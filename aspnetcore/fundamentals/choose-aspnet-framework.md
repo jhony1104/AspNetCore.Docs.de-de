@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: seodec18
 ms.date: 09/11/2018
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: b75fbea330e48075c4a2789454e973d4c56ffa53
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.openlocfilehash: eb216bdac7dd029c3d985f2edd9e70eb91f42883
+ms.sourcegitcommit: a16352c1c88a71770ab3922200a8cd148fb278a6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121179"
+ms.lasthandoff: 12/13/2018
+ms.locfileid: "53335342"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>Wählen zwischen ASP.NET 4.x und ASP.NET Core
 
@@ -62,6 +62,3 @@ Weitere Informationen über Unterstützung für ASP.NET Core 2.x in .NET Framewo
 * [Einführung in ASP.NET](/aspnet/overview)
 * [Einführung in ASP.NET Core](xref:index)
 * <xref:host-and-deploy/azure-apps/index>
-
-> [!NOTE]
-> Wir testen gerade eine vorgeschlagene neue Struktur für das ASP.NET Core-Inhaltsverzeichnis.  Falls Sie einige Minuten Zeit haben, um einen Test durchzuführen, in dem Sie sieben unterschiedliche Artikel im aktuellen und vorgeschlagene Inhaltsverzeichnis finden sollen, [klicken Sie hier, um daran teilzunehmen](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).

@@ -3,15 +3,15 @@ title: Erstellen von Web-APIs mit ASP.NET Core und MongoDB
 author: prkhandelwal
 description: Dieses Tutorial zeigt, wie Sie eine ASP.NET Core Web-API mit einer MongoDB NoSQL-Datenbank erstellen.
 ms.author: scaddie
-ms.custom: mvc,seodec18
+ms.custom: mvc, seodec18
 ms.date: 11/29/2018
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: df3b8656618c813838d6618efc9394f0ccb6e563
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.openlocfilehash: bd9a36c5eb06542c820e71e937b8da10f735a0f8
+ms.sourcegitcommit: 68a3081dd175d6518d1bfa31b4712bd8a2dd3864
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121478"
+ms.lasthandoff: 12/18/2018
+ms.locfileid: "53577837"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Erstellen einer Web-API mit ASP.NET Core und MongoDB
 
@@ -34,7 +34,7 @@ In diesem Tutorial lernen Sie, wie die folgenden Aufgaben ausgeführt werden:
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 2.2 oder höher](https://www.microsoft.com/net/download/all)
-* [Version 15.9 von Visual Studio 2017 oder höher](https://www.visualstudio.com/downloads/) mit der Workload **ASP.NET und Webentwicklung**
+* [Version 15.9 von Visual Studio 2017 oder höher](https://www.visualstudio.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017) mit der Workload **ASP.NET und Webentwicklung**
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)

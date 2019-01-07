@@ -4,14 +4,14 @@ author: rick-anderson
 description: Hier erfahren Sie, wie statische Dateien bereitgestellt und gesichert werden und wie das Verhalten von Middleware beim Hosting statischer Dateien in einer ASP.NET Core-Web-App konfiguriert wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/18/2018
+ms.date: 12/18/2018
 uid: fundamentals/static-files
-ms.openlocfilehash: fb92141b1864574242b29ecc386024ce72a6be87
-ms.sourcegitcommit: 408921a932448f66cb46fd53c307a864f5323fe5
+ms.openlocfilehash: 4c08d65cc1f658ef08a9b4b362ac7f8a3a243557
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2018
-ms.locfileid: "51570125"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637780"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -246,7 +246,7 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 
 * Die URLs für Inhalte, die mit `UseDirectoryBrowser` und `UseStaticFiles` verfügbar gemacht wurden, unterliegen der Groß-/Kleinschreibung und den Zeichenbeschränkungen des zugrunde liegenden Dateisystems. Bei Windows wird die Groß-/Kleinschreibung beispielsweise beachtet, bei macOS und Linux hingegen nicht.
 
-* In IIS gehostete ASP.NET Core-Apps leiten über das [ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module) alle Anforderungen an die App weiter, darunter die Anforderungen von statischen Dateien. Der statische IIS-Dateihandler wird nicht verwendet. Er kann Anforderungen erst verarbeiten, nachdem sie vom Modul verarbeitet wurden.
+* In IIS gehostete ASP.NET Core-Apps leiten über das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) alle Anforderungen an die App weiter, darunter die Anforderungen von statischen Dateien. Der statische IIS-Dateihandler wird nicht verwendet. Er kann Anforderungen erst verarbeiten, nachdem sie vom Modul verarbeitet wurden.
 
 * Führen Sie im IIS-Manager die folgenden Schritte aus, um den statischen IIS-Dateihandler auf Server- oder Website-Ebene zu entfernen:
     1. Navigieren Sie zum Feature **Module**.

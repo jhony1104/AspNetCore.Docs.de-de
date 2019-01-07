@@ -4,14 +4,14 @@ author: tdykstra
 description: Erfahren Sie mehr über die Fehlerbehandlung in ASP.NET Core-Apps.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 11/01/2018
+ms.date: 12/18/2018
 uid: fundamentals/error-handling
-ms.openlocfilehash: fbc86d36f66e71e6ebd84f536148fba2e3c452d8
-ms.sourcegitcommit: 408921a932448f66cb46fd53c307a864f5323fe5
+ms.openlocfilehash: f4358cba81d2aa47a26f90a8d5f4e77310bcad00
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2018
-ms.locfileid: "51570060"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637637"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>Fehlerbehandlung in ASP.NET Core
 
@@ -226,7 +226,7 @@ Nur auf Hostebene können Ausnahmen behandelt werden, die während des Starts ei
 
 Das Hosting kann nur dann eine Fehlerseite für einen erfassten Fehler beim Start anzeigen, wenn der Fehler nach der Bindung der Hostadresse bzw. des Ports auftritt. Wenn eine Bindung aus irgendeinem Grund fehlschlägt, wird auf der Hostebene eine kritische Ausnahme protokolliert, der .NET-Prozess stürzt ab, und es wird keine Fehlerseite angezeigt, wenn die App auf dem [Kestrel](xref:fundamentals/servers/kestrel)-Server ausgeführt wird.
 
-Wenn sie auf [IIS](/iis) oder [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) ausgeführt wird, wird ein *Prozessfehler 502.5* vom [ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module) zurückgegeben, wenn der Prozess nicht gestartet werden kann. Weitere Informationen zum Beheben von Startproblemen beim Hosten mit den IIS finden Sie unter <xref:host-and-deploy/iis/troubleshoot>. Weitere Informationen zum Beheben von Startproblemen mit Azure App Service finden Sie unter <xref:host-and-deploy/azure-apps/troubleshoot>.
+Wenn sie auf [IIS](/iis) oder [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) ausgeführt wird, wird ein *Prozessfehler 502.5* vom [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) zurückgegeben, wenn der Prozess nicht gestartet werden kann. Weitere Informationen zum Beheben von Startproblemen beim Hosten mit den IIS finden Sie unter <xref:host-and-deploy/iis/troubleshoot>. Weitere Informationen zum Beheben von Startproblemen mit Azure App Service finden Sie unter <xref:host-and-deploy/azure-apps/troubleshoot>.
 
 ## <a name="aspnet-core-mvc-error-handling"></a>ASP.NET Core MVC-Fehlerbehandlung
 
