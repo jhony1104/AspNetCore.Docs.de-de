@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/11/2018
 uid: security/anti-request-forgery
-ms.openlocfilehash: c4a512e5518380f5f0a43d08cd0bcba2f8c26141
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 3c1ea8f41eb6ed847bf24141ef0ae0c7e03d8a79
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207666"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099220"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Zu verhindern, dass Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core
 
@@ -225,7 +225,7 @@ services.AddAntiforgery(options =>
 | [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | Der Pfad für das Cookie festgelegt. Diese Eigenschaft ist veraltet und wird in einer zukünftigen Version entfernt. Die empfohlene Alternative ist die Cookie.Path. |
 | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Der Name des ausgeblendeten Formularfelds mit denen vom System antiforgery fälschungssicherheitstoken in Ansichten gerendert werden soll. |
 | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Der Name des Headers der antiforgery-System verwendet werden soll. Wenn `null`, das System berücksichtigt nur die Formulardaten. |
-| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Gibt an, ob das System antiforgery SSL erforderlich ist. Wenn `true`, nicht-SSL-Anforderungen schlagen fehl. Wird standardmäßig auf `false` festgelegt. Diese Eigenschaft ist veraltet und wird in einer zukünftigen Version entfernt. Die empfohlene Alternative ist Cookie.SecurePolicy festlegen. |
+| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Gibt an, ob das System antiforgery HTTPS erforderlich ist. Wenn `true`, nicht-HTTPS-Anforderungen schlagen fehl. Wird standardmäßig auf `false` festgelegt. Diese Eigenschaft ist veraltet und wird in einer zukünftigen Version entfernt. Die empfohlene Alternative ist Cookie.SecurePolicy festlegen. |
 | [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Gibt an, ob die Erstellung von Unterdrücken der `X-Frame-Options` Header. Standardmäßig wird der Header mit einem Wert von "SAMEORIGIN" generiert. Wird standardmäßig auf `false` festgelegt. |
 
 ::: moniker-end
@@ -298,7 +298,7 @@ Die `ValidateAntiForgeryToken` Attribut erfordert ein Token für Anforderungen a
 ASP.NET Core-apps erstellen keine fälschungssicherheitstoken für sichere HTTP-Methoden (GET, HEAD, Optionen und ABLAUFVERFOLGUNG). Anstelle von Allgemein Anwenden der `ValidateAntiForgeryToken` -Attribut, und überschreiben Sie dann mit `IgnoreAntiforgeryToken` Attribute, die [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) Attribut kann verwendet werden. Dieses Attribut funktioniert genauso wie die `ValidateAntiForgeryToken` Attribut, außer dass es keine Token für Anforderungen mit den folgenden HTTP-Methoden erfordert:
 
 * GET
-* HEAD-,
+* HEAD
 * OPTIONEN
 * TRACE
 

@@ -4,16 +4,16 @@ title: Hinzufügen einer Validierung | Microsoft-Dokumentation
 author: Rick-Anderson
 description: ''
 ms.author: riande
-ms.date: 10/17/2013
+ms.date: 01/06/2019
 ms.assetid: 9f35ca15-e216-4db6-9ebf-24380b0f31b4
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-validation
 msc.type: authoredcontent
-ms.openlocfilehash: 22e59a99a179a7a414447036b973e3ad3b462515
-ms.sourcegitcommit: 7b4e3936feacb1a8fcea7802aab3e2ea9c8af5b4
+ms.openlocfilehash: 6831259ce19c3747c179d6fc1b7e2095051a603b
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48577950"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099025"
 ---
 <a name="adding-validation"></a>Hinzufügen der Validierung
 ====================
@@ -97,7 +97,7 @@ Sie fragen sich vielleicht, wie die Benutzeroberfläche für die Validierung ohn
 
 [!code-csharp[Main](adding-validation/samples/sample5.cs)]
 
-Die erste `Create`-Aktionsmethode (HTTP GET) zeigt das erste Formular „Create“ an. Die zweite Version (`[HttpPost]`) verarbeitet die Formularbereitstellung. Die zweite `Create`-Methode (die `HttpPost`-Version) ruft `ModelState.IsValid` auf, um zu überprüfen, ob der Film Validierungsfehler aufweist. Beim Aufrufen dieser Methode werden alle Validierungsattribute ausgewertet, die auf das Objekt angewendet wurden. Wenn das Objekt Validierungsfehler enthält, zeigt die `Create`-Methode das Formular erneut an. Wenn keine Fehler vorliegen, speichert die Methode den neuen Film in der Datenbank. In unserem filmbeispiel wird **Form wird nicht an den Server gesendet, wenn Validierungsfehler erkannt werden, auf der Clientseite; es gibt die zweite** `Create` **wird nie aufgerufen**. Wenn Sie JavaScript in Ihrem Browser deaktivieren, wird die Clientvalidierung deaktiviert und die HTTP-POST `Create` Methodenaufrufe `ModelState.IsValid` zu überprüfen, ob der Film Validierungsfehler aufweist.
+Die erste `Create`-Aktionsmethode (HTTP GET) zeigt das erste Formular „Create“ an. Die zweite Version (`[HttpPost]`) verarbeitet die Formularbereitstellung. Die zweite `Create` Methode (die `HttpPost` Version) überprüft `ModelState.IsValid` um festzustellen, ob der Film Validierungsfehler aufweist. Beim Abrufen dieser Eigenschaft wertet alle Validierungsattribute, die auf das Objekt angewendet wurden. Wenn das Objekt Validierungsfehler enthält die `Create` -Methode zeigt das Formular. Wenn keine Fehler vorliegen, speichert die Methode den neuen Film in der Datenbank. In unserem filmbeispiel wird **Form wird nicht an den Server gesendet, wenn Validierungsfehler erkannt werden, auf der Clientseite; es gibt die zweite** `Create` **wird nie aufgerufen**. Wenn Sie JavaScript in Ihrem Browser deaktivieren, wird die Clientvalidierung deaktiviert und die HTTP-POST `Create` Methode ruft `ModelState.IsValid` zu überprüfen, ob der Film Validierungsfehler aufweist.
 
 Sie können einen Haltepunkt in der `HttpPost Create`-Methode festlegen und überprüfen, ob die Methode tatsächlich niemals aufgerufen wird und die clientseitige Validierung die Formulardaten nicht sendet, wenn Validierungsfehler gefunden werden. Wenn Sie JavaScript in Ihrem Browser deaktivieren und dann das Formular mit Fehlern senden, wird der Haltepunkt erreicht. Sie erhalten auch ohne JavaScript weiterhin eine vollständige Validierung. Die folgende Abbildung zeigt, wie JavaScript in Internet Explorer deaktiviert.
 
@@ -159,7 +159,7 @@ Bei Verwendung der `DataType` Attribut mit einem Datumsfeld müssen Sie angeben 
 
 Der folgende Code zeigt die Kombination von Attributen in einer Zeile:
 
-[!code-csharp[Main](adding-validation/samples/sample10.cs?highlight=6,10)]
+[!code-csharp[Main](adding-validation/samples/sample10.cs?highlight=4,6,10,12)]
 
 Im nächsten Teil der Reihe überprüfen wir die Anwendung und nehmen einige Verbesserungen an den automatisch generierten Methoden `Details` und `Delete` vor.
 

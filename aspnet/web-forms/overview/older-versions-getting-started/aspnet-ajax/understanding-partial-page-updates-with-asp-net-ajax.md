@@ -8,12 +8,12 @@ ms.date: 03/28/2008
 ms.assetid: 54d9df99-1161-4899-b4e8-2679c85915e7
 msc.legacyurl: /web-forms/overview/older-versions-getting-started/aspnet-ajax/understanding-partial-page-updates-with-asp-net-ajax
 msc.type: authoredcontent
-ms.openlocfilehash: 2e0b1e1d4cbb282e7fd4b27e0a93ba1b9702edea
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: 4883046aa16d5e67b7f0c92e15c897ef1a933b67
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41827883"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098934"
 ---
 <a name="understanding-partial-page-updates-with-aspnet-ajax"></a>Grundlegendes zu Teilupdates für Seiten aktualisiert mit ASP.NET-AJAX
 ====================
@@ -46,7 +46,7 @@ Das sichtbarste Feature von ASP.NET AJAX Extensions ist vielleicht die Möglichk
 
 Die Fähigkeit zum Integrieren von Teilrendering von Seiten ist in ASP.NET mit minimalen Änderungen in Ihr Projekt integriert.
 
-## <a name="walkthrough-integrating-partial-rendering-into-an-existing-project"></a>Exemplarische Vorgehensweise: Partielles Rendering in einem vorhandenen Projekt integrieren
+## <a name="walkthrough-integrating-partial-rendering-into-an-existing-project"></a>Exemplarische Vorgehensweise: Partielles Rendering integrieren in einem vorhandenen Projekt
 
 
 1. Erstellen Sie in Microsoft Visual Studio 2008 ein neues Projekt für die ASP.NET Web Site, indem Sie <em>Datei</em>  <em>- &gt; neu</em>  <em>- &gt; Website</em> , und wählen im Dialogfeld ASP.NET-Website. Sie können sie einen beliebigen Namen, und Sie können es entweder im Dateisystem oder in Internet Information Services (IIS) installieren.
@@ -57,7 +57,7 @@ Die Fähigkeit zum Integrieren von Teilrendering von Seiten ist in ASP.NET mit m
 
 [!code-aspx[Main](understanding-partial-page-updates-with-asp-net-ajax/samples/sample1.aspx)]
 
-**Codebeispiel 2: Codebehind (hier gekürzt), in der Datei default.aspx.cs**
+**Codebeispiel 2: (Hier gekürzt), in der Datei default.aspx.cs CodeBehind**
 
 [!code-csharp[Main](understanding-partial-page-updates-with-asp-net-ajax/samples/sample2.cs)]
 
@@ -91,7 +91,7 @@ Die Fähigkeit zum Integrieren von Teilrendering von Seiten ist in ASP.NET mit m
 
 1. Öffnen Sie die Datei "Web.config". Beachten Sie, dass Visual Studio automatisch ein Verweis Kompilierung System.Web.Extensions.dll hinzugefügt wurde.
 
-1. Neuigkeiten in Visual Studio 2008: die Datei "Web.config", die automatisch mit den Projektvorlagen ASP.NET Web Site geliefert wird enthält alle erforderlichen Verweise auf ASP.NET AJAX Extensions und enthält kommentierte Abschnitten von Konfigurationsinformationen, die sein können nicht kommentierten um zusätzliche Funktionalität zu aktivieren. Visual Studio 2005 mussten ähnliche Vorlagen aus, wenn ASP.NET 2.0 AJAX Extensions installiert wurden. Die AJAX-Erweiterungen sind jedoch in Visual Studio 2008, melden Sie sich in der Standardeinstellung (d. h. sie wird standardmäßig verwiesen, aber als Verweise entfernt werden kann).
+1. Was ist neu in Visual Studio 2008: Die Datei "Web.config", die mit der ASP.NET Web Site Projektvorlagen automatisch alle erforderlichen Verweise auf die ASP.NET AJAX-Erweiterungen enthält, und enthält stammen kommentierten Abschnitten von Konfigurationsinformationen, die zusätzliche aktivieren nicht kommentiert werden können die Funktionalität. Visual Studio 2005 mussten ähnliche Vorlagen aus, wenn ASP.NET 2.0 AJAX Extensions installiert wurden. Die AJAX-Erweiterungen sind jedoch in Visual Studio 2008, melden Sie sich in der Standardeinstellung (d. h. sie wird standardmäßig verwiesen, aber als Verweise entfernt werden kann).
 
 
 [![](understanding-partial-page-updates-with-asp-net-ajax/_static/image8.png)](understanding-partial-page-updates-with-asp-net-ajax/_static/image7.png)
@@ -153,7 +153,7 @@ Nachfolger von Markup:
 
 Das ScriptManager-Steuerelement ist der Kern des essential ASP.NET AJAX Extensions. Es ermöglicht den Zugriff auf die Skriptbibliothek (einschließlich des Typsystems umfangreichen Client-seitige Skript), partielles Rendering unterstützt und bietet umfangreiche Unterstützung für zusätzliche ASP.NET-Dienste (z. B. Authentifizierung und die profilerstellung, sondern auch andere Webdienste). Das ScriptManager-Steuerelement bietet auch Unterstützung von Globalisierung und Lokalisierung für die Clientskripts.
 
-## <a name="providing-alterative-and-supplemental-scripts"></a>Bereitstellen von Alterative und zusätzliche Skripts
+## <a name="providing-alternative-and-supplemental-scripts"></a>Bereitstellen von alternativen und zusätzliche Skripts
 
 Während Microsoft ASP.NET 2.0 AJAX Extensions den gesamten Skriptcode in sowohl für Debug-umfassen und release Editionen als Ressourcen in den verwiesenen Assemblys eingebettet, können sich Entwickler uneingeschränkt Umleiten von ScriptManager auf benutzerdefinierte Skripts als auch registrieren zusätzliche erforderlichen Skripts.
 

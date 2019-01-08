@@ -3,14 +3,14 @@ title: Zwischenspeichern von Antworten in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie Sie die Zwischenspeicherung von Antworten verwenden können, um die Bandbreitenanforderungen zu senken und die Leistung von ASP.NET Core-Apps zu steigern.
 ms.author: riande
-ms.date: 09/20/2017
+ms.date: 01/07/2018
 uid: performance/caching/response
-ms.openlocfilehash: 99093cd281ffa8dddc574dc27254c0175e2651b3
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 5fbcaddff6e53d01a19ba8a7455c719feb614326
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207367"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098947"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.NET Core
 
@@ -23,7 +23,7 @@ Durch [John Luo](https://github.com/JunTaoLuo), [Rick Anderson](https://twitter.
 
 Zwischenspeichern von Antworten reduziert die Anzahl der Anforderungen, die ein Client oder Proxy an einen Webserver sendet. Zwischenspeichern von Antworten auch verringert die Menge der Arbeit der Webserver ausgeführt werden, um eine Antwort zu generieren. Zwischenspeichern von Antworten wird durch Header gesteuert werden, die angeben, wie Sie Client und Proxy-Middleware zum Zwischenspeichern von Antworten soll.
 
-Der Webserver kann Antworten zwischenspeichern, wenn Sie hinzufügen [Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware).
+Die [ResponseCache-Attribut](#responsecache-attribute) beim Festlegen der Antwort-Header, welche Clients möglicherweise, beim Zwischenspeichern von Antworten berücksichtigt Zwischenspeichern teilnimmt. [Zwischenspeichern von Antworten-Middleware](xref:performance/caching/middleware) kann zum Zwischenspeichern von Antworten auf dem Server verwendet werden. Die Middleware können `ResponseCache` Attributeigenschaften serverseitige Verhalten beim Zwischenspeichern zu beeinflussen.
 
 ## <a name="http-based-response-caching"></a>Zwischenspeichern von Antworten HTTP-basierte
 
@@ -36,8 +36,8 @@ Allgemeine `Cache-Control` Direktiven werden in der folgenden Tabelle angezeigt.
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Ein Cache kann die Antwort speichern. |
 | [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Die Antwort muss nicht von einem freigegebenen Cache gespeichert werden. Ein privater Cache möglicherweise speichern und Wiederverwenden von der Antwort. |
 | [Max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Der Client wird nicht akzeptiert, eine Antwort, deren Alter größer als die angegebene Anzahl von Sekunden ist. Beispiele: `max-age=60` (60 Sekunden), `max-age=2592000` (1 Monat) |
-| [ohne-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Für Anforderungen**: ein Cache gespeicherte Antwort zum Erfüllen der Anforderung muss nicht verwendet werden. Hinweis: Der Ursprungsserver die Antwort erneut für den Client generiert und die Middleware aktualisiert die gespeicherte Antwort im jeweiligen Cache.<br><br>**Für Antworten**: die Antwort darf nicht für eine nachfolgende Anforderung ohne Überprüfung auf dem Ursprungsserver verwendet werden. |
-| [ohne-store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Für Anforderungen**: ein Cache muss die Anforderung nicht speichern.<br><br>**Für Antworten**: ein Cache muss einen beliebigen Teil der Antwort nicht speichern. |
+| [ohne-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Für Anforderungen**: Ein Cache darf keine gespeicherte Antwort verwenden, zum Erfüllen der Anforderung. Hinweis: Der Ursprungsserver die Antwort erneut für den Client generiert und die Middleware aktualisiert die gespeicherte Antwort im jeweiligen Cache.<br><br>**Für Antworten**: Die Antwort darf nicht für eine nachfolgende Anforderung ohne Überprüfung auf dem Ursprungsserver verwendet werden. |
+| [ohne-store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Für Anforderungen**: Ein Cache muss die Anforderung nicht speichern.<br><br>**Für Antworten**: Ein Cache muss einen beliebigen Teil der Antwort nicht speichern. |
 
 Andere Cacheheader, die Zwischenspeichern eine Rolle spielen, werden in der folgenden Tabelle angezeigt.
 
@@ -54,7 +54,7 @@ Die [Zwischenspeichern von HTTP 1.1-Spezifikation für den Cache-Control-Header]
 
 Berücksichtigt immer Client `Cache-Control` Anforderungsheader ist sinnvoll, wenn Sie das Ziel der HTTP-Zwischenspeicherung in Betracht ziehen. In der offiziellen Spezifikation Zwischenspeicherung dient zum Reduzieren des Latenz und Aufwand der Erfüllung der Anforderungen in einem Netzwerk von Clients, Proxys und Servern. Es ist nicht unbedingt eine Möglichkeit zum Steuern der Last auf einem Ursprungsserver.
 
-Gibt es keine aktuelle entwicklersteuerung dieses Verhalten beim Zwischenspeichern ist die Verwendung der [Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware) , da die Middleware der offiziellen zwischenspeicherungsspezifikation entspricht. [Zukünftige Verbesserungen an die Middleware](https://github.com/aspnet/ResponseCaching/issues/96) gestattet, konfigurieren die Middleware für die Verwendung einer Anforderung ignorieren `Cache-Control` Header, die bei der Entscheidung, um eine zwischengespeicherte Antwort zu verarbeiten. Dies wird Sie bieten eine Möglichkeit, eine bessere Steuerung der Last auf dem Server bei der Verwendung der Middleware.
+Ist kein Entwickler-Steuerelement über dieses Verhalten beim Zwischenspeichern bei Verwendung der [Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware) , da die Middleware der offiziellen zwischenspeicherungsspezifikation entspricht. [Verbesserungen an die Middleware geplant](https://github.com/aspnet/AspNetCore/issues/2612) sind eine gute Gelegenheit zum Konfigurieren der Middleware zum Ignorieren von einer Anforderung `Cache-Control` Header, die bei der Entscheidung, um eine zwischengespeicherte Antwort zu verarbeiten. Geplante-Erweiterungen bieten die Möglichkeit, eine bessere Kontrolle serverauslastung.
 
 ## <a name="other-caching-technology-in-aspnet-core"></a>Andere cachetechnologie in ASP.NET Core
 
@@ -91,7 +91,7 @@ Die [ResponseCacheAttribute](/dotnet/api/Microsoft.AspNetCore.Mvc.ResponseCacheA
 
 [VaryByQueryKeys](/dotnet/api/microsoft.aspnetcore.mvc.responsecacheattribute.varybyquerykeys) hängt von der gespeicherten Antwort nach den Werten der angegebenen Liste von Abfrage-Schlüssel. Wenn ein einzelner Wert des `*` angegeben wird, hängt von die Middleware Antworten von allen anfordern, Abfragezeichenfolgen-Parameter. `VaryByQueryKeys` erfordert ASP.NET Core 1.1 oder höher.
 
-Die Middleware für die Antwort-Zwischenspeicherung muss aktiviert sein, Festlegen der `VaryByQueryKeys` Eigenschaft; andernfalls wird eine Laufzeitausnahme ausgelöst. Es gibt keine entsprechenden HTTP-Header für die `VaryByQueryKeys` Eigenschaft. Die Eigenschaft ist eine HTTP-Funktion, die von der Antwort-Caching-Middleware verarbeitet. Für die Middleware, um eine zwischengespeicherte Antwort zu verarbeiten müssen der Abfragezeichenfolge und den Wert der Abfragezeichenfolge eine vorherige Anforderung übereinstimmen. Betrachten Sie beispielsweise die Reihenfolge der Anforderungen und Ergebnissen, die in der folgenden Tabelle gezeigt.
+[Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware) muss aktiviert sein, um festzulegen der `VaryByQueryKeys` Eigenschaft ist; andernfalls wird eine Laufzeitausnahme ausgelöst. Es gibt keine entsprechenden HTTP-Header für die `VaryByQueryKeys` Eigenschaft. Die Eigenschaft ist eine HTTP-Funktion, die von der Antwort-Caching-Middleware verarbeitet. Für die Middleware, um eine zwischengespeicherte Antwort zu verarbeiten müssen der Abfragezeichenfolge und den Wert der Abfragezeichenfolge eine vorherige Anforderung übereinstimmen. Betrachten Sie beispielsweise die Reihenfolge der Anforderungen und Ergebnissen, die in der folgenden Tabelle gezeigt.
 
 | Anforderung                          | Ergebnis                   |
 | -------------------------------- | ------------------------ |

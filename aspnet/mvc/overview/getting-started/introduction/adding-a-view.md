@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer MVC-app
 ms.author: riande
 ms.date: 09/1721/2017
 uid: mvc/overview/getting-started/introduction/adding-a-view
-ms.openlocfilehash: 56c00d5992a95971f48bb6e1ec30d63706948997
-ms.sourcegitcommit: 7b4e3936feacb1a8fcea7802aab3e2ea9c8af5b4
+ms.openlocfilehash: 47447c82506cc0eb4dafabe272b3204f76a2edd7
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48578234"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098661"
 ---
 <a name="adding-a-view"></a>Hinzufügen einer Ansicht
 ====================
@@ -22,7 +22,7 @@ In diesem Abschnitt also ändern Sie die `HelloWorldController` anzeigen, die Vo
 
 Erstellen Sie eine Ansicht Vorlage mithilfe der [Razor-ansichtsengine](../../../../web-pages/overview/getting-started/introducing-razor-syntax-c.md). Razor-basierte Ansichtsvorlagen haben eine *.cshtml* Dateierweiterung aus, und geben Sie eine elegante Methode zum Erstellen von HTML-Ausgabe mithilfe von c#. Razor minimiert die Anzahl von Zeichen und Tastaturanschläge erforderlich, wenn eine ansichtsvorlage zu schreiben und ermöglicht eine schnelle, fließende Workflows programmieren.
 
-Derzeit gibt die `Index`-Methode eine Zeichenfolge mit der Meldung zurück, die in der Controllerklasse hartcodiert ist. Ändern der `Index` -Methode zur Rückgabe einer `View` Objekt, wie im folgenden Code gezeigt:
+Derzeit gibt die `Index`-Methode eine Zeichenfolge mit der Meldung zurück, die in der Controllerklasse hartcodiert ist. Ändern der `Index` Controller aufzurufende Methode [Ansicht](/dotnet/api/microsoft.aspnetcore.mvc.controller.view#Microsoft_AspNetCore_Mvc_Controller_View) Methode, wie im folgenden Code gezeigt:
 
 [!code-csharp[Main](adding-a-view/samples/sample1.cs?highlight=1,3)]
 
@@ -112,7 +112,7 @@ Unsere wenig &quot;Daten&quot; (in diesem Fall die &quot;Hello from our View Tem
 
 Bevor wir mit einer Datenbank und über Modelle sprechen, jedoch zunächst sprechen wir über Informationen vom Controller an eine Ansicht übergeben. Controller-Klassen werden als Reaktion auf eine eingehende URL-Anforderung aufgerufen. Eine Controllerklasse ist, Schreiben Sie der Code, der den eingehende Browser verarbeitet, angefordert wird, ruft Daten aus einer Datenbank ab, und letztlich entscheidet, welche Art der Antwort zurück an den Browser senden. Anzeigen von Vorlagen können dann verwendet werden von einem Controller zum Generieren und Formatieren einer HTML-Antwortinhalts an den Browser.
 
-Controller sind verantwortlich für das Bereitstellen der beliebige Daten oder Objekte erforderlich sind, in der Reihenfolge für eine ansichtsvorlage eine Antwort an den Browser auszugeben. Eine bewährte Methode: **eine ansichtsvorlage sollte nie Geschäftslogik ausführen bzw. interagieren mit einer Datenbank direkt**. Stattdessen sollte eine ansichtsvorlage nur mit den Daten arbeiten, die sie durch den Controller bereitgestellt wird. Verwalten diese &quot;Trennung der Belange&quot; bleibt der Code übersichtlich, testfähig und besser verwaltbar.
+Controller sind verantwortlich für das Bereitstellen der beliebige Daten oder Objekte erforderlich sind, in der Reihenfolge für eine ansichtsvorlage eine Antwort an den Browser auszugeben. Eine bewährte Methode: **Eine ansichtsvorlage sollte nie Geschäftslogik ausführen bzw. interagieren mit einer Datenbank direkt**. Stattdessen sollte eine ansichtsvorlage nur mit den Daten arbeiten, die sie durch den Controller bereitgestellt wird. Verwalten diese &quot;Trennung der Belange&quot; bleibt der Code übersichtlich, testfähig und besser verwaltbar.
 
 Derzeit den `Welcome` Aktionsmethode in der `HelloWorldController` -Klasse eine `name` und `numTimes` Parameter und gibt anschließend die Werte direkt an den Browser. Anstatt den Controller diese Antwort als Zeichenfolge Rendern zu lassen, ändern wir den Controller, um stattdessen eine ansichtsvorlage zu verwenden. Die Ansichtsvorlage generiert eine dynamische Antwort. Das bedeutet, dass Sie die entsprechenden Datenelemente vom Controller an die Ansicht übergeben müssen, um die Antwort zu generieren. Hierzu können Sie den Controller die dynamischen Daten (Parameter) zu platzieren, die die ansichtsvorlage, in benötigt einem `ViewBag` -Objekt, das die ansichtsvorlage zugreifen kann.
 

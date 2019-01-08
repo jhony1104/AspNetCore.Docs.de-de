@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Azure Active Directory B2C-Authentifizierung mit 
 ms.date: 01/25/2018
 ms.custom: mvc
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 73a66cea1533cc835796f673021bfa45c35f5935
-ms.sourcegitcommit: 4cd8dce371d63a66d780e4af1baab2bcf9d61b24
+ms.openlocfilehash: 2c544475ccd3eb76f2737fec1cf269ac86add372
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43893193"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098986"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Cam Soper](https://twitter.com/camsoper)
 [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) ist eine Cloudlösung für die Verwaltung von Identität für Web- und mobilen apps. Der Dienst ermöglicht die Authentifizierung für apps, die in der Cloud und lokal gehostet werden. Authentifizierungstypen sind einzelne Konten, Konten sozialer Netzwerke, und Verbundbenutzer Unternehmenskonten zu authentifizieren. Darüber hinaus bieten die Azure AD B2C Multi-Factor Authentication mit Minimalkonfiguration.
 
 > [!TIP]
-> Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Azure AD-Mandant repräsentiert eine Organisation, auf, während ein Azure AD B2C-Mandanten ist, eine Sammlung von Identitäten, die mit Anwendungen der vertrauenden Seite verwendet werden. Weitere Informationen finden Sie unter [Azure AD B2C: häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
+> Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Azure AD-Mandant repräsentiert eine Organisation, auf, während ein Azure AD B2C-Mandanten ist, eine Sammlung von Identitäten, die mit Anwendungen der vertrauenden Seite verwendet werden. Weitere Informationen finden Sie unter [Azure AD B2C: Häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
 
 In diesem Tutorial erfahren Sie, wie Sie:
 
@@ -29,7 +29,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 > * Verwenden Sie Visual Studio zum Erstellen einer ASP.NET Core-Web-Apps so konfiguriert, dass die Azure AD B2C-Mandanten für die Authentifizierung verwenden
 > * Konfigurieren von Richtlinien, die Steuerung des Verhaltens des Azure AD B2C-Mandanten
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Vorraussetzungen
 
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 
@@ -96,7 +96,7 @@ In Visual Studio:
 Zurück zum Browserfenster mit den B2C-app-Eigenschaften noch geöffnet. Ändern Sie den temporären **Antwort-URL** früher auf den Wert kopiert aus Visual Studio angegeben. Wählen Sie **speichern** am oberen Rand des Fensters.
 
 > [!TIP]
-> Wenn Sie nicht die Antwort-URL kopieren, verwenden Sie die SSL-Adresse aus der Registerkarte "Debuggen" in den Projekteigenschaften für Web, und fügen die **CallbackPath** Wert *"appSettings.JSON"*.
+> Wenn Sie nicht die Antwort-URL kopieren, verwenden Sie die HTTPS-Adresse aus der Registerkarte "Debuggen" in den Web-Projekteigenschaften, und fügen die **CallbackPath** Wert *"appSettings.JSON"*.
 
 ## <a name="configure-policies"></a>Konfigurieren von Richtlinien
 

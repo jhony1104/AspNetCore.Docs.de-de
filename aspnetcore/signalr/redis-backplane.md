@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/redis-backplane
-ms.openlocfilehash: 343cb5b2c7ed7162bae7865553a783fea45f0cfb
-ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
+ms.openlocfilehash: fde7f08ae2310b0b9bf9b7fe25a1dfc4a568adb6
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53284467"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099354"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>Richten Sie einen Redis-Backplane für ASP.NET Core SignalR-Skalierung
 
@@ -24,7 +24,10 @@ In diesem Artikel wird erläutert, SignalR-spezifische Aspekte der Einrichtung e
 
 * Bereitstellen eines Redis-Servers.
 
-  Für die Produktion ist eine Redis-Rückwandplatine nur für vor-Ort-Infrastruktur empfohlen. Zur Minimierung der Wartezeit sollte sich der Redis-Server im selben Rechenzentrum wie die SignalR-app. Wenn Ihre SignalR-app in der Azure-Cloud ausgeführt wird, empfehlen wir anstelle einer Redis-Rückwandplatine Azure SignalR Service. Sie können den Azure Redis Cache-Dienst verwenden, für die Entwicklung und testumgebungen. Weitere Informationen finden Sie in den folgenden Ressourcen:
+  > [!IMPORTANT] 
+  > Für die Produktion wird eine Redis-Rückwandplatine empfohlen, nur, wenn er im selben Rechenzentrum wie die SignalR-app ausgeführt wird. Andernfalls wird die Netzwerklatenz die Leistung beeinträchtigt. Wenn Ihre SignalR-app in der Azure-Cloud ausgeführt wird, empfehlen wir anstelle einer Redis-Rückwandplatine Azure SignalR Service. Sie können den Azure Redis Cache-Dienst verwenden, für die Entwicklung und testumgebungen.
+
+  Weitere Informationen finden Sie in den folgenden Ressourcen:
 
   * <xref:signalr/scale>
   * [Dokumentation zu redis](https://redis.io/)

@@ -4,14 +4,14 @@ author: mjrousos
 description: Tipps zum Verbessern der Leistung in ASP.NET Core-apps und allgemeiner Leistungsprobleme zu vermeiden.
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
-ms.date: 11/29/2018
+ms.date: 1/9/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 9f3ed97bf4d4eb371ff5ae3874234b44745cc4ca
-ms.sourcegitcommit: 0fc89b80bb1952852ecbcf3c5c156459b02a6ceb
+ms.openlocfilehash: 25aa4c1e22ead7db4775c6e5e81b6fd627c6d7a6
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/29/2018
-ms.locfileid: "52618115"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099064"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Best Practices für ASP.NET Core-Leistung
 
@@ -19,8 +19,7 @@ Durch [Mike Rousos](https://github.com/mjrousos)
 
 Dieses Thema enthält bewährte Methoden für ASP.NET Core Richtlinien für die Leistung.
 
-<a name="hot"></a>
-<!-- TODO review hot code paths is jargon that won't MT (machine translate) and is not well defined for native speakers. --> In diesem Dokument ist ein "Hot" Codepfad definiert als einen Codepfad, die häufig aufgerufen wird und, in denen ein Großteil der Ausführungszeit auftritt. "Hot" Codepfade beschränken in der Regel app horizontale Skalierung und Leistung.
+<a name="hot"></a> In diesem Dokument ist ein "Hot" Codepfad definiert als einen Codepfad, die häufig aufgerufen wird und, in denen ein Großteil der Ausführungszeit auftritt. "Hot" Codepfade beschränken in der Regel app horizontale Skalierung und Leistung.
 
 ## <a name="cache-aggressively"></a>Zwischenspeichern aggressiv
 
@@ -129,6 +128,10 @@ Empfehlungen:
 
 * **Führen Sie** Verwenden von ASP.NET Core [integrierte Unterstützung](xref:client-side/bundling-and-minification) zu bündeln und Minimieren der Clientobjekte.
 * **Führen Sie** sollten Sie andere Tools von Drittanbietern wie [Gulp](uid:client-side/bundling-and-minification#consume-bundleconfigjson-from-gulp) oder [Webpack](https://webpack.js.org/) für komplexere Client Asset Management.
+
+## <a name="compress-responses"></a>Komprimieren von Antworten
+
+ Verringern der Größe der Antwort in der Regel erhöht die Reaktionsfähigkeit einer App, häufig erheblich. Eine Möglichkeit zum Reduzieren der Größe der Nutzlast ist zum Komprimieren von Antworten von der app. Weitere Informationen finden Sie unter [antwortkomprimierung](xref:performance/response-compression).
 
 ## <a name="use-the-latest-aspnet-core-release"></a>Verwenden Sie die neueste Version von ASP.NET Core
 

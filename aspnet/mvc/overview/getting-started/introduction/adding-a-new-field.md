@@ -8,12 +8,12 @@ ms.date: 10/17/2013
 ms.assetid: 4085de68-d243-4378-8a64-86236ea8d2da
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-a-new-field
 msc.type: authoredcontent
-ms.openlocfilehash: 87bb2c5f64e714268f5e2631b44fbb8a93a6a4b6
-ms.sourcegitcommit: 7b4e3936feacb1a8fcea7802aab3e2ea9c8af5b4
+ms.openlocfilehash: 950ae17ebd6b0f15520c2a4e9372703f5374dfbe
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48578086"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098687"
 ---
 <a name="adding-a-new-field"></a>Hinzufügen eines neuen Felds
 ====================
@@ -94,7 +94,7 @@ In der **-Paket-Manager-Konsole**, geben Sie den Befehl `update-database` zum Er
 
 ![](adding-a-new-field/_static/image7.png)
 
-Wenn Sie eine Fehlermeldung, der angibt erhalten, eine Tabelle ist bereits vorhanden und kann nicht erstellt werden, es ist wahrscheinlich, da Sie die Anwendung ausgeführt, nachdem Sie die Datenbank gelöscht und bevor Sie ausgeführt `update-database`. In diesem Fall löschen Sie die *Movies.mdf* -Datei erneut, und wiederholen Sie den `update-database` Befehl. Wenn Sie weiterhin eine Fehlermeldung erhalten, löschen Sie den Ordner "Migrations" und den Inhalt, und beginnen Sie mit den Anweisungen am oberen Rand dieser Seite (d.h. Löschen der *Movies.mdf* -Datei, und fahren Sie mit der Enable-Migrations). Wenn Sie weiterhin einen Fehler erhalten, öffnen Sie SQL Server-Objekt-Explorer, und entfernen Sie die Datenbank aus der Liste.
+Wenn Sie eine Fehlermeldung, der angibt erhalten, eine Tabelle ist bereits vorhanden und kann nicht erstellt werden, es ist wahrscheinlich, da Sie die Anwendung ausgeführt, nachdem Sie die Datenbank gelöscht und bevor Sie ausgeführt `update-database`. In diesem Fall löschen Sie die *Movies.mdf* -Datei erneut, und wiederholen Sie den `update-database` Befehl. Wenn Sie weiterhin eine Fehlermeldung erhalten, löschen Sie den Ordner "Migrations" und den Inhalt, und beginnen Sie mit den Anweisungen am oberen Rand dieser Seite (d.h. Löschen der *Movies.mdf* -Datei, und fahren Sie mit der Enable-Migrations). Wenn Sie weiterhin eine Fehlermeldung erhalten, öffnen Sie SQL Server-Objekt-Explorer, und entfernen Sie die Datenbank aus der Liste.
 
 Führen Sie die Anwendung, und navigieren Sie zu der */Movies* URL. Die Seed-Daten werden angezeigt.
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: b15c6b5ac77f047c40704c9e164165c55b6ae93b
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 0c3add9c8860a47932cda3a8b07c83dc774bf1f1
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861523"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098973"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.NET Core
 
@@ -69,9 +69,9 @@ Geben Sie den HTTPS-Port mit einer der folgenden Methoden:
 
   **Schlüssel**: `https_port`  
   **Typ:** *Zeichenfolge*  
-  **Standardmäßige**: ein Standardwert ist nicht festgelegt.  
+  **Standard**: Ein Standardwert ist nicht festgelegt.  
   **Festlegen mit:** `UseSetting`  
-  **Umgebungsvariable**: `<PREFIX_>HTTPS_PORT` (das Präfix ist `ASPNETCORE_` bei Verwendung der [Webhost](xref:fundamentals/host/web-host).)
+  **Umgebungsvariable**: `<PREFIX_>HTTPS_PORT` (Das Präfix ist `ASPNETCORE_` bei Verwendung der [Webhost](xref:fundamentals/host/web-host).)
 
   Beim Konfigurieren einer <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> in `Program`:
 
@@ -98,7 +98,7 @@ Jeder Firewall zwischen dem Client und Server müssen auch Kommunikationsports f
 
 Wenn die Anforderungen in einer Reverseproxykonfiguration weitergeleitet werden, verwenden Sie [Forwardedheadersmiddleware](xref:host-and-deploy/proxy-load-balancer) vor dem Aufruf von HTTPS-Umleitung-Middleware. Forwarded-Header-Middleware Updates der `Request.Scheme`unter Verwendung der `X-Forwarded-Proto` Header. Die Middleware ermöglicht umleitungs-URIs und andere Sicherheitsrichtlinien ordnungsgemäß funktionieren. Wenn Forwardedheadersmiddleware nicht verwendet wird, möglicherweise nicht die Back-End-app erhalten das richtige Schema und letztlich in eine Umleitungsschleife entsteht. Eine allgemeine Fehlermeldung für Endbenutzer ist, dass zu viele umleitungen aufgetreten sind.
 
-Wenn Sie in Azure App Service bereitstellen möchten, befolgen Sie die Anweisungen in [Tutorial: Binden ein vorhandenes benutzerdefiniertes SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
+Wenn Sie in Azure App Service bereitstellen möchten, befolgen Sie die Anweisungen in [Lernprogramm: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
 ### <a name="options"></a>Optionen
 
@@ -260,7 +260,7 @@ Finden Sie unter [GitHub-Problem](https://github.com/aspnet/Docs/issues/6199).
 ## <a name="additional-information"></a>Zusätzliche Informationen
 
 * <xref:host-and-deploy/proxy-load-balancer>
-* [Hosten von ASP.NET Core unter Linux mit Apache: SSL-Konfiguration](xref:host-and-deploy/linux-apache#ssl-configuration)
-* [Hosten von ASP.NET Core unter Linux mit Nginx: SSL-Konfiguration](xref:host-and-deploy/linux-nginx#configure-ssl)
+* [Hosten von ASP.NET Core unter Linux mit Apache: HTTPS-Konfiguration](xref:host-and-deploy/linux-apache#https-configuration)
+* [Hosten von ASP.NET Core unter Linux mit Nginx: HTTPS-Konfiguration](xref:host-and-deploy/linux-nginx#https-configuration)
 * [Gewusst wie: Einrichten von SSL auf IIS](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis)
 * [OWASP HSTS-Browserunterstützung](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support)

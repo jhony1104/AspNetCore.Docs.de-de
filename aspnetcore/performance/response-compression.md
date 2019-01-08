@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: performance/response-compression
-ms.openlocfilehash: 51ab51652a7b3f9b4ef97b3abbffe2e398c0bfb5
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: a9f72a6816298b11e7b7d30b2b4bd44083baab3a
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637754"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099038"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Antwortkomprimierung in ASP.NET Core
 
@@ -143,8 +143,10 @@ public class Startup
 }
 ```
 
-> [!NOTE]
-> Mit einem Tool wie [Fiddler](http://www.telerik.com/fiddler), [Firebug](http://getfirebug.com/), oder [Postman](https://www.getpostman.com/) Festlegen der `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text.
+Notizen: 
+
+* `app.UseResponseCompression` muss aufgerufen werden, bevor `app.UseMvc`.
+* Verwenden Sie ein Tool wie z. B. [Fiddler](http://www.telerik.com/fiddler), [Firebug](http://getfirebug.com/), oder [Postman](https://www.getpostman.com/) Festlegen der `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text.
 
 Senden Sie eine Anforderung zur Beispiel-app ohne die `Accept-Encoding` Header und beobachten Sie, dass die Antwort nicht komprimiert. Die `Content-Encoding` und `Vary` Header nicht in der Antwort vorhanden sind.
 

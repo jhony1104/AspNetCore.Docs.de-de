@@ -6,12 +6,12 @@ ms.author: casoper
 ms.date: 09/21/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 9c541644d276bbdc990bb01f8bd80c92862cd6f0
-ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
+ms.openlocfilehash: 6d0365b103572d6059ce61c54b9b3406da9e5bd4
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53284616"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098700"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET Core
 
@@ -157,8 +157,8 @@ Um sicherzustellen, dass die Web-API eine Authentifizierung erforderlich ist, st
     ![die Antwort 401 nicht autorisiert](./azure-ad-b2c-webapi/postman-401-status.png)
 
 > [!IMPORTANT]
-> Wenn Sie eine Fehlermeldung "Die Antwort konnte nicht abgerufen werden" erhalten, müssen Sie möglicherweise so deaktivieren Sie die Überprüfung von SSL-Zertifikat in der [Postman Einstellungen](https://learning.getpostman.com/docs/postman/launching_postman/settings). 
- 
+> Wenn Sie die Fehlermeldung "Die Antwort konnte nicht abgerufen werden" erhalten, müssen Sie möglicherweise so deaktivieren Sie die Überprüfung von SSL-Zertifikat in der [Postman Einstellungen](https://learning.getpostman.com/docs/postman/launching_postman/settings).
+
 ### <a name="obtain-a-bearer-token"></a>Abrufen eines bearertokens
 
 Um eine authentifizierte Anforderung an die Web-API vornehmen zu können, ist ein trägertoken, das erforderlich. Postman erleichtert es, melden Sie sich an den Azure AD B2C-Mandanten und ein Token abrufen.
