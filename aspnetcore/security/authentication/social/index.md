@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
 uid: security/authentication/social/index
-ms.openlocfilehash: 47ac1f966ff727957e6ed700c3c68efa16b1b38b
-ms.sourcegitcommit: 3e94d192b2ed9409fe72e3735e158b333354964c
+ms.openlocfilehash: 063d452fb6ab91b712ade7f7b7ed99823dbdc657
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/24/2018
-ms.locfileid: "53735725"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098817"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 
@@ -46,11 +46,11 @@ Hinweis: Dieses Tutorial bezieht sich auf die ASP.NET Core 2.0 SDK-Version, die 
 * Geben Sie die E-Mail-Adresse und das Kennwort für das neue Konto ein, und wählen Sie dann **Registrieren** aus.
 * Befolgen Sie die Anweisungen zum Anwenden von Migrationen.
 
-## <a name="require-ssl"></a>Anfordern von SSL
+## <a name="require-https"></a>Erforderlichkeit von HTTPS
 
-OAuth 2.0 erfordert die Verwendung von SSL für die Authentifizierung über das HTTPS-Protokoll.
+OAuth 2.0 erfordert die Verwendung von SSL/TLS für die Authentifizierung über das HTTPS-Protokoll.
 
-Projekte, die mithilfe der Projektvorlagen **Webanwendung** oder **Web-API** mit ASP.NET Core 2.1 oder höher erstellt werden, werden automatisch so konfiguriert, dass SSL aktiviert wird. Die App wird mit einem sicheren Standardendpunkt gestartet, wenn die Option **Einzelne Benutzerkonten** im Dialogfeld **Authentifizierung ändern** des Projekt-Assistenten ausgewählt ist.
+Projekte, die mithilfe der Projektvorlagen **Webanwendung** oder **Web-API** mit ASP.NET Core 2.1 oder höher erstellt wurden, werden automatisch zur Aktivierung von HTTPS konfiguriert. Die App wird mit einem sicheren Standardendpunkt gestartet, wenn die Option **Einzelne Benutzerkonten** im Dialogfeld **Authentifizierung ändern** des Projekt-Assistenten ausgewählt ist.
 
 Weitere Informationen finden Sie unter <xref:security/enforcing-ssl>.
 

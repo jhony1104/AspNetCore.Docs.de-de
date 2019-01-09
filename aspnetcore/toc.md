@@ -32,7 +32,7 @@
 ## [Umgebungen (Entwicklung, Staging, Produktion)](xref:fundamentals/environments)
 ## [Konfiguration](xref:fundamentals/configuration/index)
 ## [Optionen](xref:fundamentals/configuration/options)
-## [Logging (Protokollierung)](xref:fundamentals/logging/index)
+## [Protokollierung](xref:fundamentals/logging/index)
 ## [Behandeln von Fehlern](xref:fundamentals/error-handling)
 ## Middleware
 ### [Übersicht](xref:fundamentals/middleware/index)
@@ -173,13 +173,15 @@
 
 # Testen, Debuggen und Problembehandlung
 ## [Komponententests](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-## [Komponententests für Razor-Seiten](xref:test/razor-pages-tests)
+## [Komponententests für Razor Pages](xref:test/razor-pages-tests)
 ## [Testen von Controllern](xref:mvc/controllers/testing)
 ## [Remotedebuggen](/visualstudio/debugger/remote-debugging-azure)
 ## [Momentaufnahmendebugging](/azure/application-insights/app-insights-snapshot-debugger)
 ## [Debuggen von Momentaufnahmen in Visual Studio](/visualstudio/debugger/debug-live-azure-applications)
 ## [Integrationstests](xref:test/integration-tests)
+## [Auslastungs- und Belastungstests](xref:test/loadtests)
 ## [Problembehandlung](xref:test/troubleshoot)
+## [Protokollierung](xref:fundamentals/logging/index)
 
 # Datenzugriff
 ## Tutorials
@@ -278,7 +280,7 @@
 ### [Einführung in Identity](xref:security/authentication/identity)
 ### [Gerüst für Identität](xref:security/authentication/scaffold-identity)
 ### [Hinzufügen benutzerdefinierter Benutzerdaten zu Identity](xref:security/authentication/add-user-data)
-### [Customize Identity (Anpassen der Identität)](xref:security/authentication/customize_identity_model)
+### [Anpassen der Identität](xref:security/authentication/customize_identity_model)
 ### [Community-basierte OSS-Authentifizierungsoptionen](xref:security/authentication/community)
 ### [Konfigurieren von Identity](xref:security/authentication/identity-configuration)
 ### [Konfigurieren der Windows-Authentifizierung](xref:security/authentication/windowsauth)
@@ -314,7 +316,7 @@
 ### [Rollenbasierte Autorisierung](xref:security/authorization/roles)
 ### [Anspruchsbasierte Autorisierung](xref:security/authorization/claims)
 ### [Richtlinienbasierte Autorisierung](xref:security/authorization/policies)
-### [Authorization policy providers (Anbieter von Autorisierungsrichtlinien)](xref:security/authorization/iauthorizationpolicyprovider)
+### [Anbieter von Autorisierungsrichtlinien](xref:security/authorization/iauthorizationpolicyprovider)
 ### [Abhängigkeitsinjektion in Anforderungshandlern](xref:security/authorization/dependencyinjection)
 ### [Ressourcenbasierte Autorisierung](xref:security/authorization/resourcebased)
 ### [Ansichtsbasierte Autorisierung](xref:security/authorization/views)
@@ -392,6 +394,7 @@
 ## [Verwenden eines Dateiüberwachungselements](xref:tutorials/dotnet-watch)
 
 # Migration
+## [2.2 zu 3.0](xref:migration/22-to-30)
 ## [2.1 zu 2.2](xref:migration/21-to-22)
 ## [2.0 auf 2.1](xref:migration/20_21)
 ## 1.x auf 2.0
@@ -406,6 +409,7 @@
 ### [ClaimsPrincipal.Current](xref:migration/claimsprincipal-current)
 ### [Mitgliedschaft zu Identität](xref:migration/proper-to-2x/membership-to-core-identity)
 ### [Migration von HTTP-Modulen zu Middleware](xref:migration/http-modules)
+## [Protokollierung (nicht ASP.NET Core)](xref:migration/logging-nonaspnetcore)
 
 # Neuigkeiten
 ## [Neuerungen in Version 2.2](xref:aspnetcore-2.2)
