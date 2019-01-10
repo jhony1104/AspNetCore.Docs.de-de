@@ -1,0 +1,2 @@
+* [Version 15.9 von Visual Studio 2017 oder höher](* [Visual Studio 2017 version 15.9 or later](https://www.visualstudio.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017) with the **ASP.NET and web development** workload) mit der Workload **ASP.NET und Webentwicklung**
+* [.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
