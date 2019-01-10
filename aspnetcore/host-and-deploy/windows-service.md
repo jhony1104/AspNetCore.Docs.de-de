@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: f53c303dc63e092f08e933fea79eb805523cde9b
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: bdb29c318c66ac884b9225ba8c2a0dfc1f364255
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861393"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637702"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -108,7 +108,7 @@ Nehmen Sie in `Program.Main` die folgenden Änderungen vor:
 
   Wenn die Bedingungen nicht zutreffen (die App als Dienst ausgeführt wird):
 
-  * Rufen Sie <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseContentRoot*> auf, und verwenden Sie einen Pfad zum veröffentlichten Speicherort der App. Rufen Sie nicht <xref:System.IO.Directory.GetCurrentDirectory*> auf, um den Pfad abzurufen, da eine Windows-Dienst-App den Ordner *C:\\WINDOWS\\system32* zurückgibt, wenn `GetCurrentDirectory` aufgerufen wird. Weitere Informationen finden Sie im Abschnitt [Aktuelles Verzeichnis und Inhaltsstammverzeichnis](#current-directory-and-content-root).
+  * Rufen Sie <xref:System.IO.Directory.SetCurrentDirectory*> auf, und verwenden Sie einen Pfad zum veröffentlichten Speicherort der App. Rufen Sie nicht <xref:System.IO.Directory.GetCurrentDirectory*> auf, um den Pfad abzurufen, da eine Windows-Dienst-App den Ordner *C:\\WINDOWS\\system32* zurückgibt, wenn `GetCurrentDirectory` aufgerufen wird. Weitere Informationen finden Sie im Abschnitt [Aktuelles Verzeichnis und Inhaltsstammverzeichnis](#current-directory-and-content-root).
   * Rufen Sie <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> auf, um die App als Dienst auszuführen.
 
   Da der [Anbieter der Befehlszeilenkonfiguration](xref:fundamentals/configuration/index#command-line-configuration-provider) Name/Wert-Paare für Befehlszeilenargumente benötigt, wird der `--console`-Schalter aus den Argumenten entfernt, bevor <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> sie empfängt.
@@ -214,7 +214,7 @@ Im folgenden Beispiel für die Beispiel-App:
 
 * Der Dienst heißt **MyService**.
 * Der veröffentlichte Dienst ist im Ordner *c:\\svc* vorhanden. Die ausführbare Datei der App heißt *SampleApp.exe*. Setzen Sie den `binPath`-Wert in doppelte Anführungszeichen (").
-* Der Dienst wird mit dem Konto `ServiceUser` ausgeführt. Ersetzen Sie `{DOMAIN}` durch den Domänennamen oder den lokalen Computernamen für das Benutzerkonto. Setzen Sie den `obj`-Wert in doppelte Anführungszeichen ("). Beispiel: Wenn das Hostsystem ein lokaler Computer mit Namen `MairaPC` ist, legen Sie `obj` auf `"MairaPC\ServiceUser"` fest.
+* Der Dienst wird mit dem Konto `ServiceUser` ausgeführt. Ersetzen Sie `{DOMAIN}` durch den Domänennamen oder den lokalen Computernamen für das Benutzerkonto. Setzen Sie den `obj`-Wert in doppelte Anführungszeichen ("). Beispiel: Wenn das Hostsystem ein lokaler Computer namens `MairaPC` ist, legen Sie `obj` auf `"MairaPC\ServiceUser"` fest.
 * Ersetzen Sie `{PASSWORD}` durch das Kennwort für das Benutzerkonto. Setzen Sie den `password`-Wert in doppelte Anführungszeichen (").
 
 ```console
@@ -323,16 +323,16 @@ Das aktuelle Arbeitsverzeichnis, das durch Aufrufen von <xref:System.IO.Director
 
 ### <a name="set-the-content-root-path-to-the-apps-folder"></a>Legen Sie den Inhaltsstammpfad auf den Ordner der App fest.
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> entspricht dem gleichen Pfad, der für das Argument `binPath` bereitgestellt wird, wenn der Dienst erstellt wird. Anstatt `GetCurrentDirectory` aufzurufen, um Pfade zu Einstellungsdateien zu erstellen, rufen Sie <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseContentRoot*> mit dem Pfad zum Inhaltsstamm der App auf.
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> entspricht dem gleichen Pfad, der für das Argument `binPath` bereitgestellt wird, wenn der Dienst erstellt wird. Anstatt `GetCurrentDirectory` aufzurufen, um Pfade zu Einstellungsdateien zu erstellen, rufen Sie <xref:System.IO.Directory.SetCurrentDirectory*> mit dem Pfad zum Inhaltsstamm der App auf.
 
 Bestimmen Sie unter `Program.Main` den Pfad zum Ordner der ausführbaren Datei des Dienstes und verwenden Sie den Pfad, um das Inhaltsverzeichnis der App festzulegen:
 
 ```csharp
 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
 var pathToContentRoot = Path.GetDirectoryName(pathToExe);
+Directory.SetCurrentDirectory(pathToContentRoot);
 
 CreateWebHostBuilder(args)
-    .UseContentRoot(pathToContentRoot)
     .Build()
     .RunAsService();
 ```

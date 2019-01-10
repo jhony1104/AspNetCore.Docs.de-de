@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/5/2018
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: e280bc9553113982a1f1a77eabab32575c905237
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 9b3ad5f6c4b1c9b5f016f5591127c8d1b213948d
+ms.sourcegitcommit: 1ea1b4fc58055c62728143388562689f1ef96cb2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862290"
+ms.lasthandoff: 12/13/2018
+ms.locfileid: "53329132"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Hinzufügen eines neuen Felds zu einer Razor-Seite in ASP.NET Core
 
@@ -96,9 +96,13 @@ Der `Add-Migration`-Befehl weist das Framework an, Folgendes auszuführen:
 
 Der Name „Rating“ ist beliebig und wird verwendet, um die Migrationsdatei zu benennen. Es ist hilfreich, einen aussagekräftigen Namen für die Migrationsdatei zu verwenden.
 
+Der `Update-Database`-Befehl weist das Framework an, die Schemaänderungen auf die Datenbank anzuwenden.
+
 <a name="ssox"></a>
 
-Wenn Sie alle Datensätze aus der Datenbank löschen, führt der Initialisierer ein Seeding für die Datenbank aus und fügt das Feld `Rating` hinzu. Dies ist über die Links „Löschen“ im Browser oder [SQL Server-Objekt-Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX) möglich. So löschen Sie die Datenbank aus SSOX
+Wenn Sie alle Datensätze aus der Datenbank löschen, führt der Initialisierer ein Seeding für die Datenbank aus und fügt das Feld `Rating` hinzu. Dies ist über die Links „Löschen“ im Browser oder [SQL Server-Objekt-Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX) möglich.
+
+Eine weitere Möglichkeit ist, die Datenbank zu löschen und Migrationen zu verwenden, um die Datenbank neu zu erstellen. So löschen Sie die Datenbank in SSOX
 
 * Wählen Sie die Datenbank in SSOX aus.
 * Klicken Sie mit der rechten Maustaste auf die Datenbank, und wählen Sie *Löschen* aus.
@@ -111,12 +115,9 @@ Wenn Sie alle Datensätze aus der Datenbank löschen, führt der Initialisierer 
   ```
 
 <!-- Code -------------------------->
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
-<!-- copy/paste this tab to the next. Not worth an include  --> SQLite unterstützt keine Migrationen.
-
-* Löschen Sie die Datenbank, oder ändern Sie den Namen der Datenbank in der Datei *appsettings.json*.
-* Löschen Sie den Ordner *Migrations* (und alle Dateien in diesem Ordner).
+<!-- copy/paste this tab to the next. Not worth an include  -->
 
 Führen Sie die folgenden .NET Core-CLI-Befehle aus:
 
@@ -125,20 +126,28 @@ dotnet ef migrations add Rating
 dotnet ef database update
 ```
 
-<!-- Mac -------------------------->
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+Der `ef migrations add`-Befehl weist das Framework an, Folgendes auszuführen:
 
-SQLite unterstützt keine Migrationen.
+* Das `Movie`-Modell mit dem Schema der `Movie`-Datenbank vergleichen.
+* Code erstellen, um das Schema der Datenbank in das neue Modell zu migrieren.
 
-* Löschen Sie die Datenbank, oder ändern Sie den Namen der Datenbank in der Datei *appsettings.json*.
-* Löschen Sie den Ordner *Migrations* (und alle Dateien in diesem Ordner).
+Der Name „Rating“ ist beliebig und wird verwendet, um die Migrationsdatei zu benennen. Es ist hilfreich, einen aussagekräftigen Namen für die Migrationsdatei zu verwenden.
 
-Führen Sie die folgenden .NET Core-CLI-Befehle aus:
+Der `ef database update`-Befehl weist das Framework an, die Schemaänderungen auf die Datenbank anzuwenden.
+
+Wenn Sie alle Datensätze aus der Datenbank löschen, führt der Initialisierer ein Seeding für die Datenbank aus und fügt das Feld `Rating` hinzu. Dies ist über die „Löschen“-Links im Browser oder über ein SQLite-Tool möglich.
+
+Eine weitere Möglichkeit ist, die Datenbank zu löschen und Migrationen zu verwenden, um die Datenbank neu zu erstellen. Um die Datenbank zu löschen, löschen Sie die Datenbankdatei (*MvcMovie.db*). Führen Sie dann den `ef database update`-Befehl aus: 
 
 ```console
-dotnet ef migrations add Rating
 dotnet ef database update
 ```
+
+> [!NOTE]
+> Viele Schemaänderungsvorgänge werden vom EF Core SQLite-Anbieter nicht unterstützt. Zum Beispiel wird Hinzufügen einer Spalten unterstützt, wogegen Entfernen einer Spalte nicht unterstützt wird. Wenn Sie eine Migration hinzufügen, um eine Spalte zu entfernen, wird der `ef migrations add`-Befehl erfolgreich ausgeführt, aber der `ef database update`-Befehl schlägt fehl. Sie können einige der Einschränkungen umgehen, indem Sie manuell Migrationscode schreiben, um eine Tabellenneuerstellung auszuführen. Eine Tabellenneuerstellung umfasst Umbenennen der vorhandenen Tabelle, Erstellen einer neuen Tabelle, Kopieren von Daten in die neue Tabelle und Löschen der alten Tabelle. Weitere Informationen finden Sie in den folgenden Ressourcen:
+> * [SQLite EF Core-Datenbank-Anbieter-Einschränkungen](/ef/core/providers/sqlite/limitations)
+> * [Anpassen des Migrationscodes](/ef/core/managing-schemas/migrations/#customize-migration-code)
+> * [Datenseeding](/ef/core/modeling/data-seeding)
 
 ---  
 <!-- End of VS tabs -->

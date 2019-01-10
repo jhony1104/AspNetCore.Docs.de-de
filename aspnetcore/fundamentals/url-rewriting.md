@@ -4,14 +4,14 @@ author: guardrex
 description: Informationen zum Umschreiben und Umleiten von URL mit URL-umschreibender Middleware in ASP.NET Core-Anwendungen
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/19/2018
+ms.date: 12/18/2018
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 84052789717738a48c346d35d1a2642017a9ab93
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: d2dd5e9b7f196bcbd1940f7ef58331dabd2367a1
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861913"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637806"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>URL-umschreibende Middleware in ASP.NET Core
 
@@ -56,7 +56,7 @@ Wenn Anforderungen auf eine andere URL umgeleitet werden, muss angegeben werden,
 
 * Der Statuscode *302 – Gefunden* wird verwendet, wenn die Umleitung temporär ist oder sowieso Änderungen vorbehalten sind. Der Statuscode 302 teilt dem Client mit, dass die URL nicht gespeichert und nicht wiederverwendet werden soll.
 
-Weitere Informationen zu Statuscodes finden Sie unter [RFC 2616: Status Code Definitions (RFC 2616: Statuscodedefinitionen)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+Weitere Informationen zu Statuscodes finden Sie unter [RFC 2616: Status Code Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
 
 Bei der *Neuschreibung einer URL* handelt es sich um einen serverseitigen Vorgang, bei dem eine Ressource von einer anderen Ressourcenadresse, als der vom Client angeforderten, bereitgestellt wird. Wenn eine URL neu geschrieben wird, ist kein Roundtrip zum Server erforderlich. Die neu geschriebene URL wird nicht an den Server zurückgegeben und nicht in der Adressleiste des Browsers angezeigt.
 
@@ -78,7 +78,7 @@ Sie können Middleware zur URL-Neuschreibung verwenden, wenn die folgenden Ansä
 * [Apache mod_rewrite module on Apache Server (Apache mod_rewrite-Modul auf Apache-Server)](https://httpd.apache.org/docs/2.4/rewrite/)
 * [URL rewriting on Nginx (URL-Neuschreibung auf Nginx)](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Sie können die Middleware auch verwenden, wenn die App auf dem [HTTP.sys-Server](xref:fundamentals/servers/httpsys) (früher [WebListener](xref:fundamentals/servers/weblistener)) gehostet wird.
+Sie können die Middleware auch verwenden, wenn die App auf dem [HTTP.sys-Server](xref:fundamentals/servers/httpsys) (früher als WebListener bezeichnet) gehostet wird.
 
 Die Hauptgründe für die Verwendung der serverbasierten Technologien zur URL-Neuschreibung in IIS, Apache und Nginx sind:
 

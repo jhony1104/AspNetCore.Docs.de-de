@@ -3,46 +3,75 @@ title: Verwenden von Web-API-Konventionen
 author: pranavkm
 description: Informationen zu Web-API-Konventionen in ASP.NET Core
 monikerRange: '>= aspnetcore-2.2'
-ms.author: pranavkm
+ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/13/2018
+ms.date: 12/13/2018
 uid: web-api/advanced/conventions
-ms.openlocfilehash: ede9a46c160cf6a49aa93da710af0bf0b8f59acc
-ms.sourcegitcommit: c4572be5ebb301013a5698caf9b5572b76cb2e34
+ms.openlocfilehash: 481e3810f1e1aca40e0ee1ce3da6c67dc9d841f4
+ms.sourcegitcommit: 6548c19f345850ee22b50f7ef9fca732895d9e08
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "52710074"
+ms.lasthandoff: 12/14/2018
+ms.locfileid: "53425106"
 ---
 # <a name="use-web-api-conventions"></a>Verwenden von Web-API-Konventionen
 
-Mit ASP.NET Core 2.2 wird die Möglichkeit eingeführt, allgemeine [API-Dokumentation](xref:tutorials/web-api-help-pages-using-swagger) zu extrahieren und diese auf mehrere Aktionen, Controller sowie alle Controller in einer Assembly anzuwenden. Web-API-Konventionen können verwendet werden, damit keine einzelnen Aktionen mit [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) versehen werden müssen. Sie können sie nutzen, um die gängigsten Rückgabetypen und Statuscodes, die durch Ihre Aktionen zurückgegeben werden, mit einer Möglichkeit zu definieren, die Konvention auszuwählen, die zu der jeweiligen Aktion passt.
+Von [Pranav Krishnamoorthy](https://github.com/pranavkm) und [Scott Addie](https://github.com/scottaddie)
 
-In der Regel sind verschiedene Standardkonventionen im Lieferumfang von ASP.NET Core MVC 2.2 enthalten (`Microsoft.AspNetCore.Mvc.DefaultApiConventions`). Diese Konventionen basieren auf dem Controller, dessen Gerüst ASP.NET Core erstellt. Wenn Ihre Aktionen dem Muster folgen, das aus dem Gerüstbau resultiert, sollten die Standardkonventionen ausreichen.
+ASP.NET Core 2.2 und höher umfasst eine Möglichkeit, allgemeine [API-Dokumentation](xref:tutorials/web-api-help-pages-using-swagger) zu extrahieren und diese auf mehrere Aktionen, Controller sowie alle Controller in einer Assembly anzuwenden. Web-API-Konventionen können verwendet werden, damit keine einzelnen Aktionen mit [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) versehen werden müssen.
 
-<xref:Microsoft.AspNetCore.Mvc.ApiExplorer> erkennt zur Laufzeit Konventionen. `ApiExplorer` ist die Abstraktion von MVC, über die mit Dokumentgeneratoren für Open API kommuniziert wird. Die Attribute der angewendeten Konvention werden einer Aktion zugeordnet und zu der Swagger-Dokumentation der Aktion hinzugefügt. Auch API-Analysetools erkennen Konventionen. Wenn Ihre Aktion keiner Konvention folgt (also z.B. einen Statuscode zurückgibt, der nicht von der angewendeten Konvention dokumentiert wird), wird eine Warnung ausgegeben, in der Sie zur Dokumentation aufgefordert werden.
+Eine Konvention ermöglicht Ihnen Folgendes:
+
+* Definieren der gebräuchlichsten Rückgabetypen und Statuscodes, die von einem bestimmten Typ von Aktion zurückgegeben werden
+* Erkennen von Aktionen, die vom definierten Standard abweichen
+
+ASP.NET Core MVC 2.2 und höher umfasst eine Reihe von Standardkonventionen in `Microsoft.AspNetCore.Mvc.DefaultApiConventions`. Die Konventionen basieren auf dem Controller (*ValuesController.cs*), der in der ASP.NET Core-Projektvorlage **API** bereitgestellt wird. Wenn Ihre Aktionen den Mustern in der Vorlage entsprechen, sollten die Standardkonventionen für Sie ausreichend sein. Wenn die Standardkonventionen Ihre Anforderungen nicht erfüllen, lesen Sie [Erstellen von Web-API-Konventionen](#create-web-api-conventions).
+
+<xref:Microsoft.AspNetCore.Mvc.ApiExplorer> erkennt zur Laufzeit Konventionen. `ApiExplorer` ist die Abstraktion von MVC, über die mit [OpenAPI](https://www.openapis.org/)-Dokumentgeneratoren kommuniziert wird (OpenAPI ist auch als Swagger bekannt). Die Attribute aus der angewendeten Konvention werden einer Aktion zugeordnet und zur OpenAPI-Dokumentation der Aktion hinzugefügt. Auch [API-Analysetools](xref:web-api/advanced/analyzers) erkennen Konventionen. Wenn Ihre Aktion keiner Konvention folgt (also z. B. einen Statuscode zurückgibt, der nicht durch die angewendete Konvention dokumentiert ist), werden Sie mit einer Warnung aufgefordert, den Statuscode zu dokumentieren.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/conventions/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="apply-web-api-conventions"></a>Anwenden von Web-API-Konventionen
 
-Es gibt drei Möglichkeiten, eine Konvention anzuwenden. Konventionen werden nicht miteinander kombiniert. Jede Aktion kann genau einer Konvention zugeordnet werden. Genauere Konventionen (unten aufgeführt) haben Vorrang gegenüber ungenaueren. Die Auswahl ist nicht deterministisch, wenn mindestens zwei Konventionen mit gleicher Priorität für eine Aktion gelten. Sie können eine der folgenden Optionen auswählen, um angefangen bei der genausten Konvention bis hin zur ungenausten eine Konvention auf eine Aktion anzuwenden:
+Konventionen werden nicht miteinander kombiniert. Jede Aktion kann genau einer Konvention zugeordnet werden. Speziellere Konventionen haben Vorrang vor weniger speziellen Konventionen. Die Auswahl ist nicht deterministisch, wenn mindestens zwei Konventionen mit gleicher Priorität für eine Aktion gelten. Sie können eine der folgenden Optionen auswählen, um angefangen bei der genausten Konvention bis hin zur ungenausten eine Konvention auf eine Aktion anzuwenden:
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute` &mdash; Gilt für einzelne Aktionen und gibt den jeweiligen passenden Konventionstyp und die Konventionsmethode an. Im folgenden Beispiel wird die Konventionsmethode `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` auf die Aktion `Update` angewendet:
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute` &mdash; Gilt für einzelne Aktionen und gibt den jeweiligen passenden Konventionstyp und die Konventionsmethode an.
 
-    [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=apiconventionmethod&highlight=2-3)]
+    Im folgenden Beispiel wird die `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put`-Konventionsmethode des Standardkonventionstyps auf die `Update`-Aktion angewendet:
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf einen Controller angewendet &mdash; wendet den Konventionstyp bei allen Controlleraktionen an. Konventionsmethoden werden mit Hinweisen dazu versehen, für welche Aktionen sie jeweils anzuwenden sind (werden als Teil von Konventionen zur Dokumenterstellung zugewiesen). Zum Beispiel:
+    [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionMethod&highlight=3)]
 
-    [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=apiconventiontypeattribute)]
+    Die `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put`-Konventionsmethode wendet die folgenden Attribute auf die Aktion an:
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf eine Assembly angewendet &mdash; wendet den Konventionstyp auf alle Controller in der aktuellen Assembly an. Zum Beispiel:
+    ```csharp
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(400)]
+    ```
 
-    [!code-csharp[](conventions/sample/Startup.cs?name=apiconventiontypeattribute)]
+1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf einen Controller angewendet &mdash; Wendet den angegebenen Konventionstyp auf alle Controlleraktionen an. Eine Konventionsmethode ist mit Hinweisen versehen, die die Aktionen bestimmen, für die die Konventionsmethode gilt. Weitere Informationen zu Hinweisen finden Sie unter [Erstellen von Web-API-Konventionen](#create-web-api-conventions)).
+
+    Im folgenden Beispiel werden alle standardmäßigen Konventionen auf alle Aktionen in *ContactsConventionController* angewendet:
+
+    [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionTypeAttribute&highlight=2)]
+
+1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf eine Assembly angewendet &mdash; Wendet den angegebenen Konventionstyp auf alle Controller in der aktuellen Assembly an. Es empfiehlt sich, Attribute auf Assemblyebene auf die `Startup`-Klasse anzuwenden.
+
+    Im folgenden Beispiel werden alle standardmäßigen Konventionen auf alle Controller in der Assembly angewendet:
+
+    [!code-csharp[](conventions/sample/Startup.cs?name=snippet_ApiConventionTypeAttribute&highlight=1)]
 
 ## <a name="create-web-api-conventions"></a>Erstellen von Web-API-Konventionen
 
-Bei einer Konvention handelt es sich um einen statischen Typ mit Methoden. Diese Methoden werden mit den Attributen `[ProducesResponseType]` oder `[ProducesDefaultResponseType]` versehen.
+Wenn die Standard-API-Konventionen Ihre Anforderungen nicht erfüllen, erstellen Sie eigene Konventionen. Eine Konvention ist:
+
+* Ein statischer Typ mit Methoden.
+* Geeignet, [Antworttypen](#response-types) und [Benennungsanforderungen](#naming-requirements) für Aktionen zu definieren.
+
+### <a name="response-types"></a>Antworttypen
+
+Diese Methoden werden mit den Attributen `[ProducesResponseType]` oder `[ProducesDefaultResponseType]` versehen. Beispiel:
 
 ```csharp
 public static class MyAppConventions
@@ -55,9 +84,14 @@ public static class MyAppConventions
 }
 ```
 
-Wenn diese Konvention auf eine Assembly angewendet wird, wird die Konventionsmethode auf eine beliebige Aktion mit dem Namen `Find` und einem Parameter mit dem Namen `id` angewendet, wenn keine genaueren Metadatenattribute vorhanden sind.
+Sind keine spezielleren Metadatenattribute vorhanden, erzwingt ein Anwenden dieser Konvention auf eine Assembly, dass:
 
-Neben `[ProducesResponseType]` und `[ProducesDefaultResponseType]` können auch die Attribute `[ApiConventionNameMatch]` und `[ApiConventionTypeMatch]` auf die Konventionsmethode angewendet werden, die die Methoden bestimmt, auf die sie anzuwenden sind. Zum Beispiel:
+* Die Konventionsmethode für jede Aktion namens `Find` gilt.
+* Ein Parameter namens `id` in der `Find`-Aktion vorhanden ist.
+
+### <a name="naming-requirements"></a>Benennungsanforderungen
+
+Die Attribute `[ApiConventionNameMatch]` und `[ApiConventionTypeMatch]` können auf die Konventionsmethode angewendet werden, die die Aktionen bestimmt, für die sie gelten. Beispiel:
 
 ```csharp
 [ProducesResponseType(200)]
@@ -69,5 +103,12 @@ public static void Find(
 { }
 ```
 
-* Wenn die Option `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix` auf die Methode angewendet wird, deutet dies darauf hin, dass die Konvention mit jeder beliebigen Aktion übereinstimmt, solange diese das Präfix „Find“ aufweist. Dies betrifft z.B. die Methoden `Find`, `FindPet` und `FindById`.
-* Wenn die Option `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix` auf den Parameter angewendet wird, deutet dies darauf hin, dass die Konvention Methoden zugeordnet werden kann, die genau einen Parameter aufweisen, der auf dem Suffixbezeichner endet. Dies betrifft z.B. die Parameter `id` und `petId`. Genauso kann `ApiConventionTypeMatch` auf Typen angewendet, um den Parametertyp einzuschränken. Ein `params[]`-Argument kann verwendet werden, um auf verbleibende Parameter zu verweisen, die nicht genau zugeordnet werden müssen.
+Im vorherigen Beispiel:
+
+* Die auf die Methode angewendete Option `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix` gibt an, dass die Konvention für jede Aktion gilt, die das Präfix „Find“ hat. Beispiele für übereinstimmende Aktionen sind `Find`, `FindPet` und `FindById`.
+* Die auf den Parameter angewendete Option `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix` gibt an, dass die Konvention für jede Methode gilt, die genau einen Parameter hat, der mit dem Suffix „id“ endet. Beispiele sind Parameter wie `id` und `petId`. Vergleichbar kann `ApiConventionTypeMatch` auf Typen angewendet, um den Parametertyp einzuschränken. Ein `params[]`-Argument gibt verbleibende Parameter an, die nicht explizit abgeglichen werden müssen.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* <xref:web-api/advanced/analyzers>
+* <xref:tutorials/web-api-help-pages-using-swagger>

@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie mehr über das Aktualisieren der generierten Seiten in einer ASP.NET Core-App.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
-ms.date: 12/3/2018
+ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: b88dcd12ee670eb2e0919bdb07b9b7556a5b80e7
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 396cb9b9eeaab2d3db6108feeba71dbc2bc8981d
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862407"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997200"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Aktualisieren der generierten Seiten in einer ASP.NET Core-App
 
@@ -69,21 +69,21 @@ Eine Anforderung an die Seite mit der Routenvorlage „{id:int}“, die **nicht*
 @page "{id:int?}"
 ```
 
-So testen Sie das Verhalten für `@page "{id:int?}"`:
+So testen Sie das Verhalten von `@page "{id:int?}"`:
 
-* Legen Sie die Seitendirektive in *Pages/Movies/Details.cshtml* auf `@page "{id:int?}"` fest.
+* Legen Sie die page-Anweisung in *Pages/Movies/Details.cshtml* auf `@page "{id:int?}"` fest.
 * Legen Sie eine Haltepunkt in `public async Task<IActionResult> OnGetAsync(int? id)` fest (in *Pages/Movies/Details.cshtml.cs*).
 * Navigieren Sie zu `https://localhost:5001/Movies/Details/`.
 
 Mit der `@page "{id:int}"`-Direktive wird der Haltepunkt nie erreicht. Die Routing-Engine gibt den HTTP-Fehler 404 zurück. Bei Verwendung von `@page "{id:int?}"` gibt die `OnGetAsync`-Methode `NotFound` zurück (HTTP 404).
 
-Sie könnten die delete-Methode auch folgendermaßen schreiben, dies wird allerdings nicht empfohlen:
+Obwohl nicht zu empfehlen, könnten Sie die `OnGetAsync`-Methode (in *Pages/Movies/Delete.cshtml.cs*) wie folgt schreiben:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Delete.cshtml.cs?name=snippet)]
 
 Testen Sie den oben stehenden Code:
 
-* Wählen Sie einen Löschlink aus.
+* Wählen Sie einen **Löschen**-Link aus.
 * Entfernen Sie die ID aus der URL. Ändern Sie beispielsweise `https://localhost:5001/Movies/Delete/8` zu `https://localhost:5001/Movies/Delete`.
 * Führen Sie den Code im Debugger schrittweise aus.
 
@@ -125,7 +125,7 @@ Wenn die Seite „Filme/Bearbeiten“ bereitgestellt wird:
   public Movie Movie { get; set; }
   ```
 
-* Bei Fehlern beim Modellstatus (Beispiel: `ReleaseDate` kann nicht in ein Datum konvertiert werden), wird das Formular mit den übermittelten Werten erneut bereitgestellt.
+* Bei Fehlern beim Modellstatus (Beispiel: `ReleaseDate` kann nicht in ein Datum konvertiert werden) wird das Formular mit den übermittelten Werten angezeigt.
 * Wenn keine Modellfehler vorhanden sind, wird der Film gespeichert.
 
 Die HTTP GET-Methoden auf den Razor Pages „Index“, „Create“ und „Delete“ folgen einem ähnlichen Muster. Die HTTP-POST-Methode `OnPostAsync` auf der Razor Page „Create“ folgt einem ähnlichen Muster wie die `OnPostAsync`-Methode auf der Razor Page „Edit“.

@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie mehr über den Webhost in ASP.NET Core, der für das Starten der App und das Verwalten der Lebensdauer verantwortlich ist.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/01/2018
+ms.date: 12/18/2018
 uid: fundamentals/host/web-host
-ms.openlocfilehash: bc77413127273aba207e68e7fbcb8ad916267e8e
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 7215027a083c0ed0bc3b15196e390a31c5dcfc14
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862277"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637845"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core-Webhost
 
@@ -57,7 +57,7 @@ public class Program
   * Umgebungsvariablen.
   * Befehlszeilenargumenten
 * Konfiguriert die [Protokollierung](xref:fundamentals/logging/index) für die Konsolen- und Debugausgabe Die Protokollierung umfasst Regeln zur [Protokollfilterung](xref:fundamentals/logging/index#log-filtering), die im Abschnitt für die Protokollierungskonfiguration einer *appsettings.json*- oder *appsettings.{Environment}.json*-Datei angegeben werden.
-* Wenn die Ausführung mit dem [ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module) hinter den IIS erfolgt, ermöglicht `CreateDefaultBuilder` die [IIS-Integration](xref:host-and-deploy/iis/index), die die Basisadresse und den Port der App konfiguriert. Die IIS-Integration konfiguriert die App auch für das [Erfassen von Startfehlern](#capture-startup-errors). Informationen zu den IIS-Standardoptionen finden Sie unter <xref:host-and-deploy/iis/index#iis-options>.
+* Wenn die Ausführung mit dem [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) hinter den IIS erfolgt, ermöglicht `CreateDefaultBuilder` die [IIS-Integration](xref:host-and-deploy/iis/index), die die Basisadresse und den Port der App konfiguriert. Die IIS-Integration konfiguriert die App auch für das [Erfassen von Startfehlern](#capture-startup-errors). Informationen zu den IIS-Standardoptionen finden Sie unter <xref:host-and-deploy/iis/index#iis-options>.
 * Legt [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) auf `true` fest, wenn die Umgebung der App „Development“ ist. Weitere Informationen finden Sie unter [Bereichsvalidierung](#scope-validation).
 
 Die durch `CreateDefaultBuilder` definierte Konfiguration kann von [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging) und anderen Methoden sowie Erweiterungsmethoden von [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) überschrieben und erweitert werden. Es folgen einige Beispiele:
@@ -137,7 +137,7 @@ Die Eigenschaft [IHostingEnvironment.ApplicationName](/dotnet/api/microsoft.exte
 
 **Schlüssel:** Anwendungsname  
 **Typ:** *Zeichenfolge*  
-**Standardwert:** Der Name der Assembly, die den Einstiegspunkt der App enthält.  
+**Standardwert**: Der Name der Assembly, die den Einstiegspunkt der App enthält.  
 **Festlegen mit:** `UseSetting`  
 **Umgebungsvariable:** `ASPNETCORE_APPLICATIONNAME`
 
@@ -152,7 +152,7 @@ Diese Einstellung steuert das Erfassen von Startfehlern.
 
 **Schlüssel:** captureStartupErrors  
 **Typ:** *Boolesch* (`true` or `1`)  
-**Standard:** Die Standardeinstellung ist `false`, wenn die App nicht mit Kestrel im Hintergrund von IIS ausgeführt wird, dann ist diese `true`.  
+**Standardwert**: Die Standardeinstellung ist gleich `false`, es sei denn, die App wird mit Kestrel hinter IIS ausgeführt, dann ist sie gleich `true`.  
 **Festlegen mit:** `CaptureStartupErrors`  
 **Umgebungsvariable:** `ASPNETCORE_CAPTURESTARTUPERRORS`
 
@@ -169,7 +169,7 @@ Diese Einstellung bestimmt, wo ASP.NET mit der Suche nach Inhaltsdateien (z.B. M
 
 **Schlüssel:** contentRoot  
 **Typ:** *Zeichenfolge*  
-**Standard:** Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
+**Standardwert**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
 **Festlegen mit:** `UseContentRoot`  
 **Umgebungsvariable:** `ASPNETCORE_CONTENTROOT`
 
@@ -203,7 +203,7 @@ Legt die Umgebung der App fest.
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standard:** Produktion  
+**Standardwert**: Produktion  
 **Festlegen mit:** `UseEnvironment`  
 **Umgebungsvariable:** `ASPNETCORE_ENVIRONMENT`
 
@@ -220,7 +220,7 @@ Legt die Hostingstartassemblys der App fest.
 
 **Schlüssel:** hostingStartupAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standard:** Leere Zeichenfolge  
+**Standardwert**: Leere Zeichenfolge  
 **Festlegen mit:** `UseSetting`  
 **Umgebungsvariable:** `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
@@ -237,8 +237,8 @@ WebHost.CreateDefaultBuilder(args)
 
 Legen Sie den HTTPS-Umleitungsport fest. Wird in [Erzwingen von HTTPS](xref:security/enforcing-ssl) verwendet.
 
-**Schlüssel**: https_port **Typ**: *string*
-**Standard**: Es ist kein Standardwert festgelegt.
+**Schlüssel**: https_port **Typ**: *Zeichenfolge*
+**Standardwert**: Es ist kein Standardwert festgelegt.
 **Festlegen mit**: `UseSetting`
 **Umgebungsvariable**: `ASPNETCORE_HTTPS_PORT`
 
@@ -253,7 +253,7 @@ Eine durch Semikolons getrennte Zeichenfolge der Hostingstartassemblys, die beim
 
 **Schlüssel**: hostingStartupExcludeAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standard:** Leere Zeichenfolge  
+**Standardwert**: Leere Zeichenfolge  
 **Festlegen mit:** `UseSetting`  
 **Umgebungsvariable:** `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
@@ -317,7 +317,7 @@ Gibt die Wartezeit an, bis der Webhost heruntergefahren wird.
 
 **Schlüssel:** shutdownTimeoutSeconds  
 **Typ:** *Ganze Zahl*  
-**Standard:** 5  
+**Standardwert**: 5  
 **Festlegen mit:** `UseShutdownTimeout`  
 **Umgebungsvariable:** `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
@@ -341,7 +341,7 @@ Bestimmt die Assembly, die nach der `Startup`-Klasse suchen soll.
 
 **Schlüssel:** startupAssembly  
 **Typ:** *Zeichenfolge*  
-**Standard:** Die Assembly der App  
+**Standardwert**: Die Assembly der App  
 **Festlegen mit:** `UseStartup`  
 **Umgebungsvariable:** `ASPNETCORE_STARTUPASSEMBLY`
 
@@ -363,7 +363,7 @@ Legt den relativen Pfad für die statischen Objekte der App fest.
 
 **Schlüssel:** webroot  
 **Typ:** *Zeichenfolge*  
-**Standard:** Wenn nichts anderes angegeben und der Pfad vorhanden ist, ist der Standardwert „(Content Root)/wwwroot“. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
+**Standardwert**: Wenn nichts anderes angegeben und der Pfad vorhanden ist, ist der Standardwert „(Inhaltsstammverzeichnis)/wwwroot“. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
 **Festlegen mit:** `UseWebRoot`  
 **Umgebungsvariable:** `ASPNETCORE_WEBROOT`
 

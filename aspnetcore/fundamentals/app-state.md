@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/14/2018
 uid: fundamentals/app-state
-ms.openlocfilehash: ccaaa6fafd611c3cf35a9171d5bfd6100535eeb9
-ms.sourcegitcommit: 0fc89b80bb1952852ecbcf3c5c156459b02a6ceb
+ms.openlocfilehash: 2d9fe4fc7c69f23a903b4ada44e328ef140963db
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/29/2018
-ms.locfileid: "52618128"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997304"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>Sitzungs- und App-Zustand in ASP.NET Core
 
@@ -64,6 +64,7 @@ Der Sitzungszustand verhält sich wie folgt:
 * Die App speichert Sitzungen für einen beschränkten Zeitraum nach der letzten Anforderung. Die App legt entweder ein Zeitlimit für die Sitzungen fest oder verwendet den Standardwert von 20 Minuten. Der Sitzungszustand eignet sich ideal zum Speichern von Benutzerdaten, die für eine bestimmte Sitzung zwar wichtig sind, die jedoch nicht dauerhaft sitzungsübergreifend gespeichert werden müssen.
 * Sitzungsdaten werden entweder gelöscht, wenn die [ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear)-Implementierung aufgerufen wird oder wenn die Sitzung abläuft.
 * Es gibt kein Standardverfahren, wie App-Code darüber informiert wird, dass ein Clientbrowser geschlossen wurde oder dass ein Sitzungscookie gelöscht wurde oder auf dem Client abgelaufen ist.
+Die Vorlagen für ASP.NET Core MVC- und Razor-Seiten bieten Unterstützung für die [Unterstützung für die Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr). [Sitzungszustandscookies sind nicht unbedingt erforderlich](xref:security/gdpr#tempdata-provider-and-session-state-cookies-are-not-essential), denn der Sitzungszustand ist nicht funktionsfähig, wenn die Nachverfolgung deaktiviert ist.
 
 > [!WARNING]
 > Speichern Sie keine vertraulichen Daten im Sitzungszustand. Es besteht die Möglichkeit, dass der Benutzer seinen Browser nicht schließt oder die Sitzungscookies nicht löscht. Einige Browser behalten gültige Sitzungscookies browserfensterübergreifend bei. Eine Sitzung ist möglicherweise nicht nur auf einen Benutzer beschränkt, sodass der nächste Benutzer dasselbe Sitzungscookie verwendet.
@@ -125,7 +126,7 @@ Verwenden Sie [Sitzungsoptionen](/dotnet/api/microsoft.aspnetcore.builder.sessio
 
 ::: moniker range=">= aspnetcore-2.0"
 
-| Option | Beschreibung  |
+| Option | Beschreibung |
 | ------ | ----------- |
 | [Cookie](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | Bestimmt die Einstellungen, die zum Erstellen des Cookies verwendet wurden. Der Standardwert von [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name) ist [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename) (`.AspNetCore.Session`). Der Standardwert von [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path) ist [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath) (`/`). Der Standardwert von [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite) ist [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode) (`1`). Der Standardwert von [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) ist `true`. Der Standardwert von [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential) ist `false`. |
 | [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout` gibt an, wie lang die Sitzung sich im Leerlauf befinden darf, bevor die Inhalte verworfen werden. Jeder Zugriff auf eine Sitzung setzt das Zeitlimit zurück. Diese Einstellung gilt nur für den Inhalt der Sitzung und nicht für den Cookie. Der Standardwert beträgt 20 Minuten. |
@@ -137,7 +138,7 @@ Die Sitzung verwendet ein Cookie, um Anforderungen eines Browsers nachzuverfolge
 
 ::: moniker range="< aspnetcore-2.0"
 
-| Option | Beschreibung  |
+| Option | Beschreibung |
 | ------ | ----------- |
 | [CookieDomain](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookiedomain) | Bestimmt die Domäne, mit der ein Cookie erstellt wurde. `CookieDomain` ist standardmäßig nicht festgelegt. |
 | [CookieHttpOnly](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookiehttponly) | Bestimmt, ob der Browser zulässt, dass auf das Cookie über clientseitiges JavaScript zugegriffen wird. Der Standardwert ist `true`. D.h., dass das Cookie nur an HTTP-Anforderungen übergeben und nicht für Skript auf der Seite verfügbar gemacht wird. |

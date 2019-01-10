@@ -5,24 +5,24 @@ description: Informationen zum Erstellen und Verwenden von benutzerdefinierten F
 ms.author: tdykstra
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: ee6f166ced41c41506f2a17a7d362399c165b718
-ms.sourcegitcommit: 2d3e5422d530203efdaf2014d1d7df31f88d08d0
+ms.openlocfilehash: 2861a15a80725dcc237d33313a24822cf8aa9c7e
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2018
-ms.locfileid: "51020649"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997291"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>Benutzerdefinierte Formatierer in Web-APIs in ASP.NET Core
 
 Von [Tom Dykstra](https://github.com/tdykstra)
 
-Im ASP.NET Core MVC ist die Unterstützung von Datenaustausch in Web-APIs über JSON, XML oder Nur-Text-Formate integriert. In diesem Artikel wird dargestellt, wie Sie die Unterstützung von zusätzlichen Formaten hinzufügen, indem Sie benutzerdefinierte Formatierer erstellen.
+In ASP.NET Core MVC ist die Unterstützung für Datenaustausch in Web-APIs über JSON oder integriert. In diesem Artikel wird dargestellt, wie Sie die Unterstützung von zusätzlichen Formaten hinzufügen, indem Sie benutzerdefinierte Formatierer erstellen.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>Empfohlene Verwendung von benutzerdefinierten Formatierern
 
-Verwenden Sie einen benutzerdefinierten Formatierer, wenn Sie möchten, dass der [Inhaltaushandlungsvorgang](xref:web-api/advanced/formatting#content-negotiation) einen Inhaltstyp unterstützt, der nicht von den integrierten Formatieren (JSON, XML und Nur-Text) unterstützt wird.
+Verwenden Sie einen benutzerdefinierten Formatierer, wenn Sie möchten, dass der [Inhaltaushandlungsvorgang](xref:web-api/advanced/formatting#content-negotiation) einen Inhaltstyp unterstützt, der nicht von den integrierten Formatieren (JSON und XML) unterstützt wird.
 
 Wenn z.B. einige der Clients für Ihre Web-API das [Protobuf](https://github.com/google/protobuf)-Format verarbeiten können, sollten Sie auch Protobuf für diese Clients verwenden, wenn Sie effizient arbeiten möchten. Möglicherweise möchten Sie aber lieber Ihre Web-API verwenden, um Namen und Adressen von Kontakten im [vCard](https://wikipedia.org/wiki/VCard)-Format zu versenden – ein häufig zum Austauschen von Kontaktdaten verwendetes Format. Die in diesem Artikel enthaltene Beispiel-App implementiert einen einfachen vCard-Formatierer.
 
@@ -103,7 +103,8 @@ Formatierer werden in der Reihenfolge überprüft, in der Sie sie einfügen. Der
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Überprüfen Sie die [Beispielanwendung](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), die einfache Eingabe- und Ausgabeformatierer für vCard implementiert. Die Anwendung liest und schreibt vCards, die dem folgenden Beispiel ähneln:
+* [Beispielcode für Nur-Text-Formatierer auf GitHub.](https://github.com/aspnet/Entropy/tree/master/samples/Mvc.Formatters)
+* [Beispiel-App für diese Dokumentation](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), in der einfache Eingabe- und Ausgabeformatierer für vCard implementiert werden. Die App liest und schreibt vCards, die dem folgenden Beispiel ähneln:
 
 ```
 BEGIN:VCARD

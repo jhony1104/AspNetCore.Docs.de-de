@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie mit Visual Studio eine ASP.NET Core-Web-App erstellen und sie unter Verwendung von Git für Continuous Deployment in Azure App Service bereitstellen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/14/2016
+ms.date: 12/06/2018
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 5ae8ce01610828417fc76ed6626e518c8493bd0f
-ms.sourcegitcommit: 57eccdea7d89a62989272f71aad655465f1c600a
+ms.openlocfilehash: e12c2ee0b78db105b431770e8644e7d19d915765
+ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/10/2018
-ms.locfileid: "44340198"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53284427"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Continuous Deployment in Azure mit Visual Studio und Git mit ASP.NET Core
 
@@ -71,7 +71,7 @@ Mit den folgenden Schritten wird eine Web-App im Azure-Portal erstellt:
 
 1. Wählen Sie **Web + Mobil** > **Web-App** aus.
 
-   ![Microsoft Azure-Portal: Schaltfläche „Neu“: „Web + Mobil“ unter Marketplace: Schaltfläche „Web-App“ unter „Ausgewählte Apps“](azure-continuous-deployment/_static/05-azure-newwebapp.png)
+   ![Microsoft Azure-Portal: Schaltfläche „Neu“: „Web und mobil“ unter „Marketplace“: Schaltfläche „Web App“ unter „Ausgewählte Apps“](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
 1. Geben Sie auf dem Blatt **Web-App** für **App Service-Name** einen eindeutigen Wert ein.
 
@@ -84,7 +84,7 @@ Mit den folgenden Schritten wird eine Web-App im Azure-Portal erstellt:
 
 1. Wählen Sie **Erstellen** aus. Azure stellt die Web-App bereit und startet sie.
 
-   ![Azure-Portal: Beispiel-Web-App „Demo 01“, Blatt „Zusammenfassung“](azure-continuous-deployment/_static/07-azure-webappblade.png)
+   ![Azure-Portal: SampleWebAppDemo01, Blatt „Zusammenfassung“](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
 ## <a name="enable-git-publishing-for-the-new-web-app"></a>Aktivieren der Git-Veröffentlichung für die neue Web-App
 
@@ -98,7 +98,7 @@ Bei Git handelt es sich um ein verteiltes Versionskontrollsystem, mit dem Sie ei
 
 1. Klicken Sie auf dem Blatt **Bereitstellung** auf **Bereitstellungsoptionen** > **Quelle auswählen** > **Lokales Git-Repository**.
 
-   ![Blatt „Einstellungen“: Blatt „Bereitstellungsquelle“: Blatt „Quelle auswählen“](azure-continuous-deployment/_static/deployment-options.png)
+   ![Blatt "Einstellungen": Blatt „Bereitstellungsquelle“: Quellblatt auswählen](azure-continuous-deployment/_static/deployment-options.png)
 
 1. Klicken Sie auf **OK**.
 
@@ -184,7 +184,7 @@ In diesem Abschnitt erstellen Sie ein lokales Git-Repository mit Visual Studio u
 
 Wählen Sie die Web-App im [Azure-Portal](https://portal.azure.com) aus. Wählen Sie **Bereitstellung** > **Bereitstellungsoptionen** aus.
 
-![Azure-Portal: Blatt „Einstellungen“: Blatt „Bereitstellungen“ mit erfolgreicher Bereitstellung](azure-continuous-deployment/_static/13-verify-deployment.png)
+![Azure-Portal: Blatt "Einstellungen": Blatt „Bereitstellungen“ mit erfolgreicher Bereitstellung](azure-continuous-deployment/_static/13-verify-deployment.png)
 
 ## <a name="run-the-app-in-azure"></a>Ausführen der App in Azure
 
@@ -230,3 +230,4 @@ Zeigen Sie die aktualisierte Web-App an, indem Sie im Azure-Portal auf dem Blatt
 
 * [Erstellen Sie Ihre erste Pipeline mit Azure Pipelines](/azure/devops/pipelines/get-started-yaml)
 * [Projekt Kudu](https://github.com/projectkudu/kudu/wiki)
+* <xref:host-and-deploy/visual-studio-publish-profiles>

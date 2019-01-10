@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-mvc/intro
-ms.openlocfilehash: f1682203850f2c5440fe8d0b98830ca8772ff70f
-ms.sourcegitcommit: c4572be5ebb301013a5698caf9b5572b76cb2e34
+ms.openlocfilehash: 1191632555dc9331f815c1bfb1f313459824754a
+ms.sourcegitcommit: 68a3081dd175d6518d1bfa31b4712bd8a2dd3864
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "50244887"
+ms.lasthandoff: 12/18/2018
+ms.locfileid: "53577902"
 ---
 # <a name="aspnet-core-mvc-with-entity-framework-core---tutorial-1-of-10"></a>ASP.NET Core MVC mit Entity Framework Core: Tutorial 1 von 10
 
@@ -75,7 +75,7 @@ Der Benutzeroberflächenstil dieser Website orientiert sich an den integrierten 
 
 * Wählen Sie unter **ASP.NET Core 2.0** die Vorlage **Webanwendung (Model-View-Controller)** aus.
 
-  **Hinweis:** Für dieses Tutorial ist ASP.NET Core 2.0 und EF Core 2.0 oder höher erforderlich. Vergewissern Sie sich, dass nicht **ASP.NET Core 1.1.** ausgewählt ist.
+  **Hinweis**: Für dieses Tutorial ist ASP.NET Core 2.0 und EF Core 2.0 oder höher erforderlich. Vergewissern Sie sich, dass nicht **ASP.NET Core 1.1.** ausgewählt ist.
 
 * Stellen Sie sicher, dass **Authentifizierung** auf **Keine Authentifizierung** festgelegt ist.
 
@@ -245,7 +245,7 @@ Die automatische Erstellung von CRUD-Aktionsmethoden und Ansichten wird als Ger�
 
 Wenn das Dialogfeld **MVC-Abhängigkeiten hinzufügen** angezeigt wird, gehen Sie wie folgt vor:
 
-* [Aktualisieren Sie Visual Studio auf die neuste Version.](https://www.visualstudio.com/downloads/) Dieses Dialogfeld wird in allen Visual Studio Versionen vor Version 15.5 angezeigt.
+* [Aktualisieren Sie Visual Studio auf die neuste Version.](https://www.visualstudio.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017) Dieses Dialogfeld wird in allen Visual Studio Versionen vor Version 15.5 angezeigt.
 * Wenn Sie kein Update ausführen können, klicken Sie auf **Hinzufügen**, und führen Sie die Schritte zum Hinzufügen eines Controllers erneut aus.
 
 * Im Dialogfeld **Gerüst hinzufügen**:

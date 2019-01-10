@@ -3,16 +3,15 @@ title: 'Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC'
 author: rick-anderson
 description: Erstellen einer Web-API mit ASP.NET Core MVC
 ms.author: riande
-monikerRange: '> aspnetcore-2.1'
 ms.custom: mvc
-ms.date: 11/19/2018
+ms.date: 12/10/2018
 uid: tutorials/first-web-api
-ms.openlocfilehash: 1af14b85cbaefc00fd97db7c721c4f9436a65fb2
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.openlocfilehash: c2b4dcddd5332330cd6e6abe7d3a12697cde845e
+ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121465"
+ms.lasthandoff: 12/14/2018
+ms.locfileid: "53382003"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC
 
@@ -359,7 +358,7 @@ Fügen Sie die folgende `PutTodoItem`-Methode hinzu:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
-`PutTodoItem` ähnelt `PostTodoItem`, verwendet allerdings HTTP PUT. Die Antwort ist [204 (Kein Inhalt)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). Gemäß der HTTP-Spezifikation erfordert eine PUT-Anforderung, dass der Client die gesamte aktualisierte Entität (nicht nur die Änderungen) sendet. Verwenden Sie [HTTP PATCH](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute), um Teilupdates zu unterstützen.
+`PutTodoItem` ähnelt `PostTodoItem`, verwendet allerdings HTTP PUT. Die Antwort ist [204 (Kein Inhalt)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). Gemäß der HTTP-Spezifikation erfordert eine PUT-Anforderung, dass der Client die gesamte aktualisierte Entität (nicht nur die Änderungen) sendet. Verwenden Sie [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute), um Teilupdates zu unterstützen.
 
 ### <a name="test-the-puttodoitem-method"></a>Testen der PutTodoItem-Methode
 

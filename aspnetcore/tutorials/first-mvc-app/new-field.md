@@ -4,78 +4,86 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie Entity Framework Code First-Migrationen verwenden, um ein neues Feld zu einem Modell hinzuzufügen und diese Änderung an eine Datenbank zu migrieren.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: e58d5af90b997c66cb749ab8f1b2f8049b8f7303
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: c6e7fe13a55a14533949d212bfb149ccd91103e5
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50089682"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997239"
 ---
 # <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines neuen Felds zu einer ASP.NET Core MVC-App
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-In diesem Abschnitt verwenden Sie [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First-Migrationen zum Hinzufügen eines neuen Felds zum Modell und zum Migrieren dieser Änderung in die Datenbank.
+In diesem Abschnitt werden [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First-Migrationen für folgende Zwecke verwendet:
 
-Wenn Sie EF Code First verwenden, um eine Datenbank automatisch zu erstellen, fügt Code First der Datenbank eine Tabelle hinzu, um nachzuverfolgen, ob das Schema der Datenbank mit den Modellklassen synchron ist, aus denen sie generiert wurde. Wenn sie nicht synchron sind, löst EF eine Ausnahme aus. Dies erleichtert die Suche nach Problemen mit inkonsistenten Datenbanken bzw. inkonsistentem Code.
+* Dem Modell wird ein neues Feld hinzugefügt.
+* Das neue Feld wird in die Datenbank migriert.
 
-## <a name="adding-a-rating-property-to-the-movie-model"></a>Hinzufügen einer Rating-Eigenschaft zum Movie-Modell
+Wird EF Code First verwendet, um eine Datenbank automatisch zu erstellen, geht Code First wie folgt vor:
 
-Öffnen Sie die Datei *Models/Movie.cs*, und fügen Sie eine `Rating`-Eigenschaft hinzu:
+* Es fügt der Datenbank eine Tabelle hinzu, um das Schema der Datenbank nachzuverfolgen.
+* Es überprüft, ob die Datenbank mit den Modellklassen synchron ist, aus denen sie generiert wurde. Wenn sie nicht synchron sind, löst EF eine Ausnahme aus. Dies erleichtert die Suche nach Problemen mit inkonsistenten Datenbanken bzw. inkonsistentem Code.
 
-::: moniker range=">= aspnetcore-2.1"
+## <a name="add-a-rating-property-to-the-movie-model"></a>Hinzufügen einer Rating-Eigenschaft zum Movie-Modell
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie21/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+Fügen Sie eine `Rating`-Eigenschaft zu *Models/Movie.cs* hinzu:
 
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRating.cs?highlight=11&range=7-18)]
-
-::: moniker-end
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 Erstellen Sie die App (STRG+UMSCHALT+B).
 
-Da Sie der `Movie`-Klasse ein neues Feld hinzugefügt haben, müssen Sie auch die Positivliste für die Bindung aktualisieren, damit diese neue Eigenschaft eingeschlossen wird. Aktualisieren Sie in *MoviesController.cs* das `[Bind]`-Attribut für die Aktionsmethoden `Create` und `Edit` so, dass die `Rating`-Eigenschaft eingeschlossen wird:
+Da Sie der `Movie`-Klasse ein neues Feld hinzugefügt haben, müssen Sie die Positivliste für die Bindung aktualisieren, damit diese neue Eigenschaft eingeschlossen wird. Aktualisieren Sie in *MoviesController.cs* das `[Bind]`-Attribut für die Aktionsmethoden `Create` und `Edit` so, dass die `Rating`-Eigenschaft eingeschlossen wird:
 
 ```csharp
 [Bind("ID,Title,ReleaseDate,Genre,Price,Rating")]
    ```
 
-Sie müssen auch die Ansichtsvorlagen aktualisieren, um die neue `Rating`-Eigenschaft in der Browseransicht anzuzeigen, zu erstellen und zu bearbeiten.
+Aktualisieren Sie die Ansichtsvorlagen, um die neue `Rating`-Eigenschaft in der Browseransicht anzuzeigen, zu erstellen und zu bearbeiten.
 
 Bearbeiten Sie die Datei */Views/Movies/Index.cshtml*, und fügen Sie das Feld `Rating` hinzu:
 
-[!code-HTML[](start-mvc/sample/MvcMovie/Views/Movies/IndexGenreRating.cshtml?highlight=17,39&range=24-64)]
+[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=17,39&range=24-64)]
 
-Aktualisieren Sie die Datei */Views/Movies/Create.cshtml* mit dem Feld `Rating`. Sie können die vorherige „Formulargruppe“ kopieren und einfügen und IntelliSense die Felder aktualisieren lassen. IntelliSense nutzt [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro). Hinweis: In der RTM-Version von Visual Studio 2017 müssen Sie die [Razor-Sprachdienste](https://marketplace.visualstudio.com/items?itemName=ms-madsk.RazorLanguageServices) für Razor IntelliSense installieren. Dies wird in der nächsten Version behoben.
+Aktualisieren Sie die Datei */Views/Movies/Create.cshtml* mit dem Feld `Rating`.
+
+<!-- VS -------------------------->
+# <a name="visual-studio--visual-studio-for-mactabvisual-studiovisual-studio-mac"></a>[Visual Studio / Visual Studio für Mac](#tab/visual-studio+visual-studio-mac)
+
+Sie können die vorherige „Formulargruppe“ kopieren und einfügen und IntelliSense die Felder aktualisieren lassen. IntelliSense nutzt [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro).
 
 ![Der Entwickler hat den Buchstaben R als Attributwert von „asp-for“ im zweiten „label“-Element der Ansicht eingegeben. Ein Intellisense-Kontextmenü mit den verfügbaren Feldern wird angezeigt, einschließlich „Rating“, das in der Liste automatisch hervorgehoben wird. Wenn der Entwickler auf das Feld klickt oder auf der Tastatur die EINGABETASTE drückt, wird der Wert auf „Rating“ festgelegt.](new-field/_static/cr.png)
 
-Die App funktioniert erst, nachdem wir die Datenbank mit dem neuen Feld aktualisiert haben. Wenn Sie sie jetzt ausführen, erhalten Sie die folgende `SqlException`:
-
-`SqlException: Invalid column name 'Rating'.`
-
-Dieser Fehler wird gemeldet, da die aktualisierte Modellklasse „Movie“ sich vom Schema der Tabelle „Movie“ der vorhandenen Datenbank unterscheidet. (Die Datenbanktabelle enthält nicht die Spalte „Rating“.)
-
-Es gibt mehrere Vorgehensweisen zum Beheben des Fehlers:
-
-1. Lassen Sie die Datenbank von Entity Framework automatisch löschen und basierend auf dem neuen Modellklassenschema neu erstellen. Dieser Ansatz ist früh im Entwicklungszyklus sehr praktisch, wenn die aktive Entwicklung in einer Testdatenbank erfolgt. Er ermöglicht Ihnen, das Modell und das Datenbankschema schnell weiterzuentwickeln. Der Nachteil ist jedoch, dass in der Datenbank vorhandene Daten verloren gehen. Deshalb eignet sich dieser Ansatz nicht für eine Produktionsdatenbank! Das Verwenden eines Initialisierers zum automatischen Ausführen eines Seedings für eine Datenbank mit Testdaten ist häufig eine produktive Möglichkeit zum Entwickeln einer Anwendung.
-
-2. Ändern Sie das Schema der vorhandenen Datenbank explizit so, dass es mit den Modellklassen übereinstimmt. Der Vorteil dieses Ansatzes ist, dass Sie Ihre Daten behalten. Sie können diese Änderung entweder manuell oder durch Erstellen eines Änderungsskripts für die Datenbank vornehmen.
-
-3. Verwenden Sie Code First-Migrationen, um das Datenbankschema zu aktualisieren.
-
-Für dieses Tutorial verwenden wir Code First-Migrationen.
+<!-- Code -------------------------->
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+<!-- This tab intentionally left blank. -->
+---  
+<!-- End of VS tabs -->
 
 Aktualisieren Sie die `SeedData`-Klasse so, dass sie einen Wert für die neue Spalte bereitstellt. Eine Beispieländerung wird nachstehend gezeigt, aber Sie sollten diese Änderung für jedes `new Movie`-Element vornehmen.
 
 [!code-csharp[](start-mvc/sample/MvcMovie/Models/SeedDataRating.cs?name=snippet1&highlight=6)]
 
-Erstellen Sie die Projektmappe.
+Die App funktioniert erst, nachdem die Datenbank mit dem neuen Feld aktualisiert wurde. Wird sie jetzt ausgeführt, wird die folgende `SqlException` ausgelöst:
+
+`SqlException: Invalid column name 'Rating'.`
+
+Dieser Fehler tritt auf, weil die aktualisierte Modellklasse „Movie“ sich vom Schema der Tabelle „Movie“ der vorhandenen Datenbank unterscheidet. (Die Datenbanktabelle enthält nicht die Spalte `Rating`.)
+
+Es gibt mehrere Vorgehensweisen zum Beheben des Fehlers:
+
+1. Lassen Sie die Datenbank von Entity Framework automatisch löschen und basierend auf dem neuen Modellklassenschema neu erstellen. Dieser Ansatz ist früh im Entwicklungszyklus sehr praktisch, wenn die aktive Entwicklung in einer Testdatenbank erfolgt. Er ermöglicht Ihnen, das Modell und das Datenbankschema schnell weiterzuentwickeln. Der Nachteil ist jedoch, dass in der Datenbank vorhandene Daten verloren gehen. Deshalb eignet sich dieser Ansatz nicht für eine Produktionsdatenbank! Das Verwenden eines Initialisierers zum automatischen Ausführen eines Seedings für eine Datenbank mit Testdaten ist häufig eine produktive Möglichkeit zum Entwickeln einer Anwendung. Dies ist ein guter Ansatz für die frühe Entwicklung und wenn SQLite verwendet wird.
+
+2. Ändern Sie das Schema der vorhandenen Datenbank explizit so, dass es mit den Modellklassen übereinstimmt. Der Vorteil dieses Ansatzes ist, dass Sie Ihre Daten behalten. Sie können diese Änderung entweder manuell oder durch Erstellen eines Änderungsskripts für die Datenbank vornehmen.
+
+3. Verwenden Sie Code First-Migrationen, um das Datenbankschema zu aktualisieren.
+
+Für dieses Tutorial wird Code First-Migrationen verwendet.
+
+<!-- VS -------------------------->
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Öffnen Sie das Menü **Extras**. Wählen Sie dort **NuGet-Paket-Manager > Paket-Manager-Konsole** aus.
 
@@ -88,11 +96,27 @@ Add-Migration Rating
 Update-Database
 ```
 
-Der Befehl `Add-Migration` weist das Migrationsframework an, das aktuelle `Movie`-Modell mit dem aktuellen `Movie`-Datenbankschema zu untersuchen und den notwendigen Code zu erstellen, um die Datenbank in das neue Modell zu migrieren. Der Name „Rating“ ist beliebig und wird verwendet, um die Migrationsdatei zu benennen. Es ist hilfreich, einen aussagekräftigen Namen für die Migrationsdatei zu verwenden.
+Der Befehl `Add-Migration` weist das Migrationsframework an, das aktuelle `Movie`-Modell mit dem aktuellen `Movie`-Datenbankschema zu untersuchen und den notwendigen Code zu erstellen, um die Datenbank in das neue Modell zu migrieren.
 
-Wenn Sie alle Datensätze aus der Datenbank löschen, führt der Initialisierer ein Seeding für die Datenbank aus und fügt das Feld `Rating` hinzu. Dies ist über die Links „Löschen“ im Browser oder SSOX möglich.
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Führen Sie die App aus, und überprüfen Sie, ob Sie Filme mit dem Feld `Rating` erstellen/bearbeiten/anzeigen können. Sie müssen das Feld `Rating` auch den Ansichtsvorlagen `Edit`, `Details` und `Delete` hinzufügen.
+[!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
+
+Führen Sie den folgenden Befehl aus:
+
+```cli
+dotnet ef migrations add Rating
+dotnet ef database update
+```
+
+---  
+<!-- End of VS tabs -->
+
+Der Name „Rating“ ist beliebig und wird verwendet, um die Migrationsdatei zu benennen. Es ist hilfreich, einen aussagekräftigen Namen für die Migrationsdatei zu verwenden.
+
+Werden alle Datensätze aus der Datenbank gelöscht, führt die initialize-Methode ein Seeding für die Datenbank aus und fügt das Feld `Rating` hinzu.
+
+Führen Sie die App aus, und überprüfen Sie, ob Sie Filme mit dem Feld `Rating` erstellen/bearbeiten/anzeigen können. Sie müssen das Feld `Rating` den Ansichtsvorlagen `Edit`, `Details` und `Delete` hinzufügen.
 
 > [!div class="step-by-step"]
 > [Zurück](search.md)

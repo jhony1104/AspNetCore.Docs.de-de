@@ -2,17 +2,16 @@
 title: Erste Schritte mit ASP.NET Core SignalR
 author: tdykstra
 description: In diesem Tutorial erstellen Sie eine Chat-App, die ASP.NET Core SignalR verwendet.
-monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 11/30/2018
 uid: tutorials/signalr
-ms.openlocfilehash: c52041b34d6c9d1d8f06f980c900b805a0933293
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 36296513726f7e098a536afc22fcbfb2cafe946d
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861980"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997278"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Tutorial: Erste Schritte mit ASP.NET Core SignalR
 
@@ -30,10 +29,6 @@ Am Ende verfügen Sie über eine funktionierende Chat-App:
 ![SignalR-Beispiel-App](signalr/_static/signalr-get-started-finished.png)
 
 [Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/signalr/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
-
-> [!NOTE]
-> Wir testen gerade eine vorgeschlagene neue Struktur für das ASP.NET Core-Inhaltsverzeichnis.  Falls Sie einige Minuten Zeit haben, um einen Test durchzuführen, in dem Sie sieben unterschiedliche Artikel im aktuellen und vorgeschlagene Inhaltsverzeichnis finden sollen, [klicken Sie hier, um daran teilzunehmen](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).
-
 
 [!INCLUDE [|Prerequisites](~/includes/net-core-prereqs-all-2.2.md)]
 
@@ -168,7 +163,7 @@ Ein *Hub* ist eine Klasse, die als grundlegende Pipeline verwendet wird, mit der
 
   Die `ChatHub`-Klasse erbt von der `Hub`-Klasse von SignalR. Die `Hub`-Klasse verwaltet Verbindungen, Gruppen und Messaging.
 
-  Die `SendMessage`-Methode kann von jedem verbundenen Client aufgerufen werden. Die empfangenen Nachrichten werden an alle Clients gesendet. SignalR-Code ist asynchron, damit die maximale Skalierbarkeit gewährleistet werden kann.
+  Die `SendMessage`-Methode kann von einem verbundenen Client aufgerufen werden, um eine Nachricht an alle Clients zu senden. JavaScript-Clientcode, in dem die Methode aufgerufen wird, wird später in diesem Tutorial vorgestellt. SignalR-Code ist asynchron, damit die maximale Skalierbarkeit gewährleistet werden kann.
 
 ## <a name="configure-signalr"></a>Konfigurieren von SignalR
 

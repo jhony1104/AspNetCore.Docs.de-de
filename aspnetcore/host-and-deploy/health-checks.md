@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Integritätsprüfungen für ASP.NET Core-Infr
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/03/2018
+ms.date: 12/12/2018
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: d8fd43d9d689396cf30ca371763cdf7ac9423c77
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: cf2aea91221887dad5646604214f810493d4b175
+ms.sourcegitcommit: 1ea1b4fc58055c62728143388562689f1ef96cb2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862635"
+ms.lasthandoff: 12/13/2018
+ms.locfileid: "53329145"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Integritätsprüfungen in ASP.NET Core
 
@@ -36,10 +36,12 @@ Integritätsprüfungen werden in der Regel mit einem externen Überwachungsdiens
 
 Verweisen Sie auf das [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app), oder fügen Sie einen Paketverweis auf das Paket [Microsoft.AspNetCore.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks) hinzu.
 
-Die Beispiel-App stellt Startcode bereit, um die Integritätsprüfungen für verschiedene Szenarien zu veranschaulichen. Das Szenario [Datenbanktest](#database-probe) testet die Integrität einer Datenbankverbindung mithilfe von [BeatPulse](https://github.com/Xabaril/BeatPulse). Das Szenario [DbContext-Test](#entity-framework-core-dbcontext-probe) testet eine Datenbank mithilfe eines EF Core-`DbContext`-Elements. So erkunden Sie die Datenbankszenarien mithilfe der Beispiel-App:
+Die Beispiel-App stellt Startcode bereit, um die Integritätsprüfungen für verschiedene Szenarien zu veranschaulichen. Das Szenario [Datenbanktest](#database-probe) überprüft die Integrität einer Datenbankverbindung mithilfe von [BeatPulse](https://github.com/Xabaril/BeatPulse). Das Szenario [DbContext-Test](#entity-framework-core-dbcontext-probe) überprüft eine Datenbank mithilfe eines EF Core-`DbContext`-Elements. Für ein Erkunden der Datenbankszenarios gilt für die Beispiel-App:
 
-* Erstellen Sie eine Datenbank, und geben Sie die zugehörige Verbindungszeichenfolge in der Datei *appsettings.json* der App an.
-* Fügen Sie einen Paketverweis auf [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/) hinzu.
+* Sie erstellt eine Datenbank und stellt deren Verbindungszeichenfolge in der Datei *appsettings.json* bereit.
+* Sie hat die folgenden Paketverweise in ihrer Projektdatei:
+  * [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
+  * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
 
 > [!NOTE]
 > [BeatPulse](https://github.com/Xabaril/BeatPulse) wird von Microsoft nicht verwaltet oder unterstützt.
@@ -50,7 +52,7 @@ Ein anderes Szenario für Integritätsprüfungen zeigt, wie Sie Integritätsprü
 
 In vielen Apps genügt zur Ermittlung des App-Status eine grundlegende Integritätstestkonfiguration, die die Verfügbarkeit der App für die Verarbeitung von Anforderungen (*Lebendigkeit*) meldet.
 
-Die grundlegende Konfiguration registriert Integritätsprüfungsdienste und ruft die Middleware für Integritätsprüfungen auf, damit diese an einem URL-Endpunkt mit dem Integritätsstatus antwortet. Standardmäßig werden keine spezifischen Integritätsprüfungen registriert, um eine bestimmte Abhängigkeit oder ein bestimmtes Subsystem zu testen. Die App wird als fehlerfrei angesehen, wenn sie an der URL des Integritätsendpunkts antworten kann. Der standardmäßige Antwortwriter schreibt den Status (`HealthCheckStatus`) als Klartextantwort zurück an den Client und gibt den Status entweder als `HealthCheckResult.Healthy` oder als `HealthCheckResult.Unhealthy` an.
+Die grundlegende Konfiguration registriert Integritätsprüfungsdienste und ruft die Middleware für Integritätsprüfungen auf, damit diese an einem URL-Endpunkt mit dem Integritätsstatus antwortet. Standardmäßig werden keine spezifischen Integritätsprüfungen registriert, um eine bestimmte Abhängigkeit oder ein bestimmtes Subsystem zu testen. Die App wird als fehlerfrei angesehen, wenn sie an der URL des Integritätsendpunkts antworten kann. Der standardmäßige Antwortwriter schreibt den Status (`HealthStatus`) als Klartextantwort zurück an den Client und gibt den Status als `HealthStatus.Healthy`, `HealthStatus.Degraded` oder `HealthStatus.Unhealthy` an.
 
 Registrieren Sie Integritätsprüfungsdienste mit `AddHealthChecks` in `Startup.ConfigureServices`. Fügen Sie Middleware für Integritätsprüfungen mit `UseHealthChecks` in der Anforderungsverarbeitungspipeline von `Startup.Configure` hinzu.
 
@@ -216,12 +218,12 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseHealthChecks("/health", new HealthCheckOptions()
     {
         // The following StatusCodes are the default assignments for
-        // the HealthCheckStatus properties.
+        // the HealthStatus properties.
         ResultStatusCodes =
         {
-            [HealthCheckStatus.Healthy] = StatusCodes.Status200OK,
-            [HealthCheckStatus.Degraded] = StatusCodes.Status200OK,
-            [HealthCheckStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+            [HealthStatus.Healthy] = StatusCodes.Status200OK,
+            [HealthStatus.Degraded] = StatusCodes.Status200OK,
+            [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
         }
     });
 }
@@ -314,9 +316,17 @@ dotnet run --scenario db
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core-DbContext-Test
 
-Die `DbContext`-Überprüfung wird in Apps unterstützt, die [Entity Framework Core](/ef/core/) (EF Core) verwenden. Diese Überprüfung bestätigt, dass die App mit der Datenbank kommunizieren kann, die für einen EF Core-`DbContext` konfiguriert wurde. Standardmäßig ruft `DbContextHealthCheck` die `CanConnectAsync`-Methode von EF Core auf. Sie können festlegen, welcher Vorgang ausgeführt wird, wenn Sie die Integrität mithilfe von Überladungen der `AddDbContextCheck`-Methode überprüfen.
+Die `DbContext`-Überprüfung bestätigt, dass die App mit der Datenbank kommunizieren kann, die für einen EF Core-`DbContext` konfiguriert wurde. Die `DbContext` Überprüfung wird in Apps unterstützt, für die gilt:
 
-`AddDbContextCheck<TContext>` registriert eine Integritätsprüfung für einen `DbContext` (`TContext`). Standardmäßig ist der Name der Integritätsprüfung der Name des `TContext`-Typs. Eine Überladung ist verfügbar, um den Fehlerstatus, Tags sowie eine benutzerdefinierte Testabfrage zu konfigurieren.
+* In ihnen wird [Entity Framework Core (EF Core)](/ef/core/) verwendet.
+* Sie enthalten einen Paketverweis auf [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/).
+
+`AddDbContextCheck<TContext>` registriert eine Integritätsprüfung für einen `DbContext`. Der `DbContext` wird als der `TContext` für die Methode bereitgestellt. Eine Überladung ist verfügbar, um den Fehlerstatus, Tags sowie eine benutzerdefinierte Testabfrage zu konfigurieren.
+
+Standardmäßig:
+
+* `DbContextHealthCheck` ruft die `CanConnectAsync`-Methode von EF Core auf. Sie können festlegen, welcher Vorgang ausgeführt wird, wenn die Integrität mit `AddDbContextCheck`-Methodenüberladungen überprüft wird.
+* Der Name der Integritätsprüfung ist der Name des `TContext`-Typs.
 
 In der Beispiel-App wird `AppDbContext` für `AddDbContextCheck` bereitgestellt und als Dienst in `Startup.ConfigureServices` registriert.
 

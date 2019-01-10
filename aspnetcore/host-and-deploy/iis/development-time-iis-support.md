@@ -4,14 +4,14 @@ author: shirhatti
 description: Informationen zur Unterstützung für das Debuggen von ASP.NET Core-Apps, wenn diese hinter IIS unter Windows Server ausgeführt werden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/30/2018
+ms.date: 12/18/2018
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 51375e6a6bb25a469d467ca97a151abd305c1ece
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 44570bb28451ce4c5fde12ec77e3856fb5bd3062
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862381"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637663"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>IIS-Support zum Zeitpunkt der Entwicklung in Visual Studio für ASP.NET Core
 
@@ -54,9 +54,9 @@ Wenn die IIS-Installation bereits über eine **Standardwebsite** mit einem Hostn
 ## <a name="enable-development-time-iis-support-in-visual-studio"></a>Aktivieren von IIS-Unterstützung in Visual Studio zur Entwicklungszeit
 
 1. Starten Sie den Visual Studio-Installer.
-1. Wählen Sie die Komponente **IIS-Unterstützung zur Entwicklungszeit** aus. Die Komponente wird im Bereich **Zusammenfassung** für die Workload **ASP.NET und Webentwicklung** als optional aufgeführt. Sie installiert das [ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module) – ein natives IIS-Modul, das zur Ausführung von ASP.NET Core-Anwendungen mit IIS erforderlich ist.
+1. Wählen Sie die Komponente **IIS-Unterstützung zur Entwicklungszeit** aus. Die Komponente wird im Bereich **Zusammenfassung** für die Workload **ASP.NET und Webentwicklung** als optional aufgeführt. Sie installiert das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) – ein natives IIS-Modul, das zur Ausführung von ASP.NET Core-Anwendungen mit IIS erforderlich ist.
 
-![Ändern von Visual Studio-Features: Die Registerkarte „Workloads“ ist ausgewählt. Im Bereich „Web und Cloud“ ist der Bereich „ASP.NET und Webentwicklung“ ausgewählt. Auf der rechten Seite des Bereichs „Optional“ im Bereich „Zusammenfassung“ befindet sich ein Kontrollkästchen für „IIS-Unterstützung zur Entwicklungszeit“.](development-time-iis-support/_static/development_time_support.png)
+![Ändern von Visual Studio-Features: Die Registerkarte „Workloads“ wird ausgewählt. Im Bereich „Web und Cloud“ ist der Bereich „ASP.NET und Webentwicklung“ ausgewählt. Auf der rechten Seite des Bereichs „Optional“ im Bereich „Zusammenfassung“ befindet sich ein Kontrollkästchen für „IIS-Unterstützung zur Entwicklungszeit“.](development-time-iis-support/_static/development_time_support.png)
 
 ## <a name="configure-the-project"></a>Konfigurieren des Projekts
 
@@ -146,6 +146,6 @@ Bei Verwendung eines nicht vertrauenswürdigen Entwicklungszertifikats müssen S
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Hosten von ASP.NET Core unter Windows mit IIS](xref:host-and-deploy/iis/index)
-* [Einführung in das ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module)
+* [Einführung in das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module)
 * [Konfigurationsreferenz für das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module)
 * [Erzwingen von HTTPS](xref:security/enforcing-ssl)

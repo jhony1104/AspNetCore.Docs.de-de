@@ -4,14 +4,14 @@ author: rick-anderson
 description: Hier finden Sie Informationen zum Einrichten von Nginx als Reverseproxy unter Ubuntu 16.04, um den HTTP-Datenverkehr an eine ASP.NET Core-Web-App weiterzuleiten, die auf Kestrel ausgeführt wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/26/2018
+ms.date: 12/20/2018
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: d4bffab80ba20d4cf77a358249c7b349033de5bd
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.openlocfilehash: 534c62c127e685af9c6076932943def25bd3ac06
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52450787"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997330"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -126,7 +126,7 @@ Weitere Informationen finden Sie unter <xref:host-and-deploy/proxy-load-balancer
 
 ### <a name="install-nginx"></a>Installieren von Nginx
 
-Verwenden Sie `apt-get` zum Installieren von Nginx. Das Installationsprogramm erstellt ein *systemd*-Initialisierungsskript, das Nginx beim Systemstart als Dämon ausführt. Führen Sie die Installationsanweisungen für Ubuntu unter [Nginx: Offizielle Debian-/Ubuntu-Pakete](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages) aus.
+Verwenden Sie `apt-get` zum Installieren von Nginx. Das Installationsprogramm erstellt ein *systemd*-Initialisierungsskript, das Nginx beim Systemstart als Dämon ausführt. Befolgen Sie die Installationsanleitungen für Ubuntu auf [NGINX: Official Debian/Ubuntu packages](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages).
 
 > [!NOTE]
 > Wenn optionale Nginx-Module benötigt werden, kann die Erstellung von Nginx aus der Quelle erforderlich sein.
@@ -297,6 +297,18 @@ Wenn Sie den Schutz von Daten konfigurieren möchten, um den Schlüsselring pers
 * <xref:security/data-protection/implementation/key-storage-providers>
 * <xref:security/data-protection/implementation/key-encryption-at-rest>
 
+## <a name="long-request-header-fields"></a>Lange Anforderungsheaderfelder
+
+Wenn die App Anforderungsheaderfelder erfordert, die länger sind, als dies die Standardeinstellungen des Proxyservers zulassen (meist 4K oder 8K, je nach Plattform), müssen die folgenden Anweisungen angepasst werden. Die anzuwendenden Werte hängen von Szenario ab. Weitere Informationen finden Sie in der Dokumentation Ihres Servers.
+
+* [proxy_buffer_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffer_size)
+* [proxy_buffers](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffers)
+* [proxy_busy_buffers_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_busy_buffers_size)
+* [large_client_header_buffers](https://nginx.org/docs/http/ngx_http_core_module.html#large_client_header_buffers)
+
+> [!WARNING]
+> Erhöhen Sie die Standardwerte der Proxypuffer nur dann, wenn dies absolut erforderlich ist. Ein Erhöhen dieser Werte vergrößert das Risiko von Pufferüberlauf- (Überlauf-) und Denial-of-Service-Angriffen durch böswillige Benutzer.
+
 ## <a name="secure-the-app"></a>Sichern der App
 
 ### <a name="enable-apparmor"></a>Aktivieren von AppArmor
@@ -386,7 +398,7 @@ Fügen Sie die Zeile `add_header X-Content-Type-Options "nosniff";` hinzu, und s
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Voraussetzungen für .NET Core unter Linux](/dotnet/core/linux-prerequisites)
-* [Nginx: Binary Releases: Official Debian/Ubuntu packages (Nginx: Binäre Releases – offizielle Debian/Ubuntu-Pakete)](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
+* [Nginx: Binary Releases: Official Debian/Ubuntu packages](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/proxy-load-balancer>
 * [NGINX: Using the Forwarded header (NGINX: Verwenden des weitergeleiteten Headers)](https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/)

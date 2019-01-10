@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, inwiefern das Routing mit ASP.NET Core für das Zuordnen von Anforderungs-URIs zu Endpunktselektoren und das Weiterleiten von Anforderungen an Endpunkte zuständig ist.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/15/2018
+ms.date: 12/29/2018
 uid: fundamentals/routing
-ms.openlocfilehash: f18ec1da2affbf67b7ada570b68f98a42c7256a5
-ms.sourcegitcommit: ad28d1bc6657a743d5c2fa8902f82740689733bb
+ms.openlocfilehash: c57b309e4474f9aff5c0594a3d9d1c796990d31e
+ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2018
-ms.locfileid: "52256592"
+ms.lasthandoff: 01/03/2019
+ms.locfileid: "53997356"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -193,7 +193,7 @@ Die `GetPath*`-Methoden sind `Url.Action` und `Url.Page` in der Hinsicht ähnlic
 
 Die von `LinkGenerator` bereitgestellten Methoden unterstützen die Standardfunktionen zur Generierung von Links für jeden beliebigen Adresstypen. Am praktischsten ist es, die API zur Linkgenerierung mit Erweiterungsmethoden zu verwenden, die Vorgänge für einen bestimmten Adresstypen ausführen.
 
-| Erweiterungsmethode   | Beschreibung                                                          |
+| Erweiterungsmethode   | Beschreibung                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | `GetPathByAddress` | Generiert einen URI mit einem absoluten Pfad, der auf den angegebenen Werten basiert. |
 | `GetUriByAddress`  | Generiert einen absoluten URI, der auf den angegebenen Werten basiert.             |
@@ -292,6 +292,8 @@ Es gibt einige Unterschiede zwischen dem Endpunktrouting in ASP.NET Core 2.2 ode
 Im folgenden Beispiel verwendet eine Middleware die `LinkGenerator`-API, um eine Verknüpfung zu einer Aktionsmethode herzustellen, die Speicherprodukte aufführt. Sie können für jede beliebige Klasse in einer App die API zur Linkgenerierung verwenden, indem Sie diese in eine Klasse einfügen und `GenerateLink` aufrufen.
 
 ```csharp
+using Microsoft.AspNetCore.Routing;
+
 public class ProductsLinkMiddleware
 {
     private readonly LinkGenerator _linkGenerator;
@@ -303,8 +305,7 @@ public class ProductsLinkMiddleware
 
     public async Task InvokeAsync(HttpContext httpContext)
     {
-        var url = _linkGenerator.GenerateLink(new { controller = "Store",
-                                                    action = "ListProducts" });
+        var url = _linkGenerator.GetPathByAction("ListProducts", "Store");
 
         httpContext.Response.ContentType = "text/plain";
 
@@ -679,12 +680,23 @@ Parametertransformatoren:
 
 Beispielsweise generiert ein benutzerdefinierter Parametertransformator `slugify` im Routenmuster `blog\{article:slugify}` mit `Url.Action(new { article = "MyTestArticle" })` `blog\my-test-article`.
 
+Um einen Parametertransformator in einem Routenmuster zu verwenden, konfigurieren Sie ihn zuerst mit <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> in `Startup.ConfigureServices`:
+
+```csharp
+services.AddRouting(options =>
+{
+    // Replace the type and the name used to refer to it with your own
+    // IOutboundParameterTransformer implementation
+    options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+});
+```
+
 Parametertransformatoren werden auch von Frameworks verwendet, um den URI zu transformieren, zu dem ein Endpunkt aufgelöst wird. Beispielsweise verwendet ASP.NET Core MVC Parametertransformatoren zum Transformieren des Routenwerts, der zum Zuordnen einer `area`, eines `controller`, einer `action` und einer `page` verwendet wird.
 
 ```csharp
 routes.MapRoute(
     name: "default",
-    template: "{controller=Home:slugify}/{action=Index:slugify}/{id?}");
+    template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
 Mit der vorstehenden Route wird die Aktion `SubscriptionManagementController.GetAll()` dem URI `/subscription-management/get-all` zugeordnet. Ein Parametertransformator ändert nicht die zum Generieren eines Links verwendeten Routenwerte. Beispielsweise gibt `Url.Action("GetAll", "SubscriptionManagement")` `/subscription-management/get-all` aus.

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 67f74657fb9aa5ba8235be159e2f10cf80ebce3d
-ms.sourcegitcommit: 0fc89b80bb1952852ecbcf3c5c156459b02a6ceb
+ms.openlocfilehash: 0e3784de18be16e3217a015dd94f1b43b6621c1c
+ms.sourcegitcommit: 68a3081dd175d6518d1bfa31b4712bd8a2dd3864
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/29/2018
-ms.locfileid: "52618102"
+ms.lasthandoff: 12/18/2018
+ms.locfileid: "53577889"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
 
@@ -343,7 +343,7 @@ public interface IValidateOptions<TOptions> where TOptions : class
 }
 ```
 
-Die Überprüfung auf Basis von Datenanmerkungen ist über das Paket [Microsoft.Extensions.Options.DataAnnotations](https://www.nuget.org/packages/Microsoft.Extensions.Options.DataAnnotations) durch Aufrufen der `ValidateDataAnnotations`-Methode in `OptionsBuilder<TOptions>` verfügbar. `Microsoft.Extensions.Options.DataAnnotations` ist im Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 oder höher) enthalten.
+Die Überprüfung auf Basis von Datenanmerkungen ist über das Paket [Microsoft.Extensions.Options.DataAnnotations](https://www.nuget.org/packages/Microsoft.Extensions.Options.DataAnnotations) durch Aufrufen der `ValidateDataAnnotations`-Methode in `OptionsBuilder<TOptions>` verfügbar. `Microsoft.Extensions.Options.DataAnnotations` ist im Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) (ASP.NET Core 2.2 oder höher) enthalten.
 
 ```csharp
 private class AnnotatedOptions
