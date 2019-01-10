@@ -1,141 +1,148 @@
 ---
-title: Erste Schritte mit ASP.NET Core MVC und Visual Studio
+title: Erste Schritte mit ASP.NET Core MVC
 author: rick-anderson
-description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC und Visual Studio.
+monikerRange: '>= aspnetcore-2.2'
+description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC.
 ms.author: riande
-ms.date: 10/07/2017
+ms.date: 12/12/2018
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 738c49272c2ae2b075866001f06ad09fe73969f9
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: cfce3b5792a5d0673bae5ddbba9e2d4d515a6279
+ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862199"
+ms.lasthandoff: 12/14/2018
+ms.locfileid: "53381802"
 ---
-# <a name="get-started-with-aspnet-core-mvc-and-visual-studio"></a><span data-ttu-id="b4a64-103">Erste Schritte mit ASP.NET Core MVC und Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b4a64-103">Get started with ASP.NET Core MVC and Visual Studio</span></span>
+# <a name="get-started-with-aspnet-core-mvc"></a><span data-ttu-id="f54a3-103">Erste Schritte mit ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="f54a3-103">Get started with ASP.NET Core MVC</span></span>
 
-<span data-ttu-id="b4a64-104">Von [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="b4a64-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="f54a3-104">Von [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="f54a3-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-<span data-ttu-id="b4a64-105">Es gibt drei Versionen dieses Tutorials:</span><span class="sxs-lookup"><span data-stu-id="b4a64-105">There are 3 versions of this tutorial:</span></span>
+https://docs.microsoft.com/en-us/visualstudio/ide/visual-studio-ide?view=vs-2017
 
-* <span data-ttu-id="b4a64-106">macOS: [Erstellen einer ASP.NET Core MVC-App mit Visual Studio für Mac](xref:tutorials/first-mvc-app-mac/start-mvc)</span><span class="sxs-lookup"><span data-stu-id="b4a64-106">macOS: [Create an ASP.NET Core MVC app with Visual Studio for Mac](xref:tutorials/first-mvc-app-mac/start-mvc)</span></span>
-* <span data-ttu-id="b4a64-107">Windows: [Erstellen einer ASP.NET Core MVC-App mit Visual Studio](xref:tutorials/first-mvc-app/start-mvc)</span><span class="sxs-lookup"><span data-stu-id="b4a64-107">Windows: [Create an ASP.NET Core MVC app with Visual Studio](xref:tutorials/first-mvc-app/start-mvc)</span></span>
-* <span data-ttu-id="b4a64-108">macOS, Linux und Windows: [Erstellen einer ASP.NET Core MVC-App mit Visual Studio Code](xref:tutorials/first-mvc-app-xplat/start-mvc)</span><span class="sxs-lookup"><span data-stu-id="b4a64-108">macOS, Linux, and Windows: [Create an ASP.NET Core MVC app with Visual Studio Code](xref:tutorials/first-mvc-app-xplat/start-mvc)</span></span>
+<span data-ttu-id="f54a3-105">In diesem Tutorial lernen Sie Grundlegendes zur Erstellung einer ASP.NET Core-MVC-Web-App.</span><span class="sxs-lookup"><span data-stu-id="f54a3-105">This tutorial teaches the basics of building an ASP.NET Core MVC web app.</span></span>
+
+<span data-ttu-id="f54a3-106">Die App verwaltet eine Datenbank mit Filmtiteln.</span><span class="sxs-lookup"><span data-stu-id="f54a3-106">The app manages a database of movie titles.</span></span> <span data-ttu-id="f54a3-107">Sie lernen Folgendes:</span><span class="sxs-lookup"><span data-stu-id="f54a3-107">You learn how to:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="f54a3-108">Erstellen einer Web-App</span><span class="sxs-lookup"><span data-stu-id="f54a3-108">Create a web app.</span></span>
+> * <span data-ttu-id="f54a3-109">Hinzufügen eines Modells und Erstellen eines Gerüsts für das Modell</span><span class="sxs-lookup"><span data-stu-id="f54a3-109">Add and scaffold a model.</span></span>
+> * <span data-ttu-id="f54a3-110">Arbeiten mit einer Datenbank</span><span class="sxs-lookup"><span data-stu-id="f54a3-110">Work with a database.</span></span>
+> * <span data-ttu-id="f54a3-111">Hinzufügen von Such- und Überprüfungsfunktionen</span><span class="sxs-lookup"><span data-stu-id="f54a3-111">Add search and validation.</span></span>
+
+<span data-ttu-id="f54a3-112">Am Ende verfügen Sie über eine App, die Filmdaten verwalten und anzeigen kann.</span><span class="sxs-lookup"><span data-stu-id="f54a3-112">At the end, you have an app that can manage and display movie data.</span></span>
+
+[!INCLUDE[](~/includes/mvc-intro/download.md)]
 
 > [!NOTE]
-> <span data-ttu-id="b4a64-109">Wir testen gerade eine vorgeschlagene neue Struktur für das ASP.NET Core-Inhaltsverzeichnis.</span><span class="sxs-lookup"><span data-stu-id="b4a64-109">We’re testing the usability of a proposed new structure for the ASP.NET Core table of contents.</span></span>  <span data-ttu-id="b4a64-110">Falls Sie einige Minuten Zeit haben, um einen Test durchzuführen, in dem Sie sieben unterschiedliche Artikel im aktuellen und vorgeschlagene Inhaltsverzeichnis finden sollen, [klicken Sie hier, um daran teilzunehmen](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).</span><span class="sxs-lookup"><span data-stu-id="b4a64-110">If you have a few minutes to try an exercise of finding 7 different topics in the current or proposed table of contents, please [click here to participate in the study](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).</span></span>
+> <span data-ttu-id="f54a3-113">Wir testen gerade eine vorgeschlagene neue Struktur für das ASP.NET Core-Inhaltsverzeichnis.</span><span class="sxs-lookup"><span data-stu-id="f54a3-113">We’re testing the usability of a proposed new structure for the ASP.NET Core table of contents.</span></span>  <span data-ttu-id="f54a3-114">Falls Sie einige Minuten Zeit haben, um einen Test durchzuführen, in dem Sie sieben unterschiedliche Artikel im aktuellen und vorgeschlagene Inhaltsverzeichnis finden sollen, [klicken Sie hier, um daran teilzunehmen](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).</span><span class="sxs-lookup"><span data-stu-id="f54a3-114">If you have a few minutes to try an exercise of finding 7 different topics in the current or proposed table of contents, please [click here to participate in the study](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).</span></span>
 
-## <a name="install-visual-studio-and-net-core"></a><span data-ttu-id="b4a64-111">Installieren von Visual Studio und .NET Core</span><span class="sxs-lookup"><span data-stu-id="b4a64-111">Install Visual Studio and .NET Core</span></span>
+[!INCLUDE[](~/includes/net-core-prereqs-all-2.2.md)]
 
-::: moniker range=">= aspnetcore-2.1"
+## <a name="create-a-web-app"></a><span data-ttu-id="f54a3-115">Erstellen einer Web-App</span><span class="sxs-lookup"><span data-stu-id="f54a3-115">Create a web app</span></span>
 
-[!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
+<!-- VS -------------------------->
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="f54a3-116">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f54a3-116">Visual Studio</span></span>](#tab/visual-studio)
 
-## <a name="create-a-web-app"></a><span data-ttu-id="b4a64-112">Erstellen einer Web-App</span><span class="sxs-lookup"><span data-stu-id="b4a64-112">Create a web app</span></span>
-
-<span data-ttu-id="b4a64-113">Klicken Sie in Visual Studio auf **Datei > Neu > Projekt**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-113">From Visual Studio, select  **File > New > Project**.</span></span>
-
-![Datei > Neu > Projekt](start-mvc/_static/alt_new_project.png)
-
-<span data-ttu-id="b4a64-115">Schließen Sie das Dialogfeld **Neues Projekt**ab:</span><span class="sxs-lookup"><span data-stu-id="b4a64-115">Complete the **New Project** dialog:</span></span>
-
-* <span data-ttu-id="b4a64-116">Tippen Sie im linken Bereich auf **.NET Core**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-116">In the left pane, tap **.NET Core**</span></span>
-* <span data-ttu-id="b4a64-117">Tippen Sie im mittleren Bereich auf **ASP.NET Core-Webanwendung (.NET Core)**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-117">In the center pane, tap **ASP.NET Core Web Application (.NET Core)**</span></span>
-* <span data-ttu-id="b4a64-118">Geben Sie dem Projekt den Namen „MvcMovie“. Es ist wichtig, dem Projekt diesen Namen zu geben, sodass beim Kopieren von Code der Namespace übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-118">Name the project "MvcMovie" (It's important to name the project "MvcMovie" so when you copy code, the namespace will match.)</span></span>
-* <span data-ttu-id="b4a64-119">Tippen Sie auf **OK**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-119">Tap **OK**</span></span>
-
-![<span data-ttu-id="b4a64-120">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="b4a64-120">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project2-21.png)
-
-<span data-ttu-id="b4a64-121">Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMovie** ab:</span><span class="sxs-lookup"><span data-stu-id="b4a64-121">Complete the **New ASP.NET Core Web Application (.NET Core) - MvcMovie** dialog:</span></span>
-
-* <span data-ttu-id="b4a64-122">Wählen Sie im Dropdownfeld der Versionsauswahl den Eintrag **ASP.NET Core 2.1.** aus</span><span class="sxs-lookup"><span data-stu-id="b4a64-122">In the version selector drop-down box select **ASP.NET Core 2.1**</span></span>
-* <span data-ttu-id="b4a64-123">Wählen Sie **Webanwendung (Model-View-Controller)** aus.</span><span class="sxs-lookup"><span data-stu-id="b4a64-123">Select **Web Application (Model-View-Controller)**</span></span>
-* <span data-ttu-id="b4a64-124">Tippen Sie auf **OK**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-124">Tap **OK**.</span></span>
-
-![<span data-ttu-id="b4a64-125">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="b4a64-125">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project22-21.png)
-
-<span data-ttu-id="b4a64-126">Visual Studio verwendet eine Standardvorlage für das MVC-Projekt, das Sie gerade erstellt haben.</span><span class="sxs-lookup"><span data-stu-id="b4a64-126">Visual Studio used a default template for the MVC project you just created.</span></span> <span data-ttu-id="b4a64-127">Wenn Sie einen Projektnamen eingeben und einige Optionen festlegen, funktioniert Ihre App bereits.</span><span class="sxs-lookup"><span data-stu-id="b4a64-127">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="b4a64-128">Dies ist ein grundlegendes Startprojekt und ein guter Einstieg.</span><span class="sxs-lookup"><span data-stu-id="b4a64-128">This is a basic starter project, and it's a good place to start.</span></span>
-
-<span data-ttu-id="b4a64-129">Tippen Sie auf **F5**, um die App im Debugmodus auszuführen oder **STRG+F5**, um sie im Nicht-Debugmodus auszuführen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-129">Tap **F5** to run the app in debug mode or **Ctrl-F5** in non-debug mode.</span></span>
-<span data-ttu-id="b4a64-130"><!-- These images are also used by uid: tutorials/first-mvc-app-xplat/start-mvc -->
-![Ausgeführte App](start-mvc/_static/1.png)</span><span class="sxs-lookup"><span data-stu-id="b4a64-130"><!-- These images are also used by uid: tutorials/first-mvc-app-xplat/start-mvc -->
-![running app](start-mvc/_static/1.png)</span></span>
-
-* <span data-ttu-id="b4a64-131">Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt Ihre App aus.</span><span class="sxs-lookup"><span data-stu-id="b4a64-131">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs your app.</span></span> <span data-ttu-id="b4a64-132">Beachten Sie, dass die Adressleiste `localhost:port#` und nicht etwas wie `example.com` anzeigt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-132">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="b4a64-133">Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-133">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="b4a64-134">Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.</span><span class="sxs-lookup"><span data-stu-id="b4a64-134">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="b4a64-135">In der obigen Abbildung ist die Portnummer 5000.</span><span class="sxs-lookup"><span data-stu-id="b4a64-135">In the image above, the port number is 5000.</span></span> <span data-ttu-id="b4a64-136">Die URL im Browser zeigt `localhost:5000` an.</span><span class="sxs-lookup"><span data-stu-id="b4a64-136">The URL in the browser shows `localhost:5000`.</span></span> <span data-ttu-id="b4a64-137">Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-137">When you run the app, you'll see a different port number.</span></span>
-* <span data-ttu-id="b4a64-138">Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-138">Launching the app with **Ctrl+F5** (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="b4a64-139">Viele Entwickler bevorzugen den Nicht-Debugmodus, um die App schnell zu starten und Änderungen anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-139">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
-* <span data-ttu-id="b4a64-140">Sie können die App über das Menüelement **Debuggen** im Debugmodus oder Nicht-Debugmodus starten:</span><span class="sxs-lookup"><span data-stu-id="b4a64-140">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
-
-![Menü „Debuggen“](start-mvc/_static/debug_menu.png)
-
-* <span data-ttu-id="b4a64-142">Sie können die App debuggen, indem Sie auf die Schaltfläche **IIS Express** tippen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-142">You can debug the app by tapping the **IIS Express** button</span></span>
-
-![IIS Express](start-mvc/_static/iis_express.png)
-
-<span data-ttu-id="b4a64-144">Die Standardvorlage bietet Ihnen funktionierende Links für **Startseite, Info** und **Kontakt**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-144">The default template gives you working **Home, About** and **Contact** links.</span></span> <span data-ttu-id="b4a64-145">Die obenstehende Browserabbildung zeigt diese Links nicht an.</span><span class="sxs-lookup"><span data-stu-id="b4a64-145">The browser image above doesn't show these links.</span></span> <span data-ttu-id="b4a64-146">Je nach Größe Ihres Browsers müssen Sie möglicherweise auf das Navigationssymbol klicken, um diese anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-146">Depending on the size of your browser, you might need to click the navigation icon to show them.</span></span>
-
-![Navigationssymbol oben rechts](start-mvc/_static/2.png)
-
-<span data-ttu-id="b4a64-148">Wenn Sie die App im Debugmodus ausgeführt haben, tippen Sie **UMSCHALT+F5**, um das Debuggen zu beenden.</span><span class="sxs-lookup"><span data-stu-id="b4a64-148">If you were running in debug mode, tap **Shift-F5** to stop debugging.</span></span>
-
-<span data-ttu-id="b4a64-149">Im nächsten Teil dieses Tutorials erfahren Sie mehr über MVC und beginnen mit dem Schreiben von Code.</span><span class="sxs-lookup"><span data-stu-id="b4a64-149">In the next part of this tutorial, we'll learn about MVC and start writing some code.</span></span>
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-[!INCLUDE [](~/includes/net-core-prereqs.md)]
-
-## <a name="create-a-web-app"></a><span data-ttu-id="b4a64-150">Erstellen einer Web-App</span><span class="sxs-lookup"><span data-stu-id="b4a64-150">Create a web app</span></span>
-
-<span data-ttu-id="b4a64-151">Klicken Sie in Visual Studio auf **Datei > Neu > Projekt**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-151">From Visual Studio, select  **File > New > Project**.</span></span>
+<span data-ttu-id="f54a3-117">Klicken Sie in Visual Studio auf **Datei > Neu > Projekt**.</span><span class="sxs-lookup"><span data-stu-id="f54a3-117">From Visual Studio, select  **File > New > Project**.</span></span>
 
 ![Datei > Neu > Projekt](start-mvc/_static/alt_new_project.png)
 
-<span data-ttu-id="b4a64-153">Schließen Sie das Dialogfeld **Neues Projekt**ab:</span><span class="sxs-lookup"><span data-stu-id="b4a64-153">Complete the **New Project** dialog:</span></span>
+<span data-ttu-id="f54a3-119">Schließen Sie das Dialogfeld **Neues Projekt**ab:</span><span class="sxs-lookup"><span data-stu-id="f54a3-119">Complete the **New Project** dialog:</span></span>
 
-* <span data-ttu-id="b4a64-154">Tippen Sie im linken Bereich auf **.NET Core**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-154">In the left pane, tap **.NET Core**</span></span>
-* <span data-ttu-id="b4a64-155">Tippen Sie im mittleren Bereich auf **ASP.NET Core-Webanwendung (.NET Core)**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-155">In the center pane, tap **ASP.NET Core Web Application (.NET Core)**</span></span>
-* <span data-ttu-id="b4a64-156">Geben Sie dem Projekt den Namen „MvcMovie“. Es ist wichtig, dem Projekt diesen Namen zu geben, sodass beim Kopieren von Code der Namespace übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-156">Name the project "MvcMovie" (It's important to name the project "MvcMovie" so when you copy code, the namespace will match.)</span></span>
-* <span data-ttu-id="b4a64-157">Tippen Sie auf **OK**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-157">Tap **OK**</span></span>
+* <span data-ttu-id="f54a3-120">Wählen Sie im linken Bereich die Option **.NET Core** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-120">In the left pane, select **.NET Core**</span></span>
+* <span data-ttu-id="f54a3-121">Wählen Sie im mittleren Bereich die Option **ASP.NET Core-Webanwendung (.NET Core)** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-121">In the center pane, select **ASP.NET Core Web Application (.NET Core)**</span></span>
+* <span data-ttu-id="f54a3-122">Geben Sie dem Projekt den Namen „MvcMovie“. Es ist wichtig, dem Projekt diesen Namen zu geben, sodass beim Kopieren von Code der Namespace übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-122">Name the project "MvcMovie" (It's important to name the project "MvcMovie" so when you copy code, the namespace will match.)</span></span>
+* <span data-ttu-id="f54a3-123">Wählen Sie **OK** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-123">select **OK**</span></span>
 
-![<span data-ttu-id="b4a64-158">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="b4a64-158">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project2.png)
+![<span data-ttu-id="f54a3-124">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="f54a3-124">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project2-21.png)
 
-<span data-ttu-id="b4a64-159">Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMovie** ab:</span><span class="sxs-lookup"><span data-stu-id="b4a64-159">Complete the **New ASP.NET Core Web Application (.NET Core) - MvcMovie** dialog:</span></span>
+<span data-ttu-id="f54a3-125">Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMovie** ab:</span><span class="sxs-lookup"><span data-stu-id="f54a3-125">Complete the **New ASP.NET Core Web Application (.NET Core) - MvcMovie** dialog:</span></span>
 
-* <span data-ttu-id="b4a64-160">Klicken Sie im Dropdownfeld der Versionsauswahl auf **ASP.NET Core 2.–**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-160">In the version selector drop-down box select **ASP.NET Core 2.-**</span></span>
-* <span data-ttu-id="b4a64-161">Klicken Sie auf **Webanwendung (Model View Controller)**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-161">Select **Web Application(Model-View-Controller)**</span></span>
-* <span data-ttu-id="b4a64-162">Tippen Sie auf **OK**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-162">Tap **OK**.</span></span>
+* <span data-ttu-id="f54a3-126">Klicken Sie im Dropdownfeld der Versionsauswahl auf **ASP.NET Core 2.2**.</span><span class="sxs-lookup"><span data-stu-id="f54a3-126">In the version selector drop-down box select **ASP.NET Core 2.2**</span></span>
+* <span data-ttu-id="f54a3-127">Wählen Sie **Webanwendung (Model-View-Controller)** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-127">Select **Web Application (Model-View-Controller)**</span></span>
+* <span data-ttu-id="f54a3-128">Wählen Sie **OK** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-128">select **OK**.</span></span>
 
-![<span data-ttu-id="b4a64-163">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="b4a64-163">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project22.png)
+![<span data-ttu-id="f54a3-129">Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web</span><span class="sxs-lookup"><span data-stu-id="f54a3-129">New project dialog, .Net core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project22-21.png)
 
-<span data-ttu-id="b4a64-164">Visual Studio verwendet eine Standardvorlage für das MVC-Projekt, das Sie gerade erstellt haben.</span><span class="sxs-lookup"><span data-stu-id="b4a64-164">Visual Studio used a default template for the MVC project you just created.</span></span> <span data-ttu-id="b4a64-165">Wenn Sie einen Projektnamen eingeben und einige Optionen festlegen, funktioniert Ihre App bereits.</span><span class="sxs-lookup"><span data-stu-id="b4a64-165">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="b4a64-166">Dies ist ein grundlegendes Startprojekt und ein guter Einstieg.</span><span class="sxs-lookup"><span data-stu-id="b4a64-166">This is a basic starter project, and it's a good place to start,</span></span>
+<span data-ttu-id="f54a3-130">Visual Studio verwendet eine Standardvorlage für das MVC-Projekt, das Sie gerade erstellt haben.</span><span class="sxs-lookup"><span data-stu-id="f54a3-130">Visual Studio used a default template for the MVC project you just created.</span></span> <span data-ttu-id="f54a3-131">Wenn Sie einen Projektnamen eingeben und einige Optionen festlegen, funktioniert Ihre App bereits.</span><span class="sxs-lookup"><span data-stu-id="f54a3-131">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="f54a3-132">Dies ist ein grundlegendes Startprojekt und ein guter Einstieg.</span><span class="sxs-lookup"><span data-stu-id="f54a3-132">This is a basic starter project, and it's a good place to start.</span></span>
 
-<span data-ttu-id="b4a64-167">Tippen Sie auf **F5**, um die App im Debugmodus auszuführen oder **STRG+F5**, um sie im Nicht-Debugmodus auszuführen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-167">Tap **F5** to run the app in debug mode or **Ctrl-F5** in non-debug mode.</span></span>
-<span data-ttu-id="b4a64-168"><!-- These images are also used by uid: tutorials/first-mvc-app-xplat/start-mvc -->
-![Ausgeführte App](start-mvc/_static/1.png)</span><span class="sxs-lookup"><span data-stu-id="b4a64-168"><!-- These images are also used by uid: tutorials/first-mvc-app-xplat/start-mvc -->
-![running app](start-mvc/_static/1.png)</span></span>
+<span data-ttu-id="f54a3-133">Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-133">Select **Ctrl-F5** to run the app in non-debug mode.</span></span>
 
-* <span data-ttu-id="b4a64-169">Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt Ihre App aus.</span><span class="sxs-lookup"><span data-stu-id="b4a64-169">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs your app.</span></span> <span data-ttu-id="b4a64-170">Beachten Sie, dass die Adressleiste `localhost:port#` und nicht etwas wie `example.com` anzeigt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-170">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="b4a64-171">Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-171">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="b4a64-172">Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.</span><span class="sxs-lookup"><span data-stu-id="b4a64-172">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="b4a64-173">In der obigen Abbildung ist die Portnummer 5000.</span><span class="sxs-lookup"><span data-stu-id="b4a64-173">In the image above, the port number is 5000.</span></span> <span data-ttu-id="b4a64-174">Die URL im Browser zeigt `localhost:5000` an.</span><span class="sxs-lookup"><span data-stu-id="b4a64-174">The URL in the browser shows `localhost:5000`.</span></span> <span data-ttu-id="b4a64-175">Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.</span><span class="sxs-lookup"><span data-stu-id="b4a64-175">When you run the app, you'll see a different port number.</span></span>
-* <span data-ttu-id="b4a64-176">Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-176">Launching the app with **Ctrl+F5** (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="b4a64-177">Viele Entwickler bevorzugen den Nicht-Debugmodus, um die App schnell zu starten und Änderungen anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-177">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
-* <span data-ttu-id="b4a64-178">Sie können die App über das Menüelement **Debuggen** im Debugmodus oder Nicht-Debugmodus starten:</span><span class="sxs-lookup"><span data-stu-id="b4a64-178">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
+* <span data-ttu-id="f54a3-134">Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt Ihre App aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-134">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs your app.</span></span> <span data-ttu-id="f54a3-135">Beachten Sie, dass die Adressleiste `localhost:port#` und nicht etwas wie `example.com` anzeigt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-135">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="f54a3-136">Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-136">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="f54a3-137">Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.</span><span class="sxs-lookup"><span data-stu-id="f54a3-137">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="f54a3-138">In der obigen Abbildung ist die Portnummer 5000.</span><span class="sxs-lookup"><span data-stu-id="f54a3-138">In the image above, the port number is 5000.</span></span> <span data-ttu-id="f54a3-139">Die URL im Browser zeigt `localhost:5000` an.</span><span class="sxs-lookup"><span data-stu-id="f54a3-139">The URL in the browser shows `localhost:5000`.</span></span> <span data-ttu-id="f54a3-140">Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-140">When you run the app, you'll see a different port number.</span></span>
+* <span data-ttu-id="f54a3-141">Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-141">Launching the app with **Ctrl+F5** (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="f54a3-142">Viele Entwickler bevorzugen den Nicht-Debugmodus, um die App schnell zu starten und Änderungen anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-142">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
+* <span data-ttu-id="f54a3-143">Sie können die App über das Menüelement **Debuggen** im Debugmodus oder Nicht-Debugmodus starten:</span><span class="sxs-lookup"><span data-stu-id="f54a3-143">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
 
 ![Menü „Debuggen“](start-mvc/_static/debug_menu.png)
 
-* <span data-ttu-id="b4a64-180">Sie können die App debuggen, indem Sie auf die Schaltfläche **IIS Express** tippen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-180">You can debug the app by tapping the **IIS Express** button</span></span>
+* <span data-ttu-id="f54a3-145">Sie können die App debuggen, indem Sie die Schaltfläche **IIS Express** auswählen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-145">You can debug the app by selecting the **IIS Express** button</span></span>
 
 ![IIS Express](start-mvc/_static/iis_express.png)
 
-<span data-ttu-id="b4a64-182">Die Standardvorlage bietet Ihnen funktionierende Links für **Startseite, Info** und **Kontakt**.</span><span class="sxs-lookup"><span data-stu-id="b4a64-182">The default template gives you working **Home, About** and **Contact** links.</span></span> <span data-ttu-id="b4a64-183">Die obenstehende Browserabbildung zeigt diese Links nicht an.</span><span class="sxs-lookup"><span data-stu-id="b4a64-183">The browser image above doesn't show these links.</span></span> <span data-ttu-id="b4a64-184">Je nach Größe Ihres Browsers müssen Sie möglicherweise auf das Navigationssymbol klicken, um diese anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="b4a64-184">Depending on the size of your browser, you might need to click the navigation icon to show them.</span></span>
+<!-- Code -------------------------->
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="f54a3-147">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f54a3-147">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-![Navigationssymbol oben rechts](start-mvc/_static/2.png)
+<span data-ttu-id="f54a3-148">Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind.</span><span class="sxs-lookup"><span data-stu-id="f54a3-148">The tutorial assumes familarity with VS Code.</span></span> <span data-ttu-id="f54a3-149">Weitere Informationen finden Sie unter [Erste Schritte mit VS Code](https://code.visualstudio.com/docs) und [Hilfe zu Visual Studio Code](#visual-studio-code-help).</span><span class="sxs-lookup"><span data-stu-id="f54a3-149">See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information.</span></span>
 
-<span data-ttu-id="b4a64-186">Wenn Sie die App im Debugmodus ausgeführt haben, tippen Sie **UMSCHALT+F5**, um das Debuggen zu beenden.</span><span class="sxs-lookup"><span data-stu-id="b4a64-186">If you were running in debug mode, tap **Shift-F5** to stop debugging.</span></span>
+* <span data-ttu-id="f54a3-150">Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span><span class="sxs-lookup"><span data-stu-id="f54a3-150">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="f54a3-151">Wechseln Sie mit `cd` zu einem Ordner, der das Projekt enthalten soll.</span><span class="sxs-lookup"><span data-stu-id="f54a3-151">Change directories (`cd`) to a folder which will contain the project.</span></span>
+* <span data-ttu-id="f54a3-152">Führen Sie den folgenden Befehl aus:</span><span class="sxs-lookup"><span data-stu-id="f54a3-152">Run the following command:</span></span>
 
-<span data-ttu-id="b4a64-187">Im nächsten Teil dieses Tutorials erfahren Sie mehr über MVC und beginnen mit dem Schreiben von Code.</span><span class="sxs-lookup"><span data-stu-id="b4a64-187">In the next part of this tutorial, we'll learn about MVC and start writing some code.</span></span>
+   ```console
+   dotnet new mvc -o MvcMovie
+   code -r MvcMovie
+   ```
 
-::: moniker-end
+  * <span data-ttu-id="f54a3-153">Es wird ein Dialogfeld mit folgender Meldung angezeigt: **Die erforderlichen Objekte zum Erstellen und Debuggen sind in "MvcMovie" nicht vorhanden. Sollen sie hinzugefügt werden?**</span><span class="sxs-lookup"><span data-stu-id="f54a3-153">A dialog box appears with **Required assets to build and debug are missing from 'MvcMovie'. Add them?**</span></span>  <span data-ttu-id="f54a3-154">Wählen Sie **Ja** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-154">Select **Yes**</span></span>
+
+  * <span data-ttu-id="f54a3-155">`dotnet new mvc -o MvcMovie`: Erstellt ein neues ASP.NET Core MVC-Projekt im Ordner *MvcMovie*.</span><span class="sxs-lookup"><span data-stu-id="f54a3-155">`dotnet new mvc -o MvcMovie`: creates a new ASP.NET Core MVC project in the *MvcMovie* folder.</span></span>
+  * <span data-ttu-id="f54a3-156">`code -r MvcMovie`: Lädt die Projektdatei *MvcMovie.csproj* in Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="f54a3-156">`code -r MvcMovie`: Loads the *MvcMovie.csproj* project file in Visual Studio Code.</span></span>
+
+### <a name="launch-the-app"></a><span data-ttu-id="f54a3-157">Starten der App</span><span class="sxs-lookup"><span data-stu-id="f54a3-157">Launch the app</span></span>
+
+* <span data-ttu-id="f54a3-158">Drücken Sie **STRG+F5**, um die Ausführung ohne den Debugger zu starten.</span><span class="sxs-lookup"><span data-stu-id="f54a3-158">Press **Ctrl-F5** to run without the debugger.</span></span>
+
+  <span data-ttu-id="f54a3-159">Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`.</span><span class="sxs-lookup"><span data-stu-id="f54a3-159">Visual Studio Code starts starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `http://localhost:5001`.</span></span> <span data-ttu-id="f54a3-160">Die Adressleiste zeigt `localhost:port:5001` an, nicht `example.com`.</span><span class="sxs-lookup"><span data-stu-id="f54a3-160">The address bar shows `localhost:port:5001` and not something like `example.com`.</span></span> <span data-ttu-id="f54a3-161">Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-161">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="f54a3-162">„Localhost“ dient nur Webanforderungen vom lokalen Computer.</span><span class="sxs-lookup"><span data-stu-id="f54a3-162">Localhost only serves web requests from the local computer.</span></span>
+
+  <span data-ttu-id="f54a3-163">Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-163">Launching the app with **Ctrl+F5** (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="f54a3-164">Viele Entwickler bevorzugen den Nicht-Debugmodus, um die Seite zu aktualisieren und Änderungen anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-164">Many developers prefer to use non-debug mode to refresh the page and view changes.</span></span>
+
+<!-- Mac -------------------------->
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="f54a3-165">Visual Studio für Mac</span><span class="sxs-lookup"><span data-stu-id="f54a3-165">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+
+* <span data-ttu-id="f54a3-166">Wählen Sie **Datei** > **Neue Projektmappe** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-166">Select **File** > **New Solution**.</span></span>
+
+  ![Neue Projektmappe in macOS](~/tutorials/first-web-api-mac/_static/sln.png)
+
+* <span data-ttu-id="f54a3-168">Wählen Sie **.NET Core App** > **ASP.NET Core** > **ASP.NET Core Web App (MVC)** > **Next** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-168">Select **.NET Core App** > **ASP.NET Core** > **ASP.NET Core Web App (MVC)** > **Next**.</span></span>
+
+  ![Dialogfeld „Neue Projektmappe“ in macOS](~/tutorials/first-mvc-app-mac/start-mvc/1.png)
+
+* <span data-ttu-id="f54a3-170">Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von \**.NET Core 2.2*.</span><span class="sxs-lookup"><span data-stu-id="f54a3-170">In the **Configure your new ASP.NET Core Web API** dialog, accept the default **Target Framework** of \**.NET Core 2.2*.</span></span>
+
+* <span data-ttu-id="f54a3-171">Nennen Sie das Projekt **MvcMovie**, und wählen Sie dann **Erstellen** aus.</span><span class="sxs-lookup"><span data-stu-id="f54a3-171">Name the project **MvcMovie**, and then select **Create**.</span></span>
+
+### <a name="launch-the-app"></a><span data-ttu-id="f54a3-172">Starten der App</span><span class="sxs-lookup"><span data-stu-id="f54a3-172">Launch the app</span></span>
+
+<span data-ttu-id="f54a3-173">Wählen Sie **Ausführen** > **Ohne Debuggen starten** aus, um die App zu starten.</span><span class="sxs-lookup"><span data-stu-id="f54a3-173">Select **Run** > **Start Without Debugging** to launch the app.</span></span> <span data-ttu-id="f54a3-174">Visual Studio für Mac startet den [Kestrel](xref:fundamentals/servers/index#kestrel)-Server und einen Browser und navigiert zu `http://localhost:port`, wobei es sich bei *port* um eine zufällig ausgewählte Portnummer handelt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-174">Visual Studio for Mac starts [Kestrel](xref:fundamentals/servers/index#kestrel) server, launches a browser, and navigates to `http://localhost:port`, where *port* is a randomly chosen port number.</span></span>
+
+* <span data-ttu-id="f54a3-175">Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`.</span><span class="sxs-lookup"><span data-stu-id="f54a3-175">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="f54a3-176">Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-176">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="f54a3-177">Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.</span><span class="sxs-lookup"><span data-stu-id="f54a3-177">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="f54a3-178">Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.</span><span class="sxs-lookup"><span data-stu-id="f54a3-178">When you run the app, you'll see a different port number.</span></span>
+* <span data-ttu-id="f54a3-179">Sie können die App über das Menü **Ausführen** im Debugmodus oder Nicht-Debugmodus starten.</span><span class="sxs-lookup"><span data-stu-id="f54a3-179">You can launch the app in debug or non-debug mode from the **Run** menu.</span></span>
+
+---  
+<!-- End of VS tabs -->
+
+* <span data-ttu-id="f54a3-180">Wählen Sie **Akzeptieren** aus, um der Nachverfolgung zuzustimmen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-180">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="f54a3-181">Diese App verfolgt keine personenbezogenen Informationen nach.</span><span class="sxs-lookup"><span data-stu-id="f54a3-181">This app doesn't track personal information.</span></span> <span data-ttu-id="f54a3-182">Der generierte Vorlagencode enthält Objekte, die bei der Erfüllung der [Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr) als Unterstützung dienen sollen.</span><span class="sxs-lookup"><span data-stu-id="f54a3-182">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+
+  ![Start- oder Indexseite](start-mvc/_static/privacy.png)
+
+  <span data-ttu-id="f54a3-184">Die folgende Abbildung zeigt die App, nachdem die Nachverfolgung akzeptiert wurde:</span><span class="sxs-lookup"><span data-stu-id="f54a3-184">The following image shows the app after accepting tracking:</span></span>
+
+  ![Start- oder Indexseite](start-mvc/_static/home2.2.png)
+
+[!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
+
+<span data-ttu-id="f54a3-186">Im nächsten Teil dieses Tutorials erfahren Sie mehr über MVC und beginnen mit dem Schreiben von Code.</span><span class="sxs-lookup"><span data-stu-id="f54a3-186">In the next part of this tutorial, you learn about MVC and start writing some code.</span></span>
 
 > [!div class="step-by-step"]
-> [<span data-ttu-id="b4a64-188">Nächste</span><span class="sxs-lookup"><span data-stu-id="b4a64-188">Next</span></span>](adding-controller.md)  
+> [<span data-ttu-id="f54a3-187">Nächste</span><span class="sxs-lookup"><span data-stu-id="f54a3-187">Next</span></span>](adding-controller.md)  
