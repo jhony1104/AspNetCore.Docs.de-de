@@ -4,14 +4,14 @@ author: guardrex
 description: Einführung in Kestrel, dem plattformübergreifenden Webserver für ASP.NET Core.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 12/01/2018
+ms.date: 12/18/2018
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 2a6a3786aa3a78bb83f497db22acac873512f939
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: af1f330f2afa340ef98a6b4bd5008859f4b0f914
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861926"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637910"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -25,7 +25,7 @@ Laden Sie für die Version 1.1 dieses Themas die [Kestrel-Webserverimplementieru
 
 Einführung in Kestrel, dem plattformübergreifenden [Webserver für ASP.NET Core](xref:fundamentals/servers/index). Kestrel ist der Webserver, der standardmäßig in ASP.NET Core-Projektvorlagen enthalten ist.
 
-Kestrel unterstützt die folgenden Features:
+Kestrel unterstützt die folgenden Szenarios:
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -76,7 +76,11 @@ HTTP/2 ist standardmäßig deaktiviert. Weitere Informationen zur Konfiguration 
 
 Sie können Kestrel eigenständig oder mit einem *Reverseproxyserver* wie z.B. [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](http://nginx.org) oder [Apache](https://httpd.apache.org/) verwenden. Ein Reverseproxyserver empfängt HTTP-Anforderungen aus dem Netzwerk und leitet diese an Kestrel weiter.
 
+Kestrel bei Verwendung als Webserver mit direkter Internetverbindung:
+
 ![Kestrel kommuniziert direkt und ohne Reverseproxyserver mit dem Internet](kestrel/_static/kestrel-to-internet2.png)
+
+Kestrel bei Verwendung in einer Reverseproxykonfiguration:
 
 ![Kestrel kommuniziert indirekt mit dem Internet über einen Reverseproxyserver wie IIS, Nginx oder Apache](kestrel/_static/kestrel-to-internet.png)
 
@@ -790,7 +794,7 @@ Diese Methoden sind nützlich, wenn Ihr Code mit anderen Servern als Kestrel fun
 
 ### <a name="iis-endpoint-configuration"></a>IIS-Endpunktkonfiguration
 
-Bei der Verwendung von IIS werden die URL-Bindungen für IIS-Überschreibungsbindungen durch `Listen` oder `UseUrls` festgelegt. Weitere Informationen finden Sie im Artikel [ASP.NET Core-Modul](xref:fundamentals/servers/aspnet-core-module).
+Bei der Verwendung von IIS werden die URL-Bindungen für IIS-Überschreibungsbindungen durch `Listen` oder `UseUrls` festgelegt. Weitere Informationen finden Sie im Artikel [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module).
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -1033,4 +1037,4 @@ Die Middleware zum Filtern von Hosts ist standardmäßig deaktiviert. Wenn Sie d
 * <xref:security/enforcing-ssl>
 * <xref:host-and-deploy/proxy-load-balancer>
 * [Kestrel-Quellcode](https://github.com/aspnet/KestrelHttpServer)
-* [RFC 7230: Message Syntax und Routing (Abschnitt 5.4: Host)](https://tools.ietf.org/html/rfc7230#section-5.4)
+* [RFC 7230: Message Syntax and Routing (Abschnitt 5.4: Host)](https://tools.ietf.org/html/rfc7230#section-5.4)
