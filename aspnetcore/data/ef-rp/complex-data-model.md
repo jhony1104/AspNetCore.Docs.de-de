@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 9a0d5a8e722487ccf7e08aadb39f838a0963451d
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: 930a6f2b860c71b6f499cff53e0d909a130f7948
+ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090967"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "53637897"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -47,7 +47,7 @@ Aktualisieren Sie *Models/Student.cs* mit folgendem hervorgehobenen Code:
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Zum Beispiel:
+Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Beispiel:
 
 * Der Link `mailto:` wird automatisch für `DataType.EmailAddress` erstellt.
 * Die Datumsauswahl für `DataType.Date` wird in den meisten Browsern bereitgestellt.
@@ -538,10 +538,7 @@ Aktualisieren Sie den Code in *Data/DbInitializer.cs*:
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Final)]
 
-Der vorangehende Code stellt Startwertdaten für die neuen Entitäten bereit. Durch diesen Code werden überwiegend neue Entitätsobjekte erstellt und Beispieldaten geladen. Die Beispieldaten werden für Tests verwendet. Der vorangehende Code erstellt folgende m:n-Beziehungen:
-
-* `Enrollments`
-* `CourseAssignment`
+Der vorangehende Code stellt Startwertdaten für die neuen Entitäten bereit. Durch diesen Code werden überwiegend neue Entitätsobjekte erstellt und Beispieldaten geladen. Die Beispieldaten werden für Tests verwendet. Beispiele dazu, wie viele m:n-Jointabellen eingerichtet werden können, finden Sie unter `Enrollments` und `CourseAssignments`.
 
 ## <a name="add-a-migration"></a>Hinzufügen einer Migration
 
@@ -581,7 +578,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 Da Sie nun über eine Datenbank verfügen, müssen Sie überlegen, wie zukünftig Änderungen an dieser vorgenommen werden sollen. In diesem Tutorial werden zwei Vorgehensweisen veranschaulicht:
 
 * [Löschen und Neuerstellen der Datenbank](#drop)
-* [Anwenden der Migration auf die vorhandene Datenbank](#applyexisting). Obwohl diese Methode komplexer und zeitaufwendiger ist, ist dies in der Praxis die bevorzugte Methode für Produktionsumgebungen. **Hinweis**: Dies ist ein optionaler Abschnitt des Tutorials. Sie können diesen Abschnitt überspringen und die Schritte zum Löschen und Neuerstellen durchführen. Wenn Sie stattdessen die Schritte in diesem Abschnitt ausführen möchten, führen Sie nicht die Schritte zum Löschen und Neuerstellen aus. 
+* [Anwenden der Migration auf die vorhandene Datenbank](#applyexisting). Obwohl diese Methode komplexer und zeitaufwendiger ist, ist dies in der Praxis die bevorzugte Methode für Produktionsumgebungen. **Hinweis:** Dies ist ein optionaler Abschnitt des Tutorials. Sie können diesen Abschnitt überspringen und die Schritte zum Löschen und Neuerstellen durchführen. Wenn Sie stattdessen die Schritte in diesem Abschnitt ausführen möchten, führen Sie nicht die Schritte zum Löschen und Neuerstellen aus. 
 
 <a name="drop"></a>
 

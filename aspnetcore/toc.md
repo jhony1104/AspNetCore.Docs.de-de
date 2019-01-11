@@ -1,3 +1,5 @@
+# [ASP.NET Core-Dokumentation](/aspnet/#pivot=core)
+
 # Übersicht
 ## [Weitere Informationen zu ASP.NET Core](xref:index)
 ## [Vergleich zwischen .NET Core und ASP.NET](xref:fundamentals/choose-between-aspnet-and-aspnetcore)
@@ -5,8 +7,14 @@
 
 # [Erste Schritte](xref:getting-started)
 
+# Neuigkeiten
+## [Neuerungen in Version 2.2](xref:aspnetcore-2.2)
+## [Neuerungen in 2.1](xref:aspnetcore-2.1)
+## [Neuigkeiten in 2.0](xref:aspnetcore-2.0)
+## [Neuerungen in 1.1](xref:aspnetcore-1.1)
+
 # Tutorials
-## Web-APIs
+## Web-API-Apps
 ### [Erstellen einer Web-API](xref:tutorials/first-web-api)
 ### [Web-API mit MongoDB](xref:tutorials/first-mongo-app)
 ## Web-Apps
@@ -32,7 +40,7 @@
 ## [Umgebungen (Entwicklung, Staging, Produktion)](xref:fundamentals/environments)
 ## [Konfiguration](xref:fundamentals/configuration/index)
 ## [Optionen](xref:fundamentals/configuration/options)
-## [Protokollierung](xref:fundamentals/logging/index)
+## [Logging (Protokollierung)](xref:fundamentals/logging/index)
 ## [Behandeln von Fehlern](xref:fundamentals/error-handling)
 ## Middleware
 ### [Übersicht](xref:fundamentals/middleware/index)
@@ -121,7 +129,7 @@
 ### [Benutzerdefinierte Modellbindung](xref:mvc/advanced/custom-model-binding)
 ### [Kompatibilitätsversion](xref:mvc/compatibility-version)
 
-# Web-APIs
+# Web-API-Apps
 ## [Übersicht](xref:web-api/index)
 
 ## Tutorials
@@ -181,7 +189,7 @@
 ## [Integrationstests](xref:test/integration-tests)
 ## [Auslastungs- und Belastungstests](xref:test/loadtests)
 ## [Problembehandlung](xref:test/troubleshoot)
-## [Protokollierung](xref:fundamentals/logging/index)
+## [Logging (Protokollierung)](xref:fundamentals/logging/index)
 
 # Datenzugriff
 ## Tutorials
@@ -280,7 +288,7 @@
 ### [Einführung in Identity](xref:security/authentication/identity)
 ### [Gerüst für Identität](xref:security/authentication/scaffold-identity)
 ### [Hinzufügen benutzerdefinierter Benutzerdaten zu Identity](xref:security/authentication/add-user-data)
-### [Anpassen der Identität](xref:security/authentication/customize_identity_model)
+### [Customize Identity (Anpassen der Identität)](xref:security/authentication/customize_identity_model)
 ### [Community-basierte OSS-Authentifizierungsoptionen](xref:security/authentication/community)
 ### [Konfigurieren von Identity](xref:security/authentication/identity-configuration)
 ### [Konfigurieren der Windows-Authentifizierung](xref:security/authentication/windowsauth)
@@ -376,6 +384,7 @@
 ### [Antworten zwischenspeichernde Middleware](xref:performance/caching/middleware)
 ## [Antwortkomprimierung](xref:performance/response-compression)
 ## [Diagnosetools](xref:performance/diagnostic-tools)
+## [Auslastungs- und Belastungstests](xref:test/loadtests)
 
 # Andere Themen
 ## [Globalisierung und Lokalisierung](xref:fundamentals/localization)
@@ -410,12 +419,6 @@
 ### [Mitgliedschaft zu Identität](xref:migration/proper-to-2x/membership-to-core-identity)
 ### [Migration von HTTP-Modulen zu Middleware](xref:migration/http-modules)
 ## [Protokollierung (nicht ASP.NET Core)](xref:migration/logging-nonaspnetcore)
-
-# Neuigkeiten
-## [Neuerungen in Version 2.2](xref:aspnetcore-2.2)
-## [Neuerungen in 2.1](xref:aspnetcore-2.1)
-## [Neuigkeiten in 2.0](xref:aspnetcore-2.0)
-## [Neuerungen in 1.1](xref:aspnetcore-1.1)
 
 # [API-Referenz](/dotnet/api/?view=aspnetcore-2.2)
 
