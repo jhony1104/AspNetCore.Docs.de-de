@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/04/2019
 uid: test/loadtests
-ms.openlocfilehash: 0a53405cba19435a74b398ba42a05456c50bdc72
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: d989bc841a372bed7ebf2c84c6abe1a57762ad04
+ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54099480"
+ms.lasthandoff: 01/10/2019
+ms.locfileid: "54207355"
 ---
 # <a name="load-and-stress-testing-aspnet-core"></a>Laden und Belastungstests Testen von ASP.NET Core
 
@@ -24,7 +24,7 @@ Auslastungstests und Belastungstests sind wichtig, sicherzustellen, dass eine We
 * Hohe benutzerauslastung – Spitzen oder allmählich.
 * Compute-Ressourcen beschränkt.  
 
-Bei hoher Belastung kann die app Wiederherstellen nach einem Fehler und zurück zum erwarteten Verhalten? Die app wird unter normalen Bedingungen ausgeführt.
+Bei hoher Belastung kann die app Wiederherstellen nach einem Fehler und zurück zum erwarteten Verhalten? Bei hoher Belastung die app ist *nicht* unter normalen Bedingungen ausgeführt.
 
 ## <a name="visual-studio-tools"></a>Visual Studio Tools
 
