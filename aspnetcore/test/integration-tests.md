@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Integrationstests sicherstellen
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/26/2018
+ms.date: 01/11/2019
 uid: test/integration-tests
-ms.openlocfilehash: 9729925c89c212bb6e6fac1a484b6288697afe57
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.openlocfilehash: 0f919d7715a26f1efdb37d35b047a7050e46a272
+ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52450748"
+ms.lasthandoff: 01/12/2019
+ms.locfileid: "54249515"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -72,9 +72,9 @@ Integrationstests führen Sie eine Sequenz von Ereignissen, die die üblichen *a
 
 1. GSs-Web-Host wird konfiguriert.
 1. Ein Testclient-Server wird erstellt, um Anforderungen an die app zu senden.
-1. Die *anordnen* Schritt ausgeführt wird: die Test-app eine Anfrage vorbereitet.
-1. Die *Act* Schritt ausgeführt wird: der Client sendet die Anforderung und empfängt die Antwort.
-1. Die *Assert* Schritt ausgeführt wird: der *tatsächliche* Antwort wird als validiert eine *übergeben* oder *fehlschlagen* basierend auf einer *erwartet*  Antwort.
+1. Die *anordnen* Schritt ausgeführt wird: Die Test-app wird vorbereitet, eine Anforderung.
+1. Die *Act* Schritt ausgeführt wird: Der Client sendet die Anforderung und empfängt die Antwort.
+1. Die *Assert* Schritt ausgeführt wird: Die *tatsächliche* Antwort wird als validiert eine *übergeben* oder *fehlschlagen* basierend auf einer *erwartet* Antwort.
 1. Der Prozess wird fortgesetzt, bis alle Tests ausgeführt werden.
 1. Die Testergebnisse werden gemeldet.
 
@@ -114,7 +114,7 @@ Diese erforderlichen Komponenten finden Sie in der [Beispiel-app](https://github
 
 [WebApplicationFactory&lt;TEntryPoint&gt; ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) dient zum Erstellen einer [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) für Integrationstests. `TEntryPoint` ist die Einstiegspunktklasse des GS, in der Regel die `Startup` Klasse.
 
-Test-Klassen implementieren einen *Klasse Fixture* Schnittstelle (`IClassFixture`) an, dass die Klasse enthält Tests, und geben Sie die freigegebenen Instanzen zwischen den Tests in der Klasse.
+Test-Klassen implementieren einen *Klasse Fixture* Schnittstelle ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) an, dass die Klasse enthält Tests, und geben Sie die freigegebenen Instanzen zwischen den Tests in der Klasse.
 
 ### <a name="basic-test-of-app-endpoints"></a>Grundlegenden Tests des app-Endpunkte
 
@@ -173,9 +173,9 @@ Die `SendAsync` Hilfsmethoden für die Erweiterung (*Helpers/HttpClientExtension
 
 * `GetDocumentAsync` &ndash; Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt eine `IHtmlDocument`. `GetDocumentAsync` eine Factory, die vorbereitet wird eine *virtuellen Antwort* auf Grundlage der ursprünglichen `HttpResponseMessage`. Weitere Informationen finden Sie unter den [AngleSharp Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync` Erweiterungsmethoden für die `HttpClient` compose eine [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) , und rufen Sie [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) , Anforderungen werden dem GS Auslöser zu senden. Überladungen für `SendAsync` akzeptieren Sie die HTML-Formular (`IHtmlFormElement`) und die folgenden:
-  - Schaltfläche der Form "Senden" (`IHtmlElement`)
-  - Formular Werte Auflistung (`IEnumerable<KeyValuePair<string, string>>`)
-  - Schaltfläche "Senden" (`IHtmlElement`) und Werte bilden (`IEnumerable<KeyValuePair<string, string>>`)
+  * Schaltfläche der Form "Senden" (`IHtmlElement`)
+  * Formular Werte Auflistung (`IEnumerable<KeyValuePair<string, string>>`)
+  * Schaltfläche "Senden" (`IHtmlElement`) und Werte bilden (`IEnumerable<KeyValuePair<string, string>>`)
 
 > [!NOTE]
 > [AngleSharp](https://anglesharp.github.io/) ist ein Drittanbieter-Analyse-Bibliothek, die in diesem Thema und die Beispiel-app zu Demonstrationszwecken verwendet. AngleSharp wird nicht unterstützt, oder für Integrationstests von ASP.NET Core-apps erforderlich sind. Andere Parser können verwendet werden, z. B. die [HTML-Agilität Pack (HAP)](http://html-agility-pack.net/). Ein anderer Ansatz ist Code schreiben, um der antiforgery Systemvariable Überprüfung Anfordern eines Tokens und antiforgery Cookie direkt behandeln.
