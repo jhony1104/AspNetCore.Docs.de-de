@@ -4,14 +4,14 @@ author: scottaddie
 description: Lernen Sie die verfügbaren Features zum Erstellen einer Web-API in ASP.NET Core kennen, und erhalten Sie Informationen zur Verwendung dieser Features.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 01/11/2019
 uid: web-api/index
-ms.openlocfilehash: 7541c4c308deaecda0bda9a9c77d9372b65a5100
-ms.sourcegitcommit: f202864efca81a72ea7120c0692940c40d9d0630
+ms.openlocfilehash: a826bdecdd3a25eb23597123166695c169ba4229
+ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2018
-ms.locfileid: "51635299"
+ms.lasthandoff: 01/12/2019
+ms.locfileid: "54249437"
 ---
 # <a name="build-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -23,7 +23,7 @@ In diesem Dokument wird erläutert, wie eine Web-API in ASP.NET Core erstellt we
 
 ## <a name="derive-class-from-controllerbase"></a>Ableiten einer Klasse von ControllerBase
 
-Leiten Sie Inhalte der <xref:Microsoft.AspNetCore.Mvc.ControllerBase>-Klasse in einem Controller ab, der als Web-API fungieren soll. Zum Beispiel:
+Leiten Sie Inhalte der <xref:Microsoft.AspNetCore.Mvc.ControllerBase>-Klasse in einem Controller ab, der als Web-API fungieren soll. Beispiel:
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -43,7 +43,7 @@ Die `ControllerBase`-Klasse ermöglicht den Zugriff auf mehrere Eigenschaften un
 
 ## <a name="annotation-with-apicontroller-attribute"></a>Anmerkungen mit dem ApiController-Attribut
 
-In ASP.NET Core 2.1 wird das Attribut [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) eingeführt, um eine Klasse des Web-API-Controllers anzugeben. Zum Beispiel:
+In ASP.NET Core 2.1 wird das Attribut [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) eingeführt, um eine Klasse des Web-API-Controllers anzugeben. Beispiel:
 
 [!code-csharp[](define-controller/samples/WebApiSample.Api.21/Controllers/ProductsController.cs?name=snippet_ControllerSignature&highlight=2)]
 
@@ -141,7 +141,10 @@ Rückschlussregeln werden auf die Standarddatenquellen der Aktionsparameter ange
 
 * Für komplexe Typparameter wird **[FromBody]** abgeleitet. Eine Ausnahme von der Regel ist jeder komplexe integrierte Typ mit spezieller Bedeutung, z.B. <xref:Microsoft.AspNetCore.Http.IFormCollection> und <xref:System.Threading.CancellationToken>. Der Rückschlusscode der Bindungsquelle ignoriert diese Typen. `[FromBody]` wird für einfache Typen wie `string` oder `int` nicht abgeleitet. Deshalb sollte das `[FromBody]`-Attribut für einfache Typen verwendet werden, wenn diese Funktionsweise benötigt wird. Wenn für eine Aktion mehr als ein Parameter explizit angegeben ist (über `[FromBody]`) oder als vom Anforderungstext gebunden hergeleitet wird, wird eine Ausnahme ausgelöst. Die folgenden Aktionssignaturen lösen beispielsweise eine Ausnahme aus:
 
-[!code-csharp[](define-controller/samples/WebApiSample.Api.21/Controllers/TestController.cs?name=snippet_ActionsCausingExceptions)]
+    [!code-csharp[](define-controller/samples/WebApiSample.Api.21/Controllers/TestController.cs?name=snippet_ActionsCausingExceptions)]
+
+    > [!NOTE]
+    > In ASP.NET Core 2.1 werden Sammlungstypparameter wie z.B. Listen und Arrays fälschlicherweise als [[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) abgeleitet. Für diese Parameter sollte [[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) verwendet werden, wenn sie aus dem Anforderungstext gebunden werden sollen. Dieses Verhalten wurde für ASP.NET Core 2.2 oder höher behoben. Hier werden Sammlungstypparameter standardmäßig als „[FromBody]“ abgeleitet.
 
 * **[FromForm]** wird für Aktionsparameter des Typs <xref:Microsoft.AspNetCore.Http.IFormFile> und <xref:Microsoft.AspNetCore.Http.IFormFileCollection> abgeleitet. Es wird für keine einfachen oder benutzerdefinierte Typen abgeleitet.
 * **[FromRoute]** wird für jeden Namen von Aktionsparametern abgeleitet, die mit einem Parameter in der Routenvorlage übereinstimmen. Wenn mehr als eine Route mit einem Aktionsparameter übereinstimmt, gilt jeder Routenwert als `[FromRoute]`.
@@ -193,7 +196,7 @@ Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinter `services.Ad
 
 ### <a name="attribute-routing-requirement"></a>Anforderung für das Attributrouting
 
-Das Attributrouting wird zu einer Anforderung. Zum Beispiel:
+Das Attributrouting wird zu einer Anforderung. Beispiel:
 
 [!code-csharp[](define-controller/samples/WebApiSample.Api.21/Controllers/ProductsController.cs?name=snippet_ControllerSignature&highlight=1)]
 
@@ -214,7 +217,7 @@ Betrachten Sie den folgenden Code in einer Controlleraktion:
 
 [!code-csharp[](define-controller/samples/WebApiSample.Api.22/Controllers/ProductsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-Die HTTP-Antwort für `NotFound` hat den Statuscode 404 mit einem `ProblemDetails`-Körper. Zum Beispiel:
+Die HTTP-Antwort für `NotFound` hat den Statuscode 404 mit einem `ProblemDetails`-Körper. Beispiel:
 
 ```json
 {
