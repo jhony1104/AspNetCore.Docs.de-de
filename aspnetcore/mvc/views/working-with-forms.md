@@ -4,14 +4,14 @@ author: rick-anderson
 description: Beschreibt die integrierten Taghilfsprogramme, die mit Formularen verwendet werden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 1/11/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 7319fbbfe3e78e61526f9042b2b6004a351c2186
-ms.sourcegitcommit: 2ef32676c16f76282f7c23154d13affce8c8bf35
+ms.openlocfilehash: cd15c641fbf702071bd57510a1d51737f6ab8e19
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50234617"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099012"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -108,7 +108,7 @@ Das `Input`-Taghilfsprogramm legt das HTML-Attribut `type` basierend auf dem .NE
 |---|---|
 |Bool|type="checkbox"|
 |Zeichenfolge|type="text"|
-|DateTime|type="datetime"|
+|DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
 |Int|type="number"|
 |Single, Double|type="number"|
@@ -401,7 +401,7 @@ Der generierte HTML-Code (wenn das Modell gültig ist):
 
 * Verfügt über die alternativen HTML-Hilfsprogramme `Html.DropDownListFor` und `Html.ListBoxFor`
 
-Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Zum Beispiel:
+Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Beispiel:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 

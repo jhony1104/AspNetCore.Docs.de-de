@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/10/2018
 uid: tutorials/first-web-api
-ms.openlocfilehash: c2b4dcddd5332330cd6e6abe7d3a12697cde845e
-ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
+ms.openlocfilehash: 03936ee74836c7b214cb3dc4023a6e3c252f2a26
+ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53382003"
+ms.lasthandoff: 01/10/2019
+ms.locfileid: "54207446"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC
 
@@ -311,7 +311,7 @@ Fügen Sie die folgende `PostTodoItem`-Methode hinzu:
 
 Der vorherige Code ist eine HTTP POST-Methode, die durch das Attribut [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) angegeben wird. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
 
-Die `CreatedAtRoute`-Methode:
+Die `CreatedAtAction`-Methode:
 
 * Gibt eine 201-Antwort zurück. HTTP 201 ist die Standardantwort für eine HTTP POST-Methode, die eine neue Ressource auf dem Server erstellt.
 * Fügt der Antwort einen Adressheader hinzu. Der Adressheader gibt den URI des neu erstellten To-Do-Elements zurück. Weitere Informationen finden Sie unter [10.2.2 201 Erstellt](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
@@ -398,7 +398,7 @@ Sie können in der Beispiel-App alle Elemente löschen. Sobald das letzte Elemen
 
 In diesem Abschnitt wird eine HTML-Seite hinzugefügt, die mithilfe von jQuery die Web-API aufruft. jQuery initiiert die Anforderung und aktualisiert die Seite mit den Informationen aus der Antwort der API.
 
-Konfigurieren Sie die App so, dass [statische Dateien unterstützt](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) und [Standarddateizuordnung aktiviert](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) werden.
+Konfigurieren Sie die App so, dass [statische Dateien unterstützt](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) und [Standarddateizuordnung aktiviert](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) werden.
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
