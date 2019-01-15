@@ -4,14 +4,14 @@ author: guardrex
 description: Einführung in Kestrel, dem plattformübergreifenden Webserver für ASP.NET Core.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 01/11/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: af1f330f2afa340ef98a6b4bd5008859f4b0f914
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: a85403468d64b35ac5b6754139f78a12ad3fc386
+ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637910"
+ms.lasthandoff: 01/12/2019
+ms.locfileid: "54249528"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -120,6 +120,26 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         {
             // Set properties and call methods on options
         });
+```
+
+Wenn die App `CreateDefaultBuilder` nicht aufruft, um den Host einzurichten, rufen Sie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> **auf,** bevor Sie `ConfigureKestrel` aufrufen:
+
+```csharp
+public static void Main(string[] args)
+{
+    var host = new WebHostBuilder()
+        .UseContentRoot(Directory.GetCurrentDirectory())
+        .UseKestrel()
+        .UseIISIntegration()
+        .UseStartup<Startup>()
+        .ConfigureKestrel((context, options) =>
+        {
+            // Set properties and call methods on options
+        })
+        .Build();
+
+    host.Run();
+}
 ```
 
 ::: moniker-end
@@ -684,7 +704,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 ### <a name="bind-to-a-tcp-socket"></a>Binden an einen TCP-Socket
 
-Die [Listen](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserveroptions.listen)-Methode wird an ein TCP-Socket gebunden, und ein Lambdaausdruck einer Option lässt die Konfiguration des SSL-Zertifikats zu:
+Die [Listen](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserveroptions.listen)-Methode wird an ein TCP-Socket gebunden, und ein Lambdaausdruck einer Option lässt die Konfiguration des X.509-Zertifikats zu:
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -734,7 +754,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 ::: moniker-end
 
-Im Beispiel wird SSL für einen Endpunkt mit [ListenOptions](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.listenoptions) konfiguriert. Verwenden Sie die gleiche API zum Konfigurieren anderer Kestrel-Einstellungen für bestimmte Endpunkte.
+Im Beispiel wird HTTPS für einen Endpunkt mit [ListenOptions](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.listenoptions) konfiguriert. Verwenden Sie die gleiche API zum Konfigurieren anderer Kestrel-Einstellungen für bestimmte Endpunkte.
 
 [!INCLUDE [How to make an X.509 cert](~/includes/make-x509-cert.md)]
 
@@ -789,7 +809,7 @@ Konfigurieren Sie Endpunkte mithilfe der folgenden Ansätze:
 
 Diese Methoden sind nützlich, wenn Ihr Code mit anderen Servern als Kestrel funktionieren soll. Beachten Sie jedoch die folgenden Einschränkungen:
 
-* SSL kann nicht mit diesen Ansätzen verwendet werden, außer ein Standardzertifikat wird in der HTTPS-Endpunktkonfiguration angegeben (z.B. wenn Sie wie zuvor in diesem Artikel gezeigt die `KestrelServerOptions`-Konfiguration oder eine Konfigurationsdatei verwenden).
+* HTTPS kann nicht mit diesen Ansätzen verwendet werden, außer ein Standardzertifikat wird in der HTTPS-Endpunktkonfiguration angegeben (z.B. wenn Sie wie zuvor in diesem Artikel gezeigt die `KestrelServerOptions`-Konfiguration oder eine Konfigurationsdatei verwenden).
 * Wenn die Ansätze `Listen` und `UseUrls` gleichzeitig verwendet werden, überschreiben die `Listen`-Endpunkte die `UseUrls`-Endpunkte.
 
 ### <a name="iis-endpoint-configuration"></a>IIS-Endpunktkonfiguration
@@ -968,7 +988,7 @@ Gehen Sie bei Projekten mit ASP.NET Core 2.1 oder höher, die das [Metapaket Mic
 
 Bei der Verwendung von `UseUrls`, dem Befehlszeilenargument `--urls`, dem Hostkonfigurationsschlüssel `urls` oder der Umgebungsvariable `ASPNETCORE_URLS` können die URL-Präfixe in den folgenden Formaten vorliegen.
 
-Nur HTTP-URL-Präfixe sind gültig. Kestrel unterstützt SSL nicht beim Konfigurieren von URL-Bindungen mit `UseUrls`.
+Nur HTTP-URL-Präfixe sind gültig. Kestrel unterstützt HTTPS nicht beim Konfigurieren von URL-Bindungen mit `UseUrls`.
 
 * IPv4-Adresse mit Portnummer
 

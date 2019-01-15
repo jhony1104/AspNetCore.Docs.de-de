@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 12/4/2018
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: acfc446732803c67714943fe3e5b7a31055ebcd7
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 2b68523ac84596bda2914d9c348ddea8c7ea9465
+ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862004"
+ms.lasthandoff: 01/10/2019
+ms.locfileid: "54207381"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>Gerüstbau mit Razor Pages in ASP.NET Core
 
@@ -57,6 +57,12 @@ Das HTML-Hilfsprogramm `DisplayNameFor` überprüft die Eigenschaft `Title`, auf
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
 Die `@model`-Anweisung gibt den Typ des Modells an, das an die Razor Page weitergegeben wird. Im vorherigen Beispiel macht die `@model`-Linie die von `PageModel` abgeleitete Klasse der Razor Page verfügbar. Das Modell wird in den [HTML Helpers (HTML-Hilfsprogrammen)](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) `@Html.DisplayNameFor` und `@Html.DisplayFor` auf der Seite verwendet.
+
+### <a name="the-layout-page"></a>Die Seite „Layout“
+
+Wählen Sie die Menülinks aus (**RazorPagesMovie**, **Home**, **Datenschutz**). Auf jeder Seite wird dasselbe Menülayout gezeigt. Das Menülayout wird mithilfe der Datei *Pages/Shared/_Layout.cshtml* implementiert. Öffnen Sie die Datei *Pages/Shared/_Layout.cshtml*.
+
+[Layout](xref:mvc/views/layout)-Vorlagen ermöglichen Ihnen, das HTML-Containerlayout Ihrer Website zentral anzugeben und dann auf mehrere Seiten Ihrer Website anzuwenden. Suchen Sie die Zeile `@RenderBody()`. `RenderBody` ist ein Platzhalter, bei dem alle seitenspezifischen Ansichten, die Sie erstellen, von der Layoutseite *umschlossen* angezeigt werden. Wenn Sie beispielsweise den Link **Privacy** auswählen, wird die Ansicht **Pages/Privacy.cshtml** in der `RenderBody`-Methode gerendert.
 
 <a name="vd"></a>
 ### <a name="viewdata-and-layout"></a>ViewData und Layout
@@ -169,4 +175,4 @@ Das [Hilfsprogramm für Eingabetags](xref:mvc/views/working-with-forms) (`<input
 
 > [!div class="step-by-step"]
 > [Zurück: Hinzufügen eines Modells](xref:tutorials/razor-pages/model)
-> [Weiter: Datenbank](xref:tutorials/razor-pages/sql)
+> [Nächster Schritt: Datenbank](xref:tutorials/razor-pages/sql)

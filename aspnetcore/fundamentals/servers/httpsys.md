@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über HTTP.sys. einen Webserver für ASP.NET Core
 monikerRange: '>= aspnetcore-2.0'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 01/03/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: a779fee53109d4c1cabb2005896e757f23467540
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 46538d256ae2c5f3b7e6c725fa8f29092759f69f
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637624"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098853"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implementierung des Http.sys-Webservers in ASP.NET Core
 
@@ -134,12 +134,22 @@ HTTP.sys delegiert zur Kernelmodusauthentifizierung mit dem Kerberos-Authentifiz
 
 ### <a name="configure-windows-server"></a>Konfigurieren von Windows Server
 
+1. Bestimmen Sie die Ports, die für die App geöffnet werden sollen, und verwenden Sie Windows-Firewall oder [PowerShell-Cmdlets](https://technet.microsoft.com/library/jj554906), um Firewall-Ports zu öffnen, damit der Datenverkehr HTTP.sys erreichen kann. Öffnen Sie bei der Bereitstellung für eine Azure-VM die Ports in der [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview). In den folgenden Befehlen und der Appkonfiguration wird Port 443 verwendet.
+
+1. Beziehen Sie X.509-Zertifikate und installieren Sie sie, falls erforderlich.
+
+   Erstellen Sie unter Windows selbstsignierte Zertifikate mit dem [PowerShell-Cmdlet „New-SelfSignedCertificate“](/powershell/module/pkiclient/new-selfsignedcertificate). Ein nicht unterstütztes Beispiel finden Sie unter [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
+
+   Installieren Sie entweder selbstsignierte oder CA-signierte Zertifikate im Speicher **Lokaler Server** > **Persönlich** des Servers.
+
 1. Wenn es sich bei der App um eine [frameworkabhängige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-fdd) handelt, installieren Sie .NET Core, .NET Framework oder beides (wenn es sich um eine .NET Core-App für das .NET Framework handelt).
 
-   * **.NET Core** &ndash;: Wenn die App .NET Core erfordert, rufen Sie das .NET Core-Installationsprogramm über die [.NET-Seite „All Downloads“](https://www.microsoft.com/net/download/all) ab, und führen Sie es aus.
-   * **.NET Framework**: Erfordert die App .NET Framework, wechseln Sie zum [.NET Framework: Installationshandbuch](/dotnet/framework/install/), um die Installationsanweisungen zu lesen. Installieren Sie das erforderliche .NET Framework. Das Installationsprogramm für die neueste .NET Framework-Version finden Sie auf der [.NET-Seite „Alle Downloads“](https://www.microsoft.com/net/download/all).
+   * **.NET Core**&ndash;: Wenn die App .NET Core erfordert, rufen Sie das **.NET Core Runtime**-Installationsprogramm über [.NET Core-Downloads](https://dotnet.microsoft.com/download) ab, und führen Sie es aus. Installieren Sie nicht das vollständige SDK auf dem Server.
+   * **.NET Framework**&ndash;: Erfordert die App .NET Framework, rufen Sie das [.NET Framework-Installationshandbuch](/dotnet/framework/install/) auf. Installieren Sie das erforderliche .NET Framework. Das Installationsprogramm für das neueste .NET Framework steht auf der Seite [.NET Core-Downloads](https://dotnet.microsoft.com/download) zur Verfügung.
 
-2. Konfigurieren Sie URLs und Ports für die App.
+   Wenn die App eine [eigenständige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-scd) ist, enthält die App die Runtime in ihrer Bereitstellung. Es ist keine Frameworkinstallation auf dem Server erforderlich.
+
+1. Konfigurieren Sie URLs und Ports in der App.
 
    Standardmäßig ist ASP.NET Core an `http://localhost:5000` gebunden. Zum Konfigurieren von URL-Präfixen und Ports stehen folgende Optionen zur Verfügung:
 
@@ -148,48 +158,109 @@ HTTP.sys delegiert zur Kernelmodusauthentifizierung mit dem Kerberos-Authentifiz
    * Umgebungsvariable `ASPNETCORE_URLS`
    * [UrlPrefixes](/dotnet/api/microsoft.aspnetcore.server.httpsys.httpsysoptions.urlprefixes)
 
-   Das folgende Codebeispiel veranschaulicht die Verwendung von [UrlPrefixes](/dotnet/api/microsoft.aspnetcore.server.httpsys.httpsysoptions.urlprefixes):
+   Das folgende Codebeispiel zeigt, wie Sie [UrlPrefixes](/dotnet/api/microsoft.aspnetcore.server.httpsys.httpsysoptions.urlprefixes) mit der lokalen IP-Adresse `10.0.0.4` des Servers auf Port 443 verwenden:
 
-   [!code-csharp[](httpsys/sample/Program.cs?name=snippet1&highlight=11)]
+   [!code-csharp[](httpsys/sample_snapshot/Program.cs?name=snippet1&highlight=11)]
 
    Ein Vorteil von `UrlPrefixes` besteht darin, dass bei falsch formatierten Präfixen sofort eine Fehlermeldung generiert wird.
 
-   Die Einstellungen in `UrlPrefixes` überschreiben die Einstellungen für `UseUrls`/`urls`/`ASPNETCORE_URLS`. Daher bieten `UseUrls`, `urls` und die Umgebungsvariable `ASPNETCORE_URLS` den Vorteil, dass sie den Wechsel zwischen Kestrel und HTTP.sys vereinfachen. Weitere Informationen zu `UseUrls`, `urls` und `ASPNETCORE_URLS` finden Sie unter [Hosten in ASP.NET Core](xref:fundamentals/host/index).
+   Die Einstellungen in `UrlPrefixes` überschreiben die Einstellungen für `UseUrls`/`urls`/`ASPNETCORE_URLS`. Daher bieten `UseUrls`, `urls` und die Umgebungsvariable `ASPNETCORE_URLS` den Vorteil, dass sie den Wechsel zwischen Kestrel und HTTP.sys vereinfachen. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host>.
 
    HTTP.sys verwendet die [HTTP Server-API-UrlPrefix-Zeichenfolgenformate](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
 
    > [!WARNING]
-   > Allgemeine Platzhalterbindungen (`http://*:80/` und `http://+:80`) dürfen **nicht** verwendet werden. Platzhalterbindungen auf oberster Ebene gefährden die Sicherheit Ihrer App. Dies gilt für starke und schwache Platzhalter. Verwenden Sie statt Platzhaltern explizite Hostnamen. Platzhalterbindungen in untergeordneten Domänen (z.B. `*.mysub.com`) verursachen kein Sicherheitsrisiko, wenn Sie die gesamte übergeordnete Domäne steuern (im Gegensatz zu `*.com`, das angreifbar ist). Weitere Informationen finden Sie unter [rfc7230 im Abschnitt 5.4](https://tools.ietf.org/html/rfc7230#section-5.4).
+   > Allgemeine Platzhalterbindungen (`http://*:80/` und `http://+:80`) dürfen **nicht** verwendet werden. Platzhalterbindungen auf oberster Ebene gefährden die Sicherheit Ihrer App. Dies gilt für starke und schwache Platzhalter. Verwenden Sie statt Platzhaltern explizite Hostnamen oder IP-Adressen. Platzhalterbindungen in untergeordneten Domänen (z.B. `*.mysub.com`) stellen kein Sicherheitsrisiko dar, wenn Sie die gesamte übergeordnete Domäne steuern (im Gegensatz zu `*.com`, das angreifbar ist). Weitere Informationen finden Sie unter [RFC 7230: Abschnitt 5.4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
 
-3. Registrieren Sie URL-Präfixe vorab, um sie an HTTP.sys zu binden, und richten Sie X.509-Zertifikate ein.
+1. URL-Präfixe können vorab auf dem Server registriert werden.
 
-   Wenn URL-Präfixe nicht vorab in Windows registriert wurden, führen Sie die App mit Administratorrechten aus. Die einzige Ausnahme besteht dann, wenn die Bindung an „localhost“ über HTTP (nicht HTTPS) mit einer höheren Portnummer als 1024 erfolgt. In diesem Fall sind keine Administratorrechte erforderlich.
+   Das integrierte Tool für die Konfiguration von HTTP.sys ist *netsh.exe*. Mithilfe von *netsh.exe* können Sie URL-Präfixe reservieren und X.509-Zertifikate zuweisen. Das Tool erfordert Administratorrechte.
 
-   1. Das integrierte Tool für die Konfiguration von HTTP.sys ist *netsh.exe*. Mithilfe von *netsh.exe* können Sie URL-Präfixe reservieren und X.509-Zertifikate zuweisen. Das Tool erfordert Administratorrechte.
+   Verwenden Sie das Tool *netsh.exe*, um die URLs für die App zu registrieren:
 
-      Das folgende Beispiel zeigt die Befehle, mit denen URL-Präfixe für die Ports 80 und 443 reserviert werden:
+   ```console
+   netsh http add urlacl url=<URL> user=<USER>
+   ```
 
-      ```console
-      netsh http add urlacl url=http://+:80/ user=Users
-      netsh http add urlacl url=https://+:443/ user=Users
-      ```
+   * `<URL>` &ndash; Der vollqualifizierte Uniform Resource Locator (URL). Verwenden Sie keine Platzhalterbindung. Verwenden Sie einen gültigen Hostnamen oder eine gültige lokale IP-Adresse. *Die URL muss einen nachgestellten Schrägstrich enthalten.*
+   * `<USER>` &ndash; Gibt den Benutzer oder den Benutzergruppennamen an.
 
-      Das folgende Beispiel zeigt, wie Sie ein X.509-Zertifikat zuweisen:
+   Im folgenden Beispiel ist die lokale IP-Adresse des Servers `10.0.0.4`:
 
-      ```console
-      netsh http add sslcert ipport=0.0.0.0:443 certhash=MyCertHash_Here appid="{00000000-0000-0000-0000-000000000000}"
-      ```
+   ```console
+   netsh http add urlacl url=https://10.0.0.4:443/ user=Users
+   ```
 
-      Referenzdokumentation für *netsh.exe*:
+   Wenn eine URL registriert ist, antwortet das Tool mit `URL reservation successfully added`.
 
-      * [Netsh Commands for Hypertext Transfer Protocol (HTTP) (Netsh-Befehle für Hypertext Transfer-Protokolle (HTTP))](https://technet.microsoft.com/library/cc725882.aspx)
-      * [UrlPrefix Strings (UrlPrefix-Zeichenfolgen)](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   Verwenden Sie zum Löschen einer registrierten URL den Befehl `delete urlacl`:
 
-   2. Erstellen Sie bei Bedarf selbstsignierte X.509-Zertifikate.
+   ```console
+   netsh http delete urlacl url=<URL>
+   ```
 
-      [!INCLUDE [How to make an X.509 cert](~/includes/make-x509-cert.md)]
+1. Registrieren Sie X.509-Zertifikate auf dem Server.
 
-4. Öffnen Sie Firewallports, damit der Datenverkehr HTTP.sys erreicht. Verwenden Sie *netsh.exe* oder [PowerShell-Cmdlets](https://technet.microsoft.com/library/jj554906).
+   Verwenden Sie das Tool *netsh.exe*, um Zertifikate für die App zu registrieren:
+
+   ```console
+   netsh http add sslcert ipport=<IP>:<PORT> certhash=<THUMBPRINT> appid="{<GUID>}"
+   ```
+
+   * `<IP>` &ndash; Gibt die lokale IP-Adresse für die Bindung an. Verwenden Sie keine Platzhalterbindung. Verwenden Sie eine gültige IP-Adresse.
+   * `<PORT>` &ndash; Gibt den Port für die Bindung an.
+   * `<THUMBPRINT>` &ndash; Der X.509-Zertifikatsfingerabdruck.
+   * `<GUID>` &ndash; Eine vom Entwickler generierte GUID zur Darstellung der App zu Informationszwecken.
+
+   Speichern Sie die GUID zu Referenzzwecken in der App als Paket-Tag:
+
+   * In Visual Studio:
+     * Öffnen Sie die Projekteigenschaften der App, indem Sie mit der rechten Maustaste auf die App im **Projektmappen-Explorer** klicken und **Eigenschaften** auswählen.
+     * Wählen Sie die Registerkarte **Paket** aus.
+     * Geben Sie die GUID ein, die Sie im Feld **Tags** erstellt haben.
+   * Wenn Sie Visual Studio nicht verwenden:
+     * Öffnen Sie die Projektdatei der App.
+     * Fügen Sie einer neuen oder vorhandenen `<PropertyGroup>` mit der von Ihnen erstellten GUID eine `<PackageTags>`-Eigenschaft hinzu:
+
+       ```xml
+       <PropertyGroup>
+         <PackageTags>9412ee86-c21b-4eb8-bd89-f650fbf44931</PackageTags>
+       </PropertyGroup>
+       ```
+
+   Im folgenden Beispiel:
+
+   * Die lokale IP-Adresse des Servers lautet `10.0.0.4`.
+   * Ein zufälliger Online-GUID-Generator stellt den Wert `appid` bereit.
+
+   ```console
+   netsh http add sslcert 
+       ipport=10.0.0.4:443 
+       certhash=b66ee04419d4ee37464ab8785ff02449980eae10 
+       appid="{9412ee86-c21b-4eb8-bd89-f650fbf44931}"
+   ```
+
+   Wenn ein Zertifikat registriert ist, antwortet das Tool mit `SSL Certificate successfully added`.
+
+   Verwenden Sie zum Löschen einer Zertifikatsregistrierung den Befehl `delete sslcert`:
+
+   ```console
+   netsh http delete sslcert ipport=<IP>:<PORT>
+   ```
+
+   Referenzdokumentation für *netsh.exe*:
+
+   * [Netsh Commands for Hypertext Transfer Protocol (HTTP) (Netsh-Befehle für Hypertext Transfer-Protokolle (HTTP))](https://technet.microsoft.com/library/cc725882.aspx)
+   * [UrlPrefix Strings (UrlPrefix-Zeichenfolgen)](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+
+1. Führen Sie die App aus.
+
+   Administratorberechtigungen sind nicht erforderlich, um die App auszuführen, wenn die Verbindung zum lokalen Host über HTTP (nicht HTTPS) mit einer Portnummer größer als 1024 erfolgt. Für andere Konfigurationen (z.B. über eine lokale IP-Adresse oder Bindung an Port 443) führen Sie die App mit Administratorberechtigungen aus.
+
+   Die App antwortet auf die öffentliche IP-Adresse des Servers. In diesem Beispiel wird der Server aus dem Internet mit seiner öffentlichen IP-Adresse `104.214.79.47` erreicht.
+
+   In diesem Beispiel wird ein Entwicklungszertifikat verwendet. Die Seite wird sicher geladen, nachdem die Warnung vor nicht vertrauenswürdigen Zertifikaten des Browsers umgangen wurde.
+
+   ![Browserfenster mit Anzeige der geladenen Indexseite der App](httpsys/_static/browser.png)
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxyserver und Lastenausgleichsszenarien
 
@@ -197,6 +268,7 @@ Für Apps, die von HTTP.sys gehostet werden und mit Anforderungen aus dem Intern
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
+* [Aktivieren der Windows-Authentifizierung mit HTTP.sys](xref:security/authentication/windowsauth#enable-windows-authentication-with-httpsys)
 * [HTTP-Server-API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
 * [aspnet/HttpSysServer – GitHub-Repository (Quellcode)](https://github.com/aspnet/HttpSysServer/)
 * <xref:fundamentals/host/index>

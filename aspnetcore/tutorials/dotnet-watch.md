@@ -5,12 +5,12 @@ description: In diesem Tutorial wird erläutert, wie Sie das Dateiwatcher-Tool (
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: fc08efa433f688a0b9009aed35fdee2b0c228619
-ms.sourcegitcommit: e12f45ddcbe99102a74d4077df27d6c0ebba49c1
+ms.openlocfilehash: f1e0d91b27df4af7cbfb6f2547c94c0370c65d0d
+ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/15/2018
-ms.locfileid: "39063298"
+ms.lasthandoff: 01/10/2019
+ms.locfileid: "54207501"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Victor Hurdugaci](http
 
 In diesem Tutorial wird eine vorhandene Web-API mit zwei Endpunkten verwendet: der eine gibt eine Summe zurück, der andere ein Produkt. Die Produktmethode enthält einen Fehler, der in diesem Tutorial behoben wird.
 
-Laden Sie die [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie besteht aus zwei Projekten: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententests für die Web-API).
+Laden Sie die [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie enthält zwei Projekte: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententest für die Web-API).
 
 Navigieren Sie in einer Befehlsshell zum Ordner *WebApp*. Führen Sie den folgenden Befehl aus:
 
@@ -66,7 +66,7 @@ Das Dateiwatcher-Tool `dotnet watch` ist im Lieferumfang von .NET Core SDK-Versi
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Ausführen von .NET Core-CLI-Befehlen mit `dotnet watch`
 
-Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Zum Beispiel:
+Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Beispiel:
 
 | Befehl | Befehl mit watch |
 | ---- | ----- |
@@ -179,4 +179,4 @@ VSTest wird ausgeführt, wenn in einer beliebigen Datei in einem der Testprojekt
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` in GitHub
 
-`dotnet-watch` ist Teil des GitHub-Repositorys [DotNetTools](https://github.com/aspnet/DotNetTools/tree/master/src/dotnet-watch).
+`dotnet-watch` ist Teil des GitHub-[Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch).

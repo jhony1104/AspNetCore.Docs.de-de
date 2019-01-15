@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/20/2018
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 534c62c127e685af9c6076932943def25bd3ac06
-ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
+ms.openlocfilehash: 24973e7bedcb219ac411948db8aa27d7219eac31
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/03/2019
-ms.locfileid: "53997330"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099285"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -68,7 +68,7 @@ Ein Reverseproxy wird im Allgemeinen zur Unterstützung dynamischer Web-Apps ein
 
 ### <a name="use-a-reverse-proxy-server"></a>Verwenden eines Reverseproxyservers
 
-Kestrel eignet sich hervorragend für die Bereitstellung dynamischer Inhalte aus ASP.NET Core. Die Webbereitstellungsfunktionen sind jedoch nicht so umfangreich wie bei Servern wie IIS, Apache oder Nginx. Ein Reverseproxyserver kann Arbeiten wie das Verarbeiten von statischen Inhalten, das Zwischenspeichern und Komprimieren von Anforderungen und das Beenden von SSL vom HTTP-Server auslagern. Ein Reverseproxyserver kann sich auf einem dedizierten Computer befinden oder zusammen mit einem HTTP-Server bereitgestellt werden.
+Kestrel eignet sich hervorragend für die Bereitstellung dynamischer Inhalte aus ASP.NET Core. Die Webbereitstellungsfunktionen sind jedoch nicht so umfangreich wie bei Servern wie IIS, Apache oder Nginx. Ein Reverseproxyserver kann Arbeiten wie das Verarbeiten von statischen Inhalten, das Zwischenspeichern und Komprimieren von Anforderungen und das Beenden von HTTPS vom HTTP-Server auslagern. Ein Reverseproxyserver kann sich auf einem dedizierten Computer befinden oder zusammen mit einem HTTP-Server bereitgestellt werden.
 
 Für diesen Leitfaden wird eine einzelne Instanz von Nginx verwendet. Diese wird auf demselben Server ausgeführt, zusammen mit dem HTTP-Server. Je nach Anforderungen kann ein anderes Setup ausgewählt werden.
 
@@ -349,7 +349,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 Konfigurieren Sie den Server mit zusätzlichen erforderlichen Modulen. Erwägen Sie zum Schutz der App die Verwendung einer Web-App-Firewall wie z.B. [ModSecurity](https://www.modsecurity.org/).
 
-#### <a name="configure-ssl"></a>Konfigurieren von SSL
+#### <a name="https-configuration"></a>HTTPS-Konfiguration
 
 * Konfigurieren Sie den Server, damit dieser für den HTTPS-Datenverkehr an Port `443` empfangsbereit ist, indem Sie ein gültiges Zertifikat angeben, das von einer vertrauenswürdigen Zertifizierungsstelle (Certificate Authority, CA) ausgestellt wurde.
 
@@ -357,7 +357,7 @@ Konfigurieren Sie den Server mit zusätzlichen erforderlichen Modulen. Erwägen 
 
 * Durch das Hinzufügen eines `HTTP Strict-Transport-Security`-Headers (HSTS) wird sichergestellt, dass alle nachfolgenden Anforderungen vom Client über HTTPS erfolgen.
 
-* Fügen Sie den HSTS-Header nicht hinzu, oder wählen Sie ein entsprechendes `max-age` aus, wenn Sie SSL in Zukunft deaktivieren möchten.
+* Fügen Sie den HSTS-Header nicht hinzu, oder wählen Sie ein entsprechendes `max-age` aus, wenn Sie HTTPS in Zukunft deaktivieren möchten.
 
 Fügen Sie die Konfigurationsdatei */etc/nginx/proxy.conf* hinzu:
 

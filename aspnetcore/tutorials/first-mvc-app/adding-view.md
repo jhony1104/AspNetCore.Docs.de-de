@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 5267e5a49bb6ecdd4cef671989f111eae7a64ec4
-ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
+ms.openlocfilehash: 321ffd6b0168d4befc950a58035d19561e879491
+ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53381815"
+ms.lasthandoff: 01/12/2019
+ms.locfileid: "54249450"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -24,7 +24,7 @@ Derzeit gibt die `Index`-Methode eine Zeichenfolge mit der Meldung zurück, die 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Der vorangehende Code gibt ein `View`-Objekt zurück. Er verwendet eine Ansichtsvorlage zum Generieren einer HTML-Antwort an den Browser. Controllermethoden (auch Aktionsmethoden genannt), wie z. B. die `Index`-Methode oben, geben in der Regel ein [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) (oder eine von `ActionResult` abgeleitete Klasse) und keinen Typ wie „string“ zurück.
+Der vorangehende Code ruft die Methode<xref:Microsoft.AspNetCore.Mvc.Controller.View*> des Controllers auf. Er verwendet eine Ansichtsvorlage zum Generieren einer HTML-Antwort. Controllermethoden (auch *Aktionsmethoden* genannt), wie z. B. die `Index`-Methode oben, geben in der Regel ein <xref:Microsoft.AspNetCore.Mvc.IActionResult> (oder eine von <xref:Microsoft.AspNetCore.Mvc.ActionResult> abgeleitete Klasse) und keinen Typ wie `string` zurück.
 
 ## <a name="add-a-view"></a>Hinzufügen einer Ansicht
 
@@ -86,9 +86,9 @@ Wählen Sie die Menülinks aus (**MvcMovie**, **Home**, **Privacy**). Auf jeder 
 
 [Layout](xref:mvc/views/layout)-Vorlagen ermöglichen Ihnen, das HTML-Containerlayout Ihrer Website zentral anzugeben und dann auf mehrere Seiten Ihrer Website anzuwenden. Suchen Sie die Zeile `@RenderBody()`. `RenderBody` ist ein Platzhalter, bei dem alle ansichtsspezifischen Seiten, die Sie erstellen, von der Layoutseite *umschlossen* angezeigt werden. Wenn Sie beispielsweise den Link **Privacy** auswählen, wird die Ansicht **Views/Home/Privacy.cshtml** in der `RenderBody`-Methode gerendert.
 
-## <a name="change-the-title-and-menu-link-in-the-layout-file"></a>Ändern des Titels und Menülinks in der Layoutdatei
+## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Ändern des Titels, der Fußzeile und Menülinks in der Layoutdatei
 
-* Ändern Sie im title-Element `MvcMovie` in `Movie App`.
+* Ändern Sie in den Elementen „Titel“ und „Fußzeile“ `MvcMovie` in `Movie App`.
 * Ändern Sie das Ankerlement `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` in `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>`.
 
 Im folgenden Markup sind die Änderungen hervorgehoben dargestellt:

@@ -6,12 +6,12 @@ ms.author: spboyer
 ms.custom: mvc
 ms.date: 12/20/2018
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 8c590743328885336498ca2446c618b13a7d2ce2
-ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
+ms.openlocfilehash: 217dc840748ef33173ae6a8c001aee558864ec59
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/03/2019
-ms.locfileid: "53997226"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099408"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hosten von ASP.NET Core unter Linux mit Apache
 
@@ -324,15 +324,15 @@ icmp-blocks:
 rich rules: 
 ```
 
-### <a name="ssl-configuration"></a>SSL-Konfiguration
+### <a name="https-configuration"></a>HTTPS-Konfiguration
 
-Für die Konfiguration von Apache für SSL wird das Modul *mod_ssl* verwendet. Wenn das Modul *httpd* installiert wurde, wurde das Modul *mod_ssl* ebenfalls installiert. Wurde es nicht installiert, fügen Sie es mit `yum` zur Konfiguration hinzu.
+Für die Konfiguration von Apache für HTTPS wird das Modul *mod_ssl* verwendet. Wenn das Modul *httpd* installiert wurde, wurde das Modul *mod_ssl* ebenfalls installiert. Wurde es nicht installiert, fügen Sie es mit `yum` zur Konfiguration hinzu.
 
 ```bash
 sudo yum install mod_ssl
 ```
 
-Installieren Sie zur Erzwingung von SSL das Modul `mod_rewrite`, um eine URL-Umschreibung zu aktivieren:
+Installieren Sie zur Erzwingung von HTTPS das Modul `mod_rewrite`, um eine URL-Umschreibung zu aktivieren:
 
 ```bash
 sudo yum install mod_rewrite

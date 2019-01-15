@@ -4,14 +4,14 @@ author: tdykstra
 description: Informationen zur Modellvalidierung im ASP.NET Core MVC
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 01/04/2019
 uid: mvc/models/validation
-ms.openlocfilehash: f1757f807e50019e5071abc42ec3129935ab77aa
-ms.sourcegitcommit: fc7eb4243188950ae1f1b52669edc007e9d0798d
+ms.openlocfilehash: f3a34972006b5fdee307c9a8d9989b2cc1e36893
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2018
-ms.locfileid: "51225459"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54099382"
 ---
 # <a name="model-validation-in-aspnet-core-mvc"></a>Modellvalidierung im ASP.NET Core MVC
 
@@ -44,23 +44,23 @@ Nachfolgend finden Sie ein annotiertes `Movie`-Modell einer App, das Information
 
 Wenn Sie das Modell ansehen, erfahren Sie, welche Regeln über Daten für diese App gelten, wodurch Sie den Code einfacher verwalten können. Im Folgenden finden Sie verschiedene beliebte integrierte Validierungsattribute:
 
-* `[CreditCard]`: überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
+* `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
 
-* `[Compare]`: überprüft, ob zwei Eigenschaften in einem Modell miteinander übereinstimmen.
+* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell miteinander übereinstimmen.
 
-* `[EmailAddress]`: überprüft, ob die Eigenschaft über ein E-Mail-Format verfügt.
+* `[EmailAddress]`: Überprüft, ob die Eigenschaft über ein E-Mail-Format verfügt.
 
-* `[Phone]`: überprüft, ob die Eigenschaft über ein Telefonformat verfügt.
+* `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonformat verfügt.
 
-* `[Range]`: überprüft, ob der Eigenschaftenwert im vorgegebenen Bereich liegt.
+* `[Range]`: Überprüft, ob der Eigenschaftenwert im vorgegebenen Bereich liegt.
 
-* `[RegularExpression]`: überprüft, ob die Daten mit dem angegebenen regulären Ausdruck übereinstimmt.
+* `[RegularExpression]`: Überprüft, ob die Daten mit dem angegebenen regulären Ausdruck übereinstimmt.
 
-* `[Required]`: legt eine Eigenschaft als erforderlich fest.
+* `[Required]`: Legt eine Eigenschaft als erforderlich fest.
 
-* `[StringLength]`: überprüft, ob eine Zeichenfolgeneigenschaft die maximale Länge nicht überschreitet.
+* `[StringLength]`: Überprüft, ob eine Zeichenfolgeneigenschaft die maximale Länge nicht überschreitet.
 
-* `[Url]`: überprüft, ob die Eigenschaft über ein URL-Format verfügt.
+* `[Url]`: Überprüft, ob die Eigenschaft über ein URL-Format verfügt.
 
 MVC unterstützt alle Attribute, die von `ValidationAttribute` zu Validierungszwecken abgeleitet werden. Im [System.ComponentModel.DataAnnotations](/dotnet/api/system.componentmodel.dataannotations)-Namespace finden Sie viele nützliche Validierungsattribute.
 
@@ -84,7 +84,7 @@ Der Modellstatus stellt Validierungsfehler in übermittelten HTML-Formularwerten
 
 MVC überprüft die Felder solange, bis die maximale Anzahl von Fehlern (standardmäßig 200) erreicht wird. Sie können diese Zahl mit dem folgenden Code in `Startup.ConfigureServices` konfigurieren:
 
-[!code-csharp[](validation/sample/Startup.cs?range=27)]
+[!code-csharp[](validation/sample/Startup.cs?name=snippet_MaxModelValidationErrors)]
 
 ## <a name="handle-model-state-errors"></a>Behandeln von Modellstatusfehlern
 

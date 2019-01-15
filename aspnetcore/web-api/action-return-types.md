@@ -4,14 +4,14 @@ author: scottaddie
 description: In diesem Artikel erfahren Sie, wie die verschiedenen Rückgabetypen für Controlleraktionsmethoden in einer ASP.NET Core-Web-API verwendet werden.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/23/2018
+ms.date: 01/04/2019
 uid: web-api/action-return-types
-ms.openlocfilehash: 84300eae4271c3ee4387be022c3576dc83e144eb
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 98d70e0379d353cff98a6d7a13f2dd00eb4da206
+ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207523"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54098739"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
 
@@ -68,13 +68,18 @@ Bei der folgenden asynchronen Aktion gibt es zwei mögliche Rückgabetypen:
 
 [!code-csharp[](../web-api/action-return-types/samples/WebApiSample.Api.Pre21/Controllers/ProductsController.cs?name=snippet_CreateAsync&highlight=8,13)]
 
-Bei der vorherigen Aktion wird der Statuscode 400 zurückgegeben, wenn die Modellvalidierung fehlschlägt und die Hilfsmethode [BadRequest](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.badrequest) aufgerufen wird. Das folgende Modell gibt beispielsweise an, dass Anforderungen die `Name`-Eigenschaft und einen Wert bereitstellen müssen. Aus diesem Grund führt die fehlgeschlagene Bereitstellung eines geeigneten `Name` in der Anforderung zu einer fehlgeschlagenen Modellvalidierung.
+Für den Code oben gilt:
 
-[!code-csharp[](../web-api/action-return-types/samples/WebApiSample.DataAccess/Models/Product.cs?name=snippet_ProductClass&highlight=5-6)]
+* Ein Statuscode „400“ ([BadRequest](xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*)) wird von der ASP.NET Core-Runtime zurückgegeben, wenn die Produktbeschreibung „XYZ Widget“ enthält.
+* Ein Statuscode „201“ wird von der Methode [CreatedAtAction](xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*) generiert, wenn ein Produkt erstellt wird. In diesem Codepfad wird das `Product`-Objekt zurückgegeben.
 
-Der zweite bekannte Rückgabecode der vorherigen Aktion lautet 201 und wird von der Hilfsmethode [CreatedAtAction](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.createdataction) erzeugt. In diesem Pfad wird das `Product`-Objekt zurückgegeben.
+Das folgende Modell gibt beispielsweise an, dass Anforderungen die `Name`- und `Description`-Eigenschaften einbinden müssen. Aus diesem Grund führt die fehlgeschlagene Bereitstellung eines `Name` und einer `Description` zu einer fehlgeschlagenen Modellvalidierung.
+
+[!code-csharp[](../web-api/action-return-types/samples/WebApiSample.DataAccess/Models/Product.cs?name=snippet_ProductClass&highlight=5-6,8-9)]
 
 ::: moniker range=">= aspnetcore-2.1"
+
+Wenn das [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut in ASP.NET Core 2.1 oder höher angewendet wird, führen Modellvalidierungsfehler zu einem Statuscode „400“. Weitere Informationen finden Sie unter [Automatische HTTP 400-Antworten](xref:web-api/index#automatic-http-400-responses).
 
 ## <a name="actionresultt-type"></a>ActionResult\<T>-Typ
 
@@ -114,7 +119,12 @@ Bei der folgenden asynchronen Aktion gibt es zwei mögliche Rückgabetypen:
 
 [!code-csharp[](../web-api/action-return-types/samples/WebApiSample.Api.21/Controllers/ProductsController.cs?name=snippet_CreateAsync&highlight=8,13)]
 
-Schlägt die Modellvalidierung fehlt, wird die [BadRequest](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.badrequest#Microsoft_AspNetCore_Mvc_ControllerBase_BadRequest_Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary_)-Methode zur Rückgabe eines Statuscodes 400 aufgerufen. Die [ModelState](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.modelstate)-Eigenschaft wird mit den entsprechenden Validierungsfehlern übergeben. Bei erfolgreicher Modellvalidierung wird das Produkt in der Datenbank erstellt. Der Statuscode 201 wird zurückgegeben.
+Für den Code oben gilt:
+
+* Ein Statuscode „400“ ([BadRequest](xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*)) wird durch die ASP.NET Core-Runtime zurückgegeben, wenn:
+  * Das [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut angewendet wurde und die Modellvalidierung fehlschlägt.
+  * Die Produktbeschreibung „XYZ-Widget“ enthält.
+* Ein Statuscode „201“ wird von der Methode [CreatedAtAction](xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*) generiert, wenn ein Produkt erstellt wird. In diesem Codepfad wird das `Product`-Objekt zurückgegeben.
 
 > [!TIP]
 > Seit ASP.NET Core 2.1 wird der Rückschluss auf die Bindungsquelle des Aktionsparameters aktiviert, wenn eine Controllerklasse mit dem `[ApiController]`-Attribut ausgestattet ist. Komplexe Typparameter werden automatisch mithilfe des Anforderungstexts gebunden. Folglich wird der `product`-Parameter der vorherigen Aktion nicht explizit mit dem Attribut [[FromBody]](/dotnet/api/microsoft.aspnetcore.mvc.frombodyattribute) versehen.
