@@ -8,12 +8,12 @@ ms.date: 10/14/2017
 ms.assetid: 8935bf14-ca6d-4a4e-9dbe-b96ce74cef49
 msc.legacyurl: /ajax/cdn
 msc.type: content
-ms.openlocfilehash: 2445d788df8ae80ccaad2dfeb19d1ccb91954d40
-ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
+ms.openlocfilehash: 65eee9bc477fc8adf10e8d819b93375ffbb72d7b
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2019
-ms.locfileid: "54249580"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341838"
 ---
 <a name="microsoft-ajax-content-delivery-network"></a>Microsoft Ajax Content Delivery Network
 ====================
@@ -269,35 +269,35 @@ Die folgenden Versionen von jQuery, die für das CDN gehostet werden:
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.map
 
-#### <a name="jquery-version-210"></a>jQuery-Version 2.1.0
+#### <a name="jquery-version-210"></a>jQuery version 2.1.0
 
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0-vsdoc.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.map
 
-#### <a name="jquery-version-203"></a>jQuery-Version 2.0.3
+#### <a name="jquery-version-203"></a>jQuery version 2.0.3
 
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3-vsdoc.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.map
 
-#### <a name="jquery-version-202"></a>jQuery-Version 2.0.2
+#### <a name="jquery-version-202"></a>jQuery version 2.0.2
 
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.2.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.2.min.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.2-vsdoc.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.2.min.map
 
-#### <a name="jquery-version-201"></a>jQuery-Version 2.0.1
+#### <a name="jquery-version-201"></a>jQuery version 2.0.1
 
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.1.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.1.min.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.1-vsdoc.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.1.min.map
 
-#### <a name="jquery-version-200"></a>jQuery-Version 2.0.0
+#### <a name="jquery-version-200"></a>jQuery version 2.0.0
 
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.0.js
 - https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.0.min.js
@@ -525,7 +525,7 @@ Die folgenden Versionen von jQuery, die für das CDN gehostet werden:
 
 Die folgenden Versionen von jQuery migrieren, die für das CDN gehostet werden:
 
-#### <a name="jquery-migrate-version-300"></a>jQuery migrieren Version 3.0.0
+#### <a name="jquery-migrate-version-300"></a>jQuery Migrate version 3.0.0
 
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-3.0.0.js
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-3.0.0.min.js
@@ -550,7 +550,7 @@ jQuery-Version 1.2.0-Migration
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.1.0.js
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.1.0.min.js
 
-#### <a name="jquery-migrate-version-100"></a>jQuery-Version 1.0.0-Migration
+#### <a name="jquery-migrate-version-100"></a>jQuery Migrate version 1.0.0
 
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.0.0.js
 - https://ajax.aspnetcdn.com/ajax/jquery.migrate/jquery-migrate-1.0.0.min.js
@@ -603,18 +603,18 @@ Die folgenden Versionen der jQuery UI-Bibliothek, die auf dieses CDN gehostet we
 
 Die folgenden Versionen der jQuery-Validierung-Bibliothek, die für dieses CDN gehostet werden. Klicken Sie auf jeden Link, um die tatsächliche Liste von Dateien.
 
-- [jQuery Validate 1.19.0](jquery-validate/cdnjqueryvalidate1190.md "jQuery-Validierung 1.19.0")
-- [jQuery Validate 1.17.0](jquery-validate/cdnjqueryvalidate1170.md "jQuery-Validierung 1.17.0")
-- [jQuery Validate 1.16.0](jquery-validate/cdnjqueryvalidate1160.md "jQuery-Validierung 1.16.0")
-- [jQuery Validate 1.15.1](jquery-validate/cdnjqueryvalidate1151.md "jQuery-Validierung 1.15.1")
-- [jQuery Validate 1.15.0](jquery-validate/cdnjqueryvalidate1150.md "jQuery-Validierung 1.15.0")
-- [jQuery Validate 1.14.0](jquery-validate/cdnjqueryvalidate1140.md "jQuery-Validierung 1.14.0")
-- [jQuery Validate 1.13.1](jquery-validate/cdnjqueryvalidate1131.md "jQuery-Validierung 1.13.1")
-- [jQuery Validate 1.13.0](jquery-validate/cdnjqueryvalidate1130.md "jQuery-Validierung 1.13.0")
-- [jQuery Validate 1.12.0](jquery-validate/cdnjqueryvalidate1120.md "jQuery-Validierung 1.12.0")
-- [jQuery Validate 1.11.1](jquery-validate/cdnjqueryvalidate1111.md "jQuery-Validierung 1.11.1")
-- [jQuery Validate 1.11.0](jquery-validate/cdnjqueryvalidate111.md "jQuery-Validierung 1.11.0")
-- [jQuery Validate 1.10.0](jquery-validate/cdnjqueryvalidate110.md "jQuery-Validierung 1.10.0")
+- [jQuery Validate 1.19.0](jquery-validate/cdnjqueryvalidate1190.md "jQuery Validation 1.19.0")
+- [jQuery Validate 1.17.0](jquery-validate/cdnjqueryvalidate1170.md "jQuery Validation 1.17.0")
+- [jQuery Validate 1.16.0](jquery-validate/cdnjqueryvalidate1160.md "jQuery Validation 1.16.0")
+- [jQuery Validate 1.15.1](jquery-validate/cdnjqueryvalidate1151.md "jQuery Validation 1.15.1")
+- [jQuery Validate 1.15.0](jquery-validate/cdnjqueryvalidate1150.md "jQuery Validation 1.15.0")
+- [jQuery Validate 1.14.0](jquery-validate/cdnjqueryvalidate1140.md "jQuery Validation 1.14.0")
+- [jQuery Validate 1.13.1](jquery-validate/cdnjqueryvalidate1131.md "jQuery Validation 1.13.1")
+- [jQuery Validate 1.13.0](jquery-validate/cdnjqueryvalidate1130.md "jQuery Validation 1.13.0")
+- [jQuery Validate 1.12.0](jquery-validate/cdnjqueryvalidate1120.md "jQuery Validation 1.12.0")
+- [jQuery Validate 1.11.1](jquery-validate/cdnjqueryvalidate1111.md "jQuery Validation 1.11.1")
+- [jQuery Validate 1.11.0](jquery-validate/cdnjqueryvalidate111.md "jQuery Validation 1.11.0")
+- [jQuery Validate 1.10.0](jquery-validate/cdnjqueryvalidate110.md "jQuery Validation 1.10.0")
 - [jQuery Validate 1.9](jquery-validate/cdnjqueryvalidate19.md "jquery.validate Version 1.9")
 - [jQuery Validate 1.8.1](jquery-validate/cdnjqueryvalidate181.md "jquery.validate Version 1.8.1")
 - [jQuery Validate 1.8](jquery-validate/cdnjqueryvalidate18.md "jquery.validate Version 1.8")
@@ -661,8 +661,8 @@ Die folgenden Versionen der jQuery-Vorlagen-Plug-Ins werden auf dieses CDN gehos
 Die folgenden Versionen der jQuery-Zyklus-Plug-Ins werden auf dieses CDN gehostet. Klicken Sie auf jeden Link, um die tatsächliche Liste von Dateien.
 
 - [jQuery-Zyklus 2,99](jquery-cycle/cdnjquerycycle299.md "jQuery Zyklus 2,99")
-- [jQuery-Zyklus 2.94](jquery-cycle/cdnjquerycycle294.md "jQuery Zyklus 2.94")
-- [jQuery-Zyklus 2,88](jquery-cycle/cdnjquerycycle288.md "jQuery Zyklus 2,88")
+- [jQuery Cycle 2.94](jquery-cycle/cdnjquerycycle294.md "jQuery Cycle 2.94")
+- [jQuery Cycle 2.88](jquery-cycle/cdnjquerycycle288.md "jQuery Cycle 2.88")
 
 <a id="jQuery_DataTables_Releases_on_the_CDN_7"></a>
 
@@ -670,14 +670,14 @@ Die folgenden Versionen der jQuery-Zyklus-Plug-Ins werden auf dieses CDN gehoste
 
 Die folgenden Versionen der jQuery-DataTables-Plug-Ins werden auf dieses CDN gehostet. Klicken Sie auf jeden Link, um die tatsächliche Liste von Dateien.
 
-- [jQuery-DataTables 1.10.5](jquery-datatables/cdnjquerydatatables105.md "jQuery-DataTables 1.10.5")
-- [jQuery-DataTables 1.10.4](jquery-datatables/cdnjquerydatatables104.md "jQuery-DataTables 1.10.4")
-- [jQuery-DataTables 1.9.4](jquery-datatables/cdnjquerydatatables194.md "jQuery-DataTables 1.9.4")
-- [jQuery-DataTables 1.9.3](jquery-datatables/cdnjquerydatatables193.md "jQuery-DataTables 1.9.3")
-- [jQuery-DataTables 1.9.2](jquery-datatables/cdnjquerydatatables192.md "jQuery-DataTables 1.9.2")
-- [jQuery-DataTables 1.9.1](jquery-datatables/cdnjquerydatatables191.md "jQuery-DataTables 1.9.1")
-- [jQuery-DataTables 1.9.0](jquery-datatables/cdnjquerydatatables190.md "jQuery-DataTables 1.9.0")
-- [jQuery-DataTables 1.8.2](jquery-datatables/cdnjquerydatatables182.md "jQuery-DataTables 1.8.2")
+- [jQuery DataTables 1.10.5](jquery-datatables/cdnjquerydatatables105.md "jQuery DataTables 1.10.5")
+- [jQuery DataTables 1.10.4](jquery-datatables/cdnjquerydatatables104.md "jQuery DataTables 1.10.4")
+- [jQuery DataTables 1.9.4](jquery-datatables/cdnjquerydatatables194.md "jQuery DataTables 1.9.4")
+- [jQuery DataTables 1.9.3](jquery-datatables/cdnjquerydatatables193.md "jQuery DataTables 1.9.3")
+- [jQuery DataTables 1.9.2](jquery-datatables/cdnjquerydatatables192.md "jQuery DataTables 1.9.2")
+- [jQuery DataTables 1.9.1](jquery-datatables/cdnjquerydatatables191.md "jQuery DataTables 1.9.1")
+- [jQuery DataTables 1.9.0](jquery-datatables/cdnjquerydatatables190.md "jQuery DataTables 1.9.0")
+- [jQuery DataTables 1.8.2](jquery-datatables/cdnjquerydatatables182.md "jQuery DataTables 1.8.2")
 
 <a id="Modernizr_Releases_on_the_CDN_8"></a>
 
@@ -797,6 +797,21 @@ Die folgenden Versionen von [https://github.com/scottjehl/Respond](https://githu
 
 Die folgenden Versionen von [getbootstrap.com](http://getbootstrap.com "getbootstrap.com") Bootstrap für das CDN gehostet werden:
 
+#### <a name="bootstrap-version-421"></a>Bootstrap-Version 4.2.1
+
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.js
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.min.js
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.bundle.js
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css.map
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-grid.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-grid.min.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-grid.css.map
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-reboot.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-reboot.min.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap-reboot.css.map
+
 #### <a name="bootstrap-version-411"></a>Bootstrap Version 4.1.1
 
 - https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.1/bootstrap.js
@@ -826,6 +841,22 @@ Die folgenden Versionen von [getbootstrap.com](http://getbootstrap.com "getboots
 - https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/css/bootstrap-reboot.css
 - https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/css/bootstrap-reboot.min.css
 - https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/css/bootstrap-reboot.css.map
+
+#### <a name="bootstrap-version-340"></a>Bootstrap Version 3.4.0
+
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/bootstrap.js
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/bootstrap.min.js
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap.css.map
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap.min.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap-theme.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap-theme.css.map
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/css/bootstrap-theme.min.css
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/fonts/glyphicons-halflings-regular.eot
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/fonts/glyphicons-halflings-regular.svg
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/fonts/glyphicons-halflings-regular.ttf
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/fonts/glyphicons-halflings-regular.woff
+- https://ajax.aspnetcdn.com/ajax/bootstrap/3.4.0/fonts/glyphicons-halflings-regular.woff2
 
 #### <a name="bootstrap-version-337"></a>Bootstrap Version 3.3.7
 
@@ -1062,7 +1093,7 @@ Die folgenden Versionen von [getbootstrap.com](http://getbootstrap.com "getboots
 
 Die folgenden Versionen von [https://github.com/ixisio/bootstrap-touch-carousel](https://github.com/ixisio/bootstrap-touch-carousel "https://github.com/ixisio/bootstrap-touch-carousel") TouchCarousel der Bootstrap-Versionen für das CDN gehostet werden:
 
-#### <a name="bootstrap-touchcarousel-version-080"></a>Bootstrap TouchCarousel Version 0.8.0
+#### <a name="bootstrap-touchcarousel-version-080"></a>Bootstrap TouchCarousel version 0.8.0
 
 - https://ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css
 - https://ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js
@@ -1073,7 +1104,7 @@ Die folgenden Versionen von [https://github.com/ixisio/bootstrap-touch-carousel]
 
 Die folgenden Versionen von [http://hammerjs.github.io/](http://hammerjs.github.io/ "http://hammerjs.github.io/") Hammer.js-Versionen für das CDN gehostet werden:
 
-#### <a name="hammerjs-version-204"></a>Hammer.js Version 2.0.4
+#### <a name="hammerjs-version-204"></a>Hammer.js version 2.0.4
 
 - https://ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.js
 - https://ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js

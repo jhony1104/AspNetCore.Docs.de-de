@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 11/14/2018
 uid: signalr/javascript-client
-ms.openlocfilehash: cd64a65889227d84615768bc3d8fddcd362fbba4
-ms.sourcegitcommit: eef99d14d96dc8c3c1bb0e2c4cb14da152f8a952
+ms.openlocfilehash: acdb4d1a59d980010fe89fe381190425cbb12901
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/07/2018
-ms.locfileid: "53022478"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341455"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR-JavaScript-client
 
@@ -60,7 +60,7 @@ Um zu verhindern, dass eine schädliche Website sensible Daten von einem anderen
 JavaScript-Clients rufen Sie öffentliche Methoden für Hubs über die [Aufrufen](/javascript/api/%40aspnet/signalr/hubconnection#invoke) Methode der [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection). Die `invoke` -Methode akzeptiert zwei Argumente:
 
 * Der Name der hubmethode. Im folgenden Beispiel wird der Name der Methode auf dem Hub `SendMessage`.
-* In der hubmethode definierten Argumente. Im folgenden Beispiel wird der Name des Arguments `message`.
+* In der hubmethode definierten Argumente. Im folgenden Beispiel wird der Name des Arguments `message`. Der Beispielcode verwendet die pfeilfunktionssyntax, die in aktuellen Versionen von allen wichtigen Browsern mit Ausnahme von Internet Explorer unterstützt wird.
 
   [!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=24)]
 

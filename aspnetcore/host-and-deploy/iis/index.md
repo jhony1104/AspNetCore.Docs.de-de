@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/11/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 3239b4652d739ed2ac205c9daae7754dbd8e918c
-ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
+ms.openlocfilehash: 83c084beb059d803811e9739d34bdbdd6bcff463
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2019
-ms.locfileid: "54249555"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341796"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -312,11 +312,6 @@ Wenn Sie Apps auf Servern mit [Web Deploy](/iis/publish/using-web-deploy/introdu
 ## <a name="create-the-iis-site"></a>Erstellen der IIS-Website
 
 1. Erstellen Sie auf dem Hostingsystem einen Ordner zum Speichern der veröffentlichten Ordner und Dateien der App. Das Layout der App-Bereitstellung wird im Thema [Verzeichnisstruktur](xref:host-and-deploy/directory-structure) beschrieben.
-
-1. Erstellen Sie innerhalb des neuen Ordners einen Ordner *Protokolle*, um darin stdout-Protokolle von ASP.NET Core zu speichern, wenn die stdout-Protokollierung aktiviert ist. Wenn die App mit einem Ordner *Protokolle* in der Payload bereitgestellt wird, können Sie diesen Schritt überspringen. Anweisungen zum Aktivieren von MSBuild zum automatischen Erstellen des Ordners *Protokolle* bei der Erstellung des lokalen Projekts finden Sie im Thema zur [Verzeichnisstruktur](xref:host-and-deploy/directory-structure).
-
-   > [!IMPORTANT]
-   > Verwenden Sie das stdout-Protokoll, um Probleme beim App-Start zu behandeln. Verwenden Sie die stdout-Protokollierung nicht für die routinemäßige App-Protokollierung. Für die Protokollgröße oder die Anzahl von erstellten Protokolldateien ist kein Grenzwert festgelegt. Der App-Pool muss über Schreibberechtigungen für den Speicherort verfügen, an dem die Protokolle geschrieben werden. Alle Ordner im Pfad des Protokollspeicherorts müssen vorhanden sein. Weitere Informationen zum stdout-Protokoll finden Sie im Thema zur [Protokollerstellung und Umleitung](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection). Informationen zur Protokollierung in einer ASP.NET Core-App finden Sie im Thema [Protokollierung](xref:fundamentals/logging/index).
 
 1. Öffnen Sie im **IIS-Manager** den Serverknoten im Bereich **Verbindungen**. Klicken Sie mit der rechten Maustaste auf den Ordner **Websites**. Klicken Sie im Kontextmenü auf **Website hinzufügen**.
 
