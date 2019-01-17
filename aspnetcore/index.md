@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/16/2018
+ms.date: 01/15/2019
 uid: index
-ms.openlocfilehash: fed81090f123084f3f33e75f86d09f55ac7fb481
-ms.sourcegitcommit: a16352c1c88a71770ab3922200a8cd148fb278a6
+ms.openlocfilehash: e7c81ff82e5206a5aca217417f6cb1c339d72e89
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53335298"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341406"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -97,7 +97,7 @@ Weitere Informationen zur Verwendung von [C#-Präprozessoranweisungen](/dotnet/c
 
 ### <a name="regions-in-sample-code"></a>Bereiche in Beispielcode
 
-Einige Beispiel-Apps enthalten Codeabschnitte, die von den C#-Anweisungen [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) und [#end-region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) umschlossen werden. Das Buildsystem der Dokumentation fügt diese Bereiche in den gerenderten Dokumentationsartikel ein.  
+Einige Beispiel-Apps enthalten Codeabschnitte, die von den C#-Anweisungen [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) und [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) umschlossen werden. Das Buildsystem der Dokumentation fügt diese Bereiche in den gerenderten Dokumentationsartikel ein.  
 
 Namen von Bereichen enthalten oft das Wort „snippet“ (Ausschnitt). Im folgenden Beispiel ist ein Bereich mit dem Namen `snippet_FilterInCode` enthalten:
 
@@ -118,7 +118,7 @@ In der Markdowndatei wird auf den vorherigen C#-Codeausschnitt mit der folgenden
 [!code-csharp[](sample/SampleApp/Program.cs?name=snippet_FilterInCode)]
 ```
 
-Sie können die Anweisungen `#region` und `#end-region`, die den Code umschließen, ohne Weiteres ignorieren (oder entfernen). Ändern Sie jedoch den Code innerhalb dieser Anweisungen nicht, wenn Sie die im Artikel beschriebenen Beispielszenarios durchführen möchten. Wenn Sie andere Szenarios ausprobieren möchten, können Sie den Code anpassen.
+Sie können die Anweisungen `#region` und `#endregion`, die den Code umschließen, ohne Weiteres ignorieren (oder entfernen). Ändern Sie jedoch den Code innerhalb dieser Anweisungen nicht, wenn Sie die im Artikel beschriebenen Beispielszenarios durchführen möchten. Wenn Sie andere Szenarios ausprobieren möchten, können Sie den Code anpassen.
 
 Weitere Informationen finden Sie unter [Contribute to the ASP.NET documentation: Code snippets (Mitwirken an der ASP.NET-Dokumentation: Codeausschnitte)](https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md#code-snippets).
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 4e5da1036b77e876899ccdea48bdec69454e1657
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: c55dbd5a9ac31f55daf1cb3146fb18b91b016919
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861484"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341588"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Steve Smith](https://a
 Middleware ist Software, die zu einer Anwendungspipeline zusammengesetzt wird, um Anforderungen und Antworten zu verarbeiten. Jede Komponente kann Folgendes ausführen:
 
 * Entscheiden, ob die Anforderung an die nächste Komponente in der Pipeline übergeben werden soll.
-* Arbeiten, bevor oder nachdem die nächste Komponente in der Pipeline aufgerufen wird.
+* Ausführen von Arbeiten, bevor oder nachdem die nächste Komponente in der Pipeline aufgerufen wird.
 
 Anforderungsdelegaten werden verwendet, um die Anforderungspipeline zu erstellen. Die Anforderungsdelegaten behandeln jede HTTP-Anforderung.
 
@@ -230,7 +230,7 @@ app.Map("/level1", level1App => {
 
 Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthalten. Die Spalte *Reihenfolge* enthält Hinweise zur Platzierung der Middleware in der Anforderungspipeline und zu den Bedingungen, unter denen die Middleware die Anforderung möglicherweise beendet und andere Middleware von der Verarbeitung einer Anforderung abhält.
 
-| Middleware | Beschreibung  | Reihenfolge |
+| Middleware | Beschreibung | Reihenfolge |
 | ---------- | ----------- | ----- |
 | [Authentifizierung](xref:security/authentication/identity) | Bietet Unterstützung für Authentifizierungen. | Bevor `HttpContext.User` erforderlich ist. Terminal für OAuth-Rückrufe. |
 | [Cookierichtlinie](xref:security/gdpr) | Verfolgt die Zustimmung von Benutzern zum Speichern persönlicher Informationen nach und erzwingt die Mindeststandards für Cookiefelder, z.B. `secure` und `SameSite`. | Befindet sich vor der Middleware, die Cookies ausstellt. Beispiele: Authentifizierung, Sitzung, MVC (TempData). |
@@ -240,7 +240,7 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Integritätsprüfung](xref:host-and-deploy/health-checks) | Überprüft die Integrität der ASP.NET Core-App und ihrer Abhängigkeiten, z. B. Überprüfung der Datenbankverfügbarkeit. | Abschließend, wenn eine Anforderung mit einem Integritätsprüfungs-Endpunkt übereinstimmt. |
 | [Außerkraftsetzung der HTTP-Methode](/dotnet/api/microsoft.aspnetcore.builder.httpmethodoverrideextensions) | Ermöglicht es eingehenden POST-Anforderungen, die Methode außer Kraft zu setzen. | Vor Komponenten, die die aktualisierte Methode nutzen. |
 | [HTTPS-Umleitung](xref:security/enforcing-ssl#require-https) | Leitet alle HTTP-Anforderungen an HTTPS um (ASP.NET Core 2.1 oder höher). | Vor Komponenten, die die URL nutzen. |
-| [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Sicherheits-Middleware, die einen besonderen Antwortheader hinzufügt (ASP.NET Core 2.1 oder höher). | Bevor Antworten gesendet werden und nach Komponenten, die Anforderungen ändern. Beispiele: weitergeleitete Header und URL-Umschreibung. |
+| [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Sicherheits-Middleware, die einen besonderen Antwortheader hinzufügt (ASP.NET Core 2.1 oder höher). | Bevor Antworten gesendet werden und nach Komponenten, die Anforderungen ändern. Beispiele: weitergeleitete Header, URL-Umschreibung. |
 | [MVC](xref:mvc/overview) | Verarbeitet Anforderungen mit MVC/Razor Pages (ASP.NET Core 2.0 oder höher). | Abschließend, wenn eine Anforderung mit einer Route übereinstimmt. |
 | [OWIN](xref:fundamentals/owin) | Interoperabilität mit auf OWIN basierten Apps, Servern und Middleware. | Abschließend, wenn die OWIN-Middleware die Anforderung vollständig verarbeitet. |
 | [Zwischenspeichern von Antworten](xref:performance/caching/middleware) | Bietet Unterstützung für das Zwischenspeichern von Antworten. | Vor Komponenten, für die das Zwischenspeichern erforderlich ist. |
