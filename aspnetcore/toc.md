@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: a3ac1ac389892681e8c122d569e6325353ed6e88
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341679"
+---
 # [ASP.NET Core-Dokumentation](/aspnet/#pivot=core)
 
 # Übersicht
@@ -181,7 +189,7 @@
 
 # Testen, Debuggen und Problembehandlung
 ## [Komponententests](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-## [Komponententests für Razor Pages](xref:test/razor-pages-tests)
+## [Komponententests für Razor-Seiten](xref:test/razor-pages-tests)
 ## [Testen von Controllern](xref:mvc/controllers/testing)
 ## [Remotedebuggen](/visualstudio/debugger/remote-debugging-azure)
 ## [Momentaufnahmendebugging](/azure/application-insights/app-insights-snapshot-debugger)
@@ -251,7 +259,9 @@
 ### [Veröffentlichen mit CLI-Tools](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 ### [Veröffentlichen mit Visual Studio und Git](xref:host-and-deploy/azure-apps/azure-continuous-deployment)
 ### [Continuous Deployment mit Azure Pipelines](/azure/devops/pipelines/get-started-yaml)
-### [Problembehandlung bei Startfehlern](xref:host-and-deploy/azure-apps/troubleshoot)
+### [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module)
+### [Problembehandlung](xref:host-and-deploy/azure-apps/troubleshoot)
+### [Fehlerreferenz](xref:host-and-deploy/azure-iis-errors-reference)
 ## DevOps 
 ### [Übersicht](xref:azure/devops/index)
 ### [Tools und Downloads](xref:azure/devops/tools-and-downloads)
@@ -261,10 +271,11 @@
 ### [Nächste Schritte](xref:azure/devops/next-steps)
 ## Hosten unter Windows mit IIS
 ### [Übersicht](xref:host-and-deploy/iis/index)
-### [Problembehandlung bei den Internetinformationsdiensten (IIS)](xref:host-and-deploy/iis/troubleshoot)
 ### [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module)
 ### [IIS-Unterstützung in Visual Studio](xref:host-and-deploy/iis/development-time-iis-support)
 ### [IIS-Module](xref:host-and-deploy/iis/modules)
+### [Problembehandlung](xref:host-and-deploy/iis/troubleshoot)
+### [Fehlerreferenz](xref:host-and-deploy/azure-iis-errors-reference)
 ## [Kestrel](xref:fundamentals/servers/kestrel)
 ## [HTTP.sys](xref:fundamentals/servers/httpsys)
 ## [Hosten in einem Windows-Dienst](xref:host-and-deploy/windows-service)
@@ -279,7 +290,6 @@
 ## [Hosten in einer Webfarm](xref:host-and-deploy/web-farm)
 ## [Veröffentlichungsprofile in Visual Studio](xref:host-and-deploy/visual-studio-publish-profiles)
 ## [Verzeichnisstruktur](xref:host-and-deploy/directory-structure)
-## [Referenz zu Fehlern bei Azure App Service und IIS](xref:host-and-deploy/azure-iis-errors-reference)
 ## [Integritätsprüfungen](xref:host-and-deploy/health-checks)
 
 # Sicherheit und Identität
@@ -324,7 +334,7 @@
 ### [Rollenbasierte Autorisierung](xref:security/authorization/roles)
 ### [Anspruchsbasierte Autorisierung](xref:security/authorization/claims)
 ### [Richtlinienbasierte Autorisierung](xref:security/authorization/policies)
-### [Anbieter von Autorisierungsrichtlinien](xref:security/authorization/iauthorizationpolicyprovider)
+### [Authorization policy providers (Anbieter von Autorisierungsrichtlinien)](xref:security/authorization/iauthorizationpolicyprovider)
 ### [Abhängigkeitsinjektion in Anforderungshandlern](xref:security/authorization/dependencyinjection)
 ### [Ressourcenbasierte Autorisierung](xref:security/authorization/resourcebased)
 ### [Ansichtsbasierte Autorisierung](xref:security/authorization/views)
@@ -390,7 +400,7 @@
 ## [Globalisierung und Lokalisierung](xref:fundamentals/localization)
 ## [Lokalisierung portabler Objekte mit Orchard Core](xref:fundamentals/portable-object-localization)
 ## [URL-Umschreibung](xref:fundamentals/url-rewriting)
-## [Dateianbieter](xref:fundamentals/file-providers)
+## [File Provider (Dateianbieter)](xref:fundamentals/file-providers)
 ## [Erforderliche Funktionen](xref:fundamentals/request-features)
 ## [Zugriff auf HttpContext](xref:fundamentals/httpcontext)
 ## [Ändern von Token](xref:fundamentals/change-tokens)
@@ -420,6 +430,6 @@
 ### [Migration von HTTP-Modulen zu Middleware](xref:migration/http-modules)
 ## [Protokollierung (nicht ASP.NET Core)](xref:migration/logging-nonaspnetcore)
 
-# [API-Referenz](/dotnet/api/?view=aspnetcore-2.2)
+# [API-Referenz](/dotnet/api/?view=aspnetcore-2.1)
 
 # [Mitwirken](https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md)
