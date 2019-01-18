@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, inwiefern das Routing mit ASP.NET Core für das Zuordnen von Anforderungs-URIs zu Endpunktselektoren und das Weiterleiten von Anforderungen an Endpunkte zuständig ist.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/29/2018
+ms.date: 01/14/2019
 uid: fundamentals/routing
-ms.openlocfilehash: c57b309e4474f9aff5c0594a3d9d1c796990d31e
-ms.sourcegitcommit: e1cc4c1ef6c9e07918a609d5ad7fadcb6abe3e12
+ms.openlocfilehash: 96d098115f2f9b150f796e08cf14e60611f59e17
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/03/2019
-ms.locfileid: "53997356"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341757"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -46,7 +46,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Weitere Informationen zum <xref:Microsoft.AspNetCore.Routing.IRouter>-basierten Routing finden Sie in dem [Artikel zur Version 2.1 von ASP.NET Core](xref:fundamentals/routing?view=aspnetcore-2.1).
+Weitere Informationen zum <xref:Microsoft.AspNetCore.Routing.IRouter>-basierten Routing finden Sie in dem [Artikel zur Version 2.1 von ASP.NET Core](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
 
 ::: moniker-end
 
