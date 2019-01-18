@@ -4,20 +4,19 @@ title: Überblick und Behandeln von Verbindung Objektlebensdauer-Ereignisse in S
 author: pfletcher
 description: Dieser Artikel beschreibt, wie durch die Hubs-API verfügbar gemachten Ereignisse beschrieben.
 ms.author: riande
-ms.date: 06/10/2014
+ms.date: 01/15/2019
 ms.assetid: 03960de2-8d95-4444-9169-4426dcc64913
 msc.legacyurl: /signalr/overview/guide-to-the-api/handling-connection-lifetime-events
 msc.type: authoredcontent
-ms.openlocfilehash: 6a354179a82eba1d4a64184bfdeb302472fabf5f
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 5aaec6795f714ba0877ec3b22eff45eb281b44aa
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287980"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54396167"
 ---
 <a name="understanding-and-handling-connection-lifetime-events-in-signalr"></a>Überblick und Behandeln von Verbindung Objektlebensdauer-Ereignisse in SignalR
 ====================
-durch [Patrick Fletcher](https://github.com/pfletcher), [Tom Dykstra](https://github.com/tdykstra)
 
 [!INCLUDE [Consider ASP.NET Core SignalR](~/includes/signalr/signalr-version-disambiguation.md)]
 
@@ -32,7 +31,7 @@ durch [Patrick Fletcher](https://github.com/pfletcher), [Tom Dykstra](https://gi
 > ## <a name="software-versions-used-in-this-topic"></a>In diesem Thema verwendeten Softwareversionen
 >
 >
-> - [Visual Studio 2013](https://my.visualstudio.com/Downloads?q=visual%20studio%202013)
+> - [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
 > - .NET 4.5
 > - SignalR-Version 2
 >
@@ -147,7 +146,7 @@ Einige netzwerkumgebungen schließen absichtlich Verbindungen im Leerlauf, und e
 
 > [!NOTE]
 >
-> **Wichtige**: Die Abfolge der Ereignisse, die hier beschriebenen ist nicht garantiert. SignalR versucht jede Verbindung Objektlebensdauer-Ereignisse in einer vorhersagbaren Weise nach diesem Schema heraufstufen, aber es gibt viele Varianten der Netzwerkereignisse und viele Möglichkeiten, die in denen zugrunde liegenden Communications-Frameworks wie Transport APIs diese behandeln. Z. B. die `Reconnected` -Ereignis kann nicht ausgelöst werden, wenn der Client die Verbindung wiederherstellt, oder die `OnConnected` Handler auf dem Server kann ausgeführt werden, wenn der Versuch zum Herstellen einer Verbindung nicht erfolgreich ist. Dieses Thema beschreibt nur die Effekte, die normalerweise durch bestimmte normalen Betrieb erstellt werden würde.
+> **Wichtig:** Die Abfolge der Ereignisse, die hier beschriebenen ist nicht garantiert. SignalR versucht jede Verbindung Objektlebensdauer-Ereignisse in einer vorhersagbaren Weise nach diesem Schema heraufstufen, aber es gibt viele Varianten der Netzwerkereignisse und viele Möglichkeiten, die in denen zugrunde liegenden Communications-Frameworks wie Transport APIs diese behandeln. Z. B. die `Reconnected` -Ereignis kann nicht ausgelöst werden, wenn der Client die Verbindung wiederherstellt, oder die `OnConnected` Handler auf dem Server kann ausgeführt werden, wenn der Versuch zum Herstellen einer Verbindung nicht erfolgreich ist. Dieses Thema beschreibt nur die Effekte, die normalerweise durch bestimmte normalen Betrieb erstellt werden würde.
 
 
 <a id="clientdisconnect"></a>
@@ -180,7 +179,7 @@ Der Standardwert `ConnectionTimeout`, `DisconnectTimeout`, und `KeepAlive` Werte
 
 <a id="connectiontimeout"></a>
 
-### <a name="connectiontimeout"></a>Verbindungstimeout-Wert
+### <a name="connectiontimeout"></a>ConnectionTimeout
 
 Diese Einstellung steht für die Zeitspanne, während eine transportverbindung öffnen und zu warten auf eine Antwort vor dem Schließen und öffnen eine neue Verbindung zu bleiben. Der Standardwert ist 110 Sekunden.
 

@@ -4,20 +4,19 @@ title: ASP.NET SignalR-Hubs-API-Leitfaden – JavaScript-Client | Microsoft-Doku
 author: pfletcher
 description: Dieses Dokument enthält eine Einführung zur Verwendung von den Hubs-API für SignalR-Version 2 in JavaScript-Clients wie Browsern und Windows Store (WinJS) Application...
 ms.author: riande
-ms.date: 09/28/2015
+ms.date: 01/15/2019
 ms.assetid: a9fd4dc0-1b96-4443-82ca-932a5b4a8ea4
 msc.legacyurl: /signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client
 msc.type: authoredcontent
-ms.openlocfilehash: a8352045d99b77713c94ab809417c5dc4675557f
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 12d675b6a2f2f6acdd8c3a5d0d27b5ad2fb1efc4
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54099272"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54396310"
 ---
 <a name="aspnet-signalr-hubs-api-guide---javascript-client"></a>ASP.NET SignalR-Hubs-API-Leitfaden – JavaScript-Client
 ====================
-durch [Patrick Fletcher](https://github.com/pfletcher), [Tom Dykstra](https://github.com/tdykstra)
 
 [!INCLUDE [Consider ASP.NET Core SignalR](~/includes/signalr/signalr-version-disambiguation.md)]
 
@@ -30,7 +29,7 @@ durch [Patrick Fletcher](https://github.com/pfletcher), [Tom Dykstra](https://gi
 > ## <a name="software-versions-used-in-this-topic"></a>In diesem Thema verwendeten Softwareversionen
 >
 >
-> - [Visual Studio 2013](https://my.visualstudio.com/Downloads?q=visual%20studio%202013)
+> - [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
 > - .NET 4.5
 > - SignalR-Version 2
 >
@@ -142,9 +141,7 @@ Verwenden Sie in einer ASP.NET Web Forms-Anwendung `ResolveClientUrl` von Proxys
 
 Verwenden Sie als allgemeine Regel die gleiche Methode zum Angeben der URL "/ Signalr/Hubs", die Sie für CSS oder JavaScript-Dateien verwenden. Wenn Sie eine URL angeben, ohne mit einer Tilde, wird in einigen Szenarien Ihrer Anwendung fehlerfrei, wenn Sie in Visual Studio mit IIS Express testen jedoch mit einen 404-Fehler fehl schlägt, wenn Sie in der vollständigen Variante von IIS bereitstellen. Weitere Informationen finden Sie unter **Auflösen von Verweisen auf Ressourcen auf Stammebene** in [Webserver in Visual Studio für ASP.NET-Webprojekte](https://msdn.microsoft.com/library/58wxa9w5.aspx) auf der MSDN-Website.
 
-Wenn Sie ein Webprojekt in Visual Studio 2013 im Debugmodus ausgeführt, und wenn Sie Internet Explorer als Standardbrowser verwenden, Sie die Proxydatei im sehen **Projektmappen-Explorer** unter **Skriptdokumente**Siehe die folgende Abbildung an.
-
-![JavaScript-generierten Proxy-Datei im Projektmappen-Explorer](hubs-api-guide-javascript-client/_static/image1.png)
+Wenn Sie ein Webprojekt in Visual Studio 2017 im Debugmodus ausgeführt, und wenn Sie Internet Explorer als Standardbrowser verwenden, Sie die Proxydatei im sehen **Projektmappen-Explorer** unter **Skripts**.
 
 Um den Inhalt der Datei anzuzeigen, doppelklicken Sie auf **Hubs**. Wenn Sie nicht Visual Studio 2012 oder 2013 und Internet Explorer verwenden oder wenn Sie nicht im Debugmodus sind, können Sie auch den Inhalt der Datei abrufen, indem Sie zu der URL "/ SignalR/Hubs". Wenn an Ihrem Standort ausgeführt wird z. B. `http://localhost:56699`, wechseln Sie zu `http://localhost:56699/SignalR/hubs` in Ihrem Browser.
 

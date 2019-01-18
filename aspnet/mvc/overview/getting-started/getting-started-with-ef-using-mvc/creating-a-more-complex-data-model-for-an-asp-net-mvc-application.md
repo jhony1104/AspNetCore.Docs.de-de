@@ -1,36 +1,49 @@
 ---
 uid: mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-a-more-complex-data-model-for-an-asp-net-mvc-application
-title: Erstellen ein komplexeres Datenmodell für eine ASP.NET MVC-Anwendung | Microsoft-Dokumentation
+title: 'Tutorial: Erstellen eines komplexeren Datenmodells für eine ASP.NET MVC-app'
 author: tdykstra
-description: Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET MVC 5-Anwendungen, die mit dem Entity Framework 6 Code First "und" Visual Studio...
+description: In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen, und passen das Datenmodell von Formatierung, Validierung und Zuordnungsregeln für die Datenbank angeben.
 ms.author: riande
-ms.date: 11/07/2014
+ms.date: 01/16/2019
+ms.topic: tutorial
 ms.assetid: 46f7f3c9-274f-4649-811d-92222a9b27e2
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-a-more-complex-data-model-for-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 25cec8bb9384dbd053f8af12855171a54675a40e
-ms.sourcegitcommit: a4dcca4f1cb81227c5ed3c92dc0e28be6e99447b
+ms.openlocfilehash: 50cbc184983b3e37c34332dad52bc0d70ade18c2
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/10/2018
-ms.locfileid: "48912487"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54396297"
 ---
-<a name="creating-a-more-complex-data-model-for-an-aspnet-mvc-application"></a>Erstellen ein komplexeres Datenmodell für eine ASP.NET MVC-Anwendung
-====================
-durch [Tom Dykstra](https://github.com/tdykstra)
+# <a name="tutorial-create-a-more-complex-data-model-for-an-aspnet-mvc-app"></a>Tutorial: Erstellen eines komplexeren Datenmodells für eine ASP.NET MVC-app
 
-[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
-
-> Contoso University Beispiel Web-Anwendung veranschaulicht, wie ASP.NET MVC 5 mit dem Entity Framework 6 Code First Visual Studio erstellt. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](creating-an-entity-framework-data-model-for-an-asp-net-mvc-application.md).
-
-
-In den vorherigen Tutorials haben Sie mit einem einfachen Datenmodell, das aus drei Entitäten Bestand aus. In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen, und passen das Datenmodell von Formatierung, Validierung und Zuordnungsregeln für die Datenbank angeben. Sehen Sie zwei Möglichkeiten zum Anpassen des Datenmodells: durch Hinzufügen von Attributen, um Entitätsklassen und indem Sie Code hinzufügen, um den Datenbankkontext-Klasse.
+In den vorherigen Tutorials haben Sie mit einem einfachen Datenmodell, das aus drei Entitäten Bestand aus. In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen, und Sie passen das Datenmodell an, durch Angeben von Regeln zur Formatierung, Validierung und Datenbank zuordnen. In diesem Artikel veranschaulicht zwei Möglichkeiten zum Anpassen des Datenmodells: durch Hinzufügen von Attributen, um Entitätsklassen und indem Sie Code hinzufügen, um den Datenbankkontext-Klasse.
 
 Wenn Sie dies erledigt haben, bilden die Entitätsklassen ein vollständiges Datenmodell, das in der folgenden Abbildung dargestellt wird:
 
 ![School_class_diagram](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image1.png)
 
-## <a name="customize-the-data-model-by-using-attributes"></a>Anpassen des Datenmodells mithilfe von Attributen
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Anpassen des Datenmodells
+> * Aktualisieren der Entität "Student"
+> * Erstellen der Entität "Instructor"
+> * Erstellen der Entität "OfficeAssignment"
+> * Ändern Sie die Entität "Course"
+> * Erstellen der Entität „Department“
+> * Ändern der Entität „Enrollment“
+> * Fügen Sie Code hinzu, um den Datenbankkontext
+> * SEED-Datenbank mit Testdaten
+> * Hinzufügen einer Migration
+> * Aktualisieren der Datenbank
+
+## <a name="prerequisites"></a>Vorraussetzungen
+
+* [Code der ersten Migration und Bereitstellung](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application.md)
+
+## <a name="customize-the-data-model"></a>Anpassen des Datenmodells
 
 In diesem Abschnitt wird das Anpassen des Datenmodells mithilfe von Attributen erläutert, die Regeln zur Formatierung, Validierung und Datenbankzuordnung angeben. In einigen der in den folgenden Abschnitten Sie die vollständige erstellen werden `School` Datenmodell durch Hinzufügen von Attributen auf Klassen Sie bereits erstellte, und erstellen neue Klassen, die für die verbleibenden Entitätstypen im Modell.
 
@@ -62,7 +75,7 @@ Können Sie die [DisplayFormat](https://msdn.microsoft.com/library/system.compon
 
 Bei Verwendung der `DataType` Attribut mit einem Datumsfeld müssen Sie angeben der `DisplayFormat` Attribut auch, um sicherzustellen, dass das Feld in Chrome-Browsern richtig gerendert wird. Weitere Informationen finden Sie unter [dieser Stack Overflow-Thread](http://stackoverflow.com/questions/12633471/mvc4-datatype-date-editorfor-wont-display-date-value-in-chrome-fine-in-ie).
 
-Weitere Informationen zum Umgang mit anderen Datumsformate in MVC finden Sie unter [Einführung in MVC-5: Überprüfen der Methoden bearbeiten und die Bearbeitungsansicht](../introduction/examining-the-edit-methods-and-edit-view.md) , und suchen Sie auf der Seite für &quot;Internationalisierung&quot;.
+Weitere Informationen zum Umgang mit anderen Datumsformate in MVC finden Sie unter [MVC 5-Einführung: Überprüfen der Methoden bearbeiten und die Bearbeitungsansicht](../introduction/examining-the-edit-methods-and-edit-view.md) , und suchen Sie auf der Seite für &quot;Internationalisierung&quot;.
 
 Führen Sie die Seite "Student" Index erneut aus, und beachten Sie, wie oft die Uhrzeit nicht mehr angezeigt werden. Dasselbe gilt für jede Ansicht, die verwendet werden die `Student` Modell.
 
@@ -96,9 +109,7 @@ Die `add-migration` Befehl erstellt eine Datei mit dem Namen  *&lt;Zeitstempel&g
 
 Der Zeitstempel mit dem Namen der Migrationsdatei vorangestellt wird von Entity Framework verwendet, um die Migrationen zu sortieren. Sie können mehrere livemigrationen vor dem Ausführen erstellen den `update-database` Befehl, und klicken Sie dann alle Migrationen werden angewendet, in der Reihenfolge, in dem sie erstellt wurden.
 
-Führen Sie die **erstellen** Seite, und geben Sie entweder ein, die mehr als 50 Zeichen. Wenn Sie auf **Erstellen** klicken, zeigt die clientseitige Validierung eine Fehlermeldung an.
-
-![Client-side Val-Fehler](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image3.png)
+Führen Sie die **erstellen** Seite, und geben Sie entweder ein, die mehr als 50 Zeichen. Beim Klicken auf **erstellen**, zeigt die clientseitige Validierung eine Fehlermeldung angezeigt: *Das Feld "LastName" muss eine Zeichenfolge mit einer maximalen Länge von 50.*
 
 ### <a name="the-column-attribute"></a>Column-Attribut
 
@@ -116,8 +127,6 @@ Das Hinzufügen der [Spaltenattribut](https://msdn.microsoft.com/library/system.
 
 In **Server-Explorer**öffnen die *für Schüler und Studenten* Tabellen-Designer durch Doppelklicken auf die *für Schüler und Studenten* Tabelle.
 
-![](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image4.png)
-
 Die folgende Abbildung zeigt den ursprünglichen Spaltennamen an, wie es war, bevor Sie die ersten beiden Migrationen angewendet. Zusätzlich zu den Namen der Spalte ändern von `FirstMidName` zu `FirstName`, die zwei Namensspalten von geändert haben `MAX` auf 50 Zeichen.
 
 ![](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image5.png)
@@ -127,10 +136,7 @@ Sie können auch Änderungen vornehmen, Datenbank Zuordnung mithilfe der [Fluent
 > [!NOTE]
 > Wenn Sie vor dem Erstellen aller Entitätsklassen in den folgenden Abschnitten versuchen, zu kompilieren, werden möglicherweise Compilerfehler angezeigt.
 
-
-## <a name="complete-changes-to-the-student-entity"></a>Nehmen Sie Änderungen vor, um die Entität "Student"
-
-![Student_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image6.png)
+## <a name="update-student-entity"></a>Aktualisieren der Entität "Student"
 
 In *Models\Student.cs*, ersetzen Sie den Code, die Sie hinzugefügt haben weiter oben durch den folgenden Code. Die Änderungen werden hervorgehoben.
 
@@ -150,9 +156,7 @@ Das `Display`-Attribut gibt an, dass die Beschriftung der Textfelder in jeder In
 
 Bei `FullName` handelt es sich um eine berechnete Eigenschaft, die einen Wert zurückgibt, der durch das Verketten von zwei weiteren Eigenschaften erstellt wird. Aus diesem Grund ist es nur eine `get` Accessor, und keine `FullName` Spalte in der Datenbank generiert werden.
 
-## <a name="create-the-instructor-entity"></a>Erstellen der Instructor-Entität
-
-![Instructor_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image7.png)
+## <a name="create-instructor-entity"></a>Erstellen der Entität "Instructor"
 
 Erstellen Sie *Models\Instructor.cs*, und Ersetzen Sie den Vorlagencode durch den folgenden Code:
 
@@ -176,9 +180,7 @@ Unsere Geschäftsregeln Status ein Dozenten haben nur maximal ein Büro, also `O
 
 [!code-csharp[Main](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/samples/sample12.cs)]
 
-## <a name="create-the-officeassignment-entity"></a>Erstellen der Entität "OfficeAssignment"
-
-![OfficeAssignment_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image8.png)
+## <a name="create-officeassignment-entity"></a>Erstellen der Entität "OfficeAssignment"
 
 Erstellen Sie *Models\OfficeAssignment.cs* durch den folgenden Code:
 
@@ -208,9 +210,7 @@ Die `Instructor` Entität verfügt über eine auf NULL festlegbare `OfficeAssign
 
 Sie platzieren konnte eine `[Required]` Attribut für die Navigationseigenschaft "Instructor", um anzugeben, dass ein zugehöriger Dozent vorhanden sein muss, aber Sie müssen dies tun, da der Fremdschlüssel InstructorID (entspricht auch der Schlüssel für diese Tabelle) nicht auf NULL festlegbare ist.
 
-## <a name="modify-the-course-entity"></a>Ändern der Entität „Course“
-
-![Course_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image9.png)
+## <a name="modify-the-course-entity"></a>Ändern Sie die Entität "Course"
 
 In *Models\Course.cs*, ersetzen Sie den Code, die Sie hinzugefügt haben weiter oben durch den folgenden Code:
 
@@ -240,9 +240,7 @@ Die Fremdschlüssel- und Navigationseigenschaften in der `Course` Entität stell
 
     [!code-csharp[Main](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/samples/sample19.cs)]
 
-## <a name="create-the-department-entity"></a>Erstellen der Entität "Department"
-
-![Department_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image10.png)
+## <a name="create-the-department-entity"></a>Erstellen der Entität „Department“
 
 Erstellen Sie *Models\Department.cs* durch den folgenden Code:
 
@@ -268,14 +266,11 @@ Die Fremdschlüssel- und Navigationseigenschaften stellen folgende Beziehungen d
     [!code-csharp[Main](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/samples/sample23.cs)]
 
   > [!NOTE]
-  > Gemäß der Konvention aktiviert Entity Framework das kaskadierende Delete für nicht auf NULL festlegbare Fremdschlüssel und für m:n-Beziehungen. Dies kann zu zirkulären Regeln für kaskadierende Deletes führen, wodurch eine Ausnahme ausgelöst wird, wenn Sie versuchen, eine Migration hinzuzufügen. Angenommen, Sie definieren nicht die `Department.InstructorID` Eigenschaft als NULL-Werte zulässt, erhalten Sie die folgende Ausnahmemeldung: "die referenzielle Beziehung ergibt einen zyklischen Verweis, der nicht zulässig ist." Wenn Ihre Geschäftsregeln erfordern `InstructorID` Eigenschaft nicht NULL-Werte zulässt, müssen Sie folgende fluent-API-Anweisung verwenden, um kaskadierende DELETES für die Beziehung zu deaktivieren:
+  > Gemäß der Konvention aktiviert Entity Framework das kaskadierende Delete für nicht auf NULL festlegbare Fremdschlüssel und für m:n-Beziehungen. Dies kann zu zirkulären Regeln für kaskadierende Deletes führen, wodurch eine Ausnahme ausgelöst wird, wenn Sie versuchen, eine Migration hinzuzufügen. Wenn Sie nicht definieren, z. B. die `Department.InstructorID` Eigenschaft als NULL-Werte zulässt, erhalten Sie die folgende Ausnahmemeldung: "Referenzielle Beziehung führt zu einer zyklischen Verweis, der nicht zulässig ist." Wenn Ihre Geschäftsregeln erfordern `InstructorID` Eigenschaft nicht NULL-Werte zulässt, müssen Sie folgende fluent-API-Anweisung verwenden, um kaskadierende DELETES für die Beziehung zu deaktivieren:
 
 [!code-csharp[Main](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/samples/sample24.cs)]
 
-
-## <a name="modify-the-enrollment-entity"></a>Ändern Sie die Entität "Enrollment"
-
-![Enrollment_entity](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image11.png)
+## <a name="modify-the-enrollment-entity"></a>Ändern der Entität „Enrollment“
 
  In *Models\Enrollment.cs*, ersetzen Sie den Code, die Sie hinzugefügt haben weiter oben durch den folgenden Code
 
@@ -298,29 +293,29 @@ Besteht eine m: n Beziehung zwischen der `Student` und `Course` Entitäten, und 
 
 Die folgende Abbildung stellt dar, wie diese Beziehungen in einem Entitätsdiagramm aussehen. (Dieses Diagramm wurde mithilfe von generiert die [Entity Framework Power Tools](https://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d), erstellen das Diagramm ist nicht Teil des Tutorials wird nur verwendet wird hier als anschauliches Beispiel.)
 
-![Student Course_many, many_relationship](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image12.png)
+!["Student" Course_many zu many_relationship](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image12.png)
 
 Jede Beziehung weist eine 1 an einem Ende und ein Sternchen (\*), der am anderen, die angibt, einer 1: n Beziehung.
 
 Wenn die `Enrollment` Tabelle nicht auf Unternehmensniveau Informationen enthalten, müssen sie nur die beiden Fremdschlüssel enthalten `CourseID` und `StudentID`. In diesem Fall würde es entsprechen einer m: n Jointabelle *ohne Nutzlast* (oder ein *reine Jointabelle*) in der Datenbank, und Sie hätten eine Modellklasse überhaupt zu erstellen. Die `Instructor` und `Course` Entitäten verfügen über diese Art von m: n Beziehung, und wie Sie sehen können, es ist keine Entitätsklasse zwischen ihnen:
 
-![Kursleiter Course_many zu many_relationship](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image13.png)
+!["Instructor" Course_many zu many_relationship](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image13.png)
 
 Eine Jointabelle ist jedoch in der Datenbank erforderlich, wie im folgenden Diagramm dargestellt:
 
-![Kursleiter Course_many zu many_relationship_tables](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image14.png)
+!["Instructor" Course_many zu many_relationship_tables](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image14.png)
 
 Das Entity Framework erstellt automatisch die `CourseInstructor` Tabelle, und Sie lesen und aktualisieren sie indirekt durch Lesen und Aktualisieren der `Instructor.Courses` und `Course.Instructors` Navigationseigenschaften.
 
-## <a name="entity-diagram-showing-relationships"></a>Entitätsdiagramm mit angezeigten Beziehungen
+## <a name="entity-relationship-diagram"></a>Entitätsbeziehungsdiagramm
 
 Die folgende Abbildung stellt das Diagramm dar, das von Entity Framework Power Tools für das vollständige Modell „School“ erstellt wird.
 
-![School_data_model_diagram](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image15.png)
+![School_data_model_diagram](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image1.png)
 
 Neben den Zeilen der m: n Beziehung (\* zu \*) und die Beziehungslinien für 1: n (1 bis \*), sehen Sie die Zeile 1-0 (null)-oder-1-Beziehung (1 zu 0.. 1) zwischen den `Instructor` und `OfficeAssignment` Entitäten und 0 (null)-oder-1-n-Beziehung (0.. 1: \*) zwischen den Entitäten "Instructor" und Abteilung.
 
-## <a name="customize-the-data-model-by-adding-code-to-the-database-context"></a>Anpassen des Datenmodells durch Hinzufügen von Code zum Kontext Datenbank
+## <a name="add-code-to-database-context"></a>Fügen Sie Code hinzu, um den Datenbankkontext
 
 Als Nächstes fügen Sie die neuen Entitäten, die die `SchoolContext` Klasse, und passen Sie die Zuordnung mithilfe einiger [fluent-API](https://msdn.microsoft.com/data/jj591617) aufrufen. Die API ist "fluent", da sie häufig verwendet wird, durch das Verketten mehrerer Methodenaufrufe zu einer einzelnen Anweisung, wie im folgenden Beispiel gezeigt:
 
@@ -346,7 +341,7 @@ Der folgende Code bietet ein Beispiel, wie Sie fluent-API anstelle von Attribute
 
 Weitere Informationen dazu, was hinter den Kulissen "fluent-API"-Anweisungen ausführen, finden Sie unter den [Fluent-API](https://blogs.msdn.com/b/aspnetue/archive/2011/05/04/entity-framework-code-first-tutorial-supplement-what-is-going-on-in-a-fluent-api-call.aspx) Blogbeitrag.
 
-## <a name="seed-the-database-with-test-data"></a>Ausführen eines Seedings für die Datenbank mit Testdaten
+## <a name="seed-database-with-test-data"></a>SEED-Datenbank mit Testdaten
 
 Ersetzen Sie den Code in die *migrations\configuration. cs* -Datei mit den folgenden Code, um startwertdaten für neuen Entitäten zu gewährleisten, Sie erstellt haben.
 
@@ -358,7 +353,7 @@ Im ersten Tutorial haben Sie gesehen, die meisten dieser Code einfach aktualisie
 
 Bei der Erstellung einer `Course` Objekt, initialisieren Sie die `Instructors` Navigationseigenschaft als eine leere Auflistung, die mit dem Code `Instructors = new List<Instructor>()`. Dadurch wird es möglich, `Instructor` Entitäten, die auf diese beziehen `Course` mithilfe der `Instructors.Add` Methode. Wenn Sie eine leere Liste erstellt haben, Sie wäre nicht hinzufügen, diese Beziehungen, da die `Instructors` Eigenschaft würde nicht null und nicht ausreichen würde eine `Add` Methode. Sie können auch die List-Initialisierung an den Konstruktor hinzufügen.
 
-## <a name="add-a-migration-and-update-the-database"></a>Eine Migration hinzufügen und Aktualisieren der Datenbank
+## <a name="add-a-migration"></a>Hinzufügen einer Migration
 
 Geben Sie in der PMC die `add-migration` Befehl (nicht die `update-database` noch Befehl):
 
@@ -376,6 +371,8 @@ Bearbeiten der &lt; *Zeitstempel&gt;\_ComplexDataModel.cs* -Datei, kommentieren 
 
 Wenn die `Seed` Methode ausgeführt wird, es fügt Zeilen in der `Department` Tabelle, und es werden vorhandene beziehen `Course` Zeilen in diese neue `Department` Zeilen. Wenn Sie Kurse in der Benutzeroberfläche hinzugefügt haben, klicken Sie dann nicht mehr benötigen Sie die Abteilung "Temp" oder den Standardwert für die `Course.DepartmentID` Spalte. Damit wird die Möglichkeit, dass eine Person Kurse hinzugefügt haben, mit der Anwendung, Sie würden auch aktualisieren möchten die `Seed` Methodencode, um sicherzustellen, dass alle `Course` Zeilen (nicht nur diejenigen, die von früheren Ausführungen eingefügt wurden die `Seed` Methode) haben gültige `DepartmentID` Werte vor dem Entfernen der Standardwert aus der Spalte Wert, und löschen Sie die Abteilung "Temp".
 
+## <a name="update-the-database"></a>Aktualisieren der Datenbank
+
 Nach dem Bearbeiten der &lt; *Zeitstempel&gt;\_ComplexDataModel.cs* Datei, geben Sie die `update-database` Befehl in der PMC die Migration ausgeführt.
 
 [!code-powershell[Main](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/samples/sample35.ps1)]
@@ -391,7 +388,6 @@ Nach dem Bearbeiten der &lt; *Zeitstempel&gt;\_ComplexDataModel.cs* Datei, geben
 >
 > `update-database -TargetMigration:0`
 
-
 Öffnen Sie die Datenbank in **Server-Explorer** wie zuvor, und erweitern Sie die **Tabellen** Knoten aus, um zu sehen, dass alle Tabellen erstellt wurden. (Falls noch **Server-Explorer** immer zu öffnen, klicken Sie auf die **aktualisieren** Schaltfläche.)
 
 ![](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image16.png)
@@ -402,14 +398,28 @@ Mit der rechten Maustaste die `CourseInstructor` Tabelle, und wählen Sie **Tabe
 
 ![Table_data_in_CourseInstructor_table](creating-a-more-complex-data-model-for-an-asp-net-mvc-application/_static/image17.png)
 
-## <a name="summary"></a>Zusammenfassung
-
-Sie besitzen nun ein komplexeres Datenmodell und eine zugehörige Datenbank. Im folgenden Tutorial erfahren Sie mehr über verschiedene Möglichkeiten zum Zugriff auf verwandte Daten.
-
-Lassen Sie Feedback auf, wie Sie in diesem Tutorial gefallen hat und was wir verbessern können.
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Links zu anderen Ressourcen des Entity Framework finden Sie in der [ASP.NET-Datenzugriff – empfohlene Ressourcen](../../../../whitepapers/aspnet-data-access-content-map.md).
 
-> [!div class="step-by-step"]
-> [Zurück](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application.md)
-> [Weiter](reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application.md)
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Das Datenmodell angepasst
+> * Aktualisierte Student-Entität
+> * Erstellte Instructor-Entität
+> * Erstellte OfficeAssignment-Entität
+> * Die Entität "Course" geändert
+> * Erstellt die Entität "Department"
+> * Die Entität "Enrollment" geändert
+> * Code hinzugefügt, der Datenbankkontext
+> * Per Seeding hinzugefügten Datenbank mit Testdaten
+> * Eine Migration hinzugefügt
+> * Die Datenbank aktualisiert wurde
+
+Wechseln Sie zum nächsten Artikel erfahren Sie, wie zum Lesen und Anzeigen von verknüpften Daten, die das Entity Framework in Navigationseigenschaften lädt.
+
+> [!div class="nextstepaction"]
+> [Lesen relevanter Daten](reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application.md)
