@@ -4,20 +4,20 @@ author: rick-anderson
 description: Dieses Tutorial veranschaulicht, wie Sie eine ASP.NET Core 2.x-App mithilfe von OAuth 2.0 und externen Authentifizierungsanbietern entwickeln.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/11/2018
+ms.date: 1/19/2019
 uid: security/authentication/social/index
-ms.openlocfilehash: 063d452fb6ab91b712ade7f7b7ed99823dbdc657
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 48dd8b772234ff18158423a36ed1716102bc2f31
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098817"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54396141"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 
 Von [Valeriy Novytskyy](https://github.com/01binary) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Dieses Tutorial veranschaulicht, wie Sie eine ASP.NET Core 2.x-App erstellen, die Benutzern ermöglicht, sich mithilfe von OAuth 2.0 und Anmeldeinformationen von externen Authentifizierungsanbietern anzumelden.
+In diesem Tutorial wird veranschaulicht, wie Sie eine ASP.NET Core 2.2-App erstellen, mit der Benutzer sich mithilfe von OAuth 2.0 und Anmeldeinformationen von externen Authentifizierungsanbietern anmelden können.
 
 Die Anbieter [Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins) und [Microsoft](xref:security/authentication/microsoft-logins) werden in den folgenden Abschnitten behandelt. Andere Anbieter stehen in Paketen von Drittanbietern wie z.B. [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) und [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) zur Verfügung.
 
@@ -30,29 +30,13 @@ Den Benutzern zu ermöglichen, sich mit ihren vorhandenen Anmeldeinformationen a
 * Erstellen Sie in Visual Studio 2017 ein neues Projekt auf der Startseite oder über **Date** > **Neu** > **Projekt**.
 
 * Wählen Sie die Vorlage **ASP.NET Core-Webanwendung** aus, die in der Kategorie **Visual C#** > **.NET Core** verfügbar ist:
-
-![Dialogfeld "Neues Projekt"](index/_static/new-project.png)
-
-* Tippen Sie auf **Webanwendung**, und vergewissern Sie sich, dass **Authentifizierung** auf **Einzelne Benutzerkonten** festgelegt ist:
-
-![Dialogfeld „Neue Webanwendung“](index/_static/select-project.png)
-
-Hinweis: Dieses Tutorial bezieht sich auf die ASP.NET Core 2.0 SDK-Version, die oben im Assistenten ausgewählt werden kann.
+* Klicken Sie auf **Authentifizierung ändern**, und legen Sie die Authentifizierung auf **Einzelne Benutzerkonten** fest.
 
 ## <a name="apply-migrations"></a>Anwenden von Migrationen
 
-* Führen Sie die App aus, und klicken Sie auf den Link **Anmelden**.
-* Klicken Sie auf den Link **Als neuer Benutzer registrieren**.
+* Führen Sie die App aus, und klicken Sie auf den Link **Registrieren**.
 * Geben Sie die E-Mail-Adresse und das Kennwort für das neue Konto ein, und wählen Sie dann **Registrieren** aus.
 * Befolgen Sie die Anweisungen zum Anwenden von Migrationen.
-
-## <a name="require-https"></a>Erforderlichkeit von HTTPS
-
-OAuth 2.0 erfordert die Verwendung von SSL/TLS für die Authentifizierung über das HTTPS-Protokoll.
-
-Projekte, die mithilfe der Projektvorlagen **Webanwendung** oder **Web-API** mit ASP.NET Core 2.1 oder höher erstellt wurden, werden automatisch zur Aktivierung von HTTPS konfiguriert. Die App wird mit einem sicheren Standardendpunkt gestartet, wenn die Option **Einzelne Benutzerkonten** im Dialogfeld **Authentifizierung ändern** des Projekt-Assistenten ausgewählt ist.
-
-Weitere Informationen finden Sie unter <xref:security/enforcing-ssl>.
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
@@ -83,11 +67,11 @@ Wenn Sie sich bei einem externen Anmeldeanbieter registrieren, wird kein Kennwor
 
 So erstellen Sie ein Kennwort und melden sich mithilfe Ihrer E-Mail-Adresse an, die Sie während des Anmeldevorgangs bei externen Anbietern festgelegt haben:
 
-* Tippen Sie rechts oben auf den Link **Hallo &lt;E-Mail-Alias&gt;**, um zur Ansicht **Verwalten** zu gelangen.
+* Klicken Sie rechts oben auf den Link **Hallo &lt;E-Mail-Alias&gt;**, um zur Ansicht **Verwalten** zu gelangen.
 
 ![Ansicht „Verwalten“ der Webanwendung](index/_static/pass1a.png)
 
-* Tippen Sie auf **Erstellen**.
+* Klicken Sie auf **Erstellen**.
 
 ![Seite zum Festlegen Ihres Kennworts](index/_static/pass2a.png)
 
