@@ -1,38 +1,43 @@
 ---
 uid: mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application
-title: Verarbeiten von Parallelität bei Entitätsframework 6 in ASP.NET MVC 5-Anwendungen (10 von 12) | Microsoft-Dokumentation
+title: 'Tutorial: Behandeln der Parallelität in EF in einer ASP.NET MVC 5-app'
+description: In diesem Tutorial veranschaulicht das vollständigen Parallelität verwendet, um Konflikte zu behandeln, wenn mehrere Benutzer dieselbe Entität gleichzeitig aktualisieren.
 author: tdykstra
-description: Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET MVC 5-Anwendungen, die mit dem Entity Framework 6 Code First "und" Visual Studio...
 ms.author: riande
-ms.date: 12/08/2014
+ms.date: 01/21/2019
+ms.topic: tutorial
 ms.assetid: be0c098a-1fb2-457e-b815-ddca601afc65
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 22fd6bc92aa0d516e1bfeb5aa6a67d7246d977ac
-ms.sourcegitcommit: a4dcca4f1cb81227c5ed3c92dc0e28be6e99447b
+ms.openlocfilehash: b77b8d6f952472f4d3030f54665f970b8ace2caf
+ms.sourcegitcommit: 728f4e47be91e1c87bb7c0041734191b5f5c6da3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/10/2018
-ms.locfileid: "48913254"
+ms.lasthandoff: 01/22/2019
+ms.locfileid: "54444180"
 ---
-<a name="handling-concurrency-with-the-entity-framework-6-in-an-aspnet-mvc-5-application-10-of-12"></a>Verarbeiten von Parallelität bei Entitätsframework 6 in ASP.NET MVC 5-Anwendungen (10 von 12)
-====================
-durch [Tom Dykstra](https://github.com/tdykstra)
+# <a name="tutorial-handle-concurrency-with-ef-in-an-aspnet-mvc-5-app"></a>Tutorial: Behandeln der Parallelität in EF in einer ASP.NET MVC 5-app
 
-[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
+In den vorherigen Tutorials haben Sie gelernt, wie Daten zu aktualisieren. In diesem Tutorial veranschaulicht das vollständigen Parallelität verwendet, um Konflikte zu behandeln, wenn mehrere Benutzer dieselbe Entität gleichzeitig aktualisieren. Sie ändern die Webseiten, die Arbeit mit der `Department` Entität, damit sie Parallelitätsfehler behandeln. In der nachfolgenden Abbildung sehen Sie die Seiten „Bearbeiten“ und „Löschen“, einschließlich einiger Meldungen, die angezeigt werden, wenn ein Parallelitätskonflikt auftritt.
 
-> Contoso University Beispiel Web-Anwendung veranschaulicht, wie ASP.NET MVC 5 mit dem Entity Framework 6 Code First Visual Studio erstellt. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](creating-an-entity-framework-data-model-for-an-asp-net-mvc-application.md).
+![Department_Edit_page_2_after_clicking_Save](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image10.png)
 
+![Department_Edit_page_2_after_clicking_Save](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image15.png)
 
-In den vorherigen Tutorials haben Sie gelernt, wie Daten zu aktualisieren. In diesem Tutorial wird gezeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren.
+In diesem Tutorial:
 
-Ändern Sie die Webseiten, die Arbeit mit der `Department` Entität, damit sie Parallelitätsfehler behandeln. Die folgenden Abbildungen zeigen die Seiten Index und löschen, einschließlich einiger Meldungen, die angezeigt werden, wenn ein Parallelitätskonflikt auftritt.
+> [!div class="checklist"]
+> * Erfahren Sie mehr über Parallelitätskonflikte
+> * Hinzufügen der vollständigen Parallelität
+> * Ändern des abteilungscontrollers
+> * Test-Parallelitätsbehandlung
+> * Aktualisieren der Seite „Delete“ (Löschen)
 
-![Department_Index_page_before_edits](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image1.png)
+## <a name="prerequisites"></a>Vorraussetzungen
 
-![Department_Edit_page_2_after_clicking_Save](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image2.png)
+* [Asynchrone und gespeicherte Prozeduren](async-and-stored-procedures-with-the-entity-framework-in-an-asp-net-mvc-application.md)
 
-## <a name="concurrency-conflicts"></a>Parallelitätskonflikte
+## <a name="concurrency-conflicts"></a>Nebenläufigkeitskonflikte
 
 Ein Parallelitätskonflikt tritt auf, wenn ein Benutzer die Daten einer Entität anzeigt, um diese zu bearbeiten, und ein anderer Benutzer eben diese Entitätsdaten aktualisiert, bevor die Änderungen des ersten Benutzers in die Datenbank geschrieben wurden. Wenn Sie die Erkennung solcher Konflikte nicht aktivieren, überschreibt das letzte Update der Datenbank die Änderungen des anderen Benutzers. In vielen Anwendungen ist dieses Risiko akzeptabel: Wenn es nur wenige Benutzer bzw. wenige Updates gibt, oder wenn es nicht schlimm ist, dass Änderungen überschrieben werden können, ist es den Aufwand, für die Parallelität zu programmieren, möglicherweise nicht wert. In diesem Fall müssen Sie für die Anwendung keine Behandlung von Nebenläufigkeitskonflikten konfigurieren.
 
@@ -46,13 +51,9 @@ Das Verwalten von Sperren hat Nachteile. Es kann komplex sein, sie zu programmie
 
 Die Alternative zur pessimistischen Parallelität ist *optimistische Parallelität*. Die Verwendung der optimistischen Parallelität bedeutet, Nebenläufigkeitskonflikte zu erlauben und entsprechend zu reagieren, wenn diese auftreten. Beispielsweise führt er die Seite Abteilungen zu bearbeiten, Änderungen der **Budget** Menge für die englische Abteilung von $350.000,00 in $0,00.
 
-![Changing_English_dept_budget_to_100000](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image3.png)
-
 Bevor John klickt **speichern**, Andrea führt den gleichen Seite und ändert die **Startdatum** Feld 9/1/2007, 8/8/2013.
 
-![Changing_English_dept_start_date_to_1999](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image4.png)
-
-John klickt **speichern** zuerst und erkennt, die seine ändern, wenn der Browser die Indexseite, klicken Sie dann Jane gibt klickt **speichern**. Was daraufhin geschieht, ist abhängig davon, wie Sie Nebenläufigkeitskonflikte behandeln. Einige der Optionen schließen Folgendes ein:
+John klickt **speichern** zuerst und erkennt, die seine ändern, wenn der Browser die Indexseite, klicken Sie dann Jane gibt klickt **speichern**. Was daraufhin geschieht ist abhängig davon, wie Sie Nebenläufigkeitskonflikte handhaben. Einige der Optionen schließen Folgendes ein:
 
 - Sie können nachverfolgen, welche Eigenschaft ein Benutzer geändert hat und nur die entsprechenden Spalten in der Datenbank aktualisieren. Im Beispielszenario würden keine Daten verloren gehen, da verschiedene Eigenschaften von zwei Benutzern aktualisiert wurden. Das nächste Mal eine Person den englischen Fachbereich durchsucht, die sie erhalten sowohl Johns und Jane die Änderungen, ein Datum von vor 8/8/2013 sowie ein Budget von 0 Dollar.
 
@@ -75,7 +76,7 @@ Sie können Konflikte auflösen, durch behandeln [OptimisticConcurrencyException
 
 Im weiteren Verlauf dieses Tutorials fügen Sie eine [Rowversion](https://msdn.microsoft.com/library/ms182776(v=sql.110).aspx) tracking-Eigenschaft, um die `Department` Entität, einen Controller und Ansichten zu erstellen und testen, um sicherzustellen, dass alles ordnungsgemäß funktioniert.
 
-## <a name="add-an-optimistic-concurrency-property-to-the-department-entity"></a>Fügen Sie eine vollständige Parallelität-Eigenschaft auf die Entität "Department"
+## <a name="add-optimistic-concurrency"></a>Hinzufügen der vollständigen Parallelität
 
 In *Models\Department.cs*, Hinzufügen einer Nachverfolgungseigenschaft namens `RowVersion`:
 
@@ -91,7 +92,7 @@ Durch das Hinzufügen einer Eigenschaft ändern Sie das Datenbankmodell, daher m
 
 [!code-console[Main](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample3.cmd)]
 
-## <a name="modify-the-department-controller"></a>Ändern des Abteilungscontrollers
+## <a name="modify-department-controller"></a>Ändern des abteilungscontrollers
 
 In *Controllers\DepartmentController.cs*, Hinzufügen einer `using` Anweisung:
 
@@ -135,37 +136,23 @@ In *Views\Department\Edit.cshtml*, fügen Sie ein ausgeblendetes Feld zum Speich
 
 [!code-cshtml[Main](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample12.cshtml?highlight=18)]
 
-## <a name="testing-optimistic-concurrency-handling"></a>Testen der Behandlung von Parallelität
+## <a name="test-concurrency-handling"></a>Test-Parallelitätsbehandlung
 
-Führen Sie die Website, und klicken Sie auf **Abteilungen**:
-
-![Department_Index_page_before_edits](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image5.png)
+Führen Sie die Website, und klicken Sie auf **Abteilungen**.
 
 Klicken Sie mit der rechten Maustaste auf die **bearbeiten** Link für den englischen Fachbereich, und wählen **in neuer Registerkarte öffnen** klicken Sie dann auf die **bearbeiten** Link für die englische Abteilung. Die beiden Registerkarten werden dieselben Informationen angezeigt.
 
-![Department_Edit_page_before_changes](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image6.png)
-
 Ändern Sie ein Feld in der ersten Registerkarte, und klicken Sie auf **Speichern**.
-
-![Department_Edit_page_1_after_change](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image7.png)
 
 Der Browser zeigt die Indexseite mit dem geänderten Wert an.
 
-![Departments_Index_page_after_first_budget_edit](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image8.png)
-
-Ändern Sie ein Feld in der zweiten Registerkarte, und klicken Sie auf **speichern**.
-
-![Department_Edit_page_2_after_change](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image9.png)
-
-Klicken Sie auf **speichern** in der zweiten Registerkarte. Folgende Fehlermeldung wird angezeigt:
+Ändern Sie ein Feld in der zweiten Registerkarte, und klicken Sie auf **speichern**. Folgende Fehlermeldung wird angezeigt:
 
 ![Department_Edit_page_2_after_clicking_Save](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image10.png)
 
 Klicken Sie erneut auf **Speichern**. Der Wert, den Sie in der zweiten Registerkarte eingegeben haben, wird zusammen mit den ursprünglichen Wert der Daten gespeichert, die Sie in der ersten Browser geändert haben. Die gespeicherten Werte werden Ihnen auf der Indexseite angezeigt.
 
-![Department_Index_page_with_change_from_second_browser](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image11.png)
-
-## <a name="updating-the-delete-page"></a>Aktualisieren die Seite "löschen"
+## <a name="update-the-delete-page"></a>Aktualisieren der Seite „Delete“ (Löschen)
 
 Bei der Seite „Löschen“ entdeckt Entity Framework Nebenläufigkeitskonflikte, die durch die Bearbeitung einer Abteilung ausgelöst wurden, auf ähnliche Weise. Wenn die `HttpGet` `Delete` Methode bestätigungsansicht anzeigt, die Ansicht enthält die ursprüngliche `RowVersion` Wert in einem verborgenen Feld. Dieser Wert dann zur Verfügung, um wird die `HttpPost` `Delete` -Methode, die aufgerufen wird, wenn der Benutzer das Löschen bestätigt. Wenn Entity Framework erstellt SQL `DELETE` Befehl, er enthält eine `WHERE` Klausel mit dem ursprünglichen `RowVersion` Wert. Wenn die Ergebnisse des Befehls in 0 (null) Zeilen betroffen (d. h. die Zeile wurde geändert, nachdem die Bestätigungsseite "löschen" angezeigt wurde), wird eine Parallelitätsausnahme ausgelöst, und die `HttpGet Delete` Methode wird aufgerufen, mit dem Fehler Kennzeichen festgelegt `true` um Kostenoptionen der Bestätigungsseite mit einer Fehlermeldung. Es ist auch möglich, dass keine Zeilen betroffen sind, da die Zeile von einem anderen Benutzer gelöscht wurde, sodass in diesem Fall eine andere Fehlermeldung angezeigt wird.
 
@@ -209,17 +196,11 @@ Schließlich fügt sie ausgeblendete Felder für die `DepartmentID` und `RowVers
 
 Führen Sie die Indexseite "Abteilungen". Klicken Sie mit der rechten Maustaste auf die **löschen** Link für den englischen Fachbereich, und wählen **in neuer Registerkarte öffnen** klicken Sie dann in der ersten Registerkarte auf die **bearbeiten** Link für die englische Abteilung.
 
-Im ersten Fenster einen der Werte ändern, und klicken Sie auf **speichern** :
-
-![Department_Edit_page_after_change_before_delete](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image12.png)
+Im ersten Fenster einen der Werte ändern, und klicken Sie auf **speichern**.
 
 Die Indexseite wird die Änderung bestätigt.
 
-![Departments_Index_page_after_budget_edit_before_delete](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image13.png)
-
 Klicken Sie in der zweiten Registerkarte auf **Löschen**.
-
-![Department_Delete_confirmation_page_before_concurrency_error](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image14.png)
 
 Ihnen wird eine Fehlermeldung zur Parallelität angezeigt, und die Abteilungswerte werden mit den aktuellen Werten der Datenbank aktualisiert.
 
@@ -227,12 +208,27 @@ Ihnen wird eine Fehlermeldung zur Parallelität angezeigt, und die Abteilungswer
 
 Wenn Sie erneut auf **Löschen** klicken, werden Sie auf die Indexseite weitergeleitet, die anzeigt, dass die Abteilung gelöscht wurde.
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Damit ist die Einführung in die Behandlung von Nebenläufigkeitskonflikten abgeschlossen. Weitere Informationen über andere Möglichkeiten, verschiedene Szenarien zu behandeln, finden Sie unter [optimistische Parallelitätsmuster](https://msdn.microsoft.com/data/jj592904) und [arbeiten mit Eigenschaftswerten](https://msdn.microsoft.com/data/jj592677) auf MSDN. Das nächste Tutorial zeigt, wie Sie Tabelle pro Hierarchie-Vererbung für implementieren die `Instructor` und `Student` Entitäten.
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Links zu anderen Ressourcen des Entity Framework finden Sie in der [ASP.NET-Datenzugriff – empfohlene Ressourcen](../../../../whitepapers/aspnet-data-access-content-map.md).
 
-> [!div class="step-by-step"]
-> [Zurück](async-and-stored-procedures-with-the-entity-framework-in-an-asp-net-mvc-application.md)
-> [Weiter](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application.md)
+Weitere Informationen über andere Möglichkeiten, verschiedene Szenarien zu behandeln, finden Sie unter [optimistische Parallelitätsmuster](https://msdn.microsoft.com/data/jj592904) und [arbeiten mit Eigenschaftswerten](https://msdn.microsoft.com/data/jj592677) auf MSDN. Das nächste Tutorial zeigt, wie Sie Tabelle pro Hierarchie-Vererbung für implementieren die `Instructor` und `Student` Entitäten.
+
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Haben Informationen über Parallelitätskonflikte
+> * Hinzugefügte optimistische Parallelität
+> * Geänderte abteilungscontrollers
+> * Getestete Parallelitätsbehandlung
+> * Aktualisiert die Seite "löschen"
+
+Wechseln Sie zum nächsten Artikel erfahren, wie Sie Vererbung in das Datenmodell zu implementieren.
+> [!div class="nextstepaction"]
+> [Implementieren der Vererbung im Datenmodell](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application.md)

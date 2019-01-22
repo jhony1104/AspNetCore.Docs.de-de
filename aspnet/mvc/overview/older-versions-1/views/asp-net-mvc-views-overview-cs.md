@@ -8,12 +8,12 @@ ms.date: 02/16/2008
 ms.assetid: 152ab1e5-aec2-4ea7-b8cc-27a24dd9acb8
 msc.legacyurl: /mvc/overview/older-versions-1/views/asp-net-mvc-views-overview-cs
 msc.type: authoredcontent
-ms.openlocfilehash: ac47caa46d93c6157926f1c9b5112555fae4f8f5
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: a8e64a99549584f150d64d909ac97210257b1147
+ms.sourcegitcommit: 728f4e47be91e1c87bb7c0041734191b5f5c6da3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41834417"
+ms.lasthandoff: 01/22/2019
+ms.locfileid: "54444128"
 ---
 <a name="aspnet-mvc-views-overview-c"></a>ASP.NET MVC-Ansichten – Übersicht (c#)
 ====================
@@ -28,7 +28,7 @@ Der Zweck dieses Lernprogramms ist eine kurze Einführung in ASP.NET MVC-Ansicht
 
 Für ASP.NET oder Active Server Pages enthält ASP.NET MVC nicht alles, der direkt auf eine Seite entspricht. In einer ASP.NET MVC-Anwendung besteht keine Seite auf dem Datenträger, der den Pfad in der URL entspricht, die Sie in die Adressleiste des Browsers eingeben. Am ehesten mit einer Seite in einer ASP.NET MVC-Anwendung ist etwas bezeichnet ein *Ansicht*.
 
-ASP.NET MVC-Controlleraktionen Anwendung, die eingehenden Browseranforderungen zugeordnet sind. Eine Controlleraktion kann es sich um eine Ansicht zurückgeben. Eine Controlleraktion kann jedoch eine andere Art von Aktion, z. B. umleiten Sie zu einer anderen Controlleraktion durchführen.
+In einer ASP.NET MVC-Anwendung werden die eingehenden Browseranforderungen zu Controlleraktionen zugeordnet. Eine Controlleraktion kann es sich um eine Ansicht zurückgeben. Eine Controlleraktion kann jedoch eine andere Art von Aktion, z. B. umleiten Sie zu einer anderen Controlleraktion durchführen.
 
 Codebeispiel 1 enthält einen einfachen Controller, mit dem Namen HomeController. HomeController macht zwei Controller-Aktionen, die mit dem Namen Index() und Details() verfügbar.
 
@@ -91,7 +91,7 @@ Da Sie so oft Response.Write() aufrufen, bietet Microsoft eine Verknüpfung zum 
 
 [!code-aspx[Main](asp-net-mvc-views-overview-cs/samples/sample3.aspx)]
 
-Sie können jeder verwenden, um dynamischen Inhalt in einer Ansicht zu generieren. Normalerweise wird Sie verwenden Visual Basic .NET oder C#-Controllern und Ansichten zu schreiben.
+Sie können jeder verwenden, um dynamischen Inhalt in einer Ansicht zu generieren. Normalerweise verwenden Sie entweder Visual Basic .NET oder C# , Controllern und Ansichten zu schreiben.
 
 ## <a name="using-html-helpers-to-generate-view-content"></a>Verwenden von HTML-Hilfsmethoden zum Generieren von Inhalt anzeigen
 
@@ -106,7 +106,7 @@ Bilden beispielsweise die Ansicht in Listing 4 nutzt drei HTML-Hilfsprogrammen �
 
 [![Das Dialogfeld "Neues Projekt"](asp-net-mvc-views-overview-cs/_static/image1.jpg)](asp-net-mvc-views-overview-cs/_static/image1.png)
 
-**Abbildung 01**: ein Anmeldeformular standard ([klicken Sie, um das Bild in voller Größe anzeigen](asp-net-mvc-views-overview-cs/_static/image2.png))
+**Abbildung 01**: Ein standard Anmeldeformular ([klicken Sie, um das Bild in voller Größe anzeigen](asp-net-mvc-views-overview-cs/_static/image2.png))
 
 
 Alle HTML-Hilfsprogramme Methoden werden in der Eigenschaft Html der Ansicht aufgerufen. Rendern Sie z. B. ein Textfeld durch Aufrufen der Html.TextBox()-Methode.
@@ -139,7 +139,7 @@ Die Ansicht im Codebeispiel 7 Ruft die Nachricht von den Daten ab und rendert di
 
 Beachten Sie, dass die Ansicht die Html.Encode() HTML-Hilfsmethode beim Rendern der Nachricht nutzt. Das HTML-Hilfsobjekt Html.Encode() codiert Sonderzeichen wie z. B. &lt; und &gt; in Zeichen, die sicher auf einer Webseite angezeigt werden. Wenn Sie Inhalt, die ein Benutzer auf einer Website sendet rendern, sollten Sie den Inhalt, der JavaScript-Injection-Angriffe zu verhindern, dass codieren.
 
-(Da wir die Nachricht selbst im ProductController erstellt haben, wir Raten t nicht unbedingt die Meldung zu codieren. Es ist jedoch ein sollte zur guten Gewohnheit, immer die Html.Encode()-Methode aufgerufen wird, bei der Anzeige von Inhalten aus der sichtdaten in einer Sicht abgerufen.)
+(Da wir die Nachricht selbst im ProductController erstellt haben, müssen wir unbedingt auf die Meldung zu codieren. Es ist jedoch ein sollte zur guten Gewohnheit, immer die Html.Encode()-Methode aufgerufen wird, bei der Anzeige von Inhalten aus der sichtdaten in einer Sicht abgerufen.)
 
 Auflisten von 7 haben wir nutzen Anzeigedaten, eine einfache Zeichenfolge-Nachricht anhand eines Controllers zu einer Ansicht zu übergeben. Sie können auch anzeigen von Daten verwenden, um andere Arten von Daten, z. B. eine Auflistung von Datenbank-Datensätzen von einem Controller an eine Ansicht zu übergeben. Beispielsweise sollten Sie den Inhalt der Datenbank Products-Tabelle in einer Sicht, zeigen Sie die Auflistung der Datenbank übergeben würde Datensätze in der Ansicht Daten.
 

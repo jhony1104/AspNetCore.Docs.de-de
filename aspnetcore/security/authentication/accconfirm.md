@@ -5,12 +5,12 @@ description: Informationen Sie zum Erstellen einer ASP.NET Core-app mit e-Mail-B
 ms.author: riande
 ms.date: 7/11/2018
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 4c2e62335bc7dd004829dbc2a8c1f62ea91f334f
-ms.sourcegitcommit: 4a6bbe84db24c2f3dd2de065de418fde952c8d40
+ms.openlocfilehash: 0dc9907f9f54c8a0daf2e05a3769897e5145935f
+ms.sourcegitcommit: 728f4e47be91e1c87bb7c0041734191b5f5c6da3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50253038"
+ms.lasthandoff: 01/22/2019
+ms.locfileid: "54444141"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Kontobestätigung und kennwortwiederherstellung in ASP.NET Core
 
@@ -253,6 +253,6 @@ Die beiden Konten wurden kombiniert. Sie können mit beiden Konto anmelden. Sie 
 Aktivierung kontobestätigung auf einer Website für Benutzer, alle vorhandenen Benutzer sperren. Vorhandene Benutzer werden gesperrt, da es sich bei ihrem Konto bestätigt werden nicht. Um vorhandene Benutzersperre zu umgehen, verwenden Sie einen der folgenden Ansätze:
 
 * Ändern der Datenbank markieren Sie alle vorhandenen Benutzer als bestätigt wird.
-* Bestätigen Sie die vorhandenen Benutzer. Z. B. Batch-Send-e-Mails mit Bestätigung Links.
+* Vergewissern Sie sich vorhandene Benutzer. Z. B. Batch-Send-e-Mails mit Bestätigung Links.
 
 ::: moniker-end

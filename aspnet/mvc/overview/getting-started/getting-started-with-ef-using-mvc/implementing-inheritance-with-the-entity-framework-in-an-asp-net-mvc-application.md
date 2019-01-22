@@ -1,34 +1,43 @@
 ---
 uid: mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application
-title: Implementieren der Vererbung mit dem Entitätsframework 6 in einer ASP.NET MVC 5-Anwendung (11 von 12) | Microsoft-Dokumentation
+title: 'Vorlage: Implementieren von Vererbung mit EF in einer ASP.NET MVC 5-appS'
+description: In diesem Tutorial erfahren Sie, wie Sie die Vererbung in das Datenmodell implementieren können.
 author: tdykstra
-description: Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET MVC 5-Anwendungen, die mit dem Entity Framework 6 Code First "und" Visual Studio...
 ms.author: riande
-ms.date: 11/07/2014
+ms.date: 01/21/2019
+ms.topic: tutorial
 ms.assetid: 08834147-77ec-454a-bb7a-d931d2a40dab
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 613494d58d7652f69a52241bcd3a7e896bc5407c
-ms.sourcegitcommit: a4dcca4f1cb81227c5ed3c92dc0e28be6e99447b
+ms.openlocfilehash: df8715e4416ce3ccdf1d9e380addcded553d85f8
+ms.sourcegitcommit: 728f4e47be91e1c87bb7c0041734191b5f5c6da3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/10/2018
-ms.locfileid: "48912701"
+ms.lasthandoff: 01/22/2019
+ms.locfileid: "54444284"
 ---
-<a name="implementing-inheritance-with-the-entity-framework-6-in-an-aspnet-mvc-5-application-11-of-12"></a>Implementieren der Vererbung mit dem Entitätsframework 6 in einer ASP.NET MVC 5-Anwendung (11 von 12)
-====================
-durch [Tom Dykstra](https://github.com/tdykstra)
-
-[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
-
-> Contoso University Beispiel Web-Anwendung veranschaulicht, wie ASP.NET MVC 5 mit dem Entity Framework 6 Code First Visual Studio erstellt. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](creating-an-entity-framework-data-model-for-an-asp-net-mvc-application.md).
-
+# <a name="template-implement-inheritance-with-ef-in-an-aspnet-mvc-5-app"></a>Vorlage: Implementieren von Vererbung mit EF in einer ASP.NET MVC 5-app
 
 Im vorherigen Tutorial haben Sie Parallelitätsausnahmen behandelt. In diesem Tutorial erfahren Sie, wie Sie die Vererbung in das Datenmodell implementieren können.
 
 In der objektorientierten Programmierung können Sie [Vererbung](http://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) zur Erleichterung [Wiederverwendung von code](http://en.wikipedia.org/wiki/Code_reuse). In diesem Tutorial ändern Sie die Klassen `Instructor` und `Student` so, dass sie von einer `Person`-Basisklasse abgeleitet werden, die Eigenschaften wie `LastName` enthält. Diese Eigenschaften sind für Dozenten und Studenten gängig. Sie fügen keine Webseiten hinzu oder ändern diese, aber Sie werden Teile des Codes ändern. Diese Änderungen werden automatisch in der Datenbank widergespiegelt.
 
-## <a name="options-for-mapping-inheritance-to-database-tables"></a>Optionen für die Zuordnung von Vererbung zu Datenbanktabellen
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Informationen Sie zum Zuordnen von Vererbung mit Datenbank
+> * Erstellen der Klasse „Person“
+> * Update "Instructor" und "Student"
+> * Person zum Modell hinzuzufügen.
+> * Erstellen und Aktualisieren von Migrationen
+> * Testen der Implementierung
+> * Bereitstellung in Azure
+
+## <a name="prerequisites"></a>Vorraussetzungen
+
+* [Implementieren von Vererbung](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application.md)
+
+## <a name="map-inheritance-to-database"></a>Zuordnen von Vererbung mit Datenbank
 
 Die `Instructor` und `Student` Klassen in der `School` Datenmodell besitzt mehrere Eigenschaften, die identisch sind:
 
@@ -46,7 +55,7 @@ Dieses Muster zum Generieren von eine Vererbungsstruktur für Entitäten aus ein
 
 Alternativ kann die Datenbank so gestaltet werden, dass sie mehr wie die Vererbungsstruktur aussieht. Angenommen, Sie verfügen über nur die Felder der `Person` Tabelle, und über separate `Instructor` und `Student` Tabellen mit den Feldern.
 
-![Tabelle-pro-type_inheritance](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image4.png)
+![Table-per-type_inheritance](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image4.png)
 
 Dieses Muster eine Datenbanktabelle zu machen, für jede Entitätsklasse aufgerufen *Tabelle pro Typ* (TPT)-Vererbung.
 
@@ -62,7 +71,9 @@ In der *Modelle* Ordner erstellen *Person.cs* , und Ersetzen Sie den Vorlagencod
 
 [!code-csharp[Main](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample1.cs)]
 
-## <a name="make-student-and-instructor-classes-inherit-from-person"></a>Veranlassen der Vererbung von der Klasse „Person“ an die Klassen „Student“ und „Instructor“
+## <a name="update-instructor-and-student"></a>Update "Instructor" und "Student"
+
+Jetzt aktualisieren, die *Instructor.cs* und *Sudent.cs* erben von Werten aus der *Person.sc*.
 
 In *Instructor.cs*, leiten die `Instructor` -Klasse aus der `Person` Klasse, und entfernen Sie die Schlüssel- und Namensfelder. Der Code sieht aus wie im folgenden Beispiel:
 
@@ -72,7 +83,7 @@ Nehmen Sie ähnliche Änderungen an *Student.cs*. Die `Student` Klasse wird wie 
 
 [!code-csharp[Main](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample3.cs)]
 
-## <a name="add-the-person-entity-type-to-the-model"></a>Den Typ der Person-Entität zum Modell hinzuzufügen.
+## <a name="add-person-to-the-model"></a>Person zum Modell hinzuzufügen.
 
 In *SchoolContext.cs*, Hinzufügen einer `DbSet` -Eigenschaft für die `Person` Entitätstyp:
 
@@ -80,7 +91,7 @@ In *SchoolContext.cs*, Hinzufügen einer `DbSet` -Eigenschaft für die `Person` 
 
 Das ist alles, was Entity Framework für die Konfiguration der „Tabelle pro Hierarchie“-Vererbung benötigt. Wie Sie sehen werden, wenn die Datenbank aktualisiert wird, müssen sie eine `Person` anstelle der Tabelle die `Student` und `Instructor` Tabellen.
 
-## <a name="create-and-update-a-migrations-file"></a>Erstellen Sie und aktualisieren Sie eine Migrationsdatei
+## <a name="create-and-update-migrations"></a>Erstellen und Aktualisieren von Migrationen
 
 Geben Sie in der Paket-Manager-Konsole (PMC) den folgenden Befehl ein:
 
@@ -121,18 +132,13 @@ Führen Sie die `update-database` -Befehl erneut aus.
 >
 > Mit einer neuen Datenbank, sind keine Daten zu migrieren, und die `update-database` Befehl ist sehr wahrscheinlich ohne Fehler abgeschlossen. Anweisungen dazu, wie Sie die Datenbank zu löschen, finden Sie unter [Gewusst wie: Löschen einer Datenbank in Visual Studio 2012](http://romiller.com/2013/05/17/how-to-drop-a-database-from-visual-studio-2012/). Wenn Sie diesen Ansatz verwenden, um dieses Lernprogramm fortsetzen, überspringen Sie den Bereitstellungsschritt am Ende dieses Tutorials bereitstellen Sie oder in eine neue Website und die Datenbank. Wenn Sie ein Update für denselben Standort, die, denen Sie bereits bereitstellen die Bereitstellung wurde haben, erhalten EF es den gleichen Fehler, wenn sie Migrationen automatisch ausgeführt wird. Wenn Sie einen Migrationen Fehler beheben möchten, ist die beste Ressource ein Entity Framework-Foren oder StackOverflow.com.
 
-
-## <a name="testing"></a>Test
+## <a name="test-the-implementation"></a>Testen der Implementierung
 
 Führen Sie die Website, und Testen Sie verschiedene Seiten. Alles funktioniert genauso wie vorher.
 
 In **Server-Explorer** erweitern **Daten Connections\SchoolContext** und dann **Tabellen**, und Sie sehen, dass die **für Schüler und Studenten** und **"Instructor"** Tabellen wurden durch ersetzt eine **Person** Tabelle. Erweitern Sie die **Person** Tabelle, und Sie finden Sie, dass sie alle Spalten, die verwendet werden hat, in der **für Schüler und Studenten** und **"Instructor"** Tabellen.
 
-![Server_Explorer_showing_Person_table](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image5.png)
-
 Klicken Sie mit der rechten Maustaste auf die Tabelle „Person“, und klicken Sie anschließend auf **Tabellendaten anzeigen**, um die Unterscheidungsspalte anzuzeigen.
-
-![](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image6.png)
 
 Das folgende Diagramm veranschaulicht die Struktur der neuen Datenbank "School":
 
@@ -144,22 +150,37 @@ In diesem Abschnitt müssen Sie das optionale haben **Bereitstellen der app für
 
 1. In Visual Studio mit der Maustaste des Projekts im **Projektmappen-Explorer** , und wählen Sie **veröffentlichen** aus dem Kontextmenü.
 
-    ![Veröffentlichen Sie im Kontextmenü "Projekt"](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image8.png)
 2. Klicken Sie auf **Veröffentlichen**.
 
-    ![publish](implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image9.png)
+    Die Web-app wird im Standardbrowser geöffnet.
 
-   Die Web-app wird im Standardbrowser geöffnet.
 3. Testen Sie die Anwendung, überprüfen Sie, ob es funktioniert.
 
     Beim ersten einer Seite ausführen, auf die Datenbank zugreift, Entity Framework führt alle Migrationen `Up` Methoden erforderlich, um die Datenbank mit dem aktuellen Datenmodell auf dem neuesten Stand zu bringen.
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie haben die „Tabelle pro Hierarchie“-Vererbung für die Klassen `Person`, `Student` und `Instructor` implementiert. Weitere Informationen zu diesen und anderen Strukturen Vererbung finden Sie unter [TPT-Vererbungsmuster](https://msdn.microsoft.com/data/jj618293) und [TPH-Vererbungsmuster](https://msdn.microsoft.com/data/jj618292) auf MSDN. Im nächsten Tutorial erfahren Sie, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Links zu anderen Ressourcen des Entity Framework finden Sie in der [ASP.NET-Datenzugriff – empfohlene Ressourcen](../../../../whitepapers/aspnet-data-access-content-map.md).
 
-> [!div class="step-by-step"]
-> [Zurück](handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application.md)
-> [Weiter](advanced-entity-framework-scenarios-for-an-mvc-web-application.md)
+Weitere Informationen zu diesen und anderen Strukturen Vererbung finden Sie unter [TPT-Vererbungsmuster](https://msdn.microsoft.com/data/jj618293) und [TPH-Vererbungsmuster](https://msdn.microsoft.com/data/jj618292) auf MSDN. Im nächsten Tutorial erfahren Sie, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Gelernt, wie Sie die Vererbung Datenbank zuordnen
+> * Erstellt die Person-Klasse
+> * Aktualisierte "Instructor" und "Student"
+> * Hinzugefügten Person auf das Modell
+> * Erstellt, und Aktualisieren von Migrationen
+> * Die Implementierung getestet
+> * In Azure bereitgestellt
+
+Wechseln Sie zum nächsten Artikel erfahren Sie mehr zu Themen, die zu beachten, wenn Sie die Grundlagen der Entwicklung von ASP.NET Web-Anwendungen, die Entity Framework Code First verwenden hinausgehen hilfreich sind.
+> [!div class="nextstepaction"]
+> [Erweiterte Entity Framework-Szenarien](advanced-entity-framework-scenarios-for-an-mvc-web-application.md)
