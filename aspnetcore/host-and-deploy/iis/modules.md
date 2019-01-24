@@ -4,14 +4,14 @@ author: guardrex
 description: Lernen Sie aktive und inaktive IIS-Module für ASP.NET Core-Apps kennen, und erfahren Sie, wie Sie diese verwalten können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/30/2018
+ms.date: 01/17/2019
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: c6a6cc9b6b3410267c6f5034f824648a1ebbe10f
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 8c32a668b3945f0da0194162e19e965b4aed3934
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52862238"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54396271"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS-Module mit ASP.NET Core
 
@@ -105,13 +105,13 @@ Für weitere Informationen zum Deaktivieren von Modulen mit Konfigurationseinste
 
 Wenn Sie ein Modul mit einer Einstellung in der Datei *web.config* entfernen können, entsperren Sie das Modul, und entsperren Sie zunächst den Abschnitt `<modules>` in der Datei *web.config*:
 
-1. Entsperren Sie das Modul auf Serverebene. Wählen Sie den IIS-Server in der IIS-Manager-Sidebar **Verbindungen** aus. Öffnen Sie **Module** im Bereich **IIS**. Wählen Sie das Modul aus der Liste aus. Wählen Sie in der Sidebar **Aktionen** auf der rechten Seite die Option **Entsperren** aus. Entsperren Sie alle Module, die Sie später aus *web.config* entfernen möchten.
+1. Entsperren Sie das Modul auf Serverebene. Wählen Sie den IIS-Server in der IIS-Manager-Sidebar **Verbindungen** aus. Öffnen Sie **Module** im Bereich **IIS**. Wählen Sie das Modul aus der Liste aus. Wählen Sie in der Sidebar **Aktionen** auf der rechten Seite die Option **Entsperren** aus. Wenn der Aktionseintrag für das Modul **Lock** (Sperren) lautet, wurde das Modul bereits entsperrt, und es ist keine weitere Aktion erforderlich. Entsperren Sie alle Module, die Sie später aus *web.config* entfernen möchten.
 
 2. Stellen Sie die App ohne den Abschnitt `<modules>` in der Datei *web.config* bereit. Wenn eine App bereitgestellt wird, in der die Datei *web.config* den Abschnitt `<modules>` enthält, ohne dass der Abschnitt zuvor in IIS-Manager entsperrt wurde, löst der Configuration Manager bei dem Versuch, den Abschnitt zu entsperren, eine Ausnahme aus. Daher sollten Sie die App ohne einen Abschnitt `<modules>` bereitstellen.
 
-3. Entsperren Sie den Abschnitt `<modules>` in der Datei *web.config*. Wählen Sie in der Sidebar **Verbindungen** unter **Sites** die Website aus. Öffnen Sie im Bereich **Verwaltung** den **Konfigurations-Editor**. Wählen Sie mithilfe der Navigationssteuerelemente den Abschnitt `system.webServer/modules` aus. Wählen Sie in der Seitenleiste **Aktionen** auf der rechten Seite die Option **Entsperren** für den Abschnitt aus.
+3. Entsperren Sie den Abschnitt `<modules>` in der Datei *web.config*. Wählen Sie in der Sidebar **Verbindungen** unter **Sites** die Website aus. Öffnen Sie im Bereich **Verwaltung** den **Konfigurations-Editor**. Wählen Sie mithilfe der Navigationssteuerelemente den Abschnitt `system.webServer/modules` aus. Wählen Sie in der Seitenleiste **Aktionen** auf der rechten Seite die Option **Entsperren** für den Abschnitt aus. Wenn der Aktionseintrag für den Modulabschnitt **Lock Section** (Abschnitt sperren) lautet, wurde der Modulabschnitt bereits entsperrt, und es ist keine weitere Aktion erforderlich.
 
-4. An diesem Punkt kann der Abschnitt `<modules>` zur Datei *web.config* mit dem Element `<remove>` hinzugefügt werden, um das Modul aus der App zu entfernen. Es können mehrere Elemente vom Typ `<remove>` hinzugefügt werden, um mehrere Module zu entfernen. Wenn auf dem Server Änderungen an der Datei *web.config* vorgenommen werden, nehmen Sie sofort lokal die gleichen Änderungen an der Datei *web.config* des Projekts vor. Wenn ein Modul auf diese Weise entfernt wird, hat dies keine Auswirkungen auf die Verwendung des Moduls mit anderen Apps auf dem Server.
+4. Fügen Sie den Abschnitt `<modules>` zur Datei *web.config* mit dem Element `<remove>` hinzu, um das Modul aus der App zu entfernen. Es können mehrere `<remove>`-Elemente hinzugefügt werden, um mehrere Module zu entfernen. Wenn auf dem Server Änderungen an der Datei *web.config* vorgenommen werden, nehmen Sie sofort lokal die gleichen Änderungen an der Datei *web.config* des Projekts vor. Wenn ein Modul auf diese Weise entfernt wird, hat dies keine Auswirkungen auf die Verwendung des Moduls mit anderen Apps auf dem Server.
 
    ```xml
    <configuration>
@@ -122,6 +122,26 @@ Wenn Sie ein Modul mit einer Einstellung in der Datei *web.config* entfernen kö
     </system.webServer>
    </configuration>
    ```
+   
+Sie können Module für IIS Express mit *web.config* hinzufügen oder entfernen. Ändern Sie dazu die Datei *applicationHost.config*, und entsperren Sie den Abschnitt `<modules>`:
+
+1. Öffnen Sie *{ANWENDUNGSSTAMM}\\.vs\config\applicationhost.config*.
+
+1. Machen Sie das Element `<section>` für IIS-Module ausfindig, und ändern Sie `overrideModeDefault` von `Deny` in `Allow`:
+
+   ```xml
+   <section name="modules" 
+            allowDefinition="MachineToApplication" 
+            overrideModeDefault="Allow" />
+   ```
+   
+1. Machen Sie den Abschnitt `<location path="" overrideMode="Allow"><system.webServer><modules>` ausfindig. Ändern Sie für alle zu entfernenden Module `lockItem` von `true` in `false`. Im folgenden Beispiel wird das CGI-Modul entsperrt:
+
+   ```xml
+   <add name="CgiModule" lockItem="false" />
+   ```
+   
+1. Nachdem der Abschnitt `<modules>` und die einzelnen Module entsperrt wurden, können Sie IIS-Module mit der *web.config*-Datei der App hinzufügen, um die App in IIS Express auszuführen.
 
 Ein IIS-Modul kann auch mit *Appcmd.exe* entfernt werden. Geben Sie `MODULE_NAME` und `APPLICATION_NAME` im Befehl an:
 
@@ -146,7 +166,7 @@ Das HTTP-Zwischenspeicherungsmodul (`HttpCacheModule`) implementiert den IIS-Aus
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:host-and-deploy/iis/index>
-* [Einführung in IIS-Architekturen: Module in IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
+* [Introduction to IIS Architectures: Modules in IIS (Einführung in IIS-Architekturen: Module in IIS)](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Übersicht über IIS-Module](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [Anpassen von IIS 7.0-Rollen und -Modulen](https://technet.microsoft.com/library/cc627313.aspx)
 * [IIS`<system.webServer>`](/iis/configuration/system.webServer/)

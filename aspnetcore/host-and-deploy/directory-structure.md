@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/11/2018
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: ee0bebb8b5c688f8471d6420d1641b87ac271f6c
-ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
+ms.openlocfilehash: 4bc5ead8e24c4bb7fe6cd2f52fd2aa622187180c
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53284564"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341393"
 ---
 # <a name="aspnet-core-directory-structure"></a>Verzeichnisstruktur für ASP.NET Core
 
@@ -37,7 +37,7 @@ Das Verzeichnis *publish* stellt den *Pfad des Inhaltsstammverzeichnisses* (auch
 
 Das Verzeichnis *wwwroot* enthält, sofern vorhanden, nur statische Objekte.
 
-Das stdout-Verzeichnis *Logs* kann mit einem der folgenden beiden Ansätze für die Bereitstellung erstellt werden:
+Das Verzeichnis *Logs* (Protokolle) kann mit einem der folgenden beiden Ansätze für die Bereitstellung erstellt werden:
 
 * Fügen Sie das folgende `<Target>`-Element zur Projektdatei hinzu:
 
@@ -57,6 +57,8 @@ Das stdout-Verzeichnis *Logs* kann mit einem der folgenden beiden Ansätze für 
 * Erstellen Sie das Verzeichnis *Logs* physisch auf dem Server in der Bereitstellung.
 
 Für das Bereitstellungsverzeichnis sind Lese-/Ausführungsberechtigungen erforderlich. Für das Verzeichnis *Logs* sind Lese-/Schreibberechtigungen erforderlich. Für weitere Verzeichnisse, in die Dateien geschrieben werden, sind Lese-/Schreibberechtigungen erforderlich.
+
+Für die [stdout-Protokollierung für das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) ist kein *Logs*-Ordner in der Bereitstellung erforderlich. Mit dem Modul können beliebige Ordner im `stdoutLogFile`-Pfad erstellt werden, wenn die Protokolldatei erstellt wird. Das Erstellen eines *Logs*-Ordners ist für die [erweiterte Debugprotokollierung für das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) nützlich. Ordner im Pfad, die für den `<handlerSetting>`-Wert bereitgestellt werden, werden nicht automatisch vom Modul erstellt und müssen zuvor in der Bereitstellung vorhanden sein, damit das Modul das Debugprotokoll schreiben kann.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

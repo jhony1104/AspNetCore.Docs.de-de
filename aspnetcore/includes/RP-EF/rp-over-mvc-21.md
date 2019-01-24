@@ -1,18 +1,24 @@
+---
+ms.openlocfilehash: b7c97f3b329bea452e1f49c351231f92310c97b5
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "53335071"
+---
 ::: moniker range=">= aspnetcore-2.1"
 
 Dieses Tutorial wurde noch nicht auf ASP.NET Core 2.1 upgegradet. Das Tutorial für ASP.NET Core 2.0 finden Sie, indem Sie am oberen Rand der Seite über dem Inhaltsverzeichnis auf **ASP.NET Core 2.0** klicken:
 
-Das Tutorial für Razor Pages in ASP.NET Core 2.1 enthält zahlreiche Verbesserungen gegenüber Version 2.0.
+![Lernprogramme ](~//data/ef-rp/read-related-data/_static/2.1.png)
 
-Im Tutorial für Version 2.0 erfahren Sie die Grundlagen zu ASP.NET Core MVC und Entity Framework Core mit Controllern und Ansichten. Razor Pages ist ein seitenbasiertes Programmiermodell, mit dem Sie Webbenutzeroberflächen einfacher und schneller erstellen können. Es wird empfohlen, das Tutorial zu den [Razor Pages](xref:data/ef-rp/intro) vor dem Tutorial zu MVC anzusehen. Das Tutorial zu Razor Pages:
+Das Tutorial für [Razor Pages](xref:data/ef-rp/intro) in ASP.NET Core 2.1 enthält zahlreiche Verbesserungen gegenüber Version 2.0.
+
+Im Tutorial für Version 2.0 erfahren Sie die Grundlagen zu ASP.NET Core MVC und Entity Framework Core mit Controllern und Ansichten. Das Tutorial für Razor Pages wurde aktualisiert und wie folgt verbessert:
 
 * Ist einfacher zu befolgen. Beispielsweise wurde der Gerüstbau-Code deutlich vereinfacht.
 * Bietet mehr bewährte Methoden für Entity Framework Core.
 * Verwendet effizientere Abfragen.
-* Passt besser zur aktuellen API.
-* Behandelt mehr Features.
-* Ist die bevorzugte Methode für die Entwicklung neuer Anwendungen.
-
-Wenn Sie sich für dieses Tutorial statt für das Tutorial zu [Razor Pages](xref:data/ef-rp/intro) entschieden haben, nennen Sie uns in [dieser GitHub-Diskussion](https://github.com/aspnet/Docs/issues/6146) den Grund dafür.
+* Es wird die aktuelle Version der EF Core-API verwendet.
 
 ::: moniker-end

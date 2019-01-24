@@ -1,17 +1,17 @@
 ---
-title: Problembehandlung von Startfehlern bei ASP.NET Core in Azure App Service
+title: Problembehandlung bei ASP.NET Core in Azure App Service
 author: guardrex
 description: Erfahren Sie, wie Sie Probleme mit ASP.NET Core Azure App Service-Bereitstellungen diagnostizieren können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 01/11/2019
 uid: host-and-deploy/azure-apps/troubleshoot
-ms.openlocfilehash: b36c321c6ba6801a32b5187651063337b4533fd1
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 65a5e355bc15db6de9060331395c441160c8b62d
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637650"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341640"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service"></a>Problembehandlung bei ASP.NET Core in Azure App Service
 
@@ -49,17 +49,17 @@ Das ASP.NET Core-Modul wurde mit dem Standardwert 120 Sekunden für das *Startup
 
 ### <a name="application-event-log"></a>Anwendungsereignisprotokoll
 
-Um auf das Anwendungsereignisprotokoll zuzugreifen, verwenden Sie das Blatt **Diagnose und Problembehandlung** im Azure-Portal:
+Verwenden Sie das Blatt **Diagnose und Problembehandlung** im Azure-Portal, um auf das Anwendungsereignisprotokoll zuzugreifen:
 
-1. Öffnen Sie im Azure-Portal das Blatt der App auf dem Blatt **App Services**.
-1. Wählen Sie das Blatt **Diagnose und Problembehandlung**.
-1. Wählen Sie unter **SELECT PROBLEM CATEGORY** (PROBLEMKATEGORIE WÄHLEN) die Schaltfläche **Web App Down** (Web-App ausgefallen) aus.
-1. Öffnen Sie unter **Suggested Solutions** (Vorgeschlagene Lösungen) den Bereich für **Open Application Event Logs** (Anwendungsereignisprotokolle öffnen). Klicken Sie auf **Open Application Event Logs** (Anwendungsereignisprotokolle öffnen).
-1. Überprüfen Sie den letzten von *IIS AspNetCoreModule* in der Spalte **Quelle** angegebenen Fehler.
+1. Öffnen Sie die App im Azure-Portal unter **App Services**.
+1. Klicken Sie auf **Diagnose und Problembehandlung**.
+1. Wählen Sie die Überschrift **Diagnosetools** aus.
+1. Klicken Sie unter **Supporttools** auf die Schaltfläche **Anwendungsereignisse**.
+1. Überprüfen Sie den letzten vom Eintrag *IIS AspNetCoreModule* oder *IIS AspNetCoreModule V2* in der Spalte **Quelle** angegebenen Fehler.
 
 Anstatt das Blatt **Diagnose und Problembehandlung** zu verwenden, können Sie die Anwendungsereignisprotokoll-Datei auch direkt mit [Kudu](https://github.com/projectkudu/kudu/wiki) untersuchen:
 
-1. Wählen Sie das Blatt **Erweiterte Tools** im Bereich **ENTWICKLUNGSTOOLS** aus. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
+1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
 1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
 1. Öffnen Sie den Ordner **LogFiles**.
 1. Wählen Sie den Bleistift neben der Datei *eventlog.xml* aus.
@@ -69,7 +69,7 @@ Anstatt das Blatt **Diagnose und Problembehandlung** zu verwenden, können Sie d
 
 Viele Startfehler erzeugen keine nützlichen Informationen im Anwendungsereignisprotokoll. Sie können die App in der [Kudu](https://github.com/projectkudu/kudu/wiki)-Remote-Ausführungskonsole ausführen, um den Fehler zu ermitteln:
 
-1. Wählen Sie das Blatt **Erweiterte Tools** im Bereich **ENTWICKLUNGSTOOLS** aus. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
+1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
 1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
 1. Öffnen Sie die Ordner unter dem Pfad **site** > **wwwroot**.
 1. Führen Sie die App in der Konsole aus, indem Sie die Assembly der App ausführen.
@@ -95,7 +95,7 @@ Das stdout-Protokoll des ASP.NET Core-Moduls zeichnet häufig nützliche Fehlerm
 1. Überprüfen Sie die Spalte **Geändert**, und wählen Sie den Bleistift aus, um das stdout-Protokoll mit dem letzten Änderungsdatum zu bearbeiten.
 1. Wenn die Protokolldatei geöffnet wird, wird der Fehler angezeigt.
 
-**Wichtig** Deaktivieren Sie die stdout-Protokollierung, wenn die Problembehandlung abgeschlossen ist.
+Deaktivieren Sie die stdout-Protokollierung, wenn die Problembehandlung abgeschlossen ist:
 
 1. Kehren Sie in der Kudu-**Diagnosekonsole** zum Pfad **site** > **wwwroot** zurück, um die Datei *web.config* einzublenden. Öffnen Sie die Datei **web.config** erneut, indem Sie den Bleistift auswählen.
 1. Legen Sie **stdoutLogEnabled** auf `false` fest.
@@ -106,7 +106,37 @@ Das stdout-Protokoll des ASP.NET Core-Moduls zeichnet häufig nützliche Fehlerm
 >
 > Verwenden Sie für die allgemeine Protokollierung in einer ASP.NET Core-App nach dem Start eine Protokollierungsbibliothek, die die Protokolldateigröße beschränkt und Protokolle rotiert. Weitere Informationen finden Sie im Artikel zur [Protokollierung von Drittanbietern](xref:fundamentals/logging/index#third-party-logging-providers).
 
-## <a name="common-startup-errors"></a>Häufige Startfehler 
+::: moniker range=">= aspnetcore-2.2"
+
+### <a name="aspnet-core-module-debug-log"></a>Debugprotokoll des ASP.NET Core-Moduls
+
+Das Debugprotokoll des ASP.NET Core-Moduls ermöglicht die zusätzliche und ausführlichere Protokollierung über das ASP.NET Core-Modul. So aktivieren Sie stdout-Protokolle und zeigen diese an:
+
+1. Führen Sie einen der folgenden Schritte aus, um das erweiterte Diagnoseprotokoll zu aktivieren:
+   * Befolgen Sie den Anweisungen in den [erweiterten Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs), um die App für die erweiterte Diagnoseprotokollierung zu konfigurieren. Stellen Sie die App erneut bereit.
+   * Fügen Sie die in unter [Erweiterte Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) enthaltene `<handlerSettings>`-Klasse für die *web.config*-Datei der Live-App über die Kudu-Konsole hinzu:
+     1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
+     1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
+     1. Öffnen Sie die Ordner unter dem Pfad **site** > **wwwroot**. Bearbeiten Sie die Datei *web.config*, indem Sie auf die Bleistiftschaltfläche klicken. Fügen Sie den Abschnitt `<handlerSettings>` wie in den [erweiterten Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) dargestellt hinzu. Klicken Sie auf die Schaltfläche **Speichern**.
+1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
+1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
+1. Öffnen Sie die Ordner unter dem Pfad **site** > **wwwroot**. Wenn Sie keinen Pfad für die *aspnetcore-debug.log*-Datei angegeben haben, wird die Datei in der Liste aufgeführt. Wenn Sie jedoch einen Pfad angegeben haben, navigieren Sie zum Speicherort der Protokolldatei.
+1. Öffnen Sie die Protokolldatei über die Bleistiftschaltfläche neben dem Dateinamen.
+
+Deaktivieren Sie die Debugprotokollierung, wenn die Problembehandlung abgeschlossen ist.
+
+1. Führen Sie einen der folgenden Schritte aus, um das erweiterte Debugprotokoll zu deaktivieren:
+   * Entfernen Sie `<handlerSettings>` aus der lokalen *web.config*-Datei, und stellen Sie die App erneut bereit.
+   * Verwenden Sie die Kudu-Konsole, um die *web.config*-Datei zu bearbeiten und den Abschnitt `<handlerSettings>` zu entfernen. Speichern Sie die Datei.
+
+> [!WARNING]
+> Wenn das Debugprotokoll nicht deaktiviert werden kann, können App- oder Serverfehler auftreten. Es gibt keine Begrenzung für die Größe der Protokolldatei. Nutzen Sie die Debugprotokollierung nur für die Behandlung von App-Startproblemen.
+>
+> Verwenden Sie für die allgemeine Protokollierung in einer ASP.NET Core-App nach dem Start eine Protokollierungsbibliothek, die die Protokolldateigröße beschränkt und Protokolle rotiert. Weitere Informationen finden Sie im Artikel zur [Protokollierung von Drittanbietern](xref:fundamentals/logging/index#third-party-logging-providers).
+
+::: moniker-end
+
+## <a name="common-startup-errors"></a>Häufige Startfehler
 
 Siehe <xref:host-and-deploy/azure-iis-errors-reference>. Die meisten der häufig auftretenden Probleme, die den Start von Apps verhindern, werden im Referenzartikel behandelt.
 
@@ -157,7 +187,7 @@ Fahren Sie mit der Aktivierung der Diagnoseprotokollierung fort:
 1. Führen Sie eine Anforderung an die App aus.
 1. In den Protokollstreamdaten wird die Ursache des Fehlers angegeben.
 
-**Wichtig** Achten Sie darauf, die stdout-Protokollierung zu deaktivieren, wenn die Problembehandlung abgeschlossen ist. Weitere Informationen finden Sie im Abschnitt [stdout-Protokoll der ASP.NET Core-Moduls](#aspnet-core-module-stdout-log).
+Achten Sie darauf, die stdout-Protokollierung zu deaktivieren, wenn die Problembehandlung abgeschlossen ist. Weitere Informationen finden Sie im Abschnitt [stdout-Protokoll der ASP.NET Core-Moduls](#aspnet-core-module-stdout-log).
 
 So zeigen Sie die Ablaufverfolgungsprotokolle für Anforderungsfehler (FREB-Protokolle) an:
 

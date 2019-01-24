@@ -3,14 +3,15 @@ title: 'ASP.NET Core MVC mit EF Core: Erweitert (10 von 10)'
 author: rick-anderson
 description: In diesem Tutorial werden wichtige Themen eingeführt, um Grundkenntnisse der Entwicklung von ASP.NET Core-Web-Apps, die Entity Framework Core verwenden, zu erweitern.
 ms.author: tdykstra
-ms.date: 03/15/2017
+ms.custom: mvc
+ms.date: 10/24/2018
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 5cdba79c0b8edd9b865bda8328c86356cbe6a0a2
-ms.sourcegitcommit: b2723654af4969a24545f09ebe32004cb5e84a96
+ms.openlocfilehash: ba3834b29e78972bf914a5cba1a2cae3cc19a315
+ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46010922"
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "50090783"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---advanced---10-of-10"></a>ASP.NET Core MVC mit EF Core: Erweitert (10 von 10)
 
@@ -100,7 +101,7 @@ Klicken Sie auf **Zurück zur Liste**, um die Kursliste mit der geänderte Anzah
 
 Beachten Sie, dass der Produktionscode sicherstellen würde, dass Aktualisierungen immer zu gültigen Daten führen. Der hier dargestellte vereinfachte Code könnte die Anzahl der Credits so verändern, dass sie Zahlen größer als fünf ergeben. (Die `Credits`-Eigenschaft verfügt über ein `[Range(0, 5)]`-Attribut.) Die Updateabfrage würde funktionieren, aber die ungültigen Daten könnten zu unerwarteten Ergebnissen in anderen Teilen des Systems führen, die davon ausgehen, dass die Anzahl der Credits fünf oder weniger beträgt.
 
-Weitere Informationen zu unformatierten SQL-Abfragen finden Sie unter [Unformatierte SQL-Abfragen](https://docs.microsoft.com/ef/core/querying/raw-sql).
+Weitere Informationen zu unformatierten SQL-Abfragen finden Sie unter [Unformatierte SQL-Abfragen](/ef/core/querying/raw-sql).
 
 ## <a name="examine-sql-sent-to-the-database"></a>Überprüfen von an die Datenbank gesendeten SQL-Abfragen
 
@@ -162,7 +163,7 @@ Entity Framework bestimmt wie eine Entität geändert wurde (und welche Updates 
 
 * ChangeTracker.Entries
 
-Wenn Sie eine große Anzahl von Entitäten überwachen und eine dieser Methoden oft in einer Schleife aufrufen, erhalten Sie möglicherweise erhebliche Leistungssteigerungen durch vorübergehendes Deaktivieren der automatischen Änderungserkennung mithilfe der `ChangeTracker.AutoDetectChangesEnabled`-Eigenschaft. Zum Beispiel:
+Wenn Sie eine große Anzahl von Entitäten überwachen und eine dieser Methoden oft in einer Schleife aufrufen, erhalten Sie möglicherweise erhebliche Leistungssteigerungen durch vorübergehendes Deaktivieren der automatischen Änderungserkennung mithilfe der `ChangeTracker.AutoDetectChangesEnabled`-Eigenschaft. Beispiel:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -176,7 +177,7 @@ Obwohl der Quellcode Open Source ist, wird Entity Framework Core als ein Microso
 
 ## <a name="reverse-engineer-from-existing-database"></a>Reverse Engineering aus der bestehenden Datenbank
 
-Verwenden Sie zum Zurückentwickeln (Reverse Engineering) eines Datenmodells, einschließlich der Entitätsklassen aus einer vorhandenen Datenbank, den Befehl [scaffold-dbcontext](https://docs.microsoft.com/ef/core/miscellaneous/cli/powershell#scaffold-dbcontext). Lesen Sie das [Tutorial Erste Schritte](https://docs.microsoft.com/ef/core/get-started/aspnetcore/existing-db).
+Verwenden Sie zum Zurückentwickeln (Reverse Engineering) eines Datenmodells, einschließlich der Entitätsklassen aus einer vorhandenen Datenbank, den Befehl [scaffold-dbcontext](/ef/core/miscellaneous/cli/powershell#scaffold-dbcontext). Lesen Sie das [Tutorial Erste Schritte](/ef/core/get-started/aspnetcore/existing-db).
 
 <a id="dynamic-linq"></a>
 ## <a name="use-dynamic-linq-to-simplify-sort-selection-code"></a>Verwenden von dynamischen LINQ zum vereinfachten Sortieren des Auswahlcodes
@@ -189,11 +190,11 @@ Das [dritte Tutorial dieser Reihe](sort-filter-page.md) zeigt, wie Sie LINQ-Code
 
 Dies schließt die verschiedenen Tutorials zur Verwendung von Entity Framework Core in einer ASP.NET Core MVC-Anwendung ab.
 
-Weitere Informationen zu EF Core finden Sie in der [Dokumentation zu Entity Framework Core](https://docs.microsoft.com/ef/core). Ein Buch ist ebenfalls verfügbar: [Entity Framework Core in Aktion](https://www.manning.com/books/entity-framework-core-in-action).
+Weitere Informationen zu EF Core finden Sie in der [Dokumentation zu Entity Framework Core](/ef/core). Zu diesem Thema ist auch ein Buch verfügbar: [Entity Framework Core in Action](https://www.manning.com/books/entity-framework-core-in-action)
 
-Weitere Informationen zum Bereitstellen einer Webanwendung finden Sie unter [Hosten und Bereitstellen](xref:host-and-deploy/index).
+Weitere Informationen zum Bereitstellen einer Webanwendung finden Sie unter <xref:host-and-deploy/index>.
 
-Weitere Informationen zu anderen Themen im Zusammenhang mit ASP.NET Core MVC, wie beispielsweise Authentifizierung und Autorisierung, finden Sie in der [ASP.NET Core-Dokumentation](xref:index).
+Weitere Informationen zu anderen Themen im Zusammenhang mit ASP.NET Core MVC, wie beispielsweise Authentifizierung und Autorisierung, finden Sie unter <xref:index>.
 
 ## <a name="acknowledgments"></a>Danksagungen
 
@@ -239,7 +240,7 @@ dotnet ef database drop
 
 Fehlermeldung:
 
-> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig und SQL Server so konfiguriert ist, das Remoteverbindungen zulässig sind. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26 – Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz.)
+> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig und SQL Server so konfiguriert ist, das Remoteverbindungen zulässig sind. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26: Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz)
 
 Projektmappe:
 

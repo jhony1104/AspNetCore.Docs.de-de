@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie in ASP.NET Core-Apps das App-Verhalten umgebu
 ms.author: riande
 ms.date: 07/03/2018
 uid: fundamentals/environments
-ms.openlocfilehash: 865257d127084671036147dd1f28c9c4843feef6
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 642af9e8f9e322e3624dad46bb1463f6525f5c9e
+ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206847"
+ms.lasthandoff: 01/16/2019
+ms.locfileid: "54341666"
 ---
 # <a name="use-multiple-environments-in-aspnet-core"></a>Verwenden von mehreren Umgebungen in ASP.NET Core
 
@@ -111,9 +111,9 @@ Die folgende JSON zeigt drei Profile aus der Datei *launchSettings.json* an:
 
 Wenn die Anwendung mit [dotnet run](/dotnet/core/tools/dotnet-run) gestartet wird, wird das erste Profil mit `"commandName": "Project"` verwendet. Der Wert von `commandName` gibt den zu startenden Webserver an. `commandName` kann einer der folgenden sein:
 
-* IIS Express
-* IIS
-* Projekt (über das Kestrel gestartet wird)
+* `IISExpress`
+* `IIS`
+* `Project` (über das Kestrel gestartet wird)
 
 Beim Start einer App mit [dotnet run](/dotnet/core/tools/dotnet-run) tritt Folgendes ein:
 
@@ -182,8 +182,8 @@ Führen Sie die folgenden Schritte durch, um die Umgebung in [Azure App Service]
 1. Wählen Sie die App auf dem Blatt **App Services** aus.
 1. Wählen Sie in der Gruppe **EINSTELLUNGEN** das Blatt **Anwendungseinstellung** aus.
 1. Wählen Sie im Bereich **Anwendungseinstellung** **Neue Einstellung hinzufügen** aus.
-1. Geben Sie `ASPNETCORE_ENVIRONMENT` als Namen ein. Geben Sie die Umgebung als Wert an (z.B. `Staging`).
-1. Aktivieren Sie das Kontrollkästchen **Sloteinstellung**, wenn Sie möchten, dass die Umgebungseinstellung im aktuellen Slot bleibt, wenn Bereitstellungsslots getauscht werden. Weitere Informationen finden Sie in der [Azure-Dokumentation: Einrichten von Stagingumgebungen in Azure App Service](/azure/app-service/web-sites-staged-publishing).
+1. Für **Geben Sie einen Namen**, bieten `ASPNETCORE_ENVIRONMENT`. Für **Geben Sie einen Wert**, geben Sie die Umgebung (z. B. `Staging`).
+1. Aktivieren Sie das Kontrollkästchen **Sloteinstellung**, wenn Sie möchten, dass die Umgebungseinstellung im aktuellen Slot bleibt, wenn Bereitstellungsslots getauscht werden. Weitere Informationen finden Sie in der [Azure-Dokumentation: Welche Einstellungen werden ausgetauscht?](/azure/app-service/web-sites-staged-publishing).
 1. Klicken Sie oben auf dem Blatt auf **Speichern**.
 
 Azure App Service startet die App automatisch neu, nachdem eine App-Einstellung (Umgebungsvariable) im Azure-Portal hinzugefügt, geändert oder gelöscht wurde.
@@ -276,8 +276,8 @@ Verwenden Sie bei Linux-Distributionen für sitzungsbasierte Variableneinstellun
 
 Zum Laden von „Konfiguration nach Umgebung“ empfehlen wir:
 
-* *appsettings*-Dateien (*appsettings.&lt;<Environment>&gt;.json) Weitere Informationen erhalten Sie unter [Konfiguration: Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider).
-* Umgebungsvariablen (in jedem System festgelegt, in dem die App gehostet wird) Weitere Informationen erhalten Sie unter [Konfiguration: Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) und [Sicheres Speichern geheimer App-Schlüssel in der Entwicklung: Umgebungsvariablen](xref:security/app-secrets#environment-variables).
+* *appsettings*-Dateien (*appsettings.&lt;<Environment>&gt;.json) Weitere Informationen finden Sie unter [Konfiguration: Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider).
+* Umgebungsvariablen (in jedem System festgelegt, in dem die App gehostet wird) Weitere Informationen finden Sie unter [Konfiguration: Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) und [Sicheres Speichern geheimer App-Schlüssel in der Entwicklung: Umgebungsvariablen](xref:security/app-secrets#environment-variables).
 * Secret Manager (nur in der Entwicklungsumgebung) Siehe <xref:security/app-secrets>.
 
 ## <a name="environment-based-startup-class-and-methods"></a>Umgebungsbasierte Startklasse und Methoden
