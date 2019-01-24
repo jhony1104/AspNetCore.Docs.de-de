@@ -1,26 +1,26 @@
 ---
 uid: signalr/overview/getting-started/tutorial-getting-started-with-signalr
 title: 'Tutorial: Echtzeit-Chat mit SignalR 2 | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Dieses Tutorial zeigt, wie Sie mithilfe von SignalR eine Chatanwendung mit Echtzeitfunktionalität erstellen. Eine leere ASP.NET-Webanwendung hinzugefügt SignalR.
-ms.author: riande
-ms.date: 01/02/2019
+ms.author: bradyg
+ms.date: 01/22/2019
 ms.assetid: a8b3b778-f009-4369-85c7-e90f9878d8b4
 msc.legacyurl: /signalr/overview/getting-started/tutorial-getting-started-with-signalr
 msc.type: authoredcontent
 ms.topic: tutorial
-ms.openlocfilehash: aa015abc47bb2450e04e167c0404aaa1d119ba2c
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 90f2c03fbda522e3a46200bc0132cc74100ce70f
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098623"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836791"
 ---
 # <a name="tutorial-real-time-chat-with-signalr-2"></a>Tutorial: Echtzeit-Chat mit SignalR 2
 
 In diesem Tutorial erfahren Sie, wie mit SignalR eine chatanwendung mit Echtzeitfunktionalität erstellen können. Sie SignalR eine leere ASP.NET-Webanwendung hinzufügen und erstellen Sie eine HTML-Seite zum Senden und Meldungen angezeigt werden.
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Einrichten des Projekts
@@ -162,6 +162,10 @@ Dieser Code öffnet eine Verbindung mit dem Hub.
 
 Der Code wird die Verbindung gestartet und leitet diese dann in eine Funktion zum Behandeln der Click-Ereignis auf der **senden** auf der HTML-Seite.
 
+## <a name="get-the-code"></a>Abrufen des Codes
+
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/SignalR-Getting-Started-b9d18aa9)
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
@@ -170,7 +174,7 @@ Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
 
 * [SignalR Github und Beispiele](https://github.com/SignalR/SignalR)
 
-* [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+* [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

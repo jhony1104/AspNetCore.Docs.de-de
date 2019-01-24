@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/performance/scaleout-in-signalr
 title: Einführung zur horizontalen Skalierung in SignalR | Microsoft-Dokumentation
-author: MikeWasson
+author: bradygaster
 description: Version der Software verwendete in diesem Thema Visual Studio 2013 .NET 4.5 SignalR Version 2-Vorgängerversionen des in diesem Thema Informationen zu früheren Versionen von...
-ms.author: riande
+ms.author: bradyg
 ms.date: 06/10/2014
 ms.assetid: 7e781fc1-1c1f-45a8-bc1d-338e96dbe9c9
 msc.legacyurl: /signalr/overview/performance/scaleout-in-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: 50f9e5bc2713af7fe41473339e360099a92d4c5d
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 60ae0353745284796eb7e0ddb6397ecb48eceaf0
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53286986"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836202"
 ---
 <a name="introduction-to-scaleout-in-signalr"></a>Einführung zur horizontalen Skalierung in SignalR
 ====================
@@ -56,7 +56,7 @@ SignalR stellt derzeit drei Backplanes bereit:
 
 - **Azure Servicebus**. Service Bus ist eine messaging-Infrastruktur, die Komponenten zum Senden von Nachrichten in einem lose gekoppelten System ermöglicht.
 - **Redis**. Redis ist ein Schlüssel-Wert-Speicher im Arbeitsspeicher. Redis unterstützt ein Muster zum Veröffentlichen/Abonnieren ("Pub/Sub") zum Senden von Nachrichten an.
-- **SQLServer**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
+- **SQL Server**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
 
 Wenn Sie Ihre Anwendung in Azure bereitstellen, sollten Sie die Redis-Rückwandplatine mit [Azure Redis Cache](https://azure.microsoft.com/services/cache/). Wenn Sie mit Ihren eigenen Serverfarm bereitstellen, sollten Sie Sie der SQL Server- oder Redis Backplanes.
 

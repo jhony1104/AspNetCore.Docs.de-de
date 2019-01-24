@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/older-versions/tutorial-getting-started-with-signalr-and-mvc-4
 title: 'Tutorial: Erste Schritte mit SignalR 1.x und MVC 4 | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Verwenden Sie SignalR für ASP.NET und ASP.NET MVC 4, um eine chatanwendung mit Echtzeitfunktionalität erstellen.
-ms.author: riande
+ms.author: bradyg
 ms.date: 03/29/2013
 ms.assetid: eeef9f73-6de3-49f9-b50b-9af22108f2ce
 msc.legacyurl: /signalr/overview/older-versions/tutorial-getting-started-with-signalr-and-mvc-4
 msc.type: authoredcontent
-ms.openlocfilehash: a67d05288252c17d84b1d7df5f7bcddde3c887f5
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: dd55ca22004b7e3899f6a8789494c842b984787f
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287710"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837792"
 ---
 <a name="tutorial-getting-started-with-signalr-1x-and-mvc-4"></a>Tutorial: Erste Schritte mit SignalR 1.x und MVC 4
 ====================
@@ -126,7 +126,7 @@ In diesem Abschnitt veranschaulicht das Erstellen einer ASP.NET MVC 4-Anwendung,
 
 Der SignalR Chat-Anwendung zeigt zwei grundlegende Aufgaben für die SignalR-Entwicklung: Erstellen eines Hubs wie das wichtigste Coordination-Objekt, auf dem Server, und mithilfe der SignalR-jQuery-Bibliothek zum Senden und Empfangen von Nachrichten.
 
-### <a name="signalr-hubs"></a>SignalR-Hubs
+### <a name="signalr-hubs"></a>SignalR Hubs
 
 Im Codebeispiel enthält die **ChatHub** Klasse leitet sich von der **Microsoft.AspNet.SignalR.Hub** Klasse. Ableiten von der **Hub** Klasse ist eine gute Möglichkeit, eine SignalR-Anwendung zu erstellen. Sie können öffentliche Methoden auf Ihrem Hub-Klasse erstellen und dann Zugriff auf diese Methoden durch einen Aufruf über die jQuery-Skripts auf einer Webseite.
 
@@ -174,4 +174,4 @@ Erweiterte Konzepte der SignalR-Entwicklungen finden Sie unter den folgenden Web
 
 - [SignalR-Projekt](http://signalr.net)
 - [SignalR Github und Beispiele](https://github.com/SignalR/SignalR)
-- [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+- [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)

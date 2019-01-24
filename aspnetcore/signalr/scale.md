@@ -1,18 +1,18 @@
 ---
 title: Hosten von ASP.NET Core SignalR Produktion und Skalierung
-author: tdykstra
+author: bradygaster
 description: Erfahren Sie, wie Sie vermeiden, Leistungs- und Skalierungsproblemen in apps, die ASP.NET Core SignalR verwenden.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: tdykstra
+ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/scale
-ms.openlocfilehash: 94791ffb73b58a9026942d632bce59773e3fda5b
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.openlocfilehash: 4ac4509acc89d0091a3757c7cfbc9981614f29ad
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52452948"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836921"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>Hosten von ASP.NET Core SignalR und Skalierung
 
@@ -46,7 +46,7 @@ Eine app, die SignalR verwendet muss zum Nachverfolgen der Verbindungen, die Pro
 
 Die Optionen zur Lösung dieses Problems sind die [Azure SignalR Service](#azure-signalr-service) und [Redis Rückwandplatine](#redis-backplane).
 
-## <a name="azure-signalr-service"></a>Der Azure SignalR Service
+## <a name="azure-signalr-service"></a>Azure SignalR Service
 
 Der Azure SignalR Service ist eine Rückwandplatine, anstatt einen Proxy. Jedes Mal, die ein Client eine Verbindung mit dem Server initiiert wird der Client umgeleitet, um eine Verbindung mit dem Dienst herzustellen. Dieser Prozess wird im folgenden Diagramm dargestellt:
 

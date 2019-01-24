@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/getting-started/supported-platforms
 title: Unterstützte Plattformen | Microsoft-Dokumentation
-author: pfletcher
+author: bradygaster
 description: In diesem Artikel wird beschrieben, welche Clients und Servern von SignalR unterstützt werden.
-ms.author: riande
+ms.author: bradyg
 ms.date: 04/18/2018
 ms.assetid: eac31beb-0f46-4afa-9def-e80904dea4f0
 msc.legacyurl: /signalr/overview/getting-started/supported-platforms
 msc.type: authoredcontent
-ms.openlocfilehash: e270f9a328f36854fdfb3e23b78e0b40cdda6411
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 60fa74b54797efbe14ba525160b2f750a4f5a451
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287362"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836050"
 ---
 <a name="supported-platforms"></a>Unterstützte Plattformen
 ====================
@@ -124,12 +124,12 @@ SignalR kann in Windows Store-Anwendungen und Windows Phone 8-Anwendungen verwen
 
 **Windows Store und Windows Phone-Transport-Anforderungen**
 
-| Transport | Windows Store / .NET | Windows Store / JavaScript | Windows Phone / IE | Windows Phone / .NET |
+| Transport | Windows Store/ .NET | Windows Store / JavaScript | Windows Phone/ IE | Windows Phone/ .NET |
 | --- | --- | --- | --- | --- |
-| WebSockets | Nicht zutreffend | Win8 + | 8+ | Nicht zutreffend |
-| Forever Frame | Nicht zutreffend | Win8 + | 7.5+ | Nicht zutreffend |
-| Vom Server gesendeten Ereignisse | Win8 + | Nicht zutreffend | Nicht zutreffend | 8+ |
-| Lange Abrufvorgänge | Win8 + | Win8 + | 7.5+ | 8+ |
+| WebSockets | Nicht zutreffend | Win8+ | 8+ | Nicht zutreffend |
+| Forever Frame | Nicht zutreffend | Win8+ | 7.5+ | Nicht zutreffend |
+| Vom Server gesendeten Ereignisse | Win8+ | Nicht zutreffend | Nicht zutreffend | 8+ |
+| Lange Abrufvorgänge | Win8+ | Win8+ | 7.5+ | 8+ |
 
 <a id="updates"></a>
 

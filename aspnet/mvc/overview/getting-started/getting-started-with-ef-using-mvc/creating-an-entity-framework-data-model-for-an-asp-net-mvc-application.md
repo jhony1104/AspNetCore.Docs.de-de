@@ -4,17 +4,17 @@ title: 'Tutorial: Erste Schritte mit Entity Framework 6 Code First anhand von MV
 description: In dieser Reihe von Tutorials erfahren Sie, wie zum Erstellen einer ASP.NET MVC 5-Anwendung, die Entity Framework 6 für den Datenzugriff verwendet.
 author: tdykstra
 ms.author: riande
-ms.date: 01/10/2019
+ms.date: 01/22/2019
 ms.topic: tutorial
 ms.assetid: 00bc8b51-32ed-4fd3-9745-be4c2a9c1eaf
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 5d524c981af2d9d8f44254c61631937e6f049cdb
-ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.openlocfilehash: b72a4ae1a89fd47d9c6ff63ccd45b26324508a63
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2019
-ms.locfileid: "54341705"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836180"
 ---
 # <a name="tutorial-get-started-with-entity-framework-6-code-first-using-mvc-5"></a>Tutorial: Erste Schritte mit Entity Framework 6 Code First anhand von MVC 5
 
@@ -286,6 +286,11 @@ Der Code voraussetzten Entität Rahmen eine vollständige Datenbank erstellen k�
 - Eine Eigenschaft wird als Fremdschlüsseleigenschaften interpretiert, wenn sie den Namen *&lt;navigationseigenschaftennamen&gt;&lt;Primärschlüsseleigenschaft Namen&gt;* (z. B. `StudentID` für die `Student` Navigationseigenschaft, da die `Student` Primärschlüssel der Entität ist `ID`). Fremdschlüsseleigenschaften können auch einfach den Namen der gleiche &lt;Primärschlüsseleigenschaft Namen&gt; (z. B. `EnrollmentID` seit der `Enrollment` Primärschlüssel der Entität ist `EnrollmentID`).
 
 Sie haben gesehen, dass die Konventionen überschrieben werden können. Beispielsweise angegeben werden kann, dass Tabellennamen im Plural werden darf nicht aus, und Sie später feststellen, wie Sie eine Eigenschaft als eine Fremdschlüsseleigenschaft explizit zu kennzeichnen.
+
+## <a name="get-the-code"></a>Abrufen des Codes
+
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8)
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Weitere Informationen zu EF 6 finden Sie in diesen Artikeln:

@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/deployment/tutorial-signalr-self-host
 title: 'Tutorial: Selfhosten von SignalR | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: In diesem Tutorial wird gezeigt, wie Sie einen selbst gehosteten SignalR-2-Server zu erstellen und wie Sie eine Verbindung mit einem JavaScript-Client herstellen. Softwareversionen, die in diesem Tutorial V verwendet...
-ms.author: riande
+ms.author: bradyg
 ms.date: 06/10/2014
 ms.assetid: 400db427-27af-4f2f-abf0-5486d5e024b5
 msc.legacyurl: /signalr/overview/deployment/tutorial-signalr-self-host
 msc.type: authoredcontent
-ms.openlocfilehash: 48cb3d4d71c33ac3382b2b35b5a19fa1c4958874
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 6a6359d59a4b715e13fe2bbcef57da6d6d6294b5
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287402"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54835751"
 ---
 <a name="tutorial-signalr-self-host"></a>Tutorial: Selfhosten von SignalR
 ====================
@@ -93,7 +93,7 @@ In diesem Tutorial erstellen Sie einen Server, der gehostet wird in einer Konsol
 
     Der obige Code enthält drei Klassen:
 
-    - **Programm**, einschließlich der **Main** Methode, die den primären Pfad, der Ausführung zu definieren. Bei dieser Methode eine Webanwendung vom Typ **Start** wird gestartet, an der angegebenen URL (`http://localhost:8080`). Wenn Sicherheit auf dem Endpunkt erforderlich ist, kann SSL implementiert werden. Finden Sie unter [Vorgehensweise: Konfigurieren eines Anschlusses mit einem SSL-Zertifikat](https://msdn.microsoft.com/library/ms733791.aspx) für Weitere Informationen.
+    - **Programm**, einschließlich der **Main** Methode, die den primären Pfad, der Ausführung zu definieren. Bei dieser Methode eine Webanwendung vom Typ **Start** wird gestartet, an der angegebenen URL (`http://localhost:8080`). Wenn Sicherheit auf dem Endpunkt erforderlich ist, kann SSL implementiert werden. Weitere Informationen finden Sie unter [How to: Konfigurieren eines Anschlusses mit einem SSL-Zertifikat](https://msdn.microsoft.com/library/ms733791.aspx) für Weitere Informationen.
     - **Beim Start**, Klasse, die die Konfiguration für den SignalR-Server enthält (die einzige Konfiguration, die in diesem Tutorial wird verwendet, ist der Aufruf von `UseCors`), und der Aufruf von `MapSignalR`, die Routen für alle Objekte der Hub im Projekt erstellt.
     - **MyHub**, die SignalR-Hub-Klasse, die die Anwendung für Clients bereitstellt. Diese Klasse verfügt über eine einzelne Methode, **senden**, dass Clients aufrufen werden, um eine Nachricht an alle anderen verbundenen Clients zu übertragen.
 6. Kompilieren Sie die Anwendung, und führen Sie sie aus. Die Adresse, die der Server ausgeführt wird, sollte in einem Konsolenfenster angezeigt.

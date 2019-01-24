@@ -1,21 +1,21 @@
 ---
 uid: signalr/overview/getting-started/real-time-web-applications-with-signalr
-title: 'Praxisnahe Übung: Echtzeit-Webanwendungen mit SignalR | Microsoft-Dokumentation'
-author: rick-anderson
+title: 'Hands On Lab: Echtzeit-Webanwendungen mit SignalR | Microsoft-Dokumentation'
+author: bradygaster
 description: Echtzeit-Webanwendungen bieten die Möglichkeit, serverseitige an verbundene Clients Inhalte, während es geschieht, können Sie in Echtzeit mithilfe von push. Für ASP.NET-Entwickler ASP...
-ms.author: riande
+ms.author: bradyg
 ms.date: 07/16/2014
 ms.assetid: ba07958c-42e1-4da0-81db-ba6925ed6db0
 msc.legacyurl: /signalr/overview/getting-started/real-time-web-applications-with-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: de2f2349fc284e167bd8227ae55da79b9f1f4549
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: d4998c8b739b4b1a06699a17464a7399a87a8595
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53288001"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837506"
 ---
-<a name="hands-on-lab-real-time-web-applications-with-signalr"></a>Praxisnahe Übung: Echtzeit-Webanwendungen mit SignalR
+<a name="hands-on-lab-real-time-web-applications-with-signalr"></a>Hands On Lab: Echtzeit-Webanwendungen mit SignalR
 ====================
 
 durch [Web Camps Team](https://twitter.com/webcamps)
@@ -260,7 +260,7 @@ Sie können diese Probleme beheben, indem Sie mithilfe einer Komponente namens *
 Es gibt derzeit drei Typen von Backplanes für SignalR:
 
 - **Windows Azure-Servicebus**. Service Bus ist eine messaging-Infrastruktur, die Komponenten zum Senden von lose verbundenen Nachrichten ermöglicht.
-- **SQLServer**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
+- **SQL Server**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
 - **Redis**. Redis ist ein Schlüssel-Wert-Speicher im Arbeitsspeicher. Redis unterstützt ein Muster zum Veröffentlichen/Abonnieren ("Pub/Sub") zum Senden von Nachrichten an.
 
 Jede Nachricht wird über einen Nachrichtenbus gesendet. Implementiert ein Nachrichtenbus der ["imessagebus"](https://msdn.microsoft.com/library/microsoft.aspnet.signalr.messaging.imessagebus(v=vs.100).aspx) -Schnittstelle, die eine Abstraktion zum Veröffentlichen/Abonnieren bereitstellt. Die Backplanes zu arbeiten, indem Sie den standardmäßigen ersetzen **"imessagebus"** mit einem Bus, die für diese Rückwandplatine konzipiert.

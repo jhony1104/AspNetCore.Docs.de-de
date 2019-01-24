@@ -3,18 +3,18 @@ uid: signalr/overview/getting-started/tutorial-server-broadcast-with-signalr
 title: 'Tutorial: Serverübertragung mit SignalR 2 | Microsoft-Dokumentation'
 author: tdykstra
 description: Dieses Tutorial veranschaulicht, wie eine Webanwendung erstellen, die ASP.NET SignalR 2 verwendet, um Server-broadcast-Funktionalität bereitzustellen.
-ms.author: riande
+ms.author: bradyg
 ms.date: 01/02/2019
 ms.topic: tutorial
 ms.assetid: 1568247f-60b5-4eca-96e0-e661fbb2b273
 msc.legacyurl: /signalr/overview/getting-started/tutorial-server-broadcast-with-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: a6014e604613492db91b2dc6f846c3c73d938d99
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: a243c78c7d552f1c82a88c6083871fcd16538618
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54099298"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837428"
 ---
 # <a name="tutorial-server-broadcast-with-signalr-2"></a>Tutorial: Server senden, die mit SignalR 2
 
@@ -26,7 +26,7 @@ Die Anwendung, die Sie in diesem Tutorial erstellen simuliert einen Börsenticke
 
 ![Erstellen Sie web](tutorial-server-broadcast-with-signalr/_static/image1.png)
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Erstellen eines Projekts
@@ -81,7 +81,7 @@ Sie verwenden die SignalR-Hub-API, um die Server-zu-Client-Interaktion. Ein `Sto
 
 Sollen nur eine Instanz der `StockTicker` Klasse, die auf dem Server ausgeführt wird, daher Sie einen Verweis aus jedem einrichten müssen `StockTickerHub` Instanz auf das Singleton `StockTicker` Instanz. Die `StockTicker` -Klasse verfügt über an Clients übertragen werden, da es die vorhandenen Daten und Updates, löst aber `StockTicker` wird keine `Hub` Klasse. Die `StockTicker` -Klasse verfügt über einen Verweis auf das Kontextobjekt für SignalR-Hub-Verbindung abrufen. Sie können dann das Kontextobjekt für SignalR-Verbindung verwenden, an Clients senden.
 
-#### <a name="create-stocktickerhubcs"></a>Erstellen von StockTickerHub.cs
+#### <a name="create-stocktickerhubcs"></a>Create StockTickerHub.cs
 
 1. In **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, und wählen Sie **hinzufügen** > **neues Element**.
 
@@ -105,7 +105,7 @@ Die `HubName` Attribut gibt an, wie die app Hub im JavaScript-Code auf dem Clien
 
 Wie Sie später sehen werden bei der Erstellung der `StockTicker` -Klasse, die app erstellt eine Singleton-Instanz dieser Klasse in die statische `Instance` Eigenschaft. Diese Singletoninstanz des `StockTicker` befindet sich im Speicher, unabhängig davon, wie viele Clients eine Verbindung herstellen oder trennen. Diese Instanz ist, was die `GetAllStocks()` Methode verwendet, um die aktuellen vordefinierten Informationen zurückgegeben werden sollen.
 
-#### <a name="create-stocktickercs"></a>Erstellen von StockTicker.cs
+#### <a name="create-stocktickercs"></a>Create StockTicker.cs
 
 1. In **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, und wählen Sie **hinzufügen** > **Klasse**.
 
@@ -232,7 +232,7 @@ Zunächst fügen Sie den HTML-Client.
 
 1. In **Projektmappen-Explorer**, mit der rechten Maustaste *StockTicker.html*, und wählen Sie dann **als Startseite festlegen**.
 
-#### <a name="create-stocktickerjs"></a>Erstellen von StockTicker.js
+#### <a name="create-stocktickerjs"></a>Create StockTicker.js
 
 Erstellen Sie jetzt die JavaScript-Datei.
 
@@ -321,7 +321,7 @@ Für eine bestimmte Verbindung wählt SignalR die beste Transportmethode, die de
 
     [!code-javascript[Main](tutorial-server-broadcast-with-signalr/samples/sample19.js?highlight=2)]
 
-1. Drücken Sie **F5** um das Projekt auszuführen.
+1. Drücken Sie **F5**, um das Projekt auszuführen.
 
 1. Öffnen Sie Ihren Browser die Developer-Tools-Fenster, und wählen Sie die Konsole, um die Protokolle anzuzeigen. Möglicherweise müssen die Seite zum Anzeigen der Protokolle von SignalR, die die Transportmethode für eine neue Verbindung aushandeln aktualisieren zu können.
 
@@ -483,11 +483,11 @@ Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
 * [ASP.NET SignalR](../../index.md)
 * [SignalR-Projekt](http://signalr.net/)
 * [SignalR GitHub und Beispiele](https://github.com/SignalR/SignalR)
-* [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+* [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Erstellen des Projekts

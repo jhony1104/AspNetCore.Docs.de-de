@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/releases/upgrading-signalr-1x-projects-to-20
 title: Aktualisieren von SignalR 1.x-Projekte auf Version 2 | Microsoft-Dokumentation
-author: pfletcher
+author: bradygaster
 description: In diesem Thema wird beschrieben, wie Sie ein vorhandenes SignalR 1.x-Projekt auf SignalR aktualisieren 2.x, und Beheben von Problemen, die während des Upgrades auftreten können...
-ms.author: riande
+ms.author: bradyg
 ms.date: 06/10/2014
 ms.assetid: adcfef99-9bc5-489d-a91b-9b7c2bc35e04
 msc.legacyurl: /signalr/overview/releases/upgrading-signalr-1x-projects-to-20
 msc.type: authoredcontent
-ms.openlocfilehash: 23ea23585b15395cf86bdad13885af32d1b64e79
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: a1cb4903f3cdeef70ffd0f624a3a2170f641a395
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53286843"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837337"
 ---
 <a name="upgrading-signalr-1x-projects-to-version-2"></a>Aktualisieren von SignalR 1.x-Projekte auf Version 2
 ====================
@@ -58,7 +58,7 @@ Dieses Tutorial beschreibt, wie Sie eine im Internet gehostete Anwendung mit Sig
 
 Die folgenden Abschnitte beschreiben die Aufgaben zum beim Upgrade von SignalR-Projekte, und Beheben von Problemen, die auftreten können.
 
-- [Beispiel: Aktualisieren die Tutorials: Erste Schritte mit SignalR 2](#example)
+- [Anpassen von mit VSTU Aktualisieren die Tutorials: Erste Schritte mit SignalR 2](#example)
 - [Problembehandlung für Fehler, die während des Upgrades](#troubleshooting)
 
 <a id="example"></a>

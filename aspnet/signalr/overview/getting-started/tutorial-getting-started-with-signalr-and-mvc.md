@@ -1,26 +1,26 @@
 ---
 uid: signalr/overview/getting-started/tutorial-getting-started-with-signalr-and-mvc
 title: 'Tutorial: Echtzeit-Chat mit SignalR 2 und MVC 5 | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Dieses Tutorial veranschaulicht, wie ASP.NET SignalR 2 zu verwenden, um eine chatanwendung mit Echtzeitfunktionalität erstellen. Eine MVC 5-Anwendung hinzugefügt SignalR.
-ms.author: riande
-ms.date: 01/02/2019
+ms.author: bradyg
+ms.date: 01/22/2019
 ms.assetid: 80bfe5fb-bdfc-41fe-ac43-2132e5d69fac
 msc.legacyurl: /signalr/overview/getting-started/tutorial-getting-started-with-signalr-and-mvc
 msc.type: authoredcontent
 ms.topic: tutorial
-ms.openlocfilehash: eb4b7e1403f4070d65702b756bf98c5294c7fb17
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 1b02aecc68a93dbd6373ca5304530e76c9d0b6b5
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098603"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837000"
 ---
 # <a name="tutorial-real-time-chat-with-signalr-2-and-mvc-5"></a>Tutorial: Echtzeit-Chat mit SignalR 2 und MVC 5
 
 Dieses Tutorial veranschaulicht, wie ASP.NET SignalR 2 zu verwenden, um eine chatanwendung mit Echtzeitfunktionalität erstellen. Sie SignalR zu einer MVC 5-Anwendung hinzufügen und erstellen eine Chat-Ansicht zum Senden und Nachrichten anzuzeigen.
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Einrichten des Projekts
@@ -176,6 +176,10 @@ Dieser Code öffnet eine Verbindung mit dem Hub.
 
 Der Code wird die Verbindung gestartet und leitet diese dann in eine Funktion zum Behandeln der Click-Ereignis auf der **senden** auf der Seite Chat.
 
+## <a name="get-the-code"></a>Abrufen des Codes
+
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/Getting-Started-with-c366b2f3)
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
@@ -184,11 +188,11 @@ Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
 
 * [SignalR GitHub und Beispiele](https://github.com/SignalR/SignalR)
 
-* [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+* [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Einrichten des Projekts

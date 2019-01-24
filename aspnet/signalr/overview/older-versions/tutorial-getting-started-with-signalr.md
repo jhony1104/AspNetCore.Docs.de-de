@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/older-versions/tutorial-getting-started-with-signalr
 title: 'Tutorial: Erste Schritte mit SignalR 1.x | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Verwenden Sie ASP.NET SignalR, um eine Echtzeit-Chat-Anwendung in eine HTML-Seite zu erstellen.
-ms.author: riande
+ms.author: bradyg
 ms.date: 02/18/2013
 ms.assetid: fdc3599a-5217-44c1-951f-0eec9812dce7
 msc.legacyurl: /signalr/overview/older-versions/tutorial-getting-started-with-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: 720a4879f5fbe3c0c2b4c7809cb94c22547329c3
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: b4b632a84e40aa0b73dfc7a30da0cf28249cc5b4
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287360"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836631"
 ---
 <a name="tutorial-getting-started-with-signalr-1x"></a>Tutorial: Erste Schritte mit SignalR 1.x
 ====================
@@ -123,7 +123,7 @@ Die folgenden Schritte verwenden Visual Studio 2012, erstellen eine leere ASP.NE
 
 Der SignalR Chat-Anwendung zeigt zwei grundlegende Aufgaben für die SignalR-Entwicklung: Erstellen eines Hubs wie das wichtigste Coordination-Objekt, auf dem Server, und mithilfe der SignalR-jQuery-Bibliothek zum Senden und Empfangen von Nachrichten.
 
-### <a name="signalr-hubs"></a>SignalR-Hubs
+### <a name="signalr-hubs"></a>SignalR Hubs
 
 Im Codebeispiel enthält die **ChatHub** Klasse leitet sich von der **Microsoft.AspNet.SignalR.Hub** Klasse. Ableiten von der **Hub** Klasse ist eine gute Möglichkeit, eine SignalR-Anwendung zu erstellen. Sie können öffentliche Methoden auf Ihrem Hub-Klasse erstellen und dann Zugriff auf diese Methoden durch einen Aufruf über die jQuery-Skripts auf einer Webseite.
 
@@ -173,4 +173,4 @@ Erweiterte Konzepte der SignalR-Entwicklungen finden Sie unter den folgenden Web
 
 - [SignalR-Projekt](http://signalr.net)
 - [SignalR Github und Beispiele](https://github.com/SignalR/SignalR)
-- [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+- [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)

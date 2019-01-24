@@ -1,20 +1,20 @@
 ---
 uid: signalr/overview/getting-started/tutorial-high-frequency-realtime-with-signalr
 title: 'Tutorial: Erstellen Sie in Echtzeit hoher Frequenz-app mit SignalR 2 | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Dieses Tutorial veranschaulicht, wie eine Webanwendung erstellen, die ASP.NET SignalR verwendet wird, um häufige-messaging-Funktionalität bereitzustellen.
-ms.author: riande
-ms.date: 01/02/2019
+ms.author: bradyg
+ms.date: 01/22/2019
 ms.assetid: 9f969dda-78ea-4329-b1e3-e51c02210a2b
 msc.legacyurl: /signalr/overview/getting-started/tutorial-high-frequency-realtime-with-signalr
 msc.type: authoredcontent
 ms.topic: tutorial
-ms.openlocfilehash: 85503db0b41be6f87136627667d6dd71f0d4f609
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 44aaa2b0c059de310e963f642fa56c2f00a7e443
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098589"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836726"
 ---
 # <a name="tutorial-create-high-frequency-real-time-app-with-signalr-2"></a>Tutorial: Erstellen Sie in Echtzeit hoher Frequenz-app mit SignalR 2
 
@@ -24,7 +24,7 @@ Die Anwendung, die Sie erstellen, zeigt eine Form, die Benutzer ziehen können. 
 
 In diesem Tutorial eingeführte Konzepte müssen Anwendungen in Echtzeit Spiele und andere Anwendungen für die Simulation.
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Einrichten des Projekts
@@ -224,6 +224,10 @@ Weniger ruckartige, wird die Verschiebung von der Form, in dem anderen Fenster a
 
 Dieser Code wird die Form am alten Speicherort in das neue Projekt verschoben. Der Server gibt die Position der Form im Verlauf des Intervalls Animation an. In diesem Fall ist, die 100 Millisekunden. Die app löscht alle vorherige Animation, auf die Form ausgeführt werden, bevor die neue Animation gestartet wird.
 
+## <a name="get-the-code"></a>Abrufen des Codes
+
+[Abgeschlossenes Projekt herunterladen](http://code.msdn.microsoft.com/SignalR-20-MoveShape-Demo-6285b83a)
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Das Communication-Paradigma, die Sie gerade gelernt haben, zu eignet sich für die Entwicklung von Onlinespielen und andere Simulationen, wie z. B. [ShootR Spiel erstellt, die mit SignalR](https://shootr.azurewebsites.net/).
@@ -234,11 +238,11 @@ Weitere Informationen zu SignalR finden Sie in den folgenden Ressourcen:
 
 * [SignalR GitHub und Beispiele](https://github.com/SignalR/SignalR)
 
-* [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+* [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial haben Sie:
+In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Einrichten des Projekts

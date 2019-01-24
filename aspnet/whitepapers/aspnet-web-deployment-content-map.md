@@ -8,18 +8,18 @@ ms.date: 03/14/2014
 ms.assetid: 58b583cd-c4ab-47a3-8527-8c92c298c91f
 msc.legacyurl: /whitepapers/aspnet-web-deployment-content-map
 msc.type: content
-ms.openlocfilehash: c970d929c4e6b581bedd2947982926ac448facfa
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: 6df0c9d2f38ad1d39abd62787c600ef80da8e8e0
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41823932"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836220"
 ---
 <a name="aspnet-web-deployment---recommended-resources"></a>ASP.NET: Webbereitstellung – empfohlene Ressourcen
 ====================
 > Dieses Thema enthält Links zu Dokumentationen, die Ressourcen zum Bereitstellen (veröffentlichen) von ASP.NET web-Anwendungen zu IIS mithilfe von Visual Studio 2010, Visual Web Developer 2010 und höheren Versionen.
 > 
-> Wenn Sie wissen, dass ein tolles Blog Posten, [Stackoverflow](http://stackoverflow.com) Thread oder einen anderen Link, die nützlich wären [senden Sie uns eine e-Mail](mailto:aspnetue@microsoft.com?subject=Deployment Content Map) mit dem Link.
+> Wenn Sie wissen, dass ein tolles Blog Posten, [Stackoverflow](http://stackoverflow.com) Thread oder einen anderen Link, die nützlich wären [senden Sie uns eine e-Mail](mailto:aspnetue@microsoft.com?subject=Deployment%20Content%20Map) mit dem Link.
 > 
 > > [!NOTE] 
 > > 
@@ -75,7 +75,7 @@ Dieses Thema enthält folgende Abschnitte:
 
 - [Gewusst wie: Bereitstellen einer Windows Azure-Website](https://docs.microsoft.com/azure/app-service-web/web-sites-deploy). Erläutert Optionen sowie Links zu Ressourcen für die Bereitstellung von Webprojekten in Windows Azure-Websites. Enthält einen Abschnitt zur Bereitstellung von Visual Studio.
 - [ASP.NET-webbereitstellung mithilfe von Visual Studio](../web-forms/overview/deployment/visual-studio-web-deployment/introduction.md). Teil 12 tutorialreihe wird gezeigt, wie von Webanwendungen mit SQL Server-Datenbanken bereitgestellt wird. Für die Datenbank verwendet die Bereitstellung der DbDacFx-Anbieter und Entity Framework Code First-Migrationen. Enthält zudem Informationen zu [Umwandlungen für die Datei "Web.config"](../web-forms/overview/deployment/visual-studio-web-deployment/web-config-transformations.md), [Bereitstellen von einzelnen Dateien](../web-forms/overview/deployment/visual-studio-web-deployment/deploying-a-code-update.md#specificfiles), [Bereitstellung über die Befehlszeile](../web-forms/overview/deployment/visual-studio-web-deployment/command-line-deployment.md), und [wie Anpassen der Visual Studio Web Pipeline durch Bearbeiten pubxml-Dateien veröffentlichen](../web-forms/overview/deployment/visual-studio-web-deployment/deploying-extra-files.md). Gilt für alle ASP.NET Web-Projekte, einschließlich Web Forms, MVC und Web-API.)
-- [Gewusst wie: Bereitstellen einer Webanwendungsprojekts mit One-Click-Veröffentlichung in Visual Studio](https://msdn.microsoft.com/library/dd465337.aspx) (Referenzinformationen zu den Visual Studio Web Publish-Assistenten)
+- [Vorgehensweise: Bereitstellen einer Webanwendungsprojekts mit One-Click-Veröffentlichung in Visual Studio](https://msdn.microsoft.com/library/dd465337.aspx) (Referenzinformationen zu den Visual Studio Web Publish-Assistenten)
 - [Bereitstellen einer ASP.NET-Webanwendung mit SQL Server Compact mit Visual Studio](../web-forms/overview/older-versions-getting-started/deployment-to-a-hosting-provider/deployment-to-a-hosting-provider-introduction-1-of-12.md). Dies ist eine frühere Version von **ASP.NET-webbereitstellung mithilfe von Visual Studio** ganz oben in diesem Abschnitt. Vor allem nützlich für jetzt Informationen zum Bereitstellen von SQL Server Compact-Datenbanken und wie Sie von SQL Server Compact auf eine Vollversion von SQL Server zu migrieren.
 - [.NET Multi-Tier-Anwendung mithilfe von Storage-Tabellen, Warteschlangen und Blobs](https://code.msdn.microsoft.com/Windows-Azure-Multi-Tier-eadceb36) (Microsoft Azure-Website). 5-Teil der tutorialreihe, veranschaulicht, wie ein MVC-Projekt erstellen und in einem Windows Azure-Cloud-Dienst bereitstellen.
 
@@ -83,8 +83,8 @@ Dieses Thema enthält folgende Abschnitte:
 <a id="package"></a>
 ## <a name="deploying-a-web-application-by-creating-and-installing-a-web-deployment-package"></a>Bereitstellen einer Web-Anwendung erstellen und Installieren von einem Webbereitstellungspaket
 
-- [Vorgehensweise: erstellen ein Webbereitstellungspakets in Visual Studio](https://msdn.microsoft.com/library/dd465323.aspx) (MSDN).
-- [Vorgehensweise: installieren ein Bereitstellungspakets mit der Datei "Deploy.cmd" erstellt von Visual Studio](https://msdn.microsoft.com/library/ff356104.aspx) (MSDN).
+- [Vorgehensweise: Erstellen ein Webbereitstellungspakets in Visual Studio](https://msdn.microsoft.com/library/dd465323.aspx) (MSDN).
+- [Vorgehensweise: Installieren ein Bereitstellungspakets mit der Datei "Deploy.cmd" erstellt von Visual Studio](https://msdn.microsoft.com/library/ff356104.aspx) (MSDN).
 - [Mithilfe von Web Deploy-Pakete zum Bereitstellen in IIS auf dem Entwicklungscomputer und auf einem Host von Drittanbietern](http://sedodream.com/2011/11/08/UsingAWebDeployPackageToDeployToIISOnTheDevBoxAndToAThirdPartyHost.aspx) (Sayed Hashimi-Blog). Gewusst wie: Verwenden Sie zum Installieren eines Bereitstellungspakets in IIS auf dem lokalen Computer und auf ein hosting zu Unternehmen, die IIS-Manager unterstützt die IIS-Manager für die Remoteverwaltung.
 - [Erstellen eine Web bereitstellen Paket von Visual Studio 2010](https://www.iis.net/learn/publish/using-web-deploy/building-a-web-deploy-package-from-visual-studio-2010) (IIS.NET-Website). Enthält Anweisungen zum Befehlszeilen-Paket erstellen und installieren.
 - [Packen Sie einmal veröffentlichen überall](http://sedodream.com/2012/03/14/PackageWebUpdatedAndVideoBelow.aspx) (Sayed Hashimi-Blog). Stellt ein NuGet-Paket, das den Prozess der Transformation der Datei "Web.config" für zielumgebungen mit mehreren, automatisiert, damit Sie ein Paket mit mehreren Servern bereitstellen können. Siehe auch die [PackageWeb Video](https://www.youtube.com/watch?v=-LvUJFI8CzM) von Sayed Hashimi.
@@ -100,7 +100,7 @@ Siehe auch im folgenden Abschnitt.
 - [Continuous Integration und Continuous Delivery (erstellen realer Cloud-Apps mit Windows Azure).](../aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery.md) E-Book-Kapitel, die continuous Integration und continuous Delivery eingeführt werden.
 - [Gewusst wie: Bereitstellen einer Windows Azure-Website](https://docs.microsoft.com/azure/app-service-web/web-sites-deploy). Erläutert die Optionen und Links für Ressourcen für die Bereitstellung von Webprojekten in Windows Azure-Websites. Enthält einen Abschnitt zum Automatisieren von Bereitstellungen aus der quellcodeverwaltung.
 - [Bereitstellen von Webanwendungen in Unternehmensszenarien](../web-forms/overview/deployment/deploying-web-applications-in-enterprise-scenarios/deploying-web-applications-in-enterprise-scenarios.md). 40-Teil der tutorialreihe, veranschaulicht Automatisieren der Bereitstellung in einem CI-Prozess mithilfe von Visual Studio 2010 und Team Foundation Server 2010.
-- [In der Microsoft Build-Engine: Verwenden von MSBuild und Team Foundation-Build von Sayed Hashimi und William Bartholomew](http://msbuildbook.com). Dies ist ein Buch, nicht auf eine Webressource, aber es ist eine wichtige Anleitung aus, für das Erlernen von MSBuild für Szenarien mit fortlaufender Integration zu konfigurieren.
+- [In der Microsoft Build-Engine: Mithilfe von MSBuild und Team Foundation-Build von Sayed Hashimi und William Bartholomew](http://msbuildbook.com). Dies ist ein Buch, nicht auf eine Webressource, aber es ist eine wichtige Anleitung aus, für das Erlernen von MSBuild für Szenarien mit fortlaufender Integration zu konfigurieren.
 - [MSBuild-Erweiterungspaket](https://github.com/mikefourie/MSBuildExtensionPack). Umfasst die Bereitstellungsaufgaben.
 - [Team Foundation Build Customization Guide](https://aka.ms/vsarsolutions). Dokumentation von ALM Rangers zum Einrichten von Team Foundation Server behandelt webbereitstellung, und es enthält Lernprogramme und Videos.
 - [SlowCheetah XML transformiert werden, von einem CI-Server](http://sedodream.com/2011/12/12/SlowCheetahXMLTransformsFromACIServer.aspx) (Sayed Hashimi-Blog). Erläutert, wie SlowCheetah, eine Visual Studio-add-in für die Transformation von "App.config" und andere XML-Dateien.
@@ -119,7 +119,7 @@ Siehe auch [sicherstellen einer Anwendungs offline ist, während der Bereitstell
 - [Wie deaktiviere ich die Web.config-Transformation?](https://msdn.microsoft.com/library/ee942158.aspx#disable_web_config_transformation) (MSDN).
 - [Wann sollte ich Web Deploy-Parameter anstelle von Web.config-Transformationen verwenden?](https://msdn.microsoft.com/library/ee942158.aspx#web_deploy_parameters) (MSDN).
 - [Mithilfe von XDT (XML Document Transformation) veröffentlicht, auf codeplex.com](https://blogs.msdn.com/b/webdev/archive/2013/04/23/xdt-xml-document-transform-released-on-codeplex-com.aspx) (.NET-Webentwicklung und Tools-Blog). Kündigt die Verfügbarkeit des Quellcodes für die Datei "Web.config" Datei-Transformations-Engine und führt einige Tools, die sie verwenden.
-- [Windows Azure-Websites: Anwendung wie Zeichenfolgen und Verbindungszeichenfolgen](https://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx) (Microsoft Azure-Blog). Eine Alternative zur Datei "Web.config" transformiert werden, wenn es sich bei Ihrer zielumgebung ist Windows Azure-Websites, und Sie transformieren möchten `appSettings` oder `connectionStrings`.
+- [Windows Azure-Websites: Wie Zeichenfolgen und Verbindungszeichenfolgen](https://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx) (Microsoft Azure-Blog). Eine Alternative zur Datei "Web.config" transformiert werden, wenn es sich bei Ihrer zielumgebung ist Windows Azure-Websites, und Sie transformieren möchten `appSettings` oder `connectionStrings`.
 
 
 <a id="webdeployparms"></a>
@@ -128,11 +128,11 @@ Siehe auch [sicherstellen einer Anwendungs offline ist, während der Bereitstell
 ## <a name="using-web-deploy-parameters-to-change-settings-in-the-destination-web-application-during-deployment"></a>Verwenden von Web Deploy Parametern zum Ändern der Einstellungen in der Ziel-Webanwendung während der Bereitstellung
 
 - [Vorgehensweise: Verwenden von Web Deploy-Parametern in einem Webbereitstellungspaket](https://msdn.microsoft.com/library/ff398068.aspx) (MSDN).
-- [MSDeploy: Aktualisieren von app-Einstellungen für die Veröffentlichung basierend auf dem Veröffentlichungsprofil ein](http://sedodream.com/2013/03/02/MSDeployHowToUpdateAppSettingsOnPublishBasedOnThePublishProfile.aspx) (Sayed Hashimi-Blog). Zeigt, wie Sie integrieren Web deploy-Parametern in Visual Studio Profile veröffentlichen.
+- [MSDeploy: Vorgehensweise beim Aktualisieren der app-Einstellungen für das Veröffentlichen auf Grundlage des Veröffentlichungsprofils](http://sedodream.com/2013/03/02/MSDeployHowToUpdateAppSettingsOnPublishBasedOnThePublishProfile.aspx) (Sayed Hashimi-Blog). Zeigt, wie Sie integrieren Web deploy-Parametern in Visual Studio Profile veröffentlichen.
 - [Web-bereitstellen-Parametrisierung](https://www.iis.net/learn/publish/using-web-deploy/web-deploy-parameterization) (IIS.NET-Website).
 - [Web-bereitstellen-Parametrisierung in Aktion](http://vishaljoshi.blogspot.com/2010/07/web-deploy-parameterization-in-action.html) (Vishal Joshi Blog).
 - [Visual Studio Web-Parametrisierung bereitstellen. Web.config-Transformation](http://vishaljoshi.blogspot.com/2010/06/parameterization-vs-webconfig.html) (Vishal Joshi Blog).
-- [Windows Azure-Websites: Anwendung wie Zeichenfolgen und Verbindungszeichenfolgen](https://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx) (Microsoft Azure-Blog). Eine Alternative zu Web deploy-Parametern Ihrer zielumgebung ist Windows Azure-Websites, und Sie parametrisieren möchten `appSettings` oder `connectionStrings`.
+- [Windows Azure-Websites: Wie Zeichenfolgen und Verbindungszeichenfolgen](https://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx) (Microsoft Azure-Blog). Eine Alternative zu Web deploy-Parametern Ihrer zielumgebung ist Windows Azure-Websites, und Sie parametrisieren möchten `appSettings` oder `connectionStrings`.
 
 
 <a id="appoffline"></a>

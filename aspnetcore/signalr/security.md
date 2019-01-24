@@ -1,18 +1,18 @@
 ---
 title: Überlegungen zur Sicherheit in ASP.NET Core SignalR
-author: tdykstra
+author: bradygaster
 description: Erfahren Sie, wie Sie Authentifizierung und Autorisierung in ASP.NET Core SignalR verwenden.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
 ms.date: 11/06/2018
 uid: signalr/security
-ms.openlocfilehash: f646d319cf3030fd4d769e882514da14b230bbdd
-ms.sourcegitcommit: c3fa5aded0bf76a7414047d50b8a2311d27ee1ef
+ms.openlocfilehash: 52cfac6be8e61572acdf0b19dab574b607314d97
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/08/2018
-ms.locfileid: "51276144"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836063"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>Überlegungen zur Sicherheit in ASP.NET Core SignalR
 
@@ -46,25 +46,25 @@ Beispielsweise kann die folgende CORS-Richtlinie einer SignalR-Browser-Client au
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Der Schutz von CORS erhalten, anwenden nicht auf WebSockets. Origin-Einschränkung für WebSockets, finden Sie in [WebSockets Ursprung Einschränkung](xref:fundamentals/websockets#websocket-origin-restriction).
+Der von CORS erzeugte Schutz gilt nicht für WebSockets. Origin-Einschränkung für WebSockets, finden Sie in [WebSockets Ursprung Einschränkung](xref:fundamentals/websockets#websocket-origin-restriction).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Der Schutz von CORS erhalten, anwenden nicht auf WebSockets. Führen Sie den Browser **nicht**:
+Der von CORS erzeugte Schutz gilt nicht für WebSockets. Für Browser gilt Folgendes **nicht**:
 
-* Führen Sie die CORS-Preflight-Prüfliste-Anforderungen.
-* Berücksichtigen Sie die Einschränkungen, die im angegebenen `Access-Control` Header bei WebSocket-Anforderungen.
+* Ausführen von CORS-Preflightanforderungen
+* Berücksichtigen der Einschränkungen, die in den `Access-Control`-Headern bei der Erstellung von WebSocket-Anforderungen angegeben sind
 
-Allerdings Browser Sende die `Origin` Header, wenn die WebSocket-Anforderungen ausgeben. Anwendungen sollten konfiguriert werden, um zu überprüfen diese Header, um sicherzustellen, dass nur WebSockets, die von der erwarteten Ursprünge zulässig sind.
+Allerdings senden Browser den `Origin`-Header, wenn die WebSocket-Anforderungen ausgegeben werden. Anwendungen sollten zur Überprüfung dieser Header konfiguriert werden, um sicherzustellen, dass nur WebSockets von den erwarteten Ursprüngen zulässig sind.
 
 In ASP.NET Core 2.1 und höher headerüberprüfung erfolgt über eine benutzerdefinierte Middleware platziert **vor `UseSignalR`, und die authentifizierungsmiddleware** in `Configure`:
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
 > [!NOTE]
-> Die `Origin` Header wird gesteuert, durch den Client und, wie die `Referer` -Header, überlistet werden kann. Dieser Header sollte **nicht** als Authentifizierungsmechanismus verwendet werden.
+> Der `Origin`-Header wird vom Client gesteuert und kann wie der `Referer`-Header überlistet werden. Dieser Header sollte **nicht** als Authentifizierungsmechanismus verwendet werden.
 
 ::: moniker-end
 

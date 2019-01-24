@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/older-versions/scaleout-in-signalr
 title: Einführung zur horizontalen Skalierung in SignalR 1.x | Microsoft-Dokumentation
-author: MikeWasson
+author: bradygaster
 description: ''
-ms.author: riande
+ms.author: bradyg
 ms.date: 04/29/2013
 ms.assetid: 3fd9f11c-799b-4001-bd60-1e70cfc61c19
 msc.legacyurl: /signalr/overview/older-versions/scaleout-in-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: fffa424ea4b62a54b9df48aaa409541ab5d1608f
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 78e53c38ec760334cecee0431d52d993a657b908
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53287593"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837285"
 ---
 <a name="introduction-to-scaleout-in-signalr-1x"></a>Einführung zur horizontalen Skalierung in SignalR 1.x
 ====================
@@ -38,7 +38,7 @@ SignalR stellt derzeit drei Backplanes bereit:
 
 - **Azure Servicebus**. Service Bus ist eine messaging-Infrastruktur, die Komponenten zum Senden von Nachrichten in einem lose gekoppelten System ermöglicht.
 - **Redis**. Redis ist ein Schlüssel-Wert-Speicher im Arbeitsspeicher. Redis unterstützt ein Muster zum Veröffentlichen/Abonnieren ("Pub/Sub") zum Senden von Nachrichten an.
-- **SQLServer**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
+- **SQL Server**. Die SQL Server-Rückwandplatine Nachrichten, die in SQL-Tabellen geschrieben wird. Der Rückwand verwendet Service Broker für effiziente messaging. Es funktioniert jedoch auch, wenn Service Broker nicht aktiviert ist.
 
 Wenn Sie Ihre Anwendung in Azure bereitstellen, sollten erwägen Sie, die Azure Service Bus-Rückwandplatine zu verwenden. Wenn Sie mit Ihren eigenen Serverfarm bereitstellen, sollten Sie Sie der SQL Server- oder Redis Backplanes.
 

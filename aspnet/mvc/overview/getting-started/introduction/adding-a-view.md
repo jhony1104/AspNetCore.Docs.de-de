@@ -3,14 +3,14 @@ title: Hinzufügen einer Ansicht zu einer MVC-app
 author: Rick-Anderson
 description: Hinzufügen einer Ansicht zu einer MVC-app
 ms.author: riande
-ms.date: 09/1721/2017
+ms.date: 01/23/2019
 uid: mvc/overview/getting-started/introduction/adding-a-view
-ms.openlocfilehash: 47447c82506cc0eb4dafabe272b3204f76a2edd7
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: afa7584529566ebe82a0eb3849de89bd0df064bd
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098661"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837753"
 ---
 <a name="adding-a-view"></a>Hinzufügen einer Ansicht
 ====================
@@ -60,7 +60,7 @@ Alternativ führen Sie die Anwendung, und navigieren Sie zu der `HelloWorld` Con
 
 ![](adding-a-view/_static/image6.png)
 
-Das sieht recht gut. Beachten Sie jedoch, dass die Titelleiste des Browsers wird &quot;Index - meine ASP.NET Anwendungse "und der große Link oben auf der Seite"Anwendungsname". Je nach kleine Sie Ihr Browserfenster vornehmen, müssen Sie möglicherweise die drei Balken in der oberen rechten Ecke, um anzuzeigen, klicken Sie auf die auf die **Startseite**, **zu**, **wenden Sie sich an**, **Registrieren** und **melden Sie sich bei** Links.
+Das sieht recht gut. Beachten Sie jedoch, dass im Browser auf die Titelleiste zeigt "Index – My ASP.NET Application," und der große Link am oberen Rand der Seite ", sagt"Anwendungsname". Je nach kleine Sie Ihr Browserfenster vornehmen, müssen Sie möglicherweise die drei Balken in der oberen rechten Ecke, um anzuzeigen, klicken Sie auf die auf die **Startseite**, **zu**, **wenden Sie sich an**, **Registrieren** und **melden Sie sich bei** Links.
 
 ## <a name="changing-views-and-layout-pages"></a>Ändern von Ansichten und Layoutseiten
 
