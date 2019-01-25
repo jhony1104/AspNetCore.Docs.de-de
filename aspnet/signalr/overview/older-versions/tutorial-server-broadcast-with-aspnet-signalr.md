@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/older-versions/tutorial-server-broadcast-with-aspnet-signalr
 title: 'Tutorial: Serverübertragung mit ASP.NET SignalR 1.x | Microsoft-Dokumentation'
-author: pfletcher
+author: bradygaster
 description: Dieses Tutorial veranschaulicht, wie eine Webanwendung erstellen, die ASP.NET SignalR verwendet, um Server-broadcast-Funktionalität bereitzustellen. Serverübertragung bedeutet, dass das communic...
-ms.author: riande
+ms.author: bradyg
 ms.date: 04/10/2013
 ms.assetid: ab7b2554-956a-4f6d-b2a0-4ae0c62e8580
 msc.legacyurl: /signalr/overview/older-versions/tutorial-server-broadcast-with-aspnet-signalr
 msc.type: authoredcontent
-ms.openlocfilehash: d5c09f6493c4dedb4fc2ecbf9055dd014ede71f2
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: 258a55bf72c4b3425d001f478620fa9651952b3f
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53288046"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837467"
 ---
 <a name="tutorial-server-broadcast-with-aspnet-signalr-1x"></a>Tutorial: Serverübertragung mit ASP.NET SignalR 1.x
 ====================
@@ -117,7 +117,7 @@ Sie möchten nur eine Instanz der StockTicker-Klasse, auf dem Server ausgeführt
 2. Wenn Sie Visual Studio 2012 mit haben die [ASP.NET und Web Tools 2012.2 Update](https://go.microsoft.com/fwlink/?LinkId=279941), klicken Sie auf **Web** unter **Visual C#-** , und wählen Sie die **SignalR-Hubklasse** Elementvorlage. Wählen Sie andernfalls die **Klasse** Vorlage.
 3. Nennen Sie die neue Klasse *StockTickerHub.cs*, und klicken Sie dann auf **hinzufügen**.
 
-    ![Hinzufügen von StockTickerHub.cs](tutorial-server-broadcast-with-aspnet-signalr/_static/image5.png)
+    ![Add StockTickerHub.cs](tutorial-server-broadcast-with-aspnet-signalr/_static/image5.png)
 4. Ersetzen Sie den Vorlagencode durch den folgenden Code:
 
     [!code-csharp[Main](tutorial-server-broadcast-with-aspnet-signalr/samples/sample3.cs)]
@@ -297,7 +297,7 @@ Für eine bestimmte Verbindung wählt SignalR die beste Transportmethode, die de
 
     Wenn Sie Internet Explorer 10 unter Windows 7 (IIS 7.5) ausgeführt werden, ist die Transportmethode Iframe an.
 
-    ![IE 10-Konsole mit IIS 7.5](tutorial-server-broadcast-with-aspnet-signalr/_static/image11.png)
+    ![IE 10 Console, IIS 7.5](tutorial-server-broadcast-with-aspnet-signalr/_static/image11.png)
 
     Installieren Sie die Firebug-add-Ins rufen Sie ein Konsolenfenster, in Firefox. Wenn Sie Firefox 19 unter Windows 8 (IIS 8) ausgeführt werden, ist die Transportmethode die WebSockets.
 
@@ -415,4 +415,4 @@ Erweiterte Konzepte der SignalR-Entwicklung finden Sie unter den folgenden Websi
 - [ASP.NET SignalR](https://asp.net/signalr/)
 - [SignalR-Projekt](http://signalr.net/)
 - [SignalR Github und Beispiele](https://github.com/SignalR/SignalR)
-- [SignalR-Wiki](https://github.com/SignalR/SignalR/wiki)
+- [SignalR Wiki](https://github.com/SignalR/SignalR/wiki)
