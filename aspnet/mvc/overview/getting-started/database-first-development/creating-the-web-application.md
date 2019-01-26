@@ -1,30 +1,38 @@
 ---
 uid: mvc/overview/getting-started/database-first-development/creating-the-web-application
-title: 'EF Database First mit ASP.NET MVC: Erstellen der Webanwendung und Datenmodelle | Microsoft-Dokumentation'
+title: 'Tutorial: Erstellen Sie die der Webanwendung und Datenmodelle für EF Database First mit ASP.NET MVC'
+description: Dieser Artikel konzentriert sich auf die Webanwendung erstellen und das Generieren von Datenmodelle auf Grundlage von Datenbanktabellen.
 author: Rick-Anderson
-description: Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieses Tutorial Seri...
 ms.author: riande
-ms.date: 10/01/2014
+ms.date: 01/23/2019
+ms.topic: tutorial
 ms.assetid: bc8f2bd5-ff57-4dcd-8418-a5bd517d8953
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/creating-the-web-application
 msc.type: authoredcontent
-ms.openlocfilehash: 6679b61326bd016481d96a4b5d58ec006f86b633
-ms.sourcegitcommit: 2d3e5422d530203efdaf2014d1d7df31f88d08d0
+ms.openlocfilehash: 095d355866c9ab8fba3759f3e05e2a521992f3d6
+ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2018
-ms.locfileid: "51020796"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54889768"
 ---
-<a name="ef-database-first-with-aspnet-mvc-creating-the-web-application-and-data-models"></a>EF Database First mit ASP.NET MVC: Erstellen der Webanwendung und Datenmodelle
-====================
-durch [Tom FitzMacken](https://github.com/tfitzmac)
+# <a name="tutorial-create-the-the-web-application-and-data-models-for-ef-database-first-with-aspnet-mvc"></a>Tutorial: Erstellen Sie die der Webanwendung und Datenmodelle für EF Database First mit ASP.NET MVC
 
-> Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle.
-> 
-> Dieser Teil der Serie konzentriert sich auf die Webanwendung erstellen und das Generieren von Datenmodelle auf Grundlage von Datenbanktabellen.
+ Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle.
 
+Dieser Artikel konzentriert sich auf die Webanwendung erstellen und das Generieren von Datenmodelle auf Grundlage von Datenbanktabellen.
 
-## <a name="create-a-new-aspnet-web-application"></a>Erstellen Sie eine neue ASP.NET-Webanwendung
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erstellen einer ASP.NET-Web-App
+> * Die Modelle generieren
+
+## <a name="prerequisites"></a>Vorraussetzungen
+
+* [Erste Schritte mit Entity Framework 6 Database First anhand von MVC 5](setting-up-database.md)
+
+## <a name="create-an-aspnet-web-app"></a>Erstellen einer ASP.NET-Web-App
 
 Erstellen Sie ein neues Projekt in Visual Studio in einer neuen Projektmappe oder der gleichen Projektmappe wie das Projekt, und wählen Sie die **ASP.NET-Webanwendung** Vorlage. Nennen Sie das Projekt **ContosoSite**.
 
@@ -33,8 +41,6 @@ Erstellen Sie ein neues Projekt in Visual Studio in einer neuen Projektmappe ode
 Klicken Sie auf **OK**.
 
 Wählen Sie im Fenster Neues ASP.NET-Projekt die **MVC** Vorlage. Sie können löschen, die **in der Cloud hosten** option jetzt, da Sie später die Anwendung in der Cloud bereitstellen. Klicken Sie auf **OK** zum Erstellen der Anwendung.
-
-![Mvc-Vorlage auswählen](creating-the-web-application/_static/image2.png)
 
 Das Projekt wird mit der Standarddateien und Ordner erstellt.
 
@@ -48,25 +54,17 @@ Erstellen Sie jetzt Entity Framework-Modellen aus den Datenbanktabellen. Diese M
 
 Mit der rechten Maustaste die **Modelle** Ordner, und wählen **hinzufügen** und **neues Element**.
 
-![Neues Element hinzufügen](creating-the-web-application/_static/image4.png)
-
 Wählen Sie im Fenster "Neues Element hinzufügen", **Daten** im linken Bereich und **ADO.NET Entity Data Model** aus den Optionen im mittleren Bereich. Nennen Sie die neue Modelldatei **ContosoModel**.
-
-![Modell erstellen](creating-the-web-application/_static/image5.png)
 
 Klicken Sie auf **Hinzufügen**.
 
 Wählen Sie in der Assistent für Entity Data Model **EF Designer aus Datenbank**.
 
-![aus Datenbank generieren](creating-the-web-application/_static/image6.png)
-
 Klicken Sie auf **Weiter**.
 
 Wenn Sie Verbindungen mit der Datenbank in Ihrer Entwicklungsumgebung definiert haben, sehen Sie diese Verbindungen vorab ausgewählt. Sie möchten jedoch eine neue Verbindung mit der Datenbank zu erstellen, die Sie im ersten Teil dieses Tutorials erstellt haben. Klicken Sie auf die **neue Verbindung** Schaltfläche.
 
-![mit Datenbank verbinden](creating-the-web-application/_static/image7.png)
-
-Geben Sie im Fenster Eigenschaften der Verbindung den Namen des lokalen Servers, in die Datenbank erstellt wurde (in diesem Fall **(Localdb) \ProjectsV12**). Wählen Sie nachdem Sie den Namen des Servers haben die ContosoUniversityData aus den verfügbaren Datenbanken aus.
+Geben Sie im Fenster Eigenschaften der Verbindung den Namen des lokalen Servers, in die Datenbank erstellt wurde (in diesem Fall **(Localdb) \Projects13**). Wählen Sie nachdem Sie den Namen des Servers haben die ContosoUniversityData aus den verfügbaren Datenbanken aus.
 
 ![Set-Verbindungseigenschaften](creating-the-web-application/_static/image8.png)
 
@@ -74,13 +72,13 @@ Klicken Sie auf **OK**.
 
 Die richtige Verbindungseigenschaften werden nun angezeigt. Sie können den Standardnamen für die Verbindung in der Datei "Web.config" verwenden.
 
-![Verbindungseinstellungen](creating-the-web-application/_static/image9.png)
+Klicken Sie auf **Weiter**.
+
+Wählen Sie die neueste Version von Entity Framework.
 
 Klicken Sie auf **Weiter**.
 
 Wählen Sie **Tabellen** zum Generieren von Modellen für alle drei Tabellen.
-
-![Tabellen auswählen](creating-the-web-application/_static/image10.png)
 
 Klicken Sie auf **Fertig stellen**.
 
@@ -92,12 +90,18 @@ Die Modelle aus Tabellen der Datenbank generiert wird, und ein Diagramm wird mit
 
 Der Ordner "Models" enthält jetzt viele neue Dateien, die im Zusammenhang mit der die Modelle, die aus der Datenbank generiert wurden.
 
-![Neues Modelldateien anzeigen](creating-the-web-application/_static/image12.png)
-
 Die **ContosoModel.Context.cs** -Datei enthält eine abgeleitete Klasse die **"DbContext"** Klasse, und stellt eine Eigenschaft für jede Modellklasse, die einer Datenbanktabelle entspricht. Die **Course.cs**, **Enrollment.cs**, und **Student.cs** Dateien enthalten die Modellklassen, die in den Datenbanken Tabellen darstellen. Sie werden sowohl der Context-Klasse und die Modellklassen verwenden, bei der Arbeit mit Gerüstbau.
 
 Erstellen Sie bevor Sie mit diesem Tutorial Fortfahren das Projekt ein. Im nächsten Abschnitt generieren Sie Code auf Grundlage der Datenmodelle, aber dieser Abschnitt funktioniert nicht, wenn das Projekt noch nicht erstellt wurde.
 
-> [!div class="step-by-step"]
-> [Zurück](setting-up-database.md)
-> [Weiter](generating-views.md)
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erstellt eine ASP.NET Web-app
+> * Generiert die Modelle
+
+Verschiebung der Anwendungszeit auf dem nächsten Artikel erfahren, wie Erstellung Generieren von Code basierend auf den Datenmodellen.
+> [!div class="nextstepaction"]
+> [Generieren von Sichten](generating-views.md)

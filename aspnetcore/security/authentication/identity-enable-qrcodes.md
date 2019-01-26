@@ -5,12 +5,12 @@ description: Erfahren Sie, wie QR-codegenerierung für TOTP-Authentifikator-apps
 ms.author: riande
 ms.date: 08/14/2018
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 437f354f71128a98bae9abdced291e04efc9f48e
-ms.sourcegitcommit: fc7eb4243188950ae1f1b52669edc007e9d0798d
+ms.openlocfilehash: cf99cc21a7a1bb4d01c7cc092106d23375a1a76f
+ms.sourcegitcommit: ca5f03210bedc61c6639a734ae5674bfe095dee8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2018
-ms.locfileid: "51225381"
+ms.lasthandoff: 01/26/2019
+ms.locfileid: "55073126"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>Aktivieren der QR-Code-Generierung für Authentifikator-apps in ASP.NET Core TOTP
 
@@ -25,6 +25,8 @@ Qr-Codes ist ASP.NET Core 2.0 oder höher erforderlich.
 Im Lieferumfang von ASP.NET Core ist Support für Authenticator-Anwendungen für die einzelne Authentifizierung. Zwei Faktor-Authentifizierung (2FA) Authentifikator-apps, verwenden eine zeitbasierte Einmalkennwort Kennwort Algorithmus (TOTP), sind der empfohlene Ansatz für 2FA Branche. 2FA TOTP mit SMS 2FA vorzuziehen ist. Eine Authentifikator-app bietet einen 6 bis 8 Ziffern-Code, der die Benutzer nach der Bestätigung ihres Benutzernamens und Kennworts eingeben müssen. In der Regel wird eine Authentifikator-app auf einem Smartphone installiert.
 
 Die ASP.NET Core-Web-app-Vorlagen unterstützen von Authentifikatoren, aber Sie bieten keine Unterstützung für QRCode Generation. QRCode Generatoren vereinfachen die Einrichtung der 2FA. Dieses Dokument führt Sie durch Hinzufügen von [QR-Code](https://wikipedia.org/wiki/QR_code) Generierung auf der Konfigurationsseite 2FA.
+
+Zweistufige Authentifizierung erfolgt nicht mithilfe eines externen Authentifizierungsanbieters, z. B. [Google](xref:security/authentication/google-logins) oder [Facebook](xref:security/authentication/facebook-logins). Externe Anmeldungen sind geschützt durch Mechanismus der externen Anmeldeanbieter bietet. Betrachten Sie z. B. die [Microsoft](xref:security/authentication/microsoft-logins) Authentication-Anbieter erfordert einen Hardwareschlüssel oder ein anderer 2FA Ansatz. Wenn die Standardvorlagen "local" 2FA erzwungen ist Benutzer erforderlich sein, erfüllt zwei 2FA Ansätze, die nicht auf ein häufig verwendetes Szenario ist.
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>Hinzufügen von QR-Codes auf der Konfigurationsseite für 2FA
 

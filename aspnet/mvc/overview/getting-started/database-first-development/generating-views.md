@@ -1,60 +1,63 @@
 ---
 uid: mvc/overview/getting-started/database-first-development/generating-views
-title: 'EF Database First mit ASP.NET MVC: Generieren von Sichten | Microsoft-Dokumentation'
+title: 'Tutorial: Generieren von Ansichten für EF Database First mit ASP.NET MVC-app'
+description: Dieser Artikel konzentriert sich auf ASP.NET-Gerüstbau verwenden, um die Controller und Ansichten zu generieren.
 author: Rick-Anderson
-description: Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieses Tutorial Seri...
 ms.author: riande
-ms.date: 12/29/2014
+ms.date: 01/23/2019
+ms.topic: tutorial
 ms.assetid: 669367cf-8e30-4eb6-821d-10a7d9bb906c
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/generating-views
 msc.type: authoredcontent
-ms.openlocfilehash: 7d925573dd4cdf5c1a36e51f312e18093bd35043
-ms.sourcegitcommit: 2d3e5422d530203efdaf2014d1d7df31f88d08d0
+ms.openlocfilehash: e1f6646cdf10d293268b92f44b018709e70c0f86
+ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2018
-ms.locfileid: "51021087"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54889781"
 ---
-<a name="ef-database-first-with-aspnet-mvc-generating-views"></a>EF Database First mit ASP.NET MVC: Generieren von Sichten
-====================
-durch [Tom FitzMacken](https://github.com/tfitzmac)
+# <a name="tutorial-generate-views-for-ef-database-first-with-aspnet-mvc-app"></a>Tutorial: Generieren von Ansichten für EF Database First mit ASP.NET MVC-app
 
-> Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle.
-> 
-> Dieser Teil der Serie konzentriert sich auf ASP.NET-Gerüstbau verwenden, um die Controller und Ansichten zu generieren.
+Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle.
 
+Dieser Artikel konzentriert sich auf ASP.NET-Gerüstbau verwenden, um die Controller und Ansichten zu generieren.
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Gerüst hinzufügen
+> * Hinzufügen von Links zu den neuen Ansichten
+> * Anzeigen von für Schüler und Studenten-Ansichten
+> * Anzeigen von Ansichten der Registrierung
+
+## <a name="prerequisite"></a>Vorbereitungsmaßnahme
+
+* [Erstellen Sie die Anwendungs- und Datenmodelle](creating-the-web-application.md)
 
 ## <a name="add-scaffold"></a>Gerüst hinzufügen
 
 Sie können zum Generieren von Code, die standard-Vorgänge für die Modellklassen bereitstellt. Sie können den Code durch Hinzufügen eines Elements Gerüst hinzufügen. Es gibt viele Optionen für den Typ der Gerüstbau, die Sie hinzufügen können. In diesem Tutorial enthält das Gerüst, einen Controller und Ansichten, die die Modelle "Student" und der Registrierung entsprechen, die Sie im vorherigen Abschnitt erstellt haben.
 
-Um Konsistenz in Ihrem Projekt zu gewährleisten, fügen Sie den neuen Controller hinzu, die vorhandene **Controller** Ordner. Mit der rechten Maustaste die **Controller** Ordner, und wählen **hinzufügen** – **neues Gerüstelement**.
-
-![Gerüst hinzufügen](generating-views/_static/image1.png)
+Um Konsistenz in Ihrem Projekt zu gewährleisten, fügen Sie den neuen Controller hinzu, die vorhandene **Controller** Ordner. Mit der rechten Maustaste die **Controller** Ordner, und wählen **hinzufügen** > **neues Gerüstelement**.
 
 Wählen Sie die **MVC 5-Controller mit Ansichten unter Verwendung von Entity Framework** Option. Diese Option wird die Controller und Ansichten zum Aktualisieren, löschen, erstellen und Anzeigen der Daten in Ihrem Modell generiert.
 
 ![Hinzufügen der Mvc-controller](generating-views/_static/image2.png)
 
-Wählen Sie **für Schüler und Studenten** für die Model-Klasse, und wählen die **ContosoUniversityEntities** für der Context-Klasse. Behalten Sie den Namen der Controller als **StudentsController**,
-
-![Geben Sie controller](generating-views/_static/image3.png)
+Wählen Sie **für Schüler und Studenten (ContosoSite.Models)** für die Model-Klasse, und wählen die **ContosoUniversityDataEntities (ContosoSite.Models)** für der Context-Klasse. Behalten Sie den Namen der Controller als **StudentsController**.
 
 Klicken Sie auf **Hinzufügen**.
 
 Wenn Sie eine Fehlermeldung erhalten, kann es sein, da Sie nicht auf das Projekt im vorherigen Abschnitt erstellt haben. Wenn dies der Fall ist, versuchen Sie es beim Erstellen des Projekts, und klicken Sie dann das erstellte Element erneut hinzufügen.
 
-Nachdem der Prozess der codegenerierung abgeschlossen ist, werden Sie einen neuen Controller und Ansichten in Ihrem Projekt angezeigt.
+Nachdem der Prozess der codegenerierung abgeschlossen ist, sehen Sie einen neuen Controller und Ansichten in Ihrem Projekts die **Controller** und **Ansichten** > **Schüler/Studenten** Ordner .
 
-![Ansichten anzeigen](generating-views/_static/image4.png)
 
-Führen Sie die gleichen Schritte erneut aus, aber fügen Sie ein Gerüst für die Registrierung-Klasse hinzu. Wenn Sie fertig sind, müssen Sie eine **EnrollmentsController.cs** Datei sowie einen Ordner unter **Ansichten** mit dem Namen **Registrierungen** mit der Create, Delete, Details, bearbeiten und Index Ansichten.
-
-![Ansichten anzeigen](generating-views/_static/image5.png)
+Führen Sie die gleichen Schritte erneut aus, aber fügen Sie ein Gerüst für die **Registrierung** Klasse. Wenn Sie fertig sind, müssen Sie eine **EnrollmentsController.cs** Datei sowie einen Ordner unter **Ansichten** mit dem Namen **Registrierungen** mit den Ansichten erstellen "," Delete "," Details "," Bearbeiten "und" Index.
 
 ## <a name="add-links-to-new-views"></a>Hinzufügen von Links zu den neuen Ansichten
 
-Um für die Navigation zu Ihrer neuen Ansichten vereinfachen, können Sie eine Reihe von Links für Schüler/Studenten und Registrierungen, die den Index Ansichten hinzufügen. Öffnen Sie die Datei unter **Views/Home/Index.cshtml**, dies ist die Startseite für Ihre Website. Fügen Sie den folgenden Code unter den Jumbotron hinzu.
+Um für die Navigation zu Ihrer neuen Ansichten vereinfachen, können Sie eine Reihe von Links für Schüler/Studenten und Registrierungen, die den Index Ansichten hinzufügen. Öffnen Sie die Datei unter **Ansichten** > **Home** > *"Index.cshtml"*, dies ist die Startseite für Ihre Website. Fügen Sie den folgenden Code unter den Jumbotron hinzu.
 
 [!code-cshtml[Main](generating-views/samples/sample1.cshtml)]
 
@@ -64,31 +67,15 @@ Für die ActionLink-Methode ist der erste Parameter der im Link anzuzeigende Tex
 
 Sie werden überprüfen, dass der Code ordnungsgemäß zu Ihrem Projekt hinzugefügt wird eine Liste der Studenten angezeigt, und Benutzern ermöglicht das Bearbeiten, erstellen oder löschen Sie die Studentendatensätze für Schüler und in der Datenbank.
 
-Mit der rechten Maustaste die **Views/Home/Index.cshtml** , und wählen Sie **in Browser anzeigen**. Klicken Sie auf dieser Seite auf den Link, um die Liste der Schüler/Studenten.
+Mit der rechten Maustaste die **Ansichten** > **Startseite** > *"Index.cshtml"* , und wählen Sie **in Browser anzeigen**. Wählen Sie auf der Startseite der Anwendung **Liste der Studenten**.
 
 ![](generating-views/_static/image6.png)
 
-Beachten Sie auf dieser Seite die Liste der Schüler/Studenten und Links zum Ändern dieser Daten ein.
+Auf der **Index** Seite, beachten Sie, dass die Liste der Schüler/Studenten und Links zum Ändern dieser Daten. Wählen Sie die **neu erstellen** verknüpfen, und geben Sie einige Werte für einen neuen Studenten. Klicken Sie auf **erstellen**, und beachten Sie, dass die neue Studenten zur Liste hinzugefügt wird.
 
-![Liste der Schüler/Studenten](generating-views/_static/image7.png)
-
-Klicken Sie auf die **neu erstellen** verknüpfen, und geben Sie einige Werte für einen neuen Studenten.
-
-![Erstellen Sie neue für Schüler und Studenten](generating-views/_static/image8.png)
-
-Klicken Sie auf **erstellen**, und beachten Sie, dass die neue Studenten zur Liste hinzugefügt wird.
-
-![Liste mit den neuen Studenten](generating-views/_static/image9.png)
-
-Wählen Sie die **bearbeiten** verknüpfen, und einige der Werte für Schüler/Student ändern.
-
-![Kursteilnehmer bearbeiten](generating-views/_static/image10.png)
-
-Klicken Sie auf **speichern**, und beachten Sie, dass der Student-Datensatz geändert wurde.
+Auf der **Index** Seite die **bearbeiten** verknüpfen, und einige der Werte für Schüler/Student ändern. Klicken Sie auf **speichern**, und beachten Sie, dass der Student-Datensatz geändert wurde.
 
 Wählen Sie abschließend die **löschen** verknüpfen, und bestätigen Sie den Datensatz zu löschen, indem Sie auf die **löschen** Schaltfläche.
-
-![Löschen Sie "Student"](generating-views/_static/image11.png)
 
 Ohne Code schreiben zu müssen, haben Sie die Sichten hinzugefügt, die allgemeine Vorgänge auf die Daten in der Tabelle "Student" ausführen.
 
@@ -96,16 +83,24 @@ Ihnen möglicherweise aufgefallen, dass das die textbezeichnung für ein Feld au
 
 ## <a name="display-enrollment-views"></a>Anzeigen von Ansichten der Registrierung
 
-Ihre Datenbank enthält eine 1: n Beziehung zwischen den Tabellen "Student" und Registrierung, und eine 1: n Beziehung zwischen den Tabellen Kurs- und Registrierungsentitäten. Die Ansichten für die Registrierung zu diese Beziehungen verarbeiten. Navigieren Sie zur Startseite für Ihre Website, und wählen die **Liste der Registrierungen** Link und klicken Sie dann die **neu erstellen** Link. Die Ansicht zeigt ein Formular zum Erstellen eines neuen Eintrags für die Registrierung. Beachten Sie insbesondere, dass das Formular mit zwei Dropdownlisten enthält, die mit Werten aus den verknüpften Tabellen aufgefüllt werden.
+Ihre Datenbank enthält eine 1: n Beziehung zwischen den Tabellen "Student" und Registrierung, und eine 1: n Beziehung zwischen den Tabellen Kurs- und Registrierungsentitäten. Die Ansichten für die Registrierung zu diese Beziehungen verarbeiten. Navigieren Sie zur Startseite für Ihre Website, und wählen die **Liste der Registrierungen** Link und klicken Sie dann die **neu erstellen** Link.
 
-![Erstellen Sie die Registrierung](generating-views/_static/image12.png)
+Die Ansicht zeigt ein Formular zum Erstellen eines neuen Eintrags für die Registrierung. Beachten Sie insbesondere die, dass das Formular enthält eine **CourseID** Dropdown-Liste und eine **"StudentID"** Dropdown-Liste. Beide werden mit Werten aus der verknüpften Tabellen aufgefüllt.
 
-Darüber hinaus wird die Überprüfung der bereitgestellten Werte automatisch basierend auf dem Datentyp des Felds angewendet. Professionelle erfordert eine Zahl ist, damit eine Fehlermeldung angezeigt wird, wenn Sie versuchen, einen nicht kompatiblen Wert angeben.
-
-![validierungsmeldung](generating-views/_static/image13.png)
+Darüber hinaus wird die Überprüfung der bereitgestellten Werte automatisch basierend auf dem Datentyp des Felds angewendet. **Professionelle** erfordert eine Zahl ist, eine Fehlermeldung angezeigt wird, wenn Sie versuchen, einen nicht kompatiblen Wert angeben: *Das Feld "Grade" muss eine Zahl sein.*
 
 Sie haben sichergestellt, dass die automatisch generierte Ansichten für die Arbeit mit den Daten in der Datenbank ermöglichen. Im nächsten Tutorial dieser Reihe Sie die Datenbank aktualisieren, und nehmen die entsprechenden Änderungen in der Webanwendung.
 
-> [!div class="step-by-step"]
-> [Zurück](creating-the-web-application.md)
-> [Weiter](changing-the-database.md)
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Hinzugefügten scaffold
+> * Links zu neuen Funktionen hinzugefügt
+> * Ansichten der angezeigten für Schüler und Studenten
+> * Angezeigte Registrierung-Ansichten
+
+Wechseln Sie zum nächsten Artikel erfahren, wie Sie die Datenbank zu ändern.
+> [!div class="nextstepaction"]
+> [Ändern Sie die Datenbank](changing-the-database.md)
