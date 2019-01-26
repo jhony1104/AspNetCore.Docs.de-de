@@ -5,6 +5,3 @@ In diesem Tutorial erfahren Sie die Grundlagen zu ASP.NET Core MVS und Entity Fr
 * Verwendet effizientere Abfragen.
 * Passt besser zur aktuellen API.
 * Behandelt mehr Features.
-* Ist die bevorzugte Methode für die Entwicklung neuer Anwendungen.
-
-Wenn Sie dieses Tutorial über die Version der [Razor-Seiten](xref:data/ef-rp/intro) auswählen, nennen Sie uns unter [diesem GitHub-Problem](https://github.com/aspnet/Docs/issues/6146) den Grund dafür.
