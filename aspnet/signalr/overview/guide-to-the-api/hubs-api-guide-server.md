@@ -1,19 +1,19 @@
 ---
 uid: signalr/overview/guide-to-the-api/hubs-api-guide-server
 title: ASP.NET SignalR-Hubs-API-Guide - Server (c#) | Microsoft-Dokumentation
-author: pfletcher
+author: bradygaster
 description: Dieses Dokument enthält eine Einführung in die Programmierung von der Serverseite die ASP.NET SignalR-Hubs-API für SignalR, Version 2, mit Codebeispiele zur...
-ms.author: riande
+ms.author: bradyg
 ms.date: 06/10/2014
 ms.assetid: b19913e5-cd8a-4e4b-a872-5ac7a858a934
 msc.legacyurl: /signalr/overview/guide-to-the-api/hubs-api-guide-server
 msc.type: authoredcontent
-ms.openlocfilehash: 4730c4d9f601f561cfc884e0a9c2c2d12785ae0f
-ms.sourcegitcommit: 74e3be25ea37b5fc8b4b433b0b872547b4b99186
+ms.openlocfilehash: a28663c8d5c679f85e863e7d0b4523a6f4dd4a1f
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53288104"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54837454"
 ---
 <a name="aspnet-signalr-hubs-api-guide---server-c"></a>ASP.NET SignalR-Hubs-API-Guide - Server (c#)
 ====================
@@ -104,7 +104,7 @@ Um die Route definieren, die Clients verwenden, um mit Ihrem Hub herstellen, ruf
 
 [!code-csharp[Main](hubs-api-guide-server/samples/sample1.cs)]
 
-Wenn Sie SignalR-Funktionen zu einer ASP.NET MVC-Anwendung hinzufügen, stellen Sie sicher, dass die SignalR-Route vor anderen Routen hinzugefügt wird. Weitere Informationen finden Sie unter [Lernprogramm: Erste Schritte mit SignalR 2 und MVC 5](../getting-started/tutorial-getting-started-with-signalr-and-mvc.md).
+Wenn Sie SignalR-Funktionen zu einer ASP.NET MVC-Anwendung hinzufügen, stellen Sie sicher, dass die SignalR-Route vor anderen Routen hinzugefügt wird. Weitere Informationen finden Sie unter [Tutorial: Erste Schritte mit SignalR 2 und MVC 5](../getting-started/tutorial-getting-started-with-signalr-and-mvc.md).
 
 <a id="signalrurl"></a>
 
@@ -526,7 +526,7 @@ Rufen Sie Informationen über den Client mit der `Context` Eigenschaft der Hub-K
     [!code-csharp[Main](hubs-api-guide-server/samples/sample52.cs)]
 
     Der Wert des `transportMethod` "WebSockets", "ServerSentEvents", "ForeverFrame" oder "LongPolling" werden. Beachten Sie, dass, wenn Sie diesen Wert, in Überprüfen der `OnConnected` -Ereignishandlermethode in einigen Szenarien erhalten Sie möglicherweise zunächst einen Transportwert, der nicht die endgültige ausgehandelten Transportmethode für die Verbindung ist. In diesem Fall wird die Methode löst eine Ausnahme aus, und wird später erneut aufgerufen, wenn die endgültige Transportmethode hergestellt wird.
-- Cookies sind.
+- Cookies.
 
     [!code-csharp[Main](hubs-api-guide-server/samples/sample53.cs?highlight=1)]
 
