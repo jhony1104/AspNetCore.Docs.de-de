@@ -1,26 +1,26 @@
 ---
 uid: mvc/overview/getting-started/database-first-development/setting-up-database
 title: 'Tutorial: Erste Schritte mit EF Database First anhand von MVC 5'
-description: In diesem Artikel wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren.
+description: In diesem Tutorial wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren.
 author: Rick-Anderson
 ms.author: riande
-ms.date: 01/23/2019
+ms.date: 01/28/2019
 ms.topic: tutorial
 ms.assetid: 095abad4-3bfe-4f06-b092-ae6a735b7e49
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/setting-up-database
 msc.type: authoredcontent
-ms.openlocfilehash: 8b094b7c334eaad510c46b55a99ec727b9c381c2
-ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
+ms.openlocfilehash: a503e3db63c873249178fd4783d322f4067c3208
+ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54889924"
+ms.lasthandoff: 01/30/2019
+ms.locfileid: "55236379"
 ---
 # <a name="tutorial-get-started-with-ef-database-first-using-mvc-5"></a>Tutorial: Erste Schritte mit EF Database First anhand von MVC 5
 
 Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle. Im letzten Teil der Reihe werden Sie den Standort und die Datenbank in Azure bereitstellen.
 
-In diesem Artikel wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren. Er verwendet das Entity Framework 6 und MVC 5, um die Webanwendung zu erstellen. Die ASP.NET-Gerüstbau-Funktion ermöglicht Ihnen das automatische Generieren von Code zum Anzeigen, aktualisieren, erstellen und Löschen von Daten. Verwenden die Tools für die Veröffentlichung in Visual Studio, können Sie problemlos den Standort und die Datenbank in Azure bereitstellen.
+In diesem Tutorial wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren. Er verwendet das Entity Framework 6 und MVC 5, um die Webanwendung zu erstellen. Die ASP.NET-Gerüstbau-Funktion ermöglicht Ihnen das automatische Generieren von Code zum Anzeigen, aktualisieren, erstellen und Löschen von Daten. Verwenden die Tools für die Veröffentlichung in Visual Studio, können Sie problemlos den Standort und die Datenbank in Azure bereitstellen.
 
 Dieser Teil der Serie konzentriert sich auf eine Datenbank erstellen und ihn mit Daten aufzufüllen.
 
@@ -37,7 +37,7 @@ In diesem Tutorial:
 
 ## <a name="introduction"></a>Einführung
 
-Dieser Artikel behandelt die Situation, in dem Sie eine Datenbank und zum Generieren von Code für eine Webanwendung, die auf Grundlage der Felder für diese Datenbank werden soll. Dieser Ansatz heißt Database First-Entwicklung. Wenn Sie nicht bereits über eine vorhandene Datenbank verfügen, können Sie stattdessen, eine Methode, die Code First-Entwicklung und dazu Datenklassen zu definieren und die Datenbank aus den Eigenschaften der Klasse aufgerufen.
+In diesem Tutorial behandelt die Situation, in dem Sie eine Datenbank und zum Generieren von Code für eine Webanwendung, die auf Grundlage der Felder für diese Datenbank werden soll. Dieser Ansatz heißt Database First-Entwicklung. Wenn Sie nicht bereits über eine vorhandene Datenbank verfügen, können Sie stattdessen, eine Methode, die Code First-Entwicklung und dazu Datenklassen zu definieren und die Datenbank aus den Eigenschaften der Klasse aufgerufen.
 
 ## <a name="set-up-the-database"></a>Richten Sie die Datenbank
 
@@ -102,6 +102,6 @@ In diesem Tutorial:
 > [!div class="checklist"]
 > * Richten Sie die Datenbank
 
-Wechseln Sie zum nächsten Artikel erfahren, wie Sie das Web zu Anwendungs- und Datenmodelle erstellen.
+Fahren Sie fort mit dem nächsten Tutorial erfahren, wie die-Anwendungs- und Datenmodelle zu erstellen.
 > [!div class="nextstepaction"]
 > [Erstellen Sie die Anwendungs- und Datenmodelle](creating-the-web-application.md)

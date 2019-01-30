@@ -8,12 +8,12 @@ ms.date: 08/15/2012
 ms.assetid: c7e4e1ab-4932-4614-9f53-aaf7c706d498
 msc.legacyurl: /mvc/overview/views/using-page-inspector-in-aspnet-mvc
 msc.type: authoredcontent
-ms.openlocfilehash: c465b0bac9af90a892d6e62a327ba36977d08d4a
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: 0dea8b077878139a3f513cb51447b86a93fe55b8
+ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41826591"
+ms.lasthandoff: 01/30/2019
+ms.locfileid: "55236535"
 ---
 <a name="using-page-inspector-in-aspnet-mvc"></a>Verwenden der Seitenprüfung in ASP.NET MVC
 ====================
@@ -34,14 +34,14 @@ von Tim Ammann
 > - [Verwenden der Seitenprüfung Markup ändern](#_5_using_page)
 > - [Überprüfungsmodus und HTML-Fenster](#_6_inspection_mode)
 > - [Vorschau der CSS-Änderungen im Fenster Stile](#_7_previewing_css)
-> - [Automatische CSS-Synchronisierung](#css_auto_sync)
+> - [CSS Auto Sync](#css_auto_sync)
 > - [Mithilfe der CSS-Farbauswahl](#css_color_picker)
 > - [Zuordnen von dynamische Seitenelemente zu JavaScript](#map_dynamic_elements)
 
 
 <a id="_prerequisites"></a><a id="_1_prerequisites"></a>
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Vorraussetzungen
 
 - [Visual Studio 2012](https://www.microsoft.com/visualstudio/11) oder [Visual Studio Express 2012 für Web](https://www.microsoft.com/visualstudio/11/downloads#express-web).
 
@@ -81,7 +81,7 @@ In **Projektmappen-Explorer**, erweitern Sie die **Ansichten** Ordner und klicke
 
 ![Ansicht "Index.cshtml" in der Seitenprüfung](using-page-inspector-in-aspnet-mvc/_static/image8.png)
 
-Standardmäßig wird der Seitenprüfung auf der linken Seite der Visual Studio-Umgebung als Fenster angedockt. Falls gewünscht, können Sie an anderer Stelle andocken, oder lösen das Fenster. Finden Sie unter [Vorgehensweise: anordnen und Andocken von Windows](https://msdn.microsoft.com/library/z4y0hsax.aspx).
+Standardmäßig wird der Seitenprüfung auf der linken Seite der Visual Studio-Umgebung als Fenster angedockt. Falls gewünscht, können Sie an anderer Stelle andocken, oder lösen das Fenster. Weitere Informationen finden Sie unter [How to: Arrange and Dock Windows (Vorgehensweise: Anordnen und Andocken von Fenstern)](https://msdn.microsoft.com/library/z4y0hsax.aspx).
 
 Im obere Bereich des Fensters die Seitenprüfung zeigt die aktuelle Seite in einem Browserfenster angezeigt. Im unteren Bereich zeigt die Seite im HTML-Markup verwendet werden, sowie einige Registerkarten, mit die Sie verschiedene Aspekte der Seite untersuchen können. Der untere Bereich ist ähnlich wie die [F12-Entwicklertools](https://msdn.microsoft.com/ie/aa740478) in Internet Explorer.
 

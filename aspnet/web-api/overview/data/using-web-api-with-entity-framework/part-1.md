@@ -4,20 +4,19 @@ title: Mithilfe von Web-API 2 mit Entitätsframework 6 | Microsoft-Dokumentation
 author: MikeWasson
 description: In diesem Tutorial erfahren Sie, dass die Grundlagen der Erstellung einer Web-Anwendung mit einer ASP.NET Web-API-back-End. Das Lernprogramm verwendet Entity Framework 6 für das Layout der Daten...
 ms.author: riande
-ms.date: 05/28/2015
+ms.date: 01/17/2019
 ms.assetid: e879487e-dbcd-4b33-b092-d67c37ae768c
 msc.legacyurl: /web-api/overview/data/using-web-api-with-entity-framework/part-1
 msc.type: authoredcontent
-ms.openlocfilehash: d65c0ea35ec766ef9d9093c6502230f9de72a3f3
-ms.sourcegitcommit: 7890dfb5a8f8c07d813f166d3ab0c263f893d0c6
+ms.openlocfilehash: 266c808e3525787181038d2de473194989039e02
+ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48795209"
+ms.lasthandoff: 01/30/2019
+ms.locfileid: "55236522"
 ---
 <a name="using-web-api-2-with-entity-framework-6"></a>Mithilfe von Web-API 2 mit Entitätsframework 6
 ====================
-durch [Mike Wasson](https://github.com/MikeWasson)
 
 [Abgeschlossenes Projekt herunterladen](https://github.com/MikeWasson/BookService)
 
@@ -26,10 +25,10 @@ durch [Mike Wasson](https://github.com/MikeWasson)
 > ## <a name="software-versions-used-in-the-tutorial"></a>Softwareversionen, die in diesem Tutorial verwendet werden.
 >
 > - Web-API 2.1
-> - Visual Studio 2013 (Visual Studio 2017 herunterladen [hier](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017))
+> - Visual Studio 2017 (Visual Studio 2017 herunterladen [hier](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017))
 > - Entity Framework 6
-> - .NET 4.5
-> - ["Knockout.js"](http://knockoutjs.com/) 3.1
+> - .NET 4.7
+> - [Knockout.js](http://knockoutjs.com/) 3.1
 
 Dieses Tutorial verwendet ASP.NET Web API 2 mit Entity Framework 6, um eine Webanwendung erstellen, die eine Back-End-Datenbank ändert. Hier ist ein Screenshot der Anwendung, die Sie erstellen.
 
@@ -46,9 +45,9 @@ Hier sind die wichtigsten Bausteine für diese app aus:
 - Knockout.js-Datenbindung der HTML-Elemente, die JSON-Daten.
 - Entitätsframework finden Sie in der Datenbank.
 
-## <a name="see-this-app-running-on-azure"></a>Finden Sie unter dieser App in Azure ausführen
+## <a name="see-this-app-running-on-azure"></a>Finden Sie unter dieser app in Azure ausführen
 
-Möchten Sie die fertige Website als live-Web-app ausgeführt wird, finden Sie unter? Sie können eine vollständige Version der app beim Azure-Konto bereitstellen, indem Sie einfach die folgende Schaltfläche.
+Möchten Sie die fertige Website als live-Web-app ausgeführt wird, finden Sie unter? Sie können eine vollständige Version der app beim Azure-Konto bereitstellen, durch die folgende Schaltfläche auswählen.
 
 [![](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?WT.mc_id=deploy_azure_aspnet&repository=https://github.com/tfitzmac/BookService)
 
@@ -57,31 +56,49 @@ Sie benötigen ein Azure-Konto zum Bereitstellen dieser Lösung in Azure. Wenn S
 - [Öffnen Sie ein Azure-Konto kostenlos](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A443DD604) – Sie erhalten ein Guthaben zum Ausprobieren Zahlungspflichtiger Azure-Dienste nutzen können, und auch nach dem sie verwendet werden, bis können Sie das Konto behalten und kostenlose Azure-Dienste.
 - [MSDN-abonnentenvorteile aktivieren](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A443DD604) -Ihr MSDN-Abonnement ein monatliches Guthaben, die Sie für zahlungspflichtige Azure-Dienste verwenden können.
 
-## <a name="create-the-project"></a>Erstellen des Projekts
+## <a name="create-the-project"></a>Erstellen eines Projekts
 
-Öffnen Sie Visual Studio. Von der **Datei** , wählen Sie im Menü **neu**, und wählen Sie dann **Projekt**. (Oder klicken Sie auf **neues Projekt** auf der Startseite.)
+Öffnen Sie Visual Studio. Von der **Datei** , wählen Sie im Menü **neu**, und wählen Sie dann **Projekt**. (Oder wählen Sie **neues Projekt** auf der Startseite.)
 
-In der **neues Projekt** Dialogfeld klicken Sie auf **Web** im linken Bereich und **ASP.NET-Webanwendung** im mittleren Bereich. Nennen Sie das Projekt BookService, und klicken Sie auf **OK**.
+In der **neues Projekt** wählen Sie im Dialogfeld **Web** im linken Bereich und **ASP.NET-Webanwendung ((.NET Framework)** im mittleren Bereich. Nennen Sie das Projekt **BookService** , und wählen Sie **OK**.
 
-[![](part-1/_static/image4.png)](part-1/_static/image3.png)
+[![](part-1/_static/image11.png)](part-1/_static/image11.png)
 
 In der **neues ASP.NET-Projekt** wählen Sie im Dialogfeld die **Web-API-** Vorlage.
 
-[![](part-1/_static/image6.png)](part-1/_static/image5.png)
+[![](part-1/_static/image12.png)](part-1/_static/image12.png)
 
-Wenn Sie das Projekt in einer Azure App Service hosten möchten, lassen Sie die **in der Cloud hosten** Feld aktiviert.
 
 Klicken Sie auf **OK**, um das Projekt zu erstellen.
 
-## <a name="configure-azure-settings-optional"></a>Konfigurieren von Azure-Einstellungen (Optional)
+## <a name="configure-azure-settings-optional"></a>Konfigurieren von Azure-Einstellungen (optional)
 
-Wenn Sie links die **Host in der Cloud** Option aktiviert, die Visual Studio fordert Sie zur Anmeldung beim Microsoft Azure
+Nachdem Sie das Projekt erstellt haben, können Sie jederzeit auf Azure App Service-Web-Apps bereitstellen. 
 
-[![](part-1/_static/image8.png)](part-1/_static/image7.png)
+1. Projektmappen-Explorer mit der Maustaste auf Ihr Projekt, und wählen Sie **veröffentlichen**.
 
-Nachdem Sie bei Azure anmelden, fordert Visual Studio Sie so konfigurieren Sie die Web-app. Geben Sie einen Namen für die Website, wählen Sie Ihr Azure-Abonnement, und wählen Sie eine geografische Region. Klicken Sie unter **Datenbankserver**Option **neuen Server erstellen**. Geben Sie einen Benutzernamen und das Kennwort ein.
+2. Wählen Sie im Fenster, das angezeigt wird, **starten**. Die **Veröffentlichungsziel** Dialogfeld wird angezeigt.
 
-[![](part-1/_static/image10.png)](part-1/_static/image9.png)
+   [![](part-1/_static/image14.png)](part-1/_static/image14.png)
+
+3. Klicken Sie auf **Profil erstellen**. Das Dialogfeld **App Service erstellen** wird angezeigt.
+
+   [![](part-1/_static/image15.png)](part-1/_static/image15.png)
+
+   Akzeptieren Sie die Standardeinstellungen, oder geben Sie unterschiedliche Werte für den Anwendungsnamen, die Ressourcengruppe, die hosting-Plan, Azure-Abonnement und geografischen Region. 
+
+4. Wählen Sie **erstellen Sie eine SQL­Datenbank**. Die **Konfigurieren von SQL Server** Dialogfeld wird angezeigt. 
+
+   [![](part-1/_static/image16.png)](part-1/_static/image16.png)
+
+   Akzeptieren Sie die Standardeinstellungen, oder geben Sie andere Werte ein. Geben Sie eine **Adminstrator Username** und **Administratorkennwort** für Ihre neue Datenbank. Wählen Sie **OK** Wenn Sie fertig sind. Die **App Service erstellen** Seite wird erneut angezeigt.
+
+5. Wählen Sie **erstellen** auf Ihr Profil zu erstellen. In der unteren rechten Ecke, der angibt, dass die Bereitstellung ausgeführt wird, wird eine Meldung angezeigt. Nach einer kurzen Zeit die **veröffentlichen** Fenster wird erneut angezeigt.
+
+    [![](part-1/_static/image17.png)](part-1/_static/image17.png)
+   
+    Das Profil, das Sie erstellt haben, zum Bereitstellen der app ist jetzt verfügbar. 
+
 
 > [!div class="step-by-step"]
 > [Nächste](part-2.md)
