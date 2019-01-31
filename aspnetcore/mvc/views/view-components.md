@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Ansichtskomponenten in ASP.NET Core verwendet wer
 ms.author: riande
 ms.date: 12/03/2018
 uid: mvc/views/view-components
-ms.openlocfilehash: 5812abad80cd906d6b9a7175bd7cdefd03a99eb3
-ms.sourcegitcommit: 9bb58d7c8dad4bbd03419bcc183d027667fefa20
+ms.openlocfilehash: 156db610d99eaf8a8042a4c7c85267d521a20fd4
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52861328"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836700"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="view-components"></a>Ansichtskomponenten
 
-Ansichtskomponenten ähneln zwar den Teilansichten, sind aber wesentlich leistungsstärker. Ansichtskomponenten verwenden keine Modellbindungen und sind nur von den Daten abhängig, die bei ihrem Aufruf bereitgestellt werden. Für diesen Artikel wurde ASP.NET Core-MVC verwendet. Es funktionieren aber auch Ansichtskomponenten zusammen mit Razor-Seiten.
+Ansichtskomponenten ähneln zwar den Teilansichten, sind aber wesentlich leistungsstärker. Ansichtskomponenten verwenden keine Modellbindungen und sind nur von den Daten abhängig, die bei ihrem Aufruf bereitgestellt werden. Beim Schreiben dieses Artikels wurden Controller und Ansichten verwendet, aber Ansichtskomponenten funktionieren auch zusammen mit Razor Pages.
 
 Eine Ansichtskomponente:
 

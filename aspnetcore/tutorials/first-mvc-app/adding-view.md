@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 321ffd6b0168d4befc950a58035d19561e879491
-ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
+ms.openlocfilehash: f241a19c8821019f327fb160f01fe01eca53c5d0
+ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2019
-ms.locfileid: "54249450"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54836904"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -104,7 +104,7 @@ Im obigen Markup wurde das `asp-area`-[Anchor-Taghilfsprogramm Attribut](xref:mv
 
 **Hinweis:** Der `Movies`-Controller wurde nicht implementiert. An diesem Punkt ist der `Movie App`-Link nicht funktionsfähig.
 
-Speichern Sie Ihre Änderungen, und wählen den **Privacy**-Link aus. Wie Sie sehen, wird auf der Browserregisterkarte der Titel **Privacy - Movie App** anstelle des Titels **Privacy - Mvc Movie** angezeigt:
+Speichern Sie Ihre Änderungen, und wählen den **Privacy**-Link aus. Wie Sie sehen, wird auf der Browserregisterkarte der Titel **Privacy Policy - Movie App** anstelle des Titels **Privacy Policy - Mvc Movie** angezeigt:
 
 ![Registerkarte „Privacy“](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 

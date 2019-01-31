@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/14/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 96d098115f2f9b150f796e08cf14e60611f59e17
-ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.openlocfilehash: c5303ad418660fa31fe9094f0e61ee31f5d988f7
+ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2019
-ms.locfileid: "54341757"
+ms.lasthandoff: 01/24/2019
+ms.locfileid: "54890015"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -666,6 +666,26 @@ Weitere Informationen zur Syntax von regulären Ausdrücken finden Sie unter [Sp
 
 Einen regulären Ausdruck können Sie verwenden, um einen Parameter auf zulässige Werte einzuschränken. Mit `{action:regex(^(list|get|create)$)}` werden beispielsweise für den `action`-Routenwert nur die Werte `list`, `get` oder `create` abgeglichen. Wenn die Zeichenfolge `^(list|get|create)$` dem Einschränkungswörterbuch übergeben wird, führt dies zum gleichen Ergebnis. Auch Einschränkungen, die dem zugehörigen Wörterbuch hinzugefügt werden und mit keiner vorgegebenen Einschränkung übereinstimmen , werden als reguläre Ausdrücke behandelt. Dies gilt allerdings nicht für Inline-Einschränkungen in einer Vorlage.
 
+## <a name="custom-route-constraints"></a>Benutzerdefinierte Routeneinschränkungen
+
+Zusätzlich zu den integrierten Routeneinschränkungen können benutzerdefinierte Routeneinschränkungen durch Implementierung der <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle erstellt werden. Die `IRouteConstraint`-Schnittstelle enthält eine einzelne Methode, `Match`, die `true` zurückgibt, wenn die Einschränkung erfüllt wird, und andernfalls `false`.
+
+Zum Verwenden einer benutzerdefinierten `IRouteConstraint` muss der Routeneinschränkungstyp bei der `RouteOptions.ConstraintMap` der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel `IRouteConstraint`-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die `RouteOptions.ConstraintMap` einer App kann in `Startup.ConfigureServices` entweder als Teil eines `services.AddRouting`-Aufrufs oder durch direktes Konfigurieren `RouteOptions` mit `services.Configure<RouteOptions>` aktualisiert werden. Beispiel:
+
+```csharp
+services.AddRouting(options =>
+{
+    options.ConstraintMap.Add("customName", typeof(MyCustomConstraint));
+});
+```
+
+Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Beispiel:
+
+```csharp
+[HttpGet("{id:customName}")]
+public ActionResult<string> Get(string id)
+```
+
 ::: moniker range=">= aspnetcore-2.2"
 
 ## <a name="parameter-transformer-reference"></a>Parametertransformatorreferenz
@@ -737,3 +757,9 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 ```
 
 Für diese Route wird nur dann ein Link generiert, wenn die übereinstimmenden Werte für `controller` und `action` bereitgestellt werden.
+
+## <a name="complex-segments"></a>Komplexe Segmente
+
+Komplexe Segmente (z.B. `[Route("/x{token}y")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Unter [diesem Code](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) finden Sie eine ausführliche Erklärung für das Abgleichen komplexer Segmente. Das [Codebeispiel](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) wird von ASP.NET Core nicht verwendet, aber es bietet eine gute Erklärung komplexer Segmente.
+<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
+-->
