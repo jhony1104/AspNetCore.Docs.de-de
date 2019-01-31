@@ -4,16 +4,16 @@ title: Aktivieren von ursprungsübergreifenden Anforderungen in ASP.NET-Web-API 
 author: MikeWasson
 description: Zeigt, wie zur Unterstützung von Cross-Origin Resource Sharing (CORS) in ASP.NET Web-API.
 ms.author: riande
-ms.date: 10/10/2018
+ms.date: 01/29/2019
 ms.assetid: 9b265a5a-6a70-4a82-adce-2d7c56ae8bdd
 msc.legacyurl: /web-api/overview/security/enabling-cross-origin-requests-in-web-api
 msc.type: authoredcontent
-ms.openlocfilehash: 118b779c89edb874f7f928315d1094738be5f097
-ms.sourcegitcommit: 6e6002de467cd135a69e5518d4ba9422d693132a
+ms.openlocfilehash: 97a0027194b019b09e220493dcb593e682027fe3
+ms.sourcegitcommit: d22b3c23c45a076c4f394a70b1c8df2fbcdf656d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49348519"
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55428446"
 ---
 <a name="enable-cross-origin-requests-in-aspnet-web-api-2"></a>Aktivieren Sie ursprungsübergreifender Anforderungen in ASP.NET Web API 2
 ====================
@@ -90,7 +90,7 @@ Wenn Sie die Schaltfläche "Ausprobieren" klicken, wird eine AJAX-Anforderung ü
 ![Fehler "Ausprobieren", im browser](enabling-cross-origin-requests-in-web-api/_static/image7.png)
 
 > [!NOTE]
-> Wenn Sie sehen Sie sich den HTTP-Datenverkehr in einem Tool wie [Fiddler](http://www.telerik.com/fiddler), sehen Sie, dass der Browser die GET-Anforderung sendet, und die Anforderung erfolgreich ist, aber der AJAX-Aufruf gibt einen Fehler zurück. Es ist wichtig zu verstehen, dass die Richtlinie desselben Ursprungs nicht durch den Browser verhindert *senden* der Anforderung. Stattdessen es verhindert, dass die Anwendung sehen die *Antwort*.
+> Wenn Sie sehen Sie sich den HTTP-Datenverkehr in einem Tool wie [Fiddler](https://www.telerik.com/fiddler), sehen Sie, dass der Browser die GET-Anforderung sendet, und die Anforderung erfolgreich ist, aber der AJAX-Aufruf gibt einen Fehler zurück. Es ist wichtig zu verstehen, dass die Richtlinie desselben Ursprungs nicht durch den Browser verhindert *senden* der Anforderung. Stattdessen es verhindert, dass die Anwendung sehen die *Antwort*.
 
 ![Fiddler-webdebugger, die webanforderungen anzeigen](enabling-cross-origin-requests-in-web-api/_static/image8.png)
 
@@ -165,6 +165,22 @@ Hier ist eine Beispielantwort, vorausgesetzt, dass der Server die Anforderung zu
 
 Die Antwort enthält eine Access-Control-Allow-Methods-Header, der die zulässigen Methoden aufgeführt, und optional eine Access-Control-Allow-Headers-Header, der die erlaubten Header aufgeführt sind. Wenn die preflight-Anforderung erfolgreich ist, sendet der Browser die tatsächliche Anforderung an, wie oben beschrieben.
 
+Tools, die häufig verwendet, um die Endpunkte mit der Preflight-OPTIONS-Anforderungen zu testen (z. B. [Fiddler](https://www.telerik.com/fiddler) und [Postman](https://www.getpostman.com/)) nicht die erforderlichen Optionen Header standardmäßig gesendet. Überprüfen Sie, ob die `Access-Control-Request-Method` und `Access-Control-Request-Headers` Header mit der Anforderung gesendet werden, und, die Optionen Header erreichen, die app mithilfe von IIS.
+
+Zum Konfigurieren von IIS für die Verwendung eine ASP.NET-App zu empfangen und Verarbeiten von OPTION-Anforderungen ermöglichen, fügen Sie die folgende Konfiguration auf die *"Web.config"* Datei die `<system.webServer><handlers>` Abschnitt:
+
+```xml
+<system.webServer>
+  <handlers>
+    <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+    <remove name="OPTIONSVerbHandler" />
+    <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+  </handlers>
+</system.webServer>
+```
+
+Das Entfernen der `OPTIONSVerbHandler` verhindert, dass IIS die OPTIONS-Anforderungen verarbeiten. Die Ersetzung des `ExtensionlessUrlHandler-Integrated-4.0` ermöglicht die OPTIONS-Anforderungen an die app zu erreichen, da die Registrierung der Standard-Modul nur GET, HEAD, POST und DEBUG-Anforderungen mit URLs ohne Erweiterung lässt.
+
 ## <a name="scope-rules-for-enablecors"></a>Bereichsregeln für [EnableCors]
 
 Sie können CORS pro Aktion, pro Controller oder global für alle Web-API-Controller in Ihrer Anwendung ermöglichen.
@@ -181,7 +197,7 @@ Setzen Sie **[EnableCors]** auf die Controllerklasse, gilt für alle Aktionen au
 
 [!code-csharp[Main](enabling-cross-origin-requests-in-web-api/samples/sample11.cs)]
 
-**Global**
+**Globally**
 
 Übergeben Sie zum Aktivieren von CORS für alle Web-API-Controller in Ihrer Anwendung eine **EnableCorsAttribute** -Instanz, auf die **EnableCors** Methode:
 
@@ -227,7 +243,7 @@ Standardmäßig ist der Browser nicht alle Antwortheader für die Anwendung verf
 
 - Cache-Control
 - Content-Language
-- Inhaltstyp
+- Content-Type
 - Läuft ab
 - Zuletzt geändert
 - Pragma
