@@ -8,7 +8,7 @@ items:
 - name: Web Forms
   href: web-forms/index.md
   items:
-  - name: Empfehlungen
+  - name: Leitfaden
     href: web-forms/overview/index.md
     items:
     - name: Erste Schritte
@@ -209,7 +209,7 @@ items:
           href: web-forms/overview/deployment/advanced-enterprise-web-deployment/running-windows-powershell-scripts-from-msbuild-project-files.md
         - name: Behandeln von Problemen mit dem Paketerstellungsprozess
           href: web-forms/overview/deployment/advanced-enterprise-web-deployment/troubleshooting-the-packaging-process.md
-    - name: Erweitert
+    - name: Weitere
       href: web-forms/overview/advanced/index.md
       items:
       - name: Verbindungsresilienz von ASP.NET Web Forms und Abfangen von Befehlen
@@ -680,7 +680,7 @@ items:
           href: web-forms/overview/ajax-control-toolkit/reorderlist/using-postbacks-with-reorderlist-vb.md
         - name: Drag & Drop über ReorderList (VB)
           href: web-forms/overview/ajax-control-toolkit/reorderlist/drag-and-drop-via-reorderlist-vb.md
-      - name: Slider
+      - name: Schieberegler
         href: web-forms/overview/ajax-control-toolkit/slider/index.md
         items:
         - name: Schieberegler-Steuerelement mit automatischem Postback (C#)
@@ -1136,7 +1136,7 @@ items:
         href: web-forms/overview/moving-to-aspnet-20/data-source-controls.md
       - name: Datengebundene Steuerelemente
         href: web-forms/overview/moving-to-aspnet-20/data-bound-controls.md
-      - name: Zwischenspeicherung
+      - name: Zwischenspeichern
         href: web-forms/overview/moving-to-aspnet-20/caching.md
       - name: Mitgliedschaft
         href: web-forms/overview/moving-to-aspnet-20/membership.md
@@ -2062,7 +2062,7 @@ items:
 - name: MVC
   href: mvc/index.md
   items:
-  - name: Empfehlungen
+  - name: Leitfaden
     href: mvc/overview/index.md
     items:
     - name: Erste Schritte
@@ -2135,8 +2135,6 @@ items:
           href: mvc/overview/getting-started/database-first-development/customizing-a-view.md
         - name: Optimieren der Datenüberprüfung
           href: mvc/overview/getting-started/database-first-development/enhancing-data-validation.md
-        - name: Veröffentlichen in Azure
-          href: mvc/overview/getting-started/database-first-development/publish-to-azure.md
       - name: Lebenszyklus einer ASP.NET MVC 5-Anwendung
         href: mvc/overview/getting-started/lifecycle-of-an-aspnet-mvc-5-application.md
       - name: MVC – Empfohlene Ressourcen
@@ -2754,7 +2752,7 @@ items:
 - name: Web-API
   href: web-api/index.md
   items:
-  - name: Empfehlungen
+  - name: Leitfaden
     href: web-api/overview/index.md
     items:
     - name: Erste Schritte
@@ -2997,7 +2995,7 @@ items:
 - name: Webseiten
   href: web-pages/index.md
   items:
-  - name: Empfehlungen
+  - name: Leitfaden
     href: web-pages/overview/index.md
     items:
     - name: Erste Schritte
@@ -3200,7 +3198,7 @@ items:
 - name: SignalR
   href: signalr/index.md
   items:
-  - name: Empfehlungen
+  - name: Leitfaden
     href: signalr/overview/index.md
     items:
     - name: Erste Schritte
@@ -3279,7 +3277,7 @@ items:
         href: signalr/overview/deployment/tutorial-signalr-self-host.md
       - name: Verwenden von SignalR mit Web-Apps in Azure App Service
         href: signalr/overview/deployment/using-signalr-with-azure-web-sites.md
-    - name: Erweitert
+    - name: Weitere
       href: signalr/overview/advanced/index.md
       items:
       - name: Abhängigkeitsinjektion in SignalR
@@ -3812,9 +3810,9 @@ items:
     href: whitepapers/whats-new-in-aspnet-45-and-visual-studio-2012.md
 - name: API-Verweis
   href: api-ref.md
-ms.openlocfilehash: e96b99f5a6432ae359e1b8543701e4e2d49171a4
-ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.openlocfilehash: 32bc0de99f07ad72d4b09dd29ac3f316609b0c69
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2019
-ms.locfileid: "55291172"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667829"
