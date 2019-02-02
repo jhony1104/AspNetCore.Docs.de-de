@@ -4,20 +4,18 @@ title: Vorgehensweise nicht in ASP.NET und empfohlene Vorgehensweisen | Microsof
 author: Rick-Anderson
 description: Dieses Thema beschreibt einige häufige Fehler, die Personen innerhalb von ASP.NET-Webprojekten vornehmen. Hier finden Sie Empfehlungen für was Sie tun sollten, um diese gemeinsame zu vermeiden...
 ms.author: riande
-ms.date: 05/08/2014
+ms.date: 01/28/2019
 ms.assetid: c39b9965-545c-4b04-8f55-21be7f28a9e5
 msc.legacyurl: /aspnet/overview/web-development-best-practices/what-not-to-do-in-aspnet-and-what-to-do-instead
 msc.type: authoredcontent
-ms.openlocfilehash: 69040ca6a1ddeaf029062da45475dd2171b1afa6
-ms.sourcegitcommit: 2d3e5422d530203efdaf2014d1d7df31f88d08d0
+ms.openlocfilehash: 512d2e2b39467635390fa175546f79d8c9f89f4a
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2018
-ms.locfileid: "51021442"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667712"
 ---
-<a name="what-not-to-do-in-aspnet-and-what-to-do-instead"></a>Elemente, die nicht für die Sie in ASP.NET und empfohlene Vorgehensweisen
-====================
-durch [Tom FitzMacken](https://github.com/tfitzmac)
+# <a name="what-not-to-do-in-aspnet-and-what-to-do-instead"></a>Häufige Fehler bei ASP.NET und empfohlene Vorgehensweisen
 
 > Dieses Thema beschreibt einige häufige Fehler, die Personen innerhalb von ASP.NET-Webprojekten vornehmen. Hier finden Sie Empfehlungen für was Sie tun sollten, um diese häufige Fehler zu vermeiden. Es basiert auf einer [Präsentation](http://vimeo.com/68390507) von **Damian Edwards** auf Norwegian Developers Conference.
 
@@ -63,17 +61,17 @@ Dieses Thema enthält folgende Abschnitte:
 
 ### <a name="control-adapters"></a>Steuerelementadapter
 
-Empfehlung: Beenden Sie der Verwendung von Steuerelementadapter für adaptive rendern, und verwenden Sie die CSS-Medienabfragen und standardkonforme HTML.
+Empfehlung: Beenden Sie der Verwendung von Steuerelementadapter für adaptive Rendering, und verwenden Sie die CSS-Medienabfragen und standardkonforme HTML.
 
 Steuerelemente Adapter wurden in .NET 2.0 Darstellungscode gerendert, die für verschiedene Geräte und Umgebungen angepasst wurde eingeführt. Jetzt kann dieses adaptive Rendering mit CSS und HTML-erreicht werden. Sie sollten nicht mehr verwenden Steuerelementadapter und konvertieren alle vorhandenen Adapter, CSS und HTML.
 
-Weitere Informationen finden Sie unter [Medienabfragen](http://www.w3.org/TR/css3-mediaqueries/) und [so wird's gemacht: Mobile-Seiten hinzufügen, um Ihre ASP.NET Web Forms / MVC-Anwendung](../../../whitepapers/add-mobile-pages-to-your-aspnet-web-forms-mvc-application.md).
+Weitere Informationen finden Sie unter [Medienabfragen](http://www.w3.org/TR/css3-mediaqueries/) und [so wird's gemacht: Hinzufügen mobiler Seiten zu Ihren ASP.NET Web Forms-/ MVC-Anwendung](../../../whitepapers/add-mobile-pages-to-your-aspnet-web-forms-mvc-application.md).
 
 <a id="styleprop"></a>
 
 ### <a name="style-properties-on-controls"></a>Style-Eigenschaften für Steuerelemente
 
-Empfehlung: Beenden Sie Einstellungswerte in Markup des Steuerelements, und stattdessen festlegen Sie Formatierungswerte in CSS-Stylesheets.
+Empfehlung: Beenden Sie die Einstellungswerte in Markup des Steuerelements, und stattdessen festlegen Sie Formatierungswerte in CSS-Stylesheets.
 
 Webserver-Steuerelemente enthalten Dutzende von Eigenschaften, die mit dem Inline-Style-Eigenschaften festgelegt werden können. Beispielsweise legt die ForeColor-Eigenschaft, die Farbe des Texts für ein Steuerelement. Sie können diesen Effekt über CSS-Stylesheets effizienter ausführen. Stylesheets können Sie Stilwerte zentralisieren und zu vermeiden, diese Werte in der gesamten Anwendung festlegen.
 
@@ -87,9 +85,9 @@ Das nächste Beispiel zeigt, wie Sie die CSS-Klasse dynamisch anwenden.
 
 <a id="callback"></a>
 
-### <a name="page-and-control-callbacks"></a>Seite "und" Control-Rückrufe
+### <a name="page-and-control-callbacks"></a>Seiten- und Rückrufe
 
-Empfehlung: Verwenden von Rückrufen für Seiten und-Steuerelementen zu beenden, und verwenden Sie stattdessen eine der folgenden: AJAX, UpdatePanel, MVC-Aktionsmethoden, Web-API oder SignalR.
+Empfehlung: Beenden Sie verwenden von Rückrufen für Seiten und-Steuerelementen zu, und verwenden Sie stattdessen eine der folgenden: AJAX, UpdatePanel, MVC Aktionsmethoden, Web-API und SignalR.
 
 In früheren Versionen von ASP.NET aktiviert Seiten- und Steuerelementausgabe Rückrufmethoden Sie Teil der Webseite zu aktualisieren, ohne dass eine gesamte Seite aktualisiert. Erreichen Sie Partial-Page-Updates bis jetzt [AJAX](../../../ajax/index.md), [UpdatePanel](https://msdn.microsoft.com/library/bb386454.aspx), [MVC](../../../mvc/index.md), [Web-API-](../../../web-api/index.md) oder [SignalR](../../../signalr/index.md). Sie müssen die Verwendung von Rückrufmethoden, weil sie Probleme mit freundlichen URLs verursachen können, und routing beenden. Standardmäßig Steuerelemente Rückrufmethoden nicht aktivieren, aber wenn Sie diese Funktion in einem Steuerelement aktiviert haben, sollten Sie ihn deaktivieren.
 
@@ -151,7 +149,7 @@ Das folgende Beispiel zeigt, wie Sie in der Datei "Web.config" angeben, dass die
 
 ### <a name="enableviewstatemac"></a>EnableViewStateMac
 
-Empfehlung: Nie auf False festgelegt.
+Empfehlung: Nie auf "false" festgelegt.
 
 In der Standardeinstellung EnbableViewStateMac festgelegt ist auf "true". Auch wenn Ihre Anwendung nicht Ansichtszustand verwendet wird, legen Sie EnableViewStateMac nicht auf "false". Dieser Wert auf "false" festlegen, wird die Anwendung anfällig für Cross-Site-scripting machen.
 
@@ -183,7 +181,7 @@ Weitere Informationen finden Sie unter [ASP.NET AppSettings-Element](https://msd
 
 ### <a name="urlpathencode"></a>UrlPathEncode
 
-Empfehlung: Verwenden von [UrlEncode](https://msdn.microsoft.com/library/zttxte6w.aspx) stattdessen.
+Empfehlung: Verwendung [UrlEncode](https://msdn.microsoft.com/library/zttxte6w.aspx) stattdessen.
 
 .NET Framework, um eine ganz bestimmte Browser Problems "Anwendungskompatibilität" aufgelöst wurde die UrlPathEncode-Methode hinzugefügt. Er nicht ordnungsgemäß codiert eine URL und die Anwendung nicht vor Cross-Site-scripting schützt. Sie sollten nie in Ihrer Anwendung verwenden. Verwenden Sie stattdessen [UrlEncode](https://msdn.microsoft.com/library/zttxte6w.aspx).
 
@@ -199,7 +197,7 @@ Das folgende Beispiel zeigt, wie eine codierte URL als ein Abfragezeichenfolgen-
 
 ### <a name="presendrequestheaders-and-presendrequestcontent"></a>PreSendRequestHeaders und PreSendRequestContent
 
-Empfehlung: Verwenden Sie diese Ereignisse nicht mit der verwalteten Module an. Schreiben Sie stattdessen ein natives IIS-Modul, um die erforderliche Aufgabe ausführen. Finden Sie unter [Erstellen von systemeigenem Code HTTP-Modulen](https://msdn.microsoft.com/library/ms693629.aspx).
+Empfehlung: Verwenden Sie diese Ereignisse nicht mit verwalteten Module aus. Schreiben Sie stattdessen ein natives IIS-Modul, um die erforderliche Aufgabe ausführen. Finden Sie unter [Erstellen von systemeigenem Code HTTP-Modulen](https://msdn.microsoft.com/library/ms693629.aspx).
 
 Sie können die [PreSendRequestHeaders](https://msdn.microsoft.com/library/system.web.httpapplication.presendrequestheaders.aspx) und [PreSendRequestContent](https://msdn.microsoft.com/library/system.web.httpapplication.presendrequestcontent.aspx) Ereignisse mit systemeigenen IIS-Modulen.
 > [!WARNING]
@@ -207,7 +205,7 @@ Sie können die [PreSendRequestHeaders](https://msdn.microsoft.com/library/syste
 
 <a id="asyncevents"></a>
 
-### <a name="asynchronous-page-events-with-web-forms"></a>Asynchrone Seitenereignisse mit Web Forms
+### <a name="asynchronous-page-events-with-web-forms"></a>Asynchrone Seitenereignisse mit Web forms
 
 Empfehlung: In Web Forms zu vermeiden, Schreiben Async-void-Methoden für den Seitenlebenszyklus-Ereignisse und stattdessen [Page.RegisterAsyncTask](https://msdn.microsoft.com/library/system.web.ui.page.registerasynctask.aspx) für asynchronen Code.
 
@@ -217,15 +215,15 @@ Das folgende Beispiel zeigt eine Schaltfläche klicken Sie auf Handler, der asyn
 
 [!code-csharp[Main](what-not-to-do-in-aspnet-and-what-to-do-instead/samples/sample11.cs)]
 
-Bei Verwendung von asynchronen Aufgaben können Sie das Zielframework des Http-Laufzeit auf 4.5 festgelegt, in der Datei "Web.config". Durch Festlegen des Zielframeworks auf 4.5 auf dem neuen Synchronisierungskontext an, die wurde in .NET 4.5 hinzugefügt. Dieser Wert ist standardmäßig in neuen Projekten in Visual Studio 2012 festgelegt, aber es ist nicht festgelegt werden, wenn Sie ein vorhandenes Projekt arbeiten.
+Bei Verwendung asynchrone Aufgaben, legen Sie das Zielframework des Http-Laufzeit auf 4.5 (oder höher) in der Datei "Web.config". Durch Festlegen des Zielframeworks auf 4.5 auf dem neuen Synchronisierungskontext an, die wurde in .NET 4.5 hinzugefügt. Dieser Wert ist standardmäßig in neuen Projekten in Visual Studio festgelegt, aber es ist nicht festgelegt werden, wenn Sie ein vorhandenes Projekt arbeiten.
 
 [!code-xml[Main](what-not-to-do-in-aspnet-and-what-to-do-instead/samples/sample12.xml)]
 
 <a id="fire"></a>
 
-### <a name="fire-and-forget-work"></a>Fire-and-Forget-Aufgaben
+### <a name="fire-and-forget-work"></a>Fire-and-forget-Aufgaben
 
-Empfehlung: Vermeiden Sie eine Anforderung innerhalb von ASP.NET verarbeitet, beim Starten von Fire-and-forget-Arbeit (solche Aufrufen der Methode ThreadPool.QueueUserWorkItem oder erstellen einen Timer, der wiederholt einen Delegaten aufruft).
+Empfehlung: Bei der Behandlung einer Anforderung in ASP.NET zu vermeiden, Starten von Fire-and-forget-Arbeit (solche Aufrufen der Methode ThreadPool.QueueUserWorkItem oder erstellen einen Timer, der wiederholt einen Delegaten aufruft).
 
 Wenn Ihre Anwendung Fire-and-forget-Aufgaben, die in ASP.NET ausgeführt wird, erhalten Ihre Anwendung nicht mehr synchron. Zu jedem Zeitpunkt kann die Anwendungsdomäne zerstört werden dies bedeutet, dass es sich bei Ihrem laufende Prozess den aktuellen Zustand der Anwendung möglicherweise nicht mehr überein.
 
@@ -235,9 +233,9 @@ Wenn Sie diese Arbeit in ASP.NET ausführen müssen, können Sie die Nuget-Paket
 
 <a id="requestentity"></a>
 
-### <a name="request-entity-body"></a>Anforderungs-Einheitstextkörpers
+### <a name="request-entity-body"></a>Anforderungs-einheitstextkörpers
 
-Empfehlung: Vermeiden Sie Request.Form oder Request.InputStream lesen, vor dem Ausführen des Handlers des Ereignisses.
+Empfehlung: Lesen Request.Form oder Request.InputStream, vor dem Ausführen des Handlers des Ereignisses zu vermeiden.
 
 Das früheste von Request.Form oder Request.InputStream gelesenen sollte ausführen während des Handlers Ereignis. In MVC wird der Controller ist der Handler, und das Execute-Ereignis ist, wenn die Aktionsmethode ausgeführt wird. In Web Forms die Seite wird der Handler, und das Execute-Ereignis ist, wenn das Page.Init-Ereignis auslöst. Wenn Sie die Anforderungs-einheitstextkörper vor der Execute-Ereignis lesen, stören Sie bei der Verarbeitung der Anforderung.
 
@@ -257,7 +255,7 @@ In einem MVC-Projekt dürfen Sie nicht Response.Redirect aufrufen. Geben Sie sta
 
 ### <a name="enableviewstate-and-viewstatemode"></a>EnableViewState und ViewStateMode
 
-Empfehlung: Verwenden ViewStateMode statt EnableViewState, um eine präzise Kontrolle bereitzustellen, über die Steuerelemente den Ansichtszustand verwenden.
+Empfehlung: Können Sie ViewStateMode, anstatt EnableViewState, geben Sie eine präzise Kontrolle über die Steuerelemente den Ansichtszustand verwenden.
 
 Wenn Sie auf "false", in der Page-Direktive EnableViewState festlegen, werden Ansichtszustand ist für alle Steuerelemente auf der Seite deaktiviert und kann nicht aktiviert werden. Wenn Sie den Ansichtszustand für nur für bestimmte Steuerelemente auf der Seite zu aktivieren möchten, können Sie ViewStateMode auf deaktiviert festgelegt, für die Seite.
 
@@ -281,9 +279,9 @@ Weitere Informationen finden Sie unter [Einführung in ASP.NET Universal Provide
 
 <a id="long"></a>
 
-### <a name="long-running-requests-110-seconds"></a>Lang andauernde Anforderungen (> 110 Sekunden)
+### <a name="long-running-requests-110-seconds"></a>Lang ausgeführte Anforderungen (> 110 Sekunden)
 
-Empfehlung: Verwenden von [WebSockets](https://msdn.microsoft.com/library/system.net.websockets.websocket.aspx) oder [SignalR](../../../signalr/index.md) für verbundene Clients, und verwenden asynchrone e/a-Vorgänge.
+Empfehlung: Verwenden Sie [WebSockets](https://msdn.microsoft.com/library/system.net.websockets.websocket.aspx) oder [SignalR](../../../signalr/index.md) für verbundene Clients, und verwenden asynchrone e/a-Vorgänge.
 
 Lang ausgeführte Anforderungen kann zu unvorhersehbaren Ergebnissen und eine schlechte Leistung in Ihrer Webanwendung. Der standardmäßigen zeitlimiteinstellung für eine Anforderung ist 110 Sekunden. Bei Verwendung des Sitzungszustands mit einer lang andauernden-Anforderung wird ASP.NET die Sperre für das Sitzungsobjekt nach 110 Sekunden freigegeben. Jedoch kann die Anwendung gerade ein Vorgang für das Sitzungsobjekt sein, wenn die Sperre wird aufgehoben, und der Vorgang kann nicht erfolgreich abgeschlossen. Wenn eine zweite Anforderung des Benutzers blockiert wird, während die erste Anforderung ausgeführt wird, kann die zweite Anforderung das Sitzungsobjekt in einem inkonsistenten Zustand zugreifen.
 

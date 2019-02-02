@@ -3,16 +3,16 @@ title: Authentifizierung und Autorisierung in ASP.NET Core SignalR
 author: bradygaster
 description: Erfahren Sie, wie Sie Authentifizierung und Autorisierung in ASP.NET Core SignalR verwenden.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
+ms.author: bradyg
 ms.custom: mvc
-ms.date: 06/29/2018
+ms.date: 01/31/2019
 uid: signalr/authn-and-authz
-ms.openlocfilehash: c807b65e0047fe6cedff08aef9f758653fab6a0d
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: 5d4574775606b4354ec099b6b32e05294d9f0e45
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54835816"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667309"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>Authentifizierung und Autorisierung in ASP.NET Core SignalR
 
@@ -68,22 +68,14 @@ Wenn [Windows-Authentifizierung](xref:security/authentication/windowsauth) erfol
 
 Fügen Sie eine neue Klasse, die implementiert `IUserIdProvider` und Abrufen von einer der Ansprüche aus dem Benutzer, die als Bezeichner zu verwenden. Um beispielsweise den Anspruch "Name" verwenden (Dies ist die Windows-Benutzernamen im Format `[Domain]\[Username]`), erstellen Sie die folgende Klasse:
 
-```csharp
-public class NameUserIdProvider : IUserIdProvider
-{
-    public string GetUserId(HubConnectionContext connection)
-    {
-        return connection.User?.FindFirst(ClaimTypes.Name)?.Value;
-    }
-}
-```
+[!code-csharp[Name based provider](authn-and-authz/sample/nameuseridprovider.cs?name=NameUserIdProvider)]
 
 Statt `ClaimTypes.Name`, können Sie einen beliebigen Wert aus der `User` (z. B. die Windows-SID-ID, usw.).
 
 > [!NOTE]
 > Die von Ihnen ausgewählte Wert muss zwischen allen Benutzern in Ihrem System eindeutig. Andernfalls konnte eine Nachricht für einen einzelnen Benutzer vorgesehen am Ende zu einem anderen Benutzer.
 
-Registrieren Sie diese Komponente in Ihre `Startup.ConfigureServices` Methode **nach** den Aufruf von `.AddSignalR`
+Registrieren Sie diese Komponente in Ihre `Startup.ConfigureServices` Methode.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -107,6 +99,27 @@ var connection = new HubConnectionBuilder()
 ```
 
 Windows-Authentifizierung wird nur von Browser-Clients unterstützt, wenn Sie Microsoft Internet Explorer oder Microsoft Edge verwenden.
+
+### <a name="use-claims-to-customize-identity-handling"></a>Verwenden von Ansprüchen Behandlung anpassen
+
+Eine app, die Benutzer authentifiziert kann SignalR-Benutzer-IDs von Ansprüchen des Benutzers abgeleitet werden. Um anzugeben, wie SignalR für Benutzer-IDs erstellt, das Sie verwenden, implementieren `IUserIdProvider` und registrieren Sie die Implementierung.
+
+Im Beispielcode wird veranschaulicht, wie Sie Ansprüche verwenden würden, um die e-Mail-Adresse des Benutzers als die identifizierende Eigenschaft auswählen. 
+
+> [!NOTE]
+> Die von Ihnen ausgewählte Wert muss zwischen allen Benutzern in Ihrem System eindeutig. Andernfalls konnte eine Nachricht für einen einzelnen Benutzer vorgesehen am Ende zu einem anderen Benutzer.
+
+[!code-csharp[Email provider](authn-and-authz/sample/EmailBasedUserIdProvider.cs?name=EmailBasedUserIdProvider)]
+
+Die kontoregistrierung Fügt einen Anspruch mit dem Typ `ClaimsTypes.Email` mit der ASP.NET Identity-Datenbank.
+
+[!code-csharp[Adding the email to the ASP.NET identity claims](authn-and-authz/sample/pages/account/Register.cshtml.cs?name=AddEmailClaim)]
+
+Registrieren Sie diese Komponente in Ihre `Startup.ConfigureServices`.
+
+```csharp
+services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
+```
 
 ## <a name="authorize-users-to-access-hubs-and-hub-methods"></a>Autorisieren von Benutzern für den Zugriff Hubs und hubmethoden
 

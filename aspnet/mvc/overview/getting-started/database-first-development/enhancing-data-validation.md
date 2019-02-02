@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.assetid: 0ed5e67a-34c0-4b57-84a6-802b0fb3cd00
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/enhancing-data-validation
 msc.type: authoredcontent
-ms.openlocfilehash: 85299d70c6cba52c1d40a42edfd429c96318134a
-ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
+ms.openlocfilehash: 897cd7c6a40445e2a4abede50d81e101372d3233
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2019
-ms.locfileid: "55236483"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667621"
 ---
 # <a name="tutorial-enhance-data-validation-for-ef-database-first-with-aspnet-mvc-app"></a>Tutorial: Optimieren der datenüberprüfung für EF Database First mit ASP.NET MVC-app
 
@@ -84,6 +84,14 @@ Speichern Sie die *ContosoModel.edmx* Datei, die die Änderungen zu übernehmen.
 
 Öffnen der *Student.cs* Datei oder das *Enrollment.cs* -Datei, und beachten Sie, dass die Validierung zuvor angewendeten Attribute nicht mehr in der Datei. Allerdings wird führen Sie die Anwendung aus, und beachten Sie, dass die Validierungsregeln immer noch angewendet werden, wenn Sie Daten eingeben.
 
+## <a name="conclusion"></a>Schlussbemerkung
+
+Diese Reihe bereitgestellt, ein einfaches Beispiel dafür, wie zum Generieren von Code aus einer vorhandenen Datenbank, in dem Benutzer bearbeiten, aktualisieren, erstellen und Löschen von Daten. Er verwendet ASP.NET MVC 5, Entity Framework und ASP.NET Scaffolding zum Erstellen des Projekts. 
+
+Ein einführendes Beispiel Code First-Entwicklung, finden Sie unter [erste Schritte mit ASP.NET MVC 5](../introduction/getting-started.md). 
+
+Ein komplexeres Beispiel, finden Sie unter [erstellen ein Entity Framework-Datenmodells für eine ASP.NET MVC 4-App](../getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application.md). Beachten Sie, dass die DbContext-API, mit denen Sie für die Arbeit mit Daten in der ersten Datenbank identisch mit der API Sie verwenden für die Arbeit mit Daten in Code First. Auch wenn Sie Database First verwenden möchten, erhalten Sie wie Sie die Verarbeitung komplexerer Szenarien wie z. B. das Lesen und aktualisieren die zugehörige Daten, Behandlung von nebenläufigkeitskonflikten führen, und so weiter aus einem Code First-Lernprogramm. Der einzige Unterschied besteht im wie die Datenbank, die Context-Klasse und die Entitätsklassen erstellt werden.
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Eine vollständige Liste von datenanmerkungen Überprüfung können Sie auf Eigenschaften und Klassen anwenden, finden Sie unter [System.ComponentModel.DataAnnotations](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.aspx).
@@ -96,6 +104,6 @@ In diesem Tutorial:
 > * Hinzugefügt von datenanmerkungen
 > * Hinzugefügte Metadatenklassen
 
-Wechseln Sie zum nächsten Tutorial erfahren, wie Sie Web-app und Datenbank in Azure veröffentlichen.
+Um zu erfahren, wie Sie eine Web-app und SQL-Datenbank in Azure App Service bereitstellen, finden Sie im Tutorial:
 > [!div class="nextstepaction"]
-> [Veröffentlichen in Azure](publish-to-azure.md)
+> [Bereitstellen einer .NET-App in Azure App Service](/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase/)

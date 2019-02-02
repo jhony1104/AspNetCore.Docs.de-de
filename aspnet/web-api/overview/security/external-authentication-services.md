@@ -4,22 +4,20 @@ title: Externe Authentifizierungsdienste mit ASP.NET-Web-API (c#) | Microsoft-Do
 author: rmcmurray
 description: Beschreibt die Verwendung von externen Authentifizierungsdienste in ASP.NET Web-API.
 ms.author: riande
-ms.date: 06/26/2013
+ms.date: 01/28/2019
 ms.assetid: 3bb8eb15-b518-44f5-a67d-a27e051aedc6
 msc.legacyurl: /web-api/overview/security/external-authentication-services
 msc.type: authoredcontent
-ms.openlocfilehash: 0b23baac7eca0297e063c682a8ae199f9543d75e
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: de9b64e6c582059ec66ab352f60773f50af7b1ff
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41826122"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667855"
 ---
-<a name="external-authentication-services-with-aspnet-web-api-c"></a>Externe Authentifizierungsdienste mit ASP.NET-Web-API (c#)
-====================
-durch [Robert McMurray](https://github.com/rmcmurray)
+# <a name="external-authentication-services-with-aspnet-web-api-c"></a>Externe Authentifizierungsdienste mit ASP.NET-Web-API (c#)
 
-Visual Studio 2013 und ASP.NET 4.5.1 erweitern Sie die Sicherheitsoptionen für [Single Page Applications](../../../single-page-application/index.md) (SPA) und [Web-API-](../../index.md) Dienste zur Integration in externe Authentifizierung-Dienste, die mehrere enthalten OAuth-/OpenID und Dienste für soziale Authentifizierung: Microsoft Accounts, Twitter, Facebook und Google.
+Visual Studio 2017 und ASP.NET 4.7.2 Erweitern Sie die Sicherheitsoptionen für [Single Page Applications](../../../single-page-application/index.md) (SPA) und [Web-API-](../../index.md) Dienste zur Integration in externe Authentifizierung-Dienste, die mehrere enthalten OAuth-/OpenID und Dienste für soziale Authentifizierung: Microsoft-Konten, Twitter, Facebook und Google.  
 
 ### <a name="in-this-walkthrough"></a>In dieser exemplarischen Vorgehensweise
 
@@ -34,21 +32,19 @@ Visual Studio 2013 und ASP.NET 4.5.1 erweitern Sie die Sicherheitsoptionen für 
     - [Kombinieren von externen Authentifizierungsdienste](#COMBINE)
     - [Konfiguration von IIS Express, um einen vollständig qualifizierten Domänennamen verwenden](#FQDN)
     - [So erhalten Sie die Einstellungen Ihrer Anwendung für die Microsoft-Authentifizierung](#OBTAIN)
-    - [Optional: Deaktivieren der lokalen Registrierung](#DISABLE)
+    - [Optional: Deaktivieren Sie die lokale Registrierung](#DISABLE)
 
-### <a name="prerequisites"></a>Erforderliche Komponenten
+### <a name="prerequisites"></a>Vorraussetzungen
 
 Um den Beispielen in dieser exemplarischen Vorgehensweise folgen zu können, müssen Sie über Folgendes verfügen:
 
-- Visual Studio 2013
-- Ein Konto für mindestens eine der folgenden externen Dienste:
+- Visual Studio 2017
+- Eine Developer-Konto mit dem Anwendungs-ID und geheimen Schlüssel für eines der folgenden Dienste für soziale Authentifizierung:
 
-    - Ein Google-Benutzer-Konto
-    - Eine Developer-Konto mit dem Anwendungs-ID und geheimen Schlüssel für eines der folgenden Dienste für soziale Authentifizierung:
-
-        - Microsoft-Konten ([https://go.microsoft.com/fwlink/?LinkID=144070](https://go.microsoft.com/fwlink/?LinkID=144070))
-        - Twitter ([https://dev.twitter.com/](https://dev.twitter.com/))
-        - Facebook ([https://developers.facebook.com/](https://developers.facebook.com/))
+  - Microsoft-Konten ([https://go.microsoft.com/fwlink/?LinkID=144070](https://go.microsoft.com/fwlink/?LinkID=144070))
+  - Twitter ([https://dev.twitter.com/](https://dev.twitter.com/))
+  - Facebook ([https://developers.facebook.com/](https://developers.facebook.com/))
+  - Google ([https://developers.google.com/](https://developers.google.com))
 
 <a id="USING"></a>
 ## <a name="using-external-authentication-services"></a>Verwenden externe Authentifizierungsdienste
@@ -65,43 +61,41 @@ In diesem zweiten Beispiel der Benutzer-Agent handelt, mit der Webanwendung und 
 
 [![](external-authentication-services/_static/image4.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image3.png)
 
-Visual Studio 2013 und ASP.NET 4.5.1 erleichtern Integration in externe Authentifizierungsdienste für Entwickler durch die integrierte Integration für die folgenden Authentifizierungsdienste:
+Visual Studio 2017 und ASP.NET 4.7.2 erleichtern Integration in externe Authentifizierungsdienste für Entwickler durch die integrierte Integration für die folgenden Authentifizierungsdienste:
 
 - Facebook
 - Google
 - Microsoft-Accounts (Windows Live ID-Konten)
 - Twitter
 
-In die Beispielen in dieser exemplarischen Vorgehensweise werden veranschaulicht die unterstützte externe Authentifizierungsdienste mit die neue ASP.NET Web Application-Vorlage, die bereitgestellt wird mit Visual Studio 2013 konfigurieren.
+In die Beispielen in dieser exemplarischen Vorgehensweise werden veranschaulicht, konfigurieren Sie jeden der unterstützte externe Authentifizierungsdienste mit die neue ASP.NET Web Application-Vorlage, die bereitgestellt wird mit Visual Studio 2017.
 
 > [!NOTE]
 > Ggf. müssen Sie möglicherweise Ihren FQDN an den Einstellungen für den Dienst für die externe Authentifizierung hinzufügen. Diese Anforderung basiert auf sicherheitseinschränkungen für einige externe Authentifizierungsdienste erfordern den FQDN in den Anwendungseinstellungen Ihrer, mit dem FQDN übereinstimmen, die von den Clients verwendet wird. (Für diese Schritte variiert stark für jeden Dienst für die externe Authentifizierung, müssen Sie in der Dokumentation für jeden Dienst externe Authentifizierung, um festzustellen, ob dies erforderlich ist und wie Sie diese Einstellungen zu konfigurieren.) Wenn Sie müssen zum Konfigurieren von IIS Express zur Verwendung eines FQDN für das Testen dieser Umgebung finden die [Konfigurieren von IIS Express verwenden einen vollständig qualifizierten Domänennamen](#FQDN) weiter unten in dieser exemplarischen Vorgehensweise.
 
 
 <a id="SAMPLE"></a>
-## <a name="creating-a-sample-web-application"></a>Erstellen einer Beispiel-Webanwendung
+## <a name="create-a-sample-web-application"></a>Erstellen einer Beispiel-Webanwendung
 
 Die folgenden Schritte führt Sie durch das Erstellen einer Beispiel-Anwendung mithilfe der ASP.NET Web Application-Vorlage, und Sie diese beispielanwendung für jeden der Dienste externe Authentifizierung weiter unten in dieser exemplarischen Vorgehensweise verwenden.
 
-Starten Sie Visual Studio 2013 wählen **neues Projekt** von der Startseite. Alternativ wählen Sie in der **Datei** , wählen Sie im Menü **neu** und dann **Projekt**.
+Starten Sie Visual Studio 2017, und wählen Sie **neues Projekt** von der Startseite. Alternativ wählen Sie in der **Datei** , wählen Sie im Menü **neu** und dann **Projekt**.
 
-[![](external-authentication-services/_static/image6.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image5.png)
+<!-- [![](external-authentication-services/_static/image6.png "Click to Expand the Image")](external-authentication-services/_static/image5.png) -->
 
-Wenn die **neues Projekt** Dialogfeld angezeigt wird, wählen **installiert** **Vorlagen** und erweitern Sie **Visual C#-**. Klicken Sie unter **Visual C#-** Option **Web**. Wählen Sie in der Liste der Projektvorlagen das Projekt **ASP.NET-Webanwendung**. Geben Sie einen Namen für Ihr Projekt, und klicken Sie auf **OK**.
+Wenn die **neues Projekt** Dialogfeld angezeigt wird, wählen **installiert** und erweitern Sie **Visual C#** . Klicken Sie unter **Visual C#-** Option **Web**. Wählen Sie in der Liste der Projektvorlagen das Projekt **ASP.NET-Webanwendung (.Net Framework)**. Geben Sie einen Namen für Ihr Projekt, und klicken Sie auf **OK**.
 
-[![](external-authentication-services/_static/image8.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image7.png)
+[![](external-authentication-services/_static/image71.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image71.png)
 
-Wenn die **neues ASP.NET-Projekt** angezeigt, wählen die **SPA** Vorlage, und klicken Sie auf **Erstellen eines Projekts**.
+Wenn die **neues ASP.NET-Projekt** angezeigt, wählen die **Single Page Application** Vorlage, und klicken Sie auf **Erstellen eines Projekts**.
 
-[![](external-authentication-services/_static/image10.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image9.png)
+[![](external-authentication-services/_static/image72.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image72.png)
 
-Warten, wie Visual Studio 2013 wird das Projekt erstellt.
+Warten, wie Visual Studio 2017 wird das Projekt erstellt.
 
-[![](external-authentication-services/_static/image12.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image11.png)
+<!-- [![](external-authentication-services/_static/image12.png "Click to Expand the Image")](external-authentication-services/_static/image11.png) -->
 
-Wenn Sie Visual Studio 2013 Erstellen Ihres Projekts abgeschlossen ist, öffnen Sie die *Startup.Auth.cs* -Datei auf dem ist die **App\_starten** Ordner.
-
-[![](external-authentication-services/_static/image14.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image13.png)
+Wenn Sie Visual Studio 2017 Erstellen Ihres Projekts abgeschlossen ist, öffnen Sie die *Startup.Auth.cs* -Datei auf dem ist die **App\_starten** Ordner.
 
 Wenn Sie zuerst das Projekt erstellen, sind keine externen Authentifizierungsdienste aktiviert *Startup.Auth.cs* file; im folgenden wird veranschaulicht, was Ihr Code aussehen kann, mit der Position, an hervorgehobenen Abschnitten würden Sie aktivieren ein externer Authentifizierungsdienst und alle relevanten Einstellungen, um die Microsoft-Accounts, Twitter, Facebook oder Google-Authentifizierung für Ihre ASP.NET-Anwendung zu verwenden:
 
@@ -109,9 +103,9 @@ Wenn Sie zuerst das Projekt erstellen, sind keine externen Authentifizierungsdie
 
 Wenn Sie F5 drücken, um das Erstellen und Debuggen Ihre Web-Anwendung, wird einen Anmeldebildschirm angezeigt, in denen sehen Sie, dass keine externen Authentifizierungsdienste definiert wurden.
 
-[![](external-authentication-services/_static/image16.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image15.png)
+[![](external-authentication-services/_static/image73.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image73.png)
 
-In den folgenden Abschnitten erfahren Sie, wie die externe Authentifizierungsdienste aktivieren, die mit ASP.NET in Visual Studio 2013 bereitgestellt werden.
+In den folgenden Abschnitten erfahren Sie, wie die externe Authentifizierungsdienste aktivieren, die mit ASP.NET in Visual Studio 2017 bereitgestellt werden.
 
 <a id="FACEBOOK"></a>
 ## <a name="enabling-facebook-authentication"></a>Facebook-Authentifizierung aktivieren
@@ -120,10 +114,9 @@ Verwendung von Facebook Authentifizierung müssen Sie ein Facebook-Entwickler-Ko
 
 Einmal Anwendungs-ID und geheimen Schlüssel erhalten haben, verwenden die folgenden Schritte aus, um Facebook-Authentifizierung für Ihre Webanwendung zu aktivieren:
 
-1. Wenn Sie Ihr Projekt in Visual Studio 2013 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei:
+1. Wenn Sie Ihr Projekt in Visual Studio 2017 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei.
 
-    [![](external-authentication-services/_static/image18.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image17.png)
-2. Suchen Sie nach der hervorgehobene Abschnitt des Codes:
+2. Suchen Sie im Bereich der Facebook-Authentifizierung des Codes:
 
     [!code-csharp[Main](external-authentication-services/samples/sample2.cs)]
 3. Entfernen Sie die &quot; // &quot; Zeichen, kommentieren Sie die hervorgehobenen Codezeilen, und dann Ihre Anwendungs-ID und geheimen Schlüssel hinzufügen. Nachdem Sie diese Parameter hinzugefügt haben, können Sie das Projekt neu kompilieren:
@@ -131,7 +124,7 @@ Einmal Anwendungs-ID und geheimen Schlüssel erhalten haben, verwenden die folge
     [!code-csharp[Main](external-authentication-services/samples/sample3.cs)]
 4. Beim Drücken von F5, um Ihre Webanwendung in Ihrem Webbrowser zu öffnen, sehen Sie sich, dass es sich bei Facebook als externer Authentifizierungsdienst definiert wurde:
 
-    [![](external-authentication-services/_static/image20.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image19.png)
+    [![](external-authentication-services/_static/image74.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image74.png)
 5. Beim Klicken auf die **Facebook** Schaltfläche, wird Ihr Browser an die Facebook-Anmeldeseite weitergeleitet werden:
 
     [![](external-authentication-services/_static/image22.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image21.png)
@@ -145,22 +138,22 @@ Einmal Anwendungs-ID und geheimen Schlüssel erhalten haben, verwenden die folge
 <a id="GOOGLE"></a>
 ## <a name="enabling-google-authentication"></a>Aktivieren von Google-Authentifizierung
 
-Google ist bei weitem die einfachste Methode der externen Authentifizierung Dienste aktiviert werden, da ein Developer-Konto benötigt keine, noch muss zusätzliche Informationen wie Ihre Anwendungs-ID oder den geheimen Schlüssel als die andere externe Authentifizierungsdienste erforderlich.
+Mithilfe von Google Authentication müssen Sie ein Google Developer-Konto zu erstellen, und Ihr Projekt benötigen eine Anwendungs-ID und geheimen Schlüssel von Google um zu funktionieren. Weitere Informationen über ein Google Developer-Konto erstellen und Abrufen von Anwendungs-ID und geheimen Schlüssel, finden Sie unter [ https://developers.google.com ](https://developers.google.com).
+
 
 Verwenden Sie zum Aktivieren der Google-Authentifizierung für Ihre Webanwendung die folgenden Schritte aus:
 
-1. Wenn Sie Ihr Projekt in Visual Studio 2013 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei:
+1. Wenn Sie Ihr Projekt in Visual Studio 2017 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei.
 
-    [![](external-authentication-services/_static/image28.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image27.png)
-2. Suchen Sie nach der hervorgehobene Abschnitt des Codes:
+2. Suchen Sie im Bereich der Google-Authentifizierung des Codes:
 
     [!code-csharp[Main](external-authentication-services/samples/sample4.cs)]
-3. Entfernen Sie die &quot; // &quot; Zeichen, kommentieren Sie die hervorgehobene Zeile des Codes, und klicken Sie dann das Projekt neu kompilieren:
+3. Entfernen Sie die &quot; // &quot; Zeichen, kommentieren Sie die hervorgehobenen Codezeilen, und dann Ihre Anwendungs-ID und geheimen Schlüssel hinzufügen. Nachdem Sie diese Parameter hinzugefügt haben, können Sie das Projekt neu kompilieren:
 
     [!code-csharp[Main](external-authentication-services/samples/sample5.cs)]
 4. Beim Drücken von F5, um Ihre Webanwendung in Ihrem Webbrowser zu öffnen, sehen Sie sich, dass die Google als externer Authentifizierungsdienst definiert wurde:
 
-    [![](external-authentication-services/_static/image30.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image29.png)
+    [![](external-authentication-services/_static/image75.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image75.png)
 5. Beim Klicken auf die **Google** Schaltfläche Ihr Browser wird auf die Google-Anmeldeseite weitergeleitet werden:
 
     [![](external-authentication-services/_static/image32.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image31.png)
@@ -181,10 +174,9 @@ Microsoft-Authentifizierung müssen Sie ein Developer-Konto zu erstellen, und er
 
 Nachdem Sie Ihre Consumer Key und consumergeheimnis abgerufen haben, verwenden die folgenden Schritte aus, um Microsoft-Authentifizierung für Ihre Webanwendung zu aktivieren:
 
-1. Wenn Sie Ihr Projekt in Visual Studio 2013 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei:
+1. Wenn Sie Ihr Projekt in Visual Studio 2017 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei.
 
-    [![](external-authentication-services/_static/image40.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image39.png)
-2. Suchen Sie nach der hervorgehobene Abschnitt des Codes:
+2. Suchen Sie den Microsoft-Authentifizierung-Abschnitt des Codes:
 
     [!code-csharp[Main](external-authentication-services/samples/sample6.cs)]
 3. Entfernen Sie die &quot; // &quot; Zeichen, kommentieren Sie die hervorgehobenen Codezeilen, und dann Ihre Client-ID und geheimer Clientschlüssel hinzufügen. Nachdem Sie diese Parameter hinzugefügt haben, können Sie das Projekt neu kompilieren:
@@ -213,10 +205,9 @@ Twitter-Authentifizierung müssen Sie ein Developer-Konto zu erstellen und erfor
 
 Nachdem Sie Ihre Consumer Key und consumergeheimnis abgerufen haben, verwenden die folgenden Schritte aus, um die Twitter-Authentifizierung für Ihre Webanwendung zu aktivieren:
 
-1. Wenn Sie Ihr Projekt in Visual Studio 2013 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei:
+1. Wenn Sie Ihr Projekt in Visual Studio 2017 geöffnet ist, öffnen Sie die *Startup.Auth.cs* Datei.
 
-    [![](external-authentication-services/_static/image52.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image51.png)
-2. Suchen Sie nach der hervorgehobene Abschnitt des Codes:
+2. Suchen Sie im Bereich der Twitter-Authentifizierung des Codes:
 
     [!code-csharp[Main](external-authentication-services/samples/sample8.cs)]
 3. Entfernen Sie die &quot; // &quot; Zeichen kommentieren die hervorgehobenen Zeilen des Codes, und fügen Sie dann Ihre Consumer Key und consumergeheimnis hinzu. Nachdem Sie diese Parameter hinzugefügt haben, können Sie das Projekt neu kompilieren:
@@ -251,9 +242,9 @@ Flexibler Sie können mehrere externe Authentifizierungsdienste definieren, zur 
 [![](external-authentication-services/_static/image62.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image61.png)
 
 <a id="FQDN"></a>
-### <a name="configuring-iis-express-to-use-a-fully-qualified-domain-name"></a>Konfiguration von IIS Express, um einen vollständig qualifizierten Domänennamen verwenden
+### <a name="configure-iis-express-to-use-a-fully-qualified-domain-name"></a>Konfigurieren von IIS Express, um einen vollständig qualifizierten Domänennamen zu verwenden.
 
-Einige externe Authentifizierungsanbieter unterstützen nicht das Testen Ihrer Anwendung mithilfe einer HTTP-Adresse wie `http://localhost:port/`. Um dieses Problem zu umgehen, können Sie eine statische Zuordnung für den vollständig qualifizierten Domänennamen (FQDN) der HOSTS-Datei hinzufügen und konfigurieren Ihren Projektoptionen in Visual Studio 2013 verwenden Sie den FQDN für das Testen/Debuggen. Zu diesem Zweck verwenden Sie die folgenden Schritte aus:
+Einige externe Authentifizierungsanbieter unterstützen nicht das Testen Ihrer Anwendung mithilfe einer HTTP-Adresse wie `http://localhost:port/`. Um dieses Problem zu umgehen, können Sie eine statische Zuordnung für den vollständig qualifizierten Domänennamen (FQDN) der HOSTS-Datei hinzufügen und konfigurieren Ihren Projektoptionen in Visual Studio 2017 auf den vollqualifizierten Domänennamen für das Testen/Debuggen verwenden. Zu diesem Zweck verwenden Sie die folgenden Schritte aus:
 
 - Fügen Sie einen statischen FQDN Zuordnen der Datei "HOSTS" hinzu:
 
@@ -268,7 +259,7 @@ Einige externe Authentifizierungsanbieter unterstützen nicht das Testen Ihrer A
 
 - Konfigurieren Sie Visual Studio-Projekt zum Verwenden des FQDN:
 
-  1. Wenn Ihr Projekt in Visual Studio 2013 geöffnet ist, klicken Sie auf die **Projekt** Menü, und wählen Sie dann den Eigenschaften Ihres Projekts. Sie können beispielsweise auswählen **WebApplication1 Eigenschaften**.
+  1. Wenn Ihr Projekt in Visual Studio 2017 geöffnet ist, klicken Sie auf die **Projekt** Menü, und wählen Sie dann den Eigenschaften Ihres Projekts. Sie können beispielsweise auswählen **WebApplication1 Eigenschaften**.
   2. Wählen Sie die **Web** Registerkarte.
   3. Geben Sie Ihren FQDN für den <strong>Projekt Url</strong>. Geben Sie z. B. <kbd> <http://www.wingtiptoys.com> </kbd> war, die die FQDN-Zuordnung, die Datei "HOSTS" hinzugefügt.
 
@@ -280,7 +271,7 @@ Einige externe Authentifizierungsanbieter unterstützen nicht das Testen Ihrer A
         <kbd>cd /d &quot;%ProgramFiles%\IIS Express&quot;</kbd>
     3. Geben Sie den folgenden Befehl aus, um den vollqualifizierten Domänennamen für Ihre Anwendung hinzuzufügen:
 
-        <kbd>Appcmd.exe set Config-section:system.applicationHost/sites / +&quot;[Name = 'WebApplication1'] .bindings. [ Protocol = "http", BindingInformation ='*:80:www.wingtiptoys.com']&quot; /commit:apphost</kbd>
+        <kbd>appcmd.exe set config -section:system.applicationHost/sites /+&quot;[name='WebApplication1'].bindings.[protocol='http',bindingInformation='*:80:www.wingtiptoys.com']&quot; /commit:apphost</kbd>
 
   Wo **WebApplication1** ist der Name des Projekts und **BindingInformation** enthält die Portnummer und den vollqualifizierten Domänennamen, den Sie für Ihre Tests verwenden möchten.
 
@@ -291,16 +282,18 @@ Verknüpfen eine Anwendung in Windows Live für Microsoft Authentication ist ein
 
 1. Navigieren Sie zu [ https://go.microsoft.com/fwlink/?LinkID=144070 ](https://go.microsoft.com/fwlink/?LinkID=144070) Geben Sie Ihren Microsoft-Kontonamen und das Kennwort ein, wenn Sie dazu aufgefordert werden, und klicken Sie auf **Anmeldung**:
 
-    [![](external-authentication-services/_static/image64.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image63.png)
-2. Geben Sie den Namen und die Sprache Ihrer Anwendung, wenn Sie aufgefordert werden, und klicken Sie dann auf **akzeptieren**:
+   <!--  [![](external-authentication-services/_static/image64.png "Click to Expand the Image")](external-authentication-services/_static/image63.png) -->
+2. Wählen Sie **fügen Sie eine app** und geben Sie den Namen Ihrer Anwendung, wenn Sie aufgefordert werden, und klicken Sie dann auf **erstellen**:
 
-    [![](external-authentication-services/_static/image66.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image65.png)
-3. Auf der **API-Einstellungen** Seite für Ihre Anwendung, geben Sie die umleitungsdomäne für Ihre Anwendung und die Kopie der **Client-ID** und **clientgeheimnis** für Ihr Projekt, und klicken Sie dann Klicken Sie auf **speichern**:
+    [![](external-authentication-services/_static/image79.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image79.png)
+3. Wählen Sie Ihre app unter **Namen** und die Seite mit den Anwendungseigenschaften wird angezeigt.
 
-    [![](external-authentication-services/_static/image68.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image67.png)
+4. Geben Sie die umleitungsdomäne für Ihre Anwendung ein. Kopieren der **Anwendungs-ID** und klicken Sie unter **Anwendungsgeheimnisse**Option **Kennwort generieren**. Kopieren Sie das Kennwort, das angezeigt wird. Die Anwendungs-ID und Kennwort sind Ihre Client-ID und den geheimen Clientschlüssel. Wählen Sie **Ok** und dann **speichern**.
+
+    [![](external-authentication-services/_static/image77.png "Klicken Sie auf, um das Bild zu erweitern.")](external-authentication-services/_static/image77.png)
 
 <a id="DISABLE"></a>
-### <a name="optional-disable-local-registration"></a>Optional: Deaktivieren der lokalen Registrierung
+### <a name="optional-disable-local-registration"></a>Optional: Deaktivieren Sie die lokale Registrierung
 
 Die aktuelle lokale Registrierung-Funktionalität von ASP.NET wird nicht verhindert, dass automatisierten Programmen (Bots) Erstellen von Konten für den Member; z. B. durch Einsatz einer Technologie zum Verhindern von Bots und Überprüfung wie [CAPTCHA](../../../web-pages/overview/security/16-adding-security-and-membership.md). Aus diesem Grund sollten Sie die lokale Anmeldung Form und die Registrierung einen Link auf der Anmeldeseite entfernen. Öffnen Sie hierzu die  *\_Login.cshtml* Seite in Ihrem Projekt, und klicken Sie dann auf die Zeilen für den Bereich für die lokale Anmeldung und den Registrierungslink auskommentieren. Die entsprechende Seite sollte wie im folgenden Codebeispiel aussehen:
 

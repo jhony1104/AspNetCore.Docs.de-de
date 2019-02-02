@@ -9,16 +9,16 @@ ms.topic: tutorial
 ms.assetid: 095abad4-3bfe-4f06-b092-ae6a735b7e49
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/setting-up-database
 msc.type: authoredcontent
-ms.openlocfilehash: a503e3db63c873249178fd4783d322f4067c3208
-ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
+ms.openlocfilehash: dfc6c7a7083524a1e7049fdc879fe679f951084d
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2019
-ms.locfileid: "55236379"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667738"
 ---
 # <a name="tutorial-get-started-with-ef-database-first-using-mvc-5"></a>Tutorial: Erste Schritte mit EF Database First anhand von MVC 5
 
-Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle. Im letzten Teil der Reihe werden Sie den Standort und die Datenbank in Azure bereitstellen.
+Verwenden MVC, Entity Framework und ASP.NET-Gerüstbau, können Sie eine Webanwendung erstellen, die eine Schnittstelle für eine vorhandene Datenbank bereitstellt. Dieser tutorialreihe erfahren Sie, wie Sie automatisch generierter Code, der ermöglicht Benutzern das anzeigen, bearbeiten, erstellen und Löschen von Daten, die in einer Datenbanktabelle gespeichert. Der generierte Code entspricht die Spalten in der Datenbanktabelle. Im letzten Teil der Reihe erfahren Sie, wie Hinzufügen von datenanmerkungen in das Datenmodell, geben Sie die überprüfungsanforderungen zu erfüllen und Formatierung anzeigen. Wenn Sie fertig sind, können Sie eine Azure-Artikel erfahren, wie eine app mit .NET und SQL-Datenbank in Azure App Service bereitstellen fahren fort.
 
 In diesem Tutorial wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren. Er verwendet das Entity Framework 6 und MVC 5, um die Webanwendung zu erstellen. Die ASP.NET-Gerüstbau-Funktion ermöglicht Ihnen das automatische Generieren von Code zum Anzeigen, aktualisieren, erstellen und Löschen von Daten. Verwenden die Tools für die Veröffentlichung in Visual Studio, können Sie problemlos den Standort und die Datenbank in Azure bereitstellen.
 
@@ -51,7 +51,7 @@ Starten Sie Visual Studio, und erstellen Sie eine **SQL Server-Datenbankprojekt*
 
 ![Datenbankprojekt erstellen](setting-up-database/_static/image1.png)
 
-Sie haben jetzt ein leeres Datenbankprojekt. Sie werden diese Datenbank in Azure weiter unten in diesem Tutorial bereitgestellt, daher Sie Azure SQL-Datenbank als Zielplattform für das Projekt festlegen müssen. Festlegen der Zielplattform ist die Datenbank keine tatsächliche Bereitstellung; Es bedeutet lediglich, dass das Datenbankprojekt sicherstellen, dass der Entwurf der Datenbank mit der Zielplattform kompatibel ist. Öffnen Sie zum Festlegen der Zielplattform der **Eigenschaften** für das Projekt und wählen Sie **Microsoft Azure SQL-Datenbank** für die Zielplattform.
+Sie haben jetzt ein leeres Datenbankprojekt. Um sicherzustellen, dass Sie diese Datenbank in Azure bereitstellen können, müssen Sie die Azure SQL-Datenbank als Zielplattform für das Projekt festlegen. Festlegen der Zielplattform ist die Datenbank keine tatsächliche Bereitstellung; Es bedeutet lediglich, dass das Datenbankprojekt sicherstellen, dass der Entwurf der Datenbank mit der Zielplattform kompatibel ist. Öffnen Sie zum Festlegen der Zielplattform der **Eigenschaften** für das Projekt und wählen Sie **Microsoft Azure SQL-Datenbank** für die Zielplattform.
 
 Sie können die Tabellen, die für dieses Tutorial erforderlich sind, durch das Hinzufügen von SQL-Skripts, die definieren, die Tabellen erstellen. Mit der rechten Maustaste in des Projekts, und fügen Sie ein neues Element hinzu. Wählen Sie **Tabellen und Sichten** > **Tabelle** und nennen Sie sie *für Schüler und Studenten*.
 

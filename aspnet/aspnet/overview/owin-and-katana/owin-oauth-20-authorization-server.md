@@ -4,20 +4,18 @@ title: OWIN OAuth 2.0-Autorisierungsserver | Microsoft-Dokumentation
 author: hongyes
 description: Dieses Tutorial führt Sie zum Implementieren von OAuth 2.0-Autorisierungsserver mit OWIN-OAuth-Middleware. Dies ist ein erweitertes Lernprogramm, nur Outlin...
 ms.author: riande
-ms.date: 03/20/2014
+ms.date: 01/28/2019
 ms.assetid: 20acee16-c70c-41e9-b38f-92bfcf9a4c1c
 msc.legacyurl: /aspnet/overview/owin-and-katana/owin-oauth-20-authorization-server
 msc.type: authoredcontent
-ms.openlocfilehash: 095dad49a8e9f963d941a84398afe9da0f46ce0b
-ms.sourcegitcommit: a4dcca4f1cb81227c5ed3c92dc0e28be6e99447b
+ms.openlocfilehash: b8451d2d9e346bd5e2f51ba45e48030a5221b549
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/10/2018
-ms.locfileid: "48912266"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667647"
 ---
-<a name="owin-oauth-20-authorization-server"></a>OWIN OAuth 2.0-Autorisierungsserver
-====================
-durch [Hongye Sun](https://github.com/hongyes), [Praburaj Thiagarajan](https://github.com/Praburaj), [Rick Anderson]((https://twitter.com/RickAndMSFT))
+# <a name="owin-oauth-20-authorization-server"></a>OWIN-OAuth 2.0-Autorisierungsserver
 
 > Dieses Tutorial führt Sie zum Implementieren von OAuth 2.0-Autorisierungsserver mit OWIN-OAuth-Middleware. Dies ist eine erweiterte Tutorial, in dem nur die Schritte zum Erstellen einer OWIN OAuth 2.0-Autorisierungsserver erläutert. Dies ist keine Schritt-für-Schritt-Tutorial. [Beispielcode herunterladen](https://code.msdn.microsoft.com/OWIN-OAuth-20-Authorization-ba2b8783/file/114932/1/AuthorizationServer.zip).
 >
@@ -29,9 +27,9 @@ durch [Hongye Sun](https://github.com/hongyes), [Praburaj Thiagarajan](https://g
 >
 > | **In diesem Tutorial gezeigt** | **Funktioniert auch mit** |
 > | --- | --- |
-> | Windows 8.1 | Windows 8, Windows 7 |
-> | [Visual Studio 2013](https://my.visualstudio.com/Downloads?q=visual%20studio%202013) | [Visual Studio 2013 Express für Desktop](https://my.visualstudio.com/Downloads?q=visual%20studio%202013#d-2013-express). Visual Studio 2012 mit dem aktuellen Update sollte funktionieren, aber das Tutorial wurde dabei nicht getestet, und einige Menüauswahl und Dialogfelder unterscheiden sich. |
-> | .NET 4.5 |  |
+> | Windows 8.1 | Windows 10, Windows 8, Windows 7 |
+> | [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
+> | .NET 4.7.2 |  |
 >
 > ## <a name="questions-and-comments"></a>Fragen und Kommentare
 >
@@ -53,7 +51,7 @@ In diesem Tutorial werden behandelt:
 <a id="prerequisites"></a>
 ## <a name="prerequisites"></a>Vorraussetzungen
 
-- [Visual Studio 2013](https://www.microsoft.com/visualstudio/eng/downloads#d-2013-editions) oder die kostenlose [Visual Studio Express 2013](https://www.microsoft.com/visualstudio/eng/downloads#d-2013-express), gemäß **Softwareversionen** am oberen Rand der Seite.
+- [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) gemäß **Softwareversionen** am oberen Rand der Seite.
 - Vertrautheit mit OWIN. Finden Sie unter [erste Schritte mit dem Katana-Projekt](https://msdn.microsoft.com/magazine/dn451439.aspx) und [Neuigkeiten in der OWIN und Katana](index.md).
 - Vertrautheit mit [OAuth](http://tools.ietf.org/html/rfc6749) Terminologie, einschließlich [Rollen](http://tools.ietf.org/html/rfc6749#section-1.1), [Protocol Flow](http://tools.ietf.org/html/rfc6749#section-1.2), und [Gewährung der Autorisierung](http://tools.ietf.org/html/rfc6749#section-1.3). [Einführung in die OAuth 2.0](http://tools.ietf.org/html/rfc6749#section-1) bietet eine gute Einführung in.
 
@@ -79,19 +77,19 @@ Der obige Code ermöglicht die Anwendung/eine externe Anmeldung Cookies und Goog
 
 Die `UseOAuthAuthorizationServer` Erweiterungsmethode ist den autorisierungsserver einrichten. Die Setupoptionen sind:
 
-- `AuthorizeEndpointPath`: Der Pfad der Anforderung, in denen Clientanwendungen User-Agent umgeleitet wird, um die Benutzer erhalten haben, stimmen ein Token oder Code ausgeben. Es muss beginnen mit einem führenden Schrägstrich, z. B. "`/Authorize`".
-- `TokenEndpointPath`: Die Anforderung Clientanwendungen kommunizieren direkt zum Abrufen des Zugriffstokens. Es muss mit einem führenden Schrägstrich, z. B. "/ Token" beginnen. Wenn der Client ausgestellt wird eine [Client\_geheimen Schlüssel](http://tools.ietf.org/html/rfc6749#appendix-A.2), muss an diesen Endpunkt bereitgestellt werden.
+- `AuthorizeEndpointPath`: Der Anforderungspfad, in denen Clientanwendungen User-Agent umgeleitet wird, um die Benutzer erhalten, stimmen ein Token oder Code ausgeben. Es muss beginnen mit einem führenden Schrägstrich, z. B. "`/Authorize`".
+- `TokenEndpointPath`: Die Anforderung Pfad-Clientanwendungen kommunizieren direkt zum Abrufen des Zugriffstokens. Es muss mit einem führenden Schrägstrich, z. B. "/ Token" beginnen. Wenn der Client ausgestellt wird eine [Client\_geheimen Schlüssel](http://tools.ietf.org/html/rfc6749#appendix-A.2), muss an diesen Endpunkt bereitgestellt werden.
 - `ApplicationCanDisplayErrors`: Legen Sie auf `true` Wenn möchte, dass die Webanwendung auf eine benutzerdefinierten Fehlerseite für den clientvalidierungsfehler generieren `/Authorize` Endpunkt. Dies ist nur erforderlich, für Fälle, in dem der Browser wird nicht umgeleitet, an die Clientanwendung, z. B. sichern, wenn die `client_id` oder `redirect_uri` sind falsch. Die `/Authorize` Endpunkt sollte aber in den "Oauth. Fehler","Oauth. ErrorDescription"und"Oauth. Argument ErrorUri"-Eigenschaften werden in der OWIN-Umgebung hinzugefügt.
 
     > [!NOTE]
     > Wenn nicht "true", der autorisierungsserver gibt eine Standardfehlerseite mit den Fehlerdetails.
-- `AllowInsecureHttp`: True, wenn in zu ermöglichen, Autorisierungs- und tokenanforderungen für HTTP-URI-Adressen eingehen und eingehende `redirect_uri` autorisieren Anforderungsparameter, um HTTP-URI-Adressen verfügen.
+- `AllowInsecureHttp`: True, um zuzulassen, Autorisierungs- und tokenanforderungen für HTTP-URI-Adressen eingehen und eingehende `redirect_uri` autorisieren Anforderungsparameter, um HTTP-URI-Adressen verfügen.
 
     > [!WARNING]
     > Sicherheit – ist dies nur für die Entwicklung.
-- `Provider`: Das Objekt, das bereitgestellt wird, von der Anwendung zum Verarbeiten von Ereignissen, die von der autorisierungsservermiddleware ausgelöst. Die Anwendung kann die Schnittstelle vollständig implementieren oder es möglicherweise erstellen Sie eine Instanz des `OAuthAuthorizationServerProvider` und Zuweisen von Delegaten, die für die OAuth-Flows, die dieser Server unterstützt.
+- `Provider`: Das Objekt bereitgestellt, die von der Anwendung zum Verarbeiten von Ereignissen, die von der autorisierungsservermiddleware ausgelöst. Die Anwendung kann die Schnittstelle vollständig implementieren oder es möglicherweise erstellen Sie eine Instanz des `OAuthAuthorizationServerProvider` und Zuweisen von Delegaten, die für die OAuth-Flows, die dieser Server unterstützt.
 - `AuthorizationCodeProvider`: Erstellt einen einmaligen Verwendung Autorisierungscode an die Clientanwendung zurückgeben. Sichern Sie die Anwendung für die OAuth-Server **müssen** stellen eine Instanz für `AuthorizationCodeProvider` , in dem das Token erstellt, indem die `OnCreate/OnCreateAsync` Ereignis gilt für nur einen Aufruf von `OnReceive/OnReceiveAsync`.
-- `RefreshTokenProvider`: Erstellt ein Aktualisierungstoken, das verwendet werden kann, um ein neues Zugriffstoken bei Bedarf zu erzeugen. Wenn nicht angegeben. der autorisierungsserver keine Aktualisierungstoken aus zurück der `/Token` Endpunkt.
+- `RefreshTokenProvider`: Generiert ein Aktualisierungstoken, das verwendet werden kann, um ein neues Zugriffstoken bei Bedarf zu erzeugen. Wenn nicht angegeben. der autorisierungsserver keine Aktualisierungstoken aus zurück der `/Token` Endpunkt.
 
 ## <a name="account-management"></a>Kontoverwaltung
 

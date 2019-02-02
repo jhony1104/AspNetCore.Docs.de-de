@@ -8,12 +8,12 @@ ms.date: 08/29/2011
 ms.assetid: c23d27f7-b0cf-44f2-8445-fb69e045c674
 msc.legacyurl: /mvc/overview/older-versions/using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc/using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc-part-1
 msc.type: authoredcontent
-ms.openlocfilehash: a4cd6e9adfcd85503b9843232903a243bc07c959
-ms.sourcegitcommit: 392a36ed269b88899d6bb652aa7f4dfb72e43e7f
+ms.openlocfilehash: 3e700d2db4f86fe6734e2f08b01c9f8a8a69b6c3
+ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50220660"
+ms.lasthandoff: 02/02/2019
+ms.locfileid: "55667790"
 ---
 <a name="using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc---part-1"></a>Verwenden des HTML5 und jQuery UI Datepicker-Popupkalenders mit ASP.NET MVC – Teil 1
 ====================
@@ -24,19 +24,19 @@ durch [Rick Anderson]((https://twitter.com/RickAndMSFT))
 
 Dieses Tutorial vermittelt Ihnen die Grundlagen der Arbeit mit Editor-Vorlagen, Anzeigevorlagen und dem jQuery [UI Datepicker-Popupkalenders](http://plugins.jquery.com/project/datepicker) in einer ASP.NET MVC-Webanwendung. In diesem Tutorial können Sie Microsoft Visual Web Developer 2010 Express Service Pack 1 (&quot;Visual Web Developer&quot;), dies ist eine kostenlose Version von Microsoft Visual Studio oder Sie können Visual Studio 2010 SP1 verwenden, wenn bereits vorhanden.
 
-Bevor Sie beginnen, stellen Sie sicher, dass Sie die unten aufgeführten erforderlichen Komponenten installiert haben. Sie können alle auf den folgenden Link installieren: [Webplattform-Installer](https://www.microsoft.com/web/gallery/install.aspx?appid=VWD2010SP1Pack). Alternativ können Sie einzeln die erforderliche Software, die über die folgenden Links installieren:
+Bevor Sie beginnen, stellen Sie sicher, dass Sie die unten aufgeführten erforderlichen Komponenten installiert haben. Sie können alle installieren, indem Sie auf den folgenden Link: [Webplattform-Installer](https://www.microsoft.com/web/gallery/install.aspx?appid=VWD2010SP1Pack). Alternativ können Sie einzeln die erforderliche Software, die über die folgenden Links installieren:
 
 - [Visual Studio Web Developer Express SP1-Voraussetzungen](https://www.microsoft.com/web/gallery/install.aspx?appid=VWD2010SP1Pack)
 - [ASP.NET MVC 3 Toolsupdate](https://www.microsoft.com/web/gallery/install.aspx?appsxml=&amp;appid=MVC3)
 - [SQL Server Compact 4.0](https://www.microsoft.com/web/gallery/install.aspx?appid=SQLCE;SQLCEVSTools_4_0)(Common Language Runtime und Tools unterstützen)
 
-Wenn Sie Visual Studio 2010 anstelle von Visual Web Developer verwenden, die erforderlichen Komponenten installieren, indem Sie auf den folgenden Link: [Visual Studio 2010-Voraussetzungen](https://www.microsoft.com/web/gallery/install.aspx?appsxml=&amp;appid=VS2010SP1Pack).
+Wenn Sie Visual Studio 2010 anstelle von Visual Web Developer verwenden, werden installieren Sie die erforderlichen Komponenten, indem Sie auf den folgenden Link: [Visual Studio 2010-Voraussetzungen](https://www.microsoft.com/web/gallery/install.aspx?appsxml=&amp;appid=VS2010SP1Pack).
 
 In diesem Tutorial wird vorausgesetzt, Sie haben die [erste Schritte mit MVC 3](../getting-started-with-aspnet-mvc3/cs/intro-to-aspnet-mvc-3.md) Lernprogramm oder, dass Sie mit der ASP.NET MVC-Entwicklung vertraut sind. Dieses Tutorial beginnt mit das abgeschlossene Projekt aus der [erste Schritte mit MVC 3](../getting-started-with-aspnet-mvc3/cs/intro-to-aspnet-mvc-3.md) Tutorial.
 
 Dieses Tutorial zeigt den Code in C# geschrieben. Allerdings die [Startprojekt](https://archive.msdn.microsoft.com/Project/Download/FileDownload.aspx?ProjectName=aspnetmvcsamples&amp;DownloadId=15800) und abgeschlossene Projekt sind auch in Visual Basic verfügbar.
 
-Visual Studio-Projekts mit c# und Visual Basic-Quellcode ist verfügbar, die in diesem Thema begleitet: [herunterladen](https://archive.msdn.microsoft.com/Project/Download/FileDownload.aspx?ProjectName=aspnetmvcsamples&amp;DownloadId=15800).
+Visual Studio-Projekt mit C# und Visual Basic-Quellcode ist zur Ergänzung dieses Themas verfügbar: [Herunterladen](https://archive.msdn.microsoft.com/Project/Download/FileDownload.aspx?ProjectName=aspnetmvcsamples&amp;DownloadId=15800).
 
 ### <a name="what-youll-build"></a>Sie lernen Folgendes
 
@@ -54,7 +54,11 @@ Hier ist Sie lernen Folgendes:
 
 ### <a name="getting-started"></a>Erste Schritte
 
-Wenn Sie bereits über die Auflistung von Film-Anwendung aus dem Startprojekt haben, laden sie über den folgenden Link: [herunterladen](https://code.msdn.microsoft.com/Introduction-to-MVC-3-10d1b098). Klicken Sie dann im Windows-Explorer mit der Maustaste der *MvcMovie.zip* und wählen Sie **Eigenschaften**. In der **MvcMovie.zip Eigenschaften** wählen Sie im Dialogfeld **Unblock**. (Aufheben der Sperre wird verhindert, dass eine sicherheitswarnung angezeigt, das auftritt, wenn Sie versuchen, eine *ZIP* -Datei, die Sie aus dem Web heruntergeladen haben.)
+Wenn Sie bereits über die Auflistung von Film-Anwendung aus dem Startprojekt haben, laden Sie sie: 
+
+* [Herunterladen](https://code.msdn.microsoft.com/Introduction-to-MVC-3-10d1b098).
+* Windows-Explorer mit der Maustaste der *MvcMovie.zip* und wählen Sie **Eigenschaften**. 
+* In der **MvcMovie.zip Eigenschaften** wählen Sie im Dialogfeld **Unblock**. (Aufheben der Sperre wird verhindert, dass eine sicherheitswarnung angezeigt, das auftritt, wenn Sie versuchen, eine *ZIP* -Datei, die Sie aus dem Web heruntergeladen haben.)
 
 ![](using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc-part-1/_static/image2.png)
 
