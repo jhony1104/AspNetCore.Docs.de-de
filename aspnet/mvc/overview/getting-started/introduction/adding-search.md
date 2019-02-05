@@ -8,12 +8,12 @@ ms.date: 05/22/2015
 ms.assetid: df001954-18bf-4550-b03d-43911a0ea186
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-search
 msc.type: authoredcontent
-ms.openlocfilehash: 2cf2274a5592e1f073e62c9b8a789fbb61e23a51
-ms.sourcegitcommit: 7b4e3936feacb1a8fcea7802aab3e2ea9c8af5b4
+ms.openlocfilehash: 31fd35ac63f3eb31d824e1710833ad83a0852ac9
+ms.sourcegitcommit: a91e8dd2f4b788114c8bc834507277f4b5e8d6c5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48576377"
+ms.lasthandoff: 02/04/2019
+ms.locfileid: "55712262"
 ---
 <a name="search"></a>Suchen
 ====================
@@ -126,7 +126,7 @@ Der folgende Code zeigt, wie Sie überprüfen die `movieGenre` Parameter. Wenn e
 
 [!code-csharp[Main](adding-search/samples/sample13.cs)]
 
-Wie bereits erwähnt, die Abfrage nicht ausgeführt wird auf der Basis der Daten bis die Filmliste durchlaufen (das geschieht in der Ansicht nach der `Index` Aktionsmethode zurückgegeben).
+Wie bereits erwähnt, die Abfrage wird nicht ausgeführt für die Datenbank bis die Filmliste durchlaufen (das geschieht in der Ansicht nach der `Index` Aktionsmethode zurückgegeben).
 
 ## <a name="adding-markup-to-the-index-view-to-support-search-by-genre"></a>Hinzufügen von Markup für die Ansicht "Index", um die Suche nach Genre zu unterstützen
 
