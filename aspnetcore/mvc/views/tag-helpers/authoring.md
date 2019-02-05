@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: c21decd39b7855cf2eefb2bb482e5e91b9487863
-ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
+ms.openlocfilehash: dbfb63bb7406ee8e20ae25b366162702ac87942c
+ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54889937"
+ms.lasthandoff: 01/30/2019
+ms.locfileid: "55236457"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
@@ -27,7 +27,7 @@ Bei einem Taghilfsprogramm handelt es sich um eine Klasse, die die `ITagHelper`-
 
 1. Erstellen Sie ein neues ASP.NET Core-Projekt mit dem Namen **AuthoringTagHelpers**. Für dieses Projekt benötigen Sie keine Authentifizierung.
 
-1. Erstellen Sie einen Ordner mit dem Namen *TagHelpers*, in dem die Taghilfsprogramme gespeichert werden sollen. Dieser Ordner ist *nicht* zwingend erforderlich, allerdings handelt es sich dabei um eine praktische Konvention. Im Folgenden werden Beispiele zum Schreiben einfacher Taghilfsprogramme beschrieben.
+1. Erstellen Sie einen Ordner mit dem Namen *TagHelpers*, in dem die Taghilfsprogramme gespeichert werden sollen. Dieser *TagHelpers* Ordner ist *nicht* zwingend erforderlich, allerdings handelt es sich dabei um eine praktische Konvention. Im Folgenden werden Beispiele zum Schreiben einfacher Taghilfsprogramme beschrieben.
 
 ## <a name="a-minimal-tag-helper"></a>Ein Taghilfsprogramm mit den mindestens erforderlichen Elementen
 
@@ -213,12 +213,12 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
 
 1. Fügen Sie der *About.cshtml*-Ansicht das folgende Markup hinzu. Das markierte Markup zeigt die Websiteinformationen an.
 
-   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,12-999)]
+   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
    > Im nachfolgenden Razor-Markup:
    >
-   > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=13-17)]
+   > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
    > Razor weiß, dass es sich bei dem `info`-Attribut um eine Klasse und nicht um eine Zeichenfolge handelt und Sie C#-Code schreiben wollen. Alle Attribute von Taghilfsprogrammen, die keine Zeichenfolgen darstellen, sollten ohne das Zeichen `@` geschrieben werden.
 
