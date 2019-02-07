@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 06/04/2018
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 2852ca93c62e706e9a5203625822c2fb954fd2b8
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: da6eeeb51f5d0fc2ad69978688ad1c4ca4d63dab
+ms.sourcegitcommit: 3c2ba9a0d833d2a096d9d800ba67a1a7f9491af0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54835608"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "55854340"
 ---
 # <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>Verwenden von MessagePack Hub-Protokoll in SignalR für ASP.NET Core
 
@@ -68,9 +68,9 @@ var hubConnection = new HubConnectionBuilder()
 > [!NOTE]
 > Dies `AddMessagePackProtocol` Aufruf nimmt einen Delegaten für das Konfigurieren von Optionen wie den Server.
 
-### <a name="javascript-client"></a>JavaScript-client
+### <a name="javascript-client"></a>JavaScript-Client
 
-MessagePack-Unterstützung für Javascript-Client wird bereitgestellt, durch die `@aspnet/signalr-protocol-msgpack` NPM-Paket.
+MessagePack-Unterstützung für JavaScript-Client wird bereitgestellt, durch die `@aspnet/signalr-protocol-msgpack` Npm-Paket.
 
 ```console
 npm install @aspnet/signalr-protocol-msgpack
