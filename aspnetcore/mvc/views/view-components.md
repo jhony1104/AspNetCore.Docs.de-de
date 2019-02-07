@@ -3,14 +3,14 @@ title: Ansichtskomponenten in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie Ansichtskomponenten in ASP.NET Core verwendet werden und wie sie Apps hinzugefügt werden.
 ms.author: riande
-ms.date: 12/03/2018
+ms.date: 1/30/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: 156db610d99eaf8a8042a4c7c85267d521a20fd4
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: d0e528fcf9e20afee98e74fbc09c67b81e123e95
+ms.sourcegitcommit: d22b3c23c45a076c4f394a70b1c8df2fbcdf656d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54836700"
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55428394"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -75,9 +75,11 @@ Eine Ansichtskomponente definiert ihre Logik in einer `InvokeAsync`-Methode, die
 
 Die Runtime sucht in den folgenden Pfaden nach der Ansicht:
 
-* /Pages/Components/{Ansichtskomponentenname}/{Ansichtsname}
 * /Views/{Controllername} /Components/{Ansichtskomponentenname}/{Ansichtsname}
 * /Views/Shared/Components/{Ansichtskomponentenname}/{Ansichtsname}
+* /Pages/Shared/Components/{Ansichtskomponentenname}/{Ansichtsname}
+
+Der Suchpfad gilt für Projekte, die Controller und Ansichten sowie Razor Pages verwenden.
 
 Der Standardansichtsname für die Ansichtskomponente ist *Default*. Dies bedeutet, dass Ihre Ansichtsdatei normalerweise *Default.cshtml* heißt. Sie können einen anderen Ansichtsnamen angeben, wenn Sie die Ansichtskomponentenergebnisse erstellen oder die `View`-Methode aufrufen.
 
@@ -91,9 +93,9 @@ Rufen Sie Folgendes in der Ansicht auf, wenn Sie die Ansichtskomponente verwende
 @await Component.InvokeAsync("Name of view component", {Anonymous Type Containing Parameters})
 ```
 
-Die Parameter werden an die `InvokeAsync`-Methode übergeben. Die Ansichtskomponente `PriorityList`, die im Artikel entwickelt wurde, wird von der Ansichtsdatei *Views/Todo/Index.cshtml* aufgerufen. Im folgenden Code wird die `InvokeAsync`-Methode mit zwei Parametern aufgerufen:
+Die Parameter werden an die `InvokeAsync`-Methode übergeben. Die Ansichtskomponente `PriorityList`, die im Artikel entwickelt wurde, wird von der Ansichtsdatei *Views/ToDo/Index.cshtml* aufgerufen. Im folgenden Code wird die `InvokeAsync`-Methode mit zwei Parametern aufgerufen:
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexFinal.cshtml?range=35)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
 ::: moniker range=">= aspnetcore-1.1"
 
@@ -101,9 +103,9 @@ Die Parameter werden an die `InvokeAsync`-Methode übergeben. Die Ansichtskompon
 
 In ASP.NET Core 1.1 und höher können Sie eine Ansichtskomponente als [Taghilfsprogramm](xref:mvc/views/tag-helpers/intro) aufrufen.
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexTagHelper.cshtml?range=37-38)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexTagHelper.cshtml?range=37-38)]
 
-Namen von Klassen und Methodenparameter für Taghilfsprogramme, die in Pascal-Schreibweise angegeben sind, werden in [Lower Kebab-Schreibweise](https://stackoverflow.com/questions/11273282/whats-the-name-for-dash-separated-case/12273101) übersetzt. Das Taghilfsprogramm zum Aufrufen einer Ansichtskomponente verwendet das `<vc></vc>`-Element. Die Ansichtskomponente wird wie folgt angegeben:
+Namen von Klassen und Methodenparameter für Taghilfsprogramme, die in Pascal-Schreibweise angegeben sind, werden in [Kebab-Schreibweise](https://stackoverflow.com/questions/11273282/whats-the-name-for-dash-separated-case/12273101) übersetzt. Das Taghilfsprogramm zum Aufrufen einer Ansichtskomponente verwendet das `<vc></vc>`-Element. Die Ansichtskomponente wird wie folgt angegeben:
 
 ```cshtml
 <vc:[view-component-name]
@@ -122,13 +124,13 @@ Sie können eine Ansichtskomponente als Taghilfsprogramm für jede Datei registr
 
 Die `InvokeAsync`-Methode, die in diesem Tutorial verwendet wird:
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexFinal.cshtml?range=35)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
 In Taghilfsprogramm-Markup:
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexTagHelper.cshtml?range=37-38)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexTagHelper.cshtml?range=37-38)]
 
-Im Beispiel oben stehenden Beispiel wird die Ansichtskomponente `PriorityList` zu `priority-list`. Die Parameter der Ansichtskomponente werden als Attribute in Lower Kebab-Schreibweise übergeben.
+Im Beispiel oben stehenden Beispiel wird die Ansichtskomponente `PriorityList` zu `priority-list`. Die Parameter der Ansichtskomponente werden als Attribute in Kebab-Schreibweise übergeben.
 
 ::: moniker-end
 
@@ -142,7 +144,7 @@ In diesem Beispiel wird die Ansichtskomponente direkt von einem Controller aus a
 
 ## <a name="walkthrough-creating-a-simple-view-component"></a>Exemplarische Vorgehensweise: Erstellen einer einfachen Ansichtskomponente
 
-[Laden Sie den Startercode herunter](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/view-components/sample), und erstellen und testen Sie diesen. Dabei handelt es sich um ein einfaches Projekt mit einem `Todo`-Controller, in dem eine Liste von *ToDo*-Elementen angezeigt wird.
+[Laden Sie den Startercode herunter](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/view-components/sample), und erstellen und testen Sie diesen. Dabei handelt es sich um ein einfaches Projekt mit einem `ToDo`-Controller, in dem eine Liste von *ToDo*-Elementen angezeigt wird.
 
 ![Liste mit ToDo-Elementen](view-components/_static/2dos.png)
 
@@ -175,14 +177,14 @@ Bemerkungen zum Code:
 * Erstellen Sie den Ordner *Views/Shared/Components/PriorityList*. Der Ordnername muss mit dem Namen der Ansichtskomponentenklasse oder mit dem Namen der Klasse ohne Suffix (wenn wir uns an die Konvention gehalten und *ViewComponent* als Suffix im Klassennamen verwendet haben) übereinstimmen. Wenn Sie das Attribut `ViewComponent` verwenden, muss der Klassenname mit der Attributbezeichnung übereinstimmen.
 
 * Erstellen Sie die Razor-Ansicht *Views/Shared/Components/PriorityList/Default.cshtml*: [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
-    
-   Die Razor-Ansicht nimmt eine Liste von `TodoItem` an und zeigt diese an. Wenn die `InvokeAsync`-Methode der Ansichtskomponente nicht den Namen der Ansicht übergibt (wie in unserem Beispiel), wird *Default* per Konvention für den Ansichtsnamen verwendet. Später in diesem Tutorial erfahren Sie, wie Sie den Namen der Ansicht übergeben. Fügen Sie eine Ansicht zu einem controllerspezifischen Ansichtsordner hinzu, um das Standardformat für einen spezifischen Controller zu überschreiben (z.B. *Views/Todo/Components/PriorityList/Default.cshtml*).
-    
-    Wenn die Ansichtskomponente controllerspezifisch ist, können Sie sie dem controllerspezifischen Ordner hinzufügen (*Views/Todo/Components/PriorityList/Default.cshtml*).
 
-* Fügen Sie ein `div`-Objekt, das einen Aufruf an eine Prioritätslistenkomponente enthält, am Ende der Datei *Views/Todo/index.cshtml* hinzu:
+   Die Razor-Ansicht nimmt eine Liste von `TodoItem` an und zeigt diese an. Wenn die `InvokeAsync`-Methode der Ansichtskomponente nicht den Namen der Ansicht übergibt (wie in unserem Beispiel), wird *Default* per Konvention für den Ansichtsnamen verwendet. Später in diesem Tutorial erfahren Sie, wie Sie den Namen der Ansicht übergeben. Fügen Sie eine Ansicht einem controllerspezifischen Ansichtsordner hinzu, um das Standardformat für einen spezifischen Controller zu überschreiben (z.B. *Views/ToDo/Components/PriorityList/Default.cshtml*).
 
-    [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexFirst.cshtml?range=34-38)]
+    Wenn die Ansichtskomponente controllerspezifisch ist, können Sie sie dem controllerspezifischen Ordner hinzufügen (*Views/ToDo/Components/PriorityList/Default.cshtml*).
+
+* Fügen Sie ein `div`-Objekt, das einen Aufruf an eine Prioritätslistenkomponente enthält, am Ende der Datei *Views/ToDo/index.cshtml* hinzu:
+
+    [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFirst.cshtml?range=34-38)]
 
 Das Markup `@await Component.InvokeAsync` zeigt die Syntax für die aufrufenden Ansichtskomponenten an. Das erste Argument ist der Name der aufzurufenden Komponente. Darauffolgende Parameter werden an die Komponente übergeben. `InvokeAsync` kann eine arbiträre Anzahl von Argumenten annehmen.
 
@@ -206,11 +208,11 @@ Kopieren Sie die Datei *Views/Shared/Components/PriorityList/Default.cshtml* in 
 
 [!code-cshtml[](../../mvc/views/view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/PVC.cshtml?highlight=3)]
 
-Aktualisieren Sie *Views/TodoList/Index.cshtml*:
+Aktualisieren Sie *Views/ToDo/Index.cshtml*:
 
-<!-- Views/TodoList/Index.cshtml is never imported, so change to test tutorial -->
+<!-- Views/ToDo/Index.cshtml is never imported, so change to test tutorial -->
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexFinal.cshtml?range=35)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
 Führen Sie die App aus und überprüfen Sie die PVC-Ansicht.
 
@@ -221,7 +223,7 @@ Wenn die PVC-Ansicht nicht gerendert wird, stellen Sie sicher, dass Sie die Ansi
 ### <a name="examine-the-view-path"></a>Untersuchen des Ansichtspfads
 
 * Ändern Sie den Prioritätsparameter in drei oder weniger, damit die Prioritätsansicht nicht zurückgegeben wird.
-* Benennen Sie *Views/Todo/Components/PriorityList/Default.cshtml* vorrübergehend in *1Default.cshtml* um.
+* Benennen Sie *Views/ToDo/Components/PriorityList/Default.cshtml* vorübergehend in *1Default.cshtml* um.
 * Wenn Sie die App testen, erhalten Sie die folgende Fehlermeldung:
 
    ```
@@ -232,7 +234,7 @@ Wenn die PVC-Ansicht nicht gerendert wird, stellen Sie sicher, dass Sie die Ansi
    EnsureSuccessful
    ```
 
-* Kopieren Sie *Views/Todo/Components/PriorityList/1Default.cshtml* nach *Views/Shared/Components/PriorityList/Default.cshtml*.
+* Kopieren Sie *Views/ToDo/Components/PriorityList/1Default.cshtml* nach *Views/Shared/Components/PriorityList/Default.cshtml*.
 * Fügen Sie der ToDo-Ansichtskomponentenansicht *Shared* (Freigegeben) Markup hinzu, um anzugeben, dass die Ansicht aus dem Ordner *Shared* stammt.
 * Testen Sie die Komponentenansicht **Shared** (Freigegeben).
 
@@ -246,7 +248,7 @@ Wenn Sie Sicherheit zu Kompilierzeit haben möchten, können Sie den hart codier
 
 Fügen Sie eine `using`-Anweisung zu Ihrer Razor-Ansichtsdatei hinzu, und verwenden Sie den `nameof`-Operator:
 
-[!code-cshtml[](view-components/sample/ViewCompFinal/Views/Todo/IndexNameof.cshtml?range=1-6,35-)]
+[!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexNameof.cshtml?range=1-6,35-)]
 
 ## <a name="perform-synchronous-work"></a>Ausführen synchroner Verarbeitung
 

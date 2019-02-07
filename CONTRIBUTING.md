@@ -114,30 +114,34 @@ Für DocFX ist Folgendes erforderlich:
 
 * Laden Sie *docfx.zip* von der Seite [DocFX-Releases](https://github.com/dotnet/docfx/releases) herunter, und entpacken Sie die Datei.
 * Fügen Sie DocFX zu Ihrem PATH hinzu.
-* Navigieren Sie in einem Befehlszeilenfenster zu dem entsprechenden Ordner, der die Datei *docfx.json* enthält (*aspnet* für ASP.NET-Inhalt oder *aspnetcore* für ASP.NET Core-Inhalt), und führen Sie den folgenden Befehl aus:
+* Navigieren Sie in einer Befehlsshell zu dem Ordner, der die Datei *docfx.json* enthält (*aspnet* für ASP.NET-Inhalt oder *aspnetcore* für ASP.NET Core-Inhalt), und führen Sie den folgenden Befehl aus:
 
-  ```
+  ```console
   docfx --serve
   ```
-    
-* Navigieren Sie in einem Browser zu `http://localhost:8080`.
+* Navigieren Sie in einem Browser zu `http://localhost:8080/group1-dest/`.
 
 ### <a name="mono-instructions"></a>Anweisungen für Mono
 
 * Installieren Sie Mono über Homebrew:
 
-  ```
+  ```console
   brew install mono
   ```
 * Laden Sie die [aktuelle Version von DocFX](https://github.com/dotnet/docfx/releases) herunter.
 * Extrahieren Sie das Archiv zu *$HOME/bin/docfx*.
 * Erstellen Sie ein Paar von Aliasen für **docfx** in einer Bash-Shell. Der erste Alias wird verwendet, um die Dokumentation zu erstellen. Der zweite Alias wird verwendet, um die Dokumentation zu erstellen und sie zu bedienen.
 
-  ```
+  ```console
   alias docfx='mono $HOME/bin/docfx/docfx.exe'
   alias docfx-serve='mono $HOME/bin/docfx/docfx.exe --serve'
   ```
-* Führen Sie `docfx` im Stammverzeichnis des Repositorys aus, um die Website zu erstellen. Führen Sie `docfx-serve` aus, um die Website unter `http://localhost:8080` anzuzeigen.
+* Navigieren Sie in einer Befehlsshell zu dem Ordner, der die Datei *docfx.json* enthält (*aspnet* für ASP.NET-Inhalt oder *aspnetcore* für ASP.NET Core-Inhalt), und führen Sie den folgenden Befehl aus, um die Dokumente über ihren Alias zu erstellen und zu bedienen:
+
+  ```console
+  docfx-serve
+  ```
+* Navigieren Sie in einem Browser zu `http://localhost:8080/group1-dest/`.
 
 ## <a name="voice-and-tone"></a>Schreibstil
 

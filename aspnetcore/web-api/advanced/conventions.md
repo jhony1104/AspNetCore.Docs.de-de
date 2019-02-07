@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/13/2018
 uid: web-api/advanced/conventions
-ms.openlocfilehash: 892fb8898c78a1645c766544715a8256462207c6
-ms.sourcegitcommit: ec71fd5a988f927ae301813aae5ff764feb3bb6a
+ms.openlocfilehash: 5ae96b213a19464045e1d0b1a76f8eb81089dc5b
+ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2019
-ms.locfileid: "54249385"
+ms.lasthandoff: 01/30/2019
+ms.locfileid: "55236340"
 ---
 # <a name="use-web-api-conventions"></a>Verwenden von Web-API-Konventionen
 
@@ -58,7 +58,7 @@ Weitere Informationen zu `[ProducesDefaultResponseType]` finden Sie unter [Stand
 
     [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionTypeAttribute&highlight=2)]
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf eine Assembly angewendet &mdash; Wendet den angegebenen Konventionstyp auf alle Controller in der aktuellen Assembly an. Es empfiehlt sich, Attribute auf Assemblyebene auf die `Startup`-Klasse anzuwenden.
+1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`, auf eine Assembly angewendet &mdash; Wendet den angegebenen Konventionstyp auf alle Controller in der aktuellen Assembly an. Es empfiehlt sich, Attribute auf Assemblyebene in der *Startup.cs*-Datei anzuwenden.
 
     Im folgenden Beispiel werden alle standardmäßigen Konventionen auf alle Controller in der Assembly angewendet:
 
