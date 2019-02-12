@@ -8,7 +8,7 @@ items:
 - name: Web Forms
   href: web-forms/index.md
   items:
-  - name: Leitfaden
+  - name: Empfehlungen
     href: web-forms/overview/index.md
     items:
     - name: Erste Schritte
@@ -209,7 +209,7 @@ items:
           href: web-forms/overview/deployment/advanced-enterprise-web-deployment/running-windows-powershell-scripts-from-msbuild-project-files.md
         - name: Behandeln von Problemen mit dem Paketerstellungsprozess
           href: web-forms/overview/deployment/advanced-enterprise-web-deployment/troubleshooting-the-packaging-process.md
-    - name: Weitere
+    - name: Erweitert
       href: web-forms/overview/advanced/index.md
       items:
       - name: Verbindungsresilienz von ASP.NET Web Forms und Abfangen von Befehlen
@@ -680,7 +680,7 @@ items:
           href: web-forms/overview/ajax-control-toolkit/reorderlist/using-postbacks-with-reorderlist-vb.md
         - name: Drag & Drop über ReorderList (VB)
           href: web-forms/overview/ajax-control-toolkit/reorderlist/drag-and-drop-via-reorderlist-vb.md
-      - name: Schieberegler
+      - name: Slider
         href: web-forms/overview/ajax-control-toolkit/slider/index.md
         items:
         - name: Schieberegler-Steuerelement mit automatischem Postback (C#)
@@ -1136,7 +1136,7 @@ items:
         href: web-forms/overview/moving-to-aspnet-20/data-source-controls.md
       - name: Datengebundene Steuerelemente
         href: web-forms/overview/moving-to-aspnet-20/data-bound-controls.md
-      - name: Zwischenspeichern
+      - name: Zwischenspeicherung
         href: web-forms/overview/moving-to-aspnet-20/caching.md
       - name: Mitgliedschaft
         href: web-forms/overview/moving-to-aspnet-20/membership.md
@@ -2062,7 +2062,7 @@ items:
 - name: MVC
   href: mvc/index.md
   items:
-  - name: Leitfaden
+  - name: Empfehlungen
     href: mvc/overview/index.md
     items:
     - name: Erste Schritte
@@ -2180,7 +2180,7 @@ items:
       items:
       - name: Benutzerdefinierte MVC-Vorlage
         href: mvc/overview/advanced/custom-mvc-templates.md
-    - name: Freigaben
+    - name: Versionen
       href: mvc/overview/releases/index.md
       items:
       - name: Neue Funktionen in ASP.NET MVC 5.2
@@ -2752,7 +2752,7 @@ items:
 - name: Web-API
   href: web-api/index.md
   items:
-  - name: Leitfaden
+  - name: Empfehlungen
     href: web-api/overview/index.md
     items:
     - name: Erste Schritte
@@ -2935,7 +2935,7 @@ items:
         href: web-api/overview/advanced/sending-html-form-data-part-2.md
       - name: HTTP-Cookies in der ASP.NET-Web-API
         href: web-api/overview/advanced/http-cookies.md
-    - name: Freigaben
+    - name: Versionen
       href: web-api/overview/releases/index.md
       items:
       - name: Neue Funktionen in Web-API OData 5.3
@@ -2995,7 +2995,7 @@ items:
 - name: Webseiten
   href: web-pages/index.md
   items:
-  - name: Leitfaden
+  - name: Empfehlungen
     href: web-pages/overview/index.md
     items:
     - name: Erste Schritte
@@ -3106,7 +3106,7 @@ items:
       items:
       - name: ASP.NET-API-Kurzübersicht
         href: web-pages/overview/api-reference/asp-net-web-pages-api-reference.md
-    - name: Freigaben
+    - name: Versionen
       href: web-pages/overview/releases/index.md
       items:
       - name: Neue Funktionen in ASP.NET Web Pages 3.2
@@ -3198,7 +3198,7 @@ items:
 - name: SignalR
   href: signalr/index.md
   items:
-  - name: Leitfaden
+  - name: Empfehlungen
     href: signalr/overview/index.md
     items:
     - name: Erste Schritte
@@ -3277,12 +3277,12 @@ items:
         href: signalr/overview/deployment/tutorial-signalr-self-host.md
       - name: Verwenden von SignalR mit Web-Apps in Azure App Service
         href: signalr/overview/deployment/using-signalr-with-azure-web-sites.md
-    - name: Weitere
+    - name: Erweitert
       href: signalr/overview/advanced/index.md
       items:
       - name: Abhängigkeitsinjektion in SignalR
         href: signalr/overview/advanced/dependency-injection.md
-    - name: Freigaben
+    - name: Versionen
       href: signalr/overview/releases/index.md
       items:
       - name: Durchführen eines Upgrades für SignalR 1.x-Projekte auf Version 2
@@ -3400,7 +3400,7 @@ items:
   href: visual-studio/overview/2017/index.md
   items:
   - name: Optimieren der Buildleistung für die Projektmappe
-    href: uid:visual-studio/overview/2017/optimize-build-perf
+    href: visual-studio/overview/2017/optimize-build-perf.md
 - name: Visual Studio 2013
   href: visual-studio/overview/2013/index.md
   items:
@@ -3810,9 +3810,9 @@ items:
     href: whitepapers/whats-new-in-aspnet-45-and-visual-studio-2012.md
 - name: API-Verweis
   href: api-ref.md
-ms.openlocfilehash: 32bc0de99f07ad72d4b09dd29ac3f316609b0c69
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: 62f2efd95bb9712d56740a685659106eda21ace0
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667829"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103188"
