@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit der Azure Key Vault-Konfigurationsanbiete
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/28/2019
+ms.date: 02/08/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: d255321f6083747ce9b452e1efd4da5bc015bf64
-ms.sourcegitcommit: 3c2ba9a0d833d2a096d9d800ba67a1a7f9491af0
+ms.openlocfilehash: f70389c86420d81e284ecc863ac8386f726ed2cf
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55854431"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103110"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault-Konfigurationsanbieter in ASP.NET Core
 
@@ -271,8 +271,8 @@ var cert = store.Certificates
         config["CertificateThumbprint"], false);
 
 config.AddAzureKeyVault(
-    builtConfig["Vault"],
-    builtConfig["ClientId"],
+    builtConfig["KeyVaultName"],
+    builtConfig["AzureADApplicationId"],
     cert.OfType<X509Certificate2>().Single(),
     new EnvironmentSecretManager(context.HostingEnvironment.ApplicationName));
 
@@ -342,8 +342,8 @@ Bei die app ein Fehler beim Laden der Konfiguration, die mithilfe des Anbieters 
 * Die app ist nicht autorisiert, auf den schlüsseltresor zugreifen.
 * Die Zugriffsrichtlinie beinhaltet keine `Get` und `List` Berechtigungen.
 * In den schlüsseltresor ist die Konfigurationsdaten (Name / Wert-Paar) falsch benannt, fehlen, deaktiviert oder abgelaufen.
-* Die app hat den falschen schlüsseltresornamen (`Vault`), Azure AD-App-Id (`ClientId`), oder Azure AD Key (`ClientSecret`).
-* Die Azure AD Key (`ClientSecret`) ist abgelaufen.
+* Die app hat den falschen schlüsseltresornamen (`KeyVaultName`), Azure AD-Anwendungs-Id (`AzureADApplicationId`), oder Azure AD-Kennwort (geheimer Clientschlüssel) (`AzureADPassword`).
+* Das Azure AD-Kennwort (geheimer Clientschlüssel) (`AzureADPassword`) ist abgelaufen.
 * Der Konfigurationsschlüssel (Name) ist falsch, in der app für den Wert an, die, den Sie laden möchten.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
