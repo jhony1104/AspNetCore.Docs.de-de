@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/29/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 9392da14e589736b24790676c1c07c9964882737
-ms.sourcegitcommit: d22b3c23c45a076c4f394a70b1c8df2fbcdf656d
+ms.openlocfilehash: 9f7fc5571f8d1a6e5e2d84779082abb02d2fb292
+ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55428459"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56159394"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -313,7 +313,7 @@ Wenn Sie Apps auf Servern mit [Web Deploy](/iis/publish/using-web-deploy/introdu
 
 1. Erstellen Sie auf dem Hostingsystem einen Ordner zum Speichern der veröffentlichten Ordner und Dateien der App. Das Layout der App-Bereitstellung wird im Thema [Verzeichnisstruktur](xref:host-and-deploy/directory-structure) beschrieben.
 
-1. Öffnen Sie im **IIS-Manager** den Serverknoten im Bereich **Verbindungen**. Klicken Sie mit der rechten Maustaste auf den Ordner **Websites**. Klicken Sie im Kontextmenü auf **Website hinzufügen**.
+1. Öffnen Sie in IIS-Manager den Serverknoten im Bereich **Verbindungen**. Klicken Sie mit der rechten Maustaste auf den Ordner **Websites**. Klicken Sie im Kontextmenü auf **Website hinzufügen**.
 
 1. Geben Sie einen **Websitenamen** an, und legen Sie den **physischen Pfad** auf den Bereitstellungsordner der App fest. Geben Sie die Konfiguration unter **Bindung** an, und erstellen Sie die Website, indem Sie auf **OK** klicken:
 
@@ -334,7 +334,7 @@ Wenn Sie Apps auf Servern mit [Web Deploy](/iis/publish/using-web-deploy/introdu
 
 1. *ASP.NET Core 2.2 oder höher*: Deaktivieren Sie für eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) für 64-Bit-Systeme (x64), die das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, den App-Pool für 32-Bit-Prozesse (x86).
 
-   Wählen Sie in der Seitenleiste **Actions** (Aktionen) im **Anwendungspool** des IIS-Manager **Anwendungspoolstandardwerte festlegen** oder **Erweiterte Einstellungen** aus. Suchen Sie nach **32-Bit-Anwendungen aktivieren**, und legen Sie den Wert auf `False` fest. Diese Einstellung wirkt sich nicht auf Apps aus, die für [Out-of-Process-Hosting](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model) bereitgestellt wurden.
+   Wählen Sie in der Seitenleiste **Aktionen** von „IIS-Manager > **Anwendungspools**“ die Option **Standardwerte für Anwendungspool festlegen** oder **Erweiterte Einstellungen** aus. Suchen Sie nach **32-Bit-Anwendungen aktivieren**, und legen Sie den Wert auf `False` fest. Diese Einstellung wirkt sich nicht auf Apps aus, die für [Out-of-Process-Hosting](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model) bereitgestellt wurden.
 
 1. Vergewissern Sie sich, dass die Prozessmodellidentität über die richtigen Berechtigungen verfügt.
 
@@ -410,7 +410,14 @@ Zum Konfigurieren des Schutzes von Daten unter IIS mithilfe des persistenten Sch
 
 * **Konfigurieren des IIS-Anwendungspools zum Laden des Benutzerprofils**
 
-  Diese Einstellung befindet sich im Abschnitt **Prozessmodell** unter **Erweiterte Einstellungen** für den App-Pool. Legen Sie „Benutzerprofil laden“ auf `True` fest. Dadurch werden Schlüssel im Benutzerprofilverzeichnis gespeichert und mit DPAPI mit einem Schlüssel geschützt, der nur für das Benutzerkonto gilt, das vom App-Pool verwendet wird.
+  Diese Einstellung befindet sich im Abschnitt **Prozessmodell** unter **Erweiterte Einstellungen** für den App-Pool. Legen Sie **Benutzerprofil laden** auf `True` fest. Wenn diese Option auf `True` festgelegt ist, werden Schlüssel im Benutzerprofilverzeichnis gespeichert und mit DPAPI mit einem für das Benutzerkonto spezifischen Schlüssel geschützt. Schlüssel werden im Ordner *%LOCALAPPDATA%/ASP.NET/DataProtection-Keys* gespeichert.
+
+  Das [setProfileEnvironment-Attribut](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) des App-Pools muss ebenfalls aktiviert sein. Der Standardwert von `setProfileEnvironment` ist `true`. In einigen Szenarien (z.B. Windows-Betriebssystem) ist `setProfileEnvironment` auf `false` festgelegt. Gehen Sie folgendermaßen vor, wenn Schlüssel nicht wie erwartet im Benutzerprofilverzeichnis gespeichert werden:
+
+  1. Navigieren Sie zum Ordner *%windir%/system32/inetsrv/config*.
+  1. Öffnen Sie die Datei *applicationHost.config*.
+  1. Suchen Sie das Element `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>`.
+  1. Bestätigen Sie, dass das `setProfileEnvironment`-Attribut nicht vorhanden ist, das standardmäßig den Wert `true` aufweist, oder legen Sie den Wert des Attributs explizit auf `true` fest.
 
 * **Verwenden des Dateisystems als Schlüsselbundspeicher**
 
