@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Vorteile der Vorkompilierung von Razor-
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2019
+ms.date: 02/13/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 2720708f8e58fdc55b82bfb56665005170e79934
-ms.sourcegitcommit: d5223cf6a2cf80b4f5dc54169b0e376d493d2d3a
+ms.openlocfilehash: c4e8f722fdf3d3f64807cc35ff9f349af7f32abd
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54889755"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248185"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -98,7 +98,7 @@ Die Datei *<project_name>.PrecompiledViews.dll*, welche die kompilierten Razor-D
 
 ## <a name="recompile-razor-files-on-change"></a>Erneutes Kompilieren der Razor-Dateien bei Änderung
 
-<xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions> `AllowRecompilingViewsOnFileChange` übernimmt oder bestimmt einen Wert, der bestimmt, ob Razor-Dateien (Razor-Ansichten und Razor Pages) neu kompiliert und aktualisiert werden, wenn Dateien auf dem Datenträger sich ändern.
+<xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions> <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> übernimmt oder bestimmt einen Wert, der bestimmt, ob Razor-Dateien (Razor-Ansichten und Razor Pages) neu kompiliert und aktualisiert werden, wenn Dateien auf dem Datenträger sich ändern.
 
 Bei Festlegung auf `true` überwacht [IFileProvider.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) Änderungen an den Razor-Dateien in konfigurierten <xref:Microsoft.Extensions.FileProviders.IFileProvider>-Instanzen.
 
@@ -107,11 +107,11 @@ Der Standardwert ist `true` für:
 * ASP.NET Core 2.1 oder frühere Apps.
 * ASP.NET Core 2.2 oder höhere Apps in der Entwicklungsumgebung.
 
-`AllowRecompilingViewsOnFileChange` ist einem Kompatibilitätsswitch zugeordnet und kann je nach der für die App konfigurierten Kompatibilitätsversion unterschiedliches Verhalten zeigen. Konfigurieren der App durch Festlegen von `AllowRecompilingViewsOnFileChange` hat Vorrang vor dem durch die Kompatibilitätsversion implizierten Wert.
+<xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> ist einem Kompatibilitätsswitch zugeordnet und kann je nach der für die App konfigurierten Kompatibilitätsversion unterschiedliches Verhalten zeigen. Konfigurieren der App durch Festlegen von <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> hat Vorrang vor dem durch die Kompatibilitätsversion implizierten Wert.
 
-Wenn die Kompatibilitätsversion der App auf <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1> oder früher festgelegt ist, wird `AllowRecompilingViewsOnFileChange` auf `true` festgelegt, sofern nicht explizit konfiguriert.
+Wenn die Kompatibilitätsversion der App auf <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1> oder früher festgelegt ist, wird <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> auf `true` festgelegt, sofern nicht explizit konfiguriert.
 
-Wenn die Kompatibilitätsversion der App auf `CompatibilityVersion.Version_2_2` oder höher festgelegt ist, wird `AllowRecompilingViewsOnFileChange` auf `false` festgelegt, wenn es sich nicht um eine Entwicklungsumgebung handelt oder der Wert explizit konfiguriert ist.
+Wenn die Kompatibilitätsversion der App auf <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2> oder höher festgelegt ist, wird <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> auf `false` festgelegt, wenn es sich nicht um eine Entwicklungsumgebung handelt oder der Wert explizit konfiguriert ist.
 
 Anleitungen und Beispiele zum Festlegen der Kompatibilitätsversion der App finden Sie unter <xref:mvc/compatibility-version>.
 
