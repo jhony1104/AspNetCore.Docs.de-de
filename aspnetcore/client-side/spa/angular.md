@@ -2,26 +2,19 @@
 title: Verwenden der Angular-Projektvorlage mit ASP.NET Core
 author: SteveSandersonMS
 description: Erfahren Sie, wie Sie sich mit der Projektvorlage für die Einzelseitenanwendung (Single-Page Application, SPA) von ASP.NET Core für Angular und die Angular-CLI vertraut machen.
-monikerRange: '>= aspnetcore-2.0'
-ms.author: scaddie
+monikerRange: '>= aspnetcore-2.1'
+ms.author: stevesa
 ms.custom: mvc
-ms.date: 02/21/2018
+ms.date: 02/13/2019
 uid: spa/angular
-ms.openlocfilehash: 8283fe9e96acb57942040dd4c90fabd204a19663
-ms.sourcegitcommit: 4bdf7703aed86ebd56b9b4bae9ad5700002af32d
+ms.openlocfilehash: 35a839e31369e8dbf00f5dbfb3751a2985335755
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2018
-ms.locfileid: "49326042"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248120"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
-
-::: moniker range="= aspnetcore-2.0"
-
-> [!NOTE]
-> Diese Dokumentation befasst sich nicht mit der in ASP.NET Core 2.0 enthaltenen Angular-Projektvorlage. Sie befasst sich mit der neueren Angular-Vorlage, die manuell aktualisiert werden kann. Die Vorlage ist standardmäßig in ASP.NET Core 2.1 enthalten.
-
-::: moniker-end
 
 Die aktualisierte Angular-Projektvorlage stellt einen geeigneten Anfangspunkt für ASP.NET Core-Apps dar, die Angular und die Angular-CLI für die Implementierung einer umfangreichen, clientseitigen Benutzerschnittstelle (User Interface, UI) verwenden.
 
@@ -29,17 +22,7 @@ Mit der Vorlage können Sie ein ASP.NET Core-Projekt, das als API-Back-End fungi
 
 ## <a name="create-a-new-app"></a>Erstellen einer neuen App
 
-::: moniker range="= aspnetcore-2.0"
-
-Stellen Sie bei Verwendung von ASP.NET Core 2.0 sicher, dass Sie [die aktualisierte Angular-Projektvorlage installiert](xref:spa/index#installation) haben.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
 Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlage für Angular-Projekte nicht installieren.
-
-::: moniker-end
 
 Erstellen Sie über eine Eingabeaufforderung mit dem Befehl `dotnet new angular` in einem leeren Verzeichnis ein neues Projekt. Mit den folgenden Befehlen wird die App beispielsweise im Verzeichnis *my-new-app* erstellt und zu diesem Verzeichnis gewechselt:
 
@@ -70,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 Navigieren Sie in einem Browser zu dieser URL.
 
-Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird protokolliert: *NG Live-Entwicklungsserver lauscht an localhost:&lt;otherport&gt;, öffnen Sie http://localhost:&lt;otherport&gt; /* in Ihrem Browser. Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
+Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird angezeigt: *NG-Live-Entwicklungsserver auf "localhost" lauscht:&lt;Otherport&gt;, öffnen Sie Ihren Browser auf http://localhost:&lt; Otherport&gt;/*. Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
 
 ---
 

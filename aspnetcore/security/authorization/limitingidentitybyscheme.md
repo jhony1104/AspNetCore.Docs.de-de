@@ -5,12 +5,12 @@ description: In diesem Artikel wird erläutert, wie Identität für ein bestimmt
 ms.author: riande
 ms.date: 10/22/2018
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: fbe9f32e01a214f41b5a6e9f43e8fdee5fc612df
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: 778bb61f472ab2e76f85da5999d3c79238188f19
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50089395"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248198"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren Sie mit einem bestimmten Schema in ASP.NET Core
 
@@ -201,6 +201,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wie die Standardrichtlinie für die Autorisierung überschrieben wird, ist es möglich, verwenden eine einfache `[Authorize]` Attribut in Controllern. Der Controller akzeptiert Anforderungen klicken Sie dann mit der von der ersten oder zweiten Aussteller ausgestellte JWT.
+Wie die Standardrichtlinie für die Autorisierung überschrieben wird, ist es möglich, verwenden die `[Authorize]` Attribut in Controllern. Der Controller akzeptiert Anforderungen klicken Sie dann mit der von der ersten oder zweiten Aussteller ausgestellte JWT.
 
 ::: moniker-end

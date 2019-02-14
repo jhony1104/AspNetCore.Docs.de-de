@@ -4,26 +4,36 @@ title: Suche | Microsoft-Dokumentation
 author: Rick-Anderson
 description: ''
 ms.author: riande
-ms.date: 05/22/2015
+ms.date: 01/17/2019
 ms.assetid: df001954-18bf-4550-b03d-43911a0ea186
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-search
 msc.type: authoredcontent
-ms.openlocfilehash: 31fd35ac63f3eb31d824e1710833ad83a0852ac9
-ms.sourcegitcommit: a91e8dd2f4b788114c8bc834507277f4b5e8d6c5
+ms.openlocfilehash: ada125c917656f3a83524ff39e53b4cfc041a497
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/04/2019
-ms.locfileid: "55712262"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248380"
 ---
 <a name="search"></a>Suchen
 ====================
-durch [Rick Anderson]((https://twitter.com/RickAndMSFT))
 
 [!INCLUDE [Tutorial Note](sample/code-location.md)]
 
 ## <a name="adding-a-search-method-and-search-view"></a>Hinzufügen eines Search-Methode und des Anzeigebereichs
 
 In diesem Abschnitt fügen Sie die Suchfunktion auf der `Index` Aktionsmethode, mit der Sie, suchen, Filme nach Genre oder Namen.
+
+## <a name="prerequisites"></a>Vorraussetzungen
+
+Entsprechend diesem Abschnitt des Screenshots müssen Sie zum Ausführen der Anwendung (F5), und der Datenbank die folgenden Filme hinzugefügt.
+
+| Titel | Datum der Veröffentlichung | "Genre" | Preis |
+| ----- | ------------ | ----- | ----- |
+| Ghostbusters | 6/8/1984 | Komödie | 6.99 |
+| Ghostbusters II | 6/16/1989 | Komödie | 6.99 |
+| Planeten von der Primaten | 3/27/1986 | Aktion | 5.99 |
+
 
 ## <a name="updating-the-index-form"></a>Aktualisieren des Index-Formulars
 
@@ -68,7 +78,7 @@ Sie können nun den Suchtitel als Routendaten (ein URL-Segment) anstatt als Wert
 
 ![](adding-search/_static/image2.png)
 
-Sie können jedoch von den Benutzern nicht erwarten, dass sie jedes Mal die URL ändern, wenn sie nach einem Film suchen möchten. Nun Sie Benutzeroberfläche helfen hinzufügen, diese Filme zu filtern. Wenn Sie die Signatur des geändert haben die `Index` Methode zum Testen den routengebundenen ID-Parameter übergeben. ändern Sie ihn, damit Ihre `Index` Methode nimmt einen Zeichenfolgenparameter namens `searchString`:
+Sie können jedoch von den Benutzern nicht erwarten, dass sie jedes Mal die URL ändern, wenn sie nach einem Film suchen möchten. Deshalb fügen Sie nun eine Benutzeroberflächenoption zum besseren Filtern von Filmen hinzu. Wenn Sie die Signatur des geändert haben die `Index` Methode zum Testen den routengebundenen ID-Parameter übergeben. ändern Sie ihn, damit Ihre `Index` Methode nimmt einen Zeichenfolgenparameter namens `searchString`:
 
 [!code-csharp[Main](adding-search/samples/sample7.cs)]
 
@@ -120,7 +130,7 @@ Der folgende Code ist eine LINQ-Abfrage, die alle Genres aus der Datenbank abruf
 
 [!code-csharp[Main](adding-search/samples/sample12.cs)]
 
-Der Code verwendet die `AddRange` Methode der generischen `List` Auflistung, die alle der unterschiedlichen Genres zur Liste hinzugefügt. (Ohne die `Distinct` Modifizierer, doppelte Genres hinzugefügt – zweimal in unserem Beispiel würde z. B. Komödie hinzugefügt werden). Der Code speichert dann die Liste der Genres in die `ViewBag.MovieGenre` Objekt. Speichern von Kategoriedaten (solche eine Filmgenre des) als eine [SelectList](https://msdn.microsoft.cus/library/system.web.mvc.selectlist(v=vs.108).aspx) -Objekt in ein `ViewBag`, und klicken Sie dann den Zugriff auf die Kategoriedaten in einem Dropdown-Listenfeld ein typischer Ansatz für MVC-Anwendungen ist.
+Der Code verwendet die `AddRange` Methode der generischen `List` Auflistung, die alle der unterschiedlichen Genres zur Liste hinzugefügt. (Ohne die `Distinct` Modifizierer, doppelte Genres hinzugefügt – zweimal in unserem Beispiel würde z. B. Komödie hinzugefügt werden). Der Code speichert dann die Liste der Genres in die `ViewBag.MovieGenre` Objekt. Speichern von Kategoriedaten (solche einen Filmgenres) als eine [SelectList](https://msdn.microsoft.cus/library/system.web.mvc.selectlist(v=vs.108).aspx) -Objekt in ein `ViewBag`, und klicken Sie dann den Zugriff auf die Kategoriedaten in einem Dropdown-Listenfeld ein typischer Ansatz für MVC-Anwendungen ist.
 
 Der folgende Code zeigt, wie Sie überprüfen die `movieGenre` Parameter. Wenn es nicht leer ist, schränkt der Code weiter die filmabfrage, um die ausgewählten Filme, die bestimmten Genre zu beschränken.
 

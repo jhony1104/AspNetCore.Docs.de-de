@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie, wie Sie einen ASP.NET Core verteilten Cache zu verwenden, um app-Leistung und Skalierbarkeit, insbesondere in einer Cloud oder einer serverfarmumgebung zu verbessern.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/19/2018
+ms.date: 02/13/2019
 uid: performance/caching/distributed
-ms.openlocfilehash: d80cde372535aa04604ce0cd5a731a1448515093
-ms.sourcegitcommit: 4a6bbe84db24c2f3dd2de065de418fde952c8d40
+ms.openlocfilehash: a157eb075874d2118e3e34b51410b539a1ec37df
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50253007"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248587"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Verteilte Zwischenspeicherung in ASP.NET Core
 
@@ -76,7 +76,7 @@ Registrieren Sie eine Implementierung von <xref:Microsoft.Extensions.Caching.Dis
 
 ### <a name="distributed-memory-cache"></a>Verteilte Memory-Cache
 
-Der verteilten Memory-Cache (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) ist eine Framework bereitgestellte Implementierung der `IDistributedCache` , Elemente im Arbeitsspeicher speichert. Der verteilten Memory-Cache ist eine tatsächliche verteilter Cache nicht. Zwischengespeicherte Elemente werden von der app-Instanz auf dem Server gespeichert, in dem die app ausgeführt wird.
+Der verteilten Memory-Cache (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) ist eine Framework bereitgestellte Implementierung der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> , Elemente im Arbeitsspeicher speichert. Der verteilten Memory-Cache ist eine tatsächliche verteilter Cache nicht. Zwischengespeicherte Elemente werden von der app-Instanz auf dem Server gespeichert, in dem die app ausgeführt wird.
 
 Der verteilten Memory-Cache ist eine nützliche-Implementierung:
 
@@ -149,13 +149,13 @@ So installieren Redis auf Ihrem lokalen Computer:
 
 ## <a name="use-the-distributed-cache"></a>Verwenden Sie den verteilten cache
 
-Verwenden der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Schnittstelle, fordern Sie eine Instanz von `IDistributedCache` über keinen Konstruktor in der app. Die Instanz wird von bereitgestellt [Abhängigkeitsinjektion (Dependency Injection)](xref:fundamentals/dependency-injection).
+Verwenden der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Schnittstelle, fordern Sie eine Instanz von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> über keinen Konstruktor in der app. Die Instanz wird von bereitgestellt [Abhängigkeitsinjektion (Dependency Injection)](xref:fundamentals/dependency-injection).
 
-Nach dem Start der app `IDistributedCache` injiziert wird `Startup.Configure`. Die aktuelle Zeit zwischengespeichert wird, mithilfe von <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> (Weitere Informationen finden Sie unter [Webhost: IApplicationLifetime-Schnittstelle](xref:fundamentals/host/web-host#iapplicationlifetime-interface)):
+Nach dem Start der app <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> injiziert wird `Startup.Configure`. Die aktuelle Zeit zwischengespeichert wird, mithilfe von <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> (Weitere Informationen finden Sie unter [Webhost: IApplicationLifetime-Schnittstelle](xref:fundamentals/host/web-host#iapplicationlifetime-interface)):
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
-Die Beispiel-app fügt `IDistributedCache` in die `IndexModel` für die Verwendung durch die Indexseite.
+Die Beispiel-app fügt <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> in die `IndexModel` für die Verwendung durch die Indexseite.
 
 Jedes Mal die Indexseite geladen wird, der Cache wird überprüft, für die zwischengespeicherten Zeit in `OnGetAsync`. Wenn die zwischengespeicherte Zeit nicht abgelaufen ist, wird die Zeit angezeigt. Wenn 20 Sekunden seit dem letzten die Cachezeit wurde (der letzten Seite geladen wurde) zugegriffen übersteigt, um die Seite zeigt *zwischengespeicherte Zeit abgelaufen*.
 
@@ -164,13 +164,13 @@ Aktualisieren Sie die zwischengespeicherte Zeit sofort auf die aktuelle Uhrzeit,
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
-> Besteht keine Notwendigkeit für eine Singleton- oder Bereichsbezogene Lebensdauer verwenden `IDistributedCache` Instanzen (mindestens für die integrierten Implementierungen).
+> Besteht keine Notwendigkeit für eine Singleton- oder Bereichsbezogene Lebensdauer verwenden <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Instanzen (mindestens für die integrierten Implementierungen).
 >
-> Sie können auch erstellen, eine `IDistributedCache` Instanz immer Sie möglicherweise einen benötigen anstelle von DI, aber erstellen eine Instanz im Code kann Code schwieriger zu testen und verstößt gegen die [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies).
+> Sie können auch erstellen, eine <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Instanz immer Sie möglicherweise einen benötigen anstelle von DI, aber erstellen eine Instanz im Code kann Code schwieriger zu testen und verstößt gegen die [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies).
 
 ## <a name="recommendations"></a>Empfehlungen
 
-Bei der Entscheidung, welche Implementierung der `IDistributedCache` ist am besten für Ihre app, berücksichtigen Sie Folgendes:
+Bei der Entscheidung, welche Implementierung der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ist am besten für Ihre app, berücksichtigen Sie Folgendes:
 
 * Vorhandene Infrastruktur
 * Leistungsanforderungen

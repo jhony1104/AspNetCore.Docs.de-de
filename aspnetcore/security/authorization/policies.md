@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/21/2017
 uid: security/authorization/policies
-ms.openlocfilehash: 4e8a9ac6c0594f9bab67214aaa8cab9199cca29d
-ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
+ms.openlocfilehash: 937c73c26cd3935c5069d4735e754d1a567f41f4
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/10/2019
-ms.locfileid: "54207394"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248107"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinienbasierte Autorisierung in ASP.NET Core
 
@@ -32,6 +32,8 @@ Richtlinien werden angewendet, mit der `[Authorize]` Attribut mit dem Richtlinie
 Eine autorisierungsanforderung ist eine Auflistung von Datenparametern, die eine Richtlinie zum Auswerten des aktuelle Benutzerprinzipals verwenden können. In unserer "AtLeast21"-Richtlinie die Anforderung ist ein einzelner Parameter&mdash;das Mindestalter. Eine Anforderung implementiert [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), dies ist eine leere Markierungsschnittstelle. Eine parametrisierte Mindestalter-Anforderung kann wie folgt implementiert werden:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
+
+Eine Autorisierungsrichtlinie mehrere autorisierungsanforderungen enthält, müssen alle Anforderungen in der Reihenfolge für die richtlinienauswertung erfolgreich übergeben. Anders ausgedrückt, sind mehrere autorisierungsanforderungen, die eine einzelne Autorisierungsrichtlinie hinzugefügt auf behandelt eine **und** Basis.
 
 > [!NOTE]
 > Eine Anforderung benötigen nicht Daten oder Eigenschaften.

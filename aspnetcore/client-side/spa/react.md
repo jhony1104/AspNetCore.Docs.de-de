@@ -2,26 +2,19 @@
 title: Verwenden der React-Projektvorlage mit ASP.NET Core
 author: SteveSandersonMS
 description: Erfahren Sie, wie Sie sich mit der Projektvorlage für die Einzelseitenanwendung (Single-Page Application, SPA) von ASP.NET Core für React und create-react-app vertraut machen.
-monikerRange: '>= aspnetcore-2.0'
+monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/21/2018
+ms.date: 02/13/2019
 uid: spa/react
-ms.openlocfilehash: d83bff8abcd5b59d8bc4a51a101510755394f0c4
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: aa08a9d8d06d8b52be564fabf904d4923684d4e4
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667686"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248029"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Verwenden der React-Projektvorlage mit ASP.NET Core
-
-::: moniker range="= aspnetcore-2.0"
-
-> [!NOTE]
-> Diese Dokumentation befasst sich nicht mit der in ASP.NET Core 2.0 enthaltenen React-Projektvorlage. Sie befasst sich mit der neueren React-Vorlage, die manuell aktualisiert werden kann. Die Vorlage ist standardmäßig in ASP.NET Core 2.1 enthalten.
-
-::: moniker-end
 
 Die aktualisierte React-Projektvorlage stellt einen geeigneten Anfangspunkt für ASP.NET Core-Apps dar, die React und CRA-Konventionen ([create-react-app](https://github.com/facebookincubator/create-react-app)) für die Implementierung einer umfangreichen, clientseitigen Benutzerschnittstelle (User Interface, UI) verwenden.
 
@@ -29,17 +22,7 @@ Mit der Vorlage können ein ASP.NET Core-Projekt, das als API-Back-End fungieren
 
 ## <a name="create-a-new-app"></a>Erstellen einer neuen App
 
-::: moniker range="= aspnetcore-2.0"
-
-Stellen Sie bei Verwendung von ASP.NET Core 2.0 sicher, dass Sie [die aktualisierte React-Projektvorlage installiert](xref:spa/index#installation) haben.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
 Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlage für React-Projekte nicht installieren.
-
-::: moniker-end
 
 Erstellen Sie über eine Eingabeaufforderung mit dem Befehl `dotnet new react` in einem leeren Verzeichnis ein neues Projekt. Mit den folgenden Befehlen wird die App beispielsweise im Verzeichnis *my-new-app* erstellt und zu diesem Verzeichnis gewechselt:
 

@@ -4,17 +4,17 @@ title: 'Tutorial: Erste Schritte mit EF Database First anhand von MVC 5'
 description: In diesem Tutorial wird gezeigt, wie für den Einstieg eine vorhandene Datenbank und erstellen Sie schnell eine Anwendung, die Benutzern ermöglicht, die mit den Daten interagieren.
 author: Rick-Anderson
 ms.author: riande
-ms.date: 01/28/2019
+ms.date: 01/15/2019
 ms.topic: tutorial
 ms.assetid: 095abad4-3bfe-4f06-b092-ae6a735b7e49
 msc.legacyurl: /mvc/overview/getting-started/database-first-development/setting-up-database
 msc.type: authoredcontent
-ms.openlocfilehash: dfc6c7a7083524a1e7049fdc879fe679f951084d
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: d99fdb5382037038d4428ff1946f39aee380fb75
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667738"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248224"
 ---
 # <a name="tutorial-get-started-with-ef-database-first-using-mvc-5"></a>Tutorial: Erste Schritte mit EF Database First anhand von MVC 5
 
@@ -33,17 +33,16 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Vorraussetzungen
 
-* [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017)
+[Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
 
-## <a name="introduction"></a>Einführung
-
-In diesem Tutorial behandelt die Situation, in dem Sie eine Datenbank und zum Generieren von Code für eine Webanwendung, die auf Grundlage der Felder für diese Datenbank werden soll. Dieser Ansatz heißt Database First-Entwicklung. Wenn Sie nicht bereits über eine vorhandene Datenbank verfügen, können Sie stattdessen, eine Methode, die Code First-Entwicklung und dazu Datenklassen zu definieren und die Datenbank aus den Eigenschaften der Klasse aufgerufen.
 
 ## <a name="set-up-the-database"></a>Richten Sie die Datenbank
 
 Zum Imitieren der Umgebung von einer vorhandenen Datenbank müssen Sie zunächst eine Datenbank erstellen, mit einigen Daten vorab ausgefüllten, und klicken Sie dann Ihre Webanwendung die Verbindung mit der Datenbank erstellen.
 
-In diesem Tutorial wurde die Verwendung von LocalDB entwickelt. Sie können einen vorhandenen Datenbankserver verwenden, statt mit LocalDB, aber je nach Ihrer Version von Visual Studio und den Typ der Datenbank, aller Data Tools in Visual Studio möglicherweise nicht unterstützt. Wenn die Tools nicht für die Datenbank verfügbar sind, müssen Sie möglicherweise einige der Schritte in der Management Suite datenbankspezifischen für Ihre Datenbank ausführen.
+
+In diesem Tutorial wurde entwickelt, verwenden von LocalDB mit Visual Studio 2017. Sie können einen vorhandenen Datenbankserver verwenden, statt mit LocalDB, aber je nach Ihrer Version von Visual Studio und den Typ der Datenbank, aller Data Tools in Visual Studio möglicherweise nicht unterstützt. Wenn die Tools nicht für die Datenbank verfügbar sind, müssen Sie möglicherweise einige der Schritte in der Management Suite datenbankspezifischen für Ihre Datenbank ausführen.
+
 
 Wenn Sie ein Problem mit der Datenbanktools in Ihrer Version von Visual Studio verfügen, stellen Sie sicher, dass Sie die neueste Version der Datenbanktools installiert haben. Informationen zu aktualisieren oder die Datenbanktools installieren, finden Sie unter [Microsoft SQL Server Data Tools](https://msdn.microsoft.com/data/hh297027).
 

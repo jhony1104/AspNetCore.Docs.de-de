@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core-Controller und Aktion Zugriff einsch
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/authorization/roles
-ms.openlocfilehash: 59753b90d3196b0bc16d4963f45b995f5108bc8b
-ms.sourcegitcommit: d99a8554c91f626cf5e466911cf504dcbff0e02e
+ms.openlocfilehash: 0467ea82831bffe6882e584930c2fa1212a244c7
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/31/2018
-ms.locfileid: "39356674"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248094"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>Rollenbasierte Autorisierung in ASP.NET Core
 
@@ -108,7 +108,8 @@ public void ConfigureServices(IServiceCollection services)
 
     services.AddAuthorization(options =>
     {
-        options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+        options.AddPolicy("RequireAdministratorRole",
+             policy => policy.RequireRole("Administrator"));
     });
 }
 ```
@@ -131,3 +132,9 @@ options.AddPolicy("ElevatedRights", policy =>
 ```
 
 In diesem Beispiel autorisiert Benutzer Zugehörigkeit zu der `Administrator`, `PowerUser` oder `BackupAdministrator` Rollen.
+
+### <a name="add-role-services-to-identity"></a>Fügen Sie Rollendienste hinzu, die Identität
+
+Fügen Sie [Rollen](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) Rollendienste hinzufügen:
+
+[!code-csharp[](roles/samples/Startup.cs?name=snippet&highlight=7)]
