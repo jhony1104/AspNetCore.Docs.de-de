@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Information Services (IIS) gehostet werden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/29/2019
+ms.date: 02/13/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 9f7fc5571f8d1a6e5e2d84779082abb02d2fb292
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.openlocfilehash: 5d6ba8b7ee6f09a7d00aa0285802cf0aad267a1d
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159394"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248419"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -94,7 +94,7 @@ Weitere Informationen zu In-Process- und Out-of-Process-Hostingmodellen finden S
 
 `CreateDefaultBuilder` konfiguriert [Kestrel](xref:fundamentals/servers/kestrel) Server als Webserver und aktiviert die IIS-Integration durch Konfigurierung des Basispfads und Ports für das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module).
 
-Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` ruft die [UseIISIntegration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderiisextensions.useiisintegration)-Methode auf. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`127.0.0.1`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `127.0.0.1:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
+Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` ruft die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Methode auf. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`127.0.0.1`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `127.0.0.1:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
 
 * `UseUrls`
 * [der Listen-API von Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -108,7 +108,7 @@ Aufrufe von `UseUrls` oder der `Listen`-API von Kestrel sind nicht erforderlich,
 
 `CreateDefaultBuilder` konfiguriert [Kestrel](xref:fundamentals/servers/kestrel) Server als Webserver und aktiviert die IIS-Integration durch Konfigurierung des Basispfads und Ports für das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module).
 
-Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` ruft die [UseIISIntegration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderiisextensions.useiisintegration)-Methode auf. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`localhost`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `localhost:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
+Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` ruft die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Methode auf. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`localhost`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `localhost:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
 
 * `UseUrls`
 * [der Listen-API von Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -120,7 +120,7 @@ Aufrufe von `UseUrls` oder der `Listen`-API von Kestrel sind nicht erforderlich,
 
 ::: moniker range="< aspnetcore-2.0"
 
-Nehmen Sie eine Abhängigkeit vom Paket [Microsoft.AspNetCore.Server.IISIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/) in die App-Abhängigkeiten auf. Verwenden Sie Middleware für die Integration von IIS, indem Sie die Erweiterungsmethode [UseIISIntegration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderiisextensions.useiisintegration) zu [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder) hinzufügen:
+Nehmen Sie eine Abhängigkeit vom Paket [Microsoft.AspNetCore.Server.IISIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/) in die App-Abhängigkeiten auf. Verwenden Sie Middleware für die Integration von IIS, indem Sie die Erweiterungsmethode <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> zu <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> hinzufügen:
 
 ```csharp
 var host = new WebHostBuilder()
@@ -129,7 +129,7 @@ var host = new WebHostBuilder()
     ...
 ```
 
-Sowohl [UseKestrel](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderkestrelextensions.usekestrel) als auch [UseIISIntegration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderiisextensions.useiisintegration) sind erforderlich. Ein Code, der `UseIISIntegration` aufruft, hat keinen Einfluss auf die Codeportabilität. Wenn die App nicht hinter IIS ausgeführt wird (die App wird z.B. direkt auf Kestrel ausgeführt), hat `UseIISIntegration` keine Funktion.
+Es sind jeweils <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> und <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> erforderlich. Ein Code, der `UseIISIntegration` aufruft, hat keinen Einfluss auf die Codeportabilität. Wenn die App nicht hinter IIS ausgeführt wird (die App wird z.B. direkt auf Kestrel ausgeführt), hat `UseIISIntegration` keine Funktion.
 
 Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`localhost`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `localhost:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
 
@@ -150,7 +150,7 @@ Weitere Informationen zum Hosten finden Sie unter [Hosten in ASP.NET Core](xref:
 
 **In-Process-Hostingmodell**
 
-Um IIS Server-Optionen zu konfigurieren, beziehen Sie eine Dienstkonfiguration für [IISServerOptions](/dotnet/api/microsoft.aspnetcore.builder.iisserveroptions) in [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices) ein. Mit dem folgenden Beispiel wird AutomaticAuthentication deaktiviert:
+Schließen Sie zur Konfiguration von IIS-Serveroptionen eine Dienstkonfiguration für <xref:Microsoft.AspNetCore.Builder.IISServerOptions> in <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> ein. Mit dem folgenden Beispiel wird AutomaticAuthentication deaktiviert:
 
 ```csharp
 services.Configure<IISServerOptions>(options => 
@@ -168,7 +168,7 @@ services.Configure<IISServerOptions>(options =>
 
 ::: moniker-end
 
-Um IIS-Optionen zu konfigurieren, beziehen Sie eine Dienstkonfiguration für [IISOptions](/dotnet/api/microsoft.aspnetcore.builder.iisoptions) in [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices) ein. Im folgenden Beispiel wird Verhindert, dass die App `HttpContext.Connection.ClientCertificate` auffüllt:
+Schließen Sie zur Konfiguration von IIS-Optionen eine Dienstkonfiguration für <xref:Microsoft.AspNetCore.Builder.IISOptions> in <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> ein. Im folgenden Beispiel wird Verhindert, dass die App `HttpContext.Connection.ClientCertificate` auffüllt:
 
 ```csharp
 services.Configure<IISOptions>(options => 
@@ -218,6 +218,10 @@ Zum Erstellen des [ASP.NET Core-Moduls](xref:host-and-deploy/aspnet-core-module)
 Im physischen Pfad der App sind vertrauliche Dateien vorhanden, wie z.B. *\<assembly_name>.runtimeconfig.json*, *\<assembly_name>.xml* (XML-Dokumentationskommentare) und *\<assembly_name>.deps.json*. Wenn die Datei *web.config* vorhanden ist und die Website normal startet, werden diese vertraulichen Dateien von IIS bei Anforderung nicht offengelegt. Wenn die Datei *web.config* fehlt, falsch benannt wurde oder die Website nicht für den normalen Start konfigurieren kann, macht IIS vertrauliche Dateien möglicherweise öffentlich verfügbar.
 
 **Die Datei *web.config* muss immer in der Bereitstellung vorhanden, richtig benannt und in der Lage sein, die Website für einen normalen Start zu konfigurieren. Entfernen Sie die Datei *web.config* niemals aus einer Produktionsbereitstellung.**
+
+### <a name="transform-webconfig"></a>Transformieren von web.config
+
+Wenn Sie *web.config* beim Veröffentlichen transformieren müssen (z.B. Umgebungsvariablen basierend auf der Konfiguration, dem Profil oder der Umgebung festlegen müssen), finden Sie weitere Informationen unter <xref:host-and-deploy/iis/transform-webconfig>.
 
 ## <a name="iis-configuration"></a>IIS-Konfiguration
 
@@ -416,7 +420,7 @@ Zum Konfigurieren des Schutzes von Daten unter IIS mithilfe des persistenten Sch
 
   1. Navigieren Sie zum Ordner *%windir%/system32/inetsrv/config*.
   1. Öffnen Sie die Datei *applicationHost.config*.
-  1. Suchen Sie das Element `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>`.
+  1. Suchen Sie das Element `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` .
   1. Bestätigen Sie, dass das `setProfileEnvironment`-Attribut nicht vorhanden ist, das standardmäßig den Wert `true` aufweist, oder legen Sie den Wert des Attributs explizit auf `true` fest.
 
 * **Verwenden des Dateisystems als Schlüsselbundspeicher**
@@ -641,3 +645,4 @@ Erfahren Sie, wie Sie häufige Fehler beim Hosten von ASP.NET Core-Apps in IIS e
 * [Die offizielle Microsoft IIS-Website](https://www.iis.net/)
 * [Bibliothek mit technischem Inhalt zu Windows Server](/windows-server/windows-server)
 * [HTTP/2 unter IIS](/iis/get-started/whats-new-in-iis-10/http2-on-iis)
+* <xref:host-and-deploy/iis/transform-webconfig>

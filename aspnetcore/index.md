@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2019
+ms.date: 02/13/2019
 uid: index
-ms.openlocfilehash: e7c81ff82e5206a5aca217417f6cb1c339d72e89
-ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.openlocfilehash: c3f07814bfab19a0f070e0b48b0d2ef6cfc1594e
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2019
-ms.locfileid: "54341406"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248159"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -44,7 +44,7 @@ ASP.NET Core MVC bietet Funktionen zum Erstellen von [Web-APIs](xref:tutorials/f
 
 ## <a name="client-side-development"></a>Clientseitige Entwicklung
 
-ASP.NET Core integriert sich nahtlos in gängige clientseitige Frameworks und Bibliotheken, einschließlich [Angular](xref:spa/angular), [React](xref:spa/react) und [Bootstrap](https://getbootstrap.com/). Weitere Informationen finden Sie unter [Clientseitige Entwicklung](xref:client-side/index).
+ASP.NET Core integriert sich nahtlos in gängige clientseitige Frameworks und Bibliotheken, einschließlich [Razor Components](xref:razor-components/index), [Angular](xref:spa/angular), [React](xref:spa/react) und [Bootstrap](https://getbootstrap.com/). Weitere Informationen finden Sie unter [Razor Components](xref:razor-components/index) und verwandten Themen unter *Clientseitige Entwicklung*.
 
 <a name="target-framework"></a>
 
