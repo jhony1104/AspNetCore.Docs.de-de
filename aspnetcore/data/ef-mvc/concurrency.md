@@ -1,27 +1,20 @@
 ---
-title: ASP.NET Core MVC mit EF Core – Parallelität (8 von 10)
-author: rick-anderson
+title: 'Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial wird gezeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren.
+author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/05/2019
+ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 0ae566a76a2ef656843452ed537b8fdfbddaed22
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: 7b18927d5d528ec2951087502e26b2b30214f389
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090900"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103019"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---concurrency---8-of-10"></a>ASP.NET Core MVC mit EF Core – Parallelität (8 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core
 
 In den vorherigen Tutorials haben Sie gelernt, wie Sie Daten aktualisieren. In diesem Tutorial wird gezeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren.
 
@@ -30,6 +23,23 @@ Sie erstellen Webseiten, die mit der Fachbereichsentität arbeiten und behandeln
 ![Seite „Fachbereich bearbeiten“](concurrency/_static/edit-error.png)
 
 ![Seite „Fachbereich löschen“](concurrency/_static/delete-error.png)
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erhalten Sie Informationen über Parallelitätskonflikte
+> * Fügen Sie eine Nachverfolgungseigenschaft hinzu
+> * Erstellen Sie Abteilungscontroller und -ansichten
+> * Aktualisieren Sie die Ansicht „Index“
+> * Aktualisieren Sie „Bearbeiten“-Methoden
+> * Aktualisieren Sie die Ansicht „Bearbeiten“
+> * Testen Sie auf Parallelitätskonflikte
+> * Aktualisieren der Seite „Delete“ (Löschen)
+> * Aktualisieren der Ansichten „Details“ und „Erstellen“
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit EF Core: Lesen verwandter Daten (7 von 10)](update-related-data.md)
 
 ## <a name="concurrency-conflicts"></a>Nebenläufigkeitskonflikte
 
@@ -87,7 +97,7 @@ Sie können Konflikte auflösen, indem Sie die `DbConcurrencyException`-Ausnahme
 
 Im weiteren Verlauf dieses Tutorials fügen Sie der Fachbereichsentität die Änderungsverfolgungseigenschaft `rowversion` hinzu, erstellen einen Controller und Ansichten und überprüfen, ob alles ordnungsgemäß funktioniert.
 
-## <a name="add-a-tracking-property-to-the-department-entity"></a>Hinzufügen einer Nachverfolgungseigenschaft zur Entität „Department“
+## <a name="add-a-tracking-property"></a>Fügen Sie eine Nachverfolgungseigenschaft hinzu
 
 Fügen Sie der Datei *Models/Department.cs* eine Nachverfolgungseigenschaft namens „RowVersion“ hinzu:
 
@@ -114,7 +124,7 @@ dotnet ef migrations add RowVersion
 dotnet ef database update
 ```
 
-## <a name="create-a-departments-controller-and-views"></a>Erstellen von Abteilungscontrollern und -ansichten
+## <a name="create-departments-controller-and-views"></a>Erstellen Sie Abteilungscontroller und -ansichten
 
 Erstellen Sie einen Abteilungscontroller und Ansichten, wie Sie es vorher bereits für Studenten, Kurse und Dozenten getan haben.
 
@@ -124,7 +134,7 @@ Erstellen Sie einen Abteilungscontroller und Ansichten, wie Sie es vorher bereit
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_Dropdown)]
 
-## <a name="update-the-departments-index-view"></a>Aktualisieren der Indexansicht für Abteilungen
+## <a name="update-index-view"></a>Aktualisieren Sie die Ansicht „Index“
 
 Die Engine für den Gerüstbau hat eine RowVersion-Spalte in der Indexansicht erstellt, dieses Feld soll jedoch nicht angezeigt werden.
 
@@ -134,7 +144,7 @@ Ersetzen Sie den Code in der Datei *Views/Departments/Index.cshtml* durch folgen
 
 Damit wird die Überschrift in „Abteilungen“ geändert, die Spalte „RowVersion“ gelöscht und der vollständige Name des Administrators wird anstelle des Vornamens angezeigt.
 
-## <a name="update-the-edit-methods-in-the-departments-controller"></a>Aktualisieren der Edit-Methoden im Abteilungscontroller
+## <a name="update-edit-methods"></a>Aktualisieren Sie „Bearbeiten“-Methoden
 
 Fügen Sie in den HttpGet-Methoden `Edit` und `Details` `AsNoTracking` hinzu. Fügen Sie in der HttpGet-Methode `Edit` für den Administrator Eager Loading hinzu.
 
@@ -172,7 +182,7 @@ Schließlich legt der Code den Wert `RowVersion` von `departmentToUpdate` auf de
 
 Die Anweisung `ModelState.Remove` ist erforderlich, da `ModelState` über den alten `RowVersion`-Wert verfügt. In der Ansicht hat der Wert `ModelState` Vorrang vor den Modelleigenschaftswerten, wenn beide vorhanden sind.
 
-## <a name="update-the-department-edit-view"></a>Aktualisieren der Ansicht „Abteilung bearbeiten“
+## <a name="update-edit-view"></a>Aktualisieren Sie die Ansicht „Bearbeiten“
 
 Nehmen Sie folgende Änderungen in der Datei *Views/Departments/Edit.cshtml* vor:
 
@@ -182,7 +192,7 @@ Nehmen Sie folgende Änderungen in der Datei *Views/Departments/Edit.cshtml* vor
 
 [!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
-## <a name="test-concurrency-conflicts-in-the-edit-page"></a>Überprüfen von Nebenläufigkeitskonflikten in der Seite „Bearbeiten“
+## <a name="test-concurrency-conflicts"></a>Testen Sie auf Parallelitätskonflikte
 
 Führen Sie die App aus, und navigieren Sie zur Indexseite „Abteilungen“. Klicken Sie mit der rechten Maustaste auf den Link **Bearbeiten** für die englische Abteilung und wählen **In neuer Registerkarte öffnen** aus, klicken Sie dann auf den Link **Bearbeiten** für die englische Abteilung. Beide Registerkarten zeigen nun die gleichen Informationen im Browser an.
 
@@ -276,12 +286,29 @@ Ersetzen Sie den Code in der Datei *Views/Departments/Create.cshtml*, um der Dro
 
 [!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Damit ist die Einführung in die Behandlung von Nebenläufigkeitskonflikten abgeschlossen. Weitere Informationen zum Behandeln der Parallelität in EF Core finden Sie unter [Concurrency conflicts (Nebenläufigkeitskonflikte)](/ef/core/saving/concurrency). Das nächste Tutorial zeigt Ihnen, wie Sie die „Tabelle pro Hierarchie“-Vererbung für die Entitäten Instructor und Student implementieren.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-> [!div class="step-by-step"]
-> [Zurück](update-related-data.md)
-> [Weiter](inheritance.md)
+ Weitere Informationen zum Behandeln der Parallelität in EF Core finden Sie unter [Concurrency conflicts (Nebenläufigkeitskonflikte)](/ef/core/saving/concurrency).
+
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Haben Sie Informationen über Parallelitätskonflikte erhalten
+> * Haben Sie eine Nachverfolgungseigenschaft hinzugefügt
+> * Haben Sie Abteilungscontroller und Ansichten erstellt
+> * Haben Sie die Ansicht „Index“ aktualisiert
+> * Haben Sie „Bearbeiten“-Methoden aktualisiert
+> * Haben Sie die Ansicht „Bearbeiten“ aktualisiert
+> * Haben Sie auf Parallelitätskonflikte getestet
+> * Haben Sie die Seite „Löschen“ aktualisiert
+> * Haben Sie die Ansichten „Details“ und „Erstellen“ aktualisiert
+
+Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie die „Tabelle pro Hierarchie“-Vererbung für die Entitäten „Instructor“ und „Student“ implementieren.
+> [!div class="nextstepaction"]
+> [ASP.NET Core MVC mit EF Core: Vererbung (9 von 10)](inheritance.md)

@@ -1,42 +1,38 @@
 ---
-title: ASP.NET Core MVC mit EF Core − Erweitert (2 von 10)
+title: 'Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core'
+description: In diesem Tutorial überprüfen und passen Sie CRUD-Code (Create, Read, Update, Delete) an, der durch den MVC-Gerüstbau automatisch für Ihre Controller und Ansichten erstellt wird.
 author: rick-anderson
-description: ''
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/04/2019
+ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 34927415beadaa3f5c9035a9101e3c99f7cbc395
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: 368b1774ba977ec8020a02d48705200fd54c3bbd
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090822"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56102980"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---crud---2-of-10"></a>ASP.NET Core MVC mit EF Core − Erweitert (2 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
 Im vorherigen Tutorial haben Sie eine MVC-Anwendung erstellt, die Entity Framework und SQL Server LocalDB verwendet, um Daten zu speichern und anzuzeigen. In diesem Tutorial überprüfen und passen Sie CRUD-Code (Create, Read, Update, Delete) an, der durch den MVC-Gerüstbau automatisch für Ihre Controller und Ansichten erstellt wird.
 
 > [!NOTE]
 > Es ist üblich, dass das Repositorymuster implementiert wird, um eine Abstraktionsebene zwischen Ihrem Controller und der Datenzugriffsebene zu erstellen. In diesen Tutorials werden keine Repositorys verwendet, um die Verwendung des Entity Frameworks einfach und zielorientiert zu erklären. Weitere Informationen über Repositorys mit EF finden Sie im [letzten Tutorial dieser Reihe](advanced.md).
 
-In diesem Tutorial arbeiten Sie mit den folgenden Webseiten:
+In diesem Tutorial:
 
-![Seite „Studentendetails“](crud/_static/student-details.png)
+> [!div class="checklist"]
+> * Anpassen der Seite „Details“
+> * Aktualisieren der Seite „Erstellen“
+> * Aktualisieren der Seite „Bearbeiten“
+> * Aktualisieren der Seite „Delete“ (Löschen)
+> * Schließen von Datenbankverbindungen
 
-![Seite „Student erstellen“](crud/_static/student-create.png)
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
-![Seite „Student bearbeiten“](crud/_static/student-edit.png)
-
-![Seite „Student löschen“](crud/_static/student-delete.png)
+* [ASP.NET Core MVC mit Entity Framework Core: Tutorial 1 von 10](intro.md)
 
 ## <a name="customize-the-details-page"></a>Anpassen der Seite „Details“
 
@@ -172,7 +168,7 @@ Dies ist eine serverseitige Validierung, die Sie standardgemäß erhalten. In ei
 
 Die HttpGet-Methode `Edit` (ohne das Attribut `HttpPost`) in der Datei *StudentController.cs* verwendet die Methode `SingleOrDefaultAsync`, um die ausgewählte Studententität abzurufen, wie Sie bereits in der Methode `Details` gesehen haben. Sie müssen diese Methode nicht ändern.
 
-### <a name="recommended-httppost-edit-code-read-and-update"></a>Empfohlener HttpPost-Edit-Code: Lesen und Aktualisieren
+### <a name="recommended-httppost-edit-code-read-and-update"></a>Empfohlener HttpPost-Edit-Code: Lesen und aktualisieren
 
 Ersetzen Sie die HttpPost-Edit-Aktionsmethode durch folgenden Code:
 
@@ -186,7 +182,7 @@ Als eine bewährte Methode zum Verhindern von Overposting, sind die Felder in de
 
 Aus diesen Änderungen resultiert, dass die Methodensignatur der HttpPost-Methode `Edit` identisch mit der HttpGet-Methode `Edit` ist. Daher haben Sie die Methode in `EditPost` umbenannt.
 
-### <a name="alternative-httppost-edit-code-create-and-attach"></a>Alternativer HttpPost-Edit-Code: Erstellen und Anfügen
+### <a name="alternative-httppost-edit-code-create-and-attach"></a>Alternativer HttpPost-Edit-Code: Erstellen und anfügen
 
 Der empfohlene HttpPost-Edit-Code stellt sicher, dass nur geänderte Spalten aktualisiert werden und behält Daten in Eigenschaften, die Sie nicht in der Modellbindung einschließen wollen. Dieser Read-First-Ansatz benötigt jedoch einen zusätzlichen Datenbank-Lesevorgang und kann zu komplexeren Code für die Behandlung von Nebenläufigkeitskonflikten führen. Alternativ können Sie dem EF-Kontext eine Entität anfügen, die von der Modellbindung erstellt wurde, und diese als geändert markieren. (Aktualisieren Sie ihr Projekt nicht mit diesem Code, er wird hier nur gezeigt, um eine optionale Vorgehensweise zu veranschaulichen.)
 
@@ -270,13 +266,13 @@ Führen Sie die Anwendung aus, wählen Sie die Registerkarte **Students** aus un
 
 Klicken Sie auf **Löschen**. Die Indexseite wird ohne den gelöschten Student angezeigt. (Ein Beispiel für den Fehlerbehandlungscode in Aktion im Tutorial zur Parallelität wird angezeigt.)
 
-## <a name="closing-database-connections"></a>Trennen von Datenbankverbindungen
+## <a name="close-database-connections"></a>Schließen von Datenbankverbindungen
 
 Sobald Sie mit ihr fertig sind, muss die Kontextinstanz so bald wie möglich entfernt werden, um die Ressourcen der Datenbankverbindung freizugeben. Die in ASP.NET Core eingebaute [Dependency Injection](../../fundamentals/dependency-injection.md) erledigt diese Aufgabe für Sie.
 
 Rufen Sie die [Erweiterungsmethode AddDbContext](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) in der Datei *Startup.cs* auf, um die Klasse `DbContext` in dem ASP.NET Core DI-Container bereitzustellen. Diese Methode legt die Lebensdauer des Diensts standardgemäß auf `Scoped` fest. `Scoped` bedeutet, dass die Lebensdauer des Kontextobjekts mit der Lebensdauer der Webanforderung übereinstimmt, und die Methode `Dispose` wird am Ende der Webanforderung automatisch aufgerufen.
 
-## <a name="handling-transactions"></a>Verarbeiten von Transaktionen
+## <a name="handle-transactions"></a>Behandeln von Transaktionen
 
 Standardgemäß implementiert Entity Framework implizit Transaktionen. In Szenarios, in denen Sie Änderungen an mehreren Zeilen oder Tabellen vornehmen und dann `SaveChanges` aufrufen, stellt Entity Framework automatisch sicher, dass alle Ihre Änderungen entweder fehlschlagen oder erfolgreich abgeschlossen werden. Wenn ein Fehler auftritt, nachdem einige der Änderungen durchgeführt wurden, werden diese Änderungen automatisch zurückgesetzt. Informationen zu Szenarios, die Sie genauer kontrollieren müssen (z.B. wenn Sie Vorgänge einfügen möchten, die außerhalb von Entity Framework in einer Transaktion ausgeführt werden), finden Sie unter [Transaktionen](/ef/core/saving/transactions).
 
@@ -294,12 +290,21 @@ Sie können die Nachverfolgung von Entitätsobjekten im Arbeitsspeicher deaktivi
 
 Weitere Informationen finden Sie unter [Tracking vs. No-Tracking (Mit Nachverfolgung gegen ohne Nachverfolgung)](/ef/core/querying/tracking).
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie verfügen jetzt über einen vollständigen Satz von Seiten, die dazu in der Lage sind, einfache CRUD-Vorgänge für Student-Entitäten auszuführen. Im nächsten Tutorial erweitern Sie die Funktionen der Seite **Index**, indem Sie das Sortieren, Filtern und Paging hinzufügen.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="next-steps"></a>Nächste Schritte
 
-> [!div class="step-by-step"]
-> [Zurück](intro.md)
-> [Weiter](sort-filter-page.md)
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Die Seite „Details“ angepasst
+> * Die Seite „Erstellen“ aktualisiert
+> * Die Seite „Bearbeiten“ aktualisiert
+> * Die Seite „Löschen“ aktualisiert
+> * Datenbankverbindungen geschlossen
+
+Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie die Funktionen der Seite **Index** erweitern, indem Sie das Sortieren, Filtern und Auslagern hinzufügen.
+> [!div class="nextstepaction"]
+> [Sortieren, Filtern und Auslagern](sort-filter-page.md)

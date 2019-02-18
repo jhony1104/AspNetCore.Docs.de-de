@@ -5,14 +5,14 @@ description: Erfahren Sie, wie eine ASP.NET Core-App in einem Windows-Dienst geh
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 01/22/2019
+ms.date: 02/13/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: eedaf64710506f2a2aac65c178a9888d2ab33d38
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: 081a631c9c3e74c01e15f4b0b272d650c162bd20
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54837480"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248250"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -112,7 +112,7 @@ Nehmen Sie in `Program.Main` die folgenden Änderungen vor:
 
   Wenn die Bedingungen nicht zutreffen (die App als Dienst ausgeführt wird):
 
-  * Rufen Sie <xref:System.IO.Directory.SetCurrentDirectory*> auf, und verwenden Sie einen Pfad zum veröffentlichten Speicherort der App. Rufen Sie nicht <xref:System.IO.Directory.GetCurrentDirectory*> auf, um den Pfad abzurufen, da eine Windows-Dienst-App den Ordner *C:\\WINDOWS\\system32* zurückgibt, wenn `GetCurrentDirectory` aufgerufen wird. Weitere Informationen finden Sie im Abschnitt [Aktuelles Verzeichnis und Inhaltsstammverzeichnis](#current-directory-and-content-root).
+  * Rufen Sie <xref:System.IO.Directory.SetCurrentDirectory*> auf, und verwenden Sie einen Pfad zum veröffentlichten Speicherort der App. Rufen Sie nicht <xref:System.IO.Directory.GetCurrentDirectory*> auf, um den Pfad abzurufen, da eine Windows-Dienst-App den Ordner *C:\\WINDOWS\\system32* zurückgibt, wenn <xref:System.IO.Directory.GetCurrentDirectory*> aufgerufen wird. Weitere Informationen finden Sie im Abschnitt [Aktuelles Verzeichnis und Inhaltsstammverzeichnis](#current-directory-and-content-root).
   * Rufen Sie <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> auf, um die App als Dienst auszuführen.
 
   Da der [Anbieter der Befehlszeilenkonfiguration](xref:fundamentals/configuration/index#command-line-configuration-provider) Name/Wert-Paare für Befehlszeilenargumente benötigt, wird der `--console`-Schalter aus den Argumenten entfernt, bevor <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> sie empfängt.
@@ -147,11 +147,13 @@ dotnet publish --configuration Release --runtime win7-x64 --output c:\svc
 
 ### <a name="create-a-user-account"></a>Erstellen eines Benutzerkontos
 
-Erstellen Sie mit dem `net user`-Befehl ein Benutzerkonto für den Dienst:
+Erstellen Sie ein Benutzerkonto für den Dienst mithilfe des `net user`-Befehls von einer administrativen Befehlsshell aus:
 
 ```console
 net user {USER ACCOUNT} {PASSWORD} /add
 ```
+
+Die Standardablaufzeit für das Kennwort beträgt sechs Wochen.
 
 Erstellen Sie für die Beispiel-App ein Benutzerkonto mit dem Namen `ServiceUser` und einem Kennwort. Ersetzen Sie im folgenden Befehl `{PASSWORD}` durch ein [sicheres Kennwort](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements).
 
@@ -167,9 +169,13 @@ net localgroup {GROUP} {USER ACCOUNT} /add
 
 Weitere Informationen finden Sie unter [Dienstbenutzerkonten](/windows/desktop/services/service-user-accounts).
 
+Eine alternative Methode zum Verwalten von Benutzern bei Verwendung von Active Directory ist die Verwendung von verwalteten Dienstkonten. Weitere Informationen finden Sie unter [Gruppenverwaltete Dienstkonten: Übersicht](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+
 ### <a name="set-permissions"></a>Festlegen von Berechtigungen
 
-Gewähren Sie mit dem Befehl [icacls](/windows-server/administration/windows-commands/icacls) Schreib-/Lese-/Ausführungszugriff für den App-Ordner:
+#### <a name="access-to-the-app-folder"></a>Zugriff auf den App-Ordner
+
+Gewähren Sie von einer administrativen Befehlsshell aus mit dem Befehl [icacls](/windows-server/administration/windows-commands/icacls) Schreib-/Lese-/Ausführungszugriff für den App-Ordner:
 
 ```console
 icacls "{PATH}" /grant {USER ACCOUNT}:(OI)(CI){PERMISSION FLAGS} /t
@@ -195,11 +201,23 @@ icacls "c:\svc" /grant ServiceUser:(OI)(CI)WRX /t
 
 Weitere Informationen finden Sie unter [icacls](/windows-server/administration/windows-commands/icacls).
 
+#### <a name="log-on-as-a-service"></a>Anmelden als Dienst
+
+Gewähren Sie die Berechtigung [Anmelden als Dienst](/windows/security/threat-protection/security-policy-settings/log-on-as-a-service) für das Benutzerkonto:
+
+1. Suchen Sie die Richtlinien zum **Zuweisen von Benutzerrechten** entweder in der Konsole „Lokale Sicherheitsrichtlinie“ oder in der Konsole „Editor für lokale Gruppenrichtlinien“. Anweisungen finden Sie unter: [Konfigurieren von Sicherheitsrichtlinieneinstellungen](/windows/security/threat-protection/security-policy-settings/how-to-configure-security-policy-settings).
+1. Suchen Sie die `Log on as a service`-Richtlinie. Doppelklicken Sie auf die Richtlinie, um sie zu öffnen.
+1. Wählen Sie **Benutzer oder Gruppe hinzufügen** aus.
+1. Wählen Sie **Erweitert** und dann **Jetzt suchen** aus.
+1. Wählen Sie das Benutzerkonto aus, das zuvor im Abschnitt [Erstellen eines Benutzerkontos](#create-a-user-account) erstellt wurde. Wählen Sie **OK** aus, um die Auswahl zu akzeptieren.
+1. Wählen Sie **OK** aus nach der Bestätigung, dass der Objektname richtig ist.
+1. Klicken Sie auf **Übernehmen**. Wählen Sie **OK** aus, um das Richtlinienfenster zu schließen.
+
 ## <a name="manage-the-service"></a>Verwalten des Diensts
 
 ### <a name="create-the-service"></a>Erstellen Sie den Dienst.
 
-Verwenden Sie das Befehlszeilentool [sc.exe](https://technet.microsoft.com/library/bb490995), um den Dienst zu erstellen. Der Wert `binPath` ist der Pfad zu der ausführbaren Datei der App, der den Namen der ausführbaren Datei enthält. **Das Leerzeichen zwischen dem Gleichheitszeichen und dem Anführungszeichen für jeden Parameter und Wert ist erforderlich.**
+Erstellen Sie mit dem [sc.exe](https://technet.microsoft.com/library/bb490995)-Befehlszeilentool den Dienst von einer administrativen Befehlsshell aus. Der Wert `binPath` ist der Pfad zu der ausführbaren Datei der App, der den Namen der ausführbaren Datei enthält. **Das Leerzeichen zwischen dem Gleichheitszeichen und dem Anführungszeichen für jeden Parameter und Wert ist erforderlich.**
 
 ```console
 sc create {SERVICE NAME} binPath= "{PATH}" obj= "{DOMAIN}\{USER ACCOUNT}" password= "{PASSWORD}"
@@ -207,7 +225,7 @@ sc create {SERVICE NAME} binPath= "{PATH}" obj= "{DOMAIN}\{USER ACCOUNT}" passwo
 
 * `{SERVICE NAME}` &ndash; Der Name, der dem Dienst im [Dienststeuerungs-Manager](/windows/desktop/services/service-control-manager) zugewiesen wird.
 * `{PATH}`&ndash; Der Pfad zur ausführbaren Datei des Diensts.
-* `{DOMAIN}` &ndash; Die Domäne eines in eine Domäne eingebundenen Computers. Wenn der Computer nicht in die Domäne eingebunden ist, ist dies der Name des lokalen Computers.
+* `{DOMAIN}` &ndash; Die Domäne eines in eine Domäne eingebundenen Computers. Wenn der Computer nicht in die Domäne eingebunden ist, verwenden Sie den Namen des lokalen Computers.
 * `{USER ACCOUNT}` &ndash; Das Benutzerkonto, unter dem der Dienst ausgeführt wird.
 * `{PASSWORD}` &ndash; Das Kennwort für das Benutzerkonto.
 

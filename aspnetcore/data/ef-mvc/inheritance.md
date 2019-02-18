@@ -1,33 +1,40 @@
 ---
-title: 'ASP.NET Core MVC mit EF Core: Vererbung (9 von 10)'
-author: rick-anderson
+title: 'Tutorial: Implementieren von Vererbung: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial erfahren Sie, wie Sie die Vererbung mithilfe von Entity Framework Core in einer ASP.NET Core-App implementieren.
+author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/05/2019
+ms.topic: tutorial
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 60417040dd296311e1aecff8f224aadf8da82779
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: 0a5eb1aba43bc2adf746202772c7f98eff49b4ff
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090757"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103006"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---inheritance---9-of-10"></a>ASP.NET Core MVC mit EF Core: Vererbung (9 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von Vererbung: ASP.NET MVC mit EF Core
 
 Im vorherigen Tutorial haben Sie Parallelitätsausnahmen behandelt. In diesem Tutorial erfahren Sie, wie Sie die Vererbung in das Datenmodell implementieren können.
 
 Bei objektorientierter Programmierung können Sie mithilfe von Vererbung die Wiederverwendung von Code vereinfachen. In diesem Tutorial ändern Sie die Klassen `Instructor` und `Student` so, dass sie von einer `Person`-Basisklasse abgeleitet werden, die Eigenschaften wie `LastName` enthält. Diese Eigenschaften sind für Dozenten und Studenten gängig. Sie fügen keine Webseiten hinzu oder ändern diese, aber Sie werden Teile des Codes ändern. Diese Änderungen werden automatisch in der Datenbank widergespiegelt.
 
-## <a name="options-for-mapping-inheritance-to-database-tables"></a>Optionen für die Zuordnung von Vererbung zu Datenbanktabellen
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Zuordnen von Vererbung zu Datenbank
+> * Erstellen der Klasse „Person“
+> * Aktualisieren von „Instructor“ und „Student“
+> * Hinzuzufügen von „Person“ zum Modell
+> * Erstellen und Aktualisieren von Migrationen
+> * Testen der Implementierung
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit EF Core – Parallelität (8 von 10)](concurrency.md)
+
+## <a name="map-inheritance-to-database"></a>Zuordnen von Vererbung zu Datenbank
 
 Die Klassen `Instructor` und `Student` im Datenmodell „Schule“ weisen mehrere identische Eigenschaften auf:
 
@@ -64,7 +71,7 @@ Erstellen Sie im Ordner „Models“ (Modelle) die Datei „Person.cs“ und ers
 
 [!code-csharp[](intro/samples/cu/Models/Person.cs)]
 
-## <a name="make-student-and-instructor-classes-inherit-from-person"></a>Veranlassen der Vererbung von der Klasse „Person“ an die Klassen „Student“ und „Instructor“
+## <a name="update-instructor-and-student"></a>Aktualisieren von „Instructor“ und „Student“
 
 Leiten Sie in der Datei *Instructor.cs* die Klasse „Instructor“ von der Klasse „Person“ ab, und entfernen Sie Schlüssel- und Namensfelder. Der Code sieht aus wie im folgenden Beispiel:
 
@@ -74,7 +81,7 @@ Nehmen Sie an der Datei *Student.cs* die gleichen Änderungen vor.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_AfterInheritance&highlight=8)]
 
-## <a name="add-the-person-entity-type-to-the-data-model"></a>Hinzufügen des Entitätstyps „Person“ zum Datenmodell
+## <a name="add-person-to-the-model"></a>Hinzuzufügen von „Person“ zum Modell
 
 Fügen Sie den Entitätstyp „Person“ zur Datei *SchoolContext.cs* hinzu. Die neuen Zeilen werden hervorgehoben.
 
@@ -82,7 +89,7 @@ Fügen Sie den Entitätstyp „Person“ zur Datei *SchoolContext.cs* hinzu. Die
 
 Das ist alles, was Entity Framework für die Konfiguration der „Tabelle pro Hierarchie“-Vererbung benötigt. Sie werden feststellen, dass die Datenbank nach ihrer Aktualisierung statt der Tabellen „Student“ und „Instructor“ eine Person-Tabelle enthält.
 
-## <a name="create-and-customize-migration-code"></a>Erstellen und Anpassen des Migrationscodes
+## <a name="create-and-update-migrations"></a>Erstellen und Aktualisieren von Migrationen
 
 Speichern Sie Ihre Änderungen, und erstellen Sie das Projekt. Öffnen Sie anschließend das Befehlsfenster im Projektordner, und geben Sie folgenden Befehl ein:
 
@@ -129,7 +136,7 @@ dotnet ef database update
 > [!NOTE]
 > Es ist möglich, dass andere Fehler auftreten, wenn Schemaänderungen in einer Datenbank durchgeführt werden, die vorhandene Daten enthält. Wenn Migrationsfehler auftreten, die Sie nicht beheben können, können Sie entweder den Datenbanknamen in der Verbindungszeichenfolge ändern oder die Datenbank löschen. In einer neuen Datenbank gibt es keine zu migrierenden Daten, und der Befehl „update-database“ wird wahrscheinlich ohne Fehler ausgeführt. Verwenden Sie zum Löschen der Datenbank SSOX, oder führen Sie den CLI-Befehl `database drop` aus.
 
-## <a name="test-with-inheritance-implemented"></a>Testen mit implementierter Vererbung
+## <a name="test-the-implementation"></a>Testen der Implementierung
 
 Führen Sie die App aus, und testen Sie verschiedene Seiten. Alles funktioniert genauso wie vorher.
 
@@ -141,12 +148,26 @@ Klicken Sie mit der rechten Maustaste auf die Tabelle „Person“, und klicken 
 
 ![Person-Tabelle im SSOX: Tabellendaten](inheritance/_static/ssox-person-data.png)
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie haben die „Tabelle pro Hierarchie“-Vererbung für die Klassen `Person`, `Student` und `Instructor` implementiert. Weitere Informationen zur Vererbung in Entity Framework Core finden Sie unter [Vererbung](/ef/core/modeling/inheritance). Im nächsten Tutorial erfahren Sie, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-> [!div class="step-by-step"]
-> [Zurück](concurrency.md)
-> [Weiter](advanced.md)
+Weitere Informationen zur Vererbung in Entity Framework Core finden Sie unter [Vererbung](/ef/core/modeling/inheritance).
+
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Vererbung wurde der Datenbank zugeordnet
+> * Klasse „Person“ wurde erstellt
+> * „Instructor“ und „Student“ wurden aktualisiert
+> * „Person“ wurde dem Modell hinzugefügt
+> * Migrationen wurden erstellt und aktualisiert
+> * Die Implementierung wurde getestet
+
+Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+> [!div class="nextstepaction"]
+> [Weiterführende Themen](advanced.md)

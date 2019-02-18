@@ -1,26 +1,19 @@
 ---
-title: 'ASP.NET Core MVC mit EF Core: Sortieren, Filtern, Paging (3 von 10)'
+title: 'Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core'
+description: In diesem Tutorial fügen Sie die Funktionen zum Sortieren, Filtern und Paging zur Studentenindexseite hinzu. Sie werden auch eine Seite erstellen, auf der einfache Gruppierungsvorgänge ausgeführt werden.
 author: rick-anderson
-description: In diesem Tutorial fügen Sie mit ASP.NET Core und Entity Framework Core die Funktionen Sortieren, Filtern und Paging für das Paging hinzu.
 ms.author: tdykstra
-ms.date: 03/15/2017
+ms.date: 02/04/2019
+ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 1f80faf0e36332c28e8337ddc331cc8b4c4970d7
-ms.sourcegitcommit: b8a2f14bf8dd346d7592977642b610bbcb0b0757
+ms.openlocfilehash: 51b6b08d2410652f93427371aec299eb4c8789f1
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38193948"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103058"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---sort-filter-paging---3-of-10"></a>ASP.NET Core MVC mit EF Core: Sortieren, Filtern, Paging (3 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core
 
 Im vorherigen Tutorial haben Sie eine Reihe von Webseiten für grundlegende CRUD-Vorgänge für Studentenentitäten implementiert. In diesem Tutorial fügen Sie die Funktionen zum Sortieren, Filtern und Paging zur Studentenindexseite hinzu. Sie werden auch eine Seite erstellen, auf der einfache Gruppierungsvorgänge ausgeführt werden.
 
@@ -28,7 +21,21 @@ Die folgende Abbildung zeigt, wie die Seite am Ende aussehen wird. Die Spaltenü
 
 ![Indexseite „Studenten“](sort-filter-page/_static/paging.png)
 
-## <a name="add-column-sort-links-to-the-students-index-page"></a>Hinzufügen von Spaltensortierungslinks zur Studentenindexseite
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Hinzufügen von Spaltensortierungslinks
+> * Hinzufügen eines Suchfelds
+> * Hinzufügen von Paging zum „Students“-Index
+> * Hinzufügen von Paging zur „Index“-Methode
+> * Hinzufügen von Paginglinks
+> * Erstellen einer Infoseite
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit EF Core − Erweitert (2 von 10)](crud.md)
+
+## <a name="add-column-sort-links"></a>Hinzufügen von Spaltensortierungslinks
 
 Ändern Sie die `Index`-Methode des Studentencontrollers, und fügen Sie Code zur Studentenindexansicht hinzu, um der Indexseite die Sortierfunktion hinzuzufügen.
 
@@ -71,7 +78,7 @@ Führen Sie die Anwendung aus, wählen Sie die Registerkarte **Students** (Stude
 
 ![Indexseite „Studenten“ in Reihenfolge der Namen](sort-filter-page/_static/name-order.png)
 
-## <a name="add-a-search-box-to-the-students-index-page"></a>Hinzufügen eines Suchfelds zur Studentenindexseite
+## <a name="add-a-search-box"></a>Hinzufügen eines Suchfelds
 
 Wenn Sie eine Filterfunktion zur Studentenindexseite hinzufügen möchten, dann fügen Sie ein Textfeld und die Schaltfläche „Senden“ zur Ansicht hinzu, und führen Sie die entsprechenden Änderungen in der `Index`-Methode aus. Sie können eine Zeichenfolge in das Textfeld für Vor- und Nachnamen eingeben, um eine Suche zu starten.
 
@@ -86,7 +93,7 @@ Sie haben einen `searchString`-Parameter zur `Index`-Methode hinzugefügt. Der Z
 > [!NOTE]
 > Wenn Sie die `Where`-Methode auf einem `IQueryable`-Objekt aufrufen, wird der Filter auf dem Server verarbeitet. In einigen Szenarios rufen Sie möglicherweise die `Where`-Methode als Erweiterungsmethode für eine speicherinterne Sammlung auf. (Angenommen, Sie ändern den Verweis auf `_context.Students`. Dann wird nicht mehr auf ein `DbSet`-EF, sondern auf eine Repository-Methode verwiesen, die eine `IEnumerable`-Sammlung zurückgibt.) Das Ergebnis wäre normalerweise identisch, aber in einigen Fällen kann es unterschiedlich ausfallen.
 >
->Die .NET Framework-Implementierung der `Contains`-Methode führt beispielsweise standardmäßig einen Vergleich unter Beachtung der Groß-/Kleinschreibung durch. Aber in SQL Server wird dies durch die Sortierungseinstellung der SQL Server-Instanz bestimmt. Diese Einstellung berücksichtigt die Groß-/Kleinschreibung standardmäßig nicht. Sie können die `ToUpper`-Methode aufrufen, damit der Test die Groß-/Kleinschreibung explizit nicht berücksichtigt: *Where(s => s.LastName.ToUpper(). Contains(searchString.ToUpper())*. Das würde sicherstellen, dass die Ergebnisse gleich bleiben, wenn Sie den Code später ändern, um ein Repository zu verwenden, das eine `IEnumerable`-Sammlung anstelle eines `IQueryable`-Objekts zurückgibt. (Beim Aufrufen der `Contains`-Methode einer `IEnumerable`-Sammlung erhalten Sie die .NET Framework-Implementierung. Wenn Sie sie auf einem `IQueryable`-Objekt aufrufen, erhalten Sie die Implementierung des Datenanbieters.) Es gibt jedoch eine Leistungseinbuße für diese Lösung. Der `ToUpper`-Code würde eine Funktion in die WHERE-Klausel der TSQL SELECT-Anweisung setzen. Die würde verhindern, dass der Optimierer einen Index verwendet. Da SQL die Groß-/Kleinschreibung hauptsächlich nicht berücksichtigt, wird empfohlen, den `ToUpper`-Code zu vermeiden, bis die Migration zu einem Datenspeicher erfolgt ist, der die Groß-/Kleinschreibung beachtet.
+>Die .NET Framework-Implementierung der `Contains`-Methode führt beispielsweise standardmäßig einen Vergleich unter Beachtung der Groß-/Kleinschreibung durch. Aber in SQL Server wird dies durch die Sortierungseinstellung der SQL Server-Instanz bestimmt. Diese Einstellung berücksichtigt die Groß-/Kleinschreibung standardmäßig nicht. Sie könnten die `ToUpper`-Methode aufrufen, wenn die Groß-/Kleinschreibung bei der Durchführung des Tests explizit nicht beachtet werden soll:  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*. Das würde sicherstellen, dass die Ergebnisse gleich bleiben, wenn Sie den Code später ändern, um ein Repository zu verwenden, das eine `IEnumerable`-Sammlung anstelle eines `IQueryable`-Objekts zurückgibt. (Beim Aufrufen der `Contains`-Methode einer `IEnumerable`-Sammlung erhalten Sie die .NET Framework-Implementierung. Wenn Sie sie auf einem `IQueryable`-Objekt aufrufen, erhalten Sie die Implementierung des Datenanbieters.) Es gibt jedoch eine Leistungseinbuße für diese Lösung. Der `ToUpper`-Code würde eine Funktion in die WHERE-Klausel der TSQL SELECT-Anweisung setzen. Die würde verhindern, dass der Optimierer einen Index verwendet. Da SQL die Groß-/Kleinschreibung hauptsächlich nicht berücksichtigt, wird empfohlen, den `ToUpper`-Code zu vermeiden, bis die Migration zu einem Datenspeicher erfolgt ist, der die Groß-/Kleinschreibung beachtet.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Hinzufügen eines Suchfelds zur Studentenindexansicht
 
@@ -110,7 +117,7 @@ Wenn Sie diese Seite kennzeichnen, erhalten Sie die gefilterte Liste bei der Ver
 
 Wenn Sie in dieser Phase auf einen Sortierlink in einer Spaltenüberschrift klicken, verlieren Sie den Filterwert, den Sie im Feld neben **Suchen** eingegeben haben. Dies soll im nächsten Abschnitt behoben werden.
 
-## <a name="add-paging-functionality-to-the-students-index-page"></a>Hinzufügen von Pagingfunktionen der Studentenindexseite
+## <a name="add-paging-to-students-index"></a>Hinzufügen von Paging zum „Students“-Index
 
 Um die Pagingfunktionen zur Studentenindexseite hinzuzufügen, erstellen Sie eine `PaginatedList`-Klasse, die `Skip`- und `Take`-Anweisungen zum Filtern von Daten auf dem Server verwendet, anstatt immer alle Zeilen der Tabelle abzurufen. Dann nehmen Sie zusätzliche Änderungen der `Index`-Methode vor, und fügen Pagingschaltflächen zur `Index`-Ansicht hinzu. Die folgende Abbildung zeigt die Pagingschaltflächen.
 
@@ -124,7 +131,7 @@ Die `CreateAsync`-Methode in diesem Code akzeptiert die Seitengröße und die Se
 
 Ein `CreateAsync`-Methode wird anstelle eines Konstruktors verwendet, um das `PaginatedList<T>`-Objekt zu erstellen, da die Konstruktoren keinen asynchronen Code ausführen können.
 
-## <a name="add-paging-functionality-to-the-index-method"></a>Fügen Sie Pagingfunktionen zur Indexmethode hinzu
+## <a name="add-paging-to-index-method"></a>Hinzufügen von Paging zur „Index“-Methode
 
 Ersetzen Sie in *StudentsController.cs* die `Index`-Methode mit dem folgenden Code.
 
@@ -167,7 +174,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 Die `PaginatedList.CreateAsync`-Methode nimmt eine Seitenanzahl. Die zwei Fragezeichen stellen den Nullzusammensetzungsoperator dar. Der Nullzusammensetzungsoperator definiert einen Standardwert für einen Nullable-Typ. Der `(page ?? 1)`-Ausdruck bedeutet, dass `page` zurückgegeben wird, wenn dies über einen Wert verfügt, oder 1, wenn `page` gleich 0 (null) ist.
 
-## <a name="add-paging-links-to-the-student-index-view"></a>Hinzufügen eines Paginglinks zur Studentenindexansicht
+## <a name="add-paging-links"></a>Hinzufügen von Paginglinks
 
 Ersetzen Sie in *Views/Students/Index.cshtml* den vorhandenen Code durch den folgenden Code. Die Änderungen werden hervorgehoben.
 
@@ -199,7 +206,7 @@ Führen Sie die Anwendung aus. Wechseln Sie zur Studentenseite.
 
 Klicken Sie auf die Paginglinks in verschiedenen Sortierreihenfolgen, um sicherzustellen, dass die Paging funktioniert. Geben Sie dann eine Suchzeichenfolge ein. Probieren Sie Paging erneut aus, um sicherzustellen, dass sie auch mit Sortier- und Filtervorgängen ordnungsgemäß funktioniert.
 
-## <a name="create-an-about-page-that-shows-student-statistics"></a>Erstellen einer Informationsseite, die Statistiken der Studentendaten anzeigt
+## <a name="create-an-about-page"></a>Erstellen einer Infoseite
 
 Auf der **Infoseite** der Contoso University wird angezeigt, wie viele Studenten sich an welchem Datum angemeldet haben. Das erfordert Gruppieren und einfache Berechnungen dieser Gruppen. Um dies zu erreichen, ist Folgendes erforderlich:
 
@@ -241,16 +248,24 @@ Ersetzen Sie den Code in der *Views/Home/About.cshtml*-Datei durch den folgenden
 
 [!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
 
-Führen Sie die Anwendung aus, und wechseln Sie zur Infoseite. Die Anzahl der Studenten für jedes Anmeldedatum wird in einer Tabelle angezeigt.
+Führen Sie die Anwendung aus, und wechseln Sie zur Infoseite. Die Anzahl der Studenten für die jeweiligen Anmeldedatumswerte wird in einer Tabelle angezeigt.
 
-![Seite „Info“](sort-filter-page/_static/about.png)
+## <a name="get-the-code"></a>Abrufen des Codes
 
-## <a name="summary"></a>Zusammenfassung
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-In diesem Tutorial haben Sie das Sortieren, Filtern, Paging und Gruppieren gelernt. Im nächsten Tutorial lernen Sie, wie Sie mithilfe von Migrationen Datenmodelländerungen verarbeiten.
+## <a name="next-steps"></a>Nächste Schritte
 
-::: moniker-end
+In diesem Tutorial:
 
-> [!div class="step-by-step"]
-> [Zurück](crud.md)
-> [Weiter](migrations.md)
+> [!div class="checklist"]
+> * Spaltensortierungslinks wurden hinzugefügt
+> * Ein Suchfeld wurde hinzugefügt
+> * Paging wurde dem „Students“-Index hinzugefügt
+> * Paging wurde der „Index“-Methode hinzugefügt
+> * Paginglinks wurden hinzugefügt
+> * Infoseite wurde erstellt
+
+Fahren Sie mit dem nächsten Artikel fort, um zu lernen, wie Sie mithilfe von Migrationen Datenmodelländerungen verarbeiten.
+> [!div class="nextstepaction"]
+> [Verarbeiten von Datenmodelländerungen](migrations.md)

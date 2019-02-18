@@ -1,26 +1,19 @@
 ---
-title: ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)
-author: rick-anderson
+title: 'Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core'
 description: In diesem Tutorial lesen Sie verwandte Daten und zeigen sie an – d.h., die Daten, die Entity Framework in Navigationseigenschaften lädt.
+author: rick-anderson
 ms.author: tdykstra
-ms.date: 03/15/2017
+ms.date: 02/05/2019
+ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: a310c9e4b9cec6e2ab2477461f395c9bbd3fa364
-ms.sourcegitcommit: e12f45ddcbe99102a74d4077df27d6c0ebba49c1
+ms.openlocfilehash: 73e225c2cd6d9f88079c54115cccad48f43d7d0c
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/15/2018
-ms.locfileid: "39063285"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103045"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---read-related-data---6-of-10"></a>ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
 Im vorherigen Tutorial haben Sie das Schuldatenmodell abgeschlossen. In diesem Tutorial lesen Sie verwandte Daten und zeigen sie an – d.h., die Daten, die Entity Framework in Navigationseigenschaften lädt.
 
@@ -30,7 +23,19 @@ Die folgenden Abbildungen zeigen die Seiten, mit den Sie arbeiten werden.
 
 ![Indexseite „Dozenten“](read-related-data/_static/instructors-index.png)
 
-## <a name="eager-explicit-and-lazy-loading-of-related-data"></a>Explizites, Eager und Lazy Loading verwandter Daten
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erfahren Sie, wie verwandte Daten geladen werden.
+> * Erstellen Sie eine Seite „Kurse“
+> * Erstellen Sie eine Seite „Instructors“
+> * Erfahren Sie mehr über das explizite Laden
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit Entity Framework Core: Datenmodell (5 von 10)](complex-data-model.md)
+
+## <a name="learn-how-to-load-related-data"></a>Erfahren Sie, wie verwandte Daten geladen werden.
 
 Es gibt mehrere Möglichkeiten, mit denen Software für objektrelationales Mapping (ORM), z.B. Entity Framework, verwandte Daten in die Navigationseigenschaften einer Entität laden kann:
 
@@ -42,7 +47,7 @@ Es gibt mehrere Möglichkeiten, mit denen Software für objektrelationales Mappi
 
   ![Beispiel für separate Abfragen](read-related-data/_static/separate-queries.png)
 
-* Explizites Laden. Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Sie schreiben Code, der die verwandten Daten abruft, wenn erforderlich. So wie im Fall von Eager Loading mit separaten Abfragen führt explizites Laden zu mehreren Abfragen, die an die Datenbank gesendet werden. Der Unterschied liegt darin, dass beim expliziten Laden der Code die zu ladenden Navigationseigenschaften angibt. In Entity Framework Core 1.1 können Sie die `Load`-Methode verwenden, um das explizite Laden auszuführen. Zum Beispiel:
+* Explizites Laden. Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Sie schreiben Code, der die verwandten Daten abruft, wenn erforderlich. So wie im Fall von Eager Loading mit separaten Abfragen führt explizites Laden zu mehreren Abfragen, die an die Datenbank gesendet werden. Der Unterschied liegt darin, dass beim expliziten Laden der Code die zu ladenden Navigationseigenschaften angibt. In Entity Framework Core 1.1 können Sie die `Load`-Methode verwenden, um das explizite Laden auszuführen. Beispiel:
 
   ![Beispiel für explizites Laden](read-related-data/_static/explicit-loading.png)
 
@@ -54,7 +59,7 @@ Wenn Sie wissen, dass Sie für jede abgerufene Entität verwandte Daten benötig
 
 Andererseits sind separate Abfragen in einigen Szenarios jedoch effizienter. Eager Loading aller verwandter Daten in einer Abfrage könnte eine sehr komplexe Verknüpfung generieren, die der SQL Server nicht effizient verarbeiten kann. Oder angenommen, Sie benötigen nur Zugriff auf Navigationseigenschaften einer Entität, um auf eine Teilmenge der Reihe von Entitäten, die Sie verarbeiten, zuzugreifen. In diesem Fall können separate Abfragen möglicherweise besser ausgeführt werden, da Eager Loading aller Elemente im Vorfeld mehr Daten als benötigt abrufen würde. Wenn die Leistung wichtig ist, empfiehlt es sich, die Leistung mit beiden Möglichkeiten zu testen, um die beste Wahl treffen zu können.
 
-## <a name="create-a-courses-page-that-displays-department-name"></a>Erstellen einer Kursseite, die Abteilungsnamen anzeigt
+## <a name="create-a-courses-page"></a>Erstellen Sie eine Seite „Kurse“
 
 Die Kursentität enthält eine Navigationseigenschaft, die die Abteilungsentität der Abteilung enthält, der der Kurs zugewiesen ist. Sie benötigen die Namenseigenschaft der Abteilungsentität in der `Course.Department`-Navigationseigenschaft, um den Namen der zugewiesenen Abteilung in einer Kursliste anzuzeigen.
 
@@ -88,7 +93,7 @@ Führen Sie die Anwendung aus, und wählen Sie die Registerkarte **Kurse** aus, 
 
 ![Indexseite „Kurse“](read-related-data/_static/courses-index.png)
 
-## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a>Erstellen einer Dozentenseite, die Kurse und Registrierungen anzeigt
+## <a name="create-an-instructors-page"></a>Erstellen Sie eine Seite „Instructors“
 
 In diesem Abschnitt müssen Sie einen Controller und eine Ansicht für die Instructor-Entität erstellen, um die Dozentenseite anzuzeigen:
 
@@ -226,7 +231,7 @@ Aktualisieren Sie die Seite erneut. Wählen Sie einen Dozenten aus. Wählen Sie 
 
 ![Indexseite „Dozenten“, Dozent und Kurs ausgewählt](read-related-data/_static/instructors-index.png)
 
-## <a name="explicit-loading"></a>Explizites Laden
+## <a name="about-explicit-loading"></a>Informationen zum expliziten Laden
 
 Wenn Sie die Liste der Dozenten aus *InstructorsController.cs* abrufen, haben Sie Eager Loading für die `CourseAssignments`-Navigationseigenschaft angegeben.
 
@@ -238,12 +243,20 @@ Der neue Code löscht die *ThenInclude*-Methodenaufrufe für Registrierungsdaten
 
 Führen Sie die Anwendung aus, navigieren Sie zur Dozentenindexseite, und Sie werden keinen Unterschied in der Anzeige auf der Seite bemerken, obwohl Sie die Abrufart für Daten geändert haben.
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie haben Eager Loading jetzt mit einer und mehreren Abfragen verwendet, um verwandte Daten in die Navigationseigenschaften zu lesen. Das nächste Tutorial zeigt die Aktualisierung verwandter Daten.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="next-steps"></a>Nächste Schritte
 
->[!div class="step-by-step"]
->[Zurück](complex-data-model.md)
->[Weiter](update-related-data.md)
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Haben Sie gelernt, wie verwandte Daten geladen werden
+> * Wurde eine Seite „Kurse“ erstellt
+> * Wurde eine Seite „Instructors“ erstellt
+> * Haben Sie mehr über das explizite Laden erfahren
+
+Wechseln Sie zum nächsten Artikel, um mehr über das Aktualisieren zugehöriger Daten zu erfahren.
+> [!div class="nextstepaction"]
+> [Aktualisieren relevanter Daten](update-related-data.md)

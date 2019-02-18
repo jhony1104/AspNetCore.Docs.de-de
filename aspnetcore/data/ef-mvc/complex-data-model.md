@@ -1,27 +1,20 @@
 ---
-title: 'ASP.NET Core MVC mit Entity Framework Core: Datenmodell (5 von 10)'
-author: rick-anderson
+title: 'Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen hinzu und passen das Datenmodell an, indem Sie Regeln zur Formatierung, Validierung und Zuordnung angeben.
+author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/05/2019
+ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 87212edbfe34af6de938cf95314501e56e64a8be
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: c08fd6ff7c19c63161135b4c87609f6edd3edb80
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50091040"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103123"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---data-model---5-of-10"></a>ASP.NET Core MVC mit Entity Framework Core: Datenmodell (5 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core
 
 In den vorherigen Tutorials haben Sie mit einem einfachen Datenmodell gearbeitet, das aus drei Entitäten bestand. In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen hinzu und passen das Datenmodell an, indem Sie die Regeln zur Formatierung, Validierung und Datenbankzuordnung angeben.
 
@@ -29,7 +22,27 @@ Wenn Sie dies erledigt haben, bilden die Entitätsklassen ein vollständiges Dat
 
 ![Entitätsdiagramm](complex-data-model/_static/diagram.png)
 
-## <a name="customize-the-data-model-by-using-attributes"></a>Anpassen des Datenmodells mithilfe von Attributen
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Anpassen des Datenmodells
+> * Ändern der Entität „Student“
+> * Erstellen der Entität „Instructor“
+> * Erstellen der Entität „OfficeAssignment“
+> * Ändern der Entität „Course“
+> * Erstellen der Entität „Department“
+> * Ändern der Entität „Enrollment“
+> * Aktualisieren des Datenbankkontexts
+> * Füllen der Datenbank mit Testdaten
+> * Hinzufügen einer Migration
+> * Ändern der Verbindungszeichenfolge
+> * Aktualisieren der Datenbank
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit Entity Framework Core (EF Core): Migrationen (4 von 10)](migrations.md)
+
+## <a name="customize-the-data-model"></a>Anpassen des Datenmodells
 
 In diesem Abschnitt wird das Anpassen des Datenmodells mithilfe von Attributen erläutert, die Regeln zur Formatierung, Validierung und Datenbankzuordnung angeben. In den folgenden Abschnitten erstellen Sie dann das vollständige Datenmodell „School“, indem Sie Attribute zu den bereits erstellten Klassen hinzufügen und neue Klassen für die verbleibenden Entitätstypen im Modell erstellen.
 
@@ -97,9 +110,7 @@ Der `migrations add`-Befehl gibt eine Warnung aus, dass es zu Datenverlust komme
 
 Der Zeitstempel, der dem Namen der Migrationsdatei vorangestellt ist, wird von Entity Framework verwendet, um die Migrationen zu sortieren. Sie können mehrere Migrationen erstellen, bevor Sie den Befehl „update-database“ ausführen. Anschließend werden alle Migrationen in der Reihenfolge angewendet, in der Sie erstellt wurden.
 
-Führen Sie die App aus, klicken Sie auf die Registerkarte **Studenten** und dann auf **Neu erstellen**, und geben Sie einen beliebigen Namen ein, der länger als 50 Zeichen ist. Wenn Sie auf **Erstellen** klicken, zeigt die clientseitige Validierung eine Fehlermeldung an.
-
-![Indexseite „Studenten“, die Fehler für die Zeichenfolgenlänge anzeigt](complex-data-model/_static/string-length-errors.png)
+Führen Sie die App aus, wählen Sie die Registerkarte **Students** aus, klicken Sie dann auf **Neu erstellen**, und geben Sie einen beliebigen Namen ein, der länger als 50 Zeichen ist. Die Anwendung sollte Sie daran hindern. 
 
 ### <a name="the-column-attribute"></a>Das Column-Attribut
 
@@ -132,7 +143,7 @@ Bevor Sie die ersten beiden Migrationen angewendet haben, wiesen die Namensspalt
 > [!Note]
 > Wenn Sie vor dem Erstellen aller Entitätsklassen in den folgenden Abschnitten versuchen, zu kompilieren, werden möglicherweise Compilerfehler angezeigt.
 
-## <a name="final-changes-to-the-student-entity"></a>Letzte Änderungen an der Entität „Student“
+## <a name="changes-to-student-entity"></a>Ändern der Entität „Student“
 
 ![Entität „Student“](complex-data-model/_static/student-entity.png)
 
@@ -160,9 +171,9 @@ Das `Display`-Attribut gibt an, dass die Beschriftung der Textfelder in jeder In
 
 Bei `FullName` handelt es sich um eine berechnete Eigenschaft, die einen Wert zurückgibt, der durch das Verketten von zwei weiteren Eigenschaften erstellt wird. Daher verfügt diese nur über einen get-Accessor, und keine `FullName`-Spalte wird in der Datenbank generiert.
 
-## <a name="create-the-instructor-entity"></a>Erstellen der Entität „Instructor“
+## <a name="create-instructor-entity"></a>Erstellen der Entität „Instructor“
 
-![Entität „Instructor“](complex-data-model/_static/instructor-entity.png)
+![Instructor-Entität](complex-data-model/_static/instructor-entity.png)
 
 Erstellen Sie *Models/Instructor.cs*, indem Sie den Vorlagencode durch folgenden Code ersetzen:
 
@@ -196,7 +207,7 @@ Die Geschäftsregeln der Contoso University besagen, dass ein Dozent maximal ein
 public OfficeAssignment OfficeAssignment { get; set; }
 ```
 
-## <a name="create-the-officeassignment-entity"></a>Erstellen der Entität „OfficeAssignment“
+## <a name="create-officeassignment-entity"></a>Erstellen der Entität „OfficeAssignment“
 
 ![Entität „OfficeAssignment“](complex-data-model/_static/officeassignment-entity.png)
 
@@ -223,7 +234,7 @@ Die Entität „Instructor“ verfügt über eine auf NULL festlegbare `OfficeAs
 
 Sie können ein `[Required]`-Attribut zur Navigationseigenschaft „Instructor“ hinzufügen, um anzugeben, dass ein zugehöriger Dozent vorhanden sein muss. Dies ist jedoch nicht notwendig, da der Fremdschlüssel `InstructorID` (bei dem es sich ebenfalls um den Schlüssel für diese Tabelle handelt) nicht auf NULL festlegbar ist.
 
-## <a name="modify-the-course-entity"></a>Ändern der Entität „Course“
+## <a name="modify-course-entity"></a>Ändern der Entität „Course“
 
 ![Entität „Course“](complex-data-model/_static/course-entity.png)
 
@@ -272,7 +283,7 @@ Ein Kurs kann von mehreren Dozenten unterrichtet werden, darum stellt die `Cours
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
 ```
 
-## <a name="create-the-department-entity"></a>Erstellen der Entität „Department“
+## <a name="create-department-entity"></a>Erstellen der Entität „Department“
 
 ![Entität „Department“](complex-data-model/_static/department-entity.png)
 
@@ -318,7 +329,7 @@ public ICollection<Course> Courses { get; set; }
 >    .OnDelete(DeleteBehavior.Restrict)
 > ```
 
-## <a name="modify-the-enrollment-entity"></a>Ändern der Entität „Enrollment“
+## <a name="modify-enrollment-entity"></a>Ändern der Entität „Enrollment“
 
 ![Entität „Enrollment“](complex-data-model/_static/enrollment-entity.png)
 
@@ -344,7 +355,7 @@ public int StudentID { get; set; }
 public Student Student { get; set; }
 ```
 
-## <a name="many-to-many-relationships"></a>n:n-Beziehungen
+## <a name="many-to-many-relationships"></a>m:n-Beziehungen
 
 Es besteht eine m:n-Beziehung zwischen den Entitäten „Student“ und „Course“, und die Entitätsfunktionen „Enrollment“ liegen als m:n-Jointabelle *mit Nutzlast* in der Datenbank vor. „Mit Nutzlast“ bedeutet, dass die Tabelle „Enrollment“ außer den Fremdschlüsseln für die verknüpften Tabellen (in diesem Fall ein Primärschlüssel und eine Grade-Eigenschaft) zusätzliche Daten enthält.
 
@@ -384,7 +395,7 @@ Fügen Sie folgenden hervorgehobenen Code zur Datei *Data/SchoolContext.cs* hinz
 
 Durch diesen Code werden neue Entitäten hinzugefügt, und der zusammengesetzte Primärschlüssel der Entität „CourseAssignment“ wird konfiguriert.
 
-## <a name="fluent-api-alternative-to-attributes"></a>Fluent-API-Alternativen für Attribute
+## <a name="about-a-fluent-api-alternative"></a>Informationen zu einer Fluent-API-Alternative
 
 Der Code in der `OnModelCreating`-Methode der `DbContext`-Klasse verwendet die *Fluent-API* zum Konfigurieren des Verhaltens von Entity Framework. Die API wird als „Fluent“ bezeichnet, da sie häufig durch das Verketten mehrerer Methodenaufrufe zu einer einzigen Anweisung verwendet wird. Ein Beispiel hierfür finden Sie in der [EF Core documentation (Dokumentation zu Entity Framework)](/ef/core/modeling/#methods-of-configuration):
 
@@ -411,7 +422,7 @@ Die folgende Abbildung stellt das Diagramm dar, das von Entity Framework Power T
 
 Neben den Linien für 1:n-Beziehungen (1:\*) werden die Linien für „Eins-bis-Null-oder Eins“-Beziehungen (1:0..1) zwischen den Entitäten „Instructor“ und „OfficeAssignment“ und die Linien für 0..1:n-Beziehungen (0..1:*) zwischen den Entitäten „Instructor“ und „Department“ dargestellt.
 
-## <a name="seed-the-database-with-test-data"></a>Ausführen eines Seedings für die Datenbank mit Testdaten
+## <a name="seed-database-with-test-data"></a>Füllen der Datenbank mit Testdaten
 
 Ersetzen Sie den Code in der Datei *Data/DbInitializer.cs* durch folgenden Code, um Startwertdaten für die neu erstellten Entitäten bereitzustellen.
 
@@ -456,7 +467,7 @@ In einer Produktionsanwendung würden Sie Code oder Skripts schreiben, um Depart
 
 Speichern Sie Ihre Änderungen, und erstellen Sie das Projekt.
 
-## <a name="change-the-connection-string-and-update-the-database"></a>Ändern der Verbindungszeichenfolge und Aktualisieren der Datenbank
+## <a name="change-the-connection-string"></a>Ändern der Verbindungszeichenfolge
 
 Sie haben nun neuen Code zur `DbInitializer`-Klasse hinzugefügt, der Startwertdaten für neue Entitäten zu einer leeren Datenbank hinzufügt. Ändern Sie den Namen der Datenbank in der Verbindungszeichenfolge in *appsetting.json* in „ContosoUniversity3“ oder in einen anderen Namen, der auf Ihrem Computer bisher nicht verwendet wird, damit Entity Framework eine neue, leere Datenbank erstellt.
 
@@ -474,6 +485,8 @@ Speichern Sie Ihre Änderungen an *appsettings.json*.
 > ```console
 > dotnet ef database drop
 > ```
+
+## <a name="update-the-database"></a>Aktualisieren der Datenbank
 
 Nachdem Sie den Datenbanknamen geändert oder die Datenbank gelöscht haben, führen Sie den Befehl `database update` im Befehlsfenster aus, um die Migrationen auszuführen.
 
@@ -493,12 +506,28 @@ Klicken Sie mit der rechten Maustaste auf die Tabelle **CourseAssignment**, und 
 
 ![CourseAssignment-Daten im SSOX](complex-data-model/_static/ssox-ci-data.png)
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie besitzen nun ein komplexeres Datenmodell und eine zugehörige Datenbank. Im folgenden Tutorial erfahren Sie mehr über das Zugreifen auf zugehörige Daten.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="next-steps"></a>Nächste Schritte
 
-> [!div class="step-by-step"]
-> [Zurück](migrations.md)
-> [Weiter](read-related-data.md)
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Datenmodell wurde angepasst
+> * Entität „Student“ wurde geändert
+> * Entität „Instructor“ wurde erstellt
+> * Entität „OfficeAssignment“ wurde erstellt
+> * Entität „Course“ wurde geändert
+> * Entität „Department“ wurde erstellt
+> * Entität „Enrollment“ wurde geändert
+> * Datenbankkontext wurde aktualisiert
+> * Datenbank wurde mit Testdaten gefüllt
+> * Migration wurde hinzugefügt
+> * Verbindungszeichenfolge wurde geändert
+> * Datenbank wurde aktualisiert
+
+Wechseln Sie zum nächsten Artikel, um mehr über den Zugriff auf zugehörige Daten zu erfahren.
+> [!div class="nextstepaction"]
+> [ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)](read-related-data.md)

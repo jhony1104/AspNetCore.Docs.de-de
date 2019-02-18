@@ -1,38 +1,44 @@
 ---
-title: 'ASP.NET Core MVC mit Entity Framework Core: Tutorial 1 von 10'
+title: 'Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App'
+description: Dies ist die erste Tutorial in der Reihe, in dem die Erstellung der Beispielanwendung der Contoso University von Grund auf erläutert wird.
 author: rick-anderson
-description: ''
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/06/2019
+ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 1191632555dc9331f815c1bfb1f313459824754a
-ms.sourcegitcommit: 68a3081dd175d6518d1bfa31b4712bd8a2dd3864
+ms.openlocfilehash: f7b557c8e560393ae886c46fad95c48ccbcc65b4
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/18/2018
-ms.locfileid: "53577902"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56102967"
 ---
-# <a name="aspnet-core-mvc-with-entity-framework-core---tutorial-1-of-10"></a>ASP.NET Core MVC mit Entity Framework Core: Tutorial 1 von 10
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
-Die Beispielwebanwendung der Contoso University veranschaulicht, wie mit Entity Framework Core 2.0 (EF Core 2.0) und Visual Studio 2017 ASP.NET Core MVC-Webanwendungen erstellt werden.
+Die Beispielwebanwendung der Contoso University veranschaulicht, wie mit Entity Framework Core 2.2 (EF Core 2.0) und Visual Studio 2017 ASP.NET Core MVC-Webanwendungen erstellt werden.
 
 Bei der Beispiel-App handelt es sich um eine Website für die fiktive Contoso University. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten. Dies ist die erste Tutorial in der Reihe, in dem die Erstellung der Beispielanwendung der Contoso University von Grund auf erläutert wird.
-
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 Entity Framework Core 2.0 ist die neuste Version von Entity Framework, die allerdings noch nicht alle Features von Entity Framework 6.x enthält. Weitere Informationen zum Auswählen zwischen EF 6.x und EF Core finden Sie unter [Vergleichen von EF Core und EF6.x](/ef/efcore-and-ef6/). Wenn Sie sich für EF 6.x entscheiden, erhalten Sie weitere Informationen in der [Vorgängerversion dieser Tutorialreihe](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application).
 
 > [!NOTE]
 > Weitere Informationen zur ASP.NET Core 1.1-Version dieses Tutorials finden Sie im [PDF-Format in der VS 2017 Update 2-Version dieses Tutorials](https://webpifeed.blob.core.windows.net/webpifeed/Partners/efmvc1.1.pdf).
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erstellen Sie eine ASP.NET Core-MVC-Web-App
+> * Einrichten des Websitestils
+> * Erfahren Sie mehr über EF Core-NuGet-Pakete
+> * Erstellen des Datenmodells
+> * Erstellen des Datenbankkontexts
+> * Registrieren Sie den SchoolContext
+> * Initialisieren Sie die Datenbank mit Testdaten
+> * Erstellen Sie Controller und Ansichten
+> * Zeigen Sie die Datenbank an
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
@@ -45,7 +51,7 @@ Wenn Sie auf ein Problem stoßen, das Sie nicht lösen können, sollten Sie vers
 > [!TIP]
 > Diese Reihe besteht aus 10 Tutorials, die aufeinander aufbauen. Sie sollten jedes Mal, wenn Sie erfolgreich ein Tutorial abgeschlossen haben, eine Kopie des Projekts erstellen. Wenn Sie dann auf Probleme stoßen, können Sie zurück zum vorherigen Tutorial wechseln und müssen nicht wieder ganz von vorne beginnen.
 
-## <a name="the-contoso-university-web-application"></a>Die Webanwendung der Contoso University
+## <a name="contoso-university-web-app"></a>Web-App der Contoso University
 
 Bei der Anwendung, die Sie mithilfe dieser Tutorials erstellen, handelt es sich um eine einfache Universitätswebsite.
 
@@ -57,7 +63,7 @@ Benutzer können Informationen zu den Studenten, Kursen und Dozenten abrufen. Na
 
 Der Benutzeroberflächenstil dieser Website orientiert sich an den integrierten Vorlagen, sodass Sie mit dieses Tutorial hauptsächlich auf die Verwendung von Entity Framework konzentriert.
 
-## <a name="create-an-aspnet-core-mvc-web-application"></a>Erstellen einer ASP.NET Core-MVC-Webanwendung
+## <a name="create-aspnet-core-mvc-web-app"></a>Erstellen Sie eine ASP.NET Core-MVC-Web-App
 
 Öffnen Sie Visual Studio, und erstellen Sie ein neues ASP.NET Core C#-Webprojekt mit dem Namen „ContosoUniversity“.
 
@@ -69,19 +75,19 @@ Der Benutzeroberflächenstil dieser Website orientiert sich an den integrierten 
 
 * Geben Sie **ContosoUniversity** als Name ein, und klicken Sie auf **OK**.
 
-  ![Dialogfeld "Neues Projekt"](intro/_static/new-project.png)
+  ![Dialogfeld "Neues Projekt"](intro/_static/new-project2.png)
 
 * Warten Sie, bis das Dialogfeld **Neue ASP.NET Core-Webanwendung (.NET Core)** angezeigt wird.
 
-* Wählen Sie unter **ASP.NET Core 2.0** die Vorlage **Webanwendung (Model-View-Controller)** aus.
+  ![Dialogfeld „Neues ASP.NET Core-Projekt“](intro/_static/new-aspnet2.png)
 
-  **Hinweis**: Für dieses Tutorial ist ASP.NET Core 2.0 und EF Core 2.0 oder höher erforderlich. Vergewissern Sie sich, dass nicht **ASP.NET Core 1.1.** ausgewählt ist.
+* Wählen Sie unter **ASP.NET Core 2.2** die Vorlage **Webanwendung (Model View Controller)** aus.
+
+  **Hinweis**: Dieses Tutorial setzt ASP.NET Core 2.2 und EF Core 2.0 oder höher voraus.
 
 * Stellen Sie sicher, dass **Authentifizierung** auf **Keine Authentifizierung** festgelegt ist.
 
 * Klicken Sie auf **OK**.
-
-  ![Dialogfeld „Neues ASP.NET Core-Projekt“](intro/_static/new-aspnet.png)
 
 ## <a name="set-up-the-site-style"></a>Einrichten des Websitestils
 
@@ -91,11 +97,11 @@ Sie können das Websitemenü, das Layout und die Startseite über einige Änderu
 
 * Ändern Sie jedes „ContosoUniversity“ in „Contoso University“. Diese Begriffskombination kommt dreimal vor.
 
-* Fügen Sie Menüeinträge für **Studenten**, **Kurse**, **Dozenten** und **Abteilungen** hinzu, und löschen Sie den Menüeintrag **Kontakt**.
+* Fügen Sie Menüeinträge für **Informationen**, **Studenten**, **Kurse**, **Dozenten** und **Abteilungen** hinzu, und löschen Sie den Menüeintrag **Datenschutz**.
 
 Die Änderungen werden hervorgehoben.
 
-[!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,30,36-39,48)]
+[!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,32-36,51)]
 
 Ersetzen Sie in der *Views/Home/Index.cshtml*-Datei die Inhalte der Datei durch den folgenden Code. Dadurch ersetzen Sie den Text zu ASP.NET und MVC durch Text zu dieser Anwendung:
 
@@ -105,7 +111,7 @@ Drücken Sie STRG+F5, um das Projekt auszuführen, oder wählen Sie aus dem Men�
 
 ![Contoso University-Startseite](intro/_static/home-page.png)
 
-## <a name="entity-framework-core-nuget-packages"></a>NuGet-Pakete für Entity Framework Core
+## <a name="about-ef-core-nuget-packages"></a>Informationen zu EF Core-NuGet-Paketen
 
 Installieren Sie den Datenbankanbieter, der verwendet werden soll, um einem Projekt EF Core-Unterstützung hinzuzufügen. In diesem Tutorial wird SQL Server verwendet, und das Anbieterpaket lautet [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/). Dieses Paket ist im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten, weshalb Sie nicht auf das Paket verweisen müssen, wenn Ihre App über einen Paketverweis für das Paket `Microsoft.AspNetCore.App` verfügt.
 
@@ -185,7 +191,7 @@ Wenn die Datenbank erstellt wird, erstellt EF Core Tabellen mit Namen, die den `
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_TableNames&highlight=16-21)]
 
-## <a name="register-the-context-with-dependency-injection"></a>Registrieren des Kontexts durch Dependency Injection
+## <a name="register-the-schoolcontext"></a>Registrieren Sie den SchoolContext
 
 ASP.NET Core implementiert standardmäßig [Dependency Injection](../../fundamentals/dependency-injection.md). Dienste wie der EF-Datenbankkontext werden per Dependency Injection beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z.B. Ihre MVC-Controller), werden über Konstruktorparameter bereitgestellt. Nachfolgend in diesem Tutorial wird der Konstruktorcode des Controllers angezeigt, der eine Kontextinstanz abruft.
 
@@ -207,7 +213,7 @@ Fügen Sie `using`-Anweisungen für die Namespaces `ContosoUniversity.Data` und 
 
 Die Verbindungszeichenfolge gibt eine SQL Server-LocalDB-Datenbank an. LocalDB ist eine Basisversion der SQL Server Express-Datenbank-Engine, die zwar zur Anwendungsentwicklung, aber nicht für den Produktionseinsatz bestimmt ist. LocalDB wird bedarfsgesteuert gestartet und im Benutzermodus ausgeführt, sodass keine komplexe Konfiguration anfällt. Standardmäßig erstellt LocalDB *.mdf*-Datenbankdateien im `C:/Users/<user>`-Verzeichnis.
 
-## <a name="add-code-to-initialize-the-database-with-test-data"></a>Hinzufügen von Code zum Initialisieren der Datenbank mithilfe von Testdaten
+## <a name="initialize-db-with-test-data"></a>Initialisieren Sie die Datenbank mit Testdaten
 
 Entity Framework erstellt eine leere Datenbank für Sie. In diesem Abschnitt schreiben Sie eine Methode, die aufgerufen wird, nachdem die Datenbank erstellt wurde, um diese mit Testdaten aufzufüllen.
 
@@ -235,7 +241,7 @@ Es kann sein, dass in älteren Tutorials ähnlicher Code in der `Configure`-Meth
 
 Wenn dann die Anwendung das erste Mal ausgeführt wird, wird die Datenbank erstellt und mit Testdaten aufgefüllt. Wenn Sie Ihr Datenmodell ändern, können Sie die Datenbank löschen, die Seedmethode aktualisieren, und mit einer neuen Datenbank auf die gleiche Weise beginnen. In späteren Tutorials wird ein Update für die Datenbank ausgeführt, wenn das Datenmodell geändert wird, ohne die Datenbank zu löschen und neu zu erstellen.
 
-## <a name="create-a-controller-and-views"></a>Erstellen von einem Controller und Ansichten
+## <a name="create-controller-and-views"></a>Erstellen Sie Controller und Ansichten
 
 Verwenden Sie als nächstes die Gerüstbauengine in Visual Studio, um einen MVC-Controller und Ansichten hinzuzufügen, die EF verwenden, um Daten abzufragen und zu speichern.
 
@@ -252,9 +258,9 @@ Wenn das Dialogfeld **MVC-Abhängigkeiten hinzufügen** angezeigt wird, gehen Si
 
   * Wählen Sie **MVC-Controller mit Ansichten unter Verwendung von Entity Framework** aus.
 
-  * Klicken Sie auf **Hinzufügen**.
+  * Klicken Sie auf **Hinzufügen**. Das Dialogfeld **MVC-Controller mit Ansichten unter Verwendung von Entity Framework hinzufügen** wird angezeigt.
 
-* Im Dialogfeld **Controller hinzufügen**:
+    ![Gerüst „Student“](intro/_static/scaffold-student2.png)
 
   * Wählen Sie unter **Modellklasse** **Student** aus.
 
@@ -263,8 +269,6 @@ Wenn das Dialogfeld **MVC-Abhängigkeiten hinzufügen** angezeigt wird, gehen Si
   * Akzeptieren Sie den Standardnamen **StudentsController**.
 
   * Klicken Sie auf **Hinzufügen**.
-
-  ![Gerüst „Student“](intro/_static/scaffold-student.png)
 
   Wenn Sie auf **Hinzufügen** klicken, erstellt die Visual Studio-Gerüstbauengine eine *StudentsController.cs*-Datei und mehrere Ansichten (*.cshtml*-Dateien), die mit dem Controller zusammenarbeiten.
 
@@ -294,7 +298,7 @@ Klicken Sie auf die Registerkarte „Students“, um die Testdaten abzurufen, di
 
 ![Indexseite „Studenten“](intro/_static/students-index.png)
 
-## <a name="view-the-database"></a>Abrufen der Datenbank
+## <a name="view-the-database"></a>Zeigen Sie die Datenbank an
 
 Nachdem Sie die Anwendung gestartet haben, ruft die `DbInitializer.Initialize`-Methode `EnsureCreated` auf. EF hat festgestellt, dass noch keine Datenbank vorhanden war und hat deshalb eine erstellt. Anschließend hat der restliche `Initialize`-Methodencode die Datenbank mit Daten aufgefüllt. Sie können den **SQL Server-Objekt-Explorer** (SSOX) verwenden, um die Datenbank in Visual Studio abzurufen.
 
@@ -360,11 +364,27 @@ Behalten Sie Folgendes im Hinterkopf, wenn Sie asynchronen Code schreiben, der E
 
 Weitere Informationen zur asynchronen Programmierung in .NET finden Sie unter [Async (Übersicht)](/dotnet/articles/standard/async).
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Sie haben jetzt eine einfache Anwendung erstellt, die Entity Framework Core und SQL Server Express-LocalDB verwenden, um Daten zu speichern und anzuzeigen. Im nächsten Tutorial erfahren Sie, wie Sie grundlegende CRUD-Vorgänge (Create, Read, Update, Delete = Erstellen, Lesen, Aktualisieren, Löschen) ausführen.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="next-steps"></a>Nächste Schritte
 
-> [!div class="step-by-step"]
-> [Nächste](crud.md)
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Haben Sie eine ASP.NET Core-MVC-Web-App erstellt
+> * Einrichten des Websitestils
+> * Haben Sie mehr über EF Core-NuGet-Pakete erfahren
+> * Haben Sie das Datenmodell erstellt
+> * Haben Sie den Datenbankkontext erstellt
+> * Haben Sie den SchoolContext registriert
+> * Haben Sie die Datenbank mit Testdaten initialisiert
+> * Haben Sie Controller und Ansichten erstellt
+> * Haben Sie die Datenbank angezeigt
+
+Im nächsten Tutorial erfahren Sie, wie Sie grundlegende CRUD-Vorgänge (Create, Read, Update, Delete = Erstellen, Lesen, Aktualisieren, Löschen) ausführen.
+
+Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie grundlegende CRUD-Vorgänge (Create, Read, Update, Delete = Erstellen, Lesen, Aktualisieren, Löschen) ausführen.
+> [!div class="nextstepaction"]
+> [Implementieren von grundlegenden CRUD-Funktionen](crud.md)

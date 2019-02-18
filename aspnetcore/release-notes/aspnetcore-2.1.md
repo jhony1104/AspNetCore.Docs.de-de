@@ -4,14 +4,14 @@ author: isaac2004
 description: Informationen zu den neuen Features in ASP.NET Core 2.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/30/2018
+ms.date: 02/13/2019
 uid: aspnetcore-2.1
-ms.openlocfilehash: e16bb874f317b922f3900b540596f6ff38debb2f
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 8299af819f86d3d2371650ce3d87deb817f0feb8
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206834"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248172"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
 
@@ -70,7 +70,7 @@ Darüber hinaus kann die Verwendung von HTTPS mit dem [HTTP Strict Transport Sec
 
 In der Produktion muss HTTPS explizit konfiguriert sein. In Version 2.1 wurde ein Konfigurationsschema für die Konfiguration von HTTPS für Kestrel hinzugefügt. Apps können für folgende Verwendung konfiguriert werden:
 
-* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel web server implementation: Endpoint configuration (Kestrel: Endpunktkonfiguration)](xref:fundamentals/servers/kestrel#endpoint-configuration).
 * Das für HTTPS zu verwendende Zertifikat aus einer Datei auf dem Datenträger oder aus einem Zertifikatspeicher.
 
 ## <a name="gdpr"></a>DSGVO
@@ -131,7 +131,7 @@ Weitere Informationen finden Sie unter [Initiieren von HTTP-Anforderungen](xref:
 
 ## <a name="kestrel-transport-configuration"></a>Kestrel-Transportkonfiguration
 
-Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Transportkonfiguration](xref:fundamentals/servers/kestrel#transport-configuration).
+Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel web server implementation: Transport configuration (Kestrel: Transportkonfiguration)](xref:fundamentals/servers/kestrel#transport-configuration).
 
 ## <a name="generic-host-builder"></a>Generator für generische Hosts
 
@@ -144,7 +144,12 @@ Weitere Informationen finden Sie unter [Generischer .NET-Host](xref:fundamentals
 Die Vorlagen der Single-Page-Webanwendung für Angular, React und React & Redux werden aktualisiert, damit die Standardprojektstrukturen und Buildsysteme für die einzelnen Frameworks verwendet werden können.
 
 Die Angular-Vorlage basiert auf der Angular-CLI, während die React-Vorlagen auf „create-react-app“ basieren.
-Weitere Informationen finden Sie unter [Verwenden der Vorlagen für Einzelseitenanwendungen (SPAs) mit ASP.NET Core](xref:spa/index).
+
+Weitere Informationen finden Sie unter:
+
+* <xref:spa/angular>
+* <xref:spa/react>
+* <xref:spa/react-with-redux>
 
 ## <a name="razor-pages-search-for-razor-assets"></a>Razor Pages-Suche nach Razor-Objekten
 

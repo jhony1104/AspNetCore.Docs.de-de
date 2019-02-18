@@ -1,27 +1,20 @@
 ---
-title: 'ASP.NET Core MVC mit EF Core: Lesen verwandter Daten (7 von 10)'
-author: rick-anderson
+title: 'Tutorial: Aktualisieren verwandter Daten: ASP.NET Core MVC mit EF Core'
 description: Mithilfe dieses Tutorials führen Sie Updates für verwandte Daten aus, indem Sie Felder mit Fremdschlüsseln sowie Navigationseigenschaften aktualisieren.
+author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/05/2019
+ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 37985c945f2e4b15cfcefb0c126c3209e0bdeac4
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: ac94f2e2876c2d8d571a451e4641787ffe37b3d2
+ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090731"
+ms.lasthandoff: 02/12/2019
+ms.locfileid: "56103032"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---update-related-data---7-of-10"></a>ASP.NET Core MVC mit EF Core: Lesen verwandter Daten (7 von 10)
-
-[!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc-21.md)]
-
-::: moniker range="= aspnetcore-2.0"
-
-Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Die Contoso University-Beispielwebanwendung veranschaulicht, wie ASP.NET Core MVC-Webanwendungen mit Entity Framework Core und Visual Studio erstellt werden. Informationen zu dieser Tutorialreihe finden Sie im [ersten Tutorial der Reihe](intro.md).
+# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Aktualisieren verwandter Daten: ASP.NET Core MVC mit EF Core
 
 Mithilfe des letzten Tutorials haben Sie zugehörige Daten abgerufen. Mithilfe dieses Tutorials führen Sie hingegen Updates für verwandte Daten aus, indem Sie Felder mit Fremdschlüsseln sowie Navigationseigenschaften aktualisieren.
 
@@ -31,7 +24,20 @@ In den folgenden Abbildungen werden die Seiten dargestellt, mit denen Sie arbeit
 
 ![Bearbeitungsseite „Dozent“](update-related-data/_static/instructor-edit-courses.png)
 
-## <a name="customize-the-create-and-edit-pages-for-courses"></a>Anpassen der Seiten „Erstellen“ und „Bearbeiten“ für Kurse
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Passen Sie die Seite „Kurse“ an
+> * Fügen Sie die Seite „Bearbeiten“ für Dozenten hinzu
+> * Fügen Sie der Seite „Bearbeiten“ Kurse hinzu
+> * Aktualisieren Sie die Seite „Löschen“
+> * Fügen Sie Bürostandort und Kurse der Seite „Erstellen“ hinzu
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+* [ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)](read-related-data.md)
+
+## <a name="customize-courses-pages"></a>Passen Sie die Seite „Kurse“ an
 
 Wenn eine neue Kursentität erstellt wird, muss diese in Beziehung zu einer vorhandenen Abteilung stehen. Um dies zu vereinfachen, enthält der Gerüstcode Controllermethoden und Ansichten zum „Erstellen“ und „Bearbeiten“, die eine Dropdownliste enthalten, aus denen der Fachbereich ausgewählt werden kann. Die Dropdownliste legt die `Course.DepartmentID`-Fremdschlüsseleigenschaft fest. Mehr benötigt Entity Framework nicht, um die `Department`-Navigationseigenschaft mit der passenden Department-Entität zu laden. Verwenden Sie den Gerüstcode, aber nehmen Sie kleine Änderungen vor, um die Fehlerbehandlung hinzuzufügen und die Dropdownliste zu sortieren.
 
@@ -103,7 +109,7 @@ Klicken Sie auf der Indexseite eines Kurses auf **Bearbeiten**.
 
 Ändern Sie die Daten auf der Seite, und klicken Sie auf **Speichern**. Die Indexseite des Kurses wird mit den aktualisierten Kursdaten angezeigt.
 
-## <a name="add-an-edit-page-for-instructors"></a>Hinzufügen einer Seite zum „Bearbeiten“ für Dozenten
+## <a name="add-instructors-edit-page"></a>Fügen Sie die Seite „Bearbeiten“ für Dozenten hinzu
 
 Bei der Bearbeitung eines Dozentendatensatzes sollten Sie auch die Bürozuweisung des Dozenten aktualisieren. Die Entität „Instructor“ verfügt über eine 1:0..1-Beziehung mit der Entität „OfficeAssignment“. Das bedeutet, dass Ihr Code den folgenden Situationen standhalten muss:
 
@@ -163,7 +169,7 @@ Führen Sie die App aus, klicken Sie erst auf die Registerkarte **Dozenten** und
 
 ![Bearbeitungsseite „Dozent“](update-related-data/_static/instructor-edit-office.png)
 
-## <a name="add-course-assignments-to-the-instructor-edit-page"></a>Hinzufügen von Kurszuweisungen zur Dozentenseite „Bearbeiten“
+## <a name="add-courses-to-edit-page"></a>Fügen Sie der Seite „Bearbeiten“ Kurse hinzu
 
 Dozenten können eine beliebige Anzahl von Kursen unterrichten. Jetzt soll die Dozentenseite „Bearbeiten“ verbessert werden, indem es ermöglicht wird, Kurszuweisungen über eine Reihe von Kontrollkästchen zu verändern. Dies wird im folgenden Screenshot dargestellt:
 
@@ -236,7 +242,7 @@ Führen Sie die App aus, klicken Sie erst auf die Registerkarte **Dozenten** und
 > [!NOTE]
 > Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Auflistungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode erforderlich.
 
-## <a name="update-the-delete-page"></a>Aktualisieren der Seite „Delete“ (Löschen)
+## <a name="update-delete-page"></a>Aktualisieren Sie die Seite „Löschen“
 
 Löschen Sie aus der Datei *InstructorsController.cs* die `DeleteConfirmed`-Methode, und fügen Sie stattdessen den folgenden Code ein.
 
@@ -248,7 +254,7 @@ Durch diesen Code werden folgende Änderungen vorgenommen:
 
 * Wenn der zu löschende Dozent als Administrator einer beliebigen Abteilung zugewiesen ist, wird die Dozentenzuweisung aus diesen Abteilungen entfernt.
 
-## <a name="add-office-location-and-courses-to-the-create-page"></a>Hinzufügen von einem Bürostandort und von Kursen zu der Seite „Erstellen“
+## <a name="add-office-location-and-courses-to-create-page"></a>Fügen Sie Bürostandort und Kurse der Seite „Erstellen“ hinzu
 
 Löschen Sie in der *InstructorsController.cs*-Datei die Methoden HttpGet und HttpPost-`Create`, und fügen Sie anschließend stattdessen den folgenden Code ein:
 
@@ -293,12 +299,21 @@ Führen Sie einen Test durch, indem Sie die App ausführen und einen Dozenten er
 
 Wie bereits im [CRUD-Tutorial](crud.md) erläutert, implementiert Entity Framework implizit Transaktionen. Informationen zu Szenarios, die Sie genauer kontrollieren müssen (z.B. wenn Sie Vorgänge einfügen möchten, die außerhalb von Entity Framework in einer Transaktion ausgeführt werden), finden Sie unter [Transaktionen](/ef/core/saving/transactions).
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="get-the-code"></a>Abrufen des Codes
 
-Damit ist sind die ersten Schritte zum Arbeiten mit zugehörigen Daten abgeschlossen. Im nächsten Tutorial wird erläutert, wie Nebenläufigkeitskonflikte verarbeitet werden.
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-::: moniker-end
+## <a name="next-steps"></a>Nächste Schritte
 
-> [!div class="step-by-step"]
-> [Zurück](read-related-data.md)
-> [Weiter](concurrency.md)
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Haben Sie die Seite „Kurse“ angepasst
+> * Haben Sie die Seite „Bearbeiten“ für Dozenten hinzugefügt
+> * Haben Sie der Seite „Bearbeiten“ Kurse hinzugefügt
+> * Haben Sie die Seite „Löschen“ aktualisiert
+> * Haben Sie Bürostandort und Kurse der Seite „Erstellen“ hinzugefügt
+
+Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie Nebenläufigkeitskonflikte behandeln können.
+> [!div class="nextstepaction"]
+> [Verarbeiten von Nebenläufigkeitskonflikten](concurrency.md)

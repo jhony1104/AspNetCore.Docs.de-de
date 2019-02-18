@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/14/2019
 uid: mvc/models/validation
-ms.openlocfilehash: 7c8255097dfc72480794930ebe4d6cb568edbd7c
-ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
+ms.openlocfilehash: ca7ee54b8e6b6ae5091b0cb133e448ad9c04da8f
+ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "54396193"
+ms.lasthandoff: 02/14/2019
+ms.locfileid: "56248518"
 ---
 # <a name="model-validation-in-aspnet-core-mvc"></a>Modellvalidierung im ASP.NET Core MVC
 
@@ -151,9 +151,9 @@ Die obenstehende `movie`-Variable stellt ein `Movie`-Objekt dar, das die Daten d
 
 Wenn ein Benutzer das `Genre`-Feld verändert und das Formular übermittelt, überprüft die `IsValid`-Methode des `ClassicMovieAttribute`-Attributs, ob es sich bei dem Film um einen Klassiker handelt. Wenden Sie das `ClassicMovieAttribute`-Attribut wie jedes andere Attribut auch auf eine Eigenschaft wie `ReleaseDate` an, um wie im folgenden Codebeispiel dargestellt sicherzustellen, dass die Validierung durchgeführt wird. Da das Beispiel nur mit `Movie`-Typen funktioniert, ist es die bessere Option, `IValidatableObject` wie im folgenden Abschnitt dargestellt zu verwenden.
 
-Stattdessen kann derselbe Code auch in dem Modell platziert werden, indem er in die `Validate`-Methode auf der `IValidatableObject`-Schnittstelle implementiert wird. Benutzerdefinierte Validierungsattribute funktionieren zwar gut für die Validierung von individuellen Eigenschaften, die Implementierung von `IValidatableObject` kann jedoch verwendet werden, um wie hier dargestellt die Validierung auf Klassenebene zu implementieren.
+Stattdessen kann derselbe Code auch in dem Modell platziert werden, indem er in die `Validate`-Methode auf der `IValidatableObject`-Schnittstelle implementiert wird. Benutzerdefinierte Validierungsattribute funktionieren zwar gut für die Validierung von individuellen Eigenschaften, die Implementierung von `IValidatableObject` kann jedoch verwendet werden, um die Validierung auf Klassenebene zu implementieren:
 
-[!code-csharp[](validation/sample/MovieIValidatable.cs?name=snippet_Validate)]
+[!code-csharp[](validation/sample/MovieIValidatable.cs?name=snippet&highlight=1,26-34)]
 
 ## <a name="client-side-validation"></a>Validierung auf Clientseite
 
