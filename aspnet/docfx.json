@@ -39,7 +39,6 @@
       "https://xref.docs.microsoft.com/query?uid={uid}"
     ],
     "globalMetadata": {
-      "bilingual_type": "hover over",
       "_navPath": "/foo",
       "_navRel": "/foo",
       "breadcrumb_path": "/aspnet/breadcrumb/toc.json",
