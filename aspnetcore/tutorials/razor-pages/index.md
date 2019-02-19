@@ -2,16 +2,15 @@
 title: 'Tutorial: Erstellen einer Razor Pages-Web-App mit ASP.NET Core'
 author: rick-anderson
 description: Erstellen einer Razor Pages-Web-App unter Windows mit Visual Studio, ASP.NET Core und EF Core.
-monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 09/08/2017
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: db0dab630f986b6f60e24b7a39e20c7a4607f931
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: c543e86b58b37a120df22331043944757beeca3a
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667374"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410059"
 ---
 # <a name="tutorial-create-a-razor-pages-web-app-with-aspnet-core"></a>Tutorial: Erstellen einer Razor Pages-Web-App mit ASP.NET Core
 
