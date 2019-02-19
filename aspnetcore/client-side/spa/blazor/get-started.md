@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2019
 uid: spa/blazor/get-started
-ms.openlocfilehash: 8c984bab8a13b4fc2d87fd1a7e0b285dfa25ba09
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.openlocfilehash: 26336f73f6c8976ed5de819cebc3c5c50274ab03
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159586"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410007"
 ---
 # <a name="get-started-with-blazor"></a>Erste Schritte mit Blazor
 
-Durch [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
+Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/razor-components-preview-notice.md)]
 
@@ -32,7 +32,7 @@ So erstellen Ihr erste Blazor-Projekt in Visual Studio:
 1. Stellen Sie die Vorlagen Blazor mithilfe des folgenden Befehls in einer Befehlsshell für die Verwendung mit .NET Core-CLI zur Verfügung:
 
    ```console
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::0.8.0-preview-19104-04
    ```
 
 1. Wählen Sie **Datei** > **neues Projekt** > **Web** > **ASP.NET Core-Webanwendung**.
@@ -97,7 +97,7 @@ Erforderliche Komponenten:
 1. Fügen Sie die Vorlagen Blazor mithilfe des folgenden Befehls in einer Befehlsshell hinzu:
 
    ```console
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::0.8.0-preview-19104-04
    ```
 
 1. Erstellen Sie Ihr erste Blazor-Projekt in einer Befehlsshell ein:
@@ -122,7 +122,7 @@ Wenn die app ausgeführt wird, stehen mehrere Seiten von Registerkarten in der R
 * Zähler
 * Abrufen der Daten
 
-Wählen Sie auf der Seite Leistungsindikator der **hier klicken** Schaltfläche, um die Zähler ohne eine seitenaktualisierung zu erhöhen. Erhöhen eines Zählers auf einer Webseite bei normalerweise erfordert das Schreiben von JavaScript allerdings Blazor bietet einen besseren Ansatz mit C#.
+Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Erhöhen eines Zählers auf einer Webseite bei normalerweise erfordert das Schreiben von JavaScript allerdings Blazor bietet einen besseren Ansatz mit C#.
 
 *Pages/Counter.cshtml*:
 
@@ -133,7 +133,7 @@ Eine Anforderung für `/counter` im Browser, laut der `@page` -Direktive am Anfa
 Jedes Mal die **hier klicken** ausgewählt ist:
 
 * Die `onclick` Ereignis wird ausgelöst.
-* Die `IncrementCount` -Methode wird aufgerufen.
+* Die `IncrementCount`-Methode wird aufgerufen.
 * Die `currentCount` wird erhöht.
 * Die Komponente wird erneut gerendert.
 
@@ -150,13 +150,13 @@ Führen Sie die App aus. Die Startseite verfügt über eine eigene Leistungsindi
 Um einen Parameter an die Leistungsindikator-Komponente hinzuzufügen, aktualisieren Sie der Komponente `@functions` blockieren:
 
 * Hinzufügen einer Eigenschaft für `IncrementAmount` ergänzt die `[Parameter]` Attribut.
-* Ändern der `IncrementCount` zu verwendende Methode der `IncrementAmount` beim Erhöhen des Werts der `currentCount`.
+* Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
 *Pages/Counter.cshtml*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter2.cshtml?highlight=4,8)]
 
-Geben Sie eine `IncrementAmount` Parameter in der Home-Komponente `<Counter>` Element unter Verwendung eines Attributs.
+Geben Sie unter Verwendung eines Attributs einen `IncrementAmount`-Parameter in das `<Counter>`-Element der Home-Komponente ein.
 
 *Pages/Index.cshtml*:
 

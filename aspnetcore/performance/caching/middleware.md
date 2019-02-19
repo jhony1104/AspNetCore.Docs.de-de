@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Middleware für die Zwischenspeicherung von A
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/26/2017
+ms.date: 02/16/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: 4b2c71aad4b5bcfee14a271303df5874ccfedb90
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: bb265d04022ec2f8fdb3f2f3bc42f6b3f0b2b338
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207328"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410322"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Antworten zwischenspeichernden Middleware in ASP.NET Core
 
@@ -103,7 +103,7 @@ Zwischenspeichern von Antworten von der Middleware ist so konfiguriert, die mith
 | Header | Details |
 | ------ | ------- |
 | Autorisierung | Die Antwort nicht zwischengespeichert, wenn der Header vorhanden ist. |
-| Cache-Control | Die Middleware berücksichtigt nur die Zwischenspeicherung von Antworten mit markiert die `public` mit cacheanweisungen. Steuerung der Zwischenspeicherung, die mit den folgenden Parametern:<ul><li>Max-age</li><li>Max-stale&#8224;</li><li>Min-neu</li><li>Must-revalidate</li><li>ohne-cache</li><li>ohne-store</li><li>nur-If-cached</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-revalidate&#8225;</li></ul>&#8224;Wenn keine Begrenzung, um angegeben wird `max-stale`, die Middleware führt keine Aktion aus.<br>&#8225;`proxy-revalidate`hat dieselbe Wirkung wie das `must-revalidate`.<br><br>Weitere Informationen finden Sie unter [RFC 7231: Cache-Control-Request-Direktiven](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| Cache-Control | Die Middleware berücksichtigt nur die Zwischenspeicherung von Antworten mit markiert die `public` mit cacheanweisungen. Steuerung der Zwischenspeicherung, die mit den folgenden Parametern:<ul><li>Max-age</li><li>Max-stale&#8224;</li><li>Min-neu</li><li>Must-revalidate</li><li>ohne-cache</li><li>ohne-store</li><li>only-if-cached</li><li>private</li><li>öffentlich</li><li>s-maxage</li><li>proxy-revalidate&#8225;</li></ul>&#8224;Wenn keine Begrenzung, um angegeben wird `max-stale`, die Middleware führt keine Aktion aus.<br>&#8225;`proxy-revalidate`hat dieselbe Wirkung wie das `must-revalidate`.<br><br>Weitere Informationen finden Sie unter [RFC 7231: Fordern Sie Cachesteuerungsdirektiven](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | Pragma | Ein `Pragma: no-cache` -Header in der Anforderung generiert dieselbe Wirkung wie das `Cache-Control: no-cache`. Dieser Header wird überschrieben, indem die entsprechenden Anweisungen in der `Cache-Control` -Header, falls vorhanden. Für die Abwärtskompatibilität mit HTTP/1.0 berücksichtigt. |
 | Set-Cookie | Die Antwort nicht zwischengespeichert, wenn der Header vorhanden ist. Middleware, die in der Anforderungsverarbeitungspipeline, die ein oder mehrere Cookies festlegt wird verhindert, dass die Antwort zwischenspeichern Middleware Zwischenspeichern der Antwort (z. B. die [cookiebasierte TempData-Anbieters](xref:fundamentals/app-state#tempdata)).  |
 | Variieren | Die `Vary` Header wird zum variieren der zwischengespeicherten Antwort von einer anderen Spaltenüberschrift. Z. B. Zwischenspeichern von Antworten, indem Sie mit Codierung der `Vary: Accept-Encoding` -Header, der Anforderungen mit Headern speichert `Accept-Encoding: gzip` und `Accept-Encoding: text/plain` getrennt. Eine Antwort mit einem Headerwert, der `*` niemals gespeichert ist. |
@@ -138,7 +138,7 @@ Beim Testen und Problembehandlung von Verhalten beim Zwischenspeichern kann in e
 
 * Die Anforderung muss zu einer Antwort des Servers mit einem 200 (OK) Statuscode führen.
 * Die Anforderungsmethode muss GET oder HEAD.
-* Der Terminalserver-Middleware, wie z. B. [Middleware für statische Dateien](xref:fundamentals/static-files), muss die Antwort, bevor die Middleware für die Antwort-Caching nicht verarbeiten.
+* Terminaldienste-Middleware muss die Antwort, bevor die Middleware für die Antwort-Caching nicht verarbeitet werden.
 * Die `Authorization` Header darf nicht vorhanden sein.
 * `Cache-Control` Header-Parameter müssen gültig sein, und die Antwort muss markiert sein `public` und nicht als markiert `private`.
 * Die `Pragma: no-cache` Header darf nicht vorhanden sein wenn die `Cache-Control` -Header nicht vorhanden ist, als die `Cache-Control` Header überschreibt die `Pragma` Header, wenn vorhanden.
@@ -148,7 +148,7 @@ Beim Testen und Problembehandlung von Verhalten beim Zwischenspeichern kann in e
 * Die [IHttpSendFileFeature](/dotnet/api/microsoft.aspnetcore.http.features.ihttpsendfilefeature) wird nicht verwendet.
 * Die Antwort darf nicht laut veraltet sein der `Expires` Header und die `max-age` und `s-maxage` cache-Anweisungen.
 * Antwortpufferung muss erfolgreich sein, und die Größe der Antwort muss kleiner sein als die konfigurierte oder default `SizeLimit`.
-* Die Antwort muss gemäß zwischengespeichert werden, die [RFC 7234](https://tools.ietf.org/html/rfc7234) Spezifikationen. Z. B. die `no-store` Richtlinie darf nicht in der Anforderung oder Antwort-Header-Felder vorhanden sein. Finden Sie unter *Abschnitt 3: Speichern von Antworten in Caches* von [RFC 7234](https://tools.ietf.org/html/rfc7234) Details.
+* Die Antwort muss gemäß zwischengespeichert werden, die [RFC 7234](https://tools.ietf.org/html/rfc7234) Spezifikationen. Z. B. die `no-store` Richtlinie darf nicht in der Anforderung oder Antwort-Header-Felder vorhanden sein. Finden Sie unter *Abschnitt 3: Das Speichern von Antworten in Caches* von [RFC 7234](https://tools.ietf.org/html/rfc7234) Details.
 
 > [!NOTE]
 > Antiforgery System zum Generieren von sicheren Token zum Verhindern von Cross-Site Request Forgery (CSRF) attacks legt die `Cache-Control` und `Pragma` Header `no-cache` , damit die Antworten nicht zwischengespeichert. Informationen zum Deaktivieren der antiforgery Tokens für die HTML-Formularelemente, finden Sie unter [antiforgery ASP.NET Core-Konfiguration](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration).

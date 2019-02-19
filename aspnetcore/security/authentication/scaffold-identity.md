@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 94ccfc8aa2ad37d89de42f276cb2f808a08cd55e
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: d86d3cab91e8f927db30767097a89a08cf358f06
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090640"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410166"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst-Identität in ASP.NET Core-Projekten
 
@@ -90,10 +90,9 @@ Optional: Hinzufügen die Anmeldung, die teilweise (`_LoginPartial`) zur Layoutd
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
 Use = 2.0: dotnet new razor -au Individual -o RPauth
+uld option: Use Local DB, not SQLite
 
-dotnet new webapp -au Individual -o RPauth
-
-dotnet new razor -au Individual -o RPauth
+dotnet new webapp -au Individual -uld -o RPauth
 cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore

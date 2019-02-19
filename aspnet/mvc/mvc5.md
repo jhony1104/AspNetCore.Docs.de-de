@@ -8,18 +8,18 @@ ms.date: 10/11/2018
 ms.assetid: f79fbf7f-59e5-4279-a832-c1a0294630f4
 msc.legacyurl: /mvc/mvc5
 msc.type: content
-ms.openlocfilehash: c958d39c7eff0d581de6b05890b8e6df8bdb5207
-ms.sourcegitcommit: 6e6002de467cd135a69e5518d4ba9422d693132a
+ms.openlocfilehash: 14fcf863a4ef5f6c9180cdf9e7b632ccdb1ebcb0
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49348259"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410468"
 ---
 <a name="aspnet-mvc-5"></a>ASP.NET MVC 5
 ====================
 ## <a name="whats-new-in-aspnet-mvc-5"></a>Neuerungen in ASP.NET MVC 5
 
-### <a name="one-aspnet"></a>Eine ASP.NET
+### <a name="one-aspnet"></a>One ASP.NET
 
 Die Web-MVC-Projektvorlagen nahtlose Integration in die Oberfläche One ASP.NET. Sie können Ihre MVC-Projekt anpassen und Konfigurieren von Authentifizierung unter Verwendung von One ASP.NET projekterstellungs-Assistenten. Ein einführendes Lernprogramm zu ASP.NET MVC 5 finden Sie unter [erste Schritte mit ASP.NET MVC 5](overview/getting-started/introduction/getting-started.md).
 
@@ -43,7 +43,7 @@ Sie können jetzt überschreiben, die Filter auf eine bestimmte Aktionsmethode b
 
 ### <a name="attribute-routing"></a>Attributrouting
 
-Unterstützt nun das ASP.NET MVC [attributrouting](https://blogs.msdn.com/b/webdev/archive/2013/10/17/attribute-routing-in-asp-net-mvc-5.aspx), Dank der einen Beitrag von Tim McCall der Autor des [ http://attributerouting.net ](http://attributerouting.net). Das attributrouting können Sie Ihre Routen angeben, durch das Hinzufügen von Anmerkungen zu Ihren Aktionen und Controllern.
+Unterstützt nun das ASP.NET MVC [attributrouting](https://blogs.msdn.com/b/webdev/archive/2013/10/17/attribute-routing-in-asp-net-mvc-5.aspx), Dank der einen Beitrag von Tim McCall der Autor des [AttributeRouting](https://github.com/mccalltd/AttributeRouting). Das attributrouting können Sie Ihre Routen angeben, durch das Hinzufügen von Anmerkungen zu Ihren Aktionen und Controllern.
 
 ## <a name="new-web-project-experience"></a>Neue Project-Weboberfläche
 
