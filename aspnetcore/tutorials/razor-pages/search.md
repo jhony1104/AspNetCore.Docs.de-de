@@ -2,16 +2,15 @@
 title: Hinzufügen der Suche zu Razor-Seiten in ASP.NET Core
 author: rick-anderson
 description: Informationen zum Hinzufügen der Suche zu ASP.NET Core Razor Pages
-monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.date: 12/3/2018
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 8e047024180b20e3b649085647a9136140911fee
-ms.sourcegitcommit: 3e94d192b2ed9409fe72e3735e158b333354964c
+ms.openlocfilehash: 3900b33f31fef79327d01b0579208355b0bce90c
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/21/2018
-ms.locfileid: "53735816"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410218"
 ---
 # <a name="add-search-to-aspnet-core-razor-pages"></a>Hinzufügen der Suche zu Razor-Seiten in ASP.NET Core
 
