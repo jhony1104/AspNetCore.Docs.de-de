@@ -5,12 +5,12 @@ description: Informationen zur Verarbeitung der Darstellung von App-Daten und zu
 ms.author: riande
 ms.date: 12/12/2017
 uid: mvc/views/overview
-ms.openlocfilehash: 276540a5d77b1d65119d1b2104508d77f45d5588
-ms.sourcegitcommit: 8f8924ce4eb9effeaf489f177fb01b66867da16f
+ms.openlocfilehash: 6c5b4d7b89ac07a85b5aad626e37855de98064eb
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39219367"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410435"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Ansichten in ASP.NET Core MVC
 
@@ -34,7 +34,7 @@ Verwenden Sie [Layouts](xref:mvc/views/layout), damit die Abschnitte der Webseit
 
 ## <a name="benefits-of-using-views"></a>Vorteile der Verwendung von Ansichten
 
-Über Ansichten kann in einer MVC-App ein [Separation of Concerns-Design (SoC)](http://deviq.com/separation-of-concerns/) erstellt werden, indem das Markup der Benutzeroberfläche von anderen Bestandteilen der App getrennt wird. Das SoC-Design macht Ihre App modularer. Dies hat folgende Vorteile:
+Über Ansichten kann in einer MVC-App eine [Trennung von Belangen](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) erfolgen, indem das Markup der Benutzeroberfläche von anderen Bestandteilen der App getrennt wird. Das SoC-Design macht Ihre App modularer. Dies hat folgende Vorteile:
 
 * Die App kann einfacher verwaltet werden, da sie besser organisiert ist. Ansichten werden in der Regel nach App-Features gruppiert. Dadurch können Sie zugehörige Ansichten leichter finden, wenn Sie an einem Feature arbeiten.
 * Die Bestandteile der App sind lose miteinander verknüpft. Sie können die Ansichten der App getrennt von der Geschäftslogik und den Datenzugriffskomponenten erstellen und aktualisieren. Sie können die Ansichten der App verändern, müssen dafür aber nicht unbedingt andere Bestandteile der App aktualisieren.

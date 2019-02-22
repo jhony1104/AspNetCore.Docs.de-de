@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 930a6f2b860c71b6f499cff53e0d909a130f7948
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 1dc9f1278e502cd5040e82c18d99e2da6f139568
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637897"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410585"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -469,7 +469,7 @@ Datenmodelle fangen einfach an und werden dann größer. Währenddessen erhalten
 
 ### <a name="composite-key"></a>Zusammengesetzte Schlüssel
 
-Fremdschlüssel sind nicht auf NULL festlegbar. Die beiden Fremdschlüssel in `CourseAssignment` (`InstructorID` und `CourseID`) identifizieren zusammen jede Zeile der `CourseAssignment`-Tabelle eindeutig. `CourseAssignment` erfordert keinen dedizierten Fremdschlüssel. Die Eigenschaften `InstructorID` und `CourseID` fungieren als zusammengesetzter Fremdschlüssel. Zusammengesetzte Fremdschlüssel können für Entity Framework Core nur über die Fluent-API angegeben werden. Im folgenden Abschnitt wird das Konfigurieren des zusammengesetzten Fremdschlüssels erläutert.
+Fremdschlüssel sind nicht auf NULL festlegbar. Die beiden Fremdschlüssel in `CourseAssignment` (`InstructorID` und `CourseID`) identifizieren zusammen jede Zeile der `CourseAssignment`-Tabelle eindeutig. `CourseAssignment` erfordert keinen dedizierten Fremdschlüssel. Die Eigenschaften `InstructorID` und `CourseID` fungieren als zusammengesetzter Fremdschlüssel. Zusammengesetzte Fremdschlüssel können für Entity Framework Core nur über die *Fluent-API* angegeben werden. Im folgenden Abschnitt wird das Konfigurieren des zusammengesetzten Fremdschlüssels erläutert.
 
 Durch den zusammengesetzten Schlüssel wird sichergestellt, dass:
 
@@ -654,7 +654,9 @@ Aktualisieren Sie die `Up`-Methode der `ComplexDataModel`-Klasse:
 
 [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CommentOut&highlight=9-13)]
 
-Fügen Sie folgenden hervorgehobenen Code hinzu: Der neue Code folgt nach dem Block `.CreateTable( name: "Department"`: [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
+Fügen Sie folgenden hervorgehobenen Code hinzu: Der neue Code folgt auf den Block `.CreateTable( name: "Department"`:
+
+ [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
 Durch die zuvor durchgeführten Änderungen sind die vorhandenen `Course`-Zeilen mit dem Fachbereich „Temp“ verknüpft, nachdem die Methode `ComplexDataModel` `Up` ausgeführt wurde.
 

@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Ansichtskomponenten in ASP.NET Core verwendet wer
 ms.author: riande
 ms.date: 1/30/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: d0e528fcf9e20afee98e74fbc09c67b81e123e95
-ms.sourcegitcommit: d22b3c23c45a076c4f394a70b1c8df2fbcdf656d
+ms.openlocfilehash: d979c9480f7bffff993f0ea526bdc231b940baa2
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55428394"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410481"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -240,7 +240,7 @@ Wenn die PVC-Ansicht nicht gerendert wird, stellen Sie sicher, dass Sie die Ansi
 
 ![ToDo-Ausgabe mit Komponentenansicht „Shared“](view-components/_static/shared.png)
 
-### <a name="avoiding-magic-strings"></a>Vermeiden „magischer“ Zeichenfolgen
+### <a name="avoiding-hard-coded-strings"></a>Vermeiden hart codierter Zeichenfolgen
 
 Wenn Sie Sicherheit zu Kompilierzeit haben möchten, können Sie den hart codierten Komponentennamen durch den Klassennamen ersetzen. Erstellen Sie die Ansichtskomponente ohne den Suffix „ViewComponent“:
 

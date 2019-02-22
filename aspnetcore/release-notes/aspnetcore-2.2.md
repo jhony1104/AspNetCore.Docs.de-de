@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: aspnetcore-2.2
-ms.openlocfilehash: b8279588e674e3ada486f61bac2c216f1359e86d
-ms.sourcegitcommit: 728f4e47be91e1c87bb7c0041734191b5f5c6da3
+ms.openlocfilehash: 6dcdf71ec5271690718dd1fe750a9a74d498a0f8
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/22/2019
-ms.locfileid: "54444388"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410335"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Neuerungen in ASP.NET Core 2.2
 
@@ -29,7 +29,7 @@ Weitere Informationen finden Sie in den folgenden Ressourcen:
 
 ## <a name="problem-details-support"></a>Unterstützung bei Problemdetails
 
-In ASP.NET Core 2.1 wurde `ProblemDetails` eingeführt, basierend auf der RFC 7807-Spezifikation für die Übertragung von Fehlerdetails mit einer HTTP-Antwort. In 2.2 ist `ProblemDetails` die Standardantwort für Clientfehlercodes in Controllern mit dem `ApiControllerAttribute`. Ein `IActionResult`, das einen Statuscode für Clientfehler (4xx) zurückgegeben hat, gibt jetzt einen `ProblemDetails`-Text zurück. Das Ergebnis enthält auch eine Korrelations-ID, die zum Korrelieren des Fehlers mithilfe von Anforderungsprotokollen verwendet werden kann. Bei Clientfehlern verwendet `ProducesResponseType` standardmäßig `ProblemDetails` als Antworttyp. Dies wird in der Open API- bzw. Swagger-Ausgabe dokumentiert, die mit NSwag oder Swashbuckle.AspNetCore generiert wird.
+In ASP.NET Core 2.1 wurde `ProblemDetails` eingeführt, basierend auf der [RFC 7807](https://tools.ietf.org/html/rfc7807)-Spezifikation für die Übertragung von Fehlerdetails mit einer HTTP-Antwort. In 2.2 ist `ProblemDetails` die Standardantwort für Clientfehlercodes in Controllern mit dem `ApiControllerAttribute`. Ein `IActionResult`, das einen Statuscode für Clientfehler (4xx) zurückgegeben hat, gibt jetzt einen `ProblemDetails`-Text zurück. Das Ergebnis enthält auch eine Korrelations-ID, die zum Korrelieren des Fehlers mithilfe von Anforderungsprotokollen verwendet werden kann. Bei Clientfehlern verwendet `ProducesResponseType` standardmäßig `ProblemDetails` als Antworttyp. Dies wird in der Open API- bzw. Swagger-Ausgabe dokumentiert, die mit NSwag oder Swashbuckle.AspNetCore generiert wird.
 
 ## <a name="endpoint-routing"></a>Endpunktrouting
 

@@ -5,12 +5,12 @@ description: ''
 ms.author: riande
 ms.date: 07/03/2017
 uid: mvc/controllers/actions
-ms.openlocfilehash: 3f3f565021d484b69401a3e03a2a966c92764a49
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.openlocfilehash: 8289424b3cd3678bea18a25c7850e409795d1577
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36275657"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410434"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -33,7 +33,7 @@ Ein Controller ist eine Klasse, die instanziiert werden kann und auf die mindest
 
 Die Controllerklasse darf kein verknüpftes `[NonController]`-Attribut aufweisen.
 
-Controller sollten dem [Prinzip der expliziten Abhängigkeiten](http://deviq.com/explicit-dependencies-principle/) folgen. Zum Umsetzen dieses Prinzips gibt es mehrere Herangehensweisen. Wenn mehrere Controlleraktionen den gleichen Dienst erfordern, ziehen Sie [Constructor Injection](xref:mvc/controllers/dependency-injection#constructor-injection) zum Anfordern dieser Abhängigkeiten in Erwägung. Wenn der Dienst nur von einer einzigen Aktionsmethode benötigt wird, ist [Action Injection](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) möglicherweise nützlich.
+Controller sollten dem [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) folgen. Zum Umsetzen dieses Prinzips gibt es mehrere Herangehensweisen. Wenn mehrere Controlleraktionen den gleichen Dienst erfordern, ziehen Sie [Constructor Injection](xref:mvc/controllers/dependency-injection#constructor-injection) zum Anfordern dieser Abhängigkeiten in Erwägung. Wenn der Dienst nur von einer einzigen Aktionsmethode benötigt wird, ist [Action Injection](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) möglicherweise nützlich.
 
 Im Muster **M**odel-**V**iew-**C**ontroller ist ein Controller für die erste Verarbeitung der Anforderung und die Instanziierung des Modells zuständig. Für gewöhnlich sollten Unternehmensentscheidungen innerhalb des Modell getroffen werden.
 
@@ -57,7 +57,7 @@ Controller erben üblicherweise von [Controller](/dotnet/api/microsoft.aspnetcor
 
 Es ist kein `Content-Type`-HTTP-Antwortheader beinhaltet, da der Antworttext keinen Inhalt aufweist, der beschrieben werden könnte.
 
-Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: Redirect (Umleiten) oder HTTP-Statuscode.
+Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: „View“ (Ansicht) und „Formatted Response“ (Formatierte Antwort).
 
 * **HTTP-Statuscode**
 
@@ -73,7 +73,7 @@ Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: Redirect (Umleit
 
 Die meisten Hilfsmethoden in dieser Kategorie beinhalten eine `ContentType`-Eigenschaft, mit der Sie den Antwortheader `Content-Type` festlegen können, um den Antworttext zu beschreiben.
 
-Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: [View](xref:mvc/views/overview) (Ansicht) und [Formatted Response](xref:web-api/advanced/formatting) (Formatierte Antwort).
+Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: [View](xref:mvc/views/overview) (Ansicht) und [Formatted Response](xref:web-api/advanced/formatting) (Formatierte Antwort). 
 
 * **Ansicht**
 
@@ -83,7 +83,7 @@ Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: [View](xref:mvc/
 
     Dieser Typ gibt eine Datei im JSON-Format oder in einem ähnlichen Datenaustauschformat zurück, um ein Objekt auf eine bestimmte Weise darzustellen. `return Json(customer);` serialisiert beispielsweise das bereitgestellte Objekt im JSON-Format.
     
-    Weitere gängige Methoden dieses Typs sind `File`, `PhysicalFile` und `VirtualFile`. `return PhysicalFile(customerFilePath, "text/xml");` gibt beispielsweise eine XML-Datei zurück, die von dem `Content-Type`-Antwortheaderwert „text/xml“ beschrieben wird.
+    Weitere gängige Methoden dieses Typs sind `File` und `PhysicalFile`. `return PhysicalFile(customerFilePath, "text/xml");` gibt beispielsweise [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult) zurück.
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. Methoden, die einen nicht leeren Antworttext in einem mit dem Client ausgehandelten Inhaltsformat zur Folge haben
 
@@ -93,7 +93,7 @@ Weitere Hilfsmethoden dieses Typs sind `BadRequest`, `CreatedAtRoute` und `Ok`. 
 
 ### <a name="cross-cutting-concerns"></a>Übergreifende Belange
 
-Verschiedene Anwendungen haben häufig übereinstimmende Teile in Ihrem Workflow. Beispiel dafür sind Anwendungen, die eine Authentifizierung erfordern, um auf den Einkaufswagen zugreifen zu können, oder Anwendungen, die Daten auf einigen Seiten zwischenspeichern. Verwenden Sie einen *Filter*, um Logik vor oder nach einer Aktionsmethode durchzuführen. Das Verwenden von [Filtern](xref:mvc/controllers/filters) bei übergreifenden Belangen kann Duplikate minimieren, sodass das [DRY-Prinzip (Don‘t Repeat Yourself)](http://deviq.com/don-t-repeat-yourself/) eingehalten wird.
+Verschiedene Anwendungen haben häufig übereinstimmende Teile in Ihrem Workflow. Beispiel dafür sind Anwendungen, die eine Authentifizierung erfordern, um auf den Einkaufswagen zugreifen zu können, oder Anwendungen, die Daten auf einigen Seiten zwischenspeichern. Verwenden Sie einen *Filter*, um Logik vor oder nach einer Aktionsmethode durchzuführen. Das Verwenden von [Filtern](xref:mvc/controllers/filters) bei übergreifenden Belangen kann Duplikate minimieren.
 
 Die meisten Filterattribute, wie z.B. `[Authorize]`, können auf Ebene des Controllers oder der Aktion mit der gewünschten Detailgenauigkeit angewendet werden.
 

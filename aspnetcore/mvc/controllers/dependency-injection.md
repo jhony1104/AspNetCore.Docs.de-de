@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC-Controller Abhängigkeiten mit D
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 12247dbbbb6de3f8feb7bc37caec4ecf4bd21719
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 9d9d0a68927da62fad8df72c868eaf4b8ada440d
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206340"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410270"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Dependency Injection in Controller in ASP.NET Core
 
@@ -24,7 +24,7 @@ ASP.NET Core MVC-Controller sollten ihre Abhängigkeiten explizit über ihre Kon
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
-Dependency Injection folgt dem [Prinzip der Umkehr von Abhängigkeiten](http://deviq.com/dependency-inversion-principle/), wodurch Anwendungen aus lose gekoppelten Modulen erstellt werden können. ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection](../../fundamentals/dependency-injection.md). Dadurch können Anwendungen einfacher getestet und verwaltet werden.
+ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection](../../fundamentals/dependency-injection.md). Dadurch können Anwendungen einfacher getestet und verwaltet werden.
 
 ## <a name="constructor-injection"></a>Constructor Injection
 
@@ -63,7 +63,7 @@ Sobald der Dienst konfiguriert wurde, sollte beim Ausführen der Anwendung und b
 ![Serverbegrüßung](dependency-injection/_static/server-greeting.png)
 
 >[!TIP]
-> Informationen zum einfacheren Testen von Code mithilfe der expliziten Anforderung von Abhängigkeiten im Controller [http://deviq.com/explicit-dependencies-principle/](http://deviq.com/explicit-dependencies-principle/) finden Sie unter [Testen von Controllerlogik](testing.md).
+> Informationen zum einfacheren Testen von Code mithilfe der expliziten Anforderung von Abhängigkeiten in Controllern finden Sie unter [Testen von Controllerlogik](testing.md).
 
 Die integrierte Dependency Injection von ASP.NET Core unterstützt das Vorhandensein eines einzelnen Konstruktors für Klassen, die Dienste anfordern. Bei mehr als einem Konstruktor wird möglicherweise die folgende Ausnahme angezeigt:
 
@@ -101,4 +101,4 @@ Sobald Sie ein stark typisiertes Konfigurationsobjekt (in diesem Fall `SampleWeb
 
 [!code-csharp[](./dependency-injection/sample/src/ControllerDI/Controllers/SettingsController.cs?highlight=3,5,7&range=7-22)]
 
-Mithilfe des Optionsmusters können Einstellungen und Konfiguration voneinander entkoppelt werden. Es wird sichergestellt, dass der Controller das Prinzip der [Trennung von Belangen](http://deviq.com/separation-of-concerns/) befolgt, da ihm nicht bekannt sein muss, wie und wo die Einstellungsinformationen zu finden sind. Dadurch kann für den Controller auch einfacher der Komponententest [Testen von Controllerlogik](testing.md) durchgeführt werden, da kein [statischer Zusammenhang](http://deviq.com/static-cling/) und keine direkte Instanziierung von Einstellungsklassen innerhalb der Controllerklasse vorhanden sind.
+Mithilfe des Optionsmusters können Einstellungen und Konfiguration voneinander entkoppelt werden. Es wird sichergestellt, dass der Controller das Prinzip der [Trennung von Belangen](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) befolgt, da ihm nicht bekannt sein muss, wie und wo die Einstellungsinformationen zu finden sind. Dadurch kann für den Controller auch einfacher der [Komponententest](testing.md) durchgeführt werden, da es keine direkte Instanziierung von Einstellungsklassen innerhalb der Controllerklasse gibt.

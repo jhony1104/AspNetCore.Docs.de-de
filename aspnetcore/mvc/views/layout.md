@@ -5,12 +5,12 @@ description: Erfahren Sie, wie man gängige Layouts verwendet, Anweisungen von m
 ms.author: riande
 ms.date: 10/18/2018
 uid: mvc/views/layout
-ms.openlocfilehash: b23fd4e0b1d91a4dd5aae548aa2b2081aa37a561
-ms.sourcegitcommit: f43f430a166a7ec137fcad12ded0372747227498
+ms.openlocfilehash: 1bd225c804b333efea834a46b7d9ba46b1bb69d8
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "49391296"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410572"
 ---
 # <a name="layout-in-aspnet-core"></a>Layout in ASP.NET Core
 
@@ -22,7 +22,7 @@ Seiten und Ansichten beinhalten häufig sowohl visuelle als auch programmgesteue
 * Freigeben von Anweisungen
 * Führen Sie den allgemeinen Code aus, bevor Sie Seiten oder Ansichten rendern.
 
-In diesem Dokument werden Layouts für zwei verschiedene Ansätze zu ASP.NET Core MVC erläutert: Razor-Seiten und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
+In diesem Dokument werden Layouts für zwei verschiedene Ansätze zu ASP.NET Core MVC erläutert: Razor Pages und Controller mit Ansichten.  In diesem Thema sind die Unterschiede minimal:
 
 * Razor-Seiten befinden sich im Ordner *Pages*.
 * Controller mit Ansichten verwenden einen Ordner namens *Views* für Ansichten.
@@ -33,11 +33,11 @@ Die meisten Web-Apps haben ein gebräuchliches Layout, das dem Benutzer beim Nav
 
 ![Beispiel für ein Seitenlayout](layout/_static/page-layout.png)
 
-Gängige HTML-Strukturen wie Skripts und Stylesheets werden häufig von vielen Seiten in einer App verwendet. Alle diese gemeinsamen Elemente werden in einer *Layoutdatei* definiert, auf die dann von jeder Ansicht einer App verwiesen werden kann. Layouts minimieren Codeduplikate in Ansichten, sodass das [DRY-Prinzip (Don‘t Repeat Yourself)](http://deviq.com/don-t-repeat-yourself/) eingehalten wird.
+Gängige HTML-Strukturen wie Skripts und Stylesheets werden häufig von vielen Seiten in einer App verwendet. Alle diese gemeinsamen Elemente werden in einer *Layoutdatei* definiert, auf die dann von jeder Ansicht einer App verwiesen werden kann. Layouts minimieren duplizierten Code in Ansichten.
 
 Gemäß Konvention ist *_Layout.cshtml* das Standardlayout für eine ASP.NET Core-App. Die Layoutdatei für neue ASP.NET Core-Projekte, die mit den Vorlagen erstellt wurden:
 
-* Razor-Seiten: *Pages/Shared/_Layout.cshtml*
+* Razor Pages: *Pages/Shared/_Layout.cshtml*
 
   ![Ordner „Pages“ im Projektmappen-Explorer](layout/_static/rp-web-project-views.png)
 
@@ -155,4 +155,4 @@ Ein Beispiel für die Datei *_ViewStart.cshtml*:
 
 Die oben stehende Datei gibt an, dass alle Ansichten das Layout *_Layout.cshtml* verwenden.
 
-*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder  */Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.
+*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder * /Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.

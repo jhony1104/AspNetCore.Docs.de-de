@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das 
 ms.author: riande
 ms.date: 02/14/2017
 uid: mvc/controllers/areas
-ms.openlocfilehash: 3e998af42cd6209271495dd8dd97a8aed35717a4
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.openlocfilehash: 19e818fa198936ea1bee0da8039e88a3c0abbf6b
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36274826"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410611"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -30,48 +30,32 @@ Die Verwendung von Bereichen in einem MVC-Projekt ist erwägenswert, wenn:
 
 Features von Bereichen:
 
-* Eine ASP.NET Core MVC-App kann über eine beliebige Anzahl von Bereichen verfügen
+* Eine ASP.NET Core MVC-App kann über eine beliebige Anzahl von Bereichen verfügen.
 
-* Jeder Bereich verfügt über seine eigenen Controller, Modelle und Ansichten
+* Jeder Bereich verfügt über seine eigenen Controller, Modelle und Ansichten.
 
-* Ermöglicht Ihnen das Organisieren großer MVC-Projekte in mehrere allgemeine Komponenten, die unabhängig voneinander bearbeitet werden können
+* Die Bereiche ermöglichen Ihnen das Organisieren großer MVC-Projekte in mehrere allgemeine Komponenten, die unabhängig voneinander bearbeitet werden können.
 
-* Unterstützt mehrere Controller mit demselben Namen, solange diese über verschiedene *Bereiche* verfügen
+* Die Bereiche unterstützen mehrere Controller mit demselben Namen, solange diese über verschiedene *Bereiche* verfügen.
 
-Im Folgenden finden Sie ein Beispiel, das darstellt, wie Bereiche erstellt und verwendet werden. Angenommen, Sie besitzen eine Store-App mit zwei unterschiedlichen Gruppierungen von Controllern und Ansichten: Produkte und Dienste. Eine übliche Ordnerstruktur hierfür, die MVC-Bereiche verwendet, sieht folgendermaßen aus:
+Im Folgenden finden Sie ein Beispiel, das darstellt, wie Bereiche erstellt und verwendet werden. Angenommen, Sie besitzen eine Store-App mit zwei unterschiedlichen Gruppierungen von Controllern und Ansichten: Produkte und Dienste.  Eine übliche Ordnerstruktur hierfür, die MVC-Bereiche verwendet, sieht folgendermaßen aus:
 
 * Projektname
-
   * Bereiche
-
-    * Produkte
-
+    * Products
       * Controller
-
         * HomeController.cs
-
         * ManageController.cs
-
       * Ansichten
-
         * Startseite
-
           * Index.cshtml
-
         * Verwalten
-
           * Index.cshtml
-
     * Dienste
-
       * Controller
-
         * HomeController.cs
-
       * Ansichten
-
         * Startseite
-
           * Index.cshtml
 
 Wenn MVC versucht, eine Ansicht in einem Bereich zu rendern, wird standardgemäß in den folgenden Speicherorten gesucht:

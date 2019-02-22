@@ -5,12 +5,12 @@ description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum E
 ms.author: riande
 ms.date: 01/08/2018
 uid: mvc/overview
-ms.openlocfilehash: d2a50e48c20fe69b1fe691bfc9c91a27d4219922
-ms.sourcegitcommit: 5a2456cbf429069dc48aaa2823cde14100e4c438
+ms.openlocfilehash: 205948cb45709b4eb6014aaf4960bf193a20dc30
+ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2018
-ms.locfileid: "41902598"
+ms.lasthandoff: 02/19/2019
+ms.locfileid: "56410309"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -20,13 +20,13 @@ ASP.NET Core MVC ist ein umfangreiches Framework zum Erstellen von Web-Apps und 
 
 ## <a name="what-is-the-mvc-pattern"></a>Was ist das MVC-Muster?
 
-Das Architekturmuster Model-View-Controller (MVC) unterteilt eine Anwendung in drei Hauptkomponentengruppen: Modelle (Models), Ansichten (Views) und Controller (Controllers). Dieses Muster erleichtert die [Trennung von Belangen](http://deviq.com/separation-of-concerns/). Mit diesem Muster werden Benutzeranforderungen an einen Controller weitergeleitet. Der Controller arbeitet mit dem Modell, um Benutzeraktionen auszuführen und/oder Ergebnisse von Abfragen abzurufen. Der Controller wählt die Ansicht, die dem Benutzer angezeigt wird, und stellt sämtliche erforderliche Modelldaten dafür bereit.
+Das Architekturmuster Model-View-Controller (MVC) unterteilt eine Anwendung in drei Hauptkomponentengruppen: Modelle (Models), Ansichten (Views) und Controller (Controllers).  Dieses Muster erleichtert die [Trennung von Belangen](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns). Mit diesem Muster werden Benutzeranforderungen an einen Controller weitergeleitet. Der Controller arbeitet mit dem Modell, um Benutzeraktionen auszuführen und/oder Ergebnisse von Abfragen abzurufen. Der Controller wählt die Ansicht, die dem Benutzer angezeigt wird, und stellt sämtliche erforderliche Modelldaten dafür bereit.
 
 Die folgende Abbildung zeigt die drei Hauptkomponenten und deren Beziehungen untereinander:
 
 ![MVC-Muster](overview/_static/mvc.png)
 
-Diese Abgrenzung der Aufgaben erleichtert die Skalierung Ihrer Anwendung hinsichtlich der Komplexität, da es einfacher ist, ein Element zu codieren, zu debuggen und zu testen (das Modell, die Ansicht oder den Controller), das nur eine einzige Aufgabe besitzt (und das [Prinzip der einzigen Verantwortung](http://deviq.com/single-responsibility-principle/) befolgt). Deutlich schwieriger ist es, Code zu aktualisieren, zu testen und zu debuggen, der Abhängigkeiten in zwei oder drei dieser Bereiche aufweist. Benutzeroberflächenlogik ändert sich beispielsweise häufiger als Geschäftslogik. Werden Präsentationscode und Geschäftslogik in einem einzigen Objekt kombiniert, muss ein Objekt mit Geschäftslogik jedes Mal geändert werden, wenn die Benutzeroberfläche geändert wird. Dies führt häufig zu Fehlermeldungen. Außerdem muss die Geschäftslogik nach jeder kleinen Änderung der Benutzeroberfläche erneut getestet werden.
+Diese Abgrenzung der Aufgaben erleichtert die Skalierung Ihrer Anwendung hinsichtlich der Komplexität, da es einfacher ist, ein Element zu codieren, zu debuggen und zu testen (das Modell, die Ansicht oder den Controller), das nur eine einzige Aufgabe hat. Deutlich schwieriger ist es, Code zu aktualisieren, zu testen und zu debuggen, der Abhängigkeiten in zwei oder drei dieser Bereiche aufweist. Benutzeroberflächenlogik ändert sich beispielsweise häufiger als Geschäftslogik. Werden Präsentationscode und Geschäftslogik in einem einzigen Objekt kombiniert, muss ein Objekt mit Geschäftslogik jedes Mal geändert werden, wenn die Benutzeroberfläche geändert wird. Dies führt häufig zu Fehlermeldungen. Außerdem muss die Geschäftslogik nach jeder kleinen Änderung der Benutzeroberfläche erneut getestet werden.
 
 > [!NOTE]
 > Sowohl die Ansicht als auch der Controller sind abhängig vom Modell. Das Modell ist jedoch weder von der Ansicht noch vom Controller abhängig. Hierin besteht einer der Hauptvorteile der Trennung. Aufgrund dieser Trennung kann das Modell unabhängig von der visuellen Darstellung erstellt und getestet werden.
@@ -34,9 +34,6 @@ Diese Abgrenzung der Aufgaben erleichtert die Skalierung Ihrer Anwendung hinsich
 ### <a name="model-responsibilities"></a>Aufgaben des Modells
 
 Das Modell stellt in einer MVC-Anwendung den Status der Anwendung und sämtlicher Vorgänge oder Geschäftslogik dar, die von ihm ausgeführt werden sollen. Im Modell sollte Geschäftslogik zusammen mit der gesamten Implementierungslogik gekapselt werden, um den Status der Anwendung beizubehalten. Stark typisierte Ansichten verwenden in der Regel ViewModel-Typen, die die Daten für diese Ansicht enthalten. Der Controller erstellt und füllt diese ViewModel-Instanzen aus dem Modell.
-
-> [!NOTE]
-> Das Modell in einer App, die das MVC-Architekturmuster verwendet, kann auf verschiedene Weise organisiert werden. Informationen zu den [verschiedenen Arten von Modelltypen](http://deviq.com/kinds-of-models/) erhalten Sie hier.
 
 ### <a name="view-responsibilities"></a>Aufgaben der Ansicht
 
@@ -47,10 +44,10 @@ Ansichten dienen der Darstellung von Inhalt über die Benutzeroberfläche. Dabei
 Controller sind Komponenten, die Benutzerinteraktionen verarbeiten, mit dem Modell arbeiten und letztlich eine Ansicht auswählen, die gerendert werden soll. In einer MVC-Anwendung zeigt die Ansicht nur Informationen an. Benutzereingaben und -interaktionen werden vom Controller verarbeitet und beantwortet. Im MVC-Muster stellt der Controller den Einstiegspunkt dar. Er ist verantwortlich für die Auswahl des Modells, mit dem gearbeitet wird, sowie der Ansicht, die gerendert wird (daher kommt auch sein Name: Der Controller kontrolliert, wie die App auf eine bestimmte Anforderung reagiert).
 
 > [!NOTE]
-> Controller sollten nicht durch zu viele Aufgaben übermäßig kompliziert gemacht werden. Verwenden Sie zu diesem Zweck das [Prinzip der einzigen Verantwortung](http://deviq.com/single-responsibility-principle/), um Geschäftslogik aus dem Controller in das Domänenmodell zu verlagern.
+> Controller sollten nicht durch zu viele Aufgaben übermäßig kompliziert gemacht werden. Um zu verhindern, dass die Controllerlogik zu komplex wird, verlagern Sie die Geschäftslogik aus dem Controller in das Domänenmodell.
 
 >[!TIP]
-> Sollten Sie feststellen, dass Ihre Controlleraktionen häufig die gleiche Art von Aktionen ausführen, befolgen Sie das [DRY-Prinzip](http://deviq.com/don-t-repeat-yourself/) (Don‘t Repeat Yourself, Keine Wiederholungen), indem Sie diese häufig ausgeführten Aktionen in [Filter](#filters) verschieben.
+> Wenn Sie feststellen, dass Ihre Controlleraktionen häufig die gleiche Art von Aktionen ausführen, verschieben diese häufig ausgeführten Aktionen in [Filter](#filters).
 
 ## <a name="what-is-aspnet-core-mvc"></a>Was ist ASP.NET Core MVC?
 
@@ -146,7 +143,7 @@ Das Framework verarbeitet Validierungsanforderungsdaten sowohl auf dem Client al
 
 ### <a name="dependency-injection"></a>Dependency Injection
 
-ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC können [Controller](controllers/dependency-injection.md) benötigte Dienste über ihre Konstruktoren anfordern. So wird das [Prinzip der expliziten Abhängigkeiten](http://deviq.com/explicit-dependencies-principle/) befolgt.
+ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC können [Controller](controllers/dependency-injection.md) benötigte Dienste über ihre Konstruktoren anfordern. So wird das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgt.
 
 Mit der `@inject`-Anweisung kann Ihre App [Dependency Injection auch in Ansichtsdateien](views/dependency-injection.md) verwenden:
 
