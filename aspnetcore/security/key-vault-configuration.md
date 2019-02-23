@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit der Azure Key Vault-Konfigurationsanbiete
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/08/2019
+ms.date: 02/22/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: f70389c86420d81e284ecc863ac8386f726ed2cf
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 2188929d6f380327465e8ce0fd8ad659188416d3
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103110"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56743984"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault-Konfigurationsanbieter in ASP.NET Core
 
@@ -116,7 +116,7 @@ Die Anweisungen unter dem [Schnellstart: Festlegen und Abrufen ein geheimen Schl
 Konfigurieren von Azure AD, Azure Key Vault, und der app, um eine Anwendungs-ID und Kennwort (geheimer Clientschlüssel) verwenden, um in einen schlüsseltresor authentifizieren **Wenn die app gehostet wird, außerhalb von Azure**.
 
 > [!NOTE]
-> Mithilfe einer Anwendungs-ID und Kennwort (geheimer Clientschlüssel) für apps, die in Azure gehostet wird zwar unterstützt, es wird empfohlen, [verwaltet Identitäten für Azure-Ressourcen](#use-managed-identities-for-azure-resources) beim Hosten einer app in Azure. Verwaltete Identitäten erfordert das Speichern von Anmeldeinformationen in der app oder der Konfiguration, damit es im Allgemeinen sicherer Ansatz angesehen wird.
+> Mithilfe einer Anwendungs-ID und Kennwort (geheimer Clientschlüssel) für apps, die in Azure gehostet wird zwar unterstützt, es wird empfohlen, [verwaltet Identitäten für Azure-Ressourcen](#use-managed-identities-for-azure-resources) beim Hosten einer app in Azure. Verwaltete Identitäten erfordert keine das Speichern von Anmeldeinformationen in der app oder der Konfiguration, damit es im Allgemeinen sicherer Ansatz angesehen wird.
 
 Die Beispiel-app verwendet eine Anwendungs-ID und ein Kennwort (geheimer Clientschlüssel) Wenn die `#define` Anweisung am Anfang der *"Program.cs"* Datei nastaven NA hodnotu `Basic`.
 

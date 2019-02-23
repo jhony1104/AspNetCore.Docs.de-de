@@ -5,12 +5,12 @@ description: ''
 ms.author: tdykstra
 ms.date: 12/07/2016
 uid: migration/http-modules
-ms.openlocfilehash: 9dd28b86966912cce87166feb37e65adf3dd6dcb
-ms.sourcegitcommit: 5a2456cbf429069dc48aaa2823cde14100e4c438
+ms.openlocfilehash: 601b93fb12ab5b37b7d8ad8fd9825accc6e314cd
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2018
-ms.locfileid: "41902670"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56743854"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handler und Module zu ASP.NET Core-middleware
 
@@ -46,7 +46,7 @@ Bevor Sie fortfahren, um ASP.NET Core-Middleware, zunächst betrachten wir wie H
 
 **Die Reihenfolge, in der Module eingehenden Anforderungen verarbeiten, wird durch bestimmt:**
 
-   1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)usw. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
+   1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
 
    2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"*.
 
@@ -96,7 +96,7 @@ Siehe die [Middleware](xref:fundamentals/middleware/index) Seite eine ASP.NET Co
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddleware.cs?highlight=9,13,20,24,28,30,32)]
 
-Die vorherige Middleware Vorlage stammt aus dem Abschnitt für [Schreiben von Middleware](xref:fundamentals/middleware/index#write-middleware).
+Die vorherige Middleware Vorlage stammt aus dem Abschnitt für [Schreiben von Middleware](xref:fundamentals/middleware/write).
 
 Die *MyMiddlewareExtensions* Hilfsklasse erleichtert das Konfigurieren Ihrer Middleware in Ihre `Startup` Klasse. Die `UseMyMiddleware` Methode fügt Ihrer Middleware-Klasse, zu der Anforderungspipeline. Die Middleware erforderlich sind, erhalten in den Konstruktor der Middleware eingefügt.
 
@@ -242,7 +242,7 @@ public async Task Invoke(HttpContext context)
 
 `HttpContext` in ASP.NET Core wurde erheblich geändert werden. In diesem Abschnitt wird gezeigt, wie die am häufigsten verwendeten Eigenschaften der übersetzen [System.Web.HttpContext](/dotnet/api/system.web.httpcontext) mit dem neuen `Microsoft.AspNetCore.Http.HttpContext`.
 
-### <a name="httpcontext"></a>"HttpContext"
+### <a name="httpcontext"></a>HttpContext
 
 **"HttpContext.Items"** übersetzt in:
 
@@ -272,11 +272,11 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Secure)]
 
-**HttpContext.Request.UserHostAddress** übersetzt in:
+**HttpContext.Request.UserHostAddress** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext.Request.Cookies** übersetzt in:
+**HttpContext.Request.Cookies** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -284,15 +284,15 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Route)]
 
-**HttpContext.Request.Headers** übersetzt in:
+**HttpContext.Request.Headers** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Headers)]
 
-**HttpContext.Request.UserAgent** übersetzt in:
+**HttpContext.Request.UserAgent** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Agent)]
 
-**HttpContext.Request.UrlReferrer** übersetzt in:
+**HttpContext.Request.UrlReferrer** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Referrer)]
 
@@ -300,7 +300,7 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Type)]
 
-**HttpContext.Request.Form** übersetzt in:
+**HttpContext.Request.Form** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 

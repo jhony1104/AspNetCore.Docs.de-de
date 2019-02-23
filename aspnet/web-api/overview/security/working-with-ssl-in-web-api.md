@@ -4,16 +4,16 @@ title: Arbeiten mit SSL in Web-API | Microsoft-Dokumentation
 author: MikeWasson
 description: Veranschaulicht die Verwendung von SSL mit ASP.NET Web-API, einschließlich der Verwendung von SSL-Clientzertifikate.
 ms.author: riande
-ms.date: 12/12/2012
+ms.date: 02/22/2019
 ms.assetid: 97f6164f-59cf-45c0-b820-e4aa29b45396
 msc.legacyurl: /web-api/overview/security/working-with-ssl-in-web-api
 msc.type: authoredcontent
-ms.openlocfilehash: b11b35f58a1f033423f5e6ea5f5373df0d1fcb5f
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: 69c0d217f605096d968435c062ee9931f8dff75f
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41826672"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744104"
 ---
 <a name="working-with-ssl-in-web-api"></a>Arbeiten mit SSL in Web-API
 ====================
@@ -58,8 +58,8 @@ Um IIS für die Clientzertifikate akzeptieren konfigurieren zu können, öffnen 
 2. Doppelklicken Sie auf die **SSL-Einstellungen** -Funktion in der Mitte.
 3. Klicken Sie unter **Clientzertifikate**, wählen Sie eine der folgenden Optionen: 
 
-    - **Akzeptieren Sie**: IIS ein Zertifikat vom Client akzeptiert, aber es ist nicht erforderlich sind.
-    - **Erfordern**: ein Clientzertifikat erforderlich. (Wenn Sie diese Option aktivieren, müssen Sie auch "SSL erforderlich" auswählen)
+    - **Akzeptieren Sie**: IIS wird ein Zertifikat vom Client akzeptiert, aber es ist nicht erforderlich sind.
+    - **Erfordern**: Benötigen Sie ein Clientzertifikat. (Wenn Sie diese Option aktivieren, müssen Sie auch "SSL erforderlich" auswählen)
 
 Sie können auch diese Optionen in der Datei "applicationHost.config" festlegen:
 
@@ -69,7 +69,7 @@ Die **SslNegotiateCert** Flag bedeutet, dass IIS ein Zertifikat vom Client akzep
 
 ### <a name="creating-a-client-certificate-for-testing"></a>Erstellen ein Clientzertifikat für das Testen
 
-Zu Testzwecken können Sie [MakeCert.exe](https://msdn.microsoft.com/library/bfsktky3.aspx) ein Clientzertifikat zu erstellen. Erstellen Sie zunächst eine Test-Stammzertifizierungsstelle:
+Zu Testzwecken können Sie [MakeCert.exe](/windows/desktop/SecCrypto/makecert) ein Clientzertifikat zu erstellen. Erstellen Sie zunächst eine Test-Stammzertifizierungsstelle:
 
 [!code-console[Main](working-with-ssl-in-web-api/samples/sample4.cmd)]
 
