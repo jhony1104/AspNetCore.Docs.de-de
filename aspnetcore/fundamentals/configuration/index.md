@@ -1,17 +1,11 @@
 ---
 title: Konfiguration in ASP.NET Core
 author: guardrex
-description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.
+description: 'In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/25/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 2465570e469020ae2855508bd1bfc8528e188ebb
-ms.sourcegitcommit: ca5f03210bedc61c6639a734ae5674bfe095dee8
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 01/26/2019
-ms.locfileid: "55073165"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -70,7 +64,7 @@ Diese drei Pakete sind im Metapaket [Microsoft.AspNetCore.All](xref:fundamentals
 
 ## <a name="host-vs-app-configuration"></a>Hostkonfiguration vs. App-Konfiguration
 
-Bevor die App konfiguriert und gestartet wird, wird ein *Host* konfiguriert und gestartet. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. Die App und der Host werden mit den in diesem Thema beschriebenen Konfigurationsanbietern konfiguriert. Schlüssel-Wert-Paare der Hostkonfiguration werden Teil der globalen App-Konfiguration. Weitere Informationen dazu, wie Konfigurationsanbieter beim Erstellen des Hosts verwendet werden, und wie sich Konfigurationsquellen auf die Hostkonfiguration auswirken, finden Sie unter <xref:fundamentals/host/index>.
+Bevor die App konfiguriert und gestartet wird, wird ein *Host* konfiguriert und gestartet. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. Die App und der Host werden mit den in diesem Thema beschriebenen Konfigurationsanbietern konfiguriert. Schlüssel-Wert-Paare der Hostkonfiguration werden Teil der globalen App-Konfiguration. Weitere Informationen dazu, wie Konfigurationsanbieter beim Erstellen des Hosts verwendet werden, und wie sich Konfigurationsquellen auf die Hostkonfiguration auswirken, finden Sie unter [Hosting](xref:fundamentals/index#host).
 
 ## <a name="default-configuration"></a>Standardkonfiguration
 

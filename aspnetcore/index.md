@@ -1,17 +1,11 @@
 ---
 title: Einführung in ASP.NET Core
 author: rick-anderson
-description: Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.
+description: 'Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 02/14/2019
 uid: index
-ms.openlocfilehash: c3f07814bfab19a0f070e0b48b0d2ef6cfc1594e
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248159"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -68,6 +62,34 @@ Das Anzielen auf .NET Core bringt mit jedem Release mehr und mehr Vorteile mit s
 * Quelle öffnen
 
 Es wird daran gearbeitet, die API-Lücke von .NET Framework zu .NET Core zu schließen. Das [Windows Compatibility Pack](/dotnet/core/porting/windows-compat-pack) stellt Tausende nur unter Windows verfügbare APIs in .NET Core zur Verfügung. Diese APIs waren in .NET Core 1.x nicht verfügbar.
+
+## <a name="recommended-learning-path"></a>Empfohlener Lernpfad
+
+Als Einführung in die Entwicklung von ASP.NET Core-Apps empfehlen wir die folgenden Tutorials und Artikel:
+
+1. Folgen Sie einem Tutorial, das für den Typ von App bestimmt ist, den Sie entwickeln oder verwalten möchten:
+
+   |App-Typ  |Szenario  |Lernprogramm  |
+   |----------|----------|----------|
+   |Web-App       | Für Neuentwicklungen        |[Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web-App       | Für die Verwaltung einer MVC-App |[Erste Schritte mit MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Web-API       |                            |[Erstellen einer Web-API](xref:tutorials/first-web-api)\*  |
+   |Echtzeit-App |                            |[Erste Schritte mit SignalR](xref:tutorials/signalr) |
+
+1. Folgen Sie einem Tutorial, in dem die Grundlagen des Datenzugriffs erklärt werden:
+
+   |Szenario  |Lernprogramm  |
+   |----------|----------|
+   | Für Neuentwicklungen        |[Razor Pages mit Entity Framework Core](xref:data/ef-rp/intro) |
+   | Für die Verwaltung einer MVC-App |[MVC mit Entity Framework Core](xref:data/ef-mvc/intro)
+
+1. Übersicht über ASP.NET Core-Features, die alle App-Typen bieten:
+
+   * [Grundlagen](xref:fundamentals/index)
+
+1. Suchen Sie im Inhaltsverzeichnis nach weiteren interessanten Themen.
+
+\* Es gibt ein neues [Web-API-Tutorial, dem Sie vollständig im Browser folgen können](https://docs.microsoft.com/learn/modules/build-web-api-net-core), ohne dass eine lokale Entwicklungsumgebung installiert werden muss.  Der Code wird in einer [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) ausgeführt, und zum Testen wird [curl](https://curl.haxx.se/) verwendet.
 
 ## <a name="how-to-download-a-sample"></a>Herunterladen eines Beispiels
 
@@ -126,7 +148,7 @@ Weitere Informationen finden Sie unter [Contribute to the ASP.NET documentation:
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-* [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start)
+* <xref:getting-started>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>
 * [ASP.NET Core – Grundlagen](xref:fundamentals/index)
 * Im [wöchentlichen ASP.NET Community Standup](https://live.asp.net/) werden die Fortschritte und Pläne des Teams behandelt. Zudem werden neue Blogs und Drittanbietersoftware vorgestellt.
