@@ -58,35 +58,35 @@ items:
   - uid: fundamentals/index
     name: Übersicht
   - uid: fundamentals/startup
-    name: App-Start
+    name: Die Startup-Klasse
   - uid: fundamentals/dependency-injection
     name: Abhängigkeitsinjektion (Dienste)
-  - uid: fundamentals/routing
-    name: Routing
-  - uid: fundamentals/environments
-    name: Umgebungen (Entwicklung, Staging, Produktion)
-  - uid: fundamentals/configuration/index
-    name: Konfiguration
-  - uid: fundamentals/configuration/options
-    name: Optionen
-  - uid: fundamentals/logging/index
-    name: Protokollierung
-  - uid: fundamentals/error-handling
-    name: Behandeln von Fehlern
   - uid: fundamentals/middleware/index
     name: Middleware
-  - name: Host
+  - name: Hosting
     items:
-    - uid: fundamentals/host/index
-      name: Übersicht
     - uid: fundamentals/host/web-host
       name: Webhost
     - uid: fundamentals/host/generic-host
       name: Generischer Host
   - uid: fundamentals/servers/index
     name: Server
+  - uid: fundamentals/configuration/index
+    name: Konfiguration
+  - uid: fundamentals/configuration/options
+    name: Optionen
+  - uid: fundamentals/environments
+    name: Umgebungen (Entwicklung, Staging, Produktion)
+  - uid: fundamentals/logging/index
+    name: Protokollierung
+  - uid: fundamentals/routing
+    name: Routing
+  - uid: fundamentals/error-handling
+    name: Behandeln von Fehlern
   - uid: fundamentals/http-requests
     name: Übermitteln von HTTP-Anforderungen
+  - uid: fundamentals/static-files
+    name: Statische Dateien
 - name: Web-Apps
   items:
   - name: Razor Pages
@@ -210,8 +210,6 @@ items:
         href: mvc/views/working-with-forms.md#the-validation-summary-tag-helper
   - uid: mvc/views/layout
     name: Layout
-  - uid: fundamentals/static-files
-    name: Statische Dateien
   - uid: mvc/models/model-binding
     name: Modellbindung
   - uid: mvc/models/validation
@@ -814,6 +812,8 @@ items:
     name: Lokalisierung portabler Objekte
 - name: Erweitert
   items:
+  - uid: fundamentals/middleware/write
+    name: Schreiben von Middleware
   - uid: fundamentals/url-rewriting
     name: URL-Umschreibung
   - uid: fundamentals/file-providers
@@ -880,9 +880,9 @@ items:
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: Mitwirken
   href: https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md
-ms.openlocfilehash: d2015955147460621d64ea6035f5f8118a02469b
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: e55cfa30103c2a89007f2bc5e9d133dea7f8c6d5
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248393"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56743997"
