@@ -8,16 +8,16 @@ ms.date: 10/02/2014
 ms.assetid: 0a8d6044-5fab-4213-82d6-5618d5601358
 msc.legacyurl: /web-forms/overview/security/create-a-secure-aspnet-web-forms-app-with-user-registration-email-confirmation-and-password-reset
 msc.type: authoredcontent
-ms.openlocfilehash: b964257165f8a50bef5cb5d8cee4fb30a5e91cf0
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
+ms.openlocfilehash: acc13776840408756901e20589b9efacc83ff2a9
+ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41836250"
+ms.lasthandoff: 02/26/2019
+ms.locfileid: "56833682"
 ---
-<a name="create-a-secure-aspnet-web-forms-app-with-user-registration-email-confirmation-and-password-reset-c"></a>Erstellen einer sicheren ASP.NET Web Forms-app mit benutzerregistrierung, e-Mail-Bestätigung und kennwortzurücksetzung (c#)
+<a name="create-a-secure-aspnet-web-forms-app-with-user-registration-email-confirmation-and-password-reset-c"></a>Erstellen einer sicheren ASP.NET Web Forms-App mit Benutzerregistrierung, E-Mail-Bestätigung und Kennwortzurücksetzung (C#)
 ====================
-durch [Erik Reitan](https://github.com/Erikre)
+by [Erik Reitan](https://github.com/Erikre)
 
 > In diesem Tutorial erfahren Sie, wie Sie eine ASP.NET Web Forms-app mit benutzerregistrierung, e-Mail-Bestätigung und kennwortzurücksetzung mithilfe von ASP.NET Identity-Mitgliedschaftssystem zu erstellen. In diesem Tutorial basiert auf andersons [MVC-Tutorial](../../../mvc/overview/security/create-an-aspnet-mvc-5-web-app-with-email-confirmation-and-password-reset.md).
 
@@ -70,6 +70,8 @@ Im Allgemeinen möchten Sie verhindern, dass neue Benutzer keine Daten zu Ihrer 
 
 <a id="SG"></a>
 ## <a name="hook-up-sendgrid"></a>Verknüpfen mit SendGrid
+
+SendGrid wurde dessen-API-geändert werden, da in diesem Tutorial geschrieben wurde. Aktuelle SendGrid-Anweisungen, finden Sie unter [SendGrid](http://sendgrid.com/) oder [Konto Bestätigung und -Wiederherstellung aktivieren](xref:security/authentication/accconfirm#enable-account-confirmation-and-password-recovery).
 
 Obwohl dieses Tutorial nur das zeigt Hinzufügen von e-Mail-Benachrichtigung über [SendGrid](http://sendgrid.com/), senden Sie eine e-Mail mit SMTP und andere Mechanismen (finden Sie unter [Zusatzressourcen](#addRes)).
 

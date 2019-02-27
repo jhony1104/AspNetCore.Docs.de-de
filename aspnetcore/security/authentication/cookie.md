@@ -3,14 +3,14 @@ title: Verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity
 author: rick-anderson
 description: Eine Erläuterung der verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity
 ms.author: riande
-ms.date: 10/11/2017
+ms.date: 02/25/2019
 uid: security/authentication/cookie
-ms.openlocfilehash: f05e5b83359ec1739115293e092eaed0c811c046
-ms.sourcegitcommit: 3c2ba9a0d833d2a096d9d800ba67a1a7f9491af0
-ms.translationtype: MT
+ms.openlocfilehash: 7e975da3a276ffb6a3de7ee02f7cc5be67cbbebe
+ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55854379"
+ms.lasthandoff: 02/26/2019
+ms.locfileid: "56833617"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>Verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity
 
@@ -39,6 +39,8 @@ In der `ConfigureServices` -Methode, erstellen Sie den Authentifizierungs-Middle
 `AuthenticationScheme` die an `AddAuthentication` legt das Authentifizierungsschema "Standard" für die app fest. `AuthenticationScheme` ist nützlich, wenn mehrere Instanzen der Cookie-Authentifizierung vorhanden sind, und Sie möchten [autorisieren mit einem bestimmten Schema](xref:security/authorization/limitingidentitybyscheme). Festlegen der `AuthenticationScheme` zu `CookieAuthenticationDefaults.AuthenticationScheme` "Cookies" der Wert für das Schema enthält. Sie können einen beliebigen Zeichenfolgenwert angeben, der das Schema unterscheidet.
 
 Der app-Authentifizierungsschema unterscheidet sich von der app Cookie-Authentifizierungsschema. Wenn ein Cookie-Authentifizierungsschema bereitgestellt ist nicht <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>, verwendet [CookieAuthenticationDefaults.AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("Cookies").
+
+Des Authentifizierungscookies <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> -Eigenschaftensatz auf `true` standardmäßig. Authentifizierungscookies sind zulässig, wenn ein Besucher der Website, die Datensammlung zugestimmt wurde nicht. Weitere Informationen finden Sie unter <xref:security/gdpr#essential-cookies>.
 
 In der `Configure` -Methode ist, die `UseAuthentication` Middleware für die Authentifizierung, die festlegt, aufzurufenden Methode der `HttpContext.User` Eigenschaft. Rufen Sie die `UseAuthentication` Methode vor dem Aufruf `UseMvcWithDefaultRoute` oder `UseMvc`:
 

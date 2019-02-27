@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: b10731261ca0c748548fcba94a229ba055d46eb5
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.openlocfilehash: ccd56d0c15639e1ad29094e947f8055702ee2264
+ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090835"
+ms.lasthandoff: 02/26/2019
+ms.locfileid: "56833669"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Benutzerdefinierte Speicheranbieter für ASP.NET Core Identity
 
@@ -106,7 +106,7 @@ Speichert und ruft die Benutzeranmeldeinformationen (z. B. ein externer Authenti
 
 Speichert und ruft Sie ab, welche Benutzer welche Rollen zugewiesen sind. [Beispiel](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
-**Tipp:** nur implementieren die Klassen, die Sie in Ihrer app verwenden möchten.
+**TIPP:** Implementieren Sie nur die Klassen, die Sie in Ihrer app verwenden möchten.
 
 Geben Sie in den Klassen der Data Access Code zum Ausführen von Datenvorgängen für den persistenzmechanismus. Z. B. in einen benutzerdefinierten Anbieter, Sie müssen möglicherweise den folgenden Code zum Erstellen eines neuen Benutzers in der *speichern* Klasse:
 
@@ -133,7 +133,7 @@ Erstellen Sie eine `UserStore` -Klasse, die Methoden für alle Vorgänge für de
 * [IUserPasswordStore](/dotnet/api/microsoft.aspnetcore.identity.iuserpasswordstore-1)
 * [IUserSecurityStampStore](/dotnet/api/microsoft.aspnetcore.identity.iusersecuritystampstore-1)
 * [IUserEmailStore](/dotnet/api/microsoft.aspnetcore.identity.iuseremailstore-1)
-* [IPhoneNumberStore](/dotnet/api/microsoft.aspnetcore.identity.iphonenumberstore-1)
+* [IUserPhoneNumberStore](/dotnet/api/microsoft.aspnetcore.identity.iuserphonenumberstore-1)
 * [IQueryableUserStore](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)
 * [IUserLoginStore](/dotnet/api/microsoft.aspnetcore.identity.iuserloginstore-1)
 * [IUserTwoFactorStore](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1)
