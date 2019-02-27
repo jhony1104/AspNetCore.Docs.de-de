@@ -33,7 +33,7 @@ Sammeln Sie folgende Informationen:
 
 Vergleichen Sie die Fehlerinformationen mit folgenden häufigen Fehlern. Befolgen Sie die Hinweise zur Fehlerbehebung, wenn eine Übereinstimmung gefunden wird.
 
-Die Fehlerliste in diesem Artikel ist nicht vollständig. Wenn bei Ihnen ein Fehler auftritt, der hier nicht aufgeführt wird, öffnen Sie über die Schaltfläche **Content feedback** (Feedback zum Inhalt) am Ende des Artikels ein neues Issue, in dem Sie den Fehler ausführlich beschreiben sollten, damit er reproduziert werden kann.
+Die Fehlerliste in diesem Artikel ist nicht vollständig. Wenn bei Ihnen ein Fehler auftritt, der hier nicht aufgeführt wird, öffnen Sie über die Schaltfläche **Feedback zum Inhalt** am Ende des Artikels ein neues Issue, in dem Sie den Fehler ausführlich beschreiben sollten, damit er reproduziert werden kann.
 
 [!INCLUDE[Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
@@ -41,7 +41,7 @@ Die Fehlerliste in diesem Artikel ist nicht vollständig. Wenn bei Ihnen ein Feh
 
 * **Ausnahme des Installationsprogramms:** „0x80072efd“ **oder** „0x80072f76: Unbekannter Fehler“
 
-* **Protokollausnahme des Installationsprogramms&#8224;:** „Error 0x80072efd“ **oder** „0x80072f76: Failed to execute EXE package“ (0x80072f76: Fehler beim Ausführen des EXE-Pakets)
+* **Protokollausnahme des Installationsprogramms&#8224;:** „Error 0x80072efd“ **oder** „0x80072f76: Fehler beim Ausführen des EXE-Pakets
 
   &#8224;Das Protokoll befindet sich unter *C:\Benutzer\{USER}\AppData\Local\Temp\dd_DotNetCoreWinSvrHosting__{TIMESTAMP}.log*.
 
@@ -59,15 +59,15 @@ Nicht zum Betriebssystem gehörende Dateien im Verzeichnis **C:\Windows\SysWOW64
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Bereitstellung einer x86-App, obwohl der App-Pool nicht für 32-Bit-Apps aktiviert ist
 
-* **Browser:** HTTP Error 500.30 - ANCM In-Process Start Failure (HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM))
+* **Browser:** HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM)
 
-* **Anwendungsprotokoll:** Application '/LM/W3SVC/5/ROOT' with physical root '{PATH}' hit unexpected managed exception, exception code = '0xe0434352'. Please check the stderr logs for more information. (Die Anwendung „/LM/W3SVC/5/ROOT“ mit dem physischen Stamm „{PATH}“ hat unerwartet eine nicht verwaltete Ausnahme ausgelöst. Fehlercode: „0xe0434352“. Überprüfen Sie die stderr-Protokolle, um weitere Informationen zu erhalten.) Application '/LM/W3SVC/5/ROOT' with physical root '{PATH}' failed to load clr and managed application. CLR worker thread exited prematurely (Die Anwendung „/LM/W3SVC/5/ROOT“ mit dem physischen Stamm „{PATH}“ konnte die CLR und die verwaltete Anwendung nicht laden. Der CLR-Arbeitsthread wurde vorzeitig beendet.)
+* **Anwendungsprotokoll:** Application '/LM/W3SVC/5/ROOT' with physical root '{PATH}' hit unexpected managed exception, exception code = '0xe0434352'. Überprüfen Sie die stderr-Protokolle, um weitere Informationen zu erhalten. Application '/LM/W3SVC/5/ROOT' with physical root '{PATH}' failed to load clr and managed application. Der CLR-Arbeitsthread wurde vorzeitig beendet
 
 * **stdout-Protokoll des ASP.NET Core-Moduls:** Die erstellte Protokolldatei ist leer.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** Failed HRESULT returned: 0x8007023e (Fehler. Zurückgegebenes HRESULT: 0x8007023e)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Failed HRESULT returned: 0x8007023e
 
 ::: moniker-end
 
@@ -79,11 +79,11 @@ Aktivieren Sie den IIS-App-Pool für 32-Bit-Apps, wenn Sie von x86-Frameworks ab
 
 ## <a name="platform-conflicts-with-rid"></a>Plattformkonflikte mit RID
 
-* **Browser:** HTTP Error 502.5 - Process Failure (HTTP-Fehler 502.5: Prozessfehler)
+* **Browser:** HTTP-Fehler 502.5: Prozessfehler
 
 * **Anwendungsprotokoll:** Die Anwendung „MACHINE/WEBROOT/APPHOST/{ASSEMBLY}“ mit dem physischen Stamm „C:\{PATH}\' konnte den Prozess mit der Befehlszeile „C:\{PATH}{assembly}.{exe|dll}“ nicht starten. Fehlercode = 0x80004005 : ff.
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** Ausnahmefehler: System.BadImageFormatException: Could not load file or assembly '{ASSEMBLY}.dll'. (System.BadImageFormatException: Die Datei oder Assembly „{ASSEMBLY}.dll“ wurde nicht gefunden.) Es wurde versucht, ein Programm mit einem falschen Format zu laden.
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Ausnahmefehler: System.BadImageFormatException: Die Datei oder Assembly „{ASSEMBLY}.dll“ wurde nicht gefunden. Es wurde versucht, ein Programm mit einem falschen Format zu laden.
 
 Problembehandlung:
 
@@ -95,13 +95,13 @@ Problembehandlung:
 
 * **Browser:** „ERR_CONNECTION_REFUSED“ **oder** „Es kann keine Verbindung hergestellt werden.“
 
-* **Anwendungsprotokoll:** No entry (Kein Eintrag)
+* **Anwendungsprotokoll:** Kein Eintrag
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker-end
 
@@ -113,7 +113,7 @@ Problembehandlung:
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine oder W3SVC-Serverfeatures deaktiviert
 
-**Betriebssystemausnahme:** The IIS 7.0 CoreWebEngine and W3SVC features must be installed to use the ASP.NET Core Module. (Die Features „CoreWebEngine“ und „W3SVC“ von IIS 7.0 müssen installiert sein, um das ASP.NET Core-Modul zu verwenden.)
+**Betriebssystemausnahme:** Die Features „CoreWebEngine“ und „W3SVC“ von IIS 7.0 müssen installiert sein, um das ASP.NET Core-Modul zu verwenden.
 
 Problembehandlung:
 
@@ -121,15 +121,15 @@ Vergewissern Sie sich, dass die richtigen Rollen und Features aktiviert wurden. 
 
 ## <a name="incorrect-website-physical-path-or-app-missing"></a>Falscher physischer Pfad der Website oder App fehlt
 
-* **Browser:** „403 – Verboten: Zugriff verweigert.“ **oder** „403.14 Forbidden - The Web server is configured to not list the contents of this directory.“ (403.14 – Verboten: Der Webserver wurde dafür konfiguriert, die Inhalte dieses Verzeichnisses nicht aufzulisten.)
+* **Browser:** „403 – Verboten: Zugriff verweigert.“ **oder** „403.14 Verboten: Der Webserver wurde dafür konfiguriert, die Inhalte dieses Verzeichnisses nicht aufzulisten.
 
-* **Anwendungsprotokoll:** No entry (Kein Eintrag)
+* **Anwendungsprotokoll:** Kein Eintrag
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker-end
 
@@ -139,15 +139,15 @@ Problembehandlung:
 
 ## <a name="incorrect-role-aspnet-core-module-not-installed-or-incorrect-permissions"></a>„Falsche Rolle“, „ASP.NET Core-Modul nicht installiert“ oder „Falsche Berechtigungen“
 
-* **Browser:** „500.19 Internal Server Error - The requested page cannot be accessed because the related configuration data for the page is invalid.“ (500.19 – Interner Serverfehler: Auf die angeforderte Seite kann nicht zugegriffen werden, da die zugehörigen Konfigurationsdaten für die Seite ungültig sind.) **oder** „Diese Seite kann nicht angezeigt werden.“
+* **Browser:** 500.19 – Interner Serverfehler: Auf die angeforderte Seite kann nicht zugegriffen werden, da die zugehörigen Konfigurationsdaten für die Seite ungültig sind. **oder** „Diese Seite kann nicht angezeigt werden.“
 
-* **Anwendungsprotokoll:** No entry (Kein Eintrag)
+* **Anwendungsprotokoll:** Kein Eintrag
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker-end
 
@@ -167,19 +167,19 @@ Problembehandlung:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Browser:** HTTP Error 500.0 - ANCM In-Process Handler Load Failure (HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM))
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)
 
-* **Anwendungsprotokoll:** Application 'MACHINE/WEBROOT/APPHOST/{ASSEMBLY}' with physical root 'C:\{PATH}\' failed to start process with commandline '"{...}" ', ErrorCode = '0x80070002 : 0. Application '{PATH}' wasn't able to start. Executable was not found at '{PATH}'. (Die Anwendung „{PATH}“ konnte nicht gestartet werden. Es wurde keine ausführbare Datei unter „{PATH}“ gefunden.) Failed to start application '/LM/W3SVC/2/ROOT', ErrorCode '0x8007023e'. (Die Anwendung „/LM/W3SVC/2/ROOT“ konnte nicht gestartet werden. Fehlercode: 0x8007023e.)
+* **Anwendungsprotokoll:** Application 'MACHINE/WEBROOT/APPHOST/{ASSEMBLY}' with physical root 'C:\{PATH}\' failed to start process with commandline '"{...}" ', ErrorCode = '0x80070002 : 0. Application '{PATH}' wasn't able to start. Es wurde keine ausführbare Datei unter „{PATH}“ gefunden. Die Anwendung „/LM/W3SVC/2/ROOT“ konnte nicht gestartet werden. Fehlercode: 0x8007023e.
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** Ereignisprotokoll: 'Application '{PATH}' wasn't able to start. Executable was not found at '{PATH}'. (Die Anwendung „{PATH}“ konnte nicht gestartet werden. Es wurde keine ausführbare Datei unter „{PATH}“ gefunden.) Failed HRESULT returned: 0x8007023e (Fehler. Zurückgegebenes HRESULT: 0x8007023e)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Ereignisprotokoll: 'Application '{PATH}' wasn't able to start. Es wurde keine ausführbare Datei unter „{PATH}“ gefunden. Failed HRESULT returned: 0x8007023e
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-* **Browser:** HTTP Error 502.5 - Process Failure (HTTP-Fehler 502.5: Prozessfehler)
+* **Browser:** HTTP-Fehler 502.5: Prozessfehler
 
 * **Anwendungsprotokoll:** Application 'MACHINE/WEBROOT/APPHOST/{ASSEMBLY}' with physical root 'C:\{PATH}\' failed to start process with commandline '"{...}" ', ErrorCode = '0x80070002 : 0.
 
@@ -213,23 +213,23 @@ Problembehandlung:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Browser:** HTTP Error 500.0 - ANCM In-Process Handler Load Failure (HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM))
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)
 
-* **Anwendungsprotokoll:** Invoking hostfxr to find the inprocess request handler failed without finding any native dependencies. (Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln.) Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: Did you mean to run dotnet SDK commands? Please install dotnet SDK from: (Der In-Process-Anforderungshandler konnte nicht gefunden werden. Ausgabe des Aufrufs von „hostfxr“: Hatten Sie die Absicht, .NET SDK-Befehle auszuführen? Installieren Sie das .NET SDK über https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409.) https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 Fehler beim Starten der Anwendung "/ LM/W3SVC/3/ROOT", ErrorCode "0x8000ffff".
+* **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: Did you mean to run dotnet SDK commands? Installieren Sie das .NET SDK über: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 Fehler beim Starten der Anwendung "/ LM/W3SVC/3/ROOT", ErrorCode "0x8000ffff".
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** Did you mean to run dotnet SDK commands? Please install dotnet SDK from: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 (Hatten Sie die Absicht, .NET SDK-Befehle auszuführen? Installieren Sie das .NET SDK über https://go.microsoft.com/fwlink/?LinkID=798306&amp;clcid=0x409.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Did you mean to run dotnet SDK commands? Installieren Sie das .NET SDK über: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** Invoking hostfxr to find the inprocess request handler failed without finding any native dependencies. (Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln.) Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Failed HRESULT returned: 0x8000ffff Could not find inprocess request handler. Captured output from invoking hostfxr: Did you mean to run dotnet SDK commands? Please install dotnet SDK from: (Fehler. Zurückgegebenes HRESULT: 0x8000ffff. Der In-Process-Anforderungshandler konnte nicht gefunden werden. Ausgabe des Aufrufs von „hostfxr“: Hatten Sie die Absicht, .NET SDK-Befehle auszuführen? Installieren Sie das .NET SDK über https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409.) https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 HRESULT-Fehler zurückgegeben: 0x8000ffff (Fehler. Zurückgegebenes HRESULT: 0x8000ffff.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Failed HRESULT returned: 0x8000ffff Could not find inprocess request handler. Captured output from invoking hostfxr: Did you mean to run dotnet SDK commands? Installieren Sie das .NET SDK über: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 HRESULT-Fehler zurückgegeben: 0x8000ffff
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-* **Browser:** HTTP Error 502.5 - Process Failure (HTTP-Fehler 502.5: Prozessfehler)
+* **Browser:** HTTP-Fehler 502.5: Prozessfehler
 
-* **Anwendungsprotokoll:** Application 'MACHINE/WEBROOT/APPHOST/{ASSEMBLY}' with physical root 'C:\{PATH}\' failed to start process with commandline '"dotnet" .\{ASSEMBLY}.dll', ErrorCode = '0x80004005 : 80008081. (Die Anwendung „MACHINE/WEBROOT/APPHOST/{ASSEMBLY}“ mit dem physischen Stamm „C:\{PATH}\“ konnte den Prozess mit der Befehlszeile „"dotnet" .\{ASSEMBLY}.dll“ nicht starten. Fehlercode = 0x80004005 : 80008081.)
+* **Anwendungsprotokoll:** Application 'MACHINE/WEBROOT/APPHOST/{ASSEMBLY}' with physical root 'C:\{PATH}\' failed to start process with commandline '"dotnet" .\{ASSEMBLY}.dll', ErrorCode = '0x80004005 : 80008081.
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The application to execute does not exist: 'PATH\{ASSEMBLY}.dll' (Die Anwendung, die ausgeführt werden soll, ist nicht vorhanden: „PATH\{ASSEMBLY}.dll“.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** The application to execute does not exist: 'PATH\{ASSEMBLY}.dll'
 
 ::: moniker-end
 
@@ -243,15 +243,15 @@ Problembehandlung:
 
 ## <a name="missing-net-core-shared-framework"></a>Fehlendes freigegebenes .NET Core-Framework
 
-* **Browser:** HTTP Error 500.0 - ANCM In-Process Handler Load Failure (HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM))
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)
 
-* **Anwendungsprotokoll:** Invoking hostfxr to find the inprocess request handler failed without finding any native dependencies. (Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln.) Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: It was not possible to find any compatible framework version. The specified framework 'Microsoft.AspNetCore.App', version '{VERSION}' was not found. (Der In-Process-Anforderungshandler konnte nicht gefunden werden. Ausgabe des Aufrufs von „hostfxr“: Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.)
+* **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: It was not possible to find any compatible framework version. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.
 
-Failed to start application '/LM/W3SVC/5/ROOT', ErrorCode '0x8000ffff'. (Die Anwendung „/LM/W3SVC/5/ROOT“ konnte nicht gestartet werden. Fehlercode: 0x8000ffff.)
+Die Anwendung „/LM/W3SVC/5/ROOT“ konnte nicht gestartet werden. Fehlercode: 0x8000ffff.
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** It was not possible to find any compatible framework version. (Es konnte keine kompatible Frameworkversion gefunden werden.) The specified framework 'Microsoft.AspNetCore.App', version '{VERSION}' was not found. (Der In-Process-Anforderungshandler konnte nicht gefunden werden. Ausgabe des Aufrufs von „hostfxr“: Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** Failed HRESULT returned: 0x8000ffff (Fehler. Zurückgegebenes HRESULT: 0x8000ffff.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Failed HRESULT returned: 0x8000ffff
 
 ::: moniker-end
 
@@ -263,13 +263,13 @@ Stellen Sie für eine Framework-abhängige Bereitstellung (Framework-Dependent D
 
 * **Browser:** 503 – Dienst nicht verfügbar
 
-* **Anwendungsprotokoll:** No entry (Kein Eintrag)
+* **Anwendungsprotokoll:** Kein Eintrag
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker-end
 
@@ -279,15 +279,15 @@ Vergewissern Sie sich, dass der Anwendungspool nicht den Status *Beendet* aufwei
 
 ## <a name="sub-application-includes-a-handlers-section"></a>Untergeordnete Anwendung mit \<handlers>-Abschnitt
 
-* **Browser:** HTTP Error 500.19 - Internal Server Error (HTTP-Fehler 500.19: Interner Serverfehler)
+* **Browser:** HTTP-Fehler 500.19: Interner Serverfehler
 
-* **Anwendungsprotokoll:** No entry (Kein Eintrag)
+* **Anwendungsprotokoll:** Kein Eintrag
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The root app's log file is created and shows normal operation. The sub-app's log file isn't created. (Die Protokolldatei der Stamm-App wurde erstellt und gibt Normalbetrieb an. Die Protokolldatei der untergeordneten App wurde nicht erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** The root app's log file is created and shows normal operation. Die Protokolldatei der untergeordneten App wurde nicht erstellt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** The root app's log file is created and shows normal operation. The sub-app's log file isn't created. (Die Protokolldatei der Stamm-App wurde erstellt und gibt Normalbetrieb an. Die Protokolldatei der untergeordneten App wurde nicht erstellt.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** The root app's log file is created and shows normal operation. Die Protokolldatei der untergeordneten App wurde nicht erstellt.
 
 ::: moniker-end
 
@@ -313,19 +313,19 @@ Der Abschnitt `<system.webServer>` in der *web.config*-Datei der übergeordneten
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Anwendungsprotokoll:** Could not start stdout redirection in C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. (Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht gestartet werden.) Ausnahmemeldung: HRESULT 0x80070005 returned at {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84. („HRESULT: 0x80070005“ wurde für {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84 zurückgegeben.) Could not stop stdout redirection in C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. (Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht beendet werden.) Ausnahmemeldung: HRESULT 0x80070002 returned at {PATH}. Could not start stdout redirection in {PATH}\aspnetcorev2_inprocess.dll. („HRESULT: 0x80070002“ wurde für {PATH} zurückgegeben. Das stdout-Verzeichnis in {PATH}\aspnetcorev2_inprocess.dll konnte nicht gestartet werden.)
+* **Anwendungsprotokoll:** Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht gestartet werden. Ausnahmemeldung: „HRESULT: 0x80070005“ wurde für {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84 zurückgegeben. Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht beendet werden. Ausnahmemeldung: HRESULT 0x80070002 returned at {PATH}. Das stdout-Verzeichnis in {PATH}\aspnetcorev2_inprocess.dll konnte nicht gestartet werden.
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
-* **Debugprotokoll des ASP.NET Core-Moduls:** Could not start stdout redirection in C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. (Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht gestartet werden.) Ausnahmemeldung: HRESULT 0x80070005 returned at {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84. („HRESULT: 0x80070005“ wurde für {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84 zurückgegeben.) Could not stop stdout redirection in C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. (Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht beendet werden.) Ausnahmemeldung: HRESULT 0x80070002 returned at {PATH}. Could not start stdout redirection in {PATH}\aspnetcorev2_inprocess.dll. („HRESULT: 0x80070002“ wurde für {PATH} zurückgegeben. Das stdout-Verzeichnis in {PATH}\aspnetcorev2_inprocess.dll konnte nicht gestartet werden.)
+* **Debugprotokoll des ASP.NET Core-Moduls:** Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht gestartet werden. Ausnahmemeldung: „HRESULT: 0x80070005“ wurde für {PATH}\aspnetcoremodulev2\commonlib\fileoutputmanager.cpp:84 zurückgegeben. Das stdout-Verzeichnis in C:\Programme\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll konnte nicht beendet werden. Ausnahmemeldung: HRESULT 0x80070002 returned at {PATH}. Das stdout-Verzeichnis in {PATH}\aspnetcorev2_inprocess.dll konnte nicht gestartet werden.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-* **Anwendungsprotokoll:** Warnung: Could not create stdoutLogFile \\?\{PATH}\path_doesnt_exist\stdout_{PROCESS ID}_{TIMESTAMP}.log, ErrorCode = -2147024893. (Die stdout-Protokolldatei „\\?\{PATH}\path_doesnt_exist\stdout_{PROCESS ID}_{TIMESTAMP}.log“ konnte nicht erstellt werden. Fehlercode: -2147024893.)
+* **Anwendungsprotokoll:** Warnung: Die stdout-Protokolldatei „\\?\{PATH}\path_doesnt_exist\stdout_{PROCESS ID}_{TIMESTAMP}.log“ konnte nicht erstellt werden. Fehlercode: -2147024893.)
 
-* **stdout-Protokoll des ASP.NET Core-Moduls:** The log file isn't created. (Es wurde keine Protokolldatei erstellt.)
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
 ::: moniker-end
 
@@ -339,7 +339,7 @@ Problembehandlung:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Browser:** „HTTP Error 500.0 - ANCM In-Process Handler Load Failure“ (HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)) **oder** „HTTP Error 500.30 - ANCM In-Process Start Failure“ (HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM))
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM) **oder** HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM)
 
 * **Anwendungsprotokoll:** Variable
 
@@ -351,7 +351,7 @@ Problembehandlung:
 
 ::: moniker range="< aspnetcore-2.2"
 
-* **Browser:** HTTP Error 502.5 - Process Failure (HTTP-Fehler 502.5: Prozessfehler)
+* **Browser:** HTTP-Fehler 502.5: Prozessfehler
 
 * **Anwendungsprotokoll:** Die Anwendung „MACHINE/WEBROOT/APPHOST/{ASSEMBLY}“ mit dem physischen Stamm ‚C:\{PATH}\' hat den Prozess mit der Befehlszeile „C:\{PATH}\{ASSEMBLY}.{exe|dll}“ erstellt, ist aber abgestürzt, reagiert nicht oder lauscht dem angegebenen Port „{PORT}“ nicht. Fehlercode: {ERROR CODE}.)
 
