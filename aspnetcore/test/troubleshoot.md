@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: In diesem Artikel werden Warnungen und Fehler erläutert. Außerdem erfahren Sie, wie die Problembehandlung in ASP.NET Core-Projekten funktioniert.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/26/2018
+ms.date: 02/26/2019
 uid: test/troubleshoot
-ms.openlocfilehash: 7a3361970bde2b8761c76884fc1905957d075c5c
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.openlocfilehash: c8b34f51fd329eb9a7c34f7be93bd7f2aa054283
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52450774"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899286"
 ---
 # <a name="troubleshoot-aspnet-core-projects"></a>Problembehandlung bei ASP.NET Core-Projekten
 
@@ -23,7 +23,7 @@ Die folgenden Links erhalten Anleitungen zur Fehlerbehebung:
 * <xref:host-and-deploy/iis/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 * [NDC Conference (London, 2018): Diagnostizieren von Problemen in ASP.NET Core-Anwendungen](https://www.youtube.com/watch?v=RYI0DHoIVaA)
-* [ASP.NET-Blog: Problembehandlung bei Leistungsproblemen von ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2018/05/23/asp-net-core-performance-improvements/)
+* [ASP.NET-Blog: Behandlung von Leistungsproblemen von ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2018/05/23/asp-net-core-performance-improvements/)
 
 ## <a name="net-core-sdk-warnings"></a>.NET Core SDK-Warnungen
 
@@ -63,12 +63,12 @@ In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende 
 
 ![Screenshot des Dialogfelds mit die Warnmeldung OneASP.NET](troubleshoot/_static/NoNetCore.png)
 
-Diese Warnung wird angezeigt, wenn die Umgebungsvariable `PATH` verweist nicht auf alle .NET Core-SDKs auf dem Computer. Um dieses Problem zu beheben:
+Diese Warnung wird angezeigt, wenn die Umgebungsvariable `PATH` verweist nicht auf alle .NET Core-SDKs auf dem Computer (z. B. `C:\Program Files\dotnet\` und `C:\Program Files (x86)\dotnet\`). Um dieses Problem zu beheben:
 
-* Installieren, oder stellen Sie sicher, dass das .NET Core SDK installiert ist.
+* Installieren, oder stellen Sie sicher, dass das .NET Core SDK installiert ist. Abrufen der neuesten Installation von [.NET Downloads](https://dotnet.microsoft.com/download). 
 * Überprüfen Sie, ob die `PATH` Umgebungsvariable verweist auf den Speicherort, in dem das SDK installiert ist. Der Installer normalerweise legt der `PATH`.
 
-## <a name="obtain-data-from-an-app"></a>Abrufen von Daten aus einer app
+## <a name="obtain-data-from-an-app"></a>Abrufen von Daten aus einer App
 
 Wenn eine app auf Anforderungen reagiert werden kann, können Sie die folgenden Daten aus der app unter Verwendung von Middleware abrufen:
 

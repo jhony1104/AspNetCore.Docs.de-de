@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: spa/react
-ms.openlocfilehash: aa08a9d8d06d8b52be564fabf904d4923684d4e4
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: 3b2b2e67b5d577872bafefef5624a13ca1a22449
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248029"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899176"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Verwenden der React-Projektvorlage mit ASP.NET Core
 
@@ -102,3 +102,6 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
     ```
 
 Wenn Sie Ihre ASP.NET Core-App starten, wird kein CRA-Server gestartet. Stattdessen wird die Instanz verwendet, die Sie manuell gestartet haben. Dadurch kann sie schneller gestartet und neu gestartet werden. So müssen Sie nicht mehr jedes Mal warten, bis Ihre React-App neu erstellt wurde.
+
+> [!IMPORTANT]
+> "Serverseitiges Rendering" ist keine unterstützte Funktion dieser Vorlage. Unser Ziel mit dieser Vorlage ist Parität mit "create-React-app" zu erfüllen. Daher ist es möglich, Szenarien und Features, die nicht in einem Projekt "erstellen-React-app" (z. B. SSR) enthalten werden nicht unterstützt, und Sie bleiben als Übung für den Benutzer.
