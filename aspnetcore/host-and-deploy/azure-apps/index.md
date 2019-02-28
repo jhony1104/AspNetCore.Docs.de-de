@@ -5,7 +5,7 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2019
+ms.date: 02/26/2019
 uid: host-and-deploy/azure-apps/index
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
@@ -19,7 +19,7 @@ In der [Web-Apps-Dokumentation](/azure/app-service/) finden Sie die Azure-Apps-D
 [Erstellen einer ASP.NET Core-Web-App in Azure](/azure/app-service/app-service-web-get-started-dotnet)  
 Verwenden Sie Visual Studio, um ASP.NET Core-Web-Apps zu erstellen und in Azure App Service unter Windows bereitzustellen.
 
-[Erstellen einer .NET Core-Web-App in App Service für Linux](/azure/app-service/containers/quickstart-dotnetcore)  
+[Erstellen einer .NET Core-App in App Service für Linux](/azure/app-service/containers/quickstart-dotnetcore)  
 Verwenden Sie die Befehlszeile, um ASP.NET Core-Web-Apps zu erstellen und in Azure App Service unter Linux bereitzustellen.
 
 Die folgenden Artikel sind in der ASP.NET Core-Dokumentation verfügbar:
