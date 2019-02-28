@@ -4,14 +4,14 @@ author: guardrex
 description: Hier erfahren Sie, wie Sie häufige Fehler beim Hosten von ASP.NET Core-Apps in Azure Apps Service und IIS beheben können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 02/21/2019
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 976f7e3fbeab9e81ba99e2dd7d09a892b854651b
-ms.sourcegitcommit: 3c2ba9a0d833d2a096d9d800ba67a1a7f9491af0
+ms.openlocfilehash: d1cdac4d27ee1bc3ebb4329c1bbd3bdacb34a58c
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55854460"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56743946"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Referenz zu häufigen Fehlern bei Azure App Service und IIS mit ASP.NET Core
 
@@ -163,6 +163,14 @@ Problembehandlung:
 
 * Stellen Sie sicher, dass **Anwendungspool** > **Prozessmodell** > **Identität** auf **ApplicationPoolIdentity** festgelegt ist, oder dass die benutzerdefinierte Identität über die erforderlichen Berechtigungen für den Zugriff auf den Bereitstellungsordner der App verfügt.
 
+* Wenn Sie das ASP.NET Core-Hostingpaket deinstallieren und eine frühere Version des Hostingpakets installieren, ist in der *applicationHost.config*-Datei kein Abschnitt für das ASP.NET Core-Modul enthalten. Öffnen Sie die *applicationHost.config*-Datei unter *%windir%/System32/inetsrv/config*, und suchen Sie nach der Abschnittsgruppe `<configuration><configSections><sectionGroup name="system.webServer">`. Wenn der Abschnitt für das ASP.NET Core-Modul in der Abschnittsgruppe nicht vorhanden ist, fügen Sie dieses Abschnittselement hinzu:
+
+  ```xml
+  <section name="aspNetCore" overrideModeDefault="Allow" />
+  ```
+  
+  Installieren Sie alternativ die neueste Version des ASP.NET Core-Hostingpakets. Die neueste Version ist mit den unterstützten ASP.NET Core-Apps abwärtskompatibel.
+
 ## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Falscher processPath-Wert, fehlende PATH-Variable, Hostingpaket nicht installiert, System/IIS wird nicht neu gestartet, VC++ Redistributable nicht installiert oder dotnet.exe-Zugriffsverletzung
 
 ::: moniker range=">= aspnetcore-2.2"
@@ -245,7 +253,7 @@ Problembehandlung:
 
 * **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)
 
-* **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: It was not possible to find any compatible framework version. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.
+* **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Could not find inprocess request handler. Captured output from invoking hostfxr: Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“ (Version {VERSION}) konnte nicht gefunden werden.
 
 Die Anwendung „/LM/W3SVC/5/ROOT“ konnte nicht gestartet werden. Fehlercode: 0x8000ffff.
 
@@ -323,7 +331,7 @@ Der Abschnitt `<system.webServer>` in der *web.config*-Datei der übergeordneten
 
 ::: moniker range="< aspnetcore-2.2"
 
-* **Anwendungsprotokoll:** Warnung: Die stdout-Protokolldatei „\\?\{PATH}\path_doesnt_exist\stdout_{PROCESS ID}_{TIMESTAMP}.log“ konnte nicht erstellt werden. Fehlercode: -2147024893.)
+* **Anwendungsprotokoll:** Warnung: Die stdout-Protokolldatei „ \\?\{ PATH}\path_doesnt_exist\stdout_{PROCESS ID}_{TIMESTAMP}.log“ konnte nicht erstellt werden. Fehlercode: -2147024893.)
 
 * **stdout-Protokoll des ASP.NET Core-Moduls:** Es wurde keine Protokolldatei erstellt.
 
@@ -339,7 +347,7 @@ Problembehandlung:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM) **oder** HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM)
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)  **oder**  HTTP-Fehler 500.30: In-Process-Startfehler beim ASP.NET Core-Modul (ANCM)
 
 * **Anwendungsprotokoll:** Variable
 

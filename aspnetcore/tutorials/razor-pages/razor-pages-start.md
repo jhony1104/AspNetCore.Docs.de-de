@@ -5,12 +5,12 @@ description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Cor
 ms.author: riande
 ms.date: 12/5/2018
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: acebe52719e1876dc6808441fcff6fe849e36983
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 81a2a76fc1cecc78b69226fe714d7c9272b04bf7
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410413"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899190"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
@@ -96,23 +96,29 @@ Klicken Sie in Visual Studio auf **Datei > Öffnen**, und wählen Sie dann die D
 
 ---
 
-## <a name="run-the-web-app"></a>Webanwendung ausführen
+## <a name="run-the-app"></a>Ausführen der App
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Drücken Sie STRG+F5, um die Ausführung ohne den Debugger zu starten.
 
-  Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt die App aus. Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet. In der vorherigen Abbildung ist die Portnummer 5001. Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.
+  [!INCLUDE[](~/includes/trustCertVS.md)]
+
+  Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt die App aus. Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.
   
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Drücken Sie **STRG+F5**, um die Ausführung ohne den Debugger zu starten.
+
+  [!INCLUDE[](~/includes/trustCertVSC.md)]
 
   Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`. Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer.
   
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Klicken Sie in Visual Studio auf **Ausführen > Ohne Debuggen starten**, um die App zu starten. Visual Studio startet dann [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`.
+
+[!INCLUDE[](~/includes/trustCertMac.md)]
 
 <!-- End of VS tabs -->
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/08/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 3cd576b389a2a4384c0ba90b5740ac42140533cc
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.openlocfilehash: a9081a9938d56b7612bba13937eba384ff02455b
+ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159313"
+ms.lasthandoff: 02/26/2019
+ms.locfileid: "56833734"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -316,7 +316,7 @@ Sie können einen Aktionsfilter verwenden, um den Modellzustand zu überprüfen 
 Die Methode `OnActionExecuted` wird nach der Aktionsmethode ausgeführt, und sie kann die Ergebnisse der Aktion durch die Eigenschaft `ActionExecutedContext.Result` sehen und bearbeiten. `ActionExecutedContext.Canceled` wird auf TRUE festgelegt, wenn die Ausführung der Aktion durch einen anderen Filter kurzgeschlossen wurde. `ActionExecutedContext.Exception` wird auf einen Wert festgelegt, der ungleich NULL ist, wenn eine Aktion oder ein nachfolgender Aktionsfilter eine Ausnahme ausgelöst hat. Wenn für `ActionExecutedContext.Exception` NULL festgelegt wird,
 
 * werden Ausnahmen effektiv behandelt,
-* und `ActionExectedContext.Result` wird so ausgeführt, als würde die Eigenschaft normal von der Aktionsmethode zurückgegeben werden.
+* und `ActionExecutedContext.Result` wird so ausgeführt, als würde die Eigenschaft normal von der Aktionsmethode zurückgegeben werden.
 
 ## <a name="exception-filters"></a>Ausnahmefilter
 

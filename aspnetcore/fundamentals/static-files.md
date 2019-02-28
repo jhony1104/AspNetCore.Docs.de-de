@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/static-files
-ms.openlocfilehash: 4c08d65cc1f658ef08a9b4b362ac7f8a3a243557
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: e6bda5dd60c62c7bdbfa81f34c14cfcd07e8d700
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637780"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744052"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -23,7 +23,7 @@ Bei statischen Dateien wie HTML, CSS, Images und JavaScript handelt es sich um O
 
 ## <a name="serve-static-files"></a>Bereitstellen statischer Dateien
 
-Statische Dateien werden im Webstammverzeichnis Ihres Projekts gespeichert. Das Standardverzeichnis lautet *\<content_root>/wwwroot*, es kann jedoch mit der Methode [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) geändert werden. Weitere Informationen finden Sie unter [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root-webroot).
+Statische Dateien werden im Webstammverzeichnis Ihres Projekts gespeichert. Das Standardverzeichnis lautet *\<content_root>/wwwroot*, es kann jedoch mit der Methode [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) geändert werden. Weitere Informationen finden Sie unter [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root).
 
 Der Web-Host der App muss über das Inhaltsstammverzeichnis informiert werden.
 
@@ -82,7 +82,7 @@ Die parameterlose Überladung der Methode `UseStaticFiles` markiert die Dateien 
 
 [!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
-Im vorhergehenden Code verweist die Tilde (`~/`) auf den Webstamm. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/index#web-root-webroot).
+Im vorhergehenden Code verweist die Tilde (`~/`) auf den Webstamm. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/index#web-root).
 
 ### <a name="serve-files-outside-of-web-root"></a>Bereitstellen von Dateien außerhalb des Webstammverzeichnisses
 
