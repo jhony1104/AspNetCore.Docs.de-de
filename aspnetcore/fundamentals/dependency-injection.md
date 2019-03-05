@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie, wie ASP.NET Core Dependency Injection implementiert und wie Sie dieses Muster verwenden können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 02/25/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 5e5b9746da9bbc13a147b807aabfd3d9ab90a0ca
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 5e1522e0819d989a7029c2928c1c33624c1774c7
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410507"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899358"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -179,7 +179,7 @@ In der Beispiel-App wird die Instanz `IMyDependency` angefordert, und mit ihr wi
 
 ## <a name="framework-provided-services"></a>Von Frameworks bereitgestellte Dienste
 
-Die Methode `Startup.ConfigureServices` definiert die von der App verwendeten Dienste. Dies beinhaltet Plattformfunktionen wie Entity Framework Core und ASP.NET Core MVC. Zunächst enthält die in `ConfigureServices` bereitgestellte `IServiceCollection` folgende definierten Dienste (abhängig von der [Vorgehensweise bei der Konfiguration des Hosts](xref:fundamentals/host/index)):
+Die Methode `Startup.ConfigureServices` definiert die von der App verwendeten Dienste. Dies beinhaltet Plattformfunktionen wie Entity Framework Core und ASP.NET Core MVC. Zunächst enthält die in `ConfigureServices` bereitgestellte `IServiceCollection` folgende definierten Dienste (abhängig von der [Vorgehensweise bei der Konfiguration des Hosts](xref:fundamentals/index#host)):
 
 | Diensttyp | Lebensdauer |
 | ------------ | -------- |
@@ -253,7 +253,7 @@ Wenn Dienste durch `ActivatorUtilities` aufgelöst werden, erfordert Constructor
 
 ## <a name="entity-framework-contexts"></a>Entity Framework-Kontexte
 
-Entity Framework-Kontexte sollten dem Dienstcontainer mit der bereichsbezogenen Lebensdauer hinzugefügt werden. Dies erfolgt automatisch mit dem Aufrufen der Methode [AddDbContext](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) bei der Registrierung des Datenbankkontexts. Dienste, die den Datenbankkontext verwenden, sollten auch die bereichsbezogene Lebensdauer verwenden.
+Entity Framework-Kontexte werden einem Dienstcontainer normalerweise mithilfe der [bereichsbezogenen Lebensdauer](#service-lifetimes) hinzugefügt, da Datenbankvorgänge von Web-Apps normalerweise auf den Abfragebereich bezogen werden. Der Bereich einer Standardlebensdauer wird festgelegt, wenn eine Lebensdauer nicht von einer <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext*>-Überladung angegeben wird, wenn der Datenbankkontext registriert wird. Dienste einer festgelegten Lebensdauer sollten keinen Datenbankkontext mit einer kürzeren Lebensdauer als die des Dienstes verwenden.
 
 ## <a name="lifetime-and-registration-options"></a>Lebensdauer und Registrierungsoptionen
 
@@ -559,7 +559,7 @@ Dependency Injection stellt eine *Alternative* zu statischen bzw. globalen Objek
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
 * [Schreiben von sauberem Code in ASP.NET Core über Dependency Injection (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [Entwurf einer mit Containern verwalteten Anwendung, Einleitung: Welche Zugehörigkeit hat der Container?](https://blogs.msdn.microsoft.com/nblumhardt/2008/12/26/container-managed-application-design-prelude-where-does-the-container-belong/) 
+* [Container-Managed Application Design, Prelude: Where does the Container Belong? (Containerverwaltetes Anwendungsdesign, Einleitung: Wohin gehört der Container?)](https://blogs.msdn.microsoft.com/nblumhardt/2008/12/26/container-managed-application-design-prelude-where-does-the-container-belong/)
 * [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 * [Umkehrung von Steuerungscontainern und das Abhängigkeitsinjektionsmuster (Martin Fowler)](https://www.martinfowler.com/articles/injection.html) (in englischer Sprache)
 * [Registrieren eines Diensts mit mehreren Schnittstellen in ASP.NET Core DI](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)

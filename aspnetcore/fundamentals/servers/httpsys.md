@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über HTTP.sys. einen Webserver für ASP.NET Core
 monikerRange: '>= aspnetcore-2.0'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 02/21/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 859e3daeba125ab1a9392c1bdbf2733de2f79a34
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: abb426b1a41226e52d9b9b5c00c41ff816890d36
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248341"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744130"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implementierung des Http.sys-Webservers in ASP.NET Core
 
@@ -135,7 +135,9 @@ HTTP.sys delegiert zur Kernelmodusauthentifizierung mit dem Kerberos-Authentifiz
 
 ### <a name="configure-windows-server"></a>Konfigurieren von Windows Server
 
-1. Bestimmen Sie die Ports, die für die App geöffnet werden sollen, und verwenden Sie Windows-Firewall oder [PowerShell-Cmdlets](https://technet.microsoft.com/library/jj554906), um Firewall-Ports zu öffnen, damit der Datenverkehr HTTP.sys erreichen kann. Öffnen Sie bei der Bereitstellung für eine Azure-VM die Ports in der [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview). In den folgenden Befehlen und der Appkonfiguration wird Port 443 verwendet.
+1. Bestimmen Sie die Ports, die für die App geöffnet werden sollen, und verwenden Sie die [Windows-Firewall](/windows/security/threat-protection/windows-firewall/create-an-inbound-port-rule) oder das PowerShell-Cmdlet [New-NetFirewallRule](/powershell/module/netsecurity/new-netfirewallrule), um Firewall-Ports zu öffnen, damit der Datenverkehr HTTP.sys erreichen kann. In den folgenden Befehlen und der Appkonfiguration wird Port 443 verwendet.
+
+1. Öffnen Sie bei der Bereitstellung für eine Azure-VM die Ports in der [Netzwerksicherheitsgruppe](/azure/virtual-machines/windows/nsg-quickstart-portal). In den folgenden Befehlen und der Appkonfiguration wird Port 443 verwendet.
 
 1. Beziehen Sie X.509-Zertifikate und installieren Sie sie, falls erforderlich.
 
@@ -272,5 +274,5 @@ Für Apps, die von HTTP.sys gehostet werden und mit Anforderungen aus dem Intern
 * [Aktivieren der Windows-Authentifizierung mit HTTP.sys](xref:security/authentication/windowsauth#enable-windows-authentication-with-httpsys)
 * [HTTP-Server-API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
 * [aspnet/HttpSysServer – GitHub-Repository (Quellcode)](https://github.com/aspnet/HttpSysServer/)
-* <xref:fundamentals/host/index>
+* [Der Host](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>

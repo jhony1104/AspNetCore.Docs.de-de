@@ -3,13 +3,14 @@ Die folgende Tabelle zeigt die Details der Parameter des Codegenerators von ASP.
 | Parameter               | Beschreibung|
 | ----------------- | ------------ |
 | -m  | Der Name des Modells. |
-| -dc  | Die `DbContext`-Klasse, die verwendet werden soll. |
+| -dc  | Der Datenkontext. |
 | -udl | Verwendung des Standardlayouts. |
-| -outDir | Der relative Ausgabeordnerpfad zur Erstellung der Ansichten. |
+| --relativeFolderPath | Der relative Ausgabeordnerpfad zur Erstellung der Ansichten. |
+| --useDefaultLayout | Das Standardlayout sollte für die Ansichten verwendet werden. |
 | --referenceScriptLibraries | Fügt `_ValidationScriptsPartial` zu den Seiten „Create“ und „Edit“ hinzu. |
 
-Verwenden Sie den `h`-Switch um Hilfe für den `aspnet-codegenerator razorpage`-Befehl zu erhalten:
+Verwenden Sie den `h`-Switch um Hilfe für den `aspnet-codegenerator controller`-Befehl zu erhalten:
 
 ```console
-dotnet aspnet-codegenerator razorpage -h
+dotnet aspnet-codegenerator controller -h
 ```

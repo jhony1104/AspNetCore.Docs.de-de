@@ -3,14 +3,14 @@ title: Layout in ASP.NET Core
 author: ardalis
 description: Erfahren Sie, wie man gängige Layouts verwendet, Anweisungen von mehreren Ansichten gemeinsam nutzen lässt und Programmcode vor dem Rendern der Ansichten in einer ASP.NET Core-App ausführt.
 ms.author: riande
-ms.date: 10/18/2018
+ms.date: 02/26/2019
 uid: mvc/views/layout
-ms.openlocfilehash: 1bd225c804b333efea834a46b7d9ba46b1bb69d8
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 7a60ee15e688d6f0e531302457604fa759213758
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410572"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899241"
 ---
 # <a name="layout-in-aspnet-core"></a>Layout in ASP.NET Core
 
@@ -22,7 +22,7 @@ Seiten und Ansichten beinhalten häufig sowohl visuelle als auch programmgesteue
 * Freigeben von Anweisungen
 * Führen Sie den allgemeinen Code aus, bevor Sie Seiten oder Ansichten rendern.
 
-In diesem Dokument werden Layouts für zwei verschiedene Ansätze zu ASP.NET Core MVC erläutert: Razor Pages und Controller mit Ansichten.  In diesem Thema sind die Unterschiede minimal:
+In diesem Dokument werden Layouts für zwei verschiedene Ansätze zu ASP.NET Core MVC erläutert: Razor Pages und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
 
 * Razor-Seiten befinden sich im Ordner *Pages*.
 * Controller mit Ansichten verwenden einen Ordner namens *Views* für Ansichten.
@@ -49,15 +49,15 @@ Das Layout definiert eine übergeordnete Vorlage für die Ansichten einer App. A
 
 Der folgende Code zeigt die Layoutdatei für eine Vorlage, die mit dem Projekt mit einem Controller und Ansichten erstellt wurde:
 
-[!code-html[](~/common/samples/WebApplication1/Views/Shared/_Layout.cshtml?highlight=44,72)]
+[!code-cshtml[](~/common/samples/WebApplication1/Views/Shared/_Layout.cshtml?highlight=44,72)]
 
 ## <a name="specifying-a-layout"></a>Festlegen eines Layouts
 
 Razor-Ansichten verfügen über eine `Layout` -Eigenschaft. Durch Festlegen dieser Eigenschaft wird das Layout der jeweiligen Ansicht bestimmt:
 
-[!code-html[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
+[!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Das angegebene Layout kann einen vollständigen Pfad (z.B. */Pages/Shared/_Layout.cshtml* oder */Views/Shared/_Layout.cshtml*) oder einen Teil des Namens (Beispiel: `_Layout`) aufweisen. Wird ein Teil des Namens angegeben, dann durchsucht die Razor-Ansichts-Engine die Layoutdatei unter Verwendung des standardmäßigen Ermittlungsprozesses. Der Ordner, in dem sich die die Handlermethode (oder der Controller) befindet, wird zuerst durchsucht und danach der Ordner *Shared*. Dieser Ermittlungsprozess ist identisch mit dem Prozess zum Auffinden von [Teilansichten](partial.md).
+Das angegebene Layout kann einen vollständigen Pfad (z.B. */Pages/Shared/_Layout.cshtml* oder */Views/Shared/_Layout.cshtml*) oder einen Teil des Namens (Beispiel: `_Layout`) aufweisen. Wird ein Teil des Namens angegeben, dann sucht die Razor-Ansichts-Engine die Layoutdatei unter Verwendung des standardmäßigen Ermittlungsprozesses. Der Ordner, in dem sich die die Handlermethode (oder der Controller) befindet, wird zuerst durchsucht und danach der Ordner *Shared*. Dieser Ermittlungsprozess ist identisch mit dem Prozess zum Auffinden von [Teilansichten](xref:mvc/views/partial#partial-view-discovery).
 
 Standardmäßig muss jedes Layout `RenderBody` aufrufen. Wo immer der Aufruf von `RenderBody` platziert ist, wird der Inhalt der Ansicht gerendert.
 
@@ -123,7 +123,7 @@ Die Datei unterstützt keine anderen Razor-Features wie Funktionen und Abschnitt
 
 Eine `_ViewImports.cshtml`-Beispieldatei:
 
-[!code-html[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
+[!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
 Die Datei *_ViewImports.cshtml* für eine ASP.NET Core MVC-App befindet sich normalerweise im Ordner *Pages* (oder *Views*). Eine Datei *_ViewImports.cshtml* kann auch in einen anderen Ordner verschoben werden. In diesem Fall wird sie nur auf die Seiten oder Ansichten in diesem Ordner und in dessen Unterordnern angewendet. `_ViewImports`-Dateien werden beginnend ab der Stammebene verarbeitet und dann einzeln für jeden Ordner bis zum Speicherort der Seite oder der Ansicht selbst. Die `_ViewImports`-Einstellungen auf der Stammebene werden möglicherweise auf Ordnerebene außer Kraft gesetzt.
 
@@ -151,8 +151,8 @@ Code, der ausgeführt werden muss, bevor die einzelnen Ansichten oder Seiten in 
 
 Ein Beispiel für die Datei *_ViewStart.cshtml*:
 
-[!code-html[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml)]
+[!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml)]
 
 Die oben stehende Datei gibt an, dass alle Ansichten das Layout *_Layout.cshtml* verwenden.
 
-*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder * /Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.
+*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder  */Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.

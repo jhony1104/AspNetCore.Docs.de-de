@@ -1,5 +1,5 @@
 ---
-title: Initiieren von HTTP-Anforderungen
+title: Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 author: stevejgordon
 description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schnittstelle, um logische HttpClient-Instanzen in ASP.NET Core zu verwalten.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,14 +7,14 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/25/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 4fc4e602b809563ea78b6a3af5e5eb5c0ebeddea
-ms.sourcegitcommit: c6db8b14521814f1f7e528d7aa06e474e4c04a1f
+ms.openlocfilehash: a4026addaa55d463c41aadd0a7a39606c88fcb84
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "55065034"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744208"
 ---
-# <a name="initiate-http-requests"></a>Initiieren von HTTP-Anforderungen
+# <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
 Von [Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/rynowak), und [Steve Gordon](https://github.com/stevejgordon)
 
@@ -274,3 +274,9 @@ Es kann notwendig sein, die Konfiguration des inneren von einem Client verwendet
 `IHttpClientBuilder` wird zurückgegeben, wenn benannte oder typisierte Clients hinzugefügt werden. Die Erweiterungsmethode <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> kann zum Definieren eines Delegaten verwendet werden. Der Delegat wird verwendet, um den primären `HttpMessageHandler` zu erstellen und konfigurieren, der von dem Client verwendet wird:
 
 [!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Verwenden von HttpClientFactory zur Implementierung robuster HTTP-Anforderungen](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
+* [Implementieren von Wiederholungen von HTTP-Aufrufen mit exponentiellem Backoff mit HttpClientFactory und Polly-Richtlinien](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
+* [Implementieren des Trennschaltermusters](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-circuit-breaker-pattern)

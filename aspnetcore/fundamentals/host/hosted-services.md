@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Hintergrundtasks mit gehosteten Diensten in A
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/28/2018
+ms.date: 02/25/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: de419357d4d96a6e348a77055e67c0fcd190ae42
-ms.sourcegitcommit: 0fc89b80bb1952852ecbcf3c5c156459b02a6ceb
+ms.openlocfilehash: d10a335429752c1a52c1b3619adecc41725a819a
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/29/2018
-ms.locfileid: "52618141"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899306"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Hintergrundtasks mit gehosteten Diensten in ASP.NET Core
 
@@ -21,15 +21,15 @@ Von [Luke Latham](https://github.com/guardrex)
 In ASP.NET Core können Hintergrundtasks als *gehostete Dienste* implementiert werden. Ein gehosteter Dienst ist eine Klasse mit Logik für Hintergrundaufgaben, die die Schnittstelle <xref:Microsoft.Extensions.Hosting.IHostedService> implementiert. In diesem Artikel sind drei Beispiel für gehostete Dienste enthalten:
 
 * Hintergrundtasks, die auf einem Timer ausgeführt werden.
-* Gehostete Dienste, die einen bereichsbezogenen Dienst aktivieren. Der bereichsbezogene Dienst kann Dependency Injection verwenden.
+* Gehostete Dienste, die einen [bereichsbezogenen Dienst](xref:fundamentals/dependency-injection#service-lifetimes) aktivieren. Der bereichsbezogene Dienst kann Dependency Injection verwenden.
 * Hintergrundtasks in der Warteschlange, die sequenziell ausgeführt werden.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Die Beispiel-App wird in zwei Versionen bereitgestellt:
 
-* Web Host: Der Webhost eignet sich für das Hosten von Web-Apps. Der in diesem Thema gezeigte Beispielcode stammt aus der Webhostversion des Beispiels. Weitere Informationen finden Sie unter dem Thema [Webhost](xref:fundamentals/host/web-host).
-* Generischer Host: Der generische Host wurde in ASP.NET Core 2.1 neu eingeführt. Weitere Informationen finden Sie unter dem Thema [Generischer Host](xref:fundamentals/host/generic-host).
+* Web Host &ndash; Der Webhost eignet sich für das Hosten von Web-Apps. Der in diesem Thema gezeigte Beispielcode stammt aus der Webhostversion des Beispiels. Weitere Informationen finden Sie unter dem Thema [Webhost](xref:fundamentals/host/web-host).
+* Generischer Host &ndash; Der generische Host wurde in ASP.NET Core 2.1 neu eingeführt. Weitere Informationen finden Sie unter dem Thema [Generischer Host](xref:fundamentals/host/generic-host).
 
 ## <a name="package"></a>Package
 
@@ -54,8 +54,8 @@ Gehostete Dienste implementieren die <xref:Microsoft.Extensions.Hosting.IHostedS
 
   Um das standardmäßig 5-sekündige Timeout beim Herunterfahren zu verlängern, legen Sie folgendes fest:
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>, wenn Sie den generische Host verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#shutdown-timeout>.
-  * Hostkonfigurationseinstellung Des Timeout zum Herunterfahren, wenn Sie den Webhost verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host#shutdown-timeout>.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>, wenn Sie den generischen Host verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#shutdown-timeout>.
+  * Hostkonfigurationseinstellung „Timeout beim Herunterfahren“, wenn Sie den Webhost verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host#shutdown-timeout>.
 
 Der gehostete Dienst wird beim Start der App einmal aktiviert und beim Beenden der App wieder ordnungsgemäß heruntergefahren. Wenn während der Ausführung von Hintergrundtasks ein Fehler ausgelöst wird, sollte `Dispose` aufgerufen werden, auch wenn `StopAsync` nicht aufgerufen wird.
 
@@ -71,7 +71,7 @@ Der Dienst wird in `Startup.ConfigureServices` mit der Erweiterungsmethode `AddH
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>Verwenden eines bereichsbezogenen Diensts in einem Hintergrundtask
 
-Erstellen Sie einen Bereich, um bereichsbezogene Dienste in `IHostedService` zu verwenden. Bereiche werden für einen gehosteten Dienst nicht standardmäßig erstellt.
+Erstellen Sie einen Bereich, um [bereichsbezogene Dienste](xref:fundamentals/dependency-injection#service-lifetimes) in `IHostedService` zu verwenden. Bereiche werden für einen gehosteten Dienst nicht standardmäßig erstellt.
 
 Der bereichsbezogene Dienst für Hintergrundtasks enthält die Logik des Hintergrundtasks. Im folgenden Beispiel wird <xref:Microsoft.Extensions.Logging.ILogger> in den Dienst eingefügt:
 
@@ -99,7 +99,10 @@ Die Dienste werden in `Startup.ConfigureServices` registriert. Der Implementieru
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample-WebHost/Startup.cs?name=snippet3)]
 
-In der Modellklasse für die Indexseite wird `IBackgroundTaskQueue` in den Konstruktor eingefügt und `Queue` zugewiesen:
+In der Modellklasse für die Indexseite:
+
+* `IBackgroundTaskQueue` wird in den Konstruktor eingefügt und `Queue` zugewiesen.
+* Ein <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> wird eingefügt und `_serviceScopeFactory` zugewiesen. Die Zuordnungsinstanz wird verwendet, um Instanzen von <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> zu erstellen. Dieser wird verwendet, um Dienste in einem Bereich zu erstellen. Ein Bereich wird erstellt, um den `AppDbContext` der App (einen [bereichsbezogenen Dienst](xref:fundamentals/dependency-injection#service-lifetimes)) zu verwenden, um Datenbankeinträge in `IBackgroundTaskQueue` (ein Singletondienst) zu schreiben.
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample-WebHost/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -110,4 +113,4 @@ Wenn auf der Indexseite auf die Schaltfläche **Task hinzufügen** geklickt wird
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Implement background tasks in microservices with IHostedService and the BackgroundService class (Implementieren von Hintergrundtasks in Microservices mit IHostedService und der BackgroundService-Klasse)](/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/background-tasks-with-ihostedservice)
-* [System.Threading.Timer](xref:System.Threading.Timer)
+* <xref:System.Threading.Timer>

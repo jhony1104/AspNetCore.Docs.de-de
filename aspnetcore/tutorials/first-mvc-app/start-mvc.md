@@ -5,20 +5,18 @@ description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/12/2018
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: f0c2351de017de7f4c62021b8f9478603055e9bc
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: c09c06f55c4179e9e2174f0063ab7387b7e4c31b
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410546"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899228"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Erste Schritte mit ASP.NET Core MVC
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
-
-https://docs.microsoft.com/en-us/visualstudio/ide/visual-studio-ide?view=vs-2017
 
 In diesem Tutorial lernen Sie Grundlegendes zur Erstellung einer ASP.NET Core-MVC-Web-App.
 
@@ -33,9 +31,6 @@ Die App verwaltet eine Datenbank mit Filmtiteln. Sie lernen Folgendes:
 Am Ende verfügen Sie über eine App, die Filmdaten verwalten und anzeigen kann.
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
-
-> [!NOTE]
-> Wir testen gerade eine vorgeschlagene neue Struktur für das ASP.NET Core-Inhaltsverzeichnis.  Falls Sie einige Minuten Zeit haben, um einen Test durchzuführen, in dem Sie sieben unterschiedliche Artikel im aktuellen und vorgeschlagene Inhaltsverzeichnis finden sollen, [klicken Sie hier, um daran teilzunehmen](https://dpk4xbh5.optimalworkshop.com/treejack/aa11wn82).
 
 [!INCLUDE[](~/includes/net-core-prereqs-all-2.2.md)]
 
@@ -67,18 +62,6 @@ Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMov
 
 Visual Studio verwendet eine Standardvorlage für das MVC-Projekt, das Sie gerade erstellt haben. Wenn Sie einen Projektnamen eingeben und einige Optionen festlegen, funktioniert Ihre App bereits. Dies ist ein grundlegendes Startprojekt und ein guter Einstieg.
 
-Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.
-
-* Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt Ihre App aus. Beachten Sie, dass die Adressleiste `localhost:port#` und nicht etwas wie `example.com` anzeigt. Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet. In der obigen Abbildung ist die Portnummer 5000. Die URL im Browser zeigt `localhost:5000` an. Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.
-* Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen. Viele Entwickler bevorzugen den Nicht-Debugmodus, um die App schnell zu starten und Änderungen anzuzeigen.
-* Sie können die App über das Menüelement **Debuggen** im Debugmodus oder Nicht-Debugmodus starten:
-
-![Menü „Debuggen“](start-mvc/_static/debug_menu.png)
-
-* Sie können die App debuggen, indem Sie die Schaltfläche **IIS Express** auswählen.
-
-![IIS Express](start-mvc/_static/iis_express.png)
-
 <!-- Code -------------------------->
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -98,14 +81,6 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
   * `dotnet new mvc -o MvcMovie`: Erstellt ein neues ASP.NET Core MVC-Projekt im Ordner *MvcMovie*.
   * `code -r MvcMovie`: Lädt die Projektdatei *MvcMovie.csproj* in Visual Studio Code.
 
-### <a name="launch-the-app"></a>Starten der App
-
-* Drücken Sie **STRG+F5**, um die Ausführung ohne den Debugger zu starten.
-
-  Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`. Die Adressleiste zeigt `localhost:port:5001` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer.
-
-  Das Starten der App mit **STRG+F5** (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen. Viele Entwickler bevorzugen den Nicht-Debugmodus, um die Seite zu aktualisieren und Änderungen anzuzeigen.
-
 <!-- Mac -------------------------->
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
@@ -121,15 +96,47 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
 * Nennen Sie das Projekt **MvcMovie**, und wählen Sie dann **Erstellen** aus.
 
-### <a name="launch-the-app"></a>Starten der App
+---  
+<!-- End of VS tabs -->
+
+### <a name="run-the-app"></a>Ausführen der App
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+
+Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.
+
+[!INCLUDE[](~/includes/trustCertVS.md)]
+
+* Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt die App aus. Beachten Sie, dass die Adressleiste `localhost:port#` und nicht etwas wie `example.com` anzeigt. Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.
+* Das Starten der App mit STRG+F5 (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen. Viele Entwickler bevorzugen den Nicht-Debugmodus, um die App schnell zu starten und Änderungen anzuzeigen.
+* Sie können die App über das Menüelement **Debuggen** im Debugmodus oder Nicht-Debugmodus starten:
+
+  ![Menü „Debuggen“](start-mvc/_static/debug_menu.png)
+
+* Sie können die App debuggen, indem Sie die Schaltfläche **IIS Express** auswählen.
+
+  ![IIS Express](start-mvc/_static/iis_express.png)
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+
+Drücken Sie STRG+F5, um die Ausführung ohne den Debugger zu starten.
+
+[!INCLUDE[](~/includes/trustCertVSC.md)]
+
+  Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `https://localhost:5001`. Die Adressleiste zeigt `localhost:port:5001` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer.
+
+  Das Starten der App mit STRG+F5 (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen. Viele Entwickler bevorzugen den Nicht-Debugmodus, um die Seite zu aktualisieren und Änderungen anzuzeigen.
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Wählen Sie **Ausführen** > **Ohne Debuggen starten** aus, um die App zu starten. Visual Studio für Mac startet den [Kestrel](xref:fundamentals/servers/index#kestrel)-Server und einen Browser und navigiert zu `http://localhost:port`, wobei es sich bei *port* um eine zufällig ausgewählte Portnummer handelt.
+
+[!INCLUDE[](~/includes/trustCertMac.md)]
 
 * Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet. Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.
 * Sie können die App über das Menü **Ausführen** im Debugmodus oder Nicht-Debugmodus starten.
 
----  
-<!-- End of VS tabs -->
+------
 
 * Wählen Sie **Akzeptieren** aus, um der Nachverfolgung zuzustimmen. Diese App verfolgt keine personenbezogenen Informationen nach. Der generierte Vorlagencode enthält Objekte, die bei der Erfüllung der [Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr) als Unterstützung dienen sollen.
 

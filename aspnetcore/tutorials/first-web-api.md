@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/4/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 5d72cb214a3d5565452b3b95f364818a71be44b7
-ms.sourcegitcommit: 98e9c7187772d4ddefe6d8e85d0d206749dbd2ef
+ms.openlocfilehash: 686397cd25248ce7b37e505c7129a3b56d4ada1b
+ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2019
-ms.locfileid: "55737641"
+ms.lasthandoff: 02/26/2019
+ms.locfileid: "56833760"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC
 
@@ -41,11 +41,11 @@ In diesem Tutorial wird die folgende API erstellt:
 
 |API | Beschreibung | Anforderungstext | Antworttext |
 |--- | ---- | ---- | ---- |
-|GET /api/todo | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
-|GET /api/todo/{id} | Ein Element nach ID abrufen | Keine | To-do-Element|
+|GET /api/todo | Alle To-do-Elemente abrufen | Keiner | Array von To-do-Elementen|
+|GET /api/todo/{id} | Ein Element nach ID abrufen | Keiner | To-do-Element|
 |POST /api/todo | Neues Element hinzufügen | To-do-Element | To-do-Element |
-|PUT /api/todo/{id} | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keine |
-|DELETE /api/todo/{id} &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keine | Keine|
+|PUT /api/todo/{id} | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keiner |
+|DELETE /api/todo/{id} &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keiner | Keiner|
 
 Das folgende Diagramm zeigt den Entwurf der App.
 
@@ -349,6 +349,8 @@ Fügen Sie die folgende `PutTodoItem`-Methode hinzu:
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
 `PutTodoItem` ähnelt `PostTodoItem`, verwendet allerdings HTTP PUT. Die Antwort ist [204 (Kein Inhalt)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). Gemäß der HTTP-Spezifikation erfordert eine PUT-Anforderung, dass der Client die gesamte aktualisierte Entität (nicht nur die Änderungen) sendet. Verwenden Sie [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute), um Teilupdates zu unterstützen.
+
+Wenn beim Aufrufen von `PutTodoItem` ein Fehler zurückgegeben wird, rufen Sie `GET` auf, damit es in der Datenbank ein Element gibt.
 
 ### <a name="test-the-puttodoitem-method"></a>Testen der PutTodoItem-Methode
 

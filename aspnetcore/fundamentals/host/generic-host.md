@@ -1,28 +1,51 @@
 ---
 title: Generischer .NET-Host
 author: guardrex
-description: Erfahren Sie mehr über den generischen Host in .NET, der für das Starten der App und das Verwalten der Lebensdauer verantwortlich ist.
+description: Erfahren Sie mehr über den generischen Host in ASP.NET Core, der für das Starten der App und das Verwalten der Lebensdauer verantwortlich ist.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 4d435984d8169b558ab026ef8541c90f7a2a96b9
-ms.sourcegitcommit: 0fc89b80bb1952852ecbcf3c5c156459b02a6ceb
+ms.openlocfilehash: a128b7c19d544d1dd28ab16f7a208ceef680ce81
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/29/2018
-ms.locfileid: "52618154"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56743841"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
 Von [Luke Latham](https://github.com/guardrex)
 
-Durch .NET Core-Apps kann ein *Host* gestartet und konfiguriert werden. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. In diesem Thema wird der generische ASP.NET Core-Host (<xref:Microsoft.Extensions.Hosting.HostBuilder>) erläutert, der für das Hosten von Apps nützlich ist, die keine HTTP-Anforderungen verarbeiten. Weitere Informationen zum Webhost (<xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>) finden Sie unter <xref:fundamentals/host/web-host>.
+::: moniker range="<= aspnetcore-2.2"
 
-Das Ziel des generischen Hosts besteht darin, die HTTP-Pipeline von der Webhost-API zu entkoppeln, um mehr Szenarios zu ermöglichen. Messaging, Hintergrundtasks und andere Nicht-HTTP-Workloads, die auf dem generischen Host basieren, profitieren von übergreifenden Funktionen wie der Konfiguration, Dependency Injection (DI) und der Protokollerstellung.
+Durch ASP.NET Core-Apps kann ein Host gestartet und konfiguriert werden. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer.
 
-Der generische Host ist neu in ASP.NET Core 2.1 und ist nicht für Webhostingszenarios geeignet. Verwenden Sie den [Webhost](xref:fundamentals/host/web-host) für Webhostingszenarios. Der generische Host wird dafür entwickelt, den Webhost in einem zukünftigen Release zu ersetzen und als primäre Host-API in HTTP- und Nicht-HTTP-Szenarios zu fungieren.
+In diesem Artikel wird der generische ASP.NET Core-Host (<xref:Microsoft.Extensions.Hosting.HostBuilder>) erläutert, der für das Hosten von Apps verwendet wird, die keine HTTP-Anforderungen verarbeiten.
+
+Das Ziel des generischen Hosts besteht darin, die HTTP-Pipeline von der Webhost-API zu entkoppeln, um mehr Hostszenarios zu ermöglichen. Messaging, Hintergrundtasks und andere Nicht-HTTP-Workloads, die auf dem generischen Host basieren, profitieren von übergreifenden Funktionen wie der Konfiguration, Dependency Injection (DI) und der Protokollerstellung.
+
+Der generische Host ist neu in ASP.NET Core 2.1 und ist nicht für Webhostingszenarios geeignet. Verwenden Sie den [Webhost](xref:fundamentals/host/web-host) für Webhostingszenarios. Der generische Host wird den Webhost in einem zukünftigen Release ersetzen und als primäre Host-API in HTTP- und Nicht-HTTP-Szenarios fungieren.
+
+::: moniker-end
+
+::: moniker range="> aspnetcore-2.2"
+
+Durch ASP.NET Core-Apps kann ein Host gestartet und konfiguriert werden. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer.
+
+In diesem Artikel wird der generische .NET Core-Host (<xref:Microsoft.Extensions.Hosting.HostBuilder>) erläutert.
+
+Der generische Host unterscheidet sich vom Webhost darin, dass er die HTTP-Pipeline von der Webhost-API entkoppelt, um mehr Host-Szenarios zu ermöglichen. Messaging, Hintergrundtasks und andere Nicht-HTTP-Workloads können den generischen Host verwenden und von übergreifenden Funktionen wie der Konfiguration, Dependency Injection (DI) und der Protokollerstellung profitieren.
+
+Ab ASP.NET Core 3.0 wird der generische Host für HTTP- und Nicht-HTTP-Workloads empfohlen. Sofern eingeschlossen wird eine HTTP-Serverimplementierung als eine Implementierung von <xref:Microsoft.Extensions.Hosting.IHostedService> ausgeführt. `IHostedService` ist eine Schnittstelle, die auch für andere Workloads verwendet werden kann.
+
+Der Webhost wird nicht mehr für Web-Apps empfohlen, ist aber aus Gründen der Abwärtskompatibilität weiterhin verfügbar.
+
+> [!NOTE]
+> Dieser Rest des Artikels wurde noch nicht für die Version 3.0 aktualisiert.
+
+::: moniker-end
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -95,7 +118,7 @@ Die Eigenschaft [IHostingEnvironment.ApplicationName](xref:Microsoft.Extensions.
 
 **Schlüssel:** Anwendungsname  
 **Typ:** *Zeichenfolge*  
-**Standardwert:** Der Name der Assembly, die den Einstiegspunkt der App enthält.  
+**Standardwert**: Der Name der Assembly, die den Einstiegspunkt der App enthält.  
 **Festlegen mit:** `HostBuilderContext.HostingEnvironment.ApplicationName`  
 **Umgebungsvariable:** `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 
@@ -105,7 +128,7 @@ Diese Einstellung bestimmt, wo der Host mit der Suche nach Inhaltsdateien beginn
 
 **Schlüssel:** contentRoot  
 **Typ:** *Zeichenfolge*  
-**Standard:** Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
+**Standardwert**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
 **Festlegen mit:** `UseContentRoot`  
 **Umgebungsvariable:** `<PREFIX_>CONTENTROOT` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 
@@ -119,7 +142,7 @@ Legt die [Umgebung](xref:fundamentals/environments) der App fest.
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standard:** Produktion  
+**Standardwert**: Produktion  
 **Festlegen mit:** `UseEnvironment`  
 **Umgebungsvariable:** `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 

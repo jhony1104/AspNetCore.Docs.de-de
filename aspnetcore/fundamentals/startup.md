@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 01/17/2019
 uid: fundamentals/startup
-ms.openlocfilehash: 685b496943642b349321a36a7200d6d51ecf4d6e
-ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
+ms.openlocfilehash: cfd0a57d5d0b60862b017a170b6d5cbddf56f15a
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "54396232"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744182"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -31,7 +31,7 @@ ASP.NET Core-Apps verwenden eine `Startup`-Klasse, die standardmäßig `Startup`
 
 [!code-csharp[](startup/sample_snapshot/Startup1.cs?highlight=4,10)]
 
-Die `Startup`-Klasse wird für die App angegeben, wenn der [Host](xref:fundamentals/host/index) der App erstellt wird. Der App-Host wird erstellt, wenn `Build` im Hostgenerator in der `Program`-Klasse aufgerufen wird. Die `Startup`-Klasse wird normalerweise angegeben, indem die [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*)-Methode im Hostgenerator aufgerufen wird:
+Die `Startup`-Klasse wird für die App angegeben, wenn der [Host](xref:fundamentals/index#host) der App erstellt wird. Der App-Host wird erstellt, wenn `Build` im Hostgenerator in der `Program`-Klasse aufgerufen wird. Die `Startup`-Klasse wird normalerweise angegeben, indem die [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*)-Methode im Hostgenerator aufgerufen wird:
 
 [!code-csharp[](startup/sample_snapshot/Program3.cs?name=snippet_Program&highlight=10)]
 
@@ -47,19 +47,19 @@ Der Host stellt Dienste für den `Startup`-Klassenkonstruktor bereit. Die App f�
 
 Sie können auch einen konventionsbasierten Ansatz wählen, anstatt `IHostingEnvironment` einzufügen. Wenn die App unterschiedliche `Startup`-Klassen für unterschiedliche Umgebungen definiert (z.B. `StartupDevelopment`), wird zur Laufzeit die entsprechende `Startup`-Klasse ausgewählt. Die Klasse, deren Namenssuffix mit der aktuellen Umgebung übereinstimmt, wird priorisiert. Wenn die App in der Entwicklungsumgebung ausgeführt wird und sowohl eine `Startup`-Klasse als auch eine `StartupDevelopment`-Klasse enthält, wird die `StartupDevelopment`-Klasse verwendet. Weitere Informationen finden Sie unter [Verwenden mehrerer Umgebungen](xref:fundamentals/environments#environment-based-startup-class-and-methods).
 
-Weitere Informationen zum Update finden Sie unter <xref:fundamentals/host/index>. Weitere Informationen zum Umgang mit Fehlern beim Start finden Sie unter [Startup exception handling (Umgang mit Ausnahmen beim Start)](xref:fundamentals/error-handling#startup-exception-handling).
+Weitere Informationen zum Host finden Sie unter [Der Host](xref:fundamentals/index#host). Weitere Informationen zum Umgang mit Fehlern beim Start finden Sie unter [Startup exception handling (Umgang mit Ausnahmen beim Start)](xref:fundamentals/error-handling#startup-exception-handling).
 
 ## <a name="the-configureservices-method"></a>Die ConfigureServices-Methode
 
 Die <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>-Methode:
 
-* ist optional.
+* Dies ist optional.
 * wird vor der `Configure`-Methode vom Host aufgerufen, um die App-Dienste zu konfigurieren.
 * Über diese Methode werden standardmäßig [Konfigurationsoptionen](xref:fundamentals/configuration/index) festgelegt.
 
 Das typische Muster besteht darin, alle `Add{Service}`-Methoden und dann alle `services.Configure{Service}`-Methoden aufzurufen. Ein Beispiel finden Sie unter [Konfigurieren der Identitätsdienste](xref:security/authentication/identity#pw).
 
-Es kann sein, dass der Host einige Dienste konfiguriert, bevor die `Startup`-Methoden aufgerufen werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/index>.
+Es kann sein, dass der Host einige Dienste konfiguriert, bevor die `Startup`-Methoden aufgerufen werden. Weitere Informationen finden Sie unter [Der Host](xref:fundamentals/index#host).
 
 Für Features, die ein umfangreiches Setup erfordern, sind in <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> `Add{Service}`-Erweiterungsmethoden verfügbar. ASP.NET Core-Apps registrieren Dienste in der Regel für Entity Framework, Identity und MVC:
 
@@ -134,7 +134,7 @@ Eine <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>-Implementierung ermögl
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:fundamentals/host/index>
+* [Der Host](xref:fundamentals/index#host)
 * <xref:fundamentals/environments>
 * <xref:fundamentals/middleware/index>
 * <xref:fundamentals/logging/index>

@@ -6,16 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 7215027a083c0ed0bc3b15196e390a31c5dcfc14
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 878fbaa1a61946dadf23ba8fefbf22021e547cc2
+ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637845"
+ms.lasthandoff: 02/23/2019
+ms.locfileid: "56744091"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core-Webhost
 
 Von [Luke Latham](https://github.com/guardrex)
+
+Durch ASP.NET Core-Apps kann ein *Host* gestartet und konfiguriert werden. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. Der Host konfiguriert mindestens einen Server und eine Pipeline für die Anforderungsverarbeitung. Der Host kann auch die Protokollierung, die Dependency Injection und die Konfiguration einrichten.
 
 ::: moniker range="<= aspnetcore-1.1"
 
@@ -23,7 +25,17 @@ Laden Sie für die Version 1.1 dieses Themas den [ASP.NET Core-Webhost (Version 
 
 ::: moniker-end
 
-Durch ASP.NET Core-Apps kann ein *Host* gestartet und konfiguriert werden. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. Der Host konfiguriert mindestens einen Server und eine Pipeline für die Anforderungsverarbeitung. In diesem Artikel wird der ASP.NET Core-Webhost ([IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)) behandelt, der für das Hosten von Web-Apps nützlich ist. Weitere Informationen zum generischen .NET-Host ([IHostBuilder](/dotnet/api/microsoft.extensions.hosting.ihostbuilder)) finden Sie unter <xref:fundamentals/host/generic-host>.
+::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+
+In diesem Artikel wird der ASP.NET Core-Webhost (<xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder>) erläutert, mit dem Web-Apps gehostet werden. Weitere Informationen zum generischen .NET-Host ([IHostBuilder](/dotnet/api/microsoft.extensions.hosting.ihostbuilder)) finden Sie unter <xref:fundamentals/host/generic-host>.
+
+::: moniker-end
+
+::: moniker range="> aspnetcore-2.2"
+
+In diesem Artikel wird der ASP.NET Core-Webhost ([IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)) erläutert. In ASP.NET Core 3.0 ersetzt der generische Host den Webhost. Weitere Informationen finden Sie unter [Der Host](xref:fundamentals/index#host).
+
+::: moniker-end
 
 ## <a name="set-up-a-host"></a>Einrichten eines Hosts
 
@@ -669,7 +681,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-`IHostingEnvironment` kann in die `Invoke`-Methode eingefügt werden, wenn eine benutzerdefinierte [Middleware](xref:fundamentals/middleware/index#write-middleware) erstellt wird:
+`IHostingEnvironment` kann in die `Invoke`-Methode eingefügt werden, wenn eine benutzerdefinierte [Middleware](xref:fundamentals/middleware/write) erstellt wird:
 
 ```csharp
 public async Task Invoke(HttpContext context, IHostingEnvironment env)

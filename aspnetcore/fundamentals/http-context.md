@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2018
 uid: fundamentals/httpcontext
-ms.openlocfilehash: babc637cdec8590ac14f7924c17e862e5b2f6a81
-ms.sourcegitcommit: d22b3c23c45a076c4f394a70b1c8df2fbcdf656d
+ms.openlocfilehash: 446882297524af3cbaed3ba7f941935debf5e7f4
+ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55428485"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "56899197"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>Zugreifen auf HttpContext in ASP.NET Core
 
@@ -131,3 +131,36 @@ public class UserRepository : IUserRepository
     }
 }
 ```
+
+## <a name="httpcontext-access-from-a-background-thread"></a>HttpContext-Zugriff von einem Hintergrundthread aus
+
+`HttpContext` ist nicht threadsicher. Eigenschaften von `HttpContext` außerhalb der Verarbeitung einer Anforderung zu lesen oder zu schreiben kann zu einer `NullReferenceException` führen.
+
+> [!NOTE]
+> Wenn `HttpContext` außerhalb der Verarbeitung einer Anforderung verwendet wird, führt dies oft zu einer `NullReferenceException`. Wenn Ihre App sporadische `NullReferenceException`s erstellt, überprüfen Sie die Teile des Codes, die die Hintergrundverarbeitung starten, oder die die Verarbeitung fortsetzen, nachdem eine Anforderung erfüllt wurde. Suchen Sie nach Fehlern, wie das Definieren einer Controllermethode als `async void`.
+
+So werden Hintergrundaufgaben mit `HttpContext`-Daten sicher ausgeführt:
+
+* Kopieren Sie die benötigten Daten während der Verarbeitung der Anforderung.
+* Übergeben Sie die kopierten Daten an eine Hintergrundaufgabe.
+
+Um unsicheren Code zu vermeiden, sollten Sie `HttpContext` niemals an eine Methode übergeben, die Hintergrundarbeit ausführt. Übergeben Sie stattdessen die benötigten Daten.
+
+```csharp
+public class EmailController
+{
+    public ActionResult SendEmail(string email)
+    {
+        var correlationId = HttpContext.Request.Headers["x-correlation-id"].ToString();
+
+        // Starts sending an email, but doesn't wait for it to complete
+        _ = SendEmailCore(correlationId);
+        return View();
+    }
+
+    private async Task SendEmailCore(string correlationId)
+    {
+        // send the email
+    }
+}
+
