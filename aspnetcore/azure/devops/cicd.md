@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: seodec18
 uid: azure/devops/cicd
-ms.openlocfilehash: e5bddde41291c9573f58d749bbf830de9ea9319d
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.openlocfilehash: 906aae3fd4b4abd0becc8847b0f54c372bda300a
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121589"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346306"
 ---
 # <a name="continuous-integration-and-deployment"></a>Continuous Integration und Continuous deployment
 
@@ -60,9 +60,9 @@ Entfernen Sie die lokale Git-Bereitstellung mit den folgenden Schritten. Azure-P
 
     ![Staging-Web-App-Suchbegriff](media/cicd/portal-search-box.png)
 
-1. Klicken Sie auf **Bereitstellungsoptionen**. Ein neuer Bereich wird angezeigt. Klicken Sie auf **trennen** So entfernen Sie die Konfiguration der quellcodeverwaltung lokale Git, das im vorherigen Kapitel hinzugefügt wurde. Bestätigen Sie den Entfernungsvorgang zum, indem Sie auf die **Ja** Schaltfläche.
+1. Klicken Sie auf **Bereitstellungscenter**. Ein neuer Bereich wird angezeigt. Klicken Sie auf **trennen** So entfernen Sie die Konfiguration der quellcodeverwaltung lokale Git, das im vorherigen Kapitel hinzugefügt wurde. Bestätigen Sie den Entfernungsvorgang zum, indem Sie auf die **Ja** Schaltfläche.
 1. Navigieren Sie zu der *Mywebapp < Unique_number >* App Service. Zur Erinnerung: kann das Suchfeld des Portals verwendet werden, um die App Service schnell zu finden.
-1. Klicken Sie auf **Bereitstellungsoptionen**. Ein neuer Bereich wird angezeigt. Klicken Sie auf **trennen** So entfernen Sie die Konfiguration der quellcodeverwaltung lokale Git, das im vorherigen Kapitel hinzugefügt wurde. Bestätigen Sie den Entfernungsvorgang zum, indem Sie auf die **Ja** Schaltfläche.
+1. Klicken Sie auf **Bereitstellungscenter**. Ein neuer Bereich wird angezeigt. Klicken Sie auf **trennen** So entfernen Sie die Konfiguration der quellcodeverwaltung lokale Git, das im vorherigen Kapitel hinzugefügt wurde. Bestätigen Sie den Entfernungsvorgang zum, indem Sie auf die **Ja** Schaltfläche.
 
 ## <a name="create-an-azure-devops-organization"></a>Erstellen einer Azure DevOps-Organisation
 
@@ -262,7 +262,7 @@ Die **Quelle (Builddefinition)** Wert darstellt, die Builddefinition, die mit de
 
 ![Screenshot mit Pipeline releasetasks](media/cicd/release-definition-tasks.png)
 
-Die releasepipeline besteht aus zwei Aufgaben: *Bereitstellen von Azure App Service in Slot* und *Verwalten von Azure App Service – Slottausch*. Klicken Sie auf die erste Aufgabe wird die folgende Aufgabenkonfiguration:
+Die releasepipeline besteht aus zwei Aufgaben: *Bereitstellen von Azure App Service in Slot* und *Verwalten von Azure App Service – Slotaustausch*. Klicken Sie auf die erste Aufgabe wird die folgende Aufgabenkonfiguration:
 
 ![Bereitstellungstask für den Screenshot mit Release-pipeline](media/cicd/release-definition-task1.png)
 

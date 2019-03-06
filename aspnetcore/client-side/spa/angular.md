@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie sich mit der Projektvorlage für die Einzelse
 monikerRange: '>= aspnetcore-2.1'
 ms.author: stevesa
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 02/27/2019
 uid: spa/angular
-ms.openlocfilehash: f33f4b96faf71440c3e8878c0480f2908ace70d1
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 41990be4910ad35cdc2826f268fcbb659be9de75
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899254"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57345719"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
 
@@ -90,7 +90,7 @@ npm install --save <package_name>
 
 Bei der Entwicklung wird die App in einem für Entwickler optimierten Modus ausgeführt. JavaScript-Pakete enthalten beispielsweise Quellzuordnungen (damit Sie beim Debuggen Ihren ursprünglichen TypeScript-Code anzeigen können). Die App überwacht TypeScript-, HTML- und CSS-Dateiänderungen auf dem Datenträger und führt bei Feststellung dieser Dateiänderungen automatisch eine Neukompilierung und ein erneutes Laden durch.
 
-Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zum Entwicklungsbuild muss Node.js beim Produktionsbuild nicht auf dem Server installiert sein (sofern Sie das [serverseitige Vorabrendern](#server-side-rendering) nicht aktiviert haben).
+Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zu den Development Build ist nicht der erstellungs-Build Node.js auf dem Server installiert werden (es sei denn, Sie serverseitiges Rendering (SSR) aktiviert haben) erforderlich.
 
 Sie können [ASP.NET Core-Standardhosting- und -bereitstellungsmethoden](xref:host-and-deploy/index) verwenden.
 

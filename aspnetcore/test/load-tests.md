@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/04/2019
 uid: test/loadtests
-ms.openlocfilehash: d989bc841a372bed7ebf2c84c6abe1a57762ad04
-ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
+ms.openlocfilehash: 587df6e216943d3eeec779df4d0554dd0fc2fda0
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/10/2019
-ms.locfileid: "54207355"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57345427"
 ---
 # <a name="load-and-stress-testing-aspnet-core"></a>Laden und Belastungstests Testen von ASP.NET Core
 
@@ -25,6 +25,10 @@ Auslastungstests und Belastungstests sind wichtig, sicherzustellen, dass eine We
 * Compute-Ressourcen beschränkt.  
 
 Bei hoher Belastung kann die app Wiederherstellen nach einem Fehler und zurück zum erwarteten Verhalten? Bei hoher Belastung die app ist *nicht* unter normalen Bedingungen ausgeführt.
+
+Visual Studio 2019 ist die letzte Version von Visual Studio mit Auslastungstestfunktionen. Kunden, die Auslastungstesttools benötigen, empfehlen wir, alternative Auslastungstesttools wie Apache JMeter, Akamai CloudTest oder Blazemeter zu verwenden. Weitere Informationen finden Sie unter den [2019 Preview Release Anmerkungen zur Visual Studio](/visualstudio/releases/2019/release-notes-preview#test-tools).
+
+Die Dienst-Auslastungstests in Azure DevOps endet in 2020. Weitere Informationen finden Sie unter [cloudbasierte Auslastungstests Service Ende ihrer Lebensdauer](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/).
 
 ## <a name="visual-studio-tools"></a>Visual Studio Tools
 
@@ -47,7 +51,7 @@ Der Dienst unterstützt die folgenden Typen von Test-Format an:
 - Visual Studio-Test – Webtest in Visual Studio erstellt.
 - HTTP-Archiv-basierten Test – erfassten HTTP-Datenverkehr in das Archiv ist während der Tests wiedergegeben.
 - [URL-basierter Test](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) – ermöglicht das Angeben von URLs, um den Test, Anforderungstypen, Header und Abfragezeichenfolgen zu laden. Festlegen von Parametern, z. B. Dauer ausgeführt werden, kann eine Auslastungsmuster, Anzahl der Benutzer usw., konfiguriert werden.
-- [Apache JMeter](https://jmeter.apache.org/) testen.
+- [Apache JMeter](https://jmeter.apache.org/) test.
 
 ## <a name="azure-portal"></a>Azure-Portal
 
@@ -72,7 +76,7 @@ Die folgende Liste enthält die Drittanbieter-Web-Leistungstools mit verschieden
 - [Apache JMeter](https://jmeter.apache.org/) : Vollständige ausgewählte Sammlung von Testtools laden. Threadgebunden: benötigen Sie einen Thread pro Benutzer.
 - [Ab – Apache HTTP Server Benchmark tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
 - [Gatling](https://gatling.io/) : Desktop-Tool mit einer grafischen Benutzeroberfläche und Test Recorder. Bieten eine bessere Leistung als JMeter.
-- [Locust.IO](https://locust.io/) : Nicht begrenzt von Threads.
+- [Locust.io](https://locust.io/) : Nicht begrenzt von Threads.
 
 <a name="add"></a>
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen

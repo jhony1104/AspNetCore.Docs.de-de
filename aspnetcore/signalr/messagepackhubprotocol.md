@@ -5,14 +5,14 @@ description: Fügen Sie in ASP.NET Core SignalR MessagePack Hub-Protokoll hinzu.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 06/04/2018
+ms.date: 02/27/2019
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: da6eeeb51f5d0fc2ad69978688ad1c4ca4d63dab
-ms.sourcegitcommit: 3c2ba9a0d833d2a096d9d800ba67a1a7f9491af0
+ms.openlocfilehash: 7742f6f8bb53fb3c299ff98ae52a0da519ff396c
+ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55854340"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57400670"
 ---
 # <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>Verwenden von MessagePack Hub-Protokoll in SignalR für ASP.NET Core
 
@@ -98,6 +98,74 @@ const connection = new signalR.HubConnectionBuilder()
 
 > [!NOTE]
 > Zu diesem Zeitpunkt stehen keine Konfigurationsoptionen für das Protokoll MessagePack auf dem JavaScript-Client zur Verfügung.
+
+## <a name="messagepack-quirks"></a>MessagePack Quirksmodus
+
+Es gibt einige Probleme bei Verwendung des Hub-Protokolls MessagePack berücksichtigen.
+
+### <a name="messagepack-is-case-sensitive"></a>MessagePack wird Groß-/Kleinschreibung beachtet
+
+Das MessagePack-Protokoll ist Groß-/Kleinschreibung beachtet. Betrachten Sie beispielsweise die folgenden C# Klasse:
+
+```csharp
+public class ChatMessage
+{
+    public string Sender { get; }
+    public string Message { get; }
+}
+```
+
+Wenn von der JavaScript-Client zu senden, müssen Sie verwenden `PascalCased` Eigenschaftennamen, da die Groß-/Kleinschreibung übereinstimmen muss die C# Klasse genau. Zum Beispiel:
+
+```javascript
+connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
+```
+
+Mithilfe von `camelCased` Namen wird nicht ordnungsgemäß Binden an die C# Klasse. Sie können diese umgehen mithilfe der `Key` Attribut, um einen anderen Namen für die Eigenschaft MessagePack anzugeben. Weitere Informationen finden Sie unter [der MessagePack-CSharp-Dokumentation](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+
+### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>DateTime.Kind wird nicht beibehalten werden, bei der Serialisierung oder Deserialisierung
+
+Das Protokoll MessagePack nicht die Möglichkeit, codieren die `Kind` Wert eine `DateTime`. Daher annimmt, wenn ein Datum zu deserialisieren, das MessagePack-Hub-Protokoll, dass das eingehende Datum in UTC-Format ist. Wenn Sie mit der Sie arbeiten `DateTime` Werte in Ortszeit, wir empfehlen in UTC konvertiert, bevor diese gesendet werden. Konvertieren sie von der UTC in eine lokale Zeit, wenn Sie diese erhalten.
+
+Weitere Informationen zu dieser Beschränkung finden Sie unter GitHub Problem [Aspnet/SignalR-2632](https://github.com/aspnet/SignalR/issues/2632).
+
+### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>DateTime.MinValue wird vom MessagePack in JavaScript nicht unterstützt.
+
+Die [msgpack5](https://github.com/mcollina/msgpack5) Bibliothek ein, die den SignalR JavaScript-Client unterstützt nicht die `timestamp96` MessagePack geben. Dieser Typ wird verwendet, um sehr große Date-Werten (entweder einem frühen Zeitpunkt in der Vergangenheit oder sehr weit in der Zukunft) zu codieren. Der Wert des `DateTime.MinValue` ist `January 1, 0001` die müssen codiert werden, einem `timestamp96` Wert. Aufgrund dieser, senden `DateTime.MinValue` zu einer JavaScript-Client wird nicht unterstützt. Wenn `DateTime.MinValue` empfangen wird durch den JavaScript-Client, der folgende Fehler ausgelöst wird:
+
+```
+Uncaught Error: unable to find ext type 255 at decoder.js:427
+```
+
+In der Regel `DateTime.MinValue` wird zur Codierung verwendet eine "missing" oder `null` Wert. Wenn Sie diesen Wert in MessagePack codieren möchten, verwenden Sie eine auf NULL festlegbare `DateTime` Wert (`DateTime?`) oder ein separates codieren `bool` Wert, der angibt, wenn das Datum vorhanden ist.
+
+Weitere Informationen zu dieser Beschränkung finden Sie unter GitHub Problem [Aspnet/SignalR-2228](https://github.com/aspnet/SignalR/issues/2228).
+
+### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>MessagePack-Unterstützung in kompilierungsumgebung "ahead-of-Time"
+
+Die [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp) Bibliothek, die von der .NET Client und Server verwendet codegenerierung verwendet, um Serialisierung zu optimieren. Daher nicht standardmäßig in Umgebungen unterstützt, die Kompilierung von "ahead-of-Time" (z. B. Xamarin.IOS oder Unity) verwenden. Es ist möglich, MessagePack in diesen Umgebungen verwenden, indem"vor" die Serialisierungs-/Deserialisierungsprogramm Code generiert. Weitere Informationen finden Sie unter [der MessagePack-CSharp-Dokumentation](https://github.com/neuecc/MessagePack-CSharp#pre-code-generationunityxamarin-supports). Nachdem Sie die Serialisierungsprogramme vorab generiert haben, können Sie sie mit der Konfiguration-Delegat, der an übergebene registrieren `AddMessagePackProtocol`:
+
+```csharp
+services.AddSignalR()
+    .AddMessagePackProtocol(options =>
+    {
+        options.FormatterResolvers = new List<MessagePack.IFormatterResolver>()
+        {
+            MessagePack.Resolvers.GeneratedResolver.Instance,
+            MessagePack.Resolvers.StandardResolver.Instance
+        };
+    });
+```
+
+### <a name="type-checks-are-more-strict-in-messagepack"></a>Überprüfungen sind strenger in MessagePack
+
+Das JSON-Hub-Protokoll führt Konvertierungen während der Deserialisierung. Beispielsweise verfügt das eingehende Objekt ein Eigenschaftswerts ist, die eine Zahl (`{ foo: 42 }`) die Eigenschaft für die Klasse .NET weist jedoch Typ `string`, wird der Wert konvertiert werden. MessagePack, allerdings wird diese Konvertierung nicht ausgeführt und löst eine Ausnahme, die angezeigt werden, im Server-echtzeitprotokolle (und in der Konsole):
+
+```
+InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+```
+
+Weitere Informationen zu dieser Beschränkung finden Sie unter GitHub Problem [Aspnet/SignalR-2937](https://github.com/aspnet/SignalR/issues/2937).
 
 ## <a name="related-resources"></a>Weitere Informationen
 

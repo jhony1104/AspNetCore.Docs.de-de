@@ -2,9 +2,9 @@
 
 Dieses Beispiel veranschaulicht die Verwendung von Razor Pages-Autorisierung durch Konventionen. In diesem Beispiel wird veranschaulicht, die in beschriebenen Features der [autorisierungskonventionen für Razor Pages](https://docs.microsoft.com/aspnet/core/security/authorization/razor-pages-authorization) Thema.
 
-Benutzerautorisierung in diesem Beispiel verwendet die Cookie-Authentifizierung, die Funktionen, in beschrieben der [verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity](https://docs.microsoft.com/aspnet/core/security/authentication/cookie) Thema. Weitere Informationen zur Verwendung von ASP.NET Core Identity finden Sie unter <xref:security/authentication/identity>.
+Benutzerautorisierung in diesem Beispiel verwendet die Cookie-Authentifizierung, die Funktionen, in beschrieben der [verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity](https://docs.microsoft.com/aspnet/core/security/authentication/cookie) Thema. Die Konzepte und die Beispiele in diesem Thema gelten auch für apps, die ASP.NET Core Identity verwenden. Weitere Informationen zur Verwendung von ASP.NET Core Identity finden Sie unter [Einführung in die Identität in ASP.NET Core](https://docs.microsoft.com/aspnet/core/security/authentication/identity).
 
-Beim Ausführen des Beispiels, verwenden Sie die e-Mail-Adresse **maria.rodriguez@contoso.com** zum Authentifizieren des Benutzers.
+Verwenden Sie die e-Mail-Adresse **maria.rodriguez@contoso.com** zum Authentifizieren des Benutzers mit der ein Kennwort. Der Benutzer wird authentifiziert, der `AuthenticateUser` -Methode in der die *Pages/Account/Login.cshtml.cs* Datei. Im Real-World-Beispiel würde der Benutzer für eine Datenbank authentifiziert werden.
 
 ## <a name="examples-in-this-sample"></a>Beispiele
 

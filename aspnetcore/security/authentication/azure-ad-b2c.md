@@ -2,15 +2,15 @@
 title: Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 author: camsoper
 description: Erfahren Sie, wie Azure Active Directory B2C-Authentifizierung mit ASP.NET Core einrichten.
-ms.date: 01/25/2018
+ms.date: 02/27/2019
 ms.custom: mvc
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 2c544475ccd3eb76f2737fec1cf269ac86add372
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 86be999e02cfe34193bd594dcf89e8872590cca5
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098986"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346501"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 
@@ -104,6 +104,30 @@ Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie ein
 
 > [!WARNING]
 > Stellen Sie sicher, Richtliniennamen werden genau wie in der Dokumentation beschrieben, wie diese Richtlinien, in verwendet wurden der **Authentifizierung ändern** Dialogfeld in Visual Studio. Namen der Richtlinien überprüft werden können, im *"appSettings.JSON"*.
+
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Konfigurieren Sie die zugrunde liegenden OpenIdConnectOptions/JwtBearer/Cookie-Optionen
+
+Um die zugrunde liegenden Optionen direkt konfigurieren zu können, verwenden Sie die entsprechenden Schema-Konstante in `Startup.ConfigureServices`:
+
+```csharp
+services.Configure<OpenIdConnectOptions>(
+    AzureAD[B2C]Defaults.OpenIdScheme, options => 
+    {
+        // Omitted for brevity
+    });
+
+services.Configure<CookieAuthenticationOptions>(
+    AzureAD[B2C]Defaults.CookieScheme, options => 
+    {
+        // Omitted for brevity
+    });
+
+services.Configure<JwtBearerOptions>(
+    AzureAD[B2C]Defaults.JwtBearerAuthenticationScheme, options => 
+    {
+        // Omitted for brevity
+    });
+```
 
 ## <a name="run-the-app"></a>Ausführen der App
 
