@@ -4,7 +4,7 @@ author: rick-anderson
 description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Core-Apps kennen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/14/2019
+ms.date: 03/02/2019
 uid: fundamentals/index
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
@@ -83,7 +83,7 @@ Der Code zum Erstellen eines Hosts befindet sich in `Program.Main` und folgt dem
 
 ::: moniker range="<= aspnetcore-2.2"
 
-ASP.NET Core 2.x verwendet einen Webhost (die `WebHost`-Klasse) für Web-Apps. Das Framework bietet `CreateDefaultBuilder`-Erweiterungsmethoden, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
+ASP.NET Core 2.x verwendet einen Webhost (die `WebHost`-Klasse) für Web-Apps. Das Framework bietet die `CreateDefaultBuilder`-Methode, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichtet:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
 * Laden der Konfiguration aus *appsettings.json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Quellen.
@@ -105,13 +105,13 @@ Weitere Informationen finden Sie unter [Webhost](xref:fundamentals/host/web-host
 
 In ASP.NET Core 3.0 kann ein Webhost (`WebHost`-Klasse) oder ein generischer Host (`Host`-Klasse) in einer Web-App verwendet werden. Ein generischer Host wird empfohlen, und ein Webhost ist für Abwärtskompatibilität verfügbar.
 
-Das Framework bietet `CreateDefaultBuilder`- und `ConfigureWebHostDefaults`-Erweiterungsmethoden, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
+Das Framework bietet die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults`, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
 * Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen und Befehlszeilenargumenten.
 * Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
 
-Hier ist ein Beispielcode für das Erstellen eines Hosts: Die Erweiterungsmethoden, mit denen der Host mit häufig verwendeten Optionen eingerichtet wird, sind hervorgehoben.
+Hier ist ein Beispielcode für das Erstellen eines Hosts: Die Methoden, mit denen der Host mit häufig verwendeten Optionen eingerichtet wird, sind hervorgehoben.
 
 [!code-csharp[](index/snapshots/3.x/Program1.cs?highlight=9-10)]
 

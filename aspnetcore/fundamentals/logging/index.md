@@ -1,17 +1,11 @@
 ---
 title: Protokollierung in ASP.NET Core
 author: tdykstra
-description: Erfahren Sie mehr über das Protokollierungsframework in ASP.NET Core. Lernen Sie die integrierten Anbieter für die Protokollierung kennen, und erfahren Sie mehr über beliebte Anbieter von Drittanbietern.
+description: 'Erfahren Sie mehr über das Protokollierungsframework in ASP.NET Core. Lernen Sie die integrierten Anbieter für die Protokollierung kennen, und erfahren Sie mehr über beliebte Anbieter von Drittanbietern.'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 01/14/2019
+ms.date: 03/02/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 81620f0c844f3dbb1a2da0e9f1c319f87d9790b6
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667699"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -31,7 +25,7 @@ Um einen Anbieter hinzuzufügen, rufen Sie die `Add{provider name}`-Erweiterungs
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_ExpandDefault&highlight=17-19)]
 
-Die Standardprojektvorlage ruft die <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>-Erweiterungsmethode auf, die die folgenden Protokollierungsanbieter hinzugefügt:
+Die Standardprojektvorlage ruft die Methode <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> auf, die die folgenden Protokollierungsanbieter hinzufügt:
 
 * Konsole
 * Debug
@@ -98,7 +92,7 @@ Der Protokollierungs*grad* gibt den Schweregrad des protokollierten Ereignisses 
 
 Zum Schreiben von Protokollen in der `Startup`-Klasse schließen Sie einen `ILogger`-Parameter in die Konstruktorsignatur ein:
 
-[!code-csharp[](index/samples/2.x/TodoApiSample/Startup.cs?name=snippet_Startup&highlight=3,5,8,19,26)]
+[!code-csharp[](index/samples/2.x/TodoApiSample/Startup.cs?name=snippet_Startup&highlight=3,5,8,20,27)]
 
 ### <a name="create-logs-in-program"></a>Erstellen von Protokollen in der Programmklasse
 
@@ -464,7 +458,7 @@ Das zweite `AddFilter` gibt den Debuganbieter durch Verwendung des zugehörigen 
 
 Die Konfigurationsdaten und der in den vorangegangenen Beispielen gezeigte `AddFilter`-Code erzeugen die in der folgenden Tabelle gezeigten Regeln. Die ersten sechs Regeln stammen aus dem Konfigurationsbeispiel, die letzten zwei Filter stammen aus dem Codebeispiel.
 
-| Zahl | Anbieter      | Kategorien beginnend mit...          | Mindestprotokolliergrad |
+| Anzahl | Anbieter      | Kategorien beginnend mit...          | Mindestprotokolliergrad |
 | :----: | ------------- | --------------------------------------- | ----------------- |
 | 1      | Debug         | Alle Kategorien                          | Information       |
 | 2      | Konsole       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warnung           |
@@ -806,7 +800,7 @@ Wenn Sie Ihre App auf .NET Core ausrichten, beachten Sie Folgendes:
 
 * Rufen Sie <xref:Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions.AddAzureWebAppDiagnostics*> nicht explizit auf. Der Anbieter wird Ihrer App automatisch zur Verfügung gestellt, wenn diese in Azure App Service bereitgestellt wird.
 
-Wenn Sie Anwendungen für .NET Framework entwickeln oder auf das `Microsoft.AspNetCore.App`-Metapaket verweisen, fügen Sie dem Projekt das Anbieterpaket hinzu. Rufen Sie `AddAzureWebAppDiagnostics` für eine <xref:Microsoft.Extensions.Logging.ILoggerFactory>-Instanz auf:
+Wenn Sie Anwendungen für .NET Framework entwickeln oder auf das `Microsoft.AspNetCore.App`-Metapaket verweisen, fügen Sie dem Projekt das Anbieterpaket hinzu. Rufen Sie `AddAzureWebAppDiagnostics` auf:
 
 ```csharp
 logging.AddAzureWebAppDiagnostics();
@@ -822,19 +816,27 @@ loggerFactory.AddAzureWebAppDiagnostics();
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-1.1"
+::: moniker range="<= aspnetcore-2.1"
 
 Eine <xref:Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions.AddAzureWebAppDiagnostics*>-Überladung ermöglicht das Übergeben von <xref:Microsoft.Extensions.Logging.AzureAppServices.AzureAppServicesDiagnosticsSettings>. Das settings-Objekt kann Standardeinstellungen überschreiben, z.B. die Protokollierungsausgabevorlage, den Blobnamen und die maximale Dateigröße. (Die *Ausgabevorlage* ist eine Nachrichtenvorlage, die auf alle Protokolle zusätzlich zu dem angewendet wird, was mit einem `ILogger`-Methodenaufruf bereitgestellt wird.)
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+Verwenden Sie <xref:Microsoft.Extensions.Logging.AzureAppServices.AzureFileLoggerOptions> und <xref:Microsoft.Extensions.Logging.AzureAppServices.AzureBlobLoggerOptions> wie im folgenden Beispiel, um die Anbietereinstellungen zu konfigurieren:
+
+[!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_AzLogOptions&highlight=19-27)]
+
+::: moniker-end
 
 Wenn Sie eine Bereitstellung in einer App Service-App durchführen, berücksichtigt die Anwendung die Einstellungen im Abschnitt [Diagnoseprotokolle](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) der Seite **App Service** im Azure-Portal. Bei einem Update dieser Einstellungen werden die Änderungen sofort wirksam, ohne dass ein Neustart oder eine erneute Bereitstellung der App notwendig ist.
 
 ![Einstellungen für die Azure-Protokollierung](index/_static/azure-logging-settings.png)
 
-Der Standardspeicherort für Protokolldateien ist der Ordner *D:\\home\\LogFiles\\Application*, und der standardmäßige Dateiname lautet *diagnostics-yyyymmdd.txt*. Die Dateigröße ist standardmäßig auf 10 MB beschränkt, und die maximal zulässige Anzahl beibehaltener Dateien lautet 2. Der Standardblobname lautet *{app-name}{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*. Weitere Informationen zum Standardverhalten finden Sie unter <xref:Microsoft.Extensions.Logging.AzureAppServices.AzureAppServicesDiagnosticsSettings>.
+Der Standardspeicherort für Protokolldateien ist der Ordner *D:\\home\\LogFiles\\Application*, und der standardmäßige Dateiname lautet *diagnostics-yyyymmdd.txt*. Die Dateigröße ist standardmäßig auf 10 MB beschränkt, und die maximal zulässige Anzahl beibehaltener Dateien lautet 2. Der Standardblobname lautet *{app-name}{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*.
 
 Der Anbieter funktioniert nur, wenn das Projekt in der Azure-Umgebung ausgeführt wird. Bei einer lokalen Ausführung zeigt er keine Auswirkungen. Der Anbieter schreibt keine Protokolle in lokale Dateien oder den lokalen Entwicklungsspeicher für BLOBs.
-
-::: moniker-end
 
 ### <a name="azure-log-streaming"></a>Azure-Protokollstreaming
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 3dbb2d358ec9e3dcdd96c3771576911d906d796f
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: 622f28f3b4348820c8781e0ba14ae5137136e797
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248432"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346566"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -583,7 +583,7 @@ Die folgende Tabelle enthält Beispielvorlagen für Routen und deren Verhalten.
 | `{Page=Home}`                            | `/Contact`              | Eine Übereinstimmung wird ermittelt, und `Page` wird auf `Contact` festgelegt.                                      |
 | `{controller}/{action}/{id?}`            | `/Products/List`        | Stimmt mit dem `Products`-Controller und der `List`-Aktion überein.                       |
 | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Stimmt mit dem `Products`-Controller und der `Details`-Aktion (`id` auf 123 festgelegt) überein. |
-| `{controller=Home}/{action=Index}/{id?`} | `/`                     | Stimmt mit dem `Home`-Controller und der `Index`-Aktion überein (`id` wird ignoriert).        |
+| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Stimmt mit dem `Home`-Controller und der `Index`-Aktion überein (`id` wird ignoriert).        |
 
 Mit Vorlagen lässt sich Routing besonders leicht durchführen. Einschränkungen und Standardwerte können auch außerhalb der Routenvorlage angegeben werden.
 

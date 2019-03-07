@@ -4,7 +4,7 @@ author: guardrex
 description: 'In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/25/2019
+ms.date: 03/04/2019
 uid: fundamentals/configuration/index
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
@@ -128,7 +128,26 @@ Beim Starten der Anwendung werden Konfigurationsquellen in der Reihenfolge geles
 
 Dateikonfigurationsanbieter können Konfigurationen erneut laden, wenn eine zugrunde liegende Einstellungsdatei nach dem App-Start geändert wird. Der Dateikonfigurationsanbieter wird später in diesem Thema beschrieben.
 
-<xref:Microsoft.Extensions.Configuration.IConfiguration> steht im App-Container [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zur Verfügung. Konfigurationsanbieter können die Abhängigkeitsinjektion nicht verwenden, weil sie nicht verfügbar ist, wenn sie vom Host eingerichtet werden.
+<xref:Microsoft.Extensions.Configuration.IConfiguration> steht im App-Container [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zur Verfügung. <xref:Microsoft.Extensions.Configuration.IConfiguration> kann in eine <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>-Klasse von Razor Pages eingefügt werden, um die Konfiguration für die Klasse abzurufen:
+
+```csharp
+// using Microsoft.Extensions.Configuration;
+
+public class IndexModel : PageModel
+{
+    private readonly IConfiguration _config;
+
+    public IndexModel(IConfiguration config)
+    {
+        _config = config;
+    }
+        
+    // The _config local variable is used to obtain configuration 
+    // throughout the class.
+}
+```
+
+Konfigurationsanbieter können die Abhängigkeitsinjektion nicht verwenden, weil sie nicht verfügbar ist, wenn sie vom Host eingerichtet werden.
 
 Konfigurationsschlüssel entsprechen den folgenden Konventionen:
 
@@ -256,6 +275,8 @@ Rufen Sie <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfigurati
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=19)]
 
 ::: moniker-end
+
+Die für die App in der <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>-Methode angegebene Konfiguration, einschließlich `Startup.ConfigureServices`, ist während des Starts der App verfügbar. Weitere Informationen finden Sie im Abschnitt [Hinzufügen von Konfigurationen aus einer externen Assembly](#access-configuration-during-startup).
 
 ## <a name="command-line-configuration-provider"></a>Befehlszeilen-Konfigurationsanbieter
 
@@ -1305,10 +1326,29 @@ var host = new WebHostBuilder()
 
 [ConfigurationBinder.GetValue&lt;T&gt;](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extrahiert einen Wert aus der Konfiguration mit einem angegebenen Schlüssel, und konvertiert ihn in den angegebenen Typ. Eine Überladung erlaubt es Ihnen, einen Standardwert anzugeben, wenn der Schlüssel nicht gefunden wird.
 
-Das folgende Beispiel extrahiert den Zeichenfolgenwert aus der Konfiguration mit dem Schlüssel `NumberKey`, gibt den Wert als `int` an und speichert den Wert in der Variablen `intValue`. Wenn `NumberKey` nicht im Konfigurationsschlüssel gefunden wird, erhält `intValue` den Standardwert `99`:
+Im Beispiel unten geschieht Folgendes:
+
+* Der Zeichenfolgenwert aus der Konfiguration wird mit dem Schlüssel `NumberKey` extrahiert. Wenn `NumberKey` nicht in den Konfigurationsschlüsseln gefunden wird, wird der Standardwert `99` verwendet.
+* Der Typ für den Wert wird als `int` festgelegt.
+* Der Wert wird in der `NumberConfig`-Eigenschaft für die Verwendung durch die Seite gespeichert.
 
 ```csharp
-var intValue = config.GetValue<int>("NumberKey", 99);
+// using Microsoft.Extensions.Configuration;
+
+public class IndexModel : PageModel
+{
+    public IndexModel(IConfiguration config)
+    {
+        _config = config;
+    }
+    
+    public int NumberConfig { get; private set; }
+        
+    public void OnGet()
+    {
+        NumberConfig = _config.GetValue<int>("NumberKey", 99);
+    }
+}
 ```
 
 ## <a name="getsection-getchildren-and-exists"></a>GetSection, GetChildren und Exists

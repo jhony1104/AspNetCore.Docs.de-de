@@ -1,18 +1,13 @@
 ---
 title: 'ASP.NET Core: Integrierte Taghilfsprogramme'
 author: pkellner
-description: Erfahren Sie, wie in ASP.NET Core integrierte Taghilfsprogramme dabei helfen, Ihre Produktivität zu steigern.
+description: 'Erfahren Sie, wie in ASP.NET Core integrierte Taghilfsprogramme dabei helfen, Ihre Produktivität zu steigern.'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/Index
-ms.openlocfilehash: 58840d6ecd09bd2ae7f96c046a0cb93c018f9645
-ms.sourcegitcommit: 4bdf7703aed86ebd56b9b4bae9ad5700002af32d
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2018
-ms.locfileid: "49325483"
 ---
+
 # <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core: Integrierte Taghilfsprogramme
 
 Von [Peter Kellner](http://peterkellner.net)
@@ -35,6 +30,8 @@ Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpe
 [comment]: **[FormActionTagHelper](xref:mvc/views/tag-helpers/builtin-th/form-action-tag-helper)**
 
 **[Hilfsprogramm für Formulartags](xref:mvc/views/working-with-forms#the-form-tag-helper)**
+
+**[Hilfsprogramm für Formularaktionen](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
 
 **[Image-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/image-tag-helper)**
 
