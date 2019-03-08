@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/21/2017
 uid: security/authorization/policies
-ms.openlocfilehash: be4812487c92a16c44e3983b234bc9e31be65190
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: c2bc626b2dd341dda878a151def6b405884357d7
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410388"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665401"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinienbasierte Autorisierung in ASP.NET Core
 
@@ -72,7 +72,7 @@ Handler werden in der dienstauflistung während der Konfiguration registriert. Z
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=40-41,50-55,63-65,72)]
 
-Jeder Handler wird der dienstauflistung hinzugefügt, durch den Aufruf `services.AddSingleton<IAuthorizationHandler, YourHandlerClass>();`.
+Der vorangehende Code registriert `MinimumAgeHandler` als Singleton durch den Aufruf `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`. Handler können registriert werden, mithilfe der integrierten [service Lifetimes](xref:fundamentals/dependency-injection#service-lifetimes).
 
 ## <a name="what-should-a-handler-return"></a>Was sollte es sich um ein Handler zurückgeben?
 

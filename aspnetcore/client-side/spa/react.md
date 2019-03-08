@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie sich mit der Projektvorlage für die Einzelse
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: 3b2b2e67b5d577872bafefef5624a13ca1a22449
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 7b07f696ae071531c88c9f8cf528fc6f0bf97b46
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899176"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665560"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Verwenden der React-Projektvorlage mit ASP.NET Core
 
@@ -105,3 +105,7 @@ Wenn Sie Ihre ASP.NET Core-App starten, wird kein CRA-Server gestartet. Stattdes
 
 > [!IMPORTANT]
 > "Serverseitiges Rendering" ist keine unterstützte Funktion dieser Vorlage. Unser Ziel mit dieser Vorlage ist Parität mit "create-React-app" zu erfüllen. Daher ist es möglich, Szenarien und Features, die nicht in einem Projekt "erstellen-React-app" (z. B. SSR) enthalten werden nicht unterstützt, und Sie bleiben als Übung für den Benutzer.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* <xref:security/authentication/identity/spa>

@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 08/09/2018
 uid: client-side/bower
-ms.openlocfilehash: 06edf7ee791aac0984ff71c2f243f61093f0d503
-ms.sourcegitcommit: 408921a932448f66cb46fd53c307a864f5323fe5
+ms.openlocfilehash: 08e6daa537c6c6f92a1cf80d70745e8ef606f580
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2018
-ms.locfileid: "51570021"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665612"
 ---
 # <a name="manage-client-side-packages-with-bower-in-aspnet-core"></a>Verwalten von clientseitigen Paketen mit Bower in ASP.NET Core
 
-Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Noel Reis](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/), und [Scott Addie](https://scottaddie.com)
+Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Noel Reis](https://twitter.com/noelrice1), und [Scott Addie](https://scottaddie.com)
 
 > [!IMPORTANT]
 > Während der Bower verwaltet wird, wird empfohlen, die Verwalter eine andere Lösung. [Hilfebibliotheks-Manager](https://blogs.msdn.microsoft.com/webdev/2018/04/18/what-happened-to-bower/) (kurz LibMan) ist Visual Studio neue clientseitige Bibliothek Lizenzerwerbs-Tool (Visual Studio 15,8 oder höher). Weitere Informationen finden Sie unter <xref:client-side/libman/index>. Bower ist in Visual Studio bis Version 15.5 unterstützt.

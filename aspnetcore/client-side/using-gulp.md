@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 10/04/2018
 uid: client-side/using-gulp
-ms.openlocfilehash: e280eabecbd427f3e1418b3d7a60e0ea3df46a5a
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.openlocfilehash: 43277dc5910971374187f49031e74769c9e29e1f
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52450605"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665625"
 ---
 # <a name="use-gulp-in-aspnet-core"></a>Verwenden von Gulp in ASP.NET Core
 
@@ -60,9 +60,9 @@ Der obige Code gibt an, welche Module Knoten erforderlich sind. Die `require` Fu
 | ----------- | ----------- |
 | Gulp        | Erstellen Sie das Gulp-streaming auf System. Weitere Informationen finden Sie unter [gulp](https://www.npmjs.com/package/gulp). |
 | rimraf      | Ein Modul, Knoten löschen. Weitere Informationen finden Sie unter [Rimraf](https://www.npmjs.com/package/rimraf). |
-| Gulp-concat | Ein Modul, das verkettet Dateien auf Grundlage des Betriebssystems Zeilenumbruchzeichen. Weitere Informationen finden Sie unter [Gulp-Concat](https://www.npmjs.com/package/gulp-concat). |
-| Gulp-cssmin | Ein Modul, das CSS-Dateien verkleinert. Weitere Informationen finden Sie unter [Gulp-Cssmin](https://www.npmjs.com/package/gulp-cssmin). |
-| Gulp-uglify | Ein Modul, das verkleinert *js* Dateien. Weitere Informationen finden Sie unter [Gulp-uglify](https://www.npmjs.com/package/gulp-uglify). |
+| gulp-concat | Ein Modul, das verkettet Dateien auf Grundlage des Betriebssystems Zeilenumbruchzeichen. Weitere Informationen finden Sie unter [Gulp-Concat](https://www.npmjs.com/package/gulp-concat). |
+| gulp-cssmin | Ein Modul, das CSS-Dateien verkleinert. Weitere Informationen finden Sie unter [Gulp-Cssmin](https://www.npmjs.com/package/gulp-cssmin). |
+| gulp-uglify | Ein Modul, das verkleinert *js* Dateien. Weitere Informationen finden Sie unter [Gulp-uglify](https://www.npmjs.com/package/gulp-uglify). |
 
 Nachdem die erforderlichen Module importiert wurden, können die Aufgaben angegeben werden. Es gibt sechs Aufgaben registriert, mit dem folgenden Code dargestellt:
 
@@ -100,8 +100,8 @@ Die folgende Tabelle enthält eine Erläuterung der Aufgaben im obigen Code ange
 |clean:js|Eine Aufgabe, die die Löschung Rimraf knotenmodul verwendet, um die minimierte Version von der Datei "site.js" zu entfernen.|
 |Bereinigen: Css|Eine Aufgabe, die die Löschung Rimraf knotenmodul verwendet, um die minimierte Version der Datei "Site.CSS" zu entfernen.|
 |Bereinigen|Eine Aufgabe, die Aufrufe der `clean:js` Aufgabe, gefolgt von der `clean:css` Aufgabe.|
-|Min:js|Eine Aufgabe, die verkleinert und verkettet alle JS-Dateien im Ordner "Js". Die. min.js-Dateien ausgeschlossen sind.|
-|Min:CSS|Eine Aufgabe, die verkleinert und alle CSS-Dateien im Ordner "Css" verkettet. Die. min.css Dateien ausgeschlossen sind.|
+|min:js|Eine Aufgabe, die verkleinert und verkettet alle JS-Dateien im Ordner "Js". Die. min.js-Dateien ausgeschlossen sind.|
+|min:css|Eine Aufgabe, die verkleinert und alle CSS-Dateien im Ordner "Css" verkettet. Die. min.css Dateien ausgeschlossen sind.|
 |Min.|Eine Aufgabe, die Aufrufe der `min:js` Aufgabe, gefolgt von der `min:css` Aufgabe.|
 
 ## <a name="running-default-tasks"></a>Ausführen von Standardaufgaben
@@ -337,7 +337,7 @@ Ein Gulp-Task ist ein Funktionsname registriert. Sie können Abhängigkeiten ang
 |src   |`gulp.src(globs[, options]) { }`|Die `src` Funktion enthält Dateien, die die Glob-Werten entsprechen. Die `glob` -Parameter ist ein `string` oder `array` , der bestimmt, welche Dateien um zu lesen. Die `options` Parameter enthält zusätzliche Dateioptionen.|
 |dest  |`gulp.dest(path[, options]) { }`|Die `dest` Funktion definiert einen Speicherort, auf die Dateien geschrieben werden können. Die `path` -Parameter ist eine Zeichenfolge oder eine Funktion, die den Zielordner bestimmt. Die `options` -Parameter ist ein Objekt, Ausgabe Ordneroptionen angibt.|
 
-Zusätzliche Gulp-API-Referenzinformationen finden Sie unter [Gulp-API-Dokumentation-](https://github.com/gulpjs/gulp/blob/master/docs/API.md).
+Zusätzliche Gulp-API-Referenzinformationen finden Sie unter [Gulp-API-Dokumentation-](https://gulpjs.org/API.html).
 
 ## <a name="gulp-recipes"></a>Gulp recipes
 

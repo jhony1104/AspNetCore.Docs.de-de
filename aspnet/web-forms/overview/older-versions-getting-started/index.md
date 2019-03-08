@@ -1,34 +1,28 @@
 ---
 uid: web-forms/overview/older-versions-getting-started/index
-title: Ältere Versionen – Web Forms, erste Schritte | Microsoft-Dokumentation
+title: 'Ältere Versionen – Web Forms, erste Schritte | Microsoft-Dokumentation'
 author: rick-anderson
-description: Dokumentation zu ASP.NET Web Forms-4 und früheren Versionen.
+description: Tutorial zur ASP.NET Web Forms 4 und früheren Versionen.
 ms.author: riande
 ms.date: 10/18/2014
 ms.assetid: e03585c2-80bf-4083-99ba-9fcbc883ccd8
 msc.legacyurl: /web-forms/overview/older-versions-getting-started
 msc.type: chapter
-ms.openlocfilehash: 93eed9c2560b8e5106b224114eb1109d3da95daf
-ms.sourcegitcommit: 45ac74e400f9f2b7dbded66297730f6f14a4eb25
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "48255896"
 ---
 <a name="older-versions---web-forms-getting-started"></a>Ältere Versionen – Web Forms, erste Schritte
 ====================
-> Dokumentation zu ASP.NET Web Forms-4 und früheren Versionen.
+> Tutorial zur ASP.NET Web Forms 4 und früheren Versionen.
 
 
 - [ASP.NET 4 – Tailspin Spyworks](tailspin-spyworks/index.md)
 
-    - [Teil 1: Datei > Neues Projekt](tailspin-spyworks/tailspin-spyworks-part-1.md)
-    - [Teil 2: Datenzugriffsschicht](tailspin-spyworks/tailspin-spyworks-part-2.md)
+    - [Teil 1: Datei -> Neues Projekt](tailspin-spyworks/tailspin-spyworks-part-1.md)
+    - [Teil 2: Datenzugriffsebene](tailspin-spyworks/tailspin-spyworks-part-2.md)
     - [Teil 3: Layout- und Kategoriemenü](tailspin-spyworks/tailspin-spyworks-part-3.md)
     - [Teil 4: Auflistung von Produkten](tailspin-spyworks/tailspin-spyworks-part-4.md)
     - [Teil 5: Geschäftslogik](tailspin-spyworks/tailspin-spyworks-part-5.md)
     - [Teil 6: ASP.NET-Mitgliedschaft](tailspin-spyworks/tailspin-spyworks-part-6.md)
-    - [Teil 7: Hinzufügen von Features](tailspin-spyworks/tailspin-spyworks-part-7.md)
+    - [Teil 7: Hinzufügen von Funktionen](tailspin-spyworks/tailspin-spyworks-part-7.md)
     - [Teil 8: Letzte Seiten, Ausnahmebehandlung und Zusammenfassung](tailspin-spyworks/tailspin-spyworks-part-8.md)
 - [ASP.NET 4 – Erste Schritte mit Entity Framework 4 und Web Forms](getting-started-with-ef/index.md)
 
@@ -42,9 +36,9 @@ ms.locfileid: "48255896"
     - [Erste Schritte mit Entity Framework 4.0 Database First – Teil 8](getting-started-with-ef/the-entity-framework-and-aspnet-getting-started-part-8.md)
 - [ASP.NET 4 – Entity Framework 4 und Web Forms (Fortsetzung)](continuing-with-ef/index.md)
 
-    - [Entity Framework 4.0 und ObjectDataSource-Steuerelement, Teil 1: Erste Schritte](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-1-getting-started.md)
-    - [Entity Framework 4.0 und ObjectDataSource-Steuerelement, Teil 2: Hinzufügen einer Geschäftslogikebene und von Komponententests](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-2-adding-a-business-logic-layer-and-unit-tests.md)
-    - [Entity Framework 4.0 und ObjectDataSource-Steuerelement, Teil 3: Sortieren und Filtern](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-3-sorting-and-filtering.md)
+    - [Entitätsframework 4.0 und ObjectDataSource-Steuerelement, Teil 1: Erste Schritte](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-1-getting-started.md)
+    - [Entitätsframework 4.0 und ObjectDataSource-Steuerelement, Teil 2: Hinzufügen einer Geschäftslogikebene und Komponententests](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-2-adding-a-business-logic-layer-and-unit-tests.md)
+    - [Entitätsframework 4.0 und ObjectDataSource-Steuerelement, Teil 3: Sortieren und Filtern](continuing-with-ef/using-the-entity-framework-and-the-objectdatasource-control-part-3-sorting-and-filtering.md)
     - [Verarbeiten von Parallelität bei Entity Framework 4.0 in ASP.NET 4](continuing-with-ef/handling-concurrency-with-the-entity-framework-in-an-asp-net-web-application.md)
     - [Maximieren der Leistung bei Entity Framework 4.0 in ASP.NET 4](continuing-with-ef/maximizing-performance-with-the-entity-framework-in-an-asp-net-web-application.md)
     - [Neue Funktionen in Entity Framework 4.0](continuing-with-ef/what-s-new-in-the-entity-framework-4.md)
