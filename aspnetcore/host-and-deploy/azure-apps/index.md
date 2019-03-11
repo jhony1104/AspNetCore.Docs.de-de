@@ -120,7 +120,7 @@ Verwenden Sie einen der folgenden Ansätze:
 
 ### <a name="install-the-preview-site-extension"></a>Installieren der Websiteerweiterung (Vorschau)
 
-Sollte ein Problem mit dem Verwenden der Vorschau der Websiteerweiterung auftreten, erstellen Sie ein Problem auf [GitHub](https://github.com/aspnet/azureintegration/issues/new).
+Sollte ein Problem mit dem Verwenden der Vorschau der Websiteerweiterung auftreten, öffnen Sie ein [aspnet/AspNetCore-Issue](https://github.com/aspnet/AspNetCore/issues).
 
 1. Navigieren Sie im Azure-Portal zu „App Service“.
 1. Wählen Sie die Web-App aus.

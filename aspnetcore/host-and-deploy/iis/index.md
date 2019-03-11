@@ -286,7 +286,7 @@ So erhalten Sie eine frühere Version des Installers:
 1. Laden Sie den Installer über den Link **Runtime & Hosting Bundle** (Runtime- und Hosting-Paket) herunter.
 
 > [!WARNING]
-> Einige Installer enthalten Releaseversionen, die das Ende ihres Lebenszyklus erreicht haben und nicht mehr von Microsoft unterstützt werden. Weitere Informationen finden Sie in den [Unterstützungsrichtlinien](https://www.microsoft.com/net/download/dotnet-core/2.0).
+> Einige Installer enthalten Releaseversionen, die das Ende ihres Lebenszyklus erreicht haben und nicht mehr von Microsoft unterstützt werden. Weitere Informationen finden Sie in den [Unterstützungsrichtlinien](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
 ### <a name="install-the-hosting-bundle"></a>Installieren des Hosting-Pakets
 

@@ -1,17 +1,11 @@
 ---
 title: Einführung in Razor Pages in ASP.NET Core
 author: Rick-Anderson
-description: Erfahren Sie, wie Razor Pages in ASP.NET Core codierungsseitige Szenarios einfacher und produktiver gestalten als MVC.
+description: 'Erfahren Sie, wie Razor Pages in ASP.NET Core codierungsseitige Szenarios einfacher und produktiver gestalten als MVC.'
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 05/12/2018
 uid: razor-pages/index
-ms.openlocfilehash: cc881ff42d57ab1654f492a70006a995939e4844
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53709549"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Einführung in Razor Pages in ASP.NET Core
 
@@ -173,7 +167,7 @@ Die Datei *Index.cshtml* enthält das folgende Markup, um einen Bearbeitungslink
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-Das [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) verwendet das Attribut `asp-route-{value}`, um einen Link zur Bearbeitungsseite zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `http://localhost:5000/Edit/1`.
+Das [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) verwendet das Attribut `asp-route-{value}`, um einen Link zur Bearbeitungsseite zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `http://localhost:5000/Edit/1`. Verwenden Sie das `asp-area`-Attribut zur Angabe eines Bereichs. Weitere Informationen finden Sie unter <xref:mvc/controllers/areas>.
 
 Die Datei *Pages/Edit.cshtml*:
 
@@ -401,6 +395,14 @@ Das Verknüpfen relativer Namen eignet sich beim Erstellen von Websites mit eine
 
 ::: moniker range=">= aspnetcore-2.1"
 
+Um auf eine Seite in einem anderen [Bereich](xref:mvc/controllers/areas) umzuleiten, geben Sie den Bereich an:
+
+```csharp
+RedirectToPage("/Index", new { area = "Services" });
+```
+
+Weitere Informationen finden Sie unter <xref:mvc/controllers/areas>.
+
 ## <a name="viewdata-attribute"></a>Attribut „ViewData“
 
 Daten können mit [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) an eine Seite übergeben werden. Die Werte der Eigenschaften auf Controllern oder Razor Pages-Modellen, die mit `[ViewData]` versehen sind, werden in [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) gespeichert und daraus geladen.
@@ -547,6 +549,7 @@ services.AddMvc()
 
 * <xref:index>
 * <xref:mvc/views/razor>
+* <xref:mvc/controllers/areas>
 * <xref:tutorials/razor-pages/razor-pages-start>
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:razor-pages/razor-pages-conventions>
