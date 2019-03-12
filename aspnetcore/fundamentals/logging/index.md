@@ -866,6 +866,7 @@ Das Application Insights SDK kann Protokolle erfassen und melden, die von der AS
 * [Application Insights-Übersicht](/azure/application-insights/app-insights-overview)
 * [Application Insights für ASP.NET Core](/azure/application-insights/app-insights-asp-net-core)
 * [Application Insights logging adapters (Adapter zur Protokollierung für Application Insights)](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/README.md).
+* [Beispiele für die ILogger-Implementierung in Application Insights](/azure/azure-monitor/app/ilogger)
 
 ::: moniker-end
 
