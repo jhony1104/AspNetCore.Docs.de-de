@@ -5,12 +5,12 @@ description: In diesem Tutorial verwenden Sie zunächst das EF Core-Migrationsfe
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 2051f55bfa7a9582486df78ec91315f0b03cb1e8
-ms.sourcegitcommit: 661d30492d5ef7bbca4f7e709f40d8f3309d2dac
+ms.openlocfilehash: ef79aca700068aadf9b5b2b689213b6e78a5d729
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37938377"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346436"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)
 
@@ -171,10 +171,11 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-Lösung: Führen Sie `dotnet ef database update` aus.
+Projektmappe: Ausführen von `dotnet ef database update`
 
 ### <a name="additional-resources"></a>Zusätzliche Ressourcen
 
+* [Dieses Tutorial auf YouTube](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [.NET Core-CLI](/ef/core/miscellaneous/cli/dotnet)
 * [Paket-Manager-Konsole (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 

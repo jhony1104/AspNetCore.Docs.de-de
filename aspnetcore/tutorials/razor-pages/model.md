@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 02/12/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: c7341430e8e2ace7eb04faa308020095139d5b94
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 0ba00750dee1ccbef5d91d8c66f2de0db401c5c1
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56410231"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346358"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -147,10 +147,6 @@ Die Datei *appsettings.json* wird mit der Verbindungszeichenfolge aktualisiert, 
 
 ---
 
-Mit den vorherigen Befehlen wird die folgende Warnung erstellt: "No type was specified for the decimal column 'Price' on entity type 'Movie'. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'." („Für die Spalte „Price“ mit Dezimalwerten beim Entitätstyp „Movie“ wurde kein Typ angegeben. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Geben Sie den Spaltentyp von SQL-Server an, der durch „ForHasColumnType()“ sämtliche Werte unterstützen kann.")
-
-Sie können diese Warnung ignorieren, sie wird in einem späteren Tutorial behoben.
-
 Der Gerüstprozess erstellt und ändert folgende Dateien:
 
 ### <a name="files-created"></a>Erstellte Dateien
@@ -204,6 +200,10 @@ Update-Database
 
 ---  
 <!-- End of VS tabs -->
+
+Mit den vorherigen Befehlen wird die folgende Warnung erstellt: "No type was specified for the decimal column 'Price' on entity type 'Movie'. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'." („Für die Spalte „Price“ mit Dezimalwerten beim Entitätstyp „Movie“ wurde kein Typ angegeben. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Geben Sie den Spaltentyp von SQL-Server an, der durch „ForHasColumnType()“ sämtliche Werte unterstützen kann.")
+
+Sie können diese Warnung ignorieren, sie wird in einem späteren Tutorial behoben.
 
 Mit dem Befehl `ef migrations add InitialCreate` wird Code generiert, um das anfängliche Datenbankschema zu erstellen. Das Schema basiert auf dem Modell, das in `DbContext` angegeben ist (in der Datei *RazorPagesMovieContext.cs*). Das Argument `InitialCreate` wird verwendet, um die Migrationen zu benennen. Es kann jeder Name verwendet werden, aber per Konvention wird ein Name ausgewählt, der die Migration beschreibt.
 
@@ -271,6 +271,10 @@ Sie haben den [Migrationsschritt](#pmc) verpasst.
 * Testen Sie die Links **Edit** (Bearbeiten), **Details** und **Delete** (Löschen).
 
 Im nächsten Tutorial finden Sie Erläuterungen zu den Dateien, die durch den Gerüstbau erstellt wurden.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube](https://www.youtube.com/watch?v=sFVIsdR_RcM)
 
 > [!div class="step-by-step"]
 > [Zurück: Erste Schritte](xref:tutorials/razor-pages/razor-pages-start)

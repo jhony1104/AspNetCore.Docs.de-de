@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 01/17/2019
 uid: fundamentals/startup
-ms.openlocfilehash: cfd0a57d5d0b60862b017a170b6d5cbddf56f15a
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.openlocfilehash: d629c2f02f9021454d8f8539018f3e2ca4703a00
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56744182"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346397"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -40,7 +40,7 @@ Der Host stellt Dienste f체r den `Startup`-Klassenkonstruktor bereit. Die App f�
 [Dependency Injection](xref:fundamentals/dependency-injection) wird h채ufig im Zusammenhang mit der `Startup`-Klasse verwendet, um Folgendes einzuf체gen:
 
 * <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>, um Dienste nach Umgebung zu konfigurieren.
-* <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder>, um Konfigurationen zu lesen.
+* <xref:Microsoft.Extensions.Configuration.IConfiguration>, um Konfigurationen zu lesen.
 * <xref:Microsoft.Extensions.Logging.ILoggerFactory>, um eine Protokollierung in `Startup.ConfigureServices` zu erstellen.
 
 [!code-csharp[](startup/sample_snapshot/Startup2.cs?highlight=7-8)]
@@ -73,7 +73,7 @@ Die <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>-Methode wird verw
 
 Die [ASP.NET Core-Vorlagen](/dotnet/core/tools/dotnet-new) konfigurieren die Pipeline mit Unterst체tzung f체r:
 
-* [die Seite mit Ausnahmen f체r Entwickler](xref:fundamentals/error-handling#the-developer-exception-page)
+* [die Seite mit Ausnahmen f체r Entwickler](xref:fundamentals/error-handling#developer-exception-page)
 * [Ausnahmehandler](xref:fundamentals/error-handling#configure-a-custom-exception-handling-page)
 * [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [HTTPS-Umleitung](xref:security/enforcing-ssl)

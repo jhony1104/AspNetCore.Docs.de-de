@@ -5,12 +5,12 @@ description: In diesem Tutorial wird veranschaulicht, wie mit EF Core Erstellung
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/crud
-ms.openlocfilehash: 4af16bdf3928609214c1255cdd411312c8b7d3f3
-ms.sourcegitcommit: f5d403004f3550e8c46585fdbb16c49e75f495f3
+ms.openlocfilehash: adb281277599456356251c6ee30772a25f14ac58
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2018
-ms.locfileid: "49477435"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346051"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)
 
@@ -247,6 +247,10 @@ Testen Sie die Seite „Löschen“.
 Die `@page`-Anweisung muss auf jeder Razor Page vorhanden sein.
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube](https://www.youtube.com/watch?v=F0SP7Ry4flQ&list=PLnVvOWNfuhGV45HnNgd0vuIIkoQ1UaVBf)
 
 > [!div class="step-by-step"]
 > [Zurück](xref:data/ef-rp/intro)

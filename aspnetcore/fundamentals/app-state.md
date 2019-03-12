@@ -4,14 +4,14 @@ author: rick-anderson
 description: Ansätze zum Erhalten des Sitzungs- und App-Zustands zwischen Sitzungen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/14/2018
+ms.date: 03/04/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: a510e4f49e158203dd7c5e1e0bd28472541f7925
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: 2e3591ac1d6b1670b27b1ed9e42f59ba2b956b37
+ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54836336"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57400709"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>Sitzungs- und App-Zustand in ASP.NET Core
 
@@ -64,7 +64,7 @@ Der Sitzungszustand verhält sich wie folgt:
 * Die App speichert Sitzungen für einen beschränkten Zeitraum nach der letzten Anforderung. Die App legt entweder ein Zeitlimit für die Sitzungen fest oder verwendet den Standardwert von 20 Minuten. Der Sitzungszustand eignet sich ideal zum Speichern von Benutzerdaten, die für eine bestimmte Sitzung zwar wichtig sind, die jedoch nicht dauerhaft sitzungsübergreifend gespeichert werden müssen.
 * Sitzungsdaten werden entweder gelöscht, wenn die [ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear)-Implementierung aufgerufen wird oder wenn die Sitzung abläuft.
 * Es gibt kein Standardverfahren, wie App-Code darüber informiert wird, dass ein Clientbrowser geschlossen wurde oder dass ein Sitzungscookie gelöscht wurde oder auf dem Client abgelaufen ist.
-Die Vorlagen für ASP.NET Core MVC- und Razor-Seiten bieten Unterstützung für die [Unterstützung für die Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr). [Sitzungszustandscookies sind nicht unbedingt erforderlich](xref:security/gdpr#tempdata-provider-and-session-state-cookies-are-not-essential), denn der Sitzungszustand ist nicht funktionsfähig, wenn die Nachverfolgung deaktiviert ist.
+Die Vorlagen für ASP.NET Core MVC- und Razor-Seiten bieten Unterstützung für die Datenschutz-Grundverordnung (DSGVO). Sitzungsstatuscookies werden nicht standardmäßig als wichtig markiert, sodass der Sitzungsstatus erst dann eine Funktion hat, wenn der Besucher der Website die Nachverfolgung zulässt. Weitere Informationen finden Sie unter <xref:security/gdpr#tempdata-provider-and-session-state-cookies-are-not-essential>.
 
 > [!WARNING]
 > Speichern Sie keine vertraulichen Daten im Sitzungszustand. Es besteht die Möglichkeit, dass der Benutzer seinen Browser nicht schließt oder die Sitzungscookies nicht löscht. Einige Browser behalten gültige Sitzungscookies browserfensterübergreifend bei. Eine Sitzung ist möglicherweise nicht nur auf einen Benutzer beschränkt, sodass der nächste Benutzer dasselbe Sitzungscookie verwendet.
@@ -130,7 +130,7 @@ Verwenden Sie [Sitzungsoptionen](/dotnet/api/microsoft.aspnetcore.builder.sessio
 | ------ | ----------- |
 | [Cookie](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | Bestimmt die Einstellungen, die zum Erstellen des Cookies verwendet wurden. Der Standardwert von [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name) ist [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename) (`.AspNetCore.Session`). Der Standardwert von [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path) ist [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath) (`/`). Der Standardwert von [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite) ist [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode) (`1`). Der Standardwert von [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) ist `true`. Der Standardwert von [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential) ist `false`. |
 | [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout` gibt an, wie lang die Sitzung sich im Leerlauf befinden darf, bevor die Inhalte verworfen werden. Jeder Zugriff auf eine Sitzung setzt das Zeitlimit zurück. Diese Einstellung gilt nur für den Inhalt der Sitzung und nicht für den Cookie. Der Standardwert beträgt 20 Minuten. |
-| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | Das Zeitlimit, wie lange eine Sitzung aus dem Speicher geladen werden soll oder wie lange sie in den Speicher committet werden soll. Diese Einstellung gilt möglicherweise nur für asynchrone Vorgänge. Dieses Zeitlimit kann mit [InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan) deaktiviert werden. Der Standardwert beträgt 1&#160;Minute. |
+| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | Das Zeitlimit, wie lange eine Sitzung aus dem Speicher geladen werden soll oder wie lange sie in den Speicher committet werden soll. Diese Einstellung gilt möglicherweise nur für asynchrone Vorgänge. Dieses Zeitlimit kann mit [InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan) deaktiviert werden. Der Standardwert beträgt 1&amp;#160;Minute. |
 
 Die Sitzung verwendet ein Cookie, um Anforderungen eines Browsers nachzuverfolgen und zu identifizieren. Standardmäßig wird das Cookie `.AspNetCore.Session` genannt und verwendet den Pfad von `/`. Da das Standardcookie keine Domäne festlegt, wird es dem clientseitigen Skript auf der Seite nicht zur Verfügung gestellt, da der Standardwert von [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) `true` ist.
 

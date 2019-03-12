@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: cf8733e1e806c4be0c4b217fc45c7a338a03a3ce
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 140f482e136acf4daba1248fecc87e06db6866f3
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207555"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57345890"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Lesen verwandter Daten (6 von 8)
 
@@ -42,13 +42,13 @@ Es gibt mehrere Möglichkeiten, mit denen EF Core verwandte Daten in die Navigat
   * Eine Abfrage für die Hauptabfrage 
   * Eine Abfrage für jeden „Sammlungsrand“ in der Ladestruktur.
 
-* Separate Abfragen mit `Load`: Die Daten können in separaten Abfragen abgerufen werden. EF Core korrigiert die Navigationseigenschaften. „Korrigieren“ bedeutet, dass EF Core die Navigationseigenschaften automatisch füllt. Separate Abfragen mit `Load` ähneln mehr dem expliziten Laden als dem Eager Loading.
+* Beispiel für separate Abfragen mit `Load`: Die Daten können in separaten Abfragen abgerufen werden. EF Core korrigiert die Navigationseigenschaften. „Korrigieren“ bedeutet, dass EF Core die Navigationseigenschaften automatisch füllt. Separate Abfragen mit `Load` ähneln mehr dem expliziten Laden als dem Eager Loading.
 
   ![Beispiel für separate Abfragen](read-related-data/_static/separate-queries.png)
 
   Hinweis: EF Core korrigiert automatisch Navigationseigenschaften für alle anderen Entitäten, die zuvor in die Kontextinstanz geladen wurden. Auch wenn die Daten für eine Navigationseigenschaft *nicht* explizit eingeschlossen sind, kann die Eigenschaft immer noch aufgefüllt werden, wenn einige oder alle verwandten Entitäten zuvor geladen wurden.
 
-* [Explizites Laden](/ef/core/querying/related-data#explicit-loading). Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Es muss Code geschrieben werden, um die verwandten Daten bei Bedarf abzurufen. Explizites Laden mit separaten Abfragen führt zu mehreren Abfragen, die an die Datenbank gesendet werden. Mit explizitem Laden gibt der Code die zu ladenden Navigationseigenschaften an. Verwenden Sie für explizites Laden die `Load`-Methode. Zum Beispiel:
+* [Explizites Laden](/ef/core/querying/related-data#explicit-loading). Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Es muss Code geschrieben werden, um die verwandten Daten bei Bedarf abzurufen. Explizites Laden mit separaten Abfragen führt zu mehreren Abfragen, die an die Datenbank gesendet werden. Mit explizitem Laden gibt der Code die zu ladenden Navigationseigenschaften an. Verwenden Sie für explizites Laden die `Load`-Methode. Beispiel:
 
   ![Beispiel für explizites Laden](read-related-data/_static/explicit-loading.png)
 
@@ -330,6 +330,11 @@ Beachten Sie, dass der vorherige Code `.AsNoTracking()` auskommentiert. Navigati
 Testen Sie die App. Aus Benutzersicht verhält sich die Anwendung identisch mit der vorherigen Version.
 
 Das nächste Tutorial zeigt, wie verwandte Daten aktualisiert werden.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube (Teil 1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
+* [Dieses Tutorial auf YouTube (Teil 2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)
 
 >[!div class="step-by-step"]
 >[Zurück](xref:data/ef-rp/complex-data-model)

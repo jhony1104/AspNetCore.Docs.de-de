@@ -5,12 +5,12 @@ description: Mithilfe dieses Tutorials führen Sie Updates für verwandte Daten 
 ms.author: riande
 ms.date: 11/15/2017
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 4306118240c052585a5c2eeb2053ce03534b547c
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: c3dbfe57a832ba63c5da2f89c0d29e443a1277a7
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207542"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57345761"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)
 
@@ -197,7 +197,7 @@ Wenn die Kontrollkästchen ursprünglich gerendert wurden, weisen dem Dozenten z
 
 Führen Sie die App aus, und testen Sie die aktualisierte Dozentenseite „Edit“ (Bearbeiten). Ändern Sie einige Kurszuweisungen. Die Änderungen werden auf der Seite „Index“ widergespiegelt.
 
-Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird für eine begrenzte Anzahl von Kursen empfohlen. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
+Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
 
 ### <a name="update-the-instructors-create-page"></a>Aktualisieren der Dozentenseite „Create“ (Erstellen)
 
@@ -224,6 +224,11 @@ Durch den vorangehenden Code werden folgende Änderungen vorgenommen:
 * Verwendet Eager Loading für die Navigationseigenschaft `CourseAssignments`. `CourseAssignments` müssen eingeschlossen werden. Andernfalls werden diese nicht gelöscht, wenn der Dozent gelöscht wird. Wenn Sie vermeiden möchten, diese lesen zu müssen, konfigurieren Sie in der Datenbank eine Löschweitergabe.
 
 * Wenn der zu löschende Dozent als Administrator einer beliebigen Abteilung zugewiesen ist, wird die Dozentenzuweisung aus diesen Abteilungen entfernt.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube (Teil 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
+* [Dieses Tutorial auf YouTube (Teil 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)
 
 > [!div class="step-by-step"]
 > [Zurück](xref:data/ef-rp/read-related-data)

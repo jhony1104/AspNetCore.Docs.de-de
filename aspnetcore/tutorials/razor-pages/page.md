@@ -5,12 +5,12 @@ description: Gibt nähere Informationen über durch Gerüstbau erstellte Razor P
 ms.author: riande
 ms.date: 12/4/2018
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: ad87e3da72c3dd6adf8cf55d16da58fa47ed5542
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 07ad142b369fab92589f63479533a769136a087b
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410348"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346449"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>Gerüstbau mit Razor Pages in ASP.NET Core
 
@@ -171,6 +171,11 @@ Das [Hilfsprogramm für Validierungstags](xref:mvc/views/working-with-forms#the-
 Das [Label Tag Helper (Taghilfsprogramm für Label)](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) generiert den Titel des Labels und das `for`-Attribut für die Eigenschaft `Title`.
 
 Das [Hilfsprogramm für Eingabetags](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control" />`) verwendet die Attribute von [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) und generiert HTML-Attribute, die auf der Clientseite für die jQuery-Validierung erforderlich sind.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube](https://youtu.be/zxgKjPYnOMM)
+
 
 > [!div class="step-by-step"]
 > [Zurück: Hinzufügen eines Modells](xref:tutorials/razor-pages/model)

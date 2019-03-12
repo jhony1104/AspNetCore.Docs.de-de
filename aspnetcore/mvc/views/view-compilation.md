@@ -5,14 +5,14 @@ description: Erfahren Sie, wie die Kompilierung von Razor-Dateien in einer ASP.N
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 03/02/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 0b6173a7860f5f1d9d11219fbf3f57f76d703031
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 0b3aea584de63cb8032e4ca112d2441349bdfbb3
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899267"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57345484"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -38,7 +38,7 @@ Eine Razor-Datei wird zur Laufzeit kompiliert, wenn die zugeordnete Razor-Seite 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor-Dateien werden mit dem [Razor SDK](xref:razor-pages/sdk) zur Erstellung und zur Veröffentlichung kompiliert. Die Laufzeitkompilierung kann optional aktiviert werden, indem Ihre Anwendung konfiguriert wird
+Razor-Dateien werden mit dem [Razor SDK](xref:razor-pages/sdk) zur Erstellung und zur Veröffentlichung kompiliert. Die Laufzeitkompilierung kann optional aktiviert werden, indem Ihre Anwendung konfiguriert wird.
 
 ::: moniker-end
 
@@ -93,7 +93,7 @@ Bereiten Sie die App mit dem [Veröffentlichungsbefehl der .NET Core-CLI](/dotne
 dotnet publish -c Release
 ```
 
-Die Datei *<project_name>.PrecompiledViews.dll*, welche die kompilierten Razor-Dateien enthält, wird erzeugt, wenn die Vorkompilierung erfolgreich abgeschlossen wurde. Im unten stehenden Screenshot wird beispielsweise der Inhalt von *Index.cshtml* in *WebApplication1.PrecompiledViews.dll* dargestellt:
+Die Datei *\<project_name>.PrecompiledViews.dll*, welche die kompilierten Razor-Dateien enthält, wird erzeugt, wenn die Vorkompilierung erfolgreich abgeschlossen wurde. Im unten stehenden Screenshot wird beispielsweise der Inhalt von *Index.cshtml* in *WebApplication1.PrecompiledViews.dll* dargestellt:
 
 ![Razor-Ansichten in einer DLL](view-compilation/_static/razor-views-in-dll.png)
 
@@ -122,18 +122,19 @@ Anleitungen und Beispiele zum Festlegen der Kompatibilitätsversion der App find
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Die Laufzeitkompilierung wird mithilfe des `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`-Pakets aktiviert. Um die Laufzeitkompilierung aktivieren zu können, müssen Apps
+Die Laufzeitkompilierung wird mithilfe des `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`-Pakets aktiviert. Um die Laufzeitkompilierung aktivieren zu können, müssen Apps:
 
 * das NuGet-Paket [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) installieren.
 * Aktualisieren Sie das `ConfigureServices` der Anwendung, damit Aufrufe von `AddMvcRazorRuntimeCompilation` enthalten sind:
 
-```csharp
-services
-    .AddMvc()
-    .AddMvcRazorRuntimeCompilation()
-```
+  ```csharp
+  services
+      .AddMvc()
+      .AddMvcRazorRuntimeCompilation()
+  ```
 
 Damit die Laufzeitkompilierung bei der Bereitstellung funktioniert, müssen Apps zusätzlich ihre Projektdateien modifizieren, sodass `PreserveCompilationReferences` auf `true` festgelegt ist.
+
 [!code-xml[](view-compilation/sample/RuntimeCompilation.csproj?highlight=3)]
 
 ::: moniker-end

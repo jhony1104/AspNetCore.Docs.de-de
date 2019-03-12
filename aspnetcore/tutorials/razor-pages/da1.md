@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über das Aktualisieren der generierten Seiten in
 ms.author: riande
 ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 62385f33dc86609726305728fbc19dd9ff27dc87
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 19f54e04e748f5cf0469c2b5428800694d2c9344
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410193"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346105"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Aktualisieren der generierten Seiten in einer ASP.NET Core-App
 
@@ -130,6 +130,10 @@ Wenn die Seite „Filme/Bearbeiten“ bereitgestellt wird:
 Die HTTP GET-Methoden auf den Razor Pages „Index“, „Create“ und „Delete“ folgen einem ähnlichen Muster. Die HTTP-POST-Methode `OnPostAsync` auf der Razor Page „Create“ folgt einem ähnlichen Muster wie die `OnPostAsync`-Methode auf der Razor Page „Edit“.
 
 Die Suche wird im nächsten Tutorial hinzugefügt.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorial auf YouTube](https://youtu.be/yLnnleREMtQ)
 
 > [!div class="step-by-step"]
 > [Zurück: Arbeiten mit einer Datenbank](xref:tutorials/razor-pages/sql)
