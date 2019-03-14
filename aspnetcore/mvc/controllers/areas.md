@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das 
 ms.author: riande
 ms.date: 02/14/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: c21eed04ea68512515da262b6b6895dc1a821039
-ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
+ms.openlocfilehash: 8904d217a18fff65113ae3469efe60258d20d5f0
+ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/26/2019
-ms.locfileid: "56833526"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57400644"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -27,6 +27,8 @@ Die Verwendung von Bereichen in einem Projekt ist erwägenswert, wenn:
 
 [Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)). Das Downloadbeispiel stellt eine einfache App für Testbereiche zur Verfügung.
 
+Wenn Sie Razor-Seiten verwenden, lesen Sie [Bereiche mit Razor-Seiten](#areas-with-razor-pages) in diesem Dokument.
+
 ## <a name="areas-for-controllers-with-views"></a>Bereiche für Controller mit Ansichten
 
 Eine typische ASP.NET Core-Web-App, die Bereiche, Controller und Ansichten verwendet, beinhaltet Folgendes:
@@ -35,7 +37,7 @@ Eine typische ASP.NET Core-Web-App, die Bereiche, Controller und Ansichten verwe
 * Controller, die mit dem Attribut [&lbrack;Bereich&rbrack;](#attribute) versehen wurden, um dem Controller den Bereich zuzuordnen: [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 * Die [Bereichsroute, die dem Startup hinzugefügt wurde](#add-area-route): [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
-## <a name="area-folder-structure"></a>Bereichsordnerstruktur
+### <a name="area-folder-structure"></a>Bereichsordnerstruktur
 Stellen Sie sich eine App vor, die zwei logische Gruppen hat, *Produkte* und *Dienste*. Wenn Bereiche verwendet werden, würde die Ordnerstruktur ähnlich dem Folgenden aussehen:
 
 * Projektname
@@ -68,11 +70,6 @@ Während das vorherige Layout typisch ist, wenn Bereiche verwendet werden, müss
 
 Der Speicherort von Ordnern, die sich nicht auf die Ansicht beziehen, wie *Controller* und *Modelle* spielt **keine** Rolle. Die Ordner *Controller* und *Modelle* werden z.B. nicht benötigt. Der Inhalt von *Controller* und *Modelle* ist Code, der in eine .dll-Datei kompiliert wird. Der Inhalt von *Ansichten* wird nicht kompiliert, bis eine Anforderung an diese Ansicht gestellt wird.
 
-<!-- TODO review:
-The content of the *Views* isn't compiled until a request to that view has been made.
-
-What about precompiled views? 
- -->
 <a name="attribute"></a>
 
 ### <a name="associate-the-controller-with-an-area"></a>Zuordnen eines Controllers zu einem Bereich
@@ -99,7 +96,7 @@ Wenn `MapAreaRoute` mit ASP.NET Core 2.2 verwendet werden soll, sehen Sie sich d
 
 Weitere Informationen finden Sie im Artikel [Routing zu Controlleraktionen in ASP.NET Core](xref:mvc/controllers/routing#areas).
 
-### <a name="link-generation-with-areas"></a>Erstellen von Links mit Bereichen
+### <a name="link-generation-with-mvc-areas"></a>Erstellen von Links mit MVC-Bereichen
 
 Im folgenden Code aus dem [Beispieldownload](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) sehen Sie die Erstellung eines Links mit dem angegebenen Bereich:
 
@@ -107,7 +104,7 @@ Im folgenden Code aus dem [Beispieldownload](https://github.com/aspnet/Docs/tree
 
 Links, die mit dem vorherigen Code erstellt wurden, gelten überall in der App.
 
-Im Beispieldownload ist eine [partielle Ansicht](xref:mvc/views/partial) enthalten, die die vorherigen Links und dieselben Links beinhaltet, ohne dass der Bereich angegeben wird. In der [Layoutdatei]() wird auf die partielle Ansicht verwiesen. Jede Seite in der App stellt also die erstellen Links dar. Die Links, die ohne Angabe eines Bereichs erstellt werden, sind nur gültig, wenn auf sie von einer Seite im selben Bereich und Controller verwiesen wird.
+Im Beispieldownload ist eine [partielle Ansicht](xref:mvc/views/partial) enthalten, die die vorherigen Links und dieselben Links beinhaltet, ohne dass der Bereich angegeben wird. In der [Layoutdatei](xref:mvc/views/layout) wird auf die partielle Ansicht verwiesen. Jede Seite in der App stellt also die erstellen Links dar. Die Links, die ohne Angabe eines Bereichs erstellt werden, sind nur gültig, wenn auf sie von einer Seite im selben Bereich und Controller verwiesen wird.
 
 Wenn der Bereich oder der Kontroller nicht angegeben werden, hängt das Routing von den *Umgebungswerten* ab. Die aktuellen Routenwerte der aktuellen Anforderung werden bei der Linkgenerierung als Umgebungswerte behandelt. Oft werden ungültige Links erstellt, wenn für die Beispiel-App die Umgebungswerte verwendet werden.
 
@@ -117,11 +114,6 @@ Weitere Informationen finden Sie unter [Routing zu Controlleraktionen in ASP.NET
 
 Um ein gemeinsames Layout für die gesamte App freizugeben, verschieben Sie *_ViewStart.cshtml* in den Stammordner der Anwendung.
 
-<!-- This section will be completed after https://github.com/aspnet/Docs/pull/10978 is merged.
-<a name="arp"></a>
-
-## Areas for Razor Pages
--->
 <a name="rename"></a>
 
 ### <a name="change-default-area-folder-where-views-are-stored"></a>Ändern des Standardbereichsordners, in dem Ansichten gespeichert sind
@@ -130,7 +122,72 @@ Der folgende Code ändert den Standardbereichsordner von `"Areas"` in `"MyAreas"
 
 [!code-csharp[](areas/samples/MVCareas/Startup2.cs?name=snippet)]
 
-<!-- TODO review - can we delete this. Areas doesn't change publishing - right? -->
+<a name="arp"></a>
+
+## <a name="areas-with-razor-pages"></a>Bereiche mit Razor-Seiten
+
+Bereiche mit Razor-Seiten erfordern einen Ordner *Areas/&lt;Bereichsname&gt;/Pages* im Stammverzeichnis der App. Die folgende Ordnerstruktur wird mit dem [Beispieldownload](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) verwendet.
+
+* Projektname
+  * Bereiche
+    * Products
+      * Seiten
+        * _ViewImports
+        * Info
+        * Index
+    * Dienste
+      * Seiten
+        * Verwalten
+          * Info
+          * Index
+
+### <a name="link-generation-with-razor-pages-and-areas"></a>Erstellen von Links mit Razor-Seiten und Bereichen
+
+Im folgenden Code aus dem [Beispieldownload](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) sehen Sie die Erstellung eines Links mit dem angegebenen Bereich (z.B. `asp-area="Products"`):
+
+[!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
+
+Links, die mit dem vorherigen Code erstellt wurden, gelten überall in der App.
+
+Im Beispieldownload ist eine [partielle Ansicht](xref:mvc/views/partial) enthalten, die die vorherigen Links und dieselben Links beinhaltet, ohne dass der Bereich angegeben wird. In der [Layoutdatei](xref:mvc/views/layout) wird auf die partielle Ansicht verwiesen. Jede Seite in der App stellt also die erstellen Links dar. Die Links, die ohne Angabe eines Bereichs erstellt werden, sind nur gültig, wenn auf sie von einer Seite im selben Bereich verwiesen wird.
+
+Wenn der Bereich nicht angegeben wird, hängt das Routing von den *Umgebungswerten* ab. Die aktuellen Routenwerte der aktuellen Anforderung werden bei der Linkgenerierung als Umgebungswerte behandelt. Oft werden ungültige Links erstellt, wenn für die Beispiel-App die Umgebungswerte verwendet werden. Betrachten Sie hierzu die aus dem folgenden Code generierten Links:
+
+[!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
+
+Für den Code oben gilt:
+
+* Der aus `<a asp-page="/Manage/About">` generierte Link stimmt nur, wenn die letzte Anforderung für eine Seite im `Services`-Bereich erfolgte. Beispielsweise `/Services/Manage/`, `/Services/Manage/Index` oder `/Services/Manage/About`.
+* Der aus `<a asp-page="/About">` generierte Link stimmt nur, wenn die letzte Anforderung für eine Seite in `/Home` erfolgte.
+* Der Code stammt aus dem [Beispieldownload](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas).
+
+### <a name="import-namespace-and-tag-helpers-with-viewimports-file"></a>Importieren von Namespace und Taghilfsprogrammen mit der _ViewImports-Datei
+
+Eine *_ViewImports* Datei kann dem *Pages*-Ordner jedes Bereichs hinzugefügt werden, um Namespace und Taghilfsprogramme für jede Razor-Seite im Ordner zu importieren.
+
+Betrachten Sie den Bereich *Services* des Beispielcodes, der keine *_ViewImports*-Datei enthält. Das folgende Markup zeigt die Razor-Seite */Services/Manage/About*:
+
+[!code-cshtml[](areas/samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
+
+Im obenstehenden Markup:
+
+* Der vollqualifizierte Domänenname muss verwendet werden, um das Modell anzugeben (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`).
+* [Taghilfsprogramme]() werden durch `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` aktiviert.
+
+Im Beispieldownload enthält der Bereich „Products“ die folgende *_ViewImports*-Datei:
+
+[!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
+
+Das folgende Markup zeigt die Razor-Seite */Products/About*: [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
+
+In der vorherigen Datei werden Namespace und `@addTagHelper`-Anweisung von der Datei *Areas/Products/Pages/_ViewImports.cshtml* in die Datei importiert:
+
+Weitere Informationen finden Sie unter [Verwalten des Taghilfsprogrammbereichs](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) und [Importieren gemeinsam verwendeter Anweisungen](xref:mvc/views/layout#importing-shared-directives).
+
+### <a name="shared-layout-for-razor-pages-areas"></a>Gemeinsam genutztes Layout für Razor-Seiten-Bereiche
+
+Um ein gemeinsames Layout für die gesamte App freizugeben, verschieben Sie *_ViewStart.cshtml* in den Stammordner der Anwendung.
+
 ### <a name="publishing-areas"></a>Veröffentlichen von Bereichen
 
-Alle `*.cshtml`- und `wwwroot/**`-Dateien werden für die Ausgabe veröffentlicht, wenn `<Project Sdk="Microsoft.NET.Sdk.Web">` in der *CSPROJ*-Datei enthalten ist.
+Alle `*.cshtml`- und `wwwroot/**`-Dateien werden für die Ausgabe veröffentlicht, wenn `<Project Sdk="Microsoft.NET.Sdk.Web">` in der CSPROJ-Datei enthalten ist.

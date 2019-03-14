@@ -4,14 +4,14 @@ author: guardrex
 description: Hier erfahren Sie, wie Sie häufige Fehler beim Hosten von ASP.NET Core-Apps in Azure Apps Service und IIS beheben können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/21/2019
+ms.date: 02/28/2019
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: d1cdac4d27ee1bc3ebb4329c1bbd3bdacb34a58c
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.openlocfilehash: 1c8cb31b306b38ec17596af0a84f22ca0e3d911c
+ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56743946"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "57346225"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Referenz zu häufigen Fehlern bei Azure App Service und IIS mit ASP.NET Core
 
@@ -56,6 +56,39 @@ Wenn das System während der [Installation des .NET Core-Hosting-Pakets](xref:ho
 Problembehandlung:
 
 Nicht zum Betriebssystem gehörende Dateien im Verzeichnis **C:\Windows\SysWOW64\inetsrv** werden während eines Betriebssystemupgrades nicht beibehalten. Dieses Problem tritt auf, wenn vor der Durchführung eines Betriebssystemupgrades das ASP.NET Core-Modul installiert wurde und nach einem Betriebssystemupgrade ein App-Pool im 32-Bit-Modus ausgeführt wird. Reparieren Sie nach einem Betriebssystemupgrade das ASP.NET Core-Modul. Siehe [Installieren des .NET Core-Hostingpakets](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle). Wählen Sie **Reparatur** aus, wenn der Installer ausgeführt wird.
+
+## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>Websiteerweiterung fehlt, 32-Bit- und 64-Bit-Websiteerweiterungen (x86 und x64) installiert oder falsche Prozessbitanzahl festgelegt
+
+*Gilt für Apps, die von Azure App Services gehostet werden.*
+
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM) 
+
+* **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Could not find inprocess request handler. Captured output from invoking hostfxr: Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“, Version „{VERSION}-preview-\*“ konnte nicht gefunden werden. Die Anwendung „/LM/W3SVC/1416782824/ROOT“ konnte nicht gestartet werden. Fehlercode: „0x8000ffff“.
+
+* **stdout-Protokoll des ASP.NET Core-Moduls:** Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“, Version „{VERSION}-preview-\*“ konnte nicht gefunden werden.
+
+::: moniker range=">= aspnetcore-2.2"
+
+* **Debugprotokoll des ASP.NET Core-Moduls:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Das bedeutet wahrscheinlich, dass die App falsch konfiguriert wurde. Vergleichen Sie die Versionen von „Microsoft.NetCore.App“ und „Microsoft.AspNetCore.App“, die von der Anwendung angezielt werden, mit den auf dem Computer installierten Versionen. Failed HRESULT returned: 0x8000ffff. Could not find inprocess request handler. Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“, Version „{VERSION}-preview-\*“ konnte nicht gefunden werden.
+
+::: moniker-end
+
+Problembehandlung:
+
+* Wenn die App in einer Vorschauruntime ausgeführt wird, installieren Sie entweder die 32-Bit- **oder** 64-Bit-Websiteerweiterung (x86 oder x64), die der Bitanzahl und der Runtimeversion der App entspricht. **Installieren Sie nicht sowohl Erweiterungen als auch mehrere Runtimeversionen der Erweiterung.**
+
+  * ASP.NET Core {RUNTIME VERSION} (x86) Runtime
+  * ASP.NET Core {RUNTIME VERSION} (x64) Runtime
+
+  Starten Sie die App neu. Warten Sie einige Sekunden, bis die App neu startet. 
+
+* Wenn Sie die App auf einer Vorschauruntime ausführen und sowohl die 32-Bit- als auch die 64-Bit-[Websiteerweiterung](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension) (x86 und x64) installiert sind, deinstallieren Sie die Websiteerweiterung, die nicht der Bitanzahl der App entspricht. Starten Sie die App nach dem Entfernen der Websiteerweiterung neu. Warten Sie einige Sekunden, bis die App neu startet.
+
+* Wenn Sie die App auf einer Vorschauruntime ausführen und die Bitanzahl der Websiteerweiterung mit der Bitanzahl der App übereinstimmt, bestätigen Sie, dass die *Runtimeversion* der Websiteerweiterung der Vorschau der Runtimeversion der App entspricht.
+
+* Überprüfen Sie, ob die **Plattform** der App in **Anwendungseinstellungen** der Bitanzahl der App entspricht.
+
+Weitere Informationen finden Sie unter <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>.
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Bereitstellung einer x86-App, obwohl der App-Pool nicht für 32-Bit-Apps aktiviert ist
 
