@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 5e1522e0819d989a7029c2928c1c33624c1774c7
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 72e3ae1c4be18edaa2e7f1906cf65269e5ed2288
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899358"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665495"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -559,7 +559,6 @@ Dependency Injection stellt eine *Alternative* zu statischen bzw. globalen Objek
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
 * [Schreiben von sauberem Code in ASP.NET Core über Dependency Injection (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [Container-Managed Application Design, Prelude: Where does the Container Belong? (Containerverwaltetes Anwendungsdesign, Einleitung: Wohin gehört der Container?)](https://blogs.msdn.microsoft.com/nblumhardt/2008/12/26/container-managed-application-design-prelude-where-does-the-container-belong/)
 * [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 * [Umkehrung von Steuerungscontainern und das Abhängigkeitsinjektionsmuster (Martin Fowler)](https://www.martinfowler.com/articles/injection.html) (in englischer Sprache)
 * [Registrieren eines Diensts mit mehreren Schnittstellen in ASP.NET Core DI](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)

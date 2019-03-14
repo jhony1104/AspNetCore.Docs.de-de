@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Validierung zu einer ASP.NET Core
 ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 431715e7c584d3ee381cbafb42171a7c01dddb3a
-ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
+ms.openlocfilehash: 49db8d7c1d3e54f416c66685c19b3a2e3b14251c
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53382055"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665443"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Validierung zu einer ASP.NET Core MVC-App
 
@@ -59,7 +59,7 @@ Wie Sie sehen, hat das Formular automatisch für alle Felder mit einem ungültig
 
 Ein entscheidender Vorteil ist, dass Sie nicht eine Codezeile in der Klasse `MoviesController` oder in der Ansicht *Create.cshtml* ändern müssen, um diese Benutzeroberfläche für die Validierung zu aktivieren. Die Controller und Ansichten, die Sie zuvor in diesem Tutorial erstellt haben, haben die angegebenen Validierungsregeln automatisch übernommen (mithilfe der Validierungsattribute für die Eigenschaften der Modellklasse `Movie`). Testen Sie die Validierung mithilfe der Aktionsmethode `Edit`, und es folgt die gleiche Validierung.
 
-Die Formulardaten werden erst an den Server gesendet, wenn auf Clientseite keine Validierungsfehler mehr auftreten. Sie können dies überprüfen, indem Sie einen Haltepunkt in die Methode `HTTP Post` einfügen. Verwenden Sie dazu das [Fiddler-Tool](http://www.telerik.com/fiddler) oder die [F12-Entwicklertools](https://developer.microsoft.com/microsoft-edge/platform/documentation/f12-devtools-guide/).
+Die Formulardaten werden erst an den Server gesendet, wenn auf Clientseite keine Validierungsfehler mehr auftreten. Sie können dies überprüfen, indem Sie einen Haltepunkt in die Methode `HTTP Post` einfügen. Verwenden Sie dazu das [Fiddler-Tool](http://www.telerik.com/fiddler) oder die [F12-Entwicklertools](/microsoft-edge/devtools-guide).
 
 ## <a name="how-validation-works"></a>Funktionsweise der Validierung
 
