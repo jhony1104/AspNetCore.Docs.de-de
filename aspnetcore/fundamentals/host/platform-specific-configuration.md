@@ -2,23 +2,23 @@
 title: Verwenden von Hostingstartassemblys in ASP.NET Core
 author: guardrex
 description: Erfahren Sie, wie Sie eine ASP.NET Core-App aus einer externen Assembly mithilfe einer Implementierung von IHostingStartup erweitern.
-monikerRange: '>= aspnetcore-2.0'
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 02/14/2019
+ms.date: 03/10/2019
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: cffad201c84414ee4788877d80d3619a9013ae99
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 6111ae77369608e828eebf6229b5702630bc63f8
+ms.sourcegitcommit: 34bf9fc6ea814c039401fca174642f0acb14be3c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410494"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57841461"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Verwenden von Hostingstartassemblys in ASP.NET Core
 
 Von [Luke Latham](https://github.com/guardrex) und [Pavel Krymets](https://github.com/pakrym)
 
-Mit einer [IHostingStartup](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup)-Implementierung (Hostingstart) werden Verbesserungen an einer App beim Start von einer externen Assemblys aus vorgenommen. Eine externe Bibliothek kann beispielsweise eine Hostingstartimplementierung verwenden, um zusätzliche Konfigurationsanbieter oder -dienste für eine App bereitzustellen. `IHostingStartup` *ist in ASP.NET Core 2.0 und höher verfügbar*.
+Mit einer [IHostingStartup](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup)-Implementierung (Hostingstart) werden Verbesserungen an einer App beim Start von einer externen Assemblys aus vorgenommen. Eine externe Bibliothek kann beispielsweise eine Hostingstartimplementierung verwenden, um zusätzliche Konfigurationsanbieter oder -dienste für eine App bereitzustellen.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -40,8 +40,6 @@ Zum Ermitteln von geladenen Hostingstartassemblys aktivieren Sie die Protokollie
 
 ## <a name="disable-automatic-loading-of-hosting-startup-assemblies"></a>Deaktivieren des automatischen Ladens von Hostingstartassemblys
 
-::: moniker range=">= aspnetcore-2.1"
-
 Um das automatische Laden von Hostingstartassemblys zu deaktivieren, verwenden Sie einen der folgenden Ansätze:
 
 * Um zu verhindern, dass alle Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf `true` oder `1` fest:
@@ -50,17 +48,6 @@ Um das automatische Laden von Hostingstartassemblys zu deaktivieren, verwenden S
 * Um zu verhindern, dass bestimmte Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf eine durch Semikolons getrennte Zeichenfolge mit Hostingstartassemblys fest, die beim Starten ausgeschlossen werden sollen:
   * Hostkonfigurationseinstellung [Hostingstartausschlussassemblys](xref:fundamentals/host/web-host#hosting-startup-exclude-assemblies).
   * Die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-Um das automatische Laden von Hostingstartassemblys zu deaktivieren, legen Sie eine der folgenden Einstellungen auf `true` oder `1` fest:
-
-* Hostkonfigurationseinstellung [Verhindern des Hostingstarts](xref:fundamentals/host/web-host#prevent-hosting-startup).
-* Die Umgebungsvariable `ASPNETCORE_PREVENTHOSTINGSTARTUP`
-
-::: moniker-end
 
 Wenn sowohl die Konfigurationseinstellung für den Host als auch die Umgebungsvariable festgelegt werden, wird das Verhalten durch die Hosteinstellung gesteuert.
 
