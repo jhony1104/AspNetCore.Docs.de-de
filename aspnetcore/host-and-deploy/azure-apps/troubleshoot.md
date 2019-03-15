@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie, wie Sie Probleme mit ASP.NET Core Azure App Service-Bereitstellungen diagnostizieren können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/11/2019
+ms.date: 03/05/2019
 uid: host-and-deploy/azure-apps/troubleshoot
-ms.openlocfilehash: 65a5e355bc15db6de9060331395c441160c8b62d
-ms.sourcegitcommit: 42a8164b8aba21f322ffefacb92301bdfb4d3c2d
+ms.openlocfilehash: c3732bfab362ec034248eb3912d4b1337c94216e
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2019
-ms.locfileid: "54341640"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665427"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service"></a>Problembehandlung bei ASP.NET Core in Azure App Service
 
@@ -71,11 +71,56 @@ Viele Startfehler erzeugen keine nützlichen Informationen im Anwendungsereignis
 
 1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;**. Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
 1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
-1. Öffnen Sie die Ordner unter dem Pfad **site** > **wwwroot**.
-1. Führen Sie die App in der Konsole aus, indem Sie die Assembly der App ausführen.
-   * Wenn die App eine [Framework-abhängige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-fdd) ist, führen Sie die Assembly der App mit *dotnet.exe* aus. Ersetzen Sie im folgenden Befehl den Namen der Assembly der App durch `<assembly_name>`: `dotnet .\<assembly_name>.dll`
-   * Wenn die App eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) ist, führen Sie die ausführbare Datei der App aus. Ersetzen Sie im folgenden Befehl den Namen der Assembly der App durch `<assembly_name>`: `<assembly_name>.exe`
-1. Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
+
+#### <a name="test-a-32-bit-x86-app"></a>Testen einer 32-Bit-App (x86)
+
+##### <a name="current-release"></a>Aktuelles Release
+
+1. `cd d:\home\site\wwwroot`
+1. Führen Sie die App aus:
+   * Wenn es sich bei der App um eine [Framework-abhängige Bereitstellung handelt](/dotnet/core/deploying/#framework-dependent-deployments-fdd):
+
+     ```console
+     dotnet .\{ASSEMBLY NAME}.dll
+     ```
+   * Wenn es sich bei der App um eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) handelt:
+
+     ```console
+     {ASSEMBLY NAME}.exe
+     ```
+   
+Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
+   
+##### <a name="framework-depdendent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
+
+*Erfordert die Installation der Runtimeerweiterung für ASP.NET Core {VERSION} (x86).*
+
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` ist die Runtimeversion.)
+1. Führen Sie die App aus: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+
+Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
+
+#### <a name="test-a-64-bit-x64-app"></a>Testen einer 64-Bit-App (x64)
+
+##### <a name="current-release"></a>Aktuelles Release
+
+* Wenn es sich bei der App um eine [frameworkabhängige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-fdd) (64-Bit, x64) handelt:
+  1. `cd D:\Program Files\dotnet`
+  1. Führen Sie die App aus: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+* Wenn es sich bei der App um eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) handelt:
+  1. `cd D:\home\site\wwwroot`
+  1. Führen Sie die App aus: `{ASSEMBLY NAME}.exe`
+
+Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
+
+##### <a name="framework-depdendent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
+
+*Erfordert die Installation der Runtimeerweiterung für ASP.NET Core {VERSION} (x64).*
+
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` ist die Runtimeversion.)
+1. Führen Sie die App aus: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+
+Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
 
 ### <a name="aspnet-core-module-stdout-log"></a>stdout-Protokoll des ASP.NET Core-Moduls
 
