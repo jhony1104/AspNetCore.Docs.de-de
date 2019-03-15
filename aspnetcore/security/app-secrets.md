@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen Sie zum Speichern und Abrufen von vertraulichen Informationen wie app-Geheimnissen während der Entwicklung von ASP.NET Core-Apps.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 01/31/2019
+ms.date: 03/13/2019
 uid: security/app-secrets
-ms.openlocfilehash: eaa2e9d1ba98d391a29a9ff55872d062df016b87
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: 1a10c4d035510c689e3eccadc5986df0cc06b71e
+ms.sourcegitcommit: 34bf9fc6ea814c039401fca174642f0acb14be3c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667777"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57841513"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Sichere Speicherung von app-Geheimnissen bei der Entwicklung in ASP.NET Core
 
@@ -27,7 +27,7 @@ Umgebungsvariablen werden zum Speichern von app-Geheimnisse in Code oder in loka
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Konfigurieren Sie das Lesen der Werte von Umgebungsvariablen, durch den Aufruf [AddEnvironmentVariables](/dotnet/api/microsoft.extensions.configuration.environmentvariablesextensions.addenvironmentvariables) in die `Startup` Konstruktor:
+Konfigurieren Sie das Lesen der Werte von Umgebungsvariablen, durch den Aufruf <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> in die `Startup` Konstruktor:
 
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=8)]
 
@@ -55,13 +55,7 @@ System-Dateipfad:
 
 `%APPDATA%\Microsoft\UserSecrets\<user_secrets_id>\secrets.json`
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
-
-System-Dateipfad:
-
-`~/.microsoft/usersecrets/<user_secrets_id>/secrets.json`
-
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux--macostablinuxmacos"></a>[Linux / MacOS](#tab/linux+macos)
 
 System-Dateipfad:
 
@@ -125,9 +119,27 @@ Use "dotnet user-secrets [command] --help" for more information about a command.
 
 ::: moniker-end
 
-## <a name="set-a-secret"></a>Legen Sie einen geheimen Schlüssel
+## <a name="enable-secret-storage"></a>Aktivieren Sie den geheimen Speicher
 
-Secret Manager-Tool wirkt sich auf projektspezifische Konfigurationseinstellungen, die in Ihrem Benutzerprofil gespeichert. Um vertrauliche Informationen eines Benutzers zu verwenden, definieren eine `UserSecretsId` Element innerhalb einer `PropertyGroup` von der *csproj* Datei. Der Wert des `UserSecretsId` ist beliebig, aber in dem Projekt eindeutig ist. Entwickler in der Regel generiert eine GUID für die `UserSecretsId`.
+Secret Manager-Tool wirkt sich auf projektspezifische Konfigurationseinstellungen, die in Ihrem Benutzerprofil gespeichert.
+
+::: moniker range=">= aspnetcore-3.0"
+
+Das Geheimnis-Manager-Tool bietet eine `init` -Befehl in .NET Core SDK 3.0.100 oder höher. Um vertrauliche Informationen eines Benutzers zu verwenden, führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
+
+```console
+dotnet user-secrets init
+```
+
+Der vorherige Befehl fügt eine `UserSecretsId` Element innerhalb einer `PropertyGroup` von der *csproj* Datei. Standardmäßig wird der innere Text des `UserSecretsId` ist eine GUID. Der innere Text ist beliebig, aber es ist nur für das Projekt.
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+Um vertrauliche Informationen eines Benutzers zu verwenden, definieren eine `UserSecretsId` Element innerhalb einer `PropertyGroup` von der *csproj* Datei. Der innere Text des `UserSecretsId` ist beliebig, aber in dem Projekt eindeutig ist. Entwickler in der Regel generiert eine GUID für die `UserSecretsId`.
+
+::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -142,21 +154,9 @@ Secret Manager-Tool wirkt sich auf projektspezifische Konfigurationseinstellunge
 ::: moniker-end
 
 > [!TIP]
-> Klicken Sie in Visual Studio mit der rechten Maustaste in des Projekts im Projektmappen-Explorer, und wählen **geheime Benutzerschlüssel verwalten** aus dem Kontextmenü. Diese stiftbewegung Fügt eine `UserSecretsId` Elements aufgefüllt durch eine GUID, zu der *csproj* Datei. Visual Studio öffnet eine *secrets.json* Datei im Text-Editor. Ersetzen Sie den Inhalt der *secrets.json* mit Schlüssel-Wert-Paare gespeichert werden. Zum Beispiel:
-> ```json
-> {
->   "Movies": {
->     "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true",
->     "ServiceApiKey": "12345"
->   }
-> }
-> ```
-> Die JSON-Struktur wird nach Änderungen über vereinfacht `dotnet user-secrets remove` oder `dotnet user-secrets set`. Z. B. Ausführung `dotnet user-secrets remove "Movies:ConnectionString"` reduziert die `Movies` Objektliteral. Die geänderte Datei ähnelt der folgenden:
-> ```json
-> {
->   "Movies:ServiceApiKey": "12345"
-> }
-> ```
+> Klicken Sie in Visual Studio mit der rechten Maustaste in des Projekts im Projektmappen-Explorer, und wählen **geheime Benutzerschlüssel verwalten** aus dem Kontextmenü. Diese stiftbewegung Fügt eine `UserSecretsId` Elements aufgefüllt durch eine GUID, zu der *csproj* Datei.
+
+## <a name="set-a-secret"></a>Legen Sie einen geheimen Schlüssel
 
 Definieren Sie ein app-Geheimnis, bestehend aus einem Schlüssel und seinen Wert an. Der geheime Schlüssel des Projekts zugeordnet ist `UserSecretsId` Wert. Führen Sie beispielsweise den folgenden Befehl aus dem Verzeichnis, in dem die *csproj* Datei vorhanden ist:
 
@@ -172,6 +172,27 @@ Secret Manager-Tool kann auch aus anderen Verzeichnissen verwendet werden. Verwe
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
 ```
 
+### <a name="json-structure-flattening-in-visual-studio"></a>JSON-Struktur, die in Visual Studio vereinfachen
+
+Visual Studio **geheime Benutzerschlüssel verwalten** Geste öffnet eine *secrets.json* Datei im Text-Editor. Ersetzen Sie den Inhalt der *secrets.json* mit Schlüssel-Wert-Paare gespeichert werden. Zum Beispiel:
+
+```json
+{
+  "Movies": {
+    "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "ServiceApiKey": "12345"
+  }
+}
+```
+
+Die JSON-Struktur wird nach Änderungen über vereinfacht `dotnet user-secrets remove` oder `dotnet user-secrets set`. Z. B. Ausführung `dotnet user-secrets remove "Movies:ConnectionString"` reduziert die `Movies` Objektliteral. Die geänderte Datei ähnelt der folgenden:
+
+```json
+{
+  "Movies:ServiceApiKey": "12345"
+}
+```
+
 ## <a name="set-multiple-secrets"></a>Legen Sie mehrere geheime Schlüssel
 
 Ein Batch von geheimen Schlüsseln kann festgelegt werden, durch das Weiterleiten von JSON-Code für die `set` Befehl. Im folgenden Beispiel die *"Input.JSON"* Dateiinhalt sind über die Pipeline an das `set` Befehl.
@@ -184,15 +205,7 @@ Ein Batch von geheimen Schlüsseln kann festgelegt werden, durch das Weiterleite
   type .\input.json | dotnet user-secrets set
   ```
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
-
-Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl:
-
-  ```console
-  cat ./input.json | dotnet user-secrets set
-  ```
-
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux--macostablinuxmacos"></a>[Linux / MacOS](#tab/linux+macos)
 
 Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl:
 
@@ -204,9 +217,15 @@ Ein Batch von geheimen Schlüsseln kann festgelegt werden, durch das Weiterleite
 
 ## <a name="access-a-secret"></a>Zugriff auf einen geheimen Schlüssel
 
-::: moniker range=">= aspnetcore-2.0"
+Die [ASP.NET Core-Konfigurations-API](xref:fundamentals/configuration/index) ermöglicht den Zugriff auf Secret Manager Geheimnisse.
 
-Die [ASP.NET Core-Konfigurations-API](xref:fundamentals/configuration/index) ermöglicht den Zugriff auf Secret Manager Geheimnisse. Wenn das Projekt .NET Framework verwendet, installieren Sie die [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet-Paket.
+::: moniker range=">= aspnetcore-2.0 <= aspnetcore-2.2"
+
+Wenn das Projekt .NET Framework verwendet, installieren Sie die [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet-Paket.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.0"
 
 In ASP.NET Core 2.0 oder höher, die Benutzer Geheimnisse Konfigurationsquelle wird automatisch hinzugefügt im Entwicklungsmodus Wenn, das Projekt aufruft <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> eine neue Instanz des Hosts mit vorkonfigurierten Standardwerten initialisiert werden. `CreateDefaultBuilder` Aufrufe <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets*> bei der <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> ist <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>:
 
@@ -220,9 +239,9 @@ Wenn `CreateDefaultBuilder` wird nicht aufgerufen wird, hinzufügen die Konfigur
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Die [ASP.NET Core-Konfigurations-API](xref:fundamentals/configuration/index) ermöglicht den Zugriff auf Secret Manager Geheimnisse. Installieren Sie die [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet-Paket.
+Installieren Sie die [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet-Paket.
 
-Hinzufügen die Konfigurationsquelle für Benutzer geheime Schlüssel mit einem Aufruf von [AddUserSecrets](/dotnet/api/microsoft.extensions.configuration.usersecretsconfigurationextensions.addusersecrets) in die `Startup` Konstruktor:
+Hinzufügen die Konfigurationsquelle für Benutzer geheime Schlüssel mit einem Aufruf von <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets*> in die `Startup` Konstruktor:
 
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
 
@@ -282,7 +301,7 @@ Entfernen Sie die `Password` Schlüssel / Wert-Paar aus der Verbindungszeichenfo
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
-Der geheime Schlüssel Wert kann festgelegt werden, auf eine [SqlConnectionStringBuilder](/dotnet/api/system.data.sqlclient.sqlconnectionstringbuilder) des Objekts [Kennwort](/dotnet/api/system.data.sqlclient.sqlconnectionstringbuilder.password) Eigenschaft, um die Verbindungszeichenfolge abgeschlossen:
+Der geheime Schlüssel Wert kann festgelegt werden, auf eine <xref:System.Data.SqlClient.SqlConnectionStringBuilder> des Objekts <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password*> Eigenschaft, um die Verbindungszeichenfolge abgeschlossen:
 
 ::: moniker range=">= aspnetcore-2.0"
 
