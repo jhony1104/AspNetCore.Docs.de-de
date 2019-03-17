@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Fehlerbehandlung in ASP.NET Core-Apps.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 03/01/2019
+ms.date: 03/05/2019
 uid: fundamentals/error-handling
-ms.openlocfilehash: a2ae2cb25c8cc5048b189b4035abbfc32a29aaff
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: d809c70b3fae6b2d21d5ec0871298d905b873d5d
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57345493"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665362"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>Fehlerbehandlung in ASP.NET Core
 
@@ -24,9 +24,9 @@ Dieser Artikel beschreibt grundsätzliche Vorgehensweisen zur Behandlung von Feh
 
 ## <a name="developer-exception-page"></a>Seite mit Ausnahmen für Entwickler
 
-Verwenden Sie die *Seite mit Ausnahmen für Entwickler*, um eine App so zu konfigurieren, dass sie eine Seite anzeigt, die ausführliche Informationen zu Ausnahmen enthält. Die Seite wird vom [Microsoft.AspNetCore.Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/)-Paket zur Verfügung gestellt. Dieses ist im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten. Fügen Sie der `Startup.Configure`-Methode eine Zeile hinzu:
+Verwenden Sie die *Seite mit Ausnahmen für Entwickler*, um eine App so zu konfigurieren, dass sie eine Seite anzeigt, die ausführliche Informationen zu Anforderungsausnahmen enthält. Die Seite wird vom [Microsoft.AspNetCore.Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/)-Paket zur Verfügung gestellt. Dieses ist im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten. Fügen Sie der `Startup.Configure`-Methode eine Zeile hinzu, wenn die App in der [Entwicklungsumgebung](xref:fundamentals/environments) ausgeführt wird:
 
-[!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevExceptionPage&highlight=5)]
+[!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_UseDeveloperExceptionPage)]
 
 Fügen Sie den Aufruf von <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*> vor Middleware ein, wo Sie Ausnahmen abfangen möchten.
 
@@ -50,7 +50,7 @@ Wenn die App nicht in der Entwicklungsumgebung ausgeführt wird, rufen Sie die <
 
 Im folgenden Beispiel aus der Beispiel-App fügt <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*> die Middleware zur Ausnahmebehandlung in Nichtentwicklungsumgebungen hinzu. Die Erweiterungsmethode gibt am `/Error`-Endpunkt für erneut ausgeführte Anforderungen eine Fehlerseite oder einen Controller an, nachdem Ausnahmen abgefangen und protokolliert wurden:
 
-[!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevExceptionPage&highlight=9)]
+[!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_UseExceptionHandler1)]
 
 Die Razor Pages-App-Vorlage stellt eine Fehlerseite (*.cshtml*) und <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>-Klasse (`ErrorModel`) im Ordner „Pages“ bereit.
 
@@ -66,6 +66,36 @@ public IActionResult Error()
 ```
 
 Die Aktionsmethode zur Fehlerbehandlung wird nicht durch HTTP-Methodenattribute wie `HttpGet` ergänzt. Durch explizite Verben könnte bei einigen Anforderungen verhindert werden, dass diese Methode zum Einsatz kommt. Lassen Sie den anonymen Zugriff auf die Methode zu, damit nicht authentifizierte Benutzer die Fehleransicht empfangen können.
+
+## <a name="access-the-exception"></a>Zugreifen auf die Ausnahme
+
+Verwenden Sie <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>, um auf die Ausnahme oder den Pfad der ursprünglichen Anforderung in einem Controller oder auf einer Seite zuzugreifen:
+
+* Der Pfad steht über die <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature.Path>-Eigenschaft zur Verfügung.
+* Lesen Sie <xref:System.Exception?displayProperty=fullName> aus der geerbten Eigenschaft [IExceptionHandlerFeature.Error](xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature.Error).
+
+```csharp
+// using Microsoft.AspNetCore.Diagnostics;
+
+var exceptionHandlerPathFeature = 
+    HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+var path = exceptionHandlerPathFeature?.Path;
+var error = exceptionHandlerPathFeature?.Error;
+```
+
+> [!WARNING]
+> Stellen Sie **keine** vertraulichen Fehlerinformationen aus <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> oder <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> für Clients bereit. Die Bereitstellung von Fehlern ist ein Sicherheitsrisiko.
+
+## <a name="configure-custom-exception-handling-code"></a>Konfigurieren eines benutzerdefinierten Ausnahmeverarbeitungscodes
+
+Eine Alternative zur Bereitstellung eines Endpunkts für Fehler bei einer [benutzerdefinierten Ausnahmebehandlungsseite](#configure-a-custom-exception-handling-page) besteht darin, einen Lambda-Ausdruck für <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*> anzugeben. Die Verwendung eines Lambda-Ausdrucks mit <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*> ermöglicht den Zugriff auf den Fehler, bevor die Antwort zurückgegeben wird.
+
+Die Beispiel-App veranschaulicht benutzerdefinierten Ausnahmebehandlungscode in `Startup.Configure`. Lösen Sie eine Ausnahme mit dem Link **Ausnahme auslösen** auf der Indexseite aus. Der folgende Lambda-Ausdruck wird ausgeführt:
+
+[!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_UseExceptionHandler2)]
+
+> [!WARNING]
+> Stellen Sie **keine** vertraulichen Fehlerinformationen aus <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> oder <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> für Clients bereit. Die Bereitstellung von Fehlern ist ein Sicherheitsrisiko.
 
 ## <a name="configure-status-code-pages"></a>Konfigurieren von Statuscodeseiten
 
@@ -265,7 +295,7 @@ Achten Sie nach dem Senden der Header für eine Antwort auch auf Folgendes:
 
 ## <a name="server-exception-handling"></a>Sichere Ausnahmebehandlung
 
-Neben der Ausnahmebehandlungslogik in Ihrer App kann die [Serverimplementierung](xref:fundamentals/servers/index) einige Ausnahmebehandlungen durchführen. Wenn der Server eine Ausnahme erfasst, bevor die Antwortheader gesendet werden, sendet der Server die Antwort *500 – Interner Serverfehler* ohne Antworttext. Wenn der Server eine Ausnahme auffängt, nachdem die Antwortheader gesendet wurden, schließt der Server die Verbindung. Anforderungen, die nicht von Ihrer App verarbeitet werden, werden vom Server verarbeitet. Jede auftretende Ausnahme wird durch die Ausnahmebehandlung des Servers behandelt. Konfigurierte benutzerdefinierte Fehlerseiten, Middleware oder Filter zur Fehlerbehandlung haben keine Auswirkungen auf dieses Verhalten.
+Neben der Ausnahmebehandlungslogik in Ihrer App kann die [Serverimplementierung](xref:fundamentals/servers/index) einige Ausnahmebehandlungen durchführen. Wenn der Server eine Ausnahme erfasst, bevor die Antwortheader gesendet werden, sendet der Server die Antwort *500 – Interner Serverfehler* ohne Antworttext. Wenn der Server eine Ausnahme auffängt, nachdem die Antwortheader gesendet wurden, schließt der Server die Verbindung. Anforderungen, die nicht von Ihrer App verarbeitet werden, werden vom Server verarbeitet. Jede Ausnahme, die bei der Anforderungsverarbeitung durch den Server auftritt, wird durch die Ausnahmebehandlung des Servers verarbeitet. Die benutzerdefinierten Fehlerseiten der App, Middleware zur Fehlerbehandlung und Filter haben keine Auswirkungen auf dieses Verhalten.
 
 ## <a name="startup-exception-handling"></a>Fehlerbehandlung während des Starts
 
@@ -285,10 +315,10 @@ Wenn sie auf [IIS](/iis) oder [IIS Express](/iis/extensions/introduction-to-iis-
 
 ### <a name="exception-filters"></a>Ausnahmefilter
 
-Ausnahmefilter können in einer MVC-App global oder auf der Grundlage eines Controllers oder einer Aktion konfiguriert werden. Diese Filter verarbeiten jede nicht behandelte Ausnahme, die während der Ausführung eine Controlleraktion oder eines anderen Filters auftritt. Diese Dateien werden andernfalls nicht aufgerufen. Weitere Informationen dazu finden Sie unter <xref:mvc/controllers/filters>.
+Ausnahmefilter können in einer MVC-App global oder auf der Grundlage eines Controllers oder einer Aktion konfiguriert werden. Diese Filter verarbeiten jede nicht behandelte Ausnahme, die während der Ausführung eine Controlleraktion oder eines anderen Filters auftritt. Diese Dateien werden andernfalls nicht aufgerufen. Weitere Informationen finden Sie unter <xref:mvc/controllers/filters#exception-filters>.
 
 > [!TIP]
-> Ausnahmefilter eignen sich zum Auffangen von Ausnahmen, die in MVC-Aktionen auftreten. Sie sind jedoch nicht so flexibel wie Middleware für die Fehlerbehandlung. Wir empfehlen die Verwendung von Middleware. Verwenden Sie Filter nur dann, wenn Sie für die Fehlerbehandlung auf Grundlage einer ausgewählten MVC-Aktion eine *andere* Strategie anwenden müssen.
+> Ausnahmefilter eignen sich zum Auffangen von Ausnahmen, die in MVC-Aktionen auftreten. Sie sind jedoch nicht so flexibel wie Middleware für die Ausnahmebehandlung. Es wird empfohlen, die Middleware zu verwenden. Verwenden Sie Filter nur dann, wenn Sie für die Fehlerbehandlung auf Grundlage einer ausgewählten MVC-Aktion eine *andere* Strategie anwenden müssen.
 
 ### <a name="handle-model-state-errors"></a>Behandeln von Modellstatusfehlern
 

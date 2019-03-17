@@ -5,16 +5,16 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: af11906f86fe4ea91ed520584daedc094ab2dc0b
-ms.sourcegitcommit: edb9d2d78c9a4d68b397e74ae2aff088b325a143
+ms.openlocfilehash: 70de86f2e8c4a5577b8a4b50c53d66eb3b205c09
+ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "51505829"
+ms.lasthandoff: 03/08/2019
+ms.locfileid: "57665537"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
-Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), [Bart Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://twitter.com/NadeemAfana), und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
+Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), [Bart Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/), und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
 Wenn Sie eine mehrsprachige Website mit ASP.NET Core erstellen, können Sie mit Ihrer Website ein breiteres Publikum erreichen. ASP.NET Core bietet Dienste und Middleware zur Lokalisierung in verschiedene Sprachen und Kulturen.
 
@@ -44,7 +44,7 @@ Verwenden Sie die Implementierung von `IHtmlLocalizer<T>` für Ressourcen, die H
 
 [!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Hinweis:** Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
+**Hinweis**: Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
 
 Auf der untersten Ebene können Sie `IStringLocalizerFactory` aus [Dependency Injection](dependency-injection.md) abrufen:
 
@@ -80,7 +80,7 @@ Eine französische Ressourcendatei könnte Folgendes beinhalten:
 
 Die gerenderte Ansicht würde das HTML-Markup der Ressourcendatei enthalten.
 
-**Hinweis:** Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
+**Hinweis**: Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
 
 Fügen Sie `IHtmlLocalizer<T>` ein, um eine freigegebene Ressourcendatei in einer Ansicht zu verwenden:
 
@@ -332,9 +332,9 @@ Begriffe:
 
 * Globalisierung (G11N): Der Prozess, durch den eine App mehrere Sprachen und Regionen unterstützen soll.
 * Lokalisierung (L10N): Der Prozess, durch den eine App auf eine Sprache und Region angepasst wird.
-* Internationalisierung (I18N): Beschreibt die Globalisierung und Lokalisierung.
+* Internationalisierung (I18N): Beschreibt sowohl Globalisierung als auch Lokalisierung.
 * Kultur: Beschreibt eine Sprache und optional auch eine Region.
-* Neutrale Kultur: Eine Kultur die eine bestimmte Sprache beschreibt, aber keine Region. (Zum Beispiel „en“, „es“)
+* Neutrale Kultur: Eine Kultur, die eine bestimmte Sprache beschreibt, aber keine Region. (Zum Beispiel „en“, „es“)
 * Spezifische Kultur: Eine Kultur, die eine bestimmte Sprache und Region beschreibt. (Zum Beispiel „en-US“, „en-GB“, „es-CL“)
 * Übergeordnete Kultur: Eine neutrale Kultur, die eine spezifische Kultur enthält. („en“ ist z.B. die übergeordnete Kultur von „en-US“ und „en-GB“)
 * Gebietsschema: Ein Gebietsschema ist identisch mit einer Kultur.
