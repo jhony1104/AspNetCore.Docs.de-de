@@ -60,7 +60,7 @@ dotnet dev-certs https --trust
 Über den vorherigen Befehl wird die folgende Meldung angezeigt:
 
 *Trusting the HTTPS development certificate was requested. Wenn das Zertifikat nicht bereits vertrauenswürdig, ist führen wir den folgenden Befehl aus:*  `'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`.
- 
+
 Dieser Befehl fordert Sie möglicherweise zur Eingabe Ihres Kennworts auf, um das Zertifikat für die Systemkeychain zu installieren. Geben Sie Ihr Kennwort ein, wenn Sie die Vertrauenswürdigkeit des Entwicklungszertifikats bestätigen möchten.
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)

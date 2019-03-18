@@ -1,18 +1,12 @@
 ---
 title: Einführung in Razor Components
 author: guardrex
-description: Lernen Sie ASP.NET Core Razor Components kennen, eine Möglichkeit, interaktive clientseitige Webbenutzeroberflächen mit .NET in einer ASP.NET Core-App zu erstellen.
+description: 'Lernen Sie ASP.NET Core Razor Components kennen, eine Möglichkeit, interaktive clientseitige Webbenutzeroberflächen mit .NET in einer ASP.NET Core-App zu erstellen.'
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2019
+ms.date: 03/13/2019
 uid: razor-components/index
-ms.openlocfilehash: 04a73d33cee0deedaf3dc97395836a936b580fbd
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159525"
 ---
 # <a name="introduction-to-razor-components"></a>Einführung in Razor Components
 
@@ -54,11 +48,11 @@ Weitere Informationen finden Sie unter <xref:razor-components/hosting-models#ser
 
 Eine *Razor Component* ist Bestandteil der Benutzeroberfläche (z.B. Seiten, Dialogfelder oder Formulare für die Dateneingabe). Komponenten behandeln Benutzerereignisse und definieren flexible Renderinglogik für die Benutzeroberfläche. Komponenten können geschachtelt sein und wiederverwendet werden.
 
-Komponenten sind in .NET-Assemblys integrierte .NET-Klassen, die gemeinsam genutzt und als NuGet-Pakete verteilt werden können. Die Klasse kann entweder in Form einer Razor-Markupseite (*CSHTML-Datei*) oder als C#-Klasse (*CS-Datei*) geschrieben werden.
+Komponenten sind in .NET-Assemblys integrierte .NET-Klassen, die gemeinsam genutzt und als NuGet-Pakete verteilt werden können. Die Klasse wird in der Regel in Form einer Razor-Markupseite mit der Dateierweiterung *.razor* geschrieben.
 
 [Razor](xref:mvc/views/razor) ist eine Syntax, mit der HTML-Markup mit C#-Code kombiniert werden kann. Razor wurde entwickelt, um die Produktivität von Entwicklern zu optimieren, da diese damit und unter Verwendung der [IntelliSense](/visualstudio/ide/using-intellisense)-Unterstützung innerhalb einer Datei zwischen Markup und C# wechseln können. Razor Pages und MVC-Ansichten verwenden ebenfalls Razor. Im Gegensatz zu Razor Pages und MVC-Ansichten, die auf einem Anforderung/Antwort-Modell aufbauen, werden Komponenten speziell für die Verarbeitung der Benutzeroberflächengestaltung verwendet. Razor Components können insbesondere für die clientseitige Benutzeroberflächenlogik und -gestaltung verwendet werden.
 
-Das folgende Markup stellt ein Beispiel einer benutzerdefinierten Dialogfeldkomponente in einer Razor-Datei (*DialogComponent.cshtml*) dar:
+Das folgende Markup stellt ein Beispiel einer benutzerdefinierten Dialogfeldkomponente in einer Razor-Datei (*DialogComponent.razor*) dar:
 
 ```cshtml
 <div>
