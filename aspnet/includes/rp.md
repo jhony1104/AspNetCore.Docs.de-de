@@ -1,1 +1,0 @@
-Für die neue Entwicklung von Webanwendungen empfehlen wir die Razor-Seiten. Weitere Informationen finden Sie unter [erste Schritte mit Razor Pages](/aspnet/core/tutorials/razor-pages/razor-pages-start).
