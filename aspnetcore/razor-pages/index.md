@@ -140,12 +140,12 @@ Der grundlegende Ablauf von `OnPostAsync`:
 
 Prüfen auf Validierungsfehler
 
-*  Wenn keine Fehler vorliegen, werden die Daten gespeichert und weitergeleitet.
-*  Wenn es Fehler gibt, zeigen Sie die Seite erneut mit den Validierungsmeldungen an. Die clientseitige Validierung ist identisch mit herkömmlichen ASP.NET Core MVC-Anwendungen, denn Validierungsfehler werden oftmals auf dem Client erkannt und nie an den Server übermittelt.
+* Wenn keine Fehler vorliegen, werden die Daten gespeichert und weitergeleitet.
+* Wenn es Fehler gibt, zeigen Sie die Seite erneut mit den Validierungsmeldungen an. Die clientseitige Validierung ist identisch mit herkömmlichen ASP.NET Core MVC-Anwendungen, denn Validierungsfehler werden oftmals auf dem Client erkannt und nie an den Server übermittelt.
 
 Wenn die Daten erfolgreich eingegeben wurden, ruft die `OnPostAsync`-Handlermethode die `RedirectToPage`-Hilfsmethode auf, um eine Instanz von `RedirectToPageResult` zurückzugeben. `RedirectToPage` ist ein neues Aktionsergebnis und ähnelt `RedirectToAction` oder `RedirectToRoute`, ist aber für Seiten angepasst. Im vorhergehenden Beispiel leitet es an die Stammindexseite (`/Index`) weiter. Informationen zu `RedirectToPage` finden Sie im Abschnitt [URL-Generierung für Seiten](#url_gen).
 
-Wenn das übermittelte Formular Validierungsfehler enthält (die an den Server übergeben wurden), ruft die `OnPostAsync`-Handlermethode die `Page`-Hilfsmethode auf. `Page` gibt eine Instanz von `PageResult` zurück. Der Vorgang, bei dem `Page` zurückgegeben wird, ähnelt dem Vorgang, bei dem Aktionen im Controller `View` zurückgeben. `PageResult` ist der standardmäßige <!-- Review  -->-Rückgabetyp für eine Handlermethode. Eine Handlermethode, die `void` zurückgibt, rendert die Seite.
+Wenn das übermittelte Formular Validierungsfehler enthält (die an den Server übergeben wurden), ruft die `OnPostAsync`-Handlermethode die `Page`-Hilfsmethode auf. `Page` gibt eine Instanz von `PageResult` zurück. Der Vorgang, bei dem `Page` zurückgegeben wird, ähnelt dem Vorgang, bei dem Aktionen im Controller `View` zurückgeben. `PageResult` ist der standardmäßige <!-- Review  --> Rückgabetyp für eine Handlermethode. Eine Handlermethode, die `void` zurückgibt, rendert die Seite.
 
 Die Eigenschaft `Customer` verwendet das `[BindProperty]`-Attribut, um die Modellbindung zu aktivieren.
 
