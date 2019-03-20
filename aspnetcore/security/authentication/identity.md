@@ -5,12 +5,12 @@ description: Verwenden Sie Identität mit einer ASP.NET Core-app. Erfahren Sie, 
 ms.author: riande
 ms.date: 08/08/2018
 uid: security/authentication/identity
-ms.openlocfilehash: 1a4e7fb3ac6a767ca17127dd58a9b9e65ed9a00b
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.openlocfilehash: d57ab5f2fdfabdfe3a987475d2db68b3fc1dec72
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "55739682"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209199"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität in ASP.NET Core
 
@@ -115,7 +115,7 @@ Weitere Informationen finden Sie unter den [IdentityOptions Klasse](/dotnet/api/
 
 ## <a name="scaffold-register-login-and-logout"></a>Erstellen des Gerüsts für registrieren, Anmeldung und Abmeldung
 
-Führen Sie die [Gerüst Identity in einer Razor-Projekt mit Autorisierung](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) Anweisungen zum Generieren der der Code in diesem Abschnitt.
+Führen Sie die [Gerüst Identity in einer Razor-Projekt mit Autorisierung](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) Anweisungen zum Generieren des Codes in diesem Abschnitt gezeigt.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
