@@ -5,12 +5,12 @@ description: Informationen Sie zum Erstellen einer ASP.NET Core-app mit e-Mail-B
 ms.author: riande
 ms.date: 3/11/2019
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d102ed0a4a75f6273fcda0a8cc7e9d091ff94b50
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 3bfc2ce46cfbc2ee308940f9e04eb2ffeec09073
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209923"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265497"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Kontobestätigung und kennwortwiederherstellung in ASP.NET Core
 
@@ -45,6 +45,7 @@ dotnet new webapp -au Individual -uld -o WebPWrecover
 cd WebPWrecover
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
+dotnet tool install -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout;Account.ConfirmEmail"
 dotnet ef database drop -f
 dotnet ef database update
@@ -63,6 +64,7 @@ Beachten Sie die Tabelle `EmailConfirmed` Feld `False`.
 Sie möchten möglicherweise verwenden Sie diese e-Mail erneut im nächsten Schritt, wenn die app eine Bestätigung per e-Mail sendet. Mit der rechten Maustaste auf die Zeile, und wählen **löschen**. Löschen den e-Mail-Alias erleichtert es in den folgenden Schritten.
 
 <a name="prevent-login-at-registration"></a>
+
 ## <a name="require-email-confirmation"></a>E-Mail-Bestätigung erforderlich
 
 Es ist eine bewährte Methode, die e-Mail-Adresse einer neuen benutzerregistrierung zu bestätigen. E-Mail-Bestätigung können, um zu überprüfen, ob sie sind eine andere Person keinen Identitätswechsel (d. h. sie noch nicht registriert mit einer anderen Person für den e-Mail-Adresse). Angenommen, Sie haben ein Diskussionsforum, und Sie möchten, um zu verhindern, dass "yli@example.com"aus der Registrierung als"nolivetto@contoso.com". Ohne e-Mail-Bestätigung "nolivetto@contoso.com" könnte unerwünschte e-Mail-Adresse aus Ihrer app erhalten. Angenommen, das der Benutzer versehentlich als registriert "ylo@example.com" und noch nicht bemerkt, dass die falsche Schreibweise von "Yli". Sie wäre nicht kennwortwiederherstellung zu verwenden, da die app die korrekte e-Mail-Adresse besitzt. E-Mail-Bestätigung enthält nur begrenzten Schutz von Bots. E-Mail-Bestätigung stellt keinen Schutz vor böswilligen Benutzern viele e-Mail-Konten bereit.
@@ -96,13 +98,13 @@ Auf Windows, speichert Secret Manager-Schlüssel/Wert-Paare in einem *secrets.js
 
 Den Inhalt der *secrets.json* Datei sind nicht verschlüsselt. Das folgende Markup zeigt die *secrets.json* Datei. Die `SendGridKey` Wert entfernt wurde.
 
- ```json
-  {
-    "SendGridUser": "RickAndMSFT",
-    "SendGridKey": "<key removed>"
-  }
-  ```
- 
+```json
+{
+  "SendGridUser": "RickAndMSFT",
+  "SendGridKey": "<key removed>"
+}
+```
+
 Weitere Informationen finden Sie unter den [optionsmuster](xref:fundamentals/configuration/options) und [Konfiguration](xref:fundamentals/configuration/index).
 
 ### <a name="install-sendgrid"></a>Installieren von SendGrid
@@ -130,6 +132,7 @@ dotnet add package SendGrid
 ------
 
 Finden Sie unter [kostenlos erste Schritte mit SendGrid](https://sendgrid.com/free/) für ein kostenloses SendGrid-Konto zu registrieren.
+
 ### <a name="implement-iemailsender"></a>Implementieren von IEmailSender
 
 Das implementieren `IEmailSender`, erstellen Sie *Services/EmailSender.cs* mit ähnlich dem folgenden Code:
@@ -213,6 +216,7 @@ Fügen Sie den benutzerdefinierten Anbieter zum Dienstcontainer hinzu:
 Finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/5410).
 
 <a name="debug"></a>
+
 ### <a name="debug-email"></a>Debuggen von e-Mail-Adresse
 
 Wenn Sie e-Mail-Adresse funktioniert nicht:

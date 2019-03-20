@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/05/2018
 uid: razor-pages/filter
-ms.openlocfilehash: 5b233d95c9fbab09c64072377b85b40b127df7b7
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 32613d75d966a698c6478234f3f5f9d5fc0628bc
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50205937"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264800"
 ---
 # <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Filtermethoden für Razor-Seiten in ASP-NET Core
 
@@ -35,14 +35,14 @@ Filter für Razor-Seiten bieten die folgenden Methoden, die global oder auf Seit
 
 * Synchrone Methoden:
 
-    * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0): Wird aufgerufen, nachdem eine Handlermethode ausgewählt wurde, aber bevor die Modellbindung erfolgt
-    * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0): Wird aufgerufen, bevor die Handlermethode ausgeführt wird, nachdem die Modellbindung abgeschlossen ist
-    * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0): Wird aufgerufen, nachdem die Handlermethode ausgeführt wird, bevor das Aktionsergebnis angezeigt wird
+  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) : Wird aufgerufen, nachdem eine Handlermethode ausgewählt wurde, aber vor dem Modell Bindung erfolgt.
+  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) : Vor die Handlermethode ausgeführt wird, nach der modellbindung abgeschlossen ist, aufgerufen.
+  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : Wird aufgerufen, nachdem die Handlermethode ausgeführt, bevor das Aktionsergebnis wird.
 
 * Asynchrone Methoden:
 
-    * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0): Wird asynchron aufgerufen, nachdem die Handlermethode ausgewählt wurde, aber bevor die Modellbindung erfolgt
-    * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0): Wird asynchron aufgerufen, bevor die Handlermethode aufgerufen wird, nachdem die Modellbindung abgeschlossen ist
+  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : Asynchron aufgerufen, nachdem die Handlermethode ausgewählt wurde, aber bevor die modellbindung erfolgt.
+  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : Asynchron aufgerufen, bevor die Ereignishandlermethode aufgerufen wird, nach Abschluss der modellbindung.
 
 > [!NOTE]
 > Implementieren Sie **entweder** die synchrone oder asynchrone Version einer Filterschnittstelle, aber nicht beide. Das Framework prüft zuerst, ob der Filter die asynchrone Schnittstelle implementiert, und wenn dies der Fall ist, ruft es sie auf. Wenn dies nicht der Fall ist, ruft es die Methode(n) der synchronen Schnittstelle auf. Wenn beide Schnittstellen implementiert werden, werden nur die asynchronen Methoden aufgerufen. Die gleiche Regel gilt für Überschreibungen in Seiten. Implementieren Sie die synchrone oder asynchrone Version der Überschreibung, nicht beide.
@@ -86,6 +86,7 @@ Der folgende Code überschreibt die synchronen Filter für Razor-Seiten:
 ::: moniker-end
 
 <a name="ifa"></a>
+
 ## <a name="implement-a-filter-attribute"></a>Implementieren eines Filterattributs
 
 Der integrierte attributbasierte Filter [OnResultExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncresultfilter.onresultexecutionasync?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Filters_IAsyncResultFilter_OnResultExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ResultExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ResultExecutionDelegate_) kann als Unterklasse definiert werden. Der folgende Filter fügt der Antwort einen Header hinzu:
@@ -101,6 +102,7 @@ Informationen zum Überschreiben der Reihenfolge finden Sie unter [Überschreibe
 Informationen zum Kurzschließen der Filterpipeline eines Filters finden Sie unter [Abbrechen und Kurzschließen](xref:mvc/controllers/filters#cancellation-and-short-circuiting). 
 
 <a name="auth"></a>
+
 ## <a name="authorize-filter-attribute"></a>Autorisieren eines Filterattributs
 
 Das Attribut [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) kann auf ein `PageModel` angewendet werden:

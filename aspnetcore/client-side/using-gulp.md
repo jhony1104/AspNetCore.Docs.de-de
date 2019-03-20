@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 10/04/2018
 uid: client-side/using-gulp
-ms.openlocfilehash: 43277dc5910971374187f49031e74769c9e29e1f
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 9f6d03a1e8a81bceca15cb1e1aa664c22c31e1d3
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665625"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209871"
 ---
 # <a name="use-gulp-in-aspnet-core"></a>Verwenden von Gulp in ASP.NET Core
 
@@ -86,7 +86,7 @@ gulp.task("min:css", () => {
 });
 
 gulp.task("min", gulp.series(["min:js", "min:css"]));
-    
+
 // A 'default' task is required by Gulp v4
 gulp.task("default", gulp.series(["min"]));
 ```
@@ -108,7 +108,7 @@ Die folgende Tabelle enthält eine Erläuterung der Aufgaben im obigen Code ange
 
 Wenn Sie eine neue Web-app bereits erstellt haben, erstellen Sie ein neues ASP.NET Web Application-Projekt in Visual Studio.
 
-1.  Öffnen der *"Package.JSON"* Datei (Hinzufügen Falls nicht vorhanden), und fügen Sie Folgendes hinzu.
+1. Öffnen der *"Package.JSON"* Datei (Hinzufügen Falls nicht vorhanden), und fügen Sie Folgendes hinzu.
 
     ```json
     {
@@ -122,71 +122,71 @@ Wenn Sie eine neue Web-app bereits erstellt haben, erstellen Sie ein neues ASP.N
     }
     ```
 
-2.  Fügen Sie eine neue JavaScript-Datei zu Ihrem Projekt, und nennen Sie sie *"gulpfile.js"*, kopieren Sie den folgenden Code.
+2. Fügen Sie eine neue JavaScript-Datei zu Ihrem Projekt, und nennen Sie sie *"gulpfile.js"*, kopieren Sie den folgenden Code.
 
     ```javascript
     /// <binding Clean='clean' />
     "use strict";
-    
+
     const gulp = require("gulp"),
           rimraf = require("rimraf"),
           concat = require("gulp-concat"),
           cssmin = require("gulp-cssmin"),
           uglify = require("gulp-uglify");
-    
+
     const paths = {
       webroot: "./wwwroot/"
     };
-    
+
     paths.js = paths.webroot + "js/**/*.js";
     paths.minJs = paths.webroot + "js/**/*.min.js";
     paths.css = paths.webroot + "css/**/*.css";
     paths.minCss = paths.webroot + "css/**/*.min.css";
     paths.concatJsDest = paths.webroot + "js/site.min.js";
     paths.concatCssDest = paths.webroot + "css/site.min.css";
-    
+
     gulp.task("clean:js", done => rimraf(paths.concatJsDest, done));
     gulp.task("clean:css", done => rimraf(paths.concatCssDest, done));
     gulp.task("clean", gulp.series(["clean:js", "clean:css"]));
 
     gulp.task("min:js", () => {
       return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-        .pipe(concat(paths.concatJsDest))
-        .pipe(uglify())
-        .pipe(gulp.dest("."));
+      .pipe(concat(paths.concatJsDest))
+      .pipe(uglify())
+      .pipe(gulp.dest("."));
     });
 
     gulp.task("min:css", () => {
       return gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
+      .pipe(concat(paths.concatCssDest))
+      .pipe(cssmin())
+      .pipe(gulp.dest("."));
     });
 
     gulp.task("min", gulp.series(["min:js", "min:css"]));
-    
+
     // A 'default' task is required by Gulp v4
     gulp.task("default", gulp.series(["min"]));
     ```
 
-3.  In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"*, und wählen Sie **Task Runner-Explorer**.
-    
+3. In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"*, und wählen Sie **Task Runner-Explorer**.
+
     ![Task Runner-Explorer im Projektmappen-Explorer öffnen](using-gulp/_static/02-SolutionExplorer-TaskRunnerExplorer.png)
-    
+
     **Task Runner Explorer** zeigt die Liste der Gulp-Tasks. (Möglicherweise müssen Sie klicken Sie auf die **aktualisieren** Schaltfläche, auf der linken Seite, der den Namen des Projekts angezeigt wird.)
-    
+
     ![Task Runner-Explorer](using-gulp/_static/03-TaskRunnerExplorer.png)
-    
+
     > [!IMPORTANT]
     > Die **Task Runner-Explorer** Kontextmenüelement erscheint nur, wenn *"gulpfile.js"* befindet sich im Stammverzeichnis des Projekts.
 
-4.  Darunter **Aufgaben** in **Task Runner-Explorer**, mit der rechten Maustaste **Bereinigen**, und wählen Sie **ausführen** aus dem Popupmenü.
+4. Darunter **Aufgaben** in **Task Runner-Explorer**, mit der rechten Maustaste **Bereinigen**, und wählen Sie **ausführen** aus dem Popupmenü.
 
     ![Task Runner-Explorer-clean-Aufgabe](using-gulp/_static/04-TaskRunner-clean.png)
 
     **Task Runner Explorer** erstellt eine neue Registerkarte mit dem Namen **Bereinigen** , und führen Sie die clean-Aufgabe in definierten *"gulpfile.js"*.
 
-5.  Mit der rechten Maustaste die **Bereinigen** Aufgabe aus, und wählen Sie dann **Bindungen** > **vor dem Erstellen**.
+5. Mit der rechten Maustaste die **Bereinigen** Aufgabe aus, und wählen Sie dann **Bindungen** > **vor dem Erstellen**.
 
     ![Binden von BeforeBuild Task Runner-Explorer](using-gulp/_static/05-TaskRunner-BeforeBuild.png)
 
@@ -206,7 +206,7 @@ Nachdem die clean-Aufgabe ausgeführt wird, wenn Sie das Projekt in Visual Studi
 
 Um ein neuer Gulp-Task zu definieren, ändern Sie *"gulpfile.js"*.
 
-1.  Fügen Sie den folgenden JavaScript-Code am Ende der *"gulpfile.js"*:
+1. Fügen Sie den folgenden JavaScript-Code am Ende der *"gulpfile.js"*:
 
     ```javascript
     gulp.task('first', done => {
@@ -217,11 +217,11 @@ Um ein neuer Gulp-Task zu definieren, ändern Sie *"gulpfile.js"*.
 
     Diese Aufgabe heißt `first`, und zeigt einfach eine Zeichenfolge.
 
-2.  Speichern Sie *"gulpfile.js"*.
+2. Speichern Sie *"gulpfile.js"*.
 
-3.  In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"*, und wählen Sie *Task Runner-Explorer*.
+3. In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"*, und wählen Sie *Task Runner-Explorer*.
 
-4.  In **Task Runner-Explorer**, mit der rechten Maustaste **erste**, und wählen Sie **ausführen**.
+4. In **Task Runner-Explorer**, mit der rechten Maustaste **erste**, und wählen Sie **ausführen**.
 
     ![Führen Sie die erste Aufgabe Task Runner-Explorer](using-gulp/_static/06-TaskRunner-First.png)
 
@@ -231,7 +231,7 @@ Um ein neuer Gulp-Task zu definieren, ändern Sie *"gulpfile.js"*.
 
 Wenn Sie mehrere Aufgaben ausführen, werden die Aufgaben gleichzeitig werden standardmäßig ausgeführt. Aber wenn Sie Aufgaben in einer bestimmten Reihenfolge ausführen müssen, müssen Sie angeben Wenn jede Aufgabe abgeschlossen ist, sowie ist als die Aufgaben auf den Abschluss einer anderen Aufgabe abhängig sind.
 
-1.  Um eine Reihe von Aufgaben zur Ausführung in der Reihenfolge zu definieren, ersetzen die `first` Aufgabe, die Sie oben hinzugefügt, im haben *"gulpfile.js"* durch Folgendes:
+1. Um eine Reihe von Aufgaben zur Ausführung in der Reihenfolge zu definieren, ersetzen die `first` Aufgabe, die Sie oben hinzugefügt, im haben *"gulpfile.js"* durch Folgendes:
 
     ```javascript
     gulp.task('series:first', done => {
@@ -240,22 +240,22 @@ Wenn Sie mehrere Aufgaben ausführen, werden die Aufgaben gleichzeitig werden st
     });
     gulp.task('series:second', done => {
       console.log('second task! <-----');
-      done(); // signal completion
+        done(); // signal completion
     });
 
     gulp.task('series', gulp.series(['series:first', 'series:second']), () => { });
 
     // A 'default' task is required by Gulp v4
-    gulp.task('default', gulp.series('series'));
+      gulp.task('default', gulp.series('series'));
     ```
- 
+
     Sie verfügen jetzt über drei Aufgaben: `series:first`, `series:second`, und `series`. Die `series:second` Aufgabe umfasst einen zweiten Parameter die gibt ein Array von Aufgaben ausgeführt und abgeschlossen, bevor die `series:second` Aufgabe wird ausgeführt. Gemäß den Angaben in den Code oben kann nur die `series:first` Aufgabe abgeschlossen werden muss, bevor Sie die `series:second` Aufgabe wird ausgeführt.
 
-2.  Speichern Sie *"gulpfile.js"*.
+2. Speichern Sie *"gulpfile.js"*.
 
-3.  In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"* , und wählen Sie **Task Runner-Explorer** , wenn es nicht bereits geöffnet ist.
+3. In **Projektmappen-Explorer**, mit der rechten Maustaste *"gulpfile.js"* , und wählen Sie **Task Runner-Explorer** , wenn es nicht bereits geöffnet ist.
 
-4.  In **Task Runner-Explorer**, mit der rechten Maustaste **Reihe** , und wählen Sie **ausführen**.
+4. In **Task Runner-Explorer**, mit der rechten Maustaste **Reihe** , und wählen Sie **ausführen**.
 
     ![Task Runner-Explorer Serie ausführen](using-gulp/_static/07-TaskRunner-Series.png)
 
@@ -298,27 +298,27 @@ Wenn Gulp zur Optimierung des clientseitigen Dateien für Staging und Produktion
 
 Um zwischen dem Kompilieren für verschiedene Umgebungen zu wechseln, ändern Sie die **"aspnetcore_environment"** Umgebung des Variablenwerts.
 
-1.  In **Task Runner-Explorer**, überprüfen Sie, ob die **min** auszuführende Aufgabe festgelegt wurde **vor dem Erstellen**.
+1. In **Task Runner-Explorer**, überprüfen Sie, ob die **min** auszuführende Aufgabe festgelegt wurde **vor dem Erstellen**.
 
-2.  In **Projektmappen-Explorer**mit der rechten Maustaste auf den Projektnamen, und wählen Sie **Eigenschaften**.
+2. In **Projektmappen-Explorer**mit der rechten Maustaste auf den Projektnamen, und wählen Sie **Eigenschaften**.
 
     Das Eigenschaftenblatt für die Web-app wird angezeigt.
 
-3.  Klicken Sie auf die Registerkarte **Debuggen**.
+3. Klicken Sie auf die Registerkarte **Debuggen**.
 
-4.  Legen Sie den Wert, der die **Hostingumgebung:** -Umgebungsvariable so fest, `Production`.
+4. Legen Sie den Wert, der die **Hostingumgebung:** -Umgebungsvariable so fest, `Production`.
 
-5.  Drücken Sie **F5** zum Ausführen der Anwendung in einem Browser.
+5. Drücken Sie **F5** zum Ausführen der Anwendung in einem Browser.
 
-6.  Klicken Sie im Browserfenster mit der rechten Maustaste in der Seite, und wählen **Quelltext anzeigen** um den HTML-Code für die Seite anzuzeigen.
+6. Klicken Sie im Browserfenster mit der rechten Maustaste in der Seite, und wählen **Quelltext anzeigen** um den HTML-Code für die Seite anzuzeigen.
 
     Beachten Sie, dass der Stylesheet-Links auf die minimierten CSS-Dateien verweisen.
 
-7.  Schließen Sie den Browser, um die Web-app zu beenden.
+7. Schließen Sie den Browser, um die Web-app zu beenden.
 
-8.  Klicken Sie in Visual Studio zurück, um das Eigenschaftenfenster für die Web-app, und ändern Sie die **Hostingumgebung:** Umgebungsvariablen zurück zum `Development`.
+8. Klicken Sie in Visual Studio zurück, um das Eigenschaftenfenster für die Web-app, und ändern Sie die **Hostingumgebung:** Umgebungsvariablen zurück zum `Development`.
 
-9.  Drücken Sie **F5** zum Ausführen der Anwendung in einem Browser erneut.
+9. Drücken Sie **F5** zum Ausführen der Anwendung in einem Browser erneut.
 
 10. Klicken Sie im Browserfenster mit der rechten Maustaste in der Seite, und wählen **Quelltext anzeigen** um den HTML-Code für die Seite anzuzeigen.
 

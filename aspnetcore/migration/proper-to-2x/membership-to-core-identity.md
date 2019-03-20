@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 0b7001a311eeaaa78e3d52e2ec66d33ad057c381
-ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
+ms.openlocfilehash: 3b708da13ff9f2887eee87ea17844312a4fe1b8d
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/10/2019
-ms.locfileid: "54207407"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264725"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>Migrieren von ASP.NET Membership-Authentifizierung zu ASP.NET Core 2.0-Identitätsanbieter
 
@@ -54,6 +54,7 @@ Die schnellste Möglichkeit zum Anzeigen des Schemas für ASP.NET Core 2.0-Ident
       }
     }
     ```
+
 1. Wählen Sie **Ansicht** > **Objekt-Explorer von SQL Server**. Erweitern Sie den Knoten für den Datenbanknamen angegeben werden, der `ConnectionStrings:DefaultConnection` Eigenschaft *"appSettings.JSON"*.
 
     Die `Update-Database` Befehl erstellt mit dem Schema der Datenbank und alle Daten, die für app-Initialisierung erforderlich sind. Die folgende Abbildung zeigt die Struktur der Tabelle, die mit den vorherigen Schritten erstellt wird.
@@ -66,7 +67,7 @@ Es gibt feine Unterschiede in den Feldern für Mitgliedschafts- und ASP.NET Core
 
 ### <a name="users"></a>Benutzer
 
-|*Identität<br>(Dbo. "Aspnetusers")*        ||*Mitgliedschaft<br>(dbo.aspnet_Users / dbo.aspnet_Membership)*||
+|*Identity<br>(dbo.AspNetUsers)*        ||*Mitgliedschaft<br>(dbo.aspnet_Users / dbo.aspnet_Membership)*||
 |----------------------------------------|-----------------------------------------------------------|
 |**Name des Felds**                 |**Type**|**Name des Felds**                                    |**Type**|
 |`Id`                           |Zeichenfolge  |`aspnet_Users.UserId`                             |Zeichenfolge  |
@@ -82,7 +83,7 @@ Es gibt feine Unterschiede in den Feldern für Mitgliedschafts- und ASP.NET Core
 
 ### <a name="roles"></a>Rollen
 
-|*Identität<br>(Dbo. AspNetRoles)*        ||*Mitgliedschaft<br>(dbo.aspnet_Roles)*||
+|*Identity<br>(dbo.AspNetRoles)*        ||*Membership<br>(dbo.aspnet_Roles)*||
 |----------------------------------------|-----------------------------------|
 |**Name des Felds**                 |**Type**|**Name des Felds**   |**Type**         |
 |`Id`                           |Zeichenfolge  |`RoleId`         | Zeichenfolge          |
@@ -91,7 +92,7 @@ Es gibt feine Unterschiede in den Feldern für Mitgliedschafts- und ASP.NET Core
 
 ### <a name="user-roles"></a>Benutzerrollen
 
-|*Identität<br>(Dbo. "Aspnetuserroles")*||*Mitgliedschaft<br>(dbo.aspnet_UsersInRoles)*||
+|*Identity<br>(dbo.AspNetUserRoles)*||*Membership<br>(dbo.aspnet_UsersInRoles)*||
 |------------------------------------|------------------------------------------|
 |**Name des Felds**           |**Type**  |**Name des Felds**|**Type**                   |
 |`RoleId`                 |Zeichenfolge    |`RoleId`      |Zeichenfolge                     |
@@ -127,7 +128,7 @@ SELECT aspnet_Users.UserId,
        -- Creates an empty password since passwords don't map between the 2 schemas
        '',
        /*
-        The SecurityStamp token is used to verify the state of an account and 
+        The SecurityStamp token is used to verify the state of an account and
         is subject to change at any time. It should be initialized as a new ID.
        */
        NewID(),

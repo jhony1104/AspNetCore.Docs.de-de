@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: seodec18
 uid: azure/devops/cicd
-ms.openlocfilehash: 906aae3fd4b4abd0becc8847b0f54c372bda300a
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 676620b5dd151c9cd009d7cb278ed2c2b122c83f
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346306"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264888"
 ---
 # <a name="continuous-integration-and-deployment"></a>Continuous Integration und Continuous deployment
 
@@ -39,17 +39,23 @@ In diesem Abschnitt müssen Sie die folgenden Aufgaben ausführen:
 1. Klicken Sie auf die **-Repository erstellen** Schaltfläche.
 1. Öffnen Sie die Befehlsshell von Ihrem lokalen Computer. Navigieren Sie zum Verzeichnis, in dem die *Simple-Feed-Reader* Git-Repository gespeichert ist.
 1. Benennen Sie die vorhandene *Ursprung* Remoteinstanz durch, um *upstream*. Führen Sie den folgenden Befehl aus:
+
     ```console
     git remote rename origin upstream
     ```
+
 1. Fügen Sie einen neuen *Ursprung* remote auf Ihre Kopie des Repositorys auf GitHub. Führen Sie den folgenden Befehl aus:
+
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
+
 1. Veröffentlichen Sie Ihr lokale Git-Repository zum neu erstellten GitHub-Repository. Führen Sie den folgenden Befehl aus:
+
     ```console
     git push -u origin master
     ```
+
 1. Öffnen Sie ein Browserfenster, und navigieren Sie zu `https://github.com/<GitHub_username>/simple-feed-reader/`. Überprüfen Sie, dass Ihr Code im GitHub-Repository angezeigt wird.
 
 ## <a name="disconnect-local-git-deployment"></a>Trennen Sie die lokale Git-Bereitstellung
@@ -192,6 +198,7 @@ Es gibt drei unterschiedliche Schritte ausführen. Die Schritte in den folgenden
     ```console
     git commit -a -m "upgraded to V4"
     ```
+
 1. Übertragen Sie die Änderung der *master* branch der *Ursprung* remote von Ihrem GitHub-Repository:
 
     ```console

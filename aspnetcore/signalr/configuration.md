@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/07/2019
 uid: signalr/configuration
-ms.openlocfilehash: 070d6fed26b6d14c4b8a35d0f7d94abafb08993b
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 2c1bb8d5e317813d1fdb8d474b7d7d892e6f67ec
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665414"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264572"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR-Konfiguration
 
@@ -27,7 +27,7 @@ Verwenden Sie beispielsweise zum Konfigurieren der Serialisierer, verwenden Sie 
 ```csharp
 services.AddSignalR()
     .AddJsonProtocol(options => {
-        options.PayloadSerializerSettings.ContractResolver = 
+        options.PayloadSerializerSettings.ContractResolver =
         new DefaultContractResolver();
     });
 ```
@@ -41,7 +41,7 @@ using Microsoft.Extensions.DependencyInjection;
 // When constructing your connection:
 var connection = new HubConnectionBuilder()
     .AddJsonProtocol(options => {
-        options.PayloadSerializerSettings.ContractResolver = 
+        options.PayloadSerializerSettings.ContractResolver =
             new DefaultContractResolver();
     })
     .Build();
@@ -98,13 +98,13 @@ Verwendung `HttpConnectionDispatcherOptions` so konfigurieren Sie erweiterte Ein
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
-    app.UseSignalR((configure) => 
+    app.UseSignalR((configure) =>
     {
-        var desiredTransports = 
+        var desiredTransports =
             HttpTransportType.WebSockets |
             HttpTransportType.LongPolling;
 
-        configure.MapHub<MyHub>("/myhub", (options) => 
+        configure.MapHub<MyHub>("/myhub", (options) =>
         {
             options.Transports = desiredTransports;
         });
@@ -224,6 +224,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
     .withTransport(TransportEnum.WEBSOCKETS)
     .build();
 ```
+
 > [!NOTE]
 > Der SignalR-Java-Client-unterstützt fallback Transport noch keine.
 
@@ -259,8 +260,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-
-In den SignalR-Java-Client, können Sie ein trägertoken, das zur Authentifizierung verwendet wird, durch die Bereitstellung einer Access token Factory konfigurieren die [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java). Verwendung [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) zu einer [RxJava](https://github.com/ReactiveX/RxJava) [einzelne<String>](http://reactivex.io/documentation/single.html). Mit einem Aufruf von [Single.defer](http://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-), Sie können Logik schreiben, um Zugriffstoken für den Client zu generieren.
+In den SignalR-Java-Client, können Sie ein trägertoken, das zur Authentifizierung verwendet wird, durch die Bereitstellung einer Access token Factory konfigurieren die [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java). Verwendung [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) zu einer [RxJava](https://github.com/ReactiveX/RxJava) [einzelne\<Zeichenfolge >](http://reactivex.io/documentation/single.html). Mit einem Aufruf von [Single.defer](http://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-), Sie können Logik schreiben, um Zugriffstoken für den Client zu generieren.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -319,12 +319,14 @@ Zusätzliche Optionen können konfiguriert werden, der `WithUrl` (`withUrl` in J
 | `WebSocketConfiguration` | `null` | Ein Delegat, der so konfigurieren Sie zusätzliche "WebSocket"-Optionen verwendet werden kann. Empfängt eine Instanz von [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) , die verwendet werden kann, um Optionen zu konfigurieren. |
 
 # <a name="javascripttabjavascript"></a>[JavaScript](#tab/javascript)
+
 | JavaScript-Option | Standardwert | Beschreibung |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Eine Funktion zurückgeben einer Zeichenfolge, die als bearertoken in HTTP-Anforderungen Authentifizierung bereitgestellt wird. |
 | `skipNegotiation` | `false` | Legen Sie diesen `true` um die Aushandlung Schritt zu überspringen. **Nur unterstützt, wenn die WebSockets-Übertragung der einzige aktiviert-Transport ist**. Diese Einstellung kann nicht aktiviert werden, wenn mithilfe des Azure SignalR Service. |
 
 # <a name="javatabjava"></a>[Java](#tab/java)
+
 | Java Option | Standardwert | Beschreibung |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Eine Funktion zurückgeben einer Zeichenfolge, die als bearertoken in HTTP-Anforderungen Authentifizierung bereitgestellt wird. |
@@ -357,7 +359,6 @@ let connection = new signalR.HubConnectionBuilder()
 ```
 
 Im Java-Client diese Optionen können konfiguriert werden mit den Methoden für die `HttpHubConnectionBuilder` zurückgegeben, die von der `HubConnectionBuilder.create("HUB URL")`
-
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")

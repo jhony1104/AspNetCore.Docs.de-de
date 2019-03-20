@@ -5,12 +5,12 @@ description: Lesen Sie Artikel, die basierend auf ASP.NET Core-Projekte, die mit
 ms.author: riande
 ms.date: 11/30/2017
 uid: security/authentication/individual
-ms.openlocfilehash: c73365eafaf2c38ef02c3c83ccf5ced4264f7dc0
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.openlocfilehash: f9c1be16386da935382275815bb5fd5c72894b1c
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56743773"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265432"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artikel mit einzelnen Benutzerkonten erstellten ASP.NET Core-Projekten
 
@@ -39,6 +39,7 @@ dotnet new razor -au Individual
 Finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/5833) für die Web-API-Authentifizierung.
 
 <a name="no"></a>
+
 ## <a name="no-authentication"></a>Keine Authentifizierung
 
 Gibt die Authentifizierung in .NET Core-CLI mit dem `-au` Option. In Visual Studio die **Authentifizierung ändern** Dialogfeld für neue Webanwendungen verfügbar ist. Der Standardwert für neue Web-apps in Visual Studio ist **keine Authentifizierung**.
@@ -49,6 +50,7 @@ Projekte, die ohne Authentifizierung erstellt werden:
 * Enthalten Sie nicht Code für die Authentifizierung.
 
 <a name="win"></a>
+
 ## <a name="windows-authentication"></a>Windows-Authentifizierung
 
 Windows-Authentifizierung angegeben ist, für die neue Web-apps in .NET Core-CLI mit dem `-au Windows` Option. In Visual Studio die **Authentifizierung ändern** Dialogfeld bietet die **Windows-Authentifizierung** Optionen.
