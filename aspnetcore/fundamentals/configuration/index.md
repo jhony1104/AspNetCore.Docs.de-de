@@ -531,8 +531,6 @@ Um die JSON-Dateikonfiguration zu aktivieren, rufen Sie die <xref:Microsoft.Exte
 * Ob die Konfiguration bei Dateiänderungen neu geladen wird
 * Dass mit <xref:Microsoft.Extensions.FileProviders.IFileProvider> auf die Datei zugegriffen wird
 
-
-
 `AddJsonFile` wird automatisch zweimal aufgerufen, wenn Sie ein neues <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>-Element mit <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> initialisieren. Die Methode wird aufgerufen, um die Konfiguration aus folgenden Dateien zu laden:
 
 * *appsettings.json* &ndash; Diese Datei wird zuerst gelesen. Die Umgebungsversion der Datei kann die Werte der Datei *appsettings.json* überschreiben.
