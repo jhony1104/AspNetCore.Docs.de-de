@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/08/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: a9081a9938d56b7612bba13937eba384ff02455b
-ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
+ms.openlocfilehash: 4fe04cde2a234302845b2cbded106f1e809842bc
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/26/2019
-ms.locfileid: "56833734"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209293"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -19,11 +19,11 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://gith
 
 In ASP.Net Core MVC ermöglichen *Filter* Ihnen, Code vor oder nach bestimmten Stufen der Anforderungsverarbeitungspipeline auszuführen.
 
- Integrierte Filter sind für folgende Aufgaben zuständig:
+Integrierte Filter sind für folgende Aufgaben zuständig:
 
- * Autorisierung (der Zugriff auf Ressourcen, für die ein Benutzer nicht autorisiert ist, wird verhindert)
- * Überprüfung von Anforderungen auf die Verwendung von HTTPS
- * Zwischenspeicherung von Antworten (die Anforderungspipeline wird unterbrochen, damit eine zwischengespeicherte Antwort zurückgegeben wird) 
+* Autorisierung (der Zugriff auf Ressourcen, für die ein Benutzer nicht autorisiert ist, wird verhindert)
+* Überprüfung von Anforderungen auf die Verwendung von HTTPS
+* Zwischenspeicherung von Antworten (die Anforderungspipeline wird unterbrochen, damit eine zwischengespeicherte Antwort zurückgegeben wird) 
 
 Durch die Erstellung benutzerdefinierter Filter kann mit aktionsübergreifenden Problemen umgegangen werden. Dadurch kann die Duplizierung von Code bei mehreren Aktionen verhindert werden. Sie können zum Beispiel die Fehlerbehandlung in einem Ausnahmefilter konsolidieren.
 
@@ -373,7 +373,7 @@ Wenn die Methode `OnResultExecuted` ausgeführt wird, wurde die Antwort wahrsche
 
 `ResultExecutedContext.Exception` wird auf einen Wert festgelegt, der ungleich NULL ist, wenn das Aktionsergebnis oder ein nachfolgender Ergebnisfilter eine Ausnahme ausgelöst hat. Das Festlegen von `Exception` auf NULL „behandelt“ eine Ausnahme und verhindert, dass die Ausnahme zu einem späteren Zeitpunkt in der Pipeline ein weiteres Mal von MVC ausgelöst wird. Wenn Sie eine Ausnahme in einem Ergebnisfilter verarbeiten, sind Sie möglicherweise nicht in der Lage, Daten in die Antwort zu schreiben. Wenn das Aktionsergebnis während der Ausführung ausgelöst wird und die Header bereits an den Client übergeben wurden, gibt es keinen zuverlässigen Mechanismus zum Senden von Fehlercode.
 
-Bei einem `IAsyncResultFilter` führt ein Aufruf von `await next` auf `ResultExecutionDelegate` alle nachfolgenden Ergebnisfilter und das Aktionsergebnis aus. Legen Sie `ResultExecutingContext.Cancel` auf TRUE fest, und rufen Sie nicht `ResultExectionDelegate` auf, um die Pipeline kurzzuschließen.
+Bei einem `IAsyncResultFilter` führt ein Aufruf von `await next` auf `ResultExecutionDelegate` alle nachfolgenden Ergebnisfilter und das Aktionsergebnis aus. Legen Sie `ResultExecutingContext.Cancel` auf TRUE fest, und rufen Sie nicht `ResultExecutionDelegate` auf, um die Pipeline kurzzuschließen.
 
 Das Framework stellt ein abstraktes `ResultFilterAttribute` bereit, dass Sie als Unterklasse verwenden können. Die weiter oben dargestellte Klasse [AddHeaderAttribute](#add-header-attribute) ist ein Beispiel für ein Ergebnisfilterattribut.
 

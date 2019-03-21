@@ -5,12 +5,12 @@ description: Informationen zu den neuen Features in ASP.NET Core 2.0.
 ms.author: riande
 ms.date: 07/10/2017
 uid: aspnetcore-2.0
-ms.openlocfilehash: a6d3179c84bfef0b15c2772e696466b88d228de5
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 60e44e64bd1cfada0143e374f6f51dec0e4e84f8
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207120"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209884"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
 
@@ -81,9 +81,9 @@ Es sind Projektvorlagen der Einzelseitenanwendung (Single Page Application, SPA)
 
 Der Kestrel-Webserver verfügt über neue Funktionen, die ihn geeigneter als mit dem Internet verbundenen Server machen. Zu der neuen Eigenschaft `Limits` der `KestrelServerOptions`-Klasse wurden eine Reihe von Optionen für die Servereinschränkungskonfiguration hinzugefügt. Fügen Sie Grenzwerte für Folgendes hinzu:
 
-- Maximale Anzahl der Clientverbindungen
-- Maximale Größe des Anforderungstexts
-- Minimale Datenrate des Anforderungstexts
+* Maximale Anzahl der Clientverbindungen
+* Maximale Größe des Anforderungstexts
+* Minimale Datenrate des Anforderungstexts
 
 Weitere Informationen finden Sie unter [Kestrel web server implementation in ASP.NET Core (Kestrel-Webserverimplementierung in ASP.NET Core)](xref:fundamentals/servers/kestrel).
 
@@ -129,7 +129,7 @@ Weitere Informationen finden Sie unter [Kompilierung und Vorkompilierung einer R
 
 ## <a name="razor-support-for-c-71"></a>Razor-Unterstützung für C# 7.1
 
-Die Razor-Anzeige-Engine wurde aktualisiert, damit sie mit dem neuen Roslyn-Compiler funktioniert. Dies umfasst Unterstützung für C# 7.1-Funktionen wie Standardausdrücke, abgeleitete Tupelnamen und Mustervergleich mit Generika. Fügen Sie Ihrer Projektdatei die folgende Eigenschaft hinzu, um C# 7.1 in Ihrem Projekt zu verwenden, und laden Sie die Projektmappe dann erneut:
+Die Razor-Anzeige-Engine wurde aktualisiert, damit sie mit dem neuen Roslyn-Compiler funktioniert. Dies umfasst Unterstützung für C# 7.1-Funktionen wie Standardausdrücke, abgeleitete Tupelnamen und Mustervergleich mit Generics. Fügen Sie Ihrer Projektdatei die folgende Eigenschaft hinzu, um C# 7.1 in Ihrem Projekt zu verwenden, und laden Sie die Projektmappe dann erneut:
 
 ```xml
 <LangVersion>latest</LangVersion>

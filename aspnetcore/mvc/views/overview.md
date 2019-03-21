@@ -5,12 +5,12 @@ description: Informationen zur Verarbeitung der Darstellung von App-Daten und zu
 ms.author: riande
 ms.date: 12/12/2017
 uid: mvc/views/overview
-ms.openlocfilehash: 6c5b4d7b89ac07a85b5aad626e37855de98064eb
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 0ee1fef9e9da15d91427a2eb5b5f530a0b77ce33
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410435"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265391"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Ansichten in ASP.NET Core MVC
 
@@ -70,11 +70,13 @@ Für die `View`-Hilfsprogrammmethode gibt es einige Überladungen. Sie können b
   ```csharp
   return View("Orders");
   ```
+
 * Ein [Modell](xref:mvc/models/model-binding), das an die Ansicht übergeben werden soll:
 
   ```csharp
   return View(Orders);
   ```
+
 * Sowohl eine Ansicht als auch ein Modell:
 
   ```csharp

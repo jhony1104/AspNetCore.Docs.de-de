@@ -5,12 +5,12 @@ description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasier
 ms.author: riande
 ms.date: 10/26/2018
 uid: mvc/views/razor
-ms.openlocfilehash: 8e9ec3c5040e5a24cd5f773b1232897338741c0c
-ms.sourcegitcommit: 184ba5b44d1c393076015510ac842b77bc9d4d93
+ms.openlocfilehash: 254c85ee9e74dc72170b19d27fbc5f1ae7ccd3dc
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "54396258"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264758"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -61,7 +61,7 @@ Mit Ausnahme des C#-Schlüsselworts `await` dürfen implizite Ausdrücke keine L
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-Implizite Ausdrücke dürfen **keine** C#-Generika enthalten, da die Zeichen innerhalb der Klammern (`<>`) als HTML-Tag interpretiert werden. Der folgende Code ist **ungültig**:
+Implizite Ausdrücke dürfen **keine** C#-Generics enthalten, da die Zeichen innerhalb der Klammern (`<>`) als HTML-Tag interpretiert werden. Der folgende Code ist **ungültig**:
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -69,9 +69,9 @@ Implizite Ausdrücke dürfen **keine** C#-Generika enthalten, da die Zeichen inn
 
 Der vorhergehende Code erzeugt einen Compilerfehler, der folgendermaßen aussehen kann:
 
- * Das Element „int“ wurde nicht geschlossen. Alle Elemente müssen entweder selbstschließend sein oder ein zugehöriges Endtag besitzen.
- *  Die Methodengruppe „GenericMethod“ kann nicht in den Nichtdelegattyp „Objekt“ konvertiert werden. Wollten Sie die Methode aufrufen? 
- 
+* Das Element „int“ wurde nicht geschlossen. Alle Elemente müssen entweder selbstschließend sein oder ein zugehöriges Endtag besitzen.
+* Die Methodengruppe „GenericMethod“ kann nicht in den Nichtdelegattyp „Objekt“ konvertiert werden. Wollten Sie die Methode aufrufen?
+
 Generische Methodenaufrufe müssen von einem [expliziten Razor-Ausdruck](#explicit-razor-expressions) oder einem [Razor-Codeblock](#razor-code-blocks) umschlossen werden.
 
 ## <a name="explicit-razor-expressions"></a>Explizite Razor-Ausdrücke
@@ -199,7 +199,7 @@ Verwenden Sie diese Methode zum Rendern von HTML-Code, der nicht von einem HTML-
 
 Das **\<text>**-Tag ist nützlich, wenn Sie beim Rendern von Inhalt Leerzeichen steuern möchten:
 
-* Nur der Inhalt zwischen den **\<text>**-Tags wird gerendert. 
+* Nur der Inhalt zwischen den **\<text>**-Tags wird gerendert.
 * In der HTML-Ausgabe werden keine Leerzeichen vor oder nach dem **\<text>**-Tag angezeigt.
 
 ### <a name="explicit-line-transition-with-"></a>Explizite Zeilenübergänge mit @:
@@ -337,7 +337,6 @@ Die folgenden Schleifenanweisungen werden unterstützt:
 
 In C# kann mit einer `using`-Anweisung sichergestellt werden, dass ein Objekt freigegeben wurde. In Razor wird derselbe Mechanismus verwendet, um HTML-Hilfsprogramme zu erstellen, die zusätzliche Inhalte enthalten. Im folgenden Code wird ein Formulartag mit der `@using`-Anweisung durch HTML-Hilfsprogramme gerendert:
 
-
 ```cshtml
 @using (Html.BeginForm())
 {
@@ -425,6 +424,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 Im Abschnitt [Überprüfen der Razor-C#-Klasse, die für eine Ansicht generiert wurde](#inspect-the-razor-c-class-generated-for-a-view) weiter unten wird erklärt, wie die generierte Klasse angezeigt wird.
 
 <a name="using"></a>
+
 ### <a name="using"></a>@using
 
 Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hinzu:
@@ -579,7 +579,7 @@ Sie können auch eine Razor-Inlinevorlage als Argument für eine Methode angeben
 @using Microsoft.AspNetCore.Html
 
 @functions {
-    public static IHtmlContent Repeat(IEnumerable<dynamic> items, int times, 
+    public static IHtmlContent Repeat(IEnumerable<dynamic> items, int times,
         Func<dynamic, IHtmlContent> template)
     {
         var html = new HtmlContentBuilder();

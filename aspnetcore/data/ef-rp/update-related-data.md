@@ -5,12 +5,12 @@ description: Mithilfe dieses Tutorials führen Sie Updates für verwandte Daten 
 ms.author: riande
 ms.date: 11/15/2017
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: c3dbfe57a832ba63c5da2f89c0d29e443a1277a7
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: e1407048157fccdbfdd854071a6fbf9785356026
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57345761"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208608"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)
 
@@ -136,9 +136,9 @@ Aktualisieren Sie das Seitenmodell „Edit“ (Bearbeiten) für Dozenten mit dem
 
 Der vorangehende Code:
 
-- Ruft die aktuelle Entität `Instructor` von der Datenbank über Eager Loading für die Navigationseigenschaft `OfficeAssignment` ab.
-- Aktualisiert die abgerufene Entität `Instructor` mit Werten aus der Modellbindung. `TryUpdateModel` verhindert ein [Overposting](xref:data/ef-rp/crud#overposting).
-- Wenn kein Bürostandort angegeben ist, wird `Instructor.OfficeAssignment` auf NULL festgelegt. Wenn `Instructor.OfficeAssignment` auf NULL festgelegt ist, wird die zugehörige Zeile in der `OfficeAssignment`-Tabelle gelöscht.
+* Ruft die aktuelle Entität `Instructor` von der Datenbank über Eager Loading für die Navigationseigenschaft `OfficeAssignment` ab.
+* Aktualisiert die abgerufene Entität `Instructor` mit Werten aus der Modellbindung. `TryUpdateModel` verhindert ein [Overposting](xref:data/ef-rp/crud#overposting).
+* Wenn kein Bürostandort angegeben ist, wird `Instructor.OfficeAssignment` auf NULL festgelegt. Wenn `Instructor.OfficeAssignment` auf NULL festgelegt ist, wird die zugehörige Zeile in der `OfficeAssignment`-Tabelle gelöscht.
 
 ### <a name="update-the-instructor-edit-page"></a>Aktualisieren der Dozentenseite „Edit“ (Bearbeiten)
 

@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie einen Controller zu einer einfachen ASP.NET C
 ms.author: riande
 ms.date: 02/28/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: bbb7b06e2c9c63f44cb7f7a8ee63bffa1e316b3e
-ms.sourcegitcommit: 4e87712029de2aceb1cf2c52e9e3dda8195a5b8e
+ms.openlocfilehash: dad9262e544fc216ddc694b11b0dfb88b58db9cd
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53381867"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265013"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Controllers zu einer ASP.NET Core MVC-App
 
@@ -30,7 +30,6 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 ## <a name="add-a-controller"></a>Hinzufügen eines Controllers
 
-<!-- VS -------------------------->
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Controller**.
@@ -42,14 +41,12 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 * Geben Sie im **Dialogfeld zum Hinzufügen eines leeren MVC-Controllers**  den Namen **HelloWorldController** ein, und wählen Sie **Hinzufügen** aus.
 
-<!-- Code -------------------------->
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Wählen Sie das **EXPLORER**-Symbol aus, klicken Sie dann bei gedrückter STRG-TASTE bzw. mit der rechten Maustaste auf **Controller > Neue Datei**, und geben Sie der neuen Datei den Namen *HelloWorldController.cs*.
 
   ![Kontextmenü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
-<!-- Mac -------------------------->
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Neue Datei**.
@@ -62,7 +59,6 @@ Nennen Sie den Controller **HelloWorldController**.
 ![Hinzufügen und Benennen des MVC-Controllers](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 
 ---
-<!-- End of VS tabs -->
 
 Ersetzen Sie den Inhalt von *Controllers/HelloWorldController.cs* durch Folgendes:
 
@@ -130,7 +126,6 @@ Dieses Mal hat das dritte URL-Segment mit dem Routenparameter `id` übereingesti
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
 In diesen Beispielen hat der Controller den „VC“-Teil von MVC übernommen, d. h. die Aufgaben von „View“ (Ansicht) und „Controller“. Der Controller gibt direkt HTML zurück. Im Allgemeinen sollen Controller nicht direkt HTML zurückgeben, da dies sehr aufwändig zu programmieren und pflegen ist. Stattdessen verwenden Sie in der Regel eine separate Razor-Ansichtsvorlagendatei, um die HTML-Antwort zu generieren. Dies lernen Sie im nächsten Tutorial.
-
 
 > [!div class="step-by-step"]
 > [Zurück](start-mvc.md)

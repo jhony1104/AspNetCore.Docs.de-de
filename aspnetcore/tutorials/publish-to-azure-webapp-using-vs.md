@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: e71cb8badbbc852685c845e6bbb0bbb12ab5499f
-ms.sourcegitcommit: 68a3081dd175d6518d1bfa31b4712bd8a2dd3864
+ms.openlocfilehash: b2b5a155d0dff28e471af449731da787f19d1faf
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/18/2018
-ms.locfileid: "53577811"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208356"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Veröffentlichen einer ASP.NET Core-App in Azure mit Visual Studio
 
@@ -127,7 +127,7 @@ Visual Studio kehrt zum Dialogfeld **App Service erstellen** zurück.
 
 ![Dialogfeld „SQL-Datenbank konfigurieren“](publish-to-azure-webapp-using-vs/_static/conf_final.png)
 
-Visual Studio erstellt die Web-App und SQL Server in Azure. Dies kann einige Minuten in Anspruch nehmen. Weitere Informationen zu den erstellten Ressourcen finden Sie unter [Zusätzliche Ressourcen](#additonal-resources).
+Visual Studio erstellt die Web-App und SQL Server in Azure. Dies kann einige Minuten in Anspruch nehmen. Weitere Informationen zu den erstellten Ressourcen finden Sie unter [Zusätzliche Ressourcen](#additional-resources).
 
 Wenn die Bereitstellung abgeschlossen ist, klicken Sie auf **Einstellungen**:
 
@@ -135,8 +135,8 @@ Wenn die Bereitstellung abgeschlossen ist, klicken Sie auf **Einstellungen**:
 
 Gehen Sie im Bereich **Einstellungen** im Dialogfeld **Veröffentlichen** so vor:
 
-  * Erweitern Sie **Datenbanken**, und aktivieren Sie **Diese Verbindungszeichenfolge zur Laufzeit verwenden**.
-  * Erweitern Sie **Entity Framework-Migrationen**, und aktivieren Sie **Diese Migration auf Veröffentlichung anwenden**.
+* Erweitern Sie **Datenbanken**, und aktivieren Sie **Diese Verbindungszeichenfolge zur Laufzeit verwenden**.
+* Erweitern Sie **Entity Framework-Migrationen**, und aktivieren Sie **Diese Migration auf Veröffentlichung anwenden**.
 
 * Klicken Sie auf **Speichern**. Visual Studio kehrt zum Dialogfeld **Veröffentlichen** zurück. 
 
@@ -184,7 +184,7 @@ Sobald Sie das Testen der App abgeschlossen haben, wechseln Sie zum [Azure-Porta
 
 * <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 
-## <a name="additonal-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Azure App Service](/azure/app-service/app-service-web-overview)
 * [Azure-Ressourcengruppen](/azure/azure-resource-manager/resource-group-overview#resource-groups)

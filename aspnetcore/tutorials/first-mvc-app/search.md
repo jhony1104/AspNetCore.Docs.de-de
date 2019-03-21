@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Suche zu einer einfachen ASP.NET 
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: e5dce35b60080ef752f8e6c6004158219015cbf5
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 41d7494b77edaddbf719cab087142f0132dd3ed6
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410637"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208381"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Suche zu einer ASP.NET Core MVC-App
 
@@ -113,10 +113,10 @@ Fügen Sie dem Ordner *Models* die folgende `MovieGenreViewModel`-Klasse hinzu:
 
 Das Ansichtsmodell „movie-genre“ enthält Folgendes:
 
-   * Eine Liste von Filmen.
-   * Ein `SelectList`-Element mit der Liste der Genres. Dies ermöglicht dem Benutzer, ein Genre in der Liste auszuwählen.
-   * Ein `MovieGenre`-Element, das das ausgewählte Genre enthält.
-   * `SearchString`, die den Text enthält, den Benutzer in das Suchtextfeld eingeben.
+* Eine Liste von Filmen.
+* Ein `SelectList`-Element mit der Liste der Genres. Dies ermöglicht dem Benutzer, ein Genre in der Liste auszuwählen.
+* Ein `MovieGenre`-Element, das das ausgewählte Genre enthält.
+* `SearchString`, die den Text enthält, den Benutzer in das Suchtextfeld eingeben.
 
 Ersetzen Sie die `Index`-Methode in `MoviesController.cs` durch folgenden Code:
 
@@ -148,4 +148,4 @@ Testen Sie die App mit einer Suche nach Genre, Filmtitel und beidem:
 
 > [!div class="step-by-step"]
 > [Zurück](controller-methods-views.md)
-> [Weiter](new-field.md)  
+> [Weiter](new-field.md)

@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/05/2019
 ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: ac94f2e2876c2d8d571a451e4641787ffe37b3d2
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 1606b872df2df839266ef17efee1948065c4efae
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103032"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209413"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Aktualisieren verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -131,11 +131,11 @@ Ersetzen Sie die HttpPost-Methode `Edit` durch den folgenden Code, damit diese U
 
 Der Code führt Folgendes aus:
 
--  Er ändert den Methodennamen auf `EditPost`, da die Signatur jetzt der Signatur der HttpGet-Methode `Edit` entspricht. Das `ActionName`-Attribut gibt an, dass die `/Edit/`-URL immer noch verwendet wird.
+* Er ändert den Methodennamen auf `EditPost`, da die Signatur jetzt der Signatur der HttpGet-Methode `Edit` entspricht. Das `ActionName`-Attribut gibt an, dass die `/Edit/`-URL immer noch verwendet wird.
 
--  Ruft für die Navigationseigenschaft `OfficeAssignment` die aktuelle Dozentenentität von der Datenbank über Eager Loading ab. Dies entspricht dem Vorgang in der HttpGet-Methode `Edit`.
+* Ruft für die Navigationseigenschaft `OfficeAssignment` die aktuelle Dozentenentität von der Datenbank über Eager Loading ab. Dies entspricht dem Vorgang in der HttpGet-Methode `Edit`.
 
--  Führt ein Update für die abgerufene Dozentenentität mit Werten aus der Modellbindung aus. Mithilfe der `TryUpdateModel`-Überladung können Sie die Eigenschaften auf die Whitelist setzen, die Sie hinzufügen möchten. Dadurch wird, wie im [zweiten Tutorial](crud.md) beschrieben, vermieden, dass zu viele Angaben gemacht werden.
+* Führt ein Update für die abgerufene Dozentenentität mit Werten aus der Modellbindung aus. Mithilfe der `TryUpdateModel`-Überladung können Sie die Eigenschaften auf die Whitelist setzen, die Sie hinzufügen möchten. Dadurch wird, wie im [zweiten Tutorial](crud.md) beschrieben, vermieden, dass zu viele Angaben gemacht werden.
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -146,7 +146,7 @@ Der Code führt Folgendes aus:
         i => i.FirstMidName, i => i.LastName, i => i.HireDate, i => i.OfficeAssignment))
     ```
 
--   Wenn kein Standort für das Büro angegeben wird, wird die Instructor.OfficeAssignment-Eigenschaft auf NULL festgelegt, damit die zugehörige Zeile aus der OfficeAssignment-Tabelle gelöscht wird.
+* Wenn kein Standort für das Büro angegeben wird, wird die Instructor.OfficeAssignment-Eigenschaft auf NULL festgelegt, damit die zugehörige Zeile aus der OfficeAssignment-Tabelle gelöscht wird.
 
     <!-- Snippets don't play well with <ul>  "intro/samples/cu/Controllers/InstructorsController.cs"} -->
 
@@ -157,7 +157,7 @@ Der Code führt Folgendes aus:
     }
     ```
 
-- Speichert die Änderungen in der Datenbank.
+* Speichert die Änderungen in der Datenbank.
 
 ### <a name="update-the-instructor-edit-view"></a>Aktualisieren der Dozentenansicht „Bearbeiten“
 
@@ -225,7 +225,7 @@ Fügen Sie in der *Views/Instructors/Edit.cshtml*-Datei ein **Kurse**-Feld mit e
 
 <a id="notepad"></a>
 > [!NOTE]
-> Wenn Sie den Code in Visual Studio einfügen, werden Zeilenumbrüche so geändert, dass der Code unterbrochen wird.  Drücken Sie einmal Strg+Z, um die automatische Formatierung rückgängig zu machen.  Damit werden die Zeilenumbrüche korrigiert, damit sie dem entsprechen, was Sie hier sehen. Der Einzug muss nicht perfekt sein, die Zeilen `@</tr><tr>`, `@:<td>`, `@:</td>` und `@:</tr>` müssen jedoch, wie dargestellt, jeweils in einer einzelnen Zeile stehen. Ansonsten wird ein Laufzeitfehler ausgelöst. Drücken Sie, nachdem Sie den Block mit dem neuen Code ausgewählt haben, dreimal auf die TAB-Taste, um den neuen Code am vorhandenen Code auszurichten. Sie können [hier](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html) den Status für dieses Problem überprüfen.
+> Wenn Sie den Code in Visual Studio einfügen, werden Zeilenumbrüche so geändert, dass der Code unterbrochen wird. Drücken Sie einmal Strg+Z, um die automatische Formatierung rückgängig zu machen. Damit werden die Zeilenumbrüche korrigiert, damit sie dem entsprechen, was Sie hier sehen. Der Einzug muss nicht perfekt sein, die Zeilen `@</tr><tr>`, `@:<td>`, `@:</td>` und `@:</tr>` müssen jedoch, wie dargestellt, jeweils in einer einzelnen Zeile stehen. Ansonsten wird ein Laufzeitfehler ausgelöst. Drücken Sie, nachdem Sie den Block mit dem neuen Code ausgewählt haben, dreimal auf die TAB-Taste, um den neuen Code am vorhandenen Code auszurichten. Sie können [hier](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html) den Status für dieses Problem überprüfen.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
@@ -250,7 +250,7 @@ Löschen Sie aus der Datei *InstructorsController.cs* die `DeleteConfirmed`-Meth
 
 Durch diesen Code werden folgende Änderungen vorgenommen:
 
-* Er verwendet Eager Loading für die Navigationseigenschaft `CourseAssignments`.  Sie müssen diese Eigenschaft hinzufügen. Ansonsten weiß EF nicht, dass es zugehörige `CourseAssignment`-Entitäten gibt und löscht diese nicht.  Wenn Sie vermeiden möchten, diese lesen zu müssen, können Sie in der Datenbank eine Löschweitergabe konfigurieren.
+* Er verwendet Eager Loading für die Navigationseigenschaft `CourseAssignments`. Sie müssen diese Eigenschaft hinzufügen. Ansonsten weiß EF nicht, dass es zugehörige `CourseAssignment`-Entitäten gibt und löscht diese nicht. Wenn Sie vermeiden möchten, diese lesen zu müssen, können Sie in der Datenbank eine Löschweitergabe konfigurieren.
 
 * Wenn der zu löschende Dozent als Administrator einer beliebigen Abteilung zugewiesen ist, wird die Dozentenzuweisung aus diesen Abteilungen entfernt.
 

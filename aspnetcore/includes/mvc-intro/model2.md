@@ -1,9 +1,16 @@
+---
+ms.openlocfilehash: 82c0f3076e846045ca85697e150ff0ab9be75dba
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58214546"
+---
 <a name="dc"></a>
 
 Fügen Sie dem Ordner *Models* die folgende `MvcMovieContext`-Klasse hinzu:  
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Data/MvcMovieContext.cs)]
-
 
 Der vorangehende Code erstellt eine `DbSet`-Eigenschaft für die Entitätenmenge. In der Terminologie von Entity Framework entspricht eine Entitätenmenge in der Regel einer Datenbanktabelle, und eine Entität entspricht einer Zeile in einer Tabelle.
 

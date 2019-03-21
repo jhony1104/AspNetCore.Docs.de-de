@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/28/2019
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: e5bb1a86453bb945789cc1f4b56616551e316615
-ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
+ms.openlocfilehash: de740775e124298f7c3d3be0c6f5a7311174116d
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57400683"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265478"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS-Module mit ASP.NET Core
 
@@ -123,7 +123,7 @@ Wenn Sie ein Modul mit einer Einstellung in der Datei *web.config* entfernen kö
     </system.webServer>
    </configuration>
    ```
-   
+
 Sie können Module für IIS Express mit *web.config* hinzufügen oder entfernen. Ändern Sie dazu die Datei *applicationHost.config*, und entsperren Sie den Abschnitt `<modules>`:
 
 1. Öffnen Sie *{ANWENDUNGSSTAMM}\\.vs\config\applicationhost.config*.
@@ -131,17 +131,17 @@ Sie können Module für IIS Express mit *web.config* hinzufügen oder entfernen.
 1. Machen Sie das Element `<section>` für IIS-Module ausfindig, und ändern Sie `overrideModeDefault` von `Deny` in `Allow`:
 
    ```xml
-   <section name="modules" 
-            allowDefinition="MachineToApplication" 
+   <section name="modules"
+            allowDefinition="MachineToApplication"
             overrideModeDefault="Allow" />
    ```
-   
+
 1. Machen Sie den Abschnitt `<location path="" overrideMode="Allow"><system.webServer><modules>` ausfindig. Ändern Sie für alle zu entfernenden Module `lockItem` von `true` in `false`. Im folgenden Beispiel wird das CGI-Modul entsperrt:
 
    ```xml
    <add name="CgiModule" lockItem="false" />
    ```
-   
+
 1. Nachdem der Abschnitt `<modules>` und die einzelnen Module entsperrt wurden, können Sie IIS-Module mit der *web.config*-Datei der App hinzufügen, um die App in IIS Express auszuführen.
 
 Ein IIS-Modul kann auch mit *Appcmd.exe* entfernt werden. Geben Sie `MODULE_NAME` und `APPLICATION_NAME` im Befehl an:

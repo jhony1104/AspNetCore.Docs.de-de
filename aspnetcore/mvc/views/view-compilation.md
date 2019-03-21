@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 0b3aea584de63cb8032e4ca112d2441349bdfbb3
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 11195f00e922f6817a0fa0988fad9d8082dea30a
+ms.sourcegitcommit: 10e14b85490f064395e9b2f423d21e3c2d39ed8b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57345484"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58142319"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -130,7 +130,7 @@ Die Laufzeitkompilierung wird mithilfe des `Microsoft.AspNetCore.Mvc.Razor.Runti
   ```csharp
   services
       .AddMvc()
-      .AddMvcRazorRuntimeCompilation()
+      .AddRazorRuntimeCompilation()
   ```
 
 Damit die Laufzeitkompilierung bei der Bereitstellung funktioniert, müssen Apps zusätzlich ihre Projektdateien modifizieren, sodass `PreserveCompilationReferences` auf `true` festgelegt ist.

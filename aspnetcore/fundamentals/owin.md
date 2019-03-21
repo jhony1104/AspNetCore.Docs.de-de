@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/18/2018
 uid: fundamentals/owin
-ms.openlocfilehash: 51982c7ebc4f66c2b0b73bf425d9ecbd0bf37826
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: de8548fe2396102fe44a8e6a000b44d4eea63285
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637793"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209928"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>Open Web Interface for .NET (OWIN) mit ASP.NET Core
 
@@ -260,14 +260,12 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 | owin.ResponseHeaders | `IDictionary<string,string[]>`  | |
 | owin.ResponseBody | `Stream`  | |
 
-
 ### <a name="other-data-owin-v100"></a>Andere Daten (OWIN v1.0.0)
 
 | Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
-
 
 ### <a name="common-keys"></a>Gängige Schlüssel
 
@@ -282,13 +280,11 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 | server.IsLocal  | `bool` | |    
 | server.OnSendingHeaders  | `Action<Action<object>,object>` | |
 
-
 ### <a name="sendfiles-v030"></a>SendFiles v0.3.0
 
 | Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | Siehe [Delegatsignatur](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | Pro Anforderung |
-
 
 ### <a name="opaque-v030"></a>Opaque v0.3.0
 
@@ -298,7 +294,6 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 | opaque.Upgrade | `OpaqueUpgrade` | Siehe [Delegatsignatur](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
 | opaque.Stream | `Stream` |  |
 | opaque.CallCancelled | `CancellationToken` |  |
-
 
 ### <a name="websocket-v030"></a>WebSocket v0.3.0
 
