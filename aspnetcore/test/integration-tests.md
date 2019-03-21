@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: test/integration-tests
-ms.openlocfilehash: 50cb6b26be187c7f36f189e77fd29b4559221f2c
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 11a8f4296e1b0b229c736645f1aa598307b88ec4
+ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209238"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58320185"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -311,7 +311,7 @@ Rufen Sie die [UseSolutionRelativeContentRoot](/dotnet/api/microsoft.aspnetcore.
 
 ## <a name="disable-shadow-copying"></a>Deaktivieren von Schattenkopien
 
-Erstellen von Schattenkopien führt dazu, dass die Tests in einem anderen Ordner als den Ausgabeordner ausführen. Für die Tests ordnungsgemäß funktioniert muss die Option Schattenkopien deaktiviert werden. Die [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) verwendet xUnit und deaktiviert die Schattenkopiefunktion für xUnit dazu ein *xunit.runner.json* -Datei mit der richtigen Einstellung. Weitere Informationen finden Sie unter [konfigurieren xUnit.net mit JSON](https://xunit.github.io/docs/configuring-with-json.html).
+Erstellen von Schattenkopien führt dazu, dass die Tests in einem anderen Ordner als den Ausgabeordner ausführen. Für die Tests ordnungsgemäß funktioniert muss die Option Schattenkopien deaktiviert werden. Die [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) verwendet xUnit und deaktiviert die Schattenkopiefunktion für xUnit dazu ein *xunit.runner.json* -Datei mit der richtigen Einstellung. Weitere Informationen finden Sie unter [Konfigurieren von xUnit mit JSON](https://xunit.github.io/docs/configuring-with-json.html).
 
 Hinzufügen der *xunit.runner.json* Datei zum Stamm des Testprojekts mit dem folgenden Inhalt:
 

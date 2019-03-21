@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/20/2018
 uid: signalr/hubs
-ms.openlocfilehash: 9bc74079235338c75c47e06bde2b78dc1c466bd6
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.openlocfilehash: 244ddc40e647bfcc3ca8cda2797c51bc49174822
+ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54836687"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58320146"
 ---
 # <a name="use-hubs-in-signalr-for-aspnet-core"></a>Verwenden von Hubs in SignalR für ASP.NET Core
 
@@ -52,6 +52,7 @@ Sie können einen Rückgabetyp und Parameter, einschließlich von komplexen Type
 
 > [!NOTE]
 > Hubs sind vorübergehend:
+>
 > * Speichern Sie Status nicht in einer Eigenschaft für die hubklasse. Jeder Aufruf der Hub-Methode wird eine neue hubinstanz ausgeführt.  
 > * Verwendung `await` beim Aufrufen von asynchroner Methoden, die auf dem Hub bleiben aktiv abhängig sind. Zum Beispiel eine Methode, z. B. `Clients.All.SendAsync(...)` kann fehlschlagen, wenn er, ohne aufgerufen wird `await` und die hubmethode abgeschlossen wird, bevor Sie `SendAsync` abgeschlossen ist.
 

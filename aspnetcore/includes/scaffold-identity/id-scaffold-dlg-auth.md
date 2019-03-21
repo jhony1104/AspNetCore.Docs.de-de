@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: 53774177030adf8a61606a696af85cd1f57d6ab9
+ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58320291"
+---
 Führen Sie die Identity-gerüstbauer:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -21,35 +29,35 @@ Hinweis: Wenn Sie einen neuen Benutzerkontext erstellen, müssen Sie eine Datei 
 
 Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installieren Sie es jetzt:
 
-```cli
+```console
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 Fügen Sie einen Paketverweis auf [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) auf das Projekt (\*csproj) Datei. Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
 
-```cli
+```console
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
 Führen Sie den folgenden Befehl zum Auflisten von Optionen gerüstbauer Identität:
 
-```cli
+```console
 dotnet aspnet-codegenerator identity -h
 ```
 
 Führen Sie im Projektordner der gerüstbauer Identität, mit der gewünschten Optionen. Z. B. um die Identität mit der standardmäßigen UI und die minimale Anzahl von Dateien einrichten, führen Sie den folgenden Befehl an. Verwenden Sie den richtigen vollqualifizierten Namen für den DB-Kontext:
 
-```cli
+```console
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files Account.Register
 ```
 
-PowerShell arbeitet mit Semikolon als Befehlstrennzeichen. Wenn Sie Powershell verwenden, wird versehen Sie die Semikolon in der Liste mit Escapezeichen, oder fügen Sie die Liste der Dateien in doppelte Anführungszeichen. Zum Beispiel:
+PowerShell arbeitet mit Semikolon als Befehlstrennzeichen. Wenn Sie PowerShell verwenden, wird versehen Sie die Semikolon in der Liste mit Escapezeichen, oder fügen Sie die Liste der Dateien in doppelte Anführungszeichen. Zum Beispiel:
 
-```cli
+```console
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
 Wenn das Ausführen der Identity-gerüstbauer ohne Angabe der `--files` Flag oder das `--useDefaultUI` kennzeichnen, die alle die verfügbaren Identity-UI-Seiten in Ihrem Projekt erstellt werden.
 
--------------
+---
