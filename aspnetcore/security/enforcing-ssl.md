@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: 0c3add9c8860a47932cda3a8b07c83dc774bf1f1
-ms.sourcegitcommit: 97d7a00bd39c83a8f6bccb9daa44130a509f75ce
+ms.openlocfilehash: 16cfa672fe4a81d9e8f09fc3dd1e6c036edd4c4e
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54098973"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208975"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.NET Core
 
@@ -30,7 +30,7 @@ Keine API kann verhindern, dass einen Client sensible Daten bei der ersten Anfor
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
 
-## <a name="require-https"></a>Anforderung von HTTPS
+## <a name="require-https"></a>Erforderlichkeit von HTTPS
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -64,12 +64,12 @@ Ein Port muss für die Middleware verfügbar sein, eine unsichere Anforderung an
 
 Geben Sie den HTTPS-Port mit einer der folgenden Methoden:
 
-* Legen Sie [HttpsRedirectionOptions.HttpsPort](#options).
+* Set [HttpsRedirectionOptions.HttpsPort](#options).
 * Legen Sie die `ASPNETCORE_HTTPS_PORT` Umgebungsvariable oder [Https_port Webhost-Konfigurationseinstellung](xref:fundamentals/host/web-host#https-port):
 
   **Schlüssel**: `https_port`  
   **Typ:** *Zeichenfolge*  
-  **Standard**: Ein Standardwert ist nicht festgelegt.  
+  **Standard**: Es ist kein Standardwert festgelegt.  
   **Festlegen mit:** `UseSetting`  
   **Umgebungsvariable**: `<PREFIX_>HTTPS_PORT` (Das Präfix ist `ASPNETCORE_` bei Verwendung der [Webhost](xref:fundamentals/host/web-host).)
 
@@ -212,7 +212,7 @@ Deaktivieren Sie die **für HTTPS konfigurieren** Kontrollkästchen.
 
 ![Dialogfeld "neues ASP.NET Core-Webanwendung" mit der konfigurieren für HTTPS-Kontrollkästchen deaktiviert.](enforcing-ssl/_static/out.png)
 
-#   <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli) 
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli) 
 
 Verwenden Sie die `--no-https`-Option. Beispiel:
 

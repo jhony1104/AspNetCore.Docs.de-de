@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: test/integration-tests
-ms.openlocfilehash: 053713e148df70b0be6bb567b55b2381a78d6c3e
-ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
+ms.openlocfilehash: 50cb6b26be187c7f36f189e77fd29b4559221f2c
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/26/2019
-ms.locfileid: "56833578"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209238"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -91,7 +91,7 @@ Die `Microsoft.AspNetCore.Mvc.Testing` -Paket verarbeitet die folgenden Aufgaben
 Die [Komponententests](/dotnet/articles/core/testing/unit-testing-with-dotnet-test) Dokumentation wird beschrieben, wie ein und Erstellen eines Testprogramm, sowie ausführliche Anleitungen zum Ausführen von Tests und Empfehlungen dafür, wie Namen Tests aus, und Testklassen einrichten.
 
 > [!NOTE]
-> Wenn ein Testprojekt für eine app erstellen möchten, trennen Sie die Komponententests von Integrationstests in verschiedene Projekte. Dadurch wird sichergestellt, dass Tests Infrastrukturkomponenten versehentlich nicht in die Komponententests enthalten. Ermöglicht die Trennung von Unit- und Integrationstests auch steuern, über welche Gruppe von Tests ausgeführt werden.
+> Wenn ein Testprojekt für eine app erstellen möchten, trennen Sie die Komponententests von Integrationstests in verschiedene Projekte. Damit wird sichergestellt, dass Tests Infrastrukturkomponenten nicht versehentlich in die Komponententests enthalten sind. Ermöglicht die Trennung von Unit- und Integrationstests auch steuern, über welche Gruppe von Tests ausgeführt werden.
 
 Es gibt praktisch keinen Unterschied zwischen der Konfiguration für Tests von apps mit Razor-Seiten und MVC-apps. Der einzige Unterschied besteht in der Benennung von Tests. In einer Razor Pages-app, Tests von Seite-Endpunkten in der Regel nach der Seitenklasse für das Modell benannt (z. B. `IndexPageTests` auf die Komponente für die Indexseite Integrationstest). In einer MVC-app, Tests sind in der Regel nach Controllerklassen organisiert und nach den Controllern, die sie testen benannt (z. B. `HomeControllerTests` zum Testen der Komponentenintegration für den Home-Controller).
 

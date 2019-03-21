@@ -5,12 +5,12 @@ description: ''
 ms.author: tdykstra
 ms.date: 12/07/2016
 uid: migration/http-modules
-ms.openlocfilehash: 601b93fb12ab5b37b7d8ad8fd9825accc6e314cd
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.openlocfilehash: 516230a66ee3edba986c91d79684256aa8e4c994
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56743854"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209845"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handler und Module zu ASP.NET Core-middleware
 
@@ -26,29 +26,29 @@ Bevor Sie fortfahren, um ASP.NET Core-Middleware, zunächst betrachten wir wie H
 
 **Handler sind:**
 
-   * Klassen, in denen [IHttpHandler](/dotnet/api/system.web.ihttphandler)
+* Klassen, in denen [IHttpHandler](/dotnet/api/system.web.ihttphandler)
 
-   * Verwendet, um Anforderungen mit einem angegebenen Dateinamen oder die Erweiterung, z. B. behandeln *berichtsserverprojekten*
+* Verwendet, um Anforderungen mit einem angegebenen Dateinamen oder die Erweiterung, z. B. behandeln *berichtsserverprojekten*
 
-   * [Konfiguriert](/iis/configuration/system.webserver/handlers/) in *"Web.config"*
+* [Konfiguriert](/iis/configuration/system.webserver/handlers/) in *"Web.config"*
 
 **Module sind:**
 
-   * Klassen, in denen ["IHttpModule"](/dotnet/api/system.web.ihttpmodule)
+* Klassen, in denen ["IHttpModule"](/dotnet/api/system.web.ihttpmodule)
 
-   * Für jede Anforderung aufgerufen
+* Für jede Anforderung aufgerufen
 
-   * (Weitere Verarbeitung einer Anforderung beenden) kurzschließen können
+* (Weitere Verarbeitung einer Anforderung beenden) kurzschließen können
 
-   * Hinzufügen der HTTP-Antwort, oder ihre eigenen erstellen können
+* Hinzufügen der HTTP-Antwort, oder ihre eigenen erstellen können
 
-   * [Konfiguriert](/iis/configuration/system.webserver/modules/) in *"Web.config"*
+* [Konfiguriert](/iis/configuration/system.webserver/modules/) in *"Web.config"*
 
 **Die Reihenfolge, in der Module eingehenden Anforderungen verarbeiten, wird durch bestimmt:**
 
-   1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
+1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
 
-   2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"*.
+2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"*.
 
 Neben der Module, können Sie Handler für die Lebenszyklus-Ereignisse zum Hinzufügen Ihrer *"Global.asax.cs"* Datei. Diese Handler führen nach dem Handler in der konfigurierten Module.
 
@@ -56,29 +56,29 @@ Neben der Module, können Sie Handler für die Lebenszyklus-Ereignisse zum Hinzu
 
 **Middleware sind einfacher als HTTP-Module und Handler:**
 
-   * Module, Handler *"Global.asax.cs"*, *"Web.config"* (mit Ausnahme von IIS-Konfiguration) und der Lebenszyklus der Anwendung nicht mehr vorhanden sind
+* Module, Handler *"Global.asax.cs"*, *"Web.config"* (mit Ausnahme von IIS-Konfiguration) und der Lebenszyklus der Anwendung nicht mehr vorhanden sind
 
-   * Die Rollen von Module und Handler haben von Middleware übernommen wurden
+* Die Rollen von Module und Handler haben von Middleware übernommen wurden
 
-   * Middleware konfiguriert sind, mithilfe von Code statt im *"Web.config"*
+* Middleware konfiguriert sind, mithilfe von Code statt im *"Web.config"*
 
-   * [Pipeline Verzweigen](xref:fundamentals/middleware/index#use-run-and-map) Sie Anforderungen an bestimmte Middleware senden, basierend auf nicht nur die URL, sondern auch von Anforderungsheadern, Abfragezeichenfolgen usw. ermöglicht.
+* [Pipeline Verzweigen](xref:fundamentals/middleware/index#use-run-and-map) Sie Anforderungen an bestimmte Middleware senden, basierend auf nicht nur die URL, sondern auch von Anforderungsheadern, Abfragezeichenfolgen usw. ermöglicht.
 
 **Middleware sind Module sehr ähnlich:**
 
-   * Im Prinzip für jede Anforderung aufgerufen
+* Im Prinzip für jede Anforderung aufgerufen
 
-   * Kann eine Anforderung kurzschließen, indem [nicht die Anforderung an die nächste Middleware übergeben](#http-modules-shortcircuiting-middleware)
+* Kann eine Anforderung kurzschließen, indem [nicht die Anforderung an die nächste Middleware übergeben](#http-modules-shortcircuiting-middleware)
 
-   * Erstellen Sie ihre eigenen HTTP-Antwort
+* Erstellen Sie ihre eigenen HTTP-Antwort
 
 **Middleware und Module werden in einer anderen Reihenfolge verarbeitet:**
 
-   * Reihenfolge der Middleware basiert auf der Reihenfolge, in der sie in die Anforderungspipeline, eingefügt sind während die Reihenfolge der Module vor allem auf basiert [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx) Ereignisse
+* Reihenfolge der Middleware basiert auf der Reihenfolge, in der sie in die Anforderungspipeline, eingefügt sind während die Reihenfolge der Module vor allem auf basiert [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx) Ereignisse
 
-   * Reihenfolge der Middleware für Antworten ist das Gegenteil von dem für Anforderungen, während die Reihenfolge der Module, die für Anforderungen und Antworten identisch ist
+* Reihenfolge der Middleware für Antworten ist das Gegenteil von dem für Anforderungen, während die Reihenfolge der Module, die für Anforderungen und Antworten identisch ist
 
-   * Finden Sie unter [erstellen eine middlewarepipeline mit IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)
+* Finden Sie unter [erstellen eine middlewarepipeline mit IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)
 
 ![Middleware](http-modules/_static/middleware.png)
 

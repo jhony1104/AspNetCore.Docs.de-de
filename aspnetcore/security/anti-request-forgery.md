@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/11/2018
 uid: security/anti-request-forgery
-ms.openlocfilehash: 6e140717834b901e12ef7863fd07b983b0c55107
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: 88a2d127407378b9e83df7f48b1938ed081f9bb2
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667660"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208527"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Zu verhindern, dass Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core
 
@@ -102,12 +102,12 @@ In ASP.NET Core 2.0 oder höher der [FormTagHelper](xref:mvc/views/working-with-
 </form>
 ```
 
-Entsprechend, [IHtmlHelper.BeginForm](/dotnet/api/microsoft.aspnetcore.mvc.rendering.ihtmlhelper.beginform) fälschungssicherheitstoken standardmäßig generiert, wenn die-Methode des Formulars GET nicht ist.
+Auf ähnliche Weise [IHtmlHelper.BeginForm](/dotnet/api/microsoft.aspnetcore.mvc.rendering.ihtmlhelper.beginform) fälschungssicherheitstoken standardmäßig generiert, wenn die-Methode des Formulars GET nicht ist.
 
 Erfolgt die automatische Generierung von fälschungssicherheitstoken für HTML-Formularelemente bei der `<form>` -Tag enthält den `method="post"` -Attribut und eine der folgenden erfüllt sind:
 
-  * Das Action-Attribut ist leer (`action=""`).
-  * Das Action-Attribut ist nicht angegeben (`<form method="post">`).
+* Das Action-Attribut ist leer (`action=""`).
+* Das Action-Attribut ist nicht angegeben (`<form method="post">`).
 
 Automatische Generierung von fälschungssicherheitstoken für HTML-Formularelemente kann deaktiviert werden:
 

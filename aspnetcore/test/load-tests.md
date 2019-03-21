@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/04/2019
 uid: test/loadtests
-ms.openlocfilehash: 587df6e216943d3eeec779df4d0554dd0fc2fda0
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 39632af2c92dac548c03e24d35a5e8a03e00890d
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57345427"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209832"
 ---
 # <a name="load-and-stress-testing-aspnet-core"></a>Laden und Belastungstests Testen von ASP.NET Core
 
@@ -22,7 +22,7 @@ Auslastungstests und Belastungstests sind wichtig, sicherzustellen, dass eine We
 **Belastungstests**: Tests app Stabilität bei der Ausführung unter extremen Bedingungen und häufig eine längere Zeit:
 
 * Hohe benutzerauslastung – Spitzen oder allmählich.
-* Compute-Ressourcen beschränkt.  
+* Compute-Ressourcen beschränkt.
 
 Bei hoher Belastung kann die app Wiederherstellen nach einem Fehler und zurück zum erwarteten Verhalten? Bei hoher Belastung die app ist *nicht* unter normalen Bedingungen ausgeführt.
 
@@ -44,41 +44,42 @@ Auslastungstests können in einer lokalen ausgeführt oder führen Sie in der Cl
 
 Auslastungstestläufe können gestartet werden, mithilfe der [Azure DevOps Testplänen](/azure/devops/test/load-test/index?view=vsts) Service.
 
-![](./load-tests/_static/azure-devops-load-test.png)
+![Azure-Angebotsseite der DevOps-Auslastungstests](./load-tests/_static/azure-devops-load-test.png)
 
 Der Dienst unterstützt die folgenden Typen von Test-Format an:
 
-- Visual Studio-Test – Webtest in Visual Studio erstellt.
-- HTTP-Archiv-basierten Test – erfassten HTTP-Datenverkehr in das Archiv ist während der Tests wiedergegeben.
-- [URL-basierter Test](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) – ermöglicht das Angeben von URLs, um den Test, Anforderungstypen, Header und Abfragezeichenfolgen zu laden. Festlegen von Parametern, z. B. Dauer ausgeführt werden, kann eine Auslastungsmuster, Anzahl der Benutzer usw., konfiguriert werden.
-- [Apache JMeter](https://jmeter.apache.org/) test.
+* Visual Studio-Test – Webtest in Visual Studio erstellt.
+* HTTP-Archiv-basierten Test – erfassten HTTP-Datenverkehr in das Archiv ist während der Tests wiedergegeben.
+* [URL-basierter Test](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) – ermöglicht das Angeben von URLs, um den Test, Anforderungstypen, Header und Abfragezeichenfolgen zu laden. Festlegen von Parametern, z. B. Dauer ausgeführt werden, kann eine Auslastungsmuster, Anzahl der Benutzer usw., konfiguriert werden.
+* [Apache JMeter](https://jmeter.apache.org/) test.
 
 ## <a name="azure-portal"></a>Azure-Portal
 
 [Azure-Portal ermöglicht das Einrichten und Ausführen von Web-Apps, die Auslastungstests](/azure/devops/test/load-test/app-service-web-app-performance-test?view=vsts) direkt über die Registerkarte "Leistung" des App Service im Azure-Portal.
 
-![](./load-tests/_static/azure-appservice-perf-test.png)
+![Azure App Service in Azure-Portal](./load-tests/_static/azure-appservice-perf-test.png)
 
 Der Test kann einen manuellen Test mit einer angegebenen URL oder eine Visual Studio-Webtest-Datei, die mehrere URLs zu testen sein.
 
-![](./load-tests/_static/azure-appservice-perf-test-config.png)
+![Neue Leistung-Testseite im Azure-Portal](./load-tests/_static/azure-appservice-perf-test-config.png)
 
 Am Ende des Tests werden Berichte generiert, um die Leistungsmerkmale der app anzuzeigen. Beispiel-Statistiken umfassen:
 
-- Durchschnittliche Antwortzeit
-- Maximaler Durchsatz: Anforderungen pro Sekunde
-- Ausführungsfehler in Prozent
+* Durchschnittliche Antwortzeit
+* Maximaler Durchsatz: Anforderungen pro Sekunde
+* Ausführungsfehler in Prozent
 
 ## <a name="third-party-tools"></a>Drittanbieter-Tools
 
 Die folgende Liste enthält die Drittanbieter-Web-Leistungstools mit verschiedenen Featuresätze:
 
-- [Apache JMeter](https://jmeter.apache.org/) : Vollständige ausgewählte Sammlung von Testtools laden. Threadgebunden: benötigen Sie einen Thread pro Benutzer.
-- [Ab – Apache HTTP Server Benchmark tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
-- [Gatling](https://gatling.io/) : Desktop-Tool mit einer grafischen Benutzeroberfläche und Test Recorder. Bieten eine bessere Leistung als JMeter.
-- [Locust.io](https://locust.io/) : Nicht begrenzt von Threads.
+* [Apache JMeter](https://jmeter.apache.org/) : Vollständige ausgewählte Sammlung von Testtools laden. Threadgebunden: benötigen Sie einen Thread pro Benutzer.
+* [Ab – Apache HTTP Server Benchmark tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
+* [Gatling](https://gatling.io/) : Desktop-Tool mit einer grafischen Benutzeroberfläche und Test Recorder. Bieten eine bessere Leistung als JMeter.
+* [Locust.io](https://locust.io/) : Nicht begrenzt von Threads.
 
 <a name="add"></a>
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 [Laden Sie die Test-blogreihe](https://blogs.msdn.microsoft.com/charles_sterling/2015/06/01/load-test-series-part-i-creating-web-performance-tests-for-a-load-test/) von Charles Sterling. Vom, aber die meisten Themen sind immer noch relevant.

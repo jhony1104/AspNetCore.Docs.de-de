@@ -5,12 +5,12 @@ description: Erfahren Sie Details zur Implementierung des Schutzes von Daten ASP
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: bca19ad001dd20b5d02ae5470f7d928082496037
-ms.sourcegitcommit: 8f8924ce4eb9effeaf489f177fb01b66867da16f
+ms.openlocfilehash: 81df124f3dd0cadf8fd895ab55f66eec6415705f
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39219276"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208017"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>Schlüsselspeicherformat in ASP.NET Core
 
@@ -65,7 +65,7 @@ Das besondere Format, der die \<Deskriptor >-Elements hängt von der authentifiz
 
 Ein **&lt;EncryptedSecret&gt;** Element enthält die verschlüsselte Form des Schlüsselmaterials geheimen darf vorhanden sein, wenn [die Verschlüsselung von Geheimnissen im Ruhezustand aktiviert](xref:security/data-protection/implementation/key-encryption-at-rest). Das Attribut `decryptorType` wird die Assembly qualifizierten Namen eines Typs, der implementiert [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Dieser Typ ist verantwortlich für das Lesen des inneren **&lt;EncryptedKey&gt;** Element- und entschlüsseln, um den ursprünglichen Klartext zu gewinnen.
 
-Wie bei \<Deskriptor >, das besondere Format, der die <encryptedSecret> -Elements hängt von der im Ruhezustand Verschlüsselungsmechanismus verwendet. Im obigen Beispiel wird der Hauptschlüssel verschlüsselt mithilfe von Windows-DPAPI pro des Kommentars.
+Wie bei `<descriptor>`, das besondere Format, der die `<encryptedSecret>` -Elements hängt von der im Ruhezustand Verschlüsselungsmechanismus verwendet. Im obigen Beispiel wird der Hauptschlüssel verschlüsselt mithilfe von Windows-DPAPI pro des Kommentars.
 
 ## <a name="the-revocation-element"></a>Die \<Sperrung >-Element
 

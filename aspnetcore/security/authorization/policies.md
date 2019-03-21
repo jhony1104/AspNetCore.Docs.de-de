@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/21/2017
 uid: security/authorization/policies
-ms.openlocfilehash: c2bc626b2dd341dda878a151def6b405884357d7
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: e72f15c28fb7b62c671dd6475cc323cacce42de6
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665401"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208320"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinienbasierte Autorisierung in ASP.NET Core
 
@@ -19,13 +19,25 @@ Im Hintergrund [rollenbasierte Autorisierung](xref:security/authorization/roles)
 
 Eine Autorisierungsrichtlinie besteht eine oder mehrere Anforderungen aus. Er ist als Teil der autorisierungsdienstkonfiguration registriert, der `Startup.ConfigureServices` Methode:
 
-[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=40-41,50-55,63,72)]
+[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,66)]
 
 Im vorherigen Beispiel wird eine Richtlinie für "AtLeast21" erstellt. Es wurde eine einzelne Anforderung&mdash;mit einem Mindestalter, die als Parameter für die Anforderung bereitgestellt wird.
 
-Richtlinien werden angewendet, mit der `[Authorize]` Attribut mit dem Richtliniennamen. Zum Beispiel:
+## <a name="applying-policies-to-mvc-controllers"></a>Anwenden von Richtlinien auf MVC-Controller
+
+Wenn Sie Razor-Seiten verwenden, finden Sie unter [Anwenden von Richtlinien auf Razor Pages](#applying-policies-to-razor-pages) in diesem Dokument.
+
+Richtlinien auf Controller angewendet werden, mithilfe der `[Authorize]` Attribut mit dem Richtliniennamen. Zum Beispiel:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
+
+## <a name="applying-policies-to-razor-pages"></a>Anwenden von Richtlinien auf Razor-Seiten
+
+Richtlinien werden angewendet, Razor Pages unter Verwendung der `[Authorize]` Attribut mit dem Richtliniennamen. Zum Beispiel:
+
+[!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
+
+Richtlinien können auch auf Razor Pages angewendet werden, mithilfe einer [Autorisierung Konvention](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Anforderungen
 
@@ -70,7 +82,7 @@ Der vorangehende Code durchläuft [PendingRequirements](/dotnet/api/microsoft.as
 
 Handler werden in der dienstauflistung während der Konfiguration registriert. Zum Beispiel:
 
-[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=40-41,50-55,63-65,72)]
+[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
 Der vorangehende Code registriert `MinimumAgeHandler` als Singleton durch den Aufruf `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`. Handler können registriert werden, mithilfe der integrierten [service Lifetimes](xref:fundamentals/dependency-injection#service-lifetimes).
 
@@ -112,7 +124,7 @@ Es gibt möglicherweise Situationen, in die Ausführen eine Richtlinie einfach i
 
 Z. B. den vorherigen `BadgeEntryHandler` könnte wie folgt umgeschrieben werden:
 
-[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=52-53,57-63)]
+[!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=50-51,55-61)]
 
 ## <a name="accessing-mvc-request-context-in-handlers"></a>Zugriff auf MVC-Anforderungskontext in Ereignishandlern
 
