@@ -109,7 +109,7 @@ Mit dem [clientseitigen Hostingmodell](xref:razor-components/hosting-models#clie
 * Die App wird direkt im UI-Thread des Browsers ausgeführt. Dabei wird eine der folgenden beiden Strategien unterstützt:
   * Die Blazor-App wird von einer ASP.NET Core-App unterstützt. Eine Beschreibung hierzu finden Sie im Abschnitt [Clientseitige, von Blazor gehostete Bereitstellung mit ASP.NET Core](#client-side-blazor-hosted-deployment-with-aspnet-core).
   * Die Blazor-App wird auf einem statischen Hosting-Webserver oder -Webservice abgelegt, auf dem .NET nicht zur Unterstützung der Blazor-App verwendet wird. Eine Beschreibung hierzu finden Sie im Abschnitt [Clientseitige, eigenständige Blazor-Bereitstellung](#client-side-blazor-standalone-deployment).
-  
+
 ### <a name="configure-the-linker"></a>Konfigurieren des Linkers
 
 Blazor führt auf jedem Build eine IL-Verknüpfung (Intermediate Language, Zwischensprache) durch, um nicht benötigte IL aus den Ausgabeassemblys zu entfernen. Die Assemblyverknüpfung auf Builds kann gesteuert werden. Weitere Informationen finden Sie unter <xref:host-and-deploy/razor-components/configure-linker>.
@@ -191,7 +191,8 @@ Weitere Informationen zum Hosten und Bereitstellen von ASP.NET Core-Apps finden 
 
 Informationen zum Bereitstellen für Azure App Service finden Sie in den folgenden Themen:
 
-<xref:tutorials/publish-to-azure-webapp-using-vs>  
+<xref:tutorials/publish-to-azure-webapp-using-vs>
+
 Erfahren Sie, wie eine ASP.NET Core-App in Azure App Service mit Visual Studio veröffentlicht wird.
 
 ### <a name="client-side-blazor-standalone-deployment"></a>Clientseitige, eigenständige Blazor-Bereitstellung
@@ -299,5 +300,6 @@ Wenn die ASP.NET Core-App veröffentlicht wird, ist die Razor Components-App in 
 
 Informationen zum Bereitstellen für Azure App Service finden Sie in den folgenden Themen:
 
-<xref:tutorials/publish-to-azure-webapp-using-vs>  
+<xref:tutorials/publish-to-azure-webapp-using-vs>
+
 Erfahren Sie, wie eine ASP.NET Core-App in Azure App Service mit Visual Studio veröffentlicht wird.
