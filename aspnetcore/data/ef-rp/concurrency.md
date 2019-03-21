@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/07/2018
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 3fb8ebe415d0619d33302a08e97da78db0ad1d1e
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 213794398e1188e38b0bf3522c73207988615f9b
+ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265510"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58320172"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Parallelität (8 von 8)
 
@@ -167,7 +167,7 @@ Führen Sie die Schritte unter [Erstellen des Gerüsts für das Studentenmodell]
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
   ```
 
-------
+---
 
 Der vorherige Befehl erstellt ein Gerüst für das `Department`-Modell. Öffnen Sie das Projekt in Visual Studio.
 
