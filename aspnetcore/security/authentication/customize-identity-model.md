@@ -5,12 +5,12 @@ description: Dieser Artikel beschreibt, wie Sie das zugrunde liegende Datenmodel
 ms.author: avickers
 ms.date: 09/24/2018
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 55346c571f180fa17a1108a622d991d15f365bae
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 0aa7448ac37a97a4d09a04caf365f641f22f5997
+ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209461"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58327300"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>Anpassung der Identität des in ASP.NET Core
 
@@ -253,7 +253,7 @@ public abstract class IdentityDbContext<
          where TUserToken : IdentityUserToken<TKey>
 ```
 
-Es ist auch möglich, in diesem Fall mit Identität ohne Rollen (nur Ansprüche), ein <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext`1> Klasse sollte verwendet werden:
+Es ist auch möglich, in diesem Fall mit Identität ohne Rollen (nur Ansprüche), ein <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> Klasse sollte verwendet werden:
 
 ```csharp
 // Uses the built-in non-role Identity types except with a custom User type
@@ -368,7 +368,7 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
 
 1. Wenn es sich bei der Erstellung der Datenbank führen Sie vor der Umstellung PS `Drop-Database` (PMC) oder `dotnet ef database drop` (.NET Core CLI), um ihn zu löschen.
 2. Entfernen Sie nach der Bestätigung der Datenbank gelöscht, die ursprüngliche Migration mit `Remove-Migration` (PMC) oder `dotnet ef migrations remove` (.NET Core-CLI).
-3. Update der `ApplicationDbContext` Klasse abgeleitet <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext`3>. Geben Sie den neuen Schlüssel für `TKey`. Beispielsweise verwendet ein `Guid` Schlüsseltyp:
+3. Update der `ApplicationDbContext` Klasse abgeleitet <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>. Geben Sie den neuen Schlüssel für `TKey`. Beispielsweise verwendet ein `Guid` Schlüsseltyp:
 
     ```csharp
     public class ApplicationDbContext
@@ -383,13 +383,13 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    Im obigen Code, die generischen Klassen <xref:Microsoft.AspNetCore.Identity.IdentityUser`1> und <xref:Microsoft.AspNetCore.Identity.IdentityRole`1> muss angegeben werden, um den neuen Schlüssel verwenden.
+    Im obigen Code, die generischen Klassen <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> und <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> muss angegeben werden, um den neuen Schlüssel verwenden.
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    Im obigen Code, die generischen Klassen <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser`1> und <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole`1> muss angegeben werden, um den neuen Schlüssel verwenden.
+    Im obigen Code, die generischen Klassen <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> und <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> muss angegeben werden, um den neuen Schlüssel verwenden.
 
     ::: moniker-end
 
