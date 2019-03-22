@@ -56,7 +56,7 @@ Informationen zu den [integrierten Protokollierungsanbietern](#built-in-logging-
 
 ## <a name="create-logs"></a>Erstellen von Protokollen
 
-Rufen Sie ein <xref:Microsoft.Extensions.Logging.ILogger`1>-Objekt aus DI ab.
+Rufen Sie ein <xref:Microsoft.Extensions.Logging.ILogger%601>-Objekt aus DI ab.
 
 ::: moniker range=">= aspnetcore-2.0"
 
