@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: 0eda297b7df97a5d20fea035983f426eafa03775
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 4e87423a02a275eae7e2f6054e7a3b6c22cd7cee
+ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264645"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58320216"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -76,7 +76,7 @@ Eine französische Ressourcendatei könnte Folgendes beinhalten:
 
 | Key | Wert |
 | ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b> ` |
+| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 Die gerenderte Ansicht würde das HTML-Markup der Ressourcendatei enthalten.
 
@@ -173,7 +173,7 @@ Wenn der Stammnamespace einer Assembly sich vom Assemblynamen unterscheidet, dan
 
 Wenn sich `RootNamespace` vom `AssemblyName` unterscheidet, schließen Sie Folgendes in *AssemblyInfo.cs* ein (mit den durch die aktuellen Werte ersetzten Parameterwerten):
 
-```Csharp
+```csharp
 using System.Reflection;
 using Microsoft.Extensions.Localization;
 
