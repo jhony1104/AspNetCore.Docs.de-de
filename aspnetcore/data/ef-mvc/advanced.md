@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/05/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: f02aa1d6d8e431e7e2613835b3216786aed4ecd4
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: c4804bd6614c7d5a2a30c8f59a645f603929ad52
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103097"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264586"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core
 
@@ -81,7 +81,7 @@ Nehmen wir an, dass Administratoren der Contoso University globale Änderungen i
 
 ![Seite zum Aktualisieren der Credits für Kurse](advanced/_static/update-credits.png)
 
-Fügen Sie in *CoursesContoller.cs* UpdateCourseCredits-Methoden für HttpGet und HttpPost hinzu:
+Fügen Sie in *CoursesController.cs* UpdateCourseCredits-Methoden für HttpGet und HttpPost hinzu:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_UpdateGet)]
 
@@ -202,6 +202,7 @@ Das [dritte Tutorial dieser Reihe](sort-filter-page.md) zeigt, wie Sie LINQ-Code
 Tom Dykstra und Rick Anderson (Twitter @RickAndMSFT) haben dieses Tutorial verfasst. Rowan Miller, Diego Vega und andere Mitglieder des Entity Framework-Teams haben uns bei Codereviews und der Behebung von Problemen unterstützt, die aufgetreten waren, während wir den Code für dieses Tutorial geschrieben haben. John Parente und Paul Goldman arbeiteten an der Aktualisierung des Tutorials für ASP.NET Core 2.2.
 
 <a id="common-errors"></a>
+
 ## <a name="troubleshoot-common-errors"></a>Problembehandlung bei häufigen Fehlern
 
 ### <a name="contosouniversitydll-used-by-another-process"></a>ContosoUniversity.dll wird von einem anderen Prozess verwendet

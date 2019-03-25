@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie den Intermediate Language Linker (IL) beim Er
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/20/2019
+ms.date: 03/11/2019
 uid: host-and-deploy/razor-components/configure-linker
-ms.openlocfilehash: 7c53e7912ec3b0ae471ea38777f874f55a32487d
-ms.sourcegitcommit: 0945078a09c372f17e9b003758ed87e99c2449f4
+ms.openlocfilehash: c73c972e22a51842c5d8dd209b7e1ed987f9090d
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56647940"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58207930"
 ---
 # <a name="configure-the-linker-for-blazor"></a>Konfigurieren des Linkers für Blazor
 
@@ -20,14 +20,14 @@ Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/razor-components-preview-notice.md)]
 
-Blazor führt auf jedem Releasemodusbuild eine [Intermediate Language-Verknüpfung (IL)](/dotnet/standard/managed-code#intermediate-language--execution) durch, um nicht benötigte IL aus den Ausgabeassemblys zu entfernen.
+Blazor führt bei jedem Releasemodusbuild eine [IL-Verknüpfung](/dotnet/standard/managed-code#intermediate-language--execution) durch, um nicht benötigte IL aus den Ausgabeassemblys der App zu entfernen.
 
 Sie können die Assemblyverknüpfung mit einer der folgenden Methoden steuern:
 
-* Globales Deaktivieren der Verknüpfung mit einer MSBuild-Eigenschaft.
-* Steuern der Verknüpfung pro Assembly mit einer Konfigurationsdatei.
+* Globales Deaktivieren der Verknüpfung mit einer [MSBuild-Eigenschaft](#disable-linking-with-a-msbuild-property)
+* Steuern der Verknüpfung für unterschiedliche Assemblys mit einer [Konfigurationsdatei](#control-linking-with-a-configuration-file)
 
-## <a name="disable-linking-with-an-msbuild-property"></a>Deaktivieren der Verknüpfung mit einer MSBuild-Eigenschaft.
+## <a name="disable-linking-with-a-msbuild-property"></a>Deaktivieren der Verknüpfung mit einer MSBuild-Eigenschaft
 
 Die Verknüpfung wird standardmäßig im Releasemodus aktiviert, wenn eine App erstellt wird, was die Veröffentlichung enthält. Um die Verknüpfung für alle Assemblys zu deaktivieren, legen Sie in der Projektdatei für die `<BlazorLinkOnBuild>`-MSBuild-Eigenschaft `false` fest:
 
@@ -39,9 +39,15 @@ Die Verknüpfung wird standardmäßig im Releasemodus aktiviert, wenn eine App e
 
 ## <a name="control-linking-with-a-configuration-file"></a>Steuern der Verknüpfung mit einer Konfigurationsdatei.
 
-Die Verknüpfung kann pro Assembly durch Bereitstellen einer XML-Konfigurationsdatei und Festlegung der Datei als MSBuild-Element in der Projektdatei gesteuert werden.
+Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie eine XML-Konfigurationsdatei bereitstellen und die Datei als MSBuild-Element in der Projektdatei festlegen:
 
-Im Folgenden finden Sie ein Beispiel für die Konfigurationsdatei (*Linker.xml*):
+```xml
+<ItemGroup>
+  <BlazorLinkerDescriptor Include="Linker.xml" />
+</ItemGroup>
+```
+
+*Linker.xml*:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -73,12 +79,4 @@ Im Folgenden finden Sie ein Beispiel für die Konfigurationsdatei (*Linker.xml*)
 </linker>
 ```
 
-Weitere Informationen zum Dateiformat für die Konfigurationsdatei finden Sie unter [IL-Linker: Syntax of xml descriptor (IL-Linker: Syntax des XML-Deskriptors)](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor).
-
-Geben Sie die Konfigurationsdatei in der Projektdatei mit dem `BlazorLinkerDescriptor`-Element an:
-
-```xml
-<ItemGroup>
-  <BlazorLinkerDescriptor Include="Linker.xml" />
-</ItemGroup>
-```
+Weitere Informationen finden Sie unter [IL Linker: Syntax of xml descriptor (IL-Linker: Syntax des XML-Deskriptors)](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor).

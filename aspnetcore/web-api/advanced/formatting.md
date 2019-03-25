@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 10/14/2016
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 819bf1b49b56e953a9a4398e82866ba0b01ab4db
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: b0fce0632fd2d885cb8e9a056923ec365d2f327d
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207107"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209985"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -129,13 +129,13 @@ services.AddMvc(options =>
 
 Sobald Sie Unterstützung für das XML-Format hinzugefügt haben, geben die Controllermethoden das entsprechende Format wie in diesem Fiddler-Beispiel veranschaulicht basierend auf dem `Accept`-Header der Anforderung zurück:
 
-![Fiddler-Konsole: Registerkarte „Raw“ für die Anforderung mit dem Accept-Headerwert „application/xml“ Registerkarte „Raw“ für die Antwort mit dem Inhaltstyp-Headerwert „application/xml“](formatting/_static/xml-response.png)
+![Fiddler-Konsole: Auf der Registerkarte „Raw“ (Rohdaten) wird die Anforderung mit dem Accept-Headerwert „application/xml“ angezeigt. Registerkarte „Raw“ für die Antwort mit dem Inhaltstyp-Headerwert „application/xml“](formatting/_static/xml-response.png)
 
 Auf der Registerkarte „Inspektoren“ wird deutlich, dass die GET-Anforderung unter „Raw“ mit einem festgelegten `Accept: application/xml`-Header erstellt wurde. Im Antwortbereich wird der `Content-Type: application/xml`-Header angezeigt, und das `Author`-Objekt in XML wurde serialisiert.
 
 Verwenden Sie die Registerkarte „Composer“, um für die Anforderung `application/json` im `Accept`-Header anzugeben. Führen Sie die Anforderung aus. Die Antwort wird nun als JSON formatiert:
 
-![Fiddler-Konsole: Registerkarte „Raw“ für die Anforderung mit dem Accept-Headerwert „application/json“ Registerkarte „Raw“ für die Antwort mit dem Headerwert „application/json“ mit dem Typ „Inhalt“](formatting/_static/json-response-fiddler.png)
+![Fiddler-Konsole: Auf der Registerkarte „Raw“ (Rohdaten) wird die Anforderung mit dem Accept-Headerwert „application/json“ angezeigt. Registerkarte „Raw“ für die Antwort mit dem Headerwert „application/json“ mit dem Typ „Inhalt“](formatting/_static/json-response-fiddler.png)
 
 In diesem Screenshot wird deutlich, dass die Anforderung einen Header für `Accept: application/json` festlegt und die Antwort denselben Header als `Content-Type` angibt. Das `Author`-Objekt wird im Text der Antwort im JSON-Format dargestellt.
 
@@ -168,7 +168,7 @@ Ohne `HttpNoContentOutputFormatter` werden NULL-Objekte mithilfe des konfigurier
 
 ## <a name="response-format-url-mappings"></a>Antwortformat bei URL-Zuordnungen
 
-Clients können ein bestimmtes Format als Teil der URL anfordern, wie z.B. in der Abfragezeichenfolge, als Teil des Pfads oder mithilfe einer formatspezifischen Dateierweiterung, wie etwa XML oder JSON. Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die die API verwendet. Zum Beispiel:
+Clients können ein bestimmtes Format als Teil der URL anfordern, wie z.B. in der Abfragezeichenfolge, als Teil des Pfads oder mithilfe einer formatspezifischen Dateierweiterung, wie etwa XML oder JSON. Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die die API verwendet. Beispiel:
 
 ```csharp
 [FormatFilter]
@@ -180,10 +180,8 @@ public class ProductsController
 
 Mit dieser Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das `[FormatFilter]`-Attribut überprüft, ob in den `RouteData` ein Formatwert vorhanden ist und ordnet das Antwortformat beim Erstellen der Antwort dem entsprechenden Formatierungsprogramm zu.
 
-
 |           Route            |             Formatierungsprogramm              |
 |----------------------------|------------------------------------|
 |   `/products/GetById/5`    |    Standard-Ausgabeformatierungsprogramm    |
 | `/products/GetById/5.json` | JSON-Formatierungsprogramm (falls konfiguriert) |
 | `/products/GetById/5.xml`  | XML-Formatierungsprogramm (falls konfiguriert)  |
-

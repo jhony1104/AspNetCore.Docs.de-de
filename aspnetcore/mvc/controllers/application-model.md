@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie das Anwendungsmodell lesen und bearbeiten, um
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/controllers/application-model
-ms.openlocfilehash: f3e0aafa3e6a352c632e4abbf3943be61f11ea81
-ms.sourcegitcommit: fc7eb4243188950ae1f1b52669edc007e9d0798d
+ms.openlocfilehash: 6b0591a877c0d82e0ee6ab002eb6a6650753677b
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2018
-ms.locfileid: "51225498"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58208595"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Arbeiten mit dem Anwendungsmodell in ASP.NET Core
 
@@ -25,9 +25,9 @@ Das ASP.NET Core-MVC-Anwendungsmodell enthält abstrakte Schnittstellen und konk
 Das ASP.NET Core-MVC-Anwendungsmodell weist folgende Struktur auf:
 
 * ApplicationModel
-    * Controller (ControllerModel)
-        * Aktionen (ActionModel)
-            * Parameter (ParameterModel)
+  * Controller (ControllerModel)
+    * Aktionen (ActionModel)
+      * Parameter (ParameterModel)
 
 Jede Modellebenen kann auf eine allgemeine `Properties`-Sammlung zugreifen. Zudem ist auf niedrigeren Ebenen der Zugriff auf Eigenschaftswerte sowie die Überschreibung von Eigenschaftswerten möglich, die auf höheren Ebenen in der Hierarchie festgelegt wurden. Die Eigenschaften werden bei der Erstellung der Aktionen in der Datei `ActionDescriptor.Properties` permanent gespeichert. Wenn eine Anforderung dann verarbeitet wird, kann über `ActionContext.ActionDescriptor.Properties` auf sämtliche Eigenschaften zugegriffen werden, die über eine Konvention hinzugefügt oder geändert wurden. Die Verwendung von Eigenschaften stellt eine gute Möglichkeit zur Konfiguration Ihrer Filter, Modellbindungen usw. auf Grundlage einer Aktion dar.
 
@@ -143,7 +143,7 @@ Obwohl der Methodenname `SomeName` lautet, überschreibt das Attribut die MVC-Ko
 > [!NOTE]
 > Dieses Beispiel ist im Wesentlichen mit der Verwendung des integrierten Attributs [ActionName](/dotnet/api/microsoft.aspnetcore.mvc.actionnameattribute) identisch.
 
-### <a name="sample-custom-routing-convention"></a>Beispiel: Benutzerdefinierte Routingkonvention
+### <a name="sample-custom-routing-convention"></a>Beispiel: benutzerdefinierte Routingkonvention
 
 Sie können die Funktionsweise von Routing mithilfe einer `IApplicationModelConvention` anpassen. Die folgende Konvention bezieht beispielsweise Namespaces von Controllern in ihre Routen ein und ersetzt dabei in der Route `.` im Namespace durch `/`:
 

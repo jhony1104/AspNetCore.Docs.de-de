@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2019
 uid: host-and-deploy/azure-apps/troubleshoot
-ms.openlocfilehash: 326f66070d51c04298abbf6292d2d350414311de
-ms.sourcegitcommit: 34bf9fc6ea814c039401fca174642f0acb14be3c
+ms.openlocfilehash: 36c2bdfa585a0fd54ca93bf4c0edb4cf6f7d934a
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57841399"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265445"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service"></a>Problembehandlung bei ASP.NET Core in Azure App Service
 
@@ -23,8 +23,7 @@ Dieser Artikel enthält Anweisungen für die Diagnose eines Startproblems einer 
 
 ## <a name="app-startup-errors"></a>App-Startfehler
 
-**502.5: Prozessfehler**  
-Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
+**502.5: Prozessfehler**. Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
 Das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) kann den Workerprozess nicht starten. Eine Untersuchung des Ereignisprotokolls hilft häufig, diese Art von Problem zu beheben. Der Zugriff auf das Protokoll wird im Abschnitt [Anwendungsereignisprotokoll](#application-event-log) erläutert.
 
@@ -32,7 +31,8 @@ Die Fehlerseite *502.5: Prozessfehler* wird zurückgegeben, wenn eine falsch kon
 
 ![Browserfenster mit der Seite „502.5: Prozessfehler“](troubleshoot/_static/process-failure-page.png)
 
-**500: Interner Serverfehler**  
+**500: Interner Serverfehler**
+
 Die App wird gestartet, aber ein Fehler verhindert, dass der Server auf die Anforderung eingeht.
 
 Dieser Fehler tritt im Code der App während des Starts oder bei der Erstellung einer Antwort auf. Die Antwort enthält möglicherweise keinen Inhalt oder die Antwort wird als *500: Interner Serverfehler* im Browser angezeigt. Das Anwendungsereignisprotokoll gibt normalerweise an, dass die Anwendung normal gestartet wurde. Aus Sicht des Servers ist dies richtig. Die App wurde gestartet, aber sie kann keine gültige Antwort generieren. [Führen Sie die App in der Kudu-Konsole ](#run-the-app-in-the-kudu-console) aus oder [aktivieren Sie das stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log), um das Problem zu beheben.
@@ -83,15 +83,16 @@ Viele Startfehler erzeugen keine nützlichen Informationen im Anwendungsereignis
      ```console
      dotnet .\{ASSEMBLY NAME}.dll
      ```
+
    * Wenn es sich bei der App um eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) handelt:
 
      ```console
      {ASSEMBLY NAME}.exe
      ```
-   
+
 Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
-   
-##### <a name="framework-depdendent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
+
+##### <a name="framework-dependent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
 
 *Erfordert die Installation der Runtimeerweiterung für ASP.NET Core {VERSION} (x86).*
 
@@ -113,7 +114,7 @@ Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weiter
 
 Die Konsolenausgabe der App, die Fehler anzeigt, wird an die Kudu-Konsole weitergeleitet.
 
-##### <a name="framework-depdendent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
+##### <a name="framework-dependent-deployment-running-on-a-preview-release"></a>Frameworkabhängige Bereitstellung, die in einem Vorschaurelease ausgeführt wird
 
 *Erfordert die Installation der Runtimeerweiterung für ASP.NET Core {VERSION} (x64).*
 
@@ -230,7 +231,7 @@ Fahren Sie mit der Aktivierung der Diagnoseprotokollierung fort:
 
 1. Wählen Sie im Azure-Portal das Blatt **Diagnoseprotokolle** aus.
 1. Wählen Sie den Parameter **On** für **Anwendungsprotokollierung (Dateisystem)** und **Detaillierte Fehlermeldungen** aus. Klicken Sie auf **Speichern** am oberen Rand des Blatts.
-1. Um die Ablaufverfolgung für Anforderungsfehler, auch bekannt als Protokollierung der Anforderungsfehler-Ereignispufferung (FREB), einzuschließen, wählen Sie den Parameter **On** für **Ablaufverfolgung für Anforderungsfehler** aus. 
+1. Um die Ablaufverfolgung für Anforderungsfehler, auch bekannt als Protokollierung der Anforderungsfehler-Ereignispufferung (FREB), einzuschließen, wählen Sie den Parameter **On** für **Ablaufverfolgung für Anforderungsfehler** aus.
 1. Wählen Sie das Blatt **Protokollstream** aus, das direkt unter dem Blatt **Diagnoseprotokolle** im Portal angezeigt wird.
 1. Führen Sie eine Anforderung an die App aus.
 1. In den Protokollstreamdaten wird die Ursache des Fehlers angegeben.

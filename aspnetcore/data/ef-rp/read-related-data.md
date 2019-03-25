@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 140f482e136acf4daba1248fecc87e06db6866f3
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: a264cdaf0f577be6ea2043935b485f4fd16e0229
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57345890"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264945"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Lesen verwandter Daten (6 von 8)
 
@@ -65,9 +65,10 @@ So zeigen Sie den Namen der zugewiesenen Abteilung in einer Kursliste an:
 * Rufen Sie `Name`-Eigenschaft aus der `Department`-Entität ab.
 * Die `Department`-Entität stammt aus der `Course.Department`-Navigationseigenschaft.
 
-![ourse.Department](read-related-data/_static/dep-crs.png)
+![Course.Department](read-related-data/_static/dep-crs.png)
 
 <a name="scaffold"></a>
+
 ### <a name="scaffold-the-course-model"></a>Erstellen des Gerüsts für das Kursmodell
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
@@ -115,6 +116,7 @@ Führen Sie die Anwendung aus. Wählen Sie die Registerkarte **Kurse** aus, um d
 ![Indexseite „Kurse“](read-related-data/_static/courses-index.png)
 
 <a name="select"></a>
+
 ### <a name="loading-related-data-with-select"></a>Laden verwandter Daten mit „Select“
 
 Die `OnGetAsync`-Methode lädt verwandte Daten mit der `Include`-Methode:
@@ -187,7 +189,6 @@ Die Abfrage enthält zwei Dinge:
 * `OfficeAssignment`: In der [Dozentenansicht](#IP) angezeigt.
 * `CourseAssignments`: Welche Kurse gegeben werden.
 
-
 ### <a name="update-the-instructors-index-page"></a>Aktualisieren der Indexseite „Dozenten“
 
 Aktualisieren Sie *Pages/Instructors/Index.cshtml* mit folgendem Markup:
@@ -198,11 +199,11 @@ Das oben stehende Markup führt die folgenden Änderungen durch:
 
 * Aktualisiert die `page`-Anweisung von `@page` auf `@page "{id:int?}"`. `"{id:int?}"` ist eine Routenvorlage. Die Routenvorlage ändert ganzzahlige Abfragezeichenfolgen in der URL in Routendaten. Klicken Sie beispielsweise auf den Link **Auswählen** für einen Dozenten, wenn nur die `@page`-Anweisung eine URL wie die folgende erzeugt:
 
-    `http://localhost:1234/Instructors?id=2`
+  `http://localhost:1234/Instructors?id=2`
 
-    Wenn die Seitenanweisung `@page "{id:int?}"` ist, sieht die vorherige URL wie folgt aus:
+  Wenn die Seitenanweisung `@page "{id:int?}"` ist, sieht die vorherige URL wie folgt aus:
 
-    `http://localhost:1234/Instructors/2`
+  `http://localhost:1234/Instructors/2`
 
 * Der Seitentitel lautet **Dozenten**.
 * Es wurde eine **Office**-Spalte hinzugefügt, die `item.OfficeAssignment.Location` nur anzeigt, wenn `item.OfficeAssignment` nicht gleich 0 (null) ist. Da dies eine 1:0..1-Beziehung ist, gibt es möglicherweise keine verwandte OfficeAssignment-Entität.

@@ -5,12 +5,12 @@ description: ''
 ms.author: riande
 ms.date: 07/03/2017
 uid: mvc/controllers/actions
-ms.openlocfilehash: 8289424b3cd3678bea18a25c7850e409795d1577
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 952e4dbb2c4343ca87ace1535e4a5968faf088cf
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410434"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209014"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -57,7 +57,7 @@ Controller erben üblicherweise von [Controller](/dotnet/api/microsoft.aspnetcor
 
 Es ist kein `Content-Type`-HTTP-Antwortheader beinhaltet, da der Antworttext keinen Inhalt aufweist, der beschrieben werden könnte.
 
-Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: „View“ (Ansicht) und „Formatted Response“ (Formatierte Antwort).
+Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: Umleitung und HTTP-Statuscode.
 
 * **HTTP-Statuscode**
 
@@ -73,7 +73,7 @@ Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: „View“ (Ansi
 
 Die meisten Hilfsmethoden in dieser Kategorie beinhalten eine `ContentType`-Eigenschaft, mit der Sie den Antwortheader `Content-Type` festlegen können, um den Antworttext zu beschreiben.
 
-Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: [View](xref:mvc/views/overview) (Ansicht) und [Formatted Response](xref:web-api/advanced/formatting) (Formatierte Antwort). 
+Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: [Ansicht](xref:mvc/views/overview) und [Formatierte Antwort](xref:web-api/advanced/formatting).
 
 * **Ansicht**
 
@@ -98,7 +98,7 @@ Verschiedene Anwendungen haben häufig übereinstimmende Teile in Ihrem Workflow
 Die meisten Filterattribute, wie z.B. `[Authorize]`, können auf Ebene des Controllers oder der Aktion mit der gewünschten Detailgenauigkeit angewendet werden.
 
 Die Fehlerbehandlung und das Zwischenspeichern von Antworten sind häufig übergreifende Belange:
-   * [Behandeln von Fehlern](xref:mvc/controllers/filters#exception-filters)
-   * [Zwischenspeichern von Antworten](xref:performance/caching/response)
+* [Behandeln von Fehlern](xref:mvc/controllers/filters#exception-filters)
+* [Zwischenspeichern von Antworten](xref:performance/caching/response)
 
 Viele übergreifende Belange können mit Filtern oder mit benutzerdefinierter [Middleware](xref:fundamentals/middleware/index) behandelt werden.

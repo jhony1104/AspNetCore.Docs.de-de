@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/27/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: a0fbeac51bd1bfbc50c4d369a479ce5f3091358b
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 2d5168ed4b1e14e507262361de9fa959924b82f6
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346254"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58209556"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -205,9 +205,7 @@ Das `Input`-Taghilfsprogramm legt das HTML-Attribut `type` basierend auf dem .NE
 |Int|type="number"|
 |Single, Double|type="number"|
 
-
 In der folgenden Tabelle werden einige allgemeine Attribute für die [Datenanmerkung](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) aufgeführt, die das Taghilfsprogramm für die Eingabe bestimmten Eingabetypen zuordnet (nicht jedes Validierungsattribut wird aufgeführt):
-
 
 |Attribut|Eingabetyp|
 |---|---|
@@ -215,10 +213,9 @@ In der folgenden Tabelle werden einige allgemeine Attribute für die [Datenanmer
 |[Url]|type="url"|
 |[HiddenInput]|type="hidden"|
 |[Phone]|type="tel"|
-|[DataType(DataType.Password)]| type="password"|
-|[DataType(DataType.Date)]| type="date"|
-|[DataType(DataType.Time)]| type="time"|
-
+|[DataType(DataType.Password)]|type="password"|
+|[DataType(DataType.Date)]|type="date"|
+|[DataType(DataType.Time)]|type="time"|
 
 Beispiel:
 
@@ -378,7 +375,7 @@ Folgender HTML-Code wird generiert:
 
 ## <a name="the-label-tag-helper"></a>Das Taghilfsprogramm für Bezeichnungen
 
-* Generiert den Titel des Labels und das `for`-Attribut in einem [<label>](https://www.w3.org/wiki/HTML/Elements/label)-Element für einen Ausdrucksnamen
+* generiert den Titel der Beschriftung und das `for`-Attribut in einem [\<label>](https://www.w3.org/wiki/HTML/Elements/label)-Element für einen Ausdrucksnamen
 
 * Alternatives HTML-Hilfsprogramm: `Html.LabelFor`
 

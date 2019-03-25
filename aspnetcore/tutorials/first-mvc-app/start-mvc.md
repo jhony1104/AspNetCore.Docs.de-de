@@ -5,12 +5,12 @@ description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/12/2018
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: c09c06f55c4179e9e2174f0063ab7387b7e4c31b
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: dbc07558d7d7672e60e8834dc3e4e9d8aab437e3
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899228"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265288"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Erste Schritte mit ASP.NET Core MVC
 
@@ -36,7 +36,6 @@ Am Ende verfügen Sie über eine App, die Filmdaten verwalten und anzeigen kann.
 
 ## <a name="create-a-web-app"></a>Erstellen einer Web-App
 
-<!-- VS -------------------------->
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Klicken Sie in Visual Studio auf **Datei > Neu > Projekt**.
@@ -50,7 +49,7 @@ Schließen Sie das Dialogfeld **Neues Projekt**ab:
 * Geben Sie dem Projekt den Namen „MvcMovie“. Es ist wichtig, dem Projekt diesen Namen zu geben, sodass beim Kopieren von Code der Namespace übereinstimmt.
 * Wählen Sie **OK** aus.
 
-![Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web ](start-mvc/_static/new_project2-21.png)
+![Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web-App ](start-mvc/_static/new_project2-21.png)
 
 Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMovie** ab:
 
@@ -58,11 +57,10 @@ Schließen Sie das Dialogfeld **ASP.NET Core-Webanwendung (.NET Core) – MvcMov
 * Wählen Sie **Webanwendung (Model-View-Controller)** aus.
 * Wählen Sie **OK** aus.
 
-![Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web ](start-mvc/_static/new_project22-21.png)
+![Dialogfeld „Neues Projekt“, .NET Core im linken Bereich, ASP.NET Core-Web-App ](start-mvc/_static/new_project22-21.png)
 
 Visual Studio verwendet eine Standardvorlage für das MVC-Projekt, das Sie gerade erstellt haben. Wenn Sie einen Projektnamen eingeben und einige Optionen festlegen, funktioniert Ihre App bereits. Dies ist ein grundlegendes Startprojekt und ein guter Einstieg.
 
-<!-- Code -------------------------->
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informationen finden Sie unter [Erste Schritte mit VS Code](https://code.visualstudio.com/docs) und [Hilfe zu Visual Studio Code](#visual-studio-code-help).
@@ -81,7 +79,6 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
   * `dotnet new mvc -o MvcMovie`: Erstellt ein neues ASP.NET Core MVC-Projekt im Ordner *MvcMovie*.
   * `code -r MvcMovie`: Lädt die Projektdatei *MvcMovie.csproj* in Visual Studio Code.
 
-<!-- Mac -------------------------->
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Wählen Sie **Datei** > **Neue Projektmappe** aus.
@@ -96,12 +93,11 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
 * Nennen Sie das Projekt **MvcMovie**, und wählen Sie dann **Erstellen** aus.
 
----  
-<!-- End of VS tabs -->
+---
 
 ### <a name="run-the-app"></a>Ausführen der App
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.
 
@@ -117,7 +113,7 @@ Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Drücken Sie STRG+F5, um die Ausführung ohne den Debugger zu starten.
 
@@ -136,7 +132,7 @@ Wählen Sie **Ausführen** > **Ohne Debuggen starten** aus, um die App zu starte
 * Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standard-Hostnamen für Ihren lokalen Computer handelt. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet. Wenn Sie die App ausführen, wird eine andere Portnummer angezeigt.
 * Sie können die App über das Menü **Ausführen** im Debugmodus oder Nicht-Debugmodus starten.
 
-------
+---
 
 * Wählen Sie **Akzeptieren** aus, um der Nachverfolgung zuzustimmen. Diese App verfolgt keine personenbezogenen Informationen nach. Der generierte Vorlagencode enthält Objekte, die bei der Erfüllung der [Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr) als Unterstützung dienen sollen.
 
@@ -151,4 +147,4 @@ Wählen Sie **Ausführen** > **Ohne Debuggen starten** aus, um die App zu starte
 Im nächsten Teil dieses Tutorials erfahren Sie mehr über MVC und beginnen mit dem Schreiben von Code.
 
 > [!div class="step-by-step"]
-> [Nächste](adding-controller.md)  
+> [Nächste](adding-controller.md)

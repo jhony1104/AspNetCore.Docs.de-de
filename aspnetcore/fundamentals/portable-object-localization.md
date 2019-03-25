@@ -5,12 +5,12 @@ description: Dieser Artikel führt portable Objektdateien ein und erläutert die
 ms.author: scaddie
 ms.date: 09/26/2017
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: c9f892f5a886d7167b4705595ed2277279495201
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 466759b30e756a7cac8abab7352025df0462bb6f
+ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207627"
+ms.lasthandoff: 03/19/2019
+ms.locfileid: "58210092"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurieren der Lokalisierung portabler Objekte in ASP.NET Core
 
@@ -18,7 +18,7 @@ Von [Sébastien Ros](https://github.com/sebastienros) und [Scott Addie](https://
 
 Dieser Artikel erläutert die Schritte zur Verwendung von portablen Objektdateien (PO) in einer ASP.NET Core-Anwendung mit dem Framework [Orchard Core](https://github.com/OrchardCMS/OrchardCore).
 
-**Hinweis:** Orchard Core ist kein Microsoft-Produkt. Microsoft bietet daher keinen Support für dieses Feature an.
+**Hinweis**: Orchard Core ist kein Microsoft-Produkt. Microsoft bietet daher keinen Support für dieses Feature an.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -49,15 +49,15 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 In diesem Beispiel wird die folgende Syntax verwendet:
 
-- `#:`: Ein Kommentar, der den Kontext der zu übersetzenden Zeichenfolge angibt. Die gleiche Zeichenfolge wird möglicherweise anders übersetzt, je nachdem, wo sie verwendet wird.
-- `msgid`: Die nicht übersetzte Zeichenfolge.
-- `msgstr`: Die übersetzte Zeichenfolge.
+- `#:`: ein Kommentar, der den Kontext der zu übersetzenden Zeichenfolge angibt. Die gleiche Zeichenfolge wird möglicherweise anders übersetzt, je nachdem, wo sie verwendet wird.
+- `msgid`: die nicht übersetzte Zeichenfolge.
+- `msgstr`: die übersetzte Zeichenfolge.
 
 Wenn die Pluralisierung unterstützt wird, können mehrere Einträge definiert werden.
 
-- `msgid_plural`: Die nicht übersetzte Zeichenfolge im Plural.
-- `msgstr[0]`: Die übersetzte Zeichenfolge für den Fall 0.
-- `msgstr[N]`: Die übersetzte Zeichenfolge für den Fall N.
+- `msgid_plural`: die nicht übersetzte Zeichenfolge im Plural.
+- `msgstr[0]`: die übersetzte Zeichenfolge für den Fall 0.
+- `msgstr[N]`: die übersetzte Zeichenfolge für den Fall N.
 
 Die PO-Dateispezifikation finden Sie [hier](https://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html).
 
@@ -91,7 +91,7 @@ Eine `IViewLocalizer`-Instanz wird eingefügt und zum Übersetzen des Texts „H
 
 ### <a name="creating-a-po-file"></a>Erstellen einer PO-Datei
 
-Erstellen Sie eine Datei mit dem Namen *<culture code>.po* im Stammordner Ihrer Anwendung. In diesem Beispiel lautet der Dateiname *fr.po*, weil die französische Sprache verwendet wird:
+Erstellen Sie eine Datei mit dem Namen *\<Kulturcode>.po* im Stammordner Ihrer Anwendung. In diesem Beispiel lautet der Dateiname *fr.po*, weil die französische Sprache verwendet wird:
 
 [!code-text[](localization/sample/POLocalization/fr.po)]
 
@@ -153,7 +153,7 @@ Bearbeiten Sie die *Views/Home/About.cshtml*-Datei zum Rendern von lokalisierten
 <p>@Localizer.Plural(5, "There is one item.", "There are {0} items.")</p>
 ```
 
-**Hinweis:** In einem realen Szenario würde eine Variable die Anzahl darstellen. Hier wiederholen wir den gleichen Code mit drei verschiedenen Werten, um einen sehr speziellen Fall verfügbar zu machen.
+**Hinweis**: In einem echten Szenario würde eine Variable die Anzahl darstellen. Hier wiederholen wir den gleichen Code mit drei verschiedenen Werten, um einen sehr speziellen Fall verfügbar zu machen.
 
 Beim Wechsel von Kulturen sehen Sie Folgendes:
 

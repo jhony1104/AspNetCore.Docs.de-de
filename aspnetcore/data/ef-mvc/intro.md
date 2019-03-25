@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: f7b557c8e560393ae886c46fad95c48ccbcc65b4
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 31fca1b32942f9246e099c01669f77824edf521e
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56102967"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264846"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
@@ -316,7 +316,7 @@ Klicken Sie mit der rechten Maustaste auf die Tabelle **Students**, und klicken 
 
 ![Tabelle „Student“ im SSOX](intro/_static/ssox-student-table.png)
 
-Die <em>MDF</em>- und <em>LDF</em>-Datenbankdateien befinden sich im Ordner <em>C:\Benutzer\\<yourusername></em>.
+Die Datenbankdateien im Format *MDF* und *LDF* befinden sich im Ordner *C:\Benutzer\\\<Ihr Benutzername>*.
 
 Da Sie `EnsureCreated` in der Initialisierermethode aufrufen, die beim App-Start ausgeführt wird, können Sie Änderungen an der `Student`-Klasse vornehmen, die Datenbank löschen oder die Anwendung erneut ausführen. Dann wird Ihre Datenbank automatisch Ihren Änderungen entsprechend neu erstellt. Wenn Sie z.B. eine `EmailAddress`-Eigenschaft zu der `Student`-Klasse hinzufügen, wird eine neue `EmailAddress`-Spalte in der neu erstellten Tabelle angezeigt.
 
@@ -330,7 +330,7 @@ Sie mussten nur wenig Code schreiben, damit Entity Framework eine vollständige 
 
 * Entitätseigenschaften mit dem Namen „ID“ oder „classnameID“ werden als Primärschlüsseleigenschaften erkannt.
 
-* Eigenschaften werden als Fremdschlüsseleigenschaften interpretiert, wenn Sie den Namen *<navigation property name><primary key property name>* haben – z.B. `StudentID` für die `Student`-Navigationseigenschaft, da der Primärschlüssel der `Student`-Entität `ID` lautet. Fremdschlüsseleigenschaften können auch einfach den Namen *<primary key property name>* haben – z.B. `EnrollmentID`, da der Primärschlüssel der `Enrollment`-Entität `EnrollmentID` lautet.
+* Eigenschaften werden als Fremdschlüsseleigenschaften interpretiert, wenn Sie den Namen *\<Name der Navigationseigenschaft>\<Eigenschaftenname des Primärschlüssels* haben – z. B. `StudentID` für die `Student`-Navigationseigenschaft, da der Primärschlüssel der `Student`-Entität `ID` lautet. Fremdschlüsseleigenschaften können auch einfach den Namen *\<Eigenschaftenname des Primärschlüssels* haben – z. B. `EnrollmentID`, da der Primärschlüssel der `Enrollment`-Entität `EnrollmentID` lautet.
 
 Konventionelles Verhalten kann überschrieben werden. Beispielsweise können Sie, wie bereits in diesem Tutorial erläutert, Tabellennamen explizit angeben. Außerdem können Sie Spaltennamen und jede beliebige Eigenschaft als Primär- oder Fremdschlüssel festlegen. Dies wird in einem [späteren Tutorial](complex-data-model.md) in dieser Reihe erläutert.
 

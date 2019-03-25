@@ -4,14 +4,14 @@ author: guardrex
 description: Erfahren Sie, wie Sie Probleme mit IIS-Bereitstellungen (IIS = Internet Information Services) von ASP.NET Core-Apps diagnostizieren können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/06/2019
+ms.date: 03/14/2019
 uid: host-and-deploy/iis/troubleshoot
-ms.openlocfilehash: 2f36ae2bda8537e91a3bc925505986bdd6a22a47
-ms.sourcegitcommit: 34bf9fc6ea814c039401fca174642f0acb14be3c
+ms.openlocfilehash: 1fa90737aadebe3f714c702fbce649629d79dcd4
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57841552"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264553"
 ---
 # <a name="troubleshoot-aspnet-core-on-iis"></a>Problembehandlung bei ASP.NET Core in IIS
 
@@ -33,17 +33,13 @@ In Visual Studio entspricht ein ASP.NET Core-Projekt standardmäßig dem [IIS Ex
 
 Weitere Themen zur Problembehandlung:
 
-<xref:host-and-deploy/azure-apps/troubleshoot>  
-Obwohl App Service das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) und IIS für das Hosten von Apps verwendet, finden Sie im dedizierten Thema weitere, für App Service spezifische Anweisungen.
+<xref:host-and-deploy/azure-apps/troubleshoot> Obwohl App Service das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) und IIS für das Hosten von Apps verwendet, finden Sie im entsprechenden Artikel weitere, für App Service spezifische Anweisungen.
 
-<xref:fundamentals/error-handling>  
-Informationen zur Behandlung von Fehlern in ASP.NET Core-Apps während der Bereitstellung auf einem lokalen System.
+<xref:fundamentals/error-handling> In diesem Artikel erfahren Sie, wie Sie Fehler in ASP.NET Core-Apps in der Entwicklungsphase auf einem lokalen System behandeln.
 
-[Lernen Sie das Debuggen mit Visual Studio](/visualstudio/debugger/getting-started-with-the-debugger)  
-In diesem Thema werden die Features des Visual Studio-Debuggers vorgestellt.
+[Debuggen mit Visual Studio](/visualstudio/debugger/getting-started-with-the-debugger) In diesem Artikel werden die Features des Visual Studio-Debuggers vorgestellt.
 
-[Debuggen mit Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging)  
-Hier finden Sie weitere Informationen zur integrierten Debuggingunterstützung in Visual Studio Code.
+[Debuggen mit Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging) In diesem Artikel erfahren Sie, wie Sie mit dem in Visual Studio Code integrierten Debugger arbeiten.
 
 ## <a name="app-startup-errors"></a>App-Startfehler
 
@@ -51,7 +47,7 @@ Hier finden Sie weitere Informationen zur integrierten Debuggingunterstützung i
 
 Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
-Das ASP.NET Core-Modul kann den .NET-Back-End-Prozess nicht starten. Die Ursache für einen Fehler beim Starten eines Prozesses kann in der Regel über Einträge im [Anwendungsereignisprotokoll](#application-event-log) und im [stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log) ermittelt werden. 
+Das ASP.NET Core-Modul kann den .NET-Back-End-Prozess nicht starten. Die Ursache für einen Fehler beim Starten eines Prozesses kann in der Regel über Einträge im [Anwendungsereignisprotokoll](#application-event-log) und im [stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log) ermittelt werden.
 
 Eine allgemeine Fehlerbedingung ist, dass die App aufgrund einer Version des freigegebenen ASP.NET Core-Frameworks falsch konfiguriert ist, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind.
 
@@ -65,7 +61,7 @@ Die Fehlerseite *502.5: Prozessfehler* wird zurückgegeben, wenn ein falsch konf
 
 Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
-Das ASP.NET Core-Modul kann den .NET Core-CLR-In-Process nicht starten. Die Ursache für einen Fehler beim Starten eines Prozesses kann in der Regel über Einträge im [Anwendungsereignisprotokoll](#application-event-log) und im [stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log) ermittelt werden. 
+Das ASP.NET Core-Modul kann den .NET Core-CLR-In-Process nicht starten. Die Ursache für einen Fehler beim Starten eines Prozesses kann in der Regel über Einträge im [Anwendungsereignisprotokoll](#application-event-log) und im [stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log) ermittelt werden.
 
 Eine allgemeine Fehlerbedingung ist, dass die App aufgrund einer Version des freigegebenen ASP.NET Core-Frameworks falsch konfiguriert ist, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind.
 
@@ -82,7 +78,7 @@ Das ASP.NET Core-Modul kann die .NET Core-CLR und den In-Process-Anforderungshan
 
 Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
-Das ASP.NET Core-Modul kann den Out-of-Process-Hostinganforderungshandler nicht finden. Stellen Sie sicher, dass sich *aspnetcorev2_outofprocess.dll* in einem Unterordner mit *aspnetcorev2.dll* befindet. 
+Das ASP.NET Core-Modul kann den Out-of-Process-Hostinganforderungshandler nicht finden. Stellen Sie sicher, dass sich *aspnetcorev2_outofprocess.dll* in einem Unterordner mit *aspnetcorev2.dll* befindet.
 
 ::: moniker-end
 
@@ -172,7 +168,7 @@ So aktivieren Sie stdout-Protokolle und zeigen diese an:
 
 1. Navigieren Sie zum Bereitstellungsordner der Website auf dem Hostsystem.
 1. Erstellen Sie den Ordner *logs*, wenn dieser nicht vorhanden ist. Anweisungen zum Aktivieren von MSBuild für die automatische Erstellung des Ordners *logs* in der Bereitstellung finden Sie im Thema [Verzeichnisstruktur](xref:host-and-deploy/directory-structure).
-1. Bearbeiten Sie die Datei *web.config*. Legen Sie **stdoutLogEnabled** auf `true` fest, und ändern Sie den Pfad von **stdoutLogFile** so, dass auf den Ordner *logs* verwiesen wird (Beispiel: `.\logs\stdout`). `stdout` im Pfad ist das Präfix des Protokolldateinamens. Ein Zeitstempel, eine Prozess-ID und eine Dateierweiterung werden bei der Protokollerstellung automatisch hinzugefügt. Mit `stdout` als Präfix des Dateinamens wird eine typische Protokolldatei als *stdout_20180205184032_5412.log* benannt. 
+1. Bearbeiten Sie die Datei *web.config*. Legen Sie **stdoutLogEnabled** auf `true` fest, und ändern Sie den Pfad von **stdoutLogFile** so, dass auf den Ordner *logs* verwiesen wird (Beispiel: `.\logs\stdout`). `stdout` im Pfad ist das Präfix des Protokolldateinamens. Ein Zeitstempel, eine Prozess-ID und eine Dateierweiterung werden bei der Protokollerstellung automatisch hinzugefügt. Mit `stdout` als Präfix des Dateinamens wird eine typische Protokolldatei als *stdout_20180205184032_5412.log* benannt.
 1. Stellen Sie sicher, dass die Identität des Anwendungspools über Schreibberechtigungen für den Ordner *Protokolle* verfügt.
 1. Speichern Sie die aktualisierte Datei *web.config*.
 1. Führen Sie eine Anforderung an die App aus.
@@ -245,24 +241,27 @@ Ein *Speicherabbild* ist eine Momentaufnahme des Systemarbeitsspeichers. Ein Spe
 Abrufen und Analysieren eines Speicherabbilds aus der [Windows-Fehlerberichterstattung (WER)](/windows/desktop/wer/windows-error-reporting):
 
 1. Erstellen Sie einen Ordner zum Speichern von Absturzabbilddateien unter `c:\dumps`. Der App-Pool muss über Schreibzugriff auf den Ordner verfügen.
-1. Führen Sie das [PowerShell-Skript „EnableDumps“](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/troubleshoot/scripts/EnableDumps.ps1) aus:
+1. Führen Sie das [PowerShell-Skript „EnableDumps“](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) aus:
    * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
      ```
+
    * Wenn die App das [Out-of-Process-Hostingmodell](xref:fundamentals/servers/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
 
      ```console
      .\EnableDumps dotnet.exe c:\dumps
      ```
+
 1. Führen Sie die App unter den Bedingungen aus, die dazu führen, dass der Absturz auftritt.
-1. Nachdem der Absturz stattgefunden hat, führen Sie das [PowerShell-Skript „DisableDumps“](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/troubleshoot/scripts/DisableDumps.ps1) aus:
+1. Nachdem der Absturz stattgefunden hat, führen Sie das [PowerShell-Skript „DisableDumps“](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) aus:
    * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console
      .\DisableDumps w3wp.exe
      ```
+
    * Wenn die App das [Out-of-Process-Hostingmodell](xref:fundamentals/servers/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
 
      ```console

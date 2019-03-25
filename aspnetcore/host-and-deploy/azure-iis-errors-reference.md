@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/28/2019
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 1c8cb31b306b38ec17596af0a84f22ca0e3d911c
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 053dcce7f8c59b7afe7e52d2f704c992afce0b67
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346225"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58265176"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Referenz zu häufigen Fehlern bei Azure App Service und IIS mit ASP.NET Core
 
@@ -61,7 +61,7 @@ Nicht zum Betriebssystem gehörende Dateien im Verzeichnis **C:\Windows\SysWOW64
 
 *Gilt für Apps, die von Azure App Services gehostet werden.*
 
-* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM) 
+* **Browser:** HTTP-Fehler 500.0: In-Process-Fehler beim Laden des Handlers für das ASP.NET Core-Modul (ANCM)
 
 * **Anwendungsprotokoll:** Der Aufruf von „hostfxr“ zum Ermitteln des In-Process-Anforderungshandlers ist fehlgeschlagen, ohne native Abhängigkeiten zu ermitteln. Could not find inprocess request handler. Captured output from invoking hostfxr: Es konnte keine kompatible Frameworkversion gefunden werden. Das angegebene Framework „Microsoft.AspNetCore.App“, Version „{VERSION}-preview-\*“ konnte nicht gefunden werden. Die Anwendung „/LM/W3SVC/1416782824/ROOT“ konnte nicht gestartet werden. Fehlercode: „0x8000ffff“.
 
@@ -80,7 +80,7 @@ Problembehandlung:
   * ASP.NET Core {RUNTIME VERSION} (x86) Runtime
   * ASP.NET Core {RUNTIME VERSION} (x64) Runtime
 
-  Starten Sie die App neu. Warten Sie einige Sekunden, bis die App neu startet. 
+  Starten Sie die App neu. Warten Sie einige Sekunden, bis die App neu startet.
 
 * Wenn Sie die App auf einer Vorschauruntime ausführen und sowohl die 32-Bit- als auch die 64-Bit-[Websiteerweiterung](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension) (x86 und x64) installiert sind, deinstallieren Sie die Websiteerweiterung, die nicht der Bitanzahl der App entspricht. Starten Sie die App nach dem Entfernen der Websiteerweiterung neu. Warten Sie einige Sekunden, bis die App neu startet.
 
@@ -201,8 +201,8 @@ Problembehandlung:
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
   ```
-  
-  Installieren Sie alternativ die neueste Version des ASP.NET Core-Hostingpakets. Die neueste Version ist mit den unterstützten ASP.NET Core-Apps abwärtskompatibel.
+
+  Installieren Sie alternativ die neueste Version des ASP.NET Core-Hostingbundles. Die neueste Version ist mit den unterstützten ASP.NET Core-Apps abwärtskompatibel.
 
 ## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Falscher processPath-Wert, fehlende PATH-Variable, Hostingpaket nicht installiert, System/IIS wird nicht neu gestartet, VC++ Redistributable nicht installiert oder dotnet.exe-Zugriffsverletzung
 

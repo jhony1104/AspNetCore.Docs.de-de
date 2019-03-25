@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zu Taghilfsprogrammen und deren Verwendung in ASP.NET Core
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 2/14/2018
+ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 4b9bceb3ce0153af2d9a30c402febe09707145b7
-ms.sourcegitcommit: f5d403004f3550e8c46585fdbb16c49e75f495f3
+ms.openlocfilehash: 7768dd45bdbe40c16176d57a76823cbb9dd0b91b
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2018
-ms.locfileid: "49477305"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264619"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Taghilfsprogramme in ASP.NET Core
 
@@ -122,6 +122,7 @@ Mithilfe der `@tagHelperPrefix`-Anweisung können Sie ein Tagpräfix angeben, um
 ```cshtml
 @tagHelperPrefix th:
 ```
+
 Im nachfolgend Codebild ist das Präfix des Taghilfsprogramms auf `th:` festgelegt, sodass nur die Elemente, die das Präfix `th:` verwenden, Taghilfsprogramme unterstützen (Elemente, für die Taghilfsprogramme aktiviert sind, werden in einer anderen Schriftart dargestellt). Die Elemente `<label>` und `<input>` enthalten das Präfix des Taghilfsprogramms. Für sie sind Taghilfsprogramme aktiviert, für das Element `<span>` hingegen nicht.
 
 ![Bild](intro/_static/thp.png)
@@ -186,37 +187,21 @@ Das `@`-Symbol teilt Razor mit, dass es sich um den Beginn des Codes handelt. Be
 new {@class="caption"}
 ```
 
-Dabei handelt es sich um ein anonymes Objekt, das verwendet wird, um Attribute darzustellen. Da es sich bei <strong>class</strong> um ein reserviertes Schlüsselwort in C# handelt, sollten Sie das `@`-Symbol verwenden, um C# zu zwingen, „@class=“ als Symbol (Eigenschaftenname) zu interpretieren. Front-End-Designern (also Entwickler, die mit HTML, CSS oder JavaScript und anderen Clients vertraut sind, sich aber nicht mit C# und Razor auskennen) ist diese Zeile wahrscheinlich nicht bekannt. Die gesamte Zeile muss ohne Hilfe von IntelliSense erstellt werden.
+Dabei handelt es sich um ein anonymes Objekt, das verwendet wird, um Attribute darzustellen. Da es sich bei `class` um ein reserviertes Schlüsselwort in C# handelt, sollten Sie das `@`-Symbol verwenden, um C# zu zwingen, `@class=` als Symbol (Eigenschaftenname) zu interpretieren. Front-End-Designern (also Entwickler, die mit HTML, CSS oder JavaScript und anderen Clients vertraut sind, sich aber nicht mit C# und Razor auskennen) ist diese Zeile wahrscheinlich nicht bekannt. Die gesamte Zeile muss ohne Hilfe von IntelliSense erstellt werden.
 
 Wenn Sie das `LabelTagHelper`-Taghilfsprogramm verwenden, kann dasselbe Markup wie folgt geschrieben sein:
 
-![Bild](intro/_static/label2.png)
+```cshtml
+<label class="caption" asp-for="FirstName"></label>
+```
 
 Wenn Sie die Taghilfsprogrammversion verwenden und `<l` im Visual Studio-Editor eingeben, zeigt IntelliSense passende Elemente an:
 
 ![Bild](intro/_static/label.png)
 
-Mithilfe von IntelliSense können Sie die gesamte Zeile schreiben. Das `LabelTagHelper`-Taghilfsprogramm legt standardmäßig den Inhalt des `asp-for`-Attributwerts („FirstName“) auf „First Name“ fest. Es konvertiert also Eigenschaften mit Binnenmajuskel in einen Satz, der aus dem Eigenschaftennamen besteht, und in den ein Leerzeichen vor jedem Binnenmajuskel eingefügt wird. Das folgende Markup
+Mithilfe von IntelliSense können Sie die gesamte Zeile schreiben.
 
-![Bild](intro/_static/label2.png)
-
-generiert:
-
-```cshtml
-<label class="caption" for="FirstName">First Name</label>
-```
-
-Der konvertierte Inhalt wird nicht verwendet, wenn Sie Inhalt zu `<label>` hinzufügen. Zum Beispiel:
-
-![Bild](intro/_static/1stName.png)
-
-generiert:
-
-```cshtml
-<label class="caption" for="FirstName">Name First</label>
-```
-
-Im folgenden Bild wird der Formularanteil der *Views/Account/Register.cshtml*-Razor-Ansicht angezeigt, der über die veraltete ASP.NET Core 4.5.x MVC-Vorlage generiert wird, die im Lieferumfang von Visual Studio 2015 enthalten ist.
+Im folgenden Codeausschnitt wird der Formularteil der *Views/Account/Register.cshtml*-Razor-Ansicht angezeigt, der über die ASP.NET Core 4.5.x MVC-Vorlage generiert wird, die in Visual Studio enthalten ist.
 
 ![Bild](intro/_static/regCS.png)
 

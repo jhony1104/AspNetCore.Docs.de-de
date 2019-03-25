@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 368b1774ba977ec8020a02d48705200fd54c3bbd
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 83f5d4bdc3d5872109649818b61a6dbb656fd8be
+ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56102980"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58264838"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
@@ -123,6 +123,7 @@ Abgesehen vom Attribut `Bind`, ist der Try-Catch-Block die einzige Änderung, di
 Das Attribut `ValidateAntiForgeryToken` hilft dabei, Angriffe mit der Websiteübergreifenden Anforderungsfälschung (CSRF) zu verhindern. Der [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injiziert das Token automatisch in die Ansicht und ist enthalten, wenn das Formular vom Benutzer gesendet wird. Das Token wird vom Attribut `ValidateAntiForgeryToken` überprüft. Weitere Informationen über CSRF finden Sie unter [Anti-Request Forgery (Antianforderungsfälschung)](../../security/anti-request-forgery.md).
 
 <a id="overpost"></a>
+
 ### <a name="security-note-about-overposting"></a>Sicherheitshinweis zum Overposting
 
 Das Attribut `Bind`, das der eingerüstete Code in der Methode `Create` enthält, ist eine Möglichkeit zum Schutz vor Overposting in Erstellungsszenarios. Nehmen wir beispielsweise an, die Entität „Student“ enthält die Eigenschaft `Secret`, die von dieser Webseite nicht festgelegt werden soll.
@@ -182,7 +183,7 @@ Als eine bewährte Methode zum Verhindern von Overposting, sind die Felder in de
 
 Aus diesen Änderungen resultiert, dass die Methodensignatur der HttpPost-Methode `Edit` identisch mit der HttpGet-Methode `Edit` ist. Daher haben Sie die Methode in `EditPost` umbenannt.
 
-### <a name="alternative-httppost-edit-code-create-and-attach"></a>Alternativer HttpPost-Edit-Code: Erstellen und anfügen
+### <a name="alternative-httppost-edit-code-create-and-attach"></a>Alternativer HttpPost-Edit-Code: Erstellen und Anfügen
 
 Der empfohlene HttpPost-Edit-Code stellt sicher, dass nur geänderte Spalten aktualisiert werden und behält Daten in Eigenschaften, die Sie nicht in der Modellbindung einschließen wollen. Dieser Read-First-Ansatz benötigt jedoch einen zusätzlichen Datenbank-Lesevorgang und kann zu komplexeren Code für die Behandlung von Nebenläufigkeitskonflikten führen. Alternativ können Sie dem EF-Kontext eine Entität anfügen, die von der Modellbindung erstellt wurde, und diese als geändert markieren. (Aktualisieren Sie ihr Projekt nicht mit diesem Code, er wird hier nur gezeigt, um eine optionale Vorgehensweise zu veranschaulichen.)
 
