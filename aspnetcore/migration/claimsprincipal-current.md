@@ -4,14 +4,14 @@ author: mjrousos
 description: Informationen Sie zum Migrieren von ClaimsPrincipal.Current zum Abrufen des aktuellen authentifizierten Benutzers Identität und Ansprüche in ASP.NET Core.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/04/2018
+ms.date: 03/26/2019
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 35c3389798041e141c45bf0a76fa9d7285212768
-ms.sourcegitcommit: d53e0cc71542b92de867bcce51575b054886f529
+ms.openlocfilehash: 526cc3cf3a58a656e2a1b162cfaccacc7694dc51
+ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41837793"
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58488641"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>Migrieren von ClaimsPrincipal.Current
 
@@ -56,4 +56,4 @@ Es gibt mehrere Optionen zum Abrufen des aktuellen authentifizierten Benutzers `
   * Rufen Sie eine Instanz des `IHttpContextAccessor` während des Starts und in eine statische Variable zu speichern. Die Instanz wird für Code verfügbar gemacht, die zuvor den aktuellen Benutzer über eine statische Eigenschaft abgerufen wurde.
   * Abrufen des aktuellen Benutzers `ClaimsPrincipal` mit `HttpContextAccessor.HttpContext?.User`. Wenn dieser Code, außerhalb des Kontexts einer HTTP-Anforderung verwendet wird die `HttpContext` ist null.
 
-Der letzte option, mit `IHttpContextAccessor`, im Gegensatz zu ASP.NET Core-Prinzipien (vorzugsweise eingefügte Abhängigkeiten statische Abhängigkeiten) ist. Planen, schließlich entfernen, die Abhängigkeit von der statischen `IHttpContextAccessor` Helper. Es kann hilfreich Brücke, die jedoch sein, wenn große vorhandene ASP.NET-Anwendungen zu migrieren, die zuvor verwendet haben `ClaimsPrincipal.Current`.
+Der letzte option, mit einem `IHttpContextAccessor` Instanz in einer statischen Variablen gespeichert ist, wird die ASP.NET Core-Prinzipien (vorzugsweise eingefügte Abhängigkeiten statische Abhängigkeiten), umgekehrte. Schließlich abrufen möchten, um `IHttpContextAccessor` stattdessen über Dependency Injection-Instanzen. Kann eine statische Hilfsmethode nützlich Brücke, die jedoch sein, wenn große vorhandene ASP.NET-Anwendungen zu migrieren, die zuvor verwendet haben `ClaimsPrincipal.Current`.

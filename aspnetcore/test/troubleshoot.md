@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: In diesem Artikel werden Warnungen und Fehler erläutert. Außerdem erfahren Sie, wie die Problembehandlung in ASP.NET Core-Projekten funktioniert.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/26/2019
+ms.date: 03/13/2019
 uid: test/troubleshoot
-ms.openlocfilehash: 1f53375a6aa504c989920a0bff83b400b7bd83ec
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 3d755b2f0c509d65dea86bbe719e42935d87d546
+ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208842"
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58488740"
 ---
 # <a name="troubleshoot-aspnet-core-projects"></a>Problembehandlung bei ASP.NET Core-Projekten
 
@@ -33,8 +33,6 @@ In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende 
 
 > Es werden sowohl 32- und 64-Bit-Versionen von .NET Core SDK installiert. Nur Vorlagen aus die 64-Bit-Versionen installiert ' "c:"\\Programmdateien\\Dotnet\\Sdk\\"wird angezeigt.
 
-![Screenshot des Dialogfelds mit die Warnmeldung OneASP.NET](troubleshoot/_static/both32and64bit.png)
-
 Diese Warnung wird angezeigt, wenn sowohl die 32-Bit-(x86) als auch die 64-Bit (x 64) Versionen der [.NET Core SDK](https://www.microsoft.com/net/download/all) installiert sind. Häufige Gründe, die beide Versionen installiert sind enthalten:
 
 * Sie ursprünglich heruntergeladen das .NET Core SDK-Installationsprogramm, das mit einem 32-Bit-Computer, aber klicken Sie dann über kopiert und es auf einem 64-Bit-Computer installiert.
@@ -49,24 +47,28 @@ In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende 
 
 > Das .NET Core SDK ist an mehreren Speicherorten installiert. Nur Vorlagen aus dem SDK unter "C:\\Programmdateien\\Dotnet\\Sdk\\" wird angezeigt.
 
-![Screenshot des Dialogfelds mit die Warnmeldung OneASP.NET](troubleshoot/_static/multiplelocations.png)
-
 Diese Meldung angezeigt, wenn Sie mindestens eine Installation von .NET Core SDK in einem Verzeichnis außerhalb des haben *C:\\Programmdateien\\Dotnet\\Sdk\\*. Dies geschieht normalerweise, wenn das .NET Core SDK auf einem Computer mit Kopieren/Einfügen, anstatt das MSI-Installationsprogramm bereitgestellt wurde.
 
 Deinstallieren Sie alle 32-Bit .NET Core SDKs und Laufzeiten um diese Warnung zu vermeiden. Deinstallieren von **Systemsteuerung** > **Programme und Funktionen** > **deinstallieren oder Ändern eines Programms**. Wenn Sie verstehen, warum die Warnung tritt auf, und deren Auswirkungen, können Sie die Warnung ignorieren.
 
 ### <a name="no-net-core-sdks-were-detected"></a>Es wurden keine .NET Core SDKs erkannt.
 
-In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende Warnung angezeigt:
+* In der Visual Studio **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende Warnung angezeigt:
 
-> Es wurden keine .NET Core SDKs erkannt, stellen Sie sicher, dass sie in der Umgebungsvariablen "PATH" enthalten sind.
+  > Es wurden keine .NET Core SDKs erkannt, stellen Sie sicher, sie befinden sich in der Umgebungsvariablen `PATH`.
 
-![Screenshot des Dialogfelds mit die Warnmeldung OneASP.NET](troubleshoot/_static/NoNetCore.png)
+* Beim Ausführen einer `dotnet` können die Warnung wird angezeigt als:
 
-Diese Warnung wird angezeigt, wenn die Umgebungsvariable `PATH` verweist nicht auf alle .NET Core-SDKs auf dem Computer (z. B. `C:\Program Files\dotnet\` und `C:\Program Files (x86)\dotnet\`). Um dieses Problem zu beheben:
+  > Es war nicht möglich, alle installierten Dotnet SDKs zu finden.
 
-* Installieren, oder stellen Sie sicher, dass das .NET Core SDK installiert ist. Abrufen der neuesten Installation von [.NET Downloads](https://dotnet.microsoft.com/download). 
-* Überprüfen Sie, ob die `PATH` Umgebungsvariable verweist auf den Speicherort, in dem das SDK installiert ist. Der Installer normalerweise legt der `PATH`.
+Diese Warnungen angezeigt, wenn die Umgebungsvariable `PATH` verweist nicht auf alle .NET Core-SDKs auf dem Computer. Um dieses Problem zu beheben:
+
+* Installieren Sie das .NET Core-SDK. Abrufen der neuesten Installation von [.NET Downloads](https://dotnet.microsoft.com/download).
+* Überprüfen Sie, ob die `PATH` Umgebungsvariable verweist auf den Speicherort, in dem das SDK installiert ist (`C:\Program Files\dotnet\` für 64-Bit/X64 oder `C:\Program Files (x86)\dotnet\` für 32-Bit/X86). Das SDK-Installationsprogramm normalerweise legt der `PATH`. Installieren Sie immer die gleiche Bitness SDKs und Laufzeiten auf dem gleichen Computer.
+
+### <a name="missing-sdk-after-installing-the-net-core-hosting-bundle"></a>Fehlendes SDK nach der Installation von .NET Core Hosting-Paket
+
+Installieren der [Paket für .NET Core Hosting](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle) ändert die `PATH` wann es installiert die .NET Core-Runtime, um auf die 32-Bit (x 86)-Version von .NET Core zu verweisen (`C:\Program Files (x86)\dotnet\`). Dies kann dazu führen fehlende SDKs bei 32-Bit (x 86) .NET Core `dotnet` -Befehl wird verwendet, ([wurden keine .NET Core SDKs erkannt](#no-net-core-sdks-were-detected)). Um dieses Problem zu beheben, verschieben `C:\Program Files\dotnet\` an eine Position vor dem `C:\Program Files (x86)\dotnet\` auf die `PATH`.
 
 ## <a name="obtain-data-from-an-app"></a>Abrufen von Daten aus einer App
 
