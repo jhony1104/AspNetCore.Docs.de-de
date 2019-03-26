@@ -5,7 +5,7 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/26/2019
+ms.date: 03/23/2019
 uid: host-and-deploy/azure-apps/index
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
@@ -78,7 +78,17 @@ Die Middleware für die Integration von IIS, die ForwardedHeadersMiddleware konf
 
 ## <a name="monitoring-and-logging"></a>Überwachung und Protokollierung
 
-In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core-Protokollierungserweiterungen**. Die Erweiterung ermöglicht die Protokollierung in Azure.
+::: moniker range=">= aspnetcore-3.0"
+
+In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core Logging Integration** (ASP.NET Core-Protokollierungsintegration). Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core-Protokollierungserweiterungen**. Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
+
+::: moniker-end
 
 In den folgenden Artikeln finden Sie Informationen zum Überwachen, Protokollieren und zur Problembehandlung:
 

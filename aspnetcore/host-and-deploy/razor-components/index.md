@@ -5,7 +5,7 @@ description: 'Hier erfahren Sie, wie Sie Razor Components- und Blazor-Apps mithi
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/29/2019
+ms.date: 03/22/2019
 uid: host-and-deploy/razor-components/index
 ---
 # <a name="host-and-deploy-razor-components"></a>Hosten und Bereitstellen von Razor Components
@@ -284,7 +284,7 @@ Wenn Sie anstelle einer Organisationswebsite eine Projektwebsite verwenden, füg
 
 Mit dem [serverseitigen Hostingmodell](xref:razor-components/hosting-models#server-side-hosting-model) wird Razor Components über eine ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine SignalR-Verbindung verarbeitet.
 
-Die App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer serverseitigen Bereitstellung enthält Visual Studio die **Blazor-Projektvorlage (serverseitig in ASP.NET Core)** (`blazorserver`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
+Die App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer serverseitigen Bereitstellung enthält Visual Studio die Projektvorlage **Razor-Komponenten** (oder die `razorcomponents`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
 
 <!--
 
