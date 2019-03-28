@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2018
 uid: mvc/controllers/testing
-ms.openlocfilehash: c8a374f3e3ecfdef1a02e685aecc4e2fcbfcbf48
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 429af1fb6d0388a5c57894851832969e1ef629e2
+ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410361"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58327432"
 ---
 # <a name="test-controller-logic-in-aspnet-core"></a>Testen von Controllerlogik in ASP.NET Core
 
@@ -126,7 +126,7 @@ Im dritten `Create`-Test (`Create_ReturnsNewlyCreatedIdeaForSession`) wird über
 
 ## <a name="test-actionresultlttgt"></a>Testen von ActionResult&lt;T&gt;
 
-In ASP.NET Core 2.1 oder höher ermöglicht es [ActionResult&lt;T&gt;](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult`1>) Ihnen, einen Typ, der von `ActionResult` abgeleitet ist, oder einen bestimmten Typ zurückzugeben.
+In ASP.NET Core 2.1 oder höher ermöglicht es [ActionResult&lt;T&gt;](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) Ihnen, einen Typ, der von `ActionResult` abgeleitet ist, oder einen bestimmten Typ zurückzugeben.
 
 Die Beispielanwendung enthält eine Methode, die ein `List<IdeaDTO>` für eine bestimmte Sitzung `id` zurückgibt. Wenn die Sitzung `id` nicht vorhanden ist, gibt der Controller <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> zurück:
 
@@ -144,7 +144,7 @@ Der erste Test bestätigt, dass der Controller ein `ActionResult`, aber keine ni
 Für eine gültige Sitzungs-`id` bestätigt der zweite Test, dass die Methode Folgendes zurückgibt:
 
 * Ein `ActionResult` mit einem `List<IdeaDTO>`-Typ.
-* [ActionResult&lt;T&gt;.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Value*) ist ein `List<IdeaDTO>`-Typ.
+* [ActionResult&lt;T&gt;.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) ist ein `List<IdeaDTO>`-Typ.
 * Das erste Element in der Liste ist eine gültige Idee, die der in der Pseudositzung gespeicherten Idee entspricht (abgerufen durch den Aufruf von `GetTestSession`).
 
 [!code-csharp[](testing/sample/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -170,8 +170,8 @@ Der zweite Test überprüft, ob ein <xref:Microsoft.AspNetCore.Mvc.ControllerBas
 Für eine gültige Sitzungs-`id` bestätigt der letzte Test Folgendes:
 
 * Die Methode gibt ein `ActionResult` mit einem `BrainstormSession`-Typ zurück.
-* [ActionResult&lt;T&gt;.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Result*) ist ein <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>. `CreatedAtActionResult` ist analog zu einer *201 Created*-Antwort mit einem `Location`-Header.
-* [ActionResult&lt;T&gt;.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Value*) ist ein `BrainstormSession`-Typ.
+* [ActionResult&lt;T&gt;.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) ist ein <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>. `CreatedAtActionResult` ist analog zu einer *201 Created*-Antwort mit einem `Location`-Header.
+* [ActionResult&lt;T&gt;.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) ist ein `BrainstormSession`-Typ.
 * Der Pseudoaufruf zum Aktualisieren der Sitzung (`UpdateAsync(testSession)`) wurde aufgerufen. Der `Verifiable`-Methodenaufruf wird überprüft, indem `mockRepo.Verify()` in den Assertionen ausgeführt wird.
 * Zwei `Idea`-Objekte werden für die Sitzung zurückgegeben.
 * Das letzte Element (die `Idea`, die durch den Pseudoaufruf `UpdateAsync` hinzugefügt wurde) stimmt mit der `newIdea` überein, die der Sitzung im Test hinzugefügt wurde.

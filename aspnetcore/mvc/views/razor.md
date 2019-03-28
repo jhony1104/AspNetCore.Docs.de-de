@@ -5,12 +5,12 @@ description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasier
 ms.author: riande
 ms.date: 10/26/2018
 uid: mvc/views/razor
-ms.openlocfilehash: 254c85ee9e74dc72170b19d27fbc5f1ae7ccd3dc
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 53d4dc608fbfd45bcc015a3af83f5d87f86c7f15
+ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264758"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58327364"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -534,7 +534,7 @@ Mit Razor-Vorlagen können Sie einen Ausschnitt der Benutzeroberfläche mit dem 
 @<tag>...</tag>
 ```
 
-Im folgenden Beispiel wird veranschaulicht, wie ein auf Vorlagen basierender Razor-Delegat als <xref:System.Func`2> angegeben wird. Der Typ [dynamic](/dotnet/csharp/programming-guide/types/using-type-dynamic) wird für den Parameter der Methode angegeben, die der Delegat einkapselt. Ein [object](/dotnet/csharp/language-reference/keywords/object)-Typ wird als Rückgabewert des Delegats angegeben. Die Vorlage wird mit <xref:System.Collections.Generic.List`1> von `Pet` mit einer `Name`-Eigenschaft verwendet.
+Im folgenden Beispiel wird veranschaulicht, wie ein auf Vorlagen basierender Razor-Delegat als <xref:System.Func%602> angegeben wird. Der Typ [dynamic](/dotnet/csharp/programming-guide/types/using-type-dynamic) wird für den Parameter der Methode angegeben, die der Delegat einkapselt. Ein [object](/dotnet/csharp/language-reference/keywords/object)-Typ wird als Rückgabewert des Delegats angegeben. Die Vorlage wird mit <xref:System.Collections.Generic.List%601> von `Pet` mit einer `Name`-Eigenschaft verwendet.
 
 ```csharp
 public class Pet
@@ -599,7 +599,7 @@ Sie können auch eine Razor-Inlinevorlage als Argument für eine Methode angeben
 
 Wird die Liste mit Haustieren aus dem vorherigen Beispiel verwendet, wird die `Repeat`-Methode wie folgt aufgerufen:
 
-* <xref:System.Collections.Generic.List`1> von `Pet`
+* <xref:System.Collections.Generic.List%601> von `Pet`
 * Anzahl der Wiederholungen für jedes Haustier
 * Inlinevorlage zur Verwendung für die Elemente einer unsortierten Liste
 
