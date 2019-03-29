@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 72e3ae1c4be18edaa2e7f1906cf65269e5ed2288
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: cc020d7397b03f8ecd6cebf98a14b4aaebb47940
+ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665495"
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58488688"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -128,6 +128,12 @@ Diese Schnittstelle wird durch einen konkreten Typ (`MyDependency`) implementier
 
 `IMyDependency` und `ILogger<TCategoryName>` müssen im Dienstcontainer registriert werden. `IMyDependency` ist in `Startup.ConfigureServices` registriert. `ILogger<TCategoryName>` wird von der Protokollierungsabstraktionsinfrastruktur registriert. Es handelt sich also um einen [von einem Framework bereitgestellten Dienst](#framework-provided-services), der standardmäßig vom Framework registriert wird.
 
+Der Container löst `ILogger<TCategoryName>` unter Verwendung der [(generischen) offenen Typen](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types) auf, wodurch die Notwendigkeit entfällt, jeden [(generischen) konstruierten Typ](/dotnet/csharp/language-reference/language-specification/types#constructed-types) zu registrieren:
+
+```csharp
+services.AddSingleton(typeof(ILogger<T>), typeof(Logger<T>));
+```
+
 In der Beispiel-App ist der Dienst `IMyDependency` mit dem konkreten Typ `MyDependency` registriert. Die Registrierung schränkt die Lebensdauer des Diensts auf die Lebensdauer einer einzelnen Anforderung ein. Auf die [Dienstlebensdauer](#service-lifetimes) wird später in diesem Artikel eingegangen.
 
 ::: moniker range=">= aspnetcore-2.1"
@@ -145,7 +151,7 @@ In der Beispiel-App ist der Dienst `IMyDependency` mit dem konkreten Typ `MyDepe
 > [!NOTE]
 > Jede Erweiterungsmethode vom Typ `services.Add{SERVICE_NAME}` fügt Dienste hinzu (und konfiguriert diese möglicherweise). So fügt beispielsweise `services.AddMvc()` die erforderlichen Dienste Razor Pages und MVC hinzu. Es wird empfohlen, dass Apps dieser Konvention folgen. Platzieren Sie Erweiterungsmethoden im Namespace [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection), um Gruppen von Dienstregistrierungen zu kapseln.
 
-Wenn für den Dienstkonstruktor ein Grundtyp erforderlich ist, z. B. `string`, kann dieser über [Konfiguration](xref:fundamentals/configuration/index) und das [Optionsmuster](xref:fundamentals/configuration/options) eingefügt werden:
+Wenn für den Dienstkonstruktor ein [integrierter Typ](/dotnet/csharp/language-reference/keywords/built-in-types-table) erforderlich ist, z. B. `string`, kann dieser Typ über [Konfiguration](xref:fundamentals/configuration/index) oder das [Optionsmuster](xref:fundamentals/configuration/options) eingefügt werden:
 
 ```csharp
 public class MyDependency : IMyDependency

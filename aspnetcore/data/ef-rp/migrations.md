@@ -5,12 +5,12 @@ description: In diesem Tutorial verwenden Sie zunächst das EF Core-Migrationsfe
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 5848e5e1e45708c3ab5c2a79614111662701aa77
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: 1803c6d3956121e4e7091f4f951917425e87c335
+ms.sourcegitcommit: 7d6019f762fc5b8cbedcd69801e8310f51a17c18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320159"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419471"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)
 
@@ -133,7 +133,7 @@ Zu einem frühen Entwicklungszeitpunkt wurde `EnsureCreated` verwendet. In diese
 * Er kann *nicht* mit Migrationen verwendet werden.
 * Er dient zum Testen oder schnellen Erstellen von Prototypen an Positionen, an denen die Datenbank häufig gelöscht und neu erstellt wird.
 
-Entfernen Sie die folgende Zeile aus `DbInitializer`:
+Entfernen Sie `EnsureCreated`:
 
 ```csharp
 context.Database.EnsureCreated();

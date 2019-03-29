@@ -5,18 +5,18 @@ description: Erfahren Sie, wie Back-End-Dienste mit ASP.NET Core MVC zur Unterst
 ms.author: riande
 ms.date: 10/14/2016
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 3ebd30ad1ffbd66b256e7f3954a07d682f76a754
-ms.sourcegitcommit: 517bb1366da2a28b0014e384fa379755c21b47d8
+ms.openlocfilehash: 13149dd4b877b8c17d33d428779ad31d8c51ae9e
+ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2018
-ms.locfileid: "47230177"
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58488727"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>Erstellen von Back-End-Diensten für native mobile Apps mit ASP.NET Core
 
 Von [Steve Smith](https://ardalis.com/)
 
-Mobile Apps können problemlos mit Back-End-Diensten von ASP.NET Core kommunizieren.
+Mobile Apps können mit Back-End-Diensten von ASP.NET Core kommunizieren. Anweisungen zum Herstellen einer Verbindung zwischen lokalen Webdienste von iOS-Simulatoren und Android-Emulatoren finden Sie unter [Herstellen von Verbindungen mit lokalen Webdiensten von iOS-Simulatoren und Android-Emulatoren](/xamarin/cross-platform/deploy-test/connect-to-local-web-services).
 
 [Anzeigen oder Herunterladen von Beispielcode für Back-End-Dienste](https://github.com/aspnet/Docs/tree/master/aspnetcore/mobile/native-mobile-backend/sample)
 
