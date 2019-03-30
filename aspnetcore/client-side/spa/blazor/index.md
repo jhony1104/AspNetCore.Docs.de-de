@@ -5,7 +5,7 @@ description: 'Entdecken Sie ASP.NET Core Blazor, eine neue Möglichkeit, interak
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/11/2019
+ms.date: 03/27/2019
 uid: spa/blazor/index
 ---
 # <a name="introduction-to-blazor"></a>Einführung in Blazor
@@ -50,7 +50,7 @@ Blazor unterstützt Kernfunktionen, die für die meisten Apps erforderlich sind,
 
 Um die Größe der heruntergeladenen App zu verringern, wird nicht verwendeter Code aus der App entfernt, wenn sie vom [IL-Linker (Intermediate Language)](xref:host-and-deploy/razor-components/configure-linker) veröffentlicht wird.
 
-Blazor ist das clientseitige Hostingmodell von Razor Components. Da Razor Components die Renderinglogik einer Komponente von der Art und Weise entkoppeln, wie Benutzeroberflächenupdates angewendet werden, besteht Flexibilität hinsichtlich des Hostings von Razor Components. Verwenden Sie ASP.NET Core Razor Components, um Razor Components auf dem Server in einer ASP.NET Core-App zu hosten, in der Benutzeroberflächenupdates über eine SignalR-Verbindung verarbeitet werden. Weitere Informationen finden Sie unter <xref:razor-components/hosting-models#server-side-hosting-model>. 
+Blazor ist das clientseitige Hostingmodell von Razor Components. Da Razor Components die Renderinglogik einer Komponente von der Art und Weise entkoppeln, wie Benutzeroberflächenupdates angewendet werden, besteht Flexibilität hinsichtlich des Hostings von Razor Components. Verwenden Sie ASP.NET Core Razor Components, um Razor Components auf dem Server in einer ASP.NET Core-App zu hosten, in der Benutzeroberflächenupdates über eine SignalR-Verbindung verarbeitet werden. Weitere Informationen finden Sie unter <xref:razor-components/index> und <xref:razor-components/hosting-models#server-side-hosting-model>. 
 
 ## <a name="components"></a>Komponenten
 
