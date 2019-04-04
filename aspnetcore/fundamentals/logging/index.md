@@ -1,11 +1,17 @@
 ---
 title: Protokollierung in ASP.NET Core
 author: tdykstra
-description: 'Erfahren Sie mehr über das Protokollierungsframework in ASP.NET Core. Lernen Sie die integrierten Anbieter für die Protokollierung kennen, und erfahren Sie mehr über beliebte Anbieter von Drittanbietern.'
+description: Erfahren Sie mehr über das Protokollierungsframework in ASP.NET Core. Lernen Sie die integrierten Anbieter für die Protokollierung kennen, und erfahren Sie mehr über beliebte Anbieter von Drittanbietern.
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: fundamentals/logging/index
+ms.openlocfilehash: c6543ec1f2295c21c6a693ac8bd16ee07ec11381
+ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58327406"
 ---
 # <a name="logging-in-aspnet-core"></a><span data-ttu-id="2e25f-104">Protokollierung in ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="2e25f-104">Logging in ASP.NET Core</span></span>
 

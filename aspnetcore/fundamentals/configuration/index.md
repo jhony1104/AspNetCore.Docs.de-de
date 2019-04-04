@@ -1,12 +1,18 @@
 ---
 title: Konfiguration in ASP.NET Core
 author: guardrex
-description: 'In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.'
+description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/11/2019
 uid: fundamentals/configuration/index
+ms.openlocfilehash: 52450460af59a8da4fc6b24e3aa83d55385e8c77
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750958"
 ---
 # <a name="configuration-in-aspnet-core"></a><span data-ttu-id="20842-103">Konfiguration in ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="20842-103">Configuration in ASP.NET Core</span></span>
 

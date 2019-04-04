@@ -1,10 +1,16 @@
 ---
 title: 'ASP.NET Core MVC mit EF-Core: Tutorialreihe'
 author: rick-anderson
-description: null
+description: ''
 ms.author: tdykstra
 ms.date: 03/27/2017
 uid: data/ef-mvc/index
+ms.openlocfilehash: 4a7b79faccdc76f090192e80d0450ca01ed8b58a
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750677"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a><span data-ttu-id="08709-102">ASP.NET Core MVC mit EF-Core: Tutorialreihe</span><span class="sxs-lookup"><span data-stu-id="08709-102">ASP.NET Core MVC with EF Core - tutorial series</span></span>
 

@@ -1,11 +1,17 @@
 ---
 title: Hosten von ASP.NET Core unter Windows mit IIS
 author: guardrex
-description: 'Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Information Services (IIS) gehostet werden.'
+description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Information Services (IIS) gehostet werden.
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/23/2019
 uid: host-and-deploy/iis/index
+ms.openlocfilehash: 477568dd64fb1442011abb4229299e7dece40da9
+ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58488753"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a><span data-ttu-id="7d0eb-103">Hosten von ASP.NET Core unter Windows mit IIS</span><span class="sxs-lookup"><span data-stu-id="7d0eb-103">Host ASP.NET Core on Windows with IIS</span></span>
 
