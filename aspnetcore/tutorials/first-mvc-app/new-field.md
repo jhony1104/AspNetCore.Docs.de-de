@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 44487b91c8bbd353157a5f5f1b834187e47e2f3e
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: cf8bb67703b564a711105123117498c94ab44e68
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264651"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750519"
 ---
 # <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines neuen Felds zu einer ASP.NET Core MVC-App
 
@@ -38,7 +38,7 @@ Erstellen Sie die App (STRG+UMSCHALT+B).
 Da Sie der `Movie`-Klasse ein neues Feld hinzugefügt haben, müssen Sie die Positivliste für die Bindung aktualisieren, damit diese neue Eigenschaft eingeschlossen wird. Aktualisieren Sie in *MoviesController.cs* das `[Bind]`-Attribut für die Aktionsmethoden `Create` und `Edit` so, dass die `Rating`-Eigenschaft eingeschlossen wird:
 
 ```csharp
-[Bind("ID,Title,ReleaseDate,Genre,Price,Rating")]
+[Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
    ```
 
 Aktualisieren Sie die Ansichtsvorlagen, um die neue `Rating`-Eigenschaft in der Browseransicht anzuzeigen, zu erstellen und zu bearbeiten.

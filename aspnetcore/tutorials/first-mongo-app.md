@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 01/31/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 91d8be6cd9160eefe56731d23d5dc7ba18eb6a8f
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 5b8a0c963940d65545579b7120edac3571e4ad2a
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665456"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750688"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Erstellen einer Web-API mit ASP.NET Core und MongoDB
 
@@ -242,6 +242,7 @@ Die `BookService`-Klasse verwendet die folgenden `MongoDB.Driver`-Mitglieder, um
 
     * Verwendet die `BookService`-Klasse, um CRUD-Vorgänge auszuführen.
     * Enthält Aktionsmethoden zur Unterstützung von GET-, POST-, PUT- und DELETE HTTP-Anforderungen.
+    * Die <xref:System.Web.Http.ApiController.CreatedAtRoute*>-Methode gibt die Antwort „201“ zurück, bei der es sich um die Standardantwort für eine HTTP-POST-Methode handelt, die eine neue Ressource auf dem Server erstellt. `CreatedAtRoute` fügt der Antwort außerdem einen Adressheader hinzu. Der Adressheader gibt den URI des neu erstellten To-Do-Elements zurück. Siehe [10.2.2 201 Created](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
 1. Erstellen Sie die App, und führen Sie sie aus.
 1. Navigieren Sie zu `http://localhost:<port>/api/books` in Ihrem Browser. Die folgende JSON-Antwort wird angezeigt:
 

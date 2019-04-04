@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schni
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 01/25/2019
+ms.date: 03/30/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: a4026addaa55d463c41aadd0a7a39606c88fcb84
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.openlocfilehash: 270727443f091306ac3e4ce4e2ceb99b88bbc609
+ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56744208"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58809207"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -199,7 +199,7 @@ Verwenden Sie einen der folgenden Ansätze, um den anforderungsspezifischen Zust
 
 Erweiterungsmethoden werden bereitgestellt, um die Verwendung von Polly-Richtlinien mit konfigurierten `HttpClient`-Instanzen zu aktivieren. Die Polly-Erweiterungen sind im NuGet-Paket [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) verfügbar. Dieses Paket ist nicht im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten. Zum Verwenden der Erweiterungen sollte `<PackageReference />` explizit im Projekt enthalten sein.
 
-[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/HttpClientFactorySample.csproj?highlight=9)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/HttpClientFactorySample.csproj?highlight=10)]
 
 Nach der Wiederherstellung dieses Pakets sind Erweiterungsmethoden verfügbar, um das Hinzufügen von Polly-basierten Handlern in Clients zu unterstützen.
 
