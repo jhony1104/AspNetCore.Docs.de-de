@@ -2,10 +2,17 @@
 title: ASP.NET Core – Grundlagen
 author: rick-anderson
 description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Core-Apps kennen.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/02/2019
+ms.date: 03/31/2019
 uid: fundamentals/index
+ms.openlocfilehash: a1fed574db0baab391ebb9cfc44664ceddbfa69b
+ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58809288"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -21,31 +28,23 @@ In der `Startup`-Klasse:
 * wird Code, der Dienste konfiguriert (oder *registriert*) der `Startup.ConfigureServices`-Methode hinzugefügt. *Dienste* sind Komponenten, die von der App verwendet werden. Ein Entity Framework Core-Kontextobjekt beispielsweise ist ein Dienst.
 * Code zum Konfigurieren der Pipeline zur Anforderungsverarbeitung wird der `Startup.Configure`-Methode hinzugefügt. Die Pipeline besteht aus mehreren *Middleware*-Komponenten. Eine Middleware kann beispielsweise Anforderungen für statische Dateien verarbeiten oder HTTP-Anforderungen zu HTTPS umleiten. Jede Middleware führt asynchrone Operationen in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung.
 
-::: moniker range=">= aspnetcore-2.0"
-
 Beispiel für eine `Startup`-Klasse:
 
 [!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=3,12)]
 
-::: moniker-end
-
-Weitere Informationen finden Sie unter [App-Start](xref:fundamentals/startup).
+Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
 
 ## <a name="dependency-injection-services"></a>Abhängigkeitsinjektion (Dienste)
 
 ASP.NET Core verfügt über ein integriertes DI-Framework (Dependency Injection), durch das konfigurierte Dienste für die Klassen einer App bereitgestellt werden. Eine Möglichkeit zum Abrufen einer Instanz eines Diensts in einer Klasse ist das Erstellen eines Konstruktors mit einem Parameter des erforderlichen Typs. Der Parameter kann der Diensttyp oder eine Schnittstelle sein. Das DI-System stellt den Dienst zur Laufzeit bereit.
 
-::: moniker range=">= aspnetcore-2.0"
-
 Hier ist eine Klasse, in der Dependency Injection verwendet wird, um ein Entity Framework Core-Kontextobjekt abzurufen. Die hervorgehobene Zeile ist ein Beispiel für die Konstruktorinjektion:
 
 [!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
 
-::: moniker-end
-
 Obwohl die Dependency Injection integriert ist, können Sie hier, falls gewünscht, einen IoC-Container eines Drittanbieters einbinden.
 
-Weitere Informationen finden Sie unter [Dependency injection (Abhängigkeitsinjektion)](xref:fundamentals/dependency-injection).
+Weitere Informationen finden Sie unter <xref:fundamentals/dependency-injection>.
 
 ## <a name="middleware"></a>Middleware
 
@@ -53,17 +52,13 @@ Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren Middlewarekompone
 
 Gemäß Konvention wird eine Middlewarekomponente der Pipeline durch Aufrufen ihrer `Use...`-Erweiterungsmethode in der `Startup.Configure`-Methode hinzugefügt. Um beispielsweise das Rendering statischer Dateien zu aktivieren, rufen Sie `UseStaticFiles` auf.
 
-::: moniker range=">= aspnetcore-2.0"
-
 Der hervorgehobene Code in dem folgenden Beispiel konfiguriert die Pipeline zur Anforderungsverarbeitung:
 
 [!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=14-16)]
 
-::: moniker-end
-
 ASP.NET Core enthält eine Reihe umfangreicher integrierter Middleware. Außerdem können Sie benutzerdefinierte Middleware erstellen.
 
-Weitere Informationen finden Sie unter [Middleware](xref:fundamentals/middleware/index).
+Weitere Informationen finden Sie unter <xref:fundamentals/middleware/index>.
 
 <a id="host"/>
 
@@ -81,59 +76,55 @@ Der wichtigste Grund für das Einschließen aller unabhängigen Ressourcen der A
 
 Der Code zum Erstellen eines Hosts befindet sich in `Program.Main` und folgt dem [Generatormuster](https://wikipedia.org/wiki/Builder_pattern). Zum Konfigurieren jeder Ressource, die zum Host gehört, werden Methoden aufgerufen. Um alles zu bündeln und das Hostobjekt zu instanziieren, wird eine Generatormethode aufgerufen.
 
-::: moniker range="<= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 2.x verwendet einen Webhost (die `WebHost`-Klasse) für Web-Apps. Das Framework bietet die `CreateDefaultBuilder`-Methode, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichtet:
+In ASP.NET Core 3.0 kann ein generischer Host (`Host`-Klasse) oder ein Webhost (`WebHost`-Klasse) in einer Web-App verwendet werden. Ein generischer Host wird empfohlen, und ein Webhost ist für Abwärtskompatibilität verfügbar.
+
+Das Framework bietet die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults`, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
-* Laden der Konfiguration aus *appsettings.json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Quellen.
+* Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Konfigurationsquellen.
 * Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
+
+Hier ist ein Beispielcode für das Erstellen eines Hosts: Die Methoden zum Einrichten des Hosts mit häufig verwendeten Optionen sind hervorgehoben:
+
+[!code-csharp[](index/snapshots/3.x/Program1.cs?highlight=9-10)]
+
+Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und <xref:fundamentals/host/web-host>.
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.0 <= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
+
+ASP.NET Core 2.x verwendet einen Webhost (`WebHost`-Klasse) für Web-Apps. Das Framework bietet die `CreateDefaultBuilder`-Methode, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichtet:
+
+* Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
+* Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Konfigurationsquellen.
+* Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
 
 Hier ist ein Beispielcode für das Erstellen eines Hosts:
 
 [!code-csharp[](index/snapshots/2.x/Program1.cs?highlight=9)]
 
-Weitere Informationen finden Sie unter [Webhost](xref:fundamentals/host/web-host).
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
-
-In ASP.NET Core 3.0 kann ein Webhost (`WebHost`-Klasse) oder ein generischer Host (`Host`-Klasse) in einer Web-App verwendet werden. Ein generischer Host wird empfohlen, und ein Webhost ist für Abwärtskompatibilität verfügbar.
-
-Das Framework bietet die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults`, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
-
-* Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
-* Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen und Befehlszeilenargumenten.
-* Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
-
-Hier ist ein Beispielcode für das Erstellen eines Hosts: Die Methoden, mit denen der Host mit häufig verwendeten Optionen eingerichtet wird, sind hervorgehoben.
-
-[!code-csharp[](index/snapshots/3.x/Program1.cs?highlight=9-10)]
-
-Weitere Informationen finden Sie unter [Generischer Host](xref:fundamentals/host/generic-host) und [Webhost](xref:fundamentals/host/web-host).
+Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host>.
 
 ::: moniker-end
 
 ### <a name="advanced-host-scenarios"></a>Erweiterte Hostszenarios
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
-Der Webhost wurde entwickelt, um eine HTTP-Serverimplementierung einzuschließen, welche für andere Arten von .NET-Apps nicht benötigt wird. Ab Version 2.1 ist der generische Host (`Host`-Klasse) für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host können Sie querschnittliche Funktionen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App in anderen App-Typen verwenden. Weitere Informationen finden Sie unter [Generischer Host](xref:fundamentals/host/generic-host).
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
-
-Der generische Host ist für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host können Sie querschnittliche Funktionen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App in anderen App-Typen verwenden. Weitere Informationen finden Sie unter [Generischer Host](xref:fundamentals/host/generic-host).
+Der generische Host ist für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host (`Host`-Klasse) können andere App-Typen querschnittliche Frameworkerweiterungen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
 
 ::: moniker-end
 
-Sie können auch den Host zum Ausführen von Hintergrundaufgaben verwenden. Weitere Informationen finden Sie unter [Hintergrundaufgaben](xref:fundamentals/host/hosted-services).
+::: moniker range="< aspnetcore-3.0"
+
+Der Webhost wurde entwickelt, um eine HTTP-Serverimplementierung einzuschließen, die für andere Arten von .NET-Apps nicht benötigt wird. Ab ASP.NET Core 2.1 ist der generische Host (`Host`-Klasse) für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host können andere App-Typen querschnittliche Frameworkerweiterungen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
+
+::: moniker-end
+
+Sie können auch den Host zum Ausführen von Hintergrundaufgaben verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/hosted-services>.
 
 ## <a name="servers"></a>Server
 
@@ -182,7 +173,7 @@ ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestr
 
 ::: moniker-end
 
-Weitere Informationen finden Sie unter [Server](xref:fundamentals/servers/index).
+Weitere Informationen finden Sie unter <xref:fundamentals/servers/index>.
 
 ## <a name="configuration"></a>Konfiguration
 
@@ -190,9 +181,9 @@ ASP.NET Core bietet ein Konfigurationsframework, das Einstellungen als Name/Wert
 
 Zum Beispiel könnten Sie angeben, dass die Konfiguration aus *appsettings.json* und Umgebungsvariablen stammt. Wenn dann der *ConnectionString*-Wert angefordert wird, sucht das Framework zuerst in der *appsettings.json*-Datei. Wenn der Wert sowohl dort als auch in einer Umgebungsvariablen gefunden wird, hat der Wert aus der Umgebungsvariablen Vorrang.
 
-Zum Verwalten von vertraulichen Konfigurationsdaten wie Passwörtern bietet ASP.NET Core ein [Geheimnisverwaltungstool](xref:security/app-secrets). Für Produktionsgeheimnisse empfehlen wir [Azure Key Vault](/aspnet/core/security/key-vault-configuration).
+Zum Verwalten von vertraulichen Konfigurationsdaten wie Passwörtern bietet ASP.NET Core ein [Geheimnisverwaltungstool](xref:security/app-secrets). Für Produktionsgeheimnisse empfehlen wir [Azure Key Vault](xref:security/key-vault-configuration).
 
-Weitere Informationen finden Sie unter [Konfiguration](xref:fundamentals/configuration/index).
+Weitere Informationen finden Sie unter <xref:fundamentals/configuration/index>.
 
 ## <a name="options"></a>Optionen
 
@@ -209,21 +200,17 @@ var options = new WebSocketOptions
 app.UseWebSockets(options);
 ```
 
-Weitere Informationen finden Sie unter [Optionen](xref:fundamentals/configuration/options).
+Weitere Informationen finden Sie unter <xref:fundamentals/configuration/options>.
 
 ## <a name="environments"></a>Umgebungen
 
 Ausführungsumgebungen wie *Entwicklung*, *Staging* und *Produktion* sind in ASP.NET Core von besonderer Bedeutung. Um die Umgebung anzugeben, in der eine App ausgeführt wird, stellen Sie die `ASPNETCORE_ENVIRONMENT`-Umgebungsvariable ein. ASP.NET Core liest diese Umgebungsvariable beim Start der App und speichert den Wert in einer `IHostingEnvironment`-Implementierung. Das Umgebungsobjekt ist in der gesamten App mithilfe der Dependency Injection verfügbar.
 
-::: moniker range=">= aspnetcore-2.0"
-
 Im folgenden Codebeispiel aus der `Startup`-Klasse wird die App so konfiguriert, dass detaillierte Fehlerinformationen nur bereitgestellt werden, wenn die App in der Entwicklung ausgeführt wird:
 
 [!code-csharp[](index/snapshots/2.x/Startup2.cs?highlight=3-6)]
 
-::: moniker-end
-
-Weitere Informationen finden Sie unter [Umgebungen](xref:fundamentals/environments).
+Weitere Informationen finden Sie unter <xref:fundamentals/environments>.
 
 ## <a name="logging"></a>Protokollierung
 
@@ -239,23 +226,19 @@ ASP.NET Core unterstützt eine Protokollierungs-API, die mit einer Vielzahl von 
 
 Schreiben Sie Protokolle aus jeder Stelle im Code einer App, indem Sie ein `ILogger`-Objekt aus Dependency Injection abrufen und Protokollmethoden aufrufen.
 
-::: moniker range=">= aspnetcore-2.0"
-
 Hier ist ein Beispielcode, in dem ein `ILogger`-Objekt mit Konstruktorinjektion und den hervorgehobenen Aufrufen der Protokollierungsmethode verwendet wird.
 
 [!code-csharp[](index/snapshots/2.x/TodoController.cs?highlight=5,13,17)]
 
-::: moniker-end
-
 Mithilfe der `ILogger`-Schnittstelle können Sie eine beliebige Anzahl von Feldern an den Protokollierungsanbieter übergeben. Die Felder werden häufig dazu verwendet, eine Meldungszeichenfolge zu erstellen, der Anbieter kann sie aber auch als einzelne Felder an einen Datenspeicher senden. Dieses Funktion ermöglicht Protokollierungsanbietern das Implementieren von [semantischer Protokollierung, auch bezeichnet als strukturierte Protokollierung](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
 
-Weitere Informationen finden Sie unter [Protokollierung](xref:fundamentals/logging/index).
+Weitere Informationen finden Sie unter <xref:fundamentals/logging/index>.
 
 ## <a name="routing"></a>Routing
 
 Eine *Route* ist ein URL-Muster, das einem Handler zugeordnet ist. Der Handler ist normalerweise eine Razor-Seite, eine Aktionsmethode in einem MVC-Controller oder einer Middleware. Mit ASP.NET Core-Routing können Sie steuern, welche URLs von Ihrer App verwendet werden.
 
-Weitere Informationen finden Sie unter [Routing](xref:fundamentals/routing).
+Weitere Informationen finden Sie unter <xref:fundamentals/routing>.
 
 ## <a name="error-handling"></a>Fehlerbehandlung
 
@@ -266,9 +249,7 @@ ASP.NET Core verfügt über integrierte Funktionen zur Fehlerbehandlung wie beis
 * statische Statuscodeseiten
 * Fehlerbehandlung während des Starts
 
-Weitere Informationen finden Sie unter [Fehlerbehandlung](xref:fundamentals/error-handling).
-
-::: moniker range=">= aspnetcore-2.1"
+Weitere Informationen finden Sie unter <xref:fundamentals/error-handling>.
 
 ## <a name="make-http-requests"></a>Übermitteln von HTTP-Anforderungen
 
@@ -278,32 +259,30 @@ Eine Implementierung von `IHttpClientFactory` ist verfügbar zum Erstellen von `
 * Unterstützt die Registrierung und Verkettung von mehreren delegierenden Handlern, um eine Pipeline für die Middleware für ausgehende Anforderungen zu erstellen. Dieses Muster ähnelt der eingehenden Pipeline für Middleware in ASP.NET Core. Das Muster bietet einen Mechanismus zum Verwalten von übergreifenden Belangen bezüglich HTTP-Anforderungen, einschließlich der Zwischenspeicherung, Fehlerbehandlung, Serialisierung und Protokollierung.
 * Integrierbar in *Polly*, eine beliebte Drittanbieter-Bibliothek zur Behandlung vorübergehender Fehler.
 * Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientMessageHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
-* Fügt eine konfigurierbare Protokollierungsfunktion (über *ILogger*) für alle Anforderungen hinzu, die über Clients gesendet werden, die von der Factory erstellt wurden.
+* Eine konfigurierbare Protokollierungsfunktion wird (über `ILogger`) für alle Anforderungen hinzugefügt, die über Clients gesendet werden, die von der Factory erstellt wurden.
 
-Weitere Informationen finden Sie unter [Initiieren von HTTP-Anforderungen](xref:fundamentals/http-requests).
-
-::: moniker-end
+Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
 
 ## <a name="content-root"></a>Inhaltsstammverzeichnis
 
 Der Inhaltsstamm ist der Basispfad zu einem beliebigen von der App verwendeten privaten Inhalt wie beispielsweise ihren Razor-Dateien. Standardmäßig entspricht der Inhaltsstamm dem Basispfad der ausführbaren Datei, mit der die Anwendung gehostet wird. Ein alternativer Speicherort kann beim [Erstellen des Hosts](#host) angegeben werden.
 
-::: moniker range="<= aspnetcore-2.2"
-
-Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/web-host#content-root).
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
 Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/generic-host#content-root).
 
 ::: moniker-end
 
+::: moniker range="< aspnetcore-3.0"
+
+Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/web-host#content-root).
+
+::: moniker-end
+
 ## <a name="web-root"></a>Webstammverzeichnis
 
-Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen statischen Ressourcen wie CSS, JavaScript und Bilddateien. Die Middleware für statische Dateien stellt standardmäßig nur Dateien aus dem Webstammverzeichnis (und Unterverzeichnissen) bereit. Der Pfad für den Webstamm ist standardmäßig auf *\<content root>/wwwroot* eingestellt, ein anderer Speicherort kann aber beim [Erstellen des Hosts](#host) angegeben werden.
+Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen statischen Ressourcen wie CSS, JavaScript und Bilddateien. Die Middleware für statische Dateien stellt standardmäßig nur Dateien aus dem Webstammverzeichnis (und Unterverzeichnissen) bereit. Der Pfad für den Webstamm ist standardmäßig auf *{Content Root}/wwwroot* festgelegt, beim [Erstellen des Hosts](#host) kann jedoch ein anderer Speicherort angegeben werden.
 
 In Razor-Dateien (*.cshtml*) zeigen die Tilde und der Schrägstrich `~/` auf den Webstamm. Pfade, die mit `~/` beginnen, werden als virtuelle Pfade bezeichnet.
 
-Weitere Informationen finden Sie im Artikel zu [statischen Dateien](xref:fundamentals/static-files).
+Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.
