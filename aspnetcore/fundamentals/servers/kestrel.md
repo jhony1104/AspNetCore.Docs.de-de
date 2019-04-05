@@ -4,14 +4,14 @@ author: guardrex
 description: Einführung in Kestrel, dem plattformübergreifenden Webserver für ASP.NET Core.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 03/04/2019
+ms.date: 03/28/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5fc6c78f3eb76fcf3dd663c8d878250f0051f153
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: ab56f01c000c5404b58d79727b5b426d801081c2
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665638"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58751071"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -122,7 +122,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-Wenn die App `CreateDefaultBuilder` nicht aufruft, um den Host einzurichten, rufen Sie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> **auf,** bevor Sie `ConfigureKestrel` aufrufen:
+Wenn die App `CreateDefaultBuilder` nicht aufruft, um den Host einzurichten, rufen Sie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> **auf**, bevor Sie `ConfigureKestrel` aufrufen:
 
 ```csharp
 public static void Main(string[] args)
@@ -424,7 +424,7 @@ Verwenden Sie Folgendes zum Angeben der URLs:
 * Den Hostkonfigurationsschlüssel `urls`
 * Die Erweiterungsmethode `UseUrls`
 
-Der Wert, der mit diesen Ansätzen angegeben wird, kann mindestens ein HTTP- oder HTTPS-Endpunkt sein (HTTPS wenn ein Standardzertifikat verfügbar ist). Konfigurieren Sie den Wert als eine durch Semikolons getrennte Liste (z.B. `"Urls": "http://localhost:8000; http://localhost:8001"`).
+Der Wert, der mit diesen Ansätzen angegeben wird, kann mindestens ein HTTP- oder HTTPS-Endpunkt sein (HTTPS wenn ein Standardzertifikat verfügbar ist). Konfigurieren Sie den Wert als eine durch Semikolons getrennte Liste (z.B. `"Urls": "http://localhost:8000;http://localhost:8001"`).
 
 Weitere Informationen zu diesen Ansätzen finden Sie unter [Server-URLs](xref:fundamentals/host/web-host#server-urls) und [Außerkraftsetzen der Konfiguration](xref:fundamentals/host/web-host#override-configuration).
 
@@ -447,9 +447,83 @@ Rufen Sie die <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOption
 
 Gibt die Konfiguration von `Action` zum Ausführen von jedem angegebenen Endpunkt an. Mehrmalige Aufrufe von `ConfigureEndpointDefaults` ersetzen vorherige Instanzen von `Action` mit der zuletzt angegebenen `Action`.
 
+::: moniker range=">= aspnetcore-3.0"
+
+```csharp
+Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.ConfigureKestrel(serverOptions =>
+        {
+            serverOptions.ConfigureEndpointDefaults(configureOptions =>
+            {
+                configureOptions.NoDelay = true;
+            });
+        });
+        webBuilder.UseStartup<Startup>();
+    });
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+```csharp
+public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .ConfigureKestrel((context, options) =>
+        {
+            options.ConfigureEndpointDefaults(configureOptions =>
+            {
+                configureOptions.NoDelay = true;
+            });
+        });
+```
+
+::: moniker-end
+
 ### <a name="configurehttpsdefaultsactionlthttpsconnectionadapteroptionsgt"></a>ConfigureHttpsDefaults(Action&lt;HttpsConnectionAdapterOptions&gt;)
 
 Gibt die Konfiguration von `Action` zum Ausführen von jedem HTTPS-Endpunkt an. Mehrmalige Aufrufe von `ConfigureHttpsDefaults` ersetzen vorherige Instanzen von `Action` mit der zuletzt angegebenen `Action`.
+
+::: moniker range=">= aspnetcore-3.0"
+
+```csharp
+Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.ConfigureKestrel(serverOptions =>
+        {
+            serverOptions.ConfigureHttpsDefaults(options =>
+            {
+                // certificate is an X509Certificate2
+                options.ServerCertificate = certificate;
+            });
+        });
+        webBuilder.UseStartup<Startup>();
+    });
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+```csharp
+public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .ConfigureKestrel((context, options) =>
+        {
+            options.ConfigureHttpsDefaults(httpsOptions =>
+            {
+                // certificate is an X509Certificate2
+                httpsOptions.ServerCertificate = certificate;
+            });
+        });
+```
+
+::: moniker-end
 
 ### <a name="configureiconfiguration"></a>Configure(IConfiguration)
 
@@ -495,6 +569,8 @@ Die im Folgenden beschriebenen unterstützten Konfigurationen:
 *Keine Konfiguration*
 
 Kestrel überwacht `http://localhost:5000` und `https://localhost:5001` (wenn ein Standardzertifikat verfügbar ist).
+
+<a name="configuration"></a>
 
 *Ersetzen des Standardzertifikats aus der Konfiguration*
 
