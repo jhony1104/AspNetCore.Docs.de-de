@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen Sie zum Erstellen und Verwenden von Authorization Policy-Handler für das Erzwingen von autorisierungsanforderungen in einer ASP.NET Core-app.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2017
+ms.date: 04/05/2019
 uid: security/authorization/policies
-ms.openlocfilehash: e72f15c28fb7b62c671dd6475cc323cacce42de6
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: ea9d687d3810c104d5b3fa39033849c21569709b
+ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208320"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068169"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinienbasierte Autorisierung in ASP.NET Core
 
@@ -96,7 +96,10 @@ Beachten Sie, dass die `Handle` -Methode in der die [Handler Beispiel](#security
 
 * Um Fehler zu gewährleisten, selbst wenn andere Handler für die Anforderung erfolgreich ist, rufen Sie `context.Fail`.
 
-Bei Festlegung auf `false`, [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) Eigenschaft (verfügbar in ASP.NET Core 1.1 und höher) wird verkürzt, die Ausführung der Handler bei `context.Fail` aufgerufen wird. `InvokeHandlersAfterFailure` Standardmäßig `true`, in diesem Fall alle Ereignishandler aufgerufen werden. Dadurch können Anforderungen zum Erzeugen von Nebeneffekten, z. B. die Protokollierung, die immer erfolgen, wenn `context.Fail` in einen anderen Handler aufgerufen wurde.
+Wenn Sie einen Handler aufruft `context.Succeed` oder `context.Fail`, alle anderen Ereignishandler werden immer noch aufgerufen. Dadurch können Anforderungen zum Erzeugen von Nebeneffekten, z. B. die Protokollierung, die stattfindet, wenn auch einen anderen Handler wurde erfolgreich überprüft oder Fehler bei Anforderung. Bei Festlegung auf `false`, [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) Eigenschaft (verfügbar in ASP.NET Core 1.1 und höher) wird verkürzt, die Ausführung der Handler bei `context.Fail` aufgerufen wird. `InvokeHandlersAfterFailure` Standardmäßig `true`, in diesem Fall alle Ereignishandler aufgerufen werden.
+
+> [!NOTE]
+> Authorization-Ereignishandler werden aufgerufen, selbst wenn die Authentifizierung fehlschlägt.
 
 <a name="security-authorization-policies-based-multiple-handlers"></a>
 
