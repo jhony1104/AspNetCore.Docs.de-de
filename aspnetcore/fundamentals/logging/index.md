@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: c6543ec1f2295c21c6a693ac8bd16ee07ec11381
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: 065b2016d3a2dcc2243ec6869e027c5fabe4dad8
+ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327406"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068403"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -110,7 +110,7 @@ Zum Schreiben von Protokollen in der `Program`-Klasse rufen Sie eine `ILogger`-I
 
 ### <a name="no-asynchronous-logger-methods"></a>Keine asynchronen Protokollierungsmethoden
 
-Die Protokollierung sollte so schnell erfolgen, dass sich die Leistungskosten von asynchronem Code nicht lohnen. Wenn Ihr Protokollierungsdatenspeicher langsam ist, schreiben Sie nicht direkt in ihn. Erwägen Sie, die Protokollnachrichten zunächst in einen schnellen Speicher zu schreiben und sie dann später in den langsamen Speicher zu verschieben. Führen Sie die Protokollierung beispielsweise in einer Nachrichtenwarteschlange durch, die von einem anderen Prozess gelesen und in einem langsamen Speicher persistiert wird.
+Die Protokollierung sollte so schnell erfolgen, dass sich die Leistungskosten von asynchronem Code nicht lohnen. Wenn Ihr Protokollierungsdatenspeicher langsam ist, schreiben Sie nicht direkt in ihn. Erwägen Sie, die Protokollnachrichten zunächst in einen schnellen Speicher zu schreiben und sie dann später in den langsamen Speicher zu verschieben. Wenn Sie beispielsweise in SQL Server protokollieren, möchten Sie dies nicht direkt in einer `Log`-Methode tun, da die `Log`-Methoden synchron sind. Fügen Sie stattdessen die Protokollmeldungen synchron zu einer Warteschlange im Arbeitsspeicher hinzu, und rufen Sie mithilfe eines Hintergrundworkers die Nachrichten aus der Warteschlange ab, um sie dann asynchron per Pushvorgang an SQL Server zu übertragen.
 
 ## <a name="configuration"></a>Konfiguration
 
@@ -148,7 +148,7 @@ Die `Logging`-Eigenschaft kann den `LogLevel` und Protokollanbietereigenschaften
 
 Die `LogLevel`-Eigenschaft unter `Logging` gibt den Mindest[grad](#log-level) an, der für ausgewählte Kategorien protokolliert werden soll. Im Beispiel protokollieren die Kategorien `System` und `Microsoft` mit dem Grad `Information` und alle anderen Kategorien mit dem Grad `Debug`.
 
-Weitere Eigenschaften unter `Logging` geben Protokollierungsanbieter an. Das Beispiel bezieht sich auf den Konsolenanbieter. Wenn ein Anbieter [Protokollbereiche](#log-scopes) unterstützt, gibt `IncludeScopes` an, ob sie aktiviert sind. Eine Anbietereigenschaft (z.B. `Console` im Beispiel) kann auch eine `LogLevel`-Eigenschaft angeben. `LogLevel` unter einem Anbieter gibt die Grade an, die für diesen Anbieter protokolliert werden sollen.
+Weitere Eigenschaften unter `Logging` geben Protokollierungsanbieter an. Das Beispiel bezieht sich auf den Konsolenanbieter. Wenn ein Anbieter [Protokollbereiche](#log-scopes) unterstützt, gibt `IncludeScopes` an, ob sie aktiviert sind. Eine Anbietereigenschaft (z.B. `Console` im Beispiel) kann auch eine `LogLevel`-Eigenschaft angeben. `LogLevel` Unter einem Anbieter gibt die Grade an, die für diesen Anbieter protokolliert werden sollen.
 
 Wenn Grade in `Logging.{providername}.LogLevel` angegeben werden, überschreiben sie alle Angaben in `Logging.LogLevel`.
 
@@ -168,7 +168,7 @@ Wenn Grade in `Logging.{providername}.LogLevel` angegeben werden, überschreiben
 }
 ```
 
-`LogLevel`-Schlüssel stellen Protokollnamen dar. Der `Default`-Schlüssel gilt für Protokolle, die nicht explizit aufgeführt werden. Der Wert entspricht dem auf das jeweilige Protokoll angewendeten [Protokolliergrad](#log-level).
+`LogLevel` Schlüssel stellen Protokollnamen dar. Der `Default`-Schlüssel gilt für Protokolle, die nicht explizit aufgeführt werden. Der Wert entspricht dem auf das jeweilige Protokoll angewendeten [Protokolliergrad](#log-level).
 
 ::: moniker-end
 
@@ -249,7 +249,7 @@ Um die Kategorie explizit anzugeben, rufen Sie `ILoggerFactory.CreateLogger` auf
 
 ::: moniker-end
 
-`ILogger<T>` entspricht dem Aufruf von `CreateLogger` mit dem vollqualifizierten Typnamen `T`.
+`ILogger<T>` Entspricht dem Aufruf von `CreateLogger` mit dem vollqualifizierten Typnamen `T`.
 
 ## <a name="log-level"></a>Protokolliergrad
 
@@ -285,11 +285,11 @@ ASP.NET Core definiert die folgenden Protokolliergrade. Die Reihenfolge reicht v
 
 * Information = 2
 
-  Zur Nachverfolgung des allgemeinen Ablaufs der App. Diese Protokolle haben typischerweise einen langfristigen Nutzen. Ein Beispiel: `Request received for path /api/todo`
+  Zur Nachverfolgung des allgemeinen Ablaufs der App. Diese Protokolle haben typischerweise einen langfristigen Nutzen. Beispiel: `Request received for path /api/todo`
 
 * Warning = 3
 
-  Für ungewöhnliche oder unerwartete Ereignisse im App-Verlauf. Dazu können Fehler oder andere Bedingungen gehören, die zwar nicht zum Beenden der App führen, aber eventuell untersucht werden müssen. Behandelte Ausnahmen sind eine typische Verwendung für den Protokolliergrad `Warning`. Ein Beispiel: `FileNotFoundException for file quotes.txt.`
+  Für ungewöhnliche oder unerwartete Ereignisse im App-Verlauf. Dazu können Fehler oder andere Bedingungen gehören, die zwar nicht zum Beenden der App führen, aber eventuell untersucht werden müssen. Behandelte Ausnahmen sind eine typische Verwendung für den Protokolliergrad `Warning`. Beispiel: `FileNotFoundException for file quotes.txt.`
 
 * Error = 4
 
@@ -611,7 +611,7 @@ warn: TodoApi.Controllers.TodoController[4000]
 ASP.NET Core wird mit den folgenden Anbietern bereitgestellt:
 
 * [Konsole](#console-provider)
-* [Debuggen](#debug-provider)
+* [Debug](#debug-provider)
 * [EventSource](#eventsource-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
@@ -770,7 +770,7 @@ Im folgenden Beispiel wird ein `TraceSource`-Anbieter konfiguriert, der Protokol
 
 Informationen zur Protokollierung in Azure finden Sie in den folgenden Abschnitten:
 
-* [Azure App Service-Anbieter](#azure-app-service-provider)
+* [Der Azure App Service-Anbieter](#azure-app-service-provider)
 * [Azure-Protokollstreaming](#azure-log-streaming)
 
 ::: moniker range=">= aspnetcore-1.1"
@@ -877,7 +877,7 @@ Das Application Insights SDK kann Protokolle erfassen und melden, die von der AS
 
 ## <a name="third-party-logging-providers"></a>Protokollierungsanbieter von Drittanbietern
 
-Protokollierungsframeworks von Drittanbietern aufgeführt, die mit ASP.NET Core funktionieren:
+Protokollierungsframeworks von Drittanbietern, die mit ASP.NET Core funktionieren:
 
 * [elmah.io](https://elmah.io/) ([GitHub-Repository](https://github.com/elmahio/Elmah.Io.Extensions.Logging))
 * [Gelf](http://docs.graylog.org/en/2.3/pages/gelf.html) ([GitHub-Repository](https://github.com/mattwcole/gelf-extensions-logging))
