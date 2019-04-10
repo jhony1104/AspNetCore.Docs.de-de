@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie Daten im Arbeitsspeicher in ASP.NET Core zwischenspeichern können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/11/2019
+ms.date: 04/11/2019
 uid: performance/caching/memory
-ms.openlocfilehash: c115e43b9dd4f838ab9600c2e105d86732d857ad
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 6433df36023b79bc679186bee8b0a92371661dbe
+ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208269"
+ms.lasthandoff: 04/09/2019
+ms.locfileid: "59425048"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Zwischenspeichern in Speicher in ASP.NET Core
 
@@ -21,7 +21,7 @@ Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [John Luo](https://githu
 
 ## <a name="caching-basics"></a>Grundlagen der Zwischenspeicherung
 
-Caching kann erheblich die Leistung und Skalierbarkeit einer App verbessert werden, verringern den erforderlichen Aufwand zum Generieren von Inhalt. Funktionsweise der Zwischenspeicherung am stärksten bei den Daten, die nur selten ändern. Caching stellt eine Kopie der Daten, die viel zurückgegeben werden, können aus der Originalquelle schneller. Sie schreiben und Testen Sie Ihre app so, dass keine zwischengespeicherten Daten abhängig.
+Caching kann erheblich die Leistung und Skalierbarkeit einer App verbessert werden, verringern den erforderlichen Aufwand zum Generieren von Inhalt. Funktionsweise der Zwischenspeicherung am stärksten bei den Daten, die nur selten ändern. Caching stellt eine Kopie der Daten, die viel zurückgegeben werden, können aus der Originalquelle schneller. Apps sollten geschrieben und getestet, **nie** hängen von zwischengespeicherten Daten.
 
 ASP.NET Core unterstützt mehrere unterschiedliche Caches gelten. Die einfachste Cache basiert auf der [IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache), steht für einen Cache im Arbeitsspeicher des Webservers gespeichert. Apps, die auf eine Serverfarm mit mehreren Servern ausgeführt werden sollten sicherstellen, dass Sitzungen Kurznotiz bei Verwendung von in-Memory-Cache. Persistente Sitzungen stellen Sie sicher, dass nachfolgende Anforderungen von einem Client, die alle auf dem gleichen Server erfolgen. Z. B. Azure-Web-apps verwenden [Application Request Routing](https://www.iis.net/learn/extensions/planning-for-arr) (ARR), alle nachfolgende Anforderungen auf denselben Server weitergeleitet.
 
@@ -43,7 +43,7 @@ In-Memory-Cache kann jedes beliebige Objekt speichern. die Schnittstelle für ve
 * Alle [.NET Implementierung](/dotnet/standard/net-standard#net-implementation-support) , die auf .NET Standard 2.0 oder höher. Beispiel: ASP.NET Core 2.0 oder höher.
 * .NET Framework 4.5 oder höher.
 
-["Microsoft.Extensions.Caching.Memory"](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (in diesem Thema beschrieben) wird empfohlen, `System.Runtime.Caching` / `MemoryCache` da es besser in ASP.NET Core integriert ist. Z. B. `IMemoryCache` funktioniert nativ in ASP.NET Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+["Microsoft.Extensions.Caching.Memory"](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (in diesem Artikel beschrieben) wird empfohlen, `System.Runtime.Caching` / `MemoryCache` da es besser in ASP.NET Core integriert ist. Z. B. `IMemoryCache` funktioniert nativ in ASP.NET Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
 
 Verwendung `System.Runtime.Caching` / `MemoryCache` als Brücke Kompatibilität beim Portieren von Code von ASP.NET 4.x zu ASP.NET Core.
 
@@ -53,7 +53,7 @@ Verwendung `System.Runtime.Caching` / `MemoryCache` als Brücke Kompatibilität 
 * Der Cache verwendet eine wertvolle Ressource, die Arbeitsspeicher. Cache Wachstum zu beschränken:
   * Führen Sie **nicht** externe Eingaben wie den Zugriffsschlüssel für den Cache verwenden.
   * Verwenden Sie Ablaufzeiten, um den Cache verursachte Wachstum zu begrenzen.
-  * [Verwenden Sie SetSize, Größe und SizeLimit Beschränken der Größe des Caches](#use-setsize-size-and-sizelimit-to-limit-cache-size)
+  * [Verwenden Sie zum Beschränken der Größe des Caches SetSize, Größe und SizeLimit](#use-setsize-size-and-sizelimit-to-limit-cache-size). Die ASP.NET Core-Runtime wird die Cachegröße, die basierend auf nicht ausreichendem Arbeitsspeicher nicht beschränkt. Es obliegt dem Entwickler, die Größe des Caches zu beschränken.
 
 ## <a name="using-imemorycache"></a>Verwenden von IMemoryCache
 
@@ -93,7 +93,7 @@ Die aktuelle Uhrzeit und die Cachezeit werden angezeigt:
 
 [!code-cshtml[](memory/sample/WebCache/Views/Home/Cache.cshtml)]
 
-Die zwischengespeicherten `DateTime` Wert im Cache bleibt, während Anforderungen innerhalb des Zeitlimits (und keine Entfernung aufgrund von ungenügendem Arbeitsspeicher) vorhanden sind. Die folgende Abbildung zeigt die aktuelle Uhrzeit und einem älteren Zeitpunkt aus dem Cache abgerufen werden:
+Die zwischengespeicherten `DateTime` Wert im Cache bleibt, während Anforderungen innerhalb des Zeitlimits vorhanden sind. Die folgende Abbildung zeigt die aktuelle Uhrzeit und einem älteren Zeitpunkt aus dem Cache abgerufen werden:
 
 ![Ansicht "Index" mit zwei verschiedenen Uhrzeiten angezeigt](memory/_static/time.png)
 
@@ -122,7 +122,7 @@ Im folgenden Beispiel:
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>Verwenden Sie SetSize, Größe und SizeLimit Beschränken der Größe des Caches
 
-Ein `MemoryCache` -Instanz kann optional angeben und gilt eine größenbeschränkung. Grenzwert für die Arbeitsspeichergröße verfügt keine definierte Maßeinheit, da der Cache keinen Mechanismus, um die Größe der Einträge messen verfügt. Wenn die Cache-Speicher-größenbeschränkung festgelegt ist, müssen alle Einträge Größe angeben. Die angegebene Größe ist in Einheiten, die der Entwickler entscheidet.
+Ein `MemoryCache` -Instanz kann optional angeben und gilt eine größenbeschränkung. Grenzwert für die Arbeitsspeichergröße verfügt keine definierte Maßeinheit, da der Cache keinen Mechanismus, um die Größe der Einträge messen verfügt. Wenn die Cache-Speicher-größenbeschränkung festgelegt ist, müssen alle Einträge Größe angeben. Die ASP.NET Core-Runtime wird die Cachegröße, die basierend auf nicht ausreichendem Arbeitsspeicher nicht beschränkt. Es obliegt dem Entwickler, die Größe des Caches zu beschränken. Die angegebene Größe ist in Einheiten, die der Entwickler entscheidet.
 
 Zum Beispiel:
 
