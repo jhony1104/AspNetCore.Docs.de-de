@@ -4,15 +4,15 @@ description: Mithilfe dieses Tutorials führen Sie Updates für verwandte Daten 
 author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 1606b872df2df839266ef17efee1948065c4efae
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 6add725430380f0855fe660a70b90a4546ef0637
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209413"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750909"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Aktualisieren verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -35,7 +35,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)](read-related-data.md)
+* [Lesen relevanter Daten](read-related-data.md)
 
 ## <a name="customize-courses-pages"></a>Passen Sie die Seite „Kurse“ an
 
@@ -123,7 +123,7 @@ Bei der Bearbeitung eines Dozentendatensatzes sollten Sie auch die Bürozuweisun
 
 Ändern Sie in der *InstructorsController.cs*-Datei den Code in der HttpGet-Methode `Edit`, sodass diese die `OfficeAssignment`-Eigenschaft der Instructor-Entität lädt und `AsNoTracking` aufruft:
 
-[!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=9,10&name=snippet_EditGetOA)]
+[!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=8-11&name=snippet_EditGetOA)]
 
 Ersetzen Sie die HttpPost-Methode `Edit` durch den folgenden Code, damit diese Updates für die Bürozuweisungen verarbeiten kann:
 
@@ -225,7 +225,7 @@ Fügen Sie in der *Views/Instructors/Edit.cshtml*-Datei ein **Kurse**-Feld mit e
 
 <a id="notepad"></a>
 > [!NOTE]
-> Wenn Sie den Code in Visual Studio einfügen, werden Zeilenumbrüche so geändert, dass der Code unterbrochen wird. Drücken Sie einmal Strg+Z, um die automatische Formatierung rückgängig zu machen. Damit werden die Zeilenumbrüche korrigiert, damit sie dem entsprechen, was Sie hier sehen. Der Einzug muss nicht perfekt sein, die Zeilen `@</tr><tr>`, `@:<td>`, `@:</td>` und `@:</tr>` müssen jedoch, wie dargestellt, jeweils in einer einzelnen Zeile stehen. Ansonsten wird ein Laufzeitfehler ausgelöst. Drücken Sie, nachdem Sie den Block mit dem neuen Code ausgewählt haben, dreimal auf die TAB-Taste, um den neuen Code am vorhandenen Code auszurichten. Sie können [hier](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html) den Status für dieses Problem überprüfen.
+> Wenn Sie den Code in Visual Studio einfügen, werden Zeilenumbrüche möglicherweise so geändert, dass der Code unterbrochen wird. Wenn der Code nach dem Einfügen anders aussieht, drücken Sie einmal STRG+Z, um die automatische Formatierung rückgängig zu machen. Damit werden die Zeilenumbrüche korrigiert, damit sie dem entsprechen, was Sie hier sehen. Der Einzug muss nicht perfekt sein, die Zeilen `@</tr><tr>`, `@:<td>`, `@:</td>` und `@:</tr>` müssen jedoch, wie dargestellt, jeweils in einer einzelnen Zeile stehen. Ansonsten wird ein Laufzeitfehler ausgelöst. Drücken Sie, nachdem Sie den Block mit dem neuen Code ausgewählt haben, dreimal auf die TAB-Taste, um den neuen Code am vorhandenen Code auszurichten. Dieses Problem wurde in Visual Studio 2019 behoben.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
@@ -314,6 +314,7 @@ In diesem Tutorial:
 > * Haben Sie die Seite „Löschen“ aktualisiert
 > * Haben Sie Bürostandort und Kurse der Seite „Erstellen“ hinzugefügt
 
-Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie Nebenläufigkeitskonflikte behandeln können.
+Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie Nebenläufigkeitskonflikte behandeln können.
+
 > [!div class="nextstepaction"]
 > [Verarbeiten von Nebenläufigkeitskonflikten](concurrency.md)

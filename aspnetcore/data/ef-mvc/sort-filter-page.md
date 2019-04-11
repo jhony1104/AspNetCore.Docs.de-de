@@ -3,15 +3,15 @@ title: 'Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit
 description: In diesem Tutorial fügen Sie die Funktionen zum Sortieren, Filtern und Paging zur Studentenindexseite hinzu. Sie werden auch eine Seite erstellen, auf der einfache Gruppierungsvorgänge ausgeführt werden.
 author: rick-anderson
 ms.author: tdykstra
-ms.date: 02/04/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 51b6b08d2410652f93427371aec299eb4c8789f1
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: dff5a5b1ba3c8ed07ccc8d134f8cfeb25b9f6689
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103058"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58751038"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core
 
@@ -33,7 +33,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit EF Core − Erweitert (2 von 10)](crud.md)
+* [Implementieren von CRUD-Funktionen](crud.md)
 
 ## <a name="add-column-sort-links"></a>Hinzufügen von Spaltensortierungslinks
 
@@ -144,7 +144,7 @@ public async Task<IActionResult> Index(
     string sortOrder,
     string currentFilter,
     string searchString,
-    int? page)
+    int? pageNumber)
 ```
 
 Wenn die Seite zum ersten Mal angezeigt wird oder wenn der Benutzer nicht auf einen Paging- oder Sortierlink geklickt hat, werden alle Parameter gleich 0 (null) sein.  Wenn auf ein Paginglink geklickt wird, enthält die Seitenvariable die anzuzeigende Seitenzahl.
@@ -158,7 +158,7 @@ Wenn die Suchzeichenfolge während des Pagingvorgangs geändert wird, muss die S
 ```csharp
 if (searchString != null)
 {
-    page = 1;
+    pageNumber = 1;
 }
 else
 {
@@ -169,10 +169,10 @@ else
 Am Ende der `Index`-Methode konvertiert die `PaginatedList.CreateAsync`-Methode die Abfrage der Studentendaten in eine einzelne Seite in einem Sammlungstyp, der Pagingvorgänge unterstützt. Diese einzelnen Seite mit Studentendaten wird dann an die Ansicht übergeben.
 
 ```csharp
-return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), page ?? 1, pageSize));
+return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
 ```
 
-Die `PaginatedList.CreateAsync`-Methode nimmt eine Seitenanzahl. Die zwei Fragezeichen stellen den Nullzusammensetzungsoperator dar. Der Nullzusammensetzungsoperator definiert einen Standardwert für einen Nullable-Typ. Der `(page ?? 1)`-Ausdruck bedeutet, dass `page` zurückgegeben wird, wenn dies über einen Wert verfügt, oder 1, wenn `page` gleich 0 (null) ist.
+Die `PaginatedList.CreateAsync`-Methode nimmt eine Seitenanzahl. Die zwei Fragezeichen stellen den Nullzusammensetzungsoperator dar. Der Nullzusammensetzungsoperator definiert einen Standardwert für einen Nullable-Typ. Der `(pageNumber ?? 1)`-Ausdruck bedeutet, dass `pageNumber` zurückgegeben wird, wenn dies über einen Wert verfügt, oder 1, wenn `pageNumber` gleich 0 (null) ist.
 
 ## <a name="add-paging-links"></a>Hinzufügen von Paginglinks
 
@@ -193,7 +193,7 @@ Die Pagingschaltflächen werden durch Taghilfsprogramme angezeigt:
 ```html
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
    class="btn btn-default @prevDisabled">
    Previous
@@ -234,7 +234,7 @@ Fügen Sie eine Klassenvariable für den Datenbankkontext hinzu, unmittelbar nac
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_AddContext&highlight=3,5,7)]
 
-Ersetzen Sie die `About`-Methode durch folgenden Code:
+Fügen Sie eine `About`-Methode mit dem folgenden Code hinzu:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_UseDbSet)]
 
@@ -244,7 +244,7 @@ Die LINQ-Anweisung gruppiert die Studentenentitäten nach Anmeldedatum, berechne
 
 ### <a name="modify-the-about-view"></a>Ändern der Infoansicht
 
-Ersetzen Sie den Code in der *Views/Home/About.cshtml*-Datei durch den folgenden Code:
+Fügen Sie eine *Views/Home/About.cshtml*-Datei mit dem folgenden Code hinzu:
 
 [!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
 
@@ -266,6 +266,7 @@ In diesem Tutorial:
 > * Paginglinks wurden hinzugefügt
 > * Infoseite wurde erstellt
 
-Fahren Sie mit dem nächsten Artikel fort, um zu lernen, wie Sie mithilfe von Migrationen Datenmodelländerungen verarbeiten.
+Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie mithilfe von Migrationen Datenmodelländerungen verarbeiten.
+
 > [!div class="nextstepaction"]
-> [Verarbeiten von Datenmodelländerungen](migrations.md)
+> [Weiter: Tutorial: Verwenden des Migrationsfeatures: ASP.NET MVC mit EF Core](migrations.md)

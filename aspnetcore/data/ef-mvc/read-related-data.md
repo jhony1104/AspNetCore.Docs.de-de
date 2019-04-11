@@ -3,15 +3,15 @@ title: 'Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core'
 description: In diesem Tutorial lesen Sie verwandte Daten und zeigen sie an – d.h., die Daten, die Entity Framework in Navigationseigenschaften lädt.
 author: rick-anderson
 ms.author: tdykstra
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 73e225c2cd6d9f88079c54115cccad48f43d7d0c
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: a2ae878fd861b68a17de19af1b33b6ffbf5a268c
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103045"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58751080"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -33,7 +33,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit Entity Framework Core: Datenmodell (5 von 10)](complex-data-model.md)
+* [Erstellen eines komplexen Datenmodells](complex-data-model.md)
 
 ## <a name="learn-how-to-load-related-data"></a>Erfahren Sie, wie verwandte Daten geladen werden.
 
@@ -257,6 +257,7 @@ In diesem Tutorial:
 > * Wurde eine Seite „Instructors“ erstellt
 > * Haben Sie mehr über das explizite Laden erfahren
 
-Wechseln Sie zum nächsten Artikel, um mehr über das Aktualisieren zugehöriger Daten zu erfahren.
+Fahren Sie mit dem nächsten Tutorial fort, um mehr über das Aktualisieren zugehöriger Daten zu erfahren.
+
 > [!div class="nextstepaction"]
 > [Aktualisieren relevanter Daten](update-related-data.md)

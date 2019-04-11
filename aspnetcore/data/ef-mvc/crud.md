@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 83f5d4bdc3d5872109649818b61a6dbb656fd8be
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: cee521eec3172c04b4d9d93c12076c42c9adff18
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264838"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750620"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
@@ -32,7 +32,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit Entity Framework Core: Tutorial 1 von 10](intro.md)
+* [Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App](intro.md)
 
 ## <a name="customize-the-details-page"></a>Anpassen der Seite „Details“
 
@@ -243,7 +243,7 @@ Dieser Code akzeptiert einen optionalen Parameter, der angibt, ob die Methode na
 
 Ersetzen Sie die HttpPost-Aktionsmethode `Delete` (namens `DeleteConfirmed`) mit folgendem Code, der den tatsächlichen Löschvorgang ausführt und jegliche Datenbankaktualisierungsfehler abfängt:
 
-[!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_DeleteWithReadFirst&highlight=6,8-11,13-14,18-23)]
+[!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_DeleteWithReadFirst&highlight=6-9,11-12,16-21)]
 
 Dieser Code ruft die ausgewählte Entität ab und anschließend die Methode `Remove` auf, um den Status der Entität auf `Deleted` festzulegen. Wenn `SaveChanges` aufgerufen wird, wird der SQL-Befehl DELETE generiert.
 
@@ -306,6 +306,7 @@ In diesem Tutorial:
 > * Die Seite „Löschen“ aktualisiert
 > * Datenbankverbindungen geschlossen
 
-Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie die Funktionen der Seite **Index** erweitern, indem Sie das Sortieren, Filtern und Auslagern hinzufügen.
+Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie die Funktionen der Seite **Index** erweitern, indem Sie das Sortieren, Filtern und Paging hinzufügen.
+
 > [!div class="nextstepaction"]
-> [Sortieren, Filtern und Auslagern](sort-filter-page.md)
+> [Weiter: Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core](sort-filter-page.md)

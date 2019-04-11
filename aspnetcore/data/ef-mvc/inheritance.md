@@ -4,15 +4,15 @@ description: In diesem Tutorial erfahren Sie, wie Sie die Vererbung mithilfe von
 author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 0a5eb1aba43bc2adf746202772c7f98eff49b4ff
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: ba688b259206f21045376b6a38a266ad7528aec1
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103006"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750768"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von Vererbung: ASP.NET MVC mit EF Core
 
@@ -32,7 +32,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit EF Core – Parallelität (8 von 10)](concurrency.md)
+* [Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core](concurrency.md)
 
 ## <a name="map-inheritance-to-database"></a>Zuordnen von Vererbung zu Datenbank
 
@@ -168,6 +168,7 @@ In diesem Tutorial:
 > * Migrationen wurden erstellt und aktualisiert
 > * Die Implementierung wurde getestet
 
-Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie eine Vielzahl von Entity Framework-Szenarios auf fortgeschrittenem Niveau verarbeiten können.
+
 > [!div class="nextstepaction"]
-> [Weiterführende Themen](advanced.md)
+> [Weiter: Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core](advanced.md)

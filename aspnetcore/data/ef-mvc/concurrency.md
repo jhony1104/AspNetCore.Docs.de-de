@@ -4,15 +4,15 @@ description: In diesem Tutorial wird gezeigt, wie Sie Konflikte behandeln, wenn 
 author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 7b18927d5d528ec2951087502e26b2b30214f389
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 668cdafc078091b65035ecad854d2ecc62555721
+ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56103019"
+ms.lasthandoff: 03/30/2019
+ms.locfileid: "58750853"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core
 
@@ -39,7 +39,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit EF Core: Lesen verwandter Daten (7 von 10)](update-related-data.md)
+* [Aktualisieren relevanter Daten](update-related-data.md)
 
 ## <a name="concurrency-conflicts"></a>Nebenläufigkeitskonflikte
 
@@ -148,7 +148,7 @@ Damit wird die Überschrift in „Abteilungen“ geändert, die Spalte „RowVer
 
 Fügen Sie in den HttpGet-Methoden `Edit` und `Details` `AsNoTracking` hinzu. Fügen Sie in der HttpGet-Methode `Edit` für den Administrator Eager Loading hinzu.
 
-[!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EagerLoading&highlight=2,3)]
+[!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EagerLoading)]
 
 Ersetzen Sie den vorhandenen Code für die HttpPost-Methode `Edit` durch folgenden Code:
 
@@ -309,6 +309,7 @@ In diesem Tutorial:
 > * Haben Sie die Seite „Löschen“ aktualisiert
 > * Haben Sie die Ansichten „Details“ und „Erstellen“ aktualisiert
 
-Fahren Sie mit dem nächsten Artikel fort, um zu erfahren, wie Sie die „Tabelle pro Hierarchie“-Vererbung für die Entitäten „Instructor“ und „Student“ implementieren.
+Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie die TPH-Vererbung (TPH = Table per Hierarchy, Tabelle pro Hierarchie) für die Entitäten „Instructor“ und „Student“ implementieren.
+
 > [!div class="nextstepaction"]
-> [ASP.NET Core MVC mit EF Core: Vererbung (9 von 10)](inheritance.md)
+> [Weiter: Tutorial: Implementieren von Vererbung: ASP.NET MVC mit EF Core](inheritance.md)
