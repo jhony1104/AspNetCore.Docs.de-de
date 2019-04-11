@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über die Controllermethode und Ansicht „Detail
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: f674ca1761f85ce127121603286c97d5936f6716
-ms.sourcegitcommit: c47d7c131eebbcd8811e31edda210d64cf4b9d6b
+ms.openlocfilehash: 056017ea4f4073fa0b1cd747d06775b2a33616cf
+ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2019
-ms.locfileid: "55236327"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "59012668"
 ---
 # <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>Untersuchen der Methoden „Details“ und „Delete“ einer ASP.NET Core-App
 
@@ -46,6 +46,7 @@ Eine weitere gängige Behelfslösung für Methoden mit identischen Namen und Sig
 
 ```csharp
 // POST: Movies/Delete/6
+[HttpPost]
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Delete(int id, bool notUsed)
 ```
@@ -55,4 +56,4 @@ public async Task<IActionResult> Delete(int id, bool notUsed)
 Informationen zum Bereitstellen in Azure finden Sie unter [Tutorial: Erstellen einer .NET Core- und SQL-Datenbank-Web-App in Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
 
 > [!div class="step-by-step"]
-> [Vorherige](validation.md)
+> [Vorheriges](validation.md)

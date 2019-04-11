@@ -4,14 +4,14 @@ author: pkellner
 description: Veranschaulicht die Arbeit mit dem Image-Taghilfsprogramm.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2018
+ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
-ms.openlocfilehash: 5eb74a6698911a1c594d11573192cb1b9ed53b49
-ms.sourcegitcommit: 4bdf7703aed86ebd56b9b4bae9ad5700002af32d
+ms.openlocfilehash: 916a68c187cbf516a59d3c5d7578cdb6ada01b86
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2018
-ms.locfileid: "49325834"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468817"
 ---
 # <a name="image-tag-helper-in-aspnet-core"></a>Image-Taghilfsprogramm in ASP.NET Core
 
@@ -43,13 +43,13 @@ Wenn `asp-append-version` zusätzlich mit einem `true`-Wert sowie einem `src`-At
 Im folgenden Beispiel wird ein Image-Taghilfsprogramm verwendet:
 
 ```cshtml
-<img src="~/images/asplogo.png" asp-append-version="true" />
+<img src="~/images/asplogo.png" asp-append-version="true">
 ```
 
 Wenn die statische Datei im Verzeichnis */wwwroot/images/* vorhanden ist, ähnelt der erstellte HTML-Code folgendem (der Hash wird abweichen):
 
 ```html
-<img src="/images/asplogo.png?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" />
+<img src="/images/asplogo.png?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM">
 ```
 
 Der Wert, der dem Parameter `v` zugewiesen ist, ist der Hashwert der Datei *asplogo.png* auf dem Datenträger. Wenn der Webserver den Lesezugriff auf die statische Datei, auf die verwiesen wird, nicht erhalten kann, werden im gerenderten Markup keine `v`-Parameter dem Attribut `src` zugefügt.
