@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen Sie zum Schutz von Daten in ASP.NET Core zu konfigurieren.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/08/2019
+ms.date: 04/11/2019
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 36a06246513215ec29891df02688d113db11f914
-ms.sourcegitcommit: 32bc00435767189fa3ae5fb8a91a307bf889de9d
+ms.openlocfilehash: ee43427fa1e82a365d49df50567b4ca7afb5a5d3
+ms.sourcegitcommit: 9b7fcb4ce00a3a32e153a080ebfaae4ef417aafa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2019
-ms.locfileid: "57733489"
+ms.lasthandoff: 04/12/2019
+ms.locfileid: "59516247"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>Konfigurieren von ASP.NET Core-Datenschutz
 
@@ -44,7 +44,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Legen Sie den Schlüsselbund für den Storage-Speicherort (z. B. [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Der Speicherort muss festgelegt werden, da Aufrufen `ProtectKeysWithAzureKeyVault` implementiert eine [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) , die Daten automatisch Protection-Einstellungen, einschließlich der den Speicherort für den Schlüsselbund deaktiviert. Im vorherige Beispiel verwendet Azure Blob Storage, um den Schlüsselbund beizubehalten. Weitere Informationen finden Sie unter [Schlüsselspeicheranbieter: Azure und Redis](xref:security/data-protection/implementation/key-storage-providers#azure-and-redis). Sie können auch den Schlüsselbund lokal beibehalten [PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system).
 
-Die `keyIdentifier` ist der Key Vault-Instanz Schlüsselbezeichner, der für die Schlüsselverschlüsselung verwendet (z. B. `https://contosokeyvault.vault.azure.net/keys/dataprotection/`).
+Die `keyIdentifier` den Schlüsselbezeichner Key Vault-Instanz, für die Schlüsselverschlüsselung verwendet wird. Z. B. einen Schlüssel in Key Vault-Instanz, die mit dem Namen erstellt `dataprotection` in die `contosokeyvault` hat den Schlüsselbezeichner `https://contosokeyvault.vault.azure.net/keys/dataprotection/`. Geben Sie die app mit **Schlüssel Entpacken** und **Schlüssel Packen** Berechtigungen auf den schlüsseltresor.
 
 `ProtectKeysWithAzureKeyVault` Überladungen:
 
@@ -154,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>DisableAutomaticKeyGeneration
 
-Sie können ein Szenario haben, möchten Sie keine app aus, um automatisch einen Schlüssel (Erstellen neuer Schlüssel) für, wie sie Ablaufdatum nähert. Ein Beispiel hierfür ist möglicherweise apps, die in einer Beziehung primär/Sekundär, in denen nur die primäre app ist verantwortlich für die schlüsselverwaltung Bedenken und sekundären apps haben einfach eine schreibgeschützte Ansicht von den Schlüsselbund einrichten. Die sekundären apps können konfiguriert werden, um den Schlüsselbund als schreibgeschützt zu behandeln, indem Sie die Konfiguration des Systems mit [DisableAutomaticKeyGeneration](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.disableautomatickeygeneration):
+Sie können ein Szenario haben, möchten Sie keine app aus, um automatisch einen Schlüssel (Erstellen neuer Schlüssel) für, wie sie Ablaufdatum nähert. Ein Beispiel hierfür ist möglicherweise apps, die in einer Beziehung primär/Sekundär, in denen nur die primäre app ist verantwortlich für die schlüsselverwaltung Bedenken und sekundären apps haben einfach eine schreibgeschützte Ansicht von den Schlüsselbund einrichten. Die sekundären apps können konfiguriert werden, um den Schlüsselbund als schreibgeschützt zu behandeln, indem Sie die Konfiguration des Systems mit <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -166,15 +166,14 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="per-application-isolation"></a>Pro-Anwendungsisolation
 
-Wenn das System den Schutz von Daten von einem ASP.NET Core-Host bereitgestellt wird, isoliert sie automatisch apps voneinander, auch wenn diese apps in das gleiche workerkonto-Prozess ausgeführt werden, und die gleiche Schlüsselinformationen für den master verwenden. Dies ähnelt dem IsolateApps-Modifizierer aus der von "System.Web"  **\<MachineKey >** Element.
+Wenn das System den Schutz von Daten von einem ASP.NET Core-Host bereitgestellt wird, isoliert sie automatisch apps voneinander, auch wenn diese apps in das gleiche workerkonto-Prozess ausgeführt werden, und die gleiche Schlüsselinformationen für den master verwenden. Dies ähnelt dem IsolateApps-Modifizierer aus der von "System.Web" `<machineKey>` Element.
 
-Der Isolationsmechanismus hochverfügbarkeitsbereitstellung jede app auf dem lokalen Computer als Mandant eindeutig, daher funktioniert die [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) Stamm eine bestimmte app automatisch auf die app-ID als Diskriminator enthält. Eindeutige ID der app stammt aus einer von zwei Stellen:
+Der Isolationsmechanismus hochverfügbarkeitsbereitstellung jede app auf dem lokalen Computer als Mandant eindeutig, daher funktioniert die <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> Stamm eine bestimmte app automatisch auf die app-ID als Diskriminator enthält. Eindeutige ID der app ist physische Pfad der app an:
 
-1. Wenn die app in IIS gehostet wird, ist der eindeutige Bezeichner der app-Konfigurationspfad. Wenn eine app in einer webfarmumgebung bereitgestellt wird, sollte dieser Wert stabil sein, vorausgesetzt, dass die IIS-Umgebungen auf allen Computern in der Webfarm auf ähnliche Weise konfiguriert sind.
+* Für apps in gehostet [IIS](xref:fundamentals/servers/index#iis-http-server), die eindeutige ID wird dem physischen IIS-Pfad der app. Wenn eine app in einer webfarmumgebung bereitgestellt wird, ist dieser Wert stabil, vorausgesetzt, dass die IIS-Umgebungen auf allen Computern in der Webfarm auf ähnliche Weise konfiguriert sind.
+* Für selbst gehostete apps, die unter der [Kestrel-Server](xref:fundamentals/servers/index#kestrel), die eindeutige ID wird der physische Pfad für die app auf dem Datenträger.
 
-2. Wenn die app in IIS gehostet wird nicht, ist der eindeutige Bezeichner der physische Pfad der app an.
-
-Der eindeutige Bezeichner dient zum Zurücksetzen von Kennwörtern zu überstehen &mdash; sowohl der einzelnen app und dem Computer selbst.
+Der eindeutige Bezeichner dient zum Zurücksetzen von Kennwörtern zu überstehen&mdash;sowohl der einzelnen app und dem Computer selbst.
 
 Dieser Isolationsmechanismus wird davon ausgegangen, dass die apps nicht böswillig sind. Eine böswillige Anwendung kann immer jede andere app, die das gleiche workerkonto-Prozess unter auswirken. In einer freigegebenen Hostingumgebung, in denen apps gegenseitig nicht vertrauenswürdig sind, dauert der Hostinganbieter Schritte aus, um sicherzustellen, dass auf der Betriebssystemebene Isolation zwischen apps, die auch das Trennen der apps zugrunde liegt, zu den wichtigsten Repositorys.
 
