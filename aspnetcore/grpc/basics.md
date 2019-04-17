@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/31/2019
 uid: grpc/basics
-ms.openlocfilehash: ce2682848dc6a81293545c27f0be779e12a3a600
-ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
+ms.openlocfilehash: 7c5ecf21124414b21f5c36b76e90bde67ac1f958
+ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/02/2019
-ms.locfileid: "59515514"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59672670"
 ---
 # <a name="grpc-services-with-c"></a>gRPC-Dienste mit C\#
 
@@ -32,13 +32,13 @@ Betrachten Sie beispielsweise die *greet.proto* -Basisdatei [erste Schritte mit 
 * Die `Greeter` Dienst definiert eine `SayHello` aufrufen.
 * `SayHello` sendet eine `HelloRequest` Nachricht und empfängt eine `HelloResponse` Nachricht:
 
-[!code-proto[](~/tutorials/grpc/grpc-start/samples/GrpcStart/Protos/greet.proto)]
+[!code-proto[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Protos/greet.proto)]
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>Fügen Sie eine .proto-Datei für eine C-\# app
 
 Die *.proto* Datei ist in einem Projekt enthalten, indem sie zum Hinzufügen der `<Protobuf>` Elementgruppe:
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcStart/GrpcGreeter.Server/GrpcGreeter.Server.csproj?highlight=2&range=7-10)]
+[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
 
 ## <a name="c-tooling-support-for-proto-files"></a>C#Toolunterstützung für .proto-Dateien
 
@@ -50,7 +50,7 @@ Das Paket mit Tools [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) ist
 
 Dieses Paket ist sowohl die Server- und Clientprojekte erforderlich. `Grpc.Tools` kann hinzugefügt werden, indem Sie mithilfe des Paket-Managers in Visual Studio oder das Hinzufügen einer `<PackageReference>` zu der Projektdatei:
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcStart/GrpcGreeter.Server/GrpcGreeter.Server.csproj?highlight=1&range=16)]
+[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=17)]
 
 Das Tools-Paket ist nicht erforderlich, während der Laufzeit, damit die Abhängigkeit mit markiert ist `PrivateAssets="All"`.
 
@@ -60,15 +60,15 @@ Das Tools-Paket generiert die C# Typen, die die Nachrichten, die in den enthalte
 
 Für serverseitige Ressourcen ist eine abstrakte Basisklasse Diensttyp generiert. Der Basistyp enthält die Definitionen aller gRPC Aufrufe innerhalb der *.proto* Datei. Erstellen Sie eine konkrete Implementierung, die von diesem Basistyp abgeleitet und implementiert die Logik für die gRPC-Aufrufe. Für die `greet.proto`, im Beispiel wird die zuvor beschriebenen einer abstraktes `GreeterBase` Typ, der eine virtuelle enthält `SayHello` Methode generiert. Eine konkrete Implementierung `GreeterService` überschreibt die Methode, und implementiert die Logik den gRPC-Aufruf zu verarbeiten.
 
-[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcStart/GrpcGreeter.Server/Services/GreeterService.cs?name=snippet)]
+[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Services/GreeterService.cs?name=snippet)]
 
 Für die clientseitige Objekte wird ein konkretes Clienttyp generiert. Die gRPC-Aufrufe in die *.proto* Datei werden in Methoden für den konkreten Typ, der aufgerufen werden kann, übersetzt. Für die `greet.proto`, zuvor beschriebenen einen konkreten Beispiel `GreeterClient` Typ generiert wird. Rufen Sie `GreeterClient.SayHello` eine gRPC-Aufrufs an den Server zu initiieren.
 
-[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcStart/GrpcGreeter.Client/Program.cs?highlight=9-11&name=snippet)]
+[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcGreeterClient/Program.cs?highlight=5-8&name=snippet)]
 
 Standardmäßig werden Server und Client-Ressourcen für die einzelnen generiert *.proto* enthaltene Datei die `<Protobuf>` Elementgruppe. Um sicherzustellen, dass nur die Serverressourcen werden in einem Serverprojekt generiert die `GrpcServices` -Attributsatz auf `Server`.
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcStart/GrpcGreeter.Server/GrpcGreeter.Server.csproj?highlight=2&range=7-10)]
+[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
 
 Auf ähnliche Weise wird das Attribut festgelegt, um `Client` in clientprojekten.
 
