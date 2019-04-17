@@ -4,14 +4,14 @@ author: ardalis
 description: Erfahren Sie, wie Sie Teilansichten verwenden können, um große Markupdateien aufzuteilen und die Duplizierung von allgemeinem Markup auf Webseiten in ASP.NET Core-Anwendungen zu verringern.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/11/2018
+ms.date: 04/06/2019
 uid: mvc/views/partial
-ms.openlocfilehash: b7c1545007086053e879bce6781802959da77901
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: 65da78d6df3f179df9bdfa3a32af8736b71bbac5
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327377"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468707"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Verwenden von Teilansichten in ASP.NET Core
 
@@ -75,7 +75,7 @@ Dateinamen von Teilansichten beginnen häufig mit einem Unterstrich (`_`). Diese
 Innerhalb einer Markupdatei gibt es mehrere Möglichkeiten, auf eine Teilansicht zu verweisen. Es wird empfohlen, dass Apps einen der folgenden Ansätze für asynchrones Rendering verwenden:
 
 * [Hilfsprogramm für Teiltags](#partial-tag-helper)
-* [Asynchrones HTML-Hilfsprogramm](#asynchronous-html-helper)
+* [Hilfsprogramm für asynchrone HTML](#asynchronous-html-helper)
 
 ::: moniker-end
 
@@ -83,8 +83,8 @@ Innerhalb einer Markupdatei gibt es mehrere Möglichkeiten, auf eine Teilansicht
 
 Innerhalb einer Markupdatei gibt es zwei Möglichkeiten, auf eine Teilansicht zu verweisen:
 
-* [Asynchrones HTML-Hilfsprogramm](#asynchronous-html-helper)
-* [Synchrones HTML-Hilfsprogramm](#synchronous-html-helper)
+* [Hilfsprogramm für asynchrone HTML](#asynchronous-html-helper)
+* [Hilfsprogramm für synchrone HTML](#synchronous-html-helper)
 
 Es wird empfohlen, dass Apps das [asynchrone HTML-Hilfsprogramm](#asynchronous-html-helper) verwenden.
 
@@ -243,7 +243,7 @@ Für die Ermittlung von Teilansichten gelten die folgenden Konventionen:
 
 ## <a name="access-data-from-partial-views"></a>Zugriff auf Daten aus Teilansichten
 
-Wenn eine Teilansicht instanziiert wird, erhält sie eine *Kopie* des `ViewData`-Wörterbuchs der übergeordneten Ansicht. An den Daten vorgenommene Änderungen in der Teilansicht werden in der übergeordneten Ansicht nicht beibehalten. Ein `ViewData`-Wörterbuch, das in einer Teilansicht verändert wird, geht verloren, wenn die Teilansicht eine Rückgabe ausgibt.
+Wenn eine Teilansicht instanziiert wird, erhält sie eine *Kopie* des `ViewData`-Wörterbuchs der übergeordneten Ansicht. An den Daten vorgenommene Änderungen in der Teilansicht werden in der übergeordneten Ansicht nicht beibehalten. `ViewData` Änderungen in einer Teilansicht gehen verloren, wenn die Teilansicht eine Rückgabe ausgibt.
 
 Das folgende Beispiel zeigt, wie eine Instanz von [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) an eine Teilansicht übergeben wird:
 

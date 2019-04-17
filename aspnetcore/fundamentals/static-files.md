@@ -4,14 +4,14 @@ author: rick-anderson
 description: Hier erfahren Sie, wie statische Dateien bereitgestellt und gesichert werden und wie das Verhalten von Middleware beim Hosting statischer Dateien in einer ASP.NET Core-Web-App konfiguriert wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 04/08/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: 114fee0795977043f3a74a81a15923a8bf5faf6b
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 12c7b39bee462ff83188a5a0f10b133ca273863b
+ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208634"
+ms.lasthandoff: 04/09/2019
+ms.locfileid: "59425061"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -208,15 +208,15 @@ Unter Verwendung der Dateihierarchie und des vorangehenden Codes werden URLs wie
 
 | URI            |                             Antwort  |
 | ------- | ------|
-| *http://\<server_address>/StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
-| *http://\<server_address>/StaticFiles*             |     MyStaticFiles/default.html |
+| *http://\<Serveradresse>/StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
+| *http://\<Serveradresse>/StaticFiles*             |     MyStaticFiles/default.html |
 
 Wenn im Verzeichnis *MyStaticFiles* keine Datei mit Standardnamen vorhanden ist, gibt *http://\<server_address>/StaticFiles* die Verzeichnisliste mit klickbaren Links zurück:
 
 ![Liste der statischen Dateien](static-files/_static/db2.png)
 
 > [!NOTE]
-> `UseDefaultFiles` und `UseDirectoryBrowser` verwenden die URL *http://\<server_address>/StaticFiles* ohne den nachstehenden Schrägstrich, um eine clientseitige Umleitung zu *http://\<server_address>/StaticFiles/* auszulösen. Beachten Sie den hinzugefügten nachstehenden Schrägstrich. Relative URLs innerhalb der Dokumente gelten ohne einen nachstehenden Schrägstrich als ungültig.
+> <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> und <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> führen eine clientseitige Umleitung von `http://{SERVER ADDRESS}/StaticFiles` (ohne nachstehenden Schrägstrich) zu `http://{SERVER ADDRESS}/StaticFiles/` (mit nachstehendem Schrägstrich) durch. Relative URLs im Verzeichnis *StaticFiles* gelten ohne nachstehenden Schrägstrich als ungültig.
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -242,7 +242,7 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 ### <a name="considerations"></a>Weitere Überlegungen
 
 > [!WARNING]
-> `UseDirectoryBrowser` und `UseStaticFiles` können Geheimnisse aufdecken. Eine Deaktivierung der Verzeichnissuche in der Produktionsumgebung wird dringend empfohlen. Überprüfen Sie sorgfältig, welche Verzeichnisse über `UseStaticFiles` oder `UseDirectoryBrowser` aktiviert wurden. Das gesamte Verzeichnis und die zugehörigen Unterverzeichnisse werden öffentlich zugänglich gemacht. Speichern Sie Dateien, die für eine Bereitstellung in der Öffentlichkeit geeignet sind, in einem dafür vorgesehenen Verzeichnis wie z.B. *\<content_root>/wwwroot*. Trennen Sie diese Dateien von MVC-Ansichten, Razor Pages (nur 2.x), Konfigurationsdateien usw.
+> `UseDirectoryBrowser` und `UseStaticFiles` können Geheimnisse offenlegen. Eine Deaktivierung der Verzeichnissuche in der Produktionsumgebung wird dringend empfohlen. Überprüfen Sie sorgfältig, welche Verzeichnisse über `UseStaticFiles` oder `UseDirectoryBrowser` aktiviert wurden. Das gesamte Verzeichnis und die zugehörigen Unterverzeichnisse werden öffentlich zugänglich gemacht. Speichern Sie Dateien, die für eine Bereitstellung in der Öffentlichkeit geeignet sind, in einem dafür vorgesehenen Verzeichnis wie z.B. *\<content_root>/wwwroot*. Trennen Sie diese Dateien von MVC-Ansichten, Razor Pages (nur 2.x), Konfigurationsdateien usw.
 
 * Die URLs für Inhalte, die mit `UseDirectoryBrowser` und `UseStaticFiles` verfügbar gemacht wurden, unterliegen der Groß-/Kleinschreibung und den Zeichenbeschränkungen des zugrunde liegenden Dateisystems. Bei Windows wird die Groß-/Kleinschreibung beispielsweise beachtet, bei macOS und Linux hingegen nicht.
 

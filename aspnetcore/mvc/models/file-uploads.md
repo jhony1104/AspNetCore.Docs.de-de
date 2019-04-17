@@ -4,14 +4,14 @@ author: ardalis
 description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien in ASP.NET Core MVC
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 04/06/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 5e6e2cd5fac25e2abe27915c2f4caa64b13e90bd
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: 831f0c84f0ff062e9e24ccbf4ca81b7143c66e66
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56409982"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468552"
 ---
 # <a name="file-uploads-in-aspnet-core"></a>Dateiuploads in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.NET MVC-Aktionen unterstützen das Hochladen von mindestens einer kleinen Datei über eine einfache Modellbindung bzw. das Streaming von großen Dateien.
 
-[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample).
+[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
 
 ## <a name="uploading-small-files-with-model-binding"></a>Hochladen von kleinen Dateien mittels Modellbindung
 
@@ -30,12 +30,12 @@ Wenn Sie kleine Dateien hochladen möchten, können Sie ein mehrteiliges HTML-Fo
     <div class="form-group">
         <div class="col-md-10">
             <p>Upload one or more files using this form:</p>
-            <input type="file" name="files" multiple />
+            <input type="file" name="files" multiple>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-10">
-            <input type="submit" value="Upload" />
+            <input type="submit" value="Upload">
         </div>
     </div>
 </form>

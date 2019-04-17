@@ -4,14 +4,15 @@ author: tdykstra
 description: Informationen zur Modellvalidierung in ASP.NET Core MVC und Razor Pages
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/01/2019
+ms.date: 04/06/2019
+monikerRange: '>= aspnetcore-2.1'
 uid: mvc/models/validation
-ms.openlocfilehash: b766d47f296745ba4be6ea8cb6335db9c3e2d975
-ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
+ms.openlocfilehash: 1ae3c20478b02d6f654e65fdf34c88e1ffb837f8
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/02/2019
-ms.locfileid: "58809314"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468736"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
 
@@ -23,23 +24,11 @@ In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MV
 
 Der Modellstatus stellt Fehler dar, die aus zwei Subsystemen kommen: Modellbindung und Modellvalidierung. Fehler, die Ihren Ursprung bei der [Modellbindung](model-binding.md) haben, sind normalerweise Fehler bei der Datenkonvertierung, z. B. wenn in ein Feld ein „x“ eingegeben wird, das einen Integer erwartet. Die Modellvalidierung erfolgt nach der Modellbindung und meldet Fehler, wenn die Daten in Konflikt mit den Geschäftsregeln stehen, z. B. wenn in ein Feld eine 0 eingegeben wird, das eine Bewertung zwischen 1 und 5 erwartet.
 
-::: moniker range=">= aspnetcore-2.1"
-
-Sowohl Modellbindung als auch -validierung finden noch vor der Ausführung einer Controlleraktion oder einer Razor Pages-Handlermethode statt. Die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen liegen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
-
-[!code-csharp[](validation/sample_snapshot/Create.cshtml.cs?name=snippet&highlight=3-6)]
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
 Sowohl Modellbindung als auch -validierung finden noch vor der Ausführung einer Controlleraktion oder einer Razor Pages-Handlermethode statt. Bei Web-Apps liegen die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
 
 [!code-csharp[](validation/sample_snapshot/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
 Web-API-Controller müssen `ModelState.IsValid` nicht überprüfen, wenn sie das `[ApiController]`-Attribut haben. In diesem Fall wird eine automatische HTTP 400-Antwort zurückgegeben, die Problemdetails beinhaltet, wenn der Modellstatus ungültig ist. Weitere Informationen finden Sie unter [Automatische HTTP 400-Antworten](xref:web-api/index#automatic-http-400-responses).
-
-::: moniker-end
 
 ## <a name="rerun-validation"></a>Validierung erneut ausführen
 
@@ -140,7 +129,7 @@ Die `AdditionalFields`-Eigenschaft des `[Remote]`-Attributs ermöglicht Ihnen di
 
 [!code-csharp[](validation/sample/Models/User.cs?name=snippet_UserNameProperties)]
 
-Für `AdditionalFields` könnten explizit die Zeichenfolgen `"FirstName"` und `"LastName"` festgelegt werden. Wenn Sie aber den [`nameof`](/dotnet/csharp/language-reference/keywords/nameof)-Operator verwenden, ist ein Refactoring zu einem späteren Zeitpunkt einfacher. Die Aktionsmethode für diese Validierung muss sowohl Vor- als auch Nachnamensargumente akzeptieren:
+`AdditionalFields` kann explizit auf die Zeichenfolgen `"FirstName"` und `"LastName"` festgelegt werden. Wenn Sie aber den [`nameof`](/dotnet/csharp/language-reference/keywords/nameof)-Operator verwenden, ist ein Refactoring zu einem späteren Zeitpunkt einfacher. Die Aktionsmethode für diese Validierung muss sowohl Vor- als auch Nachnamensargumente akzeptieren:
 
 [!code-csharp[](validation/sample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -153,7 +142,7 @@ Wenn Sie mindestens zwei weitere Felder überprüfen möchten, geben Sie sie als
 public string MiddleName { get; set; }
 ```
 
-`AdditionalFields` muss wie alle anderen Attributargumente ein konstanter Ausdruck sein. Aus diesem Grund verwenden Sie keine [interpolierte Zeichenfolge](/dotnet/csharp/language-reference/keywords/interpolated-strings) oder rufen <xref:System.String.Join*> auf, um `AdditionalFields` zu initialisieren.
+`AdditionalFields`muss wie alle anderen Attributargumente ein konstanter Ausdruck sein. Aus diesem Grund verwenden Sie keine [interpolierte Zeichenfolge](/dotnet/csharp/language-reference/keywords/interpolated-strings) oder rufen <xref:System.String.Join*> auf, um `AdditionalFields` zu initialisieren.
 
 ## <a name="alternatives-to-built-in-attributes"></a>Alternativen zu integrierten Attributen
 
@@ -161,7 +150,6 @@ Wenn Sie eine Validierung benötigen, die nicht von integrierten Attributen bere
 
 * [Erstellen Sie benutzerdefinierte Attribute.](#custom-attributes)
 * [Implementieren Sie IValidatableObject.](#ivalidatableobject)
-
 
 ## <a name="custom-attributes"></a>Benutzerdefinierte Attribute
 
@@ -180,8 +168,6 @@ Die obenstehende `movie`-Variable stellt ein `Movie`-Objekt dar, das die Daten d
 Im vorherigen Beispiel wurde nur mit `Movie`-Typen gearbeitet. Eine andere Option zur Validierung auf Klassenebene ist die Implementierung von `IValidatableObject` in der Modellklasse, wie im folgenden Beispiel dargestellt wird:
 
 [!code-csharp[](validation/sample/Models/MovieIValidatable.cs?name=snippet&highlight=1,26-34)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 ## <a name="top-level-node-validation"></a>Validierung der Knoten auf oberster Ebene
 
@@ -210,15 +196,11 @@ Bei Ausführung mit der Kompatibilitätsversion `CompatibilityVersion.Version_2_
 
 [!code-csharp[](validation/sample_snapshot/Startup.cs?name=snippet_AddMvc&highlight=4)]
 
-::: moniker-end
-
 ## <a name="maximum-errors"></a>Maximale Fehleranzahl
 
 Die Validierung stoppt, wenn die maximale Anzahl an Fehlern erreicht wird. Diese liegt standardmäßig bei 200. Sie können diese Zahl mit dem folgenden Code in `Startup.ConfigureServices` konfigurieren:
 
 [!code-csharp[](validation/sample/Startup.cs?name=snippet_MaxModelValidationErrors&highlight=3)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 ## <a name="maximum-recursion"></a>Maximale Rekursion
 
@@ -227,8 +209,6 @@ Die Validierung stoppt, wenn die maximale Anzahl an Fehlern erreicht wird. Diese
 ## <a name="automatic-short-circuit"></a>Automatischer Kurzschluss
 
 Die Validierung wird automatisch kurzgeschlossen (übersprungen), wenn der Modellgraph keine Validierung erfordert. Objekte, deren Validierung durch die Runtime übersprungen wird, beinhalten Primitivsammlungen (z. B. `byte[]`, `string[]`, `Dictionary<string, string>`) und komplexe Objektgraphen, die keine Validierungssteuerelemente haben.
-
-::: moniker-end
 
 ## <a name="disable-validation"></a>Validierung deaktivieren
 
@@ -270,7 +250,7 @@ Die vorangegangenen Taghilfsprogramme rendern die folgende HTML.
             <div class="col-md-10">
                 <input class="form-control" type="datetime"
                 data-val="true" data-val-required="The ReleaseDate field is required."
-                id="ReleaseDate" name="ReleaseDate" value="" />
+                id="ReleaseDate" name="ReleaseDate" value="">
                 <span class="text-danger field-validation-valid"
                 data-valmsg-for="ReleaseDate" data-valmsg-replace="true"></span>
             </div>
@@ -281,7 +261,7 @@ Die vorangegangenen Taghilfsprogramme rendern die folgende HTML.
 
 Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die [`required()`](https://jqueryvalidation.org/required-method/)-Methode von „jQuery Unobtrusive Validation“, die dann diese Meldung im zugehörigen **\<span>**-Element anzeigt.
 
-Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. Mithilfe von `[DataType]`-Attributen und Subklassen wie `[EmailAddress]` können Sie die Fehlermeldung angeben.
+Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. `[DataType]` -Attribute und -Unterklassen wie `[EmailAddress]` ermöglichen das Angeben der Fehlermeldung.
 
 ### <a name="add-validation-to-dynamic-forms"></a>Hinzufügen der Validierung zu dynamischen Formularen
 
@@ -308,7 +288,7 @@ Die `$.validator.unobtrusive.parse()`-Methode akzeptiert einen jQuery-Selektor f
 
 ### <a name="add-validation-to-dynamic-controls"></a>Hinzufügen der Validierung zu dynamischen Steuerelementen
 
-Die `$.validator.unobtrusive.parse()`-Methode funktioniert für ein gesamtes Formular, nicht für individuelle, dynamisch erstellte Steuerelemente wie `<input/>` und `<select/>`. Wenn das Formular erneut analysiert werden soll, entfernen Sie die Validierungsdaten, die bei der vorherigen Analyse des Formulars hinzugefügt wurden, wie es im folgenden Beispiel gezeigt wird:
+Die `$.validator.unobtrusive.parse()`-Methode funktioniert für ein gesamtes Formular, nicht für individuelle, dynamisch erstellte Steuerelemente wie `<input>` und `<select/>`. Wenn das Formular erneut analysiert werden soll, entfernen Sie die Validierungsdaten, die bei der vorherigen Analyse des Formulars hinzugefügt wurden, wie es im folgenden Beispiel gezeigt wird:
 
 ```js
 $.get({
@@ -349,7 +329,7 @@ Im folgenden Beispiel sehen Sie die `data-`-Attribute des `ClassicMovie`-Attribu
     data-val-classicmovie1="Classic movies must have a release year earlier than 1960."
     data-val-classicmovie1-year="1960"
     data-val-required="The ReleaseDate field is required."
-    id="ReleaseDate" name="ReleaseDate" value="" />
+    id="ReleaseDate" name="ReleaseDate" value="">
 ```
 
 Wie bereits gesagt, verwenden [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) und [HTML-Hilfsprogramme](xref:mvc/views/overview) Informationen der Validierungsattribute, um `data-`-Attribute zu rendern. Es gibt zwei Möglichkeiten, Code zu schreiben, der zur Erstellung von benutzerdefinierten HTML-Attributen des Typs `data-` führt:
@@ -391,5 +371,5 @@ Dies funktioniert nur für MVC-Ansichten, nicht in Razor Pages. Eine andere Mög
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [System.ComponentModel.DataAnnotations-Namespace](xref:System.ComponentModel.DataAnnotations)
+* [System.ComponentModel.DataAnnotations namespace](xref:System.ComponentModel.DataAnnotations)
 * [Modellbindung](model-binding.md)

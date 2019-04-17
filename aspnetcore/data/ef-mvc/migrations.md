@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 8a14ada241330ca33811b7cce70daf26ff8fc13a
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 3d2ae12bf8eda4f7997008758d4d29434a8371a7
+ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750631"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "59012603"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Tutorial: Verwenden des Migrationsfeatures: ASP.NET MVC mit EF Core
 
@@ -54,6 +54,7 @@ Durch diese Änderung wird das Projekt eingerichtet, sodass bei der ersten Migra
 > ```console
 > dotnet ef database drop
 > ```
+>
 > Im folgenden Abschnitt wird erläutert, wie CLI-Befehle ausgeführt werden.
 
 ## <a name="create-an-initial-migration"></a>Erstellen einer ursprünglichen Migration
@@ -168,7 +169,7 @@ Weitere Informationen zu den PMC-Befehlen finden Sie unter [Paket-Manager-Konsol
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Laden Sie die vollständige Anwendung herunter, oder zeigen Sie sie an.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-step"></a>Nächster Schritt
 
@@ -186,4 +187,4 @@ In diesem Tutorial:
 Fahren Sie mit dem nächsten Tutorial fort, um fortgeschrittenere Themen zum Erweitern des Datenmodells kennenzulernen. Dabei werden Sie weitere Migrationen erstellen und anwenden.
 
 > [!div class="nextstepaction"]
-> [ASP.NET Core MVC mit Entity Framework Core: Datenmodell (5 von 10)](complex-data-model.md)
+> [Erstellen und Anwenden zusätzlicher Migrationen](complex-data-model.md)

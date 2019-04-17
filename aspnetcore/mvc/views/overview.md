@@ -3,14 +3,14 @@ title: Ansichten in ASP.NET Core MVC
 author: ardalis
 description: Informationen zur Verarbeitung der Darstellung von App-Daten und zur Benutzerinteraktion in den Ansichten von ASP.NET Core MVC
 ms.author: riande
-ms.date: 12/12/2017
+ms.date: 04/03/2019
 uid: mvc/views/overview
-ms.openlocfilehash: 0ee1fef9e9da15d91427a2eb5b5f530a0b77ce33
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 766996645bc6ef2b6be42d729baf5d57f55b6ddd
+ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265391"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "59012798"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Ansichten in ASP.NET Core MVC
 
@@ -92,7 +92,7 @@ Standardmäßig gibt die `View`-Methode (`return View();`) eine Ansicht zurück,
 Es macht keinen Unterschied, ob Sie implizit `ViewResult` mit `return View();` zurückgeben, oder den Ansichtsnamen mit `return View("<ViewName>");` explizit an die `View`-Methode übergeben. In beiden Fällen sucht die Ansichtsermittlung nach einer passenden Ansichtsdatei in diesem Ordner:
 
    1. *Views/\[ControllerName]/\[ViewName].cshtml*
-   1. *Views/Shared/\[Ansichtsname].cshtml*
+   1. *Views/Shared/\[ViewName].cshtml*
 
 Anstelle eines Ansichtsnamens kann auch ein Pfad zu einer Ansichtsdatei verwendet werden. Wenn Sie einen absoluten Pfad im Stammverzeichnis der App verwenden (der mit „/“ oder „~/“ beginnt), muss die Erweiterung *.cshtml* angegeben sein:
 
@@ -192,7 +192,7 @@ Es ist möglich, für die Ansichtsmodelltypen und Unternehmensmodelltypen diesel
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a>Schwach typisierte Daten (ViewData, ViewData-Attribut und ViewBag)
 
-`ViewBag` *ist für die Razor-Seiten nicht verfügbar.*
+`ViewBag` *ist in Razor Pages nicht verfügbar.*
 
 Ansichten haben nicht nur Zugriff auf stark typisierte Datensammlungen, sondern auch auf *schwach typisierte* (auch als *lose typisiert* bezeichnet). Im Gegensatz zu starken Typen werden bei *schwachen Typen* (oder *losen Typen*) nicht explizit die Datentypen deklariert, die Sie verwenden. Sie können die Sammlung schwach typisierter Daten verwenden, um kleinere Datenmengen an Controller und Ansichten zu übergeben oder sie ihnen zu entnehmen.
 
@@ -202,7 +202,7 @@ Ansichten haben nicht nur Zugriff auf stark typisierte Datensammlungen, sondern 
 | einer Ansicht und einer [Layoutansicht](xref:mvc/views/layout)   | Festlegen des **\<title>**-Elementinhalts in der Layoutansicht über eine Ansichtsdatei.  |
 | einer [Teilansicht](xref:mvc/views/partial) und einer Ansicht | Ein Widget, das Daten anzeigt, die der Webseite zugrunde liegen, die der Benutzer angefordert hat.      |
 
-Auf diese Sammlung kann entweder über die Eigenschaft `ViewData` oder über die Eigenschaft `ViewBag` auf Controller und Ansichten verwiesen werden. Die `ViewData`-Eigenschaft ist ein Wörterbuch, das aus schwach typisierten Objekten besteht. Bei der `ViewBag`-Eigenschaft handelt es sich um einen Wrapper um `ViewData`, der dynamische Eigenschaften für die zugrunde liegende `ViewData`-Sammlung bereitstellt.
+Auf diese Sammlung kann entweder über die Eigenschaft `ViewData` oder über die Eigenschaft `ViewBag` auf Controller und Ansichten verwiesen werden. Die `ViewData`-Eigenschaft ist ein Wörterbuch, das aus schwach typisierten Objekten besteht. Bei der `ViewBag`-Eigenschaft handelt es sich um einen Wrapper um `ViewData`, der dynamische Eigenschaften für die zugrunde liegende `ViewData`-Sammlung bereitstellt. Hinweis: Bei Nachschlagevorgängen für Schlüssel wird für `ViewData` und `ViewBag` Groß-/Kleinschreibung nicht beachtet.
 
 `ViewData` und `ViewBag` werden zur Laufzeit dynamisch aufgelöst. Da in diesen Elementen keine Typüberprüfung zur Kompilierzeit enthalten sind, sind beide in der Regel fehleranfälliger als Ansichtsmodelle. Aus diesem Grund verwenden Entwickler `ViewData` und `ViewBag` selten oder nie.
 
@@ -210,7 +210,7 @@ Auf diese Sammlung kann entweder über die Eigenschaft `ViewData` oder über die
 
 **ViewData**
 
-Bei `ViewData` handelt es sich um ein [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)-Objekt, auf das über `string`-Schlüssel zugegriffen wird. Zeichenfolgendaten können gespeichert und ohne Umwandlung direkt verwendet werden. Trotzdem müssen Sie für die Extraktion andere `ViewData`-Objektwerte in bestimmte Typen umwandeln. Sie können `ViewData` verwenden, um Daten von Controllern an Ansichten und innerhalb von Ansichten zu übergeben, einschließlich [Teilansichten](xref:mvc/views/partial) und [Layouts](xref:mvc/views/layout).
+`ViewData` ist ein [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)-Objekt, auf das über `string`-Schlüssel zugegriffen wird. Zeichenfolgendaten können gespeichert und ohne Umwandlung direkt verwendet werden. Trotzdem müssen Sie für die Extraktion andere `ViewData`-Objektwerte in bestimmte Typen umwandeln. Sie können `ViewData` verwenden, um Daten von Controllern an Ansichten und innerhalb von Ansichten zu übergeben, einschließlich [Teilansichten](xref:mvc/views/partial) und [Layouts](xref:mvc/views/layout).
 
 Im Folgenden finden Sie ein Beispiel, über das Werte für eine Begrüßung und eine Anrede mithilfe von `ViewData` in einer Aktion festgelegt werden:
 
@@ -250,7 +250,7 @@ Arbeiten Sie mit den Daten in einer Ansicht:
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**ViewData-Attribut**
+**Attribut „ViewData“**
 
 Ein anderer Ansatz zur Verwendung von [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) ist das [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)-Attribut. Die Werte der Eigenschaften auf Controllern oder Razor-Seiten-Modellen, die mit `[ViewData]` versehen sind, werden in dem Verzeichnis gespeichert und daraus geladen.
 
@@ -292,9 +292,9 @@ Im Layout wird der Titel aus dem ViewData-Wörterbuch gelesen:
 
 **ViewBag**
 
-`ViewBag` *ist für die Razor-Seiten nicht verfügbar.*
+`ViewBag` *ist in Razor Pages nicht verfügbar.*
 
-Bei `ViewBag` handelt es sich um ein [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)-Objekt, das den dynamischen Zugriff auf die in `ViewData` gespeicherten Objekte ermöglicht. Es ist angenehmer, mit `ViewBag` zu arbeiten, da keine Umwandlung erforderlich ist. Im Folgenden finden Sie ein Beispiel, in dem dargestellt wird, wie Sie mit `ViewBag` das gleiche Ergebnis wie mit `ViewData` erzielen:
+`ViewBag` ist ein [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)-Objekt, das den dynamischen Zugriff auf die in `ViewData` gespeicherten Objekte ermöglicht. `ViewBag` ist eventuell praktischer zu handhaben, da keine Umwandlung erforderlich ist. Im Folgenden finden Sie ein Beispiel, in dem dargestellt wird, wie Sie mit `ViewBag` das gleiche Ergebnis wie mit `ViewData` erzielen:
 
 ```csharp
 public IActionResult SomeAction()
@@ -325,7 +325,7 @@ public IActionResult SomeAction()
 
 **Gleichzeitiges Verwenden von „ViewData“ and „ViewBag“**
 
-`ViewBag` *ist für die Razor-Seiten nicht verfügbar.*
+`ViewBag` *ist in Razor Pages nicht verfügbar.*
 
 Da `ViewData` und `ViewBag` beide auf dieselbe zugrunde liegende `ViewData`-Sammlung verweisen, können Sie sowohl `ViewData` als auch `ViewBag` verwenden, und zwischen beiden Elementen wechseln, wenn Sie Werte schreiben und lesen.
 
@@ -365,15 +365,15 @@ Sie können `ViewData` und `ViewBag` gleichzeitig verwenden und zwischen dem Les
 
 **Zusammenfassung der Unterschiede zwischen „ViewData“ und „ViewBag“**
 
- `ViewBag` ist für die Razor Pages nicht verfügbar.
+ `ViewBag` ist in Razor Pages nicht verfügbar.
 
 * `ViewData`
   * Wird von [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) abgeleitet und verfügt daher über Wörterbucheigenschaften wie `ContainsKey`, `Add`, `Remove` und `Clear`, die nützlich sein können.
-  * Schlüssel sind Zeichenfolgen im Wörterbuch. Daher sind Leerzeichen erlaubt. Ein Beispiel: `ViewData["Some Key With Whitespace"]`
+  * Schlüssel sind Zeichenfolgen im Wörterbuch. Daher sind Leerzeichen erlaubt. Beispiel: `ViewData["Some Key With Whitespace"]`
   * Jeder Typ, der von `string` abweicht, muss in der Ansicht umgewandelt werden, sodass `ViewData` verwendet werden kann.
 * `ViewBag`
   * Wird von [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) abgeleitet. Daher können dynamische Eigenschaften über die Punktnotation (`@ViewBag.SomeKey = <value or object>`) erstellt werden, und es ist keine Umwandlung erforderlich. Über die Syntax von `ViewBag` können Controller und Ansichten schneller hinzugefügt werden.
-  * Es ist einfacher, nach NULL-Werten zu suchen. Ein Beispiel: `@ViewBag.Person?.Name`
+  * Es ist einfacher, nach NULL-Werten zu suchen. Beispiel: `@ViewBag.Person?.Name`
 
 **Empfohlene Verwendung von „ViewData“ und „ViewBag“**
 

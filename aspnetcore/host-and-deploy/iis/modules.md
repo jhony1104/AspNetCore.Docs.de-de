@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/28/2019
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: de740775e124298f7c3d3be0c6f5a7311174116d
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 9770801b527829b131257da7c6e670bd33c23634
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265478"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468872"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS-Module mit ASP.NET Core
 
@@ -30,10 +30,10 @@ Die Tabelle enthält native IIS-Module, die mit ASP.NET Core-Apps und dem ASP.NE
 | **Authentifizierung durch Clientzertifikatszuordnung**<br>`CertificateMappingAuthenticationModule`      | Ja | |
 | **CGI**<br>`CgiModule`                                                                           | Nein  | |
 | **Konfigurationsvalidierung**<br>`ConfigurationValidationModule`                                  | Ja | |
-| **HTTP-Fehler**<br>`CustomErrorModule`                                                           | Nein  | [Middleware für Statuscodeseiten](xref:fundamentals/error-handling#configure-status-code-pages) |
+| **HTTP-Fehler**<br>`CustomErrorModule`                                                           | Nein  | [Middleware für Statuscodeseiten](xref:fundamentals/error-handling#usestatuscodepages) |
 | **Benutzerdefinierte Protokollierung**<br>`CustomLoggingModule`                                                      | Ja | |
 | **Standarddokument**<br>`DefaultDocumentModule`                                                  | Nein  | [Middleware für Standarddateien](xref:fundamentals/static-files#serve-a-default-document) |
-| **Hashwertauthentifizierung**<br>`DigestAuthenticationModule`                                        | Ja | |
+| **Digestauthentifizierung**<br>`DigestAuthenticationModule`                                        | Ja | |
 | **Verzeichnissuche**<br>`DirectoryListingModule`                                               | Nein  | [Middleware für Verzeichnissuche](xref:fundamentals/static-files#enable-directory-browsing) |
 | **Dynamische Komprimierung**<br>`DynamicCompressionModule`                                            | Ja | [Antworten komprimierende Middleware](xref:performance/response-compression) |
 | **Ablaufverfolgung für Anforderungsfehler**<br>`FailedRequestsTracingModule`                                     | Ja | [ASP.NET Core-Protokollierung](xref:fundamentals/logging/index#tracesource-provider) |
@@ -43,17 +43,17 @@ Die Tabelle enthält native IIS-Module, die mit ASP.NET Core-Apps und dem ASP.NE
 | **HTTP-Umleitung**<br>`HttpRedirectionModule`                                                  | Ja | [URL-umschreibende Middleware](xref:fundamentals/url-rewriting) |
 | **HTTP-Ablaufverfolgung**<br>`TracingModule`                                                              | Ja | |
 | **Authentifizierung durch IIS-Clientzertifikatszuordnung**<br>`IISCertificateMappingAuthenticationModule` | Ja | |
-| **IP- und Domäneneinschränkungen**<br>`IpRestrictionModule`                                          | Ja | |
+| **IP-Adresse- und Domäneneinschränkungen**<br>`IpRestrictionModule`                                          | Ja | |
 | **ISAPI-Filter**<br>`IsapiFilterModule`                                                         | Ja | [Middleware](xref:fundamentals/middleware/index) |
 | **ISAPI**<br>`IsapiModule`                                                                       | Ja | [Middleware](xref:fundamentals/middleware/index) |
 | **Protokollunterstützung**<br>`ProtocolSupportModule`                                                  | Ja | |
-| **Anforderungsfilterung**<br>`RequestFilteringModule`                                                | Ja | [URL-umschreibende Middleware`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
+| **Anforderungsfilterung**<br>`RequestFilteringModule`                                                | Ja | [URL-umschreibende Middleware `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **Anforderungsüberwachung**<br>`RequestMonitorModule`                                                    | Ja | |
 | **URL-Umschreibung**&#8224;<br>`RewriteModule`                                                      | Ja | [URL-umschreibende Middleware](xref:fundamentals/url-rewriting) |
 | **Serverseitige Includedateien**<br>`ServerSideIncludeModule`                                            | Nein  | |
 | **Statische Komprimierung**<br>`StaticCompressionModule`                                              | Nein  | [Antworten komprimierende Middleware](xref:performance/response-compression) |
 | **Statischer Inhalt**<br>`StaticFileModule`                                                         | Nein  | [Middleware für statische Dateien](xref:fundamentals/static-files) |
-| **Token-Zwischenspeicherung**<br>`TokenCacheModule`                                                          | Ja | |
+| **Zwischenspeicherung von Token**<br>`TokenCacheModule`                                                          | Ja | |
 | **URI-Zwischenspeicherung**<br>`UriCacheModule`                                                              | Ja | |
 | **URL-Autorisierung**<br>`UrlAuthorizationModule`                                                | Ja | [ASP.NET Core-Identität](xref:security/authentication/identity) |
 | **Windows-Authentifizierung**<br>`WindowsAuthenticationModule`                                      | Ja | |
@@ -167,7 +167,7 @@ Das HTTP-Zwischenspeicherungsmodul (`HttpCacheModule`) implementiert den IIS-Aus
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:host-and-deploy/iis/index>
-* [Introduction to IIS Architectures: Modules in IIS (Einführung in IIS-Architekturen: Module in IIS)](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
+* [Einführung in IIS-Architekturen: Module in IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Übersicht über IIS-Module](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [Anpassen von IIS 7.0-Rollen und -Modulen](https://technet.microsoft.com/library/cc627313.aspx)
-* [IIS`<system.webServer>`](/iis/configuration/system.webServer/)
+* [IIS `<system.webServer>`](/iis/configuration/system.webServer/)

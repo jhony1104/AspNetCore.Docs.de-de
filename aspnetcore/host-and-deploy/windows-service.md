@@ -5,14 +5,14 @@ description: Erfahren Sie, wie eine ASP.NET Core-App in einem Windows-Dienst geh
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 03/08/2019
+ms.date: 04/04/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: ecc7f3a8cd813c2803d03294e38d726905eeb1b8
-ms.sourcegitcommit: 34bf9fc6ea814c039401fca174642f0acb14be3c
+ms.openlocfilehash: 544eefa87898e82ec2bf8f9f61ce4e26dd554bb7
+ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57841422"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068335"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -20,11 +20,19 @@ Von [Luke Latham](https://github.com/guardrex) und [Tom Dykstra](https://github.
 
 Eine ASP.NET Core-App kann unter Windows als [Windows-Dienst](/dotnet/framework/windows-services/introduction-to-windows-service-applications) ohne die Verwendung von IIS gehostet werden. Wenn die App als Windows-Dienst gehostet wird, erfolgen Neustarts automatisch.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [PowerShell 6](https://github.com/PowerShell/PowerShell)
+* [PowerShell 6.2 oder höher](https://github.com/PowerShell/PowerShell)
+
+> [!NOTE]
+> Für Windows-Betriebssysteme vor dem Windows 10-Update vom Oktober 2018 (Version 1809/Build 10.0.17763) muss das Modul [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts) mit dem Modul [WindowsCompatibility](https://github.com/PowerShell/WindowsCompatibility) importiert werden, um Zugriff auf das im Abschnitt [Erstellen eines Benutzerkontos](#create-a-user-account) verwendete Cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) zu erhalten:
+>
+> ```powershell
+> Install-Module WindowsCompatibility -Scope CurrentUser
+> Import-WinModule Microsoft.PowerShell.LocalAccounts
+> ```
 
 ## <a name="deployment-type"></a>Bereitstellungstyp
 
@@ -129,7 +137,7 @@ Nehmen Sie in `Program.Main` die folgenden Änderungen vor:
 
 Veröffentlichen Sie die App mit [dotnet publish](/dotnet/articles/core/tools/dotnet-publish), einem [Visual Studio-Veröffentlichungsprofil](xref:host-and-deploy/visual-studio-publish-profiles) oder Visual Studio Code. Wählen Sie bei Verwendung von Visual Studio das **FolderProfile** aus, und konfigurieren Sie den **Zielspeicherort**, bevor Sie auf die Schaltfläche **Veröffentlichen** klicken.
 
-Um die Beispiel-App mit CLI-Tools (Befehlszeilenschnittstelle) zu veröffentlichen, führen Sie den Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) an einer Eingabeaufforderung aus dem Projektordner mit einer Releasekonfiguration aus, die an die [-c|--configuration](/dotnet/core/tools/dotnet-publish#options)-Option übergeben wurde. Verwenden Sie die [-o|--output](/dotnet/core/tools/dotnet-publish#options)-Option mit einem Pfad für die Veröffentlichung in einem Ordner außerhalb der App.
+Um die Beispiel-App mit CLI-Tools (Befehlszeilenschnittstelle) zu veröffentlichen, führen Sie den Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) in einer Windows-Befehlsshell im Projektordner mit einer Releasekonfiguration aus, die an die [-c|--configuration](/dotnet/core/tools/dotnet-publish#options)-Option übergeben wurde. Verwenden Sie die [-o|--output](/dotnet/core/tools/dotnet-publish#options)-Option mit einem Pfad für die Veröffentlichung in einem Ordner außerhalb der App.
 
 ### <a name="publish-a-framework-dependent-deployment-fdd"></a>Veröffentlichen einer Framework-abhängigen Bereitstellung
 
@@ -151,42 +159,38 @@ dotnet publish --configuration Release --runtime win7-x64 --output c:\svc
 
 ## <a name="create-a-user-account"></a>Erstellen eines Benutzerkontos
 
-Erstellen Sie ein Benutzerkonto für den Dienst mithilfe des `net user`-Befehls aus einer administrativen PowerShell 6-Befehlsshell:
+Erstellen Sie in einer administrativen PowerShell 6-Befehlsshell mithilfe des Cmdlets [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) ein Benutzerkonto für den Dienst:
 
 ```powershell
-net user {USER ACCOUNT} {PASSWORD} /add
+New-LocalUser -Name {NAME}
 ```
 
-Die Standardablaufzeit für das Kennwort beträgt sechs Wochen.
+Geben Sie bei Aufforderung ein [sicheres Kennwort](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) ein.
 
-Erstellen Sie für die Beispiel-App ein Benutzerkonto mit dem Namen `ServiceUser` und einem Kennwort. Ersetzen Sie im folgenden Befehl `{PASSWORD}` durch ein [sicheres Kennwort](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements).
+Erstellen Sie für die Beispiel-App ein Benutzerkonto mit dem Namen `ServiceUser`.
 
 ```powershell
-net user ServiceUser {PASSWORD} /add
+New-LocalUser -Name ServiceUser
 ```
 
-Wenn Sie den Benutzer einer Gruppe hinzufügen müssen, verwenden Sie den Befehl `net localgroup`. Hierbei steht `{GROUP}` für den Namen der Gruppe:
+Solange der Parameter `-AccountExpires` dem Cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) nicht mit einem Ablaufdatum <xref:System.DateTime> angegeben wird, läuft das Konto nicht ab.
 
-```powershell
-net localgroup {GROUP} {USER ACCOUNT} /add
-```
-
-Weitere Informationen finden Sie unter [Dienstbenutzerkonten](/windows/desktop/services/service-user-accounts).
+Weitere Informationen finden Sie unter [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) und [Dienstbenutzerkonten](/windows/desktop/services/service-user-accounts).
 
 Eine alternative Methode zum Verwalten von Benutzern bei Verwendung von Active Directory ist die Verwendung von verwalteten Dienstkonten. Weitere Informationen finden Sie unter [Gruppenverwaltete Dienstkonten: Übersicht](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
 
 ## <a name="set-permission-log-on-as-a-service"></a>Festgelegte Berechtigung: Anmelden als Dienst
 
-Gewähren Sie mit dem Befehl [icacls](/windows-server/administration/windows-commands/icacls) Schreib-/Lese-/Ausführungszugriff für den App-Ordner:
+Gewähren Sie in einer administrativen PowerShell 6-Befehlsshell mit dem Befehl [icacls](/windows-server/administration/windows-commands/icacls) Schreib-/Lese-/Ausführungszugriff auf den Ordner der App.
 
 ```powershell
-icacls "{PATH}" /grant {USER ACCOUNT}:(OI)(CI){PERMISSION FLAGS} /t
+icacls "{PATH}" /grant "{USER ACCOUNT}:(OI)(CI){PERMISSION FLAGS}" /t
 ```
 
-* `{PATH}` &ndash; Pfad zum App-Ordner.
+* `{PATH}` &ndash; Pfad zum Ordner der App.
 * `{USER ACCOUNT}` &ndash; Das Benutzerkonto (SID).
-* `(OI)`&ndash; Mit dem Flag für die Objektvererbung werden Berechtigungen an untergeordnete Dateien weitergegeben.
-* `(CI)`&ndash; Mit dem Flag für die Containervererbung werden Berechtigungen an untergeordnete Ordner weitergegeben.
+* `(OI)` &ndash; Mit dem Flag für die Objektvererbung werden Berechtigungen an untergeordnete Dateien weitergegeben.
+* `(CI)` &ndash; Mit dem Flag für die Containervererbung werden Berechtigungen an untergeordnete Ordner weitergegeben.
 * `{PERMISSION FLAGS}` &ndash; Legt die Zugriffsberechtigungen für die App fest.
   * Schreiben (`W`)
   * Lesen (`R`)
@@ -195,25 +199,24 @@ icacls "{PATH}" /grant {USER ACCOUNT}:(OI)(CI){PERMISSION FLAGS} /t
   * Ändern (`M`)
 * `/t` &ndash; Rekursive Anwendung auf vorhandene untergeordnete Ordner und Dateien.
 
-Verwenden Sie für die im Ordner *c:\\svc* veröffentlichte Beispiel-App und das Konto `ServiceUser` mit Schreib-/Lese-/Ausführungsberechtigungen den folgenden Befehl:
+Führen Sie für die im Ordner *c:\\svc* veröffentlichte Beispiel-App und das Konto `ServiceUser` mit Schreib-/Lese-/Ausführungsberechtigungen den folgenden Befehl in einer administrativen PowerShell 6-Befehlsshell aus.
 
 ```powershell
-icacls "c:\svc" /grant ServiceUser:(OI)(CI)WRX /t
+icacls "c:\svc" /grant "ServiceUser:(OI)(CI)WRX" /t
 ```
 
 Weitere Informationen finden Sie unter [icacls](/windows-server/administration/windows-commands/icacls).
 
 ## <a name="create-the-service"></a>Erstellen Sie den Dienst.
 
-Verwenden Sie das PowerShell-Skript [RegisterService.ps1](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/scripts), um den Dienst zu registrieren. Führen Sie an einer administrativen PowerShell 6-Eingabeaufforderung den folgenden Befehl aus:
+Verwenden Sie das PowerShell-Skript [RegisterService.ps1](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/scripts), um den Dienst zu registrieren. Führen Sie in einer administrativen PowerShell 6-Befehlsshell das Skript mit dem folgenden Befehl aus:
 
 ```powershell
 .\RegisterService.ps1 
     -Name {NAME} 
     -DisplayName "{DISPLAY NAME}" 
     -Description "{DESCRIPTION}" 
-    -Path "{PATH}" 
-    -Exe {ASSEMBLY}.exe 
+    -Exe "{PATH TO EXE}\{ASSEMBLY NAME}.exe" 
     -User {DOMAIN\USER}
 ```
 
@@ -221,15 +224,14 @@ Im folgenden Beispiel für die Beispiel-App:
 
 * Der Dienst heißt **MyService**.
 * Der veröffentlichte Dienst ist im Ordner *c:\\svc* vorhanden. Die ausführbare Datei der App heißt *SampleApp.exe*.
-* Der Dienst wird mit dem Konto `ServiceUser` ausgeführt. Im folgenden Beispiel lautet der Name des lokalen Computers `Desktop-PC`.
+* Der Dienst wird mit dem Konto `ServiceUser` ausgeführt. Beim folgenden Beispielbefehl lautet der Name des lokalen Computers `Desktop-PC`. Ersetzen Sie `Desktop-PC` durch den Computernamen oder die Domäne für Ihr System.
 
 ```powershell
 .\RegisterService.ps1 
     -Name MyService 
     -DisplayName "My Cool Service" 
     -Description "This is the Sample App service." 
-    -Path "c:\svc" 
-    -Exe SampleApp.exe 
+    -Exe "c:\svc\SampleApp.exe" 
     -User Desktop-PC\ServiceUser
 ```
 

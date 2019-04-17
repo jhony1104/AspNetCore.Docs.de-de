@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 01/17/2019
 uid: fundamentals/startup
-ms.openlocfilehash: 9556ec076fce3500115cf0e934202f11b175ccd3
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 362186be6feeeefeca3c56688ee6420de5fb9659
+ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750799"
+ms.lasthandoff: 04/10/2019
+ms.locfileid: "59468623"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -39,9 +39,9 @@ Der Host stellt Dienste für den `Startup`-Klassenkonstruktor bereit. Die App f�
 
 [Dependency Injection](xref:fundamentals/dependency-injection) wird häufig im Zusammenhang mit der `Startup`-Klasse verwendet, um Folgendes einzufügen:
 
-* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>, um Dienste nach Umgebung zu konfigurieren.
-* <xref:Microsoft.Extensions.Configuration.IConfiguration>, um Konfigurationen zu lesen.
-* <xref:Microsoft.Extensions.Logging.ILoggerFactory>, um eine Protokollierung in `Startup.ConfigureServices` zu erstellen.
+* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> , um Dienste nach Umgebung zu konfigurieren.
+* <xref:Microsoft.Extensions.Configuration.IConfiguration> , um die Konfiguration zu lesen.
+* <xref:Microsoft.Extensions.Logging.ILoggerFactory> , um in `Startup.ConfigureServices` eine Protokollierung zu erstellen.
 
 [!code-csharp[](startup/sample_snapshot/Startup2.cs?highlight=7-8)]
 
@@ -63,22 +63,24 @@ Es kann sein, dass der Host einige Dienste konfiguriert, bevor die `Startup`-Met
 
 Für Features, die ein umfangreiches Setup erfordern, sind in <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> `Add{Service}`-Erweiterungsmethoden verfügbar. ASP.NET Core-Apps registrieren Dienste in der Regel für Entity Framework, Identity und MVC:
 
-[!code-csharp[](startup/sample_snapshot/Startup3.cs?highlight=4,7,11)]
+[!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 
 Wenn Sie Dienste zum Dienstcontainer hinzufügen, können Sie auch über die App und die `Configure`-Methode auf diese zugreifen. Die Dienste werden über die [Dependency Injection](xref:fundamentals/dependency-injection) oder über <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> aufgelöst.
 
+Unter [SetCompatibilityVersion](xref:mvc/compatibility-version) finden Sie weitere Informationen zu `SetCompatibilityVersion`.
+
 ## <a name="the-configure-method"></a>Die Configure-Methode
 
-Die <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>-Methode wird verwendet, um festzulegen, wie die App auf HTTP-Anforderungen reagiert. Sie können die Anforderungspipeline konfigurieren, indem Sie [Middlewarekomponenten](xref:fundamentals/middleware/index) zu einer <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>-Instanz hinzufügen. Die `Configure`-Methode kann auf `IApplicationBuilder` zugreifen, wird aber nicht im Dienstcontainer registriert. Über das Hosting wird ein `IApplicationBuilder` erstellt, der direkt an `Configure` übergeben wird.
+Die <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>-Methode wird verwendet, um festzulegen, wie die App auf HTTP-Anforderungen reagiert. Sie können die Anforderungspipeline konfigurieren, indem Sie [Middlewarekomponenten](xref:fundamentals/middleware/index) zu einer <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>-Instanz hinzufügen. `IApplicationBuilder` ist für die `Configure`-Methode verfügbar, wird aber nicht im Dienstcontainer registriert. Über das Hosting wird ein `IApplicationBuilder` erstellt, der direkt an `Configure` übergeben wird.
 
 Die [ASP.NET Core-Vorlagen](/dotnet/core/tools/dotnet-new) konfigurieren die Pipeline mit Unterstützung für:
 
-* [die Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling#developer-exception-page)
-* [Ausnahmehandler](xref:fundamentals/error-handling#configure-a-custom-exception-handling-page)
+* [Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling#developer-exception-page)
+* [Ausnahmehandler](xref:fundamentals/error-handling#exception-handler-page)
 * [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [HTTPS-Umleitung](xref:security/enforcing-ssl)
 * [Statische Dateien](xref:fundamentals/static-files)
-* [die Datenschutzgrundverordnung (DSGVO)](xref:security/gdpr)
+* [Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr)
 * ASP.NET Core-[MVC](xref:mvc/overview) und [Razor Pages](xref:razor-pages/index)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine ASP.NET Core-App aus einer externen Asse
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 03/23/2019
+ms.date: 04/06/2019
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: c174d658c84ada88eef17528c663735a91347ba7
-ms.sourcegitcommit: 7d6019f762fc5b8cbedcd69801e8310f51a17c18
+ms.openlocfilehash: c2a2e1fbd288ff292c6759d03fae51876cdb5704
+ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419445"
+ms.lasthandoff: 04/09/2019
+ms.locfileid: "59425074"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Verwenden von Hostingstartassemblys in ASP.NET Core
 
@@ -44,10 +44,10 @@ Um das automatische Laden von Hostingstartassemblys zu deaktivieren, verwenden S
 
 * Um zu verhindern, dass alle Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf `true` oder `1` fest:
   * Hostkonfigurationseinstellung [Verhindern des Hostingstarts](xref:fundamentals/host/web-host#prevent-hosting-startup).
-  * Die Umgebungsvariable `ASPNETCORE_PREVENTHOSTINGSTARTUP`
+  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` Umgebungsvariable.
 * Um zu verhindern, dass bestimmte Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf eine durch Semikolons getrennte Zeichenfolge mit Hostingstartassemblys fest, die beim Starten ausgeschlossen werden sollen:
   * Hostkonfigurationseinstellung [Hostingstartausschlussassemblys](xref:fundamentals/host/web-host#hosting-startup-exclude-assemblies).
-  * Die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` Umgebungsvariable.
 
 Wenn sowohl die Konfigurationseinstellung für den Host als auch die Umgebungsvariable festgelegt werden, wird das Verhalten durch die Hosteinstellung gesteuert.
 
@@ -381,7 +381,14 @@ dotnet nuget locals all --clear
 **Aktivierung über eine mittels Laufzeitspeicher bereitgestellten Assembly**
 
 1. Im Projekt *StartupDiagnostics* wird [PowerShell](/powershell/scripting/powershell-scripting) verwendet, um die Datei *StartupDiagnostics.deps.json* zu bearbeiten. PowerShell ist standardmäßig auf Windows-Betriebssystemen ab Windows 7 SP1 und Windows Server 2008 R2 SP1 installiert. Im Artikel [Installing Windows PowerShell (Installieren von Windows PowerShell)](/powershell/scripting/setup/installing-powershell#powershell-core) erfahren Sie, wie Sie PowerShell auf anderen Plattformen nutzen können.
-1. Führen Sie das Skript *build.ps1* im Ordner *RuntimeStore* aus. Der `dotnet store`-Befehl im Skript verwendet den `win7-x64`-[Laufzeitbezeichner (RID)](/dotnet/core/rid-catalog) für einen Windows bereitgestellten Hostingstart. Wenn der Hostingstart für eine andere Laufzeit bereitgestellt wird, muss die entsprechende RID eingegeben werden.
-1. Führen Sie das Skript *deploy.ps1* im Ordner *deployment* aus.
+1. Führen Sie das Skript *build.ps1* im Ordner *RuntimeStore* aus. Das Skript:
+   * Generiert das Paket `StartupDiagnostics`.
+   * Generiert den Laufzeitspeicher für `StartupDiagnostics` im Ordner *store*. Der `dotnet store`-Befehl im Skript verwendet den `win7-x64`-[Laufzeitbezeichner (RID)](/dotnet/core/rid-catalog) für einen Windows bereitgestellten Hostingstart. Wenn der Hostingstart für eine andere Laufzeit bereitgestellt wird, muss in Zeile 37 die entsprechende RID eingegeben werden.
+   * Generiert `additionalDeps` für `StartupDiagnostics` im Ordner *additionalDeps/shared/Microsoft.AspNetCore.App/{Version des freigegebenen Frameworks}/*.
+   * Legt die Datei *deploy.ps1* im Ordner *deployment* ab.
+1. Führen Sie das Skript *deploy.ps1* im Ordner *deployment* aus. Das Skript fügt Folgendes:
+   * `StartupDiagnostics` an die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` an.
+   * Der Pfad der Hostingstartabhängigkeiten zur Umgebungsvariablen `DOTNET_ADDITIONAL_DEPS`.
+   * Die Pfad des Laufzeitspeichers zur Umgebungsvariablen `DOTNET_SHARED_STORE`.
 1. Führen Sie die Beispiel-App aus.
 1. Fordern Sie den Endpunkt `/services` an, um die registrierten Dienste der App anzuzeigen. Fordern Sie den Endpunkt `/diag` an, um Diagnoseinformationen anzuzeigen.

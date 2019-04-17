@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 282af56eb911aea53a6ce945e7c1177c158fc342
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 5a2ec9a8d85925e55840962cc90b3092953e7920
+ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750580"
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "59012850"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
@@ -39,8 +39,8 @@ In diesem Tutorial:
 
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download)
 * [Visual Studio 2017 oder 2019](https://visualstudio.microsoft.com/downloads/) mit den folgenden Workloads:
-    * Workload **ASP.NET und Webentwicklung**
-    * Workload **Plattformübergreifende .NET Core-Entwicklung**
+  * Workload **ASP.NET und Webentwicklung**
+  * Workload **Plattformübergreifende .NET Core-Entwicklung**
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
@@ -341,7 +341,7 @@ Im folgenden Code haben das `async`-Schlüsselwort, der `Task<T>`-Rückgabewert,
 
 * Das `await`-Schlüsselwort hat zur Folge, dass der Compiler die Methode in zwei Teile unterteilt. Der erste Teil endet mit dem Vorgang, der auf asynchrone Weise gestartet wird. Der zweite Teil wird in eine Rückrufmethode übertragen, die aufgerufen wird, wenn der Vorgang abgeschlossen wird.
 
-* Bei `ToListAsync` handelt es sich um die asynchrone Version der `ToList`-Erweiterungsmethode.
+* `ToListAsync` ist die asynchrone Version der `ToList`-Erweiterungsmethode.
 
 Behalten Sie Folgendes im Hinterkopf, wenn Sie asynchronen Code schreiben, der Entity Framework Core verwendet:
 
@@ -355,7 +355,7 @@ Weitere Informationen zur asynchronen Programmierung in .NET finden Sie unter [A
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Laden Sie die vollständige Anwendung herunter, oder zeigen Sie sie an.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

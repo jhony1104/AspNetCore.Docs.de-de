@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 065b2016d3a2dcc2243ec6869e027c5fabe4dad8
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.openlocfilehash: f0e4dbb6fda4f676ad8e769c71cc9548a4d61d66
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59068403"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614434"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -148,7 +148,7 @@ Die `Logging`-Eigenschaft kann den `LogLevel` und Protokollanbietereigenschaften
 
 Die `LogLevel`-Eigenschaft unter `Logging` gibt den Mindest[grad](#log-level) an, der für ausgewählte Kategorien protokolliert werden soll. Im Beispiel protokollieren die Kategorien `System` und `Microsoft` mit dem Grad `Information` und alle anderen Kategorien mit dem Grad `Debug`.
 
-Weitere Eigenschaften unter `Logging` geben Protokollierungsanbieter an. Das Beispiel bezieht sich auf den Konsolenanbieter. Wenn ein Anbieter [Protokollbereiche](#log-scopes) unterstützt, gibt `IncludeScopes` an, ob sie aktiviert sind. Eine Anbietereigenschaft (z.B. `Console` im Beispiel) kann auch eine `LogLevel`-Eigenschaft angeben. `LogLevel` Unter einem Anbieter gibt die Grade an, die für diesen Anbieter protokolliert werden sollen.
+Weitere Eigenschaften unter `Logging` geben Protokollierungsanbieter an. Das Beispiel bezieht sich auf den Konsolenanbieter. Wenn ein Anbieter [Protokollbereiche](#log-scopes) unterstützt, gibt `IncludeScopes` an, ob sie aktiviert sind. Eine Anbietereigenschaft (z.B. `Console` im Beispiel) kann auch eine `LogLevel`-Eigenschaft angeben. `LogLevel` unter einem Anbieter gibt die Grade an, die für diesen Anbieter protokolliert werden sollen.
 
 Wenn Grade in `Logging.{providername}.LogLevel` angegeben werden, überschreiben sie alle Angaben in `Logging.LogLevel`.
 
@@ -168,7 +168,7 @@ Wenn Grade in `Logging.{providername}.LogLevel` angegeben werden, überschreiben
 }
 ```
 
-`LogLevel` Schlüssel stellen Protokollnamen dar. Der `Default`-Schlüssel gilt für Protokolle, die nicht explizit aufgeführt werden. Der Wert entspricht dem auf das jeweilige Protokoll angewendeten [Protokolliergrad](#log-level).
+`LogLevel`-Schlüssel stellen Protokollnamen dar. Der `Default`-Schlüssel gilt für Protokolle, die nicht explizit aufgeführt werden. Der Wert entspricht dem auf das jeweilige Protokoll angewendeten [Protokolliergrad](#log-level).
 
 ::: moniker-end
 
@@ -249,7 +249,7 @@ Um die Kategorie explizit anzugeben, rufen Sie `ILoggerFactory.CreateLogger` auf
 
 ::: moniker-end
 
-`ILogger<T>` Entspricht dem Aufruf von `CreateLogger` mit dem vollqualifizierten Typnamen `T`.
+`ILogger<T>` entspricht dem Aufruf von `CreateLogger` mit dem vollqualifizierten Typnamen `T`.
 
 ## <a name="log-level"></a>Protokolliergrad
 
@@ -285,11 +285,11 @@ ASP.NET Core definiert die folgenden Protokolliergrade. Die Reihenfolge reicht v
 
 * Information = 2
 
-  Zur Nachverfolgung des allgemeinen Ablaufs der App. Diese Protokolle haben typischerweise einen langfristigen Nutzen. Beispiel: `Request received for path /api/todo`
+  Zur Nachverfolgung des allgemeinen Ablaufs der App. Diese Protokolle haben typischerweise einen langfristigen Nutzen. Ein Beispiel: `Request received for path /api/todo`
 
 * Warning = 3
 
-  Für ungewöhnliche oder unerwartete Ereignisse im App-Verlauf. Dazu können Fehler oder andere Bedingungen gehören, die zwar nicht zum Beenden der App führen, aber eventuell untersucht werden müssen. Behandelte Ausnahmen sind eine typische Verwendung für den Protokolliergrad `Warning`. Beispiel: `FileNotFoundException for file quotes.txt.`
+  Für ungewöhnliche oder unerwartete Ereignisse im App-Verlauf. Dazu können Fehler oder andere Bedingungen gehören, die zwar nicht zum Beenden der App führen, aber eventuell untersucht werden müssen. Behandelte Ausnahmen sind eine typische Verwendung für den Protokolliergrad `Warning`. Ein Beispiel: `FileNotFoundException for file quotes.txt.`
 
 * Error = 4
 
@@ -497,7 +497,8 @@ Jeder Anbieter definiert einen *Alias*, der in der Konfiguration anstelle des vo
 * Konsole
 * Debug
 * EventLog
-* AzureAppServices
+* AzureAppServicesFile
+* AzureAppServicesBlob
 * TraceSource
 * EventSource
 
@@ -611,7 +612,7 @@ warn: TodoApi.Controllers.TodoController[4000]
 ASP.NET Core wird mit den folgenden Anbietern bereitgestellt:
 
 * [Konsole](#console-provider)
-* [Debug](#debug-provider)
+* [Debuggen](#debug-provider)
 * [EventSource](#eventsource-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
@@ -770,7 +771,7 @@ Im folgenden Beispiel wird ein `TraceSource`-Anbieter konfiguriert, der Protokol
 
 Informationen zur Protokollierung in Azure finden Sie in den folgenden Abschnitten:
 
-* [Der Azure App Service-Anbieter](#azure-app-service-provider)
+* [Azure App Service-Anbieter](#azure-app-service-provider)
 * [Azure-Protokollstreaming](#azure-log-streaming)
 
 ::: moniker range=">= aspnetcore-1.1"
@@ -877,7 +878,7 @@ Das Application Insights SDK kann Protokolle erfassen und melden, die von der AS
 
 ## <a name="third-party-logging-providers"></a>Protokollierungsanbieter von Drittanbietern
 
-Protokollierungsframeworks von Drittanbietern, die mit ASP.NET Core funktionieren:
+Protokollierungsframeworks von Drittanbietern aufgeführt, die mit ASP.NET Core funktionieren:
 
 * [elmah.io](https://elmah.io/) ([GitHub-Repository](https://github.com/elmahio/Elmah.Io.Extensions.Logging))
 * [Gelf](http://docs.graylog.org/en/2.3/pages/gelf.html) ([GitHub-Repository](https://github.com/mattwcole/gelf-extensions-logging))

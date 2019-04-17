@@ -5,18 +5,18 @@ description: In diesem Tutorial wird erläutert, wie Sie das Dateiwatcher-Tool (
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: f1e0d91b27df4af7cbfb6f2547c94c0370c65d0d
-ms.sourcegitcommit: cec77d5ad8a0cedb1ecbec32834111492afd0cd2
+ms.openlocfilehash: 40ecca1c6f9d519b24649d0c28946d95b820c07c
+ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/10/2019
-ms.locfileid: "54207501"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068195"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-`dotnet watch` ist ein Tool, das einen [.NET Core-CLI](/dotnet/core/tools)-Befehl ausführt, wenn sich Quelldateien ändern. Eine Dateiänderung kann beispielsweise eine Kompilierung, Testausführung oder Bereitstellung auslösen.
+`dotnet watch` [ ist ein Tool, das einen ](/dotnet/core/tools).NET Core-CLI-Befehl ausführt, wenn sich Quelldateien ändern. Eine Dateiänderung kann beispielsweise eine Kompilierung, Testausführung oder Bereitstellung auslösen.
 
 In diesem Tutorial wird eine vorhandene Web-API mit zwei Endpunkten verwendet: der eine gibt eine Summe zurück, der andere ein Produkt. Die Produktmethode enthält einen Fehler, der in diesem Tutorial behoben wird.
 
@@ -27,6 +27,9 @@ Navigieren Sie in einer Befehlsshell zum Ordner *WebApp*. Führen Sie den folgen
 ```console
 dotnet run
 ```
+
+> [!NOTE]
+> Sie können `dotnet run --project <PROJECT>` verwenden, um ein auszuführendes Projekt anzugeben. Wenn Sie beispielsweise im Stammverzeichnis der Beispiel-App `dotnet run --project WebApp` ausführen, wird auch das Projekt *WebApp* ausgeführt.
 
 Die Konsolenausgabe zeigt Meldungen ähnlich der folgenden (die angibt, dass die App ausgeführt wird und auf Anforderungen wartet):
 
@@ -77,6 +80,9 @@ Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet w
 
 Führen Sie `dotnet watch run` im Ordner *WebApp* aus. Die Konsolenausgabe gibt an, dass `watch` gestartet wurde.
 
+> [!NOTE]
+> Sie können `dotnet watch --project <PROJECT>` verwenden, um ein zu überwachendes Projekt anzugeben. Wenn Sie beispielsweise im Stammverzeichnis der Beispiel-App `dotnet watch --project WebApp run` ausführen, wird auch das Projekt *WebApp* ausgeführt und überwacht.
+
 ## <a name="make-changes-with-dotnet-watch"></a>Vornehmen von Änderungen mit `dotnet watch`
 
 Stellen Sie sicher, dass `dotnet watch` ausgeführt wird.
@@ -86,7 +92,7 @@ Korrigieren Sie den Fehler in der `Product`-Methode von *MathController.cs* so, 
 ```csharp
 public static int Product(int a, int b)
 {
-  return a * b;
+    return a * b;
 }
 ```
 
@@ -129,7 +135,7 @@ Durch Bearbeiten der *CSPROJ*-Datei können der Watchlist weitere Elemente hinzu
 
 ## <a name="opt-out-of-files-to-be-watched"></a>Abwählen von zu überwachenden Dateien
 
-Sie können `dotnet-watch` so konfigurieren, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der *CSPROJ*-Datei das `Watch="false"`-Attribut hinzu:
+`dotnet-watch` kann so konfiguriert werden, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der *CSPROJ*-Datei das `Watch="false"`-Attribut hinzu:
 
 ```xml
 <ItemGroup>
@@ -179,4 +185,4 @@ VSTest wird ausgeführt, wenn in einer beliebigen Datei in einem der Testprojekt
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` in GitHub
 
-`dotnet-watch` ist Teil des GitHub-[Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch).
+`dotnet-watch` ist Teil des [Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch) auf GitHub.

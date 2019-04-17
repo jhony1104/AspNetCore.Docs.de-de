@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core Dependency Injection implementiert u
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/28/2019
+ms.date: 04/07/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 8312f3375296a8530ac2db3db46d062b7b9e76b9
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: da6ddf1f0efd164a58f017ff55ce216bbefa7cc6
+ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750606"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068322"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -82,7 +82,7 @@ Diese Schnittstelle wird durch einen konkreten Typ (`MyDependency`) implementier
 
 `MyDependency` fordert [ILogger&lt;TCategoryName&gt;](/dotnet/api/microsoft.extensions.logging.ilogger-1) im Konstruktor an. Die Abhängigkeitsinjektion wird häufig als Verkettung verwendet. Jede angeforderte Abhängigkeit fordert wiederum ihre eigenen Abhängigkeiten an. Der Container löst die Abhängigkeiten im Diagramm auf und gibt den vollständig aufgelösten Dienst zurück. Die gesammelten aufzulösenden Abhängigkeiten werden als *Abhängigkeitsstruktur*, *Abhängigkeitsdiagramm* oder *Objektdiagramm* bezeichnet.
 
-`IMyDependency` und `ILogger<TCategoryName>` müssen im Dienstcontainer registriert werden. `IMyDependency` ist in `Startup.ConfigureServices` registriert. `ILogger<TCategoryName>` wird von der Protokollierungsabstraktionsinfrastruktur registriert. Es handelt sich also um einen [von einem Framework bereitgestellten Dienst](#framework-provided-services), der standardmäßig vom Framework registriert wird.
+`IMyDependency` und `ILogger<TCategoryName>` müssen im Dienstcontainer registriert werden. `IMyDependency` ist in `Startup.ConfigureServices` registriert. `ILogger<TCategoryName>` wird von der Protokollierungsabstraktionsinfrastruktur registriert. Es handelt sich also um einen von einem [Framework bereitgestellten Dienst](#framework-provided-services), der standardmäßig vom Framework registriert wird.
 
 Der Container löst `ILogger<TCategoryName>` unter Verwendung der [(generischen) offenen Typen](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types) auf, wodurch die Notwendigkeit entfällt, jeden [(generischen) konstruierten Typ](/dotnet/csharp/language-reference/language-specification/types#constructed-types) zu registrieren:
 
@@ -162,11 +162,11 @@ Weitere Informationen finden Sie im Artikel [ServiceCollection-Klasse](/dotnet/a
 
 Wählen Sie eine geeignete Lebensdauer für jeden registrierten Dienst aus. ASP.NET Core-Dienste können mit folgender Lebensdauer konfiguriert werden:
 
-**Transient** (vorübergehend)
+**Transient (vorübergehend)**
 
 Kurzlebige Dienste werden bei jeder Anforderung aus dem Dienstcontainer neu erstellt. Diese Lebensdauer ist am besten für einfache, zustandslose Dienste geeignet.
 
-**Scoped** (bereichsbezogen)
+**Bereichsbezogen**
 
 Dienste mit bereichsbezogener Lebensdauer werden einmal pro Clientanforderung (-verbindung) erstellt.
 
@@ -209,7 +209,7 @@ Die Schnittstellen sind in die Klasse `Operation` implementiert. Der `Operation`
 
 `OperationService` ist registriert und hängt von jedem anderen `Operation`-Typ ab. Wenn `OperationService` über die Abhängigkeitsinjektion angefordert wird, wird entweder eine neue Instanz jedes Diensts oder eine vorhandene Instanz basierend auf der Lebensdauer des abhängigen Diensts zurückgegeben.
 
-* Wenn vorübergehende Dienste bei der Anforderung aus dem Container erstellt werden, ist die `OperationId` von Dienst `IOperationTransient` anders als die `OperationId` von `OperationService`. `OperationService` erhält eine neue Instanz der Klasse `IOperationTransient`. Der `OperationId`-Wert der neuen Instanz ist anders.
+* Wenn vorübergehende Dienste bei der Anforderung aus dem Container erstellt werden, ist die `OperationId` von Dienst `IOperationTransient` anders als die `OperationId` von `OperationService`. `OperationService` erhält eine neue Instanz der `IOperationTransient`-Klasse. Der `OperationId`-Wert der neuen Instanz ist anders.
 * Wenn bereichsbezogene Dienste pro Clientanforderung erstellt werden, ist die `OperationId` in Dienst `IOperationScoped` und `OperationService` identisch innerhalb einer Clientanforderung. Clientanforderungsübergreifend haben die beiden Dienste jedoch einen anderen gemeinsamen `OperationId`-Wert.
 * Wenn Singleton- und Singletoninstanzdienste einmal erstellt und für alle Clientanforderungen und alle Dienste verwendet werden, ist `OperationId` für alle Dienstanforderungen identisch.
 
@@ -236,7 +236,7 @@ Bereichsbezogen: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19
 Singleton: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Instanz: 00000000-0000-0000-0000-000000000000
 
-`OperationService`-Vorgänge:
+`OperationService` Vorgänge:
 
 Vorübergehend: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
 Bereichsbezogen: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
@@ -252,7 +252,7 @@ Bereichsbezogen: 31e820c5-4834-4d22-83fc-a60118acb9f4
 Singleton: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Instanz: 00000000-0000-0000-0000-000000000000
 
-`OperationService`-Vorgänge:
+`OperationService` Vorgänge:
 
 Vorübergehend: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
 Bereichsbezogen: 31e820c5-4834-4d22-83fc-a60118acb9f4  
@@ -364,7 +364,7 @@ Der integrierte Dienstcontainer dient dazu, die Anforderungen des Frameworks und
 * Auf Namen basierende Injektion
 * Untergeordnete Container
 * Benutzerdefinierte Verwaltung der Lebensdauer
-* `Func<T>`-Unterstützung für die verzögerte Initialisierung
+* `Func<T>` -Unterstützung für die verzögerte Initialisierung
 
 Eine Liste einiger Container, die Adapter unterstützen, finden Sie in der [Datei „readme.md“ zur Dependency Injection](https://github.com/aspnet/Extensions/tree/master/src/DependencyInjection).
 
@@ -416,13 +416,46 @@ Die Factorymethode des einzelnen Diensts, z. B. das zweite Argument für [AddSin
 
 ## <a name="recommendations"></a>Empfehlungen
 
-* `async/await`- und `Task`-basierte Dienstauflösung wird nicht unterstützt. C# unterstützt keine asynchronen Konstruktoren, daher wird empfohlen, asynchrone Methoden zu verwenden, nachdem der Dienst synchron aufgelöst wurde.
+* `async/await` - und `Task`-basierte Dienstauflösung wird nicht unterstützt. C# unterstützt keine asynchronen Konstruktoren. Daher wird empfohlen, asynchrone Methoden zu verwenden, nachdem der Dienst synchron aufgelöst wurde.
 
 * Vermeiden Sie das Speichern von Daten und die direkte Konfiguration im Dienstcontainer. Der Einkaufswagen eines Benutzers sollte z. B. normalerweise nicht dem Dienstcontainer hinzugefügt werden. Bei der Konfiguration sollte das [Optionsmuster](xref:fundamentals/configuration/options) verwendet werden. Gleichermaßen sollten Sie „Datencontainer“-Objekte vermeiden, die nur vorhanden sind, um den Zugriff auf einige andere Objekte zuzulassen. Das tatsächlich benötige Element sollte besser über Dependency Injection angefordert werden.
 
 * Vermeiden Sie den statischen Zugriff auf Dienste (z. B. statische Eingabe von [IApplicationBuilder.ApplicationServices](/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder.applicationservices) zur Verwendung an anderer Stelle).
 
-* Vermeiden Sie die Verwendung von *Dienstlocator-Mustern*. Rufen Sie beispielsweise nicht <xref:System.IServiceProvider.GetService*> auf, um eine Dienstinstanz zu erhalten, wenn Sie stattdessen Dependency Injection verwenden können. Eine andere Dienstlocator-Variante, die Sie vermeiden sollten, ist die Injektion einer Factory, die zur Laufzeit Abhängigkeiten auflöst. Beide Vorgehensweisen kombinieren Strategien zur [Umkehrung der Steuerung](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion).
+* Vermeiden Sie die Verwendung von *Dienstlocator-Mustern*. Rufen Sie beispielsweise nicht <xref:System.IServiceProvider.GetService*> auf, um eine Dienstinstanz zu erhalten, wenn Sie stattdessen Dependency Injection verwenden können:
+
+  **Falsch:**
+
+  ```csharp
+  public void MyMethod()
+  {
+      var options = 
+          _services.GetService<IOptionsMonitor<MyOptions>>();
+      var option = options.CurrentValue.Option;
+
+      ...
+  }
+  ```
+
+  **Richtig**:
+
+  ```csharp
+  private readonly MyOptions _options;
+
+  public MyClass(IOptionsMonitor<MyOptions> options)
+  {
+      _options = options.CurrentValue;
+  }
+
+  public void MyMethod()
+  {
+      var option = _options.Option;
+
+      ...
+  }
+  ```
+
+* Eine andere Dienstlocator-Variante, die Sie vermeiden sollten, ist die Injektion einer Factory, die zur Laufzeit Abhängigkeiten auflöst. Beide Vorgehensweisen kombinieren Strategien zur [Umkehrung der Steuerung](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion).
 
 * Vermeiden Sie den statischen Zugriff auf `HttpContext` (z. B. [IHttpContextAccessor.HttpContext](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor.httpcontext)).
 
@@ -439,5 +472,5 @@ Dependency Injection stellt eine *Alternative* zu statischen bzw. globalen Objek
 * <xref:fundamentals/middleware/extensibility>
 * [Schreiben von sauberem Code in ASP.NET Core über Dependency Injection (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
 * [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
-* [Umkehrung von Steuerungscontainern und das Abhängigkeitsinjektionsmuster (Martin Fowler)](https://www.martinfowler.com/articles/injection.html) (in englischer Sprache)
+* [Umkehrung von Steuerungscontainern und das Abhängigkeitsinjektionsmuster (Martin Fowler) (in englischer Sprache)](https://www.martinfowler.com/articles/injection.html)
 * [Registrieren eines Diensts mit mehreren Schnittstellen in ASP.NET Core DI](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
