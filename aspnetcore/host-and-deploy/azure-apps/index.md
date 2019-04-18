@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 03/30/2019
 uid: host-and-deploy/azure-apps/index
 ms.openlocfilehash: 009ee97d954a21f5fca1713b2b45218cac235e33
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012837"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
@@ -22,7 +22,7 @@ ms.locfileid: "59012837"
 
 In der [App Service-Dokumentation](/azure/app-service/) finden Sie die Azure-Apps-Dokumentation, Tutorials, Beispiele und Leitfäden sowie andere Ressourcen. Dies sind zwei erwähnenswerte Tutorials, die auf das Hosten von ASP.NET Core-Apps eingehen:
 
-[Erstellen von ASP.NET Core-Web-Apps in Azure](/azure/app-service/app-service-web-get-started-dotnet)  
+[Erstellen einer ASP.NET Core-Web-App in Azure](/azure/app-service/app-service-web-get-started-dotnet)  
 Verwenden Sie Visual Studio, um ASP.NET Core-Web-Apps zu erstellen und in Azure App Service unter Windows bereitzustellen.
 
 [Erstellen einer .NET Core-App in App Service für Linux](/azure/app-service/containers/quickstart-dotnetcore)  
@@ -36,7 +36,7 @@ Erfahren Sie, wie eine ASP.NET Core-App in Azure App Service mit Visual Studio v
 <xref:host-and-deploy/azure-apps/azure-continuous-deployment>  
 Erfahren Sie, wie Sie mit Visual Studio eine ASP.NET Core-Web-App erstellen und sie unter Verwendung von Git für Continuous Deployment in Azure App Service bereitstellen.
 
-[Erstellen Ihrer ersten Pipeline](/azure/devops/pipelines/get-started-yaml)  
+[Erstellen Sie Ihre erste Pipeline](/azure/devops/pipelines/get-started-yaml)  
 Richten Sie ein CI-Build für eine ASP.NET Core-App ein, und erstellen Sie dann ein Continuous Deployment-Release für Azure App Service.
 
 [Azure Web App-Sandbox](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox)  
