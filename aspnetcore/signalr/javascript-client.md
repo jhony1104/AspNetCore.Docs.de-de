@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/17/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: e58015221497a9f962edf9f9fdba7ea3025d7694
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: f1f072e63928502fa1bad62e808ff035e57f2fd3
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59705603"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59983012"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR-JavaScript-client
 
@@ -66,6 +66,13 @@ JavaScript-Clients rufen Sie öffentliche Methoden für Hubs über die [Aufrufen
 
 > [!NOTE]
 > Bei Verwendung von Azure SignalR Service in *serverlose Modus*, Sie können nicht von einem Client hubmethoden aufrufen. Weitere Informationen finden Sie unter den [SignalR Service-Dokumentation](/azure/azure-signalr/signalr-concept-serverless-development-config).
+
+Die `invoke` Methodenrückgabe JavaScript [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise). Die `Promise` wird aufgelöst mit dem Rückgabewert (sofern vorhanden) Wenn die Methode auf dem Server zurückgegeben. Wenn die Methode auf dem Server einen Fehler, löst die `Promise` wird mit der Fehlermeldung abgelehnt. Verwenden der `then` und `catch` Methoden für die `Promise` selbst, um diese Fälle zu behandeln (oder `await` Syntax).
+
+Die `send` Methodenrückgabe JavaScript `Promise`. Die `Promise` wird aufgelöst, wenn die Nachricht an den Server gesendet wurde. Wenn ein Fehler beim Senden der Nachricht, die `Promise` wird mit der Fehlermeldung abgelehnt. Verwenden der `then` und `catch` Methoden für die `Promise` selbst, um diese Fälle zu behandeln (oder `await` Syntax).
+
+> [!NOTE]
+> Mithilfe von `send` nicht gewartet, bis der Server die Nachricht empfangen hat. Daher ist es nicht möglich, Daten oder Fehler vom Server zurückgegeben.
 
 ## <a name="call-client-methods-from-hub"></a>Rufen Sie Client-Methoden von Hub-Instanz
 

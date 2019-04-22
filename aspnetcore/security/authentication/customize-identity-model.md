@@ -3,14 +3,14 @@ title: Anpassung der Identität des in ASP.NET Core
 author: ajcvickers
 description: Dieser Artikel beschreibt, wie Sie das zugrunde liegende Datenmodell von Entity Framework Core für ASP.NET Core Identity anpassen.
 ms.author: avickers
-ms.date: 09/24/2018
+ms.date: 04/24/2019
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 0aa7448ac37a97a4d09a04caf365f641f22f5997
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: ae5f4567a8921ce277cd6153f37a5558bcf4e261
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327300"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59982784"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>Anpassung der Identität des in ASP.NET Core
 
@@ -34,7 +34,7 @@ Verwenden Sie eine der folgenden Ansätze, hinzufügen und Anwenden von Migratio
 * Die .NET Core-CLI, wenn die Befehlszeile verwenden. Weitere Informationen finden Sie unter [.NET von EF Core-Befehlszeilentools](/ef/core/miscellaneous/cli/dotnet).
 * Klicken auf die **Migrationen anwenden** Schaltfläche auf der Fehlerseite, wenn die app ausgeführt wird.
 
-ASP.NET Core verfügt über einen Fehler während der Entwicklung-Seite-Handler. Der Handler kann Migrationen anwenden, wenn die app ausgeführt wird. Für Produktions-apps häufig ist es angebracht, SQL-Skripts über die Migrationen zu generieren und Bereitstellen von Änderungen in der Datenbank als Teil einer gesteuerten Bereitstellung der app und Datenbank.
+ASP.NET Core verfügt über einen Fehler während der Entwicklung-Seite-Handler. Der Handler kann Migrationen anwenden, wenn die app ausgeführt wird. Produktions-apps in der Regel von Migrationen zu SQL-Skripts generieren und Bereitstellen von Änderungen in der Datenbank als Teil einer gesteuerten app und die Bereitstellung der Datenbank.
 
 Wenn eine neue app mit Identität erstellt wird, wurden bereits obigen Schritte 1 und 2 abgeschlossen. D. h. das ursprüngliche Datenmodell ist bereits vorhanden, und die ursprüngliche Migration wurde dem Projekt hinzugefügt. Die ursprüngliche Migration muss immer noch auf die Datenbank angewendet werden. Die ursprüngliche Migration kann über eine der folgenden Methoden angewendet werden:
 
@@ -300,6 +300,16 @@ Beim Überschreiben von `OnModelCreating`, `base.OnModelCreating` zuerst aufgeru
 
 ### <a name="custom-user-data"></a>Benutzerdefinierte Daten
 
+<!--
+set projNam=WebApp1
+dotnet new webapp -o %projNam%
+cd %projNam%
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
+dotnet aspnet-codegenerator identity  -dc ApplicationDbContext --useDefaultUI 
+dotnet ef migrations add CreateIdentitySchema
+dotnet ef database update
+ -->
+
 [Benutzerdefinierte Benutzerdaten](xref:security/authentication/add-user-data) wird unterstützt durch Erben von `IdentityUser`. Es ist üblich, nennen Sie diese Art `ApplicationUser`:
 
 ```csharp
@@ -318,14 +328,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
 }
 ```
 
 Besteht keine Notwendigkeit zum Überschreiben `OnModelCreating` in die `ApplicationDbContext` Klasse. EF Core ordnet die `CustomTag` Eigenschaft gemäß der Konvention. Allerdings muss die Datenbank aktualisiert werden, zum Erstellen eines neuen `CustomTag` Spalte. Zum Erstellen der Spalte, eine Migration hinzufügen und aktualisieren Sie die Datenbank an, wie in beschrieben [Identitäts- und EF Core-Migrationen](#identity-and-ef-core-migrations).
 
-Update `Startup.ConfigureServices` für die Verwendung der neuen `ApplicationUser` Klasse:
+Update *Pages/Shared/_LoginPartial.cshtml* , und Ersetzen Sie `IdentityUser` mit `ApplicationUser`:
 
-::: moniker range=">= aspnetcore-2.1"
+```
+@using Microsoft.AspNetCore.Identity
+@using WebApp1.Areas.Identity.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+```
+
+Update *Areas/Identity/IdentityHostingStartup.cs* oder `Startup.ConfigureServices` , und Ersetzen Sie `IdentityUser` mit `ApplicationUser`.
 
 ```csharp
 services.AddDefaultIdentity<ApplicationUser>()
@@ -337,28 +359,6 @@ In ASP.NET Core 2.1 oder höher, wird die Identität als eine Razor-Klassenbibli
 
 * [Gerüst für Identität](xref:security/authentication/scaffold-identity)
 * [Hinzufügen, herunterladen und Löschen von benutzerdefinierten Daten-Identität](xref:security/authentication/add-user-data)
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-```csharp
-services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
-```
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-```csharp
-services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
-        .AddDefaultTokenProviders();
-```
-
-::: moniker-end
 
 ### <a name="change-the-primary-key-type"></a>Ändern Sie den Typ des primären Schlüssels
 
