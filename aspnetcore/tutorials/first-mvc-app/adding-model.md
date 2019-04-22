@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 02/25/2019
 uid: tutorials/first-mvc-app/adding-model
 ms.openlocfilehash: 08d8e9679bfee11f03e61cb4b9ae9b5b36186049
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012824"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Modells zu einer ASP.NET Core MVC-App
@@ -26,13 +26,13 @@ In diesem Tutorial schreiben Sie zuerst die Modellklassen. Anschließend erstell
 
 ## <a name="add-a-data-model-class"></a>Hinzufügen einer Datenmodellklasse
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*>**Hinzufügen** > **Klasse**. Nennen Sie die Klasse **Movie**.
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Fügen Sie zum Ordner *Modelle* eine Klasse mit dem Namen *Movie.cs* hinzu.
 
@@ -45,7 +45,7 @@ Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*>**Hinzufügen** >
 
 In diesem Abschnitt wird das Gerüst für das Filmmodell erstellt. Mit dem Tool für den Gerüstbau werden Seiten für die Vorgänge „Create“ (Erstellen), „Read“ (Lesen), „Update“ (Aktualisieren) und „Delete“ (Löschen), kurz CRUD-Vorgänge, für das Filmmodell erstellt.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Klicken Sie im *Projektmappen-Explorer* mit der rechten Maustaste auf den Ordner **Controllers** und anschließend auf **Hinzufügen > Neues Gerüstelement**.
 
@@ -76,7 +76,7 @@ Visual Studio erstellt Folgendes:
 
 Die automatische Erstellung des Datenbankkontexts und der [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Aktionsmethoden (create, read, update and delete – Erstellen, Lesen, Aktualisieren und Löschen) und Ansichten wird als *Gerüstbau* bezeichnet.
 
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
@@ -98,7 +98,7 @@ Die automatische Erstellung des Datenbankkontexts und der [CRUD](https://wikiped
 
 <!-- Mac -------------------------->
 
-# [<a name="visual-studio-for-mac"></a>Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Öffnen Sie ein Befehlsfenster im Projektverzeichnis (das Verzeichnis mit den Dateien *Program.cs*, *Startup.cs*, und *CSPROJ*).
 * Installieren Sie das Gerüstbautool:
@@ -141,7 +141,7 @@ In diesem Abschnitt werden die folgenden Aufgaben ausgeführt:
 * Fügen Sie eine anfängliche Migration hinzu.
 * Aktualisieren Sie die Datenbank mit der anfänglichen Migration.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (Package Manager Console, PMC) aus.
 
@@ -160,7 +160,7 @@ In diesem Abschnitt werden die folgenden Aufgaben ausgeführt:
 
    Mit dem Befehl `Update-Database` führen Sie die Methode `Up` in der Datei *Migrations/{time-stamp}_InitialCreate.cs* aus, mit der die Datenbank erstellt wird.
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [initial migration](~/includes/RP/model3.md)]
 
@@ -174,7 +174,7 @@ Das Datenbankschema basiert auf dem Modell, das in der `MvcMovieContext`-Klasse 
 
 ASP.NET Core wird mit [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (Dependency Injection, DI) erstellt. Dienste (z.B. der EF Core-Datenbankkontext) werden über DI beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z.B. Razor Pages), werden von diesen Diensten über Konstruktorparameter bereitgestellt. Der Konstruktorcode, der eine Datenbankkontext-Instanz abruft, wird später in diesem Tutorial erläutert.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Das Gerüstbautool hat automatisch einen Datenbankkontext erstellt und diesen mit dem DI-Container registriert.
 
@@ -190,7 +190,7 @@ Der vorangehende Code erstellt eine [DbSet\<Movie>](/dotnet/api/microsoft.entity
 
 Der Name der Verbindungszeichenfolge wird an den Kontext übergeben, indem Sie eine Methode auf einem [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions)-Objekt aufrufen. Für die lokale Entwicklung liest das [ASP.NET Core-Konfigurationssystem](xref:fundamentals/configuration/index) die Verbindungszeichenfolge aus der *appsettings.json*-Datei.
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 Sie haben einen Datenbankkontext erstellt und diesen mit dem DI-Container registriert.
 
@@ -224,8 +224,8 @@ Sie haben den [Migrationsschritt](#pmc) verpasst.
 
 Der oberhalb hervorgehobene Code zeigt den Filmdatenbankkontext, der dem [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)-Container hinzugefügt wird:
 
-* `services.AddDbContext<MvcMovieContext>(options =>` gibt die zu verwendende Datenbank und Verbindungszeichenfolge an.
-* `=>` ist ein [Lambdaoperator](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
+* `services.AddDbContext<MvcMovieContext>(options =>` gibt die zu verwendende Datenbank und die Verbindungszeichenfolge an.
+* `=>` ist ein [Lambdaoperator](/dotnet/articles/csharp/language-reference/operators/lambda-operator).
 
 Öffnen Sie die Datei *Controllers/MoviesController.cs*, und überprüfen Sie den Konstruktor:
 

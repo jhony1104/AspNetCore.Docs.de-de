@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie in ASP.NET Core-Apps das App-Verhalten umgebu
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/30/2019
+ms.date: 04/10/2019
 uid: fundamentals/environments
-ms.openlocfilehash: 4fc43935aa058efc4497d3d9eb607df6c0899443
-ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
+ms.openlocfilehash: f14c29030d96b530ea4af054cfa195d44db43679
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/02/2019
-ms.locfileid: "58809236"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59516351"
 ---
 # <a name="use-multiple-environments-in-aspnet-core"></a>Verwenden von mehreren Umgebungen in ASP.NET Core
 
@@ -234,7 +234,7 @@ Sobald die Umgebungsvariable `ASPNETCORE_ENVIRONMENT` global festgelegt wird, gi
 
 **web.config**
 
-Eine Anleitung zum Festlegen der Umgebungsvariable `ASPNETCORE_ENVIRONMENT` mit *web.config* finden Sie im Abschnitt *Festlegen von Umgebungsvariablen* der im Artikel zu <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>. Wurde die Umgebungsvariable `ASPNETCORE_ENVIRONMENT` mit *web.config* festgelegt, überschreibt der Wert die Einstellung auf Systemebene.
+Eine Anleitung zum Festlegen der Umgebungsvariable `ASPNETCORE_ENVIRONMENT` mit *web.config* finden Sie im Abschnitt *Festlegen von Umgebungsvariablen* der im Artikel zu <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>.
 
 ::: moniker range=">= aspnetcore-2.2"
 

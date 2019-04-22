@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/25/2019
 uid: security/key-vault-configuration
 ms.openlocfilehash: 8fd1cca1803d3f1d44d80ec63c5cfc259cbdaf55
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012694"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault-Konfigurationsanbieter in ASP.NET Core
@@ -304,7 +304,7 @@ Weitere Informationen finden Sie unter [authentifizieren mit einem Zertifikat an
 
 Der Anbieter ist der Konfigurationswerte in ein Array für die Bindung an ein POCO-Array lesen kann.
 
-Wenn aus einer Konfigurationsquelle zu lesen, die Schlüssel für den Doppelpunkt enthalten kann (`:`) Trennzeichen, die einen numerischen Schlüsselsegment wird verwendet, um die Schlüssel zu unterscheiden, aus denen ein Array (`:0:`, `:1:`,... `:{n}:`) auf den zugehörigen gespeicherten Wert zugreifen. Weitere Informationen finden Sie unter [Konfiguration: Ein Array an eine Klasse gebunden](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
+Wenn aus einer Konfigurationsquelle zu lesen, die Schlüssel für den Doppelpunkt enthalten kann (`:`) Trennzeichen, die einen numerischen Schlüsselsegment wird verwendet, um die Schlüssel zu unterscheiden, aus denen ein Array (`:0:`, `:1:`,... `:{n}:`) angezeigt wird. Weitere Informationen finden Sie unter [Konfiguration: Ein Array an eine Klasse gebunden](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
 
 Azure Key Vault-Schlüssel können keinen Doppelpunkt als Trennzeichen verwendet. In diesem Thema beschriebene Ansatz verwendet die doppelten Bindestriche (`--`) als Trennzeichen bei hierarchischen Werten (Abschnitte). Array-Schlüssel werden in Azure Key Vault gespeichert, mit doppelten Bindestrichen und numerische wichtigsten Segmente (`--0--`, `--1--`, &hellip; `--{n}--`).
 

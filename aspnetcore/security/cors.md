@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/07/2019
 uid: security/cors
 ms.openlocfilehash: fe5b750c44e5fad9ba80efb2cc8116d0a64b1a17
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068296"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Aktivieren Sie Ursprungsübergreifender Anforderungen (CORS) in ASP.NET Core
@@ -170,7 +170,7 @@ to
 to remove the ambiguous **This**.
 -->
 
-`AllowAnyOrigin` Wirkt sich auf preflight-Anforderungen und die `Access-Control-Allow-Origin` Header. Weitere Informationen finden Sie unter den [Preflight-Anforderungen](#preflight-requests) Abschnitt.
+`AllowAnyOrigin` wirkt sich auf preflight-Anforderungen und die `Access-Control-Allow-Origin` Header. Weitere Informationen finden Sie unter den [Preflight-Anforderungen](#preflight-requests) Abschnitt.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -383,7 +383,7 @@ In diesem Abschnitt wird beschrieben, was geschieht, in einem [CORS](https://dev
   * Es liegt an den Client (Browser) um CORS zu erzwingen. Der Server führt die Anforderung und gibt die Antwort zurück, sondern der Client, der ein Fehler auftritt und blockiert die Antwort zurückgibt. Beispielsweise wird eines der folgenden Tools die Serverantwort angezeigt:
     * [Fiddler](https://www.telerik.com/fiddler)
     * [Postman](https://www.getpostman.com/)
-    * [HttpClient für .NET](/dotnet/csharp/tutorials/console-webapiclient)
+    * [.NET HttpClient](/dotnet/csharp/tutorials/console-webapiclient)
     * Ein Webbrowser, indem Sie die URL in die Adressleiste eingeben.
 * Dies ist eine Möglichkeit für einen Server zum Zulassen von Browsern zum Ausführen einer Cross-Origin [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) oder [API abrufen](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) -Anforderung, die andernfalls nicht zulässig sein sollen.
   * Browser (ohne CORS), die Cross-Origin-Anfragen nicht möglich. Bevor Sie CORS [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) wurde verwendet, um diese Einschränkung zu umgehen. JSONP XHR nicht verwenden kann, verwendet er die `<script>` Tag zum Empfangen der Antwort. Skripts sind zulässig, um ursprungsübergreifende geladen werden.

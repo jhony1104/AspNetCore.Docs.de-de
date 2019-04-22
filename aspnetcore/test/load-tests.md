@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/05/2019
 uid: test/loadtests
 ms.openlocfilehash: 0a8449ea2c9df0f2ac93058f03af0a1a2aa66508
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068182"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core laden/Belastungstests
@@ -69,9 +69,9 @@ Am Ende des Tests zeigen die generierten Berichte die Leistungsmerkmale der app.
 Die folgende Liste enthält die Drittanbieter-Web-Leistungstools mit verschiedenen Featuresätze:
 
 * [Apache JMeter](https://jmeter.apache.org/)
-* [ApacheBench (Ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
+* [ApacheBench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
 * [Gatling](https://gatling.io/)
-* [Johannisbrot](https://locust.io/)
+* [Locust](https://locust.io/)
 * [West Wind WebSurge](http://websurge.west-wind.com/)
 * [Netling](https://github.com/hallatore/Netling)
 

@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: 40ecca1c6f9d519b24649d0c28946d95b820c07c
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068195"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-`dotnet watch` [ ist ein Tool, das einen ](/dotnet/core/tools).NET Core-CLI-Befehl ausführt, wenn sich Quelldateien ändern. Eine Dateiänderung kann beispielsweise eine Kompilierung, Testausführung oder Bereitstellung auslösen.
+`dotnet watch` ist ein Tool, das einen [.NET Core-CLI](/dotnet/core/tools)-Befehl ausführt, wenn sich Quelldateien ändern. Eine Dateiänderung kann beispielsweise eine Kompilierung, Testausführung oder Bereitstellung auslösen.
 
 In diesem Tutorial wird eine vorhandene Web-API mit zwei Endpunkten verwendet: der eine gibt eine Summe zurück, der andere ein Produkt. Die Produktmethode enthält einen Fehler, der in diesem Tutorial behoben wird.
 
@@ -135,7 +135,7 @@ Durch Bearbeiten der *CSPROJ*-Datei können der Watchlist weitere Elemente hinzu
 
 ## <a name="opt-out-of-files-to-be-watched"></a>Abwählen von zu überwachenden Dateien
 
-`dotnet-watch` kann so konfiguriert werden, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der *CSPROJ*-Datei das `Watch="false"`-Attribut hinzu:
+Sie können `dotnet-watch` so konfigurieren, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der *CSPROJ*-Datei das `Watch="false"`-Attribut hinzu:
 
 ```xml
 <ItemGroup>
@@ -185,4 +185,4 @@ VSTest wird ausgeführt, wenn in einer beliebigen Datei in einem der Testprojekt
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` in GitHub
 
-`dotnet-watch` ist Teil des [Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch) auf GitHub.
+`dotnet-watch` ist Teil des GitHub-[Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch).

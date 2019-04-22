@@ -8,10 +8,10 @@ ms.date: 04/06/2019
 monikerRange: '>= aspnetcore-2.1'
 uid: mvc/models/validation
 ms.openlocfilehash: 1ae3c20478b02d6f654e65fdf34c88e1ffb837f8
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468736"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
@@ -129,7 +129,7 @@ Die `AdditionalFields`-Eigenschaft des `[Remote]`-Attributs ermöglicht Ihnen di
 
 [!code-csharp[](validation/sample/Models/User.cs?name=snippet_UserNameProperties)]
 
-`AdditionalFields` kann explizit auf die Zeichenfolgen `"FirstName"` und `"LastName"` festgelegt werden. Wenn Sie aber den [`nameof`](/dotnet/csharp/language-reference/keywords/nameof)-Operator verwenden, ist ein Refactoring zu einem späteren Zeitpunkt einfacher. Die Aktionsmethode für diese Validierung muss sowohl Vor- als auch Nachnamensargumente akzeptieren:
+Für `AdditionalFields` könnten explizit die Zeichenfolgen `"FirstName"` und `"LastName"` festgelegt werden. Wenn Sie aber den [`nameof`](/dotnet/csharp/language-reference/keywords/nameof)-Operator verwenden, ist ein Refactoring zu einem späteren Zeitpunkt einfacher. Die Aktionsmethode für diese Validierung muss sowohl Vor- als auch Nachnamensargumente akzeptieren:
 
 [!code-csharp[](validation/sample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -142,7 +142,7 @@ Wenn Sie mindestens zwei weitere Felder überprüfen möchten, geben Sie sie als
 public string MiddleName { get; set; }
 ```
 
-`AdditionalFields`muss wie alle anderen Attributargumente ein konstanter Ausdruck sein. Aus diesem Grund verwenden Sie keine [interpolierte Zeichenfolge](/dotnet/csharp/language-reference/keywords/interpolated-strings) oder rufen <xref:System.String.Join*> auf, um `AdditionalFields` zu initialisieren.
+`AdditionalFields` muss wie alle anderen Attributargumente ein konstanter Ausdruck sein. Aus diesem Grund verwenden Sie keine [interpolierte Zeichenfolge](/dotnet/csharp/language-reference/keywords/interpolated-strings) oder rufen <xref:System.String.Join*> auf, um `AdditionalFields` zu initialisieren.
 
 ## <a name="alternatives-to-built-in-attributes"></a>Alternativen zu integrierten Attributen
 
@@ -261,7 +261,7 @@ Die vorangegangenen Taghilfsprogramme rendern die folgende HTML.
 
 Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die [`required()`](https://jqueryvalidation.org/required-method/)-Methode von „jQuery Unobtrusive Validation“, die dann diese Meldung im zugehörigen **\<span>**-Element anzeigt.
 
-Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. `[DataType]` -Attribute und -Unterklassen wie `[EmailAddress]` ermöglichen das Angeben der Fehlermeldung.
+Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. Mithilfe von `[DataType]`-Attributen und Subklassen wie `[EmailAddress]` können Sie die Fehlermeldung angeben.
 
 ### <a name="add-validation-to-dynamic-forms"></a>Hinzufügen der Validierung zu dynamischen Formularen
 
@@ -371,5 +371,5 @@ Dies funktioniert nur für MVC-Ansichten, nicht in Razor Pages. Eine andere Mög
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [System.ComponentModel.DataAnnotations namespace](xref:System.ComponentModel.DataAnnotations)
+* [System.ComponentModel.DataAnnotations-Namespace](xref:System.ComponentModel.DataAnnotations)
 * [Modellbindung](model-binding.md)

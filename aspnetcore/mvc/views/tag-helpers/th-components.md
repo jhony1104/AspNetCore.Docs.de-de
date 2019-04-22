@@ -7,10 +7,10 @@ ms.author: scaddie
 ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/th-components
 ms.openlocfilehash: fdad4ae367245cd3beabaf90587c1fe5e9162afe
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468594"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Taghilfsprogrammkomponenten in ASP.NET Core
@@ -44,7 +44,7 @@ Für den Code oben gilt:
   * Ermöglicht die Initialisierung der Klasse mit einem <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>.
   * Ermöglicht die Verwendung von Taghilfsprogrammkomponenten zum Hinzufügen oder Ändern von HTML-Elementen.
 * Die <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*>-Eigenschaft definiert die Reihenfolge, in der die Komponenten gerendert werden. `Order` ist erforderlich, wenn mehrere Verwendungsmöglichkeiten für Taghilfsprogrammkomponenten in einer App vorhanden sind.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*> vergleicht den Wert der <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*>-Eigenschaft des Ausführungskontexts mit `head`. Wenn der Vergleich zu TRUE ausgewertet wird, wird der Inhalt des `_style`-Felds in das HTML`<head>`-Element eingefügt.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*> vergleicht den <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*>-Eigenschaftswert des Ausführungskontexts mit `head`. Wenn der Vergleich zu TRUE ausgewertet wird, wird der Inhalt des `_style`-Felds in das HTML`<head>`-Element eingefügt.
 
 ### <a name="inject-into-html-body-element"></a>Einfügen in HTML-body-Element
 
@@ -85,7 +85,7 @@ Für den Code oben gilt:
 * Die `@inject`-Direktive stellt eine Instanz von `ITagHelperComponentManager` zur Verfügung. Die Instanz wird einer Variablen mit dem Namen `manager` für den Downstreamzugriff in der Razor-Datei zugewiesen.
 * Eine Instanz von `AddressTagHelperComponent` wird der Sammlung „Taghilfsprogrammkomponenten“ der App hinzugefügt.
 
-`AddressTagHelperComponent` wird geändert, um einen Konstruktor zu berücksichtigen, der die Parameter `markup` und `order` annimmt:
+`AddressTagHelperComponent` wird geändert, um einen Konstruktor zu berücksichtigen, der die `markup`- und `order`-Parameter annimmt:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_Constructor)]
 

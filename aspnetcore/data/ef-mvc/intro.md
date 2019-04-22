@@ -8,10 +8,10 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
 ms.openlocfilehash: 5a2ec9a8d85925e55840962cc90b3092953e7920
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012850"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
@@ -341,7 +341,7 @@ Im folgenden Code haben das `async`-Schlüsselwort, der `Task<T>`-Rückgabewert,
 
 * Das `await`-Schlüsselwort hat zur Folge, dass der Compiler die Methode in zwei Teile unterteilt. Der erste Teil endet mit dem Vorgang, der auf asynchrone Weise gestartet wird. Der zweite Teil wird in eine Rückrufmethode übertragen, die aufgerufen wird, wenn der Vorgang abgeschlossen wird.
 
-* `ToListAsync` ist die asynchrone Version der `ToList`-Erweiterungsmethode.
+* Bei `ToListAsync` handelt es sich um die asynchrone Version der `ToList`-Erweiterungsmethode.
 
 Behalten Sie Folgendes im Hinterkopf, wenn Sie asynchronen Code schreiben, der Entity Framework Core verwendet:
 
@@ -355,7 +355,7 @@ Weitere Informationen zur asynchronen Programmierung in .NET finden Sie unter [A
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Laden Sie die vollständige Anwendung herunter, oder zeigen Sie sie an.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 1/11/2019
 uid: security/authentication/google-logins
-ms.openlocfilehash: 1328bcbce3e6e4786f9d410d1f28f309dc9d2722
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 44c79b3279db7946b6d89a726bd3f5acfb5f51af
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750550"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59705590"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Google externe Anmeldung Setup in ASP.NET Core
 
 Von [Valeriy Novytskyy](https://github.com/01binary) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Im Januar 2019 Google gestartet, um [Herunterfahren](https://developers.google.com/+/api-shutdown) Google + melden Sie sich, und Entwickler müssen in einer neuen Google-Anmeldung im System verschieben, März. Die ASP.NET Core 2.1 und 2.2 Pakete für die Google-Authentifizierung werden im Februar, um die Änderungen zu berücksichtigen, aktualisiert werden. Weitere Informationen und temporäre entschärfungen für ASP.NET Core, finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/6486). In diesem Tutorial wurde mit dem neuen Setup-Prozess aktualisiert.
+[Legacy-APIs Google + heruntergefahren wurden seit 7 März 2019](https://developers.google.com/+/api-shutdown). Google + melden Sie sich, und Entwickler müssen eine neue Google-Anmeldung im System verschieben. Die ASP.NET Core 2.1 und 2.2-Pakete für die Google-Authentifizierung werden aktualisiert, damit um die Änderungen zu berücksichtigen. Weitere Informationen und temporäre entschärfungen für ASP.NET Core, finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/6486). In diesem Tutorial wurde mit dem neuen Setup-Prozess aktualisiert.
 
 In diesem Tutorial erfahren Sie, wie Sie Benutzern die Anmeldung mithilfe des ASP.NET Core-2.2-Projekts erstellt, die auf ihr Google-Kontos aktivieren die [Vorgängerseite](xref:security/authentication/social/index).
 

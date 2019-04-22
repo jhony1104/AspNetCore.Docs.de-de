@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/models/file-uploads
 ms.openlocfilehash: 831f0c84f0ff062e9e24ccbf4ca81b7143c66e66
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468552"
 ---
 # <a name="file-uploads-in-aspnet-core"></a>Dateiuploads in ASP.NET Core
@@ -19,7 +19,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.NET MVC-Aktionen unterstützen das Hochladen von mindestens einer kleinen Datei über eine einfache Modellbindung bzw. das Streaming von großen Dateien.
 
-[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
+[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample).
 
 ## <a name="uploading-small-files-with-model-binding"></a>Hochladen von kleinen Dateien mittels Modellbindung
 

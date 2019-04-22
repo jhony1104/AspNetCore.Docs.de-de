@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/working-with-forms
 ms.openlocfilehash: 6eff3bf03e650e154b5c767c9bcdd915e7db8b47
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468801"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
@@ -245,7 +245,7 @@ Die Datenanmerkungen, die auf die `Email`- und `Password`-Eigenschaft angewendet
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>Alternative HTML-Hilfsprogramme zum Taghilfsprogramm für die Eingabe
 
-`Html.TextBox`, `Html.TextBoxFor`, `Html.Editor` und `Html.EditorFor` verfügen über sich überschneidende Features mit dem Taghilfsprogramm für die Eingabe. Das Taghilfsprogramm für die Eingabe legt das `type`-Attribut automatisch fest, `Html.TextBox` und `Html.TextBoxFor` jedoch nicht. `Html.Editor` und `Html.EditorFor` verarbeiten Sammlungen, komplexe Objekte und Vorlagen, das Taghilfsprogramm für die Eingabe jedoch nicht. Das Taghilfsprogramm für die Eingabe, `Html.EditorFor` und `Html.TextBoxFor` sind stark typisiert (sie verwenden Lambdaausdrücke), `Html.TextBox` und `Html.Editor` jedoch nicht (sie verwenden Ausdrucksnamen).
+`Html.TextBox`, `Html.TextBoxFor`, `Html.Editor` und `Html.EditorFor` verfügen über sich überschneidende Features mit dem Taghilfsprogramm für die Eingabe. Das Taghilfsprogramm für die Eingabe legt das `type`-Attribut automatisch fest, `Html.TextBox` und `Html.TextBoxFor` jedoch nicht. `Html.Editor` und `Html.EditorFor` verarbeiten Auflistungen, komplexe Objekte und Vorlagen, das Taghilfsprogramm für die Eingabe jedoch nicht. Das Taghilfsprogramm für die Eingabe, `Html.EditorFor` und `Html.TextBoxFor` sind stark typisiert (sie verwenden Lambdaausdrücke), `Html.TextBox` und `Html.Editor` jedoch nicht (sie verwenden Ausdrucksnamen).
 
 ### <a name="htmlattributes"></a>HtmlAttributes
 
@@ -277,7 +277,7 @@ Mit den Auflistungseigenschaften generiert `asp-for="CollectionProperty[23].Memb
 
 Wenn ASP.NET Core MVC den Wert von `ModelExpression` berechnet, werden verschiedene Quellen untersucht, unter anderem `ModelState`. Gehen Sie von `<input type="text" asp-for="@Name">` aus. Das berechnete `value`-Attribut entspricht dem ersten der folgenden Werte, der nicht NULL ist:
 
-* `ModelState` -Eintrag mit dem Schlüssel „Name“.
+* `ModelState`-Eintrag mit dem Schlüssel „Name“
 * Ergebnis des Ausdrucks `Model.Name`
 
 ### <a name="navigating-child-properties"></a>Navigieren zu untergeordneten Eigenschaften
@@ -334,7 +334,7 @@ Die Vorlage *Views/Shared/EditorTemplates/ToDoItem.cshtml*:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-`foreach` sollte nach Möglichkeit verwendet werden, wenn der Wert in `asp-for` oder einem `Html.DisplayFor` entsprechenden Kontext verwendet werden soll. Allgemein ist `for` besser als `foreach` (sofern das Szenario dies zulässt), weil kein Enumerator zugewiesen werden muss. Die Auswertung eines Indexers in einem LINQ-Ausdruck kann jedoch teuer sein und sollte auf ein Mindestmaß reduziert werden.
+Wenn der Wert in einem Kontext wie `asp-for` oder `Html.DisplayFor` ausgeführt wird, sollte nach Möglichkeit `foreach` verwendet werden. Allgemein ist `for` besser als `foreach` (sofern das Szenario dies zulässt), weil kein Enumerator zugewiesen werden muss. Die Auswertung eines Indexers in einem LINQ-Ausdruck kann jedoch teuer sein und sollte auf ein Mindestmaß reduziert werden.
 
 &nbsp;
 
