@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 2/26/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 5f7a2f6b57804b3295b23c322dcbac553b05528b
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: a67050331cc8563b1baf5312b92910c1bbdfbd69
+ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320055"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59672566"
 ---
 # <a name="tutorial-get-started-with-grpc-service-in-aspnet-core"></a>Tutorial: Erste Schritte mit dem gRPC-Dienst in ASP.NET Core
 
@@ -27,7 +27,7 @@ In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Erstellen eines gRPC-Diensts
-> * Führen Sie den Dienst aus.
+> * Ausführen des gRPC-Diensts.
 > * Überprüfen Sie die Projektdateien.
 
 [!INCLUDE[](~/includes/net-core-prereqs-all-3.0.md)]
@@ -83,31 +83,23 @@ Klicken Sie in Visual Studio auf **Datei > Öffnen**, und wählen Sie die Datei 
 
 ---
 
-### <a name="test-the-service"></a>Testen des Diensts
+### <a name="run-the-service"></a>Ausführen des Diensts
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Stellen Sie sicher, dass **GrpcGreeter.Server** als Startprojekt festgelegt ist, und drücken Sie STRG+F5, um den gRPC-Dienst ohne den Debugger auszuführen.
+* Drücken Sie STRG+F5, um den gRPC-Dienst ohne den Debugger auszuführen.
 
   Visual Studio führt den Dienst über die Eingabeaufforderung aus. In den Protokollen wird vermerkt, dass der Dienst nun auf `http://localhost:50051` lauscht.
 
   ![neue ASP.NET Core-Webanwendung](grpc-start/_static/server_start.png)
 
-* Legen Sie nach dem Start der Dienstausführung **GrpcGreeter.Client** als Startprojekt fest, und drücken Sie STRG+F5, um den Client ohne den Debugger auszuführen.
-
-  Der Client sendet an den Dienst eine Begrüßungsnachricht, die dessen Namen („GreeterClient“) enthält. Daraufhin antwortet der Dienst mit der Nachricht „Hello GreeterClient“, die über die Eingabeaufforderung angezeigt wird.
-
-  ![neue ASP.NET Core-Webanwendung](grpc-start/_static/client.png)
-
-  Der Dienst erfasst die Details des erfolgreichen Aufrufs in den Protokollen, die über die Eingabeaufforderung ausgegeben werden.
-
-  ![neue ASP.NET Core-Webanwendung](grpc-start/_static/server_complete.png)
-
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Führen Sie das Serverprojekt „GrpcGreeter.Server“ über die Befehlszeile mit `dotnet run` aus. In den Protokollen wird vermerkt, dass der Dienst nun auf `http://localhost:50051` lauscht.
+* Führen Sie das gRPC-Greeter-Projekt „GrpcGreeter“ über die Befehlszeile mit `dotnet run` aus. In den Protokollen wird vermerkt, dass der Dienst nun auf `http://localhost:50051` lauscht.
 
 ```console
+dbug: Grpc.AspNetCore.Server.Internal.GrpcServiceBinder[1]
+      Added gRPC method 'SayHello' to service 'Greet.Greeter'. Method type: 'Unary', route pattern: '/Greet.Greeter/SayHello'.
 info: Microsoft.Hosting.Lifetime[0]
       Now listening on: http://localhost:50051
 info: Microsoft.Hosting.Lifetime[0]
@@ -115,58 +107,35 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\example\GrpcGreeter\GrpcGreeter.Server
-```
-
-* Führen Sie das Clientprojekt „GrpcGreeter.Client“ über die separate Befehlszeile mit `dotnet run` aus.
-
-Der Client sendet an den Dienst eine Begrüßungsnachricht, die dessen Namen („GreeterClient“) enthält. Daraufhin antwortet der Dienst mit der Nachricht „Hello GreeterClient“, die über die Eingabeaufforderung angezeigt wird.
-
-```console
-Greeting: Hello GreeterClient
-Press any key to exit...
-```
-
-Der Dienst erfasst die Details des erfolgreichen Aufrufs in den Protokollen, die über die Eingabeaufforderung ausgegeben werden.
-
-```console
-info: Microsoft.Hosting.Lifetime[0]
-      Now listening on: http://localhost:50051
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Development
-info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\gh\tp\GrpcGreeter\GrpcGreeter.Server
-info: Microsoft.AspNetCore.Hosting.Internal.GenericWebHostService[1]
-      Request starting HTTP/2 POST http://localhost:50051/Greet.Greeter/SayHello application/grpc
-info: Microsoft.AspNetCore.Hosting.Internal.GenericWebHostService[2]
-      Request finished in 107.46730000000001ms 200 application/grpc
+      Content root path: C:\gh\Docs\aspnetcore\tutorials\grpc\grpc-start\samples\GrpcGreeter
 ```
 
 <!-- End of combined VS/Mac tabs -->
 
 ---
 
+Im nächsten Tutorial wird gezeigt, wie ein gRPC-Client erstellt werden kann, was zum Testen des Greeter-Diensts erforderlich ist.
+
 ### <a name="examine-the-project-files-of-the-grpc-project"></a>Ansehen der gRPC-Projektdateien
 
-„GrpcGreeter.Server“-Dateien:
+gRPCGreeter-Dateien:
 
 * greet.proto: Mit der Datei *Protos/greet.proto* werden der `Greeter`-gRPC-Dienst definiert und die gRPC-Serverobjekte generiert. Weitere Informationen finden Sie unter <xref:grpc/index>.
 * *Services*-Ordner: Dieser enthält die Implementierung des `Greeter`-Diensts.
 * *appSettings.json*-Datei: Diese enthält Konfigurationsdaten wie z. B. das von Kestrel verwendete Protokoll. Weitere Informationen finden Sie unter <xref:fundamentals/configuration/index>.
 * *Program.cs*: Diese Datei enthält den Einstiegspunkt für den gRPC-Dienst. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host>.
-* Startup.cs
+* Startup.cs: Diese Datei enthält Code, mit dem das App-Verhalten konfiguriert wird. Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
 
-Diese Datei enthält Code, mit dem das App-Verhalten konfiguriert wird. Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
+### <a name="test-the-service"></a>Testen des Diensts
 
-gRPC-Clientdatei „GrpcGreeter.Client“:
-
-*Program.cs* enthält den Einstiegspunkt und die Logik für den gRPC-Client.
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 In diesem Tutorial:
 
 > [!div class="checklist"]
 > * Erstellen eines gRPC-Diensts
-> * Ausführen eines Diensts und eines Clients zum Testen des Diensts
+> * Haben Sie den gRPC-Dienst ausgeführt.
 > * Haben Sie die Projektdateien überprüft.
+
+> [!div class="step-by-step"]
+> [Weiter: Erstellen eines .NET Core-gRPC-Clients](xref:tutorials/grpc/grpc-client)

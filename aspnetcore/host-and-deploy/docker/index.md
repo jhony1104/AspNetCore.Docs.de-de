@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: e56f90ec7272ce0411651ee6f8e7c754ae44b78d
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 9189e1fbb21abcc8c8bdea947e672ee53b59bc4f
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59516260"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59982626"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Hosten von ASP.NET Core in Docker-Containern
 
@@ -28,6 +28,8 @@ In diesem Artikel lernen Sie Begriffe und Definitionen rund um die Docker-Techno
 
 [Docker containers, images, and registries (Docker-Container, -Images und -Registrierungen)](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-containers-images-registries)  
 Erfahren Sie, wie Docker-Containerimages in einer Imageregistrierung gespeichert werden, um eine konsistente Bereitstellung in verschiedenen Umgebungen zu gewährleisten.
+
+<xref:host-and-deploy/docker/building-net-docker-images> In diesem Artikel erfahren Sie, wie eine ASP.NET Core-App erstellt und in Docker bereitgestellt wird. Erkunden Sie Docker-Images, die von Microsoft verwaltet werden, und untersuchen Sie Anwendungsfälle.
 
 [Visual Studio-Tools für Docker](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
 Erfahren Sie mehr über die Unterstützung für das Erstellen, Debuggen und Ausführen von ASP.NET Core-Apps in Visual Studio 2017, die für .NET Framework oder .NET Core in Docker für Windows entwickelt wurden. Sowohl Windows- als auch Linux-Container werden unterstützt.

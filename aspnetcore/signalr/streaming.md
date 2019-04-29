@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2019
 uid: signalr/streaming
-ms.openlocfilehash: 83bbb231482d9c1606be3c5bbbeb1cc3b8efcf7d
-ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
-ms.translationtype: MT
+ms.openlocfilehash: d185056d3bdda089eaa46ae9b8e13ab7a4354f93
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59982655"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165075"
 ---
 # <a name="use-streaming-in-aspnet-core-signalr"></a>Verwenden Sie in ASP.NET Core SignalR-streaming
 
@@ -36,13 +36,13 @@ ASP.NET Core SignalR unterstützt streaming Rückgabewerte von Servermethoden. D
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe eine <xref:System.Threading.Channels.ChannelReader`1>, `IAsyncEnumerable<T>`, `Task<ChannelReader<T>>`, oder `Task<IAsyncEnumerable<T>>`.
+Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe eine <xref:System.Threading.Channels.ChannelReader%601>, `IAsyncEnumerable<T>`, `Task<ChannelReader<T>>`, oder `Task<IAsyncEnumerable<T>>`.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe eine <xref:System.Threading.Channels.ChannelReader`1> oder `Task<ChannelReader<T>>`.
+Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe eine <xref:System.Threading.Channels.ChannelReader%601> oder `Task<ChannelReader<T>>`.
 
 ::: moniker-end
 
@@ -58,7 +58,7 @@ Streaming von Hub-Methoden zurückgeben kann `IAsyncEnumerable<T>` zusätzlich z
 
 ::: moniker-end
 
-Das folgende Beispiel zeigt die Grundlagen von streaming-Daten an den Client mithilfe von Kanälen. Jedes Mal, wenn ein Objekt richtet der <xref:System.Threading.Channels.ChannelWriter`1>, das Objekt sofort an den Client gesendet wird. Am Ende der `ChannelWriter` abgeschlossen ist, um dem Client veranlassen der Stream ist geschlossen.
+Das folgende Beispiel zeigt die Grundlagen von streaming-Daten an den Client mithilfe von Kanälen. Jedes Mal, wenn ein Objekt richtet der <xref:System.Threading.Channels.ChannelWriter%601>, das Objekt sofort an den Client gesendet wird. Am Ende der `ChannelWriter` abgeschlossen ist, um dem Client veranlassen der Stream ist geschlossen.
 
 > [!NOTE]
 > Schreiben in die `ChannelWriter<T>` auf einem Hintergrundthread und Rückgabe der `ChannelReader` so bald wie möglich. Andere Hubs Aufrufe werden blockiert, bis eine `ChannelReader` zurückgegeben wird.

@@ -8,10 +8,10 @@ ms.custom: mvc, seodec18
 ms.date: 04/06/2019
 uid: fundamentals/configuration/platform-specific-configuration
 ms.openlocfilehash: c2a2e1fbd288ff292c6759d03fae51876cdb5704
-ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/09/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59425074"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Verwenden von Hostingstartassemblys in ASP.NET Core
@@ -44,10 +44,10 @@ Um das automatische Laden von Hostingstartassemblys zu deaktivieren, verwenden S
 
 * Um zu verhindern, dass alle Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf `true` oder `1` fest:
   * Hostkonfigurationseinstellung [Verhindern des Hostingstarts](xref:fundamentals/host/web-host#prevent-hosting-startup).
-  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` Umgebungsvariable.
+  * Die Umgebungsvariable `ASPNETCORE_PREVENTHOSTINGSTARTUP`
 * Um zu verhindern, dass bestimmte Hostingstartassemblys geladen werden, legen Sie eine der folgenden Einstellungen auf eine durch Semikolons getrennte Zeichenfolge mit Hostingstartassemblys fest, die beim Starten ausgeschlossen werden sollen:
   * Hostkonfigurationseinstellung [Hostingstartausschlussassemblys](xref:fundamentals/host/web-host#hosting-startup-exclude-assemblies).
-  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` Umgebungsvariable.
+  * Die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 Wenn sowohl die Konfigurationseinstellung für den Host als auch die Umgebungsvariable festgelegt werden, wird das Verhalten durch die Hosteinstellung gesteuert.
 
@@ -387,7 +387,7 @@ dotnet nuget locals all --clear
    * Generiert `additionalDeps` für `StartupDiagnostics` im Ordner *additionalDeps/shared/Microsoft.AspNetCore.App/{Version des freigegebenen Frameworks}/*.
    * Legt die Datei *deploy.ps1* im Ordner *deployment* ab.
 1. Führen Sie das Skript *deploy.ps1* im Ordner *deployment* aus. Das Skript fügt Folgendes:
-   * `StartupDiagnostics` an die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` an.
+   * `StartupDiagnostics` an die Umgebungsvariable `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`.
    * Der Pfad der Hostingstartabhängigkeiten zur Umgebungsvariablen `DOTNET_ADDITIONAL_DEPS`.
    * Die Pfad des Laufzeitspeichers zur Umgebungsvariablen `DOTNET_SHARED_STORE`.
 1. Führen Sie die Beispiel-App aus.

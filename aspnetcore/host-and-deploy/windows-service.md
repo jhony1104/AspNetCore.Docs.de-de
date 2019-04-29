@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 04/04/2019
 uid: host-and-deploy/windows-service
 ms.openlocfilehash: 544eefa87898e82ec2bf8f9f61ce4e26dd554bb7
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068335"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
@@ -187,10 +187,10 @@ Gewähren Sie in einer administrativen PowerShell 6-Befehlsshell mit dem Befehl 
 icacls "{PATH}" /grant "{USER ACCOUNT}:(OI)(CI){PERMISSION FLAGS}" /t
 ```
 
-* `{PATH}` &ndash; Pfad zum Ordner der App.
+* `{PATH}` &ndash; Pfad zum App-Ordner.
 * `{USER ACCOUNT}` &ndash; Das Benutzerkonto (SID).
-* `(OI)` &ndash; Mit dem Flag für die Objektvererbung werden Berechtigungen an untergeordnete Dateien weitergegeben.
-* `(CI)` &ndash; Mit dem Flag für die Containervererbung werden Berechtigungen an untergeordnete Ordner weitergegeben.
+* `(OI)`&ndash; Mit dem Flag für die Objektvererbung werden Berechtigungen an untergeordnete Dateien weitergegeben.
+* `(CI)`&ndash; Mit dem Flag für die Containervererbung werden Berechtigungen an untergeordnete Ordner weitergegeben.
 * `{PERMISSION FLAGS}` &ndash; Legt die Zugriffsberechtigungen für die App fest.
   * Schreiben (`W`)
   * Lesen (`R`)

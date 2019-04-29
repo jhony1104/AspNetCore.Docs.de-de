@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/08/2019
 uid: fundamentals/static-files
 ms.openlocfilehash: 12c7b39bee462ff83188a5a0f10b133ca273863b
-ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/09/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59425061"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
@@ -208,8 +208,8 @@ Unter Verwendung der Dateihierarchie und des vorangehenden Codes werden URLs wie
 
 | URI            |                             Antwort  |
 | ------- | ------|
-| *http://\<Serveradresse>/StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
-| *http://\<Serveradresse>/StaticFiles*             |     MyStaticFiles/default.html |
+| *http://\<server_address>/StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
+| *http://\<server_address>/StaticFiles*             |     MyStaticFiles/default.html |
 
 Wenn im Verzeichnis *MyStaticFiles* keine Datei mit Standardnamen vorhanden ist, gibt *http://\<server_address>/StaticFiles* die Verzeichnisliste mit klickbaren Links zurück:
 
@@ -242,7 +242,7 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 ### <a name="considerations"></a>Weitere Überlegungen
 
 > [!WARNING]
-> `UseDirectoryBrowser` und `UseStaticFiles` können Geheimnisse offenlegen. Eine Deaktivierung der Verzeichnissuche in der Produktionsumgebung wird dringend empfohlen. Überprüfen Sie sorgfältig, welche Verzeichnisse über `UseStaticFiles` oder `UseDirectoryBrowser` aktiviert wurden. Das gesamte Verzeichnis und die zugehörigen Unterverzeichnisse werden öffentlich zugänglich gemacht. Speichern Sie Dateien, die für eine Bereitstellung in der Öffentlichkeit geeignet sind, in einem dafür vorgesehenen Verzeichnis wie z.B. *\<content_root>/wwwroot*. Trennen Sie diese Dateien von MVC-Ansichten, Razor Pages (nur 2.x), Konfigurationsdateien usw.
+> `UseDirectoryBrowser` und `UseStaticFiles` können Geheimnisse aufdecken. Eine Deaktivierung der Verzeichnissuche in der Produktionsumgebung wird dringend empfohlen. Überprüfen Sie sorgfältig, welche Verzeichnisse über `UseStaticFiles` oder `UseDirectoryBrowser` aktiviert wurden. Das gesamte Verzeichnis und die zugehörigen Unterverzeichnisse werden öffentlich zugänglich gemacht. Speichern Sie Dateien, die für eine Bereitstellung in der Öffentlichkeit geeignet sind, in einem dafür vorgesehenen Verzeichnis wie z.B. *\<content_root>/wwwroot*. Trennen Sie diese Dateien von MVC-Ansichten, Razor Pages (nur 2.x), Konfigurationsdateien usw.
 
 * Die URLs für Inhalte, die mit `UseDirectoryBrowser` und `UseStaticFiles` verfügbar gemacht wurden, unterliegen der Groß-/Kleinschreibung und den Zeichenbeschränkungen des zugrunde liegenden Dateisystems. Bei Windows wird die Groß-/Kleinschreibung beispielsweise beachtet, bei macOS und Linux hingegen nicht.
 

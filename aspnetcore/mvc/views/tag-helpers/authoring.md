@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen von Taghilfsprogrammen in ASP.NET Core
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 04/12/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: ddfd7cb8c67e28709b8ce75d5a4d0a8c0c0cc43c
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 19b7df1abc8765cb9a77487e39c4365fdacf2b65
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58210079"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614421"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
@@ -65,7 +65,9 @@ Dabei handelt es sich um ein Anchor-Tag, das daraus einen E-Mail-Link erstellt. 
    public class Email : TagHelper
    ```
 
-1. Fügen Sie der *Views/_ViewImports.cshtml*-Datei die Anweisung `addTagHelper` hinzu, um die `EmailTagHelper`-Klasse für sämtliche Razor-Ansichten verfügbar zu machen: [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
+1. Fügen Sie der *Views/_ViewImports.cshtml*-Datei die Anweisung `addTagHelper` hinzu, um die `EmailTagHelper`-Klasse für sämtliche Razor-Ansichten verfügbar zu machen:
+
+   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
    Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie, dass in der zweiten Zeile die Taghilfsprogramme für ASP.NET Core MVC angegeben sind, die die Platzhaltersyntax verwendet (Informationen zu diesen Hilfsprogrammen finden Sie unter [Introduction to Tag Helpers (Einführung in Taghilfsprogramme))](intro.md). Die `@addTagHelper`-Anweisung stellt das Taghilfsprogramm für die Razor-Ansicht zur Verfügung. Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
 
