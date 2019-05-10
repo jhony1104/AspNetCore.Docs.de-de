@@ -1,14 +1,14 @@
-## <a name="prerequisites"></a><span data-ttu-id="7d09a-101">Erforderliche Komponenten</span><span class="sxs-lookup"><span data-stu-id="7d09a-101">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="a3b1f-101">Erforderliche Komponenten</span><span class="sxs-lookup"><span data-stu-id="a3b1f-101">Prerequisites</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="7d09a-102">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="7d09a-102">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="a3b1f-102">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a3b1f-102">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-2.2.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="7d09a-103">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="7d09a-103">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="a3b1f-103">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="a3b1f-103">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="7d09a-104">Visual Studio für Mac</span><span class="sxs-lookup"><span data-stu-id="7d09a-104">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="a3b1f-104">Visual Studio für Mac</span><span class="sxs-lookup"><span data-stu-id="a3b1f-104">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
