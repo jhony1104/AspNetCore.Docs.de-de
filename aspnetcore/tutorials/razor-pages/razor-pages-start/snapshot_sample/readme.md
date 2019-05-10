@@ -1,1 +1,1 @@
-<span data-ttu-id="e7843-101">Der Code in diesem Ordner sind Momentaufnahmen aus der Reihe zu Razor Pages.</span><span class="sxs-lookup"><span data-stu-id="e7843-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>
+<span data-ttu-id="59f56-101">Der Code in diesem Ordner sind Momentaufnahmen aus der Reihe zu Razor Pages.</span><span class="sxs-lookup"><span data-stu-id="59f56-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>

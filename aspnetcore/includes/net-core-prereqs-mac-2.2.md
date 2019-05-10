@@ -1,2 +1,2 @@
-* [<span data-ttu-id="ac9e1-101">Visual Studio für Mac Version 7.7 oder höher</span><span class="sxs-lookup"><span data-stu-id="ac9e1-101">Visual Studio for Mac version 7.7 or later</span></span>](https://www.visualstudio.com/downloads/)
-* [<span data-ttu-id="ac9e1-102">.NET Core SDK 2.2 oder höher</span><span class="sxs-lookup"><span data-stu-id="ac9e1-102">.NET Core SDK 2.2 or later</span></span>](https://www.microsoft.com/net/download/all)
+* [<span data-ttu-id="d587a-101">Visual Studio für Mac Version 7.7 oder höher</span><span class="sxs-lookup"><span data-stu-id="d587a-101">Visual Studio for Mac version 7.7 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
+* [<span data-ttu-id="d587a-102">.NET Core SDK 2.2 oder höher</span><span class="sxs-lookup"><span data-stu-id="d587a-102">.NET Core SDK 2.2 or later</span></span>](https://www.microsoft.com/net/download/all)
