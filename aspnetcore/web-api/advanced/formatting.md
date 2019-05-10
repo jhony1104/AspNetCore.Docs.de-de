@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 10/14/2016
 uid: web-api/advanced/formatting
-ms.openlocfilehash: b0fce0632fd2d885cb8e9a056923ec365d2f327d
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 04f5b3c544cf3fc47c8321c8233535400fcf55f4
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209985"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890765"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core MVC verfügt über integrierte Unterstützung zum Formatieren von Antwortdaten mithilfe von festen Formaten oder als Antwort auf Clientspezifikationen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/formatting/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="format-specific-action-results"></a>Formatspezifische Aktionsergebnisse
 

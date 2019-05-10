@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie ASP.NET Core SignalR-apps konfigurieren.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 02/07/2019
+ms.date: 04/15/2019
 uid: signalr/configuration
-ms.openlocfilehash: 2c1bb8d5e317813d1fdb8d474b7d7d892e6f67ec
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 703357fd52805e01515e5bac3b1a364ce7fe00f0
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264572"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087653"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR-Konfiguration
 
@@ -167,6 +167,31 @@ let connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .build();
 ```
+
+::: moniker range=">= aspnetcore-3.0"
+
+Anstelle von eine `LogLevel` Wert, Sie bieten auch eine `string` Wert, der einen Ebenennamen Protokoll darstellt. Dies ist nützlich, wenn Sie SignalR, die Protokollierung in Umgebungen konfigurieren, in dem Sie haben keinen Zugriff auf, die `LogLevel` Konstanten.
+
+```javascript
+let connection = new signalR.HubConnectionBuilder()
+    .withUrl("/myhub")
+    .configureLogging("warn")
+    .build();
+```
+
+Die folgende Tabelle enthält die verfügbaren Protokolliergrade. Wert zu `configureLogging` legt die **minimale** Protokollebene, die protokolliert werden. Auf dieser Ebene protokollierte Nachrichten **oder die Ebenen, die danach in der Tabelle aufgeführten**, protokolliert werden.
+
+| Zeichenfolge | LogLevel |
+| - | - |
+| `"trace"` | `LogLevel.Trace` |
+| `"debug"` | `LogLevel.Debug` |
+| `"info"` **Oder** `"information"` | `LogLevel.Information` |
+| `"warn"` **Oder** `"warning"` | `LogLevel.Warning` |
+| `"error"` | `LogLevel.Error` |
+| `"critical"` | `LogLevel.Critical` |
+| `"none"` | `LogLevel.None` |
+
+::: moniker-end
 
 > [!NOTE]
 > Geben Sie zum Deaktivieren der Protokollierung vollständig, `signalR.LogLevel.None` in die `configureLogging` Methode.

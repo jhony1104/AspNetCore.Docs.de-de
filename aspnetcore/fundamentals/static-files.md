@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/08/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: 12c7b39bee462ff83188a5a0f10b133ca273863b
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: bcd179bd89b90d80fc81645b24296a1fa70cca0a
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59425061"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888385"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Scott Addie](https://t
 
 Bei statischen Dateien wie HTML, CSS, Images und JavaScript handelt es sich um Objekte, die Clients von einer ASP.NET Core-App direkt bereitgestellt werden. Damit diese Dateien bereitgestellt werden können, sind einige Konfigurationsschritte erforderlich.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="serve-static-files"></a>Bereitstellen statischer Dateien
 

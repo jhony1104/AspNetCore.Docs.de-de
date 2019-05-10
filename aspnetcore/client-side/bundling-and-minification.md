@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 11/20/2018
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 5d5f0aadb7740c9b2b959d12a585cd8c91758ce8
-ms.sourcegitcommit: 4225e2c49a0081e6ac15acff673587201f54b4aa
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2018
-ms.locfileid: "52282139"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894297"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung von statischen Objekten in ASP.NET Core
 
@@ -85,15 +85,15 @@ Die *bundleconfig.json* -Datei definiert die Optionen für jedes Paket. Im vorhe
 
 Konfigurationsoptionen sind verfügbar:
 
-* `outputFileName`: Der Name der Bundle-Datei ausgegeben. Einen relativen Pfad darf die *bundleconfig.json* Datei. **Erforderlich**
+* `outputFileName`: Der Name der Bundle-Datei ausgegeben. Einen relativen Pfad darf die *bundleconfig.json* Datei. **required**
 * `inputFiles`: Ein Array von Dateien zu bündeln. Dies sind die relativen Pfade der Konfigurationsdatei hinzu. **optionale**, * ein leerer Wert in einer leeren Ausgabedatei führt. [Verwendung von Platzhaltern](http://www.tldp.org/LDP/abs/html/globbingref.html) Muster werden unterstützt.
-* `minify`: Die Minimierung-Optionen für die Ausgabe geben. **optionale**, *Standard: `minify: { enabled: true }`*
+* `minify`: Geben Sie die Minimierung-Optionen für die Ausgabe. **optionale**, *Standard: `minify: { enabled: true }`*
   * Konfigurationsoptionen sind pro ausgabedateityp verfügbar.
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
-    * [JavaScript-Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
+    * [JavaScript Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
 * `includeInProject`: Flag zum angeben, ob die generierte Dateien zur Projektdatei hinzufügen. **optionale**, *Standard: false*
-* `sourceMap`: Flag zur Angabe, ob eine quellzuordnung für die gebündelte Datei generiert. **optionale**, *Standard: false*
+* `sourceMap`: Flag zum angeben, ob eine quellzuordnung für die gebündelte Datei generiert. **optionale**, *Standard: false*
 * `sourceMapRootPath`: Der Stammpfad für das Speichern der generierten Quelldatei für die Zuordnung.
 
 ## <a name="build-time-execution-of-bundling-and-minification"></a>Zeitpunkt der Erstellung der Ausführung der Bündelung und Minimierung

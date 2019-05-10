@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 03/02/2019
 uid: mvc/views/view-compilation
 ms.openlocfilehash: 11195f00e922f6817a0fa0988fad9d8082dea30a
-ms.sourcegitcommit: 10e14b85490f064395e9b2f423d21e3c2d39ed8b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58142319"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883695"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 

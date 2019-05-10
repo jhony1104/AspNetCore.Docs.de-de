@@ -5,18 +5,14 @@ description: In diesem Tutorial wird veranschaulicht, wie mit EF Core Erstellung
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/crud
-ms.openlocfilehash: c104498a4411ac36672ffbb9660948d4e96bf1ee
-ms.sourcegitcommit: 10e14b85490f064395e9b2f423d21e3c2d39ed8b
+ms.openlocfilehash: 43d133c61c0387ebcb4bcb2d22c800588d8534c3
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58142393"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65516919"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)
-
-[!INCLUDE[2.0 version](~/includes/RP-EF/20-pdf.md)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 Von [Tom Dykstra](https://github.com/tdykstra), [Jon P. Smith](https://twitter.com/thereformedprog) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -161,7 +157,7 @@ Im folgenden Code wird das `StudentVM`-Ansichtsmodell für die Erstellung eines 
 
 Die Methode [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) legt die Werte dieses Objekts fest, indem sie Werte aus einem anderen [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues)-Objekt liest. `SetValues` verwendet die Übereinstimmung von Eigenschaftsnamen. Der Ansichtsmodelltyp muss nicht mit dem Modelltyp verknüpft sein. Er muss lediglich über übereinstimmende Eigenschaften verfügen.
 
-Für die Verwendung von `StudentVM` muss [CreateVM.cshtml](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` statt `Student` verwendet wird.
+Für die Verwendung von `StudentVM` muss [CreateVM.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` statt `Student` verwendet wird.
 
 Auf Razor Pages stellt die abgeleitete `PageModel`-Klasse das Ansichtsmodell dar.
 
@@ -246,7 +242,7 @@ Testen Sie die Seite „Löschen“.
 
 Die `@page`-Anweisung muss auf jeder Razor Page vorhanden sein.
 
-::: moniker-end
+
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

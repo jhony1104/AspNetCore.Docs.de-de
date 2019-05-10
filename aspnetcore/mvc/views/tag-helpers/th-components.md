@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: fdad4ae367245cd3beabaf90587c1fe5e9162afe
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 777bbcca3d1c2f03f386fa62df2a2e0b00409318
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59468594"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889735"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Taghilfsprogrammkomponenten in ASP.NET Core
 
@@ -21,7 +21,7 @@ Eine Taghilfsprogrammkomponente ist ein Taghilfsprogramm, mit dem Sie HTML-Eleme
 
 ASP.NET Core enthält zwei integrierte Taghilfsprogrammkomponenten: `head` und `body`. Sie befinden sich im Namespace <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> und können in MVC und Razor Pages verwendet werden. Taghilfsprogrammkomponenten benötigen keine Registrierung bei der App in *_ViewImports.cshtml*.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="use-cases"></a>Anwendungsfälle
 

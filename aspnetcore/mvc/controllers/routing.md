@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um 
 ms.author: riande
 ms.date: 01/24/2019
 uid: mvc/controllers/routing
-ms.openlocfilehash: f5104bc53581a41fa8c25d8c67e08e038c275391
-ms.sourcegitcommit: c6db8b14521814f1f7e528d7aa06e474e4c04a1f
+ms.openlocfilehash: b4d5cd3add3fda6b70873eb5cce1dcee651f9185
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "55065008"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087505"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -559,7 +559,7 @@ Aktionen werden entweder herkömmlich oder über Attribute zugeordnet, d.h., das
 
 ## <a name="complex-segments"></a>Komplexe Segmente
 
-Komplexe Segmente (z.B. `[Route("/dog{token}cat")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Eine entsprechende Beschreibung finden Sie im [Quellcode](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296). Weitere Informationen finden Sie in [diesem Thema](https://github.com/aspnet/Docs/issues/8197).
+Komplexe Segmente (z.B. `[Route("/dog{token}cat")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Eine entsprechende Beschreibung finden Sie im [Quellcode](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296). Weitere Informationen finden Sie in [diesem Thema](https://github.com/aspnet/AspNetCore.Docs/issues/8197).
 
 <a name="routing-url-gen-ref-label"></a>
 

@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: d794058f533c4b617f641fa3cb3e6d63fd807c2d
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59615383"
----
 ASP.NET Core bietet die folgenden Vorteile:
 
 * Eine einheitliche Umgebung zum Erstellen der Webbenutzeroberfläche und von Web-APIs

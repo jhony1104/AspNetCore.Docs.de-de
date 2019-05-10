@@ -4,14 +4,14 @@ author: isaac2004
 description: Informationen zu den neuen Features in ASP.NET Core 2.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 04/30/2019
 uid: aspnetcore-2.1
-ms.openlocfilehash: 8299af819f86d3d2371650ce3d87deb817f0feb8
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: 359f961db768b9048427c8ab296ee3e035879408
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248172"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086394"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
 
@@ -28,7 +28,7 @@ SignalR wurde für ASP.NET Core 2.1 umgeschrieben. ASP.NET Core SignalR umfasst 
 * Ein neues Streaming-Antwortmodell.
 * Unterstützung für Clients basierend auf Bare-WebSockets.
 
-Weitere Informationen finden Sie unter [ASP.NET Core SignalR](xref:signalr/index).
+Weitere Informationen finden Sie unter [ASP.NET Core SignalR](xref:signalr/introduction).
 
 ## <a name="razor-class-libraries"></a>Razor-Klassenbibliotheken
 
@@ -75,7 +75,7 @@ In der Produktion muss HTTPS explizit konfiguriert sein. In Version 2.1 wurde ei
 
 ## <a name="gdpr"></a>DSGVO
 
-ASP.NET Core stellt APIs und Vorlagen für die Erfüllung einiger der Anforderungen der [Datenschutz-Grundverordnung (DSGV=)](https://www.eugdpr.org/) bereit. Weitere Informationen finden Sie unter [DSGVO-Unterstützung in ASP.NET Core](xref:security/gdpr). Eine [Beispiel-App](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/gdpr/sample) veranschaulicht, wie die meisten DSGVO-Erweiterungspunkte verwendet und getestet werden können. Ferner enthält sie zu den Vorlagen von ASP.NET Core 2.1 hinzugefügte APIs.
+ASP.NET Core stellt APIs und Vorlagen für die Erfüllung einiger der Anforderungen der [Datenschutz-Grundverordnung (DSGV=)](https://www.eugdpr.org/) bereit. Weitere Informationen finden Sie unter [DSGVO-Unterstützung in ASP.NET Core](xref:security/gdpr). Eine [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) veranschaulicht, wie die meisten DSGVO-Erweiterungspunkte verwendet und getestet werden können. Ferner enthält sie zu den Vorlagen von ASP.NET Core 2.1 hinzugefügte APIs.
 
 ## <a name="integration-tests"></a>Integrationstests
 

@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/08/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 6f555858239b4432d252f8b3ac7add5c3e8bfe62
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: d2b2456c7ab6b72f2270b6edc17000695061cc2b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59425100"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887755"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>IIS-Support zum Zeitpunkt der Entwicklung in Visual Studio für ASP.NET Core
 
 Von [Sourabh Shirhatti](https://twitter.com/sshirhatti) und [Luke Latham](https://github.com/guardrex)
 
-In diesem Artikel wird die [Visual Studio](https://www.visualstudio.com/vs/)-Unterstützung des Debuggens von ASP.NET Core-Apps beschrieben, die mit IIS unter Windows Server ausgeführt werden. Dieses Thema führt Sie durch die Aktivierung dieses Szenarios und Einrichtung eines Projekts.
+In diesem Artikel wird die [Visual Studio](https://visualstudio.microsoft.com)-Unterstützung des Debuggens von ASP.NET Core-Apps beschrieben, die mit IIS unter Windows Server ausgeführt werden. Dieses Thema führt Sie durch die Aktivierung dieses Szenarios und Einrichtung eines Projekts.
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 

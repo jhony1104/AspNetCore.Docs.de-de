@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/5/2018
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: f471e4bd12510b1de78f3281dcb21d73975d0cb8
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: f73af673afebe0531f228dc0041dc708ba794047
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264741"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887615"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Hinzufügen eines neuen Felds zu einer Razor-Seite in ASP.NET Core
 
@@ -46,7 +46,7 @@ Bearbeiten Sie *Pages/Movies/Index.cshtml*, und fügen ein `Rating`-Feld hinzu:
 Aktualisieren Sie die folgenden Seiten:
 
 * Fügen Sie das `Rating`-Feld zu den Seiten „Delete“ und „Details“ hinzu.
-* Aktualisieren Sie die Datei [Create.cshtml](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) mit einem `Rating`-Feld.
+* Aktualisieren Sie die Datei [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) mit einem `Rating`-Feld.
 * Fügen Sie das Feld `Rating` der Bearbeitungsseite hinzu.
 
 Die App funktioniert erst, nachdem die Datenbank mit dem neuen Feld aktualisiert wurde. Wenn sie jetzt ausgeführt wird, löst die App eine `SqlException` aus:
@@ -69,7 +69,7 @@ Aktualisieren Sie die `SeedData`-Klasse so, dass sie einen Wert für die neue Sp
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-Sehen Sie sich die [fertige SeedData.cs-Datei an](https://github.com/aspnet/Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).
+Sehen Sie sich die [fertige SeedData.cs-Datei an](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).
 
 Erstellen Sie die Projektmappe.
 

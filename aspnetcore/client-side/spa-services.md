@@ -7,11 +7,11 @@ ms.custom: H1Hack27Feb2017
 ms.date: 08/02/2017
 uid: client-side/spa-services
 ms.openlocfilehash: ee772e67ef14608bcc6e3498ade00424ff6090e5
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121375"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893947"
 ---
 # <a name="use-javascriptservices-to-create-single-page-applications-in-aspnet-core"></a>Verwenden von JavaScriptServices zum Erstellen von einseitigen Anwendungen in ASP.NET Core
 
@@ -67,7 +67,7 @@ Führen Sie die folgenden Schritte aus, um mit SpaServices zu arbeiten:
     node -v && npm -v
     ```
 
-Hinweis: Wenn Sie eine Bereitstellung auf eine Azure-Website vornehmen möchten, müssen Sie hier nichts weiter tun, denn Node.js ist in den Serverumgebungen installiert und verfügbar.
+Hinweis: Wenn Sie in einer Azure-Website bereitstellen möchten, müssen Sie nicht hier nichts &mdash; Node.js installiert ist und in der Server-Umgebung verfügbar.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -123,7 +123,7 @@ Das empfangene `UserName`-Argument wird mit dem integrierten JSON-Serialisierung
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-Hinweis: An Taghilfsprogramme übergebene Eigenschaftennamen werden mit der **PascalCase**-Notation dargestellt. Im Gegensatz dazu stehen die gleichen Eigenschaftennamen, die im Javascript mit **CamelCase** dargestellt sind. Die Standardkonfiguration der JSON-Serialisierung ist für diesen Unterschied verantwortlich.
+Hinweis: Taghilfsprogramme übergebene Eigenschaftennamen mit dargestellt **PascalCase** Notation. Im Gegensatz dazu stehen die gleichen Eigenschaftennamen, die im Javascript mit **CamelCase** dargestellt sind. Die Standardkonfiguration der JSON-Serialisierung ist für diesen Unterschied verantwortlich.
 
 Aufbauend auf das vorherige Codebeispiel, können Daten vom Server an die Ansicht per Hydration der `globals`-Eigenschaft bereitgestellt werden, um diese an die `resolve`-Funktion weiterzureichen:
 

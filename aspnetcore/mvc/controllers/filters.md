@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/08/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 4fe04cde2a234302845b2cbded106f1e809842bc
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: f357df0bbc51e881132e36ccb20f4ffdc3035032
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209293"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883465"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -27,7 +27,7 @@ Integrierte Filter sind für folgende Aufgaben zuständig:
 
 Durch die Erstellung benutzerdefinierter Filter kann mit aktionsübergreifenden Problemen umgegangen werden. Dadurch kann die Duplizierung von Code bei mehreren Aktionen verhindert werden. Sie können zum Beispiel die Fehlerbehandlung in einem Ausnahmefilter konsolidieren.
 
-[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).
+[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).
 
 ## <a name="how-filters-work"></a>Die Funktionsweise von Filtern
 
@@ -425,4 +425,4 @@ Middlewarefilter werden zum selben Zeitpunkt in der Filterpipeline wie Ressource
 ## <a name="next-actions"></a>Nächste Schritte
 
 * Siehe [Filtermethoden für Razor Pages](xref:razor-pages/filter),
-* [Laden Sie das Github-Beispiel herunter, testen und bearbeiten Sie es](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/filters/sample), um Filter näher kennenzulernen.
+* [Laden Sie das Github-Beispiel herunter, testen und bearbeiten Sie es](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample), um Filter näher kennenzulernen.

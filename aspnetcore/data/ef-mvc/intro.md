@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 5a2ec9a8d85925e55840962cc90b3092953e7920
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 8cad650cacd0b467a45a13c7dde0410aa41fdb32
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59012850"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212567"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
@@ -44,7 +44,7 @@ In diesem Tutorial:
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
-Wenn Sie auf ein Problem stoßen, das Sie nicht lösen können, sollten Sie versuchen, Ihren Code mit dem [abgeschlossenen Projekt](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final) zu vergleichen. Eine Liste mit häufig auftretenden Fehlern und den jeweiligen Lösungen finden Sie im Abschnitt [zur Fehlerbehebung auf im letzten Tutorial dieser Tutorialreihe](advanced.md#common-errors). Wenn Sie dort nicht die gewünschten Informationen finden, können Sie unter „StackOverflow.com“ für [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) oder [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core) eine Frage posten.
+Wenn Sie auf ein Problem stoßen, das Sie nicht lösen können, sollten Sie versuchen, Ihren Code mit dem [abgeschlossenen Projekt](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final) zu vergleichen. Eine Liste mit häufig auftretenden Fehlern und den jeweiligen Lösungen finden Sie im Abschnitt [zur Fehlerbehebung auf im letzten Tutorial dieser Tutorialreihe](advanced.md#common-errors). Wenn Sie dort nicht die gewünschten Informationen finden, können Sie unter „StackOverflow.com“ für [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) oder [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core) eine Frage posten.
 
 > [!TIP]
 > Diese Reihe besteht aus 10 Tutorials, die aufeinander aufbauen. Sie sollten jedes Mal, wenn Sie erfolgreich ein Tutorial abgeschlossen haben, eine Kopie des Projekts erstellen. Wenn Sie dann auf Probleme stoßen, können Sie zurück zum vorherigen Tutorial wechseln und müssen nicht wieder ganz von vorne beginnen.
@@ -95,7 +95,7 @@ Sie können das Websitemenü, das Layout und die Startseite über einige Änderu
 
 Die Änderungen werden hervorgehoben.
 
-[!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,37-48,63)]
+[!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
 Ersetzen Sie in der *Views/Home/Index.cshtml*-Datei die Inhalte der Datei durch den folgenden Code. Dadurch ersetzen Sie den Text zu ASP.NET und MVC durch Text zu dieser Anwendung:
 
@@ -355,7 +355,7 @@ Weitere Informationen zur asynchronen Programmierung in .NET finden Sie unter [A
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: 8eabb8262deda4dc56b8da4f148ec8168a85ca52
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: cf5a1da78f3918bc4a49209157b9aa4bc7ed8458
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208949"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64886865"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>Sitzungs- und App-Zustand in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Steve Smith](https://arda
 
 Bei HTTP handelt es sich um ein zustandsloses Protokoll. HTTP-Anforderungen sind ohne zusätzliche Schritte unabhängige Nachrichten, die keine Benutzerwerte oder App-Zustände beibehalten. In diesem Artikel werden mehrere Ansätze zum Beibehalten von Benutzerdaten und App-Zuständen zwischen Anforderungen beschrieben.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="state-management"></a>Zustandsverwaltung
 

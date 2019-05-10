@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/04/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 31d45eaa684118ab78d1b3ecac594e95712f631f
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: ebbdfa4cfeb3013cd961167439dd261f2e058a4b
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068348"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087611"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Erste Schritte mit Swashbuckle und ASP.NET Core
 
 Von [Shayne Boyer](https://twitter.com/spboyer) und [Scott Addie](https://twitter.com/Scott_Addie)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Es gibt drei Hauptkomponenten von Swashbuckle:
 
@@ -75,6 +75,10 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore
 
 ## <a name="add-and-configure-swagger-middleware"></a>Hinzufügen und Konfigurieren von Swagger-Middleware
 
+Importieren Sie den folgenden Namespace zur Verwendung der `Info`-Klasse:
+
+[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_InfoClassNamespace)]
+
 Fügen Sie den Swagger-Generator zu der services-Sammlung in der `Startup.ConfigureServices`-Methode hinzu:
 
 ::: moniker range="<= aspnetcore-2.0"
@@ -88,10 +92,6 @@ Fügen Sie den Swagger-Generator zu der services-Sammlung in der `Startup.Config
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=9-12)]
 
 ::: moniker-end
-
-Importieren Sie den folgenden Namespace zur Verwendung der `Info`-Klasse:
-
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_InfoClassNamespace)]
 
 Aktivieren Sie die Middleware in der `Startup.Configure`-Methode, um das generierte JSON-Dokument und die Swagger-Benutzeroberfläche bereitzustellen:
 

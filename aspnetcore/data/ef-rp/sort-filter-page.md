@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 162586059e3115bc15efaa63a9a0652e09872f1b
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 228722ecdc0fb19e024b7154393390fe6d34c5ff
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209964"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887305"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Sortieren, Filtern, Paging (3 von 8)
 
@@ -29,7 +29,7 @@ Die folgende Abbildung zeigt eine fertige Seite. Die Spaltenüberschriften sind 
 
 ![Indexseite „Studenten“](sort-filter-page/_static/paging.png)
 
-Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
+Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
 
 ## <a name="add-sorting-to-the-index-page"></a>Hinzufügen einer Sortierung zur Indexseite
 
@@ -275,13 +275,13 @@ Ersetzen Sie den Code in der Datei *Pages/About.cshtml* durch den folgenden Code
 
 Führen Sie die App aus, und navigieren Sie zur Seite „Info“. Die Anzahl der Studenten für die jeweiligen Anmeldedatumswerte wird in einer Tabelle angezeigt.
 
-Wenn nicht zu lösende Probleme auftreten, laden Sie die [abgeschlossene Anwendung für diese Phase](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting) herunter.
+Wenn nicht zu lösende Probleme auftreten, laden Sie die [abgeschlossene Anwendung für diese Phase](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting) herunter.
 
 ![Seite „Info“](sort-filter-page/_static/about.png)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/aspnet/Docs/issues/4155)
+* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
 * [Dieses Tutorial auf YouTube](https://www.youtube.com/watch?v=MDs7PFpoMqI)
 
 Im nächsten Tutorial verwendet die App Migrationen zum Aktualisieren des Datenmodells.

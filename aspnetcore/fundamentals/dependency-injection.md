@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: da6ddf1f0efd164a58f017ff55ce216bbefa7cc6
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: f4be1559c3b4c17cd09f1360d954c837d84d5058
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068322"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085611"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -22,7 +22,7 @@ ASP.NET Core unterstützt das Softwareentwurfsmuster Abhängigkeitsinjektion. Da
 
 Weitere Informationen zur Abhängigkeitsinjektion innerhalb von MVC-Controllern finden Sie unter <xref:mvc/controllers/dependency-injection>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="overview-of-dependency-injection"></a>Übersicht über Abhängigkeitsinjektion
 
@@ -72,7 +72,7 @@ Die Abhängigkeitsinjektion löst dieses Problem mithilfe der folgenden Schritte
 * Registrierung der Abhängigkeit in einem Dienstcontainer. ASP.NET Core stellt einen integrierten Dienstcontainer ([IServiceProvider](/dotnet/api/system.iserviceprovider)) bereit. Die Dienste werden in der App-Methode `Startup.ConfigureServices` registriert.
 * Die *Injektion* des Diensts in den Konstruktor der Klasse, wo er verwendet wird. Das Framework erstellt eine Instanz der Abhängigkeit und entfernt diese, wenn sie nicht mehr benötigt wird.
 
-In der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) definiert die `IMyDependency`-Schnittstelle eine Methode, die der Dienst für die App bereitstellt:
+In der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) definiert die `IMyDependency`-Schnittstelle eine Methode, die der Dienst für die App bereitstellt:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 

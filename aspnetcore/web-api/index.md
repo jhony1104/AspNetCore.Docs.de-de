@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/11/2019
 uid: web-api/index
-ms.openlocfilehash: 334e5732269921a62356e7854824deccc051c291
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.openlocfilehash: d804a7f1b4f0e89f433a3674116c97804705f7cc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165171"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64882955"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Scott Addie](https://github.com/scottaddie) und [Tom Dykstra](https://githu
 
 ASP.NET Core unterstützt das Erstellen von RESTful-Diensten, die auch als Web-APIs bezeichnet werden, unter Verwendung von C#. Eine Web-API verwendet Controller, um Anforderungen zu verarbeiten. *Controller* in einer Web-API sind von `ControllerBase` abgeleitete Klassen. In diesem Artikel wird beschrieben, wie Sie Controller für die Verarbeitung von API-Anforderungen verwenden.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/index/samples) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="controllerbase-class"></a>ControllerBase-Klasse
 

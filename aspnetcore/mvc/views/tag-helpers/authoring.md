@@ -4,20 +4,20 @@ author: rick-anderson
 description: Informationen zum Erstellen von Taghilfsprogrammen in ASP.NET Core
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/12/2019
+ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 19b7df1abc8765cb9a77487e39c4365fdacf2b65
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 37e39ac93e7b67184dfc238d58e12c2be8d84f91
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614421"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087356"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>Erste Schritte mit Taghilfsprogrammen
 
@@ -108,7 +108,9 @@ Führen Sie über folgenden Code ein Update für die `EmailTagHelper`-Klasse aus
 
 Dieser Ansatz funktioniert für das Attribut „href“, wenn es zu diesem Zeitpunkt noch nicht in der Attributsammlung enthalten ist. Außerdem können Sie die `output.Attributes.Add`-Methode verwenden, um ein Attribut des Taghilfsprogramms am Ende der Tagattributsammlung hinzuzufügen.
 
-1. Aktualisieren Sie das Markup mit den folgenden Änderungen in der Datei *Views/Home/Contact.cshtml*: [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+1. Aktualisieren Sie das Markup mit den folgenden Änderungen in der Datei *Views/Home/Contact.cshtml*:
+
+   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. Führen Sie die App aus, und überprüfen Sie, ob die richtigen Links generiert werden.
 

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 4/10/2019
 uid: tutorials/grpc/grpc-client
-ms.openlocfilehash: 031afbfaf097c518a85400b0b6abbc135c1bc611
-ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
+ms.openlocfilehash: ec6bf5072c76de640a78b2c3f13dd1fc552b9d04
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59674143"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212639"
 ---
 # <a name="tutorial-create-a-net-core-grpc-client"></a>Tutorial: Erstellen eines .NET Core-Clients
 
@@ -36,15 +36,15 @@ In diesem Tutorial:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Folgen Sie [diesen](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
+Folgen Sie [diesen](/dotnet/core/tutorials/with-visual-studio) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Folgen Sie [diesen](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
+Folgen Sie [diesen](/dotnet/core/tutorials/with-visual-studio-code) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-Folgen Sie [diesen](https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
+Folgen Sie [diesen](/dotnet/core/tutorials/using-on-mac-vs-full-solution) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
 
 <!-- End of VS tabs -->
 
@@ -89,7 +89,7 @@ Pakete können mit den folgenden Vorgehensweisen hinzugefügt werden:
 Führen Sie folgenden Befehl aus dem **integrierten Terminal** aus:
 
 ```console
-dotnet add TodoApi.csproj package Grpc.Core
+dotnet add GrpcGreeterClient.csproj package Grpc.Core
 ```
 
 Wiederholen Sie dies für Google.Protobuf und Grpc.Tools.

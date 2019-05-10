@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 04/06/2019
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: c2a2e1fbd288ff292c6759d03fae51876cdb5704
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: df078a2a2a50538a070bb0b49ff3853682cb17df
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59425074"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889055"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Verwenden von Hostingstartassemblys in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Luke Latham](https://github.com/guardrex) und [Pavel Krymets](https://githu
 
 Mit einer [IHostingStartup](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup)-Implementierung (Hostingstart) werden Verbesserungen an einer App beim Start von einer externen Assemblys aus vorgenommen. Eine externe Bibliothek kann beispielsweise eine Hostingstartimplementierung verwenden, um zusätzliche Konfigurationsanbieter oder -dienste für eine App bereitzustellen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="hostingstartup-attribute"></a>Das Attribut HostingStartup
 
@@ -64,7 +64,7 @@ Erstellen Sie einen Hostingstart mit einem der folgenden Projekttypen:
 
 In einer Klassenbibliothek kann eine Hostingstarterweiterung bereitgestellt werden. Die Bibliothek enthält ein `HostingStartup`-Attribut.
 
-Der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) enthält die Razor Pages-App *HostingStartupApp* und die Klassenbibliothek *HostingStartupLibrary*. Die Klassenbibliothek:
+Der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) enthält die Razor Pages-App *HostingStartupApp* und die Klassenbibliothek *HostingStartupLibrary*. Die Klassenbibliothek:
 
 * Enthält die Hostingstartklasse `ServiceKeyInjection`, die `IHostingStartup` implementiert. `ServiceKeyInjection` fügt mithilfe des Anbieters der Konfiguration im Arbeitsspeicher ([AddInMemoryCollection](/dotnet/api/microsoft.extensions.configuration.memoryconfigurationbuilderextensions.addinmemorycollection)) der App-Konfiguration zwei Dienstzeichenfolgen hinzu.
 * Enthält ein `HostingStartup`-Attribut, das den Namespace und die Klasse des Hostingstarts angibt.
@@ -81,7 +81,7 @@ Die Indexseite der App liest und rendert die Konfigurationswerte für die beiden
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-Der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) enthält darüber hinaus auch ein NuGet-Paketprojekt, das den separaten Hostingstart *HostingStartupPackage* bereitstellt. Das Paket weist dieselben Merkmale wie die bereits beschriebene Klassenbibliothek auf. Das Paket:
+Der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) enthält darüber hinaus auch ein NuGet-Paketprojekt, das den separaten Hostingstart *HostingStartupPackage* bereitstellt. Das Paket weist dieselben Merkmale wie die bereits beschriebene Klassenbibliothek auf. Das Paket:
 
 * Enthält die Hostingstartklasse `ServiceKeyInjection`, die `IHostingStartup` implementiert. `ServiceKeyInjection` fügt der App-Konfiguration zwei Dienstzeichenfolgen hinzu.
 * Enthält ein `HostingStartup`-Attribut.
@@ -326,7 +326,7 @@ Eine Hostingstarterweiterung kann durch eine mittels *bin* bereitgestellte Assem
 
 ## <a name="sample-code"></a>Beispielcode
 
-Der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([Herunterladen](xref:index#how-to-download-a-sample)) zeigt Szenarios für die Hostingstartimplementierung:
+Der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([Herunterladen](xref:index#how-to-download-a-sample)) zeigt Szenarios für die Hostingstartimplementierung:
 
 * Zwei Hostingstartassemblys (Klassenbibliotheken) legen zwei Schlüssel-Wert-Paare der Konfiguration im Arbeitsspeicher fest:
   * NuGet-Paket (*HostingStartupPackage*)

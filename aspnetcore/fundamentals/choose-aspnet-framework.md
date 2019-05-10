@@ -3,15 +3,15 @@ title: Wählen zwischen ASP.NET 4.x und ASP.NET Core
 author: rick-anderson
 description: Erklärt ASP.NET Core vs. ASP.NET 4.x und wie man sich für eines von beiden entscheidet.
 ms.author: riande
-ms.custom: seodec18
+ms.custom: mvc, seodec18
 ms.date: 09/11/2018
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: eb216bdac7dd029c3d985f2edd9e70eb91f42883
-ms.sourcegitcommit: a16352c1c88a71770ab3922200a8cd148fb278a6
+ms.openlocfilehash: 454f1021520f8f22eb2b0417a958b78690f89cef
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53335342"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64886965"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>Wählen zwischen ASP.NET 4.x und ASP.NET Core
 
@@ -36,7 +36,7 @@ Die folgende Tabelle vergleicht ASP.NET Core mit ASP.NET 4.x.
 |Entwickeln für Windows, macOS oder Linux|Entwickeln für Windows|
 |[Razor-Seiten](xref:razor-pages/index) werden für das Erstellen einer Webbenutzeroberfläche mit ASP.NET Core 2.x empfohlen. Weitere Informationen finden Sie unter [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api) und [SignalR](xref:signalr/introduction).|Verwenden von [Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/) oder [WebHooks](/aspnet/webhooks/) oder [Web Pages](/aspnet/web-pages)|
 |Mehrere Versionen pro Computer|Eine Version pro Computer|
-|Entwickeln mit Visual Studio, [Visual Studio für Mac](https://www.visualstudio.com/vs/visual-studio-mac/) oder [Visual Studio Code](https://code.visualstudio.com/) unter Verwendung von C# oder F#|Entwickeln mit Visual Studio unter Verwendung von C#, VB oder F#|
+|Entwickeln mit Visual Studio, [Visual Studio für Mac](https://visualstudio.microsoft.com/vs/mac/) oder [Visual Studio Code](https://code.visualstudio.com/) unter Verwendung von C# oder F#|Entwickeln mit Visual Studio unter Verwendung von C#, VB oder F#|
 |Höhere Leistung als ASP.NET 4.x|Gute Leistung|
 |[Wählen der .NET Framework- oder .NET Core-Laufzeit](/dotnet/standard/choosing-core-framework-server)|Verwenden der .NET Framework-Laufzeit|
 

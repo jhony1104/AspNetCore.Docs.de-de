@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/13/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 095db38cf3102f6e18930efdbbaeeb90dffad8af
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 28dc7fb40c1b60f643108dcb44593a08942a1650
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614447"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087497"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Best Practices für ASP.NET Core-Leistung
 
@@ -44,7 +44,7 @@ Ein häufiges Leistungsproblem in ASP.NET Core-apps ist die blockierende Aufrufe
 * Zugriff auf Daten und Vorgängen mit langen Laufzeiten APIs asynchron aufrufen.
 * Stellen Sie Controller/Razor-Seitenaktionen asynchrone. Die gesamte Aufrufliste ist asynchron, um von profitieren [Async/await](/dotnet/csharp/programming-guide/concepts/async/) Muster.
 
-Profiler z. B. [PerfView](https://github.com/Microsoft/perfview), können verwendet werden, um Threads häufig hinzugefügt, suchen die [Thread Pool](/windows/desktop/procthread/thread-pool). Die `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` Ereignis gibt an, einen Thread, der an den Threadpool hinzugefügt. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc  -->
+Profiler z. B. [PerfView](https://github.com/Microsoft/perfview), können verwendet werden, um Threads häufig hinzugefügt, suchen die [Thread Pool](/windows/desktop/procthread/thread-pools). Die `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` Ereignis gibt an, einen Thread, der an den Threadpool hinzugefügt. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc  -->
 
 ## <a name="minimize-large-object-allocations"></a>Minimieren Sie Zuordnungen großer Objekte
 
