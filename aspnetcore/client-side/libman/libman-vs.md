@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 727bd80b7f37f6ebd9d37b7aab1aa6c33b85678c
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 41a5a41c8921b04290784d26441ecb46aea753e7
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206726"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894967"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>LibMan mit ASP.NET Core in Visual Studio verwenden
 
@@ -24,7 +24,7 @@ Visual Studio verfügt über integrierte Unterstützung für [LibMan](xref:clien
 * Das Suchdialogfeld zum Suchen von Bibliotheken, und die Dateien zu einem Projekt hinzugefügt.
 * Bearbeiten Sie die Unterstützung für *libman.json*&mdash;LibMan Manifestdatei.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/client-side/libman/samples/) [(Herunterladen von)](xref:index#how-to-download-a-sample)
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(Herunterladen von)](xref:index#how-to-download-a-sample)
 
 ## <a name="prerequisites"></a>Vorraussetzungen
 
@@ -64,9 +64,9 @@ Um eine clientseitige Bibliothek zu installieren, gehen Sie wie folgt vor:
   
   |Starten Sie Speicherort                           |Empfohlene Ordner      |
   |------------------------------------------|----------------------|
-  |Stammverzeichnis des Projekts (Wenn *"Wwwroot"* vorhanden ist)        |*Wwwroot/Lib/Jquery /* |
-  |Stammverzeichnis des Projekts (Wenn *"Wwwroot"* ist nicht vorhanden.) |*LIB/Jquery /*         |
-  |*Seiten* Ordner im Projekt                 |*Seiten/Jquery /*       |
+  |Stammverzeichnis des Projekts (Wenn *"Wwwroot"* vorhanden ist)        |*wwwroot/lib/jquery/* |
+  |Stammverzeichnis des Projekts (Wenn *"Wwwroot"* ist nicht vorhanden.) |*lib/jquery/*         |
+  |*Seiten* Ordner im Projekt                 |*Pages/jquery/*       |
 
 * Klicken Sie auf die **installieren** Schaltfläche zum Herunterladen der Dateien, gemäß der Konfiguration in *libman.json*.
 * Überprüfen Sie die **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster für die Details zur Installation. Zum Beispiel:

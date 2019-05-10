@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: 16cfa672fe4a81d9e8f09fc3dd1e6c036edd4c4e
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: ab407436afb16687fa285a836b608ad2e6a4802f
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208975"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894557"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.NET Core
 
@@ -239,13 +239,13 @@ For establishing trust on other platforms refer to the platform specific documen
 For more information on configuring HTTPS see https://go.microsoft.com/fwlink/?linkid=848054.
 ```
 
-Installieren von .NET Core SDK wird das ASP.NET Core-HTTPS-Entwicklungszertifikat in den Zertifikatspeicher des lokalen Benutzers installiert. Das Zertifikat wurde installiert, aber es ist nicht als vertrauenswürdig eingestuft. Führen Sie den einmaligen Schritt zum Ausführen der Dotnet Vertrauen des Zertifikats `dev-certs` Tool:
+Durch das Installieren des ASP.NET Core SDK wird das ASP.NET Core-HTTPS-Entwicklungszertifikat im lokalen Benutzerzertifikatspeicher installiert. Das Zertifikat wurde installiert, aber es ist nicht als vertrauenswürdig eingestuft. Führen Sie den einmaligen Schritt zum Ausführen der Dotnet Vertrauen des Zertifikats `dev-certs` Tool:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-Der folgende Befehl enthält die Hilfe für die `dev-certs` Tool:
+Der folgende Befehl stellt Hilfe zum `dev-certs`-Tool bereit:
 
 ```console
 dotnet dev-certs https --help
@@ -253,7 +253,7 @@ dotnet dev-certs https --help
 
 ## <a name="how-to-set-up-a-developer-certificate-for-docker"></a>So richten Sie ein entwicklerzertifikat für Docker
 
-Finden Sie unter [GitHub-Problem](https://github.com/aspnet/Docs/issues/6199).
+Finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/6199).
 
 ::: moniker-end
 

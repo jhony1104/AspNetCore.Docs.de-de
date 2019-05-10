@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 07/16/2018
 uid: security/data-protection/implementation/key-encryption-at-rest
 ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 8f8924ce4eb9effeaf489f177fb01b66867da16f
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39219289"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64892307"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>Verschlüsselung ruhender Daten in ASP.NET Core
 
@@ -66,7 +66,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range=">= aspnetcore-2.0"
 
-## <a name="x509-certificate"></a>X. 509-Zertifikat
+## <a name="x509-certificate"></a>X.509-Zertifikat
 
 Wenn die app über mehrere Computer verteilt ist, ist es möglicherweise sinnvoll, ein gemeinsam genutztes x. 509-Zertifikat auf dem Computer zu verteilen, und konfigurieren Sie die gehosteten apps zur Verwendung des Zertifikats für die Verschlüsselung von Schlüsseln im ruhenden Zustand:
 

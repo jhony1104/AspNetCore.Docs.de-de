@@ -5,12 +5,12 @@ description: Eine Erläuterung der verwenden der Cookieauthentifizierung ohne AS
 ms.author: riande
 ms.date: 02/25/2019
 uid: security/authentication/cookie
-ms.openlocfilehash: c6cba588abb003ee677d8f1753b73a1ced1414b0
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 2bc3e16b1b32816b14ad5bb4ca905ae5ed51ab87
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209374"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897747"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>Verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity
 
@@ -18,7 +18,7 @@ Durch [Rick Anderson](https://twitter.com/RickAndMSFT) und [Luke Latham](https:/
 
 Wie Sie in den früheren Authentifizierungsthemen gesehen haben [ASP.NET Core Identity](xref:security/authentication/identity) ist ein vollständige, voll ausgestattete Authentication-Anbieter zum Erstellen und Verwalten von Anmeldungen. Möglicherweise möchten jedoch Ihre eigene Logik für die benutzerdefinierte Authentifizierung mit gelegentlich cookiebasierte Authentifizierung zu verwenden. Sie können als eigenständige Authentifizierungsanbieter ohne ASP.NET Core Identity cookiebasierte Authentifizierung.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Zu Demonstrationszwecken in der Beispiel-app ist das Benutzerkonto für den hypothetischen Benutzer Maria Rodriguez, in der app hartcodiert. Verwenden Sie den Benutzernamen des e-Mail-Adresse "maria.rodriguez@contoso.com" und eines Kennworts zum Anmelden des Benutzers. Der Benutzer wird authentifiziert, der `AuthenticateUser` -Methode in der die *Pages/Account/Login.cshtml.cs* Datei. Im Real-World-Beispiel würde der Benutzer für eine Datenbank authentifiziert werden.
 

@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/28/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 8967f87da58e7386bc1dd84e7b3e0f5daaecf9cb
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b5b05dbd553124cecac2ec7ddb55c939cb91c8ad
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884715"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450995"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -1132,5 +1132,5 @@ Die Middleware zum Filtern von Hosts ist standardmäßig deaktiviert. Wenn Sie d
 * <xref:test/troubleshoot>
 * <xref:security/enforcing-ssl>
 * <xref:host-and-deploy/proxy-load-balancer>
-* [Kestrel-Quellcode](https://github.com/aspnet/KestrelHttpServer)
+* [Kestrel-Quellcode](https://github.com/aspnet/AspNetCore/tree/master/src/Servers/Kestrel)
 * [RFC 7230: Message Syntax and Routing (Abschnitt 5.4: Host)](https://tools.ietf.org/html/rfc7230#section-5.4)

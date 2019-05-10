@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 3113220696eb3e3cb8c126cd1287e60203d96378
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208333"
----
 # <a name="aspnet-core-built-in-tag-helpers-sample"></a>ASP.NET Core: Beispiel für integrierte Taghilfsprogramme
 
 Dieses Beispiel veranschaulicht die verschiedenen integrierten Taghilfsprogramme in MVC und Razor-Seiten:

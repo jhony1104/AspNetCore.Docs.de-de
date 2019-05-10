@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: test/integration-tests
-ms.openlocfilehash: 11a8f4296e1b0b229c736645f1aa598307b88ec4
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: 46c3b227ca0b3def5ab7d527a2f6ef2497d55f83
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320185"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64892067"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -22,7 +22,7 @@ Integrationstests stellen Sie sicher, dass der app-Komponenten auf einer Ebene o
 
 In diesem Thema wird davon ausgegangen, ein grundlegendes Verständnis der Komponententests. Wenn mit Konzepte nicht vertraut sind, finden Sie unter den [Unit Testing in .NET Core und .NET Standard](/dotnet/core/testing/) Thema und seine verknüpften Inhalt.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Die Beispiel-app ist eine Razor-Seiten-app und geht davon aus ein grundlegendes Verständnis der Razor-Seiten. Wenn Sie mit Razor-Seiten nicht vertraut sind, finden Sie unter den folgenden Themen:
 
@@ -104,7 +104,7 @@ Müssen das Testprojekt:
   * [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * Geben Sie die Webdienst-SDK in der Projektdatei (`<Project Sdk="Microsoft.NET.Sdk.Web">`). Die Webdienst-SDK ist erforderlich, beim Verweisen auf die [Microsoft.AspNetCore.App metapaket](xref:fundamentals/metapackage-app).
 
-Diese erforderlichen Komponenten finden Sie in der [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples/). Überprüfen Sie die *tests/RazorPagesProject.Tests/RazorPagesProject.Tests.csproj* Datei. Die beispielanwendung verwendet die [xUnit](https://xunit.github.io/) Testframework und die [AngleSharp](https://anglesharp.github.io/) Parser-Bibliothek, damit die Beispiel-app auch verweist:
+Diese erforderlichen Komponenten finden Sie in der [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Überprüfen Sie die *tests/RazorPagesProject.Tests/RazorPagesProject.Tests.csproj* Datei. Die beispielanwendung verwendet die [xUnit](https://xunit.github.io/) Testframework und die [AngleSharp](https://anglesharp.github.io/) Parser-Bibliothek, damit die Beispiel-app auch verweist:
 
 * [xunit](https://www.nuget.org/packages/xunit/)
 * [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
@@ -155,7 +155,7 @@ Webhostkonfiguration kann unabhängig von den Testklassen erstellt werden, durch
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   Im seeding der Datenbank die [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) erfolgt durch die `InitializeDbForTests` Methode. Die Methode wird beschrieben, der [Integrationstests-Beispiel: Testen der app-Organisation](#test-app-organization) Abschnitt.
+   Im seeding der Datenbank die [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) erfolgt durch die `InitializeDbForTests` Methode. Die Methode wird beschrieben, der [Integrationstests-Beispiel: Testen der app-Organisation](#test-app-organization) Abschnitt.
 
 2. Verwenden Sie die benutzerdefinierte `CustomWebApplicationFactory` in Testklassen. Im folgenden Beispiel wird die Factory in der `IndexPageTests` Klasse:
 
@@ -173,7 +173,7 @@ Alle POST-Anforderung an das GS erfüllen muss die antiforgery-Überprüfung, di
 1. Analysieren Sie die antiforgery Cookie und Überprüfung Anfordern eines Tokens aus der Antwort.
 1. Stellen Sie die POST-Anforderung mit dem Cookie und Anforderung antifälschungsvalidierung token vorhanden.
 
-Die `SendAsync` Hilfsmethoden für die Erweiterung (*Helpers/HttpClientExtensions.cs*) und die `GetDocumentAsync` Hilfsmethode (*Helpers/HtmlHelpers.cs*) in der [-Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples/) verwenden die [AngleSharp](https://anglesharp.github.io/) Parser behandelt die antiforgery Überprüfung mit den folgenden Methoden:
+Die `SendAsync` Hilfsmethoden für die Erweiterung (*Helpers/HttpClientExtensions.cs*) und die `GetDocumentAsync` Hilfsmethode (*Helpers/HtmlHelpers.cs*) in der [-Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) verwenden die [AngleSharp](https://anglesharp.github.io/) Parser behandelt die antiforgery Überprüfung mit den folgenden Methoden:
 
 * `GetDocumentAsync` &ndash; Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt eine `IHtmlDocument`. `GetDocumentAsync` eine Factory, die vorbereitet wird eine *virtuellen Antwort* auf Grundlage der ursprünglichen `HttpResponseMessage`. Weitere Informationen finden Sie unter den [AngleSharp Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync` Erweiterungsmethoden für die `HttpClient` compose eine [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) , und rufen Sie [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) , Anforderungen werden dem GS Auslöser zu senden. Überladungen für `SendAsync` akzeptieren Sie die HTML-Formular (`IHtmlFormElement`) und die folgenden:
@@ -188,7 +188,7 @@ Die `SendAsync` Hilfsmethoden für die Erweiterung (*Helpers/HttpClientExtension
 
 Wenn zusätzliche Konfigurationsschritte erforderlich, innerhalb einer Testmethode ist [WithWebHostBuilder](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.withwebhostbuilder) erstellt ein neues `WebApplicationFactory` mit einer [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) , die weitere Konfiguration angepasst ist.
 
-Die `Post_DeleteMessageHandler_ReturnsRedirectToRoot` test-Methode von der [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) veranschaulicht die Verwendung von `WithWebHostBuilder`. Dieser Test führt einen Löschvorgang Datensatz in der Datenbank durch Auslösen einer Formularübergabe im GS.
+Die `Post_DeleteMessageHandler_ReturnsRedirectToRoot` test-Methode von der [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) veranschaulicht die Verwendung von `WithWebHostBuilder`. Dieser Test führt einen Löschvorgang Datensatz in der Datenbank durch Auslösen einer Formularübergabe im GS.
 
 Da eine andere Testen in der `IndexPageTests` Klasse führt einen Vorgang, der alle Datensätze in der Datenbank gelöscht, und führen kann, bevor die `Post_DeleteMessageHandler_ReturnsRedirectToRoot` -Methode, die Datenbank wird in dieser Testmethode aus, um sicherzustellen, dass ein Datensatz vorhanden ist, für das GS löschen ist ein Seeding durchgeführt. Auswählen der `deleteBtn1` -Schaltfläche der `messages` Form im GS wird in der Anforderung werden dem GS Auslöser simuliert:
 
@@ -311,7 +311,7 @@ Rufen Sie die [UseSolutionRelativeContentRoot](/dotnet/api/microsoft.aspnetcore.
 
 ## <a name="disable-shadow-copying"></a>Deaktivieren von Schattenkopien
 
-Erstellen von Schattenkopien führt dazu, dass die Tests in einem anderen Ordner als den Ausgabeordner ausführen. Für die Tests ordnungsgemäß funktioniert muss die Option Schattenkopien deaktiviert werden. Die [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) verwendet xUnit und deaktiviert die Schattenkopiefunktion für xUnit dazu ein *xunit.runner.json* -Datei mit der richtigen Einstellung. Weitere Informationen finden Sie unter [Konfigurieren von xUnit mit JSON](https://xunit.github.io/docs/configuring-with-json.html).
+Erstellen von Schattenkopien führt dazu, dass die Tests in einem anderen Ordner als den Ausgabeordner ausführen. Für die Tests ordnungsgemäß funktioniert muss die Option Schattenkopien deaktiviert werden. Die [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) verwendet xUnit und deaktiviert die Schattenkopiefunktion für xUnit dazu ein *xunit.runner.json* -Datei mit der richtigen Einstellung. Weitere Informationen finden Sie unter [Konfigurieren von xUnit mit JSON](https://xunit.github.io/docs/configuring-with-json.html).
 
 Hinzufügen der *xunit.runner.json* Datei zum Stamm des Testprojekts mit dem folgenden Inhalt:
 
@@ -327,14 +327,14 @@ Nach den Tests für die `IClassFixture` Implementierung ausgeführt wird, [TestS
 
 ## <a name="integration-tests-sample"></a>Tests-integrationsbeispiel
 
-Die [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei apps:
+Die [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei apps:
 
 | App | Projektordner | Beschreibung |
 | --- | -------------- | ----------- |
 | Nachrichten-app (GS) | *src/RazorPagesProject* | Ermöglicht es einem Benutzer hinzufügen, löschen, löschen Sie alle und Analysieren von Nachrichten. |
 | Testen der app | *tests/RazorPagesProject.Tests* | Zum Integrationstest GS verwendet. |
 
-Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](https://www.visualstudio.com/vs/). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesProject.Tests* Ordner:
+Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](https://visualstudio.microsoft.com). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesProject.Tests* Ordner:
 
 ```console
 dotnet test

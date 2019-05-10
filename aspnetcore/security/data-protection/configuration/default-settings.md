@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/configuration/default-settings
 ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159210"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897277"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Data Protection-schlüsselverwaltung und Lebensdauer in ASP.NET Core
 
@@ -27,12 +27,12 @@ Die app versucht, seiner betriebsumgebung erkennen und Konfiguration selbst zu b
 
 1. Wenn das Benutzerprofil verfügbar ist, werden Schlüssel zum Beibehalten der *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* Ordner. Wenn das Betriebssystem Windows ist, werden die Schlüssel im Ruhezustand mit DPAPI verschlüsselt.
 
-   Des app-Pools [SetProfileEnvironment Attribut](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) muss ebenfalls aktiviert werden. Der Standardwert von `setProfileEnvironment` ist `true`. In einigen Szenarios (z. B. Windows-Betriebssystem) `setProfileEnvironment` nastaven NA hodnotu `false`. Wenn der Schlüssel im Benutzerprofilverzeichnis als gespeichert sind nicht erwartet:
+   Das [setProfileEnvironment-Attribut](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) des App-Pools muss ebenfalls aktiviert sein. Der Standardwert von `setProfileEnvironment` ist `true`. In einigen Szenarien (z.B. Windows-Betriebssystem) ist `setProfileEnvironment` auf `false` festgelegt. Gehen Sie folgendermaßen vor, wenn Schlüssel nicht wie erwartet im Benutzerprofilverzeichnis gespeichert werden:
 
-   1. Navigieren Sie zu der *%windir%/system32/inetsrv/config* Ordner.
-   1. Öffnen der *"applicationHost.config"* Datei.
+   1. Navigieren Sie zum Ordner *%windir%/system32/inetsrv/config*.
+   1. Öffnen Sie die Datei *applicationHost.config*.
    1. Suchen Sie das Element `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` .
-   1. Überprüfen Sie, ob die `setProfileEnvironment` Attribut nicht vorhanden ist, die standardmäßig des Werts auf `true`, oder legen Sie explizit der Wert des Attributs auf `true`.
+   1. Bestätigen Sie, dass das `setProfileEnvironment`-Attribut nicht vorhanden ist, das standardmäßig den Wert `true` aufweist, oder legen Sie den Wert des Attributs explizit auf `true` fest.
 
 1. Wenn die app in IIS gehostet wird, werden die Schlüssel in einen speziellen Registrierungsschlüssel der HKLM-Registrierung beibehalten, die nur in das Workerprozesskonto ACL des workerprozesskontos bereitgestellt wird. Schlüssel werden im Ruhezustand mit DPAPI verschlüsselt.
 

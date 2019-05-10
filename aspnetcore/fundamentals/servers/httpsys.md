@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 02/21/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 6ec9b7bf3da0015b8ac3918a4d47644fffc14cdb
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 7ba27b404cd10752ff9e304cd0a272eff7fa627a
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209173"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087053"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implementierung des Http.sys-Webservers in ASP.NET Core
 
@@ -38,7 +38,7 @@ Unterstützte Windows-Versionen:
 * Windows 7 oder höher
 * Windows Server 2008 R2 oder höher
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>Empfohlene Verwendung von HTTP.sys
 
@@ -141,7 +141,7 @@ HTTP.sys delegiert zur Kernelmodusauthentifizierung mit dem Kerberos-Authentifiz
 
 1. Beziehen Sie X.509-Zertifikate und installieren Sie sie, falls erforderlich.
 
-   Erstellen Sie unter Windows selbstsignierte Zertifikate mit dem [PowerShell-Cmdlet „New-SelfSignedCertificate“](/powershell/module/pkiclient/new-selfsignedcertificate). Ein nicht unterstütztes Beispiel finden Sie unter [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
+   Erstellen Sie unter Windows selbstsignierte Zertifikate mit dem [PowerShell-Cmdlet „New-SelfSignedCertificate“](/powershell/module/pkiclient/new-selfsignedcertificate). Ein nicht unterstütztes Beispiel finden Sie unter [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
 
    Installieren Sie entweder selbstsignierte oder CA-signierte Zertifikate im Speicher **Lokaler Server** > **Persönlich** des Servers.
 

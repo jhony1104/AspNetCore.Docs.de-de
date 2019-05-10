@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/data-protection/introduction
 ms.openlocfilehash: 37f170a3e8a46ef2215b0999358d46dd402636df
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50089547"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897987"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core-Datenschutz
 
@@ -21,7 +21,7 @@ ASP.NET Core-Stapel für den Schutz der Daten als langfristige Ersatz für diene
 
 ## <a name="problem-statement"></a>Problembeschreibung
 
-Die allgemeine Problem-Anweisung kann in einem einzigen Satz kurz angegeben werden: vertrauenswürdigen Informationen für den späteren Abruf beibehalten werden muss, aber ich nicht den Dauerhaftigkeitsmechanismus vertrauen. Web ausgedrückt kann dies geschrieben werden, als "Ich Round-Trip vertrauenswürdigen Status über ein nicht vertrauenswürdiger Client muss."
+Die allgemeine Problem-Anweisung kann in einem einzigen Satz kurz angegeben werden: Muss ich vertrauenswürdigen Informationen für den späteren Abruf zu speichern, aber ich nicht den Dauerhaftigkeitsmechanismus vertrauen. Web ausgedrückt kann dies geschrieben werden, als "Ich Round-Trip vertrauenswürdigen Status über ein nicht vertrauenswürdiger Client muss."
 
 Das kanonische Beispiel hierfür ist ein Authentifizierungscookie oder bearertoken token. Der Server generiert eine "Ich bin Groot und Xyz berechtigt" token, und übergibt diesen an dem Client. Irgendwann wird der Client dieses Token an den Server angezeigt, aber der Server benötigt eine Art von Gewissheit, dass der Client das Token gefälschten noch nicht. Daher die erste Anforderung: Echtheitszertifikat (auch als) Integrität, vor unbefugtem Zugriff sichern).
 

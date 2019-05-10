@@ -1,7 +1,7 @@
-# <a name="aspnet-core-response-caching-sample"></a>ASP.NET Core Antwort Caching-Beispiel
+# <a name="aspnet-core-response-caching-sample"></a>Beispiel: ASP.NET Core-Antwort zwischenspeichern
 
-Dieses Beispiel veranschaulicht die Verwendung von ASP.NET Core [Antwort zwischenspeichern Middleware](https://docs.microsoft.com/aspnet/core/performance/caching/middleware).
+Dieses Beispiel veranschaulicht die Verwendung von ASP.NET Core [Antworten Zwischenspeichern Middleware](https://docs.microsoft.com/aspnet/core/performance/caching/middleware).
 
-Die app antwortet, mit der Indexseite, einschließlich einer `Cache-Control` Header so konfigurieren Sie das Verhalten beim Zwischenspeichern. Setzt die app auch die `Vary` Header so konfigurieren Sie den Cache in der Antwort nur, wenn dienen der `Accept-Encoding` -Header der nachfolgenden Anforderungen, die aus der ursprünglichen Anforderung übereinstimmt.
+Die app reagiert, mit der Indexseite, einschließlich einer `Cache-Control` -Header auf das Verhalten beim Zwischenspeichern zu konfigurieren. Legt auch fest, die app die `Vary` Header zum Konfigurieren des Caches zum Verarbeiten der Antwort nur, wenn die `Accept-Encoding` Header nachfolgender Anforderungen entspricht, die aus der ursprünglichen Anforderung.
 
-Beim Ausführen des Beispiels wird die Indexseite bedient, aus dem Cache, wenn gespeichert und für bis zu 10 Sekunden zwischengespeichert.
+Beim Ausführen des Beispiels wird die Seite "Index" bereitgestellt, aus dem Cache gespeichert und bis zu 10 Sekunden lang zwischengespeichert.

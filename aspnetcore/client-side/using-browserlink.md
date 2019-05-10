@@ -7,11 +7,11 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/22/2017
 uid: client-side/using-browserlink
 ms.openlocfilehash: 452ba5149563c186750466f471c7b950f0017614
-ms.sourcegitcommit: d53e0cc71542b92de867bcce51575b054886f529
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2018
-ms.locfileid: "41829605"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894707"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Browserlink in ASP.NET Core
 
@@ -83,7 +83,7 @@ Auf dem Browserlink-Symbolleisten-Steuerelement können Sie folgende Aktionen au
 
 * Aktualisieren Sie die Webanwendung in mehreren Browsern gleichzeitig.
 * Öffnen der **Browserlink-Dashboard**.
-* Aktivieren oder deaktivieren Sie **Browserlink**. Hinweis: Browserlink ist in Visual Studio 2017 (Version 15.3) standardmäßig deaktiviert.
+* Aktivieren oder deaktivieren Sie **Browserlink**. Hinweis: Browserverknüpfung ist in Visual Studio 2017 (Version 15.3) standardmäßig deaktiviert.
 * Aktivieren oder deaktivieren Sie [automatische CSS-Synchronisierung](#enable-or-disable-css-auto-sync).
 
 > [!NOTE]
@@ -121,11 +121,11 @@ Browserverknüpfung funktioniert auch mit Browsern, die Sie außerhalb von Visua
 
 Wenn kein Browser verbunden ist, können Sie eine nicht-Debugsitzung starten, durch Auswählen der *in Browser anzeigen* Link:
 
-![Browserlink-Dashboard-ohne-Verbindungen](using-browserlink/_static/browserlink-dashboard-no-connections.png)
+![browserlink-dashboard-no-connections](using-browserlink/_static/browserlink-dashboard-no-connections.png)
 
 Andernfalls werden die verbundenen Browsern durch den Pfad zu der Seite angezeigt, die von jedem Browser angezeigt wird:
 
-![Browserlink-Dashboard-2-Verbindungen](using-browserlink/_static/browserlink-dashboard-two-connections.png)
+![browserlink-dashboard-two-connections](using-browserlink/_static/browserlink-dashboard-two-connections.png)
 
 Wenn Sie möchten, können Sie einen Namen aufgeführten Browser diese einzelnen Browser aktualisieren, klicken.
 

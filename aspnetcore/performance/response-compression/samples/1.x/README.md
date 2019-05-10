@@ -1,6 +1,6 @@
 # <a name="response-compression-sample-application-aspnet-core-1x"></a>Antwort-Komprimierung-beispielanwendung (ASP.NET Core 1.x)
 
-Dieses Beispiel veranschaulicht die Verwendung von ASP.NET Core 1.x Antworten komprimierende Middleware zum Komprimieren von HTTP-Antworten für. Im Beispiel wird veranschaulicht, Gzip und benutzerdefinierte Komprimierung-Anbieter für Text- und Image-Antworten und veranschaulicht das Hinzufügen ein MIME-Typs für die Komprimierung. Das ASP.NET Core 2.x-Beispiel finden Sie [Antwort Komprimierung-beispielanwendung (ASP.NET Core 2.x)](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples/2.x).
+Dieses Beispiel veranschaulicht die Verwendung von ASP.NET Core 1.x Antworten komprimierende Middleware zum Komprimieren von HTTP-Antworten für. Im Beispiel wird veranschaulicht, Gzip und benutzerdefinierte Komprimierung-Anbieter für Text- und Image-Antworten und veranschaulicht das Hinzufügen ein MIME-Typs für die Komprimierung. Das ASP.NET Core 2.x-Beispiel finden Sie [Antwort Komprimierung-beispielanwendung (ASP.NET Core 2.x)](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples/2.x).
 
 ## <a name="examples-in-this-sample"></a>Beispiele
 

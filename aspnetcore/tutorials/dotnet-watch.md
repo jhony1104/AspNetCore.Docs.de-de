@@ -5,12 +5,12 @@ description: In diesem Tutorial wird erläutert, wie Sie das Dateiwatcher-Tool (
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 40ecca1c6f9d519b24649d0c28946d95b820c07c
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 03b4f7f4ade5268915482a659890c7edc2d9a852
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068195"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889875"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Victor Hurdugaci](http
 
 In diesem Tutorial wird eine vorhandene Web-API mit zwei Endpunkten verwendet: der eine gibt eine Summe zurück, der andere ein Produkt. Die Produktmethode enthält einen Fehler, der in diesem Tutorial behoben wird.
 
-Laden Sie die [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie enthält zwei Projekte: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententest für die Web-API).
+Laden Sie die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie enthält zwei Projekte: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententest für die Web-API).
 
 Navigieren Sie in einer Befehlsshell zum Ordner *WebApp*. Führen Sie den folgenden Befehl aus:
 

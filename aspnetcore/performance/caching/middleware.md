@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/20/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: c7c3dbd0c9cf029fa6921d77450e780768c8aa6e
-ms.sourcegitcommit: 0945078a09c372f17e9b003758ed87e99c2449f4
+ms.openlocfilehash: ddbd547ec0fdd09da1f3e3ce30f8fa35a34870c2
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56647914"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897367"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Antworten zwischenspeichernden Middleware in ASP.NET Core
 
 Durch [Luke Latham](https://github.com/guardrex) und [John Luo](https://github.com/JunTaoLuo)
 
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
 In diesem Artikel erläutert die Antworten Zwischenspeichern von Middleware in ASP.NET Core-Apps zu konfigurieren. Die Middleware wird bestimmt, wenn Antworten zwischengespeichert werden, speichert Antworten und Antworten dient, aus dem Cache. Eine Einführung in die HTTP-Zwischenspeicherung und die `ResponseCache` Attribut, finden Sie unter [Zwischenspeichern von Antworten](xref:performance/caching/response).
 

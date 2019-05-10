@@ -5,16 +5,16 @@ description: Dieser Artikel enthält Informationen zur Verwendung von Anwendungs
 ms.author: riande
 ms.date: 01/04/2017
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 67bd40adef4cdb0bd781f70114d3954cd9a8ed09
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: 5d5e79d3afe0eee6d0b126d4642ccd5f61bff409
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320094"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888135"
 ---
 # <a name="application-parts-in-aspnet-core"></a>Anwendungsparts in ASP.NET Core
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer Anwendung, aus der MVC-Features wie Controller, Komponentenansichten oder Taghilfsprogramme ermittelt werden können. Ein Beispiel für einen Anwendungspart ist ein AssemblyPart, der einen Assemblyverweis kapselt und Typen und Kompilierungsverweise verfügbar macht. *Featureanbieter* arbeiten mit Anwendungsparts, um die Features einer ASP.NET Core MVC-Anwendung aufzufüllen. Anwendungsparts ermöglichen Ihnen hauptsächlich das Konfigurieren Ihrer App zum Ermitteln (oder zur Vermeidung des Ladens) von MVC-Features aus einer Assembly.
 

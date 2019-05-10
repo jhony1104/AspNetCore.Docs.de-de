@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: security/cookie-sharing
-ms.openlocfilehash: 7a049ed8787808e228859afc051b8697a6261c21
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 94fafc91012b5a7e0888a6ebf37f517c129af2ac
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068309"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64892797"
 ---
 # <a name="share-cookies-among-apps-with-aspnet-and-aspnet-core"></a>Freigeben von Cookies zwischen apps mit ASP.NET und ASP.NET Core
 
@@ -19,7 +19,7 @@ Durch [Rick Anderson](https://twitter.com/RickAndMSFT) und [Luke Latham](https:/
 
 Websites bestehen häufig aus einzelner Web-apps, die zusammenarbeiten. Um einen einmaligen Anmeldens (SSO) zu gewährleisten, müssen die Web-apps innerhalb eines Standorts Authentifizierungscookies freigeben. Zur Unterstützung dieses Szenarios kann die Stapel für den Schutz von Daten Freigeben von Katana-Cookie-Authentifizierung und ASP.NET Core-Cookie-Authentifizierungstickets.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Das Beispiel veranschaulicht die Cookies, die Freigabe über drei apps, die Cookie-Authentifizierung zu verwenden:
 
@@ -57,7 +57,7 @@ Beim Hosten von apps, die Cookies für Unterdomänen freigeben, geben Sie eine g
 options.Cookie.Domain = ".contoso.com";
 ```
 
-Finden Sie unter den *CookieAuthWithIdentity.Core* -Projekt in der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
+Finden Sie unter den *CookieAuthWithIdentity.Core* -Projekt in der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
 
 ::: moniker-end
 
@@ -105,7 +105,7 @@ Beim Hosten von apps, die Cookies für Unterdomänen freigeben, geben Sie eine g
 options.Cookie.Domain = ".contoso.com";
 ```
 
-Finden Sie unter den *CookieAuth.Core* -Projekt in der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
+Finden Sie unter den *CookieAuth.Core* -Projekt in der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
 
 ::: moniker-end
 
@@ -167,7 +167,7 @@ Wenn Authentifizierungscookies zwischen einer ASP.NET 4.x-app und einer ASP.NET 
 
 [!code-csharp[](cookie-sharing/sample/CookieAuthWithIdentity.NETFramework/CookieAuthWithIdentity.NETFramework/App_Start/Startup.Auth.cs?name=snippet1)]
 
-Finden Sie unter den *CookieAuthWithIdentity.NETFramework* -Projekt in der [Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
+Finden Sie unter den *CookieAuthWithIdentity.NETFramework* -Projekt in der [Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cookie-sharing/sample/) ([herunterladen](xref:index#how-to-download-a-sample)).
 
 Zur Erstellung eine Benutzeridentität muss der Authentifizierungstyp in definierten Typ übereinstimmen `AuthenticationType` festgelegt `UseCookieAuthentication`.
 

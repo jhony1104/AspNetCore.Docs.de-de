@@ -7,12 +7,12 @@ ms.author: riande
 ms.date: 09/07/2018
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: 383b7e49b5dbd0c0f13218aff20abe6421d785b8
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
-ms.translationtype: HT
+ms.openlocfilehash: 7ec36cc8f4832fb1e1a50831dfcb88f3cafb5ca9
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165156"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64895287"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Erstellen von wiederverwendbaren Benutzeroberfläche, die mit dem Razor-Klassenbibliotheksprojekt in ASP.NET Core
 
@@ -22,7 +22,7 @@ Ansichten, Seiten, Controller, Seitenmodelle, [Ansichtskomponenten](xref:mvc/vie
 
 Dieses Feature erfordert [!INCLUDE[](~/includes/2.1-SDK.md)]
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="create-a-class-library-containing-razor-ui"></a>Erstellen einer Klassenbibliothek, die eine Razor-Benutzeroberfläche enthält
 
@@ -63,7 +63,7 @@ Folgende Komponenten können auf die RCL verweisen:
 
 ## <a name="walkthrough-create-a-razor-class-library-project-and-use-from-a-razor-pages-project"></a>Exemplarische Vorgehensweise: Erstellen Sie einer Razor-Class-Library-Projekt aus und ein Projekt mit Razor Pages
 
-Sie können das [vollständige Projekt](https://github.com/aspnet/Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) herunterladen und testen, anstatt es zu erstellen. Der Beispieldownload enthält zusätzlichen Code sowie Links, die das Testen des Projekts erleichtern. [In diesem GitHub-Issue](https://github.com/aspnet/Docs/issues/6098) können Sie in Form von Kommentaren Feedback zu Unterschieden zwischen Beispieldownloads und ausführlichen Anleitungen geben.
+Sie können das [vollständige Projekt](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) herunterladen und testen, anstatt es zu erstellen. Der Beispieldownload enthält zusätzlichen Code sowie Links, die das Testen des Projekts erleichtern. [In diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/6098) können Sie in Form von Kommentaren Feedback zu Unterschieden zwischen Beispieldownloads und ausführlichen Anleitungen geben.
 
 ### <a name="test-the-download-app"></a>Testen der heruntergeladenen App
 

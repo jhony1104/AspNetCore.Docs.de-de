@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 9b01aca0cb2b33f5561193ffdce4aa4950485fce
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
-ms.translationtype: HT
+ms.openlocfilehash: 7013a88aac26426d1f84d1f52e35e319b3764cdb
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165237"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894447"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>Erstellen einer ASP.NET Core-app mit Benutzerdaten, die durch Autorisierung geschützt sind
 
@@ -19,7 +19,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Joe Audette](https://t
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Finden Sie unter [dieses PDF-Dokument](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) für die ASP.NET Core MVC-Version. Die ASP.NET Core 1.1-Version dieses Tutorials wird [dies](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data) Ordner. Die ASP.NET Core-Beispiel befindet sich in 1.1 die [Beispiele](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2).
+Finden Sie unter [dieses PDF-Dokument](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) für die ASP.NET Core MVC-Version. Die ASP.NET Core 1.1-Version dieses Tutorials wird [dies](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data) Ordner. Die ASP.NET Core-Beispiel befindet sich in 1.1 die [Beispiele](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2).
 
 ::: moniker-end
 
@@ -89,11 +89,11 @@ In ASP.NET Core 2.1 `User.IsInRole` schlägt fehl, wenn `AddDefaultIdentity`. Di
 
 ## <a name="the-starter-and-completed-app"></a>Die Starter und die fertige app
 
-[Herunterladen](xref:index#how-to-download-a-sample) der [abgeschlossen](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) app. [Test](#test-the-completed-app) die fertige app, damit Sie mit den Security-Features vertraut machen.
+[Herunterladen](xref:index#how-to-download-a-sample) der [abgeschlossen](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) app. [Test](#test-the-completed-app) die fertige app, damit Sie mit den Security-Features vertraut machen.
 
 ### <a name="the-starter-app"></a>Das Starter-app
 
-[Herunterladen](xref:index#how-to-download-a-sample) der [Starter](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2) app.
+[Herunterladen](xref:index#how-to-download-a-sample) der [Starter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2) app.
 
 Führen Sie die app, tippen Sie auf die **ContactManager** verknüpfen, und stellen Sie sicher, Sie erstellen, bearbeiten und Löschen eines Kontakts.
 
@@ -275,7 +275,7 @@ Aktualisieren Sie das Seitenmodell Details an:
 
 ## <a name="add-or-remove-a-user-to-a-role"></a>Hinzufügen oder Entfernen eines Benutzers zu einer Rolle
 
-Finden Sie unter [dieses Problem](https://github.com/aspnet/Docs/issues/8502) Informationen auf:
+Finden Sie unter [dieses Problem](https://github.com/aspnet/AspNetCore.Docs/issues/8502) Informationen auf:
 
 * Entfernen Berechtigungen eines Benutzers ein. Stummschaltung z. B. einen Benutzer in einem Chat-app ein.
 * Hinzufügen von Berechtigungen für einen Benutzer aus.
@@ -346,7 +346,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
 
 ### <a name="seed-the-database"></a>Ausführen eines Seedings für die Datenbank
 
-Hinzufügen der [SeedData](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) -Klasse auf die *Daten* Ordner.
+Hinzufügen der [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) -Klasse auf die *Daten* Ordner.
 
 Rufen Sie `SeedData.Initialize` aus `Main`:
 

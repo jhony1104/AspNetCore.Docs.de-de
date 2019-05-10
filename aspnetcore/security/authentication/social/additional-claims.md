@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 49c323fab64bd4ea52dd1d8cf2e43a79d4d0d0dc
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: 37c7a51217576669bcaed79d4a212e6412aa8945
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327351"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897667"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>Beibehalten von zusätzliche Ansprüche und Token von externen Anbietern in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core-Apps kann zusätzliche Ansprüche und Token von externen Authentifizierungsanbietern, z. B. Facebook, Google, Microsoft und Twitter herstellen. Jeder Anbieter werden andere Informationen zu Benutzern auf der Plattform, aber die Muster zum Empfangen und Transformieren von Daten des Benutzers in zusätzliche Ansprüche ist das gleiche.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Vorraussetzungen
 

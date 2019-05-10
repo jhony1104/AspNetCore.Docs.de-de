@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/13/2019
 uid: security/app-secrets
-ms.openlocfilehash: 18313f8284e81d196cbe786f494a607ee97a299f
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 195901e466262020fd1217bd9dfb6162910bb861
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750976"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893217"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Sichere Speicherung von app-Geheimnissen bei der Entwicklung in ASP.NET Core
 
 Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Daniel Roth](https://github.com/danroth27), und [Scott Addie](https://github.com/scottaddie)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/app-secrets/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Dieses Dokument erläutert die Verfahren zum Speichern und Abrufen von sensiblen Daten während der Entwicklung von ASP.NET Core-Apps. Speichern Sie niemals Kennwörter oder andere sensiblen Daten im Quellcode. Produktionsgeheimnisse sollten nicht verwendet werden zu Entwicklungs- oder Testzwecken. Sie können Azure-Test- und -Produktionsgeheimnisse mit dem [Konfigurationsanbieter Azure Key Vault](xref:security/key-vault-configuration) speichern und schützen.
 

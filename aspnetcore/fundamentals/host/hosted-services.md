@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: d10a335429752c1a52c1b3619adecc41725a819a
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 613227cdead1d0b62a0dead2fca9fab68fd534cc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899306"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889005"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Hintergrundtasks mit gehosteten Diensten in ASP.NET Core
 
@@ -24,7 +24,7 @@ In ASP.NET Core können Hintergrundtasks als *gehostete Dienste* implementiert w
 * Gehostete Dienste, die einen [bereichsbezogenen Dienst](xref:fundamentals/dependency-injection#service-lifetimes) aktivieren. Der bereichsbezogene Dienst kann Dependency Injection verwenden.
 * Hintergrundtasks in der Warteschlange, die sequenziell ausgeführt werden.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Die Beispiel-App wird in zwei Versionen bereitgestellt:
 

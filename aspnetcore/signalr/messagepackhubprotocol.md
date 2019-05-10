@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 02/27/2019
 uid: signalr/messagepackhubprotocol
 ms.openlocfilehash: 7742f6f8bb53fb3c299ff98ae52a0da519ff396c
-ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57400670"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64896517"
 ---
 # <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>Verwenden von MessagePack Hub-Protokoll in SignalR für ASP.NET Core
 

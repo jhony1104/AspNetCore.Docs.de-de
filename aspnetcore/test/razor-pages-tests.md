@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/27/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: 5116ec3c3d6c27f9b0e098f82c82dd7b7337b8f6
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: f1526b8803f43ec8cbe77c1d2c100d9daf6cd316
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207497"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893717"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Razor-Seiten-Komponententests in ASP.NET Core
 
@@ -30,16 +30,16 @@ In diesem Thema wird davon ausgegangen, dass Sie ein grundlegendes Verständnis 
 * [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start)
 * [Komponententest von C# -Code in .NET Core mit Dotnet Test und xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Das Beispielprojekt besteht aus zwei apps:
 
 | App         | Projektordner                        | Beschreibung |
 | ----------- | ------------------------------------- | ----------- |
-| Nachrichten-app | *Src/RazorPagesTestSample*            | Ermöglicht es einem Benutzer hinzufügen, löschen, löschen Sie alle und Analysieren von Nachrichten. |
-| Testen der app    | *tests/RazorPagesTestSample.Tests*    | Um einen Komponententest durchführen, die Nachrichten-app verwendet: Datenzugriff (Layer, DAL) und Index-Seitenmodell. |
+| Nachrichten-app | *src/RazorPagesTestSample*            | Ermöglicht es einem Benutzer hinzufügen, löschen, löschen Sie alle und Analysieren von Nachrichten. |
+| Testen der app    | *tests/RazorPagesTestSample.Tests*    | Um einen Komponententest durchführen, die Nachrichten-app verwendet: Die Datenzugriffsebene (DAL) und Index-Seitenmodell. |
 
-Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](https://www.visualstudio.com/vs/). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesTestSample.Tests* Ordner:
+Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](https://visualstudio.microsoft.com). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesTestSample.Tests* Ordner:
 
 ```console
 dotnet test
@@ -108,9 +108,9 @@ using (var db = new AppDbContext(Utilities.TestingDbContextOptions()))
 
 Jeder Testmethode in der `DataAccessLayerTest` Klasse (*UnitTests/DataAccessLayerTest.cs*) folgt einem ähnlichen Arrange-Act-Assert-Muster:
 
-1. Anordnen: Die Datenbank wird konfiguriert für den Test bzw. das erwartete Ergebnis definiert ist.
+1. Arrangieren: Die Datenbank konfiguriert ist, für den Test bzw. das erwartete Ergebnis definiert ist.
 1. ACT: Der Test ausgeführt wird.
-1. Eine Assertion aus: Assertionen erfolgen zu bestimmen, ob das Testergebnis erfolgreich ist.
+1. Bestätigen: Assertionen werden vorgenommen, um festzustellen, ob das Testergebnis erfolgreich ist.
 
 Z. B. die `DeleteMessageAsync` Methode ist verantwortlich für das Entfernen einer einzelnen Nachricht identifizierte seine `Id` (*src/RazorPagesTestSample/Data/AppDbContext.cs*):
 
@@ -124,7 +124,7 @@ Die Methode führt zuerst im Schritt anordnen, findet die Vorbereitung der Schri
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/DataAccessLayerTest.cs?name=snippet1)]
 
-Die Methode dient: die `DeleteMessageAsync` Methode ausgeführt wird, übergibt die `recId` von `1`:
+Die Methode dient: Die `DeleteMessageAsync` Methode ausgeführt wird, übergibt die `recId` von `1`:
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/DataAccessLayerTest.cs?name=snippet2)]
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: d2dd5e9b7f196bcbd1940f7ef58331dabd2367a1
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 72d5b2e902a95442ccffb7a149b917c50373775b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637806"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889925"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>URL-umschreibende Middleware in ASP.NET Core
 
@@ -38,7 +38,7 @@ Bei der URL-Umschreibung werden die Anforderungs-URLs verändert, die auf mindes
 > [!NOTE]
 > Wenn Sie URLs umschreiben, kann das negative Auswirkungen auf die Leistung einer App haben. Wenn möglich, sollten Sie so wenig Regeln wie möglich erstellen und darauf achten, dass diese nicht zu kompliziert sind.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>Umleiten und Umschreiben von URLs
 
@@ -68,7 +68,7 @@ Auch wenn der Client die Ressource unter der neu geschriebene URL abrufen kann, 
 
 ## <a name="url-rewriting-sample-app"></a>URL-umschreibende Beispiel-App
 
-Mit der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
+Mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>Empfohlene Verwendung der URL-umschreibenden Middleware
 
@@ -324,7 +324,7 @@ Verwenden Sie <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>,
 
 | `RewriteContext.Result`              | Aktion                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (Standardwert) | Regeln weiter anwenden.                                         |
+| `RuleResult.ContinueRules` (Standard) | Regeln weiter anwenden.                                         |
 | `RuleResult.EndResponse`             | Regeln nicht mehr anwenden und Antwort senden.                       |
 | `RuleResult.SkipRemainingRules`      | Regeln nicht mehr anwenden, und den Kontext an die nächste Middleware senden. |
 

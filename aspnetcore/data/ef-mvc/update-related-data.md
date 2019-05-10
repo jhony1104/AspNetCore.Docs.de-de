@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 6add725430380f0855fe660a70b90a4546ef0637
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: e8aa2c6e33968a6cbc05591e4e5017ea9eac691d
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750909"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64885675"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Aktualisieren verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -301,7 +301,7 @@ Wie bereits im [CRUD-Tutorial](crud.md) erläutert, implementiert Entity Framewo
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

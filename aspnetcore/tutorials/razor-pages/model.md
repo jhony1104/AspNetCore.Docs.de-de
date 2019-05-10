@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 02/12/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: b4f14241d50383ad4d1c1d8c9d00ca439f371b7d
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 9f12b9e9e35a81becd6a6da7ef4ca6d551d45938
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265029"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888745"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -22,7 +22,7 @@ In diesem Abschnitt werden Klassen für die Verwaltung von Filmen in einer Daten
 
 Die Modellklassen werden als POCO-Klassen (von „Plain-Old CLR Objects“) bezeichnet, da sie keinerlei Abhängigkeit von EF Core aufweisen. Sie definieren die Eigenschaften einer Datei, die in der Datenbank gespeichert ist.
 
-Beispiel [Anzeigen oder Herunterladen](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start).
+Beispiel [Anzeigen oder Herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start).
 
 ## <a name="add-a-data-model"></a>Hinzufügen eines Datenmodells
 
@@ -238,7 +238,7 @@ Sie haben den [Migrationsschritt](#pmc) verpasst.
   ![Seite „Create“](model/_static/conan.png)
 
   > [!NOTE]
-  > Sie können unter Umständen in das Feld `Price` keine Kommas als Dezimaltrennzeichen eingeben. Zur Unterstützung der [jQuery-Validierung](https://jqueryvalidation.org/) für Gebietsschemas mit einer anderen Sprache als Englisch, in denen ein Komma („,“) als Dezimaltrennzeichen verwendet wird, und für Datums- und Uhrzeitformate, die nicht dem US-englischen Format entsprechen, muss die App globalisiert werden. Globalisierungsanweisungen finden Sie unter [GitHub-Problem](https://github.com/aspnet/Docs/issues/4076#issuecomment-326590420).
+  > Sie können unter Umständen in das Feld `Price` keine Kommas als Dezimaltrennzeichen eingeben. Zur Unterstützung der [jQuery-Validierung](https://jqueryvalidation.org/) für Gebietsschemas mit einer anderen Sprache als Englisch, in denen ein Komma („,“) als Dezimaltrennzeichen verwendet wird, und für Datums- und Uhrzeitformate, die nicht dem US-englischen Format entsprechen, muss die App globalisiert werden. Globalisierungsanweisungen finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).
 
 * Testen Sie die Links **Edit** (Bearbeiten), **Details** und **Delete** (Löschen).
 

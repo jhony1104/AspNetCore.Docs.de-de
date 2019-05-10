@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie LoggerMessage verwenden, um Delegate zu erste
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 04/24/2019
 uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: 7a030b4bb754f65f8d93e51f203344c2dc02a634
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: a82dfa36330e987f03f576d0f80198e3bad7b429
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "58809262"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085605"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>Hochleistungsprotokollierung mit LoggerMessage in ASP.NET Core
 
@@ -25,7 +25,7 @@ Von [Luke Latham](https://github.com/guardrex)
 * Protokollierungserweiterungsmethoden erfordern das Konvertieren von Werttypen wie `int` in `object` (sogenanntes Boxing). Das <xref:Microsoft.Extensions.Logging.LoggerMessage>-Muster verhindert das Konvertieren mithilfe von statischen <xref:System.Action>-Feldern und mithilfe von Erweiterungsmethoden mit stark typisierten Parametern.
 * Protokollierungserweiterungsmethoden müssen die Meldungsvorlagen (sogenannte Formatzeichenfolgen) jedes Mal analysieren, wenn eine Protokollmeldung geschrieben wird. <xref:Microsoft.Extensions.Logging.LoggerMessage> erfordert das Analysieren einer Vorlage nur einmal beim Festlegen der Meldung.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/2.x/LoggerMessageSamples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/2.x/LoggerMessageSample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Die Beispiel-App veranschaulicht <xref:Microsoft.Extensions.Logging.LoggerMessage>-Features mit einem einfachen System zur Zitatnachverfolgung. Die App fügt Zitate hinzu und löscht diese mithilfe einer speicherinternen Datenbank. Während dieser Vorgänge werden Protokollmeldungen mit dem <xref:Microsoft.Extensions.Logging.LoggerMessage>-Muster erstellt.
 

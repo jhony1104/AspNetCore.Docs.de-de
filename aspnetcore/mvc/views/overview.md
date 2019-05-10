@@ -5,12 +5,12 @@ description: Informationen zur Verarbeitung der Darstellung von App-Daten und zu
 ms.author: riande
 ms.date: 04/03/2019
 uid: mvc/views/overview
-ms.openlocfilehash: 766996645bc6ef2b6be42d729baf5d57f55b6ddd
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 5e56c6bb18cb5d2389c11eb3e4aa9869228da47d
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59012798"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64891345"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Ansichten in ASP.NET Core MVC
 
@@ -135,7 +135,7 @@ Wenn Sie Stabilität wünschen, sollten Sie einen [Modell](xref:mvc/models/model
 
 Wenn Sie ein Ansichtsmodell verwenden, um eine Ansicht zu übergeben, kann die Ansicht die Vorteile der *starken* Typüberprüfung nutzen. Man spricht von *starker Typisierung* (oder *stark typisiert* als Adjektiv), wenn es für jede Variable und jede Konstante einen explizit definierten Typ gibt, z.B. `string`, `int` oder `DateTime`. Die Gültigkeit der in der Ansicht verwendeten Typen wird zur Kompilierzeit überprüft.
 
-[Visual Studio](https://www.visualstudio.com/vs/) und [Visual Studio Code](https://code.visualstudio.com/) erstellen Listen von stark typisierten Klassenmembern mithilfe des Features [IntelliSense](/visualstudio/ide/using-intellisense). Wenn Sie die Eigenschaften eines Ansichtsmodell anzeigen wollen, geben Sie den Namen der Variablen für dieses an, und setzen Sie einen Punkt (`.`). Dadurch können Sie Code schneller schreiben, und Sie machen weniger Fehler.
+[Visual Studio](https://visualstudio.microsoft.com) und [Visual Studio Code](https://code.visualstudio.com/) erstellen Listen von stark typisierten Klassenmembern mithilfe des Features [IntelliSense](/visualstudio/ide/using-intellisense). Wenn Sie die Eigenschaften eines Ansichtsmodell anzeigen wollen, geben Sie den Namen der Variablen für dieses an, und setzen Sie einen Punkt (`.`). Dadurch können Sie Code schneller schreiben, und Sie machen weniger Fehler.
 
 Geben Sie mithilfe der `@model`-Anweisung ein Modell an. Verwenden Sie das Modell mit `@Model`:
 

@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: performance/response-compression
-ms.openlocfilehash: e87480ebb81791ed233f3e2308e35e21e081824f
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: e312d43fb62106f6ecb98367c29daa377bb227c9
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248367"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893347"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Antwortkomprimierung in ASP.NET Core
 
 Von [Luke Latham](https://github.com/guardrex)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Die Netzwerkbandbreite ist eine eingeschränkte Ressource. Verringern der Größe der Antwort in der Regel erhöht die Reaktionsfähigkeit einer App, häufig erheblich. Eine Möglichkeit zum Reduzieren der Größe der Nutzlast ist zum Komprimieren von Antworten von der app.
 
@@ -89,7 +89,7 @@ Die Header, die beim anfordern, werden das Senden und Zwischenspeichern von komp
 | `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort geben sollte seine `Content-Type`. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort, komprimiert werden sollen. Die Middleware gibt einen Satz von [Standard-MIME-Typen](#mime-types) , die codiert werden können, aber Sie können ersetzen oder MIME-Typen hinzufügen. |
 | `Vary`             | Wenn vom Server mit dem Wert gesendet `Accept-Encoding` für Clients und -Proxys der `Vary` Header gibt an, an den Client oder Proxy, der zwischengespeichert werden soll (variieren) Antworten basierend auf den Wert der `Accept-Encoding` -Header der Anforderung. Das Ergebnis der Rückgabe von Inhalten mit der `Vary: Accept-Encoding` -Header ist, dass sowohl komprimierte und nicht komprimierte Antworten getrennt zwischengespeichert werden. |
 
-Erkunden Sie die Funktionen des die Antworten komprimierende Middleware mit der [Beispiel-app](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht:
+Erkunden Sie die Funktionen des die Antworten komprimierende Middleware mit der [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht:
 
 * Die Komprimierung von app-Antworten, die mithilfe von Gzip und benutzerdefinierte Komprimierung-Anbietern.
 * Wie Sie die Standardliste der MIME-Typen für die Komprimierung einen MIME-Typ hinzufügen.

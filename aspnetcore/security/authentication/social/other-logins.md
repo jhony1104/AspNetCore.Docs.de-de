@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 11/11/2018
 uid: security/authentication/otherlogins
 ms.openlocfilehash: b69c366ec1bf12ccf434991fc8a79eaf8c09da3d
-ms.sourcegitcommit: 09bcda59a58019fdf47b2db5259fe87acf19dd38
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51708464"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897507"
 ---
 # <a name="external-oauth-authentication-providers"></a>Externe OAuth-Authentifizierungsanbieter
 
@@ -19,7 +19,7 @@ Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Pranav Rastogi](https:/
 
 Die folgende Liste enthält allgemeine externe OAuth-Authentifizierungsanbieter, die mit ASP.NET Core-apps funktionieren. Drittanbieter-NuGet-Pakete, z. B. diejenigen, die von verwaltet [Aspnet-Contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth), können verwendet werden, um die durch das ASP.NET Core-Team implementiert Authentifizierungsanbieter zu ergänzen.
 
-* [LinkedIn](https://www.linkedin.com/developer/apps) ([Anweisungen](https://developer.linkedin.com/docs/oauth2))
+* [LinkedIn](https://www.linkedin.com/developer/apps) ([Instructions](https://developer.linkedin.com/docs/oauth2))
 
 * [Instagram](https://www.instagram.com/developer/register/) ([Anweisungen](https://www.instagram.com/developer/authentication/))
 
@@ -41,7 +41,7 @@ Die folgende Liste enthält allgemeine externe OAuth-Authentifizierungsanbieter,
 
 * [Vimeo](https://vimeo.com/join) ([Anweisungen](https://developer.vimeo.com/api/authentication))
 
-* [SoundCloud](https://soundcloud.com/you/apps/new) ([Anweisungen](https://developers.soundcloud.com/blog/we-love-oauth-2))
+* [SoundCloud](https://soundcloud.com/you/apps/new) ([Instructions](https://developers.soundcloud.com/blog/we-love-oauth-2))
 
 * [VK](https://vk.com/apps?act=manage) ([Anweisungen](https://vk.com/pages?oid=-17680044&p=Authorizing_Sites))
 

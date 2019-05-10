@@ -5,12 +5,12 @@ description: Informationen zum Erstellen und Verwenden von benutzerdefinierten F
 ms.author: tdykstra
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 611840defd1da3b57b365c99deaf1c67f1568227
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: ece60b47f345235a084faacf8e59b792856614d2
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264630"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887055"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>Benutzerdefinierte Formatierer in Web-APIs in ASP.NET Core
 
@@ -18,7 +18,7 @@ Von [Tom Dykstra](https://github.com/tdykstra)
 
 In ASP.NET Core MVC ist die Unterstützung für Datenaustausch in Web-APIs über JSON oder integriert. In diesem Artikel wird dargestellt, wie Sie die Unterstützung von zusätzlichen Formaten hinzufügen, indem Sie benutzerdefinierte Formatierer erstellen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>Empfohlene Verwendung von benutzerdefinierten Formatierern
 
@@ -51,7 +51,7 @@ Leiten Sie für Textmedientypen wie vCard von den Basisklassen [TextInputFormatt
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
 
-Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
+Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
 
 Leiten Sie für Binärtypen von den Basisklassen [InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) oder [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) ab.
 
@@ -61,7 +61,7 @@ Geben Sie im Konstruktor gültige Medientypen und Codierungen an, indem Sie `Sup
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=ctor&highlight=3,5-6)]
 
-Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
+Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
 
 > [!NOTE]
 > Sie können in einer Formatiererklasse keine Dependency Injection für den Konstruktor durchführen. Beispielsweise können Sie keine Protokollierung abrufen, indem Sie dem Konstruktor den Protokollparameter hinzufügen. Sie müssen das Kontextobjekt verwenden, das an Ihre Methoden übergeben wird, um auf Dienste zuzugreifen. Im [nachfolgenden](#read-write) Codebeispiel wird deutlich, wie Sie hierzu vorgehen.
@@ -72,7 +72,7 @@ Geben Sie den Typ an, den Sie deserialisieren bzw. serialisieren möchten, indem
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
 
-Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
+Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
 
 #### <a name="the-canwriteresult-method"></a>Die CanWriteResult-Methode
 
@@ -92,7 +92,7 @@ Sie deserialisieren oder serialisieren manuell in `ReadRequestBodyAsync` oder `W
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=writeresponse&highlight=3-4)]
 
-Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
+Einen Eingabeformatierer finden Sie z.B. in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).
 
 ## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a>Konfigurieren von MVC zum Verwenden eines benutzerdefinierten Formatierers
 
@@ -105,7 +105,7 @@ Formatierer werden in der Reihenfolge überprüft, in der Sie sie einfügen. Der
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Beispielcode für Nur-Text-Formatierer auf GitHub.](https://github.com/aspnet/Entropy/tree/master/samples/Mvc.Formatters)
-* [Beispiel-App für diese Dokumentation](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), in der einfache Eingabe- und Ausgabeformatierer für vCard implementiert werden. Die App liest und schreibt vCards, die dem folgenden Beispiel ähneln:
+* [Beispiel-App für diese Dokumentation](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), in der einfache Eingabe- und Ausgabeformatierer für vCard implementiert werden. Die App liest und schreibt vCards, die dem folgenden Beispiel ähneln:
 
 ```
 BEGIN:VCARD

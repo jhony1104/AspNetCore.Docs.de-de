@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/26/2019
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 62da2504941be0c29ddb15aaab9c091f387ccdb2
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: 5cf84cd601fb3559da559d2bd633391841fe8a19
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327286"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888645"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
 
@@ -30,7 +30,7 @@ Das Optionsmuster verwendet Klassen, um Gruppen von zusammengehörigen Einstellu
 
 Optionen bieten auch einen Mechanismus, um Konfigurationsdaten zu validieren. Weitere Informationen finden Sie im Abschnitt [Optionsvalidierung](#options-validation).
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 

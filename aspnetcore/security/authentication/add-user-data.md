@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 6/16/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 1b7cac9206776e9290326511247b6db33f13cb32
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
-ms.translationtype: HT
+ms.openlocfilehash: d704041f73a7d4773c3da9a23f120b07a03d64ac
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165088"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086490"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Hinzufügen, herunterladen und Löschen von benutzerdefinierten Daten die Identität in einem ASP.NET Core-Projekt
 
@@ -24,7 +24,7 @@ In diesem Artikel zeigt, wie Sie:
 
 Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anweisungen ähneln denen für eine ASP.NET Core MVC-Web-app.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/authentication/add-user-data) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Vorraussetzungen
 
@@ -34,7 +34,7 @@ Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anwe
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/authentication/add-user-data/sample) Code.
+* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data/sample) Code.
 * Wählen Sie **ASP.NET Core-Webanwendung** > **OK**
 * Wählen Sie **ASP.NET Core 2.2** in der Dropdownliste
 * Wählen Sie **Webanwendung**  > **OK**

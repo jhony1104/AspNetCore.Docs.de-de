@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Suche zu einer einfachen ASP.NET 
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 41d7494b77edaddbf719cab087142f0132dd3ed6
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: ca3b0baeddd31e10243689091d435767079bb979
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087282"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450849"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Suche zu einer ASP.NET Core MVC-App
 
