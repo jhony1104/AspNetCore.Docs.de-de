@@ -1,4 +1,5 @@
-<!-- THIS INCLUDE USED BY MVC AND RP --> Fügen Sie der `Movie`-Klasse die folgenden Eigenschaften hinzu:
+<!-- THIS INCLUDE USED BY MVC AND RP -->
+Fügen Sie der Klasse `Movie` die folgenden Eigenschaften hinzu:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/Movie.cs?name=snippet1)]
 

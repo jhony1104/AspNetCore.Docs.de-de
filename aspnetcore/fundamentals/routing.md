@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 622f28f3b4348820c8781e0ba14ae5137136e797
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: 0c2df3ec63f393b961754f496830cccb26f1cb76
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346566"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64884565"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -70,7 +70,7 @@ services.AddMvc()
 > [!IMPORTANT]
 > In diesem Artikel wird das Low-Level-Routing in ASP.NET Core beschrieben. Weitere Informationen zum Routing mit ASP.NET Core MVC finden Sie unter <xref:mvc/controllers/routing>. Weitere Informationen zu Routingkonventionen in Razor Pages finden Sie unter <xref:razor-pages/razor-pages-conventions>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>Routinggrundlagen
 
@@ -734,7 +734,7 @@ Im folgenden Beispiel wird gezeigt, wie Sie einen Link zu einer Route unter Ber�
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-Die <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>-Eigenschaft, die am Ende des obigen Beispiels erstellt wird, hat den Wert `/package/create/123`. Das Wörterbuch stellt die Routenwerte von `operation` und `id` aus der Vorlage „Track Package Route“ (`package/{operation}/{id}`) bereit. Weitere Informationen finden Sie im Beispielcode im Abschnitt [Verwenden von Routingmiddleware](#use-routing-middleware) oder in der [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/routing/samples).
+Die <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>-Eigenschaft, die am Ende des obigen Beispiels erstellt wird, hat den Wert `/package/create/123`. Das Wörterbuch stellt die Routenwerte von `operation` und `id` aus der Vorlage „Track Package Route“ (`package/{operation}/{id}`) bereit. Weitere Informationen finden Sie im Beispielcode im Abschnitt [Verwenden von Routingmiddleware](#use-routing-middleware) oder in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
 
 Der zweite Parameter für den <xref:Microsoft.AspNetCore.Routing.VirtualPathContext>-Konstruktor ist eine Auflistung von *Umgebungswerten*. Mit diesen lässt sich leicht die Anzahl der Werte einschränken, die ein Entwickler innerhalb eines Anforderungskontexts angeben muss. Die aktuellen Routenwerte der aktuellen Anforderung werden bei der Linkgenerierung als Umgebungswerte behandelt. In einer ASP.NET Core-MVC-App müssen Sie innerhalb der `About`-Aktion von `HomeController` nicht den Controllerroutenwert angeben, um eine Verknüpfung mit der `Index`-Aktion herzustellen, da der Umgebungswert von `Home` verwendet wird.
 

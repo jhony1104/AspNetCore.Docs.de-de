@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/scale
 ms.openlocfilehash: 4ac4509acc89d0091a3757c7cfbc9981614f29ad
-ms.sourcegitcommit: ebf4e5a7ca301af8494edf64f85d4a8deb61d641
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2019
-ms.locfileid: "54836921"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64895077"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>Hosten von ASP.NET Core SignalR und Skalierung
 
@@ -46,7 +46,7 @@ Eine app, die SignalR verwendet muss zum Nachverfolgen der Verbindungen, die Pro
 
 Die Optionen zur Lösung dieses Problems sind die [Azure SignalR Service](#azure-signalr-service) und [Redis Rückwandplatine](#redis-backplane).
 
-## <a name="azure-signalr-service"></a>Azure SignalR Service
+## <a name="azure-signalr-service"></a>Azure SignalR-Dienst
 
 Der Azure SignalR Service ist eine Rückwandplatine, anstatt einen Proxy. Jedes Mal, die ein Client eine Verbindung mit dem Server initiiert wird der Client umgeleitet, um eine Verbindung mit dem Dienst herzustellen. Dieser Prozess wird im folgenden Diagramm dargestellt:
 
@@ -66,7 +66,7 @@ Aus diesen Gründen empfehlen wir den Azure SignalR Service für alle ASP.NET Co
 
 Weitere Informationen finden Sie unter den [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview).
 
-## <a name="redis-backplane"></a>Redis-Rückwandplatine
+## <a name="redis-backplane"></a>Redis-Backplane
 
 [Redis](https://redis.io/) ist ein in-Memory-Schlüssel-Wert-Speicher, der ein messaging-System mit einem Veröffentlichen/Abonnieren-Modell unterstützt. Die Redis-SignalR-Backplane verwendet das Pub/Sub-Feature, um Nachrichten an andere Server weiterzuleiten. Wenn ein Client eine Verbindung herstellt, wird die Verbindungsinformationen an der Rückwand übergeben. Wenn ein Server zum Senden einer Nachricht an alle Clients möchte, sendet sie an die Backplane. Der Rückwand weiß, alle verbundenen Clients und dem Server sind auf. Er sendet die Nachricht an alle Clients über ihre jeweiligen Server. Dieser Prozess wird im folgenden Diagramm dargestellt:
 
