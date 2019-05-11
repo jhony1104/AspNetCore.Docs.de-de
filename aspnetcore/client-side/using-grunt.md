@@ -3,20 +3,20 @@ title: Verwenden von Grunt in ASP.NET Core
 author: rick-anderson
 description: ''
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 05/10/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: fc912974fb6ed3c65bb46a7d616d9e531587d946
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 73b7704726db9d93588dddd3f3b05a23fb3425b3
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894637"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65535940"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Verwenden von Grunt in ASP.NET Core
 
 Durch [Noel Reis](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/)
 
-Grunt ist eine JavaScript-aufgabenausführung, die automatisiert Skript Minimierung, TypeScript-Kompilierung, Code "linten" Qualitätstools, Pre CSS-Prozessoren und fast jeder sich wiederholende Aufgabe, die vor, um die Cliententwicklung zu unterstützen. Grunt wird vollständig in Visual Studio unterstützt, aber die ASP.NET-Projektvorlagen Gulp verwendet, wird standardmäßig (finden Sie unter [verwenden Gulp](using-gulp.md)).
+Grunt ist eine JavaScript-aufgabenausführung, die automatisiert Skript Minimierung, TypeScript-Kompilierung, Code "linten" Qualitätstools, Pre CSS-Prozessoren und fast jeder sich wiederholende Aufgabe, die vor, um die Cliententwicklung zu unterstützen. Grunt wird vollständig in Visual Studio unterstützt.
 
 Dieses Beispiel verwendet ein leeres ASP.NET Core-Projekt als Ausgangspunkt, veranschaulichen, wie Sie die Client-Buildprozess von Grund auf neu zu automatisieren.
 
@@ -286,7 +286,3 @@ Entladen Sie und Laden Sie das Projekt. Wenn das Projekt erneut geladen wird, wi
 ## <a name="summary"></a>Zusammenfassung
 
 Grunt ist eine leistungsstarke-aufgabenausführung erstellt, die zum Automatisieren von Aufgaben für die meisten Client-Build verwendet werden kann. Grunt nutzt NPM, um die Pakete und Funktionen, die Integration in Visual Studio-Tools bereitzustellen. Task Runner-Explorer von Visual Studio erkennt Änderungen an Konfigurationsdateien und bietet eine benutzerfreundliche Oberfläche zum Ausführen von Aufgaben, ausgeführte Aufgaben anzeigen und Aufgaben an Visual Studio-Ereignisse binden.
-
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
-
-* [Verwenden von Gulp](using-gulp.md)

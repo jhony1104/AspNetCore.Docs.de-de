@@ -4,14 +4,14 @@ author: mjrousos
 description: Tipps zum Verbessern der Leistung in ASP.NET Core-apps und allgemeiner Leistungsprobleme zu vermeiden.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 04/13/2019
+ms.date: 05/10/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 28dc7fb40c1b60f643108dcb44593a08942a1650
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 7651dff18f98c60057660c8946c3daa66d272f6a
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087497"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65536084"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Best Practices für ASP.NET Core-Leistung
 
@@ -130,7 +130,7 @@ ASP.NET Core-apps mit komplexen Front-Ends dienen häufig viele JavaScript, CSS 
 Empfehlungen:
 
 * **Führen Sie** Verwenden von ASP.NET Core [integrierte Unterstützung](xref:client-side/bundling-and-minification) zu bündeln und Minimieren der Clientobjekte.
-* **Führen Sie** sollten Sie andere Tools von Drittanbietern, z. B. [Gulp](xref:client-side/using-gulp) oder [Webpack](https://webpack.js.org/) für komplexe Client Asset Management.
+* **Führen Sie** sollten Sie andere Tools von Drittanbietern, z. B. [Webpack](https://webpack.js.org/), für die ressourcenverwaltung für komplexe Client.
 
 ## <a name="compress-responses"></a>Komprimieren von Antworten
 

@@ -4,14 +4,14 @@ author: scottaddie
 description: Erfahren Sie, wie Sie statische Ressourcen in einer ASP.NET Core-Webanwendung durch Anwenden von bündelungs-und minimierungsverfahren zu optimieren.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/20/2018
+ms.date: 05/10/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 5d5f0aadb7740c9b2b959d12a585cd8c91758ce8
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ba01d365a25dfbd13fed89263d7489b2ce2a8771
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894297"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65535933"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung von statischen Objekten in ASP.NET Core
 
@@ -63,7 +63,7 @@ Browser sind recht ausführlich im Hinblick auf HTTP-Anforderungsheadern. Die Ge
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Wählen Sie eine Strategie für die Bündelung und Minimierung
 
-Die Razor-Seiten und MVC-Projektvorlagen bieten eine Out-of-the-Box-Lösung für die Bündelung und Minimierung, bestehend aus einer JSON-Konfigurationsdatei an. Drittanbieter-tools, z. B. die [Gulp](xref:client-side/using-gulp) und [Grunt](xref:client-side/using-grunt) task Runner, die gleichen Aufgaben mit etwas mehr Komplexität. Ein Tool eines Drittanbieters ist hervorragend aus, wenn Ihrem Entwicklungsworkflow Verarbeitung auf über die Bündelung und Minimierung erfordert&mdash;wie Linting und Image. Verwenden Sie während der Entwurfszeit Bündelung und Minimierung, werden die minimierten Dateien vor der Bereitstellung von der app erstellt. Bündeln und Minimieren der vor der Bereitstellung bietet den Vorteil des reduzierten Last auf. Allerdings es ist wichtig zu erkennen, während der Entwurfszeit Bündelung und Minimierung erhöht die Komplexität des Builds ab und funktioniert nur mit statischen Dateien.
+Die Razor-Seiten und MVC-Projektvorlagen bieten eine Out-of-the-Box-Lösung für die Bündelung und Minimierung, bestehend aus einer JSON-Konfigurationsdatei an. Drittanbieter-tools, z. B. die [Grunt](xref:client-side/using-grunt) task Runner, die gleichen Aufgaben mit etwas mehr Komplexität. Ein Tool eines Drittanbieters ist hervorragend aus, wenn Ihrem Entwicklungsworkflow Verarbeitung auf über die Bündelung und Minimierung erfordert&mdash;wie Linting und Image. Verwenden Sie während der Entwurfszeit Bündelung und Minimierung, werden die minimierten Dateien vor der Bereitstellung von der app erstellt. Bündeln und Minimieren der vor der Bereitstellung bietet den Vorteil des reduzierten Last auf. Allerdings es ist wichtig zu erkennen, während der Entwurfszeit Bündelung und Minimierung erhöht die Komplexität des Builds ab und funktioniert nur mit statischen Dateien.
 
 ## <a name="configure-bundling-and-minification"></a>Konfigurieren der Bündelung und Minimierung
 
@@ -325,11 +325,9 @@ In diesem Beispiel werden alle Aufgaben in definiert die `MyPreCompileTarget` Zi
 ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
 ```
 
-Alternativ kann der Task Runner-Explorer von Visual Studio verwendet werden, zum Binden von Gulp-Aufgaben an bestimmten Visual Studio-Ereignisse. Finden Sie unter [Ausführen von Standardaufgaben](xref:client-side/using-gulp#running-default-tasks) Anleitungen hierzu.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Verwenden von Gulp](xref:client-side/using-gulp)
 * [Verwenden von Grunt](xref:client-side/using-grunt)
 * [Verwenden mehrerer Umgebungen](xref:fundamentals/environments)
 * [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro)
