@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Azure Active Directory B2C-Authentifizierung mit 
 ms.date: 02/27/2019
 ms.custom: mvc
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 86be999e02cfe34193bd594dcf89e8872590cca5
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 46654e38c780cfc9c44e7ba479419320ee684b76
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64898017"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610683"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 
@@ -34,7 +34,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 
 * [Microsoft Azure-Abonnement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
-* [Visual Studio 2017](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs) (beliebige Edition)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Erstellen der Azure Active Directory B2C-Mandanten
 
@@ -62,7 +62,7 @@ Nachdem die app registriert wurde, wird die Liste der apps im Mandanten angezeig
 
 Nichts mehr zu diesem Zeitpunkt im Azure AD B2C-Mandanten konfiguriert werden können, aber lassen das Browserfenster geöffnet. Es gibt weitere Konfigurationsschritte nach der Erstellung der ASP.NET Core-app.
 
-## <a name="create-an-aspnet-core-app-in-visual-studio-2017"></a>Erstellen Sie eine ASP.NET Core-app in Visual Studio 2017
+## <a name="create-an-aspnet-core-app-in-visual-studio"></a>Erstellen einer ASP.NET Core-Apps in Visual Studio
 
 Die Visual Studio Web Application-Vorlage kann für die verwenden Sie des Azure AD B2C-Mandantenverwaltungs für die Authentifizierung konfiguriert werden.
 

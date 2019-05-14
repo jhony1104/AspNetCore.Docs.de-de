@@ -6,12 +6,12 @@ ms.author: casoper
 ms.date: 09/21/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 00e7c9a438260ef8e12e567e521fc44b2ffa9cca
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 0eb8b533f44a1f72cfc3c4ec5ec060adb37eed6c
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086329"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610366"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET Core
 
@@ -37,7 +37,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 
 * [Microsoft Azure-Abonnement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
-* [Visual Studio 2017](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs) (beliebige Edition)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [Postman](https://www.getpostman.com/postman)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Erstellen der Azure Active Directory B2C-Mandanten
@@ -65,7 +65,7 @@ Verwenden Sie die folgenden Werte ein:
 
 Nachdem die API registriert wurde, wird die Liste der apps und APIs im Mandanten angezeigt. Wählen Sie die API, die bereits registriert wurde. Wählen Sie die **Kopie** Symbol rechts neben der **Anwendungs-ID** Feld, um ihn in die Zwischenablage zu kopieren. Wählen Sie **veröffentlichte Bereiche** und überprüfen Sie den standardmäßigen *"user_impersonation"* Bereich vorhanden ist.
 
-## <a name="create-an-aspnet-core-app-in-visual-studio-2017"></a>Erstellen Sie eine ASP.NET Core-app in Visual Studio 2017
+## <a name="create-an-aspnet-core-app-in-visual-studio"></a>Erstellen einer ASP.NET Core-Apps in Visual Studio
 
 Die Visual Studio Web Application-Vorlage kann für die verwenden Sie des Azure AD B2C-Mandantenverwaltungs für die Authentifizierung konfiguriert werden.
 
