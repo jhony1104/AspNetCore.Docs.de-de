@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 05/11/2019
 uid: fundamentals/index
-ms.openlocfilehash: a1fed574db0baab391ebb9cfc44664ceddbfa69b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9c7bc25d813ad17825ef03f5176882993cc2dd63
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882625"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610330"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -78,6 +78,8 @@ Der Code zum Erstellen eines Hosts befindet sich in `Program.Main` und folgt dem
 
 ::: moniker range=">= aspnetcore-3.0"
 
+`CreateHostBuilder` ist ein spezieller Name, der die builder-Methode für externe Komponenten wie z.B. [Entity Framework](/ef/core/) identifiziert.
+
 In ASP.NET Core 3.0 kann ein generischer Host (`Host`-Klasse) oder ein Webhost (`WebHost`-Klasse) in einer Web-App verwendet werden. Ein generischer Host wird empfohlen, und ein Webhost ist für Abwärtskompatibilität verfügbar.
 
 Das Framework bietet die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults`, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
@@ -95,6 +97,8 @@ Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
+
+`CreateWebHostBuilder` ist ein spezieller Name, der die builder-Methode für externe Komponenten wie z.B. [Entity Framework](/ef/core/) identifiziert.
 
 ASP.NET Core 2.x verwendet einen Webhost (`WebHost`-Klasse) für Web-Apps. Das Framework bietet die `CreateDefaultBuilder`-Methode, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichtet:
 

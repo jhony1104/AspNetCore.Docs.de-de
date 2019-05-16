@@ -1,27 +1,27 @@
 ---
 title: Erste Schritte mit ASP.NET Core
 author: rick-anderson
-description: Kurztutorial, in dem eine einfache Hello World-App mit ASP.NET Core erstellt und ausgeführt wird.
+description: Ein kurzes Tutorial, in dem eine einfache Hallo Welt-App mit ASP.NET Core erstellt und ausgeführt wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2019
+ms.date: 5/15/2019
 uid: getting-started
-ms.openlocfilehash: 76728c484368a8b63130c259a9663473970846d3
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 9227dcfbc84376d9d73bc6fc0dd76085779acae1
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209475"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610310"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
-Dieses Tutorial zeigt, wie die .NET Core-Befehlszeilenschnittstelle verwendet wird, um eine ASP.NET Core-Web-App zu erstellen.
+Dieses Tutorial zeigt, wie die .NET Core-Befehlszeilenschnittstelle verwendet wird, um eine ASP.NET Core-Web-App zu erstellen und auszuführen.
 
 Sie lernen, die folgende Aufgaben auszuführen:
 
 > [!div class="checklist"]
 > * Erstellen Sie ein Web-App-Projekt.
-> * Aktivieren Sie lokales HTTPS.
+> * Vertrauen Sie dem Entwicklungszertifikat.
 > * Führen Sie die App aus.
 > * Bearbeiten Sie eine Razor-Seite.
 
@@ -41,7 +41,7 @@ Am Schluss werden Sie eine funktionierende Web-App auf Ihrem lokalen Computer be
 dotnet new webapp -o aspnetcoreapp
 ```
 
-## <a name="enable-local-https"></a>Aktivieren Sie lokales HTTPS.
+### <a name="trust-the-development-certificate"></a>Dem Entwicklungszertifikat vertrauen
 
 Vertrauen Sie dem HTTPS-Entwicklungszertifikat:
 
@@ -70,6 +70,8 @@ dotnet dev-certs https --trust
 Dieser Befehl fordert Sie möglicherweise zur Eingabe Ihres Kennworts auf, um das Zertifikat in der Keychain für das System zu installieren. Geben Sie Ihr Kennwort ein, wenn Sie die Vertrauenswürdigkeit des Entwicklungszertifikats bestätigen möchten.
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)
+
+Informationen zum Windows-Subsystem für Linux finden Sie unter [Dem HTTPS-Zertifikat des Windows-Subsystems für Linux vertrauen](xref:security/enforcing-ssl#wsl).
 
 Weitere Informationen zum Bestätigen der Vertrauenswürdigkeit eines HTTPS-Entwicklungszertifikats finden Sie in der Dokumentation zu Ihrer Linux-Distribution.
 
@@ -102,7 +104,7 @@ In diesem Tutorial haben Sie gelernt, wie die folgenden Aufgaben ausgeführt wer
 
 > [!div class="checklist"]
 > * Erstellen Sie ein Web-App-Projekt.
-> * Aktivieren Sie lokales HTTPS.
+> * Vertrauen Sie dem Entwicklungszertifikat.
 > * Führen Sie das Projekt aus.
 > * Führen Sie eine Änderung durch.
 
