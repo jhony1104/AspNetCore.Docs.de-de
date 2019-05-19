@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/14/2019
 uid: host-and-deploy/iis/troubleshoot
-ms.openlocfilehash: 1fa90737aadebe3f714c702fbce649629d79dcd4
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: f89eac3ae6fc704bc8bf38a9707fc3c6c3568e91
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264553"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64884345"
 ---
 # <a name="troubleshoot-aspnet-core-on-iis"></a>Problembehandlung bei ASP.NET Core in IIS
 
@@ -49,7 +49,7 @@ Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
 Das ASP.NET Core-Modul kann den .NET-Back-End-Prozess nicht starten. Die Ursache für einen Fehler beim Starten eines Prozesses kann in der Regel über Einträge im [Anwendungsereignisprotokoll](#application-event-log) und im [stdout-Protokoll des ASP.NET Core-Moduls](#aspnet-core-module-stdout-log) ermittelt werden.
 
-Eine allgemeine Fehlerbedingung ist, dass die App aufgrund einer Version des freigegebenen ASP.NET Core-Frameworks falsch konfiguriert ist, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind.
+Eine allgemeine Fehlerbedingung ist, dass die App aufgrund einer Version des freigegebenen ASP.NET Core-Frameworks falsch konfiguriert ist, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind. Das *freigegebene Framework* ist der Satz der Assemblys (*DLL*-Dateien), die auf dem Computer installiert werden und auf die ein Metapaket wie `Microsoft.AspNetCore.App` verweist. Der Metapaketverweis kann eine mindestens erforderliche Version angeben. Weitere Informationen finden Sie unter [The shared framework](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) (Das freigegebene Framework).
 
 Die Fehlerseite *502.5: Prozessfehler* wird zurückgegeben, wenn ein falsch konfiguriertes Hosting oder eine falsch konfigurierte App bewirkt, dass der Workerprozess fehlschlägt:
 
@@ -241,7 +241,7 @@ Ein *Speicherabbild* ist eine Momentaufnahme des Systemarbeitsspeichers. Ein Spe
 Abrufen und Analysieren eines Speicherabbilds aus der [Windows-Fehlerberichterstattung (WER)](/windows/desktop/wer/windows-error-reporting):
 
 1. Erstellen Sie einen Ordner zum Speichern von Absturzabbilddateien unter `c:\dumps`. Der App-Pool muss über Schreibzugriff auf den Ordner verfügen.
-1. Führen Sie das [PowerShell-Skript „EnableDumps“](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) aus:
+1. Führen Sie das [PowerShell-Skript „EnableDumps“](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) aus:
    * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console
@@ -255,7 +255,7 @@ Abrufen und Analysieren eines Speicherabbilds aus der [Windows-Fehlerberichterst
      ```
 
 1. Führen Sie die App unter den Bedingungen aus, die dazu führen, dass der Absturz auftritt.
-1. Nachdem der Absturz stattgefunden hat, führen Sie das [PowerShell-Skript „DisableDumps“](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) aus:
+1. Nachdem der Absturz stattgefunden hat, führen Sie das [PowerShell-Skript „DisableDumps“](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) aus:
    * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console

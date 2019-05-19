@@ -6,18 +6,14 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 311f72699b6291996a43d56247bd3d2bfab596e6
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: a65543f805b197031bd46ef1974d4d4a5018b2d1
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320247"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65516905"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
-
-[!INCLUDE[2.0 version](~/includes/RP-EF/20-pdf.md)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -33,7 +29,7 @@ Die Entitätsklassen des vollständigen Datenmodells werden in der folgenden Abb
 ![Entitätsdiagramm](complex-data-model/_static/diagram.png)
 
 Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](
-https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
 
 ## <a name="customize-the-data-model-with-attributes"></a>Anpassen des Datenmodells mithilfe von Attributen
 
@@ -385,19 +381,18 @@ public ICollection<Course> Courses { get; set; }
 
 Hinweis: Gemäß der Konvention aktiviert Entity Framework Core das kaskadierende Delete für nicht auf NULL festlegbare Fremdschlüssel und für m:n-Beziehungen. Das kaskadierende Delete kann zu Zirkelregeln für kaskadierende Deletes führen. Durch Zirkelregeln für kaskadierende Deletes wird eine Ausnahme ausgelöst, wenn eine Migration hinzugefügt wird.
 
-Beispielsweise dann, wenn die `Department.InstructorID`-Eigenschaft nicht als auf NULL festlegbar definiert wurde:
+Beispielsweise dann, wenn die `Department.InstructorID`-Eigenschaft als nicht auf NULL festlegbar definiert wurde:
 
-* Entity Framework Core konfiguriert eine Regel für kaskadierende Deletes, um den Dozenten zu löschen, wenn ein Fachbereich gelöscht wird.
-* Das Löschen eines Dozenten in Folge des Löschens eines Fachbereichs stellt nicht das beabsichtigte Verhalten dar.
+* Entity Framework Core konfiguriert eine Regel für kaskadierende Deletes, um den Fachbereich zu löschen, wenn ein Dozent gelöscht wird.
+* Das Löschen eines Fachbereichs in Folge des Löschens eines Dozenten stellt nicht das beabsichtigte Verhalten dar.
+* Die folgende Fluent-API würde eine restrict-Regel anstelle einer Kascade festlegen.
 
-Wenn die Geschäftsregeln erfordern, dass die `InstructorID`-Eigenschaft nicht auf NULL festgelegt werden darf, verwenden Sie folgende Fluent-API-Anweisung:
-
- ```csharp
- modelBuilder.Entity<Department>()
-    .HasOne(d => d.Administrator)
-    .WithMany()
-    .OnDelete(DeleteBehavior.Restrict)
- ```
+   ```csharp
+   modelBuilder.Entity<Department>()
+      .HasOne(d => d.Administrator)
+      .WithMany()
+      .OnDelete(DeleteBehavior.Restrict)
+  ```
 
 Durch den vorangehenden Code werden kaskadierende Deletes für die Beziehung zwischen „Department“ und „Instructor“ deaktiviert.
 
@@ -671,7 +666,7 @@ Im folgenden Tutorial werden verknüpfte Daten behandelt.
 * [Dieses Tutorial auf YouTube (Teil 1)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [Dieses Tutorial auf YouTube (Teil 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)
 
-::: moniker-end
+
 
 > [!div class="step-by-step"]
 > [Zurück](xref:data/ef-rp/migrations)

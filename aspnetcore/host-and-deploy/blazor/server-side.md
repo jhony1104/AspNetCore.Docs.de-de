@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine serverseitige Blazor-App mit ASP.NET Cor
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 04/26/2019
 uid: host-and-deploy/blazor/server-side
-ms.openlocfilehash: 940020ee44d72d50395aad64bc924413c1bbecfb
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 8e44be09a4cceba2509f3e86abf3ce5fd2d077bd
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614716"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887765"
 ---
 # <a name="host-and-deploy-blazor-server-side"></a>Hosten und Bereitstellen von serverseitigem Blazor
 
@@ -20,13 +20,13 @@ Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.tim
 
 ## <a name="host-configuration-values"></a>Hostkonfigurationswerte
 
-Bei serverseitigen Apps, für die das [serverseitige Hostingmodell](xref:blazor/hosting-models#server-side-hosting-model) verwendet wird, können [allgemeine Hostkonfigurationswerte](xref:fundamentals/host/generic-host#host-configuration) verwendet werden.
+Bei serverseitigen Apps, für die das [serverseitige Hostingmodell](xref:blazor/hosting-models#server-side) verwendet wird, können [allgemeine Hostkonfigurationswerte](xref:fundamentals/host/generic-host#host-configuration) verwendet werden.
 
 ## <a name="deployment"></a>Bereitstellung
 
-Mit dem [serverseitigen Hostingmodell](xref:blazor/hosting-models#server-side-hosting-model) wird Blazor über eine ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
+Mit dem [serverseitigen Hostingmodell](xref:blazor/hosting-models#server-side) wird Blazor über eine ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
-Die App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, der eine ASP.NET Core-App hosten kann. Bei einer serverseitigen Bereitstellung enthält Visual Studio die Projektvorlage **Razor-Komponenten** (oder die `razorcomponents`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
+Hierfür wird ein Webserver benötigt, der eine ASP.NET Core-App hosten kann. Visual Studio enthält die serverseitige **Blazor**-Projektvorlage (oder die `blazorserverside`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
 
 <!--
 
@@ -38,6 +38,9 @@ Die App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, 
 
 -->
 
-Weitere Informationen zum Hosten und Bereitstellen von ASP.NET Core-Apps finden Sie unter <xref:host-and-deploy/index>.
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-Informationen zum Bereitstellen für Azure App Service finden Sie unter <xref:tutorials/publish-to-azure-webapp-using-vs>.
+* <xref:signalr/introduction>
+* <xref:host-and-deploy/index>
+* <xref:tutorials/publish-to-azure-webapp-using-vs>
+* [Bereitstellen der ASP.NET Core Vorschauversion für Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service)

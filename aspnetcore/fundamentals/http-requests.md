@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schni
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 03/30/2019
+ms.date: 05/10/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 84cdbca20e7c7aaa1941c78483cc36a9f0b24505
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 540f14ad2b290d276436033a94d4c815888e5a95
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888945"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65536002"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -27,9 +27,13 @@ Von [Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
+::: moniker range="<= aspnetcore-2.2"
+
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
 Für Projekte mit der Zielplattform .NET Framework muss das NuGet-Paket [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) installiert werden. Projekte für .NET Core, die auf das [Metapaket Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) verweisen, enthalten bereits das `Microsoft.Extensions.Http`-Paket.
+
+::: moniker-end
 
 ## <a name="consumption-patterns"></a>Verbrauchsmuster
 
@@ -197,11 +201,10 @@ Verwenden Sie einen der folgenden Ansätze, um den anforderungsspezifischen Zust
 
 `IHttpClientFactory` integriert mit der beliebten Drittanbieter-Bibliothek namens [Polly](https://github.com/App-vNext/Polly). Polly ist eine umfassende Bibliothek für die Behandlung von beständigen und vorübergehenden Fehlern für .NET. Entwicklern wird damit ermöglicht, Richtlinien wie Wiederholungsrichtlinien, Trennschalterrichtlinien, Timeout-Richtlinien, Bulkhead Isolation-Richtlinien und Ausweichrichtlinien in einer flüssigen und threadsicheren Art und Weise auszudrücken.
 
-Erweiterungsmethoden werden bereitgestellt, um die Verwendung von Polly-Richtlinien mit konfigurierten `HttpClient`-Instanzen zu aktivieren. Die Polly-Erweiterungen sind im NuGet-Paket [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) verfügbar. Dieses Paket ist nicht im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten. Zum Verwenden der Erweiterungen sollte `<PackageReference />` explizit im Projekt enthalten sein.
+Erweiterungsmethoden werden bereitgestellt, um die Verwendung von Polly-Richtlinien mit konfigurierten `HttpClient`-Instanzen zu aktivieren. Die Polly-Erweiterungen:
 
-[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/HttpClientFactorySample.csproj?highlight=10)]
-
-Nach der Wiederherstellung dieses Pakets sind Erweiterungsmethoden verfügbar, um das Hinzufügen von Polly-basierten Handlern in Clients zu unterstützen.
+* Unterstützen das Hinzufügen von Polly-basierten Handlern zu Clients.
+* Können nach Installation des [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/)-NuGet-Pakets verwendet werden. Das Paket ist nicht im freigegebenen ASP.NET Core-Framework enthalten.
 
 ### <a name="handle-transient-faults"></a>Behandeln von vorrübergehenden Fehlern
 
@@ -219,7 +222,7 @@ Es gibt zusätzliche Erweiterungsmethoden, die zum Hinzufügen von Polly-basiert
 
 [!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
-Im vorangehenden Code wird ein 10 Sekunden langer Timeout angewendet, wenn die ausgehende Anforderung eine GET-Anforderung ist. Für alle anderen HTTP-Methoden wird ein 30 Sekunden langer Timeout verwendet.
+Im vorangehenden Code wird ein 10 Sekunden langer Timeout angewendet, wenn die ausgehende Anforderung eine HTTP GET-Anforderung ist. Für alle anderen HTTP-Methoden wird ein 30 Sekunden langer Timeout verwendet.
 
 ### <a name="add-multiple-polly-handlers"></a>Hinzufügen mehrerer Polly-Handler
 
