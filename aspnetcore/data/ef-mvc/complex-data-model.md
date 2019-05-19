@@ -4,15 +4,15 @@ description: In diesem Tutorial fügen Sie weitere Entitäten und Beziehungen hi
 author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 5ab893dd77ff2cc9a735702eb3a547ed8bcb2197
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 2776e3357941d0e7932882c39af121f85d037d62
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264858"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887245"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core
 
@@ -40,7 +40,7 @@ In diesem Tutorial:
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [ASP.NET Core MVC mit Entity Framework Core (EF Core): Migrationen (4 von 10)](migrations.md)
+* [Verwenden von EF Core-Migrationen](migrations.md)
 
 ## <a name="customize-the-data-model"></a>Anpassen des Datenmodells
 
@@ -320,7 +320,7 @@ public ICollection<Course> Courses { get; set; }
 ```
 
 > [!NOTE]
-> Gemäß der Konvention aktiviert Entity Framework das kaskadierende Delete für nicht auf NULL festlegbare Fremdschlüssel und für m:n-Beziehungen. Dies kann zu zirkulären Regeln für kaskadierende Deletes führen, wodurch eine Ausnahme ausgelöst wird, wenn Sie versuchen, eine Migration hinzuzufügen. Wenn Sie die Eigenschaft „Department.InstructorID“ nicht als auf NULL festlegbar definiert haben, würde Entity Framework eine Regel für kaskadierende Deletes konfigurieren, damit der Dozent gelöscht wird, wenn Sie die Abteilung löschen. Dies ist jedoch nicht erwünscht. Wenn Ihre Geschäftsregeln erfordern, dass die `InstructorID`-Eigenschaft nicht auf NULL festlegbar ist, müssen Sie folgende Fluent-API-Anweisung verwenden, um kaskadierende Deletes für die Eigenschaft zu deaktivieren:
+> Gemäß der Konvention aktiviert Entity Framework das kaskadierende Delete für nicht auf NULL festlegbare Fremdschlüssel und für m:n-Beziehungen. Dies kann zu zirkulären Regeln für kaskadierende Deletes führen, wodurch eine Ausnahme ausgelöst wird, wenn Sie versuchen, eine Migration hinzuzufügen. Wenn Sie beispielsweise die Eigenschaft „Department.InstructorID“ nicht als auf NULL festlegbar definiert haben, würde EF eine Regeln für kaskadierende Deletes konfigurieren, um die Abteilung zu löschen, wenn Sie den Kursleiter löschen. Dies ist aber nicht das, was Sie wollen. Wenn Ihre Geschäftsregeln erfordern, dass die `InstructorID`-Eigenschaft nicht auf NULL festlegbar ist, müssen Sie folgende Fluent-API-Anweisung verwenden, um kaskadierende Deletes für die Eigenschaft zu deaktivieren:
 >
 > ```csharp
 > modelBuilder.Entity<Department>()
@@ -509,7 +509,7 @@ Klicken Sie mit der rechten Maustaste auf die Tabelle **CourseAssignment**, und 
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
@@ -529,6 +529,7 @@ In diesem Tutorial:
 > * Verbindungszeichenfolge wurde geändert
 > * Datenbank wurde aktualisiert
 
-Wechseln Sie zum nächsten Artikel, um mehr über den Zugriff auf zugehörige Daten zu erfahren.
+Fahren Sie mit dem nächsten Tutorial fort, um weitere Informationen über den Zugriff auf verwandte Daten zu erhalten.
+
 > [!div class="nextstepaction"]
-> [ASP.NET Core MVC mit EF Core – Lesen verwandter Daten (6 von 10)](read-related-data.md)
+> [Weiter: Zugriff auf verwandte Daten](read-related-data.md)

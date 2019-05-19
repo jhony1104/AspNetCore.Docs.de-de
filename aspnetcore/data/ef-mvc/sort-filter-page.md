@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: dff5a5b1ba3c8ed07ccc8d134f8cfeb25b9f6689
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 921e27bf56587813f835357c9090c91a155c087b
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58751038"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212548"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core
 
@@ -211,10 +211,8 @@ Klicken Sie auf die Paginglinks in verschiedenen Sortierreihenfolgen, um sicherz
 Auf der **Infoseite** der Contoso University wird angezeigt, wie viele Studenten sich an welchem Datum angemeldet haben. Das erfordert Gruppieren und einfache Berechnungen dieser Gruppen. Um dies zu erreichen, ist Folgendes erforderlich:
 
 * Erstellen Sie eine Ansichtsmodellklasse für die Daten, die Sie an die Ansicht übergeben müssen.
-
-* Ändern Sie die Infomethode im Home-Controller.
-
-* Ändern Sie die Infoansicht.
+* Erstellen Sie die About-Methode im Home-Controller.
+* Erstellen Sie die Ansicht „Info“.
 
 ### <a name="create-the-view-model"></a>Erstellen des Ansichtsmodells
 
@@ -239,10 +237,8 @@ Fügen Sie eine `About`-Methode mit dem folgenden Code hinzu:
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_UseDbSet)]
 
 Die LINQ-Anweisung gruppiert die Studentenentitäten nach Anmeldedatum, berechnet die Anzahl der Entitäten in jeder Gruppe und speichert die Ergebnisse in einer Sammlung von `EnrollmentDateGroup`-Ansichtsmodellobjekten.
-> [!NOTE]
-> In der Version 1.0 von Entity Framework Core wird das gesamte Ergebnis an den Client zurückgegeben, und die Gruppierung erfolgt auf dem Client. In einigen Szenarios könnte das Leistungsprobleme hervorrufen. Achten Sie darauf, dass Sie die Leistung mit Produktionsdatenmengen überprüfen. Verwenden Sie bei Bedarf unformatiertes SQL, um die Gruppierung auf dem Server auszuführen. Weitere Informationen zur Verwendung von unformatiertem SQL finden Sie im [letzten Tutorial dieser Reihe](advanced.md).
 
-### <a name="modify-the-about-view"></a>Ändern der Infoansicht
+### <a name="create-the-about-view"></a>Erstellen der Ansicht „Info“
 
 Fügen Sie eine *Views/Home/About.cshtml*-Datei mit dem folgenden Code hinzu:
 
@@ -252,7 +248,7 @@ Führen Sie die Anwendung aus, und wechseln Sie zur Infoseite. Die Anzahl der St
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
