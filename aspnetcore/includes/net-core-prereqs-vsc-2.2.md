@@ -1,3 +1,3 @@
-* [<span data-ttu-id="6cd54-101">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="6cd54-101">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
-* [<span data-ttu-id="6cd54-102">.NET Core SDK 2.2 oder höher</span><span class="sxs-lookup"><span data-stu-id="6cd54-102">.NET Core SDK 2.2 or later</span></span>](https://www.microsoft.com/net/download/all)
-* [<span data-ttu-id="6cd54-103">C# für Visual Studio Code Version 1.17.1 oder höher</span><span class="sxs-lookup"><span data-stu-id="6cd54-103">C# for Visual Studio Code version 1.17.1 or later</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+* [<span data-ttu-id="27eff-101">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="27eff-101">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
+* [<span data-ttu-id="27eff-102">.NET Core SDK 2.2 oder höher</span><span class="sxs-lookup"><span data-stu-id="27eff-102">.NET Core SDK 2.2 or later</span></span>](https://www.microsoft.com/net/download/all)
+* [<span data-ttu-id="27eff-103">C# für Visual Studio Code (neueste Version)</span><span class="sxs-lookup"><span data-stu-id="27eff-103">C# for Visual Studio Code (latest version)</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
