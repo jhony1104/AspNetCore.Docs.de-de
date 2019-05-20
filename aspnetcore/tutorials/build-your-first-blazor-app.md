@@ -5,14 +5,14 @@ description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/18/2019
+ms.date: 05/14/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: d235fec4e128ad8622a06d301eeac15c4862c159
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: c1b142ebdbd85eb10ddf8c8b70edd9782732a4f1
+ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087733"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65621106"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -151,6 +151,14 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    ```
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Besuchen Sie die neue Todo-Seite, um sicherzustellen, dass der Link zur Todo-Komponente funktioniert.
+
+1. Wenn Sie eine serverseitige Blazor-App erstellen, fügen Sie den Namespace der App zur Datei *\_Imports.razor* hinzu. Bei der folgenden `@using` Anweisung wird davon ausgegangen, dass der Namespace der App `WebApplication` ist:
+
+   ```cshtml
+   @using WebApplication
+   ```
+   
+   Clientseitige Blazor-Apps schließen den Namespace der App standardmäßig in die Datei *\_Imports.razor* ein.
 
 1. Fügen Sie eine *TodoItem.cs*-Datei dem Stamm des Projekts hinzu, die eine Klasse zum Darstellen eines Aufgabenelements enthalten soll. Verwenden Sie den folgenden C#-Code für die `TodoItem`-Klasse:
 
