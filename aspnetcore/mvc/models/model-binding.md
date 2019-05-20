@@ -7,11 +7,11 @@ ms.author: tdykstra
 ms.date: 11/13/2018
 uid: mvc/models/model-binding
 ms.openlocfilehash: 1dc9b41328ed78440622acc1865b6f088d394403
-ms.sourcegitcommit: 1d6ab43eed9cb3df6211c22b97bb3a9351ec4419
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51597783"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883145"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Modellbindung in ASP.NET Core
 
@@ -37,11 +37,11 @@ Hinweis: Bei den Zeichenfolgen in der URL-Route wird die Groß-/Kleinschreibung 
 
 MVC versucht, Anforderungsdaten anhand des Namens an die Aktionsparameter zu binden, und sucht mithilfe des Parameternamens und der Namen der öffentlichen festlegbaren Eigenschaften nach Werten für jeden Parameter. Im obigen Beispiel heißt der einzige Aktionsparameter `id`. Dieser wird von MVC an den Wert gebunden, der in den Routenwerten denselben Namen trägt. Zusätzlich zu den Routenwerten bindet MVC Daten aus verschiedenen Teilen der Anforderung, und zwar in einer festgelegten Reihenfolge. Bei der Modellbindung werden die folgenden Datenquellen in der folgenden Reihenfolge durchgegangen:
 
-1. `Form values`: Dies sind Formularwerte, die in der HTTP-Anforderung mithilfe der POST-Methode verwendet werden (einschließlich jQuery-POST-Anforderungen).
+1. `Form values`: Dies sind Formularwerte, die in der HTTP-Anforderung mithilfe der POST-Methode verwendet werden. (einschließlich jQuery-POST-Anforderungen).
 
 2. `Route values`: Die vom [Routing](xref:fundamentals/routing) bereitgestellten Routenwerte
 
-3. `Query strings`: Die Abfragezeichenfolge des URIs
+3. `Query strings`: Die Abfragezeichenfolge des URIs.
 
 <!-- DocFX BUG
 The link works but generates an error when building with DocFX
@@ -63,7 +63,7 @@ Wenn ein Parameter gebunden ist, beendet die Modellbindung die Suche nach Werten
 
 * Verweistypen: Die Bindung erstellt eine Instanz einer Klasse mit dem Standardkonstruktor, ohne Eigenschaften festzulegen. Die Modellbindung legt `string`-Parameter jedoch auf `null` fest.
 
-* Nullable-Typ: Nullable-Typen werden auf `null` festgelegt. Im obigen Beispiel legt die Modellbindung `id` auf `null` fest, da dessen Typ `int?` ist.
+* Nullable-Typen: Nullable-Typen werden auf `null` festgelegt. Im obigen Beispiel legt die Modellbindung `id` auf `null` fest, da dessen Typ `int?` ist.
 
 * Werttypen: `T`-Typen, die keine Nullable-Typen sind, werden auf `default(T)` festgelegt. Beispielsweise legt die Modellbindung einen Parameters `int id` auf 0 (null) fest. Sie sollten statt Standardwerten die Modellvalidierung oder Nullable-Typen verwenden.
 

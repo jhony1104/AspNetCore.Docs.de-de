@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 11/26/2018
 uid: host-and-deploy/web-farm
 ms.openlocfilehash: 4873665e6174a6acf885e1ebb41fb005d646bd1f
-ms.sourcegitcommit: e9b99854b0a8021dafabee0db5e1338067f250a9
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52450670"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64884155"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Hosten von ASP.NET Core in einer Webfarm
 
@@ -61,8 +61,8 @@ Die folgenden Szenarien erfordern keine zusätzliche Konfiguration, hängen jedo
 | -------- | ------------------- |
 | Authentifizierung | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/cookie> und <xref:security/cookie-sharing>. |
 | Identität | Authentifizierung und Datenbankkonfiguration.<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/identity>. |
-| Sitzung | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) und Zwischenspeichern (siehe <xref:performance/caching/distributed>).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Status: Sitzungszustand](xref:fundamentals/app-state#session-state). |
-| TempData | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) oder Sitzung (siehe [Sitzungs- und App-Status: Sitzungszustand](xref:fundamentals/app-state#session-state)).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Status: TempData](xref:fundamentals/app-state#tempdata). |
+| Sitzung | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) und Zwischenspeichern (siehe <xref:performance/caching/distributed>).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Zustand: Sitzungszustand](xref:fundamentals/app-state#session-state). |
+| TempData | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) oder Sitzung (siehe [Sitzungs- und App-Status: Sitzungszustand](xref:fundamentals/app-state#session-state)).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Zustand: TempData](xref:fundamentals/app-state#tempdata). |
 | Fälschungssicherheit | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Problembehandlung

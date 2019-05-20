@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über die Unterstützung von Dependency Injection
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: dfadafe9ebb5799b45ef68653f20c5fc1a2506b5
-ms.sourcegitcommit: d75d8eb26c2cce19876c8d5b65ac8a4b21f625ef
+ms.openlocfilehash: b411b164bfea81f82c5c9fc1052e0ecfe65f0bc2
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2019
-ms.locfileid: "56410559"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65517048"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>Dependency Injection in Ansichten in ASP.NET Core
 
@@ -18,15 +18,40 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core unterstützt [Dependency Injection](xref:fundamentals/dependency-injection) in Ansichten. Dies kann besonders für ansichtsspezifische Dienste nützlich sein – z.B. für die Lokalisierung oder für Daten, die nur zum Auffüllen von Ansichtselementen erforderlich sind. Sie sollten versuchen, das Prinzip [Separation of Concerns](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) zwischen Controllern und Ansichten beizubehalten. Die meisten Daten, die in Ihren Ansichten angezeigt werden, sollten vom Controller übergeben worden sein.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="a-simple-example"></a>Ein einfaches Beispiel
+## <a name="configuration-injection"></a>Konfigurationsinjektion
 
-Sie können mithilfe der `@inject`-Anweisung einen Dienst in eine Ansicht einfügen. `@inject` fügt Ihrer Ansicht eine Eigenschaft hinzu und füllt diese Eigenschaft mittels Dependency Injection auf.
+*appsettings.jason*-Werte können direkt in eine Ansicht eingefügt werden.
+
+Beispiel einer *appsettings.json*-Datei:
+
+```json
+{
+   "root": {
+      "parent": {
+         "child": "myvalue"
+      }
+   }
+}
+```
 
 Die Syntax für `@inject`: `@inject <type> <name>`
 
-Im Folgenden finden Sie ein Beispiel für die Verwendung von `@inject`:
+Ein Beispiel, das `@inject` verwendet:
+
+```csharp
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+   string myValue = Configuration["root:parent:child"];
+   ...
+}
+```
+
+## <a name="service-injection"></a>Dienstinjektion
+
+Ein Dienst kann mithilfe der `@inject`-Anweisung in eine Ansicht eingefügt werden. `@inject` fügt der Ansicht eine Eigenschaft hinzu und füllt diese Eigenschaft mittels Dependency Injection auf.
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
@@ -81,4 +106,4 @@ Wenn Sie vorhandene Dienste erweitern möchten, können Sie diese Technik verwen
 
 ## <a name="see-also"></a>Siehe auch
 
-* Blog von Simon Timms: [Getting Lookup Data Into Your View (Übertragen von Nachschlagedaten in Ihre Ansicht)](http://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)
+* Blog von Simon Timms: [Getting Lookup Data Into Your View](http://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/) (Übertragen von Nachschlagedaten in Ihre Ansicht)

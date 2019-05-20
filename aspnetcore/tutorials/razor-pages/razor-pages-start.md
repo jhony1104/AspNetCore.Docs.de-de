@@ -3,14 +3,14 @@ title: 'Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core'
 author: rick-anderson
 description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Core verwenden können. Erfahren Sie, wie Sie ein Modell erstellen, Code für Razor-Seiten generieren, Entity Framework Core und SQL Server für den Datenzugriff verwenden, Suchfunktionen hinzufügen, Eingabeüberprüfung hinzufügen und Migrationen verwenden, um das Modell zu aktualisieren.
 ms.author: riande
-ms.date: 12/5/2018
+ms.date: 05/09/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 1d264ca4a605d8291e273a8f054c92e7eefa5548
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9307291756baf1bef714d6dae2f8d25d3aa6f922
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891155"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65517112"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
@@ -59,7 +59,7 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-W
 
 * Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 
-* Wechseln Sie mit `cd` zu einem Ordner, der das Projekt enthalten soll.
+* Wechseln Sie zum Verzeichnis (`cd`), das das Projekt enthalten soll.
 
 * Führen Sie die folgenden Befehle aus:
 
@@ -69,7 +69,7 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-W
   ```
 
   * Der Befehl `dotnet new` erstellt ein neues Razor Pages-Projekt im Ordner *RazorPagesMovie*.
-  * Der Befehl `code` öffnet den Ordner *RazorPagesMovie* in einer neuen Instanz von Visual Studio Code.
+  * Der Befehl `code` öffnet den Ordner *RazorPagesMovie* in der aktuellen Instanz von Visual Studio Code.
 
   Es wird ein Dialogfeld mit folgender Meldung angezeigt: **Die erforderlichen Objekte zum Erstellen und Debuggen sind in "RazorPagesMovie" nicht vorhanden. Sollen sie hinzugefügt werden?**
 

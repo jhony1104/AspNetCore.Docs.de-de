@@ -4,14 +4,14 @@ author: guardrex
 description: Informationen zur Konfiguration von hinter Proxyservern und Lastenausgleichsmodulen gehosteten Apps, wobei wichtige Anforderungsinformationen häufig verdeckt werden
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2018
+ms.date: 05/08/2019
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 3ac67f0cb0c7b472e7192f684b1a8fc9685794ce
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: a5bd33ed787dec83bc1b19fa2ae13991b06ef0c2
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264898"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450968"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich
 
@@ -249,9 +249,9 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 ## <a name="troubleshoot"></a>Problembehandlung
 
-Wenn Header nicht wie erwartet zugewiesen werden, aktivieren Sie die [Protokollierung](xref:fundamentals/logging/index). Wenn die Protokolle nicht genügend Informationen zur Problembehandlung bereitstellen, listen Sie die vom Server empfangenen Anforderungsheader auf. Verwenden Sie Inlinemiddleware, um Anforderungsheader in eine App-Antwort zu schreiben oder die Header zu protokollieren. Platzieren Sie eines der folgenden Codebeispiele unmittelbar nach dem Aufruf von <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> in `Startup.Configure`.
+Wenn Header nicht wie erwartet zugewiesen werden, aktivieren Sie die [Protokollierung](xref:fundamentals/logging/index). Wenn die Protokolle nicht genügend Informationen zur Problembehandlung bereitstellen, listen Sie die vom Server empfangenen Anforderungsheader auf. Verwenden Sie Inlinemiddleware, um Anforderungsheader in eine App-Antwort zu schreiben oder die Header zu protokollieren. 
 
-Um die Header in die Antwort der App zu schreiben, verwenden Sie die folgende Terminalinlinemiddleware:
+Um die Header in die Antwort der App zu schreiben, platzieren Sie die folgende Terminalinlinemiddleware unmittelbar hinter den Aufruf von <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> in `Startup.Configure`:
 
 ```csharp
 app.Run(async (context) =>
@@ -283,26 +283,29 @@ app.Run(async (context) =>
 });
 ```
 
-Sie können auch in Protokolle anstatt in den Antworttext schreiben, indem Sie die folgende Inlinemiddleware verwenden. Dies ermöglicht es der Website, während des Debuggens normal zu funktionieren.
+Statt in den Antworttext können Sie in Protokolle schreiben. Das Schreiben in Protokolle ermöglicht es der Website, während des Debuggens normal zu funktionieren.
+
+So schreiben Sie in Protokolle und nicht in den Antworttext:
+
+* Fügen Sie `ILogger<Startup>` in die `Startup`-Klasse ein, wie unter [Erstellen von Protokollen beim Start](xref:fundamentals/logging/index#create-logs-in-startup) beschrieben.
+* Platzieren Sie die folgende Inlinemiddleware unmittelbar hinter den Aufruf von <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> in `Startup.Configure`.
 
 ```csharp
-var logger = _loggerFactory.CreateLogger<Startup>();
-
 app.Use(async (context, next) =>
 {
     // Request method, scheme, and path
-    logger.LogDebug("Request Method: {METHOD}", context.Request.Method);
-    logger.LogDebug("Request Scheme: {SCHEME}", context.Request.Scheme);
-    logger.LogDebug("Request Path: {PATH}", context.Request.Path);
+    _logger.LogDebug("Request Method: {METHOD}", context.Request.Method);
+    _logger.LogDebug("Request Scheme: {SCHEME}", context.Request.Scheme);
+    _logger.LogDebug("Request Path: {PATH}", context.Request.Path);
 
     // Headers
     foreach (var header in context.Request.Headers)
     {
-        logger.LogDebug("Header: {KEY}: {VALUE}", header.Key, header.Value);
+        _logger.LogDebug("Header: {KEY}: {VALUE}", header.Key, header.Value);
     }
 
     // Connection: RemoteIp
-    logger.LogDebug("Request RemoteIp: {REMOTE_IP_ADDRESS}", 
+    _logger.LogDebug("Request RemoteIp: {REMOTE_IP_ADDRESS}", 
         context.Connection.RemoteIpAddress);
 
     await next();
