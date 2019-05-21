@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/10/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 540f14ad2b290d276436033a94d4c815888e5a95
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: 8b95f63c0e06a2b7d1d66064def192f91b8ffbb4
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65536002"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874964"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/
 
 <xref:System.Net.Http.IHttpClientFactory> kann registriert und zum Konfigurieren und Erstellen von <xref:System.Net.Http.HttpClient>-Instanzen in einer App verwendet werden. Dies hat folgende Vorteile:
 
-* Ein zentraler Ort für das Benennen und Konfigurieren logischer `HttpClient`-Instanzen wird damit geboten. Zum Beispiel kann ein *github*-Client für den Zugriff auf GitHub registriert und konfiguriert werden. Ein Standard-Client kann für andere Zwecke registriert werden.
+* Ein zentraler Ort für das Benennen und Konfigurieren logischer `HttpClient`-Instanzen wird damit geboten. Ein *GitHub*-Client kann beispielsweise registriert werden und so konfiguriert werden, um auf [GitHub](https://github.com/) zuzugreifen. Ein Standard-Client kann für andere Zwecke registriert werden.
 * Das Konzept der ausgehenden Middleware wird über delegierende Handler in `HttpClient` in Code umgesetzt. Außerdem werden Erweiterungen für auf Polly basierende Middleware bereitgestellt, die dies nutzen.
 * Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientMessageHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
 * Eine konfigurierbare Protokollierungsfunktion wird (über `ILogger`) für alle Anforderungen hinzugefügt, die über Clients gesendet werden, die von der Factory erstellt wurden.

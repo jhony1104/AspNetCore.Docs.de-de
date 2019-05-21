@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Validierung zu einer ASP.NET Core
 ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 49db8d7c1d3e54f416c66685c19b3a2e3b14251c
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 6c59d0188f67872c7dd5599967551d7d390bfdcf
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665443"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65875041"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Validierung zu einer ASP.NET Core MVC-App
 
@@ -27,25 +27,9 @@ Einer der Entwurfsgrundsätze von MVC ist [DRY](https://wikipedia.org/wiki/Don%2
 
 Die von MVC und Entity Framework Core Code First angebotene Unterstützung der Validierung ist ein gutes Beispiel für den Einsatz des DRY-Prinzips. Sie können deklarativ Validierungsregeln an zentraler Stelle (in der Modellklasse) angegeben, und die Regeln werden überall in der App erzwungen.
 
-## <a name="adding-validation-rules-to-the-movie-model"></a>Hinzufügen von Validierungsregeln zum Modell „Movie“
+[!INCLUDE[](~/includes/RP-MVC/validation.md)]
 
-Öffnen Sie Datei *Movie.cs*. „DataAnnotations“ bietet eine integrierte Gruppe von Validierungsattributen, die Sie deklarativ auf eine Klasse oder Eigenschaft anwenden. (Es sind auch Formatierungsattribute wie `DataType` enthalten, die bei der Formatierung helfen und keine Validierung bieten.)
-
-Aktualisieren Sie die `Movie`-Klasse, um die integrierten Validierungsattribute `Required`, `StringLength`, `RegularExpression` und `Range` zu nutzen.
-
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie22/Models/MovieDateRatingDA.cs?name=snippet1)]
-
-Die Validierungsattribute geben das Verhalten an, das Sie in den Modelleigenschaften erzwingen möchten, auf die sie angewendet werden:
-
-* Die Attribute `Required` und `MinimumLength` geben an, dass eine Eigenschaft einen Wert haben muss. Ein Benutzer kann allerdings ein Leerzeichen eingeben, um diese Validierung zu erfüllen. 
-* Das Attribut `RegularExpression` wird verwendet, um einzuschränken, welche Zeichen eingegeben werden dürfen. Im oben angegebenen Code sind für `Genre` und `Rating` nur Buchstaben (keine Großschreibung des ersten Buchstabens, Leerzeichen, Zahlen und Sonderzeichen) erlaubt.
-* Das Attribut `Range` schränkt einen Wert auf einen bestimmten Bereich ein. 
-* Mit dem Attribut `StringLength` können Sie die maximale Länge einer Zeichenfolgeneigenschaft und optional die minimale Länge festlegen. 
-* Werttypen (wie `decimal`, `int`, `float`, `DateTime`) sind grundsätzlich erforderlich und benötigen nicht das Attribut `[Required]`.
-
-Indem Validierungsregeln von ASP.NET Core automatisch erzwungen werden, wird Ihre App stabiler. Darüber hinaus wird sichergestellt, dass Sie die Validierung nicht vergessen und nicht versehentlich falsche Daten in die Datenbank übernehmen.
-
-## <a name="validation-error-ui-in-mvc"></a>Benutzeroberfläche für Validierungsfehler in MVC
+## <a name="validation-error-ui"></a>Benutzeroberflächenoption für Validierungsfehler
 
 Führen Sie die App aus, und navigieren Sie zum Movies-Controller.
 

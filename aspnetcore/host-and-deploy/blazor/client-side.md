@@ -5,24 +5,22 @@ description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Co
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 05/13/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: 01a612029f415f583908c3bf2adc2e6d35167acb
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: ea8ece266809913e32ac212bc55cb3c2499c234f
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614717"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874974"
 ---
 # <a name="host-and-deploy-blazor-client-side"></a>Hosten und Bereitstellen von clientseitigem Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
 
-[!INCLUDE[](~/includes/razor-components-preview-notice.md)]
-
 ## <a name="host-configuration-values"></a>Hostkonfigurationswerte
 
-Bei Blazor-Apps, für die das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side-hosting-model) verwendet wird, können die folgenden Hostkonfigurationswerte als Befehlszeilenargumente zur Laufzeit in der Entwicklungsumgebung verwendet werden.
+Bei Blazor-Apps, für die das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet wird, können die folgenden Hostkonfigurationswerte als Befehlszeilenargumente zur Laufzeit in der Entwicklungsumgebung verwendet werden.
 
 ### <a name="content-root"></a>Inhaltsstammverzeichnis
 
@@ -95,7 +93,7 @@ Mit dem Argument `--urls` werden die IP-oder Hostadressen mit Ports und Protokol
 
 ## <a name="deployment"></a>Bereitstellung
 
-Mit dem [clientseitigen Hostingmodell](xref:blazor/hosting-models#client-side-hosting-model) ist Folgendes möglich:
+Mit dem [clientseitigen Hostingmodell](xref:blazor/hosting-models#client-side) ist Folgendes möglich:
 
 * Die Blazor-App, die jeweiligen Abhängigkeiten und die .NET-Runtime werden im Browser herunterladen.
 * Die App wird direkt im UI-Thread des Browsers ausgeführt. Dabei wird eine der folgenden beiden Strategien unterstützt:
@@ -110,15 +108,15 @@ Blazor führt auf jedem Build eine IL-Verknüpfung (Intermediate Language, Zwisc
 
 Routinganforderungen für Seitenkomponenten in einer clientseitigen App sind etwas komplexer als Routinganforderungen an eine serverseitige, gehostete App. Betrachten wir eine clientseitige App mit zwei Seiten:
 
-* **_Main.cshtml:_** Lädt den Anwendungsstamm und enthält einen Link zur Infoseite (`href="About"`).
-* **_About.cshtml:_** Infoseite.
+* **_Main.razor**: Wird im Stammverzeichnis der App geladen und enthält einen Link zur Infoseite (`href="About"`).
+* **_About.razor**: Infoseite.
 
 Wenn das Standarddokument der App über die Adressleiste des Browsers (z. B. `https://www.contoso.com/`) angefordert wird, geschieht Folgendes:
 
 1. Der Browser sendet eine Anforderung.
 1. Die Standardseite wird zurückgegeben, in der Regel *index.html*.
 1. *index.html* startet die App.
-1. Der Router von Blazor wird geladen, und die Hauptseite von Razor (*Main.cshtml*) wird angezeigt.
+1. Der Router von Blazor wird geladen, und die Razor-Hauptseite (*Main.razor*) wird angezeigt.
 
 Wenn auf der Hauptseite der Link zur Infoseite ausgewählt wird, wird die Infoseite geladen. Der Link zur Infoseite kann auf dem Client ausgewählt werden, da der Blazor-Router dafür sorgt, dass der Browser im Internet keine Anforderung für `About` an `www.contoso.com` sendet, und stattdessen die Infoseite selbst bereitstellt. Alle Anforderungen von internen Seiten *innerhalb der clientseitigen App* funktionieren auf dieselbe Weise: Durch Anforderungen werden keine browserbasierten Anforderungen an serverseitig gehostete Ressourcen im Internet ausgelöst. Der Router verarbeitet Anforderungen intern.
 
@@ -128,13 +126,19 @@ Da Browser Anforderungen für clientseitige Seiten an internetbasierte Hosts sen
 
 ## <a name="app-base-path"></a>Basispfad einer App
 
-Beim *Basispfad einer App* handelt es sich um den virtuellen Stammpfad der App auf dem Server. Eine App, die sich beispielsweise auf dem Contoso-Server in einem virtuellen Ordner unter `/CoolApp/` befindet, wird unter `https://www.contoso.com/CoolApp` erreicht, wobei der virtuelle Basispfad `/CoolApp/` lautet. Indem der Basispfad der App auf `CoolApp/` festgelegt wird, erkennt die App, wo sie sich virtuell auf dem Server befindet. Die App kann den Basispfad der App verwenden, um URLs relativ zum Stammverzeichnis der App über eine Komponente zu erstellen, die sich nicht im Stammverzeichnis befindet. Dadurch ist es möglich, dass Komponenten, die sich in unterschiedlichen Ebenen der Verzeichnisstruktur befinden, Links zu anderen Ressourcen an Speicherorten in der gesamten App erstellen können. Ferner wird der Basispfad der App verwendet, um Klicks auf Links abzufangen, bei denen sich das `href`-Ziel des Links innerhalb des URI-Raums für den Basispfad der App befindet – um die interne Navigation kümmert sich der Blazor-Router.
+Beim *Basispfad einer App* handelt es sich um den virtuellen Stammpfad der App auf dem Server. Eine App, die sich beispielsweise auf dem Contoso-Server in einem virtuellen Ordner unter `/CoolApp/` befindet, wird unter `https://www.contoso.com/CoolApp` erreicht, wobei der virtuelle Basispfad `/CoolApp/` lautet. Indem Sie den Basispfad der App auf den virtuellen Pfad (`<base href="/CoolApp/">`) festlegen, wird der App gezeigt, wo sie sich virtuell auf dem Server befindet. Die App kann den Basispfad der App verwenden, um URLs relativ zum Stammverzeichnis der App über eine Komponente zu erstellen, die sich nicht im Stammverzeichnis befindet. Dadurch ist es möglich, dass Komponenten, die sich in unterschiedlichen Ebenen der Verzeichnisstruktur befinden, Links zu anderen Ressourcen an Speicherorten in der gesamten App erstellen können. Ferner wird der Basispfad der App verwendet, um Klicks auf Links abzufangen, bei denen sich das `href`-Ziel des Links innerhalb des URI-Raums für den Basispfad der App befindet – um die interne Navigation kümmert sich der Blazor-Router.
 
-Bei vielen Hostingszenarios ist der virtuelle Pfad des Servers zur App das Stammverzeichnis der App. In diesen Fällen ist der Basispfad der App ein Schrägstrich (`<base href="/" />`). Hierbei handelt es sich um die Standardkonfiguration für eine App. Bei anderen Hostingszenarios wie etwa bei GitHub-Seiten und virtuellen IIS-Verzeichnissen oder untergeordneten Anwendungen muss der Basispfad der App auf den virtuellen Pfad des Servers zur App festgelegt werden. Zum Festlegen des Basispfads der App fügen Sie das `<base>`-Tag in *index.html* innerhalb der `<head>`-Tagelemente hinzu bzw. aktualisieren es. Legen Sie den `href`-Attributwert auf `virtual-path/` (der nachgestellte Schrägstrich ist erforderlich) fest, wobei `virtual-path/` der vollständige virtuelle Stammpfad der App auf dem Server ist. Im vorherigen Beispiel wurde der virtuelle Pfad auf `CoolApp/` festgelegt: `<base href="CoolApp/">`.
+Bei vielen Hostingszenarios ist der virtuelle Pfad des Servers zur App das Stammverzeichnis der App. In diesen Fällen ist der Basispfad der App ein Schrägstrich (`<base href="/" />`). Hierbei handelt es sich um die Standardkonfiguration für eine App. Bei anderen Hostingszenarios wie etwa bei GitHub-Seiten und virtuellen IIS-Verzeichnissen oder untergeordneten Anwendungen muss der Basispfad der App auf den virtuellen Pfad des Servers zur App festgelegt werden. Aktualisieren Sie das Tag `<base>` in den `<head>`-Tagelementen der Datei *wwwroot/index.html*, um den Basispfad der App festzulegen. Legen Sie den `href`-Attributwert auf `/virtual-path/` (der nachgestellte Schrägstrich ist erforderlich) fest, wobei `/virtual-path/` der vollständige virtuelle Stammpfad der App auf dem Server ist. Im vorherigen Beispiel wurde der virtuelle Pfad auf `/CoolApp/` festgelegt: `<base href="/CoolApp/">`.
 
-Bei einer App, für die ein virtueller Pfad konfiguriert wurde, der sich nicht im Stammverzeichnis befindet (z. B. `<base href="CoolApp/">`), werden die Ressourcen der App nicht gefunden, *wenn die App lokal ausgeführt wird*. Um dieses Problem bei der lokalen Entwicklung und bei Tests zu beheben, können Sie ein *Pfadbasis*-Argument bereitstellen, das dem `href`-Wert des `<base>`-Tags zur Laufzeit entspricht.
+Bei einer App, für die ein virtueller Pfad konfiguriert wurde, der sich nicht im Stammverzeichnis befindet (z. B. `<base href="/CoolApp/">`), werden die Ressourcen der App nicht gefunden, *wenn die App lokal ausgeführt wird*. Um dieses Problem bei der lokalen Entwicklung und bei Tests zu beheben, können Sie ein *Pfadbasis*-Argument bereitstellen, das dem `href`-Wert des `<base>`-Tags zur Laufzeit entspricht.
 
-Damit das Pfadbasis-Argument bei der lokalen Ausführung der App mit dem Stammpfad (`/`) übergeben wird, führen Sie den folgenden Befehl über das Verzeichnis der App aus:
+Führen Sie mithilfe der Option `--pathbase` den Befehl `dotnet run` über das Verzeichnis der App aus, um das Basispfadargument mit dem Stammverzeichnis (`/`) zu übergeben, wenn Sie die App lokal ausführen:
+
+```console
+dotnet run --pathbase=/{Virtual Path (no trailing slash)}
+```
+
+Für eine App mit dem virtuellen Basispfad `/CoolApp/` (`<base href="/CoolApp/">`) lautet der Befehl wie folgt:
 
 ```console
 dotnet run --pathbase=/CoolApp
@@ -144,7 +148,7 @@ Die App antwortet lokal unter `http://localhost:port/CoolApp`.
 
 Weitere Informationen finden Sie im Abschnitt zum [Hostkonfigurationswert für die Pfadbasis](#path-base).
 
-Wenn für eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side-hosting-model) (basierend auf der **Blazor**-Projektvorlage) verwendet wird und die App als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core Module-Handler deaktiviert werden, oder es muss sichergestellt werden, dass der `<handlers>`-Abschnitt der Stammanwendung (also der übergeordneten Anwendung) in der Datei *web.config* von der untergeordneten Anwendung nicht geerbt wird.
+Wenn eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet (basierend auf der **Blazor**-Projektvorlage; die `blazor`-Vorlage bei Verwendung des [dotnet.new](/dotnet/core/tools/dotnet-new)-Befehls) und als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core-Modulhandler deaktiviert werden, um sicherzustellen, dass der `<handlers>`-Abschnitt der Stammanwendung (bzw. der übergeordneten App) in der *web.config*-Datei von der untergeordneten App nicht geerbt wird.
 
 Entfernen Sie den Handler in der veröffentlichen *web.config*-Datei der App, indem Sie der Datei einen `<handlers>`-Abschnitt hinzufügen:
 

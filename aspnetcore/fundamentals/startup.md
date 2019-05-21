@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 01/17/2019
 uid: fundamentals/startup
-ms.openlocfilehash: 362186be6feeeefeca3c56688ee6420de5fb9659
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 7e1741d2bed15f36a967713a2f9bd0d93801c8d0
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884505"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874953"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -27,7 +27,7 @@ ASP.NET Core-Apps verwenden eine `Startup`-Klasse, die standardmäßig `Startup`
 * Kann eine <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>-Methode enthalten, um die *Dienste* der App zu konfigurieren. Ein Dienst ist eine wiederverwendbare Komponente, die App-Funktionalität bereitstellt. Dienste werden in `ConfigureServices` konfiguriert, was auch als *registrieren* bezeichnet wird, und in der App über [Dependency Injection](xref:fundamentals/dependency-injection) oder <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> genutzt.
 * Enthält eine <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>-Methode, um die Anforderungsverarbeitungspipeline einer App zu erstellen.
 
-`ConfigureServices` und `Configure` werden beim App-Start durch die Runtime aufgerufen:
+`ConfigureServices` und `Configure` werden von der ASP.NET Core-Runtime aufgerufen, wenn die App gestartet wird:
 
 [!code-csharp[](startup/sample_snapshot/Startup1.cs?highlight=4,10)]
 
