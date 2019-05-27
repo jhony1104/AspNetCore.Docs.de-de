@@ -7,12 +7,12 @@ ms.author: pranavkm
 ms.custom: mvc
 ms.date: 12/14/2018
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 7558552586d3056c43d8bfd9ef74cbcb3396726f
-ms.sourcegitcommit: 6548c19f345850ee22b50f7ef9fca732895d9e08
+ms.openlocfilehash: bcc89f856e0aeef80c46a44f76f86b4c09ac6746
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53425093"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890825"
 ---
 # <a name="use-web-api-analyzers"></a>Verwenden von Analysetools für Web-APIs
 
@@ -74,8 +74,10 @@ Eins der Analysetools in dem Paket untersucht Controller mit der <xref:Microsoft
 
 Diese Aktion dokumentiert zwar den HTTP 200-Rückgabetyp „Erfolg“, aber nicht den HTTP 404-Statuscode „Fehler“. Das Analysetool meldet die fehlende Dokumentation für den HTTP 404-Statuscode als Warnung. Es gibt eine Möglichkeit, dieses Problem zu beheben.
 
+![Analysetool mit Warnung](conventions/_static/Analyzer.gif)
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:web-api/advanced/conventions>
 * <xref:tutorials/web-api-help-pages-using-swagger>
-* [Anmerkungen mit dem ApiController-Attribut](xref:web-api/index#annotation-with-apicontroller-attribute)
+* <xref:web-api/index>
