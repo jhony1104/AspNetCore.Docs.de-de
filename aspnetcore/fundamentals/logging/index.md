@@ -4,14 +4,14 @@ author: tdykstra
 description: Erfahren Sie mehr über das Protokollierungsframework in ASP.NET Core. Lernen Sie die integrierten Anbieter für die Protokollierung kennen, und erfahren Sie mehr über beliebte Anbieter von Drittanbietern.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 03/02/2019
+ms.date: 05/01/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 8a2e310b47e32e9015b0c127ed79d8f6bdf2e44d
-ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
+ms.openlocfilehash: ee7d4b2ae04b5f6c262acc5da0f86f90ab50585f
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59982852"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085673"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Steve Smith](https://ardalis.com/) und [Tom Dykstra](https://github.com/tdy
 
 ASP.NET Core unterstützt eine Protokollierungs-API, die mit einer Vielzahl von integrierten Protokollierungsanbietern und Drittanbieter-Protokollierungslösungen zusammenarbeitet. Dieser Artikel zeigt, wie Sie die Protokollierungs-API mit integrierten Anbietern verwenden können.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/logging/index/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/index/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="add-providers"></a>Hinzufügen von Anbietern
 
@@ -54,7 +54,7 @@ Um einen Anbieter zu verwenden, installieren Sie das zugehörige NuGet-Paket und
 ASP.NET Core-[Abhängigkeitsinjektion (Dependency Injection, DI)](xref:fundamentals/dependency-injection) stellt die `ILoggerFactory`-Instanz bereit. Die Erweiterungsmethoden `AddConsole` und `AddDebug` sind in den Paketen [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/) und [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/) definiert. Jede Erweiterungsmethode ruft die Methode `ILoggerFactory.AddProvider` auf und übergibt eine Instanz des Anbieters.
 
 > [!NOTE]
-> Die [Beispiel-App](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/logging/index/samples/1.x) fügt Protokollanbieter in der `Startup.Configure`-Methode hinzu. Wenn Sie für zuvor ausgeführten Code eine Protokollausgabe abrufen möchten, fügen Sie Protokollierungsanbieter im `Startup`-Klassenkonstruktor hinzu.
+> Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/index/samples/1.x) fügt Protokollanbieter in der `Startup.Configure`-Methode hinzu. Wenn Sie für zuvor ausgeführten Code eine Protokollausgabe abrufen möchten, fügen Sie Protokollierungsanbieter im `Startup`-Klassenkonstruktor hinzu.
 
 ::: moniker-end
 
@@ -496,11 +496,12 @@ Jeder Anbieter definiert einen *Alias*, der in der Konfiguration anstelle des vo
 
 * Konsole
 * Debug
+* EventSource
 * EventLog
+* TraceSource
 * AzureAppServicesFile
 * AzureAppServicesBlob
-* TraceSource
-* EventSource
+* ApplicationInsights
 
 ### <a name="default-minimum-level"></a>Standardmindestprotokolliergrad
 
@@ -616,8 +617,9 @@ ASP.NET Core wird mit den folgenden Anbietern bereitgestellt:
 * [EventSource](#eventsource-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
-
-Optionen für [Protokollierung in Azure](#logging-in-azure) werden weiter unten in diesem Artikel behandelt.
+* [AzureAppServicesFile](#azure-app-service-provider)
+* [AzureAppServicesBlob](#azure-app-service-provider)
+* [ApplicationInsights](#azure-application-insights-trace-logging)
 
 Weitere Informationen zur stdout-Protokollierung finden Sie unter <xref:host-and-deploy/iis/troubleshoot#aspnet-core-module-stdout-log> und <xref:host-and-deploy/azure-apps/troubleshoot#aspnet-core-module-stdout-log>.
 
@@ -767,19 +769,6 @@ Im folgenden Beispiel wird ein `TraceSource`-Anbieter konfiguriert, der Protokol
 
 ::: moniker-end
 
-## <a name="logging-in-azure"></a>Protokollierung in Azure
-
-Informationen zur Protokollierung in Azure finden Sie in den folgenden Abschnitten:
-
-* [Azure App Service-Anbieter](#azure-app-service-provider)
-* [Azure-Protokollstreaming](#azure-log-streaming)
-
-::: moniker range=">= aspnetcore-1.1"
-
-* [Ablaufverfolgungsprotokollierung für Azure Application Insights](#azure-application-insights-trace-logging)
-
-::: moniker-end
-
 ### <a name="azure-app-service-provider"></a>Der Azure App Service-Anbieter
 
 Das Anbieterpaket [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices) schreibt Protokolle in Textdateien in das Dateisystem einer Azure App Service-App und in [Blob Storage](https://azure.microsoft.com/documentation/articles/storage-dotnet-how-to-use-blobs/#what-is-blob-storage) in einem Azure Storage-Konto. Das Anbieterpaket ist für Apps verfügbar, die für .NET Core 1.1 oder höher konzipiert sind.
@@ -842,7 +831,7 @@ Der Standardspeicherort für Protokolldateien ist der Ordner *D:\\home\\LogFiles
 
 Der Anbieter funktioniert nur, wenn das Projekt in der Azure-Umgebung ausgeführt wird. Bei einer lokalen Ausführung zeigt er keine Auswirkungen. Der Anbieter schreibt keine Protokolle in lokale Dateien oder den lokalen Entwicklungsspeicher für BLOBs.
 
-### <a name="azure-log-streaming"></a>Azure-Protokollstreaming
+#### <a name="azure-log-streaming"></a>Azure-Protokollstreaming
 
 Azure-Protokollstreaming ermöglicht Ihnen eine Echtzeitanzeige der Protokollaktivität für:
 
@@ -865,14 +854,23 @@ Navigieren Sie zur Seite **Protokollstreaming**, um App-Meldungen anzuzeigen. Di
 
 ### <a name="azure-application-insights-trace-logging"></a>Ablaufverfolgungsprotokollierung für Azure Application Insights
 
-Das Application Insights SDK kann Protokolle erfassen und melden, die von der ASP.NET Core-Protokollierungsinfrastruktur generiert wurden. Weitere Informationen finden Sie in den folgenden Ressourcen:
+Das [Microsoft.Extensions.Logging.ApplicationInsights](https://www.nuget.org/packages/Microsoft.Extensions.Logging.ApplicationInsights)-Anbieterpaket schreibt Protokolle in Azure Application Insights. Application Insights ist ein Dienst, der eine Web-App überwacht und Tools für Abfragen und Analysen von Telemetriedaten zur Verfügung stellt. Wenn Sie diesen Anbieter verwenden, können Sie Ihre Protokolle mithilfe der Application Insights-Tools abfragen und analysieren.
+
+Der Protokollierungsanbieter ist als Abhängigkeit von [Microsoft.ApplicationInsights.AspNetCore](https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore) enthalten, d.h. als das Paket, das alle verfügbaren Telemetriedaten für ASP.NET Core bereitstellt. Wenn Sie dieses Paket verwenden, ist nicht erforderlich, das Anbieterpaket zu installieren.
+
+Verwenden Sie nicht das [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web)-Paket, das für ASP.NET 4.x bestimmt ist.
+
+Weitere Informationen finden Sie in den folgenden Ressourcen:
 
 * [Application Insights-Übersicht](/azure/application-insights/app-insights-overview)
-* [Application Insights für ASP.NET Core](/azure/application-insights/app-insights-asp-net-core)
+* [Anwendungseinblicke für ASP.NET Core-Anwendungen](/azure/azure-monitor/app/asp-net-core-no-visualstudio): Beginnen Sie hier, wenn Sie die gesamte Bandbreite der Application Insights-Telemetrie zusammen mit der Protokollierung implementieren möchten.
+* [ApplicationInsightsLoggerProvider für .NET Core ILogger-Protokolle](/azure/azure-monitor/app/ilogger): Beginnen Sie hier, wenn Sie den Protokollierungsanbieter ohne die übrige Application Insights-Telemetrie implementieren möchten.
 * [Application Insights logging adapters (Adapter zur Protokollierung für Application Insights)](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/README.md).
-* [Beispiele für die ILogger-Implementierung in Application Insights](/azure/azure-monitor/app/ilogger)
-
+* [Installieren, Konfigurieren und Initialisieren des Application Insights SDK](/learn/modules/instrument-web-app-code-with-application-insights): interaktive Tutorials auf der Microsoft Learn-Website.
 ::: moniker-end
+
+> [!NOTE]
+> Seit dem 1.5.2019 ist der Artikel mit dem Titel [Application Insights für ASP.NET Core](/azure/azure-monitor/app/asp-net-core) veraltet, und die Schritte im Tutorial funktionieren nicht mehr. Ziehen Sie stattdessen [Application Insights für ASP.NET Core-Anwendungen](/azure/azure-monitor/app/asp-net-core-no-visualstudio) zurate. Wir kennen das Problem und arbeiten an einer Lösung.
 
 ## <a name="third-party-logging-providers"></a>Protokollierungsanbieter von Drittanbietern
 
@@ -885,7 +883,7 @@ Protokollierungsframeworks von Drittanbietern aufgeführt, die mit ASP.NET Core 
 * [Loggr](http://loggr.net/) ([GitHub-Repository](https://github.com/imobile3/Loggr.Extensions.Logging))
 * [NLog](http://nlog-project.org/) ([GitHub-Repository](https://github.com/NLog/NLog.Extensions.Logging))
 * [Sentry](https://sentry.io/welcome/) ([GitHub-Repository](https://github.com/getsentry/sentry-dotnet))
-* [Serilog](https://serilog.net/) ([GitHub-Repository](https://github.com/serilog/serilog-extensions-logging))
+* [Serilog](https://serilog.net/) ([GitHub-Repository](https://github.com/serilog/serilog-aspnetcore))
 * [Stackdriver](https://cloud.google.com/dotnet/docs/stackdriver#logging) ([GitHub-Repository](https://github.com/googleapis/google-cloud-dotnet))
 
 Einige Drittanbieterframeworks können eine [semantische Protokollierung (auch als strukturierte Protokollierung bezeichnet)](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging) ausführen.
