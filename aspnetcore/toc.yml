@@ -92,7 +92,11 @@
     - name: Apps für Remoteprozeduraufrufe
       items:
         - name: Erste Schritte mit dem gRPC-Dienst in ASP.NET Core
+          uid: tutorials/grpc/index
+        - name: Erstellen eines ASP.NET Core-gRPC Greeter-Diensts
           uid: tutorials/grpc/grpc-start
+        - name: Erstellen eines .NET Core-Clients
+          uid: tutorials/grpc/grpc-client
     - name: Datenzugriff
       items:
         - name: EF Core mit Razor Pages
@@ -230,8 +234,9 @@
         - name: Übersicht
           uid: mvc/overview
         - name: Lernprogramm
-          uid: tutorials/first-mvc-app/index
           items:
+            - name: Übersicht
+              uid: tutorials/first-mvc-app/index
             - name: Erste Schritte
               uid: tutorials/first-mvc-app/start-mvc
             - name: Hinzufügen eines Controllers
@@ -324,8 +329,6 @@
               uid: client-side/libman/libman-cli
             - name: Visual Studio
               uid: client-side/libman/libman-vs
-        - name: Gulp
-          uid: client-side/using-gulp
         - name: Grunt
           uid: client-side/using-grunt
         - name: Bower
@@ -338,13 +341,10 @@
       uid: fundamentals/app-state
     - name: Layout
       uid: mvc/views/layout
-    - name: Modellbindung
-      uid: mvc/models/model-binding
-    - name: Modellvalidierung
-      uid: mvc/models/validation
     - name: Razor-Syntax
       uid: mvc/views/razor
     - name: Taghilfsprogramme
+      uid: mvc/views/tag-helpers/builtin-th/Index
       items:
         - name: Übersicht
           uid: mvc/views/tag-helpers/intro
@@ -356,7 +356,7 @@
           uid: mvc/views/tag-helpers/th-components
         - name: Integrierte Taghilfsprogramme
           items:
-            - name: Anker
+            - name: Anchor
               uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
             - name: cache
               uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
@@ -396,10 +396,6 @@
           uid: mvc/controllers/areas
         - name: App-Komponenten
           uid: mvc/extensibility/app-parts
-        - name: Benutzerdefinierte Modellbindung
-          uid: mvc/advanced/custom-model-binding
-        - name: Kompatibilitätsversion
-          uid: mvc/compatibility-version
 - name: Web-API-Apps
   items:
     - name: Übersicht
@@ -1000,6 +996,14 @@
       uid: fundamentals/troubleshoot-aspnet-core-localization
 - name: Erweitert
   items:
+    - name: Modellbindung
+      uid: mvc/models/model-binding
+    - name: Benutzerdefinierte Modellbindung
+      uid: mvc/advanced/custom-model-binding
+    - name: Modellvalidierung
+      uid: mvc/models/validation
+    - name: Kompatibilitätsversion
+      uid: mvc/compatibility-version
     - name: Schreiben von Middleware
       uid: fundamentals/middleware/write
     - name: Anforderungs- und Antwortvorgänge
@@ -1076,4 +1080,4 @@
 - name: API-Verweis
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: Mitwirken
-  href: 'https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md'
+  href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'

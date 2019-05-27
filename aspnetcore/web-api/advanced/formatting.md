@@ -4,14 +4,14 @@ author: ardalis
 description: Informationen zum Formatieren von Antwortdaten in Web-APIS in ASP.NET Core
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 10/14/2016
+ms.date: 05/21/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 04f5b3c544cf3fc47c8321c8233535400fcf55f4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bd86015773068b6f75f64a0599d710281f7d4d60
+ms.sourcegitcommit: e67356f5e643a5d43f6d567c5c998ce6002bdeb4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890765"
+ms.lasthandoff: 05/22/2019
+ms.locfileid: "66004957"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -101,30 +101,49 @@ services.AddMvc(options =>
 
 Wenn Ihre Anwendung neben dem Standardformat JSON zusätzliche Formate unterstützen soll, können Sie NuGet-Pakete hinzufügen und MVC so konfigurieren, dass diese unterstützt werden. Es gibt unterschiedliche Formatierungsprogramme für Ein- und für Ausgaben. Eingabeformatierer werden bei der [Modellbindung](xref:mvc/models/model-binding) verwendet, Ausgabeformatierer zur Formatierung von Antworten. Sie können auch [benutzerdefinierte Formatierer](xref:web-api/advanced/custom-formatters) konfigurieren.
 
-### <a name="adding-xml-format-support"></a>Hinzufügen von Unterstützung für das XML-Format
+::: moniker range=">= aspnetcore-3.0"
 
-Installieren Sie zum Hinzufügen von Unterstützung für XML-Formatierungen das NuGet-Paket `Microsoft.AspNetCore.Mvc.Formatters.Xml`.
+### <a name="configure-systemtextjson-based-formatters"></a>Konfigurieren von System.Text.Json-basierten Formatierern
 
-Fügen Sie unter *Startup.cs* „XmlSerializerFormatters“ zur MVC-Konfiguration hinzu:
-
-[!code-csharp[](./formatting/sample/Startup.cs?name=snippet1&highlight=2)]
-
-Sie können auch nur das Ausgabeformatierungsprogramm hinzufügen:
+Funktionen für die `System.Text.Json`-basierten Formatierer können mithilfe von `Microsoft.AspNetCore.Mvc.MvcOptions.SerializerOptions` konfiguriert werden.
 
 ```csharp
 services.AddMvc(options =>
 {
-    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+    options.SerializerOptions.WriterSettings.Indented = true;
 });
 ```
 
-Mit diesen beiden Ansätzen werden die Ergebnisse mithilfe von `System.Xml.Serialization.XmlSerializer` serialisiert. Sie können wahlweise auch den `System.Runtime.Serialization.DataContractSerializer` verwenden, indem Sie das entsprechende Formatierungsprogramm hinzufügen:
+### <a name="add-newtonsoftjson-based-json-format-support"></a>Hinzufügen von Newtonsoft.Json-basierter Unterstützung für das JSON-Format
+
+Vor ASP.NET Core 3.0 wurden von MVC standardmäßig die JSON-Formatierer verwendet, die mithilfe des `Newtonsoft.Json`-Pakets implementiert wurden. In ASP.NET Core 3.0 oder höher basieren die Standardformatierer für JSON auf `System.Text.Json`. Wenn Sie das NuGet-Paket [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) installieren und in `Startup.ConfigureServices` konfigurieren, erhalten Sie die Unterstützung für `Newtonsoft.Json`-basierte Formatierer und Features.
 
 ```csharp
-services.AddMvc(options =>
-{
-    options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
-});
+services.AddMvc()
+    .AddNewtonsoftJson();
+```
+
+Einige Features funktionieren mit `System.Text.Json`-basierten Formatierern möglicherweise nicht gut und erfordern einen Verweis auf die `Newtonsoft.Json`-basierten Formatierer für das Release von ASP.NET Core 3.0. Verwenden Sie weiterhin die `Newtonsoft.Json`-basierten Formatierer, wenn Ihre ASP.NET Core-App für Version 3.0 oder höher
+
+* `Newtonsoft.Json`-Attribute verwendet (z. B. `[JsonProperty]` oder `[JsonIgnore]`), die Serialisierungseinstellungen anpasst oder auf Features beruht, die von `Newtonsoft.Json` bereitstellt werden.
+* `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` konfiguriert. Vor ASP.NET Core 3.0 akzeptiert `JsonResult.SerializerSettings` eine Instanz von `JsonSerializerSettings`, die für `Newtonsoft.Json` spezifisch ist.
+* die [OpenAPI](<xref:tutorials/web-api-help-pages-using-swagger>)-Dokumentation generiert.
+
+::: moniker-end
+
+### <a name="add-xml-format-support"></a>Hinzufügen von Unterstützung für das XML-Format
+
+Installieren Sie das NuGet-Paket [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/), um die Unterstützung für das XML-Format hinzuzufügen.
+
+XML-Formatierer, die mithilfe von `System.Xml.Serialization.XmlSerializer` implementiert wurden, können wie folgt in `Startup.ConfigureServices` konfiguriert werden:
+
+[!code-csharp[](./formatting/sample/Startup.cs?name=snippet1&highlight=2)]
+
+Alternativ können XML-Formatierer, die mithilfe von `System.Runtime.Serialization.DataContractSerializer` implementiert wurden, wie folgt in `Startup.ConfigureServices` konfiguriert werden:
+
+```csharp
+services.AddMvc()
+    .AddXmlDataContractSerializerFormatters();
 ```
 
 Sobald Sie Unterstützung für das XML-Format hinzugefügt haben, geben die Controllermethoden das entsprechende Format wie in diesem Fiddler-Beispiel veranschaulicht basierend auf dem `Accept`-Header der Anforderung zurück:

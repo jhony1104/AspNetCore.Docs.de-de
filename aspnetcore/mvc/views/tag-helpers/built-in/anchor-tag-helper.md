@@ -4,14 +4,14 @@ author: pkellner
 description: Lernen Sie die Attribute für das ASP.NET Core-Anchor-Taghilfsprogramm kennen und erfahren Sie, welche Rolle jedes Attribut bei der Erweiterung des Verhaltens des HTML-Anchor-Tags spielt.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 4/18/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 60fa0c00e40878a8227ca2bc8bdb0bc2bf9f8336
-ms.sourcegitcommit: ea215df889e89db44037a6ac2f01baede0450da9
+ms.openlocfilehash: de45c99194d4825c1e404aa193b0f076ba659748
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53595340"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883425"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
@@ -21,15 +21,15 @@ Das [Anchor-Taghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTag
 
 Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpers/intro>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Der folgende *SpeakerController* wird in den Beispielen in diesem Dokument verwendet:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
-Eine Liste der `asp-`-Attribute folgt.
+## <a name="anchor-tag-helper-attributes"></a>Attribute des Anchor-Taghilfsprogramms
 
-## <a name="asp-controller"></a>asp-controller
+### <a name="asp-controller"></a>asp-controller
 
 Das Attribut [asp-controller](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller*) weist den Controller zu, der zum Generieren der URL verwendet wird. Im folgenden Markup werden alle Lautsprecher aufgeführt:
 
@@ -41,7 +41,7 @@ Der generierte HTML-Code:
 <a href="/Speaker">All Speakers</a>
 ```
 
-Wenn das Attribut `asp-controller` angegeben wird und `asp-action` nicht, entspricht der `asp-action`-Standardwert der Controlleraktion, die der aktuell ausgeführten Ansicht zugeordnet ist. Wenn `asp-action` im obigen Markup ausgelassen wird und das Anchor-Taghilfsprogramm in der Ansicht *Index* von *HomeController* verwendet wird (*/Home*), wird folgender HTML-Code generiert:
+Wenn das Attribut `asp-controller` angegeben wird und `asp-action` nicht, entspricht der `asp-action`-Standardwert der Controlleraktion, die der aktuell ausgeführten Ansicht zugeordnet ist. Wenn `asp-action` im obigen Markup ausgelassen wird und das Anchor-Taghilfsprogramm in der Ansicht *Index* von *HomeController* verwendet wird ( */Home*), wird folgender HTML-Code generiert:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -63,7 +63,7 @@ Wenn kein `asp-controller`-Attribut angegeben ist, wird der Standardcontroller z
 
 Wenn der Wert des `asp-action`-Attribut `Index` lautet, wird keine Aktion an die URL angefügt, was zum Aufruf der `Index`-Standardaktion führt. Die angegebene (oder standardmäßige) Aktion muss im Controller vorhanden sein, auf den in `asp-controller` verwiesen wird.
 
-## <a name="asp-route-value"></a>asp-route-{value}
+### <a name="asp-route-value"></a>asp-route-{value}
 
 Das Attribut [asp-route{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) aktiviert ein Platzhalterroutenpräfix. Ein beliebiger Wert im Platzhalter `{value}` wird als potenzieller Routenparameter interpretiert. Wenn keine Standardroute gefunden wird, wird dieses Routenpräfix als Anforderungsparameter und -wert an das generierte `href`-Attribut angefügt. Andernfalls wird es in der Routenvorlage ersetzt.
 
@@ -117,7 +117,7 @@ Der folgende HTML-Code wird generiert, weil `speakerid` nicht in der übereinsti
 
 Wenn entweder `asp-controller` oder `asp-action` nicht angegeben werden, erfolgt der gleiche Standardverarbeitungsprozess wie beim `asp-route`-Attribut.
 
-## <a name="asp-route"></a>asp-route
+### <a name="asp-route"></a>asp-route
 
 Das Attribut [asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) wird zum Erstellen einer URL verwendet, die direkt auf eine benannte Route verweist. Mit der Verwendung von [Routingattributen](xref:mvc/controllers/routing#attribute-routing) kann eine Route wie in `SpeakerController` gezeigt benannt und in der zugehörigen `Evaluations`-Aktion verwendet werden:
 
@@ -155,7 +155,7 @@ Das `asp-all-route-data`-Wörterbuch wird vereinfacht, um eine Abfragezeichenfol
 
 Wenn ein beliebiger Schlüssel im Wörterbuch mit einem Routenparameter übereinstimmt, werden die Werte entsprechend in der Route eingesetzt. Die nicht übereinstimmenden Werte werden als Anforderungsparameter generiert.
 
-## <a name="asp-fragment"></a>asp-fragment
+### <a name="asp-fragment"></a>asp-fragment
 
 Das Attribut [asp-fragment](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Fragment*) definiert ein URL-Fragment, das an die URL angefügt werden soll. Das Anchor-Taghilfsprogramm fügt das Hashzeichen (#) hinzu. Sehen Sie sich das folgende Markup an:
 
@@ -169,7 +169,7 @@ Der generierte HTML-Code:
 
 Hashtags sind beim Erstellen von clientseitigen Apps nützlich. Sie können beispielsweise zum einfachen Markieren und Suchen in JavaScript verwendet werden.
 
-## <a name="asp-area"></a>asp-area
+### <a name="asp-area"></a>asp-area
 
 Das Attribut [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) legt den Bereichsnamen zum Festlegen der geeigneten Route fest. Die folgenden Beispiele zeigen, wie das `asp-area`-Attribut eine Neuzuordnung von Routen verursacht.
 
@@ -183,11 +183,11 @@ Betrachten Sie die folgende Verzeichnishierarchie:
   * **wwwroot**
   * **Bereiche**
     * **Sessions**
-      * **Seiten**
+      * **Pages**
         * *\_ViewStart.cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **Seiten**
+  * **Pages**
 
 Das Markup zum Verweisen auf den *Sessions*-Bereich der Razor-Seite *Index* lautet:
 
@@ -239,7 +239,7 @@ Der generierte HTML-Code:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
-## <a name="asp-protocol"></a>asp-protocol
+### <a name="asp-protocol"></a>asp-protocol
 
 Das Attribut [asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) gibt ein Protokoll in Ihrer URL an (z.B. `https`). Beispiel:
 
@@ -253,7 +253,7 @@ Der generierte HTML-Code:
 
 Der Hostname im Beispiel ist „localhost“. Das Anchor-Taghilfsprogramm verwendet die öffentliche Domäne der Website, wenn es die URL generiert.
 
-## <a name="asp-host"></a>asp-host
+### <a name="asp-host"></a>asp-host
 
 Mit dem Attribut [asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) wird ein Hostname in Ihrer URL angegeben. Beispiel:
 
@@ -265,7 +265,7 @@ Der generierte HTML-Code:
 <a href="https://microsoft.com/Home/About">About</a>
 ```
 
-## <a name="asp-page"></a>asp-page
+### <a name="asp-page"></a>asp-page
 
 Das Attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) wird mit Razor Pages verwendet. Mit ihm wird der `href`-Attributwerts des Anchor-Tags auf eine bestimmte Seite festgelegt. Wenn Sie dem Seitennamen einen Schrägstrich „/“ voranstellen, wird die URL erstellt.
 
@@ -289,7 +289,7 @@ Der generierte HTML-Code:
 <a href="/Attendee?attendeeid=10">View Attendee</a>
 ```
 
-## <a name="asp-page-handler"></a>asp-page-handler
+### <a name="asp-page-handler"></a>asp-page-handler
 
 Das Attribut [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) wird mit Razor Pages verwendet. Es dient zur Verknüpfung mit bestimmten Seitenhandlern.
 

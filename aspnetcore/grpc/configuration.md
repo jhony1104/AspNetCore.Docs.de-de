@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 04/09/2019
 uid: grpc/configuration
-ms.openlocfilehash: 66dfb9ec136616f10c1b7aaad766e18813b87de4
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 851c9ca1f7d62f6f368df66bb38eb4bbaf64bf32
+ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087347"
+ms.lasthandoff: 05/23/2019
+ms.locfileid: "66041892"
 ---
 # <a name="grpc-for-aspnet-core-configuration"></a>gRPC für ASP.NET Core-Konfiguration
 
@@ -48,36 +48,6 @@ services.AddGrpc().AddServiceOptions<MyService>(options =>
 {
     options.ReceiveMaxMessageSize = 10 * 1024 * 1024; // 10 megabytes
 });
-```
-
-## <a name="configure-kestrel-options"></a>Konfigurieren Sie Kestrel-Optionen
-
-Kestrel-Server verfügt über Optionen für die Konfiguration, die das Verhalten der gRPC für ASP.NET zu beeinflussen.
-
-### <a name="request-body-data-rate-limit"></a>Für die Anforderung Text Datenrate
-
-Standardmäßig legt der Kestrel-Server eine [minimale Datenrate des Anforderungstexts](
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>). Für streaming-Client und Duplex-streaming-Aufrufe diese Rate kann nicht erfüllt werden, und möglicherweise werden Verbindungstimeout. Die minimale-Anforderungstext für die Datenrate muss deaktiviert werden, wenn der Dienst gRPC-streaming-Client und Duplex-streaming-Aufrufe enthält:
-
-```csharp
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-         Host.CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder =>
-    {
-        webBuilder.UseStartup<Startup>();
-        webBuilder.ConfigureKestrel((context, options) =>
-        {
-            options.Limits.MinRequestBodyDataRate = null;
-        });
-    });
-}
 ```
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/4/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 24c87f2ad0446aef51f9d648fd20c181cbeaed2e
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: dce2926e3cb19d6ac8d2af0e9b96c31dee1d92fd
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346467"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087526"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC
 
@@ -88,7 +88,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
-* Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von **.NET Core 2.2*.
+* Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von * *.NET Core 2.2*.
 
 * Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
@@ -216,7 +216,7 @@ Der vorangehende Code:
 Der vorangehende Code:
 
 * Er definiert eine API-Controllerklasse ohne Methoden.
-* Ergänzt die Klasse mit dem Attribut [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter [Anmerkungen mit dem ApiController-Attribut](xref:web-api/index#annotation-with-apicontroller-attribute).
+* Ergänzt die Klasse mit dem Attribut [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
 * Verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
 * Fügt der Datenbank, falls sie leer ist, ein Element mit dem Namen `Item1` hinzu. Dieser Code befindet sich im Konstruktor. Er wird bei jeder neuen HTTP-Anforderung ausgeführt. Wenn Sie alle Elemente löschen, erstellt der Konstruktor beim nächsten Aufruf einer API-Methode erneut `Item1`. So sieht es möglicherweise so aus, als sei die Löschung fehlgeschlagen, obwohl sie erfolgreich war.
 
@@ -443,7 +443,7 @@ Eine Aufgabe wird folgendermaßen gelöscht: im AJAX-Aufruf wird `type` auf `DEL
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-[Sie können den Beispielcode für dieses Tutorial anzeigen oder herunterladen.](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) Informationen [zum Herunterladen](xref:index#how-to-download-a-sample).
+[Sie können den Beispielcode für dieses Tutorial anzeigen oder herunterladen.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) Informationen [zum Herunterladen](xref:index#how-to-download-a-sample).
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
