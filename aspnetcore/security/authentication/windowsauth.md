@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 04/03/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: bd4ffa79c4d1e0070c820fa9c06b0a84c3aaae74
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 46c9e054b6e9228a709f93c6b73772708f6c6eb0
+ms.sourcegitcommit: b8ed594ab9f47fa32510574f3e1b210cff000967
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64896987"
+ms.lasthandoff: 05/28/2019
+ms.locfileid: "66251230"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>Konfigurieren der Windows-Authentifizierung in ASP.NET Core
 
@@ -82,7 +82,7 @@ Wenn Sie nicht bereits geschehen, aktivieren Sie IIS zum Hosten von ASP.NET Core
 
 Den Rollendienst "IIS" für Windows-Authentifizierung zu aktivieren. Weitere Informationen finden Sie unter [Aktivieren der Windows-Authentifizierung in IIS-Rollendienste (Siehe Schritt2)](xref:host-and-deploy/iis/index#iis-configuration).
 
-Middleware für die Integration von IIS ist standardmäßig konfiguriert, um Anforderungen zu authentifizieren. Weitere Informationen finden Sie unter [Hosten von ASP.NET Core unter Windows mit IIS: IIS-Optionen (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options).
+[Middleware für die Integration von IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) wird standardmäßig zum Authentifizieren von Anforderungen automatisch konfiguriert. Weitere Informationen finden Sie unter [Hosten von ASP.NET Core unter Windows mit IIS: IIS-Optionen (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options).
 
 ASP.NET Core-Modul ist zum Weiterleiten von der Windows-Authentifizierung-Token für die app wird standardmäßig konfiguriert. Weitere Informationen finden Sie unter [Konfigurationsreferenz für das ASP.NET Core-Modul: Attribute des-Elements AspNetCore](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element).
 
