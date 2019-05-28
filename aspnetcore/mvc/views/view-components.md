@@ -3,14 +3,15 @@ title: Ansichtskomponenten in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie Ansichtskomponenten in ASP.NET Core verwendet werden und wie sie Apps hinzugefügt werden.
 ms.author: riande
-ms.date: 1/30/2019
+ms.custom: mvc
+ms.date: 5/14/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: 2bcf6411933b884c2f96d926827079dfbc25ca74
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 17fd7aa977868d522df9f27e0c23d07b016bfb7c
+ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891275"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65621073"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -40,6 +41,8 @@ Ansichtskomponenten wurden für wiederverwendbare Renderinglogik entwickelt, die
 * Ein Anmeldebereich, der auf jeder Seite gerendert wird und der die Links zum Abmelden bzw. Anmelden anzeigt, je nachdem, ob der Benutzer an- oder abgemeldet ist
 
 Eine Ansichtskomponenten besteht aus zwei Teilen: der Klasse (normalerweise von [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent) abgeleitet) und dem von dieser Klasse zurückgegebenen Ergebnis (normalerweise eine Ansicht). Eine Ansichtskomponente kann, ähnlich wie Controller, ein POCO sein. Die meisten Entwickler sollten jedoch von den Methoden und Eigenschaften, die von `ViewComponent` abgeleitet werden, Gebrauch machen.
+
+Bei der Überlegung, ob Ansichtskomponenten den Spezifikationen einer App entsprechen, sollten Sie stattdessen Razor Components in Betracht ziehen. Razor Components kombinieren zudem Markup mit C#-Code, um wiederverwendbare UI-Einheiten zu erzeugen. Razor Components wurden für Entwicklerproduktivität bei der Bereitstellung von clientseitiger Benutzeroberflächenlogik und -gestaltung konzipiert. Weitere Informationen finden Sie unter <xref:blazor/components>.
 
 ## <a name="creating-a-view-component"></a>Erstellen einer Ansichtskomponente
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieses Tutorial veranschaulicht, wie Sie eine ASP.NET Core 2.x-App mithilfe von OAuth 2.0 und externen Authentifizierungsanbietern entwickeln.
 ms.author: riande
 ms.custom: mvc
-ms.date: 4/19/2019
+ms.date: 05/10/2019
 uid: security/authentication/social/index
-ms.openlocfilehash: e2d68ac93bdcfa2fc015e8447ea38626787cdb02
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: 8dac8a8a2276388414b6bb1211e970617b001637
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65451041"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874806"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 
@@ -33,10 +33,12 @@ Beispiel dazu, wie Anmeldungen bei sozialen Medien für mehr Datenverkehr und ge
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
-* Erstellen Sie eine neue ASP.NET Core-Webanwendung.
-* Wählen Sie in der Dropdownliste **ASP.NET Core 2.2** und anschließend **Webanwendung** aus.
-* Klicken Sie auf **Authentifizierung ändern**, und legen Sie die Authentifizierung auf **Einzelne Benutzerkonten** fest.
+* Erstellen Sie ein neues Projekt.
+* Wählen Sie **ASP.NET Core-Webanwendung** und **Weiter** aus.
+* Geben Sie einen **Projektnamen** ein, und bestätigen oder ändern Sie den **Speicherort**. Wählen Sie **Erstellen** aus.
+* Wählen Sie in der Dropdownliste **ASP.NET Core 2.2** aus. Wählen Sie in der Vorlagenliste **Webanwendung** aus.
+* Wählen Sie unter **Authentifizierung** die Option **Ändern** aus, und legen Sie die Authentifizierung auf **Einzelne Benutzerkonten** fest. Klicken Sie auf **OK**.
+* Wählen Sie im Fenster **Neue ASP.NET Core-Webanwendung erstellen** die Option **Erstellen** aus.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -56,27 +58,14 @@ Beispiel dazu, wie Anmeldungen bei sozialen Medien für mehr Datenverkehr und ge
   * `-au Individual` erstellt den Code für die einzelne Authentifizierung.
   * Mit dem Befehl `code` wird der Ordner *WebApp1* in einer neuen Instanz von Visual Studio Code geöffnet.
 
-  Es wird ein Dialogfeld mit folgender Meldung angezeigt: **Die erforderlichen Objekte zum Erstellen und Debuggen sind in „WebApp1“ nicht vorhanden. Sollen sie hinzugefügt werden?**
-
-* Wählen Sie **Ja** aus.
+* Es wird ein Dialogfeld mit folgender Meldung angezeigt: **Die erforderlichen Objekte zum Erstellen und Debuggen sind in „WebApp1“ nicht vorhanden. Sollen sie hinzugefügt werden?** Wählen Sie **Ja**.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-Führen Sie über ein Terminal den folgenden Befehl aus:
-
-<!-- TODO: update these instruction once mac support 2.2 projects -->
-
-```console
-dotnet new webapp -o WebApp1 -au Individual
-```
-
-Diese Befehle verwenden die [.NET Core-CLI](/dotnet/core/tools/dotnet), um ein Razor Pages-Projekt zu erstellen.
-
-## <a name="open-the-project"></a>Öffnen des Projekts
-
-Klicken Sie in Visual Studio auf **Datei > Öffnen**, und wählen Sie dann die Datei *WebApp1.csproj* aus.
-
-<!-- End of VS tabs -->
+* Wählen Sie **Datei** > **Neue Projektmappe** aus.
+* Wählen Sie in der Randleiste **.NET Core** > **App** aus. Wählen Sie die Vorlage für **Webanwendungen** aus. Klicken Sie auf **Weiter**.
+* Wählen Sie in der Dropdownliste **Zielframework** die Option **.NET Core 2.2** aus. Klicken Sie auf **Weiter**.
+* Geben Sie einen **Projektnamen** an. Bestätigen oder ändern Sie den **Speicherort**. Wählen Sie **Erstellen** aus.
 
 ---
 
@@ -115,7 +104,7 @@ Wenn Sie sich bei einem externen Anmeldeanbieter registrieren, wird kein Kennwor
 
 So erstellen Sie ein Kennwort und melden sich mithilfe Ihrer E-Mail-Adresse an, die Sie während des Anmeldevorgangs bei externen Anbietern festgelegt haben:
 
-* Klicken Sie rechts oben auf den Link **Hallo &lt;E-Mail-Alias&gt;**, um zur Ansicht **Verwalten** zu gelangen.
+* Klicken Sie rechts oben auf den Link **Hallo &lt;E-Mail-Alias&gt;** , um zur Ansicht **Verwalten** zu gelangen.
 
 ![Ansicht „Verwalten“ der Webanwendung](index/_static/pass1a.png)
 
