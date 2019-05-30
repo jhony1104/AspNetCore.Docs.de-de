@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/08/2019
 uid: grpc/aspnetcore
-ms.openlocfilehash: 1f019fac23982a95fa37d43099522f4b3e9d107a
-ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
+ms.openlocfilehash: 190004de8b70a463f9f58a25164d5a86ecc266d6
+ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/23/2019
-ms.locfileid: "66039284"
+ms.lasthandoff: 05/29/2019
+ms.locfileid: "66376351"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>gRPC-Dienste mit ASP.NET Core
 
@@ -21,7 +21,7 @@ Diesem Dokument wird erläutert, wie Sie die ersten Schritte mit gRPC-Services m
 
 ## <a name="get-started-with-grpc-service-in-aspnet-core"></a>Erste Schritte mit dem gRPC-Dienst in ASP.NET Core
 
-[!INCLUDE[View or download sample code](~/includes/grpc/download.md)]
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -45,11 +45,11 @@ gRPC erfordert die folgenden Pakete:
 
 gRPC aktiviert ist, mit der `AddGrpc` Methode:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Startup.cs?name=snippet&highlight=5)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Startup.cs?name=snippet&highlight=5)]
 
 Jeder gRPC-Dienst wird hinzugefügt, die routing-Pipeline über die `MapGrpcService` Methode:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Startup.cs?name=snippet&highlight=21)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Startup.cs?name=snippet&highlight=21)]
 
 Freigeben von ASP.NET Core-Middleware und Funktionen der routing-Pipeline, die aus diesem Grund kann eine app konfiguriert werden, um zusätzliche Anforderungshandler zu verarbeiten. Die zusätzliche Anforderung-Handler, z. B. MVC-Controller, arbeiten parallel mit den konfigurierten gRPC-Diensten.
 
@@ -72,11 +72,11 @@ Standardmäßig kann die dienstimplementierung gRPC andere DI-Dienste mit jedem 
 
 Die gRPC-API ermöglicht den Zugriff auf einige Daten für das HTTP/2-Nachricht, z. B. die Methode, Host, Header und Nachspänne. Der Zugriff erfolgt über die `ServerCallContext` Argument an jede gRPC-Methode übergeben:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Services/GreeterService.cs?highlight=3-4&name=snippet)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Services/GreeterService.cs?highlight=3-4&name=snippet)]
 
 `ServerCallContext` bietet keine vollen Zugriff auf `HttpContext` in allen ASP.NET-APIs. Die `GetHttpContext` Erweiterungsmethode bietet umfassenden Zugriff auf die `HttpContext` , die die zugrunde liegende HTTP/2-Nachricht in ASP.NET-APIs darstellt:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Services/GreeterService.cs?name=snippet1)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Services/GreeterService.cs?name=snippet1)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

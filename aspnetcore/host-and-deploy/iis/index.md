@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/24/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: f0efe6c0edc71c5e2c45aeaa175c8a5643ef0fde
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: 12aa1b86e0b9078566f1c64cb4b83c4dddef09f7
+ms.sourcegitcommit: b8ed594ab9f47fa32510574f3e1b210cff000967
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223143"
+ms.lasthandoff: 05/28/2019
+ms.locfileid: "66251358"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -57,7 +57,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 **In-Process-Hostingmodell**
 
-`CreateDefaultBuilder` ruft die `UseIIS`-Methode auf, um die [CoreCLR](/dotnet/standard/glossary#coreclr) zu starten und die App im IIS-Workerprozess zu hosten (*w3wp.exe* oder *iisexpress.exe*). Leistungstests weisen darauf hin, dass das In-Process-Hosting einer .NET Core-App einen weitaus höheren Anforderungsdurchsatz im Vergleich zum Out-of-Process-Hosting der App mit Weiterleitung der Anforderungen über einen Proxy an [Kestrel](xref:fundamentals/servers/kestrel) Server bietet.
+`CreateDefaultBuilder` fügt eine <xref:Microsoft.AspNetCore.Hosting.Server.IServer>-Instanz hinzu, indem die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*>-Methode aufgerufen wird, um die [CoreCLR](/dotnet/standard/glossary#coreclr) zu starten und die App im IIS-Workerprozess zu hosten (*w3wp.exe* oder *iisexpress.exe*). Leistungstests weisen darauf hin, dass das In-Process-Hosting einer .NET Core-App einen weitaus höheren Anforderungsdurchsatz im Vergleich zum Out-of-Process-Hosting der App mit Weiterleitung der Anforderungen über einen Proxy an [Kestrel](xref:fundamentals/servers/kestrel) Server bietet.
 
 Das In-Process-Hostingmodell wird nicht für ASP.NET Core-Apps unterstützt, die auf .NET Framework abzielen.
 
@@ -65,7 +65,7 @@ Das In-Process-Hostingmodell wird nicht für ASP.NET Core-Apps unterstützt, die
 
 Für das Out-of-Process-Hosting mit IIS konfiguriert `CreateDefaultBuilder` [Kestrel](xref:fundamentals/servers/kestrel) Server als Webserver und aktiviert die IIS-Integration durch Konfigurieren des Basispfads und -ports für das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module).
 
-Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` ruft die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Methode auf. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`127.0.0.1`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `127.0.0.1:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
+Das ASP.NET Core-Modul generiert einen dynamischen Port, der dem Back-End-Prozess zugewiesen wird. `CreateDefaultBuilder` fügt die Middleware für die Integration von IIS sowie die [Middleware für weitergeleitete Header](xref:host-and-deploy/proxy-load-balancer) hinzu, indem die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Methode aufgerufen wird. `UseIISIntegration` konfiguriert Kestrel so, dass an dem dynamischen Port an der Localhost-IP-Adresse (`127.0.0.1`) gelauscht wird. Wenn der dynamische Port 1234 ist, lauscht Kestrel an `127.0.0.1:1234`. Diese Konfiguration ersetzt andere Konfigurationen von:
 
 * `UseUrls`
 * [der Listen-API von Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -149,13 +149,13 @@ services.Configure<IISOptions>(options =>
 
 | Option                         | Standard | Einstellung |
 | ------------------------------ | :-----: | ------- |
-| `AutomaticAuthentication`      | `true`  | Bei Festlegung auf `true` legt die Middleware für die IIS-Integration den per [Windows-Authentifizierung](xref:security/authentication/windowsauth) authentifizierten `HttpContext.User` fest. Bei Festlegung auf `false` stellt die Middleware nur eine Identität für `HttpContext.User` bereit und antwortet auf explizite Anforderungen durch `AuthenticationScheme`. Die Windows-Authentifizierung muss in IIS aktiviert sein, damit `AutomaticAuthentication` funktioniert. Weitere Informationen finden Sie im Thema [Windows-Authentifizierung](xref:security/authentication/windowsauth). |
+| `AutomaticAuthentication`      | `true`  | Bei Festlegung auf `true` legt die [Middleware für die IIS-Integration](#enable-the-iisintegration-components) den per [Windows-Authentifizierung](xref:security/authentication/windowsauth) authentifizierten `HttpContext.User` fest. Bei Festlegung auf `false` stellt die Middleware nur eine Identität für `HttpContext.User` bereit und antwortet auf explizite Anforderungen durch `AuthenticationScheme`. Die Windows-Authentifizierung muss in IIS aktiviert sein, damit `AutomaticAuthentication` funktioniert. Weitere Informationen finden Sie im Thema [Windows-Authentifizierung](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Legt den Anzeigename fest, der Benutzern auf Anmeldungsseiten angezeigt wird |
 | `ForwardClientCertificate`     | `true`  | Wenn diese Option `true` ist und der Anforderungsheader `MS-ASPNETCORE-CLIENTCERT` vorhanden ist, wird das `HttpContext.Connection.ClientCertificate` aufgefüllt. |
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>Proxyserver und Lastenausgleichsszenarien
 
-Die Middleware für die Integration von IIS, die ForwardedHeadersMiddleware konfiguriert, und das ASP.NET Core-Modul sind so konfiguriert, dass sie das Schema (HTTP/HTTPS) und die Remote-IP-Adresse an die Stelle weiterleiten, von der die Anforderung stammte. Möglicherweise ist zusätzliche Konfiguration für Apps erforderlich, die hinter weiteren Proxyservern und Lastenausgleichsmodulen (Load Balancer) gehostet werden. Weitere Informationen hierzu feinden Sie unter [Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich](xref:host-and-deploy/proxy-load-balancer).
+Die [Middleware für die Integration von IIS](#enable-the-iisintegration-components), die die Middleware für weitergeleitete Header konfiguriert, und das ASP.NET Core-Modul sind so konfiguriert, dass sie das Schema (HTTP/HTTPS) und die Remote-IP-Adresse an die Stelle weiterleiten, von der die Anforderung stammte. Möglicherweise ist zusätzliche Konfiguration für Apps erforderlich, die hinter weiteren Proxyservern und Lastenausgleichsmodulen (Load Balancer) gehostet werden. Weitere Informationen hierzu feinden Sie unter [Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich](xref:host-and-deploy/proxy-load-balancer).
 
 ### <a name="webconfig-file"></a>Datei „web.config“
 
@@ -197,9 +197,9 @@ Wenn Sie *web.config* beim Veröffentlichen transformieren müssen (z.B. Umgebun
 
 **Windows Server-Betriebssysteme**
 
-Aktivieren Sie die Serverrolle **Webserver (IIS)** , und richten Sie Rollendienste ein.
+Aktivieren Sie die Serverrolle **Webserver (IIS)**, und richten Sie Rollendienste ein.
 
-1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)** .
+1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)**.
 
    ![Die Rolle „Webserver (IIS)“ wird im Schritt „Serverrollen auswählen“ ausgewählt.](index/_static/server-roles-ws2016.png)
 
@@ -524,7 +524,7 @@ Wenn der IIS-Workerprozess erhöhte Rechte für den Zugriff auf Ihre Anwendung e
 
 1. Wählen Sie die Schaltfläche **Speicherorte** aus, und stellen Sie sicher, dass das System ausgewählt ist.
 
-1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>** , wenn Sie die Objektnamen überprüfen.
+1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>**, wenn Sie die Objektnamen überprüfen.
 
    ![Dialogfeld „Benutzer oder Gruppen auswählen“ für den App-Ordner: Der Name des App-Pools, „DefaultAppPool“, wird an „IIS AppPool\"“ im Bereich der Objektnamen angehängt, bevor „Namen überprüfen“ ausgewählt wird.](index/_static/select-users-or-groups-1.png)
 
