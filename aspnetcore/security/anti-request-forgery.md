@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/11/2018
 uid: security/anti-request-forgery
-ms.openlocfilehash: 4498bd88e7188ea6c0063aeec054bc20e13ed5f1
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: a32e0e2dbd7fab95562a562cb88767d4c1e8049d
+ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086439"
+ms.lasthandoff: 06/02/2019
+ms.locfileid: "66458488"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Zu verhindern, dass Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core
 
 Durch [Steve Smith](https://ardalis.com/), [Fiyaz Hasan](https://twitter.com/FiyazBinHasan), und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Websiteübergreifende anforderungsfälschung (auch bekannt als XSRF oder CSRF-Angriffen ausgesprochen *finden Sie unter ausspricht*) ist ein Angriff gegen gehostete Web-apps, die eine böswilligen Web-app kann bei dem die Interaktion zwischen einem Clientbrowser und einer Web-app, die vertraut, die beeinflussen Browser. Diese Angriffe sind möglich, da Webbrowser einige Arten von Authentifizierungstoken automatisch mit jeder Anforderung an eine Website gesendet werden. Diese Form der Exploit ist auch bekannt als eine *One-Click-Angriffs* oder *Sitzung Vorderkante* , da der Angriff nutzt die der Benutzer zuvor Sitzung authentifiziert.
+Websiteübergreifende anforderungsfälschung (auch bekannt als XSRF oder CSRF) handelt es sich um einen Angriff gegen gehostete Web-apps, die bei dem eine bösartige Web-app die Interaktion zwischen einem Clientbrowser und einer Web-app, die diesen Browser vertraut beeinflussen können. Diese Angriffe sind möglich, da Webbrowser einige Arten von Authentifizierungstoken automatisch mit jeder Anforderung an eine Website gesendet werden. Diese Form der Exploit ist auch bekannt als eine *One-Click-Angriffs* oder *Sitzung Vorderkante* , da der Angriff nutzt die der Benutzer zuvor Sitzung authentifiziert.
 
 Ein Beispiel eines CSRF-Angriffs:
 
