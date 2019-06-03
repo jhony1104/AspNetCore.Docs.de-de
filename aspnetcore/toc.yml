@@ -91,7 +91,7 @@
           uid: tutorials/signalr-typescript-webpack
     - name: Apps für Remoteprozeduraufrufe
       items:
-        - name: Erste Schritte mit dem gRPC-Dienst in ASP.NET Core
+        - name: Erste Schritte mit dem gRPC-Dienst
           uid: tutorials/grpc/grpc-start
     - name: Datenzugriff
       items:
