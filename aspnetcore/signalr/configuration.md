@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie ASP.NET Core SignalR-apps konfigurieren.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 06/03/2019
 uid: signalr/configuration
-ms.openlocfilehash: 703357fd52805e01515e5bac3b1a364ce7fe00f0
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 6c7bd602e621917c491bfb1e26ff0fcfc3a565b0
+ms.sourcegitcommit: a04eb20e81243930ec829a9db5dd5de49f669450
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087653"
+ms.lasthandoff: 06/03/2019
+ms.locfileid: "66470366"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR-Konfiguration
 
@@ -61,6 +61,8 @@ MessagePack Serialisierung kann konfiguriert werden, indem ein Delegat, der die 
 
 Die folgende Tabelle beschreibt die Optionen zum Konfigurieren von SignalR-Hubs:
 
+::: moniker range=">= aspnetcore-3.0"
+
 | Option | Standardwert | Beschreibung |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30 Sekunden | Der Server berücksichtigt den Client getrennt wird, wenn sie eine Nachricht (einschließlich Keep-alive-) in einem bestimmten Intervall empfangen hat. Es kann länger als diese Timeoutintervall für den Client tatsächlich gekennzeichnet werden nicht verbunden ist, aufgrund der Implementierung dauern. Der empfohlene Wert ist doppelte die `KeepAliveInterval` Wert.|
@@ -68,6 +70,21 @@ Die folgende Tabelle beschreibt die Optionen zum Konfigurieren von SignalR-Hubs:
 | `KeepAliveInterval` | 15 Sekunden | Wenn der Server eine Nachricht nicht innerhalb dieses Intervalls gesendet noch nicht, wird eine Ping-Nachricht automatisch gesendet, die Verbindung geöffnet bleiben. Wenn Sie `KeepAliveInterval`, Ändern der `ServerTimeout` / `serverTimeoutInMilliseconds` auf dem Client festlegen. Die empfohlene `ServerTimeout` / `serverTimeoutInMilliseconds` Wert double der `KeepAliveInterval` Wert.  |
 | `SupportedProtocols` | Alle installierten Protokolle | Von diesen Hub unterstützten Protokolle. Standardmäßig alle Protokolle, die auf dem Server registriert sind zulässig, aber Protokolle können aus dieser Liste Deaktivieren bestimmter Protokolle für individuelle Hubs entfernt werden. |
 | `EnableDetailedErrors` | `false` | Wenn `true`, detaillierte Ausnahme Nachrichten werden an Clients zurückgegeben, wenn in einer hubmethode eine Ausnahme ausgelöst wird. Der Standardwert ist `false`, wie diese ausnahmemeldungen können vertraulichen Informationen enthalten. |
+| `StreamBufferCapacity` | `10` | Die maximale Anzahl von Elementen, die für den Client gepuffert werden können hochladen Streams. Wenn dieser Grenzwert erreicht wird, wird die Verarbeitung der Aufrufe blockiert, bis der Server Stream Elemente verarbeitet.|
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+| Option | Standardwert | Beschreibung |
+| ------ | ------------- | ----------- |
+| `ClientTimeoutInterval` | 30 Sekunden | Der Server berücksichtigt den Client getrennt wird, wenn sie eine Nachricht (einschließlich Keep-alive-) in einem bestimmten Intervall empfangen hat. Es kann länger als diese Timeoutintervall für den Client tatsächlich gekennzeichnet werden nicht verbunden ist, aufgrund der Implementierung dauern. Der empfohlene Wert ist doppelte die `KeepAliveInterval` Wert.|
+| `HandshakeTimeout` | 15 Sekunden | Wenn der Client innerhalb dieses Zeitraums eine anfängliche Handshake-Nachricht senden, nicht, wird die Verbindung geschlossen. Dies ist eine erweiterte Einstellung, die nur geändert werden soll, wenn der Handshake-Timeout-Fehlern aufgrund von schweren Netzwerklatenz auftreten. Weitere Einzelheiten für den handshakeprozess finden Sie in der [SignalR-Hub-Protokollspezifikation](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md). |
+| `KeepAliveInterval` | 15 Sekunden | Wenn der Server eine Nachricht nicht innerhalb dieses Intervalls gesendet noch nicht, wird eine Ping-Nachricht automatisch gesendet, die Verbindung geöffnet bleiben. Wenn Sie `KeepAliveInterval`, Ändern der `ServerTimeout` / `serverTimeoutInMilliseconds` auf dem Client festlegen. Die empfohlene `ServerTimeout` / `serverTimeoutInMilliseconds` Wert double der `KeepAliveInterval` Wert.  |
+| `SupportedProtocols` | Alle installierten Protokolle | Von diesen Hub unterstützten Protokolle. Standardmäßig alle Protokolle, die auf dem Server registriert sind zulässig, aber Protokolle können aus dieser Liste Deaktivieren bestimmter Protokolle für individuelle Hubs entfernt werden. |
+| `EnableDetailedErrors` | `false` | Wenn `true`, detaillierte Ausnahme Nachrichten werden an Clients zurückgegeben, wenn in einer hubmethode eine Ausnahme ausgelöst wird. Der Standardwert ist `false`, wie diese ausnahmemeldungen können vertraulichen Informationen enthalten. |
+
+::: moniker-end
 
 Optionen für alle Hubs konfiguriert werden können, durch die Bereitstellung einer Optionen-Delegat, der die `AddSignalR` Aufrufen in `Startup.ConfigureServices`.
 
