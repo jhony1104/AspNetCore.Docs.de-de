@@ -3,14 +3,14 @@ title: 'Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core'
 author: rick-anderson
 description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Core verwenden können. Erfahren Sie, wie Sie ein Modell erstellen, Code für Razor-Seiten generieren, Entity Framework Core und SQL Server für den Datenzugriff verwenden, Suchfunktionen hinzufügen, Eingabeüberprüfung hinzufügen und Migrationen verwenden, um das Modell zu aktualisieren.
 ms.author: riande
-ms.date: 05/09/2019
+ms.date: 05/30/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 9307291756baf1bef714d6dae2f8d25d3aa6f922
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: e9f11f68aa138ab74a0ffbbd0e32067bc984606d
+ms.sourcegitcommit: 9ae1fd11f39b0a72b2ae42f0b450345e6e306bc0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65517112"
+ms.lasthandoff: 05/30/2019
+ms.locfileid: "66415661"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
@@ -71,9 +71,9 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-W
   * Der Befehl `dotnet new` erstellt ein neues Razor Pages-Projekt im Ordner *RazorPagesMovie*.
   * Der Befehl `code` öffnet den Ordner *RazorPagesMovie* in der aktuellen Instanz von Visual Studio Code.
 
-  Es wird ein Dialogfeld mit folgender Meldung angezeigt: **Die erforderlichen Objekte zum Erstellen und Debuggen sind in "RazorPagesMovie" nicht vorhanden. Sollen sie hinzugefügt werden?**
+* Wenn das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'RazorPagesMovie'. (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „RazorPagesMovie“ nicht vorhanden. Sollen sie hinzugefügt werden?** Wählen Sie **Ja**.
 
-* Wählen Sie **Ja** aus.
+  Ein *VSCODE*-Verzeichnis, das die Dateien *launch.json* und *tasks.json* enthält, wird dem Stammverzeichnis des Projekts hinzugefügt.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 

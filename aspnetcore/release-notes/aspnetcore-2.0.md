@@ -3,14 +3,15 @@ title: Neuigkeiten in ASP.NET Core 2.0
 author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 2.0.
 ms.author: riande
-ms.date: 07/10/2017
+ms.custom: mvc
+ms.date: 05/28/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 07e490fd844f0f9044afce37651ef680ed0c894d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5cf7b9aa7ccf86f1a89e6145cfc185c5ef803e66
+ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883095"
+ms.lasthandoff: 05/29/2019
+ms.locfileid: "66376411"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
 
@@ -75,7 +76,7 @@ Weitere Informationen zu Änderungen bei der Authentifizierung in 2.0 finden Sie
 
 ## <a name="spa-templates"></a>SPA-Vorlagen
 
-Es sind Projektvorlagen der Einzelseitenanwendung (Single Page Application, SPA) für Angular, Aurelia, Knockout.js, React.js und React.js mit Redux verfügbar. Die Angular-Vorlage wurde auf Angular 4 aktualisiert. Die Vorlagen für Angular und React sind standardmäßig verfügbar. Weitere Informationen zum Abrufen der anderen Vorlagen finden Sie unter [Create a new SPA project (Erstellen eines neuen SPA-Projekts)](xref:client-side/spa-services#creating-a-new-project). Informationen zum Erstellen einer SPA in ASP.NET Core finden Sie unter [Use JavaScriptServices for Creating Single Page Applications (Verwendung von JavaScriptServices zum Erstellen von einseitigen Anwendungen)](xref:client-side/spa-services).
+Es sind Projektvorlagen der Einzelseitenanwendung (Single Page Application, SPA) für Angular, Aurelia, Knockout.js, React.js und React.js mit Redux verfügbar. Die Angular-Vorlage wurde auf Angular 4 aktualisiert. Die Vorlagen für Angular und React sind standardmäßig verfügbar. Weitere Informationen zum Abrufen der anderen Vorlagen finden Sie unter [Create a new SPA project (Erstellen eines neuen SPA-Projekts)](xref:client-side/spa-services#create-a-new-project). Unter <xref:client-side/spa-services> finden Sie Informationen zum Erstellen einer Single-Page-Webanwendung in ASP.NET Core.
 
 ## <a name="kestrel-improvements"></a>Kestrel-Verbesserungen
 

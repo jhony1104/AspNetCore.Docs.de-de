@@ -5,14 +5,14 @@ description: Erfahren Sie, wie die Kompilierung von Razor-Dateien in einer ASP.N
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/02/2019
+ms.date: 05/30/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: df25c9ad03ff52c43aac1a761462772547b3b954
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: b78831dd95a721e35d4bf5b44cdd8823472f6aa2
+ms.sourcegitcommit: 06c4f2910dd54ded25e1b8750e09c66578748bc9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610146"
+ms.lasthandoff: 05/30/2019
+ms.locfileid: "66395891"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -45,7 +45,7 @@ Razor-Dateien werden mit dem [Razor SDK](xref:razor-pages/sdk) zur Erstellung un
 ## <a name="razor-compilation"></a>Razor-Kompilierung
 
 ::: moniker range=">= aspnetcore-3.0"
-Die Kompilierung zur Erstellung und Veröffentlichung von Razor-Dateien wird standardmäßig vom Razor SDK aktiviert. Wenn die Laufzeitkompilierung aktiviert ist, komplementiert diese die Kompilierung der Buildzeit, wodurch Razor-Dateien aktualisiert werden können, wenn sie bearbeitet werden.
+Die Kompilierung zur Erstellung und Veröffentlichung von Razor-Dateien wird standardmäßig vom Razor SDK aktiviert. Wenn die Laufzeitkompilierung aktiviert ist, ergänzt diese die Kompilierung zur Buildzeit, wodurch Razor-Dateien aktualisiert werden können, wenn sie bearbeitet werden.
 
 ::: moniker-end
 
