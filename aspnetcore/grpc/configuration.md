@@ -5,14 +5,14 @@ description: Erfahren Sie, wie gRPC für ASP.NET Core-apps zu konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 04/09/2019
+ms.date: 5/30/2019
 uid: grpc/configuration
-ms.openlocfilehash: 851c9ca1f7d62f6f368df66bb38eb4bbaf64bf32
-ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
+ms.openlocfilehash: 1f8250dc9aa8b82da384ee28287011baa19dc11f
+ms.sourcegitcommit: a1364109d11d414121a6337b611bee61d6e489e9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/23/2019
-ms.locfileid: "66041892"
+ms.lasthandoff: 06/04/2019
+ms.locfileid: "66491232"
 ---
 # <a name="grpc-for-aspnet-core-configuration"></a>gRPC für ASP.NET Core-Konfiguration
 
@@ -24,31 +24,24 @@ Die folgende Tabelle beschreibt die Optionen zum Konfigurieren der gRPC-Dienste:
 | ------ | ------------- | ----------- |
 | `SendMaxMessageSize` | `null` | Die maximale Nachrichtengröße in Bytes, die vom Server gesendet werden können. Es wird versucht, eine Nachricht zu senden, die überschreitet die konfigurierte maximale Nachricht Größe führt zu einer Ausnahme. |
 | `ReceiveMaxMessageSize` | 4 MB | Die maximale Nachrichtengröße in Bytes, die vom Server empfangen werden können. Wenn der Server eine Nachricht, die diesen Grenzwert überschreitet empfängt, wird eine Ausnahme ausgelöst. Durch Erhöhen dieses Wertes können den Server, größere Nachrichten zu empfangen, aber arbeitsspeichernutzung negativ beeinträchtigt werden kann. |
-| `EnableDetailedErrors` | `false` | Wenn `true`, detaillierte ausnahmemeldungen werden an Clients zurückgegeben, wenn eine Ausnahme in einer Dienstmethode ausgelöst wird. Die Standardeinstellung ist `false`. Wenn dies auf `true` kann Offenlegung von vertraulichen Informationen. |
+| `EnableDetailedErrors` | `false` | Wenn `true`, detaillierte ausnahmemeldungen werden an Clients zurückgegeben, wenn eine Ausnahme in einer Dienstmethode ausgelöst wird. Die Standardeinstellung ist `false`. Festlegen von `EnableDetailedErrors` zu `true` kann Offenlegung von vertraulichen Informationen. |
 | `CompressionProviders` | gzip | Eine Auflistung von Komprimierung-Anbietern, die zum Komprimieren und Dekomprimieren von Nachrichten verwendet werden soll. Benutzerdefinierte Komprimierung-Anbieter können erstellt und der Auflistung hinzugefügt werden. Standardmäßig konfiguriert der Anbieter unterstützt **Gzip** Komprimierung. |
-| `ResponseCompressionAlgorithm` | `null` | Der Komprimierungsalgorithmus verwendet, um vom Server gesendeten Nachrichten zu komprimieren. Der Algorithmus muss einen Anbieter Komprimierung in übereinstimmen `CompressionProviders`. Für die Algorthm zum Komprimieren einer Antwort muss der Client angeben, senden Sie sie der Algorithmus unterstützt die **Grpc-accept-encoding** Header. |
+| `ResponseCompressionAlgorithm` | `null` | Der Komprimierungsalgorithmus verwendet, um vom Server gesendeten Nachrichten zu komprimieren. Der Algorithmus muss einen Anbieter Komprimierung in übereinstimmen `CompressionProviders`. Für den Algorithmus, um eine Antwort zu komprimieren, muss der Client angeben, senden Sie sie der Algorithmus unterstützt die **Grpc-accept-encoding** Header. |
 | `ResponseCompressionLevel` | `null` | Die Compress-Ebene verwendet, um vom Server gesendeten Nachrichten zu komprimieren. |
 
-Optionen für alle Dienste konfiguriert werden können, durch die Bereitstellung einer Optionen-Delegat, der die `AddGrpc` Aufrufen in `Startup.ConfigureServices`.
+Optionen für alle Dienste konfiguriert werden können, durch die Bereitstellung einer Optionen-Delegat, der die `AddGrpc` Aufrufen in `Startup.ConfigureServices`:
 
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddGrpc(options =>
-    {
-        options.EnableDetailedErrors = true;
-    });
-}
-```
+[!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup.cs?name=snippet)]
 
 Optionen für einen einzelnen Dienst außer Kraft setzen die globale Optionen im `AddGrpc` und kann konfiguriert werden, mithilfe von `AddServiceOptions<TService>`:
 
-```csharp
-services.AddGrpc().AddServiceOptions<MyService>(options =>
-{
-    options.ReceiveMaxMessageSize = 10 * 1024 * 1024; // 10 megabytes
-});
-```
+[!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup2.cs?name=snippet)]
+
+## <a name="configure-client-options"></a>Konfigurieren Sie Clientoptionen
+
+Der folgende Code legt die maximale Client senden und Empfangen der Nachrichtengröße:
+
+[!code-csharp[](~/grpc/configuration/sample/Program.cs?name=snippet&highlight=3-6)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
