@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie auf die DSGVO-Erweiterungspunkte in einer ASP
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/29/2018
+ms.date: 06/05/2019
 uid: security/gdpr
-ms.openlocfilehash: c5c13dbd1006d10aba0f54b0b9d72b527ee98945
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 967f3246836c93a1af56f7109edb056220606b58
+ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894107"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66716347"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>Europa Allgemein Datenschutz-Grundverordnung (DSGVO)-Unterstützung in ASP.NET Core
 
@@ -30,13 +30,13 @@ Die [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcor
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>DSGVO-Unterstützung von ASP.NET Core in Vorlagen generierter code
+## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>ASP.NET Core DSGVO unterstützen, in der Vorlage generierten Codes
 
 Razor-Seiten und MVC-Projekte erstellt, die mit den Projektvorlagen enthalten die folgende DSGVO-Unterstützung:
 
-* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) und [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) in festgelegt sind `Startup`.
-* Die *_CookieConsentPartial.cshtml* [Teilansicht](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper).
-* Die *Pages/Privacy.cshtml* Seite oder *Views/Home/Privacy.cshtml* Ansicht bietet eine Seite Ihrer Website-Datenschutzrichtlinie ausführlich beschrieben. Die *_CookieConsentPartial.cshtml* -Datei generiert einen Link zu die "Datenschutz".
+* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) und [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) in festgelegt sind das `Startup` Klasse.
+* Die  *\_CookieConsentPartial.cshtml* [Teilansicht](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Ein **Accept** Schaltfläche befindet sich in dieser Datei. Klickt der Benutzer die **Accept** Schaltfläche, die zum Speichern von Cookies zustimmen wird bereitgestellt.
+* Die *Pages/Privacy.cshtml* Seite oder *Views/Home/Privacy.cshtml* Ansicht bietet eine Seite Ihrer Website-Datenschutzrichtlinie ausführlich beschrieben. Die  *\_CookieConsentPartial.cshtml* -Datei generiert einen Link zu die "Datenschutz".
 * Für apps, die mit individuellen Benutzerkonten erstellt werden, bietet der Seite "verwalten" Links zum Herunterladen und Löschen von [persönliche Benutzerdaten](#pd).
 
 ### <a name="cookiepolicyoptions-and-usecookiepolicy"></a>CookiePolicyOptions und UseCookiePolicy
@@ -49,29 +49,29 @@ Razor-Seiten und MVC-Projekte erstellt, die mit den Projektvorlagen enthalten di
 
 [!code-csharp[](gdpr/sample/Startup.cs?name=snippet1&highlight=51)]
 
-### <a name="cookieconsentpartialcshtml-partial-view"></a>_CookieConsentPartial.cshtml partial view
+### <a name="cookieconsentpartialcshtml-partial-view"></a>\_CookieConsentPartial.cshtml Teilansicht
 
-Die *_CookieConsentPartial.cshtml* Teilansicht:
+Die  *\_CookieConsentPartial.cshtml* Teilansicht:
 
 [!code-html[](gdpr/sample/RP/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Diese partielle:
 
-* Ruft den Status der Überwachung für den Benutzer ab. Wenn die app konfiguriert ist, um die Zustimmung erforderlich ist, muss der Benutzer zustimmen, bevor Cookies nachverfolgt werden können. Wenn Zustimmung erforderlich ist, das Cookie Zustimmung der Bereiche am oberen Rand der Navigationsleiste von erstellten fixiert ist die *"_Layout.cshtml"* Datei.
+* Ruft den Status der Überwachung für den Benutzer ab. Wenn die app konfiguriert ist, um die Zustimmung erforderlich ist, muss der Benutzer zustimmen, bevor Cookies nachverfolgt werden können. Wenn Zustimmung erforderlich ist, das Cookie Zustimmung der Bereiche am oberen Rand der Navigationsleiste von erstellten fixiert ist die  *\_Layout.cshtml* Datei.
 * Stellt eine HTML `<p>` Element, um den Datenschutz und Cookies zusammenzufassen mithilfe der Gruppenrichtlinie.
 * Enthält einen Link zu "Datenschutz" oder Ansicht, in denen Sie Ihrer Website-Datenschutzrichtlinie beschreiben können.
 
 ## <a name="essential-cookies"></a>Wichtige cookies
 
-Wenn Ihre Zustimmung nicht festgelegt wurde, werden nur die Cookies, die als wichtig markiert an den Browser gesendet. Im folgenden Code werden einen Cookie wichtig:
+Wenn Zustimmung zum Speichern von Cookies wurde nicht angegeben wurde, nur Cookies, die als wichtig markiert werden an den Browser gesendet. Im folgenden Code werden einen Cookie wichtig:
 
 [!code-csharp[Main](gdpr/sample/RP/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
 
 <a name="tempdata"></a>
 
-## <a name="tempdata-provider-and-session-state-cookies-are-not-essential"></a>TempData-Anbieter und -Status-Sitzungscookies sind nicht wichtig
+### <a name="tempdata-provider-and-session-state-cookies-arent-essential"></a>TempData-Anbieter und -Status-Sitzungscookies haben keine Bedeutung
 
-Die [Tempdata-Anbieters](xref:fundamentals/app-state#tempdata) Cookie nicht wichtig ist. Wenn die Überwachung deaktiviert ist, nicht der Tempdata-Anbieter. Um der Tempdata-Anbieter aktivieren, wenn die nachverfolgung deaktiviert ist, Markieren des TempData-Cookies als wesentlich `Startup.ConfigureServices`:
+Die [TempData-Anbieters](xref:fundamentals/app-state#tempdata) Cookie nicht wichtig ist. Wenn die Überwachung deaktiviert ist, nicht der TempData-Anbieter. Um der TempData-Anbieter aktivieren, wenn die nachverfolgung deaktiviert ist, Markieren des TempData-Cookies als wesentlich `Startup.ConfigureServices`:
 
 [!code-csharp[Main](gdpr/sample/RP/Startup.cs?name=snippet1)]
 
