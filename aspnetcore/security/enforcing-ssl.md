@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: e27e0c31b128cbd7d71bf7b83a2d33cc89ea3ab1
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 8d48877153d6d75348e29299c669125904236de8
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610426"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692588"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.NET Core
 
@@ -77,7 +77,7 @@ Geben Sie den HTTPS-Port mit einer der folgenden Methoden:
 
   [!code-csharp[](enforcing-ssl/sample-snapshot/Program.cs?name=snippet_Program&highlight=10)]
 * Geben Sie einen Port mit dem sicheren Schema unter Verwendung der `ASPNETCORE_URLS` -Umgebungsvariablen angegeben. Die Umgebungsvariable konfiguriert den Server. Die Middleware indirekt ermittelt die HTTPS-Port über <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>. Dieser Ansatz funktioniert nicht bei reverse-Proxy-Bereitstellungen.
-* Legen Sie bei der Entwicklung eine HTTPS-URL in *"launchsettings.JSON"*. Aktivieren Sie HTTPS, bei der IIS Express verwendet wird.
+* Legen Sie bei der Entwicklung eine HTTPS-URL in *"launchsettings.JSON"* . Aktivieren Sie HTTPS, bei der IIS Express verwendet wird.
 * Konfigurieren Sie einen HTTPS-URL-Endpunkt für die edgebereitstellung von öffentlich zugänglichen [Kestrel](xref:fundamentals/servers/kestrel) Server oder [HTTP.sys](xref:fundamentals/servers/httpsys) Server. Nur **eine HTTPS-Port** wird von der app verwendet. Die Middleware ermittelt, den Port über <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.
 
 > [!NOTE]
@@ -117,7 +117,7 @@ Der oben markierte Code:
 
 Die Middleware standardmäßig zum Senden einer [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) mit alle umleitungen. Falls gewünscht, einen permanente Umleitung-Statuscode senden, wenn die app in einer Entwicklungsumgebung, umschließen Sie die Konfiguration der Middleware-Optionen in eine bedingungsüberprüfung für eine nicht-Entwicklungsumgebung.
 
-Beim Konfigurieren einer `IWebHostBuilder` in *"Startup.cs"*:
+Beim Konfigurieren einer `IWebHostBuilder` in *"Startup.cs"* :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -225,6 +225,8 @@ dotnet new webapp --no-https
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
+
+<a name="trust"></a>
 
 ## <a name="trust-the-aspnet-core-https-development-certificate-on-windows-and-macos"></a>Vertrauen Sie das ASP.NET Core-HTTPS-Entwicklungszertifikat unter Windows und macOS
 
