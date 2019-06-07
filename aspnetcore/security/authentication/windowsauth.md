@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Windows-Authentifizierung in ASP.NET Core für II
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 05/29/2019
+ms.date: 06/05/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 9dfff5dcba409ddca7e05c771b864ab121e0ea85
-ms.sourcegitcommit: 06c4f2910dd54ded25e1b8750e09c66578748bc9
+ms.openlocfilehash: 900bbf5f14b1876ad537b2b77e4ba07d7aa168f2
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66395927"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750164"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>Konfigurieren der Windows-Authentifizierung in ASP.NET Core
 
@@ -22,9 +22,17 @@ Durch [Scott Addie](https://twitter.com/Scott_Addie) und [Luke Latham](https://g
 
 Windows-Authentifizierung basiert auf dem Betriebssystem zur Authentifizierung von Benutzern von ASP.NET Core-apps. Sie können Windows-Authentifizierung verwenden, wenn Ihre Server in einem Unternehmensnetzwerk, die mithilfe von Active Directory-domänenidentitäten oder Windows-Konten zur Identifizierung von Benutzern ausgeführt wird. Windows-Authentifizierung ist am besten für Intranetumgebungen, in dem Benutzer, Client-apps und Webserver mit der gleichen Windows-Domäne gehören.
 
-## <a name="launch-settings-debugger"></a>Starteinstellungen Sie (Debugger)
+## <a name="iisiis-express"></a>IIS/IIS Express
 
-Konfiguration für die starteinstellungen für den wirkt sich nur auf die *Properties/launchSettings.json* Datei, und konfigurieren Sie den IIS oder HTTP.sys-Server nicht für die Windows-Authentifizierung. Konfiguration des Servers wird erläutert, der [aktivieren Authentifizierungsdienste für IIS oder HTTP.sys](#authentication-services-for-iis-or-httpsys) Abschnitt.
+Hinzufügen von Authentifizierungsdienste durch den Aufruf <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> Namespace) in `Startup.ConfigureServices`:
+
+```csharp
+services.AddAuthentication(IISDefaults.AuthenticationScheme);
+```
+
+### <a name="launch-settings-debugger"></a>Starteinstellungen Sie (Debugger)
+
+Konfiguration für die starteinstellungen für den wirkt sich nur auf die *Properties/launchSettings.json* für IIS Express-Datei, und Konfigurieren von IIS für Windows-Authentifizierung nicht. Server-Konfiguration wird erläutert, der [IIS](#iis) Abschnitt.
 
 Die **Webanwendung** Vorlage zur Verfügung, über Visual Studio oder .NET Core-CLI kann konfiguriert werden, zur Unterstützung von Windows-Authentifizierung, aktualisiert der *Properties/launchSettings.json* Datei automatisch.
 
@@ -76,17 +84,7 @@ Update der `iisSettings` Knoten die *"launchsettings.JSON"* Datei:
 
 Wenn Sie ein vorhandenes Projekt ändern möchten, vergewissern Sie sich, dass die Projektdatei für die Paketverweise enthält die [Microsoft.AspNetCore.App metapaket](xref:fundamentals/metapackage-app) **oder** der [ Microsoft.AspNetCore.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet-Paket.
 
-## <a name="authentication-services-for-iis-or-httpsys"></a>Authentifizierungsdienste für IIS oder HTTP.sys
-
-Führen Sie die Anleitung im, abhängig von der hosting-Szenario **entweder** der [IIS](#iis) Abschnitt **oder** [HTTP.sys](#httpsys) Abschnitt.
-
 ### <a name="iis"></a>IIS
-
-Hinzufügen von Authentifizierungsdienste durch den Aufruf <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> Namespace) in `Startup.ConfigureServices`:
-
-```csharp
-services.AddAuthentication(IISDefaults.AuthenticationScheme);
-```
 
 IIS verwendet den [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) zum Hosten von ASP.NET Core-apps. Windows-Authentifizierung konfiguriert ist, für IIS über die *"Web.config"* Datei. Die folgenden Abschnitte zeigen Gewusst wie:
 
@@ -127,9 +125,9 @@ Verwendung **entweder** der folgenden Methoden:
   * Verwenden Sie IIS-Manager zum Zurücksetzen der Einstellungen in der *"Web.config"* -Datei nach der Bereitstellung die Datei überschrieben wird.
   * Hinzufügen einer *Datei "Web.config"* an die app lokal mit den Einstellungen.
 
-### <a name="httpsys"></a>HTTP.sys
+## <a name="httpsys"></a>HTTP.sys
 
-Obwohl [Kestrel](xref:fundamentals/servers/kestrel) unterstützt keine Windows-Authentifizierung, können Sie [HTTP.sys](xref:fundamentals/servers/httpsys) selbst gehostete Szenarios für Windows zu unterstützen.
+In selbstgehosteten Szenarien [Kestrel](xref:fundamentals/servers/kestrel) keine Unterstützung von Windows-Authentifizierung, aber Sie können [HTTP.sys](xref:fundamentals/servers/httpsys).
 
 Hinzufügen von Authentifizierungsdienste durch den Aufruf <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> Namespace) in `Startup.ConfigureServices`:
 

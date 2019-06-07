@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 05/28/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 2ac7a6c7a5499d0525a61c6401f5996f8543fdba
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: c7cd35865c5bddf0e5efaa9e616832b6755d9227
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376211"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750117"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Verwenden von JavaScript-Services zum Erstellen von einseitigen Anwendungen in ASP.NET Core
 
@@ -24,7 +24,7 @@ Eine Single-Page-Anwendung (SPA) ist ein Webanwendungstyp, der aufgrund seiner h
 
 JavaScript-Dienste ist eine Sammlung von clientseitigen Technologien für ASP.NET Core. Das Ziel ist, die ASP.NET Core als Entwickler bevorzugte serverseitige Plattform zum Erstellen von SPAs zu positionieren.
 
-JavaScript-Services besteht aus drei unterschiedlichen NuGet-Pakete:
+JavaScript-Services besteht aus zwei unterschiedlichen NuGet-Pakete:
 
 * [Microsoft.AspNetCore.NodeServices](https://www.nuget.org/packages/Microsoft.AspNetCore.NodeServices/) (NodeServices)
 * [Microsoft.AspNetCore.SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices/) (SpaServices)
