@@ -4,14 +4,14 @@ author: juntaoluo
 description: In diesem Tutorial erfahren Sie, wie Sie einen gRPC-Dienst und -Client in ASP.NET Core erstellen können. Dabei erfahren Sie, wie Sie ein gRPC-Dienstprojekt erstellen, eine PROTO-Datei bearbeiten und einen Duplexstreamaufruf hinzufügen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 5/30/2019
+ms.date: 06/05/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 2b4325d2413e335a3061a7695def88a1b23ee52b
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: 71e3321819eb7169f0896abe3e07849f59ea6fc7
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376370"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692532"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Tutorial: Erstellen eines gRPC-Clients und -Servers in ASP.NET Core
 
@@ -161,7 +161,7 @@ Fügen Sie die folgenden Pakete zum gRPC-Clientprojekt hinzu:
 
 Installieren Sie die Pakete über die Paket-Manager-Konsole oder über „NuGet-Pakete verwalten“.
 
-####  <a name="pmc-option-to-install-packages"></a>PMC-Option zum Installieren von Paketen
+#### <a name="pmc-option-to-install-packages"></a>PMC-Option zum Installieren von Paketen
 
 * Wählen Sie in Visual Studio **Tools** > **NuGet-Paket-Manager** > **Paket-Manager-Konsole** aus.
 * Navigieren Sie vom Fenster **Paket-Manager-Konsole** zu dem Verzeichnis, in dem sich die Datei *GrpcGreeterClient.csproj* befindet.
@@ -169,7 +169,7 @@ Installieren Sie die Pakete über die Paket-Manager-Konsole oder über „NuGet-
 
  ```powershell
 Install-Package Grpc.Core
-Install-Package Grpc.Protobuf
+Install-Package Google.Protobuf
 Install-Package Grpc.Tools
 ```
 
@@ -218,7 +218,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   Klicken Sie mit der rechten Maustaste auf das Projekt, und wählen Sie dann **Extras > Datei bearbeiten** aus.
 
-  ------
+  ---
 
 * Fügen Sie der `<Protobuf>`-Elementgruppe aus der GrpcGreeterClient-Projektdatei die Datei **greet.proto** hinzu:
 
@@ -230,7 +230,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 Kompilieren Sie das Clientprojekt, um die Generierung der C#-Clientobjekte auszulösen.
 
-### <a name="create-the-greater-client"></a>Erstellen des Greeterclients
+### <a name="create-the-greeter-client"></a>Erstellen des Greeter-Clients
 
 Erstellen Sie das Projekt, um die Typen im **Greeter**-Namespace erstellen zu können. Die `Greeter`-Typen werden vom Buildprozess automatisch erstellt.
 
@@ -240,14 +240,14 @@ Aktualisieren Sie die Datei *Program.cs* des gRPC-Clients mit dem folgenden Code
 
 *Program.cs* enthält den Einstiegspunkt und die Logik für den gRPC-Client.
 
-Der Greeterclient wird folgendermaßen erstellt:
+Der Greeter-Client wird folgendermaßen erstellt:
 
 * Instanziieren eines `Channel`-Objekts, das Informationen zum Herstellen einer Verbindung mit dem gRPC-Dienst enthält
-* Verwenden des `Channel`-Objekts zum Erstellen des Greeterclients:
+* Verwenden von `Channel` zum Erstellen des Greeter-Clients:
 
 [!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=4-6)]
 
-Der Greeterclient ruft die asynchrone Methode `SayHello` auf. Das Ergebnis des Aufrufs von `SayHello` wird angezeigt:
+Der Greeter-Client ruft die asynchrone Methode `SayHello` auf. Das Ergebnis des Aufrufs von `SayHello` wird angezeigt:
 
 [!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=7-9)]
 
