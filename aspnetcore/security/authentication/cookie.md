@@ -5,12 +5,12 @@ description: Eine Erläuterung der verwenden der Cookieauthentifizierung ohne AS
 ms.author: riande
 ms.date: 02/25/2019
 uid: security/authentication/cookie
-ms.openlocfilehash: 2bc3e16b1b32816b14ad5bb4ca905ae5ed51ab87
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f3e02b357a83cf5fc4b9fcdc79b2fbe80da98507
+ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897747"
+ms.lasthandoff: 06/10/2019
+ms.locfileid: "66824752"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>Verwenden der Cookieauthentifizierung ohne ASP.NET Core Identity
 
@@ -195,7 +195,7 @@ await HttpContext.Authentication.SignInAsync(
 
 `SignInAsync` erstellt ein verschlüsseltes Cookie aus, und die aktuelle Antwort hinzugefügt. Wenn Sie nicht angeben einer `AuthenticationScheme`, wird das Standardschema verwendet.
 
-Darüber hinaus ist die Verschlüsselung verwendet ASP.NET Core [den Datenschutz](xref:security/data-protection/using-data-protection#security-data-protection-getting-started) System. Wenn Sie die app auf mehrere Computer, den Lastenausgleich für apps oder mit einer Webfarm hosten, müssen Sie [Schutz von Daten konfigurieren](xref:security/data-protection/configuration/overview) und mit dem Schlüsselbund für den gleichen app-Bezeichner.
+Darüber hinaus ist die Verschlüsselung verwendet ASP.NET Core [den Datenschutz](xref:security/data-protection/using-data-protection) System. Wenn Sie die app auf mehrere Computer, den Lastenausgleich für apps oder mit einer Webfarm hosten, müssen Sie [Schutz von Daten konfigurieren](xref:security/data-protection/configuration/overview) und mit dem Schlüsselbund für den gleichen app-Bezeichner.
 
 ## <a name="sign-out"></a>Abmelden
 
