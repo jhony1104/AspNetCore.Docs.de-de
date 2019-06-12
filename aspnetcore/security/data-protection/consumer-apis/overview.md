@@ -3,14 +3,14 @@ title: Übersicht über Consumer-APIs für ASP.NET Core
 author: rick-anderson
 description: Erhalten Sie eine kurze Übersicht über die verschiedenen Consumer-APIs, die innerhalb der ASP.NET Core-Data-Protection-Bibliothek zur Verfügung.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 06/11/2019
 uid: security/data-protection/consumer-apis/overview
-ms.openlocfilehash: b0d11d097ee2d448b6781f6fa84445f6400fbc76
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: ff9badb55813cae0aa72d3a95dc53792332f109b
+ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087529"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66837381"
 ---
 # <a name="consumer-apis-overview-for-aspnet-core"></a>Übersicht über Consumer-APIs für ASP.NET Core
 
@@ -32,7 +32,7 @@ Das Konzept des gleichen im Vergleich zu anderen `IDataProtector` Ties zu sicher
 
 ## <a name="consuming-these-interfaces"></a>Nutzen diese Schnittstellen
 
-Für eine Komponente zur Abhängigkeitsinjektion die beabsichtigte Verwendung ist die Komponente dauern ein `IDataProtectionProvider` Parameter in seinem Konstruktor, und das DI-System diesen Dienst automatisch bereitgestellt, wenn die Komponente instanziiert wird.
+Eine Komponente zur Abhängigkeitsinjektion die beabsichtigte Verwendung ist, dass die Komponente akzeptiert eine `IDataProtectionProvider` Parameter in seinem Konstruktor, und das DI-System diesen Dienst automatisch bereitgestellt, wenn die Komponente instanziiert wird.
 
 > [!NOTE]
 > Einige Anwendungen (z. B. konsolenanwendungen oder ASP.NET 4.x-Anwendungen) möglicherweise nicht zur Abhängigkeitsinjektion, damit hier beschriebenen Mechanismus nicht verwenden können. Diese Szenarien finden Sie in der [nicht DI Szenarien](xref:security/data-protection/configuration/non-di-scenarios) Dokument für Weitere Informationen zum Abrufen einer Instanz von einer `IDataProtection` Anbieter ohne Umweg über Dependency Injection.

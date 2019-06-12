@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 05/01/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: ee7d4b2ae04b5f6c262acc5da0f86f90ab50585f
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 435f06b85af4a1a5a78a870c2add3e15ff1ffe89
+ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085673"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66837277"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -823,9 +823,10 @@ Verwenden Sie <xref:Microsoft.Extensions.Logging.AzureAppServices.AzureFileLogge
 
 ::: moniker-end
 
-Wenn Sie eine Bereitstellung in einer App Service-App durchführen, berücksichtigt die Anwendung die Einstellungen im Abschnitt [Diagnoseprotokolle](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) der Seite **App Service** im Azure-Portal. Bei einem Update dieser Einstellungen werden die Änderungen sofort wirksam, ohne dass ein Neustart oder eine erneute Bereitstellung der App notwendig ist.
+Wenn Sie eine Bereitstellung in einer App Service-App durchführen, berücksichtigt die Anwendung die Einstellungen im Abschnitt [App Service logs](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) (App Service-Protokolle) auf der Seite **App Services** im Azure-Portal. Bei einem Update der folgenden Einstellungen werden die Änderungen sofort wirksam, ohne dass ein Neustart oder eine erneute Bereitstellung der App notwendig ist.
 
-![Einstellungen für die Azure-Protokollierung](index/_static/azure-logging-settings.png)
+* **Anwendungsprotokoll (Dateisystem)**
+* **Anwendungsprotokoll (Blob)**
 
 Der Standardspeicherort für Protokolldateien ist der Ordner *D:\\home\\LogFiles\\Application*, und der standardmäßige Dateiname lautet *diagnostics-yyyymmdd.txt*. Die Dateigröße ist standardmäßig auf 10 MB beschränkt, und die maximal zulässige Anzahl beibehaltener Dateien lautet 2. Der Standardblobname lautet *{app-name}{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*.
 
@@ -841,14 +842,11 @@ Azure-Protokollstreaming ermöglicht Ihnen eine Echtzeitanzeige der Protokollakt
 
 So konfigurieren Sie das Azure-Protokollstreaming
 
-* Navigieren Sie von der Portalseite Ihrer App zur Seite **Diagnoseprotokolle**.
+* Navigieren Sie von der Portalseite Ihrer App zur Seite **App Service-Protokolle**.
 * Legen Sie **Anwendungsprotokollierung (Dateisystem)** auf **Ein** fest.
+* Wählen Sie die **Protokollierungsebene**.
 
-![Seite „Diagnoseprotokolle“ im Azure-Portal](index/_static/azure-diagnostic-logs.png)
-
-Navigieren Sie zur Seite **Protokollstreaming**, um App-Meldungen anzuzeigen. Diese werden von der App über die `ILogger`-Schnittstelle protokolliert.
-
-![Anwendungsprotokollstreaming im Azure-Portal](index/_static/azure-log-streaming.png)
+Navigieren Sie zur Seite **Log Stream** (Protokollstream), um App-Meldungen anzuzeigen. Diese werden von der App über die `ILogger`-Schnittstelle protokolliert.
 
 ::: moniker range=">= aspnetcore-1.1"
 
