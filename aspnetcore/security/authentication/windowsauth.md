@@ -5,22 +5,35 @@ description: Erfahren Sie, wie Windows-Authentifizierung in ASP.NET Core für II
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 06/05/2019
+ms.date: 06/12/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 900bbf5f14b1876ad537b2b77e4ba07d7aa168f2
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 93f833adff95f25d570947cd1a9035d652f522c2
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750164"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034951"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>Konfigurieren der Windows-Authentifizierung in ASP.NET Core
 
 Durch [Scott Addie](https://twitter.com/Scott_Addie) und [Luke Latham](https://github.com/guardrex)
 
-[Windows-Authentifizierung](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) kann konfiguriert werden, für ASP.NET Core-apps mit gehosteten [IIS](xref:host-and-deploy/iis/index) oder [HTTP.sys](xref:fundamentals/servers/httpsys).
+::: moniker range=">= aspnetcore-3.0"
+
+Windows-Authentifizierung (auch bekannt als Negotiate, Kerberos oder NTLM-Authentifizierung) kann konfiguriert werden, für ASP.NET Core-apps mit gehosteten [IIS](xref:host-and-deploy/iis/index), [Kestrel](xref:fundamentals/servers/kestrel), oder [HTTP.sys](xref:fundamentals/servers/httpsys) .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Windows-Authentifizierung (auch bekannt als Negotiate, Kerberos oder NTLM-Authentifizierung) kann konfiguriert werden, für ASP.NET Core-apps mit gehosteten [IIS](xref:host-and-deploy/iis/index) oder [HTTP.sys](xref:fundamentals/servers/httpsys).
+
+::: moniker-end
 
 Windows-Authentifizierung basiert auf dem Betriebssystem zur Authentifizierung von Benutzern von ASP.NET Core-apps. Sie können Windows-Authentifizierung verwenden, wenn Ihre Server in einem Unternehmensnetzwerk, die mithilfe von Active Directory-domänenidentitäten oder Windows-Konten zur Identifizierung von Benutzern ausgeführt wird. Windows-Authentifizierung ist am besten für Intranetumgebungen, in dem Benutzer, Client-apps und Webserver mit der gleichen Windows-Domäne gehören.
+
+> [!NOTE]
+> Windows-Authentifizierung mit HTTP/2 wird nicht unterstützt. -Authentifizierungsaufforderungen gesendet werden können, über HTTP/2-Antworten, aber der Client muss auf HTTP/1.1 Führen Sie vor dem authentifizieren.
 
 ## <a name="iisiis-express"></a>IIS/IIS Express
 
@@ -125,9 +138,65 @@ Verwendung **entweder** der folgenden Methoden:
   * Verwenden Sie IIS-Manager zum Zurücksetzen der Einstellungen in der *"Web.config"* -Datei nach der Bereitstellung die Datei überschrieben wird.
   * Hinzufügen einer *Datei "Web.config"* an die app lokal mit den Einstellungen.
 
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="kestrel"></a>Kestrel
+
+ Die [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet-Paket verwendet werden kann, mit [Kestrel](xref:fundamentals/servers/kestrel) zur Unterstützung der Windows-Authentifizierung mithilfe des Negotiate, Kerberos und NTLM für Windows, Linux und MacOS.
+
+> [!WARNING]
+> Anmeldeinformationen können für die Anforderungen für eine Verbindung gespeichert werden. *Aushandeln Authentifizierung darf nicht mit Proxys verwendet werden, es sei denn, der Proxy eine 1:1-verbindungsaffinität (eine permanente Verbindung) mit Kestrel führt.* Dies bedeutet, dass die Negotiate-Authentifizierung nicht verwendet werden muss, können Sie mit Kestrel im Hintergrund von IIS [ASP.NET Core-Modul (ANCM) Out-of-Process-](xref:host-and-deploy/iis/index#out-of-process-hosting-model).
+
+ Hinzufügen von Authentifizierungsdienste durch den Aufruf <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (`Microsoft.AspNetCore.Authentication.Negotiate` Namespace) und `AddNegotitate` (`Microsoft.AspNetCore.Authentication.Negotiate` Namespace) in `Startup.ConfigureServices`:
+
+ ```csharp
+services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+    .AddNegotiate();
+```
+
+Fügen Sie Middleware für die Authentifizierung durch den Aufruf <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> in `Startup.Configure`:
+
+ ```csharp
+app.UseAuthentication();
+
+app.UseMvc();
+```
+
+Weitere Informationen zu Middleware, finden Sie unter <xref:fundamentals/middleware/index>.
+
+Anonyme Anforderungen sind zulässig. Verwendung [ASP.NET Core-Autorisierung](xref:security/authorization/introduction) sollen anonyme Anforderungen für die Authentifizierung.
+
+### <a name="windows-environment-configuration"></a>Konfiguration der Windows-Umgebung
+
+Die [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) Komponente führt eine Benutzermodus-Authentifizierung. Dienstprinzipalnamen (SPN) muss das Benutzerkonto, das Ausführen des Diensts, nicht das Computerkonto hinzugefügt werden. Führen Sie `setspn -S HTTP/mysrevername.mydomain.com myuser` in einer administrativen Befehlsshell.
+
+### <a name="linux-and-macos-environment-configuration"></a>Konfiguration für Linux und MacOS-Umgebung
+
+Anweisungen zum Verknüpfen von eines Linux- oder MacOS-Computers mit einer Windows-Domäne finden Sie in der [Verbinden von Azure Data Studio zu Ihrem SQL Server mithilfe der Windows-Authentifizierung – Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) Artikel. Die Anweisungen erstellen Sie ein Computerkonto für den Linux-Computer in der Domäne. SPNs müssen auf diese Computerkonten hinzugefügt werden.
+
+> [!NOTE]
+> Befolgen Sie die Anweisungen in der [Verbinden von Azure Data Studio zu Ihrem SQL Server mithilfe der Windows-Authentifizierung – Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) Artikel, ersetzen Sie `python-software-properties` mit `python3-software-properties` bei Bedarf.
+
+Nach der Linux oder MacOS-Computer der Domäne angehört, sind zusätzliche Schritte erforderlich, zu einem [Keytab-Datei](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) mit der SPNs:
+
+* Fügen Sie auf dem Domänencontroller auf das Computerkonto neuen Webdienst SPNs hinzu:
+  * `setspn -S HTTP/mywebservice.mydomain.com mymachine`
+  * `setspn -S HTTP/mywebservice@MYDOMAIN.COM mymachine`
+* Verwendung [Ktpass](/windows-server/administration/windows-commands/ktpass) generiert eine Keytab-Datei:
+  * `ktpass -princ HTTP/mywebservice.mydomain.com@MYDOMAIN.COM -pass myKeyTabFilePassword -mapuser MYDOMAIN\mymachine$ -pType KRB5_NT_PRINCIPAL -out c:\temp\mymachine.HTTP.keytab -crypto AES256-SHA1`
+  * Einige Felder müssen angegeben werden Großbuchstaben angegeben.
+* Kopieren Sie die Keytab-Datei mit dem Linux oder MacOS-Computer.
+* Wählen Sie die Keytab-Datei über eine Umgebungsvariable: `export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
+* Rufen Sie `klist` , die derzeit nur SPNs angezeigt.
+
+> [!NOTE]
+> Eine Keytab-Datei enthält die Anmeldeinformationen für die Domäne zugreifen und muss entsprechend geschützt werden.
+
+::: moniker-end
+
 ## <a name="httpsys"></a>HTTP.sys
 
-In selbstgehosteten Szenarien [Kestrel](xref:fundamentals/servers/kestrel) keine Unterstützung von Windows-Authentifizierung, aber Sie können [HTTP.sys](xref:fundamentals/servers/httpsys).
+[HTTP.sys](xref:fundamentals/servers/httpsys) Windows Kernelmodusauthentifizierung mit Negotiate, NTLM oder Standardauthentifizierung unterstützt.
 
 Hinzufügen von Authentifizierungsdienste durch den Aufruf <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> Namespace) in `Startup.ConfigureServices`:
 
@@ -177,6 +246,12 @@ ASP.NET Core implementiert keine Identitätswechsel. Apps, die mit der app Ident
 [!code-csharp[](windowsauth/sample_snapshot/Startup.cs?highlight=10-19)]
 
 `RunImpersonated` unterstützt keine asynchronen Vorgänge und sollte nicht für komplexe Szenarien verwendet werden. Z. B. wird nicht wrapping gesamte Anforderungen oder Middleware verkettet unterstützt oder empfohlen.
+
+::: moniker range=">= aspnetcore-3.0"
+
+Während der [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) Paket ermöglicht die Authentifizierung auf Windows, Linux und MacOS, Identitätswechsel wird nur unter Windows unterstützt.
+
+::: moniker-end
 
 ## <a name="claims-transformations"></a>Transformationen von Ansprüchen
 

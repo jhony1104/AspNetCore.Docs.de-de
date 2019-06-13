@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/11/2019
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: ee43427fa1e82a365d49df50567b4ca7afb5a5d3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 65a927b6288ca6cc41ee1bedd1080e52ffe0d3e1
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897297"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034921"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>Konfigurieren von ASP.NET Core-Datenschutz
 
@@ -23,7 +23,7 @@ Wenn das System den Schutz von Daten initialisiert wird, gilt es [Standardeinste
 Für solche Szenarien bietet das System den Schutz von Daten eine umfangreiche Konfigurations-API.
 
 > [!WARNING]
-> Ähnlich wie Konfigurationsdateien, sollte der Data Protection-Schlüsselbund geschützt werden mit entsprechenden Berechtigungen. Sie können auch die Schlüssel im Ruhezustand verschlüsselt, aber dadurch nicht verhindert, dass Angreifer Erstellen neuer Schlüssel. Daher wird der app-Sicherheit beeinträchtigt. Der Speicherort für den Schutz von Daten konfiguriert müssen den Zugriff auf die app selbst ähnliche Weise, wie Sie die Konfigurationsdateien schützen würden beschränkt. Wenn Sie Ihrem Schlüsselbund auf dem Datenträger speichern möchten, verwenden Sie z. B. Dateisystemberechtigungen. Stellen Sie nur die Identität unter sicher gelesen hat, die Ihre Web-app ausgeführt wird, schreiben und erstellen Sie auf das Verzeichnis zugreifen. Wenn Sie Azure Table Storage verwenden, sollten nur die Web-app haben die Möglichkeit zu lesen, schreiben oder neue Einträge in den Tabellenspeicher usw. erstellen.
+> Ähnlich wie Konfigurationsdateien, sollte der Data Protection-Schlüsselbund geschützt werden mit entsprechenden Berechtigungen. Sie können auch die Schlüssel im Ruhezustand verschlüsselt, aber dadurch nicht verhindert, dass Angreifer Erstellen neuer Schlüssel. Daher wird der app-Sicherheit beeinträchtigt. Der Speicherort für den Schutz von Daten konfiguriert müssen den Zugriff auf die app selbst ähnliche Weise, wie Sie die Konfigurationsdateien schützen würden beschränkt. Wenn Sie Ihrem Schlüsselbund auf dem Datenträger speichern möchten, verwenden Sie z. B. Dateisystemberechtigungen. Stellen Sie nur die Identität unter sicher gelesen hat, die Ihre Web-app ausgeführt wird, schreiben und erstellen Sie auf das Verzeichnis zugreifen. Wenn Sie Azure Blob Storage verwenden, sollten nur für die Web-app haben die Möglichkeit zu lesen, schreiben oder neue Einträge in den Blob-Speicher usw. erstellen.
 >
 > Die Erweiterungsmethode [AddDataProtection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) gibt ein [IDataProtectionBuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder). `IDataProtectionBuilder` stellt Erweiterungsmethoden bereit, dass Sie miteinander Optionen verketten können so konfigurieren Sie den Schutz von Daten an.
 
@@ -42,7 +42,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Legen Sie den Schlüsselbund für den Storage-Speicherort (z. B. [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Der Speicherort muss festgelegt werden, da Aufrufen `ProtectKeysWithAzureKeyVault` implementiert eine [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) , die Daten automatisch Protection-Einstellungen, einschließlich der den Speicherort für den Schlüsselbund deaktiviert. Im vorherige Beispiel verwendet Azure Blob Storage, um den Schlüsselbund beizubehalten. Weitere Informationen finden Sie unter [Schlüsselspeicheranbieter: Azure und Redis](xref:security/data-protection/implementation/key-storage-providers#azure-and-redis). Sie können auch den Schlüsselbund lokal beibehalten [PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system).
+Legen Sie den Schlüsselbund für den Storage-Speicherort (z. B. [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Der Speicherort muss festgelegt werden, da Aufrufen `ProtectKeysWithAzureKeyVault` implementiert eine [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) , die Daten automatisch Protection-Einstellungen, einschließlich der den Speicherort für den Schlüsselbund deaktiviert. Im vorherige Beispiel verwendet Azure Blob Storage, um den Schlüsselbund beizubehalten. Weitere Informationen finden Sie unter [Schlüsselspeicheranbieter: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage). Sie können auch den Schlüsselbund lokal beibehalten [PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system).
 
 Die `keyIdentifier` den Schlüsselbezeichner Key Vault-Instanz, für die Schlüsselverschlüsselung verwendet wird. Z. B. einen Schlüssel in Key Vault-Instanz, die mit dem Namen erstellt `dataprotection` in die `contosokeyvault` hat den Schlüsselbezeichner `https://contosokeyvault.vault.azure.net/keys/dataprotection/`. Geben Sie die app mit **Schlüssel Entpacken** und **Schlüssel Packen** Berechtigungen auf den schlüsseltresor.
 
@@ -170,7 +170,7 @@ Wenn das System den Schutz von Daten von einem ASP.NET Core-Host bereitgestellt 
 
 Der Isolationsmechanismus hochverfügbarkeitsbereitstellung jede app auf dem lokalen Computer als Mandant eindeutig, daher funktioniert die <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> Stamm eine bestimmte app automatisch auf die app-ID als Diskriminator enthält. Eindeutige ID der app ist physische Pfad der app an:
 
-* Für apps in gehostet [IIS](xref:fundamentals/servers/index#iis-http-server), die eindeutige ID wird dem physischen IIS-Pfad der app. Wenn eine app in einer webfarmumgebung bereitgestellt wird, ist dieser Wert stabil, vorausgesetzt, dass die IIS-Umgebungen auf allen Computern in der Webfarm auf ähnliche Weise konfiguriert sind.
+* Für apps, die in IIS gehostet wird ist die eindeutige ID der physischen IIS-Pfad der app. Wenn eine app in einer webfarmumgebung bereitgestellt wird, ist dieser Wert stabil, vorausgesetzt, dass die IIS-Umgebungen auf allen Computern in der Webfarm auf ähnliche Weise konfiguriert sind.
 * Für selbst gehostete apps, die unter der [Kestrel-Server](xref:fundamentals/servers/index#kestrel), die eindeutige ID wird der physische Pfad für die app auf dem Datenträger.
 
 Der eindeutige Bezeichner dient zum Zurücksetzen von Kennwörtern zu überstehen&mdash;sowohl der einzelnen app und dem Computer selbst.
