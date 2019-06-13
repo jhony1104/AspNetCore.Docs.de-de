@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 05/17/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 6f9eee1ed46f02232bed977f8f60a3d77db48784
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: 37274873f2bd4127f8743399d95d3cf7fef435c5
+ms.sourcegitcommit: b8ed594ab9f47fa32510574f3e1b210cff000967
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223154"
+ms.lasthandoff: 05/28/2019
+ms.locfileid: "66251330"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -69,7 +69,7 @@ HTTP/2 ist standardmäßig deaktiviert. Weitere Informationen zur Konfiguration 
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Verwenden von Kestrel mit einem Reverseproxy
 
-Sie können Kestrel eigenständig oder mit einem *Reverseproxyserver* wie z.B. [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](http://nginx.org) oder [Apache](https://httpd.apache.org/) verwenden. Ein Reverseproxyserver empfängt HTTP-Anforderungen aus dem Netzwerk und leitet diese an Kestrel weiter.
+Kestrel kann eigenständig oder mit einem *Reverseproxyserver* wie z.B. [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](http://nginx.org) oder [Apache](https://httpd.apache.org/) verwendet werden. Ein Reverseproxyserver empfängt HTTP-Anforderungen aus dem Netzwerk und leitet diese an Kestrel weiter.
 
 Kestrel bei Verwendung als Webserver mit direkter Internetverbindung:
 
@@ -160,6 +160,12 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 Der Kestrel-Webserver verfügt über einschränkende Konfigurationsoptionen, die besonders nützlich bei Bereitstellungen mit Internetzugriff sind.
 
 Legen Sie Einschränkungen für die <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits>-Eigenschaft der <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>-Klasse fest. Die `Limits`-Eigenschaft enthält eine Instanz der <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits>-Klasse.
+
+In den folgenden Beispielen wird der <xref:Microsoft.AspNetCore.Server.Kestrel.Core>-Namespace verwendet:
+
+```csharp
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+```
 
 ### <a name="keep-alive-timeout"></a>Keep-Alive-Timeout
 
@@ -473,7 +479,7 @@ Verwenden Sie Folgendes zum Angeben der URLs:
 * Den Hostkonfigurationsschlüssel `urls`
 * Die Erweiterungsmethode `UseUrls`
 
-Der Wert, der mit diesen Ansätzen angegeben wird, kann mindestens ein HTTP- oder HTTPS-Endpunkt sein (HTTPS wenn ein Standardzertifikat verfügbar ist). Konfigurieren Sie den Wert als eine durch Semikolons getrennte Liste (z.B. `"Urls": "http://localhost:8000;http://localhost:8001"`).
+Der Wert, der mit diesen Ansätzen angegeben wird, kann mindestens ein HTTP- oder HTTPS-Endpunkt sein (HTTPS wenn ein Standardzertifikat verfügbar ist). Konfigurieren Sie den Wert als eine durch Semikolons getrennte Liste (z.B. `"Urls": "http://localhost:8000; http://localhost:8001"`).
 
 Weitere Informationen zu diesen Ansätzen finden Sie unter [Server-URLs](xref:fundamentals/host/web-host#server-urls) und [Außerkraftsetzen der Konfiguration](xref:fundamentals/host/web-host#override-configuration).
 
@@ -650,7 +656,7 @@ Die Vorgehensweise im folgenden *appsettings.json*-Beispiel:
       "Url": "https://localhost:5002",
       "Certificate": {
         "Subject": "<subject; required>",
-        "Store": "<certificate store; defaults to My>",
+        "Store": "<certificate store; required>",
         "Location": "<location; defaults to CurrentUser>",
         "AllowInvalid": "<true or false; defaults to false>"
       }
@@ -683,7 +689,7 @@ Alternativ zur Verwendung von **Pfad** und **Kennwort** für alle Zertifikatknot
 ```json
 "Default": {
   "Subject": "<subject; required>",
-  "Store": "<cert store; defaults to My>",
+  "Store": "<cert store; required>",
   "Location": "<location; defaults to CurrentUser>",
   "AllowInvalid": "<true or false; defaults to false>"
 }
