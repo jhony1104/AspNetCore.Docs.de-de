@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/11/2019
 uid: fundamentals/index
-ms.openlocfilehash: 9c7bc25d813ad17825ef03f5176882993cc2dd63
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 3cf311f8e6be4ed12c79ceecc15ccc1babfb0117
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610330"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034857"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -22,11 +22,12 @@ In diesem Artikel finden Sie eine Übersicht über die wichtigsten Themen zum En
 
 In der `Startup`-Klasse:
 
-* werden alle von der Anwendung benötigten Dienste konfiguriert.
+* werden die von der App erforderlichen Dienste konfiguriert.
 * wird die Pipeline zur Anforderungsverarbeitung definiert.
 
-* wird Code, der Dienste konfiguriert (oder *registriert*) der `Startup.ConfigureServices`-Methode hinzugefügt. *Dienste* sind Komponenten, die von der App verwendet werden. Ein Entity Framework Core-Kontextobjekt beispielsweise ist ein Dienst.
-* Code zum Konfigurieren der Pipeline zur Anforderungsverarbeitung wird der `Startup.Configure`-Methode hinzugefügt. Die Pipeline besteht aus mehreren *Middleware*-Komponenten. Eine Middleware kann beispielsweise Anforderungen für statische Dateien verarbeiten oder HTTP-Anforderungen zu HTTPS umleiten. Jede Middleware führt asynchrone Operationen in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung.
+*Dienste* sind Komponenten, die von der App verwendet werden. Eine Protokollierungskomponente stellt beispielsweise einen Dienst dar. wird Code, der Dienste konfiguriert (oder *registriert*) der `Startup.ConfigureServices`-Methode hinzugefügt.
+
+Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren *Middlewarekomponenten*. Eine Middleware kann beispielsweise Anforderungen für statische Dateien verarbeiten oder HTTP-Anforderungen zu HTTPS umleiten. Jede Middleware führt asynchrone Operationen in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung. Code zum Konfigurieren der Pipeline zur Anforderungsverarbeitung wird der `Startup.Configure`-Methode hinzugefügt.
 
 Beispiel für eine `Startup`-Klasse:
 
@@ -60,9 +61,7 @@ ASP.NET Core enthält eine Reihe umfangreicher integrierter Middleware. Außerde
 
 Weitere Informationen finden Sie unter <xref:fundamentals/middleware/index>.
 
-<a id="host"/>
-
-## <a name="the-host"></a>Der Host
+## <a name="host"></a>Host
 
 Beim Starten erstellt eine ASP.NET Core-App einen *Host*. Der Host ist ein Objekt, das alle Ressourcen der App kapselt, z. B.:
 
@@ -74,61 +73,45 @@ Beim Starten erstellt eine ASP.NET Core-App einen *Host*. Der Host ist ein Objek
 
 Der wichtigste Grund für das Einschließen aller unabhängigen Ressourcen der App in einem Objekt ist die Verwaltung der Lebensdauer: steuern von Start und ordnungsgemäßem Herunterfahren der App.
 
-Der Code zum Erstellen eines Hosts befindet sich in `Program.Main` und folgt dem [Generatormuster](https://wikipedia.org/wiki/Builder_pattern). Zum Konfigurieren jeder Ressource, die zum Host gehört, werden Methoden aufgerufen. Um alles zu bündeln und das Hostobjekt zu instanziieren, wird eine Generatormethode aufgerufen.
-
 ::: moniker range=">= aspnetcore-3.0"
 
-`CreateHostBuilder` ist ein spezieller Name, der die builder-Methode für externe Komponenten wie z.B. [Entity Framework](/ef/core/) identifiziert.
+Es stehen zwei Hosts zur Verfügung: der generische Host und der Webhost. Der generische Host wird empfohlen. Der Webhost ist nur für die Abwärtskompatibilität verfügbar.
 
-In ASP.NET Core 3.0 kann ein generischer Host (`Host`-Klasse) oder ein Webhost (`WebHost`-Klasse) in einer Web-App verwendet werden. Ein generischer Host wird empfohlen, und ein Webhost ist für Abwärtskompatibilität verfügbar.
+Der Code zum Erstellen eines Hosts befindet sich in `Program.Main`:
 
-Das Framework bietet die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults`, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichten:
+[!code-csharp[](index/snapshots/3.x/Program1.cs)]
+
+Die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults` konfigurieren einen Host mit häufig verwendeten Optionen wie den folgenden:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
 * Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Konfigurationsquellen.
 * Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
 
-Hier ist ein Beispielcode für das Erstellen eines Hosts: Die Methoden zum Einrichten des Hosts mit häufig verwendeten Optionen sind hervorgehoben:
-
-[!code-csharp[](index/snapshots/3.x/Program1.cs?highlight=9-10)]
-
-Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und <xref:fundamentals/host/web-host>.
+Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`CreateWebHostBuilder` ist ein spezieller Name, der die builder-Methode für externe Komponenten wie z.B. [Entity Framework](/ef/core/) identifiziert.
+Es stehen zwei Hosts zur Verfügung: der Webhost und der generische Host. In ASP.NET Core 2.x ist der generische Host nur für nicht webbasierte Szenarios verfügbar.
 
-ASP.NET Core 2.x verwendet einen Webhost (`WebHost`-Klasse) für Web-Apps. Das Framework bietet die `CreateDefaultBuilder`-Methode, die einen Host mit häufig verwendeten Optionen, wie den folgenden, einrichtet:
+Der Code zum Erstellen eines Hosts befindet sich in `Program.Main`:
+
+[!code-csharp[](index/snapshots/2.x/Program1.cs)]
+
+Die Methode `CreateDefaultBuilder` konfiguriert einen Host mit häufig verwendeten Optionen wie den folgenden:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
 * Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Konfigurationsquellen.
 * Senden von Protokollausgaben an die Konsole und Debuggen von Anbietern.
-
-Hier ist ein Beispielcode für das Erstellen eines Hosts:
-
-[!code-csharp[](index/snapshots/2.x/Program1.cs?highlight=9)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host>.
 
 ::: moniker-end
 
-### <a name="advanced-host-scenarios"></a>Erweiterte Hostszenarios
+### <a name="non-web-scenarios"></a>Nicht webbasierte Szenarios
 
-::: moniker range=">= aspnetcore-3.0"
-
-Der generische Host ist für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host (`Host`-Klasse) können andere App-Typen querschnittliche Frameworkerweiterungen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-Der Webhost wurde entwickelt, um eine HTTP-Serverimplementierung einzuschließen, die für andere Arten von .NET-Apps nicht benötigt wird. Ab ASP.NET Core 2.1 ist der generische Host (`Host`-Klasse) für jede .NET Core-App verfügbar – nicht nur für ASP.NET Core-Apps. Mit dem generischen Host können andere App-Typen querschnittliche Frameworkerweiterungen wie Protokollierung, Dependency Injection, Konfiguration und Lebensdauerverwaltung der App verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
-
-::: moniker-end
-
-Sie können auch den Host zum Ausführen von Hintergrundaufgaben verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/hosted-services>.
+Mit dem generischen Host können andere App-Typen querschnittliche Frameworkerweiterungen wie Protokollierung, Dependency Injection (DI), Konfiguration und Lebensdauerverwaltung der App verwenden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und <xref:fundamentals/host/hosted-services>.
 
 ## <a name="servers"></a>Server
 
@@ -287,6 +270,6 @@ Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/web
 
 Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen statischen Ressourcen wie CSS, JavaScript und Bilddateien. Die Middleware für statische Dateien stellt standardmäßig nur Dateien aus dem Webstammverzeichnis (und Unterverzeichnissen) bereit. Der Pfad für den Webstamm ist standardmäßig auf *{Content Root}/wwwroot* festgelegt, beim [Erstellen des Hosts](#host) kann jedoch ein anderer Speicherort angegeben werden.
 
-In Razor-Dateien (*.cshtml*) zeigen die Tilde und der Schrägstrich `~/` auf den Webstamm. Pfade, die mit `~/` beginnen, werden als virtuelle Pfade bezeichnet.
+In Razor-Dateien ( *.cshtml*) zeigen die Tilde und der Schrägstrich `~/` auf den Webstamm. Pfade, die mit `~/` beginnen, werden als virtuelle Pfade bezeichnet.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.
