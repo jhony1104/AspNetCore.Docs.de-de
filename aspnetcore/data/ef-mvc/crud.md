@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 61669dca24b552012ee057b89de28b7de1702c2b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 442570cdc79fe7c496392ffbcbc527cf841aefa9
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886165"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750084"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
@@ -177,7 +177,7 @@ Ersetzen Sie die HttpPost-Edit-Aktionsmethode durch folgenden Code:
 
 Diese Änderungen implementieren eine bewährte Sicherheitsmethode, um Overposting zu verhindern. Der Gerüstbauer hat ein `Bind`-Attribut generiert und die Entität hinzugefügt, die von der Modellbindung für die Entitätenmenge mit einem `Modified`-Flag erstellt wurde. Dieser Code ist für viele Szenarios nicht empfohlen, weil das Attribut `Bind` vorhandene Daten aus Feldern löscht, die nicht im Parameter `Include` aufgelistet sind.
 
-Der neue Code liest die vorhandene Entität und ruft `TryUpdateModel` auf, um Felder in der abgerufenen Entität [basierend auf Benutzereingaben in den gesendeten Formulardaten](xref:mvc/models/model-binding#how-model-binding-works) zu aktualisieren. Die automatische Änderungsnachverfolgung des Entity Frameworks legt das Flag `Modified` auf den Feldern fest, die durch die Formulareingabe geändert wurden. Wenn die Methode `SaveChanges` aufgerufen wird, erstellt Entity Framework SQL-Anweisungen, um die Datenbankzeile zu aktualisieren. Nebenläufigkeitskonflikte werden ignoriert, und nur die Tabellenspalten, die vom Benutzer aktualisiert wurden, werden in der Datenbank aktualisiert. (In einem späteren Tutorial lernen Sie, wie man Nebenläufigkeitskonflikte behandelt.)
+Der neue Code liest die vorhandene Entität und ruft `TryUpdateModel` auf, um Felder in der abgerufenen Entität [basierend auf Benutzereingaben in den gesendeten Formulardaten](xref:mvc/models/model-binding) zu aktualisieren. Die automatische Änderungsnachverfolgung des Entity Frameworks legt das Flag `Modified` auf den Feldern fest, die durch die Formulareingabe geändert wurden. Wenn die Methode `SaveChanges` aufgerufen wird, erstellt Entity Framework SQL-Anweisungen, um die Datenbankzeile zu aktualisieren. Nebenläufigkeitskonflikte werden ignoriert, und nur die Tabellenspalten, die vom Benutzer aktualisiert wurden, werden in der Datenbank aktualisiert. (In einem späteren Tutorial lernen Sie, wie man Nebenläufigkeitskonflikte behandelt.)
 
 Als eine bewährte Methode zum Verhindern von Overposting, sind die Felder in den `TryUpdateModel`-Parametern zugelassen, die durch die Seite **Edit** (Bearbeiten) aktualisierbar sein sollen. (Die leere Zeichenfolge vor der Liste der Felder in der Parameterliste ist für einen Präfix zur Verwendung mit den Namen der Formularfelder.) Derzeit sind keine zusätzlichen von Ihnen geschützten Felder vorhanden. Wenn Sie jedoch die Felder auflisten, die die Modellbindung binden soll, stellen Sie sicher, dass zukünftig hinzugefügte Felder automatisch geschützt sind, bis Sie sie explizit hier hinzufügen.
 

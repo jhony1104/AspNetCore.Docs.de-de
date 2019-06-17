@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Probleme mit IIS-Bereitstellungen (IIS = Inte
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 05/28/2019
 uid: host-and-deploy/iis/troubleshoot
-ms.openlocfilehash: e4c93459f2030c7c0a55ea90e0cc8c8d30b76c51
-ms.sourcegitcommit: a04eb20e81243930ec829a9db5dd5de49f669450
+ms.openlocfilehash: cb42a262c89c27fa350e936184f8ddb3a02788f0
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/03/2019
-ms.locfileid: "66470459"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034741"
 ---
 # <a name="troubleshoot-aspnet-core-on-iis"></a>Problembehandlung bei ASP.NET Core in IIS
 
@@ -330,13 +330,13 @@ Abrufen und Analysieren eines Speicherabbilds aus der [Windows-Fehlerberichterst
 
 1. Erstellen Sie einen Ordner zum Speichern von Absturzabbilddateien unter `c:\dumps`. Der App-Pool muss über Schreibzugriff auf den Ordner verfügen.
 1. Führen Sie das [PowerShell-Skript „EnableDumps“](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) aus:
-   * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
+   * Wenn die App das [In-Process-Hostingmodell](xref:host-and-deploy/iis/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
      ```
 
-   * Wenn die App das [Out-of-Process-Hostingmodell](xref:fundamentals/servers/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
+   * Wenn die App das [Out-of-Process-Hostingmodell](xref:host-and-deploy/iis/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
 
      ```console
      .\EnableDumps dotnet.exe c:\dumps
@@ -344,13 +344,13 @@ Abrufen und Analysieren eines Speicherabbilds aus der [Windows-Fehlerberichterst
 
 1. Führen Sie die App unter den Bedingungen aus, die dazu führen, dass der Absturz auftritt.
 1. Nachdem der Absturz stattgefunden hat, führen Sie das [PowerShell-Skript „DisableDumps“](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) aus:
-   * Wenn die App das [In-Process-Hostingmodell](xref:fundamentals/servers/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
+   * Wenn die App das [In-Process-Hostingmodell](xref:host-and-deploy/iis/index#in-process-hosting-model) verwendet, führen Sie das Skript für *w3wp.exe* aus:
 
      ```console
      .\DisableDumps w3wp.exe
      ```
 
-   * Wenn die App das [Out-of-Process-Hostingmodell](xref:fundamentals/servers/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
+   * Wenn die App das [Out-of-Process-Hostingmodell](xref:host-and-deploy/iis/index#out-of-process-hosting-model) verwendet, führen Sie das Skript für *dotnet.exe* aus:
 
      ```console
      .\DisableDumps dotnet.exe

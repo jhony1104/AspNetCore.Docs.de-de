@@ -5,12 +5,12 @@ description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Cor
 ms.author: riande
 ms.date: 6/3/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: d843e47ccb5180fab34b4c4c4a4b5cbda21289bf
-ms.sourcegitcommit: a1364109d11d414121a6337b611bee61d6e489e9
+ms.openlocfilehash: e7d0312bd4b54586f4a3d403f464ded1aa49bcac
+ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66491206"
+ms.lasthandoff: 06/10/2019
+ms.locfileid: "66824707"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
@@ -47,7 +47,7 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-W
 
   ![neue ASP.NET Core-Webanwendung](razor-pages-start/_static/np_2.1.png)
 
-* Nennen Sie das Projekt **RazorPagesMovie**. Es ist wichtig, dem Projekt den Namen *RazorPagesMovie* zu geben, damit die Namespaces übereinstimmen, wenn Sie Code kopieren und einfügen.
+* Nennen Sie das Projekt **RazorPagesMovie**. Es ist wichtig, den Namen *RazorPagesMovie* zu verwenden, damit die Namespaces übereinstimmen, wenn Sie Code kopieren und einfügen.
 
   ![neue ASP.NET Core-Webanwendung](razor-pages-start/_static/config.png)
 

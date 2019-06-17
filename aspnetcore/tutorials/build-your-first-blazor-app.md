@@ -5,14 +5,14 @@ description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2019
+ms.date: 06/12/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: d48b891127f4db929b631c0ddf199c07658e604c
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: df27dad17133f287b1c73dc308b4cc69426e0a63
+ms.sourcegitcommit: 739a3d7ca4fd2908ea0984940eca589a96359482
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970120"
+ms.lasthandoff: 06/13/2019
+ms.locfileid: "67040714"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -36,7 +36,7 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor
 
    Die Benutzeroberfläche der Counter-Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z.B. Schleifen, Bedingungen, Ausdrücken) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Das HTML-Markup und die C#-Renderinglogik werden zur Erstellungszeit in eine Komponentenklasse konvertiert. Der Name der generierten .NET-Klasse stimmt mit dem Namen der Datei überein.
 
-   Member der Komponentenklasse werden in einem `@functions`-Block definiert. Im `@functions`-Block werden der Komponentenstatus (Eigenschaften, Felder) und Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Diese Member werden dann als Teil der Renderinglogik der Komponente und zur Behandlung von Ereignissen verwendet.
+   Member der Komponentenklasse werden in einem `@code`-Block definiert. Im `@code`-Block werden der Komponentenstatus (Eigenschaften, Felder) und Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Diese Member werden dann als Teil der Renderinglogik der Komponente und zur Behandlung von Ereignissen verwendet.
 
    Wenn die **Hier klicken**-Schaltfläche ausgewählt wird:
 
@@ -69,7 +69,7 @@ Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponent
 
 Komponenten können auch Parameter aufweisen. Komponentenparameter werden mithilfe nicht öffentlicher Eigenschaften für die Komponentenklasse definiert, die mit `[Parameter]` versehen ist. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
 
-1. Aktualisieren Sie den `@functions`-C#-Code der Komponente:
+1. Aktualisieren Sie den `@code`-C#-Code der Komponente:
 
    * Fügen Sie eine `IncrementAmount`-Eigenschaft hinzu, die mit dem `[Parameter]`-Attribut ausgestattet ist.
    * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
@@ -152,21 +152,13 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Besuchen Sie die neue Todo-Seite, um sicherzustellen, dass der Link zur Todo-Komponente funktioniert.
 
-1. Wenn Sie eine serverseitige Blazor-App erstellen, fügen Sie den Namespace der App zur Datei *\_Imports.razor* hinzu. Bei der folgenden `@using` Anweisung wird davon ausgegangen, dass der Namespace der App `WebApplication` ist:
-
-   ```cshtml
-   @using WebApplication
-   ```
-   
-   Clientseitige Blazor-Apps schließen den Namespace der App standardmäßig in die Datei *\_Imports.razor* ein.
-
 1. Fügen Sie eine *TodoItem.cs*-Datei dem Stamm des Projekts hinzu, die eine Klasse zum Darstellen eines Aufgabenelements enthalten soll. Verwenden Sie den folgenden C#-Code für die `TodoItem`-Klasse:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
 1. Kehren Sie zur Todo-Komponente (*Pages/Todo.razor*) zurück:
 
-   * Fügen Sie ein Feld für die Aufgabenelemente in einem `@functions`-Block hinzu. Die Todo-Komponente verwaltet mit diesem Feld den Status der Aufgabenliste.
+   * Fügen Sie ein Feld für die Aufgabenelemente in einem `@code`-Block hinzu. Die Todo-Komponente verwaltet mit diesem Feld den Status der Aufgabenliste.
    * Fügen Sie ein Markup für eine unsortierte Liste und eine `foreach`-Schleife hinzu, um jedes Aufgabenelement als Listenelement zu rendern.
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo4.razor?highlight=5-10,12-14)]
@@ -177,7 +169,7 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Bei Auswahl der Schaltfläche **Todo-Element hinzufügen** geschieht nichts, da kein Ereignishandler mit der Schaltfläche verknüpft ist.
 
-1. Fügen Sie eine `AddTodo`-Methode der Todo-Komponente hinzu, und registrieren Sie sie mit dem `onclick`-Attribut für Schaltflächenklicks:
+1. Fügen Sie eine `AddTodo`-Methode der Todo-Komponente hinzu, und registrieren Sie sie mit dem `@onclick`-Attribut für Schaltflächenklicks:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo6.razor?highlight=2,7-10)]
 
@@ -188,7 +180,7 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
    ```cshtml
-   <input placeholder="Something todo" bind="@newTodo" />
+   <input placeholder="Something todo" @bind="@newTodo" />
    ```
 
 1. Aktualisieren Sie die `AddTodo`-Methode, um das `TodoItem` mit dem angegebenen Titel der Liste hinzuzufügen. Löschen Sie den Wert der Texteingabe, indem Sie für `newTodo` eine leere Zeichenfolge festlegen:

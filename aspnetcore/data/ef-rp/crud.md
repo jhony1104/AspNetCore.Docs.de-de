@@ -5,12 +5,12 @@ description: In diesem Tutorial wird veranschaulicht, wie mit EF Core Erstellung
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/crud
-ms.openlocfilehash: 43d133c61c0387ebcb4bcb2d22c800588d8534c3
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: ec22c82b3b70399017b5b9aa61896440db647062
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516919"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750016"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)
 
@@ -123,7 +123,7 @@ Im vorangehenden Code versucht `TryUpdateModelAsync<Student>`, das Objekt `empty
 Im vorgehenden Beispiel:
 
 * Ist das zweite Argument (`"student", // Prefix`) das Präfix, das für die Suche nach Werten verwendet wird. Die Groß-/Kleinschreibung wird hier nicht beachtet.
-* Werden die bereitgestellten Formularwerte mithilfe der [Modellbindung](xref:mvc/models/model-binding#how-model-binding-works) in die Typen im `Student`-Modell konvertiert.
+* Werden die bereitgestellten Formularwerte mithilfe der [Modellbindung](xref:mvc/models/model-binding) in die Typen im `Student`-Modell konvertiert.
 
 <a id="overpost"></a>
 
