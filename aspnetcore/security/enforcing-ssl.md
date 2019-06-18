@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: 8d48877153d6d75348e29299c669125904236de8
-ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
+ms.openlocfilehash: 08ce50775d1b5348cb0528a1724cec2e5c72dae2
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66692588"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152903"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.NET Core
 
@@ -24,11 +24,32 @@ Dieses Dokument zeigt, wie Sie:
 
 Keine API kann verhindern, dass einen Client sensible Daten bei der ersten Anforderung senden.
 
+::: moniker range="< aspnetcore-3.0"
+
 > [!WARNING]
+> ## <a name="api-projects"></a>-API-Projekte
+>
 > Führen Sie **nicht** verwenden [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) für Web-APIs, die vertraulichen Informationen zu erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+> [!WARNING]
+> ## <a name="api-projects"></a>-API-Projekte
+>
+> Führen Sie **nicht** verwenden [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) für Web-APIs, die vertraulichen Informationen zu erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+>
+> * nicht auf HTTP lauschen oder
+> * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
+>
+> ## <a name="hsts-and-api-projects"></a>HSTS und API-Projekte
+>
+> Die Standard-API-Projekte enthalten keine [HSTS](#hsts) da HSTS in der Regel eine einzige Browser-Anweisung ist. Führen Sie die anderen Abrufe, z. B. Telefon oder desktop-apps **nicht** befolgen die Anweisungen. Sogar innerhalb von Browsern hat ein einzelner authentifizierter Aufruf einer API über HTTP Risiken auf unsicheren Netzwerken. Der sichere Ansatz ist zum Konfigurieren von API-Projekten nur zum Empfangen und Antworten über HTTPS.
+
+::: moniker-end
 
 ## <a name="require-https"></a>Erforderlichkeit von HTTPS
 
@@ -159,6 +180,8 @@ Das globale Erzwingen der Verwendung von HTTPS (`options.Filters.Add(new Require
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
+
+<a name="hsts"></a>
 
 ## <a name="http-strict-transport-security-protocol-hsts"></a>HTTP Strict Transport Security-Protokoll (HSTS)
 

@@ -4,14 +4,14 @@ author: scottaddie
 description: Erfahren Sie, wie Sie statische Ressourcen in einer ASP.NET Core-Webanwendung durch Anwenden von bündelungs-und minimierungsverfahren zu optimieren.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/10/2019
+ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: ba01d365a25dfbd13fed89263d7489b2ce2a8771
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: c3ec67d9f5c2b8eb44b5ced911ccfd0fa40a52a7
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65535933"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152776"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung von statischen Objekten in ASP.NET Core
 
@@ -287,9 +287,12 @@ Wenn Visual Studio bzw. die Erweiterung "Bundler & Minifier" nicht verfügbar si
 
 Hinzufügen einer *"Package.JSON"* -Datei mit den folgenden `devDependencies`, um das Stammverzeichnis des Projekts:
 
+> [!WARNING]
+> Die `gulp-uglify` Modul ECMAScript (ES) 2015 unterstützt keine / ES6 und höher. Installieren Sie [Gulp-terser](https://www.npmjs.com/package/gulp-terser) anstelle von `gulp-uglify` ES2015 verwenden / ES6 oder höher.
+
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
-Installieren Sie die Abhängigkeiten mithilfe des folgenden Befehls auf der gleichen Ebene wie *"Package.JSON"*:
+Installieren Sie die Abhängigkeiten mithilfe des folgenden Befehls auf der gleichen Ebene wie *"Package.JSON"* :
 
 ```console
 npm i
