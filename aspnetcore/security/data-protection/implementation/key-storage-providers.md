@@ -5,12 +5,12 @@ description: Informationen Sie zu den softwareschlüsselspeicher-Anbieter in ASP
 ms.author: riande
 ms.date: 06/11/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 49b068480fe7ba0a9b338aa5f5b7fc19fb98528f
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: 19d51399e24d085f7c34f70098ca02cbba7a888f
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048099"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167040"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Softwareschlüsselspeicher-Anbieter in ASP.NET Core
 
@@ -37,7 +37,7 @@ Die `DirectoryInfo` kann in ein Verzeichnis auf dem lokalen Computer, oder es ka
 
 Die [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) Paket ermöglicht das Speichern von Data Protection-Schlüssel in Azure Blob Storage. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
 
-Zum Konfigurieren des Azure Blob Storage-Anbieters rufen Sie eine der der [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) Überladungen. 
+Zum Konfigurieren des Azure Blob Storage-Anbieters rufen Sie eine der der [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) Überladungen.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wenn die Web-app als Azure-Dienst ausgeführt wird, Authentifizierungstoken automatisch erstellt werden, mithilfe von [ Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/). 
+Wenn die Web-app als Azure-Dienst ausgeführt wird, Authentifizierungstoken automatisch erstellt werden, mithilfe von [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/).
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
@@ -149,7 +149,7 @@ Der generische Parameter, `TContext`, erben müssen ["DbContext"](/dotnet/api/mi
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-Erstellen der `DataProtectionKeys` Tabelle. 
+Erstellen der `DataProtectionKeys` Tabelle.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
