@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: 3192ad150b914c00b315f38bd9fe077ebf402b37
-ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
+ms.openlocfilehash: ec78d35daf6823779fca491aca7b7b309db4b02e
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/26/2019
-ms.locfileid: "58488701"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750036"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -30,7 +30,7 @@ Die Lokalisierung von Apps umfasst die folgenden Aufgaben:
 
 3. Implementieren Sie eine Strategie zum Auswählen der Sprache bzw. Kultur für jede Anforderung.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Stellen Sie sicher, dass der Inhalt der App lokalisierbar ist.
 
@@ -185,7 +185,7 @@ Der vorangehende Code ermöglicht die erfolgreiche Auflösung von RESX-Dateien.
 
 ## <a name="culture-fallback-behavior"></a>Kulturfallbackverhalten
 
-Bei der Suche nach einer Ressource initiiert die Lokalisierung „Kulturfallbackverhalten“. Wenn die angeforderte Kultur nicht gefunden wird, setzt sie diese Kultur auf die übergeordnete Kultur zurück. Die Eigenschaft [CultureInfo.Parent](/dotnet/api/system.globalization.cultureinfo.parent) stellt übrigens die übergeordnete Kultur dar. Das bedeutet in der Regel (aber nicht immer), dass der nationale Bezeichner aus der ISO entfernt wird. Beispielsweise ist der in Mexiko gesprochene spanische Dialekt „es-MX“. „es“&mdash;Spanisch ist das übergeordnete Element und bezieht sich nicht auf ein einzelnes Land.
+Bei der Suche nach einer Ressource initiiert die Lokalisierung „Kulturfallbackverhalten“. Wenn die angeforderte Kultur nicht gefunden wird, setzt sie diese Kultur auf die übergeordnete Kultur zurück. Die Eigenschaft [CultureInfo.Parent](/dotnet/api/system.globalization.cultureinfo.parent) stellt übrigens die übergeordnete Kultur dar. Das bedeutet in der Regel (aber nicht immer), dass der nationale Bezeichner aus der ISO entfernt wird. Beispielsweise ist der in Mexiko gesprochene spanische Sprache „es-MX“. „es“&mdash;Spanisch ist das übergeordnete Element und bezieht sich nicht auf ein einzelnes Land.
 
 Nehmen Sie an, dass Ihre Website eine Anforderung für eine Willkommensressource mit der Kultur „fr-CA“ erhält. Das Lokalisierungssystem sucht der Reihenfolge nach nach der folgenden Ressource und wählt die erste Übereinstimmung aus:
 
@@ -348,3 +348,4 @@ Begriffe:
 * [Globalisieren und Lokalisieren von .NET-Anwendungen](/dotnet/standard/globalization-localization/index)
 * [Ressourcen in RESX-Dateien](/dotnet/framework/resources/working-with-resx-files-programmatically)
 * [Microsoft Multilingual App Toolkit](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
+* [Lokalisierung und Generics](https://github.com/hishamco/hishambinateya.com/blob/master/Posts/localization-and-generics.md)

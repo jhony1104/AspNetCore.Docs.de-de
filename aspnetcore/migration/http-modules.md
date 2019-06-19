@@ -5,16 +5,14 @@ description: ''
 ms.author: tdykstra
 ms.date: 12/07/2016
 uid: migration/http-modules
-ms.openlocfilehash: 516230a66ee3edba986c91d79684256aa8e4c994
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 84381210910c66a7d121120b8c6b0f046cae8c4f
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087016"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207803"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handler und Module zu ASP.NET Core-middleware
-
-Durch [Matt Perdeck](https://www.linkedin.com/in/mattperdeck)
 
 In diesem Artikel zeigt, wie Sie vorhandene ASP.NET migrieren [HTTP-Module und Handler in "System.Webserver"](/iis/configuration/system.webserver/) zu ASP.NET Core [Middleware](xref:fundamentals/middleware/index).
 
@@ -48,7 +46,7 @@ Bevor Sie fortfahren, um ASP.NET Core-Middleware, zunächst betrachten wir wie H
 
 1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
 
-2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"*.
+2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"* .
 
 Neben der Module, können Sie Handler für die Lebenszyklus-Ereignisse zum Hinzufügen Ihrer *"Global.asax.cs"* Datei. Diese Handler führen nach dem Handler in der konfigurierten Module.
 
@@ -56,7 +54,7 @@ Neben der Module, können Sie Handler für die Lebenszyklus-Ereignisse zum Hinzu
 
 **Middleware sind einfacher als HTTP-Module und Handler:**
 
-* Module, Handler *"Global.asax.cs"*, *"Web.config"* (mit Ausnahme von IIS-Konfiguration) und der Lebenszyklus der Anwendung nicht mehr vorhanden sind
+* Module, Handler *"Global.asax.cs"* , *"Web.config"* (mit Ausnahme von IIS-Konfiguration) und der Lebenszyklus der Anwendung nicht mehr vorhanden sind
 
 * Die Rollen von Module und Handler haben von Middleware übernommen wurden
 
@@ -114,7 +112,7 @@ Beim Migrieren des Moduls Funktionen zu Ihrer neuen Middleware können mögliche
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Migrieren von Modul einfügen in die Anforderungspipeline
 
-HTTP-Module werden in der Regel hinzugefügt, um die Anforderungspipeline mithilfe *"Web.config"*:
+HTTP-Module werden in der Regel hinzugefügt, um die Anforderungspipeline mithilfe *"Web.config"* :
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
@@ -122,7 +120,7 @@ Konvertieren von [Hinzufügen Ihrer neuen Middleware](xref:fundamentals/middlewa
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Die genaue Stelle in der Pipeline, in dem Sie Ihre neue Middleware einfügen, hängt das Ereignis, das sie als Modul verarbeitet (`BeginRequest`, `EndRequest`usw.) und die Reihenfolge, in der Liste mit den Modulen in *"Web.config"*.
+Die genaue Stelle in der Pipeline, in dem Sie Ihre neue Middleware einfügen, hängt das Ereignis, das sie als Modul verarbeitet (`BeginRequest`, `EndRequest`usw.) und die Reihenfolge, in der Liste mit den Modulen in *"Web.config"* .
 
 Wie bereits erwähnt, besteht keine Anwendungslebenszyklus in ASP.NET Core und die Reihenfolge, in der Antworten von Middleware verarbeitet werden, die von der Reihenfolge von Modulen verwendeten unterscheidet sich. Dadurch kann Ihre Bestellungen Entscheidung schwieriger.
 
@@ -162,7 +160,7 @@ Die Middleware zur Pipeline hinzugefügt werden, bevor der Branch für alle Anfo
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>Laden die Verwendung des optionsmusters-middlewareoptionen.
 
-Einige Module und Handler verfügen über Konfigurationsoptionen, die in gespeichert werden *"Web.config"*. In ASP.NET Core ist ein neues Konfigurationsmodell jedoch anstelle des verwendet *"Web.config"*.
+Einige Module und Handler verfügen über Konfigurationsoptionen, die in gespeichert werden *"Web.config"* . In ASP.NET Core ist ein neues Konfigurationsmodell jedoch anstelle des verwendet *"Web.config"* .
 
 Die neue [Konfigurationssystem](xref:fundamentals/configuration/index) bietet Ihnen diese Optionen, um dieses Problem zu beheben:
 
@@ -176,7 +174,7 @@ Die neue [Konfigurationssystem](xref:fundamentals/configuration/index) bietet Ih
 
 2. Die Optionswerte Store
 
-   Das Konfigurationssystem können Sie Werte an einer beliebigen Stelle zu speichern, die Sie möchten. Allerdings verwenden die meisten Websites *"appSettings.JSON"*, sodass wir dieses Ansatzes eingehen werde:
+   Das Konfigurationssystem können Sie Werte an einer beliebigen Stelle zu speichern, die Sie möchten. Allerdings verwenden die meisten Websites *"appSettings.JSON"* , sodass wir dieses Ansatzes eingehen werde:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
@@ -188,7 +186,7 @@ Die neue [Konfigurationssystem](xref:fundamentals/configuration/index) bietet Ih
 
     Aktualisieren Ihrer `Startup` Klasse:
 
-   1. Bei Verwendung von *"appSettings.JSON"*, fügen Sie es an den konfigurationsbuilder in die `Startup` Konstruktor:
+   1. Bei Verwendung von *"appSettings.JSON"* , fügen Sie es an den konfigurationsbuilder in die `Startup` Konstruktor:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 

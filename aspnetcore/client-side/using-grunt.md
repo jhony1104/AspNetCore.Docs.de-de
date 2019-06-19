@@ -3,18 +3,16 @@ title: Verwenden von Grunt in ASP.NET Core
 author: rick-anderson
 description: Verwenden von Grunt in ASP.NET Core
 ms.author: riande
-ms.date: 05/14/2019
+ms.date: 06/18/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: 4d9b6cf6f9a0007e9722bc054f0d9a7608f1473b
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: 851ce3b50e88fee597518aef23276800f4b50f06
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65620997"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207752"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Verwenden von Grunt in ASP.NET Core
-
-Durch [Noel Reis](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/)
 
 Grunt ist eine JavaScript-aufgabenausführung, die automatisiert Skript Minimierung, TypeScript-Kompilierung, Code "linten" Qualitätstools, Pre CSS-Prozessoren und fast jeder sich wiederholende Aufgabe, die vor, um die Cliententwicklung zu unterstützen. Grunt wird vollständig in Visual Studio unterstützt.
 
@@ -89,7 +87,7 @@ Zunächst richten Sie eine neue leere Web-Anwendung, und fügen Sie TypeScript-B
 
 Als Nächstes konfigurieren Sie NPM, Grunt und Grunt-Aufgaben herunterladen.
 
-1. Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste in des Projekts, und wählen **hinzufügen > Neues Element** aus dem Kontextmenü. Wählen Sie die **NPM-Konfigurationsdatei** Element, übernehmen Sie den Standardnamen *"Package.JSON"*, und klicken Sie auf die **hinzufügen** Schaltfläche.
+1. Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste in des Projekts, und wählen **hinzufügen > Neues Element** aus dem Kontextmenü. Wählen Sie die **NPM-Konfigurationsdatei** Element, übernehmen Sie den Standardnamen *"Package.JSON"* , und klicken Sie auf die **hinzufügen** Schaltfläche.
 
 2. In der *"Package.JSON"* -Datei im der `devDependencies` Objekt geschweifte Klammern, geben Sie "grunt". Wählen Sie `grunt` leseformulare in Intellisense aus, und drücken Sie die EINGABETASTE. Visual Studio quote der Grunt-Paketname, und fügen einen Doppelpunkt. Wählen Sie rechts neben dem Doppelpunkt, die neueste stabile Version des Pakets vom oberen Rand der Intellisense-Liste (drücken Sie die `Ctrl-Space` Wenn Intellisense nicht angezeigt wird).
 
@@ -98,7 +96,7 @@ Als Nächstes konfigurieren Sie NPM, Grunt und Grunt-Aufgaben herunterladen.
     > [!NOTE]
     > Der NPM verwendet [semantische Versionierung](http://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der Intellisense-Liste (0.4.5 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion. Finden Sie unter den [NPM Semver Version Parser Verweis](https://www.npmjs.com/package/semver) als Leitfaden für die vollständige ausdrucksmöglichkeiten, die SemVer bereitstellt.
 
-3. Fügen Sie weitere Abhängigkeiten laden grunt-Contrib -\* Pakete für *Bereinigen*, *Jshint*, *"concat"*, *uglify*, und *Watch* wie im folgenden Beispiel gezeigt. Die Versionen müssen nicht im Beispiel übereinstimmen.
+3. Fügen Sie weitere Abhängigkeiten laden grunt-Contrib -\* Pakete für *Bereinigen*, *Jshint*, *"concat"* , *uglify*, und *Watch* wie im folgenden Beispiel gezeigt. Die Versionen müssen nicht im Beispiel übereinstimmen.
 
     ```json
     "devDependencies": {
@@ -126,9 +124,9 @@ Die Pakete für die einzelnen `devDependencies` Element herunterladen werden, so
 
 Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die definiert, lädt und registriert Sie Aufgaben, die manuell ausführen oder so konfiguriert, dass automatisch basierend auf Ereignissen in Visual Studio ausgeführt werden können.
 
-1. Mit der rechten Maustaste in des Projekts, und wählen Sie **hinzufügen** > **neues Element**. Wählen Sie die **JavaScript-Datei** Elementvorlagen, ändern Sie den Namen in *"gruntfile.js"*, und klicken Sie auf die **hinzufügen** Schaltfläche.
+1. Mit der rechten Maustaste in des Projekts, und wählen Sie **hinzufügen** > **neues Element**. Wählen Sie die **JavaScript-Datei** Elementvorlagen, ändern Sie den Namen in *"gruntfile.js"* , und klicken Sie auf die **hinzufügen** Schaltfläche.
 
-1. Fügen Sie den folgenden Code *"gruntfile.js"*. Die `initConfig` Funktion legt Optionen für jedes Paket und der Rest des Moduls lädt und die Tasks werden registriert.
+1. Fügen Sie den folgenden Code *"gruntfile.js"* . Die `initConfig` Funktion legt Optionen für jedes Paket und der Rest des Moduls lädt und die Tasks werden registriert.
 
    ```javascript
    module.exports = function (grunt) {
@@ -153,7 +151,7 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. Speichern Sie *"gruntfile.js"*. Die Datei sollte etwa wie im folgenden Screenshot aussehen.
+1. Speichern Sie *"gruntfile.js"* . Die Datei sollte etwa wie im folgenden Screenshot aussehen.
 
     ![ersten gruntfile](using-grunt/_static/gruntfile-js-initial.png)
 
@@ -225,7 +223,7 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. Speichern Sie *"gruntfile.js"*. Die Datei sollte etwa wie im folgenden Beispiel aussehen.
+1. Speichern Sie *"gruntfile.js"* . Die Datei sollte etwa wie im folgenden Beispiel aussehen.
 
     ![Beispiel für eine vollständige grunt](using-grunt/_static/gruntfile-js-complete.png)
 

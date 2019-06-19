@@ -3,14 +3,14 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 10/26/2018
+ms.date: 06/12/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 7f97be651c067e94f29eef4956c10d87ec031bed
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 87c5b97a653c139b8b79f4270e0d9d0081815433
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887905"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034938"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -210,7 +210,7 @@ Die Standardsprache in einem Codeblock ist C#. Die Razor Page kann jedoch zurüc
 
 ### <a name="explicit-delimited-transition"></a>Durch Trennzeichen getrennte explizite Übergänge
 
-Soll ein Unterabschnitt eines Codeblocks in HTML gerendert werden, umschließen Sie die Zeichen, die gerendert werden sollen, mit dem Razor-Tag **\<text>**:
+Soll ein Unterabschnitt eines Codeblocks in HTML gerendert werden, umschließen Sie die Zeichen, die gerendert werden sollen, mit dem Razor-Tag **\<text>** :
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -222,10 +222,10 @@ Soll ein Unterabschnitt eines Codeblocks in HTML gerendert werden, umschließen 
 
 Verwenden Sie diese Methode zum Rendern von HTML-Code, der nicht von einem HTML-Tag umschlossen ist. Ohne HTML- oder Razor-Tag tritt ein Razor-Laufzeitfehler auf.
 
-Das **\<text>**-Tag ist nützlich, wenn Sie beim Rendern von Inhalt Leerzeichen steuern möchten:
+Das **\<text>** -Tag ist nützlich, wenn Sie beim Rendern von Inhalt Leerzeichen steuern möchten:
 
-* Nur der Inhalt zwischen den **\<text>**-Tags wird gerendert.
-* In der HTML-Ausgabe werden keine Leerzeichen vor oder nach dem **\<text>**-Tag angezeigt.
+* Nur der Inhalt zwischen den **\<text>** -Tags wird gerendert.
+* In der HTML-Ausgabe werden keine Leerzeichen vor oder nach dem **\<text>** -Tag angezeigt.
 
 ### <a name="explicit-line-transition-with-"></a>Explizite Zeilenübergänge mit @:
 
@@ -574,9 +574,39 @@ Der Code rendert den folgenden HTML-Code:
 
 ::: moniker-end
 
+### <a name="attribute"></a>@attribute
+
+Die `@attribute`-Anweisung fügt das angegebene Attribut zu der Klasse der generierten Seite oder Ansicht hinzu. Im folgenden Beispiel wird das `[Authorize]`-Attribut hinzugefügt:
+
+```cshtml
+@attribute [Authorize]
+```
+
+> [!WARNING]
+> In der ASP.NET Core 3.0 Preview 6-Version gibt es ein bekanntes Problem, bei dem `@attribute`-Anweisungen in *\_Imports.razor*- und *\_ViewImports.cshtml*-Dateien nicht funktionieren. Dieses Problem wird in der Preview 7-Version behoben.
+
+### <a name="namespace"></a>@namespace
+
+Die `@namespace`-Anweisung legt den Namespace der Klasse der generierten Seite oder Ansicht fest:
+
+```cshtml
+@namespace Your.Namespace.Here
+```
+
+Wenn eine Seite oder Ansicht eine API mit einer `@namespace`-Anweisung importiert, wird der Namespace der ursprünglichen Datei relativ zu diesem Namespace festgelegt. 
+
+Wenn *MyApp/Pages/\_ViewImports.cshtml* `@namespace Hello.World` enthält, wird der Namespace von Seiten oder Ansichten, die den `Hello.World`-Namespace importieren, wie in der folgenden Tabelle gezeigt festgelegt.
+
+| Seite (oder Ansicht)                     | Namespace               |
+| ---------------------------------- | ----------------------- |
+| *MyApp/Pages/Index.cshtml*         | `Hello.World`           |
+| *MyApp/Pages/MorePages/Bar.cshtml* | `Hello.World.MorePages` |
+
+Wenn mehrere Importdateien die `@namespace`-Anweisung enthalten, wird die Datei verwendet, die sich am nächsten bei der Seite oder Ansicht in der Verzeichniskette befindet.
+
 ### <a name="section"></a>@section
 
-Die `@section`-Anweisung wird in Verbindung mit dem [Layout](xref:mvc/views/layout) verwendet, damit Ansichten Inhalte in verschiedenen Teilen der HTML-Seite rendern können. Weitere Informationen finden Sie unter [Abschnitte](xref:mvc/views/layout#layout-sections-label).
+Die `@section`-Anweisung wird in Verbindung mit dem [Layout](xref:mvc/views/layout) verwendet, damit Seiten oder Ansichten Inhalte in verschiedenen Teilen der HTML-Seite rendern können. Weitere Informationen finden Sie unter [Abschnitte](xref:mvc/views/layout#layout-sections-label).
 
 ## <a name="templated-razor-delegates"></a>Auf Vorlagen basierende Razor-Delegate
 

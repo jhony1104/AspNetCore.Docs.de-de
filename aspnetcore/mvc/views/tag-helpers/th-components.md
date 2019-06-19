@@ -4,14 +4,14 @@ author: scottaddie
 description: Informationen zu Taghilfsprogrammkomponenten und deren Verwendung in ASP.NET Core.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
-ms.date: 04/06/2019
+ms.date: 06/12/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 777bbcca3d1c2f03f386fa62df2a2e0b00409318
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b5b3abea6492cfaa7d6acd0e54073a8db12eb2a5
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889735"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034753"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Taghilfsprogrammkomponenten in ASP.NET Core
 
@@ -62,9 +62,16 @@ Der vorangehende Code bindet ein [Bootstrap-QuickInfo-Widget](https://getbootstr
 
 Eine Taghilfsprogrammkomponente muss der Sammlung „Taghilfsprogrammkomponenten“ der App hinzugefügt werden. Es gibt drei Möglichkeiten, der Sammlung Taghilfsprogrammkomponenten hinzuzufügen:
 
-1. [Registrierung über Dienstcontainer](#registration-via-services-container)
-1. [Registrierung über Razor-Datei](#registration-via-razor-file)
-1. [Registrierung über Seitenmodell oder Controller](#registration-via-page-model-or-controller)
+* [Taghilfsprogrammkomponenten in ASP.NET Core](#tag-helper-components-in-aspnet-core)
+  * [Anwendungsfälle](#use-cases)
+    * [Einfügen in HTML-head-Element](#inject-into-html-head-element)
+    * [Einfügen in HTML-body-Element](#inject-into-html-body-element)
+  * [Registrieren einer Komponente](#register-a-component)
+    * [Registrierung über Dienstcontainer](#registration-via-services-container)
+    * [Registrierung über Razor-Datei](#registration-via-razor-file)
+    * [Registrierung über Seitenmodell oder Controller](#registration-via-page-model-or-controller)
+  * [Erstellen einer Komponente](#create-a-component)
+  * [Zusätzliche Ressourcen](#additional-resources)
 
 ### <a name="registration-via-services-container"></a>Registrierung über Dienstcontainer
 
