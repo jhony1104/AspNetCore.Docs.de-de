@@ -1,20 +1,20 @@
 ---
-title: Hosten und Bereitstellen von Blazor
+title: Hosten und Bereitstellen von ASP.NET Core Blazor
 author: guardrex
 description: Erfahren Sie, wie Sie Blazor-Apps hosten und bereitstellen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/23/2019
+ms.date: 06/14/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 0fc7643c65b93a63d7a594d35e4013eab76e9db8
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: 8a5ac5c58e7ceab07e55da8b61ebb01f7ac984bc
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376386"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67153200"
 ---
-# <a name="host-and-deploy-blazor"></a>Hosten und Bereitstellen von Blazor
+# <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
 
@@ -55,4 +55,4 @@ Anleitungen für die Bereitstellung finden Sie in folgenden Themen:
 
 Clientseitige Blazor-Apps können statische Inhalte aus [Azure Storage](https://azure.microsoft.com/services/storage/) direkt aus einem Speichercontainer erhalten.
 
-Weitere Informationen finden Sie unter [Hosten und Bereitstellen von clientseitigem Blazor (eigenständige Bereitstellung): Azure Storage](xref:host-and-deploy/blazor/client-side#azure-storage).
+Weitere Informationen finden Sie unter [Host and deploy ASP.NET Core Blazor client-side (Standalone deployment) (Hosten und Bereitstellen von clientseitigem ASP.NET Core Blazor (eigenständige Bereitstellung)): Azure Storage](xref:host-and-deploy/blazor/client-side#azure-storage).
