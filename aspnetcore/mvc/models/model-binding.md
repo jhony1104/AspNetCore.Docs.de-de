@@ -1,151 +1,428 @@
 ---
 title: Modellbindung in ASP.NET Core
 author: tdykstra
-description: Erfahren Sie, wie die Modellbindung in ASP.NET Core MVC Aktionsmethodenparametern Daten aus HTTP-Anforderungen zuordnet.
+description: Erfahren Sie, wie die Modellbindung in ASP.NET Core funktioniert und wie Sie ihr Verhalten anpassen.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: tdykstra
-ms.date: 11/13/2018
+ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 1dc9b41328ed78440622acc1865b6f088d394403
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 7d62ccecdacbd34a38a1fd8c58979a9b09cf86e8
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883145"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750201"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Modellbindung in ASP.NET Core
 
-Von [Rachel Appel](https://github.com/rachelappel)
+In diesem Artikel wird erläutert, was Modellbindung ist, wie sie funktioniert, und wie Sie ihr Verhalten anpassen können.
 
-## <a name="introduction-to-model-binding"></a>Einführung in die Modellbindung
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
-Die Modellbindung in ASP.NET Core MVC ordnet Daten aus HTTP-Anforderungen Aktionsmethodenparametern zu. Diese Parameter können einfache Typen wie Zeichenfolgen, ganze Zahlen, Gleitkommazahlen oder komplexe Typen sein. Dieses Feature von MVC ist sehr hilfreich, denn das Zuordnen von eingehenden Daten zu einem Gegenstück ist ein häufiges Szenario, unabhängig von der Größe und Komplexität der Daten. MVC löst dieses Problem, indem die Bindung abstrahiert wird, sodass Entwickler nicht denselben Code für jede App umschreiben müssen. Einen eigenen Text-in-Typ-Konverter zu schreiben ist mühsam und fehleranfällig.
+## <a name="what-is-model-binding"></a>Was ist Modellbindung?
 
-## <a name="how-model-binding-works"></a>So funktioniert die Modellbindung
+Controller und Razor Pages arbeiten mit Daten, die aus HTTP-Anforderungen stammen. Routendaten können beispielsweise einen Datensatzschlüssel enthalten, und bereitgestellte Formularfelder können Werte für die Eigenschaften des Modells bereitstellen. Das Schreiben von Code zum Abrufen jedes dieser Werte und deren Konvertierung aus Zeichenfolgen in .NET-Datentypen wäre mühsam und fehleranfällig. Modellbindung automatisiert diesen Vorgang. Das Modellbindungssystem:
 
-Wenn MVC eine HTTP-Anforderung empfängt, wird sie an eine bestimmte Aktionsmethode eines Controllers weitergeleitet. MVC bestimmt auf Grundlage der Routendaten, welche Aktionsmethode ausgeführt werden soll, und bindet dann Werte aus der HTTP-Anforderung an die Parameter dieser Aktionsmethode. Nehmen wir beispielsweise die folgende URL:
+* Ruft Daten aus verschiedenen Quellen ab, z. B. Routendaten, Formularfelder und Abfragezeichenfolgen.
+* Stellt diese Daten Controllern und Razor Pages in Methodenparametern und öffentlichen Eigenschaften bereit.
+* Konvertiert Zeichenfolgendaten in .NET-Typen.
+* Aktualisiert Eigenschaften komplexer Typen.
 
-`http://contoso.com/movies/edit/2`
+## <a name="example"></a>Beispiel
 
-Da die Routenvorlage `{controller=Home}/{action=Index}/{id?}` entspricht, leitet `movies/edit/2` an den `Movies`-Controller und die zugehörige `Edit`-Aktionsmethode weiter. Diese akzeptiert auch einen optionalen Parameter namens `id`. Der Code für die Aktionsmethode sollte etwa wie folgt aussehen:
+Angenommen Sie haben die folgende Aktionsmethode:
 
-```csharp
-public IActionResult Edit(int? id)
-   ```
+[!code-csharp[](model-binding/samples/2.x/Controllers/PetsController.cs?name=snippet_DogsOnly)]
 
-Hinweis: Bei den Zeichenfolgen in der URL-Route wird die Groß-/Kleinschreibung nicht beachtet.
+Und die App empfängt eine Anforderung mit dieser URL:
 
-MVC versucht, Anforderungsdaten anhand des Namens an die Aktionsparameter zu binden, und sucht mithilfe des Parameternamens und der Namen der öffentlichen festlegbaren Eigenschaften nach Werten für jeden Parameter. Im obigen Beispiel heißt der einzige Aktionsparameter `id`. Dieser wird von MVC an den Wert gebunden, der in den Routenwerten denselben Namen trägt. Zusätzlich zu den Routenwerten bindet MVC Daten aus verschiedenen Teilen der Anforderung, und zwar in einer festgelegten Reihenfolge. Bei der Modellbindung werden die folgenden Datenquellen in der folgenden Reihenfolge durchgegangen:
-
-1. `Form values`: Dies sind Formularwerte, die in der HTTP-Anforderung mithilfe der POST-Methode verwendet werden. (einschließlich jQuery-POST-Anforderungen).
-
-2. `Route values`: Die vom [Routing](xref:fundamentals/routing) bereitgestellten Routenwerte
-
-3. `Query strings`: Die Abfragezeichenfolge des URIs.
-
-<!-- DocFX BUG
-The link works but generates an error when building with DocFX
-@fundamentals/routing
-[Routing](xref:fundamentals/routing)
--->
-
-Hinweis: Formularwerte, Routendaten und Abfragezeichenfolgen werden als Name/Wert-Paare gespeichert.
-
-Da die Modellbindung einen Schlüssel namens `id` verlangt, `id` jedoch kein Teil der Formularwerte ist, wird in den Routenwerten nach diesem Schlüssel gesucht. In unserem Beispiel befindet sich der Schlüssel dort. Eine Bindung wird hergestellt, und der Wert wird in die ganze Zahl 2 konvertiert. Dieselbe Anforderung mit „Edit(Zeichenfolgen-ID)“ würde in die Zeichenfolge „2“ konvertiert werden.
-
-Bisher wurden in diesem Beispiel einfache Typen verwendet. Einfache Typen bestehen in MVC aus allen primitiven .NET-Typen oder aus Typen mit einem Zeichenfolgentypkonverter. Falls der Aktionsmethodenparameter aus einer Klasse wie dem `Movie`-Typen besteht, der sowohl einfache als auch komplexe Typen als Eigenschaften enthält, kann die Modellbindung von MVC ihn trotzdem ordnungsgemäß verarbeiten. Sie nutzt Reflektion und Rekursion, um die Eigenschaften komplexer Typen auf der Suche nach Übereinstimmungen zu durchlaufen. Die Modellbindung sucht nach der Schreibweise *Parametername.Eigenschaftenname*, um Werte an Eigenschaften zu binden. Wenn keine übereinstimmenden Werte gefunden werden, versucht die Modellbindung, einfach anhand des Eigenschaftennamens Bindungen durchzuführen. Bei Typen wie `Collection` sucht die Modellbindung nach Übereinstimmungen mit *Parametername[index]* oder nur *[index]*. Bei der Modellbindung werden `Dictionary`-Typen ähnlich behandelt, da nur *parametername[key]* oder nur *[key]* verlangt wird, solange die Schlüssel aus einfachen Typen bestehen. Unterstützte Schlüssel stimmen mit der Feldnamen-HTML überein und markieren Hilfsprogramme, die für den gleichen Modelltyp generiert wurde. Dies ermöglicht die Erhaltung von Werten, sodass Formularfelder der Einfachheit halber mit der Benutzereingabe befüllt bleiben, z.B. wenn gebundene Daten aus einem Erstellungs- oder Bearbeitungsvorgang die Überprüfung nicht bestanden haben.
-
-Damit die Modellbindung durchgeführt werden kann, muss die Klasse über einen öffentlichen Standardkonstruktor und öffentliche schreibbare Eigenschaften verfügen, die gebunden werden können. Wenn die Modellbindung erfolgt, wird die Klasse mit dem öffentlichen Standardkonstruktor instanziiert. Anschließend können die Eigenschaften festgelegt werden.
-
-Wenn ein Parameter gebunden ist, beendet die Modellbindung die Suche nach Werten mit diesem Namen und fährt mit dem Binden des nächsten Parameters fort. Andernfalls legt das Verhalten der Standardmodellbindung Parameter in Abhängigkeit ihres Typs auf ihre jeweiligen Standardwerte fest:
-
-* `T[]`: Mit Ausnahme von Arrays des Typs `byte[]` legt die Bindung Parameter des Typs `T[]` auf `Array.Empty<T>()` fest. Arrays des Typs `byte[]` werden auf `null` festgelegt.
-
-* Verweistypen: Die Bindung erstellt eine Instanz einer Klasse mit dem Standardkonstruktor, ohne Eigenschaften festzulegen. Die Modellbindung legt `string`-Parameter jedoch auf `null` fest.
-
-* Nullable-Typen: Nullable-Typen werden auf `null` festgelegt. Im obigen Beispiel legt die Modellbindung `id` auf `null` fest, da dessen Typ `int?` ist.
-
-* Werttypen: `T`-Typen, die keine Nullable-Typen sind, werden auf `default(T)` festgelegt. Beispielsweise legt die Modellbindung einen Parameters `int id` auf 0 (null) fest. Sie sollten statt Standardwerten die Modellvalidierung oder Nullable-Typen verwenden.
-
-Wenn die Bindung fehlschlägt, gibt MVC keinen Fehler aus. Jede Aktion, die eine Benutzereingabe akzeptiert, sollte die Eigenschaft `ModelState.IsValid` prüfen.
-
-Hinweis: Jeder Eintrag in der `ModelState`-Eigenschaft des Controllers ist ein `ModelStateEntry`, das eine `Errors`-Eigenschaft enthält. Es ist nur selten notwendig, diese Auflistung selbst abzufragen. Verwenden Sie stattdessen `ModelState.IsValid`.
-
-Darüber hinaus gibt es einige spezielle Datentypen, die MVC beim Ausführen der Modellbindung berücksichtigen muss:
-
-* `IFormFile`, `IEnumerable<IFormFile>`: Eine oder mehrere hochgeladene Dateien, die Teil der HTTP-Anforderung sind.
-
-* `CancellationToken`: Wird verwendet, um die Aktivität in asynchronen Controllern zu beenden.
-
-Diese Typen können an Aktionsparameter oder Eigenschaften eines Klassentyps gebunden werden.
-
-Nach Abschluss der Modellbindung, wird die [Validierung](validation.md) ausgeführt. Die Standardmodellbindung funktioniert hervorragend für die meisten Entwicklungsszenarios. Sie ist außerdem erweiterbar. Wenn Sie also besondere Anforderungen haben, können Sie das integrierte Verhalten anpassen.
-
-## <a name="customize-model-binding-behavior-with-attributes"></a>Anpassen des Modellbindungsverhaltens mit Attributen
-
-MVC enthält mehrere Attribute, mit denen Sie das Standardverhalten der Modellbindung auf eine andere Datenquelle richten können. Sie können beispielsweise angeben, ob die Bindung für eine Eigenschaft erforderlich ist oder ob sie überhaupt niemals mithilfe der Attribute `[BindRequired]` oder `[BindNever]` erfolgen sollte. Alternativ können Sie die Standarddatenquelle überschreiben und die Datenquelle der Modellbindung angeben. Es folgt eine Liste der Modellbindungsattribute:
-
-* `[BindRequired]`: Dieses Attribut fügt einen Modellzustandsfehler hinzu, wenn kein Bindung hergestellt werden kann.
-
-* `[BindNever]`: Dieses Attribut weist die Modellbindung an, nie an diesen Parameter zu binden.
-
-* `[FromHeader]`, `[FromQuery]`, `[FromRoute]`, `[FromForm]`: Mit diesen Attributen können Sie genau die gewünschte Bindungsquelle angeben.
-
-* `[FromServices]`: Dieses Attribut verwendet [Dependency Injection](../../fundamentals/dependency-injection.md), um Parameter aus Diensten zu binden.
-
-* `[FromBody]`: Mithilfe der konfigurierten Formatierer können Sie Daten aus dem Anforderungstext binden. Der Formatierer wird basierend auf dem Inhaltstyp der Anforderung ausgewählt.
-
-* `[ModelBinder]`: Mit diesem Attribut können Sie die Standardmodellbindung, die Bindungsquelle und den Namen überschreiben.
-
-Attribute sind sehr nützliche Tools, wenn Sie das Standardverhalten der Modellbindung überschreiben möchten.
-
-## <a name="customize-model-binding-and-validation-globally"></a>Globales Anpassen der Modellbindung und der Überprüfung
-
-Das Verhalten des Systems für die Modellbindung und Überprüfung wird durch die Klasse [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata) gesteuert, die Folgendes beschreibt:
-
-* Wie ein Modell gebunden werden soll.
-* Wie die Überprüfung für den Typ und dessen Eigenschaften erfolgt.
-
-Die Aspekte des Systemverhaltens können durch Hinzufügen eines Detailanbieters zu [MvcOptions.ModelMetadataDetailsProviders](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.modelmetadatadetailsproviders#Microsoft_AspNetCore_Mvc_MvcOptions_ModelMetadataDetailsProviders) global konfiguriert werden. MVC enthält einige integrierte Detailanbieter, die das Konfigurieren des Verhalten wie das Deaktivieren der Modellbindung oder der Überprüfung für bestimmte Typen ermöglichen.
-
-Fügen Sie [ExcludeBindingMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.excludebindingmetadataprovider) in `Startup.ConfigureServices` hinzu, um die Modellbindung für alle Modelle eines bestimmten Typs zu deaktivieren. Beispielsweise können Sie die Modellbindung für alle Modelle vom Typ `System.Version` wie folgt deaktivieren:
-
-```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new ExcludeBindingMetadataProvider(typeof(System.Version))));
+```
+http://contoso.com/api/pets/2?DogsOnly=true
 ```
 
-Fügen Sie [SuppressChildValidationMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.suppresschildvalidationmetadataprovider) in `Startup.ConfigureServices` hinzu, um die Überprüfung von Eigenschaften eines bestimmten Typs zu deaktivieren. Beispielsweise können Sie die Überprüfung von Eigenschaften vom Typ `System.Guid` wie folgt deaktivieren:
+Die Modellbindung durchläuft die folgenden Schritte, nachdem das Routingsystem die Aktionsmethode ausgewählt hat:
+
+* Findet den ersten Parameters von `GetByID`, eine ganze Zahl namens `id`.
+* Durchsucht die verfügbaren Quellen in der HTTP-Anforderung und findet `id` = „2“ in den Routendaten.
+* Konvertiert der Zeichenfolge „2“ in die ganze Zahl 2.
+* Findet den nächsten Parameter von `GetByID`, einen booleschen Wert namens `dogsOnly`.
+* Durchsucht die Quellen und findet „DogsOnly=True“ in der Abfragezeichenfolge. Beim Abgleich von Namen wird die Groß- und Kleinschreibung nicht berücksichtigt.
+* Konvertiert die Zeichenfolge „true“ in den booleschen Wert `true`.
+
+Das Framework ruft dann die `GetById`-Methode auf, und übergibt dabei als Eingabe „2“ für den `id`-Parameter und `true` für den `dogsOnly`-Parameter.
+
+Im vorherigen Beispiel sind die Ziele der Modellbindung Methodenparameter, die einfache Typen sind. Ziele können aber auch die Eigenschaften eines komplexen Typs sein. Nachdem jede Eigenschaft erfolgreich gebunden wurde, erfolgt die [Modellvalidierung](xref:mvc/models/validation) für diese Eigenschaft. Der Datensatz darüber, welche Daten an das Modell gebunden sind, sowie mit allen Bindungs- oder Validierungsfehlern wird in [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) oder [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) gespeichert. Um herauszufinden, ob dieser Vorgang erfolgreich war, überprüft die App das Flag [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid).
+
+## <a name="targets"></a>Ziele
+
+Die Modellbindung versucht, Werte für die folgenden Arten von Zielen zu finden:
+
+* Parameter der Controlleraktionsmethode, zu der eine Anforderung weitergeleitet wird.
+* Parameter der Razor Pages-Handlermethode, zu der eine Anforderung weitergeleitet wird. 
+* Öffentliche Eigenschaften eines Controllers oder einer `PageModel`-Klasse, falls durch Attribute angegeben.
+
+### <a name="bindproperty-attribute"></a>[BindProperty]-Attribut
+
+Kann auf eine öffentliche Eigenschaft eines Controllers oder einer `PageModel`-Klasse angewendet werden, um die Modellbindung anzuweisen, diese Eigenschaft als Ziel zu verwenden:
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=7-8)]
+
+### <a name="bindpropertiesattribute"></a>[BindProperties]-Attribut
+
+Verfügbar in ASP.NET Core 2.1 und höher.  Kann auf einen Controller oder eine `PageModel`-Klasse angewendet werden, um die Modellbindung anzuweisen, alle öffentlichen Eigenschaften dieser Klasse als Ziel zu verwenden:
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_BindProperties&highlight=1-2)]
+
+### <a name="model-binding-for-http-get-requests"></a>Modellbindung für HTTP-GET-Anforderungen
+
+Standardmäßig sind Eigenschaften für HTTP GET-Anforderungen nicht gebunden. In der Regel ist alles, was Sie für eine GET-Anforderung benötigen, ein Datensatz-ID-Parameter. Die Datensatz-ID wird verwendet, um das Element in der Datenbank zu suchen. Daher besteht keine Notwendigkeit, eine Eigenschaft zu binden, die eine Instanz des Modells enthält. In Szenarien, in denen Sie Eigenschaften an Daten aus GET-Anforderungen binden möchten, legen Sie die Eigenschaft `SupportsGet` auf `true` fest:
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
+
+## <a name="sources"></a>Quellen
+
+Standardmäßig ruft die Modellbindung Daten in Form von Schlüssel-Wert-Paaren aus den folgenden Quellen in einer HTTP-Anforderung ab:
+
+1. Formularfelder 
+1. Der Anforderungstext (für [Controller mit dem [ApiController]-Attribut](xref:web-api/index#binding-source-parameter-inference))
+1. Routendaten
+1. Abfragezeichenfolgeparameter
+1. Hochgeladene Dateien 
+
+Für jeden Zielparameter oder jede Zieleigenschaft werden die Quellen in der in dieser Liste angegebenen Reihenfolge überprüft. Es gibt ein paar Ausnahmen:
+
+* Routendaten und Abfragezeichenfolgenwerte werden nur für einfache Typen verwendet.
+* Hochgeladene Dateien werden nur an Zieltypen gebunden, die `IFormFile` oder `IEnumerable<IFormFile>` implementieren.
+
+Wenn das Standardverhalten nicht die richtigen Ergebnisse liefert, können Sie eins der folgenden Attribute verwenden, um die für jedes vorgegebene Ziel zu verwendende Quelle anzugeben. 
+
+* [[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute): Ruft Werte aus der Abfragezeichenfolge ab. 
+* [[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute): Ruft Werte aus Routendaten ab.
+* [[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute): Ruft Werte aus bereitgestellten Formularfeldern ab.
+* [[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute): Ruft Werte aus dem Abfragezeichentext ab.
+* [[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute): Ruft Werte aus HTTP-Headern ab.
+
+Diese Attribute:
+
+* Werden Modelleigenschaften einzeln hinzugefügt (nicht zur Modellklasse), wie im folgenden Beispiel gezeigt:
+
+  [!code-csharp[](model-binding/samples/2.x/Models/Instructor.cs?name=snippet_FromQuery&highlight=5-6)]
+
+* Akzeptieren optional einen Modellnamenswert im Konstruktor. Diese Option wird für den Fall bereitgestellt, dass der Eigenschaftenname nicht mit dem Wert in der Anforderung übereinstimmt. Beispielsweise könnte der Wert in der Anforderung ein Header mit einem Bindestrich in seinem Namen sein, wie im folgenden Beispiel gezeigt:
+
+  [!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_FromHeader)]
+
+### <a name="frombody-attribute"></a>[FromBody]-Attribut
+
+Die Anforderungstextdaten werden mithilfe von Eingabeformatierern analysiert, die für den Inhaltstyp der Anforderung spezifisch sind. Eingabeformatierer werden [später in diesem Artikel](#input-formatters) erklärt.
+
+Wenden Sie `[FromBody]` auf nicht mehr als einen Parameter pro Aktionsmethode an. Die ASP.NET Core-Runtime delegiert die Verantwortung, für das Lesen des Anforderungsdatenstroms an den Eingabeformatierer. Sobald der Anforderungsdatenstrom gelesen wurde, ist er nicht mehr verfügbar, um für die Bindung anderer `[FromBody]`-Parameter erneut gelesen zu werden.
+
+### <a name="additional-sources"></a>Zusätzliche Quellen
+
+Quelldaten werden dem Modellbindungssystem durch *Wertanbieter* bereitgestellt. Sie können benutzerdefinierte Wertanbieter schreiben und registrieren, die Daten für die Modellbindung aus anderen Quellen abrufen. Beispielsweise können Sie Daten aus Cookies oder Sitzungszuständen abrufen. So rufen Sie Daten aus einer neuen Quelle ab
+
+* Erstellen Sie eine Klasse, die das `IValueProvider` implementiert.
+* Erstellen Sie eine Klasse, die das `IValueProviderFactory` implementiert.
+* Registrieren Sie die Factoryklasse in `Startup.ConfigureServices`.
+
+Die Beispiel-App umfasst ein Beispiel für einen [Wertanbieter](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProvider.cs) und eine [Factory](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProviderFactory.cs), das Werte aus Cookies abruft. Dies ist der Registrierungscode in `Startup.ConfigureServices`:
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=3)]
+
+Der angezeigte Code fügt den benutzerdefinierten Wertanbieter hinter allen integrierten Wertanbietern ein.  Damit er der erste in der Liste wird, rufen Sie `Insert(0, new CookieValueProviderFactory())` anstelle von `Add` auf.
+
+## <a name="no-source-for-a-model-property"></a>Keine Quelle für eine Modelleigenschaft
+
+Standardmäßig wird kein Modellzustandsfehler erstellt, wenn kein Wert für eine Modelleigenschaft gefunden wird. Die Eigenschaft wird auf „null“ oder einen Standardwert festgelegt:
+
+* Einfache Nullable-Typen werden auf `null` festgelegt.
+* Nicht-Nullable-Werttypen werden auf `default(T)` festgelegt. Beispiel: Ein Parameter `int id` wird auf „0“ festgelegt.
+* Für komplexe Typen erstellt die Modellbindung eine Instanz, indem der Standardkonstruktor verwendet wird, ohne Eigenschaften festzulegen.
+* Arrays werden auf `Array.Empty<T>()` festgelegt, mit der Ausnahme, dass `byte[]`-Arrays auf `null` festgelegt werden.
+
+Wenn der Modellzustand ungültig gemacht werden soll, wenn in Fomularfeldern für eine Modelleigenschaft nichts gefunden wird, verwenden Sie das [[BindRequired]-Attribut](#bindrequired-attribute).
+
+Beachten Sie, dass dieses `[BindRequired]`-Verhalten für die Modellbindung von Daten aus bereitgestellten Formulardaten gilt, nicht für JSON- oder XML-Daten in einem Anforderungstext. Anforderungstextdaten werden von [Eingabeformatierern](#input-formatters) verarbeitet.
+
+## <a name="type-conversion-errors"></a>Typkonvertierungsfehler
+
+Wenn eine Quelle gefunden wird, aber nicht in den Zieltyp konvertiert werden kann, wird der Modellzustand als „ungültig“ gekennzeichnet. Der Zielparameter oder die Zieleigenschaft wird auf „null“ oder einen Standardwert festgelegt, wie bereits im vorherigen Abschnitt erwähnt.
+
+In einem API-Controller, der über das `[ApiController]`-Attribut verfügt, führt ein ungültiger Modellzustand zu einer automatischen „HTTP 400“-Antwort.
+
+Auf einer Razor Page wird die Seite erneut mit einer Fehlermeldung angezeigt:
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
+
+Die clientseitige Validierung fängt die meisten ungültigen Daten ab, die andernfalls an ein Razor Pages-Formular übermittelt würden. Diese Validierung erschwert es, den voranstehenden, hervorgehobenen Code auszulösen. Die Beispiel-App umfasst eine Schaltfläche **Submit with Invalid Date** (Mit ungültigem Datum absenden), die ungültige Daten in das Feld **Hire Date** (Einstellungsdatum) einfügt und das Formular absendet. Diese Schaltfläche zeigt, wie der Code zum erneuten Anzeigen der Seite funktioniert, wenn Datenkonvertierungsfehler auftreten.
+
+Wenn die Seite von dem vorangehenden Code erneut angezeigt wird, wird die ungültige Eingabe nicht im Formularfeld angezeigt. Dies liegt daran, dass die Modelleigenschaft auf „null“ oder einen Standardwert festgelegt wurde. Die ungültige Eingabe wird jedoch in einer Fehlermeldung angezeigt. Wenn Sie aber die ungültigen Daten im Formularfeld erneut anzeigen möchten, sollten Sie aus der Modelleigenschaft eine Zeichenfolge machen und die Datenkonvertierung manuell ausführen.
+
+Dieselbe Strategie empfiehlt sich, wenn Sie nicht möchten, dass Typkonvertierungsfehler zu Modellzustandsfehlern führen. In diesem Fall machen Sie aus der Modelleigenschaft eine Zeichenfolge.
+
+## <a name="simple-types"></a>Einfache Typen
+
+Die einfachen Typen, in die die Modellbindung Quellzeichenfolgen konvertieren kann, sind unter anderem:
+
+* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
+* [Char](xref:System.ComponentModel.CharConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
+* [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
+* [Double](xref:System.ComponentModel.DoubleConverter)
+* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Guid](xref:System.ComponentModel.GuidConverter)
+* [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
+* [Single](xref:System.ComponentModel.SingleConverter)
+* [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
+* [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
+* [Uri](xref:System.UriTypeConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
+
+## <a name="complex-types"></a>Komplexe Typen
+
+Ein komplexer Typ muss einen öffentlichen Standardkonstruktor und öffentliche schreibbare Eigenschaften besitzen, die gebunden werden können. Wenn die Modellbindung erfolgt, wird die Klasse mit dem öffentlichen Standardkonstruktor instanziiert. 
+
+Für jede Eigenschaft des komplexen Typs durchsucht die Modellbindung die Quellen für das Namensmuster *prefix.property_name*. Wenn nichts gefunden wird, sucht sie nur nach *property_name* ohne das Präfix.
+
+Beim Binden an einen Parameter ist das Präfix der Name des Parameters. Beim Binden an eine öffentliche Eigenschaft `PageModel` ist das Präfix der Name der öffentlichen Eigenschaft. Einige Attribute besitzen eine Eigenschaft `Prefix`, die es Ihnen gestattet, die Standardverwendung des Parameter- oder Eigenschaftennamens außer Kraft zu setzen.
+
+Nehmen Sie beispielsweise an, der komplexe Typ ist die folgende `Instructor`-Klasse:
+
+  ```csharp
+  public class Instructor
+  {
+      public int ID { get; set; }
+      public string LastName { get; set; }
+      public string FirstName { get; set; }
+  }
+  ```
+
+### <a name="prefix--parameter-name"></a>Präfix = Parametername
+
+Wenn das zu bindende Modell ein Parameter namens `instructorToUpdate` ist:
 
 ```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new SuppressChildValidationMetadataProvider(typeof(System.Guid))));
+public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 ```
 
-## <a name="bind-formatted-data-from-the-request-body"></a>Binden formatierter Daten aus dem Anforderungstext
+Die Modellbindung beginnt, indem sie die Quellen nach dem Schlüssel `instructorToUpdate.ID` durchsucht. Wenn dieser nicht gefunden wird, sucht sie nach `ID` ohne Präfix.
 
-Anforderungsdaten können in einer Vielzahl von Formaten wie JSON und XML vorliegen. Wenn Sie mit dem Attribut [FromBody] angeben, dass Sie einen Parameter an Daten im Anforderungstext binden möchten, verwendet MVC einige konfigurierte Formatierer, um die Daten basierend auf deren Inhaltstyp zu verarbeiten. MVC umfasst standardmäßig eine `JsonInputFormatter`-Klasse für die Verarbeitung von JSON-Daten. Sie können jedoch zusätzliche Formatierer für die Verarbeitung von XML und anderen benutzerdefinierten Formaten hinzufügen.
+### <a name="prefix--property-name"></a>Präfix = Name der Eigenschaft
+
+Wenn das zu bindende Modell eine Eigenschaft des Controllers oder der `PageModel`-Klasse namens `Instructor` ist:
+
+```csharp
+[BindProperty]
+public Instructor Instructor { get; set; }
+```
+
+Die Modellbindung beginnt, indem sie die Quellen nach dem Schlüssel `Instructor.ID` durchsucht. Wenn dieser nicht gefunden wird, sucht sie nach `ID` ohne Präfix.
+
+### <a name="custom-prefix"></a>Benutzerdefiniertes Präfix
+
+Wenn das zu bindende Modell ein Parameter namens `instructorToUpdate` ist, und ein `Bind`-Attribut `Instructor` als Präfix angibt:
+
+```csharp
+public IActionResult OnPost(
+    int? id, [Bind(Prefix = "Instructor")] Instructor instructorToUpdate)
+```
+
+Die Modellbindung beginnt, indem sie die Quellen nach dem Schlüssel `Instructor.ID` durchsucht. Wenn dieser nicht gefunden wird, sucht sie nach `ID` ohne Präfix.
+
+### <a name="attributes-for-complex-type-targets"></a>Attribute für Ziele komplexen Typs
+
+Mehrere integrierte Attribute stehen für die Kontrolle der Modellbindung komplexer Typen zur Verfügung:
+
+* `[BindRequired]`
+* `[BindNever]`
+* `[Bind]`
 
 > [!NOTE]
-> Es kann höchstens ein Parameter pro Aktion um `[FromBody]` ergänzt werden. Die ASP.NET-MVC-Runtime delegiert die Verantwortung, den Anforderungsdatenstrom zu lesen, an den Formatierer. Sobald der Anforderungsdatenstrom auf einen Parameter gelesen wurde, kann der Anforderungsdatenstrom üblicherweise nicht erneut zum Binden von anderen `[FromBody]`-Parametern gelesen werden.
+> Diese Attribute wirken sich auf die Modellbindung aus, wenn bereitgestellte Formulardaten die Quelle der Wert sind. Sie haben keine Auswirkungen auf Eingabeformatierer, die bereitgestellte JSON- und XML-Anforderungstexte verarbeiten. Eingabeformatierer werden [später in diesem Artikel](#input-formatters) erklärt.
+>
+> Lesen Sie auch die Diskussion des `[Required]`-Attributs in der [Modellvalidierung](xref:mvc/models/validation#required-attribute).
 
-> [!NOTE]
-> `JsonInputFormatter` ist der Standardformatierer und basiert auf [Json.NET](https://www.newtonsoft.com/json).
+### <a name="bindrequired-attribute"></a>[BindRequired]-Attribut
 
-ASP.NET Core wählt Eingabeformatierer basierend auf dem Header [Content-Type](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html) und dem Parametertyp aus, es sei denn, es wird ein Attribut darauf angewendet, das etwas anderes angibt. Wenn Sie XML-Code oder ein anderes Format verwenden möchten, müssen Sie es in der Datei *Startup.cs* konfigurieren. Zunächst müssen Sie jedoch ggf. einen Verweis auf `Microsoft.AspNetCore.Mvc.Formatters.Xml` mithilfe von NuGet abrufen. Der Startcode sollte in etwa folgendermaßen aussehen:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Im Folgenden ein Beispiel:
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+### <a name="bindnever-attribute"></a>[BindNever]-Attribut
+
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Im Folgenden ein Beispiel:
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+
+### <a name="bind-attribute"></a>[Bind]-Attribut
+
+Kann auf eine Klasse oder einen Methodenparameter angewendet werden. Gibt an, welche Eigenschaften eines Modells in die Modellbindung aufgenommen werden sollen.
+
+Im folgenden Beispiel werden nur die angegebenen Eigenschaften des `Instructor`-Modells gebunden, wenn ein Ereignishandler oder eine Aktionsmethode aufgerufen wird:
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc()
-        .AddXmlSerializerFormatters();
-   }
+[Bind("LastName,FirstMidName,HireDate")]
+public class Instructor
 ```
 
-Der Code in der Datei *Startup.cs* enthält eine `ConfigureServices`-Methode mit einem `services`-Argument, mit dem Sie Dienste für Ihre ASP.NET Core-App erstellen können. In diesem Beispiel werden wir einen XML-Formatierer als Dienst hinzufügen, den MVC für diese App bereitstellt. Mit dem an die `AddMvc`-Methode übergebenen `options`-Argument können Sie Filter, Formatierer und andere Systemoptionen von MVC beim Start der App hinzufügen und verwalten. Wenden Sie dann das `Consumes`-Attribut auf Controllerklassen oder Aktionsmethoden an, damit sie mit allen Formaten funktionieren.
+Im folgenden Beispiel werden nur die angegebenen Eigenschaften des `Instructor`-Modells gebunden, wenn die `OnPost`-Methode aufgerufen wird:
 
-### <a name="custom-model-binding"></a>Benutzerdefinierte Modellbindung
+```csharp
+[HttpPost]
+public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
+```
 
-Sie können die Modellbindung erweitern, indem Sie Ihre eigene benutzerdefinierte Modellbindung schreiben. Erfahren Sie mehr über die [benutzerdefinierte Modellbindung](../advanced/custom-model-binding.md).
+Das `[Bind]`-Attribut kann zum Schutz vor Overposting in *Erstellungs*szenarien (create) verwendet werden. Es funktioniert nicht gut in Bearbeitungsszenarien (edit), weil ausgeschlossene Eigenschaften auf „null“ oder einen Standardwert festgelegt werden, anstatt unverändert zu bleiben. Zum Schutz vor Overposting werden Ansichtsmodelle empfohlen, anstelle des `[Bind]`-Attributs. Weitere Informationen finden Sie unter [Sicherheitshinweis zum Overposting](xref:data/ef-mvc/crud#security-note-about-overposting).
+
+## <a name="collections"></a>Auflistungen
+
+Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+
+* Angenommen, der zu bindende Parameter ist ein Array namens `selectedCourses`:
+
+  ```csharp
+  public IActionResult OnPost(int? id, int[] selectedCourses)
+  ```
+
+* Formular- oder Abfragezeichenfolgendaten können eins der folgenden Formate haben:
+   
+  ```
+  selectedCourses=1050&selectedCourses=2000 
+  ```
+
+  ```
+  selectedCourses[0]=1050&selectedCourses[1]=2000
+  ```
+
+  ```
+  [0]=1050&[1]=2000
+  ```
+
+  ```
+  selectedCourses[a]=1050&selectedCourses[b]=2000&selectedCourses.index=a&selectedCourses.index=b
+  ```
+
+  ```
+  [a]=1050&[b]=2000&index=a&index=b
+  ```
+
+* Das folgende Format wird nur für Formulardaten unterstützt:
+
+  ```
+  selectedCourses[]=1050&selectedCourses[]=2000
+  ```
+
+* Bei allen der vorangehenden Beispielformate übergibt die Modellbindung ein Array von zwei Elementen an den `selectedCourses`-Parameter:
+
+  * selectedCourses[0]=1050
+  * selectedCourses[1]=2000
+
+  Datenformate, die Indexnummern verwenden(... [0]... [1] ...), müssen sicherstellen, dass sie fortlaufend nummeriert sind, beginnend mit 0 (null). Treten bei der Indexnummerierung Lücken auf, werden alle Elemente, die auf die Lücke folgen, ignoriert. Wenn die Indizes beispielsweise 0 und 2 anstelle von 0 und 1 sind, wird beispielsweise das zweite Element ignoriert.
+
+## <a name="dictionaries"></a>Wörterbücher
+
+Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+
+* Angenommen, der Zielparameter ist eine `Dictionary<string, string>` mit dem Namen `selectedCourses`:
+
+  ```csharp
+  public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
+  ```
+
+* Die bereitgestellten Formular- oder Abfragezeichenfolgendaten können wie eins der folgenden Beispiele aussehen:
+
+  ```
+  selectedCourses[1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  [1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  selectedCourses[0].Key=1050&selectedCourses[0].Value=Chemistry&
+  selectedCourses[1].Key=2000&selectedCourses[1].Value=Economics
+  ```
+
+  ```
+  [0].Key=1050&[0].Value=Chemistry&[1].Key=2000&[1].Value=Economics
+  ```
+
+* Bei allen der vorangehenden Beispielformate übergibt die Modellbindung ein Wörterbuch aus zwei Elementen an den `selectedCourses`-Parameter:
+
+  * selectedCourses["1050"]="Chemistry"
+  * selectedCourses["2000"]="Economics"
+
+## <a name="special-data-types"></a>Spezielle Datentypen
+
+Es gibt einige spezielle Datentypen, die die Modellbindung verarbeiten kann.
+
+### <a name="iformfile-and-iformfilecollection"></a>„IFormFile“ und „IFormFileCollection“
+
+Eine in der HTTP-Anforderung enthaltene, hochgeladenen Datei.  Außerdem wird `IEnumerable<IFormFile>` für mehrere Dateien unterstützt.
+
+### <a name="cancellationtoken"></a>CancellationToken
+
+Wird verwendet, um die Aktivität in asynchronen Controllern zu beenden.
+
+### <a name="formcollection"></a>„FormCollection“
+
+Wird verwendet, um alle Werte aus bereitgestellten Formulardaten abzurufen.
+
+## <a name="input-formatters"></a>Eingabeformatierer
+
+Daten im Anforderungstext können im JSON-, XML- oder einem anderen Format sein. Um diese Daten zu analysieren, verwendet die Modellbindung einen *Eingabeformatierer*, der für die Verarbeitung eines bestimmten Inhaltstyps konfiguriert ist. ASP.NET Core enthält standardmäßig JSON-basierte Eingabeformatierer für die Verarbeitung von JSON-Daten. Sie können andere Formatierer für andere Inhaltstypen hinzufügen.
+
+ASP.NET Core wählt Eingabeformatierer auf Grundlage des [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute)-Attributs aus. Wenn kein Attribut vorhanden ist, verwendet es den [Content-Type-Header](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html).
+
+So verwenden Sie die integrierte XML-Eingabeformatierer
+
+* Installieren Sie das NuGet-Paket `Microsoft.AspNetCore.Mvc.Formatters.Xml`.
+
+* In `Startup.ConfigureServices`, rufen Sie <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlSerializerFormatters*> oder <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlDataContractSerializerFormatters*> auf.
+
+  [!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=9)]
+
+* Wenden Sie das `Consumes`-Attribut auf Controllerklassen oder Aktionsmethoden an, die XML im Anforderungstext erwarten sollten.
+
+  ```csharp
+  [HttpPost]
+  [Consumes("application/xml")]
+  public ActionResult<Pet> Create(Pet pet)
+  ```
+
+  Weitere Informationen finden Sie unter [Einführung der XML-Serialisierung](https://docs.microsoft.com/en-us/dotnet/standard/serialization/introducing-xml-serialization).
+
+## <a name="exclude-specified-types-from-model-binding"></a>Ausschließen angegebener Typen aus der Modellbindung
+
+Das Verhalten der Modellbindung und des Validierungssystems wird von der Klasse [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata) gesteuert. Sie können `ModelMetadata` anpassen, indem Sie [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders) einen Detailanbieter hinzufügen. Integrierte Detailanbieter sind verfügbar, um die Modellbindung oder Validierung für angegebene Typen zu deaktivieren.
+
+Um die Modellbindung für alle Modelle eines angegebenen Typs zu deaktivieren, fügen Sie in `Startup.ConfigureServices` einen <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> hinzu. Beispielsweise können Sie die Modellbindung für alle Modelle vom Typ `System.Version` wie folgt deaktivieren:
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=4-5)]
+
+Um die Validierung für Eigenschaften eines angegebenen Typs zu deaktivieren, fügen Sie in `Startup.ConfigureServices` einen <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> hinzu. Beispielsweise können Sie die Überprüfung von Eigenschaften vom Typ `System.Guid` wie folgt deaktivieren:
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=6-7)]
+
+## <a name="custom-model-binders"></a>Benutzerdefinierte Modellbindungen
+
+Sie können die Modellbindung erweitern, indem Sie eine benutzerdefinierte Modellbindung schreiben und das `[ModelBinder]`-Attribut verwenden, um diese für ein bestimmtes Ziel auszuwählen. Erfahren Sie mehr über die [benutzerdefinierte Modellbindung](xref:mvc/advanced/custom-model-binding).
+
+## <a name="manual-model-binding"></a>Manuelle Modellbindung
+
+Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Im Folgenden ein Beispiel:
+
+[!code-csharp[](model-binding/samples/2.x/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
+
+## <a name="fromservices-attribute"></a>[FromServices]-Attribut
+
+Der Name dieses Attributs folgt dem Muster von Modellbindungsattributen, die eine Datenquelle angeben. Es ist aber nicht zum Binden von Daten aus einem Wertanbieter gedacht. Es ruft eine Instanz eines Typs aus dem [Dependency Injection](xref:fundamentals/dependency-injection)-Container (Abhängigkeitsinjektion) ab. Sein Zweck besteht darin, eine Alternative zur „Constructor Injection“ (Konstruktorinjektion) bereitzustellen, wenn Sie einen Dienst nur dann benötigen, wenn eine bestimmte Methode aufgerufen wird.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* <xref:mvc/models/validation>
+* <xref:mvc/advanced/custom-model-binding>
