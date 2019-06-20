@@ -5,12 +5,12 @@ description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Cor
 ms.author: riande
 ms.date: 6/3/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: e7d0312bd4b54586f4a3d403f464ded1aa49bcac
-ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
+ms.openlocfilehash: ee5ef572db8b3c4e152fd864177c0eea3edc1f20
+ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2019
-ms.locfileid: "66824707"
+ms.lasthandoff: 06/13/2019
+ms.locfileid: "67048211"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
@@ -182,7 +182,7 @@ Enthält Konfigurationsdaten, z. B. Verbindungszeichenfolgen. Weitere Informatio
 
 ### <a name="programcs"></a>Program.cs
 
-Enthält den Einstiegspunkt für das Programm. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host>.
+Enthält den Einstiegspunkt für das Programm. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
 
 ### <a name="startupcs"></a>Startup.cs
 

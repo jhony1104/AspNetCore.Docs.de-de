@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: d3954800f4f1358565a627768e34465215dc4f6e
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bfe417a6153f74cf0ca2d9bcde4db1bba8453b3b
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886655"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152892"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core
 
@@ -154,7 +154,7 @@ Ersetzen Sie den vorhandenen Code für die HttpPost-Methode `Edit` durch folgend
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EditPost)]
 
-Der Code versucht zunächst die Abteilung zu lesen, die aktualisiert werden soll. Wenn die Methode `SingleOrDefaultAsync` NULL zurückgibt, wurde die Abteilung von einem anderen Benutzer gelöscht. In diesem Fall verwendet der Code die bereitgestellten Formularwerte zum Erstellen einer Abteilungsentität, damit die Seite „Bearbeiten“ mit einer Fehlermeldung erneut angezeigt werden kann. Alternativ müssen Sie die Abteilungsentität nicht erneut erstellen, wenn Sie nur eine Fehlermeldung anzeigen, ohne die Abteilungsfelder erneut anzuzeigen.
+Der Code versucht zunächst die Abteilung zu lesen, die aktualisiert werden soll. Wenn die Methode `FirstOrDefaultAsync` NULL zurückgibt, wurde die Abteilung von einem anderen Benutzer gelöscht. In diesem Fall verwendet der Code die bereitgestellten Formularwerte zum Erstellen einer Abteilungsentität, damit die Seite „Bearbeiten“ mit einer Fehlermeldung erneut angezeigt werden kann. Alternativ müssen Sie die Abteilungsentität nicht erneut erstellen, wenn Sie nur eine Fehlermeldung anzeigen, ohne die Abteilungsfelder erneut anzuzeigen.
 
 Die Ansicht speichert den ursprünglichen Wert von `RowVersion` in einem ausgeblendeten Feld, und diese Methode erhält diesen Wert über den Parameter `rowVersion`. Bevor Sie `SaveChanges` aufrufen, müssen Sie diesen ursprünglichen Eigenschaftswert von `RowVersion` in die Auflistung `OriginalValues` für die Entität einfügen.
 

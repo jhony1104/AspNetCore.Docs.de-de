@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 98dea9cfbafb53de8ba82ef06f4885d9fbf50123
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: c0251032d83349d4d3925d1ec594c9230ed6ad2d
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886735"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207643"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Veröffentlichen einer ASP.NET Core-App in Azure mit Visual Studio
 
-Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Cesar Blum Silveira](https://github.com/cesarbs)
+Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
