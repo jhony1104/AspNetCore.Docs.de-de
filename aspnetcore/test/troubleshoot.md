@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: In diesem Artikel werden Warnungen und Fehler erläutert. Außerdem erfahren Sie, wie die Problembehandlung in ASP.NET Core-Projekten funktioniert.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/13/2019
+ms.date: 06/19/2019
 uid: test/troubleshoot
-ms.openlocfilehash: 3d755b2f0c509d65dea86bbe719e42935d87d546
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bcec8a55a5111e1f3acf53ae2f57b45e6e609d25
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895327"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313671"
 ---
 # <a name="troubleshoot-aspnet-core-projects"></a>Problembehandlung bei ASP.NET Core-Projekten
 
@@ -27,11 +27,11 @@ Die folgenden Links erhalten Anleitungen zur Fehlerbehebung:
 
 ## <a name="net-core-sdk-warnings"></a>.NET Core SDK-Warnungen
 
-### <a name="both-the-32-bit-and-64-bit-versions-of-the-net-core-sdk-are-installed"></a>Die 32-Bit und 64-Bit-Versionen von .NET Core SDK sind installiert.
+### <a name="both-the-32-bit-and-64-bit-versions-of-the-net-core-sdk-are-installed"></a>Es werden sowohl die 32-Bit und 64-Bit-Versionen von .NET Core SDK installiert.
 
 In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende Warnung angezeigt:
 
-> Es werden sowohl 32- und 64-Bit-Versionen von .NET Core SDK installiert. Nur Vorlagen aus die 64-Bit-Versionen installiert ' "c:"\\Programmdateien\\Dotnet\\Sdk\\"wird angezeigt.
+> Es werden sowohl 32-Bit- und 64-Bit-Versionen von .NET Core SDK installiert. Nur Vorlagen von den 64-Bit-Versionen installiert ' "c:"\\Programmdateien\\Dotnet\\Sdk\\"werden angezeigt.
 
 Diese Warnung wird angezeigt, wenn sowohl die 32-Bit-(x86) als auch die 64-Bit (x 64) Versionen der [.NET Core SDK](https://www.microsoft.com/net/download/all) installiert sind. Häufige Gründe, die beide Versionen installiert sind enthalten:
 
@@ -45,9 +45,9 @@ Deinstallieren Sie die 32-Bit .NET Core-SDK, um diese Warnung zu vermeiden. Dein
 
 In der **neues Projekt** Dialogfeld für ASP.NET Core, können Sie die folgende Warnung angezeigt:
 
-> Das .NET Core SDK ist an mehreren Speicherorten installiert. Nur Vorlagen aus dem SDK unter "C:\\Programmdateien\\Dotnet\\Sdk\\" wird angezeigt.
+> Das .NET Core SDK ist an mehreren Speicherorten installiert. Nur Vorlagen aus den SDKs installiert ' "c:"\\Programmdateien\\Dotnet\\Sdk\\"werden angezeigt.
 
-Diese Meldung angezeigt, wenn Sie mindestens eine Installation von .NET Core SDK in einem Verzeichnis außerhalb des haben *C:\\Programmdateien\\Dotnet\\Sdk\\*. Dies geschieht normalerweise, wenn das .NET Core SDK auf einem Computer mit Kopieren/Einfügen, anstatt das MSI-Installationsprogramm bereitgestellt wurde.
+Diese Meldung angezeigt, wenn Sie mindestens eine Installation von .NET Core SDK in einem Verzeichnis außerhalb des haben *C:\\Programmdateien\\Dotnet\\Sdk\\* . Dies geschieht normalerweise, wenn das .NET Core SDK auf einem Computer mit Kopieren/Einfügen, anstatt das MSI-Installationsprogramm bereitgestellt wurde.
 
 Deinstallieren Sie alle 32-Bit .NET Core SDKs und Laufzeiten um diese Warnung zu vermeiden. Deinstallieren von **Systemsteuerung** > **Programme und Funktionen** > **deinstallieren oder Ändern eines Programms**. Wenn Sie verstehen, warum die Warnung tritt auf, und deren Auswirkungen, können Sie die Warnung ignorieren.
 

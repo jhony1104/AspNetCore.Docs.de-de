@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/11/2019
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 1c78cc957b6ff77c91c8ca4aef59a1cacd85a8ca
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: 16ec2d5f2bccc59958b884869ef42af9cfa13df0
+ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65517088"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67316587"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Setup von Microsoft Account externen Anmeldung mit ASP.NET Core
 
@@ -59,7 +59,7 @@ Verknüpfen Sie sensible Einstellungen wie Microsoft `ClientId` und `ClientSecre
 
 ## <a name="configure-microsoft-account-authentication"></a>Konfigurieren von Microsoft-Kontoauthentifizierung
 
-Fügen Sie den Microsoft-Account-Dienst in der `ConfigureServices` -Methode in der *"Startup.cs"* Datei:
+Fügen Sie den Dienst Microsoft Account, `Startup.ConfigureServices`:
 
 [!code-csharp[](~/security/authentication/social/social-code/StartupMS.cs?name=snippet&highlight=10-14)]
 

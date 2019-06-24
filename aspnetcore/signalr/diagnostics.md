@@ -5,14 +5,14 @@ description: Informationen Sie zum Sammeln von Diagnosedaten aus Ihrer ASP.NET C
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
-ms.date: 02/27/2019
+ms.date: 06/19/2019
 uid: signalr/diagnostics
-ms.openlocfilehash: b6bd21314ed183488999bcff3553e53493537a11
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 69dbd057b3dcadeb3ca5d94ede1234530fb447db
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64896887"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313708"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und-Diagnose in ASP.NET Core SignalR
 
@@ -29,23 +29,23 @@ Da SignalR Teil von ASP.NET Core ist, wird die ASP.NET Core-Protokollierung Syst
 
 SignalR verwendet zwei Protokollierungskategorien:
 
-* `Microsoft.AspNetCore.SignalR` -Aktivieren Sie für die Protokolle im Zusammenhang mit der Hub-Protokolle, Hubs, das Aufrufen von Methoden und anderen Aktivitäten im Zusammenhang mit dem Hub.
-* `Microsoft.AspNetCore.Http.Connections` – für Protokolle im Zusammenhang mit Transporten, z. B. WebSockets, Long Polling und Server-Sent-Ereignisse und Low-Level-SignalR-Infrastruktur.
+* `Microsoft.AspNetCore.SignalR` &ndash; Aktivieren für die Protokolle im Zusammenhang mit der Hub-Protokolle Hubs, Aufrufen von Methoden und anderen Aktivitäten im Zusammenhang mit dem Hub.
+* `Microsoft.AspNetCore.Http.Connections` &ndash; für Protokolle im Zusammenhang mit Transporten, z. B. WebSockets, Long Polling und Server-Sent-Ereignisse und Low-Level-SignalR-Infrastruktur.
 
-Detaillierte Protokolle von SignalR konfigurieren, um sowohl die vorherige Präfixe in der `Debug` Ebene in Ihrer `appsettings.json` -Datei, indem Sie die folgenden Elemente zum Hinzufügen der `LogLevel` im Unterabschnitt `Logging`:
+Detaillierte Protokolle von SignalR konfigurieren, um sowohl die vorherige Präfixe in der `Debug` Ebene in Ihrer *"appSettings.JSON"* -Datei, indem Sie die folgenden Elemente zum Hinzufügen der `LogLevel` im Unterabschnitt `Logging`:
 
-[!code-json[Configuring logging](diagnostics/logging-config.json?highlight=7-8)]
+[!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
 Sie können dies auch konfigurieren, im Code in Ihre `CreateWebHostBuilder` Methode:
 
-[!code-csharp[Configuring logging in code](diagnostics/logging-config-code.cs?highlight=5-6)]
+[!code-csharp[](diagnostics/logging-config-code.cs?highlight=5-6)]
 
 Wenn Sie JSON-basierte Konfiguration nicht verwenden, legen Sie die folgenden Konfigurationswerte in Ihrem Konfigurationssystem:
 
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-Überprüfen Sie die Dokumentation für Ihr Konfigurationssystem, um zu bestimmen, wie Sie geschachtelte Konfigurationswerte angeben. Beispielsweise bei Verwendung von Umgebungsvariablen, zwei `_` Zeichen werden verwendet, statt die `:` (z. B.: `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).
+Überprüfen Sie die Dokumentation für Ihr Konfigurationssystem, um zu bestimmen, wie Sie geschachtelte Konfigurationswerte angeben. Bei Verwendung von Umgebungsvariablen, beispielsweise zwei `_` Zeichen werden verwendet, statt der `:` (z. B. `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).
 
 Es wird empfohlen, die `Debug` Ebene beim Erfassen, ausführlichere Diagnose für Ihre app. Die `Trace` erzeugt sehr Low-Level-Diagnose und nur selten erforderlich, um die diagnose von Problemen in Ihrer app.
 
@@ -63,11 +63,11 @@ Visual Studio zeigt die Ausgabe des Protokolls in der **Ausgabe** Fenster. Wähl
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Aktivieren Sie die Option "Anwendungsprotokollierung (Dateisystem)" im Abschnitt "Diagnoseprotokolle" im Azure App Service-Portal und konfigurieren Sie die anzuzeigende Stufe `Verbose`. Protokolle sollten von der "Log"-streamingdienst, auch wie Protokolle im Dateisystem Ihres App Service verfügbar sein. Weitere Informationen finden Sie in der Dokumentation auf [Azure-protokollstreaming](xref:fundamentals/logging/index#azure-log-streaming).
+Aktivieren der **Anwendungsprotokollierung (Dateisystem)** option die **Diagnoseprotokolle** Azure App Service-Portal im Abschnitt und konfigurieren Sie die **Ebene** zu `Verbose`. Protokolle verfügbar sein sollte die **protokollstreaming** Dienst- und in die Protokolle im Dateisystem des App Service. Weitere Informationen finden Sie unter [Azure-protokollstreaming](xref:fundamentals/logging/index#azure-log-streaming).
 
 ### <a name="other-environments"></a>Andere Umgebungen
 
-Wenn Sie in einer anderen ausführen Umgebung (Docker, Kubernetes, Windows-Dienst usw.), finden Sie die vollständige Dokumentation für [ASP.NET Core-Protokollierung](xref:fundamentals/logging/index) für Weitere Informationen zum Konfigurieren der Anbieter für die Protokollierung für Ihre Umgebung geeignet ist.
+Wenn die app in einer anderen Umgebung (z. B. Docker, Kubernetes oder Windows-Dienst) bereitgestellt wird, finden Sie unter <xref:fundamentals/logging/index> für Weitere Informationen zum Konfigurieren der Anbieter für die Protokollierung für die Umgebung geeignet ist.
 
 ## <a name="javascript-client-logging"></a>JavaScript-Clients, die Protokollierung
 
@@ -76,7 +76,7 @@ Wenn Sie in einer anderen ausführen Umgebung (Docker, Kubernetes, Windows-Diens
 
 Wenn Sie den JavaScript-Client verwenden, können Sie Konfigurieren der Protokollierungsoptionen mithilfe der `configureLogging` Methode `HubConnectionBuilder`:
 
-[!code-javascript[Configuring logging in the JavaScript client](diagnostics/logging-config-js.js?highlight=3)]
+[!code-javascript[](diagnostics/logging-config-js.js?highlight=3)]
 
 Geben Sie zum Deaktivieren der Protokollierung vollständig, `signalR.LogLevel.None` in die `configureLogging` Methode.
 
@@ -96,7 +96,7 @@ Nachdem Sie die Ausführlichkeit konfiguriert haben, werden die Protokolle in de
 
 Bei der Sie Protokolle an ein System für die benutzerdefinierte Protokollierung senden möchten, können Sie angeben, ein JavaScript-Objekt implementieren die `ILogger` Schnittstelle. Ist die einzige Methode, die implementiert werden muss `log`, der die Ebene des Ereignisses akzeptiert und die Nachricht, die dem Ereignis zugeordnet. Zum Beispiel:
 
-[!code-typescript[Creating a custom logger](diagnostics/custom-logger.ts?highlight=3-7,13)]
+[!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
 ## <a name="net-client-logging"></a>.NET Client-Protokollierung
 
@@ -109,19 +109,19 @@ Um Protokolle aus dem .NET-Client zu erhalten, können Sie die `ConfigureLogging
 
 Um die konsolenprotokollierung zu aktivieren, fügen Sie der [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) Paket. Verwenden Sie dann die `AddConsole` Methode zum Konfigurieren der konsolenprotokollierung:
 
-[!code-csharp[Configuring console logging in .NET client](diagnostics/net-client-console-log.cs?highlight=6)]
+[!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
 ### <a name="debug-output-window-logging"></a>Debugprotokollierung bei der Ausgabe-Fenster
 
 Sie können auch Protokolle wechseln Sie zum Konfigurieren der **Ausgabe** Fenster in Visual Studio. Installieren Sie die [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug) packen sowie die Verwendung der `AddDebug` Methode:
 
-[!code-csharp[Configuring debug output window logging in .NET client](diagnostics/net-client-debug-log.cs?highlight=6)]
+[!code-csharp[](diagnostics/net-client-debug-log.cs?highlight=6)]
 
 ### <a name="other-logging-providers"></a>Anderer Protokollierungsanbieter
 
 SignalR unterstützt anderer Protokollierungsanbieter wie z. B. Serilog, Seq, NLog oder ein anderes Protokollierungssystem, die integriert `Microsoft.Extensions.Logging`. Wenn Ihr Protokollierungssystem bietet eine `ILoggerProvider`, registrieren Sie ihn mit `AddProvider`:
 
-[!code-csharp[Configuring a custom logging provider in .NET client](diagnostics/net-client-custom-log.cs?highlight=6)]
+[!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a>Steuerelement-Ausführlichkeitsgrads
 
@@ -144,7 +144,7 @@ Fiddler ist ein äußerst leistungsfähiges Tool zum Sammeln von HTTP-ablaufverf
 
 Wenn Sie eine Verbindung über HTTPS herstellen, sind einige zusätzlichen Schritte ausführen, um sicherzustellen, dass den HTTPS-Datenverkehr von Fiddler entschlüsselt werden kann. Weitere Informationen finden Sie unter den [Fiddler-Dokumentation](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).
 
-Nachdem Sie die Ablaufverfolgung gesammelt haben, können Sie die Ablaufverfolgung exportieren, indem auswählen **Datei** > **speichern** > **alle Sitzungen...**  in der Menüleiste.
+Nachdem Sie die Ablaufverfolgung gesammelt haben, können Sie die Ablaufverfolgung exportieren, indem auswählen **Datei** > **speichern** > **alle Sitzungen** in der Menüleiste.
 
 ![Exportieren alle Sitzungen von Fiddler](diagnostics/fiddler-export.png)
 
@@ -200,7 +200,7 @@ Die meisten Browserentwicklertools haben eine "Netzwerk"-Registerkarte, die Ihne
 Sie können die Diagnose-Dateien zu GitHub-Problemen anfügen, indem Sie Sie umbenennen, müssen sie sich eine `.txt` -Erweiterung, und klicken Sie dann ziehen und Ablegen an das Problem.
 
 > [!NOTE]
-> Fügen Sie keine den Inhalt der Protokolldateien oder netzwerkablaufverfolgungen im GitHub-Problem. Diese Protokolle und ablaufverfolgungen können sehr groß sein und GitHub wird in der Regel werden abgeschnitten.
+> Bitte nicht fügen Sie den Inhalt der Protokolldateien oder netzwerkablaufverfolgungen in ein GitHub-Problem. Diese Protokolle und ablaufverfolgungen können sehr groß sein und GitHub in der Regel abgeschnitten werden.
 
 ![Ziehen die Protokolldateien auf ein GitHub-Problem](diagnostics/attaching-diagnostics-files.png)
 

@@ -3,14 +3,14 @@ title: Migrieren von Authentifizierungs- und Identitätseinstellungen nach ASP.N
 author: scottaddie
 description: In diesem Artikel wird beschrieben, die am häufigsten verwendeten Schritte zum Migrieren von ASP.NET Core 1.x-Authentifizierung und Identifizierung zu ASP.NET Core 2.0.
 ms.author: scaddie
-ms.date: 06/13/2019
+ms.date: 06/21/2019
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 3e8bc75b87a85159c9668b52eea32bb7d700be6c
-ms.sourcegitcommit: 516f166c5f7cec54edf3d9c71e6e2ba53fb3b0e5
+ms.openlocfilehash: c83356e12fa5ae581b369265b9d857b08445ed51
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67196384"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313742"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>Migrieren von Authentifizierungs- und Identitätseinstellungen nach ASP.NET Core 2.0
 
@@ -304,18 +304,31 @@ Importieren Sie in 2.0-Projekten die `Microsoft.AspNetCore.Authentication` -Name
 ## <a name="windows-authentication-httpsys--iisintegration"></a>Windows Authentication (HTTP.sys / IISIntegration)
 
 Es gibt zwei Varianten der Windows-Authentifizierung:
-1. Der Host lässt nur authentifizierte Benutzer
-2. Der Host ermöglicht sowohl anonymen und authentifizierte Benutzer
 
-Die erste Variante, die oben beschriebenen ist von den 2.0 Änderungen nicht betroffen.
+* Der Host kann nur authentifizierte Benutzer. Diese Variation ist nicht von der 2.0 Änderungen betroffen.
+* Der Host ermöglicht sowohl anonymen und authentifizierte Benutzer. Diese Variation ist von den 2.0 Änderungen betroffen. Z. B. die app sollte Fall jeder anonyme Benutzer auf die [IIS](xref:host-and-deploy/iis/index) oder [HTTP.sys](xref:fundamentals/servers/httpsys) layer jedoch zum Autorisieren von Benutzern auf der Controllerebene. In diesem Szenario legen Sie das Standardschema in der `Startup.ConfigureServices` Methode.
 
-Die zweite Variante, die oben beschriebenen wird durch die 2.0-Änderungen beeinflusst. Zum Beispiel Sie möglicherweise sein können Sie anonyme Benutzer in Ihrer app auf IIS oder [HTTP.sys](xref:fundamentals/servers/httpsys) layer jedoch autorisierende von Benutzern auf der Controllerebene. In diesem Szenario legen Sie das Standardschema auf `IISDefaults.AuthenticationScheme` in die `Startup.ConfigureServices` Methode:
+  Für [Microsoft.AspNetCore.Server.IISIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/), legen Sie das Standardschema auf `IISDefaults.AuthenticationScheme`:
 
-```csharp
-services.AddAuthentication(IISDefaults.AuthenticationScheme);
-```
+  ```csharp
+  using Microsoft.AspNetCore.Server.IISIntegration;
 
-Fehler beim Festlegen der Standard-Schema wird verhindert, dass der autorisierungsanforderung sollen nicht funktionieren.
+  services.AddAuthentication(IISDefaults.AuthenticationScheme);
+  ```
+
+  Für [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/), legen Sie das Standardschema auf `HttpSysDefaults.AuthenticationScheme`:
+
+  ```csharp
+  using Microsoft.AspNetCore.Server.HttpSys;
+
+  services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
+  ```
+
+  Fehler beim Festlegen der Standard-Schema wird verhindert, dass der autorisierungsanforderung (Abfrage) arbeiten mit der folgenden Ausnahme:
+
+  > `System.InvalidOperationException`: Keine AuthenticationScheme angegeben wurde, und gab es keine DefaultChallengeScheme gefunden.
+
+Weitere Informationen finden Sie unter <xref:security/authentication/windowsauth>.
 
 <a name="identity-cookie-options"></a>
 
