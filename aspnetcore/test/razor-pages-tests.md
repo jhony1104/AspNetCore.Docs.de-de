@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/27/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: f1526b8803f43ec8cbe77c1d2c100d9daf6cd316
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f0e47f975579dc114eaeda375028ec62696f58ed
+ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893717"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67394738"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Razor-Seiten-Komponententests in ASP.NET Core
 
@@ -66,7 +66,7 @@ Die Test-app ist eine Konsolen-app in der *tests/RazorPagesTestSample.Tests* Ord
 | Test-app-Ordner | Beschreibung |
 | --------------- | ----------- |
 | *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* die Komponententests für die DAL enthält.</li><li>*IndexPageTests.cs* die Komponententests für das Seitenmodell Index enthält.</li></ul> |
-| *Dienstprogramme*     | Enthält die `TestingDbContextOptions` Methode verwendet, um die neue Datenbank zu Optionen für jede DAL-Komponententest erstellen, damit die Datenbank auf die Baseline-Bedingung für jeden Test zurückgesetzt wird. |
+| *Dienstprogramme*     | Enthält die `TestDbContextOptions` Methode verwendet, um die neue Datenbank zu Optionen für jede DAL-Komponententest erstellen, damit die Datenbank auf die Baseline-Bedingung für jeden Test zurückgesetzt wird. |
 
 Das Testframework ist [xUnit](https://xunit.github.io/). Das Objekt mit dem mocking-Framework ist [Moq](https://github.com/moq/moq4).
 
@@ -93,14 +93,14 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-Das Problem bei diesem Ansatz ist, dass jeder Test die Datenbank erhält in unabhängig von Ihrem Status der vorherige Test ihn verlassen. Dies kann problematisch sein, beim Versuch, eine unteilbare Einheit des Tests schreiben, die einander nicht beeinträchtigen. Erzwingen der `AppDbContext` um einen neuen Datenbankkontext für jeden Test zu verwenden, geben Sie einen `DbContextOptions` -Instanz, die basierend auf einer neuen Service-Anbieter. Die Test-app zeigt, wie dieses Vorgangs unter Verwendung der `Utilities` -Klassenmethode `TestingDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*):
+Das Problem bei diesem Ansatz ist, dass jeder Test die Datenbank erhält in unabhängig von Ihrem Status der vorherige Test ihn verlassen. Dies kann problematisch sein, beim Versuch, eine unteilbare Einheit des Tests schreiben, die einander nicht beeinträchtigen. Erzwingen der `AppDbContext` um einen neuen Datenbankkontext für jeden Test zu verwenden, geben Sie einen `DbContextOptions` -Instanz, die basierend auf einer neuen Service-Anbieter. Die Test-app zeigt, wie dieses Vorgangs unter Verwendung der `Utilities` -Klassenmethode `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
 Mithilfe der `DbContextOptions` in der DAL-Einheit Tests jeder Test automatisch mit einer neuen Datenbank-Instanz ausführen können:
 
 ```csharp
-using (var db = new AppDbContext(Utilities.TestingDbContextOptions()))
+using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 {
     // Use the db here in the unit test.
 }
