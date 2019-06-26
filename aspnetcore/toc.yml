@@ -220,8 +220,6 @@
               uid: tutorials/razor-pages/validation
         - name: Filter
           uid: razor-pages/filter
-        - name: Razor-Klassenbibliotheken
-          uid: razor-pages/ui-class
         - name: Routen- und App-Konventionen
           uid: razor-pages/razor-pages-conventions
         - name: Hochladen von Dateien
@@ -344,6 +342,8 @@
       uid: mvc/views/layout
     - name: Razor-Syntax
       uid: mvc/views/razor
+    - name: Razor-Klassenbibliotheken
+      uid: razor-pages/ui-class
     - name: Taghilfsprogramme
       uid: mvc/views/tag-helpers/builtin-th/Index
       items:
