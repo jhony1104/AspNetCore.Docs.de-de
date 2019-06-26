@@ -298,6 +298,8 @@
           uid: blazor/javascript-interop
         - name: Debug
           uid: blazor/debug
+        - name: Aufrufen einer Web-API
+          uid: blazor/call-web-api
         - name: Hosten und Bereitstellen
           items:
             - name: Übersicht
