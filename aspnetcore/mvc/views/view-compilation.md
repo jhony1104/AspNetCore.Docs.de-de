@@ -5,14 +5,14 @@ description: Erfahren Sie, wie die Kompilierung von Razor-Dateien in einer ASP.N
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/30/2019
+ms.date: 06/20/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: b78831dd95a721e35d4bf5b44cdd8823472f6aa2
-ms.sourcegitcommit: 06c4f2910dd54ded25e1b8750e09c66578748bc9
+ms.openlocfilehash: ff66148fc9aad2871f9f55ce76b5a0dacb0ad10c
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66395891"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313782"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -125,17 +125,13 @@ Anleitungen und Beispiele zum Festlegen der Kompatibilitätsversion der App find
 Die Laufzeitkompilierung wird mithilfe des `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`-Pakets aktiviert. Um die Laufzeitkompilierung aktivieren zu können, müssen Apps:
 
 * das NuGet-Paket [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) installieren.
-* Aktualisieren Sie das `ConfigureServices` der Anwendung, damit Aufrufe von `AddMvcRazorRuntimeCompilation` enthalten sind:
+* Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von `AddRazorRuntimeCompilation` enthält:
 
   ```csharp
   services
-      .AddMvc()
-      .AddRazorRuntimeCompilation()
+      .AddControllersWithViews()
+      .AddRazorRuntimeCompilation();
   ```
-
-Damit die Laufzeitkompilierung bei der Bereitstellung funktioniert, müssen Apps ihre Projektdateien modifizieren, sodass `PreserveCompilationReferences` auf `true` festgelegt ist:
-
-[!code-xml[](view-compilation/sample/RuntimeCompilation.csproj?highlight=4)]
 
 ::: moniker-end
 
