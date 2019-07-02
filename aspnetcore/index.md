@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2019
 uid: index
-ms.openlocfilehash: 6dd722b3b78d2af81497bde9e0519feb9af84748
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: ec2b5b72eeff21d183397284b0d538681282d45b
+ms.sourcegitcommit: 47cc13ab90913af9a2887cef0896bb4e9aba4dd5
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086137"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67399164"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -54,7 +54,7 @@ ASP.NET Core 2.x kann für .NET Core oder .NET Framework verwendet werden. ASP.N
 
 ASP.NET Core 2.x wird unter .NET Framework-Versionen unterstützt, die .NET Standard 2.0 implementieren:
 
-* .NET Framework 4.7.1 und später wird dringend empfohlen.
+* Die neueste Version von .NET Framework wird dringend empfohlen.
 * .NET Framework 4.6.1 und höher.
 
 ASP.NET Core 3.0 und höher kann nur in .NET Core ausgeführt werden. Weitere Informationen zu dieser Änderung finden Sie im Blogbeitrag zu [kommenden Änderungen in ASP.NET Core 3.0](https://blogs.msdn.microsoft.com/webdev/2018/10/29/a-first-look-at-changes-coming-in-asp-net-core-3-0/).
