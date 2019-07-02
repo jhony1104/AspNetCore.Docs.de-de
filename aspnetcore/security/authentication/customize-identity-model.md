@@ -3,14 +3,14 @@ title: Anpassung der Identität des in ASP.NET Core
 author: ajcvickers
 description: Dieser Artikel beschreibt, wie Sie das zugrunde liegende Datenmodell von Entity Framework Core für ASP.NET Core Identity anpassen.
 ms.author: avickers
-ms.date: 04/24/2019
+ms.date: 07/01/2019
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 53ce77e20722f3ba3282ff4455a0b70d30e635b0
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: f549fdff4a416b5fadcb2b1078b051bbab8e402e
+ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65536026"
+ms.lasthandoff: 07/02/2019
+ms.locfileid: "67500475"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>Anpassung der Identität des in ASP.NET Core
 
@@ -72,7 +72,7 @@ Die [Entitätstypen](#entity-types) sind miteinander verknüpft, auf folgende We
 
 ### <a name="default-model-configuration"></a>Standardkonfiguration für Modell
 
-Identity definiert viele *Kontextklassen* , die von erben <xref:Microsoft.EntityFrameworkCore.DbContext> konfigurieren und verwenden das Modell. Diese Konfiguration erfolgt mithilfe der [EF Core Code First Fluent-API](/ef/core/modeling/) in die <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating*> Methode der Context-Klasse. Die Standardkonfiguration ist:
+Identity definiert viele *Kontextklassen* , die von erben ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) konfigurieren und verwenden das Modell. Diese Konfiguration erfolgt mithilfe der [EF Core Code First Fluent-API](/ef/core/modeling/) in die ["onmodelcreating"](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) Methode der Context-Klasse. Die Standardkonfiguration ist:
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -463,7 +463,7 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
             .AddDefaultTokenProviders();
     ```
 
-    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der <xref:Microsoft.EntityFrameworkCore.DbContext> Objekt.
+    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) Objekt.
 
     In ASP.NET Core 2.1 oder höher, wird die Identität als eine Razor-Klassenbibliothek bereitgestellt. Weitere Informationen finden Sie unter <xref:security/authentication/scaffold-identity>. Der vorangehende Code erfordert daher einen Aufruf von <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>. Wenn der gerüstbauer Identität verwendet wurde, Identity-Dateien zum Projekt hinzufügen, entfernen Sie den Aufruf `AddDefaultUI`.
 
@@ -477,7 +477,7 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
             .AddDefaultTokenProviders();
     ```
 
-    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der <xref:Microsoft.EntityFrameworkCore.DbContext> Objekt.
+    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) Objekt.
 
     ::: moniker-end
 
@@ -507,7 +507,7 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der <xref:Microsoft.EntityFrameworkCore.DbContext> Objekt.
+    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) Objekt.
 
     In ASP.NET Core 2.1 oder höher, wird die Identität als eine Razor-Klassenbibliothek bereitgestellt. Weitere Informationen finden Sie unter <xref:security/authentication/scaffold-identity>. Der vorangehende Code erfordert daher einen Aufruf von <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>. Wenn der gerüstbauer Identität verwendet wurde, Identity-Dateien zum Projekt hinzufügen, entfernen Sie den Aufruf `AddDefaultUI`.
 
@@ -521,7 +521,7 @@ Um den Primärschlüssel ändern, gehen Sie wie folgt vor:
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der <xref:Microsoft.EntityFrameworkCore.DbContext> Objekt.
+    Der Primärschlüssel-Datentyp abgeleitet wird, durch die Analyse der ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) Objekt.
 
     ::: moniker-end
 
@@ -962,7 +962,7 @@ In diesem Abschnitt wird die Unterstützung von lazy Loading-Proxys im Identitä
 Entitätstypen können erfolgen, für die geeignet ist lazy Loading auf verschiedene Weise wie in beschrieben die [EF Core-Dokumentation](/ef/core/querying/related-data#lazy-loading). Der Einfachheit halber verwenden Sie lazy Loading-Proxys erfordert:
 
 * Installation von der [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) Paket.
-* Ein Aufruf von <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> in <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext*>.
+* Ein Aufruf von <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> in [AddDbContext\<TContext >](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext).
 * Öffentliche Entitätstypen mit `public virtual` Navigationseigenschaften.
 
 Das folgende Beispiel veranschaulicht den Aufruf `UseLazyLoadingProxies` in `Startup.ConfigureServices`:
