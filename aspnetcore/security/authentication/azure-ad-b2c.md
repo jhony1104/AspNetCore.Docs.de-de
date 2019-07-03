@@ -2,15 +2,16 @@
 title: Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 author: camsoper
 description: Erfahren Sie, wie Azure Active Directory B2C-Authentifizierung mit ASP.NET Core einrichten.
-ms.date: 02/27/2019
+ms.author: casoper
 ms.custom: mvc
+ms.date: 02/27/2019
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 46654e38c780cfc9c44e7ba479419320ee684b76
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 3cb878aff7bf0c6c8efe7f3f0c0f06c74acef477
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610683"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538728"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 
@@ -96,14 +97,14 @@ In Visual Studio:
 Zurück zum Browserfenster mit den B2C-app-Eigenschaften noch geöffnet. Ändern Sie den temporären **Antwort-URL** früher auf den Wert kopiert aus Visual Studio angegeben. Wählen Sie **speichern** am oberen Rand des Fensters.
 
 > [!TIP]
-> Wenn Sie nicht die Antwort-URL kopieren, verwenden Sie die HTTPS-Adresse aus der Registerkarte "Debuggen" in den Web-Projekteigenschaften, und fügen die **CallbackPath** Wert *"appSettings.JSON"*.
+> Wenn Sie nicht die Antwort-URL kopieren, verwenden Sie die HTTPS-Adresse aus der Registerkarte "Debuggen" in den Web-Projekteigenschaften, und fügen die **CallbackPath** Wert *"appSettings.JSON"* .
 
 ## <a name="configure-policies"></a>Konfigurieren von Richtlinien
 
 Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie eine Richtlinie für Registrierung oder Anmeldung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-sign-up-or-sign-in-policy), und klicken Sie dann [erstellen Sie eine Richtlinie zur kennwortzurücksetzung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-password-reset-policy). Verwenden Sie die Beispielwerte finden Sie in der Dokumentation für **Identitätsanbieter**, **Registrierungsattribute**, und **anwendungsansprüche**. Mithilfe der **jetzt ausführen** , um die Richtlinien zu testen, wie in der Dokumentation beschrieben ist optional.
 
 > [!WARNING]
-> Stellen Sie sicher, Richtliniennamen werden genau wie in der Dokumentation beschrieben, wie diese Richtlinien, in verwendet wurden der **Authentifizierung ändern** Dialogfeld in Visual Studio. Namen der Richtlinien überprüft werden können, im *"appSettings.JSON"*.
+> Stellen Sie sicher, Richtliniennamen werden genau wie in der Dokumentation beschrieben, wie diese Richtlinien, in verwendet wurden der **Authentifizierung ändern** Dialogfeld in Visual Studio. Namen der Richtlinien überprüft werden können, im *"appSettings.JSON"* .
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Konfigurieren Sie die zugrunde liegenden OpenIdConnectOptions/JwtBearer/Cookie-Optionen
 

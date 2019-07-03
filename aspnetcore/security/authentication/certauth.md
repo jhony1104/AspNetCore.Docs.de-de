@@ -3,15 +3,15 @@ title: Konfigurieren Sie zertifikatbasierte Authentifizierung in ASP.NET Core
 author: blowdart
 description: Informationen Sie zum Konfigurieren der Zertifikatauthentifizierung in ASP.NET Core für IIS und HTTP.sys.
 monikerRange: '>= aspnetcore-3.0'
-ms.author: barry.dorrans
+ms.author: bdorrans
 ms.date: 06/11/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 37567128531187bfe7dd6c9f5aa990226e70f35f
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: 8609c58265340da1d618135795915d6c49e750a3
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837537"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538722"
 ---
 # <a name="overview"></a>Übersicht
 
@@ -89,7 +89,7 @@ Der Handler verfügt über zwei Ereignisse:
 * `OnAuthenticationFailed` &ndash; Wird aufgerufen, wenn eine Ausnahme während der Authentifizierung erfolgt und ermöglicht es Ihnen, zu reagieren.
 * `OnCertificateValidated` &ndash; Wird aufgerufen, nachdem das Zertifikat überprüft wurde, war erfolgreich und ein Standard-Prinzipals erstellt wurde. Mit diesem Ereignis können Sie eine eigene Überprüfung durchführen und zu erweitern oder Ersetzen Sie den Prinzipal. Beispiele umfassen:
   * Bestimmen, ob das Zertifikat für Ihre Dienste bekannt ist.
-  * Erstellen Ihre eigenen dienstprinzipals. Im folgenden Beispiel in `Startup.ConfigureServices`:
+  * Erstellen Ihre eigenen dienstprinzipals. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
 ```csharp
 services.AddAuthentication(
@@ -125,7 +125,7 @@ services.AddAuthentication(
 
 Wenn Sie das eingehende Zertifikat erfüllt nicht die zusätzliche Überprüfung finden, rufen Sie `context.Fail("failure reason")` mit einem Fehlergrund für.
 
-Für real Funktionalität, Sie sollten zum Aufrufen eines Diensts in Abhängigkeitsinjektion die Verbindung mit einer Datenbank oder andere Art von Speicher des Benutzers registriert. Zugriff auf Ihren Dienst unter Verwendung des Kontexts an Ihren Delegaten übergeben. Im folgenden Beispiel in `Startup.ConfigureServices`:
+Für real Funktionalität, Sie sollten zum Aufrufen eines Diensts in Abhängigkeitsinjektion die Verbindung mit einer Datenbank oder andere Art von Speicher des Benutzers registriert. Zugriff auf Ihren Dienst unter Verwendung des Kontexts an Ihren Delegaten übergeben. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
 ```csharp
 services.AddAuthentication(
