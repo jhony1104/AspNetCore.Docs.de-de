@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, inwiefern das Routing mit ASP.NET Core für das Zuordnen von Anforderungs-URIs zu Endpunktselektoren und das Weiterleiten von Anforderungen an Endpunkte zuständig ist.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 06/17/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 2a7a942f43de94326e84977f09dc9a2e24dd00f0
-ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
+ms.openlocfilehash: 71cb7215651a263e588531c9be644326c0b6eda6
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66692579"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167094"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -141,6 +141,21 @@ Die Routingfunktionalität wird über die Klasse <xref:Microsoft.AspNetCore.Buil
 
 Bei einer URL-Zuordnung werden eingehende Anforderungen durch Routing an einen *Endpunkt* gesendet. Für diesen Prozess werden die Daten des URL-Pfads verwendet. Es können jedoch auch alle Daten der Anforderung genutzt werden. Für die Skalierung der Größe und Komplexität einer App ist das Versenden von Anforderungen an unterschiedliche Handler entscheidend.
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+Wenn eine Routingmiddleware ausgeführt wird, legt sie einen Endpunkt (`Endpoint`) fest und leitet Werte an ein Feature in <xref:Microsoft.AspNetCore.Http.HttpContext> weiter. Für die aktuelle Anforderung:
+
+* Durch Aufrufen von `HttpContext.GetEndpoint` wird der Endpunkt abgerufen.
+* `HttpRequest.RouteValues` ruft die Sammlung der Routenwerte ab.
+
+Middleware, die nach der Routingmiddleware ausgeführt wird, kann den Endpunkt erkennen und Maßnahmen ergreifen. So kann beispielsweise eine Autorisierungsmiddleware die Erfassung der Metadaten des Endpunkts für eine Autorisierungsrichtlinie abfragen. Nachdem die gesamte Middleware in der Anforderungsverarbeitungspipeline ausgeführt wurde, wird der Delegat des ausgewählten Endpunkts aufgerufen.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
 Das Routingsystem ist beim Endpunktrouting für alle Weiterleitungsentscheidungen zuständig. Da die Middleware basierend auf dem ausgewählten Endpunkt Richtlinien anwendet, ist es wichtig, dass jede Entscheidung, die die Weiterleitung oder die Anwendung von Sicherheitsrichtlinien beeinträchtigen kann, innerhalb des Routingsystems getroffen wird.
 
 Wenn der Endpunktdelegat ausgeführt wird, werden die Eigenschaften von [RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) auf Grundlage der bisher verarbeiteten Anforderungen auf entsprechende Werte festgelegt.
@@ -195,7 +210,7 @@ Die `GetPath*`-Methoden sind `Url.Action` und `Url.Page` in der Hinsicht ähnlic
 
 Die von <xref:Microsoft.AspNetCore.Routing.LinkGenerator> bereitgestellten Methoden unterstützen die Standardfunktionen zur Generierung von Links für jeden beliebigen Adresstypen. Am praktischsten ist es, die API zur Linkgenerierung mit Erweiterungsmethoden zu verwenden, die Vorgänge für einen bestimmten Adresstypen ausführen.
 
-| Erweiterungsmethode   | Beschreibung                                                         |
+| Erweiterungsmethode   | BESCHREIBUNG                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generiert einen URI mit einem absoluten Pfad, der auf den angegebenen Werten basiert. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generiert einen absoluten URI, der auf den angegebenen Werten basiert.             |

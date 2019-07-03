@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/28/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 5cf7b9aa7ccf86f1a89e6145cfc185c5ef803e66
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: dac5a48042a71774cb884e30a166be68bee69691
+ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376411"
+ms.lasthandoff: 06/13/2019
+ms.locfileid: "67048109"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
 
@@ -60,7 +60,7 @@ Weitere Informationen finden Sie unter [Introduction to Logging (Einführung in 
 
 Ein neues Authentifizierungsmodell erleichtert das Konfigurieren der Authentifizierung für eine Anwendung mithilfe der Abhängigkeitsinjektion.
 
-Es sind neue Vorlagen für die Konfiguration der Authentifizierung für Web-Apps und Web-APIs mithilfe von [Azure AD B2C] verfügbar (https://azure.microsoft.com/services/active-directory-b2c/)).
+Es sind neue Vorlagen für die Konfiguration der Authentifizierung für Web-Apps und Web-APIs mithilfe von [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/) verfügbar.
 
 Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/3054).
 

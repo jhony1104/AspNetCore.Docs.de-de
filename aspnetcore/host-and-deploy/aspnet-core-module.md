@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie das ASP.NET Core-Modul so konfigurieren, dass
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/05/2019
+ms.date: 06/17/2019
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: f287a9bad623c5ff5c41868c7c4408b572b39000
-ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
+ms.openlocfilehash: d5392ff6b15eeb3a4502df578665538b936aae6f
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66716353"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167070"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core-Modul
 
@@ -256,7 +256,7 @@ Weitere Informationen zur Konfiguration von IIS untergeordneten Anwendungen find
 
 ::: moniker range=">= aspnetcore-2.2"
 
-| Attribut | Beschreibung | Standard |
+| Attribut | BESCHREIBUNG | Standard |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Optionales Zeichenfolgeattribut.</p><p>Argumente zur ausführbaren Datei, die in **processPath** angegeben wurde.</p> | |
 | `disableStartUpErrorPage` | <p>Optionales boolesches Attribut.</p><p>Wenn TRUE, wird die Seite **502.5: Prozessfehler** unterdrückt, und die in der Datei *web.config* konfigurierte Seite für den Statuscode 502 hat Vorrang.</p> | `false` |
@@ -275,7 +275,7 @@ Weitere Informationen zur Konfiguration von IIS untergeordneten Anwendungen find
 
 ::: moniker range="< aspnetcore-2.2"
 
-| Attribut | Beschreibung | Standard |
+| Attribut | BESCHREIBUNG | Standard |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Optionales Zeichenfolgeattribut.</p><p>Argumente zur ausführbaren Datei, die in **processPath** angegeben wurde.</p>| |
 | `disableStartUpErrorPage` | <p>Optionales boolesches Attribut.</p><p>Wenn TRUE, wird die Seite **502.5: Prozessfehler** unterdrückt, und die in der Datei *web.config* konfigurierte Seite für den Statuscode 502 hat Vorrang.</p> | `false` |
@@ -451,11 +451,27 @@ Das ASP.NET Core-Modul kann so konfiguriert werden, dass es erweiterte Diagnosep
     stdoutLogFile="\\?\%home%\LogFiles\stdout"
     hostingModel="InProcess">
   <handlerSettings>
-    <handlerSetting name="debugFile" value="aspnetcore-debug.log" />
+    <handlerSetting name="debugFile" value=".\logs\aspnetcore-debug.log" />
     <handlerSetting name="debugLevel" value="FILE,TRACE" />
   </handlerSettings>
 </aspNetCore>
 ```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+Ordner, die im Pfad angegeben werden (*logs* im vorherigen Beispiel), werden vom Modul erstellt, wenn die Protokolldatei erstellt wird. Der App-Pool muss über Schreibzugriff auf den Speicherort verfügen, an dem die Protokolle geschrieben werden (verwenden Sie `IIS AppPool\<app_pool_name>`, um die Schreibberechtigung bereitzustellen).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Ordner im Pfad, die für den `<handlerSetting>`-Wert (*logs* im vorherigen Beispiel) bereitgestellt werden, werden nicht automatisch vom Modul erstellt und müssen bereits in der Bereitstellung vorhanden sein. Der App-Pool muss über Schreibzugriff auf den Speicherort verfügen, an dem die Protokolle geschrieben werden (verwenden Sie `IIS AppPool\<app_pool_name>`, um die Schreibberechtigung bereitzustellen).
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
 
 `debugLevel`-Werte können sowohl die Ebene als auch den Speicherort enthalten.
 

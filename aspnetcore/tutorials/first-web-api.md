@@ -1,19 +1,19 @@
 ---
-title: 'Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC'
+title: 'Tutorial: Erstellen einer Web-API mit ASP.NET Core'
 author: rick-anderson
-description: Erstellen einer Web-API mit ASP.NET Core MVC
+description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/4/2019
+ms.date: 06/18/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: dce2926e3cb19d6ac8d2af0e9b96c31dee1d92fd
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 17e8ee08fca775b8fccc3f2e6cd6067caca9c79f
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087526"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207782"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core MVC
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Mike Wasson](https://github.com/mikewasson)
 
@@ -39,13 +39,13 @@ Am Ende haben Sie eine Web-API, die in einer relationalen Datenbank gespeicherte
 
 In diesem Tutorial wird die folgende API erstellt:
 
-|API | Beschreibung | Anforderungstext | Antworttext |
+|API | BESCHREIBUNG | Anforderungstext | Antworttext |
 |--- | ---- | ---- | ---- |
-|GET /api/todo | Alle To-do-Elemente abrufen | Keiner | Array von To-do-Elementen|
-|GET /api/todo/{id} | Ein Element nach ID abrufen | Keiner | To-do-Element|
+|GET /api/todo | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
+|GET /api/todo/{id} | Ein Element nach ID abrufen | Keine | To-do-Element|
 |POST /api/todo | Neues Element hinzufügen | To-do-Element | To-do-Element |
-|PUT /api/todo/{id} | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keiner |
-|DELETE /api/todo/{id} &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keiner | Keiner|
+|PUT /api/todo/{id} | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keine |
+|DELETE /api/todo/{id} &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keine | Keine|
 
 Das folgende Diagramm zeigt den Entwurf der App.
 
@@ -276,7 +276,7 @@ Der Rückgabetyp der Methoden `GetTodoItems` und `GetTodoItem` ist [ActionResult
 
 Dieses Tutorial verwendet Postman zum Testen der Web-API.
 
-* Installieren Sie [Postman](https://www.getpostman.com/apps).
+* Installieren Sie [Postman](https://www.getpostman.com/downloads/).
 * Starten Sie die Web-App.
 * Starten Sie Postman.
 * Deaktivieren Sie **SSL certificate verification** (Verifizierung des SSL-Zertifikats).

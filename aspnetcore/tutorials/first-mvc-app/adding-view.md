@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 6ff706012dabbf9500a805708c1f058b59ebc610
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 70c96b4838b37ea2c193c328f00a410642338369
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890915"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167083"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -72,7 +72,7 @@ Ersetzen Sie den Inhalt der Razor-Ansichtsdatei *Views/HelloWorld/Index.cshtml* 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da Sie den Namen der Ansichtsvorlagendatei nicht explizit angegeben haben, verwendete MVC standardmäßig die Ansichtsdatei *Index.cshtml* im Ordner */Views/HelloWorld*. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
+Navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
 
 ![Browserfenster](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 

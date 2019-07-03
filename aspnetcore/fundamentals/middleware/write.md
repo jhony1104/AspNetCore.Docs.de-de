@@ -2,16 +2,17 @@
 title: Schreiben von benutzerdefinierter ASP.NET Core-Middleware
 author: rick-anderson
 description: Erfahren Sie, wie benutzerdefinierte ASP.NET Core-Middleware geschrieben wird.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/14/2019
+ms.date: 06/17/2019
 uid: fundamentals/middleware/write
-ms.openlocfilehash: 2c5577394a10370d92c8a83f9d806b63f3245c8b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 352db93dd7061070c76e34f6c03883f68e2041ee
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889165"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167108"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Schreiben von benutzerdefinierter ASP.NET Core-Middleware
 
@@ -27,33 +28,28 @@ Für gewöhnlich ist Middleware in einer Klasse gekapselt und wird mit einer Erw
 
 Im vorhergehenden Beispielcode wird die Erstellung einer Middlewarekomponente veranschaulicht. Informationen zur Unterstützung der integrierten Lokalisierung für ASP.NET Core finden Sie unter <xref:fundamentals/localization>.
 
-Sie können die Middleware testen, indem Sie die Kultur übergeben. Beispielsweise `http://localhost:7997/?culture=no`.
+Testen Sie die Middleware, indem Sie die Kultur übergeben. Fordern Sie beispielsweise `https://localhost:5001/?culture=no` an.
 
 Im folgenden Code wird der Middlewaredelegat in eine Klasse verschoben:
 
 [!code-csharp[](index/snapshot/Culture/RequestCultureMiddleware.cs)]
 
-::: moniker range="< aspnetcore-2.0"
+Die Middlewareklasse muss Folgendes enthalten:
 
-Der Name der Middlewaremethode `Task` muss `Invoke` lauten. In ASP.NET Core 2.0 oder höher kann der Name `Invoke` oder `InvokeAsync` lauten.
+* Einen öffentlichen Konstruktor mit einem Parameter des Typs <xref:Microsoft.AspNetCore.Http.RequestDelegate>.
+* Eine öffentliche Methode mit dem Namen `Invoke` oder `InvokeAsync`. Diese Methode muss Folgendes:
+  * Eine `Task` zurückgeben.
+  * Einen ersten Parameter des Typs <xref:Microsoft.AspNetCore.Http.HttpContext> akzeptieren.
+  
+Zusätzliche Parameter für den Konstruktor und `Invoke`/`InvokeAsync` werden mittels [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) aufgefüllt.
 
-::: moniker-end
+## <a name="middleware-dependencies"></a>Middlewareabhängigkeiten
 
-## <a name="middleware-extension-method"></a>Erweiterungsmethode für die Middleware
-
-Die folgende Erweiterungsmethode stellt die Middleware über <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> zur Verfügung:
-
-[!code-csharp[](index/snapshot/Culture/RequestCultureMiddlewareExtensions.cs)]
-
-Der folgende Code ruft die Methode von `Startup.Configure` auf:
-
-[!code-csharp[](index/snapshot/Culture/Startup.cs?name=snippet1&highlight=5)]
-
-Middleware sollte das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgen, indem sie ihre Abhängigkeiten in ihrem Konstruktor verfügbar macht. Middleware wird einmal während der *Anwendungslebensdauer* erstellt. Lesen Sie den Abschnitt [Voranforderungsbasierte Abhängigkeiten](#per-request-dependencies), wenn Sie Dienste für Middleware innerhalb einer Anforderung gemeinsam verwenden müssen.
+Middleware sollte das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgen, indem sie ihre Abhängigkeiten in ihrem Konstruktor verfügbar macht. Middleware wird einmal während der *Anwendungslebensdauer* erstellt. Lesen Sie den Abschnitt [Voranforderungsbasierte Middlewareabhängigkeiten](#per-request-middleware-dependencies), wenn Sie Dienste für Middleware innerhalb einer Anforderung gemeinsam verwenden müssen.
 
 Middlewarekomponenten können Ihre Abhängigkeiten über [Dependency Injection (DI)](xref:fundamentals/dependency-injection) mit Konstruktorparametern auflösen. [UseMiddleware&lt;T&gt;](/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware#Microsoft_AspNetCore_Builder_UseMiddlewareExtensions_UseMiddleware_Microsoft_AspNetCore_Builder_IApplicationBuilder_System_Type_System_Object___) kann auch direkt zusätzliche Parameter annehmen.
 
-## <a name="per-request-dependencies"></a>Voranforderungsbasierte Abhängigkeiten
+## <a name="per-request-middleware-dependencies"></a>Voranforderungsbasierte Middlewareabhängigkeiten
 
 Weil Middleware zum Zeitpunkt des Anwendungsstarts erstellt wird (und nicht voranforderungsbasiert), werden *bereichsbezogene* Lebensdauerdienste von Middlewarekonstruktoren in den einzelnen Anforderungen nicht gemeinsam mit anderen Typen mit Dependency Injection verwendet. Wenn Sie einen *bereichsbezogenen* Dienst sowohl in Ihrer Middleware als auch in anderen Typen verwenden müssen, fügen Sie diese Dienste zur Signatur der `Invoke`-Methode hinzu. Die `Invoke`-Methode kann zusätzliche Parameter akzeptieren, die durch DI aufgefüllt werden:
 
@@ -75,6 +71,16 @@ public class CustomMiddleware
     }
 }
 ```
+
+## <a name="middleware-extension-method"></a>Erweiterungsmethode für die Middleware
+
+Die folgende Erweiterungsmethode stellt die Middleware über <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> zur Verfügung:
+
+[!code-csharp[](index/snapshot/Culture/RequestCultureMiddlewareExtensions.cs)]
+
+Der folgende Code ruft die Methode von `Startup.Configure` auf:
+
+[!code-csharp[](index/snapshot/Culture/Startup.cs?name=snippet1&highlight=5)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
