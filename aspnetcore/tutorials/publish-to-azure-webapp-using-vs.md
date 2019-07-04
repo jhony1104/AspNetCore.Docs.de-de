@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/06/2018
 uid: tutorials/publish-to-azure-webapp-using-vs
 ms.openlocfilehash: c0251032d83349d4d3925d1ec594c9230ed6ad2d
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 07/01/2019
 ms.locfileid: "67207643"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Veröffentlichen einer ASP.NET Core-App in Azure mit Visual Studio
@@ -29,7 +29,7 @@ Informationen zur Problembehandlung bei der App Service-Bereitstellung finden Si
 
 ## <a name="create-a-web-app"></a>Erstellen einer Web-App
 
-Klicken Sie auf der Startseite von Visual Studio auf **Datei > Neu > Projekt...**.
+Klicken Sie auf der Startseite von Visual Studio auf **Datei > Neu > Projekt...** .
 
 ![Datei (Menü)](publish-to-azure-webapp-using-vs/_static/file_new_project.png)
 
@@ -102,7 +102,7 @@ Das Dialogfeld **App Service erstellen** wird angezeigt:
 
 * Wählen Sie die Registerkarte **Dienste** aus, um eine neue Datenbank zu erstellen.
 
-* Klicken Sie auf das grüne Symbol **+**, um eine neue SQL-Datenbank zu erstellen.
+* Klicken Sie auf das grüne Symbol **+** , um eine neue SQL-Datenbank zu erstellen.
 
 ![Neue SQL-Datenbank](publish-to-azure-webapp-using-vs/_static/sql.png)
 
