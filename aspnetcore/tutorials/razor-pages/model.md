@@ -45,7 +45,7 @@ Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*. Wählen Sie **Hi
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-* Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste auf das Projekt**RazorPagesMovie**, und klicken Sie dann auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
+* Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste auf das Projekt**RazorPagesMovie**, und klicken Sie dann auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Models*.
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und klicken Sie auf **Hinzufügen** > **Neue Datei**.
 * Führen Sie im Dialogfeld **Neue Datei** folgende Aktionen aus:
 
@@ -76,7 +76,7 @@ Klicken Sie mit der rechten Maustaste auf den Ordner *Pages/Movies* > **Hinzufü
 
 ![Abbildung der vorherigen Anweisungen.](model/_static/sca.png)
 
-Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **Hinzufügen** aus.
+Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)**  > **Hinzufügen** aus.
 
 ![Abbildung der vorherigen Anweisungen.](model/_static/add_scaffold.png)
 
