@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Co
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/14/2019
+ms.date: 07/02/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: 7567473ae8acd9e1072954907f0fe9c7beea29ad
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 46c99364098557557bff0c38cab5a91ee2d3979b
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67153184"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538647"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-client-side"></a>Clientseitiges Hosten und Bereitstellen von ASP.NET Core Blazor
 
@@ -106,19 +106,19 @@ Blazor führt auf jedem Build eine IL-Verknüpfung (Intermediate Language, Zwisc
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Erneutes Generieren von URLs für ein ordnungsgemäßes Routing
 
-Routinganforderungen für Seitenkomponenten in einer clientseitigen App sind etwas komplexer als Routinganforderungen an eine serverseitige, gehostete App. Betrachten wir eine clientseitige App mit zwei Seiten:
+Routinganforderungen für Seitenkomponenten in einer clientseitigen App sind etwas komplexer als Routinganforderungen an eine serverseitige, gehostete App. Betrachten wir eine clientseitige App mit zwei Komponenten:
 
-* **_Main.razor**: Wird im Stammverzeichnis der App geladen und enthält einen Link zur Infoseite (`href="About"`).
-* **_About.razor**: Infoseite.
+* *Main.razor*: Wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`).
+* *About.razor*: `About`-Komponente.
 
 Wenn das Standarddokument der App über die Adressleiste des Browsers (z. B. `https://www.contoso.com/`) angefordert wird, geschieht Folgendes:
 
 1. Der Browser sendet eine Anforderung.
 1. Die Standardseite wird zurückgegeben, in der Regel *index.html*.
 1. *index.html* startet die App.
-1. Der Router von Blazor wird geladen, und die Razor-Hauptseite (*Main.razor*) wird angezeigt.
+1. Der Blazor-Router lädt, und die Razor-Komponente `Main` wird gerendert.
 
-Wenn auf der Hauptseite der Link zur Infoseite ausgewählt wird, wird die Infoseite geladen. Der Link zur Infoseite kann auf dem Client ausgewählt werden, da der Blazor-Router dafür sorgt, dass der Browser im Internet keine Anforderung für `About` an `www.contoso.com` sendet, und stattdessen die Infoseite selbst bereitstellt. Alle Anforderungen von internen Seiten *innerhalb der clientseitigen App* funktionieren auf dieselbe Weise: Durch Anforderungen werden keine browserbasierten Anforderungen an serverseitig gehostete Ressourcen im Internet ausgelöst. Der Router verarbeitet Anforderungen intern.
+Auf der Seite „Main“ kann der Link zur `About`-Komponente auf dem Client ausgewählt werden, weil der Blazor-Router dafür sorgt, dass der Browser im Internet keine Anforderung für `About` an `www.contoso.com` sendet, und stattdessen die gerenderte `About`-Komponente selbst bereitstellt. Alle Anforderungen von internen Endpunkten *innerhalb der clientseitigen App* funktionieren auf dieselbe Weise: Durch Anforderungen werden keine browserbasierten Anforderungen an serverseitig gehostete Ressourcen im Internet ausgelöst. Der Router verarbeitet Anforderungen intern.
 
 Wenn eine Anforderung für `www.contoso.com/About` über die Adressleiste des Browsers gesendet wird, tritt bei der Anforderung ein Fehler auf. Diese Ressource ist im Internethost der App nicht vorhanden. Daher wird die Antwort *404 Nicht gefunden* zurückgegeben.
 
@@ -148,7 +148,7 @@ Die App antwortet lokal unter `http://localhost:port/CoolApp`.
 
 Weitere Informationen finden Sie im Abschnitt zum [Hostkonfigurationswert für die Pfadbasis](#path-base).
 
-Wenn eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet (basierend auf der **Blazor**-Projektvorlage; die `blazor`-Vorlage bei Verwendung des [dotnet.new](/dotnet/core/tools/dotnet-new)-Befehls) und als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core-Modulhandler deaktiviert werden, um sicherzustellen, dass der `<handlers>`-Abschnitt der Stammanwendung (bzw. der übergeordneten App) in der *web.config*-Datei von der untergeordneten App nicht geerbt wird.
+Wenn eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet (basierend auf der [clientseitigen] **Blazor**-Projektvorlage; die `blazor`-Vorlage bei Verwendung des [dotnet.new](/dotnet/core/tools/dotnet-new)-Befehls) und als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core-Modulhandler deaktiviert werden, um sicherzustellen, dass der `<handlers>`-Abschnitt der Stammanwendung (bzw. der übergeordneten App) in der *web.config*-Datei von der untergeordneten App nicht geerbt wird.
 
 Entfernen Sie den Handler in der veröffentlichen *web.config*-Datei der App, indem Sie der Datei einen `<handlers>`-Abschnitt hinzufügen:
 
@@ -178,7 +178,7 @@ Das Entfernen des Handlers bzw. das Deaktivieren der Vererbung wird zusätzlich 
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>Gehostete Bereitstellung mit ASP.NET Core
 
-Mit einer *gehosteten Bereitstellung* wird die clientseitige Blazor-App über eine auf einem Server ausgeführte [ASP.NET Core-App](xref:index) für Browser bereitgestellt.
+Mit einer *gehosteten Bereitstellung* wird die clientseitige Blazor-App über eine auf einem Webserver ausgeführte [ASP.NET Core-App](xref:index) für Browser bereitgestellt.
 
 Die Blazor-App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer gehosteten Bereitstellung enthält Visual Studio die **Blazor-Projektvorlage (in ASP.NET Core gehostet)** (`blazorhosted`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
 

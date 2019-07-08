@@ -2,94 +2,98 @@
 title: Erkennen von Änderungen mit Änderungstoken in ASP.NET Core
 author: guardrex
 description: Erfahren Sie, wie Sie Änderungstoken verwenden, um Änderungen nachzuverfolgen.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 11/10/2017
+ms.date: 07/03/2019
 uid: fundamentals/change-tokens
-ms.openlocfilehash: f7dad52fc19b6dc5c8668ad852e69acd65a72162
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 8b73b72d093b33edeb91bc78080e05aa312579ec
+ms.sourcegitcommit: f6e6730872a7d6f039f97d1df762f0d0bd5e34cf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886875"
+ms.lasthandoff: 07/04/2019
+ms.locfileid: "67561665"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Erkennen von Änderungen mit Änderungstoken in ASP.NET Core
 
 Von [Luke Latham](https://github.com/guardrex)
 
-Ein *Änderungstoken* ist ein allgemeiner Baustein auf niedriger Ebene zum Nachverfolgen von Änderungen.
+Ein *Änderungstoken* ist ein universeller Baustein auf niedriger Ebene, mit dem Änderungen nachverfolgt werden können.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/sample/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="ichangetoken-interface"></a>IChangeToken-Schnittstelle
 
-[IChangeToken](/dotnet/api/microsoft.extensions.primitives.ichangetoken) verbreitet Benachrichtigungen, wenn eine Änderung aufgetreten ist. `IChangeToken` befindet sich im [Microsoft.Extensions.Primitives](/dotnet/api/microsoft.extensions.primitives)-Namespace. Für Anwendungen, die das Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) (ASP.NET Core 2.1 oder höher) nicht verwenden, verweisen Sie auf das NuGet-Paket [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) in der Projektdatei.
+<xref:Microsoft.Extensions.Primitives.IChangeToken> verbreitet Benachrichtigungen, wenn eine Änderung aufgetreten ist. `IChangeToken` ist im <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>-Namespace enthalten. Für Anwendungen, die das Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) nicht verwenden, erstellen Sie einen Paketverweis auf das NuGet-Paket [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/).
 
 `IChangeToken` verfügt über zwei Eigenschaften:
 
-* [ActiveChangedCallbacks](/dotnet/api/microsoft.extensions.primitives.ichangetoken.activechangecallbacks) geben an, ob das Token proaktiv Rückrufe auslöst. Wenn `ActiveChangedCallbacks` auf `false` festgelegt ist, wird ein Rückruf nie aufgerufen, und die Anwendung muss `HasChanged` für Änderungen abrufen. Es ist auch möglich, dass ein Token nie abgebrochen wird, wenn keine Änderungen auftreten oder der zugrunde liegenden Änderungslistener gelöscht oder deaktiviert wird.
-* [HasChanged](/dotnet/api/microsoft.extensions.primitives.ichangetoken.haschanged) ruft einen Wert auf, der angibt, ob eine Änderung aufgetreten ist.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> geben an, ob das Token proaktiv Rückrufe auslöst. Wenn `ActiveChangedCallbacks` auf `false` festgelegt ist, wird ein Rückruf nie aufgerufen, und die Anwendung muss `HasChanged` für Änderungen abrufen. Es ist auch möglich, dass ein Token nie abgebrochen wird, wenn keine Änderungen auftreten oder der zugrunde liegenden Änderungslistener gelöscht oder deaktiviert wird.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> ruft einen Wert auf, der angibt, ob eine Änderung aufgetreten ist.
 
-Die Schnittstelle verfügt über eine Methode, [RegisterChangeCallback(Action&lt;Object&gt;, Object)](/dotnet/api/microsoft.extensions.primitives.ichangetoken.registerchangecallback), die einen Rückruf registriert, der aufgerufen wird, wenn das Token geändert wurde. `HasChanged` muss festgelegt werden, bevor der Rückruf aufgerufen wird.
+Die `IChangeToken`-Schnittstelle umfasst die Methode [RegisterChangeCallback(Action\<Object>, Object)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*). Diese registriert einen Rückruf, der bei einer Tokenänderung aufgerufen wird. `HasChanged` muss festgelegt werden, bevor der Rückruf aufgerufen wird.
 
 ## <a name="changetoken-class"></a>ChangeToken-Klasse
 
-`ChangeToken` ist eine statische Klasse, die zur Verbreitung von Änderungsbenachrichtigungen verwendet wird. `ChangeToken` befindet sich im [Microsoft.Extensions.Primitives](/dotnet/api/microsoft.extensions.primitives)-Namespace. Für Anwendungen, die das Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) nicht verwenden, verweisen Sie auf das NuGet-Paket [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) in der Projektdatei.
+<xref:Microsoft.Extensions.Primitives.ChangeToken> ist eine statische Klasse, die zur Verbreitung von Änderungsbenachrichtigungen verwendet wird. `ChangeToken` ist im <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>-Namespace enthalten. Für Anwendungen, die das Metapaket [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) nicht verwenden, erstellen Sie einen Paketverweis auf das NuGet-Paket [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/).
 
-Die `ChangeToken` [OnChange (Func&lt;IChangeToken&gt;, Action)](/dotnet/api/microsoft.extensions.primitives.changetoken.onchange?view=aspnetcore-2.0#Microsoft_Extensions_Primitives_ChangeToken_OnChange_System_Func_Microsoft_Extensions_Primitives_IChangeToken__System_Action_)-Methode registriert eine aufzurufende `Action`, wenn das Token geändert wird:
+Die [ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)-Methode registriert einen `Action`, der bei jeder Änderung des Tokens aufgerufen wird:
 
 * `Func<IChangeToken>` erzeugt das Token.
 * `Action` wird aufgerufen, wenn das Token geändert wird.
 
-`ChangeToken` verfügt über eine [OnChange&lt;TState&gt;(Func&lt;IChangeToken&gt;, Action&lt;TState&gt;, TState)](/dotnet/api/microsoft.extensions.primitives.changetoken.onchange?view=aspnetcore-2.0#Microsoft_Extensions_Primitives_ChangeToken_OnChange__1_System_Func_Microsoft_Extensions_Primitives_IChangeToken__System_Action___0____0_)-Überladung mit einem zusätzlichen `TState`-Parameter, das an den Tokennutzer `Action` übergeben wird.
+Die [ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)-Überladung akzeptiert einen zusätzlichen `TState`-Parameter, der an den Tokenconsumer `Action` übergeben wird.
 
-`OnChange` gibt [IDisposable](/dotnet/api/system.idisposable) zurück. Der Aufruf von [Dispose](/dotnet/api/system.idisposable.dispose) beendet den Überwachungsvorgang des Tokens für weitere Änderungen und gibt die Ressourcen des Tokens frei.
+<xref:System.IDisposable> gibt `OnChange` zurück. Der Aufruf von <xref:System.IDisposable.Dispose*> beendet den Überwachungsvorgang des Tokens auf weitere Änderungen und gibt die Tokenressourcen frei.
 
 ## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Beispielverwendungen von Änderungstoken in ASP.NET Core
 
-Änderungstoken werden in gut sichtbaren Bereichen von ASP.NET Core verwendet. Sie überwachen Objektänderungen:
+Änderungstoken werden in wichtigen Bereichen von ASP.NET Core verwendet, um auf Objektänderungen zu überwachen:
 
-* Für die Überwachung von Änderungen der Dateien erstellt die [Überwachen](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider.watch)-Methode des [IFileProvider](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider) ein `IChangeToken` zur Verfügung, das die angegebenen Dateien oder Ordner überwacht.
+* Für die Überwachung von Änderungen an Dateien erstellt die <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*>-Methode von <xref:Microsoft.Extensions.FileProviders.IFileProvider> ein `IChangeToken` für die angegebenen Dateien oder einen Ordner, der überwacht werden soll.
 * `IChangeToken`-Token können zu Cacheeinträgen hinzugefügt werden, um bei Änderungen Cacheentfernungen auszulösen.
-* Für `TOptions`-Änderungen weist die Standard-[OptionsMonitor](/dotnet/api/microsoft.extensions.options.optionsmonitor-1)-Implementierung von [IOptionsMonitor](/dotnet/api/microsoft.extensions.options.ioptionsmonitor-1) eine Überladung auf, die eine oder mehrere [IOptionsChangeTokenSource](/dotnet/api/microsoft.extensions.options.ioptionschangetokensource-1)-Instanzen akzeptiert. Jede Instanz gibt ein `IChangeToken` zurück, um den Rückruf einer Änderungsbenachrichtigung zur Nachverfolgung von Optionsänderungen zu registrieren.
+* Für `TOptions`-Änderungen umfasst die <xref:Microsoft.Extensions.Options.OptionsMonitor`1>-Standardimplementierung von <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> eine Überladung, die eine oder mehrere <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1>-Instanzen akzeptiert. Jede Instanz gibt ein `IChangeToken` zurück, um den Rückruf einer Änderungsbenachrichtigung zur Nachverfolgung von Optionsänderungen zu registrieren.
 
-## <a name="monitoring-for-configuration-changes"></a>Überwachen von Konfigurationsänderungen
+## <a name="monitor-for-configuration-changes"></a>Überwachen von Konfigurationsänderungen
 
 ASP.NET Core-Vorlagen verwenden standardmäßig [JSON-Konfigurationsdateien](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*, *appsettings.Development.json* und *appsettings.Production.json*), um Konfigurationseinstellungen der Anwendungen zu laden.
 
-Diese Dateien werden mithilfe der [AddJsonFile (IConfigurationBuilder, String, Boolean, Boolean)](/dotnet/api/microsoft.extensions.configuration.jsonconfigurationextensions.addjsonfile#Microsoft_Extensions_Configuration_JsonConfigurationExtensions_AddJsonFile_Microsoft_Extensions_Configuration_IConfigurationBuilder_System_String_System_Boolean_System_Boolean_)-Erweiterungsmethode auf [ConfigurationBuilder](/dotnet/api/microsoft.extensions.configuration.configurationbuilder) konfiguriert, der einen `reloadOnChange`-Parameter (ASP.NET Core 1.1 und höher) akzeptiert. `reloadOnChange` gibt an, ob Konfigurationen auf Dateiänderungen neu geladen werden soll. Diese Einstellung sehen Sie in der [WebHost](/dotnet/api/microsoft.aspnetcore.webhost)-Hilfsmethode [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder):
+Diese Dateien werden mithilfe der [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*)-Erweiterungsmethode für <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> konfiguriert, die einen `reloadOnChange`-Parameter akzeptiert. `reloadOnChange` gibt an, ob Konfigurationen auf Dateiänderungen neu geladen werden soll. Diese Einstellung wird in der <xref:Microsoft.AspNetCore.WebHost>-Hilfsmethode <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> verwendet:
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, 
+          reloadOnChange: true);
 ```
 
-Dateibasierte Konfiguration wird von [FileConfigurationSource](/dotnet/api/microsoft.extensions.configuration.fileconfigurationsource) dargestellt. `FileConfigurationSource` verwendet [IFileProvider](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider) zur Überwachung von Dateien.
+Die dateibasierte Konfiguration wird durch <xref:Microsoft.Extensions.Configuration.FileConfigurationSource> repräsentiert. `FileConfigurationSource` verwendet <xref:Microsoft.Extensions.FileProviders.IFileProvider> zum Überwachen von Dateien.
 
-`IFileMonitor` wird standardmäßig von einem [PhysicalFileProvider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider) bereitgestellt, der [FileSystemWatcher](/dotnet/api/system.io.filesystemwatcher) zum Überwachen der Änderungen von Konfigurationsdateien verwendet.
+`IFileMonitor` wird standardmäßig von einem <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider> bereitgestellt, der zum Überwachen auf Konfigurationsdateiänderungen <xref:System.IO.FileSystemWatcher> verwendet.
 
-Die Beispielanwendung veranschaulicht zwei Implementierungen für die Überwachung von Konfigurationsänderungen. Wenn entweder die *appsettings.json*-Datei oder die Umgebungsversion der Datei geändert wird, führt jede Implementierung benutzerdefinierten Code aus. Die Beispielanwendung schreibt eine Nachricht an die Konsole.
+Die Beispielanwendung veranschaulicht zwei Implementierungen für die Überwachung von Konfigurationsänderungen. Wenn sich eine beliebige der *appsettings*-Dateien ändert, führen beide Dateiüberwachungsimplementierungen benutzerdefinierten Code aus – die Beispiel-App gibt eine Meldung an die Konsole aus.
 
-Der `FileSystemWatcher` einer Konfigurationsdatei kann mehrere Tokenrückrufe für eine einzelne Dateikonfigurationsänderung auslösen. Die Implementierung des Beispiels schützt vor diesem Problem, indem die Dateihashes der Konfigurationsdateien überprüft werden. Die Überprüfung von Dateihashes stellt sicher, dass mindestens eine der Konfigurationsdateien geändert wurde, bevor der benutzerdefinierte Code ausgeführt wird. Das Beispiel verwendet SHA1-Dateihashing (*Utilities/Utilities.cs*):
+Der `FileSystemWatcher` einer Konfigurationsdatei kann mehrere Tokenrückrufe für eine einzelne Dateikonfigurationsänderung auslösen. Um sicherzustellen, dass der benutzerdefinierte Code bei Auslösung mehrerer Tokenrückrufe nur einmal ausgeführt wird, überprüft die Beispielimplementierung Dateihashes. Das Beispiel verwendet SHA1-Dateihashing. Eine Wiederholung wird mit einem exponentiellen Backoff implementiert. Die Wiederholung ist vorhanden, weil Dateisperren auftreten können, die vorübergehend das Berechnen eines neuen Hashs für eine der Dateien verhindern.
 
-   [!code-csharp[](change-tokens/sample/Utilities/Utilities.cs?name=snippet1)]
+*Utilities/Utilities.cs*:
 
-   Eine Wiederholung wird mit einem exponentiellen Backoff implementiert. Die Wiederholung ist vorhanden, da Dateisperren auftreten können, die vorübergehend das Berechnen eines neuen Hashs auf einer der Dateien verhindert.
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
 ### <a name="simple-startup-change-token"></a>Einfaches Starten von Änderungstoken
 
-Registrieren Sie einen `Action`-Rückruf eines Tokennutzer für Änderungsbenachrichtigungen an das Token zum Neuladen der Konfiguration (*Startup.cs*):
+Registrieren Sie einen `Action`-Rückruf eines Tokenconsumers für Änderungsbenachrichtigungen an das Token zum Neuladen der Konfiguration.
 
-[!code-csharp[](change-tokens/sample/Startup.cs?name=snippet2)]
+In `Startup.Configure`:
+
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet2)]
 
 `config.GetReloadToken()` stellt das Token bereit. Der Rückruf ist die `InvokeChanged`-Methode:
 
-[!code-csharp[](change-tokens/sample/Startup.cs?name=snippet3)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-Der `state` des Rückrufs wird zum Übergang in die `IHostingEnvironment` verwendet. Dies ist hilfreich, um die richtige, zu überwachende *appSettings*-JSON-Konfigurationsdatei zu definieren *appSettings.&lt;Umgebung&gt;.json*. Dateihashes werden verwendet, um zu verhindern, dass die `WriteConsole`-Anweisung mehrere Male ausgeführt wird. Dies liegt an mehreren Tokenrückrufen, wenn die Konfigurationsdatei nur einmal geändert wurde.
+Der `state` des Rückrufs wird zur Übergabe an die `IHostingEnvironment` verwendet. Dies ist hilfreich, um die richtige *appsettings*-Konfigurationsdatei anzugeben, die überwacht werden soll (in der Entwicklungsumgebung beispielsweise *appsettings.Development.json*). Dateihashes werden verwendet, um zu verhindern, dass die `WriteConsole`-Anweisung mehrere Male ausgeführt wird. Dies liegt an mehreren Tokenrückrufen, wenn die Konfigurationsdatei nur einmal geändert wurde.
 
 Dieses System wird so lange ausgeführt, wie die Anwendung ausgeführt wird. Es kann nicht vom Benutzer deaktiviert werden.
 
-### <a name="monitoring-configuration-changes-as-a-service"></a>Überwachen von Konfigurationsänderungen als Dienst
+### <a name="monitor-configuration-changes-as-a-service"></a>Überwachen von Konfigurationsänderungen als Dienst
 
 Das Beispiel implementiert:
 
@@ -97,80 +101,94 @@ Das Beispiel implementiert:
 * Überwachung als Dienst.
 * Ein Mechanismus zum Aktivieren und Deaktivieren des Monitoring.
 
-Das Beispiel etabliert eine `IConfigurationMonitor`-Schnittstelle (*Extensions/ConfigurationMonitor.cs*):
+In diesem Beispiel wird eine `IConfigurationMonitor`-Schnittstelle eingerichtet.
 
-[!code-csharp[](change-tokens/sample/Extensions/ConfigurationMonitor.cs?name=snippet1)]
+*Extensions/ConfigurationMonitor.cs*:
+
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
 Der Konstruktor der implementierten `ConfigurationMonitor`-Klasse registriert einen Rückruf für Änderungsbenachrichtigungen:
 
-[!code-csharp[](change-tokens/sample/Extensions/ConfigurationMonitor.cs?name=snippet2)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet2)]
 
-`config.GetReloadToken()` stellt das Token bereit. `InvokeChanged` ist die Rückrufmethode. In dieser Instanz stellt `state` einen Verweis auf die `IConfigurationMonitor`-Instanz dar, die verwendet wird, um auf den Überwachungsstatus zuzugreifen. Es werden zwei Eigenschaften verwendet:
+`config.GetReloadToken()` stellt das Token bereit. `InvokeChanged` ist die Rückrufmethode. In dieser Instanz stellt `state` einen Verweis auf die `IConfigurationMonitor`-Instanz dar, die zum Zugriff auf den Überwachungsstatus verwendet wird. Es werden zwei Eigenschaften verwendet:
 
-* `MonitoringEnabled` gibt an, ob der Rückruf seinen benutzerdefinierten Codes ausführen soll.
-* `CurrentState` beschreibt den aktuellen Überwachungsstatus für die Verwendung in der Benutzeroberfläche.
+* `MonitoringEnabled` &ndash; gibt an, ob der Rückruf den zugehörigen benutzerdefinierten Code ausführen soll.
+* `CurrentState` &ndash; beschreibt den aktuellen Überwachungsstatus zur Verwendung in der Benutzeroberfläche.
 
 Die `InvokeChanged`-Methode ist vergleichbar mit dem früheren Ansatz, außer dass sie:
 
 * Den Code nicht ausführt, es sei denn, `MonitoringEnabled` ist `true`.
-* Den aktuellen `state` in seiner `WriteConsole`-Ausgabe berücksichtigt.
+* Den aktuellen `state` in der zugehörigen `WriteConsole`-Ausgabe berücksichtigt.
 
-[!code-csharp[](change-tokens/sample/Extensions/ConfigurationMonitor.cs?name=snippet3)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet3)]
 
-Eine `ConfigurationMonitor`-Instanz wird von *Startup.cs* in `ConfigureServices` als Dienst registriert:
+Eine `ConfigurationMonitor`-Instanz wird in `Startup.ConfigureServices` als Dienst registriert:
 
-[!code-csharp[](change-tokens/sample/Startup.cs?name=snippet1)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
-Die Indexseite bietet das Benutzer Kontrolle über die Konfigurationsüberwachung. Die `IConfigurationMonitor`-Instanz wird in das `IndexModel` eingefügt:
+Die Indexseite bietet das Benutzer Kontrolle über die Konfigurationsüberwachung. Die `IConfigurationMonitor`-Instanz wird in das `IndexModel` eingefügt.
 
-[!code-csharp[](change-tokens/sample/Pages/Index.cshtml.cs?name=snippet1)]
+*Pages/Index.cshtml.cs*:
 
-Eine Schaltfläche aktiviert und deaktiviert die Überwachung:
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
-[!code-cshtml[](change-tokens/sample/Pages/Index.cshtml?range=35)]
+Der Konfigurationsmonitor (`_monitor`) wird verwendet, um die Überwachung zu aktivieren oder zu deaktivieren und den aktuellen Status für Benutzeroberflächenfeedback festzulegen:
 
-[!code-csharp[](change-tokens/sample/Pages/Index.cshtml.cs?name=snippet2)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet2)]
 
 Wenn `OnPostStartMonitoring` ausgelöst wird, wird die Überwachung aktiviert, und der aktuelle Status ist deaktiviert. Wenn `OnPostStopMonitoring` ausgelöst wird, wird Überwachung deaktiviert, und der Zustand zeigt, dass die Überwachung nicht ausgeführt wird.
 
-## <a name="monitoring-cached-file-changes"></a>Überwachen zwischengespeicherter Dateiänderungen
+Die Überwachung wird über Schaltflächen in der Benutzeroberfläche aktiviert und deaktiviert.
 
-Der Inhalt der Datei kann mithilfe von [IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache) speicherintern zwischengespeichert werden. Zwischenspeicherung im Arbeitsspeicher wird im Thema [Cache in-memory (Zwischenspeicherung im Arbeitsspeicher)](xref:performance/caching/memory) beschrieben. Ohne zusätzliche Schritte, wie der unten beschriebenen Implementierung, werden *veraltete* Daten aus einem Zwischenspeicher zurückgegeben, wenn sich die Quelldaten ändern.
+*Pages/Index.cshtml*:
 
-Wird der Status einer zwischengespeicherten Quelldatei beim Erneuern eines [variablen Ablaufzeitraums](/dotnet/api/microsoft.extensions.caching.memory.memorycacheentryoptions.slidingexpiration) nicht berücksichtigt, führt dies zu veralteten Cachedaten. Jede Datenanforderung erneuert den variablen Ablaufzeitraum, aber die Datei wird nie neu in den Zwischenspeicher geladen. Alle Anwendungsfeatures, die den zwischengespeicherten Inhalt der Datei verwenden, erhalten möglicherweise veraltete Inhalte.
+[!code-cshtml[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
-Wenn Sie Änderungstoken in einer Dateizwischenspeicherung verwenden, wird verhindert, dass veraltete Dateiinhalte im Zwischenspeicher auftreten. Die Beispielanwendung zeigt eine Implementierung des Ansatzes.
+## <a name="monitor-cached-file-changes"></a>Überwachen von zwischengespeicherten Dateiänderungen
+
+Dateiinhalt kann mithilfe von <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> speicherintern zwischengespeichert werden. Zwischenspeicherung im Arbeitsspeicher wird im Thema [Cache in-memory (Zwischenspeicherung im Arbeitsspeicher)](xref:performance/caching/memory) beschrieben. Ohne zusätzliche Schritte, wie der unten beschriebenen Implementierung, werden *veraltete* Daten aus einem Zwischenspeicher zurückgegeben, wenn sich die Quelldaten ändern.
+
+Wird beispielsweise der Status einer zwischengespeicherten Quelldatei beim Erneuern eines [variablen Ablaufzeitraums](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) nicht berücksichtigt, führt dies zu veralteten Dateidaten im Cache. Jede Datenanforderung erneuert den variablen Ablaufzeitraum, aber die Datei wird nie neu in den Zwischenspeicher geladen. Alle Anwendungsfeatures, die den zwischengespeicherten Inhalt der Datei verwenden, erhalten möglicherweise veraltete Inhalte.
+
+Durch die Verwendung von Änderungstoken in einem Szenario mit Dateizwischenspeicherung wird verhindert, dass veraltete Dateiinhalte im Zwischenspeicher auftreten. Die Beispielanwendung zeigt eine Implementierung des Ansatzes.
 
 Das Beispiel verwendet `GetFileContent`, um:
 
 * Dateiinhalt zurückzugeben.
-* Einen Wiederholungsalgorithmus mit exponentiellen Backoff zu implementieren, um Fälle abzudecken, in denen eine Dateisperre vorübergehend verhindert, dass eine Datei gelesen wird.
+* Einen Wiederholungsalgorithmus mit exponentiellem Backoff zu implementieren, um Fälle abzudecken, in denen eine Dateisperre vorübergehend das Lesen einer Datei verhindert.
 
 *Utilities/Utilities.cs*:
 
-[!code-csharp[](change-tokens/sample/Utilities/Utilities.cs?name=snippet2)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
 Ein `FileService` wird erstellt, um die zwischengespeicherten Dateisuchvorgänge zu behandeln. Der `GetFileContent`-Methodenaufruf des Diensts versucht, den Dateiinhalt aus dem speicherinternen Cache abzurufen und ihn an den Aufrufer zurückzugeben (*Services/FileService.cs*).
 
 Wenn mithilfe des Cacheschlüssels zwischengespeicherte Inhalte nicht gefunden werden, werden folgende Aktionen durchgeführt:
 
 1. Der Inhalt der Datei wird mit `GetFileContent` abgerufen.
-1. Ein Änderungstoken wird mithilfe von [IFileProviders.Watch](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider.watch) aus dem Dateianbieter abgerufen. Wenn die Datei geändert wird, wird ein Rückruf des Tokens ausgelöst.
-1. Der Inhalt der Datei wird mit einem [variablen Ablaufzeitraum](/dotnet/api/microsoft.extensions.caching.memory.memorycacheentryoptions.slidingexpiration) zwischengespeichert. Das Änderungstoken wird mit [MemoryCacheEntryExtensions.AddExpirationToken](/dotnet/api/microsoft.extensions.caching.memory.memorycacheentryextensions.addexpirationtoken) angefügt, um den Cacheeintrag zu entfernen, wenn die sich Datei ändert, während sie zwischengespeichert wird.
+1. Ein Änderungstoken wird mithilfe von [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) aus dem Dateianbieter abgerufen. Wenn die Datei geändert wird, wird ein Rückruf des Tokens ausgelöst.
+1. Der Inhalt der Datei wird mit einem [variablen Ablaufzeitraum](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) zwischengespeichert. Das Änderungstoken wird mit [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) angefügt, um den Cacheeintrag zu entfernen, wenn die sich Datei ändert, während sie zwischengespeichert wird.
 
-[!code-csharp[](change-tokens/sample/Services/FileService.cs?name=snippet1)]
+Im folgenden Beispiel werden Dateien im Stammpfad für App-Inhalte gespeichert. [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider) wird verwendet, um einen <xref:Microsoft.Extensions.FileProviders.IFileProvider> abzurufen, der auf den <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> der App zeigt. Der `filePath` wird mit [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath) abgerufen.
 
-Der `FileService` ist zusammen mit dem Speichercachedienst (*Startup.cs*) im Dienstcontainer registriert:
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
-[!code-csharp[](change-tokens/sample/Startup.cs?name=snippet4)]
+Der `FileService` ist zusammen mit dem Speichercachedienst im Dienstcontainer registriert:
 
-Das Seitenmodell lädt mithilfe des Diensts (*Pages/Index.cshtml.cs*) den Inhalt der Datei:
+In `Startup.ConfigureServices`:
 
-[!code-csharp[](change-tokens/sample/Pages/Index.cshtml.cs?name=snippet3)]
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet4)]
+
+Das Seitenmodell lädt mithilfe des Diensts den Inhalt der Datei.
+
+In der `OnGet`-Methode auf der Indexseite (*Pages/Index.cshtml.cs*):
+
+[!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
 ## <a name="compositechangetoken-class"></a>CompositeChangeToken-Klasse
 
-Verwenden Sie für die Darstellung von einer oder mehreren `IChangeToken`-Instanzen in einem einzelnen Objekt die Klasse [CompositeChangeToken](/dotnet/api/microsoft.extensions.primitives.compositechangetoken).
+Verwenden Sie für die Darstellung von einer oder mehreren `IChangeToken`-Instanzen in einem einzelnen Objekt die Klasse <xref:Microsoft.Extensions.Primitives.CompositeChangeToken>.
 
 ```csharp
 var firstCancellationTokenSource = new CancellationTokenSource();
@@ -185,13 +203,13 @@ var secondCancellationChangeToken = new CancellationChangeToken(secondCancellati
 var compositeChangeToken = 
     new CompositeChangeToken(
         new List<IChangeToken> 
-        { 
+        {
             firstCancellationChangeToken, 
             secondCancellationChangeToken
         });
 ```
 
-`HasChanged` für die kombinierten Tokenberichte ist `true`, wenn ein dargestelltes `HasChanged`-Token `true` ist. `ActiveChangeCallbacks` für die kombinierten Tokenberichte ist `true`, wenn ein dargestelltes `ActiveChangeCallbacks`-Token `true` ist. Wenn mehrere gleichzeitige Änderungsereignisse auftreten, wird der Rückruf für die kombinierte Änderung genau einmal aufgerufen.
+`HasChanged` für die kombinierten Tokenberichte ist `true`, wenn ein dargestelltes `HasChanged`-Token `true` ist. `ActiveChangeCallbacks` für die kombinierten Tokenberichte ist `true`, wenn ein dargestelltes `ActiveChangeCallbacks`-Token `true` ist. Wenn mehrere Änderungsereignisse gleichzeitig auftreten, wird der Rückruf für die kombinierte Änderung einmal aufgerufen.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

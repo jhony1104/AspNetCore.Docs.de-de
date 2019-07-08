@@ -5,14 +5,14 @@ description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/12/2019
+ms.date: 07/01/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: df27dad17133f287b1c73dc308b4cc69426e0a63
-ms.sourcegitcommit: 739a3d7ca4fd2908ea0984940eca589a96359482
+ms.openlocfilehash: d592c5bac1eb9822843a1ad1513a15fdfd6b1032
+ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67040714"
+ms.lasthandoff: 07/02/2019
+ms.locfileid: "67500312"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -20,7 +20,7 @@ Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github
 
 In diesem Tutorial erfahren Sie, wie Sie eine Blazor-App erstellen und ändern.
 
-Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor-Projekt für dieses Tutorial zu erstellen.
+Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor-Projekt für dieses Tutorial zu erstellen. Name der *ToDoList* für das Projekt.
 
 ## <a name="build-components"></a>Erstellen von Komponenten
 
@@ -28,24 +28,24 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor
 
 1. Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Das Heraufsetzen eines Zählers auf einer Webseite erfordert normalerweise das Schreiben in JavaScript, aber Blazor bietet einen besseren Ansatz mit C#.
 
-1. Sehen Sie sich die Implementierung der Counter-Komponente in der *Counter.razor*-Datei an.
+1. Sehen Sie sich die Implementierung der `Counter`-Komponente in der *Counter.razor*-Datei an.
 
    *Pages/Counter.razor*:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
-   Die Benutzeroberfläche der Counter-Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z.B. Schleifen, Bedingungen, Ausdrücken) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Das HTML-Markup und die C#-Renderinglogik werden zur Erstellungszeit in eine Komponentenklasse konvertiert. Der Name der generierten .NET-Klasse stimmt mit dem Namen der Datei überein.
+   Die Benutzeroberfläche der `Counter`-Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z.B. Schleifen, Bedingungen, Ausdrücken) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Das HTML-Markup und die C#-Renderinglogik werden zur Erstellungszeit in eine Komponentenklasse konvertiert. Der Name der generierten .NET-Klasse stimmt mit dem Namen der Datei überein.
 
    Member der Komponentenklasse werden in einem `@code`-Block definiert. Im `@code`-Block werden der Komponentenstatus (Eigenschaften, Felder) und Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Diese Member werden dann als Teil der Renderinglogik der Komponente und zur Behandlung von Ereignissen verwendet.
 
    Wenn die **Hier klicken**-Schaltfläche ausgewählt wird:
 
-   * Der registrierte `onclick`-Handler der Counter-Komponente wird aufgerufen (die `IncrementCount`-Methode).
-   * Die Counter-Komponente generiert ihre Renderstruktur neu.
+   * Der registrierte `onclick`-Handler der `Counter`-Komponente wird aufgerufen (die `IncrementCount`-Methode).
+   * Die `Counter`-Komponente generiert ihre Renderstruktur neu.
    * Die neue Renderstruktur wird mit der vorherigen verglichen.
    * Es werden nur Änderungen des Dokumentobjektmodells (Document Object Model, DOM) angewendet. Der angezeigte Zähler wird aktualisiert.
 
-1. Ändern Sie die C#-Logik der Counter-Komponente, um das Zählerinkrement von eins auf zwei heraufzusetzen.
+1. Ändern Sie die C#-Logik der `Counter`-Komponente, um das Zählerinkrement von eins auf zwei heraufzusetzen.
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/Counter2.razor?highlight=14)]
 
@@ -55,15 +55,15 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor
 
 Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponente ein.
 
-1. Fügen Sie die Counter-Komponente der Index-Komponente der App durch Hinzufügen eines `<Counter />`-Elements zur Index-Komponente (*Index.razor*) hinzu.
+1. Fügen Sie die `Index`-Komponente der `Counter`-Komponente der App durch Hinzufügen eines `<Counter />`-Elements zur `Index`-Komponente (*Index.razor*) hinzu.
 
-   Wenn Sie für diese Oberfläche die Blazor-Clientseite verwenden, enthält die Index-Komponente eine Survey Prompt-Komponente (`<SurveyPrompt>`-Element). Ersetzen Sie das `<SurveyPrompt>`-Element durch das `<Counter>`-Element. Wenn Sie für diese Oberfläche eine serverseitige Blazor-App verwenden, fügen Sie das `<Counter>`-Element zur Index-Komponente hinzu:
+   Wenn Sie für diese Oberfläche die Blazor-Clientseite verwenden, verwendet die `Index`-Komponente eine `SurveyPrompt`-Komponente. Ersetzen Sie das `<SurveyPrompt>`-Element durch ein `<Counter />`-Element. Wenn Sie für diese Oberfläche eine serverseitige Blazor-App verwenden, fügen Sie das `<Counter />`-Element zur `Index`-Komponente hinzu:
 
    *Pages/Index.razor*:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-1. Erstellen Sie die App neu, und führen Sie sie aus. Die Index-Komponente verfügt über einen eigenen Leistungsindikator.
+1. Erstellen Sie die App neu, und führen Sie sie aus. Die `Index`-Komponente verfügt über einen eigenen Zähler.
 
 ## <a name="component-parameters"></a>Komponentenparameter
 
@@ -83,23 +83,23 @@ Komponenten können auch Parameter aufweisen. Komponentenparameter werden mithil
    > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
 -->
 
-1. Geben Sie unter Verwendung eines Attributs einen `IncrementAmount`-Parameter in das `<Counter>`-Element der Index-Komponente ein. Legen Sie den Wert fest, um den Zähler um zehn heraufzusetzen.
+1. Geben Sie unter Verwendung eines Attributs einen `IncrementAmount`-Parameter im `<Counter>`-Element der `Index`-Komponente an. Legen Sie den Wert fest, um den Zähler um zehn heraufzusetzen.
 
    *Pages/Index.razor*:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-1. Laden Sie die Index-Komponente neu. Der Zähler wird jedes Mal, wenn die Schaltfläche **Hier klicken** ausgewählt wird, um zehn heraufgesetzt. Der Zähler in der Counter-Komponente wird weiter um eins erhöht.
+1. Laden Sie die `Index`-Komponente neu. Der Zähler wird jedes Mal, wenn die Schaltfläche **Hier klicken** ausgewählt wird, um zehn heraufgesetzt. Der Zähler in der `Counter`-Komponente wird weiter um eins erhöht.
 
 ## <a name="route-to-components"></a>Weiterleiten an Komponenten
 
-Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die Counter-Komponente ein Routingendpunkt ist. Die Counter-Komponente behandelt Anforderungen, die an `/counter` gesendet werden. Ohne die `@page`-Anweisung behandelt eine Komponente keine weitergeleiteten Anforderungen, aber die Komponente kann immer noch von anderen Komponenten verwendet werden.
+Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die `Counter`-Komponente ein Routingendpunkt ist. Die `Counter`-Komponente verarbeitet Anforderungen, die an `/counter` gesendet werden. Ohne die `@page`-Anweisung behandelt eine Komponente keine weitergeleiteten Anforderungen, aber die Komponente kann immer noch von anderen Komponenten verwendet werden.
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
 Im Dienstcontainer der App registrierte Dienste stehen für Komponenten über [Abhängigkeitsinjektion (DI, Dependency Injection)](xref:fundamentals/dependency-injection) zur Verfügung. Fügen Sie Dienste mit der `@inject`-Anweisung in eine Komponente ein.
 
-Sehen Sie sich die Anweisungen der FetchData-Komponente an.
+Sehen Sie sich die Anweisungen der `FetchData`-Komponente an.
 
 Wenn Sie eine serverseitige Blazor-App verwenden, ist der `WeatherForecastService`-Dienst als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert, sodass eine Instanz des Diensts in der gesamten App verfügbar ist. Mit der `@inject`-Anweisung wird die Instanz des `WeatherForecastService`-Diensts in die Komponente eingefügt.
 
@@ -107,7 +107,7 @@ Wenn Sie eine serverseitige Blazor-App verwenden, ist der `WeatherForecastServic
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1.razor?highlight=3)]
 
-Die FetchData-Komponente verwendet den eingefügten Dienst als `ForecastService`, um ein Array von `WeatherForecast`-Objekten abzurufen:
+Die `FetchData`-Komponente verwendet den eingefügten Dienst wie `ForecastService`, um ein Array aus `WeatherForecast`-Objekten abzurufen:
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
@@ -136,11 +136,11 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    <h1>Todo</h1>
    ```
 
-1. Fügen Sie der Navigationsleiste die Todo-Komponente hinzu.
+1. Fügen Sie der Navigationsleiste die `Todo`-Komponente hinzu.
 
-   Die NavMenu-Komponente (*Shared/NavMenu.razor*) wird im Layout der App verwendet. Layouts sind Komponenten, mit denen Sie die Duplizierung des Inhalts in der App vermeiden können. Weitere Informationen finden Sie unter <xref:blazor/layouts>.
+   Die `NavMenu`-Komponente (*Shared/NavMenu.razor*) wird im Layout der App verwendet. Layouts sind Komponenten, mit denen Sie die Duplizierung des Inhalts in der App vermeiden können.
 
-   Fügen Sie einen `<NavLink>` für die Todo-Komponente hinzu, indem Sie das folgende Listenelementmarkup unterhalb der vorhandenen Listenelemente der Datei *Shared/NavMenu.razor* hinzufügen:
+   Fügen Sie einen `Todo` für die `<NavLink>`-Komponente hinzu, indem Sie das folgende Listenelementmarkup unterhalb der vorhandenen Listenelemente in der *Datei Shared/NavMenu.razor* hinzufügen:
 
    ```cshtml
    <li class="nav-item px-3">
@@ -150,32 +150,30 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    </li>
    ```
 
-1. Erstellen Sie die App neu, und führen Sie sie aus. Besuchen Sie die neue Todo-Seite, um sicherzustellen, dass der Link zur Todo-Komponente funktioniert.
+1. Erstellen Sie die App neu, und führen Sie sie aus. Besuchen Sie die neue Todo-Seite, um sicherzustellen, dass der Link zur `Todo`-Komponente funktioniert.
 
 1. Fügen Sie eine *TodoItem.cs*-Datei dem Stamm des Projekts hinzu, die eine Klasse zum Darstellen eines Aufgabenelements enthalten soll. Verwenden Sie den folgenden C#-Code für die `TodoItem`-Klasse:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. Kehren Sie zur Todo-Komponente (*Pages/Todo.razor*) zurück:
+1. Kehren Sie zur `Todo`-Komponente (*Pages/Todo.razor*) zurück:
 
-   * Fügen Sie ein Feld für die Aufgabenelemente in einem `@code`-Block hinzu. Die Todo-Komponente verwaltet mit diesem Feld den Status der Aufgabenliste.
-   * Fügen Sie ein Markup für eine unsortierte Liste und eine `foreach`-Schleife hinzu, um jedes Aufgabenelement als Listenelement zu rendern.
+   * Fügen Sie ein Feld für die Aufgabenelemente in einem `@code`-Block hinzu. Die `Todo`-Komponente verwaltet mit diesem Feld den Status der Aufgabenliste.
+   * Fügen Sie ein Markup für eine unsortierte Liste und eine `foreach`-Schleife hinzu, um jedes Aufgabenelement als Listenelement zu rendern (`<li>`).
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo4.razor?highlight=5-10,12-14)]
 
-1. Die App benötigt Benutzeroberflächenelemente, damit der Liste Aufgabenelemente hinzugefügt werden können. Fügen Sie eine Texteingabe und eine Schaltfläche unterhalb der Liste hinzu:
+1. Die App benötigt Benutzeroberflächenelemente, damit der Liste Aufgabenelemente hinzugefügt werden können. Fügen Sie eine Texteingabe (`<input>`) und eine Schaltfläche (`<button>`) unterhalb der Liste (`<ul>...</ul>`) hinzu:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Bei Auswahl der Schaltfläche **Todo-Element hinzufügen** geschieht nichts, da kein Ereignishandler mit der Schaltfläche verknüpft ist.
 
-1. Fügen Sie eine `AddTodo`-Methode der Todo-Komponente hinzu, und registrieren Sie sie mit dem `@onclick`-Attribut für Schaltflächenklicks:
+1. Fügen Sie eine `AddTodo`-Methode zur `Todo`-Komponente hinzu, und registrieren Sie sie mit dem `@onclick`-Attribut für eine Schaltflächenauswahl. Die C#-Methode `AddTodo` wird aufgerufen, wenn die Schaltfläche ausgewählt wird:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo6.razor?highlight=2,7-10)]
 
-   Die `AddTodo`-C#-Methode wird aufgerufen, wenn die Schaltfläche ausgewählt wird.
-
-1. Um den Titel des neuen Aufgabenelements abzurufen, fügen Sie ein `newTodo`-Zeichenfolgenfeld hinzu, und binden Sie es mithilfe des `bind`-Attributs an den Wert der Texteingabe:
+1. Um den Titel des neuen Aufgabenelements abzurufen, fügen Sie oben im `@code`-Block ein `newTodo`-Zeichenfolgenfeld hinzu, und binden Sie es mithilfe des `bind`-Attributs im `<input>`-Element an den Wert der Texteingabe:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
@@ -189,7 +187,7 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Fügen Sie der Aufgabenliste einige Aufgabenelemente hinzu, um den neuen Code zu testen.
 
-1. Der Titeltext für die einzelnen Aufgabenelemente kann bearbeitet werden, und ein Kontrollkästchen kann dem Benutzer helfen, die erledigten Elemente nachzuverfolgen. Fügen Sie für jedes Aufgabenelement eine Kontrollkästcheneingabe hinzu, und binden Sie ihren Wert an die `IsDone`-Eigenschaft. Ändern Sie `@todo.Title` in ein `<input>`-Element, das an `@todo.Title` gebunden ist:
+1. Der Titeltext für die einzelnen Aufgabenelemente kann als bearbeitbar festgelegt werden, und ein Kontrollkästchen kann dem Benutzer helfen, die erledigten Elemente nachzuverfolgen. Fügen Sie für jedes Aufgabenelement eine Kontrollkästcheneingabe hinzu, und binden Sie ihren Wert an die `IsDone`-Eigenschaft. Ändern Sie `@todo.Title` in ein `<input>`-Element, das an `@todo.Title` gebunden ist:
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo9.razor?highlight=5-6)]
 
@@ -199,12 +197,11 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    <h1>Todo (@todos.Count(todo => !todo.IsDone))</h1>
    ```
 
-1. Die erledigte Todo-Komponente (*Pages/Todo.razor*):
+1. Die abgeschlossene `Todo`-Komponente (*Pages/Todo.razor*):
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Fügen Sie Aufgabenelemente hinzu, um den neuen Code zu testen.
 
-## <a name="publish-and-deploy-the-app"></a>Veröffentlichen und Bereitstellen der App
-
-Wie Sie die App veröffentlichen, erfahren Sie unter <xref:host-and-deploy/blazor/index>.
+> [!div class="nextstepaction"]
+> <xref:blazor/components>
