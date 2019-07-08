@@ -2,16 +2,17 @@
 title: Razor-Seiten-Komponententests in ASP.NET Core
 author: guardrex
 description: Erfahren Sie, wie Sie Komponententests für Razor Pages-apps zu erstellen.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/27/2017
+ms.date: 07/07/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: f0e47f975579dc114eaeda375028ec62696f58ed
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: f89b4fcb0065e725f70deec7859e373f9158b4bd
+ms.sourcegitcommit: 91cc1f07ef178ab709ea42f8b3a10399c970496e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394738"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67622776"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Razor-Seiten-Komponententests in ASP.NET Core
 
@@ -26,20 +27,20 @@ ASP.NET Core unterstützt Komponententests mit Razor Pages-apps. Tests für die 
 
 In diesem Thema wird davon ausgegangen, dass Sie ein grundlegendes Verständnis der Razor-Seiten-apps und Komponententests haben. Wenn Sie mit Razor Pages-apps oder Konzepte nicht vertraut sind, finden Sie unter den folgenden Themen:
 
-* [Introduction to Razor Pages (Einführung in Razor Pages)](xref:razor-pages/index)
-* [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start)
+* <xref:razor-pages/index>
+* <xref:tutorials/razor-pages/razor-pages-start>
 * [Komponententest von C# -Code in .NET Core mit Dotnet Test und xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Das Beispielprojekt besteht aus zwei apps:
 
-| App         | Projektordner                        | Beschreibung |
-| ----------- | ------------------------------------- | ----------- |
-| Nachrichten-app | *src/RazorPagesTestSample*            | Ermöglicht es einem Benutzer hinzufügen, löschen, löschen Sie alle und Analysieren von Nachrichten. |
-| Testen der app    | *tests/RazorPagesTestSample.Tests*    | Um einen Komponententest durchführen, die Nachrichten-app verwendet: Die Datenzugriffsebene (DAL) und Index-Seitenmodell. |
+| App         | Projektordner                     | Beschreibung |
+| ----------- | ---------------------------------- | ----------- |
+| Nachrichten-app | *src/RazorPagesTestSample*         | Ermöglicht es einem Benutzer zum Hinzufügen einer Nachricht, eine Nachricht zu löschen, alle Nachrichten löschen und Analysieren von Nachrichten (finden die durchschnittliche Anzahl von Wörtern pro Nachricht). |
+| Testen der app    | *tests/RazorPagesTestSample.Tests* | Verwendet, um Komponententests der DAL und Index-Seitenmodell der Nachrichten-app. |
 
-Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](https://visualstudio.microsoft.com). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesTestSample.Tests* Ordner:
+Die Tests können ausgeführt werden, verwenden integrierte Funktionen von einer IDE, z. B. [Visual Studio](/visualstudio/test/unit-test-your-code) oder [Visual Studio für Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution). Wenn [Visual Studio Code](https://code.visualstudio.com/) oder der Befehlszeile, und führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesTestSample.Tests* Ordner:
 
 ```console
 dotnet test
@@ -47,17 +48,17 @@ dotnet test
 
 ## <a name="message-app-organization"></a>Nachrichten-app-Organisation
 
-Die Nachrichten-app ist eine einfache Razor-Seiten-Nachrichtensystem mit den folgenden Merkmalen:
+Die Nachrichten-app ist ein Nachrichtensystem für Razor-Seiten mit den folgenden Merkmalen:
 
-* Die Indexseite der app (*Pages/Index.cshtml* und *Pages/Index.cshtml.cs*) eine Benutzeroberfläche und die Seite stellt Modellmethoden bereit, um zu steuern, das Hinzufügen, löschen und Analyse von Nachrichten (durchschnittliche Wörter pro Nachricht) .
+* Die Indexseite der app (*Pages/Index.cshtml* und *Pages/Index.cshtml.cs*) eine Benutzeroberfläche und die Seite stellt Modellmethoden bereit, um zu steuern, das Hinzufügen, löschen und Analyse von (suchen die durchschnittliche Anzahl von Nachrichten Wörter pro Nachricht).
 * Eine Nachricht wird beschrieben, durch die `Message` Klasse (*Data/Message.cs*) mit zwei Eigenschaften: `Id` (Schlüssel) und `Text` (Nachricht). Die `Text` Eigenschaft ist erforderlich, und bis zu 200 Zeichen.
 * Nachrichten werden gespeichert mit [des Entity Framework-in-Memory-Datenbank](/ef/core/providers/in-memory/)&#8224;.
-* Die app enthält eine Datenzugriffsschicht (DAL) in der Datenbank-Kontextklasse `AppDbContext` (*Data/AppDbContext.cs*). Die DAL-Methoden werden markiert `virtual`, wodurch simulieren die Methoden für die Verwendung in den Tests.
+* Die app enthält eine DAL in der Datenbank-Kontextklasse `AppDbContext` (*Data/AppDbContext.cs*). Die DAL-Methoden werden markiert `virtual`, wodurch simulieren die Methoden für die Verwendung in den Tests.
 * Wenn die Datenbank beim Start der app leer ist, wird der Nachrichtenspeicher mit drei Nachrichten initialisiert. Diese *Nachrichten das Seeding* werden auch in den Tests verwendet.
 
 &#8224;Das Thema EF [Testen mit InMemory](/ef/core/miscellaneous/testing/in-memory), wird erläutert, wie eine in-Memory-Datenbank für Tests mit MSTest verwenden. In diesem Thema verwendet die [xUnit](https://xunit.github.io/) Testframework. Test-Implementierung für andere Testframeworks und Konzepte sind ähnlich, aber nicht identisch.
 
-Obwohl die app nicht das Repositorymuster verwenden und kein Beispiel für effektive ist der [Arbeitseinheit (UoW) Muster](https://martinfowler.com/eaaCatalog/unitOfWork.html), Razor-Seiten unterstützt diese Muster der Entwicklung. Weitere Informationen finden Sie unter [Entwerfen der Persistenzebene der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) und [Testen von Controllerlogik](/aspnet/core/mvc/controllers/testing) (im Beispiel wird das Repositorymuster implementiert).
+Obwohl die Beispiel-app nicht das Repositorymuster verwenden und kein Beispiel für effektive ist der [Arbeitseinheit (UoW) Muster](https://martinfowler.com/eaaCatalog/unitOfWork.html), Razor-Seiten unterstützt diese Muster der Entwicklung. Weitere Informationen finden Sie unter [Entwerfen der Persistenzebene der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) und <xref:mvc/controllers/testing> (im Beispiel wird das Repositorymuster implementiert).
 
 ## <a name="test-app-organization"></a>Testen der app-Organisation
 
@@ -81,7 +82,7 @@ Die Nachrichten-app hat eine DAL mit vier Methoden in der `AppDbContext` Klasse 
 | `DeleteAllMessagesAsync` | Löscht alle `Message` Einträge aus der Datenbank.                           |
 | `DeleteMessageAsync`     | Löscht eine einzelne `Message` aus der Datenbank durch `Id`.                      |
 
-Komponententests von der DAL benötigen ["dbcontextoptions"](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) beim Erstellen eines neuen `AppDbContext` für jeden Test. Ein Ansatz zum Erstellen der `DbContextOptions` für jeden Test ist die Verwendung einer [Element](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder):
+Komponententests von der DAL benötigen <xref:Microsoft.EntityFrameworkCore.DbContextOptions> beim Erstellen eines neuen `AppDbContext` für jeden Test. Ein Ansatz zum Erstellen der `DbContextOptions` für jeden Test ist die Verwendung einer <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder>:
 
 ```csharp
 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>()
@@ -148,15 +149,15 @@ Eine andere Gruppe von Komponententests ist verantwortlich für Tests der Seiten
 | Seite "-Modell-Methode | Funktion |
 | ----------------- | -------- |
 | `OnGetAsync` | Ruft die Nachrichten aus der DAL für die Benutzeroberfläche mit dem `GetMessagesAsync` Methode. |
-| `OnPostAddMessageAsync` | Wenn die `ModelState` gültig ist, ruft `AddMessageAsync` zum Hinzufügen einer Nachricht in der Datenbank. |
+| `OnPostAddMessageAsync` | Wenn die [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) gültig ist, ruft `AddMessageAsync` zum Hinzufügen einer Nachricht in der Datenbank. |
 | `OnPostDeleteAllMessagesAsync` | Aufrufe `DeleteAllMessagesAsync` alle Nachrichten in der Datenbank zu löschen. |
 | `OnPostDeleteMessageAsync` | Führt `DeleteMessageAsync` So löschen Sie eine Nachricht mit der `Id` angegebenen. |
 | `OnPostAnalyzeMessagesAsync` | Wenn eine oder mehrere Nachrichten in der Datenbank sind, berechnet die durchschnittliche Anzahl von Wörtern pro Nachricht. |
 
 Die Seite Modellmethoden werden getestet mit sieben Tests in der `IndexPageTests` Klasse (*tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs*). Die Tests verwenden Sie das vertraute Arrange-Assert-Act-Muster. Diese Tests beziehen sich auf:
 
-* Bestimmen, ob die Methoden das richtige Verhalten führen Sie bei der `ModelState` ist ungültig.
-* Bestätigen die Methoden erzeugen der richtigen `IActionResult`.
+* Bestimmen, ob die Methoden das richtige Verhalten führen Sie bei der [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) ist ungültig.
+* Bestätigen die Methoden erzeugen der richtigen <xref:Microsoft.AspNetCore.Mvc.IActionResult>.
 * Überprüfen, dass Wert eigenschaftenzuweisungen ordnungsgemäß vorgenommen werden.
 
 Diese Gruppe von Tests simulieren häufig die Methoden von der DAL zum Erzeugen der Erwarteter Daten für den Act-Schritt, in eine Seitenmethode-Modell ausgeführt wird. Z. B. die `GetMessagesAsync` Methode der `AppDbContext` simuliert, um die Ausgabe zu erzeugen. Wenn diese Methode von eine Seitenmethode-Modell ausgeführt wird, gibt das Mock das Ergebnis zurück. Die Daten stammen nicht aus der Datenbank. Dadurch wird die vorhersagbare und zuverlässige testbedingungen für die Verwendung von der DAL in die Seite Modell Tests erstellt.
@@ -181,17 +182,18 @@ In der `Assert` einen Schritt oder die tatsächlichen Nachrichten (`actualMessag
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet3)]
 
-Andere Tests in dieser Gruppe erstellen Seite Model-Objekte, die implizit enthalten die `DefaultHttpContext`, `ModelStateDictionary`, wird eine `ActionContext` Herstellen der `PageContext`, `ViewDataDictionary`, und ein `PageContext`. Diese sind hilfreich bei der Ausführung von Tests. Beispielsweise die Nachrichten-app richtet eine `ModelState` Fehler mit `AddModelError` überprüfen, ob ein gültiger `PageResult` wird zurückgegeben, wenn `OnPostAddMessageAsync` ausgeführt wird:
+Andere Tests in dieser Gruppe erstellen Seite Model-Objekte, die implizit enthalten die <xref:Microsoft.AspNetCore.Http.DefaultHttpContext>, <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary>, wird eine <xref:Microsoft.AspNetCore.Mvc.ActionContext> Herstellen der `PageContext`, `ViewDataDictionary`, und ein `PageContext`. Diese sind hilfreich bei der Ausführung von Tests. Beispielsweise die Nachrichten-app richtet eine `ModelState` Fehler mit <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.AddModelError*> überprüfen, ob ein gültiger <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> wird zurückgegeben, wenn `OnPostAddMessageAsync` ausgeführt wird:
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Komponententest von C# -Code in .NET Core mit Dotnet Test und xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-* [Testen von Controllern](xref:mvc/controllers/testing)
+* <xref:mvc/controllers/testing>
 * [Komponententests für Code](/visualstudio/test/unit-test-your-code) (Visual Studio)
-* [Integrationstests](xref:test/integration-tests)
+* <xref:test/integration-tests>
 * [xUnit.net](https://xunit.github.io/)
-* [Erste Schritte mit xUnit.net (.NET Core bzw. ASP.NET Core)](https://xunit.github.io/docs/getting-started-dotnet-core)
+* [Erstellen einer vollständigen .NET Core-Lösung unter macOS mit Visual Studio für Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution)
+* [Erste Schritte mit xUnit.net: Verwenden von .NET Core mit dem .NET SDK-Befehlszeile](https://xunit.github.io/docs/getting-started-dotnet-core)
 * [Moq](https://github.com/moq/moq4)
 * [Moq-Schnellstart](https://github.com/Moq/moq4/wiki/Quickstart)
