@@ -5,12 +5,12 @@ description: Richtlinie Authentifizierungsschemas erleichtern es, eine einzelne 
 ms.author: riande
 ms.date: 2/28/2019
 uid: security/authentication/policyschemes
-ms.openlocfilehash: c310b61e14df2b7846e32a602bb75914a5850aff
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1a2d92e6fa54189b8154fc501b31c8a99d1f9081
+ms.sourcegitcommit: 357a7120632b20465801c093e4e5bd4a315496a8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895197"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67649183"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>Richtlinie für Schemas, die in ASP.NET Core
 
@@ -32,7 +32,7 @@ Das folgende Beispiel zeigt eine höhere Ebene Schema, in der unteren Ebene Sche
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-Im folgenden Beispiel wird die dynamische Auswahl der Schemas auf Grundlage individueller Anforderungen. D. h., wie Sie Cookies und API-Authentifizierung zu kombinieren.
+Im folgenden Beispiel wird die dynamische Auswahl der Schemas auf Grundlage individueller Anforderungen. D. h. wie zum Mischen von Cookies und API-Authentifizierung:
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 
