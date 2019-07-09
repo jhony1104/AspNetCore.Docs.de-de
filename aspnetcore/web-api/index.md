@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Grundlagen zum Erstellen einer Web-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/07/2019
+ms.date: 07/08/2019
 uid: web-api/index
-ms.openlocfilehash: 593fd33babc81cddfc4db2150a37e5ec3bc1a0be
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: 4f9c334f74dd2a8b7c31c7a42703fa361ccf9139
+ms.sourcegitcommit: 91cc1f07ef178ab709ea42f8b3a10399c970496e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65450837"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67622798"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -28,7 +28,7 @@ Eine Web-API verfügt über mindestens eine Controllerklasse, die von <xref:Micr
 
 [!code-csharp[](index/samples/2.x/Controllers/ValuesController.cs?name=snippet_Signature&highlight=3)]
 
-Erstellen Sie keinen von der <xref:Microsoft.AspNetCore.Mvc.Controller>-Basisklasse abgeleiteten Web-API-Controller. `Controller` wird von `ControllerBase` abgeleitet und fügt Unterstützung für Ansichten hinzu, wird also für die Verarbeitung von Webseiten verwendet und nicht für Web-API-Anforderungen.  Es gibt eine Ausnahme von dieser Regel: Wenn Sie denselben Controller sowohl für Ansichten als auch für APIs verwenden möchten, leiten Sie ihn von `Controller` ab.
+Erstellen Sie einen Web-API-Controller nicht durch Ableitung aus der <xref:Microsoft.AspNetCore.Mvc.Controller>-Klasse. `Controller` wird von `ControllerBase` abgeleitet und fügt Unterstützung für Ansichten hinzu, wird also für die Verarbeitung von Webseiten verwendet und nicht für Web-API-Anforderungen.  Es gibt eine Ausnahme von dieser Regel: Wenn Sie denselben Controller sowohl für Ansichten als auch für APIs verwenden möchten, leiten Sie ihn von `Controller` ab.
 
 Die `ControllerBase`-Klasse bietet viele Eigenschaften und Methoden, die für die Verarbeitung von HTTP-Anforderungen hilfreich sind. `ControllerBase.CreatedAtAction` gibt beispielsweise Statuscode 201 zurück:
 
@@ -36,7 +36,7 @@ Die `ControllerBase`-Klasse bietet viele Eigenschaften und Methoden, die für di
 
  Hier einige weitere Beispiele für die von `ControllerBase` bereitgestellten Methoden.
 
-|Methode  |Hinweise  |
+|Methode  |Notizen  |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>| Gibt Statuscode 400 zurück.|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> |Gibt Statuscode 404 zurück.|
@@ -54,7 +54,7 @@ Der <xref:Microsoft.AspNetCore.Mvc>-Namespace enthält Attribute, mit denen das 
 
 Hier einige weitere Beispiele für die verfügbaren Attribute.
 
-|Attribut|Hinweise|
+|Attribut|Notizen|
 |---------|-----|
 |[[Route]](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Gibt ein URL-Muster für einen Controller oder eine Aktion an.|
 |[[Bind]](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Gibt Präfixe und Eigenschaften an, die in die Modellbindung einbezogen werden sollen.|
