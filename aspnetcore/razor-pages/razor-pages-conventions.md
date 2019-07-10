@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 4e07b5803adbce94982584212fa65afbfd427b64
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 59c8af648b50deb51f3762c14348d08acd48886e
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893507"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724448"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor-Seiten: Routen- und App-Konventionen in ASP.NET Core
 
@@ -270,7 +270,7 @@ Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/Abo
 
 Das Seiten-App-Modell wird verwendet, um den relativen Pfad für Segmente zu überprüfen, die zur Seite „Seite2“ im Ordner *OtherPages* führen. Wenn die Bedingung erfüllt ist, wird ein Header hinzugefügt. Wenn dies nicht der Fall ist, wird der `EmptyFilter` angewendet.
 
-`EmptyFilter` ist ein [Aktionsfilter](xref:mvc/controllers/filters#action-filters). Wenn der Pfad `OtherPages/Page2` nicht enthält, hat der `EmptyFilter`, wie vorgesehen, keine Funktion, da Aktionsfilter von Razor Pages ignoriert werden.
+`EmptyFilter` ist ein [Aktionsfilter](xref:mvc/controllers/filters#action-filters). Da Aktionsfilter von Razor Pages ignoriert werden die `EmptyFilter` wirkt sich nicht erwartungsgemäß, wenn der Pfad enthält keine `OtherPages/Page2`.
 
 Fordern Sie die Seite „Seite2“ der Beispielanwendung unter `localhost:5000/OtherPages/Page2` an, und prüfen Sie die Header, um das Ergebnis zu sehen:
 

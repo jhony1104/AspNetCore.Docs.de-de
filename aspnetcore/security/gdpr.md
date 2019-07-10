@@ -2,23 +2,47 @@
 title: Datenschutz-Grundverordnung (DSGVO)-Unterstützung in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie Sie auf die DSGVO-Erweiterungspunkte in einer ASP.NET Core-Web-app zugreifen.
-monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/05/2019
+ms.date: 07/11/2019
 uid: security/gdpr
-ms.openlocfilehash: 1580187afef56e8e2f5be7a4bae32912e6305c5a
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 01d2f8943c0995c1400122b89c4ca7c459a85279
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152854"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724563"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>Europa Allgemein Datenschutz-Grundverordnung (DSGVO)-Unterstützung in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ASP.NET Core bietet APIs und Vorlagen, um einige der erfüllen die [Europa Allgemein Datenschutz-Grundverordnung (DSGVO)](https://www.eugdpr.org/) Anforderungen:
+
+::: moniker range=">= aspnetcore-3.0"
+
+* Die Projektvorlagen enthalten Erweiterungspunkte und liegenden ereignisfelds Markup, das Sie durch den Datenschutz und Cookies verwenden von Richtlinien ersetzen können.
+* Die *Pages/Privacy.cshtml* Seite oder *Views/Home/Privacy.cshtml* Ansicht bietet eine Seite Ihrer Website-Datenschutzrichtlinie ausführlich beschrieben.
+
+Um die Cookie-Zustimmung Standardfeature, zu aktivieren, die in die ASP.NET Core-2.2-Vorlagen in einer ASP.NET Core 3.0 generierte Vorlage app gefunden werden:
+
+* Hinzufügen [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) zu `Startup.ConfigureServices` und [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) zu `Startup.Configure`:
+
+  [!code-csharp[Main](gdpr/sample/RP3.0/Startup.cs?name=snippet1&highlight=12-19,38)]
+
+* Fügen Sie die Zustimmung teilweise Cookie, um die *"_Layout.cshtml"* Datei:
+
+  [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
+
+* Hinzufügen der  *\_CookieConsentPartial.cshtml* Datei zum Projekt:
+
+  [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
+
+* Wählen Sie die ASP.NET Core-2.2-Version dieses Artikels zum Feature Zustimmung Cookie gelesen.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.2"
 
 * Die Projektvorlagen enthalten Erweiterungspunkte und liegenden ereignisfelds Markup, das Sie durch den Datenschutz und Cookies verwenden von Richtlinien ersetzen können.
 * Ein Cookie Zustimmung-Feature können Sie Ihre Zustimmung anfordern (und Nachverfolgen) von Ihren Benutzern zum Speichern von persönlichen Informationen. Wenn ein Benutzer noch nicht, um die Datensammlung zugestimmt und die app verfügt über [CheckConsentNeeded](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) festgelegt `true`, nicht unbedingt Cookies werden nicht an den Browser gesendet.
@@ -32,17 +56,7 @@ Die [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcor
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>ASP.NET Core DSGVO unterstützen, in der Vorlage generierten Codes
 
-::: moniker range="< aspnetcore-2.2"
-
-Razor-Seiten und MVC mit den Projektvorlagen erstellte Projekte bieten keine Unterstützung für Zustimmung DSGVO oder Cookie. Um DSGVO hinzuzufügen, kopieren Sie den generierten Code in die ASP.NET Core-2.2-Vorlagen.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.2"
-
 Razor-Seiten und MVC-Projekte erstellt, die mit den Projektvorlagen enthalten die folgende DSGVO-Unterstützung:
-
-::: moniker-end
 
 * [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) und [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) in festgelegt sind das `Startup` Klasse.
 * Die  *\_CookieConsentPartial.cshtml* [Teilansicht](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Ein **Accept** Schaltfläche befindet sich in dieser Datei. Klickt der Benutzer die **Accept** Schaltfläche, die zum Speichern von Cookies zustimmen wird bereitgestellt.
@@ -63,7 +77,7 @@ Razor-Seiten und MVC-Projekte erstellt, die mit den Projektvorlagen enthalten di
 
 Die  *\_CookieConsentPartial.cshtml* Teilansicht:
 
-[!code-html[](gdpr/sample/RP/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Diese partielle:
 
@@ -75,7 +89,7 @@ Diese partielle:
 
 Wenn Zustimmung zum Speichern von Cookies wurde nicht angegeben wurde, nur Cookies, die als wichtig markiert werden an den Browser gesendet. Im folgenden Code werden einen Cookie wichtig:
 
-[!code-csharp[Main](gdpr/sample/RP/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
+[!code-csharp[Main](gdpr/sample/RP2.2/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
 
 <a name="tempdata"></a>
 
@@ -83,11 +97,11 @@ Wenn Zustimmung zum Speichern von Cookies wurde nicht angegeben wurde, nur Cooki
 
 Die [TempData-Anbieters](xref:fundamentals/app-state#tempdata) Cookie nicht wichtig ist. Wenn die Überwachung deaktiviert ist, nicht der TempData-Anbieter. Um der TempData-Anbieter aktivieren, wenn die nachverfolgung deaktiviert ist, Markieren des TempData-Cookies als wesentlich `Startup.ConfigureServices`:
 
-[!code-csharp[Main](gdpr/sample/RP/Startup.cs?name=snippet1)]
+[!code-csharp[Main](gdpr/sample/RP2.2/Startup.cs?name=snippet1)]
 
 [Sitzungsstatus](xref:fundamentals/app-state) Cookies sind nicht wichtig. Sitzungsstatus nicht funktionsfähig, wenn die nachverfolgung deaktiviert ist. Im folgenden Code werden die Sitzungscookies wichtig:
 
-[!code-csharp[](gdpr/sample/RP/Startup.cs?name=snippet2)]
+[!code-csharp[](gdpr/sample/RP2.2/Startup.cs?name=snippet2)]
 
 <a name="pd"></a>
 
@@ -105,6 +119,8 @@ Notizen:
 * Die **löschen** und **herunterladen** Links dienen nur auf den Standard-Identity-Daten. Apps, die benutzerdefinierten Daten zu erstellen, müssen zum Löschen und die benutzerdefinierten Benutzerdaten herunterladen erweitert werden. Weitere Informationen finden Sie unter [hinzufügen, herunterladen und Löschen von benutzerdefinierten Daten Identität](xref:security/authentication/add-user-data).
 * Gespeicherte Token für den Benutzer, die in der Identity-Datenbanktabelle gespeichert sind `AspNetUserTokens` werden gelöscht, wenn der Benutzer, über das kaskadierende Delete Verhalten aufgrund gelöscht wird der [Fremdschlüssel](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152).
 * [Authentifizierung des externen Anbieter](xref:security/authentication/social/index), z. B. Facebook und Google, nicht zur Verfügung, bevor die Cookierichtlinie akzeptiert wird.
+
+::: moniker-end
 
 ## <a name="encryption-at-rest"></a>Verschlüsselung ruhender Daten
 

@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über ASP.NET Core-Middleware und die Anforderung
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/03/2019
+ms.date: 07/09/2019
 uid: fundamentals/middleware/index
-ms.openlocfilehash: cdb4916f277c64e4f273b2a0b9a7a4074600f7b7
-ms.sourcegitcommit: f6e6730872a7d6f039f97d1df762f0d0bd5e34cf
+ms.openlocfilehash: 74ecc1fa099d2d33ceb066decc912978da53bfb3
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67561596"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724466"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -78,7 +78,7 @@ Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allge
 1. MVC-Middleware (<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*>) zum Hinzufügen von MVC zur Anforderungspipeline.
 
 ```csharp
-public void Configure(IApplicationBuilder app)
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     if (env.IsDevelopment())
     {
