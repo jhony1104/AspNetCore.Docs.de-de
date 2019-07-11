@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: d0494b96447ad2b256acbde7748209ff430ae7c1
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: ebfb405516d968bf5d5b8cff956a9892457027f2
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610183"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813463"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>LibMan mit ASP.NET Core in Visual Studio verwenden
 
@@ -26,9 +26,9 @@ Visual Studio verfügt über integrierte Unterstützung für [LibMan](xref:clien
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(Herunterladen von)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [Visual Studio-2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) mit der **ASP.NET und Webentwicklung** arbeitsauslastung
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) mit der Workload **ASP.NET- und Webentwicklung**
 
 ## <a name="add-library-files"></a>Fügen Sie Bibliotheksdateien
 
@@ -69,7 +69,7 @@ Um eine clientseitige Bibliothek zu installieren, gehen Sie wie folgt vor:
   |*Seiten* Ordner im Projekt                 |*Pages/jquery/*       |
 
 * Klicken Sie auf die **installieren** Schaltfläche zum Herunterladen der Dateien, gemäß der Konfiguration in *libman.json*.
-* Überprüfen Sie die **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster für die Details zur Installation. Zum Beispiel:
+* Überprüfen Sie die **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster für die Details zur Installation. Beispiel:
 
   ```console
   Restore operation started...
@@ -94,13 +94,13 @@ Zum Öffnen *libman.json* für die Bearbeitung gibt folgende Optionen:
 
 **&#8224;** Wenn die *libman.json* Datei ist nicht in das Stammverzeichnis des Projekts bereits vorhanden ist, wird es mit den standardmäßigen Element Vorlage-Inhalt erstellt.
 
-Visual Studio bietet umfassende JSON bearbeitungsunterstützung wie z. B. farbliche Kennzeichnung, Formatierung, IntelliSense und Schema-Validierung. Die JSON-Schema des Manifests LibMan befindet sich [ http://json.schemastore.org/libman ](http://json.schemastore.org/libman).
+Visual Studio bietet umfassende JSON bearbeitungsunterstützung wie z. B. farbliche Kennzeichnung, Formatierung, IntelliSense und Schema-Validierung. Die JSON-Schema des Manifests LibMan befindet sich [ https://json.schemastore.org/libman ](https://json.schemastore.org/libman).
 
 Mit der folgenden Manifestdatei ruft LibMan Dateien gemäß der Konfiguration definiert, der `libraries` Eigenschaft. Eine Erläuterung der Objektliterale in definierten `libraries` folgt:
 
-* Eine Teilmenge der [jQuery](https://jquery.com/) Version 3.3.1 wird vom Anbieter CDNJS abgerufen. Die Teilmenge wird definiert, der `files` Eigenschaft&mdash;*"jQuery.Min.js"*, *"jQuery.js"*, und *jquery.min.map*. Die Dateien des Projekts platziert sind *Wwwroot/Lib/Jquery* Ordner.
+* Eine Teilmenge der [jQuery](https://jquery.com/) Version 3.3.1 wird vom Anbieter CDNJS abgerufen. Die Teilmenge wird definiert, der `files` Eigenschaft&mdash; *"jQuery.Min.js"* , *"jQuery.js"* , und *jquery.min.map*. Die Dateien des Projekts platziert sind *Wwwroot/Lib/Jquery* Ordner.
 * Während des gesamten Entwicklungsprozesses [Bootstrap](https://getbootstrap.com/) Version 4.1.3 wird abgerufen und in einem *Wwwroot/Lib/Bootstrap* Ordner. Das Objektliteral `provider` -Eigenschaft überschreibt den `defaultProvider` -Eigenschaftswert. LibMan Ruft die Bootstrap-Dateien aus der Unpkg Anbieter ab.
-* Eine Teilmenge der [Lodash](https://lodash.com/) , die von einem Governanceorgane innerhalb der Organisation genehmigt wurde. Die *lodash.js* und *lodash.min.js* Dateien werden abgerufen, aus dem lokalen Dateisystem auf *C:\\Temp\\Lodash\\*. Die Dateien des Projekts kopiert werden *Wwwroot/Lib/Lodash* Ordner.
+* Eine Teilmenge der [Lodash](https://lodash.com/) , die von einem Governanceorgane innerhalb der Organisation genehmigt wurde. Die *lodash.js* und *lodash.min.js* Dateien werden abgerufen, aus dem lokalen Dateisystem auf *C:\\Temp\\Lodash\\* . Die Dateien des Projekts kopiert werden *Wwwroot/Lib/Lodash* Ordner.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -160,7 +160,7 @@ Bibliotheksdateien manuell wiederherstellen zu können:
 Während des Wiederherstellungsvorgangs ausgeführt wird:
 
 * Das Symbol "Task Status Center (TSC)" in der Statusleiste von Visual Studio animiert wird, und liest *Wiederherstellungsvorgang Schritte*. Klicken auf das Symbol klicken, wird eine QuickInfo, die Auflistung der bekannten Hintergrundaufgaben geöffnet.
-* Nachrichten werden an die Statusleiste gesendet werden und die **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster. Zum Beispiel:
+* Nachrichten werden an die Statusleiste gesendet werden und die **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster. Beispiel:
 
   ```console
   Restore operation started...
@@ -185,7 +185,7 @@ Um zu verhindern, dass unbeabsichtigt von nicht-Library-Dateien, nicht der Berei
 Während die saubere Operation ausgeführt wird:
 
 * Das Symbol "TSC" auf der Statusleiste von Visual Studio animiert wird, und liest *Client-Bibliotheken Vorgang gestartet*. Klicken auf das Symbol klicken, wird eine QuickInfo, die Auflistung der bekannten Hintergrundaufgaben geöffnet.
-* Meldungen auf der Statusleiste und **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster. Zum Beispiel:
+* Meldungen auf der Statusleiste und **Hilfebibliotheks-Manager** des Feeds der **Ausgabe** Fenster. Beispiel:
 
 ```console
 Clean libraries operation started...
@@ -201,7 +201,7 @@ So deinstallieren Sie Bibliotheksdateien
 
 * Open *libman.json*.
 * Positionieren Sie den Textcursor in den entsprechenden `libraries` Objektliteral.
-* Klicken Sie auf das Glühbirnensymbol klicken, die in den linken Rand angezeigt wird, und wählen **Deinstallieren \<Library_name > @\<Library_version >**:
+* Klicken Sie auf das Glühbirnensymbol klicken, die in den linken Rand angezeigt wird, und wählen **Deinstallieren \<Library_name > @\<Library_version >** :
 
   ![Deinstallieren Sie die Option im Kontextmenü für Bibliothek](_static/uninstall-menu-option.png)
 

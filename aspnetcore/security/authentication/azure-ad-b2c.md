@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 02/27/2019
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 3cb878aff7bf0c6c8efe7f3f0c0f06c74acef477
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 54117bf0dd45305d060eef5fecfb98ed45f8ecdb
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538728"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815302"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core
 
@@ -30,7 +30,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 > * Verwenden Sie Visual Studio zum Erstellen einer ASP.NET Core-Web-Apps so konfiguriert, dass die Azure AD B2C-Mandanten für die Authentifizierung verwenden
 > * Konfigurieren von Richtlinien, die Steuerung des Verhaltens des Azure AD B2C-Mandanten
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 
@@ -43,7 +43,7 @@ Erstellen eines Azure Active Directory B2C-Mandanten [wie in der Dokumentation b
 
 ## <a name="register-the-app-in-azure-ad-b2c"></a>Registrieren der app in Azure AD B2C
 
-In den neu erstellten Azure AD B2C-Mandanten Registrieren Ihrer app über [die Schritte in der Dokumentation](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-app) unter der **Registrieren einer WebApp** Abschnitt. Beenden der **erstellen Sie ein Web-app-clientgeheimnis** Abschnitt. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
+In den neu erstellten Azure AD B2C-Mandanten Registrieren Ihrer app über [die Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) unter der **Registrieren einer WebApp** Abschnitt. Beenden der **erstellen Sie ein Web-app-clientgeheimnis** Abschnitt. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
 
 Verwenden Sie die folgenden Werte ein:
 
@@ -57,7 +57,7 @@ Verwenden Sie die folgenden Werte ein:
 | **Nativen Client einschließen**     | Nein                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
-> Wenn das Einrichten einer nicht-Localhost-Antwort-URL, berücksichtigen die [Einschränkungen auf, was in der Antwort-URL-Liste zulässig ist](/azure/active-directory-b2c/active-directory-b2c-app-registration#choosing-a-web-app-or-api-reply-url). 
+> Wenn das Einrichten einer nicht-Localhost-Antwort-URL, berücksichtigen die [Einschränkungen auf, was in der Antwort-URL-Liste zulässig ist](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application). 
 
 Nachdem die app registriert wurde, wird die Liste der apps im Mandanten angezeigt. Wählen Sie die app, die gerade registriert wurde. Wählen Sie die **Kopie** Symbol rechts neben der **Anwendungs-ID** Feld, um ihn in die Zwischenablage zu kopieren.
 
@@ -101,7 +101,7 @@ Zurück zum Browserfenster mit den B2C-app-Eigenschaften noch geöffnet. Ändern
 
 ## <a name="configure-policies"></a>Konfigurieren von Richtlinien
 
-Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie eine Richtlinie für Registrierung oder Anmeldung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-sign-up-or-sign-in-policy), und klicken Sie dann [erstellen Sie eine Richtlinie zur kennwortzurücksetzung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-password-reset-policy). Verwenden Sie die Beispielwerte finden Sie in der Dokumentation für **Identitätsanbieter**, **Registrierungsattribute**, und **anwendungsansprüche**. Mithilfe der **jetzt ausführen** , um die Richtlinien zu testen, wie in der Dokumentation beschrieben ist optional.
+Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie eine Richtlinie für Registrierung oder Anmeldung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), und klicken Sie dann [erstellen Sie eine Richtlinie zur kennwortzurücksetzung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Verwenden Sie die Beispielwerte finden Sie in der Dokumentation für **Identitätsanbieter**, **Registrierungsattribute**, und **anwendungsansprüche**. Mithilfe der **jetzt ausführen** , um die Richtlinien zu testen, wie in der Dokumentation beschrieben ist optional.
 
 > [!WARNING]
 > Stellen Sie sicher, Richtliniennamen werden genau wie in der Dokumentation beschrieben, wie diese Richtlinien, in verwendet wurden der **Authentifizierung ändern** Dialogfeld in Visual Studio. Namen der Richtlinien überprüft werden können, im *"appSettings.JSON"* .

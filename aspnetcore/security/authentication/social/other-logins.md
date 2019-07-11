@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
 uid: security/authentication/otherlogins
-ms.openlocfilehash: b69c366ec1bf12ccf434991fc8a79eaf8c09da3d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 2bc9a11d0a46e54b4206f846d187b8c1cc954f89
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897507"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815559"
 ---
 # <a name="external-oauth-authentication-providers"></a>Externe OAuth-Authentifizierungsanbieter
 
@@ -37,7 +37,7 @@ Die folgende Liste enthält allgemeine externe OAuth-Authentifizierungsanbieter,
 
 * [Flickr](https://www.flickr.com/services/apps/create) ([Anweisungen](https://www.flickr.com/services/api/auth.oauth.html))
 
-* [Dribble](https://dribbble.com/signup) ([Anweisungen](http://developer.dribbble.com/v1/oauth/))
+* [Dribble](https://dribbble.com/signup) ([Anweisungen](https://developer.dribbble.com/v1/oauth/))
 
 * [Vimeo](https://vimeo.com/join) ([Anweisungen](https://developer.vimeo.com/api/authentication))
 

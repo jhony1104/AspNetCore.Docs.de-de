@@ -5,12 +5,12 @@ description: Informationen Sie zu Cross-Site Scripting (XSS) und Techniken zur B
 ms.author: riande
 ms.date: 10/02/2018
 uid: security/cross-site-scripting
-ms.openlocfilehash: 50f0211a2c64708d9b788dd10ce9064e66014d55
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1e9e988be68313cfd493832519c1be89335d6e48
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895347"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815212"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Verhindern von Cross-Site Scripting (XSS) in ASP.NET Core
 
@@ -57,7 +57,7 @@ Diese Sicht gibt den Inhalt der *UntrustedInput* Variable. Diese Variable enthä
 
 ## <a name="javascript-encoding-using-razor"></a>JavaScript Codierung Razor
 
-Möglicherweise gibt es Zeiten, die zum Einfügen eines Werts in JavaScript in der Ansicht verarbeitet werden sollen. Hierfür gibt es zwei Möglichkeiten. Die sicherste Möglichkeit zum Einfügen von Werten ist den Wert in einem Datenattribut eines Tags und in JavaScript abrufen. Zum Beispiel:
+Möglicherweise gibt es Zeiten, die zum Einfügen eines Werts in JavaScript in der Ansicht verarbeitet werden sollen. Hierfür gibt es zwei Möglichkeiten. Die sicherste Möglichkeit zum Einfügen von Werten ist den Wert in einem Datenattribut eines Tags und in JavaScript abrufen. Beispiel:
 
 ```cshtml
 @{
@@ -214,7 +214,7 @@ In diesem Beispiel wird die Sicherungsliste, um die Unicode-Bereich CjkUnifiedId
 <p>This link text is in Chinese: <a href="/">汉语/漢語</a></p>
    ```
 
-Liste mit sicheren Bereiche werden als Unicode-codeübersichten, nicht die Sprachen angegeben. Die [Unicode-Standard](http://unicode.org/) enthält eine Liste der [code Diagramme](http://www.unicode.org/charts/index.html) können Sie das Diagramm, das mit Ihrer Zeichen gefunden. Jeder Encoder, Html, JavaScript und die Url muss separat konfiguriert werden.
+Liste mit sicheren Bereiche werden als Unicode-codeübersichten, nicht die Sprachen angegeben. Die [Unicode-Standard](https://unicode.org/) enthält eine Liste der [code Diagramme](https://www.unicode.org/charts/index.html) können Sie das Diagramm, das mit Ihrer Zeichen gefunden. Jeder Encoder, Html, JavaScript und die Url muss separat konfiguriert werden.
 
 > [!NOTE]
 > Anpassung der Liste der sicheren wirkt sich nur Encodern, die mithilfe von DI stammen. Wenn Sie direkt einen Encoder über zugreifen `System.Text.Encodings.Web.*Encoder.Default` klicken Sie dann den Standardwert lateinischen nur Listen sicherer Adressen verwendet werden.

@@ -5,12 +5,12 @@ description: Erfahren Sie Details zur Implementierung von ASP.NET Core-Datenschu
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 2b8fd594672bf623d38bfae90d05a984f92ce6a3
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087561"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814017"
 ---
 # <a name="context-headers-in-aspnet-core"></a>Kontextheader in ASP.NET Core
 
@@ -48,7 +48,7 @@ Die Kontext-Header besteht aus folgenden Komponenten:
 
 Im Idealfall konnten wir Nullen Vektoren für K_E und K_H übergeben. Allerdings möchten wir die Situation zu vermeiden, in denen der zugrunde liegende Algorithmus das Vorhandensein von schwachen Schlüsseln vor der Durchführung aller Vorgänge (insbesondere DES und 3DES) prüft, ob die schließt die Verwendung von einem einfachen oder wiederholbare Muster wie ein Vektor Nullen.
 
-Stattdessen verwenden wir die NIST SP800-108 KDF in der Counter-Modus (finden Sie unter [NIST SP800-108](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), SEC 5.1) mit der Länge Null-Schlüssel, Bezeichnung und Kontext und HMACSHA512 als den zugrunde liegenden PRF. Wir leiten | K_E | + | K_H | Bytes von Ausgabe, klicken Sie dann zerlegen das Ergebnis in K_E und K_H selbst. Mathematisch gesehen wird dies wie folgt dargestellt.
+Stattdessen verwenden wir die NIST SP800-108 KDF in der Counter-Modus (finden Sie unter [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), SEC 5.1) mit der Länge Null-Schlüssel, Bezeichnung und Kontext und HMACSHA512 als den zugrunde liegenden PRF. Wir leiten | K_E | + | K_H | Bytes von Ausgabe, klicken Sie dann zerlegen das Ergebnis in K_E und K_H selbst. Mathematisch gesehen wird dies wie folgt dargestellt.
 
 ( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")
 

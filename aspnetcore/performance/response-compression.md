@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: performance/response-compression
-ms.openlocfilehash: e312d43fb62106f6ecb98367c29daa377bb227c9
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d5d2da3dc0a8a452de97d98161d429389d2f7638
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893347"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815613"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Antwortkomprimierung in ASP.NET Core
 
@@ -30,7 +30,7 @@ Verwenden Sie Antworten komprimierende Middleware, wenn Sie sich befinden:
 
 * Kann nicht die folgenden Server-basierten komprimierungstechnologien verwendet werden:
   * [Dynamische Komprimierung in IIS-Modul](https://www.iis.net/overview/reliability/dynamiccachingandcompression)
-  * [Apache Mod_deflate-Modul](http://httpd.apache.org/docs/current/mod/mod_deflate.html)
+  * [Apache Mod_deflate-Modul](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
   * [Nginx-Komprimierung und Dekomprimierung](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
 * Hosten direkt auf:
   * [HTTP.sys-Server](xref:fundamentals/servers/httpsys) (früher als "WebListener" bezeichnet)
@@ -70,7 +70,7 @@ Wenn ein Client komprimierten Inhalte verarbeiten kann, muss der Client den Serv
 
 ::: moniker-end
 
-Weitere Informationen finden Sie unter den [IANA offizielle Codierung Inhaltsliste](http://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
+Weitere Informationen finden Sie unter den [IANA offizielle Codierung Inhaltsliste](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
 
 Die Middleware können Sie zusätzliche Komprimierung-Anbieter für benutzerdefinierte hinzufügen `Accept-Encoding` Headerwerte. Weitere Informationen finden Sie unter [benutzerdefinierte Anbieter](#custom-providers) unten.
 
@@ -146,7 +146,7 @@ public class Startup
 Notizen:
 
 * `app.UseResponseCompression` muss aufgerufen werden, bevor `app.UseMvc`.
-* Verwenden Sie ein Tool wie z. B. [Fiddler](http://www.telerik.com/fiddler), [Firebug](http://getfirebug.com/), oder [Postman](https://www.getpostman.com/) Festlegen der `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text.
+* Verwenden Sie ein Tool wie z. B. [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/), oder [Postman](https://www.getpostman.com/) Festlegen der `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text.
 
 Senden Sie eine Anforderung zur Beispiel-app ohne die `Accept-Encoding` Header und beobachten Sie, dass die Antwort nicht komprimiert. Die `Content-Encoding` und `Vary` Header nicht in der Antwort vorhanden sind.
 
@@ -385,4 +385,4 @@ Mit einem Tool wie [Fiddler](https://www.telerik.com/fiddler), [Firebug](https:/
 * [Mozilla Developer Network: Accept-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Encoding)
 * [RFC 7231 Abschnitt 3.1.2.1: Inhalt Codings](https://tools.ietf.org/html/rfc7231#section-3.1.2.1)
 * [RFC 7230 Abschnitt 4.2.3: Gzip-Codierung](https://tools.ietf.org/html/rfc7230#section-4.2.3)
-* [GZIP-Datei-Format Specification Version 4.3](http://www.ietf.org/rfc/rfc1952.txt)
+* [GZIP-Datei-Format Specification Version 4.3](https://www.ietf.org/rfc/rfc1952.txt)

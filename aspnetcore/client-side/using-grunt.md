@@ -5,12 +5,12 @@ description: Verwenden von Grunt in ASP.NET Core
 ms.author: riande
 ms.date: 06/18/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: 851ce3b50e88fee597518aef23276800f4b50f06
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: f3832bd1fe5721fbda114103ac11a8d55312bcb2
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207752"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813553"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Verwenden von Grunt in ASP.NET Core
 
@@ -94,7 +94,7 @@ Als Nächstes konfigurieren Sie NPM, Grunt und Grunt-Aufgaben herunterladen.
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > Der NPM verwendet [semantische Versionierung](http://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der Intellisense-Liste (0.4.5 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion. Finden Sie unter den [NPM Semver Version Parser Verweis](https://www.npmjs.com/package/semver) als Leitfaden für die vollständige ausdrucksmöglichkeiten, die SemVer bereitstellt.
+    > Der NPM verwendet [semantische Versionierung](https://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der Intellisense-Liste (0.4.5 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion. Finden Sie unter den [NPM Semver Version Parser Verweis](https://www.npmjs.com/package/semver) als Leitfaden für die vollständige ausdrucksmöglichkeiten, die SemVer bereitstellt.
 
 3. Fügen Sie weitere Abhängigkeiten laden grunt-Contrib -\* Pakete für *Bereinigen*, *Jshint*, *"concat"* , *uglify*, und *Watch* wie im folgenden Beispiel gezeigt. Die Versionen müssen nicht im Beispiel übereinstimmen.
 

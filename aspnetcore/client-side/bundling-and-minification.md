@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: c3ec67d9f5c2b8eb44b5ced911ccfd0fa40a52a7
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 6254a74fd0a11669706a2a89b156a3223e300d1c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152776"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813497"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung von statischen Objekten in ASP.NET Core
 
@@ -86,7 +86,7 @@ Die *bundleconfig.json* -Datei definiert die Optionen für jedes Paket. Im vorhe
 Konfigurationsoptionen sind verfügbar:
 
 * `outputFileName`: Der Name der Bundle-Datei ausgegeben. Einen relativen Pfad darf die *bundleconfig.json* Datei. **required**
-* `inputFiles`: Ein Array von Dateien zu bündeln. Dies sind die relativen Pfade der Konfigurationsdatei hinzu. **optionale**, * ein leerer Wert in einer leeren Ausgabedatei führt. [Verwendung von Platzhaltern](http://www.tldp.org/LDP/abs/html/globbingref.html) Muster werden unterstützt.
+* `inputFiles`: Ein Array von Dateien zu bündeln. Dies sind die relativen Pfade der Konfigurationsdatei hinzu. **optionale**, * ein leerer Wert in einer leeren Ausgabedatei führt. [Verwendung von Platzhaltern](https://www.tldp.org/LDP/abs/html/globbingref.html) Muster werden unterstützt.
 * `minify`: Geben Sie die Minimierung-Optionen für die Ausgabe. **optionale**, *Standard: `minify: { enabled: true }`*
   * Konfigurationsoptionen sind pro ausgabedateityp verfügbar.
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)

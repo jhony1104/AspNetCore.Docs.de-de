@@ -17,6 +17,6 @@ Wenn die Anforderung enthält die `Accept-Encoding` -Header, die im Beispiel wir
 
 ## <a name="using-the-sample"></a>Verwenden des Beispiels
 
-1. Stellen Sie eine Anforderung mit [Fiddler](http://www.telerik.com/fiddler), [Firebug](http://getfirebug.com/), oder [Postman](https://www.getpostman.com/) auf die Anwendung ohne ein `Accept-Encoding` Header und notieren Sie die antwortnutzlast Antwortgröße, und Antwortheader.
+1. Stellen Sie eine Anforderung mit [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/), oder [Postman](https://www.getpostman.com/) auf die Anwendung ohne ein `Accept-Encoding` Header und notieren Sie die antwortnutzlast Antwortgröße, und Antwortheader.
 1. Hinzufügen einer `Accept-Encoding: gzip` Header und beachten Sie die Größe der komprimierte Antwort und -Antwortheader. Sie sehen, dass die Antwortgröße zu löschen, und die `Content-Encoding: gzip` -Header der Antwort ist enthalten, von der Beispiel-app. Wenn Sie den Antworttext für die Lorem Ipsum ansehen oder **testfile1kb.txt** Antwort wird ersichtlich, dass der Text, komprimierte und nicht gelesen werden ist.
 1. Hinzufügen einer `Accept-Encoding: mycustomcompression` Header und notieren Sie sich die Header der Antwort. Die `CustomCompressionProvider` ist eine leere Implementierung, die tatsächlich die Antwort komprimieren nicht, aber Sie können einen benutzerdefinierten Komprimierung Stream-Wrapper für erstellen, die `CreateStream()` Methode.

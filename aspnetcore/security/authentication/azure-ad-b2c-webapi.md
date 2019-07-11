@@ -6,12 +6,12 @@ ms.author: casoper
 ms.date: 09/21/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 0eb8b533f44a1f72cfc3c4ec5ec060adb37eed6c
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: c917a5130857165716bd801ac19dad0f53a7d214
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610366"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815384"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET Core
 
@@ -46,11 +46,11 @@ Erstellen eines Azure AD B2C-Mandanten [wie in der Dokumentation beschrieben](/a
 
 ## <a name="configure-a-sign-up-or-sign-in-policy"></a>Konfigurieren Sie eine Richtlinie für Registrierung oder Anmeldung
 
-Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie eine Richtlinie für Registrierung oder Anmeldung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-sign-up-or-sign-in-policy). Benennen Sie die Richtlinie **SiUpIn**.  Verwenden Sie die Beispielwerte finden Sie in der Dokumentation für **Identitätsanbieter**, **Registrierungsattribute**, und **anwendungsansprüche**. Mithilfe der **jetzt ausführen** Schaltfläche, um die Richtlinie zu testen, wie in der Dokumentation beschrieben ist optional.
+Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie eine Richtlinie für Registrierung oder Anmeldung](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Benennen Sie die Richtlinie **SiUpIn**.  Verwenden Sie die Beispielwerte finden Sie in der Dokumentation für **Identitätsanbieter**, **Registrierungsattribute**, und **anwendungsansprüche**. Mithilfe der **jetzt ausführen** Schaltfläche, um die Richtlinie zu testen, wie in der Dokumentation beschrieben ist optional.
 
 ## <a name="register-the-api-in-azure-ad-b2c"></a>Registrieren der API in Azure AD B2C
 
-In den neu erstellten Azure AD B2C-Mandanten, registrieren Sie Ihre API mit [die Schritte in der Dokumentation](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-api) unter der **Registrieren einer Web-API-** Abschnitt.
+In den neu erstellten Azure AD B2C-Mandanten, registrieren Sie Ihre API mit [die Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) unter der **Registrieren einer Web-API-** Abschnitt.
 
 Verwenden Sie die folgenden Werte ein:
 
@@ -106,7 +106,7 @@ Führen Sie die API in Visual Studio. Visual Studio startet einen Browser auf di
 
 ### <a name="register-postman-as-a-web-app"></a>Registrieren Sie Postman wird als eine Web-app.
 
-Da Sie Postman über eine Web-app simuliert, die Token aus dem Azure AD B2C-Mandanten erhält, muss es als Web-app im Mandanten registriert werden. Registrieren Sie mithilfe von Postman [die Schritte in der Dokumentation](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-app) unter der **Registrieren einer WebApp** Abschnitt. Beenden der **erstellen Sie ein Web-app-clientgeheimnis** Abschnitt. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
+Da Sie Postman über eine Web-app simuliert, die Token aus dem Azure AD B2C-Mandanten erhält, muss es als Web-app im Mandanten registriert werden. Registrieren Sie mithilfe von Postman [die Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) unter der **Registrieren einer WebApp** Abschnitt. Beenden der **erstellen Sie ein Web-app-clientgeheimnis** Abschnitt. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
 
 Verwenden Sie die folgenden Werte ein:
 

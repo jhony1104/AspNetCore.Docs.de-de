@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/05/2019
 uid: test/integration-tests
-ms.openlocfilehash: 3af2a1f7c6a65d7ff42597972ee151a50fc95fb6
-ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
+ms.openlocfilehash: a4e22e53b4658a7c6da3c9e15671a355b212f559
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66716375"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815364"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -184,7 +184,7 @@ Die `SendAsync` Hilfsmethoden für die Erweiterung (*Helpers/HttpClientExtension
   * Schaltfläche "Senden" (`IHtmlElement`) und Werte bilden (`IEnumerable<KeyValuePair<string, string>>`)
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) ist ein Drittanbieter-Analyse-Bibliothek, die in diesem Thema und die Beispiel-app zu Demonstrationszwecken verwendet. AngleSharp wird nicht unterstützt, oder für Integrationstests von ASP.NET Core-apps erforderlich sind. Andere Parser können verwendet werden, z. B. die [HTML-Agilität Pack (HAP)](http://html-agility-pack.net/). Ein anderer Ansatz ist Code schreiben, um der antiforgery Systemvariable Überprüfung Anfordern eines Tokens und antiforgery Cookie direkt behandeln.
+> [AngleSharp](https://anglesharp.github.io/) ist ein Drittanbieter-Analyse-Bibliothek, die in diesem Thema und die Beispiel-app zu Demonstrationszwecken verwendet. AngleSharp wird nicht unterstützt, oder für Integrationstests von ASP.NET Core-apps erforderlich sind. Andere Parser können verwendet werden, z. B. die [HTML-Agilität Pack (HAP)](https://html-agility-pack.net/). Ein anderer Ansatz ist Code schreiben, um der antiforgery Systemvariable Überprüfung Anfordern eines Tokens und antiforgery Cookie direkt behandeln.
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>Anpassen des Clients mit WithWebHostBuilder
 
@@ -200,7 +200,7 @@ Da eine andere Testen in der `IndexPageTests` Klasse führt einen Vorgang, der a
 
 Die folgende Tabelle zeigt die [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) verfügbar, beim Erstellen von `HttpClient` Instanzen.
 
-| Option | Beschreibung | Standard |
+| Option | Beschreibung | Default |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt ihn fest, ob `HttpClient` Instanzen sollte Umleitung Antworten automatisch folgen. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Übernimmt oder bestimmt die Basisadresse des `HttpClient` Instanzen. | `http://localhost` |

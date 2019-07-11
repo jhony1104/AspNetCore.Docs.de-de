@@ -3,24 +3,16 @@ title: Kontobestätigung und kennwortwiederherstellung in ASP.NET Core
 author: rick-anderson
 description: Informationen Sie zum Erstellen einer ASP.NET Core-app mit e-Mail-Bestätigung und kennwortzurücksetzung.
 ms.author: riande
-ms.date: 3/11/2019
+ms.date: 03/11/2019
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 59041bcf11f7deb351a2f0bb075ed80c8af5e12b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 802ba446af04df6a35ac73187ad693b8ec80c654
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891677"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814838"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Kontobestätigung und kennwortwiederherstellung in ASP.NET Core
-
-::: moniker range="<= aspnetcore-2.0"
-
-Finden Sie unter [diese PDF-Datei](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) für die ASP.NET Core 1.1 und Version 2.1.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
 
 Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Ponant](https://github.com/Ponant), und [Joe Audette](https://twitter.com/joeaudette)
 
@@ -32,7 +24,200 @@ Dieses Tutorial veranschaulicht das Erstellen eine ASP.NET Core-app mit e-Mail-B
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
-## <a name="prerequisites"></a>Vorraussetzungen
+::: moniker range="<= aspnetcore-2.0"
+
+Finden Sie unter [diese PDF-Datei](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) für die ASP.NET Core 1.1-Version.
+
+::: moniker-end
+
+::: moniker range="> aspnetcore-2.2"
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+[SDK für .NET Core 3.0 oder höher](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+
+## <a name="create-and-test-a-web-app-with-authentication"></a>Erstellen und Testen einer Web-Apps mit Authentifizierung
+
+Führen Sie die folgenden Befehle zum Erstellen einer Web-app mit Authentifizierung.
+
+```console
+dotnet new webapp -au Individual -uld -o WebPWrecover
+cd WebPWrecover
+dotnet run
+```
+
+Die app auszuführen, wählen Sie die **registrieren** verknüpfen, und registrieren Sie einen Benutzer. Nach der Registrierung werden Sie umgeleitet die auf `/Identity/Account/RegisterConfirmation` Seite enthält einen Link, um e-Mail-Bestätigung zu simulieren:
+
+* Wählen Sie die `Click here to confirm your account` Link.
+* Wählen Sie die **Anmeldung** verknüpfen, und melden Sie sich mit denselben Anmeldeinformationen an.
+* Wählen Sie die `Hello YourEmail@provider.com!` Link Sie leitet die `/Identity/Account/Manage/PersonalData` Seite.
+* Wählen Sie die **personenbezogene Daten** links auf die Registerkarte, und wählen Sie dann **löschen**.
+
+### <a name="configure-an-email-provider"></a>Konfigurieren Sie einen e-Mail-Anbieter
+
+In diesem Tutorial [SendGrid](https://sendgrid.com) wird verwendet, um e-Mail zu senden. Sie benötigen eine SendGrid-Konto und einen Schlüssel zum Senden von e-Mails. Sie können andere e-Mail-Anbieter verwenden. Es wird empfohlen, dass Sie über SendGrid oder eine andere e-Mail-Dienst verwenden, um e-Mail zu senden. SMTP ist schwierig, sichere und ordnungsgemäß eingerichtet.
+
+Erstellen Sie eine Klasse, um den Schlüssel für sichere e-Mails abrufen. In diesem Beispiel erstellen *Services/AuthMessageSenderOptions.cs*:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
+
+#### <a name="configure-sendgrid-user-secrets"></a>Konfigurieren von SendGrid benutzergeheimnisse
+
+Legen Sie die `SendGridUser` und `SendGridKey` mit der [Secret-Manager-Tool](xref:security/app-secrets). Beispiel:
+
+```console
+dotnet user-secrets set SendGridUser RickAndMSFT
+dotnet user-secrets set SendGridKey <key>
+
+Successfully saved SendGridUser = RickAndMSFT to the secret store.
+```
+
+Auf Windows, speichert Secret Manager-Schlüssel/Wert-Paare in einem *secrets.json* Datei die `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` Verzeichnis.
+
+Den Inhalt der *secrets.json* Datei sind nicht verschlüsselt. Das folgende Markup zeigt die *secrets.json* Datei. Die `SendGridKey` Wert entfernt wurde.
+
+```json
+{
+  "SendGridUser": "RickAndMSFT",
+  "SendGridKey": "<key removed>"
+}
+```
+
+Weitere Informationen finden Sie unter den [optionsmuster](xref:fundamentals/configuration/options) und [Konfiguration](xref:fundamentals/configuration/index).
+
+### <a name="install-sendgrid"></a>Installieren von SendGrid
+
+In diesem Tutorial wird gezeigt, wie Hinzufügen von e-Mail-Benachrichtigungen über [SendGrid](https://sendgrid.com/), aber Sie können e-Mails über SMTP und andere Mechanismen senden.
+
+Installieren Sie die `SendGrid` NuGet-Paket:
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Geben Sie über die Paket-Manager-Konsole den folgenden Befehl aus:
+
+``` PMC
+Install-Package SendGrid
+```
+
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+
+Geben Sie in der Konsole den folgenden Befehl aus:
+
+```cli
+dotnet add package SendGrid
+```
+
+---
+
+Finden Sie unter [kostenlos erste Schritte mit SendGrid](https://sendgrid.com/free/) für ein kostenloses SendGrid-Konto zu registrieren.
+
+### <a name="implement-iemailsender"></a>Implementieren von IEmailSender
+
+Das implementieren `IEmailSender`, erstellen Sie *Services/EmailSender.cs* mit ähnlich dem folgenden Code:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/Services/EmailSender.cs)]
+
+### <a name="configure-startup-to-support-email"></a>Konfigurieren Sie beim Start zur Unterstützung von e-Mail-Adresse
+
+Fügen Sie den folgenden Code der `ConfigureServices` -Methode in der die *"Startup.cs"* Datei:
+
+* Hinzufügen `EmailSender` als vorübergehender Dienst.
+* Registrieren der `AuthMessageSenderOptions` konfigurationsinstanz.
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
+
+## <a name="register-confirm-email-and-reset-password"></a>Registrieren und bestätigen Sie die e-Mail-Adresse und die kennwortzurücksetzung
+
+Führen Sie die Web-app, und Testen Sie die kontobestätigung und das Kennwort eine Wiederherstellung durchführen.
+
+* Die app ausführen und einen neuen Benutzer registrieren
+* Überprüfen Sie Ihre e-Mail-Adresse für die der Link für die Bestätigung. Finden Sie unter [Debuggen-e-Mail](#debug) sollten Sie die e-Mail nicht erhalten.
+* Klicken Sie auf den Link, um Ihre e-Mail-Adresse zu bestätigen.
+* Melden Sie sich mit Ihren e-Mail-Adresse und Ihr Kennwort.
+* Melden Sie sich ab.
+
+### <a name="test-password-reset"></a>Test Zurücksetzen des Kennworts
+
+* Wenn Sie sich angemeldet haben, wählen Sie **Logout**.
+* Wählen Sie die **melden Sie sich bei** verknüpfen, und wählen Sie die **haben Ihr Kennwort vergessen?** Link.
+* Geben Sie die e-Mail-Adresse, die Sie verwendet, um das Konto zu registrieren.
+* Es wird eine e-Mail mit einem Link zum Zurücksetzen Ihres Kennworts gesendet. Überprüfen Sie Ihre e-Mail-Adresse ein, und klicken Sie auf den Link zum Zurücksetzen Ihres Kennworts. Nachdem Sie Ihr Kennwort erfolgreich zurückgesetzt wurde, können Sie sich mit Ihrem e-Mail-Adresse und das neue Kennwort anmelden.
+
+## <a name="change-email-and-activity-timeout"></a>Ändern Sie die e-Mail-Adresse und der Aktivität ein timeout
+
+Das Standardtimeout für die Inaktivität beträgt 14 Tage. Im folgenden Code wird das Timeout bei Inaktivität bis 5 Tagen:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAppCookie.cs?name=snippet1)]
+
+### <a name="change-all-data-protection-token-lifespans"></a>Ändern Sie alle Data Protection-token-Gültigkeitsdauer
+
+Der folgende Code ändert alle Data Protection Token Zeitlimit bis drei Stunden:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
+
+Die integrierten im Benutzertoken für die Identität (finden Sie unter [AspNetCore/src/Identity/Extensions.Core/src/TokenOptions.cs](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) haben eine [Timeout für einen Tag](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+
+### <a name="change-the-email-token-lifespan"></a>Ändern Sie die Lebensdauer des Zugriffstoken-e-Mail
+
+Die Standard-token-Lebensdauer von [das Benutzertoken für die Identität](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ist [eines Tages](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). In diesem Abschnitt veranschaulicht, wie die Lebensdauer des Zugriffstoken-e-Mail zu ändern.
+
+Hinzufügen ein benutzerdefinierten [DataProtectorTokenProvider\<TUser >](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) und <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
+
+Fügen Sie den benutzerdefinierten Anbieter zum Dienstcontainer hinzu:
+
+[!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
+
+### <a name="resend-email-confirmation"></a>Erneutes Senden von e-Mail-Bestätigung
+
+Finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/5410).
+
+<a name="debug"></a>
+
+### <a name="debug-email"></a>Debuggen von e-Mail-Adresse
+
+Wenn Sie e-Mail-Adresse funktioniert nicht:
+
+* Festlegen eines Haltepunkts im `EmailSender.Execute` überprüfen `SendGridClient.SendEmailAsync` aufgerufen wird.
+* Erstellen Sie eine [Konsolen-app zum Senden von e-Mails](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) mit ähnlichen Code `EmailSender.Execute`.
+* Überprüfen Sie die [-e-Mail-Aktivität](https://sendgrid.com/docs/User_Guide/email_activity.html) Seite.
+* Überprüfen Sie Ihren Spam-Ordner.
+* Versuchen Sie es einer anderen e-Mail-Alias für einen anderen e-Mail-Anbieter (Microsoft, Yahoo, Gmail usw.)
+* Versuchen Sie es an andere e-Mail-Konten gesendet.
+
+**Eine bewährte Sicherheitsmethode** besteht darin, **nicht** produktionsgeheimnisse in Test- und entwicklungsumgebungen verwendet. Wenn Sie die app in Azure veröffentlichen, legen Sie die SendGrid-Geheimnisse als Anwendungseinstellungen im Azure-Web-App-Portal ein. Das Konfigurationssystem ist zum Lesen von Schlüsseln aus Umgebungsvariablen eingerichtet.
+
+## <a name="combine-social-and-local-login-accounts"></a>Kombinieren Sie Konten für soziale Netzwerke und lokale Anmeldung
+
+Um diesen Abschnitt abgeschlossen haben, müssen Sie zuerst einen externer Authentifizierungsanbieter aktivieren. Finden Sie unter [Facebook, Google und externe Anbieter Authentifizierung](xref:security/authentication/social/index).
+
+Sie können lokale als auch social kombinieren, durch Klicken auf Ihre e-Mail-Link. In der folgenden Reihenfolge "RickAndMSFT@gmail.com" wird zuerst als eine lokale Anmeldung; erstellt, Sie können jedoch zunächst erstellen Sie das Konto als Anmeldedaten eines sozialen Netzwerks, und fügen Sie eine lokale Anmeldung hinzu.
+
+![Web-Anwendung: RickAndMSFT@gmail.com authentifizierte Benutzer](accconfirm/_static/rick.png)
+
+Klicken Sie auf die **verwalten** Link. Beachten Sie die 0 externe (Anmeldungen per sozialem Netzwerk) mit diesem Konto verknüpft.
+
+![Verwalten von anzeigen](accconfirm/_static/manage.png)
+
+Klicken Sie auf den Link, um einen anderen Anmeldenamen-Dienst, und akzeptieren Sie die app-Anforderungen. In der folgenden Abbildung ist die Facebook dem externen Authentifizierungsanbieter:
+
+![Verwalten Sie Ihre Facebook auflisten externer Anmeldungen-Ansicht](accconfirm/_static/fb.png)
+
+Die beiden Konten wurden kombiniert. Sie können die Anmeldung der Konten. Sie sollten Ihre Benutzer lokale Konten hinzufügen, falls ihre sozialen Authentifizierungsdiensts ausgefallen ist oder eher sie den Zugriff auf ihre Konten sozialer Netzwerke verlieren.
+
+## <a name="enable-account-confirmation-after-a-site-has-users"></a>Kontobestätigung zu aktivieren, nachdem Sie einen Standort der Benutzer enthält
+
+Aktivierung kontobestätigung auf einer Website für Benutzer, alle vorhandenen Benutzer sperren. Vorhandene Benutzer werden gesperrt, da es sich bei ihrem Konto bestätigt werden nicht. Um vorhandene Benutzersperre zu umgehen, verwenden Sie einen der folgenden Ansätze:
+
+* Ändern der Datenbank markieren Sie alle vorhandenen Benutzer als bestätigt wird.
+* Vergewissern Sie sich vorhandene Benutzer. Z. B. Batch-Send-e-Mails mit Bestätigung Links.
+
+::: moniker-end
+
+::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 [.NET Core-2.2-SDK oder höher](https://www.microsoft.com/net/download/all)
 
@@ -44,7 +229,6 @@ Führen Sie die folgenden Befehle zum Erstellen einer Web-app mit Authentifizier
 dotnet new webapp -au Individual -uld -o WebPWrecover
 cd WebPWrecover
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet restore
 dotnet tool install -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout;Account.ConfirmEmail"
 dotnet ef database drop -f
@@ -87,7 +271,7 @@ Erstellen Sie eine Klasse, um den Schlüssel für sichere e-Mails abrufen. In di
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurieren von SendGrid benutzergeheimnisse
 
-Legen Sie die `SendGridUser` und `SendGridKey` mit der [Secret-Manager-Tool](xref:security/app-secrets). Zum Beispiel:
+Legen Sie die `SendGridUser` und `SendGridKey` mit der [Secret-Manager-Tool](xref:security/app-secrets). Beispiel:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT

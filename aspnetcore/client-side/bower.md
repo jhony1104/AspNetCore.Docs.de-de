@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 08/09/2018
 uid: client-side/bower
-ms.openlocfilehash: 08e6daa537c6c6f92a1cf80d70745e8ef606f580
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1292b75bdfe1cea56d9c8bc282b0dd90fc945a33
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892997"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813531"
 ---
 # <a name="manage-client-side-packages-with-bower-in-aspnet-core"></a>Verwalten von clientseitigen Paketen mit Bower in ASP.NET Core
 
@@ -22,9 +22,9 @@ Durch [Rick Anderson](https://twitter.com/RickAndMSFT), [Noel Reis](https://twit
 >
 > Yarn mit Webpack ist eine weit verbreitete Alternative für die [migrationsanweisungen](https://bower.io/blog/2017/how-to-migrate-away-from-bower/) stehen zur Verfügung.
 
-[Bower](https://bower.io/) ruft sich selbst "Paket-Manager für das Web". Innerhalb des Ökosystems .NET füllt die "void", um NuGets-Fehler zum Übermitteln von Dateien mit statischer Inhalt nach links. Diese statischen Dateien für ASP.NET Core-Projekte sind Bestandteil der clientseitige Bibliotheken wie [jQuery](http://jquery.com/) und [Bootstrap](http://getbootstrap.com/). Für .NET Bibliotheken verwenden, verwenden Sie immer noch [NuGet](https://www.nuget.org/) -Paket-Manager.
+[Bower](https://bower.io/) ruft sich selbst "Paket-Manager für das Web". Innerhalb des Ökosystems .NET füllt die "void", um NuGets-Fehler zum Übermitteln von Dateien mit statischer Inhalt nach links. Diese statischen Dateien für ASP.NET Core-Projekte sind Bestandteil der clientseitige Bibliotheken wie [jQuery](https://jquery.com/) und [Bootstrap](https://getbootstrap.com/). Für .NET Bibliotheken verwenden, verwenden Sie immer noch [NuGet](https://www.nuget.org/) -Paket-Manager.
 
-Buildprozess für neue Projekte, die mit der richten Sie die clientseitige ASP.NET Core-Projektvorlagen erstellt wurden. [jQuery](http://jquery.com/) und [Bootstrap](http://getbootstrap.com/) installiert sind, und Bower wird unterstützt.
+Buildprozess für neue Projekte, die mit der richten Sie die clientseitige ASP.NET Core-Projektvorlagen erstellt wurden. [jQuery](https://jquery.com/) und [Bootstrap](https://getbootstrap.com/) installiert sind, und Bower wird unterstützt.
 
 Clientseitigen Paketen finden Sie in der *"bower.JSON"* Datei. Konfiguriert die ASP.NET Core-Projektvorlagen *"bower.JSON"* mit Bootstrap, jQuery und jQuery-Validierung.
 
@@ -40,7 +40,7 @@ In diesem Tutorial fügen wir Unterstützung für [Font Awesome](http://fontawes
 
   ![Bower-Pakete verwalten](bower/_static/manage-bower-packages.png)
 
-* Überprüfen Sie, ob die "Änderungen in *" bower.JSON "*" das Kontrollkästchen aktiviert ist. Wählen Sie eine Version aus der Dropdown-Liste, und klicken Sie auf die **installieren** Schaltfläche. Die **Ausgabe** Fenster zeigt die Details zur Installation.
+* Überprüfen Sie, ob die "Änderungen in *" bower.JSON "* " das Kontrollkästchen aktiviert ist. Wählen Sie eine Version aus der Dropdown-Liste, und klicken Sie auf die **installieren** Schaltfläche. Die **Ausgabe** Fenster zeigt die Details zur Installation.
 
 ### <a name="manual-installation-in-bowerjson"></a>Manuelle Installation in "bower.JSON"
 
@@ -50,11 +50,11 @@ In diesem Tutorial fügen wir Unterstützung für [Font Awesome](http://fontawes
 
 ![Bower-Version IntelliSense](bower/_static/version-intelliSense.png)
 
-Bower-verwendet [semantische Versionierung](http://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der IntelliSense-Liste (4.6.3 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion.
+Bower-verwendet [semantische Versionierung](https://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der IntelliSense-Liste (4.6.3 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion.
 
 Speichern Sie die *"bower.JSON"* Datei. Visual Studio wird überwacht, ob die *"bower.JSON"* -Datei für die Änderungen. Beim Speichern der *Bower Install* Befehl ausgeführt wird. Finden Sie im Ausgabefenster **Bower-/Npm** Ansicht für den genauen, ausgeführten Befehl.
 
-Öffnen der *".bowerrc"* Datei *"bower.JSON"*. Die `directory` -Eigenschaftensatz auf *Wwwroot/Lib* gibt an den Speicherort von Bower installiert die Paketressourcen.
+Öffnen der *".bowerrc"* Datei *"bower.JSON"* . Die `directory` -Eigenschaftensatz auf *Wwwroot/Lib* gibt an den Speicherort von Bower installiert die Paketressourcen.
 
 ```json
 {
@@ -93,7 +93,7 @@ Nachdem Sie Pakete in Auflisten der *"bower.JSON"* Visual Studio-Datei laden sie
 
 * Klicken Sie im Projektmappen-Explorer mit der Maustaste des Projekts > **neues Element hinzufügen** , und wählen Sie **Bower-Konfigurationsdatei**. Hinweis: Ein *".bowerrc"* Datei wird ebenfalls hinzugefügt.
 
-* Öffnen *"bower.JSON"*, Hinzufügen von Jquery und bootstrap auf dem `dependencies` Abschnitt. Die resultierende *"bower.JSON"* sieht die Datei wie im folgenden Beispiel. Die Versionen ändert sich im Laufe der Zeit und entsprechen möglicherweise nicht die folgenden Abbildung.
+* Öffnen *"bower.JSON"* , Hinzufügen von Jquery und bootstrap auf dem `dependencies` Abschnitt. Die resultierende *"bower.JSON"* sieht die Datei wie im folgenden Beispiel. Die Versionen ändert sich im Laufe der Zeit und entsprechen möglicherweise nicht die folgenden Abbildung.
 
 [!code-json[](bower/sample/bower.json?highlight=5,6)]
 
@@ -114,7 +114,7 @@ Nachdem Sie Pakete in Auflisten der *"bower.JSON"* Visual Studio-Datei laden sie
 
 In diesem Abschnitt erstellen Sie eine HTML-Seite, um sicherzustellen, dass sie die bereitgestellten Pakete zugreifen kann.
 
-* Hinzufügen einer neuen HTML-Seite, die mit dem Namen *"Index.HTML"* auf die *"Wwwroot"* Ordner. Hinweis: Sie müssen die HTML-Datei zum Hinzufügen der *"Wwwroot"* Ordner. Standardmäßig kann nicht außerhalb statischer Inhalt verarbeitet werden *"Wwwroot"*. Finden Sie unter [statische Dateien](xref:fundamentals/static-files) für Weitere Informationen.
+* Hinzufügen einer neuen HTML-Seite, die mit dem Namen *"Index.HTML"* auf die *"Wwwroot"* Ordner. Hinweis: Sie müssen die HTML-Datei zum Hinzufügen der *"Wwwroot"* Ordner. Standardmäßig kann nicht außerhalb statischer Inhalt verarbeitet werden *"Wwwroot"* . Finden Sie unter [statische Dateien](xref:fundamentals/static-files) für Weitere Informationen.
 
   Ersetzen Sie den Inhalt der *"Index.HTML"* mit folgendem Markup:
 

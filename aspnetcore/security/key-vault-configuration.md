@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/13/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 78c63cf135ca92f0b5f6c6828b2ae34a44a7b36c
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: be176ed612be0773c4a5b52607c023da3856ac14
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621021"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815328"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault-Konfigurationsanbieter in ASP.NET Core
 
@@ -34,7 +34,7 @@ Um die Azure Key Vault-Konfigurationsanbieter zu verwenden, fügen Sie einen Pak
 Übernehmen der [verwaltet Identitäten für Azure-Ressourcen](/azure/active-directory/managed-identities-azure-resources/overview) Szenario fügen Sie einen Paketverweis auf die [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) Paket.
 
 > [!NOTE]
-> Zum Zeitpunkt der schreiben, der neuesten stabile Version des `Microsoft.Azure.Services.AppAuthentication`, Version `1.0.3`, bietet Unterstützung für [vom System zugewiesene verwaltete Identitäten](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-worka-namehow-does-it-worka). Unterstützung für *Benutzer zugewiesene Identitäten verwaltet* finden Sie in der `1.2.0-preview2` Paket. In diesem Thema veranschaulicht die Verwendung von vom System verwaltet Identitäten und die bereitgestellten Beispiel-app verwendet Version `1.0.3` von der `Microsoft.Azure.Services.AppAuthentication` Paket.
+> Zum Zeitpunkt der schreiben, der neuesten stabile Version des `Microsoft.Azure.Services.AppAuthentication`, Version `1.0.3`, bietet Unterstützung für [vom System zugewiesene verwaltete Identitäten](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-work). Unterstützung für *Benutzer zugewiesene Identitäten verwaltet* finden Sie in der `1.2.0-preview2` Paket. In diesem Thema veranschaulicht die Verwendung von vom System verwaltet Identitäten und die bereitgestellten Beispiel-app verwendet Version `1.0.3` von der `Microsoft.Azure.Services.AppAuthentication` Paket.
 
 ## <a name="sample-app"></a>Beispiel-App
 

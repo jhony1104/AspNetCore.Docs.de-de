@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 4afc9ac0a3c54b452c6a1b23e4de31d7e2fc5284
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 302a5e10a70e40e75ab9fe4b3e5a98c4e847b822
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894147"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815222"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für SPAs
 
@@ -251,7 +251,7 @@ Dieser Abschnitt beschreibt das Bereitstellen der app auf Azure-Websites mithilf
 
 Um auf Azure Websites bereitstellen, stellen Sie die app, die die Schritte in [Bereitstellen der app in Azure](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure) erforderlichen Azure-Ressourcen erstellen und Bereitstellen der app für die Produktion.
 
-Nach dem Ausführen der zuvor beschriebenen Anweisungen, die app in Azure bereitgestellt wird, aber noch nicht funktionsfähig. Das von der app verwendete Zertifikat muss dennoch eingerichtet werden. Suchen Sie den Fingerabdruck des Zertifikats verwendet werden, und führen Sie die Schritte [laden Ihrer Zertifikate](/azure/app-service/app-service-web-ssl-cert-load#load-your-certificates).
+Nach dem Ausführen der zuvor beschriebenen Anweisungen, die app in Azure bereitgestellt wird, aber noch nicht funktionsfähig. Das von der app verwendete Zertifikat muss dennoch eingerichtet werden. Suchen Sie den Fingerabdruck des Zertifikats verwendet werden, und führen Sie die Schritte [laden Ihrer Zertifikate](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code).
 
 Während Sie diese Schritte ganz zu schweigen SSL, gibt es eine **Zertifikate mit privaten** Abschnitt im Portal, in dem Sie das bereitgestellte Zertifikat zur Verwendung mit der app hochladen können.
 
