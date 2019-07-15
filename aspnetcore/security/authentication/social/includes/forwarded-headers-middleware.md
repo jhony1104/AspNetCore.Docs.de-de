@@ -1,9 +1,9 @@
-## <a name="forward-request-information-with-a-proxy-or-load-balancer"></a>Vorwärts Anfordern von Informationen mit einem Proxy oder load balancer
+## <a name="forward-request-information-with-a-proxy-or-load-balancer"></a>Weiterleiten von Anforderungsinformationen mit einem Proxy oder Lastenausgleich
 
-Wenn die app hinter einem Proxyserver oder Lastenausgleich bereitgestellt wird, können einige der ursprünglichen Anforderungsinformationen zur app im Anforderungsheader weitergeleitet werden. Diese Informationen umfassen in der Regel das sichere Anforderungsschema (`https`), Host und Client-IP-Adresse. Apps nicht automatisch diese Anforderungsheader, um zu ermitteln und verwenden Sie die Anforderungsinformationen der ursprünglichen gelesen.
+Wenn die App hinter einem Proxyserver oder Lastenausgleich bereitgestellt wird, können einige der ursprünglichen Anforderungsinformationen im Anforderungsheader an die App weitergeleitet werden. Zu diesen Informationen gehören in der Regel das sichere Anforderungsschema (`https`), den Host und die Client-IP-Adresse. Apps lesen diese Anforderungsheader nicht automatisch, um die ursprünglichen Anforderungsinformationen zu ermitteln und zu verwenden.
 
-Das Schema wird in linkgenerierung verwendet, die Ablauf der Authentifizierung mit externen Anbietern betroffen sind. Das sichere Schema verlieren (`https`) führt in der app, die falsche unsicherer umleitungs-URLs generieren.
+Das Schema wird bei der Linkgenerierung verwendet, die den Authentifizierungsflow bei externen Anbietern betrifft. Der Verlust des sicheren Schemas (`https`) führt dazu, dass die App falsche unsichere Umleitungs-URLs generiert.
 
-Verwenden Sie Forwardedheadersmiddleware, um Informationen zu den ursprünglichen an die app für die anforderungsverarbeitung verfügbar zu machen.
+Verwenden Sie Middleware für weitergeleitete Header, um der App zur Anforderungsverarbeitung die Informationen der ursprünglichen Anforderung verfügbar zu machen.
 
 Weitere Informationen finden Sie unter <xref:host-and-deploy/proxy-load-balancer>.
