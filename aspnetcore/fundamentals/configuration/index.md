@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/24/2019
+ms.date: 07/11/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 81820e8161965fcca2f97d00708df5a29df668de
-ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
+ms.openlocfilehash: 3351ab743ce38b78b1c5857e52020fdeda12cbe7
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2019
-ms.locfileid: "66824837"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855820"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -21,6 +21,7 @@ Von [Luke Latham](https://github.com/guardrex)
 Die App-Konfiguration in ASP.NET Core basiert auf Schlüssel-Wert-Paaren, die von *Konfigurationsanbietern* erstellt wurden. Konfigurationsanbieter lesen Konfigurationsdaten in Schlüssel-Wert-Paare aus verschiedenen Konfigurationsquellen:
 
 * Azure Key Vault
+* Azure App Configuration
 * Befehlszeilenargumente
 * Benutzerdefinierte Anbieter (installiert oder erstellt)
 * Verzeichnisdateien
@@ -38,7 +39,7 @@ Das *Optionsmuster* ist eine Erweiterung der in diesem Thema beschriebenen Konfi
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="host-vs-app-configuration"></a>Hostkonfiguration vs. App-Konfiguration
+## <a name="host-versus-app-configuration"></a>Hostkonfiguration und App-Konfiguration im Vergleich
 
 Bevor die App konfiguriert und gestartet wird, wird ein *Host* konfiguriert und gestartet. Der Host ist verantwortlich für das Starten der App und das Verwalten der Lebensdauer. Die App und der Host werden mit den in diesem Thema beschriebenen Konfigurationsanbietern konfiguriert. Schlüssel-Wert-Paare der Hostkonfiguration werden Teil der globalen App-Konfiguration. Weitere Informationen dazu, wie Konfigurationsanbieter beim Erstellen des Hosts verwendet werden, und wie sich Konfigurationsquellen auf die Hostkonfiguration auswirken, finden Sie unter [Hosting](xref:fundamentals/index#host).
 
@@ -145,6 +146,7 @@ Die folgende Tabelle zeigt die für ASP.NET Core-Apps verfügbaren Konfiguration
 | Anbieter | Bereitstellung der Konfiguration über&hellip; |
 | -------- | ----------------------------------- |
 | [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) (Thema *Sicherheit*) | Azure Key Vault |
+| [Azure App Configuration-Anbieter](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure-Dokumentation) | Azure App Configuration |
 | [Befehlszeilen-Konfigurationsanbieter](#command-line-configuration-provider) | Befehlszeilenparameter |
 | [Benutzerdefinierter Konfigurationsanbieter](#custom-configuration-provider) | Benutzerdefinierte Quelle |
 | [Umgebungsvariablen-Konfigurationsanbieter](#environment-variables-configuration-provider) | Umgebungsvariablen |
@@ -331,7 +333,7 @@ Um die Umgebungsvariablenkonfiguration zu aktivieren, rufen Sie die <xref:Micros
 
 [Azure App Service](https://azure.microsoft.com/services/app-service/) ermöglicht Ihnen Umgebungsvariablen im Azure-Portal festzulegen, die die App-Konfiguration mit dem Umgebungsvariablen-Konfigurationsanbieter überschreiben können. Weitere Informationen finden Sie unter [Azure-Apps: Überschreiben der App-Konfiguration im Azure-Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).
 
-`AddEnvironmentVariables` wird zum Laden von Umgebungsvariablen verwendet, die das Präfix `ASPNETCORE_` für die [Hostkonfiguration](#host-vs-app-configuration) aufweisen, wenn ein neues <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>-Objekt initialisiert wird. Weitere Informationen finden Sie unter [Webhost: Einrichten eines Hosts](xref:fundamentals/host/web-host#set-up-a-host).
+`AddEnvironmentVariables` wird zum Laden von Umgebungsvariablen verwendet, die das Präfix `ASPNETCORE_` für die [Hostkonfiguration](#host-versus-app-configuration) aufweisen, wenn ein neues <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>-Objekt initialisiert wird. Weitere Informationen finden Sie unter [Webhost: Einrichten eines Hosts](xref:fundamentals/host/web-host#set-up-a-host).
 
 `CreateDefaultBuilder` lädt außerdem:
 
@@ -966,7 +968,7 @@ Die folgenden Schlüssel-Wert-Paare werden für die Konfiguration erstellt:
 | starship:class        | Constitution                                      |
 | starship:length       | 304,8                                             |
 | starship:commissioned | False                                             |
-| trademark             | Paramount Pictures Corp. http://www.paramount.com |
+| trademark             | Paramount Pictures Corp. https://www.paramount.com |
 
 Die Beispiel-App ruft `GetSection` mit dem `starship`-Schlüssel auf. Die `starship`-Schlüssel-Wert-Paaren sind isoliert. Die `Bind`-Methode wird auf dem Unterabschnitt aufgerufen, der in einer Instanz der `Starship`-Klasse übergeben wird. Nach dem Binden der Instanzwerte wird die Instanz einer Eigenschaft zum Rendern zugewiesen:
 
