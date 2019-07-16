@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: cfbb50ea33ae3af577f13b00bccc75fe0be57f79
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ca05989efabea3a71c6912e98055a6746e0f5966
+ms.sourcegitcommit: 1bf80f4acd62151ff8cce517f03f6fa891136409
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64898147"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68223933"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Client-IP-Listen sicherer Adressen für ASP.NET Core
 
@@ -23,7 +23,7 @@ In diesem Artikel zeigt drei Möglichkeiten, eine IP-Listen sicherer Adressen (a
 * Aktionsfilter, um die Anforderungen für bestimmte Controller oder Aktionsmethoden remote IP-Adresse zu überprüfen.
 * Razor-Seiten-Filter, überprüfen Sie die remote IP-Adresse von Anforderungen für Razor-Seiten.
 
-Die Beispiel-app zeigt beide Ansätze. In jedem Fall wird eine Zeichenfolge, die genehmigte Client-IP-Adressen in einer app-Einstellung gespeichert. Die Middleware oder Filter analysiert die Zeichenfolge in eine Liste, und überprüft, ob die remote-IP in der Liste ist. Wenn dies nicht der Fall ist, ein HTTP 403 Verboten-Statuscode zurückgegeben.
+In jedem Fall wird eine Zeichenfolge, die genehmigte Client-IP-Adressen in einer app-Einstellung gespeichert. Die Middleware oder Filter analysiert die Zeichenfolge in eine Liste, und überprüft, ob die remote-IP in der Liste ist. Wenn dies nicht der Fall ist, ein HTTP 403 Verboten-Statuscode zurückgegeben.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples/2.x/ClientIpAspNetCore) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -37,7 +37,7 @@ Die Liste ist so konfiguriert, der *"appSettings.JSON"* Datei. Dabei handelt es 
 
 Die `Configure` Methode fügt die Middleware und die Zeichenfolge von Listen sicherer Adressen in einem Konstruktorparameter an diese übergibt.
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=7)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=10)]
 
 Die Middleware analysiert die Zeichenfolge in ein Array und sucht nach der remote-IP-Adresse in das Array. Wenn die remote-IP-Adresse nicht gefunden wird, gibt die Middleware zurück, die HTTP-401 nicht zulässig. Dieser Überprüfungsvorgang wird umgangen, um die HTTP Get-Anforderungen.
 
