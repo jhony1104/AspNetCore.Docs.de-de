@@ -184,7 +184,7 @@ Dienste mit Singleton-Lebensdauer (<xref:Microsoft.AspNet.OData.Builder.ODataMod
 
 Jede Methode zur Erweiterung der Dienstregistrierung bietet Überladungen, die in bestimmten Szenarios hilfreich sind.
 
-| Methode | Automatisch<br>object<br>Löschen | Mehrere<br>Implementierungen | Argumentübergabe |
+| Methode | Automatische<br>Objekt<br>bereinigung | Mehrere<br>Implementierungen | Argumentübergabe |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
 | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Beispiel:<br>`services.AddScoped<IMyDep, MyDep>();` | Ja | Ja | Nein |
 | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Beispiele:<br>`services.AddScoped<IMyDep>(sp => new MyDep());`<br>`services.AddScoped<IMyDep>(sp => new MyDep("A string!"));` | Ja | Ja | Ja |

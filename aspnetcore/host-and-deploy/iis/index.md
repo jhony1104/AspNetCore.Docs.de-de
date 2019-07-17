@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Info
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2019
+ms.date: 07/16/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 2dab8b4839d6778d5dc6a3daf96c1719eecfe0fb
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: 644d84f9adba650b3ef10ba69cc75c22845be211
+ms.sourcegitcommit: 7e00e8236ca4eabf058f07020a5a3882daf7564f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394624"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68239243"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -338,7 +338,7 @@ Wenn Sie Apps auf Servern mit [Web Deploy](/iis/install/installing-publishing-te
 
 ## <a name="create-the-iis-site"></a>Erstellen der IIS-Website
 
-1. Erstellen Sie auf dem Hostingsystem einen Ordner zum Speichern der veröffentlichten Ordner und Dateien der App. Das Layout der App-Bereitstellung wird im Thema [Verzeichnisstruktur](xref:host-and-deploy/directory-structure) beschrieben.
+1. Erstellen Sie auf dem Hostingsystem einen Ordner zum Speichern der veröffentlichten Ordner und Dateien der App. In einem späteren Schritt wird der Ordnerpfad als physischer App-Pfad in IIS angegeben. Weitere Informationen zu Bereitstellungsordner und Dateilayout einer App finden Sie unter <xref:host-and-deploy/directory-structure>.
 
 1. Öffnen Sie in IIS-Manager den Serverknoten im Bereich **Verbindungen**. Klicken Sie mit der rechten Maustaste auf den Ordner **Websites**. Klicken Sie im Kontextmenü auf **Website hinzufügen**.
 
@@ -372,11 +372,11 @@ Weitere Informationen finden Sie unter [Konfigurieren der Windows-Authentifizier
 
 ## <a name="deploy-the-app"></a>Bereitstellen der App
 
-Stellen Sie die App in dem Ordner bereit, den Sie im Hostingsystem erstellt haben. [Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy) ist die empfohlene Methode zur Bereitstellung.
+Stellen Sie die App im IIS-Ordner **Physischer Pfad** bereit, der im Abschnitt [Erstellen der IIS-Website](#create-the-iis-site) eingerichtet wurde. [Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy) ist die empfohlene Methode für die Bereitstellung, aber es gibt verschiedene Optionen, um die Anwendung aus dem Ordner *publish* des Projekts in den Bereitstellungsordner des Hostsystems zu verschieben.
 
 ### <a name="web-deploy-with-visual-studio"></a>Web Deploy mit Visual Studio
 
-Informationen zum Erstellen eines Veröffentlichungsprofils zur Verwendung mit Web Deploy finden Sie im Thema [Visual Studio publish profiles for ASP.NET Core app deployment (Visual Studio-Veröffentlichungsprofile zum Bereitstellen von ASP.NET Core-Apps)](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles). Wenn der Hostinganbieter ein Veröffentlichungsprofil oder Unterstützung für das Erstellen eines solchen Profils bereitstellt, laden Sie dessen Profil herunter, und importieren Sie es mithilfe des Visual Studio-Dialogfelds **Veröffentlichen**.
+Informationen zum Erstellen eines Veröffentlichungsprofils zur Verwendung mit Web Deploy finden Sie im Thema [Visual Studio publish profiles for ASP.NET Core app deployment (Visual Studio-Veröffentlichungsprofile zum Bereitstellen von ASP.NET Core-Apps)](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles). Wenn der Hostinganbieter ein Veröffentlichungsprofil oder Unterstützung für das Erstellen eines solchen Profils bereitstellt, laden Sie dessen Profil herunter, und importieren Sie es mithilfe des Visual Studio-Dialogfelds **Veröffentlichen**:
 
 ![Dialogfeld „Veröffentlichen“](index/_static/pub-dialog.png)
 
@@ -386,11 +386,15 @@ Informationen zum Erstellen eines Veröffentlichungsprofils zur Verwendung mit W
 
 ### <a name="alternatives-to-web-deploy"></a>Alternativen zu Web Deploy
 
-Verwenden Sie eine der folgenden Methoden, um die App zum Hostingsystem zu migrieren: manuelles Kopieren, XCopy, Robocopy oder PowerShell.
+Verwenden Sie eine der folgenden Methoden, um die App in das Hostsystem zu verschieben: manuelles Kopieren, [Xcopy](/windows-server/administration/windows-commands/xcopy), [Robocopy](/windows-server/administration/windows-commands/robocopy) oder [PowerShell](/powershell/).
 
 Weitere Informationen zum Bereitstellen von ASP.NET Core in IIS finden Sie im nachfolgenden Abschnitt [Bereitstellungsressourcen für IIS-Administratoren](#deployment-resources-for-iis-administrators).
 
 ## <a name="browse-the-website"></a>Navigieren auf der Website
+
+Senden Sie nach Abschluss der App-Bereitstellung auf dem Hostsystem eine Anforderung an einen der öffentlichen Endpunkte der App.
+
+Im folgenden Beispiel ist die Website an den IIS-**Hostnamen** `www.mysite.com` auf **Port** `80` gebunden. Es wird eine Anforderung an `http://www.mysite.com` gesendet:
 
 ![Der Microsoft Edge-Browser hat die IIS-Startseite geladen.](index/_static/browsewebsite.png)
 
