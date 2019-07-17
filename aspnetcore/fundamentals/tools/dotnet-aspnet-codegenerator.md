@@ -1,16 +1,17 @@
 ---
 title: Befehl „dotnet aspnet-codegenerator“
 author: rick-anderson
+description: Der Befehl „dotnet aspnet-codegenerator“ erstellt das Gerüst für ASP.NET Core-Projekte.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-description: Der Befehl „dotnet aspnet-codegenerator“ erstellt das Gerüst für ASP.NET-Projekte.
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 55b592d9d203970777c84438e210519957abb35d
-ms.sourcegitcommit: f6e6730872a7d6f039f97d1df762f0d0bd5e34cf
+ms.openlocfilehash: c96362f320efd84c35dc07294a2968a2c687ee94
+ms.sourcegitcommit: b9e914ef274b5ec359582f299724af6234dce135
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67561683"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67596136"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -18,20 +19,20 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 `dotnet aspnet-codegenerator`: Führt die ASP.NET Core-Gerüstbauengine aus. `dotnet aspnet-codegenerator` wird nur für den Gerüstbau von der Befehlszeile aus benötigt, nicht zum Gerüstbau mit Visual Studio.
 
-Dieser Artikel gilt für [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2) höher.
+Dieser Artikel gilt für [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) und höher.
 
 ## <a name="installing-aspnet-codegenerator"></a>Installieren von „aspnet-codegenerator“
 
-`aspnet-codegenerator` ist ein [globales Tool](/dotnet/core/tools/global-tools), das installiert werden muss. Über den folgenden Befehl wird die neueste stabile Version des `aspnet-codegenerator`-Tools installiert:
+`dotnet-aspnet-codegenerator` ist ein [globales Tool](/dotnet/core/tools/global-tools), das installiert werden muss. Über den folgenden Befehl wird die neueste stabile Version des `dotnet-aspnet-codegenerator`-Tools installiert:
 
 ```console
-dotnet tool install -g aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-Mit dem folgenden Befehl wird `aspnet-codegenerator` auf die neueste stabile Version aktualisiert, die in den installierten .NET Core SDKs verfügbar ist:
+Mit dem folgenden Befehl wird `dotnet-aspnet-codegenerator` auf die neueste stabile Version aktualisiert, die in den installierten .NET Core SDKs verfügbar ist:
 
 ```console
-dotnet tool update -g aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
 ```
 
 ## <a name="synopsis"></a>Übersicht
@@ -43,7 +44,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ## <a name="description"></a>BESCHREIBUNG
 
-Der globale Befehl `dotnet aspnet-codegenerator ` führt den ASP.NET Code-Codegenerator und die Gerüstbauengine aus.
+Der globale Befehl `dotnet aspnet-codegenerator` führt den ASP.NET Code-Codegenerator und die Gerüstbauengine aus.
 
 ## <a name="arguments"></a>Argumente
 
@@ -54,7 +55,7 @@ Der auszuführende Codegenerator. Folgende Generatoren sind verfügbar:
 | Generator | Vorgang |
 | ----------------- | ------------ | 
 | area      | [Gerüstbau für einen Bereich](/aspnet/core/mvc/controllers/areas) |
-  Controller| [Gerüstbau für einen Controller](/aspnet/core/tutorials/first-mvc-app/adding-model) |
+  controller| [Gerüstbau für einen Controller](/aspnet/core/tutorials/first-mvc-app/adding-model) |
   identity  | [Gerüstbau für eine Identität](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Gerüstbau für Razor Pages](/aspnet/core/tutorials/razor-pages/model) |
   view      | [Gerüstbau für eine Ansicht](/aspnet/core/mvc/views/overview) |
@@ -67,11 +68,11 @@ Gibt das NuGet-Paketverzeichnis an.
 
 `-c|--configuration {Debug|Release}`
 
-Legt die Buildkonfiguration fest. Der Standardwert ist `Debug`sein.
+Legt die Buildkonfiguration fest. Standardwert: `Debug`.
 
 `-tfm|--target-framework`
 
-Das zu verwendende [Zielframework](/dotnet/standard/frameworks). Beispielsweise `net46`.
+Das zu verwendende [Zielframework](/dotnet/standard/frameworks). Beispiel: `net46`.
 
 `-b|--build-base-path`
 
@@ -95,9 +96,9 @@ In den folgenden Abschnitte werden die verfügbaren Optionen für die unterstüt
 
 * Bereich
 * Controller
-* Identität  
+* Identity  
 * Razor Pages
-* Ansicht
+* Sicht
 
 <a name="area"></a>
 
@@ -112,7 +113,7 @@ Der oben gezeigte Befehl generiert die folgenden Ordner:
 * *Bereiche*
   * *AreaNameToGenerate*
     * *Controller*
-    * *Data*
+    * *Daten*
     * *Models*
     * *Ansichten*
 
@@ -189,6 +190,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 Unter [Erstellen des Gerüsts für das Filmmodell](/aspnet/core/tutorials/razor-pages/model) finden Sie ein Beispiel für `dotnet aspnet-codegenerator razorpage`.
 
-### <a name="identity"></a>Identität
+### <a name="identity"></a>Identity
 
 Siehe [Gerüst für Identität](/aspnet/core/security/authentication/scaffold-identity)
