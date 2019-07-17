@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/26/2019
 uid: security/blazor/index
-ms.openlocfilehash: b3bca26e7088a8353084a065f9b9593c9d8e08e6
-ms.sourcegitcommit: 9bb29f9ba6f0645ee8b9cabda07e3a5aa52cd659
+ms.openlocfilehash: 097a747f68729109922af5c68dfd918024ee6146
+ms.sourcegitcommit: 040aedca220ed24ee1726e6886daf6906f95a028
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67406183"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "67893618"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
@@ -41,7 +41,7 @@ Die serverseitige Blazor-Projektvorlage kann die Authentifizierung für Sie einr
 
 Befolgen Sie die Visual Studio-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues serverseitiges Blazor-Projekt mit einem Authentifizierungsmechanismus zu erstellen.
 
-Nachdem Sie im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** erstellen die Vorlage **Blazor (serverseitig)** ausgewählt haben, wählen Sie im Dialogfeld **Authentifizierung** die Option **Ändern**.
+Nachdem Sie im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Vorlage **Blazor-Server-App** ausgewählt haben, wählen Sie im Dialogfeld **Authentifizierung** die Option **Ändern**.
 
 Ein Dialogfeld wird geöffnet, in dem dieselben Authentifizierungsmechanismen angeboten werden, die auch für andere ASP.NET-Core-Projekte verfügbar sind:
 
