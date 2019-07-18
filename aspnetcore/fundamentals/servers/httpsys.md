@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 06/20/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: eefe507efadb5ef0a03854d931402f9eaa23a266
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: 3f48cda8f89d3f3dcce220cad4e405472b510df4
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394757"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814876"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implementierung des Http.sys-Webservers in ASP.NET Core
 
@@ -195,7 +195,7 @@ HTTP.sys delegiert zur Kernelmodusauthentifizierung mit dem Kerberos-Authentifiz
    * **.NET Core**&ndash;: Wenn die App .NET Core erfordert, rufen Sie das **.NET Core Runtime**-Installationsprogramm über [.NET Core-Downloads](https://dotnet.microsoft.com/download) ab, und führen Sie es aus. Installieren Sie nicht das vollständige SDK auf dem Server.
    * **.NET Framework**&ndash;: Erfordert die App .NET Framework, rufen Sie das [.NET Framework-Installationshandbuch](/dotnet/framework/install/) auf. Installieren Sie das erforderliche .NET Framework. Der Installer für das neueste .NET Framework steht auf der Seite [.NET Core-Downloads](https://dotnet.microsoft.com/download) zur Verfügung.
 
-   Wenn die App eine [eigenständige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-scd) ist, enthält die App die Runtime in ihrer Bereitstellung. Es ist keine Frameworkinstallation auf dem Server erforderlich.
+   Wenn die App eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) ist, enthält die App die Runtime in ihrer Bereitstellung. Es ist keine Frameworkinstallation auf dem Server erforderlich.
 
 1. Konfigurieren Sie URLs und Ports in der App.
 

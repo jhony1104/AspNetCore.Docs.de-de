@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: d7a5656131189ffafb60a7b1db0b8d93a3787ae2
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: c13e63725298975fc882aa45c4e75de53e1d66a8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621050"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815156"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
@@ -193,7 +193,7 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * Wie obenstehend erwähnt, übersetzen Taghilfsprogramme C#-Klassennamen und -Eigenschaften in der Pascal-Schreibweise für Taghilfsprogramme in [Kebab-Schreibweise](http://wiki.c2.com/?KebabCase). Wenn Sie `WebsiteInformationTagHelper` in Razor verwenden möchten, schreiben Sie daher `<website-information />`.
+   * Wie obenstehend erwähnt, übersetzen Taghilfsprogramme C#-Klassennamen und -Eigenschaften in der Pascal-Schreibweise für Taghilfsprogramme in [Kebab-Schreibweise](https://wiki.c2.com/?KebabCase). Wenn Sie `WebsiteInformationTagHelper` in Razor verwenden möchten, schreiben Sie daher `<website-information />`.
 
    * Das Zielelement wird mit dem `[HtmlTargetElement]`-Attribut nicht explizit identifiziert, sodass standardmäßig `website-information` angezielt wird. Wenn Sie das folgende Attribut angewendet haben (beachten Sie, dass es sich hierbei nicht um Kebab Case handelt, sondern das Attribut dem Klassennamen zugeordnet wird):
 
@@ -207,7 +207,7 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * Selbstschließende Elemente haben keinen Inhalt. In diesem Beispiel verwendet das Razor-Markup ein selbstschließendes Tag, aber das Taghilfsprogramm erstellt ein [section](http://www.w3.org/TR/html5/sections.html#the-section-element)-Element. Dieses ist nicht selbstschließend, und Sie können Inhalt in das `section`-Element schreiben. Aus diesem Grund müssen Sie `TagMode` auf `StartTagAndEndTag` festlegen, um Ausgaben zu schreiben. Stattdessen können Sie auch die Zeileneinstellung `TagMode` auskommentieren und Markups mit einem Endtag schreiben. (Ein Beispielmarkup wird in einem nachfolgenden Abschnitt dieses Tutorials zur Verfügung gestellt.)
+   * Selbstschließende Elemente haben keinen Inhalt. In diesem Beispiel verwendet das Razor-Markup ein selbstschließendes Tag, aber das Taghilfsprogramm erstellt ein [section](https://www.w3.org/TR/html5/sections.html#the-section-element)-Element. Dieses ist nicht selbstschließend, und Sie können Inhalt in das `section`-Element schreiben. Aus diesem Grund müssen Sie `TagMode` auf `StartTagAndEndTag` festlegen, um Ausgaben zu schreiben. Stattdessen können Sie auch die Zeileneinstellung `TagMode` auskommentieren und Markups mit einem Endtag schreiben. (Ein Beispielmarkup wird in einem nachfolgenden Abschnitt dieses Tutorials zur Verfügung gestellt.)
 
    * Das Dollarzeichen (`$`) in der folgenden Zeile verwendet eine [interpolierte Zeichenfolge](/dotnet/csharp/language-reference/keywords/interpolated-strings):
 

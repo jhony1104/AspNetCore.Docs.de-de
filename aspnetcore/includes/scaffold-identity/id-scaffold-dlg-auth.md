@@ -1,21 +1,21 @@
-Führen Sie die Identity-gerüstbauer:
+Führen Sie das Identitäts Gerüst aus:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Von **Projektmappen-Explorer**, mit der rechten Maustaste auf das Projekt > **hinzufügen** > **neues Gerüstelement**.
-* Im linken Bereich, der die **Gerüst hinzufügen** wählen Sie im Dialogfeld **Identität** > **hinzufügen**.
-* In der **ADD Identity** Dialogfeld Wählen Sie die gewünschten Optionen.
-  * Wählen Sie Ihre vorhandene Layoutseite, oder durch falsche Markup die Layoutdatei überschrieben werden. Wenn ein vorhandenes  *\_Layout.cshtml* Datei ausgewählt ist, wird es **nicht** überschrieben.
+* Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identität** > **Hinzufügen**aus.
+* Wählen Sie im Dialogfeld **Identität hinzufügen** die gewünschten Optionen aus.
+  * Wählen Sie die vorhandene Layoutseite aus, oder die Layoutdatei wird mit einem falschen Markup überschrieben. Wenn eine vorhandene  *\_Datei "Layout. cshtml* " ausgewählt ist, wird Sie **nicht** überschrieben.
 
- Z. B. `~/Pages/Shared/_Layout.cshtml` für Razor-Seiten `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
-* Um Ihre vorhandenen Datenkontext zu verwenden, wählen Sie mindestens eine Datei zu überschreiben. Sie müssen mindestens eine Datei auf Ihrem Datenkontext hinzufügen auswählen.
-  * Wählen Sie Ihre Daten Context-Klasse.
-  * Wählen Sie **hinzufügen**.
-* So erstellen einen neuen Benutzerkontext, und möglicherweise eine benutzerdefinierte Klasse erstellen, für die Identität:
+ Beispiel: `~/Pages/Shared/_Layout.cshtml` für Razor pages `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
+* Um den vorhandenen Datenkontext zu verwenden, wählen Sie mindestens eine Datei aus, die Sie außer Kraft setzen möchten. Sie müssen mindestens eine Datei auswählen, um den Datenkontext hinzuzufügen.
+  * Wählen Sie Ihre Datenkontext Klasse aus.
+  * Wählen Sie **Hinzufügen** aus.
+* So erstellen Sie einen neuen Benutzer Kontext und erstellen möglicherweise eine benutzerdefinierte Benutzerklasse für die Identität:
   * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Datenkontextklasse**.
-  * Wählen Sie **hinzufügen**.
+  * Wählen Sie **Hinzufügen** aus.
 
-Hinweis: Wenn Sie einen neuen Benutzerkontext erstellen, müssen Sie eine Datei überschreiben möchten.
+Hinweis: Wenn Sie einen neuen Benutzer Kontext erstellen, müssen Sie keine Datei zum Überschreiben auswählen.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
@@ -25,7 +25,7 @@ Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installiere
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-Fügen Sie einen Paketverweis auf [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) auf das Projekt (\*csproj) Datei. Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
+Fügen Sie der Projektdatei (\*. csproj) einen Paket Verweis auf [Microsoft. VisualStudio. Web. CodeGeneration. Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) hinzu. Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
 
 ```console
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -38,18 +38,18 @@ Führen Sie den folgenden Befehl zum Auflisten von Optionen gerüstbauer Identit
 dotnet aspnet-codegenerator identity -h
 ```
 
-Führen Sie im Projektordner der gerüstbauer Identität, mit der gewünschten Optionen. Z. B. um die Identität mit der standardmäßigen UI und die minimale Anzahl von Dateien einrichten, führen Sie den folgenden Befehl an. Verwenden Sie den richtigen vollqualifizierten Namen für den DB-Kontext:
+Führen Sie im Projektordner das Identitäts Gerüst mit den gewünschten Optionen aus. Führen Sie beispielsweise den folgenden Befehl aus, um die Identität mit der Standardbenutzer Oberfläche und der minimalen Anzahl von Dateien einzurichten. Verwenden Sie den richtigen voll qualifizierten Namen für Ihren Daten Bank Kontext:
 
 ```console
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files Account.Register
 ```
 
-PowerShell arbeitet mit Semikolon als Befehlstrennzeichen. Wenn Sie PowerShell verwenden, wird versehen Sie die Semikolon in der Liste mit Escapezeichen, oder fügen Sie die Liste der Dateien in doppelte Anführungszeichen. Beispiel:
+PowerShell verwendet ein Semikolon als Befehls Trennzeichen. Wenn Sie PowerShell verwenden, versehen Sie die Semikolons in der Datei Liste, oder fügen Sie die Datei Liste in doppelte Anführungszeichen ein. Beispiel:
 
 ```console
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-Wenn das Ausführen der Identity-gerüstbauer ohne Angabe der `--files` Flag oder das `--useDefaultUI` kennzeichnen, die alle die verfügbaren Identity-UI-Seiten in Ihrem Projekt erstellt werden.
+Wenn Sie das Identitäts Gerüst ausführen, ohne das `--files` Flag oder das `--useDefaultUI` Flag anzugeben, werden alle verfügbaren Seiten der Identitäts Benutzeroberfläche in Ihrem Projekt erstellt.
 
 ---

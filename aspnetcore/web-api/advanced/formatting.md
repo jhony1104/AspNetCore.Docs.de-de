@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 05/29/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 7628565d8646c0a057e28aa54dc9ce9198750c15
-ms.sourcegitcommit: 9ae1fd11f39b0a72b2ae42f0b450345e6e306bc0
+ms.openlocfilehash: b050011aa38743353fb2a7d133abcdca0b8c6d33
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66415677"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814814"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -63,7 +63,7 @@ Die folgende Aktionsmethode verwendet die Hilfsmethoden `Ok` und `NotFound`:
 
 [!code-csharp[](./formatting/sample/Controllers/Api/AuthorsController.cs?highlight=8,10&range=28-38)]
 
-Sofern kein anderes Format angefordert wurde und der Server das angeforderte Format zurückgeben kann, wird eine Antwort im JSON-Format zurückgegeben. Sie können ein Tool wie [Fiddler](http://www.telerik.com/fiddler) verwenden, um eine Anforderung mit einem Accept-Header zu erstellen und ein anderes Format anzugeben. Verfügt der Server in diesem Fall über ein *Formatierungsprogramm*, das eine Antwort im angeforderten Format erstellen kann, wird das Ergebnis im vom Client gewünschten Format zurückgegeben.
+Sofern kein anderes Format angefordert wurde und der Server das angeforderte Format zurückgeben kann, wird eine Antwort im JSON-Format zurückgegeben. Sie können ein Tool wie [Fiddler](https://www.telerik.com/fiddler) verwenden, um eine Anforderung mit einem Accept-Header zu erstellen und ein anderes Format anzugeben. Verfügt der Server in diesem Fall über ein *Formatierungsprogramm*, das eine Antwort im angeforderten Format erstellen kann, wird das Ergebnis im vom Client gewünschten Format zurückgegeben.
 
 ![Fiddler-Konsole mit einer manuell erstellten GET-Anforderung mit dem Accept-Headerwert „application/xml“](formatting/_static/fiddler-composer.png)
 

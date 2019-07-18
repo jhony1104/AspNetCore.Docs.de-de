@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 2776e3357941d0e7932882c39af121f85d037d62
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 8ef458108e60850d0d54e7b1e6472c5b92984ccc
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887245"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813544"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core
 
@@ -397,7 +397,7 @@ Durch diesen Code werden neue Entitäten hinzugefügt, und der zusammengesetzte 
 
 ## <a name="about-a-fluent-api-alternative"></a>Informationen zu einer Fluent-API-Alternative
 
-Der Code in der `OnModelCreating`-Methode der `DbContext`-Klasse verwendet die *Fluent-API* zum Konfigurieren des Verhaltens von Entity Framework. Die API wird als „Fluent“ bezeichnet, da sie häufig durch das Verketten mehrerer Methodenaufrufe zu einer einzigen Anweisung verwendet wird. Ein Beispiel hierfür finden Sie in der [EF Core documentation (Dokumentation zu Entity Framework)](/ef/core/modeling/#methods-of-configuration):
+Der Code in der `OnModelCreating`-Methode der `DbContext`-Klasse verwendet die *Fluent-API* zum Konfigurieren des Verhaltens von Entity Framework. Die API wird als „Fluent“ bezeichnet, da sie häufig durch das Verketten mehrerer Methodenaufrufe zu einer einzigen Anweisung verwendet wird. Ein Beispiel hierfür finden Sie in der [EF Core documentation (Dokumentation zu Entity Framework)](/ef/core/modeling/#use-fluent-api-to-configure-a-model):
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -412,7 +412,7 @@ In diesem Tutorial verwendet Sie die Fluent-API nur für Datenbankzuordnungen, d
 
 Einige Entwickler bevorzugen die exklusive Verwendung der Fluent-API, um ihre Entitätsklassen „rein“ zu halten. Sie können Attribute und die Fluent-API verwenden, wenn Sie möchten. Einige Anpassungen können nur mithilfe der Fluent-API vorgenommen werden. Im Allgemeinen wird jedoch empfohlen, einen der beiden Ansätze auszuwählen und diesen so konsistent wie möglich zu verwenden. Wenn Sie beide verwenden, beachten Sie, dass Attribute durch die Fluent-API überschrieben werden, wenn ein Konflikt vorliegt.
 
-Weitere Informationen zu Attributen und Fluent-API im Vergleich finden Sie unter [Methods of configuration (Konfigurationsmethoden)](/ef/core/modeling/#methods-of-configuration).
+Weitere Informationen zu Attributen und Fluent-API im Vergleich finden Sie unter [Methods of configuration (Konfigurationsmethoden)](/ef/core/modeling/).
 
 ## <a name="entity-diagram-showing-relationships"></a>Entitätsdiagramm mit angezeigten Beziehungen
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie einer Razor-Seite in ASP.NET Core Validierung hinzugefügt wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/5/2018
+ms.date: 12/05/2018
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 38e1fff9c7a212af992951dbf57e124cae69d36f
-ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
+ms.openlocfilehash: 8495849c89ca3d6fd2b2006b61ce2ec75ff504a5
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/19/2019
-ms.locfileid: "65874987"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815654"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>Hinzufügen der Validierung zu einer Razor-Seite in ASP.NET Core
 
@@ -47,7 +47,7 @@ Ein entscheidender Vorteil ist, dass **keine** Codeänderungen auf den Seiten �
 Die Formulardaten werden erst an den Server zurückgesendet, wenn auf Clientseite keine Validierungsfehler auftreten. Überprüfen Sie mithilfe von mindestens einem der folgenden Ansätze, ob keine Formulardaten bereitgestellt werden:
 
 * Setzen Sie einen Haltepunkt in der `OnPostAsync`-Methode. Senden Sie das Formular (wählen Sie **Erstellen** oder **Speichern**). Der Haltepunkt wird niemals erreicht.
-* Verwenden Sie das [Tool Fiddler](http://www.telerik.com/fiddler).
+* Verwenden Sie das [Tool Fiddler](https://www.telerik.com/fiddler).
 * Verwenden Sie die Browserentwicklungstools zum Überwachen des Netzwerkdatenverkehrs.
 
 ### <a name="server-side-validation"></a>Serverseitige Validierung

@@ -6,16 +6,16 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/20/2018
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: fb65b84b781b5c19040b559f0d7635ceb00cf4a0
-ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
+ms.openlocfilehash: 06a942ca213c7c0a58932494be0ed23cb6896d48
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67316566"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856091"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core-Web-API-Hilfeseiten mit Swagger/OpenAPI
 
-Von [Christoph Nienaber](https://twitter.com/zuckerthoben) und [Rico Suter](http://rsuter.com)
+Von [Christoph Nienaber](https://twitter.com/zuckerthoben) und [Rico Suter](https://blog.rsuter.com/)
 
 Wenn eine Web-API verwendet wird, fällt es dem Entwickler oft nicht leicht, die zahlreichen Methoden zu verstehen. [Swagger](https://swagger.io/), auch als [OpenAPI](https://www.openapis.org/) bekannt, löst das Problem, das das Generieren von nützlichen Dokumentationen und Hilfeseiten für Web-APIs darstellen kann. Das Programm bietet Vorteile wie die interaktive Dokumentation, die Generierung von Client SDKs und die Erkennbarkeit von APIs.
 
@@ -113,7 +113,7 @@ Jede öffentliche Aktionsmethode in Ihren Controllern kann über die Benutzerobe
 ![Beispiel für einen Swagger-GET-Test](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
-> Die für den Screenshot verwendete Version der Swagger-Benutzeroberfläche ist Version 2. Ein Beispiel für Version 3 finden Sie unter [Pet store example (Beispiel für eine Tierhandlung)](http://petstore.swagger.io/).
+> Die für den Screenshot verwendete Version der Swagger-Benutzeroberfläche ist Version 2. Ein Beispiel für Version 3 finden Sie unter [Pet store example (Beispiel für eine Tierhandlung)](https://petstore.swagger.io/).
 
 ## <a name="next-steps"></a>Nächste Schritte
 

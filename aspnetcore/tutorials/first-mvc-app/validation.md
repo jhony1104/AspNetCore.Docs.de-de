@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Validierung zu einer ASP.NET Core
 ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 6c59d0188f67872c7dd5599967551d7d390bfdcf
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: f94d1003732b8ff04ec8aba3005f8c95a876cd67
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/07/2019
-ms.locfileid: "65875041"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815116"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Validierung zu einer ASP.NET Core MVC-App
 
@@ -43,7 +43,7 @@ Wie Sie sehen, hat das Formular automatisch für alle Felder mit einem ungültig
 
 Ein entscheidender Vorteil ist, dass Sie nicht eine Codezeile in der Klasse `MoviesController` oder in der Ansicht *Create.cshtml* ändern müssen, um diese Benutzeroberfläche für die Validierung zu aktivieren. Die Controller und Ansichten, die Sie zuvor in diesem Tutorial erstellt haben, haben die angegebenen Validierungsregeln automatisch übernommen (mithilfe der Validierungsattribute für die Eigenschaften der Modellklasse `Movie`). Testen Sie die Validierung mithilfe der Aktionsmethode `Edit`, und es folgt die gleiche Validierung.
 
-Die Formulardaten werden erst an den Server gesendet, wenn auf Clientseite keine Validierungsfehler mehr auftreten. Sie können dies überprüfen, indem Sie einen Haltepunkt in die Methode `HTTP Post` einfügen. Verwenden Sie dazu das [Fiddler-Tool](http://www.telerik.com/fiddler) oder die [F12-Entwicklertools](/microsoft-edge/devtools-guide).
+Die Formulardaten werden erst an den Server gesendet, wenn auf Clientseite keine Validierungsfehler mehr auftreten. Sie können dies überprüfen, indem Sie einen Haltepunkt in die Methode `HTTP Post` einfügen. Verwenden Sie dazu das [Fiddler-Tool](https://www.telerik.com/fiddler) oder die [F12-Entwicklertools](/microsoft-edge/devtools-guide).
 
 ## <a name="how-validation-works"></a>Funktionsweise der Validierung
 

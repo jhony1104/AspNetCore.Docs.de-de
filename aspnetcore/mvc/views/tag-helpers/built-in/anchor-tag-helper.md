@@ -4,18 +4,18 @@ author: pkellner
 description: Lernen Sie die Attribute für das ASP.NET Core-Anchor-Taghilfsprogramm kennen und erfahren Sie, welche Rolle jedes Attribut bei der Erweiterung des Verhaltens des HTML-Anchor-Tags spielt.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 4/18/2019
+ms.date: 04/18/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: de45c99194d4825c1e404aa193b0f076ba659748
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 44fc4ff6334e33630974181021aa1a6880a89917
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883425"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856225"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
-Von [Peter Kellner](http://peterkellner.net) und [Scott Addie](https://github.com/scottaddie)
+Von [Peter Kellner](https://peterkellner.net) und [Scott Addie](https://github.com/scottaddie)
 
 Das [Anchor-Taghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper) verbessert das HTML-Anchor-Tag (`<a ... ></a>`), indem neue Attribute hinzugefügt werden. Per Konvention erhalten Attributnamen das Präfix `asp-`. Der Attributwert `href` des gerenderten Anchor-Elements wird von den Werten der `asp-`-Attribute bestimmt.
 

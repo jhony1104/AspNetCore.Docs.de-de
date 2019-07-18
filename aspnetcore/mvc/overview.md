@@ -5,12 +5,12 @@ description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum E
 ms.author: riande
 ms.date: 01/08/2018
 uid: mvc/overview
-ms.openlocfilehash: eb636616ab952f506993ae5f4692e5e966bb20f4
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 819bc93a7580626bf586b984b0ce169306df56d9
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087307"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815358"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -179,7 +179,7 @@ Als umfangreiche Plattform zum Erstellen von Websites verfügt ASP.NET Core MVC 
 
 Das Framework beinhaltet Unterstützung für die Aushandlung von HTTP-Inhalt mit integrierter Unterstützung zum [Formatieren von Daten](xref:web-api/advanced/formatting) als JSON oder XML. Sie können [benutzerdefinierte Formatierungsprogramme](xref:web-api/advanced/custom-formatters) schreiben, um Unterstützung für Ihre eigenen Formate hinzuzufügen.
 
-Außerdem können Sie mit der Linkgenerierung Unterstützung für Hypermedia aktivieren. Aktivieren Sie auf einfache Weise Unterstützung für die [Ressourcenfreigabe zwischen verschiedenen Ursprüngen (CORS)](http://www.w3.org/TR/cors/), damit Ihre Web-APIs für mehrere Webanwendungen freigegeben werden.
+Außerdem können Sie mit der Linkgenerierung Unterstützung für Hypermedia aktivieren. Aktivieren Sie auf einfache Weise Unterstützung für die [Ressourcenfreigabe zwischen verschiedenen Ursprüngen (CORS)](https://www.w3.org/TR/cors/), damit Ihre Web-APIs für mehrere Webanwendungen freigegeben werden.
 
 ### <a name="testability"></a>Testfähigkeit
 

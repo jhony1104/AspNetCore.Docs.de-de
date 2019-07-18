@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: a65543f805b197031bd46ef1974d4d4a5018b2d1
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: f995f3f74da4910de518af875eb89349a8457573
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516905"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813713"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -486,7 +486,7 @@ Durch den vorangehenden Code werden neue Entitäten hinzugefügt, und der zusamm
 
 ## <a name="fluent-api-alternative-to-attributes"></a>Fluent-API-Alternativen für Attribute
 
-Die `OnModelCreating`-Methode im vorangehenden Code verwendet die *Fluent-API* zum Konfigurieren des Verhaltens von Entity Framework Core. Die API wird als „Fluent“ bezeichnet, da sie häufig durch das Verketten mehrerer Methodenaufrufe zu einer einzigen Anweisung verwendet wird. Der [folgende Code](/ef/core/modeling/#methods-of-configuration) veranschaulicht die Fluent-API beispielhaft:
+Die `OnModelCreating`-Methode im vorangehenden Code verwendet die *Fluent-API* zum Konfigurieren des Verhaltens von Entity Framework Core. Die API wird als „Fluent“ bezeichnet, da sie häufig durch das Verketten mehrerer Methodenaufrufe zu einer einzigen Anweisung verwendet wird. Der [folgende Code](/ef/core/modeling/#use-fluent-api-to-configure-a-model) veranschaulicht die Fluent-API beispielhaft:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -512,7 +512,7 @@ Einige der in diesem Tutorial verwendeten Attribute werden für Folgendes verwen
 * Nur für die Konfiguration von Entity Framework Core (z.B. `HasKey`)
 * Für die Validierung und die Konfiguration von Entity Framework (z.B. `[StringLength(50)]`)
 
-Weitere Informationen zu Attributen und Fluent-API im Vergleich finden Sie unter [Methods of configuration (Konfigurationsmethoden)](/ef/core/modeling/#methods-of-configuration).
+Weitere Informationen zu Attributen und Fluent-API im Vergleich finden Sie unter [Methods of configuration (Konfigurationsmethoden)](/ef/core/modeling/).
 
 ## <a name="entity-diagram-showing-relationships"></a>Entitätsdiagramm mit angezeigten Beziehungen
 

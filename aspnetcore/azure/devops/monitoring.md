@@ -4,14 +4,14 @@ author: CamSoper
 description: Überwachen und Debuggen Ihren Code als Teil einer DevOps-Lösung mit ASP.NET Core und Azure
 ms.author: casoper
 ms.custom: mvc, seodec18
-ms.date: 10/24/2018
+ms.date: 07/10/2019
 uid: azure/devops/monitor
-ms.openlocfilehash: 00489bd92dfff8fd80bd24c2e60193d32031d7c4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1d8ed99f4387dbc99929164c558cc2ce14bd9ea0
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893067"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68307960"
 ---
 # <a name="monitor-and-debug"></a>Überwachen und Debuggen
 
@@ -37,11 +37,11 @@ App Service-Web-apps sind einfach in Echtzeit überwacht. Das Azure-Portal rende
 
     ![Screenshot mit Übersicht über panel](./media/monitoring/overview.png)
 
-    * **HTTP 5xx**: Anzahl von serverseitigen Fehlern, die in der Regel Ausnahmen in ASP.NET Core-Code.
-    * **Daten In**: Eingang von Daten in Ihrer Web-app stammen.
-    * **Ausgehende Daten**: Ausgehende Daten aus Ihrer Web-app, für Clients.
-    * **Anforderungen**: Anzahl von HTTP-Anforderungen.
-    * **Durchschnittliche Antwortzeit**: Die durchschnittliche Zeit für die Web-app auf HTTP-Anforderungen reagiert.
+    * **Http 5xx**: Anzahl serverseitiger Fehler, normalerweise Ausnahmen in ASP.net Core Code.
+    * **Daten in**: Eingehende Daten in Ihre Web-App.
+    * Ausgeh folgende **Daten**: Datenausgang von Ihrer Web-App an Clients.
+    * **Anforderungen**: Anzahl der HTTP-Anforderungen.
+    * **Durchschnittliche Antwortzeit**: Die durchschnittliche Zeit, die die Web-App auf HTTP-Anforderungen antwortet.
 
     Auf dieser Seite befinden sich auch mehrere Self-service-Tools für die Problembehandlung und Optimierung.
 
@@ -89,7 +89,7 @@ Web-Server und app-Protokolle werden standardmäßig in Azure App Service deakti
 
     ![Diagnoseprotokolle link](./media/monitoring/logging.png)
 
-1. Aktivieren Sie **Anwendungsprotokollierung (Dateisystem)**. Wenn Sie dazu aufgefordert werden, klicken Sie auf das Kontrollkästchen, um die Erweiterungen zum Aktivieren der app, die Protokollierung in der Web-app zu installieren.
+1. Aktivieren Sie **Anwendungsprotokollierung (Dateisystem)** . Wenn Sie dazu aufgefordert werden, klicken Sie auf das Kontrollkästchen, um die Erweiterungen zum Aktivieren der app, die Protokollierung in der Web-app zu installieren.
 1. Legen Sie **webserverprotokollierung** zu **Dateisystem**.
 1. Geben Sie die **Beibehaltungsdauer** in Tagen. Beispiel: 30.
 1. Klicken Sie auf **Speichern**.
@@ -111,7 +111,7 @@ Protokolle können auch sein, [gestreamt, die über Azure-Befehlszeilenschnittst
 
 Azure Monitor bietet Ihnen auch [Benachrichtigungen in Echtzeit](/azure/monitoring-and-diagnostics/insights-alerts-portal) basierend auf Metriken, administrative Ereignisse und anderen Kriterien.
 
-> *Hinweis: Derzeit Warnungen für Metriken für Web-app ist nur in der Warnungsdienst (klassisch) verfügbar.*
+> *Hinweis: Zurzeit ist eine Warnung zu Web-App-Metriken nur im Dienst "Warnungen (klassisch)" verfügbar.*
 
 Die [Warnungen (klassisch) Dienst](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal) finden Sie in Azure Monitor oder unter dem **Überwachung** Teil der App Service-Einstellungen.
 
@@ -135,7 +135,7 @@ In diesem Abschnitt haben Sie die folgenden Aufgaben aus:
 
 ## <a name="additional-reading"></a>Weiterführende Literatur
 
-* <xref:host-and-deploy/azure-apps/troubleshoot>
+* <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 * [Überwachen der Leistung von Azure-Web-app mit Application Insights](/azure/application-insights/app-insights-azure-web-apps)
 * [Aktivieren der Diagnoseprotokollierung für Apps in Azure App Service](/azure/app-service/web-sites-enable-diagnostic-log)

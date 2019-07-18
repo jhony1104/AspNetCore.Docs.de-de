@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 11d2914b5797735fb6a262a31bdb49f58391579f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 870ce2eb28f384b380cc1178842325dc28199f09
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884055"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814988"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Taghilfsprogramme in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="what-are-tag-helpers"></a>Informationen zu Taghilfsprogrammen
 
-Taghilfsprogramme ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien. Beispielsweise kann der integrierte `ImageTagHelper` eine Versionsnummer an den Bildnamen anfügen. Bei jeder Änderung des Bilds generiert der Server eine neue eindeutige Version des Bilds, sodass Clients immer das aktuelle Bild (anstelle eines veralteten zwischengespeicherten Bilds) erhalten. Für häufige Aufgaben wie das Erstellen von Formularen und Links sowie das Laden von Objekten gibt es zahlreiche integrierte Taghilfsprogramme. Weitere Taghilfsprogramme sind in öffentlichen GitHub-Repositorys und als NuGet-Pakete verfügbar. Taghilfsprogramme werden in C# erstellt und sind für HTML-Elemente basierend auf dem Elementnamen, dem Attributnamen oder dem übergeordneten Tag konzipiert. Beispielsweise kann der integrierte `LabelTagHelper` für das HTML-`<label>`-Element verwendet werden, wenn die `LabelTagHelper`-Attribute angewendet werden. Wenn Sie sich mit [HTML-Hilfsprogrammen](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) auskennen,verringern Taghilfsprogramme die expliziten Übergänge zwischen HTML und C# in Razor-Ansichten. Häufig stellen HTML-Hilfsprogramme eine Alternative zu einem bestimmten Taghilfsprogramm dar. Allerdings ersetzen Taghilfsprogramme HTML-Hilfsprogramme nicht, und es gibt nicht für jedes HTML-Hilfsprogramm ein Taghilfsprogramm. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert.
+Taghilfsprogramme ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien. Beispielsweise kann der integrierte `ImageTagHelper` eine Versionsnummer an den Bildnamen anfügen. Bei jeder Änderung des Bilds generiert der Server eine neue eindeutige Version des Bilds, sodass Clients immer das aktuelle Bild (anstelle eines veralteten zwischengespeicherten Bilds) erhalten. Für häufige Aufgaben wie das Erstellen von Formularen und Links sowie das Laden von Objekten gibt es zahlreiche integrierte Taghilfsprogramme. Weitere Taghilfsprogramme sind in öffentlichen GitHub-Repositorys und als NuGet-Pakete verfügbar. Taghilfsprogramme werden in C# erstellt und sind für HTML-Elemente basierend auf dem Elementnamen, dem Attributnamen oder dem übergeordneten Tag konzipiert. Beispielsweise kann der integrierte `LabelTagHelper` für das HTML-`<label>`-Element verwendet werden, wenn die `LabelTagHelper`-Attribute angewendet werden. Wenn Sie sich mit [HTML-Hilfsprogrammen](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) auskennen,verringern Taghilfsprogramme die expliziten Übergänge zwischen HTML und C# in Razor-Ansichten. Häufig stellen HTML-Hilfsprogramme eine Alternative zu einem bestimmten Taghilfsprogramm dar. Allerdings ersetzen Taghilfsprogramme HTML-Hilfsprogramme nicht, und es gibt nicht für jedes HTML-Hilfsprogramm ein Taghilfsprogramm. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert.
 
 ## <a name="what-tag-helpers-provide"></a>Vorteile eines Taghilfsprogramms
 
@@ -175,7 +175,7 @@ IntelliSense listet die Eigenschaften und Methoden auf, die für das Modell auf 
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich
 
-Taghilfsprogramme werden an HTML-Elemente in Razor-Ansichten angefügt. [HTML-Hilfsprogramme](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) werden hingegen als Methoden aufgerufen, die mit HTML in Razor-Ansichten vermischt werden. Sehen Sie dich das folgende Razor-Markup an, das eine HTML-Bezeichnung mit der CSS-Klasse „caption“ erstellt:
+Taghilfsprogramme werden an HTML-Elemente in Razor-Ansichten angefügt. [HTML-Hilfsprogramme](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) werden hingegen als Methoden aufgerufen, die mit HTML in Razor-Ansichten vermischt werden. Sehen Sie dich das folgende Razor-Markup an, das eine HTML-Bezeichnung mit der CSS-Klasse „caption“ erstellt:
 
 ```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
@@ -255,4 +255,4 @@ Sie können die Schriftart und die Farben über **Extras** > **Optionen** > **Um
 
 * [Erstellen von Taghilfsprogrammen](xref:mvc/views/tag-helpers/authoring)
 * [Arbeiten mit Formularen](xref:mvc/views/working-with-forms)
-* Auf der Seite [Beispiele für Taghilfsprogramme unter GitHub](https://github.com/dpaquette/TagHelperSamples) finden Sie Beispiele für Taghilfsprogramme, die Sie für die Arbeit mit [Bootstrap](http://getbootstrap.com/) verwenden können.
+* Auf der Seite [Beispiele für Taghilfsprogramme unter GitHub](https://github.com/dpaquette/TagHelperSamples) finden Sie Beispiele für Taghilfsprogramme, die Sie für die Arbeit mit [Bootstrap](https://getbootstrap.com/) verwenden können.

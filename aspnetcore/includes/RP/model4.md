@@ -1,6 +1,6 @@
 <a name="codegenerator"></a> In der folgenden Tabelle sind die Parameter des ASP.NET Core-Codegenerators detailliert aufgeführt:
 
-| Parameter               | Beschreibung|
+| Parameter               | BESCHREIBUNG|
 | ----------------- | ------------ |
 | -m  | Der Name des Modells. |
 | -dc  | Die `DbContext`-Klasse, die verwendet werden soll. |

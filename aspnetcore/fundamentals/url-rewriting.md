@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 72d5b2e902a95442ccffb7a149b917c50373775b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5be53baf4b9eb8774501fbf7f781370f7f687d0c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889925"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814950"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>URL-umschreibende Middleware in ASP.NET Core
 
@@ -129,7 +129,7 @@ Ursprüngliche Anforderung: `/redirect-rule/1234/5678`
 
 ![Browserfenster mit Entwicklertools, die die Anforderungen und Antworten nachverfolgen](url-rewriting/_static/add_redirect.png)
 
-Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)*. Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
+Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)* . Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
 
 Erfassungsgruppen werden in der Ersetzungszeichenfolge mit dem Dollarzeichen (`$`) in die Zeichenfolge eingefügt. Danach folgt die Sequenznummer der Erfassung. Der erste Wert der Erfassungsgruppe wird mit `$1` abgerufen, der zweite mit `$2`. Dies wird in Sequenzen für die Erfassungsgruppen Ihres RegEx weitergeführt. Nur eine Erfassungsgruppe ist in der Beispiel-App im RegEx der Umleitungsregel enthalten. Das bedeutet, dass es in die Ersetzungszeichenfolge nur eine Gruppe eingefügt wird, nämlich `$1`. Wenn die Regel angewendet wird, ändert sich die URL in `/redirected/1234/5678`.
 
@@ -205,7 +205,7 @@ Die Umschreibungsregel (`^rewrite-rule/(\d+)/(\d+)`) stimmt nur mit Pfaden über
 | `/my-cool-rewrite-rule/1234/5678` | Nein    |
 | `/anotherrewrite-rule/1234/5678`  | Nein    |
 
-Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)*. Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
+Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)* . Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
 
 Es gibt keinen Roundtrip zum Server, um die Ressource abzurufen. Wenn es die Ressource gibt, wird sie abgerufen und dem Client mit dem Statuscode *200 – OK* zurückgegeben. Da der Client nicht umgeleitet wird, ändert sich die URL in der Adressleiste des Browsers nicht. Clients können nicht erkennen, dass ein Vorgang zum erneuten Schreiben einer URL auf dem Server stattgefunden hat.
 
@@ -384,5 +384,5 @@ Ursprüngliche Anforderung: `/image.jpg`
 * [URL Rewrite Module Configuration Reference (Konfigurationsreferenz für das URL-Umschreibungsmodul)](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference)
 * [Forum zum IIS-URL-Umschreibungsmodul](https://forums.iis.net/1152.aspx)
 * [Einfache Strukturierung von URLs](https://support.google.com/webmasters/answer/76329?hl=en)
-* [10 URL Rewriting Tips and Tricks (10 Tipps zum Umschreiben von URL)](http://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
+* [10 URL Rewriting Tips and Tricks (10 Tipps zum Umschreiben von URL)](https://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
 * [To slash or not to slash (Schrägstriche setzen oder nicht setzen)](https://webmasters.googleblog.com/2010/04/to-slash-or-not-to-slash.html)

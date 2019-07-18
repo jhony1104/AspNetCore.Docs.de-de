@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 02/12/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 44e6f53d517b0470c5e6fa785a4061e59cda9ce6
-ms.sourcegitcommit: 20ca93d72cb0b3998637724b44523e57b089c8fd
+ms.openlocfilehash: be9f515178d0169a69487f917c7d39c6f11f1292
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/09/2019
-ms.locfileid: "65473612"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815048"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -81,6 +81,10 @@ Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit 
 ![Abbildung der vorherigen Anweisungen.](model/_static/add_scaffold.png)
 
 Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen**:
+<!-- In the next section, change 
+(plus) sign and accept the generated name 
+to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
+-->
 
 * Wählen Sie in der Dropdownliste **Modellklasse** den Eintrag **Film (RazorPagesMovie.Models)** aus.
 * Wählen Sie in der Zeile **Datenkontextklasse** das Zeichen **+** (Plus) aus, und akzeptieren Sie den generierten Namen **RazorPagesMovie.Models.RazorPagesMovieContext**.

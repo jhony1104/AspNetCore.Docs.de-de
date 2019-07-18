@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie eine ASP.NET Core-App in Azure App Service mit Visual Studio veröffentlicht wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/06/2018
+ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: c0251032d83349d4d3925d1ec594c9230ed6ad2d
-ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
+ms.openlocfilehash: dbb8229a52c8c93da94406ad64d03eff9631afb4
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67207643"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308338"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Veröffentlichen einer ASP.NET Core-App in Azure mit Visual Studio
 
@@ -21,7 +21,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Lesen Sie [Publish to Azure from Visual Studio for Mac (Veröffentlichen in Azure aus Visual Studio für Mac)](https://blog.xamarin.com/publish-azure-visual-studio-mac/), wenn Sie unter macOS arbeiten.
 
-Informationen zur Problembehandlung bei der App Service-Bereitstellung finden Sie unter <xref:host-and-deploy/azure-apps/troubleshoot>.
+Informationen zur Problembehandlung bei der App Service-Bereitstellung finden Sie unter <xref:test/troubleshoot-azure-iis>.
 
 ## <a name="set-up"></a>Einrichten
 
@@ -191,4 +191,4 @@ Sobald Sie das Testen der App abgeschlossen haben, wechseln Sie zum [Azure-Porta
 * [Azure-Ressourcengruppen](/azure/azure-resource-manager/resource-group-overview#resource-groups)
 * [Azure SQL-Datenbank](/azure/sql-database/)
 * <xref:host-and-deploy/visual-studio-publish-profiles>
-* <xref:host-and-deploy/azure-apps/troubleshoot>
+* <xref:test/troubleshoot-azure-iis>

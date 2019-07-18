@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/08/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: d2b2456c7ab6b72f2270b6edc17000695061cc2b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f2d5dbbdc80eec035616ddea234ee5d3343eeae8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887755"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815177"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>IIS-Support zum Zeitpunkt der Entwicklung in Visual Studio für ASP.NET Core
 
@@ -108,7 +108,7 @@ So erstellen Sie ein neues Startprofil, um IIS-Unterstützung zur Entwicklungsze
 
 ::: moniker-end
 
-Wenn Sie nicht Visual Studio verwenden, können Sie in der App im Ordner *Properties* manuell ein Startprofil zur Datei [launchSettings.json](http://json.schemastore.org/launchsettings) hinzufügen. Im folgenden Beispiel wird das Profil für die Verwendung des HTTPS-Protokolls konfiguriert:
+Wenn Sie nicht Visual Studio verwenden, können Sie in der App im Ordner *Properties* manuell ein Startprofil zur Datei [launchSettings.json](https://json.schemastore.org/launchsettings) hinzufügen. Im folgenden Beispiel wird das Profil für die Verwendung des HTTPS-Protokolls konfiguriert:
 
 ```json
 {

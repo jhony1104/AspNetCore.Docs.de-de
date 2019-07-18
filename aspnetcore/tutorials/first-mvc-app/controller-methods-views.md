@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über das Arbeiten mit Controllermethoden, Ansich
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 36c8141ba5827366572dabcfd0fdf9600c745706
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 6d960da5acecbb95893bd339b4391560bedffb3d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889765"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815419"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>Controllermethoden und Ansichten in ASP.NET Core
 
@@ -76,7 +76,7 @@ Der folgende Code zeigt die `HTTP POST Edit`-Methode, die die bereitgestellten F
 
 ::: moniker-end
 
-Das `[Bind]`-Attribut ist eine Möglichkeit zum Schutz vor [zu vielen Angaben](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application#overpost). Sie sollten nur Eigenschaften in das `[Bind]`-Attribut aufnehmen, die Sie ändern möchten. Weitere Informationen finden Sie unter [Protect your controller from over-posting](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application) (Schützen Ihres Controllers vor zu vielen Angaben). [ViewModels](http://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/) bietet eine alternative Methode, um zu viele Angaben zu verhindern.
+Das `[Bind]`-Attribut ist eine Möglichkeit zum Schutz vor [zu vielen Angaben](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application#overpost). Sie sollten nur Eigenschaften in das `[Bind]`-Attribut aufnehmen, die Sie ändern möchten. Weitere Informationen finden Sie unter [Protect your controller from over-posting](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application) (Schützen Ihres Controllers vor zu vielen Angaben). [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/) bietet eine alternative Methode, um zu viele Angaben zu verhindern.
 
 Beachten Sie, dass der zweiten `Edit`-Aktionsmethode das `[HttpPost]`-Attribut vorangestellt ist.
 
@@ -151,7 +151,7 @@ Alle `HttpGet`-Methoden im Movie-Controller folgen einem ähnlichen Muster. Sie 
 * [Erstellen von Taghilfsprogrammen](xref:mvc/views/tag-helpers/authoring)
 * [Antianforderungsfälschung](xref:security/anti-request-forgery)
 * Schützen Sie Ihre Domänencontroller vor [zu vielen Angaben](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
-* [ViewModels](http://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
+* [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Hilfsprogramm für Formulartags](xref:mvc/views/working-with-forms)
 * [Hilfsprogramm für Eingabetags](xref:mvc/views/working-with-forms)
 * [Hilfsprogramm für Bezeichnungstags](xref:mvc/views/working-with-forms)

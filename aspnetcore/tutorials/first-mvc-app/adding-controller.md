@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie einen Controller zu einer einfachen ASP.NET C
 ms.author: riande
 ms.date: 02/28/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 9dbfb52109260dbfe0c6c094a7ac4edae47d24e7
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: f28dc96b66fce736242d26a2584fea0a23375e23
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837335"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815190"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Controllers zu einer ASP.NET Core MVC-App
 
@@ -68,7 +68,7 @@ Jede `public`-Methode in einem Controller kann als HTTP-Endpunkt aufgerufen werd
 
 Ein HTTP-Endpunkt ist eine Ziel-URL in der Webanwendung, wie z.B. `https://localhost:5001/HelloWorld`, und kombiniert das verwendete Protokoll `HTTPS`, die Netzwerkadresse des Webservers (einschließlich TCP-Port) `localhost:5001` und den Ziel-URI `HelloWorld`.
 
-Der erste Kommentar besagt, dass es sich dabei um eine [HTTP GET](https://www.w3schools.com/tags/ref_httpmethods.asp)-Methode handelt, die durch Anfügen von `/HelloWorld/` an die Basis-URL aufgerufen wird. Der zweite Kommentar gibt eine [HTTP GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)-Methode an, die aufgerufen wird, indem `/HelloWorld/Welcome/` an die URL angefügt wird. Im weiteren Verlauf des Tutorials wird die Gerüstbau-Engine verwendet, um `HTTP POST`-Methoden zu erstellen, mit denen Daten aktualisiert werden.
+Der erste Kommentar besagt, dass es sich dabei um eine [HTTP GET](https://www.w3schools.com/tags/ref_httpmethods.asp)-Methode handelt, die durch Anfügen von `/HelloWorld/` an die Basis-URL aufgerufen wird. Der zweite Kommentar gibt eine [HTTP GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)-Methode an, die aufgerufen wird, indem `/HelloWorld/Welcome/` an die URL angefügt wird. Im weiteren Verlauf des Tutorials wird die Gerüstbau-Engine verwendet, um `HTTP POST`-Methoden zu erstellen, mit denen Daten aktualisiert werden.
 
 Führen Sie die App im Nicht-Debugmodus aus, und fügen Sie „HelloWorld“ an den Pfad in der Adressleiste an. Die `Index`-Methode gibt eine Zeichenfolge zurück.
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 644d84f9adba650b3ef10ba69cc75c22845be211
-ms.sourcegitcommit: 7e00e8236ca4eabf058f07020a5a3882daf7564f
+ms.openlocfilehash: a3d8c87fdb1cbc3b8b11b15f797190d626edad59
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/16/2019
-ms.locfileid: "68239243"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308062"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -734,10 +734,10 @@ Erfahren Sie mehr über die Verzeichnisstruktur veröffentlichter ASP.NET Core-A
 [Verzeichnisstruktur](xref:host-and-deploy/directory-structure)
 
 Lernen Sie aktive und inaktive IIS-Module für ASP.NET Core-Apps kennen, und erfahren Sie, wie Sie diese verwalten können.  
-[IIS-Module](xref:host-and-deploy/iis/troubleshoot)
+[IIS-Module](xref:host-and-deploy/iis/modules)
 
 Erfahren Sie, wie Sie Probleme mit IIS-Bereitstellungen von ASP.NET Core-Apps diagnostizieren können.  
-[Problembehandlung](xref:host-and-deploy/iis/troubleshoot)
+[Problembehandlung](xref:test/troubleshoot-azure-iis)
 
 Erfahren Sie, wie Sie häufige Fehler beim Hosten von ASP.NET Core-Apps in IIS erkennen.  
 [Referenz zu häufigen Fehlern bei Azure App Service und IIS](xref:host-and-deploy/azure-iis-errors-reference)

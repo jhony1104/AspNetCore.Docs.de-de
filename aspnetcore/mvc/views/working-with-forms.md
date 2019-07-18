@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 380d47d33706b3197dba3b9f7e3e1f186e27115f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: a07bb4f539c8bd38b08402c598924e14c748921d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890815"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815236"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -73,7 +73,7 @@ Das Hilfsprogramm für Formularaktionen generiert das `formaction`-Attribut auf 
 
 Folgende [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)-Attribute werden zum Steuern des Werts von `formaction` unterstützt:
 
-|Attribut|Beschreibung|
+|Attribut|BESCHREIBUNG|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|Der Name des Controllers.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|Der Name der Aktionsmethode.|
@@ -453,7 +453,7 @@ Wenn ein serverseitiger Validierungsfehler auftritt (wenn Sie z.B. eine benutzer
 |--- |--- |
 |ValidationSummary.All|Eigenschaften- und Modellebene|
 |ValidationSummary.ModelOnly|Modell|
-|ValidationSummary.None|Keiner|
+|ValidationSummary.None|Keine|
 
 ### <a name="sample"></a>Beispiel
 
@@ -602,7 +602,7 @@ Der generierte HTML-Code:
 
 ### <a name="multiple-select"></a>Mehrfachauswahl
 
-Das Taghilfsprogramm für die Auswahl generiert automatisch das Attribut [multiple = "multiple"](http://w3c.github.io/html-reference/select.html), wenn die Eigenschaft, die im `asp-for`-Attribut angegeben wird, eine `IEnumerable`-Schnittstelle ist. Betrachten Sie beispielsweise folgendes Modell:
+Das Taghilfsprogramm für die Auswahl generiert automatisch das Attribut [multiple = "multiple"](https://w3c.github.io/html-reference/select.html), wenn die Eigenschaft, die im `asp-for`-Attribut angegeben wird, eine `IEnumerable`-Schnittstelle ist. Betrachten Sie beispielsweise folgendes Modell:
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
