@@ -534,6 +534,10 @@
       uid: grpc/aspnetcore
     - name: Konfiguration
       uid: grpc/configuration
+    - name: Authentifizierung und Autorisierung
+      uid: grpc/authn-and-authz
+    - name: Sicherheitsüberlegungen
+      uid: grpc/security
     - name: Migrieren von gRPC-Diensten von C Core zu ASP.NET Core
       uid: grpc/migration
     - name: Vergleich von gRPC-Diensten mit HTTP-APIs
@@ -560,6 +564,10 @@
       uid: test/troubleshoot
     - name: Protokollierung
       uid: fundamentals/logging/index
+    - name: Problembehandlung für Azure und IIS
+      uid: test/troubleshoot-azure-iis
+    - name: Referenz zu Azure-und IIS-Fehlern
+      uid: host-and-deploy/azure-iis-errors-reference
 - name: Datenzugriff
   items:
     - name: Tutorials
@@ -656,7 +664,7 @@
           uid: host-and-deploy/aspnet-core-module
         - name: Problembehandlung
           displayName: 'azure, deploy, publish'
-          uid: host-and-deploy/azure-apps/troubleshoot
+          uid: test/troubleshoot-azure-iis
         - name: Fehlerreferenz
           displayName: 'azure, deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
@@ -697,7 +705,7 @@
           uid: host-and-deploy/iis/modules
         - name: Problembehandlung
           displayName: 'deploy, publish'
-          uid: host-and-deploy/iis/troubleshoot
+          uid: test/troubleshoot-azure-iis
         - name: Fehlerreferenz
           displayName: 'deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 9189e1fbb21abcc8c8bdea947e672ee53b59bc4f
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: cb5f774db5fab46a57f8ca4bbbca148f20f371ba
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085481"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308046"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Hosten von ASP.NET Core in Docker-Containern
 
@@ -31,11 +31,11 @@ Erfahren Sie, wie Docker-Containerimages in einer Imageregistrierung gespeichert
 
 <xref:host-and-deploy/docker/building-net-docker-images> In diesem Artikel erfahren Sie, wie eine ASP.NET Core-App erstellt und in Docker bereitgestellt wird. Erkunden Sie Docker-Images, die von Microsoft verwaltet werden, und untersuchen Sie Anwendungsfälle.
 
-[Visual Studio-Tools für Docker](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
-Erfahren Sie mehr über die Unterstützung für das Erstellen, Debuggen und Ausführen von ASP.NET Core-Apps in Visual Studio 2017, die für .NET Framework oder .NET Core in Docker für Windows entwickelt wurden. Sowohl Windows- als auch Linux-Container werden unterstützt.
+[Visual Studio-Containertools](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
+Erfahren Sie mehr über die Unterstützung für das Erstellen, Debuggen und Ausführen von ASP.NET Core-Apps in Visual Studio, die für .NET Framework oder .NET Core in Docker für Windows entwickelt wurden. Sowohl Windows- als auch Linux-Container werden unterstützt.
 
-[Veröffentlichen in einem Docker-Image](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  
-Erfahren Sie, wie Sie die Erweiterung Visual Studio-Tools für Docker verwenden, um mithilfe von PowerShell eine ASP.NET Core-App für einen Docker-Host in Azure bereitzustellen.
+[Veröffentlichen in Azure Container Registry](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  
+Hier erfahren Sie, wie Sie die Erweiterung für Visual Studio-Containertools verwenden, um mithilfe von PowerShell eine ASP.NET Core-App für einen Docker-Host in Azure bereitzustellen.
 
 [Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich](xref:host-and-deploy/proxy-load-balancer)  
 Möglicherweise ist zusätzliche Konfiguration für Apps erforderlich, die hinter Proxyservern und Lastenausgleichsmodulen (Load Balancer) gehostet werden. Ein Übergeben von Anforderungen über einen Proxy verschleiert häufig Informationen über die ursprüngliche Anforderung, z. B. das Schema und die Client-IP. Er kann erforderlich sein, dass einige Informationen über die Anforderung manuell an die App weitergeleitet werden.
