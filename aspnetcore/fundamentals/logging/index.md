@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 07/11/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: cdb5cad2302cc8ec02107021005b8590efce7533
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 4fe677e69478284db2ccab655c35b5744b6f63f9
+ms.sourcegitcommit: 059ab380744fa3be3b69aa90d431b563c57092cf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308220"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68410912"
 ---
 # <a name="logging-in-aspnet-core"></a>Protokollierung in ASP.NET Core
 
@@ -865,14 +865,11 @@ Verwenden Sie nicht das [Microsoft.ApplicationInsights.Web](https://www.nuget.or
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
 * [Application Insights-Übersicht](/azure/application-insights/app-insights-overview)
-* [Anwendungseinblicke für ASP.NET Core-Anwendungen](/azure/azure-monitor/app/asp-net-core-no-visualstudio): Beginnen Sie hier, wenn Sie die gesamte Bandbreite der Application Insights-Telemetrie zusammen mit der Protokollierung implementieren möchten.
+* [Anwendungseinblicke für ASP.NET Core-Anwendungen](/azure/azure-monitor/app/asp-net-core): Beginnen Sie hier, wenn Sie die gesamte Bandbreite der Application Insights-Telemetrie zusammen mit der Protokollierung implementieren möchten.
 * [ApplicationInsightsLoggerProvider für .NET Core ILogger-Protokolle](/azure/azure-monitor/app/ilogger): Beginnen Sie hier, wenn Sie den Protokollierungsanbieter ohne die übrige Application Insights-Telemetrie implementieren möchten.
-* [Application Insights logging adapters (Adapter zur Protokollierung für Application Insights)](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/README.md).
+* [Application Insights logging adapters (Adapter zur Protokollierung für Application Insights)](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-trace-logs).
 * [Installieren, Konfigurieren und Initialisieren des Application Insights SDK](/learn/modules/instrument-web-app-code-with-application-insights): interaktive Tutorials auf der Microsoft Learn-Website.
 ::: moniker-end
-
-> [!NOTE]
-> Seit dem 1.5.2019 ist der Artikel mit dem Titel [Application Insights für ASP.NET Core](/azure/azure-monitor/app/asp-net-core) veraltet, und die Schritte im Tutorial funktionieren nicht mehr. Ziehen Sie stattdessen [Application Insights für ASP.NET Core-Anwendungen](/azure/azure-monitor/app/asp-net-core-no-visualstudio) zurate. Wir kennen das Problem und arbeiten an einer Lösung.
 
 ## <a name="third-party-logging-providers"></a>Protokollierungsanbieter von Drittanbietern
 
