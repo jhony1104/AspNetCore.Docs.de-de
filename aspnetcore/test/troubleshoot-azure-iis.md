@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Probleme mit Azure App Service und Internetin
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/17/2019
+ms.date: 07/18/2019
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 46d4a11c594844e059fa8555255d7321f7b48631
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: deae568a6ba88c9a8365b9d7f2df629899bc64a1
+ms.sourcegitcommit: 16502797ea749e2690feaa5e652a65b89c007c89
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308793"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68483321"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung ASP.net Core auf Azure App Service und IIS
 
@@ -48,6 +48,31 @@ In Visual Studio entspricht ein ASP.NET Core-Projekt standardmäßig dem [IIS Ex
 In Visual Studio entspricht ein ASP.NET Core-Projekt standardmäßig dem [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)-Hosting während des Debuggens. Ein *502,5-Prozessfehler* , der auftritt, wenn das lokale Debuggen mithilfe der Ratschläge in diesem Thema diagnostiziert werden kann.
 
 ::: moniker-end
+
+### <a name="40314-forbidden"></a>403,14 unzulässig
+
+Die APP kann nicht gestartet werden. Der folgende Fehler wird protokolliert:
+
+```
+The Web server is configured to not list the contents of this directory.
+```
+
+Der Fehler wird normalerweise durch eine unterbrochene Bereitstellung auf dem Host System verursacht, die eines der folgenden Szenarien umfasst:
+
+* Die APP wird im falschen Ordner auf dem Hostingsystem bereitgestellt.
+* Beim Bereitstellungs Prozess konnten nicht alle Dateien und Ordner der app in den Bereitstellungs Ordner auf dem Hostingsystem verschoben werden.
+* Die Datei " *Web. config* " fehlt in der Bereitstellung, oder der Inhalt der Datei " *Web. config* " ist falsch formatiert.
+
+Führen Sie die folgenden Schritte aus:
+
+1. Löschen Sie alle Dateien und Ordner aus dem Bereitstellungs Ordner auf dem Host System.
+1. Stellen Sie den Inhalt des Ordners " *Publish* " der APP mit ihrer normalen Bereitstellungs Methode wie Visual Studio, PowerShell oder manueller Bereitstellung auf dem Hostingsystem erneut bereit:
+   * Vergewissern Sie sich, dass die Datei " *Web. config* " in der Bereitstellung vorhanden ist und dass Ihr Inhalt korrekt ist.
+   * Vergewissern Sie `D:\home\site\wwwroot` sich beim Hosting auf Azure App Service, dass die APP im Ordner bereitgestellt wird.
+   * Wenn die APP von IIS gehostet wird, vergewissern Sie sich, dass die APP im physischen IIS- **Pfad** bereitgestellt wird, der in den **Grundeinstellungen**des **IIS-Managers**angezeigt wird.
+1. Vergewissern Sie sich, dass alle Dateien und Ordner der APP bereitgestellt werden, indem Sie die Bereitstellung auf dem Hostingsystem mit dem Inhalt des *Veröffentlichungs* Ordners des Projekts vergleichen.
+
+Weitere Informationen zum Layout einer veröffentlichten ASP.net Core-App finden <xref:host-and-deploy/directory-structure>Sie unter. Weitere Informationen zur Datei " *Web. config* " finden <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>Sie unter.
 
 ### <a name="500-internal-server-error"></a>500: Interner Serverfehler
 
@@ -192,6 +217,8 @@ Dieser Fehler tritt bei einem Bitanzahlkonflikt zwischen der veröffentlichten A
 1. Wählen Sie **32-Bit-Anwendungen aktivieren** aus:
    * Wenn Sie eine 32-Bit-(x86)-App bereitstellen, legen Sie den Wert auf `True` fest.
    * Wenn Sie eine 64-Bit-(x64)-App bereitstellen, legen Sie den Wert auf `False` fest.
+
+Vergewissern Sie sich, dass kein Konflikt zwischen `<Platform>` einer MSBuild-Eigenschaft in der Projektdatei und der veröffentlichten Bitanzahl der APP besteht.
 
 ### <a name="connection-reset"></a>Verbindungszurücksetzung
 
