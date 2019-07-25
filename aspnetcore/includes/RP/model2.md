@@ -2,7 +2,7 @@
 
 ### <a name="add-a-database-context-class"></a>Hinzufügen einer Datenbankkontext-Klasse
 
-Fügen Sie dem Ordner *Models* die folgende `RazorPagesMovieContext`-Klasse hinzu:
+Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -12,7 +12,7 @@ Der vorangehende Code erstellt eine `DbSet`-Eigenschaft für die Entitätenmenge
 
 ### <a name="add-a-database-connection-string"></a>Hinzufügen einer Datenbank-Verbindungszeichenfolge
 
-Fügen Sie der Datei *appsettings.json* eine Verbindungszeichenfolge hinzu:
+Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code dargestellt eine Verbindungszeichenfolge hinzu:
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 

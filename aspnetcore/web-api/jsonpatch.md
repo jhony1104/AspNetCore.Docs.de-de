@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/24/2019
 uid: web-api/jsonpatch
-ms.openlocfilehash: 14710e6431a2a7ce60fa7f190bef184da85281a0
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 97264903d85dbb397e85fdbf7b070e2aaae74bc8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888415"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815540"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch in ASP.NET Core-Web-API
 
@@ -71,7 +71,7 @@ Die Änderungen, die durch Anwenden eines JSON Patch-Dokuments auf eine Ressourc
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
-Die [path](http://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
+Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Zum `add` ans Ende eines Arrays verwenden Sie einen Bindestrich (-) anstelle einer Indexnummer: `/addresses/-`.
 
@@ -171,11 +171,11 @@ Das folgende Patch-Dokumentbeispiel legt den Wert von `CustomerName` fest und er
 
 ## <a name="the-move-operation"></a>Move-Vorgang (Verschieben)
 
-* Wenn `path` auf ein Arrayelement verweist: Kopiert das `from`-Element an den von `path` angegebenen Speicherort und führt dann einen `remove`-Vorgang für das `from`-Element aus.
+* Wenn `path` auf ein Arrayelement verweist: Kopiert das `from`-Element an den Speicherort des `path`-Elements und führt dann einen `remove`-Vorgang für das `from`-Element aus.
 * Wenn `path` auf eine Eigenschaft verweist: Kopiert den Wert der `from`-Eigenschaft in die `path`-Eigenschaft, und führt dann einen `remove`-Vorgang für die `from`-Eigenschaft aus.
 * Wenn `path` auf eine nicht vorhandene Eigenschaft verweist:
   * Wenn die Ressource, auf die der Patch angewendet werden soll, ein statisches Objekt ist: Die Anforderung schlägt fehl.
-  * Wenn die Ressource, auf die der Patch angewendet werden soll, dynamisches Objekt ist: Kopiert die `from`-Eigenschaft an den von `path` angegebenen Speicherort, und führt dann einen `remove`-Vorgang für die `from`-Eigenschaft aus.
+  * Wenn es sich bei der Ressource, die gepatcht werden soll, um ein dynamisches Objekt handelt: Kopiert die `from`-Eigenschaft in den von `path` angegebenen Speicherort, und führt dann einen `remove`-Vorgang für die `from`-Eigenschaft aus.
 
 Das folgende Patch-Dokumentbeispiel:
 
@@ -221,6 +221,6 @@ Um das Beispiel zu testen, führen Sie die App aus, und senden Sie HTTP-Anforder
 
 * [IETF RFC 5789 PATCH-Methodenspezifikation](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902)
-* [IETF RFC 6901 JSON Patch-Pfadformatspezifikation](http://tools.ietf.org/html/rfc6901)
-* [JSON Patch-Dokumentation](http://jsonpatch.com/). Enthält Links zu Ressourcen zum Erstellen von JSON Patch-Dokumenten.
+* [IETF RFC 6901 JSON Patch-Pfadformatspezifikation](https://tools.ietf.org/html/rfc6901)
+* [JSON Patch-Dokumentation](https://jsonpatch.com/). Enthält Links zu Ressourcen zum Erstellen von JSON Patch-Dokumenten.
 * [ASP.NET Core JSON Patch-Quellcode](https://github.com/aspnet/AspNetCore/tree/master/src/Features/JsonPatch/src)

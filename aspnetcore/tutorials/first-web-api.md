@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/23/2019
+ms.date: 07/11/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: a53f7019c1079296f073e743ddbf9d90fc5abad3
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 95410cef9753fbb0eda6136320b59682e0553ea7
+ms.sourcegitcommit: 040aedca220ed24ee1726e6886daf6906f95a028
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555873"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "67893195"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -99,7 +99,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Neue Projektmappe in macOS](first-web-api-mac/_static/sln.png)
 
-* Klicken Sie auf **.NET Core-App** > **ASP.NET Core-Web-API** > **Weiter**.
+* Klicken Sie auf **.NET Core** > **App** > **API** > **Weiter**.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
@@ -127,7 +127,7 @@ Drücken Sie STRG+F5, um die App auszuführen. Rufen Sie in einem Browser die fo
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-Wählen Sie **Ausführen** > **Mit Debugging starten** aus, um die App zu starten. Visual Studio für Mac startet einen Browser und navigiert zu `https://localhost:<port>`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt. Der Fehler „HTTP 404: Nicht gefunden“ wird zurückgegeben. Fügen Sie der URL `/api/values` an, d.h. ändern Sie die URL in `https://localhost:<port>/api/values`.
+Wählen Sie **Run** > **Start Debugging** (Ausführen > Debugging starten) aus, um die App zu starten. Visual Studio für Mac startet einen Browser und navigiert zu `https://localhost:<port>`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt. Der Fehler „HTTP 404: Nicht gefunden“ wird zurückgegeben. Fügen Sie der URL `/api/values` an, d.h. ändern Sie die URL in `https://localhost:<port>/api/values`.
 
 ---
 
@@ -143,7 +143,7 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
+* Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Models*.
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und wählen Sie **Hinzufügen** > **Klasse** aus. Nennen Sie die Klasse *TodoItem*, und wählen Sie **Hinzufügen** aus.
 
@@ -245,6 +245,8 @@ Diese Methoden implementieren zwei GET-Endpunkte:
 
 * `GET /api/todo`
 * `GET /api/todo/{id}`
+
+Halten Sie die App an, falls diese noch ausgeführt wird. Führen Sie diese dann noch mal aus, damit die letzten Änderungen übernommen werden.
 
 Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser aufrufen. Beispiel:
 
