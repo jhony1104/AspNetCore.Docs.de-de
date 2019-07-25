@@ -7,18 +7,18 @@ ms.author: riande
 ms.date: 06/28/2019
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: d59f643a23b48ccbddf498ef534ee8432b010f40
-ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
+ms.openlocfilehash: 77c7d4a318610fcd424da0485abd41d11e3fad6a
+ms.sourcegitcommit: fbc66827e319d28bebed678ea5fd42f582fe3c34
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67463257"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68493562"
 ---
-# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Erstellen von wiederverwendbaren Benutzeroberfläche, die mit der Razor-Klassenbibliotheksprojekt in ASP.NET Core
+# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Erstellen wiederverwendbarer Benutzeroberflächen mithilfe des Razor-Klassen Bibliotheks Projekts in ASP.net Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor-Ansichten, Seiten, Controller, seitenmodelle, [Razor-Komponenten](xref:blazor/class-libraries), [Ansichtskomponenten](xref:mvc/views/view-components), Datenmodelle in einer Razor-Klassenbibliothek (RCL) erstellt werden können. Die RCL kann verpackt und wiederverwendet werden. Sie kann in Anwendungen eingebunden werden, wodurch sich die in der RCL enthaltenen Ansichten und Seiten überschreiben lassen. Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang.
+Razor-Ansichten, Seiten, Controller, Seiten Modelle, [Razor-Komponenten](xref:blazor/class-libraries), Ansichts [Komponenten](xref:mvc/views/view-components)und Datenmodelle können in eine Razor-Klassenbibliothek (RCL) integriert werden. Die RCL kann verpackt und wiederverwendet werden. Sie kann in Anwendungen eingebunden werden, wodurch sich die in der RCL enthaltenen Ansichten und Seiten überschreiben lassen. Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang.
 
 Dieses Feature erfordert [!INCLUDE[](~/includes/2.1-SDK.md)]
 
@@ -34,7 +34,7 @@ Dieses Feature erfordert [!INCLUDE[](~/includes/2.1-SDK.md)]
 * Überprüfen Sie, ob **ASP.NET Core 2.1** oder höher ausgewählt ist.
 * Klicken Sie auf **Razor Class Library** (Razor-Klassenbibliothek) > **OK**.
 
-Ein RCL hat die folgende Projektdatei:
+Eine RCL hat die folgende Projektdatei:
 
 [!code-xml[Main](ui-class/samples/cli/RazorUIClassLib/RazorUIClassLib.csproj)]
 
@@ -52,16 +52,16 @@ Weitere Informationen finden Sie unter [dotnet new](/dotnet/core/tools/dotnet-ne
 
 Fügen Sie der RCL Razor-Dateien hinzu.
 
-ASP.NET Core-Vorlagen wird davon ausgegangen, der RCL Inhalt befindet sich in der *Bereiche* Ordner. Finden Sie unter [RCL Seitenlayout](#afs) zum Erstellen der Inhalte in ein RCL, die verfügbar macht `~/Pages` statt `~/Areas/Pages`.
+ASP.NET Core-Vorlagen wird davon ausgegangen, der RCL Inhalt befindet sich in der *Bereiche* Ordner. Weitere Informationen finden Sie unter [RCL Pages Layout](#afs) zum Erstellen einer RCL `~/Pages` , die `~/Areas/Pages`Inhalte in anstelle von verfügbar macht.
 
-## <a name="referencing-rcl-content"></a>Verweisen auf RCL Inhalt
+## <a name="referencing-rcl-content"></a>Verweisen auf den RCL-Inhalt
 
 Folgende Komponenten können auf die RCL verweisen:
 
 * NuGet-Pakete. Weitere Informationen finden Sie unter [Creating NuGet packages](/nuget/create-packages/creating-a-package) (Erstellen von NuGet-Paketen), [dotnet add package](/dotnet/core/tools/dotnet-add-package) und [Erstellen und Veröffentlichen eines NuGet-Pakets](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).
 * *{ProjectName}.csproj*-Dateien. Weitere Informationen finden Sie unter [dotnet add reference](/dotnet/core/tools/dotnet-add-reference).
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>Exemplarische Vorgehensweise: Erstellen eines Projekts RCL aus und ein Projekt mit Razor Pages
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>Exemplarische Vorgehensweise: Erstellen eines RCL-Projekts und verwenden aus einem Razor Pages Projekt
 
 Sie können das [vollständige Projekt](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) herunterladen und testen, anstatt es zu erstellen. Der Beispieldownload enthält zusätzlichen Code sowie Links, die das Testen des Projekts erleichtern. [In diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/6098) können Sie in Form von Kommentaren Feedback zu Unterschieden zwischen Beispieldownloads und ausführlichen Anleitungen geben.
 
@@ -91,9 +91,9 @@ dotnet run
 
 Folgen Sie den Anweisungen in [Testen des WebApp1-Projekts](#test).
 
-## <a name="create-an-rcl"></a>Erstellen Sie eine RCL
+## <a name="create-an-rcl"></a>Erstellen einer RCL
 
-In diesem Abschnitt wird ein RCL erstellt. Dabei werden der RCL Razor-Dateien hinzugefügt.
+In diesem Abschnitt wird eine RCL erstellt. Dabei werden der RCL Razor-Dateien hinzugefügt.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -174,7 +174,7 @@ Führen Sie die App aus.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-Erstellen einer Razor Pages-Web-app und eine Projektmappendatei, die die Razor-Seiten-app und die RCL enthält:
+Erstellen Sie eine Razor Pages Web-App und eine Projektmappendatei, die die Razor Pages-APP und die RCL enthält:
 
 ```console
 dotnet new webapp -o WebApp1
@@ -197,13 +197,13 @@ dotnet run
 
 ### <a name="test-webapp1"></a>Testen des WebApp1-Projekts
 
-Stellen Sie sicher, dass die Benutzeroberfläche der Razor-Klassenbibliothek verwendet wird:
+Vergewissern Sie sich, dass die Razor-UI-Klassenbibliothek verwendet wird:
 
 * Wechseln Sie zu `/MyFeature/Page1`.
 
 ## <a name="override-views-partial-views-and-pages"></a>Überschreiben von Ansichten, Teilansichten und Seiten
 
-Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang. Fügen Sie z. B. *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* auf "WebApp1", und Seite1 aus dem "WebApp1" Vorrang vor Seite1 aus dem RCL.
+Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang. Fügen Sie z. b. *"WebApp1"/Areas/myfeature/Pages/"Page1. cshtml* zu" WebApp1 "hinzu, und" Page1 im "WebApp1" hat Vorrang vor "Page1 in der RCL.
 
 Ob Page1 in WebApp1 tatsächlich die Priorität zugeordnet wird, können Sie testen, indem Sie im Beispieldownload *WebApp1/Areas/MyFeature2* in *WebApp1/Areas/MyFeature* umbenennen.
 
@@ -230,31 +230,31 @@ Nehmen wir an *RazorUIClassLib/Pages/Shared* enthält zwei partielle Dateien: *_
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="create-an-rcl-with-static-assets"></a>Erstellen Sie eine RCL mit statischen Objekten
+## <a name="create-an-rcl-with-static-assets"></a>Erstellen einer RCL mit statischen Assets
 
-Ein RCL unter Umständen Companion statische Ressourcen, die von der Nutzung der RCL-app verwiesen werden kann. ASP.NET Core ermöglicht das Erstellen von RCLs, die statische Ressourcen enthalten, die für eine Nutzung app verfügbar sind.
+Eine RCL erfordert möglicherweise begleitende statische Ressourcen, auf die von der Verb raubenden App der RCL verwiesen werden kann. ASP.net Core ermöglicht das Erstellen von rcls, die statische Ressourcen enthalten, die für eine verarbeitende app verfügbar sind.
 
-Wenn zugehörige Ressourcen als Teil einer RCL einschließen möchten, erstellen Sie eine *"Wwwroot"* Ordner in der Klassenbibliothek und alle erforderlichen Dateien in diesem Ordner enthalten.
+Wenn Sie begleitende Assets als Teil einer RCL einschließen möchten, erstellen Sie in der Klassenbibliothek einen Ordner *wwwroot* , und fügen Sie alle erforderlichen Dateien in diesen Ordner ein.
 
-Beim Packen einer RCL, companion alle Ressourcen in der *"Wwwroot"* Ordner automatisch im Paket enthalten sind, und verweisen auf das Paket-Apps zur Verfügung gestellt.
+Beim Packen einer RCL werden alle Begleit Objekte im Ordner " *wwwroot* " automatisch in das Paket eingeschlossen und für apps verfügbar gemacht, die auf das Paket verweisen.
 
 ### <a name="consume-content-from-a-referenced-rcl"></a>Nutzen von Inhalten aus einer referenzierten RCL
 
-Die Dateien in die *"Wwwroot"* Ordner die RCL werden verfügbar gemacht, an die verarbeitende-app unter dem Präfix `_content/{LIBRARY NAME}/`. `{LIBRARY NAME}` ist der Name des Klassenbibliothekprojekts konvertiert Kleinbuchstaben durch Punkte (`.`) entfernt. Z. B. eine Bibliothek, die mit dem Namen *Razor.Class.Lib* führt zu einem Pfad an statische Inhalte auf `_content/razorclasslib/`.
+Die Dateien, die im Ordner " *wwwroot* " der RCL enthalten sind, werden für die verbrauchende app unter dem Präfix `_content/{LIBRARY NAME}/`verfügbar gemacht. Eine Bibliothek mit dem Namen *Razor. Class. lib* führt z. b. zu einem Pfad zu `_content/Razor.Class.Lib/`statischem Inhalt unter.
 
-Die Consumer-app verweist auf statische Objekte, die von der Bibliothek mit bereitgestellt `<script>`, `<style>`, `<img>`, und andere HTML-Tags. Die Consumer-app benötigen [statische dateiunterstützung](xref:fundamentals/static-files) aktiviert.
+Die verarbeitende App verweist auf statische Ressourcen, die von der `<script>`Bibliothek `<style>`mit `<img>`,, und anderen HTML-Tags bereitgestellt werden. Für die verarbeitende app muss die [Unterstützung statischer Dateien](xref:fundamentals/static-files) aktiviert sein.
 
-### <a name="multi-project-development-flow"></a>Mit mehreren Projekten Entwicklungsablauf
+### <a name="multi-project-development-flow"></a>Entwicklungsfluss für mehrere Projekte
 
-Ausführung der verarbeitende Anwendung:
+Wenn die verarbeitende app ausgeführt wird:
 
-* Die Ressourcen in der RCL behalten die ursprünglichen Ordner. Die Ressourcen werden nicht an die verarbeitende app verschoben werden.
-* Alle Änderungen innerhalb der RCL des *"Wwwroot"* Ordner wird in der verwendeten app, nachdem die RCL neu erstellt wird und ohne Neuerstellung von der verwendeten app wiedergegeben.
+* Die Assets in der RCL bleiben in ihren ursprünglichen Ordnern. Die Assets werden nicht in die Verb raubende App verschoben.
+* Jede Änderung im Ordner " *wwwroot* " der RCL wird in der nutzenden App widergespiegelt, nachdem die RCL neu erstellt wurde und ohne die Verb raubende APP neu zu erstellen.
 
-Wenn die RCL erstellt wird, wird ein Manifest erstellt, die den statischen Asset-Websites zu beschreiben. Die verwendete app liest das Manifest zur Laufzeit, um die Objekte aus referenzierten Projekten und Paketen verwenden. Wenn ein RCL ein neues Asset hinzugefügt wird, muss die RCL neu erstellt werden, um das Manifest zu aktualisieren, bevor eine verarbeitende Anwendung das neue Medienobjekt zugreifen kann.
+Wenn die RCL erstellt wurde, wird ein Manifest erstellt, in dem die statischen webasset-Speicherorte beschrieben werden. Die Verb raubende App liest das Manifest zur Laufzeit, um die Assets aus referenzierten Projekten und Paketen zu nutzen. Wenn einer RCL ein neues Asset hinzugefügt wird, muss die RCL neu erstellt werden, um das Manifest zu aktualisieren, bevor eine verarbeitende App auf das neue Medienobjekt zugreifen kann.
 
 ### <a name="publish"></a>Veröffentlichen
 
-Wenn die app veröffentlicht wird, werden die Begleit-Ressourcen über alle referenzierten Projekten und Paketen in kopiert die *"Wwwroot"* Ordner der veröffentlichten app unter `_content/{LIBRARY NAME}/`.
+Wenn die App veröffentlicht wird, werden die begleitenden Objekte aus allen referenzierten Projekten und Paketen in den Ordner *wwwroot* der veröffentlichten app unter `_content/{LIBRARY NAME}/`kopiert.
 
 ::: moniker-end
