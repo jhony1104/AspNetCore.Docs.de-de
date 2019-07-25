@@ -5,12 +5,12 @@ description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasier
 ms.author: riande
 ms.date: 06/12/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 87c5b97a653c139b8b79f4270e0d9d0081815433
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: 634623aa6df860a2ff728da4e65d277326db37e2
+ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034938"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68440356"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -581,9 +581,6 @@ Die `@attribute`-Anweisung fügt das angegebene Attribut zu der Klasse der gener
 ```cshtml
 @attribute [Authorize]
 ```
-
-> [!WARNING]
-> In der ASP.NET Core 3.0 Preview 6-Version gibt es ein bekanntes Problem, bei dem `@attribute`-Anweisungen in *\_Imports.razor*- und *\_ViewImports.cshtml*-Dateien nicht funktionieren. Dieses Problem wird in der Preview 7-Version behoben.
 
 ### <a name="namespace"></a>@namespace
 
