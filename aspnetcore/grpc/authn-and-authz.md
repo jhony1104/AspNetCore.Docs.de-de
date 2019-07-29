@@ -4,14 +4,14 @@ author: jamesnk
 description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in GrpC für ASP.net Core verwenden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 06/07/2019
+ms.date: 07/26/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 49024295e4db7976924397bb24567d92d6298562
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 34f7f8a5a22159329b3d6c4524943434c460c7fb
+ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308773"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68602422"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in GrpC für ASP.net Core
 
@@ -106,12 +106,25 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ### <a name="other-authentication-mechanisms"></a>Andere Authentifizierungsmechanismen
 
-Zusätzlich zur bearertoken-und Client Zertifikat Authentifizierung sollten alle ASP.net Core unterstützten Authentifizierungsmechanismen wie OAuth, OpenID und Aushandeln mit GrpC funktionieren. Weitere Informationen zum Konfigurieren der Authentifizierung auf Serverseite finden Sie unter [ASP.net Core-Authentifizierung](xref:security/authentication/identity) .
+Viele ASP.net Core unterstützten Authentifizierungsmechanismen funktionieren mit GrpC:
 
-Die Client seitige Konfiguration hängt vom verwendeten Authentifizierungsmechanismus ab. Die vorherigen Beispiele für bearertoken und Client Zertifikat Authentifizierung zeigen verschiedene Möglichkeiten, wie der GrpC-Client zum Senden von Authentifizierungs Metadaten mit GrpC-aufrufen konfiguriert werden kann:
+* Azure Active Directory
+* Clientzertifikat
+* IdentityServer
+* JWT-Token
+* OAuth 2,0
+* OpenID Connect
+* WS-Federation
+
+Weitere Informationen zum Konfigurieren der Authentifizierung auf dem Server finden Sie unter [ASP.net Core-Authentifizierung](xref:security/authentication/identity).
+
+Das Konfigurieren des GrpC-Clients für die Verwendung der Authentifizierung hängt von dem verwendeten Authentifizierungsmechanismus ab. Das vorherige bearertoken und Client Zertifikat Beispiele zeigen verschiedene Möglichkeiten, wie der GrpC-Client zum Senden von Authentifizierungs Metadaten mit GrpC-aufrufen konfiguriert werden kann:
 
 * Stark typisierte GrpC- `HttpClient` Clients verwenden intern. Die [`HttpMessageHandler`](/dotnet/api/system.net.http.httpmessagehandler) [`HttpClientHandler`](/dotnet/api/system.net.http.httpclienthandler) AuthentifizierungkannunteroderdurchHinzufügenvonbenutzerdefiniertenInstanzenzukonfiguriertwerden.`HttpClient`
 * Jeder GrpC-Befehl verfügt über `CallOptions` ein optionales Argument. Benutzerdefinierte Header können mithilfe der Header Auflistung der Option gesendet werden.
+
+> [!NOTE]
+> Die Windows-Authentifizierung (NTLM/Kerberos/Aushandlung) kann nicht mit GrpC verwendet werden. GrpC erfordert http/2, und http/2 unterstützt die Windows-Authentifizierung nicht.
 
 ## <a name="authorize-users-to-access-services-and-service-methods"></a>Autorisieren von Benutzern für den Zugriff auf Dienste und Dienst Methoden
 
