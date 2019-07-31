@@ -3,18 +3,185 @@ title: 'Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core'
 author: rick-anderson
 description: Diese Reihe von Tutorials zeigt, wie Sie Razor Pages in ASP.NET Core verwenden können. Erfahren Sie, wie Sie ein Modell erstellen, Code für Razor-Seiten generieren, Entity Framework Core und SQL Server für den Datenzugriff verwenden, Suchfunktionen hinzufügen, Eingabeüberprüfung hinzufügen und Migrationen verwenden, um das Modell zu aktualisieren.
 ms.author: riande
-ms.date: 06/03/2019
+ms.date: 07/25/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 7e228c99b4d55c14cea9c915cf06a7fbbbd5af44
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 1605197188d97f27a884739a72400da2d5818b1a
+ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67855734"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68371999"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutorial: Erste Schritte mit Razor Pages in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
+
+::: moniker range=">= aspnetcore-3.0"
+Dies ist das erste Tutorial einer Reihe, in der Sie Grundlegendes zur Erstellung einer ASP.NET Core-Webapp mit Razor Pages erfahren.
+
+[!INCLUDE[](~/includes/advancedRP.md)]
+
+Am Ende der Reihe verfügen Sie über eine App, mit der eine Filmdatenbank verwaltet werden kann.  
+
+[!INCLUDE[View or download sample code](~/includes/rp/download.md)]
+
+In diesem Tutorial:
+
+> [!div class="checklist"]
+> * Erstellen einer Razor Pages-Web-App
+> * Führen Sie die App aus.
+> * Überprüfen Sie die Projektdateien.
+
+Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-Web-App, auf der Sie in späteren Tutorials aufbauen werden.
+
+![Start- oder Indexseite](razor-pages-start/_static/home2.2.png)
+
+## <a name="prerequisites"></a>Erforderliche Komponenten
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+
+---
+
+## <a name="create-a-razor-pages-web-app"></a>Erstellen einer Razor Pages-Web-App
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus.
+* Erstellen Sie eine neue ASP.NET Core-Webanwendung, und klicken Sie auf **Weiter**.
+  ![neue ASP.NET Core-Webanwendung](razor-pages-start/_static/np_2.1.png)
+* Nennen Sie das Projekt **RazorPagesMovie**. Es ist wichtig, den Namen *RazorPagesMovie* zu verwenden, damit die Namespaces übereinstimmen, wenn Sie Code kopieren und einfügen.
+  ![neue ASP.NET Core-Webanwendung](razor-pages-start/_static/config.png)
+
+* Klicken Sie in der Dropdownliste auf **ASP.NET Core 3.0**, auf **Webanwendung** und anschließend auf **Erstellen**.
+
+![neue ASP.NET Core-Webanwendung](razor-pages-start/_static/3/npx.png)
+
+  Das folgende Startprojekt wird erstellt:
+
+  ![Projektmappen-Explorer](razor-pages-start/_static/se2.2.png)
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
+
+* Wechseln Sie zum Verzeichnis (`cd`), das das Projekt enthalten soll.
+
+* Führen Sie die folgenden Befehle aus:
+
+  ```console
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
+  ```
+
+  * Der Befehl `dotnet new` erstellt ein neues Razor Pages-Projekt im Ordner *RazorPagesMovie*.
+  * Der Befehl `code` öffnet den Ordner *RazorPagesMovie* in der aktuellen Instanz von Visual Studio Code.
+
+* Wenn das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'RazorPagesMovie'. (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „RazorPagesMovie“ nicht vorhanden. Sollen sie hinzugefügt werden?** Wählen Sie **Ja**.
+
+  Ein *VSCODE*-Verzeichnis, das die Dateien *launch.json* und *tasks.json* enthält, wird dem Stammverzeichnis des Projekts hinzugefügt.
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+Führen Sie über ein Terminal den folgenden Befehl aus:
+
+<!-- TODO: update these instruction once mac support 2.2 projects -->
+
+```console
+dotnet new webapp -o RazorPagesMovie
+```
+
+Diese Befehle verwenden die [.NET Core-CLI](/dotnet/core/tools/dotnet), um ein Razor Pages-Projekt zu erstellen.
+
+## <a name="open-the-project"></a>Öffnen des Projekts
+
+Klicken Sie in Visual Studio auf **Datei > Öffnen**, und wählen Sie dann die Datei *RazorPagesMovie.csproj* aus.
+
+<!-- End of VS tabs -->
+
+---
+
+## <a name="run-the-app"></a>Ausführen der App
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Drücken Sie STRG+F5, um die Ausführung ohne den Debugger zu starten.
+
+  [!INCLUDE[](~/includes/trustCertVS.md)]
+
+  Visual Studio startet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) und führt die App aus. Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer. Wenn in Visual Studio ein Webprojekt erstellt wird, wird für den Webserver ein zufälliger Port verwendet.
+ 
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+  [!INCLUDE[](~/includes/trustCertVSC.md)]
+
+* Drücken Sie **STRG+F5**, um die Ausführung ohne den Debugger zu starten.
+
+  Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`. Die Adressleiste zeigt `localhost:port#` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer.
+
+  
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+  [!INCLUDE[](~/includes/trustCertMac.md)]
+
+* Drücken Sie **CMD+OPT+F5** für eine Ausführung ohne Debugger.
+
+  Visual Studio startet dann [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `http://localhost:5001`.
+
+<!-- End of VS tabs -->
+
+---
+
+## <a name="examine-the-project-files"></a>Überprüfen der Projektdateien
+
+Es folgt eine Übersicht über die Hauptprojektordner und -dateien, mit denen Sie in späteren Tutorials arbeiten werden.
+
+### <a name="pages-folder"></a>Ordner „Seiten“
+
+Enthält Razor-Seiten und unterstützende Dateien. Jede Razor-Seite besteht aus einem Dateienpaar:
+
+* Eine *.cshtml*-Datei, die HTML-Markup mit C#-Code in Razor-Syntax enthält
+* Eine *.cshtml.cs*-Datei mit C# Code, in dem Seitenereignisse verarbeitet werden
+
+Unterstützende Dateien haben Namen, die mit einem Unterstrich beginnen. Zum Beispiel sind in der Datei *_Layout.cshtml* Benutzeroberflächenelemente konfiguriert, die für alle Seiten gelten. Mit dieser Datei werden das Navigationsmenü oben auf der Seite und der Urheberrechtshinweis unten auf der Seite eingerichtet. Weitere Informationen finden Sie unter <xref:mvc/views/layout>.
+
+### <a name="wwwroot-folder"></a>Ordner „wwwroot“
+
+Enthält statische Dateien, z. B. HTML-Dateien, JavaScript-Dateien und CSS-Dateien. Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.
+
+### <a name="appsettingsjson"></a>appsettings.json
+
+Enthält Konfigurationsdaten, z. B. Verbindungszeichenfolgen. Weitere Informationen finden Sie unter <xref:fundamentals/configuration/index>.
+
+### <a name="programcs"></a>Program.cs
+
+Enthält den Einstiegspunkt für das Programm. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host>.
+
+### <a name="startupcs"></a>Startup.cs
+
+Diese Datei enthält Code, mit dem das App-Verhalten konfiguriert wird. Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
+
+## <a name="next-steps"></a>Nächste Schritte
+
+Wechseln Sie zum nächsten Tutorial in der Reihe:
+
+> [!div class="step-by-step"]
+> [Hinzufügen eines Modells](xref:tutorials/razor-pages/model)
+
+::: moniker-end
+
+<!--::: moniker range=">= aspnetcore-3.0" -->
+
+::: moniker range="< aspnetcore-3.0"
 
 Dies ist das erste Tutorial aus einer Reihe. [In der Reihe](xref:tutorials/razor-pages/index) lernen Sie die Grundlagen zum Erstellen einer Razor Pages-Web-App mit ASP.NET Core.
 
@@ -55,7 +222,7 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionsfähige Razor Pages-W
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
+* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus.
 
 * Erstellen Sie eine neue ASP.NET Core-Webanwendung, und klicken Sie auf **Weiter**.
 
@@ -208,14 +375,9 @@ Enthält Code, mit dem das App-Verhalten konfiguriert wird, beispielsweise, ob d
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial:
-
-> [!div class="checklist"]
-> * Haben Sie eine Razor Pages-Web-App erstellt.
-> * Haben Sie die App ausgeführt.
-> * Haben Sie die Projektdateien überprüft.
-
 Wechseln Sie zum nächsten Tutorial in der Reihe:
 
 > [!div class="step-by-step"]
 > [Hinzufügen eines Modells](xref:tutorials/razor-pages/model)
+
+::: moniker-end

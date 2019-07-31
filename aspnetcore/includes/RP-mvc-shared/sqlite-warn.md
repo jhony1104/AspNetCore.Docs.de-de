@@ -4,13 +4,14 @@
 >
 >Die Problemumgehung für die SQLite-Einschränkungen besteht darin, manuell Migrationscode zu schreiben, um das erneute Erstellen einer Tabelle durchzuführen, wenn sich etwas in der Tabelle ändert. Das erneute Erstellen einer Tabelle umfasst die folgenden Aufgaben:
 >
->* Umbenennen der vorhandenen Tabelle.
 >* Erstellen einer neuen Tabelle.
 >* Kopieren von Daten aus der alten Tabelle in die neue Tabelle.
 >* Löschen der alten Tabelle.
+>* Umbenennen der neuen Tabelle.
 >
 >Weitere Informationen finden Sie in den folgenden Ressourcen:
 >
 > * [SQLite EF Core-Datenbank-Anbieter-Einschränkungen](/ef/core/providers/sqlite/limitations)
 > * [Anpassen des Migrationscodes](/ef/core/managing-schemas/migrations/#customize-migration-code)
 > * [Datenseeding](/ef/core/modeling/data-seeding)
+  * [SQLite ALTER TABLE-Anweisung](https://sqlite.org/lang_altertable.html)
