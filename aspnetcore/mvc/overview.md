@@ -3,14 +3,14 @@ title: Übersicht über ASP.NET Core MVC
 author: ardalis
 description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum Erstellen von Web-Apps und APIs mithilfe des Model-View-Controller-Entwurfsmusters
 ms.author: riande
-ms.date: 01/08/2018
+ms.date: 08/01/2019
 uid: mvc/overview
-ms.openlocfilehash: 819bc93a7580626bf586b984b0ce169306df56d9
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 7f09751850cbfa7bb3dc79656d4530445a9767b1
+ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815358"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707809"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -88,11 +88,11 @@ routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id
 [Route("api/[controller]")]
 public class ProductsController : Controller
 {
-  [HttpGet("{id}")]
-  public IActionResult GetProduct(int id)
-  {
-    ...
-  }
+    [HttpGet("{id}")]
+    public IActionResult GetProduct(int id)
+    {
+      ...
+    }
 }
 ```
 
@@ -102,7 +102,7 @@ Die [Modellbindung](models/model-binding.md) von ASP.NET Core MVC konvertiert Cl
 
 ```csharp
 public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null) { ... }
-   ```
+```
 
 ### <a name="model-validation"></a>Modellvalidierung
 
@@ -149,6 +149,7 @@ Mit der `@inject`-Anweisung kann Ihre App [Dependency Injection auch in Ansichts
 
 ```cshtml
 @inject SomeService ServiceName
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,11 +190,11 @@ Durch die Verwendung von Schnittstellen und der Abhängigkeitsinjektion eignet s
 
 [ASP.NET Core MVC-Ansichten](views/overview.md) verwenden zum Rendern von Ansichten die [Razor-Ansichtsengine](views/razor.md). Razor ist eine komprimierte, ausdrucksstarke und fließende Vorlagenmarkupsprache zum Definieren von Ansichten mithilfe von eingebettetem C#-Code. Razor wird verwendet, um Webinhalte auf dem Server dynamisch zu generieren. Sie können Servercode sauber mit Inhalt und Code der Clientseite kombinieren.
 
-```text
+```cshtml
 <ul>
-  @for (int i = 0; i < 5; i++) {
-    <li>List item @i</li>
-  }
+    @for (int i = 0; i < 5; i++) {
+        <li>List item @i</li>
+    }
 </ul>
 ```
 
