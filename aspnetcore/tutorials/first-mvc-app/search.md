@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Suche zu einer einfachen ASP.NET 
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: fbec03d71e247c58fb5968290c4baf6b28120e1c
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: ed6c7a095143670b7d06e43db3a428dec9bf97ad
+ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815069"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707842"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Suche zu einer ASP.NET Core MVC-App
 
@@ -18,7 +18,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 In diesem Abschnitt fügen Sie die Suchfunktion zur Aktionsmethode `Index` hinzu, mit der Sie Filme nach *Genre* oder *Name* suchen können.
 
-Aktualisieren Sie die `Index`-Methode mit folgendem Code:
+Aktualisieren Sie die `Index`-Methode in *Controllers/MoviesController.cs* mit folgendem Code:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippet_1stSearch)]
 
@@ -91,7 +91,7 @@ Doch selbst wenn Sie diese `[HttpPost]`-Version der `Index`-Methode hinzufügen,
 
 Sie können den Suchparameter und das [XSRF](xref:security/anti-request-forgery)-Token im Anforderungstext erkennen. Wie im vorherigen Tutorial erwähnt, generiert das [Hilfsprogramm für Formulartags](xref:mvc/views/working-with-forms) ein [XSRF](xref:security/anti-request-forgery)-Fälschungssicherheitstoken. Da wir keine Daten ändern, müssen wir nicht das Token in der Controllermethode validieren.
 
-Da sich der Suchparameter im Anforderungstext und nicht in der URL befindet, können Sie diese Suchinformationen nicht als Favorit speichern oder mit anderen teilen. Beheben Sie dies, indem Sie die Anforderung als `HTTP GET` angeben:
+Da sich der Suchparameter im Anforderungstext und nicht in der URL befindet, können Sie diese Suchinformationen nicht als Favorit speichern oder mit anderen teilen. Beheben Sie dieses Problem, indem Sie angeben, dass eine `HTTP GET`-Anforderung verwendet werden soll, die sich in der Datei *Views/Movies/Index.cshtml* befindet.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
@@ -132,7 +132,7 @@ Wenn der Benutzer nach dem Element sucht, wird der Wert für die Suche im Suchfe
 
 ## <a name="add-search-by-genre-to-the-index-view"></a>Hinzufügen der Suche nach Genre zur Indexansicht
 
-Aktualisieren Sie `Index.cshtml` wie folgt:
+Aktualisieren Sie `Index.cshtml` in *Views/Movies/* folgendermaßen:
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 
