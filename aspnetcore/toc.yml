@@ -1009,6 +1009,8 @@
       uid: fundamentals/localization
     - name: Lokalisierung portabler Objekte
       uid: fundamentals/portable-object-localization
+    - name: Erweiterungen
+      uid: fundamentals/localization-extensibility
     - name: Problembehandlung
       uid: fundamentals/troubleshoot-aspnet-core-localization
 - name: Erweitert
