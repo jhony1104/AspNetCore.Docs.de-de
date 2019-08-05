@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 222ae1d6212b838e5c70f831960fa23a9924a0ae
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 4b94cc53777308deb26521a079d8a1c2742744db
+ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856138"
+ms.lasthandoff: 08/04/2019
+ms.locfileid: "68776746"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>Erstellen einer ASP.NET Core-app mit Benutzerdaten, die durch Autorisierung geschützt sind
 
@@ -37,13 +37,13 @@ In diesem Tutorial veranschaulicht das Erstellen einer ASP.NET Core-Web-Apps mit
 * **Manager** genehmigen oder ablehnen von Kontaktdaten können. Nur genehmigte Kontakte für Benutzer sichtbar sind.
 * **Administratoren** können genehmigen/ablehnen und alle Daten bearbeiten und löschen.
 
-Die Bilder in diesem Dokument übereinstimmen nicht die neuesten Vorlagen genau.
+Die Bilder in diesem Dokument Stimmen exakt nicht mit den neuesten Vorlagen überein.
 
 In der folgenden Abbildung wird der Benutzer Rick (`rick@example.com`) angemeldet ist. Rick kann nur genehmigte Kontakte anzeigen und **bearbeiten**/**löschen**/**neu erstellen** Links, um seine Kontakte. Nur der letzte Datensatz erstellt, von Rick, zeigt **bearbeiten** und **löschen** Links. Andere Benutzer werden der letzte Eintrag nicht angezeigt, bis Manager oder Administratoren den Status "Genehmigt" annimmt.
 
 ![Screenshot der Rick angemeldet](secure-data/_static/rick.png)
 
-In der folgenden Abbildung `manager@contoso.com` in und der Manager Rolle angemeldet ist:
+In der folgenden Abbildung `manager@contoso.com` ist angemeldet und in der Rolle des Vorgesetzten:
 
 ![Screenshot mit manager@contoso.com angemeldet](secure-data/_static/manager1.png)
 
@@ -53,7 +53,7 @@ Die folgende Abbildung zeigt die Manager Detailansicht eines Kontakts an:
 
 Die **genehmigen** und **ablehnen** Schaltflächen sind nur für Manager und Administratoren angezeigt.
 
-In der folgenden Abbildung `admin@contoso.com` in und der Administrator-Rolle angemeldet ist:
+In der folgenden Abbildung `admin@contoso.com` ist angemeldet und in der Rolle des Administrators:
 
 ![Screenshot mit admin@contoso.com angemeldet](secure-data/_static/admin.png)
 
@@ -65,9 +65,9 @@ Die app wurde erstellt, indem [Gerüstbau](xref:tutorials/first-mvc-app/adding-m
 
 Das Beispiel enthält die folgenden Handler für die Autorisierung:
 
-* `ContactIsOwnerAuthorizationHandler`: Stellt sicher, dass ein Benutzer nur ihre Daten bearbeiten kann.
-* `ContactManagerAuthorizationHandler`: Zum Genehmigen oder ablehnen von Kontakten können.
-* `ContactAdministratorsAuthorizationHandler`: Ermöglicht es Administratoren, die zum Genehmigen oder ablehnen von Kontakten und zu bearbeiten und Löschen von Kontakten.
+* `ContactIsOwnerAuthorizationHandler`: Stellt sicher, dass ein Benutzer nur die Daten bearbeiten kann.
+* `ContactManagerAuthorizationHandler`: Ermöglicht Managern das genehmigen oder ablehnen von Kontakten.
+* `ContactAdministratorsAuthorizationHandler`: Ermöglicht Administratoren das genehmigen oder ablehnen von Kontakten sowie das Bearbeiten/Löschen von Kontakten.
 
 ## <a name="prerequisites"></a>Vorraussetzungen
 
@@ -122,7 +122,7 @@ Legen Sie die Standardrichtlinie für die Authentifizierung der Benutzer authent
 
  Sie können die Authentifizierung auf der Ebene der Razor Page, Controller und Aktion mit Deaktivieren der `[AllowAnonymous]` Attribut. Einstellung die Standardrichtlinie für die Authentifizierung der Benutzer authentifiziert werden müssen schützt das neu hinzugefügte Razor-Seiten und Controller. Mit der Authentifizierung erforderlich, die in der Standardeinstellung sicherer ist als die auf neue Domänencontroller und Razor-Seiten enthalten die `[Authorize]` Attribut.
 
-Hinzufügen ["AllowAnonymous"](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) zu den Seiten Index und Datenschutz, damit anonyme Benutzer Informationen über die Website nutzen können, bevor sie sich registriert haben.
+Fügen Sie die [Zuordnung](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) zu den Index-und datenschutzseiten hinzu, damit anonyme Benutzer vor der Registrierung Informationen über die Website erhalten können.
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -159,7 +159,7 @@ Erstellen Sie eine `ContactIsOwnerAuthorizationHandler` -Klasse in der *Autorisi
 Die `ContactIsOwnerAuthorizationHandler` Aufrufe [Kontext. Erfolgreiche](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) ist der aktuelle authentifizierte Benutzer der Besitzer des Kontakts. Autorisierung Handler in der Regel:
 
 * Zurückgeben `context.Succeed` Wenn die Anforderungen erfüllt sind.
-* Zurückgeben `Task.CompletedTask` Wenn sind nicht erfüllt. `Task.CompletedTask` ist kein Erfolg oder Misserfolg&mdash;dadurch, dass andere Handler Autorisierung ausgeführt.
+* Zurückgeben `Task.CompletedTask` Wenn sind nicht erfüllt. `Task.CompletedTask`ist nicht erfolgreich oder Fehler&mdash;Haft, sodass andere Autorisierungs Handler ausgeführt werden können.
 
 Wenn Sie explizit ausführen müssen, zurückgeben [Kontext. Fehler](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
@@ -242,7 +242,7 @@ Aktualisieren Sie das Seitenmodell "löschen" um den autorisierungshandler für 
 
 Derzeit wird die Benutzeroberfläche zeigt bearbeiten und Löschen von Verknüpfungen für Kontakte, die der Benutzer nicht ändern kann.
 
-Einfügen des autorisierungsdiensts in die *Pages/_viewimports.cshtml* Datei, sodass sie für alle Ansichten verfügbar ist:
+Fügen Sie den Autorisierungs Dienst in die Datei *pages/_ViewImports. cshtml* ein, damit er für alle Ansichten verfügbar ist:
 
 [!code-cshtml[](secure-data/samples/final3/Pages/_ViewImports.cshtml?highlight=6-99)]
 
@@ -269,14 +269,14 @@ Aktualisieren Sie das Seitenmodell Details an:
 
 Finden Sie unter [dieses Problem](https://github.com/aspnet/AspNetCore.Docs/issues/8502) Informationen auf:
 
-* Entfernen Berechtigungen eines Benutzers ein. Stummschaltung z. B. einen Benutzer in einem Chat-app ein.
+* Entfernen Berechtigungen eines Benutzers ein. Beispielsweise das stumm Schaltung eines Benutzers in einer Chat-app.
 * Hinzufügen von Berechtigungen für einen Benutzer aus.
 
 ## <a name="test-the-completed-app"></a>Testen Sie die fertige app
 
 Wenn Sie ein Kennwort für die per Seeding hinzugefügten Benutzerkonten bereits festgelegt haben, verwenden Sie die [Secret Manager-Tool](xref:security/app-secrets#secret-manager) zum Festlegen eines Kennworts:
 
-* Wählen Sie ein sicheres Kennwort ein: Verwenden acht oder mehr Zeichen und mindestens einen Großbuchstaben, Zahl und symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
+* Wählen Sie ein sicheres Kennwort: Verwenden Sie acht oder mehr Zeichen und mindestens ein Großbuchstabe, eine Zahl und ein Symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
 * Führen Sie den folgenden Befehl aus dem Ordner des Projekts, in denen `<PW>` ist das Kennwort:
 
   ```console
@@ -314,7 +314,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* Hinzufügen *Models/Contact.cs*:
+* *Modelle/Contact. cs*hinzufügen:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -330,9 +330,9 @@ dotnet ef migrations add initial
 dotnet ef database update
   ```
 
-Wenn Sie einen Fehler bei Auftreten der `dotnet aspnet-codegenerator razorpage` Befehl, finden Sie unter [GitHub-Problem](https://github.com/aspnet/Scaffolding/issues/984).
+Wenn Sie einen Fehler mit dem `dotnet aspnet-codegenerator razorpage` Befehl haben, finden Sie weitere Informationen in [diesem GitHub-Problem](https://github.com/aspnet/Scaffolding/issues/984).
 
-* Update der **ContactManager** verankert werden der *Pages/Shared/_Layout.cshtml* Datei:
+* Aktualisieren Sie den **ContactManager** -Anker in der Datei *pages/Shared/_Layout. cshtml* :
 
  ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Contacts/Index">ContactManager</a>
@@ -342,7 +342,7 @@ Wenn Sie einen Fehler bei Auftreten der `dotnet aspnet-codegenerator razorpage` 
 
 ### <a name="seed-the-database"></a>Ausführen eines Seedings für die Datenbank
 
-Hinzufügen der [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) -Klasse auf die *Daten* Ordner:
+Fügen Sie dem *Daten* Ordner die [seeddata](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) -Klasse hinzu:
 
 [!code-csharp[](secure-data/samples/starter3/Data/SeedData.cs)]
 
@@ -366,7 +366,7 @@ In der folgenden Abbildung wird der Benutzer Rick (`rick@example.com`) angemelde
 
 ![Screenshot der Rick angemeldet](secure-data/_static/rick.png)
 
-In der folgenden Abbildung `manager@contoso.com` in und der Manager Rolle angemeldet ist:
+In der folgenden Abbildung `manager@contoso.com` ist angemeldet und in der Rolle des Vorgesetzten:
 
 ![Screenshot mit manager@contoso.com angemeldet](secure-data/_static/manager1.png)
 
@@ -376,7 +376,7 @@ Die folgende Abbildung zeigt die Manager Detailansicht eines Kontakts an:
 
 Die **genehmigen** und **ablehnen** Schaltflächen sind nur für Manager und Administratoren angezeigt.
 
-In der folgenden Abbildung `admin@contoso.com` in und der Administrator-Rolle angemeldet ist:
+In der folgenden Abbildung `admin@contoso.com` ist angemeldet und in der Rolle des Administrators:
 
 ![Screenshot mit admin@contoso.com angemeldet](secure-data/_static/admin.png)
 
@@ -388,11 +388,11 @@ Die app wurde erstellt, indem [Gerüstbau](xref:tutorials/first-mvc-app/adding-m
 
 Das Beispiel enthält die folgenden Handler für die Autorisierung:
 
-* `ContactIsOwnerAuthorizationHandler`: Stellt sicher, dass ein Benutzer nur ihre Daten bearbeiten kann.
-* `ContactManagerAuthorizationHandler`: Zum Genehmigen oder ablehnen von Kontakten können.
-* `ContactAdministratorsAuthorizationHandler`: Ermöglicht es Administratoren, die zum Genehmigen oder ablehnen von Kontakten und zu bearbeiten und Löschen von Kontakten.
+* `ContactIsOwnerAuthorizationHandler`: Stellt sicher, dass ein Benutzer nur die Daten bearbeiten kann.
+* `ContactManagerAuthorizationHandler`: Ermöglicht Managern das genehmigen oder ablehnen von Kontakten.
+* `ContactAdministratorsAuthorizationHandler`: Ermöglicht Administratoren das genehmigen oder ablehnen von Kontakten sowie das Bearbeiten/Löschen von Kontakten.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Vorraussetzungen
 
 In diesem Tutorial wird verschoben. Sie sollten mit vertraut sein:
 
@@ -482,7 +482,7 @@ Erstellen Sie eine `ContactIsOwnerAuthorizationHandler` -Klasse in der *Autorisi
 Die `ContactIsOwnerAuthorizationHandler` Aufrufe [Kontext. Erfolgreiche](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) ist der aktuelle authentifizierte Benutzer der Besitzer des Kontakts. Autorisierung Handler in der Regel:
 
 * Zurückgeben `context.Succeed` Wenn die Anforderungen erfüllt sind.
-* Zurückgeben `Task.CompletedTask` Wenn sind nicht erfüllt. `Task.CompletedTask` ist kein Erfolg oder Misserfolg&mdash;dadurch, dass andere Handler Autorisierung ausgeführt.
+* Zurückgeben `Task.CompletedTask` Wenn sind nicht erfüllt. `Task.CompletedTask`ist nicht erfolgreich oder Fehler&mdash;Haft, sodass andere Autorisierungs Handler ausgeführt werden können.
 
 Wenn Sie explizit ausführen müssen, zurückgeben [Kontext. Fehler](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
@@ -592,14 +592,14 @@ Aktualisieren Sie das Seitenmodell Details an:
 
 Finden Sie unter [dieses Problem](https://github.com/aspnet/AspNetCore.Docs/issues/8502) Informationen auf:
 
-* Entfernen Berechtigungen eines Benutzers ein. Stummschaltung z. B. einen Benutzer in einem Chat-app ein.
+* Entfernen Berechtigungen eines Benutzers ein. Beispielsweise das stumm Schaltung eines Benutzers in einer Chat-app.
 * Hinzufügen von Berechtigungen für einen Benutzer aus.
 
 ## <a name="test-the-completed-app"></a>Testen Sie die fertige app
 
 Wenn Sie ein Kennwort für die per Seeding hinzugefügten Benutzerkonten bereits festgelegt haben, verwenden Sie die [Secret Manager-Tool](xref:security/app-secrets#secret-manager) zum Festlegen eines Kennworts:
 
-* Wählen Sie ein sicheres Kennwort ein: Verwenden acht oder mehr Zeichen und mindestens einen Großbuchstaben, Zahl und symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
+* Wählen Sie ein sicheres Kennwort: Verwenden Sie acht oder mehr Zeichen und mindestens ein Großbuchstabe, eine Zahl und ein Symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
 * Führen Sie den folgenden Befehl aus dem Ordner des Projekts, in denen `<PW>` ist das Kennwort:
 
   ```console
@@ -607,10 +607,11 @@ Wenn Sie ein Kennwort für die per Seeding hinzugefügten Benutzerkonten bereits
   ```
 
 * Löschen und Aktualisieren der Datenbank
+
     ```console
      dotnet ef database drop -f
      dotnet ef database update  
-```
+     ```
 
 * Starten Sie die app zum Seeding der Datenbank neu.
 
@@ -640,7 +641,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* Hinzufügen *Models/Contact.cs*:
+* *Modelle/Contact. cs*hinzufügen:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
