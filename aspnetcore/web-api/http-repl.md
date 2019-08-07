@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie das globale .NET Core-Tool HTTP REPL ver
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/23/2019
+ms.date: 07/25/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 1ceda6182c62bb1be06cd95f14e6a46a1809253e
-ms.sourcegitcommit: 059ab380744fa3be3b69aa90d431b563c57092cf
+ms.openlocfilehash: e719d599545810d723840b0800cd6a2b4f96b123
+ms.sourcegitcommit: fbc66827e319d28bebed678ea5fd42f582fe3c34
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68410887"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68493573"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -20,8 +20,9 @@ Von [Scott Addie](https://twitter.com/Scott_Addie)
 
 HTTP REPL (read–eval–print-Loop):
 
-* Ein schlankes, plattformübergreifendes Befehlszeilentool, das überall unterstützt wird, wo .NET Core unterstützt wird
-* Wird zum Senden von HTTP-Anforderungen zum Testen von ASP.NET Core-Web-APIs und zum Überprüfen von deren Ergebnissen verwendet
+* ein schlankes, plattformübergreifendes Befehlszeilentool, das überall unterstützt wird, wo .NET Core unterstützt wird
+* wird zum Senden von HTTP-Anforderungen verwendet, mit denen ASP.NET Core-Web-APIs (und andere APIs) getestet werden können, und zum Überprüfen von deren Ergebnissen
+* kann zum Testen von Web-APIs verwendet werden, die in beliebigen Umgebungen gehostet werden (einschließlich Localhost und Azure App Service)
 
 Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) werden unterstützt:
 
@@ -44,7 +45,7 @@ Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Gu
 Führen Sie den folgenden Befehl aus, um HTTP REPL zu installieren:
 
 ```console
-dotnet tool install -g Microsoft.dotnet-httprepl --version 3.0.0-*
+dotnet tool install -g Microsoft.dotnet-httprepl --version "3.0.0-*"
 ```
 
 Ein [globales .NET Core-Tool](/dotnet/core/tools/global-tools#install-a-global-tool) wird über das NuGet-Paket [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) installiert.

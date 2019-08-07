@@ -6,18 +6,18 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: c96362f320efd84c35dc07294a2968a2c687ee94
-ms.sourcegitcommit: b9e914ef274b5ec359582f299724af6234dce135
+ms.openlocfilehash: c2c815735ad1b4dcec761b26ea3992a4effebe62
+ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/05/2019
-ms.locfileid: "67596136"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68682689"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`dotnet aspnet-codegenerator`: Führt die ASP.NET Core-Gerüstbauengine aus. `dotnet aspnet-codegenerator` wird nur für den Gerüstbau von der Befehlszeile aus benötigt, nicht zum Gerüstbau mit Visual Studio.
+`dotnet aspnet-codegenerator`: Führt die ASP.NET Core-Gerüstbauengine aus. `dotnet aspnet-codegenerator` wird nur für den Gerüstbau über die Befehlszeile benötigt, nicht zum Gerüstbau mit Visual Studio.
 
 Dieser Artikel gilt für [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) und höher.
 
@@ -55,7 +55,7 @@ Der auszuführende Codegenerator. Folgende Generatoren sind verfügbar:
 | Generator | Vorgang |
 | ----------------- | ------------ | 
 | area      | [Gerüstbau für einen Bereich](/aspnet/core/mvc/controllers/areas) |
-  controller| [Gerüstbau für einen Controller](/aspnet/core/tutorials/first-mvc-app/adding-model) |
+  Controller| [Gerüstbau für einen Controller](/aspnet/core/tutorials/first-mvc-app/adding-model) |
   identity  | [Gerüstbau für eine Identität](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Gerüstbau für Razor Pages](/aspnet/core/tutorials/razor-pages/model) |
   view      | [Gerüstbau für eine Ansicht](/aspnet/core/mvc/views/overview) |
@@ -68,11 +68,11 @@ Gibt das NuGet-Paketverzeichnis an.
 
 `-c|--configuration {Debug|Release}`
 
-Legt die Buildkonfiguration fest. Standardwert: `Debug`.
+Legt die Buildkonfiguration fest. Der Standardwert ist `Debug`sein.
 
 `-tfm|--target-framework`
 
-Das zu verwendende [Zielframework](/dotnet/standard/frameworks). Beispiel: `net46`.
+Das zu verwendende [Zielframework](/dotnet/standard/frameworks). Beispielsweise `net46`.
 
 `-b|--build-base-path`
 
@@ -96,9 +96,9 @@ In den folgenden Abschnitte werden die verfügbaren Optionen für die unterstüt
 
 * Bereich
 * Controller
-* Identity  
+* Identität  
 * Razor Pages
-* Sicht
+* Ansicht
 
 <a name="area"></a>
 
@@ -113,7 +113,7 @@ Der oben gezeigte Befehl generiert die folgenden Ordner:
 * *Bereiche*
   * *AreaNameToGenerate*
     * *Controller*
-    * *Daten*
+    * *Data*
     * *Models*
     * *Ansichten*
 
@@ -190,6 +190,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 Unter [Erstellen des Gerüsts für das Filmmodell](/aspnet/core/tutorials/razor-pages/model) finden Sie ein Beispiel für `dotnet aspnet-codegenerator razorpage`.
 
-### <a name="identity"></a>Identity
+### <a name="identity"></a>Identität
 
 Siehe [Gerüst für Identität](/aspnet/core/security/authentication/scaffold-identity)
