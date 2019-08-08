@@ -3,14 +3,14 @@ title: Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 author: rick-anderson
 description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
-ms.date: 03/04/2017
+ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: b6a3b1e673b8b67530b82c7d850e810a6c11e555
-ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
+ms.openlocfilehash: 1c29b59f9306774316ff37eeb57cc441fe5c7370
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/01/2019
-ms.locfileid: "68707864"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68820083"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -66,7 +66,7 @@ Fügen Sie die Ansicht `Index` für `HelloWorldController` hinzu.
   * Geben Sie *Index.cshtml* in das Feld **Name** ein.
   * Wählen Sie **Neu** aus.
 
-![Dialogfeld „Neues Element hinzufügen“](adding-view/_static/add_view.png)
+![Dialogfeld „Neues Element hinzufügen“](adding-view/_static/add_view_mac.png)
 
 ---
 
@@ -74,7 +74,7 @@ Ersetzen Sie den Inhalt der Razor-Ansichtsdatei *Views/HelloWorld/Index.cshtml* 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
+Navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
 
 ![Browserfenster](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -127,7 +127,7 @@ Der Titel und das `<h2>`-Element sind geringfügig anders, sodass Sie sehen kön
 <title>@ViewData["Title"] - Movie App</title>
    ```
 
-Speichern Sie die Änderung, und navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Sie sehen, dass sich der Browsertitel, die primäre Überschrift und die sekundären Überschriften geändert haben. (Wenn die Änderungen nicht im Browser angezeigt werden, zeigen Sie ggf. zwischengespeicherten Inhalt an. Drücken Sie in Ihrem Browser STRG+F5, um das Laden der Antwort vom Server zu erzwingen.) Der Titel des Browsers wird mithilfe des Elements `ViewData["Title"]` erstellt, das wir in der Ansichtsvorlange *Index.cshtml* festgelegt haben, und des zusätzlichen Elements „- Movie App“, das in der Layoutdatei hinzugefügt wurde.
+Speichern Sie die Änderung, und navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Sie sehen, dass sich der Browsertitel, die primäre Überschrift und die sekundären Überschriften geändert haben. (Wenn die Änderungen nicht im Browser angezeigt werden, zeigen Sie ggf. zwischengespeicherten Inhalt an. Drücken Sie in Ihrem Browser STRG+F5, um das Laden der Antwort vom Server zu erzwingen.) Der Titel des Browsers wird mithilfe des Elements `ViewData["Title"]` erstellt, das wir in der Ansichtsvorlange *Index.cshtml* festgelegt haben, und des zusätzlichen Elements „- Movie App“, das in der Layoutdatei hinzugefügt wurde.
 
 Der Inhalt der Ansichtsvorlage *Index.cshtml* wird mit dem der Ansichtsvorlage *Views/Shared/_Layout.cshtml* zusammengeführt. Eine einzelne HTML-Antwort wird an den Browser gesendet. Layoutvorlagen erleichtern es Ihnen, Änderungen an allen Seiten einer App vorzunehmen. Weitere Informationen finden Sie unter [Layout](xref:mvc/views/layout).
 
@@ -157,7 +157,7 @@ Erstellen Sie eine Schleife in der Ansichtsvorlage *Welcome.cshtml*, die „Hell
 
 Speichern Sie die Änderungen, und navigieren Sie zur folgenden URL:
 
-`https://localhost:xxxx/HelloWorld/Welcome?name=Rick&numtimes=4`
+`https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
 Daten werden der URL entnommen und mithilfe der [MVC-Modellbindung](xref:mvc/models/model-binding) an den Controller übergeben. Der Controller packt die Daten in einem `ViewData`-Wörterbuch und übergibt das Objekt an die Ansicht. Die Ansicht rendert dann die Daten im HTML-Format im Browser.
 
@@ -231,7 +231,7 @@ Ersetzen Sie den Inhalt der Razor-Ansichtsdatei *Views/HelloWorld/Index.cshtml* 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
+Navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
 
 ![Browserfenster](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -287,7 +287,7 @@ Der Titel und das `<h2>`-Element sind geringfügig anders, sodass Sie sehen kön
 <title>@ViewData["Title"] - Movie App</title>
    ```
 
-Speichern Sie die Änderung, und navigieren Sie zu `https://localhost:xxxx/HelloWorld`. Sie sehen, dass sich der Browsertitel, die primäre Überschrift und die sekundären Überschriften geändert haben. (Wenn die Änderungen nicht im Browser angezeigt werden, zeigen Sie ggf. zwischengespeicherten Inhalt an. Drücken Sie in Ihrem Browser STRG+F5, um das Laden der Antwort vom Server zu erzwingen.) Der Titel des Browsers wird mithilfe des Elements `ViewData["Title"]` erstellt, das wir in der Ansichtsvorlange *Index.cshtml* festgelegt haben, und des zusätzlichen Elements „- Movie App“, das in der Layoutdatei hinzugefügt wurde.
+Speichern Sie die Änderung, und navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Sie sehen, dass sich der Browsertitel, die primäre Überschrift und die sekundären Überschriften geändert haben. (Wenn die Änderungen nicht im Browser angezeigt werden, zeigen Sie ggf. zwischengespeicherten Inhalt an. Drücken Sie in Ihrem Browser STRG+F5, um das Laden der Antwort vom Server zu erzwingen.) Der Titel des Browsers wird mithilfe des Elements `ViewData["Title"]` erstellt, das wir in der Ansichtsvorlange *Index.cshtml* festgelegt haben, und des zusätzlichen Elements „- Movie App“, das in der Layoutdatei hinzugefügt wurde.
 
 Beachten Sie außerdem, wie der Inhalt der Ansichtsvorlage *Index.cshtml* mit der Ansichtsvorlage *Views/Shared/_Layout.cshtml* zusammengeführt und eine einzelne HTML-Antwort an den Browser gesendet wurde. Layoutvorlagen erleichtern ungemein das Vornehmen von Änderungen an allen Seiten in Ihrer Anwendung. Weitere Informationen dazu finden Sie unter [Layout](xref:mvc/views/layout).
 
@@ -317,7 +317,7 @@ Erstellen Sie eine Schleife in der Ansichtsvorlage *Welcome.cshtml*, die „Hell
 
 Speichern Sie die Änderungen, und navigieren Sie zur folgenden URL:
 
-`https://localhost:xxxx/HelloWorld/Welcome?name=Rick&numtimes=4`
+`https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
 Daten werden der URL entnommen und mithilfe der [MVC-Modellbindung](xref:mvc/models/model-binding) an den Controller übergeben. Der Controller packt die Daten in einem `ViewData`-Wörterbuch und übergibt das Objekt an die Ansicht. Die Ansicht rendert dann die Daten im HTML-Format im Browser.
 
