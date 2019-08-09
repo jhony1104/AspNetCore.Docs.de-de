@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/03/2019
 uid: grpc/basics
-ms.openlocfilehash: 700fe9463317f9ee30dfe4ebf5201c7b9c0c5ad6
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: b236fe6914cf7b780a9d02398ec9c92660dc1063
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412470"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862857"
 ---
 # <a name="grpc-services-with-c"></a>GrpC-Dienste mit C\#
 
@@ -52,9 +52,9 @@ Dieses Paket ist für die Server-und Client Projekte erforderlich. Das `Grpc.Asp
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=12)]
 
-Auf Client Projekte sollte `Grpc.Tools` direkt verwiesen werden. Das Toolpaket ist zur Laufzeit nicht erforderlich, sodass die Abhängigkeit mit `PrivateAssets="All"`markiert ist:
+Client Projekte sollten direkt neben `Grpc.Tools` den anderen Paketen verweisen, die für die Verwendung des GrpC-Clients erforderlich sind. Das Toolpaket ist zur Laufzeit nicht erforderlich, sodass die Abhängigkeit mit `PrivateAssets="All"`markiert ist:
 
-[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/GrpcGreeterClient.csproj?highlight=1&range=11)]
+[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/GrpcGreeterClient.csproj?highlight=3&range=9-11)]
 
 ## <a name="generated-c-assets"></a>Generierte C# Assets
 
@@ -64,7 +64,7 @@ Bei serverseitigen Assets wird ein abstrakter Dienst Basistyp generiert. Der Bas
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Services/GreeterService.cs?name=snippet)]
 
-Bei Client seitigen Assets wird ein konkreter Clienttyp generiert. Die GrpC-Aufrufe in der *. proto* -Datei werden in Methoden für den konkreten Typ übersetzt, der aufgerufen werden kann. Für das `greet.proto`, das zuvor beschriebene Beispiel, wird ein `GreeterClient` konkreter Typ generiert. Ruft `GreeterClient.SayHello` auf, um einen GrpC-Rückruf an den Server zu initiieren.
+Bei Client seitigen Assets wird ein konkreter Clienttyp generiert. Die GrpC-Aufrufe in der *. proto* -Datei werden in Methoden für den konkreten Typ übersetzt, der aufgerufen werden kann. Für das `greet.proto`, das zuvor beschriebene Beispiel, wird ein `GreeterClient` konkreter Typ generiert. Ruft `GreeterClient.SayHelloAsync` auf, um einen GrpC-Rückruf an den Server zu initiieren.
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?highlight=3-6&name=snippet)]
 

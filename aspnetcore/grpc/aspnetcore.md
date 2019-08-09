@@ -4,14 +4,14 @@ author: juntaoluo
 description: Lernen Sie die grundlegenden Konzepte kennen, wenn Sie GrpC-Dienste mit ASP.net Core schreiben.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 07/03/2019
+ms.date: 08/07/2019
 uid: grpc/aspnetcore
-ms.openlocfilehash: 02e443dfecf2f7464a8ecabfc0cac67854d63232
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: 26f0d7610151460967b97665ed61deab1ef56d68
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412489"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862939"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>gRPC-Dienste mit ASP.NET Core
 
@@ -87,6 +87,45 @@ Die GrpC-API ermöglicht den Zugriff auf einige http/2-Nachrichten Daten, wie z.
 `ServerCallContext`bietet keinen Vollzugriff auf `HttpContext` in allen ASP.NET-APIs. Die `GetHttpContext` Erweiterungsmethode bietet vollen Zugriff auf das `HttpContext` , das die zugrunde liegende http/2-Nachricht in ASP.NET-APIs darstellt:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService2.cs?highlight=6-7&name=snippet)]
+
+## <a name="grpc-and-aspnet-core-on-macos"></a>GrpC und ASP.net Core unter macOS
+
+Kestrel unterstützt HTTP/2 mit [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246) unter macOS nicht. Die ASP.net Core GrpC-Vorlage und-Beispiele verwenden standardmäßig TLS. Wenn Sie versuchen, den GrpC-Server zu starten, wird die folgende Fehlermeldung angezeigt:
+
+> Bindung https://localhost:5001 an an der IPv4-Loopback Schnittstelle nicht möglich: HTTP/2 über TLS wird unter macOS aufgrund fehlender alpn-Unterstützung nicht unterstützt.
+
+Um dieses Problem zu umgehen, konfigurieren Sie Kestrel und den GrpC-Client für die Verwendung von http/2 **ohne** TLS. Dies sollte nur während der Entwicklung durchzuführen sein. Die Verwendung von TLS führt dazu, dass GrpC-Nachrichten ohne Verschlüsselung gesendet werden.
+
+Kestrel muss einen http/2-Endpunkt ohne TLS in `Program.cs`konfigurieren:
+
+```csharp
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.ConfigureKestrel(options =>
+            {
+                // Setup a HTTP/2 endpoint without TLS.
+                options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2);
+            });
+            webBuilder.UseStartup<Startup>();
+        });
+```
+
+Der GrpC-Client muss den `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` Switch auf `true` festlegen und `http` in der Server Adresse verwenden:
+
+```csharp
+// This switch must be set before creating the HttpClient.
+AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
+var httpClient = new HttpClient();
+// The port number(5000) must match the port of the gRPC server.
+httpClient.BaseAddress = new Uri("http://localhost:5000");
+var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+```
+
+> [!WARNING]
+> HTTP/2 ohne TLS sollte nur während der APP-Entwicklung verwendet werden. Produktionsanwendungen sollten immer Transportsicherheit verwenden. Weitere Informationen finden Sie unter [Sicherheitsüberlegungen in GrpC für ASP.net Core](xref:grpc/security#transport-security).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
