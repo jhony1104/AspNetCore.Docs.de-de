@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Konventionen für Routen- und App-Modellanbieter 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/07/2019
+ms.date: 08/08/2019
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 59c8af648b50deb51f3762c14348d08acd48886e
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: c93f169c422d260f738faba4812861521f383e51
+ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724448"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68914975"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor-Seiten: Routen- und App-Konventionen in ASP.NET Core
 
@@ -22,9 +22,9 @@ Erfahren Sie, wie Sie in Apps für Razor-Seiten mithilfe von [Konventionen für 
 
 Wenn Sie für einzelne Seiten benutzerdefinierte Seitenrouten konfigurieren müssen, sollten Sie das Routing zu den Seiten mithilfe der [AddPageRoute-Konvention](#configure-a-page-route) konfigurieren, die weiter unten in diesem Artikel beschrieben wird.
 
-Verwenden Sie zum Angeben einer seitenroute, Hinzufügen von routensegmenten oder Hinzufügen von Parametern für eine Route, die der Seite `@page` Richtlinie. Weitere Informationen finden Sie unter [benutzerdefinierte Routen](xref:razor-pages/index#custom-routes).
+Verwenden Sie die- `@page` Direktive der Seite, um eine Seiten Route anzugeben, Routen Segmente hinzuzufügen oder einer Route Parameter hinzuzufügen. Weitere Informationen finden Sie unter [benutzerdefinierte Routen](xref:razor-pages/index#custom-routes).
 
-Es sind reservierte Wörter, die als routensegmenten oder Parameternamen verwendet werden können. Weitere Informationen finden Sie unter [Routing: Reservierte routing Namen](xref:fundamentals/routing#reserved-routing-names).
+Es gibt reservierte Wörter, die nicht als Routen Segmente oder Parameternamen verwendet werden können. Weitere Informationen finden [Sie unter Routing: Reservierte Routing](xref:fundamentals/routing#reserved-routing-names)Namen.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -34,7 +34,7 @@ Es sind reservierte Wörter, die als routensegmenten oder Parameternamen verwend
 | [Konventionen für Seitenroutenaktionen](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Das Hinzufügen einer Routenvorlage zu Seiten in einem Ordner und zu einer Einzelseite |
 | [Konventionen für Seitenmodellaktionen](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (Filterklasse, Lambdaausdruck oder Filterzuordnungsinstanz)</li></ul> | Das Hinzufügen eines Headers zu Seiten in einem Ordner, das Hinzufügen eines Headers zu einer einzelnen Seite und das Konfigurieren einer [Filter-Factoy](xref:mvc/controllers/filters#ifilterfactory) zum Hinzufügen eines Headers zu den Seiten einer App. |
 
-Konventionen für Razor-Seiten werden hinzugefügt und konfiguriert die <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> Erweiterungsmethode <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> auf die Sammlung von Diensten in der `Startup` Klasse. Die folgenden Beispiele der Konvention werden später in diesem Thema erläutert:
+Razor Pages Konventionen werden mithilfe der <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> -Erweiterungsmethode für <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> die Dienst Auflistung in der `Startup` -Klasse hinzugefügt und konfiguriert. Die folgenden Beispiele der Konvention werden später in diesem Thema erläutert:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -43,124 +43,209 @@ public void ConfigureServices(IServiceCollection services)
         .AddRazorPagesOptions(options =>
             {
                 options.Conventions.Add( ... );
-                options.Conventions.AddFolderRouteModelConvention("/OtherPages", model => { ... });
-                options.Conventions.AddPageRouteModelConvention("/About", model => { ... });
-                options.Conventions.AddPageRoute("/Contact", "TheContactPage/{text?}");
-                options.Conventions.AddFolderApplicationModelConvention("/OtherPages", model => { ... });
-                options.Conventions.AddPageApplicationModelConvention("/About", model => { ... });
+                options.Conventions.AddFolderRouteModelConvention(
+                    "/OtherPages", model => { ... });
+                options.Conventions.AddPageRouteModelConvention(
+                    "/About", model => { ... });
+                options.Conventions.AddPageRoute(
+                    "/Contact", "TheContactPage/{text?}");
+                options.Conventions.AddFolderApplicationModelConvention(
+                    "/OtherPages", model => { ... });
+                options.Conventions.AddPageApplicationModelConvention(
+                    "/About", model => { ... });
                 options.Conventions.ConfigureFilter(model => { ... });
                 options.Conventions.ConfigureFilter( ... );
             });
 }
 ```
 
-## <a name="route-order"></a>Reihenfolge
+## <a name="route-order"></a>Routen Reihenfolge
 
-Routen geben eine <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> für die Verarbeitung (Route übereinstimmend).
+Routen geben einen <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> für die Verarbeitung an (Routen Abgleich).
 
 | Auftrag            | Verhalten |
 | :--------------: | -------- |
 | -1               | Die Route wird verarbeitet, bevor andere Routen verarbeitet werden. |
-| 0                | Reihenfolge nicht angegeben ist (Standardwert). Kein Zuweisen von `Order` (`Order = null`) wird standardmäßig die Route `Order` auf 0 (null) für die Verarbeitung. |
-| 1, 2, &hellip; n | Gibt die Verarbeitungsreihenfolge für die Route an. |
+| 0                | Die Reihenfolge wurde nicht angegeben (Standardwert). Wenn Sie `Order` (`Order = null`) nicht zuweisen, `Order` wird die Route für die Verarbeitung standardmäßig auf 0 (null) gesetzt. |
+| 1, 2, &hellip; n | Gibt die Verarbeitungsreihenfolge der Route an. |
 
-Die Verarbeitung Route wird gemäß der Konvention hergestellt:
+Die Routen Verarbeitung wird gemäß der Konvention eingerichtet:
 
-* Routen werden in sequenzieller Reihenfolge verarbeitet (-1, 0, 1, 2, &hellip; n).
-* Wenn die Routen haben die gleiche `Order`, wird die bestimmte Route zuerst gefolgt von weniger spezifische Routen abgeglichen wird.
-* Wenn Routen mit dem gleichen `Order` und die gleiche Anzahl von Parametern mit eine Anforderungs-URL übereinstimmen, Routen werden in der Reihenfolge verarbeitet, die hinzugefügt werden die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>.
+* Routen werden in sequenzieller Reihenfolge verarbeitet (-1, 0, 1 &hellip; , 2, n).
+* Wenn Routen identisch `Order`sind, wird die spezifischere Route zuerst abgeglichen, gefolgt von weniger spezifischen Routen.
+* Wenn Routen mit der gleichen `Order` Anzahl von Parametern mit einer Anforderungs-URL übereinstimmen, werden Routen in der Reihenfolge verarbeitet, in der Sie <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>der hinzugefügt werden.
 
-Vermeiden Sie wenn möglich, je nach einem etablierten Route Verarbeitungsreihenfolge. Im Allgemeinen wird beim routing mit URL-Zuordnung die richtige Route ausgewählt. Wenn Sie, Route festlegen müssen `Order` Eigenschaften zum Weiterleiten von Anforderungen ordnungsgemäß routing der app-Schema ist wahrscheinlich für Clients verwirrend und fehleranfälliger zu verwalten. Suchen Sie zur Vereinfachung der app-routing-Schema. Die Beispiel-app erfordert eine explizite Route Verarbeitungsreihenfolge mehrere Routingszenarien verwenden eine einzelne app veranschaulicht. Allerdings sollten Sie versuchen, vermeiden Sie die Methode der Einstellung Route `Order` in Produktions-apps.
+Vermeiden Sie nach Möglichkeit die Abhängigkeit von einer festgelegten Auftrags Verarbeitungsreihenfolge. Im Allgemeinen wählt das Routing die richtige Route mit URL-Übereinstimmung aus. Wenn Sie Routen `Order` Eigenschaften festlegen müssen, um Anforderungen ordnungsgemäß weiterzuleiten, ist das Routing Schema der APP wahrscheinlich verwirrend für Clients und anfällig für die Wartung. Versuchen Sie, das Routing Schema der APP zu vereinfachen. Die Beispiel-App erfordert eine explizite Routen Verarbeitungsreihenfolge, um verschiedene Routing Szenarien mithilfe einer einzelnen APP zu veranschaulichen. Sie sollten jedoch versuchen, die Vorgehensweise beim Festlegen von Route `Order` in Produktions-apps zu vermeiden.
 
-Razor Pages-Routing und MVC Controller-Routing verwenden eine gemeinsame Implementierung. Informationen zur Reihenfolge der MVC-Themen finden Sie unter [Routing zu Controlleraktionen: Ordnen der attributrouten](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Pages-Routing und MVC Controller-Routing verwenden eine gemeinsame Implementierung. Informationen zur Routen Reihenfolge in den MVC-Themen [finden Sie unter Routing zu Controller Aktionen: Sortieren von Attribut](xref:mvc/controllers/routing#ordering-attribute-routes)Routen.
 
 ## <a name="model-conventions"></a>Modellkonventionen
 
-Fügen Sie einen Delegaten für <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> hinzuzufügende [modellieren Konventionen](xref:mvc/controllers/application-model#conventions) gilt für Razor-Seiten.
+Fügen Sie einen Delegaten für <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> hinzu, um [Modell Konventionen](xref:mvc/controllers/application-model#conventions) hinzuzufügen, die für Razor Pages gelten.
 
-### <a name="add-a-route-model-convention-to-all-pages"></a>Hinzufügen einer routenmodellkonvention zu allen Seiten
+### <a name="add-a-route-model-convention-to-all-pages"></a>Hinzufügen einer Routen Modell Konvention zu allen Seiten
 
-Verwendung <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> zur Auflistung der <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> model Konstruktion-Instanzen, die während der seitenroute angewendet werden.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> Sie, um der Auflistung <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> von-Instanzen, <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> die während der Erstellung von Seiten Weiterleitungs Modellen angewendet werden, ein zu erstellen und hinzuzufügen
 
 Die Beispielanwendung fügt dann zu allen Seiten der App eine `{globalTemplate?}`-Routenvorlage hinzu:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Conventions/GlobalTemplatePageRouteModelConvention.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalTemplatePageRouteModelConvention.cs?name=snippet1)]
 
-Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `1` festgelegt. Dadurch wird die folgende Route Vergleichsverhalten in der Beispiel-app:
+::: moniker-end
 
-* Eine routenvorlage für `TheContactPage/{text?}` wird später im Thema hinzugefügt. Die Seite "Kontakt"-Route hat eine Standardreihenfolge der `null` (`Order = 0`), bevor Sie entsprechend der `{globalTemplate?}` routenvorlage.
-* Ein `{aboutTemplate?}` routenvorlage wird später im Thema hinzugefügt. Die Vorlage `{aboutTemplate?}` erhält den `Order` von `2`. Wenn die Seite „Info“ unter `/About/RouteDataValue` angefordert wird, wird „RouteDataValue“ in die Vorlage `RouteData.Values["globalTemplate"]` geladen (`Order = 1`) und nicht in `RouteData.Values["aboutTemplate"]` (`Order = 2`), da die Eigenschaft `Order` auf null festgelegt wurde.
-* Ein `{otherPagesTemplate?}` routenvorlage wird später im Thema hinzugefügt. Die Vorlage `{otherPagesTemplate?}` erhält den `Order` von `2`. Wenn eine Seite der *Seiten/OtherPages* Ordner mit einem Routenparameter angefordert wird (z. B. `/OtherPages/Page1/RouteDataValue`), wird "RouteDataValue" in den geladen `RouteData.Values["globalTemplate"]` (`Order = 1`) und nicht `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) aufgrund der Einstellung der `Order` Eigenschaft.
+Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `1` festgelegt. Dadurch wird das folgende Weiterleitungs Übereinstimmungs Verhalten in der Beispiel-App sichergestellt:
 
-Wo immer dies möglich ist, legen Sie nicht die `Order`, was dazu führt `Order = 0`. Wählen Sie die richtige Route routing nutzen.
+* Eine Routen Vorlage für `TheContactPage/{text?}` wird später in diesem Thema hinzugefügt. Die Route der Kontaktseite hat eine Standard Reihenfolge von `null` (`Order = 0`), sodass Sie `{globalTemplate?}` vor der Routen Vorlage übereinstimmt.
+* Eine `{aboutTemplate?}` Routen Vorlage wird später in diesem Thema hinzugefügt. Die Vorlage `{aboutTemplate?}` erhält den `Order` von `2`. Wenn die Seite „Info“ unter `/About/RouteDataValue` angefordert wird, wird „RouteDataValue“ in die Vorlage `RouteData.Values["globalTemplate"]` geladen (`Order = 1`) und nicht in `RouteData.Values["aboutTemplate"]` (`Order = 2`), da die Eigenschaft `Order` auf null festgelegt wurde.
+* Eine `{otherPagesTemplate?}` Routen Vorlage wird später in diesem Thema hinzugefügt. Die Vorlage `{otherPagesTemplate?}` erhält den `Order` von `2`. Wenn eine Seite im Ordner *pages/otherpages* `/OtherPages/Page1/RouteDataValue`mit einem Routen Parameter (z. b.) angefordert wird, wird "routedatavalue" in`Order = 1` `RouteData.Values["globalTemplate"]` () und nicht `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) geladen, weil das `Order` -Eigenschaft.
 
-Razor-Seiten-Optionen, z. B. das Hinzufügen <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>, werden hinzugefügt, wenn die Sammlung von Diensten in MVC hinzugefügt wird `Startup.ConfigureServices`. In der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) finden Sie ein Beispiel hierfür.
+Legen Sie, sofern möglich, `Order`nicht den fest, `Order = 0`der ergibt. Verlassen Sie sich auf das Routing, um die richtige Route auszuwählen.
+
+Razor Pages Optionen (z. b <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>. hinzufügen) werden hinzugefügt, wenn MVC der Dienst `Startup.ConfigureServices`Auflistung in hinzugefügt wird. In der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) finden Sie ein Beispiel hierfür.
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/About/GlobalRouteValue` an, und prüfen Sie das Ergebnis:
 
 ![Die Seite „Info“ wird mit einem Routensegment von GlobalRouteValue angefordert. Die gerenderte Seite zeigt, dass der Datenwert für die Route in der OnGet-Methode der Seite erfasst wird.](razor-pages-conventions/_static/about-page-global-template.png)
 
-### <a name="add-an-app-model-convention-to-all-pages"></a>Hinzufügen einer app-modellkonvention zu allen Seiten
+### <a name="add-an-app-model-convention-to-all-pages"></a>Hinzufügen einer APP-Modell Konvention zu allen Seiten
 
-Verwenden <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> zur Auflistung der <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> -Instanzen, die während der angewendet werden Seite Modellentwicklung app.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> Sie, um der Auflistung <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> von-Instanzen, <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> die während der Erstellung von Seiten-App-Modellen angewendet werden, eine hinzuzufügen.
 
 Die Beispielanwendung enthält eine `AddHeaderAttribute`-Klasse, damit das Verwenden dieser und anderer Konventionen weiter unten in diesem Thema gezeigt werden kann. Der Klassenkonstruktor akzeptiert eine `name`-Zeichenfolge und ein `values`-Zeichenfolgenarray. Diese Werte werden in seiner `OnResultExecuting`-Methode verwendet, um einen Antwortheader einzurichten. Die Klasse wird im Abschnitt [Seitenmodellaktionskonventionen](#page-model-action-conventions) weiter unten in diesem Artikel erläutert.
 
 Die Beispielanwendung verwendet die Klasse `AddHeaderAttribute`, um den Header `GlobalHeader` zu allen Seiten der Anwendung hinzuzufügen:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Conventions/GlobalHeaderPageApplicationModelConvention.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalHeaderPageApplicationModelConvention.cs?name=snippet1)]
+
+::: moniker-end
 
 *Startup.cs*:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet2)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet2)]
+
+::: moniker-end
 
 Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/About` an, und überprüfen Sie die Header, um das Ergebnis zu sehen:
 
 ![Antwortheader der Seite „Info“ zeigen an, dass „GlobalHeader“ hinzugefügt wurde.](razor-pages-conventions/_static/about-page-global-header.png)
 
-### <a name="add-a-handler-model-convention-to-all-pages"></a>Hinzufügen einer Ereignishandler-modellkonvention zu allen Seiten
+### <a name="add-a-handler-model-convention-to-all-pages"></a>Hinzufügen einer handlermodellkonvention zu allen Seiten
 
-Verwendung <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageHandlerModelConvention> auf die Auflistung von <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> -Instanzen, die während der angewendet werden Seite Modellentwicklung Handler.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> Sie, um der Auflistung <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageHandlerModelConvention> von-Instanzen, <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> die während der Erstellung des seitenhandlermodells angewendet werden, zu erstellen und hinzuzufügen
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Conventions/GlobalPageHandlerModelConvention.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Conventions/GlobalPageHandlerModelConvention.cs?name=snippet1)]
 
+::: moniker-end
+
 *Startup.cs*:
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet10)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet10)]
 
+::: moniker-end
+
 ## <a name="page-route-action-conventions"></a>Konventionen für Seitenroutenaktionen
 
-Der Standardwert für routenmodelle, die von abgeleitet <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelProvider> ruft Konventionen auf, die entwickelt wurden, um Erweiterungspunkte zum Konfigurieren von seitenrouten bereitzustellen.
+Der von abgeleitete Standardrouten Modell Anbieter <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelProvider> ruft Konventionen auf, die zum Bereitstellen von Erweiterungs Punkten zum Konfigurieren von Seiten Routen entworfen wurden.
 
-### <a name="folder-route-model-convention"></a>Ordnerroutenmodellkonvention
+### <a name="folder-route-model-convention"></a>Ordner Routen-Modell Konvention
 
-Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderRouteModelConvention*> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> , das eine Aktion aufruft, auf die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteModel> für alle Seiten in dem angegebenen Ordner.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderRouteModelConvention*> Sie, um einen <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> zu erstellen und hinzuzufügen, der <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteModel> eine Aktion für alle Seiten im angegebenen Ordner aufruft.
 
 Die Beispielanwendung verwendet <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderRouteModelConvention*>, um eine `{otherPagesTemplate?}`-Routenvorlage zu den Seiten im Ordner *OtherPages* hinzuzufügen:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet3)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `2` festgelegt. Dadurch wird sichergestellt, dass die Vorlage für `{globalTemplate?}` (Legen Sie weiter oben in das Thema `1`) Bezug auf die erste Routendaten Position Wert, wenn ein einziger routenwert angegeben wird. Wenn eine Seite in der *Seiten/OtherPages* Ordner mit einem routenparameterwert angefordert wird (z. B. `/OtherPages/Page1/RouteDataValue`), wird "RouteDataValue" in den geladen `RouteData.Values["globalTemplate"]` (`Order = 1`) und nicht `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) aufgrund der Einstellung der `Order` Eigenschaft.
+::: moniker-end
 
-Wo immer dies möglich ist, legen Sie nicht die `Order`, was dazu führt `Order = 0`. Wählen Sie die richtige Route routing nutzen.
+Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `2` festgelegt. Dadurch wird sichergestellt, dass `{globalTemplate?}` die Vorlage für (die zuvor im `1`Thema auf festgelegt wurde) Priorität für die erste Route-Daten Wert Position erhält, wenn ein einzelner Routen Wert bereitgestellt wird. Wenn eine Seite im Ordner *pages/otherpages* mit einem `/OtherPages/Page1/RouteDataValue`Routen Parameterwert (z. b.) angefordert wird, wird "routedatavalue" in`Order = 1` `RouteData.Values["globalTemplate"]` () und nicht `RouteData.Values["otherPagesTemplate"]` (`Order = 2`) geladen, weil der `Order` -Eigenschaft.
+
+Legen Sie, sofern möglich, `Order`nicht den fest, `Order = 0`der ergibt. Verlassen Sie sich auf das Routing, um die richtige Route auszuwählen.
 
 Fordern Sie die Seite „Seite1“ der Beispielanwendung unter `localhost:5000/OtherPages/Page1/GlobalRouteValue/OtherPagesRouteValue` an, und prüfen Sie das Ergebnis:
 
 ![Seite1 aus dem Ordner „OtherPages“ wird mit einem Routensegment von GlobalRouteValue und OtherPagesRouteValue angefordert. In der gerenderten Seite wird gezeigt, dass die Datenwerte für die Route in der OnGet-Methode der Seite erfasst werden.](razor-pages-conventions/_static/otherpages-page1-global-and-otherpages-templates.png)
 
-### <a name="page-route-model-convention"></a>Seitenroutenmodellkonvention
+### <a name="page-route-model-convention"></a>Seiten Weiterleitungs Modell Konvention
 
-Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddPageRouteModelConvention*> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> , das eine Aktion aufruft, auf die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteModel> für die Seite mit dem angegebenen Namen.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddPageRouteModelConvention*> Sie, um eine <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageRouteModelConvention> zu erstellen und hinzuzufügen, die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteModel> eine Aktion für die für die Seite mit dem angegebenen Namen aufruft.
 
 Die Beispielanwendung verwendet `AddPageRouteModelConvention`, um eine `{aboutTemplate?}`-Routenvorlage zu der Seite „Info“ hinzuzufügen:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet4)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet4)]
 
-Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `2` festgelegt. Dadurch wird sichergestellt, dass die Vorlage für `{globalTemplate?}` (Legen Sie weiter oben in das Thema `1`) Bezug auf die erste Routendaten Position Wert, wenn ein einziger routenwert angegeben wird. Wenn die Seite "Info" angefordert wird, mit dem Route-Parameterwert an `/About/RouteDataValue`, wird "RouteDataValue" in den geladen `RouteData.Values["globalTemplate"]` (`Order = 1`) und nicht `RouteData.Values["aboutTemplate"]` (`Order = 2`) aufgrund der Einstellung der `Order` Eigenschaft.
+::: moniker-end
 
-Wo immer dies möglich ist, legen Sie nicht die `Order`, was dazu führt `Order = 0`. Wählen Sie die richtige Route routing nutzen.
+Die Eigenschaft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.Order*> ist für das <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel> auf `2` festgelegt. Dadurch wird sichergestellt, dass `{globalTemplate?}` die Vorlage für (die zuvor im `1`Thema auf festgelegt wurde) Priorität für die erste Route-Daten Wert Position erhält, wenn ein einzelner Routen Wert bereitgestellt wird. Wenn die Info-Seite mit einem Routen Parameter `/About/RouteDataValue`Wert unter angefordert wird, wird "routedatavalue" in `RouteData.Values["globalTemplate"]` (`Order = 1`) und nicht `RouteData.Values["aboutTemplate"]` (`Order = 2`) geladen, weil die `Order` -Eigenschaft festgelegt wurde.
+
+Legen Sie, sofern möglich, `Order`nicht den fest, `Order = 0`der ergibt. Verlassen Sie sich auf das Routing, um die richtige Route auszuwählen.
 
 Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/About/GlobalRouteValue/AboutRouteValue` an, und prüfen Sie das Ergebnis:
 
@@ -168,15 +253,15 @@ Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/Abo
 
 ::: moniker range=">= aspnetcore-2.2"
 
-## <a name="use-a-parameter-transformer-to-customize-page-routes"></a>Verwenden Sie einen Transformator Parameter zum Anpassen von seitenrouten
+## <a name="use-a-parameter-transformer-to-customize-page-routes"></a>Verwenden eines parametertransformer zum Anpassen von Seiten Routen
 
-Von ASP.NET Core generierte seitenrouten können mit der ein Transformator Parameter angepasst werden. Ein Parametertransformator implementiert `IOutboundParameterTransformer` und wandelt den Wert der Parameter um. Beispielsweise ändert ein benutzerdefinierter `SlugifyParameterTransformer`-Parametertransformator den Routenwert `SubscriptionManagement` in `subscription-management`.
+Die von ASP.net Core generierten Seiten Routen können mit einem Parameter Transformator angepasst werden. Ein Parametertransformator implementiert `IOutboundParameterTransformer` und wandelt den Wert der Parameter um. Beispielsweise ändert ein benutzerdefinierter `SlugifyParameterTransformer`-Parametertransformator den Routenwert `SubscriptionManagement` in `subscription-management`.
 
-Die `PageRouteTransformerConvention` seitenroutenmodellkonvention gilt einen Transformator Parameter für die namenssegmente Ordner- und von automatisch generierten Seitenprofilklasse Routen in einer app. Z. B. die Razor-Seiten, die auf Dateien */Pages/SubscriptionManagement/ViewAll.cshtml* müsste der Route aus umgeschrieben `/SubscriptionManagement/ViewAll` zu `/subscription-management/view-all`.
+Die `PageRouteTransformerConvention` Page Route-Modell Konvention wendet einen Parameter Transformator auf die Ordner-und Dateinamen Segmente von automatisch generierten Seiten Routen in einer APP an. Beispielsweise wird in der Razor Pages-Datei unter */pages/SubscriptionManagement/ViewAll.cshtml* von `/SubscriptionManagement/ViewAll` in `/subscription-management/view-all`die Route umgeschrieben.
 
-`PageRouteTransformerConvention` nur transformiert die automatisch generierten Segmenten einer seitenroute, die von den Razor-Seiten-Ordner und Dateinamen stammen. Keine Transformation routensegmenten hinzugefügt, mit der `@page` Richtlinie. Die Konvention nicht transformiert und außerdem hinzugefügten Routen <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*>.
+`PageRouteTransformerConvention`transformiert nur die automatisch generierten Segmente einer Seiten Route, die aus dem Razor Pages Ordner und dem Dateinamen stammen. Mit der `@page` -Direktive hinzugefügte Routen Segmente werden nicht transformiert. Außerdem werden von hinzugefügte Routen von <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*>der Konvention nicht transformiert.
 
-Die `PageRouteTransformerConvention` registriert, ist als eine Option in `Startup.ConfigureServices`:
+Die `PageRouteTransformerConvention` ist als Option in `Startup.ConfigureServices`registriert:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -206,17 +291,37 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 ## <a name="configure-a-page-route"></a>Konfigurieren einer Seitenroute
 
-Verwendung <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> so konfigurieren Sie eine Route zu einer Seite am angegebenen Seitenpfad. Generierte Links, die auf die Seite verweisen, verwenden die von Ihnen angegebene Route. `AddPageRoute` verwendet die `AddPageRouteModelConvention` zum Aufbauen der Route.
+Verwenden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> Sie, um eine Route zu einer Seite am angegebenen Seiten Pfad zu konfigurieren. Generierte Links, die auf die Seite verweisen, verwenden die von Ihnen angegebene Route. `AddPageRoute` verwendet die `AddPageRouteModelConvention` zum Aufbauen der Route.
 
 Die Beispielanwendung erstellt für *Contact.cshtml* eine Route zur Seite `/TheContactPage`:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet5)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet5)]
+
+::: moniker-end
 
 Die Seite „Kontakt“ kann auch unter `/Contact` über ihre Standardroute erreicht werden.
 
 Die benutzerdefinierte Route der Beispielanwendung, die zur Seite „Kontakt“ führt, ermöglicht das Verwenden eines optionalen `text`-Routensegments (`{text?}`). Die Seite enthält dieses optionale Segment auch in ihrer `@page`-Anweisung, für den Fall, dass der Besucher über die `/Contact`-Route auf die Seite zugreift:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-cshtml[](razor-pages-conventions/samples/3.x/SampleApp/Pages/Contact.cshtml?highlight=1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-cshtml[](razor-pages-conventions/samples/2.x/SampleApp/Pages/Contact.cshtml?highlight=1)]
+
+::: moniker-end
 
 Beachten Sie, dass die URL, die für den Link **Kontakt** in der gerenderten Seite generiert wurde, die aktualisierte Route widerspiegelt:
 
@@ -230,21 +335,41 @@ Sie können die Kontaktseite entweder über deren übliche Route, `/Contact`, od
 
 ## <a name="page-model-action-conventions"></a>Konventionen für Seitenmodellaktionen
 
-Der Standardanbieter für seitenmodelle, die implementiert <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelProvider> ruft Konventionen auf, die entwickelt wurden, um Erweiterungspunkte zum Konfigurieren von seitenmodellen bereitzustellen. Diese Konventionen sind beim Erstellen und Ändern von Seitenermittlungs- und Verarbeitungsszenarios hilfreich.
+Der Standardanbieter für Seiten Modelle, <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelProvider> der implementiert, ruft Konventionen auf, die entwickelt wurden, um Erweiterungs Punkte zum Konfigurieren von Seiten Modellen bereitzustellen. Diese Konventionen sind beim Erstellen und Ändern von Seitenermittlungs- und Verarbeitungsszenarios hilfreich.
 
-Für die Beispiele in diesem Abschnitt, die Beispiel-app verwendet eine `AddHeaderAttribute` Klasse, die eine <xref:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute>, die für einen Antwortheader gilt:
+In den Beispielen in diesem Abschnitt verwendet `AddHeaderAttribute` die Beispiel-App eine-Klasse, bei der <xref:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute>es sich um einen handelt, der einen Antwortheader anwendet:
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Filters/AddHeader.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Filters/AddHeader.cs?name=snippet1)]
+
+::: moniker-end
 
 Das Beispiel veranschaulicht mithilfe von Konventionen, wie das Attribut auf alle Seiten in einem Ordner und auf eine Einzelseite angewendet werden kann.
 
 **Ordner-App-Modellkonvention**
 
-Verwendung <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> , die auf eine Aktion aufruft <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageApplicationModel> Instanzen für alle Seiten in den angegebenen Ordner.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> Sie, um einen <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> zu erstellen und hinzuzufügen <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageApplicationModel> , der eine Aktion für-Instanzen für alle Seiten unter dem angegebenen Ordner aufruft.
 
 Im Beispiel wird die Verwendung der `AddFolderApplicationModelConvention` durch Hinzufügen eines Headers, `OtherPagesHeader`, zu den Seiten im Ordner *OtherPages* der Anwendung veranschaulicht:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet6)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet6)]
+
+::: moniker-end
 
 Fordern Sie die Seite „Seite1“ der Beispielanwendung unter `localhost:5000/OtherPages/Page1` an, und prüfen Sie die Header, um das Ergebnis zu sehen:
 
@@ -252,11 +377,21 @@ Fordern Sie die Seite „Seite1“ der Beispielanwendung unter `localhost:5000/O
 
 **Seiten-App-Modellkonvention**
 
-Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddPageApplicationModelConvention*> erstellen und Hinzufügen einer <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> , das eine Aktion aufruft, auf die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageApplicationModel> für die Seite mit dem angegebenen Namen.
+Verwenden <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddPageApplicationModelConvention*> Sie, um eine <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageApplicationModelConvention> zu erstellen und hinzuzufügen, die <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageApplicationModel> eine Aktion für die für die Seite mit dem angegebenen Namen aufruft.
 
 Im Beispiel wird das Verwenden von `AddPageApplicationModelConvention` durch Hinzufügen eines Headers, `AboutHeader`, auf der Seite „Info“ veranschaulicht:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet7)]
+
+::: moniker-end
 
 Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/About` an, und überprüfen Sie die Header, um das Ergebnis zu sehen:
 
@@ -264,13 +399,23 @@ Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/Abo
 
 **Konfigurieren eines Filters**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguriert den angegebenen Filter anwenden. Sie können Filterklassen selbst implementieren. In der Beispielanwendung wird jedoch gezeigt, wie Sie einen Filter in einen Lambdaausdruck implementieren. Dieser wird dann im Hintergrund als Zuordnungsinstanz implementiert, die einen Filter zurückgibt:
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguriert den angegebenen Filter, der angewendet werden soll. Sie können Filterklassen selbst implementieren. In der Beispielanwendung wird jedoch gezeigt, wie Sie einen Filter in einen Lambdaausdruck implementieren. Dieser wird dann im Hintergrund als Zuordnungsinstanz implementiert, die einen Filter zurückgibt:
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet8)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet8)]
 
+::: moniker-end
+
 Das Seiten-App-Modell wird verwendet, um den relativen Pfad für Segmente zu überprüfen, die zur Seite „Seite2“ im Ordner *OtherPages* führen. Wenn die Bedingung erfüllt ist, wird ein Header hinzugefügt. Wenn dies nicht der Fall ist, wird der `EmptyFilter` angewendet.
 
-`EmptyFilter` ist ein [Aktionsfilter](xref:mvc/controllers/filters#action-filters). Da Aktionsfilter von Razor Pages ignoriert werden die `EmptyFilter` wirkt sich nicht erwartungsgemäß, wenn der Pfad enthält keine `OtherPages/Page2`.
+`EmptyFilter` ist ein [Aktionsfilter](xref:mvc/controllers/filters#action-filters). Da Aktionsfilter von Razor Pages ignoriert werden, wirkt `EmptyFilter` sich das nicht wie vorgesehen aus, wenn der Pfad `OtherPages/Page2`nicht enthält.
 
 Fordern Sie die Seite „Seite2“ der Beispielanwendung unter `localhost:5000/OtherPages/Page2` an, und prüfen Sie die Header, um das Ergebnis zu sehen:
 
@@ -278,15 +423,35 @@ Fordern Sie die Seite „Seite2“ der Beispielanwendung unter `localhost:5000/O
 
 **Konfigurieren einer Filterzuordnungsinstanz**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguriert die angegebene Zuordnungsinstanz so gelten [Filter](xref:mvc/controllers/filters) für alle Razor-Seiten.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguriert die angegebene Factory so, dass [Filter](xref:mvc/controllers/filters) auf alle Razor Pages angewendet werden.
 
 Die Beispielanwendung bietet Ihnen die Möglichkeit des beispielhaften Verwendens einer [Filterzuordnungsinstanz](xref:mvc/controllers/filters#ifilterfactory) durch Hinzufügen des Headers `FilterFactoryHeader` zu den Seiten der Anwendung, der zwei Werte besitzt:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet9)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet9)]
+
+::: moniker-end
 
 *AddHeaderWithFactory.cs*:
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Factories/AddHeaderWithFactory.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Factories/AddHeaderWithFactory.cs?name=snippet1)]
+
+::: moniker-end
 
 Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/About` an, und überprüfen Sie die Header, um das Ergebnis zu sehen:
 
@@ -294,9 +459,9 @@ Fordern Sie die Seite „Info“ der Beispielanwendung unter `localhost:5000/Abo
 
 ## <a name="mvc-filters-and-the-page-filter-ipagefilter"></a>Die MVC-Filter und der Seitenfilter (IPageFilter)
 
-MVC-[Aktionsfilter](xref:mvc/controllers/filters#action-filters) werden von Razor Pages ignoriert, da diese Handlermethoden verwenden. Andere Arten von MVC-Filter sind verfügbar, Sie verwenden: [Autorisierung](xref:mvc/controllers/filters#authorization-filters), [Ausnahme](xref:mvc/controllers/filters#exception-filters), [Ressource](xref:mvc/controllers/filters#resource-filters), und [Ergebnis](xref:mvc/controllers/filters#result-filters). Weitere Informationen finden Sie im Thema [Filter](xref:mvc/controllers/filters).
+MVC-[Aktionsfilter](xref:mvc/controllers/filters#action-filters) werden von Razor Pages ignoriert, da diese Handlermethoden verwenden. Andere Typen von MVC-Filtern stehen zur Verwendung zur Verfügung: [Autorisierung](xref:mvc/controllers/filters#authorization-filters), [Ausnahme](xref:mvc/controllers/filters#exception-filters), [Ressource](xref:mvc/controllers/filters#resource-filters)und [Ergebnis](xref:mvc/controllers/filters#result-filters). Weitere Informationen finden Sie im Thema [Filter](xref:mvc/controllers/filters).
 
-Der Seitenfilter (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) ist ein Filter, die auf Razor Pages anwendbar. Weitere Informationen finden Sie unter [Filtermethoden für Razor-Seiten](xref:razor-pages/filter).
+Der Seiten Filter (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) ist ein Filter, der für Razor Pages gilt. Weitere Informationen finden Sie unter [Filtermethoden für Razor-Seiten](xref:razor-pages/filter).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
