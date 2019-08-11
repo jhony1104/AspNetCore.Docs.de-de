@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 5b45ced4fe6ed220c9a63bc6480c8c8520b36ed4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 20f801e23f3e75d7915bcb7c095060b68d9cb03f
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886365"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68819790"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -188,7 +188,7 @@ Sie haben die folgenden Änderungen am bestehenden Code vorgenommen:
   }
   ```
 
-* Es wurde eine **Kurse**-Spalte hinzugefügt, die die Kurse eines jeden Dozenten anzeigt. Weitere Informationen über diese Razor-Syntax finden Sie unter [Explizite Zeilenübergänge mit `@:`](xref:mvc/views/razor#explicit-line-transition-with-).
+* Es wurde eine **Kurse**-Spalte hinzugefügt, die die Kurse eines jeden Dozenten anzeigt. Weitere Informationen finden Sie im Abschnitt [Explicit line transition with @:](xref:mvc/views/razor#explicit-line-transition-with-) (Expliziter Zeilenübergang mit @:) des Razor-Syntaxartikels.
 
 * Es wurde Code hinzugefügt, der `class="success"` dynamisch zum `tr`-Element des ausgewählten Dozenten hinzufügt. Hiermit wird mit einer Bootstrapklasse eine Hintergrundfarbe für die ausgewählte Zeile hinzugefügt.
 

@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schni
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/10/2019
+ms.date: 08/01/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 8b95f63c0e06a2b7d1d66064def192f91b8ffbb4
-ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
+ms.openlocfilehash: bcf2a2eaf6910222d274c38bac343c92fab9cb5b
+ms.sourcegitcommit: b5e63714afc26e94be49a92619586df5189ed93a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/19/2019
-ms.locfileid: "65874964"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68739533"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -76,7 +76,12 @@ Im vorangehenden Code muss die Anforderung keinen Hostnamen angeben. Sie muss nu
 
 ### <a name="typed-clients"></a>Typisierte Clients
 
-Typisierte Clients stellen dieselben Funktionen wie benannte Clients bereit, ohne Zeichenfolgen als Schlüssel verwenden zu müssen. Der Ansatz mit typisierten Clients bietet Hilfe durch IntelliSense und Compiler beim Verarbeiten von Clients. Sie stellen einen einzelnen Ort zum Konfigurieren und Interagieren mit einem bestimmten `HttpClient` bereit. Zum Beispiel kann ein einzelner typisierter Client für einen einzelnen Back-End-Endpunkt verwendet werden, der jegliche Logik kapselt, die mit diesem Endpunkt interagiert. Ein weiterer Vorteil ist, dass sie mit der DI funktionieren und überall in Ihrer App eingefügt werden können, wo sie benötigt werden.
+Typisierte Clients:
+
+* Stellen dieselben Funktionen wie benannte Clients bereit, ohne Zeichenfolgen als Schlüssel verwenden zu müssen.
+* Bieten Hilfe durch IntelliSense und Compiler beim Verarbeiten von Clients.
+* Stellen einen einzelnen Ort zum Konfigurieren und Interagieren mit einem bestimmten `HttpClient` bereit. Zum Beispiel kann ein einzelner typisierter Client für einen einzelnen Back-End-Endpunkt verwendet werden, der jegliche Logik kapselt, die mit diesem Endpunkt interagiert.
+* Funktionieren mit DI und können überall in Ihrer App eingefügt werden, wo sie benötigt werden.
 
 Ein typisierter Client akzeptiert einen `HttpClient`-Parameter in seinem Konstruktor:
 
@@ -163,7 +168,7 @@ public class ValuesController : ControllerBase
 
 Definieren Sie zum Erstellen eines Handlers eine von <xref:System.Net.Http.DelegatingHandler> abgeleitete Klasse. Überschreiben Sie die Methode `SendAsync`, um Code auszuführen, bevor die Anforderung an den nächsten Handler in der Pipeline übergeben wird:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
 Der vorangehende Code definiert einen einfachen Handler. Er überprüft, ob ein `X-API-KEY`-Header in die Anforderung eingefügt wurde. Wenn der Header fehlt, kann er den HTTP-Aufruf vermeiden und eine geeignete Antwort zurückgeben.
 
@@ -181,7 +186,10 @@ Nach der Registrierung kann <xref:Microsoft.Extensions.DependencyInjection.HttpC
 
 ::: moniker range="< aspnetcore-2.2"
 
-Im vorangehenden Code ist `ValidateHeaderHandler` mit DI registriert. Der Handler **muss** in DI als vorübergehender Dienst registriert sein, niemals bereichsbezogen. Wenn der Handler als bereichsbezogener Dienst registriert ist, und alle Dienste, von denen der Handler abhängig ist, verwerfbare Dienste sind, könnten die Dienste des Handlers verworfen werden, bevor der Handler den Bereich verlässt, was bei dem Handler einen Fehler verursachen würde.
+Im vorangehenden Code ist `ValidateHeaderHandler` mit DI registriert. Der Handler **muss** in DI als vorübergehender Dienst registriert sein, niemals bereichsbezogen. Wenn der Handler als bereichsbezogener Dienst registriert ist und alle Dienste, von denen der Handler abhängig ist, gelöscht werden können:
+
+* Die Dienste des Handlers können verworfen werden, bevor der Handler den Gültigkeitsbereich verlässt.
+* Der verworfenen Handlerdienst bewirken, dass der Handler fehlschlägt.
 
 Nach der Registrierung kann <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> aufgerufen werden, wobei der Typ für den Handler übergeben wird.
 
@@ -212,7 +220,7 @@ Am häufigsten treten Fehler auf, wenn externe HTTP-Aufrufe vorübergehend sind.
 
 Die `AddTransientHttpErrorPolicy`-Erweiterung kann in `Startup.ConfigureServices` verwendet werden. Die Erweiterung ermöglicht den Zugriff auf ein `PolicyBuilder`-Objekt, das für die Fehlerbehandlung konfiguriert wurde und mögliche vorübergehende Fehler darstellt:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
 
 Im vorangehenden Code wird eine `WaitAndRetryAsync`-Richtlinie definiert. Anforderungsfehler werden bis zu dreimal mit einer Verzögerung von 600 ms wiederholt.
 
@@ -220,7 +228,7 @@ Im vorangehenden Code wird eine `WaitAndRetryAsync`-Richtlinie definiert. Anford
 
 Es gibt zusätzliche Erweiterungsmethoden, die zum Hinzufügen von Polly-basierten Handlern verwendet werden können. Eine dieser Erweiterungen ist `AddPolicyHandler`, die über mehrere Überladungen verfügt. Eine Überladung ermöglicht, dass die Anforderung beim Definieren der zu verwendenden Richtlinie überprüft werden kann:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
 Im vorangehenden Code wird ein 10 Sekunden langer Timeout angewendet, wenn die ausgehende Anforderung eine HTTP GET-Anforderung ist. Für alle anderen HTTP-Methoden wird ein 30 Sekunden langer Timeout verwendet.
 
@@ -228,7 +236,7 @@ Im vorangehenden Code wird ein 10 Sekunden langer Timeout angewendet, wenn die a
 
 Es ist üblich, Polly-Richtlinien zu schachteln, um erweiterte Funktionen bereitzustellen:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
 Im vorangehenden Beispiel werden zwei Handler hinzugefügt. Der Erste verwendet die `AddTransientHttpErrorPolicy`-Erweiterung, um eine Wiederholungsrichtlinie hinzuzufügen. Fehlgeschlagene Anforderungen werden bis zu drei Mal wiederholt. Der zweite Aufruf von `AddTransientHttpErrorPolicy` fügt eine Trennschalterrichtlinie hinzu. Weitere externe Anforderungen werden 30 Sekunden lang blockiert, wenn fünf Fehlversuche hintereinander stattfinden. Trennschalterrichtlinien sind zustandsbehaftet. Alle Aufrufe über diesen Client teilen den gleichen Schalterzustand.
 
@@ -236,7 +244,7 @@ Im vorangehenden Beispiel werden zwei Handler hinzugefügt. Der Erste verwendet 
 
 Eine Methode zum Verwalten regelmäßig genutzter Richtlinien ist, Sie einmal zu definieren und mit `PolicyRegistry` zu registrieren. Eine Erweiterungsmethode wird bereitgestellt, die einem Handler ermöglicht, mithilfe einer Richtlinie aus der Registrierung hinzugefügt zu werden:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
 
 Im oben stehenden Code werden zwei Richtlinien registriert, wenn `PolicyRegistry` zu `ServiceCollection` hinzugefügt wird. Damit eine Richtlinie aus der Registrierung verwendet werden kann, wird die Methode `AddPolicyHandlerFromRegistry` verwendet. Dabei wird der Name der anzuwendenden Richtlinie übergeben.
 
@@ -252,7 +260,7 @@ Das Zusammenlegen von Handlern ist ein wünschenswerter Vorgang, da jeder Handle
 
 Die Standardlebensdauer von Handlern beträgt zwei Minuten. Der Standardwert kann für jeden benannten Client überschrieben werden. Rufen Sie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*> auf dem bei der Erstellung des Clients zurückgegebenen `IHttpClientBuilder` auf, um den Wert zu überschreiben:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
 Das Verwerfen des Client ist nicht erforderlich. Beim Verwerfen werden ausgehende Anforderungen abgebrochen, und es wird sichergestellt, dass die angegebene `HttpClient`-Instanz nach dem Aufruf von <xref:System.IDisposable.Dispose*> nicht mehr verwendet werden kann. `IHttpClientFactory` verfolgt von `HttpClient`-Instanzen verwendete Ressourcen nach und verwirft sie. Die `HttpClient`-Instanzen können im Allgemeinen als .NET-Objekte behandelt werden, die nicht verworfen werden müssen.
 
@@ -276,7 +284,32 @@ Es kann notwendig sein, die Konfiguration des inneren von einem Client verwendet
 
 `IHttpClientBuilder` wird zurückgegeben, wenn benannte oder typisierte Clients hinzugefügt werden. Die Erweiterungsmethode <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> kann zum Definieren eines Delegaten verwendet werden. Der Delegat wird verwendet, um den primären `HttpMessageHandler` zu erstellen und konfigurieren, der von dem Client verwendet wird:
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
+
+## <a name="use-ihttpclientfactory-in-a-console-app"></a>Verwenden von IHttpClientFactory in einer Konsolen-App
+
+Fügen Sie in einer Konsolen-App dem Projekt die folgenden Paketverweise hinzu:
+
+* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
+* [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
+
+Im folgenden Beispiel:
+
+* <xref:System.Net.Http.IHttpClientFactory> ist im Dienstcontainer des [generischen Hosts](xref:fundamentals/host/generic-host) registriert.
+* `MyService` erstellt eine Clientfactoryinstanz aus dem-Dienst, der zum Erstellen eines `HttpClient`verwendet wird. `HttpClient` wird zum Abrufen einer Webseite verwendet.
+* `Main` erstellt einen Bereich, um die `GetPage`-Methode des Diensts auszuführen und die ersten 500 Zeichen des Webseiteninhalts in die Konsole zu schreiben.
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](http-requests/samples/3.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

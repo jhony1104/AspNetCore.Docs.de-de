@@ -2,7 +2,7 @@
 
 ### <a name="add-a-database-context-class"></a>Hinzufügen einer Datenbankkontext-Klasse
 
-Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
+Erstellen Sie im RazorPagesMovie-Projekt einen neuen Ordner namens *Data*. Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -18,18 +18,19 @@ Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code da
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
 
-### <a name="add-required-nuget-packages"></a>Hinzufügen der erforderlichen NuGet-Pakete
+### <a name="add-nuget-packages-and-ef-tools"></a>Hinzufügen von NuGet-Paketen und EF-Tools
 
-Führen Sie den folgenden .NET Core-CLI-Befehl aus, um dem Projekt „SQLite“, „Entity Framework Core“ und „CodeGeneration.Design“ hinzuzufügen:
+Öffnen Sie ein Terminal für das RazorPagesMovie-Projekt.  Klicken Sie auf der Entwurfs-/Layoutleiste mit der rechten Maustaste auf den Projektnamen, und navigieren Sie im Terminal zu **Extras > Öffnen**. Führen Sie die folgenden .NET Core-CLI-Befehle im Termial aus:
 
 ```console
+dotnet tool install --global dotnet-ef --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
 ```
 
-Das `Microsoft.VisualStudio.Web.CodeGeneration.Design`-Paket wird für den Gerüstbau benötigt.
+Die vorhergehenden Befehle fügen dem Projekt Entity Framework Core-Tools für die .NET-CLI und mehrere Pakete hinzu. Das `Microsoft.VisualStudio.Web.CodeGeneration.Design`-Paket wird für den Gerüstbau benötigt.
 
 <a name="reg"></a>
 

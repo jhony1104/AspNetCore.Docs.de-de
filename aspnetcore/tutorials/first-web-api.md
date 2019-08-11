@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/11/2019
+ms.date: 08/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 60235af56077127093ac1d77338bc228a6edf073
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 855d05fa2b9c1a7572212c40adbe61bb396f4bac
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602512"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68819833"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -289,8 +289,8 @@ Die obenstehenden Befehle haben folgende Konsequenzen:
 Der generierte Code hat folgende Auswirkungen:
 
 * Er definiert eine API-Controllerklasse ohne Methoden.
-* Er ergänzt die Klasse mit dem Attribut [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
-* Er verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
+* Ergänzt die Klasse mit dem Attribut [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
+* Verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
 
 ## <a name="examine-the-posttodoitem-create-method"></a>Überblick über die PostTodoItem-Erstellungsmethode
 
@@ -300,7 +300,7 @@ Ersetzen Sie die Rückgabeanweisung in `PostTodoItem` durch eine Anweisung mit d
 
 Der vorherige Code ist eine HTTP POST-Methode, die durch das Attribut [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) angegeben wird. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
 
-Die <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>-Methode führt folgende Aktionen durch:
+Die <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>-Methode:
 
 * Sie gibt den HTTP-Statuscode 201 zurück, wenn der Vorgang erfolgreich ist. HTTP 201 ist die Standardantwort für eine HTTP POST-Methode, die eine neue Ressource auf dem Server erstellt.
 * Sie fügt der Antwort einen [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location)-Header hinzu. Der `Location`-Header legt den [URI](https://developer.mozilla.org/docs/Glossary/URI) des neu erstellten To-do-Elements fest. Weitere Informationen finden Sie unter [10.2.2 201 Erstellt](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
@@ -728,6 +728,7 @@ Der Rückgabetyp der Methoden `GetTodoItems` und `GetTodoItem` ist [ActionResult
 * Wenn kein Element mit der angeforderten ID übereinstimmt, gibt die Methode einen 404-Fehlercode [Nicht gefunden](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) zurück.
 * Andernfalls gibt die Methode 200 mit einem JSON-Antworttext zurück. Die Rückgabe von `item` löst eine HTTP 200-Antwort aus.
 
+
 ## <a name="test-the-gettodoitems-method"></a>Testen der GetTodoItems-Methode
 
 Dieses Tutorial verwendet Postman zum Testen der Web-API.
@@ -736,10 +737,19 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 * Starten Sie die Web-App.
 * Starten Sie Postman.
 * Deaktivieren Sie **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **File**>**Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+
+* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **Postman** > **Preferences** (Postman > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats). Wählen Sie alternativ den Schraubenschlüssel und **Settings** (Einstellungen) aus, und deaktivieren Sie dann die Überprüfung des SSL-Zertifikats.
+
+---
   
-  * Deaktivieren Sie auf der Registerkarte **General* (Allgemein) unter **File > Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
-    > [!WARNING]
-    > Aktivieren Sie die Verifizierung des SSL-Zertifikats wieder, nachdem Sie den Controller getestet haben.
+> [!WARNING]
+> Aktivieren Sie die Verifizierung des SSL-Zertifikats wieder, nachdem Sie den Controller getestet haben.
 
 * Erstellen Sie eine neue Anforderung.
   * Legen Sie die HTTP-Methode auf **GET** fest.
@@ -751,7 +761,7 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 
 ## <a name="add-a-create-method"></a>Hinzufügen einer Methode
 
-Fügen Sie die folgende `PostTodoItem`-Methode hinzu:
+Fügen Sie die folgende `PostTodoItem`-Methode in *Controllers/TodoController.cs* hinzu: 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
