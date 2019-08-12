@@ -20,7 +20,7 @@
       uid: aspnetcore-2.0
     - name: Neuerungen in Version 1.1
       uid: aspnetcore-1.1
-- name: Tutorials
+- name: Lernprogramme
   items:
     - name: Web-Apps
       items:
@@ -104,8 +104,6 @@
         - name: EF Core mit Razor Pages
           displayName: tutorial
           items:
-            - name: Übersicht
-              uid: data/ef-rp/index
             - name: Erste Schritte
               uid: data/ef-rp/intro
             - name: 'Erstellen, Lesen, Aktualisieren Und Löschen'
@@ -188,7 +186,7 @@
       uid: fundamentals/logging/index
     - name: Routing
       uid: fundamentals/routing
-    - name: Behandeln von Fehlern
+    - name: Fehlerbehandlung
       uid: fundamentals/error-handling
     - name: Übermitteln von HTTP-Anforderungen
       displayName: 'httpclient, httpclientfactory'
@@ -201,7 +199,7 @@
       items:
         - name: Einführung
           uid: razor-pages/index
-        - name: Lernprogramm
+        - name: Tutorial
           items:
             - name: Übersicht
               uid: tutorials/razor-pages/index
@@ -233,7 +231,7 @@
       items:
         - name: Übersicht
           uid: mvc/overview
-        - name: Lernprogramm
+        - name: Tutorial
           items:
             - name: Übersicht
               uid: tutorials/first-mvc-app/index
@@ -261,7 +259,7 @@
           uid: mvc/views/overview
         - name: Teilansichten
           uid: mvc/views/partial
-        - name: Controller
+        - name: Controllers
           uid: mvc/controllers/actions
         - name: Routing
           uid: mvc/controllers/routing
@@ -293,7 +291,7 @@
           uid: blazor/class-libraries
         - name: Layouts
           uid: blazor/layouts
-        - name: Dependency Injection
+        - name: Abhängigkeitsinjektion
           uid: blazor/dependency-injection
         - name: Routing
           uid: blazor/routing
@@ -303,9 +301,9 @@
           uid: security/blazor/index
         - name: Zustandsverwaltung
           uid: blazor/state-management
-        - name: Behandeln von Fehlern
+        - name: Fehlerbehandlung
           uid: blazor/handle-errors
-        - name: Debug
+        - name: Debuggen
           uid: blazor/debug
         - name: Aufrufen einer Web-API
           uid: blazor/call-web-api
@@ -370,23 +368,23 @@
           items:
             - name: Anchor
               uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-            - name: cache
+            - name: Cache
               uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
             - name: Verteilter Cache
               uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-            - name: Umgebung
+            - name: Environment
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-            - name: Formular
+            - name: Form
               href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
-            - name: Bild
+            - name: Image
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: Eingabe
               href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
             - name: Bezeichnung
               href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
-            - name: Partial
+            - name: Teilweise
               uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-            - name: Auswählen
+            - name: Select
               href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
             - name: Textarea
               href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
@@ -414,7 +412,7 @@
   items:
     - name: Übersicht
       uid: web-api/index
-    - name: Tutorials
+    - name: Lernprogramme
       items:
         - name: Erstellen einer Web-API
           uid: tutorials/first-web-api
@@ -434,7 +432,7 @@
       uid: web-api/advanced/formatting
     - name: Benutzerdefinierte Formatierer
       uid: web-api/advanced/custom-formatters
-    - name: Analyzer
+    - name: Analysemodule
       uid: web-api/advanced/analyzers
     - name: Konventionen
       uid: web-api/advanced/conventions
@@ -448,13 +446,13 @@
     - name: Unterstützte Plattformen
       uid: signalr/supported-platforms
       displayName: signalr
-    - name: Tutorials
+    - name: Lernprogramme
       items:
         - name: SignalR mit Javascript
           uid: tutorials/signalr
         - name: SignalR mit TypeScript
           uid: tutorials/signalr-typescript-webpack
-    - name: Proben
+    - name: Beispiele
       href: 'https://github.com/aspnet/SignalR-samples'
       displayName: signalr
     - name: Serverkonzepte
@@ -513,7 +511,7 @@
     - name: Authentifizierung und Autorisierung
       uid: signalr/authn-and-authz
       displayName: signalr
-    - name: Sicherheitsüberlegungen
+    - name: Sicherheitshinweise
       uid: signalr/security
       displayName: signalr
     - name: Hub-Protokoll „MessagePack“
@@ -543,7 +541,7 @@
       uid: grpc/configuration
     - name: Authentifizierung und Autorisierung
       uid: grpc/authn-and-authz
-    - name: Sicherheitsüberlegungen
+    - name: Sicherheitshinweise
       uid: grpc/security
     - name: Migrieren von gRPC-Diensten von C Core zu ASP.NET Core
       uid: grpc/migration
@@ -551,7 +549,7 @@
       uid: grpc/comparison
 - name: 'Testen, Debuggen und Problembehandlung'
   items:
-    - name: Komponententest
+    - name: Komponententests
       href: /dotnet/core/testing/unit-testing-with-dotnet-test?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
     - name: Komponententests für Razor-Seiten
       uid: test/razor-pages-tests
@@ -581,8 +579,6 @@
       items:
         - name: EF Core mit Razor Pages
           items:
-            - name: Übersicht
-              uid: data/ef-rp/index
             - name: Erste Schritte
               uid: data/ef-rp/intro
             - name: 'Erstellen, Lesen, Aktualisieren Und Löschen'
@@ -637,7 +633,7 @@
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
         - name: Warteschlangenspeicher
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-queues?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: Tabellenspeicher
+        - name: Table Storage
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: Hosten und Bereitstellen
   displayName: publish
@@ -701,6 +697,8 @@
         - name: Übersicht
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/index
+        - name: 'Veröffentlichen in IIS: Tutorial'
+          uid: tutorials/publish-to-iis
         - name: ASP.NET Core-Modul
           displayName: 'deploy, publish'
           uid: host-and-deploy/aspnet-core-module
@@ -767,7 +765,7 @@
     - name: Verzeichnisstruktur
       displayName: 'deploy, publish'
       uid: host-and-deploy/directory-structure
-    - name: Integritätsprüfungen
+    - name: Integritätsüberprüfungen
       uid: host-and-deploy/health-checks
       displayName: 'deploy, publish'
     - name: Blazor
@@ -785,7 +783,7 @@
   items:
     - name: Übersicht
       uid: security/index
-    - name: Authentifizierung
+    - name: Authentication
       items:
         - name: Einführung in Identity
           uid: security/authentication/identity
@@ -859,7 +857,7 @@
           uid: security/authentication/individual
         - name: Konfigurieren der Zertifikatauthentifizierung
           uid: security/authentication/certauth
-    - name: Autorisierung
+    - name: Authorization
       items:
         - name: Übersicht
           uid: security/authorization/introduction
@@ -885,7 +883,7 @@
           uid: security/authorization/views
         - name: Einschränken der Identität nach Schema
           uid: security/authorization/limitingidentitybyscheme
-    - name: Schutz von Daten
+    - name: Datenschutz
       displayName: encryption
       items:
         - name: Übersicht
@@ -988,7 +986,7 @@
   items:
     - name: Übersicht
       uid: performance/performance-best-practices
-    - name: Zwischenspeichern von Antworten
+    - name: Zwischenspeicherung von Antworten
       items:
         - name: Übersicht
           uid: performance/caching/response
@@ -1013,7 +1011,7 @@
       uid: fundamentals/localization
     - name: Lokalisierung portabler Objekte
       uid: fundamentals/portable-object-localization
-    - name: Erweiterungen
+    - name: Erweiterbarkeit
       uid: fundamentals/localization-extensibility
     - name: Problembehandlung
       uid: fundamentals/troubleshoot-aspnet-core-localization
@@ -1100,7 +1098,7 @@
     - name: Protokollierung (nicht ASP.NET Core)
       displayName: 'migrate, migration'
       uid: migration/logging-nonaspnetcore
-- name: API-Verweis
+- name: API-Referenz
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: Mitwirken
   href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
