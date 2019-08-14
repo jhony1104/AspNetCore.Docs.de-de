@@ -5,14 +5,14 @@ description: Beginnen Sie mit blazor, indem Sie eine blazor-App mit den Tools Ih
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/23/2019
+ms.date: 08/13/2019
 uid: blazor/get-started
-ms.openlocfilehash: b4609858be43acf9d1b2d8be5eff4879fd56f49f
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: 1358a2e92af9d9104e565718692b1ca1940b9d9e
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68948330"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993408"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
 
@@ -25,7 +25,7 @@ Beginnen Sie mit blazor:
 1. Installieren Sie die blazor-Vorlagen, indem Sie den folgenden Befehl in einer Befehlsshell ausführen:
 
    ```console
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview7.19365.7
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview8.19405.7
    ```
 
 1. Befolgen Sie die Anleitungen für die Auswahl der Tools:
@@ -40,12 +40,12 @@ Beginnen Sie mit blazor:
 
    4 \. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der **Orts** Eintrag korrekt ist, oder geben Sie einen Speicherort für das Projekt Wählen Sie **Erstellen** aus.
 
-   5 \. Wählen Sie für eine Client seitige Blade Blade-Darstellung die Vorlage **blazor (Client seitig)** aus. Wählen Sie für eine serverseitige Verwendung von blazor die Vorlage " **blazor-Server-App** " aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
+   5 \. Wählen Sie für die Client seitige Verwendung von blazor die Vorlage **blazor Webassembly App** aus. Wählen Sie für eine serverseitige Verwendung von blazor die Vorlage " **blazor-Server-App** " aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
 
    6 \. Drücken Sie **F5**, um die App auszuführen.
 
    > [!NOTE]
-   > Wenn Sie die blazor Visual Studio-Erweiterung für eine vorherige Vorschauversion von ASP.net Core blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung in der Vorschauversion 7 deinstallieren. Die Installation der blazor-Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
+   > Wenn Sie die Erweiterung blazor Visual Studio für eine vorherige Vorschauversion von ASP.net Core blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der blazor-Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -56,13 +56,13 @@ Beginnen Sie mit blazor:
    3 \. Führen Sie den folgenden Befehl in einer Befehlsshell aus, um die Client seitige Verwendung von blazor auszuführen:
 
       ```console
-      dotnet new blazor -o WebApplication1
+      dotnet new blazorwasm -o WebApplication1
       ```
 
       Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine serverseitige Funktion von blazor auszuführen:
 
       ```console
-      dotnet new blazorserverside -o WebApplication1
+      dotnet new blazorserver -o WebApplication1
       ```
 
       Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
@@ -85,7 +85,7 @@ Beginnen Sie mit blazor:
 
    3\. In the sidebar, select **.NET Core** > **App**.
 
-   4\. For a Blazor server-side experience, select the **ASP.NET Core Blazor Server App** template. For a Blazor client-side experience, select the **ASP.NET Core Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
+   4\. For a Blazor server-side experience, select the **Blazor Server App** template. For a Blazor client-side experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
 
    5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
 
@@ -100,7 +100,7 @@ Beginnen Sie mit blazor:
    Führen Sie die folgenden Befehle in einer Befehlsshell aus, um die Client seitige Verwendung von blazor auszuführen:
 
    ```console
-   dotnet new blazor -o WebApplication1
+   dotnet new blazorwasm -o WebApplication1
    cd WebApplication1
    dotnet run
    ```
@@ -108,7 +108,7 @@ Beginnen Sie mit blazor:
    Führen Sie die folgenden Befehle in einer Befehlsshell aus, um eine serverseitige Funktion von blazor auszuführen:
 
    ```console
-   dotnet new blazorserverside -o WebApplication1
+   dotnet new blazorserver -o WebApplication1
    cd WebApplication1
    dotnet run
    ```
@@ -152,7 +152,7 @@ Führen Sie die App aus. Die Startseite verfügt über einen eigenen, von `Count
 
 Komponenten Parameter werden mithilfe von Attributen oder untergeordnetem [Inhalt](xref:blazor/components#child-content)angegeben, sodass Sie Eigenschaften für die untergeordnete Komponente festlegen können. Aktualisieren Sie den `@code` Block der Komponente `Counter` , um der Komponente einen Parameter hinzuzufügen:
 
-* Fügen Sie eine- `IncrementAmount` Eigenschaft für `[Parameter]` mit einem-Attribut hinzu.
+* Fügen Sie eine öffentliche Eigenschaft `IncrementAmount` für mit `[Parameter]` einem-Attribut hinzu.
 * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
 *Pages/Counter.razor*:

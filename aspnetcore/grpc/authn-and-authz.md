@@ -4,14 +4,14 @@ author: jamesnk
 description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in GrpC für ASP.net Core verwenden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/26/2019
+ms.date: 08/13/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 34f7f8a5a22159329b3d6c4524943434c460c7fb
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 19018c4ffae1228055a4858b496f135d015625b4
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602422"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993291"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in GrpC für ASP.net Core
 
@@ -42,6 +42,8 @@ public void Configure(IApplicationBuilder app)
 
 > [!NOTE]
 > Die Reihenfolge, in der Sie die ASP.net Core Authentifizierungs Middleware registrieren, ist wichtig. `UseAuthentication` Immer und `UseAuthorization` nach und`UseRouting` vor .`UseEndpoints`
+
+Der Authentifizierungsmechanismus, den Ihre APP während eines Aufrufes verwendet, muss konfiguriert werden. Die Authentifizierungs Konfiguration wird in `Startup.ConfigureServices` hinzugefügt und unterscheidet sich je nach dem von Ihrer APP verwendeten Authentifizierungsmechanismus. Beispiele zum Sichern von ASP.net Core-apps finden Sie unter Beispiele für die [Authentifizierung](xref:security/authentication/samples).
 
 Nachdem die Authentifizierung eingerichtet wurde, kann über das `ServerCallContext`über eine GrpC-Dienst Methode auf den Benutzer zugegriffen werden.
 
@@ -146,7 +148,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Auf einzelne Dienst Methoden kann auch `[Authorize]` das-Attribut angewendet werden. Wenn der aktuelle Benutzer nicht mit den Richt **Linien für die** -Methode und die-Klasse identisch ist, wird ein Fehler an den Aufrufer zurückgegeben:
+Auf einzelne Dienst Methoden kann auch `[Authorize]` das-Attribut angewendet werden. Wenn der aktuelle Benutzer nicht mit den Richtlinien für die-Methode und die-Klasse identisch ist, wird ein Fehler an den Aufrufer zurückgegeben:
 
 ```csharp
 [Authorize]

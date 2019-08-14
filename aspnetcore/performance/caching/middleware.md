@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Middleware für die Zwischenspeicherung von A
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/08/2019
+ms.date: 08/09/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: 6371f42b100f70c6042064a6372c7b9e41fd5c73
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 838a08c12316d218501f26d5905f9e31ab93dfc9
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68914991"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994227"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Zwischen Speicherungs Middleware für Antworten in ASP.net Core
 
@@ -24,57 +24,57 @@ In diesem Artikel wird erläutert, wie Sie die Zwischenspeicherung von Antwort C
 
 ## <a name="configuration"></a>Konfiguration
 
-Verwenden Sie das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", oder fügen Sie dem Paket " [Microsoft. aspnetcore. responsecaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) " einen Paket Verweis hinzu.
+::: moniker range=">= aspnetcore-3.0"
+
+Die Middleware zum Zwischenspeichern von Antworten wird durch das [Microsoft. aspnetcore. responsecaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) -Paket ermöglicht, das ASP.net Core-apps implizit hinzugefügt wird.
 
 Fügen `Startup.ConfigureServices`Sie in der Dienst Sammlung die Middleware zum Zwischenspeichern von Antworten hinzu:
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
-
-::: moniker-end
 
 Konfigurieren Sie die APP für die Verwendung der Middleware <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> mit der-Erweiterungsmethode, mit der die Middleware der Pipeline für `Startup.Configure`die Anforderungs Verarbeitung in hinzugefügt wird:
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=16)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=14)]
-
-::: moniker-end
 
 Die Beispiel-App Fügt Header zum Steuern der Zwischenspeicherung bei nachfolgenden Anforderungen hinzu:
 
 * [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Speichert zwischen speicherbare Antworten bis zu 10 Sekunden.
 * [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4) Konfiguriert die Middleware so, dass eine zwischengespeicherte Antwort nur dann [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) bereitgestellt wird, wenn der Header der nachfolgenden Anforderungen mit der der ursprünglichen Anforderung übereinstimmt. &ndash;
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples_snippets/3.x/AddHeaders.cs)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
-
-::: moniker-end
 
 Die Middleware zum Zwischenspeichern von Antworten speichert nur Server Antworten zwischen, die zu einem 200 (OK)-Statuscode führen. Alle anderen Antworten, einschließlich der [Fehlerseiten](xref:fundamentals/error-handling), werden von der Middleware ignoriert.
 
 > [!WARNING]
 > Antworten, die Inhalte für authentifizierte Clients enthalten, müssen als nicht zwischen speicherbar gekennzeichnet werden, um zu verhindern, dass die Middleware diese Antworten speichert und bedient. Ausführliche Informationen dazu, wie die Middleware festlegt, ob eine Antwort zwischengespeichert werden kann, finden Sie unter [Bedingungen für das Caching](#conditions-for-caching) .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Verwenden Sie das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", oder fügen Sie dem Paket " [Microsoft. aspnetcore. responsecaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) " einen Paket Verweis hinzu.
+
+Fügen `Startup.ConfigureServices`Sie in der Dienst Sammlung die Middleware zum Zwischenspeichern von Antworten hinzu:
+
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
+
+Konfigurieren Sie die APP für die Verwendung der Middleware <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> mit der-Erweiterungsmethode, mit der die Middleware der Pipeline für `Startup.Configure`die Anforderungs Verarbeitung in hinzugefügt wird:
+
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=14)]
+
+Die Beispiel-App Fügt Header zum Steuern der Zwischenspeicherung bei nachfolgenden Anforderungen hinzu:
+
+* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Speichert zwischen speicherbare Antworten bis zu 10 Sekunden.
+* [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4) Konfiguriert die Middleware so, dass eine zwischengespeicherte Antwort nur dann [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) bereitgestellt wird, wenn der Header der nachfolgenden Anforderungen mit der der ursprünglichen Anforderung übereinstimmt. &ndash;
+
+[!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
+
+Die Middleware zum Zwischenspeichern von Antworten speichert nur Server Antworten zwischen, die zu einem 200 (OK)-Statuscode führen. Alle anderen Antworten, einschließlich der [Fehlerseiten](xref:fundamentals/error-handling), werden von der Middleware ignoriert.
+
+> [!WARNING]
+> Antworten, die Inhalte für authentifizierte Clients enthalten, müssen als nicht zwischen speicherbar gekennzeichnet werden, um zu verhindern, dass die Middleware diese Antworten speichert und bedient. Ausführliche Informationen dazu, wie die Middleware festlegt, ob eine Antwort zwischengespeichert werden kann, finden Sie unter [Bedingungen für das Caching](#conditions-for-caching) .
+
+::: moniker-end
 
 ## <a name="options"></a>Optionen
 
