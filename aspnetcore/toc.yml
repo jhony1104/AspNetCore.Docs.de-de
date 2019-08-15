@@ -20,7 +20,7 @@
       uid: aspnetcore-2.0
     - name: Neuerungen in Version 1.1
       uid: aspnetcore-1.1
-- name: Lernprogramme
+- name: Tutorials
   items:
     - name: Web-Apps
       items:
@@ -186,7 +186,7 @@
       uid: fundamentals/logging/index
     - name: Routing
       uid: fundamentals/routing
-    - name: Fehlerbehandlung
+    - name: Behandeln von Fehlern
       uid: fundamentals/error-handling
     - name: Übermitteln von HTTP-Anforderungen
       displayName: 'httpclient, httpclientfactory'
@@ -199,7 +199,7 @@
       items:
         - name: Einführung
           uid: razor-pages/index
-        - name: Tutorial
+        - name: Lernprogramm
           items:
             - name: Übersicht
               uid: tutorials/razor-pages/index
@@ -231,7 +231,7 @@
       items:
         - name: Übersicht
           uid: mvc/overview
-        - name: Tutorial
+        - name: Lernprogramm
           items:
             - name: Übersicht
               uid: tutorials/first-mvc-app/index
@@ -259,7 +259,7 @@
           uid: mvc/views/overview
         - name: Teilansichten
           uid: mvc/views/partial
-        - name: Controllers
+        - name: Controller
           uid: mvc/controllers/actions
         - name: Routing
           uid: mvc/controllers/routing
@@ -291,7 +291,7 @@
           uid: blazor/class-libraries
         - name: Layouts
           uid: blazor/layouts
-        - name: Abhängigkeitsinjektion
+        - name: Dependency Injection
           uid: blazor/dependency-injection
         - name: Routing
           uid: blazor/routing
@@ -301,9 +301,9 @@
           uid: security/blazor/index
         - name: Zustandsverwaltung
           uid: blazor/state-management
-        - name: Fehlerbehandlung
+        - name: Behandeln von Fehlern
           uid: blazor/handle-errors
-        - name: Debuggen
+        - name: Debug
           uid: blazor/debug
         - name: Aufrufen einer Web-API
           uid: blazor/call-web-api
@@ -368,23 +368,23 @@
           items:
             - name: Anchor
               uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-            - name: Cache
+            - name: cache
               uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
             - name: Verteilter Cache
               uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-            - name: Environment
+            - name: Umgebung
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-            - name: Form
+            - name: Formular
               href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
-            - name: Image
+            - name: Bild
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: Eingabe
               href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
             - name: Bezeichnung
               href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
-            - name: Teilweise
+            - name: Partial
               uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-            - name: Select
+            - name: Auswählen
               href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
             - name: Textarea
               href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
@@ -412,7 +412,7 @@
   items:
     - name: Übersicht
       uid: web-api/index
-    - name: Lernprogramme
+    - name: Tutorials
       items:
         - name: Erstellen einer Web-API
           uid: tutorials/first-web-api
@@ -432,7 +432,7 @@
       uid: web-api/advanced/formatting
     - name: Benutzerdefinierte Formatierer
       uid: web-api/advanced/custom-formatters
-    - name: Analysemodule
+    - name: Analyzer
       uid: web-api/advanced/analyzers
     - name: Konventionen
       uid: web-api/advanced/conventions
@@ -446,13 +446,13 @@
     - name: Unterstützte Plattformen
       uid: signalr/supported-platforms
       displayName: signalr
-    - name: Lernprogramme
+    - name: Tutorials
       items:
         - name: SignalR mit Javascript
           uid: tutorials/signalr
         - name: SignalR mit TypeScript
           uid: tutorials/signalr-typescript-webpack
-    - name: Beispiele
+    - name: Proben
       href: 'https://github.com/aspnet/SignalR-samples'
       displayName: signalr
     - name: Serverkonzepte
@@ -511,7 +511,7 @@
     - name: Authentifizierung und Autorisierung
       uid: signalr/authn-and-authz
       displayName: signalr
-    - name: Sicherheitshinweise
+    - name: Sicherheitsüberlegungen
       uid: signalr/security
       displayName: signalr
     - name: Hub-Protokoll „MessagePack“
@@ -541,15 +541,17 @@
       uid: grpc/configuration
     - name: Authentifizierung und Autorisierung
       uid: grpc/authn-and-authz
-    - name: Sicherheitshinweise
+    - name: Sicherheitsüberlegungen
       uid: grpc/security
     - name: Migrieren von gRPC-Diensten von C Core zu ASP.NET Core
       uid: grpc/migration
     - name: Vergleich von gRPC-Diensten mit HTTP-APIs
       uid: grpc/comparison
+    - name: Problembehandlung
+      uid: grpc/troubleshoot
 - name: 'Testen, Debuggen und Problembehandlung'
   items:
-    - name: Komponententests
+    - name: Komponententest
       href: /dotnet/core/testing/unit-testing-with-dotnet-test?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
     - name: Komponententests für Razor-Seiten
       uid: test/razor-pages-tests
@@ -633,7 +635,7 @@
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
         - name: Warteschlangenspeicher
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-queues?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: Table Storage
+        - name: Tabellenspeicher
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: Hosten und Bereitstellen
   displayName: publish
@@ -765,7 +767,7 @@
     - name: Verzeichnisstruktur
       displayName: 'deploy, publish'
       uid: host-and-deploy/directory-structure
-    - name: Integritätsüberprüfungen
+    - name: Integritätsprüfungen
       uid: host-and-deploy/health-checks
       displayName: 'deploy, publish'
     - name: Blazor
@@ -783,7 +785,7 @@
   items:
     - name: Übersicht
       uid: security/index
-    - name: Authentication
+    - name: Authentifizierung
       items:
         - name: Einführung in Identity
           uid: security/authentication/identity
@@ -857,7 +859,7 @@
           uid: security/authentication/individual
         - name: Konfigurieren der Zertifikatauthentifizierung
           uid: security/authentication/certauth
-    - name: Authorization
+    - name: Autorisierung
       items:
         - name: Übersicht
           uid: security/authorization/introduction
@@ -883,7 +885,7 @@
           uid: security/authorization/views
         - name: Einschränken der Identität nach Schema
           uid: security/authorization/limitingidentitybyscheme
-    - name: Datenschutz
+    - name: Schutz von Daten
       displayName: encryption
       items:
         - name: Übersicht
@@ -986,7 +988,7 @@
   items:
     - name: Übersicht
       uid: performance/performance-best-practices
-    - name: Zwischenspeicherung von Antworten
+    - name: Zwischenspeichern von Antworten
       items:
         - name: Übersicht
           uid: performance/caching/response
@@ -1011,7 +1013,7 @@
       uid: fundamentals/localization
     - name: Lokalisierung portabler Objekte
       uid: fundamentals/portable-object-localization
-    - name: Erweiterbarkeit
+    - name: Erweiterungen
       uid: fundamentals/localization-extensibility
     - name: Problembehandlung
       uid: fundamentals/troubleshoot-aspnet-core-localization
@@ -1098,7 +1100,7 @@
     - name: Protokollierung (nicht ASP.NET Core)
       displayName: 'migrate, migration'
       uid: migration/logging-nonaspnetcore
-- name: API-Referenz
+- name: API-Verweis
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: Mitwirken
   href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
