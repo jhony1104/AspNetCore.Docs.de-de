@@ -1,1 +1,1 @@
-Beim Verwenden hierarchischer Schlüssel in Umgebungsvariablen funktioniert ein Doppelpunkt (`:`) als Trennzeichen ggf. nicht auf allen Plattformen (z. B. Bash). Ein doppelter Unterstrich (`__`) wird auf allen Plattformen unterstützt und durch einen Doppelpunkt ersetzt.
+Beim Verwenden hierarchischer Schlüssel in Umgebungsvariablen funktioniert ein Doppelpunkt (`:`) als Trennzeichen ggf. nicht auf allen Plattformen (z. B. Bash). Ein doppelter Unterstrich (`__`) wird auf allen Plattformen unterstützt und automatisch durch einen Doppelpunkt ersetzt.
