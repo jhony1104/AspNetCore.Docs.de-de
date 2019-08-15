@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Komponenten in blazor-Apps aus einer externen Kom
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 08/13/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: 402b7b072554f63f85e7cf5e55336104d235a071
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 6e93d48bbc684845952c3db8935ccc8b190044b7
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68948440"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030350"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.net Core Razor Components-Klassenbibliotheken
 
@@ -33,10 +33,9 @@ Befolgen Sie die Anleitungen in <xref:blazor/get-started> diesem Artikel, um Ihr
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Erstellen Sie ein neues Projekt.
-1. Wählen Sie **ASP.NET Core-Webanwendung** aus. Klicken Sie auf **Weiter**.
+1. Wählen Sie **Razor-Klassenbibliothek**aus. Klicken Sie auf **Weiter**.
+1. Wählen Sie im Dialogfeld **neue Razor-Klassenbibliothek erstellen** die Option **Erstellen**aus.
 1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. In den Beispielen in diesem Thema wird der Projekt `MyComponentLib1`Name verwendet. Wählen Sie **Erstellen** aus.
-1. Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind.
-1. Wählen Sie die Vorlage **Razor-Klassenbibliothek** aus. Wählen Sie **Erstellen** aus.
 1. Fügen Sie die RCL zu einer Projekt Mappe hinzu:
    1. Klicken Sie mit der rechten Maustaste auf die Lösung. Wählen Sie**vorhandenes Projekt** **Hinzufügen** > .
    1. Navigieren Sie zur Projektdatei der RCL.

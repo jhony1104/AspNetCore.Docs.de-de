@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine Web-API über eine blazor-App mithilfe v
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2019
+ms.date: 08/13/2019
 uid: blazor/call-web-api
-ms.openlocfilehash: 1a13f9f1f9e660b39a1df584e49198c4bbb61533
-ms.sourcegitcommit: 47cc13ab90913af9a2887cef0896bb4e9aba4dd5
+ms.openlocfilehash: 60ebd01bc07da22cd1dcd0b16297ee54c97867fc
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "68948190"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030380"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Web-API aus ASP.net Core blazor aufzurufen
 
@@ -31,7 +31,7 @@ Informationen zu Client seitigen blazor-Beispielen finden Sie in den folgenden K
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient-und JSON-Hilfsprogramme
 
-In Client seitigen blazor-Apps ist [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst verfügbar, um Anforderungen an den Ursprungsserver zurückzusenden. `HttpClient`und JSON-Hilfsprogramme werden auch verwendet, um Web-API-Endpunkte von Drittanbietern aufzurufen. `HttpClient`wird mithilfe der Browser- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) implementiert und unterliegt den Einschränkungen, einschließlich der Erzwingung derselben Ursprungs Richtlinie.
+In Client seitigen blazor-Apps ist [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst verfügbar, um Anforderungen an den Ursprungsserver zurückzusenden. Um JSON-Hilfsprogramme zu verwenden `HttpClient` , fügen Sie einen Paket `Microsoft.AspNetCore.Blazor.HttpClient`Verweis hinzu. `HttpClient`und JSON-Hilfsprogramme werden auch verwendet, um Web-API-Endpunkte von Drittanbietern aufzurufen. `HttpClient`wird mithilfe der Browser- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) implementiert und unterliegt den Einschränkungen, einschließlich der Erzwingung derselben Ursprungs Richtlinie.
 
 Die Basisadresse des Clients wird auf die Adresse des Ursprungs Servers festgelegt. Fügen Sie `HttpClient` eine-Instanz `@inject` mithilfe der-Direktive ein:
 
@@ -59,7 +59,7 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
 
 * `GetJsonAsync`&ndash; Sendet eine HTTP GET-Anforderung und analysiert den JSON-Antworttext, um ein Objekt zu erstellen.
 
-  Im folgenden Code werden die `_todoItems` von der Komponente angezeigt. Die `GetTodoItems` -Methode wird ausgelöst, wenn das Rendering der Komponente abgeschlossen ist ([oninitasync](xref:blazor/components#lifecycle-methods)). Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+  Im folgenden Code werden die `_todoItems` von der Komponente angezeigt. Die `GetTodoItems` -Methode wird ausgelöst, wenn das Rendering der Komponente abgeschlossen ist ([oninitializedasync](xref:blazor/components#lifecycle-methods)). Ein umfassendes Beispiel finden Sie in der Beispiel-app.
 
   ```cshtml
   @using System.Net.Http
@@ -68,7 +68,7 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
   @code {
       private TodoItem[] _todoItems;
 
-      protected override async Task OnInitAsync() => 
+      protected override async Task OnInitializedAsync() => 
           _todoItems = await Http.GetJsonAsync<TodoItem[]>("api/todo");
   }
   ```

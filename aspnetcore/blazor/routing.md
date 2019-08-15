@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-K
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 08/13/2019
 uid: blazor/routing
-ms.openlocfilehash: 70cae6b3a21fe3537d6841a6716398a5fc45db62
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: 197b1a91b3540d21639c3ee775b2c490da7b23fe
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68948310"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030393"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
 
@@ -117,6 +117,18 @@ Es gibt zwei `NavLinkMatch` Optionen, die Sie dem `Match` -Attribut des `<NavLin
 * `NavLinkMatch.Prefix`(*Standard*) &ndash; Der`NavLink` ist aktiv, wenn er mit einem beliebigen Präfix der aktuellen URL übereinstimmt.
 
 Im vorherigen `NavLink` Beispiel stimmt die Start `href=""` -URL mit der Home-URL überein und `active` empfängt nur die CSS-Klasse an der `https://localhost:5001/`Standard-Basispfad-URL der APP (z. b.). Die zweite `NavLink` empfängt die `active` -Klasse, wenn der Benutzer eine URL mit `MyComponent` einem Präfix (z `https://localhost:5001/MyComponent` . `https://localhost:5001/MyComponent/AnotherSegment`b. und) besucht.
+
+Zusätzliche `NavLink` Komponenten Attribute werden an das gerenderte Ankertag weitergeleitet. Im folgenden Beispiel enthält die `NavLink` -Komponente das `target` -Attribut:
+
+```cshtml
+<NavLink href="my-page" target="_blank">My page</NavLink>
+```
+
+Das folgende HTML-Markup wird gerendert:
+
+```html
+<a href="my-page" target="_blank" rel="noopener noreferrer">My page</a>
+```
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI-und Navigations Zustands Hilfen
 

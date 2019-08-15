@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: a95c186d30eaf342f10ecbe6f7add242d4679a0f
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: 8cb2dc4c3cd22fe71fe15c22762948f9dcd3c08f
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68993412"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030363"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -519,7 +519,10 @@ Bevorzugen Sie die stark `EventCallback<T>` typisierte `EventCallback`. `EventCa
 
 ## <a name="capture-references-to-components"></a>Verweise auf Komponenten erfassen
 
-Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können, `Show` z `Reset`. b. oder. Fügen Sie ein- [@ref](xref:mvc/views/razor#ref) Attribut zur untergeordneten Komponente hinzu, und definieren Sie dann ein Feld mit demselben Namen und demselben Typ wie die untergeordnete Komponente, um einen Komponenten Verweis zu erfassen.
+Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können, `Show` z `Reset`. b. oder. So erfassen Sie einen Komponenten Verweis:
+
+* Fügen Sie [@ref](xref:mvc/views/razor#ref) der untergeordneten Komponente ein Attribut hinzu.
+* Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
 
 ```cshtml
 <MyLoginDialog @ref="loginDialog" ... />
@@ -538,6 +541,30 @@ Wenn die Komponente gerendert wird `loginDialog` , wird das Feld mit `MyLoginDia
 
 > [!IMPORTANT]
 > Die `loginDialog` -Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und `MyLoginDialog` die Ausgabe das-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Verwenden Sie die-Methode oder `OnAfterRenderAsync` `OnAfterRender` die-Methode, um Komponenten Verweise nach dem Rendering der Komponente zu bearbeiten.
+
+<!-- HOLD https://github.com/aspnet/AspNetCore.Docs/pull/13818
+Component references provide a way to reference a component instance so that you can issue commands to that instance, such as `Show` or `Reset`.
+
+The Razor compiler automatically generates a backing field for element and component references when using [@ref](xref:mvc/views/razor#ref). In the following example, there's no need to create a `myLoginDialog` field for the `LoginDialog` component:
+
+```cshtml
+<LoginDialog @ref="myLoginDialog" ... />
+
+@code {
+    private void OnSomething()
+    {
+        myLoginDialog.Show();
+    }
+}
+```
+
+When the component is rendered, the generated `myLoginDialog` field is populated with the `LoginDialog` component instance. You can then invoke .NET methods on the component instance.
+
+In some cases, a backing field is required. For example, declare a backing field when referencing generic components. To suppress backing field generation, specify the `@ref:suppressField` parameter.
+
+> [!IMPORTANT]
+> The generated `myLoginDialog` variable is only populated after the component is rendered and its output includes the `LoginDialog` element. Until that point, there's nothing to reference. To manipulate components references after the component has finished rendering, use the `OnAfterRenderAsync` or `OnAfterRender` methods.
+-->
 
 Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an JavaScript-&mdash;Code übermittelt, sondern nur in .NET-Code.
 
@@ -620,19 +647,19 @@ Stellen Sie sicher, dass `@key` die für verwendeten Werte nicht kollidieren. We
 
 ## <a name="lifecycle-methods"></a>Lebenszyklusmethoden
 
-`OnInitAsync`und `OnInit` führen Code aus, um die Komponente zu initialisieren. Verwenden `OnInitAsync` Sie zum Ausführen eines asynchronen Vorgangs das- `await` Schlüsselwort und das-Schlüsselwort für den Vorgang:
+`OnInitializedAsync`und `OnInitialized` führen Code aus, um die Komponente zu initialisieren. Verwenden `OnInitializedAsync` Sie zum Ausführen eines asynchronen Vorgangs das- `await` Schlüsselwort und das-Schlüsselwort für den Vorgang:
 
 ```csharp
-protected override async Task OnInitAsync()
+protected override async Task OnInitializedAsync()
 {
     await ...
 }
 ```
 
-Verwenden `OnInit`Sie für einen synchronen Vorgang Folgendes:
+Verwenden `OnInitialized`Sie für einen synchronen Vorgang Folgendes:
 
 ```csharp
-protected override void OnInit()
+protected override void OnInitialized()
 {
     ...
 }
@@ -674,7 +701,7 @@ protected override void OnAfterRender()
 
 Asynchrone Aktionen, die in Lebenszyklus Ereignissen ausgeführt werden, wurden möglicherweise nicht abgeschlossen, bevor die Komponente gerendert Objekte können oder `null` nicht vollständig mit Daten aufgefüllt werden, während die Lebenszyklus Methode ausgeführt wird. Stellen Sie Renderinglogik bereit, um zu bestätigen, dass Objekte initialisiert Stellen Sie Platzhalter-Benutzeroberflächen Elemente (z. b. eine Lade Nachricht `null`) dar, während-Objekte sind.
 
-In der `FetchData` -Komponente der blazor-Vorlagen `OnInitAsync` wird überschrieben, um Vorhersagedaten asynchron`forecasts`zu empfangen (). Wenn `forecasts`den Wert hat,wirddemBenutzereineMeldungzumLadenangezeigt.`null` Nachdem der `Task` von `OnInitAsync` zurückgegebene abgeschlossen wurde, wird die Komponente mit dem aktualisierten Zustand erneut ausgeführt.
+In der `FetchData` -Komponente der blazor-Vorlagen `OnInitializedAsync` wird überschrieben, um Vorhersagedaten asynchron`forecasts`zu empfangen (). Wenn `forecasts`den Wert hat,wirddemBenutzereineMeldungzumLadenangezeigt.`null` Nachdem der `Task` von `OnInitializedAsync` zurückgegebene abgeschlossen wurde, wird die Komponente mit dem aktualisierten Zustand erneut ausgeführt.
 
 *Pages/FetchData.razor*:
 
@@ -685,7 +712,7 @@ In der `FetchData` -Komponente der blazor-Vorlagen `OnInitAsync` wird überschri
 `SetParameters`kann überschrieben werden, um Code vor dem Festlegen von Parametern auszuführen:
 
 ```csharp
-public override void SetParameters(ParameterCollection parameters)
+public override void SetParameters(ParameterView parameters)
 {
     ...
 
