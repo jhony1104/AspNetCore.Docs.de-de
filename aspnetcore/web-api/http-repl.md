@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/25/2019
 uid: web-api/http-repl
-ms.openlocfilehash: e719d599545810d723840b0800cd6a2b4f96b123
-ms.sourcegitcommit: fbc66827e319d28bebed678ea5fd42f582fe3c34
+ms.openlocfilehash: 0e80fcd76a4d3efcd35140c52e0f6f0ae0f27932
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68493573"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862963"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -20,7 +20,7 @@ Von [Scott Addie](https://twitter.com/Scott_Addie)
 
 HTTP REPL (read–eval–print-Loop):
 
-* ein schlankes, plattformübergreifendes Befehlszeilentool, das überall unterstützt wird, wo .NET Core unterstützt wird
+* Ein schlankes, plattformübergreifendes Befehlszeilentool, das überall unterstützt wird, wo .NET Core unterstützt wird
 * wird zum Senden von HTTP-Anforderungen verwendet, mit denen ASP.NET Core-Web-APIs (und andere APIs) getestet werden können, und zum Überprüfen von deren Ergebnissen
 * kann zum Testen von Web-APIs verwendet werden, die in beliebigen Umgebungen gehostet werden (einschließlich Localhost und Azure App Service)
 
@@ -532,12 +532,12 @@ So führen Sie eine HTTP POST-Anforderung aus:
 
 1. Ändern Sie die JSON-Vorlage so, dass die Anforderungen für die Modellvalidierung erfüllt werden:
 
-  ```json
-  {
-    "id": 0,
-    "name": "Scott Addie"
-  }
-  ```
+    ```json
+    {
+      "id": 0,
+      "name": "Scott Addie"
+    }
+    ```
 
 1. Speichern Sie die *TMP-Datei*, und schließen Sie den Text-Editor. In der Befehlsshell wird die folgende Ausgabe angezeigt:
 

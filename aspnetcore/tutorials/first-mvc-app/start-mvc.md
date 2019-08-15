@@ -5,12 +5,12 @@ description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC.
 ms.author: riande
 ms.date: 08/05/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: f6a92423546ebd9d4c8e1a92fb81b6b72f847f61
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 36f4811f876a6e35440445103a1f86ae06b31b6a
+ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820096"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69022525"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Erste Schritte mit ASP.NET Core MVC
 
@@ -126,7 +126,6 @@ Drücken Sie **STRG+F5**, um die App im Nicht-Debugmodus auszuführen.
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-
   Auf der folgenden Abbildung sehen Sie die App:
 
   ![Start- oder Indexseite](start-mvc/_static/home2.2.png)
@@ -140,12 +139,6 @@ Drücken Sie STRG+F5, um die Ausführung ohne den Debugger zu starten.
   Visual Studio Code startet [Kestrel](xref:fundamentals/servers/kestrel) und einen Browser und navigiert zu `https://localhost:5001`. Die Adressleiste zeigt `localhost:port:5001` an, nicht `example.com`. Das liegt daran, dass es sich bei `localhost` um den Standardhostnamen für den lokalen Computer handelt. „Localhost“ dient nur Webanforderungen vom lokalen Computer.
 
   Das Starten der App mit STRG+F5 (Nicht-Debugmodus) ermöglicht die Änderung des Codes, das Speichern der Datei, das Aktualisieren des Browsers und das Anzeigen von Codeänderungen. Viele Entwickler bevorzugen den Nicht-Debugmodus, um die Seite zu aktualisieren und Änderungen anzuzeigen.
-
-* Wählen Sie **Akzeptieren** aus, um der Nachverfolgung zuzustimmen. Diese App verfolgt keine personenbezogenen Informationen nach. Der generierte Vorlagencode enthält Objekte, die bei der Erfüllung der [Datenschutz-Grundverordnung (DSGVO)](xref:security/gdpr) als Unterstützung dienen sollen.
-
-  ![Start- oder Indexseite](start-mvc/_static/privacy.png)
-
-  Die folgende Abbildung zeigt die App, nachdem die Nachverfolgung akzeptiert wurde:
 
   ![Start- oder Indexseite](start-mvc/_static/home2.2.png)
 

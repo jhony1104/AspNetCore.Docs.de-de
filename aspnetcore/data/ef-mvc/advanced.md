@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: caa821d36c192a06891a7b3d47c47436aea25a30
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 7b25ccad560d00801c1f6cb93d86163a8212bc12
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886005"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993444"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core
 
@@ -243,7 +243,7 @@ dotnet ef database drop
 
 Fehlermeldung:
 
-> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig und SQL Server so konfiguriert ist, das Remoteverbindungen zulässig sind. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26: Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz)
+> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig ist und dass SQL Server für Remoteverbindungen konfiguriert ist. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26: Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz)
 
 Projektmappe:
 
@@ -279,4 +279,4 @@ In diesem Tutorial:
 Dies schließt die verschiedenen Tutorials zur Verwendung von Entity Framework Core in einer ASP.NET Core MVC-Anwendung ab. Diese Serie hat mit einer neuen Datenbank gearbeitet; eine Alternative ist es, ein Modell aus einer vorhandenen Datenbank zurückzuentwickeln.
 
 > [!div class="nextstepaction"]
-> [Tutorial: Erste Schritte mit EF Core in ASP.NET Core mit einer neuen Datenbank](/ef/core/get-started/aspnetcore/new-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)
+> [Tutorial: Erste Schritte mit EF Core in ASP.NET Core mit einer neuen Datenbank](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)
