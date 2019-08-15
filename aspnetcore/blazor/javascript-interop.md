@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: ffd25fe0288159681f7fc052fc09e1f6fc425404
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 00ea14ca95c328b5f8779785a92aa0720a96eb05
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030306"
+ms.locfileid: "69487558"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
 
@@ -125,11 +125,12 @@ Erfassen Sie mithilfe des folgenden Ansatzes Verweise auf HTML-Elemente in einer
 
 * Fügen Sie `@ref` dem HTML--Element ein-Attribut hinzu.
 * Definieren Sie ein Feld vom `ElementReference` Typ, dessen Name `@ref` mit dem Wert des-Attributs übereinstimmt.
+* Geben Sie `@ref:suppressField` den-Parameter an, der die Unterstützungs Feld Generierung unterdrückt. Weitere Informationen finden Sie [unter "Entfernen der automatischen Unterstützung @ref für Unterstützungs Felder für" in 3.0.0-preview9](https://github.com/aspnet/Announcements/issues/381).
 
 Das folgende Beispiel zeigt, wie Sie einen Verweis `username` auf das `<input>` -Element erfassen:
 
 ```cshtml
-<input @ref="username" ... />
+<input @ref="username" @ref:suppressField ... />
 
 @code {
     ElementReference username;
@@ -158,7 +159,7 @@ Verwenden `IJSRuntime.InvokeAsync<T>` Sie`ElementReference` , `exampleJsFunction
 ```cshtml
 @inject IJSRuntime JSRuntime
 
-<input @ref="username" />
+<input @ref="username" @ref:suppressField />
 <button @onclick="SetFocus">Set focus on username</button>
 
 @code {
@@ -188,7 +189,7 @@ Die-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird d
 @inject IJSRuntime JSRuntime
 @using JsInteropClasses
 
-<input @ref="username" />
+<input @ref="username" @ref:suppressField />
 <button @onclick="SetFocus">Set focus on username</button>
 
 @code {

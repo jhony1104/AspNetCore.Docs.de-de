@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: 8cb2dc4c3cd22fe71fe15c22762948f9dcd3c08f
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 752f49f020acf26efcb304ed5e28e27c478dac83
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030363"
+ms.locfileid: "69487595"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -523,9 +523,10 @@ Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu ve
 
 * Fügen Sie [@ref](xref:mvc/views/razor#ref) der untergeordneten Komponente ein Attribut hinzu.
 * Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
+* Geben Sie `@ref:suppressField` den-Parameter an, der die Unterstützungs Feld Generierung unterdrückt. Weitere Informationen finden Sie [unter "Entfernen der automatischen Unterstützung @ref für Unterstützungs Felder für" in 3.0.0-preview9](https://github.com/aspnet/Announcements/issues/381).
 
 ```cshtml
-<MyLoginDialog @ref="loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" @ref:suppressField ... />
 
 @code {
     private MyLoginDialog loginDialog;
