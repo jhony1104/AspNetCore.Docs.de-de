@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: 6e93d48bbc684845952c3db8935ccc8b190044b7
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: b5857f2cf22bde801deeeaf227817fdf99862f4a
+ms.sourcegitcommit: 4cb0c7e74355f2e87c60e2a196f842b937247a99
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030350"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69545775"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.net Core Razor Components-Klassenbibliotheken
 
@@ -60,16 +60,6 @@ Befolgen Sie die Anleitungen in <xref:blazor/get-started> diesem Artikel, um Ihr
 
 ---
 
-## <a name="rcls-not-supported-for-client-side-apps"></a>Rcls werden für Client seitige apps nicht unterstützt.
-
-In der aktuellen ASP.net Core 3,0 Preview sind Razor-Klassenbibliotheken nicht mit Client seitigen blazor-Apps kompatibel. Verwenden Sie für Client seitige blazor-apps eine blazor-Komponentenbibliothek, die `blazorlib` von der Vorlage in einer Befehlsshell erstellt wurde:
-
-```console
-dotnet new blazorlib -o MyComponentLib1
-```
-
-Komponenten Bibliotheken, die `blazorlib` die Vorlage verwenden, können statische Dateien enthalten, wie z. b. Bilder, JavaScript und Stylesheets. Zum Zeitpunkt der Erstellung werden statische Dateien in die integrierte Assemblydatei ( *. dll*) eingebettet, wodurch die Nutzung der Komponenten ermöglicht wird, ohne sich Gedanken über das einschließen ihrer Ressourcen machen zu müssen. Alle Dateien, die `content` im Verzeichnis enthalten sind, werden als eingebettete Ressource gekennzeichnet.
-
 ## <a name="consume-a-library-component"></a>Verwenden einer Bibliotheks Komponente
 
 Verwenden Sie einen der folgenden Ansätze, um Komponenten zu verwenden, die in einer Bibliothek in einem anderen Projekt definiert sind:
@@ -116,8 +106,6 @@ Laden Sie das Paket mit dem Befehl " [dotnet NuGet Publish](/dotnet/core/tools/d
 ```console
 dotnet nuget publish
 ```
-
-Wenn Sie die `blazorlib` Vorlage verwenden, werden statische Ressourcen in das nuget-Paket eingeschlossen. Bibliotheks Consumer erhalten automatisch Skripts und Stylesheets, sodass Consumer die Ressourcen nicht manuell installieren müssen.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>Erstellen einer Razor Components-Klassenbibliothek mit statischen Assets
 
