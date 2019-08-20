@@ -3,75 +3,75 @@ title: 'Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)'
 author: rick-anderson
 description: In diesem Tutorial verwenden Sie zunächst das EF Core-Migrationsfeature für die Verwaltung von Datenmodelländerungen in einer ASP.NET Core MVC-App.
 ms.author: riande
-ms.date: 06/30/2017
+ms.date: 07/22/2019
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 54225a8126e04eb4ff3a6a0cde9d305249299887
-ms.sourcegitcommit: 1bf80f4acd62151ff8cce517f03f6fa891136409
+ms.openlocfilehash: 73624f515e8089b5852864b60ec66ad79c7475c3
+ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/15/2019
-ms.locfileid: "68223864"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68914061"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a><span data-ttu-id="8f54d-103">Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)</span><span class="sxs-lookup"><span data-stu-id="8f54d-103">Razor Pages with EF Core in ASP.NET Core - Migrations - 4 of 8</span></span>
+# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a><span data-ttu-id="fe7a8-103">Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-103">Razor Pages with EF Core in ASP.NET Core - Migrations - 4 of 8</span></span>
 
-<span data-ttu-id="8f54d-104">Von [Tom Dykstra](https://github.com/tdykstra), [Jon P. Smith](https://twitter.com/thereformedprog) und [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="8f54d-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="fe7a8-104">Von [Tom Dykstra](https://github.com/tdykstra), [Jon P. Smith](https://twitter.com/thereformedprog) und [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
-<span data-ttu-id="8f54d-105">In diesem Tutorial wird das EF Core-Migrationsfeature zur Verwaltung von Datenmodelländerungen verwendet.</span><span class="sxs-lookup"><span data-stu-id="8f54d-105">In this tutorial, the EF Core migrations feature for managing data model changes is used.</span></span>
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="8f54d-106">Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.</span><span class="sxs-lookup"><span data-stu-id="8f54d-106">If you run into problems you can't solve, download the [completed app](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).</span></span>
+<span data-ttu-id="fe7a8-105">In diesem Tutorial wird das EF Core-Migrationsfeature für die Verwaltung von Datenmodelländerungen vorgestellt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-105">This tutorial introduces the EF Core migrations feature for managing data model changes.</span></span>
 
-<span data-ttu-id="8f54d-107">Wenn eine neue App entwickelt wird, ändert sich das Datenmodell häufig.</span><span class="sxs-lookup"><span data-stu-id="8f54d-107">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="8f54d-108">Nach jeder Modelländerung ist das Modell nicht mehr synchron mit der Datenbank.</span><span class="sxs-lookup"><span data-stu-id="8f54d-108">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="8f54d-109">In diesem Tutorial wurde zunächst Entity Framework für die Erstellung der Datenbank konfiguriert, falls diese nicht vorhanden ist.</span><span class="sxs-lookup"><span data-stu-id="8f54d-109">This tutorial started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="8f54d-110">Bei jeder Datenmodelländerung:</span><span class="sxs-lookup"><span data-stu-id="8f54d-110">Each time the data model changes:</span></span>
+<span data-ttu-id="fe7a8-106">Wenn eine neue App entwickelt wird, ändert sich das Datenmodell häufig.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-106">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="fe7a8-107">Nach jeder Modelländerung ist das Modell nicht mehr synchron mit der Datenbank.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-107">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="fe7a8-108">In dieser Tutorialreihe wurde zunächst Entity Framework für die Erstellung der Datenbank konfiguriert, falls diese nicht vorhanden ist.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-108">This tutorial series started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="fe7a8-109">Jedes Mal, wenn sich das Datenmodell ändert, müssen Sie die Datenbank löschen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-109">Each time the data model changes, you have to drop the database.</span></span> <span data-ttu-id="fe7a8-110">Wenn die App das nächste Mal ausgeführt wird, wird durch den Aufruf von `EnsureCreated` die Datenbank erneut entsprechend dem neuen Datenmodell erstellt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-110">The next time the app runs, the call to `EnsureCreated` re-creates the database to match the new data model.</span></span> <span data-ttu-id="fe7a8-111">Die `DbInitializer`-Klasse wird dann ausgeführt, um das Seeding der neuen Datenbank durchzuführen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-111">The `DbInitializer` class then runs to seed the new database.</span></span>
 
-* <span data-ttu-id="8f54d-111">Wird die Datenbank gelöscht.</span><span class="sxs-lookup"><span data-stu-id="8f54d-111">The DB is dropped.</span></span>
-* <span data-ttu-id="8f54d-112">Erstellt EF eine neue, dem Modell entsprechende Datenbank.</span><span class="sxs-lookup"><span data-stu-id="8f54d-112">EF creates a new one that matches the model.</span></span>
-* <span data-ttu-id="8f54d-113">Füllt die App die Datenbank mit Testdaten auf.</span><span class="sxs-lookup"><span data-stu-id="8f54d-113">The app seeds the DB with test data.</span></span>
+<span data-ttu-id="fe7a8-112">Dieser Ansatz, bei dem die Datenbank mit dem Datenmodell synchron gehalten wird, funktioniert gut, bis Sie die App für die Produktion bereitstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-112">This approach to keeping the database in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="fe7a8-113">Wenn die App in der Produktionsumgebung ausgeführt wird, speichert sie in der Regel Daten, die verwaltet werden müssen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-113">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="fe7a8-114">Wenn eine Änderung vorgenommen wird (z.B. eine neue Spalte hinzugefügt wird), kann die App nicht jedes Mal mit einer Testdatenbank starten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-114">The app can't start with a test database each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="fe7a8-115">Mit dem EF Core-Migrationsfeature wird dieses Problem gelöst, indem EF Core das Datenbankschema aktualisiert, anstatt eine neue Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-115">The EF Core Migrations feature solves this problem by enabling EF Core to update the database schema instead of creating a new database.</span></span>
 
-<span data-ttu-id="8f54d-114">Dieser Ansatz, bei dem die Datenbank mit dem Datenmodell synchron gehalten wird, funktioniert so lange, bis Sie die App für die Produktion bereitstellen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-114">This approach to keeping the DB in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="8f54d-115">Wenn die App in der Produktionsumgebung ausgeführt wird, speichert sie in der Regel Daten, die verwaltet werden müssen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-115">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="8f54d-116">Jedes Mal, wenn eine Änderung vorgenommen wird (z.B. wenn eine neue Spalte hinzugefügt wird), kann die App nicht mit einer Testdatenbank starten.</span><span class="sxs-lookup"><span data-stu-id="8f54d-116">The app can't start with a test DB each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="8f54d-117">Mit der EF Core-Migrationsfeature wird dieses Problem gelöst, indem EF Core das Datenbankschema aktualisiert, anstatt eine neue Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-117">The EF Core Migrations feature solves this problem by enabling EF Core to update the DB schema instead of creating a new DB.</span></span>
+<span data-ttu-id="fe7a8-116">Anstatt die Datenbank bei Änderungen des Datenmodell zu löschen und neu zu erstellen, erfolgt bei der Migration eine Aktualisierung des Schemas und die Beibehaltung vorhandener Daten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-116">Rather than dropping and recreating the database when the data model changes, migrations updates the schema and retains existing data.</span></span>
 
-<span data-ttu-id="8f54d-118">Statt die Datenbank bei den Datenmodelländerungen zu löschen und neu zu erstellen, wird bei der Migration eine Aktualisierung des Schemas und eine Beibehaltung vorhandener Daten angestrebt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-118">Rather than dropping and recreating the DB when the data model changes, migrations updates the schema and retains existing data.</span></span>
+[!INCLUDE[](~/includes/sqlite-warn.md)]
 
-## <a name="drop-the-database"></a><span data-ttu-id="8f54d-119">Löschen der Datenbank</span><span class="sxs-lookup"><span data-stu-id="8f54d-119">Drop the database</span></span>
+## <a name="drop-the-database"></a><span data-ttu-id="fe7a8-117">Löschen der Datenbank</span><span class="sxs-lookup"><span data-stu-id="fe7a8-117">Drop the database</span></span>
 
-<span data-ttu-id="8f54d-120">Verwenden Sie den **SQL Server-Objekt-Explorer** (SSOX) oder den Befehl `database drop`:</span><span class="sxs-lookup"><span data-stu-id="8f54d-120">Use **SQL Server Object Explorer** (SSOX) or the `database drop` command:</span></span>
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="fe7a8-118">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="fe7a8-118">Visual Studio</span></span>](#tab/visual-studio)
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="8f54d-121">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8f54d-121">Visual Studio</span></span>](#tab/visual-studio)
+<span data-ttu-id="fe7a8-119">Verwenden Sie **SQL Server-Objekt-Explorer** (SSOX), um die Datenbank zu löschen, oder führen Sie den folgenden Befehl in der **Paket-Manager-Konsole** (PMC) aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-119">Use **SQL Server Object Explorer** (SSOX) to delete the database, or run the following command in the **Package Manager Console** (PMC):</span></span>
 
-<span data-ttu-id="8f54d-122">Führen Sie folgenden Befehl in der **Paket-Manager-Konsole** aus:</span><span class="sxs-lookup"><span data-stu-id="8f54d-122">In the **Package Manager Console** (PMC), run the following command:</span></span>
-
-```PMC
+```powershell
 Drop-Database
 ```
 
-<span data-ttu-id="8f54d-123">Führen Sie `Get-Help about_EntityFrameworkCore` über die Paket-Manager-Konsole aus, um Hilfeinformationen zu erhalten.</span><span class="sxs-lookup"><span data-stu-id="8f54d-123">Run `Get-Help about_EntityFrameworkCore` from the PMC to get help information.</span></span>
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="fe7a8-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="fe7a8-120">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="8f54d-124">.NET Core-CLI</span><span class="sxs-lookup"><span data-stu-id="8f54d-124">.NET Core CLI</span></span>](#tab/netcore-cli)
+* <span data-ttu-id="fe7a8-121">Führen Sie an der Eingabeaufforderung den folgenden Befehl aus, um die EF CLI-Tools zu installieren:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-121">Run the following command at a command prompt to install the EF CLI tools:</span></span>
 
-<span data-ttu-id="8f54d-125">Öffnen Sie ein Befehlsfenster, und navigieren Sie zu dem Projektordner.</span><span class="sxs-lookup"><span data-stu-id="8f54d-125">Open a command window and navigate to the project folder.</span></span> <span data-ttu-id="8f54d-126">Der Projektordner enthält die Datei *Startup.cs*.</span><span class="sxs-lookup"><span data-stu-id="8f54d-126">The project folder contains the *Startup.cs* file.</span></span>
+  ```console
+  dotnet tool install --global dotnet-ef --version 3.0.0-*
+  ```
 
-<span data-ttu-id="8f54d-127">Geben Sie im Befehlsfenster Folgendes ein:</span><span class="sxs-lookup"><span data-stu-id="8f54d-127">Enter the following in the command window:</span></span>
+* <span data-ttu-id="fe7a8-122">Navigieren Sie in der Eingabeaufforderung zum Projektordner.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-122">In the command prompt, navigate to the project folder.</span></span> <span data-ttu-id="fe7a8-123">Der Projektordner enthält die Datei *ContosoUniversity.csproj*.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-123">The project folder contains the *ContosoUniversity.csproj* file.</span></span>
 
- ```console
- dotnet ef database drop
- ```
+* <span data-ttu-id="fe7a8-124">Löschen Sie die Datei *CU.db*, oder führen Sie den folgenden Befehl aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-124">Delete the *CU.db* file, or run the following command:</span></span>
+
+  ```console
+  dotnet ef database drop --force
+  ```
 
 ---
 
-## <a name="create-an-initial-migration-and-update-the-db"></a><span data-ttu-id="8f54d-128">Erstellen einer ursprünglichen Migration und Aktualisieren der Datenbank</span><span class="sxs-lookup"><span data-stu-id="8f54d-128">Create an initial migration and update the DB</span></span>
+## <a name="create-an-initial-migration"></a><span data-ttu-id="fe7a8-125">Erstellen einer ursprünglichen Migration</span><span class="sxs-lookup"><span data-stu-id="fe7a8-125">Create an initial migration</span></span>
 
-<span data-ttu-id="8f54d-129">Erstellen Sie das Projekt und die erste Migration.</span><span class="sxs-lookup"><span data-stu-id="8f54d-129">Build the project and create the first migration.</span></span>
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="fe7a8-126">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="fe7a8-126">Visual Studio</span></span>](#tab/visual-studio)
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="8f54d-130">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8f54d-130">Visual Studio</span></span>](#tab/visual-studio)
+<span data-ttu-id="fe7a8-127">Führen Sie die folgenden Befehle in der PMC aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-127">Run the following commands in the PMC:</span></span>
 
-```PMC
+```powershell
 Add-Migration InitialCreate
 Update-Database
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="8f54d-131">.NET Core-CLI</span><span class="sxs-lookup"><span data-stu-id="8f54d-131">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="fe7a8-128">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="fe7a8-128">Visual Studio Code</span></span>](#tab/visual-studio-code)
+
+<span data-ttu-id="fe7a8-129">Stellen Sie sicher, dass sich die Eingabeaufforderung im Projektordner befindet, und führen Sie die folgenden Befehle aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-129">Make sure the command prompt is in the project folder, and run the following commands:</span></span>
 
 ```console
 dotnet ef migrations add InitialCreate
@@ -80,88 +80,57 @@ dotnet ef database update
 
 ---
 
-### <a name="examine-the-up-and-down-methods"></a><span data-ttu-id="8f54d-132">Überprüfen der Methoden „Up“ und „Down“</span><span class="sxs-lookup"><span data-stu-id="8f54d-132">Examine the Up and Down methods</span></span>
+## <a name="up-and-down-methods"></a><span data-ttu-id="fe7a8-130">Up- und Down-Methoden</span><span class="sxs-lookup"><span data-stu-id="fe7a8-130">Up and Down methods</span></span>
 
-<span data-ttu-id="8f54d-133">Der EF Core-Befehl `migrations add` hat Code generiert, um die Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-133">The EF Core `migrations add` command  generated code to create the DB.</span></span> <span data-ttu-id="8f54d-134">Dieser Migrationscode ist in der Datei *Migrations\<timestamp>_InitialCreate.cs* enthalten.</span><span class="sxs-lookup"><span data-stu-id="8f54d-134">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="8f54d-135">Die Methode `Up` der Klasse `InitialCreate` erstellt die Datenbanktabellen, die den Datenmodellentitätenmengen entsprechen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-135">The `Up` method of the `InitialCreate` class creates the DB tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="8f54d-136">Die Methode `Down` löscht diese, wie im folgenden Beispiel dargestellt:</span><span class="sxs-lookup"><span data-stu-id="8f54d-136">The `Down` method deletes them, as shown in the following example:</span></span>
+<span data-ttu-id="fe7a8-131">Der EF Core-Befehl `migrations add` hat Code generiert, um die Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-131">The EF Core `migrations add` command generated code to create the database.</span></span> <span data-ttu-id="fe7a8-132">Dieser Migrationscode ist in der Datei *Migrations\<timestamp>_InitialCreate.cs* enthalten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-132">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="fe7a8-133">Die Methode `Up` der Klasse `InitialCreate` erstellt die Datenbanktabellen, die den Datenmodell-Entitätenmengen entsprechen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-133">The `Up` method of the `InitialCreate` class creates the database tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="fe7a8-134">Die Methode `Down` löscht diese, wie im folgenden Beispiel dargestellt:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-134">The `Down` method deletes them, as shown in the following example:</span></span>
 
-[!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
+[!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
-<span data-ttu-id="8f54d-137">Die Migrationsfunktion ruft die Methode `Up` auf, um die Datenmodelländerungen für eine Migration zu implementieren.</span><span class="sxs-lookup"><span data-stu-id="8f54d-137">Migrations calls the `Up` method to implement the data model changes for a migration.</span></span> <span data-ttu-id="8f54d-138">Wenn Sie einen Befehl eingeben, um ein Rollback für das Update auszuführen, ruft die Migrationsfunktion die Methode `Down` auf.</span><span class="sxs-lookup"><span data-stu-id="8f54d-138">When you enter a command to roll back the update, migrations calls the `Down` method.</span></span>
+<span data-ttu-id="fe7a8-135">Der vorangehende Code ist für die ursprüngliche Migration bestimmt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-135">The preceding code is for the initial migration.</span></span> <span data-ttu-id="fe7a8-136">Der Code:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-136">The code:</span></span>
 
-<span data-ttu-id="8f54d-139">Der vorangehende Code ist für die ursprüngliche Migration bestimmt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-139">The preceding code is for the initial migration.</span></span> <span data-ttu-id="8f54d-140">Dieser Code wurde bei der Ausführung des Befehls `migrations add InitialCreate` erstellt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-140">That code was created when the `migrations add InitialCreate` command was run.</span></span> <span data-ttu-id="8f54d-141">Der Parameter für den Migrationsnamen (in dem Beispiel „InitialCreate“) wird für den Dateinamen verwendet.</span><span class="sxs-lookup"><span data-stu-id="8f54d-141">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="8f54d-142">Der Migrationsname kann ein beliebiger gültiger Dateiname sein.</span><span class="sxs-lookup"><span data-stu-id="8f54d-142">The migration name can be any valid file name.</span></span> <span data-ttu-id="8f54d-143">Es wird empfohlen, ein Wort oder einen Ausdruck auszuwählen, durch das bzw. den der Hintergrund der Migration widergespiegelt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-143">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="8f54d-144">Eine Migration, bei der eine Tabelle mit Fachbereichen hinzugefügt wurde, könnte beispielsweise als „AddDepartmentTable“ bezeichnet werden.</span><span class="sxs-lookup"><span data-stu-id="8f54d-144">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
+* <span data-ttu-id="fe7a8-137">Wurde durch den `migrations add InitialCreate`-Befehl generiert.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-137">Was generated by the `migrations add InitialCreate` command.</span></span> 
+* <span data-ttu-id="fe7a8-138">Wird durch den `database update`-Befehl ausgeführt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-138">Is executed by the `database update` command.</span></span>
+* <span data-ttu-id="fe7a8-139">Erstellt eine Datenbank für das Datenmodell, das durch die Datenbankkontextklasse angegeben wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-139">Creates a database for the data model specified by the database context class.</span></span>
 
-<span data-ttu-id="8f54d-145">Wenn die ursprüngliche Migration erstellt wird und die Datenbank vorhanden ist:</span><span class="sxs-lookup"><span data-stu-id="8f54d-145">If the initial migration is created and the DB exists:</span></span>
+<span data-ttu-id="fe7a8-140">Der Parameter für den Migrationsnamen (in dem Beispiel „InitialCreate“) wird für den Dateinamen verwendet.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-140">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="fe7a8-141">Der Migrationsname kann ein beliebiger gültiger Dateiname sein.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-141">The migration name can be any valid file name.</span></span> <span data-ttu-id="fe7a8-142">Es wird empfohlen, ein Wort oder einen Ausdruck auszuwählen, durch das bzw. den der Hintergrund der Migration widergespiegelt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-142">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="fe7a8-143">Eine Migration, bei der eine Tabelle mit Fachbereichen hinzugefügt wurde, könnte beispielsweise als „AddDepartmentTable“ bezeichnet werden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-143">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
 
-* <span data-ttu-id="8f54d-146">Wird der Code für die Datenbankerstellung generiert.</span><span class="sxs-lookup"><span data-stu-id="8f54d-146">The DB creation code is generated.</span></span>
-* <span data-ttu-id="8f54d-147">Muss der Code für die Datenbankerstellung nicht ausgeführt werden, da die Datenbank bereits mit dem Datenmodell übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-147">The DB creation code doesn't need to run because the DB already matches the data model.</span></span> <span data-ttu-id="8f54d-148">Wenn der Code für die Datenbankerstellung ausgeführt wird, werden keine Änderungen vorgenommen, da die Datenbank bereits mit dem Datenmodell übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-148">If the DB creation code is run, it doesn't make any changes because the DB already matches the data model.</span></span>
+## <a name="the-migrations-history-table"></a><span data-ttu-id="fe7a8-144">Die Migrationsverlaufstabelle</span><span class="sxs-lookup"><span data-stu-id="fe7a8-144">The migrations history table</span></span>
 
-<span data-ttu-id="8f54d-149">Wenn die App in einer neuen Umgebung bereitgestellt wird, muss der Code für die Datenbankerstellung ausgeführt werden, damit die Datenbank erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-149">When the app is deployed to a new environment, the DB creation code must be run to create the DB.</span></span>
+* <span data-ttu-id="fe7a8-145">Verwenden Sie SSOX oder das SQLite-Tool, um die Datenbank zu untersuchen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-145">Use SSOX or your SQLite tool to inspect the database.</span></span>
+* <span data-ttu-id="fe7a8-146">Beachten Sie die zusätzliche Tabelle`__EFMigrationsHistory`.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-146">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="fe7a8-147">In der Tabelle `__EFMigrationsHistory` wird nachverfolgt, welche Migrationen auf die Datenbank angewendet wurden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-147">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the database.</span></span>
+* <span data-ttu-id="fe7a8-148">Zeigen Sie die Daten in der Tabelle `__EFMigrationsHistory` an.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-148">View the data in the `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="fe7a8-149">Es wird eine Zeile für die erste Migration angezeigt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-149">It shows one row for the first migration.</span></span>
 
-<span data-ttu-id="8f54d-150">Die Datenbank wurde zuvor gelöscht und ist daher nicht vorhanden, darum erstellt die Migration eine neue Datenbank.</span><span class="sxs-lookup"><span data-stu-id="8f54d-150">Previously the DB was dropped and doesn't exist, so migrations creates the new DB.</span></span>
+## <a name="the-data-model-snapshot"></a><span data-ttu-id="fe7a8-150">Die Momentaufnahme des Datenmodells</span><span class="sxs-lookup"><span data-stu-id="fe7a8-150">The data model snapshot</span></span>
 
-### <a name="the-data-model-snapshot"></a><span data-ttu-id="8f54d-151">Die Momentaufnahme des Datenmodells</span><span class="sxs-lookup"><span data-stu-id="8f54d-151">The data model snapshot</span></span>
+<span data-ttu-id="fe7a8-151">Bei der Migration wird in *Migrations/SchoolContextModelSnapshot.cs* eine *Momentaufnahme* des aktuellen Datenmodells erstellt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-151">Migrations creates a *snapshot* of the current data model in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="fe7a8-152">Wenn Sie eine Migration hinzufügen, bestimmt EF die vorgenommenen Änderungen, indem das aktuelle Datenmodell mit der Momentaufnahmedatei verglichen wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-152">When you add a migration, EF determines what changed by comparing the current data model to the snapshot file.</span></span>
 
-<span data-ttu-id="8f54d-152">Die Migration erstellt unter *Migrations/SchoolContextModelSnapshot.cs* eine *Momentaufnahme* des aktuellen Datenbankschemas.</span><span class="sxs-lookup"><span data-stu-id="8f54d-152">Migrations create a *snapshot* of the current database schema in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="8f54d-153">Wenn Sie eine Migration hinzufügen, bestimmt EF die vorgenommenen Änderungen, indem das Datenmodell mit der Momentaufnahmedatei verglichen wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-153">When you add a migration, EF determines what changed by comparing the data model to the snapshot file.</span></span>
+<span data-ttu-id="fe7a8-153">Da die Momentaufnahmedatei den Status des Datenmodells nachverfolgt, können Sie eine Migration nicht löschen, indem Sie die Datei `<timestamp>_<migrationname>.cs` löschen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-153">Because the snapshot file tracks the state of the data model, you can't delete a migration by deleting the `<timestamp>_<migrationname>.cs` file.</span></span> <span data-ttu-id="fe7a8-154">Zum Zurücksetzen der neuesten Migration müssen Sie den Befehl `migrations remove` verwenden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-154">To back out the most recent migration, you have to use the `migrations remove` command.</span></span> <span data-ttu-id="fe7a8-155">Dieser Befehl löscht die Migration und stellt sicher, dass die Momentaufnahme ordnungsgemäß zurückgesetzt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-155">That command deletes the migration and ensures the snapshot is correctly reset.</span></span> <span data-ttu-id="fe7a8-156">Weitere Informationen finden Sie unter [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span><span class="sxs-lookup"><span data-stu-id="fe7a8-156">For more information, see [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
 
-<span data-ttu-id="8f54d-154">Verwenden Sie folgenden Befehl, um eine Migration zu löschen:</span><span class="sxs-lookup"><span data-stu-id="8f54d-154">To delete a migration, use the following command:</span></span>
+## <a name="remove-ensurecreated"></a><span data-ttu-id="fe7a8-157">Entfernen von EnsureCreated</span><span class="sxs-lookup"><span data-stu-id="fe7a8-157">Remove EnsureCreated</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="8f54d-155">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8f54d-155">Visual Studio</span></span>](#tab/visual-studio)
+<span data-ttu-id="fe7a8-158">Diese Tutorialreihe hat mit der Verwendung von `EnsureCreated` begonnen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-158">This tutorial series started by using `EnsureCreated`.</span></span> <span data-ttu-id="fe7a8-159">`EnsureCreated` erstellt keine Migrationsverlaufstabelle und kann daher nicht mit Migrationen verwendet werden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-159">`EnsureCreated` doesn't create a migrations history table and so can't be used with migrations.</span></span> <span data-ttu-id="fe7a8-160">EnsureCreated dient zum Testen oder schnellen Erstellen von Prototypen, wenn die Datenbank häufig gelöscht und neu erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-160">It's designed for testing or rapid prototyping where the database is dropped and re-created frequently.</span></span>
 
-<span data-ttu-id="8f54d-156">Remove-Migration</span><span class="sxs-lookup"><span data-stu-id="8f54d-156">Remove-Migration</span></span>
+<span data-ttu-id="fe7a8-161">Ab diesem Zeitpunkt werden die Tutorials Migrationen verwenden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-161">From this point forward, the tutorials will use migrations.</span></span>
 
-# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="8f54d-157">.NET Core-CLI</span><span class="sxs-lookup"><span data-stu-id="8f54d-157">.NET Core CLI</span></span>](#tab/netcore-cli)
-
-```console
-dotnet ef migrations remove
-```
-
-<span data-ttu-id="8f54d-158">Weitere Informationen finden Sie unter [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span><span class="sxs-lookup"><span data-stu-id="8f54d-158">For more information, see  [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
-
----
-
-<span data-ttu-id="8f54d-159">Der Befehl „Remove-Migration“ löscht die Migration und stellt sicher, dass die Momentaufnahme ordnungsgemäß zurückgesetzt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-159">The remove migrations command deletes the migration and ensures the snapshot is correctly reset.</span></span>
-
-### <a name="remove-ensurecreated-and-test-the-app"></a><span data-ttu-id="8f54d-160">Entfernen von EnsureCreated und Testen der App</span><span class="sxs-lookup"><span data-stu-id="8f54d-160">Remove EnsureCreated and test the app</span></span>
-
-<span data-ttu-id="8f54d-161">Zu einem frühen Entwicklungszeitpunkt wurde `EnsureCreated` verwendet.</span><span class="sxs-lookup"><span data-stu-id="8f54d-161">For early development, `EnsureCreated` was used.</span></span> <span data-ttu-id="8f54d-162">In diesem Tutorial werden Migrationen verwendet.</span><span class="sxs-lookup"><span data-stu-id="8f54d-162">In this tutorial, migrations are used.</span></span> <span data-ttu-id="8f54d-163">Der Befehl `EnsureCreated` weist folgende Einschränkungen auf:</span><span class="sxs-lookup"><span data-stu-id="8f54d-163">`EnsureCreated` has the following limitations:</span></span>
-
-* <span data-ttu-id="8f54d-164">Er umgeht Migrationen und erstellt die Datenbank und das Schema.</span><span class="sxs-lookup"><span data-stu-id="8f54d-164">Bypasses migrations and creates the DB and schema.</span></span>
-* <span data-ttu-id="8f54d-165">Er erstellt keine Migrationstabelle.</span><span class="sxs-lookup"><span data-stu-id="8f54d-165">Doesn't create a migrations table.</span></span>
-* <span data-ttu-id="8f54d-166">Er kann *nicht* mit Migrationen verwendet werden.</span><span class="sxs-lookup"><span data-stu-id="8f54d-166">Can *not* be used with migrations.</span></span>
-* <span data-ttu-id="8f54d-167">Er dient zum Testen oder schnellen Erstellen von Prototypen an Positionen, an denen die Datenbank häufig gelöscht und neu erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-167">Is designed for testing or rapid prototyping where the DB is dropped and re-created frequently.</span></span>
-
-<span data-ttu-id="8f54d-168">Entfernen Sie `EnsureCreated`:</span><span class="sxs-lookup"><span data-stu-id="8f54d-168">Remove `EnsureCreated`:</span></span>
+<span data-ttu-id="fe7a8-162">Kommentieren Sie in *Data/DBInitializer.cs* die folgende Zeile aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-162">In *Data/DBInitializer.cs*, comment out the following line:</span></span>
 
 ```csharp
 context.Database.EnsureCreated();
 ```
+<span data-ttu-id="fe7a8-163">Führen Sie die App aus, und stellen Sie sicher, dass für die Datenbank ein Seeding durchgeführt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-163">Run the app and verify that the database is seeded.</span></span>
 
-<span data-ttu-id="8f54d-169">Führen Sie die App aus, und stellen Sie sicher, dass für die Datenbank ein Seeding durchgeführt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-169">Run the app and verify the DB is seeded.</span></span>
+## <a name="applying-migrations-in-production"></a><span data-ttu-id="fe7a8-164">Anwenden von Migrationen in der Produktionsumgebung</span><span class="sxs-lookup"><span data-stu-id="fe7a8-164">Applying migrations in production</span></span>
 
-### <a name="inspect-the-database"></a><span data-ttu-id="8f54d-170">Untersuchen der Datenbank</span><span class="sxs-lookup"><span data-stu-id="8f54d-170">Inspect the database</span></span>
+<span data-ttu-id="fe7a8-165">Es wird empfohlen, dass Produktions-Apps [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) beim Anwendungsstart **nicht** aufrufen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-165">We recommend that production apps **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="fe7a8-166">`Migrate` sollte nicht aus einer APP aufgerufen werden, die in einer Serverfarm bereitgestellt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-166">`Migrate` shouldn't be called from an app that is deployed to a server farm.</span></span> <span data-ttu-id="fe7a8-167">Wenn die App auf mehrere Serverinstanzen horizontal hochskaliert wird, ist es schwierig sicherzustellen, dass Datenbankschemaaktualisierungen nicht von mehreren Servern erfolgen oder mit Lese-/Schreibzugriffen einen Konflikt verursachen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-167">If the app is scaled out to multiple server instances, it's hard to ensure database schema updates don't happen from multiple servers or conflict with read/write access.</span></span>
 
-<span data-ttu-id="8f54d-171">Verwenden Sie den **SQL Server-Objekt-Explorer** zur Untersuchung der Datenbank.</span><span class="sxs-lookup"><span data-stu-id="8f54d-171">Use **SQL Server Object Explorer** to inspect the DB.</span></span> <span data-ttu-id="8f54d-172">Beachten Sie die zusätzliche Tabelle`__EFMigrationsHistory`.</span><span class="sxs-lookup"><span data-stu-id="8f54d-172">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="8f54d-173">In der Tabelle `__EFMigrationsHistory` wird nachverfolgt, welche Migrationen auf die Datenbank angewendet wurden.</span><span class="sxs-lookup"><span data-stu-id="8f54d-173">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the DB.</span></span> <span data-ttu-id="8f54d-174">Wenn Sie die Daten in der Tabelle `__EFMigrationsHistory` anzeigen, wird eine Zeile für die erste Migration angezeigt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-174">View the data in the `__EFMigrationsHistory` table, it shows one row for the first migration.</span></span> <span data-ttu-id="8f54d-175">Im letzten Protokoll im vorherigen Beispiel der CLI-Ausgabe wird die INSERT-Anweisung angezeigt, mit der diese Zeile erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="8f54d-175">The last log in the preceding CLI output example shows the INSERT statement that creates this row.</span></span>
+<span data-ttu-id="fe7a8-168">Die Datenbankmigration sollte im Rahmen der Bereitstellung und auf kontrollierte Weise erfolgen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-168">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="fe7a8-169">Zu den Ansätzen für die Migration von Produktionsdatenbanken zählen die folgenden:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-169">Production database migration approaches include:</span></span>
 
-<span data-ttu-id="8f54d-176">Führen Sie die App aus, und überprüfen Sie, ob alles funktioniert.</span><span class="sxs-lookup"><span data-stu-id="8f54d-176">Run the app and verify that everything works.</span></span>
+* <span data-ttu-id="fe7a8-170">Verwendung von Migrationen zur Erstellung von SQL-Skripts und Verwendung der SQL-Skripts bei der Bereitstellung.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-170">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
+* <span data-ttu-id="fe7a8-171">Ausführen von `dotnet ef database update` über eine kontrollierte Umgebung.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-171">Running `dotnet ef database update` from a controlled environment.</span></span>
 
-## <a name="applying-migrations-in-production"></a><span data-ttu-id="8f54d-177">Anwenden von Migrationen in der Produktionsumgebung</span><span class="sxs-lookup"><span data-stu-id="8f54d-177">Applying migrations in production</span></span>
+## <a name="troubleshooting"></a><span data-ttu-id="fe7a8-172">Problembehandlung</span><span class="sxs-lookup"><span data-stu-id="fe7a8-172">Troubleshooting</span></span>
 
-<span data-ttu-id="8f54d-178">Es wird empfohlen, dass Produktions-Apps [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) beim Anwendungsstart **nicht** aufrufen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-178">We recommend production apps should **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="8f54d-179">`Migrate` sollte in der Serverfarm nicht über eine App aufgerufen werden.</span><span class="sxs-lookup"><span data-stu-id="8f54d-179">`Migrate` shouldn't be called from an app in server farm.</span></span> <span data-ttu-id="8f54d-180">Beispielsweise wenn die App über eine Cloud mit horizontaler Skalierung bereitgestellt wurde (mehrere Instanzen der App werden ausgeführt).</span><span class="sxs-lookup"><span data-stu-id="8f54d-180">For example, if the app has been cloud deployed with scale-out (multiple instances of the app are running).</span></span>
-
-<span data-ttu-id="8f54d-181">Die Datenbankmigration sollte im Rahmen der Bereitstellung und auf kontrollierte Weise erfolgen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-181">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="8f54d-182">Zu den Ansätzen für die Migration von Produktionsdatenbanken zählen die folgenden:</span><span class="sxs-lookup"><span data-stu-id="8f54d-182">Production database migration approaches include:</span></span>
-
-* <span data-ttu-id="8f54d-183">Verwendung von Migrationen zur Erstellung von SQL-Skripts und Verwendung der SQL-Skripts bei der Bereitstellung.</span><span class="sxs-lookup"><span data-stu-id="8f54d-183">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
-* <span data-ttu-id="8f54d-184">Ausführen von `dotnet ef database update` über eine kontrollierte Umgebung.</span><span class="sxs-lookup"><span data-stu-id="8f54d-184">Running `dotnet ef database update` from a controlled environment.</span></span>
-
-<span data-ttu-id="8f54d-185">EF Core kann über die Tabelle `__MigrationsHistory` sehen, ob Migrationen ausgeführt werden müssen.</span><span class="sxs-lookup"><span data-stu-id="8f54d-185">EF Core uses the `__MigrationsHistory` table to see if any migrations need to run.</span></span> <span data-ttu-id="8f54d-186">Wenn die Datenbank auf dem neuesten Stand ist, wird keine Migration ausgeführt.</span><span class="sxs-lookup"><span data-stu-id="8f54d-186">If the DB is up-to-date, no migration is run.</span></span>
-
-## <a name="troubleshooting"></a><span data-ttu-id="8f54d-187">Problembehandlung</span><span class="sxs-lookup"><span data-stu-id="8f54d-187">Troubleshooting</span></span>
-
-<span data-ttu-id="8f54d-188">Laden Sie die [fertige App](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part4-migrations) herunter.</span><span class="sxs-lookup"><span data-stu-id="8f54d-188">Download the [completed app](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part4-migrations).</span></span>
-
-<span data-ttu-id="8f54d-189">Die App generiert folgende Ausnahme:</span><span class="sxs-lookup"><span data-stu-id="8f54d-189">The app generates the following exception:</span></span>
+<span data-ttu-id="fe7a8-173">Wenn die App SQL Server LocalDB verwendet und die folgende Ausnahme angezeigt wird:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-173">If the app uses SQL Server LocalDB and displays the following exception:</span></span>
 
 ```text
 SqlException: Cannot open database "ContosoUniversity" requested by the login.
@@ -169,17 +138,191 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-<span data-ttu-id="8f54d-190">Projektmappe: Ausführen von `dotnet ef database update`</span><span class="sxs-lookup"><span data-stu-id="8f54d-190">Solution: Run `dotnet ef database update`</span></span>
+<span data-ttu-id="fe7a8-174">Die Lösung kann die Ausführung von `dotnet ef database update` an einer Eingabeaufforderung sein.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-174">The solution may be to run `dotnet ef database update` at a command prompt.</span></span>
 
-### <a name="additional-resources"></a><span data-ttu-id="8f54d-191">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="8f54d-191">Additional resources</span></span>
+### <a name="additional-resources"></a><span data-ttu-id="fe7a8-175">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="fe7a8-175">Additional resources</span></span>
 
-* [<span data-ttu-id="8f54d-192">Dieses Tutorial auf YouTube</span><span class="sxs-lookup"><span data-stu-id="8f54d-192">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=OWSUuMLKTJo)
-* <span data-ttu-id="8f54d-193">[.NET Core-CLI](/ef/core/miscellaneous/cli/dotnet)</span><span class="sxs-lookup"><span data-stu-id="8f54d-193">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
-* [<span data-ttu-id="8f54d-194">Paket-Manager-Konsole (Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="8f54d-194">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
+* <span data-ttu-id="fe7a8-176">[EF Core-CLI](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="fe7a8-176">[EF Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
+* [<span data-ttu-id="fe7a8-177">Paket-Manager-Konsole (Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-177">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
+
+## <a name="next-steps"></a><span data-ttu-id="fe7a8-178">Nächste Schritte</span><span class="sxs-lookup"><span data-stu-id="fe7a8-178">Next steps</span></span>
+
+<span data-ttu-id="fe7a8-179">Im nächsten Tutorial wird das Datenmodell erstellt, und es werden Entitätseigenschaften und neue Entitäten hinzugefügt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-179">The next tutorial builds out the data model, adding entity properties and new entities.</span></span>
+
+> [!div class="step-by-step"]
+> <span data-ttu-id="fe7a8-180">[Vorheriges Tutorial](xref:data/ef-rp/sort-filter-page)
+> [Nächstes Tutorial](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-180">[Previous tutorial](xref:data/ef-rp/sort-filter-page)
+[Next tutorial](xref:data/ef-rp/complex-data-model)</span></span>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+<span data-ttu-id="fe7a8-181">In diesem Tutorial wird das EF Core-Migrationsfeature zur Verwaltung von Datenmodelländerungen verwendet.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-181">In this tutorial, the EF Core migrations feature for managing data model changes is used.</span></span>
+
+<span data-ttu-id="fe7a8-182">Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-182">If you run into problems you can't solve, download the [completed app](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).</span></span>
+
+<span data-ttu-id="fe7a8-183">Wenn eine neue App entwickelt wird, ändert sich das Datenmodell häufig.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-183">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="fe7a8-184">Nach jeder Modelländerung ist das Modell nicht mehr synchron mit der Datenbank.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-184">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="fe7a8-185">In diesem Tutorial wurde zunächst Entity Framework für die Erstellung der Datenbank konfiguriert, falls diese nicht vorhanden ist.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-185">This tutorial started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="fe7a8-186">Bei jeder Datenmodelländerung:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-186">Each time the data model changes:</span></span>
+
+* <span data-ttu-id="fe7a8-187">Wird die Datenbank gelöscht.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-187">The DB is dropped.</span></span>
+* <span data-ttu-id="fe7a8-188">Erstellt EF eine neue, dem Modell entsprechende Datenbank.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-188">EF creates a new one that matches the model.</span></span>
+* <span data-ttu-id="fe7a8-189">Füllt die App die Datenbank mit Testdaten auf.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-189">The app seeds the DB with test data.</span></span>
+
+<span data-ttu-id="fe7a8-190">Dieser Ansatz, bei dem die Datenbank mit dem Datenmodell synchron gehalten wird, funktioniert so lange, bis Sie die App für die Produktion bereitstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-190">This approach to keeping the DB in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="fe7a8-191">Wenn die App in der Produktionsumgebung ausgeführt wird, speichert sie in der Regel Daten, die verwaltet werden müssen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-191">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="fe7a8-192">Jedes Mal, wenn eine Änderung vorgenommen wird (z.B. wenn eine neue Spalte hinzugefügt wird), kann die App nicht mit einer Testdatenbank starten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-192">The app can't start with a test DB each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="fe7a8-193">Mit der EF Core-Migrationsfeature wird dieses Problem gelöst, indem EF Core das Datenbankschema aktualisiert, anstatt eine neue Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-193">The EF Core Migrations feature solves this problem by enabling EF Core to update the DB schema instead of creating a new DB.</span></span>
+
+<span data-ttu-id="fe7a8-194">Statt die Datenbank bei den Datenmodelländerungen zu löschen und neu zu erstellen, wird bei der Migration eine Aktualisierung des Schemas und eine Beibehaltung vorhandener Daten angestrebt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-194">Rather than dropping and recreating the DB when the data model changes, migrations updates the schema and retains existing data.</span></span>
+
+## <a name="drop-the-database"></a><span data-ttu-id="fe7a8-195">Löschen der Datenbank</span><span class="sxs-lookup"><span data-stu-id="fe7a8-195">Drop the database</span></span>
+
+<span data-ttu-id="fe7a8-196">Verwenden Sie den **SQL Server-Objekt-Explorer** (SSOX) oder den Befehl `database drop`:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-196">Use **SQL Server Object Explorer** (SSOX) or the `database drop` command:</span></span>
+
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="fe7a8-197">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="fe7a8-197">Visual Studio</span></span>](#tab/visual-studio)
+
+<span data-ttu-id="fe7a8-198">Führen Sie folgenden Befehl in der **Paket-Manager-Konsole** aus:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-198">In the **Package Manager Console** (PMC), run the following command:</span></span>
+
+```PMC
+Drop-Database
+```
+
+<span data-ttu-id="fe7a8-199">Führen Sie `Get-Help about_EntityFrameworkCore` über die Paket-Manager-Konsole aus, um Hilfeinformationen zu erhalten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-199">Run `Get-Help about_EntityFrameworkCore` from the PMC to get help information.</span></span>
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="fe7a8-200">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="fe7a8-200">Visual Studio Code</span></span>](#tab/visual-studio-code)
+
+<span data-ttu-id="fe7a8-201">Öffnen Sie ein Befehlsfenster, und navigieren Sie zu dem Projektordner.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-201">Open a command window and navigate to the project folder.</span></span> <span data-ttu-id="fe7a8-202">Der Projektordner enthält die Datei *Startup.cs*.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-202">The project folder contains the *Startup.cs* file.</span></span>
+
+<span data-ttu-id="fe7a8-203">Geben Sie im Befehlsfenster Folgendes ein:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-203">Enter the following in the command window:</span></span>
+
+ ```console
+ dotnet ef database drop
+ ```
+
+---
+
+## <a name="create-an-initial-migration-and-update-the-db"></a><span data-ttu-id="fe7a8-204">Erstellen einer ursprünglichen Migration und Aktualisieren der Datenbank</span><span class="sxs-lookup"><span data-stu-id="fe7a8-204">Create an initial migration and update the DB</span></span>
+
+<span data-ttu-id="fe7a8-205">Erstellen Sie das Projekt und die erste Migration.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-205">Build the project and create the first migration.</span></span>
+
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="fe7a8-206">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="fe7a8-206">Visual Studio</span></span>](#tab/visual-studio)
+
+```PMC
+Add-Migration InitialCreate
+Update-Database
+```
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="fe7a8-207">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="fe7a8-207">Visual Studio Code</span></span>](#tab/visual-studio-code)
+
+```console
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+---
+
+### <a name="examine-the-up-and-down-methods"></a><span data-ttu-id="fe7a8-208">Überprüfen der Methoden „Up“ und „Down“</span><span class="sxs-lookup"><span data-stu-id="fe7a8-208">Examine the Up and Down methods</span></span>
+
+<span data-ttu-id="fe7a8-209">Der EF Core-Befehl `migrations add` hat Code generiert, um die Datenbank zu erstellen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-209">The EF Core `migrations add` command  generated code to create the DB.</span></span> <span data-ttu-id="fe7a8-210">Dieser Migrationscode ist in der Datei *Migrations\<timestamp>_InitialCreate.cs* enthalten.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-210">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="fe7a8-211">Die Methode `Up` der Klasse `InitialCreate` erstellt die Datenbanktabellen, die den Datenmodellentitätenmengen entsprechen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-211">The `Up` method of the `InitialCreate` class creates the DB tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="fe7a8-212">Die Methode `Down` löscht diese, wie im folgenden Beispiel dargestellt:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-212">The `Down` method deletes them, as shown in the following example:</span></span>
+
+[!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
+
+<span data-ttu-id="fe7a8-213">Die Migrationsfunktion ruft die Methode `Up` auf, um die Datenmodelländerungen für eine Migration zu implementieren.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-213">Migrations calls the `Up` method to implement the data model changes for a migration.</span></span> <span data-ttu-id="fe7a8-214">Wenn Sie einen Befehl eingeben, um ein Rollback für das Update auszuführen, ruft die Migrationsfunktion die Methode `Down` auf.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-214">When you enter a command to roll back the update, migrations calls the `Down` method.</span></span>
+
+<span data-ttu-id="fe7a8-215">Der vorangehende Code ist für die ursprüngliche Migration bestimmt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-215">The preceding code is for the initial migration.</span></span> <span data-ttu-id="fe7a8-216">Dieser Code wurde bei der Ausführung des Befehls `migrations add InitialCreate` erstellt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-216">That code was created when the `migrations add InitialCreate` command was run.</span></span> <span data-ttu-id="fe7a8-217">Der Parameter für den Migrationsnamen (in dem Beispiel „InitialCreate“) wird für den Dateinamen verwendet.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-217">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="fe7a8-218">Der Migrationsname kann ein beliebiger gültiger Dateiname sein.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-218">The migration name can be any valid file name.</span></span> <span data-ttu-id="fe7a8-219">Es wird empfohlen, ein Wort oder einen Ausdruck auszuwählen, durch das bzw. den der Hintergrund der Migration widergespiegelt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-219">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="fe7a8-220">Eine Migration, bei der eine Tabelle mit Fachbereichen hinzugefügt wurde, könnte beispielsweise als „AddDepartmentTable“ bezeichnet werden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-220">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
+
+<span data-ttu-id="fe7a8-221">Wenn die ursprüngliche Migration erstellt wird und die Datenbank vorhanden ist:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-221">If the initial migration is created and the DB exists:</span></span>
+
+* <span data-ttu-id="fe7a8-222">Wird der Code für die Datenbankerstellung generiert.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-222">The DB creation code is generated.</span></span>
+* <span data-ttu-id="fe7a8-223">Muss der Code für die Datenbankerstellung nicht ausgeführt werden, da die Datenbank bereits mit dem Datenmodell übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-223">The DB creation code doesn't need to run because the DB already matches the data model.</span></span> <span data-ttu-id="fe7a8-224">Wenn der Code für die Datenbankerstellung ausgeführt wird, werden keine Änderungen vorgenommen, da die Datenbank bereits mit dem Datenmodell übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-224">If the DB creation code is run, it doesn't make any changes because the DB already matches the data model.</span></span>
+
+<span data-ttu-id="fe7a8-225">Wenn die App in einer neuen Umgebung bereitgestellt wird, muss der Code für die Datenbankerstellung ausgeführt werden, damit die Datenbank erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-225">When the app is deployed to a new environment, the DB creation code must be run to create the DB.</span></span>
+
+<span data-ttu-id="fe7a8-226">Die Datenbank wurde zuvor gelöscht und ist daher nicht vorhanden, darum erstellt die Migration eine neue Datenbank.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-226">Previously the DB was dropped and doesn't exist, so migrations creates the new DB.</span></span>
+
+### <a name="the-data-model-snapshot"></a><span data-ttu-id="fe7a8-227">Die Momentaufnahme des Datenmodells</span><span class="sxs-lookup"><span data-stu-id="fe7a8-227">The data model snapshot</span></span>
+
+<span data-ttu-id="fe7a8-228">Die Migration erstellt unter *Migrations/SchoolContextModelSnapshot.cs* eine *Momentaufnahme* des aktuellen Datenbankschemas.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-228">Migrations create a *snapshot* of the current database schema in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="fe7a8-229">Wenn Sie eine Migration hinzufügen, bestimmt EF die vorgenommenen Änderungen, indem das Datenmodell mit der Momentaufnahmedatei verglichen wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-229">When you add a migration, EF determines what changed by comparing the data model to the snapshot file.</span></span>
+
+<span data-ttu-id="fe7a8-230">Verwenden Sie folgenden Befehl, um eine Migration zu löschen:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-230">To delete a migration, use the following command:</span></span>
+
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="fe7a8-231">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="fe7a8-231">Visual Studio</span></span>](#tab/visual-studio)
+
+<span data-ttu-id="fe7a8-232">Remove-Migration</span><span class="sxs-lookup"><span data-stu-id="fe7a8-232">Remove-Migration</span></span>
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="fe7a8-233">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="fe7a8-233">Visual Studio Code</span></span>](#tab/visual-studio-code)
+
+```console
+dotnet ef migrations remove
+```
+
+<span data-ttu-id="fe7a8-234">Weitere Informationen finden Sie unter [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span><span class="sxs-lookup"><span data-stu-id="fe7a8-234">For more information, see  [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
+
+---
+
+<span data-ttu-id="fe7a8-235">Der Befehl „Remove-Migration“ löscht die Migration und stellt sicher, dass die Momentaufnahme ordnungsgemäß zurückgesetzt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-235">The remove migrations command deletes the migration and ensures the snapshot is correctly reset.</span></span>
+
+### <a name="remove-ensurecreated-and-test-the-app"></a><span data-ttu-id="fe7a8-236">Entfernen von EnsureCreated und Testen der App</span><span class="sxs-lookup"><span data-stu-id="fe7a8-236">Remove EnsureCreated and test the app</span></span>
+
+<span data-ttu-id="fe7a8-237">Zu einem frühen Entwicklungszeitpunkt wurde `EnsureCreated` verwendet.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-237">For early development, `EnsureCreated` was used.</span></span> <span data-ttu-id="fe7a8-238">In diesem Tutorial werden Migrationen verwendet.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-238">In this tutorial, migrations are used.</span></span> <span data-ttu-id="fe7a8-239">Der Befehl `EnsureCreated` weist folgende Einschränkungen auf:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-239">`EnsureCreated` has the following limitations:</span></span>
+
+* <span data-ttu-id="fe7a8-240">Er umgeht Migrationen und erstellt die Datenbank und das Schema.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-240">Bypasses migrations and creates the DB and schema.</span></span>
+* <span data-ttu-id="fe7a8-241">Er erstellt keine Migrationstabelle.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-241">Doesn't create a migrations table.</span></span>
+* <span data-ttu-id="fe7a8-242">Er kann *nicht* mit Migrationen verwendet werden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-242">Can *not* be used with migrations.</span></span>
+* <span data-ttu-id="fe7a8-243">Er dient zum Testen oder schnellen Erstellen von Prototypen an Positionen, an denen die Datenbank häufig gelöscht und neu erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-243">Is designed for testing or rapid prototyping where the DB is dropped and re-created frequently.</span></span>
+
+<span data-ttu-id="fe7a8-244">Entfernen Sie `EnsureCreated`:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-244">Remove `EnsureCreated`:</span></span>
+
+```csharp
+context.Database.EnsureCreated();
+```
+
+<span data-ttu-id="fe7a8-245">Führen Sie die App aus, und stellen Sie sicher, dass für die Datenbank ein Seeding durchgeführt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-245">Run the app and verify the DB is seeded.</span></span>
+
+### <a name="inspect-the-database"></a><span data-ttu-id="fe7a8-246">Untersuchen der Datenbank</span><span class="sxs-lookup"><span data-stu-id="fe7a8-246">Inspect the database</span></span>
+
+<span data-ttu-id="fe7a8-247">Verwenden Sie den **SQL Server-Objekt-Explorer** zur Untersuchung der Datenbank.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-247">Use **SQL Server Object Explorer** to inspect the DB.</span></span> <span data-ttu-id="fe7a8-248">Beachten Sie die zusätzliche Tabelle`__EFMigrationsHistory`.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-248">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="fe7a8-249">In der Tabelle `__EFMigrationsHistory` wird nachverfolgt, welche Migrationen auf die Datenbank angewendet wurden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-249">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the DB.</span></span> <span data-ttu-id="fe7a8-250">Wenn Sie die Daten in der Tabelle `__EFMigrationsHistory` anzeigen, wird eine Zeile für die erste Migration angezeigt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-250">View the data in the `__EFMigrationsHistory` table, it shows one row for the first migration.</span></span> <span data-ttu-id="fe7a8-251">Im letzten Protokoll im vorherigen Beispiel der CLI-Ausgabe wird die INSERT-Anweisung angezeigt, mit der diese Zeile erstellt wird.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-251">The last log in the preceding CLI output example shows the INSERT statement that creates this row.</span></span>
+
+<span data-ttu-id="fe7a8-252">Führen Sie die App aus, und überprüfen Sie, ob alles funktioniert.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-252">Run the app and verify that everything works.</span></span>
+
+## <a name="applying-migrations-in-production"></a><span data-ttu-id="fe7a8-253">Anwenden von Migrationen in der Produktionsumgebung</span><span class="sxs-lookup"><span data-stu-id="fe7a8-253">Applying migrations in production</span></span>
+
+<span data-ttu-id="fe7a8-254">Es wird empfohlen, dass Produktions-Apps [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) beim Anwendungsstart **nicht** aufrufen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-254">We recommend production apps should **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="fe7a8-255">`Migrate` sollte in der Serverfarm nicht über eine App aufgerufen werden.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-255">`Migrate` shouldn't be called from an app in server farm.</span></span> <span data-ttu-id="fe7a8-256">Beispielsweise wenn die App über eine Cloud mit horizontaler Skalierung bereitgestellt wurde (mehrere Instanzen der App werden ausgeführt).</span><span class="sxs-lookup"><span data-stu-id="fe7a8-256">For example, if the app has been cloud deployed with scale-out (multiple instances of the app are running).</span></span>
+
+<span data-ttu-id="fe7a8-257">Die Datenbankmigration sollte im Rahmen der Bereitstellung und auf kontrollierte Weise erfolgen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-257">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="fe7a8-258">Zu den Ansätzen für die Migration von Produktionsdatenbanken zählen die folgenden:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-258">Production database migration approaches include:</span></span>
+
+* <span data-ttu-id="fe7a8-259">Verwendung von Migrationen zur Erstellung von SQL-Skripts und Verwendung der SQL-Skripts bei der Bereitstellung.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-259">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
+* <span data-ttu-id="fe7a8-260">Ausführen von `dotnet ef database update` über eine kontrollierte Umgebung.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-260">Running `dotnet ef database update` from a controlled environment.</span></span>
+
+<span data-ttu-id="fe7a8-261">EF Core kann über die Tabelle `__MigrationsHistory` sehen, ob Migrationen ausgeführt werden müssen.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-261">EF Core uses the `__MigrationsHistory` table to see if any migrations need to run.</span></span> <span data-ttu-id="fe7a8-262">Wenn die Datenbank auf dem neuesten Stand ist, wird keine Migration ausgeführt.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-262">If the DB is up-to-date, no migration is run.</span></span>
+
+## <a name="troubleshooting"></a><span data-ttu-id="fe7a8-263">Problembehandlung</span><span class="sxs-lookup"><span data-stu-id="fe7a8-263">Troubleshooting</span></span>
+
+<span data-ttu-id="fe7a8-264">Laden Sie die [fertige App](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations) herunter.</span><span class="sxs-lookup"><span data-stu-id="fe7a8-264">Download the [completed app](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations).</span></span>
+
+<span data-ttu-id="fe7a8-265">Die App generiert folgende Ausnahme:</span><span class="sxs-lookup"><span data-stu-id="fe7a8-265">The app generates the following exception:</span></span>
+
+```text
+SqlException: Cannot open database "ContosoUniversity" requested by the login.
+The login failed.
+Login failed for user 'user name'.
+```
+
+<span data-ttu-id="fe7a8-266">Projektmappe: Ausführen von `dotnet ef database update`</span><span class="sxs-lookup"><span data-stu-id="fe7a8-266">Solution: Run `dotnet ef database update`</span></span>
+
+### <a name="additional-resources"></a><span data-ttu-id="fe7a8-267">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="fe7a8-267">Additional resources</span></span>
+
+* [<span data-ttu-id="fe7a8-268">Dieses Tutorial auf YouTube</span><span class="sxs-lookup"><span data-stu-id="fe7a8-268">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=OWSUuMLKTJo)
+* <span data-ttu-id="fe7a8-269">[.NET Core-CLI](/ef/core/miscellaneous/cli/dotnet)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-269">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
+* [<span data-ttu-id="fe7a8-270">Paket-Manager-Konsole (Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-270">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
 
 
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="8f54d-195">[Zurück](xref:data/ef-rp/sort-filter-page)
-> [Weiter](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="8f54d-195">[Previous](xref:data/ef-rp/sort-filter-page)
+> <span data-ttu-id="fe7a8-271">[Zurück](xref:data/ef-rp/sort-filter-page)
+> [Weiter](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="fe7a8-271">[Previous](xref:data/ef-rp/sort-filter-page)
 [Next](xref:data/ef-rp/complex-data-model)</span></span>
+
+::: moniker-end
+

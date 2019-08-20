@@ -1,0 +1,1 @@
+<span data-ttu-id="8145a-101">Weitere Informationen zu den CLI-Tools für EF Core finden Sie unter [Toolsreferenz zu EF Core für die .NET-CLI](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="8145a-101">For more information on the CLI tools for EF Core, see [EF Core tools reference for .Net CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
