@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: be6b6c245440cb085a1a6b115f4f087306f7cc83
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: e9a42bd4e8511d426761746047fed2d4f7dfc6dd
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308086"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994088"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-client-side"></a>Clientseitiges Hosten und Bereitstellen von ASP.NET Core Blazor
 
@@ -148,7 +148,7 @@ Die App antwortet lokal unter `http://localhost:port/CoolApp`.
 
 Weitere Informationen finden Sie im Abschnitt zum [Hostkonfigurationswert für die Pfadbasis](#path-base).
 
-Wenn eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet (basierend auf der [clientseitigen] **Blazor**-Projektvorlage; die `blazor`-Vorlage bei Verwendung des [dotnet.new](/dotnet/core/tools/dotnet-new)-Befehls) und als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core-Modulhandler deaktiviert werden, um sicherzustellen, dass der `<handlers>`-Abschnitt der Stammanwendung (bzw. der übergeordneten App) in der *web.config*-Datei von der untergeordneten App nicht geerbt wird.
+Wenn eine App das [clientseitige Hostingmodell](xref:blazor/hosting-models#client-side) verwendet (basierend auf der **Blazor WebAssembly-App**-Projektvorlage; die `blazorwasm`-Vorlage bei Verwendung des [dotnet.new](/dotnet/core/tools/dotnet-new)-Befehls) und als untergeordnete IIS-Anwendung in einer ASP.NET Core-App gehostet wird, muss der geerbte ASP.NET Core-Modulhandler deaktiviert werden, um sicherzustellen, dass der `<handlers>`-Abschnitt der Stammanwendung (bzw. der übergeordneten App) in der *web.config*-Datei von der untergeordneten App nicht geerbt wird.
 
 Entfernen Sie den Handler in der veröffentlichen *web.config*-Datei der App, indem Sie der Datei einen `<handlers>`-Abschnitt hinzufügen:
 
@@ -180,7 +180,7 @@ Das Entfernen des Handlers bzw. das Deaktivieren der Vererbung wird zusätzlich 
 
 Mit einer *gehosteten Bereitstellung* wird die clientseitige Blazor-App über eine auf einem Webserver ausgeführte [ASP.NET Core-App](xref:index) für Browser bereitgestellt.
 
-Die Blazor-App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer gehosteten Bereitstellung enthält Visual Studio die **Blazor-Projektvorlage (in ASP.NET Core gehostet)** (`blazorhosted`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
+Die Blazor-App ist mit der ASP.NET Core-App in der veröffentlichen Ausgabe enthalten, sodass die beiden Apps zusammen bereitgestellt werden. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer gehosteten Bereitstellung enthält Visual Studio die **Blazor WebAssembly-App**-Projektvorlage (`blazorwasm`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)) mit der ausgewählten Option **Hosted**.
 
 Weitere Informationen zum Hosten und Bereitstellen von ASP.NET Core-Apps finden Sie unter <xref:host-and-deploy/index>.
 

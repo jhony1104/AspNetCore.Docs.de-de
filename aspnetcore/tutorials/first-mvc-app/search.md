@@ -5,12 +5,12 @@ description: Informationen zum Hinzufügen der Suche zu einer einfachen ASP.NET 
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: ed6c7a095143670b7d06e43db3a428dec9bf97ad
-ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
+ms.openlocfilehash: 97ee5f66c142780d54d28013c109da61241d967b
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/01/2019
-ms.locfileid: "68707842"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862945"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Suche zu einer ASP.NET Core MVC-App
 
@@ -85,7 +85,7 @@ Wenn Sie diese Methode hinzufügen, entspricht die aufrufende Aktionsinstanz der
 
 ![Browserfenster mit der Antwort der Anwendung von „Von HttpPost-Index“: Filter für „ghost“](~/tutorials/first-mvc-app/search/_static/fo.png)
 
-Doch selbst wenn Sie diese `[HttpPost]`-Version der `Index`-Methode hinzufügen, gibt es eine Einschränkung für die gesamte Implementierung. Stellen Sie sich vor, Sie möchten eine bestimmte Suche als Favorit speichern oder einen Link an Freunde senden, auf den diese klicken können, um dieselbe gefilterte Liste von Filmen anzuzeigen. Beachten Sie, dass die URL der HTTP POST-Anforderung identisch mit der URL der GET-Anforderung (localhost:xxxxx/Filme/Index) ist. Es sind keine Suchinformationen in der URL vorhanden. Die Informationen in der Suchzeichenfolge werden an den Server als [Formularfeldwert](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data) gesendet. Sie können dies mit den Entwicklertools für den Browser oder dem exzellenten Tool [Fiddler](https://www.telerik.com/fiddler) überprüfen. Die folgende Abbildung zeigt die Entwicklertools für den Browser Chrome:
+Doch selbst wenn Sie diese `[HttpPost]`-Version der `Index`-Methode hinzufügen, gibt es eine Einschränkung für die gesamte Implementierung. Stellen Sie sich vor, Sie möchten eine bestimmte Suche als Favorit speichern oder einen Link an Freunde senden, auf den diese klicken können, um dieselbe gefilterte Liste von Filmen anzuzeigen. Beachten Sie, dass die URL der HTTP POST-Anforderung identisch mit der URL der GET-Anforderung (localhost:{PORT}/Movies/Index) ist. Es sind keine Suchinformationen in der URL vorhanden. Die Informationen in der Suchzeichenfolge werden an den Server als [Formularfeldwert](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data) gesendet. Sie können dies mit den Entwicklertools für den Browser oder dem exzellenten Tool [Fiddler](https://www.telerik.com/fiddler) überprüfen. Die folgende Abbildung zeigt die Entwicklertools für den Browser Chrome:
 
 ![Registerkarte „Netzwerk“ der Entwicklertools in Microsoft Edge mit einem Anforderungstext mit dem „searchString“-Wert „ghost“](~/tutorials/first-mvc-app/search/_static/f12_rb.png)
 

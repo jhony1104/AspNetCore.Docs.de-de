@@ -1,54 +1,33 @@
 ---
-title: Erstellen eines .NET Core-gRPC-Clients und -Servers in ASP.NET Core
-author: juntaoluo
-description: In diesem Tutorial erfahren Sie, wie Sie einen gRPC-Dienst und -Client in ASP.NET Core erstellen können. Dabei erfahren Sie, wie Sie ein gRPC-Dienstprojekt erstellen, eine PROTO-Datei bearbeiten und einen Duplexstreamaufruf hinzufügen.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: johluo
-ms.date: 08/07/2019
-uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 496f659bd51e2404a936bea8aad77e674e1a285d
+page_type: sample
+description: In diesem Tutorial erfahren Sie, wie Sie einen gRPC-Dienst und -Client in ASP.NET Core erstellen können.
+languages:
+- csharp
+products:
+- dotnet-core
+- aspnet-core
+- vs
+urlFragment: create-grpc-client
+ms.openlocfilehash: a281adc3b1fe90eeb32c1185750f911af683af83
 ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022492"
+ms.locfileid: "69029013"
 ---
-# <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Tutorial: Erstellen eines gRPC-Clients und -Servers in ASP.NET Core
-
-Von [John Luo](https://github.com/juntaoluo)
+# <a name="create-a-grpc-client-and-server-in-aspnet-core-30-using-visual-studio"></a>Erstellen eines gRPC-Clients und -Servers in ASP.NET Core 3.0 mit Visual Studio
 
 In diesem Tutorial erfahren Sie, wie Sie einen .NET Core-[gRPC](https://grpc.io/docs/guides/)-Client und einen ASP.NET Core-gRPC-Server erstellen können.
 
 Das Ziel ist ein gRPC-Client, der mit dem gRPC-Greeter-Dienst kommuniziert.
 
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
-
 In diesem Tutorial:
 
-> [!div class="checklist"]
-> * Erstellen Sie einen gRPC-Server.
-> * Erstellen Sie einen gRPC-Client.
-> * Testen Sie den gRPC-Clientdienst mit dem gRPC-Greeterdienst (Begrüßungsdienst).
-
-## <a name="prerequisites"></a>Erforderliche Komponenten
-
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
-
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
-
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
-
----
+* Erstellen Sie einen gRPC-Server.
+* Erstellen Sie einen gRPC-Client.
+* Testen Sie den gRPC-Clientdienst mit dem gRPC-Greeterdienst (Begrüßungsdienst).
 
 ## <a name="create-a-grpc-service"></a>Erstellen eines gRPC-Diensts
-
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie im Dialogfeld **Neues Projekt** die Option **ASP.NET Core-Webanwendung** aus.
@@ -60,57 +39,11 @@ In diesem Tutorial:
   * Wählen Sie die Vorlage **gRPC Service** (gRPC-Dienst) aus.
   * Klicken Sie auf **Erstellen**.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
-
-* Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Wechseln Sie mit `cd` zu einem Ordner, der das Projekt enthalten soll.
-* Führen Sie die folgenden Befehle aus:
-
-  ```console
-  dotnet new grpc -o GrpcGreeter
-  code -r GrpcGreeter
-  ```
-
-  * Mit dem Befehl `dotnet new` wird ein neuer gRPC-Dienst im Ordner *GrpcGreeter* erstellt.
-  * Mit dem Befehl `code` wird der Ordner *GrpcGreeter* in einer neuen Instanz von Visual Studio Code geöffnet.
-
-  Ein Dialogfeld mit folgender Meldung wird angezeigt: **Required assets to build and debug are missing from 'GrpcGreeter'. Sollen sie hinzugefügt werden?**
-* Wählen Sie **Ja** aus.
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-Führen Sie über ein Terminal die folgenden Befehle aus:
-
-```console
-  dotnet new grpc -o GrpcGreeter
-  cd GrpcGreeter
-```
-
-Durch die obigen Befehle wird über die [.NET Core-CLI](/dotnet/core/tools/dotnet) ein gRPC-Dienst erstellt.
-
-### <a name="open-the-project"></a>Öffnen des Projekts
-
-Klicken Sie in Visual Studio auf **Datei > Öffnen**, und wählen Sie die Datei *GrpcGreeter.sln* aus.
-
-<!-- End of VS tabs -->
-
----
-
 ### <a name="run-the-service"></a>Ausführen des Diensts
-
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Drücken Sie `Ctrl+F5`, um den gRPC-Dienst ohne den Debugger auszuführen.
 
   Visual Studio führt den Dienst über die Eingabeaufforderung aus.
-
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
-
-* Führen Sie das gRPC-Greeter-Projekt *GrpcGreeter* über die Befehlszeile mit `dotnet run` aus.
-
-<!-- End of combined VS/Mac tabs -->
-
----
 
 In den Protokollen wird vermerkt, dass der Dienst auf `https://localhost:5001` lauscht.
 
@@ -121,12 +54,13 @@ info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
 ```
 
 > [!NOTE]
 > Die gRPC-Vorlage ist für die Verwendung von [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246) konfiguriert. gRPC-Clients müssen zum Aufrufen des Servers HTTPS verwenden.
 >
-> macOS unterstützt ASP.NET Core gRPC mit TLS nicht. Zum erfolgreichen Ausführen von gRPC-Diensten unter macOS ist eine zusätzliche Konfiguration erforderlich. Weitere Informationen finden Sie unter [ASP.NET Core gRPC-App kann unter macOS nicht gestartet werden](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos).
+> macOS unterstützt ASP.NET Core gRPC mit TLS nicht. Zum erfolgreichen Ausführen von gRPC-Diensten unter macOS ist eine zusätzliche Konfiguration erforderlich. Weitere Informationen finden Sie unter [gRPC und ASP.NET Core unter macOS](xref:grpc/aspnetcore#grpc-and-aspnet-core-on-macos).
 
 ### <a name="examine-the-project-files"></a>Überprüfen der Projektdateien
 
@@ -140,33 +74,12 @@ info: Microsoft.Hosting.Lifetime[0]
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>Erstellen des gRPC-Clients in einer .NET-Konsolen-App
 
-## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
 * Öffnen Sie eine zweite Instanz von Visual Studio.
 * Wählen Sie **Datei** > **Neu** > **Projekt** aus der Menüleiste aus.
 * Wählen Sie im Dialogfeld **Neues Projekt** **Konsolen-App (.NET Core)** aus.
 * Klicken Sie auf **Weiter**.
 * Geben sie im Textfeld **Name** „GrpcGreeterClient“ ein.
 * Wählen Sie **Erstellen** aus.
-
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
-
-* Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Wechseln Sie mit `cd` zu einem Ordner, der das Projekt enthalten soll.
-* Führen Sie die folgenden Befehle aus:
-
-```console
-dotnet new console -o GrpcGreeterClient
-code -r GrpcGreeterClient
-```
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-Folgen Sie [diesen](/dotnet/core/tutorials/using-on-mac-vs-full-solution) Anweisungen, um eine Konsolen-App namens *GrpcGreeterClient* zu erstellen.
-
-<!-- End of VS tabs -->
-
----
 
 ### <a name="add-required-packages"></a>Hinzufügen von erforderlichen Paketen
 
@@ -175,8 +88,6 @@ Das gRPC-Clientprojekt erfordert die folgenden Pakete:
 * [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client), das den .NET Core-Client enthält.
 * [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/), das die Protobuf-Nachrichten-APIs für C# enthält.
 * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/), das C#-Toolunterstützung für Protobuf-Dateien enthält. Das Toolpaket ist nicht zur Laufzeit erforderlich, darum ist die Abhängigkeit mit `PrivateAssets="All"` markiert.
-
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Installieren Sie die Pakete über die Paket-Manager-Konsole oder über „NuGet-Pakete verwalten“.
 
@@ -200,48 +111,17 @@ Install-Package Grpc.Tools
 * Wählen Sie das Paket **Grpc.Net.Client** auf der Registerkarte **Durchsuchen** aus, und klicken Sie auf **Installieren**.
 * Führen Sie diese Aktionen auch für `Google.Protobuf` und `Grpc.Tools` durch.
 
-### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
-
-Führen Sie die folgenden Befehle über das **integrierte Terminal** aus:
-
-```console
-dotnet add GrpcGreeterClient.csproj package Grpc.Net.Client
-dotnet add GrpcGreeterClient.csproj package Google.Protobuf
-dotnet add GrpcGreeterClient.csproj package Grpc.Tools
-```
-
-### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-* Klicken Sie mit der rechten Maustaste auf den Ordner **Pakete** unter **Lösungspad** > **Pakete hinzufügen**.
-* Geben Sie **Grpc.Net.Client** in das Suchfeld ein.
-* Wählen Sie das Paket **Grpc.Net.Client** im Ergebnisbereich aus, und wählen Sie **Paket hinzufügen** aus.
-* Führen Sie diese Aktionen auch für `Google.Protobuf` und `Grpc.Tools` durch.
-
----
-
 ### <a name="add-greetproto"></a>Fügen Sie „greet.proto“ hinzu:
 
 * Erstellen Sie einen **Protos**-Ordner im gRPC-Clientprojekt.
 * Kopieren Sie die Datei **Protos\greet.proto** aus dem gRPC-Greeter-Dienst in das gRPC-Clientprojekt.
 * Bearbeiten Sie die Projektdatei *GrpcGreeterClient.csproj*:
 
-  # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
-
   Klicken Sie mit der rechten Maustaste auf das Projekt, und wählen Sie **Projektdatei bearbeiten** aus.
-
-  # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
-
-  Wählen Sie die Datei *GrpcGreeterClient.csproj* aus.
-
-  # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-  Klicken Sie mit der rechten Maustaste auf das Projekt, und wählen Sie dann **Extras > Datei bearbeiten** aus.
-
-  ---
 
 * Fügen Sie eine Elementgruppe mit einem `<Protobuf>`-Element hinzu, das auf die Datei **greet.proto** verweist:
 
-  ```XML
+  ```xml
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
   </ItemGroup>
@@ -253,7 +133,32 @@ Erstellen Sie das Projekt, um die Typen im `GrpcGreeter`-Namespace zu erstellen.
 
 Aktualisieren Sie die Datei *Program.cs* des gRPC-Clients mit dem folgenden Code:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet2)]
+```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GrpcGreeter;
+using Grpc.Net.Client;
+
+namespace GrpcGreeterClient
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var httpClient = new HttpClient();
+            // The port number(5001) must match the port of the gRPC server.
+            httpClient.BaseAddress = new Uri("https://localhost:5001");
+            var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+            var reply = await client.SayHelloAsync(
+                              new HelloRequest { Name = "GreeterClient" });
+            Console.WriteLine("Greeting: " + reply.Message);
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
+    }
+}
+```
 
 *Program.cs* enthält den Einstiegspunkt und die Logik für den gRPC-Client.
 
@@ -262,27 +167,42 @@ Der Greeter-Client wird folgendermaßen erstellt:
 * Instanziieren eines `HttpClient`-Objekts, das Informationen zum Herstellen einer Verbindung mit dem gRPC-Dienst enthält.
 * Verwenden von `HttpClient` zum Erstellen des Greeter-Clients:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=3-6)]
+```csharp
+static async Task Main(string[] args)
+{
+    var httpClient = new HttpClient();
+    // The port number(5001) must match the port of the gRPC server.
+    httpClient.BaseAddress = new Uri("https://localhost:5001");
+    var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+    var reply = await client.SayHelloAsync(
+                      new HelloRequest { Name = "GreeterClient" });
+    Console.WriteLine("Greeting: " + reply.Message);
+    Console.WriteLine("Press any key to exit...");
+    Console.ReadKey();
+}
+```
 
 Der Greeter-Client ruft die asynchrone Methode `SayHello` auf. Das Ergebnis des Aufrufs von `SayHello` wird angezeigt:
 
-[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=7-9)]
+```csharp
+static async Task Main(string[] args)
+{
+    var httpClient = new HttpClient();
+    // The port number(5001) must match the port of the gRPC server.
+    httpClient.BaseAddress = new Uri("https://localhost:5001");
+    var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+    var reply = await client.SayHelloAsync(
+                      new HelloRequest { Name = "GreeterClient" });
+    Console.WriteLine("Greeting: " + reply.Message);
+    Console.WriteLine("Press any key to exit...");
+    Console.ReadKey();
+}
+```
 
 ## <a name="test-the-grpc-client-with-the-grpc-greeter-service"></a>Testen des gRPC-Clients mit dem gRPC-Greeter-Dienst
 
-### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
 * Drücken Sie im Greeterdienst `Ctrl+F5`, um den Server ohne Debugger zu starten.
 * Drücken Sie im `GrpcGreeterClient`-Projekt `Ctrl+F5`, um den Client ohne den Debugger zu starten.
-
-### <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
-
-* Starten Sie den Greeterdienst.
-* Starten Sie den Client.
-
-<!-- End of combined VS/Mac tabs -->
-
----
 
 Der Client sendet an den Dienst eine Begrüßungsnachricht, die dessen Namen („GreeterClient“) enthält. Der Dienst gibt als Antwort die Meldung „Hello GreeterClient“ aus. Die Antwort „Hello GreeterClient“ wird in der Eingabeaufforderung angezeigt:
 
@@ -312,8 +232,8 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
       Request finished in 78.32260000000001ms 200 application/grpc
 ```
 
-### <a name="next-steps"></a>Nächste Schritte
+### <a name="docs-help--next-steps-for-grpc"></a>Hilfe aus der Dokumentation und nächste Schritte für gRPC
 
-* <xref:grpc/index>
-* <xref:grpc/basics>
-* <xref:grpc/migration>
+* [Einführung in gRPC in ASP.NET Core](https://docs.microsoft.com/aspnet/core/grpc/index?view=aspnetcore-3.0)
+* [gRPC-Dienste mit C#](https://docs.microsoft.com/aspnet/core/grpc/basics?view=aspnetcore-3.0)
+* [Migrieren von gRPC-Diensten von C-core zu ASP.NET Core](https://docs.microsoft.com/aspnet/core/grpc/migration?view=aspnetcore-3.0)

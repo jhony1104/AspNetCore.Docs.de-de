@@ -3,14 +3,14 @@ title: Bereiche in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das für die Organisation von verwandten Funktionalitäten in einer Gruppe als separater Namespace (für Routing) und Ordnerstruktur (für Ansichten) verwendet wird.
 ms.author: riande
-ms.date: 05/10/2019
+ms.date: 08/07/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: f3a75bc307a206e43241b421f448b09011868d08
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: e44c726c47caa3dd0c8c92e3a2502a590bee82d1
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65535972"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862792"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -116,9 +116,13 @@ Wenn der Bereich oder der Kontroller nicht angegeben werden, hängt das Routing 
 
 Weitere Informationen finden Sie unter [Routing zu Controlleraktionen in ASP.NET Core](xref:mvc/controllers/routing).
 
-### <a name="shared-layout-for-areas-using-the-viewstartcshtml-file"></a>Freigegebenes Layout für Bereiche unter Verwendung der _ViewStart.cshtml-Datei
+### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>Freigegebenes Layout für Bereiche unter Verwendung der _ViewStart.cshtml-Datei
 
 Um ein gemeinsames Layout für die gesamte App freizugeben, verschieben Sie *_ViewStart.cshtml* in den Stammordner der Anwendung.
+
+### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
+
+An ihrem Standardspeicherort gilt die Datei */Views/_ViewImports.cshtml* nicht für Bereiche. Um allgemeine [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro), `@using` oder `@inject` in Ihrem Bereich zu verwenden, stellen Sie sicher, dass eine ordnungsgemäße Datei *_ViewImports.cshtml* [für Ihre Bereichsansichten gilt](xref:mvc/views/layout#importing-shared-directives). Wenn Sie das gleiche Verhalten in allen Ansichten wünschen, verschieben Sie */Views/_ViewImports.cshtml* in den Anwendungsstamm.
 
 <a name="rename"></a>
 
@@ -167,7 +171,7 @@ Für den Code oben gilt:
 * Der aus `<a asp-page="/About">` generierte Link stimmt nur, wenn die letzte Anforderung für eine Seite in `/Home` erfolgte.
 * Der Code stammt aus dem [Beispieldownload](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas).
 
-### <a name="import-namespace-and-tag-helpers-with-viewimports-file"></a>Importieren von Namespace und Taghilfsprogrammen mit der _ViewImports-Datei
+### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>Importieren von Namespace und Taghilfsprogrammen mit der _ViewImports-Datei
 
 Eine *_ViewImports.cshtml*-Datei kann dem *Pages*-Ordner jedes Bereichs hinzugefügt werden, um Namespace und Taghilfsprogramme für jede Razor-Seite im Ordner zu importieren.
 

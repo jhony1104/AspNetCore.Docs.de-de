@@ -3,6 +3,8 @@
   ```console
   dotnet dev-certs https --trust
   ```
+  
+  Der oben genannte Befehl funktioniert nicht unter Linux. In der Dokumentation Ihrer Linux-Distribution finden Sie Informationen dazu, wie Sie ein Zertifikat als vertrauenswürdig kennzeichnen.
 
   Über den vorherigen Befehl wird der folgende Dialog angezeigt:
 

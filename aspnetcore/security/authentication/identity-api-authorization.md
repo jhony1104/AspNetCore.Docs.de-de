@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/05/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 6b8818cc89a87e66ecec445ff8071348aacde64a
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: cb51df0267a5eabd4a2694727e9c896d0554265e
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68819929"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583596"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
 
@@ -93,9 +93,9 @@ Diese Hilfsmethode konfiguriert identityserver für die Verwendung der unterstü
 
 Diese Hilfsmethode konfiguriert ein Richtlinien Schema für die APP als Standard Authentifizierungs Handler. Die Richtlinie ist so konfiguriert, dass die Identität alle Anforderungen verarbeitet, die an einen untergeordneten Pfad im Identitäts-URL-Bereich "/Identity" weitergeleitet werden. Der `JwtBearerHandler` verarbeitet alle anderen Anforderungen. Darüber hinaus registriert diese Methode eine `<<ApplicationName>>API` API-Ressource bei identityserver mit einem Standardbereich `<<ApplicationName>>API` von und konfiguriert die JWT-bearertoken-Middleware, um von identityserver für die APP ausgegebene Token zu überprüfen.
 
-### <a name="sampledatacontroller"></a>Sampledatacontroller
+### <a name="weatherforecastcontroller"></a>Weatherforecastcontroller
 
-Beachten Sie in der Datei " *controllers\sampledatacontroller.cs* " das `[Authorize]` -Attribut, das auf die-Klasse angewendet wird, die angibt, dass der Benutzer auf der Basis der Standard Richtlinie für den Zugriff auf die Ressource autorisiert werden muss. Die Standard Autorisierungs Richtlinie wird so konfiguriert, dass das standardmäßige Authentifizierungsschema verwendet wird, das von `AddIdentityServerJwt` dem oben erwähnten Richtlinien Schema festgelegt wird. Dadurch wird `JwtBearerHandler` die von dieser Hilfsmethode konfigurierte Standard Handler für verwendet. Anforderungen an die app.
+Beachten Sie in der Datei " *controllers\weatherforecastcontroller.cs* " das `[Authorize]` -Attribut, das auf die-Klasse angewendet wird und angibt, dass der Benutzer auf der Basis der Standard Richtlinie für den Zugriff auf die Ressource autorisiert werden muss. Die Standard Autorisierungs Richtlinie wird so konfiguriert, dass das standardmäßige Authentifizierungsschema verwendet wird, das von `AddIdentityServerJwt` dem oben erwähnten Richtlinien Schema festgelegt wird. Dadurch wird `JwtBearerHandler` die von dieser Hilfsmethode konfigurierte Standard Handler für verwendet. Anforderungen an die app.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 

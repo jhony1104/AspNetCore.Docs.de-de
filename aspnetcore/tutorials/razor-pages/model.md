@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 07/22/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6132f7b907014b4f57bb9ae0300e00b6ecb23f1a
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 39e2a38e0b91b7dbecf05c084ca0be5e312dcb0d
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820066"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862872"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -135,18 +135,30 @@ Die Datei *appsettings.json* wird mit der Verbindungszeichenfolge aktualisiert, 
 
 ---
 
-Der Gerüstprozess erstellt und ändert folgende Dateien:
-
 ### <a name="files-created"></a>Erstellte Dateien
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Der Gerüstprozess erstellt und ändert folgende Dateien:
 
 * *Pages/Movies*: „Create“, „Delete“, „Details“, „Edit“ und „Index“.
 * *Data/RazorPagesMovieContext.cs*
 
-### <a name="file-updated"></a>Datei aktualisiert
+### <a name="updated"></a>Aktualisiert
 
 * *Startup.cs*
 
 Die erstellten und aktualisierten Daten werden im nächsten Abschnitt erläutert.
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+
+Der Gerüstbauprozess erstellt die folgenden Dateien:
+
+* *Pages/Movies*: „Create“, „Delete“, „Details“, „Edit“ und „Index“.
+
+Die erstellten Daten werden im nächsten Abschnitt erläutert.
+
+---
 
 <a name="pmc"></a>
 
