@@ -1,7 +1,12 @@
-In diesem Tutorial erfahren Sie die Grundlagen zu ASP.NET Core MVS und Entity Framework Core mit Controllern und Ansichten. Razor Pages sind eine neue Alternative in ASP.NET Core 2.0: Ein seitenbasiertes Programmiermodell, mit dem das Erstellen einer Webbenutzeroberfläche einfacher und produktiver wird. Es wird empfohlen, das Tutorial zu den [Razor Pages](xref:data/ef-rp/intro) vor dem Tutorial zu MVC anzusehen. Das Tutorial zu Razor Pages:
+In diesem Tutorial erfahren Sie die Grundlagen zu ASP.NET Core MVS und Entity Framework Core mit Controllern und Ansichten. [Razor Pages](xref:razor-pages/index) ist ein alternatives Programmiermodell, das in ASP.NET Core 2.0 eingeführt wurde. Für neue Entwicklungsaufgaben wird empfohlen, Razor Pages mit MVC mit Controllern und Ansichten zu verwenden. Eine [Razor Pages](xref:data/ef-rp/intro)-Version dieses Tutorials ist verfügbar. In jedem Tutorial werden einige Themen behandelt, die in den anderen Tutorials nicht behandelt werden:
 
-* Ist einfacher zu befolgen.
-* Bietet mehr bewährte Methoden für Entity Framework Core.
-* Verwendet effizientere Abfragen.
-* Passt besser zur aktuellen API.
-* Behandelt mehr Features.
+Einige Aspekte, die in diesem MVC-Tutorial behandelt werden, nicht aber im Razor Pages-Tutorial:
+
+* Implementieren von Vererbung im Datenmodell
+* Durchführen unformatierter SQL-Abfragen
+* Verwenden dynamischer LINQs zum Vereinfachen des Codes
+ 
+Einige Aspekte, die im Razor Pages-Tutorial behandelt werden, nicht aber in diesem Tutorial:
+
+* Verwenden der Select-Methode zum Laden zugehöriger Daten
+* Eine Version, die für ASP.NET Core 3.0 verfügbar ist

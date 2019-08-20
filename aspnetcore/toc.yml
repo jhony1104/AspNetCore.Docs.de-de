@@ -966,6 +966,8 @@
           uid: security/key-vault-configuration
     - name: Erzwingen von HTTPS
       uid: security/enforcing-ssl
+    - name: Hosten von Docker mit HTTPS
+      uid: security/docker-https
     - name: Unterstützung für die Datenschutz-Grundverordnung (DSGVO)
       uid: security/gdpr
     - name: Anforderungsfälschungssicherheit
