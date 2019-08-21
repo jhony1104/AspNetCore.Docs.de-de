@@ -1,116 +1,110 @@
 ---
-title: Antwortkomprimierung in ASP.NET Core
+title: Antwort Komprimierung in ASP.net Core
 author: guardrex
 description: Informationen zur Antwortkomprimierung und zum Verwenden von Antworten komprimierender Middleware in ASP.NET Core-Apps.
-monikerRange: '>= aspnetcore-1.1'
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/13/2019
+ms.date: 08/09/2019
 uid: performance/response-compression
-ms.openlocfilehash: d5d2da3dc0a8a452de97d98161d429389d2f7638
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: e320e87179f9f1b9773a55c380684a3f3f712632
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815613"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993464"
 ---
-# <a name="response-compression-in-aspnet-core"></a>Antwortkomprimierung in ASP.NET Core
+# <a name="response-compression-in-aspnet-core"></a>Antwort Komprimierung in ASP.net Core
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Die Netzwerkbandbreite ist eine eingeschränkte Ressource. Verringern der Größe der Antwort in der Regel erhöht die Reaktionsfähigkeit einer App, häufig erheblich. Eine Möglichkeit zum Reduzieren der Größe der Nutzlast ist zum Komprimieren von Antworten von der app.
+Die Netzwerkbandbreite ist eine begrenzte Ressource. Die Reduzierung der Antwort Größe erhöht in der Regel die Reaktionsfähigkeit einer APP, oft erheblich. Eine Möglichkeit, die Nutz Last Größen zu reduzieren, ist das Komprimieren der Antworten einer App.
 
-## <a name="when-to-use-response-compression-middleware"></a>Antworten komprimierende Middleware verwenden
+## <a name="when-to-use-response-compression-middleware"></a>Verwendung der Middleware für die Antwort Komprimierung
 
-Verwenden Sie Server-basierte Antwort komprimierungstechnologien in IIS, Apache oder Nginx. Die Leistung der Middleware wird nicht mit dem der Servermodule wahrscheinlich überein. [HTTP.sys-Server](xref:fundamentals/servers/httpsys) Server und [Kestrel](xref:fundamentals/servers/kestrel) Server keine integrierte komprimierungsunterstützung derzeit anbieten.
+Verwenden Sie serverbasierte Antwort Komprimierungs Technologien in IIS, Apache oder nginx. Die Leistung der Middleware stimmt wahrscheinlich nicht mit der Leistung der Server Module zusammen. Der [http. sys-Server](xref:fundamentals/servers/httpsys) Server und der [Kestrel](xref:fundamentals/servers/kestrel) -Server bieten derzeit keine integrierte Komprimierungs Unterstützung.
 
-Verwenden Sie Antworten komprimierende Middleware, wenn Sie sich befinden:
+Verwenden Sie die Middleware für die Antwort Komprimierung, wenn Sie:
 
-* Kann nicht die folgenden Server-basierten komprimierungstechnologien verwendet werden:
-  * [Dynamische Komprimierung in IIS-Modul](https://www.iis.net/overview/reliability/dynamiccachingandcompression)
-  * [Apache Mod_deflate-Modul](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
-  * [Nginx-Komprimierung und Dekomprimierung](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
-* Hosten direkt auf:
-  * [HTTP.sys-Server](xref:fundamentals/servers/httpsys) (früher als "WebListener" bezeichnet)
-  * [Kestrel-server](xref:fundamentals/servers/kestrel)
+* Die folgenden serverbasierten Komprimierungs Technologien können nicht verwendet werden:
+  * [Modul für dynamische IIS-Komprimierung](https://www.iis.net/overview/reliability/dynamiccachingandcompression)
+  * [Apache mod_deflate-Modul](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
+  * [Nginx-Komprimierung und-Komprimierung](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
+* Direktes Hosting:
+  * [Http. sys-Server](xref:fundamentals/servers/httpsys) (früher als Weblistener bezeichnet)
+  * [Kestrel-Server](xref:fundamentals/servers/kestrel)
 
 ## <a name="response-compression"></a>Antwortkomprimierung
 
-In der Regel kann alle Antworten, die nicht komprimierte antwortkomprimierung nutzen. Antworten, die in der Regel nicht komprimiert sind: CSS, JavaScript, HTML, XML und JSON. Sie sollten nicht systemintern komprimierter Assets, wie z. B. PNG-Dateien komprimieren. Wenn Sie versuchen, eine systemintern komprimierte Antwort weiter komprimiert, wird keine zusätzliche kleine Verringerung Größe und die Übertragung wahrscheinlich mit der Zeit, die zum Verarbeiten der Komprimierung benötigten überholt. Komprimieren Sie Dateien, die kleiner als ungefähr 150 – 1000 Bytes (je nach Inhalt der Datei und die Effizienz der Komprimierung) nicht. Der Mehraufwand für das Komprimieren von kleinen Dateien kann es sich um eine komprimierte Datei, die größer als die nicht komprimierte Datei führen.
+Normalerweise kann jede nicht System intern komprimierte Antwort von der Antwort Komprimierung profitieren. Nicht nativ komprimierte Antworten umfassen in der Regel Folgendes: CSS, JavaScript, HTML, XML und JSON. Sie sollten nativ komprimierte Assets, z. b. png-Dateien, nicht komprimieren. Wenn Sie versuchen, eine nativ komprimierte Antwort weiter zu komprimieren, werden alle kleinen zusätzlichen Reduzierungs-und Übertragungszeiten wahrscheinlich durch die Zeit, die für die Verarbeitung der Komprimierung benötigt wird, überschattet. Komprimieren Sie keine Dateien, die kleiner sind als ungefähr 150-1000 Byte (abhängig vom Inhalt der Datei und der Effizienz der Komprimierung). Der Aufwand für die Komprimierung kleiner Dateien kann eine komprimierte Datei erzeugen, die größer als die nicht komprimierte Datei ist.
 
-Wenn ein Client komprimierten Inhalte verarbeiten kann, muss der Client den Server seiner Funktionen per informieren die `Accept-Encoding` Header mit der Anforderung. Wenn ein Server komprimierten Inhalte sendet, muss Informationen enthalten die `Content-Encoding` Header wie die komprimierte Antwort codiert wird. In der folgenden Tabelle werden die Inhalte Codierung Bezeichnungen, die von der Middleware unterstützt angezeigt.
+Wenn ein Client komprimierte Inhalte verarbeiten kann, muss der Client den Server über seine Funktionen informieren, indem `Accept-Encoding` er die-Kopfzeile mit der Anforderung sendet. Wenn ein Server komprimierten Inhalt sendet, muss er Informationen in der `Content-Encoding` Kopfzeile enthalten, in der die komprimierte Antwort codiert wird. In der folgenden Tabelle sind die von der Middleware unterstützten Inhalts Codierungs Bezeichnungen aufgeführt.
 
 ::: moniker range=">= aspnetcore-2.2"
 
-| `Accept-Encoding` Headerwerte | Middleware unterstützt | Beschreibung |
+| `Accept-Encoding`Header Werte | Unterstützte Middleware | Beschreibung |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | Ja (Standard)        | [Format der Brotli-komprimierte Daten](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Nein                   | [Komprimierte Daten DEFLATE-format](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Nein                   | [W3C effiziente XML-Austausch](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Ja                  | [GZIP-Dateiformat](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Ja                  | "Keine Codierung"-ID: Die Antwort muss nicht codiert werden. |
-| `pack200-gzip`                  | Nein                   | [Netzwerk-Übertragungsformat für Java-Archive](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Ja                  | Alle verfügbaren Inhalte, die Codierung wird nicht explizit angefordert |
+| `br`                            | Ja (Standard)        | [Brotli-komprimiertes Datenformat](https://tools.ietf.org/html/rfc7932) |
+| `deflate`                       | Nein                   | [Komprimiertes Datenformat deflate](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | Nein                   | [Der XML-Austausch (effizient)](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Ja                  | [Gzip-Dateiformat](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Ja                  | Bezeichner "keine Codierung": Die Antwort darf nicht codiert werden. |
+| `pack200-gzip`                  | Nein                   | [Netzwerk Übertragungs Format für Java-Archive](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Ja                  | Alle verfügbaren Inhalts Codierungen, die nicht explizit angefordert werden |
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-| `Accept-Encoding` Headerwerte | Middleware unterstützt | Beschreibung |
+| `Accept-Encoding`Header Werte | Unterstützte Middleware | Beschreibung |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | Nein                   | [Format der Brotli-komprimierte Daten](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Nein                   | [Komprimierte Daten DEFLATE-format](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Nein                   | [W3C effiziente XML-Austausch](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Ja (Standard)        | [GZIP-Dateiformat](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Ja                  | "Keine Codierung"-ID: Die Antwort muss nicht codiert werden. |
-| `pack200-gzip`                  | Nein                   | [Netzwerk-Übertragungsformat für Java-Archive](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Ja                  | Alle verfügbaren Inhalte, die Codierung wird nicht explizit angefordert |
+| `br`                            | Nein                   | [Brotli-komprimiertes Datenformat](https://tools.ietf.org/html/rfc7932) |
+| `deflate`                       | Nein                   | [Komprimiertes Datenformat deflate](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | Nein                   | [Der XML-Austausch (effizient)](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Ja (Standard)        | [Gzip-Dateiformat](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Ja                  | Bezeichner "keine Codierung": Die Antwort darf nicht codiert werden. |
+| `pack200-gzip`                  | Nein                   | [Netzwerk Übertragungs Format für Java-Archive](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Ja                  | Alle verfügbaren Inhalts Codierungen, die nicht explizit angefordert werden |
 
 ::: moniker-end
 
-Weitere Informationen finden Sie unter den [IANA offizielle Codierung Inhaltsliste](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
+Weitere Informationen finden Sie in der [offiziellen Programmier Liste der IANA-Inhalte](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
 
-Die Middleware können Sie zusätzliche Komprimierung-Anbieter für benutzerdefinierte hinzufügen `Accept-Encoding` Headerwerte. Weitere Informationen finden Sie unter [benutzerdefinierte Anbieter](#custom-providers) unten.
+Die Middleware ermöglicht das Hinzufügen zusätzlicher Komprimierungs Anbieter für `Accept-Encoding` benutzerdefinierte Header Werte. Weitere Informationen finden Sie unten unter [benutzerdefinierte Anbieter](#custom-providers) .
 
-Die Middleware der Reaktion auf Qualitätswert fähig ist (Qvalue, `q`) Gewichtung, wenn vom Client gesendet werden, um Komprimierungsschemas zu priorisieren. Weitere Informationen finden Sie unter [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4).
+Die Middleware ist in der Lage, auf die Gewichtung des Qualitäts Werts `q`(qvalue) zu reagieren, wenn Sie vom Client gesendet wird, um Komprimierungs Schemas zu priorisieren Weitere Informationen finden [Sie unter RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4).
 
-Komprimierungsalgorithmen unterliegen bildet einen Kompromiss zwischen Geschwindigkeit von Komprimierung und die Effektivität der Komprimierung aus. *Effektivität* in diesem Kontext bezieht sich auf die Größe der Ausgabe nach der Komprimierung. Die kleinste Größe wird erreicht, indem die am häufigsten *optimale* Komprimierung.
+Komprimierungs Algorithmen unterliegen einem Kompromiss zwischen der Komprimierungs Geschwindigkeit und der Effektivität der Komprimierung. *Effektivität* in diesem Kontext bezieht sich auf die Größe der Ausgabe nach der Komprimierung. Die kleinste Größe wird durch die *optimale* Komprimierung erreicht.
 
-Die Header, die beim anfordern, werden das Senden und Zwischenspeichern von komprimierten Inhalten empfangen in der folgenden Tabelle beschrieben.
+Die Header, die beim anfordern, senden, Zwischenspeichern und empfangen von komprimiertem Inhalt beteiligt sind, werden in der folgenden Tabelle beschrieben.
 
 | Header             | Rolle |
 | ------------------ | ---- |
-| `Accept-Encoding`  | Vom Client an den Server an, dass die inhaltscodierung Schemas zulässig ist, an den Client gesendet. |
-| `Content-Encoding` | Vom Server an den Client, um anzugeben, die Codierung des Inhalts in der Nutzlast gesendet. |
-| `Content-Length`   | Bei der Komprimierung werden die `Content-Length` Header entfernt werden, da der Inhalt Text geändert, wenn die Antwort komprimiert wird. |
-| `Content-MD5`      | Bei der Komprimierung werden die `Content-MD5` Header entfernt, da der Inhalt des Nachrichtentexts geändert hat und der Hash nicht mehr gültig ist. |
-| `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort geben sollte seine `Content-Type`. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort, komprimiert werden sollen. Die Middleware gibt einen Satz von [Standard-MIME-Typen](#mime-types) , die codiert werden können, aber Sie können ersetzen oder MIME-Typen hinzufügen. |
-| `Vary`             | Wenn vom Server mit dem Wert gesendet `Accept-Encoding` für Clients und -Proxys der `Vary` Header gibt an, an den Client oder Proxy, der zwischengespeichert werden soll (variieren) Antworten basierend auf den Wert der `Accept-Encoding` -Header der Anforderung. Das Ergebnis der Rückgabe von Inhalten mit der `Vary: Accept-Encoding` -Header ist, dass sowohl komprimierte und nicht komprimierte Antworten getrennt zwischengespeichert werden. |
+| `Accept-Encoding`  | Wird vom Client an den Server gesendet, um die Inhalts Codierungs Schemas anzugeben, die für den Client zulässig sind. |
+| `Content-Encoding` | Wird vom Server an den Client gesendet, um die Codierung des Inhalts in der Nutzlast anzugeben. |
+| `Content-Length`   | Wenn die Komprimierung erfolgt `Content-Length` , wird der-Header entfernt, da sich der Text Inhalt ändert, wenn die Antwort komprimiert wird. |
+| `Content-MD5`      | Wenn die Komprimierung erfolgt `Content-MD5` , wird der Header entfernt, da sich der Text Inhalt geändert hat und der Hash nicht mehr gültig ist. |
+| `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort sollte die `Content-Type`zugehörige angeben. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort komprimiert werden soll. Die Middleware gibt eine Reihe von [Standard-MIME-Typen](#mime-types) an, die codiert werden können, aber Sie können MIME-Typen ersetzen oder hinzufügen. |
+| `Vary`             | Beim Senden durch den Server mit dem Wert `Accept-Encoding` an Clients und Proxys gibt der `Vary` -Header dem Client oder dem Proxy an, dass er Antworten basierend `Accept-Encoding` auf dem Wert des-Headers der Anforderung Zwischenspeichern (variieren) soll. Das Ergebnis der Rückgabe von Inhalt mit `Vary: Accept-Encoding` dem-Header besteht darin, dass sowohl komprimierte als auch nicht komprimierte Antworten separat zwischengespeichert werden. |
 
-Erkunden Sie die Funktionen des die Antworten komprimierende Middleware mit der [Beispiel-app](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht:
+Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
 
-* Die Komprimierung von app-Antworten, die mithilfe von Gzip und benutzerdefinierte Komprimierung-Anbietern.
-* Wie Sie die Standardliste der MIME-Typen für die Komprimierung einen MIME-Typ hinzufügen.
+* Die Komprimierung von App-Antworten mithilfe von gzip und benutzerdefinierten Komprimierungs Anbietern.
+* Vorgehensweise beim Hinzufügen eines MIME-Typs zur Standardliste von MIME-Typen für die Komprimierung.
 
 ## <a name="package"></a>Package
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range=">= aspnetcore-3.0"
 
-Um die Middleware in einem Projekt einzuschließen, fügen Sie einen Verweis auf die [Microsoft.AspNetCore.App metapaket](xref:fundamentals/metapackage-app), wozu die [Microsoft.AspNetCore.ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) Paket.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-Um die Middleware in einem Projekt einzuschließen, fügen Sie einen Verweis auf die [metapaket "Microsoft.aspnetcore.All"](xref:fundamentals/metapackage), wozu die [Microsoft.AspNetCore.ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) Paket.
+Die Middleware für die Antwort Komprimierung wird vom Paket [Microsoft. aspnetcore. Response Compression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) bereitgestellt, das implizit in ASP.net Core-Apps enthalten ist.
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-2.0"
+::: moniker range="< aspnetcore-3.0"
 
-Um die Middleware in einem Projekt einzuschließen, fügen Sie einen Verweis auf die [Microsoft.AspNetCore.ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) Paket.
+Fügen Sie einen Verweis auf das [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)hinzu, das das Paket [Microsoft. aspnetcore. Response Compression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) enthält, um die Middleware in ein Projekt einzubeziehen.
 
 ::: moniker-end
 
@@ -118,13 +112,13 @@ Um die Middleware in einem Projekt einzuschließen, fügen Sie einen Verweis auf
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Der folgende Code zeigt, wie Sie die Antworten komprimierende Middleware für die Standard-MIME-Typen und Komprimierung Anbieter aktivieren ([Brotli](#brotli-compression-provider) und [Gzip](#gzip-compression-provider)):
+Der folgende Code zeigt, wie Sie die Middleware für die Antwort Komprimierung für Standard-MIME-Typen und Komprimierungs Anbieter ([brotli](#brotli-compression-provider) und [gzip](#gzip-compression-provider)) aktivieren:
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Der folgende Code zeigt, wie Sie die Antworten komprimierende Middleware für Standard-MIME-Typen zu aktivieren und die [Gzip-Komprimierung Anbieter](#gzip-compression-provider):
+Der folgende Code zeigt, wie Sie die Middleware für die Antwort Komprimierung für Standard-MIME-Typen und den [GZip-Komprimierungs Anbieter](#gzip-compression-provider)aktivieren:
 
 ::: moniker-end
 
@@ -145,26 +139,26 @@ public class Startup
 
 Notizen:
 
-* `app.UseResponseCompression` muss aufgerufen werden, bevor `app.UseMvc`.
-* Verwenden Sie ein Tool wie z. B. [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/), oder [Postman](https://www.getpostman.com/) Festlegen der `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text.
+* `app.UseResponseCompression`muss vor `app.UseMvc`aufgerufen werden.
+* Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", " [Firebug](https://getfirebug.com/)" oder " [Postman](https://www.getpostman.com/) ", um den `Accept-Encoding` Anforderungs Header festzulegen und die Antwortheader, die Größe und den Text
 
-Senden Sie eine Anforderung zur Beispiel-app ohne die `Accept-Encoding` Header und beobachten Sie, dass die Antwort nicht komprimiert. Die `Content-Encoding` und `Vary` Header nicht in der Antwort vorhanden sind.
+Senden Sie eine Anforderung an die Beispiel-APP `Accept-Encoding` ohne den-Header, und beobachten Sie, dass die Antwort nicht komprimiert ist. Der `Content-Encoding` - `Vary` Header und der-Header sind in der Antwort nicht vorhanden.
 
-![Fiddler-Fenster und Ergebnis einer Anforderung ohne den Accept-Encoding-Header. Die Antwort nicht komprimiert.](response-compression/_static/request-uncompressed.png)
+![Das Anforderungsfenster zeigt das Ergebnis einer Anforderung ohne den Accept-Encoding-Header an. Die Antwort ist nicht komprimiert.](response-compression/_static/request-uncompressed.png)
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Senden Sie eine Anforderung für die Beispielapp mit der `Accept-Encoding: br` Header (Brotli-Komprimierung), und beobachten Sie, dass die Antwort komprimiert werden. Die `Content-Encoding` und `Vary` -Header in der Antwort vorhanden sind.
+Senden Sie eine Anforderung an die Beispiel-APP `Accept-Encoding: br` mit dem-Header (brotli-Komprimierung), und beobachten Sie, dass die Antwort komprimiert ist. Der `Content-Encoding` - `Vary` Header und der-Header sind in der Antwort vorhanden.
 
-![Fiddler-Fenster mit Ergebnis einer Anforderung mit dem Accept-Encoding-Header und den Br-Wert. Die Vary und Content-Encoding-Header werden an die Antwort hinzugefügt. Die Antwort wird komprimiert.](response-compression/_static/request-compressed-br.png)
+![Das Fenster "dateiddler" zeigt das Ergebnis einer Anforderung mit dem Accept-Encoding-Header und dem Wert "br" an. Die variierenden und Content-Encoding-Header werden der Antwort hinzugefügt. Die Antwort ist komprimiert.](response-compression/_static/request-compressed-br.png)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Senden Sie eine Anforderung für die Beispielapp mit der `Accept-Encoding: gzip` Header und beobachten Sie, dass die Antwort komprimiert werden. Die `Content-Encoding` und `Vary` -Header in der Antwort vorhanden sind.
+Senden Sie eine Anforderung an die Beispiel-APP `Accept-Encoding: gzip` mit dem-Header, und beobachten Sie, dass die Antwort komprimiert ist. Der `Content-Encoding` - `Vary` Header und der-Header sind in der Antwort vorhanden.
 
-![Fiddler-Fenster mit Ergebnis einer Anforderung mit dem Accept-Encoding-Header und einem Wert von Gzip. Die Vary und Content-Encoding-Header werden an die Antwort hinzugefügt. Die Antwort wird komprimiert.](response-compression/_static/request-compressed.png)
+![Das Fenster "dateiddler" zeigt das Ergebnis einer Anforderung mit dem Accept-Encoding-Header und dem Wert "gzip" an. Die variierenden und Content-Encoding-Header werden der Antwort hinzugefügt. Die Antwort ist komprimiert.](response-compression/_static/request-compressed.png)
 
 ::: moniker-end
 
@@ -172,14 +166,14 @@ Senden Sie eine Anforderung für die Beispielapp mit der `Accept-Encoding: gzip`
 
 ::: moniker range=">= aspnetcore-2.2"
 
-### <a name="brotli-compression-provider"></a>Anbieter der Brotli-Komprimierung
+### <a name="brotli-compression-provider"></a>Brotli-Komprimierungs Anbieter
 
-Verwenden der <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider> zum Komprimieren von Antworten mit dem die [Brotli komprimiertes Datenformat](https://tools.ietf.org/html/rfc7932).
+Verwenden Sie, um Antworten mit dem von [brotli komprimierten Datenformat](https://tools.ietf.org/html/rfc7932)zu komprimieren. <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>
 
-Wenn keine Komprimierung Anbieter explizit hinzugefügt werden die <xref:Microsoft.AspNetCore.ResponseCompression.CompressionProviderCollection>:
+Wenn keine Komprimierungs Anbieter explizit zum <xref:Microsoft.AspNetCore.ResponseCompression.CompressionProviderCollection>hinzugefügt werden:
 
-* Der Anbieter der Brotli-Komprimierung wird standardmäßig hinzugefügt, in das Array der Komprimierung Anbieter zusammen mit den [Gzip-Komprimierung Anbieter](#gzip-compression-provider).
-* Komprimierung standardmäßig auf Brotli-Komprimierung auf, wenn das Format der Brotli-komprimierte Daten vom Client unterstützt wird. Wenn Brotli vom Client unterstützt wird, standardmäßig Komprimierung Gzip an, wenn der Client die Gzip-Komprimierung unterstützt wird.
+* Der brotli-Komprimierungs Anbieter wird dem Array von Komprimierungs Anbietern zusammen mit dem [gzip](#gzip-compression-provider)-Komprimierungs Anbieter standardmäßig hinzugefügt.
+* Bei der Komprimierung wird standardmäßig die brotli-Komprimierung verwendet, wenn das von der Client komprimierte brotli-Datenformat Wenn brotli nicht vom Client unterstützt wird, wird standardmäßig gzip verwendet, wenn der Client die gzip-Komprimierung unterstützt.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -188,16 +182,30 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Der Brotoli Komprimierung-Anbieter muss hinzugefügt werden, wenn alle Anbieter Komprimierung explizit hinzugefügt werden:
+Der broesli-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierungs Anbieter explizit hinzugefügt werden:
 
-[!code-csharp[](response-compression/samples/2.x/Startup.cs?name=snippet1&highlight=5)]
+::: moniker-end
 
-Stellen Sie die Komprimierung mit <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>. Der Anbieter der Brotli-Komprimierung ist standardmäßig die schnellste Komprimierung ([CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel)), die möglicherweise nicht die effizienteste Komprimierung erzeugen. Wenn die effizienteste Komprimierung gewünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
+::: moniker range=">= aspnetcore-3.0"
 
-| Komprimierungsgrad | Beschreibung |
+[!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=5)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=5)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+Legen Sie die Komprimierungs <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>Ebene mit fest. Der brotli-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
+
+| Komprimierungs Ebene | Beschreibung |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Komprimierung sollte so schnell wie möglich abgeschlossen werden, auch wenn die resultierende Ausgabe optimal komprimiert ist nicht. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung ausgeführt werden. |
+| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
+| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
 | [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
 
 ```csharp
@@ -214,23 +222,23 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-### <a name="gzip-compression-provider"></a>Anbieter der Gzip-Komprimierung
+### <a name="gzip-compression-provider"></a>GZip-Komprimierungs Anbieter
 
-Verwenden der <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider> zum Komprimieren von Antworten mit dem die [Gzip-Dateiformat](https://tools.ietf.org/html/rfc1952).
+Verwenden Sie, um Antworten mit dem [gzip-Dateiformat](https://tools.ietf.org/html/rfc1952)zu komprimieren. <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>
 
-Wenn keine Komprimierung Anbieter explizit hinzugefügt werden die <xref:Microsoft.AspNetCore.ResponseCompression.CompressionProviderCollection>:
+Wenn keine Komprimierungs Anbieter explizit zum <xref:Microsoft.AspNetCore.ResponseCompression.CompressionProviderCollection>hinzugefügt werden:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* Der Anbieter der Gzip-Komprimierung wird standardmäßig hinzugefügt, in das Array der Komprimierung Anbieter zusammen mit den [Brotli-Komprimierung Anbieter](#brotli-compression-provider).
-* Komprimierung standardmäßig auf Brotli-Komprimierung auf, wenn das Format der Brotli-komprimierte Daten vom Client unterstützt wird. Wenn Brotli vom Client unterstützt wird, standardmäßig Komprimierung Gzip an, wenn der Client die Gzip-Komprimierung unterstützt wird.
+* Der GZip-Komprimierungs Anbieter wird dem Array von Komprimierungs Anbietern standardmäßig zusammen mit dem [brotli-Komprimierungs Anbieter](#brotli-compression-provider)hinzugefügt.
+* Bei der Komprimierung wird standardmäßig die brotli-Komprimierung verwendet, wenn das von der Client komprimierte brotli-Datenformat Wenn brotli nicht vom Client unterstützt wird, wird standardmäßig gzip verwendet, wenn der Client die gzip-Komprimierung unterstützt.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-* Der Anbieter der Gzip-Komprimierung wird standardmäßig in das Array der Komprimierung Anbieter hinzugefügt.
-* Komprimierung wird standardmäßig auf Gzip, wenn der Client die Gzip-Komprimierung unterstützt.
+* Der GZip-Komprimierungs Anbieter wird standardmäßig dem Array von Komprimierungs Anbietern hinzugefügt.
+* Standardmäßig wird gzip verwendet, wenn der Client die gzip-Komprimierung unterstützt.
 
 ::: moniker-end
 
@@ -241,26 +249,26 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Der Anbieter der Gzip-Komprimierung muss hinzugefügt werden, wenn alle Anbieter Komprimierung explizit hinzugefügt werden:
+Der GZip-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierungs Anbieter explizit hinzugefügt werden:
 
-::: moniker range=">= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](response-compression/samples/2.x/Startup.cs?name=snippet1&highlight=6)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.2"
-
-[!code-csharp[](response-compression/samples/1.x/Startup.cs?name=snippet2&highlight=5)]
+[!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=6)]
 
 ::: moniker-end
 
-Stellen Sie die Komprimierung mit <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>. Der Anbieter der Gzip-Komprimierung ist standardmäßig die schnellste Komprimierung ([CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel)), die möglicherweise nicht die effizienteste Komprimierung erzeugen. Wenn die effizienteste Komprimierung gewünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
+::: moniker range="< aspnetcore-3.0"
 
-| Komprimierungsgrad | Beschreibung |
+[!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=6)]
+
+::: moniker-end
+
+Legen Sie die Komprimierungs <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>Ebene mit fest. Der GZip-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
+
+| Komprimierungs Ebene | Beschreibung |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Komprimierung sollte so schnell wie möglich abgeschlossen werden, auch wenn die resultierende Ausgabe optimal komprimiert ist nicht. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung ausgeführt werden. |
+| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
+| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
 | [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
 
 ```csharp
@@ -277,33 +285,33 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="custom-providers"></a>Benutzerdefinierte Anbieter
 
-Erstellen von benutzerdefinierten Komprimierung Implementierungen mit <xref:Microsoft.AspNetCore.ResponseCompression.ICompressionProvider>. Die <xref:Microsoft.AspNetCore.ResponseCompression.ICompressionProvider.EncodingName*> stellt den Inhalt, Codierung, das von diesem `ICompressionProvider` erzeugt. Die Middleware verwendet diese Informationen, die basierend auf der Liste, die im angegebenen Anbieter auswählen der `Accept-Encoding` -Header der Anforderung.
+Erstellen Sie benutzerdefinierte Komprimierungs Implementierungen mit <xref:Microsoft.AspNetCore.ResponseCompression.ICompressionProvider>. Stellt die von diesem `ICompressionProvider` erzeugte Inhalts Codierung dar. <xref:Microsoft.AspNetCore.ResponseCompression.ICompressionProvider.EncodingName*> Die Middleware verwendet diese Informationen, um den Anbieter auf der Grundlage der im `Accept-Encoding` Header der Anforderung angegebenen Liste auszuwählen.
 
-Verwenden die Beispiel-app, die der Client sendet einer Anforderung mit der `Accept-Encoding: mycustomcompression` Header. Die Middleware die Implementierung von benutzerdefinierten Komprimierung verwendet und gibt die Antwort mit einem `Content-Encoding: mycustomcompression` Header. Der Client muss dekomprimiert werden, die benutzerdefinierte Codierung in der Reihenfolge für die Implementierung eines benutzerdefinierten Komprimierung arbeiten können.
+Mithilfe der Beispiel-App übermittelt der Client eine Anforderung mit `Accept-Encoding: mycustomcompression` dem-Header. Die Middleware verwendet die Implementierung der benutzerdefinierten Komprimierung und gibt die `Content-Encoding: mycustomcompression` Antwort mit einem-Header zurück. Der Client muss in der Lage sein, die benutzerdefinierte Codierung zu decodieren, damit eine benutzerdefinierte Komprimierungs Implementierung funktioniert.
 
-::: moniker range=">= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](response-compression/samples/2.x/Startup.cs?name=snippet1&highlight=7)]
+[!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=7)]
 
-[!code-csharp[](response-compression/samples/2.x/CustomCompressionProvider.cs?name=snippet1)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.2"
-
-[!code-csharp[](response-compression/samples/1.x/Startup.cs?name=snippet2&highlight=6)]
-
-[!code-csharp[](response-compression/samples/1.x/CustomCompressionProvider.cs?name=snippet1)]
+[!code-csharp[](response-compression/samples/3.x/SampleApp/CustomCompressionProvider.cs?name=snippet1)]
 
 ::: moniker-end
 
-Senden Sie eine Anforderung für die Beispielapp mit der `Accept-Encoding: mycustomcompression` Header, und beobachten Sie die Header der Antwort. Die `Vary` und `Content-Encoding` -Header in der Antwort vorhanden sind. Der Text der Antwort (nicht gezeigt) wird nicht durch das Beispiel komprimiert. Es ist nicht in eine Implementierung von Komprimierung das `CustomCompressionProvider` Klasse des Beispiels. Das Beispiel zeigt jedoch, in denen Sie solche einen Komprimierungsalgorithmus implementieren würden.
+::: moniker range="< aspnetcore-3.0"
 
-![Fiddler-Fenster mit Ergebnis einer Anforderung mit dem Accept-Encoding-Header und einem Wert von Mycustomcompression. Die Vary und Content-Encoding-Header werden an die Antwort hinzugefügt.](response-compression/_static/request-custom-compression.png)
+[!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=7)]
+
+[!code-csharp[](response-compression/samples/2.x/SampleApp/CustomCompressionProvider.cs?name=snippet1)]
+
+::: moniker-end
+
+Senden Sie eine Anforderung an die Beispiel-APP `Accept-Encoding: mycustomcompression` mit dem-Header, und beobachten Sie die Antwortheader. Der `Vary` - `Content-Encoding` Header und der-Header sind in der Antwort vorhanden. Der Antworttext (nicht angezeigt) wird nicht durch das Beispiel komprimiert. In der `CustomCompressionProvider` -Klasse des Beispiels ist keine Komprimierungs Implementierung vorhanden. Das Beispiel zeigt jedoch, wo Sie einen solchen Komprimierungs Algorithmus implementieren würden.
+
+![Das Fenster "dateiddler" zeigt das Ergebnis einer Anforderung mit dem Accept-Encoding-Header und einem Wert von "mycustomcompression" an. Die variierenden und Content-Encoding-Header werden der Antwort hinzugefügt.](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME-Typen
 
-Die Middleware gibt eine Reihe von MIME-Typen für die Komprimierung:
+Die Middleware gibt einen Standardsatz von MIME-Typen für die Komprimierung an:
 
 * `application/javascript`
 * `application/json`
@@ -314,67 +322,55 @@ Die Middleware gibt eine Reihe von MIME-Typen für die Komprimierung:
 * `text/plain`
 * `text/xml`
 
-Ersetzen Sie oder fügen Sie die MIME-Typen mit den Antworten komprimierende Middleware-Optionen. Beachten Sie diese Platzhalter-MIME-Typen, z. B. `text/*` werden nicht unterstützt. Die Beispiel-app Fügt einen MIME-Typ für `image/svg+xml` und komprimiert und dient dem ASP.NET Core Bannerbild (*banner.svg*).
+Ersetzen Sie MIME-Typen, oder fügen Sie Sie durch die Optionen für die Antwort Komprimierungs Middleware Beachten Sie, dass Platzhalter-MIME `text/*` -Typen wie nicht unterstützt werden. Die Beispiel-App Fügt einen MIME- `image/svg+xml` Typ für hinzu und komprimiert das ASP.net Core Banner Bild (*Banner. SVG*).
 
-::: moniker range=">= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](response-compression/samples/2.x/Startup.cs?name=snippet1&highlight=8-10)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.2"
-
-[!code-csharp[](response-compression/samples/1.x/Startup.cs?name=snippet2&highlight=7-9)]
+[!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
 ::: moniker-end
 
-## <a name="compression-with-secure-protocol"></a>Komprimierung mit sicheren Protokolls
+::: moniker range="< aspnetcore-3.0"
 
-Komprimierte Antworten über sichere Verbindungen können gesteuert werden, mit der `EnableForHttps` Option, die standardmäßig deaktiviert ist. Dynamisch generierten Seiten mit Komprimierung Sicherheitsprobleme führen kann, wie z. B. die [CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) und [SICHERHEITSVERLETZUNG](https://wikipedia.org/wiki/BREACH_(security_exploit)) Angriffe.
-
-## <a name="adding-the-vary-header"></a>Den Vary-Header hinzufügen
-
-::: moniker range=">= aspnetcore-2.0"
-
-Beim Komprimieren von Antworten basierend auf den `Accept-Encoding` -Header, es gibt potenziell mehrere komprimierte Versionen der Antwort und eine nicht komprimierte Version. Um den Client und Proxy-Caches anzuweisen, dass mehrere Versionen vorhanden sind und gespeichert werden soll, die `Vary` Header hinzugefügt, um mit einem `Accept-Encoding` Wert. In ASP.NET Core 2.0 oder höher, fügt die Middleware die `Vary` Header automatisch, wenn die Antwort komprimiert wird.
+[!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-2.0"
+## <a name="compression-with-secure-protocol"></a>Komprimierung mit sicherem Protokoll
 
-Beim Komprimieren von Antworten basierend auf den `Accept-Encoding` -Header, es gibt potenziell mehrere komprimierte Versionen der Antwort und eine nicht komprimierte Version. Um den Client und Proxy-Caches anzuweisen, dass mehrere Versionen vorhanden sind und gespeichert werden soll, die `Vary` Header hinzugefügt, um mit einem `Accept-Encoding` Wert. In ASP.NET Core 1.x, Hinzufügen der `Vary` Header in die Antwort erfolgt manuell:
+Komprimierte Antworten über sichere Verbindungen können mit der `EnableForHttps` Option gesteuert werden, die standardmäßig deaktiviert ist. Die Verwendung der Komprimierung mit dynamisch generierten Seiten kann zu Sicherheitsproblemen führen, wie z. B. [CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit))- und [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit))-Angriffen.
 
-[!code-csharp[](response-compression/samples/1.x/Startup.cs?name=snippet1)]
+## <a name="adding-the-vary-header"></a>Hinzufügen des Vary-Headers
 
-::: moniker-end
+Beim Komprimieren von Antworten auf der Grundlage `Accept-Encoding` des Headers gibt es potenziell mehrere komprimierte Versionen der Antwort und eine nicht komprimierte Version. Um Client-und Proxy Caches anzuweisen, dass mehrere Versionen vorhanden sind und gespeichert werden sollten `Vary` , wird der-Header `Accept-Encoding` mit einem-Wert hinzugefügt. In ASP.net Core 2,0 oder höher fügt die Middleware den `Vary` Header automatisch hinzu, wenn die Antwort komprimiert wird.
 
-## <a name="middleware-issue-when-behind-an-nginx-reverse-proxy"></a>Middleware-Problem, wenn der Server einen Nginx-reverse-proxy
+## <a name="middleware-issue-when-behind-an-nginx-reverse-proxy"></a>Middleware-Problem, wenn hinter einem nginx-Reverseproxy
 
-Wenn eine Anforderung über einen Proxy von Nginx, ist die `Accept-Encoding` Header entfernt wird. Entfernen der `Accept-Encoding` Header wird verhindert, dass die Middleware die Antwort zu komprimieren. Weitere Informationen finden Sie unter [NGINX: Komprimierung und Dekomprimierung](https://www.nginx.com/resources/admin-guide/compression-and-decompression/). Dieses Problem wird nachverfolgt, indem [herausfinden, Pass-Through-Komprimierung für Nginx (Aspnet/BasicMiddleware \#123)](https://github.com/aspnet/BasicMiddleware/issues/123).
+Wenn eine Anforderung von nginx bereitgestellt wird, wird `Accept-Encoding` der Header entfernt. Durch das Entfernen `Accept-Encoding` des Headers wird verhindert, dass die Middleware die Antwort komprimiert. Weitere Informationen finden Sie unter [NGINX: Komprimierung und Komprimierung](https://www.nginx.com/resources/admin-guide/compression-and-decompression/). Dieses Problem wird nachverfolgt [, indem Sie die Pass-Through-Komprimierung für nginx (ASPNET/ \#basicmiddleware 123) ermitteln](https://github.com/aspnet/BasicMiddleware/issues/123).
 
-## <a name="working-with-iis-dynamic-compression"></a>Arbeiten mit dynamische Komprimierung in IIS
+## <a name="working-with-iis-dynamic-compression"></a>Arbeiten mit dynamischer IIS-Komprimierung
 
-Wenn Sie ein aktives IIS dynamische Komprimierung Modul konfiguriert werden, auf der Serverebene, die Sie für eine app deaktivieren möchten haben, deaktivieren Sie das Modul mit der eine Ergänzung der *"Web.config"* Datei. Weitere Informationen finden Sie unter [Disabling IIS modules (Deaktivieren von IIS-Modulen)](xref:host-and-deploy/iis/modules#disabling-iis-modules).
+Wenn Sie ein aktives Modul für die dynamische IIS-Komprimierung auf Serverebene konfiguriert haben, die Sie für eine App deaktivieren möchten, deaktivieren Sie das Modul mit einer Addition zur Datei " *Web. config* ". Weitere Informationen finden Sie unter [Disabling IIS modules (Deaktivieren von IIS-Modulen)](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
-Mit einem Tool wie [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/), oder [Postman](https://www.getpostman.com/), mit denen Sie festlegen, die `Accept-Encoding` Anforderungsheader und Untersuchen der Antwortheader, Größe und Text. Antworten komprimierende Middleware komprimiert standardmäßig Antworten, die die folgenden Bedingungen erfüllen:
+Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", " [Firebug](https://getfirebug.com/)" oder [Postman](https://www.getpostman.com/), mit dem Sie den `Accept-Encoding` Anforderungs Header festlegen und die Antwortheader, die Größe und den Text überprüfen können. Standardmäßig komprimiert die Middleware für die Antwort Komprimierung Antworten, die die folgenden Bedingungen erfüllen:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* Die `Accept-Encoding` Header mit dem Wert vorhanden ist `br`, `gzip`, `*`, oder benutzerdefinierte Codierung, die einen benutzerdefinierten Komprimierung Anbieter entspricht, die Sie eingerichtet haben. Der Wert darf nicht sein `identity` oder über einen Qualitätswert (Qvalue, `q`) von 0 (null) festlegen.
-* Der MIME-Typ (`Content-Type`) muss festgelegt sein und muss einen MIME-Typ auf konfiguriert entsprechen den <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions>.
-* Die Anforderung dürfen keine der `Content-Range` Header.
-* Die Anforderung muss unsicheres Protokoll (http) verwenden, es sei denn, sicheres Protokoll (Https) in den Antworten komprimierende Middleware-Optionen konfiguriert ist. *Beachten Sie die Gefahr [oben beschriebenen](#compression-with-secure-protocol) beim Aktivieren der Komprimierung für sichere Inhalte.*
+* Der `Accept-Encoding` -Header ist mit dem `br`Wert, `gzip`, `*`oder der benutzerdefinierten Codierung vorhanden, die mit einem benutzerdefinierten Komprimierungs Anbieter übereinstimmt, den Sie eingerichtet haben. Der Wert darf nicht sein `identity` oder einen Qualitäts Wert (qvalue, `q`) der Einstellung 0 (null) aufweisen.
+* Der MIME-Typ`Content-Type`() muss festgelegt werden und mit einem MIME-Typ, <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions>der im konfiguriert ist, identisch sein.
+* Die Anforderung darf den `Content-Range` -Header nicht enthalten.
+* Die Anforderung muss das unsichere Protokoll (http) verwenden, es sei denn, das sichere Protokoll (HTTPS) ist in den Optionen der Middleware für die Antwort Komprimierung konfiguriert. *Beachten Sie die [oben beschriebene](#compression-with-secure-protocol) Gefahr beim Aktivieren der Komprimierung von sicherem Inhalt.*
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-* Die `Accept-Encoding` Header mit dem Wert vorhanden ist `gzip`, `*`, oder benutzerdefinierte Codierung, die einen benutzerdefinierten Komprimierung Anbieter entspricht, die Sie eingerichtet haben. Der Wert darf nicht sein `identity` oder über einen Qualitätswert (Qvalue, `q`) von 0 (null) festlegen.
-* Der MIME-Typ (`Content-Type`) muss festgelegt sein und muss einen MIME-Typ auf konfiguriert entsprechen den <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions>.
-* Die Anforderung dürfen keine der `Content-Range` Header.
-* Die Anforderung muss unsicheres Protokoll (http) verwenden, es sei denn, sicheres Protokoll (Https) in den Antworten komprimierende Middleware-Optionen konfiguriert ist. *Beachten Sie die Gefahr [oben beschriebenen](#compression-with-secure-protocol) beim Aktivieren der Komprimierung für sichere Inhalte.*
+* Der `Accept-Encoding` -Header ist mit dem `gzip`Wert, `*`oder der benutzerdefinierten Codierung vorhanden, die mit einem benutzerdefinierten Komprimierungs Anbieter übereinstimmt, den Sie eingerichtet haben. Der Wert darf nicht sein `identity` oder einen Qualitäts Wert (qvalue, `q`) der Einstellung 0 (null) aufweisen.
+* Der MIME-Typ`Content-Type`() muss festgelegt werden und mit einem MIME-Typ, <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions>der im konfiguriert ist, identisch sein.
+* Die Anforderung darf den `Content-Range` -Header nicht enthalten.
+* Die Anforderung muss das unsichere Protokoll (http) verwenden, es sei denn, das sichere Protokoll (HTTPS) ist in den Optionen der Middleware für die Antwort Komprimierung konfiguriert. *Beachten Sie die [oben beschriebene](#compression-with-secure-protocol) Gefahr beim Aktivieren der Komprimierung von sicherem Inhalt.*
 
 ::: moniker-end
 
@@ -383,6 +379,6 @@ Mit einem Tool wie [Fiddler](https://www.telerik.com/fiddler), [Firebug](https:/
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
 * [Mozilla Developer Network: Accept-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Encoding)
-* [RFC 7231 Abschnitt 3.1.2.1: Inhalt Codings](https://tools.ietf.org/html/rfc7231#section-3.1.2.1)
-* [RFC 7230 Abschnitt 4.2.3: Gzip-Codierung](https://tools.ietf.org/html/rfc7230#section-4.2.3)
-* [GZIP-Datei-Format Specification Version 4.3](https://www.ietf.org/rfc/rfc1952.txt)
+* [RFC 7231, Abschnitt 3.1.2.1: Inhalts Codierungen](https://tools.ietf.org/html/rfc7231#section-3.1.2.1)
+* [RFC 7230, Abschnitt 4.2.3: Gzip-Codierung](https://tools.ietf.org/html/rfc7230#section-4.2.3)
+* [Gzip-Dateiformat Spezifikation, Version 4,3](https://www.ietf.org/rfc/rfc1952.txt)
