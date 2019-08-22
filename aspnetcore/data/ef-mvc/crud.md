@@ -1,18 +1,18 @@
 ---
 title: 'Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core'
 description: In diesem Tutorial überprüfen und passen Sie CRUD-Code (Create, Read, Update, Delete) an, der durch den MVC-Gerüstbau automatisch für Ihre Controller und Ansichten erstellt wird.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 442570cdc79fe7c496392ffbcbc527cf841aefa9
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 975738200f9ea621c38b395be123b1d05c78298e
+ms.sourcegitcommit: 41f2c1a6b316e6e368a4fd27a8b18d157cef91e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750084"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69886308"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
@@ -58,7 +58,7 @@ In der folgenden URL ordnet die Standardroute den Dozenten als den Controller, d
 http://localhost:1230/Instructor/Index/1?courseID=2021
 ```
 
-Der letzte Teil der URL („?courseID=2021“) ist ein Abfragezeichenfolgenwert. Die Modellbindung gibt auch den ID-Wert an den Parameter `id` der Methode `Details` weiter, wenn Sie ihn als Abfragezeichenfolgenwert übergeben:
+Der letzte Teil der URL („?courseID=2021“) ist ein Abfragezeichenfolgenwert. Die Modellbindung gibt auch den ID-Wert an den Parameter `id` der Methode `Index` weiter, wenn Sie ihn als Abfragezeichenfolgenwert übergeben:
 
 ```
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021

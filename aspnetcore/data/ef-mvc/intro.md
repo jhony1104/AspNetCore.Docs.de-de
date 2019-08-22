@@ -1,18 +1,18 @@
 ---
 title: 'Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App'
 description: Dies ist die erste Tutorial in der Reihe, in dem die Erstellung der Beispielanwendung der Contoso University von Grund auf erläutert wird.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a93d5af314f1ff679a8df636297a0d5849ebdb8d
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 1b68c20ba206a5afe36f307525879f91d03d95d1
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610210"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583342"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
@@ -259,7 +259,7 @@ Die automatische Erstellung von CRUD-Aktionsmethoden und Ansichten wird als Ger�
 
   * Klicken Sie auf **Hinzufügen**.
 
-  Wenn Sie auf **Hinzufügen** klicken, erstellt die Visual Studio-Gerüstbauengine eine *StudentsController.cs*-Datei und mehrere Ansichten (*.cshtml*-Dateien), die mit dem Controller zusammenarbeiten.
+  Wenn Sie auf **Hinzufügen** klicken, erstellt die Visual Studio-Gerüstbauengine eine *StudentsController.cs*-Datei und mehrere Ansichten ( *.cshtml*-Dateien), die mit dem Controller zusammenarbeiten.
 
 (Die Gerüstbauengine kann ebenfalls für Sie den Datenbankkontext erstellen, wenn Sie diesen nicht zuvor manuell erstellt haben, wie obenstehend in diesem Tutorial beschrieben. Sie können im Feld **Controller hinzufügen** eine neue Kontextklasse hinzufügen, indem Sie rechts neben der **Datenkontextklasse** auf das Pluszeichen klicken.  Visual Studio erstellt dann neben dem Controller und den Ansichten Ihre `DbContext`-Klasse.)
 
@@ -305,7 +305,7 @@ Klicken Sie mit der rechten Maustaste auf die Tabelle **Students**, und klicken 
 
 ![Tabelle „Student“ im SSOX](intro/_static/ssox-student-table.png)
 
-Die Datenbankdateien im Format *MDF* und *LDF* befinden sich im Ordner *C:\Benutzer\\\<Ihr Benutzername>*.
+Die Datenbankdateien im Format *MDF* und *LDF* befinden sich im Ordner *C:\Benutzer\\\<Ihr Benutzername>* .
 
 Da Sie `EnsureCreated` in der Initialisierermethode aufrufen, die beim App-Start ausgeführt wird, können Sie Änderungen an der `Student`-Klasse vornehmen, die Datenbank löschen oder die Anwendung erneut ausführen. Dann wird Ihre Datenbank automatisch Ihren Änderungen entsprechend neu erstellt. Wenn Sie z.B. eine `EmailAddress`-Eigenschaft zu der `Student`-Klasse hinzufügen, wird eine neue `EmailAddress`-Spalte in der neu erstellten Tabelle angezeigt.
 

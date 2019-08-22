@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2019
 uid: fundamentals/file-providers
-ms.openlocfilehash: 93eb48d81a853061a874641e84b4875849690a93
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b93b2df7fad7c173f43ad69aec865f09de6c9c34
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886615"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69487575"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dateianbieter in ASP.NET Core
 
@@ -51,7 +51,7 @@ Die Beispiel-App demonstriert die Konfiguration eines Dateianbieters in `Startup
 
 Es sind drei Implementierungen von `IFileProvider` verfügbar.
 
-| Implementierung | Beschreibung |
+| Implementierung | BESCHREIBUNG |
 | -------------- | ----------- |
 | [PhysicalFileProvider](#physicalfileprovider) | Der physische Anbieter wird verwendet, um auf die physischen Systemdateien zuzugreifen. |
 | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | Der eingebettete Manifesanbieter wird verwendet, um auf Dateien zuzugreifen, die in Assemblys eingebettet sind. |
@@ -107,7 +107,7 @@ Der [ManifestEmbeddedFileProvider](/dotnet/api/microsoft.extensions.fileprovider
 
 Um ein Manifest der eingebetteten Dateien zu generieren, legen die `<GenerateEmbeddedFilesManifest>`-Eigenschaft auf `true` fest. Geben Sie die einzubettenden Dateien mit [&lt;EmbeddedResource&gt;](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects) an:
 
-[!code-csharp[](file-providers/samples/2.x/FileProviderSample/FileProviderSample.csproj?highlight=5,13)]
+[!code-csharp[](file-providers/samples/2.x/FileProviderSample/FileProviderSample.csproj?highlight=6,14)]
 
 Verwenden Sie [Globmuster](#glob-patterns), um eine oder mehr Dateien anzugeben, die in die Assembly eingebettet werden sollen.
 
@@ -126,7 +126,7 @@ Mit zusätzlichen Überladungen können Sie:
 * Dateien einem zuletzt geänderten Datum zuordnen.
 * Die eingebettete Ressource benennen, die das eingebettete Dateimanifest enthält.
 
-| Überladung | Beschreibung |
+| Überladung | BESCHREIBUNG |
 | -------- | ----------- |
 | [ManifestEmbeddedFileProvider(Assembly, String)](/dotnet/api/microsoft.extensions.fileproviders.manifestembeddedfileprovider.-ctor#Microsoft_Extensions_FileProviders_ManifestEmbeddedFileProvider__ctor_System_Reflection_Assembly_System_String_) | Akzeptiert einen optionalen relativen `root`-Pfadparameter. Geben Sie `root` an, um Aufrufe an [GetDirectoryContents](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider.getdirectorycontents) den Ressourcen im bereitgestellten Pfad zuzuordnen. |
 | [ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)](/dotnet/api/microsoft.extensions.fileproviders.manifestembeddedfileprovider.-ctor#Microsoft_Extensions_FileProviders_ManifestEmbeddedFileProvider__ctor_System_Reflection_Assembly_System_String_System_DateTimeOffset_) | Akzeptiert einen optionalen relativen `root`-Pfadparameter und einen `lastModified` ([DateTimeOffset](/dotnet/api/system.datetimeoffset))-Datumsparameter. Das `lastModified`-Datum ordnet das letzte Änderungsdatum für die [IFileInfo](/dotnet/api/microsoft.extensions.fileproviders.ifileinfo)-Instanzen zu, die vom [IFileProvider](/dotnet/api/microsoft.extensions.fileproviders.ifileprovider) zurückgegeben wurden. |

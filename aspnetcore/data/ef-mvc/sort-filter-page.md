@@ -1,17 +1,17 @@
 ---
 title: 'Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial fügen Sie die Funktionen zum Sortieren, Filtern und Paging zur Studentenindexseite hinzu. Sie werden auch eine Seite erstellen, auf der einfache Gruppierungsvorgänge ausgeführt werden.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 921e27bf56587813f835357c9090c91a155c087b
-ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
+ms.openlocfilehash: 4e52a3d3f56c4cf6f396ee9ff1c18061a2364c77
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65212548"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583393"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core
 
@@ -93,7 +93,7 @@ Sie haben einen `searchString`-Parameter zur `Index`-Methode hinzugefügt. Der Z
 > [!NOTE]
 > Wenn Sie die `Where`-Methode auf einem `IQueryable`-Objekt aufrufen, wird der Filter auf dem Server verarbeitet. In einigen Szenarios rufen Sie möglicherweise die `Where`-Methode als Erweiterungsmethode für eine speicherinterne Sammlung auf. (Angenommen, Sie ändern den Verweis auf `_context.Students`. Dann wird nicht mehr auf ein `DbSet`-EF, sondern auf eine Repository-Methode verwiesen, die eine `IEnumerable`-Sammlung zurückgibt.) Das Ergebnis wäre normalerweise identisch, aber in einigen Fällen kann es unterschiedlich ausfallen.
 >
->Die .NET Framework-Implementierung der `Contains`-Methode führt beispielsweise standardmäßig einen Vergleich unter Beachtung der Groß-/Kleinschreibung durch. Aber in SQL Server wird dies durch die Sortierungseinstellung der SQL Server-Instanz bestimmt. Diese Einstellung berücksichtigt die Groß-/Kleinschreibung standardmäßig nicht. Sie könnten die `ToUpper`-Methode aufrufen, wenn die Groß-/Kleinschreibung bei der Durchführung des Tests explizit nicht beachtet werden soll:  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*. Das würde sicherstellen, dass die Ergebnisse gleich bleiben, wenn Sie den Code später ändern, um ein Repository zu verwenden, das eine `IEnumerable`-Sammlung anstelle eines `IQueryable`-Objekts zurückgibt. (Beim Aufrufen der `Contains`-Methode einer `IEnumerable`-Sammlung erhalten Sie die .NET Framework-Implementierung. Wenn Sie sie auf einem `IQueryable`-Objekt aufrufen, erhalten Sie die Implementierung des Datenanbieters.) Es gibt jedoch eine Leistungseinbuße für diese Lösung. Der `ToUpper`-Code würde eine Funktion in die WHERE-Klausel der TSQL SELECT-Anweisung setzen. Die würde verhindern, dass der Optimierer einen Index verwendet. Da SQL die Groß-/Kleinschreibung hauptsächlich nicht berücksichtigt, wird empfohlen, den `ToUpper`-Code zu vermeiden, bis die Migration zu einem Datenspeicher erfolgt ist, der die Groß-/Kleinschreibung beachtet.
+>Die .NET Framework-Implementierung der `Contains`-Methode führt beispielsweise standardmäßig einen Vergleich unter Beachtung der Groß-/Kleinschreibung durch. Aber in SQL Server wird dies durch die Sortierungseinstellung der SQL Server-Instanz bestimmt. Diese Einstellung berücksichtigt die Groß-/Kleinschreibung standardmäßig nicht. Sie könnten die `ToUpper`-Methode aufrufen, wenn die Groß-/Kleinschreibung bei der Durchführung des Tests explizit nicht beachtet werden soll:  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())* . Das würde sicherstellen, dass die Ergebnisse gleich bleiben, wenn Sie den Code später ändern, um ein Repository zu verwenden, das eine `IEnumerable`-Sammlung anstelle eines `IQueryable`-Objekts zurückgibt. (Beim Aufrufen der `Contains`-Methode einer `IEnumerable`-Sammlung erhalten Sie die .NET Framework-Implementierung. Wenn Sie sie auf einem `IQueryable`-Objekt aufrufen, erhalten Sie die Implementierung des Datenanbieters.) Es gibt jedoch eine Leistungseinbuße für diese Lösung. Der `ToUpper`-Code würde eine Funktion in die WHERE-Klausel der TSQL SELECT-Anweisung setzen. Die würde verhindern, dass der Optimierer einen Index verwendet. Da SQL die Groß-/Kleinschreibung hauptsächlich nicht berücksichtigt, wird empfohlen, den `ToUpper`-Code zu vermeiden, bis die Migration zu einem Datenspeicher erfolgt ist, der die Groß-/Kleinschreibung beachtet.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Hinzufügen eines Suchfelds zur Studentenindexansicht
 
