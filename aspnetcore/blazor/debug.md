@@ -5,14 +5,14 @@ description: Informationen zum Debuggen von blazor-apps.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/31/2019
+ms.date: 08/22/2019
 uid: blazor/debug
-ms.openlocfilehash: 37c6009727a4f62b61793adca0d83cdd53be4b9a
-ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
+ms.openlocfilehash: c3188a1fe1b699b787f7a95630f3918d295d0f68
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/01/2019
-ms.locfileid: "68948370"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69974911"
 ---
 # <a name="debug-aspnet-core-blazor"></a>Debuggen ASP.net Core blazor
 
@@ -51,6 +51,10 @@ Das Debuggen erfordert einen der folgenden Browser:
 1. Greifen Sie im Browser auf die APP zu.
 1. Platzieren Sie den Tastaturfokus auf die APP, nicht auf den Bereich Entwicklertools. Der Bereich Entwicklertools kann geschlossen werden, wenn das Debuggen initiiert wird.
 1. Wählen Sie die folgende blazor-spezifische Tastenkombination aus:
+   * `Shift+Alt+D`unter Windows/Linux
+   * `Shift+Cmd+D`unter macOS
+1. Führen Sie die auf dem Bildschirm aufgeführten Schritte aus, um den Browser mit aktiviertem Remote Debugging neu zu starten.
+1. Wählen Sie die folgende blazor-spezifische Tastenkombination erneut aus, um die Debugsitzung zu starten:
    * `Shift+Alt+D`unter Windows/Linux
    * `Shift+Cmd+D`unter macOS
 

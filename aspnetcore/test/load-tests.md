@@ -1,81 +1,77 @@
 ---
-title: ASP.NET Core laden/Belastungstests
+title: ASP.net Core laden/Belastungstest
 author: Jeremy-Meng
-description: Lernen Sie einige wichtige Tools und Ansätze für Auslastungstests und Belastungstests in ASP.NET Core-apps.
+description: Erfahren Sie mehr über verschiedene wichtige Tools und Ansätze für Auslastungs Tests und Belastungstests ASP.net Core apps.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/05/2019
+ms.date: 4/05/2019
 uid: test/loadtests
-ms.openlocfilehash: 4b07dd1af7e0c1d3ce9baa167b69fd8f80df204a
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 7a9dfc1fedf747ab26daa573b61ed01c31709058
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815174"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975245"
 ---
-# <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core laden/Belastungstests
+# <a name="aspnet-core-loadstress-testing"></a>ASP.net Core laden/Belastungstest
 
-Auslastungstests und Belastungstests sind wichtig, sicherzustellen, dass eine Web-app leistungsfähig ist und skalierbar. Ihre Ziele unterscheiden, obwohl sie häufig ähnliche Tests freigeben.
+Auslastungs Tests und Belastungstests sind wichtig, um sicherzustellen, dass eine Web-App Performance und skalierbar ist. Ihre Ziele sind unterschiedlich, obwohl Sie häufig ähnliche Tests gemeinsam nutzen.
 
-**Auslastungstests** &ndash; testen, ob die app auf eine angegebene Last von Benutzern für eine bestimmte Szenario behandeln kann, und dabei trotzdem das Antwortziel. Die app wird unter normalen Bedingungen ausgeführt.
+**Auslastungs Tests** &ndash; Testen Sie, ob die APP eine bestimmte Last von Benutzern für ein bestimmtes Szenario verarbeiten kann, während das Antwort Ziel weiterhin erfüllt wird. Die APP wird unter normalen Bedingungen ausgeführt.
 
-**Belastungstests** &ndash; Stabilität der app zu testen, wenn unter extremen Bedingungen häufig für längere Zeit ausgeführt wird. Die Tests hohe benutzerauslastung, entweder "Spitzen" oder "schrittweise zunehmenden Auslastung, platzieren Sie in der app, oder sie der app-Compute-Ressourcen beschränken.
+**Belastungstests** &ndash; Testen Sie die APP-Stabilität, wenn Sie unter Extrembedingungen ausgeführt wird, häufig für längere Zeit. Die Tests platzieren hohe Benutzer Auslastung, entweder Spitzen oder allmählich höhere Auslastung, in der APP oder beschränken die computingressourcen der app.
 
-Belastungstests bestimmen, ob eine app unter Last Wiederherstellen nach einem Fehler und erwarteten Verhalten zurück. Bei hoher Belastung ist nicht die app unter normalen Bedingungen ausgeführt.
+Belastungstests bestimmen, ob eine zu Belastungs Ende App nach einem Fehler wieder hergestellt werden kann und ordnungsgemäß zum erwarteten Verhalten zurückkehren kann. Unter Belastung wird die APP nicht unter normalen Bedingungen ausgeführt.
 
-Visual Studio-2019 ist die letzte Version von Visual Studio mit Funktionen für Auslastungstests. Für Kunden Auslastungstesttools in der Zukunft empfehlen wir die anderen Tools wie Apache JMeter Akamai CloudTest und BlazeMeter. Weitere Informationen finden Sie unter den [Anmerkungen zu Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
+Visual Studio 2019 ist die letzte Version von Visual Studio mit Auslastungs Test Features. Für Kunden, die zukünftig Auslastungs TestTools benötigen, empfehlen wir alternative Tools, wie z. b. Apache JMeter, Akamai cloudtest und blazemeter. Weitere Informationen finden Sie in den [Anmerkungen zu dieser Version von Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
 
-Die Dienst-Auslastungstests in Azure DevOps endet in 2020. Weitere Informationen finden Sie unter [cloudbasierte Auslastungstests Service Ende ihrer Lebensdauer](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/).
+Der Auslastungs Test Dienst in Azure devops endet in 2020. Weitere Informationen finden Sie unter [Dienst Ende des cloudbasierten Auslastungs Tests](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/).
 
 ## <a name="visual-studio-tools"></a>Visual Studio Tools
 
-Visual Studio ermöglicht das Erstellen, entwickeln und Debuggen von webleistungs-und Auslastungstest. Eine Option ist verfügbar, um Tests zu erstellen, durch Aufzeichnen der Aktionen in einem Webbrowser.
+Visual Studio ermöglicht Benutzern das Erstellen, entwickeln und Debuggen von webleistungs-und Auslastungs Tests. Eine Option ist verfügbar, um Tests zu erstellen, indem Aktionen in einem Webbrowser aufgezeichnet werden.
 
-Informationen zum Erstellen, konfigurieren und Ausführen eines Auslastungstests Projekte mit Visual Studio 2017 finden Sie unter [Schnellstart: Erstellen eines Auslastungstestprojekts](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017). Weitere Informationen finden Sie unter den [Zusatzressourcen](#additional-resources) Abschnitt.
+Informationen zum Erstellen, konfigurieren und Ausführen eines Auslastungs Testprojekts mit Visual Studio 2017 finden [Sie unter Schnellstart: Erstellen eines Auslastungstestprojekts](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
 
-Auslastungstests können konfiguriert werden, führen Sie lokal oder Ausführung in der Cloud mit Azure DevOps.
+Auslastungs Tests können so konfiguriert werden, dass Sie lokal oder mithilfe von Azure devops in der Cloud ausgeführt werden.
 
 ## <a name="azure-devops"></a>Azure DevOps
 
-Auslastungstestläufe können gestartet werden, mithilfe der [Azure DevOps Testplänen](/azure/devops/test/load-test/index?view=vsts) Service.
+Auslastungs Testläufe können mithilfe des [Azure devops-Test Plans](/azure/devops/test/load-test/index?view=vsts) Dienstanbieter gestartet werden.
 
-![Azure-Angebotsseite der DevOps-Auslastungstests](./load-tests/_static/azure-devops-load-test.png)
+![Startseite für Azure devops-Auslastungs Tests](./load-tests/_static/azure-devops-load-test.png)
 
-Der Dienst unterstützt die folgenden Test-Formate:
+Der Dienst unterstützt die folgenden Testformate:
 
-* Visual Studio &ndash; Webtest in Visual Studio erstellt.
-* HTTP-Archiv &ndash; erfassten HTTP-Datenverkehr in das Archiv wird wiedergegeben, während der Tests.
-* [URL-basierte](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) &ndash; ermöglicht das Angeben von URLs, um den Test, Anforderungstypen, Header und Abfragezeichenfolgen zu laden. Festlegen von Parametern, z. B. Dauer ausgeführt werden, kann Auslastungsmuster und Anzahl von Benutzern konfiguriert werden.
+* Visual Studio &ndash; -Webtest in Visual Studio erstellt.
+* Http- &ndash; Archiv erfasste HTTP-Datenverkehr innerhalb des Archivs wird während des Tests wiedergegeben.
+* [URL-basiert](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) &ndash; Ermöglicht das Angeben von URLs für Auslastungs Tests, Anforderungs Typen, Header und Abfrage Zeichenfolgen. Es können Lauf Zeit Einstellungsparameter wie Dauer, Auslastungs Muster und Anzahl von Benutzern konfiguriert werden.
 * [Apache JMeter](https://jmeter.apache.org/).
 
 ## <a name="azure-portal"></a>Azure-Portal
 
-[Azure-Portal ermöglicht das Einrichten und Ausführen von Auslastungstests von Web-apps](/azure/devops/test/load-test/app-service-web-app-performance-test?view=vsts) direkt aus der **Leistung** App Service im Azure-Portal auf der Registerkarte.
+[Azure-Portal ermöglicht das Einrichten und Ausführen von Auslastungs Tests von Web-Apps](/azure/devops/test/load-test/app-service-web-app-performance-test?view=vsts) direkt über die Registerkarte **Leistung** der APP Service in Azure-Portal.
 
-![Azure App Service im Azure-portal](./load-tests/_static/azure-appservice-perf-test.png)
+![Azure App Service in Azure-Portal](./load-tests/_static/azure-appservice-perf-test.png)
 
-Der Test kann einen manuellen Test mit einer angegebenen URL oder eine Visual Studio-Webtest-Datei, die mehrere URLs zu testen sein.
+Der Test kann ein manueller Test mit einer angegebenen URL oder einer Visual Studio-Webtest Datei sein, die mehrere URLs testen kann.
 
-![Neue Leistung-Testseite im Azure-portal](./load-tests/_static/azure-appservice-perf-test-config.png)
+![Neue Seite "Leistungs Test" auf Azure-Portal](./load-tests/_static/azure-appservice-perf-test-config.png)
 
-Am Ende des Tests zeigen die generierten Berichte die Leistungsmerkmale der app. Beispiel-Statistiken umfassen:
+Am Ende des Tests zeigen generierte Berichte die Leistungsmerkmale der APP an. Beispiel Statistiken:
 
-* Durchschnittliche Antwortzeit
+* Durchschnittliche Reaktionszeit
 * Maximaler Durchsatz: Anforderungen pro Sekunde
-* Ausführungsfehler in Prozent
+* Fehler Prozentsatz
 
-## <a name="third-party-tools"></a>Drittanbieter-tools
+## <a name="third-party-tools"></a>Drittanbieter Tools
 
-Die folgende Liste enthält die Drittanbieter-Web-Leistungstools mit verschiedenen Featuresätze:
+Die folgende Liste enthält webleistungs Tools von Drittanbietern mit verschiedenen Funktionsgruppen:
 
 * [Apache JMeter](https://jmeter.apache.org/)
-* [ApacheBench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
-* [Gatling](https://gatling.io/)
+* [Apachebench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
+* [Gator](https://gatling.io/)
 * [Locust](https://locust.io/)
-* [West Wind WebSurge](https://websurge.west-wind.com/)
-* [Netling](https://github.com/hallatore/Netling)
+* [Webanstieg für Westwind](https://websurge.west-wind.com/)
+* [Wird netult](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
-
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
-
-* [Laden Sie die Test-Blog-Reihe](https://blogs.msdn.microsoft.com/charles_sterling/2015/06/01/load-test-series-part-i-creating-web-performance-tests-for-a-load-test/)

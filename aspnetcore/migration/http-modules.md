@@ -1,260 +1,260 @@
 ---
-title: Migrieren von HTTP-Handler und Module zu ASP.NET Core-middleware
+title: Migrieren von HTTP-Handlern und Modulen zu ASP.net Core Middleware
 author: rick-anderson
 description: ''
-ms.author: tdykstra
+ms.author: riande
 ms.date: 12/07/2016
 uid: migration/http-modules
-ms.openlocfilehash: 84381210910c66a7d121120b8c6b0f046cae8c4f
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: bdf27ccb742d4bc05bac71e6c96d71c38dcb4b62
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207803"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975493"
 ---
-# <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handler und Module zu ASP.NET Core-middleware
+# <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handlern und Modulen zu ASP.net Core Middleware
 
-In diesem Artikel zeigt, wie Sie vorhandene ASP.NET migrieren [HTTP-Module und Handler in "System.Webserver"](/iis/configuration/system.webserver/) zu ASP.NET Core [Middleware](xref:fundamentals/middleware/index).
+In diesem Artikel wird gezeigt, wie vorhandene ASP.net [-HTTP-Module und-Handler von System. Webserver](/iis/configuration/system.webserver/) zu ASP.net Core [Middleware](xref:fundamentals/middleware/index)migriert werden.
 
-## <a name="modules-and-handlers-revisited"></a>Module und Handler revisited
+## <a name="modules-and-handlers-revisited"></a>Wieder besuchte Module und Handler
 
-Bevor Sie fortfahren, um ASP.NET Core-Middleware, zunächst betrachten wir wie HTTP-Module und Handler verwendet werden:
+Bevor Sie mit der ASP.net Core Middleware fortfahren, können Sie zuerst die Funktionsweise von HTTP-Modulen und-Handlern fortsetzen:
 
 ![Module-Handler](http-modules/_static/moduleshandlers.png)
 
 **Handler sind:**
 
-* Klassen, in denen [IHttpHandler](/dotnet/api/system.web.ihttphandler)
+* Klassen, die [IHttpHandler](/dotnet/api/system.web.ihttphandler) implementieren
 
-* Verwendet, um Anforderungen mit einem angegebenen Dateinamen oder die Erweiterung, z. B. behandeln *berichtsserverprojekten*
+* Wird zum Verarbeiten von Anforderungen mit einem angegebenen Dateinamen oder einer Erweiterung verwendet, z *. b. Report*
 
-* [Konfiguriert](/iis/configuration/system.webserver/handlers/) in *"Web.config"*
+* In " *Web. config* " [konfiguriert](/iis/configuration/system.webserver/handlers/)
 
-**Module sind:**
+**Module:**
 
-* Klassen, in denen ["IHttpModule"](/dotnet/api/system.web.ihttpmodule)
+* Klassen, die [IHttpModule](/dotnet/api/system.web.ihttpmodule) implementieren
 
-* Für jede Anforderung aufgerufen
+* Wird für jede Anforderung aufgerufen.
 
-* (Weitere Verarbeitung einer Anforderung beenden) kurzschließen können
+* Kurzschluss (weitere Verarbeitung einer Anforderung wird beendet)
 
-* Hinzufügen der HTTP-Antwort, oder ihre eigenen erstellen können
+* Der HTTP-Antwort kann hinzugefügt werden, oder es kann ein eigener erstellt werden.
 
-* [Konfiguriert](/iis/configuration/system.webserver/modules/) in *"Web.config"*
+* In " *Web. config* " [konfiguriert](/iis/configuration/system.webserver/modules/)
 
-**Die Reihenfolge, in der Module eingehenden Anforderungen verarbeiten, wird durch bestimmt:**
+**Die Reihenfolge, in der Module eingehende Anforderungen verarbeiten, wird durch Folgendes bestimmt:**
 
-1. Die [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx), dies ist eine Reihe-Ereignisse, die von ASP.NET ausgelöst: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Jedes Modul kann es sich um einen Handler für ein oder mehrere Ereignisse erstellen.
+1. Der [Lebenszyklus der Anwendung](https://msdn.microsoft.com/library/ms227673.aspx), bei dem es sich um eine Reihe von ASP.net handelt: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)usw. Jedes Modul kann einen Handler für ein oder mehrere Ereignisse erstellen.
 
-2. Für das gleiche Ereignis, die Reihenfolge, in dem sie in konfiguriert sind *"Web.config"* .
+2. Für dasselbe Ereignis die Reihenfolge, in der Sie in der Datei " *Web. config*" konfiguriert sind.
 
-Neben der Module, können Sie Handler für die Lebenszyklus-Ereignisse zum Hinzufügen Ihrer *"Global.asax.cs"* Datei. Diese Handler führen nach dem Handler in der konfigurierten Module.
+Zusätzlich zu Modulen können Sie Handler für die Lebenszyklus Ereignisse ihrer *Global.asax.cs* -Datei hinzufügen. Diese Handler werden nach den Handlern in den konfigurierten Modulen ausgeführt.
 
-## <a name="from-handlers-and-modules-to-middleware"></a>Vom Handler und Module zu middleware
+## <a name="from-handlers-and-modules-to-middleware"></a>Von Handlern und Modulen bis Middleware
 
-**Middleware sind einfacher als HTTP-Module und Handler:**
+**Middleware ist einfacher als HTTP-Module und-Handler:**
 
-* Module, Handler *"Global.asax.cs"* , *"Web.config"* (mit Ausnahme von IIS-Konfiguration) und der Lebenszyklus der Anwendung nicht mehr vorhanden sind
+* Module, Handler, *Global.asax.cs*, *Web. config* (außer IIS-Konfiguration) und der Lebenszyklus der Anwendung sind nicht mehr vorhanden.
 
-* Die Rollen von Module und Handler haben von Middleware übernommen wurden
+* Die Rollen von Modulen und Handlern wurden von Middleware übernommen.
 
-* Middleware konfiguriert sind, mithilfe von Code statt im *"Web.config"*
+* Die Middleware wird mithilfe von Code anstelle von *Web. config konfiguriert.*
 
-* [Pipeline Verzweigen](xref:fundamentals/middleware/index#use-run-and-map) Sie Anforderungen an bestimmte Middleware senden, basierend auf nicht nur die URL, sondern auch von Anforderungsheadern, Abfragezeichenfolgen usw. ermöglicht.
+* Mithilfe der [Pipeline Verzweigung](xref:fundamentals/middleware/index#use-run-and-map) können Sie Anforderungen an bestimmte Middleware senden. Dies basiert nicht nur auf der URL, sondern auch auf Anforderungs Headern, Abfrage Zeichenfolgen usw.
 
-**Middleware sind Module sehr ähnlich:**
+**Middleware ähnelt Modulen stark:**
 
-* Im Prinzip für jede Anforderung aufgerufen
+* Wird im Prinzip für jede Anforderung aufgerufen.
 
-* Kann eine Anforderung kurzschließen, indem [nicht die Anforderung an die nächste Middleware übergeben](#http-modules-shortcircuiting-middleware)
+* Eine Anforderung kann kurz gebunden werden, da [die Anforderung nicht an die nächste Middleware übergeben](#http-modules-shortcircuiting-middleware) wird.
 
-* Erstellen Sie ihre eigenen HTTP-Antwort
+* Ihre eigene HTTP-Antwort kann erstellt werden.
 
 **Middleware und Module werden in einer anderen Reihenfolge verarbeitet:**
 
-* Reihenfolge der Middleware basiert auf der Reihenfolge, in der sie in die Anforderungspipeline, eingefügt sind während die Reihenfolge der Module vor allem auf basiert [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx) Ereignisse
+* Die Reihenfolge der Middleware basiert auf der Reihenfolge, in der Sie in die Anforderungs Pipeline eingefügt werden, während die Reihenfolge der Module hauptsächlich auf [Anwendungslebenszyklus](https://msdn.microsoft.com/library/ms227673.aspx) -Ereignissen basiert.
 
-* Reihenfolge der Middleware für Antworten ist das Gegenteil von dem für Anforderungen, während die Reihenfolge der Module, die für Anforderungen und Antworten identisch ist
+* Die Reihenfolge der Middleware für Antworten ist das Gegenteil bei Anforderungen, während die Reihenfolge der Module für Anforderungen und Antworten gleich ist.
 
-* Finden Sie unter [erstellen eine middlewarepipeline mit IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)
+* Weitere Informationen finden Sie [unter Erstellen einer middlewarepipeline mit iapplicationbuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)
 
 ![Middleware](http-modules/_static/middleware.png)
 
-Beachten Sie, wie in der Abbildung oben die authentifizierungsmiddleware die Anforderung kurzgeschlossen.
+Beachten Sie, dass in der obigen Abbildung die Authentifizierungs Middleware die Anforderung kurzgeschlossen hat.
 
-## <a name="migrating-module-code-to-middleware"></a>Migrieren von Modulcode zu middleware
+## <a name="migrating-module-code-to-middleware"></a>Migrieren von Modulcode zu Middleware
 
-Ein vorhandenes HTTP-Modul sieht etwa wie folgt:
+Ein vorhandenes HTTP-Modul sieht in etwa wie folgt aus:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Modules/MyModule.cs?highlight=6,8,24,31)]
 
-Siehe die [Middleware](xref:fundamentals/middleware/index) Seite eine ASP.NET Core-Middleware ist eine Klasse, die verfügbar gemacht ein `Invoke` Methode aufnehmen ein `HttpContext` und Zurückgeben einer `Task`. Ihre neue Middleware wird wie folgt aussehen:
+Wie auf der Seite [Middleware](xref:fundamentals/middleware/index) gezeigt, ist eine ASP.net Core Middleware eine `Invoke` `HttpContext` -Klasse, die eine-Methode verfügbar macht, `Task`die eine-Klasse und eine zurückgibt. Die neue Middleware sieht wie folgt aus:
 
 <a name="http-modules-usemiddleware"></a>
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddleware.cs?highlight=9,13,20,24,28,30,32)]
 
-Die vorherige Middleware Vorlage stammt aus dem Abschnitt für [Schreiben von Middleware](xref:fundamentals/middleware/write).
+Die vorangehende Middleware-Vorlage stammt aus dem Abschnitt zum [Schreiben von Middleware](xref:fundamentals/middleware/write).
 
-Die *MyMiddlewareExtensions* Hilfsklasse erleichtert das Konfigurieren Ihrer Middleware in Ihre `Startup` Klasse. Die `UseMyMiddleware` Methode fügt Ihrer Middleware-Klasse, zu der Anforderungspipeline. Die Middleware erforderlich sind, erhalten in den Konstruktor der Middleware eingefügt.
+Die Hilfsklasse *mymiddlewareextensions* vereinfacht das Konfigurieren ihrer Middleware in der `Startup` Klasse. Die `UseMyMiddleware` -Methode fügt der Anforderungs Pipeline die Middleware-Klasse hinzu. Die von der Middleware benötigten Dienste werden in den Konstruktor der Middleware eingefügt.
 
 <a name="http-modules-shortcircuiting-middleware"></a>
 
-Ihr Modul kann eine Anforderung, z. B. wenn der Benutzer nicht autorisiert ist, beenden:
+Das Modul kann eine Anforderung beenden, z. b. wenn der Benutzer nicht autorisiert ist:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Modules/MyTerminatingModule.cs?highlight=9,10,11,12,13&name=snippet_Terminate)]
 
-Eine Middleware verarbeitet dies durch den Aufruf nicht `Invoke` auf die nächste Middleware in der Pipeline. Beachten Sie, dass dadurch die Anforderung, vollständig beendet, nicht behalten Sie, da es sich bei vorherigen Middlewares weiterhin aufgerufen wird, wenn die Antwort die Möglichkeit, über die Pipeline zurückgegeben wird.
+Eine Middleware verarbeitet dies, indem nicht `Invoke` für die nächste Middleware in der Pipeline aufgerufen wird. Beachten Sie, dass dies die Anforderung nicht vollständig beendet, da vorherige Middlewares weiterhin aufgerufen werden, wenn die Antwort durch die Pipeline wieder zurückgegeben wird.
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyTerminatingMiddleware.cs?highlight=7,8&name=snippet_Terminate)]
 
-Beim Migrieren des Moduls Funktionen zu Ihrer neuen Middleware können möglicherweise den Code Kompilieren nicht, da die `HttpContext` Klasse in ASP.NET Core deutlich geändert hat. [Später](#migrating-to-the-new-httpcontext), sehen Sie, wie Sie in der neuen ASP.NET Core "HttpContext" migrieren.
+Wenn Sie die Funktionalität Ihres Moduls zu ihrer neuen Middleware migrieren, stellen Sie möglicherweise fest, dass der Code `HttpContext` nicht kompiliert wird, da die Klasse in ASP.net Core erheblich geändert wurde. [Später](#migrating-to-the-new-httpcontext)erfahren Sie, wie Sie zum neuen ASP.net Core HttpContext migrieren.
 
-## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Migrieren von Modul einfügen in die Anforderungspipeline
+## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Migrieren des Moduls in die Anforderungs Pipeline
 
-HTTP-Module werden in der Regel hinzugefügt, um die Anforderungspipeline mithilfe *"Web.config"* :
+HTTP-Module werden in der Regel mithilfe von " *Web. config*" der Anforderungs Pipeline hinzugefügt:
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
-Konvertieren von [Hinzufügen Ihrer neuen Middleware](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) zu der Anforderungspipeline in Ihre `Startup` Klasse:
+Konvertieren Sie diese, indem [Sie die neue Middleware](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) der Anforderungs Pipeline in `Startup` ihrer Klasse hinzufügen:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Die genaue Stelle in der Pipeline, in dem Sie Ihre neue Middleware einfügen, hängt das Ereignis, das sie als Modul verarbeitet (`BeginRequest`, `EndRequest`usw.) und die Reihenfolge, in der Liste mit den Modulen in *"Web.config"* .
+Die genaue Stelle in der Pipeline, in der Sie die neue Middleware einfügen, hängt von dem Ereignis ab, das in`BeginRequest`der `EndRequest`Liste der Module in der *Web. config*-Datei behandelt wurde (, usw.).
 
-Wie bereits erwähnt, besteht keine Anwendungslebenszyklus in ASP.NET Core und die Reihenfolge, in der Antworten von Middleware verarbeitet werden, die von der Reihenfolge von Modulen verwendeten unterscheidet sich. Dadurch kann Ihre Bestellungen Entscheidung schwieriger.
+Wie bereits erwähnt, gibt es keinen Anwendungslebenszyklus in ASP.net Core und die Reihenfolge, in der die Antworten von der Middleware verarbeitet werden, unterscheidet sich von der von Modulen verwendeten Reihenfolge. Dies könnte dazu führen, dass Ihre Bestell Entscheidung schwieriger wird.
 
-Wenn Sortierung ein Problem aufgetreten ist, können Sie Ihr Modul in mehreren middlewarekomponenten aufteilen, die unabhängig voneinander sortiert werden können.
+Wenn die Reihenfolge zu einem Problem wird, können Sie das Modul in mehrere middlewarekomponenten aufteilen, die unabhängig voneinander angeordnet werden können.
 
-## <a name="migrating-handler-code-to-middleware"></a>Migrieren von Handlercode zu middleware
+## <a name="migrating-handler-code-to-middleware"></a>Migrieren von Handlercode zu Middleware
 
-Ein HTTP-Handler sieht etwa folgendermaßen aus:
+Ein HTTP-Handler sieht in etwa wie folgt aus:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/HttpHandlers/ReportHandler.cs?highlight=5,7,13,14,15,16)]
 
-Im ASP.NET Core-Projekt würden Sie dies eine Middleware, die etwa wie folgt übersetzt:
+In Ihrem ASP.net Core Projekt würden Sie dies in eine Middleware übersetzen, die in etwa wie folgt aussieht:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/ReportHandlerMiddleware.cs?highlight=7,9,13,20,21,22,23,40,42,44)]
 
-Diese Middleware ist sehr ähnlich ist, an die Middleware für Module. Der einzige wirkliche Unterschied besteht darin, die hier gibt es erfolgt kein Aufruf von `_next.Invoke(context)`. Das ist sinnvoll, da der Handler am Ende der Pipeline, ist daher gibt es keine nächste Middleware aufrufen.
+Diese Middleware ähnelt der Middleware, die den Modulen entspricht. Der einzige wirkliche Unterschied besteht darin, dass hier kein- `_next.Invoke(context)`Rückruf erfolgt. Das ist sinnvoll, da sich der Handler am Ende der Anforderungs Pipeline befindet, sodass keine nächste Middleware aufgerufen werden kann.
 
-## <a name="migrating-handler-insertion-into-the-request-pipeline"></a>Migrieren von Handler einfügen in die Anforderungspipeline
+## <a name="migrating-handler-insertion-into-the-request-pipeline"></a>Migrieren von handlereinfügung in die Anforderungs Pipeline
 
-Konfigurieren eines HTTP-Handlers erfolgt in *"Web.config"* und sieht etwa folgendermaßen aus:
+Das Konfigurieren eines HTTP-Handlers erfolgt in " *Web. config* " und sieht in etwa wie folgt aus:
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32,46-48,50,101)]
 
-Sie können dies konvertieren, indem die Anforderungspipeline in Ihrer neuen Handler Middleware hinzugefügt Ihre `Startup` -Klasse, ähnlich wie Middleware, die aus Modulen konvertiert. Das Problem mit diesem Ansatz ist, dass sie alle Anforderungen an Ihre neuen Handler Middleware senden würde. Sie möchten jedoch nur Anforderungen mit einer bestimmten Erweiterung für Ihre Middleware zu erreichen. Die Sie die gleiche Funktionalität erhalten würde, die Sie mit der HTTP-Handler hatten.
+Sie können dies konvertieren, indem Sie die neue handlermiddleware der Anforderungs Pipeline in `Startup` ihrer Klasse hinzufügen, ähnlich der von Modulen konvertierten Middleware. Das Problem bei diesem Ansatz besteht darin, dass alle Anforderungen an die neue handlermiddleware gesendet werden. Es ist jedoch nur gewünscht, dass Anforderungen mit einer bestimmten Erweiterung ihre Middleware erreichen. Dies bietet Ihnen die gleiche Funktionalität wie bei Ihrem HTTP-Handler.
 
-Eine Lösung besteht darin, Branchen die Pipeline für Anforderungen mit einer angegebenen Erweiterung, mit der `MapWhen` -Erweiterungsmethode. Sie dazu in der gleichen `Configure` Methode, die in dem Sie die andere Middleware hinzufügen:
+Eine Lösung besteht darin, die Pipeline für Anforderungen mit einer bestimmten Erweiterung mithilfe der `MapWhen` Erweiterungsmethode zu verzweigen. Dies geschieht in derselben `Configure` Methode, in der Sie die andere Middleware hinzufügen:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=27-34)]
 
-`MapWhen` werden diese Parameter verwendet:
+`MapWhen`Diese Parameter werden von benötigt:
 
-1. Ein Lambda-Ausdruck, der akzeptiert die `HttpContext` und gibt `true` , wenn Sie den Branch die Anforderung gesendet werden soll. Dies bedeutet, dass Sie die Anforderungen nicht nur basierend auf ihrer Erweiterung, sondern auch auf die Anforderungsheader, Abfrageparameter usw. verzweigen können.
+1. Ein Lambda, das den `HttpContext` annimmt und `true` zurückgibt, wenn die Anforderung den Branch nach unten durchlaufen soll. Dies bedeutet, dass Sie Anforderungen verzweigen können, die nicht nur auf Grundlage ihrer Erweiterung basieren, sondern auch auf Anforderungs Headern, Abfrage Zeichen folgen Parametern usw.
 
-2. Ein Lambda-Ausdruck, der akzeptiert eine `IApplicationBuilder` und fügt die gesamte Middleware für die Verzweigung. Dies bedeutet, dass die Verzweigung vor Ihrer Middleware Handler weiteren Middleware hinzugefügt werden können.
+2. Ein Lambda, das eine `IApplicationBuilder` annimmt und alle Middleware für den Branch hinzufügt. Dies bedeutet, dass Sie der Verzweigung vor ihrer handlermiddleware zusätzliche Middleware hinzufügen können.
 
-Die Middleware zur Pipeline hinzugefügt werden, bevor der Branch für alle Anforderungen aufgerufen werden soll; der Branch wird keine Auswirkungen darauf haben.
+Der Pipeline hinzugefügte Middleware, bevor die Verzweigung für alle Anforderungen aufgerufen wird. die Verzweigung wirkt sich nicht auf diese aus.
 
-## <a name="loading-middleware-options-using-the-options-pattern"></a>Laden die Verwendung des optionsmusters-middlewareoptionen.
+## <a name="loading-middleware-options-using-the-options-pattern"></a>Laden von Middleware-Optionen mit dem Options Muster
 
-Einige Module und Handler verfügen über Konfigurationsoptionen, die in gespeichert werden *"Web.config"* . In ASP.NET Core ist ein neues Konfigurationsmodell jedoch anstelle des verwendet *"Web.config"* .
+Einige Module und Handler verfügen über Konfigurationsoptionen, die in der Datei " *Web. config*" gespeichert werden. In ASP.net Core jedoch anstelle von " *Web. config*" ein neues Konfigurations Modell verwendet.
 
-Die neue [Konfigurationssystem](xref:fundamentals/configuration/index) bietet Ihnen diese Optionen, um dieses Problem zu beheben:
+Das neue [Konfigurationssystem](xref:fundamentals/configuration/index) bietet Ihnen folgende Optionen, um dieses Problem zu beheben:
 
-* Die Optionen an die Middleware, direkt einfügen, siehe die [nächsten Abschnitt](#loading-middleware-options-through-direct-injection).
+* Fügen Sie die Optionen direkt in die Middleware ein, wie im [nächsten Abschnitt](#loading-middleware-options-through-direct-injection)gezeigt.
 
-* Verwenden der [optionsmuster](xref:fundamentals/configuration/options):
+* Verwenden Sie das [options Muster](xref:fundamentals/configuration/options):
 
-1. Erstellen einer Klasse zum halten Ihre middlewareoptionen, z.B.:
+1. Erstellen Sie eine Klasse zum Speichern der Middleware-Optionen, z. b.:
 
    [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_Options)]
 
-2. Die Optionswerte Store
+2. Speichern der Optionswerte
 
-   Das Konfigurationssystem können Sie Werte an einer beliebigen Stelle zu speichern, die Sie möchten. Allerdings verwenden die meisten Websites *"appSettings.JSON"* , sodass wir dieses Ansatzes eingehen werde:
+   Mit dem Konfigurationssystem können Sie Optionswerte beliebig speichern. Die meisten Websites verwenden jedoch " *appSettings. JSON*", daher wird dieser Ansatz verwendet:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
-   *MyMiddlewareOptionsSection* hier ist ein Name des Abschnitts. Sie müssen nicht den Namen der Optionsklasse identisch sein.
+   *Mymiddlewareoptionssection* hier ist ein Abschnitts Name. Er muss nicht mit dem Namen der Options Klasse identisch sein.
 
-3. Ordnen Sie die Werte der Optionsklasse
+3. Zuordnen der Optionswerte zur Options-Klasse
 
-    Das optionsmuster stellt anhand des ASP.NET Core Dependency Injection-Framework Optionstyp zuordnen (wie z. B. `MyMiddlewareOptions`) mit einem `MyMiddlewareOptions` Objekt, das die tatsächlichen Optionen verfügt.
+    Das Options Muster verwendet das Framework für die Abhängigkeitsinjektion von ASP.net Core, um den options `MyMiddlewareOptions`Typ (z `MyMiddlewareOptions` . b.) einem-Objekt zuzuordnen, das über die tatsächlichen Optionen verfügt.
 
-    Aktualisieren Ihrer `Startup` Klasse:
+    Aktualisieren Sie `Startup` Ihre Klasse:
 
-   1. Bei Verwendung von *"appSettings.JSON"* , fügen Sie es an den konfigurationsbuilder in die `Startup` Konstruktor:
+   1. Wenn Sie " *appSettings. JSON*" verwenden, fügen Sie es dem Konfigurations-Generator `Startup` im Konstruktor hinzu:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
-   2. Konfigurieren Sie den optionendienst an:
+   2. Konfigurieren Sie den Options Dienst:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_ConfigureServices&highlight=4)]
 
-   3. Ordnen Sie die Optionen der Options-Klasse:
+   3. Ordnen Sie die Optionen der Options-Klasse zu:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_ConfigureServices&highlight=6-8)]
 
-4. Fügen Sie die Optionen in Ihrer middlewarekonstruktor. Dies entspricht dem injizieren von Optionen in einen Controller.
+4. Fügen Sie die Optionen in ihren Middleware-Konstruktor ein. Dies ähnelt dem Einfügen von Optionen in einen Controller.
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_MiddlewareWithParams&highlight=4,7,10,15-16)]
 
-   Die [UseMiddleware](#http-modules-usemiddleware) Erweiterungsmethode, die Ihre Middleware, fügt die `IApplicationBuilder` übernimmt der Abhängigkeitsinjektion.
+   Die [usemiddleware](#http-modules-usemiddleware) -Erweiterungsmethode, mit der die `IApplicationBuilder` Middleware hinzugefügt wird, übernimmt die Abhängigkeitsinjektion.
 
-   Dies ist nicht beschränkt auf `IOptions` Objekte. Jedes andere Objekt, das Ihrer Middleware ist erforderlich, kann auf diese Weise eingefügt werden.
+   Dies ist nicht auf `IOptions` -Objekte beschränkt. Alle anderen Objekte, die von der Middleware benötigt werden, können auf diese Weise eingefügt werden.
 
-## <a name="loading-middleware-options-through-direct-injection"></a>Laden über direkte Injection-middlewareoptionen.
+## <a name="loading-middleware-options-through-direct-injection"></a>Laden von Middleware-Optionen durch direkte Injektion
 
-Das optionsmuster hat es sich um den Vorteil, den lose Kopplung von Optionswerten und seinem Consumer erstellt wird. Sobald Sie eine Options-Klasse die tatsächlichen Optionswerte zugeordnet haben, kann jede beliebige andere Klasse mit den Optionen, über die Dependency Injection-Framework zugreifen. Es ist nicht erforderlich, um Optionswerte zu übergeben.
+Das Options Muster hat den Vorteil, dass es eine lose Kopplung zwischen Options Werten und ihren Consumern erzeugt. Nachdem Sie eine Options Klasse mit den tatsächlichen Options Werten verknüpft haben, kann jede andere Klasse über das Framework für die Abhängigkeitsinjektion Zugriff auf die Optionen erhalten. Es ist nicht erforderlich, Optionswerte zu übergeben.
 
-Dies wird jedoch, wenn Sie dieselbe Middleware zweimal mit verschiedenen Optionen verwenden möchten. Zum Beispiel eine autorisierungsmiddleware in anderen Branches, sodass verschiedene Rollen verwendet. Die für eine Optionsklasse können keine zwei unterschiedliche Optionsobjekte zugeordnet werden.
+Dies wird jedoch unterbrochen, wenn Sie dieselbe Middleware zweimal mit unterschiedlichen Optionen verwenden möchten. Beispielsweise eine Autorisierungs Middleware, die in verschiedenen Verzweigungen verwendet wird und verschiedene Rollen zulässt. Sie können der One Options-Klasse nicht zwei verschiedene Options Objekte zuordnen.
 
-Die Lösung besteht darin, die Optionen Objekte durch die tatsächlichen Optionswerte in Ihrem `Startup` Klasse, und übergeben Sie diese direkt auf jede Instanz Ihrer Middleware.
+Die Lösung besteht darin, die Options Objekte mit den tatsächlichen Options Werten in Ihrer `Startup` Klasse zu erhalten und diese direkt an jede Instanz Ihrer Middleware zu übergeben.
 
-1. Fügen Sie einen zweiten Schlüssel um *"appSettings.JSON"*
+1. Fügen Sie " *appSettings. JSON* " einen zweiten Schlüssel hinzu.
 
-   Um einen zweiten Satz von Optionen zum Hinzufügen der *"appSettings.JSON"* Datei, verwenden Sie einen neuen Schlüssel, um eindeutig zu identifizieren:
+   Um der Datei " *appSettings. JSON* " einen zweiten Satz von Optionen hinzuzufügen, verwenden Sie einen neuen Schlüssel, um ihn eindeutig zu identifizieren:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
-2. Abrufen von Optionswerten, und diese an die Middleware übergeben. Die `Use...` Erweiterungsmethode (die Ihre Middleware zur Pipeline hinzugefügt wird) ist ein logischer Ansatzpunkt zum Übergeben der Werte: 
+2. Rufen Sie Optionswerte ab, und übergeben Sie Sie an die Middleware. Die `Use...` Erweiterungsmethode (die die Middleware zur Pipeline hinzufügt) ist ein logischer Speicherort, um die Optionswerte zu übergeben: 
 
    [!code-csharp[](http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=20-23)]
 
-3. Aktiviert die Middleware auszuführende Options-Parameter. Stellen Sie eine Überladung von der `Use...` Erweiterungsmethode (, die die Options-Parameter akzeptiert und übergibt es an `UseMiddleware`). Wenn `UseMiddleware` heißt mit Parametern, die Parameter an Ihre middlewarekonstruktor übergeben beim Instanziieren der Middleware-Objekt.
+3. Aktivieren Sie die Middleware, um einen Optionsparameter zu verwenden. Stellen Sie eine über `Use...` Ladung der Erweiterungsmethode bereit (die den options-Parameter annimmt und Sie an `UseMiddleware`übergibt). Wenn `UseMiddleware` mit Parametern aufgerufen wird, übergibt es die Parameter an Ihren Middleware-Konstruktor, wenn das Middleware-Objekt instanziiert wird.
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_Extensions&highlight=9-14)]
 
-   Beachten Sie, wie dies in der Options-Objekt dient als Wrapper für ein `OptionsWrapper` Objekt. Dadurch wird implementiert `IOptions`, wie von der middlewarekonstruktor erwartet.
+   Beachten Sie, dass dies das Options-Objekt `OptionsWrapper` in einem-Objekt umschließt. Dies implementiert `IOptions`, wie vom Middleware-Konstruktor erwartet.
 
-## <a name="migrating-to-the-new-httpcontext"></a>Migration zu neuen "HttpContext"
+## <a name="migrating-to-the-new-httpcontext"></a>Migrieren zum neuen HttpContext
 
-Sie haben weiter oben gesehen, die die `Invoke` -Methode in Ihrer Middleware nimmt einen Parameter vom Typ `HttpContext`:
+Sie haben bereits gesehen, `Invoke` dass die-Methode in der Middleware einen Parameter `HttpContext`des Typs annimmt:
 
 ```csharp
 public async Task Invoke(HttpContext context)
 ```
 
-`HttpContext` in ASP.NET Core wurde erheblich geändert werden. In diesem Abschnitt wird gezeigt, wie die am häufigsten verwendeten Eigenschaften der übersetzen [System.Web.HttpContext](/dotnet/api/system.web.httpcontext) mit dem neuen `Microsoft.AspNetCore.Http.HttpContext`.
+`HttpContext`wurde in ASP.net Core erheblich geändert. In diesem Abschnitt wird gezeigt, wie die am häufigsten verwendeten Eigenschaften von [System. Web. HttpContext](/dotnet/api/system.web.httpcontext) in den `Microsoft.AspNetCore.Http.HttpContext`neuen übersetzt werden.
 
 ### <a name="httpcontext"></a>HttpContext
 
-**"HttpContext.Items"** übersetzt in:
+**HttpContext. Items** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Items)]
 
-**Eindeutige Anforderungs-ID (keine Entsprechung System.Web.HttpContext)**
+**Eindeutige Anforderungs-ID (kein System. Web. HttpContext-Pendant)**
 
-Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Protokolle eingeschlossen werden sollen.
+Gibt Ihnen eine eindeutige ID für jede Anforderung. Sehr nützlich, um in Ihre Protokolle einzubeziehen.
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Trace)]
 
 ### <a name="httpcontextrequest"></a>HttpContext.Request
 
-**HttpContext.Request.HttpMethod** übersetzt in:
+**HttpContext. Request. HttpMethod** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Method)]
 
@@ -262,7 +262,7 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Query)]
 
-**HttpContext.Request.Url** und **HttpContext.Request.RawUrl** übersetzen in:
+" **HttpContext. Request. URL** " und " **HttpContext. Request. RawUrl** " übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Url)]
 
@@ -274,7 +274,7 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext.Request.Cookies** translates to:
+**HttpContext. Request. Cookies** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -282,15 +282,15 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Route)]
 
-**HttpContext.Request.Headers** translates to:
+**HttpContext. Request. Headers** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Headers)]
 
-**HttpContext.Request.UserAgent** translates to:
+**HttpContext. Request. UserAgent** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Agent)]
 
-**HttpContext.Request.UrlReferrer** translates to:
+**HttpContext. Request. UrlReferrer** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Referrer)]
 
@@ -298,53 +298,53 @@ Erhalten Sie eine eindeutige Id für jede Anforderung. Sehr nützlich in Ihre Pr
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Type)]
 
-**HttpContext.Request.Form** translates to:
+**HttpContext. Request. Form** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> Lesen Formularwerte, nur dann, wenn der Inhalt Sub-Typ ist *X-www-form-urlencoded* oder *Formulardaten*.
+> Liest Formular Werte nur, wenn der Sub-Inhaltstyp " *x-www-form-urlencoded* " oder " *Form-Data*" ist.
 
 **HttpContext.Request.InputStream** translates to:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Input)]
 
 > [!WARNING]
-> Verwenden Sie diesen Code nur in einem Handler für Typ-Middleware, am Ende einer Pipeline.
+> Verwenden Sie diesen Code nur in einer Handlertyp-Middleware am Ende einer Pipeline.
 >
->Sie können die unformatierten Text lesen, wie oben nur einmal pro Anforderung. Middleware, die versuchen, die zum Lesen des Texts nach dem ersten Lesen liest aus einem leeren Textkörper.
+>Sie können den unformatierten Text nur einmal pro Anforderung lesen. Middleware, die versucht, den Text nach dem ersten Lesevorgang zu lesen, liest einen leeren Text.
 >
->Dies gilt nicht zum Lesen eines Formulars wie zuvor gezeigt, da, die aus einem Puffer ausgeführt wird.
+>Dies gilt nicht für das Lesen eines Formulars wie zuvor gezeigt, da dies aus einem Puffer erfolgt.
 
 ### <a name="httpcontextresponse"></a>HttpContext.Response
 
-**HttpContext.Response.Status** und **HttpContext.Response.StatusDescription** übersetzen in:
+" **HttpContext. Response. Status** " und " **HttpContext. Response. StatusDescription** " übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Status)]
 
-**HttpContext.Response.ContentEncoding** und **HttpContext.Response.ContentType** übersetzen in:
+" **HttpContext. Response. ContentEncoding** " und " **HttpContext. Response. ContentType** " übersetzen in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_RespType)]
 
-**HttpContext.Response.ContentType** auf eigene auch übersetzt in:
+" **HttpContext. Response. ContentType** " selbst übersetzt ebenfalls Folgendes:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_RespTypeOnly)]
 
-**HttpContext.Response.Output** übersetzt in:
+**HttpContext. Response. Output** übersetzt in:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Output)]
 
 **HttpContext.Response.TransmitFile**
 
-Erstellen einer Datei wird erläutert [hier](../fundamentals/request-features.md#middleware-and-request-features).
+Die Einrichtung einer Datei wird [hier](../fundamentals/request-features.md#middleware-and-request-features)erläutert.
 
 **HttpContext.Response.Headers**
 
-Senden der Antwortheader wird durch die Tatsache verkompliziert, dass wenn Sie festlegen, nachdem alles in den Antworttext geschrieben wurde, sie wird nicht gesendet.
+Das Senden von Antwort Headern ist kompliziert, wenn Sie Sie nach dem Schreiben in den Antworttext festlegen, werden Sie nicht gesendet.
 
-Die Lösung besteht darin, eine Callback-Methode festgelegt wird, die vor dem Schreiben auf die Antwort beginnt rechts aufgerufen werden. Dies erfolgt am besten am Anfang der `Invoke` -Methode in Ihrer Middleware. Es ist diese Callback-Methode, die Ihre Antwortheader festlegt.
+Die Lösung besteht darin, eine Rückruf Methode festzulegen, die vor dem Schreiben in die Antwort direkt aufgerufen wird. Dies wird am Anfang `Invoke` der Methode in ihrer Middleware am besten erreicht. Diese Rückruf Methode legt die Antwortheader fest.
 
-Im folgenden Code wird eine Rückrufmethode namens `SetHeaders`:
+Der folgende Code legt eine Rückruf Methode namens `SetHeaders`fest:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -353,13 +353,13 @@ public async Task Invoke(HttpContext httpContext)
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-Die `SetHeaders` Callback-Methode sieht wie folgt:
+Die `SetHeaders` Rückruf Methode würde wie folgt aussehen:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
 **HttpContext.Response.Cookies**
 
-Übertragen Sie Cookies im Browser in einer *Set-Cookie* -Antwortheader. Senden Cookies erfordert daher demselben Rückruf verwendet zum Senden der Antwortheader:
+Cookies gelangen zum Browser in einem *Set-Cookie-* Antwortheader. Das Senden von Cookies erfordert daher denselben Rückruf wie zum Senden von Antwort Headern:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -369,13 +369,13 @@ public async Task Invoke(HttpContext httpContext)
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-Die `SetCookies` Callback-Methode würde wie folgt aussehen:
+Die `SetCookies` Rückruf Methode würde wie folgt aussehen:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [HTTP-Handler und HTTP-Module (Übersicht)](/iis/configuration/system.webserver/)
-* [Konfiguration](xref:fundamentals/configuration/index)
+* [Übersicht über HTTP-Handler und HTTP-Module](/iis/configuration/system.webserver/)
+* [Configuration](xref:fundamentals/configuration/index)
 * [Application Startup (Starten von Anwendungen)](xref:fundamentals/startup)
 * [Middleware](xref:fundamentals/middleware/index)
