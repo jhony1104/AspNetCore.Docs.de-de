@@ -34,7 +34,7 @@ Sehen Sie sich beispielsweise die Datei " *Gruß. proto* " an, die in den ersten
 
 [!code-protobuf[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Protos/greet.proto)]
 
-## <a name="add-a-proto-file-to-a-c-app"></a>Hinzufügen einer. proto-Datei zu einer C\#-App
+## <a name="add-a-proto-file-to-a-c-app"></a>Hinzufügen einer. proto-Datei zu\# einer C-App
 
 Die Datei " *. proto* " ist in einem Projekt enthalten, indem Sie `<Protobuf>` der Element Gruppe hinzugefügt wird:
 
