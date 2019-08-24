@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Integrationstests sicherstellen
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/05/2019
+ms.date: 08/23/2019
 uid: test/integration-tests
-ms.openlocfilehash: a86bf2b183a81f0b903a12f9d1660fb32faa6c03
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 195acd3e03f3de63ebd61767f2c86d1c0f38fca5
+ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68819944"
+ms.lasthandoff: 08/24/2019
+ms.locfileid: "70017436"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.net Core
 
@@ -286,6 +286,16 @@ Fügen Sie die Datei " *xUnit. Runner. JSON* " dem Stamm des Testprojekts mit fo
 }
 ```
 
+Wenn Sie Visual Studio verwenden, legen Sie die Eigenschaft **in Ausgabeverzeichnis kopieren** auf **immer kopieren**fest. Wenn Sie Visual Studio nicht verwenden, fügen `Content` Sie der Projektdatei der Test-App ein Ziel hinzu:
+
+```xml
+<ItemGroup>
+  <Content Update="xunit.runner.json">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </Content>
+</ItemGroup>
+```
+
 ## <a name="disposal-of-objects"></a>Entfernen von Objekten
 
 Nachdem `IClassFixture` die Tests der Implementierung ausgeführt wurden, werden [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) und [HttpClient](/dotnet/api/system.net.http.httpclient) verworfen, wenn xUnit die [webapplicationfactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)freigibt. Wenn Objekte, die vom Entwickler instanziiert werden, gelöscht werden müssen, verwerfen `IClassFixture` Sie diese in der Implementierung. Weitere Informationen finden Sie unter [Implementieren einer](/dotnet/standard/garbage-collection/implementing-dispose)verwerfen-Methode.
@@ -311,12 +321,12 @@ Das untergeordnete Element ist ein Razor Pages Nachrichtensystem mit folgenden M
 
 * Die Index Seite der APP (*pages/index. cshtml* und *pages/index. cshtml. cs*) stellt eine UI-und Seiten Modell Methode zum Steuern der Addition, Löschung und Analyse von Meldungen (durchschnittliche Wörter pro Nachricht) bereit.
 * Eine `Message` Meldung wird von der-Klasse (*Data/Message. cs*) mit zwei Eigenschaften beschrieben `Id` : (Key) `Text` und (Message). Die `Text` -Eigenschaft ist erforderlich und auf 200 Zeichen beschränkt.
-* Nachrichten werden&#8224;mithilfe [der in-Memory-Datenbank des Entity Framework](/ef/core/providers/in-memory/)gespeichert.
+* Nachrichten werden mithilfe [der in-Memory Database](/ef/core/providers/in-memory/)&#8224;Entity Framework gespeichert.
 * Die app enthält eine Datenzugriffs Schicht (Data Access Layer, `AppDbContext` DAL) in der zugehörigen Daten Bank Kontext Klasse (*Data/appdbcontext. cs*).
 * Wenn die Datenbank beim Starten der APP leer ist, wird der Nachrichtenspeicher mit drei Nachrichten initialisiert.
 * Die app enthält eine `/SecurePage` , auf die nur ein authentifizierter Benutzer zugreifen kann.
 
-&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory-Datenbank für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
+&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory Database für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
 
 Obwohl die APP das Repository-Muster nicht verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) -Persistenzebene und der [Test Controller Logik](/aspnet/core/mvc/controllers/testing) (im Beispiel wird das Repository-Muster implementiert).
 

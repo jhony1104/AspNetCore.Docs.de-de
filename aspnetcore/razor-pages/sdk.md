@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Razor Pages in ASP.NET Core codierungsseitige Sze
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 06/18/2019
+ms.date: 08/23/2019
 uid: razor-pages/sdk
-ms.openlocfilehash: 1dc001c7c5fe320629835e06fe6db7fadabff94d
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: 81025c14ba68971ca5d3cfc9387c2f50dd247654
+ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985401"
+ms.lasthandoff: 08/24/2019
+ms.locfileid: "70017395"
 ---
 # <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -22,26 +22,21 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Die [!INCLUDE[](~/includes/2.1-SDK.md)] enthält die `Microsoft.NET.Sdk.Razor` MSBuild SDK (Razor-SDK). Das Razor SDK:
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
+
+* Ist erforderlich, um Projekte zu erstellen, zu verpacken und zu veröffentlichen, die [Razor](xref:mvc/views/razor) -Dateien für ASP.net Core MVC-basierte oder [blazor](xref:blazor/index) -Projekte enthalten.
+* Enthält einen Satz vordefinierter Ziele, Eigenschaften und Elemente, die das Anpassen der Kompilierung von Razor-Dateien (*cshtml* -oder *Razor*-Dateien) ermöglichen.
+
+Das Razor SDK umfasst `Content` Elemente mit `Include` Attributen, die auf `**\*.cshtml` die `**\*.razor` globmuster und festgelegt sind. Übereinstimmende Dateien werden veröffentlicht.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 * Standardisiert die Vorgänge zum Erstellen, Verpacken und Veröffentlichen von Projekten, die [Razor](xref:mvc/views/razor)-Dateien für auf ASP.NET Core MVC basierende Projekte enthalten.
 * Enthält eine vordefinierte Reihe von Zielen, Eigenschaften und Elementen, die das Anpassen der Razor-Dateien ermöglichen.
-::: moniker-end
 
-::: moniker range=">= aspnetcore-3.0"
-* ist erforderlich, um Projekte zu erstellen, zu verpacken und zu veröffentlichen, die [Razor](xref:mvc/views/razor) -Dateien für ASP.net Core MVC-basierte Projekte oder [blazor](xref:blazor/index) -Projekte enthalten.
-* Enthält einen Satz vordefinierter Ziele, Eigenschaften und Elemente, die das Anpassen der Kompilierung von Razor-Dateien (cshtml-oder Razor-Dateien) ermöglichen.
-::: moniker-end
-
-
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
-
-Das Razor SDK enthält ein `<Content>` -Element mit `Include` einem-Attribut, `**\*.cshtml` das auf das globmuster festgelegt ist. Übereinstimmende Dateien werden veröffentlicht.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
-
-Das Razor SDK umfasst `<Content>` Elemente mit `Include` Attributen, die auf `**\*.cshtml` die `**\*.razor` globmuster und festgelegt sind. Übereinstimmende Dateien werden veröffentlicht.
+Das Razor SDK enthält ein `Content` -Element mit `Include` einem-Attribut, `**\*.cshtml` das auf das globmuster festgelegt ist. Übereinstimmende Dateien werden veröffentlicht.
 
 ::: moniker-end
 
@@ -53,7 +48,14 @@ Das Razor SDK umfasst `<Content>` Elemente mit `Include` Attributen, die auf `**
 
 Die meisten Web-apps müssen nicht explizit das Razor-SDK zu verweisen.
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
+
+Um das Razor SDK zum Erstellen von Klassenbibliotheken mit Razor-Ansichten oder Razor Pages zu verwenden, wird empfohlen, mit der Projektvorlage für die Razor-Klassenbibliothek (RCL) zu beginnen. Eine RCL, die zum Erstellen von blazor-Dateien (*Razor*-Dateien) verwendet wird, erfordert mindestens einen Verweis auf das Paket " [Microsoft. aspnetcore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) ". Eine RCL, die zum Erstellen von Razor-Sichten oder-Seiten (*cshtml* -Dateien) verwendet `netcoreapp3.0` wird, erfordert mindestens oder `FrameworkReference` höher als Ziel und verfügt über einen für das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) " in der Projektdatei.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 So verwenden Sie das Razor SDK zum Erstellen von Klassenbibliotheken, die Razor-Ansichten oder Razor-Seiten enthalten:
 
 * Verwenden Sie `Microsoft.NET.Sdk.Razor` anstelle von `Microsoft.NET.Sdk`:
@@ -78,11 +80,6 @@ So verwenden Sie das Razor SDK zum Erstellen von Klassenbibliotheken, die Razor-
   
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-3.0"
-Um das Razor SDK zum Erstellen von Klassenbibliotheken mit Razor-Ansichten oder Razor Pages zu verwenden, wird empfohlen, mit der Projektvorlage für die Razor-Klassenbibliothek zu beginnen. Eine Razor-Klassenbibliothek, die zum Erstellen von blazor-Dateien (Razor-Dateien) verwendet wird, erfordert mindestens `Microsoft.AspNetCore.Components` einen Verweis auf das Paket. Eine Razor-Klassenbibliothek, die verwendet wird, um Razor-Sichten oder-Seiten (cshtml-Dateien) `netcoreapp3.0` zu erstellen, erfordert die `FrameworkReference` Ziel `Microsoft.AspNetCore.App`Plattform oder höher und eine auf.
-
-::: moniker-end
-
 ::: moniker range="= aspnetcore-2.1"
 
 > [!WARNING]
@@ -100,15 +97,16 @@ Die folgenden Eigenschaften steuern das Verhalten des Razor SDK im Rahmen eines 
 Die Eigenschaften und Elemente in der folgenden Tabelle werden zum Konfigurieren von ein- und Ausgabe an die Razor-SDK verwendet.
 
 ::: moniker range=">= aspnetcore-3.0"
-> [!WARNING]
-Ab ASP.net Core 3,0 werden MVC-Sichten oder-Razor Pages nicht standardmäßig bedient, wenn `RazorCompileOnBuild` oder `RazorCompileOnPublish` deaktiviert ist. Anwendungen müssen einen expliziten Verweis auf `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` das-Paket hinzufügen, um die Unterstützung für die Lauf Zeit Kompilierung hinzuzufügen, wenn Sie zur Verarbeitung von cshtml-Dateien auf
-::: moniker-end
 
+> [!WARNING]
+> Ab ASP.net Core 3,0 werden MVC-Sichten oder-Razor Pages nicht standardmäßig bereitgestellt `RazorCompileOnBuild` , `RazorCompileOnPublish` wenn die-Eigenschaft oder die MSBuild-Eigenschaft in der Projektdatei deaktiviert ist. Anwendungen müssen einen expliziten Verweis auf das Paket [Microsoft. aspnetcore. MVC. Razor. runtimecompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation) hinzufügen, wenn die APP zur Verarbeitung von *cshtml* -Dateien auf der Lauf Zeit Kompilierung basiert.
+
+::: moniker-end
 
 | Elemente | Beschreibung |
 | ----- | ----------- |
 | `RazorGenerate` | Element Elemente (*cshtml* -Dateien), die Eingaben für die Codegenerierung sind. |
-| `RazorComponent` | Element Elemente (*Razor* -Dateien), die Eingaben für die Generierung von Komponenten Code sind.
+| `RazorComponent` | Element Elemente (*Razor* -Dateien), die Eingaben für die Codegenerierung von Razor-Komponenten sind. |
 | `RazorCompile` | Element Elemente (*CS* -Dateien), die Eingaben für Razor-Kompilierungs Ziele sind. Verwenden Sie `ItemGroup` diese Angabe, um zusätzliche Dateien anzugeben, die in die Razor-Assembly kompiliert werden sollen. |
 | `RazorTargetAssemblyAttribute` | Item-Elemente, die für das Codieren von Generate-Attributen für die Razor-Assembly verwendet werden. Zum Beispiel:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | Elemente, die als eingebettete Ressourcen für die generierte Razor-Assembly hinzugefügt werden. |
@@ -135,9 +133,9 @@ Weitere Informationen zu Eigenschaften finden Sie unter [MSBuild-Eigenschaften](
 
 Das Razor SDK definiert zwei Hauptziele:
 
-* `RazorGenerate` &ndash; Generiert Code *cs* Dateien von `RazorGenerate` item-Elemente. Verwenden Sie die Eigenschaft `RazorGenerateDependsOn`, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
-* `RazorCompile` &ndash; Kompiliert generiert *cs* Dateien im zu einer Razor-Assembly. Verwenden Sie `RazorCompileDependsOn`, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
-* `RazorComponentGenerate`Code generiert *CS* -Dateien für `RazorComponent` Element Elemente. &ndash; Verwenden Sie die Eigenschaft `RazorComponentGenerateDependsOn`, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
+* `RazorGenerate` &ndash; Generiert Code *cs* Dateien von `RazorGenerate` item-Elemente. Verwenden Sie `RazorGenerateDependsOn` die-Eigenschaft, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
+* `RazorCompile` &ndash; Kompiliert generiert *cs* Dateien im zu einer Razor-Assembly. `RazorCompileDependsOn` Verwenden Sie, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
+* `RazorComponentGenerate`Code generiert *CS* -Dateien für `RazorComponent` Element Elemente. &ndash; Verwenden Sie `RazorComponentGenerateDependsOn` die-Eigenschaft, um zusätzliche Ziele anzugeben, die vor oder nach diesem Ziel ausgeführt werden können.
 
 ### <a name="runtime-compilation-of-razor-views"></a>Kompilierung von Razor-Ansichten zur Laufzeit
 
