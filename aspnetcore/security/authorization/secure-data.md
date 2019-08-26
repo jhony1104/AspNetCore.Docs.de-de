@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 4b94cc53777308deb26521a079d8a1c2742744db
-ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
+ms.openlocfilehash: 225d0e3aa51745253d03e614b1c8568b3a6ba731
+ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/04/2019
-ms.locfileid: "68776746"
+ms.lasthandoff: 08/24/2019
+ms.locfileid: "70017485"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>Erstellen einer ASP.NET Core-app mit Benutzerdaten, die durch Autorisierung geschützt sind
 
@@ -37,7 +37,7 @@ In diesem Tutorial veranschaulicht das Erstellen einer ASP.NET Core-Web-Apps mit
 * **Manager** genehmigen oder ablehnen von Kontaktdaten können. Nur genehmigte Kontakte für Benutzer sichtbar sind.
 * **Administratoren** können genehmigen/ablehnen und alle Daten bearbeiten und löschen.
 
-Die Bilder in diesem Dokument Stimmen exakt nicht mit den neuesten Vorlagen überein.
+Die Bilder in diesem Dokument entsprechen nicht exakt den neuesten Vorlagen.
 
 In der folgenden Abbildung wird der Benutzer Rick (`rick@example.com`) angemeldet ist. Rick kann nur genehmigte Kontakte anzeigen und **bearbeiten**/**löschen**/**neu erstellen** Links, um seine Kontakte. Nur der letzte Datensatz erstellt, von Rick, zeigt **bearbeiten** und **löschen** Links. Andere Benutzer werden der letzte Eintrag nicht angezeigt, bis Manager oder Administratoren den Status "Genehmigt" annimmt.
 
@@ -392,7 +392,7 @@ Das Beispiel enthält die folgenden Handler für die Autorisierung:
 * `ContactManagerAuthorizationHandler`: Ermöglicht Managern das genehmigen oder ablehnen von Kontakten.
 * `ContactAdministratorsAuthorizationHandler`: Ermöglicht Administratoren das genehmigen oder ablehnen von Kontakten sowie das Bearbeiten/Löschen von Kontakten.
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 In diesem Tutorial wird verschoben. Sie sollten mit vertraut sein:
 
