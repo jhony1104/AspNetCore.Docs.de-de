@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 06/18/2019
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: ea96ae6d36c7e8320ea49e666a807ece72645865
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: 578f6f8cd54597fe0a6186d182cccc3955331e49
+ms.sourcegitcommit: 2fa0ffe82a47c7317efc9ea908365881cbcb8ed7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207797"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69572862"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Docker-Images für ASP.NET Core
 
@@ -165,6 +165,15 @@ In einigen Szenarien möchten Sie eine App möglicherweise in einem Container be
     ```
 
 * Navigieren Sie zu `http://localhost:5000`, um die Startseite anzuzeigen.
+
+Erstellen Sie eine neue Dockerfile-Datei, und verwenden Sie den `docker build .`-Befehl zum Erstellen des Containers, um die manuell veröffentlichte Anwendung innerhalb eines Docker-Containers zu verwenden.
+
+```console
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+WORKDIR /app
+COPY published/aspnetapp.dll ./
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+```
 
 ### <a name="the-dockerfile"></a>Die Dockerfile-Datei
 
