@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 8/22/2019
 uid: performance/caching/memory
-ms.openlocfilehash: 3005adec9ffe41859d05a3f61c7c45b8e7bfeefc
-ms.sourcegitcommit: bdaee0e8c657fe7546fd6b7990db9c03c2af04df
+ms.openlocfilehash: 1519abbca6430063f037372a4927f5818f160457
+ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69908375"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70024785"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Speicher interne Speicherung in ASP.net Core
 
@@ -85,15 +85,15 @@ Mit dem folgenden Code wird ein zwischengespeichertes Element mit dem absoluten 
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet99)]
 
-Ein zwischengespeichertes Element mit gleitender Ablaufzeit besteht lediglich aus dem Risiko, dass es veraltet ist, weil es nicht an den Ablauf gebunden ist. Verwenden Sie einen absoluten Ablauf mit einem gleitenden Ablauf, um sicherzustellen, dass das zwischengespeicherte Element nicht mehr veraltet ist als der absolute Ablauf. Wenn die absolute Ablaufzeit mit gleitender Zeit kombiniert wird, legt der absolute Ablauf eine obere Grenze fest, wie lange das Element zwischengespeichert werden kann. Anders als bei der absoluten Ablaufzeit, wird das Element aus dem Cache entfernt, wenn das Element nicht innerhalb des gleitenden Ablauf Intervalls aus dem Cache angefordert wird. Wenn absolute und gleitender Ablauf angegeben werden, werden die Abläufe logisch ORed.
+Ein zwischengespeichertes Element mit einer gleitenden Ablaufzeit besteht lediglich aus dem Risiko, veraltet zu werden. Wenn der Zugriff häufiger erfolgt als das gleitende Ablauf Intervall, läuft das Element nie ab. Kombinieren Sie einen gleitenden Ablauf mit einem absoluten Ablauf, um sicherzustellen, dass das Element abläuft, sobald die absolute Ablaufzeit abgelaufen ist. Der absolute Ablauf legt eine obere Grenze fest, die angibt, wie lange das Element zwischengespeichert werden kann, während das Element noch früher ablaufen kann, wenn es innerhalb des gleitenden Ablauf Intervalls nicht angefordert wird. Wenn absolute und gleitender Ablauf angegeben werden, werden die Abläufe logisch ORed. Wenn entweder das gleitende Ablauf Intervall *oder* die absolute Ablaufzeit abgelaufen ist, wird das Element aus dem Cache entfernt.
 
-Mit dem folgenden Code wird ein zwischengespeichertes Element mit gleitender und absolutem Ablauf abgerufen oder erstellt:
+Mit dem folgenden Code wird ein zwischengespeichertes Element mit gleitender *und* absolutem Ablauf abgerufen oder erstellt:
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet9)]
 
 Der vorangehende Code stellt sicher, dass die Daten nicht länger als die absolute Zeit zwischengespeichert werden.
 
-<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*>und <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> sind ErweiterungsMethoden,<xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>die Teil der- Klassesind,diedieFunktionvonerweitert.<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> Eine Beschreibung anderer Cache Methoden finden Sie unter [IMemoryCache-Methoden](/dotnet/api/microsoft.extensions.caching.memory.imemorycache) und [CacheExtensions-Methoden](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) .
+<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*> <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> und <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> sind Erweiterungs Methoden in der-Klasse. Diese Methoden erweitern die Funktionalität von <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>.
 
 ## <a name="memorycacheentryoptions"></a>MemoryCacheEntryOptions
 
