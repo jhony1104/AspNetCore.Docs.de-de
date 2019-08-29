@@ -3,16 +3,16 @@ title: Generischer .NET-Host
 author: tdykstra
 description: Erfahren Sie mehr über den generischen Host in .NET Core, der für das Starten der App und das Verwalten der Lebensdauer verantwortlich ist.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: d787559eaecd6d4d6cfe01e37baf28774a90c5c3
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 9f5ecc7840fc7ffd9432a3bb67d0418efb7e8fd6
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724427"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975617"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -90,7 +90,7 @@ Die <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>-Methode:
   * Befehlszeilenargumenten
 * Fügt die folgenden [Protokollierungsanbieter](xref:fundamentals/logging/index) hinzu:
   * Konsole
-  * Debuggen
+  * Debug
   * EventSource
   * EventLog (nur bei Ausführung unter Windows)
 * Aktiviert [Bereichsvalidierung](xref:fundamentals/dependency-injection#scope-validation) und [Abhängigkeitsüberprüfung](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild), wenn es sich um eine Entwicklungsumgebung handelt.
@@ -176,7 +176,7 @@ Die Eigenschaft [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hos
 
 **Schlüssel:** Anwendungsname  
 **Typ:** *Zeichenfolge*  
-**Standard:** Der Name der Assembly, die den Einstiegspunkt der App enthält.
+**Standard**: Der Name der Assembly, die den Einstiegspunkt der App enthält.
 **Umgebungsvariable:** `<PREFIX_>APPLICATIONNAME`
 
 Verwenden Sie die Umgebungsvariable, um diesen Wert festzulegen. 
@@ -187,7 +187,7 @@ Die Eigenschaft [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hos
 
 **Schlüssel:** contentRoot  
 **Typ:** *Zeichenfolge*  
-**Standard:** Der Ordner, in dem die App-Assembly gespeichert ist.  
+**Standard**: Der Ordner, in dem die App-Assembly gespeichert ist.  
 **Umgebungsvariable:** `<PREFIX_>CONTENTROOT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseContentRoot` für `IHostBuilder` auf, um diesen Wert festzulegen:
@@ -204,7 +204,7 @@ Die Eigenschaft [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hos
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Bereitstellung  
+**Standardwert**: Produktion  
 **Umgebungsvariable:** `<PREFIX_>ENVIRONMENT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseEnvironment` für `IHostBuilder` auf, um diesen Wert festzulegen:
@@ -226,7 +226,7 @@ Wenn das Zeitlimit abläuft bevor alle gehosteten Dienste beendet sind, werden a
 
 **Schlüssel:** shutdownTimeoutSeconds  
 **Typ:** *Ganze Zahl*  
-**Standard:** 5 Sekunden **Umgebungsvariable:** : `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**Standard**: 5 Sekunden **Umgebungsvariable:** : `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 Verwenden Sie die Umgebungsvariable, oder konfigurieren Sie `HostOptions`, um diesen Wert festzulegen. Im folgenden Beispiel wird das Zeitlimit auf 20 Sekunden festgelegt:
 
@@ -308,7 +308,7 @@ Verwenden Sie die Konfiguration, oder rufen Sie `UseSetting` auf, um diesen Wert
 webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
 ```
 
-### <a name="httpsport"></a>HTTPS_Port
+### <a name="https_port"></a>HTTPS_Port
 
 Der HTTPS-Umleitungsport. Wird in [Erzwingen von HTTPS](xref:security/enforcing-ssl) verwendet.
 
@@ -357,7 +357,7 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 Die Assembly, die nach der `Startup`-Klasse suchen soll.
 
 **Schlüssel**: startupAssembly **Typ**: *Zeichenfolge*  
-**Standard:** Die Assembly der App  
+**Standard**: Die Assembly der App  
 **Umgebungsvariable:** `<PREFIX_>STARTUPASSEMBLY`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseStartup` auf, um diesen Wert festzulegen. `UseStartup` kann einen Assemblynamen (`string`) oder einen Typ (`TStartup`) annehmen. Wenn mehrere `UseStartup`-Methoden aufgerufen werden, hat die letzte Vorrang.
@@ -372,7 +372,7 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URLs
 
-Eine durch Semikolons getrennte Liste mit IP-Adressen oder Hostadressen mit Ports und Protokollen, denen der Server für Anforderungen lauschen soll. Beispiel: `http://localhost:123`. Verwenden Sie \*, um anzugeben, dass der Server mithilfe des angegebenen Ports und Protokolls (z.B. `http://*:5000`) den Anfragen aller IP-Adressen oder Hostnamen lauschen soll. Das Protokoll (`http://` oder `https://`) muss in jeder URL enthalten sein. Die unterstützten Formate variieren bei den verschiedenen Servern.
+Eine durch Semikolons getrennte Liste mit IP-Adressen oder Hostadressen mit Ports und Protokollen, denen der Server für Anforderungen lauschen soll. Beispielsweise `http://localhost:123`. Verwenden Sie \*, um anzugeben, dass der Server mithilfe des angegebenen Ports und Protokolls (z.B. `http://*:5000`) den Anfragen aller IP-Adressen oder Hostnamen lauschen soll. Das Protokoll (`http://` oder `https://`) muss in jeder URL enthalten sein. Die unterstützten Formate variieren bei den verschiedenen Servern.
 
 **Schlüssel:** urls  
 **Typ:** *Zeichenfolge*  
@@ -393,7 +393,7 @@ Der relative Pfad für die statischen Objekte der App.
 
 **Schlüssel:** webroot  
 **Typ:** *Zeichenfolge*  
-**Standard:** *(Inhaltsstammverzeichnis)/wwwroot*, wenn der Pfad vorhanden ist. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
+**Standard**: *(Inhaltsstammverzeichnis)/wwwroot*, wenn der Pfad vorhanden ist. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
 **Umgebungsvariable:** `<PREFIX_>WEBROOT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseWebRoot` auf, um diesen Wert festzulegen:
@@ -406,7 +406,7 @@ webBuilder.UseWebRoot("public");
 
 Rufen Sie Methoden für die erstellte <xref:Microsoft.Extensions.Hosting.IHost>-Implementierung auf, um die App zu starten und zu beenden. Diese Methoden wirken sich auf alle <xref:Microsoft.Extensions.Hosting.IHostedService>-Implementierungen aus, die im Dienstcontainer registriert sind.
 
-### <a name="run"></a>Ausführen
+### <a name="run"></a>Run
 
 Durch <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> wird die App gestartet und der aufrufende Thread blockiert, bis der Host heruntergefahren wird.
 
@@ -418,7 +418,7 @@ Durch <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAs
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*> aktiviert die Unterstützung der Konsole, erstellt und startet den Host und lauscht auf STRG+C/SIGINT oder SIGTERM, um das Herunterfahren auszulösen.
 
-### <a name="start"></a>Start
+### <a name="start"></a>Starten
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> startet den Host synchron.
 
@@ -571,13 +571,13 @@ Wenn der Pfad nicht vorhanden ist, kann der Host nicht gestartet werden.
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseContentRoot)]
 
-### <a name="environment"></a>Environment
+### <a name="environment"></a>Umgebung
 
 Legt die [Umgebung](xref:fundamentals/environments) der App fest.
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Bereitstellung  
+**Standardwert**: Produktion  
 **Festlegen mit:** `UseEnvironment`  
 **Umgebungsvariable:** `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 
@@ -690,7 +690,7 @@ Verwenden Sie die Factory, und konfigurieren Sie den benutzerdefinierten Dienstc
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ContainerConfiguration)]
 
-## <a name="extensibility"></a>Erweiterbarkeit
+## <a name="extensibility"></a>Erweiterungen
 
 Die Erweiterung des Hosts wird mit der Erweiterungsmethode in <xref:Microsoft.Extensions.Hosting.IHostBuilder> durchgeführt. Im folgenden Beispiel wird dargestellt, wie eine Erweiterungsmethode eine <xref:Microsoft.Extensions.Hosting.IHostBuilder>-Implementierung mit dem [TimedHostedService](xref:fundamentals/host/hosted-services#timed-background-tasks)-Beispiel erweitert, das in <xref:fundamentals/host/hosted-services> gezeigt wird.
 
@@ -724,7 +724,7 @@ public static class Extensions
 
 Die Implementierung von <xref:Microsoft.Extensions.Hosting.IHost> ist für das Starten und Beenden der Implementierungen von <xref:Microsoft.Extensions.Hosting.IHostedService> verantwortlich, die im Dienstcontainer registriert sind.
 
-### <a name="run"></a>Ausführen
+### <a name="run"></a>Run
 
 Durch <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> wird die App gestartet und der aufrufende Thread blockiert, bis der Host heruntergefahren wird:
 

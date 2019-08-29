@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das 
 ms.author: riande
 ms.date: 08/16/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: d0af3092776ee09469c879fffd3047c50b1a59b4
-ms.sourcegitcommit: 4cb0c7e74355f2e87c60e2a196f842b937247a99
+ms.openlocfilehash: 9065aa23a537add5a9376472e4f4478e9d4149bd
+ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2019
-ms.locfileid: "69545803"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70024743"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -72,9 +72,7 @@ Während das vorherige Layout typisch ist, wenn Bereiche verwendet werden, müss
 /Areas/<Area-Name>/Views/Shared/<Action-Name>.cshtml
 /Views/Shared/<Action-Name>.cshtml
 /Pages/Shared/<Action-Name>.cshtml
-   ```
-
-Der Speicherort von Ordnern, die sich nicht auf die Ansicht beziehen, wie *Controller* und *Modelle* spielt **keine** Rolle. Die Ordner *Controller* und *Modelle* werden z.B. nicht benötigt. Der Inhalt von *Controller* und *Modelle* ist Code, der in eine .dll-Datei kompiliert wird. Der Inhalt von *Ansichten* wird nicht kompiliert, bis eine Anforderung an diese Ansicht gestellt wird.
+```
 
 <a name="attribute"></a>
 

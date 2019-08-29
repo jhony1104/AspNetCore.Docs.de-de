@@ -3,16 +3,16 @@ title: Implementierung des Http.sys-Webservers in ASP.NET Core
 author: guardrex
 description: Erfahren Sie mehr über HTTP.sys. einen Webserver für ASP.NET Core unter Windows. HTTP.sys basiert auf dem HTTP.sys-Kernelmodustreiber, stellt eine Alternative zu Kestrel dar und kann zum Herstellen einer direkten Verbindung mit dem Internet ohne Internetinformationsdienste (IIS) verwendet werden.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 06/20/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 3f48cda8f89d3f3dcce220cad4e405472b510df4
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 5ee866c862f16c2c22539bf880b5a93415504fb1
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814876"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975519"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implementierung des Http.sys-Webservers in ASP.NET Core
 

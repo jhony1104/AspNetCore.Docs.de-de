@@ -1,17 +1,17 @@
 ---
 title: Modellbindung in ASP.NET Core
-author: tdykstra
+author: rick-anderson
 description: Erfahren Sie, wie die Modellbindung in ASP.NET Core funktioniert und wie Sie ihr Verhalten anpassen.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
-ms.author: tdykstra
+ms.author: riande
 ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 10a9f8327bf16d11ec1e04ac3888d701f1ab1778
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 298e305cf918117ec2d313060a7420a1e721a365
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724529"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975293"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Modellbindung in ASP.NET Core
 
@@ -85,8 +85,8 @@ Standardmäßig ruft die Modellbindung Daten in Form von Schlüssel-Wert-Paaren 
 
 1. Formularfelder 
 1. Der Anforderungstext (für [Controller mit dem [ApiController]-Attribut](xref:web-api/index#binding-source-parameter-inference))
-1. Weiterleiten von Daten
-1. Abfragezeichenfolge-Parameter
+1. Routendaten
+1. Abfragezeichenfolgeparameter
 1. Hochgeladene Dateien 
 
 Für jeden Zielparameter oder jede Zieleigenschaft werden die Quellen in der in dieser Liste angegebenen Reihenfolge überprüft. Es gibt ein paar Ausnahmen:
@@ -122,8 +122,8 @@ Wenden Sie `[FromBody]` auf nicht mehr als einen Parameter pro Aktionsmethode an
 
 Quelldaten werden dem Modellbindungssystem durch *Wertanbieter* bereitgestellt. Sie können benutzerdefinierte Wertanbieter schreiben und registrieren, die Daten für die Modellbindung aus anderen Quellen abrufen. Beispielsweise können Sie Daten aus Cookies oder Sitzungszuständen abrufen. So rufen Sie Daten aus einer neuen Quelle ab
 
-* Erstellen Sie eine Klasse, die `IValueProvider` implementiert.
-* Erstellen Sie eine Klasse, die `IValueProviderFactory` implementiert.
+* Erstellen Sie eine Klasse, die das `IValueProvider` implementiert.
+* Erstellen Sie eine Klasse, die das `IValueProviderFactory` implementiert.
 * Registrieren Sie die Factoryklasse in `Startup.ConfigureServices`.
 
 Die Beispiel-App umfasst ein Beispiel für einen [Wertanbieter](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProvider.cs) und eine [Factory](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProviderFactory.cs), das Werte aus Cookies abruft. Dies ist der Registrierungscode in `Startup.ConfigureServices`:
@@ -165,7 +165,7 @@ Dieselbe Strategie empfiehlt sich, wenn Sie nicht möchten, dass Typkonvertierun
 
 Die einfachen Typen, in die die Modellbindung Quellzeichenfolgen konvertieren kann, sind unter anderem:
 
-* [Boolescher Wert](xref:System.ComponentModel.BooleanConverter)
+* [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
@@ -247,13 +247,13 @@ Mehrere integrierte Attribute stehen für die Kontrolle der Modellbindung komple
 
 ### <a name="bindrequired-attribute"></a>[BindRequired]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -277,7 +277,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 Das `[Bind]`-Attribut kann zum Schutz vor Overposting in *Erstellungs*szenarien (create) verwendet werden. Es funktioniert nicht gut in Bearbeitungsszenarien (edit), weil ausgeschlossene Eigenschaften auf „null“ oder einen Standardwert festgelegt werden, anstatt unverändert zu bleiben. Zum Schutz vor Overposting werden Ansichtsmodelle empfohlen, anstelle des `[Bind]`-Attributs. Weitere Informationen finden Sie unter [Sicherheitshinweis zum Overposting](xref:data/ef-mvc/crud#security-note-about-overposting).
 
-## <a name="collections"></a>Sammlungen
+## <a name="collections"></a>Auflistungen
 
 Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
 
@@ -414,7 +414,7 @@ Sie können die Modellbindung erweitern, indem Sie eine benutzerdefinierte Model
 
 ## <a name="manual-model-binding"></a>Manuelle Modellbindung
 
-Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Hier sehen Sie ein Beispiel:
+Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
