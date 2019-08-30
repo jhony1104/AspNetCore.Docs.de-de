@@ -2,16 +2,16 @@
 title: 'Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core'
 description: In diesem Tutorial lesen Sie verwandte Daten und zeigen sie an – d.h., die Daten, die Entity Framework in Navigationseigenschaften lädt.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 43d05d0a5f938e60cdb54a0025d8bc277059c2e3
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 2bf556dae5d30819c54ecc3f0dadfbd3316db1cc
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583434"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059114"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -239,7 +239,7 @@ Angenommen, Sie haben erwartet, dass Benutzer nur selten Registrierungen für ei
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ExplicitLoading&highlight=23-29)]
 
-Der neue Code löscht die *ThenInclude*-Methodenaufrufe für Registrierungsdaten aus dem Code, der Instructor-Entitäten abruft. Wenn ein Dozent und Kurs ausgewählt werden, ruft der hervorgehobene Code Registrierungsentitäten für den ausgewählten Kurs und Studentenentitäten für jede Registrierung ab.
+Der neue Code löscht die *ThenInclude*-Methodenaufrufe für Registrierungsdaten aus dem Code, der Instructor-Entitäten abruft. Außerdem wird `AsNoTracking` gelöscht.  Wenn ein Dozent und Kurs ausgewählt werden, ruft der hervorgehobene Code Registrierungsentitäten für den ausgewählten Kurs und Studentenentitäten für jede Registrierung ab.
 
 Führen Sie die Anwendung aus, navigieren Sie zur Dozentenindexseite, und Sie werden keinen Unterschied in der Anzeige auf der Seite bemerken, obwohl Sie die Abrufart für Daten geändert haben.
 

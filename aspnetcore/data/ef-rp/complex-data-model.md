@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 8a1c0759453b02f4ce1c45471a8f93da626f8261
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 34b977f70f3e7e58e4ab6fcf3d8f69800896a65d
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583285"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059123"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -134,13 +134,16 @@ Mit dem `[Column]`-Attribut wird `Student.FirstMidName` im Datenmodell der Spalt
 
 Durch das `Required`-Attribut werden die Name-Eigenschaften zu Pflichtfeldern. Das `Required`-Attribut ist für Typen, die keine NULL-Werte annehmen können (etwas Werttypen, z.B. `DateTime`, `int` und `double`) nicht erforderlich. Typen, die nicht auf NULL festgelegt werden können, werden automatisch als Pflichtfelder behandelt.
 
-Das `Required`-Attribut kann durch einen Parameter mit der mindestens erforderlichen Länge im `StringLength`-Attribut ersetzt werden:
+Das `Required`-Attribut muss mit `MinimumLength` verwendet werden, damit die `MinimumLength` erzwungen wird.
 
 ```csharp
 [Display(Name = "Last Name")]
-[StringLength(50, MinimumLength=1)]
+[Required]
+[StringLength(50, MinimumLength=2)]
 public string LastName { get; set; }
 ```
+
+`MinimumLength` und `Required` lassen Leerzeichen zu, um die Überprüfung zu bestehen. Verwenden Sie das `RegularExpression`-Attribut, um vollständige Kontrolle über die Zeichenfolge zu erhalten.
 
 ### <a name="the-display-attribute"></a>Das Display-Attribut
 
@@ -1353,7 +1356,7 @@ Aktualisieren Sie die `Up`-Methode der `ComplexDataModel`-Klasse:
 
 Fügen Sie folgenden hervorgehobenen Code hinzu: Der neue Code folgt auf den Block `.CreateTable( name: "Department"`:
 
- [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
+[!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
 Durch die zuvor durchgeführten Änderungen sind die vorhandenen `Course`-Zeilen mit dem Fachbereich „Temp“ verknüpft, nachdem die Methode `ComplexDataModel` `Up` ausgeführt wurde.
 
@@ -1368,8 +1371,6 @@ Im folgenden Tutorial werden verknüpfte Daten behandelt.
 
 * [Dieses Tutorial auf YouTube (Teil 1)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [Dieses Tutorial auf YouTube (Teil 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)
-
-
 
 > [!div class="step-by-step"]
 > [Zurück](xref:data/ef-rp/migrations)

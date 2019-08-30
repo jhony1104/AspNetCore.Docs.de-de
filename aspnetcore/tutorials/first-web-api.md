@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 99985e9fb1134c2ba808434f8d24c4a768773268
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: 25bfccb136d875b454034bd011828c9f3b6cd3d8
+ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022593"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70113288"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -462,9 +462,9 @@ So löschen Sie mit Postman eine Aufgabe
 * Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/TodoItems/1`.
 * Klicken Sie auf **Send**.
 
-## <a name="call-the-api-from-jquery"></a>Aufrufen einer API über jQuery
+## <a name="call-the-web-api-with-javascript"></a>Aufrufen der Web-API mit JavaScript
 
-Eine Schritt-für-Schritt-Anleitung finden Sie im [Tutorial: Aufrufen einer ASP.NET Core-Web-API mit jQuery](xref:tutorials/web-api-jquery).
+Eine Schritt-für-Schritt-Anleitung finden Sie im [Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript](xref:tutorials/web-api-javascript).
 
 ::: moniker-end
 
@@ -480,9 +480,10 @@ In diesem Tutorial lernen Sie, wie die folgenden Aufgaben ausgeführt werden:
 > * Konfigurieren von Routing und URL-Pfaden
 > * Angeben von Rückgabewerten
 > * Aufrufen der Web-API mit Postman
-> * Aufrufen der Web-API mit jQuery
+> * Aufrufen der Web-API mit JavaScript
 
 Am Ende haben Sie eine Web-API, die in einer relationalen Datenbank gespeicherte „Aufgaben“ verwalten kann.
+
 ## <a name="overview"></a>Übersicht
 
 In diesem Tutorial wird die folgende API erstellt:
@@ -737,7 +738,6 @@ Der Rückgabetyp der Methoden `GetTodoItems` und `GetTodoItem` ist [ActionResult
 * Wenn kein Element mit der angeforderten ID übereinstimmt, gibt die Methode einen 404-Fehlercode [Nicht gefunden](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) zurück.
 * Andernfalls gibt die Methode 200 mit einem JSON-Antworttext zurück. Die Rückgabe von `item` löst eine HTTP 200-Antwort aus.
 
-
 ## <a name="test-the-gettodoitems-method"></a>Testen der GetTodoItems-Methode
 
 Dieses Tutorial verwendet Postman zum Testen der Web-API.
@@ -863,9 +863,9 @@ So löschen Sie mit Postman eine Aufgabe
 
 Sie können in der Beispiel-App alle Elemente löschen. Sobald das letzte Element gelöscht wurde, wird allerdings beim nächsten API-Aufruf vom Modellklassenkonstruktor ein neues erstellt.
 
-## <a name="call-the-api-with-jquery"></a>Aufrufen der API mit jQuery
+## <a name="call-the-web-api-with-javascript"></a>Aufrufen der Web-API mit JavaScript
 
-In diesem Abschnitt wird eine HTML-Seite hinzugefügt, die mithilfe von jQuery die Web-API aufruft. jQuery initiiert die Anforderung und aktualisiert die Seite mit den Informationen aus der Antwort der API.
+In diesem Abschnitt wird eine HTML-Seite hinzugefügt, die mithilfe von JavaScript die Web-API aufruft. Die Fetch-API initiiert die Anforderung. JavaScript aktualisiert die Seite mit den Details aus der Antwort der Web-API.
 
 Konfigurieren Sie die App so, dass sie [statische Dateien bereitstellt](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_), und [aktivieren Sie die Standarddateizuordnung](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_), indem Sie *startup.cs* mit dem unten markierten Code aktualisieren.
 
@@ -886,19 +886,17 @@ Möglicherweise ist eine Änderung an den Starteinstellungen des ASP.NET Core-Pr
 * Öffnen Sie *Properties\launchSettings.json*.
 * Entfernen Sie die `launchUrl`-Eigenschaft, um zu erzwingen, dass die App mit *index.html* als Startseite geöffnet wird. Dies ist die Standarddatei des Projekts.
 
-Es gibt mehrere Möglichkeiten, um jQuery herunterzuladen. Im vorherigen Codeausschnitt wurde die Bibliothek aus einem Content Delivery Network (CDN) geladen.
-
-Dieses Beispiel ruft alle CRUD-Methoden der API auf. Im Folgenden werden die API-Aufrufe erläutert.
+Dieses Beispiel ruft alle CRUD-Methoden der Web-API auf. Im Folgenden werden die API-Aufrufe erläutert.
 
 ### <a name="get-a-list-of-to-do-items"></a>Abrufen einer Liste von To-Do-Elementen
 
-Die jQuery-Funktion [ajax](https://api.jquery.com/jquery.ajax/) sendet eine `GET`-Anforderung an die API, die JSON-Code zurückgibt, der ein Aufgabenarray darstellt. Die Rückruffunktion `success` wird aufgerufen, wenn die Anforderung erfolgreich ist. Im Rückruf wird DOM mit den To-Do-Informationen aktualisiert.
+Fetch sendet eine HTTP GET-Anforderung an die Web-API, die JSON-Code mit einem Array aus To-Do-Elementen zurückgibt. Die Rückruffunktion `success` wird aufgerufen, wenn die Anforderung erfolgreich ist. Im Rückruf wird DOM mit den To-Do-Informationen aktualisiert.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_GetData)]
 
 ### <a name="add-a-to-do-item"></a>Hinzufügen eines To-Do-Elements
 
-Die Funktion [ajax](https://api.jquery.com/jquery.ajax/) sendet eine `POST`-Anforderung mit der Aufgabe im Anforderungstext. Die Optionen `accepts` und `contentType` werden auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben. Die Aufgabe wird mit [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in JSON konvertiert. Wenn die API den Statuscode „Erfolgreich“ zurückgibt, wird die Funktion `getData` aufgerufen, um die HTML-Tabelle zu aktualisieren.
+Fetch sendet eine HTTP POST-Anforderung mit dem To-Do-Element im Anforderungstext. Die Optionen `accepts` und `contentType` werden auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben. Die Aufgabe wird mit [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in JSON konvertiert. Wenn die API den Statuscode „Erfolgreich“ zurückgibt, wird die Funktion `getData` aufgerufen, um die HTML-Tabelle zu aktualisieren.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AddItem)]
 

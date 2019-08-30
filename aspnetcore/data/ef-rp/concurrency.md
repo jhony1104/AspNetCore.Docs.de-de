@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: df3cc9eb3d0c1748ca9cd194ee58e4614bba24d5
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: da57633c345ec087b1a4f24ddc7771e7a2d04720
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583409"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059078"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Parallelität (8 von 8)
 
@@ -234,7 +234,7 @@ Erstellen Sie das Projekt.
 
 Das Gerüstbautool hat eine `RowVersion`-Spalte für die Index-Seite erstellt, dieses Feld würde jedoch in einer Produktions-App nicht angezeigt werden. In diesem Tutorial wird das letzte Byte der `RowVersion` angezeigt, damit Sie ein besseres Verständnis für die Funktionsweise der Parallelitätsverarbeitung bekommen. Das letzte Byte ist nicht zwingend eindeutig.
 
-Aktualisieren der Indexseite:
+Aktualisieren Sie die Seite *Pages\Departments\Index.cshtml*:
 
 * Ersetzen Sie „Index“ durch „Abteilungen“.
 * Ändern Sie den Code, der `RowVersion` enthält, um nur das letzte Byte des Bytearrays anzuzeigen.
