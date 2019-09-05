@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 07/01/2019
 uid: host-and-deploy/aspnet-core-module
 ms.openlocfilehash: 4a360023cc7fab2f066d490f7f368fc35815703a
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.sourcegitcommit: 4b00e77f9984ce76356e829cfe7f75f0f61a7a8f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2019
+ms.lasthandoff: 09/02/2019
 ms.locfileid: "67500449"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core-Modul
@@ -382,7 +382,7 @@ Im folgenden Beispiel werden zwei Umgebungsvariablen festgelegt. `ASPNETCORE_ENV
 > [!WARNING]
 > Legen Sie die Umgebungsvariable `ASPNETCORE_ENVIRONMENT` nur auf Staging- und Testservern auf `Development` fest, auf die nicht vertrauenswürdige Netzwerke, z.B. das Internet, nicht zugreifen können.
 
-## <a name="appofflinehtm"></a>app_offline.htm
+## <a name="app_offlinehtm"></a>app_offline.htm
 
 Wenn eine Datei mit dem Namen *app_offline.htm* im Stammverzeichnis einer App erkannt wird, versucht das ASP.NET Core-Modul, die App ordnungsgemäß zu beenden und die Verarbeitung eingehender Anforderungen zu stoppen. Wenn die App nach der Anzahl von Sekunden, die in `shutdownTimeLimit` definiert wurden, noch ausgeführt wird, beendet das ASP.NET Core-Modul den laufenden Prozess.
 

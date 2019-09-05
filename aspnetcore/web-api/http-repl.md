@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie das globale .NET Core-Tool HTTP REPL ver
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/25/2019
+ms.date: 08/29/2019
 uid: web-api/http-repl
-ms.openlocfilehash: d2c5f774595e7a2223e84cc76eecdb9baa04adfe
-ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
+ms.openlocfilehash: 7121670856da4b123b1c3e780a7952da0fb696a1
+ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2019
-ms.locfileid: "70024808"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70238048"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -325,52 +325,6 @@ Nachfolgende Antworten berücksichtigen die Einstellung auf vier Leerzeichen:
 ]
 ```
 
-### <a name="set-indentation-size"></a>Festlegen der Einzugsgröße
-
-Die Anpassung der Einzugsgröße für Antworten wird derzeit nur für JSON unterstützt. Der Standardgröße beträgt zwei Leerzeichen. Beispiel:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Apple"
-  },
-  {
-    "id": 2,
-    "name": "Orange"
-  },
-  {
-    "id": 3,
-    "name": "Strawberry"
-  }
-]
-```
-
-Legen Sie den Schlüssel `formatting.json.indentSize` fest, um die Standardgröße zu ändern. Folgendermaßen werden beispielsweise immer vier Leerzeichen verwendet:
-
-```console
-pref set formatting.json.indentSize 4
-```
-
-Nachfolgende Antworten berücksichtigen die Einstellung auf vier Leerzeichen:
-
-```json
-[
-    {
-        "id": 1,
-        "name": "Apple"
-    },
-    {
-        "id": 2,
-        "name": "Orange"
-    },
-    {
-        "id": 3,
-        "name": "Strawberry"
-    }
-]
-```
-
 ### <a name="set-the-default-text-editor"></a>Festlegen des Standard-Text-Editors
 
 Standardmäßig ist für HTTP REPL kein Text-Editor konfiguriert. Wenn Sie Web-API-Methoden testen möchten, für die ein HTTP-Anforderungstext erforderlich ist, müssen Sie einen Standard-Text-Editor festlegen. Das HTTP REPL-Tool startet den konfigurierten Text-Editor nur zum Verfassen des Anforderungstexts. Führen Sie den folgenden Befehl aus, um Ihren bevorzugten Text-Editor festzulegen:
@@ -419,7 +373,7 @@ Standardmäßig weist die HTTP-REPL eine Reihe von relativen Pfaden auf, die zum
 Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Beispiel:
 
 ```console
-pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json
+pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 ```
 
 ## <a name="test-http-get-requests"></a>Testen von HTTP GET-Anforderungen
