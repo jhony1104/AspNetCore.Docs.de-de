@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie in blazor Formular-und Feld Validierungs Szen
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/13/2019
+ms.date: 09/04/2019
 uid: blazor/forms-validation
-ms.openlocfilehash: 0b2e38cdbd974a28960b917fb6b5ce370f8c4659
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 4531ef44a7df3951f3bebdf88e597165fa75f06e
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030337"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310326"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.net Core blazor-Formulare und-Validierung
 
@@ -175,14 +175,37 @@ Im folgenden Formular werden Benutzereingaben mithilfe der im `Starship` Modell 
 
 Erstellt ein `EditContext` -Objekt als einen [kaskadierenden Wert](xref:blazor/components#cascading-values-and-parameters) , der Metadaten zum Bearbeitungsprozess nachverfolgt, einschließlich der geänderten Felder und der aktuellen Validierungs Meldungen. `EditForm` Bietet auch praktische Ereignisse für gültige und ungültige übermitteln`OnValidSubmit`( `OnInvalidSubmit`,). `EditForm` Alternativ können Sie `OnSubmit` verwenden, um die Validierungs-und Prüf Feldwerte mit benutzerdefiniertem Validierungscode zu initiieren.
 
+## <a name="inputtext-based-on-the-input-event"></a>InputText basierend auf dem Eingabe Ereignis
+
+Verwenden Sie `InputText` die-Komponente, um eine benutzerdefinierte Komponente `input` zu erstellen, die `change` anstelle des-Ereignisses das-Ereignis verwendet.
+
+Erstellen Sie eine-Komponente mit dem folgenden Markup, und verwenden Sie die `InputText` -Komponente wie verwendet:
+
+```cshtml
+@inherits InputText
+
+<input 
+    @attributes="AdditionalAttributes" 
+    class="@CssClass" 
+    value="@CurrentValue" 
+    @oninput="EventCallback.Factory.CreateBinder<string>(
+        this, __value => CurrentValueAsString = __value, CurrentValueAsString)" />
+```
+
+## <a name="validation-support"></a>Validierungs Unterstützung
+
 Die `DataAnnotationsValidator` Komponente fügt die Validierungs Unterstützung mithilfe von Daten Anmerkungen an den `EditContext`kaskadierenden an. Das Aktivieren der Unterstützung für die Validierung mithilfe von Daten Anmerkungen erfordert derzeit diese explizite Geste, aber wir erwägen, dies als Standardverhalten festzustellen, das Sie dann außer Kraft setzen können. Um ein anderes Validierungssystem als Daten Anmerkungen zu verwenden, ersetzen `DataAnnotationsValidator` Sie durch eine benutzerdefinierte Implementierung. Die ASP.net Core-Implementierung ist zur Überprüfung in der Verweis Quelle verfügbar: [DataAnnotationsValidator](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Components/src/Forms/DataAnnotationsValidator.cs)/[AddDataAnnotationsValidation](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Components/src/Forms/EditContextDataAnnotationsExtensions.cs). *Die ASP.net Core Implementierung unterliegt während des Vorschau Zeitraums schnelle Updates.*
 
 Die `ValidationSummary` Komponente fasst alle Validierungs Nachrichten zusammen, die dem taghilfsprogramm für die [Validierungs Zusammenfassung](xref:mvc/views/working-with-forms#the-validation-summary-tag-helper)ähneln.
 
-Die `ValidationMessage` Komponente zeigt Validierungs Meldungen für ein bestimmtes Feld an, das dem [Validierungs Nachrichten](xref:mvc/views/working-with-forms#the-validation-message-tag-helper)-taghilfsprogramm ähnelt. Geben Sie das Feld zur Validierung mit `For` dem-Attribut und einem Lambda-Ausdruck an, der die Model-Eigenschaft benennt:
+Die `ValidationMessage` Komponente zeigt Validierungs Meldungen für ein bestimmtes Feld an, das dem [Validierungs Nachrichten-taghilfsprogramm](xref:mvc/views/working-with-forms#the-validation-message-tag-helper)ähnelt. Geben Sie das Feld zur Validierung mit `For` dem-Attribut und einem Lambda-Ausdruck an, der die Model-Eigenschaft benennt:
 
 ```cshtml
 <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
 ```
 
 Die `ValidationMessage` Komponenten `ValidationSummary` und unterstützen beliebige Attribute. Alle Attribute, die nicht mit einem Komponenten Parameter identisch sind, werden `<div>` dem `<ul>` generierten-oder-Element hinzugefügt.
+
+### <a name="validation-of-complex-or-collection-type-properties"></a>Überprüfung komplexer Eigenschaften oder Auflistungstyp Eigenschaften
+
+Validierungs Attribute, die auf die Eigenschaften eines Modells angewendet werden, überprüfen, wenn das Formular übermittelt wird. Die Eigenschaften von Auflistungen oder komplexen Datentypen eines Modells werden jedoch nicht bei der Formular Übermittlung überprüft. Verwenden Sie eine benutzerdefinierte Validierungs Komponente, um die in diesem Szenario überbten Attribute der Überprüfung zu berücksichtigen. Ein Beispiel finden Sie [im GitHub-Repository ASPNET/Samples im Beispiel zur blazor-Validierung](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Validation).

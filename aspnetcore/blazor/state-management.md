@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/state-management
-ms.openlocfilehash: af040635302fbf2dae8192dcf37d55bfcfedfcec
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 01f32130e43b7235cb438ad71321256882f53573
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030373"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310304"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.net Core blazor-Zustands Verwaltung
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Blazor serverseitig ist ein Zustands behaftetes App-Framework. In den meisten Fällen behält die APP eine laufende Verbindung mit dem Server bei. Der Benutzer Zustand wird im Speicher des Servers in einer Verbindung gespeichert. 
+Blazor serverseitig ist ein Zustands behaftetes App-Framework. In den meisten Fällen behält die APP eine laufende Verbindung mit dem Server bei. Der Benutzer Zustand wird im Speicher des Servers *in einer Verbindung*gespeichert. 
 
 Beispiele für den Zustand einer Benutzer Verbindung sind:
 
@@ -237,10 +237,7 @@ Während der Vorab Anmeldung:
 
 Eine Möglichkeit, den Fehler zu beheben, besteht darin, die vorab Generierung zu deaktivieren. Dies ist normalerweise die beste Wahl, wenn die APP den browserbasierten Speicher stark nutzt. Das vorab Rendering erhöht die Komplexität und profitiert von der APP nicht, da die APP keine nützlichen Inhalte `localStorage` `sessionStorage` vorab vorab bereitstellen kann.
 
-So deaktivieren Sie die vorab Generierung:
-
-1. Öffnen Sie die Datei *pages/_Host. cshtml* , und entfernen Sie `Html.RenderComponentAsync`den Aufrufen von.
-1. Öffnen Sie `Startup.cs` die Datei, und ersetzen Sie `endpoints.MapBlazorHub()` den `endpoints.MapBlazorHub<App>("app")`-Befehl durch. `App`der Typ der Stamm Komponente. `"app"`ein CSS-Selektor, der den Speicherort für die Stamm Komponente angibt.
+Öffnen Sie die Datei *pages/_Host. cshtml* , und ändern Sie den Aufrufen von `Html.RenderComponentAsync<App>(RenderMode.Server)`, um die vorab Generierung zu deaktivieren.
 
 Die vorab Generierung kann für andere Seiten nützlich sein, die oder `localStorage` `sessionStorage`nicht verwenden. Verschieben Sie den Ladevorgang so lange, bis der Browser mit der Verbindung verbunden ist, um die vorab Ausführung zu aktivieren. Im folgenden finden Sie ein Beispiel für das Speichern eines Leistungs Zählers:
 

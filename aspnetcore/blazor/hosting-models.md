@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 64393e826cb17550085f468f5916fca55973908f
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: bf2bce4f89e8bfe6e5aeeb4860c85a60c5eb4b7c
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68993390"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310394"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
@@ -99,35 +99,67 @@ Serverseitige blazor-apps werden standardmäßig so eingerichtet, dass Sie die B
  
 ```cshtml
 <body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
  
     <script src="_framework/blazor.server.js"></script>
 </body>
 ```
+
+`RenderMode`konfiguriert, ob die Komponente Folgendes hat:
+
+* Wird in die Seite vorab übernommen.
+* Wird als statischer HTML-Code auf der Seite gerendert, oder wenn er die erforderlichen Informationen zum Bootstrapping einer blazor-APP vom Benutzer-Agent enthält.
+
+| `RenderMode`        | Beschreibung |
+| ------------------- | ----------- |
+| `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine serverseitige blazor-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
+| `Server`            | Rendert einen Marker für eine serverseitige blazor-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
+| `Static`            | Rendert die Komponente in statischem HTML-Format. Parameter werden unterstützt. |
+
+Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
  
 Der Client stellt erneut eine Verbindung mit dem Server mit dem gleichen Zustand her, der für die Vorabversion der APP verwendet wurde. Wenn sich der Status der APP weiterhin im Arbeitsspeicher befindet, wird der Komponenten Status nach dem Herstellen der signalr-Verbindung nicht erneut umgeleitet.
 
 ### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Zustands behaftete interaktive Komponenten von Razor Pages und Ansichten
  
-Zustands behaftete interaktive Komponenten können einer Razor Page oder Ansicht hinzugefügt werden. Wenn die Seite oder Sicht gerendert wird, wird die Komponente mit der Komponente vorab in diese integriert. Die APP stellt dann erneut eine Verbindung mit dem Komponenten Zustand her, sobald die Client Verbindung hergestellt ist, solange sich der Status noch im Speicher befindet.
+Zustands behaftete interaktive Komponenten können einer Razor Page oder Ansicht hinzugefügt werden.
+
+Wenn die Seite oder Ansicht gerendert wird:
+
+* Die Komponente wird mit der Seite oder der Ansicht vorab überstehen.
+* Der anfängliche Komponenten Zustand, der für die vorab Generierung verwendet wird, geht verloren.
+* Der neue Komponenten Status wird erstellt, wenn die signalr-Verbindung hergestellt wird.
  
-Beispielsweise wird mit der folgenden Razor Page eine `Counter` Komponente mit einer anfänglichen Anzahl gerendert, die mithilfe eines Formulars angegeben wird:
+Die folgende Razor Page rendert `Counter` eine Komponente:
+
+```cshtml
+<h1>My Razor Page</h1>
+ 
+@(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
+```
+
+### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Nicht interaktive Komponenten von Razor Pages und Ansichten
+
+Auf der folgenden Razor Page wird die `MyComponent` Komponente statisch mit einem Anfangswert gerendert, der mit einem-Format angegeben wird:
  
 ```cshtml
 <h1>My Razor Page</h1>
 
 <form>
-    <input type="number" asp-for="InitialCount" />
-    <button type="submit">Set initial count</button>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
 </form>
  
-@(await Html.RenderComponentAsync<Counter>(new { InitialCount = InitialCount }))
+@(await Html.RenderComponentAsync<MyComponent>(RenderMode.Static, 
+    new { InitialValue = InitialValue }))
  
 @code {
     [BindProperty(SupportsGet=true)]
-    public int InitialCount { get; set; }
+    public int InitialValue { get; set; }
 }
 ```
+
+Da `MyComponent` statisch gerendert wird, kann die Komponente nicht interaktiv sein.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>Erkennen, wenn die APP vorab durchgeführt wird
  
