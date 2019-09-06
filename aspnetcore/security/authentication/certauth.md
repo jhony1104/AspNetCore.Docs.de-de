@@ -1,33 +1,42 @@
 ---
-title: Konfigurieren Sie zertifikatbasierte Authentifizierung in ASP.NET Core
+title: Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 author: blowdart
-description: Informationen Sie zum Konfigurieren der Zertifikatauthentifizierung in ASP.NET Core für IIS und HTTP.sys.
+description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net Core für IIS und http. sys konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 06/11/2019
+ms.date: 08/19/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 8609c58265340da1d618135795915d6c49e750a3
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: ce7bcdbfb8ce0f1febf34b49786e92c917be139c
+ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538722"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70384859"
 ---
 # <a name="overview"></a>Übersicht
 
-`Microsoft.AspNetCore.Authentication.Certificate` enthält eine Implementierung, die ähnlich wie [Zertifikatauthentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.NET Core. Zertifikatauthentifizierung erfolgt auf lange TLS-Ebene, bevor es je zu ASP.NET Core wird. Genauer gesagt, dies ist ein authentifizierungshandler, die das Zertifikat überprüft und gibt Ihnen danach ein Ereignis, in dem Sie das Zertifikat zu beheben können, eine `ClaimsPrincipal`. 
+`Microsoft.AspNetCore.Authentication.Certificate`enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine `ClaimsPrincipal`auflösen können. 
 
-[Konfigurieren Sie Ihren Host](#configure-your-host-to-require-certificates) für die Zertifikatauthentifizierung, sei es IIS, Kestrel, Azure-Web-Apps oder was auch immer Sie verwenden.
+[Konfigurieren Sie Ihren Host für die](#configure-your-host-to-require-certificates) Zertifikat Authentifizierung, also IIS, Kestrel, Azure-Web-Apps oder andere Benutzer, die Sie verwenden.
+
+## <a name="proxy-and-load-balancer-scenarios"></a>Proxy-und Load Balancer-Szenarios
+
+Die Zertifikat Authentifizierung ist ein Zustands behaftetes Szenario, das hauptsächlich verwendet wird, wenn ein Proxy oder ein Load Balancer den Datenverkehr zwischen Clients und Servern nicht Wenn ein Proxy oder ein Lasten Ausgleichs Modul verwendet wird, funktioniert die Zertifikat Authentifizierung nur, wenn der Proxy oder der Load Balancer:
+
+* Behandelt die-Authentifizierung.
+* Übergibt die Benutzer Authentifizierungsinformationen an die APP (z. b. in einem Anforderungs Header), die die Authentifizierungsinformationen verarbeitet.
+
+Eine Alternative zur Zertifikat Authentifizierung in Umgebungen, in denen Proxys und Lasten Ausgleichs Module verwendet werden, ist Active Directory Verbund Dienste (AD FS) mit OpenID Connect (oidc).
 
 ## <a name="get-started"></a>Erste Schritte
 
-Ein HTTPS-Zertifikat erwerben, wenden Sie es, und [konfigurieren Sie Ihren Host](#configure-your-host-to-require-certificates) auf Zertifikate erforderlich sind.
+Erwerben Sie ein HTTPS-Zertifikat, wenden Sie es an, und [Konfigurieren Sie den Host](#configure-your-host-to-require-certificates) , um Zertifikate anzufordern.
 
-Fügen Sie in Ihrer Web-app einen Verweis auf die `Microsoft.AspNetCore.Authentication.Certificate` Paket. Klicken Sie dann in der `Startup.Configure` -Methode, rufen `app.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).UseCertificateAuthentication(...);` über Ihre weiteren Möglichkeiten, einen Delegaten für die Bereitstellung von `OnCertificateValidated` Sie keine zusätzliche Überprüfung des Clientzertifikats mit Anforderungen gesendet. Aktivieren Sie die Daten in einem `ClaimsPrincipal` und legen Sie es auf die `context.Principal` Eigenschaft.
+Fügen Sie in Ihrer Web-App einen Verweis auf `Microsoft.AspNetCore.Authentication.Certificate` das Paket hinzu. Verwenden Sie dann `Startup.Configure` in der- `app.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).UseCertificateAuthentication(...);` Methode mit den Optionen, und geben Sie `OnCertificateValidated` einen Delegaten für an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Diese Informationen werden in ein `ClaimsPrincipal` -Objekt umgewandelt und für `context.Principal` die-Eigenschaft festgelegt.
 
-Wenn Authentifizierung fehlschlägt, wird dieser Handler gibt eine `403 (Forbidden)` Antwort eher eine `401 (Unauthorized)`, wie zu erwarten. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung erfolgen soll. Durch die Zeit, die sie den Handler erreicht, ist es zu spät. Es gibt keine Möglichkeit die Verbindung über eine anonyme Verbindung auf eine mit einem Zertifikat zu aktualisieren.
+Wenn die Authentifizierung fehlschlägt, gibt dieser `403 (Forbidden)` Handler wie erwartet `401 (Unauthorized)`eine Antwort zurück. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung stattfinden soll. Bis zum Zeitpunkt, an dem der Handler erreicht wird, ist es zu spät. Es gibt keine Möglichkeit, die Verbindung von einer anonymen Verbindung mit einem Zertifikat zu aktualisieren.
 
-Fügen Sie auch `app.UseAuthentication();` in die `Startup.Configure` Methode. Andernfalls die HttpContext.User wird nicht festgelegt, um `ClaimsPrincipal` aus dem Zertifikat erstellt. Zum Beispiel:
+Fügen Sie `app.UseAuthentication();` außerdem die `Startup.Configure` -Methode hinzu. Andernfalls wird HttpContext. User nicht auf `ClaimsPrincipal` aus dem Zertifikat erstellt festgelegt. Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -46,50 +55,50 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Das vorausgehende Beispiel veranschaulicht die Standardmethode zum Hinzufügen der Authentifizierung per Clientzertifikat. Der Handler erstellt einen Benutzerprinzipal, der über die allgemeinen Zertifikateigenschaften.
+Im vorangehenden Beispiel wird die Standardmethode zum Hinzufügen der Zertifikat Authentifizierung veranschaulicht. Der Handler erstellt einen Benutzer Prinzipal mithilfe der allgemeinen Zertifikat Eigenschaften.
 
-## <a name="configure-certificate-validation"></a>Konfigurieren der Überprüfung des Zertifikats
+## <a name="configure-certificate-validation"></a>Konfigurieren der Zertifikat Überprüfung
 
-Die `CertificateAuthenticationOptions` Handler verfügt über einige integrierte Überprüfungen, die die minimale Überprüfungen wurden, sollten Sie für ein Zertifikat ausführen. Jede dieser Einstellungen ist standardmäßig aktiviert.
+Der `CertificateAuthenticationOptions` Handler verfügt über einige integrierte Validierungen, bei denen es sich um die minimalen Überprüfungen handelt, die Sie für ein Zertifikat ausführen sollten. Jede dieser Einstellungen ist standardmäßig aktiviert.
 
-### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = verkettet, SelfSigned oder allen (verketteten | SelfSigned)
+### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>"Verkewedcertifipeetypes = verkettet", "selfsigned" oder "alle" (verkettet | Selfsigned)
 
-Diese Überprüfung wird überprüft, dass nur der entsprechende Zertifikatstyp zulässig ist.
+Mit dieser Überprüfung wird überprüft, ob nur der geeignete Zertifikattyp zulässig ist.
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
-Diese Überprüfung überprüft, ob das vom Client vorgelegte Zertifikat die Clientauthentifizierung, die erweiterte Schlüssel verwenden (EKU) oder keine EKUs zu hat. Wenn die Spezifikationen beispielsweise, wenn keine EKU angegeben wird, und klicken Sie dann alle EKUs als gültig erachtet werden.
+Mit dieser Überprüfung wird überprüft, ob das vom Client vorgelegte Zertifikat über die erweiterte Schlüssel Verwendung (EKU) der Client Authentifizierung oder über keine EKUs verfügt. Wie bei den Spezifikationen gesagt, werden alle EKUs als gültig eingestuft, wenn kein EKU angegeben wird.
 
-### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
+### <a name="validatevalidityperiod"></a>Validatevalidityperiod
 
-Diese Überprüfung überprüft, dass das Zertifikat in seinem Gültigkeitszeitraum liegen. Bei jeder Anforderung wird der Handler für sichergestellt, dass ein Zertifikat, das war ungültig, wenn es angezeigt wurde nicht während der aktuellen Sitzung abgelaufen ist.
+Diese Prüfung überprüft, ob das Zertifikat innerhalb seines Gültigkeits Zeitraums liegt. Bei jeder Anforderung stellt der Handler sicher, dass ein Zertifikat, das bei der Präsentation gültig war, während der aktuellen Sitzung nicht abgelaufen ist.
 
 ### <a name="revocationflag"></a>RevocationFlag
 
-Ein Flag, das angibt, welche Zertifikate in der Kette auf Sperrungen überprüft werden.
+Ein Flag, das angibt, welche Zertifikate in der Kette auf die Sperrung geprüft werden.
 
-Sperrprüfungen werden nur durchgeführt, wenn das Zertifikat mit einem Stammzertifikat verkettet ist.
+Sperr Überprüfungen werden nur ausgeführt, wenn das Zertifikat mit einem Stamm Zertifikat verkettet ist.
 
 ### <a name="revocationmode"></a>RevocationMode
 
-Ein Flag, das angibt, wie sperrüberprüfungen ausgeführt werden.
+Ein Flag, das angibt, wie Sperr Überprüfungen durchgeführt werden.
 
-Eine onlineüberprüfung Angabe kann in einer langen Verzögerung führen, während die Verbindung mit die Zertifizierungsstelle hergestellt wird.
+Das Angeben einer Online Überprüfung kann zu einer langen Verzögerung führen, während die Zertifizierungsstelle kontaktiert wird.
 
-Sperrprüfungen werden nur durchgeführt, wenn das Zertifikat mit einem Stammzertifikat verkettet ist.
+Sperr Überprüfungen werden nur ausgeführt, wenn das Zertifikat mit einem Stamm Zertifikat verkettet ist.
 
-### <a name="can-i-configure-my-app-to-require-a-certificate-only-on-certain-paths"></a>Kann ich meine app aus, um ein Zertifikat nur für bestimmte Pfade erfordern konfigurieren?
+### <a name="can-i-configure-my-app-to-require-a-certificate-only-on-certain-paths"></a>Kann ich meine APP so konfigurieren, dass ein Zertifikat nur für bestimmte Pfade erforderlich ist?
 
-Dies ist nicht möglich. Denken Sie daran, dass der zertifikataustausch erfolgt ist, dass der Start der Konversation HTTPS, es vom Server abgeschlossen ist, bevor die erste Anforderung für die Verbindung empfangen wird, daher es nicht möglich, den Umfang je nach Anforderung Felder ist.
+Dies ist nicht möglich. Merken Sie sich, dass der Zertifikat Austausch durchgeführt wurde, bis der Start der HTTPS-Konversation durch den Server erfolgt ist, bevor die erste Anforderung über diese Verbindung empfangen wird. Daher ist es nicht möglich, den Bereich auf der Grundlage von Anforderungs Feldern festzustellen.
 
-## <a name="handler-events"></a>Handler-Ereignisse
+## <a name="handler-events"></a>Handlerereignisse
 
-Der Handler verfügt über zwei Ereignisse:
+Der Handler hat zwei Ereignisse:
 
-* `OnAuthenticationFailed` &ndash; Wird aufgerufen, wenn eine Ausnahme während der Authentifizierung erfolgt und ermöglicht es Ihnen, zu reagieren.
-* `OnCertificateValidated` &ndash; Wird aufgerufen, nachdem das Zertifikat überprüft wurde, war erfolgreich und ein Standard-Prinzipals erstellt wurde. Mit diesem Ereignis können Sie eine eigene Überprüfung durchführen und zu erweitern oder Ersetzen Sie den Prinzipal. Beispiele umfassen:
-  * Bestimmen, ob das Zertifikat für Ihre Dienste bekannt ist.
-  * Erstellen Ihre eigenen dienstprinzipals. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
+* `OnAuthenticationFailed`&ndash; Wird aufgerufen, wenn während der Authentifizierung eine Ausnahme auftritt und Sie reagieren können.
+* `OnCertificateValidated`&ndash; Wird aufgerufen, nachdem das Zertifikat überprüft wurde, die Überprüfung bestanden und ein Standard Prinzipal erstellt wurde. Dieses Ereignis ermöglicht es Ihnen, ihre eigene Validierung auszuführen und den Prinzipal zu erweitern oder zu ersetzen. Beispiele hierfür sind:
+  * Ermitteln, ob das Zertifikat den Diensten bekannt ist.
+  * Erstellen eines eigenen Prinzipals. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
 ```csharp
 services.AddAuthentication(
@@ -123,9 +132,9 @@ services.AddAuthentication(
     });
 ```
 
-Wenn Sie das eingehende Zertifikat erfüllt nicht die zusätzliche Überprüfung finden, rufen Sie `context.Fail("failure reason")` mit einem Fehlergrund für.
+Wenn Sie feststellen, dass das eingehende Zertifikat die zusätzliche über `context.Fail("failure reason")` Prüfung nicht erfüllt, können Sie mit einem Fehler Grund anrufen.
 
-Für real Funktionalität, Sie sollten zum Aufrufen eines Diensts in Abhängigkeitsinjektion die Verbindung mit einer Datenbank oder andere Art von Speicher des Benutzers registriert. Zugriff auf Ihren Dienst unter Verwendung des Kontexts an Ihren Delegaten übergeben. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
+Für echte Funktionen möchten Sie wahrscheinlich einen Dienst aufzurufen, der in der Abhängigkeitsinjektion registriert ist, der eine Verbindung mit einer Datenbank oder einem anderen Benutzerspeicher herstellt. Greifen Sie auf den Dienst zu, indem Sie den Kontext verwenden, der in ihren Delegaten Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
 ```csharp
 services.AddAuthentication(
@@ -168,13 +177,13 @@ services.AddAuthentication(
     });
 ```
 
-Grundsätzlich ist die Überprüfung des Zertifikats ein Aspekt Autorisierung. Eine Überprüfung auf, z. B. hinzufügen, Aussteller oder Fingerabdruck in einer Autorisierungsrichtlinie, anstatt in `OnCertificateValidated`, ist durchaus akzeptabel.
+Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb `OnCertificateValidated`von ist durchaus akzeptabel.
 
-## <a name="configure-your-host-to-require-certificates"></a>Konfigurieren Sie Ihren Host für Zertifikate erforderlich sind
+## <a name="configure-your-host-to-require-certificates"></a>Konfigurieren des Hosts, damit Zertifikate erforderlich sind
 
 ### <a name="kestrel"></a>Kestrel
 
-In *"Program.cs"* , konfigurieren Sie Kestrel wie folgt:
+Konfigurieren Sie in *Program.cs*Kestrel wie folgt:
 
 ```csharp
 public static IWebHost BuildWebHost(string[] args) =>
@@ -191,14 +200,14 @@ public static IWebHost BuildWebHost(string[] args) =>
 
 ### <a name="iis"></a>IIS
 
-Führen Sie die folgenden Schritte im IIS-Manager:
+Führen Sie im IIS-Manager die folgenden Schritte aus:
 
-1. Wählen Sie Ihre Website aus der **Verbindungen** Registerkarte.
-1. Doppelklicken Sie auf die **SSL-Einstellungen** option die **Ansicht "Features"** Fenster.
-1. Überprüfen der **SSL erforderlich** Kontrollkästchen, und wählen Sie die **erfordern** Optionsfeld in der **Clientzertifikate** Abschnitt.
+1. Wählen Sie auf der Registerkarte **Verbindungen** Ihre Website aus.
+1. Doppelklicken Sie im Fenster " **Featureansicht** " auf die Option " **SSL-Einstellungen** ".
+1. Aktivieren Sie das Kontrollkästchen **SSL erforderlich** , und aktivieren Sie im Abschnitt **Client Zertifikate** das Optionsfeld **erforderlich** .
 
-![Einstellungen für Client-Zertifikat in IIS](README-IISConfig.png)
+![Client Zertifikat Einstellungen in IIS](README-IISConfig.png)
 
-### <a name="azure-and-custom-web-proxies"></a>Azure und benutzerdefinierte Web-Proxys
+### <a name="azure-and-custom-web-proxies"></a>Azure und benutzerdefinierte Webproxys
 
-Finden Sie unter den [hosten und Bereitstellen von Dokumentation](xref:host-and-deploy/proxy-load-balancer#certificate-forwarding) Informationen zum Konfigurieren des verwaltungszertifikats Middleware weitergeleitet.
+Informationen zum Konfigurieren der Middleware für die Zertifikat Weiterleitung finden Sie in der [Dokumentation zu Host und](xref:host-and-deploy/proxy-load-balancer#certificate-forwarding) Bereitstellung.
