@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-K
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/23/2019
+ms.date: 09/06/2019
 uid: blazor/routing
-ms.openlocfilehash: ae3d7ab01185dd6f2e8e0f59b78c2e693fe464b0
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: d348908261c51b477aa698a407266d05c0df5a33
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310344"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800342"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
 
@@ -28,9 +28,7 @@ Der serverseitige blazor ist in [ASP.net Core Endpunkt Routing](xref:fundamental
 
 ## <a name="route-templates"></a>Routen Vorlagen
 
-Die `Router` Komponente aktiviert das Routing, und jeder zugänglichen Komponente wird eine Routen Vorlage bereitgestellt. Die `Router` Komponente wird in der Datei " *app. Razor* " angezeigt:
-
-In einer serverseitigen oder Client seitigen blazor-App:
+Die `Router` Komponente ermöglicht das Routing an jede Komponente mit einer angegebenen Route. Die `Router` Komponente wird in der Datei " *app. Razor* " angezeigt:
 
 ```cshtml
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -43,20 +41,27 @@ In einer serverseitigen oder Client seitigen blazor-App:
 </Router>
 ```
 
-Wenn eine *Razor* -Datei mit einer `@page` -Direktive kompiliert wird, wird der generierten Klasse <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> eine bereitgestellt, die die Routen Vorlage angibt. Zur Laufzeit sucht der Router nach Komponenten Klassen mit einem `RouteAttribute` und rendert die Komponente mit einer Routen Vorlage, die mit der angeforderten URL übereinstimmt.
+Wenn eine *Razor* -Datei mit einer `@page` -Direktive kompiliert wird, wird der generierten Klasse <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> eine bereitgestellt, die die Routen Vorlage angibt.
+
+Zur Laufzeit ist die `RouteView` -Komponente:
+
+* Empfängt den `RouteData` von der `Router` zusammen mit den gewünschten Parametern.
+* Rendert die angegebene Komponente mit dem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
+
+Optional können Sie einen `DefaultLayout` Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. Die Standardvorlagen für blazor geben `MainLayout` die Komponente an. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden <xref:blazor/layouts>Sie unter.
 
 Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Damit URLs ordnungsgemäß aufgelöst werden können, muss die APP `<base>` ein Tag in der *wwwroot/Index.html* -Datei (Client seitige blazor) oder *pages/_Host. cshtml* -Datei (blazor serverseitig) mit dem im- `href` Attribut angegebenen app-Basispfad enthalten ( `<base href="/">`). Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/client-side#app-base-path>.
+> Damit URLs ordnungsgemäß aufgelöst werden können, muss die APP `<base>` ein Tag in der *wwwroot/Index.html* -Datei (Client seitige blazor) oder *pages/_Host. cshtml* -Datei (blazor serverseitig) mit dem im- `href` Attribut angegebenen app-Basispfad enthalten ( `<base href="/">`). Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Benutzerdefinierten Inhalt bereitstellen, wenn Inhalt nicht gefunden wird
 
 Die `Router` -Komponente ermöglicht der APP, benutzerdefinierten Inhalt anzugeben, wenn der Inhalt für die angeforderte Route nicht gefunden wurde.
 
-Legen Sie in der Datei " *app. Razor* " benutzerdefinierten `<NotFound>` Inhalt im `Router` Vorlagen Parameter der Komponente fest:
+Legen Sie in der Datei " *app. Razor* " benutzerdefinierten `NotFound` Inhalt im `Router` Vorlagen Parameter der Komponente fest:
 
 ```cshtml
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -70,7 +75,13 @@ Legen Sie in der Datei " *app. Razor* " benutzerdefinierten `<NotFound>` Inhalt 
 </Router>
 ```
 
-Der Inhalt von `<NotFound>` kann beliebige Elemente enthalten, wie z. b. andere interaktive Komponenten.
+Der Inhalt von `<NotFound>` Tags kann beliebige Elemente enthalten, wie z. b. andere interaktive Komponenten. Informationen zum Anwenden eines Standard Layouts `NotFound` auf Inhalt finden <xref:blazor/layouts>Sie unter.
+
+## <a name="route-to-components-from-multiple-assemblies"></a>Weiterleiten an Komponenten aus mehreren Assemblys
+
+Verwenden Sie `AdditionalAssemblies` den-Parameter, um zusätzliche Assemblys anzugeben, die bei der `Router` Suche nach Routing fähigen Komponenten in Erwägung gezogen werden sollen. Angegebene Assemblys werden zusätzlich zur `AppAssembly`-angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist eine `Component1` Routing fähige Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Das folgende `AdditionalAssemblies` Beispiel führt zu einer Routing Unterstützung `Component1`für:
+
+< routerappassembly = "typeof (Programm). Assembly "additionalassemblys =" New [] {typeof (Component1). Assembly} >...</Router>
 
 ## <a name="route-parameters"></a>Routen Parameter
 
@@ -181,4 +192,3 @@ Wenn die Schaltfläche ausgewählt wird, navigiert `Counter` die folgende Kompon
     }
 }
 ```
-

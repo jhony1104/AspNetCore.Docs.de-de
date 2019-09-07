@@ -5,18 +5,18 @@ description: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für blaz
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 09/06/2019
 uid: blazor/layouts
-ms.openlocfilehash: 2d652e149381f0a93e3135da978ab5737d47c6f1
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 05a38c10e18407d50422192ab1ddf3ff4b0f3a5b
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "68948220"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800360"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.net Core blazor-Layouts
 
-Von [Rainer stropek](https://www.timecockpit.com)
+Von [Rainer stropek](https://www.timecockpit.com) und [Luke Latham](https://github.com/guardrex)
 
 Einige APP-Elemente, z. b. Menüs, Copyright Meldungen und Firmenlogos, sind in der Regel Teil des gesamten Layouts der APP und werden von jeder Komponente in der APP verwendet. Das Kopieren des Codes dieser Elemente in alle Komponenten einer APP ist kein effizienter Ansatz&mdash;, wenn eines der Elemente ein Update erfordert, muss jede Komponente aktualisiert werden. Eine solche Duplizierung ist schwierig zu verwalten und kann zu inkonsistenten Inhalten im Laufe der Zeit führen. *Layouts* lösen dieses Problem.
 
@@ -31,29 +31,41 @@ Das folgende Codebeispiel zeigt die Razor-Vorlage der Layoutkomponente *MainLayo
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
+In einer APP, die auf einer der Vorlagen der blazor-APP `MainLayout` basiert, befindet sich die Komponente (*MainLayout. Razor*) im frei *gegebenen* Ordner der app.
+
+## <a name="default-layout"></a>Standardlayout
+
+Geben Sie das standardmäßige APP- `Router` Layout in der-Komponente in der *app. Razor* -Datei der APP an. Mit der `Router` folgenden Komponente, die von den Standardvorlagen für blazor bereitgestellt wird, wird das Standard `MainLayout` Layout auf die Komponente festgelegt:
+
+[!code-cshtml[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
+
+Wenn Sie ein Standardlayout für `NotFound` den Inhalt angeben möchten `LayoutView` , `NotFound` geben Sie einen für Inhalt an:
+
+[!code-cshtml[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
+
+Weitere Informationen zur `Router` -Komponente finden <xref:blazor/routing>Sie unter.
+
 ## <a name="specify-a-layout-in-a-component"></a>Angeben eines Layouts in einer Komponente
 
 Verwenden Sie die Razor `@layout` -Direktive, um ein Layout auf eine Komponente anzuwenden. Der Compiler konvertiert `@layout` in eine `LayoutAttribute`, die auf die Component-Klasse angewendet wird.
 
-Der Inhalt der folgenden Komponente, *Masterlist. Razor*, wird `MainLayout` an der Position von `@Body`in eingefügt:
+Der Inhalt der folgenden `MasterList` Komponente wird `MasterLayout` an der Position von `@Body`in eingefügt:
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
 ## <a name="centralized-layout-selection"></a>Zentrale Layoutauswahl
 
-Jeder Ordner einer APP kann optional eine Vorlagen Datei mit dem Namen *_Imports. Razor*enthalten. Der Compiler schließt die in der Imports-Datei angegebenen Direktiven in allen Razor-Vorlagen im gleichen Ordner und rekursiv in allen Unterordnern ein. Daher wird durch eine *_Imports. Razor* - `@layout MainLayout` Datei sichergestellt, dass alle Komponenten in einem Ordner `MainLayout`verwenden. Es ist nicht erforderlich, alle `@layout MainLayout` *Razor* -Dateien im Ordner und in den Unterordnern wiederholt hinzuzufügen. `@using`Direktiven werden auch auf die gleiche Weise auf Komponenten angewendet.
+Jeder Ordner einer APP kann optional eine Vorlagen Datei mit dem Namen *_Imports. Razor*enthalten. Der Compiler schließt die in der Imports-Datei angegebenen Direktiven in allen Razor-Vorlagen im gleichen Ordner und rekursiv in allen Unterordnern ein. Daher wird durch eine *_Imports. Razor* - `@layout MyCoolLayout` Datei sichergestellt, dass alle Komponenten in einem Ordner `MyCoolLayout`verwenden. Es ist nicht erforderlich, alle `@layout MyCoolLayout` *Razor* -Dateien im Ordner und in den Unterordnern wiederholt hinzuzufügen. `@using`Direktiven werden auch auf die gleiche Weise auf Komponenten angewendet.
 
 Die folgenden *_Imports. Razor* -Datei wird importiert:
 
-* `MainLayout`.
+* `MyCoolLayout`
 * Alle Razor-Komponenten im selben Ordner und in allen Unterordnern.
 * Der `BlazorApp1.Data` -Namespace.
  
 [!code-cshtml[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
 Die Datei *_Imports. Razor* ähnelt der [Datei _ViewImports. cshtml für Razor-Ansichten und-Seiten](xref:mvc/views/layout#importing-shared-directives) , die jedoch speziell auf Razor-Komponenten Dateien angewendet werden.
-
-In den blazor-Vorlagen werden *_Imports. Razor* -Dateien für die Layoutauswahl verwendet. Eine APP, die über eine blazor-Vorlage erstellt wurde, enthält die Datei *_Imports. Razor* im Stammverzeichnis des Projekts und im Ordner *pages* .
 
 ## <a name="nested-layouts"></a>In-Netz-Layouts
 
@@ -67,7 +79,7 @@ Die Datei *masterlistlayout. Razor* stellt den `MasterListLayout`bereit. Das Lay
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Schließlich enthält in Masterlayout. Razor die Layoutelemente der obersten Ebene, z. b. Header, Hauptmenü und Fußzeile. `MasterLayout` `MasterListLayout`mit `EpisodesComponent` werden gerendert, wo `@Body` angezeigt wird:
+Schließlich enthält in Masterlayout. Razor die Layoutelemente der obersten Ebene, z. b. Header, Hauptmenü und Fußzeile. `MasterLayout` `MasterListLayout`mit wird gerendert `@Body` , wenn Folgendes angezeigt wird: `EpisodesComponent`
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

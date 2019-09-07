@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie GrpC für ASP.net Core-apps konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 08/21/2019
+ms.date: 09/05/2019
 uid: grpc/configuration
-ms.openlocfilehash: 34eb598211c87fbb2c68ae5e041da50d02f543f7
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: d6f095820271a3bb07e05e29299fbb82b042983b
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310320"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773682"
 ---
 # <a name="grpc-for-aspnet-core-configuration"></a>GrpC für ASP.net Core Konfiguration
 
@@ -25,7 +25,7 @@ In der folgenden Tabelle werden die Optionen zum Konfigurieren der GrpC-Dienste 
 | `MaxSendMessageSize` | `null` | Die maximale Nachrichtengröße in Bytes, die vom Server gesendet werden kann. Der Versuch, eine Nachricht zu senden, die die konfigurierte maximale Nachrichtengröße überschreitet, führt zu einer Ausnahme. |
 | `MaxReceiveMessageSize` | 4 MB | Die maximale Nachrichtengröße in Bytes, die vom Server empfangen werden kann. Wenn der Server eine Nachricht empfängt, die diesen Grenzwert überschreitet, wird eine Ausnahme ausgelöst. Das Erhöhen dieses Werts ermöglicht dem Server, größere Nachrichten zu empfangen, kann sich jedoch negativ auf die Arbeitsspeicher Auslastung auswirken. |
 | `EnableDetailedErrors` | `false` | Wenn `true`der Wert ist, werden ausführliche Ausnahme Meldungen an Clients zurückgegeben, wenn eine Ausnahme in einer Dienst Methode ausgelöst wird. Die Standardeinstellung ist `false`. Durch `EnableDetailedErrors` festlegen `true` von auf können vertrauliche Informationen nicht berücksichtigt werden. |
-| `CompressionProviders` | gzip, deflate | Eine Auflistung von Komprimierungs Anbietern, die zum Komprimieren und Dekomprimieren von Nachrichten verwendet werden. Benutzerdefinierte Komprimierungs Anbieter können erstellt und der Auflistung hinzugefügt werden. Die konfigurierten Standardanbieter unterstützen die **gzip** -und **deflate** -Komprimierung. |
+| `CompressionProviders` | gzip | Eine Auflistung von Komprimierungs Anbietern, die zum Komprimieren und Dekomprimieren von Nachrichten verwendet werden. Benutzerdefinierte Komprimierungs Anbieter können erstellt und der Auflistung hinzugefügt werden. Die konfigurierten Standardanbieter unterstützen **gzip** -Komprimierung. |
 | `ResponseCompressionAlgorithm` | `null` | Der Komprimierungs Algorithmus, der zum Komprimieren der vom Server gesendeten Nachrichten verwendet wird. Der-Algorithmus muss einem Komprimierungs Anbieter `CompressionProviders`in entsprechen. Damit der Algorithmus eine Antwort komprimieren kann, muss der Client angeben, dass er den Algorithmus unterstützt, indem er ihn im **GrpC-Accept-Encoding-** Header sendet. |
 | `ResponseCompressionLevel` | `null` | Die Komprimierungs Ebene, mit der die vom Server gesendeten Nachrichten komprimiert werden. |
 
@@ -43,12 +43,13 @@ In der folgenden Tabelle werden die Optionen zum Konfigurieren von GrpC-Kanälen
 
 | Option | Standardwert | Beschreibung |
 | ------ | ------------- | ----------- |
-| `HttpClient` | Neue Instanz | Der `HttpClient` , der zum Erstellen von GrpC-Aufrufen verwendet wird Ein Client kann festgelegt werden, um ein `HttpClientHandler`benutzerdefiniertes zu konfigurieren, oder der HTTP-Pipeline zusätzliche Handler für GrpC-Aufrufe hinzufügen. Standardmäßig wird eine `HttpClient` neue Instanz erstellt. |
+| `HttpClient` | Neue Instanz | Der `HttpClient` , der zum Erstellen von GrpC-Aufrufen verwendet wird Ein Client kann festgelegt werden, um ein `HttpClientHandler`benutzerdefiniertes zu konfigurieren, oder der HTTP-Pipeline zusätzliche Handler für GrpC-Aufrufe hinzufügen. Wenn kein `HttpClient` angegeben wird, wird eine neue `HttpClient` -Instanz für den Kanal erstellt. Sie wird automatisch verworfen. |
+| `DisposeHttpClient` | `false` | Wenn `true`, und ein `HttpClient` angegeben wird, wird die `HttpClient` -Instanz verworfen, wenn der `GrpcChannel` verworfen wird. |
+| `LoggerFactory` | `null` | Der `LoggerFactory` , der vom Client verwendet wird, um Informationen zu GrpC-aufrufen zu protokollieren. Eine `LoggerFactory` -Instanz kann aus der Abhängigkeitsinjektion aufgelöst oder `LoggerFactory.Create`mithilfe von erstellt werden. Beispiele für das Konfigurieren der Protokollierung <xref:fundamentals/logging/index>finden Sie unter. |
 | `MaxSendMessageSize` | `null` | Die maximale Nachrichtengröße in Bytes, die vom Client gesendet werden kann. Der Versuch, eine Nachricht zu senden, die die konfigurierte maximale Nachrichtengröße überschreitet, führt zu einer Ausnahme. |
-| `MaxReceiveMessageSize` | 4 MB | Die maximale Nachrichtengröße in Bytes, die vom Client empfangen werden kann. Wenn der Server eine Nachricht empfängt, die diesen Grenzwert überschreitet, wird eine Ausnahme ausgelöst. Das Erhöhen dieses Werts ermöglicht dem Server, größere Nachrichten zu empfangen, kann sich jedoch negativ auf die Arbeitsspeicher Auslastung auswirken. |
-| `TransportOptions` | `null` | Transport Optionen konfigurieren, wie der Kanal den GrpC-Dienst aufruft. Derzeit ist `HttpClientTransport` die einzige Implementierung Optionen, mit denen Sie `HttpClient` die von GrpC verwendete angeben können. |
+| `MaxReceiveMessageSize` | 4 MB | Die maximale Nachrichtengröße in Bytes, die vom Client empfangen werden kann. Wenn der Client eine Nachricht empfängt, die diesen Grenzwert überschreitet, wird eine Ausnahme ausgelöst. Das Erhöhen dieses Werts ermöglicht dem Client, größere Nachrichten zu empfangen, kann sich jedoch negativ auf die Arbeitsspeicher Auslastung auswirken. |
 | `Credentials` | `null` | Eine `ChannelCredentials`-Instanz. Anmelde Informationen werden verwendet, um GrpC-aufrufen Authentifizierungs Metadaten hinzuzufügen. |
-| `CompressionProviders` | gzip, deflate | Eine Auflistung von Komprimierungs Anbietern, die zum Komprimieren und Dekomprimieren von Nachrichten verwendet werden. Benutzerdefinierte Komprimierungs Anbieter können erstellt und der Auflistung hinzugefügt werden. Die konfigurierten Standardanbieter unterstützen die **gzip** -und **deflate** -Komprimierung. |
+| `CompressionProviders` | gzip | Eine Auflistung von Komprimierungs Anbietern, die zum Komprimieren und Dekomprimieren von Nachrichten verwendet werden. Benutzerdefinierte Komprimierungs Anbieter können erstellt und der Auflistung hinzugefügt werden. Die konfigurierten Standardanbieter unterstützen **gzip** -Komprimierung. |
 
 Der folgende Code
 

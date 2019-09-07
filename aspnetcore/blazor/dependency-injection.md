@@ -5,14 +5,14 @@ description: Erfahren Sie, wie blazor-Apps Dienste in Komponenten einfügen kön
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 09/06/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: a2bfa0cbe951e817ed6264f1a151d5a716cd795c
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: 0b48cd0cbe14d2b07627f56ab78611bbd3209fa1
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310358"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800394"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.net Core blazor-Abhängigkeitsinjektion
 
@@ -61,7 +61,7 @@ Dienste können mit der in der folgenden Tabelle angezeigten Lebensdauer konfigu
 
 | Lebensdauer | Beschreibung |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Die Client seitige Ausführung von blazor hat zurzeit kein Konzept von di-Bereichen. `Scoped`-registrierte Dienste Verhalten sich `Singleton` wie Dienste. Das serverseitige Hostingmodell unterstützt jedoch die `Scoped` Lebensdauer. In einer Razor-Komponente ist eine Bereichs bezogene Dienst Registrierung auf die Verbindung beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Webassembly-apps haben zurzeit kein Konzept von di-Bereichen. `Scoped`-registrierte Dienste Verhalten sich `Singleton` wie Dienste. Das serverseitige Hostingmodell unterstützt jedoch die `Scoped` Lebensdauer. In blazor-Server-apps wird eine Bereichs bezogene Dienst Registrierung auf die *Verbindung*beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI erstellt eine *einzelne Instanz* des Dienstanbieter. Alle Komponenten, die `Singleton` einen Dienst erfordern, erhalten eine Instanz desselben diensdienstanbieter. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Wenn eine Komponente eine Instanz eines `Transient` Dienstanbieter aus dem Dienst Container abruft, empfängt Sie eine *neue Instanz* des Dienstanbieter. |
 
@@ -124,6 +124,29 @@ Voraussetzungen für die Konstruktorinjektion:
 * Ein Konstruktor muss vorhanden sein, dessen Argumente von di erfüllt werden können. Zusätzliche Parameter, die nicht von di abgedeckt werden, sind zulässig, wenn Sie Standardwerte angeben.
 * Der anwendbare Konstruktor muss *öffentlich*sein.
 * Ein anwendbarer Konstruktor muss vorhanden sein. Bei einer Mehrdeutigkeit löst di eine Ausnahme aus.
+
+## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Basiskomponenten Klassen des-Hilfsprogramms zum Verwalten eines di-Bereichs
+
+In ASP.net Core-apps werden Bereichs bezogene Dienste in der Regel auf die aktuelle Anforderung festgelegt. Nachdem die Anforderung abgeschlossen ist, werden alle Bereichs bezogenen oder vorübergehenden Dienste vom System System entfernt. In blazor-Server-apps dauert der Anforderungs Bereich für die Dauer der Client Verbindung, was dazu führen kann, dass vorübergehende und Bereichs bezogene Dienste viel länger als erwartet Leben.
+
+Um Dienste auf die Lebensdauer einer Komponente zu beschränken, kann die `OwningComponentBase` - `OwningComponentBase<TService>` Klasse und die-Basisklasse verwenden. Diese Basisklassen machen eine `ScopedServices` Eigenschaft vom Typ `IServiceProvider` verfügbar, die Dienste auflöst, die auf die Lebensdauer der Komponente beschränkt sind. Verwenden Sie die `@inherits` -Direktive, um eine Komponente zu erstellen, die von einer Basisklasse in Razor erbt.
+
+```cshtml
+@page "/users"
+@attribute [Authorize]
+@inherits OwningComponentBase<Data.ApplicationDbContext>
+
+<h1>Users (@Service.Users.Count())</h1>
+<ul>
+    @foreach (var user in Service.Users)
+    {
+        <li>@user.UserName</li>
+    }
+</ul>
+```
+
+> [!NOTE]
+> Dienste, die mithilfe `@inject` von `InjectAttribute` oder in die Komponente eingefügt werden, werden nicht im Bereich der Komponente erstellt und sind an den Anforderungs Bereich gebunden.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
