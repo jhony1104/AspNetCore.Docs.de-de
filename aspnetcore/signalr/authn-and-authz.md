@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 07/15/2019
 uid: signalr/authn-and-authz
-ms.openlocfilehash: e7e7a9fd537ba89b64c15594652a290357a00038
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: da226f4e192be8e34a0b2cec1493a1353c995279
+ms.sourcegitcommit: 387cf29f5d5addef2cbc70670a11d612806b36b2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412532"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70746529"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>Authentifizierung und Autorisierung in ASP.net Core signalr
 
@@ -26,13 +26,39 @@ Signalr kann mit ASP.net Core- [Authentifizierung](xref:security/authentication/
 
 Im folgenden finden Sie ein Beispiel `Startup.Configure` für die Verwendung von signalr und ASP.net Core Authentifizierung:
 
+::: moniker range=">= aspnetcore-3.0"
+
 ```csharp
 public void Configure(IApplicationBuilder app)
 {
     ...
 
     app.UseStaticFiles();
-    
+
+    app.UseRouting();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHub<ChatHub>("/chat");
+        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+    });
+}
+```
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{
+    ...
+
+    app.UseStaticFiles();
+
     app.UseAuthentication();
 
     app.UseSignalR(hubs =>
@@ -50,6 +76,8 @@ public void Configure(IApplicationBuilder app)
 > [!NOTE]
 > Die Reihenfolge, in der Sie die signalr-und ASP.net Core Authentifizierungs Middleware registrieren, ist wichtig. `UseAuthentication` Immer vor `UseSignalR` , damit signalr über einen Benutzer auf dem `HttpContext`verfügt.
 
+::: moniker-end
+
 ### <a name="cookie-authentication"></a>Cookie-Authentifizierung
 
 In einer browserbasierten App ermöglicht die Cookieauthentifizierung, dass Ihre vorhandenen Benutzer Anmelde Informationen automatisch an signalr-Verbindungen weitergeleitet werden. Wenn Sie den Browser Client verwenden, ist keine zusätzliche Konfiguration erforderlich. Wenn der Benutzer bei ihrer App angemeldet ist, erbt die signalr-Verbindung diese Authentifizierung automatisch.
@@ -60,7 +88,7 @@ Cookies sind eine browserspezifische Methode zum Senden von Zugriffs Token, die 
 
 Der Client kann ein Zugriffs Token bereitstellen, anstatt ein Cookie zu verwenden. Der Server überprüft das Token und verwendet es, um den Benutzer zu identifizieren. Diese Überprüfung erfolgt nur, wenn die Verbindung hergestellt wird. Während der Lebensdauer der Verbindung wird der Server nicht automatisch neu validiert, um die tokensperrung zu überprüfen.
 
-Auf dem Server wird die bearertokenauthentifizierung mithilfe der [JWT](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)-bearermiddleware konfiguriert.
+Auf dem Server wird die bearertokenauthentifizierung mithilfe der [JWT-bearermiddleware](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)konfiguriert.
 
 Im JavaScript-Client kann das Token mithilfe der [accesstokenfactory](xref:signalr/configuration#configure-bearer-authentication) -Option bereitgestellt werden.
 
