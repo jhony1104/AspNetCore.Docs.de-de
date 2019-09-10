@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/11/2019
+ms.date: 09/02/2019
 uid: fundamentals/index
-ms.openlocfilehash: a6c848987c97103864fd5410922346e85a68c353
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 7e2901919c8b0165d0f169abf74fe5bc0edd8be4
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856232"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773757"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -269,6 +269,18 @@ Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/web
 ## <a name="web-root"></a>Webstammverzeichnis
 
 Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen statischen Ressourcen wie CSS, JavaScript und Bilddateien. Die Middleware für statische Dateien stellt standardmäßig nur Dateien aus dem Webstammverzeichnis (und Unterverzeichnissen) bereit. Der Pfad für den Webstamm ist standardmäßig auf *{Content Root}/wwwroot* festgelegt, beim [Erstellen des Hosts](#host) kann jedoch ein anderer Speicherort angegeben werden.
+
+::: moniker range=">= aspnetcore-3.0"
+
+Weitere Informationen finden Sie unter [ContentRootPath](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#contentrootpath).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Weitere Informationen finden Sie unter [Webstamm](/aspnet/core/fundamentals/host/web-host#webroot).
+
+::: moniker-end
 
 In Razor-Dateien ( *.cshtml*) zeigen die Tilde und der Schrägstrich `~/` auf den Webstamm. Pfade, die mit `~/` beginnen, werden als virtuelle Pfade bezeichnet.
 

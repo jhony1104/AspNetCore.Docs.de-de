@@ -5,14 +5,14 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/28/2019
+ms.date: 09/07/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 5035a31526e0290964e0fdee05753aeaf6cb3790
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 5da32b5fd1026263f721db442b2676d45b239b8d
+ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602438"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70815604"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -97,17 +97,7 @@ Die Middleware für die [Integration von IIS](xref:host-and-deploy/iis/index#ena
 
 ## <a name="monitoring-and-logging"></a>Überwachung und Protokollierung
 
-::: moniker range=">= aspnetcore-3.0"
-
-In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core Logging Integration** (ASP.NET Core-Protokollierungsintegration). Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core-Protokollierungserweiterungen**. Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
-
-::: moniker-end
+In Azure App Service ist eine **Protokollierungserweiterung für ASP.NET Core** enthalten, mit der die Protokollierungsintegration für ASP.NET Core-Apps ermöglicht wird. Sie können die Erweiterung automatisch zu einer App Service-App hinzufügen, indem Sie den Visual Studio-Prozess **Veröffentlichen** mit einem **App Service**-Veröffentlichungsprofil verwenden. Wenn Sie zur Bereitstellung einer App nicht Visual Studio verwenden, können Sie die Erweiterung im Azure-Portal manuell über das App Service-Dialogfeld **Entwicklungstools** > **Erweiterungen** installieren.
 
 In den folgenden Artikeln finden Sie Informationen zum Überwachen, Protokollieren und zur Problembehandlung:
 

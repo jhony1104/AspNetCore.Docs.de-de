@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über ASP.NET Core-Middleware und die Anforderung
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2019
+ms.date: 08/22/2019
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 89cd505810eefeeeb8f708ab82244bbd2e341f38
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 674e89cd22ce113474dfbba44b57d9255446fc3e
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308177"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773779"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -39,13 +39,13 @@ Jeder Delegat kann Vorgänge vor und nach dem nächsten Delegaten ausführen. Di
 
 Die einfachste mögliche ASP.NET Core-App enthält einen einzigen Anforderungsdelegaten, der alle Anforderungen verarbeitet. In diesem Fall ist keine tatsächliche Anforderungspipeline vorhanden. Stattdessen wird eine einzelne anonyme Funktion als Antwort auf jede HTTP-Anforderung aufgerufen.
 
-[!code-csharp[](index/snapshot/Middleware/Startup.cs?name=snippet1)]
+[!code-csharp[](index/snapshot/Middleware/Startup.cs)]
 
 Der erste <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run*>-Delegat beendet die Pipeline.
 
 Mit <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*> können Sie mehrere Anforderungedelegate miteinander verknüpfen. Der Parameter `next` steht für den nächsten Delegaten in der Pipeline. Sie können die Pipeline kurzschließen, indem Sie den Parameter *next* *nicht* aufrufen. Normalerweise können Sie Aktionen sowohl vor als auch nach dem nächsten Delegaten durchführen. Dies wird in folgendem Beispiel veranschaulicht:
 
-[!code-csharp[](index/snapshot/Chain/Startup.cs?name=snippet1)]
+[!code-csharp[](index/snapshot/Chain/Startup.cs)]
 
 Wenn ein keine Anforderung an den nächsten Delegaten übergibt, wird dies als *Kurzschluss der Anforderungspipeline* bezeichnet. Das Kurzschließen ist oft sinnvoll, da es unnötige Arbeit verhindert. Die [Middleware für statische Dateien](xref:fundamentals/static-files) kann beispielsweise als *Terminalmiddleware* fungieren, indem sie eine Anforderung für eine statische Datei zurückgibt und den Rest der Pipeline kurzschließt. Middleware, die noch vor der Middleware, die die weitere Verarbeitung beendet, zur Pipeline hinzugefügt wird, verarbeitet Code noch nach den `next.Invoke`-Anweisungen weiter. Sehen Sie sich allerdings die folgende Warnung zum Versuch an, in eine Antwort zu schreiben, die bereits gesendet wurde.
 
@@ -62,6 +62,82 @@ Wenn ein keine Anforderung an den nächsten Delegaten übergibt, wird dies als *
 Die Reihenfolge, in der Middlewarekomponenten in der `Startup.Configure`-Methode hinzugefügt werden, legt die Reihenfolge fest, in der die Middlewarekomponenten bei Anforderungen aufgerufen werden. Bei Antworten gilt die umgekehrte Reihenfolge. Die Reihenfolge trägt wesentlich zur Sicherheit, Leistung und Funktionalität bei.
 
 Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allgemeine App-Szenarien hinzu:
+
+::: moniker range=">= aspnetcore-3.0"
+
+1. Ausnahme-/Fehlerbehandlung
+   * Bei Ausführung der App in der Entwicklungsumgebung:
+     * Middleware der Seite mit Ausnahmen für Entwickler (<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>) meldet App-Laufzeitfehler.
+     * Middleware der Seite mit Datenbankfehlern (<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*>) meldet Datenbanklaufzeitfehler.
+   * Bei Ausführung der App in der Produktionsumgebung:
+     * Middleware für Ausnahmehandler (<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>) fängt Ausnahmen ab, die in den folgenden Middlewarekomponenten ausgelöst werden.
+     * HTTP Strict Transport Security Protocol-Middleware (HSTS) (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>) fügt den `Strict-Transport-Security`-Header hinzu.
+1. Middleware zur HTTPS-Umleitung (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) leitet HTTP-Anforderungen an HTTPS um.
+1. Middleware für statische Dateien (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>) gibt statische Dateien zurück und umgeht die weitere Anforderungsverarbeitung.
+1. Middleware für Cookierichtlinien (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*>) sorgt dafür, dass die App die Anforderungen der europäischen Datenschutzgrundverordnung (DSGVO) erfüllt.
+1. Routingmiddleware (`UseRouting`) zum Weiterleiten von Anforderungen.
+1. Middleware für die Authentifizierung (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>) versucht, den Benutzer zu authentifizieren, bevor der Zugriff auf sichere Ressourcen zugelassen wird.
+1. Autorisierungsmiddleware (`UseAuthorization`) wird zum Autorisieren des Zugriffs auf sichere Ressourcen eines Benutzers verwendet.
+1. Middleware für Sitzungen (<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession*>) richtet einen Sitzungsstatus ein und erhält diesen aufrecht. Wenn die App den Sitzungsstatus verwendet, rufen Sie die Middleware für Sitzungen nach der Middleware für Cookierichtlinien und vor der MVC-Middleware auf.
+1. Endpunktroutingmiddleware (`UseEndpoints` mit `MapRazorPages`) zum Hinzufügen von Razor Pages-Endpunkten zur Anforderungspipeline.
+
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseDatabaseErrorPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+    app.UseCookiePolicy();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+    app.UseSession();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapRazorPages();
+    });
+}
+```
+
+Im vorhergehenden Beispielcode wird jede Middleware-Erweiterungsmethode in <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> über den <xref:Microsoft.AspNetCore.Builder?displayProperty=fullName>-Namespace verfügbar gemacht.
+
+<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*> ist die erste Middlewarekomponente, die der Pipeline hinzugefügt wird. Aus diesem Grund fängt die Middleware für den Ausnahmehandler alle Ausnahmen ab, die in späteren Aufrufen auftreten.
+
+Die Middleware für statische Dateien wird am Anfang der Pipeline aufgerufen, damit sie Anforderungen und Kurzschlüsse verarbeiten kann, ohne dass die verbleibenden Komponenten durchlaufen werden müssen. Die Middleware für statische Dateien stellt **keine** Autorisierungsüberprüfungen bereit. Alle Dateien, die von Middleware für statische Dateien unterstützt werden, einschließlich der Dateien unter *wwwroot*, sind öffentlich verfügbar. Informationen zum Sichern statischer Dateien finden Sie unter <xref:fundamentals/static-files>.
+
+Wenn die Anforderung nicht von der Middleware für statische Dateien verarbeitet wird, wird sie an die Authentifizierungsmiddleware (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>) übergeben, welche die Authentifizierung durchführt. Die Authentifizierung schließt nicht authentifizierte Anforderungen nicht kurz. Auch wenn die Authentifizierungsmiddleware Anforderungen authentifiziert, erfolgt die Autorisierung (und Ablehnung) erst dann, wenn MVC eine spezifische Razor Page oder einen MVC-Controller und eine Aktion ausgewählt hat.
+
+Im folgenden Beispiel wird eine Middlewarereihenfolge veranschaulicht, bei der Anforderungen statischer Dateien von der Middleware für statische Dateien vor der Middleware für die Antwortkomprimierung verarbeitet werden. Die statischen Dateien werden bei dieser Middlewarereihenfolge nicht komprimiert. Die Razor Pages-Antworten können komprimiert werden.
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{
+    // Static files aren't compressed by Static File Middleware.
+    app.UseStaticFiles();
+
+    app.UseResponseCompression();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapRazorPages();
+    });
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 1. Ausnahme-/Fehlerbehandlung
    * Bei Ausführung der App in der Entwicklungsumgebung:
@@ -104,7 +180,7 @@ Im vorhergehenden Beispielcode wird jede Middleware-Erweiterungsmethode in <xref
 
 <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*> ist die erste Middlewarekomponente, die der Pipeline hinzugefügt wird. Aus diesem Grund fängt die Middleware für den Ausnahmehandler alle Ausnahmen ab, die in späteren Aufrufen auftreten.
 
-Die Middleware für statische Dateien wird am Anfang der Pipeline aufgerufen, damit sie Anforderungen und Kurzschlüsse verarbeiten kann, ohne dass die verbleibenden Komponenten durchlaufen werden müssen. Die Middleware für statische Dateien stellt **keine** Autorisierungsüberprüfungen bereit. Alle Dateien, die von ihr bearbeitet werden, Dateien unter *wwwroot* inbegriffen, sind öffentlich verfügbar. Informationen zum Sichern statischer Dateien finden Sie unter <xref:fundamentals/static-files>.
+Die Middleware für statische Dateien wird am Anfang der Pipeline aufgerufen, damit sie Anforderungen und Kurzschlüsse verarbeiten kann, ohne dass die verbleibenden Komponenten durchlaufen werden müssen. Die Middleware für statische Dateien stellt **keine** Autorisierungsüberprüfungen bereit. Alle Dateien, die von Middleware für statische Dateien unterstützt werden, einschließlich der Dateien unter *wwwroot*, sind öffentlich verfügbar. Informationen zum Sichern statischer Dateien finden Sie unter <xref:fundamentals/static-files>.
 
 Wenn die Anforderung nicht von der Middleware für statische Dateien verarbeitet wird, wird sie an die Authentifizierungsmiddleware (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>) übergeben, welche die Authentifizierung durchführt. Die Authentifizierung schließt nicht authentifizierte Anforderungen nicht kurz. Auch wenn die Authentifizierungsmiddleware Anforderungen authentifiziert, erfolgt die Autorisierung (und Ablehnung) erst dann, wenn MVC eine spezifische Razor Page oder einen MVC-Controller und eine Aktion ausgewählt hat.
 
@@ -113,12 +189,16 @@ Im folgenden Beispiel wird eine Middlewarereihenfolge veranschaulicht, bei der A
 ```csharp
 public void Configure(IApplicationBuilder app)
 {
-    // Static files not compressed by Static File Middleware.
+    // Static files aren't compressed by Static File Middleware.
     app.UseStaticFiles();
+
     app.UseResponseCompression();
+
     app.UseMvcWithDefaultRoute();
 }
 ```
+
+::: moniker-end
 
 ## <a name="use-run-and-map"></a>Use, Run und Map
 
@@ -126,7 +206,7 @@ Konfigurieren Sie die HTTP-Pipeline mit <xref:Microsoft.AspNetCore.Builder.UseEx
 
 <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map*>-Erweiterungen werden als Konvention zum Branchen der Pipeline verwendet. `Map` brancht die Anforderungspipeline auf Grundlage von Übereinstimmungen des angegebenen Anforderungspfads. Wenn der Anforderungspfad mit dem angegebenen Pfad beginnt, wird der Branch ausgeführt.
 
-[!code-csharp[](index/snapshot/Chain/StartupMap.cs?name=snippet1)]
+[!code-csharp[](index/snapshot/Chain/StartupMap.cs)]
 
 In der folgenden Tabelle sind die Anforderungen und Antworten von `http://localhost:1234` mit dem oben stehenden Code aufgelistet.
 
@@ -141,7 +221,7 @@ Bei Verwendung von `Map` werden die übereinstimmenden Pfadsegmente aus `HttpReq
 
 <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> brancht die Anforderungspipeline auf Grundlage des Ergebnisses des angegebenen Prädikats. Jedes Prädikat vom Typ `Func<HttpContext, bool>` kann verwendet werden, um Anforderungen einem neuen Branch der Pipeline zuzuordnen. Im folgenden Beispiel wird ein Prädikat verwendet, um das Vorhandensein der Abfragezeichenfolgenvariablen `branch` zu ermitteln:
 
-[!code-csharp[](index/snapshot/Chain/StartupMapWhen.cs?name=snippet1)]
+[!code-csharp[](index/snapshot/Chain/StartupMapWhen.cs)]
 
 In der folgenden Tabelle sind die Anforderungen und Antworten von `http://localhost:1234` mit dem oben stehenden Code aufgelistet.
 
@@ -161,11 +241,11 @@ app.Map("/level1", level1App => {
         // "/level1/level2b" processing
     });
 });
-   ```
+```
 
 `Map` kann auch mehrere Segmente auf einmal zuordnen:
 
-[!code-csharp[](index/snapshot/Chain/StartupMultiSeg.cs?name=snippet1&highlight=13)]
+[!code-csharp[](index/snapshot/Chain/StartupMultiSeg.cs?highlight=13)]
 
 ## <a name="built-in-middleware"></a>Integrierte Middleware
 
@@ -176,7 +256,7 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Authentifizierung](xref:security/authentication/identity) | Bietet Unterstützung für Authentifizierungen. | Bevor `HttpContext.User` erforderlich ist. Terminal für OAuth-Rückrufe. |
 | [Cookierichtlinie](xref:security/gdpr) | Verfolgt die Zustimmung von Benutzern zum Speichern persönlicher Informationen nach und erzwingt die Mindeststandards für Cookiefelder, z.B. `secure` und `SameSite`. | Befindet sich vor der Middleware, die Cookies ausstellt. Beispiele: Authentifizierung, Sitzung, MVC (TempData). |
 | [CORS](xref:security/cors) | Konfiguriert die Ressourcenfreigabe zwischen verschiedenen Ursprüngen (Cross-Origin Resource Sharing, CORS). | Vor Komponenten, die CORS verwenden. |
-| [Ausnahmebehandlung](xref:fundamentals/error-handling) | Behandelt Ausnahmen. | Vor Komponenten, die Fehler erzeugen. |
+| [Diagnose](xref:fundamentals/error-handling) | Mehrere separate Middlewares, die Entwicklern eine Ausnahmeseite, Ausnahmebehandlung, Statuscodeseiten und die Standardwebseite für neue Apps bereitstellen. | Vor Komponenten, die Fehler erzeugen. Terminal für Ausnahmen oder zum Bereitstellen der Standardwebseite für neue Apps. |
 | [Weitergeleitete Header](xref:host-and-deploy/proxy-load-balancer) | Leitet Proxyheader an die aktuelle Anforderung weiter. | Vor Komponenten, die die aktualisierten Felder nutzen. Beispiele: Schema, Host, Client-IP, Methode. |
 | [Integritätsprüfung](xref:host-and-deploy/health-checks) | Überprüft die Integrität der ASP.NET Core-App und ihrer Abhängigkeiten, z. B. Überprüfung der Datenbankverfügbarkeit. | Abschließend, wenn eine Anforderung mit einem Integritätsprüfungs-Endpunkt übereinstimmt. |
 | [Außerkraftsetzung der HTTP-Methode](xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions) | Ermöglicht es eingehenden POST-Anforderungen, die Methode außer Kraft zu setzen. | Vor Komponenten, die die aktualisierte Methode nutzen. |
@@ -187,10 +267,10 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Zwischenspeichern von Antworten](xref:performance/caching/middleware) | Bietet Unterstützung für das Zwischenspeichern von Antworten. | Vor Komponenten, für die das Zwischenspeichern erforderlich ist. |
 | [Antwortkomprimierung](xref:performance/response-compression) | Bietet Unterstützung für das Komprimieren von Antworten. | Vor Komponenten, für die das Komprimieren erforderlich ist. |
 | [Lokalisierung von Anforderungen](xref:fundamentals/localization) | Bietet Unterstützung für die Lokalisierung. | Vor der Lokalisierung vertraulicher Komponenten. |
-| [Routing](xref:fundamentals/routing) | Definiert Anforderungsrouten und schränkt diese ein. | Terminal für entsprechende Routen. |
+| [Endpunktrouting](xref:fundamentals/routing) | Definiert Anforderungsrouten und schränkt diese ein. | Terminal für entsprechende Routen. |
 | [Sitzung](xref:fundamentals/app-state) | Bietet Unterstützung für das Verwalten von Benutzersitzungen. | Vor Komponenten, für die Sitzungen erforderlich sind. |
 | [Statische Dateien](xref:fundamentals/static-files) | Bietet Unterstützung für das Verarbeiten statischer Dateien und das Durchsuchen des Verzeichnisses. | Abschließend, wenn eine Anforderung mit einer Datei übereinstimmt. |
-| [URL-Umschreibung](xref:fundamentals/url-rewriting) | Bietet Unterstützung für das Umschreiben von URLs und das Umleiten von Anforderungen. | Vor Komponenten, die die URL nutzen. |
+| [URL Rewrite](xref:fundamentals/url-rewriting) | Bietet Unterstützung für das Umschreiben von URLs und das Umleiten von Anforderungen. | Vor Komponenten, die die URL nutzen. |
 | [WebSockets](xref:fundamentals/websockets) | Aktiviert das WebSockets-Protokoll. | Vor Komponenten, die WebSocket-Anforderungen annehmen müssen. |
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
