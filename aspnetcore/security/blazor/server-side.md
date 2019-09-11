@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Sicherheitsbedrohungen für serverseitige bla
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/07/2019
 uid: security/blazor/server-side
-ms.openlocfilehash: 13bb4475b4beac78cf489d83fb59a3e0d6d8f2d9
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: d30f19bfbbcdb6c142f03a6e0cc6e1fc154c2091
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800492"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878528"
 ---
 # <a name="secure-aspnet-core-blazor-server-side-apps"></a>Sichere ASP.net Core blazor-serverseitige apps
 
@@ -115,7 +115,7 @@ Ein Client interagiert mit dem Server über die JS-Interop-Ereignis Verteilung u
 Für Aufrufe von .NET-Methoden an JavaScript:
 
 * Alle Aufrufe haben einen konfigurierbaren Timeout, nach dem Sie fehlschlagen, <xref:System.OperationCanceledException> und geben einen an den Aufrufer zurück.
-  * Es gibt ein Standard Timeout für die Aufrufe (`CircuitOptions.JSInteropDefaultCallTimeout`) von einer Minute.
+  * Es gibt ein Standard Timeout für die Aufrufe (`CircuitOptions.JSInteropDefaultCallTimeout`) von einer Minute. Informationen zum Konfigurieren dieses Limits finden <xref:blazor/javascript-interop#harden-js-interop-calls>Sie unter.
   * Es kann ein Abbruch Token bereitgestellt werden, um den Abbruch pro Abruf zu steuern. Verlassen Sie sich nach Möglichkeit auf das standardmäßige Aufruf Timeout und einen zeitgebundenen Aufruf an den Client, wenn ein Abbruch Token bereitgestellt wird.
 * Das Ergebnis eines JavaScript-Aufrufes kann nicht vertrauenswürdig sein. Der blazor-App-Client, der im Browser ausgeführt wird, sucht die JavaScript-Funktion, die aufgerufen wird. Die-Funktion wird aufgerufen, und entweder wird das Ergebnis oder ein Fehler erzeugt. Ein böswilliger Client kann versuchen, Folgendes zu tun:
   * Ein Problem in der APP wird verursacht, indem ein Fehler von der JavaScript-Funktion zurückgegeben wird.
@@ -200,6 +200,72 @@ Ein Client kann ein oder mehrere Inkrement-Ereignisse verteilen, bevor das Frame
 ```
 
 Durch Hinzufügen `if (count < 3) { ... }` der Überprüfung innerhalb des Handlers basiert die Entscheidung `count` für die Inkrement auf dem aktuellen App-Zustand. Die Entscheidung basiert nicht auf dem Status der Benutzeroberfläche, wie es im vorherigen Beispiel der Fall war, das möglicherweise vorübergehend veraltet ist.
+
+### <a name="guard-against-multiple-dispatches"></a>Schutz vor mehreren sendet
+
+Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit aufruft, z. b. das Abrufen von Daten aus einem externen Dienst oder einer externen Datenbank, empfiehlt sich die Verwendung eines Schutzes. Der Wächter kann verhindern, dass der Benutzer mehrere Vorgänge in die Warteschlange eingereiht, während der Vorgang durch visuelles Feedback ausgeführt wird. Mit dem folgenden Komponenten Code `isLoading` wird `true` auf `GetForecastAsync` festgelegt, während Daten vom Server abgerufen werden. Wenn `isLoading` gleich `true`ist, wird die Schaltfläche in der Benutzeroberfläche deaktiviert:
+
+```cshtml
+@page "/fetchdata"
+@using BlazorServerSample.Data
+@inject WeatherForecastService ForecastService
+
+<button disabled="@isLoading" @onclick="UpdateForecasts">Update</button>
+
+@code {
+    private bool isLoading;
+    private WeatherForecast[] forecasts;
+
+    private async Task UpdateForecasts()
+    {
+        if (!isLoading)
+        {
+            isLoading = true;
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+            isLoading = false;
+        }
+    }
+}
+```
+
+### <a name="cancel-early-and-avoid-use-after-dispose"></a>Früh abbrechen und Verwendung nach dem verwerfen vermeiden
+
+Zusätzlich zur Verwendung eines Wächter, wie im Abschnitt [Schutz vor mehreren](#guard-against-multiple-dispatches) Verteilungen beschrieben, empfiehlt es sich, <xref:System.Threading.CancellationToken> mithilfe von einen Vorgang mit langer Ausführungszeit abzubrechen, wenn die Komponente verworfen wird. Dieser Ansatz bietet den zusätzlichen Vorteil, dass die Verwendung von " *Use-After-* verwerfen" in Komponenten vermieden wird:
+
+```cshtml
+@implements IDisposable
+
+...
+
+@code {
+    private readonly CancellationTokenSource TokenSource = 
+        new CancellationTokenSource();
+
+    private async Task UpdateForecasts()
+    {
+        ...
+
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now, 
+            TokenSource.Token);
+
+        if (TokenSource.Token.IsCancellationRequested)
+        {
+           return;
+        }
+
+        ...
+    }
+
+    public void Dispose()
+    {
+        CancellationTokenSource.Cancel();
+    }
+}
+```
+
+### <a name="avoid-events-that-produce-large-amounts-of-data"></a>Vermeiden von Ereignissen, die große Datenmengen verursachen
+
+Einige DOM-Ereignisse, wie `oninput` z `onscroll`. b. oder, können eine große Datenmenge verursachen. Vermeiden Sie die Verwendung dieser Ereignisse in blazor-Server-apps.
 
 ## <a name="additional-security-guidance"></a>Zusätzliche Sicherheits Leit Fäden
 
@@ -330,6 +396,9 @@ Die folgende Liste mit Sicherheitsüberlegungen ist nicht umfassend:
 * Verhindern, dass der Client eine nicht gebundene Arbeitsspeicher Menge zuordnet.
   * Daten innerhalb der Komponente.
   * `DotNetObject`Verweise, die an den Client zurückgegeben werden.
+* Schutz vor mehreren Dispatches.
+* Abbrechen von Vorgängen mit langer Ausführungszeit, wenn die Komponente verworfen wird.
+* Vermeiden Sie Ereignisse, die große Datenmengen verursachen.
 * Vermeiden Sie die Verwendung von Benutzereingaben als Teil `NavigationManager.Navigate` von Aufrufen von, und überprüfen Sie Benutzereingaben für URLs mit einem Satz zulässiger Ursprünge zuerst, wenn dies unvermeidlich ist.
 * Treffen Sie keine Autorisierungs Entscheidungen auf Grundlage des Status der Benutzeroberfläche, sondern nur aus dem Komponenten Zustand.
 * Verwenden Sie die [Inhalts Sicherheitsrichtlinie (Content Security Policy, CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) zum Schutz vor XSS-Angriffen.

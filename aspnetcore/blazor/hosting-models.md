@@ -5,14 +5,14 @@ description: Grundlegendes zu Client seitigen und serverseitigen edzor-Hostingmo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/07/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: f7a16d64e1f874a4f6b3c8db5217810b13c7c6ff
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 7880affa59af1fa4fc47aee3dc98ae9aa53729af
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800426"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878346"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
@@ -83,24 +83,68 @@ Es gibt Nachteile zum serverseitigen Hosting:
 
 &dagger;Das Skript " *blazor. Server. js* " wird von einer eingebetteten Ressource in der ASP.net Core freigegebenen Framework bereitgestellt.
 
+### <a name="comparison-to-server-rendered-ui"></a>Vergleich mit der Server gerenderten Benutzeroberfläche
+
+Eine Möglichkeit zum verstehen von blazor-Server-apps besteht darin, zu verstehen, wie Sie sich von herkömmlichen Modellen für das Rendern von Benutzeroberflächen in ASP.net Core Apps mithilfe von Razor-Ansichten Razor Pages oder Beide Modelle verwenden die Razor-Sprache, um HTML-Inhalte zu beschreiben. Sie unterscheiden sich jedoch deutlich von der Darstellung von Markup.
+
+Wenn eine Razor Page oder eine Ansicht gerendert wird, gibt jede Zeile von Razor-Code HTML-Code in Textform aus. Nach dem Rendering verwirft der Server die Seiten-oder Sicht Instanz, einschließlich eines beliebigen Zustands, der erstellt wurde. Wenn eine andere Anforderung für die Seite auftritt, z. b. wenn die Server Validierung fehlschlägt und die Validierungs Zusammenfassung angezeigt wird:
+
+* Die gesamte Seite wird erneut in HTML-Text umgeleitet.
+* Die Seite wird an den Client gesendet.
+
+Eine blazor-App besteht aus wiederverwendbaren Elementen der UI, die als *Komponenten*bezeichnet werden. Eine Komponente enthält C# Code, Markup und andere Komponenten. Wenn eine Komponente gerendert wird, erzeugt blazor ein Diagramm der enthaltenen Komponenten, ähnlich wie ein HTML-oder XML-Dokumentobjektmodell (DOM). Dieses Diagramm enthält den Komponenten Zustand in Eigenschaften und Feldern. Blazor wertet das Komponenten Diagramm aus, sodass eine binäre Darstellung des Markups erzeugt wird. Das binäre Format kann wie folgt lauten:
+
+* Wird in HTML-Text (während der vorab Generierung) umgewandelt.
+* Wird verwendet, um das Markup beim regulären Rendering effizient zu aktualisieren.
+
+Ein Benutzeroberflächen Update in blazor wird durch Folgendes ausgelöst:
+
+* Benutzerinteraktion, z. b. das Auswählen einer Schaltfläche.
+* App-Trigger, z. b. ein Timer.
+
+Das Diagramm wird erneut ausgeführt, und es wird ein UI- *diff* (Differenz) berechnet. Dieser Unterschied ist der kleinste Satz an DOM-Änderungen, die erforderlich sind, um die Benutzeroberfläche auf dem Client zu aktualisieren. Der diff wird in einem binären Format an den Client gesendet und vom Browser angewendet.
+
+Eine Komponente wird verworfen, nachdem der Benutzer auf dem Client dorthin navigiert ist. Während ein Benutzer mit einer Komponente interagiert, muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da der Status vieler Komponenten möglicherweise gleichzeitig vom Server verwaltet wird, ist die Arbeitsspeicher Erschöpfung ein Problem, das behoben werden muss. Anleitungen zum Erstellen einer blazor-Server-APP, um die optimale Verwendung des Server Arbeitsspeichers sicherzustellen <xref:security/blazor/server-side>, finden Sie unter.
+
+### <a name="circuits"></a>Fen
+
+Eine blazor-Server-APP wird zusätzlich zu [ASP.net Core signalr](xref:signalr/introduction)erstellt. Jeder Client kommuniziert *über eine oder*mehrere signalr-Verbindungen, die als Verbindung bezeichnet werden, mit dem Server. Eine Verbindung ist die Abstraktion von blazor über signalr-Verbindungen, die temporäre Netzwerkunterbrechungen tolerieren können. Wenn ein blazor-Client feststellt, dass die signalr-Verbindung getrennt ist, versucht er, eine Verbindung mit dem Server mithilfe einer neuen signalr-Verbindung herzustellen.
+
+Jeder Browser Bildschirm (Browser Registerkarte oder IFRAME), der mit einer blazor-Server-App verbunden ist, verwendet eine signalr-Verbindung. Dies ist jedoch ein weiterer wichtiger Unterschied im Vergleich zu typischen, von Servern gerenderten apps. In einer Server gerenderten APP wird das Öffnen derselben app in mehreren Browser Bildschirmen in der Regel nicht zu zusätzlichen Ressourcenanforderungen auf dem Server übertragen. In einer blazor-Server-App erfordert jeder Browser Bildschirm eine separate Verbindung und separate Instanzen des Komponenten Zustands, die vom Server verwaltet werden.
+
+Blazor betrachtet das Schließen einer Browser Registerkarte oder das Navigieren zu einer externen URL zu einer Ordnungs *gemäßen Beendigung.* Im Fall einer ordnungsgemäßen Beendigung werden die Verbindung und zugehörige Ressourcen sofort freigegeben. Ein Client kann möglicherweise auch nicht ordnungsgemäß getrennt werden, beispielsweise aufgrund einer Netzwerk Unterbrechung. Der blazor-Server speichert getrennte Verbindungen für ein konfigurierbares Intervall, damit der Client die Verbindung wiederherstellen kann. Weitere Informationen finden Sie im Abschnitt [Wiederherstellen der Verbindung mit dem gleichen Server](#reconnection-to-the-same-server) .
+
+### <a name="ui-latency"></a>UI-Latenz
+
+Die Benutzeroberflächen Latenz ist die Zeit, die Sie von einer initiierten Aktion bis zum Zeitpunkt der Aktualisierung der Benutzeroberfläche benötigt. Kleinere Werte für die Benutzeroberflächen Latenz sind zwingend erforderlich, damit eine APP für einen Benutzer reaktionsfähig ist. In einer blazor-Server-APP wird jede Aktion an den Server gesendet, verarbeitet und ein UI-diff zurückgesendet. Folglich ist die Benutzeroberflächen Latenz die Summe der Netzwerk Latenz und der Server Latenz bei der Verarbeitung der Aktion.
+
+Für eine Branchen-APP, die auf ein privates Unternehmensnetzwerk beschränkt ist, sind die Auswirkungen auf die Benutzer Wahrnehmung von Latenzzeit aufgrund der Netzwerk Latenz in der Regel nicht wahrnehmbar. Für eine APP, die über das Internet bereitgestellt wird, kann die Latenz für Benutzer bemerkbar werden, insbesondere, wenn die Benutzer weitgehend geografisch verteilt sind.
+
+Die Speicherauslastung kann auch zur APP-Latenz beitragen. Eine erhöhte Arbeitsspeicher Auslastung führt zu häufigen Garbage Collection-oder Paging-Speicher auf den Datenträger, die beide die Leistung der APP beeinträchtigen und somit die Benutzeroberflächen Latenz erhöhen. Weitere Informationen finden Sie unter <xref:security/blazor/server-side>.
+
+Blazor-Server-apps sollten optimiert werden, um die Benutzeroberflächen Latenz zu minimieren, indem Netzwerk Latenz und Speicherauslastung reduziert werden Einen Ansatz zum Messen der Netzwerk Latenz finden <xref:host-and-deploy/blazor/server-side#measure-network-latency>Sie unter. Weitere Informationen zu signalr und blazor finden Sie unter:
+
+* <xref:host-and-deploy/blazor/server-side>
+* <xref:security/blazor/server-side>
+
 ### <a name="reconnection-to-the-same-server"></a>Erneute Verbindung mit demselben Server
 
 Serverseitige blazor-apps erfordern eine aktive signalr-Verbindung mit dem Server. Wenn die Verbindung unterbrochen wird, versucht die APP, erneut eine Verbindung mit dem Server herzustellen. Solange sich der Status des Clients weiterhin im Arbeitsspeicher befindet, wird die Client Sitzung fortgesetzt, ohne den Zustand zu verlieren.
- 
+
 Wenn der Client erkennt, dass die Verbindung unterbrochen wurde, wird dem Benutzer eine Standardbenutzer Oberfläche angezeigt, während der Client versucht, die Verbindung wiederherzustellen. Wenn bei der erneuten Verbindungs Herstellung ein Fehler auftritt, wird dem Benutzer die Option zum erneuten versuchen bereitgestellt. Definieren Sie zum Anpassen der Benutzeroberfläche ein Element `components-reconnect-modal` mit als `id` dessen auf der Razor Page *_Host. cshtml* . Der Client aktualisiert dieses Element mit einer der folgenden CSS-Klassen basierend auf dem Status der Verbindung:
- 
+
 * `components-reconnect-show`&ndash; Zeigen Sie die Benutzeroberfläche an, um anzugeben, dass die Verbindung unterbrochen wurde und der Client versucht, die Verbindung wiederherzustellen.
 * `components-reconnect-hide`&ndash; Der Client verfügt über eine aktive Verbindung, die die Benutzeroberfläche ausblenden.
 * `components-reconnect-failed`&ndash; Fehler beim erneuten Herstellen der Verbindung. Um erneut eine erneute Verbindung herzustellen, `window.Blazor.reconnect()`wird aufgerufen.
 
 ### <a name="stateful-reconnection-after-prerendering"></a>Zustands behaftete erneute Verbindung nach der vorab Ausführung
- 
+
 Serverseitige blazor-apps werden standardmäßig so eingerichtet, dass Sie die Benutzeroberfläche auf dem Server vorab ausführen, bevor die Client Verbindung mit dem Server hergestellt wird. Dies wird auf der Razor page " *_Host. cshtml* " eingerichtet:
- 
+
 ```cshtml
 <body>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
- 
+
     <script src="_framework/blazor.server.js"></script>
 </body>
 ```
@@ -117,11 +161,11 @@ Serverseitige blazor-apps werden standardmäßig so eingerichtet, dass Sie die B
 | `Static`            | Rendert die Komponente in statischem HTML-Format. Parameter werden unterstützt. |
 
 Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
- 
+
 Der Client stellt erneut eine Verbindung mit dem Server mit dem gleichen Zustand her, der für die Vorabversion der APP verwendet wurde. Wenn sich der Status der APP weiterhin im Arbeitsspeicher befindet, wird der Komponenten Status nach dem Herstellen der signalr-Verbindung nicht erneut umgeleitet.
 
 ### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Zustands behaftete interaktive Komponenten von Razor Pages und Ansichten
- 
+
 Zustands behaftete interaktive Komponenten können einer Razor Page oder Ansicht hinzugefügt werden.
 
 Wenn die Seite oder Ansicht gerendert wird:
@@ -129,19 +173,19 @@ Wenn die Seite oder Ansicht gerendert wird:
 * Die Komponente wird mit der Seite oder der Ansicht vorab überstehen.
 * Der anfängliche Komponenten Zustand, der für die vorab Generierung verwendet wird, geht verloren.
 * Der neue Komponenten Status wird erstellt, wenn die signalr-Verbindung hergestellt wird.
- 
+
 Die folgende Razor Page rendert `Counter` eine Komponente:
 
 ```cshtml
 <h1>My Razor Page</h1>
- 
+
 @(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
 ```
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Nicht interaktive Komponenten von Razor Pages und Ansichten
 
 Auf der folgenden Razor Page wird die `MyComponent` Komponente statisch mit einem Anfangswert gerendert, der mit einem-Format angegeben wird:
- 
+
 ```cshtml
 <h1>My Razor Page</h1>
 
@@ -149,10 +193,10 @@ Auf der folgenden Razor Page wird die `MyComponent` Komponente statisch mit eine
     <input type="number" asp-for="InitialValue" />
     <button type="submit">Set initial value</button>
 </form>
- 
+
 @(await Html.RenderComponentAsync<MyComponent>(RenderMode.Static, 
     new { InitialValue = InitialValue }))
- 
+
 @code {
     [BindProperty(SupportsGet=true)]
     public int InitialValue { get; set; }
@@ -162,18 +206,18 @@ Auf der folgenden Razor Page wird die `MyComponent` Komponente statisch mit eine
 Da `MyComponent` statisch gerendert wird, kann die Komponente nicht interaktiv sein.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>Erkennen, wenn die APP vorab durchgeführt wird
- 
+
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
 ### <a name="configure-the-signalr-client-for-blazor-server-side-apps"></a>Konfigurieren des signalr-Clients für serverseitige blazor-apps
- 
+
 Manchmal müssen Sie den signalr-Client konfigurieren, der von serverseitigen blazor-Apps verwendet wird. Beispielsweise können Sie die Protokollierung auf dem signalr-Client konfigurieren, um ein Verbindungsproblem zu diagnostizieren.
- 
+
 So konfigurieren Sie den signalr-Client in der Datei *pages/_Host. cshtml* :
 
 * Fügen Sie `autostart="false"` dem `<script>` -Tag für das Skript " *blazor. Server. js* " ein Attribut hinzu.
 * Ruft `Blazor.start` auf und übergibt ein Konfigurationsobjekt, das den signalr-Generator angibt.
- 
+
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
 <script>

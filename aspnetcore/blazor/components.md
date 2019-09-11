@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/components
-ms.openlocfilehash: e877abfb568f71046c3603cac5e888e99ffc8d15
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: dbd0879d200061151e8307346adef784967bf123
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800424"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878396"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -1466,3 +1466,7 @@ Ebenso werden SVG-Images in den CSS-Regeln einer Stylesheet-Datei (*CSS*) unters
 ```
 
 Inline-SVG-Markup wird jedoch nicht in allen Szenarien unterstützt. Wenn Sie ein `<svg>` Tag direkt in eine Komponenten Datei (*Razor*) platzieren, wird das grundlegende Image Rendering unterstützt, aber viele erweiterte Szenarien werden noch nicht unterstützt. Beispielsweise `<use>` werden Tags derzeit nicht beachtet und können `@bind` nicht mit einigen SVG-Tags verwendet werden. Wir gehen davon aus, dass diese Einschränkungen in einer zukünftigen Version behandelt werden.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* <xref:security/blazor/server-side>&ndash; Enthält Anleitungen zum Entwickeln von serverseitigen blazor-apps, die mit der Ressourcenauslastung zu kämpfen haben müssen.
