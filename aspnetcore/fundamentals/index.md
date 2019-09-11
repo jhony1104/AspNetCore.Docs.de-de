@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/02/2019
+ms.date: 09/06/2019
 uid: fundamentals/index
-ms.openlocfilehash: 7e2901919c8b0165d0f169abf74fe5bc0edd8be4
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: cff2afd62ed60648dc689d408dde56ecda18c261
+ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773757"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70815652"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -272,7 +272,7 @@ Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen sta
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Weitere Informationen finden Sie unter [ContentRootPath](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#contentrootpath).
+Weitere Informationen finden Sie unter [WebRoot](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#webroot).
 
 ::: moniker-end
 
