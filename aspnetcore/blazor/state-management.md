@@ -1,24 +1,24 @@
 ---
 title: ASP.net Core blazor-Zustands Verwaltung
 author: guardrex
-description: Erfahren Sie, wie Sie den Status in serverseitigen blazor-apps beibehalten.
+description: Erfahren Sie, wie Sie den Status in blazor-Server-apps beibehalten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: blazor/state-management
-ms.openlocfilehash: 000736dde53670d1df76f41cc7cf4f95ef48800a
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: e1c3b030f466a820d49c36839d7ee26bb7cea4d3
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800352"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963851"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.net Core blazor-Zustands Verwaltung
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Blazor serverseitig ist ein Zustands behaftetes App-Framework. In den meisten Fällen behält die APP eine laufende Verbindung mit dem Server bei. Der Benutzer Zustand wird im Speicher des Servers *in einer Verbindung*gespeichert. 
+Der blazor-Server ist ein Zustands behaftetes App-Framework. In den meisten Fällen behält die APP eine laufende Verbindung mit dem Server bei. Der Benutzer Zustand wird im Speicher des Servers *in einer Verbindung*gespeichert. 
 
 Beispiele für den Zustand einer Benutzer Verbindung sind:
 
@@ -27,7 +27,7 @@ Beispiele für den Zustand einer Benutzer Verbindung sind:
 * In [Abhängigkeitsinjektion (di)](xref:fundamentals/dependency-injection) -Dienst Instanzen gehaltene Daten, die auf die Verbindung beschränkt sind.
 
 > [!NOTE]
-> In diesem Artikel wird die Zustands Persistenz in serverseitigen blazor-apps behandelt. Client seitige blazor-Apps können die [Client seitige Zustands Persistenz im Browser](#client-side-in-the-browser) nutzen, erfordern jedoch benutzerdefinierte Lösungen oder Drittanbieter Pakete, die den Rahmen dieses Artikels sprengen.
+> In diesem Artikel wird die Zustands Persistenz in blazor Server-apps behandelt. Blazor Webassembly-Apps können die [Client seitige Zustands Persistenz im Browser](#client-side-in-the-browser) nutzen, erfordern jedoch benutzerdefinierte Lösungen oder Drittanbieter Pakete, die den Rahmen dieses Artikels sprengen.
 
 ## <a name="blazor-circuits"></a>Blazor-Verbindungen
 
@@ -62,7 +62,7 @@ Es ist in der Regel nicht notwendig, den einfach neu erstellten Zustand beizubeh
 
 ## <a name="where-to-persist-state"></a>Speicherort des Zustands
 
-Es gibt drei allgemeine Speicherorte für die Beibehaltung des Zustands in einer serverseitigen blazor-app. Jeder Ansatz eignet sich am besten für verschiedene Szenarien und hat unterschiedliche Einschränkungen:
+Es gibt drei allgemeine Speicherorte für die Beibehaltung des Zustands in einer blazor-Server-app. Jeder Ansatz eignet sich am besten für verschiedene Szenarien und hat unterschiedliche Einschränkungen:
 
 * [Server seitig in einer Datenbank](#server-side-in-a-database)
 * [URL](#url)
@@ -100,7 +100,7 @@ Weitere Informationen zum Definieren von URL-Mustern `@page` mit der- <xref:blaz
 Bei vorübergehenden Daten, die der Benutzer aktiv erstellt, sind die Browser-und `localStorage` `sessionStorage` -Auflistungen ein gängiger Sicherungs Speicher. Die APP muss den gespeicherten Zustand nicht verwalten oder löschen, wenn die Verbindung abgebrochen wird. Dies ist ein Vorteil gegenüber Server seitigem Speicher.
 
 > [!NOTE]
-> "Client seitig" bezieht sich in diesem Abschnitt auf Client seitige Szenarios im Browser, nicht auf das [Client seitige blazor-Hostingmodell](xref:blazor/hosting-models#client-side). `localStorage`und `sessionStorage` können in Client seitigen blazor-Apps verwendet werden, jedoch nur durch das Schreiben von benutzerdefiniertem Code oder das Verwenden eines Drittanbieter Pakets.
+> "Client seitig" bezieht sich in diesem Abschnitt auf Client seitige Szenarios im Browser, nicht auf das [blizor-webassemblyhostingmodell](xref:blazor/hosting-models#blazor-webassembly). `localStorage`und `sessionStorage` können in blazor Webassembly-Apps verwendet werden, jedoch nur durch das Schreiben von benutzerdefiniertem Code oder das Verwenden eines Drittanbieter Pakets.
 
 `localStorage`und `sessionStorage` unterscheiden sich wie folgt:
 
@@ -118,7 +118,7 @@ Einschränkungen für die Verwendung von Browser Speicher:
 
 * Ähnlich wie bei der Verwendung einer serverseitigen Datenbank sind das Laden und Speichern von Daten asynchron.
 * Im Gegensatz zu einer serverseitigen Datenbank ist der Speicher während der vorab Ausführung nicht verfügbar, da die angeforderte Seite im Browser während der vorab Erstellungsphase nicht vorhanden ist.
-* Die Speicherung von einigen Kilobyte an Daten kann für serverseitige blazor-apps dauerhaft gespeichert werden. Über einige Kilobytes hinaus müssen Sie die Auswirkungen auf die Leistung in Erwägung gezogen, da die Daten im Netzwerk geladen und gespeichert werden.
+* Die Speicherung von einigen Kilobyte an Daten kann für blazor-Server-apps dauerhaft gespeichert werden. Über einige Kilobytes hinaus müssen Sie die Auswirkungen auf die Leistung in Erwägung gezogen, da die Daten im Netzwerk geladen und gespeichert werden.
 * Benutzer können die Daten anzeigen oder manipulieren. ASP.net Core [Datenschutz](xref:security/data-protection/introduction) kann das Risiko mindern.
 
 ## <a name="third-party-browser-storage-solutions"></a>Browser Speicherlösungen von Drittanbietern
@@ -138,7 +138,7 @@ Ein Beispiel für ein nuget-Paket, [das Datenschutz](xref:security/data-protecti
 
 So installieren Sie `Microsoft.AspNetCore.ProtectedBrowserStorage` das Paket:
 
-1. Fügen Sie im serverseitigen blazor-App-Projekt einen Paket Verweis auf [Microsoft. aspnetcore. protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)hinzu.
+1. Fügen Sie im Projekt der blazor-Server-APP einen Paket Verweis auf [Microsoft. aspnetcore. protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)hinzu.
 1. Fügen Sie im HTML-Code der obersten Ebene (z. b. in der Datei *pages/_Host. cshtml* in der Standard Projektvorlage) `<script>` das folgende-Tag hinzu:
 
    ```html

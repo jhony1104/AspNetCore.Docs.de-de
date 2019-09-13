@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/routing
-ms.openlocfilehash: d348908261c51b477aa698a407266d05c0df5a33
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 1c61eedf7dbf0bbc8796eaa11360783b9d7aba6c
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800342"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963874"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
 
@@ -22,7 +22,7 @@ Erfahren Sie, wie Sie Anforderungen weiterleiten und wie `NavLink` Sie die-Kompo
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.net Core Endpunkt-Routing Integration
 
-Der serverseitige blazor ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für `MapBlazorHub` interaktive `Startup.Configure`Komponenten mit in akzeptiert werden:
+Der blazor-Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für `MapBlazorHub` interaktive `Startup.Configure`Komponenten mit in akzeptiert werden:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -55,7 +55,7 @@ Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folge
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Damit URLs ordnungsgemäß aufgelöst werden können, muss die APP `<base>` ein Tag in der *wwwroot/Index.html* -Datei (Client seitige blazor) oder *pages/_Host. cshtml* -Datei (blazor serverseitig) mit dem im- `href` Attribut angegebenen app-Basispfad enthalten ( `<base href="/">`). Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
+> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>` Tag in der *wwwroot/Index.html* -Datei (blazor Webassembly) oder in der Datei *pages/_Host. cshtml* (Blade Server) mit dem `href` App-Basispfad enthalten, der im-Attribut angegeben ist (`<base href="/">`). Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Benutzerdefinierten Inhalt bereitstellen, wenn Inhalt nicht gefunden wird
 
@@ -120,7 +120,7 @@ Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügb
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing mit URLs, die Punkte enthalten
 
-In serverseitigen blazor-Apps ist `/` die Standardroute in *_Host. cshtml* (`@page "/"`). Eine Anforderungs-URL, die einen Punkt`.`() enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine blazor-App gibt eine " *404-nicht gefunden"-* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
+In blazor-Server-Apps ist `/` die Standardroute in *_Host. cshtml* (`@page "/"`). Eine Anforderungs-URL, die einen Punkt`.`() enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine blazor-App gibt eine " *404-nicht gefunden"-* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
 
 ```cshtml
 @page "/{**path}"
@@ -167,7 +167,7 @@ Verwenden `Microsoft.AspNetCore.Components.NavigationManager` Sie, um mit URIs u
 | Member | Beschreibung |
 | ------ | ----------- |
 | `Uri` | Ruft den aktuellen absoluten URI ab. |
-| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangesteht werden kann, um einen absoluten URI zu erhalten. `<base>` `href` `BaseUri` In der Regel entspricht dem-Attribut im-Element des Dokuments in *wwwroot/Index.html* (Blade Client-Side) oder *pages/_Host. cshtml* (serverseitiges Blade von blazor). |
+| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangesteht werden kann, um einen absoluten URI zu erhalten. `<base>` `href` `BaseUri` In der Regel entspricht dem-Attribut im-Element des Dokuments in *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server). |
 | `NavigateTo` | Navigiert zum angegebenen URI. Wenn `forceLoad` ist `true`:<ul><li>Client seitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom Client seitigen Router verarbeitet wird.</li></ul> |
 | `LocationChanged` | Ein Ereignis, das ausgelöst wird, wenn sich die Navigations Position geändert hat. |
 | `ToAbsoluteUri` | Konvertiert einen relativen URI in einen absoluten URI. |

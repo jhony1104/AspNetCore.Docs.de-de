@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: blazor/get-started
-ms.openlocfilehash: 7bff1d38de77adfa1835ee37f4e5f8912ba629cc
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: e33ca421676caa20c823faf635442eda2a40ba65
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800313"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964010"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
 
@@ -40,7 +40,7 @@ Beginnen Sie mit blazor:
 
    4 \. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der **Orts** Eintrag korrekt ist, oder geben Sie einen Speicherort für das Projekt Wählen Sie **Erstellen** aus.
 
-   5 \. Wählen Sie für die Client seitige Verwendung von blazor die Vorlage **blazor Webassembly App** aus. Wählen Sie für eine serverseitige Verwendung von blazor die Vorlage " **blazor-Server-App** " aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
+   5 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
 
    6 \. Drücken Sie **F5**, um die App auszuführen.
 
@@ -53,25 +53,25 @@ Beginnen Sie mit blazor:
 
    2 \. Installieren Sie die neueste [ C# für Visual Studio Code Erweiterung](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
 
-   3 \. Führen Sie den folgenden Befehl in einer Befehlsshell aus, um die Client seitige Verwendung von blazor auszuführen:
+   3 \. Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine blazor-Webassembly zu nutzen:
 
       ```console
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine serverseitige Funktion von blazor auszuführen:
+      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um einen blazor-Server zu nutzen:
 
       ```console
       dotnet new blazorserver -o WebApplication1
       ```
 
-      Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
+      Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
 
    4 \. Öffnen Sie den Ordner *WebApplication1* in Visual Studio Code.
 
-   5 \. Bei einem serverseitigen blazor-Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
+   5 \. Für ein blazor-Server Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
 
-   6 \. Wenn Sie eine serverseitige blazor-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine Client seitige blazor-App verwenden, `dotnet run` führen Sie aus dem Projektordner der APP aus.
+   6 \. Wenn Sie eine blazor-Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine blazor Webassembly-App verwenden `dotnet run` , führen Sie aus dem Projektordner der APP aus.
 
    7 \. Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -85,7 +85,7 @@ Beginnen Sie mit blazor:
 
    3\. In the sidebar, select **.NET Core** > **App**.
 
-   4\. For a Blazor server-side experience, select the **Blazor Server App** template. For a Blazor client-side experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
+   4\. For a Blazor Server experience, select the **Blazor Server App** template. For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
 
    5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
 
@@ -97,7 +97,7 @@ Beginnen Sie mit blazor:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-   Führen Sie die folgenden Befehle in einer Befehlsshell aus, um die Client seitige Verwendung von blazor auszuführen:
+   Führen Sie für eine blazor-Webassembly die folgenden Befehle in einer Befehlsshell aus:
 
    ```console
    dotnet new blazorwasm -o WebApplication1
@@ -105,7 +105,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Führen Sie die folgenden Befehle in einer Befehlsshell aus, um eine serverseitige Funktion von blazor auszuführen:
+   Führen Sie für eine blazor-Server Darstellung die folgenden Befehle in einer Befehlsshell aus:
 
    ```console
    dotnet new blazorserver -o WebApplication1
@@ -113,7 +113,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Informationen zu den beiden blazor-Hostingmodellen (Server-und Client seitig) finden <xref:blazor/hosting-models>Sie unter.
+   Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
 
    Navigieren Sie in einem Browser zu `https://localhost:5001`.
 

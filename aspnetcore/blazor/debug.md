@@ -7,24 +7,24 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2019
 uid: blazor/debug
-ms.openlocfilehash: c3188a1fe1b699b787f7a95630f3918d295d0f68
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: e9477e504d32fd1dd5d6c87392386d1131f46e9f
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69974911"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963997"
 ---
 # <a name="debug-aspnet-core-blazor"></a>Debuggen ASP.net Core blazor
 
 [Daniel Roth](https://github.com/danroth27)
 
-*Frühe* Unterstützung für das Debuggen von Client seitigen blazor-apps, die auf Webassembly in Chrome ausgeführt werden.
+*Frühe* Unterstützung für das Debuggen von blazor Webassembly-apps, die auf Webassembly in Chrome ausgeführt werden
 
 Die Debugger-Funktionen sind eingeschränkt. Folgende Szenarien sind verfügbar:
 
 * Festlegen und Entfernen von Breakpoints.
 * Einzelschritt (`F10`) durch den Code oder die Fortsetzung`F8`()-Codeausführung.
-* Beachten Sie in der lokalen Anzeige die Werte aller lokalen Variablen vom Typ `int`, `string`und `bool`.
+* Beachten Sie in der *lokalen Anzeige die* Werte aller lokalen Variablen vom Typ `int`, `string`und `bool`.
 * Weitere Informationen finden Sie in der-Aufrufkette, einschließlich der von JavaScript in .net und von .net bis JavaScript aus.
 
 Folgendes ist *nicht*möglich:
@@ -38,7 +38,7 @@ Folgendes ist *nicht*möglich:
 
 Die Entwicklung weiterer debuggingszenarien ist ein Fortschritt des Engineering-Teams.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Vorraussetzungen
 
 Das Debuggen erfordert einen der folgenden Browser:
 
@@ -47,7 +47,7 @@ Das Debuggen erfordert einen der folgenden Browser:
 
 ## <a name="procedure"></a>Prozedur
 
-1. Führen Sie eine Client seitige blazor-APP `Debug` in der Konfiguration aus. Übergeben Sie `--configuration Debug` die Option an den Befehl [dotnet Run](/dotnet/core/tools/dotnet-run) : `dotnet run --configuration Debug`.
+1. Führen Sie eine blazor Webassembly- `Debug` app in der Konfiguration aus. Übergeben Sie `--configuration Debug` die Option an den Befehl [dotnet Run](/dotnet/core/tools/dotnet-run) : `dotnet run --configuration Debug`.
 1. Greifen Sie im Browser auf die APP zu.
 1. Platzieren Sie den Tastaturfokus auf die APP, nicht auf den Bereich Entwicklertools. Der Bereich Entwicklertools kann geschlossen werden, wenn das Debuggen initiiert wird.
 1. Wählen Sie die folgende blazor-spezifische Tastenkombination aus:

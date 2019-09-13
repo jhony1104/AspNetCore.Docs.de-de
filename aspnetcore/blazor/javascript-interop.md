@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/07/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: fa485420c01e6a6d4181f733d6848de08ffca730
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: 1572b9ee646577d094409cc33dd621f2f73dc863
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878355"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964204"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
 
@@ -28,15 +28,15 @@ Es gibt Zeiten, in denen .NET-Code erforderlich ist, um eine JavaScript-Funktion
 
 Zum Abrufen von JavaScript aus .NET verwenden Sie die `IJSRuntime` Abstraktion. Die `InvokeAsync<T>` -Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeits`window`Bereich (). Wenn Sie anrufen `window.someScope.someFunction`möchten, ist `someScope.someFunction`der Bezeichner. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss auch JSON-serialisierbar sein.
 
-Für serverseitige apps:
+Für blazor-Server-apps:
 
-* Mehrere Benutzer Anforderungen werden von der serverseitigen App verarbeitet. Rufen Sie `JSRuntime.Current` nicht in einer Komponente auf, um JavaScript-Funktionen aufzurufen.
+* Mehrere Benutzer Anforderungen werden von der blazor-Server-App verarbeitet. Rufen Sie `JSRuntime.Current` nicht in einer Komponente auf, um JavaScript-Funktionen aufzurufen.
 * Fügen Sie `IJSRuntime` die Abstraktion ein, und verwenden Sie das injizierte Objekt, um JavaScript-Interop-Aufrufe auszugeben
 * Während eine blazor-App vorab erstellt wird, ist das Aufrufen von JavaScript nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Weitere Informationen finden Sie im Abschnitt [erkennen, wenn eine blazor-App eine Vorabversion ist](#detect-when-a-blazor-app-is-prerendering) .
 
 Das folgende Beispiel basiert auf [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem experimentellen JavaScript-basierten Decoder. Im Beispiel wird veranschaulicht, wie eine JavaScript-Funktion aus C# einer Methode aufgerufen wird. Die JavaScript-Funktion akzeptiert ein Bytearray C# aus einer Methode, decodiert das Array und gibt den Text zur Anzeige an die Komponente zurück.
 
-Stellen Sie im `TextDecoder` - Elementvonwwwroot/Index.html(Clientseitig)oderPages/_Host.cshtml(serverseitigeblazor-Datei)eineFunktionbereit,dievonzumDecodiereneinesbestandenenArraysverwendet`<head>` wird:
+Geben Sie im `TextDecoder` - Elementvonwwwroot/Index.html(blazorWebassembly)oderPages/_Host.cshtml(blazorServer)eineFunktionan,dievonzumDecodiereneinesbestandenenArraysverwendet`<head>` wird:
 
 [!code-html[](javascript-interop/samples_snapshot/index-script.html)]
 
@@ -70,7 +70,7 @@ Um die `IJSRuntime` Abstraktion zu verwenden, übernehmen Sie einen der folgende
   IJSRuntime JSRuntime { get; set; }
   ```
 
-In der Client seitigen Beispiel-APP, die dieses Thema begleitet, sind zwei JavaScript-Funktionen für die Client seitige app verfügbar, die mit dem Dom interagieren, um Benutzereingaben zu empfangen und eine Willkommensnachricht anzuzeigen:
+In der Client seitigen Beispiel-APP, die dieses Thema begleitet, sind zwei JavaScript-Funktionen für die app verfügbar, die mit dem Dom interagieren, um Benutzereingaben zu empfangen und eine Willkommensnachricht anzuzeigen:
 
 * `showPrompt`&ndash; Generiert eine Aufforderung zur Annahme von Benutzereingaben (Name des Benutzers) und gibt den Namen an den Aufrufer zurück.
 * `displayWelcome`Weist dem Aufrufer eine Begrüßungs Meldung `id` mit dem-Objekt von `welcome`zu. &ndash;
@@ -79,13 +79,13 @@ In der Client seitigen Beispiel-APP, die dieses Thema begleitet, sind zwei JavaS
 
 [!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-Platzieren Sie `<script>` das-Tag, das auf die JavaScript-Datei verweist, in der *wwwroot/Index.html* -Datei (auf dem Clientseite blazor) oder in der Datei *pages/_Host. cshtml* (serverseitig, blazor).
+Platzieren Sie `<script>` das-Tag, das auf die JavaScript-Datei verweist, in der Datei *wwwroot/Index.html* (blazor Webassembly) oder der Datei *pages/_Host. cshtml* (blazor Server).
 
-*wwwroot/Index.html* (Client seitige blazor-Seite):
+*wwwroot/Index.html* (Blazor Webassembly):
 
 [!code-html[](./common/samples/3.x/BlazorSample/wwwroot/index.html?highlight=15)]
 
-*Pages/_Host. cshtml* (Serverseitige blazor-Datei):
+*Pages/_Host. cshtml* (Blazor-Server):
 
 [!code-cshtml[](javascript-interop/samples_snapshot/_Host.cshtml?highlight=29)]
 
@@ -93,7 +93,7 @@ Platzieren `<script>` Sie kein Tag in einer Komponenten Datei, da `<script>` das
 
 .NET-Methoden Interop mit den JavaScript-Funktionen in der Datei " *examplejsinterop. js* " durch Aufrufen `IJSRuntime.InvokeAsync<T>`von.
 
-Die `IJSRuntime` Abstraktion ist asynchron, um serverseitige Szenarios zu ermöglichen. Wenn die APP Client seitig ausgeführt wird und Sie eine JavaScript-Funktion synchron aufrufen möchten, verwenden Sie stattdessen Typumwandlung in `Invoke<T>` , und rufen Sie stattdessen auf `IJSInProcessRuntime` . Es wird empfohlen, dass die meisten JavaScript-Interop-Bibliotheken die Async-APIs verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarien, auf Client-oder Serverseite verfügbar sind.
+Die `IJSRuntime` Abstraktion ist asynchron, um die Verwendung von blazor-Server Szenarios zu ermöglichen. Wenn es sich bei der App um eine blazor Webassembly-App handelt und Sie eine JavaScript-Funktion synchron aufrufen möchten `IJSInProcessRuntime` , verwenden `Invoke<T>` Sie stattdessen Typumwandlung in, und rufen Sie stattdessen auf. Es wird empfohlen, dass die meisten JavaScript-Interop-Bibliotheken die Async-APIs verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarien verfügbar sind.
 
 Die Beispiel-app enthält eine Komponente zum Veranschaulichen der JavaScript-Interop. Die Komponente:
 
@@ -178,7 +178,7 @@ Die-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird d
 
 ### <a name="static-net-method-call"></a>Statischer .net-Methodenaufrufe
 
-Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie `DotNet.invokeMethod` die `DotNet.invokeMethodAsync` -Funktion oder die-Funktion. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung serverseitiger Szenarien bevorzugt. Um eine .NET-Methode aus JavaScript aufzurufen, muss die .NET-Methode öffentlich und statisch sein und `[JSInvokable]` über das-Attribut verfügen. Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute` -Konstruktor angeben. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
+Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie `DotNet.invokeMethod` die `DotNet.invokeMethodAsync` -Funktion oder die-Funktion. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung von blazor-Server Szenarios bevorzugt. Um eine .NET-Methode aus JavaScript aufzurufen, muss die .NET-Methode öffentlich und statisch sein und `[JSInvokable]` über das-Attribut verfügen. Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute` -Konstruktor angeben. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
 
 Die Beispiel-app enthält C# eine-Methode, um ein `int`Array von s zurückzugeben. Das `JSInvokable` -Attribut wird auf die-Methode angewendet.
 
@@ -268,4 +268,4 @@ Das js-Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unz
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-Weitere Informationen zur Ressourcenauslastung finden <xref:security/blazor/server-side>Sie unter.
+Weitere Informationen zur Ressourcenauslastung finden <xref:security/blazor/server>Sie unter.

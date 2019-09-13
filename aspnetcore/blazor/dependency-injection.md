@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: 0b48cd0cbe14d2b07627f56ab78611bbd3209fa1
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 6c01fdc390cc9150cf81673c717b73c4b10c31f1
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800394"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963971"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.net Core blazor-Abhängigkeitsinjektion
 
@@ -61,7 +61,7 @@ Dienste können mit der in der folgenden Tabelle angezeigten Lebensdauer konfigu
 
 | Lebensdauer | Beschreibung |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Webassembly-apps haben zurzeit kein Konzept von di-Bereichen. `Scoped`-registrierte Dienste Verhalten sich `Singleton` wie Dienste. Das serverseitige Hostingmodell unterstützt jedoch die `Scoped` Lebensdauer. In blazor-Server-apps wird eine Bereichs bezogene Dienst Registrierung auf die *Verbindung*beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Webassembly-apps haben zurzeit kein Konzept von di-Bereichen. `Scoped`-registrierte Dienste Verhalten sich `Singleton` wie Dienste. Das serverhostingmodell des blazor- `Scoped` Servers unterstützt jedoch die Lebensdauer. In blazor-Server-apps wird eine Bereichs bezogene Dienst Registrierung auf die *Verbindung*beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI erstellt eine *einzelne Instanz* des Dienstanbieter. Alle Komponenten, die `Singleton` einen Dienst erfordern, erhalten eine Instanz desselben diensdienstanbieter. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Wenn eine Komponente eine Instanz eines `Transient` Dienstanbieter aus dem Dienst Container abruft, empfängt Sie eine *neue Instanz* des Dienstanbieter. |
 

@@ -1,4 +1,4 @@
-Während eine serverseitige blazor-App vorab erstellt wird, sind bestimmte Aktionen wie das Aufrufen von JavaScript nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Komponenten müssen bei der vorab Erstellung möglicherweise anders gerzugerdert werden.
+Während eine blazor-Server-App vorab erstellt wird, sind bestimmte Aktionen (z. b. das Aufrufen von JavaScript) nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Komponenten müssen bei der vorab Erstellung möglicherweise anders gerzugerdert werden.
 
 Um JavaScript-Interop-Aufrufe zu verzögern, bis die Verbindung mit dem Browser hergestellt wurde, können `OnAfterRenderAsync` Sie das Komponenten Lebenszyklus-Ereignis verwenden. Dieses Ereignis wird nur aufgerufen, nachdem die APP vollständig gerendert wurde und die Client Verbindung hergestellt wurde.
 
@@ -62,7 +62,7 @@ Wenn `JSRuntime.InvokeAsync` aufgerufen wird, `ElementRef` wird nur in `OnAfterR
 }
 ```
 
-Verwenden Sie die `IsConnected` -Eigenschaft für den `IComponentContext` Dienst, um unterschiedliche Inhalte bedingt zu erzeugen, je nachdem, ob die APP derzeit Inhalt vorab vorläuft. Wenn serverseitig ausgeführt wird, `IsConnected` gibt nur `true` zurück, wenn eine aktive Verbindung mit dem Client vorhanden ist. Sie wird immer `true` zurückgegeben, wenn die Client seitige Ausführung ausgeführt wird.
+Verwenden Sie die `IsConnected` -Eigenschaft für den `IComponentContext` Dienst, um unterschiedliche Inhalte bedingt zu erzeugen, je nachdem, ob die APP derzeit Inhalt vorab vorläuft. Bei blazor-Server- `IsConnected` apps gibt `true` nur dann zurück, wenn eine aktive Verbindung mit dem Client vorhanden ist. Sie gibt immer `true` in blazor Webassembly-apps zurück.
 
 ```cshtml
 @page "/isconnected-example"
