@@ -1,54 +1,54 @@
 ---
-title: Einführung in die Identität in ASP.NET Core
+title: Einführung in die Identität auf ASP.net Core
 author: rick-anderson
-description: Verwenden Sie Identität mit einer ASP.NET Core-app. Erfahren Sie, wie Anforderungen für Kennwörter (RequireDigit, RequiredLength, RequiredUniqueChars usw.) festgelegt.
+description: Verwenden Sie die Identität mit einer ASP.net Core-app. Erfahren Sie, wie Sie Kenn Wort Anforderungen ("Requirements Digit", "Requirements dlength", "Requirements duniquechars" usw.) festlegen.
 ms.author: riande
 ms.date: 03/26/2019
 uid: security/authentication/identity
-ms.openlocfilehash: d813fa364bb733185baa7b2cd2d95f8b4ff570e2
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 325a61e6038e79b9a0db72c8360a5cbff2c8ddae
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894327"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011206"
 ---
-# <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität in ASP.NET Core
+# <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität auf ASP.net Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core Identity handelt es sich um ein Mitgliedschaftssystem, das ASP.NET Core-apps Anmeldefunktionalität hinzufügt. Benutzer können ein Konto erstellen, mit der Anmeldung Informationen in die Identität oder einem externen Anmeldeanbieter können. Einschließen von unterstützten externen anmeldungsanbietern [Facebook, Google, Twitter und Microsoft Account](xref:security/authentication/social/index).
+ASP.net Core Identität ist ein Mitgliedschaftssystem, das ASP.net Core-apps Anmelde Funktionalität hinzufügt. Benutzer können ein Konto mit den in der Identität gespeicherten Anmelde Informationen erstellen, oder Sie können einen externen Anmelde Anbieter verwenden. Zu den unterstützten externen Anmelde Anbietern zählen [Facebook, Google, Microsoft-Konto und Twitter](xref:security/authentication/social/index).
 
-Identität kann mithilfe einer SQL Server-Datenbank zum Speichern von Benutzernamen und Kennwörter, Profildaten konfiguriert werden. Alternativ kann einem anderen permanenten Speicher verwendet werden, z. B. Azure Table Storage.
+Die Identität kann mit einer SQL Server Datenbank konfiguriert werden, um Benutzernamen, Kenn Wörter und Profildaten zu speichern. Alternativ können Sie auch einen weiteren permanenten Speicher verwenden, z. b. Azure Table Storage.
 
-[Anzeigen oder Herunterladen der Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([zum Herunterladen)](xref:index#how-to-download-a-sample)).
+[Anzeigen oder Herunterladen des Beispielcodes](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([herunterladen)](xref:index#how-to-download-a-sample)).
 
-In diesem Thema erfahren Sie, wie Identität verwenden, um zu registrieren, melden Sie sich, und melden Sie sich ein Benutzer. Ausführlichere Anweisungen zum Erstellen von apps, die Identität verwenden, finden Sie im Abschnitt "Nächste Schritte" am Ende dieses Artikels.
+In diesem Thema erfahren Sie, wie Sie mit der Identität einen Benutzer registrieren, anmelden und abmelden. Ausführlichere Anweisungen zum Erstellen von apps, die die Identität verwenden, finden Sie im Abschnitt nächste Schritte am Ende dieses Artikels.
 
 ::: moniker range=">= aspnetcore-2.1"
 
 <a name="adi"></a>
 
-## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity und AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>Adddefaultidentity und addidentity
 
-[AddDefaultIdentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionuiextensions.adddefaultidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionUIExtensions_AddDefaultIdentity__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__) wurde in ASP.NET Core 2.1 eingeführt. Aufrufen von `AddDefaultIdentity` entspricht dem folgenden Aufruf:
+[Adddefaultidentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionuiextensions.adddefaultidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionUIExtensions_AddDefaultIdentity__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__) wurde in ASP.net Core 2,1 eingeführt. Das `AddDefaultIdentity` Aufrufen von ähnelt dem Aufrufen der folgenden:
 
-* [AddIdentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.addidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_AddIdentity__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__)
+* [Addidentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.addidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_AddIdentity__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__)
 * [AddDefaultUI](/dotnet/api/microsoft.aspnetcore.identity.identitybuilderuiextensions.adddefaultui?view=aspnetcore-2.1#Microsoft_AspNetCore_Identity_IdentityBuilderUIExtensions_AddDefaultUI_Microsoft_AspNetCore_Identity_IdentityBuilder_)
 * [AddDefaultTokenProviders](/dotnet/api/microsoft.aspnetcore.identity.identitybuilderextensions.adddefaulttokenproviders?view=aspnetcore-2.1#Microsoft_AspNetCore_Identity_IdentityBuilderExtensions_AddDefaultTokenProviders_Microsoft_AspNetCore_Identity_IdentityBuilder_)
 
-Finden Sie unter [AddDefaultIdentity Quelle](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) für Weitere Informationen.
+Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
 ::: moniker-end
 
-## <a name="create-a-web-app-with-authentication"></a>Erstellen einer Web-app mit Authentifizierung
+## <a name="create-a-web-app-with-authentication"></a>Erstellen einer Web-App mit Authentifizierung
 
-Erstellen Sie ein Projekt für die ASP.NET Core-Webanwendung mit einzelnen Benutzerkonten.
+Erstellen Sie ein ASP.net Core Webanwendungs Projekt mit einzelnen Benutzerkonten.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Wählen Sie **Datei** > **Neu** > **Projekt** aus.
-* Wählen Sie **ASP.NET Core-Webanwendung** aus. Nennen Sie das Projekt **"WebApp1"** haben denselben Namespace aufweist wie das Projekt zum Herunterladen. Klicken Sie auf **OK**.
-* Wählen Sie eine ASP.NET Core **Webanwendung**, und wählen Sie dann **Authentifizierung ändern**.
+* Wählen Sie **ASP.NET Core-Webanwendung** aus. Nennen Sie das Projekt **"WebApp1"** , um den gleichen Namespace wie das Projekt herunterzuladen. Klicken Sie auf **OK**.
+* Wählen Sie eine ASP.net Core **Webanwendung**, und wählen Sie dann **Authentifizierung ändern**aus.
 * Wählen Sie **einzelne Benutzerkonten** , und klicken Sie auf **OK**.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
@@ -59,19 +59,19 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Enthält das generierte Projekt [ASP.NET Core Identity](xref:security/authentication/identity) als eine [Razor-Klassenbibliothek](xref:razor-pages/ui-class). Die Identity-Razor-Klassenbibliothek macht Endpunkte mit dem `Identity` Bereich. Zum Beispiel:
+Das generierte Projekt stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Die Razor-Klassenbibliothek für die Identität macht Endpunkte mit dem `Identity` Bereich verfügbar. Beispiel:
 
-* / Identity/Konto/anmelden
-* / Identity/Account/Abmeldung
-* / / Account/Identitätsverwaltung
+* /Identity/Account/Login
+* /Identity/Account/Logout
+* /Identity/Account/Manage
 
 ### <a name="apply-migrations"></a>Anwenden von Migrationen
 
-Anwenden der Migrations, damit die Datenbank initialisiert werden.
+Wenden Sie die Migrationen an, um die Datenbank zu initialisieren.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Führen Sie den folgenden Befehl in der Paket-Manager-Konsole (PMC):
+Führen Sie den folgenden Befehl in der Paket-Manager-Konsole (PMC) aus:
 
 ```PM> Update-Database```
 
@@ -83,25 +83,25 @@ dotnet ef database update
 
 ---
 
-### <a name="test-register-and-login"></a>Test-Registrierung und Anmeldung
+### <a name="test-register-and-login"></a>Test Registrierung und Anmeldung
 
-Führen Sie die app aus, und registrieren Sie einen Benutzer. Je nach Bildschirmgröße, Sie müssen ggf. auf die Navigationsschaltfläche für die ein-/ausschalten, finden Sie unter den **registrieren** und **Anmeldung** Links.
+Führen Sie die APP aus, und registrieren Sie einen Benutzer. Abhängig von der Bildschirmgröße müssen Sie ggf. die Navigations Schaltfläche auswählen, um die Links **registrieren** und **Anmelden** anzuzeigen.
 
 [!INCLUDE[](~/includes/view-identity-db.md)]
 
 <a name="pw"></a>
 
-### <a name="configure-identity-services"></a>Konfigurieren der Identitätsdienste
+### <a name="configure-identity-services"></a>Konfigurieren von Identitäts Diensten
 
-Dienste hinzugefügt werden, `ConfigureServices`. Das typische Muster besteht darin, alle `Add{Service}`-Methoden und dann alle `services.Configure{Service}`-Methoden aufzurufen.
+Dienste werden in `ConfigureServices`hinzugefügt. Das typische Muster besteht darin, alle `Add{Service}`-Methoden und dann alle `services.Configure{Service}`-Methoden aufzurufen.
 
 ::: moniker range=">= aspnetcore-2.1"
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configureservices)]
 
-Der vorangehende Code konfiguriert Identität mit Standardwerten für die Option. Dienste, die app über den zur Verfügung gestellt [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+Der vorangehende Code konfiguriert die Identität mit Standard Options Werten. Dienste werden über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)der App zur Verfügung gestellt.
 
-   Identität ist aktiviert, durch den Aufruf [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_). `UseAuthentication` Fügt der Authentifizierung [Middleware](xref:fundamentals/middleware/index) zu der Anforderungspipeline.
+   Die Identität wird durch Aufrufen von " [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)" aktiviert. `UseAuthentication`Fügt der Anforderungs Pipeline Authentifizierungs [Middleware](xref:fundamentals/middleware/index) hinzu.
 
    [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
@@ -111,9 +111,9 @@ Der vorangehende Code konfiguriert Identität mit Standardwerten für die Option
 
    [!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo/Startup.cs?name=snippet_configureservices&highlight=7-9,11-28,30-42)]
 
-   Dienste stehen der Anwendung über [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+   Dienste werden der Anwendung über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)zur Verfügung gestellt.
 
-   Identität für die Anwendung aktiviert ist, durch den Aufruf `UseAuthentication` in die `Configure` Methode. `UseAuthentication` Fügt der Authentifizierung [Middleware](xref:fundamentals/middleware/index) zu der Anforderungspipeline.
+   Die Identität wird für die Anwendung aktiviert, `UseAuthentication` indem in `Configure` der-Methode aufgerufen wird. `UseAuthentication`Fügt der Anforderungs Pipeline Authentifizierungs [Middleware](xref:fundamentals/middleware/index) hinzu.
 
    [!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo/Startup.cs?name=snippet_configure&highlight=17)]
 
@@ -123,42 +123,42 @@ Der vorangehende Code konfiguriert Identität mit Standardwerten für die Option
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Startup.cs?name=snippet_configureservices&highlight=7-9,13-33)]
 
-   Diese Dienste stehen der Anwendung über [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+   Diese Dienste werden der Anwendung über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)zur Verfügung gestellt.
 
-   Identität für die Anwendung aktiviert ist, durch den Aufruf `UseIdentity` in die `Configure` Methode. `UseIdentity` Fügt der cookiebasierte Authentifizierung [Middleware](xref:fundamentals/middleware/index) zu der Anforderungspipeline.
+   Die Identität wird für die Anwendung aktiviert, `UseIdentity` indem in `Configure` der-Methode aufgerufen wird. `UseIdentity`Fügt der Anforderungs Pipeline cookiebasierte Authentifizierungs [Middleware](xref:fundamentals/middleware/index) hinzu.
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Startup.cs?name=snippet_configure&highlight=21)]
 
 ::: moniker-end
 
-Weitere Informationen finden Sie unter den [IdentityOptions Klasse](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) und [Anwendungsstart](xref:fundamentals/startup).
+Weitere Informationen finden Sie unter [identityoptions-Klasse](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) und [Anwendungsstart](xref:fundamentals/startup).
 
-## <a name="scaffold-register-login-and-logout"></a>Erstellen des Gerüsts für registrieren, Anmeldung und Abmeldung
+## <a name="scaffold-register-login-and-logout"></a>Gerüst: registrieren, anmelden und Abmelden
 
-Führen Sie die [Gerüst Identity in einer Razor-Projekt mit Autorisierung](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) Anweisungen zum Generieren des Codes in diesem Abschnitt gezeigt.
+Befolgen Sie die [Gerüst Identität in einem Razor-Projekt mit Autorisierungs](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) Anweisungen, um den in diesem Abschnitt gezeigten Code zu generieren.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Fügen Sie die Dateien registrieren, Anmeldung und Abmeldung hinzu.
+Fügen Sie die Registrierungs-, Anmelde-und Abmelde Dateien hinzu.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-Wenn Sie das Projekt mit dem Namen erstellt **"WebApp1"**, führen Sie die folgenden Befehle. Verwenden Sie andernfalls den richtigen Namespace für die `ApplicationDbContext`:
+Wenn Sie das Projekt mit dem Namen **"WebApp1"** erstellt haben, führen Sie die folgenden Befehle aus. Verwenden Sie andernfalls den korrekten Namespace für `ApplicationDbContext`:
 
 ```cli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-PowerShell arbeitet mit Semikolon als Befehlstrennzeichen. Wenn Sie PowerShell verwenden, versehen Sie die Semikolons aus der Datei mit Escapezeichen, oder fügen Sie die Liste der Dateien in doppelte Anführungszeichen, wie im vorherigen Beispiel gezeigt.
+PowerShell verwendet ein Semikolon als Befehls Trennzeichen. Wenn Sie PowerShell verwenden, führen Sie einen Escapezeichen in der Datei Liste aus, oder fügen Sie die Datei Liste in doppelte Anführungszeichen ein, wie im vorherigen Beispiel gezeigt.
 
 ---
 
-### <a name="examine-register"></a>Überprüfen Sie die Registrierung
+### <a name="examine-register"></a>Register überprüfen
 
 ::: moniker range=">= aspnetcore-2.1"
 
-   Wenn ein Benutzer klickt der **registrieren** Link die `RegisterModel.OnPostAsync` Aktion aufgerufen wird. Der Benutzer wird erstellt, indem [CreateAsync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) auf die `_userManager` Objekt. `_userManager` wird durch Dependency Injection bereitgestellt):
+   Wenn ein Benutzer auf den Link **registrieren** klickt, `RegisterModel.OnPostAsync` wird die Aktion aufgerufen. Der Benutzer wird von " [kreateasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) " für `_userManager` das-Objekt erstellt. `_userManager`wird durch Abhängigkeitsinjektion bereitgestellt):
 
    [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=7,22)]
 
@@ -166,56 +166,56 @@ PowerShell arbeitet mit Semikolon als Befehlstrennzeichen. Wenn Sie PowerShell v
 
 ::: moniker range="= aspnetcore-2.0"
 
-   Wenn ein Benutzer klickt der **registrieren** Link die `Register` Aktion wird aufgerufen, auf `AccountController`. Die `Register` Aktion wird den Benutzer erstellt, durch den Aufruf `CreateAsync` auf die `_userManager` Objekt (bereitgestellt, um `AccountController` durch Dependency Injection):
+   Wenn ein Benutzer auf den Link **registrieren** klickt, `Register` wird die Aktion für `AccountController`aufgerufen. Die `Register` Aktion erstellt den Benutzer durch Aufrufen `CreateAsync` von für `_userManager` `AccountController` das-Objekt (bereitgestellt von von der Abhängigkeitsinjektion):
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_register&highlight=11)]
 
 ::: moniker-end
 
-   Wenn der Benutzer erfolgreich erstellt wurde, der angemeldete Benutzer wird durch den Aufruf von `_signInManager.SignInAsync`.
+   Wenn der Benutzer erfolgreich erstellt wurde, wird der Benutzer durch den `_signInManager.SignInAsync`-Befehl angemeldet.
 
-   **Hinweis**: Finden Sie unter [Konto Bestätigung](xref:security/authentication/accconfirm#prevent-login-at-registration) Schritte, um sofortige Anmeldung bei der Registrierung zu verhindern.
+   **Hinweis**: Unter [Konto Bestätigung](xref:security/authentication/accconfirm#prevent-login-at-registration) finden Sie Schritte zum Verhindern der sofortigen Anmeldung bei der Registrierung.
 
 ### <a name="log-in"></a>Anmelden
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Das Anmeldeformular wird angezeigt, wenn:
+Das Anmeldeformular wird angezeigt, wenn Folgendes gilt:
 
-* Die **melden Sie sich bei** Link ausgewählt wird.
-* Ein Benutzer versucht, eine zugriffsbeschränkte Seite zugreifen, die sie autorisiert sind nicht, den Zugriff auf **oder** Wenn dies nicht getan haben sie vom System authentifiziert wurde.
+* Der Link " **Anmelden** " ist ausgewählt.
+* Ein Benutzer versucht, auf eine eingeschränkte Seite zuzugreifen, für die er nicht autorisiert ist, **oder** wenn er nicht vom System authentifiziert wurde.
 
-Wenn das Formular auf der Anmeldeseite gesendet wird, die `OnPostAsync` Aktion aufgerufen wird. `PasswordSignInAsync` wird aufgerufen, auf die `_signInManager` Objekt (bereitgestellt durch Dependency Injection).
+Wenn das Formular auf der Anmeldeseite übermittelt wird, `OnPostAsync` wird die Aktion aufgerufen. `PasswordSignInAsync`wird für das `_signInManager` -Objekt aufgerufen (durch Abhängigkeitsinjektion bereitgestellt).
 
    [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-   Die Basis `Controller` -Klasse macht eine `User` -Eigenschaft, die Sie von Controllermethoden aus zugreifen können. Sie können z. B. auflisten `User.Claims` und autorisierungsentscheidungen treffen. Weitere Informationen finden Sie unter <xref:security/authorization/introduction>.
+   Die- `Controller` Basisklasse macht `User` eine-Eigenschaft verfügbar, auf die Sie über Controller Methoden zugreifen können. Beispielsweise können `User.Claims` Sie Autorisierungs Entscheidungen auflisten und treffen. Weitere Informationen finden Sie unter <xref:security/authorization/introduction>.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-Das Anmeldeformular wird angezeigt, wenn ein Benutzer auf die **melden Sie sich bei** verknüpfen oder umgeleitet werden, wenn eine Seite zugreifen, die eine Authentifizierung erforderlich ist. Wenn der Benutzer das Formular auf die Anmeldeseite, sendet der `AccountController` `Login` Aktion aufgerufen wird.
+Das Anmeldeformular wird angezeigt, wenn Benutzer den Link Anmelden auswählen oder umgeleitet werden, wenn Sie auf eine Seite zugreifen, **für** die eine Authentifizierung erforderlich ist. Wenn der Benutzer das Formular auf der Anmeldeseite sendet, wird `AccountController` die `Login` Aktion aufgerufen.
 
-Die `Login` Aktionsaufrufen `PasswordSignInAsync` auf die `_signInManager` Objekt (bereitgestellt, um `AccountController` durch Dependency Injection).
+Die `Login` Aktion ruft `PasswordSignInAsync` `_signInManager` für`AccountController` das-Objekt auf (bereitgestellt von von der Abhängigkeitsinjektion).
 
 [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_login&highlight=13-14)]
 
-Die Basis (`Controller` oder `PageModel`)-Klasse macht eine `User` Eigenschaft. Z. B. `User.Claims` aufgelistet werden kann, um autorisierungsentscheidungen zu treffen.
+Die Basisklasse`Controller` ( `PageModel`oder) macht eine `User` -Eigenschaft verfügbar. `User.Claims` Kann z. b. aufgelistet werden, um Autorisierungs Entscheidungen zu treffen.
 
 ::: moniker-end
 
-### <a name="log-out"></a>Melden Sie sich ab
+### <a name="log-out"></a>Abmelden
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Die **Abmelden** Link Ruft die `LogoutModel.OnPost` Aktion. 
+Der Link " **Abmelden** " ruft `LogoutModel.OnPost` die Aktion auf. 
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) löscht der Ansprüche des Benutzers in einem Cookie gespeichert. Nicht nach dem Aufruf umleiten `SignOutAsync` oder der Benutzer wird **nicht** abgemeldet werden.
+[Signoutasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) löscht die in einem Cookie gespeicherten Ansprüche des Benutzers.
 
-POST wird angegeben, der *Pages/Shared/_LoginPartial.cshtml*:
+Post wird in den *Seiten "pages/Shared/_LoginPartial. cshtml*" angegeben:
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
@@ -223,50 +223,50 @@ POST wird angegeben, der *Pages/Shared/_LoginPartial.cshtml*:
 
 ::: moniker range="= aspnetcore-2.0"
 
-   Auf der **Abmelden** verknüpfen Aufrufe der `LogOut` Aktion.
+   Wenn Sie auf den Link **Abmelden** klicken `LogOut` , wird die Aktion aufgerufen.
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_logout&highlight=7)]
 
-   Der vorangehende Code Ruft die `_signInManager.SignOutAsync` Methode. Die `SignOutAsync` Methode löscht der Ansprüche des Benutzers in einem Cookie gespeichert.
+   Der vorangehende Code ruft `_signInManager.SignOutAsync` die-Methode auf. Die `SignOutAsync` -Methode löscht die in einem Cookie gespeicherten Ansprüche des Benutzers.
 
 ::: moniker-end
 
-## <a name="test-identity"></a>Testidentität
+## <a name="test-identity"></a>Test Identität
 
-Die Standardprojektvorlagen für Web zulassen anonymen Zugriff auf den Startseiten. Um die Identität zu testen, fügen [ `[Authorize]` ](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) , die "Datenschutz".
+Die Standardweb Projektvorlagen ermöglichen den anonymen Zugriff auf die Startseiten. Fügen Sie zum Testen der [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) Identität der Seite Datenschutz hinzu.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=6)]
 
-Wenn Sie angemeldet sind, melden Sie sich ab. Führen Sie die app, und wählen Sie die **Datenschutz** Link. Sie werden zur Anmeldeseite umgeleitet.
+Wenn Sie angemeldet sind, melden Sie sich ab. Führen Sie die APP aus, und wählen Sie den **Datenschutz** Link. Sie werden zur Anmeldeseite umgeleitet.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-### <a name="explore-identity"></a>Untersuchen Sie die Identität
+### <a name="explore-identity"></a>Identität erkunden
 
-Identität noch ausführlicher untersuchen zu können:
+So untersuchen Sie die Identität ausführlicher:
 
-* [Erstellen Sie die vollständige Benutzeroberfläche identitätsquelle](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
-* Überprüfen Sie die Quelle der einzelnen Seiten und durchlaufen Sie den Debugger an.
+* [Benutzeroberflächen Quelle für vollständige Identität erstellen](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
+* Überprüfen Sie die Quelle jeder Seite, und schrittweise durch den Debugger.
 
 ::: moniker-end
 
-## <a name="identity-components"></a>Identitätskomponenten
+## <a name="identity-components"></a>Identitäts Komponenten
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Alle Identity abhängigen NuGet-Pakete sind in enthalten die [Microsoft.AspNetCore.App metapaket](xref:fundamentals/metapackage-app).
+Alle Identitäts abhängigen nuget-Pakete sind im [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)enthalten.
 
 ::: moniker-end
 
-Das primäre Paket für die Identität ist [Microsoft.AspNetCore.Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Dieses Paket enthält die Kerngruppe von Schnittstellen für ASP.NET Core Identity und befindet sich durch `Microsoft.AspNetCore.Identity.EntityFrameworkCore`.
+Das primäre Paket für Identity ist [Microsoft. aspnetcore. Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Dieses Paket enthält den Kernsatz von Schnittstellen für ASP.net Core Identität und ist in enthalten `Microsoft.AspNetCore.Identity.EntityFrameworkCore`.
 
-## <a name="migrating-to-aspnet-core-identity"></a>Migrieren zu ASP.NET Core-Identität
+## <a name="migrating-to-aspnet-core-identity"></a>Migrieren zu ASP.net Core Identität
 
-Weitere Informationen und Anleitungen zum Migrieren von vorhandenen Identitätsspeicher, finden Sie unter [Migrieren von Authentifizierungs- und Identitätseinstellungen](xref:migration/identity).
+Weitere Informationen und Anleitungen zum Migrieren Ihres vorhandenen Identitäts Speicher finden Sie unter [Migrieren von Authentifizierung und Identität](xref:migration/identity).
 
-## <a name="setting-password-strength"></a>Festlegen der kennwortsicherheit
+## <a name="setting-password-strength"></a>Festlegen der Kenn Wort Stärke
 
-Finden Sie unter [Konfiguration](#pw) für ein Beispiel, das die Anforderungen für die Mindestlänge für Kennwörter legt diese fest.
+Ein Beispiel zum Festlegen der Mindestanforderungen für das Kennwort finden Sie unter [Konfiguration](#pw) .
 
 ## <a name="next-steps"></a>Nächste Schritte
 

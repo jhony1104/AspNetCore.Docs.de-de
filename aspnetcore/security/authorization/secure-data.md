@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 225d0e3aa51745253d03e614b1c8568b3a6ba731
-ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
+ms.openlocfilehash: d95f44394d6ecc3c3896b45c5bebc73fa2d92445
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/24/2019
-ms.locfileid: "70017485"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011190"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>Erstellen einer ASP.NET Core-app mit Benutzerdaten, die durch Autorisierung geschützt sind
 
@@ -69,7 +69,7 @@ Das Beispiel enthält die folgenden Handler für die Autorisierung:
 * `ContactManagerAuthorizationHandler`: Ermöglicht Managern das genehmigen oder ablehnen von Kontakten.
 * `ContactAdministratorsAuthorizationHandler`: Ermöglicht Administratoren das genehmigen oder ablehnen von Kontakten sowie das Bearbeiten/Löschen von Kontakten.
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 In diesem Tutorial wird verschoben. Sie sollten mit vertraut sein:
 
@@ -475,7 +475,7 @@ Fügen Sie die Administrator-Benutzer-ID und `ContactStatus` für die Contacts. 
 
 ## <a name="create-owner-manager-and-administrator-authorization-handlers"></a>Besitzer, Manager und Administratoren Autorisierung Handler zu erstellen
 
-Erstellen Sie eine `ContactIsOwnerAuthorizationHandler` -Klasse in der *Autorisierung* Ordner. Die `ContactIsOwnerAuthorizationHandler` stellt sicher, dass der Benutzer, die auf eine Ressource, das die Ressource besitzt.
+Erstellen Sie einen *Autorisierungs* Ordner, `ContactIsOwnerAuthorizationHandler` und erstellen Sie eine Klasse darin. Die `ContactIsOwnerAuthorizationHandler` stellt sicher, dass der Benutzer, die auf eine Ressource, das die Ressource besitzt.
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactIsOwnerAuthorizationHandler.cs)]
 

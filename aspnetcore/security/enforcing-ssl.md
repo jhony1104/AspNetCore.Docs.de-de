@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie HTTPS/TLS in einer ASP.net Core-Web-App anfordern.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 09/14/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 654b083a0dade2fc8df5cccf9fa434f30627794b
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 8474b8f12d3e08e47a4cc9b20543d2a9e6e91998
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773964"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011076"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -232,7 +232,7 @@ Beim Umleiten an HTTPS ohne die Anforderung zusätzlicher Umleitungs Regeln empf
 
 ## <a name="http-strict-transport-security-protocol-hsts"></a>HTTP Strict Transport Security Protocol (hsts)
 
-Pro [OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)ist die [http-strikte Transport Sicherheit (hsts)](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet) eine Opt-in-Sicherheits Erweiterung, die durch eine Web-App durch die Verwendung eines Antwort Headers angegeben wird. Wenn ein [Browser, der hsts unterstützt,](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support) diesen Header empfängt:
+Pro [OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)ist die [http-strikte Transport Sicherheit (hsts)](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html) eine Opt-in-Sicherheits Erweiterung, die durch eine Web-App durch die Verwendung eines Antwort Headers angegeben wird. Wenn ein [Browser, der hsts unterstützt,](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#browser-support) diesen Header empfängt:
 
 * Der Browser speichert die Konfiguration für die Domäne, die das Senden jeglicher Kommunikation über HTTP verhindert. Der Browser erzwingt die gesamte Kommunikation über HTTPS.
 * Der Browser hindert den Benutzer daran, nicht vertrauenswürdige oder ungültige Zertifikate zu verwenden. Der Browser deaktiviert Eingabe Aufforderungen, mit denen ein Benutzer ein solches Zertifikat vorübergehend als vertrauenswürdig einstufen kann.
