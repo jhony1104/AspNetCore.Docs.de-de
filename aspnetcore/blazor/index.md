@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 09/05/2019
 uid: blazor/index
-ms.openlocfilehash: 6b62eb372d642c1ad9df880a4b71e5d5a8e40b60
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 767ec8f106bebb92cf13a10eb63fab4905715d3d
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800326"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964105"
 ---
 # <a name="introduction-to-blazor"></a>Einführung in Blazor
 
@@ -101,37 +101,37 @@ Wenn diese Komponente in der App verwendet wird, beschleunigt IntelliSense in [V
 
 Die Komponenten werden in einer In-Memory-Darstellung des Browser-DOM (Document Object Model) gerendert, die als *Renderbaum* bezeichnet und verwendet wird, um die Benutzeroberfläche auf flexible und effiziente Weise zu aktualisieren.
 
-## <a name="blazor-client-side"></a>Clientseitiges Blazor
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Clientseitiges Blazor ist ein Single-Page-App-Framework zum Erstellen von interaktiven clientseitigen Web-Apps mit .NET. Blazor verwendet offene Webstandards ohne Plug-Ins oder Codetranspilation und funktioniert in allen modernen Webbrowsern, einschließlich mobiler Browser.
+Blazor WebAssembly ist ein Single-Page-App-Framework zum Erstellen interaktiver clientseitiger Web-Apps mit .NET. Blazor WebAssembly verwendet offene Webstandards ohne Plug-Ins oder Codetranspilation und funktioniert in allen modernen Webbrowsern, einschließlich mobiler Browser.
 
 Das Ausführen von .NET-Code in einem Webbrowser wird durch [WebAssembly](https://webassembly.org) (Kurzform: *wasm*) ermöglicht. Es handelt sich um ein Bytecodeformat, das für schnelles Downloaden und die maximale Ausführungsgeschwindigkeit optimiert ist. WebAssembly ist ein offener Webstandard, der in Webbrowsern ohne Plug-Ins unterstützt wird.
 
 WebAssembly-Code kann auf alle Funktionen des Browsers über JavaScript, auch als *JavaScript-Interoperabilität* (oder *JavaScript-Interop*) bezeichnet, zugreifen. Über WebAssembly im Browser ausgeführter .NET-Code wird in der JavaScript-Sandbox des Browsers ausgeführt. Hierbei greifen die Schutzmaßnahmen der Sandbox gegen schädliche Aktionen auf dem Clientcomputer.
 
-![Clientseitiges Blazor führt .NET-Code unter Verwendung von WebAssembly im Browser aus.](index/_static/blazor-client-side.png)
+![Blazor WebAssembly führt .NET-Code unter Verwendung von WebAssembly im Browser aus.](index/_static/blazor-webassembly.png)
 
-Folgendes geschieht, wenn eine clientseitige Blazor-App in einem Browser erstellt und ausgeführt wird:
+Folgendes geschieht, wenn eine Blazor WebAssembly-App in einem Browser erstellt und ausgeführt wird:
 
 * C#-Codedateien und Razor-Dateien werden in .NET-Assemblys kompiliert.
 * Die Assemblys und die .NET-Runtime werden im Browser heruntergeladen.
-* Clientseitiges Blazor startet die .NET-Runtime und konfiguriert die Runtime zum Laden der Assemblys für die App. DOM-Änderungen und API-Aufrufe im Browser werden von der clientseitigen Blazor-Runtime über die JavaScript-Interop verarbeitet.
+* Blazor WebAssembly führt einen Bootstrap für die .NET-Runtime aus und konfiguriert die Runtime zum Laden der Assemblys für die App. DOM-Änderungen und API-Aufrufe im Browser werden von der Blazor WebAssembly-Runtime über die JavaScript-Interop verarbeitet.
 
-Die Größe der veröffentlichten App, ihre *Nutzlast*, ist ein wichtiger Leistungsfaktor für die Nutzbarkeit einer App. Das Herunterladen einer großen App in einen Browser dauert relativ lange, was die Benutzerfreundlichkeit beeinträchtigt. Clientseitiges Blazor optimiert die Nutzlastgröße, um die Downloadzeiten zu verkürzen:
+Die Größe der veröffentlichten App, ihre *Nutzlast*, ist ein wichtiger Leistungsfaktor für die Nutzbarkeit einer App. Das Herunterladen einer großen App in einen Browser dauert relativ lange, was die Benutzerfreundlichkeit beeinträchtigt. Blazor WebAssembly optimiert die Nutzlastgröße, um die Downloadzeiten zu verkürzen:
 
 * Nicht verwendeter Code wird aus der App entfernt, wenn sie vom [IL-Linker (Intermediate Language)](xref:host-and-deploy/blazor/configure-linker) veröffentlicht wird.
 * HTTP-Antworten werden komprimiert.
 * Die .NET-Runtime und die Assemblys werden im Browser zwischengespeichert.
 
-## <a name="blazor-server-side"></a>Serverseitiges Blazor
+## <a name="blazor-server"></a>Blazor Server
 
-Blazor entkoppelt die Komponentenrenderinglogik von Aktualisierungen der Benutzeroberfläche. Serverseitiges Blazor bietet Unterstützung zum Hosten von Razor-Komponenten in einer ASP.NET Core-App auf dem Server. Aktualisierungen der Benutzeroberfläche werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
+Blazor entkoppelt die Komponentenrenderinglogik von Aktualisierungen der Benutzeroberfläche. Blazor Server bietet Unterstützung zum Hosten von Razor-Komponenten in einer ASP.NET Core-App auf dem Server. Aktualisierungen der Benutzeroberfläche werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
 Die Runtime handhabt das Senden von Benutzeroberflächenereignissen vom Browser an den Server und wendet Benutzeroberflächenupdates an, die nach dem Ausführen der Komponenten vom Server zurück an den Browser gesendet werden.
 
-Die Verbindung, die von serverseitigem Blazor für die Kommunikation mit dem Browser verwendet wird, wird auch für die Verarbeitung von JavaScript-Interopaufrufen verwendet.
+Die Verbindung, die von Blazor Server für die Kommunikation mit dem Browser verwendet wird, wird auch für die Verarbeitung von JavaScript-Interopaufrufen verwendet.
 
-![Serverseitiges Blazor führt .NET-Code auf dem Server aus und interagiert über eine SignalR-Verbindung mit dem Dokumentobjektmodell.](index/_static/blazor-server-side.png)
+![Blazor Server führt .NET-Code auf dem Server aus und interagiert über eine SignalR-Verbindung mit dem Dokumentobjektmodell.](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>JavaScript-Interoperabilität
 

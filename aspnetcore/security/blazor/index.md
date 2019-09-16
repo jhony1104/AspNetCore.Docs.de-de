@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: 2ba7b0612c2be50ae0797c50dc3cb0d63c0f0c2d
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: ab8cc547463ef647316b5a4e377c15021debc4b1
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800512"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963963"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
@@ -20,26 +20,26 @@ Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
 ASP.NET Core unterstützt die Konfiguration und Verwaltung der Sicherheit in Blazor-Apps.
 
-Es gibt jeweils unterschiedliche Sicherheitsszenarien für serverseitige und clientseitige Blazor-Apps. Da serverseitige Blazor-Apps auf dem Server ausgeführt werden, können Autorisierungsprüfungen Folgendes bestimmen:
+Es gibt jeweils unterschiedliche Sicherheitsszenarien für Blazor Server- und Blazor WebAssembly-Apps. Da Blazor Server-Apps auf dem Server ausgeführt werden, kann durch Autorisierungsprüfungen Folgendes bestimmt werden:
 
 * Die UI-Optionen, die einem Benutzer angezeigt werden (z.B., welche Menüeinträge für einen Benutzer verfügbar sind).
 * Zugriffsregeln für Bereiche und Komponenten der App.
 
-Clientseitige Blazor-Apps werden auf dem Client ausgeführt. Die Autorisierung wird *nur* verwendet, um zu bestimmen, welche UI-Optionen angezeigt werden. Da clientseitige Prüfungen von einem Benutzer geändert oder umgangen werden können, kann eine clientseitige Blazor-App keine Autorisierungszugriffsregeln durchsetzen.
+Blazor WebAssembly-Apps werden auf dem Client ausgeführt. Die Autorisierung wird *nur* verwendet, um zu bestimmen, welche UI-Optionen angezeigt werden. Da clientseitige Prüfungen von einem Benutzer geändert oder umgangen werden können, kann eine Blazor WebAssembly-App keine Autorisierungszugriffsregeln durchsetzen.
 
 ## <a name="authentication"></a>Authentifizierung
 
-Blazor verwendet die vorhandenen ASP.NET Core-Authentifizierungsmechanismen, um die Identität des Benutzers festzustellen. Der genaue Mechanismus hängt davon ab, wie die Blazor-App gehostet wird – serverseitig oder clientseitig.
+Blazor verwendet die vorhandenen ASP.NET Core-Authentifizierungsmechanismen, um die Identität des Benutzers festzustellen. Der genaue Mechanismus hängt davon ab, wie die Blazor-App gehostet wird – über Blazor Server oder Blazor WebAssembly.
 
-### <a name="blazor-server-side-authentication"></a>Serverseitige Blazor-Authentifizierung
+### <a name="blazor-server-authentication"></a>Blazor Server-Authentifizierung
 
-Serverseitige Blazor-Apps funktionieren über eine Echtzeitverbindung, die mit SignalR erstellt wurde. Die [Authentifizierung in SignalR-basierten Apps](xref:signalr/authn-and-authz) wird verarbeitet, wenn die Verbindung hergestellt wird. Die Authentifizierung kann auf einem Cookie oder einem anderen Bearertoken basieren.
+Blazor Server-Apps funktionieren über eine Echtzeitverbindung, die mit SignalR erstellt wurde. Die [Authentifizierung in SignalR-basierten Apps](xref:signalr/authn-and-authz) wird verarbeitet, wenn die Verbindung hergestellt wird. Die Authentifizierung kann auf einem Cookie oder einem anderen Bearertoken basieren.
 
-Die serverseitige Blazor-Projektvorlage kann die Authentifizierung für Sie einrichten, wenn das Projekt erstellt wird.
+Die Blazor Server-Projektvorlage kann die Authentifizierung für Sie einrichten, wenn das Projekt erstellt wird.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Befolgen Sie die Visual Studio-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues serverseitiges Blazor-Projekt mit einem Authentifizierungsmechanismus zu erstellen.
+Befolgen Sie die Visual Studio-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen.
 
 Nachdem Sie im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Vorlage **Blazor-Server-App** ausgewählt haben, wählen Sie im Dialogfeld **Authentifizierung** die Option **Ändern**.
 
@@ -54,7 +54,7 @@ Ein Dialogfeld wird geöffnet, in dem dieselben Authentifizierungsmechanismen an
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Befolgen Sie die Visual Studio Code-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues serverseitiges Blazor-Projekt mit einem Authentifizierungsmechanismus zu erstellen.
+Befolgen Sie die Visual Studio Code-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
 
 ```console
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -88,7 +88,7 @@ Der Befehl erstellt einen Ordner mit dem für den Platzhalter `{APP NAME}` angeg
 <!--
 # [.NET Core CLI](#tab/netcore-cli/)
 
-Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor server-side project with an authentication mechanism:
+Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism:
 
 ```console
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -111,15 +111,15 @@ The command creates a folder named with the value provided for the `{APP NAME}` 
 
 ---
 
-### <a name="blazor-client-side-authentication"></a>Clientseitige Blazor-Authentifizierung
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly-Authentifizierung
 
-In den clientseitigen Blazor-Apps können Authentifizierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
+In den Blazor WebAssembly-Apps können Authentifizierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
-Die Implementierung eines benutzerdefinierten `AuthenticationStateProvider`-Diensts für clientseitigen Blazor-Apps wird in den folgenden Abschnitten behandelt.
+Die Implementierung eines benutzerdefinierten `AuthenticationStateProvider`-Diensts für Blazor WebAssembly-Apps wird in den folgenden Abschnitten behandelt.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider-Dienst
 
-Die serverseitigen Blazor-Apps beinhalten einen integrierten `AuthenticationStateProvider`-Dienst, der die Authentifizierungsstatusdaten von `HttpContext.User` von ASP. NET Core abruft. Auf diese Weise lässt sich der Authentifizierungsstatus in bestehende serverseitige Authentifizierungsmechanismen von ASP.NET Core integrieren.
+Die Blazor Server-Apps beinhalten einen integrierten `AuthenticationStateProvider`-Dienst, der die Authentifizierungsstatusdaten von `HttpContext.User` von ASP. NET Core abruft. Auf diese Weise lässt sich der Authentifizierungsstatus in bestehende serverseitige Authentifizierungsmechanismen von ASP.NET Core integrieren.
 
 `AuthenticationStateProvider` ist der zugrunde liegende Dienst, der von der `AuthorizeView`- und der `CascadingAuthenticationState`-Komponente verwendet wird, um den Authentifizierungsstatus abzurufen.
 
@@ -157,7 +157,7 @@ Weitere Informationen zur Dependency Injection (DI) und den Diensten finden Sie 
 
 ## <a name="implement-a-custom-authenticationstateprovider"></a>Implementieren eines benutzerdefinierten AuthenticationStateProvider
 
-Wenn Sie eine clientseitige Blazor-App erstellen, oder wenn die Spezifikation Ihrer App unbedingt einen benutzerdefinierten Anbieter erfordert, implementieren Sie einen Anbieter und überschreiben Sie `GetAuthenticationStateAsync`:
+Wenn Sie eine Blazor WebAssembly-App erstellen oder wenn die Spezifikation Ihrer App unbedingt einen benutzerdefinierten Anbieter erfordert, implementieren Sie einen Anbieter, und überschreiben Sie `GetAuthenticationStateAsync`:
 
 ```csharp
 class CustomAuthStateProvider : AuthenticationStateProvider
@@ -310,13 +310,13 @@ Verwenden Sie für die richtlinienbasierte Autorisierung den `Policy`-Parameter:
 
 Die anspruchsbasierte Autorisierung ist ein Sonderfall der richtlinienbasierten Autorisierung. Beispielsweise können Sie eine Richtlinie definieren, die vom Benutzer einen bestimmten Anspruch erfordert. Weitere Informationen finden Sie unter <xref:security/authorization/policies>.
 
-Diese APIs können entweder in serverseitigen oder clientseitigen Blazor-Apps verwendet werden.
+Diese APIs können entweder in Blazor Server- oder in Blazor WebAssembly-Apps verwendet werden.
 
 Wenn weder `Roles` noch `Policy` angegeben wird, verwendet `AuthorizeView` die Standardrichtlinie.
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>Während der asynchronen Authentifizierung angezeigter Inhalt
 
-Bei Blazor kann der Authentifizierungsstatus *asynchron* bestimmt werden. Das primäre Szenario für diesen Ansatz sind clientseitige Blazor-Apps, die eine Anforderung zur Authentifizierung an einen externen Endpunkt stellen.
+Bei Blazor kann der Authentifizierungsstatus *asynchron* bestimmt werden. Das primäre Szenario für diesen Ansatz sind Blazor WebAssembly-Apps, die eine Anforderung zur Authentifizierung an einen externen Endpunkt stellen.
 
 Während der Authentifizierung zeigt `AuthorizeView` standardmäßig keine Inhalte an. Um während der Authentifizierung Inhalte anzuzeigen, wenden Sie das `<Authorizing>`-Element:
 
@@ -333,7 +333,7 @@ Während der Authentifizierung zeigt `AuthorizeView` standardmäßig keine Inhal
 </AuthorizeView>
 ```
 
-Dieser Ansatz gilt in der Regel nicht für serverseitige Blazor-Apps. Serverseitige Blazor-Apps kennen den Authentifizierungsstatus, sobald der Status hergestellt ist. `Authorizing`-Inhalte können zwar in der `AuthorizeView`-Komponente einer serverseitigen Blazor-App bereitgestellt werden, aber der Inhalt wird nie angezeigt.
+Dieser Ansatz gilt in der Regel nicht für Blazor Server-Apps. Blazor Server-Apps kennen den Authentifizierungsstatus, sobald der Status hergestellt ist. `Authorizing`-Inhalte können zwar in der `AuthorizeView`-Komponente einer Blazor Server-App bereitgestellt werden, aber der Inhalt wird nie angezeigt.
 
 ## <a name="authorize-attribute"></a>[Authorize]-Attribut
 
@@ -382,7 +382,7 @@ Gemeinsam mit der `AuthorizeRouteView`-Komponente ermöglicht die `Router`-Kompo
 * Der Benutzer eine `[Authorize]`-Bedingung nicht erfüllt, die für die Komponente angewendet wird. Das `[Authorize]`-Attribut wird im Abschnitt [[Authorize]-Attribut](#authorize-attribute) behandelt.
 * Die Asynchrone Authentifizierung ausgeführt wird.
 
-In der standardmäßigen serverseitigen Blazor-Projektvorlage zeigt die Datei *App.razor*, wie benutzerdefinierte Inhalte eingestellt werden können:
+In der standardmäßigen Blazor Server-Projektvorlage zeigt die Datei *App.razor*, wie benutzerdefinierte Inhalte eingestellt werden können:
 
 ```cshtml
 <Router AppAssembly="@typeof(Program).Assembly">
@@ -459,9 +459,9 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
 }
 ```
 
-## <a name="authorization-in-blazor-client-side-apps"></a>Autorisierung in clientseitigen Blazor-Apps
+## <a name="authorization-in-blazor-webassembly-apps"></a>Autorisierung in Blazor WebAssembly-Apps
 
-In den clientseitigen Blazor-Apps können Autorisierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
+In den Blazor WebAssembly-Apps können Autorisierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
 **Führen Sie Autorisierungsprüfungen auf dem Server immer innerhalb aller API-Endpunkte durch, auf die Ihre clientseitige App zugreift.**
 
@@ -473,7 +473,7 @@ Häufige Fehler:
 
 * **Für `authenticationStateTask` wird ein `null`** -Wert empfangen.
 
-Wahrscheinlich wurde das Projekt nicht mit einer serverseitigen Blazor-Vorlage mit aktivierter Authentifizierung erstellt. Umschließen Sie einen Teil der Benutzeroberflächenstruktur wie folgt mit `<CascadingAuthenticationState>`, z.B. in *App.razor*:
+Wahrscheinlich wurde das Projekt nicht mit einer Blazor Server-Vorlage mit aktivierter Authentifizierung erstellt. Umschließen Sie einen Teil der Benutzeroberflächenstruktur wie folgt mit `<CascadingAuthenticationState>`, z.B. in *App.razor*:
 
 ```cshtml
 <CascadingAuthenticationState>
@@ -488,5 +488,5 @@ Wahrscheinlich wurde das Projekt nicht mit einer serverseitigen Blazor-Vorlage m
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/index>
-* <xref:security/blazor/server-side>
+* <xref:security/blazor/server>
 * <xref:security/authentication/windowsauth>

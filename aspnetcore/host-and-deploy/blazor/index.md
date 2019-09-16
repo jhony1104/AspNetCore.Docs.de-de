@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 5a56bbda5bb7727c7dbeaed7f2a91d0dcb6e7e71
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 26c8fcf56ab8ca68aeca93560785fc6c1144ab86
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773587"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963692"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
@@ -40,7 +40,7 @@ dotnet publish -c Release
 
 Das Veröffentlichen einer App löst eine [Wiederherstellung](/dotnet/core/tools/dotnet-restore) der Abhängigkeiten des Projekts aus und [erstellt](/dotnet/core/tools/dotnet-build) das Projekt, bevor die Objekte für die Bereitstellung erstellt werden. Im Rahmen des Buildprozesses werden nicht verwendete Methoden und Assemblys entfernt, um die Downloadgröße und Ladezeiten von Apps zu reduzieren.
 
-Eine clientseitige Blazor-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/{ASSEMBLYNAME}/dist* veröffentlicht. Eine serverseitige Blazor-App wird im Ordner */bin/Release/{TARGET FRAMEWORK}/publish* veröffentlicht.
+Eine Blazor WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/{ASSEMBLYNAME}/dist* veröffentlicht. Eine Blazor Server-App wird im Ordner */bin/Release/{TARGET FRAMEWORK}/publish* veröffentlicht.
 
 Die Objekte im Ordner werden auf dem Webserver bereitgestellt. Die Bereitstellung kann je nach verwendetem Entwicklungstool manuell oder automatisch erfolgen.
 
@@ -87,5 +87,5 @@ Die App antwortet lokal unter `http://localhost:port/CoolApp`.
 
 Anleitungen für die Bereitstellung finden Sie in folgenden Themen:
 
-* <xref:host-and-deploy/blazor/client-side>
-* <xref:host-and-deploy/blazor/server-side>
+* <xref:host-and-deploy/blazor/webassembly>
+* <xref:host-and-deploy/blazor/server>
