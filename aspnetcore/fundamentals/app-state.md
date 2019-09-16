@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: 4b02a9b5867559da493054bb128aabed4d920ace
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 578be568b58dc630e8aabf8cb355266766741b9e
+ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813622"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70384735"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>Sitzungs- und App-Zustand in ASP.NET Core
 
@@ -163,7 +163,29 @@ Im folgenden Beispiel wird dargestellt, wie Sie serialisierbare Objekte mit den 
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core macht [die TempData-Eigenschaft des Razor Pages-Seitenmodells](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.tempdata) oder [TempData eines MVC-Controllers](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata) verfügbar. Diese Eigenschaft speichert Daten, bis sie gelesen wurden. Die Methoden [Keep](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.itempdatadictionary.keep) und [Peek](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.itempdatadictionary.peek) können verwendet werden, um die Daten zu überprüfen, ohne sie zu löschen. TempData eignet sich besonders für die Weiterleitung, wenn Daten für mehr als eine Anforderung erforderlich sind. TempData wird von TempData-Anbietern implementiert, indem Cookies oder der Sitzungszustand verwendet werden.
+ASP.NET Core macht die Razor Pages-[TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) oder Controller-<xref:Microsoft.AspNetCore.Mvc.Controller.TempData>verfügbar. Diese Eigenschaft speichert Daten, bis sie in einer anderen Anforderung gelesen werden. Mit den Methoden [Keep(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) und [Peek(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) können die Daten untersucht werden, ohne am Ende der Anforderung gelöscht zu werden. [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) markiert alle Elemente im Wörterbuch für die Aufbewahrung. `TempData` eignet sich besonders für die Weiterleitung, wenn Daten für mehr als eine Anforderung erforderlich sind. `TempData` wird von `TempData`-Anbietern durch Verwendung von Cookies oder des Sitzungszustands implementiert.
+
+## <a name="tempdata-samples"></a>TempData-Beispiele
+
+Beachten Sie die folgende Seite, die einen Kunden erstellt:
+
+[!code-csharp[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet&highlight=15-16,30)]
+
+Die folgende Seite zeigt `TempData["Message"]` an:
+
+[!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexPeek.cshtml?range=1-14)]
+
+Im vorangehenden Markup wird `TempData["Message"]` am Ende der Anforderung **nicht** gelöscht, da `Peek` verwendet wird. Bei Aktualisierung der Seite wird `TempData["Message"]` angezeigt.
+
+Das folgende Markup ähnelt dem vorangehenden Code, verwendet jedoch `Keep`, um die Daten am Ende der Anforderung beizubehalten:
+
+[!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexKeep.cshtml?range=1-14)]
+
+Die Navigation zwischen den Seiten *IndexPeek* und *IndexKeep* löscht `TempData["Message"]` nicht.
+
+Der folgende Code zeigt `TempData["Message"]` an, aber am Ende der Anforderung wird `TempData["Message"]` gelöscht:
+
+[!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/Index.cshtml?range=1-14)]
 
 ### <a name="tempdata-providers"></a>TempData-Anbieter
 

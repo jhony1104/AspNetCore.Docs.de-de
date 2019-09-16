@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 9f5ecc7840fc7ffd9432a3bb67d0418efb7e8fd6
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 261abae499a0d5f807a14aebd224949881067bc7
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975617"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773816"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -170,6 +170,8 @@ Weitere Informationen finden Sie unter [Konfiguration in ASP.NET Core](xref:fund
 
 In diesem Abschnitt werden Hosteinstellungen aufgeführt, die sowohl für HTTP- als auch für Nicht-HTTP-Workloads gelten. Standardmäßig können Umgebungsvariablen, die zur Konfiguration dieser Einstellungen verwendet werden, ein `DOTNET_`- oder `ASPNETCORE_`-Präfix haben.
 
+<!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
+
 ### <a name="applicationname"></a>ApplicationName
 
 Die Eigenschaft [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) wird von der Hostkonfiguration während der Hosterstellung festgelegt.
@@ -312,8 +314,9 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 Der HTTPS-Umleitungsport. Wird in [Erzwingen von HTTPS](xref:security/enforcing-ssl) verwendet.
 
-**Schlüssel**: https_port **Typ**: *Zeichenfolge*
-**Standardwert**: Es ist kein Standardwert festgelegt.
+**Schlüssel**: https_port  
+**Typ:** *Zeichenfolge*  
+**Standard**: Es ist kein Standardwert festgelegt.  
 **Umgebungsvariable:** `<PREFIX_>HTTPS_PORT`
 
 Verwenden Sie die Konfiguration, oder rufen Sie `UseSetting` auf, um diesen Wert festzulegen:
@@ -356,8 +359,9 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 Die Assembly, die nach der `Startup`-Klasse suchen soll.
 
-**Schlüssel**: startupAssembly **Typ**: *Zeichenfolge*  
-**Standard**: Die Assembly der App  
+**Schlüssel:** startupAssembly  
+**Typ:** *Zeichenfolge*  
+**Standardwert**: Die Assembly der App  
 **Umgebungsvariable:** `<PREFIX_>STARTUPASSEMBLY`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseStartup` auf, um diesen Wert festzulegen. `UseStartup` kann einen Assemblynamen (`string`) oder einen Typ (`TStartup`) annehmen. Wenn mehrere `UseStartup`-Methoden aufgerufen werden, hat die letzte Vorrang.
@@ -376,8 +380,8 @@ Eine durch Semikolons getrennte Liste mit IP-Adressen oder Hostadressen mit Port
 
 **Schlüssel:** urls  
 **Typ:** *Zeichenfolge*  
-**Standard**: `http://localhost:5000` und `https://localhost:5001`
-**Umgebungsvariable**: `<PREFIX_>URLS`
+**Standard**: `http://localhost:5000` und `https://localhost:5001`  
+**Umgebungsvariable:** `<PREFIX_>URLS`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseUrls` auf, um diesen Wert festzulegen:
 

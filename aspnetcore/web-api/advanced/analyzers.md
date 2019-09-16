@@ -1,31 +1,54 @@
 ---
 title: Verwenden von Analysetools für Web-APIs
 author: pranavkm
-description: Informationen zu Analysetools für Web-APIs in Microsoft.AspNetCore.Mvc.Api.Analyzers
+description: Erfahren Sie mehr über das ASP.NET Core MVC-Web-API-Analysetool-Paket.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 12/14/2018
+ms.date: 09/05/2019
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 2aaef738ab2a64f85cb85708f63d2375c04cacb5
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 1568eb0304a58758caa5f82249dc42872f5c36b9
+ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538564"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70384867"
 ---
 # <a name="use-web-api-analyzers"></a>Verwenden von Analysetools für Web-APIs
 
-ASP.NET Core 2.2 und höher umfasst das NuGet-Paket [Microsoft.AspNetCore.Mvc.Api.Analyzers](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers), in dessen Lieferumfang Analysetools für Web-APIs enthalten sind. Die Analysetools arbeiten mit Controllern mit der <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>-Klasse zusammen und basieren auf [API-Konventionen](xref:web-api/advanced/conventions).
+ASP.NET Core 2.2 und höher bietet ein MVC-Analysetool-Paket zur Verwendung mit Web-API-Projekten. Die Analysetools arbeiten mit Controllern mit der <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>-Klasse zusammen und basieren auf [Web-API-Konventionen](xref:web-api/advanced/conventions).
+
+Das Analysetoolpaket unterrichtet Sie über alle Controlleraktionen, auf die Folgendes zutrifft:
+
+* Rückgabe eines nicht deklarierten Statuscodes.
+* Rückgabe eines nicht deklarierten Erfolgsergebnisses.
+* Dokumentation eines Statuscodes, der nicht zurückgegeben wird.
+* Eine explizite Modellüberprüfung ist enthalten.
+
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="reference-the-analyzer-package"></a>Verweisen auf das Analysepaket
+
+In ASP.NET Core 3.0 oder höher sind die Analysetools im .NET Core SDK enthalten. Um das Analysetool im Projekt zu aktivieren, schließen Sie die `IncludeOpenAPIAnalyzers`-Eigenschaft in die Projektdatei ein:
+
+```xml
+<PropertyGroup>
+ <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+</PropertyGroup>
+```
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.2"
 
 ## <a name="package-installation"></a>Paketinstallation
 
-Das Paket `Microsoft.AspNetCore.Mvc.Api.Analyzers` kann wie folgt hinzugefügt werden:
+Installieren Sie das [Microsoft.AspNetCore.Mvc.Api.Analyzers](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers)-NuGet-Paket mit einem der folgenden Ansätze:
 
 ### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Aus dem Fenster **Paket-Manager-Konsole**:
-  * Navigieren Sie zu **Ansicht** > **Other Windows** (Weitere Fenster)  > **Paket-Manager-Konsole**.
+Aus dem Fenster **Paket-Manager-Konsole**:
+  * Navigieren Sie zu **Ansicht** > **Weitere Fenster** > **Paket-Manager-Konsole**.
   * Navigieren Sie zu dem Verzeichnis, in dem die *ApiConventions.csproj*-Datei gespeichert ist.
   * Führen Sie den folgenden Befehl aus:
 
@@ -33,15 +56,9 @@ Das Paket `Microsoft.AspNetCore.Mvc.Api.Analyzers` kann wie folgt hinzugefügt w
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
     ```
 
-* Aus dem Dialogfeld **NuGet-Pakete verwalten**:
-  * Klicken Sie mit der rechten Maustaste unter **Projektmappen-Explorer** > **NuGet-Pakete verwalten** auf Ihr Projekt.
-  * Legen Sie die **Paketquelle** auf „nuget.org“ fest.
-  * Geben Sie „Microsoft.AspNetCore.Mvc.Api.Analyzers“ in das Suchfeld ein.
-  * Wählen Sie das Paket „Microsoft.AspNetCore.Mvc.Api.Analyzers“ auf der Registerkarte **Durchsuchen** aus, und klicken Sie auf **Installieren**.
-
 ### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-* Klicken Sie mit der rechten Maustaste auf den Ordner *Pakete* unter **Lösungspad** > **Pakete hinzufügen...** .
+* Klicken Sie mit der rechten Maustaste auf den Ordner *Pakete* unter **Lösungspad** > **Pakete hinzufügen**.
 * Legen Sie im Fenster **Pakete hinzufügen** das Dropdownmenü **Quelle** auf „nuget.org“ fest.
 * Geben Sie „Microsoft.AspNetCore.Mvc.Api.Analyzers“ in das Suchfeld ein.
 * Wählen Sie das Paket „Microsoft.AspNetCore.Mvc.Api.Analyzers“ über den Ergebnisbereich aus, und klicken Sie auf **Paket hinzufügen**.
@@ -64,13 +81,15 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ---
 
-## <a name="analyzers-for-api-conventions"></a>Analysetools für API-Konventionen
+::: moniker-end
 
-OpenAPI-Dokumente enthalten Statuscodes und Antworttypen die von einer Aktion zurückgegeben werden können. In ASP.NET Core MVC werden Attribute wie <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> und <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> verwendet, um eine Aktion zu dokumentieren. Weitere Informationen zum Dokumentieren Ihrer API finden Sie unter <xref:tutorials/web-api-help-pages-using-swagger>.
+## <a name="analyzers-for-web-api-conventions"></a>Analysetools für Web-API-Konventionen
+
+OpenAPI-Dokumente enthalten Statuscodes und Antworttypen die von einer Aktion zurückgegeben werden können. In ASP.NET Core MVC werden Attribute wie <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> und <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> verwendet, um eine Aktion zu dokumentieren. Weitere Informationen zum Dokumentieren Ihrer Web-API finden Sie unter <xref:tutorials/web-api-help-pages-using-swagger>.
 
 Eins der Analysetools in dem Paket untersucht Controller mit der <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>-Klasse und erkennt Aktionen, deren Antworten nicht vollständig dokumentiert werden. Betrachten Sie das folgende Beispiel:
 
-[!code-csharp[](conventions/sample/Controllers/ContactsController.cs?name=missing404docs&highlight=9)]
+[!code-csharp[](conventions/sample/Controllers/ContactsController.cs?name=missing404docs&highlight=10)]
 
 Diese Aktion dokumentiert zwar den HTTP 200-Rückgabetyp „Erfolg“, aber nicht den HTTP 404-Statuscode „Fehler“. Das Analysetool meldet die fehlende Dokumentation für den HTTP 404-Statuscode als Warnung. Es gibt eine Möglichkeit, dieses Problem zu beheben.
 

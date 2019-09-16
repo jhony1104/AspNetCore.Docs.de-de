@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2f0410eb75a6ef3f3d361c75bce7e79ae6d42a61
-ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
+ms.openlocfilehash: ea1111f43b6b8b4f47061056e8ad8d505f92dba6
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/24/2019
-ms.locfileid: "70017505"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800481"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -67,11 +67,11 @@ Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponent
 
 ## <a name="component-parameters"></a>Komponentenparameter
 
-Komponenten können auch Parameter aufweisen. Komponentenparameter werden mithilfe öffentlicher Eigenschaften für die Komponentenklasse definiert, die mit `[Parameter]` versehen ist. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
+Komponenten können auch Parameter aufweisen. Komponentenparameter werden mithilfe öffentlicher Eigenschaften für die Komponentenklasse mit dem `[Parameter]`-Attribut definiert. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
 
 1. Aktualisieren Sie den `@code`-C#-Code der Komponente:
 
-   * Fügen Sie eine `IncrementAmount`-Eigenschaft hinzu, die mit dem `[Parameter]`-Attribut ausgestattet ist.
+   * Fügen Sie eine öffentliche `IncrementAmount`-Eigenschaft mit dem `[Parameter]`-Attribut hinzu.
    * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
    *Pages/Counter.razor*:
