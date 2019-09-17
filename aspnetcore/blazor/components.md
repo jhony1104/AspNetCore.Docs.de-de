@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/components
-ms.openlocfilehash: bc9fa06e5acccb773717fe87bf4aabb971b8dee5
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: e51f6745f6e0c748e51d7f8a49193f3d81fd2a06
+ms.sourcegitcommit: 07cd66e367d080acb201c7296809541599c947d1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963781"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71039186"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -229,6 +229,34 @@ Zusätzlich `onchange` zur Behandlung von Ereignissen mit `@bind` Syntax kann ei
 ```
 
 Anders `onchange`als, das ausgelöst wird, wenn das Element `oninput` den Fokus verliert, wird ausgelöst, wenn der Wert des Textfelds geändert wird.
+
+**Nicht zu erteilbare Werte**
+
+Wenn ein Benutzer einen nicht zu erteilbaren Wert für ein Daten gebundene Element bereitstellt, wird der nicht teilbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungs Ereignis ausgelöst wird.
+
+Betrachten Sie das folgende Szenario:
+
+* Ein `<input>` Element ist an einen `int` Typ mit einem Anfangswert von `123`gebunden:
+
+  ```cshtml
+  <input @bind="MyProperty" />
+
+  @code {
+      [Parameter]
+      public int MyProperty { get; set; } = 123;
+  }
+  ```
+* Der Benutzer aktualisiert den Wert des-Elements auf `123.45` der Seite auf und ändert den Element Fokus.
+
+Im vorangehenden Szenario wird der Wert des-Elements auf zurück `123`gesetzt. Wenn der Wert `123.45` zugunsten des ursprünglichen Werts von `123`abgelehnt wird, erkennt der Benutzer, dass sein Wert nicht akzeptiert wurde.
+
+Standardmäßig gilt die-Bindung für das- `onchange` Ereignis des`@bind="{PROPERTY OR FIELD}"`-Elements (). Verwenden `@bind-value="{PROPERTY OR FIELD}" @bind-value:event={EVENT}` Sie, um ein anderes Ereignis festzulegen. Für das `oninput` -Ereignis`@bind-value:event="oninput"`() tritt die Neuversion nach jedem Tastatur Strich auf, der einen nicht zu deerbaren Wert einführt. Wenn das `oninput` Ereignis mit einem `int`-gebundenen Typ als Ziel verwendet wird, wird verhindert, dass `.` ein Benutzer ein Zeichen eingibt. Ein `.` Zeichen wird sofort entfernt, sodass der Benutzer sofort Feedback erhält, dass nur ganze Zahlen zulässig sind. Es gibt Szenarien, in denen das Wiederherstellen des `oninput` Werts für das Ereignis nicht ideal ist, z. b. wenn der Benutzer einen nicht `<input>` zu testbaren Wert löschen darf. Zu Alternativen gehören:
+
+* Verwenden Sie das `oninput` Ereignis nicht. Verwenden Sie das `onchange` Standard Ereignis`@bind="{PROPERTY OR FIELD}"`(), bei dem ein ungültiger Wert nicht wieder hergestellt wird, bis das Element den Fokus verliert.
+* Binden Sie an einen Typ, der NULL- `int?` Werte `string`zulässt, wie z. b. oder, und stellen Sie eine benutzerdefinierte Logik bereit,
+* Verwenden Sie eine [Formular Validierungs Komponente](xref:blazor/forms-validation), z `InputNumber` . `InputDate`b. oder. Komponenten Validierungs Komponenten verfügen über eine integrierte Unterstützung zum Verwalten Ungültiger Eingaben. Komponenten Validierungs Komponenten:
+  * Ermöglicht es dem Benutzer, ungültige Eingaben bereitzustellen und Validierungs Fehler für `EditContext`die zugeordnete zu empfangen.
+  * Zeigen Sie Validierungs Fehler in der Benutzeroberfläche an, ohne dass der Benutzer die Eingabe zusätzlicher Webform-Daten beeinträchtigt.
 
 **Globalisierung**
 
