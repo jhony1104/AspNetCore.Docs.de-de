@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/15/2019
 uid: getting-started
-ms.openlocfilehash: c35251a0e49fbbffee7b8f5ea6905322b9042261
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: d1edf91f1b37ba2b69732471dc6c1f306ac5ad24
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814938"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081127"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
@@ -37,7 +37,7 @@ Am Schluss werden Sie eine funktionierende Web-App auf Ihrem lokalen Computer be
 
 Öffnen Sie eine Befehlsshell, und geben Sie den folgenden Befehl ein:
 
-```console
+```dotnetcli
 dotnet new webapp -o aspnetcoreapp
 ```
 
@@ -47,7 +47,7 @@ Vertrauen Sie dem HTTPS-Entwicklungszertifikat:
 
 # <a name="windowstabwindows"></a>[Windows](#tab/windows)
 
-```console
+```dotnetcli
 dotnet dev-certs https --trust
 ```
 
@@ -59,7 +59,7 @@ Klicken Sie auf **Ja**, wenn Sie zustimmen möchten, dass das Entwicklungszertif
 
 # <a name="macostabmacos"></a>[macOS](#tab/macos)
 
-```console
+```dotnetcli
 dotnet dev-certs https --trust
 ```
 
@@ -83,7 +83,7 @@ Weitere Informationen finden Sie unter [Festlegen des ASP.NET Core-HTTPS-Entwick
 
 Führen Sie die folgenden Befehle aus:
 
-```console
+```dotnetcli
 cd aspnetcoreapp
 dotnet run
 ```
