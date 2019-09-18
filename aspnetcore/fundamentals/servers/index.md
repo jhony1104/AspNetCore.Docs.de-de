@@ -1,18 +1,18 @@
 ---
 title: Webserverimplementierungen in ASP.NET Core
-author: guardrex
+author: tdykstra
 description: Ermitteln Sie die Webserver Kestrel und HTTP.sys für ASP.NET Core. Erfahren Sie mehr über das Auswählen eines Servers und darüber, wann ein Reverseproxyserver zu verwenden ist.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2019
+ms.date: 08/10/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: 404fec18409a675981fc0c068ee9a99001e06c16
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: cfea559725a644f167aa3afdf88c78bace4b5950
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975544"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011153"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Webserverimplementierungen in ASP.NET Core
 
@@ -34,7 +34,7 @@ Verwendung von Kestrel:
 
   ![Kestrel kommuniziert indirekt mit dem Internet über einen Reverseproxyserver wie IIS, Nginx oder Apache](kestrel/_static/kestrel-to-internet.png)
 
-Jede der beiden Hostingkonfigurationen &mdash;mit oder ohne einen Reverseproxyserver&mdash; wird für ASP.NET Core 2.1 oder neuere Apps unterstützt.
+Beide Hostingkonfigurationen (&mdash;mit oder ohne Reverseproxyserver&mdash;) werden unterstützt.
 
 Leitfäden zur Kestrel-Konfiguration und Informationen darüber, wann Kestrel in einer Reverseproxykonfiguration verwendet wird, finden Sie unter <xref:fundamentals/servers/kestrel>.
 
