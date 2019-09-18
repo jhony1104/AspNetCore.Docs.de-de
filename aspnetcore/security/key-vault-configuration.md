@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/01/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 0d0b6e20a1901d4a2630ce263b5fd0cd7bcca8fe
-ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
+ms.openlocfilehash: fe6cdca1f7180f9da26fe2838e529becb26ccd45
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/04/2019
-ms.locfileid: "68776650"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081102"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -61,13 +61,13 @@ Geheimnisse werden als Name-Wert-Paare erstellt. Hierarchische Werte (Konfigurat
 
 Der geheime Manager wird von einer Befehlsshell verwendet, die für den Inhalts Stamm des Projekts `{SECRET NAME}` geöffnet ist, wobei `{SECRET VALUE}` der Name und der Wert ist:
 
-```console
+```dotnetcli
 dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"
 ```
 
 Führen Sie die folgenden Befehle in einer Befehlsshell aus dem Inhalts Stamm des Projekts aus, um die geheimen Schlüssel für die Beispiel-App festzulegen:
 
-```console
+```dotnetcli
 dotnet user-secrets set "SecretName" "secret_value_1_dev"
 dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 ```
@@ -84,7 +84,7 @@ Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus A
    * Öffnen Sie Cloud Shell in Ihrem Browser mit der Schaltfläche **Start Cloud Shell** .
    * Wählen Sie im Menü in der oberen rechten Ecke des Azure-Portal die Schaltfläche **Cloud Shell** aus.
 
-   Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [unter Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
+   Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [in der Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
 
 1. Wenn Sie nicht bereits authentifiziert sind, melden Sie sich `az login` mit dem Befehl an.
 
@@ -233,7 +233,7 @@ Wenn dieser Ansatz implementiert ist:
 
    Speichern Sie die folgenden geheimen Schlüssel lokal mit dem [Geheimnis-Manager-Tool](xref:security/app-secrets):
 
-   ```console
+   ```dotnetcli
    dotnet user-secrets set "5000-AppSecret" "5.0.0.0_secret_value_dev"
    dotnet user-secrets set "5100-AppSecret" "5.1.0.0_secret_value_dev"
    ```

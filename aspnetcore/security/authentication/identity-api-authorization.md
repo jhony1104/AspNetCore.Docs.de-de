@@ -7,18 +7,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/05/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: cb51df0267a5eabd4a2694727e9c896d0554265e
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 4f6e3a4922c0a8a74b0e13edf1f00fe5f7bb76ba
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583596"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082328"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
 
 ASP.net Core 3,0 oder höher bietet die Authentifizierung in Single-Page-Apps (Spas) mithilfe der Unterstützung für die API-Autorisierung. ASP.net Core Identität für das Authentifizieren und Speichern von Benutzern wird mit [identityserver](https://identityserver.io/) für die Implementierung von Open ID Connect kombiniert.
 
-Der **Angular** -und der-Projektvorlagen, die dem Authentifizierungs Parameter in der **Webanwendung (Model-View-Controller)** (MVC) und der **Webanwendung** (Razor Pages) ähneln, wurde ein Authentifizierungs Parameter hinzugefügt. Projektvorlagen. Die zulässigen Parameterwerte sind **None** und **Individual**. Die Projektvorlage "" "" "" "" "" "" "" "" "" "" ""
+Der **Angular** -und der-Projektvorlagen, die dem Authentifizierungs Parameter in der **Webanwendung (Model-View-Controller)** (MVC **) und der** **Webanwendung** (Razor Pages) ähneln, wurde ein Authentifizierungs Parameter hinzugefügt. Projektvorlagen. Die zulässigen Parameterwerte sind **None** und **Individual**. Die **Projektvorlage** "" "" "" "" "" "" "" "" "" "" ""
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Erstellen einer APP mit Unterstützung für die API-Autorisierung
 
@@ -26,13 +26,13 @@ Benutzerauthentifizierung und-Autorisierung können mit Angular-und reagingspas 
 
 **Angular**:
 
-```console
+```dotnetcli
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
 **Reagieren**:
 
-```console
+```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
 ```
 

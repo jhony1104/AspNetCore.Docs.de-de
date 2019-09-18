@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: d95f44394d6ecc3c3896b45c5bebc73fa2d92445
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: d827f6f839c9e42e6d3d7b04fe8b24a1c9732aee
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011190"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082439"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>Erstellen einer ASP.NET Core-app mit Benutzerdaten, die durch Autorisierung geschützt sind
 
@@ -103,7 +103,7 @@ Verwenden Sie die ASP.NET [Identität](xref:security/authentication/identity) Be
 
 Erstellen Sie eine neue Migration, und aktualisieren Sie die Datenbank:
 
-```console
+```dotnetcli
 dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
@@ -130,7 +130,7 @@ Fügen Sie die [Zuordnung](/dotnet/api/microsoft.aspnetcore.authorization.allowa
 
 Die `SeedData` Klasse erstellt zwei Konten: Administrator und Manager. Verwenden der [Secret Manager-Tool](xref:security/app-secrets) , ein Kennwort für diese Konten festzulegen. Legen Sie das Kennwort aus dem Projektverzeichnis (das Verzeichnis mit *"Program.cs"* ):
 
-```console
+```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
 ```
 
@@ -279,7 +279,7 @@ Wenn Sie ein Kennwort für die per Seeding hinzugefügten Benutzerkonten bereits
 * Wählen Sie ein sicheres Kennwort: Verwenden Sie acht oder mehr Zeichen und mindestens ein Großbuchstabe, eine Zahl und ein Symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
 * Führen Sie den folgenden Befehl aus dem Ordner des Projekts, in denen `<PW>` ist das Kennwort:
 
-  ```console
+  ```dotnetcli
   dotnet user-secrets set SeedUserPW <PW>
   ```
 
@@ -310,7 +310,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
   * Nennen Sie ihn "ContactManager", sodass der Namespace den im Beispiel verwendeten Namespace entspricht.
   * `-uld` Gibt an, LocalDB anstelle von SQLite
 
-  ```console
+  ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
@@ -321,14 +321,14 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
 * Gerüst der `Contact` Modell.
 * Erstellen Sie der anfänglichen Migration und aktualisieren Sie die Datenbank zu:
 
-```console
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet tool install -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator razorpage -m Contact -udl -dc ApplicationDbContext -outDir Pages\Contacts --referenceScriptLibraries
 dotnet ef database drop -f
 dotnet ef migrations add initial
 dotnet ef database update
-  ```
+```
 
 Wenn Sie einen Fehler mit dem `dotnet aspnet-codegenerator razorpage` Befehl haben, finden Sie weitere Informationen in [diesem GitHub-Problem](https://github.com/aspnet/Scaffolding/issues/984).
 
@@ -426,7 +426,7 @@ Verwenden Sie die ASP.NET [Identität](xref:security/authentication/identity) Be
 
 Erstellen Sie eine neue Migration, und aktualisieren Sie die Datenbank:
 
-```console
+```dotnetcli
 dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
@@ -453,7 +453,7 @@ Hinzufügen ["AllowAnonymous"](/dotnet/api/microsoft.aspnetcore.authorization.al
 
 Die `SeedData` Klasse erstellt zwei Konten: Administrator und Manager. Verwenden der [Secret Manager-Tool](xref:security/app-secrets) , ein Kennwort für diese Konten festzulegen. Legen Sie das Kennwort aus dem Projektverzeichnis (das Verzeichnis mit *"Program.cs"* ):
 
-```console
+```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
 ```
 
@@ -602,16 +602,16 @@ Wenn Sie ein Kennwort für die per Seeding hinzugefügten Benutzerkonten bereits
 * Wählen Sie ein sicheres Kennwort: Verwenden Sie acht oder mehr Zeichen und mindestens ein Großbuchstabe, eine Zahl und ein Symbol. Z. B. `Passw0rd!` erfüllt die Anforderungen für sichere Kennwörter.
 * Führen Sie den folgenden Befehl aus dem Ordner des Projekts, in denen `<PW>` ist das Kennwort:
 
-  ```console
+  ```dotnetcli
   dotnet user-secrets set SeedUserPW <PW>
   ```
 
 * Löschen und Aktualisieren der Datenbank
 
-    ```console
-     dotnet ef database drop -f
-     dotnet ef database update  
-     ```
+  ```dotnetcli
+  dotnet ef database drop -f
+  dotnet ef database update  
+  ```
 
 * Starten Sie die app zum Seeding der Datenbank neu.
 
@@ -637,7 +637,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
   * Nennen Sie ihn "ContactManager", sodass der Namespace den im Beispiel verwendeten Namespace entspricht.
   * `-uld` Gibt an, LocalDB anstelle von SQLite
 
-  ```console
+  ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
@@ -648,7 +648,7 @@ Erstellen Sie einen Kontakt in der Administrator-Browser. Kopieren Sie die URL f
 * Gerüst der `Contact` Modell.
 * Erstellen Sie der anfänglichen Migration und aktualisieren Sie die Datenbank zu:
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Contact -udl -dc ApplicationDbContext -outDir Pages\Contacts --referenceScriptLibraries
   dotnet ef database drop -f
   dotnet ef migrations add initial

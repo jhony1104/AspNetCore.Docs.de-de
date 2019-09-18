@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/14/2019
 uid: test/razor-pages-tests
-ms.openlocfilehash: 35feb5dd95fa79ceca7ff03523cef30d29ccbdd3
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: afac97d686ef190ebb92d20a55a15dd774b0d1de
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022577"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081428"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Komponententests Razor pages in ASP.net Core
 
@@ -44,7 +44,7 @@ Das Beispiel Projekt besteht aus zwei apps:
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](/visualstudio/test/unit-test-your-code) oder [Visual Studio für Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Ordner *Tests/razorpgestestsample. Tests* aus:
 
-```console
+```dotnetcli
 dotnet test
 ```
 
@@ -54,13 +54,13 @@ Bei der Message-App handelt es sich um ein Razor Pages Nachrichtensystem mit fol
 
 * Die Index Seite der APP (*pages/index. cshtml* und *pages/index. cshtml. cs*) stellt eine UI-und Seiten Modell Methode bereit, mit der Sie das Hinzufügen, löschen und Analysieren von Nachrichten steuern können (suchen Sie die durchschnittliche Anzahl von Wörtern pro Nachricht).
 * Eine `Message` Meldung wird von der-Klasse (*Data/Message. cs*) mit zwei Eigenschaften beschrieben `Id` : (Key) `Text` und (Message). Die `Text` -Eigenschaft ist erforderlich und auf 200 Zeichen beschränkt.
-* Nachrichten werden&#8224;mithilfe [der in-Memory-Datenbank des Entity Framework](/ef/core/providers/in-memory/)gespeichert.
+* Nachrichten werden mithilfe [der in-Memory Database](/ef/core/providers/in-memory/)&#8224;Entity Framework gespeichert.
 * Die app enthält eine Dal in der Daten Bank Kontext Klasse `AppDbContext` (*Data/appdbcontext. cs*). Die DAL-Methoden sind `virtual`gekennzeichnet, sodass Sie die Methoden für die Verwendung in den Tests simulieren können.
 * Wenn die Datenbank beim Starten der APP leer ist, wird der Nachrichtenspeicher mit drei Nachrichten initialisiert. Diese *Seeding Nachrichten* werden auch in Tests verwendet.
 
-&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory-Datenbank für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
+&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory Database für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
 
-Obwohl die Beispiel-APP nicht das Repository-Muster verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) -Persistenzebene und (im Beispiel wird das Repository- <xref:mvc/controllers/testing> Muster implementiert).
+Obwohl die Beispiel-APP nicht das Repository-Muster verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur-Persistenzebene](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) und (im Beispiel wird das Repository- <xref:mvc/controllers/testing> Muster implementiert).
 
 ## <a name="test-app-organization"></a>Testen der APP-Organisation
 
@@ -228,7 +228,7 @@ Das Beispiel Projekt besteht aus zwei apps:
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](/visualstudio/test/unit-test-your-code) oder [Visual Studio für Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Ordner *Tests/razorpgestestsample. Tests* aus:
 
-```console
+```dotnetcli
 dotnet test
 ```
 
@@ -238,13 +238,13 @@ Bei der Message-App handelt es sich um ein Razor Pages Nachrichtensystem mit fol
 
 * Die Index Seite der APP (*pages/index. cshtml* und *pages/index. cshtml. cs*) stellt eine UI-und Seiten Modell Methode bereit, mit der Sie das Hinzufügen, löschen und Analysieren von Nachrichten steuern können (suchen Sie die durchschnittliche Anzahl von Wörtern pro Nachricht).
 * Eine `Message` Meldung wird von der-Klasse (*Data/Message. cs*) mit zwei Eigenschaften beschrieben `Id` : (Key) `Text` und (Message). Die `Text` -Eigenschaft ist erforderlich und auf 200 Zeichen beschränkt.
-* Nachrichten werden&#8224;mithilfe [der in-Memory-Datenbank des Entity Framework](/ef/core/providers/in-memory/)gespeichert.
+* Nachrichten werden mithilfe [der in-Memory Database](/ef/core/providers/in-memory/)&#8224;Entity Framework gespeichert.
 * Die app enthält eine Dal in der Daten Bank Kontext Klasse `AppDbContext` (*Data/appdbcontext. cs*). Die DAL-Methoden sind `virtual`gekennzeichnet, sodass Sie die Methoden für die Verwendung in den Tests simulieren können.
 * Wenn die Datenbank beim Starten der APP leer ist, wird der Nachrichtenspeicher mit drei Nachrichten initialisiert. Diese *Seeding Nachrichten* werden auch in Tests verwendet.
 
-&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory-Datenbank für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
+&#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory Database für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
 
-Obwohl die Beispiel-APP nicht das Repository-Muster verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) -Persistenzebene und (im Beispiel wird das Repository- <xref:mvc/controllers/testing> Muster implementiert).
+Obwohl die Beispiel-APP nicht das Repository-Muster verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur-Persistenzebene](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) und (im Beispiel wird das Repository- <xref:mvc/controllers/testing> Muster implementiert).
 
 ## <a name="test-app-organization"></a>Testen der APP-Organisation
 

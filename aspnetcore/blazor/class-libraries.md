@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: b5857f2cf22bde801deeeaf227817fdf99862f4a
-ms.sourcegitcommit: 4cb0c7e74355f2e87c60e2a196f842b937247a99
+ms.openlocfilehash: 91c4ffb29649c162fc15e5cb70dc60144b53afea
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2019
-ms.locfileid: "69545775"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080665"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.net Core Razor Components-Klassenbibliotheken
 
@@ -48,13 +48,13 @@ Befolgen Sie die Anleitungen in <xref:blazor/get-started> diesem Artikel, um Ihr
 
 1. Verwenden Sie die Vorlage für die Razor`razorclasslib`- **Klassenbibliothek** () mit dem Befehl [dotnet New](/dotnet/core/tools/dotnet-new) in einer Befehlsshell. Im folgenden Beispiel wird eine RCL mit dem Namen `MyComponentLib1`erstellt. Der Ordner, der `MyComponentLib1` enthält, wird automatisch erstellt, wenn der Befehl ausgeführt wird:
 
-   ```console
+   ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
    ```
 
 1. Um die Bibliothek einem vorhandenen Projekt hinzuzufügen, verwenden Sie den Befehl [dotnet Add Reference](/dotnet/core/tools/dotnet-add-reference) in einer Befehlsshell. Im folgenden Beispiel wird die RCL der app hinzugefügt. Führen Sie den folgenden Befehl aus dem Projektordner der APP mit dem Pfad zur Bibliothek aus:
 
-   ```console
+   ```dotnetcli
    dotnet add reference {PATH TO LIBRARY}
    ```
 
@@ -97,13 +97,13 @@ Fügen Sie `@using MyComponentLib1` die-Direktive in die *_Import. Razor* -Datei
 
 Da es sich bei Komponenten Bibliotheken um .net-Standardbibliotheken handelt, unterscheidet sich das Verpacken und Versenden von Dateien an nuget nicht von der Verpackung und dem Versand von Bibliotheken an nuget. Die Paket Erstellung erfolgt mithilfe des Befehls " [dotnet Pack](/dotnet/core/tools/dotnet-pack) " in einer Befehlsshell:
 
-```console
+```dotnetcli
 dotnet pack
 ```
 
 Laden Sie das Paket mit dem Befehl " [dotnet NuGet Publish](/dotnet/core/tools/dotnet-nuget-push) " in eine Befehlsshell in NuGet hoch:
 
-```console
+```dotnetcli
 dotnet nuget publish
 ```
 

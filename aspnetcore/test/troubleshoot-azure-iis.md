@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/18/2019
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: deae568a6ba88c9a8365b9d7f2df629899bc64a1
-ms.sourcegitcommit: 16502797ea749e2690feaa5e652a65b89c007c89
+ms.openlocfilehash: 384ae6645ce083fba76a430dfc3bec3a59d3870e
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68483321"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081537"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung ASP.net Core auf Azure App Service und IIS
 
@@ -32,7 +32,7 @@ Bietet Tipps zur Problembehandlung für apps, die in IIS bereitgestellt oder lok
 [Löschen von Paket Caches](#clear-package-caches)  
 Erläutert, was zu tun ist, wenn inkohärente Pakete eine APP beim Ausführen wichtiger Upgrades oder beim Ändern von Paketversionen unterbrechen.
 
-[Zusätzliche Ressourcen](#additional-resources)  
+[Weitere Ressourcen](#additional-resources)  
 Listet zusätzliche Problem Behandlungs Themen auf.
 
 ## <a name="app-startup-errors"></a>App-Startfehler
@@ -265,7 +265,7 @@ Viele Startfehler erzeugen keine nützlichen Informationen im Anwendungsereignis
 1. Führen Sie die App aus:
    * Wenn es sich bei der App um eine [Framework-abhängige Bereitstellung handelt](/dotnet/core/deploying/#framework-dependent-deployments-fdd):
 
-     ```console
+     ```dotnetcli
      dotnet .\{ASSEMBLY NAME}.dll
      ```
 

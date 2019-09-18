@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: 91a71498574d6d96c2c06e896283fed801e8adb3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 0e61c5b3e31a0b050d356b8f8e16306dc1e2a7f3
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893697"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080417"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Verwenden der React-Projektvorlage mit ASP.NET Core
 
@@ -26,7 +26,7 @@ Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlag
 
 Erstellen Sie über eine Eingabeaufforderung mit dem Befehl `dotnet new react` in einem leeren Verzeichnis ein neues Projekt. Mit den folgenden Befehlen wird die App beispielsweise im Verzeichnis *my-new-app* erstellt und zu diesem Verzeichnis gewechselt:
 
-```console
+```dotnetcli
 dotnet new react -o my-new-app
 cd my-new-app
 ```
@@ -59,7 +59,7 @@ Zwischen der React-App, die mit dieser Vorlage erstellt wurde, und der App, die 
 
 ## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
-Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Zum Beispiel:
+Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
 
 ```console
 cd ClientApp
@@ -80,13 +80,13 @@ Das Projekt ist so konfiguriert, dass die eigene Instanz des CRA-Entwicklungsser
 
 Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der CRA-Server neu gestartet. Es dauert einige Sekunden, bis der Sicherungsvorgang gestartet wird. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der CRA-Server neu gestartet wurde, können Sie den CRA-Server extern ausführen, unabhängig vom ASP.NET Core-Prozess. Gehen Sie hierzu wie folgt vor:
 
-1. Hinzufügen einer *env* -Datei in die *ClientApp* Unterverzeichnis mit folgender Einstellung:
+1. Fügen Sie dem *Client App* -Unterverzeichnis mit der folgenden Einstellung eine *. DV* -Datei hinzu:
 
     ```
     BROWSER=none
     ```
 
-    Dadurch wird Ihrem Webbrowser öffnen zu verhindern, dass beim Starten des Servers von CRA extern.
+    Dadurch wird verhindert, dass der Webbrowser geöffnet wird, wenn der CRA-Server extern gestartet wird.
 
 2. Wechseln Sie in einer Eingabeaufforderung zu dem Unterverzeichnis *ClientApp*, und starten Sie den CRA-Bereitstellungsserver:
 
@@ -104,7 +104,7 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
 Wenn Sie Ihre ASP.NET Core-App starten, wird kein CRA-Server gestartet. Stattdessen wird die Instanz verwendet, die Sie manuell gestartet haben. Dadurch kann sie schneller gestartet und neu gestartet werden. So müssen Sie nicht mehr jedes Mal warten, bis Ihre React-App neu erstellt wurde.
 
 > [!IMPORTANT]
-> "Serverseitiges Rendering" ist keine unterstützte Funktion dieser Vorlage. Unser Ziel mit dieser Vorlage ist Parität mit "create-React-app" zu erfüllen. Daher ist es möglich, Szenarien und Features, die nicht in einem Projekt "erstellen-React-app" (z. B. SSR) enthalten werden nicht unterstützt, und Sie bleiben als Übung für den Benutzer.
+> "Server seitiges Rendering" ist kein unterstütztes Feature dieser Vorlage. Unser Ziel dieser Vorlage besteht darin, die Parität mit "Create-REAG-app" zu erfüllen. Daher werden Szenarios und Features, die nicht in einem Projekt vom Typ "Create-REAG-app" (z. b. SSR) enthalten sind, nicht unterstützt und bleiben für den Benutzer als Übung erhalten.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

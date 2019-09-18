@@ -1,9 +1,9 @@
-# <a name="aspnet-core-integration-testing-sample"></a>Testen von ASP.NET Core-Integrationsbeispiel
+# <a name="aspnet-core-integration-testing-sample"></a>Beispiel für ASP.net Core Integration-Tests
 
-Dieses Beispiel veranschaulicht die Integrationstests von einem [ASP.NET Core Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) app. In diesem Beispiel wird veranschaulicht, die in beschriebenen Features der [Integrationstests in ASP.NET Core](https://docs.microsoft.com/aspnet/core/test/integration-tests) Thema.
+In diesem Beispiel werden die Integrationstests einer [ASP.net Core Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) -App veranschaulicht. In diesem Beispiel werden die Funktionen veranschaulicht, die im Thema [Integrationstests in ASP.net Core](https://docs.microsoft.com/aspnet/core/test/integration-tests) beschrieben werden.
 
-Wenn Sie eine IDE mit integrierten Tests Features nicht verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung in das *tests/RazorPagesProject.Tests* Ordner:
+Wenn Sie keine IDE mit integrierten Test Features verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Ordner *Tests/razorpagesproject. Tests* aus:
 
-```console
+```dotnetcli
 dotnet test
 ```

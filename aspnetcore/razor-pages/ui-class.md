@@ -7,18 +7,18 @@ ms.author: riande
 ms.date: 08/22/2019
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: 5b83cb44302a5900ec7b2ccc049790b4c1ca57e5
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: 92c04c1ac4c70c6245accf272753bc914aaab860
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985381"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081875"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Erstellen wiederverwendbarer Benutzeroberflächen mithilfe des Razor-Klassen Bibliotheks Projekts in ASP.net Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor-Ansichten, Seiten, Controller, Seiten Modelle, [Razor-Komponenten](xref:blazor/class-libraries), Ansichts [Komponenten](xref:mvc/views/view-components)und Datenmodelle können in eine Razor-Klassenbibliothek (RCL) integriert werden. Die RCL kann verpackt und wiederverwendet werden. Sie kann in Anwendungen eingebunden werden, wodurch sich die in der RCL enthaltenen Ansichten und Seiten überschreiben lassen. Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang.
+Razor-Ansichten, Seiten, Controller, Seiten Modelle, [Razor-Komponenten](xref:blazor/class-libraries), [Ansichts Komponenten](xref:mvc/views/view-components)und Datenmodelle können in eine Razor-Klassenbibliothek (RCL) integriert werden. Die RCL kann verpackt und wiederverwendet werden. Sie kann in Anwendungen eingebunden werden, wodurch sich die in der RCL enthaltenen Ansichten und Seiten überschreiben lassen. Wenn eine Ansicht, Teilansicht oder Razor-Seite sowohl in der Web-App als auch in der RCL enthalten ist, hat das Razor-Markup (die *CSHTML*-Datei) in der Web-App Vorrang.
 
 Dieses Feature erfordert [!INCLUDE[](~/includes/2.1-SDK.md)]
 
@@ -42,7 +42,7 @@ Eine RCL hat die folgende Projektdatei:
 
 Führen Sie `dotnet new razorclasslib` über die Befehlszeile aus. Zum Beispiel:
 
-```console
+```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
 ```
 
@@ -77,13 +77,13 @@ Wenn Sie die vollständige App nicht heruntergeladen haben und das Beispielproje
 
 Erstellen Sie über die Eingabeaufforderung im *cli*-Verzeichnis die RCL und die Web-App.
 
-```console
+```dotnetcli
 dotnet build
 ```
 
 Wechseln Sie ins Verzeichnis *WebApp1*, und führen Sie die App aus:
 
-```console
+```dotnetcli
 dotnet run
 ```
 
@@ -110,7 +110,7 @@ Erstellen Sie das RCL-Projekt:
 
 Führen Sie die folgenden Befehle über die Befehlszeile aus:
 
-```console
+```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
 dotnet new page -n _Message -np -o RazorUIClassLib/Areas/MyFeature/Pages/Shared
 dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
@@ -138,7 +138,7 @@ Die *_ViewStart.cshtml* Datei ist erforderlich, um das Layout des Projekts mit R
 
 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` ist erforderlich, um die Teilansicht `<partial name="_Message" />` verwenden zu können. Wenn Sie nicht die `@addTagHelper`-Anweisung einbinden möchten, können Sie die Datei *_ViewImports.cshtml* hinzufügen. Zum Beispiel:
 
-```console
+```dotnetcli
 dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
 ```
 
@@ -146,7 +146,7 @@ Weitere Informationen zu *_ViewImports.cshtml*, finden Sie unter [freigegebenen 
 
 * Erstellen Sie die Klassenbibliothek, um sicherzustellen, dass keine Compilerfehler vorliegen:
 
-```console
+```dotnetcli
 dotnet build RazorUIClassLib
 ```
 
@@ -176,7 +176,7 @@ Führen Sie die App aus.
 
 Erstellen Sie eine Razor Pages Web-App und eine Projektmappendatei, die die Razor Pages-APP und die RCL enthält:
 
-```console
+```dotnetcli
 dotnet new webapp -o WebApp1
 dotnet new sln
 dotnet sln add WebApp1
@@ -186,7 +186,7 @@ dotnet add WebApp1 reference RazorUIClassLib
 
 Erstellen Sie die Web-App, und führen Sie sie aus:
 
-```console
+```dotnetcli
 cd WebApp1
 dotnet run
 ```

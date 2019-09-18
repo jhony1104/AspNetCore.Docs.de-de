@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2019
 uid: test/integration-tests
-ms.openlocfilehash: 195acd3e03f3de63ebd61767f2c86d1c0f38fca5
-ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
+ms.openlocfilehash: 272f0f2140647dd31319f8feada0ec04c7ab4e44
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/24/2019
-ms.locfileid: "70017436"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082491"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.net Core
 
@@ -311,7 +311,7 @@ Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetc
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](https://visualstudio.microsoft.com). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *Tests/razorpagesproject. Tests* aus:
 
-```console
+```dotnetcli
 dotnet test
 ```
 
@@ -328,7 +328,7 @@ Das untergeordnete Element ist ein Razor Pages Nachrichtensystem mit folgenden M
 
 &#8224;Das EF-Thema [Testen mit inMemory](/ef/core/miscellaneous/testing/in-memory)erläutert, wie Sie eine in-Memory Database für Tests mit MSTest verwenden. In diesem Thema wird das [xUnit](https://xunit.github.io/) -Test Framework verwendet. Testkonzepte und Test Implementierungen in verschiedenen Test-Frameworks sind ähnlich, aber nicht identisch.
 
-Obwohl die APP das Repository-Muster nicht verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) -Persistenzebene und der [Test Controller Logik](/aspnet/core/mvc/controllers/testing) (im Beispiel wird das Repository-Muster implementiert).
+Obwohl die APP das Repository-Muster nicht verwendet und kein effektives Beispiel für das [Muster der Arbeitseinheit (Unit of Work, UOW)](https://martinfowler.com/eaaCatalog/unitOfWork.html)ist, werden Razor Pages diese Entwicklungsmuster unterstützt. Weitere Informationen finden Sie unter [Entwerfen der Infrastruktur-Persistenzebene](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) und der [Test Controller Logik](/aspnet/core/mvc/controllers/testing) (im Beispiel wird das Repository-Muster implementiert).
 
 ### <a name="test-app-organization"></a>Testen der APP-Organisation
 
