@@ -5,12 +5,12 @@ description: In diesem Tutorial wird erläutert, wie Sie das Dateiwatcher-Tool (
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 03b4f7f4ade5268915482a659890c7edc2d9a852
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5462f89a3b5a257ed0a6a8439efb077653fb14f6
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889875"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082250"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
@@ -24,7 +24,7 @@ Laden Sie die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/mast
 
 Navigieren Sie in einer Befehlsshell zum Ordner *WebApp*. Führen Sie den folgenden Befehl aus:
 
-```console
+```dotnetcli
 dotnet run
 ```
 
@@ -61,7 +61,7 @@ Das Dateiwatcher-Tool `dotnet watch` ist im Lieferumfang von .NET Core SDK-Versi
 
 1. Installieren Sie das `Microsoft.DotNet.Watcher.Tools`-Paket, indem Sie den folgenden Befehl ausführen:
 
-    ```console
+    ```dotnetcli
     dotnet restore
     ```
 
@@ -177,7 +177,7 @@ Wenn beide Projekte überwacht werden sollen, erstellen Sie eine benutzerdefinie
 
 Wechseln Sie zum Starten der Dateiüberwachung in beiden Projekten zum *test*-Ordner. Führen Sie den folgenden Befehl aus:
 
-```console
+```dotnetcli
 dotnet watch msbuild /t:Test
 ```
 

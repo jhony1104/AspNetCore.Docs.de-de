@@ -11,7 +11,7 @@ Die folgende Tabelle zeigt die Details der Parameter des Codegenerators von ASP.
 
 Verwenden Sie den `h`-Switch um Hilfe für den `aspnet-codegenerator controller`-Befehl zu erhalten:
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator controller -h
 ```
 

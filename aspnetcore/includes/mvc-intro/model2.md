@@ -22,7 +22,7 @@ Fügen Sie der Datei *appsettings.json* eine Verbindungszeichenfolge hinzu:
 
 Führen Sie die folgenden .NET Core-CLI-Befehle aus:
 
-```console
+```dotnetcli
 dotnet tool install --global dotnet-ef --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
@@ -71,7 +71,7 @@ Fügen Sie der Datei *appsettings.json* eine Verbindungszeichenfolge hinzu:
 
 Führen Sie den folgenden .NET Core-CLI-Befehl aus, um dem Projekt „SQLite“ und „CodeGeneration.Design“ hinzuzufügen:
 
-```console
+```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 ```

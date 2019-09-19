@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 25bfccb136d875b454034bd011828c9f3b6cd3d8
-ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
+ms.openlocfilehash: 1cc4fffc50978a3a958a96e1eb250cb85a8d2879
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/28/2019
-ms.locfileid: "70113288"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082067"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -81,7 +81,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 * Wechseln Sie vom Verzeichnis (`cd`) zum Ordner, der den Projektordner enthalten soll.
 * Führen Sie die folgenden Befehle aus:
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoAPI
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
@@ -116,7 +116,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 Öffnen Sie im Projektordner ein Befehlsterminal, und führen Sie die folgenden Befehle aus:
 
-   ```console
+   ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
    dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
    ```
@@ -280,7 +280,7 @@ Der vorangehende Code:
 
 Führen Sie die folgenden Befehle aus:
 
-```console
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
 dotnet tool install --global dotnet-aspnet-codegenerator
@@ -533,7 +533,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 * Wechseln Sie vom Verzeichnis (`cd`) zum Ordner, der den Projektordner enthalten soll.
 * Führen Sie die folgenden Befehle aus:
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o TodoApi
    code -r TodoApi
    ```

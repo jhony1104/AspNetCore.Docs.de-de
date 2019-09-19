@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: c2c815735ad1b4dcec761b26ea3992a4effebe62
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68682689"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081510"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -25,13 +25,13 @@ Dieser Artikel gilt für [.NET Core 2.1 SDK](https://dotnet.microsoft.com/downlo
 
 `dotnet-aspnet-codegenerator` ist ein [globales Tool](/dotnet/core/tools/global-tools), das installiert werden muss. Über den folgenden Befehl wird die neueste stabile Version des `dotnet-aspnet-codegenerator`-Tools installiert:
 
-```console
+```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 Mit dem folgenden Befehl wird `dotnet-aspnet-codegenerator` auf die neueste stabile Version aktualisiert, die in den installierten .NET Core SDKs verfügbar ist:
 
-```console
+```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
 ```
 
@@ -56,9 +56,9 @@ Der auszuführende Codegenerator. Folgende Generatoren sind verfügbar:
 | ----------------- | ------------ | 
 | area      | [Gerüstbau für einen Bereich](/aspnet/core/mvc/controllers/areas) |
   Controller| [Gerüstbau für einen Controller](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identity  | [Gerüstbau für eine Identität](/aspnet/core/security/authentication/scaffold-identity) |
+  Identität  | [Gerüstbau für eine Identität](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Gerüstbau für Razor Pages](/aspnet/core/tutorials/razor-pages/model) |
-  view      | [Gerüstbau für eine Ansicht](/aspnet/core/mvc/views/overview) |
+  Sicht      | [Gerüstbau für eine Ansicht](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>Optionen
 
@@ -137,7 +137,7 @@ Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator controller`:
 
 Verwenden Sie den Schalter `-h`, um Hilfe zum `aspnet-codegenerator controller`-Befehl zu erhalten:
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator controller -h
 ```
 
@@ -158,7 +158,7 @@ Für Razor Pages können jeweils einzelne Gerüste erstellt werden, indem der Na
 
 Beispielsweise verwendet der folgende Befehl die Bearbeitungsvorlage, um *MyEdit.cshtml* und *MyEdit.cshtml.cs* zu generieren:
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieContext -outDir Pages/Movies
 ```
 
@@ -184,7 +184,7 @@ Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator razorpage`:
 
 Verwenden Sie den Schalter `-h`, um Hilfe zum `aspnet-codegenerator razorpage`-Befehl zu erhalten:
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```
 
