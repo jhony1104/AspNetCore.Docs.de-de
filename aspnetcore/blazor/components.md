@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 09/19/2019
 uid: blazor/components
-ms.openlocfilehash: 521421ac413218c1f04dd9feade2a49dc1f7b918
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 55b40bc640715bf4052fa99ed68f63250b67e8d1
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080531"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168220"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -1128,7 +1128,7 @@ Alternativ können Sie das `Context` -Attribut für das Component-Element angebe
 
 ### <a name="generic-typed-components"></a>Generisch typisierte Komponenten
 
-Auf Vorlagen basierende Komponenten werden oft generisch typisiert. Beispielsweise kann eine generische `ListViewTemplate` Komponente zum Rendering `IEnumerable<T>` von Werten verwendet werden. Zum Definieren einer generischen Komponente verwenden Sie `@typeparam` die-Direktive, um Typparameter anzugeben:
+Auf Vorlagen basierende Komponenten werden oft generisch typisiert. Beispielsweise kann eine generische `ListViewTemplate` Komponente zum Rendering `IEnumerable<T>` von Werten verwendet werden. Zum Definieren einer generischen Komponente verwenden Sie [@typeparam](xref:mvc/views/razor#typeparam) die-Direktive, um Typparameter anzugeben:
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Components/ListViewTemplate.razor)]
 
@@ -1419,14 +1419,14 @@ Wenn der Code zum ersten Mal ausgeführt wird, wenn `someFlag` `true`den Wert ha
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Zweimal |
+| 0        | Textknoten | First  |
+| 1        | Textknoten | Second |
 
 Stellen Sie sich vor, und das Markup wird wieder gerendert. `false` `someFlag` Dieses Mal empfängt der Generator Folgendes:
 
 | Sequenz | Typ       | Daten   |
 | :------: | ---------- | :----: |
-| 1        | Textknoten  | Zweimal |
+| 1        | Textknoten  | Second |
 
 Wenn die Laufzeit einen Diff-Vorgang ausführt, wird angezeigt, dass das `0` Element in der Sequenz entfernt wurde, sodass das folgende triviale *Bearbeitungs Skript*generiert wird:
 
@@ -1451,14 +1451,14 @@ Nun lautet die erste Ausgabe wie folgt:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Zweimal |
+| 0        | Textknoten | First  |
+| 1        | Textknoten | Second |
 
 Dieses Ergebnis ist mit dem vorherigen Fall identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag`befindet `false` sich auf dem zweiten Rendering, und die Ausgabe lautet:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | ------ |
-| 0        | Textknoten | Zweimal |
+| 0        | Textknoten | Second |
 
 Dieses Mal sieht der Vergleichsalgorithmus, dass *zwei* Änderungen aufgetreten sind, und der Algorithmus generiert das folgende Bearbeitungs Skript:
 
