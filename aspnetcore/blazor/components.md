@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/19/2019
+ms.date: 09/21/2019
 uid: blazor/components
-ms.openlocfilehash: 55b40bc640715bf4052fa99ed68f63250b67e8d1
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: cf12be950043095b7e3e5eab897dd626021cb982
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168220"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176389"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -27,14 +27,6 @@ Blazor-apps werden mithilfe von *Komponenten*erstellt. Eine Komponente ist ein e
 Komponenten werden in [Razor](xref:mvc/views/razor) -Komponenten*Dateien (Razor*) mithilfe einer Kombination aus C# -und-HTML-Markup implementiert. Eine Komponente in blazor wird formal als *Razor-Komponente*bezeichnet.
 
 Der Name einer Komponente muss mit einem Großbuchstaben beginnen. Beispielsweise ist *mycoolcomponent. Razor* gültig, und *mycoolcomponent. Razor* ist ungültig.
-
-Komponenten können mit der Dateierweiterung *. cshtml* erstellt werden, sofern die Dateien mithilfe der `_RazorComponentInclude` MSBuild-Eigenschaft als Razor-Komponenten Dateien identifiziert werden. Beispielsweise eine APP, die angibt, dass alle *cshtml* -Dateien unter dem Ordner *pages* als Razor-Komponenten Dateien behandelt werden sollen:
-
-```xml
-<PropertyGroup>
-  <_RazorComponentInclude>Pages\**\*.cshtml</_RazorComponentInclude>
-</PropertyGroup>
-```
 
 Die Benutzeroberfläche für eine Komponente wird mit HTML definiert. Dynamische Renderinglogik (z.B. Schleifen, Bedingungen, Ausdrücken) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Wenn eine APP kompiliert wird, werden das HTML- C# Markup und die Renderinglogik in eine Komponenten Klasse konvertiert. Der Name der generierten Klasse entspricht dem Namen der Datei.
 
@@ -1046,6 +1038,9 @@ Wenn `IsCompleted`den Wert hat,wirddasKontrollkästchenwiefolgtgerendert:`false`
 
 Weitere Informationen finden Sie unter <xref:mvc/views/razor>.
 
+> [!WARNING]
+> Einige HTML-Attribute, z. b. " [Aria-Pressed](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)", funktionieren nicht ordnungsgemäß `bool`, wenn der .NET-Typ eine ist. Verwenden Sie in diesen Fällen einen `string` -Typ anstelle `bool`von.
+
 ## <a name="raw-html"></a>Unformatierte HTML
 
 Zeichen folgen werden normalerweise mithilfe von Dom-Textknoten gerendert, was bedeutet, dass alle darin enthaltenen Markup ignoriert und als Literaltext behandelt werden. Um unformatierten HTML-Code zu erstellen, umschließen Sie den HTML-Inhalt in einen `MarkupString` Der Wert wird als HTML oder SVG analysiert und in das DOM eingefügt.
@@ -1333,7 +1328,7 @@ Gerenderte Ausgabe des vorangehenden Codes:
 
 ## <a name="manual-rendertreebuilder-logic"></a>Manuelle rendertreebuilder-Logik
 
-`Microsoft.AspNetCore.Components.RenderTree`stellt Methoden zum Bearbeiten von Komponenten und Elementen bereit, einschließlich des manuellen C# erbauens von Komponenten im Code.
+`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`stellt Methoden zum Bearbeiten von Komponenten und Elementen bereit, einschließlich des manuellen C# erbauens von Komponenten im Code.
 
 > [!NOTE]
 > Die Verwendung `RenderTreeBuilder` von zum Erstellen von Komponenten ist ein erweitertes Szenario. Eine falsch formatierte Komponente (z. b. ein nicht geschlossenes Markup Kennzeichen) kann zu undefiniertem Verhalten führen.
@@ -1386,6 +1381,8 @@ Im folgenden Beispiel generiert die-Schleife in der `CreateComponent` -Methode d
     }
 }
 ```
+
+> ! Davor Die Typen in `Microsoft.AspNetCore.Components.RenderTree` ermöglichen die Verarbeitung der *Ergebnisse* von Renderingvorgängen. Hierbei handelt es sich um interne Details der blazor-Framework-Implementierung. Diese Typen sollten als *instabil* eingestuft werden und in zukünftigen Versionen geändert werden können.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Sequenznummern beziehen sich auf Codezeilen Nummern und keine Ausführungsreihenfolge.
 
