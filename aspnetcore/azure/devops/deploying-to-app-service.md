@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e09d03f1d30f128b1db1588aa92b28ec3e4ae626
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892637"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080440"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Bereitstellen einer app in App Service
 
@@ -35,7 +35,7 @@ Sie können den Code überprüfen, aber es ist wichtig zu verstehen, dass es nic
 
 Herunterladen Sie über eine Befehlsshell den Code, erstellen Sie das Projekt, und führen Sie es wie folgt aus.
 
-> *Hinweis: Linux/MacOS-Benutzer sollten, entsprechende Änderungen für Pfade, z. B. über einen Schrägstrich (`/`) anstatt einem umgekehrten Schrägstrich (`\`).*
+> *Hinweis: Linux/macOS-Benutzer sollten geeignete Änderungen an Pfaden vornehmen, z. b. mithilfe eines`/`Schrägstrichs () anstelle`\`eines umgekehrten Schrägstrichs ().*
 
 1. Klonen Sie den Code in einen Ordner auf Ihrem lokalen Computer.
 
@@ -51,13 +51,13 @@ Herunterladen Sie über eine Befehlsshell den Code, erstellen Sie das Projekt, u
 
 3. Wiederherstellen Sie der Pakete, und erstellen Sie die Projektmappe.
 
-    ```console
+    ```dotnetcli
     dotnet build
     ```
 
 4. Führen Sie die App aus.
 
-    ```console
+    ```dotnetcli
     dotnet run
     ```
 
@@ -73,7 +73,7 @@ Herunterladen Sie über eine Befehlsshell den Code, erstellen Sie das Projekt, u
 
 Um die app bereitstellen, müssen Sie zum Erstellen einer App Service [Web-App](/azure/app-service/app-service-web-overview). Nach der Erstellung der Web-App stellen Sie sich darauf aus Ihrem lokalen Computer mit Git bereit.
 
-1. Melden Sie sich bei der [Azure Cloudshell](https://shell.azure.com/bash). Hinweis: Wenn Sie zum ersten Mal anmelden, fordert Cloud Shell, um ein Speicherkonto für Konfigurationsdateien zu erstellen. Akzeptieren Sie die Standardeinstellungen, oder geben Sie einen eindeutigen Namen.
+1. Melden Sie sich bei der [Azure Cloudshell](https://shell.azure.com/bash). Hinweis: Wenn Sie sich erstmalig anmelden, werden Cloud Shell aufgefordert, ein Speicherkonto für Konfigurationsdateien zu erstellen. Akzeptieren Sie die Standardeinstellungen, oder geben Sie einen eindeutigen Namen.
 
 2. Verwenden Sie Cloud Shell, für die folgenden Schritte aus.
 

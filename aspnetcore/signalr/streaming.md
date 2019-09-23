@@ -1,56 +1,56 @@
 ---
-title: Verwenden Sie in ASP.NET Core SignalR-streaming
+title: Streaming in ASP.net Core signalr verwenden
 author: bradygaster
-description: Erfahren Sie, wie Sie Daten zwischen dem Client und Server streamen.
+description: Erfahren Sie, wie Sie Daten zwischen dem Client und dem Server streamen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 06/05/2019
 uid: signalr/streaming
-ms.openlocfilehash: a75156f398e113393ddb891d16eec3f09de80c09
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: d520c8eec3e777acb9604bdcb5969268deabf8da
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750189"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71186930"
 ---
-# <a name="use-streaming-in-aspnet-core-signalr"></a>Verwenden Sie in ASP.NET Core SignalR-streaming
+# <a name="use-streaming-in-aspnet-core-signalr"></a>Streaming in ASP.net Core signalr verwenden
 
-Durch [Brennan Conroy](https://github.com/BrennanConroy)
+Von [Brennan](https://github.com/BrennanConroy) "a"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core SignalR unterstützt das streaming, vom Client zum Server und vom Server zum Client. Dies ist nützlich für Szenarien, in denen Fragmente von Daten im Laufe der Zeit eintreffen. Beim streaming wird jedes Fragment gesendet an den Client oder Server möglichst bald wird es verfügbaren, statt alle Daten auf das Freiwerden warten.
+ASP.net Core signalr unterstützt das Streaming vom Client zum Server und vom Server zum Client. Dies ist nützlich für Szenarien, in denen Daten Fragmente im Laufe der Zeit eintreffen. Beim Streaming wird jedes Fragment an den Client oder Server gesendet, sobald es verfügbar wird, anstatt darauf zu warten, dass alle Daten verfügbar werden.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core SignalR unterstützt streaming Rückgabewerte von Servermethoden. Dies ist nützlich für Szenarien, in denen Fragmente von Daten im Laufe der Zeit eintreffen. Wenn ein Wert zurückgegeben, die an den Client gestreamt wird, wird jedes Fragment an den Client gesendet, sobald es wird zur Verfügung, statt alle Daten auf das Freiwerden warten.
+ASP.net Core signalr unterstützt das Streamen von Rückgabe Werten von Server Methoden. Dies ist nützlich für Szenarien, in denen Daten Fragmente im Laufe der Zeit eintreffen. Wenn ein Rückgabewert an den Client gestreamt wird, wird jedes Fragment an den Client gesendet, sobald es verfügbar wird, anstatt darauf zu warten, dass alle Daten verfügbar werden.
 
 ::: moniker-end
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="set-up-a-hub-for-streaming"></a>Richten Sie einen Hub für das streaming
+## <a name="set-up-a-hub-for-streaming"></a>Einrichten eines Hubs für das Streaming
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe <xref:System.Collections.Generic.IAsyncEnumerable`1>, <xref:System.Threading.Channels.ChannelReader%601>, `Task<IAsyncEnumerable<T>>`, oder `Task<ChannelReader<T>>`.
+Eine Hub-Methode wird automatisch zu einer streaminghub- <xref:System.Collections.Generic.IAsyncEnumerable`1>Methode <xref:System.Threading.Channels.ChannelReader%601>, wenn Sie `Task<ChannelReader<T>>`,, `Task<IAsyncEnumerable<T>>`oder zurückgibt.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Eine hubmethode wird automatisch eine streaming hubmethode, bei der Rückgabe eine <xref:System.Threading.Channels.ChannelReader%601> oder `Task<ChannelReader<T>>`.
+Eine Hub-Methode wird automatisch zu einer streaminghub-Methode <xref:System.Threading.Channels.ChannelReader%601> , wenn `Task<ChannelReader<T>>`Sie einen oder ein zurückgibt.
 
 ::: moniker-end
 
-### <a name="server-to-client-streaming"></a>Server-zu-Client-streaming
+### <a name="server-to-client-streaming"></a>Streaming zwischen Server und Client
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Streaming von Hub-Methoden zurückgeben kann `IAsyncEnumerable<T>` zusätzlich zu `ChannelReader<T>`. Die einfachste Möglichkeit zum Zurückgeben `IAsyncEnumerable<T>` ist, indem Sie der hubmethode eine Async-Iterator-Methode, wie das folgende Beispiel veranschaulicht. Hub-Async-Iterator-Methoden akzeptieren können eine `CancellationToken` Parameter, der ausgelöst wird, wenn der Client aus dem Stream kündigt das Abonnement. Async-Iterator-Methoden Probleme, die mit Kanälen, häufig zu vermeiden, z. B. keine zurückgegeben, die `ChannelReader` noch genügend Zeit oder die Methode wird beendet, ohne abgeschlossen der <xref:System.Threading.Channels.ChannelWriter`1>.
+Streaming Hub-Methoden können `IAsyncEnumerable<T>` zusätzlich zu `ChannelReader<T>`zurückgeben. Die einfachste Möglichkeit zur Rückgabe `IAsyncEnumerable<T>` besteht darin, dass Sie die Hub-Methode zu einer asynchronen Iteratormethode wird, wie im folgenden Beispiel veranschaulicht. Asynchrone Hub-Iteratormethoden können `CancellationToken` einen Parameter akzeptieren, der ausgelöst wird, wenn der Client den Datenstrom abonniert. Asynchrone Iteratormethoden vermeiden häufige Probleme, die mit Kanälen auftreten, wie `ChannelReader` z. b. das frühzeitige zurückgeben <xref:System.Threading.Channels.ChannelWriter`1>oder Beenden der Methode ohne das Abschließen von.
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -58,12 +58,12 @@ Streaming von Hub-Methoden zurückgeben kann `IAsyncEnumerable<T>` zusätzlich z
 
 ::: moniker-end
 
-Das folgende Beispiel zeigt die Grundlagen von streaming-Daten an den Client mithilfe von Kanälen. Jedes Mal, wenn ein Objekt richtet der <xref:System.Threading.Channels.ChannelWriter%601>, das Objekt sofort an den Client gesendet wird. Am Ende der `ChannelWriter` abgeschlossen ist, um dem Client veranlassen der Stream ist geschlossen.
+Das folgende Beispiel zeigt die Grundlagen des Streamings von Daten an den Client mithilfe von Kanälen. Jedes Mal, wenn ein Objekt in <xref:System.Threading.Channels.ChannelWriter%601>das geschrieben wird, wird das Objekt sofort an den Client gesendet. Am Ende `ChannelWriter` ist abgeschlossen, um dem Client mitzuteilen, dass der Stream geschlossen ist.
 
 > [!NOTE]
-> Schreiben in die `ChannelWriter<T>` auf einem Hintergrundthread und Rückgabe der `ChannelReader` so bald wie möglich. Andere Hubs Aufrufe werden blockiert, bis eine `ChannelReader` zurückgegeben wird.
+> Schreiben Sie in `ChannelWriter<T>` einem Hintergrund Thread in den, und `ChannelReader` geben Sie so bald wie möglich zurück. Andere hubaufrufe werden blockiert, bis eine `ChannelReader` zurückgegeben wird.
 >
-> Umschließen der Logik in einer `try ... catch`. Abschließen der `Channel` in die `catch` als auch außerhalb der `catch` sicherstellen, dass den Hub Methodenaufruf ordnungsgemäß abgeschlossen wird.
+> Packen Sie die Logik `try ... catch`in einer. Vervollständigen Sie `Channel` `catch` in und außerhalb von, um sicherzustellen, dass der Aufruf der hubmethode ordnungsgemäß abgeschlossen ist. `catch`
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -85,24 +85,24 @@ Das folgende Beispiel zeigt die Grundlagen von streaming-Daten an den Client mit
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Streaming Server-zu-Client-Hub-Methoden akzeptieren können eine `CancellationToken` Parameter, der ausgelöst wird, wenn der Client aus dem Stream kündigt das Abonnement. Verwenden Sie dieses Token beenden Sie den Servervorgang und alle Ressourcen freigeben, wenn der Client vor dem Ende des Streams, der die Verbindung trennt.
+Server-zu-Client-streaminghubmethoden können `CancellationToken` einen Parameter akzeptieren, der ausgelöst wird, wenn der Client den Datenstrom abonniert. Verwenden Sie dieses Token, um den Server Vorgang zu beenden und alle Ressourcen freizugeben, wenn der Client die Verbindung vor dem Ende des Streams trennt.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a>Client-zu-Server-streaming
+### <a name="client-to-server-streaming"></a>Client-zu-Server-Streaming
 
-Eine hubmethode wird automatisch eine Client-zu-Server-streaming hubmethode, wenn sie ein oder mehrere Objekte des Typs akzeptiert <xref:System.Threading.Channels.ChannelReader%601> oder <xref:System.Collections.Generic.IAsyncEnumerable%601>. Das folgende Beispiel zeigt die Grundlagen Lesen von Streamingdaten, die vom Client gesendet werden. Jedes Mal, wenn der Client schreibt in die <xref:System.Threading.Channels.ChannelWriter%601>, in die Daten geschrieben werden die `ChannelReader` auf dem Server, von dem die hubmethode liest.
+Eine Hub-Methode wird automatisch zu einer Client-zu-Server-streaminghub Methode, wenn Sie ein oder <xref:System.Threading.Channels.ChannelReader%601> mehrere <xref:System.Collections.Generic.IAsyncEnumerable%601>Objekte des Typs oder akzeptiert. Das folgende Beispiel zeigt die Grundlagen zum Lesen von Streamingdaten, die vom Client gesendet werden. Wenn der Client in den <xref:System.Threading.Channels.ChannelWriter%601>schreibt, werden die Daten auf dem Server, von dem die Hub-Methode liest, in den `ChannelReader` geschrieben.
 
 [!code-csharp[Streaming upload hub method](streaming/samples/3.0/Hubs/StreamHub.cs?name=snippet2)]
 
-Ein <xref:System.Collections.Generic.IAsyncEnumerable%601> Version der Methode folgt.
+Eine <xref:System.Collections.Generic.IAsyncEnumerable%601> Version der-Methode folgt.
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
 ```csharp
-public async Task UploadStream(IAsyncEnumerable<Stream> stream) 
+public async Task UploadStream(IAsyncEnumerable<string> stream)
 {
     await foreach (var item in stream)
     {
@@ -115,14 +115,14 @@ public async Task UploadStream(IAsyncEnumerable<Stream> stream)
 
 ## <a name="net-client"></a>.NET-Client
 
-### <a name="server-to-client-streaming"></a>Server-zu-Client-streaming
+### <a name="server-to-client-streaming"></a>Streaming zwischen Server und Client
 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Die `StreamAsync` und `StreamAsChannelAsync` Methoden `HubConnection` werden verwendet, um das streaming Server-zu-Client-Methoden aufrufen. Übergeben Sie die Namen der Hub-Methode und die Argumente, die in die hubmethode, die definiert `StreamAsync` oder `StreamAsChannelAsync`. Der generische Parameter auf `StreamAsync<T>` und `StreamAsChannelAsync<T>` gibt den Typ der Objekte, die von der streaming-Methode zurückgegeben. Ein Objekt des Typs `IAsyncEnumerable<T>` oder `ChannelReader<T>` aus dem Stream-Aufruf zurückgegeben wird, und den Stream darstellt, auf dem Client.
+Die `StreamAsync` - `StreamAsChannelAsync` Methode und `HubConnection` die-Methode in werden zum Aufrufen von Server-zu-Client-Streamingmethoden verwendet. Übergeben Sie den in der Hub-Methode definierten Namen und die Argumente `StreamAsync` der `StreamAsChannelAsync`Hub-Methode an oder. Der generische Parameter für `StreamAsync<T>` und `StreamAsChannelAsync<T>` gibt den Typ von Objekten an, die von der Streamingmethode zurückgegeben werden. Ein Objekt vom Typ `IAsyncEnumerable<T>` oder `ChannelReader<T>` wird vom Datenstrom Aufruf zurückgegeben und stellt den Datenstrom auf dem Client dar.
 
-Ein `StreamAsync` Beispiel und gibt `IAsyncEnumerable<int>`:
+Ein `StreamAsync` Beispiel, das `IAsyncEnumerable<int>`zurückgibt:
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -139,7 +139,7 @@ await foreach (var count in stream)
 Console.WriteLine("Streaming completed");
 ```
 
-Eine entsprechende `StreamAsChannelAsync` Beispiel und gibt `ChannelReader<int>`:
+Ein entsprechendes `StreamAsChannelAsync` Beispiel, das `ChannelReader<int>`zurückgibt:
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -165,7 +165,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Die `StreamAsChannelAsync` Methode `HubConnection` wird verwendet, um eine streaming-Server-zu-Client-Methode aufrufen. Übergeben Sie die Namen der Hub-Methode und die Argumente, die in die hubmethode, die definiert `StreamAsChannelAsync`. Der generische Parameter auf `StreamAsChannelAsync<T>` gibt den Typ der Objekte, die von der streaming-Methode zurückgegeben. Ein `ChannelReader<T>` aus dem Stream-Aufruf zurückgegeben wird, und den Stream darstellt, auf dem Client.
+Die `StreamAsChannelAsync` -Methode `HubConnection` für wird verwendet, um eine Server-zu-Client-Streamingmethode aufzurufen. Übergeben Sie den in der Hub-Methode definierten Namen und die Argumente `StreamAsChannelAsync`der Hub-Methode an. Der generische Parameter für `StreamAsChannelAsync<T>` gibt den Typ von Objekten an, die von der Streamingmethode zurückgegeben werden. Ein `ChannelReader<T>` wird vom Datenstrom Aufruf zurückgegeben und stellt den Datenstrom auf dem Client dar.
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -191,7 +191,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range="= aspnetcore-2.1"
 
-Die `StreamAsChannelAsync` Methode `HubConnection` wird verwendet, um eine streaming-Server-zu-Client-Methode aufrufen. Übergeben Sie die Namen der Hub-Methode und die Argumente, die in die hubmethode, die definiert `StreamAsChannelAsync`. Der generische Parameter auf `StreamAsChannelAsync<T>` gibt den Typ der Objekte, die von der streaming-Methode zurückgegeben. Ein `ChannelReader<T>` aus dem Stream-Aufruf zurückgegeben wird, und den Stream darstellt, auf dem Client.
+Die `StreamAsChannelAsync` -Methode `HubConnection` für wird verwendet, um eine Server-zu-Client-Streamingmethode aufzurufen. Übergeben Sie den in der Hub-Methode definierten Namen und die Argumente `StreamAsChannelAsync`der Hub-Methode an. Der generische Parameter für `StreamAsChannelAsync<T>` gibt den Typ von Objekten an, die von der Streamingmethode zurückgegeben werden. Ein `ChannelReader<T>` wird vom Datenstrom Aufruf zurückgegeben und stellt den Datenstrom auf dem Client dar.
 
 ```csharp
 var channel = await hubConnection
@@ -214,13 +214,13 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a>Client-zu-Server-streaming
+### <a name="client-to-server-streaming"></a>Client-zu-Server-Streaming
 
-Es gibt zwei Möglichkeiten, um eine Client-zu-Server-streaming hubmethode vom .NET-Client aufrufen. Können Sie übergeben eine `IAsyncEnumerable<T>` oder `ChannelReader` als Argument an `SendAsync`, `InvokeAsync`, oder `StreamAsChannelAsync`, je nachdem, für die hubmethode aufgerufen.
+Es gibt zwei Möglichkeiten, eine Client-zu-Server-streaminghub Methode aus dem .NET-Client aufzurufen. `IAsyncEnumerable<T>` Sie können entweder ein oder ein `ChannelReader` als Argument an `SendAsync`, `InvokeAsync`oder `StreamAsChannelAsync`übergeben, abhängig von der aufgerufenen Hub-Methode.
 
-Jedes Mal, wenn die Daten geschrieben wird, auf die `IAsyncEnumerable` oder `ChannelWriter` Objekt, die hubmethode auf dem Server erhält ein neues Element mit den Daten auf dem Client.
+Wenn Daten in das-Objekt `IAsyncEnumerable` oder `ChannelWriter` das-Objekt geschrieben werden, empfängt die Hub-Methode auf dem Server ein neues Element mit den Daten vom Client.
 
-Wenn ein `IAsyncEnumerable` Objekt ist, wird der Stream nach der Rückgabe Stream Elemente wird beendet-Methode endet.
+Wenn ein `IAsyncEnumerable` Objekt verwendet wird, endet der Stream, nachdem die Methode, die streamelemente zurückgibt, beendet wird.
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -238,7 +238,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-Oder Sie verwenden eine `ChannelWriter`, den Kanal mit der Durchführung `channel.Writer.Complete()`:
+Wenn Sie einen `ChannelWriter`verwenden, vervollständigen Sie den Kanal mit `channel.Writer.Complete()`folgenden Aktionen:
 
 ```csharp
 var channel = Channel.CreateBounded<string>(10);
@@ -252,20 +252,20 @@ channel.Writer.Complete();
 
 ## <a name="javascript-client"></a>JavaScript-Client
 
-### <a name="server-to-client-streaming"></a>Server-zu-Client-streaming
+### <a name="server-to-client-streaming"></a>Streaming zwischen Server und Client
 
-Clients mit JavaScript-Hubs mit streaming Server-zu-Client-Methoden aufrufen `connection.stream`. Die `stream` -Methode akzeptiert zwei Argumente:
+JavaScript-Clients wenden Server-zu-Client-Streamingmethoden `connection.stream`auf Hubs mit an. Die `stream` -Methode akzeptiert zwei Argumente:
 
-* Der Name der hubmethode. Im folgenden Beispiel wird der Name der Hub-Methode `Counter`.
-* In der hubmethode definierten Argumente. Im folgenden Beispiel werden die Argumente für eine Anzahl für die Anzahl der zu erhalten und die Verzögerung zwischen Stream-Elemente.
+* Der Name der hubmethode. Im folgenden Beispiel lautet `Counter`der Name der Hub-Methode.
+* In der Hub-Methode definierte Argumente. Im folgenden Beispiel sind die Argumente eine Anzahl für die Anzahl der zu empfangenden Datenstrom Elemente und die Verzögerung zwischen streamingelementen.
 
-`connection.stream` Gibt eine `IStreamResult`, enthält eine `subscribe` Methode. Übergeben einer `IStreamSubscriber` zu `subscribe` und legen Sie die `next`, `error`, und `complete` Rückrufe zum Empfangen von Benachrichtigungen von der `stream` Aufruf.
+`connection.stream`Gibt einen `IStreamResult`zurück, der eine `subscribe` -Methode enthält. Übergeben Sie `IStreamSubscriber` einen `subscribe` an, und `next`legen `error`Sie die `complete` Rückrufe, und fest, um `stream` Benachrichtigungen vom Aufruf zu empfangen.
 
 ::: moniker range=">= aspnetcore-2.2"
 
 [!code-javascript[Streaming javascript](streaming/samples/2.2/wwwroot/js/stream.js?range=19-36)]
 
-Um den Datenstrom vom Client zu beenden, rufen die `dispose` Methode für die `ISubscription` zurückgegeben, die von der `subscribe` Methode. Das Aufrufen dieser Methode bewirkt, dass Abbruch der `CancellationToken` Parameter der Hub-Methode, wenn Sie eine angegeben.
+Um den Stream vom Client zu beenden, müssen Sie `dispose` die-Methode `ISubscription` für das-Objekt abrufen `subscribe` , das von der-Methode zurückgegeben wird. Wenn Sie diese Methode `CancellationToken` aufrufen, wird der-Parameter der Hub-Methode abgebrochen.
 
 ::: moniker-end
 
@@ -273,31 +273,31 @@ Um den Datenstrom vom Client zu beenden, rufen die `dispose` Methode für die `I
 
 [!code-javascript[Streaming javascript](streaming/samples/2.1/wwwroot/js/stream.js?range=19-36)]
 
-Um den Datenstrom vom Client zu beenden, rufen die `dispose` Methode für die `ISubscription` zurückgegeben, die von der `subscribe` Methode.
+Um den Stream vom Client zu beenden, müssen Sie `dispose` die-Methode `ISubscription` für das-Objekt abrufen `subscribe` , das von der-Methode zurückgegeben wird.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a>Client-zu-Server-streaming
+### <a name="client-to-server-streaming"></a>Client-zu-Server-Streaming
 
-JavaScript-Clients Client-zu-Server streaming Methoden aufrufen Hubs durch die Übergabe einer `Subject` als Argument an `send`, `invoke`, oder `stream`, je nachdem, für die hubmethode aufgerufen. Die `Subject` ist eine Klasse, der aussieht wie ein `Subject`. Z. B. in RxJS können Sie die [Betreff](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) -Klasse aus dieser Bibliothek.
+Von JavaScript-Clients werden Client-zu-Server-Streamingmethoden für Hubs `Subject` aufgerufen, indem ein `send`als `invoke`Argument an `stream`, oder übergeben wird, abhängig von der aufgerufenen hubmethode. Ist eine Klasse, die wie eine `Subject`aussieht. `Subject` Beispielsweise können Sie in rxjs die Klasse " [Subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) " aus dieser Bibliothek verwenden.
 
 [!code-javascript[Upload javascript](streaming/samples/3.0/wwwroot/js/stream.js?range=41-51)]
 
-Aufrufen von `subject.next(item)` mit ein Element das Element in den Stream geschrieben werden soll, und die hubmethode empfängt das Element auf dem Server.
+Wenn `subject.next(item)` Sie mit einem Element aufrufen, wird das Element in den Stream geschrieben, und die Hub-Methode empfängt das Element auf dem Server.
 
-Um den Datenstrom zu beenden, rufen `subject.complete()`.
+Um den Stream zu beenden, `subject.complete()`wird aufgerufen.
 
 ## <a name="java-client"></a>Java-Client
 
-### <a name="server-to-client-streaming"></a>Server-zu-Client-streaming
+### <a name="server-to-client-streaming"></a>Streaming zwischen Server und Client
 
-Der SignalR-Java-Client verwendet die `stream` Methode, um die streaming-Methoden aufrufen. `stream` akzeptiert mindestens drei Argumente:
+Der signalr-Java-Client `stream` verwendet die-Methode, um Streamingmethoden aufzurufen. `stream`Es werden drei oder mehr Argumente akzeptiert:
 
-* Der erwartete Typ der Elemente Stream.
+* Der erwartete Typ der streamelemente.
 * Der Name der hubmethode.
-* In der hubmethode definierten Argumente.
+* In der Hub-Methode definierte Argumente.
 
 ```java
 hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
@@ -307,7 +307,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
         () -> {/* Define your onCompleted handler here. */});
 ```
 
-Die `stream` Methode `HubConnection` gibt ein wahrnehmbares Element, für den Elementtyp des Streams. Des Observable Typs `subscribe` Methode kommt `onNext`, `onError` und `onCompleted` Handler definiert sind.
+Die `stream` -Methode `HubConnection` für gibt einen Observable-Wert des Datenstrom-Elementtyps zurück. Die-Methode des Observable- `subscribe` Typs ist, `onCompleted` `onError` wo `onNext`und Handler definiert werden.
 
 ::: moniker-end
 

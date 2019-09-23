@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 uid: security/docker-https
-ms.openlocfilehash: f17a3abe1b00b39b7b6787be5b20ce65771190b8
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: c13ba02845eef5c53a939feec2be8a01bc4ca128
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69619695"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082531"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>Hosting von ASP.net Core Images mit docker über HTTPS
 
@@ -26,7 +26,7 @@ Weitere Informationen finden Sie [unter Entwickeln von ASP.net Core Anwendungen 
 
 Für dieses Beispiel ist [docker 17,06](https://docs.docker.com/release-notes/docker-ce) oder höher des [docker-Clients](https://www.docker.com/products/docker)erforderlich.
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 Für einige der Anweisungen in diesem Dokument ist das [.net Core 2,2 SDK](https://www.microsoft.com/net/download) oder höher erforderlich.
 
@@ -55,7 +55,7 @@ Verwenden Sie die folgenden Anweisungen für die Betriebssystem Konfiguration.
 
 Zertifikat generieren und lokalen Computer konfigurieren:
 
-```console
+```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
@@ -75,7 +75,7 @@ Das Kennwort muss dem Kennwort entsprechen, das für das Zertifikat verwendet wi
 
 Zertifikat generieren und lokalen Computer konfigurieren:
 
-```console
+```dotnetcli
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
@@ -97,7 +97,7 @@ Das Kennwort muss dem Kennwort entsprechen, das für das Zertifikat verwendet wi
 
 Zertifikat generieren und lokalen Computer konfigurieren:
 
-```console
+```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```

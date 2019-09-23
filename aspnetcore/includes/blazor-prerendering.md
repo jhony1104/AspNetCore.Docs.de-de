@@ -32,7 +32,6 @@ Wenn `JSRuntime.InvokeAsync` aufgerufen wird, `ElementRef` wird nur in `OnAfterR
 @page "/prerendered-interop"
 @using Microsoft.AspNetCore.Components
 @using Microsoft.JSInterop
-@inject IComponentContext ComponentContext
 @inject IJSRuntime JSRuntime
 
 <p>
@@ -59,32 +58,5 @@ Wenn `JSRuntime.InvokeAsync` aufgerufen wird, `ElementRef` wird nur in `OnAfterR
             StateHasChanged();
         }
     }
-}
-```
-
-Verwenden Sie die `IsConnected` -Eigenschaft für den `IComponentContext` Dienst, um unterschiedliche Inhalte bedingt zu erzeugen, je nachdem, ob die APP derzeit Inhalt vorab vorläuft. Bei blazor-Server- `IsConnected` apps gibt `true` nur dann zurück, wenn eine aktive Verbindung mit dem Client vorhanden ist. Sie gibt immer `true` in blazor Webassembly-apps zurück.
-
-```cshtml
-@page "/isconnected-example"
-@using Microsoft.AspNetCore.Components.Services
-@inject IComponentContext ComponentContext
-
-<h1>IsConnected Example</h1>
-
-<p>
-    Current state:
-    <strong id="connected-state">
-        @(ComponentContext.IsConnected ? "connected" : "not connected")
-    </strong>
-</p>
-
-<p>
-    Clicks:
-    <strong id="count">@count</strong>
-    <button id="increment-count" @onclick="@(() => count++)">Click me</button>
-</p>
-
-@code {
-    private int count;
 }
 ```

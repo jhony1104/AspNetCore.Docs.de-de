@@ -5,12 +5,12 @@ description: Erstellen einer Razor Pages-Web-App unter Windows mit Visual Studio
 ms.author: riande
 ms.date: 08/09/2019
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: 7c722a0992b9cf30731a11b31c839f183d40b9a0
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: 11a5f651aa3da0a01490d28d411a614cb2f355c2
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68994305"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082392"
 ---
 # <a name="tutorial-create-a-razor-pages-web-app-with-aspnet-core"></a>Tutorial: Erstellen einer Razor Pages-Web-App mit ASP.NET Core
 
@@ -36,3 +36,4 @@ Am Ende verfügen Sie über eine App, die eine Filmdatenbank anzeigen und verwal
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Dieses Tutorials auf YouTube](https://www.youtube.com/watch?v=F0SP7Ry4flQ&feature=youtu.be)
+* [Dieses Tutorial auf YouTube (Türkisch)](https://www.youtube.com/watch?v=wqW8ayrA5-E)

@@ -7,12 +7,12 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 1568eb0304a58758caa5f82249dc42872f5c36b9
-ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
+ms.openlocfilehash: 7b6a7328deb8718a2a1c67c104cec359a4f13497
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70384867"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082521"
 ---
 # <a name="use-web-api-analyzers"></a>Verwenden von Analysetools für Web-APIs
 
@@ -67,7 +67,7 @@ Aus dem Fenster **Paket-Manager-Konsole**:
 
 Führen Sie folgenden Befehl aus dem **integrierten Terminal** aus:
 
-```console
+```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 ```
 
@@ -75,7 +75,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 Führen Sie den folgenden Befehl aus:
 
-```console
+```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 ```
 

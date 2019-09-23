@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 07/22/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: c5347049151aed90f453f0ead2fc06649d9cf949
-ms.sourcegitcommit: bdaee0e8c657fe7546fd6b7990db9c03c2af04df
+ms.openlocfilehash: 107b348b4484301b86eeb5528833914fe4c1eaf7
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69908401"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080925"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
 
@@ -86,7 +86,7 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 * Erstellen Sie das Projekt.
 * Führen Sie an der Eingabeaufforderung im Projektordner die folgenden Befehle aus:
 
-  ```console
+  ```dotnetcli
   dotnet tool install --global dotnet-ef --version 3.0.0-*
   dotnet ef database update
   ```
@@ -116,7 +116,7 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
 * Führen Sie die folgenden Befehle aus, um ein Razor Pages `cd`-Projekt und den neuen Projektordner zu erstellen:
 
-  ```console
+  ```dotnetcli
   dotnet new webapp -o ContosoUniversity
   cd ContosoUniversity
   ```
@@ -228,7 +228,7 @@ Die folgenden Pakete werden automatisch installiert:
 
 * Führen Sie die folgenden Befehle der .NET Core-CLI aus, um erforderliche NuGet-Pakete zu installieren:
 
-  ```console
+  ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
   dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
   dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
@@ -243,7 +243,7 @@ Die folgenden Pakete werden automatisch installiert:
 
 * Führen Sie den folgenden Befehl zum Installieren des [Gerüstbautools aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator) aus.
 
-  ```console
+  ```dotnetcli
   dotnet tool install --global dotnet-aspnet-codegenerator --version 3.0.0-*
   ```
 
@@ -251,13 +251,13 @@ Die folgenden Pakete werden automatisch installiert:
 
   **Unter Windows**
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
   ```
 
   **Unter macOS oder Linux**
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
   ```
 
@@ -500,7 +500,7 @@ Führen Sie die App aus.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-```CLI
+```dotnetcli
 dotnet new webapp -o ContosoUniversity
 cd ContosoUniversity
 dotnet run
@@ -605,7 +605,7 @@ Wenn Sie Probleme mit dem vorherigen Schritt haben, finden Sie weitere Informati
 
 Führen Sie folgende Befehle aus, um das Gerüst für das Studentenmodell zu erstellen.
 
-```console
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 2.1.0
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
@@ -633,7 +633,7 @@ Das Gerüstbautool hat automatisch einen Datenbankkontext erstellt und diesen mi
 
 Untersuchen Sie die Methode `ConfigureServices` in *Startup.cs*. Die hervorgehobene Zeile wurde vom Gerüst hinzugefügt:
 
-[!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=5-6)]
+[!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
 Der Name der Verbindungszeichenfolge wird an den Kontext übergeben, indem Sie eine Methode auf einem [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions)-Objekt aufrufen. Für die lokale Entwicklung liest das [ASP.NET Core-Konfigurationssystem](xref:fundamentals/configuration/index) die Verbindungszeichenfolge aus der *appsettings.json*-Datei.
 

@@ -22,7 +22,7 @@ Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code da
 
 Öffnen Sie ein Terminal für das RazorPagesMovie-Projekt.  Klicken Sie auf der Entwurfs-/Layoutleiste mit der rechten Maustaste auf den Projektnamen, und navigieren Sie im Terminal zu **Extras > Öffnen**. Führen Sie die folgenden .NET Core-CLI-Befehle im Termial aus:
 
-```console
+```dotnetcli
 dotnet tool install --global dotnet-ef --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
@@ -57,11 +57,10 @@ Registrieren Sie den Datenbankkontext mit dem [Dependency Injection-Container](x
 
 Führen Sie den folgenden .NET Core-CLI-Befehl aus, um dem Projekt „SQLite“ und „CodeGeneration.Design“ hinzuzufügen:
 
-```console
+```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-
 ```
 
 Das `Microsoft.VisualStudio.Web.CodeGeneration.Design`-Paket wird für den Gerüstbau benötigt.

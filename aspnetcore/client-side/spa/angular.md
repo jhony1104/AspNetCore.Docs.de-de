@@ -7,12 +7,12 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/angular
-ms.openlocfilehash: 6d0107ef52d63a0f6f5713c518ddc54ac4230d53
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 62654ca040be99de8063a63c7e4ac09cbb8564eb
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893667"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080401"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
 
@@ -26,7 +26,7 @@ Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlag
 
 Erstellen Sie über eine Eingabeaufforderung mit dem Befehl `dotnet new angular` in einem leeren Verzeichnis ein neues Projekt. Mit den folgenden Befehlen wird die App beispielsweise im Verzeichnis *my-new-app* erstellt und zu diesem Verzeichnis gewechselt:
 
-```console
+```dotnetcli
 dotnet new angular -o my-new-app
 cd my-new-app
 ```
@@ -53,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 Navigieren Sie in einem Browser zu dieser URL.
 
-Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird angezeigt: *NG-Live-Entwicklungsserver auf "localhost" lauscht:&lt;Otherport&gt;, öffnen Sie Ihren Browser auf http://localhost:&lt; Otherport&gt;/*. Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
+Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird angezeigt: *Ng Live Development Server lauscht auf "localhost&lt;: otherport&gt;", öffnet Ihren http://localhost:&lt Browser auf "&gt; otherport/* ". Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
 
 ---
 
@@ -79,7 +79,7 @@ Wenn Sie das `ng`-Tool nicht installiert haben, führen Sie stattdessen `npm run
 
 ## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
-Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Zum Beispiel:
+Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
 
 ```console
 cd ClientApp
@@ -90,7 +90,7 @@ npm install --save <package_name>
 
 Bei der Entwicklung wird die App in einem für Entwickler optimierten Modus ausgeführt. JavaScript-Pakete enthalten beispielsweise Quellzuordnungen (damit Sie beim Debuggen Ihren ursprünglichen TypeScript-Code anzeigen können). Die App überwacht TypeScript-, HTML- und CSS-Dateiänderungen auf dem Datenträger und führt bei Feststellung dieser Dateiänderungen automatisch eine Neukompilierung und ein erneutes Laden durch.
 
-Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zu den Development Build ist nicht der erstellungs-Build Node.js auf dem Server installiert werden (es sei denn, Sie serverseitiges Rendering (SSR) aktiviert haben) erforderlich.
+Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zum entwicklungbuild ist es für den produktionsbuild nicht erforderlich, dass Node. js auf dem Server installiert wird (es sei denn, Sie haben serverseitiges Rendering (SSR) aktiviert).
 
 Sie können [ASP.NET Core-Standardhosting- und -bereitstellungsmethoden](xref:host-and-deploy/index) verwenden.
 

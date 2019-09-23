@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 26c8fcf56ab8ca68aeca93560785fc6c1144ab86
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 9ae0ca406138215c14b59ee395c1f6541ed9dfc9
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963692"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168244"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ## <a name="publish-the-app"></a>Veröffentlichen der App
 
@@ -32,7 +34,7 @@ Apps werden für die Bereitstellung in Releasekonfigurationen veröffentlicht.
 
 Verwenden Sie den Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) aus, um die App mit einer Releasekonfiguration zu veröffentlichen:
 
-```console
+```dotnetcli
 dotnet publish -c Release
 ```
 
@@ -71,13 +73,13 @@ Aktualisieren Sie das Tag `<base>` in den `<head>`-Tagelementen der Datei *wwwro
 
 Bei einer App mit einem relativen URL-Pfad, der sich nicht im Stammverzeichnis befindet (z. B. `<base href="/CoolApp/">`), werden die Ressourcen der App nicht gefunden, *wenn die App lokal ausgeführt wird*. Um dieses Problem bei der lokalen Entwicklung und bei Tests zu beheben, können Sie ein *Pfadbasis*-Argument bereitstellen, das dem `href`-Wert des `<base>`-Tags zur Laufzeit entspricht. Führen Sie den Befehl `dotnet run` aus dem Verzeichnis der App mit der `--pathbase`-Option aus, um das Basispfadargument beim lokalen Ausführen der App zu übergeben:
 
-```console
+```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}
 ```
 
 Für eine App mit einem relativen URL-Pfad von `/CoolApp/` (`<base href="/CoolApp/">`) lautet der Befehl wie folgt:
 
-```console
+```dotnetcli
 dotnet run --pathbase=/CoolApp
 ```
 

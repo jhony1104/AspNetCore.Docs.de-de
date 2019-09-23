@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für blaz
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 09/21/2019
 uid: blazor/layouts
-ms.openlocfilehash: 05a38c10e18407d50422192ab1ddf3ff4b0f3a5b
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 6ae795f720cd2cc1010ebec46bcee877b31d20c6
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800360"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176420"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.net Core blazor-Layouts
 
@@ -45,6 +45,8 @@ Wenn Sie ein Standardlayout für `NotFound` den Inhalt angeben möchten `LayoutV
 
 Weitere Informationen zur `Router` -Komponente finden <xref:blazor/routing>Sie unter.
 
+Die Angabe des Layouts als Standardlayout im Router ist eine sinnvolle Vorgehensweise, da Sie für einzelne Komponenten oder Ordner pro Ordner überschrieben werden kann. Verwenden Sie den Router, um das Standardlayout der App festzulegen, da es sich hierbei um die allgemeinste Methode handelt.
+
 ## <a name="specify-a-layout-in-a-component"></a>Angeben eines Layouts in einer Komponente
 
 Verwenden Sie die Razor `@layout` -Direktive, um ein Layout auf eine Komponente anzuwenden. Der Compiler konvertiert `@layout` in eine `LayoutAttribute`, die auf die Component-Klasse angewendet wird.
@@ -53,19 +55,23 @@ Der Inhalt der folgenden `MasterList` Komponente wird `MasterLayout` an der Posi
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
+Wenn Sie das Layout direkt in einer Komponente angeben, wird ein *Standardlayout* im Router oder eine `@layout` aus *_Imports. Razor*importierte Direktive überschrieben.
+
 ## <a name="centralized-layout-selection"></a>Zentrale Layoutauswahl
 
 Jeder Ordner einer APP kann optional eine Vorlagen Datei mit dem Namen *_Imports. Razor*enthalten. Der Compiler schließt die in der Imports-Datei angegebenen Direktiven in allen Razor-Vorlagen im gleichen Ordner und rekursiv in allen Unterordnern ein. Daher wird durch eine *_Imports. Razor* - `@layout MyCoolLayout` Datei sichergestellt, dass alle Komponenten in einem Ordner `MyCoolLayout`verwenden. Es ist nicht erforderlich, alle `@layout MyCoolLayout` *Razor* -Dateien im Ordner und in den Unterordnern wiederholt hinzuzufügen. `@using`Direktiven werden auch auf die gleiche Weise auf Komponenten angewendet.
 
 Die folgenden *_Imports. Razor* -Datei wird importiert:
 
-* `MyCoolLayout`
+* `MyCoolLayout`.
 * Alle Razor-Komponenten im selben Ordner und in allen Unterordnern.
 * Der `BlazorApp1.Data` -Namespace.
  
 [!code-cshtml[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
 Die Datei *_Imports. Razor* ähnelt der [Datei _ViewImports. cshtml für Razor-Ansichten und-Seiten](xref:mvc/views/layout#importing-shared-directives) , die jedoch speziell auf Razor-Komponenten Dateien angewendet werden.
+
+Durch die Angabe eines Layouts in *_Imports. Razor* wird ein Layout überschrieben, das als *Standardlayout*des Routers angegeben wird.
 
 ## <a name="nested-layouts"></a>In-Netz-Layouts
 

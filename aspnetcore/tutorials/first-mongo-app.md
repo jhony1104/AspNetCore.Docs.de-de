@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 2f7202945b3de03709b5f2e192a03549e55a04f7
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: acf2ded8b92a8f77678af7b772ac2a69264a642c
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583609"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082371"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Erstellen einer Web-API mit ASP.NET Core und MongoDB
 
@@ -163,17 +163,17 @@ Die Datenbank ist bereit. Sie können beginnen, die ASP.NET Core-Web-API zu erst
 
 1. Führen Sie die folgenden Befehle in einer Befehlsshell aus:
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o BooksApi
    code BooksApi
    ```
 
    Es wird ein neues ASP.NET Core Web-API-Projekt für .NET Core generiert und in Visual Studio Code geöffnet.
 
-1. Sobald das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'BooksApi' (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „BooksApi“ nicht vorhanden). Add them? (Sollen sie hinzugefügt werden?)**. Wählen Sie **Ja**.
+1. Sobald das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'BooksApi' (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „BooksApi“ nicht vorhanden). Add them? (Sollen sie hinzugefügt werden?)** . Wählen Sie **Ja**.
 1. Besuchen Sie den [NuGet-Katalog: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/), um die neueste stabile Version des .NET-Treibers für MongoDB zu ermitteln. Öffnen Sie das **integrierte Terminal** und navigieren Sie zum Stammverzeichnis des Projekts. Führen Sie den folgenden Befehl aus, um den .NET-Treiber für MongoDB zu installieren:
 
-   ```console
+   ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
    ```
 
@@ -513,17 +513,17 @@ Die Datenbank ist bereit. Sie können beginnen, die ASP.NET Core-Web-API zu erst
 
 1. Führen Sie die folgenden Befehle in einer Befehlsshell aus:
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o BooksApi
    code BooksApi
    ```
 
    Es wird ein neues ASP.NET Core Web-API-Projekt für .NET Core generiert und in Visual Studio Code geöffnet.
 
-1. Sobald das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'BooksApi' (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „BooksApi“ nicht vorhanden). Add them? (Sollen sie hinzugefügt werden?)**. Wählen Sie **Ja**.
+1. Sobald das OmniSharp-Flammensymbol in der Statusleiste grün angezeigt wird, wird ein Dialogfeld mit folgender Meldung angezeigt: **Required assets to build and debug are missing from 'BooksApi' (Die erforderlichen Objekte zum Erstellen und Debuggen sind in „BooksApi“ nicht vorhanden). Add them? (Sollen sie hinzugefügt werden?)** . Wählen Sie **Ja**.
 1. Besuchen Sie den [NuGet-Katalog: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/), um die neueste stabile Version des .NET-Treibers für MongoDB zu ermitteln. Öffnen Sie das **integrierte Terminal** und navigieren Sie zum Stammverzeichnis des Projekts. Führen Sie den folgenden Befehl aus, um den .NET-Treiber für MongoDB zu installieren:
 
-   ```console
+   ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
    ```
 

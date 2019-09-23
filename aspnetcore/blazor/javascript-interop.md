@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/07/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: 1572b9ee646577d094409cc33dd621f2f73dc863
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 505bd22c92c6723fb8f41621c05ba9fa3a74943b
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70964204"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176447"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
 
 Von [Javier calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)und [Luke Latham](https://github.com/guardrex)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Eine blazor-App kann JavaScript-Funktionen aus .net-und .NET-Methoden aus JavaScript-Code aufrufen.
 
@@ -111,7 +113,7 @@ Die Beispiel-app enthält eine Komponente zum Veranschaulichen der JavaScript-In
 
 ## <a name="call-a-void-javascript-function"></a>JavaScript-Funktion "void" aufruft
 
-JavaScript-Funktionen, die [void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) oder nicht [definiert](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) zurück `IJSRuntime.InvokeAsync<object>`geben, werden `null`mit aufgerufen, das zurückgibt.
+JavaScript-Funktionen, die [void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) oder nicht [definiert](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) zurück `IJSRuntime.InvokeVoidAsync`geben, werden mit aufgerufen.
 
 ## <a name="detect-when-a-blazor-app-is-prerendering"></a>Erkennen, wenn eine blazor-App vorab durchgeführt wird
  

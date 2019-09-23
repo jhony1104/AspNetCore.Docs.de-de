@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/21/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 989d10d0423075fb4812c79cd69b3e362e54e802
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: f538b06d2245400e234dadc2fd93c8aef94743ff
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985441"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081206"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Erste Schritte mit Swashbuckle und ASP.NET Core
 
@@ -61,7 +61,7 @@ Swashbuckle kann mit folgenden Vorgehensweisen hinzugefügt werden:
 
 Führen Sie folgenden Befehl aus dem **integrierten Terminal** aus:
 
-```console
+```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 ```
 
@@ -69,7 +69,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 
 Führen Sie den folgenden Befehl aus:
 
-```console
+```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 ```
 

@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: ab8cc547463ef647316b5a4e377c15021debc4b1
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 51fb1f9984878fceee0b207d02a02622c3ba191d
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963963"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168343"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ASP.NET Core unterstützt die Konfiguration und Verwaltung der Sicherheit in Blazor-Apps.
 
@@ -56,7 +58,7 @@ Ein Dialogfeld wird geöffnet, in dem dieselben Authentifizierungsmechanismen an
 
 Befolgen Sie die Visual Studio Code-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
 
-```console
+```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 
@@ -90,7 +92,7 @@ Der Befehl erstellt einen Ordner mit dem für den Platzhalter `{APP NAME}` angeg
 
 Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism:
 
-```console
+```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/31/2019
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: d9db2a251820d0dab26f8a6bd2eb755090154165
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: b71bc0464892f15ef8db0324a8e66a28a6192577
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813348"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080871"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -52,7 +52,7 @@ Wenn die App lokal ausgeführt wird und nicht so konfiguriert wurde, dass sie si
 
 Führen Sie [dotnet publish](/dotnet/core/tools/dotnet-publish) in der Entwicklungsumgebung aus, um eine App in ein Verzeichnis zu packen (z.B. *bin/Release/&lt;target_framework_moniker&gt;/publish*), das auf dem Server ausgeführt werden kann:
 
-```console
+```dotnetcli
 dotnet publish --configuration Release
 ```
 
@@ -352,7 +352,7 @@ Konfigurieren Sie mithilfe eines der folgenden Ansätze die App so, dass sie bei
 
 * Konfigurieren Sie den Server, damit dieser für den HTTPS-Datenverkehr an Port `443` empfangsbereit ist, indem Sie ein gültiges Zertifikat angeben, das von einer vertrauenswürdigen Zertifizierungsstelle (Certificate Authority, CA) ausgestellt wurde.
 
-* Stärken Sie Ihre Sicherheit, indem Sie einige der in der folgenden Datei ( */etc/nginx/nginx.conf*) dargestellten Methoden verwenden. Die Beispiele schließen das Auswählen einer stärkeren Verschlüsselung und das Weiterleiten allen Datenverkehrs über HTTP auf HTTPS ein.
+* Stärken Sie Ihre Sicherheit, indem Sie einige der in der folgenden Datei (*/etc/nginx/nginx.conf*) dargestellten Methoden verwenden. Die Beispiele schließen das Auswählen einer stärkeren Verschlüsselung und das Weiterleiten allen Datenverkehrs über HTTP auf HTTPS ein.
 
 * Durch das Hinzufügen eines `HTTP Strict-Transport-Security`-Headers (HSTS) wird sichergestellt, dass alle nachfolgenden Anforderungen vom Client über HTTPS erfolgen.
 

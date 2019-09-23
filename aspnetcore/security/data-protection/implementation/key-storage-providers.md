@@ -5,12 +5,12 @@ description: Informationen Sie zu den softwareschlüsselspeicher-Anbieter in ASP
 ms.author: riande
 ms.date: 06/11/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19d51399e24d085f7c34f70098ca02cbba7a888f
-ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
+ms.openlocfilehash: d5d15779d89a2d746ca2165abab2840232ae0128
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67167040"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082044"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Softwareschlüsselspeicher-Anbieter in ASP.NET Core
 
@@ -35,9 +35,9 @@ Die `DirectoryInfo` kann in ein Verzeichnis auf dem lokalen Computer, oder es ka
 
 ## <a name="azure-storage"></a>Azure Storage
 
-Die [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) Paket ermöglicht das Speichern von Data Protection-Schlüssel in Azure Blob Storage. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das Paket [Microsoft. aspnetcore. dataprotection. azurestorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) ermöglicht die Speicherung von Datenschutz Schlüsseln in Azure BLOB Storage. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
 
-Zum Konfigurieren des Azure Blob Storage-Anbieters rufen Sie eine der der [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) Überladungen.
+Zum Konfigurieren des Azure BLOB Storage Anbieters müssen Sie eine der [persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) -über Ladungen abrufen.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wenn die Web-app als Azure-Dienst ausgeführt wird, Authentifizierungstoken automatisch erstellt werden, mithilfe von [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/).
+Wenn die Web-App als Azure-Dienst ausgeführt wird, können Authentifizierungs Token automatisch mithilfe von [Microsoft. Azure. Services. appauthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)erstellt werden.
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
@@ -64,19 +64,19 @@ services.AddDataProtection()
     .PersistKeysToAzureBlobStorage(container, "keys.xml");
 ```
 
-Finden Sie unter [Weitere Informationen zum Konfigurieren von Dienst-zu-Dienst-Authentifizierung.](/azure/key-vault/service-to-service-authentication)
+[Weitere Informationen zum Konfigurieren der Dienst-zu-Dienst-Authentifizierung finden Sie unter.](/azure/key-vault/service-to-service-authentication)
 
 ## <a name="redis"></a>Redis
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Die [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) Paket ermöglicht das Speichern von Data Protection-Schlüssel in einem Redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das [Microsoft. aspnetcore. dataprotection. stackexchangeredis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Die [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) Paket ermöglicht das Speichern von Data Protection-Schlüssel in einem Redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das [Microsoft. aspnetcore. dataprotection. redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
 
 ::: moniker-end
 
@@ -145,15 +145,15 @@ Rufen Sie zum Konfigurieren des EF Core-Anbieters die [ `PersistKeysToDbContext<
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-15)]
 
-Der generische Parameter, `TContext`, erben müssen ["DbContext"](/dotnet/api/microsoft.entityframeworkcore.dbcontext) und implementieren Sie [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext):
+Der generische Parameter `TContext`muss von [dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) erben und [idataschutzkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)implementieren:
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-Erstellen der `DataProtectionKeys` Tabelle.
+Erstellen Sie `DataProtectionKeys` die Tabelle.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Führen Sie die folgenden Befehle in der **-Paket-Manager-Konsole** (PMC) im Fenster:
+Führen Sie die folgenden Befehle im Fenster **Paket-Manager-Konsole** (PMC) aus:
 
 ```PowerShell
 Add-Migration AddDataProtectionKeys -Context MyKeysContext
@@ -162,24 +162,24 @@ Update-Database -Context MyKeysContext
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-Führen Sie die folgenden Befehle in einer Befehlsshell ein:
+Führen Sie die folgenden Befehle in einer Befehlsshell aus:
 
-```console
+```dotnetcli
 dotnet ef migrations add AddDataProtectionKeys --context MyKeysContext
 dotnet ef database update --context MyKeysContext
 ```
 
 ---
 
-`MyKeysContext` ist die `DbContext` im obigen Codebeispiel definiert. Bei Verwendung einer `DbContext` mit einem anderen Namen ersetzen Ihrer `DbContext` für `MyKeysContext`.
+`MyKeysContext`ist der `DbContext` , der im vorangehenden Codebeispiel definiert wurde. Wenn Sie einen `DbContext` mit einem anderen Namen verwenden, ersetzen Sie den `DbContext` Namen `MyKeysContext`durch.
 
-Die  `DataProtectionKeys` /die überprüfungsentität-Klasse übernimmt die Struktur, in der folgenden Tabelle dargestellt.
+Die `DataProtectionKeys` Klasse/Entität übernimmt die Struktur, die in der folgenden Tabelle gezeigt wird.
 
-| Feld/Eigenschaft | CLR-Typ | SQL-Typ              |
+| Eigenschaft/Feld | CLR-Typ | SQL-Typ              |
 | -------------- | -------- | --------------------- |
-| `Id`           | `int`    | `int`, Primärschlüssel, nicht null   |
-| `FriendlyName` | `string` | `nvarchar(MAX)`, null |
-| `Xml`          | `string` | `nvarchar(MAX)`, null |
+| `Id`           | `int`    | `int`, PK, nicht NULL   |
+| `FriendlyName` | `string` | `nvarchar(MAX)`, NULL |
+| `Xml`          | `string` | `nvarchar(MAX)`, NULL |
 
 ::: moniker-end
 

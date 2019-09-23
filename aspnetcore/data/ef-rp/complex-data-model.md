@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: ab29cf687c80551d275cae69f28b7576016bfff6
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 78ff36b291b3215460d9ae8e560f49871862d19f
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238122"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080970"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -197,7 +197,7 @@ SqliteException: SQLite Error 1: 'no such column: s.FirstName'.
 
 * Öffnen Sie ein Befehlsfenster im Projektordner. Geben Sie folgende Befehle ein, um eine neue Migration zu erstellen und die Datenbank zu aktualisieren:
 
-  ```console
+  ```dotnetcli
   dotnet ef migrations add ColumnFirstName
   dotnet ef database update
   ```
@@ -213,7 +213,7 @@ In diesem Tutorial wird die anfängliche Migration gelöscht und erneut erstellt
 * Löschen Sie den Ordner *Migrations*.
 * Führen Sie die folgenden Befehle aus, um die Datenbank zu löschen, eine neue anfängliche Migration zu erstellen und die Migration anzuwenden:
 
-  ```console
+  ```dotnetcli
   dotnet ef database drop --force
   dotnet ef migrations add InitialCreate
   dotnet ef database update
@@ -612,13 +612,13 @@ Löschen und aktualisieren Sie die Datenbank, um EF Core zum Erstellen einer neu
 
 * Führen Sie den folgenden Befehl aus:
 
-  ```console
+  ```dotnetcli
   dotnet ef database drop --force
   ```
 
 * Löschen Sie den Ordner *Migrations*, und führen Sie dann den folgenden Befehl aus:
 
-  ```console
+  ```dotnetcli
   dotnet ef migrations add InitialCreate
   dotnet ef database update
   ```
@@ -705,7 +705,7 @@ Da die `DbInitializer.Initialize`-Methode nur für die Verwendung mit einer leer
 
 * Wenn Sie SQL Server LocalDB mit Visual Studio Code verwenden, führen Sie den folgenden Befehl aus:
 
-  ```console
+  ```dotnetcli
   dotnet ef database update
   ```
 
@@ -839,7 +839,7 @@ Update-Database
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-```console
+```dotnetcli
 dotnet ef migrations add ColumnFirstName
 dotnet ef database update
 ```
@@ -1246,13 +1246,13 @@ Erstellen Sie das Projekt.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-```PMC
+```powershell
 Add-Migration ComplexDataModel
 ```
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-```console
+```dotnetcli
 dotnet ef migrations add ComplexDataModel
 ```
 
@@ -1303,10 +1303,10 @@ Führen Sie `Get-Help about_EntityFrameworkCore` über die Paket-Manager-Konsole
 
 Geben Sie im Befehlsfenster Folgendes ein:
 
- ```console
- dotnet ef database drop
+```dotnetcli
+dotnet ef database drop
 dotnet ef database update
- ```
+```
 
 ---
 

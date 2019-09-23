@@ -1,11 +1,11 @@
-Führen Sie die Identity-gerüstbauer:
+Führen Sie das Identitäts Gerüst aus:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Von **Projektmappen-Explorer**, mit der rechten Maustaste auf das Projekt > **hinzufügen** > **neues Gerüstelement**.
 * Im linken Bereich, der die **Gerüst hinzufügen** wählen Sie im Dialogfeld **Identität** > **hinzufügen**.
-* In der **ADD Identity** Dialogfeld Wählen Sie die gewünschten Optionen.
-  * Wählen Sie Ihre vorhandene Layoutseite, oder durch falsche Markup die Layoutdatei überschrieben werden. Z. B. `~/Pages/Shared/_Layout.cshtml` für Razor-Seiten `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
+* Wählen Sie im Dialogfeld **Identität hinzufügen** die gewünschten Optionen aus.
+  * Wählen Sie die vorhandene Layoutseite aus, oder die Layoutdatei wird mit einem falschen Markup überschrieben. Beispiel `~/Pages/Shared/_Layout.cshtml` für Razor pages `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
   * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Datenkontextklasse**.
 * Wählen Sie **hinzufügen**.
 
@@ -13,26 +13,26 @@ Führen Sie die Identity-gerüstbauer:
 
 Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installieren Sie es jetzt:
 
-```cli
+```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-Fügen Sie einen Paketverweis auf [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) auf das Projekt (\*csproj) Datei. Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
+Fügen Sie der Projektdatei (\*. csproj) einen Paket Verweis auf [Microsoft. VisualStudio. Web. CodeGeneration. Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) hinzu. Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
 
-```cli
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
 Führen Sie den folgenden Befehl zum Auflisten von Optionen gerüstbauer Identität:
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-Führen Sie im Projektordner der gerüstbauer Identität, mit der gewünschten Optionen. Führen Sie z. B. um die Identität mit der standardmäßigen UI und die minimale Anzahl von Dateien einrichten, den folgenden Befehl ein:
+Führen Sie im Projektordner das Identitäts Gerüst mit den gewünschten Optionen aus. Führen Sie beispielsweise den folgenden Befehl aus, um die Identität mit der Standardbenutzer Oberfläche und der minimalen Anzahl von Dateien einzurichten:
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity --useDefaultUI
 ```
 

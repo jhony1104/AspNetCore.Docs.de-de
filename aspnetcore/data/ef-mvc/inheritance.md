@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 60d97137fbc6a08152b7b8a631b7a32940875b38
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 8e092ac47b2fd5fb6f3a0524bf1c559b7c3935c4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975099"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080424"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von Vererbung: ASP.NET MVC mit EF Core
 
@@ -93,7 +93,7 @@ Das ist alles, was Entity Framework für die Konfiguration der „Tabelle pro Hi
 
 Speichern Sie Ihre Änderungen, und erstellen Sie das Projekt. Öffnen Sie anschließend das Befehlsfenster im Projektordner, und geben Sie folgenden Befehl ein:
 
-```console
+```dotnetcli
 dotnet ef migrations add Inheritance
 ```
 
@@ -127,7 +127,7 @@ Dieser Code übernimmt folgende Tasks für Datenbankaktualisierungen:
 
 Führen Sie den Befehl `database update` aus:
 
-```console
+```dotnetcli
 dotnet ef database update
 ```
 

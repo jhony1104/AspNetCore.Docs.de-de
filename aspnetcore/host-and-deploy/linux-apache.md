@@ -7,12 +7,12 @@ ms.author: shboyer
 ms.custom: mvc
 ms.date: 03/31/2019
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 1a092a302bbffa74fa7a861901046ebda1998989
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: ec14bce5d8ada9a56ccc44d1159373dc73a09c1b
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813384"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081881"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hosten von ASP.NET Core unter Linux mit Apache
 
@@ -40,7 +40,7 @@ Wenn die App lokal ausgeführt wird und nicht so konfiguriert wurde, dass sie si
 
 Führen Sie [dotnet publish](/dotnet/core/tools/dotnet-publish) in der Entwicklungsumgebung aus, um eine App in ein Verzeichnis zu packen (z.B. *bin/Release/&lt;target_framework_moniker&gt;/publish*), das auf dem Server ausgeführt werden kann:
 
-```console
+```dotnetcli
 dotnet publish --configuration Release
 ```
 

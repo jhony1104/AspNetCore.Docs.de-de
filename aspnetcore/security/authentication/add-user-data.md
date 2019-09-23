@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 06/18/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: c219500b7595fd8d200e4e5e742b1e1fda836ba3
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: f5a47ffd2e068414268ed9037d4376bfd21ba1bb
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207736"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080810"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Hinzufügen, herunterladen und Löschen von benutzerdefinierten Daten die Identität in einem ASP.NET Core-Projekt
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 In diesem Artikel zeigt, wie Sie:
 
 * Fügen Sie benutzerdefinierter Benutzerdaten in einer ASP.NET Core-Web-app hinzu.
-* Ergänzen Sie die benutzerdefinierten Datenmodell mit der <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> Attribut, sodass sie automatisch für das Herunterladen und Löschen verfügbar ist. Sodass die Daten, die heruntergeladen und gelöscht werden kann hilft bei der Erfüllung [DSGVO](xref:security/gdpr) Anforderungen.
+* Ergänzen Sie das benutzerdefinierte Benutzerdaten Modell <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> mit dem-Attribut, damit es automatisch heruntergeladen und gelöscht werden kann. Sodass die Daten, die heruntergeladen und gelöscht werden kann hilft bei der Erfüllung [DSGVO](xref:security/gdpr) Anforderungen.
 
 Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anweisungen ähneln denen für eine ASP.NET Core MVC-Web-app.
 
@@ -36,13 +36,13 @@ Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anwe
 
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Code.
 * Wählen Sie **ASP.NET Core-Webanwendung** > **OK**
-* Wählen Sie **ASP.NET Core 2.2** in der Dropdownliste
+* Wählen Sie in der Dropdown Liste **ASP.net Core 2,2** aus.
 * Wählen Sie **Webanwendung**  > **OK**
 * Erstellen Sie das Projekt, und führen Sie es aus.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet new webapp -o WebApp1
 ```
 
@@ -67,26 +67,26 @@ dotnet new webapp -o WebApp1
 
 Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installieren Sie es jetzt:
 
-```cli
+```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 Fügen Sie einen Paketverweis auf [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) zur Projektdatei (.csproj). Führen Sie den folgenden Befehl im Verzeichnis Projekts ein:
 
-```cli
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
 Führen Sie den folgenden Befehl zum Auflisten von Optionen gerüstbauer Identität:
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
 Führen Sie im Projektordner der Identity-gerüstbauer:
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
 ```
 
@@ -143,14 +143,14 @@ Erstellen Sie das Projekt.
 
 In der Visual Studio **-Paket-Manager-Konsole**:
 
-```PMC
+```powershell
 Add-Migration CustomUserData
 Update-Database
 ```
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet ef migrations add CustomUserData
 dotnet ef database update
 ```

@@ -7,12 +7,12 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: e992401da2d194b178afbe51a293d103def0f940
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 5e531c0ce0ed48097054fd81ddc3655a66cc7c5f
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238157"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081670"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>Anforderungs- und Antwortvorgänge in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Justin Kotalik](https://github.com/jkotalik)
 
 In diesem Artikel wird erläutert, wie Sie den Anforderungstext lesen und den Antworttext schreiben. Möglicherweise ist Code für diese Vorgänge erforderlich, wenn Sie Middleware schreiben. Abgesehen vom Schreiben von Middleware ist benutzerdefinierter Code in der Regel nicht erforderlich, da die Vorgänge von MVC und Razor Pages behandelt werden.
 
-Es stehen zwei Abstraktionen für die Anforderungs- und Antworttexte zur Verfügung: <xref:System.IO.Stream> und <xref:System.IO.Pipelines.Pipe>. [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body) ist ein <xref:System.IO.Stream> zum Lesen der Anforderung, und `HttpRequest.BodyReader` ist ein <xref:System.IO.Pipelines.PipeReader>. [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body) ist eine `HttpResponse.BodyWriter` zum Schreiben der Antwort – ein <xref:System.IO.Pipelines.PipeWriter>.
+Es stehen zwei Abstraktionen für die Anforderungs- und Antworttexte zur Verfügung: <xref:System.IO.Stream> und <xref:System.IO.Pipelines.Pipe>. [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body) ist ein <xref:System.IO.Stream> zum Lesen der Anforderung, und `HttpRequest.BodyReader` ist ein <xref:System.IO.Pipelines.PipeReader>. [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body) ist eine <xref:System.IO.Stream> zum Schreiben der Antwort, und `HttpResponse.BodyWriter` ist eine <xref:System.IO.Pipelines.PipeWriter>.
 
 Anstelle von Datenströmen werden Pipelines empfohlen. Datenströme können bei einigen einfachen Vorgängen einfacher zu verwenden sein, aber Pipelines haben einen Leistungsvorteil und sind in den meisten Szenarien einfacher zu verwenden. ASP.NET Core beginnt, intern Pipelines anstelle von Datenströmen zu verwenden. Beispiele:
 

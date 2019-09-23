@@ -5,14 +5,14 @@ description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/23/2019
+ms.date: 09/15/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: ea1111f43b6b8b4f47061056e8ad8d505f92dba6
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: b433d793ae615bc4ece7c63bebd72d349adf43ee
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800481"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081265"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -57,7 +57,7 @@ Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponent
 
 1. Fügen Sie die `Index`-Komponente der `Counter`-Komponente der App durch Hinzufügen eines `<Counter />`-Elements zur `Index`-Komponente (*Index.razor*) hinzu.
 
-   Wenn Sie für diese Oberfläche die Blazor-Clientseite verwenden, verwendet die `Index`-Komponente eine `SurveyPrompt`-Komponente. Ersetzen Sie das `<SurveyPrompt>`-Element durch ein `<Counter />`-Element. Wenn Sie für diese Oberfläche eine serverseitige Blazor-App verwenden, fügen Sie das `<Counter />`-Element zur `Index`-Komponente hinzu:
+   Wenn Sie für diese Oberfläche Blazor WebAssembly verwenden, verwendet die `Index`-Komponente eine `SurveyPrompt`-Komponente. Ersetzen Sie das `<SurveyPrompt>`-Element durch ein `<Counter />`-Element. Wenn Sie für diese Oberfläche eine Blazor Server-App verwenden, fügen Sie das `<Counter />`-Element zur `Index`-Komponente hinzu:
 
    *Pages/Index.razor*:
 
@@ -97,11 +97,11 @@ Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
-Im Dienstcontainer der App registrierte Dienste stehen für Komponenten über [Abhängigkeitsinjektion (DI, Dependency Injection)](xref:fundamentals/dependency-injection) zur Verfügung. Fügen Sie Dienste mit der `@inject`-Anweisung in eine Komponente ein.
+Wenn Sie mit einer Blazor Server-App arbeiten, wird der `WeatherForecastService`-Dienst in `Startup.ConfigureServices` als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert. Eine Instanz des Diensts steht überall in der App mittels [Abhängigkeitsinjektion (Dependency Injection, DI)](xref:fundamentals/dependency-injection) zur Verfügung:
 
-Sehen Sie sich die Anweisungen der `FetchData`-Komponente an.
+[!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Wenn Sie eine serverseitige Blazor-App verwenden, ist der `WeatherForecastService`-Dienst als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert, sodass eine Instanz des Diensts in der gesamten App verfügbar ist. Mit der `@inject`-Anweisung wird die Instanz des `WeatherForecastService`-Diensts in die Komponente eingefügt.
+Mit der `@inject`-Anweisung wird die Instanz des `WeatherForecastService`-Diensts in die `FetchData`-Komponente eingefügt.
 
 *Pages/FetchData.razor*:
 
@@ -111,7 +111,7 @@ Die `FetchData`-Komponente verwendet den eingefügten Dienst wie `ForecastServic
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-Wenn Sie eine clientseitige Blazor-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* in den Ordner *wwwroot/sample-data* zu abzurufen:
+Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* in den Ordner *wwwroot/sample-data* abzurufen.
 
 *Pages/FetchData.razor*:
 
@@ -120,7 +120,6 @@ Wenn Sie eine clientseitige Blazor-App verwenden, wird `HttpClient` eingefügt, 
 Eine [\@foreach](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleife rendert jede Vorhersageinstanz als eine Zeile in der Wetterdatentabelle:
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
-
 
 ## <a name="build-a-todo-list"></a>Erstellen einer Aufgabenliste
 

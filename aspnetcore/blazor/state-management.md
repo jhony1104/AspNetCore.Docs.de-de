@@ -5,18 +5,20 @@ description: Erfahren Sie, wie Sie den Status in blazor-Server-apps beibehalten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/21/2019
 uid: blazor/state-management
-ms.openlocfilehash: e1c3b030f466a820d49c36839d7ee26bb7cea4d3
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 79676f606d31c435b54bdd8adb1c85c9e5c49bef
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963851"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176406"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.net Core blazor-Zustands Verwaltung
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Der blazor-Server ist ein Zustands behaftetes App-Framework. In den meisten Fällen behält die APP eine laufende Verbindung mit dem Server bei. Der Benutzer Zustand wird im Speicher des Servers *in einer Verbindung*gespeichert. 
 
@@ -244,38 +246,20 @@ Die vorab Generierung kann für andere Seiten nützlich sein, die oder `localSto
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
-@inject IComponentContext ComponentContext
 
 ... rendering code goes here ...
 
 @code {
     private int? currentCount;
-    private bool isWaitingForConnection;
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (ComponentContext.IsConnected)
-        {
-            // It looks like the app isn't prerendering, so the data can be
-            // immediately loaded from browser storage.
-            await LoadStateAsync();
-        }
-        else
-        {
-            // Prerendering is in progress, so the app defers the load operation
-            // until later.
-            isWaitingForConnection = true;
-        }
-    }
+    private bool isConnected = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        // By this stage, the client has connected back to the server, and
-        // browser services are available. If the app didn't load the data earlier,
-        // the app should do so now and then trigger a new render.
-        if (firstRender && isWaitingForConnection)
+        if (firstRender)
         {
-            isWaitingForConnection = false;
+            // When execution reaches this point, the first *interactive* render
+            // is complete. The component has an active connection to the browser.
+            isConnected = true;
             await LoadStateAsync();
             StateHasChanged();
         }

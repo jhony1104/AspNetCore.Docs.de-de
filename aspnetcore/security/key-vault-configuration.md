@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/01/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 0d0b6e20a1901d4a2630ce263b5fd0cd7bcca8fe
-ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
+ms.openlocfilehash: f16891182d274333ddc05eea401c06468e0717b1
+ms.sourcegitcommit: b1e480e1736b0fe0e4d8dce4a4cf5c8e47fc2101
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/04/2019
-ms.locfileid: "68776650"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71108085"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -61,13 +61,13 @@ Geheimnisse werden als Name-Wert-Paare erstellt. Hierarchische Werte (Konfigurat
 
 Der geheime Manager wird von einer Befehlsshell verwendet, die für den Inhalts Stamm des Projekts `{SECRET NAME}` geöffnet ist, wobei `{SECRET VALUE}` der Name und der Wert ist:
 
-```console
+```dotnetcli
 dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"
 ```
 
 Führen Sie die folgenden Befehle in einer Befehlsshell aus dem Inhalts Stamm des Projekts aus, um die geheimen Schlüssel für die Beispiel-App festzulegen:
 
-```console
+```dotnetcli
 dotnet user-secrets set "SecretName" "secret_value_1_dev"
 dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 ```
@@ -84,19 +84,19 @@ Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus A
    * Öffnen Sie Cloud Shell in Ihrem Browser mit der Schaltfläche **Start Cloud Shell** .
    * Wählen Sie im Menü in der oberen rechten Ecke des Azure-Portal die Schaltfläche **Cloud Shell** aus.
 
-   Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [unter Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
+   Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [in der Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
 
 1. Wenn Sie nicht bereits authentifiziert sind, melden Sie sich `az login` mit dem Befehl an.
 
 1. Erstellen Sie eine Ressourcengruppe mit dem folgenden Befehl, `{RESOURCE GROUP NAME}` wobei der Name der Ressourcengruppe für die neue Ressourcengruppe `{LOCATION}` und die Azure-Region (Datacenter) ist:
 
-   ```console
+   ```azure-cli
    az group create --name "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
 1. Erstellen Sie mit dem folgenden Befehl einen Schlüssel Tresor in der Ressourcengruppe, `{KEY VAULT NAME}` wobei der Name für den neuen Schlüssel Tresor und `{LOCATION}` die Azure-Region (Datacenter) ist:
 
-   ```console
+   ```azure-cli
    az keyvault create --name "{KEY VAULT NAME}" --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
@@ -106,7 +106,7 @@ Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus A
 
    Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod` Suffix, um Sie von den `_dev` suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden. Ersetzen `{KEY VAULT NAME}` Sie durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
 
-   ```console
+   ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "Section--SecretName" --value "secret_value_2_prod"
    ```
@@ -176,7 +176,7 @@ Eine APP, die für Azure App Service bereitgestellt wird, wird automatisch bei A
 
 Wenn Sie Azure CLI und die Objekt-ID der App verwenden, stellen `list` Sie `get` der APP die Berechtigungen und für den Zugriff auf den Schlüssel Tresor bereit:
 
-```console
+```azure-cli
 az keyvault set-policy --name '{KEY VAULT NAME}' --object-id {OBJECT ID} --secret-permissions get list
 ```
 
@@ -233,14 +233,14 @@ Wenn dieser Ansatz implementiert ist:
 
    Speichern Sie die folgenden geheimen Schlüssel lokal mit dem [Geheimnis-Manager-Tool](xref:security/app-secrets):
 
-   ```console
+   ```dotnetcli
    dotnet user-secrets set "5000-AppSecret" "5.0.0.0_secret_value_dev"
    dotnet user-secrets set "5100-AppSecret" "5.1.0.0_secret_value_dev"
    ```
 
 1. Geheime Schlüssel werden in Azure Key Vault mithilfe der folgenden Azure CLI Befehle gespeichert:
 
-   ```console
+   ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5000-AppSecret" --value "5.0.0.0_secret_value_prod"
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
    ```

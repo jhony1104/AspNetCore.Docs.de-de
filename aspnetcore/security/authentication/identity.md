@@ -5,12 +5,12 @@ description: Verwenden Sie die Identität mit einer ASP.net Core-app. Erfahren S
 ms.author: riande
 ms.date: 03/26/2019
 uid: security/authentication/identity
-ms.openlocfilehash: 325a61e6038e79b9a0db72c8360a5cbff2c8ddae
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: 979681cfc196aca9fb5097583d99a086e1c597ba
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011206"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082455"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität auf ASP.net Core
 
@@ -53,7 +53,7 @@ Erstellen Sie ein ASP.net Core Webanwendungs Projekt mit einzelnen Benutzerkonte
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
 ```
 
@@ -77,7 +77,7 @@ Führen Sie den folgenden Befehl in der Paket-Manager-Konsole (PMC) aus:
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet ef database update
 ```
 
@@ -145,7 +145,7 @@ Fügen Sie die Registrierungs-, Anmelde-und Abmelde Dateien hinzu.
 
 Wenn Sie das Projekt mit dem Namen **"WebApp1"** erstellt haben, führen Sie die folgenden Befehle aus. Verwenden Sie andernfalls den korrekten Namespace für `ApplicationDbContext`:
 
-```cli
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```

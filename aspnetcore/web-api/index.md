@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2019
 uid: web-api/index
-ms.openlocfilehash: 6e1868690a2c384307a23c89467505d3ed8916db
-ms.sourcegitcommit: 805f625d16d74e77f02f5f37326e5aceafcb78e3
+ms.openlocfilehash: aab9b848eb6e69055b019c9253c716898e9847e2
+ms.sourcegitcommit: a11f09c10ef3d4eeab7ae9ce993e7f30427741c1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70985463"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149346"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -159,7 +159,7 @@ Sie können über [konventionelle Routen](xref:mvc/controllers/routing#conventio
 
 ::: moniker-end
 
-## <a name="automatic-http-400-responses"></a>Automatische HTTP 400-Antwort
+### <a name="automatic-http-400-responses"></a>Automatische HTTP 400-Antwort
 
 Durch das `[ApiController]`-Attribut wird bei Modellvalidierungsfehlern automatisch eine HTTP 400-Antwort ausgelöst. Deshalb ist der folgende Code in einer Aktionsmethode überflüssig:
 
@@ -172,7 +172,7 @@ if (!ModelState.IsValid)
 
 ASP.NET Core MVC verwendet den <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter>-Aktionsfilter, um die vorherige Überprüfung durchzuführen.
 
-### <a name="default-badrequest-response"></a>Standardmäßige BadRequest-Antwort 
+### <a name="default-badrequest-response"></a>Standardmäßige BadRequest-Antwort
 
 Bei Kompatibilitätsversion 2.1 wird für eine HTTP 400-Antwort standardmäßig der Antworttyp <xref:Microsoft.AspNetCore.Mvc.SerializableError> verwendet. Der folgende Anforderungstext ist ein Beispiel für den serialisierten Typ:
 
@@ -206,36 +206,6 @@ Der `ValidationProblemDetails`-Typ:
 
 * Bietet ein vom Computer lesbares Format zum Angeben von Fehlern in Web-API-Antworten.
 * Entspricht der [RFC 7807-Spezifikation](https://tools.ietf.org/html/rfc7807).
-
-Wenden Sie die in `Startup.ConfigureServices` hervorgehobenen Änderungen an, um den Standardantworttyp in `SerializableError` zu ändern.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_DisableProblemDetailsInvalidModelStateResponseFactory&highlight=4-13)]
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_DisableProblemDetailsInvalidModelStateResponseFactory&highlight=5-14)]
-
-::: moniker-end
-
-### <a name="customize-badrequest-response"></a>Anpassen der BadRequest-Antwort
-
-Verwenden Sie <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory>, um die aus einem Validierungsfehler resultierende Antwort anzupassen. Beispiel:
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_ConfigureBadRequestResponse&highlight=4-20)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureBadRequestResponse&highlight=5-21)]
 
 ::: moniker-end
 
@@ -283,7 +253,7 @@ Im folgenden Beispiel gibt das `[FromQuery]`-Attribut an, dass der Parameterwert
 
 Das `[ApiController]`-Attribut wendet Rückschlussregeln auf die Standarddatenquellen von Aktionsparametern an. Da durch diese Regeln Attribute auf die Aktionsparameter angewendet werden, müssen Sie Bindungsquellen nicht manuell identifizieren. Die Rückschlussregeln für Bindungsquellen verhalten sich wie folgt:
 
-* `[FromBody]` wird für komplexe Typparameter abgeleitet. Jeder komplexe integrierte Typ mit spezieller Bedeutung, z. B. <xref:Microsoft.AspNetCore.Http.IFormCollection> und <xref:System.Threading.CancellationToken>, stellt eine Ausnahme von der `[FromBody]`-Rückschlussregel dar. Der Rückschlusscode der Bindungsquelle ignoriert diese Typen. 
+* `[FromBody]` wird für komplexe Typparameter abgeleitet. Jeder komplexe integrierte Typ mit spezieller Bedeutung, z. B. <xref:Microsoft.AspNetCore.Http.IFormCollection> und <xref:System.Threading.CancellationToken>, stellt eine Ausnahme von der `[FromBody]`-Rückschlussregel dar. Der Rückschlusscode der Bindungsquelle ignoriert diese Typen.
 * `[FromForm]` wird für Aktionsparameter des Typs <xref:Microsoft.AspNetCore.Http.IFormFile> und <xref:Microsoft.AspNetCore.Http.IFormFileCollection> abgeleitet. Es wird für keine einfachen oder benutzerdefinierte Typen abgeleitet.
 * `[FromRoute]` wird für jeden Namen von Aktionsparametern abgeleitet, der mit einem Parameter in der Routenvorlage übereinstimmt. Wenn mehr als eine Route mit einem Aktionsparameter übereinstimmt, gilt jeder Routenwert als `[FromRoute]`.
 * `[FromQuery]` wird für alle anderen Aktionsparameter abgeleitet.
@@ -375,22 +345,6 @@ Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetai
 }
 ```
 
-### <a name="customize-problemdetails-response"></a>Anpassen der ProblemDetails-Antwort
-
-Verwenden Sie die <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping*>-Eigenschaft zum Konfigurieren des Inhalts der `ProblemDetails`-Antwort. Der folgenden Code aktualisiert beispielsweise die `type`-Eigenschaft für 404-Antworten:
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=8-9)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
-
-::: moniker-end
-
 ### <a name="disable-problemdetails-response"></a>Deaktivieren der ProblemDetails-Antwort
 
 Die automatische Erstellung einer `ProblemDetails`-Instanz ist deaktiviert, wenn die <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors*>-Eigenschaft auf `true` festgelegt ist. Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinzu:
@@ -407,9 +361,10 @@ Die automatische Erstellung einer `ProblemDetails`-Instanz ist deaktiviert, wenn
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen 
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:web-api/action-return-types>
+* <xref:web-api/handle-errors>
 * <xref:web-api/advanced/custom-formatters>
 * <xref:web-api/advanced/formatting>
 * <xref:tutorials/web-api-help-pages-using-swagger>

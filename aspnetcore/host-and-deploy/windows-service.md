@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: c2a2941f2a4e27218c90cf47453c69149da8e766
-ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
+ms.openlocfilehash: 995fdd2bbba30ff983bc2055fcb97c14541e2ac6
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2019
-ms.locfileid: "70815699"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081479"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -48,7 +48,7 @@ Die ASP.NET Core-Workerdienstvorlage dient als Ausgangspunkt für das Programmie
 
 Rufen Sie die Vorlage „Workerdienst“ (`worker`) über eine Befehlsshell mit dem Befehl [dotnet new](/dotnet/core/tools/dotnet-new) auf. Im folgenden Beispiel wird eine Workerdienstanwendung namens `ContosoWorkerService` erstellt. Der Ordner für die App `ContosoWorkerService` wird automatisch erstellt, wenn der Befehl ausgeführt wird.
 
-```console
+```dotnetcli
 dotnet new worker -o ContosoWorkerService
 ```
 
