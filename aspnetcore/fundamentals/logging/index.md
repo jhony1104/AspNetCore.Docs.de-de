@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 03734addcc0e063c2c216b26b59762d27d35d47c
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 90b439603dd51ff02e40045b9420876d7200bef1
+ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081162"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219158"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -529,7 +529,7 @@ Die Reihenfolge der Platzhalter – nicht ihre Namen – bestimmt, welche Parame
 ```csharp
 string p1 = "parm1";
 string p2 = "parm2";
-_logger.LogInformation("Parameter values: {p2}, {p1}", p1, p2);
+_logger.LogInformation("Parameter values: {p1}, {p2}", p1, p2);
 ```
 
 Dieser Code erstellt eine Protokollierungsmeldung mit den Parameterwerten in der richtigen Reihenfolge:
@@ -541,7 +541,7 @@ Parameter values: parm1, parm2
 Das Protokollierungsframework funktioniert auf diese Weise, damit Protokollierungsanbieter [semantische Protokollierung, die auch als strukturierte Protokollierung bezeichnet wird](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging), implementieren können. Die Argumente selbst (nicht nur die formatierte Meldungsvorlage) werden an das Protokollierungssystem übergeben. Diese Informationen ermöglichen es Protokollierungsanbietern, die Parameterwerte als Felder zu speichern. Nehmen wir zum Beispiel an, dass Aufrufe von Protokollierungsmethoden folgendermaßen aussehen:
 
 ```csharp
-_logger.LogInformation("Getting item {ID} at {RequestTime}", id, DateTime.Now);
+_logger.LogInformation("Getting item {Id} at {RequestTime}", id, DateTime.Now);
 ```
 
 Wenn Sie die Protokolle an Azure Table Storage senden, kann jede Azure Table-Entität die Eigenschaften `ID` und `RequestTime` aufweisen. Dies vereinfacht die Abfrage von Protokolldaten. Eine Abfrage kann alle Protokolle in einem bestimmten `RequestTime`-Bereich finden, ohne die Uhrzeit aus den Textmeldungen zu analysieren.
