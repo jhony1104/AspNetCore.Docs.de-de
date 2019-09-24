@@ -1,88 +1,100 @@
 ---
-title: Hosten von ASP.NET Core SignalR Produktion und Skalierung
+title: ASP.net Core signalr-Produktions Hosting und-Skalierung
 author: bradygaster
-description: Erfahren Sie, wie Sie vermeiden, Leistungs- und Skalierungsproblemen in apps, die ASP.NET Core SignalR verwenden.
+description: Erfahren Sie, wie Sie Leistungs-und Skalierungsprobleme in apps vermeiden, die ASP.net Core signalr verwenden.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/scale
-ms.openlocfilehash: 4ac4509acc89d0091a3757c7cfbc9981614f29ad
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 26b02cffdd472fc21dc4aee7052a0ba939b82c0f
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895077"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71211738"
 ---
-# <a name="aspnet-core-signalr-hosting-and-scaling"></a>Hosten von ASP.NET Core SignalR und Skalierung
+# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.net Core signalr-Hosting und-Skalierung
 
-Durch [Andrew Stanton-Nurse](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster), und [Tom Dykstra](https://github.com/tdykstra),
+Von [Andrew Stanton-Nurse](https://twitter.com/anurse), [Brady Gaester](https://twitter.com/bradygaster)und [Tom Dykstra](https://github.com/tdykstra)
 
-In diesem Artikel wird erläutert, hosten und Skalieren bei hohem Datenverkehrsaufkommen-apps, die ASP.NET Core SignalR verwenden.
+In diesem Artikel werden die Überlegungen zu Hosting und Skalierung für apps mit hohem Datenverkehr erläutert, die ASP.net Core signalr verwenden
 
-## <a name="tcp-connection-resources"></a>TCP-Verbindungsressourcen
+## <a name="sticky-sessions"></a>Persistente Sitzungen
 
-Die Anzahl der gleichzeitigen TCP-Verbindungen, die ein Webserver unterstützen kann, ist beschränkt. Standard-HTTP-Clients verwenden *kurzlebige* Verbindungen. Diese Verbindungen können geschlossen werden, wenn der Client in den Leerlauf übergeht und erneut geöffnet später noch Mal wird. Auf der anderen Seite eine SignalR-Verbindung ist *persistente*. SignalR-Verbindungen bleiben geöffnet, auch wenn der Client in den Leerlauf. In einer app mit hohem Datenverkehr, die Anzahl der Clients dient, kann diese persistenten Verbindungen Server die maximale Anzahl von Verbindungen erreicht.
+Signalr erfordert, dass alle HTTP-Anforderungen für eine bestimmte Verbindung vom gleichen Server Prozess verarbeitet werden. Wenn signalr in einer Serverfarm (mehrere Server) ausgeführt wird, müssen "persistente Sitzungen" verwendet werden. "Persistente Sitzungen" werden von einigen Lasten Ausgleichs Modulen auch als Sitzungs Affinität bezeichnet. Azure App Service mithilfe von [Application Request Routing](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (arr) Anforderungen weiterleiten. Wenn Sie die Einstellung "arr-Affinität" in ihrer Azure App Service aktivieren, werden "persistente Sitzungen" aktiviert. Die einzigen Situationen, in denen keine persistenten Sitzungen erforderlich sind, sind:
 
-Permanente Verbindungen nutzen auch einige zusätzlichen Arbeitsspeicher, um jede Verbindung zu verfolgen.
+1. Beim Hosting auf einem einzelnen Server in einem einzelnen Prozess.
+1. Wenn Sie den Azure signalr-Dienst verwenden.
+1. Wenn alle Clients so konfiguriert sind, dass Sie **nur** websockets verwenden, **und** die [Einstellung skipaushandlung](xref:signalr/configuration#configure-additional-options) in der Client Konfiguration aktiviert ist.
 
-Die genutzten Ressourcen im Zusammenhang mit Verbindung von SignalR kann andere Web-apps beeinträchtigen, die auf demselben Server gehostet werden. Wenn SignalR wird geöffnet und die letzten verfügbaren TCP-Verbindungen enthält, haben andere Web-apps auf dem gleichen Server auch keine weiteren Verbindungen, die ihnen zur Verfügung.
+In allen anderen Fällen (einschließlich der Verwendung der redis-Rückwand) muss die Serverumgebung für persistente Sitzungen konfiguriert werden.
 
-Wenn ein Mangel an Verbindungen ausgeführt wird, werden zufällige Socketfehler angezeigt, und Verbindung zurückzusetzen, Fehler. Zum Beispiel:
+Anleitungen zum Konfigurieren von Azure App Service für signalr finden <xref:signalr/publish-to-azure-web-app>Sie unter.
+
+## <a name="tcp-connection-resources"></a>TCP-Verbindungs Ressourcen
+
+Die Anzahl der gleichzeitigen TCP-Verbindungen, die ein Webserver unterstützen kann, ist begrenzt. Standard-HTTP-Clients verwenden *kurzlebige* Verbindungen. Diese Verbindungen können geschlossen werden, wenn der Client in den Leerlauf wechselt und später erneut geöffnet wird. Auf der anderen Seite ist eine signalr-Verbindung *persistent*. Signalr-Verbindungen bleiben offen, auch wenn der Client in den Leerlauf wechselt. In einer APP mit hohem Datenverkehr, die viele Clients bedient, können diese persistenten Verbindungen bewirken, dass Server die maximale Anzahl von Verbindungen erreichen.
+
+Persistente Verbindungen verbrauchen auch zusätzlichen Arbeitsspeicher, um die einzelnen Verbindungen zu verfolgen.
+
+Die intensive Verwendung von Verbindungs bezogenen Ressourcen durch signalr kann sich auf andere Web-Apps auswirken, die auf demselben Server gehostet werden. Wenn signalr die letzten verfügbaren TCP-Verbindungen öffnet und enthält, sind auch andere Web-Apps auf demselben Server nicht mehr verfügbar.
+
+Wenn auf einem Server keine Verbindungen mehr auftreten, werden zufällige Socketfehler und Fehler beim Zurücksetzen der Verbindung angezeigt. Beispiel:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
 ```
 
-Führen Sie zum verhindern, dass SignalR-ressourcenauslastung verursachen Fehler in anderen Web-apps, SignalR auf anderen Servern als Ihre Web-apps.
+Um die signalr-Ressourcenverwendung von Fehlern in anderen Web-Apps zu verhindern, führen Sie signalr auf anderen Servern als Ihre anderen Web-Apps aus.
 
-Zum verhindern, dass SignalR-ressourcenauslastung verursachen Fehler in einer SignalR-app, horizontal hochskalieren, um die Anzahl der Verbindungen zu beschränken, die ein Server behandelt.
+Um die signalr-Ressourcenverwendung von Fehlern in einer signalr-APP zu verhindern, Skalieren Sie horizontal hoch, um die Anzahl der Verbindungen zu begrenzen, die ein Server verarbeiten muss.
 
 ## <a name="scale-out"></a>Skalieren
 
-Eine app, die SignalR verwendet muss zum Nachverfolgen der Verbindungen, die Probleme, die für eine Serverfarm erstellt. Hinzufügen eines Servers ein, und wird auf neue Verbindungen, denen nicht die anderen Server zu kennen. SignalR auf jedem Server in der folgenden Abbildung ist beispielsweise nicht über die Verbindungen auf den anderen Servern. Wenn möchte, dass SignalR für einen der Server eine Nachricht an alle Clients zu senden, wird die Nachricht nur an die Clients, die mit dem Server verbunden sind.
+Eine APP, die signalr verwendet, muss alle Verbindungen nachverfolgen, die für eine Serverfarm Probleme verursachen. Fügen Sie einen Server hinzu, der neue Verbindungen erhält, die von den anderen Servern nicht bekannt sind. Beispielsweise sind in signalr auf jedem Server im folgenden Diagramm die Verbindungen auf den anderen Servern nicht bekannt. Wenn signalr auf einem der Server eine Nachricht an alle Clients senden möchte, wird die Nachricht nur an die Clients gesendet, die mit diesem Server verbunden sind.
 
-![Skalierung von SignalR ohne Rückwandplatine](scale/_static/scale-no-backplane.png)
+![Skalieren von signalr ohne Rückwand](scale/_static/scale-no-backplane.png)
 
-Die Optionen zur Lösung dieses Problems sind die [Azure SignalR Service](#azure-signalr-service) und [Redis Rückwandplatine](#redis-backplane).
+Die Optionen für die Lösung dieses Problems sind der [Azure signalr-Dienst](#azure-signalr-service) und die [redis-Rückwand](#redis-backplane).
 
 ## <a name="azure-signalr-service"></a>Azure SignalR-Dienst
 
-Der Azure SignalR Service ist eine Rückwandplatine, anstatt einen Proxy. Jedes Mal, die ein Client eine Verbindung mit dem Server initiiert wird der Client umgeleitet, um eine Verbindung mit dem Dienst herzustellen. Dieser Prozess wird im folgenden Diagramm dargestellt:
+Der Azure signalr-Dienst ist ein Proxy anstelle einer Backplane. Jedes Mal, wenn ein Client eine Verbindung mit dem Server initiiert, wird der Client umgeleitet, um eine Verbindung mit dem Dienst herzustellen. Dieser Prozess wird in der folgenden Abbildung veranschaulicht:
 
-![Herstellen einer Verbindung mit der Azure SignalR Service](scale/_static/azure-signalr-service-one-connection.png)
+![Herstellen einer Verbindung mit dem Azure signalr-Dienst](scale/_static/azure-signalr-service-one-connection.png)
 
-Das Ergebnis ist, dass der Dienst verwaltet alle Clientverbindungen, die während jeder Server nur eine kleine Konstante Anzahl von Verbindungen mit dem Dienst benötigt, wie im folgenden Diagramm dargestellt:
+Das Ergebnis ist, dass der Dienst alle Clientverbindungen verwaltet, während jeder Server nur eine kleine Konstante Anzahl von Verbindungen mit dem Dienst benötigt, wie im folgenden Diagramm dargestellt:
 
-![Clients, die mit dem Dienst, mit dem Dienst verbundenen Server verbunden](scale/_static/azure-signalr-service-multiple-connections.png)
+![Mit dem Dienst verbundene Clients, Server, die mit dem Dienst verbunden sind](scale/_static/azure-signalr-service-multiple-connections.png)
 
-Dieser Ansatz für horizontales Skalieren hat mehrere Vorteile gegenüber der Redis-Rückwandplatine Alternative:
+Diese Vorgehensweise zum horizontalen hochskalieren hat gegenüber der redis-Rückwand-Alternative mehrere Vorteile:
 
-* Persistente Sitzungen, auch bekannt als [Clientaffinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), ist nicht erforderlich, da Clients sofort an den Azure SignalR Service umgeleitet werden, wenn sie eine Verbindung herstellen.
-* Eine SignalR, die app horizontal hochskalieren kann, basierend auf der Anzahl der Nachrichten gesendet, während der Azure SignalR Service automatisch skaliert, um eine beliebige Anzahl von Verbindungen zu verarbeiten. Beispielsweise können Tausende von Clients vorhanden sein, aber wenn nur wenige Nachrichten pro Sekunde gesendet werden, die SignalR-app zum horizontalen hochskalieren auf mehrere Server, um die Verbindungen selbst behandeln muss nicht.
-* Eine SignalR-app verwendet nicht wesentlich mehr Verbindungsressourcen als eine Web-app ohne SignalR.
+* Persistente Sitzungen, auch bekannt als [Client Affinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), sind nicht erforderlich, da Clients sofort an den Azure signalr-Dienst umgeleitet werden, wenn Sie eine Verbindung herstellen.
+* Eine signalr-App kann basierend auf der Anzahl der gesendeten Nachrichten horizontal hochskaliert werden, während der Azure signalr-Dienst für eine beliebige Anzahl von Verbindungen automatisch skaliert wird. Es könnten z. b. Tausende von Clients vorhanden sein. Wenn jedoch nur wenige Nachrichten pro Sekunde gesendet werden, muss die signalr-APP nicht auf mehrere Server horizontal hochskaliert werden, um die Verbindungen selbst zu bewältigen.
+* Eine signalr-App verwendet nicht wesentlich mehr Verbindungs Ressourcen als eine Web-App ohne signalr.
 
-Aus diesen Gründen empfehlen wir den Azure SignalR Service für alle ASP.NET Core SignalR-apps in Azure, einschließlich der App Service, VMs und Container gehostet.
+Aus diesen Gründen wird der Azure signalr-Dienst für alle ASP.net Core signalr-apps empfohlen, die in Azure gehostet werden, einschließlich APP Service, VMS und Containern.
 
-Weitere Informationen finden Sie unter den [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview).
+Weitere Informationen finden Sie in der [Dokumentation zu Azure signalr Service](/azure/azure-signalr/signalr-overview).
 
 ## <a name="redis-backplane"></a>Redis-Backplane
 
-[Redis](https://redis.io/) ist ein in-Memory-Schlüssel-Wert-Speicher, der ein messaging-System mit einem Veröffentlichen/Abonnieren-Modell unterstützt. Die Redis-SignalR-Backplane verwendet das Pub/Sub-Feature, um Nachrichten an andere Server weiterzuleiten. Wenn ein Client eine Verbindung herstellt, wird die Verbindungsinformationen an der Rückwand übergeben. Wenn ein Server zum Senden einer Nachricht an alle Clients möchte, sendet sie an die Backplane. Der Rückwand weiß, alle verbundenen Clients und dem Server sind auf. Er sendet die Nachricht an alle Clients über ihre jeweiligen Server. Dieser Prozess wird im folgenden Diagramm dargestellt:
+[Redis](https://redis.io/) ist ein Schlüssel-Wert-Speicher im Arbeitsspeicher, der ein Messaging System mit einem Veröffentlichungs-/Abonnementmodell unterstützt. Die signalr redis-Rückwand verwendet die Pub/Sub-Funktion, um Nachrichten an andere Server weiterzuleiten. Wenn ein Client eine Verbindung herstellt, werden die Verbindungsinformationen an die Backplane übermittelt. Wenn ein Server eine Nachricht an alle Clients senden möchte, sendet er an die Backplane. Die Rückwand kennt alle verbundenen Clients und die Server, auf denen Sie sich befinden. Die Nachricht wird über die entsprechenden Server an alle Clients gesendet. Dieser Vorgang wird in der folgenden Abbildung veranschaulicht:
 
-![Redis-Rückwandplatine, Nachricht, die von einem Server an alle Clients gesendet.](scale/_static/redis-backplane.png)
+![Redis-Backplane, von einem Server an alle Clients gesendete Nachrichten](scale/_static/redis-backplane.png)
 
-Die Redis-Rückwandplatine ist der empfohlene Ansatz für horizontales Skalieren für apps, die in Ihrer eigenen Infrastruktur gehostet werden. Der Azure SignalR Service ist eine praktische Option für die Produktion mit lokalen Anwendungen aufgrund der verbindungswartezeit zwischen Ihrem Datencenter und ein Azure-Rechenzentrum nicht.
+Die redis-Rückwand ist der empfohlene Ansatz für horizontales Skalieren für apps, die in ihrer eigenen Infrastruktur gehostet werden. Azure signalr Service ist aufgrund der Verbindungs Latenz zwischen Ihrem Rechenzentrum und einem Azure-Rechenzentrum nicht die praktische Option für den Einsatz in der Produktion mit lokalen apps.
 
-Der Azure SignalR Service-Vorteile, die zuvor notierten sind Nachteile für die Redis-Rückwandplatine:
+Die zuvor notierten Vorteile des Azure signalr Service sind Nachteile der redis-Backplane:
 
-* Persistente Sitzungen, auch bekannt als [Clientaffinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), ist erforderlich. Sobald eine Verbindung auf einem Server initiiert wird, muss die Verbindung auf dem Server bleiben.
-* Basierend auf der Anzahl von Clients muss eine SignalR-app skalieren, auch wenn einige Nachrichten gesendet werden.
-* Eine SignalR-app verwendet deutlich mehr als eine Web-app ohne SignalR-Verbindungsressourcen.
+* Persistente Sitzungen, auch bekannt als [Client Affinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), sind erforderlich. Nachdem eine Verbindung auf einem Server initiiert wurde, muss die Verbindung auf diesem Server bestehen.
+* Eine signalr-app muss basierend auf der Anzahl von Clients horizontal hochskaliert werden, auch wenn nur wenige Nachrichten gesendet werden.
+* Eine signalr-App verwendet erheblich mehr Verbindungs Ressourcen als eine Web-App ohne signalr.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-* [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview)
-* [Richten Sie eine Redis-Rückwandplatine](xref:signalr/redis-backplane)
+* [Dokumentation zu Azure signalr Service](/azure/azure-signalr/signalr-overview)
+* [Einrichten einer redis-Rückwand](xref:signalr/redis-backplane)

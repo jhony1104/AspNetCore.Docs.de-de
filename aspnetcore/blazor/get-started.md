@@ -5,14 +5,14 @@ description: Beginnen Sie mit blazor, indem Sie eine blazor-App mit den Tools Ih
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/23/2019
 uid: blazor/get-started
-ms.openlocfilehash: 428e231a38bb6547cfc69ccb253374da5218e058
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: 4c2a8f62b7f6a60815d131756d1e551904d918ad
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71198909"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71207221"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
 
@@ -22,7 +22,7 @@ Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github
 
 Beginnen Sie mit blazor:
 
-1. Installieren Sie die neueste Version von [.net Core 3,0 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) .
+1. Installieren Sie die neueste Version des [.net Core 3,0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) .
 
 1. Installieren Sie die blazor-Vorlagen, indem Sie den folgenden Befehl in einer Befehlsshell ausführen:
 
@@ -34,7 +34,7 @@ Beginnen Sie mit blazor:
 
    # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-   1 \. Installieren Sie die neueste [Visual Studio-Vorschau](https://visualstudio.com/vs/preview) mit der Arbeitsauslastung **ASP.net und Webentwicklung** .
+   1 \. Installieren Sie die neueste Version von [Visual Studio](https://visualstudio.com/vs/) mit der Arbeitsauslastung **ASP.net und Webentwicklung** .
 
    2 \. Erstellen Sie ein neues Projekt.
 

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Sicherheitsbedrohungen für blazor-Server-app
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 09/23/2019
 uid: security/blazor/server
-ms.openlocfilehash: 72788980ff7c7bd56f55e4e84d820a3684f7275e
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 706f504738d9c6e5af3c368c382424f2e206bcbf
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70964239"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71211712"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Sichere ASP.net Core blazor-Server-apps
 
@@ -91,7 +91,7 @@ Standardmäßig gibt es keine Beschränkung für die Anzahl der Verbindungen pro
 
 DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der Server eine oder mehrere seiner Ressourcen abwehrt, wodurch die APP nicht mehr verfügbar ist. Blazor-Server-Apps enthalten einige Standard Limits und basieren auf anderen ASP.net Core-und signalr-Limits zum Schutz vor DoS-Angriffen:
 
-| App-Limit für blazor-Server                            | Beschreibung | Default |
+| App-Limit für blazor-Server                            | Beschreibung | Standard |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | Maximale Anzahl von Verbindungen, die von einem bestimmten Server gleichzeitig im Arbeitsspeicher enthalten sind. | 100 |
 | `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Maximale Zeitspanne, für die eine getrennte Verbindung im Arbeitsspeicher gehalten wird, bevor Sie abgebrochen wird. | 3 Minuten |
@@ -99,7 +99,7 @@ DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der 
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | Maximale Anzahl nicht bestätigter renderbatches, die der Server zu einem gegebenen Zeitpunkt pro Verbindung aufbewahrt, um eine robuste erneute Verbindung zu unterstützen. Nach Erreichen des Limits beendet der Server die Erstellung neuer Rendering-Batches, bis mindestens ein Stapel vom Client bestätigt wurde. | 10 |
 
 
-| Signalr-und ASP.net Core Limit             | Beschreibung | Default |
+| Signalr-und ASP.net Core Limit             | Beschreibung | Standard |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | Nachrichtengröße für eine einzelne Nachricht. | 32 KB |
 
@@ -288,7 +288,7 @@ Der Client seitige Fehler enthält nicht die Aufruf Liste und bietet keine Detai
 
 Ausführliche Fehler ermöglichen:
 
-* `CircuitOptions.DetailedErrors`
+* `CircuitOptions.DetailedErrors`.
 * `DetailedErrors`Konfigurationsschlüssel. Legen Sie beispielsweise die `ASPNETCORE_DETAILEDERRORS` -Umgebungsvariable auf den `true`Wert fest.
 
 > [!WARNING]
