@@ -1,24 +1,24 @@
 ---
-title: GrpC für ASP.net Core Konfiguration
+title: GrpC für .NET-Konfiguration
 author: jamesnk
-description: Erfahren Sie, wie Sie GrpC für ASP.net Core-apps konfigurieren.
+description: Erfahren Sie, wie Sie GrpC für .net-apps konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: grpc/configuration
-ms.openlocfilehash: d6f095820271a3bb07e05e29299fbb82b042983b
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 42574b43b4751efc37ff3a827716df4cb8130842
+ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773682"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71199080"
 ---
-# <a name="grpc-for-aspnet-core-configuration"></a>GrpC für ASP.net Core Konfiguration
+# <a name="grpc-for-net-configuration"></a>GrpC für .NET-Konfiguration
 
 ## <a name="configure-services-options"></a>Optionen für die Dienst Konfiguration
 
-In der folgenden Tabelle werden die Optionen zum Konfigurieren der GrpC-Dienste beschrieben:
+GrpC-Dienste werden mit `AddGrpc` in *Startup.cs*konfiguriert. In der folgenden Tabelle werden die Optionen zum Konfigurieren der GrpC-Dienste beschrieben:
 
 | Option | Standardwert | Beschreibung |
 | ------ | ------------- | ----------- |
@@ -39,13 +39,13 @@ Optionen für einen einzelnen Dienst überschreiben die in `AddGrpc` bereitgeste
 
 ## <a name="configure-client-options"></a>Konfigurieren von Client Optionen
 
-In der folgenden Tabelle werden die Optionen zum Konfigurieren von GrpC-Kanälen beschrieben:
+die GrpC-Client Konfiguration ist `GrpcChannelOptions`auf ON festgelegt. In der folgenden Tabelle werden die Optionen zum Konfigurieren von GrpC-Kanälen beschrieben:
 
 | Option | Standardwert | Beschreibung |
 | ------ | ------------- | ----------- |
 | `HttpClient` | Neue Instanz | Der `HttpClient` , der zum Erstellen von GrpC-Aufrufen verwendet wird Ein Client kann festgelegt werden, um ein `HttpClientHandler`benutzerdefiniertes zu konfigurieren, oder der HTTP-Pipeline zusätzliche Handler für GrpC-Aufrufe hinzufügen. Wenn kein `HttpClient` angegeben wird, wird eine neue `HttpClient` -Instanz für den Kanal erstellt. Sie wird automatisch verworfen. |
 | `DisposeHttpClient` | `false` | Wenn `true`, und ein `HttpClient` angegeben wird, wird die `HttpClient` -Instanz verworfen, wenn der `GrpcChannel` verworfen wird. |
-| `LoggerFactory` | `null` | Der `LoggerFactory` , der vom Client verwendet wird, um Informationen zu GrpC-aufrufen zu protokollieren. Eine `LoggerFactory` -Instanz kann aus der Abhängigkeitsinjektion aufgelöst oder `LoggerFactory.Create`mithilfe von erstellt werden. Beispiele für das Konfigurieren der Protokollierung <xref:fundamentals/logging/index>finden Sie unter. |
+| `LoggerFactory` | `null` | Der `LoggerFactory` , der vom Client verwendet wird, um Informationen zu GrpC-aufrufen zu protokollieren. Eine `LoggerFactory` -Instanz kann aus der Abhängigkeitsinjektion aufgelöst oder `LoggerFactory.Create`mithilfe von erstellt werden. Beispiele für das Konfigurieren der Protokollierung <xref:grpc/diagnostics#grpc-client-logging>finden Sie unter. |
 | `MaxSendMessageSize` | `null` | Die maximale Nachrichtengröße in Bytes, die vom Client gesendet werden kann. Der Versuch, eine Nachricht zu senden, die die konfigurierte maximale Nachrichtengröße überschreitet, führt zu einer Ausnahme. |
 | `MaxReceiveMessageSize` | 4 MB | Die maximale Nachrichtengröße in Bytes, die vom Client empfangen werden kann. Wenn der Client eine Nachricht empfängt, die diesen Grenzwert überschreitet, wird eine Ausnahme ausgelöst. Das Erhöhen dieses Werts ermöglicht dem Client, größere Nachrichten zu empfangen, kann sich jedoch negativ auf die Arbeitsspeicher Auslastung auswirken. |
 | `Credentials` | `null` | Eine `ChannelCredentials`-Instanz. Anmelde Informationen werden verwendet, um GrpC-aufrufen Authentifizierungs Metadaten hinzuzufügen. |
@@ -62,4 +62,5 @@ Der folgende Code
 
 * <xref:grpc/aspnetcore>
 * <xref:grpc/client>
+* <xref:grpc/diagnostics>
 * <xref:tutorials/grpc/grpc-start>
