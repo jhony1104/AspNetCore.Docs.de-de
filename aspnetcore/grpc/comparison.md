@@ -1,25 +1,27 @@
 ---
-title: Vergleich von gRPC-Diensten mit HTTP-APIs
+title: Vergleichen von GrpC-Diensten mit http-APIs
 author: jamesnk
 description: Erfahren Sie, wie sich GrpC mit http-APIs vergleicht und welche Szenarios empfohlen werden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 03/31/2019
+ms.date: 09/25/2019
 uid: grpc/comparison
-ms.openlocfilehash: c34c7ecb668e478e2be3271928a2439979a746d9
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: 935078d890998fe6af366e3f6a7bf21f53c20cf7
+ms.sourcegitcommit: a7813a776809a5029c94aa503ee71994f156231f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310470"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71267716"
 ---
-# <a name="comparing-grpc-services-with-http-apis"></a>Vergleich von gRPC-Diensten mit HTTP-APIs
+# <a name="compare-grpc-services-with-http-apis"></a>Vergleichen von GrpC-Diensten mit http-APIs
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
 In diesem Artikel wird erläutert, wie [GrpC-Dienste](https://grpc.io/docs/guides/) mit http-APIs (einschließlich ASP.net Core [Web-APIs](xref:web-api/index)) verglichen werden. Die Technologie, mit der eine API für Ihre APP bereitgestellt wird, ist eine wichtige Wahl, und GrpC bietet im Vergleich zu http-APIs besondere Vorteile. In diesem Artikel werden die Stärken und Schwächen von GrpC erläutert und Szenarios für die Verwendung von GrpC gegenüber anderen Technologien empfohlen.
 
-#### <a name="overview"></a>Übersicht
+## <a name="high-level-comparison"></a>Vergleich auf hoher Ebene
+
+Die folgende Tabelle bietet einen Vergleich der Features zwischen GrpC und http-APIs mit JSON.
 
 | Feature          | gRPC                                               | HTTP-APIs mit JSON           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
@@ -30,7 +32,7 @@ In diesem Artikel wird erläutert, wie [GrpC-Dienste](https://grpc.io/docs/guide
 | Streaming        | [Client, Server, bidirektional](#streaming)       | Client, Server                |
 | Browser Unterstützung  | [Nein (erfordert GrpC-Web)](#limited-browser-support) | Ja                           |
 | Sicherheit         | Transport (HTTPS)                                  | Transport (HTTPS)             |
-| Client Code-gen  | [Ja](#code-generation)                            | OpenAPI + Tools von Drittanbietern |
+| Client Codegenerierung | [Ja](#code-generation)                      | OpenAPI + Tools von Drittanbietern |
 
 ## <a name="grpc-strengths"></a>GrpC-stärken
 
@@ -47,7 +49,7 @@ GrpC ist für http/2 konzipiert, eine wichtige Überarbeitung von http, die gege
 
 Alle GrpC-Frameworks bieten erstklassige Unterstützung für die Codegenerierung. Eine Kerndatei für die GrpC-Entwicklung ist die Datei " [ *. proto* ](https://developers.google.com/protocol-buffers/docs/proto3)", die den Vertrag der GrpC-Dienste und-Nachrichten definiert. Aus dieser Datei werden von den GrpC-Frameworks Code generiert, um eine Dienst Basisklasse, Nachrichten und einen kompletten Client zu generieren.
 
-Durch die Freigabe `*.proto` der Datei zwischen Server und Client können Nachrichten und Client Code von Ende zu Ende generiert werden. Die Code Generierung des Clients vermeidet das Duplizieren von Nachrichten auf dem Client und dem Server und erstellt einen stark typisierten Client für Sie. Wenn Sie keinen Client schreiben müssen, sparen Sie in Anwendungen mit vielen Diensten eine beträchtliche Entwicklungszeit.
+Durch die Freigabe der *. proto* -Datei zwischen Server und Client können Nachrichten und Client Code von Ende bis Ende generiert werden. Die Code Generierung des Clients vermeidet das Duplizieren von Nachrichten auf dem Client und dem Server und erstellt einen stark typisierten Client für Sie. Wenn Sie keinen Client schreiben müssen, sparen Sie in Anwendungen mit vielen Diensten eine beträchtliche Entwicklungszeit.
 
 ### <a name="strict-specification"></a>Strikte Spezifikation
 
@@ -95,7 +97,7 @@ Nicht alle Funktionen von GrpC werden von GrpC-Web unterstützt. Client und bidi
 
 HTTP-API-Anforderungen werden als Text gesendet und können von Menschen gelesen und erstellt werden.
 
-GrpC-Nachrichten werden standardmäßig mit protobuf codiert. Obwohl protobuf für das Senden und empfangen effizient ist, ist das binäre Format nicht Menschen lesbar. Protobuf erfordert, dass die in der `*.proto` Datei angegebene Schnittstellen Beschreibung der Nachricht ordnungsgemäß deserialisiert wird. Zusätzliche Tools sind erforderlich, um protobuf-Nutzlasten bei der Übertragung zu analysieren und Anforderungen per Hand zu verfassen.
+GrpC-Nachrichten werden standardmäßig mit protobuf codiert. Obwohl protobuf für das Senden und empfangen effizient ist, ist das binäre Format nicht Menschen lesbar. Protobuf erfordert, dass die in der *. proto* -Datei angegebene Schnittstellen Beschreibung der Meldung ordnungsgemäß deserialisiert wird. Zusätzliche Tools sind erforderlich, um protobuf-Nutzlasten bei der Übertragung zu analysieren und Anforderungen per Hand zu verfassen.
 
 Funktionen wie die [Server Reflektion](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md) und das [GrpC-Befehlszeilen Tool](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md) sind zur Unterstützung bei binären protobuf-Meldungen vorhanden. Protobuf-Nachrichten unterstützen außerdem [die Konvertierung in und aus JSON](https://developers.google.com/protocol-buffers/docs/proto3#json). Die integrierte JSON-Konvertierung bietet eine effiziente Möglichkeit zum Konvertieren von protobuf-Nachrichten in und aus der lesbaren Form beim Debuggen.
 
