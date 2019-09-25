@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 uid: grpc/aspnetcore
-ms.openlocfilehash: 28e6b8589bbe0b6a3723b64736c723c883302571
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 18a6dd2ddd4f3c3c4466e3b96dd1748fd0972e39
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238165"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71250802"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>gRPC-Dienste mit ASP.NET Core
 
@@ -67,7 +67,7 @@ ASP.net Core Middlewares und Features nutzen die Routing Pipeline gemeinsam, dah
 Kestrel-GrpC-Endpunkte:
 
 * Erfordert http/2.
-* Sollte mit HTTPS gesichert werden.
+* Muss mit [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246)gesichert werden.
 
 #### <a name="http2"></a>HTTP/2
 
@@ -75,58 +75,28 @@ GrpC erfordert http/2. GrpC für ASP.net Core überprüft, dass [HttpRequest. Pr
 
 Kestrel [unterstützt HTTP/2](xref:fundamentals/servers/kestrel#http2-support) auf den meisten modernen Betriebssystemen. Kestrel-Endpunkte werden so konfiguriert, dass HTTP/1.1-und http/2-Verbindungen standardmäßig unterstützt werden.
 
-#### <a name="https"></a>HTTPS
+#### <a name="tls"></a>TLS
 
-Kestrel-Endpunkte, die für GrpC verwendet werden, sollten mit HTTPS gesichert werden. In der Entwicklung wird ein HTTPS-Endpunkt automatisch erstellt `https://localhost:5001` , wenn das ASP.net Core-Entwicklungs Zertifikat vorhanden ist. Es ist keine Konfiguration erforderlich.
+Kestrel-Endpunkte, die für GrpC verwendet werden, sollten mit TLS gesichert werden. In der Entwicklung wird ein Endpunkt, der mit TLS gesichert ist `https://localhost:5001` , automatisch erstellt, wenn das ASP.net Core-Entwicklungs Zertifikat vorhanden ist. Es ist keine Konfiguration erforderlich. Ein `https` Präfix überprüft, ob der Kestrel-Endpunkt TLS verwendet.
 
-In der Produktion muss HTTPS explizit konfiguriert sein. Im folgenden *appSettings. JSON* -Beispiel wird ein http/2-Endpunkt bereitgestellt, der mit HTTPS gesichert ist:
+In der Produktionsumgebung muss TLS explizit konfiguriert werden. Im folgenden *appSettings. JSON* -Beispiel wird ein http/2-Endpunkt bereitgestellt, der mit TLS gesichert ist:
 
-```json
-{
-  "Kestrel": {
-    "Endpoints": {
-      "HttpsDefaultCert": {
-        "Url": "https://localhost:5001",
-        "Protocols": "Http2"
-      }
-    },
-    "Certificates": {
-      "Default": {
-        "Path": "<path to .pfx file>",
-        "Password": "<certificate password>"
-      }
-    }
-  }
-}
-```
+[!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
 Alternativ können Kestrel-Endpunkte in *Program.cs*konfiguriert werden:
 
-```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureKestrel(options =>
-            {
-                // This endpoint will use HTTP/2 and HTTPS on port 5001.
-                options.Listen(IPAddress.Any, 5001, listenOptions =>
-                {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                    listenOptions.UseHttps("<path to .pfx file>", 
-                        "<certificate password>");
-                });
-            });
-            webBuilder.UseStartup<Startup>();
-        });
-```
+[!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-Wenn ein http/2-Endpunkt ohne HTTPS konfiguriert ist, müssen die [listenoptions.-Protokolle](xref:fundamentals/servers/kestrel#listenoptionsprotocols) des Endpunkts `HttpProtocols.Http2`auf festgelegt werden. `HttpProtocols.Http1AndHttp2`kann nicht verwendet werden, da HTTPS zum Aushandeln von http/2 erforderlich ist. Ohne HTTPS werden alle Verbindungen mit dem Endpunkt standardmäßig auf HTTP/1.1, und GrpC-Aufrufe schlagen fehl.
+#### <a name="protocol-negotiation"></a>Protokoll Aushandlung
 
-Weitere Informationen zum Aktivieren von http/2 und HTTPS mit Kestrel finden Sie unter [Kestrel-Endpunkt Konfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+TLS wird für mehr als das Sichern der Kommunikation verwendet. Der Rahmen der TLS [-Protokoll Aushandlung (Application Layer Protocol Aushandlung, alpn)](https://tools.ietf.org/html/rfc7301#section-3) wird verwendet, um das Verbindungsprotokoll zwischen dem Client und dem Server auszuhandeln, wenn ein Endpunkt mehrere Protokolle unterstützt. Diese Aushandlung bestimmt, ob die Verbindung http/1.1 oder http/2 verwendet.
+
+Wenn ein http/2-Endpunkt ohne TLS konfiguriert ist, müssen die [listenoptions.-Protokolle](xref:fundamentals/servers/kestrel#listenoptionsprotocols) des Endpunkts `HttpProtocols.Http2`auf festgelegt werden. Ein Endpunkt mit mehreren Protokollen (z `HttpProtocols.Http1AndHttp2`. b.) kann ohne TLS nicht verwendet werden, da keine Aushandlung vorhanden ist. Alle Verbindungen mit dem ungesicherten Endpunkt werden standardmäßig auf HTTP/1.1 und GrpC-Aufrufe nicht bestanden.
+
+Weitere Informationen zum Aktivieren von http/2 und TLS mit Kestrel finden Sie unter [Kestrel-Endpunkt Konfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
 
 > [!NOTE]
-> ASP.net Core GrpC mit [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246)wird von macOS nicht unterstützt. Zum erfolgreichen Ausführen von gRPC-Diensten unter macOS ist eine zusätzliche Konfiguration erforderlich. Weitere Informationen finden Sie unter [ASP.NET Core gRPC-App kann unter macOS nicht gestartet werden](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos).
+> macOS unterstützt ASP.NET Core gRPC mit TLS nicht. Zum erfolgreichen Ausführen von gRPC-Diensten unter macOS ist eine zusätzliche Konfiguration erforderlich. Weitere Informationen finden Sie unter [ASP.NET Core gRPC-App kann unter macOS nicht gestartet werden](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos).
 
 ## <a name="integration-with-aspnet-core-apis"></a>Integration mit ASP.net Core-APIs
 

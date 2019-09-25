@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: ce6ad96d9e26c9cd3844093536745f8f9bea4a76
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: 7194e91b40a08c4a7ee619b8f207900af2683aa1
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71204324"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71250735"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Protokollierung und Diagnose in GrpC unter .net
 
@@ -28,11 +28,11 @@ Da GrpC-Dienste auf ASP.net Core gehostet werden, wird das ASP.net Core Protokol
 
 GrpC fügt Protokolle unter der `Grpc` Kategorie hinzu. Um detaillierte Protokolle von GrpC zu aktivieren, konfigurieren `Grpc` Sie die Präfixe `Debug` auf der Ebene in der Datei *appSettings. JSON* , `LogLevel` indem Sie die folgenden Elemente zum unter Abschnitt `Logging`in hinzufügen:
 
-[!code-json[](diagnostics/logging-config.json?highlight=7)]
+[!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
 Sie können dies auch in *Startup.cs* mit `ConfigureLogging`folgenden Einstellungen konfigurieren:
 
-[!code-csharp[](diagnostics/logging-config-code.cs?highlight=5)]
+[!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
 Wenn Sie keine JSON-basierte Konfiguration verwenden, legen Sie den folgenden Konfigurations Wert in Ihrem Konfigurationssystem fest:
 
@@ -46,7 +46,7 @@ Es wird empfohlen, `Debug` die Ebene zu verwenden, wenn Sie eine detailliertere 
 
 Im folgenden finden Sie ein Beispiel für die Konsolen `Debug` Ausgabe auf der Ebene eines GrpC-Dienstanbieter:
 
-```
+```console
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
       Request starting HTTP/2 POST https://localhost:5001/Greet.Greeter/SayHello application/grpc
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
@@ -82,19 +82,19 @@ Wenn die app in einer anderen Umgebung (z. b. Docker, Kubernetes oder Windows-Di
 
 Wenn Sie Protokolle vom .NET-Client erhalten möchten, können Sie `GrpcChannelOptions.LoggerFactory` die-Eigenschaft festlegen, wenn der Client Kanal erstellt wird. Wenn Sie einen GrpC-Dienst aus einer ASP.net Core-App aufrufen, kann die Protokollierungs Factory aus der Abhängigkeitsinjektion (di) aufgelöst werden:
 
-[!code-csharp[](diagnostics/net-client-dependency-injection.cs?highlight=7,16)]
+[!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
 Eine alternative Möglichkeit zum Aktivieren der Client Protokollierung ist die Verwendung der [GrpC-clientfactory](xref:grpc/clientfactory) zum Erstellen des Clients. Ein GrpC-Client, der bei der clientfactory registriert und von di aufgelöst wird, verwendet automatisch die konfigurierte Protokollierung der app.
 
 Wenn Ihre APP nicht di verwendet, können Sie mit `ILoggerFactory` [loggerfactory. Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)eine neue Instanz erstellen. Um auf diese Methode zuzugreifen, fügen Sie der APP das Paket [Microsoft. Extensions. Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) hinzu.
 
-[!code-csharp[](diagnostics/net-client-loggerfactory-create.cs?highlight=1,8)]
+[!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
 ### <a name="sample-logging-output"></a>Beispiel einer Protokollierungsausgabe
 
 Im folgenden finden Sie ein Beispiel für die Konsolen `Debug` Ausgabe auf der Ebene eines GrpC-Clients:
 
-```
+```console
 dbug: Grpc.Net.Client.Internal.GrpcCall[1]
       Starting gRPC call. Method type: 'Unary', URI: 'https://localhost:5001/Greet.Greeter/SayHello'.
 dbug: Grpc.Net.Client.Internal.GrpcCall[6]
