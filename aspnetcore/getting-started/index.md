@@ -4,14 +4,14 @@ author: rick-anderson
 description: Ein kurzes Tutorial, in dem eine einfache Hallo Welt-App mit ASP.NET Core erstellt und ausgeführt wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/15/2019
+ms.date: 09/22/2019
 uid: getting-started
-ms.openlocfilehash: d1edf91f1b37ba2b69732471dc6c1f306ac5ad24
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 0f05ab120d64832a4bc2fd70921efc7238ee9eac
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081127"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71187060"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
@@ -31,7 +31,7 @@ Am Schluss werden Sie eine funktionierende Web-App auf Ihrem lokalen Computer be
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
-* [.NET Core 2.2 SDK](https://www.microsoft.com/net/download/all)
+[!INCLUDE[](~/includes/3.0-SDK.md)]
 
 ## <a name="create-a-web-app-project"></a>Erstellen Sie ein Web-App-Projekt.
 
@@ -40,6 +40,11 @@ Am Schluss werden Sie eine funktionierende Web-App auf Ihrem lokalen Computer be
 ```dotnetcli
 dotnet new webapp -o aspnetcoreapp
 ```
+
+Für den obigen Befehl gilt Folgendes:
+
+* Erstellt eine neue Web-App.  
+* Mit dem `-o`-Parameter wird ein Verzeichnis mit dem Namen *aspnetcoreapp* und den Quelldateien für die App erstellt.
 
 ### <a name="trust-the-development-certificate"></a>Dem Entwicklungszertifikat vertrauen
 

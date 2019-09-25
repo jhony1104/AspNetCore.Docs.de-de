@@ -5,14 +5,14 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 07/28/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 7736888c43aafd2f64e3d7b079f2099fe548a825
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 4dc150ff4534e42e1995a185f650cea9df70ccc4
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081072"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71187049"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -97,7 +97,17 @@ Die Middleware für die [Integration von IIS](xref:host-and-deploy/iis/index#ena
 
 ## <a name="monitoring-and-logging"></a>Überwachung und Protokollierung
 
-In Azure App Service ist eine **Protokollierungserweiterung für ASP.NET Core** enthalten, mit der die Protokollierungsintegration für ASP.NET Core-Apps ermöglicht wird. Sie können die Erweiterung automatisch zu einer App Service-App hinzufügen, indem Sie den Visual Studio-Prozess **Veröffentlichen** mit einem **App Service**-Veröffentlichungsprofil verwenden. Wenn Sie zur Bereitstellung einer App nicht Visual Studio verwenden, können Sie die Erweiterung im Azure-Portal manuell über das App Service-Dialogfeld **Entwicklungstools** > **Erweiterungen** installieren.
+::: moniker range=">= aspnetcore-3.0"
+
+In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core Logging Integration** (ASP.NET Core-Protokollierungsintegration). Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+In App Service bereitgestellte ASP.NET Core-Apps erhalten automatisch die App Service-Erweiterung **ASP.NET Core-Protokollierungserweiterungen**. Durch diese Erweiterung ist die Protokollierungsintegration für ASP.NET Core-Apps in Azure App Service möglich.
+
+::: moniker-end
 
 In den folgenden Artikeln finden Sie Informationen zum Überwachen, Protokollieren und zur Problembehandlung:
 
@@ -128,10 +138,21 @@ Wenn Sie zwischen Bereitstellungsslots wechseln, können Systeme, die Data Prote
 * Redis Cache
 
 Weitere Informationen finden Sie unter <xref:security/data-protection/implementation/key-storage-providers>.
+<a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
+<!-- revert this after 3.0 supported
+## Deploy ASP.NET Core preview release to Azure App Service
 
-## <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>Bereitstellen der ASP.NET Core Vorschauversion für Azure App Service
+Use one of the following approaches if the app relies on a preview release of .NET Core:
 
-Wenden Sie einen der folgenden Ansätze an, wenn die App von einem früheren Release von .NET Core abhängig ist:
+* [Install the preview site extension](#install-the-preview-site-extension).
+* [Deploy a self-contained preview app](#deploy-a-self-contained-preview-app).
+* [Use Docker with Web Apps for containers](#use-docker-with-web-apps-for-containers).
+-->
+## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Bereitstellen von ASP.NET Core 3.0 in Azure App Service
+
+Wir hoffen, dass wir ASP.NET Core 3.0 bald in Azure App Service anbieten können.
+
+Wenden Sie einen der folgenden Ansätze an, wenn die App von .NET Core 3.0 abhängig ist:
 
 * [Installieren der Websiteerweiterung (Vorschau)](#install-the-preview-site-extension).
 * [Bereitstellen einer eigenständigen Vorschau-App](#deploy-a-self-contained-preview-app)
@@ -230,7 +251,7 @@ Von [64-Bit-Frameworks abhängige Bereitstellungen](/dotnet/core/deploying/#fram
 
 1. Nutzen Sie die Befehlsshell, um die App mit der Konfiguration „Release“ mit dem Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) zu veröffentlichen. Im folgenden Beispiel wird die App als frameworkabhängige App veröffentlicht:
 
-   ```dotnetcli
+   ```console
    dotnet publish --configuration Release
    ```
 
@@ -268,7 +289,7 @@ Nutzen Sie für [eigenständige Bereitstellungen](/dotnet/core/deploying/#self-c
 
 1. Veröffentlichen Sie aus einer Befehlsshell die App in der Releasekonfiguration für die Runtime des Hosts mit dem Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish). Im folgenden Beispiel wird die App für die RID `win-x86` veröffentlicht. Die für die Option `--runtime` angegebene RID muss in der Eigenschaft `<RuntimeIdentifier>` (oder `<RuntimeIdentifiers>`) in der Projektdatei angegeben werden.
 
-   ```dotnetcli
+   ```console
    dotnet publish --configuration Release --runtime win-x86
    ```
 
