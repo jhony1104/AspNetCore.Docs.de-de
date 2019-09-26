@@ -5,18 +5,20 @@ description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Co
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/23/2019
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f6c143cc17d08e0cada67ec831e090661c4fed56
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: cdb424137d80b280873347c1352fc43d23b4aec3
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081446"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71211624"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Clientseitiges Hosten und Bereitstellen von ASP.NET WebAssembly
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Mit dem [Blazor WebAssembly-Hostingmodell](xref:blazor/hosting-models#blazor-webassembly):
 

@@ -5,12 +5,12 @@ description: Fügen Sie ein Modell zu einer einfachen ASP.NET Core-App hinzu.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: b0efaf76cb2172f5b7568e42065b99b1259949de
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5ad31a2536ad70590eaa767cf20068512241f36b
+ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082015"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71295476"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Modells zu einer ASP.NET Core MVC-App
 
@@ -62,28 +62,14 @@ Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Man
 Führen Sie den folgenden Befehl in der PMC aus:
 
 ```powershell
-Install-Package Microsoft.EntityFrameworkCore.SqlServer -IncludePrerelease
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 Mit dem vorangehenden Befehl wird der EF Core SQL Server-Anbieter hinzugefügt. Das Anbieterpaket installiert das EF Core-Paket als Abhängigkeit. Weitere Pakete werden im weiteren Verlauf des Tutorials automatisch im Gerüstbauschritt installiert.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Führen Sie die folgenden .NET Core-CLI-Befehle aus:
-
-```dotnetcli
-dotnet tool install --global dotnet-ef --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-```
-
-Die oben aufgeführten Befehle fügen Folgendes hinzu:
-
-* Die Entity Framework Core-Tools für die .NET CLI.
-* Den EF Core SQLite-Anbieter, der das EF Core-Paket als Abhängigkeit installiert.
-* Für Gerüstbau erforderliche Pakete: `Microsoft.VisualStudio.Web.CodeGeneration.Design` und `Microsoft.EntityFrameworkCore.SqlServer`.
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 ---
 

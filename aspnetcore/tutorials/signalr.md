@@ -4,14 +4,14 @@ author: bradygaster
 description: In diesem Tutorial erstellen Sie eine Chat-App, die ASP.NET Core SignalR verwendet.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 07/08/2019
+ms.date: 09/24/2019
 uid: tutorials/signalr
-ms.openlocfilehash: 2dfa994b9763a0139cb70cbf9847ac3b02b568e4
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 7a6574bd3c463f0890f5dc076944f1ab0f0c919a
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081966"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248402"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Tutorial: Erste Schritte mit ASP.NET Core SignalR
 
@@ -484,6 +484,10 @@ Der SignalR-Server muss zunächst konfiguriert werden, um Anforderungen an Signa
 > [!TIP]
 > Wenn die App nicht funktioniert, öffnen Sie die Browser-Entwicklungstools (F12), und wechseln Sie zur Konsole. Möglicherweise werden Fehler in Bezug auf Ihren HTML- und JavaScript-Code angezeigt. Nehmen wir an, dass Sie z.B. *signalr.js* in einen anderen Ordner als vorgeschrieben platziert haben. In diesem Fall funktioniert der Verweis auf diese Datei nicht, und Ihnen wird der Fehler 404 in der Konsole angezeigt.
 > ![Fehler „signalr.js nicht gefunden“](signalr/_static/2.x/f12-console.png)
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Dieses Tutorials auf YouTube](https://www.youtube.com/watch?v=iKlVmu-r0JQ)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
