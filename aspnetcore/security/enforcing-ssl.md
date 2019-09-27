@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/14/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: aa42b1c7199e951714be809de9c9c5f857473485
-ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
+ms.openlocfilehash: 1d1bba6a1f1da2af959bc69b31f79bac53bf48b9
+ms.sourcegitcommit: fe3e556bf438fc4136fcf0bac61cf96e3e91caf5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71278758"
+ms.lasthandoff: 09/27/2019
+ms.locfileid: "71341463"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 Dieses Dokument zeigt Folgendes:
 
 * Erfordert HTTPS für alle Anforderungen.
-* Leitet alle HTTP-Anforderungen an HTTPS um.
+* Alle HTTP-Anforderungen auf HTTPS umleiten.
 
 Eine API kann verhindern, dass ein Client sensible Daten bei der ersten Anforderung sendet.
 
@@ -393,8 +393,8 @@ Mit den obigen Befehlen werden die meisten Browser Vertrauensstellungs Probleme 
 * Führen Sie die folgenden Befehle aus:
 
 ```dotnetcli
-dotnet devcerts https --clean
-dotnet devcerts https --trust
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
 ```
 
 Schließen Sie alle geöffneten Browser Instanzen. Öffnen Sie ein neues Browserfenster für die app.
