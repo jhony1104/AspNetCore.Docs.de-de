@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
 uid: getting-started
-ms.openlocfilehash: 0f05ab120d64832a4bc2fd70921efc7238ee9eac
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: c9cd5e05f52c8bdefa931adc654087dac91e2f05
+ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187060"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317763"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
@@ -90,18 +90,18 @@ Führen Sie die folgenden Befehle aus:
 
 ```dotnetcli
 cd aspnetcoreapp
-dotnet run
+dotnet watch run
 ```
 
 Nachdem die Befehlsshell angibt, dass die App gestartet wurde, wechseln Sie zu [https://localhost:5001](https://localhost:5001). Klicken Sie auf **Accept** (Akzeptieren), um die Datenschutz- und Cookierichtlinie zu akzeptieren. Diese App bewahrt keine personenbezogenen Informationen auf.
 
 ## <a name="edit-a-razor-page"></a>Bearbeiten einer Razor-Seite
 
-Öffnen Sie *Pages/Index.cshtml*, und ändern Sie die Seite mit dem folgenden hervorgehobenen Markup:
+Öffnen Sie *Pages/Index.cshtml*, und ändern und speichern Sie die Seite mit dem folgenden hervorgehobenen Markup:
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-Navigieren Sie zu [https://localhost:5001](https://localhost:5001), und überprüfen Sie, ob die Änderungen angezeigt werden.
+Navigieren Sie zu [https://localhost:5001](https://localhost:5001), aktualisieren Sie die Seite, und überprüfen Sie, ob die Änderungen angezeigt werden.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
