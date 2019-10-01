@@ -1,41 +1,41 @@
 ---
-title: Gerüst-Identität in ASP.NET Core-Projekten
+title: Gerüst Identität in ASP.net Core Projekten
 author: rick-anderson
-description: Erfahren Sie, wie Sie die Identität in einem ASP.NET Core-Projekt zu erstellen.
+description: Erfahren Sie, wie Sie die Identität in ein ASP.net Core Projekt eingerüstbau.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 9e784864ee78bdfb76dab7748f3fb81728b9c289
-ms.sourcegitcommit: 91cc1f07ef178ab709ea42f8b3a10399c970496e
+ms.openlocfilehash: f3ae089d344d95ed84c9720ab4ba2c697400901e
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/08/2019
-ms.locfileid: "67622772"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703770"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst-Identität in ASP.NET Core-Projekten
+# <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identität in ASP.net Core Projekten
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core 2.1 und höher bietet [ASP.NET Core Identity](xref:security/authentication/identity) als eine [Razor-Klassenbibliothek](xref:razor-pages/ui-class). Anwendungen, die Identität enthalten, können der gerüstbauer um selektiv hinzufügen, den in der Identität Razor Klasse-Bibliothek (RCL) enthaltenen Quellcode anwenden. Sie sollten Quellcode generieren, um den Code und das Verhalten ändern zu können. Sie können das Gerüst beispielsweise anweisen, den bei der Registrierung verwendeten Code zu generieren. Generierter Code hat Vorrang vor dem gleichen Code in der Razor-Klassenbibliothek „Identität“. Um erhalten vollständige Kontrolle über die Benutzeroberfläche, und verwenden Sie nicht die Standardeinstellung RCL, finden Sie im Abschnitt [erstellen vollständige Benutzeroberfläche identitätsquelle](#full).
+ASP.net Core 2,1 und höher stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Anwendungen, die die Identität enthalten, können das Gerüst zum selektiven Hinzufügen des Quellcodes verwenden, der in der Identity Razor Class Library (RCL) enthalten ist. Sie sollten Quellcode generieren, um den Code und das Verhalten ändern zu können. Sie können das Gerüst beispielsweise anweisen, den bei der Registrierung verwendeten Code zu generieren. Generierter Code hat Vorrang vor dem gleichen Code in der Razor-Klassenbibliothek „Identität“. Informationen zum vollständigen Zugriff auf die Benutzeroberfläche und zur Verwendung der Standard-RCL finden Sie im Abschnitt [Erstellen einer vollständigen identitätsquelle](#full)für die Identität.
 
-Anwendungen, die **nicht** gehören Authentifizierung kann der gerüstbauer zum Hinzufügen des Pakets RCL Identität anwenden. Sie können Code der Klassenbibliothek „Identität“ auswählen, der generiert werden soll.
+Anwendungen, die **keine** -Authentifizierung einschließen, können das Gerüst zum Hinzufügen des RCL-Identitäts Pakets anwenden. Sie können Code der Klassenbibliothek „Identität“ auswählen, der generiert werden soll.
 
-Obwohl der gerüstbauer größte Teil des erforderlichen Codes generiert, müssen Sie Ihr Projekt zum Abschließen des Vorgangs aktualisieren. Dieses Dokument erläutert die Schritte, um eine Identität Gerüstbau Aktualisierung abzuschließen.
+Obwohl das Gerüst den größten Teil des notwendigen Codes generiert, müssen Sie das Projekt aktualisieren, um den Vorgang abzuschließen. In diesem Dokument werden die erforderlichen Schritte zum Durchführen eines identitätsgerüstbau Updates erläutert.
 
-Wenn der Identity-gerüstbauer ausgeführt wird, eine *ScaffoldingReadme.txt* Datei wird im Projektverzeichnis erstellt. Die *ScaffoldingReadme.txt* -Datei enthält allgemeine Anweisungen, für welche Anforderungen für die Identity-Gerüstbau-Aktualisierung abgeschlossen ist. Dieses Dokument enthält ausführlichere Anweisungen als die *ScaffoldingReadme.txt* Datei.
+Wenn das Identitäts Gerüst ausgeführt wird, wird im Projektverzeichnis eine Datei mit *gerüdodingreadme. txt* erstellt. Die Datei " *gerüstoldingreadme. txt* " enthält allgemeine Anweisungen dazu, was zum Durchführen der Aktualisierung des Identitäts Gerüsts erforderlich ist. Dieses Dokument enthält ausführlichere Anweisungen als die Datei " *Gerüst-dingreadme. txt* ".
 
-Es empfiehlt sich ein Quellcodeverwaltungssystem, die Unterschiede zwischen zeigt und lässt sich aus Änderungen zurück. Überprüfen Sie die Änderungen nach dem Ausführen der gerüstbauer Identität.
+Wir empfehlen die Verwendung eines Quell Code Verwaltungssystems, das Datei Unterschiede anzeigt und es Ihnen ermöglicht, Änderungen zurückzusetzen. Überprüfen Sie die Änderungen nach dem Ausführen des Identitäts gerüstems.
 
 > [!NOTE]
-> Dienste sind erforderlich, wenn mit [zweistufige Authentifizierung](xref:security/authentication/identity-enable-qrcodes), [Konto Bestätigung und Wiederherstellung](xref:security/authentication/accconfirm), und andere Sicherheitsfunktionen, mit der Identität. Dienste oder Dienst-Stubs werden nicht generiert werden, wenn Gerüstbau für Identität. Dienste zum Aktivieren dieser Funktionen müssen manuell hinzugefügt werden. Beispielsweise finden Sie unter [müssen e-Mail-Bestätigung](xref:security/authentication/accconfirm#require-email-confirmation).
+> Dienste sind erforderlich, wenn die [zweistufige Authentifizierung](xref:security/authentication/identity-enable-qrcodes), [Konto Bestätigung und Kenn Wort Wiederherstellung](xref:security/authentication/accconfirm)sowie andere Sicherheitsfeatures mit der Identität verwendet werden. Dienste oder Service-stubzeichen werden nicht generiert, wenn eine Gerüst Identität besteht Dienste zum Aktivieren dieser Features müssen manuell hinzugefügt werden. Weitere Informationen finden Sie unter Anfordern einer [e-Mail-Bestätigung](xref:security/authentication/accconfirm#require-email-confirmation)
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Gerüst-Identität in ein leeres Projekt
+## <a name="scaffold-identity-into-an-empty-project"></a>Gerüst der Identität in ein leeres Projekt
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Fügen Sie folgenden hervorgehobenen Aufrufe der `Startup` Klasse:
+Fügen Sie die folgenden hervorgehobenen Aufrufe der `Startup`-Klasse hinzu:
 
 [!code-csharp[](scaffold-identity/sample/StartupEmpty.cs?name=snippet1&highlight=5,20-23)]
 
@@ -43,16 +43,19 @@ Fügen Sie folgenden hervorgehobenen Aufrufe der `Startup` Klasse:
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Gerüst-Identität in einer Razor-Projekt ohne vorhandene Autorisierung
+## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Gerüst der Identität in ein Razor-Projekt ohne vorhandene Autorisierung
 
-<!--
+<!--  Updated for 3.0
 set projNam=RPnoAuth
 set projType=webapp
-set version=2.1.0
 
 dotnet new %projType% -o %projNam%
 cd %projNam%
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v %version%
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add package Microsoft.AspNetCore.Identity.UI
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet restore
 dotnet aspnet-codegenerator identity --useDefaultUI
 dotnet ef migrations add CreateIdentitySchema
@@ -61,11 +64,11 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identität wird im konfiguriert *Areas/Identity/IdentityHostingStartup.cs*. Weitere Informationen finden Sie unter [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfiguriert. Weitere Informationen finden Sie unter [ihostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="efm"></a>
 
-### <a name="migrations-useauthentication-and-layout"></a>Migrationen, UseAuthentication und layout
+### <a name="migrations-useauthentication-and-layout"></a>Migrationen, UseAuthentication und Layout
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -73,19 +76,19 @@ Identität wird im konfiguriert *Areas/Identity/IdentityHostingStartup.cs*. Weit
 
 ### <a name="enable-authentication"></a>Aktivieren der Authentifizierung
 
-In der `Configure` Methode der `Startup` Klasse, rufen Sie [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles`:
+In der `Configure`-Methode der `Startup`-Klasse wird [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles` aufgerufen:
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-### <a name="layout-changes"></a>Änderungen am Layout
+### <a name="layout-changes"></a>Layoutänderungen
 
-Optional: Hinzufügen die Anmeldung, die teilweise (`_LoginPartial`) zur Layoutdatei:
+Optional: Fügen Sie die Anmelde partielle (`_LoginPartial`) der Layoutdatei hinzu:
 
 [!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Gerüst-Identität in einer Razor-Projekt mit Autorisierung
+## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Gerüst der Identität in ein Razor-Projekt mit Autorisierung
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -100,9 +103,9 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-Einige identitätsoptionen in konfiguriert *Areas/Identity/IdentityHostingStartup.cs*. Weitere Informationen finden Sie unter [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+Einige Identitäts Optionen werden in " *Bereiche/Identitäten/identityhostingstartup. cs*" konfiguriert. Weitere Informationen finden Sie unter [ihostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Gerüst-Identität in einem MVC-Projekt ohne vorhandene Autorisierung
+## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Gerüst der Identität in ein MVC-Projekt ohne vorhandene Autorisierung
 
 <!--
 set projNam=MvcNoAuth
@@ -120,23 +123,23 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Optional: Hinzufügen die Anmeldung, die teilweise (`_LoginPartial`) auf die *Views/Shared/_Layout.cshtml* Datei:
+Optional: Fügen Sie der Datei *views/Shared/_Layout. cshtml* den Anmelde Namen partiell (`_LoginPartial`) hinzu:
 
 [!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
-* Verschieben der *Pages/Shared/_LoginPartial.cshtml* Datei *Views/Shared/_LoginPartial.cshtml*
+* Verschieben Sie die Datei *pages/Shared/_LoginPartial. cshtml* in *views/Shared/_LoginPartial. cshtml* .
 
-Identität wird im konfiguriert *Areas/Identity/IdentityHostingStartup.cs*. Weitere Informationen finden Sie unter IHostingStartup.
+Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfiguriert. Weitere Informationen finden Sie unter ihostingstartup.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-Rufen Sie [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles`:
+[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles` aufzurufen:
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Gerüst-Identität in einem MVC-Projekt mit Autorisierung
+## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Gerüst der Identität in ein MVC-Projekt mit Autorisierung
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -148,27 +151,27 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext --fil
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-Löschen der *Seiten/Shared* Ordner und die Dateien in diesem Ordner.
+Löschen Sie die *Seiten/* den freigegebenen Ordner und die Dateien in diesem Ordner.
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Erstellen Sie die vollständige Benutzeroberfläche identitätsquelle
+## <a name="create-full-identity-ui-source"></a>Benutzeroberflächen Quelle für vollständige Identität erstellen
 
-Um vollständige Kontrolle über die Identity-Benutzeroberfläche gewährleisten zu können, führen Sie die Identity-gerüstbauer, und wählen Sie **alle Dateien überschreiben**.
+Um die vollständige Kontrolle über die Benutzeroberfläche der Identität aufrechtzuerhalten, führen Sie das Identitäts Gerüst aus, und wählen Sie **alle Dateien überschreiben**
 
-Der folgende hervorgehobene Code zeigt die Änderungen an die Identity-Standardbenutzeroberfläche mit Identity in einer ASP.NET Core 2.1-Web-app zu ersetzen. Möglicherweise möchten diese Option, um die vollständige Kontrolle über die Benutzeroberfläche der Identität haben.
+Der folgende hervorgehobene Code zeigt die Änderungen, um die Standardbenutzer Oberfläche der Identität durch Identität in einer ASP.net Core 2,1-Web-App zu ersetzen. Möglicherweise möchten Sie dies tun, um die vollständige Kontrolle über die Identitäts Benutzeroberfläche zu haben.
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet1&highlight=13-14,17-999)]
 
-Der Standard-Identität wird im folgenden Code ersetzt:
+Die Standard Identität wird im folgenden Code ersetzt:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet2)]
 
-Im folgenden code wird die [LoginPath](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.loginpath), [logoutpath für](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.logoutpath), und [AccessDeniedPath](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.accessdeniedpath):
+Der folgende Code legt die Werte für [loginpath](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.loginpath), [logoutpath](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.logoutpath)und [accessdeniedpath](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions.accessdeniedpath)fest:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet3)]
 
-Registrieren einer `IEmailSender` Implementierung, z.B.:
+Registrieren Sie eine `IEmailSender`-Implementierung, z. b.:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet4)]
 
@@ -176,4 +179,4 @@ Registrieren einer `IEmailSender` Implementierung, z.B.:
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Änderungen an Code für die Authentifizierung für ASP.NET Core 2.1 und höher](xref:migration/20_21#changes-to-authentication-code)
+* [Änderungen am Authentifizierungscode in ASP.net Core 2,1 und höher](xref:migration/20_21#changes-to-authentication-code)
