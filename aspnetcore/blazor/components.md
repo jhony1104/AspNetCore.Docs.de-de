@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 09/30/2019
 uid: blazor/components
-ms.openlocfilehash: 28e908968bd77c61da72d1bcc6032e580d15541b
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: ea216e405e5be52b578e99a529d8c6a726ea9cdd
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71207270"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71688029"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -440,7 +440,7 @@ Im folgenden Beispiel wird asynchron aufgerufen, `UpdateHeading` wenn die Schalt
 
 Für einige Ereignisse sind Ereignis Argument Typen zulässig. Wenn der Zugriff auf einen dieser Ereignis Typen nicht erforderlich ist, ist er im Methoden Aufrufvorgang nicht erforderlich.
 
-Die unterstützten [EventArgs](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src/Web) sind in der folgenden Tabelle aufgeführt.
+Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 
 | event | Klasse |
 | ----- | ----- |
@@ -456,7 +456,7 @@ Die unterstützten [EventArgs](https://github.com/aspnet/AspNetCore/tree/release
 | Status         | `ProgressEventArgs` |
 | Toucheingabe            | `TouchEventArgs`&ndash; stellteineneinzelnenKontaktpunktaufeinem`TouchPoint` Berührungs sensiblen Gerät dar. |
 
-Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (ASPNET/aspnetcore Release/3.0-preview9 Branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src/Web).
+Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (ASPNET/aspnetcore Release/3.0 Branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web).
 
 ### <a name="lambda-expressions"></a>Lambdaausdrücke
 
@@ -1416,14 +1416,14 @@ Wenn der Code zum ersten Mal ausgeführt wird, wenn `someFlag` `true`den Wert ha
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | First  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | Erster  |
+| 1        | Textknoten | Zweimal |
 
 Stellen Sie sich vor, und das Markup wird wieder gerendert. `false` `someFlag` Dieses Mal empfängt der Generator Folgendes:
 
 | Sequenz | Typ       | Daten   |
 | :------: | ---------- | :----: |
-| 1        | Textknoten  | Second |
+| 1        | Textknoten  | Zweimal |
 
 Wenn die Laufzeit einen Diff-Vorgang ausführt, wird angezeigt, dass das `0` Element in der Sequenz entfernt wurde, sodass das folgende triviale *Bearbeitungs Skript*generiert wird:
 
@@ -1448,14 +1448,14 @@ Nun lautet die erste Ausgabe wie folgt:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | First  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | Erster  |
+| 1        | Textknoten | Zweimal |
 
 Dieses Ergebnis ist mit dem vorherigen Fall identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag`befindet `false` sich auf dem zweiten Rendering, und die Ausgabe lautet:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | ------ |
-| 0        | Textknoten | Second |
+| 0        | Textknoten | Zweimal |
 
 Dieses Mal sieht der Vergleichsalgorithmus, dass *zwei* Änderungen aufgetreten sind, und der Algorithmus generiert das folgende Bearbeitungs Skript:
 
@@ -1514,7 +1514,7 @@ Die Lokalisierung wird in der APP behandelt:
 
 1. Der Browser sendet eine anfängliche http-Anforderung an die app.
 1. Die Kultur wird von der Lokalisierungs Middleware zugewiesen.
-1. Die `OnGet` -Methode in *_Host. cshtml. cs* speichert die Kultur in einem Cookie als Teil der Antwort.
+1. Die `OnGet`-Methode in *_Host. cshtml. cs* speichert die Kultur in einem Cookie als Teil der Antwort.
 1. Der Browser öffnet eine WebSocket-Verbindung, um eine interaktive blazor-Server Sitzung zu erstellen.
 1. Die Lokalisierungs Middleware liest das Cookie und weist die Kultur zu.
 1. Die blazor-Server Sitzung beginnt mit der richtigen Kultur.
