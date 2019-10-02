@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 261abae499a0d5f807a14aebd224949881067bc7
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 75af6dc58d31aaad888b14640268bf05c193272d
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773816"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248275"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -113,7 +113,7 @@ Folgende Dienste werden automatisch registriert:
 * [IHostLifetime](#ihostlifetime)
 * [IHostEnvironment/IWebHostEnvironment](#ihostenvironment)
 
-Eine Liste aller von Frameworks bereitgestellten Dienste finden Sie unter <xref:fundamentals/dependency-injection#framework-provided-services>.
+Weitere Informationen zu den vom Framework bereitgestellten Diensten finden Sie unter <xref:fundamentals/dependency-injection#framework-provided-services>.
 
 ## <a name="ihostapplicationlifetime"></a>IHostApplicationLifetime
 

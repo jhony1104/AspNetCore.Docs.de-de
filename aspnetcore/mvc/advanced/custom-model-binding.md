@@ -5,12 +5,12 @@ description: Erfahren Sie mehr darüber, wie Controlleraktionen durch Modellbind
 ms.author: riande
 ms.date: 11/13/2018
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 91f42393ffee3249f9167e10eaea7b279a7cb70b
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: b2fbe6a9f11315d1fb8863fbf62e8929c7ff3fc2
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878415"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71186882"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>Anpassen von Modellbindungen in ASP.NET Core
 
@@ -132,9 +132,7 @@ Wenn Sie Ihren Anbieter am Ende der Auflistung hinzufügen, kann es passieren, d
 
 ### <a name="polymorphic-model-binding"></a>Polymorphe Modellbindung
 
-Das Binden an verschiedene Modelle abgeleiteter Typen wird als polymorphe Modellbindung bezeichnet. Eine benutzerdefinierte Modellbindung ist erforderlich, wenn der Anforderungswert an den spezifischen abgeleiteten Modelltyp gebunden werden muss. Wenn dieser Ansatz nicht erforderlich ist, empfiehlt es sich, die polymorphe Modellbindung zu vermeiden. Die polymorphe Modellbindung erschwert es, Informationen über die gebundenen Modelle zu bekommen. Wenn eine App jedoch eine polymorphe Modellbindung erfordert, könnte eine Implementierung wie der folgende Code aussehen:
-
-Das Binden an verschiedene Modelle abgeleiteter Typen wird als polymorphe Modellbindung bezeichnet. Eine benutzerdefinierte Modellbindung ist erforderlich, wenn der Anforderungswert an den spezifischen abgeleiteten Modelltyp gebunden werden muss. Polymorphe Modellbindung:
+Das Binden an verschiedene Modelle abgeleiteter Typen wird als polymorphe Modellbindung bezeichnet. Eine benutzerdefinierte polymorphe Modellbindung ist erforderlich, wenn der Anforderungswert an den spezifischen abgeleiteten Modelltyp gebunden werden muss. Polymorphe Modellbindung:
 
 * Ist nicht typisch für eine Rest-API, die für die Interoperabilität mit allen Sprachen konzipiert ist.
 * Erschwert es, Informationen über die gebundenen Modelle zu bekommen.

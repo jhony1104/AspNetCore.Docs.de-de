@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 1cc4fffc50978a3a958a96e1eb250cb85a8d2879
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5e5215f246c6c7a805a4c99f485d51a2fb3c712d
+ms.sourcegitcommit: cf9ffcce4fe0b69fe795aae9ae06e99fdb18bdfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082067"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71306661"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -71,7 +71,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 * Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie die Vorlage **ASP.NET Core-Webanwendung** aus, und klicken Sie auf **Weiter**.
 * Geben Sie dem Projekt den Namen *TodoApi*, und klicken Sie auf **Erstellen**.
-* Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind. Wählen Sie die Vorlage **API** aus, und klicken Sie auf **Erstellen**. Wählen Sie **nicht** **Enable Docker Support** (Docker-Unterstützung aktivieren) aus.
+* Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind. Wählen Sie die Vorlage **API** aus, und klicken Sie auf **Erstellen**.
 
 ![VS-Dialogfeld „Neues Projekt“](first-web-api/_static/vs3.png)
 
@@ -84,8 +84,8 @@ Das folgende Diagramm zeigt den Entwurf der App.
    ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoAPI
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-   dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+   dotnet add package Microsoft.EntityFrameworkCore.InMemory
    code -r ../TodoApi
    ```
 
@@ -117,8 +117,8 @@ Das folgende Diagramm zeigt den Entwurf der App.
 Öffnen Sie im Projektordner ein Befehlsterminal, und führen Sie die folgenden Befehle aus:
 
    ```dotnetcli
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-   dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+   dotnet add package Microsoft.EntityFrameworkCore.InMemory
    ```
 
 ---
@@ -227,9 +227,8 @@ Der *Datenbankkontext* ist die Hauptklasse, die die Entity Framework-Funktionen 
 ### <a name="add-microsoftentityframeworkcoresqlserver"></a>Hinzufügen von Microsoft.EntityFrameworkCore.SqlServer
 
 * Klicken Sie im Menü **Extras** auf **NuGet-Paket-Manager > NuGet-Pakete für Projektmappe verwalten...** .
-* Aktivieren Sie das Kontrollkästchen **Vorabversion einbeziehen**.
 * Klicken Sie auf die Registerkarte **Durchsuchen**, und geben Sie dann **Microsoft.EntityFrameworkCore.SqlServer** in das Suchfeld ein.
-* Wählen Sie im linken Bereich **Microsoft.EntityFrameworkCore.SqlServer V3.0.0-preview** aus.
+* Wählen Sie im linken Bereich **Microsoft.EntityFrameworkCore.SqlServer** aus.
 * Aktivieren Sie das Kontrollkästchen **Projekt** im rechten Bereich, und klicken Sie dann auf **Installieren**.
 * Fügen Sie mithilfe der obigen Schritte das `Microsoft.EntityFrameworkCore.InMemory`-NuGet-Paket hinzu.
 
@@ -281,8 +280,8 @@ Der vorangehende Code:
 Führen Sie die folgenden Befehle aus:
 
 ```dotnetcli
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext  -outDir Controllers
 ```
@@ -913,6 +912,12 @@ Eine Aufgabe wird folgendermaßen gelöscht: im AJAX-Aufruf wird `type` auf `DEL
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxDelete)]
 
 ::: moniker-end
+
+<a name="auth"></a>
+
+## <a name="add-authentication-support-to-a-web-api"></a>Hinzufügen von Authentifizierungsunterstützung zu einer Web-API
+
+Informationen hierzu finden Sie im [IdentityServer4](https://identityserver4.readthedocs.io/en/latest/quickstarts/0_overview.html)-Tutorial.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

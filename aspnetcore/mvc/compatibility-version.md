@@ -5,33 +5,47 @@ description: Informationen zur Vorgehensweise der Startklasse in ASP.NET Core be
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/15/2019
+ms.date: 9/25/2019
 uid: mvc/compatibility-version
-ms.openlocfilehash: b360da105799a1dccb1902e167e50e78864b76a9
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 35e3b6acba2bc9a0b863bd6d1e96365328b5f169
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085885"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71256160"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>Kompatibilitätsversion für ASP.NET Core MVC
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Durch die Methode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> kann eine App Änderungen im Verhalten annehmen oder ablehnen, die in ASP.NET Core MVC 2.1 und höher eingeführt werden und potentiell Fehler verursachen. Diese potentiell Fehler verursachenden Änderungen im Verhalten betreffen generell das Verhalten des MVC-Subsystems und die Art, wie **Ihr Code** von der Runtime aufgerufen wird. Wenn Sie sich für die Änderungen entscheiden, erhalten Sie das aktuelle Verhalten und das langfristige Verhalten von ASP.NET Core.
+::: moniker range="= aspnetcore-3.0"
+
+Die <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>-Methode ist für ASP.NET Core 3.0-Apps keine Option. Das bedeutet, dass der Aufruf von `SetCompatibilityVersion` mit einem beliebigen Wert von <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> keine Auswirkungen auf die Anwendung hat.
+
+* Die nächste Nebenversion von ASP.NET Core stellt möglicherweise einen neuen `CompatibilityVersion`-Wert bereit.
+* `CompatibilityVersion`-Werte von `Version_2_0` bis `Version_2_2` (jeweils einschließlich) sind als `[Obsolete(...)]` gekennzeichnet.
+* Weitere Informationen finden Sie unter [Breaking API changes in Antiforgery, CORS, Diagnostics, Mvc, and Routing](https://github.com/aspnet/Announcements/issues/387) (Breaking Changes bei APIs für Fälschungsschutz, CORS, Diagnosen, MVC und Routing). Diese Liste enthält Breaking Changes für Kompatibilitätsoptionen.
+
+Um zu erfahren, wie `SetCompatibilityVersion` mit ASP.NET Core 2.x-Apps funktioniert, wählen Sie die [ASP.NET Core 2.2-Version dieses Artikels](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2) aus.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Mit der Methode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> kann eine ASP.NET Core 2.x-App Änderungen im Verhalten aktivieren oder deaktivieren, die in ASP.NET Core MVC 2.1 oder 2.2 eingeführt wurden und Fehler verursachen können. Diese potentiell Fehler verursachenden Änderungen im Verhalten betreffen generell das Verhalten des MVC-Subsystems und die Art, wie **Ihr Code** von der Runtime aufgerufen wird. Wenn Sie sich für die Änderungen entscheiden, erhalten Sie das aktuelle Verhalten und das langfristige Verhalten von ASP.NET Core.
 
 Der folgende Code legt den Kompatibilitätsmodus auf ASP.NET Core 2.2 fest:
 
 [!code-csharp[Main](compatibility-version/samples/2.x/CompatibilityVersionSample/Startup.cs?name=snippet1)]
 
-Es wird empfohlen, Ihre App mit der aktuellen Version zu testen (`CompatibilityVersion.Version_2_2`). Wir erwarten, dass bei den meisten Apps mit der aktuellen Version keine Fehler verursachenden Verhaltensänderungen auftreten werden.
+Es wird empfohlen, Ihre App mit der aktuellen Version zu testen (`CompatibilityVersion.Latest`). Wir erwarten, dass bei den meisten Apps mit der aktuellen Version keine Fehler verursachenden Verhaltensänderungen auftreten werden.
 
-Apps, die `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` aufrufen, sind vor potentiell Fehler verursachenden Änderungen im Verhalten geschützt, die in ASP.NET Core 2.1 MVC und höheren 2.x-Versionen eingeführt wurden. Dieser Schutz:
+Apps, die `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` aufrufen, sind vor potenziell Fehler verursachenden Änderungen im Verhalten geschützt, die in den ASP.NET Core MVC-Versionen 2.1 bzw. 2.2 eingeführt wurden. Dieser Schutz:
 
 * Gilt nicht für alle Änderungen in 2.1 und höher. Das Ziel sind potentiell Fehler verursachende Änderungen im Verhalten der ASP.NET Core-Runtime im MVC-Subsystem.
-* Erstreckt sich nicht auf die nächste Hauptversion.
+* Der Schutz gilt nicht für ASP.NET Core 3.0.
 
-Die Standard-Kompatibilität für ASP.NET Core 2.1 und höhere 2.x-Aps, die **nicht** `SetCompatibilityVersion` aufrufen, ist 2.0-Kompatibilität. Das bedeutet, `SetCompatibilityVersion` nicht aufzurufen entspricht dem Aufrufen von `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
+Standardmäßig gilt für ASP.NET Core 2.1- und 2.2-Apps, die **nicht** `SetCompatibilityVersion` aufrufen, die Kompatibilität mit Version 2.0. Das bedeutet, `SetCompatibilityVersion` nicht aufzurufen entspricht dem Aufrufen von `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
 
 Der folgende Code legt den Kompatibilitätsmodus auf ASP.NET Core 2.2 fest, außer für die folgenden Verhaltensweisen:
 
@@ -47,4 +61,5 @@ Bei Apps, bei denen Fehler verursachende Änderungen auftreten, können Sie die 
 
 In der <xref:Microsoft.AspNetCore.Mvc.MvcOptions>-Dokumentation finden Sie eine gute Erklärung, was sich geändert hat und warum die Änderungen eine Verbesserung für die meisten Benutzer darstellen.
 
-Zu einem späteren Zeitpunkt wird es eine [ASP.NET Core 3.0-Version](https://github.com/aspnet/Home/wiki/Roadmap) geben. Altes Verhalten, das von Kompatibilitätsoptionen unterstützt wird, wird in der 3.0-Version entfernt. Beinahe alle Benutzer werden von diesen positiven Änderungen profitieren. Dadurch, dass die Änderungen bereits jetzt eingeführt werden, können die meisten Apps auch jetzt davon profitieren, und die anderen bekommen Zeit, ihre Apps zu aktualisieren.
+Alte Verhaltensweisen, die von Kompatibilitätsoptionen unterstützt werden, wurden aus ASP.NET Core 3.0 entfernt. Beinahe alle Benutzer werden von diesen positiven Änderungen profitieren. Diese Änderungen in 2.1 und 2.2 bieten Vorteile für die meisten Apps, bei anderen bleibt genügend Zeit für ein Update.
+::: moniker-end

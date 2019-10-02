@@ -3,14 +3,14 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 08/05/2019
+ms.date: 09/19/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 75bf0e792ff7975f03e0f7c2fa6a71ed74d813e1
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 9a319f7efb6d879559afd9faca6955aba719fa2f
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68819799"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168293"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -738,6 +738,12 @@ Das Direktivenattribut `@key` bewirkt, dass der Komponentenvergleichsalgorithmus
 *Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
 
 Komponentenverweise (`@ref`) bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können. Weitere Informationen finden Sie unter <xref:blazor/components#capture-references-to-components>.
+
+### <a name="typeparam"></a>\@typeparam
+
+*Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
+
+Die `@typeparam`-Anweisung deklariert einen generischen Typparameter für die generierte Komponentenklasse. Weitere Informationen finden Sie unter <xref:blazor/components#generic-typed-components>.
 
 ::: moniker-end
 

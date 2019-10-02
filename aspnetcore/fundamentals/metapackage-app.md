@@ -1,21 +1,47 @@
 ---
-title: Microsoft.AspNetCore.App-Metapaket für ASP.NET Core 2.1 oder höher
+title: Microsoft.AspNetCore.App-Metapaket für ASP.NET Core
 author: Rick-Anderson
-description: Das Metapaket „Microsoft.AspNetCore.App“ enthält alle unterstützten ASP.NET Core- und Entity Framework Core-Pakete.
+description: Das freigegebene Microsoft.AspNetCore.App-Framework
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 04/21/2019
+ms.date: 09/24/2019
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 913e3d83fbf1af7ea995a88202f86c60b359a7e2
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 8435445890ce00f33ab9a8692f5442b1609192da
+ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085652"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219110"
 ---
-# <a name="microsoftaspnetcoreapp-metapackage-for-aspnet-core-21-or-later"></a>Microsoft.AspNetCore.App-Metapaket für ASP.NET Core 2.1 oder höher
+# <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>Microsoft.AspNetCore.App für ASP.NET Core
 
-Dieses Feature erfordert ASP.NET Core 2.1 oder höher für .NET Core 2.1 oder höher.
+::: moniker range=">= aspnetcore-3.0"
+
+ Das freigegebene ASP.NET Core-Framework (`Microsoft.AspNetCore.App`) enthält Assemblys, die von Microsoft entwickelt und unterstützt werden. `Microsoft.AspNetCore.App` wird bei der Installation des [SDK für .NET Core 3.0 oder höher](https://dotnet.microsoft.com/download/dotnet-core/3.0) installiert. Das *freigegebene Framework* ist der Satz von Assemblys (*DLL*-Dateien), die auf dem Computer installiert werden und eine Laufzeitkomponente sowie ein Zielpaket enthalten. Weitere Informationen finden Sie unter [The shared framework](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) (Das freigegebene Framework).
+
+* Projekte, die auf das `Microsoft.NET.Sdk.Web` SDK abzielen, verweisen implizit auf das `Microsoft.AspNetCore.App`-Framework.
+
+Für diese Projekte sind keine weiteren Verweise erforderlich:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+    ...
+</Project>
+```
+
+Für das freigegebene ASP.NET Core-Framework gilt Folgendes:
+
+* Es enthält keine Abhängigkeiten von Drittanbietern.
+* Es enthält alle unterstützten Pakete des ASP.NET Core-Teams.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Für dieses Feature ist ASP.NET Core 2.x für .NET Core 2.x erforderlich.
 
 Das [Metapaket](/dotnet/core/packages#metapackages) [Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.App) für ASP.NET Core:
 
@@ -23,7 +49,7 @@ Das [Metapaket](/dotnet/core/packages#metapackages) [Microsoft.AspNetCore.All](h
 * Enthält alle unterstützten Pakete des ASP.NET Core-Teams außer denen, die Drittanbieterabhängigkeiten enthalten (von den bereits erwähnten abgesehen).
 * Enthält alle unterstützten Pakete des Entity Framework Core-Teams außer denen, die Drittanbieterabhängigkeiten enthalten (von den bereits erwähnten abgesehen).
 
-Im Paket `Microsoft.AspNetCore.App` sind alle Features von ASP.NET Core 2.1 und höher und Entity Framework Core 2.1 und höher enthalten. Die Standardprojektvorlagen für ASP.NET Core 2.1 und höher verwenden dieses Paket. Es wird empfohlen, dass Anwendungen für ASP.NET Core 2.1 und höher und Entity Framework Core 2.1 und höher das Paket `Microsoft.AspNetCore.App` verwenden.
+In dem Paket `Microsoft.AspNetCore.App` sind alle Features von ASP.NET Core 2.x und Entity Framework Core 2.x enthalten. Die Standardprojektvorlagen für ASP.NET Core 2.x verwenden dieses Paket. Es wird empfohlen, dass Anwendungen für ASP.NET Core 2.x und Entity Framework Core 2.x das `Microsoft.AspNetCore.App`-Paket verwenden.
 
 Die Versionsnummer des `Microsoft.AspNetCore.App`-Metapakets gibt die erforderlichen Mindestversionen von ASP.NET Core und Entity Framework Core an.
 
@@ -35,13 +61,13 @@ Durch die Verwendung des Metapakets `Microsoft.AspNetCore.App` werden Versionsei
 
 Anwendungen, die das Metapaket `Microsoft.AspNetCore.App` verwenden, profitieren automatisch vom freigegebenen ASP.NET Core-Framework. Bei Verwendung des Metapakets `Microsoft.AspNetCore.App` werden mit der Anwendung **keine** Objekte aus den referenzierten NuGet-Paketen für ASP.NET Core bereitgestellt. Das freigegebene ASP.NET Core-Framework enthält diese Objekte. Die Objekte im freigegebenen Framework sind zur Verbesserung der Startzeit der Anwendung vorkompiliert. Weitere Informationen finden Sie unter [The shared framework](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/) (Das freigegebene Framework).
 
-Die folgende Projektdatei verweist auf das Metapaket `Microsoft.AspNetCore.App` für ASP.NET Core und ist eine typische ASP.NET Core 2.1-Vorlage.
+Die folgende Projektdatei verweist auf das Metapaket `Microsoft.AspNetCore.App` für ASP.NET Core und stellt eine typische ASP.NET Core 2.2-Vorlage dar:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,11 +77,13 @@ Die folgende Projektdatei verweist auf das Metapaket `Microsoft.AspNetCore.App` 
 </Project>
 ```
 
-Das zuvor erwähnte Markup stellt eine typische Vorlage für Vorlage 2.1 und höher dar. Es gibt keine Versionsnummer für den Paketverweis `Microsoft.AspNetCore.App` an. Wenn die Version nicht angegeben wird, wird vom SDK eine [implizite](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) Version angegeben (`Microsoft.NET.Sdk.Web`). Es wird empfohlen, die vom SDK angegebene implizite Version beizubehalten, statt die Versionsnummer im Paketverweis explizit festzulegen. Wenn Sie Fragen zu dieser Vorgehensweise haben, können Sie einen GitHub-Kommentar unter [Discussion for the Microsoft.AspNetCore.App implicit version (Diskussion zur impliziten Version für Microsoft.AspNetCore.App)](https://github.com/aspnet/AspNetCore.Docs/issues/6430) verfassen.
+Das hier angegebene Markup stellt eine typische ASP.NET Core 2.x-Vorlage dar. Es gibt keine Versionsnummer für den Paketverweis `Microsoft.AspNetCore.App` an. Wenn die Version nicht angegeben wird, wird vom SDK eine [implizite](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) Version angegeben (`Microsoft.NET.Sdk.Web`). Es wird empfohlen, die vom SDK angegebene implizite Version beizubehalten, statt die Versionsnummer im Paketverweis explizit festzulegen. Wenn Sie Fragen zu dieser Vorgehensweise haben, können Sie einen GitHub-Kommentar unter [Discussion for the Microsoft.AspNetCore.App implicit version (Diskussion zur impliziten Version für Microsoft.AspNetCore.App)](https://github.com/aspnet/AspNetCore.Docs/issues/6430) verfassen.
 
 Die implizite Version wird auf `major.minor.0` festgelegt, wenn es sich um Apps für Mobilgeräte handelt. Der Rollforwardmechanismus des freigegebenen Frameworks führt die App auf der neuesten kompatiblen Version der installierten freigegebenen Frameworks aus. Stellen Sie sicher, dass die gleiche Version des freigegebenen Frameworks in allen Umgebungen installiert ist, um zu gewährleisten, dass die gleiche Version bei der Entwicklung, beim Testen und in der Produktion verwendet wird. Bei unabhängigen Apps wird die implizite Versionsnummer auf die Versionsnummer `major.minor.patch` des freigegebenen Frameworks festgelegt, das im installierten SDK zusammengefasst ist.
 
-Das Angeben einer Versionsnummer im `Microsoft.AspNetCore.App`-Verweis garantiert **nicht**, dass diese Version des freigegebenen Frameworks ausgewählt wird. Gehen Sie beispielsweise davon aus, dass „2.1.1“ angegeben, aber „2.1.3“ installiert ist. In diesem Fall verwendet die App Version 2.1.3. Sie können den Rollforward (für „patch“ und/oder „minor“) deaktivieren. Dies wird jedoch nicht empfohlen. Weitere Informationen zum Rollforward des dotnet-Hosts und der Konfiguration seines Verhaltens finden Sie unter [dotnet host roll forward (Rollforward des dotnet-Hosts)](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
+Das Angeben einer Versionsnummer im `Microsoft.AspNetCore.App`-Verweis garantiert **nicht**, dass diese Version des freigegebenen Frameworks ausgewählt wird. Ein Beispiel: Version 2.2.1 ist angegeben, aber Version 2.2.3 ist installiert. In diesem Fall verwendet die App die Version 2.2.3. Sie können den Rollforward (für „patch“ und/oder „minor“) deaktivieren. Dies wird jedoch nicht empfohlen. Weitere Informationen zum Rollforward des dotnet-Hosts und der Konfiguration seines Verhaltens finden Sie unter [dotnet host roll forward (Rollforward des dotnet-Hosts)](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
+
+::: moniker-end
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -68,6 +96,8 @@ Für `<Project Sdk` muss `Microsoft.NET.Sdk.Web` festgelegt werden, um die impli
 * Dies ist ein bekanntes Problem mit dem .NET Core 2.1 SDK.
 
 ::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 <a name="update"></a>
 
@@ -83,3 +113,5 @@ So aktualisieren Sie ASP.NET Core:
  Für Anwendungen wird beim Neustart der Anwendungen ein Rollforward auf die neueste installierte Version ausgeführt. Die Versionsnummer von `Microsoft.AspNetCore.App` muss in der Projektdatei nicht aktualisiert werden. Weitere Informationen finden Sie unter [Von Frameworks abhängige Apps führen einen Rollforward aus](/dotnet/core/versions/selection#framework-dependent-apps-roll-forward).
 
 Wenn Ihre Anwendung zuvor `Microsoft.AspNetCore.All` verwendet hat, finden Sie weitere Informationen unter [Migrieren von Microsoft.AspNetCore.All zu Microsoft.AspNetCore.App](xref:fundamentals/metapackage#migrate).
+
+::: moniker-end
