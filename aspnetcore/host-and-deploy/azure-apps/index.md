@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 4dc150ff4534e42e1995a185f650cea9df70ccc4
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: 7489868fac513948cbe6f48391e7260a34b2175e
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187049"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703753"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -27,6 +27,8 @@ Verwenden Sie Visual Studio, um ASP.NET Core-Web-Apps zu erstellen und in Azure 
 
 [Erstellen einer .NET Core-App in App Service für Linux](/azure/app-service/containers/quickstart-dotnetcore)  
 Verwenden Sie die Befehlszeile, um ASP.NET Core-Web-Apps zu erstellen und in Azure App Service unter Linux bereitzustellen.
+
+Die ASP.NET Core-Version, die unter Azure App Service verfügbar ist, finden Sie unter [ASP.NET Core im App Service-Dashboard](https://aspnetcoreon.azurewebsites.net/).
 
 Die folgenden Artikel sind in der ASP.NET Core-Dokumentation verfügbar:
 
