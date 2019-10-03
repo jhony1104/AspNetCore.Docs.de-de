@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: cdaa5aff3007030c70bc959bbf07903bdf39e736
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5e62a8cc50947969d42981350b65a24781929d62
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082432"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71691181"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Erste Schritte mit NSwag und ASP.NET Core
 
@@ -104,7 +104,7 @@ Durch die Auswahl einer der folgenden Optionen können Sie die Funktion zur Code
 * [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) &ndash;– Dies ist eine Windows-Desktop-App zum Generieren von API-Clientcode in C# und TypeScript.
 * Die NuGet-Pakete [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) oder [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/), um Code innerhalb des Projekts zu generieren.
 * NSwag über die [Befehlszeile](https://github.com/RicoSuter/NSwag/wiki/CommandLine).
-* Das NuGet-Paket [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/MSBuild).
+* Das NuGet-Paket [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild).
 * [Unchase OpenAPI (Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice): Ein mit Visual Studio verbundener Dienst zum Generieren von API-Clientcode in C# oder TypeScript. Es werden auch C#-Controller für OpenAPI-Dienste mit NSwag generiert.
 
 ### <a name="generate-code-with-nswagstudio"></a>Generieren von Code mit NSwagStudio

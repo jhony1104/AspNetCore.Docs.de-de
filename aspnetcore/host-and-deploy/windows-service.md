@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 995fdd2bbba30ff983bc2055fcb97c14541e2ac6
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 544037a2a1f836e51b4f10551316312ef55c68da
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081479"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71688084"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -36,21 +36,7 @@ Die ASP.NET Core-Workerdienstvorlage dient als Ausgangspunkt für das Programmie
 1. Erstellen Sie eine Workerdienstanwendung über die .NET Core-Vorlage.
 1. Befolgen Sie die Anweisungen im Abschnitt [App-Konfiguration](#app-configuration), um die Workerdienstanwendung so zu aktualisieren, dass sie als Windows-Dienst ausgeführt werden kann.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-1. Erstellen Sie ein neues Projekt.
-1. Wählen Sie **ASP.NET Core-Webanwendung** aus. Klicken Sie auf **Weiter**.
-1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Wählen Sie **Erstellen** aus.
-1. Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind.
-1. Wählen Sie die Vorlage **Workerdienst** aus. Wählen Sie **Erstellen** aus.
-
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
-
-Rufen Sie die Vorlage „Workerdienst“ (`worker`) über eine Befehlsshell mit dem Befehl [dotnet new](/dotnet/core/tools/dotnet-new) auf. Im folgenden Beispiel wird eine Workerdienstanwendung namens `ContosoWorkerService` erstellt. Der Ordner für die App `ContosoWorkerService` wird automatisch erstellt, wenn der Befehl ausgeführt wird.
-
-```dotnetcli
-dotnet new worker -o ContosoWorkerService
-```
+[!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ---
 
