@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/23/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: 2b5d1433fce6e09adf3caa58e55e678b00ad98ee
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: b30bce6ef3ebf1cd2f4f3fe8d046e1db9b6929d5
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211643"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924649"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
 
@@ -38,7 +38,7 @@ Für blazor-Server-apps:
 
 Das folgende Beispiel basiert auf [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem experimentellen JavaScript-basierten Decoder. Im Beispiel wird veranschaulicht, wie eine JavaScript-Funktion aus C# einer Methode aufgerufen wird. Die JavaScript-Funktion akzeptiert ein Bytearray C# aus einer Methode, decodiert das Array und gibt den Text zur Anzeige an die Komponente zurück.
 
-Geben Sie im `TextDecoder` - Elementvonwwwroot/Index.html(blazorWebassembly)oderPages/_Host.cshtml(blazorServer)eineFunktionan,dievonzumDecodiereneinesbestandenenArraysverwendet`<head>` wird:
+Geben Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine Funktion an, die `TextDecoder` zum Decodieren eines bestandenen Arrays verwendet:
 
 [!code-html[](javascript-interop/samples_snapshot/index-script.html)]
 
@@ -81,13 +81,13 @@ In der Client seitigen Beispiel-APP, die dieses Thema begleitet, sind zwei JavaS
 
 [!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-Platzieren Sie `<script>` das-Tag, das auf die JavaScript-Datei verweist, in der Datei *wwwroot/Index.html* (blazor Webassembly) oder der Datei *pages/_Host. cshtml* (blazor Server).
+Platzieren Sie das `<script>`-Tag, das auf die JavaScript-Datei in der Datei *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) verweist.
 
 *wwwroot/Index.html* (Blazor Webassembly):
 
 [!code-html[](./common/samples/3.x/BlazorSample/wwwroot/index.html?highlight=15)]
 
-*Pages/_Host. cshtml* (Blazor-Server):
+*Pages/_Host. cshtml* (blazor-Server):
 
 [!code-cshtml[](javascript-interop/samples_snapshot/_Host.cshtml?highlight=29)]
 
@@ -139,7 +139,7 @@ Das folgende Beispiel zeigt, wie Sie einen Verweis `username` auf das `<input>` 
 ```
 
 > [!NOTE]
-> Verwenden Sie **keine** aufgezeichneten Element Verweise als Methode zum Auffüllen oder Bearbeiten des DOM, wenn blazor mit den Elementen interagiert, auf die verwiesen wird. Dadurch kann das deklarative Renderingmodell beeinträchtigt werden.
+> Verwenden Sie **keine** aufgezeichneten Element Verweise als Möglichkeit zum Auffüllen des DOM. Dadurch kann das deklarative Renderingmodell beeinträchtigt werden.
 
 Wenn .NET-Code betroffen ist, ist ein `ElementReference` nicht transparentes Handle. Das *einzige* , was Sie tun `ElementReference` können, ist die Übergabe an JavaScript-Code über JavaScript-Interop. Wenn Sie dies tun, empfängt der JavaScript-seitige Code eine `HTMLElement` -Instanz, die für die Verwendung mit normalen DOM-APIs verwendet werden kann.
 

@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 09/21/2019
 uid: grpc/troubleshoot
-ms.openlocfilehash: 15377ba4b31ce9319df300b23e5a95c67bca7db4
-ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
+ms.openlocfilehash: c31f499b008cdec9d759e804b18965156ca99f30
+ms.sourcegitcommit: d8b12cc1716ee329d7bd2300e201b61e15d506ac
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/21/2019
-ms.locfileid: "71176509"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71942894"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>Problembehandlung bei GrpC auf .net Core
 
@@ -151,3 +151,21 @@ Für eine GrpC-Client-App, die GrpC-Anrufe erstellt, muss nur der konkrete Clien
   <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
 </ItemGroup>
 ```
+
+## <a name="wpf-projects-unable-to-generated-grpc-c-assets-from-proto-files"></a>WPF-Projekte können keine GrpC C# -Assets aus *@no__t -2. proto* -Dateien generieren.
+
+WPF-Projekte haben ein [bekanntes Problem](https://github.com/dotnet/wpf/issues/810) , das verhindert, dass die GrpC-Codegenerierung ordnungsgemäß funktioniert. Alle in einem WPF-Projekt generierten GrpC-Typen, indem auf `Grpc.Tools`-und *. proto* -Dateien verwiesen wird, erstellen bei der Verwendung Kompilierungsfehler:
+
+> Fehler CS0246: Der Typ-oder Namespace Name "mygrpcservices" konnte nicht gefunden werden. (fehlt eine using-Direktive oder ein Assemblyverweis?)
+
+Sie können dieses Problem umgehen, indem Sie folgende Schritte ausführen:
+
+1. Erstellen Sie ein neues .net Core-Klassen Bibliotheksprojekt.
+2. Fügen Sie im neuen Projekt Verweise hinzu, um die [ C# Codegenerierung aus *@no__t -3. proto* -Dateienzu aktivieren:
+    * Fügen Sie dem [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)-Paket einen Paketverweis hinzu.
+    * Fügen Sie der `<Protobuf>`-Element Gruppe *@no__t -1. proto* -Dateien hinzu.
+3. Fügen Sie in der WPF-Anwendung einen Verweis auf das neue Projekt hinzu.
+
+Die WPF-Anwendung kann die von GrpC generierten Typen aus dem neuen Klassen Bibliotheksprojekt verwenden.
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
