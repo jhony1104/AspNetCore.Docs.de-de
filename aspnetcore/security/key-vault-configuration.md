@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit dem Azure Key Vault-Konfigurations Anbiet
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/01/2019
+ms.date: 10/07/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: f16891182d274333ddc05eea401c06468e0717b1
-ms.sourcegitcommit: b1e480e1736b0fe0e4d8dce4a4cf5c8e47fc2101
+ms.openlocfilehash: cc3894df4df169d941f54ef3dfad5d3e6f798aad
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/19/2019
-ms.locfileid: "71108085"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007402"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -34,22 +34,22 @@ Fügen Sie dem Paket " [Microsoft. Extensions. Configuration. azurekeyvault](htt
 Um das Szenario " [verwaltete Identitäten für Azure-Ressourcen](/azure/active-directory/managed-identities-azure-resources/overview) " zu übernehmen, fügen Sie dem Paket " [Microsoft. Azure. Services. appauthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) " einen Paket Verweis hinzu.
 
 > [!NOTE]
-> Zum Zeitpunkt des Schreibens bietet die neueste stabile Version von `Microsoft.Azure.Services.AppAuthentication`, Version `1.0.3`, Unterstützung für vom [System zugewiesene verwaltete Identitäten](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-work). Die Unterstützung für vom `1.2.0-preview2` *Benutzer zugewiesene verwaltete Identitäten* ist im Paket verfügbar. In diesem Thema wird die Verwendung von vom System verwalteten Identitäten veranschaulicht, und die bereitgestellte Beispiel `1.0.3` -APP `Microsoft.Azure.Services.AppAuthentication` verwendet die Version des Pakets.
+> Zum Zeitpunkt der Erstellung des Artikels bietet die neueste stabile Version von `Microsoft.Azure.Services.AppAuthentication`, Version `1.0.3`, Unterstützung für vom [System zugewiesene verwaltete Identitäten](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-work). Die Unterstützung für vom *Benutzer zugewiesene verwaltete Identitäten* ist im `1.2.0-preview2`-Paket verfügbar. In diesem Thema wird die Verwendung von vom System verwalteten Identitäten veranschaulicht, und die bereitgestellte Beispiel-App verwendet die Version `1.0.3` des Pakets `Microsoft.Azure.Services.AppAuthentication`.
 
 ## <a name="sample-app"></a>Beispiel-App
 
-Die Beispiel-APP wird in einem von zwei Modi ausgeführt, `#define` die durch die-Anweisung am Anfang der *Program.cs* -Datei bestimmt werden:
+Die Beispiel-APP wird in einem von zwei Modi ausgeführt, die durch die `#define`-Anweisung am Anfang der *Program.cs* -Datei bestimmt werden:
 
-* `Certificate`&ndash; Veranschaulicht die Verwendung einer Azure Key Vault-Client-ID und eines X. 509-Zertifikats für den Zugriff auf in Azure Key Vault gespeicherte Geheimnisse. Diese Version des Beispiels kann von einem beliebigen Speicherort aus ausgeführt werden, auf Azure App Service oder auf allen Hosts bereitgestellt werden, die eine ASP.net Core-App bereitstellen können.
-* `Managed`Veranschaulicht, wie [verwaltete Identitäten für Azure-Ressourcen](/azure/active-directory/managed-identities-azure-resources/overview) verwendet werden, um die APP für die Azure Key Vault mit Azure AD Authentifizierung ohne Anmelde Informationen zu authentifizieren, die im Code oder in der Konfiguration der APP gespeichert sind. &ndash; Wenn Sie für die Authentifizierung verwaltete Identitäten verwenden, sind keine Azure AD Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel) erforderlich. Die `Managed` Version des Beispiels muss in Azure bereitgestellt werden. Befolgen Sie die Anweisungen im Abschnitt [Verwenden der verwalteten Identitäten für Azure-Ressourcen](#use-managed-identities-for-azure-resources) .
+* `Certificate` &ndash; veranschaulicht die Verwendung einer Azure Key Vault Client-ID und eines X. 509-Zertifikats für den Zugriff auf Geheimnisse, die in Azure Key Vault gespeichert sind. Diese Version des Beispiels kann von einem beliebigen Speicherort aus ausgeführt werden, auf Azure App Service oder auf allen Hosts bereitgestellt werden, die eine ASP.net Core-App bereitstellen können.
+* `Managed` &ndash; veranschaulicht, wie [verwaltete Identitäten für Azure-Ressourcen](/azure/active-directory/managed-identities-azure-resources/overview) verwendet werden, um die APP für die Azure Key Vault mit Azure AD Authentifizierung ohne Anmelde Informationen zu authentifizieren, die im Code oder in der Konfiguration der APP gespeichert sind. Wenn Sie für die Authentifizierung verwaltete Identitäten verwenden, sind keine Azure AD Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel) erforderlich. Die `Managed`-Version des Beispiels muss in Azure bereitgestellt werden. Befolgen Sie die Anweisungen im Abschnitt [Verwenden der verwalteten Identitäten für Azure-Ressourcen](#use-managed-identities-for-azure-resources) .
 
-Weitere Informationen zum Konfigurieren einer Beispiel-App mithilfe von Präprozessordirektiven`#define`() finden <xref:index#preprocessor-directives-in-sample-code>Sie unter.
+Weitere Informationen zum Konfigurieren einer Beispiel-App mithilfe von Präprozessordirektiven (`#define`) finden Sie unter <xref:index#preprocessor-directives-in-sample-code>.
 
 ## <a name="secret-storage-in-the-development-environment"></a>Speicherung von geheimen Schlüsseln in der Entwicklungsumgebung
 
 Legen Sie Geheimnisse mit dem [Geheimnis-Manager-Tool](xref:security/app-secrets)lokal fest. Wenn die Beispiel-App auf dem lokalen Computer in der Entwicklungsumgebung ausgeführt wird, werden Geheimnisse aus dem lokalen Speicher des geheimen Haupt Schlüssels geladen.
 
-Das Secret Manager-Tool erfordert `<UserSecretsId>` eine Eigenschaft in der Projektdatei der app. Legen Sie den-Eigenschafts Wert (`{GUID}`) auf eine eindeutige GUID fest:
+Das Secret Manager-Tool benötigt eine `<UserSecretsId>`-Eigenschaft in der Projektdatei der app. Legen Sie den Eigenschafts Wert (`{GUID}`) auf eine eindeutige GUID fest:
 
 ```xml
 <PropertyGroup>
@@ -57,26 +57,26 @@ Das Secret Manager-Tool erfordert `<UserSecretsId>` eine Eigenschaft in der Proj
 </PropertyGroup>
 ```
 
-Geheimnisse werden als Name-Wert-Paare erstellt. Hierarchische Werte (Konfigurations Abschnitte) verwenden `:` einen (Doppelpunkt) als Trennzeichen in ASP.net Core Namen von [Konfigurations](xref:fundamentals/configuration/index) Schlüsseln.
+Geheimnisse werden als Name-Wert-Paare erstellt. Hierarchische Werte (Konfigurations Abschnitte) verwenden einen `:` (Doppelpunkt) als Trennzeichen in [ASP.net Core Konfigurations](xref:fundamentals/configuration/index) Schlüsselnamen.
 
-Der geheime Manager wird von einer Befehlsshell verwendet, die für den Inhalts Stamm des Projekts `{SECRET NAME}` geöffnet ist, wobei `{SECRET VALUE}` der Name und der Wert ist:
+Der geheime Manager wird von einer Befehlsshell verwendet, die für das [Inhalts](xref:fundamentals/index#content-root)Stammverzeichnis des Projekts geöffnet ist. dabei ist `{SECRET NAME}` der Name, und `{SECRET VALUE}` ist der Wert:
 
 ```dotnetcli
 dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"
 ```
 
-Führen Sie die folgenden Befehle in einer Befehlsshell aus dem Inhalts Stamm des Projekts aus, um die geheimen Schlüssel für die Beispiel-App festzulegen:
+Führen Sie die folgenden Befehle in einer Befehlsshell aus dem [Inhalts](xref:fundamentals/index#content-root) Stamm des Projekts aus, um die geheimen Schlüssel für die Beispiel-App festzulegen:
 
 ```dotnetcli
 dotnet user-secrets set "SecretName" "secret_value_1_dev"
 dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 ```
 
-Wenn diese Geheimnisse in Azure Key Vault im [geheimen Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) gespeichert werden, wird das `_dev` `_prod`Suffix in geändert. Das-Suffix bietet einen visuellen Hinweis in der APP-Ausgabe, die die Quelle der Konfigurationswerte anzeigt.
+Wenn diese Geheimnisse in Azure Key Vault im [geheimen Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) gespeichert werden, wird das Suffix `_dev` in `_prod` geändert. Das-Suffix bietet einen visuellen Hinweis in der APP-Ausgabe, die die Quelle der Konfigurationswerte anzeigt.
 
 ## <a name="secret-storage-in-the-production-environment-with-azure-key-vault"></a>Geheimer Speicher in der Produktionsumgebung mit Azure Key Vault
 
-Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe Azure CLI](/azure/key-vault/quick-create-cli) Themas werden hier zusammengefasst, um eine Azure Key Vault zu erstellen und Geheimnisse zu speichern, die von der Beispiel-App verwendet werden. Weitere Informationen finden Sie im Thema.
+Die Anweisungen des [-Schnellstarts: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe Azure CLI @ no__t-0-Themas werden hier zusammengefasst, um eine Azure Key Vault zu erstellen und Geheimnisse zu speichern, die von der Beispiel-App verwendet werden. Weitere Informationen finden Sie im Thema.
 
 1. Öffnen Sie Azure Cloud Shell, indem Sie eine der folgenden Methoden in der [Azure-Portal](https://portal.azure.com/)verwenden:
 
@@ -86,15 +86,15 @@ Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus A
 
    Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [in der Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
 
-1. Wenn Sie nicht bereits authentifiziert sind, melden Sie sich `az login` mit dem Befehl an.
+1. Wenn Sie nicht bereits authentifiziert sind, melden Sie sich mit dem Befehl "`az login`" an.
 
-1. Erstellen Sie eine Ressourcengruppe mit dem folgenden Befehl, `{RESOURCE GROUP NAME}` wobei der Name der Ressourcengruppe für die neue Ressourcengruppe `{LOCATION}` und die Azure-Region (Datacenter) ist:
+1. Erstellen Sie eine Ressourcengruppe mit dem folgenden Befehl, wobei `{RESOURCE GROUP NAME}` der Name der Ressourcengruppe für die neue Ressourcengruppe und `{LOCATION}` die Azure-Region (Datacenter) ist:
 
    ```azure-cli
    az group create --name "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
-1. Erstellen Sie mit dem folgenden Befehl einen Schlüssel Tresor in der Ressourcengruppe, `{KEY VAULT NAME}` wobei der Name für den neuen Schlüssel Tresor und `{LOCATION}` die Azure-Region (Datacenter) ist:
+1. Erstellen Sie mit dem folgenden Befehl einen Schlüssel Tresor in der Ressourcengruppe, wobei `{KEY VAULT NAME}` der Name für den neuen Schlüssel Tresor und `{LOCATION}` die Azure-Region (Datacenter) ist:
 
    ```azure-cli
    az keyvault create --name "{KEY VAULT NAME}" --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
@@ -102,9 +102,9 @@ Die Anweisungen [im Schnellstart: Festlegen und Abrufen eines Geheimnisses aus A
 
 1. Erstellen Sie Geheimnisse im Schlüssel Tresor als Name-Wert-Paare.
 
-   Azure Key Vault geheimen Namen sind auf alphanumerische Zeichen und Bindestriche beschränkt. Hierarchische Werte (Konfigurations Abschnitte) `--` verwenden (zwei Bindestriche) als Trennzeichen. Doppelpunkte, die normalerweise verwendet werden, um einen Abschnitt von einem Unterschlüssel in [ASP.net Core Konfiguration](xref:fundamentals/configuration/index)zu begrenzen, sind in Key Vault-Geheimnis Namen nicht zulässig. Aus diesem Grund werden zwei Bindestriche verwendet und für einen Doppelpunkt getauscht, wenn die geheimen Schlüssel in die Konfiguration der App geladen werden.
+   Azure Key Vault geheimen Namen sind auf alphanumerische Zeichen und Bindestriche beschränkt. Hierarchische Werte (Konfigurations Abschnitte) verwenden `--` (zwei Bindestriche) als Trennzeichen. Doppelpunkte, die normalerweise verwendet werden, um einen Abschnitt von einem Unterschlüssel in [ASP.net Core Konfiguration](xref:fundamentals/configuration/index)zu begrenzen, sind in Key Vault-Geheimnis Namen nicht zulässig. Aus diesem Grund werden zwei Bindestriche verwendet und für einen Doppelpunkt getauscht, wenn die geheimen Schlüssel in die Konfiguration der App geladen werden.
 
-   Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod` Suffix, um Sie von den `_dev` suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden. Ersetzen `{KEY VAULT NAME}` Sie durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
+   Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod`-Suffix, um Sie von den `_dev`-suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden Ersetzen Sie `{KEY VAULT NAME}` durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
 
    ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
@@ -118,7 +118,7 @@ Konfigurieren Sie Azure AD, Azure Key Vault und die APP für die Verwendung eine
 > [!NOTE]
 > Obwohl die Verwendung einer Anwendungs-ID und eines X. 509-Zertifikats für in Azure gehostete Apps unterstützt wird, empfiehlt es sich, beim Hosten einer APP in Azure [verwaltete Identitäten für Azure-Ressourcen zu](#use-managed-identities-for-azure-resources) verwenden. Für verwaltete Identitäten ist das Speichern eines Zertifikats in der APP oder in der Entwicklungsumgebung nicht erforderlich.
 
-Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509 `#define` -Zertifikat, wenn die-Anweisung am Anfang der *Program.cs* -Datei auf `Certificate`festgelegt ist.
+Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn die `#define`-Anweisung am Anfang der *Program.cs* -Datei auf `Certificate` festgelegt ist.
 
 1. Erstellen Sie ein PKCS # 12-Archiv Zertifikat ( *. pfx*). Optionen zum Erstellen von Zertifikaten sind [Makecert unter Windows](/windows/desktop/seccrypto/makecert) und [OpenSSL](https://www.openssl.org/).
 1. Installieren Sie das Zertifikat im persönlichen Zertifikat Speicher des aktuellen Benutzers. Das Markieren des Schlüssels als exportierbar ist optional. Notieren Sie den Fingerabdruck des Zertifikats, der später in diesem Prozess verwendet wird.
@@ -135,14 +135,14 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509 `#define` -Zertifik
 1. Wählen Sie **neue hinzufügen**aus.
 1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **auswählen** aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
-1. Klicken Sie auf **OK**.
+1. Wählen Sie **OK**.
 1. Klicken Sie auf **Speichern**.
 1. Stellen Sie die APP bereit.
 
-Die `Certificate` Beispiel-APP erhält Ihre Konfigurationswerte `IConfigurationRoot` aus dem gleichen Namen wie der geheime Name:
+Die Beispiel-app "`Certificate`" erhält Ihre Konfigurationswerte von `IConfigurationRoot` mit dem gleichen Namen wie der geheime Name:
 
-* Nicht hierarchische Werte: Der Wert für `SecretName` wird mit `config["SecretName"]`abgerufen.
-* Hierarchische Werte (Abschnitte): Verwenden `:` Sie die Notation (Doppelpunkt `GetSection` ) oder die Erweiterungsmethode. Verwenden Sie einen dieser Ansätze zum Abrufen des Konfigurations Werts:
+* Nicht hierarchische Werte: Der Wert für "`SecretName`" wird mit `config["SecretName"]` abgerufen.
+* Hierarchische Werte (Abschnitte): Verwenden Sie die `:`-Notation (Doppelpunkt) oder die `GetSection`-Erweiterungsmethode. Verwenden Sie einen dieser Ansätze zum Abrufen des Konfigurations Werts:
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
@@ -152,29 +152,29 @@ Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft `AddAzureK
 
 Beispiel Werte:
 
-* Key Vault-Name:`contosovault`
-* Anwendungs-ID:`627e911e-43cc-61d4-992e-12db9c81b413`
-* Zertifikat Fingerabdruck:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
+* Key Vault-Name: `contosovault`
+* Anwendungs-ID: `627e911e-43cc-61d4-992e-12db9c81b413`
+* Zertifikat Fingerabdruck: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
 *appsettings.json*:
 
 [!code-json[](key-vault-configuration/sample/appsettings.json)]
 
-Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung werden geheime Werte mit dem `_dev` -Suffix geladen. In der Produktionsumgebung werden die Werte mit dem `_prod` -Suffix geladen.
+Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung werden geheime Werte mit dem Suffix "`_dev`" geladen. In der Produktionsumgebung werden die Werte mit dem Suffix "`_prod`" geladen.
 
 ## <a name="use-managed-identities-for-azure-resources"></a>Verwenden von verwalteten Identitäten für Azure-Ressourcen
 
 **Eine in Azure** bereitgestellte App kann [verwaltete Identitäten für Azure-Ressourcen](/azure/active-directory/managed-identities-azure-resources/overview)nutzen, die es der APP ermöglichen, sich mit Azure Key Vault mithilfe Azure AD Authentifizierung ohne Anmelde Informationen (Anwendungs-ID und Kennwort/geheimer Client Schlüssel) zu authentifizieren. in der APP gespeichert.
 
-In der Beispiel-App werden verwaltete Identitäten für Azure- `#define` Ressourcen verwendet, wenn die-Anweisung am Anfang der *Program.cs* -Datei auf `Managed`festgelegt ist.
+Die Beispiel-App verwendet verwaltete Identitäten für Azure-Ressourcen, wenn die `#define`-Anweisung am Anfang der *Program.cs* -Datei auf `Managed` festgelegt ist.
 
-Geben Sie den Tresor Namen in die Datei " *appSettings. JSON* " der APP ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel) `Managed` , wenn Sie auf die-Version festgelegt ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der Datei " *appSettings. JSON* " gespeichert ist.
+Geben Sie den Tresor Namen in die Datei " *appSettings. JSON* " der APP ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel), wenn Sie auf die `Managed`-Version festgelegt ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der Datei " *appSettings. JSON* " gespeichert ist.
 
 Stellen Sie die Beispiel-App für Azure App Service bereit.
 
 Eine APP, die für Azure App Service bereitgestellt wird, wird automatisch bei Azure AD registriert, wenn der Dienst erstellt wird. Rufen Sie die Objekt-ID aus der Bereitstellung ab, um Sie im folgenden Befehl zu verwenden. Die Objekt-ID wird im Azure-Portal im **Identitäts** Bereich der APP Service angezeigt.
 
-Wenn Sie Azure CLI und die Objekt-ID der App verwenden, stellen `list` Sie `get` der APP die Berechtigungen und für den Zugriff auf den Schlüssel Tresor bereit:
+Wenn Sie Azure CLI und die Objekt-ID der App verwenden, stellen Sie der APP `list`-und `get`-Berechtigungen für den Zugriff auf den Schlüssel Tresor bereit:
 
 ```azure-cli
 az keyvault set-policy --name '{KEY VAULT NAME}' --object-id {OBJECT ID} --secret-permissions get list
@@ -184,38 +184,38 @@ az keyvault set-policy --name '{KEY VAULT NAME}' --object-id {OBJECT ID} --secre
 
 Die Beispiel-App:
 
-* Erstellt eine Instanz der `AzureServiceTokenProvider` -Klasse ohne eine Verbindungs Zeichenfolge. Wenn keine Verbindungs Zeichenfolge bereitgestellt wird, versucht der Anbieter, ein Zugriffs Token von verwalteten Identitäten für Azure-Ressourcen abzurufen.
-* Ein neues `KeyVaultClient` wird mit dem `AzureServiceTokenProvider` instanztokenrückruf erstellt.
-* Die `KeyVaultClient` -Instanz wird mit einer Standard Implementierung von `IKeyVaultSecretManager` verwendet, die alle geheimen Werte lädt und doppelte Bindestriche (`--`) durch`:`Doppelpunkte () in Schlüsselnamen ersetzt.
+* Erstellt eine Instanz der `AzureServiceTokenProvider`-Klasse ohne eine Verbindungs Zeichenfolge. Wenn keine Verbindungs Zeichenfolge bereitgestellt wird, versucht der Anbieter, ein Zugriffs Token von verwalteten Identitäten für Azure-Ressourcen abzurufen.
+* Ein neues `KeyVaultClient` wird mit dem `AzureServiceTokenProvider`-instanztokenrückruf erstellt.
+* Die `KeyVaultClient`-Instanz wird mit einer Standard Implementierung von `IKeyVaultSecretManager` verwendet, die alle geheimen Werte lädt und doppelte Bindestriche (`--`) durch Doppelpunkte (`:`) in Schlüsselnamen ersetzt.
 
 [!code-csharp[](key-vault-configuration/sample/Program.cs?name=snippet2&highlight=13-21)]
 
-Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung verfügen geheime Werte über das `_dev` -Suffix, da Sie von Benutzer Geheimnissen bereitgestellt werden. In der Produktionsumgebung werden die Werte mit dem `_prod` -Suffix geladen, da Sie von Azure Key Vault bereitgestellt werden.
+Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung haben geheime Werte das Suffix "`_dev`", da Sie von Benutzer Geheimnissen bereitgestellt werden. In der Produktionsumgebung werden die Werte mit dem `_prod`-Suffix geladen, da Sie von Azure Key Vault bereitgestellt werden.
 
-Wenn Sie einen `Access denied` Fehler erhalten, vergewissern Sie sich, dass die APP mit Azure AD registriert wurde und Zugriff auf den Schlüssel Tresor hat. Vergewissern Sie sich, dass Sie den Dienst in Azure neu gestartet haben.
+Wenn Sie einen `Access denied`-Fehler erhalten, vergewissern Sie sich, dass die APP bei Azure AD registriert ist und Zugriff auf den Schlüssel Tresor hat. Vergewissern Sie sich, dass Sie den Dienst in Azure neu gestartet haben.
 
 ## <a name="use-a-key-name-prefix"></a>Schlüsselnamen Präfix verwenden
 
-`AddAzureKeyVault`stellt eine Überladung bereit, die eine `IKeyVaultSecretManager`Implementierung von akzeptiert, mit der Sie steuern können, wie Key Vault-Geheimnisse in Konfigurationsschlüssel konvertiert werden. Beispielsweise können Sie die-Schnittstelle implementieren, um geheime Werte basierend auf einem Präfix Wert zu laden, den Sie beim Starten der APP bereitstellen. So können Sie z. b. geheime Schlüssel basierend auf der Version der App laden.
+`AddAzureKeyVault` stellt eine Überladung bereit, die eine Implementierung von `IKeyVaultSecretManager` akzeptiert, mit der Sie steuern können, wie Key Vault-Geheimnisse in Konfigurationsschlüssel konvertiert werden. Beispielsweise können Sie die-Schnittstelle implementieren, um geheime Werte basierend auf einem Präfix Wert zu laden, den Sie beim Starten der APP bereitstellen. So können Sie z. b. geheime Schlüssel basierend auf der Version der App laden.
 
 > [!WARNING]
 > Verwenden Sie keine Präfixe für Key Vault-Geheimnisse, um geheime Schlüssel für mehrere apps in demselben Schlüssel Tresor zu platzieren oder um Umwelt Geheimnisse (z. b. *Entwicklungs* -und *Produktions* Geheimnisse) in demselben Tresor zu platzieren. Es wird empfohlen, dass unterschiedliche apps und Entwicklungs-/Produktionsumgebungen separate Schlüssel Tresore verwenden, um App-Umgebungen für die höchste Sicherheitsstufe zu isolieren.
 
-Im folgenden Beispiel wird ein geheimer Schlüssel im Schlüssel Tresor erstellt (und mit dem Geheimnis-Manager-Tool für die Entwicklungsumgebung) für `5000-AppSecret` (Zeiträume sind in Key Vault-Geheimnis Namen nicht zulässig). Dieser geheime Schlüssel stellt einen geheimen App-Schlüssel für die Version 5.0.0.0 der APP dar. Bei einer anderen Version der APP, 5.1.0.0, wird dem Schlüssel Tresor ein geheimer Schlüssel (und mit dem Geheimnis-Manager-Tool) `5100-AppSecret`für hinzugefügt. Jede APP-Version lädt den Wert für `AppSecret`die Versionierung mit Versions Angabe in die Konfiguration, wobei die Version beim Laden des geheimen Schlüssels entfernt wird.
+Im folgenden Beispiel wird ein geheimer Schlüssel im Schlüssel Tresor erstellt (und mit dem Geheimnis-Manager-Tool für die Entwicklungsumgebung) für `5000-AppSecret` (Zeiträume sind in Key Vault-Geheimnis Namen nicht zulässig). Dieser geheime Schlüssel stellt einen geheimen App-Schlüssel für die Version 5.0.0.0 der APP dar. Bei einer anderen Version der APP, 5.1.0.0, wird dem Schlüssel Tresor ein geheimer Schlüssel (und mit dem Geheimnis-Manager-Tool) für `5100-AppSecret` hinzugefügt. Jede APP-Version lädt den Wert für die Versionierung mit Versions Angabe in die Konfiguration `AppSecret` und entfernt die Version beim Laden des geheimen Schlüssels.
 
-`AddAzureKeyVault`wird mit einem benutzerdefinierten `IKeyVaultSecretManager`aufgerufen:
+`AddAzureKeyVault` wird mit einem benutzerdefinierten `IKeyVaultSecretManager` aufgerufen:
 
 [!code-csharp[](key-vault-configuration/sample_snapshot/Program.cs?highlight=30-34)]
 
-Die `IKeyVaultSecretManager` Implementierung reagiert auf die Versions Präfixe von Geheimnissen, um den richtigen geheimen Schlüssel in die Konfiguration zu laden:
+Die `IKeyVaultSecretManager`-Implementierung reagiert auf die Versions Präfixe von Geheimnissen, um den richtigen geheimen Schlüssel in die Konfiguration zu laden:
 
 [!code-csharp[](key-vault-configuration/sample_snapshot/Startup.cs?name=snippet1)]
 
-Die `Load` -Methode wird von einem Anbieter Algorithmus aufgerufen, der die geheimen Schlüssel des Tresors durchläuft, um diejenigen zu finden, die über das Versions Präfix verfügen. Wenn ein Versions Präfix mit `Load`gefunden wird, verwendet der Algorithmus die `GetKey` -Methode, um den Konfigurations Namen des geheimen namens zurückzugeben. Es entfernt das Versions Präfix aus dem Namen des Geheimnisses und gibt den restlichen geheimen Namen für das Laden in die Konfigurations Name-Wert-Paare der APP zurück.
+Die `Load`-Methode wird von einem Anbieter Algorithmus aufgerufen, der die geheimen Schlüssel des Tresors durchläuft, um diejenigen zu finden, die das Versions Präfix aufweisen. Wenn ein Versions Präfix mit `Load` gefunden wird, verwendet der Algorithmus die `GetKey`-Methode, um den Konfigurations Namen des geheimen namens zurückzugeben. Es entfernt das Versions Präfix aus dem Namen des Geheimnisses und gibt den restlichen geheimen Namen für das Laden in die Konfigurations Name-Wert-Paare der APP zurück.
 
 Wenn dieser Ansatz implementiert ist:
 
-1. Die in der Projektdatei der APP angegebene Version der app. Im folgenden Beispiel wird die App-Version auf `5.0.0.0`festgelegt:
+1. Die in der Projektdatei der APP angegebene Version der app. Im folgenden Beispiel wird die App-Version auf `5.0.0.0` festgelegt:
 
    ```xml
    <PropertyGroup>
@@ -223,7 +223,7 @@ Wenn dieser Ansatz implementiert ist:
    </PropertyGroup>
    ```
 
-1. Vergewissern Sie sich `<UserSecretsId>` , dass eine Eigenschaft in der Projektdatei der app vorhanden `{GUID}` ist, wobei eine vom Benutzer bereitgestellte GUID ist:
+1. Vergewissern Sie sich, dass die `<UserSecretsId>`-Eigenschaft in der Projektdatei der app vorhanden ist, wobei `{GUID}` eine vom Benutzer bereitgestellte GUID ist:
 
    ```xml
    <PropertyGroup>
@@ -245,24 +245,24 @@ Wenn dieser Ansatz implementiert ist:
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
    ```
 
-1. Wenn die app ausgeführt wird, werden die geheimen Schlüssel Tresor-Schlüssel geladen. Der Zeichen folgen Schlüssel `5000-AppSecret` für wird mit der in der Projektdatei der APP (`5.0.0.0`) angegebenen Version der APP abgeglichen.
+1. Wenn die app ausgeführt wird, werden die geheimen Schlüssel Tresor-Schlüssel geladen. Der Zeichen folgen Schlüssel für `5000-AppSecret` wird mit der in der Projektdatei der APP (`5.0.0.0`) angegebenen app-Version abgeglichen.
 
-1. Die Version `5000` (mit dem Bindestrich) wird aus dem Schlüsselnamen entfernt. Während der gesamten APP wird beim Lesen der Konfiguration `AppSecret` mit dem Schlüssel der geheime Wert geladen.
+1. Die Version `5000` (mit dem Bindestrich) wird aus dem Schlüsselnamen entfernt. Während der gesamten APP wird durch das Lesen der Konfiguration mit dem Schlüssel `AppSecret` der geheime Wert geladen.
 
-1. Wenn die App-Version in der Projektdatei `5.1.0.0` in geändert wird und die APP erneut ausgeführt wird, wird `5.1.0.0_secret_value_dev` der geheime Wert in der Entwicklungsumgebung und `5.1.0.0_secret_value_prod` in der Produktionsumgebung zurückgegeben.
+1. Wenn die App-Version in der Projektdatei in `5.1.0.0` geändert und die APP erneut ausgeführt wird, wird der geheime Wert `5.1.0.0_secret_value_dev` in der Entwicklungsumgebung und `5.1.0.0_secret_value_prod` in der Produktionsumgebung zurückgegeben.
 
 > [!NOTE]
-> Sie können auch eine eigene `KeyVaultClient` Implementierung für `AddAzureKeyVault`bereitstellen. Ein benutzerdefinierter Client ermöglicht die gemeinsame Nutzung einer einzelnen Instanz des Clients in der gesamten app.
+> Sie können auch eine eigene `KeyVaultClient`-Implementierung für `AddAzureKeyVault` bereitstellen. Ein benutzerdefinierter Client ermöglicht die gemeinsame Nutzung einer einzelnen Instanz des Clients in der gesamten app.
 
 ## <a name="bind-an-array-to-a-class"></a>Binden eines Arrays an eine Klasse
 
 Der Anbieter ist in der Lage, Konfigurationswerte in ein Array für die Bindung an ein poco-Array zu lesen.
 
-Beim Lesen aus einer Konfigurations Quelle, bei der Schlüssel Trennzeichen (`:`Trennzeichen) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden`:0:`, `:1:`die ein Array bilden (,,... `:{n}:`) angezeigt wird. Weitere Informationen finden [Sie unter Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
+Beim Lesen aus einer Konfigurations Quelle, bei der Schlüssel Trennzeichen (`:`) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`,... `:{n}:`). Weitere Informationen finden Sie unter [configuration: Binden Sie ein Array an eine Klasse @ no__t-0.
 
-Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden. Der in diesem Thema beschriebene Ansatz verwendet doppelte Bindestriche (`--`) als Trennzeichen für hierarchische Werte (Abschnitte). Array Schlüssel werden in Azure Key Vault mit doppelten Bindestrichen und numerischen Schlüsselsegmenten`--0--`(, `--1--`, &hellip; `--{n}--`) gespeichert.
+Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden. Die in diesem Thema beschriebene Vorgehensweise verwendet doppelte Bindestriche (`--`) als Trennzeichen für hierarchische Werte (Abschnitte). Array Schlüssel werden in Azure Key Vault mit doppelten Bindestrichen und numerischen Schlüsselsegmenten (`--0--`, `--1--`, &hellip; `--{n}--`) gespeichert.
 
-Überprüfen Sie die folgende Konfiguration des [seriprotokollierungs](https://serilog.net/) Anbieters, die von einer JSON-Datei bereitgestellt wird Im `WriteTo` Array sind zwei Objektliterale definiert, die zwei serilog- *senken*reflektieren, die Ziele für die Protokollierungs Ausgabe beschreiben:
+Überprüfen Sie die folgende Konfiguration des [seriprotokollierungs](https://serilog.net/) Anbieters, die von einer JSON-Datei bereitgestellt wird Im `WriteTo`-Array sind zwei Objektliterale definiert, die zwei serilog- *senken*reflektieren, die Ziele für die Protokollierungs Ausgabe beschreiben:
 
 ```json
 "Serilog": {
@@ -285,7 +285,7 @@ Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden
 }
 ```
 
-Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key Vault mithilfe von`--`Double Dash ()-Notation und numerischen Segmenten gespeichert:
+Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key Vault mithilfe von Double Dash (`--`)-Notation und numerischen Segmenten gespeichert:
 
 | Key | Wert |
 | --- | ----- |
@@ -298,7 +298,7 @@ Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key V
 
 ## <a name="reload-secrets"></a>Geheimnisse erneut laden
 
-Geheimnisse werden zwischen `IConfigurationRoot.Reload()` gespeichert, bis aufgerufen wird. Abgelaufene, deaktivierte und aktualisierte geheime Schlüssel im Schlüssel Tresor werden von der APP erst `Reload` berücksichtigt, wenn der ausgeführt wird.
+Geheimnisse werden zwischengespeichert, bis `IConfigurationRoot.Reload()` aufgerufen wird. Abgelaufene, deaktivierte und aktualisierte Geheimnisse im Schlüssel Tresor werden von der APP erst berücksichtigt, wenn `Reload` ausgeführt wird.
 
 ```csharp
 Configuration.Reload();
@@ -306,7 +306,7 @@ Configuration.Reload();
 
 ## <a name="disabled-and-expired-secrets"></a>Deaktivierte und abgelaufene Geheimnisse
 
-Deaktivierte und abgelaufene geheim `KeyVaultClientException` nisse lösen zur Laufzeit eine aus. Um zu verhindern, dass die APP ausgelöst wird, stellen Sie die Konfiguration mithilfe eines anderen Konfigurations Anbieters bereit, oder aktualisieren Sie das deaktivierte oder abgelaufene Geheimnis.
+Deaktivierte und abgelaufene Geheimnisse lösen zur Laufzeit eine `KeyVaultClientException` aus. Um zu verhindern, dass die APP ausgelöst wird, stellen Sie die Konfiguration mithilfe eines anderen Konfigurations Anbieters bereit, oder aktualisieren Sie das deaktivierte oder abgelaufene Geheimnis.
 
 ## <a name="troubleshoot"></a>Problembehandlung
 
@@ -315,17 +315,17 @@ Wenn die APP die Konfiguration mit dem Anbieter nicht laden kann, wird eine Fehl
 * Die APP oder das Zertifikat ist in Azure Active Directory nicht ordnungsgemäß konfiguriert.
 * Der Schlüssel Tresor ist nicht in Azure Key Vault vorhanden.
 * Die APP ist nicht autorisiert, auf den Schlüssel Tresor zuzugreifen.
-* Die Zugriffs Richtlinie enthält `Get` nicht die Berechtigungen und. `List`
+* Die Zugriffs Richtlinie umfasst nicht die Berechtigungen "`Get`" und "`List`".
 * Im Schlüssel Tresor werden die Konfigurationsdaten (Name/Wert-Paar) fälschlicherweise benannt, fehlen, sind deaktiviert oder abgelaufen.
-* Die APP hat den falschen Schlüssel Tresor Namen (`KeyVaultName`), Azure AD Anwendungs-ID`AzureADApplicationId`() oder Azure AD Zertifikat Fingerabdruck (`AzureADCertThumbprint`).
+* Die APP hat den falschen Schlüssel Tresor Namen (`KeyVaultName`), Azure AD Anwendungs-ID (`AzureADApplicationId`) oder Azure AD Zertifikat Fingerabdruck (`AzureADCertThumbprint`).
 * Der Konfigurationsschlüssel (Name) ist in der APP falsch für den Wert, den Sie laden möchten.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/configuration/index>
-* [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
-* [Microsoft Azure: Dokumentation zu Key Vault](/azure/key-vault/)
+* [Microsoft Azure: Key Vault @ no__t-0
+* [Microsoft Azure: Key Vault Dokumentation @ no__t-0
 * [Generieren und übertragen von HSM-geschützten Schlüsseln für Azure Key Vault](/azure/key-vault/key-vault-hsm-protected-keys)
 * [Keyvaultclient-Klasse](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)
-* [Schnellstart: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe einer .net-Web-App](/azure/key-vault/quick-create-net)
-* [Tutorial: Verwenden von Azure Key Vault mit Azure Windows Virtual Machine in .net](/azure/key-vault/tutorial-net-windows-virtual-machine)
+* [Schnellstart: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe einer .net-Web-App @ no__t-0
+* [Tutorial: Verwenden von Azure Key Vault mit dem virtuellen Azure Windows-Computer in. NET @ no__t-0
