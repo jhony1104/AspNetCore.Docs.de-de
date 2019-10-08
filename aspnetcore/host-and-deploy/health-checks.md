@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Integritätsprüfungen für ASP.NET Core-Infr
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 09/27/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: d8be6c8eb45cde162693621e63bf40d48d04c324
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: e4b2a577815335078f7e0c9128144a514e42a6c3
+ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71199000"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71482052"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Integritätsprüfungen in ASP.NET Core
 
@@ -46,7 +46,7 @@ Die Beispiel-App stellt Startcode bereit, um die Integritätsprüfungen für ver
   * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 Ein anderes Szenario für Integritätsprüfungen zeigt, wie Sie Integritätsprüfungen auf einen Verwaltungsport filtern können. Für die Beispiel-App müssen Sie eine *Properties/launchSettings.json*-Datei erstellen, die die Verwaltungs-URL und den Verwaltungsport enthält. Weitere Informationen finden Sie im Abschnitt [Filtern nach Port](#filter-by-port).
 
@@ -337,7 +337,7 @@ dotnet run --scenario db
 ```
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core-DbContext-Test
 
@@ -526,7 +526,7 @@ dotnet run --scenario writer
 > [!NOTE]
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) enthält Szenarien für metrikbasierte Integritätsprüfungen, einschließlich Prüfungen des Datenträgerspeichers und Lebendigkeitsprüfungen mit Maximalwert.
 >
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="filter-by-port"></a>Filtern nach Port
 
@@ -741,7 +741,7 @@ Im Beispiel `LivenessProbeStartup` der Beispiel-App `StartupHostedService` hat d
 > [!NOTE]
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) enthält Herausgeber für verschiedene Systeme, einschließlich [Application Insights](/azure/application-insights/app-insights-overview).
 >
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="restrict-health-checks-with-mapwhen"></a>Einschränken von Integritätsprüfungen mit MapWhen
 
@@ -793,7 +793,7 @@ Die Beispiel-App stellt Startcode bereit, um die Integritätsprüfungen für ver
   * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 Ein anderes Szenario für Integritätsprüfungen zeigt, wie Sie Integritätsprüfungen auf einen Verwaltungsport filtern können. Für die Beispiel-App müssen Sie eine *Properties/launchSettings.json*-Datei erstellen, die die Verwaltungs-URL und den Verwaltungsport enthält. Weitere Informationen finden Sie im Abschnitt [Filtern nach Port](#filter-by-port).
 
@@ -1055,7 +1055,7 @@ dotnet run --scenario db
 ```
 
 > [!NOTE]
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core-DbContext-Test
 
@@ -1231,7 +1231,7 @@ dotnet run --scenario writer
 > [!NOTE]
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) enthält Szenarien für metrikbasierte Integritätsprüfungen, einschließlich Prüfungen des Datenträgerspeichers und Lebendigkeitsprüfungen mit Maximalwert.
 >
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="filter-by-port"></a>Filtern nach Port
 
@@ -1432,7 +1432,7 @@ Im Beispiel `LivenessProbeStartup` der Beispiel-App `StartupHostedService` hat d
 > [!NOTE]
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) enthält Herausgeber für verschiedene Systeme, einschließlich [Application Insights](/azure/application-insights/app-insights-overview).
 >
-> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) ist ein Port von [BeatPulse](https://github.com/xabaril/beatpulse) und wird von Microsoft nicht gewartet oder unterstützt.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) wird von Microsoft nicht gewartet oder unterstützt.
 
 ## <a name="restrict-health-checks-with-mapwhen"></a>Einschränken von Integritätsprüfungen mit MapWhen
 

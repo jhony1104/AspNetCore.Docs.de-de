@@ -22,7 +22,7 @@ Dieses Dokument zeigt Folgendes:
 * Erfordert HTTPS für alle Anforderungen.
 * Alle HTTP-Anforderungen auf HTTPS umleiten.
 
-Eine API kann verhindern, dass ein Client sensible Daten bei der ersten Anforderung sendet.
+Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensible Daten sendet.
 
 ::: moniker range=">= aspnetcore-3.0"
 

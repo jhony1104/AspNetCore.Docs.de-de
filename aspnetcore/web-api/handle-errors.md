@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Fehler in ASP.NET Core-Web-APIs beheben könn
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 09/25/2019
+ms.date: 09/27/2019
 uid: web-api/handle-errors
-ms.openlocfilehash: 9c5dd2f89e7351f386d1f0633c831952dc58e568
-ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
+ms.openlocfilehash: dc21d4b2cf096b8d38b0a24d739e6874186004e7
+ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71278732"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71551742"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Fehlerbehandlung in ASP.NET Core-Web-APIs
 
@@ -22,18 +22,97 @@ Dieser Artikel beschreibt die Verarbeitung und Anpassung der Fehlerbehandlung be
 
 ## <a name="developer-exception-page"></a>Seite mit Ausnahmen für Entwickler
 
-Die [Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling) ist ein nützliches Tool, um detaillierte Stapelüberwachungen für Serverfehler zu erhalten.
+Die [Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling) ist ein nützliches Tool, um detaillierte Stapelüberwachungen für Serverfehler zu erhalten. Es verwendet <xref:Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware>, um synchrone und asynchrone Ausnahmen aus der HTTP-Pipeline zu erfassen und um Fehlerantworten zu generieren. Betrachten Sie zur Darstellung die folgende Controlleraktion:
 
-Die Seite mit Ausnahmen für Entwickler zeigt eine Nur-Text-Antwort an, wenn der Client keine HTML-formatierte Ausgabe akzeptiert. Beispiel:
+[!code-csharp[](handle-errors/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_GetByCity)]
 
+Führen Sie den folgenden `curl`-Befehl aus, um die vorherige Aktion zu testen:
+
+```bash
+curl -i https://localhost:5001/weatherforecast/chicago
 ```
-> curl https://localhost:5001/weatherforecast
-System.ArgumentException: count
-   at errorhandling.Controllers.WeatherForecastController.Get(Int32 x) in D:\work\Samples\samples\aspnetcore\mvc\errorhandling\Controllers\WeatherForecastController.cs:line 35
+
+::: moniker range=">= aspnetcore-3.0"
+
+Die Seite mit Ausnahmen für Entwickler zeigt in ASP.NET Core 3.0 und später eine Nur-Text-Antwort an, wenn der Client keine HTML-formatierte Ausgabe anfordert. Die folgende Ausgabe wird angezeigt:
+
+```console
+HTTP/1.1 500 Internal Server Error
+Transfer-Encoding: chunked
+Content-Type: text/plain
+Server: Microsoft-IIS/10.0
+X-Powered-By: ASP.NET
+Date: Fri, 27 Sep 2019 16:13:16 GMT
+
+System.ArgumentException: We don't offer a weather forecast for chicago. (Parameter 'city')
+   at WebApiSample.Controllers.WeatherForecastController.Get(String city) in C:\working_folder\aspnet\AspNetCore.Docs\aspnetcore\web-api\handle-errors\samples\3.x\Controllers\WeatherForecastController.cs:line 34
    at lambda_method(Closure , Object , Object[] )
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
-...
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+
+HEADERS
+=======
+Accept: */*
+Host: localhost:44312
+User-Agent: curl/7.55.1
 ```
+
+Legen Sie den HTTP-Anforderungsheader `Accept` auf den Medientyp `text/html` fest, um stattdessen eine HTML-formatierte Antwort anzuzeigen. Beispiel:
+
+```bash
+curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
+```
+
+Beachten Sie den folgenden Auszug aus der HTTP-Antwort:
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+In ASP.NET Core 2.2 und früher wird auf der Seite mit Ausnahmen für Entwickler eine HTML-formatierte Antwort angezeigt. Beachten Sie beispielsweise den folgenden Auszug aus der HTTP-Antwort:
+
+::: moniker-end
+
+```console
+HTTP/1.1 500 Internal Server Error
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-Powered-By: ASP.NET
+Date: Fri, 27 Sep 2019 16:55:37 GMT
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Internal Server Error</title>
+        <style>
+            body {
+    font-family: 'Segoe UI', Tahoma, Arial, Helvetica, sans-serif;
+    font-size: .813em;
+    color: #222;
+    background-color: #fff;
+}
+```
+
+::: moniker range=">= aspnetcore-3.0"
+
+Die HTML-formatierte Antwort wird beim Durchführen von Tests in Tools wie etwa Postman nützlich. Auf der folgenden Bildschirmaufnahme sind jeweils die in Klartext verfassten und die HTML-formatierte Antworten in Postman dargestellt:
+
+![Testen auf der Seite mit Ausnahmen für Entwickler in Postman](handle-errors/_static/developer-exception-page-postman.gif)
+
+::: moniker-end
 
 > [!WARNING]
 > Aktivieren Sie die Seite mit Ausnahmen für Entwickler **nur dann, wenn die App in der Entwicklungsumgebung ausgeführt wird**. Wenn die App in der Produktionsumgebung ausgeführt wird, sollten Sie keine detaillierten Ausnahmeinformationen öffentlich teilen. Weitere Informationen zum Konfigurieren der Umgebungen finden Sie unter <xref:fundamentals/environments>.

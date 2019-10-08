@@ -5,16 +5,18 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: ec78d35daf6823779fca491aca7b7b309db4b02e
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 6dfbeae201a3586dfea6620917083130c4985b22
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750036"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703812"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), [Bart Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/), und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
+
+Bis dieses Dokument für ASP.NET Core 3.0 aktualisiert wird, finden Sie weitere Informationen auf Hishams Blog [What is new in Localization in ASP.NET Core 3.0](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0).
 
 Wenn Sie eine mehrsprachige Website mit ASP.NET Core erstellen, können Sie mit Ihrer Website ein breiteres Publikum erreichen. ASP.NET Core bietet Dienste und Middleware zur Lokalisierung in verschiedene Sprachen und Kulturen.
 

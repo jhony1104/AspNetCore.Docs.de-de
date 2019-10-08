@@ -4,14 +4,14 @@ author: tdykstra
 description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 07/22/2019
+ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 6b7d2ca1cea23efd195f1ae0e0a749c6d2d9b622
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: e261ccd30dc9ef0929e74fa44a5ed752d515b707
+ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71186959"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317682"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
 
@@ -19,7 +19,7 @@ Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitt
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dies ist das erste einer Reihe von Tutorials, die zeigen, wie Entity Framework (EF) Core in einer ASP.NET Core Razor Pages-App verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten.
+Dies ist das erste von vielen Tutorials, die zeigen, wie Entity Framework (EF) Core in einer [ASP.NET Core Razor Pages](xref:razor-pages/index)-App verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten.
 
 [Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
@@ -213,7 +213,7 @@ In diesem Abschnitt verwenden Sie das ASP.Net Core-Gerüstbautool, um Folgendes 
 * Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **HINZUFÜGEN** aus.
 * Gehen Sie im Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen** folgendermaßen vor:
   * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
-  * Wählen Sie in der Zeile **Datenkontextklasse** das **+** -Zeichen (Pluszeichen) aus.
+  * Wählen Sie in der Zeile **Datenkontextklasse** das **+**-Zeichen (Pluszeichen) aus.
   * Ändern Sie den Datenkontextnamen aus *ContosoUniversity.Models.ContosoUniversityContext* in *ContosoUniversity.Data.SchoolContext*.
   * Wählen Sie **Hinzufügen** aus.
 
@@ -596,7 +596,7 @@ In diesem Abschnitt wird das Gerüst für das Studentenmodell erstellt. Mit dem 
 Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen**:
 
 * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
-* Wählen Sie in der Zeile **Datenkontextklasse** das Pluszeichen ( **+** ) aus, und ändern Sie den generierten Namen in **ContosoUniversity.Models.SchoolContext**.
+* Wählen Sie in der Zeile **Datenkontextklasse** das Pluszeichen (**+**) aus, und ändern Sie den generierten Namen in **ContosoUniversity.Models.SchoolContext**.
 * Wählen Sie im Dropdownmenü **Datenkontextklasse** **ContosoUniversity.Models.SchoolContext** aus.
 * Wählen Sie **Hinzufügen** aus.
 
@@ -725,7 +725,7 @@ Drop-Database
 
 Der Datenbankname wird anhand des Kontextnamens, den Sie zuvor angegeben haben, plus Bindestrich und GUID generiert. Daher lautet der Name der Datenbank „SchoolContext-{GUID}“. Die GUID ist für jeden Benutzer unterschiedlich.
 Öffnen Sie über das Menü **Ansicht** im Visual Studio **SQL Server-Objekt-Explorer** (SSOX).
-Klicken Sie im SSOX auf **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}** .
+Klicken Sie im SSOX auf **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}**.
 
 Erweitern Sie den Knoten **Tabellen**.
 

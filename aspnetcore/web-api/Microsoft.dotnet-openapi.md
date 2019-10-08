@@ -3,31 +3,29 @@ title: Entwickeln von ASP.NET Core-Apps mit OpenAPI
 author: ryanbrandenburg
 description: Hier wird veranschaulicht, wie Sie das Tool „Microsoft.dotnet-openapi“ verwenden, um Verweise zu OpenAPI-Dateien hinzuzufügen.
 ms.author: rybrande
-ms.date: 08/26/2019
+ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: a9b38bb7e69744d72867bf69cecf1fa92d7c15b3
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: f5eae9e871bc8efc30d500769adb845ff244a90c
+ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187365"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317777"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Entwickeln von ASP.NET Core-Apps mit OpenAPI-Tools
 
 Von Ryan Brandenburg
 
-`Microsoft.dotnet-openapi` ist ein globales .NET Core-Tool zum Verwalten von [OpenAPI](https://github.com/OAI/OpenAPI-Specification)-Verweisen innerhalb eines Projekts.
+[Microsoft.dotnet-openapi](https://www.nuget.org/packages/Microsoft.dotnet-openapi) ist ein [globales .NET Core-Tool](/dotnet/core/tools/global-tools) zum Verwalten von [OpenAPI](https://github.com/OAI/OpenAPI-Specification)-Verweisen innerhalb eines Projekts.
 
 ## <a name="installation"></a>Installation
 
 Führen Sie den folgenden Befehl aus, um `Microsoft.dotnet-openapi` zu installieren:
 
-```console
+```dotnetcli
 dotnet tool install -g Microsoft.dotnet-openapi
 ```
-
-`Microsoft.dotnet-openapi` ist ein [globales .NET Core-Tool](/dotnet/core/tools/global-tools).
 
 ## <a name="add"></a>Hinzufügen
 

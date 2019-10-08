@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/27/2019
+ms.date: 09/29/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 5e5215f246c6c7a805a4c99f485d51a2fb3c712d
-ms.sourcegitcommit: cf9ffcce4fe0b69fe795aae9ae06e99fdb18bdfc
+ms.openlocfilehash: 7bb98fe5befa8eea80885d246da31ad87d5cfc2d
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71306661"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71691215"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -83,7 +83,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
-   cd TodoAPI
+   cd TodoApi
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
    dotnet add package Microsoft.EntityFrameworkCore.InMemory
    code -r ../TodoApi
@@ -106,7 +106,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
-* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag * *.NET Core 3.0* aus.
+* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag **.NET Core 3.0* aus.
 
 * Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
@@ -226,7 +226,7 @@ Der *Datenbankkontext* ist die Hauptklasse, die die Entity Framework-Funktionen 
 
 ### <a name="add-microsoftentityframeworkcoresqlserver"></a>Hinzufügen von Microsoft.EntityFrameworkCore.SqlServer
 
-* Klicken Sie im Menü **Extras** auf **NuGet-Paket-Manager > NuGet-Pakete für Projektmappe verwalten...** .
+* Klicken Sie im Menü **Extras** auf **NuGet-Paket-Manager > NuGet-Pakete für Projektmappe verwalten...**.
 * Klicken Sie auf die Registerkarte **Durchsuchen**, und geben Sie dann **Microsoft.EntityFrameworkCore.SqlServer** in das Suchfeld ein.
 * Wählen Sie im linken Bereich **Microsoft.EntityFrameworkCore.SqlServer** aus.
 * Aktivieren Sie das Kontrollkästchen **Projekt** im rechten Bereich, und klicken Sie dann auf **Installieren**.
@@ -271,8 +271,8 @@ Der vorangehende Code:
 * Klicken Sie auf **API-Controller mit Aktionen unter Verwendung von Entity Framework** und dann auf **Hinzufügen**.
 * Führen Sie im Dialogfeld **API-Controller mit Aktionen unter Verwendung von Entity Framework** folgende Schritte aus:
 
-  * Wählen Sie in der **Modellklasse** das Element **TodoItem (TodoAPI.Models)** aus.
-  * Wählen Sie in der **Datenkontextklasse** das Element **TodoContext (TodoAPI.Models)** aus.
+  * Wählen Sie in der **Modellklasse** das Element **TodoItem (TodoApi.Models)** aus.
+  * Wählen Sie in der **Datenkontextklasse** das Element **TodoContext (TodoApi.Models)** aus.
   * Wählen Sie **Hinzufügen** aus.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -283,7 +283,7 @@ Führen Sie die folgenden Befehle aus:
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext  -outDir Controllers
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 Die obenstehenden Befehle haben folgende Konsequenzen:
@@ -322,7 +322,7 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 * Starten Sie die Web-App.
 * Starten Sie Postman.
 * Deaktivieren Sie **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
-* Deaktivieren Sie auf der Registerkarte **General* (Allgemein) unter **File > Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
+* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **File**>**Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
     > [!WARNING]
     > Aktivieren Sie die Verifizierung des SSL-Zertifikats wieder, nachdem Sie den Controller getestet haben.
 
@@ -356,7 +356,7 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
   ![Registerkarte „Header“ in der Postman-Konsole](first-web-api/_static/3/create.png)
 
 * Legen Sie die Methode auf „GET“ fest.
-* Fügen Sie den URI (z. B. `https://localhost:5001/api/TodoItems/1`) ein.
+* Fügen Sie den URI (z. B. `https://localhost:5001/api/TodoItems/1`) ein.
 * Wählen Sie **Send** (Senden) aus.
 
 ## <a name="examine-the-get-methods"></a>Überblick über die GET-Methoden
@@ -458,8 +458,8 @@ Die `DeleteTodoItem`-Antwort lautet [204 (Kein Inhalt)](https://www.w3.org/Proto
 So löschen Sie mit Postman eine Aufgabe
 
 * Legen Sie die Methode auf `DELETE` fest.
-* Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/TodoItems/1`.
-* Klicken Sie auf **Send**.
+* Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/TodoItems/1`.
+* Wählen Sie **Send** (Senden) aus.
 
 ## <a name="call-the-web-api-with-javascript"></a>Aufrufen der Web-API mit JavaScript
 
@@ -551,7 +551,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
-* Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von * *.NET Core 2.2*.
+* Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von **.NET Core 2.2*.
 
 * Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
@@ -813,7 +813,7 @@ Die `CreatedAtAction`-Methode:
   ![Registerkarte „Header“ in der Postman-Konsole](first-web-api/_static/pmc2.png)
 
 * Legen Sie die Methode auf „GET“ fest.
-* Fügen Sie den URI (z. B. `https://localhost:5001/api/Todo/2`) ein.
+* Fügen Sie den URI (z. B. `https://localhost:5001/api/Todo/2`) ein.
 * Wählen Sie **Send** (Senden) aus.
 
 ## <a name="add-a-puttodoitem-method"></a>Hinzufügen einer PutTodoItem-Methode
@@ -857,8 +857,8 @@ Die `DeleteTodoItem`-Antwort lautet [204 (Kein Inhalt)](https://www.w3.org/Proto
 So löschen Sie mit Postman eine Aufgabe
 
 * Legen Sie die Methode auf `DELETE` fest.
-* Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/todo/1`.
-* Klicken Sie auf **Send**.
+* Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/todo/1`.
+* Wählen Sie **Send** (Senden) aus.
 
 Sie können in der Beispiel-App alle Elemente löschen. Sobald das letzte Element gelöscht wurde, wird allerdings beim nächsten API-Aufruf vom Modellklassenkonstruktor ein neues erstellt.
 

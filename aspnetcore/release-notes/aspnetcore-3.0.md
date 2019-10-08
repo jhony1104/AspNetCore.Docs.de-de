@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 09/26/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: 490d00da7282e2efe28fcc52e593dd71d7324d3f
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: ec3de5b35883752b7b3dbefceccec55da3986f39
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71198990"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703680"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -319,6 +319,17 @@ Die folgende Liste enthält neue Razor-Anweisungen:
 * [@attribute](xref:mvc/views/razor#attribute) &ndash; die `@attribute`-Anweisung wendet das angegebene Attribut auf die Klasse der generierten Seite oder Ansicht an. Beispielsweise `@attribute [Authorize]`.
 * [@implements](xref:mvc/views/razor#implements) &ndash; die `@implements`-Anweisung implementiert eine Schnittstelle für die generierte Klasse. Beispielsweise `@implements IDisposable`.
 
+## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 unterstützt die Authentifizierung und Autorisierung für Web-APIs und SPAs.
+
+[IdentityServer4](https://identityserver.io) ist ein Framework für OpenID Connect und OAuth 2.0 für ASP.NET Core 3.0. IdentityServer4 ermöglicht die folgenden Sicherheitsfeatures:
+
+* Authentifizierung als Dienst
+* Einmaliges Anmelden und einmaliges Abmelden für mehrere Anwendungstypen
+* Zugriffssteuerung für APIs
+* Federation Gateway
+
+Weitere Informationen finden Sie unter [Willkommen bei IdentityServer4](http://docs.identityserver.io/en/latest/index.html).
+
 ## <a name="certificate-and-kerberos-authentication"></a>Zertifikat- und Kerberos-Authentifizierung
 
 Die Zertifikatsauthentifizierung erfordert Folgendes:
@@ -412,7 +423,7 @@ Alle Dienste können weiterhin direkt als Argumente in die `Startup.Configure`-M
 * Verbindungsadapter wurden aus Kestrel entfernt und durch Verbindungsmiddleware ersetzt. Diese ähnelt der HTTP-Middleware in der ASP.NET Core-Pipeline, ist aber für Verbindungen auf niedrigerer Ebene konzipiert.
 * Die Kestrel-Transportschicht wurde in `Connections.Abstractions` als öffentliche Schnittstelle verfügbar gemacht.
 * Eine Mehrdeutigkeit zwischen Headern und Trailern wurde aufgelöst, indem nachstehende Header in eine neue Sammlung verschoben wurden.
-* APIs mit synchronen E/A-Vorgängen, wie z. B. `HttpReqeuest.Body.Read`, sind eine häufige Quelle für einen Ressourcenmangel im Thread, der zu App-Abstürzen führt. In 3.0 ist `AllowSynchronousIO` standardmäßig deaktiviert.
+* APIs mit synchronen E/A-Vorgängen, wie z. B. `HttpRequest.Body.Read`, sind eine häufige Quelle für einen Ressourcenmangel im Thread, der zu App-Abstürzen führt. In 3.0 ist `AllowSynchronousIO` standardmäßig deaktiviert.
 
 Weitere Informationen finden Sie unter <xref:migration/22-to-30#kestrel>.
 
@@ -420,9 +431,9 @@ Weitere Informationen finden Sie unter <xref:migration/22-to-30#kestrel>.
 
 HTTP/2 ist in Kestrel für HTTPS-Endpunkte standardmäßig aktiviert. Die HTTP/2-Unterstützung für IIS oder HTTP.sys ist aktiviert, wenn dies vom Betriebssystem unterstützt wird.
 
-## <a name="request-counters"></a>Anforderungszähler
+## <a name="eventcounters-on-request"></a>EventCounters auf Anforderung
 
-Die Hostingereignisquelle (Microsoft.AspNetCore.Hosting) gibt die folgenden Ereigniszähler in Zusammenhang mit eingehenden Anforderungen aus:
+Die Hostingereignisquelle `Microsoft.AspNetCore.Hosting` gibt die folgenden neuen <xref:System.Diagnostics.Tracing.EventCounter>-Typen zurück, die im Zusammenhang mit eingehenden Anforderungen stehen:
 
 * `requests-per-second`
 * `total-requests`
@@ -474,7 +485,7 @@ Startfehler beim Hosten von ASP.NET Core-Apps in IIS erzeugen jetzt umfangreiche
 
 ## <a name="worker-service-and-worker-sdk"></a>Workerdienst und Worker SDK
 
-.NET Core 3.0 führt eine neue Vorlage für die Workerdienst-App ein. Diese Vorlage dient als Ausgangspunkt für das Schreiben von Diensten mit langer Laufzeit in .NET Core.
+.NET Core 3.0 führt eine neue Vorlage für die Workerdienst-App ein. Diese Vorlage dient als Ausgangspunkt für das Schreiben von zeitintensiven Diensten in .NET Core.
 
 Weitere Informationen finden Sie unter:
 

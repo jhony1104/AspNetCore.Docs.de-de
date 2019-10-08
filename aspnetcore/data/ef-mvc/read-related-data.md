@@ -3,15 +3,15 @@ title: 'Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core'
 description: In diesem Tutorial lesen Sie verwandte Daten und zeigen sie an – d.h., die Daten, die Entity Framework in Navigationseigenschaften lädt.
 author: tdykstra
 ms.author: riande
-ms.date: 03/27/2019
+ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 2bf556dae5d30819c54ecc3f0dadfbd3316db1cc
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: cb691dce757a72a01bfd29717710d1be590c4150
+ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059114"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592287"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -63,7 +63,7 @@ Andererseits sind separate Abfragen in einigen Szenarios jedoch effizienter. Eag
 
 Die Kursentität enthält eine Navigationseigenschaft, die die Abteilungsentität der Abteilung enthält, der der Kurs zugewiesen ist. Sie benötigen die Namenseigenschaft der Abteilungsentität in der `Course.Department`-Navigationseigenschaft, um den Namen der zugewiesenen Abteilung in einer Kursliste anzuzeigen.
 
-Erstellen Sie einen Controller mit dem Namen CoursesController für den Kursentitätstyp. Verwenden Sie dieselben Optionen für den  **MVC-Controller mit Ansichten unter Verwendung des Entity Framework**-Gerüstbauers, die Sie zuvor für den Studentencontroller verwendet haben, wie in der folgenden Abbildung gezeigt:
+Erstellen Sie einen Controller mit dem Namen CoursesController für den Kursentitätstyp. Verwenden Sie dieselben Optionen für den **MVC-Controller mit Ansichten unter Verwendung des Entity Framework**-Gerüstbauers, die Sie zuvor für den Studentencontroller verwendet haben, wie in der folgenden Abbildung gezeigt:
 
 ![Hinzufügen eines Kursecontrollers](read-related-data/_static/add-courses-controller.png)
 
@@ -188,7 +188,7 @@ Sie haben die folgenden Änderungen am bestehenden Code vorgenommen:
   }
   ```
 
-* Es wurde eine **Kurse**-Spalte hinzugefügt, die die Kurse eines jeden Dozenten anzeigt. Weitere Informationen finden Sie im Abschnitt [Explicit line transition with @:](xref:mvc/views/razor#explicit-line-transition-with-) (Expliziter Zeilenübergang mit @:) des Razor-Syntaxartikels.
+* Es wurde eine **Kurse**-Spalte hinzugefügt, die die Kurse eines jeden Dozenten anzeigt. Weitere Informationen finden Sie im Abschnitt [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) (Expliziter Zeilenübergang) des Razor-Syntaxartikels.
 
 * Es wurde Code hinzugefügt, der `class="success"` dynamisch zum `tr`-Element des ausgewählten Dozenten hinzufügt. Hiermit wird mit einer Bootstrapklasse eine Hintergrundfarbe für die ausgewählte Zeile hinzugefügt.
 

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Hintergrundtasks mit gehosteten Diensten in A
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/18/2019
+ms.date: 09/26/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 8df86b10d7ba853edb3265df0e02eabbf8a2c058
-ms.sourcegitcommit: fa61d882be9d0c48bd681f2efcb97e05522051d0
+ms.openlocfilehash: 0eaa3a62370c1e413840bb65f597dc664adafc38
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71205712"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71688108"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Hintergrundtasks mit gehosteten Diensten in ASP.NET Core
 
@@ -37,29 +37,7 @@ Die Beispiel-App wird in zwei Versionen bereitgestellt:
 
 Die ASP.NET Core-Vorlage „Workerdienst“ dient als Ausgangspunkt für das Schreiben von Dienstanwendungen mit langer Laufzeit. Gehen Sie folgendermaßen vor, wenn Sie die Vorlage als Grundlage für eine Hosted Services-App verwenden möchten:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-1. Erstellen Sie ein neues Projekt.
-1. Wählen Sie **ASP.NET Core-Webanwendung** aus. Klicken Sie auf **Weiter**.
-1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Wählen Sie **Erstellen** aus.
-1. Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind.
-1. Wählen Sie die Vorlage **Workerdienst** aus. Wählen Sie **Erstellen** aus.
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
-
-1. Erstellen Sie ein neues Projekt.
-1. Wählen Sie in der Randleiste unter **.NET Core** den Eintrag **App** aus.
-1. Wählen Sie unter **ASP.NET Core** den Eintrag **Worker** aus. Klicken Sie auf **Weiter**.
-1. Wählen Sie **.NET Core 3.0** als **Zielframework** aus. Klicken Sie auf **Weiter**.
-1. Geben Sie im Feld **Projektname** einen Namen an. Wählen Sie **Erstellen** aus.
-
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
-
-Rufen Sie die Vorlage „Workerdienst“ (`worker`) über eine Befehlsshell mit dem Befehl [dotnet new](/dotnet/core/tools/dotnet-new) auf. Im folgenden Beispiel wird eine Workerdienstanwendung namens `ContosoWorker` erstellt. Der Ordner für die App `ContosoWorker` wird automatisch erstellt, wenn der Befehl ausgeführt wird.
-
-```dotnetcli
-dotnet new worker -o ContosoWorker
-```
+[!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ---
 
@@ -123,10 +101,12 @@ Der gehostete Dienst wird beim Start der App einmal aktiviert und beim Beenden d
 
 ## <a name="backgroundservice"></a>BackgroundService
 
-`BackgroundService` ist eine Basisklasse zur Implementierung eines <xref:Microsoft.Extensions.Hosting.IHostedService> mit langer Laufzeit. `BackgroundService` definiert zwei Methoden für Hintergrundvorgänge:
+`BackgroundService` ist eine Basisklasse zur Implementierung eines <xref:Microsoft.Extensions.Hosting.IHostedService> mit langer Laufzeit. `BackgroundService` bietet die abstrakte `ExecuteAsync(CancellationToken stoppingToken)`-Methode, die die Dienstlogik enthält. Das `stoppingToken` wird aufgerufen, wenn [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) aufgerufen wird. Die Implementierung dieser Methode gibt einen `Task` zurück, der die gesamte Lebensdauer des Hintergrunddiensts darstellt.
 
-* `ExecuteAsync(CancellationToken stoppingToken)` &ndash; `ExecuteAsync` wird aufgerufen, wenn der <xref:Microsoft.Extensions.Hosting.IHostedService> gestartet wird. Die Implementierung sollte einen `Task`-Wert zurückgeben, der die Lebensdauer der ausgeführten Vorgänge mit langer Laufzeit repräsentiert. Das `stoppingToken` wird aufgerufen, wenn [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) aufgerufen wird.
-* `StopAsync(CancellationToken stoppingToken)` &ndash; `StopAsync` wird ausgelöst, wenn der Anwendungshost ein ordnungsgemäßes Herunterfahren ausführt. Das `stoppingToken` weist darauf hin, dass der Prozess des Herunterfahrens nicht mehr ordnungsgemäß ausgeführt werden soll.
+Setzen Sie *optional* die unter `IHostedService` definierten Methoden außer Kraft, um den Code zum Starten und Herunterfahren auszuführen.
+
+* `StopAsync(CancellationToken cancellationToken)` &ndash; `StopAsync` wird aufgerufen, wenn der Anwendungshost ein ordnungsgemäßes Herunterfahren ausführt. `cancellationToken` wird signalisiert, wenn der Host beschließt, das Beenden des Diensts zu erzwingen. Wenn diese Methode außer Kraft gesetzt wird, **müssen** Sie die Basisklassenmethode aufrufen (und `await`), um sicherzustellen, dass der Dienst ordnungsgemäß heruntergefahren wird.
+* `StartAsync(CancellationToken cancellationToken)` &ndash; `StartAsync` wird aufgerufen, um den Hintergrunddienst zu starten. `cancellationToken` wird signalisiert, wenn der Startprozess unterbrochen wird. Die Implementierung gibt einen `Task` zurück, der den Startprozess für den Dienst darstellt. Es werden keine Dienste gestartet, bis `Task` nicht abgeschlossen ist. Wenn diese Methode außer Kraft gesetzt wird, **müssen** Sie die Basisklassenmethode aufrufen (und `await`), um sicherzustellen, dass der Dienst ordnungsgemäß gestartet wird.
 
 ## <a name="timed-background-tasks"></a>Zeitlich festgelegte Hintergrundtasks
 

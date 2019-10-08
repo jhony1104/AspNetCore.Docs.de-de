@@ -3,20 +3,20 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 09/19/2019
+ms.date: 09/28/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 9a319f7efb6d879559afd9faca6955aba719fa2f
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: 6f8835419dbf4c271617f57484c3408e0af30617
+ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168293"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592331"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) und [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) ( *.razor*) enthalten.
+Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) (*.razor*) enthalten.
 
 ## <a name="rendering-html"></a>Rendern von HTML
 
@@ -227,7 +227,7 @@ Das `<text>`-Tag ist nützlich, wenn Sie beim Rendern von Inhalt Leerzeichen ste
 * Nur der Inhalt zwischen den `<text>`-Tags wird gerendert.
 * In der HTML-Ausgabe werden keine Leerzeichen vor oder nach dem `<text>`-Tag angezeigt.
 
-### <a name="explicit-line-transition-with-colon"></a>Explizite Zeilenübergänge mit \@&colon;
+### <a name="explicit-line-transition"></a>Explizite Zeilenübergänge
 
 Verwenden Sie die `@:`-Syntax, um den Rest einer kompletten Zeile als HTML-Code in einem Codeblock zu rendern:
 
