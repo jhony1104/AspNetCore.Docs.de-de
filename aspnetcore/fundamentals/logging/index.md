@@ -1,18 +1,18 @@
 ---
 title: Protokollieren in .NET Core und ASP.NET Core
-author: tdykstra
+author: rick-anderson
 description: In diesem Artikel wird das Verwenden des Protokollierungsframeworks erläutert, das vom Microsoft.Extensions.Logging-NuGet-Paket bereitgestellt wird.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/08/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 9f7b39cc1c557356b75608817db4e8d6f61af794
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 697e6cf0cd1b51ad6c2942e21bc084d1fe6bfa4e
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007026"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259730"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -394,8 +394,12 @@ ASP.NET Core definiert die folgenden Protokolliergrade. Die Reihenfolge reicht v
 
 Verwenden Sie den Protokolliergrad, um die Menge an Protokollausgabedaten zu steuern, die in ein bestimmtes Speichermedium geschrieben oder an ein Anzeigefenster ausgegeben werden. Beispiel:
 
-* Senden Sie in der Produktion `Trace` über den Protokolliergrad `Information` an einen Volumedatenspeicher. Senden Sie `Warning` über `Critical` an einen Wertdatenspeicher.
-* Senden Sie während der Entwicklung `Warning` über `Critical` an die Konsole, und fügen Sie `Trace` über `Information` bei der Problembehandlung hinzu.
+* In einer Produktionsumgebung
+  * Das Protokollieren von `Trace` über die `Information`-Ebenen verursacht viele detaillierte Protokollmeldungen. Protokollieren Sie `Trace` über Nachrichten auf `Information`-Ebene in einem kostengünstigen Speicher mit hohem Volumen, um die Kosten zu überwachen und die Grenzwerte des Datenspeichers nicht zu überschreiten.
+  * Das Protokollieren von `Warning` über die `Critical`-Ebenen verursacht weniger und kürzere Protokollmeldungen. Daher müssen Sie sich über Kosten- und Speichergrenzwerte keine Sorgen machen und sind bei der Auswahl des Datenspeichers flexibler.
+* Entwicklungsphase:
+  * Protokollieren Sie `Warning` über `Critical`-Meldungen an der Konsole.
+  * Fügen Sie bei der Fehlerbehebung `Trace` über `Information`-Meldungen hinzu.
 
 Im Abschnitt [Protokollfilterung](#log-filtering) weiter unten in diesem Artikel wird erläutert, wie Sie steuern, welche Protokolliergrade ein Anbieter verarbeitet.
 

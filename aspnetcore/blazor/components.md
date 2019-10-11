@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: 438b3802087e2ac3df4cbe69a700b878c1cbbf63
-ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
-ms.translationtype: HT
+ms.openlocfilehash: 3e0966bf978c99fc00db7682bea3292306cbb03c
+ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/08/2019
-ms.locfileid: "72037419"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72179026"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -194,30 +194,42 @@ Die `CaptureUnmatchedValues`-Eigenschaft auf `[Parameter]` ermöglicht dem Param
 
 ## <a name="data-binding"></a>Datenbindung
 
-Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [@bind-](xref:mvc/views/razor#bind) Attribut. Im folgenden Beispiel wird das Feld `_italicsCheck` an den aktivierten Zustand des Kontrollkästchens gebunden:
+Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [@bind-](xref:mvc/views/razor#bind) Attribut. Im folgenden Beispiel wird eine `CurrentValue`-Eigenschaft an den Wert des Textfelds gebunden:
 
 ```cshtml
-<input type="checkbox" class="form-check-input" id="italicsCheck" 
-    @bind="_italicsCheck" />
+<input @bind="CurrentValue" />
+
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
-Wenn das Kontrollkästchen aktiviert und deaktiviert ist, wird der Wert der Eigenschaft auf `true` bzw. `false` aktualisiert.
+Wenn das Textfeld den Fokus verliert, wird der Wert der Eigenschaft aktualisiert.
 
-Das Kontrollkästchen wird nur dann in der Benutzeroberfläche aktualisiert, wenn die Komponente gerendert wird, nicht als Reaktion auf das Ändern des Eigenschafts Werts. Da Komponenten nach der Ausführung des Ereignishandlercodes selbst gerenden werden, werden Eigenschafts Aktualisierungen normalerweise sofort in der Benutzeroberfläche
+Das Textfeld wird nur dann in der Benutzeroberfläche aktualisiert, wenn die Komponente gerendert wird, nicht als Reaktion auf das Ändern des Eigenschafts Werts. Da Komponenten nach der Ausführung des Ereignishandlercodes selbst gerenden werden, werden Eigenschafts Aktualisierungen in der Benutzeroberfläche *normalerweise* sofort nach dem Auslösen eines Ereignis Handlers
 
-Die Verwendung von `@bind` mit einer `CurrentValue`-Eigenschaft (`<input @bind="CurrentValue" />`) entspricht im wesentlichen folgendem:
+Die Verwendung von `@bind` mit der Eigenschaft `CurrentValue` (`<input @bind="CurrentValue" />`) entspricht im wesentlichen folgendem:
 
 ```cshtml
 <input value="@CurrentValue"
-    @onchange="@((ChangeEventArgs __e) => CurrentValue = __e.Value)" />
+    @onchange="@((ChangeEventArgs __e) => CurrentValue = 
+        __e.Value.ToString())" />
+        
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
-Wenn die Komponente gerendert wird, wird der `value` des Eingabe Elements von der Eigenschaft `CurrentValue` abgeleitet. Wenn der Benutzer in das Textfeld eingibt, wird das `onchange`-Ereignis ausgelöst, und die Eigenschaft `CurrentValue` wird auf den geänderten Wert festgelegt. In Wirklichkeit ist die Codegenerierung etwas komplexer, da `@bind` einige Fälle behandelt, in denen Typkonvertierungen ausgeführt werden. Im Prinzip ordnet `@bind` den aktuellen Wert eines Ausdrucks einem `value`-Attribut zu und behandelt Änderungen mithilfe des registrierten Handlers.
+Wenn die Komponente gerendert wird, wird der `value` des Eingabe Elements von der Eigenschaft `CurrentValue` abgeleitet. Wenn der Benutzer das Textfeld eingibt und den Element Fokus ändert, wird das Ereignis `onchange` ausgelöst, und die Eigenschaft `CurrentValue` wird auf den geänderten Wert festgelegt. In Wirklichkeit ist die Codegenerierung komplexer, da `@bind` Fälle behandelt, in denen Typkonvertierungen durchgeführt werden. Im Prinzip ordnet `@bind` den aktuellen Wert eines Ausdrucks einem `value`-Attribut zu und behandelt Änderungen mithilfe des registrierten Handlers.
 
 Zusätzlich zur Behandlung von `onchange`-Ereignissen mit `@bind`-Syntax kann eine Eigenschaft oder ein Feld mit anderen Ereignissen gebunden werden, indem ein [@bind-value](xref:mvc/views/razor#bind) -Attribut mit einem `event`-Parameter ([@bind-value:event](xref:mvc/views/razor#bind)) angegeben wird. Im folgenden Beispiel wird die `CurrentValue`-Eigenschaft für das `oninput`-Ereignis gebunden:
 
 ```cshtml
 <input @bind-value="CurrentValue" @bind-value:event="oninput" />
+
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
 Im Gegensatz zu `onchange`, das ausgelöst wird, wenn das Element den Fokus verliert, wird `oninput` ausgelöst, wenn sich der Wert des Textfelds ändert.
