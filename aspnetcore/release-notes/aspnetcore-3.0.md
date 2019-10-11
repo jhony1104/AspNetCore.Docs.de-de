@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/26/2019
+ms.date: 10/08/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: ec3de5b35883752b7b3dbefceccec55da3986f39
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: 90433773bec2efc5a2bc39d71ce7ae324b922046
+ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703680"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72165356"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -302,7 +302,7 @@ subject.complete();
 
 Mit Code wie in den beiden obigen Codeausschnitten lassen sich Echtzeitstreamingfunktionen erzeugen.
 
-### <a name="new-json-serialization"></a>Neue JSON-Serialisierung
+## <a name="new-json-serialization"></a>Neue JSON-Serialisierung
 
 ASP.NET Core 3.0 verwendet jetzt standardmäßig <xref:System.Text.Json> zur JSON-Serialisierung:
 
@@ -397,7 +397,7 @@ Aus den Vorlagen für Webbenutzeroberflächen (Razor Pages, MVC mit Controller u
 
 Die Angular-Vorlage wurde auf Angular 8 aktualisiert.
 
-Die Vorlage der Razor-Klassenbibliothek (Razor Class Library, RCL) gilt standardmäßig für die Razor-Komponentenentwicklung. Eine neue Vorlagenoption in Visual Studio bietet Vorlagenunterstützung für Seiten und Ansichten. Übergeben Sie beim Erstellen einer RCL aus einer Vorlage in einer Befehlsshell die Option `-support-pages-and-views` (`dotnet new razorclasslib -support-pages-and-views`).
+Die Vorlage der Razor-Klassenbibliothek (Razor Class Library, RCL) gilt standardmäßig für die Razor-Komponentenentwicklung. Eine neue Vorlagenoption in Visual Studio bietet Vorlagenunterstützung für Seiten und Ansichten. Übergeben Sie beim Erstellen einer RCL aus einer Vorlage in einer Befehlsshell die Option `--support-pages-and-views` (`dotnet new razorclasslib --support-pages-and-views`).
 
 ## <a name="generic-host"></a>Generischer Host
 

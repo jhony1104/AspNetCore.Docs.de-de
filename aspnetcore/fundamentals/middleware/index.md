@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über ASP.NET Core-Middleware und die Anforderung
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/22/2019
+ms.date: 10/08/2019
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 674e89cd22ce113474dfbba44b57d9255446fc3e
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 5d02e1eb37693881d5b1855e1ed163590d8a44d3
+ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773779"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72165313"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -68,7 +68,7 @@ Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allge
 1. Ausnahme-/Fehlerbehandlung
    * Bei Ausführung der App in der Entwicklungsumgebung:
      * Middleware der Seite mit Ausnahmen für Entwickler (<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>) meldet App-Laufzeitfehler.
-     * Middleware der Seite mit Datenbankfehlern (<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*>) meldet Datenbanklaufzeitfehler.
+     * Middleware der Seite mit Datenbankfehlern meldet Datenbanklaufzeitfehler.
    * Bei Ausführung der App in der Produktionsumgebung:
      * Middleware für Ausnahmehandler (<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>) fängt Ausnahmen ab, die in den folgenden Middlewarekomponenten ausgelöst werden.
      * HTTP Strict Transport Security Protocol-Middleware (HSTS) (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>) fügt den `Strict-Transport-Security`-Header hinzu.
@@ -80,6 +80,18 @@ Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allge
 1. Autorisierungsmiddleware (`UseAuthorization`) wird zum Autorisieren des Zugriffs auf sichere Ressourcen eines Benutzers verwendet.
 1. Middleware für Sitzungen (<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession*>) richtet einen Sitzungsstatus ein und erhält diesen aufrecht. Wenn die App den Sitzungsstatus verwendet, rufen Sie die Middleware für Sitzungen nach der Middleware für Cookierichtlinien und vor der MVC-Middleware auf.
 1. Endpunktroutingmiddleware (`UseEndpoints` mit `MapRazorPages`) zum Hinzufügen von Razor Pages-Endpunkten zur Anforderungspipeline.
+
+<!--
+
+FUTURE UPDATE
+
+On the next topic overhaul/release update, add API crosslink to "Database Error Page Middleware" in Item 1 of the list ...
+
+Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*
+
+... when available via the API docs.
+
+-->
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

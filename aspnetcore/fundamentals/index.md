@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 10/07/2019
 uid: fundamentals/index
-ms.openlocfilehash: cff2afd62ed60648dc689d408dde56ecda18c261
-ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
+ms.openlocfilehash: a70d6aa05a2c92d19076b8d6e4ea24d7554368b6
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2019
-ms.locfileid: "70815652"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007114"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -252,36 +252,57 @@ Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
 
 ## <a name="content-root"></a>Inhaltsstammverzeichnis
 
-Der Inhaltsstamm ist der Basispfad zu einem beliebigen von der App verwendeten privaten Inhalt wie beispielsweise ihren Razor-Dateien. Standardmäßig entspricht der Inhaltsstamm dem Basispfad der ausführbaren Datei, mit der die Anwendung gehostet wird. Ein alternativer Speicherort kann beim [Erstellen des Hosts](#host) angegeben werden.
+Der Inhaltsstamm ist der Basispfad zu Folgendem:
+
+* Der ausführbaren Datei ( *.exe*), die die App hostet.
+* Kompilierten Assemblys, die die App bilden ( *.dll*).
+* Inhaltsdateien ohne Code, die von der App verwendet werden, wie z. B.:
+  * Razor-Dateien ( *.cshtml*, *.razor*)
+  * Konfigurationsdateien ( *.json*, *.xml*)
+  * Datendateien ( *.db*)
+* [Webstamm](#web-root), in der Regel der veröffentlichte Ordner *wwwroot*.
+
+Entwicklungsphase:
+
+* Der Inhaltsstamm ist standardmäßig auf das Stammverzeichnis des Projekts festgelegt.
+* Das Stammverzeichnis des Projekts dient zum Erstellen von Folgendem:
+  * Pfad zu den Inhaltsdateien ohne Code der App im Stammverzeichnis des Projekts.
+  * [Webstamm](#web-root), in der Regel der Ordner *wwwroot* im Stammverzeichnis des Projekts.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/generic-host#content-root).
+Ein alternativer Inhaltsstammpfad kann beim [Erstellen des Hosts](#host) angegeben werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#contentrootpath>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/web-host#content-root).
+Ein alternativer Inhaltsstammpfad kann beim [Erstellen des Hosts](#host) angegeben werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host#content-root>.
 
 ::: moniker-end
 
 ## <a name="web-root"></a>Webstammverzeichnis
 
-Der Webstamm (auch bekannt als *webroot*) ist der Basispfad zu öffentlichen statischen Ressourcen wie CSS, JavaScript und Bilddateien. Die Middleware für statische Dateien stellt standardmäßig nur Dateien aus dem Webstammverzeichnis (und Unterverzeichnissen) bereit. Der Pfad für den Webstamm ist standardmäßig auf *{Content Root}/wwwroot* festgelegt, beim [Erstellen des Hosts](#host) kann jedoch ein anderer Speicherort angegeben werden.
+Der Webstamm ist der Basispfad zu öffentlichen, statischen Ressourcendateien ohne Code, wie z. B.:
+
+* Stylesheets ( *.css*)
+* JavaScript ( *.js*)
+* Bilder ( *.png*, *.jpg*)
+
+Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis (samt Unterverzeichnissen) bereitgestellt.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Weitere Informationen finden Sie unter [WebRoot](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#webroot).
+Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, doch beim [Erstellen des Hosts](#host) kann ein anderer Webstamm angegeben werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#webroot>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Weitere Informationen finden Sie unter [Webstamm](/aspnet/core/fundamentals/host/web-host#webroot).
+Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, doch beim [Erstellen des Hosts](#host) kann ein anderer Webstamm angegeben werden. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/web-host#web-root).
 
 ::: moniker-end
 
-In Razor-Dateien ( *.cshtml*) zeigen die Tilde und der Schrägstrich `~/` auf den Webstamm. Pfade, die mit `~/` beginnen, werden als virtuelle Pfade bezeichnet.
+In Razor-Dateien ( *.cshtml*) zeigen Tilde und Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.

@@ -5,14 +5,14 @@ description: Lernen Sie die Szenarien für die Authentifizierung und Autorisieru
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: b0536b4290cd39397ceb440e0508b75d0373bc88
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: 1fcd54e954d09e66b8bb1c9a51ef56193f3acf93
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211722"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007433"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
@@ -117,6 +117,8 @@ The command creates a folder named with the value provided for the `{APP NAME}` 
 
 In den Blazor WebAssembly-Apps können Authentifizierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
+Fügen Sie der Projektdatei der App einen Paketverweis auf [Microsoft.AspNetCore.Components.Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) hinzu.
+
 Die Implementierung eines benutzerdefinierten `AuthenticationStateProvider`-Diensts für Blazor WebAssembly-Apps wird in den folgenden Abschnitten behandelt.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider-Dienst
@@ -131,6 +133,7 @@ Der Dienst `AuthenticationStateProvider` kann die <xref:System.Security.Claims.C
 
 ```cshtml
 @page "/"
+@using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <button @onclick="@LogUsername">Write user info to console</button>
@@ -162,18 +165,25 @@ Weitere Informationen zur Dependency Injection (DI) und den Diensten finden Sie 
 Wenn Sie eine Blazor WebAssembly-App erstellen oder wenn die Spezifikation Ihrer App unbedingt einen benutzerdefinierten Anbieter erfordert, implementieren Sie einen Anbieter, und überschreiben Sie `GetAuthenticationStateAsync`:
 
 ```csharp
-class CustomAuthStateProvider : AuthenticationStateProvider
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Authorization;
+
+namespace BlazorSample.Services
 {
-    public override Task<AuthenticationState> GetAuthenticationStateAsync()
+    public class CustomAuthStateProvider : AuthenticationStateProvider
     {
-        var identity = new ClaimsIdentity(new[]
+        public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            new Claim(ClaimTypes.Name, "mrfibuli"),
-        }, "Fake authentication type");
+            var identity = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, "mrfibuli"),
+            }, "Fake authentication type");
 
-        var user = new ClaimsPrincipal(identity);
+            var user = new ClaimsPrincipal(identity);
 
-        return Task.FromResult(new AuthenticationState(user));
+            return Task.FromResult(new AuthenticationState(user));
+        }
     }
 }
 ```
@@ -181,10 +191,10 @@ class CustomAuthStateProvider : AuthenticationStateProvider
 Der `CustomAuthStateProvider`-Dienst ist in `Startup.ConfigureServices` registriert:
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
-}
+// using Microsoft.AspNetCore.Components.Authorization;
+// using BlazorSample.Services;
+
+services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 ```
 
 Bei der Verwendung von `CustomAuthStateProvider` werden alle Benutzer mit dem Benutzernamen `mrfibuli` authentifiziert.
@@ -218,6 +228,9 @@ Wenn für die prozedurale Logik Authentifizierungsstatusdaten erforderlich sind,
     }
 }
 ```
+
+> [!NOTE]
+> Fügen Sie in einer Komponente einer Blazor WebAssembly-App den Namespace `Microsoft.AspNetCore.Components.Authorization` hinzu (`@using Microsoft.AspNetCore.Components.Authorization`).
 
 Wenn `user.Identity.IsAuthenticated` den Wert `true` hat, können Ansprüche aufgezählt und die Mitgliedschaft in Rollen ausgewertet werden.
 
@@ -339,7 +352,7 @@ Dieser Ansatz gilt in der Regel nicht für Blazor Server-Apps. Blazor Server-App
 
 ## <a name="authorize-attribute"></a>[Authorize]-Attribut
 
-Genauso wie eine App `[Authorize]` mit einem MVC-Controller oder einer Razor Page verwenden kann, kann `[Authorize]` auch mit Razor-Komponenten verwendet werden:
+Das Attribut `[Authorize]` kann in Razor-Komponenten verwendet werden:
 
 ```cshtml
 @page "/"
@@ -348,10 +361,11 @@ Genauso wie eine App `[Authorize]` mit einem MVC-Controller oder einer Razor Pag
 You can only see this if you're signed in.
 ```
 
+> [!NOTE]
+> Fügen Sie in einer Komponente einer Blazor WebAssembly-App den Namespace `Microsoft.AspNetCore.Authorization` (`@using Microsoft.AspNetCore.Authorization`) den Beispielen in diesem Abschnitt hinzu.
+
 > [!IMPORTANT]
 > Verwenden Sie nur `[Authorize]` auf `@page`-Komponenten, die über den Blazor-Router erreicht werden. Die Autorisierung wird nur als Aspekt des Routings und *nicht* für untergeordnete Komponenten durchgeführt, die innerhalb einer Seite gerendert werden. Um die Anzeige von bestimmten Teilen innerhalb einer Seite zu autorisieren, verwenden Sie stattdessen `AuthorizeView`.
-
-Möglicherweise müssen Sie `@using Microsoft.AspNetCore.Authorization` entweder zur Komponente oder zur Datei *_Imports.razor* hinzufügen, damit die Komponente kompiliert werden kann.
 
 Das `[Authorize]`-Attribut unterstützt auch die rollenbasierte oder die richtlinienbasierte Autorisierung. Verwenden Sie für die rollenbasierte Autorisierung den `Roles`-Parameter:
 
@@ -460,6 +474,14 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
     }
 }
 ```
+
+> [!NOTE]
+> Fügen Sie in einer Komponente einer Blazor WebAssembly-App die Namespaces `Microsoft.AspNetCore.Authorization` und `Microsoft.AspNetCore.Components.Authorization` hinzu:
+>
+> ```cshtml
+> @using Microsoft.AspNetCore.Authorization
+> @using Microsoft.AspNetCore.Components.Authorization
+> ```
 
 ## <a name="authorization-in-blazor-webassembly-apps"></a>Autorisierung in Blazor WebAssembly-Apps
 
