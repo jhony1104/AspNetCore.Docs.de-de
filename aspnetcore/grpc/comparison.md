@@ -1,19 +1,19 @@
 ---
-title: Vergleichen von GrpC-Diensten mit http-APIs
+title: Vergleich von gRPC-Diensten mit HTTP-APIs
 author: jamesnk
 description: Erfahren Sie, wie sich GrpC mit http-APIs vergleicht und welche Szenarios empfohlen werden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/25/2019
 uid: grpc/comparison
-ms.openlocfilehash: 935078d890998fe6af366e3f6a7bf21f53c20cf7
-ms.sourcegitcommit: a7813a776809a5029c94aa503ee71994f156231f
+ms.openlocfilehash: 5c3ea7a78401e6483425fa0774b3051b3d20f516
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71267716"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289034"
 ---
-# <a name="compare-grpc-services-with-http-apis"></a>Vergleichen von GrpC-Diensten mit http-APIs
+# <a name="compare-grpc-services-with-http-apis"></a>Vergleich von gRPC-Diensten mit HTTP-APIs
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
@@ -55,7 +55,7 @@ Durch die Freigabe der *. proto* -Datei zwischen Server und Client können Nachr
 
 Eine formale Spezifikation für die HTTP-API mit JSON ist nicht vorhanden. Entwickler diskutieren das beste Format von URLs, HTTP-Verben und Antwort Codes.
 
-Die [GrpC-Spezifikation](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) ist mit dem Format versehen, das einem GrpC-Dienst folgen muss. GrpC beseitigt die Diskussion und spart Entwicklerzeit, da gprc plattformübergreifend und Implementierungen einheitlich ist.
+Die [GrpC-Spezifikation](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) ist mit dem Format versehen, das einem GrpC-Dienst folgen muss. GrpC beseitigt die Diskussion und spart Entwicklerzeit, da GrpC plattformübergreifend und Implementierungen einheitlich ist.
 
 ### <a name="streaming"></a>Streaming
 
@@ -78,10 +78,10 @@ Durch die Weitergabe des Stichtags und des Abbruchs durch untergeordnete GrpC-An
 
 GrpC eignet sich gut für die folgenden Szenarien:
 
-* **Mikrodienste** &ndash; GrpC ist für die Kommunikation mit geringer Latenz und hohem Durchsatz konzipiert. GrpC eignet sich hervorragend für Lightweight-Dienste, bei denen die Effizienz wichtig ist.
-* **Point-to-Point-Echtzeitkommunikation** &ndash; GrpC bietet hervorragende Unterstützung für bidirektionales Streaming. GrpC-Dienste können Nachrichten in Echtzeit ohne Abruf per Push Übertragung.
-* **Polyglot-Umgebungen** &ndash; GrpC-Tools unterstützen alle gängigen Entwicklungs Sprachen, sodass GrpC für mehrsprachige Umgebungen eine gute Wahl ist.
-* **Eingeschränkte Netzwerkumgebungen** &ndash; GrpC-Nachrichten werden mit protobuf serialisiert, einem Lightweight-Nachrichtenformat. Eine GrpC-Nachricht ist immer kleiner als eine entsprechende JSON-Nachricht.
+* Der **@no__t-** 1-GrpC ist für die Kommunikation mit geringer Latenz und hohem Durchsatz konzipiert. GrpC eignet sich hervorragend für Lightweight-Dienste, bei denen die Effizienz wichtig ist.
+* **Punkt-zu-Punkt-Echtzeitkommunikation** &ndash; GrpC bietet eine hervorragende Unterstützung für bidirektionales Streaming. GrpC-Dienste können Nachrichten in Echtzeit ohne Abruf per Push Übertragung.
+* **Polyglot-Umgebungen** &ndash;-GrpC-Tools unterstützen alle gängigen Entwicklungs Sprachen, sodass GrpC für mehrsprachige Umgebungen eine gute Wahl ist.
+* **Netzwerk eingeschränkte Umgebungen** &ndash; GrpC-Nachrichten werden mit protobuf serialisiert, einem einfachen Nachrichtenformat. Eine GrpC-Nachricht ist immer kleiner als eine entsprechende JSON-Nachricht.
 
 ## <a name="grpc-weaknesses"></a>GrpC-Schwächen
 
@@ -105,9 +105,9 @@ Funktionen wie die [Server Reflektion](https://github.com/grpc/grpc/blob/master/
 
 Andere Frameworks werden in den folgenden Szenarien über GrpC empfohlen:
 
-* **Verfügbare Browser-APIs** &ndash; GrpC wird im Browser nicht vollständig unterstützt. GrpC-Web kann Browserunterstützung bieten, aber es gibt Einschränkungen und führt einen Server Proxy ein.
-* **Senden der Echtzeitkommunikation** &ndash; GrpC unterstützt die Echtzeitkommunikation über das Streaming, aber das Konzept, eine Nachricht an registrierte Verbindungen zu senden, ist nicht vorhanden. Beispielsweise ist in einem Chatroom-Szenario, in dem neue Chat Nachrichten an alle Clients im Chatraum gesendet werden sollen, jeder GrpC-Rückruf erforderlich, um neue Chat Nachrichten einzeln an den Client zu streamen. [Signalr](xref:signalr/introduction) ist ein nützliches Framework für dieses Szenario. Signalr hat das Konzept von permanenten Verbindungen und integrierter Unterstützung für das Senden von Nachrichten.
-* **Prozessübergreifende Kommunikation** &ndash; Ein Prozess muss einen http/2-Server hosten, um eingehende GrpC-Aufrufe zu akzeptieren. Bei Windows handelt es sich bei prozessübergreifenden [kommunikationspipes](/dotnet/standard/io/pipe-operations) um eine schnelle, leichte Kommunikationsmethode.
+* **Browser-barrierefreie APIs** &ndash; GrpC wird im Browser nicht vollständig unterstützt. GrpC-Web kann Browserunterstützung bieten, aber es gibt Einschränkungen und führt einen Server Proxy ein.
+* **Broadcast-Echtzeitkommunikation** &ndash; GrpC unterstützt die Echtzeitkommunikation über das Streaming, das Konzept der Übermittlung von Nachrichten an registrierte Verbindungen ist jedoch nicht vorhanden. Beispielsweise ist in einem Chatroom-Szenario, in dem neue Chat Nachrichten an alle Clients im Chatraum gesendet werden sollen, jeder GrpC-Rückruf erforderlich, um neue Chat Nachrichten einzeln an den Client zu streamen. [Signalr](xref:signalr/introduction) ist ein nützliches Framework für dieses Szenario. Signalr hat das Konzept von permanenten Verbindungen und integrierter Unterstützung für das Senden von Nachrichten.
+* Prozess **übergreifende Kommunikation** &ndash; ein Prozess muss einen http/2-Server hosten, um eingehende GrpC-Aufrufe zu akzeptieren. Bei Windows handelt es sich bei prozessübergreifenden [kommunikationspipes](/dotnet/standard/io/pipe-operations) um eine schnelle, leichte Kommunikationsmethode.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

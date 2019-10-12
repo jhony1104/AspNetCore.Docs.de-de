@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/25/2019
 uid: blazor/get-started
-ms.openlocfilehash: 5aec91eff7de0732a47fec1aafa5e094c89c37a4
-ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
+ms.openlocfilehash: ef9113dbfdbbd5920c4358cdac0c77c60f40b7c8
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71295433"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72288799"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
 
@@ -42,7 +42,7 @@ Beginnen Sie mit blazor:
 
    4 \. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der **Orts** Eintrag korrekt ist, oder geben Sie einen Speicherort für das Projekt Wählen Sie **Erstellen** aus.
 
-   5 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
+   5 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
 
    6 \. Drücken Sie **F5**, um die App auszuführen.
 
@@ -67,13 +67,13 @@ Beginnen Sie mit blazor:
       dotnet new blazorserver -o WebApplication1
       ```
 
-      Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
+      Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
 
    4 \. Öffnen Sie den Ordner *WebApplication1* in Visual Studio Code.
 
    5 \. Für ein blazor-Server Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
 
-   6 \. Wenn Sie eine blazor-Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine blazor Webassembly-App verwenden `dotnet run` , führen Sie aus dem Projektordner der APP aus.
+   6 \. Wenn Sie eine blazor-Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine blazor Webassembly-App verwenden, führen Sie `dotnet run` aus dem Projektordner der APP aus.
 
    7 \. Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -115,7 +115,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, <xref:blazor/hosting-models>finden Sie unter.
+   Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
 
    Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -127,47 +127,47 @@ Auf den Registerkarten in der Rand Leiste sind mehrere Seiten verfügbar:
 * Zähler
 * Abrufen von Daten
 
-Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Das erhöhen eines Leistungs Zählers in einer Webseite erfordert normalerweise das Schreiben von JavaScript, aber Razor- C#Komponenten bieten einen besseren Ansatz mithilfe von.
+Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Das Inkrementieren eines Zählers in einer Webseite erfordert normalerweise das Schreiben von JavaScript, C#aber mit blazor können Sie verwenden.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
-Eine Anforderung für `/counter` im Browser, wie durch die `@page` -Direktive angegeben, bewirkt, dass die `Counter` Komponente ihren Inhalt wieder gibt. Komponenten werden in einer Speicher internen Darstellung der Rendering-Struktur dargestellt, die dann zum flexiblen und effizienten Aktualisieren der Benutzeroberfläche verwendet werden kann.
+Eine Anforderung für `/counter` im Browser, wie von der `@page`-Direktive angegeben, bewirkt, dass die `Counter`-Komponente ihren Inhalt wieder gibt. Komponenten werden in einer Speicher internen Darstellung der Rendering-Struktur dargestellt, die dann zum flexiblen und effizienten Aktualisieren der Benutzeroberfläche verwendet werden kann.
 
 Jedes Mal, wenn die Schaltfläche " **Click me** " ausgewählt wird:
 
-* Das `onclick` Ereignis wird ausgelöst.
+* Das `onclick`-Ereignis wird ausgelöst.
 * Die `IncrementCount` -Methode wird aufgerufen.
 * Der `currentCount` wird inkrementiert.
 * Die Komponente wird wieder gerendert.
 
 Die Laufzeit vergleicht den neuen Inhalt mit dem vorherigen Inhalt und wendet nur den geänderten Inhalt auf die Dokumentobjektmodell (DOM) an.
 
-Fügen Sie einer anderen Komponente mithilfe der HTML-Syntax eine Komponente hinzu. Fügen Sie z. b `Counter` . die Komponente der Startseite der APP hinzu `<Counter />` , indem Sie `Index` der Komponente ein-Element hinzufügen.
+Fügen Sie einer anderen Komponente mithilfe der HTML-Syntax eine Komponente hinzu. Fügen Sie beispielsweise der Startseite der APP die Komponente `Counter` hinzu, indem Sie der Komponente `Index` ein `<Counter />`-Element hinzufügen.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-Führen Sie die App aus. Die Startseite verfügt über einen eigenen, von `Counter` der Komponente bereitgestellten Counter.
+Führen Sie die App aus. Die Startseite verfügt über einen eigenen Wert, der von der Komponente `Counter` bereitgestellt wird.
 
-Komponenten Parameter werden mithilfe von Attributen oder untergeordnetem [Inhalt](xref:blazor/components#child-content)angegeben, sodass Sie Eigenschaften für die untergeordnete Komponente festlegen können. Aktualisieren Sie den `@code` Block der Komponente `Counter` , um der Komponente einen Parameter hinzuzufügen:
+Komponenten Parameter werden mithilfe von Attributen oder untergeordnetem [Inhalt](xref:blazor/components#child-content)angegeben, sodass Sie Eigenschaften für die untergeordnete Komponente festlegen können. Aktualisieren Sie den Block "`@code`" der Komponente, um der Komponente "`Counter`" einen Parameter hinzuzufügen:
 
-* Fügen Sie eine öffentliche Eigenschaft `IncrementAmount` für mit `[Parameter]` einem-Attribut hinzu.
+* Fügen Sie eine öffentliche Eigenschaft für `IncrementAmount` mit einem `[Parameter]`-Attribut hinzu.
 * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
-Geben Sie `IncrementAmount` das im `Index` -Element `<Counter>` der Komponente mithilfe eines-Attributs an.
+Geben Sie den `IncrementAmount` im `<Counter>`-Element der `Index`-Komponente mithilfe eines-Attributs an.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Führen Sie die App aus. Die `Index` Komponente verfügt über einen eigenen Wert, der jedes Mal um zehn erhöht wird, wenn die Schaltfläche " **Click me** " ausgewählt ist. Die `Counter` Komponente (*counter. Razor*) bei `/counter` wird weiterhin um 1 erhöht.
+Führen Sie die App aus. Die Komponente "`Index`" hat einen eigenen Wert, der jedes Mal um zehn erhöht wird, wenn die Schaltfläche " **Click me** " ausgewählt ist. Die Komponente "`Counter`" (*counter. Razor*) bei `/counter` wird weiterhin um 1 erhöht.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

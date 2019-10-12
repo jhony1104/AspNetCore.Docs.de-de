@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/26/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: a2952f5234cdef7f749a1af8dd4adcb887290629
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 3484a0233a0d56811235192c4b64aa9296e72b58
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259773"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289070"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Leistung
 
@@ -178,10 +178,7 @@ Der vorangehende Code liest den gesamten HTTP-Anforderungs Text asynchron in den
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet3)]
 
-Der vorangehende Code liest den gesamten HTTP-Anforderungs Text asynchron in den Arbeitsspeicher.
-
-> [!WARNING]
-> Wenn die Anforderung groß ist, kann das Lesen des gesamten HTTP-Anforderungs Texts in den Arbeitsspeicher zu einer OOM-Bedingung (Out of Memory) führen. OOM kann zu einem Denial-of-Service-Ergebnis führen.  Weitere Informationen finden Sie unter [vermeiden des Lesens großer Anforderungs Texte oder Antwort Texte](#arlb) in den Arbeitsspeicher in diesem Dokument.
+Der vorangehende Code deserialisiert den Anforderungs Text asynchron in ein C# -Objekt.
 
 ## <a name="prefer-readformasync-over-requestform"></a>"Read Form Async" über "Request. Form" bevorzugen
 
@@ -265,7 +262,7 @@ Der vorangehende Code erfasst häufig einen NULL-Wert oder einen falschen `HttpC
 
 `HttpContext` ist nur gültig, solange eine aktive HTTP-Anforderung in der ASP.net Core Pipeline vorhanden ist. Die gesamte ASP.net Core Pipeline ist eine asynchrone Kette von Delegaten, die jede Anforderung ausführt. Wenn die von dieser Kette zurückgegebene `Task` abgeschlossen ist, wird die `HttpContext` wieder verwendet.
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird `async void` verwendet:
+**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird `async void` verwendet, wodurch die HTTP-Anforderung beendet wird, wenn die erste `await` erreicht wird:
 
 * Dies ist in ASP.net Core-apps **immer** eine bewährte Vorgehensweise.
 * Greift auf den `HttpResponse` zu, nachdem die HTTP-Anforderung beendet wurde.
