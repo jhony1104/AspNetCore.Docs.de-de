@@ -667,7 +667,7 @@
     - name: Übersicht
       displayName: 'azure, deploy, publish'
       uid: host-and-deploy/index
-    - name: Hosten in Azure App Service
+    - name: Azure App Service
       displayName: 'deploy, publish'
       items:
         - name: Übersicht
@@ -717,7 +717,7 @@
         - name: Nächste Schritte
           displayName: 'azure, deploy, publish'
           uid: azure/devops/next-steps
-    - name: Hosten unter Windows mit IIS
+    - name: IIS
       displayName: 'deploy, publish'
       items:
         - name: Übersicht
@@ -749,16 +749,16 @@
     - name: HTTP.sys
       displayName: 'deploy, publish, server'
       uid: fundamentals/servers/httpsys
-    - name: Hosten in einem Windows-Dienst
+    - name: Windows-Dienst
       displayName: 'deploy, publish'
       uid: host-and-deploy/windows-service
-    - name: Hosten unter Linux mit Nginx
+    - name: Linux mit Nginx
       displayName: 'deploy, publish'
       uid: host-and-deploy/linux-nginx
-    - name: Hosten unter Linux mit Apache
+    - name: Linux mit Apache
       displayName: 'deploy, publish'
       uid: host-and-deploy/linux-apache
-    - name: Hosten in Docker
+    - name: Docker
       displayName: 'deploy, publish'
       items:
         - name: Übersicht
@@ -779,7 +779,7 @@
     - name: Proxy- und Lastenausgleichskonfiguration
       displayName: 'deploy, publish'
       uid: host-and-deploy/proxy-load-balancer
-    - name: Hosten in einer Webfarm
+    - name: Webfarm
       displayName: 'deploy, publish'
       uid: host-and-deploy/web-farm
     - name: Veröffentlichungsprofile in Visual Studio
