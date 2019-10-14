@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/07/2019
+ms.date: 10/10/2019
 uid: index
-ms.openlocfilehash: c9b33b16de354c8bac804e8fd5e8e3ce3af688fc
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 1ccc1f5d095833e89fc20127ee23b8fa3dc4c79f
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773710"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289051"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -77,10 +77,12 @@ Als Einführung in die Entwicklung von ASP.NET Core-Apps empfehlen wir die folge
 
    |App-Typ  |Szenario  |Lernprogramm  |
    |----------|----------|----------|
-   |Web-App       | Für Neuentwicklungen        |[Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) |
-   |Web-App       | Für die Verwaltung einer MVC-App |[Erste Schritte mit MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web-API       |                            |[Erstellen einer Web-API](xref:tutorials/first-web-api)\*  |
-   |Echtzeit-App |                            |[Erste Schritte mit SignalR](xref:tutorials/signalr) |
+   |Web-App                   | Für Neuentwicklungen        |[Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web-App                   | Für die Verwaltung einer MVC-App |[Erste Schritte mit MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Web-API                   |                            |[Erstellen einer Web-API](xref:tutorials/first-web-api)\*  |
+   |Echtzeit-App             |                            |[Erste Schritte mit SignalR](xref:tutorials/signalr) |
+   |Blazor-App                |                            |[Erste Schritte mit Blazor](xref:blazor/get-started) |
+   |Apps für Remoteprozeduraufrufe |                            |[Erste Schritte mit dem gRPC-Dienst](xref:tutorials/grpc/grpc-start) |
 
 1. Folgen Sie einem Tutorial, in dem die Grundlagen des Datenzugriffs erklärt werden:
 
@@ -107,7 +109,7 @@ Viele der Artikel und Tutorials enthalten Links zu Beispielcode.
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Präprozessoranweisungen in Beispielcode
 
-In Beispiel-Apps werden die C#-Anweisungen `#define` und `#if-#else/#elif-#endif` zum selektiven Kompilieren und Ausführen unterschiedlicher Abschnitte des Beispielcodes verwendet. So werden verschiedene Szenarios veranschaulicht. Für die Beispiele, die diesen Ansatz verwenden, legen Sie die Anweisung `#define` am Anfang der C#-Dateien auf das Symbol fest, das dem Szenario zugeordnet ist, welches Sie ausführen möchten. Für einige Beispiele müssen Sie möglicherweise das Symbol in mehreren Dateien festlegen, um ein Szenario durchführen zu können.
+In Beispiel-Apps werden die Präprozessoranweisungen `#define` und `#if-#else/#elif-#endif` zum selektiven Kompilieren und Ausführen unterschiedlicher Abschnitte des Beispielcodes verwendet. So werden verschiedene Szenarios veranschaulicht. Für die Beispiele, die diesen Ansatz verwenden, legen Sie die Anweisung `#define` am Anfang der C#-Dateien auf das Symbol fest, das dem Szenario zugeordnet ist, welches Sie ausführen möchten. Für einige Beispiele müssen Sie möglicherweise das Symbol in mehreren Dateien definieren, um ein Szenario durchführen zu können.
 
 Die folgende `#define`-Symbolliste gibt beispielsweise an, dass vier Szenarios verfügbar sind (ein Szenario pro Symbol). Die aktuelle Beispielkonfiguration führt das `TemplateCode`-Szenario aus:
 
@@ -127,23 +129,22 @@ Weitere Informationen zur Verwendung von [C#-Präprozessoranweisungen](/dotnet/c
 
 Einige Beispiel-Apps enthalten Codeabschnitte, die von den C#-Anweisungen [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) und [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) umschlossen werden. Das Buildsystem der Dokumentation fügt diese Bereiche in den gerenderten Dokumentationsartikel ein.  
 
-Namen von Bereichen enthalten oft das Wort „snippet“ (Ausschnitt). Im folgenden Beispiel ist ein Bereich mit dem Namen `snippet_FilterInCode` enthalten:
+Namen von Bereichen enthalten oft das Wort „snippet“ (Ausschnitt). Im folgenden Beispiel ist ein Bereich mit dem Namen `snippet_WebHostDefaults` enthalten:
 
 ```csharp
-#region snippet_FilterInCode
-WebHost.CreateDefaultBuilder(args)
-    .UseStartup<Startup>()
-    .ConfigureLogging(logging =>
-        logging.AddFilter("System", LogLevel.Debug)
-            .AddFilter<DebugLoggerProvider>("Microsoft", LogLevel.Trace))
-            .Build();
+#region snippet_WebHostDefaults
+Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.UseStartup<Startup>();
+    });
 #endregion
 ```
 
 In der Markdowndatei wird auf den vorherigen C#-Codeausschnitt mit der folgenden Zeile verwiesen:
 
 ```md
-[!code-csharp[](sample/SampleApp/Program.cs?name=snippet_FilterInCode)]
+[!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
 Sie können die Anweisungen `#region` und `#endregion`, die den Code umschließen, ohne Weiteres ignorieren (oder entfernen). Ändern Sie jedoch den Code innerhalb dieser Anweisungen nicht, wenn Sie die im Artikel beschriebenen Beispielszenarios durchführen möchten. Wenn Sie andere Szenarios ausprobieren möchten, können Sie den Code anpassen.

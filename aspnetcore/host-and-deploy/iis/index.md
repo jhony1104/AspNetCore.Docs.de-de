@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Info
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/11/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 8131e9b8e6a3bb3643f41a9be57c5bd2e511476c
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: c11a46220f0055f4d3d14c84065281f642a4cbe7
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007371"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289020"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -408,7 +408,7 @@ Die Dateien im Bereitstellungsordner werden gesperrt, wenn die App ausgeführt w
 
 * Verwenden Sie Web Deploy, und verweisen Sie auf `Microsoft.NET.Sdk.Web` in der Projektdatei. Eine Datei namens *app_offline.htm* befindet sich im Stammverzeichnis des Web-App-Verzeichnisses. Wenn die Datei vorhanden ist, fährt das ASP.NET Core Module die App ordnungsgemäß herunter und verarbeitet die Datei *app_offline.htm* während der Bereitstellung. Weitere Informationen finden Sie unter [Konfigurationsreferenz für das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Beenden Sie den App-Pool im IIS-Manager auf dem Server manuell.
-* Verwenden Sie PowerShell, um *app_offline.html* abzulegen (erfordert PowerShell 5 oder höher):
+* Verwenden Sie PowerShell, um *app_offline.htm* abzulegen (erfordert PowerShell 5 oder höher):
 
   ```PowerShell
   $pathToApp = 'PATH_TO_APP'
