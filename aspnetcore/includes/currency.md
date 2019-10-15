@@ -1,2 +1,0 @@
-> [!NOTE]
-> Sie können unter Umständen keine Dezimaltrennzeichen in Dezimalfelder eingeben. Zur Unterstützung der [jQuery-Validierung](https://jqueryvalidation.org/) für nicht englische Gebietsschemas, in denen ein Komma („,“) als Dezimaltrennzeichen verwendet wird, und Nicht-US-englische Datums- und Uhrzeitformate müssen Sie Schritte zur Globalisierung Ihrer App ausführen. In diesem [GitHub-Problem 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) finden Sie Anweisungen zum Hinzufügen von Kommas als Dezimaltrennzeichen.
