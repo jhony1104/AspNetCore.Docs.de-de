@@ -4,14 +4,14 @@ author: rick-anderson
 description: Hier erfahren Sie, wie statische Dateien bereitgestellt und gesichert werden und wie das Verhalten von Middleware beim Hosting statischer Dateien in einer ASP.NET Core-Web-App konfiguriert wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/8/2019
+ms.date: 10/07/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: 1c665d1206e984fe41e9f57bb5356839c354dde2
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 2f153551a86860616469200862723528e4a8cc1c
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308194"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007326"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -23,7 +23,7 @@ Bei statischen Dateien wie HTML, CSS, Images und JavaScript handelt es sich um O
 
 ## <a name="serve-static-files"></a>Bereitstellen statischer Dateien
 
-Statische Dateien werden im Webstammverzeichnis des Projekts gespeichert. Das Standardverzeichnis lautet *\<content_root>/wwwroot*, es kann jedoch mit der Methode [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) geändert werden. Weitere Informationen finden Sie unter [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root).
+Statische Dateien werden im [Webstammverzeichnis](xref:fundamentals/index#web-root) des Projekts gespeichert. Das Standardverzeichnis heißt *{Inhaltsstammverzeichnis}/wwwroot*, das jedoch mit der Methode [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) geändert werden kann. Weitere Informationen finden Sie unter [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root).
 
 Der Web-Host der App muss über das Inhaltsstammverzeichnis informiert werden.
 
@@ -43,14 +43,14 @@ Legen Sie das Inhaltsstammverzeichnis auf das aktuelle Verzeichnis fest, indem S
 
 ::: moniker-end
 
-Auf statische Dateien kann über einen Pfad relativ zum Webstammverzeichnis zugegriffen werden. Die Projektvorlage der **Webanwendung** verfügt beispielsweise über mehrere Ordner innerhalb des Ordners *wwwroot*:
+Auf statische Dateien kann über einen Pfad relativ zum [Webstammverzeichnis](xref:fundamentals/index#web-root) zugegriffen werden. Die Projektvorlage der **Webanwendung** verfügt beispielsweise über mehrere Ordner innerhalb des Ordners *wwwroot*:
 
 * **wwwroot**
   * **css**
   * **images**
   * **js**
 
-Das URI-Format für den Zugriff auf eine Datei im Unterordner *Images* lautet *http://\<server_address>/images/\<image_file_name>* . Beispiel: *http://localhost:9189/images/banner3.svg*
+Das URI-Format für den Zugriff auf eine Datei im Unterordner *Images* lautet *http://\<server_address>/images/\<image_file_name>*. Beispiel: *http://localhost:9189/images/banner3.svg*
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -78,15 +78,15 @@ Rufen Sie die Methode [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.
 
 [!code-csharp[](static-files/samples/1x/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-Die parameterlose Überladung der Methode `UseStaticFiles` markiert die Dateien im Webstammverzeichnis als bereitstellbar. Folgendes Markup verweist auf *wwwroot/images/banner1.svg*:
+Die parameterlose Überladung der Methode `UseStaticFiles` markiert die Dateien im [Webstammverzeichnis](xref:fundamentals/index#web-root) als bereitstellbar. Folgendes Markup verweist auf *wwwroot/images/banner1.svg*:
 
 [!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
-Im vorhergehenden Code verweist die Tilde (`~/`) auf den Webstamm. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/index#web-root).
+Im vorhergehenden Code verweist die Tilde (`~/`) auf das [Webstammverzeichnis](xref:fundamentals/index#web-root).
 
 ### <a name="serve-files-outside-of-web-root"></a>Bereitstellen von Dateien außerhalb des Webstammverzeichnisses
 
-Ziehen Sie eine Verzeichnishierarchie in Betracht, bei der sich die bereitzustellenden statischen Dateien außerhalb des Webstammverzeichnisses befinden:
+Erwägen Sie eine Verzeichnishierarchie, bei der sich die bereitzustellenden statischen Dateien außerhalb des [Webstammverzeichnisses](xref:fundamentals/index#web-root) befinden:
 
 * **wwwroot**
   * **css**
@@ -108,7 +108,7 @@ Folgendes Markup verweist auf *MyStaticFiles/images/banner1.svg*:
 
 ### <a name="set-http-response-headers"></a>Festlegen von HTTP-Antwortheadern
 
-Mit einem [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions)-Objekt können HTTP-Antwortheader festgelegt werden. Neben der Konfiguration statischer, über das Webstammverzeichnis bereitgestellter Dateien wird mit dem folgenden Code der Header `Cache-Control` festgelegt:
+Mit einem [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions)-Objekt können HTTP-Antwortheader festgelegt werden. Neben der Konfiguration statischer, über das [Webstammverzeichnis](xref:fundamentals/index#web-root) bereitgestellter Dateien wird mit dem folgenden Code der Header `Cache-Control` festgelegt:
 
 [!code-csharp[](static-files/samples/1x/StartupAddHeader.cs?name=snippet_ConfigureMethod)]
 
@@ -256,7 +256,7 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 > [!WARNING]
 > Wenn der statische IIS-Dateihandler aktiviert ist **und** das ASP.NET Core-Modul falsch konfiguriert wurde, werden statische Dateien bereitgestellt. Dies geschieht beispielsweise, wenn die Datei *web.config* nicht bereitgestellt worden ist.
 
-* Platzieren Sie Codedateien (einschließlich *.cs* und *.cshtml*) außerhalb des Webstammverzeichnisses des App-Projekts. Aus diesem Grund wird eine logische Trennung zwischen den clientseitigen Inhalten der App und dem serverbasierten Code erschaffen. Dadurch wird verhindert, dass serverseitiger Code aufgedeckt wird.
+* Platzieren Sie Codedateien (einschließlich *.cs* und *.cshtml*) außerhalb des [Webstammverzeichnisses](xref:fundamentals/index#web-root) des App-Projekts. Aus diesem Grund wird eine logische Trennung zwischen den clientseitigen Inhalten der App und dem serverbasierten Code erschaffen. Dadurch wird verhindert, dass serverseitiger Code aufgedeckt wird.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

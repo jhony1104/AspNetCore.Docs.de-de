@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core Dateisystemzugriff durch die Verwend
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/26/2019
+ms.date: 10/07/2019
 uid: fundamentals/file-providers
-ms.openlocfilehash: 44c439dce893d486668bf8ac3f20cdf7952c5186
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: 3a92b44efc70d156596ee9fe80b4f6a65266e73d
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059101"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007165"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dateianbieter in ASP.NET Core
 
@@ -22,7 +22,7 @@ Von [Steve Smith](https://ardalis.com/) und [Luke Latham](https://github.com/gua
 
 ASP.NET Core abstrahiert Dateisystemzugriff durch die Verwendung von Dateianbietern. Dateianbieter werden im gesamten ASP.NET Core-Framework verwendet:
 
-* `IWebHostEnvironment` stellt das Inhaltsstammverzeichnis und das Webstammverzeichnis der Anwendung als `IFileProvider`-Typen zur Verfügung.
+* `IWebHostEnvironment` macht das [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root) der App als `IFileProvider`-Typen verfügbar.
 * Die [Middleware der statischen Dateien](xref:fundamentals/static-files) verwendet Dateianbieter, um statische Dateien zu suchen.
 * [Razor](xref:mvc/views/razor) verwendet Dateianbieter, um Seiten und Ansichten zu suchen.
 * .NET Core-Tools verwenden Dateianbieter und Globmuster, um anzugeben, welche Dateien veröffentlicht werden sollen.
@@ -171,7 +171,7 @@ Entspricht allen Dateien mit *.txt*-Erweiterung, die an einer beliebigen Stelle 
 
 ASP.NET Core abstrahiert Dateisystemzugriff durch die Verwendung von Dateianbietern. Dateianbieter werden im gesamten ASP.NET Core-Framework verwendet:
 
-* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> stellt das Inhaltsstammverzeichnis und das Webstammverzeichnis der Anwendung als `IFileProvider`-Typen zur Verfügung.
+* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> macht das [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) und [Webstammverzeichnis](xref:fundamentals/index#web-root) der App als `IFileProvider`-Typen verfügbar.
 * Die [Middleware der statischen Dateien](xref:fundamentals/static-files) verwendet Dateianbieter, um statische Dateien zu suchen.
 * [Razor](xref:mvc/views/razor) verwendet Dateianbieter, um Seiten und Ansichten zu suchen.
 * .NET Core-Tools verwenden Dateianbieter und Globmuster, um anzugeben, welche Dateien veröffentlicht werden sollen.

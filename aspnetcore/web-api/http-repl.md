@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie das globale .NET Core-Tool HTTP REPL ver
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 08/29/2019
+ms.date: 10/07/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 086ac141a04ab4a560f2c26fb049ef8a5493dc97
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: bb3757f51487a307ebfb97452b80995f84e95e4b
+ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187243"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72037710"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -790,25 +790,107 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader festzulegen:
 
-1. Legen Sie den Header inline mit der HTTP-Anforderung fest. Beispiel:
+* Legen Sie den Header inline mit der HTTP-Anforderung fest. Beispiel:
 
-  ```console
-  https://localhost:5001/people~ post -h Content-Type=application/json
-  ```
+    ```console
+    https://localhost:5001/people~ post -h Content-Type=application/json
+    ```
+    
+    Beim vorherigen Ansatz benötigt jeder eindeutige HTTP-Anforderungsheader eine eigene `-h`-Option.
 
-  Beim vorherigen Ansatz benötigt jeder eindeutige HTTP-Anforderungsheader eine eigene `-h`-Option.
+* Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Beispiel:
 
-1. Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Beispiel:
+    ```console
+    https://localhost:5001/people~ set header Content-Type application/json
+    ```
+    
+    Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Beispiel:
+    
+    ```console
+    https://localhost:5001/people~ set header Content-Type
+    ```
 
-  ```console
-  https://localhost:5001/people~ set header Content-Type application/json
-  ```
+## <a name="test-secured-endpoints"></a>Testen gesicherter Endpunkte
 
-  Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Beispiel:
+HTTP REPL unterstützt das Testen abgesicherter Endpunkte mithilfe von HTTP-Anforderungsheadern. Beispiele unterstützter Authentifizierungs- und Autorisierungsschemas sind Standardauthentifizierung, JWT-Bearertoken und Digestauthentifizierung. Beispielsweise können Sie mit dem folgenden Befehl ein Bearertoken an einen Endpunkt senden:
 
-  ```console
-  https://localhost:5001/people~ set header Content-Type
-  ```
+```console
+set header Authorization "bearer <TOKEN VALUE>"
+```
+
+Um auf einen in Azure gehosteten Endpunkt zuzugreifen oder die [Azure-REST-API](/rest/api/azure/) zu verwenden, benötigen Sie ein Bearertoken. Führen Sie die folgenden Schritte aus, um über die [Azure CLI](/cli/azure/) ein Bearertoken für Ihr Azure-Abonnement zu erhalten. HTTP REPL legt das Beaertoken in einem HTTP-Anforderungsheader ab und ruft eine Liste der Azure App Service-Web-Apps ab.
+
+1. Anmelden bei Azure:
+
+    ```azcli
+    az login
+    ```
+
+1. Rufen Sie Ihre Abonnement-ID mit dem folgenden Befehl ab:
+
+    ```azcli
+    az account show --query id
+    ```
+
+1. Kopieren Sie Ihre Abonnement-ID, und führen Sie den folgenden Befehl aus:
+
+    ```azcli
+    az account set --subscription "<SUBSCRIPTION ID>"
+    ```
+
+1. Rufen Sie Ihr Bearertoken mit dem folgenden Befehl ab:
+
+    ```azcli
+    az account get-access-token --query accessToken
+    ```
+
+1. Stellen Sie über HTTP REPL eine Verbindung mit der Azure-REST-API her:
+
+    ```console
+    httprepl https://management.azure.com
+    ```
+
+1. Legen Sie den HTTP-Anforderungsheader `Authorization` fest:
+
+    ```console
+    https://management.azure.com/> set header Authorization "bearer <ACCESS TOKEN>"
+    ```
+
+1. Navigieren Sie zum Abonnement:
+
+    ```console
+    https://management.azure.com/> cd subscriptions/<SUBSCRIPTION ID>
+    ```
+
+1. Rufen Sie eine Liste der Azure App Service-Web-Apps Ihres Abonnements ab:
+
+    ```console
+    https://management.azure.com/subscriptions/{SUBSCRIPTION ID}> get providers/Microsoft.Web/sites?api-version=2016-08-01
+    ```
+
+    Die folgende Antwort wird angezeigt:
+
+    ```console
+    HTTP/1.1 200 OK
+    Cache-Control: no-cache
+    Content-Length: 35948
+    Content-Type: application/json; charset=utf-8
+    Date: Thu, 19 Sep 2019 23:04:03 GMT
+    Expires: -1
+    Pragma: no-cache
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    X-Content-Type-Options: nosniff
+    x-ms-correlation-request-id: <em>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</em>
+    x-ms-original-request-ids: <em>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</em>
+    x-ms-ratelimit-remaining-subscription-reads: 11999
+    x-ms-request-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    x-ms-routing-request-id: WESTUS:xxxxxxxxxxxxxxxx:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx
+    {
+      "value": [
+        <AZURE RESOURCES LIST>
+      ]
+    }
+    ```
 
 ## <a name="toggle-http-request-display"></a>Umschalten der Anzeige von HTTP-Anforderungen
 

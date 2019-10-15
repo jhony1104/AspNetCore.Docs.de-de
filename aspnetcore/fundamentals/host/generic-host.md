@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über den generischen Host in .NET Core, der für
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2019
+ms.date: 10/07/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 75af6dc58d31aaad888b14640268bf05c193272d
-ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
+ms.openlocfilehash: 1582955cd18e6739111af05c9a892cd5cb4e270d
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71248275"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007238"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -78,7 +78,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 Die <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>-Methode:
 
-* Legt das Inhaltsstammverzeichnis auf den Pfad fest, der von <xref:System.IO.Directory.GetCurrentDirectory*> zurückgegeben wird.
+* Legt das [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) auf den Pfad fest, der von <xref:System.IO.Directory.GetCurrentDirectory*> zurückgegeben wird.
 * Lädt Hostkonfiguration aus:
   * Umgebungsvariablen mit dem Präfix „DOTNET_“.
   * Befehlszeilenargumenten
@@ -119,7 +119,7 @@ Weitere Informationen zu den vom Framework bereitgestellten Diensten finden Sie 
 
 Fügt den <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime>-Dienst (vorher `IApplicationLifetime`-Dienst) in eine beliebige Klasse ein, um die Aktivitäten nach dem Starten und die Aufgaben für ordnungsgemäßes Herunterfahren zu verarbeiten. Bei drei der Eigenschaften der Schnittstelle handelt es sich um Abbruchtokens, die zum Registrieren von Ereignishandlermethoden zum Starten und Beenden von Apps verwendet werden. Die Benutzeroberfläche umfasst auch eine `StopApplication`-Methode.
 
-Das folgende Beispiel zeigt eine `IHostedService`-Implementierung, die die `IApplicationLifetime`-Ereignisse registriert:
+Das folgende Beispiel zeigt eine `IHostedService`-Implementierung, die `IHostApplicationLifetime`-Ereignisse registriert:
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
 
@@ -200,6 +200,11 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
+Weitere Informationen finden Sie unter:
+
+* [Grundlagen: Inhaltsstammverzeichnis](xref:fundamentals/index#content-root)
+* [WebRoot](#webroot)
+
 ### <a name="environmentname"></a>EnvironmentName
 
 Die Eigenschaft [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) kann auf einen beliebigen Wert festgelegt werden. Zu den durch Frameworks definierten Werten zählen `Development`, `Staging` und `Production`. Die Groß-/Kleinschreibung wird bei Werten nicht beachtet.
@@ -228,7 +233,7 @@ Wenn das Zeitlimit abläuft bevor alle gehosteten Dienste beendet sind, werden a
 
 **Schlüssel:** shutdownTimeoutSeconds  
 **Typ:** *Ganze Zahl*  
-**Standard**: 5 Sekunden **Umgebungsvariable:** : `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**Standard**: 5 Sekunden **Umgebungsvariable:**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 Verwenden Sie die Umgebungsvariable, oder konfigurieren Sie `HostOptions`, um diesen Wert festzulegen. Im folgenden Beispiel wird das Zeitlimit auf 20 Sekunden festgelegt:
 
@@ -397,7 +402,7 @@ Der relative Pfad für die statischen Objekte der App.
 
 **Schlüssel:** webroot  
 **Typ:** *Zeichenfolge*  
-**Standard**: *(Inhaltsstammverzeichnis)/wwwroot*, wenn der Pfad vorhanden ist. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
+**Standard**: Die Standardeinstellung ist `wwwroot`. Der Pfad zu *{Inhaltsstammverzeichnis}/wwwroot* muss vorhanden sein. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
 **Umgebungsvariable:** `<PREFIX_>WEBROOT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseWebRoot` auf, um diesen Wert festzulegen:
@@ -405,6 +410,11 @@ Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseWebRoot` auf, um diesen 
 ```csharp
 webBuilder.UseWebRoot("public");
 ```
+
+Weitere Informationen finden Sie unter:
+
+* [Grundlagen: Webstammverzeichnis](xref:fundamentals/index#web-root)
+* [ContentRootPath](#contentrootpath)
 
 ## <a name="manage-the-host-lifetime"></a>Verwalten der Lebensdauer des Hosts
 
@@ -574,6 +584,8 @@ Diese Einstellung bestimmt, wo der Host mit der Suche nach Inhaltsdateien beginn
 Wenn der Pfad nicht vorhanden ist, kann der Host nicht gestartet werden.
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseContentRoot)]
+
+Weitere Informationen finden Sie unter [Grundlagen: Inhaltsstammverzeichnis](xref:fundamentals/index#content-root).
 
 ### <a name="environment"></a>Umgebung
 
