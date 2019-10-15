@@ -1,63 +1,65 @@
 ---
 title: ASP.net Core blazor-Hostingmodelle
 author: guardrex
-description: Grundlegendes zu Client seitigen und serverseitigen edzor-Hostingmodellen.
+description: Grundlegendes zum Hostingmodell von blazor Webassembly-und blazor-Servern.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 10/03/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 7880affa59af1fa4fc47aee3dc98ae9aa53729af
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: bc3ad9c7c4731b685fc161844d9f55e51722c0ea
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878346"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924675"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
 Von [Daniel Roth](https://github.com/danroth27)
 
-Blazor ist ein Webframework, das für die clientseitige Ausführung im Browser auf einer [WebAssembly](https://webassembly.org/)-basierten .NET-Laufzeit (*Blazor, clientseitig*) oder serverseitigen Ausführung in ASP.NET Core (*Blazor, serverseitig*) konzipiert ist. Unabhängig vom Hostingmodell sind die APP-und Komponentenmodelle *identisch*.
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+
+Blazor ist ein Webframework, das für die Client seitige Ausführung im Browser auf einer [webassemblybasierten](https://webassembly.org/) .NET-Runtime (*blazor Webassembly*) oder Serverseite in ASP.net Core (*blazor-Server*) konzipiert ist. Unabhängig vom Hostingmodell sind die APP-und Komponentenmodelle *identisch*.
 
 Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebenen Hostingmodelle <xref:blazor/get-started>finden Sie unter.
 
-## <a name="client-side"></a>Clientseitig
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Das Prinzipal-Hostingmodell für blazor führt die Client seitige Ausführung im Browser in Webassembly aus. Die Blazor-App, die jeweiligen Abhängigkeiten und die .NET-Runtime werden im Browser herunterladen. Die App wird direkt im UI-Thread des Browsers ausgeführt. UI-Updates und Ereignis Behandlung treten innerhalb desselben Prozesses auf. Die Assets der App werden als statische Dateien auf einem Webserver oder Dienst bereitgestellt, in dem statische Inhalte für Clients bereitgestellt werden können.
 
-![Client seitige blazor-Komponente: Die blazor-APP wird in einem UI-Thread im Browser ausgeführt.](hosting-models/_static/client-side.png)
+![Blazor-Webassembly: Die blazor-APP wird in einem UI-Thread im Browser ausgeführt.](hosting-models/_static/blazor-webassembly.png)
 
 Um eine blazor-App mithilfe des Client seitigen Hostingmodells zu erstellen, verwenden Sie die Vorlage " **blazor Webassembly-App** " ([dotnet New blazorwasm](/dotnet/core/tools/dotnet-new)).
 
-Nachdem Sie die APP-Vorlage für die **blazor-Webassembly** ausgewählt haben, können Sie die APP für die Verwendung eines ASP.net Core-Back-Ends konfigurieren, indem Sie das Kontrollkästchen **ASP.net Core gehostet** aktivieren ([dotnet New blazorwasm--Hosted](/dotnet/core/tools/dotnet-new)). Die ASP.net Core-App bedient die blazor-APP an Clients. Die Client seitige blazor-App kann über das Netzwerk mithilfe von Web-API-aufrufen oder [signalr](xref:signalr/introduction)mit dem Server interagieren.
+Nachdem Sie die APP-Vorlage für die **blazor-Webassembly** ausgewählt haben, können Sie die APP für die Verwendung eines ASP.net Core-Back-Ends konfigurieren, indem Sie das Kontrollkästchen **ASP.net Core gehostet** aktivieren ([dotnet New blazorwasm--Hosted](/dotnet/core/tools/dotnet-new)). Die ASP.net Core-App bedient die blazor-APP an Clients. Die blazor Webassembly-App kann über das Netzwerk mithilfe von Web-API-aufrufen oder [signalr](xref:signalr/introduction)mit dem Server interagieren.
 
 Die Vorlagen enthalten das Skript " *blazor. Webassembly. js* ", das Folgendes behandelt:
 
 * Herunterladen der .NET-Laufzeit, der APP und der APP-Abhängigkeiten.
 * Initialisierung der Laufzeit zum Ausführen der app.
 
-Das Client seitige Hostingmodell bietet mehrere Vorteile:
+Das Webassembly-Hostingmodell von blazor bietet mehrere Vorteile:
 
 * Es gibt keine serverseitige .net-Abhängigkeit. Die APP funktioniert nach dem Herunterladen auf den Client vollständig.
 * Client Ressourcen und-Funktionen sind vollständig ausgelastet.
 * Die Arbeit wird vom Server an den Client verlagert.
 * Ein ASP.net Core Webserver ist nicht erforderlich, um die APP zu hosten. Server lose Bereitstellungs Szenarien sind möglich (z. b. das Bereitstellen der APP aus einem CDN).
 
-Es gibt Nachteile zum Client seitigen Hosting:
+Es gibt Nachteile für das blizor-webassemblyhosting:
 
 * Die APP ist auf die Funktionen des Browsers beschränkt.
 * Kompatible Client Hardware und Software (z. b. webassemblyunterstützung) ist erforderlich.
 * Die Download Größe ist größer, und die Auslastung von apps dauert länger.
 * Die Unterstützung von .NET-Laufzeit und-Tools ist weniger ausgereift. Beispielsweise gibt es Einschränkungen in [.NET Standard](/dotnet/standard/net-standard) Unterstützung und Debuggen.
 
-## <a name="server-side"></a>Serverseitig
+## <a name="blazor-server"></a>Blazor Server
 
-Mit dem serverseitigen Hostingmodell wird die APP auf dem Server innerhalb einer ASP.net Core-app ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
+Mit dem serverhostingmodell von blazor wird die APP auf dem Server innerhalb einer ASP.net Core-app ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
-![Der Browser interagiert mit der APP (gehostet innerhalb einer ASP.net Core-APP) auf dem Server über eine signalr-Verbindung.](hosting-models/_static/server-side.png)
+![Der Browser interagiert mit der APP (gehostet innerhalb einer ASP.net Core-APP) auf dem Server über eine signalr-Verbindung.](hosting-models/_static/blazor-server.png)
 
-Um eine blazor-App mit dem serverseitigen Hostingmodell zu erstellen, verwenden Sie die ASP.net Core **blazor-Server-App** -Vorlage ([dotnet New blazorserver](/dotnet/core/tools/dotnet-new)). Die ASP.net Core-App hostet die serverseitige APP und erstellt den signalr-Endpunkt, mit dem Clients eine Verbindung herstellen.
+Verwenden Sie die Vorlage "ASP.net Core **blazor Server-App** " ([dotnet New blazorserver](/dotnet/core/tools/dotnet-new)), um eine blazor-App mithilfe des blazor-Hostingmodells zu erstellen. Die ASP.net Core-App hostet die blazor-Server-APP und erstellt den signalr-Endpunkt, mit dem Clients eine Verbindung herstellen
 
 Die ASP.net Core App verweist auf die `Startup` Klasse der APP, die hinzugefügt werden soll:
 
@@ -66,15 +68,15 @@ Die ASP.net Core App verweist auf die `Startup` Klasse der APP, die hinzugefügt
 
 Das Skript&dagger; " *blazor. Server. js* " stellt die Client Verbindung her. Es liegt in der Verantwortung der APP, den App-Zustand nach Bedarf beizubehalten und wiederherzustellen (z. b. im Fall einer verlorenen Netzwerkverbindung).
 
-Das serverseitige Hostingmodell bietet mehrere Vorteile:
+Das serverhostingmodell von blazor bietet verschiedene Vorteile:
 
-* Die Download Größe ist erheblich kleiner als eine Client seitige APP, und die APP lädt viel schneller.
+* Die Download Größe ist erheblich kleiner als eine blazor Webassembly-APP, und die APP lädt viel schneller.
 * Die App nutzt vollständige Vorteile der Serverfunktionen, einschließlich der Verwendung von .net Core-kompatiblen APIs.
 * .Net Core auf dem Server wird verwendet, um die APP auszuführen, sodass vorhandene .NET-Tools, wie z. b. das Debuggen, erwartungsgemäß funktionieren.
-* Thin Clients werden unterstützt. Serverseitige apps arbeiten z. b. mit Browsern, die Webassembly nicht unterstützen, und auf Geräten mit Ressourcen Beschränkung.
+* Thin Clients werden unterstützt. Beispielsweise funktionieren blazor-Server-apps mit Browsern, die Webassembly und auf Geräten mit eingeschränkter Ressourcen nicht unterstützen.
 * Die .net-C# /Codebasis der APP, einschließlich des Komponenten Codes der APP, wird nicht für Clients bereitgestellt.
 
-Es gibt Nachteile zum serverseitigen Hosting:
+Es gibt Nachteile des blazor-Server Hostings:
 
 * Eine höhere Latenz ist normalerweise vorhanden. Jede Benutzerinteraktion umfasst einen Netzwerkhop.
 * Es gibt keine Offline Unterstützung. Wenn die Client Verbindung fehlschlägt, funktioniert die APP nicht mehr.
@@ -104,7 +106,7 @@ Ein Benutzeroberflächen Update in blazor wird durch Folgendes ausgelöst:
 
 Das Diagramm wird erneut ausgeführt, und es wird ein UI- *diff* (Differenz) berechnet. Dieser Unterschied ist der kleinste Satz an DOM-Änderungen, die erforderlich sind, um die Benutzeroberfläche auf dem Client zu aktualisieren. Der diff wird in einem binären Format an den Client gesendet und vom Browser angewendet.
 
-Eine Komponente wird verworfen, nachdem der Benutzer auf dem Client dorthin navigiert ist. Während ein Benutzer mit einer Komponente interagiert, muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da der Status vieler Komponenten möglicherweise gleichzeitig vom Server verwaltet wird, ist die Arbeitsspeicher Erschöpfung ein Problem, das behoben werden muss. Anleitungen zum Erstellen einer blazor-Server-APP, um die optimale Verwendung des Server Arbeitsspeichers sicherzustellen <xref:security/blazor/server-side>, finden Sie unter.
+Eine Komponente wird verworfen, nachdem der Benutzer auf dem Client dorthin navigiert ist. Während ein Benutzer mit einer Komponente interagiert, muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da der Status vieler Komponenten möglicherweise gleichzeitig vom Server verwaltet wird, ist die Arbeitsspeicher Erschöpfung ein Problem, das behoben werden muss. Anleitungen zum Erstellen einer blazor-Server-APP, um die optimale Verwendung des Server Arbeitsspeichers sicherzustellen <xref:security/blazor/server>, finden Sie unter.
 
 ### <a name="circuits"></a>Fen
 
@@ -120,26 +122,29 @@ Die Benutzeroberflächen Latenz ist die Zeit, die Sie von einer initiierten Akti
 
 Für eine Branchen-APP, die auf ein privates Unternehmensnetzwerk beschränkt ist, sind die Auswirkungen auf die Benutzer Wahrnehmung von Latenzzeit aufgrund der Netzwerk Latenz in der Regel nicht wahrnehmbar. Für eine APP, die über das Internet bereitgestellt wird, kann die Latenz für Benutzer bemerkbar werden, insbesondere, wenn die Benutzer weitgehend geografisch verteilt sind.
 
-Die Speicherauslastung kann auch zur APP-Latenz beitragen. Eine erhöhte Arbeitsspeicher Auslastung führt zu häufigen Garbage Collection-oder Paging-Speicher auf den Datenträger, die beide die Leistung der APP beeinträchtigen und somit die Benutzeroberflächen Latenz erhöhen. Weitere Informationen finden Sie unter <xref:security/blazor/server-side>.
+Die Speicherauslastung kann auch zur APP-Latenz beitragen. Eine erhöhte Arbeitsspeicher Auslastung führt zu häufigen Garbage Collection-oder Paging-Speicher auf den Datenträger, die beide die Leistung der APP beeinträchtigen und somit die Benutzeroberflächen Latenz erhöhen. Weitere Informationen finden Sie unter <xref:security/blazor/server>.
 
-Blazor-Server-apps sollten optimiert werden, um die Benutzeroberflächen Latenz zu minimieren, indem Netzwerk Latenz und Speicherauslastung reduziert werden Einen Ansatz zum Messen der Netzwerk Latenz finden <xref:host-and-deploy/blazor/server-side#measure-network-latency>Sie unter. Weitere Informationen zu signalr und blazor finden Sie unter:
+Blazor-Server-apps sollten optimiert werden, um die Benutzeroberflächen Latenz zu minimieren, indem Netzwerk Latenz und Speicherauslastung reduziert werden Einen Ansatz zum Messen der Netzwerk Latenz finden <xref:host-and-deploy/blazor/server#measure-network-latency>Sie unter. Weitere Informationen zu signalr und blazor finden Sie unter:
 
-* <xref:host-and-deploy/blazor/server-side>
-* <xref:security/blazor/server-side>
+* <xref:host-and-deploy/blazor/server>
+* <xref:security/blazor/server>
 
 ### <a name="reconnection-to-the-same-server"></a>Erneute Verbindung mit demselben Server
 
-Serverseitige blazor-apps erfordern eine aktive signalr-Verbindung mit dem Server. Wenn die Verbindung unterbrochen wird, versucht die APP, erneut eine Verbindung mit dem Server herzustellen. Solange sich der Status des Clients weiterhin im Arbeitsspeicher befindet, wird die Client Sitzung fortgesetzt, ohne den Zustand zu verlieren.
+Für blazor-Server-Apps ist eine aktive signalr-Verbindung mit dem Server erforderlich. Wenn die Verbindung unterbrochen wird, versucht die APP, erneut eine Verbindung mit dem Server herzustellen. Solange sich der Status des Clients weiterhin im Arbeitsspeicher befindet, wird die Client Sitzung fortgesetzt, ohne den Zustand zu verlieren.
 
-Wenn der Client erkennt, dass die Verbindung unterbrochen wurde, wird dem Benutzer eine Standardbenutzer Oberfläche angezeigt, während der Client versucht, die Verbindung wiederherzustellen. Wenn bei der erneuten Verbindungs Herstellung ein Fehler auftritt, wird dem Benutzer die Option zum erneuten versuchen bereitgestellt. Definieren Sie zum Anpassen der Benutzeroberfläche ein Element `components-reconnect-modal` mit als `id` dessen auf der Razor Page *_Host. cshtml* . Der Client aktualisiert dieses Element mit einer der folgenden CSS-Klassen basierend auf dem Status der Verbindung:
+Wenn der Client erkennt, dass die Verbindung unterbrochen wurde, wird dem Benutzer eine Standardbenutzer Oberfläche angezeigt, während der Client versucht, die Verbindung wiederherzustellen. Wenn bei der erneuten Verbindungs Herstellung ein Fehler auftritt, wird dem Benutzer die Option zum erneuten versuchen bereitgestellt. Zum Anpassen der Benutzeroberfläche müssen Sie ein Element mit `components-reconnect-modal` als `id` auf der Razor Page *_Host. cshtml* definieren. Der Client aktualisiert dieses Element mit einer der folgenden CSS-Klassen basierend auf dem Status der Verbindung:
 
-* `components-reconnect-show`&ndash; Zeigen Sie die Benutzeroberfläche an, um anzugeben, dass die Verbindung unterbrochen wurde und der Client versucht, die Verbindung wiederherzustellen.
+* `components-reconnect-show` &ndash; zeigt die Benutzeroberfläche an, um eine verlorene Verbindung anzugeben, und der Client versucht, die Verbindung wiederherzustellen.
 * `components-reconnect-hide`&ndash; Der Client verfügt über eine aktive Verbindung, die die Benutzeroberfläche ausblenden.
-* `components-reconnect-failed`&ndash; Fehler beim erneuten Herstellen der Verbindung. Um erneut eine erneute Verbindung herzustellen, `window.Blazor.reconnect()`wird aufgerufen.
+* Fehler bei der erneuten Verbindungs Herstellung von `components-reconnect-failed` &ndash;, wahrscheinlich aufgrund eines Netzwerk Fehlers. Um erneut eine Verbindung herzustellen, wenden Sie `window.Blazor.reconnect()` an.
+* `components-reconnect-rejected` &ndash; erneute Verbindung wurde abgelehnt. Der Server wurde erreicht, hat jedoch die Verbindung abgelehnt, und der Benutzer Zustand auf dem Server ist nicht mehr vorhanden. Um die APP erneut zu laden, nennen Sie `location.reload()`. Der Verbindungsstatus kann folgende Ergebnisse haben:
+  * Ein Absturz in der Verbindung (serverseitiger Code) tritt auf.
+  * Der Client ist so lange getrennt, dass der Server den Zustand des Benutzers löscht. Instanzen von Komponenten, mit denen der Benutzer interagiert hat, werden verworfen.
 
 ### <a name="stateful-reconnection-after-prerendering"></a>Zustands behaftete erneute Verbindung nach der vorab Ausführung
 
-Serverseitige blazor-apps werden standardmäßig so eingerichtet, dass Sie die Benutzeroberfläche auf dem Server vorab ausführen, bevor die Client Verbindung mit dem Server hergestellt wird. Dies wird auf der Razor page " *_Host. cshtml* " eingerichtet:
+Blazor-Server-apps werden standardmäßig so eingerichtet, dass Sie die Benutzeroberfläche auf dem Server vorab ausführen, bevor die Client Verbindung mit dem Server hergestellt wird. Dies wird auf der Razor page " *_Host. cshtml* " eingerichtet:
 
 ```cshtml
 <body>
@@ -156,8 +161,8 @@ Serverseitige blazor-apps werden standardmäßig so eingerichtet, dass Sie die B
 
 | `RenderMode`        | Beschreibung |
 | ------------------- | ----------- |
-| `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine serverseitige blazor-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
-| `Server`            | Rendert einen Marker für eine serverseitige blazor-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
+| `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine blazor-Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
+| `Server`            | Rendert einen Marker für eine blazor-Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. Parameter werden nicht unterstützt. |
 | `Static`            | Rendert die Komponente in statischem HTML-Format. Parameter werden unterstützt. |
 
 Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
@@ -209,9 +214,9 @@ Da `MyComponent` statisch gerendert wird, kann die Komponente nicht interaktiv s
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
-### <a name="configure-the-signalr-client-for-blazor-server-side-apps"></a>Konfigurieren des signalr-Clients für serverseitige blazor-apps
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Konfigurieren des signalr-Clients für blazor-Server-apps
 
-Manchmal müssen Sie den signalr-Client konfigurieren, der von serverseitigen blazor-Apps verwendet wird. Beispielsweise können Sie die Protokollierung auf dem signalr-Client konfigurieren, um ein Verbindungsproblem zu diagnostizieren.
+Manchmal müssen Sie den signalr-Client konfigurieren, der von den blazor-Server-Apps verwendet wird. Beispielsweise können Sie die Protokollierung auf dem signalr-Client konfigurieren, um ein Verbindungsproblem zu diagnostizieren.
 
 So konfigurieren Sie den signalr-Client in der Datei *pages/_Host. cshtml* :
 
