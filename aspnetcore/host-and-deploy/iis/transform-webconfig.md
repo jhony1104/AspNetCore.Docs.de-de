@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie die Datei „web.config“ beim Veröffentlic
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 32e66007d527f7f7b7cfd88d3bebc9b808251941
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: d28c362a200ad433e316bc1af710231a169a30a4
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081462"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007316"
 ---
 # <a name="transform-webconfig"></a>Transformieren von web.config
 
@@ -28,7 +28,7 @@ Transformationen der *web.config*-Datei können automatisch angewendet werden, w
 Diese Transformationen kommen bei den folgenden *web.config*-Generierungsszenarien vor:
 
 * Automatisch generiert vom `Microsoft.NET.Sdk.Web`-SDK.
-* Durch den Entwickler im Inhaltsstammverzeichnis der App bereitgestellt.
+* Durch den Entwickler im [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) der App bereitgestellt.
 
 ## <a name="build-configuration"></a>Buildkonfiguration
 

@@ -4,14 +4,14 @@ author: ardalis
 description: Erfahren Sie, wie Filter funktionieren und wie Sie sie in ASP.NET Core verwenden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2019
+ms.date: 09/28/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 50b199744f32ad19335080da406db69665ec1ae9
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: ed48c2074360768b8d8c5af7057b353b00592394
+ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856158"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72037699"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -437,9 +437,12 @@ Der folgende Code zeigt einen Ergebnisfilter, der einen HTTP-Header hinzufügt:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, würde die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult> beinhalten. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Weitere Informationen zu [Aktionsergebnissen](xref:mvc/controllers/actions)
+Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, würde die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult> beinhalten. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Erfahren Sie mehr zu [Aktionsergebnissen](xref:mvc/controllers/actions).
 
-Ergebnisfilter werden nur für erfolgreiche Ergebnisse ausgeführt, wenn also die Aktion oder Aktionsfilter ein Aktionsergebnis erzeugen. Ergebnisfilter werden nicht ausgeführt, wenn Ausnahmefilter eine Ausnahme behandeln.
+Ergebnisfilter werden nur ausgeführt, wenn eine Aktion oder ein Aktionsfilter ein Aktionsergebnis liefert. Ergebnisfilter werden in folgenden Fällen nicht ausgeführt:
+
+* Ein Autorisierungs- oder Ressourcenfilter schließt die Pipeline kurz.
+* Ein Ausnahmefilter behandelt eine Ausnahme durch Erzeugen eines Aktionsergebnisses.
 
 Die Methode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> kann die Ausführung des Aktionsergebnisses und der nachfolgenden Ergebnisfilter durch Festlegen von <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> auf `true` kurzschließen. Schreiben Sie beim Kurzschließen in das Antwortobjekt, um zu verhindern, dass eine leere Antwort generiert wird. Beim Auslösen einer Ausnahme in `IResultFilter.OnResultExecuting` geschieht Folgendes:
 
@@ -471,12 +474,10 @@ Das Framework stellt ein abstraktes `ResultFilterAttribute` bereit, das als Unte
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>IAlwaysRunResultFilter und IAsyncAlwaysRunResultFilter
 
-Die Schnittstellen <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> deklarieren eine <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>-Implementierung, die für alle Aktionsergebnisse ausgeführt wird. Der Filter wird auf alle Aktionsergebnisse angewendet, es sei denn, es gilt Folgendes:
+Die Schnittstellen <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> deklarieren eine <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>-Implementierung, die für alle Aktionsergebnisse ausgeführt wird. Dies schließt Aktionsergebnisse ein, die von folgenden Filtern generiert werden:
 
-* Ein <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> oder ein <xref:Microsoft.AspNetCore.Mvc.Filters.IAuthorizationFilter> wird angewendet und schließt die Antwort kurz.
-* Ein Ausnahmefilter behandelt eine Ausnahme durch Erzeugen eines Aktionsergebnisses.
-
-Andere Filter als `IExceptionFilter` und `IAuthorizationFilter` schließen `IAlwaysRunResultFilter` und `IAsyncAlwaysRunResultFilter` nicht kurz.
+* Autorisierungs- und Ressourcenfilter, die einen Kurzschluss bewirken
+* Ausnahmefilter
 
 Beispielsweise wird der folgende Filter immer ausgeführt und legt ein Aktionsergebnis (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) mit dem Statuscode *422 – Einheit kann nicht bearbeitet werden* fest, wenn bei der Inhaltsaushandlung ein Fehler auftritt:
 

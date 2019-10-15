@@ -5,14 +5,14 @@ description: Informationen zur Konfiguration von hinter Proxyservern und Lastena
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/12/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 3243f5d3254e6585ff9ca48900a3326aa9b6f502
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 5eb69c2a253d1b8c42edd39b64b595898e6fb948
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71219175"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007291"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich
 
@@ -252,6 +252,60 @@ if (string.Equals(
 }
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="certificate-forwarding"></a>Zertifikatweiterleitung 
+
+### <a name="azure"></a>Azure
+
+Informationen zum Konfigurieren von Azure App Service für die Zertifikatsweiterleitung finden Sie unter [Konfigurieren der gegenseitigen TLS-Authentifizierung für Azure App Service](/azure/app-service/app-service-web-configure-tls-mutual-auth). Die folgende Anleitung bezieht sich auf die Konfiguration der ASP.NET Core-App.
+
+Fügen Sie `Startup.Configure` direkt vor dem Aufruf von `app.UseAuthentication();` den folgenden Code hinzu:
+
+```csharp
+app.UseCertificateForwarding();
+```
+
+
+Konfigurieren Sie die Middleware für die Zertifikatweiterleitung, um den von Azure verwendeten Headernamen anzugeben. Fügen Sie in `Startup.ConfigureServices` den folgenden Code hinzu, um den Header zu konfigurieren, anhand dessen die Middleware ein Zertifikat erstellt:
+
+```csharp
+services.AddCertificateForwarding(options =>
+    options.CertificateHeader = "X-ARR-ClientCert");
+```
+
+### <a name="other-web-proxies"></a>Andere Webproxys
+
+Wenn ein Proxy verwendet wird, der nicht IIS oder Routing von Anwendungsanforderungen von Azure App Service entspricht, konfigurieren Sie den Proxy so, dass das empfangene Zertifikat in einem HTTP-Header weitergeleitet wird. Fügen Sie `Startup.Configure` direkt vor dem Aufruf von `app.UseAuthentication();` den folgenden Code hinzu:
+
+```csharp
+app.UseCertificateForwarding();
+```
+
+Konfigurieren Sie die Middleware für die Zertifikatweiterleitung konfigurieren, um den Headernamen anzugeben. Fügen Sie in `Startup.ConfigureServices` den folgenden Code hinzu, um den Header zu konfigurieren, anhand dessen die Middleware ein Zertifikat erstellt:
+
+```csharp
+services.AddCertificateForwarding(options =>
+    options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
+```
+
+Wenn der Proxy das Zertifikat mit nicht mit base64 codiert (wie bei Nginx), legen Sie die Option `HeaderConverter` fest. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
+
+```csharp
+services.AddCertificateForwarding(options =>
+{
+    options.CertificateHeader = "YOUR_CUSTOM_HEADER_NAME";
+    options.HeaderConverter = (headerValue) => 
+    {
+        var clientCertificate = 
+           /* some conversion logic to create an X509Certificate2 */
+        return clientCertificate;
+    }
+});
+```
+
+::: moniker-end
+
 ## <a name="troubleshoot"></a>Problembehandlung
 
 Wenn Header nicht wie erwartet zugewiesen werden, aktivieren Sie die [Protokollierung](xref:fundamentals/logging/index). Wenn die Protokolle nicht genügend Informationen zur Problembehandlung bereitstellen, listen Sie die vom Server empfangenen Anforderungsheader auf. Verwenden Sie Inlinemiddleware, um Anforderungsheader in eine App-Antwort zu schreiben oder die Header zu protokollieren. 
@@ -336,53 +390,6 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 > [!IMPORTANT]
 > Erlauben Sie nur vertrauenswürdigen Proxys und Netzwerken die Weiterleitung von Headern. Andernfalls sind Angriffe des Typs [IP-Spoofing](https://www.iplocation.net/ip-spoofing) möglich.
-
-## <a name="certificate-forwarding"></a>Zertifikatweiterleitung 
-
-### <a name="on-azure"></a>In Azure
-
-Informationen zum Konfigurieren von Azure-Web-Apps finden Sie in der [Azure-Dokumentation](/azure/app-service/app-service-web-configure-tls-mutual-auth). Fügen Sie in der `Startup.Configure`-Methode Ihrer App den folgenden Code vor dem Aufruf von `app.UseAuthentication();` hinzu:
-
-```csharp
-app.UseCertificateForwarding();
-```
-
-Sie müssen außerdem die Middleware für die Zertifikatweiterleitung konfigurieren, um den Headernamen anzugeben, den Azure verwendet. Fügen Sie in der `Startup.ConfigureServices`-Methode Ihrer App den folgenden Code hinzu, um den Header zu konfigurieren, aus dem die Middleware ein Zertifikat erstellt:
-
-```csharp
-services.AddCertificateForwarding(options =>
-    options.CertificateHeader = "X-ARR-ClientCert");
-```
-
-### <a name="with-other-web-proxies"></a>Mit anderen Webproxys
-
-Wenn Sie einen Proxy verwenden, der nicht IIS oder Routing von Anwendungsanforderungen von Azure-Web-Apps ist, konfigurieren Sie Ihren Proxy so, dass er das empfangene Zertifikat in einem HTTP-Header weiterleitet. Fügen Sie in der `Startup.Configure`-Methode Ihrer App den folgenden Code vor dem Aufruf von `app.UseAuthentication();` hinzu:
-
-```csharp
-app.UseCertificateForwarding();
-```
-
-Sie müssen außerdem die Middleware für die Zertifikatweiterleitung konfigurieren, um den Headernamen anzugeben. Fügen Sie in der `Startup.ConfigureServices`-Methode Ihrer App den folgenden Code hinzu, um den Header zu konfigurieren, aus dem die Middleware ein Zertifikat erstellt:
-
-```csharp
-services.AddCertificateForwarding(options =>
-    options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
-```
-
-Schließlich, wenn der Proxy etwas anderes macht, als das Zertifikat mit base64 zu codieren (wie bei Nginx), legen Sie die Option `HeaderConverter` fest. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
-
-```csharp
-services.AddCertificateForwarding(options =>
-{
-    options.CertificateHeader = "YOUR_CUSTOM_HEADER_NAME";
-    options.HeaderConverter = (headerValue) => 
-    {
-        var clientCertificate = 
-           /* some conversion logic to create an X509Certificate2 */
-        return clientCertificate;
-    }
-});
-```
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
