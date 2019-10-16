@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit dem Azure Key Vault-Konfigurations Anbiet
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/14/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: cc3894df4df169d941f54ef3dfad5d3e6f798aad
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: c8e76068dbcf2a59a15fa75a1fc5aa0032e6acc5
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007402"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334198"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -76,7 +76,7 @@ Wenn diese Geheimnisse in Azure Key Vault im [geheimen Speicher in der Produktio
 
 ## <a name="secret-storage-in-the-production-environment-with-azure-key-vault"></a>Geheimer Speicher in der Produktionsumgebung mit Azure Key Vault
 
-Die Anweisungen des [-Schnellstarts: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe Azure CLI @ no__t-0-Themas werden hier zusammengefasst, um eine Azure Key Vault zu erstellen und Geheimnisse zu speichern, die von der Beispiel-App verwendet werden. Weitere Informationen finden Sie im Thema.
+Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe Azure CLI](/azure/key-vault/quick-create-cli) Themas werden hier zusammengefasst, um eine Azure Key Vault zu erstellen und Geheimnisse zu speichern, die von der Beispiel-App verwendet werden. Weitere Informationen finden Sie im Thema.
 
 1. Öffnen Sie Azure Cloud Shell, indem Sie eine der folgenden Methoden in der [Azure-Portal](https://portal.azure.com/)verwenden:
 
@@ -135,13 +135,13 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
 1. Wählen Sie **neue hinzufügen**aus.
 1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **auswählen** aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
-1. Wählen Sie **OK**.
+1. Klicken Sie auf **OK**.
 1. Klicken Sie auf **Speichern**.
 1. Stellen Sie die APP bereit.
 
 Die Beispiel-app "`Certificate`" erhält Ihre Konfigurationswerte von `IConfigurationRoot` mit dem gleichen Namen wie der geheime Name:
 
-* Nicht hierarchische Werte: Der Wert für "`SecretName`" wird mit `config["SecretName"]` abgerufen.
+* Nicht hierarchische Werte: der Wert für "`SecretName`" wird mit `config["SecretName"]` abgerufen.
 * Hierarchische Werte (Abschnitte): Verwenden Sie die `:`-Notation (Doppelpunkt) oder die `GetSection`-Erweiterungsmethode. Verwenden Sie einen dieser Ansätze zum Abrufen des Konfigurations Werts:
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
@@ -189,6 +189,16 @@ Die Beispiel-App:
 * Die `KeyVaultClient`-Instanz wird mit einer Standard Implementierung von `IKeyVaultSecretManager` verwendet, die alle geheimen Werte lädt und doppelte Bindestriche (`--`) durch Doppelpunkte (`:`) in Schlüsselnamen ersetzt.
 
 [!code-csharp[](key-vault-configuration/sample/Program.cs?name=snippet2&highlight=13-21)]
+
+Beispiel Wert für Key Vault-Name: `contosovault`
+    
+*appsettings.json*:
+
+```json
+{
+  "KeyVaultName": "Key Vault Name"
+}
+```
 
 Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung haben geheime Werte das Suffix "`_dev`", da Sie von Benutzer Geheimnissen bereitgestellt werden. In der Produktionsumgebung werden die Werte mit dem `_prod`-Suffix geladen, da Sie von Azure Key Vault bereitgestellt werden.
 
@@ -258,7 +268,7 @@ Wenn dieser Ansatz implementiert ist:
 
 Der Anbieter ist in der Lage, Konfigurationswerte in ein Array für die Bindung an ein poco-Array zu lesen.
 
-Beim Lesen aus einer Konfigurations Quelle, bei der Schlüssel Trennzeichen (`:`) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`,... `:{n}:`). Weitere Informationen finden Sie unter [configuration: Binden Sie ein Array an eine Klasse @ no__t-0.
+Beim Lesen aus einer Konfigurations Quelle, bei der Schlüssel Trennzeichen (`:`) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`,... `:{n}:`) angezeigt wird. Weitere Informationen finden Sie unter [Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
 
 Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden. Die in diesem Thema beschriebene Vorgehensweise verwendet doppelte Bindestriche (`--`) als Trennzeichen für hierarchische Werte (Abschnitte). Array Schlüssel werden in Azure Key Vault mit doppelten Bindestrichen und numerischen Schlüsselsegmenten (`--0--`, `--1--`, &hellip; `--{n}--`) gespeichert.
 
@@ -323,9 +333,9 @@ Wenn die APP die Konfiguration mit dem Anbieter nicht laden kann, wird eine Fehl
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/configuration/index>
-* [Microsoft Azure: Key Vault @ no__t-0
-* [Microsoft Azure: Key Vault Dokumentation @ no__t-0
+* [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
+* [Microsoft Azure: Key Vault-Dokumentation](/azure/key-vault/)
 * [Generieren und übertragen von HSM-geschützten Schlüsseln für Azure Key Vault](/azure/key-vault/key-vault-hsm-protected-keys)
 * [Keyvaultclient-Klasse](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)
-* [Schnellstart: Festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe einer .net-Web-App @ no__t-0
-* [Tutorial: Verwenden von Azure Key Vault mit dem virtuellen Azure Windows-Computer in. NET @ no__t-0
+* [Schnellstart: festlegen und Abrufen eines Geheimnisses aus Azure Key Vault mithilfe einer .net-Web-App](/azure/key-vault/quick-create-net)
+* [Tutorial: Verwenden von Azure Key Vault mit Azure Windows Virtual Machine in .net](/azure/key-vault/tutorial-net-windows-virtual-machine)

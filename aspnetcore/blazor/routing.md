@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-K
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/09/2019
+ms.date: 10/15/2019
 uid: blazor/routing
-ms.openlocfilehash: 8f48112237e6dd3fed88404c53b8d7d9137ef6ff
-ms.sourcegitcommit: 0b8a7571bf7acf85bf16118acb2435001cbe4b5d
+ms.openlocfilehash: a71709d6b87d8182e90f827d952090aa1e38d701
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/10/2019
-ms.locfileid: "72236531"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391197"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
 
@@ -88,7 +88,7 @@ Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys f�
 ```cshtml
 <Router
     AppAssembly="typeof(Program).Assembly"
-    AdditionalAssemblies="new[] { typeof(Component1).Assembly }>
+    AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
     ...
 </Router>
 ```
@@ -114,7 +114,7 @@ Im folgenden Beispiel entspricht die Route an die Komponente "`Users`" nur, wenn
 
 Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügbar. Informationen zu den Routen Einschränkungen, die mit der invarianten Kultur abgeglichen werden, finden Sie in der Warnung unterhalb der Tabelle.
 
-| Constraint | Beispiel           | Beispiele für Übereinstimmungen                                                                  | Invariante<br>culture<br>Übereinstimmend |
+| Constraint | Beispiel           | Beispiele für Übereinstimmungen                                                                  | Invariante<br>Kultur<br>Übereinstimmend |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
 | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Nein                               |
 | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Ja                              |

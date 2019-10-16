@@ -1,179 +1,179 @@
 ---
-title: Zwischenspeichern von Antworten in ASP.NET Core
+title: Zwischenspeichern von Antworten in ASP.net Core
 author: rick-anderson
 description: Erfahren Sie, wie Sie die Zwischenspeicherung von Antworten verwenden können, um die Bandbreitenanforderungen zu senken und die Leistung von ASP.NET Core-Apps zu steigern.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 02/28/2019
+ms.date: 10/15/2019
 uid: performance/caching/response
-ms.openlocfilehash: 2e247dcff2cbaa3711a9206d7237a061ae351e1d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 4ebac97689347245d25e0954b33729d78dd1b516
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892467"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378830"
 ---
-# <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.NET Core
+# <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.net Core
 
-Durch [John Luo](https://github.com/JunTaoLuo), [Rick Anderson](https://twitter.com/RickAndMSFT), [Steve Smith](https://ardalis.com/), und [Luke Latham](https://github.com/guardrex)
+Von [John Luo](https://github.com/JunTaoLuo), [Rick Anderson](https://twitter.com/RickAndMSFT), [Steve Smith](https://ardalis.com/)und [Luke Latham](https://github.com/guardrex)
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Zwischenspeichern von Antworten reduziert die Anzahl der Anforderungen, die ein Client oder Proxy an einen Webserver sendet. Zwischenspeichern von Antworten auch verringert die Menge der Arbeit der Webserver ausgeführt werden, um eine Antwort zu generieren. Zwischenspeichern von Antworten wird durch Header gesteuert werden, die angeben, wie Sie Client und Proxy-Middleware zum Zwischenspeichern von Antworten soll.
+Beim Zwischenspeichern von Antworten wird die Anzahl von Anforderungen reduziert, die ein Client oder Proxy an einen Webserver sendet. Durch das Zwischenspeichern von Antworten wird auch der Arbeitsaufwand reduziert, der vom Webserver zum Generieren einer Antwort ausgeführt wird. Das Zwischenspeichern von Antworten wird durch Header gesteuert, die angeben, wie die Client-, Proxy-und Middleware Antworten zwischenspeichern soll.
 
-Die [ResponseCache-Attribut](#responsecache-attribute) beim Festlegen der Antwort-Header, welche Clients möglicherweise, beim Zwischenspeichern von Antworten berücksichtigt Zwischenspeichern teilnimmt. [Zwischenspeichern von Antworten-Middleware](xref:performance/caching/middleware) kann zum Zwischenspeichern von Antworten auf dem Server verwendet werden. Die Middleware können <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Eigenschaften für das serverseitige Zwischenspeichern Verhalten zu beeinflussen.
+Das [responsecache-Attribut](#responsecache-attribute) ist an der Einstellung von Antwort Cache Headern beteiligt, die Clients beim Zwischenspeichern von Antworten berücksichtigen können. Die [Middleware zum Zwischenspeichern](xref:performance/caching/middleware) von Antworten kann zum Zwischenspeichern von Antworten auf dem Server verwendet werden. Die Middleware kann die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>-Eigenschaften verwenden, um das Verhalten der serverseitigen Zwischenspeicherung zu beeinflussen.
 
-## <a name="http-based-response-caching"></a>Zwischenspeichern von Antworten HTTP-basierte
+## <a name="http-based-response-caching"></a>HTTP-basiertes Zwischenspeichern von Antworten
 
-Die [Zwischenspeichern von HTTP 1.1-Spezifikation](https://tools.ietf.org/html/rfc7234) beschrieben, wie internetcaches Verhalten soll. Der primäre HTTP-Header für das caching verwendet [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2), dient zum Angeben der Cache *Direktiven*. Die Anweisungen Steuern des zwischenspeicherverhaltens Anforderungen ihren Weg von den Clients an Server senden und Antworten an Clients ihren Weg von Servern machen. Verschieben von Anforderungen und Antworten über Proxyserver und webanwendungsproxy-Server müssen auch der Zwischenspeicherung von HTTP 1.1-Spezifikation entsprechen.
+In der [http 1,1-cachingspezifikation](https://tools.ietf.org/html/rfc7234) wird beschrieben, wie sich die Internet Caches Verhalten. Der primäre HTTP-Header, der zum Zwischenspeichern verwendet wird, ist [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2), der zum Angeben von Cache *Anweisungen*verwendet wird. Die Direktiven steuern das zwischen Speicherungs Verhalten, da Anforderungen von Clients auf Server und Antworten von Servern an Clients zurückgeben. Anforderungen und Antworten werden durch Proxy Server verschoben, und Proxy Server müssen ebenfalls der HTTP 1,1-cachingspezifikation entsprechen.
 
-Allgemeine `Cache-Control` Direktiven werden in der folgenden Tabelle angezeigt.
+Allgemeine `Cache-Control`-Anweisungen sind in der folgenden Tabelle aufgeführt.
 
-| Direktive                                                       | Aktion |
+| Anweisung                                                       | Aktion |
 | --------------------------------------------------------------- | ------ |
-| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Ein Cache kann die Antwort speichern. |
-| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Die Antwort muss nicht von einem freigegebenen Cache gespeichert werden. Ein privater Cache möglicherweise speichern und Wiederverwenden von der Antwort. |
-| [Max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Der Client nicht mit einer Antwort akzeptiert, deren Alter größer als die angegebene Anzahl von Sekunden ist. Beispiele: `max-age=60` (60 Sekunden), `max-age=2592000` (1 Monat) |
-| [ohne-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Für Anforderungen**: Ein Cache darf keine gespeicherte Antwort verwenden, zum Erfüllen der Anforderung. Der Ursprungsserver generiert die Antwort für den Client neu, und die Middleware wird die gespeicherte Antworten in seinem Cache aktualisiert.<br><br>**Für Antworten**: Die Antwort darf nicht für eine nachfolgende Anforderung ohne Überprüfung auf dem Ursprungsserver verwendet werden. |
-| [ohne-store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Für Anforderungen**: Ein Cache muss die Anforderung nicht speichern.<br><br>**Für Antworten**: Ein Cache muss einen beliebigen Teil der Antwort nicht speichern. |
+| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Die Antwort kann in einem Cache gespeichert werden. |
+| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Die Antwort darf nicht von einem freigegebenen Cache gespeichert werden. In einem privaten Cache kann die Antwort gespeichert und wieder verwendet werden. |
+| [Max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Der Client akzeptiert keine Antwort, deren Alter größer ist als die angegebene Anzahl von Sekunden. Beispiele: `max-age=60` (60 Sekunden), `max-age=2592000` (1 Monat) |
+| [No-Cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Bei Anforderungen**: ein Cache darf keine gespeicherte Antwort verwenden, um die Anforderung zu erfüllen. Der Ursprungsserver generiert die Antwort für den Client erneut, und die Middleware aktualisiert die gespeicherte Antwort im Cache.<br><br>**Bei Antworten**: die Antwort darf nicht für eine nachfolgende Anforderung ohne Validierung auf dem Ursprungsserver verwendet werden. |
+| [No-Store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Bei Anforderungen**: die Anforderung darf nicht in einem Cache gespeichert werden.<br><br>**Bei Antworten**: ein Cache darf keinen Teil der Antwort speichern. |
 
-Andere Cacheheader, die Zwischenspeichern eine Rolle spielen, werden in der folgenden Tabelle angezeigt.
+Andere Cache Header, die eine Rolle beim Caching spielen, sind in der folgenden Tabelle aufgeführt.
 
 | Header                                                     | Funktion |
 | ---------------------------------------------------------- | -------- |
-| [ALTER](https://tools.ietf.org/html/rfc7234#section-5.1)     | Eine Schätzung der die Zeitspanne in Sekunden seit der Antwort generiert oder erfolgreich auf dem Ursprungsserver überprüft wurde. |
-| [Läuft ab](https://tools.ietf.org/html/rfc7234#section-5.3) | Die Zeit nach der die Antwort als veraltet angesehen wird. |
-| [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | Vorhanden ist, für die Abwärtskompatibilität mit HTTP/1.0 für die Einstellung speichert `no-cache` Verhalten. Wenn die `Cache-Control` Header vorhanden ist, ist die `Pragma` Header wird ignoriert. |
-| [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | Gibt an, dass eine zwischengespeicherte Antwort nicht, wenn alle gesendet werden muss von der `Vary` Headerfelder in der zwischengespeicherten Antwort zur ursprünglichen Anforderung und die neue Anforderung zu entsprechen. |
+| [Eder](https://tools.ietf.org/html/rfc7234#section-5.1)     | Eine Schätzung der Zeitspanne (in Sekunden), seit die die Antwort auf dem Ursprungsserver generiert oder erfolgreich überprüft wurde. |
+| [Laufzeit](https://tools.ietf.org/html/rfc7234#section-5.3) | Die Zeit, nach der die Antwort als veraltet eingestuft wird. |
+| [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | Ist aus Gründen der Abwärtskompatibilität mit HTTP/1.0-Caches zum Festlegen des `no-cache`-Verhaltens vorhanden. Wenn der `Cache-Control`-Header vorhanden ist, wird der Header `Pragma` ignoriert. |
+| [Abweichen](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | Gibt an, dass eine zwischengespeicherte Antwort nicht gesendet werden darf, es sei denn, alle Header Felder der @no__t 0 Stimmen in der ursprünglichen Anforderung der zwischengespeicherten Antwort und der neuen Anforderung. |
 
-## <a name="http-based-caching-respects-request-cache-control-directives"></a>Zwischenspeichern Hinsicht HTTP-basierte Anforderung cachesteuerungsdirektiven
+## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP-basiertes Zwischenspeichern, Anforderungs Cache-Steuerungs Direktiven
 
-Die [Zwischenspeichern von HTTP 1.1-Spezifikation für den Cache-Control-Header](https://tools.ietf.org/html/rfc7234#section-5.2) erfordert einen Cache, der einen gültigen berücksichtigt `Cache-Control` Header, die vom Client gesendet werden. Ein Client kann Anforderungen mit stellen eine `no-cache` Headerwert und erzwingen Sie den Server aus, um eine neue Antwort für jede Anforderung zu generieren.
+Die [http 1,1-cachingspezifikation für den Cache-Control-Header](https://tools.ietf.org/html/rfc7234#section-5.2) erfordert einen Cache, um einen gültigen `Cache-Control`-Header zu berücksichtigen, der vom Client gesendet wird. Ein Client kann Anforderungen mit einem `no-cache`-Header Wert senden und erzwingen, dass der Server eine neue Antwort für jede Anforderung generiert.
 
-Berücksichtigt immer Client `Cache-Control` Anforderungsheader ist sinnvoll, wenn Sie das Ziel der HTTP-Zwischenspeicherung in Betracht ziehen. In der offiziellen Spezifikation Zwischenspeicherung dient zum Reduzieren des Latenz und Aufwand der Erfüllung der Anforderungen in einem Netzwerk von Clients, Proxys und Servern. Es ist nicht unbedingt eine Möglichkeit zum Steuern der Last auf einem Ursprungsserver.
+Client-`Cache-Control`-Anforderungs Header sind immer sinnvoll, wenn Sie das Ziel der HTTP-Zwischenspeicherung in Erwägung gezogen haben. Unter der offiziellen Spezifikation soll das Caching die Latenz und den Netzwerk Aufwand bei der Erfüllung von Anforderungen in einem Netzwerk von Clients, Proxys und Servern reduzieren. Es ist nicht notwendigerweise eine Möglichkeit, die Last auf einem Ursprungsserver zu steuern.
 
-Ist kein Entwickler-Steuerelement über dieses Verhalten beim Zwischenspeichern bei Verwendung der [Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware) , da die Middleware der offiziellen zwischenspeicherungsspezifikation entspricht. [Verbesserungen an die Middleware geplant](https://github.com/aspnet/AspNetCore/issues/2612) sind eine gute Gelegenheit zum Konfigurieren der Middleware zum Ignorieren von einer Anforderung `Cache-Control` Header, die bei der Entscheidung, um eine zwischengespeicherte Antwort zu verarbeiten. Geplante-Erweiterungen bieten die Möglichkeit, eine bessere Kontrolle serverauslastung.
+Es gibt keine Entwickler Kontrolle über dieses zwischen Speicherungs Verhalten, wenn die [Middleware](xref:performance/caching/middleware) zum Zwischenspeichern von Antworten verwendet wird, da die Middleware die offizielle cachingspezifikation befolgt. [Geplante Erweiterungen der Middleware](https://github.com/aspnet/AspNetCore/issues/2612) sind die Möglichkeit, die Middleware so zu konfigurieren, dass Sie den `Cache-Control`-Header einer Anforderung ignoriert, wenn Sie sich für eine zwischengespeicherte Antwort entscheiden. Geplante Erweiterungen bieten die Möglichkeit, die Serverlast besser zu steuern.
 
-## <a name="other-caching-technology-in-aspnet-core"></a>Andere cachetechnologie in ASP.NET Core
+## <a name="other-caching-technology-in-aspnet-core"></a>Andere cachingtechnologie in ASP.net Core
 
-### <a name="in-memory-caching"></a>Zwischenspeicherung im Arbeitsspeicher
+### <a name="in-memory-caching"></a>Zwischenspeichern im Arbeitsspeicher
 
-Zwischenspeicherung im Arbeitsspeicher verwendet Server-Speicher zum Speichern von zwischengespeicherter Daten. Diese Form des Cachings eignet sich für einen einzelnen oder mehrerer Server mithilfe von *persistente Sitzungen*. Persistente Sitzungen bedeutet, dass die Anforderungen von einem Client immer auf dem gleichen Server zur Verarbeitung weitergeleitet werden.
+In-Memory-Caching verwendet Server Arbeitsspeicher zum Speichern von zwischengespeicherten Daten. Diese Art der Zwischenspeicherung eignet sich für einen einzelnen Server oder mehrere Server, die persistente *Sitzungen*verwenden. Mit "persistente Sitzungen" können die Anforderungen von einem Client für die Verarbeitung immer an denselben Server weitergeleitet werden.
 
 Weitere Informationen finden Sie unter <xref:performance/caching/memory>.
 
 ### <a name="distributed-cache"></a>Verteilter Cache
 
-Verwenden Sie einen verteilten Cache zum Speichern von Daten im Arbeitsspeicher, wenn die app in einer Cloud oder Server-Farm gehostet wird. Der Cache wird auf allen Servern gemeinsam genutzt, die Anforderungen verarbeiten. Ein Client kann eine Anforderung übermitteln, die von einem beliebigen Server in der Gruppe verarbeitet wird, wenn zwischengespeicherte Daten für den Client verfügbar sind. ASP.NET Core bietet SQL Server und verteilt Redis-Caches.
+Verwenden Sie einen verteilten Cache, um Daten im Arbeitsspeicher zu speichern, wenn die app in einer Cloud-oder Serverfarm gehostet wird. Der Cache wird auf den Servern freigegeben, die Anforderungen verarbeiten. Ein Client kann eine Anforderung übermitteln, die von einem beliebigen Server in der Gruppe verarbeitet wird, wenn zwischengespeicherte Daten für den Client verfügbar sind. ASP.net Core bietet SQL Server und verteilbare redis-Caches.
 
 Weitere Informationen finden Sie unter <xref:performance/caching/distributed>.
 
-### <a name="cache-tag-helper"></a>Cache-Taghilfsprogramm
+### <a name="cache-tag-helper"></a>Cache-taghilfsprogramm
 
-Zwischenspeichern Sie, den Inhalt von einem MVC-Ansicht oder Razor-Seite mit dem der Cache-Taghilfsprogramm. Das Cache-Taghilfsprogramm verwendet speicherinternes caching, um Daten zu speichern.
+Zwischenspeichern des Inhalts aus einer MVC-Ansicht oder-Razor Page mit dem cachetaghilfsprogramm. Das Cache-taghilfsprogramm verwendet das Zwischenspeichern im Arbeitsspeicher zum Speichern von Daten.
 
 Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>.
 
 ### <a name="distributed-cache-tag-helper"></a>Taghilfsprogramm für verteilten Cache
 
-Zwischenspeichern Sie, den Inhalt von einem MVC-Ansicht oder Razor-Seite in verteilten Cloud oder Web-Webfarm-Szenarios mit dem Taghilfsprogramm für verteilten Cache. Das Taghilfsprogramm für verteilten Cache werden SQL Server oder Redis verwendet, um Daten zu speichern.
+Speichern Sie den Inhalt aus einer MVC-Ansicht oder einer Razor page in verteilten Cloud-oder Webfarm Szenarios mit dem taghilfsprogramm für verteilte Caches. Das taghilfsprogramm für verteilte Caches verwendet SQL Server oder redis zum Speichern von Daten.
 
 Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.
 
-## <a name="responsecache-attribute"></a>ResponseCache-Attribut
+## <a name="responsecache-attribute"></a>Response Cache-Attribut
 
-Die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> gibt die Parameter zum Festlegen der entsprechenden Header in das Zwischenspeichern von Antworten erforderlich sind.
+Mit dem <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> werden die Parameter angegeben, die zum Festlegen geeigneter Header beim Zwischenspeichern von Antworten erforderlich sind.
 
 > [!WARNING]
-> Deaktivieren Sie die Zwischenspeicherung für Inhalte, die Informationen für authentifizierte Clients enthält. Zwischenspeichern von sollte nur aktiviert werden, für Inhalte, die sich nicht ändert, die anhand eines Benutzers Identität oder, ob ein Benutzer angemeldet ist.
+> Deaktivieren Sie das Zwischenspeichern für Inhalte, die Informationen für authentifizierte Clients enthalten. Das Zwischenspeichern sollte nur für Inhalt aktiviert werden, der sich nicht auf der Grundlage der Identität eines Benutzers ändert, oder ob ein Benutzer angemeldet ist.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> hängt von der gespeicherten Antwort nach den Werten der angegebenen Liste von Abfrage-Schlüssel. Wenn ein einzelner Wert des `*` angegeben wird, hängt von die Middleware Antworten von allen anfordern, Abfragezeichenfolgen-Parameter.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> variiert die gespeicherte Antwort anhand der Werte der angegebenen Liste von Abfrage Schlüsseln. Wenn ein einzelner Wert `*` angegeben wird, variiert die Middleware bei allen Anforderungs Abfrage-Zeichen folgen Parametern.
 
-[Antworten Zwischenspeichern Middleware](xref:performance/caching/middleware) muss aktiviert werden, um das Festlegen der <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> Eigenschaft. Andernfalls wird eine Laufzeitausnahme ausgelöst. Es gibt keine entsprechenden HTTP-Header für die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> Eigenschaft. Die Eigenschaft ist eine HTTP-Funktion, die von Antworten Zwischenspeichern Middleware verarbeitet. Für die Middleware, um eine zwischengespeicherte Antwort zu verarbeiten müssen der Abfragezeichenfolge und den Wert der Abfragezeichenfolge eine vorherige Anforderung übereinstimmen. Betrachten Sie beispielsweise die Reihenfolge der Anforderungen und Ergebnissen, die in der folgenden Tabelle gezeigt.
+Die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware) muss aktiviert sein, um die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>-Eigenschaft festzulegen. Andernfalls wird eine Lauf Zeit Ausnahme ausgelöst. Es gibt keinen entsprechenden HTTP-Header für die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>-Eigenschaft. Die-Eigenschaft ist eine HTTP-Funktion, die von der zwischenware zum Zwischenspeichern von Antworten Damit die Middleware eine zwischengespeicherte Antwort bereitstellt, müssen die Abfrage Zeichenfolge und der Abfrage Zeichenfolgen-Wert mit einer vorherigen Anforderung identisch sein. Stellen Sie sich z. b. die Abfolge der in der folgenden Tabelle gezeigten Anforderungen und Ergebnisse vor.
 
 | Anforderung                          | Ergebnis                    |
 | -------------------------------- | ------------------------- |
 | `http://example.com?key1=value1` | Vom Server zurückgegeben. |
-| `http://example.com?key1=value1` | Zurückgegeben von Middleware. |
+| `http://example.com?key1=value1` | Von der Middleware zurückgegeben. |
 | `http://example.com?key1=value2` | Vom Server zurückgegeben. |
 
-Die erste Anforderung wird vom Server zurückgegebenen und im Middleware zwischengespeichert. Die zweite Anforderung wird von Middleware zurückgegeben, da die Abfragezeichenfolge die vorherige Anforderung übereinstimmt. Die dritte Anforderung ist nicht im Cache Middleware, dass Abfragezeichenfolgen-Werts nicht mit eine vorherige Anforderung übereinstimmt.
+Die erste Anforderung wird vom Server zurückgegeben und in der Middleware zwischengespeichert. Die zweite Anforderung wird von Middleware zurückgegeben, da die Abfrage Zeichenfolge mit der vorherigen Anforderung übereinstimmt. Die dritte Anforderung befindet sich nicht im middlewarecache, da der Wert der Abfrage Zeichenfolge mit einer vorherigen Anforderung nicht identisch ist.
 
-Die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> dient zum Konfigurieren und erstellen Sie (über <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>) eine <xref:Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter>. Die <xref:Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter> die Arbeit der Aktualisierung des entsprechenden HTTP-Header und Funktionen der Antwort durchführt. Der Filter:
+Der <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> wird zum Konfigurieren und erstellen (über <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>) einer `Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter` verwendet. Der `ResponseCacheFilter` führt die Aktualisierung der entsprechenden HTTP-Header und Features der Antwort aus. Der Filter:
 
-* Entfernt alle vorhandenen Header für `Vary`, `Cache-Control`, und `Pragma`.
-* Schreibt die entsprechenden Header auf Grundlage der Eigenschaften legen Sie in der <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>.
-* Aktualisiert die Antwort Zwischenspeichern von HTTP-Funktion, wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> festgelegt ist.
+* Entfernt alle vorhandenen Header für "`Vary`", "`Cache-Control`" und "`Pragma`".
+* Schreibt die entsprechenden Header basierend auf den Eigenschaften, die in der <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> festgelegt sind.
+* Aktualisiert das HTTP-Feature zum Zwischenspeichern von Antworten, wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> festgelegt ist.
 
-### <a name="vary"></a>Variieren
+### <a name="vary"></a>Abweichen
 
-Dieser Header wird nur geschrieben, wenn die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> festgelegt wird. Die Eigenschaft auf die `Vary` Eigenschaftswert. Das folgende Beispiel verwendet die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> Eigenschaft:
+Dieser Header wird nur geschrieben, wenn die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader>-Eigenschaft festgelegt ist. Die Eigenschaft, die auf den Wert der `Vary`-Eigenschaft festgelegt ist. Im folgenden Beispiel wird die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader>-Eigenschaft verwendet:
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache1.cshtml.cs?name=snippet)]
 
-Verwenden die Beispiel-app, zeigen Sie die Antwortheadern mit Netzwerktools des Browsers. Die folgenden Antwortheader werden mit der Cache1 Seitenantwort gesendet werden:
+Verwenden Sie die Beispiel-APP, um die Antwortheader mit den Netzwerk Tools des Browsers anzuzeigen. Die folgenden Antwortheader werden mit der Cache1-Seiten Antwort gesendet:
 
 ```
 Cache-Control: public,max-age=30
 Vary: User-Agent
 ```
 
-### <a name="nostore-and-locationnone"></a>NoStore und Location.None
+### <a name="nostore-and-locationnone"></a>NoStore und Location. None
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> überschreibt die meisten anderen Eigenschaften. Wenn diese Eigenschaft auf festgelegt ist `true`, `Cache-Control` Header nastaven NA hodnotu `no-store`. Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> nastaven NA hodnotu `None`:
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> überschreibt die meisten anderen Eigenschaften. Wenn diese Eigenschaft auf `true` festgelegt ist, wird der Header `Cache-Control` auf `no-store` festgelegt. Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> auf `None` festgelegt ist:
 
 * Für `Cache-Control` ist `no-store,no-cache` festgelegt.
 * Für `Pragma` ist `no-cache` festgelegt.
 
-Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> ist `false` und <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> ist `None`, `Cache-Control`, und `Pragma` festgelegt `no-cache`.
+Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> `false` und <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None`, `Cache-Control` und `Pragma` auf `no-cache` festgelegt sind.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> in der Regel festgelegt ist, um `true` für Fehlerseiten. Die Cache2-Seite in der Beispiel-app erzeugt die Antwortheader, die dem Client nicht zum Speichern der Antwort die Anweisung.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> ist in der Regel für Fehlerseiten auf `true` festgelegt. Die Cache2-Seite in der Beispiel-app erzeugt Antwortheader, die den Client anweisen, die Antwort nicht zu speichern.
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache2.cshtml.cs?name=snippet)]
 
-Die Beispiel-app gibt die Cache2-Seite mit den folgenden Headern zurück:
+Die Beispiel-App gibt die Cache2-Seite mit den folgenden Headern zurück:
 
 ```
 Cache-Control: no-store,no-cache
 Pragma: no-cache
 ```
 
-### <a name="location-and-duration"></a>Position und Dauer
+### <a name="location-and-duration"></a>Speicherort und Dauer
 
-Zum Aktivieren der Zwischenspeicherung, <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> muss auf einen positiven Wert festgelegt werden und <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> muss `Any` (Standard) oder `Client`. In diesem Fall die `Cache-Control` Header wird festgelegt, um den Speicherort angeben, gefolgt von der `max-age` der Antwort.
+Um das Zwischenspeichern zu aktivieren, muss <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> auf einen positiven Wert festgelegt werden, und <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> muss entweder `Any` (Standard) oder `Client` sein. In diesem Fall wird der `Cache-Control`-Header auf den Speicherort Wert festgelegt, gefolgt vom `max-age` der Antwort.
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>die Optionen der `Any` und `Client` übersetzen in `Cache-Control` Headerwerte `public` und `private`bzw. Wie bereits erwähnt, festlegen <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> zu `None` legt sowohl `Cache-Control` und `Pragma` Header `no-cache`.
+> die Optionen `Any` und `Client` von <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> werden in `Cache-Control`-Header Werte `public` bzw. `private` übersetzt. Wie bereits erwähnt, legt das Festlegen von <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> auf `None` `Cache-Control`-und `Pragma`-Header auf `no-cache` fest.
 
-Das folgende Beispiel zeigt das Cache3 Seitenmodell aus der Beispiel-app und die Header, der ergibt, wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> und verlassen die Standardeinstellung <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> Wert:
+Das folgende Beispiel zeigt das Cache3 Page Model aus der Beispiel-APP und die durch Festlegen von <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> erstellten Header und die standardmäßige <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>-Werte:
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache3.cshtml.cs?name=snippet)]
 
-Die Beispiel-app gibt die Cache3-Seite mit den folgenden Header:
+Die Beispiel-App gibt die Cache3-Seite mit dem folgenden Header zurück:
 
 ```
 Cache-Control: public,max-age=10
 ```
 
-### <a name="cache-profiles"></a>Cacheprofile
+### <a name="cache-profiles"></a>Cache profile
 
-Anstelle von Antwort-cacheeinstellungen auf vielen Attributen für Controller-Aktion zu wiederholen, können Cacheprofile als Optionen konfiguriert werden, bei der Einrichtung von MVC-Razor-Seiten im `Startup.ConfigureServices`. In einer referenzierten Cacheprofil, gefundenen Werte werden verwendet, die standardmäßig von der <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> und werden überschrieben, nach beliebigen Eigenschaften des Attributs angegeben.
+Anstatt die Einstellungen für den Antwort Cache für viele Controller Aktions Attribute zu duplizieren, können Cache Profile beim Einrichten von MVC/Razor pages in `Startup.ConfigureServices` als Optionen konfiguriert werden. Werte, die in einem Cache Profil gefunden werden, auf das verwiesen wird, werden als Standardwerte <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> verwendet und von allen Eigenschaften überschrieben, die für das Attribut angegeben sind.
 
-Richten Sie ein Cacheprofil. Das folgende Beispiel zeigt ein 30 zweite Cacheprofil in der Beispiel-app `Startup.ConfigureServices`:
+Einrichten eines Cache Profils. Das folgende Beispiel zeigt ein Cache Profil mit 30 Sekunden im `Startup.ConfigureServices` der Beispiel-App:
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
 
-Die Beispiel-app Cache4 Seite modellverweisen der `Default30` Zwischenspeichern Profil:
+Das Cache4-Seiten Modell der Beispiel-App verweist auf das Cache Profil "`Default30`":
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache4.cshtml.cs?name=snippet)]
 
-Die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> auf angewendet werden können:
+Die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> kann auf Folgendes angewendet werden:
 
-* Razor-Seitenhandler (Klassen) &ndash; Attribute können nicht auf Handlermethoden angewendet werden.
+* Razor Page Handler (Klassen) &ndash;-Attribute können nicht auf Handlermethoden angewendet werden.
 * MVC-Controller (Klassen).
-* MVC-Aktionen (Methoden) &ndash; auf Methodenebene Attribute überschreiben die Einstellungen, die in den auf Klassenebene Attribute angegeben.
+* MVC-Aktionen (Methoden) &ndash;-Attribute auf Methoden Ebene überschreiben die in Attributen auf Klassenebene angegebenen Einstellungen.
 
-Den resultierenden Header, die auf die Cache4 Seitenantwort angewendet, die `Default30` Zwischenspeichern Profil:
+Der resultierende Header, der für die Antwort auf die Cache4-Seite vom Cache Profil "`Default30`" übernommen wird:
 
 ```
 Cache-Control: public,max-age=30
@@ -181,7 +181,7 @@ Cache-Control: public,max-age=30
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Das Speichern von Antworten in Caches](https://tools.ietf.org/html/rfc7234#section-3)
+* [Speichern von Antworten in Caches](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-Control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
 * <xref:performance/caching/memory>
 * <xref:performance/caching/distributed>

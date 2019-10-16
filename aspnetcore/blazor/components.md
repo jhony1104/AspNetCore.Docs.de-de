@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: 3e0966bf978c99fc00db7682bea3292306cbb03c
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: a71bbf3921417cbd23aeb14d0d78ad8354d6e93a
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179026"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378687"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -692,7 +692,7 @@ Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu ve
 Wenn die Komponente gerendert wird, wird das Feld `loginDialog` mit der untergeordneten Komponenteninstanz `MyLoginDialog` aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
 
 > [!IMPORTANT]
-> Die `loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die Methoden `OnAfterRenderAsync` oder `OnAfterRender`.
+> Die `loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](#lifecycle-methods).
 
 Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an den JavaScript-Code @ no__t-0Die werden nur in .NET-Code verwendet.
 
@@ -841,6 +841,9 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
+> [!NOTE]
+> Asynchrone Arbeit während der Initialisierung der Komponente muss während des `OnInitializedAsync`-Lebenszyklus Ereignisses stattfinden.
+
 Verwenden Sie für einen synchronen Vorgang `OnInitialized`:
 
 ```csharp
@@ -859,6 +862,9 @@ protected override async Task OnParametersSetAsync()
 }
 ```
 
+> [!NOTE]
+> Asynchrone Arbeit beim Anwenden von Parametern und Eigenschafts Werten muss während des `OnParametersSetAsync`-Lebenszyklus Ereignisses auftreten.
+
 ```csharp
 protected override void OnParametersSet()
 {
@@ -868,7 +874,7 @@ protected override void OnParametersSet()
 
 `OnAfterRenderAsync` und `OnAfterRender` werden aufgerufen, nachdem eine Komponente das Rendering abgeschlossen hat. Element-und Komponenten Verweise werden an diesem Punkt aufgefüllt. Verwenden Sie diese Phase, um zusätzliche Initialisierungs Schritte unter Verwendung des gerenderten Inhalts auszuführen, z. b. das Aktivieren von JavaScript-Bibliotheken von Drittanbietern, die auf den gerenderten Dom
 
-`OnAfterRender` *wird nicht aufgerufen, wenn die vorab Erstellung auf dem Server erfolgt.*
+`OnAfterRender` wird *nicht aufgerufen, wenn die Vorabversion auf dem Server* durchgeführt wird.
 
 Der Parameter "`firstRender`" für `OnAfterRenderAsync` und `OnAfterRender` lautet:
 
@@ -884,6 +890,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
     }
 }
 ```
+
+> [!NOTE]
+> Asynchrone Arbeit unmittelbar nach dem Rendering muss während des `OnAfterRenderAsync`-Lebenszyklus Ereignisses stattfinden.
 
 ```csharp
 protected override void OnAfterRender(bool firstRender)
@@ -1294,7 +1303,7 @@ Die Komponente "`CascadingValuesParametersTabSet`" verwendet die Komponente "`Ta
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
 
-Die untergeordneten `Tab`-Komponenten werden nicht explizit als Parameter an `TabSet` übermittelt. Stattdessen sind die untergeordneten `Tab`-Komponenten Teil des untergeordneten Inhalts von `TabSet`. Die `TabSet` muss jedoch immer noch über jede `Tab`-Komponente informiert werden, damit Sie die Header und die aktive Registerkarte Rendering können. Um diese Koordination zu aktivieren, ohne dass zusätzlicher Code erforderlich ist, kann sich die Komponente "`TabSet`" *als kaskadierenden Wert bereitstellen* , der dann von den untergeordneten `Tab`-Komponenten abgerufen wird.
+Die untergeordneten `Tab`-Komponenten werden nicht explizit als Parameter an `TabSet` übermittelt. Stattdessen sind die untergeordneten `Tab`-Komponenten Teil des untergeordneten Inhalts von `TabSet`. Die `TabSet` muss jedoch immer noch über jede `Tab`-Komponente informiert werden, damit Sie die Header und die aktive Registerkarte Rendering können. Um diese Koordination zu aktivieren, ohne dass zusätzlicher Code erforderlich ist, kann sich die `TabSet`-Komponente *als kaskadierenden Wert bereitstellen* , der dann von den Nachfolger `Tab`-Komponenten abgerufen wird.
 
 `TabSet`-Komponente:
 
@@ -1429,16 +1438,16 @@ builder.AddContent(1, "Second");
 
 Wenn der Code zum ersten Mal ausgeführt wird, wenn `someFlag` `true` ist, empfängt der Generator Folgendes:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Zweimal |
+| 0        | Textknoten | First  |
+| 1        | Textknoten | Second |
 
 Stellen Sie sich vor, dass `someFlag` `false` ist, und dass das Markup wieder gerendert wird. Dieses Mal empfängt der Generator Folgendes:
 
-| Sequenz | Typ       | Daten   |
+| Sequenz | Geben Sie Folgendes ein:       | Daten   |
 | :------: | ---------- | :----: |
-| 1        | Textknoten  | Zweimal |
+| 1        | Textknoten  | Second |
 
 Wenn die Laufzeit einen Diff-Vorgang ausführt, wird angezeigt, dass das Element bei Sequenz `0` entfernt wurde, sodass das folgende triviale *Bearbeitungs Skript*generiert wird:
 
@@ -1461,16 +1470,16 @@ builder.AddContent(seq++, "Second");
 
 Nun lautet die erste Ausgabe wie folgt:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Zweimal |
+| 0        | Textknoten | First  |
+| 1        | Textknoten | Second |
 
 Dieses Ergebnis ist mit dem vorherigen Fall identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag` ist für das zweite Rendering `false`, und die Ausgabe lautet:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | ------ |
-| 0        | Textknoten | Zweimal |
+| 0        | Textknoten | Second |
 
 Dieses Mal sieht der Vergleichsalgorithmus, dass *zwei* Änderungen aufgetreten sind, und der Algorithmus generiert das folgende Bearbeitungs Skript:
 
