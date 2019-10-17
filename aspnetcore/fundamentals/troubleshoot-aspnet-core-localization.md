@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Probleme mit der Lokalisierung von ASP.NET Co
 ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: c76732c1a0389818f8f9efae8fe384ca0f9ca308
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 98e06a92af0b6c045095ac803196bf4b1f25e5c5
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087383"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289014"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Problembehandlung bei der ASP.NET Core-Lokalisierung
 
@@ -75,6 +75,7 @@ Mit [CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization
 
 - Fügen Sie den benutzerdefinierten Anbieter wie folgt an der Position 0 in die `RequestCultureProviders` Liste ein:
 
+::: moniker range="< aspnetcore-3.0"
 ```csharp
 options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
     {
@@ -82,6 +83,17 @@ options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async
         return new ProviderCultureResult("en");
     }));
 ```
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+```csharp
+options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+    {
+        // My custom request culture logic
+        return new ProviderCultureResult("en");
+    }));
+```
+::: moniker-end
 
 - Verwenden Sie die `AddInitialRequestCultureProvider`-Erweiterungsmethode, um den benutzerdefinierten Anbieter als ersten Anbieter festzulegen.
 

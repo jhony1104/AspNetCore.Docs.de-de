@@ -1,18 +1,18 @@
 ---
 title: 'Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core'
 description: In diesem Tutorial überprüfen und passen Sie CRUD-Code (Create, Read, Update, Delete) an, der durch den MVC-Gerüstbau automatisch für Ihre Controller und Ansichten erstellt wird.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 843ac3523f3ab4bd43f8970ff8e8e2f997fec4d2
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: f0c5bcff4c4b0808f9b4703e1429c3a6d1a7a2d7
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975075"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259722"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 

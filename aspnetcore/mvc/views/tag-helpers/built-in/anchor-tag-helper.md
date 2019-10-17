@@ -4,14 +4,14 @@ author: pkellner
 description: Lernen Sie die Attribute für das ASP.NET Core-Anchor-Taghilfsprogramm kennen und erfahren Sie, welche Rolle jedes Attribut bei der Erweiterung des Verhaltens des HTML-Anchor-Tags spielt.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 04/18/2019
+ms.date: 10/13/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 44fc4ff6334e33630974181021aa1a6880a89917
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 3ff8a52361b4911a5bb3163a8ea6ae90e504e4ef
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856225"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333938"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
@@ -47,7 +47,7 @@ Wenn das Attribut `asp-controller` angegeben wird und `asp-action` nicht, entspr
 <a href="/Home">All Speakers</a>
 ```
 
-## <a name="asp-action"></a>asp-action
+### <a name="asp-action"></a>asp-action
 
 Der Attributwert [asp-action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) repräsentiert den Namen der Controlleraktion, die im generierten `href`-Attribut enthalten ist. Im folgenden Markup wird der generierte `href`-Attributwert auf die Auswertungsseite des Lautsprechers festgelegt:
 
@@ -135,7 +135,7 @@ Das Anchor-Taghilfsprogramm generiert eine Route direkt zu dieser Controllerakti
 
 Wenn `asp-controller` oder `asp-action` zusätzlich zu `asp-route` angegeben sind, entspricht die generierte Route möglicherweise nicht Ihren Erwartungen. Um einen Routenkonflikt zu vermeiden, darf `asp-route` nicht mit den Attributen `asp-controller` oder `asp-action` verwendet werden.
 
-## <a name="asp-all-route-data"></a>asp-all-route-data
+### <a name="asp-all-route-data"></a>asp-all-route-data
 
 Das Attribut [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) unterstützt das Erstellen eines Wörterbuchs aus Schlüssel-Wert-Paaren. Der Schlüssel ist der Parametername, der Wert ist der Parameterwert.
 
@@ -173,7 +173,7 @@ Hashtags sind beim Erstellen von clientseitigen Apps nützlich. Sie können beis
 
 Das Attribut [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) legt den Bereichsnamen zum Festlegen der geeigneten Route fest. Die folgenden Beispiele zeigen, wie das `asp-area`-Attribut eine Neuzuordnung von Routen verursacht.
 
-### <a name="usage-in-razor-pages"></a>Verwendung in Razor Pages
+#### <a name="usage-in-razor-pages"></a>Verwendung in Razor Pages
 
 Razor Pages-Bereiche werden in ASP.NET Core 2.1 oder höher unterstützt.
 
@@ -207,7 +207,7 @@ Der generierte HTML-Code:
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
-### <a name="usage-in-mvc"></a>Verwendung in MVC
+#### <a name="usage-in-mvc"></a>Verwendung in MVC
 
 Betrachten Sie die folgende Verzeichnishierarchie:
 

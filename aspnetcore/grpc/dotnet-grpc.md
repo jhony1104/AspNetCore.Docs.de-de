@@ -1,23 +1,23 @@
 ---
-title: Verwalten von protobuf-verweisen mit dotnet-GrpC
+title: Verwalten von Protobuf-Verweisen mit dotnet-grpc
 author: juntaoluo
 description: Erfahren Sie mehr über das Hinzufügen, aktualisieren, entfernen und Auflisten von protobuf-verweisen mit dem globalen Tool dotnet-GrpC.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 09/24/2019
+ms.date: 10/17/2019
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: ebd57419be24f7f4ed9765e36cf14189be8438b1
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: 994597c854a95bb33de1686ab025cb3744cf6845
+ms.sourcegitcommit: e71b6a85b0e94a600af607107e298f932924c849
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72290046"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72519037"
 ---
-# <a name="manage-protobuf-references-with-dotnet-grpc"></a>Verwalten von protobuf-verweisen mit dotnet-GrpC
+# <a name="manage-protobuf-references-with-dotnet-grpc"></a>Verwalten von Protobuf-Verweisen mit dotnet-grpc
 
 Von [John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc` ist ein globales .net Core-Tool zum Verwalten von protobuf-verweisen innerhalb eines .net-GrpC-Projekts. Das Tool kann zum Hinzufügen, aktualisieren, entfernen und Auflisten von protobuf-verweisen verwendet werden.
+`dotnet-grpc` ist ein globales .net Core-Tool zum Verwalten von [protobuf-verweisen ( *. proto*)](xref:grpc/basics#proto-file) in einem .net-GrpC-Projekt. Das Tool kann zum Hinzufügen, aktualisieren, entfernen und Auflisten von protobuf-verweisen verwendet werden.
 
 ## <a name="installation"></a>Installation
 
@@ -32,10 +32,10 @@ dotnet tool install -g dotnet-grpc
 `dotnet-grpc` kann verwendet werden, um protobuf-Verweise als `<Protobuf />`-Elemente der *csproj* -Datei hinzuzufügen:
 
 ```xml
-<Protobuf Include="..\Proto\count.proto" GrpcServices="Server" Link="Protos\count.proto" />
+<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Die protobuf-Verweise werden verwendet, um C# die Client-und/oder Server Objekte zu generieren. Das `dotnet-grpc`tool kann folgende Aktionen ausführen:
+Die protobuf-Verweise werden verwendet, um C# die Client-und/oder Server Objekte zu generieren. Das Tool "`dotnet-grpc`" kann folgende Aktionen ausführen:
 
 * Erstellen Sie einen protobuf-Verweis aus lokalen Dateien auf dem Datenträger.
 * Erstellen Sie einen protobuf-Verweis aus einer Remote Datei, die durch eine URL angegeben ist.
@@ -62,7 +62,7 @@ dotnet grpc add-file [options] <files>...
 
 | Argument | Beschreibung |
 |-|-|
-| files | Die protobuf-Datei Verweise. Hierbei kann es sich um einen Pfad zu globmuster für lokale protobuf-Dateien handeln. |
+| Dateien | Die protobuf-Datei Verweise. Hierbei kann es sich um einen Pfad zu globmuster für lokale protobuf-Dateien handeln. |
 
 #### <a name="options"></a>Optionen
 
@@ -116,7 +116,7 @@ dotnet-grpc remove [options] <references>...
 
 | Argument | Beschreibung |
 |-|-|
-| references | Die URLs oder Dateipfade der zu entfernenden protobuf-Verweise. |
+| Referenzen | Die URLs oder Dateipfade der zu entfernenden protobuf-Verweise. |
 
 ### <a name="options"></a>Optionen
 
@@ -143,7 +143,7 @@ dotnet-grpc refresh [options] [<references>...]
 
 | Argument | Beschreibung |
 |-|-|
-| references | Die URLs oder Dateipfade zu Remote-protobuf-verweisen, die aktualisiert werden sollen. Lassen Sie dieses Argument leer, um alle Remote Verweise zu aktualisieren. |
+| Referenzen | Die URLs oder Dateipfade zu Remote-protobuf-verweisen, die aktualisiert werden sollen. Lassen Sie dieses Argument leer, um alle Remote Verweise zu aktualisieren. |
 
 ### <a name="options"></a>Optionen
 

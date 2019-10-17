@@ -4,28 +4,20 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie eine ASP.NET Core-Web-API mit JavaScript aufrufen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/27/2019
+ms.date: 10/15/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 0070816149d64fc1d71d453eb0f135050c78597a
-ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
+ms.openlocfilehash: bbe261307f6f68af002cb98cc4895888ade7f61c
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/28/2019
-ms.locfileid: "70116639"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378702"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 In diesem Tutorial erfahren Sie, wie Sie eine ASP.NET Core-Web-API über die [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) mit JavaScript aufrufen.
-
-::: moniker range="< aspnetcore-3.0"
-
-Informationen zur Verwendung von ASP.NET Core 2.2 finden Sie im Artikel [Aufrufen einer Web-API mit JavaScript](xref:tutorials/first-web-api#call-the-web-api-with-javascript) (Version für 2.2).
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
@@ -75,9 +67,9 @@ Im folgenden Code wird Folgendes ausgeführt:
 
 * Eine `item`-Variable wird deklariert, um eine Objektliteraldarstellung des To-Do-Elements zu erstellen.
 * Eine Fetch-Anforderung wird mit den folgenden Optionen konfiguriert:
-    * `method` – gibt das POST HTTP-Aktionsverb an.
-    * `body` – gibt die JSON-Darstellung des Anforderungstexts an. Die JSON wird erzeugt, indem das in `item` gespeicherte Objektliteral an die Funktion [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) übergeben wird.
-    * `headers` – gibt die HTTP-Anforderungsheader `Accept` und `Content-Type` an. Beide Header sind auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben.
+  * `method` – gibt das POST HTTP-Aktionsverb an.
+  * `body` – gibt die JSON-Darstellung des Anforderungstexts an. Die JSON wird erzeugt, indem das in `item` gespeicherte Objektliteral an die Funktion [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) übergeben wird.
+  * `headers` – gibt die HTTP-Anforderungsheader `Accept` und `Content-Type` an. Beide Header sind auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben.
 * Eine HTTP POST-Anforderung wird an die Route *api/TodoItems* gesendet.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]
@@ -103,5 +95,3 @@ Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie Web-API-Hilf
 
 > [!div class="nextstepaction"]
 > <xref:tutorials/get-started-with-swashbuckle>
-
-::: moniker-end

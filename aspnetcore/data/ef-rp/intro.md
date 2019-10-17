@@ -1,17 +1,17 @@
 ---
 title: 'Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8'
-author: tdykstra
+author: rick-anderson
 description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: e261ccd30dc9ef0929e74fa44a5ed752d515b707
-ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
+ms.openlocfilehash: 01e507326ddd57057aa178ad3909fd4027a013fd
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71317682"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259376"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
 
@@ -213,7 +213,7 @@ In diesem Abschnitt verwenden Sie das ASP.Net Core-Gerüstbautool, um Folgendes 
 * Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **HINZUFÜGEN** aus.
 * Gehen Sie im Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen** folgendermaßen vor:
   * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
-  * Wählen Sie in der Zeile **Datenkontextklasse** das **+**-Zeichen (Pluszeichen) aus.
+  * Wählen Sie in der Zeile **Datenkontextklasse** das **+** -Zeichen (Pluszeichen) aus.
   * Ändern Sie den Datenkontextnamen aus *ContosoUniversity.Models.ContosoUniversityContext* in *ContosoUniversity.Data.SchoolContext*.
   * Wählen Sie **Hinzufügen** aus.
 
@@ -596,7 +596,7 @@ In diesem Abschnitt wird das Gerüst für das Studentenmodell erstellt. Mit dem 
 Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen**:
 
 * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
-* Wählen Sie in der Zeile **Datenkontextklasse** das Pluszeichen (**+**) aus, und ändern Sie den generierten Namen in **ContosoUniversity.Models.SchoolContext**.
+* Wählen Sie in der Zeile **Datenkontextklasse** das Pluszeichen ( **+** ) aus, und ändern Sie den generierten Namen in **ContosoUniversity.Models.SchoolContext**.
 * Wählen Sie im Dropdownmenü **Datenkontextklasse** **ContosoUniversity.Models.SchoolContext** aus.
 * Wählen Sie **Hinzufügen** aus.
 
@@ -725,7 +725,7 @@ Drop-Database
 
 Der Datenbankname wird anhand des Kontextnamens, den Sie zuvor angegeben haben, plus Bindestrich und GUID generiert. Daher lautet der Name der Datenbank „SchoolContext-{GUID}“. Die GUID ist für jeden Benutzer unterschiedlich.
 Öffnen Sie über das Menü **Ansicht** im Visual Studio **SQL Server-Objekt-Explorer** (SSOX).
-Klicken Sie im SSOX auf **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}**.
+Klicken Sie im SSOX auf **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}** .
 
 Erweitern Sie den Knoten **Tabellen**.
 

@@ -1,18 +1,18 @@
 ---
 title: 'Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial werden wichtige Themen eingeführt, um Grundkenntnisse der Entwicklung von ASP.NET Core-Web-Apps, die Entity Framework Core verwenden, zu erweitern.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 7a67efad187f29773c1cac7a5a2457d02080114b
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: d4a2aad6d93cc9a53c730323620de59fead6d5ab
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080549"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259591"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core
 

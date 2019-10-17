@@ -1,17 +1,17 @@
 ---
 title: 'Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core'
 description: In diesem Tutorial fügen Sie die Funktionen zum Sortieren, Filtern und Paging zur Studentenindexseite hinzu. Sie werden auch eine Seite erstellen, auf der einfache Gruppierungsvorgänge ausgeführt werden.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 7a5f617b00cceb007f37ca1e585c4c7ff1831b56
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: c4d50b72c5508d52b17c6754b6d8e77c1a3903b6
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975212"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259343"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Tutorial: Hinzufügen von Sortieren, Filtern und Paging: ASP.NET MVC mit EF Core
 

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Co
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/15/2019
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: a0a11f3aed9035000e79844fbec7cdd17b73fdaa
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 8ff3f7b089b7aec6b1a6be2c85f24cfb9674b684
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007338"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391318"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Clientseitiges Hosten und Bereitstellen von ASP.NET WebAssembly
 
@@ -88,8 +88,8 @@ Beim Veröffentlichen eines Blazor-Projekts wird eine *web.config*-Datei mit der
   * `application/octet-stream`
   * `application/wasm`
 * URL-Rewrite-Modul-Regeln werden eingerichtet:
-  * Stellen Sie das Unterverzeichnis bereit, in dem sich die statischen Objekte der App befinden (*{ASSEMBLYNAME}/dist/{ANGEFORDERTER PFAD}*).
-  * Richten Sie ein SPA-Fallbackrouting ein, sodass Anforderungen für nicht dateibasierte Objekte an das Standarddokument der App im entsprechenden Ordner für statische Objekte (*{ASSEMBLYNAME}/dist/index.html*) umgeleitet werden.
+  * Stellen Sie das Unterverzeichnis bereit, in dem sich die statischen Objekte der App befinden ( *{ASSEMBLYNAME}/dist/{ANGEFORDERTER PFAD}* ).
+  * Richten Sie ein SPA-Fallbackrouting ein, sodass Anforderungen für nicht dateibasierte Objekte an das Standarddokument der App im entsprechenden Ordner für statische Objekte ( *{ASSEMBLYNAME}/dist/index.html*) umgeleitet werden.
 
 #### <a name="install-the-url-rewrite-module"></a>Installieren des URL-Rewrite-Moduls
 

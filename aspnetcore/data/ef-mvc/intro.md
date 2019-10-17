@@ -1,18 +1,18 @@
 ---
 title: 'Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App'
 description: Dies ist die erste Tutorial in der Reihe, in dem die Erstellung der Beispielanwendung der Contoso University von Grund auf erläutert wird.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 3450ac5b46e2a03b5d58c8760b78a52065343992
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: a8909d391ae1a35e9c8155df767ab157701c8a51
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985370"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259446"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
