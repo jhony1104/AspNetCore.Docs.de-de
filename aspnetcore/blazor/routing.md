@@ -1,34 +1,36 @@
 ---
-title: ASP.net Core blazor-Routing
+title: ASP.net Core Blazor Routing
 author: guardrex
 description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-Komponente weiterleiten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/routing
-ms.openlocfilehash: d9f81c8aa2cf07f8bfaede65efcb7328088f55b9
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: d4b76c00f79f333884fa7e30b27eadc6e36de287
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531137"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589938"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
+# <a name="aspnet-core-opno-locblazor-routing"></a>ASP.net Core Blazor Routing
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Erfahren Sie, wie Sie Anforderungen weiterleiten und wie Sie die `NavLink`-Komponente verwenden, um Navigations Verknüpfungen in blazor-apps zu erstellen.
+Erfahren Sie, wie Sie Anforderungen weiterleiten und wie Sie die `NavLink` Komponente verwenden, um Navigations Verknüpfungen in Blazor-apps zu erstellen.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.net Core Endpunkt-Routing Integration
 
-Der blazor-Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure` akzeptiert werden:
+Blazor Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure` akzeptiert werden:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page weiterzuleiten, die als Host für den serverseitigen Teil der blazor-Server-App fungiert. Gemäß der Konvention heißt die *Hostseite* in der Regel *_Host. cshtml*. Die in der Hostdatei angegebene Route wird als *Fall Back Route* bezeichnet, da Sie bei der Routen Übereinstimmung mit niedriger Priorität arbeitet. Die Fall Back Route wird berücksichtigt, wenn andere Routen nicht gleich sind. Dies ermöglicht der APP, andere Controller und Seiten zu verwenden, ohne die blazor-Server-APP zu beeinträchtigen.
+Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page weiterzuleiten, die als Host für den serverseitigen Teil der Blazor Server-App fungiert. Gemäß der Konvention heißt die *Hostseite* in der Regel *_Host. cshtml*. Die in der Hostdatei angegebene Route wird als *Fall Back Route* bezeichnet, da Sie bei der Routen Übereinstimmung mit niedriger Priorität arbeitet. Die Fall Back Route wird berücksichtigt, wenn andere Routen nicht gleich sind. Dies ermöglicht der APP, andere Controller und Seiten zu verwenden, ohne die Blazor Server-APP zu beeinträchtigen.
 
 ## <a name="route-templates"></a>Routen Vorlagen
 
@@ -52,14 +54,14 @@ Zur Laufzeit wird die `RouteView`-Komponente:
 * Empfängt die `RouteData` von der `Router` zusammen mit den gewünschten Parametern.
 * Rendert die angegebene Komponente mit dem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
 
-Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. In den Standardvorlagen für blazor wird die Komponente "`MainLayout`" angegeben. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
+Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. In den standardmäßigen Blazor Vorlagen wird die `MainLayout` Komponente angegeben. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
 
 Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in Ihrer *wwwroot/Index.html* -Datei (blazor Webassembly) oder *pages/_Host. cshtml-* Datei (blazor-Server) mit dem im `href`-Attribut (`<base href="/">`) angegebenen app-Basispfad enthalten. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
+> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in der *wwwroot/Index.html* -Datei (Blazor Webassembly) oder der Datei *pages/_Host. cshtml* (Blazor Server) mit dem App-Basispfad enthalten, der im `href`-Attribut (`<base href="/">`) angegeben ist. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Benutzerdefinierten Inhalt bereitstellen, wenn Inhalt nicht gefunden wird
 
@@ -83,7 +85,7 @@ Der Inhalt von `<NotFound>`-Tags kann beliebige Elemente (z. b. andere interakti
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Weiterleiten an Komponenten aus mehreren Assemblys
 
-Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys für die `Router`-Komponente anzugeben, die bei der Suche nach Routing fähigen Komponenten berücksichtigt werden. Angegebene Assemblys werden zusätzlich zur @no__t -0-angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine Routing fähige Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Das folgende Beispiel `AdditionalAssemblies` führt zu einer Routing Unterstützung für `Component1`:
+Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys für die `Router`-Komponente anzugeben, die bei der Suche nach Routing fähigen Komponenten berücksichtigt werden. Angegebene Assemblys werden zusätzlich zur `AppAssembly` angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine Routing fähige Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Das folgende Beispiel `AdditionalAssemblies` führt zu einer Routing Unterstützung für `Component1`:
 
 ```cshtml
 <Router
@@ -99,7 +101,7 @@ Der Router verwendet Routen Parameter, um die entsprechenden Komponenten Paramet
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter&highlight=2,7-8)]
 
-Optionale Parameter werden für blazor-apps in ASP.net Core 3,0 nicht unterstützt. Im vorherigen Beispiel werden zwei `@page`-Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}`-Routen Parameter und weist den Wert der `Text`-Eigenschaft zu.
+Optionale Parameter werden für Blazor-apps in ASP.net Core 3,0 nicht unterstützt. Im vorherigen Beispiel werden zwei `@page`-Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}`-Routen Parameter und weist den Wert der `Text`-Eigenschaft zu.
 
 ## <a name="route-constraints"></a>Routen Einschränkungen
 
@@ -130,7 +132,7 @@ Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügb
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing mit URLs, die Punkte enthalten
 
-In blazor-Server-Apps ist die Standardroute in *_Host. cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine blazor-App gibt eine " *404-nicht gefunden"-* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
+In Blazor Server-Apps ist die Standardroute in *_Host. cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine Blazor-App gibt eine *404-nicht gefundene* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
 
 ```cshtml
 @page "/{**path}"
@@ -177,7 +179,7 @@ Verwenden Sie `Microsoft.AspNetCore.Components.NavigationManager`, um mit URIs u
 | Member | Beschreibung |
 | ------ | ----------- |
 | `Uri` | Ruft den aktuellen absoluten URI ab. |
-| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangesteht werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht `BaseUri` dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server). |
+| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangesteht werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht `BaseUri` dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/Index.html* (Blazor Webassembly) oder *pages/_Host. cshtml* (Blazor Server). |
 | `NavigateTo` | Navigiert zum angegebenen URI. Wenn `forceLoad` `true` ist:<ul><li>Client seitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom Client seitigen Router verarbeitet wird.</li></ul> |
 | `LocationChanged` | Ein Ereignis, das ausgelöst wird, wenn sich die Navigations Position geändert hat. |
 | `ToAbsoluteUri` | Konvertiert einen relativen URI in einen absoluten URI. |
