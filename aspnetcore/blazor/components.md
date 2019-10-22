@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/05/2019
+ms.date: 10/20/2019
 uid: blazor/components
-ms.openlocfilehash: cd48111e8d601fc67e8a938fcdd686759a9ddeca
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: 065a3a078c56f813ed38f85d7414f22061217dff
+ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531115"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72697964"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -254,7 +254,7 @@ Betrachten Sie das folgende Szenario:
 
 Im vorangehenden Szenario wird der Wert des Elements auf `123` zurückgesetzt. Wenn der Wert `123.45` zugunsten des ursprünglichen Werts von `123` abgelehnt wird, erkennt der Benutzer, dass sein Wert nicht akzeptiert wurde.
 
-Standardmäßig gilt die Bindung für das `onchange`-Ereignis des Elements (`@bind="{PROPERTY OR FIELD}"`). Verwenden Sie `@bind-value="{PROPERTY OR FIELD}" @bind-value:event={EVENT}`, um ein anderes Ereignis festzulegen. Für das `oninput`-Ereignis (`@bind-value:event="oninput"`) tritt die Neuversion nach jedem Tastatur Strich auf, der einen nicht zu deerbaren Wert einführt. Wenn das `oninput`-Ereignis mit einem @no__t -1-gebundenen Typ als Ziel verwendet wird, wird verhindert, dass ein Benutzer ein `.`-Zeichen eingegeben hat. Ein `.`-Zeichen wird sofort entfernt, sodass der Benutzer sofort Feedback erhält, dass nur ganze Zahlen zulässig sind. Es gibt Szenarios, in denen die Wiederherstellung des Werts für das `oninput`-Ereignis nicht ideal ist, z. b. wenn der Benutzer berechtigt sein sollte, einen nicht zu testbaren `<input>`-Wert zu löschen. Zu Alternativen gehören:
+Standardmäßig gilt die Bindung für das `onchange`-Ereignis des Elements (`@bind="{PROPERTY OR FIELD}"`). Verwenden Sie `@bind-value="{PROPERTY OR FIELD}" @bind-value:event={EVENT}`, um ein anderes Ereignis festzulegen. Für das `oninput`-Ereignis (`@bind-value:event="oninput"`) tritt die Neuversion nach jedem Tastatur Strich auf, der einen nicht zu deerbaren Wert einführt. Wenn das `oninput` Ereignis mit einem `int` gebundenen Typ als Ziel verwendet wird, wird verhindert, dass ein Benutzer ein `.` Zeichen eingibt. Ein `.`-Zeichen wird sofort entfernt, sodass der Benutzer sofort Feedback erhält, dass nur ganze Zahlen zulässig sind. Es gibt Szenarios, in denen die Wiederherstellung des Werts für das `oninput`-Ereignis nicht ideal ist, z. b. wenn der Benutzer berechtigt sein sollte, einen nicht zu testbaren `<input>`-Wert zu löschen. Zu Alternativen gehören:
 
 * Verwenden Sie das Ereignis "`oninput`" nicht. Verwenden Sie das Standard Ereignis `onchange` (`@bind="{PROPERTY OR FIELD}"`), bei dem ein ungültiger Wert nicht wieder hergestellt wird, bis das Element den Fokus verliert.
 * Binden Sie an einen Typ, der NULL-Werte zulässt, wie z. b. `int?` oder `string`, und stellen Sie benutzerdefinierte Logik zur Behandlung Ungültiger
@@ -509,7 +509,7 @@ Häufig ist es praktisch, zusätzliche Werte zu schließen, z. b. beim Durchlauf
 
 ### <a name="eventcallback"></a>EventCallback
 
-Ein häufiges Szenario mit untergeordneten Komponenten ist der Wunsch, die-Methode einer übergeordneten Komponente auszuführen, wenn ein untergeordnetes Komponenten Ereignis auftritt @ no__t-0z. b. Wenn ein `onclick`-Ereignis im untergeordneten Element auftritt. Um Ereignisse Komponenten übergreifend verfügbar zu machen, verwenden Sie einen `EventCallback`. Eine übergeordnete Komponente kann dem `EventCallback` einer untergeordneten Komponente eine Rückruf Methode zuweisen.
+Ein häufiges Szenario mit untergeordneten Komponenten ist der Wunsch, die-Methode einer übergeordneten Komponente auszuführen, wenn ein untergeordnetes Komponenten Ereignis auftritt &mdash;for Beispiel, wenn ein `onclick` Ereignis im untergeordneten Element auftritt. Um Ereignisse Komponenten übergreifend verfügbar zu machen, verwenden Sie einen `EventCallback`. Eine übergeordnete Komponente kann dem `EventCallback` einer untergeordneten Komponente eine Rückruf Methode zuweisen.
 
 Der `ChildComponent` in der Beispiel-App veranschaulicht, wie der `onclick`-Handler einer Schaltfläche so eingerichtet wird, dass er einen `EventCallback`-Delegaten aus dem `ParentComponent` des Beispiels empfängt. Der `EventCallback` wird mit `MouseEventArgs` typisiert, was für ein `onclick`-Ereignis von einem Peripheriegerät geeignet ist:
 
@@ -694,7 +694,7 @@ Wenn die Komponente gerendert wird, wird das Feld `loginDialog` mit der untergeo
 > [!IMPORTANT]
 > Die `loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](#lifecycle-methods).
 
-Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an den JavaScript-Code @ no__t-0Die werden nur in .NET-Code verwendet.
+Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an JavaScript-Code übermittelt, &mdash;they nur in .NET-Code verwendet werden.
 
 > [!NOTE]
 > Verwenden Sie **keine** Komponenten Verweise, um den Status von untergeordneten Komponenten zu mutieren. Verwenden Sie stattdessen normale deklarative Parameter, um Daten an untergeordnete Komponenten zu übergeben. Die Verwendung normaler deklarativer Parameter führt dazu, dass untergeordnete Komponenten automatisch zu den richtigen Zeitpunkten gerenden werden.
@@ -960,6 +960,9 @@ Wenn eine Komponente <xref:System.IDisposable> implementiert, wird die verwerfen
 }
 ```
 
+> [!NOTE]
+> Das Aufrufen von `StateHasChanged` in `Dispose` wird nicht unterstützt. `StateHasChanged` können als Teil des aufgerufenen Renderers aufgerufen werden. Das Anfordern von Aktualisierungen der Benutzeroberfläche an diesem Punkt wird nicht unterstützt
+
 ## <a name="routing"></a>Routing
 
 Das Routing in blazor wird durch Bereitstellen einer Routen Vorlage für jede barrierefreie Komponente in der APP erreicht.
@@ -980,21 +983,106 @@ Weiterleitungs *Parameter Komponente*:
 
 Optionale Parameter werden nicht unterstützt. Daher werden im obigen Beispiel zwei `@page`-Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}`-Routen Parameter und weist den Wert der `Text`-Eigenschaft zu.
 
-## <a name="base-class-inheritance-for-a-code-behind-experience"></a>Basisklassen Vererbung für eine "Code Behind"-Funktion
+::: moniker range=">= aspnetcore-3.1"
 
-Komponenten Dateien mischen HTML-Markup C# und Verarbeitungs Code in derselben Datei. Die `@inherits`-Direktive kann verwendet werden, um blazor-apps eine "Code Behind"-Funktion bereitzustellen, die das Komponenten Markup von der Code Verarbeitung trennt.
+## <a name="partial-class-support"></a>Unterstützung für Teil Klassen
+
+Razor-Komponenten werden als partielle Klassen generiert. Razor-Komponenten werden mithilfe eines der folgenden Ansätze erstellt:
+
+* C#Code wird in einem [@code](xref:mvc/views/razor#code) -Block mit HTML-Markup und Razor-Code in einer einzelnen Datei definiert. Blazor-Vorlagen definieren ihre Razor-Komponenten mithilfe dieses Ansatzes.
+* C#der Code wird in einer Code Behind-Datei platziert, die als partielle Klasse definiert ist.
+
+Das folgende Beispiel zeigt die Standard `Counter` Komponente mit einem `@code`-Block in einer APP, die aus einer blazor-Vorlage generiert wurde. HTML-Markup, Razor-Code C# und Code befinden sich in derselben Datei:
+
+*Counter. Razor*:
+
+```cshtml
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+```
+
+Die `Counter` Komponente kann auch mit einer Code Behind-Datei mit einer partiellen Klasse erstellt werden:
+
+*Counter. Razor*:
+
+```cshtml
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+```
+
+*Counter.Razor.cs*:
+
+```csharp
+namespace BlazorApp.Pages
+{
+    public partial class Counter
+    {
+        int currentCount = 0;
+
+        void IncrementCount()
+        {
+            currentCount++;
+        }
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
+
+## <a name="specify-a-component-base-class"></a>Angeben einer Komponentenbasis Klasse
+
+Die `@inherits`-Direktive kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben.
 
 Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) zeigt, wie eine Komponente eine Basisklasse, `BlazorRocksBase`, erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen.
 
 *Pages/blazorrocks. Razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
+```cshtml
+@page "/BlazorRocks"
+@inherits BlazorRocksBase
+
+<h1>@BlazorRocksText</h1>
+```
 
 *BlazorRocksBase.cs*:
 
-[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocksBase.cs)]
+```csharp
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample
+{
+    public class BlazorRocksBase : ComponentBase
+    {
+        public string BlazorRocksText { get; set; } = 
+            "Blazor rocks the browser!";
+    }
+}
+```
 
 Die Basisklasse sollte von `ComponentBase` abgeleitet werden.
+
+::: moniker-end
 
 ## <a name="import-components"></a>Importieren von Komponenten
 
@@ -1494,7 +1582,7 @@ Dies ist ein sehr einfaches Beispiel. In realistischeren Fällen mit komplexen u
 
 * Die APP-Leistung leidet, wenn Sequenznummern dynamisch generiert werden.
 * Das Framework kann zur Laufzeit automatisch keine eigenen Sequenznummern erstellen, da die erforderlichen Informationen nicht vorhanden sind, es sei denn, Sie werden zur Kompilierzeit aufgezeichnet.
-* Schreiben Sie keine langen Blöcke der manuell implementierten `RenderTreeBuilder`-Logik. Bevorzugen Sie `.razor`-Dateien, und ermöglichen Sie es dem Compiler, die Sequenznummern zu behandeln. Wenn Sie keine manuelle `RenderTreeBuilder`-Logik vermeiden können, teilen Sie lange Code Blöcke in kleinere Teile, die `OpenRegion` @ no__t-2 @ no__t-3-aufrufen umschließen. Jede Region verfügt über einen eigenen separaten Bereich von Sequenznummern, sodass Sie in jeder Region von NULL (oder einer beliebigen anderen beliebigen Zahl) neu starten können.
+* Schreiben Sie keine langen Blöcke der manuell implementierten `RenderTreeBuilder`-Logik. Bevorzugen Sie `.razor`-Dateien, und ermöglichen Sie es dem Compiler, die Sequenznummern zu behandeln. Wenn Sie manuelle `RenderTreeBuilder` Logik nicht vermeiden können, teilen Sie lange Code Blöcke in kleinere Teile auf, die `OpenRegion` / `CloseRegion` aufrufen umschließen. Jede Region verfügt über einen eigenen separaten Bereich von Sequenznummern, sodass Sie in jeder Region von NULL (oder einer beliebigen anderen beliebigen Zahl) neu starten können.
 * Wenn Sequenznummern hart codiert sind, erfordert der Vergleichsalgorithmus nur, dass die Sequenznummern den Wert erhöhen. Die Anfangswerte und Lücken sind irrelevant. Eine berechtigte Option besteht darin, die Codezeilen Nummer als Sequenznummer zu verwenden oder von NULL zu beginnen und um Werte oder Hunderte (oder ein beliebiges bevorzugtes Intervall) zu erhöhen. 
 * Blazor verwendet Sequenznummern, während andere Benutzeroberflächen-Frameworks, die Sie nicht verwenden, diese verwenden. Das diffalling ist weitaus schneller, wenn Sequenznummern verwendet werden, und blazor bietet den Vorteil eines Kompilierungs Schritts, der automatisch Sequenznummern für Entwickler erstellt, die `.razor`-Dateien erstellen.
 
@@ -1545,7 +1633,7 @@ Die Lokalisierung wird in der APP behandelt:
 
 ## <a name="provide-ui-to-choose-the-culture"></a>Bereitstellen der Benutzeroberfläche zum Auswählen der Kultur
 
-Zum Bereitstellen einer Benutzeroberfläche, mit der Benutzer eine Kultur auswählen können, wird ein *Umleitungs basierter Ansatz* empfohlen. Der Prozess ähnelt dem, was in einer Web-App geschieht, wenn ein Benutzer versucht, auf eine sichere Ressource zuzugreifen no__t-0der Benutzer wird zu einer Anmeldeseite umgeleitet und dann zurück an die ursprüngliche Ressource umgeleitet. 
+Zum Bereitstellen einer Benutzeroberfläche, mit der Benutzer eine Kultur auswählen können, wird ein *Umleitungs basierter Ansatz* empfohlen. Der Prozess ähnelt dem, was in einer Web-App geschieht, wenn ein Benutzer versucht, auf eine sichere Ressource zuzugreifen, &mdash;the Benutzer zu einer Anmeldeseite umgeleitet und dann zurück an die ursprüngliche Ressource umgeleitet wird. 
 
 Die APP speichert die ausgewählte Kultur des Benutzers über eine Umleitung zu einem Controller. Der Controller legt die ausgewählte Kultur des Benutzers in einem Cookie fest und leitet den Benutzer zurück an den ursprünglichen URI.
 
