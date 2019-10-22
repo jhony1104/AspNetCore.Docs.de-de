@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/12/2019
+ms.date: 10/18/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 357a3d89648086f0329cd16bc9d72863df9bdcd6
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 0a9b1a1a08617ef4ca8a36295cec8910ec111acd
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71217787"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589904"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -773,7 +773,7 @@ Das Wörterbuch wird mit einem Aufruf von `AddInMemoryCollection` verwendet, um 
 
 ## <a name="getvalue"></a>GetValue
 
-[ConfigurationBinder.GetValue\<T>](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extrahiert einen Wert aus der Konfiguration mit einem angegebenen Schlüssel und konvertiert ihn in den angegebenen Typ. Eine Überladung erlaubt es Ihnen, einen Standardwert anzugeben, wenn der Schlüssel nicht gefunden wird.
+[ConfigurationBinder.GetValue\<T>](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extrahiert einen einzelnen Wert aus der Konfiguration mit einem angegebenen Schlüssel und konvertiert ihn in den angegebenen Typ, der kein Auflistungstyp ist. Eine Überladung akzeptiert einen Standardwert.
 
 Im Beispiel unten geschieht Folgendes:
 
