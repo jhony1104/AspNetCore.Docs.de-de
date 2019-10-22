@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: ed48c2074360768b8d8c5af7057b353b00592394
-ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
+ms.openlocfilehash: 0c3597f24e02af40517e12a86127b140ed4fb550
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/08/2019
-ms.locfileid: "72037699"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333936"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -449,18 +449,7 @@ Die Methode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuti
 * Die Ausführung des Aktionsergebnisses und der nachfolgenden Filter wird verhindert.
 * Die ausgelöste Ausnahme wird nicht als erfolgreiches Ergebnis, sondern als Fehler behandelt.
 
-Beim Ausführen der <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName>-Methode gilt:
-
-* Die Antwort wurde wahrscheinlich an den Client gesendet und kann nicht geändert werden.
-* Wenn eine Ausnahme ausgelöst wurde, wird der Antworttext nicht gesendet.
-
-<!-- Review preceding "If an exception was thrown: Original 
-When the OnResultExecuted method runs, the response has likely been sent to the client and cannot be changed further (unless an exception was thrown).
-
-SHould that be , 
-If an exception was thrown **IN THE RESULT FILTER**, the response body is not sent.
-
- -->
+Wenn die <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName>-Methode ausgeführt wird, wurde die Antwort wahrscheinlich bereits an den Client gesendet. Wenn die Antwort bereits an den Client gesendet wurde, kann sie nicht mehr geändert werden.
 
 `ResultExecutedContext.Canceled` wird auf `true` festgelegt, wenn die Ausführung des Aktionsergebnisses durch einen anderen Filter kurzgeschlossen wurde.
 
@@ -532,7 +521,7 @@ Ressourcenfilter funktionieren wie [Middleware](xref:fundamentals/middleware/ind
 
 Um Middleware als Filter zu verwenden, erstellen Sie einen Typ mit einer `Configure`-Methode, die die Middleware festlegt, die in die Filterpipeline eingefügt werden soll. Das folgende Beispiel verwendet die Lokalisierungsmiddleware, um die aktuelle Kultur einer Anforderung einzurichten:
 
-[!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,21)]
+[!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,22)]
 
 Verwenden Sie das <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute> zum Ausführen der Middleware:
 
@@ -542,5 +531,5 @@ Middlewarefilter werden zum selben Zeitpunkt in der Filterpipeline wie Ressource
 
 ## <a name="next-actions"></a>Nächste Schritte
 
-* Siehe [Filtermethoden für Razor Pages](xref:razor-pages/filter),
+* Siehe [Filtermethoden für Razor Pages](xref:razor-pages/filter).
 * Um Filter näher kennenzulernen, [laden Sie das GitHub-Beispiel herunter, und testen und bearbeiten Sie es](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).

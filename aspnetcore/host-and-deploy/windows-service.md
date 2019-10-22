@@ -5,14 +5,14 @@ description: Erfahren Sie, wie eine ASP.NET Core-App in einem Windows-Dienst geh
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/10/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 32226c06ba005b4a61c473d6584b2b762733dcbd
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: b02e627af875f15a81d68b0d625a2eccf25c0657
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007300"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333801"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
@@ -83,7 +83,7 @@ Weitere Informationen und Tipps zu Bereitstellungsszenarien finden Sie unter [.N
 
 ### <a name="framework-dependent-deployment-fdd"></a>Frameworkabhängige Bereitstellung (Framework-dependent deployment, FDD)
 
-Eine Framework-abhängige Bereitstellung (Framework-Dependent Deployment, FDD) benötigt eine gemeinsame systemweite Version von .NET Core auf dem Zielsystem. Wenn das FDD-Szenario gemäß der Anleitung in diesem Artikel übernommen wird, erzeugt das SDK eine ausführbare Datei (*.exe*). Diese wird als *frameworkabhängige ausführbare Datei* bezeichnet.
+Eine Framework-abhängige Bereitstellung (Framework-Dependent Deployment, FDD) benötigt eine gemeinsame systemweite Version von .NET Core auf dem Zielsystem. Wenn das FDD-Szenario gemäß der Anleitung in diesem Artikel übernommen wird, erzeugt das SDK eine ausführbare Datei ( *.exe*). Diese wird als *frameworkabhängige ausführbare Datei* bezeichnet.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -107,7 +107,7 @@ Eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET 
 
 ::: moniker range="= aspnetcore-2.2"
 
-Der [Runtimebezeichner](/dotnet/core/rid-catalog) (Runtime Identifier, RID) für Windows ([\<Runtimebezeichner>](/dotnet/core/tools/csproj#runtimeidentifier)) enthält das Zielframework. Im folgenden Beispiel wird die RID auf `win7-x64` festgelegt. Die `<SelfContained>`-Eigenschaft ist auf `false` festgelegt. Diese Eigenschaften geben dem SDK die Anweisung, eine ausführbare Datei (*.exe*) für Windows sowie eine App zu generieren, die vom freigegebenen .NET Core-Framework abhängig ist.
+Der [Runtimebezeichner](/dotnet/core/rid-catalog) (Runtime Identifier, RID) für Windows ([\<Runtimebezeichner>](/dotnet/core/tools/csproj#runtimeidentifier)) enthält das Zielframework. Im folgenden Beispiel wird die RID auf `win7-x64` festgelegt. Die `<SelfContained>`-Eigenschaft ist auf `false` festgelegt. Diese Eigenschaften geben dem SDK die Anweisung, eine ausführbare Datei ( *.exe*) für Windows sowie eine App zu generieren, die vom freigegebenen .NET Core-Framework abhängig ist.
 
 Eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET Core-App veröffentlichen, ist für eine Windows Services-App nicht erforderlich. Um die Erstellung der *web.config*-Datei zu deaktivieren, fügen Sie die auf `true` festgelegte `<IsTransformWebConfigDisabled>`-Eigenschaft hinzu.
 
@@ -124,7 +124,7 @@ Eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET 
 
 ::: moniker range="= aspnetcore-2.1"
 
-Der [Runtimebezeichner](/dotnet/core/rid-catalog) (Runtime Identifier, RID) für Windows ([\<Runtimebezeichner>](/dotnet/core/tools/csproj#runtimeidentifier)) enthält das Zielframework. Im folgenden Beispiel wird die RID auf `win7-x64` festgelegt. Die `<SelfContained>`-Eigenschaft ist auf `false` festgelegt. Diese Eigenschaften geben dem SDK die Anweisung, eine ausführbare Datei (*.exe*) für Windows sowie eine App zu generieren, die vom freigegebenen .NET Core-Framework abhängig ist.
+Der [Runtimebezeichner](/dotnet/core/rid-catalog) (Runtime Identifier, RID) für Windows ([\<Runtimebezeichner>](/dotnet/core/tools/csproj#runtimeidentifier)) enthält das Zielframework. Im folgenden Beispiel wird die RID auf `win7-x64` festgelegt. Die `<SelfContained>`-Eigenschaft ist auf `false` festgelegt. Diese Eigenschaften geben dem SDK die Anweisung, eine ausführbare Datei ( *.exe*) für Windows sowie eine App zu generieren, die vom freigegebenen .NET Core-Framework abhängig ist.
 
 Die `<UseAppHost>`-Eigenschaft ist auf `true` festgelegt. Diese Eigenschaft stellt für den Dienst einen Aktivierungspfad (eine ausführbare Datei, *EXE*) für eine frameworkabhängige Bereitstellung bereit.
 
@@ -302,10 +302,12 @@ Dienste, die mit Anforderungen aus dem Internet oder einem Unternehmensnetzwerk 
 
 Standardmäßig ist ASP.NET Core an `http://localhost:5000` gebunden. Konfigurieren Sie URL und Port, indem Sie die `ASPNETCORE_URLS`-Umgebungsvariable festlegen.
 
-Weitere Informationen zu URL- und Portkonfigurationsansätzen einschließlich der Unterstützung für HTTPS-Endpunkte finden Sie in den folgenden Themen:
+Weitere Informationen zu den Konfigurationsansätzen für URLs und Ports finden Sie im relevanten Serverartikel:
 
-* <xref:fundamentals/servers/kestrel#endpoint-configuration> (Kestrel)
-* <xref:fundamentals/servers/httpsys#configure-windows-server> (HTTP.sys)
+* <xref:fundamentals/servers/kestrel#endpoint-configuration>
+* <xref:fundamentals/servers/httpsys#configure-windows-server>
+
+Die vorangehende Anleitung behandelt die Unterstützung für HTTPS-Endpunkte. Konfigurieren Sie z. B. die APP für HTTPS, wenn die Authentifizierung mit einem Windows-Dienst verwendet wird.
 
 > [!NOTE]
 > Die Verwendung des ASP.NET Core-HTTPS-Entwicklerzertifikats zum Schützen eines Dienstendpunkts wird nicht unterstützt.

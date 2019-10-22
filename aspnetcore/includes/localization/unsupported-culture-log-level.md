@@ -1,0 +1,2 @@
+> [!NOTE]
+> Web-Apps vor ASP.NET Core 3.0 schreiben ein Protokoll vom Typ `LogLevel.Warning` pro Anforderung, wenn die angeforderte Kultur nicht unterstützt wird. Durch die Protokollierung einer `LogLevel.Warning` pro Anforderung können große Protokolldateien mit redundanten Informationen entstehen. Dieses Verhalten wurde in ASP.NET 3.0 geändert. Die `RequestLocalizationMiddleware` schreibt ein Protokoll vom Typ `LogLevel.Debug`, wodurch die Größe der Produktionsprotokolle reduziert wird.

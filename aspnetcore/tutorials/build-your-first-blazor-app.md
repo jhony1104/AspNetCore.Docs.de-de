@@ -5,14 +5,14 @@ description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/15/2019
+ms.date: 10/15/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 10feb5467a6a6b5a43e0df739fa72902af9854da
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: c357b324905ee3a4c9f4bd167dbbcacaf7e1bc76
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168361"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391209"
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -99,6 +99,8 @@ Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
+### <a name="blazor-server-experience"></a>Verwendung von Blazor Server
+
 Wenn Sie mit einer Blazor Server-App arbeiten, wird der `WeatherForecastService`-Dienst in `Startup.ConfigureServices` als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert. Eine Instanz des Diensts steht überall in der App mittels [Abhängigkeitsinjektion (Dependency Injection, DI)](xref:fundamentals/dependency-injection) zur Verfügung:
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
@@ -113,13 +115,15 @@ Die `FetchData`-Komponente verwendet den eingefügten Dienst wie `ForecastServic
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
+### <a name="blazor-webassembly-experience"></a>Verwendung von Blazor WebAssembly
+
 Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* in den Ordner *wwwroot/sample-data* abzurufen.
 
 *Pages/FetchData.razor*:
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
 
-Eine [\@foreach](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleife rendert jede Vorhersageinstanz als eine Zeile in der Wetterdatentabelle:
+Eine [@foreach](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleife rendert jede Vorhersageinstanz als eine Zeile in der Wetterdatentabelle:
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
 

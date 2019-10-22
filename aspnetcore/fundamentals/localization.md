@@ -5,18 +5,16 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: 6dfbeae201a3586dfea6620917083130c4985b22
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: 9ed133c93a9ec95c63869b710d120eca9fda1b6e
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703812"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333699"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), [Bart Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/), und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
-
-Bis dieses Dokument für ASP.NET Core 3.0 aktualisiert wird, finden Sie weitere Informationen auf Hishams Blog [What is new in Localization in ASP.NET Core 3.0](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0).
 
 Wenn Sie eine mehrsprachige Website mit ASP.NET Core erstellen, können Sie mit Ihrer Website ein breiteres Publikum erreichen. ASP.NET Core bietet Dienste und Middleware zur Lokalisierung in verschiedene Sprachen und Kulturen.
 
@@ -275,10 +273,36 @@ Der [Accept-Language-Header](https://www.w3.org/International/questions/qa-accep
 
 6. Klicken Sie auf die Sprache und dann auf **Nach oben**.
 
+::: moniker range=">= aspnetcore-3.0"
+### <a name="the-content-language-http-header"></a>Der Content-Language-HTTP-Header
+
+Der [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language)-Entitätsheader:
+
+ - Wird verwendet, um die für die Zielgruppe vorgesehenen Sprachen zu beschreiben.
+ - Ermöglicht einem Benutzer, gemäß seiner bevorzugten Sprache zu differenzieren.
+
+Entitätsheader werden in HTTP-Anforderungen und -Antworten verwendet.
+
+In ASP.NET Core 3.0 kann der `Content-Language`-Header hinzugefügt werden, indem die Eigenschaft `ApplyCurrentCultureToResponseHeaders` festgelegt wird.
+
+Hinzufügen des `Content-Language`-Headers:
+
+ - Ermöglicht RequestLocalizationMiddleware, den `Content-Language`-Header mit der `CurrentUICulture` festzulegen.
+ - Macht das explizite Festlegen des `Content-Language`-Antwortheaders überflüssig.
+
+```csharp
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    ApplyCurrentCultureToResponseHeaders = true
+});
+```
+::: moniker-end
+
 ### <a name="use-a-custom-provider"></a>Verwenden eines benutzerdefinierten Anbieters
 
 Angenommen, Sie möchten Ihren Kunden das Speichern ihrer Sprache und Kultur in Ihren Datenbanken ermöglichen. In diesem Fall können Sie einen Anbieter codieren, der diese Werte für den Benutzer abruft. Im folgenden Codebeispiel wird veranschaulicht, wie Sie einen benutzerdefinierten Anbieter hinzufügen:
 
+::: moniker range="< aspnetcore-3.0"
 ```csharp
 private const string enUSCulture = "en-US";
 
@@ -301,6 +325,32 @@ services.Configure<RequestLocalizationOptions>(options =>
     }));
 });
 ```
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+```csharp
+private const string enUSCulture = "en-US";
+
+services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo(enUSCulture),
+        new CultureInfo("fr")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(culture: enUSCulture, uiCulture: enUSCulture);
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+
+    options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+    {
+        // My custom request culture logic
+        return new ProviderCultureResult("en");
+    }));
+});
+```
+::: moniker-end
 
 Verwenden Sie `RequestLocalizationOptions`, um Lokalisierungsanbieter hinzuzufügen oder zu entfernen.
 
@@ -341,7 +391,11 @@ Begriffe:
 * Übergeordnete Kultur: Eine neutrale Kultur, die eine spezifische Kultur enthält. („en“ ist z.B. die übergeordnete Kultur von „en-US“ und „en-GB“)
 * Gebietsschema: Ein Gebietsschema ist identisch mit einer Kultur.
 
-[!INCLUDE[](~/includes/currency.md)]
+[!INCLUDE[](~/includes/localization/currency.md)]
+
+::: moniker range=">= aspnetcore-3.0"
+[!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
+::: moniker-end
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
@@ -351,3 +405,4 @@ Begriffe:
 * [Ressourcen in RESX-Dateien](/dotnet/framework/resources/working-with-resx-files-programmatically)
 * [Microsoft Multilingual App Toolkit](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
 * [Lokalisierung und Generics](https://github.com/hishamco/hishambinateya.com/blob/master/Posts/localization-and-generics.md)
+* [Neues bei der Lokalisierung von ASP.NET Core 3.0](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0)

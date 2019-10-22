@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Metho
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/16/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: a8c3a0951761faab1c11507834aeef2507388d71
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: b157e16918975cd522318a02f21824d9a0198b11
+ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531125"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72697930"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
 
@@ -38,9 +38,9 @@ Für blazor-Server-apps:
 
 Das folgende Beispiel basiert auf [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem experimentellen JavaScript-basierten Decoder. Im Beispiel wird veranschaulicht, wie eine JavaScript-Funktion aus C# einer Methode aufgerufen wird. Die JavaScript-Funktion akzeptiert ein Bytearray C# aus einer Methode, decodiert das Array und gibt den Text zur Anzeige an die Komponente zurück.
 
-Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine Funktion bereit, die `TextDecoder` zum Decodieren eines bestandenen Arrays verwendet:
+Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine JavaScript-Funktion bereit, die `TextDecoder` zum Decodieren eines bestandenen Arrays verwendet und den decodierten Wert zurückgibt:
 
-[!code-html[](javascript-interop/samples_snapshot/index-script.html)]
+[!code-html[](javascript-interop/samples_snapshot/index-script-convertarray.html)]
 
 JavaScript-Code, wie z. b. der im vorherigen Beispiel gezeigte Code, kann auch aus einer JavaScript-Datei ( *. js*) mit einem Verweis auf die Skriptdatei geladen werden:
 
@@ -50,10 +50,12 @@ JavaScript-Code, wie z. b. der im vorherigen Beispiel gezeigte Code, kann auch a
 
 Folgende Komponente:
 
-* Ruft die JavaScript-Funktion `ConvertArray` mithilfe von `JsRuntime` auf, wenn eine Komponenten Schaltfläche (**Array konvertieren**) ausgewählt ist.
+* Ruft die `convertArray` JavaScript-Funktion mithilfe von `JSRuntime` auf, wenn eine Komponenten Schaltfläche (**Array konvertieren**) ausgewählt ist.
 * Nachdem die JavaScript-Funktion aufgerufen wurde, wird das bestandene Array in eine Zeichenfolge konvertiert. Die Zeichenfolge wird zur Anzeige an die Komponente zurückgegeben.
 
 [!code-cshtml[](javascript-interop/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
+
+##  <a name="use-of-ijsruntime"></a>Verwendung von ijsruntime
 
 Um die `IJSRuntime`-Abstraktion zu verwenden, übernehmen Sie einen der folgenden Ansätze:
 
@@ -61,9 +63,17 @@ Um die `IJSRuntime`-Abstraktion zu verwenden, übernehmen Sie einen der folgende
 
   [!code-cshtml[](javascript-interop/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
+  Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine `handleTickerChanged` JavaScript-Funktion bereit. Die-Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
+
+  [!code-html[](javascript-interop/samples_snapshot/index-script-handleTickerChanged1.html)]
+
 * Fügen Sie die `IJSRuntime`-Abstraktion in eine Klasse ( *. cs*) ein:
 
   [!code-csharp[](javascript-interop/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
+
+  Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine `handleTickerChanged` JavaScript-Funktion bereit. Die-Funktion wird mit `JSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
+
+  [!code-html[](javascript-interop/samples_snapshot/index-script-handleTickerChanged2.html)]
 
 * Verwenden Sie für die Generierung dynamischer Inhalte mit [buildrendertree](xref:blazor/components#manual-rendertreebuilder-logic)das `[Inject]`-Attribut:
 

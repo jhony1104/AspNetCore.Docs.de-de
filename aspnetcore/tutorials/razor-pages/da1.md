@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über das Aktualisieren der generierten Seiten in
 ms.author: riande
 ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: f1f69b7facf584d46248405c808e75bdd8448d2b
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: 0f6535462fe2d308825bf7289c10d2b0690cebd4
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68440325"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334111"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Aktualisieren der generierten Seiten in einer ASP.NET Core-App
 
@@ -53,6 +53,8 @@ Rufen Sie in Ihrem bevorzugten Browser **Quelltext anzeigen** auf, um das generi
 ```
 
 Die dynamisch generierten Links übergeben die Film-ID mit einer Abfragezeichenfolge (z.B. den Teil `?id=1` in `https://localhost:5001/Movies/Details?id=1`).
+
+### <a name="add-route-template"></a>Hinzufügen der Routenvorlage
 
 Aktualisieren Sie die Razor Pages „Edit“, „Details“ und „Delete“ so, dass die Routenvorlage „{id:int}“ verwendet wird. Ändern Sie die „page“-Direktive für jede dieser Seiten aus `@page` in `@page "{id:int}"`. Führen Sie die App aus, und zeigen Sie dann den Quelltext an. Der generierte HTML-Code fügt die ID dem Pfadteil der URL hinzu:
 

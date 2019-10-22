@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie eine Blazor Server-App mit ASP.NET Core hoste
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/05/2019
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: aedef7fe695dd4a0cbf04d3f3e9947f33f7afa40
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: 693d7ff67bad3a0c5bd050b795833763056ed511
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211606"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378815"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Hosten und Bereitstellen von Blazor Server
 
@@ -52,7 +52,11 @@ Blazor-Server-Apps verwenden ASP.NET Core SignalR, um mit dem Browser zu kommuni
 
 Blazor funktioniert am besten, wenn WebSockets aufgrund geringerer Latenz und wegen Zuverlässigkeit und [Sicherheit](xref:signalr/security) zum SignalR-Transport verwendet wird. SignalR verwendet Long Polling, wenn WebSockets nicht verfügbar oder die App explizit für die Verwendung von Long Polling konfiguriert ist. Konfigurieren Sie die App bei Bereitstellung für Azure App Service in den Einstellungen für den Dienst im Azure-Portal für die Verwendung von WebSockets. Weitere Informationen zum Konfigurieren der App für Azure App Service finden Sie in den [Richtlinien für die SignalR-Veröffentlichung](xref:signalr/publish-to-azure-web-app).
 
-Sie sollten den [Azure SignalR-Dienst](/azure/azure-signalr) für Blazor-Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor-Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Außerdem tragen die globale Reichweite und die Hochleistungsrechenzentren des SignalR-Diensts erheblich zur Verringerung der geografiebedingten Latenz bei.
+Sie sollten den [Azure SignalR-Dienst](/azure/azure-signalr) für Blazor-Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor-Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Außerdem tragen die globale Reichweite und die Hochleistungsrechenzentren des SignalR-Diensts erheblich zur Verringerung der geografiebedingten Latenz bei. So konfigurieren Sie eine App (und stellen optional den Azure SignalR-Dienst bereit):
+
+* Erstellen Sie ein Veröffentlichungsprofil für Azure-Apps in Visual Studio für die Blazor Server-App.
+* Fügen Sie dem Profil die **Azure SignalR-Dienst** -Abhängigkeit hinzu. Wenn das Azure-Abonnement nicht über eine bereits vorhandene Instanz des Azure SignalR-Diensts verfügt, die der App zugewiesen werden soll, wählen Sie **Neue Azure SignalR Service-Instanz erstellen** aus, um eine neue Dienstinstanz bereitzustellen.
+* Veröffentlichen der App in Azure
 
 ### <a name="measure-network-latency"></a>Messen der Netzwerklatenz
 

@@ -4,14 +4,14 @@ author: juntaoluo
 description: In diesem Tutorial erfahren Sie, wie Sie einen gRPC-Dienst und -Client in ASP.NET Core erstellen können. Dabei erfahren Sie, wie Sie ein gRPC-Dienstprojekt erstellen, eine PROTO-Datei bearbeiten und einen Duplexstreamaufruf hinzufügen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 8/26/2019
+ms.date: 10/10/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 9eeb71ca751005780560f0f2200edc2013541c34
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 61324cdd5b574ea8a12a1be5846a25c311ab4499
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925223"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259668"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Tutorial: Erstellen eines gRPC-Clients und -Servers in ASP.NET Core
 
@@ -91,7 +91,7 @@ Durch die obigen Befehle wird über die [.NET Core-CLI](/dotnet/core/tools/dotne
 
 ### <a name="open-the-project"></a>Öffnen des Projekts
 
-Klicken Sie in Visual Studio auf **Datei** > **Öffnen**, und wählen Sie die Datei *GrpcGreeter.sln* aus.
+Klicken Sie in Visual Studio auf **Datei** > **Öffnen**, und wählen Sie die Datei *GrpcGreeter.csproj* aus.
 
 ---
 

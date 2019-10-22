@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
 ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 1c29b59f9306774316ff37eeb57cc441fe5c7370
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: de75c3b0651c0cda6629af786d7db9dc83bc4fef
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820083"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72288821"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -86,7 +86,7 @@ Wählen Sie die Menülinks aus (**MvcMovie**, **Home**, **Privacy**). Auf jeder 
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Ändern des Titels, der Fußzeile und Menülinks in der Layoutdatei
 
-Ersetzen Sie den Inhalt der Datei *Views\Shared\_Layout.cshtml* durch das folgende Markup. Die Änderungen werden hervorgehoben:
+Ersetzen Sie den Inhalt der Datei *Views/Shared/_Layout.cshtml* durch das folgende Markup. Die Änderungen werden hervorgehoben:
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 

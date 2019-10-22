@@ -5,12 +5,12 @@ description: Dieser Artikel erläutert das Arbeiten mit einer Datenbank und ASP.
 ms.author: riande
 ms.date: 7/22/2019
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 197697f28e9faa45c1ac2b7f993bde15994957e5
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: b5acb573f8fa39e5300ecdb359113d8697d78934
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68440390"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334230"
 ---
 # <a name="work-with-a-database-and-aspnet-core"></a>Arbeiten mit einer Datenbank und ASP.NET Core
 
@@ -38,7 +38,7 @@ Das ASP.NET Core-[Konfigurationssystem](xref:fundamentals/configuration/index) l
 
 Der Name-Wert für die Datenbank (`Database={Database name}`) ist für den generierten Code anders. Beim Name-Wert handelt es sich um einen beliebigen Wert.
 
-[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json)]
+[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -52,7 +52,7 @@ Wenn die App auf einem Test- oder Produktionsserver bereitgestellt wird, kann ei
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB ist eine Basisversion der SQL Server Express-Datenbank-Engine, die für die Programmentwicklung bestimmt ist. LocalDB wird bedarfsgesteuert gestartet und im Benutzermodus ausgeführt, sodass keine komplexe Konfiguration anfällt. Standardmäßig erstellt LocalDB `*.mdf`-Dateien im `C:/Users/<user/>`-Verzeichnis.
+LocalDB ist eine Basisversion der SQL Server Express-Datenbank-Engine, die für die Programmentwicklung bestimmt ist. LocalDB wird bedarfsgesteuert gestartet und im Benutzermodus ausgeführt, sodass keine komplexe Konfiguration anfällt. Standardmäßig erstellt LocalDB `*.mdf`-Dateien im `C:\Users\<user>\`-Verzeichnis.
 
 <a name="ssox"></a>
 * Öffnen Sie im Menü **Ansicht** den **SQL Server-Objekt-Explorer** (SSOX).
@@ -107,10 +107,10 @@ Der folgende Code zeigt die aktualisierte *Program.cs*-Datei.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
-Eine Produktions-App würde `Database.Migrate` nicht aufrufen. Es wird zum vorangehenden Code hinzugefügt, um die folgende Ausnahme zu verhindern, wenn `Update-Database` nicht ausgeführt wurde:
+Die folgende Ausnahme tritt auf, wenn `Update-Database` nicht ausgeführt wurde:
 
-SqlException: Die bei der Anmeldung angeforderte Datenbank „RazorPagesMovieContext-21“ kann nicht geöffnet werden. Die Anmeldung ist fehlgeschlagen.
-Die Anmeldung des Benutzers „Benutzername“ ist fehlgeschlagen.
+> `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
+> `Login failed for user 'user name'.`
 
 ### <a name="test-the-app"></a>Testen der App
 

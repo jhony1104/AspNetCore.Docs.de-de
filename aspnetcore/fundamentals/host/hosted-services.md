@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/26/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 0eaa3a62370c1e413840bb65f597dc664adafc38
-ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
+ms.openlocfilehash: c1fbb5ae8ffc4ee506f42df6a4cbbe845b2b903d
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/30/2019
-ms.locfileid: "71688108"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333658"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Hintergrundtasks mit gehosteten Diensten in ASP.NET Core
 
-Von [Luke Latham](https://github.com/guardrex)
+Von [Luke Latham](https://github.com/guardrex) und [Jeow Li Huan](https://github.com/huan086)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -147,13 +147,17 @@ Im folgenden Beispiel für `QueueHostedService` gilt:
 
 * Die `BackgroundProcessing`-Methode gibt einen `Task` zurück, auf den in `ExecuteAsync` gewartet wird.
 * Hintergrundtasks in der Warteschlange werden aus dieser entfernt und in `BackgroundProcessing` ausgeführt.
+* Auf Arbeitselemente wird gewartet, bevor der Dienst in `StopAsync` angehalten wird.
 
-[!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28,39-40,44)]
+[!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28-29,33)]
 
 Ein `MonitorLoop`-Dienst verarbeitet das Einreihen von Tasks in die Warteschlange für den gehosteten Dienst, wenn der `w`-Schlüssel auf einem Eingabegerät ausgewählt wird:
 
 * Die `IBackgroundTaskQueue` wird in den `MonitorLoop`-Dienst eingefügt.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem` wird aufgerufen, um ein Arbeitselement in die Warteschlange einzureihen.
+* Das Arbeitselement simuliert eine Hintergrundaufgabe mit langer Ausführungszeit:
+  * Drei 5-Sekunden-Verzögerungen werden ausgeführt (`Task.Delay`).
+  * Eine `try-catch`-Anweisung fängt <xref:System.OperationCanceledException> auf, wenn der Task abgebrochen wird.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
@@ -234,7 +238,7 @@ Die Dienste werden in `Startup.ConfigureServices` registriert. Der Implementieru
 
 ## <a name="queued-background-tasks"></a>Hintergrundtasks in der Warteschlange
 
-Eine Warteschlange für Hintergrundtasks basiert auf dem <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*>von .NET 4.x ([die Integration in ASP.NET Core ist vorläufig geplant](https://github.com/aspnet/Hosting/issues/1280)):
+Eine Warteschlange für Hintergrundtasks basiert auf dem <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> von .NET Framework 4.x ([die Integration in ASP.NET Core ist vorläufig geplant](https://github.com/aspnet/Hosting/issues/1280)):
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
