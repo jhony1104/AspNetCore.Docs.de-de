@@ -5,14 +5,14 @@ description: Grundlegendes zum Hostingmodell von blazor Webassembly-und blazor-S
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/03/2019
+ms.date: 10/15/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: bc3ad9c7c4731b685fc161844d9f55e51722c0ea
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 072f9bbdcf7171ede63383b085f9f0f030bf1076
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71924675"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391171"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
@@ -22,7 +22,7 @@ Von [Daniel Roth](https://github.com/danroth27)
 
 Blazor ist ein Webframework, das für die Client seitige Ausführung im Browser auf einer [webassemblybasierten](https://webassembly.org/) .NET-Runtime (*blazor Webassembly*) oder Serverseite in ASP.net Core (*blazor-Server*) konzipiert ist. Unabhängig vom Hostingmodell sind die APP-und Komponentenmodelle *identisch*.
 
-Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebenen Hostingmodelle <xref:blazor/get-started>finden Sie unter.
+Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebenen Hostingmodelle finden Sie unter <xref:blazor/get-started>.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
@@ -61,12 +61,12 @@ Mit dem serverhostingmodell von blazor wird die APP auf dem Server innerhalb ein
 
 Verwenden Sie die Vorlage "ASP.net Core **blazor Server-App** " ([dotnet New blazorserver](/dotnet/core/tools/dotnet-new)), um eine blazor-App mithilfe des blazor-Hostingmodells zu erstellen. Die ASP.net Core-App hostet die blazor-Server-APP und erstellt den signalr-Endpunkt, mit dem Clients eine Verbindung herstellen
 
-Die ASP.net Core App verweist auf die `Startup` Klasse der APP, die hinzugefügt werden soll:
+Die ASP.net Core-App verweist auf die `Startup` Klasse der APP, um Folgendes hinzuzufügen:
 
 * Server seitige Dienste.
 * Die APP für die Pipeline für die Anforderungs Verarbeitung.
 
-Das Skript&dagger; " *blazor. Server. js* " stellt die Client Verbindung her. Es liegt in der Verantwortung der APP, den App-Zustand nach Bedarf beizubehalten und wiederherzustellen (z. b. im Fall einer verlorenen Netzwerkverbindung).
+Das Skript " *blazor. Server. js* " &dagger; die Client Verbindung herstellt. Es liegt in der Verantwortung der APP, den App-Zustand nach Bedarf beizubehalten und wiederherzustellen (z. b. im Fall einer verlorenen Netzwerkverbindung).
 
 Das serverhostingmodell von blazor bietet verschiedene Vorteile:
 
@@ -83,7 +83,7 @@ Es gibt Nachteile des blazor-Server Hostings:
 * Skalierbarkeit ist eine Herausforderung für apps mit vielen Benutzern. Der Server muss mehrere Clientverbindungen verwalten und den Client Status verarbeiten.
 * Ein ASP.net Core Server ist erforderlich, um der APP zu dienen. Server lose Bereitstellungs Szenarien sind nicht möglich (z. b. für die APP aus einem CDN).
 
-&dagger;Das Skript " *blazor. Server. js* " wird von einer eingebetteten Ressource in der ASP.net Core freigegebenen Framework bereitgestellt.
+&dagger;The " *blazor. Server. js* "-Skript wird von einer eingebetteten Ressource im ASP.net Core freigegebenen Framework bereitgestellt.
 
 ### <a name="comparison-to-server-rendered-ui"></a>Vergleich mit der Server gerenderten Benutzeroberfläche
 
@@ -106,7 +106,7 @@ Ein Benutzeroberflächen Update in blazor wird durch Folgendes ausgelöst:
 
 Das Diagramm wird erneut ausgeführt, und es wird ein UI- *diff* (Differenz) berechnet. Dieser Unterschied ist der kleinste Satz an DOM-Änderungen, die erforderlich sind, um die Benutzeroberfläche auf dem Client zu aktualisieren. Der diff wird in einem binären Format an den Client gesendet und vom Browser angewendet.
 
-Eine Komponente wird verworfen, nachdem der Benutzer auf dem Client dorthin navigiert ist. Während ein Benutzer mit einer Komponente interagiert, muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da der Status vieler Komponenten möglicherweise gleichzeitig vom Server verwaltet wird, ist die Arbeitsspeicher Erschöpfung ein Problem, das behoben werden muss. Anleitungen zum Erstellen einer blazor-Server-APP, um die optimale Verwendung des Server Arbeitsspeichers sicherzustellen <xref:security/blazor/server>, finden Sie unter.
+Eine Komponente wird verworfen, nachdem der Benutzer auf dem Client dorthin navigiert ist. Während ein Benutzer mit einer Komponente interagiert, muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da der Status vieler Komponenten möglicherweise gleichzeitig vom Server verwaltet wird, ist die Arbeitsspeicher Erschöpfung ein Problem, das behoben werden muss. Anleitungen zum Erstellen einer blazor-Server-APP, um die optimale Verwendung des Server Arbeitsspeichers sicherzustellen, finden Sie unter <xref:security/blazor/server>.
 
 ### <a name="circuits"></a>Fen
 
@@ -124,7 +124,7 @@ Für eine Branchen-APP, die auf ein privates Unternehmensnetzwerk beschränkt is
 
 Die Speicherauslastung kann auch zur APP-Latenz beitragen. Eine erhöhte Arbeitsspeicher Auslastung führt zu häufigen Garbage Collection-oder Paging-Speicher auf den Datenträger, die beide die Leistung der APP beeinträchtigen und somit die Benutzeroberflächen Latenz erhöhen. Weitere Informationen finden Sie unter <xref:security/blazor/server>.
 
-Blazor-Server-apps sollten optimiert werden, um die Benutzeroberflächen Latenz zu minimieren, indem Netzwerk Latenz und Speicherauslastung reduziert werden Einen Ansatz zum Messen der Netzwerk Latenz finden <xref:host-and-deploy/blazor/server#measure-network-latency>Sie unter. Weitere Informationen zu signalr und blazor finden Sie unter:
+Blazor-Server-apps sollten optimiert werden, um die Benutzeroberflächen Latenz zu minimieren, indem Netzwerk Latenz und Speicherauslastung reduziert werden Einen Ansatz zum Messen der Netzwerk Latenz finden Sie unter <xref:host-and-deploy/blazor/server#measure-network-latency>. Weitere Informationen zu signalr und blazor finden Sie unter:
 
 * <xref:host-and-deploy/blazor/server>
 * <xref:security/blazor/server>
@@ -135,10 +135,10 @@ Für blazor-Server-Apps ist eine aktive signalr-Verbindung mit dem Server erford
 
 Wenn der Client erkennt, dass die Verbindung unterbrochen wurde, wird dem Benutzer eine Standardbenutzer Oberfläche angezeigt, während der Client versucht, die Verbindung wiederherzustellen. Wenn bei der erneuten Verbindungs Herstellung ein Fehler auftritt, wird dem Benutzer die Option zum erneuten versuchen bereitgestellt. Zum Anpassen der Benutzeroberfläche müssen Sie ein Element mit `components-reconnect-modal` als `id` auf der Razor Page *_Host. cshtml* definieren. Der Client aktualisiert dieses Element mit einer der folgenden CSS-Klassen basierend auf dem Status der Verbindung:
 
-* `components-reconnect-show` &ndash; zeigt die Benutzeroberfläche an, um eine verlorene Verbindung anzugeben, und der Client versucht, die Verbindung wiederherzustellen.
-* `components-reconnect-hide`&ndash; Der Client verfügt über eine aktive Verbindung, die die Benutzeroberfläche ausblenden.
-* Fehler bei der erneuten Verbindungs Herstellung von `components-reconnect-failed` &ndash;, wahrscheinlich aufgrund eines Netzwerk Fehlers. Um erneut eine Verbindung herzustellen, wenden Sie `window.Blazor.reconnect()` an.
-* `components-reconnect-rejected` &ndash; erneute Verbindung wurde abgelehnt. Der Server wurde erreicht, hat jedoch die Verbindung abgelehnt, und der Benutzer Zustand auf dem Server ist nicht mehr vorhanden. Um die APP erneut zu laden, nennen Sie `location.reload()`. Der Verbindungsstatus kann folgende Ergebnisse haben:
+* `components-reconnect-show` &ndash; die Benutzeroberfläche anzeigen, um eine verlorene Verbindung anzugeben, und der Client versucht, die Verbindung wiederherzustellen.
+* `components-reconnect-hide` &ndash; der Client über eine aktive Verbindung verfügt, blenden Sie die Benutzeroberfläche aus.
+* `components-reconnect-failed` &ndash; Verbindungsfehler, wahrscheinlich aufgrund eines Netzwerk Fehlers. Um erneut eine Verbindung herzustellen, wenden Sie `window.Blazor.reconnect()` an.
+* `components-reconnect-rejected` &ndash; erneute Verbindung abgelehnt. Der Server wurde erreicht, hat jedoch die Verbindung abgelehnt, und der Benutzer Zustand auf dem Server ist nicht mehr vorhanden. Um die APP erneut zu laden, wenden Sie `location.reload()` an. Der Verbindungsstatus kann folgende Ergebnisse haben:
   * Ein Absturz in der Verbindung (serverseitiger Code) tritt auf.
   * Der Client ist so lange getrennt, dass der Server den Zustand des Benutzers löscht. Instanzen von Komponenten, mit denen der Benutzer interagiert hat, werden verworfen.
 
@@ -154,7 +154,7 @@ Blazor-Server-apps werden standardmäßig so eingerichtet, dass Sie die Benutzer
 </body>
 ```
 
-`RenderMode`konfiguriert, ob die Komponente Folgendes hat:
+`RenderMode` konfiguriert, ob die Komponente Folgendes hat:
 
 * Wird in die Seite vorab übernommen.
 * Wird als statischer HTML-Code auf der Seite gerendert, oder wenn er die erforderlichen Informationen zum Bootstrapping einer blazor-APP vom Benutzer-Agent enthält.
@@ -179,7 +179,7 @@ Wenn die Seite oder Ansicht gerendert wird:
 * Der anfängliche Komponenten Zustand, der für die vorab Generierung verwendet wird, geht verloren.
 * Der neue Komponenten Status wird erstellt, wenn die signalr-Verbindung hergestellt wird.
 
-Die folgende Razor Page rendert `Counter` eine Komponente:
+Die folgende Razor Page rendert eine `Counter` Komponente:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -189,7 +189,7 @@ Die folgende Razor Page rendert `Counter` eine Komponente:
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Nicht interaktive Komponenten von Razor Pages und Ansichten
 
-Auf der folgenden Razor Page wird die `MyComponent` Komponente statisch mit einem Anfangswert gerendert, der mit einem-Format angegeben wird:
+Auf der folgenden Razor-Seite wird die `MyComponent` Komponente statisch mit einem Anfangswert gerendert, der mit einem Formular angegeben wird:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -220,7 +220,7 @@ Manchmal müssen Sie den signalr-Client konfigurieren, der von den blazor-Server
 
 So konfigurieren Sie den signalr-Client in der Datei *pages/_Host. cshtml* :
 
-* Fügen Sie `autostart="false"` dem `<script>` -Tag für das Skript " *blazor. Server. js* " ein Attribut hinzu.
+* Fügen Sie dem `<script>`-Tag für das Skript " *blazor. Server. js* " ein `autostart="false"` Attribut hinzu.
 * Ruft `Blazor.start` auf und übergibt ein Konfigurationsobjekt, das den signalr-Generator angibt.
 
 ```html
