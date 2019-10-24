@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 8/22/2019
 uid: performance/caching/memory
-ms.openlocfilehash: aa39503f034cf46fa4317a1f3cbb8d130afd1b8c
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: d6b2aa363c552fdbda7f6e9ec5d476768c17d8a5
+ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333750"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72779194"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Speicher interne Speicherung in ASP.net Core
 
@@ -29,19 +29,19 @@ ASP.net Core unterstützt mehrere verschiedene Caches. Der einfachste Cache basi
 
 Für nicht persistente Sitzungen in einer Webfarm ist ein [verteilter Cache](distributed.md) erforderlich, um Cache Konsistenzprobleme zu vermeiden. Bei einigen apps kann ein verteilter Cache eine höhere horizontale Skalierung unterstützen als ein in-Memory-Cache. Wenn Sie einen verteilten Cache verwenden, wird der Cache Speicher auf einen externen Prozess verlagert.
 
-Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnittstelle ist auf `byte[]` beschränkt. Die Cache Elemente im Arbeitsspeicher und im verteilten Cache werden als Schlüssel-Wert-Paare gespeichert.
+Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnittstelle ist auf `byte[]`beschränkt. Die Cache Elemente im Arbeitsspeicher und im verteilten Cache werden als Schlüssel-Wert-Paare gespeichert.
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. Caching/MemoryCache
 
-<xref:System.Runtime.Caching> @ no__t-1 @ no__t-2 ([nuget-Paket](https://www.nuget.org/packages/System.Runtime.Caching/)) kann mit folgenden Aktionen verwendet werden:
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([nuget-Paket](https://www.nuget.org/packages/System.Runtime.Caching/)) kann mit folgenden Aktionen verwendet werden:
 
 * .NET Standard 2,0 oder höher.
 * Alle [.net-Implementierungen](/dotnet/standard/net-standard#net-implementation-support) , die auf .NET Standard 2,0 oder höher ausgerichtet sind. Beispielsweise ASP.net Core 2,0 oder höher.
 * .NET Framework 4,5 oder höher.
 
-[Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/ @ no__t-2 (in diesem Artikel beschrieben) wird über `System.Runtime.Caching` @ no__t-4 @ no__t-5 empfohlen, da es besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+[Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/`IMemoryCache` (in diesem Artikel beschrieben) wird für `System.Runtime.Caching`/`MemoryCache` empfohlen, da Sie besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
 
-Verwenden Sie `System.Runtime.Caching` @ no__t-1 @ no__t-2 als Kompatibilitäts Bridge, wenn Sie Code von ASP.NET 4. x auf ASP.net Core portieren.
+Verwenden Sie `System.Runtime.Caching`/`MemoryCache` als Kompatibilitäts Bridge, wenn Sie Code von ASP.NET 4. x auf ASP.net Core portieren.
 
 ## <a name="cache-guidelines"></a>Cache Richtlinien
 
@@ -56,6 +56,7 @@ Verwenden Sie `System.Runtime.Caching` @ no__t-1 @ no__t-2 als Kompatibilitäts 
 > [!WARNING]
 > Die Verwendung eines *Shared* Memory-Caches aus der [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) und das Aufrufen von `SetSize`, `Size` oder `SizeLimit`, um die Cache Größe einzuschränken, kann dazu führen, dass die APP ausfällt. Wenn eine Größenbeschränkung für einen Cache festgelegt wird, müssen alle Einträge beim Hinzufügen eine Größe angeben. Dies kann zu Problemen führen, da Entwickler möglicherweise nicht die vollständige Kontrolle darüber haben, was den freigegebenen Cache verwendet. Beispielsweise wird von Entity Framework Core der freigegebene Cache verwendet, und es wird keine Größe angegeben. Wenn eine APP eine Cache Größenbeschränkung festlegt und EF Core verwendet, löst die APP eine `InvalidOperationException` aus.
 > Wenn Sie `SetSize`, `Size` oder `SizeLimit` verwenden, um den Cache einzuschränken, erstellen Sie einen Cache Singleton zum Zwischenspeichern. Weitere Informationen und ein Beispiel finden Sie unter [Verwenden von "setSize", "size" und "SizeLimit", um die Cache Größe einzuschränken](#use-setsize-size-and-sizelimit-to-limit-cache-size).
+> Ein frei gegebener Cache wird von anderen Frameworks oder Bibliotheken gemeinsam genutzt. Beispielsweise wird von EF Core der freigegebene Cache verwendet, und es wird keine Größe angegeben. 
 
 In-Memory-Caching ist ein *Dienst* , auf den von einer App mithilfe von [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)verwiesen wird. Fordern Sie die `IMemoryCache`-Instanz im Konstruktor an:
 
@@ -202,19 +203,19 @@ ASP.net Core unterstützt mehrere verschiedene Caches. Der einfachste Cache basi
 
 Für nicht persistente Sitzungen in einer Webfarm ist ein [verteilter Cache](distributed.md) erforderlich, um Cache Konsistenzprobleme zu vermeiden. Bei einigen apps kann ein verteilter Cache eine höhere horizontale Skalierung unterstützen als ein in-Memory-Cache. Wenn Sie einen verteilten Cache verwenden, wird der Cache Speicher auf einen externen Prozess verlagert.
 
-Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnittstelle ist auf `byte[]` beschränkt. Die Cache Elemente im Arbeitsspeicher und im verteilten Cache werden als Schlüssel-Wert-Paare gespeichert.
+Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnittstelle ist auf `byte[]`beschränkt. Die Cache Elemente im Arbeitsspeicher und im verteilten Cache werden als Schlüssel-Wert-Paare gespeichert.
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. Caching/MemoryCache
 
-<xref:System.Runtime.Caching> @ no__t-1 @ no__t-2 ([nuget-Paket](https://www.nuget.org/packages/System.Runtime.Caching/)) kann mit folgenden Aktionen verwendet werden:
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([nuget-Paket](https://www.nuget.org/packages/System.Runtime.Caching/)) kann mit folgenden Aktionen verwendet werden:
 
 * .NET Standard 2,0 oder höher.
 * Alle [.net-Implementierungen](/dotnet/standard/net-standard#net-implementation-support) , die auf .NET Standard 2,0 oder höher ausgerichtet sind. Beispielsweise ASP.net Core 2,0 oder höher.
 * .NET Framework 4,5 oder höher.
 
-[Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/ @ no__t-2 (in diesem Artikel beschrieben) wird über `System.Runtime.Caching` @ no__t-4 @ no__t-5 empfohlen, da es besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
+[Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/`IMemoryCache` (in diesem Artikel beschrieben) wird für `System.Runtime.Caching`/`MemoryCache` empfohlen, da Sie besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
 
-Verwenden Sie `System.Runtime.Caching` @ no__t-1 @ no__t-2 als Kompatibilitäts Bridge, wenn Sie Code von ASP.NET 4. x auf ASP.net Core portieren.
+Verwenden Sie `System.Runtime.Caching`/`MemoryCache` als Kompatibilitäts Bridge, wenn Sie Code von ASP.NET 4. x auf ASP.net Core portieren.
 
 ## <a name="cache-guidelines"></a>Cache Richtlinien
 
@@ -230,7 +231,7 @@ Verwenden Sie `System.Runtime.Caching` @ no__t-1 @ no__t-2 als Kompatibilitäts 
 > Die Verwendung eines *Shared* Memory-Caches aus der [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) und das Aufrufen von `SetSize`, `Size` oder `SizeLimit`, um die Cache Größe einzuschränken, kann dazu führen, dass die APP ausfällt. Wenn eine Größenbeschränkung für einen Cache festgelegt wird, müssen alle Einträge beim Hinzufügen eine Größe angeben. Dies kann zu Problemen führen, da Entwickler möglicherweise nicht die vollständige Kontrolle darüber haben, was den freigegebenen Cache verwendet. Beispielsweise wird von Entity Framework Core der freigegebene Cache verwendet, und es wird keine Größe angegeben. Wenn eine APP eine Cache Größenbeschränkung festlegt und EF Core verwendet, löst die APP eine `InvalidOperationException` aus.
 > Wenn Sie `SetSize`, `Size` oder `SizeLimit` verwenden, um den Cache einzuschränken, erstellen Sie einen Cache Singleton zum Zwischenspeichern. Weitere Informationen und ein Beispiel finden Sie unter [Verwenden von "setSize", "size" und "SizeLimit", um die Cache Größe einzuschränken](#use-setsize-size-and-sizelimit-to-limit-cache-size).
 
-In-Memory-Caching ist ein *Dienst* , auf den von ihrer App mithilfe von [Abhängigkeitsinjektion](../../fundamentals/dependency-injection.md)verwiesen wird. @No__t-0 in `ConfigureServices` aufzurufen:
+In-Memory-Caching ist ein *Dienst* , auf den von ihrer App mithilfe von [Abhängigkeitsinjektion](../../fundamentals/dependency-injection.md)verwiesen wird. `AddMemoryCache` in `ConfigureServices`abrufen:
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 

@@ -5,14 +5,14 @@ description: Beginnen Sie mit blazor, indem Sie eine blazor-App mit den Tools Ih
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/21/2019
 uid: blazor/get-started
-ms.openlocfilehash: fc368be5eb2e5d8f7c80071dc86a02ae986a685f
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 80ff7b42a44e722dd27bc4fde53a066863448e10
+ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391056"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72779128"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
 
@@ -46,7 +46,7 @@ Beginnen Sie mit blazor:
 
    5 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
 
-   6 \. Drücken Sie **F5**, um die App auszuführen.
+   6 \. Drücken Sie **STRG**+**F5**, um die App auszuführen.
 
    > [!NOTE]
    > Wenn Sie die Erweiterung blazor Visual Studio für eine vorherige Vorschauversion von ASP.net Core blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der blazor-Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
@@ -263,7 +263,7 @@ Führen Sie die App aus. Die Startseite verfügt über einen eigenen Wert, der v
 
 Komponenten Parameter werden mithilfe von Attributen oder untergeordnetem [Inhalt](xref:blazor/components#child-content)angegeben, sodass Sie Eigenschaften für die untergeordnete Komponente festlegen können. Aktualisieren Sie den Block "`@code`" der Komponente, um der Komponente "`Counter`" einen Parameter hinzuzufügen:
 
-* Fügen Sie eine öffentliche Eigenschaft für `IncrementAmount` mit einem `[Parameter]`-Attribut hinzu.
+* Fügen Sie eine öffentliche Eigenschaft für `IncrementAmount` mit einem `[Parameter]` Attribut hinzu.
 * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
 *Pages/Counter.razor*:
