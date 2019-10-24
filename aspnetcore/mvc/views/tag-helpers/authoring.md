@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: c13e63725298975fc882aa45c4e75de53e1d66a8
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: f0c7e114583b2ca2e681c507bef3487c863d8cd0
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815156"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589870"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
@@ -67,7 +67,7 @@ Dabei handelt es sich um ein Anchor-Tag, das daraus einen E-Mail-Link erstellt. 
 
 1. Fügen Sie der *Views/_ViewImports.cshtml*-Datei die Anweisung `addTagHelper` hinzu, um die `EmailTagHelper`-Klasse für sämtliche Razor-Ansichten verfügbar zu machen:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
    Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie, dass in der zweiten Zeile die Taghilfsprogramme für ASP.NET Core MVC angegeben sind, die die Platzhaltersyntax verwendet (Informationen zu diesen Hilfsprogrammen finden Sie unter [Introduction to Tag Helpers (Einführung in Taghilfsprogramme))](intro.md). Die `@addTagHelper`-Anweisung stellt das Taghilfsprogramm für die Razor-Ansicht zur Verfügung. Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
 

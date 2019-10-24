@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/10/2019
 uid: fundamentals/websockets
-ms.openlocfilehash: 5d4d9b02bd45e6650aa56448a3663cad06b3b45e
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 098e6826d6f7114baceb9578dc6d9883eb83f0aa
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975453"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589704"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>WebSockets-Unterstützung in ASP.NET Core
 
@@ -78,7 +78,7 @@ Sie können die folgenden Einstellungen konfigurieren:
 Sie können die folgenden Einstellungen konfigurieren:
 
 * `KeepAliveInterval`: Legt fest, wie oft Ping-Frames an den Client gesendet werden, um sicherzustellen, dass Proxys die Verbindung aufrechterhalten Der Standardwert beträgt zwei Minuten.
-* `ReceiveBufferSize`: Legt die Größe des Puffers fest, der zum Empfang von Daten verwendet wird Fortgeschrittene Benutzer müssen diese Angaben möglicherweise ändern, um die Leistung auf Grundlage der Größe ihrer Daten anzupassen. Der Standardwert ist 4 KB.
+* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize>: Legt die Größe des Puffers fest, der zum Empfang von Daten verwendet wird Fortgeschrittene Benutzer müssen diese Angaben möglicherweise ändern, um die Leistung auf Grundlage der Größe ihrer Daten anzupassen. Der Standardwert ist 4 KB.
 * `AllowedOrigins` – Eine Liste der zulässigen Origin-Headerwerte für WebSocket-Anforderungen. Alle Ursprünge sind standardmäßig zulässig. Weitere Informationen finden Sie unter „Beschränkung von WebSocket-Ursprüngen“ weiter unten.
 
 ::: moniker-end
