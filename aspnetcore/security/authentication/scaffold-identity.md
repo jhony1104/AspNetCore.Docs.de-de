@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3ae089d344d95ed84c9720ab4ba2c697400901e
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: ca2046563281efc3c1cd8f4fec73fe4f8d3fbdda
+ms.sourcegitcommit: 383017d7060a6d58f6a79cf4d7335d5b4b6c5659
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703770"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72816105"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identität in ASP.net Core Projekten
 
@@ -35,7 +35,7 @@ Wir empfehlen die Verwendung eines Quell Code Verwaltungssystems, das Datei Unte
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Fügen Sie die folgenden hervorgehobenen Aufrufe der `Startup`-Klasse hinzu:
+Fügen Sie die folgenden markierten Aufrufe der `Startup`-Klasse hinzu:
 
 [!code-csharp[](scaffold-identity/sample/StartupEmpty.cs?name=snippet1&highlight=5,20-23)]
 
@@ -76,7 +76,7 @@ Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfigurie
 
 ### <a name="enable-authentication"></a>Aktivieren der Authentifizierung
 
-In der `Configure`-Methode der `Startup`-Klasse wird [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles` aufgerufen:
+Nennen Sie in der `Configure`-Methode der `Startup`-Klasse nach `UseStaticFiles`die [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) :
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -84,7 +84,7 @@ In der `Configure`-Methode der `Startup`-Klasse wird [UseAuthentication](/dotnet
 
 ### <a name="layout-changes"></a>Layoutänderungen
 
-Optional: Fügen Sie die Anmelde partielle (`_LoginPartial`) der Layoutdatei hinzu:
+Optional: Fügen Sie die Anmelde-partielle (`_LoginPartial`) der Layoutdatei hinzu:
 
 [!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
@@ -98,8 +98,7 @@ uld option: Use Local DB, not SQLite
 dotnet new webapp -au Individual -uld -o RPauth
 cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet restore
-dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files Account.Register
+dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Register"
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
@@ -133,7 +132,7 @@ Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfigurie
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles` aufzurufen:
+[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) nach `UseStaticFiles`abrufen:
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
@@ -146,7 +145,7 @@ dotnet new mvc -au Individual -o MvcAuth
 cd MvcAuth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
-dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext --files Account.Register
+dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --files "Account.Login;Account.Register"
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
@@ -171,11 +170,85 @@ Der folgende Code legt die Werte für [loginpath](/dotnet/api/microsoft.aspnetco
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet3)]
 
-Registrieren Sie eine `IEmailSender`-Implementierung, z. b.:
+Registrieren Sie eine `IEmailSender` Implementierung, z. b.:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet4)]
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet)]
+
+<!--
+uld option: Use Local DB, not SQLite
+
+dotnet new webapp -au Individual -uld -o RPauth
+cd RPauth
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
+-->
+## <a name="disable-register-page"></a>Registerseite deaktivieren
+
+So deaktivieren Sie die Benutzerregistrierung:
+
+* Gerüst Identität. Schließen Sie Account. Register, Account. Login und Account. registerconfirmation ein. Beispiel:
+
+  ```dotnetcli
+   dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
+  ```
+
+* Aktualisieren Sie *Areas/Identity/Pages/Account/Register. cshtml. cs* , damit Benutzer sich nicht bei diesem Endpunkt registrieren können:
+
+  [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
+
+* Aktualisieren Sie *Areas/Identity/Pages/Account/Register. cshtml* , damit Sie mit den vorangehenden Änderungen konsistent sind:
+
+  [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
+
+* Kommentieren Sie den Registrierungs Link aus *Bereichen/Identität/Seiten/Konto/Login. cshtml* aus, oder entfernen Sie ihn.
+
+```cshtml
+@*
+<p>
+    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+</p>
+*@
+```
+
+* Aktualisieren Sie die Seite *Bereiche/Identität/Seiten/Konto/Register Bestätigung* .
+
+  * Entfernen Sie den Code und die Verknüpfungen aus der cshtml-Datei.
+  * Entfernen Sie den Bestätigungscode aus dem `PageModel`:
+
+  ```csharp
+   [AllowAnonymous]
+    public class RegisterConfirmationModel : PageModel
+    {
+        public IActionResult OnGet()
+        {  
+            return Page();
+        }
+    }
+  ```
+  
+### <a name="use-another-app-to-add-users"></a>Verwenden einer anderen APP zum Hinzufügen von Benutzern
+
+Stellen Sie einen Mechanismus zum Hinzufügen von Benutzern außerhalb der Web-App bereit. Zu den Optionen zum Hinzufügen von Benutzern gehören:
+
+* Eine dedizierte admin-Web-App.
+* Eine Konsolen-app.
+
+Der folgende Code beschreibt einen Ansatz zum Hinzufügen von Benutzern:
+
+* Eine Liste von Benutzern wird in den Arbeitsspeicher eingelesen.
+* Für jeden Benutzer wird ein sicheres Kennwort generiert.
+* Der Benutzer wird der Identitätsdatenbank hinzugefügt.
+* Der Benutzer wird benachrichtigt und aufgefordert, das Kennwort zu ändern.
+
+[!code-csharp[](scaffold-identity/consoleAddUser/Program.cs?name=snippet)]
+
+Der folgende Code zeigt, wie Sie einen Benutzer hinzufügen:
+
+[!code-csharp[](scaffold-identity/consoleAddUser/Data/SeedData.cs?name=snippet)]
+
+Ein ähnlicher Ansatz kann in Produktionsszenarien befolgt werden.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
