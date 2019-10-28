@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Integrationstests sicherstellen
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/14/2019
 uid: test/integration-tests
-ms.openlocfilehash: 2825073962d135608c52e7bde42106e7786de521
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: c0fede8f9f46d1b10502055d8e1fe7caa48cf351
+ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007456"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72779233"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.net Core
 
@@ -109,8 +109,8 @@ Das Testprojekt muss folgende Aktionen ausführen:
 Diese Voraussetzungen finden Sie in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Überprüfen Sie die Datei *Tests/razorpagesproject. Tests/razorpagesproject. Tests. csproj* . Die Beispiel-App verwendet das [xUnit](https://xunit.github.io/) -Test Framework und die [anglesharp](https://anglesharp.github.io/) -Parser-Bibliothek, sodass die Beispiel-APP auch auf Folgendes verweist:
 
 * [xUnit](https://www.nuget.org/packages/xunit)
-* [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
-* [AngleSharp](https://www.nuget.org/packages/AngleSharp)
+* [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
+* [Anglesharp](https://www.nuget.org/packages/AngleSharp)
 
 Entity Framework Core wird auch in den Tests verwendet. Die APP-Verweise:
 
@@ -126,7 +126,7 @@ Wenn die SUT- [Umgebung](xref:fundamentals/environments) nicht festgelegt ist, w
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Grundlegende Tests mit der standardmäßigen webapplicationfactory
 
-[Webapplicationfactory @ no__t-1tentrypoint >](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) wird verwendet, um einen [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) für die Integrationstests zu erstellen. `TEntryPoint` ist die Einstiegspunkt Klasse des SUT, normalerweise die `Startup`-Klasse.
+[Webapplicationfactory \<TEntryPoint >](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) wird verwendet, um einen [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) für die Integrationstests zu erstellen. `TEntryPoint` ist die Einstiegspunkt Klasse des SUT, normalerweise die `Startup`-Klasse.
 
 Test Klassen implementieren eine *Klassen Fixierungs* Schnittstelle ([iclassfixd](https://xunit.github.io/docs/shared-context#class-fixture)), um anzugeben, dass die Klasse Tests enthält, und stellen in den Tests in der Klasse gemeinsam genutzte Objektinstanzen bereit.
 
@@ -167,7 +167,24 @@ Die Webhost Konfiguration kann unabhängig von den Test Klassen erstellt werden,
 
    [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   Das datenbankseeding in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) wird von der `InitializeDbForTests`-Methode ausgeführt. Die-Methode wird im Beispiel [integration Tests beschrieben: Test-App-Organisation @ no__t-0 (Abschnitt).
+   Das datenbankseeding in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) wird von der `InitializeDbForTests`-Methode ausgeführt. Die-Methode wird im Beispiel [integration Tests beschrieben: ](#test-app-organization) Abschnitt "App-Organisation testen".
+
+   Der Daten Bank Kontext des Daten Bank Kontexts wird in der `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices` Rückruf der Test-App wird *nach* der Ausführung des `Startup.ConfigureServices` Codes der app ausgeführt. Um für die Tests eine andere Datenbank als die Datenbank der APP zu verwenden, muss der Daten Bank Kontext der app in `builder.ConfigureServices` ersetzt werden.
+
+   Die Beispiel-App findet den Dienst Deskriptor für den Daten Bank Kontext und verwendet den Deskriptor, um die Dienst Registrierung zu entfernen. Als Nächstes fügt die Factory eine neue `ApplicationDbContext` hinzu, die eine in-Memory Database für die Tests verwendet.
+
+   Um eine Verbindung mit einer anderen Datenbank als der in-Memory Database herzustellen, ändern Sie den `UseInMemoryDatabase`-Befehl, um den Kontext mit einer anderen Datenbank zu verbinden. So verwenden Sie eine SQL Server Testdatenbank:
+
+   * Verweisen Sie in der Projektdatei auf das nuget-Paket [Microsoft. entityframeworkcore. SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) .
+   * Ruft `UseSqlServer` mit einer Verbindungs Zeichenfolge für die Datenbank auf.
+
+   ```csharp
+   services.AddDbContext<ApplicationDbContext>((options, context) => 
+   {
+       context.UseSqlServer(
+           Configuration.GetConnectionString("TestingDbConnectionString"));
+   });
+   ```
 
 2. Verwenden Sie die benutzerdefinierte `CustomWebApplicationFactory` in Test Klassen. Im folgenden Beispiel wird die Factory in der `IndexPageTests`-Klasse verwendet:
 
@@ -210,7 +227,7 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang ausführt, der 
 
 In der folgenden Tabelle wird der Standardwert für [webapplicationfactoriyclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) angezeigt, der beim Erstellen von `HttpClient`-Instanzen verfügbar ist.
 
-| Option | Beschreibung | Default |
+| Option | Beschreibung | Standard |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungs Antworten befolgen sollen. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt Sie fest. | `http://localhost` |
@@ -306,8 +323,8 @@ Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetc
 
 | App | Projektverzeichnis | Beschreibung |
 | --- | ----------------- | ----------- |
-| Message-app (Das SUT) | *src/RazorPagesProject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
-| Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
+| Message-app (Das SUT) | *src/razorpagesproject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
+| Test-App | *Tests/razorpagesproject. Tests* | Wird verwendet, um das SUT zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](https://visualstudio.microsoft.com). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *Tests/razorpagesproject. Tests* aus:
 
@@ -349,6 +366,8 @@ Für Integrationstests ist in der Regel vor der Testausführung ein kleines Data
 Die Beispiel-App startet die Datenbank mit drei Nachrichten in *Utilities.cs* , die von Tests bei der Ausführung verwendet werden können:
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/Helpers/Utilities.cs?name=snippet1)]
+
+Der Daten Bank Kontext des Daten Bank Kontexts wird in der `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices` Rückruf der Test-App wird *nach* der Ausführung des `Startup.ConfigureServices` Codes der app ausgeführt. Um eine andere Datenbank für die Tests zu verwenden, muss der Daten Bank Kontext der app in `builder.ConfigureServices` ersetzt werden. Weitere Informationen finden Sie im Abschnitt [Anpassen von webapplicationfactory](#customize-webapplicationfactory) .
 
 ::: moniker-end
 
@@ -439,14 +458,14 @@ Das Testprojekt muss folgende Aktionen ausführen:
 
 * Verweisen Sie auf die folgenden Pakete:
   * [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
-  * [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
+  * [Microsoft. aspnetcore. MVC. testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * Geben Sie das Web-SDK in der Projektdatei an (`<Project Sdk="Microsoft.NET.Sdk.Web">`). Das Web-SDK ist erforderlich, wenn Sie auf das [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)verweisen.
 
 Diese Voraussetzungen finden Sie in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Überprüfen Sie die Datei *Tests/razorpagesproject. Tests/razorpagesproject. Tests. csproj* . Die Beispiel-App verwendet das [xUnit](https://xunit.github.io/) -Test Framework und die [anglesharp](https://anglesharp.github.io/) -Parser-Bibliothek, sodass die Beispiel-APP auch auf Folgendes verweist:
 
 * [xUnit](https://www.nuget.org/packages/xunit/)
-* [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
-* [AngleSharp](https://www.nuget.org/packages/AngleSharp/)
+* [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
+* [Anglesharp](https://www.nuget.org/packages/AngleSharp/)
 
 ## <a name="sut-environment"></a>SUT-Umgebung
 
@@ -454,7 +473,7 @@ Wenn die SUT- [Umgebung](xref:fundamentals/environments) nicht festgelegt ist, w
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Grundlegende Tests mit der standardmäßigen webapplicationfactory
 
-[Webapplicationfactory @ no__t-1tentrypoint >](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) wird verwendet, um einen [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) für die Integrationstests zu erstellen. `TEntryPoint` ist die Einstiegspunkt Klasse des SUT, normalerweise die `Startup`-Klasse.
+[Webapplicationfactory \<TEntryPoint >](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) wird verwendet, um einen [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) für die Integrationstests zu erstellen. `TEntryPoint` ist die Einstiegspunkt Klasse des SUT, normalerweise die `Startup`-Klasse.
 
 Test Klassen implementieren eine *Klassen Fixierungs* Schnittstelle ([iclassfixd](https://xunit.github.io/docs/shared-context#class-fixture)), um anzugeben, dass die Klasse Tests enthält, und stellen in den Tests in der Klasse gemeinsam genutzte Objektinstanzen bereit.
 
@@ -495,7 +514,7 @@ Die Webhost Konfiguration kann unabhängig von den Test Klassen erstellt werden,
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   Das datenbankseeding in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) wird von der `InitializeDbForTests`-Methode ausgeführt. Die-Methode wird im Beispiel [integration Tests beschrieben: Test-App-Organisation @ no__t-0 (Abschnitt).
+   Das datenbankseeding in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) wird von der `InitializeDbForTests`-Methode ausgeführt. Die-Methode wird im Beispiel [integration Tests beschrieben: ](#test-app-organization) Abschnitt "App-Organisation testen".
 
 2. Verwenden Sie die benutzerdefinierte `CustomWebApplicationFactory` in Test Klassen. Im folgenden Beispiel wird die Factory in der `IndexPageTests`-Klasse verwendet:
 
@@ -538,7 +557,7 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang ausführt, der 
 
 In der folgenden Tabelle wird der Standardwert für [webapplicationfactoriyclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) angezeigt, der beim Erstellen von `HttpClient`-Instanzen verfügbar ist.
 
-| Option | Beschreibung | Default |
+| Option | Beschreibung | Standard |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungs Antworten befolgen sollen. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt Sie fest. | `http://localhost` |
@@ -644,8 +663,8 @@ Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetc
 
 | App | Projektverzeichnis | Beschreibung |
 | --- | ----------------- | ----------- |
-| Message-app (Das SUT) | *src/RazorPagesProject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
-| Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
+| Message-app (Das SUT) | *src/razorpagesproject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
+| Test-App | *Tests/razorpagesproject. Tests* | Wird verwendet, um das SUT zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](https://visualstudio.microsoft.com). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *Tests/razorpagesproject. Tests* aus:
 
