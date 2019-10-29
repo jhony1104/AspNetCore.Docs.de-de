@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: 02e44135ab1742d44691cfda8c4167f21d6efa4e
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: ca5b0f8088773027f7403120247cbeca8900bcf5
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975648"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034348"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Client-IP-SafeList für ASP.net Core
 
@@ -35,7 +35,7 @@ Die Liste wird in der Datei " *appSettings. JSON* " konfiguriert. Dabei handelt 
 
 ## <a name="middleware"></a>Middleware
 
-Die `Configure` -Methode fügt die Middleware hinzu und übergibt die SafeList-Zeichenfolge in einem Konstruktorparameter.
+Die `Configure`-Methode fügt die Middleware hinzu und übergibt die SafeList-Zeichenfolge in einem Konstruktorparameter.
 
 [!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=10)]
 
@@ -47,7 +47,7 @@ Die Middleware analysiert die Zeichenfolge in ein Array und sucht im Array nach 
 
 Wenn Sie eine SafeList nur für bestimmte Controller oder Aktionsmethoden verwenden möchten, verwenden Sie einen Aktionsfilter. Im Folgenden ein Beispiel: 
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIdCheckFilter.cs)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckFilter.cs)]
 
 Der Aktionsfilter wird dem Dienst Container hinzugefügt.
 
@@ -57,13 +57,13 @@ Der Filter kann dann für einen Controller oder eine Aktionsmethode verwendet we
 
 [!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Controllers/ValuesController.cs?name=snippet_Filter&highlight=1)]
 
-In der Beispiel-APP wird der Filter auf die `Get` -Methode angewendet. Wenn Sie also die APP testen, indem Sie `Get` eine API-Anforderung senden, überprüft das Attribut die Client-IP-Adresse. Wenn Sie den Test durch Aufrufen der API mit einer anderen HTTP-Methode durchlaufen, überprüft die Middleware die Client-IP-Adresse.
+In der Beispiel-APP wird der Filter auf die `Get`-Methode angewendet. Wenn Sie also die APP testen, indem Sie eine `Get` API-Anforderung senden, überprüft das Attribut die Client-IP-Adresse. Wenn Sie den Test durch Aufrufen der API mit einer anderen HTTP-Methode durchlaufen, überprüft die Middleware die Client-IP-Adresse.
 
 ## <a name="razor-pages-filter"></a>Razor Pages Filter 
 
 Wenn Sie eine SafeList für eine Razor Pages-App verwenden möchten, verwenden Sie einen Razor Pages Filter. Im Folgenden ein Beispiel: 
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIdCheckPageFilter.cs)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckPageFilter.cs)]
 
 Dieser Filter wird aktiviert, indem er der MVC-Filter Auflistung hinzugefügt wird.
 

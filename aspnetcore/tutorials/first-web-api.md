@@ -78,7 +78,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Wechseln Sie vom Verzeichnis (`cd`) zum Ordner, der den Projektordner enthalten soll.
+* Wechseln Sie mit dem Befehl `cd`' zu dem Ordner, der den Projektordner enthalten soll.
 * Führen Sie die folgenden Befehle aus:
 
    ```dotnetcli
@@ -529,7 +529,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Wechseln Sie vom Verzeichnis (`cd`) zum Ordner, der den Projektordner enthalten soll.
+* Wechseln Sie mit dem Befehl `cd`' zu dem Ordner, der den Projektordner enthalten soll.
 * Führen Sie die folgenden Befehle aus:
 
    ```dotnetcli

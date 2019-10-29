@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit dem Azure Key Vault-Konfigurations Anbiet
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/14/2019
+ms.date: 10/27/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: c8e76068dbcf2a59a15fa75a1fc5aa0032e6acc5
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: acc3a77cdeb3ba73d8467d465128106e461efa7c
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334198"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034327"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -72,7 +72,7 @@ dotnet user-secrets set "SecretName" "secret_value_1_dev"
 dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 ```
 
-Wenn diese Geheimnisse in Azure Key Vault im [geheimen Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) gespeichert werden, wird das Suffix `_dev` in `_prod` geändert. Das-Suffix bietet einen visuellen Hinweis in der APP-Ausgabe, die die Quelle der Konfigurationswerte anzeigt.
+Wenn diese geheimen Schlüssel in Azure Key Vault im [geheimen Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) gespeichert werden, wird das `_dev` Suffix in `_prod`geändert. Das-Suffix bietet einen visuellen Hinweis in der APP-Ausgabe, die die Quelle der Konfigurationswerte anzeigt.
 
 ## <a name="secret-storage-in-the-production-environment-with-azure-key-vault"></a>Geheimer Speicher in der Produktionsumgebung mit Azure Key Vault
 
@@ -104,7 +104,7 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
 
    Azure Key Vault geheimen Namen sind auf alphanumerische Zeichen und Bindestriche beschränkt. Hierarchische Werte (Konfigurations Abschnitte) verwenden `--` (zwei Bindestriche) als Trennzeichen. Doppelpunkte, die normalerweise verwendet werden, um einen Abschnitt von einem Unterschlüssel in [ASP.net Core Konfiguration](xref:fundamentals/configuration/index)zu begrenzen, sind in Key Vault-Geheimnis Namen nicht zulässig. Aus diesem Grund werden zwei Bindestriche verwendet und für einen Doppelpunkt getauscht, wenn die geheimen Schlüssel in die Konfiguration der App geladen werden.
 
-   Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod`-Suffix, um Sie von den `_dev`-suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden Ersetzen Sie `{KEY VAULT NAME}` durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
+   Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod` Suffix, um Sie von den `_dev` suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden. Ersetzen Sie `{KEY VAULT NAME}` durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
 
    ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
@@ -141,7 +141,7 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
 
 Die Beispiel-app "`Certificate`" erhält Ihre Konfigurationswerte von `IConfigurationRoot` mit dem gleichen Namen wie der geheime Name:
 
-* Nicht hierarchische Werte: der Wert für "`SecretName`" wird mit `config["SecretName"]` abgerufen.
+* Nicht hierarchische Werte: der Wert für `SecretName` wird mit `config["SecretName"]`abgerufen.
 * Hierarchische Werte (Abschnitte): Verwenden Sie die `:`-Notation (Doppelpunkt) oder die `GetSection`-Erweiterungsmethode. Verwenden Sie einen dieser Ansätze zum Abrufen des Konfigurations Werts:
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
@@ -160,7 +160,7 @@ Beispiel Werte:
 
 [!code-json[](key-vault-configuration/sample/appsettings.json)]
 
-Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung werden geheime Werte mit dem Suffix "`_dev`" geladen. In der Produktionsumgebung werden die Werte mit dem Suffix "`_prod`" geladen.
+Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung werden geheime Werte mit dem `_dev`-Suffix geladen. In der Produktionsumgebung werden die Werte mit dem `_prod`-Suffix geladen.
 
 ## <a name="use-managed-identities-for-azure-resources"></a>Verwenden von verwalteten Identitäten für Azure-Ressourcen
 
@@ -200,9 +200,11 @@ Beispiel Wert für Key Vault-Name: `contosovault`
 }
 ```
 
-Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung haben geheime Werte das Suffix "`_dev`", da Sie von Benutzer Geheimnissen bereitgestellt werden. In der Produktionsumgebung werden die Werte mit dem `_prod`-Suffix geladen, da Sie von Azure Key Vault bereitgestellt werden.
+Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen Werte angezeigt. In der Entwicklungsumgebung verfügen geheime Werte über das `_dev` Suffix, da Sie von Benutzer Geheimnissen bereitgestellt werden. In der Produktionsumgebung werden die Werte mit dem `_prod` Suffix geladen, da Sie von Azure Key Vault bereitgestellt werden.
 
 Wenn Sie einen `Access denied`-Fehler erhalten, vergewissern Sie sich, dass die APP bei Azure AD registriert ist und Zugriff auf den Schlüssel Tresor hat. Vergewissern Sie sich, dass Sie den Dienst in Azure neu gestartet haben.
+
+Informationen zur Verwendung des Anbieters mit einer verwalteten Identität und einer Azure devops-Pipeline finden Sie unter [Erstellen einer Azure Resource Manager Dienst Verbindung mit einem virtuellen Computer mit einer verwalteten Dienst Identität](/azure/devops/pipelines/library/connect-to-azure#create-an-azure-resource-manager-service-connection-to-a-vm-with-a-managed-service-identity).
 
 ## <a name="use-a-key-name-prefix"></a>Schlüsselnamen Präfix verwenden
 
@@ -259,7 +261,7 @@ Wenn dieser Ansatz implementiert ist:
 
 1. Die Version `5000` (mit dem Bindestrich) wird aus dem Schlüsselnamen entfernt. Während der gesamten APP wird durch das Lesen der Konfiguration mit dem Schlüssel `AppSecret` der geheime Wert geladen.
 
-1. Wenn die App-Version in der Projektdatei in `5.1.0.0` geändert und die APP erneut ausgeführt wird, wird der geheime Wert `5.1.0.0_secret_value_dev` in der Entwicklungsumgebung und `5.1.0.0_secret_value_prod` in der Produktionsumgebung zurückgegeben.
+1. Wenn die App-Version in der Projektdatei geändert wird, um `5.1.0.0` und die APP erneut ausgeführt wird, wird der geheime Wert in der Entwicklungsumgebung `5.1.0.0_secret_value_dev` und in der Produktionsumgebung `5.1.0.0_secret_value_prod`.
 
 > [!NOTE]
 > Sie können auch eine eigene `KeyVaultClient`-Implementierung für `AddAzureKeyVault` bereitstellen. Ein benutzerdefinierter Client ermöglicht die gemeinsame Nutzung einer einzelnen Instanz des Clients in der gesamten app.

@@ -1,53 +1,53 @@
 ---
-title: Migrieren der Konfiguration zu ASP.NET Core
+title: Konfiguration zu ASP.net Core migrieren
 author: ardalis
-description: Informationen Sie zum Migrieren der Konfiguration in einem ASP.NET MVC-Projekt zu einem ASP.NET Core MVC-Projekt.
+description: Erfahren Sie, wie Sie die Konfiguration von einem ASP.NET-MVC-Projekt zu einem ASP.net Core MVC-Projekt migrieren.
 ms.author: riande
 ms.date: 10/14/2016
 uid: migration/configuration
-ms.openlocfilehash: c379f1f64dc5ab8aeb48055124e86e4e60d93785
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 455e66b94dd69ee6aab88768b64c525d56b8bbcf
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894927"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73033906"
 ---
-# <a name="migrate-configuration-to-aspnet-core"></a>Migrieren der Konfiguration zu ASP.NET Core
+# <a name="migrate-configuration-to-aspnet-core"></a>Konfiguration zu ASP.net Core migrieren
 
 Von [Steve Smith](https://ardalis.com/) und [Scott Addie](https://scottaddie.com)
 
-Im vorherigen Artikel wir zu Beginn der [migrieren ein ASP.NET MVC-Projekts zu ASP.NET Core MVC](xref:migration/mvc). In diesem Artikel migrieren wir die Konfiguration.
+Im vorherigen Artikel haben wir begonnen, [ein ASP.NET MVC-Projekt zu ASP.net Core MVC zu migrieren](xref:migration/mvc). In diesem Artikel wird die Konfiguration migriert.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="setup-configuration"></a>Setup-Konfiguration
+## <a name="setup-configuration"></a>Setup Konfiguration
 
-ASP.NET Core nicht mehr verwendet die *"Global.asax"* und *"Web.config"* Dateien, die frühere Versionen von ASP.NET verwendet. In früheren Versionen von ASP.NET Startlogik der Anwendung platziert wurde, eine `Application_StartUp` -Methode im *"Global.asax"*. Weiter unten in ASP.NET MVC, eine *"Startup.cs"* Datei im Stammverzeichnis des Projekts; enthalten war, und es wurde aufgerufen, wenn die Anwendung gestartet. ASP.NET Core hat dieser Ansatz übernommen, in der vollständig von allen Startlogik in die *"Startup.cs"* Datei.
+ASP.net Core verwendet nicht mehr die Dateien " *Global. asax* " und " *Web. config* ", die in früheren Versionen von ASP.NET verwendet wurden. In früheren Versionen von ASP.net wurde die Anwendungsstart Logik in einer `Application_StartUp`-Methode in " *Global. asax*" platziert. Später wurde in ASP.NET MVC eine *Startup.cs* -Datei in das Stammverzeichnis des Projekts eingefügt. und es wurde aufgerufen, als die Anwendung gestartet wurde. ASP.net Core hat diesen Ansatz vollständig übernommen, indem er die gesamte Start Logik in der *Startup.cs* -Datei platziert hat.
 
-Die *"Web.config"* in ASP.NET Core wurde auch Datei ersetzt. Konfiguration selbst kann nun konfiguriert werden, und als Teil der Anwendung beim Start-Prozedur, die in beschriebenen *"Startup.cs"*. Konfiguration kann dennoch XML-Dateien nutzen, aber in der Regel ASP.NET Core-Projekten platziert den Werten in einer JSON-formatierte Datei, z. B. *"appSettings.JSON"*. ASP.NET Core-Konfigurationssystem kann auch auf einfache Weise Zugriff auf Umgebungsvariablen, die zur Verfügung stellen können eine [mehr sicherer und stabiler Speicherort](xref:security/app-secrets) für umgebungsspezifische Werte. Dies gilt insbesondere für geheime Daten wie Verbindungszeichenfolgen und API-Schlüssel, die in die quellcodeverwaltung eingecheckt werden, sollte nicht. Finden Sie unter [Konfiguration](xref:fundamentals/configuration/index) Weitere Informationen zur Konfiguration in ASP.NET Core.
+Die Datei " *Web. config* " wurde auch in ASP.net Core ersetzt. Die Konfiguration selbst kann nun im Rahmen des in *Startup.cs*beschriebenen Verfahrens zum Starten der Anwendung konfiguriert werden. Die Konfiguration kann weiterhin XML-Dateien verwenden, aber in der Regel ASP.net Core Projekte Konfigurationswerte in eine JSON-formatierte Datei (z. b. *appSettings. JSON*). ASP.net Core Konfigurationssystem kann auch problemlos auf Umgebungsvariablen zugreifen, die einen sichereren [und stabileren Speicherort](xref:security/app-secrets) für Umgebungs spezifische Werte bereitstellen können. Dies gilt insbesondere für Geheimnisse wie Verbindungs Zeichenfolgen und API-Schlüssel, die nicht in die Quell Code Verwaltung eingecheckt werden sollen. Weitere Informationen zur Konfiguration in ASP.net Core finden Sie unter [Konfiguration](xref:fundamentals/configuration/index) .
 
-In diesem Artikel beginnen wir mit teilweise migrierte ASP.NET Core-Projekt aus [im vorgängerartikel](xref:migration/mvc). Konfiguration einrichten, fügen Sie den folgenden Konstruktor und die Eigenschaft, um die *"Startup.cs"* -Datei im Stammverzeichnis des Projekts:
+In diesem Artikel beginnen wir mit dem teilweise migrierten ASP.net Core Projekt aus [dem vorherigen Artikel](xref:migration/mvc). Fügen Sie der *Startup.cs* -Datei, die sich im Stammverzeichnis des Projekts befindet, den folgenden Konstruktor und die folgende Eigenschaft hinzu, um die Konfiguration einzurichten:
 
 [!code-csharp[](configuration/samples/WebApp1/src/WebApp1/Startup.cs?range=11-16)]
 
-Beachten Sie, dass an diesem Punkt die *"Startup.cs"* Datei nicht kompiliert werden, wie wir weiterhin die folgenden müssen `using` Anweisung:
+Beachten Sie, dass die *Startup.cs* -Datei zu diesem Zeitpunkt nicht kompiliert werden kann, da wir weiterhin die folgende `using`-Anweisung hinzufügen müssen:
 
 ```csharp
 using Microsoft.Extensions.Configuration;
 ```
 
-Hinzufügen einer *"appSettings.JSON"* Datei im Stammverzeichnis des Projekts mit der entsprechenden Elementvorlage:
+Fügen Sie die Datei " *appSettings. JSON* " im Stammverzeichnis des Projekts mithilfe der entsprechenden Element Vorlage hinzu:
 
-![Fügen Sie "appSettings" JSON](configuration/_static/add-appsettings-json.png)
+![AppSettings-JSON hinzufügen](configuration/_static/add-appsettings-json.png)
 
-## <a name="migrate-configuration-settings-from-webconfig"></a>Migrieren Sie die Konfigurationseinstellungen aus "Web.config"
+## <a name="migrate-configuration-settings-from-webconfig"></a>Konfigurationseinstellungen aus "Web. config" Migrieren
 
-Unser ASP.NET MVC-Projekt enthalten, die erforderliche Datenbank-Verbindungszeichenfolge in *"Web.config"* in die `<connectionStrings>` Element. In unserer ASP.NET Core-Projekts werden wir diese Informationen in den *"appSettings.JSON"* Datei. Open *"appSettings.JSON"*, und beachten Sie, dass sie bereits über Folgendes enthält:
+Das ASP.NET-MVC-Projekt enthielt die erforderliche Daten bankverbindungs Zeichenfolge in *Web. config*im `<connectionStrings>`-Element. In unserem ASP.net Core Projekt werden diese Informationen in der Datei " *appSettings. JSON* " gespeichert. Öffnen Sie die *Datei "appSettings. JSON*", und beachten Sie, dass Sie bereits Folgendes umfasst:
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 
-Die hervorgehobene Zeile oben dargestellten, ändern den Namen der Datenbank von **_CHANGE_ME** auf den Namen der Datenbank.
+Ändern Sie in der oben gezeigten markierten Zeile den Namen der Datenbank von **_CHANGE_ME** in den Namen der Datenbank.
 
 ## <a name="summary"></a>Zusammenfassung
 
-ASP.NET Core platziert alle Startlogik für die Anwendung in einer einzelnen Datei, in der die erforderlichen Dienste und Abhängigkeiten definiert und konfiguriert werden können. Er ersetzt die *"Web.config"* -Datei mit der eine flexible Konfiguration-Funktion, die eine Vielzahl von Dateiformaten wie JSON als auch Umgebungsvariablen nutzen können.
+ASP.net Core platziert alle Start Logik für die Anwendung in einer einzelnen Datei, in der die erforderlichen Dienste und Abhängigkeiten definiert und konfiguriert werden können. Die Datei " *Web. config* " wird durch ein flexibles Konfigurations Feature ersetzt, das eine Vielzahl von Dateiformaten, z. b. JSON, und Umgebungsvariablen nutzen kann.
