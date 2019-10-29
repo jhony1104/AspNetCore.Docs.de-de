@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 10/07/2019
 uid: razor-pages/index
-ms.openlocfilehash: d12cf7f4f45c98c292b0d035c99e051d9b779e9a
-ms.sourcegitcommit: 383017d7060a6d58f6a79cf4d7335d5b4b6c5659
+ms.openlocfilehash: 61e15b9b9b8f84de36621c301ecb9d33b21dff88
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72816123"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034280"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Einführung in Razor Pages in ASP.NET Core
 
@@ -157,7 +157,7 @@ Die Umgebungsdatei *Pages/Create.cshtml*:
 
 Der von *Pages/Create.cshtml* gerenderte HTML-Code sieht wie folgt aus:
 
-[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
+[!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
 Im vorherigen Code gilt für die Formularübermittlung mittels POST Folgendes:
 
@@ -283,7 +283,7 @@ Der vorangehende Code:
 
 * wird der folgende HTML-Code generiert:
 
-  [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
+  [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
 
 Wenn Sie das Formular „Create“ (Erstellen) ohne einen Wert für den Namen mit POST übermitteln, wird die Fehlermeldung „The Name field is required.“ (Für das Namensfeld muss ein Wert angegeben werden.) auf dem Formular angezeigt. Wenn JavaScript auf dem Client aktiviert ist, zeigt der Browser den Fehler an, ohne dass Daten per POST an den Server gesendet werden.
 
