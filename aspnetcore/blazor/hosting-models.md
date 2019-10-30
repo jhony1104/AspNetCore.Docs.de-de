@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 072f9bbdcf7171ede63383b085f9f0f030bf1076
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: be67c129af4f071d10719e0bbf121de761dde9f4
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391171"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73033995"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
@@ -228,7 +228,7 @@ So konfigurieren Sie den signalr-Client in der Datei *pages/_Host. cshtml* :
 <script>
   Blazor.start({
     configureSignalR: function (builder) {
-      builder.configureLogging(2); // LogLevel.Information
+      builder.configureLogging("information"); // LogLevel.Information
     }
   });
 </script>
