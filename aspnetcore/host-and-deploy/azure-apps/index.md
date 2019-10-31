@@ -1,18 +1,18 @@
 ---
 title: Bereitstellen von ASP.NET Core-Apps in Azure App Service
-author: guardrex
+author: bradygaster
 description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsressourcen.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
+ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/02/2019
+ms.date: 10/11/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: bda4923adb0f9769f883ef64f7902c8650308222
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 392868b4fc9105279f8f3b10436a9915123e7070
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71924886"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190660"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -29,6 +29,8 @@ Verwenden Sie Visual Studio, um ASP.NET Core-Web-Apps zu erstellen und in Azure 
 Verwenden Sie die Befehlszeile, um ASP.NET Core-Web-Apps zu erstellen und in Azure App Service unter Linux bereitzustellen.
 
 Die ASP.NET Core-Version, die unter Azure App Service verfügbar ist, finden Sie unter [ASP.NET Core im App Service-Dashboard](https://aspnetcoreon.azurewebsites.net/).
+
+Abonnieren Sie das Repository für [App Service-Ankündigungen](https://github.com/Azure/app-service-announcements/), und überwachen Sie die Issues. Das App Service-Team postet regelmäßig Ankündigungen und neue Szenarien in App Service.
 
 Die folgenden Artikel sind in der ASP.NET Core-Dokumentation verfügbar:
 
@@ -141,24 +143,48 @@ Wenn Sie zwischen Bereitstellungsslots wechseln, können Systeme, die Data Prote
 
 Weitere Informationen finden Sie unter <xref:security/data-protection/implementation/key-storage-providers>.
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
-<!-- revert this after 3.0 supported
-## Deploy ASP.NET Core preview release to Azure App Service
 
-Use one of the following approaches if the app relies on a preview release of .NET Core:
-
-* [Install the preview site extension](#install-the-preview-site-extension).
-* [Deploy a self-contained preview app](#deploy-a-self-contained-preview-app).
-* [Use Docker with Web Apps for containers](#use-docker-with-web-apps-for-containers).
--->
 ## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Bereitstellen von ASP.NET Core 3.0 in Azure App Service
 
-Wir hoffen, dass wir ASP.NET Core 3.0 bald in Azure App Service anbieten können.
+ASP.NET Core 3.0 wird in Azure App Service unterstützt. Um eine Vorschauversion einer höheren .NET Core-Version als 3.0 bereitzustellen, verwenden Sie eins der folgenden Verfahren. Diese Verfahren werden auch verwendet, wenn die Runtime verfügbar ist, aber das SDK nicht in Azure App Service installiert wurde.
 
-Wenden Sie einen der folgenden Ansätze an, wenn die App von .NET Core 3.0 abhängig ist:
-
-* [Installieren der Websiteerweiterung (Vorschau)](#install-the-preview-site-extension).
+* [Angeben der .NET Core SDK-Version mithilfe von Azure Pipelines](#specify-the-net-core-sdk-version-using-azure-pipelines)
 * [Bereitstellen einer eigenständigen Vorschau-App](#deploy-a-self-contained-preview-app)
 * [Verwenden von Docker mit Web-Apps für Container](#use-docker-with-web-apps-for-containers).
+* [Installieren der Websiteerweiterung (Vorschau)](#install-the-preview-site-extension).
+
+### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Angeben der .NET Core SDK-Version mithilfe von Azure Pipelines
+
+Verwenden Sie die Szenarien zum [Entwerfen einer CI/CD-Pipeline mithilfe von Azure DevOps](/azure/app-service/deploy-continuous-deployment), um einen Continuous Integration-Build mit Azure DevOps einzurichten. Nach dem Erstellen des Azure DevOps-Builds können Sie diesen optional für die Verwendung einer bestimmten SDK-Version konfigurieren. 
+
+#### <a name="specify-the-net-core-sdk-version"></a>Angeben der .NET Core SDK-Version
+
+Wenn Sie das App Service-Bereitstellungscenter zum Erstellen eines Azure DevOps-Builds verwenden, enthält die Standardbuildpipeline die Schritte für `Restore`, `Build`, `Test` und `Publish`. Zum Angeben der SDK-Version klicken Sie auf die Schaltfläche **Hinzufügen (+)** in der Liste mit Agent-Aufträgen, um einen neuen Schritt hinzuzufügen. Suchen Sie in der Suchleiste nach **.NET Core SDK**. 
+
+![Hinzufügen des .NET Core SDK-Schritts](index/add-sdk-step.png)
+
+Verschieben Sie den Schritt an die erste Stelle im Build, sodass die nachfolgenden Schritte die angegebene Version des .NET Core SDK verwenden. Geben Sie die Version des .NET Core SDK an. In diesem Beispiel ist das SDK auf `3.0.100` festgelegt.
+
+![Abgeschlossener SDK-Schritt](index/sdk-step-first-place.png)
+
+Um eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) (Self-Contained Deployment, SCD) zu veröffentlichen, konfigurieren Sie SCD im Schritt `Publish`, und geben Sie den [Runtimebezeichner](/dotnet/core/rid-catalog) (Runtime Identifier, RID) an.
+
+![Veröffentlichung einer eigenständigen Bereitstellung](index/self-contained.png)
+
+### <a name="deploy-a-self-contained-preview-app"></a>Bereitstellen einer eigenständigen Vorschau-App
+
+Eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd), die auf eine Vorschauruntime abzielt, enthält die Vorschauruntime in der Bereitstellung.
+
+Wenn Sie eine eigenständige App bereitstellen, gilt Folgendes:
+
+* Die Site in Azure App Service erfordert nicht die [Vorschau-Websiteerweiterung](#install-the-preview-site-extension).
+* Die App muss gemäß einem anderen Ansatz veröffentlicht werden, als beim Veröffentlichen für eine [frameworkabhängige Bereitstellung](/dotnet/core/deploying#framework-dependent-deployments-fdd).
+
+Befolgen Sie die Anweisungen im Abschnitt [Bereitstellen einer eigenständigen Vorschau-App](#deploy-the-app-self-contained).
+
+### <a name="use-docker-with-web-apps-for-containers"></a>Verwenden von Docker mit Web-Apps für Container
+
+Der [Docker-Hub](https://hub.docker.com/r/microsoft/aspnetcore/) enthält die aktuellen Images für die Docker-Vorschauversion. Die Images können als Basisimage verwendet werden. Verwenden Sie das Image, und führen Sie wie gewohnt eine Bereitstellung für Web-Apps für Container durch.
 
 ### <a name="install-the-preview-site-extension"></a>Installieren der Websiteerweiterung (Vorschau)
 
@@ -205,21 +231,6 @@ Nach Abschluss dieses Vorgangs wird die neueste .NET Core-Vorschauversion instal
 Wenn Sie eine ARM-Vorlage zum Erstellen und Bereitstellen von Anwendungen verwenden, können Sie den Ressourcentyp `siteextensions` verwenden, um die Websiteerweiterung zu einer Web-App hinzuzufügen. Beispiel:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
-
-### <a name="deploy-a-self-contained-preview-app"></a>Bereitstellen einer eigenständigen Vorschau-App
-
-Eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd), die auf eine Vorschauruntime abzielt, enthält die Vorschauruntime in der Bereitstellung.
-
-Wenn Sie eine eigenständige App bereitstellen, gilt Folgendes:
-
-* Die Site in Azure App Service erfordert nicht die [Vorschau-Websiteerweiterung](#install-the-preview-site-extension).
-* Die App muss gemäß einem anderen Ansatz veröffentlicht werden, als beim Veröffentlichen für eine [frameworkabhängige Bereitstellung](/dotnet/core/deploying#framework-dependent-deployments-fdd).
-
-Befolgen Sie die Anweisungen im Abschnitt [Bereitstellen einer eigenständigen Vorschau-App](#deploy-the-app-self-contained).
-
-### <a name="use-docker-with-web-apps-for-containers"></a>Verwenden von Docker mit Web-Apps für Container
-
-Der [Docker-Hub](https://hub.docker.com/r/microsoft/aspnetcore/) enthält die aktuellen Images für die Docker-Vorschauversion. Die Images können als Basisimage verwendet werden. Verwenden Sie das Image, und führen Sie wie gewohnt eine Bereitstellung für Web-Apps für Container durch.
 
 ## <a name="publish-and-deploy-the-app"></a>Veröffentlichen und Bereitstellen der App
 
