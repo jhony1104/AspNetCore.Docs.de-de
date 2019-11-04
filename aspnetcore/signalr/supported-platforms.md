@@ -1,51 +1,53 @@
 ---
-title: ASP.NET Core SignalR unterstützte Plattformen
+title: ASP.net Core von signalr unterstützte Plattformen
 author: bradygaster
-description: Informationen Sie zu den unterstützten Plattformen für ASP.NET Core SignalR.
+description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net Core signalr.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/06/2019
+ms.date: 11/01/2019
 uid: signalr/supported-platforms
-ms.openlocfilehash: fefaaf97de3f1fabf8f3154bf5b4ccb37195ccff
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1be7a307710e6e522c0088fd1ca01da11a13eda1
+ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892017"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73426980"
 ---
-# <a name="aspnet-core-signalr-supported-platforms"></a>ASP.NET Core SignalR unterstützte Plattformen
+# <a name="aspnet-core-signalr-supported-platforms"></a>ASP.net Core von signalr unterstützte Plattformen
 
-## <a name="server-system-requirements"></a>Server – Systemanforderungen
+## <a name="server-system-requirements"></a>Systemanforderungen für Server
 
-SignalR für ASP.NET Core unterstützt Serverplattform, die ASP.NET Core unterstützt.
+Signalr für ASP.net Core unterstützt jede Server Plattform, die von ASP.net Core unterstützt wird.
 
 ## <a name="javascript-client"></a>JavaScript-Client
 
-Die [JavaScript-Client](https://www.npmjs.com/package/@aspnet/signalr) auf NodeJS-8 und höheren Versionen und den folgenden Browsern ausgeführt wird:
+Der [JavaScript-Client](https://www.npmjs.com/package/@aspnet/signalr) wird auf nodejs 8 und höheren Versionen und den folgenden Browsern ausgeführt:
 
-| Browser                         | Version |
-| ------------------------------- | ------- |
-| Microsoft Edge                  | Aktuell |
-| Mozilla Firefox                 | Aktuell |
-| Google Chrome; Android enthält | Aktuell |
-| Safari; iOS enthält            | Aktuell |
-| Microsoft Internet Explorer     | 11      |
- 
+| Browser                         | Version         |
+| ------------------------------- | --------------- |
+| Microsoft Edge                  | Aktuelle&dagger; |
+| Mozilla Firefox                 | Aktuelle&dagger; |
+| Google Chrome; umfasst Android | Aktuelle&dagger; |
+| SK umfasst IOS            | Aktuelle&dagger; |
+| Microsoft Internet Explorer     | 11              |
+
+&dagger;*aktuelle* bezieht sich auf die neueste Version des Browsers.
+
 ## <a name="net-client"></a>.NET-Client
 
-Die [.NET Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) ausgeführt, die auf jeder Plattform, die von ASP.NET Core unterstützt wird. Z. B. [Xamarin-Entwickler können SignalR](https://github.com/aspnet/Announcements/issues/305) zum Erstellen von Android-apps mithilfe von Xamarin.Android 8.4.0.1 und höher sowie iOS-apps unter Verwendung von Xamarin.iOS 11.14.0.4 und höher.
+Der [.NET-Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) wird auf jeder von ASP.net Core unterstützten Plattform ausgeführt. [Xamarin-Entwickler können](https://github.com/aspnet/Announcements/issues/305) z. b. signalr zum Entwickeln von Android-Apps mit xamarin. Android 8.4.0.1 und höher und IOS-Apps verwenden, die xamarin. IOS 11.14.0.4 und höher verwenden.
 
-Wenn der Server mit IIS ausgeführt wird, ist die WebSockets-Übertragung IIS 8.0 oder höher auf Windows Server 2012 oder höher erforderlich. Andere Transporte werden auf allen Plattformen unterstützt.
+Wenn der Server IIS ausführt, erfordert der websockets-Transport IIS 8,0 oder höher unter Windows Server 2012 oder höher. Andere Transporte werden auf allen Plattformen unterstützt.
 
 ## <a name="java-client"></a>Java-Client
 
-Die [Java-Client](https://search.maven.org/artifact/com.microsoft.aspnet/signalr) Java 8 und höheren Versionen unterstützt.
+Der [Java-Client](https://search.maven.org/artifact/com.microsoft.aspnet/signalr) unterstützt Java 8 und höhere Versionen.
 
-## <a name="unsupported-clients"></a>Nicht unterstützte clients
+## <a name="unsupported-clients"></a>Nicht unterstützte Clients
 
-Die folgenden Clients sind verfügbar, aber es sind experimentelle oder inoffizielle. Sie werden derzeit nicht unterstützt und möglicherweise nie sein.
+Die folgenden Clients sind verfügbar, aber experimentell oder inoffiziell. Sie werden derzeit nicht unterstützt und sind möglicherweise nie.
 
-* [C++-client](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
+* [C++ent](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
 
-* [SWIFT-client](https://github.com/moozzyk/SignalR-Client-Swift)
+* [SWIFT-Client](https://github.com/moozzyk/SignalR-Client-Swift)

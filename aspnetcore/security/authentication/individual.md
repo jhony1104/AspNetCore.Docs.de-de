@@ -5,12 +5,12 @@ description: Entdecken Sie Artikel, die auf ASP.net Core Projekte basieren, die 
 ms.author: riande
 ms.date: 11/30/2017
 uid: security/authentication/individual
-ms.openlocfilehash: cf548417268a8587787471b9ed91c0ed109fbee9
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 91c5665dc50124b3ba09bdcfbf3ba501f684c604
+ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080703"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73463030"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artikel, die auf ASP.net Core Projekten basieren, die mit einzelnen Benutzerkonten erstellt wurden
 
@@ -42,7 +42,7 @@ Sehen Sie sich [dieses GitHub-Problem](https://github.com/aspnet/AspNetCore/issu
 
 ## <a name="no-authentication"></a>Keine Authentifizierung
 
-Die Authentifizierung wird im .net Core-CLI mit der `-au` Option angegeben. In Visual Studio ist das Dialogfeld **Authentifizierung ändern** für neue Webanwendungen verfügbar. Der Standardwert für neue Web-Apps in Visual Studio ist **keine Authentifizierung**.
+Die Authentifizierung wird im .net Core-CLI mit der `-au`-Option angegeben. In Visual Studio ist das Dialogfeld **Authentifizierung ändern** für neue Webanwendungen verfügbar. Der Standardwert für neue Web-Apps in Visual Studio ist **keine Authentifizierung**.
 
 Ohne Authentifizierung erstellte Projekte:
 
@@ -53,7 +53,7 @@ Ohne Authentifizierung erstellte Projekte:
 
 ## <a name="windows-authentication"></a>Windows-Authentifizierung
 
-Die Windows-Authentifizierung wird für neue Web-Apps im .net Core-CLI mit `-au Windows` der Option angegeben. Im Dialogfeld **Authentifizierung ändern** werden in Visual Studio die Optionen für die **Windows-Authentifizierung** angezeigt.
+Die Windows-Authentifizierung wird für neue Web-Apps im .net Core-CLI mit der `-au Windows`-Option angegeben. Im Dialogfeld **Authentifizierung ändern** werden in Visual Studio die Optionen für die **Windows-Authentifizierung** angezeigt.
 
 Wenn die Windows-Authentifizierung ausgewählt ist, wird die APP für die Verwendung des [IIS-Moduls der Windows-Authentifizierung](xref:host-and-deploy/iis/modules)konfiguriert. Die Windows-Authentifizierung ist für Intranetwebsites vorgesehen.
 
@@ -61,6 +61,5 @@ Wenn die Windows-Authentifizierung ausgewählt ist, wird die APP für die Verwen
 
 In den folgenden Artikeln wird gezeigt, wie Sie den in ASP.net Core Vorlagen generierten Code verwenden, der einzelne Benutzerkonten verwendet:
 
-* [Zweistufige Authentifizierung mit SMS](xref:security/authentication/2fa)
 * [Account confirmation and password recovery in ASP.NET Core (Kontobestätigung und Kennwortwiederherstellung in ASP.NET Core)](xref:security/authentication/accconfirm)
 * [Erstellen einer ASP.net Core-App mit von der Autorisierung geschützten Benutzerdaten](xref:security/authorization/secure-data)

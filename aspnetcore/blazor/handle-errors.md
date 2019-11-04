@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.net Core blazor, wie von blazor nicht behande
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/31/2019
 uid: blazor/handle-errors
-ms.openlocfilehash: fb4c7cacfe8be2417d6009cfc722595d0d91d530
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: afcaa4d926c3e5f0a018897ce4b67b54574dae77
+ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72288835"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73426985"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Behandeln von Fehlern in ASP.net Core blazor-apps
 
@@ -29,7 +29,7 @@ Der blazor-Server ist ein Zustands behaftetes Framework. Während Benutzer mit e
 
 Wenn ein Benutzer die APP auf mehreren Browser Registerkarten öffnet, sind mehrere unabhängige Verbindungen vorhanden.
 
-Blazor behandelt die meisten nicht behandelten Ausnahmen als schwerwiegend an der Verbindung, in der Sie auftreten. Wenn eine Verbindung aufgrund einer nicht behandelten Ausnahme beendet wird, kann der Benutzer die Interaktion mit der app nur fortsetzen, indem er die Seite erneut lädt, um eine neue Verbindung zu erstellen. Verbindungen außerhalb der Beendigungs Seite, bei der es sich um Verbindungen für andere Benutzer oder andere Browser Registerkarten handelt, sind nicht betroffen. Dieses Szenario ähnelt einer Desktop-App, die einen Absturz von @ no__t-0Die abgestürzte app muss neu gestartet werden, aber andere apps sind nicht betroffen.
+Blazor behandelt die meisten nicht behandelten Ausnahmen als schwerwiegend an der Verbindung, in der Sie auftreten. Wenn eine Verbindung aufgrund einer nicht behandelten Ausnahme beendet wird, kann der Benutzer die Interaktion mit der app nur fortsetzen, indem er die Seite erneut lädt, um eine neue Verbindung zu erstellen. Verbindungen außerhalb der Beendigungs Seite, bei der es sich um Verbindungen für andere Benutzer oder andere Browser Registerkarten handelt, sind nicht betroffen. Dieses Szenario ähnelt einer Desktop-App, die abstürzt,&mdash;die abstürzte APP neu gestartet werden muss, aber andere apps sind nicht betroffen.
 
 Eine Verbindung wird beendet, wenn eine nicht behandelte Ausnahme aus den folgenden Gründen auftritt:
 
@@ -48,7 +48,7 @@ In der Produktionsumgebung müssen Sie keine Framework-Ausnahme Meldungen oder S
 
 ## <a name="log-errors-with-a-persistent-provider"></a>Protokollieren von Fehlern mit einem permanenten Anbieter
 
-Wenn eine nicht behandelte Ausnahme auftritt, wird die Ausnahme in <xref:Microsoft.Extensions.Logging.ILogger>-Instanzen protokolliert, die im Dienst Container konfiguriert sind. Standardmäßig melden sich blazor-apps mit dem Konsolen Protokollierungs Anbieter an der Konsolenausgabe an. Melden Sie sich bei einem Anbieter, der die Protokoll Größe und die Protokoll Rotation verwaltet, an einem permanenten Speicherort an. Weitere Informationen finden Sie unter <xref:fundamentals/logging/index>.
+Wenn eine nicht behandelte Ausnahme auftritt, wird die Ausnahme in <xref:Microsoft.Extensions.Logging.ILogger> Instanzen protokolliert, die im Dienst Container konfiguriert sind. Standardmäßig melden sich blazor-apps mit dem Konsolen Protokollierungs Anbieter an der Konsolenausgabe an. Melden Sie sich bei einem Anbieter, der die Protokoll Größe und die Protokoll Rotation verwaltet, an einem permanenten Speicherort an. Weitere Informationen finden Sie unter <xref:fundamentals/logging/index>.
 
 Während der Entwicklung sendet blazor in der Regel die vollständigen Details der Ausnahmen an die Konsole des Browsers, um das Debuggen zu unterstützen. In der Produktionsumgebung sind ausführliche Fehler in der Browser Konsole standardmäßig deaktiviert. Dies bedeutet, dass Fehler nicht an Clients gesendet werden, sondern dass die vollständigen Details der Ausnahme weiterhin serverseitig protokolliert werden. Weitere Informationen finden Sie unter <xref:fundamentals/error-handling>.
 
@@ -75,9 +75,9 @@ Die vorangegangenen nicht behandelten Ausnahmen werden in den folgenden Abschnit
 Wenn blazor eine Instanz einer Komponente erstellt:
 
 * Der Konstruktor der Komponente wird aufgerufen.
-* Die Konstruktoren aller nicht-Singleton-di-Dienste, die über die [@inject-](xref:blazor/dependency-injection#request-a-service-in-a-component) Direktive oder das [[injizieren]](xref:blazor/dependency-injection#request-a-service-in-a-component) -Attribut für den Konstruktor der Komponente bereitgestellt werden, werden aufgerufen. 
+* Die Konstruktoren aller nicht-Singleton-di-Dienste, die über die [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) -Direktive oder das [[einschleusen]](xref:blazor/dependency-injection#request-a-service-in-a-component) -Attribut für den Konstruktor der Komponente bereitgestellt werden, werden aufgerufen. 
 
-Eine Verbindung kann nicht hergestellt werden, wenn ein ausgeführter Konstruktor oder Setter für eine `[Inject]`-Eigenschaft eine nicht behandelte Ausnahme auslöst. Die Ausnahme ist schwerwiegend, da das Framework die Komponente nicht instanziieren kann. Wenn die Konstruktorlogik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
+Eine Verbindung kann nicht hergestellt werden, wenn ein ausgeführter Konstruktor oder ein Setter für eine `[Inject]` Eigenschaft eine nicht behandelte Ausnahme auslöst. Die Ausnahme ist schwerwiegend, da das Framework die Komponente nicht instanziieren kann. Wenn die Konstruktorlogik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
 
 ### <a name="lifecycle-methods"></a>Lebenszyklusmethoden
 
@@ -94,22 +94,22 @@ Im folgenden Beispiel, in dem `OnParametersSetAsync` eine Methode zum Abrufen ei
 
 * Eine Ausnahme, die in der `ProductRepository.GetProductByIdAsync`-Methode ausgelöst wird, wird von einer `try-catch`-Anweisung behandelt.
 * Wenn der `catch`-Block ausgeführt wird:
-  * `loadFailed` ist auf `true` festgelegt, das verwendet wird, um dem Benutzer eine Fehlermeldung anzuzeigen.
+  * `loadFailed` ist auf `true`festgelegt, das verwendet wird, um dem Benutzer eine Fehlermeldung anzuzeigen.
   * Der Fehler wird protokolliert.
 
 [!code-cshtml[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
 
 ### <a name="rendering-logic"></a>Renderinglogik
 
-Das deklarative Markup in einer `.razor`-Komponenten Datei wird in eine C# Methode namens `BuildRenderTree` kompiliert. Wenn eine Komponente gerendert wird, wird `BuildRenderTree` ausgeführt und erstellt eine Datenstruktur, die die Elemente, den Text und die untergeordneten Komponenten der gerenderten Komponente beschreibt.
+Das deklarative Markup in einer `.razor` Komponenten Datei wird in eine C# Methode namens `BuildRenderTree`kompiliert. Wenn eine Komponente gerendert wird, wird `BuildRenderTree` ausgeführt und erstellt eine Datenstruktur, die die Elemente, den Text und die untergeordneten Komponenten der gerenderten Komponente beschreibt.
 
-Die Renderinglogik kann eine Ausnahme auslösen. Ein Beispiel für dieses Szenario tritt auf, wenn `@someObject.PropertyName` ausgewertet, aber `@someObject` `null` ist. Eine nicht behandelte Ausnahme, die von der Renderinglogik ausgelöst wird, ist schwerwiegend auf die
+Die Renderinglogik kann eine Ausnahme auslösen. Ein Beispiel für dieses Szenario tritt auf, wenn `@someObject.PropertyName` ausgewertet, aber `@someObject` `null`ist. Eine nicht behandelte Ausnahme, die von der Renderinglogik ausgelöst wird, ist schwerwiegend auf die
 
-Um eine NULL-Verweis Ausnahme in Renderinglogik zu verhindern, überprüfen Sie vor dem Zugriff auf die Member auf ein `null`-Objekt Im folgenden Beispiel wird auf `person.Address`-Eigenschaften nicht zugegriffen, wenn `person.Address` `null` ist:
+Um eine NULL-Verweis Ausnahme in der Renderingerweiterung zu vermeiden, suchen Sie vor dem Zugriff auf die Member nach einem `null` Objekt. Im folgenden Beispiel wird auf `person.Address` Eigenschaften nicht zugegriffen, wenn `person.Address` `null`ist:
 
 [!code-cshtml[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
 
-Der vorangehende Code geht davon aus, dass `person` nicht `null` ist. Häufig gewährleistet die Struktur des Codes, dass ein Objekt vorhanden ist, wenn die Komponente gerendert wird. In diesen Fällen ist es nicht erforderlich, in der Renderinglogik auf `null` zu überprüfen. Im vorherigen Beispiel ist es möglicherweise garantiert, dass `person` vorhanden ist, da `person` erstellt wird, wenn die Komponente instanziiert wird.
+Der vorangehende Code geht davon aus, dass `person` nicht `null`ist. Häufig gewährleistet die Struktur des Codes, dass ein Objekt vorhanden ist, wenn die Komponente gerendert wird. In diesen Fällen ist es nicht notwendig, auf `null` in der Renderinglogik zu prüfen. Im vorherigen Beispiel ist möglicherweise gewährleistet, dass `person` vorhanden ist, da `person` erstellt wird, wenn die Komponente instanziiert wird.
 
 ### <a name="event-handlers"></a>Ereignishandler
 
@@ -117,7 +117,7 @@ Client seitiger Code löst Aufrufe von Code aus C# , wenn Ereignishandler mit er
 
 * `@onclick`
 * `@onchange`
-* Andere `@on...`-Attribute
+* Weitere `@on...` Attribute
 * `@bind`
 
 Der Ereignishandlercode löst in diesen Szenarien möglicherweise eine nicht behandelte Ausnahme aus.
@@ -128,7 +128,7 @@ Wenn Benutzercode die Ausnahme nicht abfängt und behandelt, protokolliert das F
 
 ### <a name="component-disposal"></a>Komponenten Beseitigung
 
-Eine Komponente kann z. b. aus der Benutzeroberfläche entfernt werden, weil der Benutzer zu einer anderen Seite navigiert ist. Wenn eine Komponente, die <xref:System.IDisposable?displayProperty=fullName> implementiert, von der Benutzeroberfläche entfernt wird, ruft das Framework die <xref:System.IDisposable.Dispose*>-Methode der Komponente auf. 
+Eine Komponente kann z. b. aus der Benutzeroberfläche entfernt werden, weil der Benutzer zu einer anderen Seite navigiert ist. Wenn eine Komponente, die <xref:System.IDisposable?displayProperty=fullName> implementiert, von der Benutzeroberfläche entfernt wird, ruft das Framework die <xref:System.IDisposable.Dispose*> Methode der Komponente auf. 
 
 Wenn die `Dispose`-Methode der Komponente eine nicht behandelte Ausnahme auslöst, ist die Ausnahme für die Verbindung schwerwiegend. Wenn die Entsorgungs Logik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
 
@@ -136,13 +136,13 @@ Weitere Informationen zur Komponenten Beseitigung finden Sie unter <xref:blazor/
 
 ### <a name="javascript-interop"></a>JavaScript-Interoperabilität
 
-mit `IJSRuntime.InvokeAsync<T>` kann .NET-Code asynchrone Aufrufe der JavaScript-Laufzeit im Browser des Benutzers durchführen.
+`IJSRuntime.InvokeAsync<T>` ermöglicht .NET-Code das Ausführen von asynchronen Aufrufen der JavaScript-Laufzeit im Browser des Benutzers.
 
 Die folgenden Bedingungen gelten für die Fehlerbehandlung mit `InvokeAsync<T>`:
 
-* Wenn ein Rückruf von `InvokeAsync<T>` synchron fehlschlägt, tritt eine .NET-Ausnahme auf. Ein `InvokeAsync<T>`-Aufrufvorgang kann beispielsweise fehlschlagen, da die bereitgestellten Argumente nicht serialisiert werden können. Der Entwickler Code muss die Ausnahme abfangen. Wenn der app-Code in einem Ereignishandler oder einer Komponenten Lebenszyklus-Methode keine Ausnahme behandelt, ist die resultierende Ausnahme schwerwiegend auf die Verbindung.
-* Wenn ein Rückruf von `InvokeAsync<T>` asynchron fehlschlägt, schlägt .net <xref:System.Threading.Tasks.Task> fehl. Ein `InvokeAsync<T>`-Aufrufvorgang kann z. b. fehlschlagen, weil der JavaScript-seitige Code eine Ausnahme auslöst oder einen `Promise` zurückgibt, der als `rejected` abgeschlossen wurde. Der Entwickler Code muss die Ausnahme abfangen. Wenn Sie den [await](/dotnet/csharp/language-reference/keywords/await)-Operator verwenden, umschließen Sie den Methodenaufruf am besten in einer [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung mit der Fehlerbehandlung und der Protokollierung. Andernfalls führt der fehlgeschlagene Code zu einer nicht behandelten Ausnahme, die für die Verbindung schwerwiegend ist.
-* Standardmäßig müssen Aufrufe von `InvokeAsync<T>` innerhalb eines bestimmten Zeitraums durchgeführt werden, oder für den Aufruf wird ein Timeout festgestellt. Der Standard Timeout Zeitraum beträgt eine Minute. Das Timeout schützt den Code vor einem Verlust in Netzwerk Konnektivität oder JavaScript-Code, der niemals eine Abschluss Nachricht zurücksendet. Wenn für den-Timeout ein Timeout auftritt, schlägt die resultierende `Task` mit einem <xref:System.OperationCanceledException> fehl. Trap und verarbeitet die Ausnahme mit der Protokollierung.
+* Wenn bei einem Rückruf von `InvokeAsync<T>` synchron ein Fehler auftritt, wird eine .NET-Ausnahme ausgelöst. Ein-`InvokeAsync<T>` kann beispielsweise fehlschlagen, da die bereitgestellten Argumente nicht serialisiert werden können. Der Entwickler Code muss die Ausnahme abfangen. Wenn der app-Code in einem Ereignishandler oder einer Komponenten Lebenszyklus-Methode keine Ausnahme behandelt, ist die resultierende Ausnahme schwerwiegend auf die Verbindung.
+* Wenn ein-`InvokeAsync<T>` asynchron fehlschlägt, kann die .net-<xref:System.Threading.Tasks.Task> nicht ausgeführt werden. Ein-`InvokeAsync<T>` kann beispielsweise fehlschlagen, weil der JavaScript-seitige Code eine Ausnahme auslöst oder eine `Promise` zurückgibt, die als `rejected`abgeschlossen wurde. Der Entwickler Code muss die Ausnahme abfangen. Wenn Sie den [Erwartungs Operator verwenden](/dotnet/csharp/language-reference/keywords/await) , sollten Sie den Methoden aufrufin eine [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung umhüllen. Andernfalls führt der fehlgeschlagene Code zu einer nicht behandelten Ausnahme, die für die Verbindung schwerwiegend ist.
+* Standardmäßig müssen Aufrufe von `InvokeAsync<T>` innerhalb eines bestimmten Zeitraums ausgeführt werden, oder für den Aufruf wird ein Timeout festgestellt. Der Standard Timeout Zeitraum beträgt eine Minute. Das Timeout schützt den Code vor einem Verlust in Netzwerk Konnektivität oder JavaScript-Code, der niemals eine Abschluss Nachricht zurücksendet. Wenn für den-Rückruf ein Timeout auftritt, tritt bei der resultierenden `Task` ein <xref:System.OperationCanceledException>auf. Trap und verarbeitet die Ausnahme mit der Protokollierung.
 
 Ebenso kann JavaScript-Code Aufrufe von .NET-Methoden initiieren, die durch das [[jsinvokable]-Attribut](xref:blazor/javascript-interop#invoke-net-methods-from-javascript-functions)angegeben werden. Wenn diese .NET-Methoden eine nicht behandelte Ausnahme auslösen:
 
@@ -162,21 +162,21 @@ Mit blazor kann Code einen Verbindungs *Handler*definieren, der Benachrichtigung
 * `disconnected`
 * `disposed`
 
-Benachrichtigungen werden durch Registrieren eines di-Dienstanbieter verwaltet, der von der abstrakten Basisklasse `CircuitHandler` erbt.
+Benachrichtigungen werden durch Registrieren eines di-Dienstanbieter verwaltet, der von der `CircuitHandler` abstrakten Basisklasse erbt.
 
 Wenn die Methoden eines benutzerdefinierten Verbindungs Handlers eine nicht behandelte Ausnahme auslösen, ist die Ausnahme für die Verbindung schwerwiegend. Um Ausnahmen im Code eines Handlers zu tolerieren oder Methoden aufzurufen, packen Sie den Code in einer oder mehreren [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung.
 
 ### <a name="circuit-disposal"></a>Freigabe Entfernung
 
-Wenn eine Verbindung beendet wird, weil ein Benutzer die Verbindung getrennt hat und das Framework den Verbindungsstatus bereinigt, gibt das Framework den di-Bereich der Verbindung frei. Wenn Sie den Bereich verwerfen, werden alle di-Dienste, die mit <xref:System.IDisposable?displayProperty=fullName> implementiert werden, freigegeben. Wenn ein di-Dienst während der Entfernung eine nicht behandelte Ausnahme auslöst, protokolliert das Framework die Ausnahme.
+Wenn eine Verbindung beendet wird, weil ein Benutzer die Verbindung getrennt hat und das Framework den Verbindungsstatus bereinigt, gibt das Framework den di-Bereich der Verbindung frei. Wenn Sie den Bereich verwerfen, werden alle di-Dienste, die mit <xref:System.IDisposable?displayProperty=fullName>verbunden sind, mit dem Bereich entfernt. Wenn ein di-Dienst während der Entfernung eine nicht behandelte Ausnahme auslöst, protokolliert das Framework die Ausnahme.
 
 ### <a name="prerendering"></a>Wird vorab durchgeführt
 
 Blazor-Komponenten können mithilfe von `Html.RenderComponentAsync` vorab übernommen werden, damit das gerenderte HTML-Markup als Teil der ursprünglichen HTTP-Anforderung des Benutzers zurückgegeben wird. Dies funktioniert wie folgt:
 
-* Erstellen einer neuen Verbindung mit allen vorab erstellten Komponenten, die Teil der gleichen Seite sind.
+* Erstellen einer neuen Verbindung für alle vorab erstellten Komponenten, die Teil der gleichen Seite sind.
 * Das anfängliche HTML wird erzeugt.
-* Die Verbindung wird als `disconnected` behandelt, bis der Browser des Benutzers eine signalr-Verbindung zum gleichen Server herstellt, um die Interaktivität auf der Verbindung fortzusetzen.
+* Die Verbindung wird als `disconnected` behandelt, bis der Browser des Benutzers eine signalr-Verbindung zum gleichen Server herstellt. Wenn die Verbindung hergestellt wird, wird die Interaktivität der Verbindung fortgesetzt, und das HTML-Markup der Komponenten wird aktualisiert.
 
 Wenn eine Komponente während der vorab Generierung eine nicht behandelte Ausnahme auslöst, z. b. während einer Lebenszyklus Methode oder in Renderinglogik:
 
@@ -185,13 +185,13 @@ Wenn eine Komponente während der vorab Generierung eine nicht behandelte Ausnah
 
 Unter normalen Umständen ist es nicht sinnvoll, die Komponente zu erstellen und zu rendern, da eine funktionierende Komponente nicht gerendert werden kann.
 
-Um Fehler zu tolerieren, die möglicherweise während der vorab Generierung auftreten, muss die Fehler Behandlungs Logik in einer Komponente platziert werden, die Ausnahmen auslösen kann. Verwenden [Sie try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung. Anstatt den-Befehl `RenderComponentAsync` in einer `try-catch`-Anweisung zu umwickeln, platzieren Sie die Fehler Behandlungs Logik in der von `RenderComponentAsync` gerenderten Komponente.
+Um Fehler zu tolerieren, die möglicherweise während der vorab Generierung auftreten, muss die Fehler Behandlungs Logik in einer Komponente platziert werden, die Ausnahmen auslösen kann. Verwenden [Sie try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung. Anstatt den aufzurufenden `RenderComponentAsync` in einer `try-catch`-Anweisung zu umwickeln, platzieren Sie die Fehler Behandlungs Logik in der von `RenderComponentAsync`gerenderten Komponente.
 
 ## <a name="advanced-scenarios"></a>Erweiterte Szenarien
 
 ### <a name="recursive-rendering"></a>Rekursives Rendering
 
-Komponenten können rekursiv eingefügt werden. Dies ist nützlich, um rekursive Datenstrukturen darzustellen. Beispielsweise kann eine `TreeNode`-Komponente mehr `TreeNode`-Komponenten für die untergeordneten Knoten des Knotens darstellen.
+Komponenten können rekursiv eingefügt werden. Dies ist nützlich, um rekursive Datenstrukturen darzustellen. Beispielsweise kann eine `TreeNode` Komponente mehr `TreeNode` Komponenten für die untergeordneten Knoten des Knotens darstellen.
 
 Vermeiden Sie beim rekursiv Rendering das Codieren von Mustern, die zu einer unendlichen Rekursion führen:
 
@@ -213,12 +213,12 @@ Um unendliche Rekursions Muster zu vermeiden, stellen Sie sicher, dass der rekur
 
 ### <a name="custom-render-tree-logic"></a>Benutzerdefinierte renderstrukturlogik
 
-Die meisten blazor-Komponenten werden als *Razor* -Dateien implementiert und kompiliert, um Logik zu erzeugen, die auf einem `RenderTreeBuilder` zum Renderingergebnis arbeitet. Ein Entwickler kann `RenderTreeBuilder`-Logik mithilfe von prozeduralem C# Code manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/components#manual-rendertreebuilder-logic>.
+Die meisten blazor-Komponenten werden als *Razor* -Dateien implementiert und kompiliert, um Logik zu erzeugen, die auf einem `RenderTreeBuilder` zum Renderingergebnis funktioniert. Ein Entwickler kann `RenderTreeBuilder` Logik mithilfe von prozeduralem C# Code manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/components#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
 > Die Verwendung der Logik des manuellen renderbaum-Generators wird als erweitertes und unsichere Szenario angesehen und wird für die allgemeine Komponentenentwicklung nicht empfohlen.
 
-Wenn `RenderTreeBuilder`-Code geschrieben wurde, muss der Entwickler die Richtigkeit des Codes sicherstellen. Der Entwickler muss beispielsweise Folgendes sicherstellen:
+Wenn `RenderTreeBuilder` Code geschrieben wurde, muss der Entwickler die Richtigkeit des Codes sicherstellen. Der Entwickler muss beispielsweise Folgendes sicherstellen:
 
 * Aufrufe von `OpenElement` und `CloseElement` sind ordnungsgemäß ausgeglichen.
 * Attribute werden nur an den richtigen Stellen hinzugefügt.

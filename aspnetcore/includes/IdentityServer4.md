@@ -1,4 +1,10 @@
-ASP.net Core Identity fügt ASP.net Core Web-Apps Benutzeroberflächen-Anmelde Funktionen hinzu. Verwenden Sie zum Sichern von Web-APIs und Spas [IdentityServer4](https://identityserver.io). IdentityServer4 ist ein OpenID Connect-und OAuth 2,0-Framework für ASP.net Core 3,0. IdentityServer4 ermöglicht die folgenden Sicherheitsfeatures:
+ASP.NET Core Identity fügt Benutzeroberflächen-Anmeldefunktionen zu ASP.NET Core-Web-Apps hinzu. Verwenden Sie zum Sichern von Web-APIs und SPAs eine der folgenden Optionen:
+
+* [Azure Active Directory](/azure/api-management/api-management-howto-protect-backend-with-aad)
+* [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-custom-rest-api-netfw) (Azure AD B2C)
+* [IdentityServer4](https://identityserver.io)
+
+IdentityServer4 ist ein OpenID Connect- und OAuth 2.0-Framework für ASP.NET Core 3.0. IdentityServer4 ermöglicht die folgenden Sicherheitsfeatures:
 
 * Authentifizierung als Dienst
 * Einmaliges Anmelden und einmaliges Abmelden für mehrere Anwendungstypen
