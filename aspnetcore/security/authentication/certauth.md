@@ -6,16 +6,16 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 08/19/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: bb375cf380175daf2399f3b56f543819ee5692b8
-ms.sourcegitcommit: 07cd66e367d080acb201c7296809541599c947d1
+ms.openlocfilehash: 1e646aabb4e384e6906575e7beaa680e91f968a0
+ms.sourcegitcommit: e5d4768aaf85703effb4557a520d681af8284e26
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/17/2019
-ms.locfileid: "71039241"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73616581"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
-`Microsoft.AspNetCore.Authentication.Certificate`enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine `ClaimsPrincipal`auflösen können. 
+`Microsoft.AspNetCore.Authentication.Certificate` enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine `ClaimsPrincipal`auflösen können. 
 
 [Konfigurieren Sie Ihren Host für die](#configure-your-host-to-require-certificates) Zertifikat Authentifizierung, also IIS, Kestrel, Azure-Web-Apps oder andere Benutzer, die Sie verwenden.
 
@@ -32,11 +32,11 @@ Eine Alternative zur Zertifikat Authentifizierung in Umgebungen, in denen Proxys
 
 Erwerben Sie ein HTTPS-Zertifikat, wenden Sie es an, und [Konfigurieren Sie den Host](#configure-your-host-to-require-certificates) , um Zertifikate anzufordern.
 
-Fügen Sie in Ihrer Web-App einen Verweis auf `Microsoft.AspNetCore.Authentication.Certificate` das Paket hinzu. Verwenden Sie dann `Startup.Configure` in der- `app.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).UseCertificateAuthentication(...);` Methode mit den Optionen, und geben Sie `OnCertificateValidated` einen Delegaten für an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Diese Informationen werden in ein `ClaimsPrincipal` -Objekt umgewandelt und für `context.Principal` die-Eigenschaft festgelegt.
+Fügen Sie in Ihrer Web-App einen Verweis auf das `Microsoft.AspNetCore.Authentication.Certificate`-Paket hinzu. Nennen Sie dann in der `Startup.ConfigureServices`-Methode `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).UseCertificateAuthentication(...);` mit den Optionen, und geben Sie einen Delegaten für `OnCertificateValidated` an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Wandeln Sie diese Informationen in eine `ClaimsPrincipal` um, und legen Sie Sie für die `context.Principal`-Eigenschaft fest.
 
-Wenn die Authentifizierung fehlschlägt, gibt dieser `403 (Forbidden)` Handler wie erwartet `401 (Unauthorized)`eine Antwort zurück. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung stattfinden soll. Bis zum Zeitpunkt, an dem der Handler erreicht wird, ist es zu spät. Es gibt keine Möglichkeit, die Verbindung von einer anonymen Verbindung mit einem Zertifikat zu aktualisieren.
+Wenn bei der Authentifizierung ein Fehler auftritt, gibt dieser Handler wie erwartet eine `403 (Forbidden)` Antwort zurück, die `401 (Unauthorized)`. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung stattfinden soll. Bis zum Zeitpunkt, an dem der Handler erreicht wird, ist es zu spät. Es gibt keine Möglichkeit, die Verbindung von einer anonymen Verbindung mit einem Zertifikat zu aktualisieren.
 
-Fügen Sie `app.UseAuthentication();` außerdem die `Startup.Configure` -Methode hinzu. Andernfalls wird HttpContext. User nicht auf `ClaimsPrincipal` aus dem Zertifikat erstellt festgelegt. Beispiel:
+Fügen Sie außerdem `app.UseAuthentication();` in der `Startup.Configure`-Methode hinzu. Andernfalls wird der HttpContext. User nicht auf `ClaimsPrincipal` festgelegt, der aus dem Zertifikat erstellt wurde. Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -65,7 +65,7 @@ Der `CertificateAuthenticationOptions` Handler verfügt über einige integrierte
 
 Mit dieser Überprüfung wird überprüft, ob nur der geeignete Zertifikattyp zulässig ist.
 
-### <a name="validatecertificateuse"></a>ValidateCertificateUse
+### <a name="validatecertificateuse"></a>Validatecertifi| euse
 
 Mit dieser Überprüfung wird überprüft, ob das vom Client vorgelegte Zertifikat über die erweiterte Schlüssel Verwendung (EKU) der Client Authentifizierung oder über keine EKUs verfügt. Wie bei den Spezifikationen gesagt, werden alle EKUs als gültig eingestuft, wenn kein EKU angegeben wird.
 
@@ -95,8 +95,8 @@ Dies ist nicht möglich. Merken Sie sich, dass der Zertifikat Austausch durchgef
 
 Der Handler hat zwei Ereignisse:
 
-* `OnAuthenticationFailed`&ndash; Wird aufgerufen, wenn während der Authentifizierung eine Ausnahme auftritt und Sie reagieren können.
-* `OnCertificateValidated`&ndash; Wird aufgerufen, nachdem das Zertifikat überprüft wurde, die Überprüfung bestanden und ein Standard Prinzipal erstellt wurde. Dieses Ereignis ermöglicht es Ihnen, ihre eigene Validierung auszuführen und den Prinzipal zu erweitern oder zu ersetzen. Beispiele hierfür sind:
+* `OnAuthenticationFailed` &ndash; aufgerufen, wenn eine Ausnahme während der Authentifizierung auftritt und es Ihnen ermöglicht, zu reagieren.
+* `OnCertificateValidated` &ndash; aufgerufen, nachdem das Zertifikat überprüft wurde, wird die Überprüfung bestanden, und ein Standard Prinzipal wurde erstellt. Dieses Ereignis ermöglicht es Ihnen, ihre eigene Validierung auszuführen und den Prinzipal zu erweitern oder zu ersetzen. Beispiele hierfür sind:
   * Ermitteln, ob das Zertifikat den Diensten bekannt ist.
   * Erstellen eines eigenen Prinzipals. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
@@ -132,7 +132,7 @@ services.AddAuthentication(
     });
 ```
 
-Wenn Sie feststellen, dass das eingehende Zertifikat die zusätzliche über `context.Fail("failure reason")` Prüfung nicht erfüllt, können Sie mit einem Fehler Grund anrufen.
+Wenn Sie feststellen, dass das eingehende Zertifikat die zusätzliche Überprüfung nicht erfüllt, wenden Sie `context.Fail("failure reason")` mit einem Fehler Grund an.
 
 Für echte Funktionen möchten Sie wahrscheinlich einen Dienst aufzurufen, der in der Abhängigkeitsinjektion registriert ist, der eine Verbindung mit einer Datenbank oder einem anderen Benutzerspeicher herstellt. Greifen Sie auf den Dienst zu, indem Sie den Kontext verwenden, der in ihren Delegaten Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
@@ -177,7 +177,7 @@ services.AddAuthentication(
     });
 ```
 
-Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb `OnCertificateValidated`von ist durchaus akzeptabel.
+Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb `OnCertificateValidated`ist durchaus akzeptabel.
 
 ## <a name="configure-your-host-to-require-certificates"></a>Konfigurieren des Hosts, damit Zertifikate erforderlich sind
 
