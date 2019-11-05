@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie Daten im Arbeitsspeicher in ASP.NET Core zwischenspeichern können.
 ms.author: riande
 ms.custom: mvc
-ms.date: 8/22/2019
+ms.date: 11/2/2019
 uid: performance/caching/memory
-ms.openlocfilehash: d6b2aa363c552fdbda7f6e9ec5d476768c17d8a5
-ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
+ms.openlocfilehash: 1114d154ed1af09958df63ae718712177bbf6db0
+ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/22/2019
-ms.locfileid: "72779194"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73611441"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Speicher interne Speicherung in ASP.net Core
 
@@ -158,15 +158,18 @@ Weitere Informationen finden Sie [unter Compact Source auf GitHub](https://githu
 
 ## <a name="cache-dependencies"></a>Cache Abhängigkeiten
 
-Im folgenden Beispiel wird gezeigt, wie ein Cache Eintrag abläuft, wenn ein abhängiger Eintrag abläuft. Ein `CancellationChangeToken` wird dem zwischengespeicherten Element hinzugefügt. Wenn `Cancel` für die `CancellationTokenSource` aufgerufen wird, werden beide Cache Einträge entfernt.
+Im folgenden Beispiel wird gezeigt, wie ein Cache Eintrag abläuft, wenn ein abhängiger Eintrag abläuft. Dem zwischengespeicherten Element wird ein <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> hinzugefügt. Wenn `Cancel` für die `CancellationTokenSource` aufgerufen wird, werden beide Cache Einträge entfernt.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ed)]
 
-Durch die Verwendung eines `CancellationTokenSource` können mehrere Cache Einträge als Gruppe entfernt werden. Mit dem Muster "`using`" im obigen Code erben Cache Einträge, die innerhalb des `using`-Blocks erstellt werden, Trigger und Ablauf Einstellungen.
+Durch die Verwendung einer <xref:System.Threading.CancellationTokenSource> können mehrere Cache Einträge als Gruppe entfernt werden. Mit dem Muster "`using`" im obigen Code erben Cache Einträge, die innerhalb des `using`-Blocks erstellt werden, Trigger und Ablauf Einstellungen.
 
 ## <a name="additional-notes"></a>Zusätzliche Hinweise
 
-* Das Ablaufdatum wird im Hintergrund nicht angezeigt. Es gibt keinen Timer, der den Cache aktiv nach abgelaufenen Elementen scannt. Jede Aktivität im Cache (`Get`, `Set`, `Remove`) kann eine Hintergrund Überprüfung für abgelaufene Elemente auslöst. Ein Timer für den `CancellationTokenSource` (`CancelAfter`) würde ebenfalls den Eintrag entfernen und eine Überprüfung abgelaufener Elemente veranlassen. Verwenden Sie z. b. `CancellationTokenSource.CancelAfter(TimeSpan.FromHours(1))` für das registrierte Token, anstatt `SetAbsoluteExpiration(TimeSpan.FromHours(1))` zu verwenden. Wenn dieses Token ausgelöst wird, wird der Eintrag sofort entfernt, und die Entfernungs Rückrufe werden ausgelöst. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/Caching/issues/248).
+* Das Ablaufdatum wird im Hintergrund nicht angezeigt. Es gibt keinen Timer, der den Cache aktiv nach abgelaufenen Elementen scannt. Jede Aktivität im Cache (`Get`, `Set`, `Remove`) kann eine Hintergrund Überprüfung für abgelaufene Elemente auslöst. Ein Timer im `CancellationTokenSource` (<xref:System.Threading.CancellationTokenSource.CancelAfter*>) entfernt ebenfalls den Eintrag und löst eine Überprüfung abgelaufener Elemente aus. Im folgenden Beispiel wird [CancellationTokenSource (TimeSpan)](/dotnet/api/system.threading.cancellationtokensource.-ctor) für das registrierte Token verwendet. Wenn dieses Token ausgelöst wird, wird der Eintrag sofort entfernt, und die Entfernungs Rückrufe werden ausgelöst:
+
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ae)]
+
 * Bei Verwendung eines Rückrufs zum erneuten Auffüllen eines Cache Elements:
 
   * Mehrere Anforderungen können den zwischengespeicherten Schlüsselwert leer finden, da der Rückruf noch nicht abgeschlossen wurde.
@@ -327,7 +330,7 @@ Weitere Informationen finden Sie [unter Compact Source auf GitHub](https://githu
 
 ## <a name="cache-dependencies"></a>Cache Abhängigkeiten
 
-Im folgenden Beispiel wird gezeigt, wie ein Cache Eintrag abläuft, wenn ein abhängiger Eintrag abläuft. Ein `CancellationChangeToken` wird dem zwischengespeicherten Element hinzugefügt. Wenn `Cancel` für die `CancellationTokenSource` aufgerufen wird, werden beide Cache Einträge entfernt.
+Im folgenden Beispiel wird gezeigt, wie ein Cache Eintrag abläuft, wenn ein abhängiger Eintrag abläuft. Dem zwischengespeicherten Element wird ein <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> hinzugefügt. Wenn `Cancel` für die `CancellationTokenSource` aufgerufen wird, werden beide Cache Einträge entfernt.
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_ed)]
 
