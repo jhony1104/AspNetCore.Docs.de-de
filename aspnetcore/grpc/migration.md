@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
 uid: grpc/migration
-ms.openlocfilehash: 596eca0f510387a18472eb353672980e0a8e0d24
-ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
+ms.openlocfilehash: c4c07808540c9af370bfa253e8154a8a19f0f3de
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2019
-ms.locfileid: "72697999"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634068"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>Migrieren von GrpC-Diensten von C-Core zu ASP.net Core
 
@@ -80,9 +80,27 @@ public class GreeterService : Greeter.GreeterBase
 
 Auf C-Core basierende apps konfigurieren HTTPS über die [Server. Ports-Eigenschaft](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server_Ports). Ein ähnliches Konzept wird verwendet, um Server in ASP.net Core zu konfigurieren. Kestrel verwendet beispielsweise die [Endpunkt Konfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration) für diese Funktion.
 
-## <a name="interceptors-and-middleware"></a>Interceptors und Middleware
+## <a name="grpc-interceptors-vs-middleware"></a>GrpC-Interceptors und Middleware
 
-ASP.net Core [Middleware](xref:fundamentals/middleware/index) bietet im Vergleich zu Interceptors in C-Core-basierten GrpC-apps ähnliche Funktionen. Middleware und Interceptors sind konzeptionell identisch mit beiden, um eine Pipeline zu erstellen, die eine GrpC-Anforderung verarbeitet. Beide ermöglichen die Ausführung von Arbeiten vor oder nach der nächsten Komponente in der Pipeline. ASP.net Core Middleware arbeitet jedoch mit den zugrunde liegenden http/2-Nachrichten, während Interceptors mithilfe von [servercallcontext](https://grpc.io/grpc/csharp/api/Grpc.Core.ServerCallContext.html)auf der GrpC-Abstraktions Ebene arbeiten.
+ASP.net Core [Middleware](xref:fundamentals/middleware/index) bietet im Vergleich zu Interceptors in C-Core-basierten GrpC-apps ähnliche Funktionen. ASP.net Core Middleware und Interceptors sind konzeptionell vergleichbar. Zwar
+
+* Wird verwendet, um eine Pipeline zu erstellen, die eine GrpC-Anforderung verarbeitet.
+* Ermöglicht die Ausführung von Arbeit vor oder nach der nächsten Komponente in der Pipeline.
+* Zugriff auf `HttpContext`bereitstellen:
+  * In der Middleware ist die `HttpContext` ein Parameter.
+  * In Interceptors kann auf den `HttpContext` mithilfe des `ServerCallContext`-Parameters mit der `ServerCallContext.GetHttpContext`-Erweiterungsmethode zugegriffen werden. Beachten Sie, dass dieses Feature für Interceptors spezifisch ist, die in ASP.net Core ausgeführt werden.
+
+Unterschiede bei den GrpC-Interceptors von ASP.net Core Middleware:
+
+* Interceptors
+  * Arbeiten Sie mithilfe von [servercallcontext](https://grpc.io/grpc/csharp/api/Grpc.Core.ServerCallContext.html)mit der GrpC-Abstraktions Ebene.
+  * Zugriff ermöglichen:
+    * Die deserialisierte Nachricht, die an einen-Befehl gesendet wird.
+    * Die Meldung, die vom-Befehl zurückgegeben wird, bevor Sie serialisiert wird.
+* Middleware
+  * Wird vor GrpC-Interceptors ausgeführt.
+  * Arbeitet mit den zugrunde liegenden http/2-Nachrichten.
+  * Kann nur aus den Anforderungs-und Antwortstreams auf Bytes zugreifen.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
