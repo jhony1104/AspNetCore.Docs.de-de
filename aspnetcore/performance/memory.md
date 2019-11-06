@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/05/2019
 uid: performance/memory
-ms.openlocfilehash: 48397e9fe7da912c1930f17fb86b686f0a20c60e
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 8f6b47ecde6f265bfb9437234b89f11f7d235869
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 11/06/2019
-ms.locfileid: "73638159"
+ms.locfileid: "73660012"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Speicherverwaltung und Garbage Collection (GC) in ASP.net Core
 
@@ -70,7 +70,7 @@ Wenn der Arbeitsspeicher Wert des Task-Managers unbegrenzt zunimmt und nie verei
 
 Die [Memoryleak-Beispiel-App](https://github.com/sebastienros/memoryleak) ist auf GitHub verfügbar. Die memoryleck-App:
 
-* Enthält einen Diagnose Controller, der Real-Tin-Speicher und GC-Daten für die APP sammelt.
+* Enthält einen Diagnose Controller, der Echt Zeit Speicher-und GC-Daten für die APP sammelt.
 * Verfügt über eine Index Seite, auf der die Speicher-und GC-Daten angezeigt werden. Die Index Seite wird jede Sekunde aktualisiert.
 * Enthält einen API-Controller, der verschiedene Speicher Auslastungs Muster bereitstellt.
 * Ist kein unterstütztes Tool, kann jedoch verwendet werden, um Speicher Auslastungs Muster von ASP.net Core-apps anzuzeigen.
@@ -114,7 +114,7 @@ Das folgende Diagramm wird mit dem maximalen Durchsatz erstellt, der vom Compute
 
 Das vorangehende Diagramm zeigt Folgendes:
 
-* 22 RPS
+* 22K RPS
 * Garbage Collections der Generation 0 sind mehrmals pro Sekunde aufgetreten.
 * Sammlungen der Generation 1 werden ausgelöst, da die APP bedeutend mehr Arbeitsspeicher pro Sekunde zugewiesen hat.
 * Die Workingsets sind konstant bei ungefähr 500 MB.
