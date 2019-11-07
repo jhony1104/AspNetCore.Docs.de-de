@@ -1020,6 +1020,8 @@
   items:
     - name: Übersicht
       uid: performance/performance-best-practices
+    - name: Speicher und Garbage Collection
+      uid: performance/memory
     - name: Zwischenspeichern von Antworten
       items:
         - name: Übersicht
