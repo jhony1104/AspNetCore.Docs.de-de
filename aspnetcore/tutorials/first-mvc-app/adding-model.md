@@ -5,12 +5,12 @@ description: Fügen Sie ein Modell zu einer einfachen ASP.NET Core-App hinzu.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 5ad31a2536ad70590eaa767cf20068512241f36b
-ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
+ms.openlocfilehash: d6d75bcbab875c08bfff532d968013dca323beed
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71295476"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634113"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Modells zu einer ASP.NET Core MVC-App
 
@@ -212,7 +212,7 @@ Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Man
 
 Geben Sie in der PMC die folgenden Befehle ein:
 
-```console
+```PMC
 Add-Migration InitialCreate
 Update-Database
 ```
@@ -517,7 +517,7 @@ In diesem Abschnitt werden die folgenden Aufgaben ausgeführt:
 
 1. Geben Sie in der PMC die folgenden Befehle ein:
 
-   ```console
+   ```PMC
    Add-Migration Initial
    Update-Database
    ```

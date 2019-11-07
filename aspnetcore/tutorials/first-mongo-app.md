@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: acf2ded8b92a8f77678af7b772ac2a69264a642c
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 42c0efcd914eaa54134827cdf3bd6bd599d512b2
+ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082371"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73427020"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Erstellen einer Web-API mit ASP.NET Core und MongoDB
 
@@ -715,6 +715,10 @@ Um die zuvor genannten Anforderungen zu erfüllen, nehmen Sie die folgenden Änd
 1. Wiederholen Sie die im Abschnitt [Testen der Web-API](#test-the-web-api) definierten Schritte. Beachten Sie den Unterschied bei den JSON-Eigenschaftsnamen.
 
 ::: moniker-end
+
+## <a name="add-authentication-support-to-a-web-api"></a>Hinzufügen der Authentifizierungsunterstützung zu einer Web-API
+
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="next-steps"></a>Nächste Schritte
 
