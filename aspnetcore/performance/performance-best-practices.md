@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/26/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 3484a0233a0d56811235192c4b64aa9296e72b58
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: 1cd4ca6fccfee674f46e87ba051e049f7daa5b66
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289070"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799515"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Leistung
 
@@ -44,7 +44,7 @@ Ausführen:
 * Asynchrones Aufrufen von Datenzugriff-und lang andauernden Operations-APIs.
 * Aktionen für Controller/Razor-Seite asynchron durchführen. Die gesamte-aufrufsstapel ist asynchron, um von [Async/](/dotnet/csharp/programming-guide/concepts/async/) Erwartungs Mustern zu profitieren.
 
-Ein Profiler, z. b. [perfview](https://github.com/Microsoft/perfview), kann verwendet werden, um häufig dem [Thread Pool](/windows/desktop/procthread/thread-pools)hinzugefügte Threads zu suchen. Das `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`-Ereignis gibt einen Thread an, der dem Thread Pool hinzugefügt wurde. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+Ein Profiler, z. b. [perfview](https://github.com/Microsoft/perfview), kann verwendet werden, um häufig dem [Thread Pool](/windows/desktop/procthread/thread-pools)hinzugefügte Threads zu suchen. Das Ereignis `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` gibt einen Thread an, der dem Thread Pool hinzugefügt wurde. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>Minimieren von großen Objekt Zuordnungen
 
@@ -75,7 +75,7 @@ Empfehlungen
 * In **Erwägung gezogen** , dass Daten, auf die häufig zugegriffen wird, von einer Datenbank oder einem Remote Dienst abgerufen werden, wenn etwas veraltete Daten zulässig sind. Verwenden Sie je nach Szenario einen [MemoryCache](xref:performance/caching/memory) oder einen [distributedcache](xref:performance/caching/distributed). Weitere Informationen finden Sie unter <xref:performance/caching/response>.
 * Minimieren **Sie** die Netzwerkroundtrips. Das Ziel besteht darin, die erforderlichen Daten in einem einzigen Aufruf anstelle mehrerer Aufrufe abzurufen.
 * **Verwenden** Sie [keine nach Verfolgungs Abfragen](/ef/core/querying/tracking#no-tracking-queries) in Entity Framework Core, wenn Sie schreibgeschützte Zwecke auf Daten zugreifen. EF Core können die Ergebnisse von Abfragen ohne Nachverfolgung effizienter zurückgeben.
-* Filtern und Aggregieren **Sie** LINQ-Abfragen (z. b. mit `.Where`-, `.Select`-oder `.Sum`-Anweisung), damit die Filterung von der Datenbank ausgeführt wird.
+* Filtern und Aggregieren **Sie** LINQ-Abfragen (z. b. mit `.Where`-, `.Select`-oder `.Sum`-Anweisungen), damit die Filterung von der Datenbank ausgeführt wird.
 * Beachten **Sie** , dass EF Core einige Abfrage Operatoren auf dem Client auflöst, was zu einer ineffizienten Abfrage Ausführung führen kann. Weitere Informationen finden Sie unter [Leistungsprobleme bei der Client Evaluierung](/ef/core/querying/client-eval#client-evaluation-performance-issues).
 * Verwenden **Sie keine** Projektions Abfragen für Auflistungen, die zum Ausführen von "N + 1"-SQL-Abfragen führen können. Weitere Informationen finden Sie unter [Optimierung korrelierter Unterabfragen](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries).
 
@@ -90,12 +90,12 @@ Abfrage Probleme können erkannt werden, indem die Zeit für den Zugriff auf Dat
 
 ## <a name="pool-http-connections-with-httpclientfactory"></a>Pool-http-Verbindungen mit httpclientfactory
 
-Obwohl [HttpClient](/dotnet/api/system.net.http.httpclient) die Schnittstelle `IDisposable` implementiert, ist Sie für die Wiederverwendung vorgesehen. Wenn `HttpClient`-Instanzen geschlossen sind, werden Sockets für kurze Zeit im Status `TIME_WAIT` geöffnet. Wenn ein Codepfad, der `HttpClient`-Objekte erstellt und freigibt, häufig verwendet wird, kann die APP verfügbare Sockets ausschöpfen. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) wurde in ASP.net Core 2,1 als Lösung für dieses Problem eingeführt. Er verarbeitet das Pooling von http-Verbindungen, um Leistung und Zuverlässigkeit zu optimieren.
+Obwohl [HttpClient](/dotnet/api/system.net.http.httpclient) die `IDisposable`-Schnittstelle implementiert, ist Sie für die Wiederverwendung vorgesehen. Geschlossene `HttpClient` Instanzen lassen die Sockets für einen kurzen Zeitraum im `TIME_WAIT` Status geöffnet. Wenn ein Codepfad, der `HttpClient` Objekte erstellt und freigibt, häufig verwendet wird, kann die APP verfügbare Sockets ausschöpfen. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) wurde in ASP.net Core 2,1 als Lösung für dieses Problem eingeführt. Er verarbeitet das Pooling von http-Verbindungen, um Leistung und Zuverlässigkeit zu optimieren.
 
 Empfehlungen
 
-* Erstellen und löschen Sie `HttpClient`-Instanzen **nicht** direkt.
-* Verwenden Sie [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) zum Abrufen von `HttpClient`-Instanzen. Weitere Informationen finden [Sie unter Verwenden von httpclientfactory zum Implementieren robuster HTTP-Anforderungen](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
+* Erstellen und löschen Sie `HttpClient` Instanzen **nicht** direkt.
+* Verwenden Sie [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) zum Abrufen von `HttpClient` Instanzen. Weitere Informationen finden [Sie unter Verwenden von httpclientfactory zum Implementieren robuster HTTP-Anforderungen](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
 
 ## <a name="keep-common-code-paths-fast"></a>Häufige Codepfade schnell halten
 
@@ -159,7 +159,8 @@ In den folgenden Abschnitten finden Sie Leistungs Tipps und bekannte Zuverlässi
 
 Alle e/a in ASP.net Core sind asynchron. Server implementieren die `Stream`-Schnittstelle, die sowohl synchrone als auch asynchrone über Ladungen aufweist. Die asynchronen sollten bevorzugt werden, um zu verhindern, dass Threads im Thread Pool blockiert werden. Blockierende Threads können zu einem Thread Pool-Hunger führen.
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird das <xref:System.IO.StreamReader.ReadToEnd*> verwendet. Der aktuelle Thread wird blockiert, um auf das Ergebnis zu warten. Dies ist ein Beispiel für [sync over Async @ no__t-1.
+Gehen Sie nicht wie folgt vor **:** Im folgenden Beispiel wird der <xref:System.IO.StreamReader.ReadToEnd*>verwendet. Der aktuelle Thread wird blockiert, um auf das Ergebnis zu warten. Dies ist ein Beispiel für die [Synchronisierung über Async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+).
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
 
@@ -183,12 +184,13 @@ Der vorangehende Code deserialisiert den Anforderungs Text asynchron in ein C# -
 ## <a name="prefer-readformasync-over-requestform"></a>"Read Form Async" über "Request. Form" bevorzugen
 
 Verwenden Sie `HttpContext.Request.ReadFormAsync` anstelle von `HttpContext.Request.Form`.
-`HttpContext.Request.Form` kann nur mit den folgenden Bedingungen sicher gelesen werden:
+`HttpContext.Request.Form` können nur mit den folgenden Bedingungen sicher gelesen werden:
 
-* Das Formular wurde durch einen `ReadFormAsync`-aufrufenen gelesen, und
-* Der zwischengespeicherte Formular Wert wird mit `HttpContext.Request.Form` gelesen.
+* Das Formular wurde durch einen-`ReadFormAsync`gelesen, und
+* Der zwischengespeicherte Formular Wert wird mit `HttpContext.Request.Form`
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird `HttpContext.Request.Form` verwendet.  `HttpContext.Request.Form` verwendet [SYNC über Async @ no__t-2 und kann zu einem Hunger vor dem Thread Pool führen.
+Gehen Sie nicht wie folgt vor **:** Im folgenden Beispiel wird `HttpContext.Request.Form`verwendet.  `HttpContext.Request.Form` verwendet [Sync über Async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+) und kann zu einem Thread Pool-Hunger führen.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
 
@@ -209,7 +211,7 @@ In diesem [Blogbeitrag](https://adamsitnik.com/Array-Pool/#the-problem) wird das
 
 > Wenn ein großes Objekt zugewiesen wird, wird es als Objekt der Generation 2 markiert. Nicht Gen 0 wie bei kleinen Objekten. Wenn nicht genügend Arbeitsspeicher in Loh vorhanden ist, bereinigt GC den gesamten verwalteten Heap, nicht nur Loh. Die Generation 0, Gen 1 und Gen 2 einschließlich Loh werden bereinigt. Dies wird als voll Garbage Collection bezeichnet und ist der zeitraubende Garbage Collection. Für viele Anwendungen ist dies akzeptabel. Aber definitiv nicht für Hochleistungs-Webserver, bei denen einige große Speicherpuffer benötigt werden, um eine durchschnittliche Webanforderung zu verarbeiten (Lesen Sie aus einem Socket, dekomprimieren und JSON-decodieren &).
 
-Das naive Speichern eines großen Anforderungs-oder Antwort Texts in einem einzelnen `byte[]` oder `string`:
+Speichern Sie einen großen Anforderungs-oder Antworttext in einem einzigen `byte[]` oder `string`:
 
 * Kann dazu führen, dass der Platz in Loh schnell nicht mehr genügend Speicherplatz hat.
 * Kann aufgrund vollständiger GCS-Ausführung zu Leistungsproblemen bei der APP führen.
@@ -231,26 +233,26 @@ ASP.net Core 3,0 verwendet <xref:System.Text.Json> standardmäßig für die JSON
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>Speichern Sie ihttpcontextaccessor. HttpContext nicht in einem Feld.
 
-Der [ihttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) gibt den `HttpContext` der aktiven Anforderung zurück, wenn der Zugriff über den Anforderungs Thread erfolgt. Der `IHttpContextAccessor.HttpContext` sollte **nicht** in einem Feld oder einer Variablen gespeichert werden.
+Der [ihttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) gibt den `HttpContext` der aktiven Anforderung zurück, wenn der Zugriff über den Anforderungs Thread erfolgt. Die `IHttpContextAccessor.HttpContext` sollte **nicht** in einem Feld oder einer Variablen gespeichert werden.
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird die `HttpContext` in einem Feld gespeichert, und anschließend wird versucht, Sie später zu verwenden.
+Gehen Sie nicht wie folgt vor **:** Im folgenden Beispiel wird die `HttpContext` in einem Feld gespeichert, und anschließend wird versucht, Sie später zu verwenden.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
 Der vorangehende Code erfasst häufig einen NULL-Wert oder einen falschen `HttpContext` im Konstruktor.
 
-**Führen Sie Folgendes aus:** Im Beispiel unten geschieht Folgendes:
+**Führen Sie Folgendes aus:** Im folgenden Beispiel wird Folgendes veranschaulicht:
 
-* Speichert die <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> in einem Feld.
-* Verwendet das Feld `HttpContext` zur richtigen Zeit und überprüft `null`.
+* Speichert die <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> in einem-Feld.
+* Verwendet das `HttpContext` Feld zur richtigen Zeit und überprüft `null`.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet2)]
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>Nicht auf "HttpContext" aus mehreren Threads zugreifen
 
-`HttpContext` ist *nicht* Thread sicher. Wenn Sie von mehreren Threads parallel auf `HttpContext` zugreifen, kann dies zu nicht definiertem Verhalten wie z. b. hängen, abstürzen und Daten Beschädigung führen.
+`HttpContext` ist *nicht* Thread sicher. Der parallele Zugriff auf `HttpContext` mehrerer Threads kann zu nicht definiertem Verhalten wie z. b. hängen, abstürzen und Daten Beschädigung führen.
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel werden drei parallele Anforderungen erstellt, und der eingehende Anforderungs Pfad wird vor und nach der ausgehenden HTTP-Anforderung protokolliert. Der Zugriff auf den Anforderungs Pfad erfolgt über mehrere Threads, die möglicherweise parallel erfolgen.
+Gehen Sie nicht wie folgt vor **:** Im folgenden Beispiel werden drei parallele Anforderungen erstellt, und der eingehende Anforderungs Pfad wird vor und nach der ausgehenden HTTP-Anforderung protokolliert. Der Zugriff auf den Anforderungs Pfad erfolgt über mehrere Threads, die möglicherweise parallel erfolgen.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncFirstController.cs?name=snippet1&highlight=25,28)]
 
@@ -262,10 +264,10 @@ Der vorangehende Code erfasst häufig einen NULL-Wert oder einen falschen `HttpC
 
 `HttpContext` ist nur gültig, solange eine aktive HTTP-Anforderung in der ASP.net Core Pipeline vorhanden ist. Die gesamte ASP.net Core Pipeline ist eine asynchrone Kette von Delegaten, die jede Anforderung ausführt. Wenn die von dieser Kette zurückgegebene `Task` abgeschlossen ist, wird die `HttpContext` wieder verwendet.
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird `async void` verwendet, wodurch die HTTP-Anforderung beendet wird, wenn die erste `await` erreicht wird:
+Gehen Sie nicht wie folgt vor **:** Im folgenden Beispiel wird `async void` verwendet, mit dem die HTTP-Anforderung durchgeführt wird, wenn die erste `await` erreicht wird:
 
 * Dies ist in ASP.net Core-apps **immer** eine bewährte Vorgehensweise.
-* Greift auf den `HttpResponse` zu, nachdem die HTTP-Anforderung beendet wurde.
+* Greift auf die `HttpResponse` zu, nachdem die HTTP-Anforderung beendet wurde.
 * Stürzt den Prozess ab.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncBadVoidController.cs?name=snippet1)]
@@ -276,32 +278,34 @@ Der vorangehende Code erfasst häufig einen NULL-Wert oder einen falschen `HttpC
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>HttpContext nicht in Hintergrundthreads erfassen
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird gezeigt, dass die `HttpContext` aus der Eigenschaft `Controller` erfasst wird. Dies ist eine bewährte Vorgehensweise, da das Arbeits Element folgende Aktionen ausführen könnte:
+Gehen Sie nicht wie folgt vor **:** Das folgende Beispiel zeigt, dass die `HttpContext` aus der `Controller`-Eigenschaft erfasst werden. Dies ist eine bewährte Vorgehensweise, da das Arbeits Element folgende Aktionen ausführen könnte:
 
 * Außerhalb des Anforderungs Bereichs ausführen.
-* Es wurde versucht, die falsche `HttpContext` zu lesen.
+* Versuchen Sie, die falsche `HttpContext`zu lesen.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet1)]
 
-**Führen Sie Folgendes aus:** Im Beispiel unten geschieht Folgendes:
+**Führen Sie Folgendes aus:** Im folgenden Beispiel wird Folgendes veranschaulicht:
 
 * Kopiert die Daten, die in der Hintergrundaufgabe während der Anforderung erforderlich sind.
 * Verweist auf nichts vom Controller.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet2)]
 
+Hintergrundaufgaben sollten als gehostete Dienste implementiert werden. Weitere Informationen finden Sie unter [Hintergrundaufgaben mit gehosteten Diensten](xref:fundamentals/host/hosted-services).
+
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>Dienste, die in die Controller in Hintergrundthreads eingefügt werden, nicht erfassen
 
-**Gehen Sie nicht wie folgt vor:** Im folgenden Beispiel wird gezeigt, dass die `DbContext` aus dem Aktionsparameter `Controller` erfasst. Dies ist eine bewährte Vorgehensweise.  Das Arbeits Element kann außerhalb des Anforderungs Bereichs ausgeführt werden. Der `ContosoDbContext` ist auf die Anforderung beschränkt, was zu einer `ObjectDisposedException` führt.
+Gehen Sie nicht wie folgt vor **:** Das folgende Beispiel zeigt, dass die `DbContext` aus dem `Controller` Action-Parameter erfasst wird. Dies ist eine bewährte Vorgehensweise.  Das Arbeits Element kann außerhalb des Anforderungs Bereichs ausgeführt werden. Der `ContosoDbContext` wird auf die Anforderung beschränkt, was zu einer `ObjectDisposedException`führt.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
-**Führen Sie Folgendes aus:** Im Beispiel unten geschieht Folgendes:
+**Führen Sie Folgendes aus:** Im folgenden Beispiel wird Folgendes veranschaulicht:
 
 * Fügt eine <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> ein, um einen Bereich im Hintergrund Arbeits Element zu erstellen. `IServiceScopeFactory` ist ein Singleton.
 * Erstellt einen neuen Abhängigkeits einschleusungs Bereich im Hintergrund Thread.
 * Verweist auf nichts vom Controller.
-* Erfasst nicht den `ContosoDbContext` aus der eingehenden Anforderung.
+* Erfasst die `ContosoDbContext` nicht von der eingehenden Anforderung.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2)]
 
@@ -319,11 +323,11 @@ Der HTTP-Antworttext wird von ASP.net Core nicht gepuffert. Wenn die Antwort zum
 * Die Header werden zusammen mit diesem Textteil an den Client gesendet.
 * Es ist nicht mehr möglich, Antwortheader zu ändern.
 
-**Gehen Sie nicht wie folgt vor:** Der folgende Code versucht, Antwortheader hinzuzufügen, nachdem die Antwort bereits gestartet wurde:
+Gehen Sie nicht wie folgt vor **:** Der folgende Code versucht, Antwortheader hinzuzufügen, nachdem die Antwort bereits gestartet wurde:
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 
-Im vorangehenden Code löst `context.Response.Headers["test"] = "test value";` eine Ausnahme aus, wenn `next()` in die Antwort geschrieben hat.
+Im vorangehenden Code wird `context.Response.Headers["test"] = "test value";` eine Ausnahme auslösen, wenn `next()` in die Antwort geschrieben hat.
 
 **Führen Sie Folgendes aus:** Im folgenden Beispiel wird überprüft, ob die HTTP-Antwort vor dem Ändern der Header gestartet wurde.
 
