@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: fundamentals/routing
-ms.openlocfilehash: c8037d79c79c5b7eb3b99d9724aa3e5361f92b8c
-ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
+ms.openlocfilehash: 8b4da4e1e262ec82225413d0338b3492d0b5e152
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71482041"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190507"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -485,7 +485,7 @@ In regulären Ausdrücken werden Trennzeichen und Token verwendet, die auch beim
 
 Beim Routing verwendete reguläre Ausdrücke beginnen oft mit einem Caretzeichen (`^`) und stellen die Startposition der Zeichenfolge dar. Die Ausdrücke enden häufig mit einem Dollarzeichen (`$`) und stellen das Ende der Zeichenfolge dar. Mit den Zeichen `^` und `$` wird sichergestellt, dass der reguläre Ausdruck mit dem vollständigen Routenparameterwert übereinstimmt. Ohne die Zeichen `^` und `$` werden mit dem regulären Ausdruck alle Teilzeichenfolgen ermittelt, was häufig nicht gewünscht ist. In der folgenden Tabelle finden Sie Beispiele für reguläre Ausdrücke. Außerdem wird erklärt, warum ein Abgleich erfolgreich ist oder fehlschlägt.
 
-| Ausdruck   | Zeichenfolge    | Match | Kommentar               |
+| expression   | Zeichenfolge    | Match | Kommentar               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Ja   | Teilzeichenfolge stimmt überein     |
 | `[a-z]{2}`   | 123abc456 | Ja   | Teilzeichenfolge stimmt überein     |
@@ -591,6 +591,81 @@ Für diese Route wird nur dann ein Link generiert, wenn die übereinstimmenden W
 Komplexe Segmente (z.B. `[Route("/x{token}y")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Unter [diesem Code](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) finden Sie eine ausführliche Erklärung für das Abgleichen komplexer Segmente. Das [Codebeispiel](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) wird von ASP.NET Core nicht verwendet, aber es bietet eine gute Erklärung komplexer Segmente.
 <!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
+
+## <a name="configuring-endpoint-metadata"></a>Konfigurieren von Endpunktmetadaten
+
+Die folgenden Links enthalten Informationen zum Konfigurieren von Endpunktmetadaten:
+
+* [Aktivieren von Cors mit Endpunktrouting](xref:security/cors#enable-cors-with-endpoint-routing)
+* [IAuthorizationPolicyProvider-Beispiel](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) mit einem benutzerdefinierten `[MinimumAgeAuthorize]`-Attribut
+* [Testen der Authentifizierung mit dem [Authorize]-Attribut](xref:security/authentication/identity#test-identity)
+* <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
+* [Auswählen des Schemas mit dem [Authorize]-Attribut](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
+* [Anwenden von Richtlinien mithilfe des [Authorize]-Attributs](xref:security/authorization/policies#applying-policies-to-mvc-controllers)
+* <xref:security/authorization/roles>
+
+<a name="hostmatch"></a>
+
+## <a name="host-matching-in-routes-with-requirehost"></a>Hostabgleich in Routen mit RequireHost
+
+`RequireHost` wendet eine Einschränkung auf die Route an, für die der angegebene Host erforderlich ist. Der `RequireHost`- oder `[Host]`-Parameter kann wie folgt lauten:
+
+* Host: `www.domain.com` (entspricht `www.domain.com` mit einem beliebigen Port)
+* Host mit Platzhalter: `*.domain.com` (entspricht `www.domain.com`, `subdomain.domain.com`oder `www.subdomain.domain.com` an einem beliebigen Port)
+* Port: `*:5000` (entspricht Port 5000 mit einem beliebigen Host)
+* Host und Port: `www.domain.com:5000`, `*.domain.com:5000` (entspricht dem Host und Port)
+
+Es können mehrere Parameter mit `RequireHost` oder `[Host]` angegeben werden. Die Einschränkung gleicht die Hosts ab, die für einen der Parameter gültig sind. Beispielsweise entspricht `[Host("domain.com", "*.domain.com")]` `domain.com`, `www.domain.com` oder `subdomain.domain.com`.
+
+Im folgenden Code wird `RequireHost` verwendet, um den angegebenen Host auf der Route anzufordern:
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{
+    app.UseRouting();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGet("/", context => context.Response.WriteAsync("Hi Contoso!"))
+            .RequireHost("contoso.com");
+        endpoints.MapGet("/", context => context.Response.WriteAsync("Hi AdventureWorks!"))
+            .RequireHost("adventure-works.com");
+        endpoints.MapHealthChecks("/healthz").RequireHost("*:8080");
+    });
+}
+```
+
+Im folgenden Code wird das `[Host]`-Attribut verwendet, um den angegebenen Host auf dem Controller anzufordern:
+
+```csharp
+[Host("contoso.com", "adventure-works.com")]
+public class HomeController : Controller
+{
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [Host("example.com:8080")]
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+}
+```
+
+Wenn das `[Host]`-Attribut sowohl auf die Controller- als auch auf die Aktionsmethode angewendet wird, trifft Folgendes zu:
+
+* Das Attribut auf der Aktion wird verwendet.
+* Das Controllerattribut wird ignoriert.
 
 ::: moniker-end
 
@@ -1071,7 +1146,7 @@ In regulären Ausdrücken werden Trennzeichen und Token verwendet, die auch beim
 
 Beim Routing verwendete reguläre Ausdrücke beginnen oft mit einem Caretzeichen (`^`) und stellen die Startposition der Zeichenfolge dar. Die Ausdrücke enden häufig mit einem Dollarzeichen (`$`) und stellen das Ende der Zeichenfolge dar. Mit den Zeichen `^` und `$` wird sichergestellt, dass der reguläre Ausdruck mit dem vollständigen Routenparameterwert übereinstimmt. Ohne die Zeichen `^` und `$` werden mit dem regulären Ausdruck alle Teilzeichenfolgen ermittelt, was häufig nicht gewünscht ist. In der folgenden Tabelle finden Sie Beispiele für reguläre Ausdrücke. Außerdem wird erklärt, warum ein Abgleich erfolgreich ist oder fehlschlägt.
 
-| Ausdruck   | Zeichenfolge    | Match | Kommentar               |
+| expression   | Zeichenfolge    | Match | Kommentar               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Ja   | Teilzeichenfolge stimmt überein     |
 | `[a-z]{2}`   | 123abc456 | Ja   | Teilzeichenfolge stimmt überein     |
@@ -1525,7 +1600,7 @@ In regulären Ausdrücken werden Trennzeichen und Token verwendet, die auch beim
 
 Beim Routing verwendete reguläre Ausdrücke beginnen oft mit einem Caretzeichen (`^`) und stellen die Startposition der Zeichenfolge dar. Die Ausdrücke enden häufig mit einem Dollarzeichen (`$`) und stellen das Ende der Zeichenfolge dar. Mit den Zeichen `^` und `$` wird sichergestellt, dass der reguläre Ausdruck mit dem vollständigen Routenparameterwert übereinstimmt. Ohne die Zeichen `^` und `$` werden mit dem regulären Ausdruck alle Teilzeichenfolgen ermittelt, was häufig nicht gewünscht ist. In der folgenden Tabelle finden Sie Beispiele für reguläre Ausdrücke. Außerdem wird erklärt, warum ein Abgleich erfolgreich ist oder fehlschlägt.
 
-| Ausdruck   | Zeichenfolge    | Match | Kommentar               |
+| expression   | Zeichenfolge    | Match | Kommentar               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Ja   | Teilzeichenfolge stimmt überein     |
 | `[a-z]{2}`   | 123abc456 | Ja   | Teilzeichenfolge stimmt überein     |
