@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/05/2019
 uid: performance/memory
-ms.openlocfilehash: 8f6b47ecde6f265bfb9437234b89f11f7d235869
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 4c25c069aa2a6088c0549d786ecdd487ab7b9ea5
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73660012"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73896935"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Speicherverwaltung und Garbage Collection (GC) in ASP.net Core
 
@@ -82,7 +82,7 @@ Führen Sie memoryleck aus. Der zugewiesene Arbeitsspeicher steigt langsam, bis 
 Im Diagramm werden zwei Werte für die Speicherauslastung angezeigt:
 
 - Reserviert: die Menge an Arbeitsspeicher, die von verwalteten Objekten belegt wird.
-- Workingset: der gesamte physische Arbeitsspeicher (RAM), der vom Prozess verwendet wird. Das angezeigte Workingset ist derselbe Wert, den Task-Manager anzeigen kann.
+- [Workingset](/windows/win32/memory/working-set): der Satz von Seiten im virtuellen Adressraum des Prozesses, der sich zurzeit im physischen Speicher befinden. Das angezeigte Workingset ist derselbe Wert, den Task-Manager anzeigt.
 
 ### <a name="transient-objects"></a>Vorübergehende Objekte
 

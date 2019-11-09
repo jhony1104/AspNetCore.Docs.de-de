@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2019
 uid: web-api/index
-ms.openlocfilehash: aab9b848eb6e69055b019c9253c716898e9847e2
-ms.sourcegitcommit: a11f09c10ef3d4eeab7ae9ce993e7f30427741c1
+ms.openlocfilehash: 122de0a225668a7523eec900e2ad8fdac56d7886
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149346"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73897020"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -159,7 +159,7 @@ Sie können über [konventionelle Routen](xref:mvc/controllers/routing#conventio
 
 ::: moniker-end
 
-### <a name="automatic-http-400-responses"></a>Automatische HTTP 400-Antwort
+## <a name="automatic-http-400-responses"></a>Automatische HTTP 400-Antwort
 
 Durch das `[ApiController]`-Attribut wird bei Modellvalidierungsfehlern automatisch eine HTTP 400-Antwort ausgelöst. Deshalb ist der folgende Code in einer Aktionsmethode überflüssig:
 

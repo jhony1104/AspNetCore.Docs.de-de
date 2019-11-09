@@ -1,24 +1,23 @@
 ---
-title: Autorisieren Sie mit einem bestimmten Schema in ASP.NET Core
+title: Autorisieren mit einem bestimmten Schema in ASP.net Core
 author: rick-anderson
-description: In diesem Artikel wird erläutert, wie Identität für ein bestimmtes Schema beschränkt, bei der Verwendung mehrerer Authentifizierungsmethoden.
+description: In diesem Artikel wird erläutert, wie Sie die Identität auf ein bestimmtes Schema beschränken, wenn Sie mit mehreren Authentifizierungsmethoden arbeiten.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 10/22/2018
+ms.date: 11/08/2019
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 778bb61f472ab2e76f85da5999d3c79238188f19
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 38da80519b9d5d097c24d38b5a37503174629fc4
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897337"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73896968"
 ---
-# <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren Sie mit einem bestimmten Schema in ASP.NET Core
+# <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren mit einem bestimmten Schema in ASP.net Core
 
-In einigen Szenarien, z. B. Single Page Applications (SPAs) ist es üblich, mehrere Authentifizierungsmethoden zu verwenden. Beispielsweise kann die app cookiebasierte Authentifizierung für die Anmeldung und JWT-Bearer-Authentifizierung für JavaScript-Anforderungen verwenden. In einigen Fällen möglicherweise die app mehrere Instanzen eines Handlers für die Authentifizierung. Z. B. wird zwei Cookie-Handler, von denen einer eine grundlegende Identität enthält, und eine erstellt, wenn ein Multi-Factor Authentication (MFA) ausgelöst wurde. MFA kann ausgelöst werden, da der Benutzer einen Vorgang angefordert, der zusätzliche Sicherheit erfordert.
+In einigen Szenarien, z. b. Single-Page-Anwendungen (Spas), ist es üblich, mehrere Authentifizierungsmethoden zu verwenden. Die APP kann z. b. die cookiebasierte Authentifizierung für die Anmeldung und die JWT-Träger Authentifizierung für JavaScript-Anforderungen verwenden. In einigen Fällen verfügt die APP möglicherweise über mehrere Instanzen eines Authentifizierungs Handlers. Beispielsweise zwei Cookie-Handler, bei denen eine eine grundlegende Identität enthält und eine erstellt wird, wenn eine mehrstufige Authentifizierung (Multi-Factor Authentication, MFA) ausgelöst wurde. MFA kann ausgelöst werden, da der Benutzer einen Vorgang angefordert hat, der zusätzliche Sicherheit erfordert.
 
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
-
-Ein betroffenes Authentifizierungsschema heißt, wenn der Authentifizierungsdienst während der Authentifizierung konfiguriert ist. Zum Beispiel:
+Ein Authentifizierungsschema wird benannt, wenn der Authentifizierungsdienst während der Authentifizierung konfiguriert wird. Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -36,50 +35,14 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-Im vorangehenden Code wurden zwei authentifizierungshandler hinzugefügt: eine für Cookies und eine für trägertoken.
+Im vorangehenden Code wurden zwei Authentifizierungs Handler hinzugefügt: eine für Cookies und eine für Bearer.
 
 >[!NOTE]
->Die Angabe der Standard-Schema führt zu den `HttpContext.User` -Eigenschaft, die auf dieser Identität festgelegt wird. Wenn Sie dieses Verhalten nicht möchten, deaktivieren Sie es durch Aufrufen der parameterlose Form `AddAuthentication`.
+>Wenn Sie das Standardschema angeben, wird die `HttpContext.User`-Eigenschaft auf diese Identität festgelegt. Wenn dieses Verhalten nicht erwünscht ist, deaktivieren Sie es, indem Sie die Parameter lose Form `AddAuthentication`aufrufen.
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Auswählen des Schemas mit dem Attribut "autorisieren"
 
-Authentifizierungsschemas heißen, wenn Authentifizierung-Middleware, die während der Authentifizierung konfiguriert sind. Zum Beispiel:
-
-```csharp
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-{
-    // Code omitted for brevity
-
-    app.UseCookieAuthentication(new CookieAuthenticationOptions()
-    {
-        AuthenticationScheme = "Cookie",
-        LoginPath = "/Account/Unauthorized/",
-        AccessDeniedPath = "/Account/Forbidden/",
-        AutomaticAuthenticate = false
-    });
-    
-    app.UseJwtBearerAuthentication(new JwtBearerOptions()
-    {
-        AuthenticationScheme = "Bearer",
-        AutomaticAuthenticate = false,
-        Audience = "http://localhost:5001/",
-        Authority = "http://localhost:5000/",
-        RequireHttpsMetadata = false
-    });
-```
-
-Im vorangehenden Code wurden zwei Authentifizierung-Middleware hinzugefügt: eine für Cookies und eine für trägertoken.
-
->[!NOTE]
->Die Angabe der Standard-Schema führt zu den `HttpContext.User` -Eigenschaft, die auf dieser Identität festgelegt wird. Wenn Sie dieses Verhalten nicht möchten, deaktivieren Sie es durch Festlegen der `AuthenticationOptions.AutomaticAuthenticate` Eigenschaft `false`.
-
----
-
-## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Wählen das Schema mit dem Authorize-Attribut
-
-Die app zum Zeitpunkt der Autorisierung gibt an, dass der Handler, der verwendet werden. Wählen Sie den Handler für die app wird mit dem durch Übergeben einer durch Trennzeichen getrennte Liste der Authentifizierungsschemas autorisiert `[Authorize]`. Die `[Authorize]` Attribut gibt an, das Authentifizierungsschema oder Schemas verwenden, unabhängig davon, ob ein Standardwert konfiguriert ist. Zum Beispiel:
-
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+Zum Zeitpunkt der Autorisierung gibt die APP den zu verwendenden Handler an. Wählen Sie den Handler aus, mit dem die APP autorisiert werden soll, indem Sie eine durch Trennzeichen getrennte Liste von Authentifizierungs Schemas an `[Authorize]`übergeben. Das `[Authorize]`-Attribut gibt das Authentifizierungsschema bzw. die zu verwendenden Schemas an, unabhängig davon, ob ein Standard konfiguriert ist. Beispiel:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -92,24 +55,7 @@ public class MixedController : Controller
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-```csharp
-[Authorize(ActiveAuthenticationSchemes = AuthSchemes)]
-public class MixedController : Controller
-    // Requires the following imports:
-    // using Microsoft.AspNetCore.Authentication.Cookies;
-    // using Microsoft.AspNetCore.Authentication.JwtBearer;
-    private const string AuthSchemes =
-        CookieAuthenticationDefaults.AuthenticationScheme + "," +
-        JwtBearerDefaults.AuthenticationScheme;
-```
-
----
-
-Im vorherigen Beispiel sowohl die Cookie-als auch das Bearer-Handler ausgeführt und haben die Möglichkeit, zu erstellen, und fügen eine Identität für den aktuellen Benutzer. Führt durch Angabe eines Schemas nur an, der entsprechende Handler.
-
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+Im vorherigen Beispiel werden sowohl der Cookie-als auch der bearerhandler ausgeführt, und Sie haben die Möglichkeit, eine Identität für den aktuellen Benutzer zu erstellen und anzufügen. Wenn Sie nur ein einzelnes Schema angeben, wird der entsprechende Handler ausgeführt.
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -117,21 +63,11 @@ Im vorherigen Beispiel sowohl die Cookie-als auch das Bearer-Handler ausgeführt
 public class MixedController : Controller
 ```
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+Im vorangehenden Code wird nur der Handler mit dem Schema "Träger" ausgeführt. Cookiebasierte Identitäten werden ignoriert.
 
-```csharp
-[Authorize(ActiveAuthenticationSchemes = 
-    JwtBearerDefaults.AuthenticationScheme)]
-public class MixedController : Controller
-```
+## <a name="selecting-the-scheme-with-policies"></a>Auswählen des Schemas mit Richtlinien
 
----
-
-Im vorangehenden Code ausgeführt wird nur der Handler mit dem Schema "Bearer" aus. Cookiebasierte Identitäten werden ignoriert.
-
-## <a name="selecting-the-scheme-with-policies"></a>Wählen das Schema mit Richtlinien
-
-Wenn, geben Sie die gewünschten Schemas in möchten [Richtlinie](xref:security/authorization/policies), Sie können festlegen, die `AuthenticationSchemes` Auflistung bei Ihrer Richtlinie hinzufügen:
+Wenn Sie die gewünschten Schemas in der [Richtlinie](xref:security/authorization/policies)angeben möchten, können Sie beim Hinzufügen Ihrer Richtlinie die `AuthenticationSchemes` Sammlung festlegen:
 
 ```csharp
 services.AddAuthorization(options =>
@@ -145,7 +81,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Im vorherigen Beispiel wird die Richtlinie "Over18" nur ausgeführt, mit der Identität, die vom Handler "Bearer" erstellt werden. Verwenden Sie die Richtlinie durch Festlegen der `[Authorize]` des Attributs `Policy` Eigenschaft:
+Im vorherigen Beispiel wird die Richtlinie "Over18" nur für die Identität ausgeführt, die vom Handler "Träger" erstellt wurde. Verwenden Sie die Richtlinie, indem Sie die `Policy`-Eigenschaft des `[Authorize]` Attributs festlegen:
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -154,11 +90,11 @@ public class RegistrationController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-## <a name="use-multiple-authentication-schemes"></a>Verwenden Sie mehrere Authentifizierungsschemas
+## <a name="use-multiple-authentication-schemes"></a>Verwenden mehrerer Authentifizierungs Schemas
 
-Einige apps müssen möglicherweise mehrere Arten von Authentifizierung zu unterstützen. Ihre app kann z. B. Benutzer aus Azure Active Directory und aus einer Benutzerdatenbank authentifizieren. Ein weiteres Beispiel ist eine app, die Benutzer aus Active Directory Federation Services und Azure Active Directory B2C authentifiziert. In diesem Fall sollte die app ein JWT-Bearer-Token von mehreren Ausstellern akzeptieren.
+Einige apps müssen möglicherweise mehrere Arten der Authentifizierung unterstützen. Beispielsweise kann Ihre App Benutzer von Azure Active Directory und einer Benutzerdatenbank authentifizieren. Ein weiteres Beispiel ist eine APP, die Benutzer sowohl aus Active Directory-Verbunddienste (AD FS) als auch aus Azure Active Directory B2C authentifiziert. In diesem Fall sollte die APP ein JWT-bearertoken von mehreren Ausstellern akzeptieren.
 
-Fügen Sie alle Authentifizierungsschemas, die Sie übernehmen möchten. Im folgenden code wird beispielsweise `Startup.ConfigureServices` fügt zwei JWT-Bearer-Authentifizierungsschemas mit unterschiedliche Aussteller:
+Fügen Sie alle Authentifizierungs Schemas hinzu, die angenommen werden sollen. Beispielsweise werden mit dem folgenden Code in `Startup.ConfigureServices` zwei JWT-Träger Authentifizierungs Schemas für verschiedene Aussteller hinzugefügt:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -180,9 +116,9 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> Nur ein JWT-Bearer-Authentifizierung registriert ist, mit dem Standard-Authentifizierungsschema `JwtBearerDefaults.AuthenticationScheme`. Zusätzlicher Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
+> Nur eine JWT-Träger Authentifizierung wird mit dem standardmäßigen Authentifizierungsschema `JwtBearerDefaults.AuthenticationScheme`registriert. Die zusätzliche Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
 
-Der nächste Schritt ist die Standardrichtlinie für die Autorisierung zum Akzeptieren von beide Authentifizierungsschemas zu aktualisieren. Zum Beispiel:
+Der nächste Schritt besteht darin, die Standard Autorisierungs Richtlinie so zu aktualisieren, dass beide Authentifizierungs Schemas akzeptiert werden. Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -201,6 +137,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wie die Standardrichtlinie für die Autorisierung überschrieben wird, ist es möglich, verwenden die `[Authorize]` Attribut in Controllern. Der Controller akzeptiert Anforderungen klicken Sie dann mit der von der ersten oder zweiten Aussteller ausgestellte JWT.
+Wenn die Standard Autorisierungs Richtlinie überschrieben wird, ist es möglich, das `[Authorize]`-Attribut in Controllern zu verwenden. Der Controller akzeptiert dann Anforderungen mit JWT, die vom ersten oder zweiten Aussteller ausgegeben wurden.
 
 ::: moniker-end
