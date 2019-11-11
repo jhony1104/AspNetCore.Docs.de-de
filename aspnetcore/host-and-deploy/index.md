@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Hostingumgebungen einrichten und ASP.NET Core
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/index
-ms.openlocfilehash: 068c5f357b8010d78493a78a10c353e3317f3867
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: aa6e3da5f40211535037c671de913ab3219f063a
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65969888"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799337"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Hosten und Bereitstellen von ASP.NET Core
 
@@ -68,6 +68,10 @@ Anleitungen zum Veröffentlichen einer App in Azure mithilfe von Visual Studio f
 ## <a name="publish-with-msdeploy-on-windows"></a>Veröffentlichen mit MSDeploy unter Windows
 
 Anleitungen zum Veröffentlichen einer App mit einem Visual Studio-Veröffentlichungsprofil z.B. von einer Windows-Eingabeaufforderung mit dem Befehl [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) finden Sie unter <xref:host-and-deploy/visual-studio-publish-profiles>.
+
+## <a name="internet-information-services-iis"></a>IIS (Internet Information Services)
+
+Informationen zu Bereitstellungen zu Internetinformationsdiensten (IIS) mit von der *web.config*-Datei bereitgestellter Konfiguration, finden Sie in den Artikeln unter <xref:host-and-deploy/iis/index>.
 
 ## <a name="host-in-a-web-farm"></a>Hosten in einer Webfarm
 

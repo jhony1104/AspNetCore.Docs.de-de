@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 11/07/2019
 uid: fundamentals/index
-ms.openlocfilehash: a70d6aa05a2c92d19076b8d6e4ea24d7554368b6
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 7173a732a04bf3e598adef298fa9120c15dd52fb
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007114"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799371"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -302,6 +302,14 @@ Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, do
 Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, doch beim [Erstellen des Hosts](#host) kann ein anderer Webstamm angegeben werden. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/web-host#web-root).
 
 ::: moniker-end
+
+Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im *wwwroot/local*-Verzeichnis und in Unterverzeichnisse veröffentlicht werden:
+
+```xml
+<ItemGroup>
+  <Content Update="wwwroot\local\**\*.*" CopyToPublishDirectory="Never" />
+</ItemGroup>
+```
 
 In Razor-Dateien ( *.cshtml*) zeigen Tilde und Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
 

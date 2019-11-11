@@ -5,14 +5,14 @@ description: Einführung in Kestrel, dem plattformübergreifenden Webserver für
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/29/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5565011f6531ef5e95eb02f310e7107f9ed547b2
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: beaf6ac49359adfdc2dc24221eab04cc853646a9
+ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72378869"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73143442"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementierung des Webservers Kestrel in ASP.NET Core
 
@@ -631,6 +631,20 @@ webBuilder.ConfigureKestrel(serverOptions =>
                 return exampleCert;
             };
         });
+    });
+});
+```
+
+### <a name="connection-logging"></a>Verbindungsprotokollierung
+
+Rufen Sie <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> auf, um Protokolle auf Debugebene für die Kommunikation auf Byteebene für eine Verbindung auszugeben. Die Verbindungsprotokollierung ist beim Beheben von Problemen bei der Low-Level-Kommunikation hilfreich, wie z. B. bei der TLS-Verschlüsselung und bei Proxys. Wenn `UseConnectionLogging` vor `UseHttps` platziert wird, wird der verschlüsselte Datenverkehr protokolliert. Wenn `UseConnectionLogging` nach `UseHttps` platziert wird, wird der entschlüsselte Datenverkehr protokolliert.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
+    {
+        listenOptions.UseConnectionLogging();
     });
 });
 ```
@@ -1597,6 +1611,20 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
+### <a name="connection-logging"></a>Verbindungsprotokollierung
+
+Rufen Sie <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> auf, um Protokolle auf Debugebene für die Kommunikation auf Byteebene für eine Verbindung auszugeben. Die Verbindungsprotokollierung ist beim Beheben von Problemen bei der Low-Level-Kommunikation hilfreich, wie z. B. bei der TLS-Verschlüsselung und bei Proxys. Wenn `UseConnectionLogging` vor `UseHttps` platziert wird, wird der verschlüsselte Datenverkehr protokolliert. Wenn `UseConnectionLogging` nach `UseHttps` platziert wird, wird der entschlüsselte Datenverkehr protokolliert.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
+    {
+        listenOptions.UseConnectionLogging();
+    });
+});
+```
+
 ### <a name="bind-to-a-tcp-socket"></a>Binden an einen TCP-Socket
 
 Die <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>-Methode wird an ein TCP-Socket gebunden, und ein Lambdaausdruck einer Option lässt die Konfiguration des X.509-Zertifikats zu:
@@ -2422,6 +2450,20 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             });
         })
         .Build();
+```
+
+### <a name="connection-logging"></a>Verbindungsprotokollierung
+
+Rufen Sie <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging*> auf, um Protokolle auf Debugebene für die Kommunikation auf Byteebene für eine Verbindung auszugeben. Die Verbindungsprotokollierung ist beim Beheben von Problemen bei der Low-Level-Kommunikation hilfreich, wie z. B. bei der TLS-Verschlüsselung und bei Proxys. Wenn `UseConnectionLogging` vor `UseHttps` platziert wird, wird der verschlüsselte Datenverkehr protokolliert. Wenn `UseConnectionLogging` nach `UseHttps` platziert wird, wird der entschlüsselte Datenverkehr protokolliert.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
+    {
+        listenOptions.UseConnectionLogging();
+    });
+});
 ```
 
 ### <a name="bind-to-a-tcp-socket"></a>Binden an einen TCP-Socket

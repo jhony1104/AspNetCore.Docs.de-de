@@ -5,14 +5,14 @@ description: Ermitteln Sie die Webserver Kestrel und HTTP.sys für ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/10/2019
+ms.date: 11/07/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: 3bdc2bf776946b8fae8886a37ecd3ed5e3f860fe
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: e542dd4506eb77f949c0c87bea3044397bbb1b8f
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259825"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799403"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Webserverimplementierungen in ASP.NET Core
 
@@ -156,7 +156,9 @@ Der Server wird gestartet, wenn die integrierte Entwicklungsumgebung (IDE) oder 
 * [Visual Studio Code:](https://code.visualstudio.com/) Die App und der Server werden durch [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode) gestartet, das den CoreCLR-Debugger aktiviert.
 * [Visual Studio für Mac:](https://visualstudio.microsoft.com/vs/mac/) Die App und der Server werden durch den [Mono Soft-Mode Debugger](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/) gestartet.
 
-Wird die App über eine Eingabeaufforderung im Ordner des Projekts gestartet, startet [dotnet run](/dotnet/core/tools/dotnet-run) die App und den Server (nur Kestrel und HTTP.sys). Die Konfiguration wird durch die Option `-c|--configuration` angegeben, die entweder auf `Debug` (Standardwert) oder `Release` festgelegt ist. Sind in der Datei *launchSettings.json* Startprofile vorhanden, verwenden Sie die Option `--launch-profile <NAME>`, um das Startprofil festzulegen (z. B. `Development` oder `Production`). Weitere Informationen hierzu finden Sie unter [dotnet run](/dotnet/core/tools/dotnet-run) und unter [Verpacken einer Verteilung von .NET Core](/dotnet/core/build/distribution-packaging).
+Wird die App über eine Eingabeaufforderung im Ordner des Projekts gestartet, startet [dotnet run](/dotnet/core/tools/dotnet-run) die App und den Server (nur Kestrel und HTTP.sys). Die Konfiguration wird durch die Option `-c|--configuration` angegeben, die entweder auf `Debug` (Standardwert) oder `Release` festgelegt ist.
+
+Eine *launchSettings.json*-Datei bietet Konfiguration während des App-Starts mit `dotnet run` oder mit einem in Tools integrierten Debugger, z. B. Visual Studio. Sind in der Datei *launchSettings.json* Startprofile vorhanden, verwenden Sie die Option `--launch-profile {PROFILE NAME}` mit dem `dotnet run`-Befehl, um das Profil in Visual Studio auszuwählen. Weitere Informationen hierzu finden Sie unter [dotnet run](/dotnet/core/tools/dotnet-run) und unter [Verpacken einer Verteilung von .NET Core](/dotnet/core/build/distribution-packaging).
 
 ## <a name="http2-support"></a>HTTP/2-Unterstützung
 
