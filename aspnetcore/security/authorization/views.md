@@ -1,31 +1,30 @@
 ---
-title: Ansichtsbasierte Autorisierung in ASP.NET Core MVC
+title: Ansichts basierte Autorisierung in ASP.net Core MVC
 author: rick-anderson
-description: In diesem Dokument wird das Einfügen und Verwenden des autorisierungsdiensts in einer ASP.NET Core Razor-Ansicht veranschaulicht.
+description: In diesem Dokument wird veranschaulicht, wie Sie den Autorisierungs Dienst in einer ASP.net Core Razor-Ansicht einfügen und verwenden.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 10/30/2017
+ms.date: 11/08/2019
 uid: security/authorization/views
-ms.openlocfilehash: e497c41d4dca29fed8733f18cf727804e3f06d8c
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: fc03da9eb98d36ffdda932ee5b16f327c2be9f83
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892057"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73896980"
 ---
-# <a name="view-based-authorization-in-aspnet-core-mvc"></a>Ansichtsbasierte Autorisierung in ASP.NET Core MVC
+# <a name="view-based-authorization-in-aspnet-core-mvc"></a>Ansichts basierte Autorisierung in ASP.net Core MVC
 
-Ein Entwickler möchte häufig einblenden, ausblenden oder anderweitig ändern eine Benutzeroberfläche, die basierend auf der Identität des aktuellen Benutzers. Sie erreichen des autorisierungsdiensts in MVC-Ansichten über [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection). Um den Autorisierungsdienst in einer Razor-Ansicht einfügen möchten, verwenden Sie die `@inject` Richtlinie:
+Ein Entwickler möchte eine Benutzeroberfläche häufig auf der Grundlage der aktuellen Benutzeridentität anzeigen, ausblenden oder anderweitig ändern. Sie können über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)in MVC-Ansichten auf den Autorisierungs Dienst zugreifen. Um den Autorisierungs Dienst in eine Razor-Ansicht einzufügen, verwenden Sie die `@inject`-Direktive:
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 ```
 
-Platzieren Sie Sie ggf. den Autorisierungsdienst in jeder Ansicht der `@inject` -Direktive in der *_ViewImports.cshtml* Datei die *Ansichten* Verzeichnis. Weitere Informationen finden Sie unter [Dependency Injection in Ansichten](xref:mvc/views/dependency-injection).
+Wenn Sie den Autorisierungs Dienst in jeder Ansicht verwenden möchten, platzieren Sie die `@inject`-Direktive in der Datei " *_ViewImports. cshtml* " des Verzeichnisses " *views* ". Weitere Informationen finden Sie unter [Dependency Injection in Ansichten](xref:mvc/views/dependency-injection).
 
-Verwenden Sie den eingefügten Autorisierungsdienst Aufrufen `AuthorizeAsync` auf genau die gleiche Weise Sie, während der überprüfen würden [ressourcenbasierte Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):
-
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+Verwenden Sie den injizierten Autorisierungs Dienst, um `AuthorizeAsync` genau wie bei der [ressourcenbasierten Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)aufzurufen:
 
 ```cshtml
 @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
@@ -34,20 +33,7 @@ Verwenden Sie den eingefügten Autorisierungsdienst Aufrufen `AuthorizeAsync` au
 }
 ```
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-```cshtml
-@if (await AuthorizationService.AuthorizeAsync(User, "PolicyName"))
-{
-    <p>This paragraph is displayed because you fulfilled PolicyName.</p>
-}
-```
-
----
-
-In einigen Fällen wird die Ressource Ihrem Ansichtsmodell sein. Rufen Sie `AuthorizeAsync` auf genau die gleiche Weise Sie, während der überprüfen würden [ressourcenbasierte Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):
-
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+In einigen Fällen ist die Ressource Ihr Ansichts Modell. Rufen Sie `AuthorizeAsync` auf genau dieselbe Weise auf wie bei der [ressourcenbasierten Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):
 
 ```cshtml
 @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit)).Succeeded)
@@ -57,19 +43,7 @@ In einigen Fällen wird die Ressource Ihrem Ansichtsmodell sein. Rufen Sie `Auth
 }
 ```
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-```cshtml
-@if (await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit))
-{
-    <p><a class="btn btn-default" role="button"
-        href="@Url.Action("Edit", "Document", new { id = Model.Id })">Edit</a></p>
-}
-```
-
----
-
-Im vorangehenden Code wird das Modell als Ressource, die die richtlinienauswertung durchführen soll übergeben, zu berücksichtigen.
+Im vorangehenden Code wird das Modell als Ressource übermittelt, die von der Richtlinien Auswertung berücksichtigt werden sollte.
 
 > [!WARNING]
-> Verlassen Sie sich nicht auf die Umschaltfläche Sichtbarkeit von Ihrer app-UI-Elementen wie die einzige autorisierungsprüfung. Ausblenden von einem Element der Benutzeroberfläche möglicherweise nicht vollständig Zugriff auf der zugehörigen Controlleraktion verhindern. Betrachten Sie beispielsweise die Schaltfläche im vorhergehenden Codeausschnitt aus. Benutzer kann Aufrufen der `Edit` Action-Methode, wenn er die relative Ressource kennt-URL ist */Document/Edit/1*. Aus diesem Grund die `Edit` Aktionsmethode sollten eigene autorisierungsprüfung ausführen.
+> Verlassen Sie sich nicht auf das Umschalten der Sichtbarkeit der Benutzeroberflächen Elemente Ihrer APP als alleinige Autorisierungs Überprüfung. Wenn Sie ein UI-Element ausblenden, kann der Zugriff auf die zugeordnete Controller Aktion nicht vollständig verhindert werden Sehen Sie sich beispielsweise die Schaltfläche im vorangehenden Code Ausschnitt an. Ein Benutzer kann die `Edit` Aktionsmethode aufrufen, wenn er weiß, dass die relative Ressourcen-URL */Document/Edit/1*lautet. Aus diesem Grund sollte die `Edit` Aktionsmethode eine eigene Autorisierungs Überprüfung durchführen.
