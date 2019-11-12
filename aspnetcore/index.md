@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieser Artikel enthält eine Einführung in ASP.NET Core, ein plattformübergreifendes, leistungsstarkes Open-Source-Framework für das Erstellen moderner, cloudbasierter Anwendungen, die mit dem Internet verbunden sind.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2019
+ms.date: 11/03/2019
 uid: index
-ms.openlocfilehash: 1ccc1f5d095833e89fc20127ee23b8fa3dc4c79f
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: edbdce19656af64d7c2c0ee554bc5213a0d0c50e
+ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289051"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73611408"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -98,6 +98,10 @@ Als Einführung in die Entwicklung von ASP.NET Core-Apps empfehlen wir die folge
 1. Suchen Sie im Inhaltsverzeichnis nach weiteren interessanten Themen.
 
 \* Es gibt ein neues [Web-API-Tutorial, dem Sie vollständig im Browser folgen können](https://docs.microsoft.com/learn/modules/build-web-api-net-core), ohne dass eine lokale Entwicklungsumgebung installiert werden muss.  Der Code wird in einer [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) ausgeführt, und zum Testen wird [curl](https://curl.haxx.se/) verwendet.
+
+## <a name="migration-from-the-net-framework"></a>Migration vom .NET Framework
+
+Eine Referenzanleitung für die Migration von ASP.NET-Apps zu ASP.NET Core finden Sie unter <migration/proper-to-2x/index>.
 
 ## <a name="how-to-download-a-sample"></a>Herunterladen eines Beispiels
 
