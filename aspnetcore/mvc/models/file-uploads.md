@@ -5,14 +5,14 @@ description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/02/2019
+ms.date: 10/31/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: de8bfee22e39dfc5a6ed254cf0555887891d4590
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: 04e7533aa190a4875d3f66e8665fec16abec48b3
+ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179303"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73462940"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -34,13 +34,12 @@ Gehen Sie mit Bedacht vor, wenn Sie Benutzern die Möglichkeit geben, Dateien au
 
 Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines erfolgreichen Angriffs zu verringern:
 
-* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien auf dem System hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Die Verwendung eines dedizierten Speicherorts erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
-* Hochgeladene Dateien dürfen nie persistent in der Verzeichnisstruktur gespeichert werden, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Um einen nicht vertrauenswürdigen Dateinamen auf einer Benutzeroberfläche oder in einer Protokollierungsnachricht anzuzeigen, versehen Sie den Wert mit HTML-Code.
-* Lassen Sie nur einen festgelegten Satz genehmigter Dateierweiterungen zu.&dagger;
-* Überprüfen Sie die Signatur des Dateiformats, um zu verhindern, dass ein Benutzer eine getarnte Datei hochlädt.&dagger; Lassen Sie z. B. nicht zu, dass ein Benutzer eine *EXE*-Datei mit der Erweiterung *.txt* hochlädt.
-* Stellen Sie sicher, dass clientseitige Überprüfungen auch auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
-* Überprüfen Sie die Größe einer hochgeladenen Datei, und verhindern Sie Uploads, die größer als erwartet sind.&dagger;
+* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
+* Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Codieren Sie den nicht vertrauenswürdigen Dateinamen mit HTML, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
+* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
+* Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
 
@@ -212,8 +211,20 @@ Für ein Eingabeelement des Typs `files`, welches das Hochladen mehrerer Dateien
 
 Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [Modellbindung](xref:mvc/models/model-binding) mittels <xref:Microsoft.AspNetCore.Http.IFormFile>zugegriffen werden. Die Beispiel-App veranschaulicht mehrere gepufferte Dateiuploads für Szenarien mit Datenbank und physischem Speicher.
 
+<a name="filename"></a>
+
 > [!WARNING]
-> Verlassen Sie sich nicht ohne Validierung auf die `FileName`-Eigenschaft <xref:Microsoft.AspNetCore.Http.IFormFile>, bzw. vertrauen Sie ihr nicht. Die `FileName`-Eigenschaft darf nur für Anzeigezwecke und erst nach HTML-Codierung des Werts verwendet werden.
+> Verwenden Sie die Eigenschaft `FileName` von <xref:Microsoft.AspNetCore.Http.IFormFile>, **ausschließlich** für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
+>
+> * den Pfad aus dem vom Benutzer angegebenen Dateinamen entfernen
+> * den mit HTML codierten Dateinamen, aus dem der Pfad entfernt wurde, für die Benutzeroberfläche oder Protokollierung speichern
+> * einen neuen zufälligen Dateinamen für die Speicherung generieren
+>
+> Mit dem folgenden Code wird der Pfad aus dem Dateinamen entfernt:
+>
+> ```csharp
+> string untrustedFileName = Path.GetFileName(pathName);
+> ```
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
@@ -393,7 +404,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
 
-Das folgende Beispiel zeigt, wie JavaScript verwendet wird, um eine Datei an eine Controlleraktion zu streamen. Das Antifälschungstoken einer Datei wird mithilfe eines benutzerdefinierten Filterattributs generiert und an die HTTP-Header des Clients anstelle des Anforderungstexts übergeben. Da die Aktionsmethode die hochgeladenen Daten direkt verarbeitet, wird die Modellbindung des Formulars von einem anderen benutzerdefinierten Filter deaktiviert. Innerhalb der Aktion werden die Inhalte des Formulars über `MultipartReader` gelesen. Dieses Element liest jede einzelne `MultipartSection`-Klasse, wodurch die Datei verarbeitet wird oder die Inhalte angemessen gespeichert werden. Nachdem alle mehrteiligen Abschnitte gelesen wurden, führt die Aktion ihre eigene Modellbindung aus.
+Das folgende Beispiel zeigt, wie JavaScript verwendet wird, um eine Datei an eine Controlleraktion zu streamen. Das Fälschungssicherheitstoken einer Datei wird mithilfe eines benutzerdefinierten Filterattributs generiert und an die HTTP-Header des Clients anstelle des Anforderungstexts übergeben. Da die Aktionsmethode die hochgeladenen Daten direkt verarbeitet, wird die Modellbindung des Formulars von einem anderen benutzerdefinierten Filter deaktiviert. Innerhalb der Aktion werden die Inhalte des Formulars über `MultipartReader` gelesen. Dieses Element liest jede einzelne `MultipartSection`-Klasse, wodurch die Datei verarbeitet wird oder die Inhalte angemessen gespeichert werden. Nachdem alle mehrteiligen Abschnitte gelesen wurden, führt die Aktion ihre eigene Modellbindung aus.
 
 Die Reaktion auf der ersten Seite lädt das Formular und speichert das Fälschungssicherheitstoken (über das `GenerateAntiforgeryTokenCookieAttribute`-Attribut) in einem Cookie. Das Attribut nutzt die in ASP.NET Core integrierte [Unterstützung der Fälschungssicherheit](xref:security/anti-request-forgery), um ein Cookie mit einem Anforderungstoken festzulegen:
 
@@ -748,13 +759,12 @@ Gehen Sie mit Bedacht vor, wenn Sie Benutzern die Möglichkeit geben, Dateien au
 
 Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines erfolgreichen Angriffs zu verringern:
 
-* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien auf dem System hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Die Verwendung eines dedizierten Speicherorts erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
-* Hochgeladene Dateien dürfen nie persistent in der Verzeichnisstruktur gespeichert werden, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Um einen nicht vertrauenswürdigen Dateinamen auf einer Benutzeroberfläche oder in einer Protokollierungsnachricht anzuzeigen, versehen Sie den Wert mit HTML-Code.
-* Lassen Sie nur einen festgelegten Satz genehmigter Dateierweiterungen zu.&dagger;
-* Überprüfen Sie die Signatur des Dateiformats, um zu verhindern, dass ein Benutzer eine getarnte Datei hochlädt.&dagger; Lassen Sie z. B. nicht zu, dass ein Benutzer eine *EXE*-Datei mit der Erweiterung *.txt* hochlädt.
-* Stellen Sie sicher, dass clientseitige Überprüfungen auch auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
-* Überprüfen Sie die Größe einer hochgeladenen Datei, und verhindern Sie Uploads, die größer als erwartet sind.&dagger;
+* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
+* Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Codieren Sie den nicht vertrauenswürdigen Dateinamen mit HTML, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
+* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
+* Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
 
@@ -926,8 +936,20 @@ Für ein Eingabeelement des Typs `files`, welches das Hochladen mehrerer Dateien
 
 Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [Modellbindung](xref:mvc/models/model-binding) mittels <xref:Microsoft.AspNetCore.Http.IFormFile>zugegriffen werden. Die Beispiel-App veranschaulicht mehrere gepufferte Dateiuploads für Szenarien mit Datenbank und physischem Speicher.
 
+<a name="filename2"></a>
+
 > [!WARNING]
-> Verlassen Sie sich nicht ohne Validierung auf die `FileName`-Eigenschaft <xref:Microsoft.AspNetCore.Http.IFormFile>, bzw. vertrauen Sie ihr nicht. Die `FileName`-Eigenschaft darf nur für Anzeigezwecke und erst nach HTML-Codierung des Werts verwendet werden.
+> Verwenden Sie die Eigenschaft `FileName` von <xref:Microsoft.AspNetCore.Http.IFormFile>, **ausschließlich** für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
+>
+> * den Pfad aus dem vom Benutzer angegebenen Dateinamen entfernen
+> * den mit HTML codierten Dateinamen, aus dem der Pfad entfernt wurde, für die Benutzeroberfläche oder Protokollierung speichern
+> * einen neuen zufälligen Dateinamen für die Speicherung generieren
+>
+> Mit dem folgenden Code wird der Pfad aus dem Dateinamen entfernt:
+>
+> ```csharp
+> string untrustedFileName = Path.GetFileName(pathName);
+> ```
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >

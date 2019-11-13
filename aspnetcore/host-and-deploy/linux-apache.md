@@ -5,14 +5,14 @@ description: Informationen zum Einrichten von Apache als Reverseproxyserver für
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 11/05/2019
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: ec14bce5d8ada9a56ccc44d1159373dc73a09c1b
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: fce91db736908e433ba6803319aa8984bb68a554
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081881"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659885"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hosten von ASP.NET Core unter Linux mit Apache
 
@@ -484,7 +484,7 @@ In der Beispieldatei wird die Bandbreite am Stammspeicherort auf 600 KB/Sek. beg
 
 ### <a name="long-request-header-fields"></a>Lange Anforderungsheaderfelder
 
-Wenn die App Anforderungsheaderfelder benötigt, die länger sind, als es die Standardeinstellung des Proxyservers zulässt (meist 8.190 Byte), passen Sie den Wert der [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize)-Anweisung an. Der anzuwendende Wert hängt von Szenario ab. Weitere Informationen finden Sie in der Dokumentation Ihres Servers.
+Die Standardeinstellungen für den Proxyserver schränken die Anforderungsheaderfelder in der Regel auf 8.190 Bytes ein. Eine App erfordert möglicherweise Felder, die länger als die Standardwerte sind (z. B. Apps, die [Azure Active Directory](https://azure.microsoft.com/services/active-directory/) verwenden). Wenn längere Felder erforderlich sind, muss die Anweisung [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) des Proxyservers angepasst werden. Der anzuwendende Wert hängt vom jeweiligen Szenario ab. Weitere Informationen finden Sie in der Dokumentation Ihres Servers.
 
 > [!WARNING]
 > Erhöhen Sie den Standardwert von `LimitRequestFieldSize` nur dann, wenn dies absolut erforderlich ist. Ein Erhöhen dieses Werts vergrößert das Risiko von Pufferüberlauf- (Überlauf-) und Denial-of-Service-Angriffen durch böswillige Benutzer.

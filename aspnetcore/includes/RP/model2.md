@@ -71,4 +71,5 @@ Registrieren Sie den Datenbankkontext mit dem [Dependency Injection-Container](x
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
 Erstellen Sie das Projekt zur Fehlerüberprüfung.
+
 ::: moniker-end

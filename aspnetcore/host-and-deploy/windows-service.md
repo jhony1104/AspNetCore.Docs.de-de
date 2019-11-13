@@ -5,22 +5,22 @@ description: Erfahren Sie, wie eine ASP.NET Core-App in einem Windows-Dienst geh
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2019
+ms.date: 10/30/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: b02e627af875f15a81d68b0d625a2eccf25c0657
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 014585cd1e170fc94f7f577e11ec19824e54572f
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333801"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659844"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Hosten von ASP.NET Core in einem Windows-Dienst
 
-Von [Luke Latham](https://github.com/guardrex) und [Tom Dykstra](https://github.com/tdykstra)
+Von [Luke Latham](https://github.com/guardrex)
 
 Eine ASP.NET Core-App kann unter Windows als [Windows-Dienst](/dotnet/framework/windows-services/introduction-to-windows-service-applications) ohne die Verwendung von IIS gehostet werden. Wenn die App als Windows-Dienst gehostet und der Server neu gestartet wird, startet diese automatisch.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Erforderliche Komponenten
 
@@ -38,15 +38,15 @@ Die ASP.NET Core-Workerdienstvorlage dient als Ausgangspunkt für das Programmie
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
----
-
 ::: moniker-end
 
 ## <a name="app-configuration"></a>App-Konfiguration
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Die Erweiterung `IHostBuilder.UseWindowsService` ist im Paket [Microsoft.Extensions.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices) enthalten und wird aufgerufen, wenn der Host erstellt wird. Wenn die App als Windows-Dienst ausgeführt wird, sorgt die Methode für Folgendes:
+Die App erfordert einen Paketverweis auf [Microsoft.Extensions.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices).
+
+Beim Erstellen des Hosts wird `IHostBuilder.UseWindowsService` aufgerufen. Wenn die App als Windows-Dienst ausgeführt wird, sorgt die Methode für Folgendes:
 
 * Sie legt die Lebensdauer des Hosts auf `WindowsServiceLifetime` fest.
 * Sie legt das [Inhaltsstammverzeichnis](xref:fundamentals/index#content-root) fest.
@@ -54,7 +54,20 @@ Die Erweiterung `IHostBuilder.UseWindowsService` ist im Paket [Microsoft.Extensi
   * Die Protokollebene kann mithilfe des Schlüssels `Logging:LogLevel:Default` in der Datei *appsettings.Production.json* konfiguriert werden.
   * Nur Administratoren können neue Ereignisquellen erstellen. Wenn keine Ereignisquellen mithilfe des Anwendungsnamens erstellt werden können, wird in der *Anwendungsquelle* eine Warnung protokolliert, und die Ereignisprotokolle werden deaktiviert.
 
-[!code-csharp[](windows-service/samples/3.x/AspNetCoreService/Program.cs?name=snippet_Program)]
+In `CreateHostBuilder` von *Program.cs*:
+
+```csharp
+Host.CreateDefaultBuilder(args)
+    .UseWindowsService()
+    ...
+```
+
+In diesem Thema werden die folgenden Beispiel-Apps behandelt:
+
+* Beispiel eines Hintergrundworkerdiensts &ndash; Ein Beispiel einer nicht webbasierten App, die auf der [Workerdienstvorlage](#worker-service-template) basiert, die [gehostete Dienste](xref:fundamentals/host/hosted-services) für Hintergrundaufgaben verwendet.
+* Beispiel eines Web-App-Diensts &ndash; Ein Razor Pages-Web-App-Beispiel, das als Windows-Dienst mit [gehosteten Diensten](xref:fundamentals/host/hosted-services) für Hintergrundaufgaben ausgeführt wird.
+
+MVC-Anleitungen finden Sie in den Artikeln unter <xref:mvc/overview> und <xref:migration/22-to-30>.
 
 ::: moniker-end
 
@@ -81,24 +94,31 @@ Im folgenden Beispiel aus der Beispiel-App wird `RunAsCustomService` anstelle vo
 
 Weitere Informationen und Tipps zu Bereitstellungsszenarien finden Sie unter [.NET Core-Anwendungsbereitstellung](/dotnet/core/deploying/).
 
+### <a name="sdk"></a>SDK
+
+Geben Sie für einen Web-App-basierten Dienst, der die Razor Pages- oder MVC-Frameworks verwendet, das Web-SDK in der Projektdatei an:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+```
+
+Geben Sie das Worker-SDK in der Projektdatei an, wenn der Dienst nur Hintergrundaufgaben ausführt (z. B. [gehostete Dienste](xref:fundamentals/host/hosted-services)):
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+```
+
 ### <a name="framework-dependent-deployment-fdd"></a>Frameworkabhängige Bereitstellung (Framework-dependent deployment, FDD)
 
 Eine Framework-abhängige Bereitstellung (Framework-Dependent Deployment, FDD) benötigt eine gemeinsame systemweite Version von .NET Core auf dem Zielsystem. Wenn das FDD-Szenario gemäß der Anleitung in diesem Artikel übernommen wird, erzeugt das SDK eine ausführbare Datei ( *.exe*). Diese wird als *frameworkabhängige ausführbare Datei* bezeichnet.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Fügen Sie die folgenden Eigenschaftselemente zu der Projektdatei hinzu:
-
-* `<OutputType>`: der Ausgabetyp der App (`Exe` für ausführbare Dateien)
-* `<LangVersion>`: die C#-Sprachversion (`latest` oder `preview`)
-
-Eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET Core-App veröffentlichen, ist für eine Windows Services-App nicht erforderlich. Um die Erstellung der *web.config*-Datei zu deaktivieren, fügen Sie die auf `true` festgelegte `<IsTransformWebConfigDisabled>`-Eigenschaft hinzu.
+Bei Verwendung des [Web-SDK](#sdk) ist eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET Core-App veröffentlichen, für eine Windows Services-App nicht erforderlich. Um die Erstellung der *web.config*-Datei zu deaktivieren, fügen Sie die auf `true` festgelegte `<IsTransformWebConfigDisabled>`-Eigenschaft hinzu.
 
 ```xml
 <PropertyGroup>
   <TargetFramework>netcoreapp3.0</TargetFramework>
-  <OutputType>Exe</OutputType>
-  <LangVersion>preview</LangVersion>
   <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
 </PropertyGroup>
 ```
@@ -132,7 +152,7 @@ Eine *web.config*-Datei, die normalerweise erstellt wird, wenn Sie eine ASP.NET 
 
 ```xml
 <PropertyGroup>
-  <TargetFramework>netcoreapp2.1</TargetFramework>
+  <TargetFramework>netcoreapp2.2</TargetFramework>
   <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
   <UseAppHost>true</UseAppHost>
   <SelfContained>false</SelfContained>

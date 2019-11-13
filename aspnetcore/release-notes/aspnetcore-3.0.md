@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2019
+ms.date: 10/31/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: 90433773bec2efc5a2bc39d71ce7ae324b922046
-ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
+ms.openlocfilehash: 8c53d8a9fa222ca40f26dc713ec3b70ddde76539
+ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72165356"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73416124"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -231,7 +231,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-In der vorherigen Version mussten Entwickler Controller, Razor-Seiten und Hubs an den unterschiedlichsten Orten miteinander verknüpfen. Explizite Verbindungen führen zu einer Reihe nahezu identischer Routingsegmente:
+In der vorherigen Version mussten Entwickler Controller, Razor-Seiten und Hubs an verschiedenen Orten miteinander verknüpfen. Explizite Verbindungen führen zu einer Reihe nahezu identischer Routingsegmente:
 
 ```csharp
 app.UseSignalR(routes =>
@@ -321,14 +321,16 @@ Die folgende Liste enthält neue Razor-Anweisungen:
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 unterstützt die Authentifizierung und Autorisierung für Web-APIs und SPAs.
 
-[IdentityServer4](https://identityserver.io) ist ein Framework für OpenID Connect und OAuth 2.0 für ASP.NET Core 3.0. IdentityServer4 ermöglicht die folgenden Sicherheitsfeatures:
+ASP.NET Core 3.0 bietet eine Authentifizierung in Single-Page-Webanwendungen (SPAs) unter Verwendung der Unterstützung für die Web-API-Autorisierung. Die ASP.NET Core-Identität für die Authentifizierung und zum Speichern von Benutzern wird mit [IdentityServer4](https://identityserver.io/) für die Implementierung von Open ID Connect kombiniert.
+
+IdentityServer4 ist ein OpenID Connect- und OAuth 2.0-Framework für ASP.NET Core 3.0. Es ermöglicht die folgenden Sicherheitsfunktionen:
 
 * Authentifizierung als Dienst
 * Einmaliges Anmelden und einmaliges Abmelden für mehrere Anwendungstypen
 * Zugriffssteuerung für APIs
 * Federation Gateway
 
-Weitere Informationen finden Sie unter [Willkommen bei IdentityServer4](http://docs.identityserver.io/en/latest/index.html).
+Weitere Informationen finden Sie unter der [IdentityServer4-Dokumentation](http://docs.identityserver.io/en/latest/index.html) oder [Authentifizierung und Autorisierung für SPAs](xref:security/authentication/identity/spa).
 
 ## <a name="certificate-and-kerberos-authentication"></a>Zertifikat- und Kerberos-Authentifizierung
 
@@ -401,13 +403,13 @@ Die Vorlage der Razor-Klassenbibliothek (Razor Class Library, RCL) gilt standard
 
 ## <a name="generic-host"></a>Generischer Host
 
-Die ASP.NET Core 3.0-Vorlagen verwenden <xref:fundamentals/host/generic-host>. In vorherigen Versionen wurde <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> verwendet. Durch Verwendung des generischen .NET Core-Hosts (<xref:Microsoft.Extensions.Hosting.HostBuilder>) lässt sich eine bessere Integration von ASP.NET Core-Apps in andere, nicht webspezifische Serverszenarien erzielen. Weitere Informationen finden Sie unter [HostBuilder ersetzt WebHostBuilder](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder).
+Die ASP.NET Core 3.0-Vorlagen verwenden <xref:fundamentals/host/generic-host>. In vorherigen Versionen wurde <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> verwendet. Durch Verwendung des generischen .NET Core-Hosts (<xref:Microsoft.Extensions.Hosting.HostBuilder>) lässt sich eine bessere Integration von ASP.NET Core-Apps in andere, nicht webspezifische Serverszenarios erzielen. Weitere Informationen finden Sie unter [HostBuilder ersetzt WebHostBuilder](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder).
 
 ### <a name="host-configuration"></a>Konfiguration des Hosts
 
 Vor ASP.NET Core 3.0 wurden Umgebungsvariablen mit dem Präfix `ASPNETCORE_` für die Hostkonfiguration des Webhosts geladen. In Version 3.0 wird `AddEnvironmentVariables` zum Laden von Umgebungsvariablen mit dem Präfix `DOTNET_` zur Hostkonfiguration mit `CreateDefaultBuilder` verwendet.
 
-### <a name="changes-to-startup-contructor-injection"></a>Änderungen an der Startkonstruktorinjektion
+### <a name="changes-to-startup-constructor-injection"></a>Änderungen an der Startkonstruktorinjektion
 
 Der generische Host unterstützt nur die folgenden Typen für die Injektion des `Startup`-Konstruktors:
 
@@ -512,7 +514,7 @@ ASP.NET Core 3.0 enthält viele Verbesserungen, die die Arbeitsspeichernutzung 
 
 ## <a name="aspnet-core-30-only-runs-on-net-core-30"></a>ASP.NET Core 3.0 funktioniert nur in .NET Core 3.0
 
-Ab ASP.NET Core 3.0 ist .NET Framework kein unterstütztes Zielframework mehr. Projekte, die auf .NET Framework abzielen, können mit dem [.NET Core 2.1 LTS-Release](https://www.microsoft.com/net/download/dotnet-core/2.1) weiterhin mit vollständiger Unterstützung ausgeführt werden. Die meisten auf ASP.NET Core 2.1.x bezogenen Pakete werden unbegrenzt unterstützt, auch nach dem 3-jährigen LTS-Zeitraum für .NET Core 2.1.
+Ab ASP.NET Core 3.0 ist .NET Framework kein unterstütztes Zielframework mehr. Projekte, die auf .NET Framework abzielen, können mit dem [.NET Core 2.1 LTS-Release](https://www.microsoft.com/net/download/dotnet-core/2.1) weiterhin mit vollständiger Unterstützung ausgeführt werden. Die meisten auf ASP.NET Core 2.1.x bezogenen Pakete werden unbegrenzt unterstützt, auch nach dem dreijährigen LTS-Zeitraum für .NET Core 2.1.
 
 Informationen zur Migration finden Sie unter [Portieren Ihres Codes von .NET Framework auf .NET Core](/dotnet/core/porting/).
 

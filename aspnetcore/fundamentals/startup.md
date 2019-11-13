@@ -2,16 +2,17 @@
 title: Anwendungsstart in ASP.NET Core
 author: rick-anderson
 description: Informationen zur Funktionsweise der Startklasse in ASP.NET Core bei der Konfiguration von Diensten und der Anforderungspipeline einer App.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 8/7/2019
+ms.date: 11/02/2019
 uid: fundamentals/startup
-ms.openlocfilehash: 0ea3965f73f4b0334810bc9ec2910b0c9364a7ba
-ms.sourcegitcommit: d8b12cc1716ee329d7bd2300e201b61e15d506ac
+ms.openlocfilehash: 081eaa772d136477a37a3392877886327e0cda7c
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2019
-ms.locfileid: "71942873"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634039"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -23,7 +24,7 @@ Die `Startup`-Klasse konfiguriert Dienste und die Anforderungspipeline einer App
 
 ASP.NET Core-Apps verwenden eine `Startup`-Klasse, die standardmäßig `Startup` genannt wird. Die `Startup`-Klasse:
 
-* Kann eine <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>-Methode enthalten, um die *Dienste* der App zu konfigurieren. Ein Dienst ist eine wiederverwendbare Komponente, die App-Funktionalität bereitstellt. Dienste werden in `ConfigureServices` konfiguriert, was auch als *registrieren* bezeichnet wird, und in der App über [Dependency Injection](xref:fundamentals/dependency-injection) oder <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> genutzt.
+* Kann eine <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>-Methode enthalten, um die *Dienste* der App zu konfigurieren. Ein Dienst ist eine wiederverwendbare Komponente, die App-Funktionalität bereitstellt. Dienste werden in `ConfigureServices` *registriert* und in der App über [Dependency Injection (DI)](xref:fundamentals/dependency-injection) oder <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> genutzt.
 * Enthält eine <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>-Methode, um die Anforderungsverarbeitungspipeline einer App zu erstellen.
 
 `ConfigureServices` und `Configure` werden von der ASP.NET Core-Runtime aufgerufen, wenn die App gestartet wird:
@@ -56,9 +57,9 @@ Die `Startup`-Klasse wird angegeben, wenn der [Host](xref:fundamentals/index#hos
 
 Der Host stellt Dienste für den `Startup`-Klassenkonstruktor bereit. Die App fügt über `ConfigureServices` zusätzliche Dienste hinzu. Sowohl die Host- als auch die App-Dienste sind in `Configure` und über die App verfügbar.
 
-Bei Verwendung von <xref:Microsoft.Extensions.Hosting.IHostBuilder> können nur die folgenden Diensttypen in den `Startup`-Konstruktor eingefügt werden:
+Bei Verwendung des [generischen Hosts](xref:fundamentals/host/generic-host) (<xref:Microsoft.Extensions.Hosting.IHostBuilder>) können nur die folgenden Diensttypen in den `Startup`-Konstruktor eingefügt werden:
 
-* `IWebHostEnvironment`
+* <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
@@ -84,7 +85,7 @@ Die meisten Dienste sind erst verfügbar, wenn die `Configure`-Methode aufgerufe
 
 ::: moniker-end
 
-### <a name="multiple-startup"></a>Mehrere StartUp-Klassen
+### <a name="multiple-startup"></a>Mehrere Startup-Klassen
 
 Wenn die App unterschiedliche `Startup`-Klassen für unterschiedliche Umgebungen definiert (z.B. `StartupDevelopment`), wird zur Laufzeit die entsprechende `Startup`-Klasse ausgewählt. Die Klasse, deren Namenssuffix mit der aktuellen Umgebung übereinstimmt, wird priorisiert. Wenn die App in der Entwicklungsumgebung ausgeführt wird und sowohl eine `Startup`-Klasse als auch eine `StartupDevelopment`-Klasse enthält, wird die `StartupDevelopment`-Klasse verwendet. Weitere Informationen finden Sie unter [Verwenden mehrerer Umgebungen](xref:fundamentals/environments#environment-based-startup-class-and-methods).
 
@@ -180,6 +181,7 @@ Weitere Informationen zur Verwendung von `IApplicationBuilder` und der Reihenfol
 Rufen Sie die Hilfsmethoden `ConfigureServices` und `Configure` im Hostgenerator auf, um Dienste und die Anforderungsverarbeitungspipeline ohne die `Startup`-Klasse zu konfigurieren. Wenn `ConfigureServices` mehrmals aufgerufen wird, werden diese Aufrufe einander angefügt. Wenn es mehrere Aufrufe der Methode `Configure` gibt, wird der letzte `Configure`-Aufruf verwendet.
 
 ::: moniker range=">= aspnetcore-3.0"
+
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Program1.cs?name=snippet)]
 
 ::: moniker-end

@@ -10,7 +10,7 @@
 1. Erstellen Sie ein neues Projekt.
 1. Wählen Sie in der Randleiste unter **.NET Core** den Eintrag **App** aus.
 1. Wählen Sie unter **ASP.NET Core** den Eintrag **Worker** aus. Klicken Sie auf **Weiter**.
-1. Wählen Sie **.NET Core 3.0** als **Zielframework** aus. Klicken Sie auf **Weiter**.
+1. Wählen Sie **.NET Core 3.0** oder höher als **Zielframework** aus. Klicken Sie auf **Weiter**.
 1. Geben Sie im Feld **Projektname** einen Namen an. Wählen Sie **Erstellen** aus.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
@@ -20,3 +20,5 @@ Rufen Sie die Vorlage „Workerdienst“ (`worker`) über eine Befehlsshell mit 
 ```dotnetcli
 dotnet new worker -o ContosoWorker
 ```
+
+---

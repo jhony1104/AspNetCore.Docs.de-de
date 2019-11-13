@@ -14,3 +14,5 @@ Die oben aufgeführten Befehle fügen Folgendes hinzu:
 * Die Entity Framework Core-Tools für die .NET Core-CLI.
 * Den EF Core SQLite-Anbieter, der das EF Core-Paket als Abhängigkeit installiert.
 * Für Gerüstbau erforderliche Pakete: `Microsoft.VisualStudio.Web.CodeGeneration.Design` und `Microsoft.EntityFrameworkCore.SqlServer`.
+
+Eine Anleitung für die Konfiguration mehrerer Umgebungen, die es einer App ermöglicht, Ihre Datenbankkontexte nach Umgebung zu konfigurieren, finden Sie unter <xref:fundamentals/environments#environment-based-startup-class-and-methods>.

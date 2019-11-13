@@ -5,14 +5,14 @@ description: Hier finden Sie Informationen zum Einrichten von Nginx als Reversep
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 11/05/2019
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: b71bc0464892f15ef8db0324a8e66a28a6192577
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: c6ae86ec9ac54ddf2d487fd72156199fbdd029ef
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080871"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659876"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -287,7 +287,7 @@ Wenn Sie den Schutz von Daten konfigurieren möchten, um den Schlüsselring pers
 
 ## <a name="long-request-header-fields"></a>Lange Anforderungsheaderfelder
 
-Wenn die App Anforderungsheaderfelder erfordert, die länger sind, als dies die Standardeinstellungen des Proxyservers zulassen (meist 4K oder 8K, je nach Plattform), müssen die folgenden Anweisungen angepasst werden. Die anzuwendenden Werte hängen von Szenario ab. Weitere Informationen finden Sie in der Dokumentation Ihres Servers.
+Die Standardeinstellungen für den Proxyserver schränken die Anforderungsheaderfelder in der Regel je nach Plattform auf 4 K oder 8 K ein. Eine App erfordert möglicherweise Felder, die länger als die Standardwerte sind (z. B. Apps, die [Azure Active Directory](https://azure.microsoft.com/services/active-directory/) verwenden). Wenn längere Felder erforderlich sind, müssen die Standardeinstellungen des Proxyservers angepasst werden. Die anzuwendenden Werte hängen vom jeweiligen Szenario ab. Weitere Informationen finden Sie in der Dokumentation Ihres Servers.
 
 * [proxy_buffer_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffer_size)
 * [proxy_buffers](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffers)

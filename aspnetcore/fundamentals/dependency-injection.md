@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core Dependency Injection implementiert u
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/12/2019
+ms.date: 11/05/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: b07ed6d1c23454c95778a5942de615684b70bc36
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: c46e7322e86c2836a15bd0720995a8634bb185be
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589899"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634008"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency Injection in ASP.NET Core
 
@@ -571,7 +571,7 @@ Generell sollte die App diese Eigenschaften nicht direkt verwenden. Fordern Sie 
 Best Practices:
 
 * Entwerfen Sie Dienste zur Verwendung der Abhängigkeitsinjektion, um ihre Abhängigkeiten zu erhalten.
-* Vermeiden Sie zustandsbehaftete, statische Methodenaufrufe.
+* Vermeiden Sie zustandsbehaftete statische Klassen und Member. Entwerfen Sie Apps so, dass stattdessen Singletondienste verwendet werden. Diese vermeiden das Entstehen eines globalen Zustands.
 * Vermeiden Sie die direkte Instanziierung abhängiger Klassen innerhalb von Diensten. Die direkte Instanziierung koppelt den Code an eine bestimmte Implementierung.
 * Erstellen Sie kleine, gut gestaltete und einfach zu testende Apps.
 
