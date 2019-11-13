@@ -1,26 +1,28 @@
 ---
-title: Debuggen ASP.net Core blazor
+title: ASP.net Core Debuggen Blazor
 author: guardrex
-description: Informationen zum Debuggen von blazor-apps.
+description: Erfahren Sie, wie Sie Blazor-apps Debuggen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/debug
-ms.openlocfilehash: 9fc3f1d2dd7dc79d2ba3d64bff6e0f92ac2cf6dc
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 3096ad9b3a6904804f239d61f374adcd4d851978
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391182"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963147"
 ---
-# <a name="debug-aspnet-core-blazor"></a>Debuggen ASP.net Core blazor
+# <a name="debug-aspnet-core-opno-locblazor"></a>ASP.net Core Debuggen Blazor
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-*Frühe* Unterstützung für das Debuggen von blazor Webassembly-apps, die auf Webassembly in Chrome ausgeführt werden
+*Frühe* Unterstützung für das Debuggen von Blazor Webassembly-apps, die auf Webassembly in Chrome ausgeführt werden
 
 Die Debugger-Funktionen sind eingeschränkt. Folgende Szenarien sind verfügbar:
 
@@ -49,30 +51,30 @@ Das Debuggen erfordert einen der folgenden Browser:
 
 ## <a name="procedure"></a>Prozedur
 
-1. Führen Sie eine blazor Webassembly-app in `Debug`-Konfiguration aus. Übergeben Sie die Option `--configuration Debug` an den Befehl [dotnet Run](/dotnet/core/tools/dotnet-run) : `dotnet run --configuration Debug`.
+1. Führen Sie eine Blazor Webassembly-app in `Debug` Konfiguration aus. Übergeben Sie die Option `--configuration Debug` an den Befehl [dotnet Run](/dotnet/core/tools/dotnet-run) : `dotnet run --configuration Debug`.
 1. Greifen Sie im Browser auf die APP zu.
 1. Platzieren Sie den Tastaturfokus auf die APP, nicht auf den Bereich Entwicklertools. Der Bereich Entwicklertools kann geschlossen werden, wenn das Debuggen initiiert wird.
-1. Wählen Sie die folgende blazor-spezifische Tastenkombination aus:
+1. Wählen Sie die folgende Blazorspezifische Tastenkombination aus:
    * `Shift+Alt+D` unter Windows/Linux
    * `Shift+Cmd+D` unter macOS
 1. Führen Sie die auf dem Bildschirm aufgeführten Schritte aus, um den Browser mit aktiviertem Remote Debugging neu zu starten.
-1. Wählen Sie die folgende blazor-spezifische Tastenkombination erneut aus, um die Debugsitzung zu starten:
+1. Wählen Sie die folgende Blazorspezifische Tastenkombination erneut aus, um die Debugsitzung zu starten:
    * `Shift+Alt+D` unter Windows/Linux
    * `Shift+Cmd+D` unter macOS
 
 ## <a name="enable-remote-debugging"></a>Remote Debuggen aktivieren
 
-Wenn das Remote Debuggen deaktiviert ist, wird die Fehlerseite " **Debugfähige Browser Registerkarte nicht gefunden** " von Chrome generiert. Die Fehlerseite enthält Anweisungen zum Ausführen von Chrome mit dem geöffneten debugsport, sodass der blazor-debugproxy eine Verbindung mit der App herstellen kann. *Schließen Sie alle Chrome-Instanzen* , und starten Sie Chrome wie beschrieben neu.
+Wenn das Remote Debuggen deaktiviert ist, wird die Fehlerseite " **Debugfähige Browser Registerkarte nicht gefunden** " von Chrome generiert. Die Fehlerseite enthält Anweisungen zum Ausführen von Chrome mit dem geöffneten debugsport, sodass der Blazor debugerproxy eine Verbindung mit der App herstellen kann. *Schließen Sie alle Chrome-Instanzen* , und starten Sie Chrome wie beschrieben neu.
 
 ## <a name="debug-the-app"></a>Debuggen der App
 
 Nachdem Chrome mit aktiviertem Remote Debugging ausgeführt wurde, öffnet die Tastenkombination Debuggen eine neue Registerkarte Debugger. Nach kurzer Zeit wird auf der Registerkarte **Quellen** eine Liste der .NET-Assemblys in der App angezeigt. Erweitern Sie die einzelnen Assemblys, und suchen Sie die zu debuggingquelldateien *. cs*/ *. Razor* . Legen Sie Breakpoints fest, wechseln Sie zurück zur Registerkarte der APP, und die Breakpoints werden bei der Ausführung des Codes angezeigt. Nach dem Erreichen eines halte Punkts wird ein Einzelschritt (`F10`) durch den Code oder die Fortsetzung (`F8`) der Codeausführung normal ausgeführt.
 
-Blazor bietet einen debugproxy, der das [Chrome devtools-Protokoll](https://chromedevtools.github.io/devtools-protocol/) implementiert und das Protokoll mit erweitert. Netzwerk spezifische Informationen. Wenn das Debuggen der Tastenkombination gedrückt wird, zeigt blazor die Chrome devtools auf dem Proxy an. Der Proxy stellt eine Verbindung mit dem Browserfenster her, das Sie debuggen möchten (daher muss das Remote Debugging aktiviert werden).
+Blazor stellt einen debugproxy bereit, der das [Chrome devtools-Protokoll](https://chromedevtools.github.io/devtools-protocol/) implementiert und das Protokoll mit erweitert. Netzwerk spezifische Informationen. Wenn das Debuggen der Tastenkombination gedrückt wird, zeigt Blazor die Chrome devtools auf dem Proxy an. Der Proxy stellt eine Verbindung mit dem Browserfenster her, das Sie debuggen möchten (daher muss das Remote Debugging aktiviert werden).
 
 ## <a name="browser-source-maps"></a>Browser-Quell Zuordnungen
 
-Browser-Quell Zuordnungen ermöglichen es dem Browser, kompilierte Dateien wieder den ursprünglichen Quelldateien zuzuordnen, und werden häufig für das Client seitige Debuggen verwendet. Allerdings ist blazor derzeit nicht C# direkt auf JavaScript/WASM zuordnet. Stattdessen führt blazor eine Il-Interpretation innerhalb des Browsers durch, sodass die Quell Zuordnungen nicht relevant sind.
+Browser-Quell Zuordnungen ermöglichen es dem Browser, kompilierte Dateien wieder den ursprünglichen Quelldateien zuzuordnen, und werden häufig für das Client seitige Debuggen verwendet. Blazor wird jedoch derzeit nicht C# direkt zu JavaScript/WASM zugeordnet. Stattdessen Blazor die Il-Interpretation innerhalb des Browsers durchführt, sodass die Quell Zuordnungen nicht relevant sind.
 
 ## <a name="troubleshooting-tip"></a>Tipps zur Problembehandlung
 

@@ -1,20 +1,22 @@
 ---
-title: ASP.net Core von blazor unterstützten Plattformen
+title: ASP.net Core Blazor unterstützten Plattformen
 author: guardrex
-description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net Core blazor.
+description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net Core Blazor.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/supported-platforms
-ms.openlocfilehash: 4e86bd6967a747a59c99a515c1c838cc2c21770f
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: de51296cc8785474e1c1406cfd5d4e5bd4050172
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391221"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962731"
 ---
-# <a name="aspnet-core-blazor-supported-platforms"></a>ASP.net Core von blazor unterstützten Plattformen
+# <a name="aspnet-core-opno-locblazor-supported-platforms"></a>ASP.net Core Blazor unterstützten Plattformen
 
 Von [Luke Latham](https://github.com/guardrex)
 
@@ -22,7 +24,7 @@ Von [Luke Latham](https://github.com/guardrex)
 
 ## <a name="browser-requirements"></a>Browseranforderungen
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### <a name="opno-locblazor-webassembly"></a>Webassembly Blazor
 
 | Browser                          | Version               |
 | -------------------------------- | :-------------------: |
@@ -30,11 +32,11 @@ Von [Luke Latham](https://github.com/guardrex)
 | Mozilla Firefox                  | Aktuell               |
 | Google Chrome, einschließlich Android | Aktuell               |
 | Safari, einschließlich IOS            | Aktuell               |
-| Microsoft Internet Explorer      | Nicht unterstützt @ no__t-0 |
+| Microsoft Internet Explorer      | Nicht unterstützt&dagger; |
 
 &dagger;Microsoft Internet Explorer unterstützt [Webassembly](https://webassembly.org)nicht.
 
-### <a name="blazor-server"></a>Blazor Server
+### <a name="opno-locblazor-server"></a>Blazor Server
 
 | Browser                          | Version    |
 | -------------------------------- | :--------: |
@@ -42,7 +44,7 @@ Von [Luke Latham](https://github.com/guardrex)
 | Mozilla Firefox                  | Aktuell    |
 | Google Chrome, einschließlich Android | Aktuell    |
 | Safari, einschließlich IOS            | Aktuell    |
-| Microsoft Internet Explorer      | 11 @ no__t-0 |
+| Microsoft Internet Explorer      | 11&dagger; |
 
 &dagger;zusätzliche polyfills sind erforderlich (beispielsweise können Zusagen über ein [Polyfill.IO](https://polyfill.io/v3/) -Bundle hinzugefügt werden).
 

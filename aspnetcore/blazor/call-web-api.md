@@ -1,39 +1,41 @@
 ---
-title: Web-API aus ASP.net Core blazor aufzurufen
+title: Ruft eine Web-API aus ASP.net Core Blazor
 author: guardrex
-description: Erfahren Sie, wie Sie eine Web-API über eine blazor-App mithilfe von JSON-Hilfsprogrammen aufzurufen, einschließlich der cors-Anforderungen (Cross-Origin Resource Sharing).
+description: Erfahren Sie, wie Sie eine Web-API aus einer Blazor-App mithilfe von JSON-Hilfsprogrammen aufzurufen, einschließlich der cors-Anforderungen (Cross-Origin Resource Sharing).
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/call-web-api
-ms.openlocfilehash: b08fdf5c2f9a523314b1744a33087eb64fa4c14a
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: b5c57317005d0072410542bad322458b1cb3f5ee
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72390827"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962725"
 ---
-# <a name="call-a-web-api-from-aspnet-core-blazor"></a>Web-API aus ASP.net Core blazor aufzurufen
+# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Ruft eine Web-API aus ASP.net Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)und [Juan de la Cruz](https://github.com/juandelacruz23)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor Webassembly-apps rufen Web-APIs mithilfe eines vorkonfigurierten `HttpClient`-Diensts auf. Verfassen von Anforderungen, die JavaScript-Abruf- [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) -Optionen mithilfe von blazor JSON-Hilfsprogrammen oder mit <xref:System.Net.Http.HttpRequestMessage> enthalten können.
+Blazor Webassembly-apps Web-APIs mithilfe eines vorkonfigurierten `HttpClient` Diensts aufruft. Verfassen von Anforderungen, die JavaScript-Abruf- [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) -Optionen enthalten können, unter Verwendung Blazor JSON-Hilfsprogramme oder mit <xref:System.Net.Http.HttpRequestMessage>.
 
-Blazor-Server-apps greifen Web-APIs mithilfe von <xref:System.Net.Http.HttpClient>-Instanzen an, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory> Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
+Blazor Server-apps Web-APIs mithilfe <xref:System.Net.Http.HttpClient> Instanzen, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory>erstellt werden. Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Beispiele für blazor Webassembly finden Sie unter den folgenden Komponenten in der Beispiel-App:
+Blazor Webassembly-Beispiele finden Sie in den folgenden Komponenten in der Beispiel-App:
 
 * Aufrufen der Web-API (*pages/callwebapi. Razor*)
 * HTTP-Anforderungs Tester (*Components/httprequesttester. Razor*)
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient-und JSON-Hilfsprogramme
 
-In blazor Webassembly-Apps ist [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst zur Wiederherstellung von Anforderungen an den Ursprungsserver verfügbar. Fügen Sie `Microsoft.AspNetCore.Blazor.HttpClient` einen Paket Verweis hinzu, um `HttpClient`-JSON-Hilfsprogramme zu verwenden. `HttpClient`-und JSON-Hilfsprogramme werden auch verwendet, um Web-API-Endpunkte von Drittanbietern aufzurufen. `HttpClient` wird mithilfe der Browser- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) implementiert und unterliegt den Einschränkungen, einschließlich der Erzwingung der gleichen Ursprungs Richtlinie.
+In Blazor Webassembly-Apps ist [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst zur Wiederherstellung von Anforderungen an den Ursprungsserver verfügbar. Um `HttpClient` JSON-Hilfsprogramme zu verwenden, fügen Sie `Microsoft.AspNetCore.Blazor.HttpClient`einen Paket Verweis hinzu. `HttpClient`-und JSON-Hilfsprogramme werden auch verwendet, um Web-API-Endpunkte von Drittanbietern aufzurufen. `HttpClient` wird mithilfe der Browser- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) implementiert und unterliegt den Einschränkungen, einschließlich der Erzwingung der gleichen Ursprungs Richtlinie.
 
 Die Basisadresse des Clients wird auf die Adresse des Ursprungs Servers festgelegt. Fügen Sie mit der `@inject`-Direktive eine `HttpClient`-Instanz ein:
 
@@ -99,7 +101,7 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
 
 * `PutJsonAsync` &ndash; sendet eine HTTP PUT-Anforderung, einschließlich JSON-codiertem Inhalt.
 
-  Im folgenden Code werden `_editItem`-Werte für `Name` und `IsCompleted` von gebundenen Elementen der Komponente bereitgestellt. Der `Id` des Elements wird festgelegt, wenn das Element in einem anderen Teil der Benutzeroberfläche ausgewählt und `EditItem` aufgerufen wird. Die `SaveItem`-Methode wird ausgelöst, indem das Save `<button>`-Element ausgewählt wird. Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+  Im folgenden Code werden `_editItem` Werte für `Name` und `IsCompleted` von gebundenen Elementen der Komponente bereitgestellt. Der `Id` des Elements wird festgelegt, wenn das Element in einem anderen Teil der Benutzeroberfläche ausgewählt und `EditItem` aufgerufen wird. Die `SaveItem`-Methode wird ausgelöst, indem das Save `<button>`-Element ausgewählt wird. Ein umfassendes Beispiel finden Sie in der Beispiel-app.
 
   ```cshtml
   @using System.Net.Http
@@ -153,7 +155,7 @@ Informationen dazu, wie Sie anderen Standorten cors-Anforderungen (Cross-Origin 
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient und httprequestmessage mit Abruf-API-Anforderungs Optionen
 
-Verwenden Sie zum Anpassen von Anforderungen bei der Ausführung in Webassembly in einer blazor Webassembly-APP [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage>. Sie können z. b. den Anforderungs-URI, die HTTP-Methode und alle gewünschten Anforderungs Header angeben.
+Verwenden Sie zum Anpassen von Anforderungen bei der Ausführung in Webassembly in einer Blazor Webassembly-APP [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage>. Sie können z. b. den Anforderungs-URI, die HTTP-Methode und alle gewünschten Anforderungs Header angeben.
 
 Stellen Sie mithilfe der `WebAssemblyHttpMessageHandler.FetchArgs`-Eigenschaft der Anforderung Anforderungs Optionen für die zugrunde liegende JavaScript- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) bereit. Wie im folgenden Beispiel gezeigt, wird die `credentials`-Eigenschaft auf einen der folgenden Werte festgelegt:
 

@@ -4,14 +4,16 @@ author: jamesnk
 description: Erfahren Sie, wie sich GrpC mit http-APIs vergleicht und welche Szenarios empfohlen werden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 09/25/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 52b057876481bd9be4f83d93b1f05081ed19660f
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: ceb24d656827548492a6fa326681922297fc481b
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589974"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963660"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Vergleich von gRPC-Diensten mit HTTP-APIs
 
@@ -106,7 +108,7 @@ Funktionen wie die [Server Reflektion](https://github.com/grpc/grpc/blob/master/
 Andere Frameworks werden in den folgenden Szenarien über GrpC empfohlen:
 
 * **Browser-barrierefreie APIs** &ndash; GrpC wird im Browser nicht vollständig unterstützt. GrpC-Web kann Browserunterstützung bieten, aber es gibt Einschränkungen und führt einen Server Proxy ein.
-* **Broadcast-Echtzeitkommunikation** &ndash; GrpC unterstützt die Echtzeitkommunikation über das Streaming, aber das Konzept, eine Nachricht an registrierte Verbindungen zu senden, ist nicht vorhanden. Beispielsweise ist in einem Chatroom-Szenario, in dem neue Chat Nachrichten an alle Clients im Chatraum gesendet werden sollen, jeder GrpC-Rückruf erforderlich, um neue Chat Nachrichten einzeln an den Client zu streamen. [Signalr](xref:signalr/introduction) ist ein nützliches Framework für dieses Szenario. Signalr hat das Konzept von permanenten Verbindungen und integrierter Unterstützung für das Senden von Nachrichten.
+* **Broadcast-Echtzeitkommunikation** &ndash; GrpC unterstützt die Echtzeitkommunikation über das Streaming, aber das Konzept, eine Nachricht an registrierte Verbindungen zu senden, ist nicht vorhanden. Beispielsweise ist in einem Chatroom-Szenario, in dem neue Chat Nachrichten an alle Clients im Chatraum gesendet werden sollen, jeder GrpC-Rückruf erforderlich, um neue Chat Nachrichten einzeln an den Client zu streamen. [SignalR](xref:signalr/introduction) ist ein nützliches Framework für dieses Szenario. SignalR hat das Konzept von permanenten Verbindungen und integrierter Unterstützung für das Senden von Nachrichten.
 * Prozess **übergreifende Kommunikation** &ndash; ein Prozess muss einen http/2-Server hosten, um eingehende GrpC-Aufrufe zu akzeptieren. Bei Windows handelt es sich bei prozessübergreifenden [kommunikationspipes](/dotnet/standard/io/pipe-operations) um eine schnelle, leichte Kommunikationsmethode.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen

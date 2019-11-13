@@ -1,73 +1,75 @@
 ---
-title: ASP.NET Core SignalR-Java-client
+title: ASP.net Core SignalR Java-Clients
 author: mikaelm12
-description: Erfahren Sie, wie Sie mit dem ASP.NET Core SignalR-Java-Client.
+description: Erfahren Sie, wie Sie den ASP.net Core SignalR Java-Client verwenden.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: mimengis
 ms.custom: mvc
-ms.date: 06/27/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: signalr/java-client
-ms.openlocfilehash: ea0abbaee81222493ff02e1f3bba13ed1e494bf5
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: d7143b2c22ecdc4e68f484aa4c244e1c520beae0
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814971"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963783"
 ---
-# <a name="aspnet-core-signalr-java-client"></a>ASP.NET Core SignalR-Java-client
+# <a name="aspnet-core-opno-locsignalr-java-client"></a>ASP.net Core SignalR Java-Clients
 
-Durch [Mikael Mengistu](https://twitter.com/MikaelM_12)
+Von [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-Die Java-Clients kann Verbindungen mit einem ASP.NET Core SignalR-Server aus Java-Code, einschließlich Android-apps. Wie die [JavaScript-Client](xref:signalr/javascript-client) und [.NET Client](xref:signalr/dotnet-client), dem Java-Client können Sie zum Empfangen und Senden von Nachrichten mit einem Hub in Echtzeit. Der Java-Client ist in ASP.NET Core 2.2 und höher verfügbar.
+Der Java-Client ermöglicht das Herstellen einer Verbindung mit einem ASP.net Core SignalR Server aus Java-Code, einschließlich Android-Apps. Wie der [JavaScript-Client](xref:signalr/javascript-client) und der [.NET-Client](xref:signalr/dotnet-client)ermöglicht der Java-Client das empfangen und Senden von Nachrichten an einen Hub in Echtzeit. Der Java-Client ist in ASP.net Core 2,2 und höher verfügbar.
 
-In diesem Artikel erwähnten Beispiel Java-Konsolenanwendung verwendet die SignalR-Java-Client.
+Die Java-Beispiel Konsolen-APP, auf die in diesem Artikel verwiesen wird, verwendet den SignalR Java-Client
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-signalr-java-client-package"></a>Installieren Sie das Paket der SignalR-Java-client
+## <a name="install-the-opno-locsignalr-java-client-package"></a>Installieren des SignalR Java-Client Pakets
 
-Die *Signalr-1.0.0* JAR-Datei ermöglicht Clients, die mit SignalR-Hubs herstellen. Die letzte Versionsnummer der JAR-Datei finden Sie unter den [Maven-Suchergebnissen](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr).
+Die jar *-Datei signalr-1.0.0* ermöglicht Clients das Herstellen einer Verbindung mit SignalR Hubs. Die aktuelle JAR-Datei-Versionsnummer finden Sie in den [Maven-Suchergebnissen](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr).
 
-Wenn Sie Gradle verwenden zu können, fügen Sie die folgende Zeile in der `dependencies` Teil Ihrer *build.gradle* Datei:
+Wenn Sie gradle verwenden, fügen Sie die folgende Zeile zum Abschnitt "`dependencies`" in der Datei " *Build. gradle* " hinzu:
 
 ```gradle
 implementation 'com.microsoft.signalr:signalr:1.0.0'
 ```
 
-Wenn Sie mit Maven den folgenden Zeilen hinzufügen der `<dependencies>` Element Ihrer *"pom.xml"* Datei:
+Wenn Sie Maven verwenden, fügen Sie die folgenden Zeilen innerhalb des `<dependencies>`-Elements der Datei " *Pom. XML* " hinzu:
 
 [!code-xml[pom.xml dependency element](java-client/sample/pom.xml?name=snippet_dependencyElement)]
 
-## <a name="connect-to-a-hub"></a>Verbinden mit einem hub
+## <a name="connect-to-a-hub"></a>Herstellen einer Verbindung mit einem Hub
 
-Herstellen einer `HubConnection`, `HubConnectionBuilder` verwendet werden soll. Die Hub-URL und Protokoll-Ebene kann beim Erstellen einer Verbindungs konfiguriert werden. Konfigurieren Sie alle erforderlichen Optionen durch das Aufrufen einer der der `HubConnectionBuilder` Methoden vor dem `build`. Starten Sie die Verbindung mit `start`.
+Zum Einrichten einer `HubConnection`sollte die `HubConnectionBuilder` verwendet werden. Die Hub-URL und die Protokollebene können während der Verbindungs Herstellung konfiguriert werden. Konfigurieren Sie alle erforderlichen Optionen, indem Sie eine der `HubConnectionBuilder` Methoden aufrufen, bevor Sie `build`. Starten Sie die Verbindung mit `start`.
 
 [!code-java[Build hub connection](java-client/sample/src/main/java/Chat.java?range=16-17)]
 
-## <a name="call-hub-methods-from-client"></a>Aufrufen von Hub-Methoden von client
+## <a name="call-hub-methods-from-client"></a>Hub-Methoden vom Client abrufen
 
-Ein Aufruf von `send` eine hubmethode aufruft. Übergeben Sie den Namen des Hubs-Methode und alle Argumente, die in die hubmethode, die definiert `send`.
+Ein Aufruf von `send` Ruft eine Hub-Methode auf. Übergeben Sie den Namen der Hub-Methode und alle in der Hub-Methode definierten Argumente an `send`.
 
 [!code-java[send method](java-client/sample/src/main/java/Chat.java?range=28)]
 
 > [!NOTE]
-> Bei Verwendung von Azure SignalR Service in *serverlose Modus*, Sie können nicht von einem Client hubmethoden aufrufen. Weitere Informationen finden Sie unter den [SignalR Service-Dokumentation](/azure/azure-signalr/signalr-concept-serverless-development-config).
+> Wenn Sie Azure SignalR Service im *Server losen Modus*verwenden, können Sie keine hubmethoden von einem Client aus abrufen. Weitere Informationen finden Sie in der [Dokumentation zumSignalR-Dienst](/azure/azure-signalr/signalr-concept-serverless-development-config).
 
-## <a name="call-client-methods-from-hub"></a>Rufen Sie Client-Methoden von Hub-Instanz
+## <a name="call-client-methods-from-hub"></a>Client Methoden aus Hub abrufen
 
-Verwendung `hubConnection.on` Methoden auf dem Client definieren, die der Hub aufgerufen werden kann. Definieren Sie die Methoden, nach der Erstellung von jedoch vor dem Starten der Verbindung.
+Verwenden Sie `hubConnection.on`, um Methoden auf dem Client zu definieren, die der Hub abrufen kann. Definieren Sie die Methoden nach dem Aufbau, aber vor dem Starten der Verbindung.
 
 [!code-java[Define client methods](java-client/sample/src/main/java/Chat.java?range=19-21)]
 
-## <a name="add-logging"></a>Hinzufügen der Protokollierung
+## <a name="add-logging"></a>Protokollierung hinzufügen
 
-Der SignalR-Java-Client verwendet die [SLF4J](https://www.slf4j.org/) Bibliothek für die Protokollierung. Es ist eine allgemeine protokollierungs-API an, die Benutzer der Bibliothek, wählen ihre eigenen spezifischen protokollierungsimplementierung bereitgestellt werden, indem Sie in einer bestimmten Protokollierung Abhängigkeit bringen kann. Der folgende Codeausschnitt zeigt, wie Sie mit `java.util.logging` mit dem SignalR-Java-Client.
+Der SignalR Java-Client verwendet die [SLF4J](https://www.slf4j.org/) -Bibliothek für die Protokollierung. Dabei handelt es sich um eine allgemeine Protokollierungs-API, die es Benutzern der Bibliothek ermöglicht, ihre eigene spezifische Protokollierungs Implementierung zu wählen, indem Sie eine bestimmte Protokollierungs Abhängigkeit einbinden. Der folgende Code Ausschnitt zeigt, wie `java.util.logging` mit dem SignalR Java-Client verwendet wird.
 
 ```gradle
 implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 ```
 
-Wenn Sie die Anmeldung bei Ihrer Abhängigkeiten nicht konfigurieren, lädt SLF4J eine Protokollierung standardmäßig nicht-Vorgang die folgende Warnmeldung an:
+Wenn Sie die Protokollierung in ihren Abhängigkeiten nicht konfigurieren, lädt SLF4J eine Standard Protokollierung ohne Vorgang mit folgender Warnmeldung:
 
 ```
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -75,18 +77,18 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ```
 
-Dies kann problemlos ignoriert werden.
+Dies kann sicher ignoriert werden.
 
-## <a name="android-development-notes"></a>Anmerkungen zu dieser Version Android-Entwicklung
+## <a name="android-development-notes"></a>Hinweise zur Android-Entwicklung
 
-Im Hinblick auf die Android SDK-Kompatibilität für die SignalR-Client-Funktionen die folgenden Aspekte berücksichtigt, wenn Sie Ihre Android-SDK-Zielversion angeben:
+Beachten Sie beim Angeben der Ziel Android SDK Version die folgenden Punkte, wenn Sie die Android SDK Kompatibilität für die SignalR-Client Features beachten:
 
-* Der SignalR-Java-Client wird auf Android-API-Ebene-16 und höher ausgeführt werden.
-* Herstellen einer Verbindung über den Azure SignalR Service müssen sich auf Android-API-Ebene 20 und höher da die [Azure SignalR Service](/azure/azure-signalr/signalr-overview) TLS 1.2 erfordert und unterstützt keine SHA-1-basierte Verschlüsselungssammlungen. Android [Unterstützung für SHA-256 (und höher)-Verschlüsselungssammlungen hinzugefügt](https://developer.android.com/reference/javax/net/ssl/SSLSocket) in API-Ebene 20.
+* Der SignalR Java-Client kann auf Android-API-Ebene 16 und höher ausgeführt werden.
+* Zum Herstellen einer Verbindung über den Azure SignalR-Dienst sind Android-API-Ebene 20 und höher erforderlich, da der [Azure SignalR-Dienst](/azure/azure-signalr/signalr-overview) TLS 1,2 erfordert und keine SHA-1-basierten Verschlüsselungs Sammlungen unterstützt. Android hat [Unterstützung für die Verschlüsselungs Sammlungen SHA-256 (und höher)](https://developer.android.com/reference/javax/net/ssl/SSLSocket) auf API-Ebene 20 hinzugefügt.
 
-## <a name="configure-bearer-token-authentication"></a>Konfigurieren von Bearer-token-Authentifizierung
+## <a name="configure-bearer-token-authentication"></a>Konfigurieren der bearertokenauthentifizierung
 
-In den SignalR-Java-Client, können Sie ein trägertoken, das zur Authentifizierung verwendet wird, durch die Bereitstellung einer "Access token Factory" konfigurieren, um die [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java). Verwendung [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) zu einer [RxJava](https://github.com/ReactiveX/RxJava) [einzelne\<Zeichenfolge >](https://reactivex.io/documentation/single.html). Mit einem Aufruf von [Single.defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-), Sie können Logik schreiben, um Zugriffstoken für den Client zu generieren.
+Im SignalR Java-Client können Sie ein bearertoken für die Authentifizierung konfigurieren, indem Sie dem [httphubconnectionbuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)eine "zugriffstokenfactory" bereitstellen. Verwenden Sie [withaccesstokenfactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) , um eine [rxjava](https://github.com/ReactiveX/RxJava) - [\<Zeichenfolge >](https://reactivex.io/documentation/single.html)bereitzustellen. Beim Aufrufen von " [Single.](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)Write" können Sie Logik schreiben, um Zugriffs Token für den Client zu erstellen.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
@@ -100,15 +102,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Es wird nur das JSON-Protokoll unterstützt.
-* Fallback-Transport und den Transport-Server gesendete Ereignisse werden nicht unterstützt.
+* Nur das JSON-Protokoll wird unterstützt.
+* Der Transport Fall Back und der Transport der Server gesendeten Ereignisse werden nicht unterstützt.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-* Es wird nur das JSON-Protokoll unterstützt.
-* Nur die WebSockets-Übertragung wird unterstützt.
+* Nur das JSON-Protokoll wird unterstützt.
+* Nur der websockets-Transport wird unterstützt.
 * Streaming wird noch nicht unterstützt.
 
 ::: moniker-end
@@ -119,4 +121,4 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 * <xref:signalr/hubs>
 * <xref:signalr/javascript-client>
 * <xref:signalr/publish-to-azure-web-app>
-* [Serverlose Azure SignalR Service-Dokumentation](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [Server lose Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-concept-serverless-development-config)

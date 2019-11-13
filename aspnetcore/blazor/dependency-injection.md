@@ -1,20 +1,22 @@
 ---
-title: ASP.net Core blazor-Abhängigkeitsinjektion
+title: ASP.net Core Blazor Abhängigkeitsinjektion
 author: guardrex
-description: Erfahren Sie, wie blazor-Apps Dienste in Komponenten einfügen können.
+description: Erfahren Sie, wie Blazor-Apps Dienste in-Komponenten einfügen können.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/dependency-injection
-ms.openlocfilehash: b548f0e50e1a60b74969e5bbee43860be9ba5a7f
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: a39d913636afc55ac9d831de923ba7ae8db1216b
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391139"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963080"
 ---
-# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.net Core blazor-Abhängigkeitsinjektion
+# <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.net Core Blazor Abhängigkeitsinjektion
 
 Von [Rainer stropek](https://www.timecockpit.com)
 
@@ -22,7 +24,7 @@ Von [Rainer stropek](https://www.timecockpit.com)
 
 Blazor unterstützt die [Abhängigkeitsinjektion (di)](xref:fundamentals/dependency-injection). Apps können integrierte Dienste verwenden, indem Sie Sie in Komponenten einfügen. Apps können auch benutzerdefinierte Dienste definieren und registrieren und in der gesamten App über di verfügbar machen.
 
-DI ist eine Technik für den Zugriff auf Dienste, die an einem zentralen Ort konfiguriert sind. Dies kann bei blazor-Apps für folgende Aktionen nützlich sein:
+DI ist eine Technik für den Zugriff auf Dienste, die an einem zentralen Ort konfiguriert sind. Dies kann in Blazor-apps nützlich sein:
 
 * Freigeben einer einzelnen Instanz einer Dienstklasse für viele Komponenten, die als *Singleton* -Dienst bezeichnet werden.
 * Entkoppeln von Komponenten aus konkreten Dienst Klassen mithilfe von Verweis Abstraktionen. Angenommen, eine Schnittstelle `IDataAccess` für den Zugriff auf Daten in der app. Die Schnittstelle wird von einer konkreten `DataAccess`-Klasse implementiert und als Dienst im Dienst Container der APP registriert. Wenn eine Komponente di zum Empfangen einer `IDataAccess`-Implementierung verwendet, ist die Komponente nicht mit dem konkreten Typ gekoppelt. Die-Implementierung kann ausgetauscht werden, vielleicht für eine Pseudo Implementierung in Komponententests.
@@ -63,7 +65,7 @@ Dienste können mit der in der folgenden Tabelle angezeigten Lebensdauer konfigu
 
 | Lebensdauer | Beschreibung |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Webassembly-apps haben zurzeit kein Konzept von di-Bereichen. @no__t -0 registrierte Dienste Verhalten sich wie `Singleton`-Dienste. Das edzor-Server Hostingmodell unterstützt jedoch die Lebensdauer von `Scoped`. In blazor-Server-apps wird eine Bereichs bezogene Dienst Registrierung auf die *Verbindung*beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Webassembly-apps verfügen derzeit nicht über ein Konzept von di-Bereichen. `Scoped`registrierte Dienste Verhalten sich wie `Singleton` Dienste. Das Blazor Server-Hostingmodell unterstützt jedoch die `Scoped` Lebensdauer. In Blazor Server-Apps ist eine Bereichs bezogene Dienst Registrierung auf die *Verbindung*beschränkt. Aus diesem Grund wird die Verwendung von Bereichs bezogenen Diensten für Dienste bevorzugt, die auf den aktuellen Benutzer beschränkt werden sollten, auch wenn die aktuelle Absicht ist, die Client seitige Ausführung im Browser auszuführen. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI erstellt eine *einzelne Instanz* des Dienstanbieter. Alle Komponenten, die einen `Singleton`-Dienst erfordern, erhalten eine Instanz desselben diensdienstanbieter. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Wenn eine Komponente eine Instanz eines `Transient`-Dienstanbieter aus dem Dienst Container erhält, empfängt Sie eine *neue Instanz* des Dienstanbieter. |
 
@@ -129,7 +131,7 @@ Voraussetzungen für die Konstruktorinjektion:
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Basiskomponenten Klassen des-Hilfsprogramms zum Verwalten eines di-Bereichs
 
-In ASP.net Core-apps werden Bereichs bezogene Dienste in der Regel auf die aktuelle Anforderung festgelegt. Nachdem die Anforderung abgeschlossen ist, werden alle Bereichs bezogenen oder vorübergehenden Dienste vom System System entfernt. In blazor-Server-apps dauert der Anforderungs Bereich für die Dauer der Client Verbindung, was dazu führen kann, dass vorübergehende und Bereichs bezogene Dienste viel länger als erwartet Leben.
+In ASP.net Core-apps werden Bereichs bezogene Dienste in der Regel auf die aktuelle Anforderung festgelegt. Nachdem die Anforderung abgeschlossen ist, werden alle Bereichs bezogenen oder vorübergehenden Dienste vom System System entfernt. In Blazor Server-apps dauert der Anforderungs Bereich für die Dauer der Client Verbindung, was dazu führen kann, dass vorübergehende und Bereichs bezogene Dienste viel länger als erwartet Leben.
 
 Um Dienste auf die Lebensdauer einer Komponente zu beschränken, können die Basisklassen `OwningComponentBase` und `OwningComponentBase<TService>` verwenden. Diese Basisklassen machen eine `ScopedServices`-Eigenschaft vom Typ `IServiceProvider` verfügbar, die Dienste auflöst, die auf die Lebensdauer der Komponente beschränkt sind. Verwenden Sie die `@inherits`-Direktive, um eine Komponente zu erstellen, die von einer Basisklasse in Razor erbt.
 

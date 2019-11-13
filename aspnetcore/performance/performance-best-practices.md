@@ -4,14 +4,16 @@ author: mjrousos
 description: Tipps zum Verbessern der Leistung in ASP.net Core-apps und vermeiden von häufigen Leistungsproblemen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 09/26/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 1cd4ca6fccfee674f46e87ba051e049f7daa5b66
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 279bf352580e5e45fc005e800ee536871210409b
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799515"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963241"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Leistung
 
@@ -117,7 +119,7 @@ Empfehlungen
 
 * Warten **Sie nicht** , bis lange Ausführungsaufgaben im Rahmen der normalen Verarbeitung von HTTP-Anforderungen ausgeführt werden.
 * **Sie** sollten Anforderungen mit langer Ausführungszeit mit [Hintergrund Diensten](xref:fundamentals/host/hosted-services) oder außerhalb des Prozesses mit einer [Azure-Funktion](/azure/azure-functions/)verarbeiten. Das Abschließen von Arbeitsprozessen außerhalb des Prozesses ist besonders für CPU-intensive Aufgaben vorteilhaft.
-* Verwenden **Sie** Echt Zeit Kommunikationsoptionen, wie z. b. [signalr](xref:signalr/introduction), um asynchron mit Clients zu kommunizieren.
+* Verwenden **Sie** Echt Zeit Kommunikationsoptionen, wie z. b. [SignalR](xref:signalr/introduction), um asynchron mit Clients zu kommunizieren.
 
 ## <a name="minify-client-assets"></a>Minimieren von Client Ressourcen
 

@@ -1,26 +1,28 @@
 ---
-title: ASP.net Core blazor JavaScript-Interop
+title: ASP.net Core Blazor JavaScript-Interop
 author: guardrex
-description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Methoden von JavaScript in blazor-apps aufrufen.
+description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Methoden aus JavaScript in Blazor-apps aufrufen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/16/2019
+no-loc:
+- Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: b157e16918975cd522318a02f21824d9a0198b11
-ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
+ms.openlocfilehash: 76437ef00e00f5de1b995b4f0b1a09e5876dff8f
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2019
-ms.locfileid: "72697930"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962843"
 ---
-# <a name="aspnet-core-blazor-javascript-interop"></a>ASP.net Core blazor JavaScript-Interop
+# <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
 Von [Javier calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Eine blazor-App kann JavaScript-Funktionen aus .net-und .NET-Methoden aus JavaScript-Code aufrufen.
+Eine Blazor-App kann JavaScript-Funktionen von .net-und .NET-Methoden aus JavaScript-Code aufrufen.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -30,15 +32,15 @@ Es gibt Zeiten, in denen .NET-Code erforderlich ist, um eine JavaScript-Funktion
 
 Um JavaScript aus .net aufzurufen, verwenden Sie die `IJSRuntime`-Abstraktion. Die `InvokeAsync<T>`-Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeitsbereich (`window`). Wenn Sie `window.someScope.someFunction` anrufen möchten, ist der Bezeichner `someScope.someFunction`. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein.
 
-Für blazor-Server-apps:
+Für Blazor Server-apps:
 
-* Mehrere Benutzer Anforderungen werden von der blazor-Server-App verarbeitet. Rufen Sie `JSRuntime.Current` nicht in einer Komponente auf, um JavaScript-Funktionen aufzurufen.
+* Mehrere Benutzer Anforderungen werden von der Blazor Server-App verarbeitet. Rufen Sie `JSRuntime.Current` nicht in einer Komponente auf, um JavaScript-Funktionen aufzurufen.
 * Fügen Sie die `IJSRuntime`-Abstraktion ein, und verwenden Sie das injizierte Objekt, um JavaScript-Interop-Aufrufe
-* Während eine blazor-App vorab erstellt wird, ist das Aufrufen von JavaScript nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Weitere Informationen finden Sie im Abschnitt [erkennen, wenn eine blazor-App eine Vorabversion ist](#detect-when-a-blazor-app-is-prerendering) .
+* Während eine Blazor-App vorab erstellt wird, ist das Aufrufen von JavaScript nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Weitere Informationen finden Sie im Abschnitt [erkennen, wenn eine Blazor-App eine Vorabversion ist](#detect-when-a-blazor-app-is-prerendering) .
 
 Das folgende Beispiel basiert auf [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem experimentellen JavaScript-basierten Decoder. Im Beispiel wird veranschaulicht, wie eine JavaScript-Funktion aus C# einer Methode aufgerufen wird. Die JavaScript-Funktion akzeptiert ein Bytearray C# aus einer Methode, decodiert das Array und gibt den Text zur Anzeige an die Komponente zurück.
 
-Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine JavaScript-Funktion bereit, die `TextDecoder` zum Decodieren eines bestandenen Arrays verwendet und den decodierten Wert zurückgibt:
+Geben Sie im `<head>`-Element von *wwwroot/Index.html* (Blazor Webassembly) oder *pages/_Host. cshtml* (Blazor Server) eine JavaScript-Funktion an, die `TextDecoder` zum Decodieren eines bestandenen Arrays verwendet und den decodierten Wert zurückgibt:
 
 [!code-html[](javascript-interop/samples_snapshot/index-script-convertarray.html)]
 
@@ -63,7 +65,7 @@ Um die `IJSRuntime`-Abstraktion zu verwenden, übernehmen Sie einen der folgende
 
   [!code-cshtml[](javascript-interop/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine `handleTickerChanged` JavaScript-Funktion bereit. Die-Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
+  Geben Sie im `<head>`-Element von *wwwroot/Index.html* (Blazor Webassembly) oder *pages/_Host. cshtml* (Blazor Server) eine `handleTickerChanged` JavaScript-Funktion an. Die-Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
 
   [!code-html[](javascript-interop/samples_snapshot/index-script-handleTickerChanged1.html)]
 
@@ -71,7 +73,7 @@ Um die `IJSRuntime`-Abstraktion zu verwenden, übernehmen Sie einen der folgende
 
   [!code-csharp[](javascript-interop/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  Stellen Sie im `<head>`-Element von *wwwroot/Index.html* (blazor Webassembly) oder *pages/_Host. cshtml* (blazor Server) eine `handleTickerChanged` JavaScript-Funktion bereit. Die-Funktion wird mit `JSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
+  Geben Sie im `<head>`-Element von *wwwroot/Index.html* (Blazor Webassembly) oder *pages/_Host. cshtml* (Blazor Server) eine `handleTickerChanged` JavaScript-Funktion an. Die-Funktion wird mit `JSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
 
   [!code-html[](javascript-interop/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -91,13 +93,13 @@ In der Client seitigen Beispiel-APP, die dieses Thema begleitet, sind zwei JavaS
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-Platzieren Sie das `<script>` Tag, das auf die JavaScript-Datei verweist, in der Datei *wwwroot/Index.html* (blazor Webassembly) oder der Datei *pages/_Host. cshtml* (blazor Server).
+Platzieren Sie das `<script>` Tag, das auf die JavaScript-Datei verweist, in der Datei *wwwroot/Index.html* (Blazor Webassembly) oder der Datei *pages/_Host. cshtml* (Blazor Server).
 
-*wwwroot/Index.html* (blazor-Webassembly):
+*wwwroot/Index.html* (Blazor Webassembly):
 
 [!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=15)]
 
-*Pages/_Host. cshtml* (blazor-Server):
+*Pages/_Host. cshtml* (Blazor Server):
 
 [!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=21)]
 
@@ -105,7 +107,7 @@ Platzieren Sie kein `<script>`-Tag in einer Komponenten Datei, da das Tag "`<scr
 
 .NET-Methoden Interop mit den JavaScript-Funktionen in der Datei " *examplejsinterop. js* " durch Aufrufen von `IJSRuntime.InvokeAsync<T>`.
 
-Die `IJSRuntime`-Abstraktion ist asynchron, um die Verwendung von blazor-Server Szenarios zu ermöglichen. Wenn es sich bei der App um eine blazor Webassembly-App handelt und Sie eine JavaScript-Funktion synchron aufrufen möchten, können Sie Sie in `IJSInProcessRuntime` herab laden und stattdessen `Invoke<T>` aufrufen. Es wird empfohlen, dass die meisten JavaScript-Interop-Bibliotheken die Async-APIs verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarien verfügbar sind.
+Die `IJSRuntime` Abstraktion ist asynchron, um Blazor Server Szenarios zu ermöglichen. Wenn es sich bei der App um eine Blazor Webassembly-App handelt und Sie eine JavaScript-Funktion synchron aufrufen möchten, können Sie eine Typumwandlung-Funktion in `IJSInProcessRuntime` und stattdessen `Invoke<T>` aufrufen. Es wird empfohlen, dass die meisten JavaScript-Interop-Bibliotheken die Async-APIs verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarien verfügbar sind.
 
 Die Beispiel-app enthält eine Komponente zum Veranschaulichen der JavaScript-Interop. Die Komponente:
 
@@ -125,7 +127,7 @@ Die Beispiel-app enthält eine Komponente zum Veranschaulichen der JavaScript-In
 
 JavaScript-Funktionen, die [void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) oder nicht [definiert](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) zurückgeben, werden mit `IJSRuntime.InvokeVoidAsync` aufgerufen.
 
-## <a name="detect-when-a-blazor-app-is-prerendering"></a>Erkennen, wenn eine blazor-App vorab durchgeführt wird
+## <a name="detect-when-a-opno-locblazor-app-is-prerendering"></a>Erkennen, wenn eine Blazor-App vorgestellt wird
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -190,7 +192,7 @@ Die-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird d
 
 ### <a name="static-net-method-call"></a>Statischer .net-Methodenaufrufe
 
-Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung von blazor-Server Szenarios bevorzugt. Um eine .NET-Methode aus JavaScript aufzurufen, muss die .NET-Methode öffentlich und statisch sein und über das `[JSInvokable]`-Attribut verfügen. Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute`-Konstruktor angeben. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
+Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung von Blazor Server-Szenarien bevorzugt. Um eine .NET-Methode aus JavaScript aufzurufen, muss die .NET-Methode öffentlich und statisch sein und über das `[JSInvokable]`-Attribut verfügen. Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute`-Konstruktor angeben. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
 
 Die Beispiel-app enthält C# eine-Methode, um ein Array von `int`S zurückzugeben. Das `JSInvokable`-Attribut wird auf die-Methode angewendet.
 
@@ -224,7 +226,7 @@ Sie können auch .net-Instanzmethoden von JavaScript aus abrufen. So rufen Sie e
 > [!NOTE]
 > Die Beispiel-App protokolliert Nachrichten in der Client seitigen Konsole. Überprüfen Sie die Konsolenausgabe des Browsers in den Entwicklertools des Browsers auf die folgenden Beispiele, die von der Beispiel-App veranschaulicht werden.
 
-Wenn die Schaltfläche **.net-Instanzmethode "hellohelper. SayHello" des Auslösers** aufgerufen wird, wird "`ExampleJsInterop.CallHelloHelperSayHello`" aufgerufen und übergibt einen Namen `Blazor` an die-Methode.
+Wenn die Schaltfläche **.net-Instanzmethode "hellohelper. SayHello" des Auslösers** aufgerufen wird, wird `ExampleJsInterop.CallHelloHelperSayHello` aufgerufen und übergibt einen Namen, `Blazor`, an die-Methode.
 
 *Pages/jsinterop. Razor*:
 
@@ -264,7 +266,7 @@ Weitere Informationen finden Sie unter <xref:blazor/class-libraries>.
 
 ## <a name="harden-js-interop-calls"></a>Harden-js-Interop-Aufrufe
 
-Das js-Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unzuverlässig behandelt werden. Standardmäßig wird für eine blazor-Server-App nach einer Minute ein Timeout für JS-Interop-Aufrufe auf dem Server verwendet. Wenn eine APP einen aggressiveren Timeout (z. b. 10 Sekunden) tolerieren kann, legen Sie den Timeout mithilfe eines der folgenden Ansätze fest:
+Das js-Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unzuverlässig behandelt werden. Standardmäßig wird für eine Blazor Server-App nach einer Minute ein Timeout für JS-Interop-Aufrufe auf dem Server verwendet. Wenn eine APP einen aggressiveren Timeout (z. b. 10 Sekunden) tolerieren kann, legen Sie den Timeout mithilfe eines der folgenden Ansätze fest:
 
 * Geben Sie in `Startup.ConfigureServices` Global das Timeout an:
 

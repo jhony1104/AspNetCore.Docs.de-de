@@ -1,18 +1,20 @@
 ---
 title: ASP.net Core Razor Components-Klassenbibliotheken
 author: guardrex
-description: Erfahren Sie, wie Komponenten in blazor-Apps aus einer externen Komponentenbibliothek eingeschlossen werden können.
+description: Erfahren Sie, wie Komponenten in Blazor-Apps aus einer externen Komponentenbibliothek eingeschlossen werden können.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/23/2019
+no-loc:
+- Blazor
 uid: blazor/class-libraries
-ms.openlocfilehash: 2e042b43c6db24e0ecac727be100575fe1275e17
-ms.sourcegitcommit: 6d26ab647ede4f8e57465e29b03be5cb130fc872
+ms.openlocfilehash: d4cc4124c9dc28ed6da0923b919919df4965f89f
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "71999773"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962713"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.net Core Razor Components-Klassenbibliotheken
 
@@ -28,25 +30,25 @@ Ebenso wie Komponenten reguläre .NET-Typen sind, sind von einer RCL bereitgeste
 
 ## <a name="create-an-rcl"></a>Erstellen einer RCL
 
-Befolgen Sie die Anweisungen im Artikel "<xref:blazor/get-started>", um Ihre Umgebung für blazor zu konfigurieren.
+Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um Ihre Umgebung für Blazorzu konfigurieren.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Erstellen Sie ein neues Projekt.
 1. Wählen Sie **Razor-Klassenbibliothek**aus. Klicken Sie auf **Weiter**.
 1. Wählen Sie im Dialogfeld **neue Razor-Klassenbibliothek erstellen** die Option **Erstellen**aus.
-1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. In den Beispielen in diesem Thema wird der Projektname `MyComponentLib1` verwendet. Wählen Sie **Erstellen** aus.
+1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. In den Beispielen in diesem Thema wird der Projektname `MyComponentLib1`verwendet. Wählen Sie **Erstellen** aus.
 1. Fügen Sie die RCL zu einer Projekt Mappe hinzu:
-   1. Klicken Sie mit der rechten Maustaste auf die Lösung. Wählen Sie  > **vorhandenes Projekt** **Hinzufügen**aus.
+   1. Klicken Sie mit der rechten Maustaste auf die Lösung. Wählen Sie > **vorhandenes Projekt** **Hinzufügen** aus.
    1. Navigieren Sie zur Projektdatei der RCL.
    1. Wählen Sie die Projektdatei ( *. csproj*) der RCL aus.
 1. Fügen Sie einen Verweis auf die RCL aus der APP hinzu:
-   1. Klicken Sie mit der rechten Maustaste auf das App-Projekt. Wählen Sie  > -**Verweis** **Hinzufügen**aus.
-   1. Wählen Sie das RCL-Projekt aus. Wählen Sie **OK**.
+   1. Klicken Sie mit der rechten Maustaste auf das App-Projekt. Wählen Sie > **Verweis** **Hinzufügen** aus.
+   1. Wählen Sie das RCL-Projekt aus. Klicken Sie auf **OK**.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-1. Verwenden Sie die Vorlage für die **Razor-Klassenbibliothek** (`razorclasslib`) mit dem [dotnet New](/dotnet/core/tools/dotnet-new) -Befehl in einer Befehlsshell. Im folgenden Beispiel wird eine RCL namens "`MyComponentLib1`" erstellt. Der Ordner, der `MyComponentLib1` enthält, wird automatisch erstellt, wenn der Befehl ausgeführt wird:
+1. Verwenden Sie die Vorlage für die **Razor-Klassenbibliothek** (`razorclasslib`) mit dem Befehl [dotnet New](/dotnet/core/tools/dotnet-new) in einer Befehlsshell. Im folgenden Beispiel wird eine RCL namens `MyComponentLib1`erstellt. Der Ordner, der `MyComponentLib1` enthält, wird automatisch erstellt, wenn der Befehl ausgeführt wird:
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
@@ -65,11 +67,11 @@ Befolgen Sie die Anweisungen im Artikel "<xref:blazor/get-started>", um Ihre Umg
 Verwenden Sie einen der folgenden Ansätze, um Komponenten zu verwenden, die in einer Bibliothek in einem anderen Projekt definiert sind:
 
 * Verwenden Sie den vollständigen Typnamen mit dem-Namespace.
-* Verwenden Sie die [\@using-](xref:mvc/views/razor#using) Direktive von Razor. Einzelne Komponenten können anhand des Namens hinzugefügt werden.
+* Verwenden Sie die [\@using](xref:mvc/views/razor#using) -Direktive von Razor. Einzelne Komponenten können anhand des Namens hinzugefügt werden.
 
-In den folgenden Beispielen ist `MyComponentLib1` eine Komponentenbibliothek, die eine `SalesReport`-Komponente enthält.
+In den folgenden Beispielen ist `MyComponentLib1` eine Komponentenbibliothek, die eine `SalesReport` Komponente enthält.
 
-Auf die Komponente "`SalesReport`" kann mit dem vollständigen Typnamen mit Namespace verwiesen werden:
+Auf die `SalesReport` Komponente kann mit dem vollständigen Typnamen mit Namespace verwiesen werden:
 
 ```cshtml
 <h1>Hello, world!</h1>
@@ -91,7 +93,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-Fügen Sie die `@using MyComponentLib1`-Direktive in der *_Import. Razor* -Datei der obersten Ebene ein, um die Komponenten der Bibliothek für ein gesamtes Projekt verfügbar zu machen. Fügen Sie die-Direktive zu einer *_Import. Razor* -Datei auf jeder Ebene hinzu, um den Namespace auf eine einzelne Seite oder eine Gruppe von Seiten in einem Ordner anzuwenden.
+Fügen Sie die `@using MyComponentLib1`-Direktive in der *_Import. Razor* -Datei der obersten Ebene ein, um die Komponenten der Bibliothek für ein gesamtes Projekt verfügbar zu machen. Fügen Sie die-Direktive einer *_Import Razor* -Datei auf jeder Ebene hinzu, um den Namespace auf eine einzelne Seite oder eine Gruppe von Seiten in einem Ordner anzuwenden.
 
 ## <a name="build-pack-and-ship-to-nuget"></a>Erstellen, Verpacken und versenden an nuget
 

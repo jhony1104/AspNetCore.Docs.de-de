@@ -6,13 +6,15 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 08/23/2019
+no-loc:
+- Blazor
 uid: razor-pages/sdk
-ms.openlocfilehash: 606d2bdca3fa4fb1c81df73ac697d2175c3ab633
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 2fbdf95d02d7918236981c7fee8ebcbedf5c55e1
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334037"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963265"
 ---
 # <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -20,11 +22,11 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="overview"></a>Übersicht
 
-Der [!INCLUDE[](~/includes/2.1-SDK.md)] umfasst das `Microsoft.NET.Sdk.Razor` MSBuild SDK (Razor SDK). Das Razor SDK:
+Die [!INCLUDE[](~/includes/2.1-SDK.md)] umfasst das `Microsoft.NET.Sdk.Razor` MSBuild SDK (Razor SDK). Das Razor SDK:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Ist erforderlich, um Projekte zu erstellen, zu verpacken und zu veröffentlichen, die [Razor](xref:mvc/views/razor) -Dateien für ASP.net Core MVC-basierte oder [blazor](xref:blazor/index) -Projekte enthalten.
+* Ist erforderlich, um Projekte zu erstellen, zu verpacken und zu veröffentlichen, die [Razor](xref:mvc/views/razor) -Dateien für ASP.net Core MVC-basierte-oder [Blazor](xref:blazor/index) -Projekte enthalten.
 * Enthält einen Satz vordefinierter Ziele, Eigenschaften und Elemente, die das Anpassen der Kompilierung von Razor-Dateien (*cshtml* -oder *Razor*-Dateien) ermöglichen.
 
 Das Razor SDK umfasst `Content`-Elemente, für die `Include`-Attribute auf die globmuster `**\*.cshtml` und `**\*.razor` festgelegt sind. Übereinstimmende Dateien werden veröffentlicht.
@@ -50,7 +52,7 @@ Die meisten Web-Apps müssen nicht explizit auf das Razor-SDK verweisen.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Um das Razor SDK zum Erstellen von Klassenbibliotheken mit Razor-Ansichten oder Razor Pages zu verwenden, wird empfohlen, mit der Projektvorlage für die Razor-Klassenbibliothek (RCL) zu beginnen. Eine RCL, die zum Erstellen von blazor-Dateien (*Razor*-Dateien) verwendet wird, erfordert mindestens einen Verweis auf das Paket " [Microsoft. aspnetcore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) ". Eine RCL, die zum Erstellen von Razor-Sichten oder-Seiten (*cshtml* -Dateien) verwendet wird, erfordert mindestens `netcoreapp3.0` oder höher und verfügt über eine `FrameworkReference` bis zum [Microsoft. aspnetcore. app-Metapaket](xref:fundamentals/metapackage-app) in der Projektdatei.
+Um das Razor SDK zum Erstellen von Klassenbibliotheken mit Razor-Ansichten oder Razor Pages zu verwenden, wird empfohlen, mit der Projektvorlage für die Razor-Klassenbibliothek (RCL) zu beginnen. Eine RCL, die verwendet wird, um Blazor ( *. Razor*)-Dateien zu erstellen, erfordert mindestens einen Verweis auf das Paket [Microsoft. aspnetcore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) . Eine RCL, die zum Erstellen von Razor-Sichten oder-Seiten (*cshtml* -Dateien) verwendet wird, erfordert mindestens `netcoreapp3.0` oder höher und verfügt über eine `FrameworkReference` bis zum [Microsoft. aspnetcore. app-Metapaket](xref:fundamentals/metapackage-app) in der Projektdatei.
 
 ::: moniker-end
 
