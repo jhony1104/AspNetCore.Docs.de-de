@@ -5,22 +5,25 @@ description: Lernen Sie ASP.NET Core Blazor kennen, eine Möglichkeit, interakti
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 10/31/2019
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- SignalR
 uid: blazor/index
-ms.openlocfilehash: c2574c1250cf94e89dd5476b6174620d83546236
-ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
+ms.openlocfilehash: 8b656a7461c78475432722540ad628258cfe19c4
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73427027"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962916"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>Einführung in ASP.NET Core Blazor
+# <a name="introduction-to-aspnet-core-opno-locblazor"></a>Einführung in ASP.NET Core Blazor
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
 *Willkommen bei Blazor!*
 
-Blazor ist ein Framework zum Erstellen von interaktiver clientseitiger Webbenutzeroberflächen mit .NET:
+Blazor ist ein Framework zum Erstellen einer interaktiven clientseitigen Webbenutzeroberfläche mit .NET:
 
 * Erstellen Sie umfassende interaktive Benutzeroberflächen mit C# anstatt mit JavaScript.
 * Gemeinsames Verwenden von server- und clientseitiger App-Logik, die in .NET geschrieben wurde.
@@ -75,7 +78,7 @@ Das folgende Razor-Markup veranschaulicht eine Komponente (*Dialog.razor*), die 
 
 Der Textinhalt (`ChildContent`) und der Titel (`Title`) des Dialogfelds werden von der Komponente bereitgestellt, die diese Komponente in ihrer Benutzeroberfläche verwendet. `OnYes` ist eine C#-Methode, die vom Schaltflächenereignis `onclick` ausgelöst wird.
 
-Blazor verwendet die natürlichen HTML-Tags für die Benutzeroberflächengestaltung. HTML-Elemente legen Komponenten fest, und die Attribute eines Tags übergeben Werte an die Eigenschaften einer Komponente.
+Blazor verwendet natürliche HTML-Tags für die Benutzeroberflächengestaltung. HTML-Elemente legen Komponenten fest, und die Attribute eines Tags übergeben Werte an die Eigenschaften einer Komponente.
 
 Im folgenden Beispiel verwendet die `Index`-Komponente die `Dialog`-Komponente. `ChildContent` und `Title` werden durch die Attribute und den Inhalt des `<Dialog>`-Elements festgelegt.
 
@@ -101,7 +104,7 @@ Wenn diese Komponente in der App verwendet wird, beschleunigt IntelliSense in [V
 
 Die Komponenten werden in einer In-Memory-Darstellung des Browser-DOM (Document Object Model) gerendert, die als *Renderbaum* bezeichnet und verwendet wird, um die Benutzeroberfläche auf flexible und effiziente Weise zu aktualisieren.
 
-## <a name="blazor-webassembly"></a>Blazor WebAssembly
+## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -125,7 +128,7 @@ Die Größe der veröffentlichten App, ihre *Nutzlast*, ist ein wichtiger Leistu
 * HTTP-Antworten werden komprimiert.
 * Die .NET-Runtime und die Assemblys werden im Browser zwischengespeichert.
 
-## <a name="blazor-server"></a>Blazor Server
+## <a name="opno-locblazor-server"></a>Blazor Server
 
 Blazor entkoppelt die Komponentenrenderinglogik von Aktualisierungen der Benutzeroberfläche. Blazor Server bietet Unterstützung zum Hosten von Razor-Komponenten in einer ASP.NET Core-App auf dem Server. Aktualisierungen der Benutzeroberfläche werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
@@ -152,4 +155,4 @@ APIs, die nicht in einem Webbrowser angewendet werden können (z.B. zum Zugreife
 * [Leitfaden für C#](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
-* Links zur [Awesome Blazor](https://github.com/AdrienTorris/awesome-blazor)-Community
+* [Awesome Blazor](https://github.com/AdrienTorris/awesome-blazor) Community-Links
