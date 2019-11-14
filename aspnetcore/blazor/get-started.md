@@ -1,32 +1,34 @@
 ---
-title: Beginnen Sie mit ASP.net Core blazor
+title: Beginnen Sie mit ASP.net Core Blazor
 author: guardrex
-description: Beginnen Sie mit blazor, indem Sie eine blazor-App mit den Tools Ihrer Wahl entwickeln.
+description: Beginnen Sie mit der Blazor, indem Sie eine Blazor-App mit den Tools Ihrer Wahl entwickeln.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
+no-loc:
+- Blazor
 uid: blazor/get-started
-ms.openlocfilehash: b5043c7e4549800c1ab49bc37dd8f3568975d4aa
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 9b4aee0be30568f098c756e9ab4cb5298e9a049b
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799227"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962998"
 ---
-# <a name="get-started-with-aspnet-core-blazor"></a>Beginnen Sie mit ASP.net Core blazor
+# <a name="get-started-with-aspnet-core-opno-locblazor"></a>Beginnen Sie mit ASP.net Core Blazor
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Beginnen Sie mit blazor:
+Beginnen Sie mit Blazor:
 
 ::: moniker range=">= aspnetcore-3.1"
 
 1. Installieren Sie das [.net Core 3,1 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1).
 
-1. Installieren Sie die Vorlage [blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) , indem Sie den folgenden Befehl in einer Befehlsshell ausführen. Das Paket " [Microsoft. aspnetcore. blazor. Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) " verfügt über eine Vorschauversion, während sich die blazor-Webassembly in der Vorschau Phase befindet.
+1. Installieren Sie die [Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) -Vorlage, indem Sie den folgenden Befehl in einer Befehlsshell ausführen. [Microsoft. aspnetcore.Blazor. Das Vorlagen](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) Paket verfügt über eine Vorschauversion, während sich Blazor Webassembly in der Vorschau Phase befindet.
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview2.19528.8
@@ -40,16 +42,16 @@ Beginnen Sie mit blazor:
 
    2 \. Erstellen Sie ein neues Projekt.
 
-   3 \. Wählen Sie **blazor-App**aus. Klicken Sie auf **Weiter**.
+   3 \. Wählen Sie **Blazor App**aus. Klicken Sie auf **Weiter**.
 
    4 \. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der **Orts** Eintrag korrekt ist, oder geben Sie einen Speicherort für das Projekt Wählen Sie **Erstellen** aus.
 
-   5 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+   5 \. Wählen Sie für eine Blazor Webassembly die Vorlage **Blazor Webassembly-App** aus. Wählen Sie für eine Blazor Server-Darstellung die **Blazor Server-App** -Vorlage aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    6 \. Drücken Sie **STRG**+**F5**, um die App auszuführen.
 
    > [!NOTE]
-   > Wenn Sie die Erweiterung blazor Visual Studio für eine vorherige Vorschauversion von ASP.net Core blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der blazor-Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
+   > Wenn Sie die Blazor Visual Studio-Erweiterung für eine vorherige Vorschauversion von ASP.net Core Blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der Blazor Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -57,25 +59,25 @@ Beginnen Sie mit blazor:
 
    2 \. Installieren Sie die neueste [ C# für Visual Studio Code Erweiterung](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
 
-   3 \. Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine blazor-Webassembly zu nutzen:
+   3 \. Führen Sie für eine Blazor Webassembly den folgenden Befehl in einer Befehlsshell aus:
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um einen blazor-Server zu nutzen:
+      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine Blazor Server-Funktion zu erhalten:
 
       ```dotnetcli
       dotnet new blazorserver -o WebApplication1
       ```
 
-      Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+      Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    4 \. Öffnen Sie den Ordner *WebApplication1* in Visual Studio Code.
 
-   5 \. Für ein blazor-Server Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
+   5 \. Bei einem Blazor Server-Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
 
-   6 \. Wenn Sie eine blazor-Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine blazor Webassembly-App verwenden, führen Sie `dotnet run` aus dem Projektordner der APP aus.
+   6 \. Wenn Sie eine Blazor Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine Blazor Webassembly-App verwenden, führen Sie `dotnet run` aus dem Projektordner der APP aus.
 
    7 \. Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -101,7 +103,7 @@ Beginnen Sie mit blazor:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-   Führen Sie für eine blazor-Webassembly die folgenden Befehle in einer Befehlsshell aus:
+   Führen Sie für eine Blazor Webassembly die folgenden Befehle in einer Befehlsshell aus:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -109,7 +111,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Führen Sie für eine blazor-Server Darstellung die folgenden Befehle in einer Befehlsshell aus:
+   Führen Sie die folgenden Befehle in einer Befehlsshell aus, um die Blazor Server-Darstellung auszuführen:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -117,7 +119,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+   Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -129,7 +131,7 @@ Beginnen Sie mit blazor:
 
 1. Installieren Sie die neueste Version des [.net Core 3,0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) .
 
-1. Installieren Sie optional die Vorlage [blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) , indem Sie das [.net Core 3,1 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) installieren und dann den folgenden Befehl in einer Befehlsshell ausführen:
+1. Installieren Sie optional die Vorlage [Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) , indem Sie das [.net Core 3,1 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) installieren und dann den folgenden Befehl in einer Befehlsshell ausführen:
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview2.19528.8
@@ -141,20 +143,20 @@ Beginnen Sie mit blazor:
 
    1 \. Installieren Sie die neueste Version von [Visual Studio](https://visualstudio.com/vs/) mit der Arbeitsauslastung **ASP.net und Webentwicklung** .
 
-   2 \. Optional können Sie [Visual Studio 16,4 Preview 2 oder](https://visualstudio.microsoft.com/vs/preview/) höher mit der Arbeitsauslastung **ASP.net und Webentwicklung** für die blazor Webassembly-App-Entwicklung installieren.
+   2 \. Optional können Sie [Visual Studio 16,4 Preview 2 oder](https://visualstudio.microsoft.com/vs/preview/) höher mit der Arbeitsauslastung **ASP.net und Webentwicklung** für Blazor Webassembly-App-Entwicklung installieren.
 
    3 \. Erstellen Sie ein neues Projekt.
 
-   4 \. Wählen Sie **blazor-App**aus. Klicken Sie auf **Weiter**.
+   4 \. Wählen Sie **Blazor App**aus. Klicken Sie auf **Weiter**.
 
    5 \. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der **Orts** Eintrag korrekt ist, oder geben Sie einen Speicherort für das Projekt Wählen Sie **Erstellen** aus.
 
-   6 \. Wählen Sie für eine blazor-Webassembly die Vorlage " **blazor Webassembly-App** " aus. Wählen Sie für eine blazor-Server-APP die Vorlage für den **blazor-Server** aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+   6 \. Wählen Sie für eine Blazor Webassembly die Vorlage **Blazor Webassembly-App** aus. Wählen Sie für eine Blazor Server-Darstellung die **Blazor Server-App** -Vorlage aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    7 \. Drücken Sie **F5**, um die App auszuführen.
 
    > [!NOTE]
-   > Wenn Sie die Erweiterung blazor Visual Studio für eine vorherige Vorschauversion von ASP.net Core blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der blazor-Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
+   > Wenn Sie die Blazor Visual Studio-Erweiterung für eine vorherige Vorschauversion von ASP.net Core Blazor (Preview 6 oder früher) installiert haben, können Sie die Erweiterung deinstallieren. Die Installation der Blazor Vorlagen in einer Befehlsshell reicht nun aus, um die Vorlagen in Visual Studio zu überstehen.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -162,25 +164,25 @@ Beginnen Sie mit blazor:
 
    2 \. Installieren Sie die neueste [ C# für Visual Studio Code Erweiterung](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
 
-   3 \. Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine blazor-Webassembly zu nutzen:
+   3 \. Führen Sie für eine Blazor Webassembly den folgenden Befehl in einer Befehlsshell aus:
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um einen blazor-Server zu nutzen:
+      Führen Sie den folgenden Befehl in einer Befehlsshell aus, um eine Blazor Server-Funktion zu erhalten:
 
       ```dotnetcli
       dotnet new blazorserver -o WebApplication1
       ```
 
-      Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+      Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    4 \. Öffnen Sie den Ordner *WebApplication1* in Visual Studio Code.
 
-   5 \. Für ein blazor-Server Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
+   5 \. Bei einem Blazor Server-Projekt fordert die IDE an, dass Sie Assets hinzufügen, um das Projekt zu erstellen und zu debuggen. Wählen Sie **Ja**.
 
-   6 \. Wenn Sie eine blazor-Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine blazor Webassembly-App verwenden, führen Sie `dotnet run` aus dem Projektordner der APP aus.
+   6 \. Wenn Sie eine Blazor Server-App verwenden, führen Sie die APP mit dem Visual Studio Code Debugger aus. Wenn Sie eine Blazor Webassembly-App verwenden, führen Sie `dotnet run` aus dem Projektordner der APP aus.
 
    7 \. Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -206,7 +208,7 @@ Beginnen Sie mit blazor:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-   Führen Sie für eine blazor-Webassembly die folgenden Befehle in einer Befehlsshell aus:
+   Führen Sie für eine Blazor Webassembly die folgenden Befehle in einer Befehlsshell aus:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -214,7 +216,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Führen Sie für eine blazor-Server Darstellung die folgenden Befehle in einer Befehlsshell aus:
+   Führen Sie die folgenden Befehle in einer Befehlsshell aus, um die Blazor Server-Darstellung auszuführen:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -222,7 +224,7 @@ Beginnen Sie mit blazor:
    dotnet run
    ```
 
-   Informationen zu den beiden blazor-Hostingmodellen, *blazor Server* und *blazor Webassembly*, finden Sie unter <xref:blazor/hosting-models>.
+   Informationen zu den beiden Blazor Hostingmodellen *Blazor Server* und *Blazor Webassembly*finden Sie unter <xref:blazor/hosting-models>.
 
    Navigieren Sie in einem Browser zu `https://localhost:5001`.
 
@@ -236,7 +238,7 @@ Auf den Registerkarten in der Rand Leiste sind mehrere Seiten verfügbar:
 * Zähler
 * Abrufen von Daten
 
-Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Das Inkrementieren eines Zählers in einer Webseite erfordert normalerweise das Schreiben von JavaScript, C#aber mit blazor können Sie verwenden.
+Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Das Inkrementieren eines Zählers in einer Webseite erfordert normalerweise das Schreiben von JavaScript C#, aber mit Blazor können Sie verwenden.
 
 *Pages/Counter.razor*:
 
