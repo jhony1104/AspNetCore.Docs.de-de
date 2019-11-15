@@ -1,27 +1,27 @@
 ---
-title: Migrieren von ClaimsPrincipal.Current
+title: Migrieren von "ClaimsPrincipal. Current"
 author: mjrousos
-description: Informationen Sie zum Migrieren von ClaimsPrincipal.Current zum Abrufen des aktuellen authentifizierten Benutzers Identität und Ansprüche in ASP.NET Core.
+description: Erfahren Sie, wie Sie von ClaimsPrincipal. Current migrieren, um die Identität und Ansprüche des aktuellen authentifizierten Benutzers in ASP.net Core abzurufen.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/26/2019
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 526cc3cf3a58a656e2a1b162cfaccacc7694dc51
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f7472f5b851d3869da3d26b881e276ce4ca004fb
+ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894787"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74115970"
 ---
-# <a name="migrate-from-claimsprincipalcurrent"></a>Migrieren von ClaimsPrincipal.Current
+# <a name="migrate-from-claimsprincipalcurrent"></a>Migrieren von "ClaimsPrincipal. Current"
 
-In ASP.NET 4.x-Projekten, war es üblich, dass verwendet [ClaimsPrincipal.Current](/dotnet/api/system.security.claims.claimsprincipal.current) zum Abrufen der aktuellen authentifizierten Identität und Ansprüche des Benutzers. In ASP.NET Core ist diese Eigenschaft nicht mehr festgelegt. Code, der davon abhängig war, muss aktualisiert werden, um die aktuellen authentifizierten Identität des Benutzers über eine unterschiedliche zu erhalten.
+In ASP.NET 4. x-Projekten war es üblich, " [ClaimsPrincipal. Current](/dotnet/api/system.security.claims.claimsprincipal.current) " zum Abrufen der Identität und Ansprüche des aktuellen authentifizierten Benutzers zu verwenden. In ASP.net Core ist diese Eigenschaft nicht mehr festgelegt. Code, der von ihm abhängig war, muss aktualisiert werden, um die Identität des aktuellen authentifizierten Benutzers auf andere Weise zu erhalten.
 
 ## <a name="context-specific-data-instead-of-static-data"></a>Kontextspezifische Daten anstelle von statischen Daten
 
-Bei Verwendung von ASP.NET Core, die Werte von `ClaimsPrincipal.Current` und `Thread.CurrentPrincipal` werden nicht festgelegt. Diese Eigenschaften, die sowohl statischen Zustand darstellen, die ASP.NET Core wird in der Regel vermieden. Stattdessen wird die ASP.NET Core-Architektur zum Abrufen von Abhängigkeiten (z. B. die aktuelle Identität des Benutzers) aus der Dienstkontext-spezifischen Dienst Sammlungen (mit der [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (DI)-Modell). Mehr Neuigkeiten `Thread.CurrentPrincipal` ist statisch, damit die Änderungen in einigen asynchronen Szenarien nicht beibehalten werden können (und `ClaimsPrincipal.Current` ruft nur `Thread.CurrentPrincipal` standardmäßig).
+Wenn Sie ASP.net Core verwenden, werden die Werte von `ClaimsPrincipal.Current` und `Thread.CurrentPrincipal` nicht festgelegt. Diese Eigenschaften stellen beide den statischen Zustand dar, der ASP.net Core im allgemeinen vermeidet. Stattdessen ist die Architektur von ASP.net Core das Abrufen von Abhängigkeiten (z. b. der Identität des aktuellen Benutzers) von kontextspezifischen Dienst Auflistungen (unter Verwendung des Modells für die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (di)). Weitere `Thread.CurrentPrincipal` ist Thread statisch, sodass Änderungen in einigen asynchronen Szenarios möglicherweise nicht persistent gespeichert werden (und `ClaimsPrincipal.Current` lediglich standardmäßig `Thread.CurrentPrincipal` aufruft).
 
-Um zu verstehen, die Arten von Problemen Thread können statische Member führen, den folgende Codeausschnitt in asynchronen Szenarien zu berücksichtigen:
+Um die möglichen Probleme zu verstehen, die Thread statische Member in asynchronen Szenarien verursachen können, sollten Sie den folgenden Code Ausschnitt in Erwägung ziehen:
 
 ```csharp
 // Create a ClaimsPrincipal and set Thread.CurrentPrincipal
@@ -39,21 +39,21 @@ await Task.Yield();
 Console.WriteLine($"Current user: {Thread.CurrentPrincipal?.Identity.Name}");
 ```
 
-Im vorherigen Beispiel Code wird `Thread.CurrentPrincipal` und dessen Wert überprüft wird, vor und nach dem Warten eines asynchronen Aufrufs. `Thread.CurrentPrincipal` bezieht sich auf die *Thread* auf dem sie festgelegt ist, und die Methode ist wahrscheinlich die Ausführung in einem anderen Thread nach dem await-Ausdruck fortgesetzt werden. Folglich `Thread.CurrentPrincipal` ist vorhanden, wenn er zuerst daraufhin überprüft, aber nach dem Aufruf von null ist, `await Task.Yield()`.
+Der vorangehende Beispielcode legt `Thread.CurrentPrincipal` fest und überprüft seinen Wert vor und nach dem warten auf einen asynchronen-Befehl. `Thread.CurrentPrincipal` ist spezifisch für den *Thread* , in dem er festgelegt ist, und die Methode wird die Ausführung wahrscheinlich in einem anderen Thread nach der Warte Zeit fortsetzen. Folglich ist `Thread.CurrentPrincipal` vorhanden, wenn Sie zum ersten Mal aktiviert ist, aber nach dem Aufruf`await Task.Yield()`NULL ist.
 
-Abrufen der Identität des aktuellen Benutzers aus der app DI-Dienst-Auflistung ist besser getestet werden, zu, da der Test-Identitäten problemlos eingefügt werden können.
+Das Überprüfen der Identität des aktuellen Benutzers aus der di-Dienst Sammlung der APP ist auch besser zu testen, da Test Identitäten problemlos eingefügt werden können.
 
-## <a name="retrieve-the-current-user-in-an-aspnet-core-app"></a>Rufen Sie die aktuelle Benutzer in einer ASP.NET Core-app
+## <a name="retrieve-the-current-user-in-an-aspnet-core-app"></a>Abrufen des aktuellen Benutzers in einer ASP.net Core-App
 
-Es gibt mehrere Optionen zum Abrufen des aktuellen authentifizierten Benutzers `ClaimsPrincipal` in ASP.NET Core anstelle von `ClaimsPrincipal.Current`:
+Es gibt mehrere Optionen zum Abrufen der `ClaimsPrincipal` des aktuellen authentifizierten Benutzers in ASP.net Core anstelle von `ClaimsPrincipal.Current`:
 
-* **ControllerBase.User**. MVC-Controller stehen derzeit authentifizierten Benutzer mit ihren [Benutzer](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) Eigenschaft.
-* **HttpContext.User**. Komponenten mit Zugriff auf die aktuelle `HttpContext` (z. B. Middleware) erhalten des aktuellen Benutzers `ClaimsPrincipal` aus [HttpContext.User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user).
-* **Vom Aufrufer übergebenen**. Bibliotheken ohne Zugriff auf die aktuelle `HttpContext` werden häufig von Controllern oder Middleware-Komponenten bezeichnet und kann die aktuelle Identität des Benutzers als Argument übergeben.
-* **IHttpContextAccessor**. Das Projekt, die Migration zu ASP.NET Core möglicherweise zu groß, um die Identität des aktuellen Benutzers problemlos an alle erforderlichen Stellen zu übergeben. In solchen Fällen [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) kann verwendet werden, dieses Problem zu umgehen. `IHttpContextAccessor` ist auf dem aktuellen `HttpContext` (falls vorhanden). Es wäre eine kurzfristige Lösung, die beim Abrufen der Identität des aktuellen Benutzers in Code, der noch nicht zum Arbeiten mit ASP.NET Core DI-driven Architecture aktualisiert wurden:
+* **Controllerbase. User**. MVC-Controller können mit Ihrer [User](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) -Eigenschaft auf den aktuellen authentifizierten Benutzer zugreifen.
+* **HttpContext. User**. Komponenten mit Zugriff auf die aktuelle `HttpContext` (z. b. Middleware) können die `ClaimsPrincipal` des aktuellen Benutzers von " [HttpContext. User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)" abrufen.
+* **Übergeben vom**Aufrufer. Bibliotheken, die keinen Zugriff auf die aktuelle `HttpContext` haben, werden häufig von Controllern oder middlewarekomponenten aufgerufen, und die Identität des aktuellen Benutzers kann als Argument übermittelt werden.
+* **Ihttpcontextaccessor**. Das Projekt, das zu ASP.net Core migriert wird, ist möglicherweise zu groß, um die Identität des aktuellen Benutzers an alle erforderlichen Orte zu übergeben. In solchen Fällen kann [ihttpcontextaccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) als Problem Umgehung verwendet werden. `IHttpContextAccessor` kann auf den aktuellen `HttpContext` zugreifen (sofern vorhanden). Wenn di verwendet wird, finden Sie weitere Informationen unter <xref:fundamentals/httpcontext>. Eine kurzfristige Lösung, um die Identität des aktuellen Benutzers im Code zu erhalten, der noch nicht aktualisiert wurde, um mit der ASP.net Core di-gesteuerten Architektur zu arbeiten, wäre Folgendes:
 
-  * Stellen `IHttpContextAccessor` zur Verfügung, in der DI-Container durch Aufrufen von [AddHttpContextAccessor](https://github.com/aspnet/Hosting/issues/793) in `Startup.ConfigureServices`.
-  * Rufen Sie eine Instanz des `IHttpContextAccessor` während des Starts und in eine statische Variable zu speichern. Die Instanz wird für Code verfügbar gemacht, die zuvor den aktuellen Benutzer über eine statische Eigenschaft abgerufen wurde.
-  * Abrufen des aktuellen Benutzers `ClaimsPrincipal` mit `HttpContextAccessor.HttpContext?.User`. Wenn dieser Code, außerhalb des Kontexts einer HTTP-Anforderung verwendet wird die `HttpContext` ist null.
+  * Stellen Sie `IHttpContextAccessor` im di-Container durch Aufrufen von [addhttpcontextaccessor](https://github.com/aspnet/Hosting/issues/793) in `Startup.ConfigureServices`bereit.
+  * Eine Instanz von `IHttpContextAccessor` während des Starts erhalten und in einer statischen Variablen speichern. Die-Instanz wird für Code verfügbar gemacht, der zuvor den aktuellen Benutzer aus einer statischen Eigenschaft abgerufen hat.
+  * Rufen Sie die `ClaimsPrincipal` des aktuellen Benutzers mithilfe `HttpContextAccessor.HttpContext?.User`ab. Wenn dieser Code außerhalb des Kontexts einer HTTP-Anforderung verwendet wird, ist der `HttpContext` NULL.
 
-Der letzte option, mit einem `IHttpContextAccessor` Instanz in einer statischen Variablen gespeichert ist, wird die ASP.NET Core-Prinzipien (vorzugsweise eingefügte Abhängigkeiten statische Abhängigkeiten), umgekehrte. Schließlich abrufen möchten, um `IHttpContextAccessor` stattdessen über Dependency Injection-Instanzen. Kann eine statische Hilfsmethode nützlich Brücke, die jedoch sein, wenn große vorhandene ASP.NET-Anwendungen zu migrieren, die zuvor verwendet haben `ClaimsPrincipal.Current`.
+Die letzte Option, die eine `IHttpContextAccessor` Instanz verwendet, die in einer statischen Variablen gespeichert ist, entspricht ASP.net Core Prinzipien (bevorzugt injizierte Abhängigkeiten von statischen Abhängigkeiten). Planen Sie das Abrufen von `IHttpContextAccessor` Instanzen stattdessen aus der Abhängigkeitsinjektion. Ein statisches Hilfsprogramm kann jedoch nützlich sein, wenn Sie große vorhandene ASP.net-apps migrieren, die zuvor `ClaimsPrincipal.Current`verwendet haben.
