@@ -46,7 +46,7 @@ static async Task Main(string[] args)
 }
 ```
 
-Alle GrpC-Client Implementierungen unterstützen TLS. für GrpC-Clients aus anderen Sprachen muss der Kanal in der Regel mit `SslCredentials` konfiguriert werden. `SslCredentials` gibt das Zertifikat an, das vom Client verwendet wird, und es muss anstelle unsicherer Anmelde Informationen verwendet werden. Beispiele für das Konfigurieren der verschiedenen GrpC-Client Implementierungen für die Verwendung von TLS finden Sie unter [GrpC-Authentifizierung](https://www.grpc.io/docs/guides/auth/).
+Alle GrpC-Client Implementierungen unterstützen TLS. für GrpC-Clients aus anderen Sprachen ist in der Regel der mit `SslCredentials`konfigurierte Kanal erforderlich. `SslCredentials` gibt das Zertifikat an, das vom Client verwendet wird, und es muss anstelle unsicherer Anmelde Informationen verwendet werden. Beispiele für das Konfigurieren der verschiedenen GrpC-Client Implementierungen für die Verwendung von TLS finden Sie unter [GrpC-Authentifizierung](https://www.grpc.io/docs/guides/auth/).
 
 ## <a name="call-a-grpc-service-with-an-untrustedinvalid-certificate"></a>Einen GrpC-Dienst mit einem nicht vertrauenswürdigen/ungültigen Zertifikat aufzurufen.
 
@@ -76,7 +76,7 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>Anrufen unsicherer GrpC-Dienste mit .net Core-Client
 
-Eine zusätzliche Konfiguration ist erforderlich, um unsichere GrpC-Dienste mit dem .net Core-Client aufzurufen. Der GrpC-Client muss den `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport`-Schalter auf `true` festlegen und `http` in der Server Adresse verwenden:
+Eine zusätzliche Konfiguration ist erforderlich, um unsichere GrpC-Dienste mit dem .net Core-Client aufzurufen. Der GrpC-Client muss den `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` Switch auf `true` festlegen und `http` in der Server Adresse verwenden:
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
@@ -113,7 +113,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-Wenn ein http/2-Endpunkt ohne TLS konfiguriert ist, müssen die [listenoptions.-Protokolle](xref:fundamentals/servers/kestrel#listenoptionsprotocols) des Endpunkts auf `HttpProtocols.Http2` festgelegt werden. `HttpProtocols.Http1AndHttp2` kann nicht verwendet werden, da TLS zum Aushandeln von http/2 erforderlich ist. Ohne TLS werden alle Verbindungen mit dem Endpunkt standardmäßig auf HTTP/1.1, und GrpC-Aufrufe schlagen fehl.
+Wenn ein http/2-Endpunkt ohne TLS konfiguriert ist, müssen die [listenoptions.-Protokolle](xref:fundamentals/servers/kestrel#listenoptionsprotocols) des Endpunkts auf `HttpProtocols.Http2`festgelegt werden. `HttpProtocols.Http1AndHttp2` kann nicht verwendet werden, da TLS zum Aushandeln von http/2 erforderlich ist. Ohne TLS werden alle Verbindungen mit dem Endpunkt standardmäßig auf HTTP/1.1, und GrpC-Aufrufe schlagen fehl.
 
 Der GrpC-Client muss auch für die Verwendung von TLS konfiguriert werden. Weitere Informationen finden Sie unter [callunsichere GrpC-Dienste mit .net Core-Client](#call-insecure-grpc-services-with-net-core-client).
 
@@ -124,14 +124,14 @@ Der GrpC-Client muss auch für die Verwendung von TLS konfiguriert werden. Weite
 
 die GrpC-Codegenerierung von konkreten Clients und Dienst Basisklassen erfordert, dass protobuf-Dateien und-Tools von einem Projekt referenziert werden. Sie müssen Folgendes einschließen:
 
-* *. proto* -Dateien, die Sie in der `<Protobuf>`-Element Gruppe verwenden möchten. Auf [importierte *. proto* -Dateien](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions) muss vom Projekt verwiesen werden.
+* *. proto* -Dateien, die Sie in der `<Protobuf>` Element Gruppe verwenden möchten. Auf [importierte *. proto* -Dateien](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions) muss vom Projekt verwiesen werden.
 * Paket Verweis auf das GrpC-Toolpaket " [GrpC. Tools](https://www.nuget.org/packages/Grpc.Tools/)".
 
 Weitere Informationen zum Erstellen von GrpC C# -Assets finden Sie unter <xref:grpc/basics>.
 
-Standardmäßig generiert ein `<Protobuf>`-Verweis einen konkreten Client und eine Dienst Basisklasse. Das `GrpcServices`-Attribut des Reference-Elements kann verwendet werden C# , um die Medienobjekt Generierung einzuschränken. Gültige `GrpcServices`-Optionen sind:
+Standardmäßig generiert ein `<Protobuf>` Verweis einen konkreten Client und eine Dienst Basisklasse. Das `GrpcServices`-Attribut des Reference-Elements kann verwendet werden C# , um die Medienobjekt Generierung einzuschränken. Gültige `GrpcServices` Optionen:
 
-* `Both` (Standardwert, wenn nicht vorhanden)
+* `Both` (Standardeinstellung, wenn nicht vorhanden)
 * `Server`
 * `Client`
 * `None`
@@ -154,16 +154,16 @@ Für eine GrpC-Client-App, die GrpC-Anrufe erstellt, muss nur der konkrete Clien
 
 ## <a name="wpf-projects-unable-to-generate-grpc-c-assets-from-proto-files"></a>WPF-Projekte können keine GrpC C# -Objekte aus. proto-Dateien generieren.
 
-WPF-Projekte haben ein [bekanntes Problem](https://github.com/dotnet/wpf/issues/810) , das verhindert, dass die GrpC-Codegenerierung ordnungsgemäß funktioniert. Alle in einem WPF-Projekt generierten GrpC-Typen, indem auf `Grpc.Tools`-und *. proto* -Dateien verwiesen wird, erstellen bei der Verwendung Kompilierungsfehler:
+WPF-Projekte haben ein [bekanntes Problem](https://github.com/dotnet/wpf/issues/810) , das verhindert, dass die GrpC-Codegenerierung ordnungsgemäß funktioniert. Alle in einem WPF-Projekt durch Verweise auf `Grpc.Tools`-und *. proto* -Dateien generierten GrpC-Typen erstellen Kompilierungsfehler, wenn Sie verwendet werden:
 
 > Fehler CS0246: der Typ-oder Namespace Name "mygrpcservices" wurde nicht gefunden. (fehlt eine using-Direktive oder ein Assemblyverweis?)
 
 Sie können dieses Problem umgehen, indem Sie folgende Schritte ausführen:
 
 1. Erstellen Sie ein neues .net Core-Klassen Bibliotheksprojekt.
-2. Fügen Sie im neuen Projekt Verweise hinzu, um die [ C# Codegenerierung aus *@no__t -3. proto* -Dateien](xref:grpc/basics#generated-c-assets)zu aktivieren:
+2. Fügen Sie im neuen Projekt Verweise hinzu, um die [ C# Codegenerierung aus *\*. proto* -Dateien](xref:grpc/basics#generated-c-assets)zu aktivieren:
     * Fügen Sie dem [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)-Paket einen Paketverweis hinzu.
-    * Fügen Sie der `<Protobuf>`-Elementgruppe *\*.proto*-Dateien hinzu.
+    * Fügen Sie der *-Elementgruppe \** .proto`<Protobuf>`-Dateien hinzu.
 3. Fügen Sie in der WPF-Anwendung einen Verweis auf das neue Projekt hinzu.
 
 Die WPF-Anwendung kann die von GrpC generierten Typen aus dem neuen Klassen Bibliotheksprojekt verwenden.

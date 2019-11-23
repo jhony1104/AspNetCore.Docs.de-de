@@ -31,7 +31,7 @@ In diesen Szenarien bietet das Datenschutzsystem eine umfangreiche Konfiguration
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
-Um Schlüssel in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)zu speichern, konfigurieren Sie das System mit [protectkeyswithazurekeyvault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) in der `Startup`-Klasse:
+Um Schlüssel in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)zu speichern, konfigurieren Sie das System mit " [protectkeyswithazurekeyvault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) " in der `Startup`-Klasse:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -42,15 +42,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Legen Sie den Speicherort des Schlüsselrings fest (z. [b. persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Der Speicherort muss festgelegt werden, da der Aufruf von `ProtectKeysWithAzureKeyVault` einen [ixmlencryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) implementiert, der die Einstellungen für den automatischen Datenschutz deaktiviert, einschließlich des Speicher Orts für den Schlüsselring. Im vorangehenden Beispiel wird Azure BLOB Storage verwendet, um den Schlüsselring beizubehalten. Weitere Informationen finden Sie unter [key-Speicher Anbieter: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage). Sie können den Schlüsselring auch lokal mit [persistkeystofile System](xref:security/data-protection/implementation/key-storage-providers#file-system)speichern.
+Legen Sie den Speicherort des Schlüsselrings fest (z. [b. persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Der Speicherort muss festgelegt werden, da der aufrufende `ProtectKeysWithAzureKeyVault` einen [ixmlencryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) implementiert, der die Einstellungen für den automatischen Datenschutz deaktiviert, einschließlich des Speicher Orts für den Schlüsselring. Im vorangehenden Beispiel wird Azure BLOB Storage verwendet, um den Schlüsselring beizubehalten. Weitere Informationen finden Sie unter [Schlüsselspeicher Anbieter: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage). Sie können den Schlüsselring auch lokal mit [persistkeystofile System](xref:security/data-protection/implementation/key-storage-providers#file-system)speichern.
 
-Der `keyIdentifier` ist der Key Vault-Schlüssel Bezeichner, der für die Schlüssel Verschlüsselung verwendet wird. Ein Schlüssel, der in Key Vault namens "`dataprotection`" im `contosokeyvault` erstellt wurde, hat beispielsweise den Schlüssel Bezeichner `https://contosokeyvault.vault.azure.net/keys/dataprotection/`. Stellen Sie für die APP die Berechtigungen **Entpacken** **und Schlüssel einschließen** für den Schlüssel Tresor bereit.
+Der `keyIdentifier` ist die Key Vault-Schlüssel Kennung, die für die Schlüssel Verschlüsselung verwendet wird. Ein Schlüssel, der in Key Vault namens `dataprotection` in der `contosokeyvault` erstellt wurde, verfügt z. b. über den Schlüssel Bezeichner `https://contosokeyvault.vault.azure.net/keys/dataprotection/`. Stellen Sie für die APP die Berechtigungen **Entpacken** **und Schlüssel einschließen** für den Schlüssel Tresor bereit.
 
-`ProtectKeysWithAzureKeyVault`-über Ladungen:
+`ProtectKeysWithAzureKeyVault` Überladungen:
 
 * [Protectkeyswithazurekeyvault (idataschutzbuilder, keyvaultclient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) ermöglicht die Verwendung eines [keyvaultclient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) , damit das Datenschutzsystem den Schlüssel Tresor verwenden kann.
 * [Protectkeyswithazurekeyvault (idataschutzbuilder, String, String, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) ermöglicht die Verwendung eines `ClientId` und [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) , damit das Datenschutzsystem den Schlüssel Tresor verwenden kann.
-* [Protectkeyswithazurekeyvault (idataschutzbuilder, String, String, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) gestattet die Verwendung einer `ClientId` und `ClientSecret`, damit das Datenschutzsystem den Schlüssel Tresor verwenden kann.
+* [Protectkeyswithazurekeyvault (idataschutzbuilder, String, String, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) gestattet die Verwendung eines `ClientId` und `ClientSecret`, damit das Datenschutzsystem den Schlüssel Tresor verwenden kann.
 
 ::: moniker-end
 
@@ -71,7 +71,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="protectkeyswith"></a>ProtectKeysWith\*
 
-Sie können das System konfigurieren, um Schlüssel im Ruhezustand zu schützen, indem Sie eine der [protectkeyswith @ no__t-1-](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) Konfigurations-APIs aufrufen. Betrachten Sie das folgende Beispiel, in dem Schlüssel auf einer UNC-Freigabe gespeichert werden und die Schlüssel im Ruhezustand mit einem bestimmten X. 509-Zertifikat verschlüsselt werden:
+Sie können das System konfigurieren, um Schlüssel im Ruhezustand zu schützen, indem Sie eine der [protectkeyswith-\*](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) Konfigurations-APIs aufrufen. Betrachten Sie das folgende Beispiel, in dem Schlüssel auf einer UNC-Freigabe gespeichert werden und die Schlüssel im Ruhezustand mit einem bestimmten X. 509-Zertifikat verschlüsselt werden:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -154,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>DisableAutomaticKeyGeneration
 
-Möglicherweise gibt es ein Szenario, in dem eine APP nicht automatisch ein Rollback für Schlüssel durchführen soll (neue Schlüssel erstellen), wenn Sie den Ablauf erreichen. Ein Beispiel hierfür sind apps, die in einer primären/sekundären Beziehung eingerichtet sind, bei der nur die primäre App für wichtige Verwaltungsprobleme zuständig ist und sekundäre Apps einfach nur eine schreibgeschützte Ansicht des Schlüsselrings haben. Die sekundären Apps können so konfiguriert werden, dass Sie den Schlüsselbund als schreibgeschützt behandeln, indem Sie das System mit <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*> konfigurieren:
+Möglicherweise gibt es ein Szenario, in dem eine APP nicht automatisch ein Rollback für Schlüssel durchführen soll (neue Schlüssel erstellen), wenn Sie den Ablauf erreichen. Ein Beispiel hierfür sind apps, die in einer primären/sekundären Beziehung eingerichtet sind, bei der nur die primäre App für wichtige Verwaltungsprobleme zuständig ist und sekundäre Apps einfach nur eine schreibgeschützte Ansicht des Schlüsselrings haben. Die sekundären Apps können so konfiguriert werden, dass Sie den Schlüsselbund als schreibgeschützt behandeln, indem Sie das System mit <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>konfigurieren:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -168,16 +168,16 @@ public void ConfigureServices(IServiceCollection services)
 
 Wenn das Datenschutzsystem von einem ASP.net Core Host bereitgestellt wird, werden die Apps automatisch voneinander isoliert, auch wenn diese apps unter demselben Workerprozesskonto ausgeführt werden und dasselbe Masterschlüssel Material verwenden. Dies ähnelt dem IsolateApps-Modifizierer aus dem `<machineKey>`-Element von System. Web.
 
-Der Isolations Mechanismus funktioniert, indem jede APP auf dem lokalen Computer als eindeutiger Mandant betrachtet wird, sodass die @no__t 0 (null) für eine bestimmte App automatisch die APP-ID als Diskriminator enthält. Die eindeutige ID der APP ist der physische Pfad der APP:
+Der Isolations Mechanismus funktioniert, indem jede APP auf dem lokalen Computer als eindeutiger Mandant betrachtet wird, sodass die <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>, die für eine bestimmte App verwendet wird, die APP-ID automatisch als Diskriminator enthält. Die eindeutige ID der APP ist der physische Pfad der APP:
 
 * Bei in IIS gehosteten Apps ist die eindeutige ID der physische IIS-Pfad der app. Wenn eine app in einer Webfarm Umgebung bereitgestellt wird, ist dieser wertstabil, wenn Sie davon ausgehen, dass die IIS-Umgebungen auf allen Computern in der Webfarm ähnlich konfiguriert sind.
 * Für selbst gehostete Apps, die auf dem [Kestrel-Server](xref:fundamentals/servers/index#kestrel)ausgeführt werden, ist die eindeutige ID der physische Pfad zur APP auf dem Datenträger.
 
-Der eindeutige Bezeichner ist so konzipiert, dass er zurücksetzt @ no__t-0beide der einzelnen APP und des Computers selbst überstehen.
+Der eindeutige Bezeichner ist so konzipiert, dass er zurück Stellungen&mdash;beiden einzelnen apps und des Computers selbst überstehen.
 
 Dieser Isolations Mechanismus geht davon aus, dass die apps nicht schädlich sind. Eine böswillige App kann sich immer auf jede andere APP auswirken, die unter demselben Workerprozesskonto ausgeführt wird. In einer freigegebenen Hostingumgebung, in der apps gegenseitig nicht vertrauenswürdig sind, sollte der Hostinganbieter Maßnahmen ergreifen, um die Isolation auf Betriebssystemebene zwischen apps sicherzustellen, einschließlich der Trennung der zugrunde liegenden Schlüssel Depots
 
-Wenn das Datenschutzsystem nicht von einem ASP.net Core Host bereitgestellt wird (wenn Sie z. b. über den konkreten Typ `DataProtectionProvider` instanziieren), ist die APP-Isolation standardmäßig deaktiviert. Wenn die APP-Isolation deaktiviert ist, können alle apps, die durch das gleiche Schlüssel Erstellungs Material unterstützt werden, Nutzlasten gemeinsam nutzen, sofern Sie die entsprechenden [Zwecke](xref:security/data-protection/consumer-apis/purpose-strings)bereitstellen. Um die APP-Isolation in dieser Umgebung bereitzustellen, wenden Sie die [setapplicationname](#setapplicationname) -Methode für das Konfigurationsobjekt an, und geben Sie einen eindeutigen Namen für jede APP an.
+Wenn das Datenschutzsystem nicht von einem ASP.net Core Host bereitgestellt wird (wenn Sie z. b. über den `DataProtectionProvider` konkreten Typ instanziieren), ist die APP-Isolation standardmäßig deaktiviert. Wenn die APP-Isolation deaktiviert ist, können alle apps, die durch das gleiche Schlüssel Erstellungs Material unterstützt werden, Nutzlasten gemeinsam nutzen, sofern Sie die entsprechenden [Zwecke](xref:security/data-protection/consumer-apis/purpose-strings)bereitstellen. Um die APP-Isolation in dieser Umgebung bereitzustellen, wenden Sie die [setapplicationname](#setapplicationname) -Methode für das Konfigurationsobjekt an, und geben Sie einen eindeutigen Namen für jede APP an.
 
 ## <a name="changing-algorithms-with-usecryptographicalgorithms"></a>Ändern von Algorithmen mit usecrypumgraphicalgorithms
 
@@ -211,7 +211,7 @@ services.AddDataProtection()
 
 ::: moniker-end
 
-Der Standardverschlüsselungsalgorithmus ist AES-256-CBC, und der standardmäßige validationalgorithmus ist HMACSHA256. Die Standard Richtlinie kann von einem Systemadministrator über eine [Computer weite Richtlinie](xref:security/data-protection/configuration/machine-wide-policy)festgelegt werden, aber ein expliziter Rückruf von `UseCryptographicAlgorithms` überschreibt die Standard Richtlinie.
+Der Standardverschlüsselungsalgorithmus ist AES-256-CBC, und der standardmäßige validationalgorithmus ist HMACSHA256. Die Standard Richtlinie kann von einem Systemadministrator über eine [Computer weite Richtlinie](xref:security/data-protection/configuration/machine-wide-policy)festgelegt werden, aber ein expliziter-`UseCryptographicAlgorithms` überschreibt die Standard Richtlinie.
 
 Wenn Sie `UseCryptographicAlgorithms` aufrufen, können Sie den gewünschten Algorithmus aus einer vordefinierten integrierten Liste angeben. Sie müssen sich keine Gedanken über die Implementierung des Algorithmus machen. Im obigen Szenario versucht das Datenschutzsystem, die CNG-Implementierung von AES zu verwenden, wenn es unter Windows ausgeführt wird. Andernfalls greift Sie auf die verwaltete [System. Security. Cryptography. AES](/dotnet/api/system.security.cryptography.aes) -Klasse zurück.
 
@@ -266,7 +266,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker-end
 
-Im Allgemeinen müssen die \*type-Eigenschaften auf konkrete, instanziable-Implementierungen (über einen öffentlichen Parameter losen ctor) von [SymmetricAlgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) und [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)verweisen, obwohl das System Sonderfälle für einige Werte wie `typeof(Aes)` für Komforts.
+Im Allgemeinen müssen die \*-Typeigenschaften auf konkrete, instanziier Bare Implementierungen (über einen öffentlichen Parameter losen ctor) von [SymmetricAlgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) und [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)verweisen, obwohl das System bestimmte Werte wie `typeof(Aes)` aus Gründen der Beweglichkeit als Sonderfall.
 
 > [!NOTE]
 > Der SymmetricAlgorithm muss eine Schlüssellänge von 128 Bits und eine Blockgröße von 64 Bits aufweisen und muss die Verschlüsselung im CBC-Modus mit PKCS #7 Padding unterstützen. Der KeyedHashAlgorithm muss eine Hashgröße von > = 128 Bits aufweisen, und er muss Schlüssel mit einer Länge unterstützen, die der Digest-Länge des Hash Algorithmus entspricht. KeyedHashAlgorithm muss nicht unbedingt HMAC sein.
@@ -322,7 +322,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> Der Algorithmus für symmetrische Blockchiffre muss eine Schlüssellänge von > = 128 Bits, eine Blockgröße von > = 64 Bits aufweisen und muss die Verschlüsselung im CBC-Modus mit PKCS #7 Padding unterstützen. Der Hash Algorithmus muss eine digestgröße von > = 128 Bits aufweisen und muss mit dem Flag bcrypt @ no__t-0alg @ no__t-1handle @ no__t-2hmac @ no__t-3flag unterstützt werden. Die \*provider-Eigenschaften können auf NULL festgelegt werden, um den Standardanbieter für den angegebenen Algorithmus zu verwenden. Weitere Informationen finden Sie in der Dokumentation zu [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) .
+> Der Algorithmus für symmetrische Blockchiffre muss eine Schlüssellänge von > = 128 Bits, eine Blockgröße von > = 64 Bits aufweisen und muss die Verschlüsselung im CBC-Modus mit PKCS #7 Padding unterstützen. Der Hash Algorithmus muss eine Hashgröße von > = 128 Bits aufweisen und muss Unterstützung für das Öffnen mit dem bcrypt-\_ALG\_handle\_HMAC\_Flag-Flag aufweisen. Die Eigenschaften des \*Anbieters können auf NULL festgelegt werden, um den Standardanbieter für den angegebenen Algorithmus zu verwenden. Weitere Informationen finden Sie in der Dokumentation zu [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) .
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -380,9 +380,9 @@ Beim Hosting in einem [docker](/dotnet/standard/microservices-architecture/conta
 
 ## <a name="persisting-keys-with-redis"></a>Beibehalten von Schlüsseln mit redis
 
-Zum Speichern von Schlüsseln sollten nur redis-Versionen verwendet werden, die [redis-Daten Persistenz](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) unterstützen. [Azure BLOB Storage](/azure/storage/blobs/storage-blobs-introduction) ist persistent und kann zum Speichern von Schlüsseln verwendet werden. Weitere Informationen finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/13476).
+Zum Speichern von Schlüsseln sollten nur redis-Versionen verwendet werden, die [redis-Daten Persistenz](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) unterstützen. [Azure BLOB Storage](/azure/storage/blobs/storage-blobs-introduction) ist persistent und kann zum Speichern von Schlüsseln verwendet werden. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore/issues/13476).
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:security/data-protection/configuration/non-di-scenarios>
 * <xref:security/data-protection/configuration/machine-wide-policy>
