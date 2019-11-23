@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 10/07/2019
 uid: razor-pages/index
-ms.openlocfilehash: 61e15b9b9b8f84de36621c301ecb9d33b21dff88
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 67cc4f9b261372996d612f922c9f491f53948ece
+ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034280"
+ms.lasthandoff: 11/23/2019
+ms.locfileid: "74412074"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Einführung in Razor Pages in ASP.NET Core
 
@@ -65,7 +65,7 @@ Führen Sie `dotnet new webapp` über die Befehlszeile aus.
 
 Razor Pages ist in *Startup.cs* aktiviert:
 
-[!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12)]
+[!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
 Sehen Sie sich diese einfache Seite an: <a name="OnGet"></a>
 
