@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie mehrere Instanzen einer ASP.NET Core-App
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: df1be8cc76a5017923f26636a241b69881dfcc81
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: 16ec2162be8199857d0f2d0ff989ec4cdc6c3277
+ms.sourcegitcommit: 68d804d60e104c81fe77a87a9af70b5df2726f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970110"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73830702"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Hosten von ASP.NET Core in einer Webfarm
 
@@ -88,3 +88,7 @@ Weitere Informationen zur Konfiguration zum Schutz von Daten für Webfarmbereits
 ## <a name="obtain-data-from-apps"></a>Abrufen von Daten aus Apps
 
 Wenn die Webfarm-Apps in der Lage sind, auf Anforderungen zu reagieren, erhalten Sie Anforderungen, Verbindungen und zusätzliche Daten von den Apps über die Inlinemiddleware des Terminals. Weitere Informationen und Beispielcode finden Sie unter <xref:test/troubleshoot#obtain-data-from-an-app>.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* Die [benutzerdefinierte Skript Erweiterung für Windows](/azure/virtual-machines/extensions/custom-script-windows) lädt Skripts auf virtuellen Azure-Computern herunter und führt sie dort aus &ndash; dies ist für die Konfiguration und Softwareinstallation nach der Bereitstellung nützlich.
