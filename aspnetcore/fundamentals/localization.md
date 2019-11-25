@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: 9ed133c93a9ec95c63869b710d120eca9fda1b6e
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 36235e305037c0bbf20093327e2a0ff21b3de809
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333699"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963668"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -166,6 +166,9 @@ Wenn Sie nicht die Option `ResourcesPath` verwenden, befindet sich die *RESX*-Da
 
 Das [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1)-Attribut stellt den Stammnamespace einer Assembly bereit, wenn der Stammnamespace einer Assembly sich vom Assemblynamen unterscheidet. 
 
+> [!WARNING]
+> Dies kann vorkommen, wenn der Name eines Projekts kein gültiger .NET-Bezeichner ist. Beispielsweise verwendet `my-project-name.csproj` den Stammnamespace `my_project_name` und den Assemblynamen `my-project-name`, der zu diesem Fehler führt. 
+
 Wenn der Stammnamespace einer Assembly sich vom Assemblynamen unterscheidet, dann geschieht Folgendes:
 
 * Die Lokalisierung funktioniert standardmäßig nicht.
@@ -197,7 +200,7 @@ Wenn Sie beispielsweise den Kulturkennzeichner „.fr“ entfernen und die Kultu
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Erstellen von Ressourcendateien mit Visual Studio
 
-Wenn Sie eine Ressourcendatei in Visual Studio erstellen, ohne eine Kultur im Dateinamen (z.B. *Welcome.resx*) festzulegen, erstellt Visual Studio eine C#-Klasse mit einer Eigenschaft für jede Zeichenfolge. Das ist in der Regel nicht das, was Sie mit ASP.NET Core erreichen wollen. In der Regel gibt es keine Standard-*RESX*-Ressourcendatei (eine *RESX*-Datei ohne den Kulturnamen). Es wird empfohlen, dass Sie eine *RESX*-Datei mit einem Kulturnamen erstellen (z.B. *Welcome.fr.resx*). Wenn Sie eine *RESX*-Datei mit einem Kulturnamen erstellen, erstellt Visual Studio keine Klassendatei. Es wird davon ausgegangen, dass viele Entwickler keine Ressourcendatei in einer Standardsprache erstellen.
+Wenn Sie eine Ressourcendatei in Visual Studio erstellen, ohne eine Kultur im Dateinamen (z.B. *Welcome.resx*) festzulegen, erstellt Visual Studio eine C#-Klasse mit einer Eigenschaft für jede Zeichenfolge. Das ist in der Regel nicht das, was Sie mit ASP.NET Core erreichen wollen. In der Regel gibt es keine Standard-*RESX*-Ressourcendatei (eine *RESX*-Datei ohne den Kulturnamen). Es wird empfohlen, dass Sie eine *RESX*-Datei mit einem Kulturnamen erstellen (z.B. *Welcome.fr.resx*). Wenn Sie eine *RESX*-Datei mit einem Kulturnamen erstellen, erstellt Visual Studio keine Klassendatei.
 
 ### <a name="add-other-cultures"></a>Hinzufügen von anderen Kulturen
 

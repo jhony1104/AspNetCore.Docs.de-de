@@ -4,22 +4,24 @@ author: isaac2004
 description: Informationen zu den neuen Features in ASP.NET Core 2.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 359f961db768b9048427c8ab296ee3e035879408
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: a45ba44fb7911a21927a4a996c0d6fa9eb776357
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086394"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963183"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
 
 In diesem Artikel werden die wichtigsten Änderungen in ASP.NET Core 2.1 hervorgehoben und Links zu relevanter Dokumentation bereitgestellt.
 
-## <a name="signalr"></a>SignalR
+## SignalR
 
-SignalR wurde für ASP.NET Core 2.1 umgeschrieben. ASP.NET Core SignalR umfasst eine Reihe von Verbesserungen:
+SignalR wurde für ASP.NET Core 2.1 umgeschrieben. ASP.NET Core SignalR bietet eine Reihe von Verbesserungen:
 
 * Ein vereinfachtes Modell für horizontale Skalierung.
 * Einen neuen JavaScript-Client ohne jQuery-Abhängigkeit.
@@ -81,7 +83,7 @@ ASP.NET Core stellt APIs und Vorlagen für die Erfüllung einiger der Anforderun
 
 Es wurde ein neues Paket eingeführt, durch das die Testerstellung und -ausführung optimiert wird. Das Paket [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) behandelt folgende Aufgaben:
 
-* Es kopiert die Abhängigkeitsdatei (*\*.deps*) aus der getesteten App in den Ordner *bin* des Testprojekts.
+* Es kopiert die Abhängigkeitsdatei ( *\*.deps*) aus der getesteten App in den Ordner *bin* des Testprojekts.
 * Es legt das Inhaltsstammelement auf das Projektstammelement der App fest, damit statische Dateien und Seiten/Ansichten bei der Ausführung des Tests gefunden werden.
 * Es stellt die Klasse [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) zur Optimierung des Bootstrappings der getesteten App mit [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) bereit.
 

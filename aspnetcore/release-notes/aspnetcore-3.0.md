@@ -4,22 +4,25 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/31/2019
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 8c53d8a9fa222ca40f26dc713ec3b70ddde76539
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: c3dde383507ec919f82b5268ddbf23911c3d24f8
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416124"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963120"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
 In diesem Artikel werden die wichtigsten Änderungen in ASP.NET Core 3.0 aufgezeigt und Links zur relevanten Dokumentation bereitgestellt.
 
-## <a name="blazor"></a>Blazor
+## Blazor
 
-Blazor ist ein Framework in ASP.NET Core zum Erstellen von interaktiven clientseitigen Webbenutzeroberflächen mit .NET:
+Blazor ist ein Framework in ASP.NET Core zum Erstellen von interaktiven clientseitigen Webbenutzeroberflächen mit .NET:
 
 * Erstellen Sie umfassende interaktive Benutzeroberflächen mit C# anstatt mit JavaScript.
 * Gemeinsames Verwenden von server- und clientseitiger App-Logik, die in .NET geschrieben wurde.
@@ -37,19 +40,19 @@ Vom Blazor-Framework unterstützte Szenarien:
 
 Weitere Informationen finden Sie unter <xref:blazor/index>.
 
-### <a name="blazor-server"></a>Blazor Server
+### <a name="opno-locblazor-server"></a>Blazor Server
 
 Blazor entkoppelt die Komponentenrenderinglogik von Aktualisierungen der Benutzeroberfläche. Blazor Server bietet Unterstützung zum Hosten von Razor-Komponenten in einer ASP.NET Core-App auf dem Server. Aktualisierungen der Benutzeroberfläche werden über eine SignalR-Verbindung verarbeitet. Blazor Server wird in ASP.NET Core 3.0 unterstützt.
 
-### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly (Vorschau)
+### <a name="opno-locblazor-webassembly-preview"></a>Blazor WebAssembly (Vorschau)
 
-Blazor-Apps können auch mit einer WebAssembly-basierten .NET-Runtime direkt im Browser ausgeführt werden. Blazor WebAssembly befindet sich in der Vorschau und wird in ASP.NET Core 3.0 *nicht* unterstützt. Blazor WebAssembly wird in einer zukünftigen Version von ASP.NET Core unterstützt.
+Blazor-Apps können auch mit einer WebAssembly-basierten .NET-Runtime direkt im Browser ausgeführt werden. Blazor WebAssembly befindet sich in der Vorschau und wird in ASP.NET Core 3.0 *nicht* unterstützt. Blazor WebAssembly wird in einem zukünftigen Release von ASP.NET Core unterstützt.
 
 ### <a name="razor-components"></a>Razor-Komponenten
 
-Blazor-Apps sind auf Komponenten aufgebaut. Komponenten sind eigenständige Elemente einer Benutzeroberfläche, z. B. eine Seite, ein Dialogfeld oder ein Formular. Komponenten sind normale .NET-Klassen, die die Renderinglogik für die Benutzeroberfläche sowie clientseitige Ereignishandler definieren. Damit können Sie umfangreiche interaktive Web-Apps ohne JavaScript erstellen.
+Blazor-Apps setzen sich aus Komponenten zusammen. Komponenten sind eigenständige Elemente einer Benutzeroberfläche, z. B. eine Seite, ein Dialogfeld oder ein Formular. Komponenten sind normale .NET-Klassen, die die Renderinglogik für die Benutzeroberfläche sowie clientseitige Ereignishandler definieren. Damit können Sie umfangreiche interaktive Web-Apps ohne JavaScript erstellen.
 
-Komponenten in Razor werden üblicherweise mit der Razor-Syntax erstellt, einer natürlichen Mischung aus HTML und C#. Razor-Komponenten ähneln Razor Pages und MVC-Ansichten dahingehend, dass sie ebenfalls Razor verwenden. Im Gegensatz zu Pages und Ansichten, die auf einem Anforderung/Antwort-Modell basieren, werden Komponenten speziell für die Verarbeitung der Benutzeroberflächengestaltung verwendet.
+Komponenten in Blazor werden üblicherweise mit der Razor-Syntax erstellt, einer natürlichen Mischung aus HTML und C#. Razor-Komponenten ähneln Razor Pages und MVC-Ansichten dahingehend, dass sie ebenfalls Razor verwenden. Im Gegensatz zu Pages und Ansichten, die auf einem Anforderung/Antwort-Modell basieren, werden Komponenten speziell für die Verarbeitung der Benutzeroberflächengestaltung verwendet.
 
 ## <a name="grpc"></a>gRPC
 
@@ -76,9 +79,9 @@ Die gRPC-Funktionalität in ASP.NET Core 3.0 umfasst Folgendes:
 
 Weitere Informationen finden Sie unter <xref:grpc/index>.
 
-## <a name="signalr"></a>SignalR
+## SignalR
 
-Anleitungen zur Migration finden Sie unter [Aktualisieren von SignalR-Code](xref:migration/22-to-30#signalr). SignalR verwendet jetzt `System.Text.Json`, um JSON-Nachrichten zu serialisieren bzw. zu deserialisieren. Anleitungen zum Wiederherstellen des `Newtonsoft.Json`-basierten Serialisierungsmoduls finden Sie unter [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) (Wechseln zu Newtonsoft.Json).
+Anweisungen zur Migration finden Sie unter [Aktualisieren von SignalR-Code](xref:migration/22-to-30#signalr). SignalR verwendet jetzt `System.Text.Json`, um JSON-Nachrichten zu serialisieren bzw. zu deserialisieren. Anleitungen zum Wiederherstellen des `Newtonsoft.Json`-basierten Serialisierungsmoduls finden Sie unter [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) (Wechseln zu Newtonsoft.Json).
 
 In den JavaScript- und .NET-Clients für SignalR wurde Unterstützung für eine automatische erneute Verbindungsherstellung hinzugefügt. Standardmäßig versucht der Client sofort, die Verbindung wiederherzustellen, und wiederholt den Versuch nötigenfalls nach 2, 10 und 30 Sekunden. Wenn der Client die Verbindung erfolgreich wiederherstellt, erhält er eine neue Verbindungs-ID. Die automatische erneute Herstellung einer Verbindung kann optional aktiviert werden:
 
@@ -105,7 +108,7 @@ Wenn die Verbindung nicht wiederhergestellt werden kann, passiert nach dem letzt
 
 Aktualisieren Sie die App-Benutzeroberfläche während der Verbindungsversuche, um den Benutzer darüber zu informieren, dass versucht wird, erneut eine Verbindung herzustellen.
 
-Um bei einer unterbrochenen Verbindung Feedback auf der Benutzeroberfläche bereitstellen zu können, wurde die SignalR-Client-API erweitert und umfasst jetzt die folgenden Ereignishandler:
+Um bei einer unterbrochenen Verbindung Feedback auf der Benutzeroberfläche bereitstellen zu können, wurde die SignalR-Client-API um die folgenden Ereignishandler ergänzt:
 
 * `onreconnecting`:  Bietet Entwicklern die Möglichkeit, die Benutzeroberfläche zu deaktivieren oder Benutzer darüber zu informieren, dass die App offline ist.
 * `onreconnected`: Bietet Entwicklern die Möglichkeit, die Benutzeroberfläche zu aktualisieren, sobald die Verbindung wiederhergestellt wurde.
@@ -255,7 +258,7 @@ app.UseRouting(routes =>
 });
 ```
 
-In ASP.NET Core 3.0 durch SignalR hinzugefügt:
+In ASP.NET Core 3.0 SignalR wurde Folgendes hinzugefügt:
 
 Streaming vom Client zum Server. Mit dem Streaming vom Client zum Server können serverseitige Methoden Instanzen von `IAsyncEnumerable<T>` oder `ChannelReader<T>` akzeptieren. Im folgenden C#-Beispiel empfängt die `UploadStream`-Methode im Hub einen Zeichenfolgenstream vom Client:
 

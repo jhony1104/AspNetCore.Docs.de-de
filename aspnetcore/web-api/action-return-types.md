@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: web-api/action-return-types
-ms.openlocfilehash: 991265810324d6339ebf346ff9aa14c479112af9
-ms.sourcegitcommit: fa61d882be9d0c48bd681f2efcb97e05522051d0
+ms.openlocfilehash: c409170a24225e160c1c53e7294590589e114f7f
+ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71205764"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74116086"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
 
@@ -50,7 +50,7 @@ Wenn bekannte Bedingungen bei einer Aktion berücksichtig werden müssen, werden
 
 ### <a name="return-ienumerablet-or-iasyncenumerablet"></a>Rückgabe von IEnumerable\<T> oder IAsyncEnumerable\<T>
 
-Wenn eine Aktion in ASP.NET Core 2.2 und früher <xref:System.Collections.Generic.IAsyncEnumerable%601> zurückgibt, führt dies zu einer synchronen Sammlungsiteration durch das Serialisierungsprogramm. Das Ergebnis sind die Blockierung von Aufrufen und die potenzielle Außerkraftsetzung des Threadpools. Stellen Sie sich zur Veranschaulichung vor, dass der Entity Framework-Core (EF) für die Datenzugriffsanforderungen der Web-API verwendet wird. Der Rückgabetyp der folgenden Aktion wird während der Serialisierung synchron aufgezählt:
+Wenn eine Aktion in ASP.NET Core 2.2 und früher <xref:System.Collections.Generic.IEnumerable%601> zurückgibt, führt dies zu einer synchronen Sammlungsiteration durch das Serialisierungsprogramm. Das Ergebnis sind die Blockierung von Aufrufen und die potenzielle Außerkraftsetzung des Threadpools. Stellen Sie sich zur Veranschaulichung vor, dass der Entity Framework-Core (EF) für die Datenzugriffsanforderungen der Web-API verwendet wird. Der Rückgabetyp der folgenden Aktion wird während der Serialisierung synchron aufgezählt:
 
 ```csharp
 public IEnumerable<Product> GetOnSaleProducts() =>

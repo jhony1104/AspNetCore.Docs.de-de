@@ -5,14 +5,16 @@ description: Ansätze zum Erhalten des Sitzungs- und App-Zustands zwischen Sitzu
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/12/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: ccb37a422d972ab9113bb4115473d054282dac87
-ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
+ms.openlocfilehash: b80b1e72eb2f25e9c9fe07a0c33c14ecf5ae05aa
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71278691"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963479"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>Sitzungs- und App-Zustand in ASP.NET Core
 
@@ -52,7 +54,7 @@ Beachten Sie die [Europäische Datenschutz-Grundverordnung (DSGVO)](https://ec.e
 Der Sitzungszustand ist ein Szenario in ASP.NET Core zum Speichern von Benutzerdaten, wenn der Benutzer eine Web-App verwendet. Der Sitzungszustand verwendet einen von der App verwalteten Speicher, um Daten für mehrere Anforderungen eines Clients beizubehalten. Die Sitzungsdaten werden in einem Cache zwischengespeichert und sind kurzlebig. Die Website sollte auch ohne die Sitzungsdaten weiterhin funktionieren. Kritische Anwendungsdaten sollten in der Benutzerdatenbank gespeichert und nur zur Leistungsoptimierung in der Sitzung zwischengespeichert werden.
 
 > [!NOTE]
-> Sitzungen werden in [SignalR](xref:signalr/index)-Apps nicht unterstützt, weil ein [SignalR-Hub](xref:signalr/hubs) unabhängig vom HTTP-Kontext ausgeführt werden kann. Das kann z.B. passieren, wenn eine lange Abrufanforderung von einem Hub länger als die Lebensdauer des HTTP-Kontexts einer Anforderung offen gehalten wird.
+> Sitzungen werden in [SignalRSignalR-Apps nicht unterstützt, da ein ](xref:signalr/index)[-Hub](xref:signalr/hubs) unabhängig vom HTTP-Kontext ausgeführt werden kann. Das kann z.B. passieren, wenn eine lange Abrufanforderung von einem Hub länger als die Lebensdauer des HTTP-Kontexts einer Anforderung offen gehalten wird.
 
 ASP.NET Core verwaltet den Sitzungszustand, indem ein Cookie an den Client übergeben wird, das die Sitzungs-ID enthält, die mit jeder Anforderung an den Server gesendet wird. Die App verwendet die Sitzungs-ID, um die Sitzungsdaten abzurufen.
 
@@ -316,7 +318,7 @@ Verwenden Sie [Dependency Injection](xref:fundamentals/dependency-injection), um
 
   Es wird empfohlen, nach Fehlern zu suchen, indem Sie `await feature.Session.CommitAsync();` über App-Code aufrufen, wenn die App mit dem Schreiben in die Sitzung fertig ist. `CommitAsync` löst eine Ausnahme aus, wenn der Sicherungsspeicher nicht verfügbar ist. Wenn `CommitAsync` fehlschlägt, kann die App die Ausnahme verarbeiten. `LoadAsync` wird unter den gleichen Bedingungen ausgelöst, wenn der Sicherungsspeicher nicht verfügbar ist.
   
-## <a name="signalr-and-session-state"></a>SignalR und Sitzungszustand
+## <a name="opno-locsignalr-and-session-state"></a>SignalR und Sitzungszustand
 
 SignalR-Apps dürfen nicht den Sitzungszustand verwenden, um Informationen zu speichern. SignalR-Apps können Informationen je nach Verbindungszustand in `Context.Items` im Hub speichern. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 

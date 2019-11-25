@@ -5,16 +5,16 @@ description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/21/2019
 no-loc:
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 86ba5b1aec230d78c1a0e1709187e129df6cb4cc
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 9b9cf1d57d61c333c485f23b7ab952c66814d2aa
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963728"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317470"
 ---
 # <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core SignalR unterstützten Plattformen
 
@@ -24,7 +24,7 @@ SignalR für ASP.net Core unterstützt jede Server Plattform, die ASP.net Core u
 
 ## <a name="javascript-client"></a>JavaScript-Client
 
-Der [JavaScript-Client](https://www.npmjs.com/package/@aspnet/signalr) wird auf nodejs 8 und höheren Versionen und den folgenden Browsern ausgeführt:
+Der [JavaScript-Client](xref:signalr/javascript-client) wird auf nodejs 8 und höheren Versionen und den folgenden Browsern ausgeführt:
 
 | Browser                         | Version         |
 | ------------------------------- | --------------- |
@@ -38,13 +38,13 @@ Der [JavaScript-Client](https://www.npmjs.com/package/@aspnet/signalr) wird auf 
 
 ## <a name="net-client"></a>.NET-Client
 
-Der [.NET-Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) wird auf jeder von ASP.net Core unterstützten Plattform ausgeführt. [Xamarin-Entwickler können](https://github.com/aspnet/Announcements/issues/305) z. b. SignalRzum Entwickeln von Android-Apps mit xamarin. Android 8.4.0.1 und höher und IOS-Apps verwenden, die xamarin. IOS 11.14.0.4 und höher verwenden.
+Der [.NET-Client](xref:signalr/dotnet-client) wird auf jeder von ASP.net Core unterstützten Plattform ausgeführt. [Xamarin-Entwickler können](https://github.com/aspnet/Announcements/issues/305) z. b. SignalRzum Entwickeln von Android-Apps mit xamarin. Android 8.4.0.1 und höher und IOS-Apps verwenden, die xamarin. IOS 11.14.0.4 und höher verwenden.
 
 Wenn der Server IIS ausführt, erfordert der websockets-Transport IIS 8,0 oder höher unter Windows Server 2012 oder höher. Andere Transporte werden auf allen Plattformen unterstützt.
 
 ## <a name="java-client"></a>Java-Client
 
-Der [Java-Client](https://search.maven.org/artifact/com.microsoft.aspnet/signalr) unterstützt Java 8 und höhere Versionen.
+Der [Java-Client](xref:signalr/java-client) unterstützt Java 8 und höhere Versionen.
 
 ## <a name="unsupported-clients"></a>Nicht unterstützte Clients
 

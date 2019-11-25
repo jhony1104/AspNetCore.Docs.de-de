@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 313d951ccdd45ae1209ffd9612d24738822fbed8
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: b8b1ade4c8c29d34200bf8c0944cff6adec0bb95
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259605"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74288954"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core
 
@@ -155,11 +155,12 @@ Ersetzen Sie in *Models/Student.cs* den Code, den Sie zuvor hinzugefügt haben, 
 
 Durch das `Required`-Attribut werden die Name-Eigenschaften zu Pflichtfeldern. Das `Required`-Attribut ist für nicht auf NULL festlegbare Typen wie Werttypen (DateTime, int, double, float usw.) nicht erforderlich. Typen, die nicht auf NULL festgelegt werden können, werden automatisch als Pflichtfelder behandelt.
 
-Sie können das `Required`-Attribut entfernen und durch einen Parameter mit der mindestens erforderlichen Länge für das `StringLength`-Attribut ersetzen:
+Das `Required`-Attribut muss mit `MinimumLength` verwendet werden, damit die `MinimumLength` erzwungen wird.
 
 ```csharp
 [Display(Name = "Last Name")]
-[StringLength(50, MinimumLength=1)]
+[Required]
+[StringLength(50, MinimumLength=2)]
 public string LastName { get; set; }
 ```
 

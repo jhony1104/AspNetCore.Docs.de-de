@@ -8,8 +8,6 @@
 
 **[Environment-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)**
 
-**[FormActionTagHelper](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
-
 **[Hilfsprogramm für Formulartags](xref:mvc/views/working-with-forms#the-form-tag-helper)**
 
 **[Hilfsprogramm für Formularaktionen](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
@@ -20,13 +18,11 @@
 
 **[Hilfsprogramm für Bezeichnungstags](xref:mvc/views/working-with-forms#the-label-tag-helper)**
 
-**[LinkTagHelper](xref:mvc/views/tag-helpers/builtin-th/link-tag-helper)**
-
-[comment]: **[OptionTagHelper](xref:mvc/views/tag-helpers/builtin-th/option-tag-helper)**
-
-**[ScriptTagHelper](xref:mvc/views/tag-helpers/builtin-th/script-tag-helper)**
+**[Hilfsprogramm für Linktags](xref:mvc/views/tag-helpers/builtin-th/link-tag-helper)**
 
 **[Hilfsprogramm für Teiltags](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)**
+
+**[Hilfsprogramm für Skripttags](xref:mvc/views/tag-helpers/builtin-th/script-tag-helper)**
 
 **[Hilfsprogramm für Auswahltags](xref:mvc/views/working-with-forms#the-select-tag-helper)**
 

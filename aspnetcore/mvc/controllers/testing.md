@@ -5,14 +5,14 @@ description: Informationen zum Testen von Controllerlogik in ASP.NET Core mit Mo
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/22/2019
+ms.date: 11/07/2019
 uid: mvc/controllers/testing
-ms.openlocfilehash: 3b5e60bbc76030b6d08bcb2f3aa1f6eca3c9bb05
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: 7f4fcb1a5d6e9959c751ebe24e41b39ee05a5819
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71199094"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799499"
 ---
 # <a name="test-controller-logic-in-aspnet-core"></a>Testen von Controllerlogik in ASP.NET Core
 
@@ -347,4 +347,6 @@ Für eine gültige Sitzungs-`id` bestätigt der letzte Test Folgendes:
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:test/integration-tests>
-* [Erstellen und Ausführen von Komponententests mit Visual Studio](/visualstudio/test/unit-test-your-code).
+* [Erstellen und Ausführen von Komponententests mit Visual Studio](/visualstudio/test/unit-test-your-code)
+* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; stark typisierte Bibliothek für Tests mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
+

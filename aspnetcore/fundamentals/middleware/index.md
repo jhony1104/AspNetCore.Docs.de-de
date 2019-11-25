@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/08/2019
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 8f5c3aabf17e78ae9675048602317c54f08e82a7
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: d678f3d1f6ca10e486543a2965506236e4e61b82
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259812"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239847"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -57,13 +57,24 @@ Wenn ein keine Anforderung an den nächsten Delegaten übergibt, wird dies als *
 >
 > <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted*> ist ein nützlicher Hinweis, der angibt, ob Header gesendet wurden oder ob in den Text geschrieben wurde.
 
-## <a name="order"></a>Auftrag
+<a name="order"></a>
 
-Die Reihenfolge, in der Middlewarekomponenten in der `Startup.Configure`-Methode hinzugefügt werden, legt die Reihenfolge fest, in der die Middlewarekomponenten bei Anforderungen aufgerufen werden. Bei Antworten gilt die umgekehrte Reihenfolge. Die Reihenfolge trägt wesentlich zur Sicherheit, Leistung und Funktionalität bei.
+## <a name="middleware-order"></a>Middlewarereihenfolge
 
-Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allgemeine App-Szenarien hinzu:
+Die Reihenfolge, in der Middlewarekomponenten in der `Startup.Configure`-Methode hinzugefügt werden, legt die Reihenfolge fest, in der die Middlewarekomponenten bei Anforderungen aufgerufen werden. Bei Antworten gilt die umgekehrte Reihenfolge. Die Reihenfolge ist in Bezug auf Sicherheit, Leistung und Funktionalität **entscheidend**.
+
+Die folgende `Startup.Configure`-Methode fügt sicherheitsbezogene Middlewarekomponenten in der empfohlenen Reihenfolge hinzu:
 
 ::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](index/snapshot/StartupAll3.cs?name=snippet)]
+
+Für den Code oben gilt:
+
+* Middleware, die beim Erstellen einer neuen Web-App mit [einzelnen Benutzerkonten](xref:security/authentication/identity) nicht hinzugefügt wird, wird auskommentiert.
+* Nicht jede Middleware muss in genau dieser Reihenfolge vorliegen, aber für viele Middlewarekomponenten ist dies erforderlich. Beispielsweise müssen `UseCors`, `UseAuthentication` und `UseAuthorization` in der gezeigten Reihenfolge vorliegen.
+
+Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allgemeine App-Szenarien hinzu:
 
 1. Ausnahme-/Fehlerbehandlung
    * Bei Ausführung der App in der Entwicklungsumgebung:
@@ -150,6 +161,15 @@ public void Configure(IApplicationBuilder app)
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
+
+[!code-csharp[](index/snapshot/Startup22.cs?name=snippet)]
+
+Für den Code oben gilt:
+
+* Middleware, die beim Erstellen einer neuen Web-App mit [einzelnen Benutzerkonten](xref:security/authentication/identity) nicht hinzugefügt wird, wird auskommentiert.
+* Nicht jede Middleware muss in genau dieser Reihenfolge vorliegen, aber für viele Middlewarekomponenten ist dies erforderlich. Beispielsweise müssen `UseCors` und `UseAuthentication` in der gezeigten Reihenfolge vorliegen.
+
+Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allgemeine App-Szenarien hinzu:
 
 1. Ausnahme-/Fehlerbehandlung
    * Bei Ausführung der App in der Entwicklungsumgebung:

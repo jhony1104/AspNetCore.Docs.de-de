@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Probleme mit der Lokalisierung von ASP.NET Co
 ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 98e06a92af0b6c045095ac803196bf4b1f25e5c5
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: 229e274a22e170d984a16d3b1ee64ebc38c4ef77
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289014"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963336"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Problembehandlung bei der ASP.NET Core-Lokalisierung
 
@@ -100,6 +100,9 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 ## <a name="root-namespace-issues"></a>Probleme mit dem Stammnamespace
 
 Wenn der Stammnamespace einer Assembly sich vom Assemblynamen unterscheidet, funktioniert die Lokalisierung standardmäßig nicht. Um dieses Problem zu vermeiden, verwenden Sie [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1), das [hier](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming) im Detail beschrieben wird.
+
+> [!WARNING]
+> Dies kann vorkommen, wenn der Name eines Projekts kein gültiger .NET-Bezeichner ist. Beispielsweise verwendet `my-project-name.csproj` den Stammnamespace `my_project_name` und den Assemblynamen `my-project-name`, der zu diesem Fehler führt. 
 
 ## <a name="resources--build-action"></a>Ressourcen und Buildaktion
 

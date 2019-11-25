@@ -1,20 +1,22 @@
 ---
 title: Erstellen Ihrer ersten Blazor-App
 author: guardrex
-description: Erstellen Sie Schritt-für-Schritt eine Blazor-App.
+description: Erstellen Sie Schritt für Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/31/2019
+no-loc:
+- Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: cc7caa1ee01e0282024895ab35c5b9933b1504d0
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: 646e14060b88fc2a0fefc2f7a5ebb1c15ac39b79
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416175"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963712"
 ---
-# <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
+# <a name="build-your-first-opno-locblazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
@@ -59,7 +61,7 @@ Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponent
 
 1. Fügen Sie die `Index`-Komponente der `Counter`-Komponente der App durch Hinzufügen eines `<Counter />`-Elements zur `Index`-Komponente (*Index.razor*) hinzu.
 
-   Wenn Sie für diese Oberfläche Blazor WebAssembly verwenden, verwendet die `Index`-Komponente eine `SurveyPrompt`-Komponente. Ersetzen Sie das `<SurveyPrompt>`-Element durch ein `<Counter />`-Element. Wenn Sie für diese Oberfläche eine Blazor Server-App verwenden, fügen Sie das `<Counter />`-Element zur `Index`-Komponente hinzu:
+   Wenn Sie für diese Oberfläche Blazor WebAssembly verwenden, verwendet die `Index`-Komponente eine `SurveyPrompt`-Komponente. Ersetzen Sie das `<SurveyPrompt>`-Element durch ein `<Counter />`-Element. Wenn Sie für diese Oberfläche eine Blazor Server-App verwenden, fügen Sie der `Index`-Komponente das `<Counter />`-Element hinzu:
 
    *Pages/Index.razor*:
 
@@ -99,7 +101,7 @@ Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
-### <a name="blazor-server-experience"></a>Verwendung von Blazor Server
+### <a name="opno-locblazor-server-experience"></a>Blazor Server-Benutzererfahrung
 
 Wenn Sie mit einer Blazor Server-App arbeiten, wird der `WeatherForecastService`-Dienst in `Startup.ConfigureServices` als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert. Eine Instanz des Diensts steht überall in der App mittels [Abhängigkeitsinjektion (Dependency Injection, DI)](xref:fundamentals/dependency-injection) zur Verfügung:
 
@@ -115,9 +117,9 @@ Die `FetchData`-Komponente verwendet den eingefügten Dienst wie `ForecastServic
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="blazor-webassembly-experience"></a>Verwendung von Blazor WebAssembly
+### <a name="opno-locblazor-webassembly-experience"></a>Blazor WebAssembly-Benutzererfahrung
 
-Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* in den Ordner *wwwroot/sample-data* abzurufen.
+Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* im Ordner *wwwroot/sample-data* abzurufen.
 
 *Pages/FetchData.razor*:
 

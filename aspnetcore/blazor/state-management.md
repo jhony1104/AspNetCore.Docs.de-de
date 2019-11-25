@@ -9,12 +9,12 @@ ms.date: 10/15/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: 408d44a3f2e81a165e8b786c6d2efc9329082e30
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 38ee5fccdf476f08c9f39d01b53c81b48eea04bf
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962829"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317184"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.net Core Blazor Zustands Verwaltung
 
@@ -56,8 +56,8 @@ Im Allgemeinen gilt: die Zustands übergreifende Zustands Verwaltung gilt für S
 
 Die Daten Persistenz ist in der Regel nur für einen hochwertigen Status erforderlich, den Benutzer für die Erstellung aufgewendet haben. In den folgenden Beispielen spart die Beibehaltung des Zustands entweder Zeit oder Hilfsmittel in kommerziellen Aktivitäten:
 
-* Mehreren Schritten Webform &ndash; ist es zeitaufwändig, dass ein Benutzer die Daten für mehrere abgeschlossene Schritte eines mehrstufigen Prozesses erneut eingibt, wenn der Status verloren geht. Ein Benutzer verliert den Zustand in diesem Szenario, wenn er vom mehrstufigen Formular weg navigiert und später zum Formular zurückkehrt.
-* Einkaufswagen &ndash; alle kommerziell wichtigen Komponenten einer APP, die einen potenziellen Umsatz darstellen, können verwaltet werden. Ein Benutzer, der seinen Zustand verliert und somit seinen Warenkorb, kann weniger Produkte oder Dienste kaufen, wenn er zu einem späteren Zeitpunkt zur Website zurückkehrt.
+* Mehrstufige Webform &ndash; es für einen Benutzer zeitaufwändig ist, Daten für mehrere abgeschlossene Schritte eines mehrstufigen Prozesses erneut einzugeben, wenn deren Status verloren geht. Ein Benutzer verliert den Zustand in diesem Szenario, wenn er vom mehrstufigen Formular weg navigiert und später zum Formular zurückkehrt.
+* Einkaufswagen &ndash; eine kommerziell wichtige Komponente einer APP, die einen potenziellen Umsatz darstellt. Ein Benutzer, der seinen Zustand verliert und somit seinen Warenkorb, kann weniger Produkte oder Dienste kaufen, wenn er zu einem späteren Zeitpunkt zur Website zurückkehrt.
 
 Es ist in der Regel nicht notwendig, den einfach neu erstellten Zustand beizubehalten, z. b. den Benutzernamen, der in ein Anmelde Dialogfeld eingegeben wurde, das nicht übermittelt wurde.
 
@@ -101,14 +101,14 @@ Weitere Informationen zum Definieren von URL-Mustern mit der `@page`-Direktive f
 
 ### <a name="client-side-in-the-browser"></a>Client seitig im Browser
 
-Bei vorübergehenden Daten, die der Benutzer aktiv erstellt, sind die `localStorage`-und `sessionStorage`-Auflistungen des Browsers ein gängiger Sicherungs Speicher. Die APP muss den gespeicherten Zustand nicht verwalten oder löschen, wenn die Verbindung abgebrochen wird. Dies ist ein Vorteil gegenüber Server seitigem Speicher.
+Bei vorübergehenden Daten, die der Benutzer aktiv erstellt, sind die `localStorage`-und `sessionStorage` Sammlungen des Browsers ein gängiger Sicherungs Speicher. Die APP muss den gespeicherten Zustand nicht verwalten oder löschen, wenn die Verbindung abgebrochen wird. Dies ist ein Vorteil gegenüber Server seitigem Speicher.
 
 > [!NOTE]
 > "Client seitig" bezieht sich in diesem Abschnitt auf Client seitige Szenarios im Browser, nicht auf das [Blazor Webassembly-Hostingmodell](xref:blazor/hosting-models#blazor-webassembly). `localStorage` und `sessionStorage` können in Blazor Webassembly-Apps verwendet werden, jedoch nur durch das Schreiben von benutzerdefiniertem Code oder das Verwenden eines Drittanbieter Pakets.
 
 `localStorage` und `sessionStorage` unterscheiden sich wie folgt:
 
-* `localStorage` ist auf den Browser des Benutzers festgelegt. Wenn der Benutzer die Seite erneut lädt oder den Browser schließt und erneut öffnet, wird der Zustand beibehalten. Wenn der Benutzer mehrere Browser Registerkarten öffnet, wird der Status auf den Registerkarten freigegeben. Daten bleiben in `localStorage` bestehen, bis Sie explizit gelöscht werden.
+* `localStorage` ist auf den Browser des Benutzers beschränkt. Wenn der Benutzer die Seite erneut lädt oder den Browser schließt und erneut öffnet, wird der Zustand beibehalten. Wenn der Benutzer mehrere Browser Registerkarten öffnet, wird der Status auf den Registerkarten freigegeben. Daten bleiben in `localStorage` bestehen, bis Sie explizit gelöscht werden.
 * `sessionStorage` ist auf die Registerkarte Browser des Benutzers festgelegt. Wenn der Benutzer die Registerkarte erneut lädt, bleibt der Zustand erhalten. Wenn der Benutzer die Registerkarte oder den Browser schließt, geht der Status verloren. Wenn der Benutzer mehrere Browser Registerkarten öffnet, verfügt jede Registerkarte über eine eigene unabhängige Version der Daten.
 
 Im Allgemeinen ist `sessionStorage` sicherer zu verwenden. `sessionStorage` vermeidet das Risiko, dass ein Benutzer mehrere Registerkarten öffnet und auf Folgendes stößt:
@@ -127,7 +127,7 @@ Einschränkungen für die Verwendung von Browser Speicher:
 
 ## <a name="third-party-browser-storage-solutions"></a>Browser Speicherlösungen von Drittanbietern
 
-Nuget-Pakete von Drittanbietern bieten APIs zum Arbeiten mit `localStorage` und `sessionStorage`.
+Nuget-Pakete von Drittanbietern stellen APIs zum Arbeiten mit `localStorage` und `sessionStorage`bereit.
 
 Es lohnt sich zu erwägen, ein Paket auszuwählen, das den [Datenschutz](xref:security/data-protection/introduction)ASP.net Core transparent verwendet. ASP.net Core Datenschutz verschlüsselt gespeicherte Daten und verringert das potenzielle Risiko der Manipulation gespeicherter Daten. Wenn JSON-serialisierte Daten als Klartext gespeichert werden, können Benutzer die Daten mithilfe von Browser Entwicklertools anzeigen und auch die gespeicherten Daten ändern. Das Sichern von Daten ist nicht immer problematisch, da die Daten möglicherweise trivial sind. Beispielsweise ist das Lesen oder Ändern der gespeicherten Farbe eines UI-Elements für den Benutzer oder die Organisation kein erhebliches Sicherheitsrisiko. Vermeiden Sie es Benutzern, *sensible Daten*zu überprüfen oder zu manipulieren.
 
@@ -136,11 +136,11 @@ Es lohnt sich zu erwägen, ein Paket auszuwählen, das den [Datenschutz](xref:se
 Ein Beispiel für ein nuget-Paket, das den [Schutz von Daten](xref:security/data-protection/introduction) für `localStorage` und `sessionStorage` bietet, ist [Microsoft. aspnetcore. protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).
 
 > [!WARNING]
-> `Microsoft.AspNetCore.ProtectedBrowserStorage` ist ein nicht unterstütztes experimentelles Paket, das zu diesem Zeitpunkt nicht für die Produktion geeignet ist.
+> `Microsoft.AspNetCore.ProtectedBrowserStorage` ist ein nicht unterstütztes experimentelles Paket, das zurzeit für die Verwendung in der Produktion ungeeignet ist.
 
 ### <a name="installation"></a>Installation
 
-So installieren Sie das Paket "`Microsoft.AspNetCore.ProtectedBrowserStorage`":
+So installieren Sie das `Microsoft.AspNetCore.ProtectedBrowserStorage` Paket:
 
 1. Fügen Sie im Blazor Server-App-Projekt einen Paket Verweis auf [Microsoft. aspnetcore. protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)hinzu.
 1. Fügen Sie im HTML-Code der obersten Ebene (z. b. in der Datei *pages/_Host. cshtml* in der Standard Projektvorlage) das folgende `<script>` Tag hinzu:
@@ -149,7 +149,7 @@ So installieren Sie das Paket "`Microsoft.AspNetCore.ProtectedBrowserStorage`":
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
    ```
 
-1. Nennen Sie in der `Startup.ConfigureServices`-Methode `AddProtectedBrowserStorage`, um der Dienst Sammlung `localStorage`-und `sessionStorage`-Dienste hinzuzufügen:
+1. Nennen Sie in der `Startup.ConfigureServices`-Methode `AddProtectedBrowserStorage`, um der Dienst Sammlung `localStorage` und `sessionStorage` Dienste hinzuzufügen:
 
    ```csharp
    services.AddProtectedBrowserStorage();
@@ -157,7 +157,7 @@ So installieren Sie das Paket "`Microsoft.AspNetCore.ProtectedBrowserStorage`":
 
 ### <a name="save-and-load-data-within-a-component"></a>Speichern und Laden von Daten in einer Komponente
 
-Verwenden Sie für jede Komponente, die das Laden oder Speichern von Daten im Browser Speicher erfordert, [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) , um eine Instanz von einem der folgenden Komponenten einzufügen:
+Verwenden Sie [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) in einer Komponente, die das Laden oder Speichern von Daten in den Browser Speicher erfordert, eine Instanz von einem der folgenden Komponenten:
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -171,7 +171,7 @@ Die Auswahl hängt von dem Sicherungs Speicher ab, den Sie verwenden möchten. I
 
 Die `@using`-Anweisung kann in einer *_Imports. Razor* -Datei statt in der-Komponente abgelegt werden. Durch die Verwendung der Datei " *_Imports. Razor* " wird der Namespace für größere Segmente der APP oder der gesamten App zur Verfügung gestellt.
 
-Um den `currentCount`-Wert in der `Counter`-Komponente der Projektvorlage beizubehalten, ändern Sie die `IncrementCount`-Methode so, dass `ProtectedSessionStore.SetAsync` verwendet wird:
+Um den `currentCount` Wert in der `Counter`-Komponente der Projektvorlage beizubehalten, ändern Sie die `IncrementCount`-Methode so, dass `ProtectedSessionStore.SetAsync`verwendet wird:
 
 ```csharp
 private async Task IncrementCount()
@@ -185,7 +185,7 @@ Bei größeren, realistischeren Apps ist die Speicherung einzelner Felder ein un
 
 Im vorangehenden Codebeispiel werden die `currentCount` Daten als `sessionStorage['count']` im Browser des Benutzers gespeichert. Die Daten werden nicht als Klartext gespeichert, sondern durch ASP.net Core [Datenschutz](xref:security/data-protection/introduction)geschützt. Die verschlüsselten Daten können angezeigt werden, wenn `sessionStorage['count']` in der Entwickler Konsole des Browsers ausgewertet wird.
 
-Um die `currentCount`-Daten wiederherzustellen, wenn der Benutzer später zur `Counter`-Komponente zurückkehrt (auch wenn Sie sich auf einer vollständig neuen Verbindung befinden), verwenden Sie `ProtectedSessionStore.GetAsync`:
+Um die `currentCount` Daten wiederherzustellen, wenn der Benutzer zu einem späteren Zeitpunkt zur `Counter` Komponente zurückkehrt (auch wenn Sie sich in einer vollständig neuen Verbindung befinden), verwenden Sie `ProtectedSessionStore.GetAsync`:
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -194,7 +194,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Wenn die Parameter der Komponente den Navigations Zustand einschließen, wird `ProtectedSessionStore.GetAsync` aufgerufen und das Ergebnis in `OnParametersSetAsync`, nicht `OnInitializedAsync` zugewiesen. `OnInitializedAsync` wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. `OnInitializedAsync` wird später nicht erneut aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf der gleichen Seite bleibt.
+Wenn die Parameter der Komponente den Navigations Zustand einschließen, wenden Sie `ProtectedSessionStore.GetAsync` an, und weisen Sie das Ergebnis in `OnParametersSetAsync`, nicht `OnInitializedAsync`zu. `OnInitializedAsync` wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. `OnInitializedAsync` wird später nicht erneut aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf derselben Seite verbleibt.
 
 > [!WARNING]
 > Die Beispiele in diesem Abschnitt funktionieren nur, wenn für den Server keine vorab Aktivierung aktiviert ist. Wenn die vorab Aktivierung aktiviert ist, wird ein Fehler ähnlich dem folgenden generiert:
@@ -207,7 +207,7 @@ Wenn die Parameter der Komponente den Navigations Zustand einschließen, wird `P
 
 Da der Browser Speicher asynchron ist (auf den über eine Netzwerkverbindung zugegriffen wird), gibt es immer einen Zeitraum, bis die Daten geladen sind und zur Verwendung durch eine Komponente verfügbar sind. Um die besten Ergebnisse zu erzielen, sollten Sie während des Ladens eine Ladezustands Meldung erstellen, anstatt leere oder Standarddaten anzuzeigen.
 
-Ein Ansatz besteht darin, zu überprüfen, ob die Daten `null` (noch geladen) sind oder nicht. In der standardmäßigen `Counter`-Komponente wird die Anzahl in einem `int` gespeichert. Legen Sie `currentCount` NULL-Werte fest, indem Sie dem Typ (`int`) ein Fragezeichen (`?`) hinzufügen:
+Ein Ansatz besteht darin, zu überprüfen, ob die Daten `null` (noch geladen) sind oder nicht. In der Standard `Counter` Komponente wird die Anzahl in einem `int`gespeichert. Legen Sie `currentCount` Nullwerte fest, indem Sie dem Typ (`int`) ein Fragezeichen (`?`) hinzufügen:
 
 ```csharp
 private int? currentCount;
@@ -235,15 +235,25 @@ Während der Vorab Anmeldung:
 * Eine interaktive Verbindung zum Browser des Benutzers ist nicht vorhanden.
 * Der Browser verfügt noch nicht über eine Seite, auf der der JavaScript-Code ausgeführt werden kann.
 
-`localStorage` oder `sessionStorage` ist während der vorab Generierung nicht verfügbar. Wenn die Komponente versucht, mit dem Speicher zu interagieren, wird ein Fehler ähnlich dem folgenden generiert:
+`localStorage` oder `sessionStorage` sind während der vorab Generierung nicht verfügbar. Wenn die Komponente versucht, mit dem Speicher zu interagieren, wird ein Fehler ähnlich dem folgenden generiert:
 
 > JavaScript-Interop-Aufrufe können zu diesem Zeitpunkt nicht ausgegeben werden. Dies liegt daran, dass die Komponente vorab in eine Vorabversion übernommen wird.
 
 Eine Möglichkeit, den Fehler zu beheben, besteht darin, die vorab Generierung zu deaktivieren. Dies ist normalerweise die beste Wahl, wenn die APP den browserbasierten Speicher stark nutzt. Das vorab Rendering erhöht die Komplexität und profitiert von der APP nicht, da die APP keine nützlichen Inhalte vorab bereitstellen kann, bis `localStorage` oder `sessionStorage` verfügbar sind.
 
+::: moniker range=">= aspnetcore-3.1"
+
+Öffnen Sie zum Deaktivieren der vorab Generierung die Datei *pages/_Host. cshtml* , und ändern Sie den `render-mode` des `Component`-taghilfsprogramms in `Server`.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
+
 Um die vorab Generierung zu deaktivieren, öffnen Sie die Datei *pages/_Host. cshtml* , und ändern Sie den Aufrufen in `Html.RenderComponentAsync<App>(RenderMode.Server)`.
 
-Die vorab Generierung ist möglicherweise nützlich für andere Seiten, die nicht `localStorage` oder `sessionStorage` verwenden. Verschieben Sie den Ladevorgang so lange, bis der Browser mit der Verbindung verbunden ist, um die vorab Ausführung zu aktivieren. Im folgenden finden Sie ein Beispiel für das Speichern eines Leistungs Zählers:
+::: moniker-end
+
+Die vorab Generierung ist möglicherweise nützlich für andere Seiten, die `localStorage` oder `sessionStorage`nicht verwenden. Verschieben Sie den Ladevorgang so lange, bis der Browser mit der Verbindung verbunden ist, um die vorab Ausführung zu aktivieren. Im folgenden finden Sie ein Beispiel für das Speichern eines Leistungs Zählers:
 
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -284,7 +294,7 @@ Die vorab Generierung ist möglicherweise nützlich für andere Seiten, die nich
 
 Wenn viele Komponenten auf Browser basiertem Speicher basieren, wird durch erneutes Implementieren des Zustands Anbieter Codes die Code Duplizierung erstellt. Eine Möglichkeit zur Vermeidung von Code Duplizierung besteht darin, eine über *geordnete Zustands Anbieter Komponente* zu erstellen, die die Zustands Anbieter Logik kapselt. Untergeordnete Komponenten können ohne Berücksichtigung des Zustands Persistenzmechanismus mit beibehaltenen Daten arbeiten.
 
-Im folgenden Beispiel einer `CounterStateProvider`-Komponente werden die Counter-Daten persistent gespeichert:
+Im folgenden Beispiel für eine `CounterStateProvider` Komponente werden die Daten des Zählers persistent gespeichert:
 
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -322,9 +332,9 @@ else
 }
 ```
 
-Die Komponente `CounterStateProvider` verarbeitet die Lade Phase, indem ihr untergeordneter Inhalt nicht gerendert wird, bis der Ladevorgang beendet ist.
+Die `CounterStateProvider` Komponente verarbeitet die Lade Phase, indem der untergeordnete Inhalt erst nach Abschluss des Ladens gerendert wird.
 
-Um die Komponente "`CounterStateProvider`" zu verwenden, müssen Sie eine Instanz der Komponente um eine beliebige andere Komponente umschließen, die Zugriff auf den Gegenstand benötigt. Um den Status für alle Komponenten in einer APP zugänglich zu machen, wrappen Sie die Komponente "`CounterStateProvider`" um die `Router` in der Komponente "`App`" ("*app. Razor*"):
+Um die `CounterStateProvider` Komponente zu verwenden, schließen Sie eine Instanz der Komponente in eine beliebige andere Komponente ein, die Zugriff auf den Gegenstand benötigt. Um den Status für alle Komponenten in einer APP zugänglich zu machen, wrappen Sie die `CounterStateProvider` Komponente um die `Router` in der `App` Komponente (*app. Razor*):
 
 ```cshtml
 <CounterStateProvider>
@@ -334,7 +344,7 @@ Um die Komponente "`CounterStateProvider`" zu verwenden, müssen Sie eine Instan
 </CounterStateProvider>
 ```
 
-Umschließende Komponenten empfangen und können den persistenten Status des Zählers ändern. Die folgende `Counter`-Komponente implementiert das Muster:
+Umschließende Komponenten empfangen und können den persistenten Status des Zählers ändern. Die folgende `Counter` Komponente implementiert das Muster:
 
 ```cshtml
 @page "/counter"
@@ -355,9 +365,9 @@ Umschließende Komponenten empfangen und können den persistenten Status des Zä
 }
 ```
 
-Die vorherige Komponente ist nicht erforderlich, um mit `ProtectedBrowserStorage` zu interagieren, auch nicht mit einer "Lade Phase".
+Die vorherige Komponente ist nicht erforderlich, um mit `ProtectedBrowserStorage`zu interagieren, auch nicht mit einer "Lade Phase".
 
-Um mit der vorab Ausführung wie zuvor beschrieben umzugehen, kann `CounterStateProvider` geändert werden, sodass alle Komponenten, die die Daten des Zählers nutzen, automatisch mit der vorab Ausführung arbeiten. Weitere Informationen finden Sie im Abschnitt Vorabversion des [Handles](#handle-prerendering) .
+Um die vorab Ausführung wie oben beschrieben zu behandeln, können `CounterStateProvider` dahingehend geändert werden, dass alle Komponenten, die die Daten des Zählers nutzen, automatisch mit der vorab Ausführung arbeiten. Weitere Informationen finden Sie im Abschnitt Vorabversion des [Handles](#handle-prerendering) .
 
 Im Allgemeinen wird ein über *geordnetes Zustands Anbieter-Komponenten* Muster empfohlen:
 
