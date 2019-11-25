@@ -5,14 +5,14 @@ description: In diesem Artikel wird das Verwenden des Protokollierungsframeworks
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 11/19/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 2cb19d251ad69ebd7d18480c14857e948c69b747
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: b23e64077290f0f613e904651e4bb640fcbba95d
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659970"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74289092"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -311,8 +311,6 @@ Die Konfiguration von Protokollierungsanbietern erfolgt durch mindestens einen K
 
 Die Konfiguration der Protokollierung wird meist vom `Logging`-Abschnitt von Anwendungseinstellungsdateien angegeben. Im folgenden Beispiel werden die Inhalte einer herkömmlichen *appsettings.Development.json*-Datei veranschaulicht:
 
-::: moniker range=">= aspnetcore-2.1"
-
 ```json
 {
   "Logging": {
@@ -337,7 +335,7 @@ Weitere Eigenschaften unter `Logging` geben Protokollierungsanbieter an. Das Bei
 
 Wenn Grade in `Logging.{providername}.LogLevel` angegeben werden, überschreiben sie alle Angaben in `Logging.LogLevel`.
 
-::: moniker-end
+Die Protokollierungs-API umfasst kein Szenario zum Ändern der Protokollebene, während eine App ausgeführt wird. Einige Konfigurationsanbieter können jedoch die Konfiguration erneut laden, was sich unmittelbar auf die Protokollierungskonfiguration auswirkt. Beispielsweise lädt der [Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider), der durch `CreateDefaultBuilder` zum Lesen von Einstellungsdateien hinzugefügt wird, die Protokollierungskonfiguration standardmäßig erneut. Wenn die Konfiguration im Code geändert wird, während eine App ausgeführt wird, kann die App [IConfigurationRoot.Reload](xref:Microsoft.Extensions.Configuration.IConfigurationRoot.Reload*) aufrufen, um ihre Protokollierungskonfiguration zu aktualisieren.
 
 Informationen zur Implementierung von Konfigurationsanbieter finden Sie hier: <xref:fundamentals/configuration/index>.
 
@@ -706,7 +704,7 @@ Wenn Sie alle Protokolle unterdrücken möchten, geben Sie `LogLevel.None` als M
 
 ### <a name="create-filter-rules-in-configuration"></a>Erstellen von Filterregeln in der Konfiguration
 
-Der Projektvorlagencode ruft `CreateDefaultBuilder` auf, um die Protokollierung für die Konsolen- und Debuganbieter einzurichten. Die `CreateDefaultBuilder`-Methode richtet die Protokollierung ein, um nach der Konfiguration in einem `Logging`-Abschnitt zu suchen; dies wird [weiter oben in diesem Artikel](#configuration) erläutert.
+Der Projektvorlagencode ruft `CreateDefaultBuilder` auf, um die Protokollierung für die Konsolen-, Debug- und EventSource-Anbieter (ASP.NET Core 2.2 oder höher) einzurichten. Die `CreateDefaultBuilder`-Methode richtet die Protokollierung ein, um nach der Konfiguration in einem `Logging`-Abschnitt zu suchen; dies wird [weiter oben in diesem Artikel](#configuration) erläutert.
 
 Die Konfigurationsdaten geben die Mindestprotokolliergrade nach Anbieter und Kategorie an, wie im folgenden Beispiel gezeigt:
 
@@ -892,7 +890,7 @@ ASP.NET Core wird mit den folgenden Anbietern bereitgestellt:
 
 * [Konsole](#console-provider)
 * [Debuggen](#debug-provider)
-* [EventSource](#eventsource-provider)
+* [EventSource](#event-source-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
 * [AzureAppServicesFile](#azure-app-service-provider)
@@ -925,15 +923,121 @@ Unter Linux werden Protokolle dieses Anbieters in */var/log/message* geschrieben
 logging.AddDebug();
 ```
 
-### <a name="eventsource-provider"></a>Der EventSource-Anbieter
+### <a name="event-source-provider"></a>Ereignisquellenanbieter
 
-Für Apps, die für ASP.NET Core 1.1.0 oder höher konzipiert sind, kann mit dem Anbieterpaket [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource) eine Ereignisablaufverfolgung implementiert werden. Verwenden Sie unter Windows [ETW](https://msdn.microsoft.com/library/windows/desktop/bb968803). Der Anbieter ist plattformunabhängig, aber für Linux oder macOS sind Ereignissammlung und Anzeigetools noch nicht verfügbar.
+Das [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource)-Anbieterpaket schreibt in eine plattformübergreifende Ereignisquelle mit dem Namen `Microsoft-Extensions-Logging`. Unter Windows verwendet der Anbieter die [Ereignisablaufverfolgung für Windows (ETW)](https://msdn.microsoft.com/library/windows/desktop/bb968803).
 
 ```csharp
 logging.AddEventSourceLogger();
 ```
 
-Eine gute Möglichkeit zum Erfassen und Anzeigen von Protokollen ist die Verwendung des Hilfsprogramms [PerfView](https://github.com/Microsoft/perfview). Es gibt andere Tools zur Anzeige von ETW-Protokollen, aber PerfView bietet die besten Ergebnisse bei der Arbeit mit ETW-Ereignissen, die von ASP.NET Core ausgegeben werden.
+Der Ereignisquellenanbieter wird automatisch hinzugefügt, wenn `CreateDefaultBuilder` zum Erstellen des Hosts aufgerufen wird.
+
+::: moniker range=">= aspnetcore-3.0"
+
+#### <a name="dotnet-trace-tooling"></a>dotnet-trace-Tool
+
+Das Tool [dotnet-trace](/dotnet/core/diagnostics/dotnet-trace) ist ein plattformübergreifendes globales Befehlszeilenschnittstellentool zum Sammeln von .NET Core-Ablaufverfolgungen eines ausgeführten Prozesses. Das Tool sammelt <xref:Microsoft.Extensions.Logging.EventSource>-Anbieterdaten mithilfe einer <xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource>.
+
+Installieren Sie das dotnet-trace-Tool mit dem folgenden Befehl:
+
+```dotnetcli
+dotnet tool install --global dotnet-trace
+```
+
+Verwenden Sie das dotnet-trace-Tool, um die Ablaufverfolgung aus einer App zu erfassen:
+
+1. Wenn die App den Host nicht mit `CreateDefaultBuilder` erstellt, fügen Sie den [Ereignisquellenanbieter](#event-source-provider) zur Protokollierungskonfiguration der App hinzu.
+
+1. Führen Sie die App mit dem Befehl `dotnet run` aus.
+
+1. Bestimmen Sie den Prozessbezeichner der .NET Core-App:
+
+   * Unter Windows können Sie einen der folgenden Ansätze verwenden:
+     * Task-Manager (STRG+ALT+ENTF)
+     * [tasklist-Befehl](/windows-server/administration/windows-commands/tasklist)
+     * [PowerShell-Befehl „Get-Process“](/powershell/module/microsoft.powershell.management/get-process)
+   * Verwenden Sie unter Linux den [pidof-Befehl](https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/pidof.html).
+
+   Suchen Sie den Prozessbezeichner für den Prozess, der den gleichen Namen wie die App-Assembly hat.
+
+1. Führen Sie den `dotnet trace`-Befehl aus.
+
+   Allgemeine Befehlssyntax:
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} 
+       --providers Microsoft-Extensions-Logging:{Keyword}:{Event Level}
+           :FilterSpecs=\"
+               {Logger Category 1}:{Event Level 1};
+               {Logger Category 2}:{Event Level 2};
+               ...
+               {Logger Category N}:{Event Level N}\"
+   ```
+
+   Wenn Sie eine PowerShell-Befehlsshell verwenden, schließen Sie den `--providers`-Wert in einfache Anführungszeichen (`'`) ein:
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} 
+       --providers 'Microsoft-Extensions-Logging:{Keyword}:{Event Level}
+           :FilterSpecs=\"
+               {Logger Category 1}:{Event Level 1};
+               {Logger Category 2}:{Event Level 2};
+               ...
+               {Logger Category N}:{Event Level N}\"'
+   ```
+
+   Auf Plattformen, die nicht unter Windows ausgeführt werden, fügen Sie die `-f speedscope`-Option hinzu, um das Format der Ablaufverfolgungsdatei der Ausgabe in `speedscope` zu ändern.
+
+   | Stichwort | BESCHREIBUNG |
+   | :-----: | ----------- |
+   | 1       | Protokolliert Metaereignisse über die `LoggingEventSource`. Es werden keine Ereignisse von `ILogger`) protokolliert. |
+   | 2       | Aktiviert das `Message`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Die Informationen werden in einer programmgesteuerten (nicht formatierten) Weise ausgegeben. |
+   | 4       | Aktiviert das `FormatMessage`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Gibt die formatierte Zeichenfolgeversion der Informationen an. |
+   | 8       | Aktiviert das `MessageJson`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Stellt eine JSON-Darstellung der Argumente bereit. |
+
+   | Ereignisgrad | BESCHREIBUNG     |
+   | :---------: | --------------- |
+   | 0           | `LogAlways`     |
+   | 1           | `Critical`      |
+   | 2           | `Error`         |
+   | 3           | `Warning`       |
+   | 4           | `Informational` |
+   | 5           | `Verbose`       |
+
+   `FilterSpecs`-Einträge für `{Logger Category}` und `{Event Level}` stellen zusätzliche Protokollfilterbedingungen dar. Trennen Sie die `FilterSpecs`-Einträge durch ein Semikolon (`;`).
+
+   Beispiel mit einer Windows-Befehlsshell (**keine** einfachen Anführungszeichen um den `--providers`-Wert):
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} --providers Microsoft-Extensions-Logging:4:2:FilterSpecs=\"Microsoft.AspNetCore.Hosting*:4\"
+   ```
+
+   Mit dem vorangestellten Komma wird Folgendes aktiviert:
+
+   * Die Ereignisquellenprotokollierung zur Erzeugung von formatierten Zeichenfolgen (`4`) für Fehler (`2`)
+   * `Microsoft.AspNetCore.Hosting`-Protokollierung auf `Informational`-Protokollierungsebene (`4`)
+
+1. Halten Sie das dotnet-trace-Tool an, indem Sie die EINGABETASTE oder STRG+C drücken.
+
+   Die Ablaufverfolgung wird mit dem Namen *trace.nettrace* in dem Ordner gespeichert, in dem der `dotnet trace`-Befehl ausgeführt wird.
+
+1. Öffnen Sie die Ablaufverfolgung mit [Perfview](#perfview). Öffnen Sie die Datei *trace.nettrace*, und untersuchen Sie die Ablaufverfolgungsereignisse.
+
+Weitere Informationen finden Sie unter:
+
+* [Ablaufverfolgung für das Hilfsprogramm zur Leistungsanalyse (dotnet-trace)](/dotnet/core/diagnostics/dotnet-trace) (.NET Core-Dokumentation)
+* [Ablaufverfolgung für das Hilfsprogramm zur Leistungsanalyse (dotnet-trace)](https://github.com/dotnet/diagnostics/blob/master/documentation/dotnet-trace-instructions.md) (GitHub-Repository-Dokumentation zu dotnet/diagnostics)
+* [LoggingEventSource-Klasse](xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource) (.NET API-Browser)
+* <xref:System.Diagnostics.Tracing.EventLevel>
+* [LoggingEventSource-Verweisquelle (3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs) &ndash; Ändern Sie für das Abrufen der Verweisquelle für eine andere Version den Branch in `release/{Version}`, wobei `{Version}` die Version der gewünschten ASP.NET Core-Version darstellt.
+* [Perfview](#perfview) &ndash; Nützlich zum Anzeigen von Ablaufverfolgung für Ereignisquellen.
+
+#### <a name="perfview"></a>PerfView
+
+::: moniker-end
+
+Verwenden Sie das [PerfView-Hilfsprogramm](https://github.com/Microsoft/perfview) zum Sammeln und Anzeigen von Protokollen. Es gibt andere Tools zur Anzeige von ETW-Protokollen, aber PerfView bietet die besten Ergebnisse bei der Arbeit mit ETW-Ereignissen, die von ASP.NET Core ausgegeben werden.
 
 Um PerfView für das Erfassen von Ereignissen zu konfigurieren, die von diesem Anbieter protokolliert wurden, fügen Sie die Zeichenfolge `*Microsoft-Extensions-Logging` zur Liste **Zusätzliche Anbieter** hinzu. (Vergessen Sie nicht das Sternchen am Anfang der Zeichenfolge.)
 
@@ -975,7 +1079,7 @@ Das Anbieterpaket ist nicht im freigegebenen Framework enthalten. Zum Verwenden 
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
 
 Dieses Anbieterpaket ist nicht im [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/metapackage-app) enthalten. Wenn Sie Anwendungen für .NET Framework entwickeln oder auf das `Microsoft.AspNetCore.App`-Metapaket verweisen, fügen Sie das Anbieterpaket dem Projekt hinzu. 
 
@@ -1024,7 +1128,7 @@ So konfigurieren Sie das Azure-Protokollstreaming
 
 * Navigieren Sie von der Portalseite Ihrer App zur Seite **App Service-Protokolle**.
 * Legen Sie **Anwendungsprotokollierung (Dateisystem)** auf **Ein** fest.
-* Wählen Sie die **Protokollierungsebene**.
+* Wählen Sie die **Protokollierungsebene**. Diese Einstellung gilt nur für das Azure-Protokollstreaming, nicht für andere Protokollierungsanbieter in der App.
 
 Navigieren Sie zur Seite **Log Stream** (Protokollstream), um App-Meldungen anzuzeigen. Diese werden von der App über die `ILogger`-Schnittstelle protokolliert.
 

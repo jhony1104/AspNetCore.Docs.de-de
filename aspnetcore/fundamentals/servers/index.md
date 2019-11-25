@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: e542dd4506eb77f949c0c87bea3044397bbb1b8f
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: d46793ef54c99fe609b5983c5a658fb7b20032fa
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799403"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74289064"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Webserverimplementierungen in ASP.NET Core
 
@@ -22,7 +22,7 @@ Eine ASP.NET Core-App wird über eine In-Process-Implementierung eines HTTP-Serv
 
 ## <a name="kestrel"></a>Kestrel
 
-Kestrel ist der Standardwebserver, der in ASP.NET Core-Projektvorlagen enthalten ist.
+Kestrel ist der Standardwebserver, der für ASP.NET Core-Projektvorlagen erforderlich ist.
 
 Verwendung von Kestrel:
 
@@ -158,7 +158,7 @@ Der Server wird gestartet, wenn die integrierte Entwicklungsumgebung (IDE) oder 
 
 Wird die App über eine Eingabeaufforderung im Ordner des Projekts gestartet, startet [dotnet run](/dotnet/core/tools/dotnet-run) die App und den Server (nur Kestrel und HTTP.sys). Die Konfiguration wird durch die Option `-c|--configuration` angegeben, die entweder auf `Debug` (Standardwert) oder `Release` festgelegt ist.
 
-Eine *launchSettings.json*-Datei bietet Konfiguration während des App-Starts mit `dotnet run` oder mit einem in Tools integrierten Debugger, z. B. Visual Studio. Sind in der Datei *launchSettings.json* Startprofile vorhanden, verwenden Sie die Option `--launch-profile {PROFILE NAME}` mit dem `dotnet run`-Befehl, um das Profil in Visual Studio auszuwählen. Weitere Informationen hierzu finden Sie unter [dotnet run](/dotnet/core/tools/dotnet-run) und unter [Verpacken einer Verteilung von .NET Core](/dotnet/core/build/distribution-packaging).
+Eine *launchSettings.json*-Datei bietet Konfiguration während des App-Starts mit `dotnet run` oder mit einem in Tools integrierten Debugger, z. B. Visual Studio. Sind in der Datei *launchSettings.json* Startprofile enthalten, verwenden Sie die Option `--launch-profile {PROFILE NAME}` mit dem Befehl `dotnet run`, oder wählen Sie das Profil in Visual Studio aus. Weitere Informationen hierzu finden Sie unter [dotnet run](/dotnet/core/tools/dotnet-run) und unter [Verpacken einer Verteilung von .NET Core](/dotnet/core/build/distribution-packaging).
 
 ## <a name="http2-support"></a>HTTP/2-Unterstützung
 
