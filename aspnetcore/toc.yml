@@ -587,8 +587,6 @@
       uid: grpc/troubleshoot
 - name: 'Testen, Debuggen und Problembehandlung'
   items:
-    - name: Komponententest
-      href: /dotnet/core/testing/unit-testing-with-dotnet-test?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
     - name: Komponententests für Razor-Seiten
       uid: test/razor-pages-tests
     - name: Testen von Controllern
