@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Optionsmuster verwenden, um Gruppen von zusam
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/11/2019
+ms.date: 11/18/2019
 uid: fundamentals/configuration/options
-ms.openlocfilehash: eb0b7f3f4596b63cf3142017c5c5fe4923aac3a4
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: 4192bab8acef7c4f7bdf1ac481c468cd0a835420
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72378739"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239797"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
 
@@ -138,7 +138,7 @@ Im folgenden Code wird ein dritter <xref:Microsoft.Extensions.Options.IConfigure
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
-Die `GetSection`-Erweiterungsmethode erfordert das [Microsoft.Extensions.Options.ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/)-NuGet-Paket. Auf `Microsoft.Extensions.Options.ConfigurationExtensions` wird in ASP.NET Core-Apps implizit verwiesen.
+Die `GetSection`-Methode erfordert den Namespace <xref:Microsoft.Extensions.Configuration?displayProperty=fullName>.
 
 Die *appsettings.json*-Datei des Beispiels definiert ein `subsection`-Element mit Schlüsseln für `suboption1` und `suboption2`:
 
@@ -162,11 +162,16 @@ Wenn die App ausgeführt wird, gibt die `OnGet`-Methode eine Zeichenfolge zurüc
 subOption1 = subvalue1_from_json, subOption2 = 200
 ```
 
-## <a name="options-provided-by-a-view-model-or-with-direct-view-injection"></a>Optionen, die durch ein Ansichtsmodell oder mit direkter View Injection bereitgestellt werden
+## <a name="options-injection"></a>Einfügung von Optionen
 
-Optionen, die durch ein Ansichtsmodell oder mit direkter View Injection bereitgestellt werden, werden im Beispiel &num;4 in der Beispiel-App veranschaulicht.
+Die Einfügung von Optionen ist als Beispiel &num;4 in der Beispiel-App dargestellt.
 
-Optionen können in einem Ansichtsmodell oder durch direkte Injection von <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in eine Ansicht (*Pages/Index.cshtml.cs*) angegeben werden:
+Fügen Sie <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ein in:
+
+* Eine Razor-Seite oder MVC-Ansicht mithilfe der Razor-Anweisung [@inject](xref:mvc/views/razor#inject).
+* Ein Seiten- oder Ansichtsmodell.
+
+Im folgenden Beispiel aus der Beispiel-App wird <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in ein Seitenmodell eingefügt (*Pages/Index.cshtml.cs*):
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -186,9 +191,12 @@ Wenn die App ausgeführt wird, werden die Optionswerte in der gerenderten Seite 
 
 Das Neuladen der Konfigurationsdaten mit <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> wird im Beispiel &num;5 in der Beispiel-App veranschaulicht.
 
-<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> unterstützt das Neuladen von Optionen mit minimalem Verarbeitungsaufwand.
+Mithilfe von <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> werden Optionen einmal pro Anforderung berechnet. Dies geschieht, wenn auf sie zugegriffen wird und sie für die Dauer der Anforderung zwischengespeichert werden.
 
-Optionen werden einmal pro Anforderung berechnet. Dies geschieht, wenn auf sie zugegriffen wird und sie für die Dauer der Anforderung zwischengespeichert werden.
+Der Unterschied zwischen `IOptionsMonitor` und `IOptionsSnapshot` ist folgender:
+
+* `IOptionsMonitor` ist ein [Singleton-Dienst](xref:fundamentals/dependency-injection#singleton), der zu jeder Zeit aktuelle Optionswerte empfängt, was insbesondere bei Singleton-Abhängigkeiten nützlich ist.
+* `IOptionsSnapshot` ist ein [bereichsbezogener Dienst](xref:fundamentals/dependency-injection#scoped) und bietet eine Momentaufnahme der Optionen zu dem Zeitpunkt, da das `IOptionsSnapshot<T>`-Objekt konstruiert wird. Momentaufnahmen von Optionen sind für die Verwendung mit vorübergehenden und bereichsbezogenen Abhängigkeiten bestimmt.
 
 Im folgenden Beispiel wird veranschaulicht, wie eine neue <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> nach den *appsettings.json*-Veränderungen erstellt wird (*Pages/Index.cshtml.cs*). Mehrere Anforderungen an den Server geben konstante Werte zurück, die von der *appsettings.json*-Datei bereitgestellt werden, bis die Datei geändert wird und die Konfiguration neu lädt.
 
@@ -554,7 +562,7 @@ Im folgenden Code wird ein dritter <xref:Microsoft.Extensions.Options.IConfigure
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
-Die `GetSection`-Erweiterungsmethode erfordert das [Microsoft.Extensions.Options.ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/)-NuGet-Paket. Wenn die Anwendung das [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app)-Metapaket (ASP.NET Core 2.1 oder höher) verwendet, ist das Paket automatisch eingeschlossen.
+Die `GetSection`-Methode erfordert den Namespace <xref:Microsoft.Extensions.Configuration?displayProperty=fullName>.
 
 Die *appsettings.json*-Datei des Beispiels definiert ein `subsection`-Element mit Schlüsseln für `suboption1` und `suboption2`:
 
@@ -578,11 +586,16 @@ Wenn die App ausgeführt wird, gibt die `OnGet`-Methode eine Zeichenfolge zurüc
 subOption1 = subvalue1_from_json, subOption2 = 200
 ```
 
-## <a name="options-provided-by-a-view-model-or-with-direct-view-injection"></a>Optionen, die durch ein Ansichtsmodell oder mit direkter View Injection bereitgestellt werden
+## <a name="options-injection"></a>Einfügung von Optionen
 
-Optionen, die durch ein Ansichtsmodell oder mit direkter View Injection bereitgestellt werden, werden im Beispiel &num;4 in der Beispiel-App veranschaulicht.
+Die Einfügung von Optionen ist als Beispiel &num;4 in der Beispiel-App dargestellt.
 
-Optionen können in einem Ansichtsmodell oder durch direkte Injection von <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in eine Ansicht (*Pages/Index.cshtml.cs*) angegeben werden:
+Fügen Sie <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ein in:
+
+* Eine Razor-Seite oder MVC-Ansicht mithilfe der Razor-Anweisung [@inject](xref:mvc/views/razor#inject).
+* Ein Seiten- oder Ansichtsmodell.
+
+Im folgenden Beispiel aus der Beispiel-App wird <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in ein Seitenmodell eingefügt (*Pages/Index.cshtml.cs*):
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -602,9 +615,12 @@ Wenn die App ausgeführt wird, werden die Optionswerte in der gerenderten Seite 
 
 Das Neuladen der Konfigurationsdaten mit <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> wird im Beispiel &num;5 in der Beispiel-App veranschaulicht.
 
-<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> unterstützt das Neuladen von Optionen mit minimalem Verarbeitungsaufwand.
+Mithilfe von <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> werden Optionen einmal pro Anforderung berechnet. Dies geschieht, wenn auf sie zugegriffen wird und sie für die Dauer der Anforderung zwischengespeichert werden.
 
-Optionen werden einmal pro Anforderung berechnet. Dies geschieht, wenn auf sie zugegriffen wird und sie für die Dauer der Anforderung zwischengespeichert werden.
+Der Unterschied zwischen `IOptionsMonitor` und `IOptionsSnapshot` ist folgender:
+
+* `IOptionsMonitor` ist ein [Singleton-Dienst](xref:fundamentals/dependency-injection#singleton), der zu jeder Zeit aktuelle Optionswerte empfängt, was insbesondere bei Singleton-Abhängigkeiten nützlich ist.
+* `IOptionsSnapshot` ist ein [bereichsbezogener Dienst](xref:fundamentals/dependency-injection#scoped) und bietet eine Momentaufnahme der Optionen zu dem Zeitpunkt, da das `IOptionsSnapshot<T>`-Objekt konstruiert wird. Momentaufnahmen von Optionen sind für die Verwendung mit vorübergehenden und bereichsbezogenen Abhängigkeiten bestimmt.
 
 Im folgenden Beispiel wird veranschaulicht, wie eine neue <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> nach den *appsettings.json*-Veränderungen erstellt wird (*Pages/Index.cshtml.cs*). Mehrere Anforderungen an den Server geben konstante Werte zurück, die von der *appsettings.json*-Datei bereitgestellt werden, bis die Datei geändert wird und die Konfiguration neu lädt.
 
@@ -968,7 +984,7 @@ Im folgenden Code wird ein dritter <xref:Microsoft.Extensions.Options.IConfigure
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
-Die `GetSection`-Erweiterungsmethode erfordert das [Microsoft.Extensions.Options.ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/)-NuGet-Paket. Wenn die Anwendung das [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app)-Metapaket (ASP.NET Core 2.1 oder höher) verwendet, ist das Paket automatisch eingeschlossen.
+Die `GetSection`-Methode erfordert den Namespace <xref:Microsoft.Extensions.Configuration?displayProperty=fullName>.
 
 Die *appsettings.json*-Datei des Beispiels definiert ein `subsection`-Element mit Schlüsseln für `suboption1` und `suboption2`:
 

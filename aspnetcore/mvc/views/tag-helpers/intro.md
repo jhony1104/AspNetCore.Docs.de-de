@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 870ce2eb28f384b380cc1178842325dc28199f09
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 15f94fd1c619e9f69c5783f664eafc9ca28f86f9
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814988"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239858"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Taghilfsprogramme in ASP.NET Core
 
@@ -97,7 +97,7 @@ Wie obenstehend bereits erwähnt, ist das Taghilfsprogramm für alle Ansichtsdat
 
 Das `@removeTagHelper`-Taghilfsprogramm enthält dieselben beiden Parameter wie `@addTagHelper` und entfernt ein bereits zuvor hinzugefügtes Taghilfsprogramm. Wenn z.B. der `@removeTagHelper` auf eine bestimmte Ansicht angewendet wird, wird das angegebene Taghilfsprogramm aus der Ansicht entfernt. Wenn Sie das `@removeTagHelper`-Taghilfsprogramm in einem *Views/Folder/_ViewImports.cshtml*-Ordner verwenden, wird das festgelegte Taghilfsprogramm aus allen Ansichten im *Ordner* entfernt.
 
-### <a name="controlling-tag-helper-scope-with-the-viewimportscshtml-file"></a>Steuern des Taghilfsprogrammbereichs mit der *_ViewImports.cshtml*-Datei
+### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>Steuern des Taghilfsprogrammbereichs mit der *_ViewImports.cshtml*-Datei
 
 Sie können jedem Ordner eine *_ViewImports.cshtml*-Datei hinzufügen, und die Ansichtsengine wendet die Anweisungen aus dieser Datei und der *Views/_ViewImports.cshtml*-Datei an. Wenn Sie für die *Startseiten*-Ansicht eine leere *Views/Home/_ViewImports.cshtml*-Ansicht hinzufügen, ändert sich nichts, da die *_ViewImports.cshtml*-Datei nur einen Zusatz darstellt. Alle `@addTagHelper`-Anweisungen, die Sie der *Views/Home/_ViewImports.cshtml*-Datei hinzufügen (die nicht in der Standarddatei *Views/_ViewImports.cshtml* enthalten sind) machen diese Taghilfsprogramme nur für Ansichten im *Basis*-Ordner verfügbar.
 
@@ -132,6 +132,22 @@ Für `@addTagHelper` gelten dieselben Hierarchieregeln wie für `@tagHelperPrefi
 ## <a name="self-closing-tag-helpers"></a>Taghilfsprogramme als selbstschließende Tags
 
 Viele Taghilfsprogramme können nicht als selbstschließende Tags verwendet werden. Einige Taghilfsprogramme sind als selbstschließende Tags konzipiert. Wenn Sie ein Taghilfsprogramm verwenden, das nicht als selbstschließendes Tag konzipiert ist, wird die gerenderte Ausgabe unterdrückt. Wenn Sie ein als selbstschließendes Tag konzipiertes Taghilfsprogramm verwenden, werden selbstschließende Tags in der gerenderten Ausgabe verwendet. Weitere Informationen finden Sie unter [Erstellen von Taghilfsprogrammen in ASP.NET Core](xref:mvc/views/tag-helpers/authoring) in [diesem Hinweis](xref:mvc/views/tag-helpers/authoring#self-closing).
+
+## <a name="c-in-tag-helpers-attributedeclaration"></a>C# in Attributen/der Deklaration von Taghilfsprogrammen 
+
+Taghilfsprogramme lassen C# im Attribut des Elements oder im Tagdeklarationsbereich nicht zu. Beispielsweise ist der folgende Code ungültig:
+
+```cshtml
+<input asp-for="LastName"  
+       @(Model?.LicenseId == null ? "disabled" : string.Empty) />
+```
+
+Der vorangehende Code kann wie folgt geschrieben werden:
+
+```cshtml
+<input asp-for="LastName" 
+       disabled="@(Model?.LicenseId == null)" />
+```
 
 ## <a name="intellisense-support-for-tag-helpers"></a>IntelliSense-Unterstützung für Taghilfsprogramme
 

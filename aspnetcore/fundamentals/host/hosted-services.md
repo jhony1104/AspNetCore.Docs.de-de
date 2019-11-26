@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Hintergrundtasks mit gehosteten Diensten in A
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/26/2019
+ms.date: 11/19/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: c1fbb5ae8ffc4ee506f42df6a4cbbe845b2b903d
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: da3c2679005714a3d82de94cf3bc3c809aa3500d
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333658"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239733"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Hintergrundtasks mit gehosteten Diensten in ASP.NET Core
 
@@ -28,22 +28,23 @@ In ASP.NET Core können Hintergrundtasks als *gehostete Dienste* implementiert w
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Die Beispiel-App wird in zwei Versionen bereitgestellt:
-
-* Web Host &ndash; Der Webhost eignet sich für das Hosten von Web-Apps. Der in diesem Thema gezeigte Beispielcode stammt aus der Webhostversion des Beispiels. Weitere Informationen finden Sie unter dem Thema [Webhost](xref:fundamentals/host/web-host).
-* Generischer Host &ndash; Der generische Host wurde in ASP.NET Core 2.1 neu eingeführt. Weitere Informationen finden Sie unter dem Thema [Generischer Host](xref:fundamentals/host/generic-host).
-
 ## <a name="worker-service-template"></a>Vorlage „Workerdienst“
 
-Die ASP.NET Core-Vorlage „Workerdienst“ dient als Ausgangspunkt für das Schreiben von Dienstanwendungen mit langer Laufzeit. Gehen Sie folgendermaßen vor, wenn Sie die Vorlage als Grundlage für eine Hosted Services-App verwenden möchten:
+Die ASP.NET Core-Vorlage „Workerdienst“ dient als Ausgangspunkt für das Schreiben von Dienstanwendungen mit langer Laufzeit. Eine aus der Workerdienstvorlage erstellte App gibt das Worker SDK in ihrer Projektdatei an:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+```
+
+Gehen Sie folgendermaßen vor, wenn Sie die Vorlage als Grundlage für eine Hosted Services-App verwenden möchten:
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
----
-
 ## <a name="package"></a>Package
 
-Für ASP.NET Core-Apps wird implizit ein Paketverweis auf das Paket [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) hinzugefügt.
+Eine App, die auf der Workerdienstvorlage basiert, verwendet das `Microsoft.NET.Sdk.Worker` SDK und verfügt über einen expliziten Paketverweis auf das [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)-Paket. Sehen Sie sich dazu beispielsweise die Projektdatei der Beispiel-App (*BackgroundTasksSample.csproj*) an.
+
+Für Web-Apps, die das `Microsoft.NET.Sdk.Web` SDK verwenden, wird auf das [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)-Paket implizit über das geteilte Framework verwiesen. Es ist kein expliziter Paketverweis in der Projektdatei der App erforderlich.
 
 ## <a name="ihostedservice-interface"></a>Die IHostedService-Schnittstelle
 
@@ -99,14 +100,13 @@ Die <xref:Microsoft.Extensions.Hosting.IHostedService>-Schnittstelle definiert z
 
 Der gehostete Dienst wird beim Start der App einmal aktiviert und beim Beenden der App wieder ordnungsgemäß heruntergefahren. Wenn während der Ausführung von Hintergrundtasks ein Fehler ausgelöst wird, sollte `Dispose` aufgerufen werden, auch wenn `StopAsync` nicht aufgerufen wird.
 
-## <a name="backgroundservice"></a>BackgroundService
+## <a name="backgroundservice-base-class"></a>BackgroundService-Basisklasse
 
-`BackgroundService` ist eine Basisklasse zur Implementierung eines <xref:Microsoft.Extensions.Hosting.IHostedService> mit langer Laufzeit. `BackgroundService` bietet die abstrakte `ExecuteAsync(CancellationToken stoppingToken)`-Methode, die die Dienstlogik enthält. Das `stoppingToken` wird aufgerufen, wenn [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) aufgerufen wird. Die Implementierung dieser Methode gibt einen `Task` zurück, der die gesamte Lebensdauer des Hintergrunddiensts darstellt.
+<xref:Microsoft.Extensions.Hosting.BackgroundService> ist eine Basisklasse zur Implementierung eines <xref:Microsoft.Extensions.Hosting.IHostedService> mit langer Laufzeit.
 
-Setzen Sie *optional* die unter `IHostedService` definierten Methoden außer Kraft, um den Code zum Starten und Herunterfahren auszuführen.
+[ExecuteAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*) wird aufgerufen, um den Hintergrunddienst auszuführen. Die Implementierung gibt einen <xref:System.Threading.Tasks.Task> zurück, der die gesamte Lebensdauer des Hintergrunddiensts darstellt. Es werden keine weiteren Dienste gestartet, bis [ExecuteAsync asynchron wird](https://github.com/aspnet/Extensions/issues/2149), etwa durch den Aufruf von `await`. Vermeiden Sie die Ausführung von langen, blockierenden Initialisierungsarbeiten in `ExecuteAsync`. Die Hostblöcke in [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*) warten auf den Abschluss von `ExecuteAsync`.
 
-* `StopAsync(CancellationToken cancellationToken)` &ndash; `StopAsync` wird aufgerufen, wenn der Anwendungshost ein ordnungsgemäßes Herunterfahren ausführt. `cancellationToken` wird signalisiert, wenn der Host beschließt, das Beenden des Diensts zu erzwingen. Wenn diese Methode außer Kraft gesetzt wird, **müssen** Sie die Basisklassenmethode aufrufen (und `await`), um sicherzustellen, dass der Dienst ordnungsgemäß heruntergefahren wird.
-* `StartAsync(CancellationToken cancellationToken)` &ndash; `StartAsync` wird aufgerufen, um den Hintergrunddienst zu starten. `cancellationToken` wird signalisiert, wenn der Startprozess unterbrochen wird. Die Implementierung gibt einen `Task` zurück, der den Startprozess für den Dienst darstellt. Es werden keine Dienste gestartet, bis `Task` nicht abgeschlossen ist. Wenn diese Methode außer Kraft gesetzt wird, **müssen** Sie die Basisklassenmethode aufrufen (und `await`), um sicherzustellen, dass der Dienst ordnungsgemäß gestartet wird.
+Das Abbruchtoken wird beim Aufruf von [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) ausgelöst. Ihre Implementierung von `ExecuteAsync` sollte unverzüglich beendet werden, wenn das Abbruchtoken ausgelöst wird, um den Dienst ordnungsgemäß herunterzufahren. Andernfalls wird der Dienst beim Erreichen des Timeouts beim Herunterfahren nicht ordnungsgemäß beendet. Weitere Informationen finden Sie im Abschnitt [IHostedService-Schnittstelle](#ihostedservice-interface).
 
 ## <a name="timed-background-tasks"></a>Zeitlich festgelegte Hintergrundtasks
 
@@ -120,7 +120,7 @@ Der Dienst wird in `IHostBuilder.ConfigureServices` (*Program.cs*) mit der Erwei
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>Verwenden eines bereichsbezogenen Diensts in einem Hintergrundtask
 
-Erstellen Sie einen Bereich, um [bereichsbezogene Dienste](xref:fundamentals/dependency-injection#service-lifetimes) in einem `BackgroundService` zu verwenden. Bereiche werden für einen gehosteten Dienst nicht standardmäßig erstellt.
+Erstellen Sie einen Bereich, um [bereichsbezogene Dienste](xref:fundamentals/dependency-injection#service-lifetimes) in einem [BackgroundService](#backgroundservice-base-class) zu verwenden. Bereiche werden für einen gehosteten Dienst nicht standardmäßig erstellt.
 
 Der bereichsbezogene Dienst für Hintergrundtasks enthält die Logik des Hintergrundtasks. Im folgenden Beispiel:
 
@@ -176,11 +176,6 @@ In ASP.NET Core können Hintergrundtasks als *gehostete Dienste* implementiert w
 * Hintergrundtasks in der Warteschlange, die sequenziell ausgeführt werden.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
-
-Die Beispiel-App wird in zwei Versionen bereitgestellt:
-
-* Web Host &ndash; Der Webhost eignet sich für das Hosten von Web-Apps. Der in diesem Thema gezeigte Beispielcode stammt aus der Webhostversion des Beispiels. Weitere Informationen finden Sie unter dem Thema [Webhost](xref:fundamentals/host/web-host).
-* Generischer Host &ndash; Der generische Host wurde in ASP.NET Core 2.1 neu eingeführt. Weitere Informationen finden Sie unter dem Thema [Generischer Host](xref:fundamentals/host/generic-host).
 
 ## <a name="package"></a>Package
 
@@ -242,7 +237,7 @@ Eine Warteschlange für Hintergrundtasks basiert auf dem <xref:System.Web.Hostin
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
-In `QueueHostedService` werden Hintergrundaufgaben in der Warteschlange aus der Warteschlange entfernt und als <xref:Microsoft.Extensions.Hosting.BackgroundService>, eine Basisklasse zum Bereitstellen von `IHostedService` mit langer Ausführungszeit, ausgeführt:
+In `QueueHostedService` werden Hintergrundaufgaben in der Warteschlange aus der Warteschlange entfernt und als [BackgroundService](#backgroundservice-base-class), eine Basisklasse zum Bereitstellen von `IHostedService` mit langer Ausführungszeit, ausgeführt:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=21,25)]
 
