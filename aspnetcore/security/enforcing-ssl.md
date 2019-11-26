@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 Dieses Dokument zeigt Folgendes:
 
 * Erfordert HTTPS für alle Anforderungen.
-* Leitet alle HTTP-Anforderungen an HTTPS um.
+* Alle HTTP-Anforderungen auf HTTPS umleiten.
 
 Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensible Daten sendet.
 
@@ -29,7 +29,7 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
@@ -45,14 +45,14 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
 
 ::: moniker-end
 
-## <a name="require-https"></a>Erforderlichkeit von HTTPS
+## <a name="require-https"></a>HTTPS erforderlich
 
 Es wird empfohlen, dass die Web-Apps für die Produktion ASP.net Core:
 
@@ -142,7 +142,7 @@ Der Client muss auf den unsicheren Port zugreifen können, damit die APP eine un
 
 Weitere Informationen finden Sie unter [Kestrel-Endpunkt Konfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration) oder <xref:fundamentals/servers/httpsys>.
 
-### <a name="deployment-scenarios"></a>Bereitstellungs Szenarien
+### <a name="deployment-scenarios"></a>Bereitstellungsszenarien
 
 Für jede Firewall zwischen dem Client und dem Server müssen auch Kommunikationsports für den Datenverkehr geöffnet sein.
 

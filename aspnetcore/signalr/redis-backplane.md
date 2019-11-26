@@ -29,7 +29,7 @@ In diesem Artikel werden SignalRspezifischen Aspekte der Einrichtung eines [redi
   > [!IMPORTANT] 
   > Für den Einsatz in der Produktion wird eine redis-Rückwand nur dann empfohlen, wenn Sie im selben Rechenzentrum wie die SignalR-app ausgeführt wird. Andernfalls beeinträchtigt die Netzwerk Latenz die Leistung. Wenn Ihre SignalR-app in der Azure-Cloud ausgeführt wird, empfehlen wir den Azure-SignalR Dienst anstelle einer redis-Backplane. Sie können den Azure redis Cache-Dienst für Entwicklungs-und Testumgebungen verwenden.
 
-  Weitere Informationen finden Sie in den folgenden Ressourcen:
+  Weitere Informationen finden Sie unter:
 
   * <xref:signalr/scale>
   * [Redis-Dokumentation](https://redis.io/)
@@ -226,7 +226,7 @@ services.AddSignalR()
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen finden Sie in den folgenden Ressourcen:
+Weitere Informationen finden Sie unter:
 
 * <xref:signalr/scale>
 * [Redis-Dokumentation](https://redis.io/documentation)

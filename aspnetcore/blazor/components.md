@@ -77,7 +77,7 @@ Verwenden Sie das `Component`-taghilfsprogramm, um eine Komponente aus einer Sei
 * Wird in die Seite vorab übernommen.
 * Wird auf der Seite als statischer HTML-Code gerendert, oder, wenn er die erforderlichen Informationen zum Bootstrapping einer Blazor-APP vom Benutzer-Agent enthält.
 
-| `RenderMode`        | Beschreibung |
+| `RenderMode`        | Description |
 | ------------------- | ----------- |
 | `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine Blazor Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
 | `Server`            | Rendert einen Marker für eine Blazor Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
@@ -104,7 +104,7 @@ Verwenden Sie die `RenderComponentAsync<TComponent>` HTML-Hilfsmethode, um eine 
 * Wird in die Seite vorab übernommen.
 * Wird auf der Seite als statischer HTML-Code gerendert, oder, wenn er die erforderlichen Informationen zum Bootstrapping einer Blazor-APP vom Benutzer-Agent enthält.
 
-| `RenderMode`        | Beschreibung |
+| `RenderMode`        | Description |
 | ------------------- | ----------- |
 | `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine Blazor Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. Parameter werden nicht unterstützt. |
 | `Server`            | Rendert einen Marker für eine Blazor Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. Parameter werden nicht unterstützt. |
@@ -329,7 +329,7 @@ Im Gegensatz zu `onchange`, das ausgelöst wird, wenn das Element den Fokus verl
 
 Wenn ein Benutzer einen nicht zu erteilbaren Wert für ein Daten gebundene Element bereitstellt, wird der nicht teilbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungs Ereignis ausgelöst wird.
 
-Betrachten Sie das folgende Szenario:
+Als Beispiel dient das folgende Szenario:
 
 * Ein `<input>`-Element ist an einen `int` Typ mit einem Anfangswert von `123`gebunden:
 
@@ -545,12 +545,12 @@ Für einige Ereignisse sind Ereignis Argument Typen zulässig. Wenn der Zugriff 
 
 Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 
-| Ereignis            | Klasse                | DOM-Ereignisse und-Notizen |
+| event            | Klasse                | DOM-Ereignisse und-Notizen |
 | ---------------- | -------------------- | -------------------- |
 | Zwischenablage        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
 | Hinein             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
-| Error            | `ErrorEventArgs`     | `onerror` |
-| Ereignis            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Fehler            | `ErrorEventArgs`     | `onerror` |
+| event            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | Fokus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Beinhaltet keine Unterstützung für `relatedTarget`. |
 | Eingabe            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | Tastatur         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
@@ -1690,14 +1690,14 @@ Wenn der Code zum ersten Mal ausgeführt wird, erhält der Generator Folgendes, 
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | First  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | Erster  |
+| 1        | Textknoten | Zweimal |
 
 Stellen Sie sich vor, dass `someFlag` `false`wird und das Markup wieder gerendert wird. Dieses Mal empfängt der Generator Folgendes:
 
 | Sequenz | Typ       | Daten   |
 | :------: | ---------- | :----: |
-| 1        | Textknoten  | Second |
+| 1        | Textknoten  | Zweimal |
 
 Wenn die Laufzeit einen diff ausführt, wird angezeigt, dass das Element bei Sequenz `0` entfernt wurde, sodass das folgende triviale *Bearbeitungs Skript*generiert wird:
 
@@ -1722,14 +1722,14 @@ Nun lautet die erste Ausgabe wie folgt:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | First  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | Erster  |
+| 1        | Textknoten | Zweimal |
 
 Dieses Ergebnis ist mit dem vorherigen Fall identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag` wird im zweiten Rendering `false`, und die Ausgabe lautet:
 
 | Sequenz | Typ      | Daten   |
 | :------: | --------- | ------ |
-| 0        | Textknoten | Second |
+| 0        | Textknoten | Zweimal |
 
 Dieses Mal sieht der Vergleichsalgorithmus, dass *zwei* Änderungen aufgetreten sind, und der Algorithmus generiert das folgende Bearbeitungs Skript:
 

@@ -18,7 +18,7 @@ ms.locfileid: "74317470"
 ---
 # <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core SignalR unterstützten Plattformen
 
-## <a name="server-system-requirements"></a>Systemanforderungen für Server
+## <a name="server-system-requirements"></a>Systemanforderungen an Server
 
 SignalR für ASP.net Core unterstützt jede Server Plattform, die ASP.net Core unterstützt.
 
