@@ -5,14 +5,14 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/11/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 392868b4fc9105279f8f3b10436a9915123e7070
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
+ms.openlocfilehash: f9fc6e706046165c142e19ca38d97ac21914dc9b
+ms.sourcegitcommit: a104ba258ae7c0b3ee7c6fa7eaea1ddeb8b6eb73
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190660"
+ms.lasthandoff: 11/25/2019
+ms.locfileid: "74478766"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -52,6 +52,8 @@ In diesem Artikel werden Warnungen und Fehler erläutert. Außerdem erfahren Sie
 ## <a name="application-configuration"></a>Anwendungskonfiguration
 
 ### <a name="platform"></a>Plattform
+
+Die Plattformarchitektur (x86/x64) einer App Services-App wird in den Einstellungen der App im Azure-Portal festgelegt. Dies gilt für Apps, die in einem A-Series-Computetarif (Basic) oder einem höheren Hostingtarif gehostet werden. Überprüfen Sie, ob die Veröffentlichungseinstellungen der App (z. B im [Veröffentlichungsprofil (PUBXML)](xref:host-and-deploy/visual-studio-publish-profiles) von Visual Studio) mit der Einstellung in der Dienstkonfiguration der App im Azure-Portal übereinstimmen.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -213,9 +215,11 @@ Nach Abschluss dieses Vorgangs wird die neueste .NET Core-Vorschauversion instal
    Der Befehl gibt `True` zurück, wenn die x64-Vorschauruntime installiert ist.
 
 > [!NOTE]
-> Die Plattformarchitektur (x86/x64) einer App Services-App wird in den Einstellungen der App im Azure-Portal festgelegt. Dies gilt für Apps, die in einem A-Series-Computetarif oder einem höheren Hostingtarif gehostet werden. Wenn die Anwendung im In-Process-Modus ausgeführt wird und die Plattformarchitektur für 64-Bit (x64) konfiguriert ist, verwendet das ASP.NET Core-Modul die 64-Bit-Vorschauruntime, falls vorhanden. Installieren Sie die Erweiterung **ASP.NET Core {X.Y} (x64) Runtime**.
+> Die Plattformarchitektur (x86/x64) einer App Services-App wird in den Einstellungen der App im Azure-Portal festgelegt. Dies gilt für Apps, die in einem A-Series-Computetarif (Basic) oder einem höheren Hostingtarif gehostet werden. Überprüfen Sie, ob die Veröffentlichungseinstellungen der App (z. B im [Veröffentlichungsprofil (PUBXML)](xref:host-and-deploy/visual-studio-publish-profiles) von Visual Studio) mit der Einstellung in der Dienstkonfiguration der App im Azure-Portal übereinstimmen.
 >
-> Nach der Installation der x64-Vorschauruntime führen Sie den folgenden Befehl im Kudu PowerShell-Befehlsfenster aus, um die Installation zu überprüfen. Ersetzen Sie im Befehl die ASP.NET Core-Runtimeversion für `{X.Y}`:
+> Wenn die Anwendung im In-Process-Modus ausgeführt wird und die Plattformarchitektur für 64-Bit (x64) konfiguriert ist, verwendet das ASP.NET Core-Modul die 64-Bit-Vorschauruntime, falls vorhanden. Installieren Sie die Erweiterung **ASP.NET Core {X.Y} (x64) Runtime** über das Azure-Portal.
+>
+> Nach der Installation der x64-Vorschauruntime führen Sie den folgenden Befehl im Azure Kudu PowerShell-Befehlsfenster aus, um die Installation zu überprüfen. Ersetzen Sie im folgenden Befehl die ASP.NET Core-Runtimeversion für `{X.Y}`:
 >
 > ```powershell
 > Test-Path D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64\
@@ -234,16 +238,16 @@ Wenn Sie eine ARM-Vorlage zum Erstellen und Bereitstellen von Anwendungen verwen
 
 ## <a name="publish-and-deploy-the-app"></a>Veröffentlichen und Bereitstellen der App
 
-### <a name="deploy-the-app-framework-dependent"></a>Frameworkabhängige Bereitstellung einer App
-
 ::: moniker range=">= aspnetcore-2.2"
 
-Von [64-Bit-Frameworks abhängige Bereitstellungen](/dotnet/core/deploying/#framework-dependent-deployments-fdd):
+Für eine 64-Bit-Bereitstellung:
 
 * Verwenden Sie ein .NET Core SDK mit 64 Bit, um eine 64-Bit-App zu erstellen.
 * Legen Sie die **Plattform** in App Service unter **Konfiguration** > **Allgemeine Einstellungen** auf **64 Bit** fest. Die App muss den Serviceplan „Basic“ oder höher verwenden, damit die Bitanzahl der Plattform festgelegt werden kann.
 
 ::: moniker-end
+
+### <a name="deploy-the-app-framework-dependent"></a>Frameworkabhängige Bereitstellung einer App
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
