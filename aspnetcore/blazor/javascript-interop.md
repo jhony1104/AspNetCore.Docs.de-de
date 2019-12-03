@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Metho
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/02/2019
 no-loc:
 - Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: 79555ca6c987e2ca57e0cfab9779024498fdd58b
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 108fdac8667f407adba3470de4eb8e35883cefbf
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681023"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733829"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
@@ -30,7 +30,7 @@ Eine Blazor-App kann JavaScript-Funktionen von .net-und .NET-Methoden aus JavaSc
 
 Es gibt Zeiten, in denen .NET-Code erforderlich ist, um eine JavaScript-Funktion aufzurufen. Beispielsweise kann ein JavaScript-Befehl Browserfunktionen oder-Funktionen aus einer JavaScript-Bibliothek für die app verfügbar machen. Dieses Szenario wird als *JavaScript-Interoperabilität* (*js-Interop*) bezeichnet.
 
-Verwenden Sie zum Abrufen von JavaScript aus .net die `IJSRuntime` Abstraktion. Die `InvokeAsync<T>`-Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeitsbereich (`window`). Wenn Sie `window.someScope.someFunction`anrufen möchten, wird der Bezeichner `someScope.someFunction`. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein.
+Verwenden Sie zum Abrufen von JavaScript aus .net die `IJSRuntime` Abstraktion. Die `InvokeAsync<T>`-Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeitsbereich (`window`). Wenn Sie `window.someScope.someFunction`anrufen möchten, wird der Bezeichner `someScope.someFunction`. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein. `T` sollte dem .NET-Typ entsprechen, der dem zurückgegebenen JSON-Typ am besten zugeordnet wird.
 
 Für Blazor Server-apps:
 
@@ -180,26 +180,41 @@ window.exampleJsFunctions = {
 }
 ```
 
-Verwenden Sie `IJSRuntime.InvokeAsync<T>`, und wenden Sie `exampleJsFunctions.focusElement` mit einem `ElementReference` an, um ein Element zu fokussieren:
+Verwenden Sie `IJSRuntime.InvokeVoidAsync`, um eine JavaScript-Funktion aufzurufen, die keinen Wert zurückgibt. Mit dem folgenden Code wird der Fokus auf die username-Eingabe festgelegt, indem die vorherige JavaScript-Funktion mit dem erfassten `ElementReference`aufgerufen wird:
 
 [!code-cshtml[](javascript-interop/samples_snapshot/component1.razor?highlight=1,3,11-12)]
 
-Wenn Sie eine Erweiterungsmethode verwenden möchten, um ein Element zu fokussieren, erstellen Sie eine statische Erweiterungsmethode, die die `IJSRuntime` Instanz empfängt:
+Erstellen Sie eine statische Erweiterungsmethode, die die `IJSRuntime` Instanz empfängt, um eine Erweiterungsmethode zu verwenden:
 
 ```csharp
-public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
+public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 {
-    return jsRuntime.InvokeAsync<object>(
+    await jsRuntime.InvokeVoidAsync(
         "exampleJsFunctions.focusElement", elementRef);
 }
 ```
 
-Die-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird davon ausgegangen, dass die statische `Focus`-Methode über den `JsInteropClasses`-Namespace verfügbar ist:
+Die `Focus`-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird davon ausgegangen, dass die `Focus`-Methode über den `JsInteropClasses`-Namespace verfügbar ist:
 
-[!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1,4,12)]
+[!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
 > Die `username` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde. Wenn eine nicht aufgefüllte `ElementReference` an den JavaScript-Code übermittelt wird, erhält der JavaScript-Code den Wert `null`. Um Element Verweise zu manipulieren, nachdem die Komponente das Rendering abgeschlossen hat (um den anfänglichen Fokus auf ein Element festzulegen), verwenden Sie die [onafterrenderasync-oder onafterrendering-Komponenten Lebenszyklus-Methoden](xref:blazor/lifecycle#after-component-render).
+
+Wenn Sie mit generischen Typen arbeiten und einen Wert zurückgeben, verwenden Sie [valuetask\<t >](xref:System.Threading.Tasks.ValueTask`1):
+
+```csharp
+public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
+    IJSRuntime jsRuntime)
+{
+    return jsRuntime.InvokeAsync<T>(
+        "exampleJsFunctions.doSomethingGeneric", elementRef);
+}
+```
+
+`GenericMethod` wird direkt für das-Objekt mit einem-Typ aufgerufen. Im folgenden Beispiel wird davon ausgegangen, dass die `GenericMethod` im `JsInteropClasses`-Namespace verfügbar ist:
+
+[!code-cshtml[](javascript-interop/samples_snapshot/component3.razor?highlight=17)]
 
 ## <a name="invoke-net-methods-from-javascript-functions"></a>Aufrufen von .NET-Methoden aus JavaScript-Funktionen
 
@@ -296,3 +311,7 @@ Das js-Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unz
   ```
 
 Weitere Informationen zur Ressourcenauslastung finden Sie unter <xref:security/blazor/server>.
+
+## <a name="additional-resources"></a>Weitere Ressourcen
+
+* [Interopcomponent. Razor-Beispiel (ASPNET/aspnetcore-GitHub-Repository, 3,0-releasebranch)](https://github.com/aspnet/AspNetCore/blob/release/3.0/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
