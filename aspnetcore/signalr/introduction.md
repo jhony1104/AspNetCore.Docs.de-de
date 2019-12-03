@@ -1,22 +1,22 @@
 ---
-title: Einführung in ASP.net Core SignalR
+title: Einführung in ASP.NET Core SignalR
 author: bradygaster
 description: Erfahren Sie, wie die ASP.net Core SignalR Bibliothek das Hinzufügen von Echtzeitfunktionen zu apps vereinfacht.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/27/2019
 no-loc:
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 7108d9f223db78937dd1203a1cb4b890006b20ec
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: e84dd0d086cbfc80a80bc10baa33979da9b5d137
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963936"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717233"
 ---
-# <a name="introduction-to-aspnet-core-opno-locsignalr"></a>Einführung in ASP.net Core SignalR
+# <a name="introduction-to-aspnet-core-opno-locsignalr"></a>Einführung in ASP.NET Core SignalR
 
 ## <a name="what-is-opno-locsignalr"></a>Was ist SignalR?
 
@@ -40,9 +40,9 @@ Im folgenden finden Sie einige Features der SignalR für ASP.net Core:
 
 Die Quelle wird in einem [SignalR Repository auf GitHub](https://github.com/aspnet/AspNetCore/tree/master/src/SignalR)gehostet.
 
-## <a name="transports"></a>Transportprotokolle
+## <a name="transports"></a>Transporte
 
-SignalR unterstützt verschiedene Verfahren für die Verarbeitung von Echtzeitkommunikation:
+SignalR unterstützt die folgenden Verfahren für die Verarbeitung der Echtzeitkommunikation (in der Reihenfolge des ordnungsgemäßen Fallbacks):
 
 * [WebSockets](https://tools.ietf.org/html/rfc7118)
 * Vom Server gesendete Ereignisse
@@ -58,7 +58,7 @@ Ein Hub ist eine Pipeline auf hoher Ebene, die es einem Client und einem Server 
 
 Hubs wenden Client seitigen Code an, indem Sie Nachrichten senden, die den Namen und die Parameter der Client seitigen Methode enthalten. Objekte, die als Methoden Parameter gesendet werden, werden mithilfe des konfigurierten Protokolls deserialisiert. Der Client versucht, den Namen einer Methode im Client seitigen Code zuzuordnen. Wenn der Client eine Entsprechung findet, ruft er die-Methode auf und übergibt die deserialisierten Parameterdaten an ihn.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Beginnen Sie mit SignalR für ASP.net Core](xref:tutorials/signalr)
 * [Unterstützte Plattformen](xref:signalr/supported-platforms)
