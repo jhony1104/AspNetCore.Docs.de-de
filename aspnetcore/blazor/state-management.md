@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie den Status in Blazor Server-apps beibehalten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: 38ee5fccdf476f08c9f39d01b53c81b48eea04bf
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: facd6c2747bb0b31404c3c4fce25b76cd141932e
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317184"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74680979"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.net Core Blazor Zustands Verwaltung
 
@@ -194,7 +194,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Wenn die Parameter der Komponente den Navigations Zustand einschließen, wenden Sie `ProtectedSessionStore.GetAsync` an, und weisen Sie das Ergebnis in `OnParametersSetAsync`, nicht `OnInitializedAsync`zu. `OnInitializedAsync` wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. `OnInitializedAsync` wird später nicht erneut aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf derselben Seite verbleibt.
+Wenn die Parameter der Komponente den Navigations Zustand einschließen, wenden Sie `ProtectedSessionStore.GetAsync` an, und weisen Sie das Ergebnis in `OnParametersSetAsync`, nicht `OnInitializedAsync`zu. `OnInitializedAsync` wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. `OnInitializedAsync` wird später nicht erneut aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf derselben Seite verbleibt. Weitere Informationen finden Sie unter <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Die Beispiele in diesem Abschnitt funktionieren nur, wenn für den Server keine vorab Aktivierung aktiviert ist. Wenn die vorab Aktivierung aktiviert ist, wird ein Fehler ähnlich dem folgenden generiert:

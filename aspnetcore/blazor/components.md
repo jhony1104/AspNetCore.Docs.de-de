@@ -9,12 +9,12 @@ ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 89c92fbd5a3939cd2b4a34c39163767bcdf73bb8
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 764e5e7db995b2dcadccf6d93c826ccf32c9ba04
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550308"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681005"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -522,7 +522,7 @@ Der folgende Code Ruft die `CheckChanged`-Methode auf, wenn das Kontrollkästche
 }
 ```
 
-Ereignishandler können auch asynchron sein und eine <xref:System.Threading.Tasks.Task>zurückgeben. Es ist nicht erforderlich, `StateHasChanged()`manuell aufzurufen. Ausnahmen werden protokolliert, wenn Sie auftreten.
+Ereignishandler können auch asynchron sein und eine <xref:System.Threading.Tasks.Task>zurückgeben. [Statehaschte](xref:blazor/lifecycle#state-changes)muss nicht manuell aufgerufen werden. Ausnahmen werden protokolliert, wenn Sie auftreten.
 
 Im folgenden Beispiel wird `UpdateHeading` asynchron aufgerufen, wenn die Schaltfläche ausgewählt wird:
 
@@ -614,7 +614,7 @@ Der `ParentComponent` legt die `EventCallback<T>` des untergeordneten Elements a
 Wenn die Schaltfläche im `ChildComponent`ausgewählt ist:
 
 * Die `ShowMessage`-Methode des `ParentComponent`wird aufgerufen. `messageText` wird aktualisiert und in der `ParentComponent`angezeigt.
-* Ein-`StateHasChanged` ist in der-Methode des Rückrufs (`ShowMessage`) nicht erforderlich. `StateHasChanged` wird automatisch aufgerufen, um die `ParentComponent`zu übertragen, ebenso wie untergeordnete Ereignisse die erneute Ausführung von Komponenten in Ereignis Handlern auslöst, die innerhalb des untergeordneten Elements ausgeführt werden.
+* In der-Methode des Rückrufs (`ShowMessage`) ist kein aufzurufende [statehasch-](xref:blazor/lifecycle#state-changes) Methode erforderlich. `StateHasChanged` wird automatisch aufgerufen, um die `ParentComponent`zu übertragen, ebenso wie untergeordnete Ereignisse die erneute Ausführung von Komponenten in Ereignis Handlern auslöst, die innerhalb des untergeordneten Elements ausgeführt werden.
 
 `EventCallback` und `EventCallback<T>` die asynchrone Delegaten zulassen. `EventCallback<T>` ist stark typisiert und erfordert einen bestimmten Argumenttyp. `EventCallback` ist schwach typisiert und ermöglicht einen beliebigen Argumenttyp.
 
@@ -854,7 +854,7 @@ Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu ve
 Wenn die Komponente gerendert wird, wird das `loginDialog` Feld mit der `MyLoginDialog` untergeordneten Komponenteninstanz aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
 
 > [!IMPORTANT]
-> Die `loginDialog` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](#lifecycle-methods).
+> Die `loginDialog` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](xref:blazor/lifecycle#after-component-render).
 
 Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an JavaScript-Code übermittelt,&mdash;Sie nur in .NET-Code verwendet werden.
 
@@ -863,7 +863,7 @@ Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>Komponenten Methoden extern aufrufen, um den Status zu aktualisieren
 
-Blazor verwendet einen `SynchronizationContext`, um einen einzelnen logischen Ausführungs Thread zu erzwingen. Die Lebenszyklus Methoden einer Komponente und alle Ereignis Rückrufe, die von Blazor ausgelöst werden, werden für diese `SynchronizationContext`ausgeführt. Wenn eine Komponente auf der Grundlage eines externen Ereignisses (z. b. eines Timers oder anderer Benachrichtigungen) aktualisiert werden muss, verwenden Sie die `InvokeAsync`-Methode, die an Blazor-`SynchronizationContext`weitergeleitet wird.
+Blazor verwendet einen `SynchronizationContext`, um einen einzelnen logischen Ausführungs Thread zu erzwingen. Die [Lebenszyklus Methoden](xref:blazor/lifecycle) einer Komponente und alle Ereignis Rückrufe, die von Blazor ausgelöst werden, werden für diese `SynchronizationContext`ausgeführt. Wenn eine Komponente auf der Grundlage eines externen Ereignisses (z. b. eines Timers oder anderer Benachrichtigungen) aktualisiert werden muss, verwenden Sie die `InvokeAsync`-Methode, die an Blazor-`SynchronizationContext`weitergeleitet wird.
 
 Stellen Sie sich beispielsweise einen *Benachrichtigungsdienst* vor, der jede überwachende Komponente des aktualisierten Zustands benachrichtigen kann:
 
@@ -991,139 +991,6 @@ Im Allgemeinen ist es sinnvoll, eine der folgenden Arten von Werten für `@key`b
 * Eindeutige Bezeichner (z. b. Primärschlüssel Werte vom Typ `int`, `string`oder `Guid`).
 
 Stellen Sie sicher, dass die für `@key` verwendeten Werte nicht kollidieren. Wenn innerhalb desselben übergeordneten Elements Werte für die Zwischenablage erkannt werden, löst Blazor eine Ausnahme aus, da Sie alte Elemente oder Komponenten nicht deterministisch neuen Elementen oder Komponenten zuordnen kann. Verwenden Sie nur eindeutige Werte, z. b. Objektinstanzen oder Primärschlüssel Werte.
-
-## <a name="lifecycle-methods"></a>Lebenszyklusmethoden
-
-`OnInitializedAsync` und `OnInitialized` Code ausführen, um die Komponente zu initialisieren. Verwenden Sie zum Ausführen eines asynchronen Vorgangs `OnInitializedAsync` und das `await`-Schlüsselwort für den Vorgang:
-
-```csharp
-protected override async Task OnInitializedAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> Asynchrone Arbeit während der Initialisierung der Komponente muss während des `OnInitializedAsync` Lifecycle-Ereignisses stattfinden.
-
-Verwenden Sie für einen synchronen Vorgang `OnInitialized`:
-
-```csharp
-protected override void OnInitialized()
-{
-    ...
-}
-```
-
-`OnParametersSetAsync` und `OnParametersSet` werden aufgerufen, wenn eine Komponente Parameter von ihrem übergeordneten Element empfangen hat und die Werte Eigenschaften zugewiesen werden. Diese Methoden werden nach der Initialisierung der Komponente und jedes Mal, wenn die übergeordnete Komponente gerendert wird:
-
-```csharp
-protected override async Task OnParametersSetAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> Asynchrone Arbeit beim Anwenden von Parametern und Eigenschafts Werten muss während des `OnParametersSetAsync` Lifecycle-Ereignisses auftreten.
-
-```csharp
-protected override void OnParametersSet()
-{
-    ...
-}
-```
-
-`OnAfterRenderAsync` und `OnAfterRender` werden aufgerufen, nachdem eine Komponente das Rendering abgeschlossen hat. Element-und Komponenten Verweise werden an diesem Punkt aufgefüllt. Verwenden Sie diese Phase, um zusätzliche Initialisierungs Schritte unter Verwendung des gerenderten Inhalts auszuführen, z. b. das Aktivieren von JavaScript-Bibliotheken von Drittanbietern, die auf den gerenderten Dom
-
-`OnAfterRender` wird *nicht aufgerufen, wenn die Vorab Anmeldung auf dem Server erfolgt.*
-
-Der `firstRender` Parameter für `OnAfterRenderAsync` und `OnAfterRender` ist:
-
-* Wird auf `true` festgelegt, wenn die Komponenteninstanz zum ersten Mal aufgerufen wird.
-* Stellt sicher, dass die Initialisierungs Arbeit nur einmal ausgeführt wird.
-
-```csharp
-protected override async Task OnAfterRenderAsync(bool firstRender)
-{
-    if (firstRender)
-    {
-        await ...
-    }
-}
-```
-
-> [!NOTE]
-> Asynchrone Arbeit unmittelbar nach dem Rendering muss während des `OnAfterRenderAsync` Lifecycle-Ereignisses stattfinden.
-
-```csharp
-protected override void OnAfterRender(bool firstRender)
-{
-    if (firstRender)
-    {
-        ...
-    }
-}
-```
-
-### <a name="handle-incomplete-async-actions-at-render"></a>Unvollständige Async-Aktionen bei Rendering behandeln
-
-Asynchrone Aktionen, die in Lebenszyklus Ereignissen ausgeführt werden, wurden möglicherweise nicht abgeschlossen, bevor die Komponente gerendert Objekte können `null` oder nicht vollständig mit Daten aufgefüllt werden, während die Lebenszyklus Methode ausgeführt wird. Stellen Sie Renderinglogik bereit, um zu bestätigen, dass Objekte initialisiert Stellen Sie Platzhalter-Benutzeroberflächen Elemente (z. b. eine Lade Nachricht) dar, während Objekte `null`werden.
-
-In der `FetchData` Komponente der Blazor Vorlagen wird `OnInitializedAsync` überschrieben, um Vorhersagedaten (`forecasts`) asynchron zu empfangen. Wenn `forecasts` `null`ist, wird dem Benutzer eine Meldung zum Laden angezeigt. Nachdem der von `OnInitializedAsync` zurückgegebene `Task` abgeschlossen ist, wird die Komponente mit dem aktualisierten Zustand erneut ausgeführt.
-
-*Pages/FetchData.razor*:
-
-[!code-cshtml[](components/samples_snapshot/3.x/FetchData.razor?highlight=9)]
-
-### <a name="execute-code-before-parameters-are-set"></a>Ausführen von Code vor dem Festlegen von Parametern
-
-`SetParameters` können überschrieben werden, um Code vor dem Festlegen von Parametern auszuführen:
-
-```csharp
-public override void SetParameters(ParameterView parameters)
-{
-    ...
-
-    base.SetParameters(parameters);
-}
-```
-
-Wenn `base.SetParameters` nicht aufgerufen wird, kann der benutzerdefinierte Code den Wert eingehender Parameter in beliebiger Weise interpretieren. Beispielsweise müssen die eingehenden Parameter nicht den Eigenschaften der Klasse zugewiesen werden.
-
-### <a name="suppress-refreshing-of-the-ui"></a>Aktualisierung der Benutzeroberfläche unterdrücken
-
-`ShouldRender` können überschrieben werden, um die Aktualisierung der Benutzeroberfläche zu unterdrücken. Wenn die Implementierung `true`zurückgibt, wird die Benutzeroberfläche aktualisiert. Auch wenn `ShouldRender` überschrieben wird, wird die Komponente immer anfänglich gerendert.
-
-```csharp
-protected override bool ShouldRender()
-{
-    var renderUI = true;
-
-    return renderUI;
-}
-```
-
-## <a name="component-disposal-with-idisposable"></a>Komponenten Beseitigung mit iverwerf
-
-Wenn eine Komponente <xref:System.IDisposable>implementiert, wird die verwerfen- [Methode](/dotnet/standard/garbage-collection/implementing-dispose) aufgerufen, wenn die Komponente aus der Benutzeroberfläche entfernt wird. In der folgenden Komponente werden `@implements IDisposable` und die `Dispose`-Methode verwendet:
-
-```csharp
-@using System
-@implements IDisposable
-
-...
-
-@code {
-    public void Dispose()
-    {
-        ...
-    }
-}
-```
-
-> [!NOTE]
-> Das Aufrufen von `StateHasChanged` in `Dispose` wird nicht unterstützt. `StateHasChanged` können als Teil des aufgerufenen Renderers aufgerufen werden. Das Anfordern von Aktualisierungen der Benutzeroberfläche an diesem Punkt wird nicht unterstützt
 
 ## <a name="routing"></a>Routing
 

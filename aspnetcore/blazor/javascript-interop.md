@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Metho
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: f55eda512f8dcf0695c2e7f4655db83b26ea4159
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 79555ca6c987e2ca57e0cfab9779024498fdd58b
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317198"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681023"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
@@ -199,7 +199,7 @@ Die-Methode wird direkt für das-Objekt aufgerufen. Im folgenden Beispiel wird d
 [!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1,4,12)]
 
 > [!IMPORTANT]
-> Die `username` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde. Wenn eine nicht aufgefüllte `ElementReference` an den JavaScript-Code übermittelt wird, erhält der JavaScript-Code den Wert `null`. Um Element Verweise zu manipulieren, nachdem die Komponente das Rendering abgeschlossen hat (um den anfänglichen Fokus auf ein Element festzulegen), verwenden Sie die `OnAfterRenderAsync`-oder `OnAfterRender`- [Lebenszyklus Methoden der Komponente](xref:blazor/components#lifecycle-methods).
+> Die `username` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde. Wenn eine nicht aufgefüllte `ElementReference` an den JavaScript-Code übermittelt wird, erhält der JavaScript-Code den Wert `null`. Um Element Verweise zu manipulieren, nachdem die Komponente das Rendering abgeschlossen hat (um den anfänglichen Fokus auf ein Element festzulegen), verwenden Sie die [onafterrenderasync-oder onafterrendering-Komponenten Lebenszyklus-Methoden](xref:blazor/lifecycle#after-component-render).
 
 ## <a name="invoke-net-methods-from-javascript-functions"></a>Aufrufen von .NET-Methoden aus JavaScript-Funktionen
 

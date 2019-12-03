@@ -5,17 +5,17 @@ description: Erfahren Sie, wie ASP.net Core Blazor, wie nicht behandelte Ausnahm
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: f2fa59259f1dd36f50e81256bddea265e347554b
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 9784b357c2cdeb7422bbe40a39f881c97f6d716a
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317154"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74680992"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Behandeln von Fehlern in ASP.net Core Blazor-apps
 
@@ -122,7 +122,7 @@ Eine Verbindung kann nicht hergestellt werden, wenn ein ausgeführter Konstrukto
 
 ### <a name="lifecycle-methods"></a>Lebenszyklusmethoden
 
-Während der Lebensdauer einer Komponente ruft Blazor Lebenszyklus Methoden auf:
+Während der Lebensdauer einer Komponente ruft Blazor [Lebenszyklus Methoden](xref:blazor/lifecycle)auf:
 
 * `OnInitialized` / `OnInitializedAsync`
 * `OnParametersSet` / `OnParametersSetAsync`
@@ -173,7 +173,7 @@ Eine Komponente kann z. b. aus der Benutzeroberfläche entfernt werden, weil der
 
 Wenn die `Dispose`-Methode der Komponente eine nicht behandelte Ausnahme auslöst, ist die Ausnahme für die Verbindung schwerwiegend. Wenn die Entsorgungs Logik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
 
-Weitere Informationen zur Komponenten Beseitigung finden Sie unter <xref:blazor/components#component-disposal-with-idisposable>.
+Weitere Informationen zur Komponenten Beseitigung finden Sie unter <xref:blazor/lifecycle#component-disposal-with-idisposable>.
 
 ### <a name="javascript-interop"></a>JavaScript-Interoperabilität
 
