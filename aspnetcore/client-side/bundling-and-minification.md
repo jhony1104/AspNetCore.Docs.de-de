@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 7499381a24a2513a4fbd1205f245e624c86647c3
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: a7a5c40d6c31c4416212c02c1b491dd794f2a1d3
+ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080558"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74803278"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündel und minimieren statischer Ressourcen in ASP.net Core
 
@@ -25,9 +25,9 @@ Bündelung und Minimierung sind zwei unterschiedliche Leistungsoptimierungen, di
 
 Bündelung und Minimierung verbessern hauptsächlich die Ladezeit für die erste Seiten Anforderung. Nachdem eine Webseite angefordert wurde, speichert der Browser die statischen Assets (JavaScript, CSS und Images) zwischen. Folglich verbessern die Bündelung und Minimierung die Leistung nicht, wenn die gleiche Seite oder Seiten auf derselben Website angefordert werden, die dieselben Assets anfordert. Wenn der Ablauf Header für die Objekte nicht ordnungsgemäß festgelegt ist und Bündelung und Minimierung nicht verwendet wird, kennzeichnet die Heuristik des Browsers die Assets nach einigen Tagen. Außerdem erfordert der Browser eine Validierungs Anforderung für jedes Asset. In diesem Fall bieten Bündelung und Minimierung eine Leistungsverbesserung, auch nach der ersten Seiten Anforderung.
 
-### <a name="bundling"></a>anbietet
+### <a name="bundling"></a>Anbietet
 
-Beim bündeln werden mehrere Dateien in einer einzelnen Datei kombiniert. Die Bündelung reduziert die Anzahl der Serveranforderungen, die zum Rendering eines webassets erforderlich sind, z. b. eine Webseite. Sie können eine beliebige Anzahl einzelner Bündel speziell für CSS, JavaScript usw. erstellen. Weniger Dateien bedeuten weniger HTTP-Anforderungen vom Browser an den Server oder den Dienst, der Ihre Anwendung bereitstellt. Dies führt zu einer verbesserten Leistung der ersten Seiten Auslastung.
+Bei der Bündelung werden mehrere Dateien zu einer einzelnen Datei kombiniert. Die Bündelung reduziert die Anzahl der Serveranforderungen, die zum Rendering eines webassets erforderlich sind, z. b. eine Webseite. Sie können eine beliebige Anzahl einzelner Bündel speziell für CSS, JavaScript usw. erstellen. Weniger Dateien bedeuten weniger HTTP-Anforderungen vom Browser an den Server oder den Dienst, der Ihre Anwendung bereitstellt. Dies führt zu einer verbesserten Leistung der ersten Seiten Auslastung.
 
 ### <a name="minification"></a>Minimierung
 
@@ -53,7 +53,7 @@ Ursprünglich | Umbenannt
 
 In der folgenden Tabelle werden die Unterschiede zwischen dem individuellen Laden von Assets und der Verwendung von Bündelung und Minimierung erläutert:
 
-Aktion | Mit B/M | Ohne B/M | Änderung
+-Aktion | Mit B/M | Ohne B/M | Anwendungseinstellungen
 --- | :---: | :---: | :---:
 Datei Anforderungen  | 7   | 18     | 157%
 KB übertragen | 156 | 264.68 | 70%
@@ -63,7 +63,7 @@ Browser sind im Hinblick auf HTTP-Anforderungs Header recht ausführlich. Die Me
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Auswählen einer Strategie für Bündelung und Minimierung
 
-Die MVC-und Razor Pages-Projektvorlagen stellen eine sofort einstufige Lösung für die Bündelung und Minimierung dar, die aus einer JSON-Konfigurationsdatei besteht. Drittanbieter Tools, wie z. b. die [grunt](xref:client-side/using-grunt) -Aufgabenausführung, erfüllen die gleichen Aufgaben mit etwas mehr Komplexität. Ein Drittanbieter Tool eignet sich hervorragend, wenn Ihr Entwicklungs Workflow eine Verarbeitung über die Bündelung und Minimierung&mdash;hinaus erfordert, wie z. b. linting-und Image-Optimierung. Mithilfe der Entwurfszeit Bündelung und-Minimierung werden die minisierten Dateien vor der Bereitstellung der App erstellt. Das bündeln und minimieren vor der Bereitstellung bietet den Vorteil der reduzierten Serverauslastung. Es ist jedoch wichtig zu erkennen, dass die Entwurfszeit Bündelung und-Minimierung die Komplexität der Builds erhöht und nur mit statischen Dateien funktioniert.
+Die MVC-und Razor Pages-Projektvorlagen stellen eine sofort einstufige Lösung für die Bündelung und Minimierung dar, die aus einer JSON-Konfigurationsdatei besteht. Drittanbieter Tools, wie z. b. die [grunt](xref:client-side/using-grunt) -Aufgabenausführung, erfüllen die gleichen Aufgaben mit etwas mehr Komplexität. Ein Drittanbieter Tool eignet sich hervorragend, wenn Ihr Entwicklungs Workflow die Verarbeitung über die Bündelung und Minimierung hinaus erfordert&mdash;z. b. linting-und Image-Optimierung. Mithilfe der Entwurfszeit Bündelung und-Minimierung werden die minisierten Dateien vor der Bereitstellung der App erstellt. Das bündeln und minimieren vor der Bereitstellung bietet den Vorteil der reduzierten Serverauslastung. Es ist jedoch wichtig zu erkennen, dass die Entwurfszeit Bündelung und-Minimierung die Komplexität der Builds erhöht und nur mit statischen Dateien funktioniert.
 
 ## <a name="configure-bundling-and-minification"></a>Konfigurieren von Bündelung und Minimierung
 
@@ -85,16 +85,16 @@ Die Datei *bundleconfig. JSON* definiert die Optionen für jedes Paket. Im vorhe
 
 Zu den Konfigurationsoptionen gehören:
 
-* `outputFileName`: Der Name der Paketdatei, die ausgegeben werden soll. Kann einen relativen Pfad aus der Datei " *bundleconfig. JSON* " enthalten. **Erforderlich**
-* `inputFiles`: Ein Array von Dateien, die zusammengefasst werden sollen. Dabei handelt es sich um relative Pfade zur Konfigurationsdatei. **optional**: * ein leerer Wert führt zu einer leeren Ausgabedatei. [globmuster](https://www.tldp.org/LDP/abs/html/globbingref.html) werden unterstützt.
-* `minify`: Die Minimierung-Optionen für den Ausgabetyp. **optional**, *Standard- `minify: { enabled: true }`*
+* `outputFileName`: der Name der Paketdatei, die ausgegeben werden soll. Kann einen relativen Pfad aus der Datei " *bundleconfig. JSON* " enthalten. **erforderlich**
+* `inputFiles`: ein Array von Dateien, die zusammengefasst werden sollen. Dabei handelt es sich um relative Pfade zur Konfigurationsdatei. **optional**: * ein leerer Wert führt zu einer leeren Ausgabedatei. [globmuster](https://www.tldp.org/LDP/abs/html/globbingref.html) werden unterstützt.
+* `minify`: die Minimierung-Optionen für den Ausgabetyp. **optional**, *Standard-`minify: { enabled: true }`*
   * Konfigurationsoptionen sind pro Ausgabe Dateityp verfügbar.
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript-minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: Flag zum angeben, ob generierte Dateien der Projektdatei hinzugefügt werden sollen. **optional**, *Standard-false*
-* `sourceMap`: Flag zum angeben, ob eine Quell Zuordnung für die gebündelte Datei generiert werden soll. **optional**, *Standard-false*
-* `sourceMapRootPath`: Der Stammpfad zum Speichern der generierten Quell Zuordnungs Datei.
+* `includeInProject`: Flag, das angibt, ob generierte Dateien der Projektdatei hinzugefügt werden sollen. **optional**, *Standard-false*
+* `sourceMap`: Flag, das angibt, ob eine Quell Zuordnung für die gebündelte Datei generiert werden soll. **optional**, *Standard-false*
+* `sourceMapRootPath`: der Stammpfad zum Speichern der generierten Quell Zuordnungs Datei.
 
 ## <a name="build-time-execution-of-bundling-and-minification"></a>Build-Zeit-Ausführung von Bündelung und Minimierung
 
@@ -197,7 +197,7 @@ dotnet bundle
 ```
 
 > [!IMPORTANT]
-> Der nuget-Paket-Manager fügt der *. csproj- `<PackageReference />` Datei Abhängigkeiten als Knoten hinzu. Der `dotnet bundle` -Befehl wird bei der .net Core-CLI nur dann registriert `<DotNetCliToolReference />` , wenn ein Knoten verwendet wird. Ändern Sie die Datei *. csproj entsprechend.
+> Der nuget-Paket-Manager fügt der *. CSPROJ-Datei Abhängigkeiten als `<PackageReference />` Knoten hinzu. Der `dotnet bundle` Befehl wird nur bei der .net Core-CLI registriert, wenn ein `<DotNetCliToolReference />` Knoten verwendet wird. Ändern Sie die Datei *. csproj entsprechend.
 
 ## <a name="add-files-to-workflow"></a>Dateien zum Workflow hinzufügen
 
@@ -213,7 +213,7 @@ Fügen Sie den relativen Pfad zu *bundleconfig. JSON*hinzu, um " *Custom. CSS* "
 > Alternativ könnte das folgende globmuster verwendet werden:
 >
 > ```json
-> "inputFiles": ["wwwroot/**/*(*.css|!(*.min.css))"]
+> "inputFiles": ["wwwroot/**/!(*.min).css" ]
 > ```
 >
 > Dieses globmuster stimmt mit allen CSS-Dateien überein und schließt das minierte Dateimuster aus.
@@ -226,7 +226,7 @@ Als bewährte Vorgehensweise sollten die gebündelten und die minierten Dateien 
 
 Geben Sie mithilfe des [Umgebungs-taghilfsprogramms](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper) in ihren Ansichten an, welche Dateien in Ihre Seiten eingeschlossen werden sollen. Das Umgebungs-taghilfsprogramm rendert nur seinen Inhalt, wenn es in bestimmten [Umgebungen](xref:fundamentals/environments)ausgeführt wird.
 
-Das folgende `environment` -Tag rendert die nicht verarbeiteten CSS-Dateien, `Development` Wenn Sie in der-Umgebung ausgeführt werden:
+Das folgende `environment`-Tag rendert die nicht verarbeiteten CSS-Dateien, wenn Sie in der `Development`-Umgebung ausgeführt werden:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -240,7 +240,7 @@ Das folgende `environment` -Tag rendert die nicht verarbeiteten CSS-Dateien, `De
 
 ::: moniker-end
 
-Mit dem `environment` folgenden Tag werden die gebündelten und die minierten CSS-Dateien bei der Ausführung `Development`in einer anderen Umgebung als gerendert. Wenn Sie beispielsweise in `Production` oder `Staging` ausführen, wird das Rendering dieser Stylesheets ausgelöst:
+Das folgende `environment`-Tag rendert die gebündelten und die minierten CSS-Dateien, wenn Sie in einer anderen Umgebung als `Development`ausgeführt werden. Wenn Sie z. b. in `Production` oder `Staging` ausführen, wird das Rendering dieser Stylesheets ausgelöst:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -265,11 +265,11 @@ Die Visual Studio [Bundler-& minifier](https://marketplace.visualstudio.com/item
 > [!NOTE]
 > Die Bundler-& minifier-Erweiterung gehört zu einem Community-gesteuerten Projekt auf GitHub, für das Microsoft keine Unterstützung bietet. [Hier](https://github.com/madskristensen/BundlerMinifier/issues)sollten Probleme aufgeführt werden.
 
-Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf die Datei *bundleconfig. JSON* , und wählen Sie **Bundler aus, & minifier** > in**Gulp konvertieren...** :
+Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf die Datei *bundleconfig. JSON* , und wählen Sie **Bundler & minifier** aus, > in **Gulp konvertieren...** :
 
 ![In Gulp-Kontextmenü Element konvertieren](../client-side/bundling-and-minification/_static/convert-to-gulp.png)
 
-Die Dateien " *gulpfile. js* " und " *Package. JSON* " werden dem Projekt hinzugefügt. Die unterstützenden [NPM](https://www.npmjs.com/) - `devDependencies` Pakete, die im Abschnitt der Datei " *Package. JSON* " aufgeführt sind, werden installiert.
+Die Dateien " *gulpfile. js* " und " *Package. JSON* " werden dem Projekt hinzugefügt. Die unterstützenden [NPM](https://www.npmjs.com/) -Pakete, die im `devDependencies` Abschnitt der Datei " *Package. JSON* " aufgeführt sind, werden installiert.
 
 Führen Sie den folgenden Befehl im PMC-Fenster aus, um die Gulp-CLI als globale Abhängigkeit zu installieren:
 
@@ -285,10 +285,10 @@ Die Datei " *gulpfile. js* " liest die Datei " *bundleconfig. JSON* " für die E
 
 Wenn Visual Studio und/oder die Bundler-& minifier-Erweiterung nicht verfügbar ist, konvertieren Sie manuell.
 
-Fügen Sie dem Projektstamm eine Datei " *Package. JSON* " mit dem folgenden `devDependencies`Code hinzu:
+Fügen Sie dem Projektstamm eine Datei " *Package. JSON* " mit dem folgenden `devDependencies`hinzu:
 
 > [!WARNING]
-> Das `gulp-uglify` Modul unterstützt nicht ECMAScript (es) 2015/ES6 und höher. Installieren Sie [Gulp-terser](https://www.npmjs.com/package/gulp-terser) anstelle `gulp-uglify` von, um ES2015/ES6 oder höher zu verwenden.
+> Das `gulp-uglify`-Modul unterstützt ECMAScript (es) 2015/ES6 und höher nicht. Installieren Sie [Gulp-terser](https://www.npmjs.com/package/gulp-terser) anstelle von `gulp-uglify`, um ES2015/ES6 oder höher zu verwenden.
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
@@ -314,7 +314,7 @@ Fügen Sie das folgende [MSBuild-Ziel](/visualstudio/msbuild/msbuild-targets) de
 
 [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
 
-In diesem Beispiel werden alle Aufgaben, die innerhalb `MyPreCompileTarget` des Ziels definiert sind, `Build` vor dem vordefinierten Ziel ausgeführt. Die Ausgabe ähnlich der folgenden wird im Ausgabefenster von Visual Studio angezeigt:
+In diesem Beispiel werden alle Aufgaben, die im `MyPreCompileTarget` Ziel definiert sind, vor dem vordefinierten `Build` Ziel ausgeführt. Die Ausgabe ähnlich der folgenden wird im Ausgabefenster von Visual Studio angezeigt:
 
 ```console
 1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
@@ -328,9 +328,8 @@ In diesem Beispiel werden alle Aufgaben, die innerhalb `MyPreCompileTarget` des 
 ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
 ```
 
-
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Verwenden von Grunt](xref:client-side/using-grunt)
 * [Verwenden mehrerer Umgebungen](xref:fundamentals/environments)
-* [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro)
+* [Tag Helpers (Taghilfsprogramme)](xref:mvc/views/tag-helpers/intro)

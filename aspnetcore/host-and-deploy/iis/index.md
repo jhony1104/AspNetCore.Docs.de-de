@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/26/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 179ab4c97426c9d3cb8ed069d2059d767d755533
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: de1b3e270ccd90bde741975de38a224e557f1a08
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034264"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717415"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -251,9 +251,9 @@ Wenn Sie *web.config* beim Veröffentlichen transformieren müssen (z.B. Umgebun
 
 **Windows Server-Betriebssysteme**
 
-Aktivieren Sie die Serverrolle **Webserver (IIS)** , und richten Sie Rollendienste ein.
+Aktivieren Sie die Serverrolle **Webserver (IIS)**, und richten Sie Rollendienste ein.
 
-1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)** .
+1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)**.
 
    ![Die Rolle „Webserver (IIS)“ wird im Schritt „Serverrollen auswählen“ ausgewählt.](index/_static/server-roles-ws2016.png)
 
@@ -325,15 +325,36 @@ So erhalten Sie eine frühere Version des Installers:
 1. Führen Sie das Installationsprogramm auf dem Server aus. Die folgenden Parameter sind verfügbar, wenn Sie das Installationsprogramm über eine Administratorbefehlsshell ausführen.
 
    * `OPT_NO_ANCM=1` &ndash; Überspringen Sie die Installation des ASP.NET Core-Moduls.
-   * `OPT_NO_RUNTIME=1` &ndash; Überspringen Sie die Installation der .NET Core Runtime.
-   * `OPT_NO_SHAREDFX=1` &ndash; Überspringen Sie die Installation des geteilten ASP.NET Frameworks (ASP.NET Runtime).
+   * `OPT_NO_RUNTIME=1` &ndash; Überspringen Sie die Installation der .NET Core Runtime. Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
+   * `OPT_NO_SHAREDFX=1` &ndash; Überspringen Sie die Installation des geteilten ASP.NET Frameworks (ASP.NET Runtime). Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
    * `OPT_NO_X86=1` &ndash; Überspringen Sie die Installation von X86 Runtimes. Verwenden Sie diesen Parameter, wenn Sie wissen, dass Sie keine 32-Bit-Apps hosten. Sollte die Möglichkeit bestehen, dass Sie sowohl 32-Bit- als auch 64-Bit-Apps hosten könnten, verwenden Sie diesen Parameter nicht, und installieren Sie beide Runtimes.
    * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Deaktivieren Sie die Überprüfung auf Verwendung einer gemeinsamen IIS-Konfiguration (*applicationHost.config*), wenn die gemeinsam genutzte Konfiguration sich auf demselben Computer wie die IIS-Installation befindet. *Nur für Installationsprogramme für Hostingbundles für ASP.NET Core 2.2 oder höher verfügbar.* Weitere Informationen finden Sie unter <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
-1. Starten Sie das System neu, oder führen Sie **net stop was /y** gefolgt von **net start w3svc** über eine Befehlsshell aus. Durch den Neustart von IIS wird eine Änderung an der PATH-Systemeinstellung – einer Umgebungsvariable – angewendet, die durch den Installer vorgenommen wurde.
+1. Starten Sie das System neu, oder führen Sie die folgenden Befehle in einer Befehlsshell aus:
+
+   ```console
+   net stop was /y
+   net start w3svc
+   ```
+   Durch den Neustart von IIS wird eine Änderung an der PATH-Systemeinstellung – einer Umgebungsvariable – angewendet, die durch den Installer vorgenommen wurde.
+
+::: moniker range=">= aspnetcore-3.0"
+
+ASP.NET Core wendet kein Rollforwardverhalten für Patchversionen freigegebener Frameworkpakete an. Nach einem Upgrade des freigegebene Frameworks durch Installation eines neuen Hostingpakets starten Sie das System neu, oder führen Sie die folgenden Befehle in einer Befehlsshell aus:
+
+```console
+net stop was /y
+net start w3svc
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 Beim Installieren des Hostingpakets müssen die einzelnen Websites in IIS nicht manuell angehalten werden. Gehostete Apps (IIS-Websites) werden beim Neustart von IIS neu gestartet. Apps starten wieder, wenn die erste Anforderung eintrifft, beispielsweise aus dem [Anwendungsinitialisierungsmodul](#application-initialization-module-and-idle-timeout).
 
 ASP.NET Core wendet ein Rollforwardverhalten für Patchversionen freigegebener Frameworkpaketen an. Wenn von IIS gehostete Apps mit IIS neu starten, werden sie mit den neuesten Patchversionen der referenzierten Pakete geladen, sobald sie die erste Anforderung empfangen. Wenn IIS nicht neu gestartet wird, starten die Apps neu und wenden ein Rollforwardverhalten an, wenn die Workerprozesse neu starten und die Apps die erste Anforderung empfangen.
+
+::: moniker-end
 
 > [!NOTE]
 > Informationen zur Verwendung einer IIS-Freigabekonfiguration finden Sie unter [ASP.NET Core-Modul mit IIS-Freigabekonfiguration](xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration).
@@ -592,7 +613,7 @@ Wenn der IIS-Workerprozess erhöhte Rechte für den Zugriff auf Ihre Anwendung e
 
 1. Wählen Sie die Schaltfläche **Speicherorte** aus, und stellen Sie sicher, dass das System ausgewählt ist.
 
-1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>** , wenn Sie die Objektnamen überprüfen.
+1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>**, wenn Sie die Objektnamen überprüfen.
 
    ![Dialogfeld „Benutzer oder Gruppen auswählen“ für den App-Ordner: Der Name des App-Pools, „DefaultAppPool“, wird an „IIS AppPool\"“ im Bereich der Objektnamen angehängt, bevor „Namen überprüfen“ ausgewählt wird.](index/_static/select-users-or-groups-1.png)
 
