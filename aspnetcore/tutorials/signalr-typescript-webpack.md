@@ -4,16 +4,18 @@ author: ssougnez
 description: In diesem Tutorial konfigurieren Sie Webpack zum Bündeln und Erstellen einer ASP.NET Core SignalR-Web-App, deren Client in TypeScript geschrieben ist.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/04/2019
+ms.date: 11/21/2019
+no-loc:
+- SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 630e8cb5efe9c313479960626d3d864c4923cbd1
-ms.sourcegitcommit: 3ffcd8cbff8b49128733842f72270bc58279de70
+ms.openlocfilehash: a7c99c9e79647995886aec5b3a91584fd2f24451
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2019
-ms.locfileid: "71955933"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317487"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>Verwenden von ASP.NET Core SignalR mit TypeScript und Webpack
+# <a name="use-aspnet-core-opno-locsignalr-with-typescript-and-webpack"></a>Verwenden von ASP.NET Core SignalR mit TypeScript und Webpack
 
 Von [Sébastien Sougnez](https://twitter.com/ssougnez) und [Scott Addie](https://twitter.com/Scott_Addie)
 
@@ -130,7 +132,7 @@ In den folgenden Schritten wird die Konvertierung von TypeScript zu JavaScript u
     Die vorangehende Datei konfiguriert die Webpack-Kompilierung. Zu beachtende Konfigurationsdetails:
 
     * Die Eigenschaft `output` überschreibt den Standardwert von *dist*. Das Bündel wird stattdessen an das Verzeichnis *wwwroot* ausgegeben.
-    * Das `resolve.extensions`-Array enthält *.js*, um den JavaScript-Code des SignalR-Clients zu importieren.
+    * Das `resolve.extensions`-Array schließt *.js* ein, um den JavaScript-Code des SignalR-Clients zu importieren.
 
 1. Erstellen Sie ein neues *src*-Verzeichnis im Projektstamm. Es dient als Speicherort für clientseitige Ressourcen des Projekts.
 
@@ -196,10 +198,10 @@ Derzeit zeigt die App ein einfaches Formular zum Senden von Nachrichten an. Es g
 1. Führen Sie den folgenden Befehl auf der Ebene des Projektstamms aus:
 
     ```console
-    npm install @aspnet/signalr
+    npm install @microsoft/signalr
     ```
 
-    Der vorangehende Befehl installiert den [SignalR-TypeScript-Client](https://www.npmjs.com/package/@aspnet/signalr), mit dem der Client Nachrichten an den Server senden kann.
+    Der vorangehende Befehl installiert den [SignalR-TypeScript-Client](https://www.npmjs.com/package/@microsoft/signalr), mit dem der Client Nachrichten an den Server senden kann.
 
 1. Fügen Sie den hervorgehobenen Code in die Datei *src/index.ts* ein:
 
@@ -365,7 +367,7 @@ In den folgenden Schritten wird die Konvertierung von TypeScript zu JavaScript u
     Die vorangehende Datei konfiguriert die Webpack-Kompilierung. Zu beachtende Konfigurationsdetails:
 
     * Die Eigenschaft `output` überschreibt den Standardwert von *dist*. Das Bündel wird stattdessen an das Verzeichnis *wwwroot* ausgegeben.
-    * Das `resolve.extensions`-Array enthält *.js*, um den JavaScript-Code des SignalR-Clients zu importieren.
+    * Das `resolve.extensions`-Array schließt *.js* ein, um den JavaScript-Code des SignalR-Clients zu importieren.
 
 1. Erstellen Sie ein neues *src*-Verzeichnis im Projektstamm. Es dient als Speicherort für clientseitige Ressourcen des Projekts.
 
@@ -431,10 +433,10 @@ Derzeit zeigt die App ein einfaches Formular zum Senden von Nachrichten an. Es g
 1. Führen Sie den folgenden Befehl auf der Ebene des Projektstamms aus:
 
     ```console
-    npm install @aspnet/signalr
+    npm install @microsoft/signalr
     ```
 
-    Der vorangehende Befehl installiert den [SignalR-TypeScript-Client](https://www.npmjs.com/package/@aspnet/signalr), mit dem der Client Nachrichten an den Server senden kann.
+    Der vorangehende Befehl installiert den [SignalR-TypeScript-Client](https://www.npmjs.com/package/@microsoft/signalr), mit dem der Client Nachrichten an den Server senden kann.
 
 1. Fügen Sie den hervorgehobenen Code in die Datei *src/index.ts* ein:
 
