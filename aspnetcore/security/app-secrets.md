@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: security/app-secrets
-ms.openlocfilehash: 3323b7b614b7e8bc711b2c5acfb501b65b3d783b
-ms.sourcegitcommit: 76d7fff62014c3db02564191ab768acea00f1b26
+ms.openlocfilehash: 0bbd6af01ce3a29d3931faa2853a50dc895490cc
+ms.sourcegitcommit: fd2483f0a384b1c479c5b4af025ee46917db1919
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 12/05/2019
-ms.locfileid: "74852687"
+ms.locfileid: "74868029"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Sichere Speicherung von App-Geheimnissen in der Entwicklung in ASP.net Core
 
@@ -27,7 +27,7 @@ Umgebungsvariablen werden verwendet, um das Speichern von App-Geheimnissen im Co
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Konfigurieren Sie das Lesen von Umgebungsvariablen Werten, indem Sie <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> im `Startup`-Konstruktor aufrufen:
+Konfigurieren Sie das Lesen von Umgebungsvariablen Werten, indem Sie <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables%2A> im `Startup`-Konstruktor aufrufen:
 
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=8)]
 
@@ -229,11 +229,11 @@ Wenn das Projekt .NET Framework als Ziel hat, installieren Sie das nuget-Paket [
 
 ::: moniker range=">= aspnetcore-2.0"
 
-In ASP.net Core 2,0 oder höher wird die Konfigurations Quelle "Benutzer Geheimnisse" automatisch im Entwicklungsmodus hinzugefügt, wenn das Projekt <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> aufruft, um eine neue Instanz des Hosts mit vorkonfigurierten Standardwerten zu initialisieren. `CreateDefaultBuilder` <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets*> aufruft, wenn der <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>ist:
+In ASP.net Core 2,0 oder höher wird die Konfigurations Quelle "Benutzer Geheimnisse" automatisch im Entwicklungsmodus hinzugefügt, wenn das Projekt <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> aufruft, um eine neue Instanz des Hosts mit vorkonfigurierten Standardwerten zu initialisieren. `CreateDefaultBuilder` <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> aufruft, wenn der <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>ist:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-Wenn `CreateDefaultBuilder` nicht aufgerufen wird, fügen Sie die Konfigurations Quelle für Benutzer Geheimnisse explizit hinzu, indem Sie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets*> im `Startup`-Konstruktor aufrufen. Wenn die app in der Entwicklungsumgebung ausgeführt wird, wenden Sie `AddUserSecrets` an, wie im folgenden Beispiel gezeigt:
+Wenn `CreateDefaultBuilder` nicht aufgerufen wird, fügen Sie die Konfigurations Quelle für Benutzer Geheimnisse explizit hinzu, indem Sie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> im `Startup`-Konstruktor aufrufen. Wenn die app in der Entwicklungsumgebung ausgeführt wird, wenden Sie `AddUserSecrets` an, wie im folgenden Beispiel gezeigt:
 
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
 
@@ -243,7 +243,7 @@ Wenn `CreateDefaultBuilder` nicht aufgerufen wird, fügen Sie die Konfigurations
 
 Installieren Sie das nuget-Paket [Microsoft. Extensions. Configuration. usersecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) .
 
-Fügen Sie die Konfigurations Quelle für Benutzer Geheimnisse mit einem <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets*> im `Startup`-Konstruktor aufgerufen wird:
+Fügen Sie die Konfigurations Quelle für Benutzer Geheimnisse mit einem <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> im `Startup`-Konstruktor aufgerufen wird:
 
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
 
@@ -303,7 +303,7 @@ Entfernen Sie das `Password` Schlüssel/Wert-Paar aus der Verbindungs Zeichenfol
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
-Der Wert des Geheimnisses kann für die <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password*>-Eigenschaft eines <xref:System.Data.SqlClient.SqlConnectionStringBuilder> Objekts festgelegt werden, um die Verbindungs Zeichenfolge abzuschließen:
+Der Wert des Geheimnisses kann für die <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A>-Eigenschaft eines <xref:System.Data.SqlClient.SqlConnectionStringBuilder> Objekts festgelegt werden, um die Verbindungs Zeichenfolge abzuschließen:
 
 ::: moniker range=">= aspnetcore-2.0"
 
