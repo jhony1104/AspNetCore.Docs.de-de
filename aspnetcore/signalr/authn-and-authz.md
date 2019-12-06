@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in AS
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 5a1e15ef46a3f89af3fbd3d505e7bd340c46e672
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 091cc9b2adc1f6a8fac79519884695d1c1725d2a
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963830"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880419"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-opno-locsignalr"></a>Authentifizierung und Autorisierung in ASP.net Core SignalR
 
@@ -24,7 +24,7 @@ Von [Andrew Stanton-Nurse](https://twitter.com/anurse)
 
 ## <a name="authenticate-users-connecting-to-a-opno-locsignalr-hub"></a>Authentifizieren von Benutzern, die sich mit einem SignalR Hub verbinden
 
-SignalR können mit [ASP.net Core Authentifizierung](xref:security/authentication/identity) verwendet werden, um einen Benutzer jeder Verbindung zuzuordnen. In einem Hub kann über die [`HubConnectionContext.User`](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) -Eigenschaft auf Authentifizierungsdaten zugegriffen werden. Die Authentifizierung ermöglicht dem Hub das Abrufen von Methoden für alle Verbindungen, die einem Benutzer zugeordnet sind. Weitere Informationen finden Sie unter [Verwalten von Benutzern und Gruppen in SignalR](xref:signalr/groups). Mehrere Verbindungen können einem einzelnen Benutzer zugeordnet werden.
+SignalR können mit [ASP.net Core Authentifizierung](xref:security/authentication/identity) verwendet werden, um einen Benutzer jeder Verbindung zuzuordnen. In einem Hub kann über die [hubconnectioncontext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) -Eigenschaft auf Authentifizierungsdaten zugegriffen werden. Die Authentifizierung ermöglicht dem Hub das Abrufen von Methoden für alle Verbindungen, die einem Benutzer zugeordnet sind. Weitere Informationen finden Sie unter [Verwalten von Benutzern und Gruppen in SignalR](xref:signalr/groups). Mehrere Verbindungen können einem einzelnen Benutzer zugeordnet werden.
 
 Im folgenden finden Sie ein Beispiel für `Startup.Configure`, die SignalR und ASP.net Core Authentifizierung verwendet:
 
@@ -220,7 +220,7 @@ public class ChatHub : Hub
 
 SignalR bietet Autorisierungs Handlern eine benutzerdefinierte Ressource, wenn eine Hub-Methode eine Autorisierung erfordert. Die Ressource ist eine Instanz von `HubInvocationContext`. Die `HubInvocationContext` enthält die `HubCallerContext`, den Namen der aufgerufenen Hub-Methode und die Argumente für die Hub-Methode.
 
-Sehen Sie sich das Beispiel für einen Chatraum an, der die Anmeldung mehrerer Organisationen über Azure Active Directory ermöglicht. Jeder Benutzer mit einem Microsoft-Konto kann sich anmelden, um sich anzumelden, aber nur Mitglieder der besitzenden Organisation sollten in der Lage sein, Benutzer zu sperren oder die Chat Verläufe der Benutzer anzuzeigen. Außerdem möchten wir möglicherweise bestimmte Funktionen von bestimmten Benutzern einschränken. Wenn Sie die aktualisierten Features in ASP.net Core 3,0 verwenden, ist dies durchaus möglich. Beachten Sie, dass die `DomainRestrictedRequirement` als benutzerdefinierte `IAuthorizationRequirement` fungiert. Nachdem der `HubInvocationContext`-Ressourcen Parameter übergeben wurde, kann die interne Logik den Kontext untersuchen, in dem der Hub aufgerufen wird, und Entscheidungen treffen, die es dem Benutzer ermöglichen, individuelle hubmethoden auszuführen.
+Sehen Sie sich das Beispiel für einen Chatraum an, der die Anmeldung mehrerer Organisationen über Azure Active Directory ermöglicht. Jeder Benutzer mit einem Microsoft-Konto kann sich anmelden, um sich anzumelden, aber nur Mitglieder der besitzenden Organisation sollten in der Lage sein, Benutzer zu sperren oder die Chat Verläufe der Benutzer anzuzeigen. Außerdem möchten wir möglicherweise bestimmte Funktionen von bestimmten Benutzern einschränken. Wenn Sie die aktualisierten Features in ASP.net Core 3,0 verwenden, ist dies durchaus möglich. Beachten Sie, dass die `DomainRestrictedRequirement` als benutzerdefinierte `IAuthorizationRequirement`fungiert. Nachdem der `HubInvocationContext`-Ressourcen Parameter übergeben wurde, kann die interne Logik den Kontext untersuchen, in dem der Hub aufgerufen wird, und Entscheidungen treffen, die es dem Benutzer ermöglichen, individuelle hubmethoden auszuführen.
 
 ```csharp
 [Authorize]
@@ -266,7 +266,7 @@ public class DomainRestrictedRequirement :
 }
 ```
 
-Fügen Sie in `Startup.ConfigureServices` die neue Richtlinie hinzu, und stellen Sie die benutzerdefinierte `DomainRestrictedRequirement` Anforderung als Parameter zum Erstellen der `DomainRestricted` Richtlinie bereit.
+Fügen Sie in `Startup.ConfigureServices`die neue Richtlinie hinzu, und stellen Sie die benutzerdefinierte `DomainRestrictedRequirement` Anforderung als Parameter zum Erstellen der `DomainRestricted` Richtlinie bereit.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -288,7 +288,7 @@ Im vorherigen Beispiel ist die `DomainRestrictedRequirement`-Klasse sowohl ein `
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Bearertokenauthentifizierung in ASP.net Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [Ressourcenbasierte Autorisierung](xref:security/authorization/resourcebased)

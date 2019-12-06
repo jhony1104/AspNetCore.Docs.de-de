@@ -4,16 +4,16 @@ author: jamesnk
 description: Erfahren Sie, wie sich GrpC mit http-APIs vergleicht und welche Szenarios empfohlen werden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: ceb24d656827548492a6fa326681922297fc481b
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 8935e665dfd5d8f9afa002f475c202ec0f0ee657
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963660"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880673"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Vergleich von gRPC-Diensten mit HTTP-APIs
 
@@ -32,7 +32,7 @@ Die folgende Tabelle bietet einen Vergleich der Features zwischen GrpC und http-
 | Payload          | [Protobuf (Small, Binary)](#performance)           | JSON (groß, Menschen lesbar)  |
 | Präskriptivität | [Strikte Spezifikation](#strict-specification)      | Lose. Jeder http-Wert ist gültig.     |
 | Streaming        | [Client, Server, bidirektional](#streaming)       | Client, Server                |
-| Browser Unterstützung  | [Nein (erfordert GrpC-Web)](#limited-browser-support) | Ja                           |
+| Browserunterstützung  | [Nein (erfordert GrpC-Web)](#limited-browser-support) | Ja                           |
 | Sicherheit         | Transport (TLS)                                    | Transport (TLS)               |
 | Client Codegenerierung | [Ja](#code-generation)                      | OpenAPI + Tools von Drittanbietern |
 
@@ -49,7 +49,7 @@ GrpC ist für http/2 konzipiert, eine wichtige Überarbeitung von http, die gege
 
 ### <a name="code-generation"></a>Codeerzeugung
 
-Alle GrpC-Frameworks bieten erstklassige Unterstützung für die Codegenerierung. Eine Kerndatei für die GrpC-Entwicklung ist die Datei " [ *. proto* ](https://developers.google.com/protocol-buffers/docs/proto3)", die den Vertrag der GrpC-Dienste und-Nachrichten definiert. Aus dieser Datei werden von den GrpC-Frameworks Code generiert, um eine Dienst Basisklasse, Nachrichten und einen kompletten Client zu generieren.
+Alle GrpC-Frameworks bieten erstklassige Unterstützung für die Codegenerierung. Eine Kerndatei für die GrpC-Entwicklung ist die [Datei ". proto](https://developers.google.com/protocol-buffers/docs/proto3)", die den Vertrag der GrpC-Dienste und-Nachrichten definiert. Aus dieser Datei werden von den GrpC-Frameworks Code generiert, um eine Dienst Basisklasse, Nachrichten und einen kompletten Client zu generieren.
 
 Durch die Freigabe der *. proto* -Datei zwischen Server und Client können Nachrichten und Client Code von Ende bis Ende generiert werden. Die Code Generierung des Clients vermeidet das Duplizieren von Nachrichten auf dem Client und dem Server und erstellt einen stark typisierten Client für Sie. Wenn Sie keinen Client schreiben müssen, sparen Sie in Anwendungen mit vielen Diensten eine beträchtliche Entwicklungszeit.
 
@@ -111,7 +111,7 @@ Andere Frameworks werden in den folgenden Szenarien über GrpC empfohlen:
 * **Broadcast-Echtzeitkommunikation** &ndash; GrpC unterstützt die Echtzeitkommunikation über das Streaming, aber das Konzept, eine Nachricht an registrierte Verbindungen zu senden, ist nicht vorhanden. Beispielsweise ist in einem Chatroom-Szenario, in dem neue Chat Nachrichten an alle Clients im Chatraum gesendet werden sollen, jeder GrpC-Rückruf erforderlich, um neue Chat Nachrichten einzeln an den Client zu streamen. [SignalR](xref:signalr/introduction) ist ein nützliches Framework für dieses Szenario. SignalR hat das Konzept von permanenten Verbindungen und integrierter Unterstützung für das Senden von Nachrichten.
 * Prozess **übergreifende Kommunikation** &ndash; ein Prozess muss einen http/2-Server hosten, um eingehende GrpC-Aufrufe zu akzeptieren. Bei Windows handelt es sich bei prozessübergreifenden [kommunikationspipes](/dotnet/standard/io/pipe-operations) um eine schnelle, leichte Kommunikationsmethode.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:tutorials/grpc/grpc-start>
 * <xref:grpc/index>

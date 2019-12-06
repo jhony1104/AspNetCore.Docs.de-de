@@ -9,12 +9,12 @@ ms.date: 11/27/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 19636b0f10e71133eddece918b1bb9e2bc25a226
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: 9cdbae0bde8f6c44dc8b680dccbf9c8f96043c7f
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733842"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879698"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -171,7 +171,7 @@ Der folgende `ParentComponent` kann Inhalte zum Rendern des `ChildComponent` ber
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Attribut-Verteilung und beliebige Parameter
 
-Komponenten können zusätzlich zu den deklarierten Parametern der Komponente zusätzliche Attribute erfassen und Rendering. Zusätzliche Attribute können in einem Wörterbuch aufgezeichnet und dann auf ein Element *gesplattet* werden, wenn die Komponente mithilfe der [@attributes](xref:mvc/views/razor#attributes) Razor-Direktive gerendert wird. Dieses Szenario ist nützlich, wenn Sie eine Komponente definieren, die ein Markup Element erzeugt, das eine Vielzahl von Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für eine `<input>`, die viele Parameter unterstützt, separat zu definieren.
+Komponenten können zusätzlich zu den deklarierten Parametern der Komponente zusätzliche Attribute erfassen und Rendering. Zusätzliche Attribute können in einem Wörterbuch aufgezeichnet und dann auf ein Element *gesplattet* werden, wenn die Komponente mithilfe der [`@attributes`](xref:mvc/views/razor#attributes) Razor-Direktive gerendert wird. Dieses Szenario ist nützlich, wenn Sie eine Komponente definieren, die ein Markup Element erzeugt, das eine Vielzahl von Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für eine `<input>`, die viele Parameter unterstützt, separat zu definieren.
 
 Im folgenden Beispiel verwendet das erste `<input>`-Element (`id="useIndividualParams"`) einzelne Komponenten Parameter, während das zweite `<input>`-Element (`id="useAttributesDict"`) Attribut-splatting verwendet:
 
@@ -287,7 +287,7 @@ Der gerenderte `<div>` in der `Parent` Komponente enthält beim Durchlaufen des 
 
 ## <a name="data-binding"></a>Datenbindung
 
-Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [@bind](xref:mvc/views/razor#bind) -Attribut. Im folgenden Beispiel wird eine `CurrentValue`-Eigenschaft an den Wert des Textfelds gebunden:
+Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [`@bind`](xref:mvc/views/razor#bind) -Attribut. Im folgenden Beispiel wird eine `CurrentValue`-Eigenschaft an den Wert des Textfelds gebunden:
 
 ```cshtml
 <input @bind="CurrentValue" />
@@ -315,7 +315,7 @@ Die Verwendung von `@bind` mit der `CurrentValue`-Eigenschaft (`<input @bind="Cu
 
 Wenn die Komponente gerendert wird, stammt der `value` des Eingabe Elements aus der `CurrentValue`-Eigenschaft. Wenn der Benutzer das Textfeld eingibt und den Element Fokus ändert, wird das `onchange`-Ereignis ausgelöst, und die `CurrentValue`-Eigenschaft wird auf den geänderten Wert festgelegt. In der Realität ist die Codegenerierung komplexer, da `@bind` Fälle behandelt, in denen Typkonvertierungen durchgeführt werden. Im Prinzip ordnet `@bind` den aktuellen Wert eines Ausdrucks einem `value`-Attribut zu und behandelt Änderungen mithilfe des registrierten Handlers.
 
-Zusätzlich zur Behandlung von `onchange` Ereignissen mit `@bind` Syntax kann eine Eigenschaft oder ein Feld mit anderen Ereignissen gebunden werden, indem ein [@bind-value](xref:mvc/views/razor#bind) Attribut mit einem `event` Parameter ([@bind-value:event](xref:mvc/views/razor#bind)) angegeben wird. Im folgenden Beispiel wird die `CurrentValue`-Eigenschaft für das `oninput`-Ereignis gebunden:
+Zusätzlich zur Behandlung von `onchange` Ereignissen mit `@bind` Syntax kann eine Eigenschaft oder ein Feld mit anderen Ereignissen gebunden werden, indem ein [`@bind-value`](xref:mvc/views/razor#bind) Attribut mit einem `event` Parameter ([`@bind-value:event`](xref:mvc/views/razor#bind)) angegeben wird. Im folgenden Beispiel wird die `CurrentValue`-Eigenschaft für das `oninput`-Ereignis gebunden:
 
 ```cshtml
 <input @bind-value="CurrentValue" @bind-value:event="oninput" />
@@ -384,7 +384,7 @@ Informationen zum Festlegen der Kultur des Benutzers finden Sie im Abschnitt zur
 
 **Format Zeichenfolgen**
 
-Die Datenbindung funktioniert mit <xref:System.DateTime>-Format Zeichenfolgen [@bind:format](xref:mvc/views/razor#bind). Andere Format Ausdrücke, z. b. Währungs-oder Zahlenformate, sind zurzeit nicht verfügbar.
+Die Datenbindung funktioniert mit <xref:System.DateTime>-Format Zeichenfolgen [`@bind:format`](xref:mvc/views/razor#bind). Andere Format Ausdrücke, z. b. Währungs-oder Zahlenformate, sind zurzeit nicht verfügbar.
 
 ```cshtml
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -498,7 +498,7 @@ Im Allgemeinen kann eine Eigenschaft mithilfe `@bind-property:event` Attributs a
 
 ## <a name="event-handling"></a>Ereignisbehandlung
 
-Razor-Komponenten stellen Ereignis Behandlungs Funktionen bereit. Für ein HTML-Element Attribut mit dem Namen `on{EVENT}` (z. b. `onclick` und `onsubmit`) mit einem delegattypisierten Wert behandelt Razor-Komponenten den Wert des Attributs als Ereignishandler. Der Name des Attributs wird immer [@on{Event}](xref:mvc/views/razor#onevent)formatiert.
+Razor-Komponenten stellen Ereignis Behandlungs Funktionen bereit. Für ein HTML-Element Attribut mit dem Namen `on{EVENT}` (z. b. `onclick` und `onsubmit`) mit einem delegattypisierten Wert behandelt Razor-Komponenten den Wert des Attributs als Ereignishandler. Der Name des Attributs wird immer [`@on{EVENT}`](xref:mvc/views/razor#onevent)formatiert.
 
 Der folgende Code Ruft die `UpdateHeading`-Methode auf, wenn die Schaltfläche in der Benutzeroberfläche ausgewählt wird:
 
@@ -554,7 +554,7 @@ Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 | Event            | Klasse                | DOM-Ereignisse und-Notizen |
 | ---------------- | -------------------- | -------------------- |
 | Zwischenablage        | `ClipboardEventArgs` | `oncut`ist `oncopy`ist `onpaste` |
-| Hinein             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
+| Ziehen             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
 | Fehler            | `ErrorEventArgs`     | `onerror` |
 | Event            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`ist `onbeforecopy`ist `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | Fokus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Beinhaltet keine Unterstützung für `relatedTarget`. |
@@ -651,7 +651,7 @@ Bevorzugen der stark typisierten `EventCallback<T>` über `EventCallback`. `Even
 
 ### <a name="prevent-default-actions"></a>Standard Aktionen verhindern
 
-Verwenden Sie das [@on{Event}:p reventdefault](xref:mvc/views/razor#oneventpreventdefault) -direktivenattribut, um die Standardaktion für ein Ereignis zu verhindern.
+Verwenden Sie das [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) direktivenattribut, um die Standardaktion für ein Ereignis zu verhindern.
 
 Wenn ein Schlüssel auf einem Eingabegerät ausgewählt wird und sich der Element Fokus auf einem Textfeld befindet, zeigt ein Browser normalerweise das Schlüsselzeichen im Textfeld an. Im folgenden Beispiel wird das Standardverhalten verhindert, indem das `@onkeypress:preventDefault` direktivenattribut angegeben wird. Der Wert des Leistungs Zählers wird erhöht, und der **+** Schlüssel wird nicht in den Wert des `<input>` Elements aufgezeichnet:
 
@@ -683,7 +683,7 @@ Ein Ereignishandler ist nicht erforderlich, um die Standardaktion zu verhindern.
 
 ### <a name="stop-event-propagation"></a>Ereignis Weitergabe Abbrechen
 
-Verwenden Sie zum Beenden der Ereignis Weitergabe das [@on{Event}:](xref:mvc/views/razor#oneventstoppropagation) stoppropagendirektivenattribut.
+Verwenden Sie das Attribut [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) Direktive, um die Ereignis Weitergabe zu verhindern
 
 Im folgenden Beispiel wird durch Aktivieren des Kontrollkästchens verhindert, dass Click-Ereignisse aus dem zweiten untergeordneten `<div>` an die übergeordnete `<div>`weitergegeben werden:
 
@@ -841,7 +841,7 @@ Password:
 
 Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können, z. b. `Show` oder `Reset`. So erfassen Sie einen Komponenten Verweis:
 
-* Fügen Sie der untergeordneten Komponente ein [@ref](xref:mvc/views/razor#ref) Attribut hinzu.
+* Fügen Sie der untergeordneten Komponente ein [`@ref`](xref:mvc/views/razor#ref) Attribut hinzu.
 * Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
 
 ```cshtml
@@ -1026,7 +1026,7 @@ Die *catch-all-* Parameter Syntax (`*`/`**`), die den Pfad über mehrere Ordner 
 
 Razor-Komponenten werden als partielle Klassen generiert. Razor-Komponenten werden mithilfe eines der folgenden Ansätze erstellt:
 
-* C#Code wird in einem [@code](xref:mvc/views/razor#code) -Block mit HTML-Markup und Razor-Code in einer einzelnen Datei definiert. Mithilfe dieses Ansatzes definieren Blazor Vorlagen ihre Razor-Komponenten.
+* C#Code wird in einem [`@code`](xref:mvc/views/razor#code) -Block mit HTML-Markup und Razor-Code in einer einzelnen Datei definiert. Mithilfe dieses Ansatzes definieren Blazor Vorlagen ihre Razor-Komponenten.
 * C#der Code wird in einer Code Behind-Datei platziert, die als partielle Klasse definiert ist.
 
 Das folgende Beispiel zeigt die Standard `Counter` Komponente mit einem `@code`-Block in einer APP, die aus einer Blazor Vorlage generiert wurde. HTML-Markup, Razor-Code C# und Code befinden sich in derselben Datei:
@@ -1125,13 +1125,13 @@ Die Basisklasse sollte von `ComponentBase`abgeleitet werden.
 
 Der Namespace einer mit Razor erstellten Komponente basiert auf (in Prioritäts Reihenfolge):
 
-* [@namespace](xref:mvc/views/razor#namespace) Bezeichnung in Razor-Datei ( *. Razor*) Markup (`@namespace BlazorSample.MyNamespace`).
+* [`@namespace`](xref:mvc/views/razor#namespace) Bezeichnung in Razor-Datei ( *. Razor*) Markup (`@namespace BlazorSample.MyNamespace`).
 * Das Projekt `RootNamespace` in der Projektdatei (`<RootNamespace>BlazorSample</RootNamespace>`).
 * Der Projektname, der aus dem Dateinamen der Projektdatei ( *. csproj*) und dem Pfad des Projekt Stamms zur Komponente stammt. Das Framework löst z. b. *{Project root}/pages/index.Razor* (*blazorsample. csproj*) in den Namespace `BlazorSample.Pages`auf. Komponenten folgen C# den namens Bindungs Regeln. Für die `Index` Komponente in diesem Beispiel sind die Komponenten im Bereich alle Komponenten:
   * Im gleichen Ordner, *Seiten*.
   * Die Komponenten im Stammverzeichnis des Projekts, die nicht explizit einen anderen Namespace angeben.
 
-Komponenten, die in einem anderen Namespace definiert sind, werden mithilfe der [@using](xref:mvc/views/razor#using) Direktive von Razor in den Gültigkeitsbereich
+Komponenten, die in einem anderen Namespace definiert sind, werden mithilfe der [`@using`](xref:mvc/views/razor#using) Direktive von Razor in den Gültigkeitsbereich
 
 Wenn eine andere Komponente, `NavMenu.razor`im Ordner " *blazorsample/Shared/* " vorhanden ist, kann die Komponente in `Index.razor` mit der folgenden `@using`-Anweisung verwendet werden:
 
@@ -1143,7 +1143,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-Auf Komponenten kann auch mit ihren voll qualifizierten Namen verwiesen werden, die die [@using](xref:mvc/views/razor#using) -Direktive nicht benötigen:
+Auf Komponenten kann auch mit ihren voll qualifizierten Namen verwiesen werden, die die [`@using`](xref:mvc/views/razor#using) -Direktive nicht benötigen:
 
 ```cshtml
 This is the Index page.
@@ -1272,7 +1272,7 @@ Alternativ können Sie das `Context`-Attribut für das Component-Element angeben
 
 ### <a name="generic-typed-components"></a>Generisch typisierte Komponenten
 
-Auf Vorlagen basierende Komponenten werden oft generisch typisiert. Beispielsweise kann eine generische `ListViewTemplate` Komponente zum Rendering `IEnumerable<T>` Werte verwendet werden. Verwenden Sie zum Definieren einer generischen Komponente die [@typeparam](xref:mvc/views/razor#typeparam) -Direktive, um Typparameter anzugeben:
+Auf Vorlagen basierende Komponenten werden oft generisch typisiert. Beispielsweise kann eine generische `ListViewTemplate` Komponente zum Rendering `IEnumerable<T>` Werte verwendet werden. Verwenden Sie zum Definieren einer generischen Komponente die [`@typeparam`](xref:mvc/views/razor#typeparam) -Direktive, um Typparameter anzugeben:
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 

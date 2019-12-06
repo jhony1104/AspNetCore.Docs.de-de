@@ -4,16 +4,16 @@ author: mjrousos
 description: Tipps zum Verbessern der Leistung in ASP.net Core-apps und vermeiden von häufigen Leistungsproblemen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 64d231ca435ccbfe9bfcd839a2b67fcee68c0cc6
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: bd30776d527b4ac9f44005e9f5d03fec7cfda2e6
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239879"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880920"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Leistung
 
@@ -41,7 +41,7 @@ Ein häufiges Leistungsproblem bei ASP.net Core-Apps ist das Blockieren von aufr
 * Abrufen von Sperren in gemeinsamen Codepfade. ASP.net Core-apps sind am leistungsfähigsten, wenn Sie entwickelt werden, um Code parallel auszuführen.
 * " [Task. Run](/dotnet/api/system.threading.tasks.task.run) " aufzurufen und sofort darauf warten. ASP.net Core bereits app-Code in normalen Thread Pool-Threads ausführt, führt das Aufrufen von "Task. Run" nur zu einer zusätzlichen unnötigen Thread Pool-Zeitplanung. Auch wenn der geplante Code einen Thread blockieren würde, wird dies von Task. Run nicht verhindert.
 
-Ausführen:
+**Empfohlene Vorgehensweise:**
 
 * Asynchrone [Hot-Codepfade](#understand-hot-code-paths) .
 * Wenn eine asynchrone API verfügbar ist, wird der Datenzugriff und die Vorgänge mit langer Ausführungsdauer asynchron aufgerufen. Verwenden Sie erneut " [Task. Run](/dotnet/api/system.threading.tasks.task.run) ", um eine synchronus-API asynchron zu machen.
@@ -56,7 +56,7 @@ Der [.net Core-Garbage Collector](/dotnet/standard/garbage-collection/) verwalte
 Empfehlungen:
 
 * Sollten **Sie** große Objekte zwischenspeichern, die häufig verwendet werden. Das Zwischenspeichern von großen Objekten verhindert teure Zuweisungen.
-* Verwenden **Sie einen** [`ArrayPool<T>`](/dotnet/api/system.buffers.arraypool-1) , um große Arrays zu speichern.
+* Verwenden **Sie einen** [arraypool-\<t->](/dotnet/api/system.buffers.arraypool-1) , um große Arrays zu speichern.
 * Weisen **Sie nicht** viele kurzlebige große Objekte in den [Pfaden für heiße Codes](#understand-hot-code-paths)zu.
 
 Arbeitsspeicher Probleme, wie z. b. die vorstehenden, können diagnostiziert werden, indem Garbage Collection (GC)-Statistiken in [perfview](https://github.com/Microsoft/perfview) überprüft und Folgendes überprüft wird:
@@ -140,7 +140,7 @@ Empfehlungen:
 
 ## <a name="use-the-latest-aspnet-core-release"></a>Neueste ASP.net Core Release verwenden
 
-Jede neue Version von ASP.net Core umfasst Leistungsverbesserungen. Optimierungen in .net Core und ASP.net Core bedeuten, dass neuere Versionen in der Regel ältere Versionen übersteigen. .Net Core 2,1 hat z. b. Unterstützung für kompilierte reguläre Ausdrücke hinzugefügt und von [`Span<T>`](https://msdn.microsoft.com/magazine/mt814808.aspx)profitiert. ASP.net Core 2,2 hat Unterstützung für http/2 hinzugefügt. [ASP.net Core 3,0 bietet viele Verbesserungen](xref:aspnetcore-3.0) , die die Speicherauslastung reduzieren und den Durchsatz verbessern. Wenn Leistung eine Priorität ist, sollten Sie ein Upgrade auf die aktuelle Version von ASP.net Core durchführen.
+Jede neue Version von ASP.net Core umfasst Leistungsverbesserungen. Optimierungen in .net Core und ASP.net Core bedeuten, dass neuere Versionen in der Regel ältere Versionen übersteigen. .Net Core 2,1 hat z. b. Unterstützung für kompilierte reguläre Ausdrücke hinzugefügt und von [Spannen\<t >](https://msdn.microsoft.com/magazine/mt814808.aspx)profitiert. ASP.net Core 2,2 hat Unterstützung für http/2 hinzugefügt. [ASP.net Core 3,0 bietet viele Verbesserungen](xref:aspnetcore-3.0) , die die Speicherauslastung reduzieren und den Durchsatz verbessern. Wenn Leistung eine Priorität ist, sollten Sie ein Upgrade auf die aktuelle Version von ASP.net Core durchführen.
 
 ## <a name="minimize-exceptions"></a>Minimieren von Ausnahmen
 

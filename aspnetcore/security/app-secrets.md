@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: security/app-secrets
-ms.openlocfilehash: 0bbd6af01ce3a29d3931faa2853a50dc895490cc
-ms.sourcegitcommit: fd2483f0a384b1c479c5b4af025ee46917db1919
+ms.openlocfilehash: ef5cb120c15d349be744c401bd518e026ddf11e9
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/05/2019
-ms.locfileid: "74868029"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880785"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Sichere Speicherung von App-Geheimnissen in der Entwicklung in ASP.net Core
 
@@ -231,11 +231,35 @@ Wenn das Projekt .NET Framework als Ziel hat, installieren Sie das nuget-Paket [
 
 In ASP.net Core 2,0 oder höher wird die Konfigurations Quelle "Benutzer Geheimnisse" automatisch im Entwicklungsmodus hinzugefügt, wenn das Projekt <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> aufruft, um eine neue Instanz des Hosts mit vorkonfigurierten Standardwerten zu initialisieren. `CreateDefaultBuilder` <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> aufruft, wenn der <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>ist:
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.0 <= aspnetcore-2.2"
+
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.0"
 
 Wenn `CreateDefaultBuilder` nicht aufgerufen wird, fügen Sie die Konfigurations Quelle für Benutzer Geheimnisse explizit hinzu, indem Sie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> im `Startup`-Konstruktor aufrufen. Wenn die app in der Entwicklungsumgebung ausgeführt wird, wenden Sie `AddUserSecrets` an, wie im folgenden Beispiel gezeigt:
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.0 <= aspnetcore-2.2"
+
 [!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupConstructor&highlight=12)]
 
 ::: moniker-end
 

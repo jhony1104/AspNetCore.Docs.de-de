@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Middleware für die Zwischenspeicherung von A
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/04/2019
+ms.date: 12/05/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: a8e656e1d59114e2e953323e98e0a2399efca98a
-ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
+ms.openlocfilehash: d034252f69f8efdc9a912a0d9c3ecde65196e7e3
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2019
-ms.locfileid: "73611458"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880938"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Zwischen Speicherungs Middleware für Antworten in ASP.net Core
 
@@ -20,9 +20,9 @@ Von [Luke Latham](https://github.com/guardrex) und [John Luo](https://github.com
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-In diesem Artikel wird erläutert, wie Sie die Zwischenspeicherung von Antwort Caching in einer ASP.net Core-App konfigurieren. Die Middleware bestimmt, wann Antworten zwischengespeichert werden können, speichert Antworten und verarbeitet Antworten aus dem Cache. Eine Einführung in das http-Caching und das [[responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) -Attribut finden Sie unter zwischen [Speichern von Antworten](xref:performance/caching/response).
+In diesem Artikel wird erläutert, wie Sie die Zwischenspeicherung von Antwort Caching in einer ASP.net Core-App konfigurieren. Die Middleware bestimmt, wann Antworten zwischengespeichert werden können, speichert Antworten und verarbeitet Antworten aus dem Cache. Eine Einführung in das http-Caching und das [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) -Attribut finden Sie unter zwischen [Speichern von Antworten](xref:performance/caching/response).
 
-## <a name="configuration"></a>Konfiguration
+## <a name="configuration"></a>-Konfiguration
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -39,7 +39,7 @@ Konfigurieren Sie die APP für die Verwendung der Middleware mit der <xref:Micro
 Die Beispiel-App Fügt Header zum Steuern der Zwischenspeicherung bei nachfolgenden Anforderungen hinzu:
 
 * [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; speichert zwischen speicherbare Antworten bis zu 10 Sekunden.
-* [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; konfiguriert die Middleware so, dass eine zwischengespeicherte Antwort nur dann bereitgestellt wird, wenn der [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) Header der nachfolgenden Anforderungen mit der ursprünglichen Anforderung übereinstimmt.
+* Unter [schiedlich](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; die Middleware so konfiguriert, dass eine zwischengespeicherte Antwort verarbeitet wird, wenn der [Accept-Encoding-](https://tools.ietf.org/html/rfc7231#section-5.3.4) Header der nachfolgenden Anforderungen mit der ursprünglichen Anforderung übereinstimmt.
 
 [!code-csharp[](middleware/samples_snippets/3.x/AddHeaders.cs)]
 
@@ -65,7 +65,7 @@ Konfigurieren Sie die APP für die Verwendung der Middleware mit der <xref:Micro
 Die Beispiel-App Fügt Header zum Steuern der Zwischenspeicherung bei nachfolgenden Anforderungen hinzu:
 
 * [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; speichert zwischen speicherbare Antworten bis zu 10 Sekunden.
-* [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; konfiguriert die Middleware so, dass eine zwischengespeicherte Antwort nur dann bereitgestellt wird, wenn der [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) Header der nachfolgenden Anforderungen mit der ursprünglichen Anforderung übereinstimmt.
+* Unter [schiedlich](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; die Middleware so konfiguriert, dass eine zwischengespeicherte Antwort verarbeitet wird, wenn der [Accept-Encoding-](https://tools.ietf.org/html/rfc7231#section-5.3.4) Header der nachfolgenden Anforderungen mit der ursprünglichen Anforderung übereinstimmt.
 
 [!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
 
@@ -76,11 +76,11 @@ Die Middleware zum Zwischenspeichern von Antworten speichert nur Server Antworte
 
 ::: moniker-end
 
-## <a name="options"></a>Optionen
+## <a name="options"></a>Options
 
 Die Optionen zum Zwischenspeichern von Antworten sind in der folgenden Tabelle aufgeführt.
 
-| Option | Beschreibung |
+| -Option | Beschreibung |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Die größte zwischen speicherbare Größe für den Antworttext in Bytes. Der Standardwert ist `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Die Größenbeschränkung für die Antwort Cache-Middleware in Bytes. Der Standardwert ist `100 * 1024 * 1024` (100 MB). |
@@ -99,9 +99,9 @@ services.AddResponseCaching(options =>
 });
 ```
 
-## <a name="varybyquerykeys"></a>Varybyquerykeys
+## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-Bei der Verwendung von MVC/Web-API-Controllern oder Razor Pages Seiten Modellen gibt das Attribut [[responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) die Parameter an, die zum Festlegen der entsprechenden Header für das Zwischenspeichern von Antworten erforderlich sind. Der einzige Parameter des `[ResponseCache]` Attributs, das die Middleware strikt erfordert, ist <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys>, was keinem tatsächlichen HTTP-Header entspricht. Weitere Informationen finden Sie unter <xref:performance/caching/response#responsecache-attribute>.
+Bei der Verwendung von MVC/Web-API-Controllern oder Razor Pages Seiten Modellen gibt das [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) Attribut die Parameter an, die zum Festlegen der entsprechenden Header für das Zwischenspeichern von Antworten erforderlich sind Der einzige Parameter des `[ResponseCache]` Attributs, das die Middleware strikt erfordert, ist <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys>, was keinem tatsächlichen HTTP-Header entspricht. Weitere Informationen finden Sie unter <xref:performance/caching/response#responsecache-attribute>.
 
 Wenn das `[ResponseCache]`-Attribut nicht verwendet wird, kann das Zwischenspeichern von Antworten mit `VaryByQueryKeys`variiert werden. Verwenden Sie die <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> direkt aus [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
@@ -123,7 +123,7 @@ Die folgende Tabelle enthält Informationen über HTTP-Header, die sich auf das 
 | Header | Details |
 | ------ | ------- |
 | `Authorization` | Die Antwort wird nicht zwischengespeichert, wenn der Header vorhanden ist. |
-| `Cache-Control` | Die Middleware berücksichtigt nur zwischen Speicherungs Antworten, die mit der `public` Cache Direktive gekennzeichnet sind. Steuern Sie die Zwischenspeicherung mit den folgenden Parametern:<ul><li>Max-age</li><li>Max-veraltet&#8224;</li><li>min-Fresh</li><li>muss neu validiert werden</li><li>No-Cache</li><li>No-Store</li><li>nur-if-Cache</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-erneut validieren&#8225;</li></ul>&#8224;Wenn keine Beschränkung für `max-stale`angegeben wird, führt die Middleware keine Aktion aus.<br>&#8225;`proxy-revalidate` hat dieselbe Auswirkung wie `must-revalidate`.<br><br>Weitere Informationen finden Sie unter [RFC 7231: Anfordern von Cache-Control-Direktiven](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| `Cache-Control` | Die Middleware berücksichtigt nur zwischen Speicherungs Antworten, die mit der `public` Cache Direktive gekennzeichnet sind. Steuern Sie die Zwischenspeicherung mit den folgenden Parametern:<ul><li>Max-age</li><li>Max-veraltet&#8224;</li><li>min-Fresh</li><li>must-revalidate</li><li>Kein Cache</li><li>No-Store</li><li>nur-if-Cache</li><li>privat</li><li>public</li><li>s-maxage</li><li>Proxy-erneut validieren&#8225;</li></ul>&#8224;Wenn keine Beschränkung für `max-stale`angegeben wird, führt die Middleware keine Aktion aus.<br>&#8225;`proxy-revalidate` hat dieselbe Auswirkung wie `must-revalidate`.<br><br>Weitere Informationen finden Sie unter [RFC 7231: Anfordern von Cache-Control-Direktiven](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | `Pragma` | Ein `Pragma: no-cache`-Header in der Anforderung erzeugt denselben Effekt wie `Cache-Control: no-cache`. Dieser Header wird durch die relevanten Direktiven im `Cache-Control`-Header überschrieben, sofern vorhanden. Wird aus Gründen der Abwärtskompatibilität mit HTTP/1.0 berücksichtigt. |
 | `Set-Cookie` | Die Antwort wird nicht zwischengespeichert, wenn der Header vorhanden ist. Jede Middleware in der Anforderungs Verarbeitungs Pipeline, mit der mindestens ein Cookie festgelegt wird, verhindert, dass die Antwort Cache-Middleware die Antwort zwischenspeichert (z. b. den [cookiebasierten TempData-Anbieter](xref:fundamentals/app-state#tempdata)).  |
 | `Vary` | Der `Vary`-Header wird verwendet, um die zwischengespeicherte Antwort von einem anderen Header zu verändern. Beispielsweise können Sie Antworten nach der Codierung Zwischenspeichern, indem Sie den `Vary: Accept-Encoding`-Header einschließen, der Antworten für Anforderungen mit Headern speichert `Accept-Encoding: gzip` und `Accept-Encoding: text/plain` separat. Eine Antwort mit dem Header Wert `*` wird nie gespeichert. |
@@ -138,7 +138,7 @@ Die folgende Tabelle enthält Informationen über HTTP-Header, die sich auf das 
 
 Die Middleware respektiert die Regeln der [http 1,1-cachingspezifikation](https://tools.ietf.org/html/rfc7234#section-5.2). Die Regeln erfordern einen Cache, um einen gültigen `Cache-Control` Header zu berücksichtigen, der vom Client gesendet wird. In der Spezifikation kann ein Client Anforderungen mit einem `no-cache`-Header Wert senden und erzwingen, dass der Server eine neue Antwort für jede Anforderung generiert. Derzeit gibt es keine Entwickler Kontrolle über dieses zwischen Speicherungs Verhalten, wenn die Middleware verwendet wird, da die Middleware die offizielle zwischen Speicherungs Spezifikation befolgt.
 
-Weitere Informationen zum zwischen Speicherungs Verhalten finden Sie unter untersuchen anderer zwischen Speicherungs Funktionen von ASP.net Core. Informationen hierzu finden Sie in den folgenden Themen:
+Weitere Informationen zum zwischen Speicherungs Verhalten finden Sie unter untersuchen anderer zwischen Speicherungs Funktionen von ASP.net Core. Weitere Informationen finden Sie in folgenden Themen:
 
 * <xref:performance/caching/memory>
 * <xref:performance/caching/distributed>
@@ -173,7 +173,7 @@ Beim Testen und behandeln von Problemen zwischen Speicherungs Verhalten kann ein
 > [!NOTE]
 > Das antifälschungs System zum Erstellen sicherer Token zum Verhindern von Angriffen durch Website übergreifende Anforderungs Fälschung (CSRF) legt die `Cache-Control`-und `Pragma`-Header auf `no-cache` fest, damit Antworten nicht zwischengespeichert werden. Informationen zum Deaktivieren von antifälschungstoken für HTML-Formularelemente finden Sie unter <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration>.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

@@ -4,20 +4,20 @@ author: rick-anderson
 description: Erfahren Sie, wie Arbeitsspeicher in ASP.net Core verwaltet wird und wie die Garbage Collector (GC) funktioniert.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 12/05/2019
 uid: performance/memory
-ms.openlocfilehash: 4c25c069aa2a6088c0549d786ecdd487ab7b9ea5
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.openlocfilehash: 85e34c9faa31a1020a4200eb99003455ca435ec3
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73896935"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880951"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Speicherverwaltung und Garbage Collection (GC) in ASP.net Core
 
 Von [Sébastien Ros](https://github.com/sebastienros) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Die Speicherverwaltung ist auch in verwalteten Frameworks wie .net Komplex. Das analysieren und verstehen von Speicherproblemen kann eine Herausforderung darstellen. Dieser Artikel:
+Die Speicherverwaltung ist auch in verwalteten Frameworks wie .net Komplex. Das analysieren und verstehen von Speicherproblemen kann eine Herausforderung darstellen. Inhalt dieses Artikels
 
 * Wurde von vielen *Speicherlecks* und *GC* -Fehlern motiviert. Die meisten dieser Probleme sind darauf zurückzuführen, dass Sie nicht verstehen, wie die Arbeitsspeicher Nutzung in .net Core funktioniert, oder nicht verstehen, wie Sie gemessen wird.
 * Veranschaulicht die problematische Speicher Verwendung und schlägt alternative Ansätze vor.
@@ -274,7 +274,7 @@ Die folgenden Links zeigen die ASP.net Core Methode zum Beibehalten von Objekten
 - [Responsecaching/Streams/streamutilities. cs](https://github.com/aspnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 - [Responsecaching/memoryresponsecache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-Weitere Informationen finden Sie unter:
+Weitere Informationen finden Sie unter: .
 
 * [Large Object Heap wurde aufgedeckt.](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Großer Objekt Heap](/dotnet/standard/garbage-collection/large-object-heap)
@@ -373,7 +373,7 @@ Im folgenden Diagramm wird der Aufruf der vorangehenden API mit mittlerer Auslas
 
 Im vorangehenden Diagramm erfolgen die Sammlungen der Generation 0 ungefähr einmal pro Sekunde.
 
-Der vorangehende Code kann optimiert werden, indem der `byte` Puffer mithilfe [`ArrayPool<T>`](xref:System.Buffers.ArrayPool`1)gebündelt wird. Eine statische-Instanz wird in allen Anforderungen wieder verwendet.
+Der vorangehende Code kann optimiert werden, indem der `byte` Puffer mithilfe von [arraypool\<t > gepoolt](xref:System.Buffers.ArrayPool`1)wird. Eine statische-Instanz wird in allen Anforderungen wieder verwendet.
 
 Unterscheidet sich bei diesem Ansatz, dass ein in einem Pool zusammengefasste Objekt von der API zurückgegeben wird. Dies bedeutet Folgendes:
 
@@ -425,7 +425,7 @@ Das Anwenden derselben Last wie die nicht in einem Pool zusammengefasste Version
 
 Der Hauptunterschied besteht darin, dass Bytes zugeordnet werden, was zu einer wesentlich geringeren Auflistung der Generation 0 gehört.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Garbage Collection](/dotnet/standard/garbage-collection/)
 * [Grundlegendes zu verschiedenen GC-Modi mit neben läufigkeits Schnellansicht](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

@@ -3,15 +3,15 @@ title: Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET C
 author: camsoper
 description: Erfahren Sie, wie Azure Active Directory B2C-Authentifizierung mit ASP.NET Core-Web-API einrichten. Testen Sie die authentifizierte Web-API mit Postman an.
 ms.author: casoper
-ms.date: 09/21/2018
+ms.date: 12/05/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: c917a5130857165716bd801ac19dad0f53a7d214
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 0c7e8a1db924bdedf29468bf6b8cc17f03962c6d
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815384"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880740"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Cam Soper](https://twitter.com/camsoper)
 
 [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) ist eine Cloudlösung für die Verwaltung von Identität für Web- und mobilen apps. Der Dienst ermöglicht die Authentifizierung für apps, die in der Cloud und lokal gehostet werden. Authentifizierungstypen sind einzelne Konten, Konten sozialer Netzwerke, und Verbundbenutzer Unternehmenskonten zu authentifizieren. Azure AD B2C bietet auch Multi-Factor Authentication mit Minimalkonfiguration.
 
-Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Azure AD-Mandant repräsentiert eine Organisation, auf, während ein Azure AD B2C-Mandanten ist, eine Sammlung von Identitäten, die mit Anwendungen der vertrauenden Seite verwendet werden. Weitere Informationen finden Sie unter [Azure AD B2C: Häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
+Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Azure AD-Mandant repräsentiert eine Organisation, auf, während ein Azure AD B2C-Mandanten ist, eine Sammlung von Identitäten, die mit Anwendungen der vertrauenden Seite verwendet werden. Weitere Informationen finden Sie unter [Azure AD B2C: häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
 
 Da Web-APIs enthalten keine Benutzeroberfläche, können sie nicht den Benutzer an einem sicheren Tokendienst wie Azure AD B2C umleiten. Stattdessen wird die API ein trägertoken, das von der aufrufenden app übergeben bereits den Benutzer mit Azure AD B2C authentifiziert hat. Die API überprüft das Token ohne direkten Benutzereingriff.
 
@@ -32,7 +32,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 > * Konfigurieren von Richtlinien, die das Verhalten des Azure AD B2C-Mandanten steuern.
 > * Verwenden von Postman, eine Web-app zu simulieren, die ein Dialogfeld zur Anmeldung, stellt ein Token abgerufen, und wird verwendet, um eine Anforderung an die Web-API richten.
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Erforderliche Voraussetzungen
 
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 
@@ -52,9 +52,9 @@ Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, [erstellen Sie ein
 
 In den neu erstellten Azure AD B2C-Mandanten, registrieren Sie Ihre API mit [die Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) unter der **Registrieren einer Web-API-** Abschnitt.
 
-Verwenden Sie die folgenden Werte ein:
+Verwenden Sie die folgenden Werte:
 
-| Einstellung                       | Wert               | Hinweise                                                                                  |
+| -Einstellung                       | {2&gt;Wert&lt;2}               | Hinweise                                                                                  |
 |-------------------------------|---------------------|----------------------------------------------------------------------------------------|
 | **Name**                      | *{API-Name}*        | Geben Sie einen **Namen** für die app, die Ihre app für Kunden beschreibt.                     |
 | **Einschließen von Web-app / web-API** | Ja                 |                                                                                        |
@@ -65,7 +65,7 @@ Verwenden Sie die folgenden Werte ein:
 
 Nachdem die API registriert wurde, wird die Liste der apps und APIs im Mandanten angezeigt. Wählen Sie die API, die bereits registriert wurde. Wählen Sie die **Kopie** Symbol rechts neben der **Anwendungs-ID** Feld, um ihn in die Zwischenablage zu kopieren. Wählen Sie **veröffentlichte Bereiche** und überprüfen Sie den standardmäßigen *"user_impersonation"* Bereich vorhanden ist.
 
-## <a name="create-an-aspnet-core-app-in-visual-studio"></a>Erstellen einer ASP.NET Core-Apps in Visual Studio
+## <a name="create-an-aspnet-core-app-in-visual-studio"></a>Erstellen einer ASP.net Core-app in Visual Studio
 
 Die Visual Studio Web Application-Vorlage kann für die verwenden Sie des Azure AD B2C-Mandantenverwaltungs für die Authentifizierung konfiguriert werden.
 
@@ -83,7 +83,7 @@ In Visual Studio:
 
 5. Füllen Sie das Formular mit den folgenden Werten:
 
-    | Einstellung                       | Wert                                                 |
+    | -Einstellung                       | {2&gt;Wert&lt;2}                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **Domänenname**               | *{der Domänenname Ihres B2C-Mandanten}*                |
     | **Anwendungs-ID**            | *{die Anwendungs-ID aus der Zwischenablage einfügen}*       |
@@ -91,7 +91,7 @@ In Visual Studio:
 
     Wählen Sie **OK** schließen die **Authentifizierung ändern** Dialogfeld. Wählen Sie **OK** zum Erstellen der Web-app.
 
-Visual Studio erstellt die Web-API mit einem Controller mit dem Namen *ValuesController.cs* , hartcodierte Werte für GET-Anforderungen zurückgibt. Die Klasse wird ergänzt, mit der [Authorize-Attribut](xref:security/authorization/simple), sodass die Authentifizierung für alle Anforderungen erforderlich ist.
+Visual Studio erstellt die Web-API mit einem Controller mit dem Namen *ValuesController.cs* , hartcodierte Werte für GET-Anforderungen zurückgibt. Die Klasse ist mit dem Attribut " [autorisieren](xref:security/authorization/simple) " gekennzeichnet, sodass für alle Anforderungen eine Authentifizierung erforderlich ist.
 
 ## <a name="run-the-web-api"></a>Führen Sie die Web-API
 
@@ -108,9 +108,9 @@ Führen Sie die API in Visual Studio. Visual Studio startet einen Browser auf di
 
 Da Sie Postman über eine Web-app simuliert, die Token aus dem Azure AD B2C-Mandanten erhält, muss es als Web-app im Mandanten registriert werden. Registrieren Sie mithilfe von Postman [die Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) unter der **Registrieren einer WebApp** Abschnitt. Beenden der **erstellen Sie ein Web-app-clientgeheimnis** Abschnitt. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
 
-Verwenden Sie die folgenden Werte ein:
+Verwenden Sie die folgenden Werte:
 
-| Einstellung                       | Wert                            | Hinweise                           |
+| -Einstellung                       | {2&gt;Wert&lt;2}                            | Hinweise                           |
 |-------------------------------|----------------------------------|---------------------------------|
 | **Name**                      | Postman                          |                                 |
 | **Einschließen von Web-app / web-API** | Ja                              |                                 |
@@ -157,7 +157,7 @@ Um sicherzustellen, dass die Web-API eine Authentifizierung erforderlich ist, st
     ![die Antwort 401 nicht autorisiert](./azure-ad-b2c-webapi/postman-401-status.png)
 
 > [!IMPORTANT]
-> Wenn Sie die Fehlermeldung "Die Antwort konnte nicht abgerufen werden" erhalten, müssen Sie möglicherweise so deaktivieren Sie die Überprüfung von SSL-Zertifikat in der [Postman Einstellungen](https://learning.getpostman.com/docs/postman/launching_postman/settings).
+> Wenn Sie die Fehlermeldung "Es konnte keine Antwort erhalten" angezeigt wird, müssen Sie unter Umständen die SSL-Zertifikat Überprüfung in den [Postman-Einstellungen](https://learning.getpostman.com/docs/postman/launching_postman/settings)deaktivieren.
 
 ### <a name="obtain-a-bearer-token"></a>Abrufen eines bearertokens
 
@@ -169,7 +169,7 @@ Um eine authentifizierte Anforderung an die Web-API vornehmen zu können, ist ei
 
 2. Abschließen der **Abrufen neuer ZUGRIFFSTOKEN** Dialogfeld wie folgt:
 
-   |                Einstellung                 |                                             Wert                                             |                                                                                                                                    Hinweise                                                                                                                                     |
+   |                -Einstellung                 |                                             {2&gt;Wert&lt;2}                                             |                                                                                                                                    Hinweise                                                                                                                                     |
    |----------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
    |      **Tokenname**       |                                          *{Tokenname}*                                       |                                                                                                                   Geben Sie einen beschreibenden Namen für das Token aus.                                                                                                                    |
    |      **Gewährungstyp**       |                                           Implizit                                            |                                                                                                                                                                                                                                                                              |
@@ -181,7 +181,7 @@ Um eine authentifizierte Anforderung an die Web-API vornehmen zu können, ist ei
    | **Die Clientauthentifizierung** |                                Senden von Clientanmeldeinformationen in Text                                |                                                                                                                                                                                                                                                                              |
 
     > [!NOTE]
-    > &dagger; Das Dialogfeld für die Richtlinie Einstellungen im Azure Active Directory B2C-Portal zeigt zwei mögliche URLs: Eine im Format `https://login.microsoftonline.com/`{Mandanten-Domain-Name} / {zusätzliche Pfadinformationen}, und die andere im Format `https://{tenant name}.b2clogin.com/`{Mandanten-Domain-Name} / {zusätzliche Pfadinformationen}. Sie verfügt über **kritische** , die die Domäne finden Sie in in `AzureAdB2C.Instance` in der Web-API *"appSettings.JSON"* Datei entspricht, die in der Web-app verwendet *"appSettings.JSON"* Datei. Dies ist der gleichen Domäne, die für die Authentifizierungs-URL-Feld in Postman verwendet. Beachten Sie, dass Visual Studio verwendet ein etwas anderes URL-Format als was im Portal angezeigt wird. Solange die angegebenen Domänen entsprechen, funktioniert die URL.
+    > &dagger; Das Dialogfeld für die Richtlinie Einstellungen im Azure Active Directory B2C-Portal zeigt zwei mögliche URLs an: in das Format `https://login.microsoftonline.com/`{Mandanten-Domain-Name} / {zusätzliche Pfadinformationen}, und die andere im Format `https://{tenant name}.b2clogin.com/`{Mandanten-Domain-Name} / {zusätzliche die Pfadinformationen}. Sie verfügt über **kritische** , die die Domäne finden Sie in in `AzureAdB2C.Instance` in der Web-API *"appSettings.JSON"* Datei entspricht, die in der Web-app verwendet *"appSettings.JSON"* Datei. Dies ist der gleichen Domäne, die für die Authentifizierungs-URL-Feld in Postman verwendet. Beachten Sie, dass Visual Studio verwendet ein etwas anderes URL-Format als was im Portal angezeigt wird. Solange die angegebenen Domänen entsprechen, funktioniert die URL.
 
 3. Wählen Sie die **Token anfordern** Schaltfläche.
 

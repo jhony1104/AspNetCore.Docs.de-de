@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 4f6a4ea209ebe30759f9f14b15b0385399b36ead
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: fe07a113a29ed3e14679e3f3f2249b0810c17593
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116055"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880706"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Benutzerdefinierte Autorisierungs Richtlinien Anbieter, die iauthorizationpolicyprovider in ASP.net Core verwenden 
 
@@ -31,7 +31,7 @@ Beispiele für Szenarien, in denen ein benutzerdefinierter [iauthorizationpolicy
 
 ASP.net Core-Apps verwenden eine Implementierung der `IAuthorizationPolicyProvider` Schnittstelle zum Abrufen von Autorisierungs Richtlinien. Standardmäßig ist [defaultauthorizationpolicyprovider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) registriert und wird verwendet. `DefaultAuthorizationPolicyProvider` gibt Richtlinien vom `AuthorizationOptions` zurück, die in einem `IServiceCollection.AddAuthorization`-Befehl bereitgestellt werden.
 
-Sie können dieses Verhalten anpassen, indem Sie eine andere `IAuthorizationPolicyProvider` Implementierung im Container für die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) der APP registrieren. 
+Passen Sie dieses Verhalten an, indem Sie eine andere `IAuthorizationPolicyProvider` Implementierung im Container für die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) der APP registrieren. 
 
 Die `IAuthorizationPolicyProvider`-Schnittstelle enthält drei APIs:
 
@@ -148,7 +148,7 @@ Anschließend kann die `GetPolicyAsync`-Methode so aktualisiert werden, dass Sie
 return BackupPolicyProvider.GetPolicyAsync(policyName);
 ```
 
-## <a name="default-policy"></a>Standard Richtlinie
+## <a name="default-policy"></a>Standardrichtlinie
 
 Zusätzlich zur Bereitstellung benannter Autorisierungs Richtlinien muss ein benutzerdefinierter `IAuthorizationPolicyProvider` `GetDefaultPolicyAsync` implementieren, um eine Autorisierungs Richtlinie für `[Authorize]` Attribute bereitzustellen, ohne dass ein Richtlinien Name angegeben wird.
 

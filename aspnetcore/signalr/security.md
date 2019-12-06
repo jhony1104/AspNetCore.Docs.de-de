@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in AS
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: c5a34ae67bdfb8f7fd92c00f18973b66b685a99c
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: f443fe0fbaaa1facd09edc0878c048772895ecff
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963901"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881183"
 ---
 # <a name="security-considerations-in-aspnet-core-opno-locsignalr"></a>Sicherheitsüberlegungen in ASP.net Core SignalR
 
@@ -117,9 +117,9 @@ Wenn Sie Bedenken haben, dass Sie diese Daten mit ihren Serverprotokollen protok
 
 ## <a name="exceptions"></a>Ausnahmen
 
-Ausnahme Meldungen werden im Allgemeinen als sensible Daten betrachtet, die für einen Client nicht offengelegt werden sollen. Standardmäßig sendet SignalR nicht die Details einer Ausnahme, die von einer Hub-Methode ausgelöst wird, an den Client. Stattdessen empfängt der Client eine generische Meldung, die angibt, dass ein Fehler aufgetreten ist. Die Übermittlung von Ausnahme Meldungen an den Client kann überschrieben werden (z. b. in Entwicklung oder Test), mit [`EnableDetailedErrors`](xref:signalr/configuration#configure-server-options). Ausnahme Meldungen sollten in Produktions-apps nicht für den Client verfügbar gemacht werden.
+Ausnahme Meldungen werden im Allgemeinen als sensible Daten betrachtet, die für einen Client nicht offengelegt werden sollen. Standardmäßig sendet SignalR nicht die Details einer Ausnahme, die von einer Hub-Methode ausgelöst wird, an den Client. Stattdessen empfängt der Client eine generische Meldung, die angibt, dass ein Fehler aufgetreten ist. Die Übermittlung von Ausnahme Meldungen an den Client kann überschrieben werden (z. b. in "Entwicklung" oder "Test") mit [enabledetailederrors](xref:signalr/configuration#configure-server-options). Ausnahme Meldungen sollten in Produktions-apps nicht für den Client verfügbar gemacht werden.
 
-## <a name="buffer-management"></a>Puffer Verwaltung
+## <a name="buffer-management"></a>Pufferverwaltung
 
 SignalR verwendet Verbindungs Puffer, um eingehende und ausgehende Nachrichten zu verwalten. Standardmäßig beschränkt SignalR diese Puffer auf 32 KB. Die größte Nachricht, die ein Client oder Server senden kann, ist 32 KB. Der maximale Arbeitsspeicher, der von einer Verbindung für Nachrichten belegt wird, beträgt 32 KB. Wenn die Nachrichten immer kleiner als 32 KB sind, können Sie den Grenzwert verringern:
 
@@ -131,7 +131,7 @@ Wenn die Nachrichten größer als 32 KB sind, können Sie den Grenzwert erhöhen
 * Der-Client kann bewirken, dass der Server große Speicherpuffer zuweist.
 * Die Server Zuordnung großer Puffer verringert möglicherweise die Anzahl der gleichzeitigen Verbindungen.
 
-Es gibt Grenzwerte für eingehende und ausgehende Nachrichten. beide können für das in `MapHub`konfigurierte [`HttpConnectionDispatcherOptions`](xref:signalr/configuration#configure-server-options) Objekt konfiguriert werden:
+Es gibt Grenzwerte für eingehende und ausgehende Nachrichten. beide können für das [httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) -Objekt konfiguriert werden, das in `MapHub`konfiguriert ist:
 
 * `ApplicationMaxBufferSize` die die maximale Anzahl von Bytes vom Client darstellt, die der Server puffert. Wenn der Client versucht, eine Nachricht zu senden, die über diesen Grenzwert hinausgeht, wird die Verbindung möglicherweise geschlossen.
 * `TransportMaxBufferSize` die die maximale Anzahl von Bytes darstellt, die vom Server gesendet werden können. Wenn der Server versucht, eine Nachricht (einschließlich Rückgabewerte von hubmethoden) zu senden, die größer als dieser Grenzwert ist, wird eine Ausnahme ausgelöst.

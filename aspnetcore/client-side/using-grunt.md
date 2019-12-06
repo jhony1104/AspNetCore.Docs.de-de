@@ -1,62 +1,62 @@
 ---
-title: Verwenden von Grunt in ASP.NET Core
+title: Verwenden von grunt in ASP.net Core
 author: rick-anderson
-description: Verwenden von Grunt in ASP.NET Core
+description: Verwenden von grunt in ASP.net Core
 ms.author: riande
-ms.date: 06/18/2019
+ms.date: 12/05/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: f3832bd1fe5721fbda114103ac11a8d55312bcb2
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: e516b85da7e94d0c93be642086fede0a11fea3c2
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813553"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879794"
 ---
-# <a name="use-grunt-in-aspnet-core"></a>Verwenden von Grunt in ASP.NET Core
+# <a name="use-grunt-in-aspnet-core"></a>Verwenden von grunt in ASP.net Core
 
-Grunt ist eine JavaScript-aufgabenausführung, die automatisiert Skript Minimierung, TypeScript-Kompilierung, Code "linten" Qualitätstools, Pre CSS-Prozessoren und fast jeder sich wiederholende Aufgabe, die vor, um die Cliententwicklung zu unterstützen. Grunt wird vollständig in Visual Studio unterstützt.
+Grunt ist eine JavaScript-Aufgabenausführung, die Skript Minimierung, typescript-Kompilierung, lint-Tools für die Codequalität, CSS-Präprozessoren und fast alle wiederkehrenden Aufgabe automatisiert, die zur Unterstützung der Client Entwicklung erforderlich sind. Grunt wird in Visual Studio vollständig unterstützt.
 
-Dieses Beispiel verwendet ein leeres ASP.NET Core-Projekt als Ausgangspunkt, veranschaulichen, wie Sie die Client-Buildprozess von Grund auf neu zu automatisieren.
+In diesem Beispiel wird ein leeres ASP.net Core Projekt als Ausgangspunkt verwendet, um anzuzeigen, wie der clientbuildprozess von Grund auf neu automatisiert werden kann.
 
-Das fertige Beispiel löscht das Zielverzeichnis für die Bereitstellung, kombiniert JavaScript-Dateien, überprüft der Codequalität, fasst der Inhalt der JavaScript-Datei und in das Stammverzeichnis der Webanwendung bereitgestellt. Wir verwenden die folgenden Pakete:
+Das fertige Beispiel bereinigt das Ziel Bereitstellungs Verzeichnis, kombiniert JavaScript-Dateien, überprüft die Codequalität, fasst JavaScript-Dateiinhalte zusammen und stellt Sie im Stammverzeichnis Ihrer Webanwendung bereit. Wir verwenden die folgenden Pakete:
 
-* **grunt**: Das Grunt Task Runner-Paket.
+* **grunt**: das grunt Task Runner-Paket.
 
-* **grunt-contrib-clean**: Ein Plug-in, das Dateien oder Verzeichnisse entfernt.
+* **grunt-contrib-Clean**: ein Plug-in, mit dem Dateien oder Verzeichnisse entfernt werden.
 
-* **grunt-contrib-jshint**: Ein Plug-in, das Qualität der JavaScript-Code überprüft.
+* **grunt-contrib-jshint**: ein Plug-in, das die Qualität von JavaScript-Code überprüft.
 
-* **grunt-contrib-concat**: Ein Plug-in, das Dateien in einer einzelnen Datei verknüpft.
+* **grunt-contrib-Concat**: ein Plug-in, das Dateien zu einer einzelnen Datei verknüpft.
 
-* **grunt-contrib-uglify**: Ein Plug-in, das JavaScript zur Reduzierung der Größe verkleinert wird.
+* **grunt-contrib-uglify**: ein Plug-in, das JavaScript minimiert, um die Größe zu verringern.
 
-* **grunt-contrib-watch**: Ein Plug-in, die Aktivität "Datei" überwacht wird.
+* **grunt-contrib-Watch**: ein Plug-in, das die Datei Aktivität überwacht.
 
 ## <a name="preparing-the-application"></a>Vorbereiten der Anwendung
 
-Zunächst richten Sie eine neue leere Web-Anwendung, und fügen Sie TypeScript-Beispiel-Dateien hinzu. TypeScript-Dateien werden in JavaScript mithilfe der Standardeinstellungen für Visual Studio automatisch kompiliert und werden unsere Rohmaterial zum Verarbeiten von Verwenden von Grunt.
+Richten Sie zunächst eine neue leere Webanwendung ein, und fügen Sie typescript-Beispieldateien hinzu. Typescript-Dateien werden automatisch mithilfe von Visual Studio-Standardeinstellungen in JavaScript kompiliert und sind das Rohmaterial, das mit grunt verarbeitet werden soll.
 
-1. Erstellen Sie in Visual Studio ein neues `ASP.NET Web Application`.
+1. Erstellen Sie in Visual Studio eine neue `ASP.NET Web Application`.
 
-2. In der **neues ASP.NET-Projekt** Dialogfeld Wählen Sie die ASP.NET Core **leere** Vorlage, und klicken Sie auf die Schaltfläche "OK".
+2. Wählen Sie im Dialogfeld **Neues ASP.net-Projekt** das ASP.net Core **leere** Vorlage aus, und klicken Sie auf die Schaltfläche OK.
 
-3. Überprüfen Sie im Projektmappen-Explorer die Struktur des Projekts aus. Die `\src` Ordner enthält leere `wwwroot` und `Dependencies` Knoten.
+3. Überprüfen Sie im Projektmappen-Explorer die Projektstruktur. Der `\src` Ordner enthält leere `wwwroot` und `Dependencies` Knoten.
 
-    ![leere Web-Lösung](using-grunt/_static/grunt-solution-explorer.png)
+    ![leere Weblösung](using-grunt/_static/grunt-solution-explorer.png)
 
-4. Fügen Sie einen neuen Ordner namens `TypeScript` zu Ihrem Projektverzeichnis.
+4. Fügen Sie dem Projektverzeichnis einen neuen Ordner mit dem Namen `TypeScript` hinzu.
 
-5. Vor dem Hinzufügen von Dateien, stellen Sie sicher, dass Visual Studio die Option "Kompilieren speichern" für TypeScript-Dateien ausgecheckt. Navigieren Sie zu **Tools** > **Optionen** > **Text-Editor** > **Typescript**  >  **Projekt**:
+5. Vergewissern Sie sich vor dem Hinzufügen von Dateien, dass Visual Studio die Option "beim Speichern kompilieren" für typescript-Dateien aktiviert hat. Navigieren Sie **zu** Extras > **Optionen** > **Text-Editor** > **typescript** > **Projekt**:
 
-    ![Optionen, die automatische Kompilierung von TypeScript-Dateien festlegen](using-grunt/_static/typescript-options.png)
+    ![Optionen zum Festlegen der automatischen Kompilierung von typescript-Dateien](using-grunt/_static/typescript-options.png)
 
-6. Mit der rechten Maustaste die `TypeScript` und wählen **hinzufügen > Neues Element** aus dem Kontextmenü. Wählen Sie die **JavaScript-Datei** Element aus, und nennen Sie die Datei *Tastes.ts* (Beachten Sie die \*Dateierweiterung TS). Kopieren Sie die Zeile der folgenden TypeScript-Code in die Datei (Wenn Sie gespeichert haben, ein neues *Tastes.js* Datei wird angezeigt, mit der JavaScript-Quelle).
+6. Klicken Sie mit der rechten Maustaste auf das `TypeScript` Verzeichnis, und wählen Sie im Kontextmenü **> Neues Element hinzufügen** aus. Wählen Sie das **JavaScript-Datei** Element aus, und nennen Sie die Datei " *Geschmacks. TS* " (Beachten Sie die \*. TS-Erweiterung) Kopieren Sie die Zeile des typescript-Codes weiter unten in die Datei (wenn Sie speichern, wird eine neue Datei " *Geschmäcker. js* " mit der JavaScript-Quelle angezeigt).
 
     ```typescript
     enum Tastes { Sweet, Sour, Salty, Bitter }
     ```
 
-7. Fügen Sie eine zweite Datei, die **TypeScript** Verzeichnis und nennen Sie sie `Food.ts`. Kopieren Sie den folgenden Code in die Datei an.
+7. Fügen Sie dem **typescript** -Verzeichnis eine zweite Datei hinzu, und benennen Sie Sie `Food.ts`. Kopieren Sie den folgenden Code in die Datei.
 
     ```typescript
     class Food {
@@ -85,18 +85,18 @@ Zunächst richten Sie eine neue leere Web-Anwendung, und fügen Sie TypeScript-B
 
 ## <a name="configuring-npm"></a>Konfigurieren von NPM
 
-Als Nächstes konfigurieren Sie NPM, Grunt und Grunt-Aufgaben herunterladen.
+Als Nächstes konfigurieren Sie NPM, um grunt-und grunt-Tasks herunterzuladen.
 
-1. Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste in des Projekts, und wählen **hinzufügen > Neues Element** aus dem Kontextmenü. Wählen Sie die **NPM-Konfigurationsdatei** Element, übernehmen Sie den Standardnamen *"Package.JSON"* , und klicken Sie auf die **hinzufügen** Schaltfläche.
+1. Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste auf das Projekt, und wählen Sie im Kontextmenü **> Neues Element hinzufügen** aus. Wählen Sie das Element **NPM-Konfigurationsdatei** aus, belassen Sie den Standardnamen *Package. JSON*, und klicken Sie auf die Schaltfläche **Hinzufügen** .
 
-2. In der *"Package.JSON"* -Datei im der `devDependencies` Objekt geschweifte Klammern, geben Sie "grunt". Wählen Sie `grunt` leseformulare in Intellisense aus, und drücken Sie die EINGABETASTE. Visual Studio quote der Grunt-Paketname, und fügen einen Doppelpunkt. Wählen Sie rechts neben dem Doppelpunkt, die neueste stabile Version des Pakets vom oberen Rand der Intellisense-Liste (drücken Sie die `Ctrl-Space` Wenn Intellisense nicht angezeigt wird).
+2. Geben Sie in der Datei " *Package. JSON* " in den Klammern des `devDependencies` Objekts "Grunt" ein. Wählen Sie `grunt` aus der IntelliSense-Liste aus, und drücken Sie die EINGABETASTE. Visual Studio gibt den Namen des grunt-Pakets an und fügt einen Doppelpunkt hinzu. Wählen Sie rechts neben dem Doppelpunkt die neueste stabile Version des Pakets am oberen Rand der IntelliSense-Liste aus (drücken Sie `Ctrl-Space`, wenn IntelliSense nicht angezeigt wird).
 
-    ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
+    ![grunt IntelliSense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > Der NPM verwendet [semantische Versionierung](https://semver.org/) zum Organisieren von Abhängigkeiten. Semantischer versionsverwaltung, auch bekannt als SemVer, identifiziert die Pakete mit den Nummerierungsschema \<wichtigen >.\< kleinere >. \<Patch >. IntelliSense vereinfacht semantische Versionierung, indem Sie nur einige gängige Optionen angezeigt. Das oberste Element in der Intellisense-Liste (0.4.5 im obigen Beispiel), gilt die neueste stabile Version des Pakets. Das Caretzeichen (^) Symbol entspricht, die aktuellste Version, und die Tilde (~) entspricht der aktuellsten Nebenversion. Finden Sie unter den [NPM Semver Version Parser Verweis](https://www.npmjs.com/package/semver) als Leitfaden für die vollständige ausdrucksmöglichkeiten, die SemVer bereitstellt.
+    > NPM verwendet die [semantische Versions](https://semver.org/) Verwaltung, um Abhängigkeiten zu organisieren. Die semantische Versionierung, auch bekannt als semver, identifiziert Pakete mit dem Nummerierungschema \<Haupt >.\<neben >.\<Patch >. IntelliSense vereinfacht die semantische Versionsverwaltung, da nur einige allgemeine Optionen angezeigt werden. Das oberste Element in der IntelliSense-Liste (0.4.5 im obigen Beispiel) wird als neueste stabile Version des Pakets betrachtet. Das Caretzeichen (^) stimmt mit der aktuellen Hauptversion überein, und die Tilde (~) entspricht der neuesten neben Version. Weitere Informationen zur vollständigen Ausdrucksweise von semver finden Sie in der [Referenz zu NPM semver Version Parser](https://www.npmjs.com/package/semver) als Leitfaden.
 
-3. Fügen Sie weitere Abhängigkeiten laden grunt-Contrib -\* Pakete für *Bereinigen*, *Jshint*, *"concat"* , *uglify*, und *Watch* wie im folgenden Beispiel gezeigt. Die Versionen müssen nicht im Beispiel übereinstimmen.
+3. Fügen Sie weitere Abhängigkeiten hinzu, um grunt-contrib-\* Pakete für *Clean*, *jshint*, *Concat*, *uglify*und *Watch* zu laden, wie im folgenden Beispiel gezeigt. Die Versionen müssen nicht mit dem Beispiel identisch sein.
 
     ```json
     "devDependencies": {
@@ -109,24 +109,24 @@ Als Nächstes konfigurieren Sie NPM, Grunt und Grunt-Aufgaben herunterladen.
     }
     ```
 
-4. Speichern Sie die *"Package.JSON"* Datei.
+4. Speichern Sie die Datei " *Package. JSON* ".
 
-Die Pakete für die einzelnen `devDependencies` Element herunterladen werden, sowie alle Dateien, die jedes Paket ist erforderlich. Sie finden die Paketdateien in der *"node_modules"* Verzeichnis durch Aktivieren der **alle Dateien anzeigen** Schaltfläche **Projektmappen-Explorer**.
+Die Pakete für die einzelnen `devDependencies` Elemente werden zusammen mit allen Dateien heruntergeladen, die von den einzelnen Paketen benötigt werden. Sie finden die Paketdateien im *node_modules* Verzeichnis, indem Sie die Schaltfläche **alle Dateien anzeigen** in **Projektmappen-Explorer**aktivieren.
 
-![Grunt "node_modules"](using-grunt/_static/node-modules.png)
+![grunt-node_modules](using-grunt/_static/node-modules.png)
 
 > [!NOTE]
-> Wenn Sie möchten, können Sie manuell wiederherstellen von Abhängigkeiten in **Projektmappen-Explorer** mit der rechten Maustaste auf `Dependencies\NPM` und Auswählen der **-Pakete wiederherstellen** Option des Menüs.
+> Wenn erforderlich, können Sie Abhängigkeiten in **Projektmappen-Explorer** manuell wiederherstellen, indem Sie mit der rechten Maustaste auf `Dependencies\NPM` klicken und die Menüoption **Pakete wiederherstellen** auswählen.
 
-![Wiederherstellen von Paketen](using-grunt/_static/restore-packages.png)
+![Pakete wiederherstellen](using-grunt/_static/restore-packages.png)
 
-## <a name="configuring-grunt"></a>Konfigurieren von Grunt
+## <a name="configuring-grunt"></a>Konfigurieren von grunt
 
-Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die definiert, lädt und registriert Sie Aufgaben, die manuell ausführen oder so konfiguriert, dass automatisch basierend auf Ereignissen in Visual Studio ausgeführt werden können.
+Grunt wird mithilfe eines Manifests namens *gruntfile. js* konfiguriert, das Aufgaben definiert, lädt und registriert, die manuell ausgeführt oder für die automatische Ausführung auf der Grundlage von Ereignissen in Visual Studio konfiguriert werden können.
 
-1. Mit der rechten Maustaste in des Projekts, und wählen Sie **hinzufügen** > **neues Element**. Wählen Sie die **JavaScript-Datei** Elementvorlagen, ändern Sie den Namen in *"gruntfile.js"* , und klicken Sie auf die **hinzufügen** Schaltfläche.
+1. Klicken Sie mit der rechten Maustaste auf das Projekt, und wählen Sie > **Neues Element** **Hinzufügen** Wählen Sie die **JavaScript-Datei** Element Vorlage aus, ändern Sie den Namen in *gruntfile. js*, und klicken Sie auf die Schaltfläche **Hinzufügen** .
 
-1. Fügen Sie den folgenden Code *"gruntfile.js"* . Die `initConfig` Funktion legt Optionen für jedes Paket und der Rest des Moduls lädt und die Tasks werden registriert.
+1. Fügen Sie " *gruntfile. js*" den folgenden Code hinzu. Mit der `initConfig`-Funktion werden Optionen für jedes Paket festgelegt, und der Rest des Moduls lädt und registriert Tasks.
 
    ```javascript
    module.exports = function (grunt) {
@@ -135,7 +135,7 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
    };
    ```
 
-1. In der `initConfig` funktioniert, fügen Sie die Optionen für die `clean` Aufgabe wie im Beispiel gezeigt *"gruntfile.js"* unten. Die `clean` akzeptiert ein Array von Verzeichniszeichenfolgen Task. Dieser Task entfernt Dateien, die von *Wwwroot/Lib* und entfernt den gesamten */temp* Verzeichnis.
+1. Fügen Sie innerhalb der `initConfig`-Funktion Optionen für die `clean`-Aufgabe hinzu, wie im folgenden Beispiel gezeigt: *gruntfile. js* . Die `clean` Aufgabe akzeptiert ein Array von Verzeichnis Zeichenfolgen. Mit diesem Task werden Dateien aus *wwwroot/lib* entfernt und das gesamte */Temp abgelegt* -Verzeichnis entfernt.
 
     ```javascript
     module.exports = function (grunt) {
@@ -145,34 +145,34 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     };
     ```
 
-1. Unterhalb der `initConfig` funktioniert, fügen Sie einen Aufruf von `grunt.loadNpmTasks`. Dadurch wird die Aufgabe von Visual Studio ausführbar.
+1. Fügen Sie unter der `initConfig`-Funktion einen-Aufruf`grunt.loadNpmTasks`hinzu. Dadurch wird die Aufgabe aus Visual Studio entfernt.
 
     ```javascript
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. Speichern Sie *"gruntfile.js"* . Die Datei sollte etwa wie im folgenden Screenshot aussehen.
+1. Speichern Sie *gruntfile. js*. Die Datei sollte in etwa wie der folgende Screenshot aussehen.
 
-    ![ersten gruntfile](using-grunt/_static/gruntfile-js-initial.png)
+    ![anfängliche gruntfile](using-grunt/_static/gruntfile-js-initial.png)
 
-1. Mit der rechten Maustaste *"gruntfile.js"* , und wählen Sie **Task Runner-Explorer** aus dem Kontextmenü. Die **Task Runner-Explorer** Fenster wird geöffnet.
+1. Klicken Sie mit der rechten Maustaste auf *gruntfile. js* , und wählen Sie im Kontextmenü **Task Runner-Explorer** aus. Das Fenster **Task Runner Explorer** wird geöffnet.
 
-    ![Task Runner-Explorer-Menü](using-grunt/_static/task-runner-explorer-menu.png)
+    ![Menü "Aufgaben Runner-Explorer"](using-grunt/_static/task-runner-explorer-menu.png)
 
-1. Überprüfen Sie, ob `clean` wird unter **Aufgaben** in die **Task Runner-Explorer**.
+1. Vergewissern Sie sich, dass `clean` unter **Aufgaben** im **Task Runner-Explorer**angezeigt wird.
 
-    ![Task Runner-Explorer-Aufgabenliste](using-grunt/_static/task-runner-explorer-tasks.png)
+    ![Aufgaben Ausführungs-Explorer-Aufgabenliste](using-grunt/_static/task-runner-explorer-tasks.png)
 
-1. Mit der rechten Maustaste der clean-Aufgabe, und wählen Sie **ausführen** aus dem Kontextmenü. Ein Befehlsfenster zeigt Fortschritt der Aufgabe.
+1. Klicken Sie mit der rechten Maustaste auf die Aufgabe bereinigen, und wählen Sie im Kontextmenü **Ausführen** Im Befehlsfenster wird der Fortschritt der Aufgabe angezeigt.
 
-    ![Task Runner-Explorer ausführen clean-Aufgabe](using-grunt/_static/task-runner-explorer-run-clean.png)
+    ![Task Runner-Explorer ausführen von Clean Task](using-grunt/_static/task-runner-explorer-run-clean.png)
 
     > [!NOTE]
-    > Es gibt keine Dateien oder Verzeichnisse noch bereinigt. Wenn Sie möchten, können Sie sie im Projektmappen-Explorer manuell erstellen und die clean-Aufgabe als Test führen.
+    > Es sind noch keine Dateien oder Verzeichnisse zum Bereinigen vorhanden. Wenn Sie möchten, können Sie diese manuell im Projektmappen-Explorer erstellen und dann die Aufgabe bereinigen als Test ausführen.
 
-1. In der `initConfig` funktioniert, fügen Sie einen Eintrag für `concat` anhand des folgenden Codes.
+1. Fügen Sie in der `initConfig`-Funktion einen Eintrag für `concat` mit dem folgenden Code hinzu.
 
-    Die `src` Eigenschaftsarray Listet die Dateien in der Reihenfolge kombiniert, dass sie kombiniert werden sollen. Die `dest` Eigenschaft weist den Pfad zu der Datei, die erzeugt wird.
+    Das `src`-Eigenschaften Array listet die zu kombinierenden Dateien in der Reihenfolge auf, in der Sie kombiniert werden sollten. Die `dest`-Eigenschaft weist den Pfad der kombinierten Datei zu, die erstellt wird.
 
     ```javascript
     concat: {
@@ -184,11 +184,11 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     ```
 
     > [!NOTE]
-    > Die `all` Eigenschaft im obigen Code ist der Name eines Ziels. Ziele werden in einigen Grunt-Aufgaben verwendet, um Buildumgebungen mit mehreren zu ermöglichen. Sie können Anzeigen der integrierten Ziele mithilfe von IntelliSense oder weisen Sie Ihre eigenen.
+    > Die `all`-Eigenschaft im obigen Code ist der Name eines Ziels. Ziele werden in einigen grunt-Aufgaben verwendet, um mehrere Buildumgebungen zuzulassen. Sie können die integrierten Ziele mithilfe von IntelliSense anzeigen oder eigene Ziele zuweisen.
 
-1. Hinzufügen der `jshint` Aufgabe mit dem folgenden Code.
+1. Fügen Sie die `jshint` Aufgabe mit dem folgenden Code hinzu.
 
-    Die Jshint `code-quality` Hilfsprogramm ausgeführt wird, für alle JavaScript-Datei finden Sie in der *Temp* Verzeichnis.
+    Das Hilfsprogramm jshint `code-quality` wird für jede JavaScript-Datei im Verzeichnis *Temp* ausgeführt.
 
     ```javascript
     jshint: {
@@ -200,11 +200,11 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     ```
 
     > [!NOTE]
-    > Die Option "-W069" wird ein Fehler erzeugt, durch Jshint Wenn JavaScript verwendet die Syntax So weisen eine Eigenschaft anstatt die punktierte Schreibweise, d. h. Klammer `Tastes["Sweet"]` anstelle von `Tastes.Sweet`. Die Option deaktiviert die Warnung, um den Rest des Prozesses, der weiterhin ermöglichen.
+    > Die Option "-W069" ist ein Fehler, der von jshint erzeugt wird, wenn JavaScript die Klammer Syntax verwendet, um eine Eigenschaft anstelle der Punkt Notation zuzuweisen, d. h. `Tastes["Sweet"]` statt `Tastes.Sweet`. Mit der-Option wird die Warnung deaktiviert, damit der restliche Prozess fortgesetzt werden kann.
 
-1. Hinzufügen der `uglify` Aufgabe mit dem folgenden Code.
+1. Fügen Sie die `uglify` Aufgabe mit dem folgenden Code hinzu.
 
-    Verkleinert die Aufgabe der *combined.js* -Datei finden Sie im Verzeichnis "temp" und erstellt die Ergebnisdatei im Wwwroot/Lib die standardmäßige Benennungskonvention  *\<Dateiname\>. min.js*.
+    Der Task miniert die *kombinierte js* -Datei im Verzeichnis "Temp" und erstellt die Ergebnisdatei in wwwroot/lib gemäß der Standard Benennungs Konvention *\<Dateiname\>. min. js*.
 
     ```javascript
     uglify: {
@@ -215,7 +215,7 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     },
     ```
 
-1. Unter dem Aufruf `grunt.loadNpmTasks` , lädt `grunt-contrib-clean`, enthalten die gleichen Aufruf für Jshint, "concat", und uglify anhand des folgenden Codes.
+1. Fügen Sie unter dem Aufrufen von `grunt.loadNpmTasks`, der `grunt-contrib-clean`lädt, den gleichen-Befehl für jshint, Concat und uglify mit dem folgenden Code hinzu.
 
     ```javascript
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -223,36 +223,36 @@ Grunt erfolgt mithilfe eines Manifests, das mit dem Namen *"gruntfile.js"* , die
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. Speichern Sie *"gruntfile.js"* . Die Datei sollte etwa wie im folgenden Beispiel aussehen.
+1. Speichern Sie *gruntfile. js*. Die Datei sollte in etwa wie im folgenden Beispiel aussehen.
 
-    ![Beispiel für eine vollständige grunt](using-grunt/_static/gruntfile-js-complete.png)
+    ![Beispiel für eine komplette grunt-Datei](using-grunt/_static/gruntfile-js-complete.png)
 
-1. Beachten Sie, dass die **Task Runner-Explorer** Aufgabenliste enthält `clean`, `concat`, `jshint` und `uglify` Aufgaben. Führen Sie jede Aufgabe in der Reihenfolge, und beobachten Sie die Ergebnisse im **Projektmappen-Explorer**. Jede Aufgabe sollte ohne Fehler ausgeführt.
+1. Beachten Sie, dass Aufgaben **Runner-Explorer** -Aufgabenliste `clean`, `concat`, `jshint` und `uglify` Tasks enthält. Führen Sie jede Aufgabe nacheinander aus, und beobachten Sie die Ergebnisse in **Projektmappen-Explorer**. Jede Aufgabe sollte ohne Fehler ausgeführt werden.
 
-    ![Task Runner-Explorer, die jeder Task ausführen](using-grunt/_static/task-runner-explorer-run-each-task.png)
+    ![Task Runner-Explorer ausführen der einzelnen Aufgaben](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    Der Task "concat" erstellt ein neues *combined.js* Datei, und setzt es in das temporäre Verzeichnis. Die `jshint` Task einfach ausgeführt wird und keine Ausgabe erzeugt. Die `uglify` Task erstellt eine neue *combined.min.js* Datei, und platziert ihn in *Wwwroot/Lib*. Nach Abschluss des Vorgangs sollte die Lösung etwa wie im folgenden Screenshot aussehen:
+    Der Concat-Task erstellt eine neue *kombinierte js* -Datei und platziert Sie im temporären Verzeichnis. Der `jshint` Task wird einfach ausgeführt, und es wird keine Ausgabe erzeugt. Der `uglify` Task erstellt eine neue *kombinierte. min. js* -Datei und platziert Sie in *wwwroot/lib*. Nach Abschluss sollte die Projekt Mappe in etwa wie im folgenden Screenshot aussehen:
 
-    ![Projektmappen-Explorer nachdem alle Aufgaben](using-grunt/_static/solution-explorer-after-all-tasks.png)
+    ![Projektmappen-Explorer nach allen Aufgaben](using-grunt/_static/solution-explorer-after-all-tasks.png)
 
     > [!NOTE]
-    > Weitere Informationen zu den Optionen für jedes Paket finden Sie unter [ https://www.npmjs.com/ ](https://www.npmjs.com/) und suchen Sie den Paketnamen in das Suchfeld auf der Hauptseite. Beispielsweise können Sie das Paket Grunt-Contrib-clean, um einen Link zur Dokumentation zu erhalten, der allen Parametern erklärt nachschlagen.
+    > Weitere Informationen zu den Optionen für jedes Paket finden Sie unter [https://www.npmjs.com/](https://www.npmjs.com/) und Nachschlagen des Paket namens im Suchfeld auf der Hauptseite. Beispielsweise können Sie das grunt-contrib-Clean-Paket suchen, um einen Dokumentations Link zu erhalten, in dem alle seine Parameter erläutert werden.
 
-### <a name="all-together-now"></a>Und jetzt alle zusammen
+### <a name="all-together-now"></a>Zusammenfassung
 
-Verwenden Sie die Grunt `registerTask()` Methode, um eine Reihe von Aufgaben in einer bestimmten Reihenfolge auszuführen. Z. B. zum Ausführen des Beispiels, die oben genannten Schritte, in der Reihenfolge bereinigen -> "concat" -> Jshint -> uglify, fügen Sie den folgenden Code hinzu, an das Modul. Der Code sollte auf der gleichen Ebene wie die Aufrufe loadNpmTasks() außerhalb InitConfig hinzugefügt werden.
+Verwenden Sie die grunt-`registerTask()`-Methode, um eine Reihe von Aufgaben in einer bestimmten Sequenz auszuführen. Um z. b. die obigen Beispiel Schritte in der Order Clean-> Concat-> jshint-> uglify auszuführen, fügen Sie dem-Modul den folgenden Code hinzu. Der Code sollte der gleichen Ebene wie die loadnpmtasks ()-Aufrufe außerhalb von InitConfig hinzugefügt werden.
 
 ```javascript
 grunt.registerTask("all", ['clean', 'concat', 'jshint', 'uglify']);
 ```
 
-Die neue Aufgabe wird im Task Runner-Explorer unter Aliastasks angezeigt. Sie können mit der rechten Maustaste, und genau wie andere Aufgaben ausführen. Die `all` Task ausgeführt `clean`, `concat`, `jshint` und `uglify`, in der Reihenfolge.
+Die neue Aufgabe wird im Task Runner-Explorer unter Alias Tasks angezeigt. Sie können mit der rechten Maustaste darauf klicken und Sie genauso wie andere Aufgaben ausführen. Der `all` Task führt `clean`, `concat`, `jshint` und `uglify`in der richtigen Reihenfolge aus.
 
-![Alias-Grunt-Aufgaben](using-grunt/_static/alias-tasks.png)
+![Alias-grunt-Aufgaben](using-grunt/_static/alias-tasks.png)
 
 ## <a name="watching-for-changes"></a>Erkennen von Änderungen
 
-Ein `watch` -Task auf Dateien und Verzeichnisse. Die Apple Watch löst Aufgaben automatisch, wenn Änderungen erkannt. InitConfig, damit die Änderungen sehen Sie sich den folgenden Code hinzugefügt \*JS-Dateien in das TypeScript-Verzeichnis. Wenn eine JavaScript-Datei geändert wird, `watch` führt die `all` Aufgabe.
+Mit einer `watch` Aufgabe werden Dateien und Verzeichnisse im Auge behalten. Die Überwachung löst Aufgaben automatisch aus, wenn Änderungen erkannt werden. Fügen Sie in InitConfig den folgenden Code hinzu, um Änderungen an \*. js-Dateien im typescript-Verzeichnis zu überwachen. Wenn eine JavaScript-Datei geändert wird, wird `watch` die `all` Aufgabe ausführen.
 
 ```javascript
 watch: {
@@ -261,26 +261,26 @@ watch: {
 }
 ```
 
-Fügen Sie einen Aufruf von `loadNpmTasks()` zum Anzeigen der `watch` Aufgabe im Task Runner-Explorer.
+Fügen Sie einen `loadNpmTasks()` hinzu, um die `watch` Aufgabe im Task Runner-Explorer anzuzeigen.
 
 ```javascript
 grunt.loadNpmTasks('grunt-contrib-watch');
 ```
 
-Mit der rechten Maustaste in der Watch-Aufgabe in Task Runner-Explorer, und führen Sie aus dem Kontextmenü auswählen. Das Befehlsfenster, das zeigt die Watch-Aufgabe ausgeführt wird eine "gewartet..." angezeigt. Nachricht. Öffnen Sie die TypeScript-Dateien, ein Leerzeichen hinzu, und speichern Sie die Datei. Wird, lösen die Aufgabe überwachen und lösen die anderen Tasks in der Reihenfolge ausgeführt. Der folgende Screenshot zeigt eine beispielausführung.
+Klicken Sie im Task Runner Explorer mit der rechten Maustaste auf die Aufgabe überwachen, und wählen Sie im Kontextmenü Ausführen aus. Im Befehlsfenster, in dem die ausgestellte Aufgabe "überwachen" angezeigt wird, wird ein "warten..." Nachricht. Öffnen Sie eine der typescript-Dateien, fügen Sie ein Leerzeichen hinzu, und speichern Sie die Datei. Dadurch wird die Aufgabe "überwachen" auslöst und die anderen Tasks in der Reihenfolge ausgeführt. Der folgende Screenshot zeigt eine Beispiel Testlauf.
 
-![Ausführen von Aufgaben-Ausgabe](using-grunt/_static/watch-running.png)
+![Ausführen der Aufgaben Ausgabe](using-grunt/_static/watch-running.png)
 
 ## <a name="binding-to-visual-studio-events"></a>Binden an Visual Studio-Ereignisse
 
-Es sei denn, Sie möchten Ihre Aufgaben manuell zu starten, jedes Mal, wenn Sie in Visual Studio arbeiten, können Sie Aufgaben zum Binden **vor dem Erstellen**, **nach dem Erstellen**, **Bereinigen**, und  **Projekt öffnen** Ereignisse.
+Wenn Sie die Aufgaben nicht jedes Mal manuell starten möchten, wenn Sie in Visual Studio arbeiten, binden Sie Aufgaben an, **bevor Sie erstellt**werden, **nachdem**Sie erstellt, **bereinigt**und Ereignisse **geöffnet** haben.
 
-Binden wir `watch` , damit es ausgeführt wird, jedes Mal, wenn Visual Studio wird geöffnet. Klicken Sie im Task Runner-Explorer mit der rechten Maustaste in der Aufgabe überwachen, und wählen **Bindungen > Project Open** aus dem Kontextmenü.
+Binden Sie `watch` so, dass er jedes Mal ausgeführt wird, wenn Visual Studio geöffnet wird. Klicken Sie im Task Runner Explorer mit der rechten Maustaste auf die Aufgabe überwachen, und wählen Sie im Kontextmenü die Option **Bindungen** > **Projekt öffnen** aus.
 
-![Binden Sie eine Aufgabe an das öffnende Projekt](using-grunt/_static/bindings-project-open.png)
+![Binden einer Aufgabe an das Projekt öffnen](using-grunt/_static/bindings-project-open.png)
 
-Entladen Sie und Laden Sie das Projekt. Wenn das Projekt erneut geladen wird, wird die Aufgabe überwachen automatisch gestartet.
+Entladen und laden Sie das Projekt erneut. Wenn das Projekt erneut geladen wird, wird der Überwachungs Task automatisch gestartet.
 
-## <a name="summary"></a>Zusammenfassung
+## <a name="summary"></a>Summary
 
-Grunt ist eine leistungsstarke-aufgabenausführung erstellt, die zum Automatisieren von Aufgaben für die meisten Client-Build verwendet werden kann. Grunt nutzt NPM, um die Pakete und Funktionen, die Integration in Visual Studio-Tools bereitzustellen. Task Runner-Explorer von Visual Studio erkennt Änderungen an Konfigurationsdateien und bietet eine benutzerfreundliche Oberfläche zum Ausführen von Aufgaben, ausgeführte Aufgaben anzeigen und Aufgaben an Visual Studio-Ereignisse binden.
+Grunt ist ein leistungsfähiger Aufgaben Runner, der zum Automatisieren der meisten clientbuildaufgaben verwendet werden kann. Grunt nutzt NPM für die Bereitstellung der Pakete und bietet Funktionen für die Tools-Integration in Visual Studio. Der Task Runner-Explorer von Visual Studio erkennt Änderungen an Konfigurationsdateien und stellt eine bequeme Oberfläche zum Ausführen von Aufgaben, zum Anzeigen laufender Aufgaben und zum Binden von Aufgaben an Visual Studio-Ereignisse bereit.

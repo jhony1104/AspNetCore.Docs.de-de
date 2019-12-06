@@ -1,38 +1,38 @@
 ---
-title: Richtlinie für Schemas, die in ASP.NET Core
+title: Richtlinien Schemas in ASP.net Core
 author: rick-anderson
-description: Richtlinie Authentifizierungsschemas erleichtern es, eine einzelne logische Authentifizierungsschema haben
+description: Authentifizierungs Richtlinien Schemas vereinfachen die Erstellung eines einzelnen logischen Authentifizierungs Schemas.
 ms.author: riande
-ms.date: 02/28/2019
+ms.date: 12/05/2019
 uid: security/authentication/policyschemes
-ms.openlocfilehash: be03f349455c673b0739935ad20e596325c8cb74
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: f02d8e5cac20a9b60c5eddbd28253efacf682ea1
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815285"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880717"
 ---
-# <a name="policy-schemes-in-aspnet-core"></a>Richtlinie für Schemas, die in ASP.NET Core
+# <a name="policy-schemes-in-aspnet-core"></a>Richtlinien Schemas in ASP.net Core
 
-Richtlinie Authentifizierungsschemas erleichtern es, damit eine einzelne logische-Authentifizierungsschema, die potenziell mehrere Ansätze verwenden. Beispielsweise kann ein Schema für die Richtlinie für alle anderen Google-Authentifizierung für die Herausforderungen und Cookie-Authentifizierung verwenden. Richtlinie Authentifizierungsschemas erleichtern:
+Authentifizierungs Richtlinien Schemas vereinfachen die Verwendung eines einzelnen logischen Authentifizierungs Schemas, das möglicherweise mehrere Ansätze verwendet. Beispielsweise kann ein Richtlinien Schema die Google-Authentifizierung für Herausforderungen und die Cookie-Authentifizierung für alles andere verwenden. Die Authentifizierungs Richtlinien Schemas machen Folgendes:
 
-* Einfache Maßnahmen Authentifizierung zu einem anderen Schema weiterleiten.
-* Vorlauf dynamisch basierend auf der Anforderung.
+* Einfache Weiterleiten beliebiger Authentifizierungs Aktionen an ein anderes Schema.
+* Basierend auf der Anforderung dynamisch weiterleiten.
 
-Alle Authentifizierungsschemas, die verwenden abgeleiteter <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> und den zugehörigen [ `AuthenticationHandler<TOptions>` ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1):
+Alle Authentifizierungs Schemas, die abgeleitete <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> und die zugehörigen [authenticationhandler-\<toptions >](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)verwenden:
 
-* Werden automatisch Richtlinie Schemas in ASP.NET Core 2.1 und höher.
-* Kann über das Konfigurieren von Optionen für das Schema der aktiviert werden.
+* Sind automatisch Richtlinien Schemas in ASP.net Core 2,1 und höher.
+* Kann durch Konfigurieren der Schema Optionen aktiviert werden.
 
 [!code-csharp[sample](policyschemes/samples/AuthenticationSchemeOptions.cs?name=snippet)]
 
 ## <a name="examples"></a>Beispiele
 
-Das folgende Beispiel zeigt eine höhere Ebene Schema, in der unteren Ebene Schemas kombiniert. Google-Authentifizierung wird verwendet, für die Herausforderungen und Cookieauthentifizierung für alle anderen verwendet wird:
+Das folgende Beispiel zeigt ein Schema höherer Ebene, das Schemata auf niedrigerer Ebene kombiniert. Die Google-Authentifizierung wird für Herausforderungen verwendet, und die Cookie-Authentifizierung wird für alles andere verwendet:
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-Im folgenden Beispiel wird die dynamische Auswahl der Schemas auf Grundlage individueller Anforderungen. D. h. wie zum Mischen von Cookies und API-Authentifizierung:
+Im folgenden Beispiel wird die dynamische Auswahl von Schemas pro Anforderung aktiviert. Das heißt, es wird erläutert, wie Cookies und API-Authentifizierung gemischt werden:
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 
