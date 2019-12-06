@@ -5,14 +5,14 @@ description: In diesem Artikel wird das Verwenden des Protokollierungsframeworks
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/19/2019
+ms.date: 12/04/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 23ce2d09d2ce9f415ce71bcd7c21c29cb2a040fc
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 49d598330948c5f4a137c534094e14ed5e01e27c
+ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550358"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74825490"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -48,10 +48,10 @@ Rufen Sie in einer Konsolen-App ohne Host die `Add{provider name}`-Erweiterungsm
 
 Die ASP.NET-Standardprojektvorlagen rufen die Methode <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> auf, die die folgenden Protokollierungsanbieter hinzufügt:
 
-* Konsole
-* Debug
-* EventSource
-* EventLog (nur bei Ausführung unter Windows)
+* [Konsole](#console-provider)
+* [Debuggen](#debug-provider)
+* [EventSource](#event-source-provider)
+* [EventLog](#windows-eventlog-provider) (nur bei Ausführung unter Windows)
 
 Sie können die Standardanbieter durch Ihre eigene Auswahl ersetzen. Rufen Sie <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A> auf, und fügen Sie die gewünschten Anbieter hinzu.
 
@@ -129,7 +129,7 @@ In den folgenden Beispielen zu ASP.NET Core und einer Konsolen-App werden von de
 
 Wenn Protokolle in die `Program`-Klasse einer ASP.NET Core-App geschrieben werden sollen, rufen Sie nach dem Erstellen des Hosts eine `ILogger`-Instanz aus der Abhängigkeitsinjektion ab:
 
-[!code-csharp[](index/samples/3.x/TodoApiSample/Program.cs?name=snippet_LogFromMain&highlight=9,10)]
+[!code-csharp[](index/samples_snapshot/3.x/TodoApiSample/Program.cs?highlight=9,10)]
 
 Die Protokollierung während der Hosterstellung wird nicht direkt unterstützt. Es kann jedoch eine separate Protokollierung verwendet werden. Im folgenden Beispiel wird eine [Serilog](https://serilog.net/)-Protokollierung zum Anmelden von `CreateHostBuilder` verwendet. `AddSerilog` verwendet die in `Log.Logger` angegebene statische Konfiguration:
 
@@ -1051,7 +1051,11 @@ Das Anbieterpaket [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/
 logging.AddEventLog();
 ```
 
-Mithilfe von [AddEventLog-Überladungen](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions) können Sie <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings> übergeben.
+Mithilfe von [AddEventLog-Überladungen](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions) können Sie <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings> übergeben. Wenn `null` oder nicht angegeben, werden die folgenden Standardeinstellungen verwendet:
+
+* `LogName` &ndash; „Anwendung“
+* `SourceName` &ndash; „.NET Runtime“
+* `MachineName` &ndash; Lokaler Computer
 
 ### <a name="tracesource-provider"></a>Der TraceSource-Anbieter
 

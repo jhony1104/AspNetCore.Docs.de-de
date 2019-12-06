@@ -3,14 +3,14 @@ title: Migrieren von ASP.NET zu ASP.NET Core
 author: isaac2004
 description: Anweisungen zum Migrieren vorhandener ASP.NET MVC- oder Web-API-Apps zu ASP.NET Core Web.
 ms.author: scaddie
-ms.date: 12/11/2018
+ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 9c97b9c0f13a265ab5c90225dcd5a581a1272701
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 1564b644b774939c3c242a41812851917e96d2b2
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815468"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "74803343"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migration von ASP.NET zu ASP.NET Core
 
@@ -154,6 +154,10 @@ Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<i
 
 > [!NOTE]
 > Ausführliche Informationen zum Bereitstellen statischer Dateien in ASP.NET Core finden Sie im Artikel zu [statischen Dateien](xref:fundamentals/static-files).
+
+## <a name="multi-value-cookies"></a>Mehrwertige Cookies
+
+[Mehrwertige Cookies](xref:System.Web.HttpCookie.Values) werden in ASP.NET Core nicht unterstützt. Erstellen Sie ein Cookie pro Wert.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
