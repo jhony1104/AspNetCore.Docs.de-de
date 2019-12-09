@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie den Status in Blazor Server-apps beibehalten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: ed203458126f3b4c97103c88a465e3eb5953a775
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 7351ee2438c6adf675b8aa5e8ecdb1b2da7b4f23
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879714"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943926"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.net Core Blazor Zustands Verwaltung
 
@@ -164,7 +164,7 @@ Verwenden Sie [`@inject`](xref:blazor/dependency-injection#request-a-service-in-
 
 Die Auswahl hängt von dem Sicherungs Speicher ab, den Sie verwenden möchten. Im folgenden Beispiel wird `sessionStorage` verwendet:
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
@@ -215,7 +215,7 @@ private int? currentCount;
 
 Anstatt die Schaltfläche Anzahl und **Inkrement** bedingungslos anzuzeigen, können Sie diese Elemente nur anzeigen, wenn die Daten geladen werden:
 
-```cshtml
+```razor
 @if (currentCount.HasValue)
 {
     <p>Current count: <strong>@currentCount</strong></p>
@@ -255,7 +255,7 @@ Um die vorab Generierung zu deaktivieren, öffnen Sie die Datei *pages/_Host. cs
 
 Die vorab Generierung ist möglicherweise nützlich für andere Seiten, die `localStorage` oder `sessionStorage`nicht verwenden. Verschieben Sie den Ladevorgang so lange, bis der Browser mit der Verbindung verbunden ist, um die vorab Ausführung zu aktivieren. Im folgenden finden Sie ein Beispiel für das Speichern eines Leistungs Zählers:
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
@@ -296,7 +296,7 @@ Wenn viele Komponenten auf Browser basiertem Speicher basieren, wird durch erneu
 
 Im folgenden Beispiel für eine `CounterStateProvider` Komponente werden die Daten des Zählers persistent gespeichert:
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
@@ -336,7 +336,7 @@ Die `CounterStateProvider` Komponente verarbeitet die Lade Phase, indem der unte
 
 Um die `CounterStateProvider` Komponente zu verwenden, schließen Sie eine Instanz der Komponente in eine beliebige andere Komponente ein, die Zugriff auf den Gegenstand benötigt. Um den Status für alle Komponenten in einer APP zugänglich zu machen, wrappen Sie die `CounterStateProvider` Komponente um die `Router` in der `App` Komponente (*app. Razor*):
 
-```cshtml
+```razor
 <CounterStateProvider>
     <Router AppAssembly="typeof(Startup).Assembly">
         ...
@@ -346,7 +346,7 @@ Um die `CounterStateProvider` Komponente zu verwenden, schließen Sie eine Insta
 
 Umschließende Komponenten empfangen und können den persistenten Status des Zählers ändern. Die folgende `Counter` Komponente implementiert das Muster:
 
-```cshtml
+```razor
 @page "/counter"
 
 <p>Current count: <strong>@CounterStateProvider.CurrentCount</strong></p>

@@ -9,12 +9,12 @@ ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/dependency-injection
-ms.openlocfilehash: 17dd0f927064ae7c2b1e3e439fd93e2cb220a5a4
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: aad6cfee500b5cb502470f6a4a7cb5756df09dc4
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879784"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943783"
 ---
 # <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.net Core Blazor Abhängigkeitsinjektion
 
@@ -84,7 +84,7 @@ Verwenden Sie mehrere `@inject`-Anweisungen, um unterschiedliche Dienste einzuf�
 
 Das folgende Beispiel veranschaulicht die Verwendung von `@inject`. Der Dienst, der `Services.IDataAccess` implementiert, wird in die-Eigenschaften `DataRepository`der Komponente eingefügt. Beachten Sie, dass der Code nur die `IDataAccess` Abstraktion verwendet:
 
-[!code-cshtml[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
+[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
 
 Intern verwendet die generierte Eigenschaft (`DataRepository`) das `InjectAttribute`-Attribut. In der Regel wird dieses Attribut nicht direkt verwendet. Wenn eine Basisklasse für Komponenten erforderlich ist und eingefügte Eigenschaften auch für die Basisklasse erforderlich sind, fügen Sie die `InjectAttribute`manuell hinzu:
 
@@ -100,7 +100,7 @@ public class ComponentBase : IComponent
 
 In Komponenten, die von der-Basisklasse abgeleitet sind, ist die `@inject`-Anweisung nicht erforderlich. Die `InjectAttribute` der Basisklasse ist ausreichend:
 
-```cshtml
+```razor
 @page "/demo"
 @inherits ComponentBase
 
@@ -135,7 +135,7 @@ In ASP.net Core-apps werden Bereichs bezogene Dienste in der Regel auf die aktue
 
 Um Dienste auf die Lebensdauer einer Komponente zu beschränken, kann die `OwningComponentBase`-und `OwningComponentBase<TService>` Basisklassen verwenden. Diese Basisklassen machen eine `ScopedServices`-Eigenschaft des Typs `IServiceProvider` verfügbar, mit der Dienste aufgelöst werden, die auf die Lebensdauer der Komponente beschränkt sind. Verwenden Sie die `@inherits`-Direktive, um eine Komponente zu erstellen, die von einer Basisklasse in Razor erbt.
 
-```cshtml
+```razor
 @page "/users"
 @attribute [Authorize]
 @inherits OwningComponentBase<Data.ApplicationDbContext>

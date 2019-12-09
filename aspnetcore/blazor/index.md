@@ -5,17 +5,17 @@ description: Lernen Sie ASP.NET Core Blazor kennen, eine Möglichkeit, interakti
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 8b656a7461c78475432722540ad628258cfe19c4
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 4ab6af649afe66d92fb2ea07d3abed057f321bce
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962916"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943718"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>Einführung in ASP.NET Core Blazor
 
@@ -53,7 +53,7 @@ Die Komponentenklasse wird in der Regel in Form einer [Razor](xref:mvc/views/raz
 
 Das folgende Razor-Markup veranschaulicht eine Komponente (*Dialog.razor*), die in eine andere Komponente verschachtelt werden kann:
 
-```cshtml
+```razor
 <div>
     <h1>@Title</h1>
 
@@ -84,7 +84,7 @@ Im folgenden Beispiel verwendet die `Index`-Komponente die `Dialog`-Komponente. 
 
 *Index.razor*:
 
-```cshtml
+```razor
 @page "/"
 
 <h1>Hello, world!</h1>

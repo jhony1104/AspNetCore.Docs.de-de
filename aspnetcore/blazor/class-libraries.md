@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Komponenten in Blazor-Apps aus einer externen Kom
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/class-libraries
-ms.openlocfilehash: d4cc4124c9dc28ed6da0923b919919df4965f89f
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 6bac007e3e1d046d6b16a3a0be6dc5976b99b766
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962713"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943874"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.net Core Razor Components-Klassenbibliotheken
 
@@ -39,7 +39,7 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um Ihre Umgeb
 1. Wählen Sie im Dialogfeld **neue Razor-Klassenbibliothek erstellen** die Option **Erstellen**aus.
 1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. In den Beispielen in diesem Thema wird der Projektname `MyComponentLib1`verwendet. Wählen Sie **Erstellen** aus.
 1. Fügen Sie die RCL zu einer Projekt Mappe hinzu:
-   1. Klicken Sie mit der rechten Maustaste auf die Lösung. Wählen Sie > **vorhandenes Projekt** **Hinzufügen** aus.
+   1. Klicken Sie mit der rechten Maustaste auf die Lösung. Wählen Sie **Hinzufügen** > **Vorhandenes Projekt** aus.
    1. Navigieren Sie zur Projektdatei der RCL.
    1. Wählen Sie die Projektdatei ( *. csproj*) der RCL aus.
 1. Fügen Sie einen Verweis auf die RCL aus der APP hinzu:
@@ -73,7 +73,7 @@ In den folgenden Beispielen ist `MyComponentLib1` eine Komponentenbibliothek, di
 
 Auf die `SalesReport` Komponente kann mit dem vollständigen Typnamen mit Namespace verwiesen werden:
 
-```cshtml
+```razor
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
@@ -83,7 +83,7 @@ Welcome to your new app.
 
 Auf die Komponente kann auch verwiesen werden, wenn die Bibliothek mit einer `@using`-Direktive in den Gültigkeitsbereich eingebunden ist:
 
-```cshtml
+```razor
 @using MyComponentLib1
 
 <h1>Hello, world!</h1>
@@ -109,6 +109,6 @@ Laden Sie das Paket mit dem Befehl [dotnet NuGet Push](/dotnet/core/tools/dotnet
 
 Eine RCL kann statische Assets enthalten. Die statischen Ressourcen sind für jede app verfügbar, die die Bibliothek nutzt. Weitere Informationen finden Sie unter <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:razor-pages/ui-class>

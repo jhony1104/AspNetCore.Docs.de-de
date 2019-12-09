@@ -5,17 +5,17 @@ description: Erfahren Sie, wie ASP.net Core Blazor, wie nicht behandelte Ausnahm
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/01/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: e737a8a85e7eb83d95618d71e85b0307c54b0766
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: d73eb9a0dd0ec7a4bec4b7b9aeaaa4a9ee888bce
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879683"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943705"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Behandeln von Fehlern in ASP.net Core Blazor-apps
 
@@ -138,7 +138,7 @@ Im folgenden Beispiel, in dem `OnParametersSetAsync` eine Methode zum Abrufen ei
   * `loadFailed` ist auf `true`festgelegt, das verwendet wird, um dem Benutzer eine Fehlermeldung anzuzeigen.
   * Der Fehler wird protokolliert.
 
-[!code-cshtml[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
+[!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
 
 ### <a name="rendering-logic"></a>Renderinglogik
 
@@ -148,7 +148,7 @@ Die Renderinglogik kann eine Ausnahme auslösen. Ein Beispiel für dieses Szenar
 
 Um eine NULL-Verweis Ausnahme in der Renderingerweiterung zu vermeiden, suchen Sie vor dem Zugriff auf die Member nach einem `null` Objekt. Im folgenden Beispiel wird auf `person.Address` Eigenschaften nicht zugegriffen, wenn `person.Address` `null`ist:
 
-[!code-cshtml[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
+[!code-razor[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
 
 Der vorangehende Code geht davon aus, dass `person` nicht `null`ist. Häufig gewährleistet die Struktur des Codes, dass ein Objekt vorhanden ist, wenn die Komponente gerendert wird. In diesen Fällen ist es nicht notwendig, auf `null` in der Renderinglogik zu prüfen. Im vorherigen Beispiel ist möglicherweise gewährleistet, dass `person` vorhanden ist, da `person` erstellt wird, wenn die Komponente instanziiert wird.
 

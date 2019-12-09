@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie HTTPS/TLS in einer ASP.net Core-Web-App anfordern.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/14/2019
+ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 82cd2e52f3bd929682b9eae24611ad04fd9f8682
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 032105c67e15ab94635ae6fadea103450c7eb0fb
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317367"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944238"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 Dieses Dokument zeigt Folgendes:
 
 * Erfordert HTTPS für alle Anforderungen.
-* Alle HTTP-Anforderungen auf HTTPS umleiten.
+* Leitet alle HTTP-Anforderungen an HTTPS um.
 
 Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensible Daten sendet.
 
@@ -29,7 +29,7 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
@@ -45,7 +45,7 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
@@ -85,7 +85,7 @@ Der vorangehende markierte Code:
 
 Es wird empfohlen, temporäre Umleitungen anstelle von permanenten Umleitungen zu verwenden. Das Zwischenspeichern von Links kann in Entwicklungsumgebungen zu instabiles Verhalten führen. Wenn Sie lieber einen permanenten Umleitungs Statuscode senden möchten, wenn sich die app in einer nicht Entwicklungsumgebung befindet, finden Sie weitere Informationen im Abschnitt [configure permanent Umleitungen in Production](#configure-permanent-redirects-in-production) . Wir empfehlen die Verwendung von [hsts](#http-strict-transport-security-protocol-hsts) , um Clients zu signalisieren, dass nur sichere Ressourcenanforderungen an die APP gesendet werden sollen (nur in der Produktion).
 
-### <a name="port-configuration"></a>Port Konfiguration
+### <a name="port-configuration"></a>Portkonfiguration
 
 Ein Port muss verfügbar sein, damit die Middleware eine unsichere Anforderung an HTTPS umleiten muss. Wenn kein Port verfügbar ist:
 
@@ -131,7 +131,7 @@ Geben Sie den HTTPS-Port an, indem Sie einen der folgenden Ansätze verwenden:
 > [!NOTE]
 > Wenn eine app in einer Reverseproxykonfiguration ausgeführt wird, ist <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> nicht verfügbar. Legen Sie den Port mithilfe eines der anderen in diesem Abschnitt beschriebenen Ansätze fest.
 
-### <a name="edge-deployments"></a>Edge-bereit Stellungen 
+### <a name="edge-deployments"></a>Edgebereitstellungen 
 
 Wenn Kestrel oder http. sys als Public-Edge-Server verwendet wird, müssen Kestrel oder http. sys so konfiguriert werden, dass Sie auf beiden Servern lauschen:
 
@@ -150,7 +150,7 @@ Wenn Anforderungen in einer Reverseproxykonfiguration weitergeleitet werden, ver
 
 Wenn Sie Azure App Service bereitstellen, befolgen Sie die Anweisungen im [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Der folgende markierte Code ruft [addhttpsredirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) auf, um Middleware-Optionen zu konfigurieren:
 
@@ -173,7 +173,7 @@ Das Aufrufen von `AddHttpsRedirection` ist nur erforderlich, um die Werte von `H
 Der vorangehende markierte Code:
 
 * Legt [httpsredirectionoptions. redirectstatus Code](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) auf <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>fest. Dies ist der Standardwert. Verwenden Sie die Felder der <xref:Microsoft.AspNetCore.Http.StatusCodes>-Klasse, um Zuweisungen zu `RedirectStatusCode`.
-* Legt den HTTPS-Port auf 5001 fest. Der Standardwert ist 443.
+* Legt den HTTPS-Port auf 5001 fest.
 
 #### <a name="configure-permanent-redirects-in-production"></a>Konfigurieren dauerhafter Umleitungen in der Produktion
 

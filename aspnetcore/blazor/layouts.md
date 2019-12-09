@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für Blaz
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/layouts
-ms.openlocfilehash: 3546259fc6b622a6137a6baa8f446c5f43af1cab
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 90acfb0d4e9daadb12be79de6bd0c99fc545697a
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962812"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944056"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.net Core Blazor Layouts
 
@@ -31,7 +31,7 @@ Um eine *Komponente* in ein *Layout*umzuwandeln, ist die Komponente:
 
 Das folgende Codebeispiel zeigt die Razor-Vorlage der Layoutkomponente *MainLayout. Razor*. Das Layout erbt `LayoutComponentBase` und legt die `@Body` zwischen der Navigationsleiste und der Fußzeile fest:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
+[!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
 In einer APP, die auf einer der Blazor App-Vorlagen basiert, befindet sich die `MainLayout` Komponente (*MainLayout. Razor*) im frei *gegebenen* Ordner der app.
 
@@ -39,11 +39,11 @@ In einer APP, die auf einer der Blazor App-Vorlagen basiert, befindet sich die `
 
 Geben Sie das standardmäßige App-Layout in der `Router`-Komponente in der *app. Razor* -Datei der APP an. Mit der folgenden `Router`-Komponente, die von den standardmäßigen Blazor Vorlagen bereitgestellt wird, wird das Standardlayout auf die `MainLayout`-Komponente festgelegt:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
+[!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
 Um ein Standardlayout für `NotFound` Inhalt anzugeben, geben Sie eine `LayoutView` für `NotFound` Inhalt an:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
+[!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
 Weitere Informationen zur `Router` Komponente finden Sie unter <xref:blazor/routing>.
 
@@ -55,7 +55,7 @@ Verwenden Sie die Razor-Direktive `@layout`, um ein Layout auf eine Komponente a
 
 Der Inhalt der folgenden `MasterList` Komponente wird in die `MasterLayout` an der Position `@Body`eingefügt:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
+[!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
 Wenn Sie das Layout direkt in einer Komponente angeben, wird ein *Standardlayout* im Router oder eine `@layout` Direktive, die aus *_Imports. Razor*importiert wurde, überschrieben.
 
@@ -65,11 +65,11 @@ Jeder Ordner einer APP kann optional eine Vorlagen Datei mit dem Namen *_Imports
 
 Die folgenden *_Imports. Razor* -Datei Importe:
 
-* `MyCoolLayout`
+* `MyCoolLayout`.
 * Alle Razor-Komponenten im selben Ordner und in allen Unterordnern.
 * Der `BlazorApp1.Data` -Namespace.
  
-[!code-cshtml[](layouts/sample_snapshot/3.x/_Imports.razor)]
+[!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
 Die Datei " *_Imports. Razor* " ähnelt der Datei " [_ViewImports. cshtml" für Razor-Ansichten und-Seiten](xref:mvc/views/layout#importing-shared-directives) , die jedoch speziell auf Razor-Komponenten Dateien angewendet werden.
 
@@ -81,16 +81,16 @@ Apps können aus den in einem Netz gefügten Layouts bestehen. Eine Komponente k
 
 Im folgenden Beispiel wird gezeigt, wie Sie die Verwendung von Netz Layouts durchführen. Die Datei " *episodescomponent. Razor* " ist die Komponente, die angezeigt werden soll. Die Komponente verweist auf die `MasterListLayout`:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
+[!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
 Die Datei *masterlistlayout. Razor* stellt die `MasterListLayout`bereit. Das Layout verweist auf ein anderes Layout, `MasterLayout`, wo es gerendert wird. `EpisodesComponent` wird gerendert, wenn `@Body` angezeigt wird:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
+[!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
 Zum Schluss enthält `MasterLayout` in *Masterlayout. Razor* die Layoutelemente der obersten Ebene, z. b. Header, Hauptmenü und Fußzeile. `MasterListLayout` mit dem `EpisodesComponent` wird gerendert, wenn `@Body` angezeigt wird:
 
-[!code-cshtml[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
+[!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:mvc/views/layout>

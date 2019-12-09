@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-K
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/routing
-ms.openlocfilehash: 2c139db4e44679fbd9f3455a2d2543be0e128765
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 1690434f48141bc83e7bc02e22cb763430eaa10d
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550338"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944017"
 ---
 # <a name="aspnet-core-opno-locblazor-routing"></a>ASP.net Core Blazor Routing
 
@@ -36,7 +36,7 @@ Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page 
 
 Die `Router` Komponente ermöglicht das Routing an jede Komponente mit einer angegebenen Route. Die `Router` Komponente wird in der Datei " *app. Razor* " angezeigt:
 
-```cshtml
+```razor
 <Router AppAssembly="typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -58,7 +58,12 @@ Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse ange
 
 Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
+```razor
+@page "/BlazorRoute"
+@page "/DifferentBlazorRoute"
+
+<h1>Blazor routing</h1>
+```
 
 > [!IMPORTANT]
 > Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in Ihrer *wwwroot/Index.html* -Datei (Blazor Webassembly) oder in der Datei *pages/_Host. cshtml* (Blazor Server) mit dem App-Basispfad enthalten, der im `href`-Attribut (`<base href="/">`) angegeben ist. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
@@ -69,7 +74,7 @@ Die `Router` Komponente ermöglicht der APP, benutzerdefinierten Inhalt anzugebe
 
 Legen Sie in der Datei " *app. Razor* " benutzerdefinierten Inhalt im `NotFound` Template-Parameter der `Router` Komponente fest:
 
-```cshtml
+```razor
 <Router AppAssembly="typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -87,7 +92,7 @@ Der Inhalt `<NotFound>` Tags kann beliebige Elemente enthalten, wie z. b. andere
 
 Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys anzugeben, die die `Router` Komponente bei der Suche nach Routing fähigen Komponenten beachten soll. Angegebene Assemblys werden zusätzlich zur `AppAssembly`angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine Routing fähige Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Im folgenden `AdditionalAssemblies` Beispiel wird die Routing Unterstützung für `Component1`:
 
-```cshtml
+```razor
 <Router
     AppAssembly="typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
@@ -99,7 +104,22 @@ Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys an
 
 Der Router verwendet Routen Parameter, um die entsprechenden Komponenten Parameter mit dem gleichen Namen (ohne Beachtung der Groß-/Kleinschreibung) aufzufüllen:
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter&highlight=2,7-8)]
+```razor
+@page "/RouteParameter"
+@page "/RouteParameter/{text}"
+
+<h1>Blazor is @Text!</h1>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
+```
 
 Optionale Parameter werden für Blazor-apps in ASP.net Core 3,0 nicht unterstützt. Im vorherigen Beispiel werden zwei `@page` Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}` Route-Parameter und weist den Wert der `Text`-Eigenschaft zu.
 
@@ -112,7 +132,7 @@ Im folgenden Beispiel stimmt die Route zur `Users`-Komponente nur mit überein, 
 * Ein `Id` Routen Segment ist in der Anforderungs-URL vorhanden.
 * Das `Id` Segment ist eine Ganzzahl (`int`).
 
-[!code-cshtml[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
+[!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
 
 Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügbar. Informationen zu den Routen Einschränkungen, die mit der invarianten Kultur abgeglichen werden, finden Sie in der Warnung unterhalb der Tabelle.
 
@@ -154,7 +174,7 @@ Verwenden Sie beim Erstellen von Navigationslinks eine `NavLink` Komponente anst
 
 Die folgende `NavMenu` Komponente erstellt eine [Bootstrap](https://getbootstrap.com/docs/) -Navigationsleiste, die die Verwendung `NavLink` Komponenten veranschaulicht:
 
-[!code-cshtml[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
+[!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
 Es gibt zwei `NavLinkMatch` Optionen, die Sie dem `Match`-Attribut des `<NavLink>`-Elements zuweisen können:
 
@@ -165,7 +185,7 @@ Im vorherigen Beispiel ist der Home `NavLink` `href=""` mit der Home-URL überei
 
 Zusätzliche `NavLink` Komponenten Attribute werden an das gerenderte Ankertag weitergegeben. Im folgenden Beispiel enthält die `NavLink` Komponente das `target`-Attribut:
 
-```cshtml
+```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
 ```
 
@@ -190,7 +210,7 @@ Verwenden Sie `Microsoft.AspNetCore.Components.NavigationManager`, um mit URIs u
 
 Wenn die Schaltfläche ausgewählt wird, navigiert die folgende Komponente zur `Counter` Komponente der APP:
 
-```cshtml
+```razor
 @page "/navigate"
 @inject NavigationManager NavigationManager
 

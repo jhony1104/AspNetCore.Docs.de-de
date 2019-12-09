@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie Sicherheitsbedrohungen für Blazor Server-app
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 5cf83a4dd255959e8840fca3a8194b5b4e2ad0a8
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 2d644b84b304a31ad0debc16164ad155c7f7da65
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963881"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944281"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-server-apps"></a>Sichern von ASP.net Core Blazor-Server-apps
 
@@ -38,7 +38,7 @@ Die Ressourcenauslastung kann auftreten, wenn ein Client mit dem Server interagi
 
 * [CPU](#cpu)
 * [Arbeitsspeicher](#memory)
-* [Client Verbindungen](#client-connections)
+* [Clientverbindungen](#client-connections)
 
 DOS-Angriffe (Denial of Service) suchen in der Regel nach dem ausschöpfen der Ressourcen einer APP oder eines Servers. Die Ressourcenauslastung ist jedoch nicht notwendigerweise das Ergebnis eines Angriffs auf das System. Endliche Ressourcen können z. b. aufgrund einer hohen Benutzer Nachfrage aufgebraucht werden. DOS wird weiter unten im Abschnitt [Denial of Service (DOS)-Angriffe](#denial-of-service-dos-attacks) behandelt.
 
@@ -73,7 +73,7 @@ Serverseitige Speicheranforderungen sind bei allen Blazor Server-apps zu berück
 > [!NOTE]
 > Während der Entwicklung kann ein Profiler verwendet oder eine Ablauf Verfolgung erfasst werden, um die Speicheranforderungen von Clients zu bewerten. Ein Profiler oder eine Ablauf Verfolgung erfasst nicht den Arbeitsspeicher, der einem bestimmten Client zugeordnet ist. Um die Arbeitsspeicher Nutzung eines bestimmten Clients während der Entwicklung zu erfassen, erfassen Sie einen Dump, und untersuchen Sie die Speichernachfrage aller Objekte, die auf die Verbindung eines Benutzers basieren.
 
-### <a name="client-connections"></a>Client Verbindungen
+### <a name="client-connections"></a>Clientverbindungen
 
 Die Verbindungs Erschöpfung kann auftreten, wenn ein oder mehrere Clients zu viele gleichzeitige Verbindungen mit dem Server öffnen, wodurch verhindert wird, dass andere Clients neue Verbindungen herstellen.
 
@@ -159,7 +159,7 @@ Blazor Server Ereignisse asynchron sind, können mehrere Ereignisse an den Serve
 
 Stellen Sie sich eine-Counter-Komponente vor, die es einem Benutzer ermöglicht, einen-Wert maximal dreimal zu erhöhen. Die Schaltfläche zum Erhöhen des Zählers basiert bedingt auf dem Wert `count`:
 
-```cshtml
+```razor
 <p>Count: @count<p>
 
 @if (count < 3)
@@ -180,7 +180,7 @@ Stellen Sie sich eine-Counter-Komponente vor, die es einem Benutzer ermöglicht,
 
 Ein Client kann ein oder mehrere Inkrement-Ereignisse verteilen, bevor das Framework ein neues Rendering dieser Komponente erzeugt. Das Ergebnis ist, dass die `count` durch den Benutzer *dreimal* erhöht werden kann, da die Schaltfläche nicht schnell genug von der Benutzeroberfläche entfernt wird. Im folgenden Beispiel wird die richtige Methode zum Erreichen des Limits von drei `count` Inkrementen gezeigt:
 
-```cshtml
+```razor
 <p>Count: @count<p>
 
 @if (count < 3)
@@ -208,7 +208,7 @@ Wenn Sie die `if (count < 3) { ... }` Prüfung innerhalb des Handlers hinzufüge
 
 Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit aufruft, z. b. das Abrufen von Daten aus einem externen Dienst oder einer externen Datenbank, empfiehlt sich die Verwendung eines Schutzes. Der Wächter kann verhindern, dass der Benutzer mehrere Vorgänge in die Warteschlange eingereiht, während der Vorgang durch visuelles Feedback ausgeführt wird. Der folgende Komponenten Code legt `isLoading` auf `true` fest, während `GetForecastAsync` Daten vom Server abruft. Obwohl `isLoading` `true`ist, wird die Schaltfläche in der Benutzeroberfläche deaktiviert:
 
-```cshtml
+```razor
 @page "/fetchdata"
 @using BlazorServerSample.Data
 @inject WeatherForecastService ForecastService
@@ -235,7 +235,7 @@ Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit aufruft, z.
 
 Zusätzlich zur Verwendung eines Wächter, wie im Abschnitt [Schutz vor mehreren](#guard-against-multiple-dispatches) Verteilungen beschrieben, empfiehlt es sich, eine <xref:System.Threading.CancellationToken> zu verwenden, um Vorgänge mit langer Ausführungszeit abzubrechen, wenn die Komponente verworfen wird. Dieser Ansatz bietet den zusätzlichen Vorteil, dass die Verwendung von " *Use-After-* verwerfen" in Komponenten vermieden wird:
 
-```cshtml
+```razor
 @implements IDisposable
 
 ...
@@ -291,8 +291,8 @@ Der Client seitige Fehler enthält nicht die Aufruf Liste und bietet keine Detai
 
 Ausführliche Fehler ermöglichen:
 
-* `CircuitOptions.DetailedErrors`
-* `DetailedErrors` Konfigurationsschlüssel. Legen Sie beispielsweise die `ASPNETCORE_DETAILEDERRORS`-Umgebungsvariable auf den Wert `true`fest.
+* `CircuitOptions.DetailedErrors`.
+* `DetailedErrors`-Konfigurationsschlüssel. Legen Sie beispielsweise die `ASPNETCORE_DETAILEDERRORS`-Umgebungsvariable auf den Wert `true`fest.
 
 > [!WARNING]
 > Das verfügbar machen von Fehlerinformationen für Clients im Internet stellt ein Sicherheitsrisiko dar, das immer vermieden werden sollte.
@@ -389,7 +389,7 @@ Weitere Informationen finden Sie unter <xref:security/preventing-open-redirects>
 
 Anleitungen zur Authentifizierung und Autorisierung finden Sie unter <xref:security/blazor/index>.
 
-## <a name="security-checklist"></a>Sicherheits Checkliste
+## <a name="security-checklist"></a>Checkliste für die Sicherheit
 
 Die folgende Liste mit Sicherheitsüberlegungen ist nicht umfassend:
 
