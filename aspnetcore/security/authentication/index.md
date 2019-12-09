@@ -4,14 +4,14 @@ author: mjrousos
 description: Hier erfahren Sie mehr zur Authentifizierung in ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/22/2019
+ms.date: 12/04/2019
 uid: security/authentication/index
-ms.openlocfilehash: 5e6c875188831c468bc6ca52ce71c5961b43573c
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 40b2fb59b96486435a2ec0a7d69bee5ab4a814d2
+ms.sourcegitcommit: 76d7fff62014c3db02564191ab768acea00f1b26
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681362"
+ms.lasthandoff: 12/05/2019
+ms.locfileid: "74852713"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Übersicht über die ASP.NET Core-Authentifizierung
 
@@ -41,7 +41,7 @@ Der `AddAuthentication`-Parameter `JwtBearerDefaults.AuthenticationScheme` ist d
 
 Wenn mehrere Schemas verwendet werden, können Autorisierungsrichtlinien (oder Autorisierungsattribute) [das Authentifizierungsschema (oder die Authentifizierungsschemas) angeben](xref:security/authorization/limitingidentitybyscheme), von denen sie zur Authentifizierung des Benutzers abhängig sind. Im Beispiel oben kann das Cookie-Authentifizierungsschema verwendet werden, indem der Name angegeben wird (standardmäßig `CookieAuthenticationDefaults.AuthenticationScheme`, obwohl beim Aufruf von `AddCookie` ein anderer Name angegeben werden kann).
 
-In bestimmten Fällen erfolgt der Aufruf von `AddAuthentication` automatisch durch andere Erweiterungsmethoden. Wenn Sie z. B. [ASP.NET Core-Identität](xref:security/authentication/identity) verwenden, wird intern `AddAuthentication` aufgerufen.
+In bestimmten Fällen erfolgt der Aufruf von `AddAuthentication` automatisch durch andere Erweiterungsmethoden. Wenn Sie z. B. [ASP.NET Core-Identität](xref:security/authentication/identity) verwenden, wird `AddAuthentication` intern aufgerufen.
 
 Die Authentifizierungsmiddleware wird in `Startup.Configure` durch Aufrufen der <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>-Erweiterungsmethode für den `IApplicationBuilder` der App hinzugefügt. Durch Aufrufen von `UseAuthentication` wird die Middleware registriert, die die zuvor registrierten Authentifizierungsschemas verwendet. Rufen Sie `UseAuthentication` vor jeder Middleware auf, die voraussetzt, dass Benutzer authentifiziert sind. Wenn Sie das Endpunktrouting verwenden, muss der Aufruf von `UseAuthentication`:
 
@@ -57,7 +57,7 @@ Ein Authentifizierungsschema ist ein Name, der Folgendem entspricht:
 * Einem Authentifizierungshandler.
 * Optionen zum Konfigurieren dieser bestimmten Instanz des Handlers.
 
-Schemas sind als Mechanismus nützlich, um auf die Authentifizierungs-, Aufforderungs- und Unterbindungsverhalten des zugeordneten Handlers zu verweisen. Eine Autorisierungsrichtlinie kann beispielsweise anhand des Namens angeben, welches Autorisierungsschema (oder welche Autorisierungsschemas) zum Authentifizieren des Benutzers verwendet werden soll(en). Beim Konfigurieren der Authentifizierung ist es üblich, das Standardauthentifizierungsschema anzugeben. Das Standardschema wird verwendet, sofern eine Ressource kein bestimmtes Schema anfordert. Weitere Möglichkeiten:
+Schemas sind als Mechanismus nützlich, um auf die Authentifizierungs-, Aufforderungs- und Unterbindungsverhalten des zugeordneten Handlers zu verweisen. Eine Autorisierungsrichtlinie kann beispielsweise anhand von Schemanamen angeben, welche Authentifizierungsschemas zum Authentifizieren des Benutzers verwendet werden sollen. Beim Konfigurieren der Authentifizierung ist es üblich, das Standardauthentifizierungsschema anzugeben. Das Standardschema wird verwendet, sofern eine Ressource kein bestimmtes Schema anfordert. Weitere Möglichkeiten:
 
 * Angeben unterschiedlicher Standardschemas für Authentifizierungs-, Aufforderungs- und Unterbindungsaktionen.
 * Kombinieren mehrerer Schemas mithilfe von [Richtlinienschemas](xref:security/authentication/policyschemes).
@@ -80,14 +80,14 @@ In Abhängigkeit von der Konfiguration des Authentifizierungsschemas und vom Kon
 
 ### <a name="authenticate"></a>Authentifizieren
 
-Die Authentifizierungsaktion eines Authentifizierungsschemas ist für das Erstellen der Identität des Benutzers basierend auf dem Anforderungskontext verantwortlich. Sie gibt ein <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>, das angibt, ob die Authentifizierung erfolgreich war, und in diesem Fall außerdem die Identität des Benutzers in einem Authentifizierungsticket zurück. Siehe HttpContext.AuthenticateAsync. Beispiele für die Authentifizierung:
+Die Authentifizierungsaktion eines Authentifizierungsschemas ist für das Erstellen der Identität des Benutzers basierend auf dem Anforderungskontext verantwortlich. Sie gibt ein <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>, das angibt, ob die Authentifizierung erfolgreich war, und in diesem Fall außerdem die Identität des Benutzers in einem Authentifizierungsticket zurück. Siehe `HttpContext.AuthenticateAsync`. Beispiele für die Authentifizierung:
 
 * Ein Cookieauthentifizierungsschema, bei dem die Identität des Benutzers aus Cookies erstellt wird.
 * Ein JWT-Bearer-Schema, das ein JWT-Bearertoken zum Erstellen der Identität des Benutzers deserialisiert und überprüft.
 
 ### <a name="challenge"></a>Herausforderung
 
-Eine Authentifizierungsaufforderung wird durch die Autorisierung aufgerufen, wenn ein nicht authentifizierter Benutzer einen Endpunkt anfordert, für den eine Authentifizierung erforderlich ist. Eine Authentifizierungsaufforderung wird z. B. ausgegeben, wenn ein anonymer Benutzer eine eingeschränkte Ressource anfordert oder auf einen Anmeldelink klickt. Die Autorisierung ruft eine Aufforderung mithilfe des/der angegebenen Authentifizierungsschema(s) oder, wenn keines angegeben ist, des Standardschemas auf. Siehe HttpContext.ChallengeAsync. Beispiele für Authentifizierungsaufforderungen:
+Eine Authentifizierungsaufforderung wird durch die Autorisierung aufgerufen, wenn ein nicht authentifizierter Benutzer einen Endpunkt anfordert, für den eine Authentifizierung erforderlich ist. Eine Authentifizierungsaufforderung wird z. B. ausgegeben, wenn ein anonymer Benutzer eine eingeschränkte Ressource anfordert oder auf einen Anmeldelink klickt. Die Autorisierung ruft eine Aufforderung mithilfe des/der angegebenen Authentifizierungsschema(s) oder, wenn keines angegeben ist, des Standardschemas auf. Siehe `HttpContext.ChallengeAsync`. Beispiele für Authentifizierungsaufforderungen:
 
 * Ein Cookie-Authentifizierungsschema, das den Benutzer auf eine Anmeldeseite umleitet.
 * Ein JWT-Bearer-Schema, das ein 401-Ergebnis mit einem `www-authenticate: bearer`-Header zurückgibt.
@@ -96,7 +96,7 @@ Eine Aufforderungsaktion sollte dem Benutzer mitteilen können, welcher Authenti
 
 ### <a name="forbid"></a>Unterbindung
 
-Die Unterbindungsaktion eines Authentifizierungsschemas wird von der Autorisierung aufgerufen, wenn ein authentifizierter Benutzer versucht, auf eine Ressource zuzugreifen, für die er keine Berechtigung besitzt. Siehe HttpContext.ForbidAsync. Beispiele für Authentifizierungsunterbindungen:
+Die Unterbindungsaktion eines Authentifizierungsschemas wird von der Autorisierung aufgerufen, wenn ein authentifizierter Benutzer versucht, auf eine Ressource zuzugreifen, für die er keine Berechtigung besitzt. Siehe `HttpContext.ForbidAsync`. Beispiele für Authentifizierungsunterbindungen:
 * Ein Cookie-Authentifizierungsschema, das den Benutzer auf eine Seite umleitet, auf der steht, dass der Zugriff unzulässig war.
 * Ein JWT-Bearer-Schema, das ein 403-Ergebnis zurückgibt.
 * Ein benutzerdefiniertes Authentifizierungsschema, das den Benutzer auf eine Seite umleitet, auf der er den Zugriff auf die Ressource anfordern kann.

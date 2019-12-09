@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/22/2019
 uid: web-api/index
-ms.openlocfilehash: 3f52e4ce2d26902324ab30e0bda7ed8a4942daa0
-ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
+ms.openlocfilehash: 5ef8b4d012f4ed90339ffea191612e4dc365d958
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/23/2019
-ms.locfileid: "74412047"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880529"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -66,17 +66,17 @@ Hier einige weitere Beispiele für die verfügbaren Attribute.
 
 |Attribut|Hinweise|
 |---------|-----|
-|[[Route]](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Gibt ein URL-Muster für einen Controller oder eine Aktion an.|
-|[[Bind]](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Gibt Präfixe und Eigenschaften an, die in die Modellbindung einbezogen werden sollen.|
-|[[HttpGet]](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |Identifiziert eine Aktion, die das HTTP GET-Aktionsverb unterstützt.|
-|[[Consumes]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|Gibt die von einer Aktion akzeptierten Datentypen an.|
-|[[Produces]](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Gibt die von einer Aktion zurückgegebenen Datentypen an.|
+|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Gibt ein URL-Muster für einen Controller oder eine Aktion an.|
+|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Gibt Präfixe und Eigenschaften an, die in die Modellbindung einbezogen werden sollen.|
+|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |Identifiziert eine Aktion, die das HTTP GET-Aktionsverb unterstützt.|
+|[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|Gibt die von einer Aktion akzeptierten Datentypen an.|
+|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Gibt die von einer Aktion zurückgegebenen Datentypen an.|
 
 Eine Liste mit den verfügbaren Attributen finden Sie im <xref:Microsoft.AspNetCore.Mvc>-Namespace.
 
 ## <a name="apicontroller-attribute"></a>ApiController-Attribut
 
-Das [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut kann auf eine Controllerklasse angewendet werden, um folgende API-spezifische Verhalten mit einigen vordefinierten Konfigurationen zu aktivieren:
+Das [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut kann auf eine Controllerklasse angewendet werden, um folgende API-spezifische Verhalten mit einigen vordefinierten Konfigurationen zu aktivieren:
 
 * [Anforderung für das Attributrouting](#attribute-routing-requirement)
 * [Automatische HTTP 400-Antworten](#automatic-http-400-responses)
@@ -241,12 +241,12 @@ Ein Bindungsquellenattribut definiert den Speicherort, an dem der Wert eines Akt
 
 |Attribut|Bindungsquelle |
 |---------|---------|
-|[[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | Anforderungstext |
-|[[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | Formulardaten im Anforderungstext |
-|[[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | Anforderungsheader |
-|[[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | Abfragezeichenfolge-Parameter der Anforderung |
-|[[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | Routendaten aus aktuellen Anforderungen |
-|[[FromServices]](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Der als Aktionsparameter eingefügte Anforderungsdienst. |
+|[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | Anforderungstext |
+|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | Formulardaten im Anforderungstext |
+|[`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | Anforderungsheader |
+|[`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | Abfragezeichenfolge-Parameter der Anforderung |
+|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | Routendaten aus aktuellen Anforderungen |
+|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Der als Aktionsparameter eingefügte Anforderungsdienst. |
 
 > [!WARNING]
 > Verwenden Sie `[FromRoute]` nicht, wenn Werte möglicherweise `%2f` enthalten (d.h. `/`). `%2f` wird nicht durch Entfernen von Escapezeichen zu `/`. Verwenden Sie `[FromQuery]`, wenn der Wert `%2f` enthalten könnte.
@@ -322,7 +322,7 @@ Legen Sie <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBinding
 
 ## <a name="multipartform-data-request-inference"></a>Ableiten der Multipart/form-data-Anforderung
 
-Das `[ApiController]`-Attribut wendet eine Rückschlussregel an, wenn ein Aktionsparameter mit dem [[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Attribut kommentiert ist. Der `multipart/form-data`-Anforderungsinhaltstyp wird abgeleitet.
+Das `[ApiController]`-Attribut wendet eine Rückschlussregel an, wenn ein Aktionsparameter mit dem [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Attribut kommentiert ist. Der `multipart/form-data`-Anforderungsinhaltstyp wird abgeleitet.
 
 Legen Sie die <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters>-Eigenschaft auf `true` in `Startup.ConfigureServices` fest, um das Standardverhalten zu deaktivieren.
 
