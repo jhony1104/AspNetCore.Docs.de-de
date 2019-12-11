@@ -7,32 +7,32 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 uid: mvc/controllers/testing
-ms.openlocfilehash: 7f4fcb1a5d6e9959c751ebe24e41b39ee05a5819
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 449d8791962e4233d599f364b2e8c922f0975d2f
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799499"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681096"
 ---
-# <a name="test-controller-logic-in-aspnet-core"></a>Testen von Controllerlogik in ASP.NET Core
+# <a name="unit-test-controller-logic-in-aspnet-core"></a>Komponententests für die Controllerlogik in ASP.NET Core
 
 Von [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Controller](xref:mvc/controllers/actions) spielen in jeder ASP.NET Core MVC-App eine zentrale Rolle. Daher sollten Sie sich auch darauf verlassen können, dass Controller in Ihrer App wie beabsichtigt funktionieren. Automatisierte Tests können Fehler erkennen, bevor die App in einer Produktionsumgebung bereitgestellt wird.
-
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
-
-## <a name="unit-tests-of-controller-logic"></a>Komponententests der Controllerlogik
-
 [Komponententests](/dotnet/articles/core/testing/unit-testing-with-dotnet-test) beinhalten das Testen einer App-Komponente isoliert von ihrer Infrastruktur und ihren Abhängigkeiten. Bei einem Komponententest der Controllerlogik werden nur die Inhalte einer einzelnen Aktion getestet, nicht das Verhalten ihrer Abhängigkeiten oder des Frameworks selbst.
+
+## <a name="unit-testing-controllers"></a>Komponententests für Controller
 
 Richten Sie Komponententests für Controlleraktionen ein, um sich auf das Verhalten des Controllers zu konzentrieren. Bei einem Komponententest des Controllers werden Szenarien wie [Filter](xref:mvc/controllers/filters), [Routing](xref:fundamentals/routing) und [Modellbindung](xref:mvc/models/model-binding) vermieden. Tests, die die Interaktionen zwischen Komponenten betreffen, die gemeinsam auf eine Anforderung reagieren, werden mithilfe von *Integrationstests* behandelt. Weitere Informationen zu Integrationstests finden Sie unter <xref:test/integration-tests>.
 
 Wenn Sie benutzerdefinierte Filter und Routen schreiben, sollten Sie für diese isoliert einen Komponententest durchführen, der nicht Bestandteil eines Tests für eine bestimmte Controlleraktion ist.
 
-Um mehr über Komponententests für Controller zu erfahren, sehen Sie sich den folgenden Controller in der Beispiel-App an. Der Homecontroller zeigt eine Liste von Brainstormingsitzungen an und ermöglicht das Erstellen neuer Brainstormingsitzungen mit einer POST-Anforderung:
+Um mehr über Komponententests für Controller zu erfahren, sehen Sie sich den folgenden Controller in der Beispiel-App an. 
+
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+
+Der Homecontroller zeigt eine Liste von Brainstormingsitzungen an und ermöglicht das Erstellen neuer Brainstormingsitzungen mit einer POST-Anforderung:
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/HomeController.cs?name=snippet_HomeController&highlight=1,5,10,31-32)]
 

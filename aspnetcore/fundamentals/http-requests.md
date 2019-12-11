@@ -4,14 +4,14 @@ author: stevejgordon
 description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schnittstelle, um logische HttpClient-Instanzen in ASP.NET Core zu verwalten.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 10/27/2019
+ms.date: 11/27/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: a963833acfa12889c8ae3dac443962682e1cb931
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
+ms.openlocfilehash: f33444b8fc08dc022da7700af53a218600290162
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190583"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733920"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -288,6 +288,35 @@ Die Standardlebensdauer von Handlern beträgt zwei Minuten. Der Standardwert kan
 
 Das Beibehalten einer einzelnen `HttpClient`-Instanz für einen langen Zeitraum ist ein allgemeines Muster, das vor der Einführung von `IHttpClientFactory` verwendet wurde. Dieses Muster wird nach der Migration zu `IHttpClientFactory` überflüssig.
 
+### <a name="alternatives-to-ihttpclientfactory"></a>Alternativen zu IHttpClientFactory
+
+Mit der Verwendung von `IHttpClientFactory` in einer DI-fähigen App wird Folgendes vermieden:
+
+* Probleme mit der Ressourcenauslastung durch Zusammenlegen von `HttpMessageHandler`-Instanzen
+* Probleme durch veraltetes DNS durch regelmäßigen Wechsel von `HttpMessageHandler`-Instanzen
+
+Es gibt alternative Möglichkeiten zum Lösen des vorangehenden Problems mithilfe einer langlebigen <xref:System.Net.Http.SocketsHttpHandler>-Instanz:
+
+- Erstellen Sie eine `SocketsHttpHandler`-Instanz, wenn die App gestartet wird, und verwenden Sie diese für die Lebensdauer der App.
+- Konfigurieren Sie einen geeigneten Wert für <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> basierend auf den DNS-Aktualisierungszeiten.
+- Erstellen Sie bei Bedarf `HttpClient`-Instanzen mithilfe von `new HttpClient(handler, dispostHandler: false)`.
+
+Diese Ansätze lösen die Ressourcenverwaltungsprobleme, die `IHttpClientFactory` auf ähnliche Weise löst.
+
+- `SocketsHttpHandler` gibt Verbindungen für `HttpClient`-Instanzen frei. Durch diese Freigabe wird die Erschöpfung von Sockets vermieden.
+- `SocketsHttpHandler` wechselt die Verbindungen anhand von `PooledConnectionLifetime`, um Probleme durch veraltetes DNS zu umgehen.
+
+### <a name="cookies"></a>Cookies
+
+Die zusammengelegten `HttpMessageHandler`-Instanzen resultieren in der Freigabe von `CookieContainer`-Objekten. Die unerwartete Freigabe von `CookieContainer`-Objekten führt oft zu fehlerhaftem Code. Ziehen Sie für Apps, die Cookies erfordern, folgende Vorgehensweisen in Betracht:
+
+ - Deaktivieren der automatischen Cookieverarbeitung
+ - Vermeiden der Verwendung von `IHttpClientFactory`
+
+Rufen Sie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> auf, um die automatische Cookieverarbeitung zu deaktivieren:
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
+
 ## <a name="logging"></a>Protokollierung
 
 Über `IHttpClientFactory` erstellte Clients zeichnen Protokollmeldungen für alle Anforderungen auf. Aktivieren Sie die entsprechende Informationsebene in der Protokollierungskonfiguration, um die Standardprotokollmeldungen anzuzeigen. Zusätzliche Protokollierung, z.B. das Protokollieren von Anforderungsheadern, wird nur auf der Ablaufverfolgungsebene enthalten.
@@ -559,6 +588,35 @@ Die Standardlebensdauer von Handlern beträgt zwei Minuten. Der Standardwert kan
 Das Verwerfen des Client ist nicht erforderlich. Beim Verwerfen werden ausgehende Anforderungen abgebrochen, und es wird sichergestellt, dass die angegebene `HttpClient`-Instanz nach dem Aufruf von <xref:System.IDisposable.Dispose*> nicht mehr verwendet werden kann. `IHttpClientFactory` verfolgt von `HttpClient`-Instanzen verwendete Ressourcen nach und verwirft sie. Die `HttpClient`-Instanzen können im Allgemeinen als .NET-Objekte behandelt werden, die nicht verworfen werden müssen.
 
 Das Beibehalten einer einzelnen `HttpClient`-Instanz für einen langen Zeitraum ist ein allgemeines Muster, das vor der Einführung von `IHttpClientFactory` verwendet wurde. Dieses Muster wird nach der Migration zu `IHttpClientFactory` überflüssig.
+
+### <a name="alternatives-to-ihttpclientfactory"></a>Alternativen zu IHttpClientFactory
+
+Mit der Verwendung von `IHttpClientFactory` in einer DI-fähigen App wird Folgendes vermieden:
+
+* Probleme mit der Ressourcenauslastung durch Zusammenlegen von `HttpMessageHandler`-Instanzen
+* Probleme durch veraltetes DNS durch regelmäßigen Wechsel von `HttpMessageHandler`-Instanzen
+
+Es gibt alternative Möglichkeiten zum Lösen des vorangehenden Problems mithilfe einer langlebigen <xref:System.Net.Http.SocketsHttpHandler>-Instanz:
+
+- Erstellen Sie eine `SocketsHttpHandler`-Instanz, wenn die App gestartet wird, und verwenden Sie diese für die Lebensdauer der App.
+- Konfigurieren Sie einen geeigneten Wert für <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> basierend auf den DNS-Aktualisierungszeiten.
+- Erstellen Sie bei Bedarf `HttpClient`-Instanzen mithilfe von `new HttpClient(handler, dispostHandler: false)`.
+
+Diese Ansätze lösen die Ressourcenverwaltungsprobleme, die `IHttpClientFactory` auf ähnliche Weise löst.
+
+- `SocketsHttpHandler` gibt Verbindungen für `HttpClient`-Instanzen frei. Durch diese Freigabe wird die Erschöpfung von Sockets vermieden.
+- `SocketsHttpHandler` wechselt die Verbindungen anhand von `PooledConnectionLifetime`, um Probleme durch veraltetes DNS zu umgehen.
+
+### <a name="cookies"></a>Cookies
+
+Die zusammengelegten `HttpMessageHandler`-Instanzen resultieren in der Freigabe von `CookieContainer`-Objekten. Die unerwartete Freigabe von `CookieContainer`-Objekten führt oft zu fehlerhaftem Code. Ziehen Sie für Apps, die Cookies erfordern, folgende Vorgehensweisen in Betracht:
+
+ - Deaktivieren der automatischen Cookieverarbeitung
+ - Vermeiden der Verwendung von `IHttpClientFactory`
+
+Rufen Sie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> auf, um die automatische Cookieverarbeitung zu deaktivieren:
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
 ## <a name="logging"></a>Protokollierung
 
@@ -838,6 +896,35 @@ Die Standardlebensdauer von Handlern beträgt zwei Minuten. Der Standardwert kan
 Das Verwerfen des Client ist nicht erforderlich. Beim Verwerfen werden ausgehende Anforderungen abgebrochen, und es wird sichergestellt, dass die angegebene `HttpClient`-Instanz nach dem Aufruf von <xref:System.IDisposable.Dispose*> nicht mehr verwendet werden kann. `IHttpClientFactory` verfolgt von `HttpClient`-Instanzen verwendete Ressourcen nach und verwirft sie. Die `HttpClient`-Instanzen können im Allgemeinen als .NET-Objekte behandelt werden, die nicht verworfen werden müssen.
 
 Das Beibehalten einer einzelnen `HttpClient`-Instanz für einen langen Zeitraum ist ein allgemeines Muster, das vor der Einführung von `IHttpClientFactory` verwendet wurde. Dieses Muster wird nach der Migration zu `IHttpClientFactory` überflüssig.
+
+### <a name="alternatives-to-ihttpclientfactory"></a>Alternativen zu IHttpClientFactory
+
+Mit der Verwendung von `IHttpClientFactory` in einer DI-fähigen App wird Folgendes vermieden:
+
+* Probleme mit der Ressourcenauslastung durch Zusammenlegen von `HttpMessageHandler`-Instanzen
+* Probleme durch veraltetes DNS durch regelmäßigen Wechsel von `HttpMessageHandler`-Instanzen
+
+Es gibt alternative Möglichkeiten zum Lösen des vorangehenden Problems mithilfe einer langlebigen <xref:System.Net.Http.SocketsHttpHandler>-Instanz:
+
+- Erstellen Sie eine `SocketsHttpHandler`-Instanz, wenn die App gestartet wird, und verwenden Sie diese für die Lebensdauer der App.
+- Konfigurieren Sie einen geeigneten Wert für <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> basierend auf den DNS-Aktualisierungszeiten.
+- Erstellen Sie bei Bedarf `HttpClient`-Instanzen mithilfe von `new HttpClient(handler, dispostHandler: false)`.
+
+Diese Ansätze lösen die Ressourcenverwaltungsprobleme, die `IHttpClientFactory` auf ähnliche Weise löst.
+
+- `SocketsHttpHandler` gibt Verbindungen für `HttpClient`-Instanzen frei. Durch diese Freigabe wird die Erschöpfung von Sockets vermieden.
+- `SocketsHttpHandler` wechselt die Verbindungen anhand von `PooledConnectionLifetime`, um Probleme durch veraltetes DNS zu umgehen.
+
+### <a name="cookies"></a>Cookies
+
+Die zusammengelegten `HttpMessageHandler`-Instanzen resultieren in der Freigabe von `CookieContainer`-Objekten. Die unerwartete Freigabe von `CookieContainer`-Objekten führt oft zu fehlerhaftem Code. Ziehen Sie für Apps, die Cookies erfordern, folgende Vorgehensweisen in Betracht:
+
+ - Deaktivieren der automatischen Cookieverarbeitung
+ - Vermeiden der Verwendung von `IHttpClientFactory`
+
+Rufen Sie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> auf, um die automatische Cookieverarbeitung zu deaktivieren:
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
 ## <a name="logging"></a>Protokollierung
 

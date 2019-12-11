@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: b989b90100318ac874dc399daf65ef7d21c5549f
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 00bab51cb411552c884f85fa63d42d0691b401b1
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799480"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717272"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -238,6 +238,10 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 
 > [!WARNING]
 > Die Aktivierung von [ServeUnknownFileTypes](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions.serveunknownfiletypes#Microsoft_AspNetCore_Builder_StaticFileOptions_ServeUnknownFileTypes) stellt ein Sicherheitsrisiko dar. Diese Eigenschaft ist standardmäßig deaktiviert, von einer Verwendung wird abgeraten. [FileExtensionContentTypeProvider](#fileextensioncontenttypeprovider) bietet eine sicherere Alternative für die Bereitstellung von Dateien mit vom Standard abweichenden Erweiterungen.
+
+## <a name="serve-files-from-multiple-locations"></a>Bereitstellen von Dateien aus mehreren Speicherorten
+
+Bei `UseStaticFiles` und `UseFileServer` zeigt der Dateianbieter standardmäßig auf *wwwroot*. Sie können weitere Instanzen von `UseStaticFiles` und `UseFileServer` mit anderen Dateianbietern bereitstellen, um Dateien von anderen Speicherorten bereitzustellen. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/15578).
 
 ### <a name="considerations"></a>Weitere Überlegungen
 

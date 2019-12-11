@@ -3,14 +3,14 @@ title: Globalisierung und Lokalisierung in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Lokalisieren von Inhalten in verschiedene Sprachen und Kulturen anbietet.
 ms.author: riande
-ms.date: 01/14/2017
+ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: 36235e305037c0bbf20093327e2a0ff21b3de809
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 645f680436336acbe1d5c2854a242527c9b4b9cb
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963668"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717402"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -276,7 +276,7 @@ Der [Accept-Language-Header](https://www.w3.org/International/questions/qa-accep
 
 6. Klicken Sie auf die Sprache und dann auf **Nach oben**.
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-3.1"
 ### <a name="the-content-language-http-header"></a>Der Content-Language-HTTP-Header
 
 Der [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language)-Entitätsheader:
@@ -286,7 +286,7 @@ Der [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 
 Entitätsheader werden in HTTP-Anforderungen und -Antworten verwendet.
 
-In ASP.NET Core 3.0 kann der `Content-Language`-Header hinzugefügt werden, indem die Eigenschaft `ApplyCurrentCultureToResponseHeaders` festgelegt wird.
+Der `Content-Language`-Header kann durch Festlegen der Eigenschaft `ApplyCurrentCultureToResponseHeaders` hinzugefügt werden.
 
 Hinzufügen des `Content-Language`-Headers:
 
@@ -373,6 +373,10 @@ Die Methode `SetLanguage` legt das Kulturcookie fest.
 
 Sie können *_SelectLanguagePartial.cshtml* dem Beispielcode für dieses Projekt nicht hinzufügen. Das Projekt **Localization.StarterWeb** auf [GitHub](https://github.com/aspnet/entropy) enthält Code, der `RequestLocalizationOptions` durch den Container von [Dependency Injection](dependency-injection.md) an eine Razor-Teilansicht übermittelt.
 
+## <a name="model-binding-route-data-and-query-strings"></a>Routendaten und Abfragezeichenfolgen für die Modellbindung
+
+Weitere Informationen finden Sie unter [Globalisierungsverhalten der Routendaten und Abfragezeichenfolgen für die Modellbindung](xref:mvc/models/model-binding#glob).
+
 ## <a name="globalization-and-localization-terms"></a>Begriffe für die Globalisierung und Lokalisierung
 
 Der Lokalisierungsprozess für Ihre App erfordert ein grundlegendes Verständnis von relevanten Zeichensätzen, die häufig in der modernen Softwareentwicklung verwendet werden, und von den Problemen, die mit ihnen zusammenhängen. Obwohl alle Computer Text als Zahlen (Codes) speichern, speichern verschiedene Systeme denselben Text mit anderen Zahlen. Der Lokalisierungsprozess bezieht sich auf das Übersetzen der Benutzeroberfläche (UI) der App für eine spezifische Kultur bzw. ein bestimmtes Gebietsschema.
@@ -407,5 +411,4 @@ Begriffe:
 * [Globalisieren und Lokalisieren von .NET-Anwendungen](/dotnet/standard/globalization-localization/index)
 * [Ressourcen in RESX-Dateien](/dotnet/framework/resources/working-with-resx-files-programmatically)
 * [Microsoft Multilingual App Toolkit](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
-* [Lokalisierung und Generics](https://github.com/hishamco/hishambinateya.com/blob/master/Posts/localization-and-generics.md)
-* [Neues bei der Lokalisierung von ASP.NET Core 3.0](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0)
+* [Lokalisierung und Generics](http://hishambinateya.com/localization-and-generics)

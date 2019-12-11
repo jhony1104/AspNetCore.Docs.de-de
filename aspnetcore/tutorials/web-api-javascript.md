@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie eine ASP.NET Core-Web-API mit JavaScript aufrufen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/27/2019
+ms.date: 11/26/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 0070816149d64fc1d71d453eb0f135050c78597a
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 5a31aa2974eb41938db89f97c070c352a26290fd
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/13/2019
-ms.locfileid: "72378702"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681174"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript
 
@@ -44,13 +44,15 @@ Ein sehr einfacher `fetch`-Aufruf akzeptiert einen einzelnen Parameter, der die 
 
     [!code-csharp[](first-web-api/samples/3.0/TodoApi/StartupJavaScript.cs?highlight=8-9&name=snippet_configure)]
 
-1. Erstellen Sie ein *wwwroot*-Verzeichnis im Projektstamm.
+1. Erstellen Sie im Stammverzeichnis den Ordner *wwwroot*.
 
-1. Fügen Sie dem Verzeichnis *wwwroot* eine HTML-Datei namens *index.html* hinzu. Ersetzen Sie den Inhalt durch folgendes Markup:
+1. Erstellen Sie einen *js*-Ordner im *wwwroot*-Ordner.
+
+1. Fügen Sie eine HTML-Datei namens *index.html* zum *wwwroot*-Ordner hinzu. Ersetzen Sie den Inhalt von *index.html* durch folgendes Markup:
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. Fügen Sie dem Verzeichnis *wwwroot* eine JavaScript-Datei namens *site.js* hinzu. Ersetzen Sie den Inhalt durch folgenden Code:
+1. Fügen Sie eine JavaScript-Datei namens *site.js* zum Ordner *wwwroot/js* hinzu. Ersetzen Sie den Inhalt der Datei *site.js* durch den folgenden Code:
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
@@ -75,9 +77,9 @@ Im folgenden Code wird Folgendes ausgeführt:
 
 * Eine `item`-Variable wird deklariert, um eine Objektliteraldarstellung des To-Do-Elements zu erstellen.
 * Eine Fetch-Anforderung wird mit den folgenden Optionen konfiguriert:
-    * `method` – gibt das POST HTTP-Aktionsverb an.
-    * `body` – gibt die JSON-Darstellung des Anforderungstexts an. Die JSON wird erzeugt, indem das in `item` gespeicherte Objektliteral an die Funktion [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) übergeben wird.
-    * `headers` – gibt die HTTP-Anforderungsheader `Accept` und `Content-Type` an. Beide Header sind auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben.
+  * `method` – gibt das POST HTTP-Aktionsverb an.
+  * `body` – gibt die JSON-Darstellung des Anforderungstexts an. Die JSON wird erzeugt, indem das in `item` gespeicherte Objektliteral an die Funktion [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) übergeben wird.
+  * `headers` – gibt die HTTP-Anforderungsheader `Accept` und `Content-Type` an. Beide Header sind auf `application/json` festgelegt, um den gesendeten und empfangenen Medientyp anzugeben.
 * Eine HTTP POST-Anforderung wird an die Route *api/TodoItems* gesendet.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]

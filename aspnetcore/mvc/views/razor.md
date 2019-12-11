@@ -3,20 +3,20 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 09/28/2019
+ms.date: 11/09/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 6f8835419dbf4c271617f57484c3408e0af30617
-ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
+ms.openlocfilehash: dea1cd8986757b0bafab9ba9e8aa358a57a6b5eb
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71592331"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317407"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) und [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) (*.razor*) enthalten.
+Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) ( *.razor*) enthalten.
 
 ## <a name="rendering-html"></a>Rendern von HTML
 
@@ -676,7 +676,7 @@ Wenn der Ordner *EvenMorePages* im Beispiel oben eine Importdatei mit `@namespac
 
 Die `@page`-Anweisung hat abhängig vom Typ der Datei, in der Sie verwendet wird, unterschiedliche Auswirkungen. Für die Anweisung gilt:
 
-* In einer *CSHTML*-Datei gibt sie an, dass die Datei eine Razor-Seite ist. Weitere Informationen finden Sie unter <xref:razor-pages/index>.
+* In einer *CSHTML*-Datei gibt sie an, dass die Datei eine Razor-Seite ist. Weitere Informationen finden Sie unter [Benutzerdefinierte Routen](xref:razor-pages/index#custom-routes) und <xref:razor-pages/index>.
 * Gibt an, dass eine Razor-Komponente Anforderungen direkt verarbeiten soll. Weitere Informationen finden Sie unter <xref:blazor/routing>.
 
 ::: moniker-end
@@ -721,11 +721,31 @@ Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hin
 
 Die Datenbindung in-Komponenten wird mit dem `@bind`-Attribut erreicht. Weitere Informationen finden Sie unter <xref:blazor/components#data-binding>.
 
-### <a name="onevent"></a>\@on{event}
+### <a name="onevent"></a>\@on{EVENT}
 
 *Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
 
 Razor stellt Ereignisbehandlungsfunktionen für Komponenten bereit. Weitere Informationen finden Sie unter <xref:blazor/components#event-handling>.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.1"
+
+### <a name="oneventpreventdefault"></a>\@on{EVENT}:preventDefault
+
+*Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
+
+Verhindert die Standardaktion für das Ereignis.
+
+### <a name="oneventstoppropagation"></a>\@on{EVENT}:stopPropagation
+
+*Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
+
+Beendet die Ereignisweitergabe für das Ereignis.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="key"></a>\@key
 

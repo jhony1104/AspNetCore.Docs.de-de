@@ -5,14 +5,14 @@ description: Informationen zum Einrichten von Apache als Reverseproxyserver für
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 12/02/2019
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: fce91db736908e433ba6803319aa8984bb68a554
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 730ed1847ec5728657d56db3ccf0f1f5fab6b5dd
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659885"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717363"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hosten von ASP.NET Core unter Linux mit Apache
 
@@ -24,10 +24,13 @@ In diesem Leitfaden finden Sie Informationen zur Einrichtung von [Apache](https:
 
 * Ein Server, auf dem CentOS 7 ausgeführt wird, mit einem Standardbenutzerkonto mit sudo-Berechtigung.
 * Installieren Sie die .NET Core-Runtime auf dem Server.
-   1. Navigieren Sie zu der [.NET-Seite „All Downloads“ (Alle Downloads)](https://www.microsoft.com/net/download/all).
-   1. Wählen Sie unter **Runtime** die aktuelle Nicht-Vorschau-Runtime aus der Liste aus.
-   1. Wählen Sie die Anweisungen für CentOS/Oracle aus, und befolgen Sie diese.
+   1. Besuchen Sie die [.NET Core-Downloadseite](https://dotnet.microsoft.com/download/dotnet-core).
+   1. Wählen Sie die neueste Version von .NET Core aus, die keine Vorschauversion ist.
+   1. Laden Sie die neueste Runtime aus der Tabelle unter **Run apps - Runtime** (App-Ausführung – Runtime) herunter, bei der es sich nicht um eine Vorschauversion handelt.
+   1. Klicken Sie auf den Link zu den **Anweisungen zum Linux-Paket-Manager**, und führen Sie die CentOS-Anweisungen aus.
 * Eine vorhandene ASP.NET Core-App.
+
+Starten Sie die vom Server gehosteten ASP.NET Core-Apps zu einem beliebigen Zeitpunkt nach dem Upgrade des freigegebenen Frameworks neu.
 
 ## <a name="publish-and-copy-over-the-app"></a>Veröffentlichen und Kopieren der App
 
@@ -380,6 +383,10 @@ sudo systemctl restart httpd
 ```
 
 ## <a name="additional-apache-suggestions"></a>Weitere Vorschläge für Apache
+
+### <a name="restart-apps-with-shared-framework-updates"></a>Neustarten von Apps bei Updates für das freigegebene Framework
+
+Starten Sie die vom Server gehosteten ASP.NET Core-Apps nach dem Upgrade des freigegebenen Frameworks neu.
 
 ### <a name="additional-headers"></a>Zusätzliche Header
 

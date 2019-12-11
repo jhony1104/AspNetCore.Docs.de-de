@@ -5,14 +5,14 @@ description: Hier finden Sie Informationen zum Einrichten von Nginx als Reversep
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 12/02/2019
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c6ae86ec9ac54ddf2d487fd72156199fbdd029ef
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: f307a1c3e0dc62c5dc03e50d710696fadd9fd487
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659876"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717389"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -36,10 +36,13 @@ In diesem Leitfaden:
 
 1. Greifen Sie auf einen Ubuntu 16.04-Server mit einem Standardbenutzerkonto mit sudo-Berechtigung zu.
 1. Installieren Sie die .NET Core-Runtime auf dem Server.
-   1. Navigieren Sie zu der [.NET-Seite „All Downloads“ (Alle Downloads)](https://www.microsoft.com/net/download/all).
-   1. Wählen Sie unter **Runtime** die aktuelle Nicht-Vorschau-Runtime aus der Liste aus.
-   1. Wählen Sie die Anweisungen für Ubuntu aus, die der Ubuntu-Version des Servers entsprechen, und befolgen Sie diese.
+   1. Besuchen Sie die [.NET Core-Downloadseite](https://dotnet.microsoft.com/download/dotnet-core).
+   1. Wählen Sie die neueste Version von .NET Core aus, die keine Vorschauversion ist.
+   1. Laden Sie die neueste Runtime aus der Tabelle unter **Run apps - Runtime** (App-Ausführung – Runtime) herunter, bei der es sich nicht um eine Vorschauversion handelt.
+   1. Klicken Sie auf den Link zu den **Anweisungen zum Linux-Paket-Manager**, und führen Sie die Ubuntu-Anweisungen zu Ihrer Version von Ubuntu aus.
 1. Eine vorhandene ASP.NET Core-App.
+
+Starten Sie die vom Server gehosteten ASP.NET Core-Apps zu einem beliebigen Zeitpunkt nach dem Upgrade des freigegebenen Frameworks neu.
 
 ## <a name="publish-and-copy-over-the-app"></a>Veröffentlichen und Kopieren der App
 
@@ -352,7 +355,7 @@ Konfigurieren Sie mithilfe eines der folgenden Ansätze die App so, dass sie bei
 
 * Konfigurieren Sie den Server, damit dieser für den HTTPS-Datenverkehr an Port `443` empfangsbereit ist, indem Sie ein gültiges Zertifikat angeben, das von einer vertrauenswürdigen Zertifizierungsstelle (Certificate Authority, CA) ausgestellt wurde.
 
-* Stärken Sie Ihre Sicherheit, indem Sie einige der in der folgenden Datei (*/etc/nginx/nginx.conf*) dargestellten Methoden verwenden. Die Beispiele schließen das Auswählen einer stärkeren Verschlüsselung und das Weiterleiten allen Datenverkehrs über HTTP auf HTTPS ein.
+* Stärken Sie Ihre Sicherheit, indem Sie einige der in der folgenden Datei ( */etc/nginx/nginx.conf*) dargestellten Methoden verwenden. Die Beispiele schließen das Auswählen einer stärkeren Verschlüsselung und das Weiterleiten allen Datenverkehrs über HTTP auf HTTPS ein.
 
 * Durch das Hinzufügen eines `HTTP Strict-Transport-Security`-Headers (HSTS) wird sichergestellt, dass alle nachfolgenden Anforderungen vom Client über HTTPS erfolgen.
 
@@ -393,6 +396,10 @@ sudo nano /etc/nginx/nginx.conf
 ```
 
 Fügen Sie die Zeile `add_header X-Content-Type-Options "nosniff";` hinzu, und speichern Sie die Datei. Starten Sie Nginx dann neu.
+
+## <a name="additional-nginx-suggestions"></a>Zusätzliche Vorschläge zu Nginx
+
+Starten Sie die vom Server gehosteten ASP.NET Core-Apps nach dem Upgrade des freigegebenen Frameworks neu.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

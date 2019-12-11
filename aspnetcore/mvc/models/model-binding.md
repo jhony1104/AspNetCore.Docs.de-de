@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie die Modellbindung in ASP.NET Core funktioniert und wie Sie ihr Verhalten anpassen.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
-ms.date: 11/15/2019
+ms.date: 11/21/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: a025419a5b4d2c2e3e5c5a7850df281ddd3164ea
-ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
+ms.openlocfilehash: a49fec38a6d38bbd33e9461cbcceb39bfe810f5c
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "74155040"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717285"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Modellbindung in ASP.NET Core
 
@@ -83,18 +83,18 @@ Standardmäßig sind Eigenschaften für HTTP GET-Anforderungen nicht gebunden. I
 
 Standardmäßig ruft die Modellbindung Daten in Form von Schlüssel-Wert-Paaren aus den folgenden Quellen in einer HTTP-Anforderung ab:
 
-1. Formularfelder 
+1. Formularfelder
 1. Der Anforderungstext (für [Controller mit dem [ApiController]-Attribut](xref:web-api/index#binding-source-parameter-inference))
 1. Routendaten
 1. Abfragezeichenfolgeparameter
-1. Hochgeladene Dateien 
+1. Hochgeladene Dateien
 
-Für jeden Zielparameter oder jede Zieleigenschaft werden die Quellen in der in dieser Liste angegebenen Reihenfolge überprüft. Es gibt ein paar Ausnahmen:
+Für jeden Zielparameter oder jede Zieleigenschaft werden die Quellen nach der oben aufgeführten Reihenfolge überprüft. Es gibt ein paar Ausnahmen:
 
 * Routendaten und Abfragezeichenfolgenwerte werden nur für einfache Typen verwendet.
 * Hochgeladene Dateien werden nur an Zieltypen gebunden, die `IFormFile` oder `IEnumerable<IFormFile>` implementieren.
 
-Wenn das Standardverhalten nicht die richtigen Ergebnisse liefert, können Sie eins der folgenden Attribute verwenden, um die für jedes vorgegebene Ziel zu verwendende Quelle anzugeben. 
+Wenn die Standardquelle nicht richtig ist, verwenden Sie eines der folgenden Attribute zum Festlegen der Quelle:
 
 * [[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute): Ruft Werte aus der Abfragezeichenfolge ab. 
 * [[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute): Ruft Werte aus Routendaten ab.
@@ -114,9 +114,34 @@ Diese Attribute:
 
 ### <a name="frombody-attribute"></a>[FromBody]-Attribut
 
-Die Anforderungstextdaten werden mithilfe von Eingabeformatierern analysiert, die für den Inhaltstyp der Anforderung spezifisch sind. Eingabeformatierer werden [später in diesem Artikel](#input-formatters) erklärt.
+Wenden Sie das `[FromBody]`-Attribut auf einen Parameter an, um dessen Eigenschaften über den Text einer HTTP-Anforderung aufzufüllen. Die ASP.NET Core-Runtime delegiert die Verantwortung, für das Lesen des Texts an einen Eingabeformatierer. Eingabeformatierer werden [später in diesem Artikel](#input-formatters) erklärt.
 
-Wenden Sie `[FromBody]` auf nicht mehr als einen Parameter pro Aktionsmethode an. Die ASP.NET Core-Runtime delegiert die Verantwortung, für das Lesen des Anforderungsdatenstroms an den Eingabeformatierer. Sobald der Anforderungsdatenstrom gelesen wurde, ist er nicht mehr verfügbar, um für die Bindung anderer `[FromBody]`-Parameter erneut gelesen zu werden.
+Wenn `[FromBody]` auf einen komplexen Typparameter angewendet wird, werden alle Bindungsquellenattribute ignoriert, die auf die Eigenschaften angewendet werden. Die folgende `Create`-Aktion legt beispielsweise fest, dass der `pet`-Parameter mithilfe des Texts aufgefüllt wird:
+
+```csharp
+public ActionResult<Pet> Create([FromBody] Pet pet)
+```
+
+Die `Pet`-Klasse legt fest, dass ihre `Breed`-Eigenschaft mithilfe eines Abfragezeichenfolgenparameters aufgefüllt wird:
+
+```csharp
+public class Pet
+{
+    public string Name { get; set; }
+
+    [FromQuery] // Attribute is ignored.
+    public string Breed { get; set; }
+}
+```
+
+Im vorherigen Beispiel:
+
+* Das `[FromQuery]`-Attribut wird ignoriert.
+* Die `Breed`-Eigenschaft wird nicht mithilfe eines Abfragezeichenfolgenparameters aufgefüllt. 
+
+Eingabeformatierer lesen nur den Text und verstehen Bindungsquellenattribute nicht. Wenn ein geeigneter Wert im Text gefunden wird, wird dieser Wert zum Auffüllen der `Breed`-Eigenschaft verwendet.
+
+Wenden Sie `[FromBody]` auf nicht mehr als einen Parameter pro Aktionsmethode an. Sobald der Anforderungsdatenstrom von einem Eingabeformatierer gelesen wurde, ist er nicht mehr verfügbar, um für die Bindung anderer `[FromBody]`-Parameter nochmal gelesen zu werden.
 
 ### <a name="additional-sources"></a>Zusätzliche Quellen
 
@@ -355,6 +380,27 @@ Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *par
 
   * selectedCourses["1050"]="Chemistry"
   * selectedCourses["2000"]="Economics"
+
+<a name="glob"></a>
+
+## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>Globalisierungsverhalten der Routendaten und Abfragezeichenfolgen für die Modellbindung
+
+Der ASP.NET Core-Routenwertanbieter und der Abfragezeichenfolgenwert-Anbieter:
+
+* behandeln Werte als invariante Kulturen.
+* erwarten, dass URLs kulturinvariant sind.
+
+Im Gegensatz dazu durchlaufen Werte, die aus Formulardaten stammen, eine kulturabhängige Konvertierung. Dies ist beabsichtigt, damit URLs zwischen Gebietsschemas freigegeben werden können.
+
+So lassen Sie den ASP.NET Core-Routenwertanbieter und den Abfragezeichenfolgenwert-Anbieter eine kulturabhängige Konvertierung durchlaufen:
+
+* Sie erben von <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>.
+* Kopieren Sie den Code aus [QueryStringValueProviderFactory](https://github.com/aspnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) oder [RouteValueValueProviderFactory](https://github.com/aspnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs).
+* Ersetzen Sie den an den Wertanbieterkonstruktor übergebenen [Culture-Wert](https://github.com/aspnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30) durch [CultureInfo.CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture).
+* Ersetzen Sie die Standardwertanbieter-Zuordnungsinstanz in den MVC-Optionen durch Ihre neue:
+
+[!code-csharp[](model-binding/samples/StartupMB.cs?name=snippet)]
+[!code-csharp[](model-binding/samples/StartupMB.cs?name=snippet1)]
 
 ## <a name="special-data-types"></a>Spezielle Datentypen
 

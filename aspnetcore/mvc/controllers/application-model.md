@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie das Anwendungsmodell lesen und bearbeiten, um
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/controllers/application-model
-ms.openlocfilehash: f7f64c8b3a63ec66936772e724edb57037654059
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 4e264dc7cc63955df42df0b9eeeb7b82ae286241
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815507"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733959"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Arbeiten mit dem Anwendungsmodell in ASP.NET Core
 
@@ -71,7 +71,7 @@ Einige integrierte Verhaltensweisen werden vom `DefaultApplicationModelProvider`
 
 ## <a name="conventions"></a>Konventionen
 
-Das Anwendungsmodell definiert Konventionsabstraktionen, die eine einfachere Möglichkeit zur Anpassung des Verhaltens der Modelle bieten, wodurch auf eine Überschreibung des gesamten Modells oder Anbieters verzichtet werden kann. Diese Abstraktionen werden als Methode für eine Änderung des Verhaltens Ihrer App empfohlen. Mithilfe von Konventionen können Sie Code schreiben, der Anpassungen dynamisch anwendet. Während [Filter](xref:mvc/controllers/filters) eine Möglichkeit zum Ändern des Frameworkverhaltens bieten, können Sie mithilfe von Anpassungen steuern, wie die gesamte App verbunden ist.
+Das Anwendungsmodell definiert Konventionsabstraktionen, die eine einfachere Möglichkeit zur Anpassung des Verhaltens der Modelle bieten, wodurch auf eine Überschreibung des gesamten Modells oder Anbieters verzichtet werden kann. Diese Abstraktionen werden als Methode für eine Änderung des Verhaltens Ihrer App empfohlen. Mithilfe von Konventionen können Sie Code schreiben, der Anpassungen dynamisch anwendet. Während [Filter](xref:mvc/controllers/filters) eine Möglichkeit zum Ändern des Frameworkverhaltens bieten, können Sie mithilfe von Anpassungen steuern, wie die einzelnen Komponenten der App zusammenarbeiten.
 
 Folgende Konventionen sind verfügbar:
 

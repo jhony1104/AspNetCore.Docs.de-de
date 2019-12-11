@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zur Modellvalidierung in ASP.NET Core MVC und Razor Pages
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/19/2019
+ms.date: 11/21/2019
 uid: mvc/models/validation
-ms.openlocfilehash: 1277cac231bab6b56657793ed78dbc4cfb7d9704
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: 19f71799e958e2761832c91cec6762a6d391d2b5
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239870"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317429"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
 
@@ -208,7 +208,7 @@ Die Validierung stoppt, wenn die maximale Anzahl an Fehlern erreicht wird. Diese
 
 ## <a name="maximum-recursion"></a>Maximale Rekursion
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> durchläuft den Objektgraph des Modells, das überprüft wird. Bei Modellen, die umfassend oder unendlich rekursiv sind, führt die Validierung möglicherweise zu einem Stapelüberlauf. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) stellt eine Möglichkeit dar, die Validierung frühzeitig zu stoppen, wenn die Besucherrekursion eine konfigurierte Tiefe überschreitet. Der Standardwert von `MvcOptions.MaxValidationDepth` lautet 200.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> durchläuft den Objektgraph des Modells, das überprüft wird. Bei Modellen, die umfassend oder unendlich rekursiv sind, führt die Validierung möglicherweise zu einem Stapelüberlauf. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) stellt eine Möglichkeit dar, die Validierung frühzeitig zu stoppen, wenn die Besucherrekursion eine konfigurierte Tiefe überschreitet. Der Standardwert von `MvcOptions.MaxValidationDepth` ist „32“.
 
 ## <a name="automatic-short-circuit"></a>Automatischer Kurzschluss
 
@@ -569,7 +569,7 @@ Die Validierung stoppt, wenn die maximale Anzahl an Fehlern erreicht wird. Diese
 
 ## <a name="maximum-recursion"></a>Maximale Rekursion
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> durchläuft den Objektgraph des Modells, das überprüft wird. Bei Modellen, die sehr umfassend oder unendlich rekursiv sind, führt die Validierung möglicherweise zu einem Stapelüberlauf. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) stellt eine Möglichkeit dar, die Validierung frühzeitig zu stoppen, wenn die Besucherrekursion eine konfigurierte Tiefe überschreitet. Der Standardwert von `MvcOptions.MaxValidationDepth` ist 200, bei Ausführung mit `CompatibilityVersion.Version_2_2` oder höher. Bei früheren Versionen ist der Wert NULL, d.h. es gibt keine Tiefeneinschränkung.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> durchläuft den Objektgraph des Modells, das überprüft wird. Bei Modellen, die sehr umfassend oder unendlich rekursiv sind, führt die Validierung möglicherweise zu einem Stapelüberlauf. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) stellt eine Möglichkeit dar, die Validierung frühzeitig zu stoppen, wenn die Besucherrekursion eine konfigurierte Tiefe überschreitet. Der Standardwert von `MvcOptions.MaxValidationDepth` ist bei Ausführung mit `CompatibilityVersion.Version_2_2` oder höher „32“. Bei früheren Versionen ist der Wert NULL, d.h. es gibt keine Tiefeneinschränkung.
 
 ## <a name="automatic-short-circuit"></a>Automatischer Kurzschluss
 

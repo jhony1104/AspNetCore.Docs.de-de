@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über den generischen Host in .NET Core, der für
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 12/02/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: f14917ad924e2c762a14c2cb5f51391d4be06e7b
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: 2ed4af109b5ccd303a03a0d9167649dda7793126
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72378757"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717021"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -129,7 +129,7 @@ Die <xref:Microsoft.Extensions.Hosting.IHostLifetime>-Implementierung steuert, w
 
 `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime` ist die `IHostLifetime`-Standardimplementierung. `ConsoleLifetime`:
 
-* lauscht auf STRG+C/SIGINT oder SIGTERM und ruft <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*> auf, um das Herunterfahren zu beginnen.
+* lauscht auf STRG+C/SIGINT oder SIGTERM und ruft <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> auf, um das Herunterfahren zu beginnen.
 * Hebt die Blockierung von Erweiterungen wie [RunAsync](#runasync) und [WaitForShutdownAsync](#waitforshutdownasync) auf.
 
 ## <a name="ihostenvironment"></a>IHostEnvironment
@@ -140,9 +140,7 @@ Fügt den <xref:Microsoft.Extensions.Hosting.IHostEnvironment>-Dienst in eine Kl
 * [EnvironmentName](#environmentname)
 * [ContentRootPath](#contentrootpath)
 
-Web-Apps implementieren die `IWebHostEnvironment`-Schnittstelle, die `IHostEnvironment` erbt und Folgendes hinzufügt:
-
-* [WebRootPath](#webroot)
+Web-Apps implementieren die `IWebHostEnvironment`-Schnittstelle, die `IHostEnvironment` erbt und [WebRootPath](#webroot) hinzufügt.
 
 ## <a name="host-configuration"></a>Konfiguration des Hosts
 
@@ -226,7 +224,7 @@ Host.CreateDefaultBuilder(args)
 
 [HostOptions.ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) legt das Zeitlimit für <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> fest. Der Standardwert beträgt fünf Sekunden.  Während des Zeitlimits verhält sich der Host folgendermaßen:
 
-* Er löst [IHostApplicationLifetime.ApplicationStopping](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime.applicationstopping) aus.
+* Er löst [IHostApplicationLifetime.ApplicationStopping](/dotnet/api/microsoft.aspnetcore.hosting.ihostapplicationlifetime.applicationstopping) aus.
 * Er versucht, gehostete Dienste zu beenden und protokolliert Fehler für Dienste, die nicht beendet werden können.
 
 Wenn das Zeitlimit abläuft bevor alle gehosteten Dienste beendet sind, werden alle verbleibenden aktiven Dienste beendet, wenn die App herunterfährt. Die Dienste werden beendet, selbst wenn die Verarbeitung noch nicht abgeschlossen ist. Wenn die Dienste mehr Zeit zum Beenden benötigen, sollten Sie das Zeitlimit erhöhen.

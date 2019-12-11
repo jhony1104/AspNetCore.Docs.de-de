@@ -1,26 +1,28 @@
 ---
 title: Konfigurieren des Linkers für ASP.NET Core Blazor
 author: guardrex
-description: Erfahren Sie, wie Sie den Intermediate Language Linker (IL) beim Erstellen einer Blazor-App steuern.
+description: Erfahren Sie, wie Sie den IL-Linker (Intermediate Language, Zwischensprache) beim Erstellen einer Blazor-App steuern.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/21/2019
+no-loc:
+- Blazor
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: a7e59e63c163986c40155e230dc644028e78e5fd
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 0bc987d72d2f684b1ecbd4a883e9a09fac7c801e
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391451"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317289"
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
+# <a name="configure-the-linker-for-aspnet-core-opno-locblazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor führt bei einem Releasebuild eine [IL-Verknüpfung](/dotnet/standard/managed-code#intermediate-language--execution) durch, um nicht benötigte IL aus den Ausgabeassemblys der App zu entfernen.
+Blazor führt bei einem Build eine [IL](/dotnet/standard/managed-code#intermediate-language--execution)-Verknüpfung durch, um nicht benötigte Zwischensprache aus den Ausgabeassemblys der App zu entfernen.
 
 Sie können die Assemblyverknüpfung mit einer der folgenden Methoden steuern:
 
@@ -29,7 +31,7 @@ Sie können die Assemblyverknüpfung mit einer der folgenden Methoden steuern:
 
 ## <a name="disable-linking-with-a-msbuild-property"></a>Deaktivieren der Verknüpfung mit einer MSBuild-Eigenschaft
 
-Die Verknüpfung wird standardmäßig im Releasemodus aktiviert, wenn eine App erstellt wird, was die Veröffentlichung enthält. Um die Verknüpfung für alle Assemblys zu deaktivieren, legen Sie in der Projektdatei für die `BlazorLinkOnBuild`-MSBuild-Eigenschaft `false` fest:
+Die Verknüpfung wird standardmäßig aktiviert, wenn eine App erstellt wird. Dieser Prozess umfasst die Veröffentlichung. Um die Verknüpfung für alle Assemblys zu deaktivieren, legen Sie in der Projektdatei für die `BlazorLinkOnBuild`-MSBuild-Eigenschaft `false` fest:
 
 ```xml
 <PropertyGroup>
@@ -80,3 +82,29 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 ```
 
 Weitere Informationen finden Sie unter [IL Linker: Syntax of xml descriptor (IL-Linker: Syntax des XML-Deskriptors)](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor).
+
+### <a name="configure-the-linker-for-internationalization"></a>Konfigurieren des Linkers für die Internationalisierung
+
+Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Durch die Entfernung dieser Assemblys wird die Größe der App minimiert.
+
+Legen Sie die MSBuild-Eigenschaft `<MonoLinkerI18NAssemblies>` in der Projektdatei fest, um zu steuern, welche I18N-Assemblys beibehalten werden:
+
+```xml
+<PropertyGroup>
+  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+</PropertyGroup>
+```
+
+| Regionswert     | Mono-Regionsassembly    |
+| ---------------- | ----------------------- |
+| `all`            | Alle Assemblys sind enthalten |
+| `cjk`            | *I18N.CJK.dll*          |
+| `mideast`        | *I18N.MidEast.dll*      |
+| `none` (Standard) | Keine                    |
+| `other`          | *I18N.Other.dll*        |
+| `rare`           | *I18N.Rare.dll*         |
+| `west`           | *I18N.West.dll*         |
+
+Verwenden Sie ein Komma, um mehrere Werte voneinander zu trennen (z. B. `mideast,west`).
+
+Weitere Informationen finden Sie unter [I18N: Pnetlib-Framework-Bibliothek für die Internationalisierung (Mono/Mono-Github-Repository)](https://github.com/mono/mono/tree/master/mcs/class/I18N).

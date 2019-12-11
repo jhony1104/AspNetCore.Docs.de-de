@@ -2,26 +2,25 @@
 title: Zugreifen auf HttpContext in ASP.NET Core
 author: coderandhiker
 description: Anleitung zum Zugreifen auf HttpContext in ASP.NET Core
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/11/2018
+ms.date: 12/03/2019
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 0bf40f9cd2554f5ba01ccc06001fa4f1940d51a5
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
+ms.sourcegitcommit: 5974e3e66dab3398ecf2324fbb82a9c5636f70de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289052"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74778738"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>Zugreifen auf HttpContext in ASP.NET Core
 
-ASP.NET Core-Apps greifen über die [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor)-Schnittstelle und die zugehörige Standardimplementierung [HttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.httpcontextaccessor) auf `HttpContext` zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
-
-::: moniker range=">= aspnetcore-2.0"
+ASP.NET Core-Apps greifen über die <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>-Schnittstelle und ihrer Standardimplementierung <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> auf `HttpContext` zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
 
 ## <a name="use-httpcontext-from-razor-pages"></a>Verwenden von HttpContext über Razor Pages
 
-Die Klasse [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) in Razor Pages zeigt die Eigenschaft [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext) an:
+Das Razor Pages-<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> stellt die <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext>-Eigenschaft zur Verfügung:
 
 ```csharp
 public class AboutModel : PageModel
@@ -35,21 +34,21 @@ public class AboutModel : PageModel
 }
 ```
 
-::: moniker-end
-
 ## <a name="use-httpcontext-from-a-razor-view"></a>Verwenden von HttpContext in einer Razor-Ansicht
 
-Razor-Ansichten machen `HttpContext` direkt über die [RazorPage.Context](/dotnet/api/microsoft.aspnetcore.mvc.razor.razorpage.context#Microsoft_AspNetCore_Mvc_Razor_RazorPage_Context)-Eigenschaft in der Ansicht verfügbar. Im folgenden Beispiel wird der aktuelle Benutzernamen in einer Intranet-App abgerufen, die die Windows-Authentifizierung verwendet:
+Razor-Ansichten machen `HttpContext` direkt über die [RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context)-Eigenschaft in der Ansicht verfügbar. Im folgenden Beispiel wird der aktuelle Benutzername in einer Intranet-App abgerufen, die die Windows-Authentifizierung verwendet:
 
 ```cshtml
 @{
     var username = Context.User.Identity.Name;
+    
+    ...
 }
 ```
 
 ## <a name="use-httpcontext-from-a-controller"></a>Verwenden von HttpContext über einen Controller
 
-Controller zeigen die Eigenschaft [ControllerBase.HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.httpcontext) an:
+Controller zeigen die Eigenschaft [ControllerBase.HttpContext](xref:Microsoft.AspNetCore.Mvc.ControllerBase.HttpContext) an:
 
 ```csharp
 public class HomeController : Controller
@@ -57,7 +56,8 @@ public class HomeController : Controller
     public IActionResult About()
     {
         var pathBase = HttpContext.Request.PathBase;
-        // Do something with the PathBase.
+
+        ...
 
         return View();
     }
@@ -73,22 +73,21 @@ public class MyCustomMiddleware
 {
     public Task InvokeAsync(HttpContext context)
     {
-        // Middleware initialization optionally using HttpContext
+        ...
     }
 }
 ```
 
 ## <a name="use-httpcontext-from-custom-components"></a>Verwenden von HttpContext über benutzerdefinierte Komponenten
 
-Für andere Framework- und benutzerdefinierte Komponenten, die Zugriff auf `HttpContext` erfordern, wird empfohlen, eine Abhängigkeit mithilfe des integrierten Containers [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zu registrieren. Der Abhängigkeitsinjektionscontainer stellt `IHttpContextAccessor` allen Klassen zur Verfügung, die ihn in ihren Konstruktoren als Abhängigkeit deklarieren.
+Für andere Framework- und benutzerdefinierte Komponenten, die Zugriff auf `HttpContext` erfordern, wird empfohlen, eine Abhängigkeit mithilfe des integrierten Containers [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zu registrieren. Der Abhängigkeitsinjektionscontainer stellt `IHttpContextAccessor` allen Klassen zur Verfügung, die ihn in ihren Konstruktoren als Abhängigkeit deklarieren:
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range=">= aspnetcore-3.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-     services.AddMvc()
-         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+     services.AddControllersWithViews();
      services.AddHttpContextAccessor();
      services.AddTransient<IUserRepository, UserRepository>();
 }
@@ -96,13 +95,14 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-::: moniker range="<= aspnetcore-2.0"
+::: moniker range="< aspnetcore-3.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-     services.AddMvc();
-     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+     services.AddMvc()
+         .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+     services.AddHttpContextAccessor();
      services.AddTransient<IUserRepository, UserRepository>();
 }
 ```
@@ -134,17 +134,17 @@ public class UserRepository : IUserRepository
 
 ## <a name="httpcontext-access-from-a-background-thread"></a>HttpContext-Zugriff von einem Hintergrundthread aus
 
-`HttpContext` ist nicht threadsicher. Eigenschaften von `HttpContext` außerhalb der Verarbeitung einer Anforderung zu lesen oder zu schreiben kann zu einer `NullReferenceException` führen.
+`HttpContext` ist nicht threadsicher. Eigenschaften von `HttpContext` außerhalb der Verarbeitung einer Anforderung zu lesen oder zu schreiben kann zu einer <xref:System.NullReferenceException> führen.
 
 > [!NOTE]
-> Wenn `HttpContext` außerhalb der Verarbeitung einer Anforderung verwendet wird, führt dies oft zu einer `NullReferenceException`. Wenn Ihre App sporadische `NullReferenceException`s erstellt, überprüfen Sie die Teile des Codes, die die Hintergrundverarbeitung starten, oder die die Verarbeitung fortsetzen, nachdem eine Anforderung erfüllt wurde. Suchen Sie nach Fehlern, wie das Definieren einer Controllermethode als `async void`.
+> Wenn Ihre App sporadische `NullReferenceException`-Fehler erzeugt, überprüfen Sie die Teile des Codes, die die Hintergrundverarbeitung starten oder die Verarbeitung fortsetzen, nachdem eine Anforderung erfüllt wurde. Suchen Sie nach Fehlern, wie das Definieren einer Controllermethode als `async void`.
 
 So werden Hintergrundaufgaben mit `HttpContext`-Daten sicher ausgeführt:
 
 * Kopieren Sie die benötigten Daten während der Verarbeitung der Anforderung.
 * Übergeben Sie die kopierten Daten an eine Hintergrundaufgabe.
 
-Um unsicheren Code zu vermeiden, sollten Sie `HttpContext` niemals an eine Methode übergeben, die Hintergrundarbeit ausführt. Übergeben Sie stattdessen die benötigten Daten.
+Übergeben Sie `HttpContext` niemals an eine Methode, die Hintergrundaufgaben ausführt, um unsicheren Code zu vermeiden. Übergeben Sie stattdessen die erforderlichen Daten. Im folgenden Beispiel wird `SendEmailCore` aufgerufen, um mit dem Senden einer E-Mail zu beginnen. `correlationId` wird an `SendEmailCore` übergeben, nicht an `HttpContext`. Die Codeausführung wartet nicht auf den Abschluss von `SendEmailCore`:
 
 ```csharp
 public class EmailController : Controller
@@ -153,13 +153,13 @@ public class EmailController : Controller
     {
         var correlationId = HttpContext.Request.Headers["x-correlation-id"].ToString();
 
-        // Starts sending an email, but doesn't wait for it to complete
         _ = SendEmailCore(correlationId);
+
         return View();
     }
 
     private async Task SendEmailCore(string correlationId)
     {
-        // send the email
+        ...
     }
 }
