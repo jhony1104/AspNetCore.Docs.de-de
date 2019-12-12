@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/04/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: b57ad4fe62de38085c11d7026d278cc6e0c565ce
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 20e58660185a3055e06e92d9136e80e2394a470d
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963156"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881070"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -686,7 +686,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-`RequestSizeLimitAttribute` kann auch mithilfe der Razor-Anweisung [@attribute](xref:mvc/views/razor#attribute) angewendet werden:
+`RequestSizeLimitAttribute` kann auch mithilfe der Razor-Anweisung [`@attribute`](xref:mvc/views/razor#attribute) angewendet werden:
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]

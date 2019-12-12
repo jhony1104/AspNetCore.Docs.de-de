@@ -4,7 +4,7 @@
 
 Erstellen Sie im RazorPagesMovie-Projekt einen neuen Ordner namens *Data*. Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
 Der vorangehende Code erstellt eine `DbSet`-Eigenschaft für die Entitätenmenge. In der Terminologie von Entity Framework entspricht eine Entitätenmenge in der Regel einer Datenbanktabelle, und eine Entität entspricht einer Zeile in einer Tabelle.
 
@@ -29,7 +29,7 @@ Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code da
 Fügen Sie am Anfang der Datei *Startup.cs* die folgenden `using`-Anweisungen ein.
 
 ```csharp
-using RazorPagesMovie.Models;
+using RazorPagesMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 

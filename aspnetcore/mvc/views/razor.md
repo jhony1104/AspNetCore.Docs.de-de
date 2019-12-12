@@ -3,20 +3,20 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 11/09/2019
+ms.date: 12/05/2019
 uid: mvc/views/razor
-ms.openlocfilehash: dea1cd8986757b0bafab9ba9e8aa358a57a6b5eb
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: baac0ac38a0781cb9c16689cf3e29526b602d8da
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317407"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944251"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) und [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) ( *.razor*) enthalten.
+Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) (*.razor*) enthalten.
 
 ## <a name="rendering-html"></a>Rendern von HTML
 
@@ -461,13 +461,13 @@ Die `@attribute`-Anweisung fügt das angegebene Attribut zu der Klasse der gener
 
 Der `@code`-Block ermöglicht einer [Razor-Komponente](xref:blazor/components) das Hinzufügen von C#-Membern (Feldern, Eigenschaften und Methoden) zu einer Komponente:
 
-```cshtml
+```razor
 @code {
     // C# members (fields, properties, and methods)
 }
 ```
 
-Für Razor-Komponenten ist `@code` ein Alias von [@functions](#functions) und wird über `@functions` empfohlen. Mehrere `@code`-Blöcke sind zulässig.
+Für Razor-Komponenten ist `@code` ein Alias von [`@functions`](#functions) und wird über `@functions` empfohlen. Mehrere `@code`-Blöcke sind zulässig.
 
 ::: moniker-end
 
@@ -874,9 +874,9 @@ Die folgenden drei Anweisungen gehören zu den [Taghilfsprogrammen](xref:mvc/vie
 
 | Anweisung | Funktion |
 | --------- | -------- |
-| [@addTagHelper](xref:mvc/views/tag-helpers/intro#add-helper-label) | Macht Taghilfsprogramme für eine Ansicht verfügbar. |
-| [@removeTagHelper](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Entfernt die zuvor aus einer Ansicht hinzugefügten Taghilfsprogramme. |
-| [@tagHelperPrefix](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Gibt ein Tagpräfix an, um Unterstützung für Taghilfsprogramme zu aktivieren und ihre Verwendung explizit festzulegen. |
+| [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | Macht Taghilfsprogramme für eine Ansicht verfügbar. |
+| [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Entfernt die zuvor aus einer Ansicht hinzugefügten Taghilfsprogramme. |
+| [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Gibt ein Tagpräfix an, um Unterstützung für Taghilfsprogramme zu aktivieren und ihre Verwendung explizit festzulegen. |
 
 ## <a name="razor-reserved-keywords"></a>Für Razor reservierte Schlüsselwörter
 
