@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 2.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2019
+ms.date: 12/05/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: dac5a48042a71774cb884e30a166be68bee69691
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: 452ccd76eece55cb5cf38fe39781f2f64dd5d466
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048109"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880872"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
 
@@ -104,7 +104,7 @@ var entityTag = new EntityTagHeaderValue("\"MyCalculatedEtagValue\"");
 return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNow.AddSeconds(-5), entityTag: entityTag);
 ```
 
-Die Datei, die an Ihre Besucher zurückgegeben wird, wird mit den entsprechenden HTTP-Headern für die Werte `ETag` und `LastModified` ergänzt.
+Die Datei, die an Ihre Besucher zurückgegeben wird, weist die entsprechenden HTTP-Header für die Werte `ETag` und `LastModified` auf.
 
 Wenn ein Besucher der Anwendung Inhalt mit einem Range-Anforderungsheader anfordert, erkennt ASP.NET Core diese Anforderung und verarbeitet den Header. Wenn der angeforderte Inhalt nur teilweise geliefert werden kann, überspringt ASP.NET Core diese Teile entsprechend und gibt nur den angeforderte Bytesatz zurück. Sie müssen keine bestimmten Handler in Ihren Methoden schreiben, um dieses Feature anzupassen oder zu verarbeiten, da dies automatisch für Sie erledigt wird.
 

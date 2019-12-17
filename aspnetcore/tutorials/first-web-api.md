@@ -4,14 +4,14 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/29/2019
+ms.date: 12/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: abb55ea12583374639f28945037cb6aa41a5a32d
-ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
+ms.openlocfilehash: 4377d7d1895b80b3c98a5b480c0f42820f11fbb8
+ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73427044"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74959111"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -52,15 +52,15 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
@@ -71,7 +71,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 * Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie die Vorlage **ASP.NET Core-Webanwendung** aus, und klicken Sie auf **Weiter**.
 * Geben Sie dem Projekt den Namen *TodoApi*, und klicken Sie auf **Erstellen**.
-* Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.0** ausgewählt sind. Wählen Sie die Vorlage **API** aus, und klicken Sie auf **Erstellen**.
+* Vergewissern Sie sich, dass im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Optionen **.NET Core** und **ASP.NET Core 3.1** ausgewählt sind. Wählen Sie die Vorlage **API** aus, und klicken Sie auf **Erstellen**.
 
 ![VS-Dialogfeld „Neues Projekt“](first-web-api/_static/vs3.png)
 
@@ -106,7 +106,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
-* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag * *.NET Core 3.0* aus.
+* Wählen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren**für das **Zielframework** den Eintrag * *.NET Core 3.1* aus.
 
 * Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
@@ -297,7 +297,7 @@ Die obenstehenden Befehle haben folgende Konsequenzen:
 Der generierte Code hat folgende Auswirkungen:
 
 * Definiert eine API-Controllerklasse ohne Methoden.
-* Ergänzt die Klasse mit dem Attribut [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
+* Markiert die Klasse mit dem [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute)-Attribut. Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
 * Verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
 
 ## <a name="examine-the-posttodoitem-create-method"></a>Überblick über die PostTodoItem-Erstellungsmethode
@@ -306,7 +306,7 @@ Ersetzen Sie die Rückgabeanweisung in `PostTodoItem` durch eine Anweisung mit d
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-Der vorherige Code ist eine HTTP POST-Methode, die durch das Attribut [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) angegeben wird. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
+Der oben stehende Code ist eine HTTP POST-Methode, wie durch das [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute)-Attribut angegeben. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
 
 Die <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>-Methode:
 
@@ -679,7 +679,7 @@ Der vorangehende Code:
 Der vorangehende Code:
 
 * Definiert eine API-Controllerklasse ohne Methoden.
-* Ergänzt die Klasse mit dem Attribut [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute). Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
+* Markiert die Klasse mit dem [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute)-Attribut. Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
 * Verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
 * Fügt der Datenbank, falls sie leer ist, ein Element mit dem Namen `Item1` hinzu. Dieser Code befindet sich im Konstruktor. Er wird bei jeder neuen HTTP-Anforderung ausgeführt. Wenn Sie alle Elemente löschen, erstellt der Konstruktor beim nächsten Aufruf einer API-Methode erneut `Item1`. So sieht es möglicherweise so aus, als sei die Löschung fehlgeschlagen, obwohl sie erfolgreich war.
 
@@ -773,7 +773,7 @@ Fügen Sie die folgende `PostTodoItem`-Methode in *Controllers/TodoController.cs
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-Der vorherige Code ist eine HTTP POST-Methode, die durch das Attribut [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) angegeben wird. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
+Der oben stehende Code ist eine HTTP POST-Methode, wie durch das [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute)-Attribut angegeben. Die Methode ruft den Wert der Aufgabe aus dem Text der HTTP-Anforderung ab.
 
 Die `CreatedAtAction`-Methode:
 

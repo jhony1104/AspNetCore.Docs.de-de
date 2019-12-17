@@ -4,16 +4,16 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 2.2.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: fca653158c95e7c1a11f25f4076830fe3e7e93ae
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 8995a514ea2e5016da85952d0f0beaf396a5d639
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963127"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880850"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Neuerungen in ASP.NET Core 2.2
 
@@ -57,7 +57,12 @@ Weitere Informationen finden Sie unter [Integritätsprüfungen in ASP.NET Core](
 
 In ASP.NET Core 2.2 wurde Unterstützung für HTTP/2 hinzugefügt.
 
-HTTP/2 ist eine umfassende Überarbeitung des HTTP-Protokolls. Einige der wichtigsten Features von HTTP/2 sind die Unterstützung für die Headerkomprimierung und Streams mit vollständigem Multiplexing über eine einzige Verbindung. HTTP/2 behält zwar die HTTP-Semantik bei (HTTP-Header, Methoden usw.), ist aber im Vergleich zu HTTP/1.x ein Breaking Change in Bezug darauf, wie Daten in Frames aufgeteilt und über das Netzwerk gesendet werden.
+HTTP/2 ist eine umfassende Überarbeitung des HTTP-Protokolls. HTTP/2 bietet u. a. die folgenden wichtigen Features:
+
+* Unterstützung für Headerkomprimierung.
+* Streams mit vollständigem Multiplexing über eine einzelne Verbindung.
+
+HTTP/2 behält zwar die HTTP-Semantik bei (z. B. HTTP-Header und Methoden), ist aber im Vergleich zu HTTP/1.x ein Breaking Change in Bezug darauf, wie Daten in Frames aufgeteilt und zwischen Client und Server gesendet werden.
 
 Aufgrund dieser Änderung bei der Frameerstellung müssen Server und Clients die verwendete Protokollversion aushandeln. Application-Layer Protocol Negotiation (ALPN) ist eine TLS-Erweiterung, die es dem Server und dem Client ermöglicht, die verwendete Protokollversion im Rahmen des TLS-Handshakes auszuhandeln. Es ist zwar möglich, dass Server und Client das Protokoll vorher kennen, aber alle wichtigen Browser unterstützt ALPN als einzige Möglichkeit, eine HTTP/2-Verbindung herzustellen.
 

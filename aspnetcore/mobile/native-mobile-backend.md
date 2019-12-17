@@ -3,14 +3,14 @@ title: Erstellen von Back-End-Diensten für native mobile Apps mit ASP.NET Core
 author: ardalis
 description: Erfahren Sie, wie Back-End-Dienste mit ASP.NET Core MVC zur Unterstützung nativer mobiler Apps erstellt werden.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 12/05/2019
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: b50d2593d7dc4b89472033898373e3a22fc9a7a3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 38ac69bfe9d99d6d61f96fde92d86fd752ebbb6b
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883955"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881159"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>Erstellen von Back-End-Diensten für native mobile Apps mit ASP.NET Core
 
@@ -108,7 +108,7 @@ Sie können Ihre neue API-Methode mit einer Vielzahl von Tools testen, z.B. wie 
 
 ### <a name="creating-items"></a>Erstellen von Elementen
 
-Gemäß der Konvention wird die Erstellung neuer Datenelemente dem HTTP POST-Verb zugeordnet. Auf die Methode `Create` wird das Attribut `[HttpPost]` angewendet, und sie akzeptiert eine `ToDoItem`-Instanz. Da das Argument `item` im POST-Text übergeben wird, wird dieser Parameter mit dem Attribut `[FromBody]` versehen.
+Gemäß der Konvention wird die Erstellung neuer Datenelemente dem HTTP POST-Verb zugeordnet. Auf die Methode `Create` wird das Attribut `[HttpPost]` angewendet, und sie akzeptiert eine `ToDoItem`-Instanz. Da das Argument `item` im POST-Text übergeben wird, gibt dieser Parameter das Attribut `[FromBody]` an.
 
 Innerhalb der Methode wird überprüft, ob das Element gültig ist und ob es bereits im Datenspeicher vorhanden ist. Wenn keine Probleme auftreten, wird es über das Repository hinzugefügt. Bei der Überprüfung von `ModelState.IsValid` wird eine [Modellvalidierung](../mvc/models/validation.md) durchgeführt. Dies sollte bei jeder API-Methode geschehen, die Benutzereingaben akzeptiert.
 

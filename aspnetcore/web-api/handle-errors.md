@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Fehler in ASP.NET Core-Web-APIs beheben könn
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 09/27/2019
+ms.date: 12/10/2019
 uid: web-api/handle-errors
-ms.openlocfilehash: 457ad7449c608c3b1b0acd729626e07808f55897
-ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
+ms.openlocfilehash: c2dbc47b4495b7187aefbc62eb6d2f0c9683c2da
+ms.sourcegitcommit: 29ace642ca0e1f0b48a18d66de266d8811df2b83
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/23/2019
-ms.locfileid: "74412102"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74987832"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Fehlerbehandlung in ASP.NET Core-Web-APIs
 
@@ -149,7 +149,7 @@ In nicht zur Entwicklung dienenden Umgebungen kann [Middleware zur Ausnahmebehan
 
     ::: moniker-end
 
-Die oben stehende `Error`-Aktion sendet eine mit [RFC7807](https://tools.ietf.org/html/rfc7807) kompatible Nutzlast an den Client.
+Die oben stehende `Error`-Aktion sendet eine mit [RFC 7807](https://tools.ietf.org/html/rfc7807) konforme Nutzlast an den Client.
 
 Middleware zur Ausnahmebehandlung kann auch eine detailliertere Ausgabe der Inhaltsaushandlung in der lokalen Entwicklungsumgebung bieten. Führen Sie die folgenden Schritte aus, um für ein konsistentes Nutzlastformat in Entwicklungs- und Produktionsumgebungen zu sorgen:
 
@@ -267,6 +267,13 @@ Bei Web-API-Controllern antwortet MVC mit dem Antworttyp <xref:Microsoft.AspNetC
 ## <a name="client-error-response"></a>Fehlerantwort des Clients
 
 Ein *Fehlerergebnis* ist als Ergebnis mit dem HTTP-Statuscode 400 oder höher definiert. Bei Web-API-Controllern transformiert MVC ein Fehlerergebnis in ein Ergebnis mit <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>.
+
+::: moniker range="= aspnetcore-2.1"
+
+> [!IMPORTANT]
+> ASP.NET Core 2.1 generiert eine Antwort mit Details zum Problem, die nahezu mit RFC 7807 konform ist. Wenn eine 100-prozentige Konformität wichtig ist, führen Sie ein Upgrade des Projekts auf ASP.NET Core 2.2 oder höher durch.
+
+::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 

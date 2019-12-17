@@ -3,14 +3,14 @@ title: Anpassen von Modellbindungen in ASP.NET Core
 author: ardalis
 description: Erfahren Sie mehr darüber, wie Controlleraktionen durch Modellbindungen direkt mit den Modelltypen in ASP.NET Core arbeiten.
 ms.author: riande
-ms.date: 11/13/2018
+ms.date: 12/05/2019
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: b2fbe6a9f11315d1fb8863fbf62e8929c7ff3fc2
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: 625cc6c9ca5a2c22d028ea25f8fc0d942b71f12d
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71186882"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881132"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>Anpassen von Modellbindungen in ASP.NET Core
 
@@ -34,11 +34,11 @@ Bevor Sie Ihre eigene benutzerdefinierte Modellbindung erstellen, ist es sinnvol
 
 Base64-codierte Zeichenfolgen können verwendet werden, um Binärdaten darzustellen. Das folgende Bild kann beispielsweise als Zeichenfolge codiert werden:
 
-![.NET-Bot](custom-model-binding/images/bot.png "dotnet bot")
+![Dotnet-Bot](custom-model-binding/images/bot.png "Dotnet-Bot")
 
 Ein kleiner Anteil der codierten Zeichenfolge wird in der folgenden Abbildung dargestellt:
 
-![.NET-Bot codiert](custom-model-binding/images/encoded-bot.png "dotnet bot encoded")
+![Dotnet-Bot, codiert](custom-model-binding/images/encoded-bot.png "Dotnet-Bot, codiert")
 
 Befolgen Sie die Anweisungen in der [README-Datei des Beispiels](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/sample/CustomModelBindingSample/README.md), um die Base64-codierte Zeichenfolge in eine Datei zu konvertieren.
 
@@ -69,7 +69,7 @@ In folgendem Beispiel wird veranschaulicht, wie Sie mit `ByteArrayModelBinder` e
 
 Sie können eine Base64-codierte Zeichenfolge in diese API-Methode posten, indem Sie ein Tool wie [Postman](https://www.getpostman.com/) verwenden:
 
-![Postman](custom-model-binding/images/postman.png "postman")
+![Postman](custom-model-binding/images/postman.png "Postman")
 
 Solange die Bindung Anforderungsdaten an entsprechend benannte Eigenschaften oder Argumente binden kann, ist die Modellbindung erfolgreich. Im folgenden Beispiel wird gezeigt, wie `ByteArrayModelBinder` mit einem Ansichtsmodell verwendet wird:
 
@@ -124,7 +124,7 @@ Beim Überprüfen von Modellbindungen wird die Anbieterauflistung von oben nach 
 
 In der folgenden Abbildung werden die Standardmodellbindungen des Debuggers gezeigt:
 
-![Standardmodellbindung](custom-model-binding/images/default-model-binders.png "default model binders")
+![Standardmodellbindungen](custom-model-binding/images/default-model-binders.png "Standardmodellbindungen")
 
 Wenn Sie Ihren Anbieter am Ende der Auflistung hinzufügen, kann es passieren, dass ein integrierter Modellbindung aufgerufen wird, bevor Ihre benutzerdefinierte Bindung an die Reihe kommt. In diesem Beispiel wird der benutzerdefinierte Anbieter am Anfang der Auflistung hinzugefügt, um sicherzustellen, dass er auch tatsächlich für `Author`-Aktionsargumente verwendet wird.
 
@@ -147,4 +147,4 @@ Benutzerdefinierte Modellbindungen:
 
 - Sollten nicht versuchen, Statuscodes festzulegen oder Ergebnisse zurückzugeben (z.B. 404 – Nicht gefunden). Wenn die Modellbindung fehlschlägt, sollte ein [Aktionsfilter](xref:mvc/controllers/filters) oder Logik innerhalb der Aktionsmethode selbst den Fehler behandeln.
 - Sind besonders beim Eliminieren von wiederholendem Code und übergreifenden Belangen aus Aktionsmethoden nützlich.
-- Sollten normalerweise nicht dazu verwendet werden, eine Zeichenfolge in einen benutzerdefinierten Typ zu konvertieren. [`TypeConverter`](/dotnet/api/system.componentmodel.typeconverter) ist oft eine sinnvollere Option.
+- Sollten normalerweise nicht dazu verwendet werden, eine Zeichenfolge in einen benutzerdefinierten Typ zu konvertieren. Ein [TypeConverter](/dotnet/api/system.componentmodel.typeconverter) ist meist die sinnvollere Option.

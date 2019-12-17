@@ -3,14 +3,14 @@ title: Routing zu Controlleraktionen in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um die URLs der eingehenden Anforderungen abzugleichen und sie Aktionen zuzuordnen.
 ms.author: riande
-ms.date: 01/24/2019
+ms.date: 12/05/2019
 uid: mvc/controllers/routing
-ms.openlocfilehash: a0dbfbe60c151990581b494f81e500fe0b315f55
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: b0cd3df6eb0efa90fc76d206413016d6c624285c
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589856"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881076"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -336,7 +336,7 @@ public class ProductsApiController : Controller
 }
 ```
 
-In diesem Beispiel kann der URL-Pfad `/products` `ProductsApi.ListProducts` und der URL-Pfad `/products/5` `ProductsApi.GetProduct(int)` zugeordnet werden. Beide dieser Aktionen entsprechen nur HTTP `GET`, da sie mit `HttpGetAttribute` ausgestattet sind.
+In diesem Beispiel kann der URL-Pfad `/products` `ProductsApi.ListProducts` und der URL-Pfad `/products/5` `ProductsApi.GetProduct(int)` zugeordnet werden. Beide Aktionen gleichen nur „HTTP `GET`“ ab, weil sie mit `HttpGetAttribute` markiert sind.
 
 Routenvorlagen, die auf eine Aktion angewendet werden, die mit einem `/` oder `~/` beginnen, können nicht mit Routenvorlagen kombiniert werden, die auf den Controller angewendet werden. In diesem Beispiel werden mehrere URL-Pfade zugeordnet, die der *Standardroute* ähneln.
 

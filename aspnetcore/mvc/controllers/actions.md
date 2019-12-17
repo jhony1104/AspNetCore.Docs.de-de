@@ -3,14 +3,14 @@ title: Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 author: ardalis
 description: ''
 ms.author: riande
-ms.date: 07/03/2017
+ms.date: 12/05/2019
 uid: mvc/controllers/actions
-ms.openlocfilehash: 952e4dbb2c4343ca87ace1535e4a5968faf088cf
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890255"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881107"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -23,13 +23,15 @@ Controller, Aktionen und Folgen von Aktionen sind ein wesentlicher Bestandteil d
 Ein Controller wird verwendet, um mehrere Aktionen zu definieren und zu gruppieren. Eine Aktion (oder eine *Aktionsmethode*) ist eine Methode in einem Controller, der Abfragen behandelt. Controller gruppieren ähnliche Aktionen auf logische Weise. Diese Aktionsaggregation ermöglicht das Anwenden gemeinsamer Regeln, wie z.B. für das Routing, Caching und die Autorisierung. Anforderungen werden Aktionen über [Routing](xref:mvc/controllers/routing) zugeordnet.
 
 Per Konvention trifft Folgendes auf Controllerklassen zu:
+
 * Sie befinden sich im Ordner *Controllers* auf Stammebene des Projekts.
-* Sie erben von `Microsoft.AspNetCore.Mvc.Controller`.
+* Stellen Sie sicher, dass Ihre Klasse von der Klasse `Microsoft.AspNetCore.Mvc.Controller` erbt.
 
 Ein Controller ist eine Klasse, die instanziiert werden kann und auf die mindestens eine der folgenden Bedingungen zutrifft:
-* An den Klassennamen ist „Controller“ angehängt.
-* Die Klasse erbt von einer Klasse, an deren Namen „Controller“ angehängt ist.
-* Die Klasse ist mit dem `[Controller]`-Attribut ausgestattet.
+
+* An den Klassennamen ist `Controller` angehängt.
+* Die Klasse erbt von einer Klasse, an deren Namen `Controller` angehängt ist.
+* Das `[Controller]`-Attribut wird auf die Klasse angewendet.
 
 Die Controllerklasse darf kein verknüpftes `[NonController]`-Attribut aufweisen.
 

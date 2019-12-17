@@ -3,14 +3,14 @@ title: Ansichten in ASP.NET Core MVC
 author: ardalis
 description: Informationen zur Verarbeitung der Darstellung von App-Daten und zur Benutzerinteraktion in den Ansichten von ASP.NET Core MVC
 ms.author: riande
-ms.date: 04/03/2019
+ms.date: 12/05/2019
 uid: mvc/views/overview
-ms.openlocfilehash: 5e56c6bb18cb5d2389c11eb3e4aa9869228da47d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f636908ee36d0af6e92875876240cb8712dd2ccc
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891345"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881023"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Ansichten in ASP.NET Core MVC
 
@@ -199,7 +199,7 @@ Ansichten haben nicht nur Zugriff auf stark typisierte Datensammlungen, sondern 
 | Übergeben von Daten zwischen...                        | Beispiel                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | einem Controller und einer Ansicht                             | Auffüllen einer Dropdownliste mit Daten                                          |
-| einer Ansicht und einer [Layoutansicht](xref:mvc/views/layout)   | Festlegen des **\<title>**-Elementinhalts in der Layoutansicht über eine Ansichtsdatei.  |
+| einer Ansicht und einer [Layoutansicht](xref:mvc/views/layout)   | Festlegen des **\<title>** -Elementinhalts in der Layoutansicht über eine Ansichtsdatei.  |
 | einer [Teilansicht](xref:mvc/views/partial) und einer Ansicht | Ein Widget, das Daten anzeigt, die der Webseite zugrunde liegen, die der Benutzer angefordert hat.      |
 
 Auf diese Sammlung kann entweder über die Eigenschaft `ViewData` oder über die Eigenschaft `ViewBag` auf Controller und Ansichten verwiesen werden. Die `ViewData`-Eigenschaft ist ein Wörterbuch, das aus schwach typisierten Objekten besteht. Bei der `ViewBag`-Eigenschaft handelt es sich um einen Wrapper um `ViewData`, der dynamische Eigenschaften für die zugrunde liegende `ViewData`-Sammlung bereitstellt. Hinweis: Bei Nachschlagevorgängen für Schlüssel wird für `ViewData` und `ViewBag` Groß-/Kleinschreibung nicht beachtet.
@@ -252,9 +252,9 @@ Arbeiten Sie mit den Daten in einer Ansicht:
 
 **ViewData-Attribut**
 
-Ein anderer Ansatz zur Verwendung von [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) ist das [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)-Attribut. Die Werte der Eigenschaften auf Controllern oder Razor-Seiten-Modellen, die mit `[ViewData]` versehen sind, werden in dem Verzeichnis gespeichert und daraus geladen.
+Ein anderer Ansatz zur Verwendung von [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) ist das [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)-Attribut. Die Werte der Eigenschaften in Controllern oder Razor Pages-Modellen, die mit dem `[ViewData]`-Attribut markiert sind, werden im Wörterbuch gespeichert und daraus geladen.
 
-Im folgenden Beispiel enthält der Home-Controller die Eigenschaft `Title`, die mit `[ViewData]` versehen ist. Die `About`-Methode legt den Titel der Infoansicht fest:
+Im folgenden Beispiel enthält der Home-Controller eine `Title`-Eigenschaft, die mit `[ViewData]` markiert ist. Die `About`-Methode legt den Titel der Infoansicht fest:
 
 ```csharp
 public class HomeController : Controller

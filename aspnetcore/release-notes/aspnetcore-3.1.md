@@ -4,17 +4,17 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 634c6937089a0a0fe1f862a83771aff65a1f8418
-ms.sourcegitcommit: 5974e3e66dab3398ecf2324fbb82a9c5636f70de
+ms.openlocfilehash: 89c676b96ef66f648544a8a884593bdafa3876de
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74778842"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944225"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Neuerungen in ASP.NET Core 3.1
 
@@ -28,7 +28,7 @@ Razor-Komponenten werden nun als partielle Klassen generiert. Der Code für eine
 
 In Blazor mit ASP.NET Core 3.0 wurden Komponenten mithilfe eines HTML-Hilfsprogramms (`Html.RenderComponentAsync`) in Seiten und Ansichten gerendert. In ASP.NET Core 3.1 werden Komponenten mithilfe eines neuen Komponententaghilfsprogramms in Seiten oder Ansichten gerendert:
 
-```razor
+```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
@@ -47,7 +47,7 @@ Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Sei
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Unterstützung für freigegebene Warteschlangen in HTTP.sys
 
-[HTTP.sys](xref:fundamentals/servers/httpsys) unterstützt das Erstellen anonymer Anforderungswarteschlangen. In ASP.NET Core 3.1 wurde das Erstellen einer oder Anfügen an eine vorhandene benannte HTTP.sys-Anforderungswarteschlange hinzugefügt. Das Erstellen einer oder Anfügen an eine vorhandene benannte HTTP.sys-Anforderungswarteschlange ermöglicht Szenarios, in denen der HTTP.sys-Controllerprozess, der die Warteschlange besitzt, unabhängig von Listenerprozess ist. Diese Unabhängigkeit ermöglicht die Beibehaltung vorhandener Verbindungen und in der Warteschlange eingereihter Anforderungen zwischen Neustarts des Listenerprozesses:
+[HTTP.sys](xref:fundamentals/servers/httpsys) unterstützt das Erstellen anonymer Anforderungswarteschlangen. In ASP.NET Core 3.1 wurde die Möglichkeit hinzugefügt, eine benannte HTTP.sys-Anforderungswarteschlange zu erstellen oder Elemente an eine solche Warteschlange anzufügen. Das Erstellen einer benannten HTTP.sys-Anforderungswarteschlange bzw. das Anfügen von Elementen an eine solche ermöglicht Szenarien, in denen der HTTP.sys-Controllerprozess, der die Warteschlange besitzt, unabhängig vom Listenerprozess ist. Diese Unabhängigkeit ermöglicht die Beibehaltung vorhandener Verbindungen und in der Warteschlange eingereihter Anforderungen zwischen Neustarts des Listenerprozesses:
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 

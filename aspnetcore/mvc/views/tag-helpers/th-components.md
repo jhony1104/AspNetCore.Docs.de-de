@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: de053dd0138224a9bece218010eaaedcf7e084cb
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 070cc3aae08664c13d8eb793a066766d0a5569ee
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583535"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880974"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Taghilfsprogrammkomponenten in ASP.NET Core
 
@@ -111,8 +111,8 @@ Für den Code oben gilt:
 So erstellen Sie eine benutzerdefinierte Taghilfsprogrammkomponente:
 
 * Erstellen Sie eine öffentliche Klasse, die von <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> ableitet ist.
-* Wenden Sie ein [[HtmlTargetElement]](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute)-Attribut auf die Klasse an. Geben Sie den Namen des HTML-Zielelements an.
-* *Optional:* Wenden Sie ein [[EditorBrowsable(EditorBrowsableState.Never)]](xref:System.ComponentModel.EditorBrowsableAttribute)-Attribut auf die Klasse an, um die Anzeige des Typs in IntelliSense zu unterdrücken.
+* Wenden Sie ein [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute)-Attribut auf die Klasse an. Geben Sie den Namen des HTML-Zielelements an.
+* *Optional:* Wenden Sie ein [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute)-Attribut auf die Klasse an, um die Anzeige des Typs in IntelliSense zu unterdrücken.
 
 Der folgende Code erstellt eine benutzerdefinierte Taghilfsprogrammkomponente, das als Ziel das `<address>`-HTML-Element aufweist:
 

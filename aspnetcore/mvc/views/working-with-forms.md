@@ -4,14 +4,14 @@ author: rick-anderson
 description: Beschreibt die integrierten Taghilfsprogramme, die mit Formularen verwendet werden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2019
+ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 43a1c408ff1a03468989e5bb0839ca2cd245082b
-ms.sourcegitcommit: b5e63714afc26e94be49a92619586df5189ed93a
+ms.openlocfilehash: 61b50a63bd026f917035f64785d8d3b1956958a6
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/02/2019
-ms.locfileid: "68739492"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880963"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -457,7 +457,7 @@ Wenn ein serverseitiger Validierungsfehler auftritt (wenn Sie z.B. eine benutzer
 
 ### <a name="sample"></a>Beispiel
 
-Im folgenden Beispiel wird das Datenmodell mit `DataAnnotation`-Attributen versehen. Dieses generiert Validierungsfehlermeldungen im `<input>`-Element.  Das Taghilfsprogramm für die Validierung zeigt diese Fehlermeldung an, wenn ein Validierungsfehler auftritt:
+Im folgenden Beispiel enthält das Datenmodell `DataAnnotation`-Attribute, wodurch Validierungsfehlermeldungen im `<input>`-Element generiert werden.  Das Taghilfsprogramm für die Validierung zeigt diese Fehlermeldung an, wenn ein Validierungsfehler auftritt:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
@@ -545,7 +545,7 @@ Die `GetEnumSelectList`-Methode generiert ein `SelectList`-Objekt für eine Enum
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
-Sie können die Enumeratorliste mit dem `Display`-Attribut versehen, um eine umfangreichere Benutzeroberfläche zu erhalten:
+Sie können die Enumeratorliste mit dem `Display`-Attribut markieren, um eine umfangreichere Benutzeroberfläche zu erhalten:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryEnum.cs?highlight=5,7)]
 

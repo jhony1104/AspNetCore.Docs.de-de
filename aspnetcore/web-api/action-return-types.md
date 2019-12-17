@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: web-api/action-return-types
-ms.openlocfilehash: c409170a24225e160c1c53e7294590589e114f7f
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: fe665026fdced22ccf4b4f1ba655e858a7acf016
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116086"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879737"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
 
@@ -92,7 +92,7 @@ Beide vorangehenden Aktionen führen ab ASP.NET Core 3.0 nicht mehr zu Blockier
 
 Der Rückgabetyp <xref:Microsoft.AspNetCore.Mvc.IActionResult> eignet sich in Fällen, in denen mehrere `ActionResult`-Rückgabetypen in einer Aktion möglich sind. Die `ActionResult`-Typen stellen verschiedene HTTP-Statuscodes dar. Alle nicht abstrakten Klassen, die von `ActionResult` abgeleitet werden, qualifizieren sich als gültiger Rückgabetyp. Einige allgemeine Rückgabetypen in dieser Kategorie sind <xref:Microsoft.AspNetCore.Mvc.BadRequestResult> (400), <xref:Microsoft.AspNetCore.Mvc.NotFoundResult> (404) und <xref:Microsoft.AspNetCore.Mvc.OkObjectResult> (200). Alternativ können Hilfsmethoden in der <xref:Microsoft.AspNetCore.Mvc.ControllerBase>-Klasse verwendet werden, um `ActionResult`-Typen aus einer Aktion zurückzugeben. `return BadRequest();` ist beispielsweise eine Kurzform von `return new BadRequestResult();`.
 
-Da es bei einer Aktion dieser Art mehrere Rückgabetypen und Pfade gibt, sollte das Attribut [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) großzügig verwendet werden. Dieses Attribut erzeugt aussagekräftigere Antwortdetails für Web-API-Hilfeseiten, die mit Tools wie [Swagger](xref:tutorials/web-api-help-pages-using-swagger) erstellt wurden. `[ProducesResponseType]` gibt die bekannten Typen und HTTP-Statuscodes an, die von der Aktion zurückgegeben werden sollen.
+Da es bei einer Aktion dieser Art mehrere Rückgabetypen und Pfade gibt, sollte das Attribut [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) verstärkt verwendet werden. Dieses Attribut erzeugt aussagekräftigere Antwortdetails für Web-API-Hilfeseiten, die mit Tools wie [Swagger](xref:tutorials/web-api-help-pages-using-swagger) erstellt wurden. `[ProducesResponseType]` gibt die bekannten Typen und HTTP-Statuscodes an, die von der Aktion zurückgegeben werden sollen.
 
 ### <a name="synchronous-action"></a>Synchrone Aktion
 
@@ -142,13 +142,13 @@ Das folgende Modell gibt beispielsweise an, dass Anforderungen die `Name`- und `
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Wenn das [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut in ASP.NET Core 2.1 oder höher angewendet wird, führen Modellvalidierungsfehler zu einem 400-Statuscode. Weitere Informationen finden Sie unter [Automatische HTTP 400-Antworten](xref:web-api/index#automatic-http-400-responses).
+Wenn das [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut in ASP.NET Core 2.1 oder höher angewendet wird, führen Modellvalidierungsfehler zu einem Statuscode „400“. Weitere Informationen finden Sie unter [Automatische HTTP 400-Antworten](xref:web-api/index#automatic-http-400-responses).
 
 ## <a name="actionresultt-type"></a>ActionResult\<T>-Typ
 
 In ASP.NET Core 2.1 wurde der Rückgabetyp [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) für Web-API-Controlleraktionen eingeführt. Damit wird die Rückgabe eines von <xref:Microsoft.AspNetCore.Mvc.ActionResult> abgeleiteten Typs oder eines [spezifischen Typs](#specific-type) ermöglicht. `ActionResult<T>` besitzt gegenüber dem [IActionResult-Typ](#iactionresult-type) die folgenden Vorteile:
 
-* Die `Type`-Eigenschaft des [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)-Attributs kann ausgeschlossen werden. `[ProducesResponseType(200, Type = typeof(Product))]` wird beispielsweise zu `[ProducesResponseType(200)]` vereinfacht. Der erwartete Rückgabetyp der Aktion wird stattdessen von `T` in `ActionResult<T>` abgeleitet.
+* Die `Type`-Eigenschaft des [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)-Attributs kann ausgeschlossen werden. `[ProducesResponseType(200, Type = typeof(Product))]` wird beispielsweise zu `[ProducesResponseType(200)]` vereinfacht. Der erwartete Rückgabetyp der Aktion wird stattdessen von `T` in `ActionResult<T>` abgeleitet.
 * [Implizite Umwandlungsoperatoren](/dotnet/csharp/language-reference/keywords/implicit) unterstützen die Konvertierung von `T` und `ActionResult` in `ActionResult<T>`. `T` wird in <xref:Microsoft.AspNetCore.Mvc.ObjectResult> konvertiert, wodurch `return new ObjectResult(T);` zu `return T;` vereinfacht wird.
 
 C# unterstützt keine impliziten Umwandlungsoperatoren in Schnittstellen. Daher ist die Konvertierung der Schnittstelle in einen konkreten Typ erforderlich, um `ActionResult<T>` verwenden zu können. Die Verwendung von `IEnumerable` im folgenden Beispiel funktioniert also nicht:
@@ -183,7 +183,7 @@ Bei der folgenden asynchronen Aktion gibt es zwei mögliche Rückgabetypen:
 In der vorhergehenden Aktion geschieht Folgendes:
 
 * Ein 400-Statuscode (<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>) wird durch die ASP.NET Core-Runtime zurückgegeben, wenn:
-  * Das [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut angewendet wurde und die Modellvalidierung fehlschlägt.
+  * Das [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut angewendet wurde und bei der Modellvalidierung ein Fehler auftritt.
   * Die Produktbeschreibung „XYZ-Widget“ enthält.
 * Ein 201-Statuscode wird von der Methode <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> generiert, wenn ein Produkt erstellt wird. In diesem Codepfad wird das `Product`-Objekt im Antworttext bereitgestellt. Ein `Location`-Antwortheader, der die neu erstellte Produkt-URL enthält, wird bereitgestellt.
 

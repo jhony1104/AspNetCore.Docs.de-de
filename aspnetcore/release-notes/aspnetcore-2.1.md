@@ -4,16 +4,16 @@ author: isaac2004
 description: Informationen zu den neuen Features in ASP.NET Core 2.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: a45ba44fb7911a21927a4a996c0d6fa9eb776357
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: d969b4caab44e3e50b3a0202b25864921d6d01dc
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963183"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880859"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
 
@@ -51,7 +51,7 @@ Weitere Informationen finden Sie unter [Gerüst „Identität“in ASP.NET Core 
 
 ## <a name="https"></a>HTTPS
 
-Durch die verstärkte Ausrichtung auf Sicherheit und Datenschutz ist die Aktivierung von HTTPS für Web-Apps von großer Bedeutung. Die Erzwingung von HTTPS ist im Web zunehmend strenger. Websites, auf denen HTTPS nicht verwendet wird, gelten als unsicher. Browser (Chromium, Mozilla) beginnen zu erzwingen, dass Web-Features über einen sicheren Kontext verwendet werden müssen. Für die [DSGVO](xref:security/gdpr) ist die Verwendung von HTTPS aus Datenschutzgründen erforderlich. Während die Verwendung von HTTPS in der Produktion wichtig ist, können durch die Verwendung von HTTPS in der Entwicklung Probleme bei der Bereitstellung verhindert werden (z.B. unsichere Links). ASP.NET Core 2.1 umfasst eine Reihe von Verbesserungen, die die Verwendung von HTTPS in der Entwicklung und die Konfiguration von HTTPS in der Produktion erleichtern. Weitere Informationen finden Sie unter [Erzwingen von HTTPS](xref:security/enforcing-ssl).
+Durch die verstärkte Ausrichtung auf Sicherheit und Datenschutz ist die Aktivierung von HTTPS für Web-Apps von großer Bedeutung. Die Erzwingung von HTTPS ist im Web zunehmend strenger. Websites, die kein HTTPS verwenden, gelten als unsicher. Browser (Chromium, Mozilla) beginnen zu erzwingen, dass Web-Features über einen sicheren Kontext verwendet werden müssen. Für die [DSGVO](xref:security/gdpr) ist die Verwendung von HTTPS aus Datenschutzgründen erforderlich. Während die Verwendung von HTTPS in der Produktion wichtig ist, können durch die Verwendung von HTTPS in der Entwicklung Probleme bei der Bereitstellung verhindert werden (z.B. unsichere Links). ASP.NET Core 2.1 umfasst eine Reihe von Verbesserungen, die die Verwendung von HTTPS in der Entwicklung und die Konfiguration von HTTPS in der Produktion erleichtern. Weitere Informationen finden Sie unter [Erzwingen von HTTPS](xref:security/enforcing-ssl).
 
 ### <a name="on-by-default"></a>Standardmäßig aktiviert
 

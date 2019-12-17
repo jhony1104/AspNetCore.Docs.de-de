@@ -4,17 +4,17 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.0.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: c3dde383507ec919f82b5268ddbf23911c3d24f8
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 4ade13c38880c9915ec590297f2a43548ca400a8
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963120"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880827"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -182,7 +182,7 @@ Im vorherigen Code dient `DomainRestrictedRequirement` als benutzerdefinierte `I
 * Sie kann den Kontext untersuchen, in dem der Hub aufgerufen wird.
 * Sie kann Entscheidungen darüber treffen, ob einem Benutzer die Ausführung einzelner Hubmethoden gestattet wird.
 
-Einzelne Hubmethoden können durch den Namen der Richtlinie ergänzt werden, die der Code zur Laufzeit prüft. Wenn Clients versuchen, einzelne Hubmethoden aufzurufen, wird der `DomainRestrictedRequirement`-Handler ausgeführt und steuert den Zugriff auf die Methoden. Basierend auf der Art und Weise, in der `DomainRestrictedRequirement` den Zugriff steuert, kann Folgendes passieren:
+Einzelne Hubmethoden können mit dem Namen der Richtlinie gekennzeichnet werden, die der Code zur Laufzeit prüft. Wenn Clients versuchen, einzelne Hubmethoden aufzurufen, wird der `DomainRestrictedRequirement`-Handler ausgeführt und steuert den Zugriff auf die Methoden. Basierend auf der Art und Weise, in der `DomainRestrictedRequirement` den Zugriff steuert, kann Folgendes passieren:
 
 * Alle angemeldeten Benutzer können die `SendMessage`-Methode aufrufen.
 * Nur Benutzer, die sich mit einer `@jabbr.net`-E-Mail-Adresse angemeldet haben, können den Verlauf anderer Benutzer anzeigen.
@@ -319,8 +319,8 @@ Informationen zum Hinzufügen von Json.NET zu ASP.NET Core 3.0 finden Sie unter
 
 Die folgende Liste enthält neue Razor-Anweisungen:
 
-* [@attribute](xref:mvc/views/razor#attribute) &ndash; die `@attribute`-Anweisung wendet das angegebene Attribut auf die Klasse der generierten Seite oder Ansicht an. Beispielsweise `@attribute [Authorize]`.
-* [@implements](xref:mvc/views/razor#implements) &ndash; die `@implements`-Anweisung implementiert eine Schnittstelle für die generierte Klasse. Beispielsweise `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute) &ndash; die `@attribute`-Anweisung wendet das angegebene Attribut auf die Klasse der generierten Seite oder Ansicht an. Beispielsweise `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements) &ndash; die `@implements`-Anweisung implementiert eine Schnittstelle für die generierte Klasse. Beispielsweise `@implements IDisposable`.
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 unterstützt die Authentifizierung und Autorisierung für Web-APIs und SPAs.
 
