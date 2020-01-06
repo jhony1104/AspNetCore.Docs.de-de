@@ -5,6 +5,7 @@ Der generierte Identitätsdaten Bank Code erfordert [Entity Framework Core Migra
 In der Visual Studio **-Paket-Manager-Konsole**:
 
 ```powershell
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 Add-Migration CreateIdentitySchema
 Update-Database
 ```
@@ -18,4 +19,4 @@ dotnet ef database update
 
 ---
 
-Der Name-Parameter "Name" von "Name" für den `Add-Migration` Befehl ist willkürlich. `"CreateIdentitySchema"`Beschreibt die Migration.
+Der Name-Parameter "Name" für den Befehl "`Add-Migration`" ist willkürlich. in `"CreateIdentitySchema"` wird die Migration beschrieben.

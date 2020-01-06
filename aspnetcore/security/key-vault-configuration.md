@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie mit dem Azure Key Vault-Konfigurations Anbiet
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/14/2019
+ms.date: 12/16/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: e0e55d40734e0cb6e3e1afe1c708ec47c6f43054
-ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
+ms.openlocfilehash: 37ba756cc4170c145d2ab1f9f0a465057cc826c1
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "74155173"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358707"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -73,9 +73,9 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
 
 1. Öffnen Sie Azure Cloud Shell, indem Sie eine der folgenden Methoden in der [Azure-Portal](https://portal.azure.com/)verwenden:
 
-   * Klicken Sie in der oberen rechten Ecke eines Code Blocks auf **ausprobieren** . Verwenden Sie die Such Zeichenfolge "Azure CLI" im Textfeld.
+   * Klicken Sie in der rechten oberen Ecke eines Codeblocks auf **Ausprobieren**. Verwenden Sie die Such Zeichenfolge "Azure CLI" im Textfeld.
    * Öffnen Sie Cloud Shell in Ihrem Browser mit der Schaltfläche **Start Cloud Shell** .
-   * Wählen Sie im Menü in der oberen rechten Ecke des Azure-Portal die Schaltfläche **Cloud Shell** aus.
+   * Wählen Sie im Azure-Portal rechts oben im Menü die Schaltfläche **Cloud Shell** aus.
 
    Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [in der Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
 
@@ -90,7 +90,7 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
 1. Erstellen Sie mit dem folgenden Befehl einen Schlüssel Tresor in der Ressourcengruppe, wobei `{KEY VAULT NAME}` der Name des neuen Schlüssel Tresors und `{LOCATION}` die Azure-Region (Datacenter) ist:
 
    ```azure-cli
-   az keyvault create --name "{KEY VAULT NAME}" --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
+   az keyvault create --name {KEY VAULT NAME} --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
 1. Erstellen Sie Geheimnisse im Schlüssel Tresor als Name-Wert-Paare.
@@ -100,13 +100,13 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
    Die folgenden geheimen Schlüssel sind für die Verwendung mit der Beispiel-App vorgesehen. Die Werte enthalten ein `_prod` Suffix, um Sie von den `_dev` suffixwerten zu unterscheiden, die in der Entwicklungsumgebung von Benutzer Geheimnissen geladen werden. Ersetzen Sie `{KEY VAULT NAME}` durch den Namen des Schlüssel Tresors, den Sie im vorherigen Schritt erstellt haben:
 
    ```azure-cli
-   az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
-   az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "Section--SecretName" --value "secret_value_2_prod"
+   az keyvault secret set --vault-name {KEY VAULT NAME} --name "SecretName" --value "secret_value_1_prod"
+   az keyvault secret set --vault-name {KEY VAULT NAME} --name "Section--SecretName" --value "secret_value_2_prod"
    ```
 
 ## <a name="use-application-id-and-x509-certificate-for-non-azure-hosted-apps"></a>Verwenden Sie die Anwendungs-ID und das X. 509-Zertifikat für nicht in Azure gehostete Apps.
 
-Konfigurieren Sie Azure AD, Azure Key Vault und die APP für die Verwendung einer Azure Active Directory Anwendungs-ID und eines X. 509-Zertifikats, um sich bei einem Schlüssel Tresor zu authentifizieren, **Wenn die APP außerhalb von Azure gehostet wird**. Weitere Informationen finden Sie unter Informationen [zu Schlüsseln, Geheimnissen und Zertifikaten](/azure/key-vault/about-keys-secrets-and-certificates).
+Konfigurieren Sie Azure AD, Azure Key Vault und die APP für die Verwendung einer Azure Active Directory Anwendungs-ID und eines X. 509-Zertifikats, um sich bei einem Schlüssel Tresor zu authentifizieren, **Wenn die APP außerhalb von Azure gehostet wird**. Weitere Informationen finden Sie im Artikel [Informationen zu Schlüsseln, Geheimnissen und Zertifikaten](/azure/key-vault/about-keys-secrets-and-certificates).
 
 > [!NOTE]
 > Obwohl die Verwendung einer Anwendungs-ID und eines X. 509-Zertifikats für in Azure gehostete Apps unterstützt wird, empfiehlt es sich, beim Hosten einer APP in Azure [verwaltete Identitäten für Azure-Ressourcen zu](#use-managed-identities-for-azure-resources) verwenden. Für verwaltete Identitäten ist das Speichern eines Zertifikats in der APP oder in der Entwicklungsumgebung nicht erforderlich.
@@ -124,13 +124,13 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
 1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck in der *appSettings. JSON* -Datei der app.
 1. Navigieren Sie in der Azure-Portal zu **Schlüssel Tresoren** .
 1. Wählen Sie den Schlüssel Tresor aus, den Sie im Abschnitt " [Geheimnis Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) " erstellt haben.
-1. Wählen Sie **Zugriffsrichtlinien**aus.
+1. Klicken Sie auf **Zugriffsrichtlinien**.
 1. Wählen Sie **Zugriffs Richtlinie hinzufügen**aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
-1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **auswählen** aus.
+1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **Auswählen** aus.
 1. Klicken Sie auf **OK**.
 1. Klicken Sie auf **Speichern**.
-1. Stellen Sie die APP bereit.
+1. Stellen Sie die App bereit.
 
 Die `Certificate`-Beispiel-App Ruft die Konfigurationswerte aus `IConfigurationRoot` mit dem Namen des geheimen Schlüssels ab:
 
@@ -153,7 +153,7 @@ Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Micr
 
 ::: moniker-end
 
-Beispiel Werte:
+Beispielwerte:
 
 * Key Vault-Name: `contosovault`
 * Anwendungs-ID: `627e911e-43cc-61d4-992e-12db9c81b413`
@@ -190,7 +190,7 @@ Eine APP, die für Azure App Service bereitgestellt wird, wird automatisch bei A
 Wenn Sie Azure CLI und die Objekt-ID der App verwenden, stellen Sie der APP `list` und `get` Berechtigungen für den Zugriff auf den Schlüssel Tresor bereit:
 
 ```azure-cli
-az keyvault set-policy --name '{KEY VAULT NAME}' --object-id {OBJECT ID} --secret-permissions get list
+az keyvault set-policy --name {KEY VAULT NAME} --object-id {OBJECT ID} --secret-permissions get list
 ```
 
 **Starten Sie die APP** mit Azure CLI, PowerShell oder der Azure-Portal neu.
@@ -243,7 +243,7 @@ config.AddAzureKeyVault(
     });
 ```
 
-| property         | Beschreibung |
+| Die Eigenschaften-         | Beschreibung |
 | ---------------- | ----------- |
 | `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient> zum Abrufen von Werten verwendet werden. |
 | `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>-Instanz zum Steuern des geheimen Schlüssels. |
@@ -304,8 +304,8 @@ Wenn dieser Ansatz implementiert ist:
 1. Geheime Schlüssel werden in Azure Key Vault mithilfe der folgenden Azure CLI Befehle gespeichert:
 
    ```azure-cli
-   az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5000-AppSecret" --value "5.0.0.0_secret_value_prod"
-   az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
+   az keyvault secret set --vault-name {KEY VAULT NAME} --name "5000-AppSecret" --value "5.0.0.0_secret_value_prod"
+   az keyvault secret set --vault-name {KEY VAULT NAME} --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
    ```
 
 1. Wenn die app ausgeführt wird, werden die geheimen Schlüssel Tresor-Schlüssel geladen. Der Zeichen folgen Schlüssel für `5000-AppSecret` wird mit der in der Projektdatei der APP (`5.0.0.0`) angegebenen app-Version abgeglichen.
@@ -350,7 +350,7 @@ Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden
 
 Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key Vault mithilfe von Double Dash (`--`)-Notation und numerischen Segmenten gespeichert:
 
-| Key | Wert |
+| Key | {2&gt;Wert&lt;2} |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -384,7 +384,7 @@ Wenn die APP die Konfiguration mit dem Anbieter nicht laden kann, wird eine Fehl
 * Der Konfigurationsschlüssel (Name) ist in der APP falsch für den Wert, den Sie laden möchten.
 * Beim Hinzufügen der Zugriffs Richtlinie für die APP zum Schlüssel Tresor wurde die Richtlinie erstellt, aber die Schaltfläche **Speichern** wurde nicht in der Benutzeroberfläche für **Zugriffsrichtlinien** ausgewählt.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

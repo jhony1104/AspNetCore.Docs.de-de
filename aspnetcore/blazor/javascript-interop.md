@@ -9,12 +9,12 @@ ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: 05225b86701b7a5d5c84dd43afbef70dd1ece228
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 2350870f8548a9c8df324182883a105706c12c20
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944069"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355747"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
@@ -30,13 +30,9 @@ Eine Blazor-App kann JavaScript-Funktionen von .net-und .NET-Methoden aus JavaSc
 
 Es gibt Zeiten, in denen .NET-Code erforderlich ist, um eine JavaScript-Funktion aufzurufen. Beispielsweise kann ein JavaScript-Befehl Browserfunktionen oder-Funktionen aus einer JavaScript-Bibliothek für die app verfügbar machen. Dieses Szenario wird als *JavaScript-Interoperabilität* (*js-Interop*) bezeichnet.
 
-Verwenden Sie zum Abrufen von JavaScript aus .net die `IJSRuntime` Abstraktion. Die `InvokeAsync<T>`-Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeitsbereich (`window`). Wenn Sie `window.someScope.someFunction`anrufen möchten, wird der Bezeichner `someScope.someFunction`. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein. `T` sollte dem .NET-Typ entsprechen, der dem zurückgegebenen JSON-Typ am besten zugeordnet wird.
+Verwenden Sie zum Abrufen von JavaScript aus .net die `IJSRuntime` Abstraktion. Um js-Interop-Aufrufe auszugeben, fügen Sie die `IJSRuntime` Abstraktion in die Komponente ein. Die `InvokeAsync<T>`-Methode nimmt einen Bezeichner für die JavaScript-Funktion an, die Sie zusammen mit einer beliebigen Anzahl von JSON-serialisierbaren Argumenten aufrufen möchten. Der Funktions Bezeichner ist relativ zum globalen Gültigkeitsbereich (`window`). Wenn Sie `window.someScope.someFunction`anrufen möchten, wird der Bezeichner `someScope.someFunction`. Es ist nicht erforderlich, die Funktion zu registrieren, bevor Sie aufgerufen wird. Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein. `T` sollte dem .NET-Typ entsprechen, der dem zurückgegebenen JSON-Typ am besten zugeordnet wird.
 
-Für Blazor Server-apps:
-
-* Mehrere Benutzer Anforderungen werden von der Blazor Server-App verarbeitet. Rufen Sie `JSRuntime.Current` nicht in einer Komponente auf, um JavaScript-Funktionen aufzurufen.
-* Fügen Sie die `IJSRuntime` Abstraktion ein, und verwenden Sie das injizierte Objekt, um js-Interop-Aufrufe auszugeben
-* Während eine Blazor-App vorab erstellt wird, ist das Aufrufen von JavaScript nicht möglich, da keine Verbindung mit dem Browser hergestellt wurde. Weitere Informationen finden Sie im Abschnitt [erkennen, wenn eine Blazor-App eine Vorabversion ist](#detect-when-a-blazor-app-is-prerendering) .
+Bei Blazor Server-apps, bei denen die vorab Aktivierung aktiviert ist, ist das Aufrufen von JavaScript während der ersten vorab Generierung nicht möglich. JavaScript-Interop-Aufrufe müssen verzögert werden, bis die Verbindung mit dem Browser hergestellt ist. Weitere Informationen finden Sie im Abschnitt [erkennen, wenn eine Blazor-App eine Vorabversion ist](#detect-when-a-blazor-app-is-prerendering) .
 
 Das folgende Beispiel basiert auf [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem experimentellen JavaScript-basierten Decoder. Im Beispiel wird veranschaulicht, wie eine JavaScript-Funktion aus C# einer Methode aufgerufen wird. Die JavaScript-Funktion akzeptiert ein Bytearray C# aus einer Methode, decodiert das Array und gibt den Text zur Anzeige an die Komponente zurück.
 

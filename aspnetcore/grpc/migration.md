@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
 uid: grpc/migration
-ms.openlocfilehash: c4c07808540c9af370bfa253e8154a8a19f0f3de
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 451171a041f7bbb3711babd73d2fa2e245aadd28
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634068"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355141"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>Migrieren von GrpC-Diensten von C-Core zu ASP.net Core
 
@@ -49,7 +49,7 @@ Allerdings kann eine Dienst Implementierung mit einer Singleton-Lebensdauer kein
 
 In C-Core-basierten apps werden Einstellungen wie `grpc.max_receive_message_length` und `grpc.max_send_message_length` beim [Erstellen der Server Instanz](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)mit `ChannelOption` konfiguriert.
 
-In ASP.net Core bietet GrpC eine Konfiguration über den `GrpcServiceOptions`-Typ. So kann z. b. die maximale Größe eingehender Nachrichten für einen GrpC-Dienst über `AddGrpc` konfiguriert werden. Im folgenden Beispiel wird der Standard `MaxReceiveMessageSize` von 4 MB in 16 MB geändert:
+In ASP.net Core bietet GrpC eine Konfiguration über den `GrpcServiceOptions`-Typ. So kann z. b. die maximale Größe eingehender Nachrichten für einen GrpC-Dienst über `AddGrpc`konfiguriert werden. Im folgenden Beispiel wird der Standard `MaxReceiveMessageSize` von 4 MB in 16 MB geändert:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -82,7 +82,7 @@ Auf C-Core basierende apps konfigurieren HTTPS über die [Server. Ports-Eigensch
 
 ## <a name="grpc-interceptors-vs-middleware"></a>GrpC-Interceptors und Middleware
 
-ASP.net Core [Middleware](xref:fundamentals/middleware/index) bietet im Vergleich zu Interceptors in C-Core-basierten GrpC-apps ähnliche Funktionen. ASP.net Core Middleware und Interceptors sind konzeptionell vergleichbar. Zwar
+ASP.net Core [Middleware](xref:fundamentals/middleware/index) bietet im Vergleich zu Interceptors in C-Core-basierten GrpC-apps ähnliche Funktionen. ASP.net Core Middleware und Interceptors sind konzeptionell vergleichbar. Beide:
 
 * Wird verwendet, um eine Pipeline zu erstellen, die eine GrpC-Anforderung verarbeitet.
 * Ermöglicht die Ausführung von Arbeit vor oder nach der nächsten Komponente in der Pipeline.
@@ -97,12 +97,13 @@ Unterschiede bei den GrpC-Interceptors von ASP.net Core Middleware:
   * Zugriff ermöglichen:
     * Die deserialisierte Nachricht, die an einen-Befehl gesendet wird.
     * Die Meldung, die vom-Befehl zurückgegeben wird, bevor Sie serialisiert wird.
-* Middleware
+  * Können von GrpC-Diensten ausgelöste Ausnahmen abfangen und behandeln.
+* Middleware:
   * Wird vor GrpC-Interceptors ausgeführt.
   * Arbeitet mit den zugrunde liegenden http/2-Nachrichten.
   * Kann nur aus den Anforderungs-und Antwortstreams auf Bytes zugreifen.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:grpc/index>
 * <xref:grpc/basics>

@@ -4,14 +4,14 @@ author: blowdart
 description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net Core für IIS und http. sys konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 12/09/2019
+ms.date: 01/02/2020
 uid: security/authentication/certauth
-ms.openlocfilehash: 38ee8a6767191bb3eee4286e49b96162b14d9889
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 9c175439c0313d62c75898f1af097774b06f353a
+ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959059"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75608144"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
@@ -63,23 +63,33 @@ Der `CertificateAuthenticationOptions` Handler verfügt über einige integrierte
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>"Verkewedcertifipeetypes = verkettet", "selfsigned" oder "alle" (verkettet | Selfsigned)
 
-Mit dieser Überprüfung wird überprüft, ob nur der geeignete Zertifikattyp zulässig ist.
+Standardwert: `CertificateTypes.Chained`
+
+Mit dieser Überprüfung wird überprüft, ob nur der geeignete Zertifikattyp zulässig ist. Wenn die APP selbst signierte Zertifikate verwendet, muss diese Option auf `CertificateTypes.All` oder `CertificateTypes.SelfSigned`festgelegt werden.
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
+
+Standardwert: `true`
 
 Mit dieser Überprüfung wird überprüft, ob das vom Client vorgelegte Zertifikat über die erweiterte Schlüssel Verwendung (EKU) der Client Authentifizierung oder über keine EKUs verfügt. Wie bei den Spezifikationen gesagt, werden alle EKUs als gültig eingestuft, wenn kein EKU angegeben wird.
 
 ### <a name="validatevalidityperiod"></a>Validatevalidityperiod
 
+Standardwert: `true`
+
 Diese Prüfung überprüft, ob das Zertifikat innerhalb seines Gültigkeits Zeitraums liegt. Bei jeder Anforderung stellt der Handler sicher, dass ein Zertifikat, das bei der Präsentation gültig war, während der aktuellen Sitzung nicht abgelaufen ist.
 
 ### <a name="revocationflag"></a>RevocationFlag
+
+Standardwert: `X509RevocationFlag.ExcludeRoot`
 
 Ein Flag, das angibt, welche Zertifikate in der Kette auf die Sperrung geprüft werden.
 
 Sperr Überprüfungen werden nur ausgeführt, wenn das Zertifikat mit einem Stamm Zertifikat verkettet ist.
 
 ### <a name="revocationmode"></a>RevocationMode
+
+Standardwert: `X509RevocationMode.Online`
 
 Ein Flag, das angibt, wie Sperr Überprüfungen durchgeführt werden.
 
@@ -208,7 +218,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> Auf Endpunkte, die durch Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **vor** dem Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> erstellt werden, werden die Standardwerte nicht angewendet.
+> Endpunkte, die durch <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> Aufrufen von erstellt wurden, **bevor** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> aufgerufen werden, werden nicht auf die Standardwerte angewendet
 
 ### <a name="iis"></a>IIS
 
@@ -376,6 +386,9 @@ Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertif
 
 Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath root_ca_dev_damienbod.crt
 ```
+
+> [!NOTE]
+> Der Wert des `-DnsName`-Parameters muss mit dem Bereitstellungs Ziel der APP identisch sein. Beispiel: "localhost" für die Entwicklung.
 
 #### <a name="install-in-the-trusted-root"></a>Installieren des vertrauenswürdigen Stamms
 

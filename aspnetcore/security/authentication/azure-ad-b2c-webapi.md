@@ -6,16 +6,18 @@ ms.author: casoper
 ms.date: 12/05/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 0c7e8a1db924bdedf29468bf6b8cc17f03962c6d
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 9b18b19838a2d25944a2498b6eec1677e56b12cc
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880740"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358260"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentifizierung in Web-APIs mit Azure Active Directory B2C in ASP.NET Core
 
 Von [Cam Soper](https://twitter.com/camsoper)
+
+<!-- Next update remove screenshots. They become obsolete too soon and are more work to update -->
 
 [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) ist eine Cloudlösung für die Verwaltung von Identität für Web- und mobilen apps. Der Dienst ermöglicht die Authentifizierung für apps, die in der Cloud und lokal gehostet werden. Authentifizierungstypen sind einzelne Konten, Konten sozialer Netzwerke, und Verbundbenutzer Unternehmenskonten zu authentifizieren. Azure AD B2C bietet auch Multi-Factor Authentication mit Minimalkonfiguration.
 
@@ -32,7 +34,7 @@ In diesem Tutorial erfahren Sie, wie Sie:
 > * Konfigurieren von Richtlinien, die das Verhalten des Azure AD B2C-Mandanten steuern.
 > * Verwenden von Postman, eine Web-app zu simulieren, die ein Dialogfeld zur Anmeldung, stellt ein Token abgerufen, und wird verwendet, um eine Anforderung an die Web-API richten.
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
 

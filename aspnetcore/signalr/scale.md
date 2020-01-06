@@ -9,12 +9,12 @@ ms.date: 11/28/2018
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 7fc767939996a489174be949742637030924616d
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 6506430202870ba9de2f8eb6f33d79c7c1fbbbd4
+ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963747"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75608066"
 ---
 # <a name="aspnet-core-opno-locsignalr-hosting-and-scaling"></a>ASP.net Core SignalR Hosting und Skalierung
 
@@ -52,7 +52,7 @@ Um zu verhindern, dass SignalR Ressourcenverwendung in anderen Web-Apps zu Fehle
 
 Um zu verhindern, dass SignalR Ressourcenverwendung in einer SignalR-App Fehler verursacht, Skalieren Sie horizontal hoch, um die Anzahl der Verbindungen zu begrenzen, die ein Server verarbeiten muss.
 
-## <a name="scale-out"></a>Skalieren
+## <a name="scale-out"></a>Erweitern von
 
 Eine APP, die SignalR verwendet, muss alle Verbindungen nachverfolgen, die für eine Serverfarm Probleme verursachen. Fügen Sie einen Server hinzu, der neue Verbindungen erhält, die von den anderen Servern nicht bekannt sind. Beispielsweise ist SignalR auf jedem Server im folgenden Diagramm nicht mit den Verbindungen auf den anderen Servern zu rechnen. Wenn SignalR auf einem der Server eine Nachricht an alle Clients senden möchte, wird die Nachricht nur an die Clients gesendet, die mit diesem Server verbunden sind.
 
@@ -60,7 +60,7 @@ Eine APP, die SignalR verwendet, muss alle Verbindungen nachverfolgen, die für 
 
 Die Optionen für die Lösung dieses Problems sind der [Azure SignalR-Dienst](#azure-signalr-service) und die [redis-Rückwand](#redis-backplane).
 
-## <a name="azure-opno-locsignalr-service"></a>Azure SignalR-Dienst
+## <a name="azure-opno-locsignalr-service"></a>Azure SignalR Service
 
 Beim Azure-SignalR Dienst handelt es sich um einen Proxy und nicht um eine Backplane. Jedes Mal, wenn ein Client eine Verbindung mit dem Server initiiert, wird der Client umgeleitet, um eine Verbindung mit dem Dienst herzustellen. Dieser Prozess wird in der folgenden Abbildung veranschaulicht:
 
@@ -90,13 +90,28 @@ Die redis-Rückwand ist der empfohlene Ansatz für horizontales Skalieren für a
 
 Die zuvor notierten Vorteile von Azure SignalR Service sind Nachteile der redis-Backplane:
 
-* Persistente Sitzungen, auch bekannt als [Client Affinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), sind erforderlich. Nachdem eine Verbindung auf einem Server initiiert wurde, muss die Verbindung auf diesem Server bestehen.
+* Persistente Sitzungen, auch bekannt als [Client Affinität](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity), sind erforderlich, außer wenn **beide** der folgenden Punkte zutreffen:
+  * Alle Clients sind so konfiguriert, dass Sie **nur** websockets verwenden.
+  * Die [Einstellung skipaushandlung](xref:signalr/configuration#configure-additional-options) ist in der Client Konfiguration aktiviert. 
+   Nachdem eine Verbindung auf einem Server initiiert wurde, muss die Verbindung auf diesem Server bestehen.
 * Eine SignalR-app muss basierend auf der Anzahl von Clients horizontal hochskaliert werden, auch wenn nur wenige Nachrichten gesendet werden.
 * Eine SignalR-App verwendet erheblich mehr Verbindungs Ressourcen als eine Web-App ohne SignalR.
 
+## <a name="iis-limitations-on-windows-client-os"></a>IIS-Einschränkungen für Windows-Client Betriebssystem
+
+Windows 10 und Windows 8. x sind Client Betriebssysteme. IIS unter Client Betriebssystemen hat eine Beschränkung von 10 gleichzeitigen Verbindungen. SignalRVerbindungen sind:
+
+* Vorübergehend und häufig wieder hergestellt.
+* Wird **nicht** sofort verworfen, wenn Sie nicht mehr verwendet wird.
+
+Die vorangehenden Bedingungen machen es wahrscheinlich, dass die 10 Verbindungs Beschränkung für ein Client Betriebssystem erreicht wird. Wenn ein Client Betriebssystem für die Entwicklung verwendet wird, wird Folgendes empfohlen:
+
+* Vermeiden Sie IIS.
+* Verwenden Sie Kestrel oder IIS Express als Bereitstellungs Ziele.
+
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen finden Sie in den folgenden Ressourcen:
+Weitere Informationen finden Sie unter:
 
 * [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview)
 * [Einrichten einer redis-Rückwand](xref:signalr/redis-backplane)

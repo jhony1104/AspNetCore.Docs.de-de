@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/28/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: a79202565f45b4d26e280427892ea16b33f3f853
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 87f21d84c17e5bbd1247bb955acee81384b890e7
+ms.sourcegitcommit: 47d453f34b6fd0179119c572cb8be64c5365cbb6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943861"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75597901"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -1624,7 +1624,8 @@ Im folgenden Beispiel generiert die-Schleife in der `CreateComponent`-Methode dr
 }
 ```
 
-> ! Davor Die Typen in `Microsoft.AspNetCore.Components.RenderTree` die Verarbeitung der *Ergebnisse* von Renderingvorgängen zulassen. Hierbei handelt es sich um interne Details der Implementierung des Blazor-Frameworks. Diese Typen sollten als *instabil* eingestuft werden und in zukünftigen Versionen geändert werden können.
+> [!WARNING]
+> Die Typen in `Microsoft.AspNetCore.Components.RenderTree` die Verarbeitung der *Ergebnisse* von Renderingvorgängen zulassen. Hierbei handelt es sich um interne Details der Implementierung des Blazor-Frameworks. Diese Typen sollten als *instabil* eingestuft werden und in zukünftigen Versionen geändert werden können.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Sequenznummern beziehen sich auf Codezeilen Nummern und keine Ausführungsreihenfolge.
 
@@ -1729,7 +1730,7 @@ Weitere Informationen und Beispiele finden Sie unter <xref:fundamentals/localiza
 
 ### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>Konfigurieren des Linkers für die Internationalisierung (Blazor Webassembly)
 
-Standardmäßig entfernt die linkerkonfiguration Blazorfür Blazor Webassembly-apps Internationalisierungs Informationen außer den explizit angeforderten Gebiets Schemas. Weitere Informationen und Anleitungen zum Steuern des linkerverhaltens finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
+Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des linkerverhaltens finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
 
 ### <a name="cookies"></a>Cookies
 

@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 7aff46f739239246191763e0590046b2d9995922
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 52285999d7710cc3198836b9246596980cfc1666
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080507"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355784"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Verwenden Sie JavaScript-Dienste zum Erstellen von Single-Page-Anwendungen in ASP.net Core
 
@@ -69,7 +69,7 @@ Führen Sie die folgenden Schritte aus, um mit SpaServices zu arbeiten:
     node -v && npm -v
     ```
 
-  * Wenn die Bereitstellung auf einer Azure-Website erfolgt, ist&mdash;keine Aktion erforderlich, da Node. js installiert ist und in den Serverumgebungen verfügbar ist.
+  * Wenn die Bereitstellung auf einer Azure-Website erfolgt, ist keine Aktion erforderlich,&mdash;Node. js installiert ist und in den Serverumgebungen verfügbar ist.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -195,7 +195,7 @@ Nach dem Laden der App im Browser zeigt die Registerkarte für die Konsole der E
 
 In den meisten ASP.net Core basierten Spas ist das Client seitige Routing neben Server seitigem Routing oft erwünscht. Die SPA- und MVC-Routingsysteme können ohne Störung unabhängig voneinander arbeiten. Es gibt jedoch einen Grenzfall, bei dem die Groß-/Kleinschreibung zur Herausforderung wird, und zwar beim Identifizieren von 404-HTTP-Antworten.
 
-Betrachten Sie das Szenario, in dem eine Route ohne Erweiterung, `/some/page`, verwendet wird. Angenommen, die Anforderung stimmt nicht mit dem Muster eines serverseitigen Pfades überein, jedoch mit einer clientseitigen Route. Betrachten Sie nun eine eingehende Anforderung für `/images/user-512.png`, die in der Regel davon ausgeht, eine Bilddatei auf dem Server zu finden. Wenn der angeforderte Ressourcen Pfad keiner serverseitigen Route oder statischen Datei entspricht, ist es unwahrscheinlich, dass die Client seitige Anwendung diese verarbeitet, wenn&mdash;Sie in der Regel den HTTP-Statuscode 404 zurückgibt.
+Betrachten Sie das Szenario, in dem eine Route ohne Erweiterung, `/some/page`, verwendet wird. Angenommen, die Anforderung stimmt nicht mit dem Muster eines serverseitigen Pfades überein, jedoch mit einer clientseitigen Route. Betrachten Sie nun eine eingehende Anforderung für `/images/user-512.png`, die in der Regel davon ausgeht, eine Bilddatei auf dem Server zu finden. Wenn der angeforderte Ressourcen Pfad keiner serverseitigen Route oder statischen Datei entspricht, ist es unwahrscheinlich, dass die Client seitige Anwendung diese verarbeitet,&mdash;in der Regel der HTTP-Statuscode 404 zurückgegeben wird.
 
 ### <a name="routing-helpers-prerequisites"></a>Voraussetzungen für Routing Hilfsprogramme
 
@@ -213,7 +213,7 @@ Eine Erweiterungsmethode namens `MapSpaFallbackRoute` wird in der `Configure`-Me
 
 Routen werden in der Reihenfolge ausgewertet, in der Sie konfiguriert sind. Daher wird die `default`-Route im obigen Codebeispiel zuerst für den Musterabgleich verwendet.
 
-## <a name="create-a-new-project"></a>Erstellt ein neues Projekt
+## <a name="create-a-new-project"></a>Erstellen eines neuen Projekts
 
 JavaScript-Dienste stellen vorkonfigurierte Anwendungs Vorlagen bereit. Spaservices wird in diesen Vorlagen zusammen mit verschiedenen Frameworks und Bibliotheken wie Angular, reagieren und Redux verwendet.
 
@@ -225,11 +225,11 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 
 Eine Liste der verfügbaren SPA-Vorlagen wird angezeigt:
 
-| Vorlagen                                 | Kurzname | Sprache | Tags        |
+| Vorlagen                                 | Kurzname | Language | Tags        |
 | ------------------------------------------| :--------: | :------: | :---------: |
-| MVC, ASP.NET Core mit Angular             | angular    | [C#]     | MVC/Web/SPA |
-| MVC, ASP.NET Core mit React.js            | react      | [C#]     | MVC/Web/SPA |
-| MVC, ASP.NET Core mit React.js und Redux  | reactredux | [C#]     | MVC/Web/SPA |
+| MVC, ASP.NET Core mit Angular             | angular    | [C#]     | Web/MVC/SPA |
+| MVC, ASP.NET Core mit React.js            | react      | [C#]     | Web/MVC/SPA |
+| MVC, ASP.NET Core mit React.js und Redux  | reactredux | [C#]     | Web/MVC/SPA |
 
 Schließen Sie zum Erstellen eines neuen Projekts mithilfe einer der SPA-Vorlagen den **Kurznamen** der Vorlage in den Befehl [dotnet new](/dotnet/core/tools/dotnet-new) ein. Der folgende Befehl erstellt eine Angular-Anwendung mit ASP.NET Core MVC, die für die serverseitige Verwendung konfiguriert ist:
 
@@ -241,10 +241,10 @@ dotnet new angular
 
 Es sind zwei Modi der primären Laufzeitkonfiguration vorhanden:
 
-* **Entwicklung**:
+* **Entwicklung:**
   * Enthält Quellzuordnungen zur Erleichterung des Debuggings.
   * Der clientseitige Code wird nicht für Leistung optimiert.
-* **Produktion**:
+* **Produktion:**
   * Schließt Quellzuordnungen aus.
   * Optimiert den Client seitigen Code durch Bündelung und Minimierung.
 
@@ -290,6 +290,8 @@ Das Skript startet den Karma-Test Runner, der die in der *karma.conf.js*-Datei d
 
 ## <a name="publish-the-app"></a>Veröffentlichen der App
 
+Weitere Informationen zum Veröffentlichen in Azure finden Sie in [diesem GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/12474) .
+
 Es kann aufwendig sein, die generierten clientseitigen Ressourcen und die veröffentlichten ASP.NET Core-Artefakte in einem Paket, das bereitgestellt werden kann, zu kombinieren. Glücklicherweise orchestriert SpaServices diesen gesamten Veröffentlichungsprozess mit einem benutzerdefinierten MSBuild-Ziel mit dem Namen `RunWebpack`:
 
 [!code-xml[](../client-side/spa-services/sample/SpaServicesSampleApp/SpaServicesSampleApp.csproj?range=31-45)]
@@ -307,6 +309,6 @@ Das MSBuild-Ziel wird aufgerufen, wenn Folgendes ausgeführt wird:
 dotnet publish -c Release
 ```
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Angular-Docs](https://angular.io/docs)

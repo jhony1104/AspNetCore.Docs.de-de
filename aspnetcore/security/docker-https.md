@@ -6,13 +6,15 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
+no-loc:
+- Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: c13ba02845eef5c53a939feec2be8a01bc4ca128
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 47027033c0b7130f2d38d22c02a54945b2cc31b3
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082531"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358912"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>Hosting von ASP.net Core Images mit docker über HTTPS
 
@@ -32,16 +34,16 @@ Für einige der Anweisungen in diesem Dokument ist das [.net Core 2,2 SDK](https
 
 ## <a name="certificates"></a>Zertifikate
 
-Ein Zertifikat von einer [Zertifizierungs](https://en.wikipedia.org/wiki/Certificate_authority) Stelle ist für das [Produktions Hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) für eine Domäne erforderlich.  [Wir verschlüsseln](https://letsencrypt.org/) eine Zertifizierungsstelle, die kostenlose Zertifikate anbietet.
+Ein Zertifikat von einer [Zertifizierungs](https://wikipedia.org/wiki/Certificate_authority) Stelle ist für das [Produktions Hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) für eine Domäne erforderlich. [Let's Encrypt](https://letsencrypt.org/) ist eine Zertifizierungsstelle, die kostenlose Zertifikate anbietet.
 
-In`localhost`diesem Dokument werden [selbst signierte Entwicklungs Zertifikate](https://en.wikipedia.org/wiki/Self-signed_certificate) für das Hosting von vordefinierten Images verwendet. Die Anweisungen ähneln der Verwendung von Produktions Zertifikaten.
+In diesem Dokument werden [selbst signierte Entwicklungs Zertifikate](https://en.wikipedia.org/wiki/Self-signed_certificate) zum Hosting von vorgefertigten Images über `localhost`verwendet. Die Anweisungen ähneln der Verwendung von Produktions Zertifikaten.
 
 Für produktionscerts:
 
 * Das `dotnet dev-certs` Tool ist nicht erforderlich.
 * Zertifikate müssen nicht an dem Speicherort gespeichert werden, der in den Anweisungen verwendet wird. Jeder Speicherort sollte funktionieren, obwohl das Speichern von Zertifikaten innerhalb Ihres Website Verzeichnisses nicht empfohlen wird.
 
-Die Anweisungen Volume einbinden von Zertifikaten in Containern. Sie können Zertifikate in Container Images mit einem `COPY` Befehl in einer dockerfile-Datei hinzufügen. Das Kopieren von Zertifikaten in ein Abbild ist nicht empfehlenswert:
+Die Anweisungen Volume einbinden von Zertifikaten in Containern. Sie können Zertifikate in Container Images mit einem `COPY`-Befehl in einer *dockerfile-Datei*hinzufügen. Das Kopieren von Zertifikaten in ein Abbild wird aus den folgenden Gründen nicht empfohlen:
 
 * Es ist schwierig, das gleiche Image für Tests mit Entwickler Zertifikaten zu verwenden.
 * Es ist schwierig, das gleiche Image für das Hosting mit Produktions Zertifikaten zu verwenden.
@@ -60,7 +62,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie `{ password here }` in den vorangehenden Befehlen durch ein Kennwort.
 
 Führen Sie das Container Image mit für HTTPS konfigurierten ASP.net Core aus:
 
@@ -80,9 +82,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`wird nur unter macOS und Windows unterstützt. Sie müssen Zertifikate unter Linux in der von Ihrer Distribution unterstützten Weise als vertrauenswürdig einstufen. Es ist wahrscheinlich, dass Sie das Zertifikat in Ihrem Browser als vertrauenswürdig einstufen müssen.
+`dotnet dev-certs https --trust` wird nur unter macOS und Windows unterstützt. Sie müssen Zertifikate unter Linux in der von Ihrer Distribution unterstützten Weise als vertrauenswürdig einstufen. Es ist wahrscheinlich, dass Sie das Zertifikat in Ihrem Browser als vertrauenswürdig einstufen müssen.
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie `{ password here }` in den vorangehenden Befehlen durch ein Kennwort.
 
 Führen Sie das Container Image mit für HTTPS konfigurierten ASP.net Core aus:
 
@@ -102,7 +104,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie `{ password here }` in den vorangehenden Befehlen durch ein Kennwort.
 
 Führen Sie das Container Image mit für HTTPS konfigurierten ASP.net Core aus:
 
