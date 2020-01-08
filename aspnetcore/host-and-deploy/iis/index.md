@@ -5,14 +5,14 @@ description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Info
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/26/2019
+ms.date: 01/06/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: de1b3e270ccd90bde741975de38a224e557f1a08
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: c2b524472b276dee215ff5eca7fd4e48e98957ef
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717415"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693855"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -139,13 +139,33 @@ Weitere Informationen zum Hosten finden Sie unter [Hosten in ASP.NET Core](xref:
 
 ### <a name="enable-the-iisintegration-components"></a>Aktivieren der IISIntegration-Komponenten
 
-Eine typische *Program.cs*-Datei ruft <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> auf, um mit der Einrichtung eines Hosts zu beginnen, der die Integration mit IIS ermöglicht:
+::: moniker range=">= aspnetcore-3.0"
+
+Rufen Sie beim Erstellen eines Hosts in `CreateHostBuilder` (*Program.cs*) <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> ab, um die IIS-Integration zu aktivieren:
+
+```csharp
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        ...
+```
+
+Weitere Informationen zu `CreateDefaultBuilder` finden Sie unter <xref:fundamentals/host/generic-host#default-builder-settings>.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+Rufen Sie beim Erstellen eines Hosts in `CreateWebHostBuilder` (*Program.cs*) <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> ab, um die IIS-Integration zu aktivieren:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
     WebHost.CreateDefaultBuilder(args)
         ...
 ```
+
+Weitere Informationen zu `CreateDefaultBuilder` finden Sie unter <xref:fundamentals/host/web-host#set-up-a-host>.
+
+::: moniker-end
 
 ### <a name="iis-options"></a>IIS-Optionen
 
@@ -251,9 +271,9 @@ Wenn Sie *web.config* beim Veröffentlichen transformieren müssen (z.B. Umgebun
 
 **Windows Server-Betriebssysteme**
 
-Aktivieren Sie die Serverrolle **Webserver (IIS)**, und richten Sie Rollendienste ein.
+Aktivieren Sie die Serverrolle **Webserver (IIS)** , und richten Sie Rollendienste ein.
 
-1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)**.
+1. Verwenden Sie den Assistenten **Rollen und Features hinzufügen** im Menü **Verwalten** oder den Link in **Server-Manager**. Aktivieren Sie im Schritt **Serverrollen** das Kontrollkästchen für **Webserver (IIS)** .
 
    ![Die Rolle „Webserver (IIS)“ wird im Schritt „Serverrollen auswählen“ ausgewählt.](index/_static/server-roles-ws2016.png)
 
@@ -325,10 +345,10 @@ So erhalten Sie eine frühere Version des Installers:
 1. Führen Sie das Installationsprogramm auf dem Server aus. Die folgenden Parameter sind verfügbar, wenn Sie das Installationsprogramm über eine Administratorbefehlsshell ausführen.
 
    * `OPT_NO_ANCM=1` &ndash; Überspringen Sie die Installation des ASP.NET Core-Moduls.
-   * `OPT_NO_RUNTIME=1` &ndash; Überspringen Sie die Installation der .NET Core Runtime. Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
-   * `OPT_NO_SHAREDFX=1` &ndash; Überspringen Sie die Installation des geteilten ASP.NET Frameworks (ASP.NET Runtime). Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
-   * `OPT_NO_X86=1` &ndash; Überspringen Sie die Installation von X86 Runtimes. Verwenden Sie diesen Parameter, wenn Sie wissen, dass Sie keine 32-Bit-Apps hosten. Sollte die Möglichkeit bestehen, dass Sie sowohl 32-Bit- als auch 64-Bit-Apps hosten könnten, verwenden Sie diesen Parameter nicht, und installieren Sie beide Runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Deaktivieren Sie die Überprüfung auf Verwendung einer gemeinsamen IIS-Konfiguration (*applicationHost.config*), wenn die gemeinsam genutzte Konfiguration sich auf demselben Computer wie die IIS-Installation befindet. *Nur für Installationsprogramme für Hostingbundles für ASP.NET Core 2.2 oder höher verfügbar.* Weitere Informationen finden Sie unter <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_RUNTIME=1` &ndash; Überspringen Sie die Installation der .NET Core-Runtime. Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
+   * `OPT_NO_SHAREDFX=1` &ndash; Überspringen Sie die Installation des geteilten ASP.NET-Frameworks (ASP.NET-Runtime). Wird verwendet, wenn der Server nur [eigenständige Bereitstellungen (Self-contained Deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) hostet.
+   * `OPT_NO_X86=1` &ndash; Überspringen Sie die Installation von X86-Runtimes. Verwenden Sie diesen Parameter, wenn Sie wissen, dass Sie keine 32-Bit-Apps hosten. Sollte die Möglichkeit bestehen, dass Sie sowohl 32-Bit- als auch 64-Bit-Apps hosten könnten, verwenden Sie diesen Parameter nicht, und installieren Sie beide Runtimes.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Deaktivieren Sie die Überprüfung auf Verwendung einer gemeinsamen IIS-Konfiguration, wenn sich die gemeinsam genutzte Konfiguration (*applicationHost.config*) auf demselben Computer wie die IIS-Installation befindet. *Nur für Installationsprogramme für Hostingbundles für ASP.NET Core 2.2 oder höher verfügbar.* Weitere Informationen finden Sie unter <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Starten Sie das System neu, oder führen Sie die folgenden Befehle in einer Befehlsshell aus:
 
    ```console
@@ -421,7 +441,7 @@ Weitere Informationen zum Bereitstellen von ASP.NET Core in IIS finden Sie im na
 
 Senden Sie nach Abschluss der App-Bereitstellung auf dem Hostsystem eine Anforderung an einen der öffentlichen Endpunkte der App.
 
-Im folgenden Beispiel ist die Website an den IIS-**Hostnamen** `www.mysite.com` auf **Port** `80` gebunden. Es wird eine Anforderung an `http://www.mysite.com` gesendet:
+Im folgenden Beispiel ist die Website an den IIS-**Hostnamen** von `www.mysite.com` auf **Port** `80` gebunden. Es wird eine Anforderung an `http://www.mysite.com` gesendet:
 
 ![Der Microsoft Edge-Browser hat die IIS-Startseite geladen.](index/_static/browsewebsite.png)
 
@@ -613,7 +633,7 @@ Wenn der IIS-Workerprozess erhöhte Rechte für den Zugriff auf Ihre Anwendung e
 
 1. Wählen Sie die Schaltfläche **Speicherorte** aus, und stellen Sie sicher, dass das System ausgewählt ist.
 
-1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>**, wenn Sie die Objektnamen überprüfen.
+1. Geben Sie im Bereich **Geben Sie die Namen der auszuwählenden Objekte ein** den Wert **IIS AppPool\\<Name_des_AppPools>** ein. Klicken Sie auf die Schaltfläche **Namen überprüfen**. Überprüfen Sie für *DefaultAppPool* die Namen mit **IIS AppPool\DefaultAppPool**. Bei Auswahl der Schaltfläche **Namen überprüfen** wird im Bereich für Objektnamen der Wert **DefaultAppPool** angegeben. Es ist nicht möglich, den Namen des App-Pools direkt in den Bereich für Objektnamen einzugeben. Verwenden Sie das Format **IIS AppPool\\<Name_des_AppPools>** , wenn Sie die Objektnamen überprüfen.
 
    ![Dialogfeld „Benutzer oder Gruppen auswählen“ für den App-Ordner: Der Name des App-Pools, „DefaultAppPool“, wird an „IIS AppPool\"“ im Bereich der Objektnamen angehängt, bevor „Namen überprüfen“ ausgewählt wird.](index/_static/select-users-or-groups-1.png)
 
@@ -660,7 +680,7 @@ Weitere Informationen zu den In-Process- und Out-of-Process-Hostingmodellen find
 * Zielframework: Nicht zutreffend für Out-of-Process-Bereitstellungen, da die HTTP/2-Verbindung vollständig von IIS verarbeitet wird.
 * TLS 1.2-Verbindung oder höher
 
-Wenn eine HTTP/2-Verbindung hergestellt wurde, meldet [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) `HTTP/1.1`.
+Wenn eine HTTP/2-Verbindung hergestellt wurde, meldet [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*)`HTTP/1.1`.
 
 ::: moniker-end
 
@@ -678,8 +698,8 @@ Für eine ASP.NET Core-App, die auf das .NET Framework ausgerichtet ist, werden 
 
 Bei Hosting in IIS durch Version 2 das ASP.NET Core-Moduls:
 
-* [Initialisierung Anwendungsmodul](#application-initialization-module) &ndash; [In-Process](#in-process-hosting-model) oder [Out-of-Process](#out-of-process-hosting-model) gehostete Apps können für den automatischen Start bei einem Worker- oder Serverneustart konfiguriert werden.
-* [Leerlauftimeout](#idle-timeout) &ndash; [In-Process](#in-process-hosting-model) gehostete Apps können so konfiguriert werden, dass in der Zeiten ohne Aktivität kein Timeout eintritt.
+* [Anwendungsinitialisierungsmodul](#application-initialization-module) &ndash; App-Hostings vom Typ [In-Process](#in-process-hosting-model) oder [Out-of-Process](#out-of-process-hosting-model) können so konfiguriert werden, dass sie automatisch im Rahmen eines Workerprozessneustarts oder eines Serverneustarts gestartet werden.
+* [Leerlauftimeout](#idle-timeout) &ndash; App-Hostings vom Typ [In-Process](#in-process-hosting-model) können so konfiguriert werden, dass in Zeiten ohne Aktivität kein Timeout eintritt.
 
 ### <a name="application-initialization-module"></a>Anwendungsinitialisierungsmodul
 
@@ -709,7 +729,7 @@ Verwenden Sie einen der folgenden Ansätze, um das Anwendungsinitialisierungsmod
   1. Klicken Sie mit der rechten Maustaste im App-Pool der App in die Liste, und wählen Sie **Erweiterte Einstellungen** aus.
   1. Der standardmäßige **Startmodus** ist **OnDemand**. Legen Sie den **Startmodus** auf **AlwaysRunning** fest. Klicken Sie auf **OK**.
   1. Öffnen Sie den Knoten **Websites** im Bereich **Verbindungen**.
-  1. Klicken Sie mit der rechten Maustaste auf die App, und wählen Sie **Website verwalten** > **Erweiterte Einstellungen** aus.
+  1. Klicken Sie mit der rechten Maustaste zunächst auf die App und dann auf **Website verwalten** > **Erweiterte Einstellungen**.
   1. Die Standardeinstellung für **Vorabladen aktiviert** ist **False**. Legen Sie für **Vorabladen aktiviert** **True** fest. Klicken Sie auf **OK**.
 
 * Fügen Sie bei Verwenden von *web.config* das `<applicationInitialization>`-Element hinzu, wobei `doAppInitAfterRestart` auf `true` für die `<system.webServer>`-Elemente in der *web.config*-Datei der App festgelegt ist:

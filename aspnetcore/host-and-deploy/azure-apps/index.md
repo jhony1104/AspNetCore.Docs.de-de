@@ -5,14 +5,14 @@ description: Dieser Artikel enthält Links zu Azure-Host- und Bereitstellungsres
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: f9fc6e706046165c142e19ca38d97ac21914dc9b
-ms.sourcegitcommit: a104ba258ae7c0b3ee7c6fa7eaea1ddeb8b6eb73
+ms.openlocfilehash: 51d82d1deadb3d2adbdccd39c8d949e3f9f812fd
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/25/2019
-ms.locfileid: "74478766"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693842"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -87,13 +87,13 @@ Wenn eine App-Einstellung im Azure-Portal erstellt oder geändert und die Schalt
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Wenn eine App den [generischen Host](xref:fundamentals/host/generic-host) verwendet, werden Umgebungsvariablen nicht standardmäßig in die App-Konfiguration geladen, und der Konfigurationsanbieter muss vom Entwickler hinzugefügt werden. Der Entwickler legt das Präfix der Umgebungsvariablen fest, wenn der Konfigurationsanbieter hinzugefügt wird. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Wenn eine App einen [generischen Host](xref:fundamentals/host/generic-host) verwendet, werden beim Abruf von <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> zum Erstellen des Hosts Umgebungsvariablen in die Konfiguration der App geladen. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Wenn eine App den Host mit [WebHost.CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) erstellt, verwenden Umgebungsvariablen, die den Host konfigurieren, das Präfix `ASPNETCORE_`. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Wenn eine App einen [Webhost](xref:fundamentals/host/web-host) verwendet, werden beim Abruf von <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> zum Erstellen des Hosts Umgebungsvariablen in die Konfiguration der App geladen. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
@@ -146,14 +146,16 @@ Wenn Sie zwischen Bereitstellungsslots wechseln, können Systeme, die Data Prote
 Weitere Informationen finden Sie unter <xref:security/data-protection/implementation/key-storage-providers>.
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
 
-## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Bereitstellen von ASP.NET Core 3.0 in Azure App Service
+## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>Bereitstellen einer ASP.NET Core-App, die eine Vorschauversion von .NET Core verwendet
 
-ASP.NET Core 3.0 wird in Azure App Service unterstützt. Um eine Vorschauversion einer höheren .NET Core-Version als 3.0 bereitzustellen, verwenden Sie eins der folgenden Verfahren. Diese Verfahren werden auch verwendet, wenn die Runtime verfügbar ist, aber das SDK nicht in Azure App Service installiert wurde.
+In den folgenden Ressourcen finden Sie Informationen zum Bereitstellen einer App, die eine Vorschauversion von .NET Core verwendet. Diese Verfahren werden auch verwendet, wenn die Runtime verfügbar ist, aber das SDK nicht in Azure App Service installiert wurde.
 
 * [Angeben der .NET Core SDK-Version mithilfe von Azure Pipelines](#specify-the-net-core-sdk-version-using-azure-pipelines)
-* [Bereitstellen einer eigenständigen Vorschau-App](#deploy-a-self-contained-preview-app)
-* [Verwenden von Docker mit Web-Apps für Container](#use-docker-with-web-apps-for-containers).
-* [Installieren der Websiteerweiterung (Vorschau)](#install-the-preview-site-extension).
+* [Bereitstellen einer eigenständigen Vorschauversions-App](#deploy-a-self-contained-preview-app)
+* [Verwenden von Docker mit Web-Apps für Container](#use-docker-with-web-apps-for-containers)
+* [Installieren der Websiteerweiterung (Vorschau)](#install-the-preview-site-extension)
+
+Die ASP.NET Core-Version, die unter Azure App Service verfügbar ist, finden Sie unter [ASP.NET Core im App Service-Dashboard](https://aspnetcoreon.azurewebsites.net/).
 
 ### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Angeben der .NET Core SDK-Version mithilfe von Azure Pipelines
 
@@ -232,7 +234,7 @@ Nach Abschluss dieses Vorgangs wird die neueste .NET Core-Vorschauversion instal
 
 **Verwenden der Vorschau-Websiteerweiterung mit einer ARM-Vorlage**
 
-Wenn Sie eine ARM-Vorlage zum Erstellen und Bereitstellen von Anwendungen verwenden, können Sie den Ressourcentyp `siteextensions` verwenden, um die Websiteerweiterung zu einer Web-App hinzuzufügen. Beispiel:
+Wenn Sie eine ARM-Vorlage zum Erstellen und Bereitstellen von Anwendungen verwenden, können Sie den Ressourcentyp `siteextensions` verwenden, um die Websiteerweiterung zu einer Web-App hinzuzufügen. Zum Beispiel:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 
@@ -288,7 +290,7 @@ Nutzen Sie für [eigenständige Bereitstellungen](/dotnet/core/deploying/#self-c
 1. Führen Sie im Dialogfeld **Veröffentlichen** folgende Schritte aus:
    * Überprüfen Sie, ob die Konfiguration **Release** ausgewählt ist.
    * Öffnen Sie die Dropdownliste **Bereitstellungsmodus**, und wählen Sie **Eigenständig** aus.
-   * Wählen Sie die Zielruntime in der Dropdownliste **Zielruntime** aus. Die Standardeinstellung ist `win-x86`.
+   * Wählen Sie die Zielruntime in der Dropdownliste **Zielruntime** aus. Der Standardwert ist `win-x86`.
    * Wenn Sie zusätzliche Dateien bei der Bereitstellung entfernen müssen, öffnen Sie **Dateiveröffentlichungsoptionen**, und aktivieren Sie das Kontrollkästchen, um zusätzliche Dateien am Ziel zu entfernen.
    * Klicken Sie auf **Speichern**.
 1. Sie können eine neue Website erstellen oder eine vorhandene aktualisieren, indem Sie die folgenden Anweisungen des Veröffentlichungs-Assistenten befolgen.
