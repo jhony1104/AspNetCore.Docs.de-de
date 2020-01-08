@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/04/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 49d598330948c5f4a137c534094e14ed5e01e27c
-ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
+ms.openlocfilehash: e1c50c4592b21d56ed813dac43204d63f1bfe46c
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74825490"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359347"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -513,7 +513,7 @@ ASP.NET Core definiert die folgenden Protokolliergrade. Die Reihenfolge reicht v
 
   Für Fehler, die sofortige Aufmerksamkeit erfordern. Beispiel: Szenarios mit Datenverlust, Speichermangel.
 
-Verwenden Sie den Protokolliergrad, um die Menge an Protokollausgabedaten zu steuern, die in ein bestimmtes Speichermedium geschrieben oder an ein Anzeigefenster ausgegeben werden. Beispiel:
+Verwenden Sie den Protokolliergrad, um die Menge an Protokollausgabedaten zu steuern, die in ein bestimmtes Speichermedium geschrieben oder an ein Anzeigefenster ausgegeben werden. Zum Beispiel:
 
 * In einer Produktionsumgebung
   * Das Protokollieren von `Trace` über die `Information`-Ebenen verursacht viele detaillierte Protokollmeldungen. Protokollieren Sie `Trace` über Nachrichten auf `Information`-Ebene in einem kostengünstigen Speicher mit hohem Volumen, um die Kosten zu überwachen und die Grenzwerte des Datenspeichers nicht zu überschreiten.
@@ -804,7 +804,7 @@ Wenn Sie den Mindestprotokolliergrad nicht explizit festlegen, lautet der Standa
 
 ### <a name="filter-functions"></a>Filterfunktionen
 
-Eine Filterfunktion wird für alle Anbieter und Kategorien aufgerufen, denen keine Regeln durch Konfiguration oder Code zugewiesen sind. Code in der Funktion verfügt über Zugriff auf den Anbietertyp, die Kategorie und den Protokolliergrad. Beispiel:
+Eine Filterfunktion wird für alle Anbieter und Kategorien aufgerufen, denen keine Regeln durch Konfiguration oder Code zugewiesen sind. Code in der Funktion verfügt über Zugriff auf den Anbietertyp, die Kategorie und den Protokolliergrad. Zum Beispiel:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -989,14 +989,14 @@ Verwenden Sie das dotnet-trace-Tool, um die Ablaufverfolgung aus einer App zu er
 
    Auf Plattformen, die nicht unter Windows ausgeführt werden, fügen Sie die `-f speedscope`-Option hinzu, um das Format der Ablaufverfolgungsdatei der Ausgabe in `speedscope` zu ändern.
 
-   | Stichwort | BESCHREIBUNG |
+   | Stichwort | Beschreibung |
    | :-----: | ----------- |
    | 1       | Protokolliert Metaereignisse über die `LoggingEventSource`. Es werden keine Ereignisse von `ILogger`) protokolliert. |
    | 2       | Aktiviert das `Message`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Die Informationen werden in einer programmgesteuerten (nicht formatierten) Weise ausgegeben. |
    | 4       | Aktiviert das `FormatMessage`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Gibt die formatierte Zeichenfolgeversion der Informationen an. |
    | 8       | Aktiviert das `MessageJson`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Stellt eine JSON-Darstellung der Argumente bereit. |
 
-   | Ereignisgrad | BESCHREIBUNG     |
+   | Ereignisgrad | Beschreibung     |
    | :---------: | --------------- |
    | 0           | `LogAlways`     |
    | 1           | `Critical`      |
@@ -1030,8 +1030,8 @@ Weitere Informationen finden Sie unter:
 * [Ablaufverfolgung für das Hilfsprogramm zur Leistungsanalyse (dotnet-trace)](https://github.com/dotnet/diagnostics/blob/master/documentation/dotnet-trace-instructions.md) (GitHub-Repository-Dokumentation zu dotnet/diagnostics)
 * [LoggingEventSource-Klasse](xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource) (.NET API-Browser)
 * <xref:System.Diagnostics.Tracing.EventLevel>
-* [LoggingEventSource-Verweisquelle (3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs) &ndash; Ändern Sie für das Abrufen der Verweisquelle für eine andere Version den Branch in `release/{Version}`, wobei `{Version}` die Version der gewünschten ASP.NET Core-Version darstellt.
-* [Perfview](#perfview) &ndash; Nützlich zum Anzeigen von Ablaufverfolgung für Ereignisquellen.
+* [LoggingEventSource-Verweisquelle (3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs)&ndash; Ändern Sie für das Abrufen der Verweisquelle für eine andere Version den Branch in `release/{Version}`, wobei `{Version}` die Version der gewünschten ASP.NET Core-Version darstellt.
+* [Perfview](#perfview) ist hilfreich zum Anzeigen der Ablaufverfolgung für Ereignisquellen.
 
 #### <a name="perfview"></a>PerfView
 
@@ -1053,9 +1053,19 @@ logging.AddEventLog();
 
 Mithilfe von [AddEventLog-Überladungen](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions) können Sie <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings> übergeben. Wenn `null` oder nicht angegeben, werden die folgenden Standardeinstellungen verwendet:
 
-* `LogName` &ndash; „Anwendung“
-* `SourceName` &ndash; „.NET Runtime“
-* `MachineName` &ndash; Lokaler Computer
+* `LogName` „Anwendung“
+* `SourceName` „.NET Runtime“
+* `MachineName` Lokaler Computer
+
+Ereignisse werden für die [Warnstufe und höher](#log-level) protokolliert. Legen Sie die Protokollierungsebene fest, um Ereignisse, die niedriger als `Warning` sind, zu protokollieren. Fügen Sie beispielsweise Folgendes zur *appsettings.json*-Datei hinzu:
+
+```json
+"EventLog": {
+  "LogLevel": {
+    "Default": "Information"
+  }
+}
+```
 
 ### <a name="tracesource-provider"></a>Der TraceSource-Anbieter
 

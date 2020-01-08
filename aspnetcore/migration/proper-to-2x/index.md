@@ -5,12 +5,12 @@ description: Anweisungen zum Migrieren vorhandener ASP.NET MVC- oder Web-API-App
 ms.author: scaddie
 ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 1564b644b774939c3c242a41812851917e96d2b2
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: 19be7191792c44fb5414eb0a7b24772c45391253
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "74803343"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359411"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migration von ASP.NET zu ASP.NET Core
 
@@ -18,7 +18,7 @@ Von [Isaac Levin](https://isaaclevin.com)
 
 Dieser Artikel dient als Leitfaden zum Migrieren von ASP.NET-Anwendungen zu ASP.NET Core.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 [.NET Core SDK 2.2 oder höher](https://www.microsoft.com/net/download)
 
@@ -158,6 +158,40 @@ Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<i
 ## <a name="multi-value-cookies"></a>Mehrwertige Cookies
 
 [Mehrwertige Cookies](xref:System.Web.HttpCookie.Values) werden in ASP.NET Core nicht unterstützt. Erstellen Sie ein Cookie pro Wert.
+
+## <a name="partial-app-migration"></a>Partielle App-Migration
+
+Ein Ansatz für die partielle App-Migration besteht darin, eine IIS-Unteranwendung zu erstellen und nur bestimmte Routen von ASP.NET 4.x zu ASP.NET Core zu verschieben, wobei die URL-Struktur der App beibehalten wird. Betrachten Sie beispielsweise die URL-Struktur der Anwendung aus der Datei *applicationHost.config*:
+
+```xml
+<sites>
+    <site name="Default Web Site" id="1" serverAutoStart="true">
+        <application path="/">
+            <virtualDirectory path="/" physicalPath="D:\sites\MainSite\" />
+        </application>
+        <application path="/api" applicationPool="DefaultAppPool">
+            <virtualDirectory path="/" physicalPath="D:\sites\netcoreapi" />
+        </application>
+        <bindings>
+            <binding protocol="http" bindingInformation="*:80:" />
+            <binding protocol="https" bindingInformation="*:443:" sslFlags="0" />
+        </bindings>
+    </site>
+    ...
+</sites>
+```
+
+Verzeichnisstruktur:
+
+```
+.
+├── MainSite
+│   ├── ...
+│   └── Web.config
+└── NetCoreApi
+    ├── ...
+    └── web.config
+```
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

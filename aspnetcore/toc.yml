@@ -326,8 +326,6 @@
               uid: host-and-deploy/blazor/server
             - name: Konfigurieren des Linkers
               uid: host-and-deploy/blazor/configure-linker
-        - name: Proben
-          href: 'https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor'
     - name: Clientseitige Entwicklung
       items:
         - name: Einzelseiten-Apps
@@ -612,7 +610,7 @@
       uid: test/integration-tests
     - name: Auslastungs- und Belastungstests
       uid: test/loadtests
-    - name: Problembehandlung
+    - name: Problembehandlung und Debuggen
       uid: test/troubleshoot
     - name: Protokollierung
       uid: fundamentals/logging/index
@@ -885,15 +883,15 @@
             - name: Übersicht
               uid: security/authentication/azure-active-directory/index
             - name: Integrieren von Azure AD in eine Web-App
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial'
             - name: Integrieren von Azure AD B2C in eine Web-App
               uid: security/authentication/azure-ad-b2c
             - name: Integrieren von Azure AD B2C in eine Web-API
               uid: security/authentication/azure-ad-b2c-webapi
             - name: Aufrufen einer Web-API über WPF
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore'
             - name: Aufrufen einer Web-API in einer Web-App mithilfe von Azure AD
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore'
         - name: Schützen von ASP.NET Core-Apps mit IdentityServer4
           href: 'https://identityserver4.readthedocs.io/'
         - name: Schützen von ASP.NET Core-Apps mit der Azure App Service-Authentifizierung (Easy Auth)
@@ -1101,6 +1099,9 @@
       uid: fundamentals/host/hosted-services
     - name: Hostingstartassemblys
       uid: fundamentals/configuration/platform-specific-configuration
+    - name: ASP.NET Core in Klassenbibliotheken
+      displayName: shared framework
+      uid: fundamentals/target-aspnetcore
     - name: Metapaket „Microsoft.AspNetCore.App“
       uid: fundamentals/metapackage-app
     - name: Metapaket „Microsoft.AspNetCore.All“
