@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Integrationstests sicherstellen
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/28/2019
+ms.date: 01/06/2019
 uid: test/integration-tests
-ms.openlocfilehash: 33f3e29bc649fa65efdff0c47e54a83662005577
-ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
+ms.openlocfilehash: ccee8957a72da0eb5d870b1bd184ee1ea146a0e6
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2019
-ms.locfileid: "73143365"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693790"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.net Core
 
@@ -41,7 +41,7 @@ Integrationstests bewerten die Komponenten einer APP auf einer umfassenderen Ebe
 
 Diese umfassenderen Tests werden verwendet, um die Infrastruktur und das gesamte Framework der APP zu testen, häufig auch die folgenden Komponenten:
 
-* Datenbank
+* -Datenbank
 * Dateisystem
 * Netzwerkgeräte
 * Anforderungs-/Antwort-Pipeline
@@ -148,7 +148,7 @@ Die Webhost Konfiguration kann unabhängig von den Test Klassen erstellt werden,
 
    Das datenbankseeding in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) wird durch die `InitializeDbForTests`-Methode ausgeführt. Die-Methode wird im Abschnitt [Integration Tests Sample: Test App Organization](#test-app-organization) beschrieben.
 
-   Der Daten Bank Kontext des Daten Bank Kontexts wird in der `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices` Rückruf der Test-App wird *nach* der Ausführung des `Startup.ConfigureServices` Codes der app ausgeführt. Um für die Tests eine andere Datenbank als die Datenbank der APP zu verwenden, muss der Daten Bank Kontext der app in `builder.ConfigureServices`ersetzt werden.
+   Der Daten Bank Kontext des Daten Bank Kontexts wird in der `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices` Rückruf der Test-App wird *nach* der Ausführung des `Startup.ConfigureServices` Codes der app ausgeführt. Die Ausführungsreihenfolge ist eine Breaking Change für den [generischen Host](xref:fundamentals/host/generic-host) mit der Veröffentlichung von ASP.net Core 3,0. Um für die Tests eine andere Datenbank als die Datenbank der APP zu verwenden, muss der Daten Bank Kontext der app in `builder.ConfigureServices`ersetzt werden.
 
    Die Beispiel-App findet den Dienst Deskriptor für den Daten Bank Kontext und verwendet den Deskriptor, um die Dienst Registrierung zu entfernen. Als Nächstes fügt die Factory eine neue `ApplicationDbContext` hinzu, die eine in-Memory Database für die Tests verwendet.
 
@@ -206,7 +206,7 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang ausführt, der 
 
 In der folgenden Tabelle wird der Standardwert für [webapplicationfactoriyclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) angezeigt, der beim Erstellen von `HttpClient` Instanzen verfügbar ist.
 
-| Option | Beschreibung | Default |
+| -Option | Beschreibung | Default |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient` Instanzen automatisch Umleitungs Antworten befolgen sollen. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse `HttpClient`-Instanzen ab oder legt Sie fest. | `http://localhost` |
@@ -344,10 +344,10 @@ Nachdem die Tests der `IClassFixture`-Implementierung ausgeführt wurden, werden
 
 Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei apps:
 
-| App | Projektverzeichnis | Beschreibung |
+| App- | Projektverzeichnis | Beschreibung |
 | --- | ----------------- | ----------- |
 | Message-app (Das SUT) | *src/RazorPagesProject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
-| Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
+| Testen der App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](https://visualstudio.microsoft.com). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *Tests/razorpagesproject. Tests* aus:
 
@@ -418,7 +418,7 @@ Integrationstests bewerten die Komponenten einer APP auf einer umfassenderen Ebe
 
 Diese umfassenderen Tests werden verwendet, um die Infrastruktur und das gesamte Framework der APP zu testen, häufig auch die folgenden Komponenten:
 
-* Datenbank
+* -Datenbank
 * Dateisystem
 * Netzwerkgeräte
 * Anforderungs-/Antwort-Pipeline
@@ -560,7 +560,7 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang ausführt, der 
 
 In der folgenden Tabelle wird der Standardwert für [webapplicationfactoriyclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) angezeigt, der beim Erstellen von `HttpClient` Instanzen verfügbar ist.
 
-| Option | Beschreibung | Default |
+| -Option | Beschreibung | Default |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient` Instanzen automatisch Umleitungs Antworten befolgen sollen. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse `HttpClient`-Instanzen ab oder legt Sie fest. | `http://localhost` |
@@ -708,10 +708,10 @@ Nachdem die Tests der `IClassFixture`-Implementierung ausgeführt wurden, werden
 
 Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei apps:
 
-| App | Projektverzeichnis | Beschreibung |
+| App- | Projektverzeichnis | Beschreibung |
 | --- | ----------------- | ----------- |
 | Message-app (Das SUT) | *src/RazorPagesProject* | Ermöglicht Benutzern das Hinzufügen, löschen, löschen und Analysieren von Nachrichten. |
-| Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
+| Testen der App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das SUT zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE ausgeführt werden, z. b. [Visual Studio](https://visualstudio.microsoft.com). Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *Tests/razorpagesproject. Tests* aus:
 
@@ -757,7 +757,7 @@ Die Beispiel-App startet die Datenbank mit drei Nachrichten in *Utilities.cs* , 
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Komponententests](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:test/razor-pages-tests>

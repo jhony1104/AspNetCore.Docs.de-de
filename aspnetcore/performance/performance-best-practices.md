@@ -8,16 +8,16 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: bd30776d527b4ac9f44005e9f5d03fec7cfda2e6
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: c74adf7479d176c41dc26c7e77acfc3dc9cdcb88
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880920"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693959"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Leistung
 
-Von [Mike rousos](https://github.com/mjrousos)
+Von [Mike Rousos](https://github.com/mjrousos)
 
 Dieser Artikel enthält Richtlinien für bewährte Methoden für die Leistung mit ASP.net Core.
 
@@ -44,7 +44,7 @@ Ein häufiges Leistungsproblem bei ASP.net Core-Apps ist das Blockieren von aufr
 **Empfohlene Vorgehensweise:**
 
 * Asynchrone [Hot-Codepfade](#understand-hot-code-paths) .
-* Wenn eine asynchrone API verfügbar ist, wird der Datenzugriff und die Vorgänge mit langer Ausführungsdauer asynchron aufgerufen. Verwenden Sie erneut " [Task. Run](/dotnet/api/system.threading.tasks.task.run) ", um eine synchronus-API asynchron zu machen.
+* Aufrufen von Datenzugriff, e/a und langfristigen Operations-APIs, wenn eine asynchrone API verfügbar ist. Verwenden Sie " [Task. Run](/dotnet/api/system.threading.tasks.task.run) " **nicht** , um eine synchrone synchrone API zu erstellen.
 * Aktionen für Controller/Razor-Seite asynchron durchführen. Die gesamte-aufrufsstapel ist asynchron, um von [Async/](/dotnet/csharp/programming-guide/concepts/async/) Erwartungs Mustern zu profitieren.
 
 Ein Profiler, z. b. [perfview](https://github.com/Microsoft/perfview), kann verwendet werden, um häufig dem [Thread Pool](/windows/desktop/procthread/thread-pools)hinzugefügte Threads zu suchen. Das Ereignis `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` gibt einen Thread an, der dem Thread Pool hinzugefügt wurde. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -67,7 +67,7 @@ Arbeitsspeicher Probleme, wie z. b. die vorstehenden, können diagnostiziert wer
 
 Weitere Informationen finden Sie unter [Garbage Collection und Leistung](/dotnet/standard/garbage-collection/performance).
 
-## <a name="optimize-data-access"></a>Optimieren des Datenzugriffs
+## <a name="optimize-data-access-and-io"></a>Optimieren des Datenzugriffs und der e/a-Vorgänge
 
 Interaktionen mit einem Datenspeicher und anderen Remote Diensten sind häufig die langsamsten Teile einer ASP.net Core-app. Das effiziente lesen und Schreiben von Daten ist wichtig für eine gute Leistung.
 
@@ -98,7 +98,7 @@ Obwohl [HttpClient](/dotnet/api/system.net.http.httpclient) die `IDisposable`-Sc
 Empfehlungen:
 
 * Erstellen und löschen Sie `HttpClient` Instanzen **nicht** direkt.
-* Verwenden Sie [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) zum Abrufen von `HttpClient` Instanzen. Weitere Informationen finden [Sie unter Verwenden von httpclientfactory zum Implementieren robuster HTTP-Anforderungen](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
+* Verwenden Sie [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) zum Abrufen von `HttpClient` Instanzen. Weitere Informationen finden Sie unter [Verwenden von HttpClientFactory zum Implementieren robuster HTTP-Anforderungen](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
 
 ## <a name="keep-common-code-paths-fast"></a>Häufige Codepfade schnell halten
 
