@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
 uid: mvc/compatibility-version
-ms.openlocfilehash: 35e3b6acba2bc9a0b863bd6d1e96365328b5f169
-ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
+ms.openlocfilehash: b29e2ee49aaf0f557f1acd0cf03e9e82d5ea0105
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71256160"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75357730"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>Kompatibilitätsversion für ASP.NET Core MVC
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-::: moniker range="= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-3.0"
 
 Die <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>-Methode ist für ASP.NET Core 3.0-Apps keine Option. Das bedeutet, dass der Aufruf von `SetCompatibilityVersion` mit einem beliebigen Wert von <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> keine Auswirkungen auf die Anwendung hat.
 
@@ -45,7 +45,7 @@ Apps, die `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` aufrufen, 
 * Gilt nicht für alle Änderungen in 2.1 und höher. Das Ziel sind potentiell Fehler verursachende Änderungen im Verhalten der ASP.NET Core-Runtime im MVC-Subsystem.
 * Der Schutz gilt nicht für ASP.NET Core 3.0.
 
-Standardmäßig gilt für ASP.NET Core 2.1- und 2.2-Apps, die **nicht** `SetCompatibilityVersion` aufrufen, die Kompatibilität mit Version 2.0. Das bedeutet, `SetCompatibilityVersion` nicht aufzurufen entspricht dem Aufrufen von `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
+Standardmäßig gilt für ASP.NET Core 2.1- und 2.2-Apps, die **nicht**`SetCompatibilityVersion` aufrufen, die Kompatibilität mit Version 2.0. Das bedeutet, `SetCompatibilityVersion` nicht aufzurufen entspricht dem Aufrufen von `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
 
 Der folgende Code legt den Kompatibilitätsmodus auf ASP.NET Core 2.2 fest, außer für die folgenden Verhaltensweisen:
 

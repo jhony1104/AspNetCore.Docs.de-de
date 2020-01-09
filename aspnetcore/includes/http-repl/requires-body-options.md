@@ -1,6 +1,6 @@
 * `-c|--content`
 
-  Stellt einen Inline-HTTP-Anforderungstext bereit. Beispielsweise `-c "{ 'id': 2, 'name': 'Cherry' }"`.
+  Stellt einen Inline-HTTP-Anforderungstext bereit. Beispielsweise `-c "{"id":2,"name":"Cherry"}"`.
 
 * `-f|--file`
 

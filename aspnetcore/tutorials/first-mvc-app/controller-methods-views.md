@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über das Arbeiten mit Controllermethoden, Ansich
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 6d960da5acecbb95893bd339b4391560bedffb3d
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 2c442060872ab1d2d79a2e355ae257fdf1005914
+ms.sourcegitcommit: 991442dfb16ef08a0aae05bc79f9e9a2d819c587
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815419"
+ms.lasthandoff: 12/26/2019
+ms.locfileid: "75492652"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>Controllermethoden und Ansichten in ASP.NET Core
 
@@ -48,7 +48,7 @@ Die Links **Bearbeiten**, **Details** und **Löschen** werden mithilfe des MVC C
 
 Erinnern Sie sich an das Format für das [Routing](xref:mvc/controllers/routing) in der Datei *Startup.cs*:
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
 ASP.NET Core übersetzt `https://localhost:5001/Movies/Edit/4` in eine Anforderung an die `Edit`-Aktionsmethode des `Movies`-Controllers mit dem `Id`-Parameter 4. (Controllermethoden werden auch als Aktionsmethoden bezeichnet.)
 
