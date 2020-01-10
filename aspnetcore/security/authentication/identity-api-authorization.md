@@ -7,22 +7,22 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: f58d92634ce1ef6110533d56c40b7520dda90514
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.openlocfilehash: 31a5e47d772e7416646c4d83c3209d7d2b254199
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73897041"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829165"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
 
 ASP.net Core 3,0 oder höher bietet die Authentifizierung in Single-Page-Apps (Spas) mithilfe der Unterstützung für die API-Autorisierung. ASP.net Core Identität für das Authentifizieren und Speichern von Benutzern wird mit [identityserver](https://identityserver.io/) für die Implementierung von Open ID Connect kombiniert.
 
-Der **Angular** -und der-Projektvorlagen, die dem Authentifizierungs Parameter in der **Webanwendung (Model-View-Controller)** (MVC **) und der** **Webanwendung** (Razor Pages) ähneln, wurde ein Authentifizierungs Parameter hinzugefügt. Projektvorlagen. Die zulässigen Parameterwerte sind **None** und **Individual**. Die **Projektvorlage** "" "" "" "" "" "" "" "" "" "" ""
+Der **Angular** -und der-Projektvorlagen, die dem-Authentifizierungs Parameter in **den Projektvorlagen** **Webanwendung (Model-View-Controller)** (MVC) und **Webanwendung** (Razor Pages) ähneln, wurde ein Authentifizierungs Parameter hinzugefügt. Die zulässigen Parameterwerte sind **None** und **Individual**. Die **Projektvorlage** "" "" "" "" "" "" "" "" "" "" ""
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Erstellen einer APP mit Unterstützung für die API-Autorisierung
 
-Benutzerauthentifizierung und-Autorisierung können mit Angular-und reagingspas verwendet werden. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
+Benutzerauthentifizierung und-Autorisierung können mit Angular-und reagingspas verwendet werden. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl:
 
 **Angular**:
 
@@ -42,7 +42,7 @@ Der vorherige Befehl erstellt eine ASP.net Core-App mit einem *ClientApp* -Verze
 
 In den folgenden Abschnitten werden Ergänzungen zum-Projekt beschrieben, wenn die Authentifizierungs Unterstützung enthalten ist:
 
-### <a name="startup-class"></a>Startup-Klasse
+### <a name="startup-class"></a>Startklasse
 
 Die `Startup`-Klasse verfügt über folgende Ergänzungen:
 
@@ -58,7 +58,7 @@ Die `Startup`-Klasse verfügt über folgende Ergänzungen:
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * Identityserver mit einer zusätzlichen `AddApiAuthorization`-Hilfsmethode, die einige Standard ASP.net Core Konventionen auf identityserver aufgibt:
+  * Identityserver mit einer zusätzlichen `AddApiAuthorization`-Hilfsmethode, mit der einige standardmäßige ASP.net Core Konventionen auf identityserver eingerichtet werden:
 
     ```csharp
     services.AddIdentityServer()
@@ -89,13 +89,13 @@ Die `Startup`-Klasse verfügt über folgende Ergänzungen:
 
 Diese Hilfsmethode konfiguriert identityserver für die Verwendung der unterstützten Konfiguration. Identityserver ist ein leistungsfähiges und erweiterbares Framework für die Behandlung von App-Sicherheitsbedenken. Gleichzeitig stellt dies unnötige Komplexität für die gängigsten Szenarien bereit. Folglich werden Ihnen eine Reihe von Konventionen und Konfigurationsoptionen zur Verfügung gestellt, die als guter Ausgangspunkt angesehen werden. Nachdem sich Ihre Authentifizierung geändert hat, ist die volle Leistungsfähigkeit von identityserver weiterhin verfügbar, um die Authentifizierung an Ihre Bedürfnisse anzupassen.
 
-### <a name="addidentityserverjwt"></a>Addidentityserverjwt
+### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
 Diese Hilfsmethode konfiguriert ein Richtlinien Schema für die APP als Standard Authentifizierungs Handler. Die Richtlinie ist so konfiguriert, dass die Identität alle Anforderungen verarbeitet, die an einen untergeordneten Pfad im Identitäts-URL-Bereich "/Identity" weitergeleitet werden. Die `JwtBearerHandler` behandelt alle anderen Anforderungen. Darüber hinaus registriert diese Methode eine `<<ApplicationName>>API` API-Ressource bei identityserver mit einem Standardbereich `<<ApplicationName>>API` und konfiguriert die JWT-bearertoken-Middleware, um von identityserver für die APP ausgegebene Token zu überprüfen.
 
 ### <a name="weatherforecastcontroller"></a>Weatherforecastcontroller
 
-Beachten Sie in der Datei " *controllers\weatherforecastcontroller.cs* " das `[Authorize]` Attribut, das auf die Klasse angewendet wird, die angibt, dass der Benutzer auf der Basis der Standard Richtlinie für den Zugriff auf die Ressource autorisiert werden muss. Die Standard Autorisierungs Richtlinie wird so konfiguriert, dass das Standard Authentifizierungsschema verwendet wird, das durch `AddIdentityServerJwt` auf das oben erwähnte Richtlinien Schema festgelegt wird. Dadurch wird der von dieser Hilfsmethode konfigurierte `JwtBearerHandler` als Standard Handler für Anforderungen an die app.
+Beachten Sie in der Datei " *controllers\weatherforecastcontroller.cs* " das `[Authorize]` Attribut, das auf die Klasse angewendet wird, die angibt, dass der Benutzer auf der Basis der Standard Richtlinie für den Zugriff auf die Ressource autorisiert werden muss. Die Standard Autorisierungs Richtlinie wird so konfiguriert, dass das Standard Authentifizierungsschema verwendet wird, das durch `AddIdentityServerJwt` auf das oben erwähnte Richtlinien Schema festgelegt wird. Dadurch wird der von dieser Hilfsmethode konfigurierte `JwtBearerHandler` der Standard Handler für Anforderungen an die app.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
@@ -103,7 +103,7 @@ Beachten Sie in der Datei *data\applicationdbcontext.cs* , dass die gleiche `DbC
 
 Um die vollständige Kontrolle über das Datenbankschema zu erhalten, erben Sie von einer der verfügbaren Identitäts `DbContext` Klassen, und konfigurieren Sie den Kontext so, dass er das Identitäts Schema einschließt, indem Sie `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` für die `OnModelCreating` Methode aufrufen
 
-### <a name="oidcconfigurationcontroller"></a>Oidcconfigurationcontroller
+### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
 
 Beachten Sie in der Datei " *controllers\oidcconfigurationcontroller.cs* " den Endpunkt, der bereitgestellt wird, um die oidc-Parameter bereitzustellen, die vom Client verwendet werden müssen.
 
@@ -121,7 +121,7 @@ In der Datei *appSettings. JSON* des Projekt Stamms befindet sich ein neuer `Ide
 }
 ```
 
-### <a name="appsettingsdevelopmentjson"></a>appSettings. "Development. JSON"
+### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.json
 
 In *appSettings. Development. JSON* -Datei des Projekt Stamms. es gibt einen `IdentityServer` Abschnitt, in dem der Schlüssel zum Signieren von Token beschrieben wird. Beim Bereitstellen in der Produktion muss neben der APP ein Schlüssel bereitgestellt und bereitgestellt werden, wie im Abschnitt bereitstellen [in der Produktion](#deploy-to-production) erläutert.
 
@@ -260,7 +260,7 @@ async populateWeatherData() {
 }
 ```
 
-## <a name="deploy-to-production"></a>In Produktionsumgebungen bereitstellen
+## <a name="deploy-to-production"></a>Bereitstellen für die Produktion
 
 Um die app in der Produktionsumgebung bereitzustellen, müssen die folgenden Ressourcen bereitgestellt werden:
 
@@ -369,7 +369,7 @@ AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
 });
 ```
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:spa/angular>
 * <xref:spa/react>

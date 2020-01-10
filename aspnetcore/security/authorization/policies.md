@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: security/authorization/policies
-ms.openlocfilehash: e3929fb0f45d4ba28f46a6b42b653940de0badb0
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: eeb5ddd63ef8177325b35e5a666aa5e9ab047057
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761037"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828957"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinien basierte Autorisierung in ASP.net Core
 
@@ -31,13 +31,13 @@ Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich ist, <xref:M
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
-Im vorangehenden Code werden die beiden Methoden des [IAuthorizationService](https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)hervorgehoben.
+Im vorangehenden Code werden die beiden Methoden des [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)hervorgehoben.
 
 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement> ist ein markerdienst ohne Methoden und der Mechanismus für die Nachverfolgung, ob die Autorisierung erfolgreich war.
 
 Jede <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> ist für die Überprüfung zuständig, ob die Anforderungen erfüllt sind:
 <!--The following code is a copy/paste from 
-https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
+https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
 
 ```csharp
 /// <summary>
@@ -123,7 +123,7 @@ Richtlinien werden auf Razor Pages mithilfe des `[Authorize]`-Attributs mit dem 
 
 Richtlinien können auch auf Razor Pages mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)angewendet werden.
 
-## <a name="requirements"></a>Anforderungen
+## <a name="requirements"></a>-Anforderungen
 
 Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;dem minimal Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 
@@ -249,13 +249,13 @@ Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich ist, <xref:M
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
-Im vorangehenden Code werden die beiden Methoden des [IAuthorizationService](https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)hervorgehoben.
+Im vorangehenden Code werden die beiden Methoden des [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)hervorgehoben.
 
 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement> ist ein markerdienst ohne Methoden und der Mechanismus für die Nachverfolgung, ob die Autorisierung erfolgreich war.
 
 Jede <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> ist für die Überprüfung zuständig, ob die Anforderungen erfüllt sind:
 <!--The following code is a copy/paste from 
-https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
+https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
 
 ```csharp
 /// <summary>
@@ -340,7 +340,7 @@ Richtlinien werden auf Razor Pages mithilfe des `[Authorize]`-Attributs mit dem 
 
 Richtlinien können auch auf Razor Pages mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)angewendet werden.
 
-## <a name="requirements"></a>Anforderungen
+## <a name="requirements"></a>-Anforderungen
 
 Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;dem minimal Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 

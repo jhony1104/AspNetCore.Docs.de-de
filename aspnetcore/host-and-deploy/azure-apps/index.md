@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 51d82d1deadb3d2adbdccd39c8d949e3f9f812fd
-ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
+ms.openlocfilehash: 286d73d732b146fef15bbfc309caeb214cdbbe0d
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75693842"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829178"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -192,7 +192,7 @@ Der [Docker-Hub](https://hub.docker.com/r/microsoft/aspnetcore/) enthält die ak
 
 ### <a name="install-the-preview-site-extension"></a>Installieren der Websiteerweiterung (Vorschau)
 
-Sollte ein Problem mit dem Verwenden der Vorschau der Websiteerweiterung auftreten, öffnen Sie ein [aspnet/AspNetCore-Issue](https://github.com/aspnet/AspNetCore/issues).
+Sollte ein Problem mit dem Verwenden der Vorschau der Websiteerweiterung auftreten, öffnen Sie ein [dotnet/AspNetCore-Issue](https://github.com/dotnet/AspNetCore/issues).
 
 1. Navigieren Sie im Azure-Portal zu „App Service“.
 1. Wählen Sie die Web-App aus.

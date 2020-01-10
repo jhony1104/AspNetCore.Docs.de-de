@@ -9,12 +9,12 @@ ms.date: 12/28/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 87f21d84c17e5bbd1247bb955acee81384b890e7
-ms.sourcegitcommit: 47d453f34b6fd0179119c572cb8be64c5365cbb6
+ms.openlocfilehash: 9e796a23a0b24a9fee314051644703ef12bd7607
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75597901"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828203"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -592,7 +592,7 @@ Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 | Fortschritt         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | Toucheingabe            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` stellt einen einzelnen Kontaktpunkt auf einem Berührungs sensiblen Gerät dar. |
 
-Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (ASPNET/aspnetcore Release/3.0 Branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web).
+Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (dotnet/aspnetcore Release/3.0 Branch)](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web).
 
 ### <a name="lambda-expressions"></a>Lambdaausdrücke
 

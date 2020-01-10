@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: performance/memory
-ms.openlocfilehash: dfc789d080beec09a4f0eb34c3809b9f2df0d4b5
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 0ae367e954e21e2f696a3b292fa64f1d2dba98ec
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75357277"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829022"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Speicherverwaltung und Garbage Collection (GC) in ASP.net Core
 
@@ -209,7 +209,7 @@ In der folgenden Abbildung wird das Speicher Profil angezeigt, während der `fil
 
 ![Vorheriges Diagramm](memory/_static/fileprovider.png)
 
-Das vorangehende Diagramm zeigt ein offensichtliches Problem mit der Implementierung dieser Klasse, da die Speicherauslastung weiterhin zunimmt. Dies ist ein bekanntes Problem, das in [diesem Problem](https://github.com/aspnet/Home/issues/3110)nachverfolgt wird.
+Das vorangehende Diagramm zeigt ein offensichtliches Problem mit der Implementierung dieser Klasse, da die Speicherauslastung weiterhin zunimmt. Dies ist ein bekanntes Problem, das in [diesem Problem](https://github.com/dotnet/aspnetcore/issues/3110)nachverfolgt wird.
 
 Der gleiche Fehler kann im Benutzercode auftreten, indem eine der folgenden Aktionen durchgeführt wird:
 
@@ -271,8 +271,9 @@ Temporäre große Objekte sind besonders problematisch, da Sie Gen2-GCS verursac
 Um die maximale Leistung zu erzielen, sollte die Verwendung von großen Objekten minimiert werden. Teilen Sie nach Möglichkeit große Objekte auf. Beispielsweise wird durch die Middleware zum zwischen [Speichern von Antworten](xref:performance/caching/response) in ASP.net Core die Cache Einträge in Blöcke aufgeteilt, die kleiner als 85.000 Bytes sind.
 
 Die folgenden Links zeigen die ASP.net Core Methode zum Beibehalten von Objekten unter dem Loh-Grenzwert:
-- [Responsecaching/Streams/streamutilities. cs](https://github.com/aspnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
-- [Responsecaching/memoryresponsecache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
+
+* [Responsecaching/Streams/streamutilities. cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
+* [Responsecaching/memoryresponsecache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
 Weitere Informationen finden Sie unter: .
 

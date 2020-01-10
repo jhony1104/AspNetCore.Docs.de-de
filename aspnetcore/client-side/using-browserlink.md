@@ -4,28 +4,34 @@ author: ncarandini
 description: Erläutert, wie Browser Link eine Visual Studio-Funktion ist, die die Entwicklungsumgebung mit einem oder mehreren Webbrowsern verknüpft.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 11/12/2019
+ms.date: 01/09/2020
 no-loc:
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: b21b698d49e72b559cd9cd3753c48a38c99db24d
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 19cc3c2ed91bd9e05df3c036123c78ecbf81fcc0
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962780"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828269"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Browser Link in ASP.net Core
 
 Von [Nicolò Carandini](https://github.com/ncarandini), [Mike Wasson](https://github.com/MikeWasson)und [Tom Dykstra](https://github.com/tdykstra)
 
-Browser Link ist eine Funktion in Visual Studio, die einen Kommunikationskanal zwischen der Entwicklungsumgebung und einem oder mehreren Webbrowsern erstellt. Sie können die Browser Verknüpfung verwenden, um Ihre Webanwendung in mehreren Browsern gleichzeitig zu aktualisieren, was für Browser übergreifende Tests nützlich ist.
+Browser Link ist ein Visual Studio-Feature. Er erstellt einen Kommunikationskanal zwischen der Entwicklungsumgebung und einem oder mehreren Webbrowsern. Sie können die Browser Verknüpfung verwenden, um Ihre Web-App in mehreren Browsern gleichzeitig zu aktualisieren, was für Browser übergreifende Tests nützlich ist.
 
 ## <a name="browser-link-setup"></a>Browser Link einrichten
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range=">= aspnetcore-3.0"
 
-Wenn Sie ein ASP.net Core 2,0-Projekt in ASP.net Core 2,1 und den Übergang in das [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app), installieren Sie das Paket [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) für die browserlink-Funktionalität. In den ASP.net Core 2,1-Projektvorlagen wird standardmäßig das `Microsoft.AspNetCore.App` Metapaket verwendet.
+Fügen Sie dem Projekt das [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) -Paket hinzu. Aktivieren Sie für ASP.net Core Razor Pages-oder MVC-Projekte auch die Lauf Zeit Kompilierung von Razor-Dateien ( *. cshtml*), wie unter <xref:mvc/views/view-compilation>beschrieben. Razor-Syntax Änderungen werden nur angewendet, wenn die Laufzeit-Kompilierung aktiviert wurde.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+
+Wenn Sie ein ASP.net Core 2,0-Projekt in ASP.net Core 2,1 und den Übergang in das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)" umrechnen, installieren Sie das Paket " [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) " für Browser Link Funktionalität. In den ASP.net Core 2,1-Projektvorlagen wird standardmäßig das `Microsoft.AspNetCore.App` Metapaket verwendet.
 
 ::: moniker-end
 
@@ -37,33 +43,19 @@ In den Projektvorlagen für die ASP.net Core 2,0- **Webanwendung**, **leere**und
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Die Projektvorlage "ASP.net Core 1. x- **Webanwendung** " enthält einen Paket Verweis für das Paket " [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) ". Die **leeren** oder **Web-API** -Vorlagen Projekte erfordern, dass Sie `Microsoft.VisualStudio.Web.BrowserLink`einen Paket Verweis hinzufügen.
-
-Da es sich hierbei um ein Visual Studio-Feature handelt, ist die einfachste Möglichkeit zum Hinzufügen des Pakets zu einem **leeren** oder **Web-API** -Vorlagen Projekt das Öffnen der Paket- **Manager-Konsole** (**anzeigen** > **anderen Windows** > **Package Manager-Konsole**) und das Ausführen des folgenden Befehls:
-
-```console
-install-package Microsoft.VisualStudio.Web.BrowserLink
-```
-
-Alternativ können Sie den **nuget-Paket-Manager**verwenden. Klicken Sie in **Projektmappen-Explorer** mit der rechten Maustaste auf den Projektnamen, und wählen Sie **nuget-Pakete verwalten**:
-
-![Nuget-Paket-Manager öffnen](using-browserlink/_static/open-nuget-package-manager.png)
-
-Suchen und installieren Sie das Paket:
-
-![Hinzufügen eines Pakets mit dem nuget-Paket-Manager](using-browserlink/_static/add-package-with-nuget-package-manager.png)
+Die Projektvorlage "ASP.net Core 1. x- **Webanwendung** " enthält einen Paket Verweis für das Paket " [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) ". Andere Projekttypen erfordern, dass Sie `Microsoft.VisualStudio.Web.BrowserLink`einen Paket Verweis hinzufügen.
 
 ::: moniker-end
 
-### <a name="configuration"></a>Konfiguration
+### <a name="configuration"></a>-Konfiguration
 
-Für die `Startup.Configure`-Methode gilt Folgendes:
+Rufen Sie `UseBrowserLink` in der `Startup.Configure`-Methode auf:
 
 ```csharp
 app.UseBrowserLink();
 ```
 
-Normalerweise befindet sich der Code in einem `if`-Block, der nur den Browser Link in der Entwicklungsumgebung aktiviert, wie hier gezeigt:
+Der `UseBrowserLink`-Befehl wird in der Regel in einem `if`-Block platziert, der nur den Browser Link in der Entwicklungsumgebung aktiviert. Beispiel:
 
 ```csharp
 if (env.IsDevelopment())
@@ -73,7 +65,7 @@ if (env.IsDevelopment())
 }
 ```
 
-Weitere Informationen finden Sie unter [Verwenden mehrerer Umgebungen](xref:fundamentals/environments).
+Weitere Informationen finden Sie unter <xref:fundamentals/environments>.
 
 ## <a name="how-to-use-browser-link"></a>Verwenden von Browser Link
 
@@ -83,13 +75,10 @@ Wenn Sie ein ASP.net Core Projekt geöffnet haben, zeigt Visual Studio das Brows
 
 Im Browser Link Symbolleisten-Steuerelement können Sie folgende Aktionen ausführen:
 
-* Aktualisieren Sie die Webanwendung in mehreren Browsern gleichzeitig.
+* Aktualisieren Sie die Web-App in mehreren Browsern gleichzeitig.
 * Öffnen Sie das **Browser Link-Dashboard**.
-* Aktiviert oder deaktiviert den **Browser Link**. Hinweis: der Browser Link ist in Visual Studio 2017 (15,3) standardmäßig deaktiviert.
+* Aktiviert oder deaktiviert den **Browser Link**. Hinweis: der Browser Link ist in Visual Studio standardmäßig deaktiviert.
 * Aktivieren oder deaktivieren Sie die [Automatische CSS-Synchronisierung](#enable-or-disable-css-auto-sync).
-
-> [!NOTE]
-> Einige Visual Studio-Plug-ins, insbesondere *Web Extension Pack 2015* und *Web Extension Pack 2017*, bieten erweiterte Funktionen für den Browser Link. einige der zusätzlichen Features funktionieren jedoch nicht mit ASP.net Core Projekten.
 
 ## <a name="refresh-the-web-app-in-several-browsers-at-once"></a>Die Web-App in mehreren Browsern gleichzeitig aktualisieren
 
@@ -97,7 +86,7 @@ Verwenden Sie zum Auswählen eines einzelnen Webbrowsers, der beim Starten des P
 
 ![F5-Dropdown Menü](using-browserlink/_static/debug-target-dropdown-menu.png)
 
-Wenn Sie mehrere Browser gleichzeitig öffnen möchten, wählen Sie in der Dropdown Liste die Option **Durchsuchen mit...** aus. Halten Sie die STRG-Taste gedrückt, um die gewünschten Browser auszuwählen, und klicken Sie dann auf **Durchsuchen**:
+Wenn Sie mehrere Browser gleichzeitig öffnen möchten, wählen Sie in der Dropdown Liste die Option **Durchsuchen mit...** aus. Halten Sie die <kbd>STRG</kbd> -Taste gedrückt, um die gewünschten Browser auszuwählen, und klicken Sie dann auf **Durchsuchen**:
 
 ![Viele Browser gleichzeitig öffnen](using-browserlink/_static/open-many-browsers-at-once.png)
 
@@ -113,23 +102,23 @@ Zeigen Sie auf das Symbolleisten-Steuerelement Browser Link, um die Browser anzu
 
 ![Browser-Sync-zu-Änderungen](using-browserlink/_static/browsers-sync-to-changes.png)
 
-Browser Link funktioniert auch mit Browsern, die Sie von außerhalb von Visual Studio starten und zur Anwendungs-URL navigieren.
+Browser Link funktioniert auch mit Browsern, die Sie von außerhalb von Visual Studio starten, und navigieren Sie zur App-URL.
 
 ### <a name="the-browser-link-dashboard"></a>Das Browser Link-Dashboard
 
-Öffnen Sie im Dropdown Menü Browser Link das Browser Link-Dashboard, um die Verbindung mit geöffneten Browsern zu verwalten:
+Öffnen Sie im Dropdown Menü Browser Link das Fenster **Browser Link-Dashboard** , um die Verbindung mit geöffneten Browsern zu verwalten:
 
-![Open-browserslink-Dashboard](using-browserlink/_static/open-browserlink-dashboard.png)
+![open-browserslink-dashboard](using-browserlink/_static/open-browserlink-dashboard.png)
 
-Wenn kein Browser verbunden ist, können Sie eine nicht-Debugsitzung starten, indem Sie den Link *in Browser anzeigen* auswählen:
+Wenn kein Browser verbunden ist, können Sie eine nicht-Debugsitzung starten, indem Sie den Link **in Browser anzeigen** auswählen:
 
-![browserlink-Dashboard-keine-Verbindungen](using-browserlink/_static/browserlink-dashboard-no-connections.png)
+![browserlink-dashboard-no-connections](using-browserlink/_static/browserlink-dashboard-no-connections.png)
 
 Andernfalls werden die verbundenen Browser mit dem Pfad zu der Seite angezeigt, die von den einzelnen Browsern angezeigt wird:
 
-![browserlink-Dashboard-Two-Connections](using-browserlink/_static/browserlink-dashboard-two-connections.png)
+![browserlink-dashboard-two-connections](using-browserlink/_static/browserlink-dashboard-two-connections.png)
 
-Wenn Sie möchten, können Sie auf einen aufgelisteten Browser Namen klicken, um den einzelnen Browser zu aktualisieren.
+Sie können auch auf einen einzelnen Browser Namen klicken, um nur diesen Browser zu aktualisieren.
 
 ### <a name="enable-or-disable-browser-link"></a>Browser Link aktivieren oder deaktivieren
 
@@ -139,9 +128,9 @@ Wenn Sie den Browser Link nach der Deaktivierung erneut aktivieren, müssen Sie 
 
 Wenn die automatische CSS-Synchronisierung aktiviert ist, werden verbundene Browser automatisch aktualisiert, wenn Sie Änderungen an CSS-Dateien vornehmen.
 
-## <a name="how-it-works"></a>Funktionsweise
+## <a name="how-it-works"></a>So funktioniert's
 
-Browser Link verwendet SignalR, um einen Kommunikationskanal zwischen Visual Studio und dem Browser zu erstellen. Wenn der Browser Link aktiviert ist, fungiert Visual Studio als SignalR Server, mit dem mehrere Clients (Browser) eine Verbindung herstellen können. Der Browser Link registriert auch eine Middlewarekomponente in der ASP.net Core Anforderungs Pipeline. Diese Komponente fügt besondere `<script>` Verweise auf jede Seiten Anforderung vom Server ein. Sie können die Skript Verweise anzeigen, indem Sie im Browser **Quelle anzeigen** auswählen und einen Bildlauf zum Ende des `<body>`-Taginhalts durchführen:
+Browser Link verwendet [SignalR](xref:signalr/introduction) , um einen Kommunikationskanal zwischen Visual Studio und dem Browser zu erstellen. Wenn der Browser Link aktiviert ist, fungiert Visual Studio als SignalR Server, mit dem mehrere Clients (Browser) eine Verbindung herstellen können. Der Browser Link registriert auch eine Middlewarekomponente in der ASP.net Core Anforderungs Pipeline. Diese Komponente fügt besondere `<script>` Verweise auf jede Seiten Anforderung vom Server ein. Sie können die Skript Verweise anzeigen, indem Sie im Browser **Quelle anzeigen** auswählen und einen Bildlauf zum Ende des `<body>`-Taginhalts durchführen:
 
 ```html
     <!-- Visual Studio Browser Link -->

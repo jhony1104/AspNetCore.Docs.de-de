@@ -9,12 +9,12 @@ ms.date: 11/27/2019
 no-loc:
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: e84dd0d086cbfc80a80bc10baa33979da9b5d137
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 635431abf9263c2dff261aea47e6f8324061763f
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717233"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829282"
 ---
 # <a name="introduction-to-aspnet-core-opno-locsignalr"></a>Einführung in ASP.NET Core SignalR
 
@@ -24,10 +24,10 @@ Bei ASP.net Core SignalR handelt es sich um eine Open-Source-Bibliothek, die das
 
 Gute Kandidaten für SignalR:
 
-* Apps, die hoch Häufigkeits Updates vom Server erfordern. Beispiele hierfür sind Spiele, soziale Netzwerke, Abstimmungs-, Auktions-, Karten-und GPS-Apps.
-* Dashboards und Überwachungs-apps. Beispiele hierfür sind Unternehmens Dashboards, sofortige Verkaufs Updates oder Reisewarnungen.
-* Kollaborative apps. Whiteboardanwendungen und Team Besprechungs Software sind Beispiele für kollaborative apps.
-* Apps, für die Benachrichtigungen erforderlich sind. Bei sozialen Netzwerken, e-Mails, Chats, spielen, Reisewarnungen und vielen anderen apps werden Benachrichtigungen verwendet.
+* Apps, für die eine hohe Frequenz von Updates vom Server benötigt wird. Beispiele hierfür sind Apps aus den Bereichen Gaming, soziale Netzwerke, Voting, Auktionen, Karten und GPS.
+* Dashboards und Überwachungs-Apps. Beispiele hierfür sind Unternehmensdashboards, Sofortupdates von Verkaufszahlen oder Reisehinweise.
+* Apps für die Zusammenarbeit. Whiteboard-Apps und Software für Teambesprechungen sind Beispiele für Apps für die Zusammenarbeit.
+* Apps, für die Benachrichtigungen benötigt werden. Soziale Netzwerke, E-Mail, Chat, Games, Reisehinweise und viele andere Arten von Apps nutzen Benachrichtigungen.
 
 SignalR stellt eine API zum Erstellen von [Remote Prozedur aufrufen (RPC)](https://wikipedia.org/wiki/Remote_procedure_call)für Server-zu-Client bereit. Die RPCs wenden JavaScript-Funktionen auf Clients aus dem serverseitigen .net Core-Code an.
 
@@ -38,7 +38,7 @@ Im folgenden finden Sie einige Features der SignalR für ASP.net Core:
 * Sendet Nachrichten an bestimmte Clients oder Client Gruppen.
 * Skaliert, um zunehmenden Datenverkehr zu verarbeiten.
 
-Die Quelle wird in einem [SignalR Repository auf GitHub](https://github.com/aspnet/AspNetCore/tree/master/src/SignalR)gehostet.
+Die Quelle wird in einem [SignalR Repository auf GitHub](https://github.com/dotnet/AspNetCore/tree/master/src/SignalR)gehostet.
 
 ## <a name="transports"></a>Transporte
 

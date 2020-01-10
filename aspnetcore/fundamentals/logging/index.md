@@ -5,14 +5,14 @@ description: In diesem Artikel wird das Verwenden des Protokollierungsframeworks
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/04/2019
+ms.date: 01/08/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: e1c50c4592b21d56ed813dac43204d63f1bfe46c
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: d9ef6694b6c0b0a88b13d60915be6e04ebdffb28
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75359347"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829048"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -22,7 +22,7 @@ Von [Tom Dykstra](https://github.com/tdykstra) und [Steve Smith](https://ardalis
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Die meisten der Codebeispiele in diesem Artikel stammen aus ASP.NET Core-Apps. Die auf die Protokollierung bezogenen Teile dieser Codeausschnitte gelten für jede .NET Core-App, die den [generischen Host](xref:fundamentals/host/generic-host) verwendet. Weitere Informationen zum Verwenden des generischen Hosts in Nicht-Webkonsolen-Apps finden Sie unter [Gehostete Dienste](xref:fundamentals/host/hosted-services).
+Die meisten der Codebeispiele in diesem Artikel stammen aus ASP.NET Core-Apps. Die auf die Protokollierung bezogenen Teile dieser Codeausschnitte gelten für jede .NET Core-App, die den [generischen Host](xref:fundamentals/host/generic-host) verwendet. Ein Beispiel zum Verwenden des generischen Hosts in einer nicht webbasierten Konsolen-App finden Sie in der *Program.cs*-Datei der [Beispiel-App für Hintergrundaufgaben](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples) (<xref:fundamentals/host/hosted-services>).
 
 Das Protokollieren von Code für Apps ohne generischen Host weicht in Bezug auf das [Hinzufügen von Anbietern](#add-providers) und das [Erstellen von Protokollierungen](#create-logs) ab. Codebeispiele ohne Host finden sich in diesen Abschnitten des Artikels.
 

@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie eine ASP.net Core-App mit e-Mail-Bestätigung
 ms.author: riande
 ms.date: 03/11/2019
 uid: security/authentication/accconfirm
-ms.openlocfilehash: a4ecc2d91fb72915703dfaa146260f0c1360bded
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 49d3d214fd64edc5b17df2df929ddc3c2af47ede
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880770"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829269"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Konto Bestätigung und Kenn Wort Wiederherstellung in ASP.net Core
 
@@ -32,7 +32,7 @@ Informationen zum ASP.net Core 1,1-Version finden Sie in [dieser PDF-Datei](http
 
 ::: moniker range="> aspnetcore-2.2"
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 [.NET Core 3.0 SDK oder höher](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -155,11 +155,11 @@ Der folgende Code ändert den Timeout Zeitraum für alle Token für die Datensch
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-Die integrierten Identitäts Benutzer Token (siehe [aspnetcore/src/Identity/Extensions. Core/src/tokenoptions. cs](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) haben ein Timeout von einem [Tag](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Die integrierten Identitäts Benutzer Token (siehe [aspnetcore/src/Identity/Extensions. Core/src/tokenoptions. cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) haben ein Timeout von einem [Tag](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>Lebensdauer von e-Mail-Token
 
-Die standardmäßige tokengültigkeits Dauer der [Identitäts Benutzer Token](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ist [ein Tag](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). In diesem Abschnitt wird gezeigt, wie Sie die Lebensdauer von e-Mail-
+Die standardmäßige tokengültigkeits Dauer der [Identitäts Benutzer Token](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ist [ein Tag](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). In diesem Abschnitt wird gezeigt, wie Sie die Lebensdauer von e-Mail-
 
 Fügen Sie einen benutzerdefinierten [dataprotectortokenprovider-\<tuser->](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) und <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>hinzu:
 
@@ -171,7 +171,7 @@ Fügen Sie dem Dienst Container den benutzerdefinierten Anbieter hinzu:
 
 ### <a name="resend-email-confirmation"></a>E-Mail-Bestätigung erneut senden
 
-Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/aspnet/AspNetCore/issues/5410).
+Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/dotnet/AspNetCore/issues/5410).
 
 <a name="debug"></a>
 
@@ -217,7 +217,7 @@ Das Aktivieren der Konto Bestätigung auf einem Standort mit Benutzern sperrt al
 
 ::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 [.Net Core 2,2 SDK oder höher](https://www.microsoft.com/net/download/all)
 
@@ -381,11 +381,11 @@ Der folgende Code ändert den Timeout Zeitraum für alle Token für die Datensch
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-Die integrierten Identitäts Benutzer Token (siehe [aspnetcore/src/Identity/Extensions. Core/src/tokenoptions. cs](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) haben ein Timeout von einem [Tag](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Die integrierten Identitäts Benutzer Token (siehe [aspnetcore/src/Identity/Extensions. Core/src/tokenoptions. cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) haben ein Timeout von einem [Tag](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>Lebensdauer von e-Mail-Token
 
-Die standardmäßige tokengültigkeits Dauer der [Identitäts Benutzer Token](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ist [ein Tag](https://github.com/aspnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). In diesem Abschnitt wird gezeigt, wie Sie die Lebensdauer von e-Mail-
+Die standardmäßige tokengültigkeits Dauer der [Identitäts Benutzer Token](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ist [ein Tag](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). In diesem Abschnitt wird gezeigt, wie Sie die Lebensdauer von e-Mail-
 
 Fügen Sie einen benutzerdefinierten [dataprotectortokenprovider-\<tuser->](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) und <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>hinzu:
 
@@ -397,7 +397,7 @@ Fügen Sie dem Dienst Container den benutzerdefinierten Anbieter hinzu:
 
 ### <a name="resend-email-confirmation"></a>E-Mail-Bestätigung erneut senden
 
-Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/aspnet/AspNetCore/issues/5410).
+Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/dotnet/AspNetCore/issues/5410).
 
 <a name="debug"></a>
 

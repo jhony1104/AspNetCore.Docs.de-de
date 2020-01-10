@@ -3,14 +3,14 @@ title: Artikel, die auf ASP.net Core Projekten basieren, die mit einzelnen Benut
 author: rick-anderson
 description: Entdecken Sie Artikel, die auf ASP.net Core Projekte basieren, die mit einzelnen Benutzerkonten erstellt wurden.
 ms.author: riande
-ms.date: 11/30/2017
+ms.date: 12/11/2019
 uid: security/authentication/individual
-ms.openlocfilehash: 91c5665dc50124b3ba09bdcfbf3ba501f684c604
-ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
+ms.openlocfilehash: 7ef0d5eabded61d04fb9fe7be384a663ad7ea5f4
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2019
-ms.locfileid: "73463030"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828710"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artikel, die auf ASP.net Core Projekten basieren, die mit einzelnen Benutzerkonten erstellt wurden
 
@@ -36,7 +36,7 @@ dotnet new razor -au Individual
 
 ::: moniker-end
 
-Sehen Sie sich [dieses GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/5833) bei der Web-API-Authentifizierung
+Sehen Sie sich [dieses GitHub-Problem](https://github.com/dotnet/AspNetCore/issues/5833) bei der Web-API-Authentifizierung
 
 <a name="no"></a>
 
@@ -57,7 +57,33 @@ Die Windows-Authentifizierung wird für neue Web-Apps im .net Core-CLI mit der `
 
 Wenn die Windows-Authentifizierung ausgewählt ist, wird die APP für die Verwendung des [IIS-Moduls der Windows-Authentifizierung](xref:host-and-deploy/iis/modules)konfiguriert. Die Windows-Authentifizierung ist für Intranetwebsites vorgesehen.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="dotnet-new-webapp-authentication-options"></a>Optionen für die neue webapp-Authentifizierung in dotnet
+
+In der folgenden Tabelle sind die für neue Web-Apps verfügbaren Authentifizierungs Optionen aufgeführt:
+
+| -Option | Authentifizierungstyp | Link für weitere Informationen |
+ | ----------------- | ------------ | ---------- |
+| Keine            |  Keine Authentifizierung | | 
+| Einzelkonto      |  Individuelle Authentifizierung | <xref:security/authentication/identity>
+| IndividualB2C   |  In der Cloud gehostete individuelle Authentifizierung mit Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
+| Singleorg       |  Organisations Authentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Multiorg        |  Organisations Authentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Windows         |  Windows-Authentifizierung | [Windows-Authentifizierung](xref:security/authentication/windowsauth)
+
+## <a name="visual-studio-new-webapp-authentication-options"></a>Visual Studio-Optionen für die neue webapp-Authentifizierung
+
+In der folgenden Tabelle sind die Authentifizierungs Optionen aufgeführt, die beim Erstellen einer neuen Web-App mit Visual Studio verfügbar sind:
+
+| -Option | Authentifizierungstyp | Link für weitere Informationen |
+ | ----------------- | ------------ | ---------- |
+| Keine            |  Keine Authentifizierung | | 
+| Einzelne Benutzerkonten/Benutzerkonten in-APP speichern |  Individuelle Authentifizierung | <xref:security/authentication/identity> |
+| Einzelne Benutzerkonten/Verbindung mit einem vorhandenen Benutzerspeicher in der Cloud |  In der Cloud gehostete individuelle Authentifizierung mit Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
+| Geschäfts-, Schul-oder Uni-Cloud/Single org  |  Organisations Authentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Geschäfts-, Schul-oder Uni-Cloud/Multiple org |  Organisations Authentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Windows         |  Windows-Authentifizierung | [Windows-Authentifizierung](xref:security/authentication/windowsauth)
+
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 In den folgenden Artikeln wird gezeigt, wie Sie den in ASP.net Core Vorlagen generierten Code verwenden, der einzelne Benutzerkonten verwendet:
 

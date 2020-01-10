@@ -5,25 +5,25 @@ description: Erfahren Sie, wie Sie Kenn Wörter mithilfe der ASP.net Core-Datens
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: bd4b8fcf6a5a16a86ada97bbd3519f872d1417b7
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 52532f9f4d7f9037609c8273deb8b6964d81c714
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602452"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828567"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>Hash Kennwörter in ASP.net Core
 
 Die Codebasis für den Datenschutz umfasst das Paket *Microsoft. aspnetcore. Cryptography. keyderivations* , das die Funktionen der kryptografieschlüsselableitung enthält. Bei diesem Paket handelt es sich um eine eigenständige Komponente, die keine Abhängigkeiten vom Rest des Datenschutzsystems aufweist. Sie kann vollständig unabhängig verwendet werden. Die Quelle ist neben der Datenschutz-Codebasis vorhanden.
 
-Das Paket bietet derzeit eine Methode `KeyDerivation.Pbkdf2` , die das Hashen eines Kennworts mithilfe des [PBKDF2-Algorithmus](https://tools.ietf.org/html/rfc2898#section-5.2)zulässt. Diese API ähnelt dem vorhandenen [Rfc2898DeriveBytes-Typ](/dotnet/api/system.security.cryptography.rfc2898derivebytes)der .NET Framework, aber es gibt drei wichtige Unterschiede:
+Das Paket bietet derzeit eine-Methode `KeyDerivation.Pbkdf2` die das Hashen eines Kennworts mithilfe des [PBKDF2-Algorithmus](https://tools.ietf.org/html/rfc2898#section-5.2)zulässt. Diese API ähnelt dem vorhandenen [Rfc2898DeriveBytes-Typ](/dotnet/api/system.security.cryptography.rfc2898derivebytes)der .NET Framework, aber es gibt drei wichtige Unterschiede:
 
-1. Die `KeyDerivation.Pbkdf2` -Methode unterstützt die Verwendung mehrerer prfs `HMACSHA256`(zurzeit `HMACSHA1`, und) `Rfc2898DeriveBytes` , während der `HMACSHA1`- `HMACSHA512`Typ nur unterstützt.
+1. Die `KeyDerivation.Pbkdf2`-Methode unterstützt die Verwendung mehrerer prfs (derzeit `HMACSHA1`, `HMACSHA256`und `HMACSHA512`), während der `Rfc2898DeriveBytes` Typ nur `HMACSHA1`unterstützt.
 
-2. Mit `KeyDerivation.Pbkdf2` der-Methode wird das aktuelle Betriebssystem erkannt, und es wird versucht, die am besten optimierte Implementierung der Routine zu wählen, um in bestimmten Fällen eine viel bessere Leistung zu erzielen (Unter Windows 8 bietet das Angebot ungefähr Zehnfache den Durchsatz von `Rfc2898DeriveBytes`.)
+2. Mit der `KeyDerivation.Pbkdf2`-Methode wird das aktuelle Betriebssystem erkannt, und es wird versucht, die am besten optimierte Implementierung der Routine zu wählen, um in bestimmten Fällen eine deutlich bessere Leistung zu erzielen. (Unter Windows 8 bietet das Angebot ungefähr Zehnfache den Durchsatz von `Rfc2898DeriveBytes`.)
 
-3. Die `KeyDerivation.Pbkdf2` -Methode erfordert, dass der Aufrufer alle Parameter (Salt, PRF und Iterations Anzahl) angibt. Der `Rfc2898DeriveBytes` -Typ stellt Standardwerte für diese bereit.
+3. Die `KeyDerivation.Pbkdf2`-Methode erfordert, dass der Aufrufer alle Parameter (Salt, PRF und Iterations Anzahl) angibt. Der `Rfc2898DeriveBytes` Typ stellt Standardwerte für diese bereit.
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
-Sehen Sie sich den [Quellcode](https://github.com/aspnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) für ASP.net Core `PasswordHasher` identitätsart für einen realen Anwendungsfall an.
+Sehen Sie sich den [Quellcode](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) für den `PasswordHasher` Typ der ASP.net Core Identität für einen realen Anwendungsfall an.

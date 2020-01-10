@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1242ec9f71f4a26b07f9a56a2a960bf315b56ccf
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: c46f50a418cf630980ac2ba94407e4370d36e7d5
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880014"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828931"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrieren von ASP.NET Core 1.x zu 2.0
 
@@ -23,7 +23,7 @@ Vorhandene ASP.NET Core 1.x-Anwendungen basieren auf versionsspezifischen Projek
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 Weitere Informationen finden Sie unter [Erste Schritte mit ASP.NET Core](xref:getting-started).
 
@@ -42,7 +42,7 @@ Auf .NET Framework ausgelegte Projekte müssen den TFM einer Version größer gl
 > [!NOTE]
 > .NET Core 2.0 bietet eine viel größere Oberfläche als .NET Core 1.x. Wenn Sie mit .NET Framework entwickeln, nur weil APIs in .NET Core 1.x fehlen, wird das Entwickeln mit .NET Core 2.0 wahrscheinlich funktionieren.
 
-Wenn die Projektdatei `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` enthält, lesen Sie die Informationen zu [diesem GitHub-Problem](https://github.com/aspnet/AspNetCore/issues/3221#issuecomment-413094268).
+Wenn die Projektdatei `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` enthält, lesen Sie die Informationen zu [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268).
 
 <a name="global-json"></a>
 

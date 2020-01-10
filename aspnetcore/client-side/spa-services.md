@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 52285999d7710cc3198836b9246596980cfc1666
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: caff1a735de3274b371f67e6e485dc42e579452c
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75355784"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828216"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Verwenden Sie JavaScript-Dienste zum Erstellen von Single-Page-Anwendungen in ASP.net Core
 
@@ -23,7 +23,7 @@ Eine Single-Page-Anwendung (SPA) ist ein Webanwendungstyp, der aufgrund seiner h
 ::: moniker range=">= aspnetcore-3.0"
 
 > [!WARNING]
-> Die in diesem Artikel beschriebenen Funktionen sind ab ASP.net Core 3,0 veraltet. Im nuget-Paket " [Microsoft. aspnetcore. Spaservices. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices.Extensions) " steht ein einfacherer Integrationsmechanismus für Spa-Frameworks zur Verfügung. Weitere Informationen finden Sie unter [[Ankündigung] Obsoleting Microsoft. aspnetcore. Spaservices und Microsoft. aspnetcore. nodeservices](https://github.com/aspnet/AspNetCore/issues/12890).
+> Die in diesem Artikel beschriebenen Funktionen sind ab ASP.net Core 3,0 veraltet. Im nuget-Paket " [Microsoft. aspnetcore. Spaservices. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices.Extensions) " steht ein einfacherer Integrationsmechanismus für Spa-Frameworks zur Verfügung. Weitere Informationen finden Sie unter [[Ankündigung] Obsoleting Microsoft. aspnetcore. Spaservices und Microsoft. aspnetcore. nodeservices](https://github.com/dotnet/AspNetCore/issues/12890).
 
 ::: moniker-end
 

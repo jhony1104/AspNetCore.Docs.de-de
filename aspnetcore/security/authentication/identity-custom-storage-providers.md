@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 6d0d9b5467d9d27b936a17fa86f73e7d8123b75b
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 70951085474d88fd57f1b1496a41adcda520b91f
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73760971"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829152"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Benutzerdefinierte Speicher Anbieter für ASP.net Core Identität
 
@@ -57,11 +57,11 @@ Beim Erstellen einer neuen Instanz von `UserManager` oder `RoleManager` geben Si
 
 [ASP.net Core Identitäts](https://github.com/aspnet/identity) Datentypen werden in den folgenden Abschnitten beschrieben:
 
-### <a name="users"></a>Benutzer
+### <a name="users"></a>-Benutzer
 
 Registrierte Benutzer Ihrer Website. Der [identityuser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser) -Typ kann erweitert oder als Beispiel für Ihren eigenen benutzerdefinierten Typ verwendet werden. Sie müssen nicht von einem bestimmten Typ erben, um eine eigene benutzerdefinierte Identitäts Speicherlösung zu implementieren.
 
-### <a name="user-claims"></a>Benutzer Ansprüche
+### <a name="user-claims"></a>Benutzeransprüche
 
 Ein Satz von-Anweisungen (oder- [Ansprüchen](/dotnet/api/system.security.claims.claim)) zum Benutzer, die die Identität des Benutzers darstellen. Kann einen größeren Ausdruck der Identität des Benutzers aktivieren, als durch Rollen erreicht werden kann.
 
@@ -69,7 +69,7 @@ Ein Satz von-Anweisungen (oder- [Ansprüchen](/dotnet/api/system.security.claims
 
 Informationen zum externen Authentifizierungs Anbieter (z. b. Facebook oder eine Microsoft-Konto), die bei der Anmeldung eines Benutzers verwendet werden sollen. [Beispiel](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
-### <a name="roles"></a>Rollen
+### <a name="roles"></a>-Rollen
 
 Autorisierungs Gruppen für Ihre Website. Enthält die Rollen-ID und den Rollennamen (z. b. "admin" oder "Employee"). [Beispiel](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
@@ -127,16 +127,16 @@ Erstellen Sie eine `UserStore` Klasse, die die Methoden für alle Daten Vorgäng
 
 ### <a name="optional-interfaces"></a>Optionale Schnittstellen
 
-* [Iuserrolestore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserrolestore-1)
-* [Iuserclaimstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserclaimstore-1)
-* [Iuserpasswordstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserpasswordstore-1)
-* [Iusersecuritystampstore](/dotnet/api/microsoft.aspnetcore.identity.iusersecuritystampstore-1)
-* [Iuseremailstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuseremailstore-1)
-* [Iuserphonenumberstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserphonenumberstore-1)
-* [Iqueryableuserstore ist](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)
-* [Iuserloginstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserloginstore-1)
-* [Iusertwofactorstore ist](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1)
-* [Iuserlockoutstore ist](/dotnet/api/microsoft.aspnetcore.identity.iuserlockoutstore-1)
+* [IUserRoleStore](/dotnet/api/microsoft.aspnetcore.identity.iuserrolestore-1)
+* [IUserClaimStore](/dotnet/api/microsoft.aspnetcore.identity.iuserclaimstore-1)
+* [IUserPasswordStore](/dotnet/api/microsoft.aspnetcore.identity.iuserpasswordstore-1)
+* [IUserSecurityStampStore](/dotnet/api/microsoft.aspnetcore.identity.iusersecuritystampstore-1)
+* [IUserEmailStore](/dotnet/api/microsoft.aspnetcore.identity.iuseremailstore-1)
+* [IUserPhoneNumberStore](/dotnet/api/microsoft.aspnetcore.identity.iuserphonenumberstore-1)
+* [IQueryableUserStore](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)
+* [IUserLoginStore](/dotnet/api/microsoft.aspnetcore.identity.iuserloginstore-1)
+* [IUserTwoFactorStore](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1)
+* [IUserLockoutStore](/dotnet/api/microsoft.aspnetcore.identity.iuserlockoutstore-1)
 
 Die optionalen Schnittstellen erben von `IUserStore<TUser>`. Sie können einen teilweise implementierten Beispiel Benutzerspeicher in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs)sehen.
 
@@ -148,25 +148,25 @@ In der `UserStore`-Klasse verwenden Sie die Datenzugriffsklassen, die Sie erstel
 
 * **IUserStore**  
  Die [&lt;tuser-&gt;Schnittstelle von iuserstore](/dotnet/api/microsoft.aspnetcore.identity.iuserstore-1) ist die einzige Schnittstelle, die Sie im Benutzerspeicher implementieren müssen. Es definiert Methoden zum Erstellen, aktualisieren, löschen und Abrufen von Benutzern.
-* **Iuserclaimstore ist**  
+* **IUserClaimStore**  
  Die [iuserclaimstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserclaimstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um Benutzer Ansprüche zu aktivieren. Sie enthält Methoden zum Hinzufügen, entfernen und Abrufen von Benutzer Ansprüchen.
-* **Iuserloginstore ist**  
+* **IUserLoginStore**  
  Das [iuserloginstore-&lt;tuser&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserloginstore-1) definiert die Methoden, die Sie implementieren, um externe Authentifizierungs Anbieter zu aktivieren. Sie enthält Methoden zum Hinzufügen, entfernen und Abrufen von Benutzeranmeldungen sowie eine Methode zum Abrufen eines Benutzers basierend auf den Anmelde Informationen.
-* **Iuserrolestore ist**  
+* **IUserRoleStore**  
  Die [iuserrolestore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserrolestore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um einen Benutzer einer Rolle zuzuordnen. Sie enthält Methoden zum Hinzufügen, entfernen und Abrufen der Rollen eines Benutzers sowie eine Methode, um zu überprüfen, ob ein Benutzer einer Rolle zugewiesen ist.
-* **Iuserpasswordstore ist**  
+* **IUserPasswordStore**  
  Die [iuserpasswordstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserpasswordstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um Hash Kennwörter beizubehalten. Sie enthält Methoden zum erhalten und Festlegen des hashkennworts sowie eine Methode, die angibt, ob der Benutzer ein Kennwort festgelegt hat.
-* **Iusersecuritystampstore**  
+* **IUserSecurityStampStore**  
  Die [iusersecuritystampstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iusersecuritystampstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um einen Sicherheits Stempel zu verwenden, der angibt, ob sich die Kontoinformationen des Benutzers geändert haben. Dieser Stempel wird aktualisiert, wenn ein Benutzer das Kennwort ändert oder Anmeldungen hinzufügt oder entfernt. Sie enthält Methoden zum erhalten und Festlegen des Sicherheits Stempels.
-* **Iusertwofactorstore ist**  
+* **IUserTwoFactorStore**  
  Die [iusertwofactorstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um die zweistufige Authentifizierung zu unterstützen. Sie enthält Methoden zum erhalten und festlegen, ob die zweistufige Authentifizierung für einen Benutzer aktiviert ist.
-* **Iuserphonenumberstore ist**  
+* **IUserPhoneNumberStore**  
  Die [iuserphonenumberstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserphonenumberstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um die Telefonnummern von Benutzern zu speichern. Sie enthält Methoden zum erhalten und Festlegen der Telefonnummer und darüber, ob die Telefonnummer bestätigt ist.
-* **Iuseremailstore ist**  
+* **IUserEmailStore**  
  Die [iuseremailstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuseremailstore-1) Schnittstelle definiert die Methoden, die Sie zum Speichern von Benutzer-e-Mail-Adressen implementieren Sie enthält Methoden zum erhalten und Festlegen der e-Mail-Adresse und darüber, ob die e-Mail bestätigt ist.
-* **Iuserlockoutstore ist**  
+* **IUserLockoutStore**  
  Die [iuserlockoutstore-&lt;tuser-&gt;](/dotnet/api/microsoft.aspnetcore.identity.iuserlockoutstore-1) Schnittstelle definiert die Methoden, die Sie implementieren, um Informationen zum Sperren eines Kontos zu speichern. Sie enthält Methoden zum Nachverfolgen fehlerhafter Zugriffsversuche und Sperr Outs.
-* **Iqueryableuserstore ist**  
+* **IQueryableUserStore**  
  Die Schnittstelle [iqueryableuserstore&lt;tuser&gt;](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiert die von Ihnen implementierten Elemente, um einen abfragbaren Benutzerspeicher bereitzustellen.
 
 Sie implementieren nur die Schnittstellen, die in Ihrer APP benötigt werden. Beispiel:
@@ -199,9 +199,9 @@ Im folgenden finden Sie ein Beispiel für eine Rollen Klasse:
 
 Sie können eine `RoleStore` Klasse erstellen, die die Methoden für alle Daten Vorgänge für Rollen bereitstellt. Diese Klasse entspricht der [rolestore-&lt;trole-&gt;](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1) Klasse. In der `RoleStore`-Klasse implementieren Sie die `IRoleStore<TRole>` und optional die `IQueryableRoleStore<TRole>`-Schnittstelle.
 
-* **Irolestore&lt;trole-&gt;**  
+* **IRoleStore&lt;TRole&gt;**  
  Die [irolestore-&lt;trole-&gt;](/dotnet/api/microsoft.aspnetcore.identity.irolestore-1) Schnittstelle definiert die Methoden, die in der Rollen Speicher Klasse implementiert werden. Sie enthält Methoden zum Erstellen, aktualisieren, löschen und Abrufen von Rollen.
-* **Rolestore&lt;trole&gt;**  
+* **RoleStore&lt;TRole&gt;**  
  Um `RoleStore`anzupassen, erstellen Sie eine Klasse, die die `IRoleStore<TRole>`-Schnittstelle implementiert. 
 
 ## <a name="reconfigure-app-to-use-a-new-storage-provider"></a>Neukonfigurieren der APP für die Verwendung eines neuen Speicher Anbieters
@@ -238,4 +238,4 @@ public void ConfigureServices(IServiceCollection services)
 ## <a name="references"></a>Verweise
 
 * [Benutzerdefinierte Speicher Anbieter für die ASP.NET 4. x-Identität](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.net Core Identity](https://github.com/aspnet/AspNetCore/tree/master/src/Identity) &ndash; dieses Repository enthält Links zu communityanbietern, die von der Community verwaltet werden.
+* [ASP.net Core Identity](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) &ndash; dieses Repository enthält Links zu communityanbietern, die von der Community verwaltet werden.

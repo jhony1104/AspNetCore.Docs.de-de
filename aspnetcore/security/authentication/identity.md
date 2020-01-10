@@ -5,12 +5,12 @@ description: Verwenden Sie die Identität mit einer ASP.net Core-app. Erfahren S
 ms.author: riande
 ms.date: 12/05/2019
 uid: security/authentication/identity
-ms.openlocfilehash: 787d39dd7824f912128e6af849fa268c3e8eb908
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: d4cda43c417a0d8e1b78f8b59b7050debf017269
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75359198"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828229"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität auf ASP.net Core
 
@@ -25,7 +25,7 @@ ASP.net Core Identität:
 
 Benutzer können ein Konto mit den in der Identität gespeicherten Anmelde Informationen erstellen, oder Sie können einen externen Anmelde Anbieter verwenden. Zu den unterstützten externen Anmelde Anbietern zählen [Facebook, Google, Microsoft-Konto und Twitter](xref:security/authentication/social/index).
 
-Der Quellcode der [identitätsquelle](https://github.com/aspnet/AspNetCore/tree/master/src/Identity) ist auf GitHub verfügbar. [Gerüstbau der Identität](xref:security/authentication/scaffold-identity) und Anzeigen der generierten Dateien zum Überprüfen der Vorlagen Interaktion mit der Identität.
+Der Quellcode der [identitätsquelle](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) ist auf GitHub verfügbar. [Gerüstbau der Identität](xref:security/authentication/scaffold-identity) und Anzeigen der generierten Dateien zum Überprüfen der Vorlagen Interaktion mit der Identität.
 
 Die Identität wird in der Regel mit einer SQL Server Datenbank konfiguriert, um Benutzernamen, Kenn Wörter und Profildaten zu speichern. Alternativ können Sie auch einen weiteren permanenten Speicher verwenden, z. b. Azure Table Storage.
 
@@ -212,7 +212,7 @@ Ein Beispiel zum Festlegen der Mindestanforderungen für das Kennwort finden Sie
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/aspnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
+Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/dotnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
 ## <a name="next-steps"></a>Nächste Schritte
 
@@ -250,7 +250,7 @@ In diesem Thema erfahren Sie, wie Sie mit der Identität einen Benutzer registri
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/aspnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
+Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/dotnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
 ## <a name="create-a-web-app-with-authentication"></a>Erstellen einer Web-App mit Authentifizierung
 

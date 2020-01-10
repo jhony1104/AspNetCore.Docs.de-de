@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/20/2019
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 49a0f59fb6930235de10c726f3695f2a5352efb2
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: b0f5d44f153a095a6108a12ee91f4cc46fe0a0de
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74251961"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829009"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung ASP.net Core auf Azure App Service und IIS
 
@@ -109,7 +109,7 @@ Beim Laden [ASP.net Core Modul](xref:host-and-deploy/aspnet-core-module) Kompone
 
 * Wenden Sie sich an den [Microsoft-Support](https://support.microsoft.com/oas/default.aspx?prid=15832) (über **Entwicklertools** > **ASP.NET Core**).
 * Stellen Sie Ihre Frage auf Stack Overflow.
-* Melden Sie das Problem im [GitHub-Repository](https://github.com/aspnet/AspNetCore).
+* Melden Sie das Problem im [GitHub-Repository](https://github.com/dotnet/AspNetCore).
 
 ### <a name="50030-in-process-startup-failure"></a>500.30: Prozessinterner Startupfehler
 
@@ -347,7 +347,7 @@ Das Debugprotokoll des ASP.NET Core-Moduls ermöglicht die zusätzliche und ausf
 
 1. Führen Sie einen der folgenden Schritte aus, um das erweiterte Diagnoseprotokoll zu aktivieren:
    * Befolgen Sie den Anweisungen in den [erweiterten Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs), um die App für die erweiterte Diagnoseprotokollierung zu konfigurieren. Stellen Sie die App erneut bereit.
-   * Fügen Sie die in unter `<handlerSettings>`Erweiterte Diagnoseprotokollen[ enthaltene ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)-Klasse für die *web.config*-Datei der Live-App über die Kudu-Konsole hinzu:
+   * Fügen Sie die in unter [Erweiterte Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) enthaltene `<handlerSettings>`-Klasse für die *web.config*-Datei der Live-App über die Kudu-Konsole hinzu:
      1. Öffnen Sie **Erweiterte Tools** im Bereich **Entwicklungstools**. Klicken Sie auf **Los&rarr;** . Die Kudu-Konsole wird in einer neuen Browserregisterkarte oder in einem neuen Fenster geöffnet.
      1. Öffnen Sie mithilfe der Navigationsleiste am oberen Rand der Seite die **Debugging-Konsole**, und wählen Sie **CMD** aus.
      1. Öffnen Sie die Ordner unter dem Pfad **site** > **wwwroot**. Bearbeiten Sie die Datei *web.config*, indem Sie auf die Bleistiftschaltfläche klicken. Fügen Sie den Abschnitt `<handlerSettings>` wie in den [erweiterten Diagnoseprotokollen](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) dargestellt hinzu. Klicken Sie auf die Schaltfläche **Speichern**.
@@ -507,7 +507,7 @@ Weitere Informationen finden Sie unter <xref:host-and-deploy/aspnet-core-module#
 
 ### <a name="enable-the-developer-exception-page"></a>Aktivieren der Seite mit Ausnahmen für Entwickler
 
-Die `ASPNETCORE_ENVIRONMENT` [Umgebungsvariable kann zur Datei web.config hinzugefügt werden](xref:host-and-deploy/aspnet-core-module#setting-environment-variables), um die App in der Entwicklungsumgebung auszuführen. Solange die Umgebung nicht beim Starten der App von `UseEnvironment` im Host-Builder außer Kraft gesetzt wird, kann die [Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling) durch Festlegen der Umgebungsvariable angezeigt werden, wenn die App ausgeführt wird.
+Die `ASPNETCORE_ENVIRONMENT`- [Umgebungsvariable kann der Datei "Web. config" hinzugefügt werden](xref:host-and-deploy/aspnet-core-module#setting-environment-variables) , um die app in der Entwicklungsumgebung auszuführen. Solange die Umgebung nicht beim Starten der App von `UseEnvironment` im Host-Builder außer Kraft gesetzt wird, kann die [Seite mit Ausnahmen für Entwickler](xref:fundamentals/error-handling) durch Festlegen der Umgebungsvariable angezeigt werden, wenn die App ausgeführt wird.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -607,7 +607,7 @@ In manchen Fällen tritt ein funktionierender App direkt nach dem Upgrade der .n
 1. Stellen Sie das Projekt wieder her und erstellen Sie es neu.
 1. Löschen Sie alle Dateien im Bereitstellungs Ordner auf dem Server, bevor Sie die APP erneut bereitstellen.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
