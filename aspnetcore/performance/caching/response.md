@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 uid: performance/caching/response
-ms.openlocfilehash: 9246305e6979a6a7e006f567ee6bf9569029aef1
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: e20c197c7ce3334d4f4f0b917d1fc94174e6c615
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828307"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914199"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.NET Core
 
@@ -66,7 +66,7 @@ Weitere Informationen finden Sie unter <xref:performance/caching/memory>.
 
 ### <a name="distributed-cache"></a>Verteilter Cache
 
-Verwenden Sie einen verteilten Cache zum Speichern von Daten im Arbeitsspeicher, wenn die app in einer Cloud oder Server-Farm gehostet wird. Der Cache wird auf allen Servern gemeinsam genutzt, die Anforderungen verarbeiten. Ein Client kann eine Anforderung übermitteln, die von einem beliebigen Server in der Gruppe verarbeitet wird, wenn zwischengespeicherte Daten für den Client verfügbar sind. ASP.NET Core bietet SQL Server und verteilt Redis-Caches.
+Verwenden Sie einen verteilten Cache zum Speichern von Daten im Arbeitsspeicher, wenn die app in einer Cloud oder Server-Farm gehostet wird. Der Cache wird auf allen Servern gemeinsam genutzt, die Anforderungen verarbeiten. Ein Client kann eine Anforderung übermitteln, die von einem beliebigen Server in der Gruppe verarbeitet wird, wenn zwischengespeicherte Daten für den Client verfügbar sind. ASP.net Core funktioniert mit verteilten Caches SQL Server, [redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)und [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) .
 
 Weitere Informationen finden Sie unter <xref:performance/caching/distributed>.
 
@@ -78,7 +78,7 @@ Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/ca
 
 ### <a name="distributed-cache-tag-helper"></a>Taghilfsprogramm für verteilten Cache
 
-Speichern Sie den Inhalt aus einer MVC-Ansicht oder einer Razor page in verteilten Cloud-oder Webfarm Szenarios mit dem taghilfsprogramm für verteilte Caches. Das Taghilfsprogramm für verteilten Cache werden SQL Server oder Redis verwendet, um Daten zu speichern.
+Speichern Sie den Inhalt aus einer MVC-Ansicht oder einer Razor page in verteilten Cloud-oder Webfarm Szenarios mit dem taghilfsprogramm für verteilte Caches. Das taghilfsprogramm für verteilte Caches verwendet SQL Server, [redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)oder [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) zum Speichern von Daten.
 
 Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.
 
