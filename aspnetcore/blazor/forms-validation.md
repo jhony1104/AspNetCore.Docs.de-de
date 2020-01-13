@@ -9,12 +9,12 @@ ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/forms-validation
-ms.openlocfilehash: f4c1845ee4b6ff9274b7117167367ccdd9f36c12
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: a94a433f26e451bbadc73615e502e46d273f05c2
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943692"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828138"
 ---
 # <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.net Core Blazor Formularen und Validierung
 
@@ -193,7 +193,7 @@ Erstellen Sie eine-Komponente mit dem folgenden Markup, und verwenden Sie die-Ko
 
 ## <a name="validation-support"></a>Validierungs Unterstützung
 
-Die `DataAnnotationsValidator` Komponente fügt die Validierungs Unterstützung mithilfe von Daten Anmerkungen an den kaskadierenden `EditContext`an. Das Aktivieren der Unterstützung für die Validierung mithilfe von Daten Anmerkungen erfordert diese explizite Geste. Um ein anderes Validierungssystem als Daten Anmerkungen zu verwenden, ersetzen Sie den `DataAnnotationsValidator` durch eine benutzerdefinierte Implementierung. Die ASP.net Core-Implementierung ist zur Überprüfung in der Verweis Quelle verfügbar: [DataAnnotationsValidator](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[AddDataAnnotationsValidation](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs).
+Die `DataAnnotationsValidator` Komponente fügt die Validierungs Unterstützung mithilfe von Daten Anmerkungen an den kaskadierenden `EditContext`an. Das Aktivieren der Unterstützung für die Validierung mithilfe von Daten Anmerkungen erfordert diese explizite Geste. Um ein anderes Validierungssystem als Daten Anmerkungen zu verwenden, ersetzen Sie den `DataAnnotationsValidator` durch eine benutzerdefinierte Implementierung. Die ASP.net Core-Implementierung ist für die Untersuchung in der Verweis Quelle verfügbar: [dataannotationsvalidator](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[adddataannotationsvalidation](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs).
 
 Blazor führt zwei Validierungs Typen aus:
 
@@ -251,7 +251,7 @@ private class MyCustomValidator : ValidationAttribute
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty]-Attribut
 
-Die <xref:System.ComponentModel.DataAnnotations.CompareAttribute> funktioniert nicht gut mit der `DataAnnotationsValidator` Komponente. [Microsoft. aspnetcore.Blazor. Mit dem experimentellen DataAnnotations. Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) -Paket wird ein zusätzliches Validierungs Attribut (`ComparePropertyAttribute`) eingeführt, das diese Einschränkungen behandelt. In einer Blazor-APP ist `[CompareProperty]` ein direkter Ersatz für das `[Compare]`-Attribut. Weitere Informationen finden Sie unter [compareattribute ignoriert mit onvalidsubmit EditForm (ASPNET/aspnetcore-#10643)](https://github.com/aspnet/AspNetCore/issues/10643#issuecomment-543909748).
+Die <xref:System.ComponentModel.DataAnnotations.CompareAttribute> funktioniert nicht gut mit der `DataAnnotationsValidator` Komponente. [Microsoft. aspnetcore.Blazor. Mit dem experimentellen DataAnnotations. Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) -Paket wird ein zusätzliches Validierungs Attribut (`ComparePropertyAttribute`) eingeführt, das diese Einschränkungen behandelt. In einer Blazor-APP ist `[CompareProperty]` ein direkter Ersatz für das `[Compare]`-Attribut. Weitere Informationen finden Sie unter [compareattribute ignoriert mit onvalidsubmit EditForm (dotnet/aspnetcore-#10643)](https://github.com/dotnet/AspNetCore/issues/10643#issuecomment-543909748).
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>Untergeordnete Modelle, Sammlungs Typen und komplexe Typen
 
