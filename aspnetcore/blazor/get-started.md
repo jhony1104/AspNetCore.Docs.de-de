@@ -9,12 +9,12 @@ ms.date: 12/09/2019
 no-loc:
 - Blazor
 uid: blazor/get-started
-ms.openlocfilehash: e368ecaf931d392de7e52ec2d5a2dfd171c2c86f
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 554f4daff92a0839ee7679287a4618e9b51e0fe5
+ms.sourcegitcommit: 925cdbd94613243f33bc7613a62ea34006219931
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943763"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75921304"
 ---
 # <a name="get-started-with-aspnet-core-opno-locblazor"></a>Erste Schritte mit ASP.NET Core Blazor
 
@@ -30,7 +30,7 @@ Beginnen Sie mit Blazor:
 
 1. Installieren Sie optional die Vorlage [Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) :
    * Installieren Sie das [.net Core 3,1-oder spätere SDK (Vorschauversion)](https://dotnet.microsoft.com/download/dotnet-core/3.1).
-   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. [Microsoft. aspnetcore.Blazor. Das Vorlagen](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) Paket verfügt über eine Vorschauversion, während sich Blazor Webassembly in der Vorschau Phase befindet.
+   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. [Microsoft.aspnetcore.Blazor.Das Vorlagen](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) Paket verfügt über eine Vorschauversion, während sich Blazor Webassembly in der Vorschau Phase befindet.
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview4.19579.2
@@ -85,7 +85,7 @@ Beginnen Sie mit Blazor:
 
    # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-   1 \. Installieren Sie [Visual Studio für Mac](https://visualstudio.microsoft.com/vs/mac/). Wechseln [Sie zum Aktualisierungs Kanal, um die Vorschau anzuzeigen](/visualstudio/mac/install-preview).
+   1 \. Installieren Sie [Visual Studio für Mac](https://visualstudio.microsoft.com/vs/mac/).
 
    2 \. Wählen Sie Datei > **neue** Projekt **Mappe** aus, oder erstellen Sie ein **Neues Projekt**.
 
@@ -135,7 +135,7 @@ Beginnen Sie mit Blazor:
 
 1. Installieren Sie optional die Vorlage [Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) :
    * Installieren Sie das [.net Core 3,1-oder spätere SDK (Vorschauversion)](https://dotnet.microsoft.com/download/dotnet-core/3.1).
-   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. [Microsoft. aspnetcore.Blazor. Das Vorlagen](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) Paket verfügt über eine Vorschauversion, während sich Blazor Webassembly in der Vorschau Phase befindet.
+   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. [Microsoft.aspnetcore.Blazor.Das Vorlagen](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) Paket verfügt über eine Vorschauversion, während sich Blazor Webassembly in der Vorschau Phase befindet.
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview4.19579.2
@@ -238,7 +238,7 @@ Beginnen Sie mit Blazor:
 
 Auf den Registerkarten in der Rand Leiste sind mehrere Seiten verfügbar:
 
-* Startseite
+* -Startseite
 * Zähler
 * Abrufen von Daten
 
@@ -253,7 +253,7 @@ Eine Anforderung für `/counter` im Browser, wie von der `@page`-Direktive angeg
 Jedes Mal, wenn die Schaltfläche " **Click me** " ausgewählt wird:
 
 * Das `onclick` Ereignis wird ausgelöst.
-* Die `IncrementCount` -Methode wird aufgerufen.
+* Die `IncrementCount`-Methode wird aufgerufen.
 * Der `currentCount` wird inkrementiert.
 * Die Komponente wird wieder gerendert.
 
@@ -288,7 +288,7 @@ Führen Sie die App aus. Die `Index` Komponente verfügt über einen eigenen Wer
 
 <xref:tutorials/first-blazor-app>
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:blazor/templates>
 * <xref:signalr/introduction>
