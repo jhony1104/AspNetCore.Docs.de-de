@@ -9,12 +9,12 @@ ms.date: 11/28/2018
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 6506430202870ba9de2f8eb6f33d79c7c1fbbbd4
-ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
+ms.openlocfilehash: 8e7b7596fcfe2d6b7150fe1ab09a7ab1dc4a2e47
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75608066"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952120"
 ---
 # <a name="aspnet-core-opno-locsignalr-hosting-and-scaling"></a>ASP.net Core SignalR Hosting und Skalierung
 
@@ -86,7 +86,7 @@ Weitere Informationen finden Sie in der [Dokumentation zu Azure SignalR Service]
 
 ![Redis-Backplane, von einem Server an alle Clients gesendete Nachrichten](scale/_static/redis-backplane.png)
 
-Die redis-Rückwand ist der empfohlene Ansatz für horizontales Skalieren für apps, die in ihrer eigenen Infrastruktur gehostet werden. Azure SignalR Service ist aufgrund der Verbindungs Latenz zwischen Ihrem Rechenzentrum und einem Azure-Rechenzentrum nicht die praktische Option für den Einsatz in der Produktion mit lokalen apps.
+Die redis-Rückwand ist der empfohlene Ansatz für horizontales Skalieren für apps, die in ihrer eigenen Infrastruktur gehostet werden. Wenn zwischen Ihrem Rechenzentrum und einem Azure-Rechenzentrum eine beträchtliche Verbindungs Wartezeit vorliegt, ist der Azure SignalR-Dienst möglicherweise keine praktische Option für lokale apps mit geringer Latenz oder hohen Durchsatzanforderungen.
 
 Die zuvor notierten Vorteile von Azure SignalR Service sind Nachteile der redis-Backplane:
 

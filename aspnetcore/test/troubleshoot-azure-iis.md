@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Probleme mit Azure App Service und Internetin
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/20/2019
+ms.date: 01/10/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: b0f5d44f153a095a6108a12ee91f4cc46fe0a0de
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 23c90c33d197d26d1c4ad758449e318e20ef3760
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829009"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952153"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung ASP.net Core auf Azure App Service und IIS
 
@@ -433,7 +433,7 @@ Weitere Informationen finden Sie im [Abschnitt Failed request traces (Ablaufverf
 
 Greifen Sie auf das Anwendungsereignisprotokoll zu:
 
-1. Öffnen Sie das Menü „Start“, suchen Sie nach der **Ereignisanzeige**, und wählen Sie anschließend die App **Ereignisanzeige** aus.
+1. Öffnen Sie das Startmenü, suchen Sie nach *Ereignisanzeige*, und wählen Sie die **Ereignisanzeige** -App aus.
 1. Öffnen Sie unter **Ereignisanzeige** den Knoten **Windows-Protokolle**.
 1. Wählen Sie **Anwendung** aus, um das Anwendungsereignisprotokoll zu öffnen.
 1. Suchen Sie nach Fehlern, die mit der fehlerhaften App im Zusammenhang stehen. Fehler weisen in der Spalte *Quelle* den Wert *IIS AspNetCore-Modul* oder *IIS Express AspNetCore-Modul* auf.
@@ -597,10 +597,10 @@ Ein Speicherabbild kann mithilfe mehrerer Ansätze analysiert werden. Weitere In
 
 ## <a name="clear-package-caches"></a>Löschen von Paket Caches
 
-In manchen Fällen tritt ein funktionierender App direkt nach dem Upgrade der .net Core SDK auf dem Entwicklungs Computer oder dem Ändern der Paketversionen in der APP auf. In einigen Fällen können inkohärente Pakete eine App beschädigen, wenn größere Upgrades durchgeführt werden. Die meisten dieser Probleme können durch Befolgung der folgenden Anweisungen behoben werden:
+Eine funktionierende App schlägt möglicherweise unmittelbar nach dem Upgrade des .net Core SDK auf dem Entwicklungs Computer oder beim Ändern der Paketversionen innerhalb der APP fehl. In einigen Fällen können inkohärente Pakete eine App beschädigen, wenn größere Upgrades durchgeführt werden. Die meisten dieser Probleme können durch Befolgung der folgenden Anweisungen behoben werden:
 
 1. Löschen Sie die Ordner *bin* und *obj*.
-1. Löschen Sie die Paket Caches, indem Sie `dotnet nuget locals all --clear` über eine Befehlsshell ausführen.
+1. Löschen Sie die Paket Caches, indem Sie in einer Befehlsshell [dotnet nuget Locals alle--Clear](/dotnet/core/tools/dotnet-nuget-locals) ausführen.
 
    Das Löschen von Paket Caches kann auch mit dem [nuget. exe](https://www.nuget.org/downloads) -Tool und dem Ausführen des Befehls `nuget locals all -clear`erfolgen. *nuget.exe* ist wird unter dem Windows Desktop-Betriebssystem nicht gebündelt installiert und muss separat von der [NuGet-Website](https://www.nuget.org/downloads) abgerufen werden.
 

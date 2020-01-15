@@ -9,12 +9,12 @@ ms.date: 07/05/2019
 no-loc:
 - Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: 47027033c0b7130f2d38d22c02a54945b2cc31b3
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 07e2791e5b26975c71323f8cb41a4b0fbe0cdf11
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358912"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952138"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>Hosting von ASP.net Core Images mit docker über HTTPS
 
@@ -43,7 +43,7 @@ Für produktionscerts:
 * Das `dotnet dev-certs` Tool ist nicht erforderlich.
 * Zertifikate müssen nicht an dem Speicherort gespeichert werden, der in den Anweisungen verwendet wird. Jeder Speicherort sollte funktionieren, obwohl das Speichern von Zertifikaten innerhalb Ihres Website Verzeichnisses nicht empfohlen wird.
 
-Die Anweisungen Volume einbinden von Zertifikaten in Containern. Sie können Zertifikate in Container Images mit einem `COPY`-Befehl in einer *dockerfile-Datei*hinzufügen. Das Kopieren von Zertifikaten in ein Abbild wird aus den folgenden Gründen nicht empfohlen:
+Die Anweisungen im folgenden Abschnitt enthalten Informationen zum Einbinden von Zertifikaten in Container mithilfe der `-v` Befehlszeilenoption von Docker. Sie können Zertifikate in Container Images mit einem `COPY`-Befehl in einer *dockerfile-Datei*hinzufügen, dies wird jedoch nicht empfohlen. Das Kopieren von Zertifikaten in ein Abbild wird aus den folgenden Gründen nicht empfohlen:
 
 * Es ist schwierig, das gleiche Image für Tests mit Entwickler Zertifikaten zu verwenden.
 * Es ist schwierig, das gleiche Image für das Hosting mit Produktions Zertifikaten zu verwenden.
