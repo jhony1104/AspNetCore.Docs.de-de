@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das 
 ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 7e02a21361e0e2148b29a3ae0f1ba25e68239e13
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1066f4ce104e507abe63302fd3523a3a7a8dfde9
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881117"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828242"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -96,7 +96,7 @@ Im folgenden Code wird <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExt
 
 [!code-csharp[](areas/samples/MVCareas/StartupMapAreaRoute.cs?name=snippet&highlight=18-27)]
 
-Wenn `MapAreaRoute` mit ASP.NET Core 2.2 verwendet werden soll, sehen Sie sich diesen [GitHub-Artikel](https://github.com/aspnet/AspNetCore/issues/7772) an.
+Wenn `MapAreaRoute` mit ASP.NET Core 2.2 verwendet werden soll, sehen Sie sich diesen [GitHub-Artikel](https://github.com/dotnet/AspNetCore/issues/7772) an.
 
 Weitere Informationen finden Sie im Artikel [Routing zu Controlleraktionen in ASP.NET Core](xref:mvc/controllers/routing#areas).
 
@@ -120,7 +120,7 @@ Um ein gemeinsames Layout für die gesamte App freizugeben, verschieben Sie *_Vi
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-An ihrem Standardspeicherort gilt die Datei */Views/_ViewImports.cshtml* nicht für Bereiche. Um allgemeine [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro), `@using` oder `@inject` in Ihrem Bereich zu verwenden, stellen Sie sicher, dass eine ordnungsgemäße Datei *_ViewImports.cshtml* [für Ihre Bereichsansichten gilt](xref:mvc/views/layout#importing-shared-directives). Wenn Sie das gleiche Verhalten in allen Ansichten wünschen, verschieben Sie */Views/_ViewImports.cshtml* in den Anwendungsstamm.
+An ihrem Standardspeicherort gilt die Datei */Views/_ViewImports.cshtml* nicht für Bereiche. Um allgemeine [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro), `@using` oder `@inject` in Ihrem Bereich zu verwenden, stellen Sie sicher, dass eine ordnungsgemäße Datei *_ViewImports.cshtml*[für Ihre Bereichsansichten gilt](xref:mvc/views/layout#importing-shared-directives). Wenn Sie das gleiche Verhalten in allen Ansichten wünschen, verschieben Sie */Views/_ViewImports.cshtml* in den Anwendungsstamm.
 
 <a name="rename"></a>
 

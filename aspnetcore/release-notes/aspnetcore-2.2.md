@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 8995a514ea2e5016da85952d0f0beaf396a5d639
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 97deafd520926476f7653fc3de40d577b394734b
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880850"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829126"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Neuerungen in ASP.NET Core 2.2
 
@@ -119,4 +119,4 @@ Weitere Informationen finden Sie beim [Pull Request, durch den diese Verbesserun
 
 ## <a name="additional-information"></a>Zusätzliche Informationen
 
-Die vollständige Liste der Änderungen finden Sie in den Versionshinweisen zu [ASP.NET Core 2.2](https://github.com/aspnet/Home/releases/tag/2.2.0).
+Die vollständige Liste der Änderungen finden Sie in den Versionshinweisen zu [ASP.NET Core 2.2](https://github.com/dotnet/aspnetcore/releases/tag/2.2.0).

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie die Datei „web.config“ beim Veröffentlic
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: d28c362a200ad433e316bc1af710231a169a30a4
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: ef627de70c6aea44962d2187c4d401baab6557ae
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007316"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952048"
 ---
 # <a name="transform-webconfig"></a>Transformieren von web.config
 
@@ -182,5 +182,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Syntax der Web.config-Transformation für die Bereitstellung von Webanwendungsprojekten](https://go.microsoft.com/fwlink/?LinkId=301874)
-* [Syntax der Web.config-Transformation für die Bereitstellung von Webanwendungsprojekten mit Visual Studio](https://docs.microsoft.com/previous-versions/aspnet/dd465326(v=vs.110))
+* [Syntax der Web.config-Transformation für die Bereitstellung von Webanwendungsprojekten](/previous-versions/dd465326(v=vs.100))
+* [Syntax der Web.config-Transformation für die Bereitstellung von Webanwendungsprojekten mit Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

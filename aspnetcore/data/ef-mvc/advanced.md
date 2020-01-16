@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: d4a2aad6d93cc9a53c730323620de59fead6d5ab
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: abea9b189861954533b24cb73650af41952d1a86
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259591"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914112"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core
 
@@ -31,7 +31,7 @@ In diesem Tutorial:
 > * Informationen zum EF Core-Quellcode und zu Entwicklungsplänen
 > * Informationen zum Verwenden dynamischer LINQs zum Vereinfachen des Codes
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [Implementieren von Vererbung](inheritance.md)
 
@@ -173,7 +173,7 @@ Entity Framework bestimmt wie eine Entität geändert wurde (und welche Updates 
 
 * ChangeTracker.Entries
 
-Wenn Sie eine große Anzahl von Entitäten überwachen und eine dieser Methoden oft in einer Schleife aufrufen, erhalten Sie möglicherweise erhebliche Leistungssteigerungen durch vorübergehendes Deaktivieren der automatischen Änderungserkennung mithilfe der `ChangeTracker.AutoDetectChangesEnabled`-Eigenschaft. Beispiel:
+Wenn Sie eine große Anzahl von Entitäten überwachen und eine dieser Methoden oft in einer Schleife aufrufen, erhalten Sie möglicherweise erhebliche Leistungssteigerungen durch vorübergehendes Deaktivieren der automatischen Änderungserkennung mithilfe der `ChangeTracker.AutoDetectChangesEnabled`-Eigenschaft. Zum Beispiel:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -181,7 +181,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>EF Core-Quellcode und Entwicklungspläne
 
-Die Quelle von Entity Framework Core befindet sich unter [https://github.com/aspnet/EntityFrameworkCore](https://github.com/aspnet/EntityFrameworkCore). Das EF Core-Repository enthält über Nacht erstellte Builds, Problemverfolgung, Featurespezifikationen, Notizen der Designbesprechungen und [die Roadmap für künftige Entwicklungen](https://github.com/aspnet/EntityFrameworkCore/wiki/Roadmap). Sie können Fehler finden oder protokollieren und beitragen.
+Die Quelle von Entity Framework Core befindet sich unter [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore). Das EF Core-Repository enthält über Nacht erstellte Builds, Problemverfolgung, Featurespezifikationen, Notizen der Designbesprechungen und [die Roadmap für künftige Entwicklungen](https://github.com/dotnet/efcore/wiki/Roadmap). Sie können Fehler finden oder protokollieren und beitragen.
 
 Obwohl der Quellcode Open Source ist, wird Entity Framework Core als ein Microsoft-Produkt vollständig unterstützt. Das Microsoft Entity Framework-Team überprüft, welche Beiträge akzeptiert werden. Es testet alle Codeänderungen, um die Qualität jedes Release zu garantieren.
 
@@ -243,7 +243,7 @@ dotnet ef database drop
 
 Fehlermeldung:
 
-> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig ist und dass SQL Server für Remoteverbindungen konfiguriert ist. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26: Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz)
+> Ein netzwerkbezogener oder instanzspezifischer Fehler beim Herstellen einer Verbindung mit SQL Server. Der Server wurde nicht gefunden oder es konnte nicht auf ihn zugegriffen werden. Stellen Sie sicher, dass der Instanzname richtig und SQL Server so konfiguriert ist, das Remoteverbindungen zulässig sind. (Anbieter: SQL-Netzwerkschnittstellen, Fehler: 26: Fehler beim Suchen des angegebenen Servers/der angegebenen Instanz)
 
 Projektmappe:
 
