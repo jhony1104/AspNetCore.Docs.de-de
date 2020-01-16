@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Hostingumgebungen einrichten und ASP.NET Core
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/index
-ms.openlocfilehash: 8c7c131ca328f3118c45e822d6d5c86f0d44001f
-ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
+ms.openlocfilehash: ffc1f0b649e24e5e4a0bca2fc36a0b0c25460238
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74803265"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951799"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Hosten und Bereitstellen von ASP.NET Core
 
@@ -77,6 +77,10 @@ Informationen zu Bereitstellungen zu Internetinformationsdiensten (IIS) mit von 
 
 Weitere Informationen zur Konfiguration des Hostings von ASP.NET Core-Apps in einer Webfarmumgebung (z.B. Bereitstellen mehrerer App-Instanzen zur besseren Skalierbarkeit) finden Sie unter <xref:host-and-deploy/web-farm>.
 
+## <a name="host-on-docker"></a>Hosten auf Docker
+
+Weitere Informationen finden Sie unter <xref:host-and-deploy/docker/index>.
+
 ::: moniker range=">= aspnetcore-2.2"
 
 ## <a name="perform-health-checks"></a>Ausführen von Integritätsprüfungen
@@ -87,7 +91,5 @@ Verwenden Sie Middleware für die Integritätsprüfung, um Integritätsprüfunge
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:host-and-deploy/docker/index>
 * <xref:test/troubleshoot>
 * [Hosten von ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)
-
