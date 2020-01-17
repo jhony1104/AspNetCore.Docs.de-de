@@ -5,14 +5,14 @@ description: Erfahren Sie, inwiefern das Routing mit ASP.NET Core für das Zuord
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/24/2019
+ms.date: 12/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: be4493cc927bd5437a2c9dab00b6a555756195bb
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: 9780183f8f9bc322f73d058b3cab7f8c10f7cd5f
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416136"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354741"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Ryan Nowak](https://github.com/rynowak), [Steve Smith](https://ardalis.com/
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Beim Routing werden Anforderungs-URIs Endpunkten zugeordnet und Anforderungen an diese Endpunkte weitergeleitet. Routen werden in der App definiert und beim Start der App konfiguriert. Eine Route kann optional Werte aus der URL extrahieren, die in der Anforderung enthalten ist. Diese Werte können anschließend für die Verarbeitung der Anforderung verwendet werden. Mithilfe von Routeninformationen aus der App lassen sich durch das Routing URLs generieren, die Endpunkten zugeordnet werden.
+Beim Routing werden Anforderungs-URIs Endpunkten zugeordnet und Anforderungen an diese Endpunkte weitergeleitet. Routen werden in der App definiert und beim Start der App konfiguriert. Eine Route kann optional Werte aus der URL extrahieren, die in der Anforderung enthalten ist. Diese Werte können anschließend für die Verarbeitung der Anforderung verwendet werden. Mithilfe von Routeninformationen aus der App lassen sich durch das Routing URLs generieren, die Endpunkten zugeordnet werden. Viele Apps brauchen über die von den Vorlagen bereitgestellten hinaus keine Routen hinzuzufügen. Die ASP.NET Core-Vorlagen für Controller und Razor Pages konfigurieren Routenendpunkte. Wenn Sie benutzerdefinierte Routenendpunkte hinzufügen müssen, können die benutzerdefinierten Endpunkte zusätzlich zu den von Vorlagen generierten Routenendpunkten konfiguriert werden.
 
 > [!IMPORTANT]
 > In diesem Artikel wird das Low-Level-Routing in ASP.NET Core beschrieben. Weitere Informationen zum Routing mit ASP.NET Core MVC finden Sie unter <xref:mvc/controllers/routing>. Weitere Informationen zu Routingkonventionen in Razor Pages finden Sie unter <xref:razor-pages/razor-pages-conventions>.
@@ -115,7 +115,7 @@ Die `GetPath*`-Methoden sind `Url.Action` und `Url.Page` in der Hinsicht ähnlic
 
 Die von <xref:Microsoft.AspNetCore.Routing.LinkGenerator> bereitgestellten Methoden unterstützen die Standardfunktionen zur Generierung von Links für jeden beliebigen Adresstypen. Am praktischsten ist es, die API zur Linkgenerierung mit Erweiterungsmethoden zu verwenden, die Vorgänge für einen bestimmten Adresstypen ausführen.
 
-| Erweiterungsmethode | BESCHREIBUNG |
+| Erweiterungsmethode | Beschreibung |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generiert einen URI mit einem absoluten Pfad, der auf den angegebenen Werten basiert. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generiert einen absoluten URI, der auf den angegebenen Werten basiert.             |
@@ -126,6 +126,22 @@ Die von <xref:Microsoft.AspNetCore.Routing.LinkGenerator> bereitgestellten Metho
 > * Verwenden Sie `GetUri*`-Erweiterungsmethoden in App-Konfigurationen, die den `Host`-Header von eingehenden Anforderungen nicht überprüfen, mit Bedacht. Wenn der `Host`-Header von eingehenden Anforderungen nicht überprüft wird, können nicht vertrauenswürdige Anforderungseingaben zurück an den Client in URIs einer Ansicht bzw. Seite zurückgesendet werden. Es wird empfohlen, dass alle Produktions-Apps ihren Server so konfigurieren, dass der `Host`-Header auf bekannte gültige Werte überprüft wird.
 >
 > * Verwenden Sie <xref:Microsoft.AspNetCore.Routing.LinkGenerator> in Kombination mit `Map` oder `MapWhen` in Middleware mit Bedacht. `Map*` ändert den Basispfad der ausgeführten Anforderung. Dies beeinflusst die Ausgabe der Linkgenerierung. Für alle <xref:Microsoft.AspNetCore.Routing.LinkGenerator>-APIs ist die Angabe eines Basispfads zulässig. Geben Sie immer einen leeren Basispfad an, um den Einfluss von `Map*` auf die Linkgenerierung rückgängig zu machen.
+
+## <a name="endpoint-routing"></a>Endpunktrouting
+
+* Ein Routenendpunkt verfügt über eine Vorlage, Metadaten und einen Anforderungsdelegat, der die Antwort des Endpunkts bedient. Die Metadaten werden zur Implementierung von übergreifenden Belangen verwendet, die auf Richtlinien und der Konfiguration basieren, die den einzelnen Endpunkten angefügt sind. So kann beispielsweise eine Autorisierungsmiddleware die Erfassung der Metadaten des Endpunkts für eine [Autorisierungsrichtlinie](xref:security/authorization/policies#applying-policies-to-mvc-controllers) abfragen.
+* Endpunktrouting wird mithilfe von zwei Erweiterungsmethoden in Middleware integriert:
+  * [UseRouting](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*) fügt der Middlewarepipeline Routenzuordnung hinzu. Es muss vor jeder routingabhängigen Middleware wie Autorisierung, Endpunktausführung usw. stehen.
+  * [UseEndpoints](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*) fügt der Middlewarepipeline Endpunktausführung hinzu. Es führt den Anforderungsdelegat aus, der die Antwort des Endpunkts bedient.
+  In `UseEndpoints` können darüber hinaus Routenendpunkte konfiguriert werden, die von der App zugeordnet und ausgeführt werden können. Beispielsweise <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> und <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*>.
+* Apps verwenden die Hilfsmethoden von ASP.NET Core zum Konfigurieren ihrer Routen. ASP.NET Core-Frameworks bieten Hilfsmethoden wie <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> und `MapHub<THub>`. Außerdem gibt es Hilfsmethoden zum Konfigurieren Ihrer eigenen benutzerdefinierten Routenendpunkte: <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> und [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
+* Endpunktrouting unterstützt darüber hinaus das Ändern von Endpunkten nach dem Starten einer Anwendung. Um dies in Ihrer App oder in ASP.NET Core-Framework zu unterstützen, muss eine benutzerdefinierte <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> erstellt und registriert werden. Dies ist eine erweiterte Funktion, die normalerweise nicht benötigt wird. Endpunkte werden normalerweise beim Start konfiguriert und bleiben für die Lebensdauer der App statisch. Das Laden einer Routenkonfiguration aus einer Datei oder Datenbank beim Start ist nicht dynamisch.
+
+Der folgende Code veranschaulicht ein einfaches Beispiel für Endpunktrouting:
+
+[!code-csharp[](routing/samples/3.x/Startup.cs?name=snippet)]
+
+Weitere Informationen zum Endpunktrouting finden Sie unter [URL-Zuordnung](#url-matching) in diesem Dokument.
 
 ## <a name="endpoint-routing-differences-from-earlier-versions-of-routing"></a>Unterschiede beim Endpunktrouting im Vergleich zu früheren Routingversionen
 
@@ -349,7 +365,7 @@ Fügen Sie anschließend dem Dienstcontainer in `Startup.ConfigureServices` die 
 Routen müssen in der `Startup.Configure`-Methode konfiguriert werden. In der Beispiel-App werden die folgenden APIs verwendet:
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Nur HTTP-GET-Anforderungen werden abgeglichen.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> &ndash; Ordnet nut HTTP GET-Anforderungen zu.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -396,7 +412,7 @@ Bei einem URL-Muster, durch das ein Dateiname mit einer optionalen Erweiterung e
 
 Sie können ein (`*`) oder zwei (`**`) Sternchen als Präfix für einen Routenparameter verwenden, um eine Bindung zum verbleibenden Teil des URI herzustellen. Hierbei wird von *Catch-All*-Parametern gesprochen. Durch `blog/{**slug}` wird beispielsweise jeder URI ermittelt, der mit `/blog` beginnt und dahinter einen beliebigen Wert aufweist, der dann dem `slug`-Routenwert zugeordnet wird. Durch Catch-All-Parameter können auch leere Zeichenfolgen gefunden werden.
 
-Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }` `foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen. Um Trennzeichen für Roundtrips einsetzen zu können, verwenden Sie das Routenparameterpräfix `**`. Die Route `foo/{**path}` mit `{ path = "my/path" }` generiert `foo/my/path`.
+Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }``foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen. Um Trennzeichen für Roundtrips einsetzen zu können, verwenden Sie das Routenparameterpräfix `**`. Die Route `foo/{**path}` mit `{ path = "my/path" }` generiert `foo/my/path`.
 
 Routenparameter können über mehrere *Standardwerte* verfügen, die nach dem Parameternamen angegeben werden und durch ein Gleichheitszeichen (`=`) voneinander getrennt werden. Mit `{controller=Home}` wird beispielsweise `Home` als Standardwert für `controller` definiert. Der Standardwert wird verwendet, wenn kein Wert in der Parameter-URL vorhanden ist. Routenparameter sind optional, wenn am Ende des Parameternamens ein Fragezeichen (`?`) angefügt wird, z. B. `id?`. Der Unterschied zwischen optionalen Parametern und Routenparametern mit einem Standardwert besteht darin, dass mithilfe der letzteren immer ein Wert erzeugt wird. Ein optionaler Parameter verfügt demgegenüber nur dann über einen Wert, wenn ein solcher von der Anforderungs-URL bereitgestellt wird.
 
@@ -502,7 +518,7 @@ Einen regulären Ausdruck können Sie verwenden, um einen Parameter auf zulässi
 
 Zusätzlich zu den integrierten Routeneinschränkungen können benutzerdefinierte Routeneinschränkungen durch Implementierung der <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle erstellt werden. Die <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle enthält eine einzelne Methode, `Match`, die `true` zurückgibt, wenn die Einschränkung erfüllt wird, und andernfalls `false`.
 
-Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Beispiel:
+Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Zum Beispiel:
 
 ```csharp
 services.AddRouting(options =>
@@ -511,7 +527,7 @@ services.AddRouting(options =>
 });
 ```
 
-Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Beispiel:
+Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Zum Beispiel:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -528,7 +544,7 @@ Parametertransformatoren:
 * Nehmen den Routenwert des Parameters an und transformieren ihn in einen neuen Zeichenfolgenwert.
 * Haben die Verwendung des transformierten Wert in einem generierten Link zur Folge.
 
-Beispielsweise generiert ein benutzerdefinierter Parametertransformator `slugify` im Routenmuster `blog\{article:slugify}` mit `Url.Action(new { article = "MyTestArticle" })` `blog\my-test-article`.
+Beispielsweise generiert ein benutzerdefinierter Parametertransformator `slugify` im Routenmuster `blog\{article:slugify}` mit `Url.Action(new { article = "MyTestArticle" })``blog\my-test-article`.
 
 Um einen Parametertransformator in einem Routenmuster zu verwenden, konfigurieren Sie ihn zuerst mit <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> in `Startup.ConfigureServices`:
 
@@ -549,7 +565,7 @@ routes.MapRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-Mit der vorstehenden Route wird die Aktion `SubscriptionManagementController.GetAll()` dem URI `/subscription-management/get-all` zugeordnet. Ein Parametertransformator ändert nicht die zum Generieren eines Links verwendeten Routenwerte. Beispielsweise gibt `Url.Action("GetAll", "SubscriptionManagement")` `/subscription-management/get-all` aus.
+Mit der vorstehenden Route wird die Aktion `SubscriptionManagementController.GetAll()` dem URI `/subscription-management/get-all` zugeordnet. Ein Parametertransformator ändert nicht die zum Generieren eines Links verwendeten Routenwerte. Beispielsweise gibt `Url.Action("GetAll", "SubscriptionManagement")``/subscription-management/get-all` aus.
 
 ASP.NET Core bietet API-Konventionen für die Verwendung von Parametertransformatoren mit generierten Routen:
 
@@ -615,7 +631,7 @@ Die folgenden Links enthalten Informationen zum Konfigurieren von Endpunktmetada
 * Port: `*:5000` (entspricht Port 5000 mit einem beliebigen Host)
 * Host und Port: `www.domain.com:5000`, `*.domain.com:5000` (entspricht dem Host und Port)
 
-Es können mehrere Parameter mit `RequireHost` oder `[Host]` angegeben werden. Die Einschränkung gleicht die Hosts ab, die für einen der Parameter gültig sind. Beispielsweise entspricht `[Host("domain.com", "*.domain.com")]` `domain.com`, `www.domain.com` oder `subdomain.domain.com`.
+Es können mehrere Parameter mit `RequireHost` oder `[Host]` angegeben werden. Die Einschränkung gleicht die Hosts ab, die für einen der Parameter gültig sind. Beispielsweise entspricht `[Host("domain.com", "*.domain.com")]``domain.com`, `www.domain.com` oder `subdomain.domain.com`.
 
 Im folgenden Code wird `RequireHost` verwendet, um den angegebenen Host auf der Route anzufordern:
 
@@ -776,7 +792,7 @@ Die `GetPath*`-Methoden sind `Url.Action` und `Url.Page` in der Hinsicht ähnlic
 
 Die von <xref:Microsoft.AspNetCore.Routing.LinkGenerator> bereitgestellten Methoden unterstützen die Standardfunktionen zur Generierung von Links für jeden beliebigen Adresstypen. Am praktischsten ist es, die API zur Linkgenerierung mit Erweiterungsmethoden zu verwenden, die Vorgänge für einen bestimmten Adresstypen ausführen.
 
-| Erweiterungsmethode   | BESCHREIBUNG                                                         |
+| Erweiterungsmethode   | Beschreibung                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generiert einen URI mit einem absoluten Pfad, der auf den angegebenen Werten basiert. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generiert einen absoluten URI, der auf den angegebenen Werten basiert.             |
@@ -1010,7 +1026,7 @@ Fügen Sie anschließend dem Dienstcontainer in `Startup.ConfigureServices` die 
 Routen müssen in der `Startup.Configure`-Methode konfiguriert werden. In der Beispiel-App werden die folgenden APIs verwendet:
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Nur HTTP-GET-Anforderungen werden abgeglichen.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> &ndash; Ordnet nut HTTP GET-Anforderungen zu.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1057,7 +1073,7 @@ Bei einem URL-Muster, durch das ein Dateiname mit einer optionalen Erweiterung e
 
 Sie können ein (`*`) oder zwei (`**`) Sternchen als Präfix für einen Routenparameter verwenden, um eine Bindung zum verbleibenden Teil des URI herzustellen. Hierbei wird von *Catch-All*-Parametern gesprochen. Durch `blog/{**slug}` wird beispielsweise jeder URI ermittelt, der mit `/blog` beginnt und dahinter einen beliebigen Wert aufweist, der dann dem `slug`-Routenwert zugeordnet wird. Durch Catch-All-Parameter können auch leere Zeichenfolgen gefunden werden.
 
-Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }` `foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen. Um Trennzeichen für Roundtrips einsetzen zu können, verwenden Sie das Routenparameterpräfix `**`. Die Route `foo/{**path}` mit `{ path = "my/path" }` generiert `foo/my/path`.
+Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }``foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen. Um Trennzeichen für Roundtrips einsetzen zu können, verwenden Sie das Routenparameterpräfix `**`. Die Route `foo/{**path}` mit `{ path = "my/path" }` generiert `foo/my/path`.
 
 Routenparameter können über mehrere *Standardwerte* verfügen, die nach dem Parameternamen angegeben werden und durch ein Gleichheitszeichen (`=`) voneinander getrennt werden. Mit `{controller=Home}` wird beispielsweise `Home` als Standardwert für `controller` definiert. Der Standardwert wird verwendet, wenn kein Wert in der Parameter-URL vorhanden ist. Routenparameter sind optional, wenn am Ende des Parameternamens ein Fragezeichen (`?`) angefügt wird, z. B. `id?`. Der Unterschied zwischen optionalen Parametern und Routenparametern mit einem Standardwert besteht darin, dass mithilfe der letzteren immer ein Wert erzeugt wird. Ein optionaler Parameter verfügt demgegenüber nur dann über einen Wert, wenn ein solcher von der Anforderungs-URL bereitgestellt wird.
 
@@ -1163,7 +1179,7 @@ Einen regulären Ausdruck können Sie verwenden, um einen Parameter auf zulässi
 
 Zusätzlich zu den integrierten Routeneinschränkungen können benutzerdefinierte Routeneinschränkungen durch Implementierung der <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle erstellt werden. Die <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle enthält eine einzelne Methode, `Match`, die `true` zurückgibt, wenn die Einschränkung erfüllt wird, und andernfalls `false`.
 
-Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Beispiel:
+Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Zum Beispiel:
 
 ```csharp
 services.AddRouting(options =>
@@ -1172,7 +1188,7 @@ services.AddRouting(options =>
 });
 ```
 
-Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Beispiel:
+Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Zum Beispiel:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1189,7 +1205,7 @@ Parametertransformatoren:
 * Nehmen den Routenwert des Parameters an und transformieren ihn in einen neuen Zeichenfolgenwert.
 * Haben die Verwendung des transformierten Wert in einem generierten Link zur Folge.
 
-Beispielsweise generiert ein benutzerdefinierter Parametertransformator `slugify` im Routenmuster `blog\{article:slugify}` mit `Url.Action(new { article = "MyTestArticle" })` `blog\my-test-article`.
+Beispielsweise generiert ein benutzerdefinierter Parametertransformator `slugify` im Routenmuster `blog\{article:slugify}` mit `Url.Action(new { article = "MyTestArticle" })``blog\my-test-article`.
 
 Um einen Parametertransformator in einem Routenmuster zu verwenden, konfigurieren Sie ihn zuerst mit <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> in `Startup.ConfigureServices`:
 
@@ -1210,7 +1226,7 @@ routes.MapRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-Mit der vorstehenden Route wird die Aktion `SubscriptionManagementController.GetAll()` dem URI `/subscription-management/get-all` zugeordnet. Ein Parametertransformator ändert nicht die zum Generieren eines Links verwendeten Routenwerte. Beispielsweise gibt `Url.Action("GetAll", "SubscriptionManagement")` `/subscription-management/get-all` aus.
+Mit der vorstehenden Route wird die Aktion `SubscriptionManagementController.GetAll()` dem URI `/subscription-management/get-all` zugeordnet. Ein Parametertransformator ändert nicht die zum Generieren eines Links verwendeten Routenwerte. Beispielsweise gibt `Url.Action("GetAll", "SubscriptionManagement")``/subscription-management/get-all` aus.
 
 ASP.NET Core bietet API-Konventionen für die Verwendung von Parametertransformatoren mit generierten Routen:
 
@@ -1462,7 +1478,7 @@ Fügen Sie anschließend dem Dienstcontainer in `Startup.ConfigureServices` die 
 Routen müssen in der `Startup.Configure`-Methode konfiguriert werden. In der Beispiel-App werden die folgenden APIs verwendet:
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Nur HTTP-GET-Anforderungen werden abgeglichen.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> &ndash; Ordnet nut HTTP GET-Anforderungen zu.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1513,7 +1529,7 @@ Bei einem URL-Muster, durch das ein Dateiname mit einer optionalen Erweiterung e
 
 Sie können das Sternchen (`*`) als Präfix für einen Routenparameter verwenden, um eine Bindung zum verbleibenden Teil des URI herzustellen. Hierbei wird von einem *Catch-All*-Parameter gesprochen. Durch `blog/{*slug}` wird beispielsweise jeder URI ermittelt, der mit `/blog` beginnt und dahinter einen beliebigen Wert aufweist, der dann dem `slug`-Routenwert zugeordnet wird. Durch Catch-All-Parameter können auch leere Zeichenfolgen gefunden werden.
 
-Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }` `foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen.
+Der Catch-All-Parameter schützt die entsprechenden Zeichen (Escaping), wenn die Route verwendet wird, um eine URL, einschließlich Pfadtrennzeichen zu generieren (`/`). Z.B. generiert die Route `foo/{*path}` mit den Routenwerten `{ path = "my/path" }``foo/my%2Fpath`. Beachten Sie den umgekehrten Schrägstrich mit Escapezeichen.
 
 Routenparameter können über mehrere *Standardwerte* verfügen, die nach dem Parameternamen angegeben werden und durch ein Gleichheitszeichen (`=`) voneinander getrennt werden. Mit `{controller=Home}` wird beispielsweise `Home` als Standardwert für `controller` definiert. Der Standardwert wird verwendet, wenn kein Wert in der Parameter-URL vorhanden ist. Routenparameter sind optional, wenn am Ende des Parameternamens ein Fragezeichen (`?`) angefügt wird, z. B. `id?`. Der Unterschied zwischen optionalen Parametern und Routenparametern mit einem Standardwert besteht darin, dass mithilfe der letzteren immer ein Wert erzeugt wird. Ein optionaler Parameter verfügt demgegenüber nur dann über einen Wert, wenn ein solcher von der Anforderungs-URL bereitgestellt wird.
 
@@ -1617,7 +1633,7 @@ Einen regulären Ausdruck können Sie verwenden, um einen Parameter auf zulässi
 
 Zusätzlich zu den integrierten Routeneinschränkungen können benutzerdefinierte Routeneinschränkungen durch Implementierung der <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle erstellt werden. Die <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle enthält eine einzelne Methode, `Match`, die `true` zurückgibt, wenn die Einschränkung erfüllt wird, und andernfalls `false`.
 
-Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Beispiel:
+Zum Verwenden einer benutzerdefinierten <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> der App im Dienstcontainer der App registriert werden. Eine <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> ist ein Wörterbuch, das Routeneinschränkungsschlüssel <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Zum Beispiel:
 
 ```csharp
 services.AddRouting(options =>
@@ -1626,7 +1642,7 @@ services.AddRouting(options =>
 });
 ```
 
-Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Beispiel:
+Die Einschränkung kann dann auf die übliche Weise mit dem bei der Registrierung des Einschränkungstyps angegebenen Namen auf Routen angewendet werden. Zum Beispiel:
 
 ```csharp
 [HttpGet("{id:customName}")]

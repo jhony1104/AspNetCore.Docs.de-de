@@ -5,12 +5,12 @@ description: Fügen Sie ein Modell zu einer einfachen ASP.NET Core-App hinzu.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 2fac37e7069fb2a464d4de1da8912197f7adf8a8
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 5d4251a2577111324aa2cfb715c41e3ecad5a9d1
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761090"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722795"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Modells zu einer ASP.NET Core MVC-App
 
@@ -32,9 +32,13 @@ In diesem Tutorial schreiben Sie zuerst die Modellklassen. Anschließend erstell
 
 Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*>**Hinzufügen** > **Klasse**. Nennen Sie die Datei *Movie.cs*.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Fügen Sie dem Ordner *Models* eine Datei mit dem Namen *Movie.cs* hinzu.
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle* > **Hinzufügen** > **Neue Klasse** > **Leere Klasse**. Nennen Sie die Datei *Movie.cs*.
 
 ---
 
@@ -55,7 +59,7 @@ Das [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.dat
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
+Wählen Sie im Menü **Tools** **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
 
 ![PMC-Menü](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -67,9 +71,26 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 Mit dem vorangehenden Befehl wird der EF Core SQL Server-Anbieter hinzugefügt. Das Anbieterpaket installiert das EF Core-Paket als Abhängigkeit. Weitere Pakete werden im weiteren Verlauf des Tutorials automatisch im Gerüstbauschritt installiert.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+Wählen Sie im Menü **Projekt** **NuGet-Pakete verwalten** aus.
+
+Geben Sie in das Feld **Suchen** in der oberen rechten Ecke `Microsoft.EntityFrameworkCore.SQLite` ein, und drücken Sie die **EINGABETASTE**, um zu suchen. Wählen Sie das entsprechende NuGet-Paket aus, und klicken Sie auf die Schaltfläche **Paket hinzufügen**.
+
+![NuGet-Paket für Entity Framework Core hinzufügen](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
+
+Das Dialogfeld **Projekte auswählen** wird angezeigt, und das Projekt `MvcMovie` ist ausgewählt. Klicken Sie auf die Schaltfläche **OK**.
+
+Ein Dialogfeld **Zustimmen zur Lizenz** wird angezeigt. Überprüfen Sie die Lizenzen nach Wunsch, und klicken Sie dann auf die Schaltfläche **Akzeptieren**.
+
+Wiederholen Sie die Schritte oben, um die folgenden NuGet-Pakete zu installieren:
+ * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
+ * `Microsoft.EntityFrameworkCore.SqlServer`
+ * `Microsoft.EntityFrameworkCore.Design`
 
 ---
 
@@ -208,7 +229,7 @@ Verwenden Sie das Feature [Migrations](xref:data/ef-mvc/migrations) von EF Core,
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
+Wählen Sie im Menü **Tools** **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
 
 Geben Sie in der PMC die folgenden Befehle ein:
 
@@ -524,7 +545,7 @@ In diesem Abschnitt werden die folgenden Aufgaben ausgeführt:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Wählen Sie im Menü **Extras** die Option **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
+1. Wählen Sie im Menü **Tools** **NuGet-Paket-Manager** > **Paket-Manager-Konsole** (PMC) aus.
 
    ![PMC-Menü](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -689,6 +710,6 @@ Da das `Model`-Objekt stark typisiert ist (als ein `IEnumerable<Movie>`-Objekt),
 
 > [!div class="step-by-step"]
 > [Vorheriges Tutorial: Hinzufügen einer Ansicht](adding-view.md)
-> [Nächstes Tutorial: Arbeiten mit SQL](working-with-sql.md)
+> [Nächstes Tutorial: Arbeiten mit einer Datenbank](working-with-sql.md)
 
 ::: moniker-end
