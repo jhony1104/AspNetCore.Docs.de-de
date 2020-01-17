@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: c2397a535fa2c128f18d65323d0f4920af914205
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 34157a63e43372876a02a858741dfd3a83a063b1
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334218"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354809"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>Hinzufügen der Validierung zu einer Razor-Seite in ASP.NET Core
 
@@ -92,6 +92,8 @@ Testen Sie optional die serverseitige Validierung:
       return Page();
    }
   ```
+  
+Alternativ können Sie [die clientseitige Validierung auf dem Server deaktivieren](xref:mvc/models/validation#disable-client-side-validation).
 
 Der folgende Code zeigt einen Teil der Seite *Create.cshtml*, deren Gerüst Sie zuvor im Tutorial erstellt haben. Sie wird von den Seiten „Erstellen“ und „Bearbeiten“ zum Anzeigen des anfänglichen Formulars und zum erneuten Anzeigen des Formulars bei einem Fehler verwendet.
 

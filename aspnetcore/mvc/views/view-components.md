@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Ansichtskomponenten in ASP.NET Core verwendet werden und wie sie Apps hinzugefügt werden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2019
+ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: e6990368519857a27b291d7d565c09072f23f1b0
-ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
+ms.openlocfilehash: a4583d49eb0b42f1fa6e3d8c444d263cba34da79
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68670088"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356843"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -87,6 +87,14 @@ Der Suchpfad gilt für Projekte, die Controller und Ansichten sowie Razor Pages 
 Der Standardansichtsname für die Ansichtskomponente ist *Default*. Dies bedeutet, dass Ihre Ansichtsdatei normalerweise *Default.cshtml* heißt. Sie können einen anderen Ansichtsnamen angeben, wenn Sie die Ansichtskomponentenergebnisse erstellen oder die `View`-Methode aufrufen.
 
 Es wird empfohlen, dass Sie die Ansichtsdatei *Default.cshtml* nennen und den Pfad *View/Shared/Components/{Ansichtskomponentenname}/{Ansichtsname}* verwenden. Die Ansichtskomponente `PriorityList`, die in diesem Beispiel verwendet wird, verwendet *Views/Shared/Components/PriorityList/Default.cshtml* für die Ansichtskomponentenansicht.
+
+### <a name="customize-the-view-search-path"></a>Anpassen des Ansichtssuchpfads
+
+Um den Suchpfad für die Ansicht anzupassen, ändern Sie die <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats>-Sammlung von Razor. Um z. B. nach Ansichten im Pfad „/Components/{Name der Ansichtskomponente}/{Name der Ansicht}“ zu suchen, fügen Sie der Auflistung ein neues Element hinzu:
+
+[!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
+
+Im vorangehenden Code stellt der Platzhalter „{0}“ den Pfad „Components/{Name der Ansichtskomponente}/{Name der Ansicht}“ dar.
 
 ## <a name="invoking-a-view-component"></a>Aufrufen einer Ansichtskomponente
 

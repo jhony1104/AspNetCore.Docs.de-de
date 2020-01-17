@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie einen Controller zu einer einfachen ASP.NET C
 ms.author: riande
 ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 1c54959130f3a9959d4d4fdb8dcaa0d37ee2f046
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: fe0c1d3c066d6ab20387391e15c3a7cfe684c61e
+ms.sourcegitcommit: 077b45eceae044475f04c1d7ef2d153d7c0515a8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820052"
+ms.lasthandoff: 12/29/2019
+ms.locfileid: "75542707"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Controllers zu einer ASP.NET Core MVC-App
 
@@ -108,7 +108,7 @@ Führen Sie die App aus, und navigieren Sie zu:
 
 (Ersetzen Sie `{PORT}` durch Ihre Portnummer.) Sie können für `name` und `numtimes` in der URL verschiedene Werte ausprobieren. Das MVC-[Modellbindungssystem](xref:mvc/models/model-binding) ordnet automatisch die benannten Parameter aus der Abfragezeichenfolge auf der Adressleiste den Parametern der Methode zu. Weitere Informationen finden Sie unter [Modellbindung](xref:mvc/models/model-binding).
 
-![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
 In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden als [Abfragezeichenfolgen](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, auf das die Abfragezeichenfolgen folgen. Das Zeichen `&` trennt Abfragezeichenfolgen.
 
@@ -227,7 +227,7 @@ Führen Sie die App aus, und navigieren Sie zu:
 
 (Ersetzen Sie `{PORT}` durch Ihre Portnummer.) Sie können für `name` und `numtimes` in der URL verschiedene Werte ausprobieren. Das MVC-[Modellbindungssystem](xref:mvc/models/model-binding) ordnet automatisch die benannten Parameter aus der Abfragezeichenfolge auf der Adressleiste den Parametern der Methode zu. Weitere Informationen finden Sie unter [Modellbindung](xref:mvc/models/model-binding).
 
-![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
 In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden als [Abfragezeichenfolgen](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, auf das die Abfragezeichenfolgen folgen. Das Zeichen `&` trennt Abfragezeichenfolgen.
 

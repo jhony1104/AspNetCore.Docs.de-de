@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 4377d7d1895b80b3c98a5b480c0f42820f11fbb8
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 3bf930d19684e84365f0ff0255fccd2939fb3f39
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959111"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354925"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -36,7 +36,7 @@ Abschließend steht Ihnen eine Web-API zur Verfügung, die in einer relationalen
 
 In diesem Tutorial wird die folgende API erstellt:
 
-|API | BESCHREIBUNG | Anforderungstext | Antworttext |
+|API | Beschreibung | Anforderungstext | Antworttext |
 |--- | ---- | ---- | ---- |
 |GET /api/TodoItems | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
 |GET /api/TodoItems/{id} | Ein Element nach ID abrufen | Keine | To-do-Element|
@@ -48,7 +48,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ![Der Client ist das Feld ganz links. Er sendet eine Anforderung und erhält von der Anwendung (Feld auf der rechten Seite) eine Antwort. Im Anwendungsfeld stellen drei Felder den Controller, das Modell und die Datenzugriffsschicht dar. Die Anforderung geht im Controller der Anwendung ein, und Lese-/Schreibvorgänge erfolgen zwischen Controller und Datenzugriffsschicht. Das Modell wird serialisiert und in der Antwort an den Client zurückgegeben.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -102,13 +102,13 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Neue Projektmappe in macOS](first-web-api-mac/_static/sln.png)
 
-* Klicken Sie auf **.NET Core** > **App** > **API** > **Weiter**.
+* Wählen Sie **.NET Core** > **App** > **API** > **Weiter** aus.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
 * Wählen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren**für das **Zielframework** den Eintrag * *.NET Core 3.1* aus.
 
-* Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
+* Geben Sie für **Projektname***TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
   ![Dialogfeld „Konfiguration“](first-web-api-mac/_static/2.png)
 
@@ -204,7 +204,7 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
   ![Neuer Ordner](first-web-api-mac/_static/folder.png)
 
-* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und klicken Sie auf **Hinzufügen** > **Neue Datei** > **Allgemein** > **Leere Klasse**.
+* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und wählen Sie **Hinzufügen** > **Neue Datei** > **Allgemein** > **Leere Klasse** aus.
 
 * Nennen Sie die Klasse *TodoItem*, und klicken Sie dann auf **Neu**.
 
@@ -267,7 +267,7 @@ Der vorangehende Code:
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Controller*.
-* Klicken Sie auf **Hinzufügen** > **Neues Gerüstelement**.
+* Wählen Sie **Hinzufügen** > **Neues Gerüstelement** aus.
 * Klicken Sie auf **API-Controller mit Aktionen unter Verwendung von Entity Framework** und dann auf **Hinzufügen**.
 * Führen Sie im Dialogfeld **API-Controller mit Aktionen unter Verwendung von Entity Framework** folgende Schritte aus:
 
@@ -322,7 +322,7 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 * Starten Sie die Web-App.
 * Starten Sie Postman.
 * Deaktivieren Sie **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
-* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **File**>**Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
+* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter File > Settings (**Datei** > **Einstellungen**) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
     > [!WARNING]
     > Aktivieren Sie die Verifizierung des SSL-Zertifikats wieder, nachdem Sie den Controller getestet haben.
 
@@ -366,7 +366,7 @@ Diese Methoden implementieren zwei GET-Endpunkte:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser oder über Postman aufrufen. Beispiel:
+Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser oder über Postman aufrufen. Zum Beispiel:
 
 * [https://localhost:5001/api/TodoItems](https://localhost:5001/api/TodoItems)
 * [https://localhost:5001/api/TodoItems/1](https://localhost:5001/api/TodoItems/1)
@@ -451,8 +451,6 @@ Untersuchen Sie die `DeleteTodoItem`-Methode.
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
-Die `DeleteTodoItem`-Antwort lautet [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
-
 ### <a name="test-the-deletetodoitem-method"></a>Testen der DeleteTodoItem-Methode
 
 So löschen Sie mit Postman eine Aufgabe
@@ -463,7 +461,7 @@ So löschen Sie mit Postman eine Aufgabe
 
 ## <a name="call-the-web-api-with-javascript"></a>Aufrufen der Web-API mit JavaScript
 
-Eine Schritt-für-Schritt-Anleitung finden Sie im [Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript](xref:tutorials/web-api-javascript).
+Mehr dazu finden Sie im [-Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript](xref:tutorials/web-api-javascript).
 
 ::: moniker-end
 
@@ -487,7 +485,7 @@ Am Ende haben Sie eine Web-API, die in einer relationalen Datenbank gespeicherte
 
 In diesem Tutorial wird die folgende API erstellt:
 
-|API | BESCHREIBUNG | Anforderungstext | Antworttext |
+|API | Beschreibung | Anforderungstext | Antworttext |
 |--- | ---- | ---- | ---- |
 |GET /api/TodoItems | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
 |GET /api/TodoItems/{id} | Ein Element nach ID abrufen | Keine | To-do-Element|
@@ -499,7 +497,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ![Der Client ist das Feld ganz links. Er sendet eine Anforderung und erhält von der Anwendung (Feld auf der rechten Seite) eine Antwort. Im Anwendungsfeld stellen drei Felder den Controller, das Modell und die Datenzugriffsschicht dar. Die Anforderung geht im Controller der Anwendung ein, und Lese-/Schreibvorgänge erfolgen zwischen Controller und Datenzugriffsschicht. Das Modell wird serialisiert und in der Antwort an den Client zurückgegeben.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -547,13 +545,13 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
   ![Neue Projektmappe in macOS](first-web-api-mac/_static/sln.png)
 
-* Klicken Sie auf **.NET Core** > **App** > **API** > **Weiter**.
+* Wählen Sie **.NET Core** > **App** > **API** > **Weiter** aus.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](first-web-api-mac/_static/1.png)
   
 * Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von * *.NET Core 2.2*.
 
-* Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
+* Geben Sie für **Projektname***TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
   ![Dialogfeld „Konfiguration“](first-web-api-mac/_static/2.png)
 
@@ -609,7 +607,7 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
   ![Neuer Ordner](first-web-api-mac/_static/folder.png)
 
-* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und klicken Sie auf **Hinzufügen** > **Neue Datei** > **Allgemein** > **Leere Klasse**.
+* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und wählen Sie **Hinzufügen** > **Neue Datei** > **Allgemein** > **Leere Klasse** aus.
 
 * Nennen Sie die Klasse *TodoItem*, und klicken Sie dann auf **Neu**.
 
@@ -660,7 +658,7 @@ Der vorangehende Code:
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Controller*.
-* Klicken Sie auf **Hinzufügen** > **Neues Element**.
+* Wählen Sie **Hinzufügen** > **Neues Element** aus.
 * Wählen Sie im Dialogfeld **Neues Element hinzufügen** die Vorlage **API-Controllerklasse** aus.
 * Benennen Sie die Klasse *TodoController*, und wählen Sie **Hinzufügen** aus.
 
@@ -696,7 +694,7 @@ Diese Methoden implementieren zwei GET-Endpunkte:
 
 Halten Sie die App an, falls diese noch ausgeführt wird. Führen Sie diese dann noch mal aus, damit die letzten Änderungen übernommen werden.
 
-Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser aufrufen. Beispiel:
+Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser aufrufen. Zum Beispiel:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -748,7 +746,7 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **File**>**Settings** (Datei > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
+* Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter File > Settings (**Datei** > **Einstellungen**) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 

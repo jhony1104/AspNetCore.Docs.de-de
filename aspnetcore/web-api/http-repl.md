@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie das globale .NET Core-Tool HTTP REPL ver
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/02/2019
+ms.date: 12/11/2019
 uid: web-api/http-repl
-ms.openlocfilehash: c6e3ab5685b5bd0b154d20585fb0d187f81da641
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 34ec2b2eb511f33e1263cdad4a338183a3e4b83a
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717164"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356170"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -36,7 +36,7 @@ Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Gu
 
 [Sehen Sie sich die beispielhafte ASP.NET Core-Web-API an, oder laden Sie sie herunter ([Downloadanleitung](xref:index#how-to-download-a-sample))](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples), um dem Artikel zu folgen.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -134,7 +134,7 @@ Stellen Sie mithilfe des folgenden Befehls eine Verbindung mit einer Web-API her
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` ist der Basis-URI für die Web-API. Beispiel:
+`<ROOT URI>` ist der Basis-URI für die Web-API. Zum Beispiel:
 
 ```console
 httprepl https://localhost:5001
@@ -146,7 +146,7 @@ Alternativ können Sie den folgenden Befehl jederzeit ausführen, während HTTP 
 connect <ROOT URI>
 ```
 
-Beispiel:
+Zum Beispiel:
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -160,7 +160,7 @@ Der oben genannte connect-Befehl versucht, das Swagger-Dokument automatisch zu f
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-Beispiel:
+Zum Beispiel:
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -199,7 +199,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-Führen Sie alternativ den Befehl `ui` aus, um die Swagger-Benutzeroberflächenseite der Web-API in einem Browser zu öffnen. Beispiel:
+Führen Sie alternativ den Befehl `ui` aus, um die Swagger-Benutzeroberflächenseite der Web-API in einem Browser zu öffnen. Zum Beispiel:
 
 ```console
 https://localhost:5001/~ ui
@@ -243,7 +243,7 @@ Die *HTTPREPLPREFS-Datei* wird beim Start geladen und bei der Laufzeit nicht auf
 
 ### <a name="view-the-settings"></a>Anzeigen der Einstellungen
 
-Führen Sie den Befehl `pref get` aus, um die verfügbaren Einstellungen anzuzeigen. Beispiel:
+Führen Sie den Befehl `pref get` aus, um die verfügbaren Einstellungen anzuzeigen. Zum Beispiel:
 
 ```console
 https://localhost:5001/~ pref get
@@ -281,7 +281,7 @@ Wenn bestimmte Farbtasten nicht festgelegt sind, werden mehr generische Schlüss
 
 ### <a name="set-indentation-size"></a>Festlegen der Einzugsgröße
 
-Die Anpassung der Einzugsgröße für Antworten wird derzeit nur für JSON unterstützt. Der Standardgröße beträgt zwei Leerzeichen. Beispiel:
+Die Anpassung der Einzugsgröße für Antworten wird derzeit nur für JSON unterstützt. Der Standardgröße beträgt zwei Leerzeichen. Zum Beispiel:
 
 ```json
 [
@@ -370,7 +370,7 @@ Standardmäßig weist die HTTP-REPL eine Reihe von relativen Pfaden auf, die zum
 - */swagger.json*
 - */swagger/v1/swagger.json*
 
-Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Beispiel:
+Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Zum Beispiel:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -490,7 +490,7 @@ So führen Sie eine HTTP POST-Anforderung aus:
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Beispiel:
+    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Zum Beispiel:
 
     ```json
     {
@@ -585,7 +585,7 @@ So führen Sie eine HTTP PUT-Anforderung aus:
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Beispiel:
+    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Zum Beispiel:
 
     ```json
     {
@@ -690,8 +690,9 @@ So führen Sie eine HTTP DELETE-Anforderung aus:
         "data": "Strawberry"
       }
     ]
+    ```
 
-1. Run the `delete` command on an endpoint that supports it:
+1. Führen Sie den Befehl `delete` für einen Endpunkt aus, der ihn unterstützt:
 
     ```console
     https://localhost:5001/fruits~ delete 2
@@ -790,7 +791,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader festzulegen:
 
-* Legen Sie den Header inline mit der HTTP-Anforderung fest. Beispiel:
+* Legen Sie den Header inline mit der HTTP-Anforderung fest. Zum Beispiel:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -798,13 +799,13 @@ Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader fes
     
     Beim vorherigen Ansatz benötigt jeder eindeutige HTTP-Anforderungsheader eine eigene `-h`-Option.
 
-* Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Beispiel:
+* Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Zum Beispiel:
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Beispiel:
+    Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Zum Beispiel:
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -820,7 +821,7 @@ set header Authorization "bearer <TOKEN VALUE>"
 
 Um auf einen in Azure gehosteten Endpunkt zuzugreifen oder die [Azure-REST-API](/rest/api/azure/) zu verwenden, benötigen Sie ein Bearertoken. Führen Sie die folgenden Schritte aus, um über die [Azure CLI](/cli/azure/) ein Bearertoken für Ihr Azure-Abonnement zu erhalten. HTTP REPL legt das Beaertoken in einem HTTP-Anforderungsheader ab und ruft eine Liste der Azure App Service-Web-Apps ab.
 
-1. Anmelden bei Azure:
+1. Melden Sie sich bei Azure an:
 
     ```azcli
     az login
@@ -898,14 +899,14 @@ Standardmäßig wird die Anzeige der gesendeten HTTP-Anforderung unterdrückt. S
 
 ### <a name="enable-request-display"></a>Aktivieren der Anzeige von Anforderungen
 
-Zeigen Sie die gesendete HTTP-Anforderung an, indem Sie den Befehl `echo on` ausführen. Beispiel:
+Zeigen Sie die gesendete HTTP-Anforderung an, indem Sie den Befehl `echo on` ausführen. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-Nachfolgende HTTP-Anforderungen in der aktuellen Sitzung zeigen die Anforderungsheader an. Beispiel:
+Nachfolgende HTTP-Anforderungen in der aktuellen Sitzung zeigen die Anforderungsheader an. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ post
@@ -943,7 +944,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>Deaktivieren der Anzeige von Anforderungen
 
-Unterdrücken Sie die Anzeige der gesendeten HTTP-Anforderung, indem Sie den Befehl `echo off` ausführen. Beispiel:
+Unterdrücken Sie die Anzeige der gesendeten HTTP-Anforderung, indem Sie den Befehl `echo off` ausführen. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ echo off
@@ -952,7 +953,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Ausführen eines Skripts
 
-Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in einer Textdatei speichern. Die Befehle in der Datei haben das gleiche Format wie die manuell in der Befehlszeile ausgeführten Befehle. Die Befehle können mithilfe des Befehls `run` auf einmal ausgeführt werden. Beispiel:
+Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in einer Textdatei speichern. Die Befehle in der Datei haben das gleiche Format wie die manuell in der Befehlszeile ausgeführten Befehle. Die Befehle können mithilfe des Befehls `run` auf einmal ausgeführt werden. Zum Beispiel:
 
 1. Erstellen Sie eine Textdatei, die einige Befehle enthält, die jeweils in einer neuen Zeile stehen. Sie können die Datei *people-script.txt*, die folgende Befehle enthält, als Beispiel verwenden:
 
@@ -964,7 +965,7 @@ Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in
     get 1
     ```
 
-1. Führen Sie den Befehl `run` aus, und übergeben Sie den Pfad der Textdatei. Beispiel:
+1. Führen Sie den Befehl `run` aus, und übergeben Sie den Pfad der Textdatei. Zum Beispiel:
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt

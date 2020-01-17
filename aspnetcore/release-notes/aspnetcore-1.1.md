@@ -5,12 +5,12 @@ description: Informationen zu den neuen Features in ASP.NET Core 1.1.
 ms.author: riande
 ms.date: 12/18/2018
 uid: aspnetcore-1.1
-ms.openlocfilehash: 167842a7376a6bb0a88e6f41159730f076bb2bdb
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: 0b1c4eb467dd13a7654229b3ed76dd14e984e94b
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034719"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355228"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>Neuerungen in ASP.NET Core 1.1
 
@@ -29,7 +29,7 @@ Die folgenden Funktionen sind in ASP.NET Core 1.1 neu:
 
 ## <a name="choosing-between-versions-10-and-11-of-aspnet-core"></a>Wählen zwischen den Versionen 1.0 und 1.1 von ASP.NET Core
 
-ASP.NET Core 1.1 bietet mehr Funktionen als 1.0. Allgemeinen wird empfohlen, die neueste Version zu verwenden.
+ASP.NET Core 1.1 bietet mehr Funktionen als ASP.NET Core 1.0. Allgemeinen wird empfohlen, die neueste Version zu verwenden.
 
 ## <a name="additional-information"></a>Zusätzliche Informationen
 

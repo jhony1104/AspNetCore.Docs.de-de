@@ -5,12 +5,12 @@ description: Hier finden Sie Informationen zum Einstieg in ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/16/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0c8c59a5c59c8a70985dc8463c80f9569a00621f
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 901257efdfbc7b36249233745175f5ed253da2c7
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761236"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722868"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Erste Schritte mit ASP.NET Core MVC
 
@@ -34,19 +34,19 @@ Am Ende verfügen Sie über eine App, die Filmdaten verwalten und anzeigen kann.
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
@@ -94,15 +94,13 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
   ![Neue Projektmappe in macOS](./start-mvc/_static/new_project_vsmac.png)
 
-* Klicken Sie auf **.NET Core** > **App** > **Webanwendung (Model View Controller)** > **Weiter**.
+* Wählen Sie **.NET Core** > **App** > **Webanwendung (Model-View-Controller)** > **Weiter** aus.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag **.NET Core 3.0** aus.
+* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag **.NET Core 3.1** aus.
 
-<!-- 
-  ![macOS .NET Core 2.2 selection](./start-mvc/_static/new_project_22_vsmac.png)
--->
+  ![Auswahl für .NET Core 3.1 in macOS](./start-mvc/_static/new_project_31_vsmac.png)
 
 * Nennen Sie das Projekt **MvcMovie**, und wählen Sie dann **Erstellen** aus.
 
@@ -184,7 +182,7 @@ Am Ende verfügen Sie über eine App, die Filmdaten verwalten und anzeigen kann.
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -244,7 +242,7 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
   ![Neue Projektmappe in macOS](./start-mvc/_static/new_project_vsmac.png)
 
-* Klicken Sie auf **.NET Core** > **App** > **Webanwendung (Model View Controller)** > **Weiter**.
+* Wählen Sie **.NET Core** > **App** > **Webanwendung (Model-View-Controller)** > **Weiter** aus.
 
   ![Dialogfeld „Neue Projektmappe“ in macOS](./start-mvc/_static/new_project_mvc_vsmac.png)
 

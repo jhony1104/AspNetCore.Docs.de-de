@@ -1,21 +1,15 @@
-* Vertrauen Sie dem HTTPS-Entwicklungszertifikat, indem Sie den folgenden Befehl ausführen:
+In Visual Studio für Mac wird das folgende Popup angezeigt:
 
-    ```dotnetcli
-    dotnet dev-certs https --trust
-    ```
+![HTTPS-Entwicklungszertifikat nicht gefunden. Möchten Sie das Zertifikat installieren und ihm vertrauen?](~/getting-started/_static/trustCertMac.png)
 
-* Über den vorherigen Befehl wird die folgende Ausgabe angezeigt:
+Klicken Sie auf **Ja**, wenn Sie das Entwicklungszertifikat für vertrauenswürdig halten.
 
-    ```console
-    Trusting the HTTPS development certificate was requested. If the certificate 
-    is not already trusted we will run the following command:
-    'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain 
-    <<certificate>>'
-    This command might prompt you for your password to install the certificate on the 
-    system keychain.
-    The HTTPS developer certificate was generated successfully.
-    ```
+Das folgende Dialogfeld wird angezeigt:
 
-* Geben Sie bei Aufforderung den Benutzernamen und das Kennwort des Administrators ein.  Das Zertifikat wird nun installiert und als vertrauenswürdig eingestuft.
+![Dialogfeld „Sicherheitswarnung“](~/getting-started/_static/certMac.png)
 
-    Weitere Informationen finden Sie unter [Trust the ASP.NET Core HTTPS development certificate (Festlegen des ASP.NET Core-HTTPS-Entwicklungszertifikats als vertrauenswürdig)](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos).
+Geben Sie Ihr Kennwort ein, und wählen Sie **OK** aus.
+
+Klicken Sie auf **Ja**, wenn Sie zustimmen möchten, dass das Entwicklungszertifikat vertrauenswürdig ist.
+
+Weitere Informationen finden Sie unter [Trust the ASP.NET Core HTTPS development certificate (Festlegen des ASP.NET Core-HTTPS-Entwicklungszertifikats als vertrauenswürdig)](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos).
