@@ -2,19 +2,20 @@
 title: ASP.net Core Blazor Lebenszyklus
 author: guardrex
 description: Erfahren Sie, wie Sie den Lebenszyklus von Razor-Komponenten in ASP.net Core Blazor-Apps verwenden.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: e600e7c7a6a8c646a655520bd5c127f2cd662753
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: df5bb676df59b538179a69978040521c4ee78ed1
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944030"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146367"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.net Core Blazor Lebenszyklus
 
@@ -26,26 +27,23 @@ Das Blazor Framework umfasst synchrone und asynchrone Lebenszyklus Methoden. Üb
 
 ### <a name="component-initialization-methods"></a>Initialisierungs Methoden für Komponenten
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> Ausführen von Code, der eine Komponente initialisiert. Diese Methoden werden nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> werden aufgerufen, wenn die Komponente initialisiert wird, nachdem ihre ursprünglichen Parameter von der übergeordneten Komponente empfangen wurden. Verwenden Sie `OnInitializedAsync`, wenn die Komponente einen asynchronen Vorgang ausführt und nach Abschluss des Vorgangs aktualisiert werden soll. Diese Methoden werden nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird.
 
-Verwenden Sie zum Ausführen eines asynchronen Vorgangs `OnInitializedAsync` und das `await`-Schlüsselwort für den Vorgang:
-
-```csharp
-protected override async Task OnInitializedAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> Asynchrone Arbeit während der Initialisierung der Komponente muss während des `OnInitializedAsync` Lifecycle-Ereignisses stattfinden.
-
-Verwenden Sie für einen synchronen Vorgang `OnInitialized`:
+Überschreiben Sie für einen synchronen Vorgang `OnInitialized`:
 
 ```csharp
 protected override void OnInitialized()
 {
     ...
+}
+```
+
+Um einen asynchronen Vorgang auszuführen, überschreiben Sie `OnInitializedAsync`, und verwenden Sie das Schlüsselwort `await` für den Vorgang:
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    await ...
 }
 ```
 
@@ -70,7 +68,12 @@ Wenn `base.SetParametersAync` nicht aufgerufen wird, kann der benutzerdefinierte
 
 ### <a name="after-parameters-are-set"></a>Nachdem Parameter festgelegt wurden
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> werden aufgerufen, wenn eine Komponente Parameter von ihrem übergeordneten Element empfangen hat und die Werte Eigenschaften zugewiesen werden. Diese Methoden werden nach der Initialisierung der Komponente und jedes Mal, wenn neue Parameterwerte angegeben werden, ausgeführt:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> werden aufgerufen:
+
+* Wenn die Komponente initialisiert wird und ihren ersten Satz von Parametern von der übergeordneten Komponente empfangen hat.
+* Wenn die übergeordnete Komponente erneut gerendert wird und Folgendes bereitstellt:
+  * Nur bekannte primitive unveränderliche Typen, von denen sich mindestens ein Parameter geändert hat.
+  * Alle komplexen typisierten Parameter. Das Framework weiß nicht, ob die Werte eines komplexen typisierten Parameters intern geändert wurden, sodass der Parametersatz als geändert behandelt wird.
 
 ```csharp
 protected override async Task OnParametersSetAsync()
@@ -160,7 +163,7 @@ In der `FetchData` Komponente der Blazor Vorlagen wird `OnInitializedAsync` übe
 
 Wenn eine Komponente <xref:System.IDisposable>implementiert, wird die verwerfen- [Methode](/dotnet/standard/garbage-collection/implementing-dispose) aufgerufen, wenn die Komponente aus der Benutzeroberfläche entfernt wird. In der folgenden Komponente werden `@implements IDisposable` und die `Dispose`-Methode verwendet:
 
-```csharp
+```razor
 @using System
 @implements IDisposable
 

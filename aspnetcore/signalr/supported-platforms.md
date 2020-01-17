@@ -5,16 +5,16 @@ description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 9b9cf1d57d61c333c485f23b7ab952c66814d2aa
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 054965921c87c1a9be27e5ddaa8a87b0fa1f4113
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317470"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146497"
 ---
 # <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core SignalR unterstützten Plattformen
 
@@ -28,7 +28,7 @@ Der [JavaScript-Client](xref:signalr/javascript-client) wird auf nodejs 8 und h�
 
 | Browser                         | Version         |
 | ------------------------------- | --------------- |
-| Microsoft Edge                  | Aktuelle&dagger; |
+| Microsoft-Edge                  | Aktuelle&dagger; |
 | Mozilla Firefox                 | Aktuelle&dagger; |
 | Google Chrome; umfasst Android | Aktuelle&dagger; |
 | SK umfasst IOS            | Aktuelle&dagger; |
@@ -50,6 +50,6 @@ Der [Java-Client](xref:signalr/java-client) unterstützt Java 8 und höhere Vers
 
 Die folgenden Clients sind verfügbar, aber experimentell oder inoffiziell. Sie werden derzeit nicht unterstützt und sind möglicherweise nie.
 
-* [C++ent](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
+* [C++ent](https://github.com/aspnet/SignalR-Client-Cpp)
 
 * [SWIFT-Client](https://github.com/moozzyk/SignalR-Client-Swift)

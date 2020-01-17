@@ -3,14 +3,14 @@ title: Einführung in die Identität auf ASP.net Core
 author: rick-anderson
 description: Verwenden Sie die Identität mit einer ASP.net Core-app. Erfahren Sie, wie Sie Kenn Wort Anforderungen ("Requirements Digit", "Requirements dlength", "Requirements duniquechars" usw.) festlegen.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 01/15/2020
 uid: security/authentication/identity
-ms.openlocfilehash: d4cda43c417a0d8e1b78f8b59b7050debf017269
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 98fee261a741a20eed181ca5b9a4ebb693deeb63
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828229"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146510"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität auf ASP.net Core
 
@@ -213,6 +213,22 @@ Ein Beispiel zum Festlegen der Mindestanforderungen für das Kennwort finden Sie
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
 Weitere Informationen finden Sie unter [adddefaultidentity-Quelle](https://github.com/dotnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
+
+## <a name="prevent-publish-of-static-identity-assets"></a>Veröffentlichen statischer identitätsassets verhindern
+
+Um zu verhindern, dass statische Identitäts Ressourcen (Stylesheets und JavaScript-Dateien für die Identitäts Benutzeroberfläche) im Webstamm Verzeichnis veröffentlicht werden, fügen Sie der Projektdatei der APP die folgende `ResolveStaticWebAssetsInputsDependsOn`-Eigenschaft und `RemoveIdentityAssets` Ziel hinzu:
+
+```xml
+<PropertyGroup>
+  <ResolveStaticWebAssetsInputsDependsOn>RemoveIdentityAssets</ResolveStaticWebAssetsInputsDependsOn>
+</PropertyGroup>
+
+<Target Name="RemoveIdentityAssets">
+  <ItemGroup>
+    <StaticWebAsset Remove="@(StaticWebAsset)" Condition="%(SourceId) == 'Microsoft.AspNetCore.Identity.UI'" />
+  </ItemGroup>
+</Target>
+```
 
 ## <a name="next-steps"></a>Nächste Schritte
 

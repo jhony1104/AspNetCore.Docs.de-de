@@ -2,20 +2,20 @@
 title: Sichern von ASP.net Core Blazor-Server-apps
 author: guardrex
 description: Erfahren Sie, wie Sie Sicherheitsbedrohungen für Blazor Server-apps mindern.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 2d644b84b304a31ad0debc16164ad155c7f7da65
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: d87aac02137681e62cf8f5cbd4dc8b0be6f8431e
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944281"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146302"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-server-apps"></a>Sichern von ASP.net Core Blazor-Server-apps
 
@@ -206,7 +206,7 @@ Wenn Sie die `if (count < 3) { ... }` Prüfung innerhalb des Handlers hinzufüge
 
 ### <a name="guard-against-multiple-dispatches"></a>Schutz vor mehreren sendet
 
-Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit aufruft, z. b. das Abrufen von Daten aus einem externen Dienst oder einer externen Datenbank, empfiehlt sich die Verwendung eines Schutzes. Der Wächter kann verhindern, dass der Benutzer mehrere Vorgänge in die Warteschlange eingereiht, während der Vorgang durch visuelles Feedback ausgeführt wird. Der folgende Komponenten Code legt `isLoading` auf `true` fest, während `GetForecastAsync` Daten vom Server abruft. Obwohl `isLoading` `true`ist, wird die Schaltfläche in der Benutzeroberfläche deaktiviert:
+Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit asynchron aufruft (z. b. das Abrufen von Daten aus einem externen Dienst oder einer externen Datenbank), sollten Sie einen Wächter verwenden. Der Wächter kann verhindern, dass der Benutzer mehrere Vorgänge in die Warteschlange eingereiht, während der Vorgang durch visuelles Feedback ausgeführt wird. Der folgende Komponenten Code legt `isLoading` auf `true` fest, während `GetForecastAsync` Daten vom Server abruft. Obwohl `isLoading` `true`ist, wird die Schaltfläche in der Benutzeroberfläche deaktiviert:
 
 ```razor
 @page "/fetchdata"
@@ -230,6 +230,8 @@ Wenn ein Ereignis Rückruf einen Vorgang mit langer Ausführungszeit aufruft, z.
     }
 }
 ```
+
+Das im vorangehenden Beispiel gezeigte Wächter Muster funktioniert, wenn der Hintergrund Vorgang mit dem `async`-`await` Muster asynchron ausgeführt wird.
 
 ### <a name="cancel-early-and-avoid-use-after-dispose"></a>Früh abbrechen und Verwendung nach dem verwerfen vermeiden
 
@@ -292,7 +294,7 @@ Der Client seitige Fehler enthält nicht die Aufruf Liste und bietet keine Detai
 Ausführliche Fehler ermöglichen:
 
 * `CircuitOptions.DetailedErrors`.
-* `DetailedErrors`-Konfigurationsschlüssel. Legen Sie beispielsweise die `ASPNETCORE_DETAILEDERRORS`-Umgebungsvariable auf den Wert `true`fest.
+* `DetailedErrors` Konfigurationsschlüssel. Legen Sie beispielsweise die `ASPNETCORE_DETAILEDERRORS`-Umgebungsvariable auf den Wert `true`fest.
 
 > [!WARNING]
 > Das verfügbar machen von Fehlerinformationen für Clients im Internet stellt ein Sicherheitsrisiko dar, das immer vermieden werden sollte.

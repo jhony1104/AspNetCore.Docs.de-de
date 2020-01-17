@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 uid: security/samesite
-ms.openlocfilehash: 988069a66cc4772583444303948bff2e47ff4310
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: b344ed8f539979210980b3421659207edd513f32
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733985"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146432"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>Arbeiten mit SameSite-Cookies in ASP.net Core
 
@@ -36,7 +36,7 @@ Jede ASP.net Core Komponente, die Cookies ausgibt, muss entscheiden, ob SameSite
 
 Alle ASP.net Core Komponenten, die Cookies ausgeben, überschreiben die oben genannten Standardeinstellungen mit den Einstellungen, die für Ihre Szenarios Die überschriebenen vorangehenden Standardwerte haben sich nicht geändert.
 
-| Komponente | KS | Default |
+| Komponente | Cookie | Default |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions. Cookie](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
@@ -72,7 +72,7 @@ In ASP.net Core 3,0 und höher wurden die SameSite-Standardwerte geändert, um K
 
 Die SameSite-Unterstützung wurde zunächst in ASP.net Core in 2,0 mithilfe des [Entwurfs Standards 2016](https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1)implementiert. Der 2016-Standard war Opt-in. ASP.net Core durch Festlegen mehrerer Cookies auf `Lax` standardmäßig aktiviert. Nachdem mehrere Authentifizierungs [Probleme](https://github.com/aspnet/Announcements/issues/318) aufgetreten sind, wurde die meisten SameSite-Nutzung [deaktiviert](https://github.com/aspnet/Announcements/issues/348).
 
-Im November 2019 wurden Patches zum Aktualisieren von der 2016-Standard-auf den 2019-Standard ausgegeben. Der [2019-Entwurf der SameSite-Spezifikation](https://github.com/aspnet/Announcements/issues/390):
+Im November 2019 wurden [Patches](https://devblogs.microsoft.com/dotnet/net-core-November-2019/) zum Aktualisieren von der 2016-Standard-auf den 2019-Standard ausgegeben. Der [2019-Entwurf der SameSite-Spezifikation](https://github.com/aspnet/Announcements/issues/390):
 
 * Ist **nicht** abwärts kompatibel mit dem 2016-Entwurf. Weitere Informationen finden Sie [unter unterstützen älterer Browser](#sob) in diesem Dokument.
 * Gibt an, dass Cookies standardmäßig als `SameSite=Lax` behandelt werden.
@@ -141,8 +141,8 @@ Chrome 78 + liefert irreführende Ergebnisse, da eine vorübergehende Entschärf
 
 Google stellt keine älteren Chrome-Versionen zur Verfügung. Befolgen Sie die Anweisungen unter [Herunterladen von Chrom](https://www.chromium.org/getting-involved/download-chromium) , um ältere Versionen von Chrome zu testen. Laden Sie Chrome **nicht** von den von Ihnen bereitgestellten Links herunter, indem Sie nach älteren Versionen von Chrome suchen.
 
-* [Chrom 76 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/664998/)
-* [Chrom 74 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/638880/)
+* [Chromium 76 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/664998/)
+* [Chromium 74 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/638880/)
 
 ### <a name="test-with-safari"></a>Testen mit Safari
 
@@ -162,9 +162,10 @@ Die SameSite-Flags werden auf der Seite "`edge://flags/#same-site-by-default-coo
 
 ### <a name="test-with-electron"></a>Testen mit einem Elektron
 
-Zu den Versionen des-Elektrons zählen ältere Versionen von Chrom. Beispielsweise ist die Version des von Teams verwendeten Elektrons Chrom 66, das das ältere Verhalten zeigt. Sie müssen ihre eigenen Kompatibilitätstests mit der Version des von Ihrem Produkt verwendeten-Elektronen durchführen. Weitere Informationen finden Sie [unter Unterstützung älterer Browser](#sob) im folgenden Abschnitt.
+Zu den Electron-Versionen zählen ältere Versionen von Chromium. Beispielsweise ist die Version des von Teams verwendeten Elektrons Chrom 66, das das ältere Verhalten zeigt. Sie müssen ihre eigenen Kompatibilitätstests mit der Version des von Ihrem Produkt verwendeten-Elektronen durchführen. Weitere Informationen finden Sie [unter Unterstützung älterer Browser](#sob) im folgenden Abschnitt.
 
 ## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Chromium-Blog: Entwickler: machen Sie sich bereit für neue SameSite = None; Sichere Cookie-Einstellungen](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [Erläuterte SameSite-Cookies](https://web.dev/samesite-cookies-explained/)
+* [Patches vom November 2019](https://devblogs.microsoft.com/dotnet/net-core-November-2019/)
