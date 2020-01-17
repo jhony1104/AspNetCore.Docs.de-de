@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: a4583d49eb0b42f1fa6e3d8c444d263cba34da79
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 8df070b580b6125db6616b33a81f3ffebad69f3a
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75356843"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828918"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -337,7 +337,7 @@ Die Methodensignatur von `PriorityList.Invoke` ist synchron, aber Razor sucht na
 
 ## <a name="all-view-component-parameters-are-required"></a>Alle Parameter einer Ansichtskomponente sind erforderlich
 
-Jeder Parameter in einer Ansichtskomponente ist ein erforderliches Attribut. Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/aspnet/AspNetCore/issues/5011). Wenn ein Parameter ausgelassen wird, geschieht Folgendes:
+Jeder Parameter in einer Ansichtskomponente ist ein erforderliches Attribut. Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/dotnet/AspNetCore/issues/5011). Wenn ein Parameter ausgelassen wird, geschieht Folgendes:
 
 * Für die Signatur der `InvokeAsync`-Methode kann keine Übereinstimmung ermittelt werden. Die Methode wird daher nicht ausgeführt.
 * Das Markup des ViewComponent-Elements wird nicht gerendert.
