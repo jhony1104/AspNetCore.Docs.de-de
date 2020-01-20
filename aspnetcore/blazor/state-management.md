@@ -2,19 +2,20 @@
 title: ASP.net Core Blazor Zustands Verwaltung
 author: guardrex
 description: Erfahren Sie, wie Sie den Status in Blazor Server-apps beibehalten.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 7351ee2438c6adf675b8aa5e8ecdb1b2da7b4f23
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: ffb32a4f274a30f2a5ceed9cbf193285e85bab4c
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943926"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160144"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.net Core Blazor Zustands Verwaltung
 
@@ -241,17 +242,7 @@ Während der Vorab Anmeldung:
 
 Eine Möglichkeit, den Fehler zu beheben, besteht darin, die vorab Generierung zu deaktivieren. Dies ist normalerweise die beste Wahl, wenn die APP den browserbasierten Speicher stark nutzt. Das vorab Rendering erhöht die Komplexität und profitiert von der APP nicht, da die APP keine nützlichen Inhalte vorab bereitstellen kann, bis `localStorage` oder `sessionStorage` verfügbar sind.
 
-::: moniker range=">= aspnetcore-3.1"
-
 Öffnen Sie zum Deaktivieren der vorab Generierung die Datei *pages/_Host. cshtml* , und ändern Sie den `render-mode` des `Component`-taghilfsprogramms in `Server`.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-Um die vorab Generierung zu deaktivieren, öffnen Sie die Datei *pages/_Host. cshtml* , und ändern Sie den Aufrufen in `Html.RenderComponentAsync<App>(RenderMode.Server)`.
-
-::: moniker-end
 
 Die vorab Generierung ist möglicherweise nützlich für andere Seiten, die `localStorage` oder `sessionStorage`nicht verwenden. Verschieben Sie den Ladevorgang so lange, bis der Browser mit der Verbindung verbunden ist, um die vorab Ausführung zu aktivieren. Im folgenden finden Sie ein Beispiel für das Speichern eines Leistungs Zählers:
 

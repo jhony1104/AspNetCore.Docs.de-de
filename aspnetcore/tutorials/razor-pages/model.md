@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 0934c94236b507f2f57200ded4344a71c483d356
-ms.sourcegitcommit: 5fe17e54f7e4267a2fdecc6f9aa1d41166cecc34
+ms.openlocfilehash: fa5be8f3a222a7c186409faa2f48e43347df637a
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2020
-ms.locfileid: "75737857"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829295"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -48,7 +48,7 @@ Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*. Wählen Sie **Hi
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Klicken Sie im Lösungspad mit der rechten Maustaste auf das Projekt **RazorPagesMovie**, und wählen Sie dann **Hinzufügen** > **Neuer Ordner...** aus. Geben Sie dem Ordner den Namen *Modelle*.
-* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und klicken Sie auf **Hinzufügen** > **Neue Datei...**.
+* Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und klicken Sie auf **Hinzufügen** > **Neue Datei...** .
 * Führen Sie im Dialogfeld **Neue Datei** folgende Aktionen aus:
 
   * Klicken Sie im linken Bereich auf **Allgemein**.
@@ -125,7 +125,7 @@ Erstellen Sie den Ordner *Pages/Movies*:
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Pages* > **Hinzufügen** > **Neuer Ordner**.
 * Geben Sie dem Ordner den Namen *Movies*
 
-Klicken Sie mit der rechten Maustaste auf den Ordner *Pages/Movies* > **Hinzufügen** > **Neuer Gerüstbau...**.
+Klicken Sie mit der rechten Maustaste auf den Ordner *Pages/Movies* > **Hinzufügen** > **Neuer Gerüstbau...** .
 
 ![Abbildung der vorherigen Anweisungen.](model/_static/scaMac.png)
 
@@ -142,6 +142,16 @@ Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) h
 ![Abbildung der vorherigen Anweisungen.](model/_static/arpMac.png)
 
 Die Datei *appsettings.json* wird mit der Verbindungszeichenfolge aktualisiert, die zum Herstellen einer Verbindung mit einer lokalen Datenbank verwendet wird.
+
+### <a name="add-ef-tools"></a>Hinzufügen von EF-Tools
+
+Führen Sie den folgenden .NET Core-CLI-Befehl aus:
+
+```dotnetcli
+dotnet tool install --global dotnet-ef
+```
+
+Der vorangehende Befehl fügt die Entity Framework Core-Tools für die .NET Core-CLI hinzu.
 
 ---
 
@@ -461,7 +471,7 @@ Der Befehl `Update-Database` führt die Methode `Up` in der Datei *Migrations/\<
 
 ---
 > [!NOTE]
-> Mit den vorherigen Befehlen wird die folgende Warnung erstellt: „*Für die Spalte „Preis“ mit Dezimalwerten beim Entitätstyp „Movie“ wurde kein Typ angegeben. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Geben Sie den Spaltentyp von SQL-Server an, der durch „HasColumnType()“ sämtliche Werte unterstützen kann.*“ Sie können diese Warnung ignorieren, sie wird in einem zukünftigen Tutorial korrigiert.
+> Mit den vorherigen Befehlen wird die folgende Warnung erstellt: „*Für die Spalte „Preis“ mit Dezimalwerten beim Entitätstyp „Movie“ wurde kein Typ angegeben. Dadurch werden Werte automatisch abgeschnitten, falls diese nicht der Standardgenauigkeit und -skalierung entsprechen. Geben Sie den Spaltentyp von SQL-Server an, der durch „HasColumnType()“ sämtliche Werte unterstützen kann.* “ Sie können diese Warnung ignorieren, sie wird in einem zukünftigen Tutorial korrigiert.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

@@ -2,19 +2,20 @@
 title: ASP.net Core Blazor unterstützten Plattformen
 author: guardrex
 description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.net Core Blazor.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: de51296cc8785474e1c1406cfd5d4e5bd4050172
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 505974280b5c96ec2bcae42c6e076ab67a15bb07
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962731"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160131"
 ---
 # <a name="aspnet-core-opno-locblazor-supported-platforms"></a>ASP.net Core Blazor unterstützten Plattformen
 
@@ -24,11 +25,11 @@ Von [Luke Latham](https://github.com/guardrex)
 
 ## <a name="browser-requirements"></a>Browseranforderungen
 
-### <a name="opno-locblazor-webassembly"></a>Webassembly Blazor
+### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
 
 | Browser                          | Version               |
 | -------------------------------- | :-------------------: |
-| Microsoft Edge                   | Aktuell               |
+| Microsoft-Edge                   | Aktuell               |
 | Mozilla Firefox                  | Aktuell               |
 | Google Chrome, einschließlich Android | Aktuell               |
 | Safari, einschließlich IOS            | Aktuell               |
@@ -40,14 +41,14 @@ Von [Luke Latham](https://github.com/guardrex)
 
 | Browser                          | Version    |
 | -------------------------------- | :--------: |
-| Microsoft Edge                   | Aktuell    |
+| Microsoft-Edge                   | Aktuell    |
 | Mozilla Firefox                  | Aktuell    |
 | Google Chrome, einschließlich Android | Aktuell    |
 | Safari, einschließlich IOS            | Aktuell    |
 | Microsoft Internet Explorer      | 11&dagger; |
 
-&dagger;zusätzliche polyfills sind erforderlich (beispielsweise können Zusagen über ein [Polyfill.IO](https://polyfill.io/v3/) -Bundle hinzugefügt werden).
+&dagger;zusätzlichen polyfills sind erforderlich (z. b. Zusagen können über ein [Polyfill.IO](https://polyfill.io/v3/) -Bundle hinzugefügt werden).
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:blazor/hosting-models>

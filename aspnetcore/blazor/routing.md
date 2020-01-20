@@ -2,19 +2,20 @@
 title: ASP.net Core Blazor Routing
 author: guardrex
 description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-Komponente weiterleiten.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/routing
-ms.openlocfilehash: 1690434f48141bc83e7bc02e22cb763430eaa10d
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 0cd15f25ff7975cae3f63a739212aa23062ece23
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944017"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160157"
 ---
 # <a name="aspnet-core-opno-locblazor-routing"></a>ASP.net Core Blazor Routing
 
@@ -121,7 +122,7 @@ Der Router verwendet Routen Parameter, um die entsprechenden Komponenten Paramet
 }
 ```
 
-Optionale Parameter werden für Blazor-apps in ASP.net Core 3,0 nicht unterstützt. Im vorherigen Beispiel werden zwei `@page` Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}` Route-Parameter und weist den Wert der `Text`-Eigenschaft zu.
+Optionale Parameter werden nicht unterstützt. Im vorherigen Beispiel werden zwei `@page` Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}` Route-Parameter und weist den Wert der `Text`-Eigenschaft zu.
 
 ## <a name="route-constraints"></a>Routen Einschränkungen
 

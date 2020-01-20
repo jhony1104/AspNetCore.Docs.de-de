@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie einen Controller zu einer einfachen ASP.NET C
 ms.author: riande
 ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: fe0c1d3c066d6ab20387391e15c3a7cfe684c61e
-ms.sourcegitcommit: 077b45eceae044475f04c1d7ef2d153d7c0515a8
+ms.openlocfilehash: fb670902b0dafa7dce2b3372e550095387844936
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/29/2019
-ms.locfileid: "75542707"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914240"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Controllers zu einer ASP.NET Core MVC-App
 
@@ -110,7 +110,7 @@ Führen Sie die App aus, und navigieren Sie zu:
 
 ![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden als [Abfragezeichenfolgen](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, auf das die Abfragezeichenfolgen folgen. Das Zeichen `&` trennt Abfragezeichenfolgen.
+In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden in der [Abfragezeichenfolge](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, danach folgt die Abfragezeichenfolge. Das Zeichen `&` trennt Feld-Wert-Paare.
 
 Ersetzen Sie die `Welcome`-Methode durch folgenden Code:
 
@@ -229,7 +229,7 @@ Führen Sie die App aus, und navigieren Sie zu:
 
 ![Browserfenster mit der Anwendungsantwort Hello Rick, NumTimes is\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden als [Abfragezeichenfolgen](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, auf das die Abfragezeichenfolgen folgen. Das Zeichen `&` trennt Abfragezeichenfolgen.
+In der obigen Abbildung wird das URL-Segment (`Parameters`) nicht verwendet, und die Parameter `name` und `numTimes` werden in der [Abfragezeichenfolge](https://wikipedia.org/wiki/Query_string) übergeben. Das Fragezeichen (`?`) in der obigen URL ist ein Trennzeichen, danach folgt die Abfragezeichenfolge. Das Zeichen `&` trennt Feld-Wert-Paare.
 
 Ersetzen Sie die `Welcome`-Methode durch folgenden Code:
 

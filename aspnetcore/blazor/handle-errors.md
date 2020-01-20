@@ -2,20 +2,20 @@
 title: Behandeln von Fehlern in ASP.net Core Blazor-apps
 author: guardrex
 description: Erfahren Sie, wie ASP.net Core Blazor, wie nicht behandelte Ausnahmen von Blazor verwaltet werden und wie Sie apps entwickeln, die Fehler erkennen und behandeln.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: d73eb9a0dd0ec7a4bec4b7b9aeaaa4a9ee888bce
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: fe4cc13b1efb8c70c9632f032626aa938fb65ea3
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943705"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159949"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Behandeln von Fehlern in ASP.net Core Blazor-apps
 
@@ -23,14 +23,12 @@ Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
 In diesem Artikel wird beschrieben, wie Blazor nicht behandelte Ausnahmen verwaltet und wie Sie apps entwickeln, die Fehler erkennen und behandeln.
 
-::: moniker range=">= aspnetcore-3.1"
-
 ## <a name="detailed-errors-during-development"></a>Ausführliche Fehler bei der Entwicklung
 
-Wenn eine Blazor-APP während der Entwicklung nicht ordnungsgemäß funktioniert, hilft Ihnen das empfangen ausführlicher Fehlerinformationen aus der App bei der Problembehandlung und Behebung des Problems. Wenn ein Fehler auftritt, wird in Blazor-apps unten auf dem Bildschirm eine goldene Leiste angezeigt:
+Wenn eine Blazor-App während der Entwicklung nicht ordnungsgemäß funktioniert, erhalten Sie nun ausführliche Fehlerinformationen von der App, die Sie beim Beheben des Problems unterstützen. Wenn ein Fehler auftritt, zeigen Blazor-Apps eine goldene Leiste am unteren Rand der Anzeige an:
 
-* Während der Entwicklung leitet der Goldene Balken Sie zur Browser Konsole, in der Sie die Ausnahme sehen können.
-* In der Produktion benachrichtigt der Goldene Balken den Benutzer, dass ein Fehler aufgetreten ist, und empfiehlt, den Browser zu aktualisieren.
+* Während der Entwicklung leitet die goldene Leiste Sie an die Browserkonsole weiter, in der die Ausnahme angezeigt wird.
+* In der Produktion benachrichtigt die goldene Leiste den Benutzer darüber, dass ein Fehler aufgetreten ist, und empfiehlt eine Aktualisierung des Browsers.
 
 Die Benutzeroberfläche für diese Fehlerbehandlung ist Teil der Blazor-Projektvorlagen. Passen Sie in einer Blazor Webassembly-APP die Darstellung in der *wwwroot/Index.html* -Datei an:
 
@@ -58,8 +56,6 @@ Passen Sie in einer Blazor Server-APP die Darstellung in der Datei *pages/_Host.
 ```
 
 Das `blazor-error-ui` Element wird durch die in den Blazor Vorlagen enthaltenen Stile ausgeblendet und dann angezeigt, wenn ein Fehler auftritt.
-
-::: moniker-end
 
 ## <a name="how-the-opno-locblazor-framework-reacts-to-unhandled-exceptions"></a>Reagieren des Blazor Frameworks auf nicht behandelte Ausnahmen
 
@@ -213,8 +209,6 @@ Wenn eine Verbindung beendet wird, weil ein Benutzer die Verbindung getrennt hat
 
 ### <a name="prerendering"></a>Wird vorab durchgeführt
 
-::: moniker range=">= aspnetcore-3.1"
-
 Blazor Komponenten können mithilfe des `Component`-taghilfsprogramms vorab übernommen werden, damit das gerenderte HTML-Markup als Teil der ursprünglichen HTTP-Anforderung des Benutzers zurückgegeben wird. Dies funktioniert wie folgt:
 
 * Erstellen einer neuen Verbindung für alle vorab erstellten Komponenten, die Teil der gleichen Seite sind.
@@ -229,27 +223,6 @@ Wenn eine Komponente während der vorab Generierung eine nicht behandelte Ausnah
 Unter normalen Umständen ist es nicht sinnvoll, die Komponente zu erstellen und zu rendern, da eine funktionierende Komponente nicht gerendert werden kann.
 
 Um Fehler zu tolerieren, die möglicherweise während der vorab Generierung auftreten, muss die Fehler Behandlungs Logik in einer Komponente platziert werden, die Ausnahmen auslösen kann. Verwenden [Sie try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung. Anstatt das `Component`-taghilfsprogramm in einer `try-catch`-Anweisung zu umwickeln, platzieren Sie die Fehler Behandlungs Logik in der vom `Component`-taghilfsprogramm gerenderten Komponente.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-Blazor Komponenten können mithilfe `Html.RenderComponentAsync` vorab übernommen werden, damit das gerenderte HTML-Markup als Teil der ursprünglichen HTTP-Anforderung des Benutzers zurückgegeben wird. Dies funktioniert wie folgt:
-
-* Erstellen einer neuen Verbindung für alle vorab erstellten Komponenten, die Teil der gleichen Seite sind.
-* Das anfängliche HTML wird erzeugt.
-* Die Verbindung wird als `disconnected` behandelt, bis der Browser des Benutzers eine SignalR Verbindung zum gleichen Server herstellt. Wenn die Verbindung hergestellt wird, wird die Interaktivität der Verbindung fortgesetzt, und das HTML-Markup der Komponenten wird aktualisiert.
-
-Wenn eine Komponente während der vorab Generierung eine nicht behandelte Ausnahme auslöst, z. b. während einer Lebenszyklus Methode oder in Renderinglogik:
-
-* Die Ausnahme ist für die Verbindung schwerwiegend.
-* Die Ausnahme wird in der aufrufsstapel aus dem `Html.RenderComponentAsync`-Befehl ausgelöst. Daher schlägt die gesamte HTTP-Anforderung fehl, es sei denn, die Ausnahme wird explizit durch den Entwickler Code abgefangen.
-
-Unter normalen Umständen ist es nicht sinnvoll, die Komponente zu erstellen und zu rendern, da eine funktionierende Komponente nicht gerendert werden kann.
-
-Um Fehler zu tolerieren, die möglicherweise während der vorab Generierung auftreten, muss die Fehler Behandlungs Logik in einer Komponente platziert werden, die Ausnahmen auslösen kann. Verwenden [Sie try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung. Anstatt den aufzurufenden `RenderComponentAsync` in einer `try-catch`-Anweisung zu umwickeln, platzieren Sie die Fehler Behandlungs Logik in der von `RenderComponentAsync`gerenderten Komponente.
-
-::: moniker-end
 
 ## <a name="advanced-scenarios"></a>Erweiterte Szenarios
 

@@ -2,20 +2,20 @@
 title: ASP.net Core Blazor Vorlagen
 author: guardrex
 description: Erfahren Sie mehr über ASP.net Core Blazor App-Vorlagen und Blazor Projektstruktur.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/25/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: bc0ea4a777e8684a7b0925377b8a19a45c2b531c
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 2a95b986450471b474d93ead252255f2bd9d4918
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879657"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160118"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.net Core Blazor Vorlagen
 
@@ -50,13 +50,13 @@ Die folgenden Dateien und Ordner bilden eine Blazor-APP, die aus einer Blazor Vo
 * *wwwroot/Index.html* (Blazor Webassembly) &ndash; die Stamm Seite der APP, die als HTML-Seite implementiert ist:
   * Wenn eine Seite der APP anfänglich angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
   * Die Seite gibt an, wo die Stamm `App` Komponente gerendert wird. Die `App` Komponente (*app. Razor*) wird in `Startup.Configure`als `app` DOM-Element für die `AddComponent`-Methode angegeben.
-  * Die *_framework* JavaScript-Datei "/blazor.Webassembly.js" wird geladen, was Folgendes:
+  * Die `_framework/blazor.webassembly.js` JavaScript-Datei wird geladen:
     * Herunterladen der .NET-Runtime, der APP und der APP-Abhängigkeiten.
     * Initialisiert die Laufzeit, um die APP auszuführen.
 
 * *Pages/_Host. cshtml* (Blazor Server) &ndash; die Stamm Seite der APP, die als Razor Page implementiert wurde:
   * Wenn eine Seite der APP anfänglich angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
-  * Die *_framework/blazor.Server.js* JavaScript-Datei wird geladen, die die Echt Zeit SignalR Verbindung zwischen dem Browser und dem Server einrichtet.
+  * Die `_framework/blazor.server.js` JavaScript-Datei wird geladen, die die Echt Zeit SignalR Verbindung zwischen dem Browser und dem Server einrichtet.
   * Die Seite Host gibt an, wo die Stamm `App` Komponente (*app. Razor*) gerendert wird.
 
 * *App. Razor* &ndash; die Stamm Komponente der APP, die das Client seitige Routing mithilfe der <xref:Microsoft.AspNetCore.Components.Routing.Router> Komponente einrichtet. Die `Router` Komponente fängt die Browser Navigation ab und rendert die Seite, die der angeforderten Adresse entspricht.

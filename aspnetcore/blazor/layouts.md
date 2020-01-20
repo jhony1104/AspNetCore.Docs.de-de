@@ -2,19 +2,20 @@
 title: ASP.net Core Blazor Layouts
 author: guardrex
 description: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für Blazor Apps erstellen.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 90acfb0d4e9daadb12be79de6bd0c99fc545697a
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 51720af8fec5b4427fc66660eb8ac9c54ba2e99e
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944056"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159858"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.net Core Blazor Layouts
 
@@ -90,6 +91,10 @@ Die Datei *masterlistlayout. Razor* stellt die `MasterListLayout`bereit. Das Lay
 Zum Schluss enthält `MasterLayout` in *Masterlayout. Razor* die Layoutelemente der obersten Ebene, z. b. Header, Hauptmenü und Fußzeile. `MasterListLayout` mit dem `EpisodesComponent` wird gerendert, wenn `@Body` angezeigt wird:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
+
+## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Freigeben eines Razor Pages Layouts mit integrierten Komponenten
+
+Wenn Routing fähige Komponenten in eine Razor Pages-app integriert sind, kann das freigegebene Layout der APP mit den-Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps>.
 
 ## <a name="additional-resources"></a>Weitere Ressourcen
 

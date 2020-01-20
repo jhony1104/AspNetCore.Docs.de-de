@@ -2,19 +2,20 @@
 title: Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 author: guardrex
 description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, einschließlich Informationen zum Binden an Daten, behandeln von Ereignissen und Verwalten von Komponenten Lebenszyklen.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/28/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/components
-ms.openlocfilehash: 9e796a23a0b24a9fee314051644703ef12bd7607
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: e73667925c04dd1b2360138343c4a2dcef0ee310
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828203"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160014"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -34,9 +35,6 @@ Die Benutzeroberfläche für eine Komponente wird mit HTML definiert. Dynamische
 
 Member der Komponentenklasse werden in einem `@code`-Block definiert. Im `@code` Block wird der Komponenten Zustand (Eigenschaften, Felder) mit Methoden für die Ereignis Behandlung oder zum Definieren anderer Komponenten Logik angegeben. Mehrere `@code`-Blöcke sind zulässig.
 
-> [!NOTE]
-> In früheren Vorschauen von ASP.net Core 3,0 wurden `@functions` Blöcke für denselben Zweck verwendet wie `@code` Blöcke in Razor-Komponenten. `@functions` Blöcke funktionieren weiterhin in Razor-Komponenten, aber es wird empfohlen, den `@code`-Block in ASP.net Core 3,0 Preview 6 oder höher zu verwenden.
-
 Komponentenmember können als Teil der Renderinglogik der Komponente mithilfe C# von Ausdrücken verwendet werden, die mit `@`beginnen. Beispielsweise wird ein C# Feld gerendert, indem `@` dem Feldnamen vorangestellt wird. Im folgenden Beispiel wird ausgewertet und gerendert:
 
 * `_headingFontStyle` zum CSS-Eigenschafts Wert für `font-style`.
@@ -53,17 +51,37 @@ Komponentenmember können als Teil der Renderinglogik der Komponente mithilfe C#
 
 Nachdem die Komponente anfänglich gerendert wurde, generiert die Komponente die Renderstruktur in Reaktion auf Ereignisse erneut. Blazor vergleicht dann die neue Rendering-Struktur mit der vorherigen und wendet alle Änderungen auf die Dokumentobjektmodell des Browsers (DOM) an.
 
-Komponenten sind normale C# Klassen und können an beliebiger Stelle innerhalb eines Projekts platziert werden. Komponenten, die Webseiten entwickeln, befinden sich normalerweise im Ordner *pages* . Nicht-Seiten Komponenten werden häufig im frei *gegebenen* Ordner oder in einem benutzerdefinierten Ordner abgelegt, der dem Projekt hinzugefügt wird. Um einen benutzerdefinierten Ordner zu verwenden, fügen Sie den Namespace des benutzerdefinierten Ordners entweder der übergeordneten Komponente oder der *_Imports Razor* -Datei der APP hinzu. Der folgende Namespace stellt z. b. Komponenten in einem *Komponenten* Ordner zur Verfügung, wenn der Stamm Namespace der APP `WebApplication`ist:
+Komponenten sind normale C# Klassen und können an beliebiger Stelle innerhalb eines Projekts platziert werden. Komponenten, die Webseiten entwickeln, befinden sich normalerweise im Ordner *pages* . Nicht-Seiten Komponenten werden häufig im frei *gegebenen* Ordner oder in einem benutzerdefinierten Ordner abgelegt, der dem Projekt hinzugefügt wird.
+
+In der Regel wird der Namespace einer Komponente aus dem Stamm Namespace der APP und dem Speicherort (Ordner) der Komponente in der APP abgeleitet. Wenn der Stamm Namespace der APP `BlazorApp` ist und sich die `Counter` Komponente im Ordner " *pages* " befindet:
+
+* Der Namespace der `Counter` Komponente ist `BlazorApp.Pages`.
+* Der voll qualifizierte Typname der Komponente ist `BlazorApp.Pages.Counter`.
+
+Weitere Informationen finden Sie im Abschnitt [Importieren von Komponenten](#import-components) .
+
+Um einen benutzerdefinierten Ordner zu verwenden, fügen Sie den Namespace des benutzerdefinierten Ordners entweder der übergeordneten Komponente oder der *_Imports Razor* -Datei der APP hinzu. Der folgende Namespace stellt z. b. Komponenten in einem *Komponenten* Ordner zur Verfügung, wenn der Stamm Namespace der APP `BlazorApp`ist:
 
 ```razor
-@using WebApplication.Components
+@using BlazorApp.Components
 ```
 
 ## <a name="integrate-components-into-razor-pages-and-mvc-apps"></a>Integrieren von Komponenten in Razor Pages und MVC-apps
 
-Verwenden Sie Komponenten mit vorhandenen Razor Pages und MVC-apps. Es ist nicht erforderlich, vorhandene Seiten oder Sichten für die Verwendung von Razor-Komponenten neu zu schreiben. Wenn die Seite oder die Ansicht gerendert wird, werden die Komponenten gleichzeitig vorab in eine Vorabversion übernommen.
+Razor-Komponenten können in Razor Pages-und MVC-Apps integriert werden. Wenn die Seite oder Ansicht gerendert wird, können Komponenten gleichzeitig vorab vorgerendert werden.
 
-::: moniker range=">= aspnetcore-3.1"
+Wenn Sie eine Razor Pages-oder MVC-App zum Hosten von Razor-Komponenten vorbereiten möchten, befolgen Sie die Anweisungen im Abschnitt *integrieren von Razor-Komponenten in Razor Pages und MVC-apps* des <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps> Artikels.
+
+Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace, der den Ordner darstellt, entweder der Seite/Ansicht oder der Datei " *_ViewImports. cshtml* " hinzu. Im folgenden Beispiel:
+
+* Ändern Sie `MyAppNamespace` in den Namespace der app.
+* Wenn ein Ordner mit dem Namen *Components* nicht zum Speichern der Komponenten verwendet wird, ändern Sie `Components` in den Ordner, in dem sich die Komponenten befinden.
+
+```csharp
+@using MyAppNamespace.Components
+```
+
+Die Datei " *_ViewImports. cshtml* " befindet sich im Ordner " *pages* " einer Razor Pages-APP oder im Ordner " *views* " einer MVC-app.
 
 Verwenden Sie das `Component`-taghilfsprogramm, um eine Komponente aus einer Seite oder Sicht zu Rendering:
 
@@ -90,35 +108,6 @@ Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil n
 Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
 
 Weitere Informationen zum Rendern von Komponenten, zum Komponenten Status und zum `Component`-taghilfsprogramm finden Sie unter <xref:blazor/hosting-models>.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-Verwenden Sie die `RenderComponentAsync<TComponent>` HTML-Hilfsmethode, um eine Komponente aus einer Seite oder Sicht zu erstellen:
-
-```cshtml
-@(await Html.RenderComponentAsync<MyComponent>(RenderMode.ServerPrerendered))
-```
-
-`RenderMode` konfiguriert, ob die Komponente Folgendes hat:
-
-* Wird in die Seite vorab übernommen.
-* Wird auf der Seite als statischer HTML-Code gerendert, oder, wenn er die erforderlichen Informationen zum Bootstrapping einer Blazor-APP vom Benutzer-Agent enthält.
-
-| `RenderMode`        | Beschreibung |
-| ------------------- | ----------- |
-| `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine Blazor Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. Parameter werden nicht unterstützt. |
-| `Server`            | Rendert einen Marker für eine Blazor Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. Parameter werden nicht unterstützt. |
-| `Static`            | Rendert die Komponente in statischem HTML-Format. Parameter werden unterstützt. |
-
-Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil nicht der Fall. Komponenten können keine Ansichts-und Seiten spezifischen Szenarien verwenden, wie z. b. partielle Sichten und Abschnitte. Um die Logik der Teilansicht in einer Komponente zu verwenden, müssen Sie die partielle Sicht Logik in eine Komponente einbeziehen.
-
-Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
-
-Weitere Informationen zum Rendern von Komponenten, zum Komponenten Status und zum `RenderComponentAsync` HTML-Hilfsobjekt finden Sie unter <xref:blazor/hosting-models>.
-
-::: moniker-end
 
 ## <a name="use-components"></a>Verwenden von Komponenten
 
@@ -353,6 +342,11 @@ Zusätzlich zur Behandlung von `onchange` Ereignissen mit `@bind` Syntax kann ei
 
 Im Gegensatz zu `onchange`, das ausgelöst wird, wenn das Element den Fokus verliert, `oninput` ausgelöst, wenn sich der Wert des Textfelds ändert.
 
+im vorherigen Beispiel wird `@bind-value` gebunden:
+
+* Der angegebene Ausdruck (`CurrentValue`) zum `value` Attribut des Elements.
+* Ein Änderungs Ereignis Delegat für das Ereignis, das durch `@bind-value:event`angegeben wird.
+
 **Nicht zu erteilbare Werte**
 
 Wenn ein Benutzer einen nicht zu erteilbaren Wert für ein Daten gebundene Element bereitstellt, wird der nicht teilbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungs Ereignis ausgelöst wird.
@@ -522,6 +516,10 @@ Im Allgemeinen kann eine Eigenschaft mithilfe `@bind-property:event` Attributs a
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
+**Optionsfelder**
+
+Informationen zum Binden an Options Felder in einem Formular finden Sie unter <xref:blazor/forms-validation#work-with-radio-buttons>.
+
 ## <a name="event-handling"></a>Ereignisbehandlung
 
 Razor-Komponenten stellen Ereignis Behandlungs Funktionen bereit. Für ein HTML-Element Attribut mit dem Namen `on{EVENT}` (z. b. `onclick` und `onsubmit`) mit einem delegattypisierten Wert behandelt Razor-Komponenten den Wert des Attributs als Ereignishandler. Der Name des Attributs wird immer [`@on{EVENT}`](xref:mvc/views/razor#onevent)formatiert.
@@ -592,7 +590,7 @@ Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 | Fortschritt         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | Toucheingabe            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` stellt einen einzelnen Kontaktpunkt auf einem Berührungs sensiblen Gerät dar. |
 
-Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (dotnet/aspnetcore Release/3.0 Branch)](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web).
+Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (dotnet/aspnetcore Release/3.1 Branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
 
 ### <a name="lambda-expressions"></a>Lambdaausdrücke
 
@@ -696,8 +694,6 @@ Verwenden Sie `EventCallback` und `EventCallback<T>` für Ereignisverarbeitungs-
 
 Bevorzugen der stark typisierten `EventCallback<T>` über `EventCallback`. `EventCallback<T>` bietet den Benutzern der Komponente ein besseres Fehler Feedback. Ähnlich wie bei anderen Benutzeroberflächen-Ereignis Handlern ist die Angabe des Ereignis Parameters optional. Verwenden Sie `EventCallback`, wenn kein Wert an den Rückruf übermittelt wird.
 
-::: moniker range=">= aspnetcore-3.1"
-
 ### <a name="prevent-default-actions"></a>Standard Aktionen verhindern
 
 Verwenden Sie das [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) direktivenattribut, um die Standardaktion für ein Ereignis zu verhindern.
@@ -763,8 +759,6 @@ Im folgenden Beispiel wird durch Aktivieren des Kontrollkästchens verhindert, d
         Console.WriteLine($"A child div was selected. {DateTime.Now}");
 }
 ```
-
-::: moniker-end
 
 ## <a name="chained-bind"></a>Verkettete Bindung
 
@@ -1091,8 +1085,6 @@ Optionale Parameter werden nicht unterstützt. Daher werden im obigen Beispiel z
 
 Die *catch-all-* Parameter Syntax (`*`/`**`), die den Pfad über mehrere Ordner Grenzen hinweg erfasst, wird in Razor-*Komponenten (Razor*-Komponenten) **nicht** unterstützt.
 
-::: moniker range=">= aspnetcore-3.1"
-
 ## <a name="partial-class-support"></a>Unterstützung für Teil Klassen
 
 Razor-Komponenten werden als partielle Klassen generiert. Razor-Komponenten werden mithilfe eines der folgenden Ansätze erstellt:
@@ -1154,43 +1146,16 @@ namespace BlazorApp.Pages
 }
 ```
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-## <a name="specify-a-component-base-class"></a>Angeben einer Komponentenbasis Klasse
-
-Die `@inherits`-Direktive kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben.
-
-Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) zeigt, wie eine Komponente eine Basisklasse (`BlazorRocksBase`) erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen.
-
-*Pages/blazorrocks. Razor*:
-
-```razor
-@page "/BlazorRocks"
-@inherits BlazorRocksBase
-
-<h1>@BlazorRocksText</h1>
-```
-
-*BlazorRocksBase.cs*:
+Fügen Sie alle erforderlichen Namespaces der partiellen Klassendatei nach Bedarf hinzu. Typische Namespaces, die von Razor-Komponenten verwendet werden, sind:
 
 ```csharp
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-
-namespace BlazorSample
-{
-    public class BlazorRocksBase : ComponentBase
-    {
-        public string BlazorRocksText { get; set; } = 
-            "Blazor rocks the browser!";
-    }
-}
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Web;
 ```
-
-Die Basisklasse sollte von `ComponentBase`abgeleitet werden.
-
-::: moniker-end
 
 ## <a name="import-components"></a>Importieren von Komponenten
 
