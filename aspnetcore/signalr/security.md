@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in AS
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 1bdb8b10a24c65735f49f04285e4129cb77eb3fb
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 4b27d9abb36938ed8161ff0d3535204e3fa68765
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828944"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294705"
 ---
 # <a name="security-considerations-in-aspnet-core-opno-locsignalr"></a>Sicherheitsüberlegungen in ASP.net Core SignalR
 
@@ -35,7 +35,7 @@ Weitere Informationen zum Konfigurieren von cors finden Sie unter [Aktivieren vo
 
 * Hiermit werden bestimmte erwartete Ursprünge zugelassen. Es ist möglich, einen beliebigen Ursprung zuzulassen, aber er ist **nicht** sicher oder wird empfohlen.
 * HTTP-Methoden `GET` und `POST` müssen zulässig sein.
-* Anmelde Informationen müssen zulässig sein, damit cookiebasierte persistente Sitzungen ordnungsgemäß funktionieren. Sie müssen auch dann aktiviert werden, wenn keine Authentifizierung verwendet wird.
+* Anmelde Informationen müssen zulässig sein, damit cookiebasierte persistente Sitzungen ordnungsgemäß funktionieren. Sie müssen auch dann aktiviert werden, wenn die Authentifizierung nicht verwendet wird.
 
 <!--
 ::: moniker range=">= aspnetcore-5.0"  // Moniker here just to make sure this doesn't get missed in the 5.0 version update.
@@ -112,16 +112,20 @@ In ASP.net Core 2,1 und höher kann die Header Validierung mithilfe einer benutz
 
 ::: moniker-end
 
+## <a name="connectionid"></a>ConnectionId
+
+Das verfügbar machen von `ConnectionId` kann zu böswilligem Identitätswechsel führen, wenn der SignalR Server oder die Client Version ASP.net Core 2,2 oder früher ist. Wenn die SignalR Server-und Client Version 3,0 oder höher ASP.net Core, muss der `ConnectionToken` anstelle der `ConnectionId` geheim gehalten werden. Der `ConnectionToken` wird absichtlich nicht in einer API verfügbar gemacht.  Es kann schwierig sein, sicherzustellen, dass ältere SignalR Clients keine Verbindung mit dem Server herstellen. auch wenn Ihre SignalR Server Version ASP.net Core 3,0 oder höher ist, sollten die `ConnectionId` nicht verfügbar gemacht werden.
+
 ## <a name="access-token-logging"></a>Protokollierung von Zugriffs Token
 
-Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im Allgemeinen so sicher wie die Verwendung des Standard-`Authorization` Headers. Sie sollten immer HTTPS verwenden, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Beispiel:
+Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im Allgemeinen sicher, weil der Standard-`Authorization` Header verwendet wird Verwenden Sie immer HTTPS, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Beispiel:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
       Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
 ```
 
-Wenn Sie Bedenken haben, dass Sie diese Daten mit ihren Serverprotokollen protokollieren möchten, können Sie diese Protokollierung vollständig deaktivieren, indem Sie die `Microsoft.AspNetCore.Hosting` Protokollierung auf `Warning` Ebene oder höher konfigurieren (diese Nachrichten werden auf `Info` Ebene geschrieben). Weitere Informationen finden Sie in der Dokumentation zur [Protokollfilterung](xref:fundamentals/logging/index#log-filtering) . Wenn Sie trotzdem bestimmte Anforderungs Informationen protokollieren möchten, können Sie [eine Middleware schreiben](xref:fundamentals/middleware/write) , um die benötigten Daten zu protokollieren, und den `access_token` Abfrage Zeichenfolgen-Wert herausfiltern (sofern vorhanden).
+Wenn Sie Bedenken haben, dass Sie diese Daten mit ihren Serverprotokollen protokollieren möchten, können Sie diese Protokollierung vollständig deaktivieren, indem Sie die `Microsoft.AspNetCore.Hosting` Protokollierung auf `Warning` Ebene oder höher konfigurieren (diese Nachrichten werden auf `Info` Ebene geschrieben). Weitere Informationen finden Sie unter [Protokollfilterung](xref:fundamentals/logging/index#log-filtering) . Wenn Sie trotzdem bestimmte Anforderungs Informationen protokollieren möchten, können Sie [eine Middleware schreiben](xref:fundamentals/middleware/write) , um die benötigten Daten zu protokollieren, und den `access_token` Abfrage Zeichenfolgen-Wert herausfiltern (sofern vorhanden).
 
 ## <a name="exceptions"></a>Ausnahmen
 

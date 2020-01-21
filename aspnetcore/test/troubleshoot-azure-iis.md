@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Probleme mit Azure App Service und Internetin
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/10/2020
+ms.date: 01/18/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 23c90c33d197d26d1c4ad758449e318e20ef3760
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 071dba9e936351e201b7582b3d0667cd6fac54bb
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75952153"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294621"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung ASP.net Core auf Azure App Service und IIS
 
@@ -117,7 +117,10 @@ Der Workerprozess schlägt fehl. Die App wird nicht gestartet.
 
 Das [Modul ASP.net Core](xref:host-and-deploy/aspnet-core-module) versucht, die .net Core-CLR in einem Prozess zu starten, aber es kann nicht gestartet werden. Die Ursache für den Fehler eines Prozess Starts kann in der Regel von Einträgen im Anwendungs Ereignisprotokoll und vom ASP.net Core-Modul "stdout"-Protokoll bestimmt werden.
 
-Eine allgemeine Fehlerbedingung ist, dass die App aufgrund einer Version des freigegebenen ASP.NET Core-Frameworks falsch konfiguriert ist, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind.
+Häufige Fehlerbedingungen:
+
+* Die APP ist falsch konfiguriert, weil eine Version des ASP.net Core freigegebenen Frameworks als Ziel verwendet wird, die nicht vorhanden ist. Überprüfen Sie, welche Versionen des freigegebenen ASP.NET Core-Frameworks auf dem Zielcomputer installiert sind.
+* Mit Azure Key Vault fehlen Berechtigungen für die Key Vault. Überprüfen Sie die Zugriffsrichtlinien in der Ziel Key Vault, um sicherzustellen, dass die richtigen Berechtigungen gewährt werden.
 
 ### <a name="50031-ancm-failed-to-find-native-dependencies"></a>500.31: Fehler bei der Suche nach nativen Abhängigkeiten in ANCM
 

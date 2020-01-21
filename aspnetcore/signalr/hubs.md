@@ -5,16 +5,16 @@ description: Erfahren Sie, wie Sie Hubs in ASP.net Core SignalRverwenden können
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: f95766cab84bddff2c7c62f30bce1e6d1e43deab
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: e5bc12c5ccafe2b5273d72e6bde0f631ca043428
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963804"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294628"
 ---
 # <a name="use-hubs-in-opno-locsignalr-for-aspnet-core"></a>Verwenden von Hubs in SignalR für ASP.net Core
 
@@ -80,7 +80,7 @@ Sie können einen Rückgabetyp und Parameter, einschließlich komplexer Typen un
 
 Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eigenschaften, die Informationen über die Verbindung enthalten:
 
-| property | Beschreibung |
+| Die Eigenschaften- | Beschreibung |
 | ------ | ----------- |
 | `ConnectionId` | Ruft die eindeutige ID für die Verbindung ab, die von SignalRzugewiesen wird. Es gibt eine Verbindungs-ID für jede Verbindung.|
 | `UserIdentifier` | Ruft den [Benutzer Bezeichner](xref:signalr/groups)ab. Standardmäßig verwendet SignalR die `ClaimTypes.NameIdentifier` aus der `ClaimsPrincipal`, die der Verbindung zugeordnet ist, als Benutzer Bezeichner. |
@@ -91,7 +91,7 @@ Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eig
 
 `Hub.Context` enthält auch die folgenden Methoden:
 
-| Methode | Beschreibung |
+| -Methode | Beschreibung |
 | ------ | ----------- |
 | `GetHttpContext` | Gibt die `HttpContext` für die Verbindung zurück, oder `null`, wenn die Verbindung nicht mit einer HTTP-Anforderung verknüpft ist. Für http-Verbindungen können Sie diese Methode verwenden, um Informationen wie HTTP-Header und Abfrage Zeichenfolgen zu erhalten. |
 | `Abort` | Bricht die Verbindung ab. |
@@ -100,7 +100,7 @@ Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eig
 
 Die `Hub`-Klasse verfügt über eine `Clients`-Eigenschaft, die die folgenden Eigenschaften für die Kommunikation zwischen Server und Client enthält:
 
-| property | Beschreibung |
+| Die Eigenschaften- | Beschreibung |
 | ------ | ----------- |
 | `All` | Ruft eine Methode auf allen verbundenen Clients auf. |
 | `Caller` | Ruft eine Methode auf dem Client auf, der die Hub-Methode aufgerufen hat. |
@@ -108,7 +108,7 @@ Die `Hub`-Klasse verfügt über eine `Clients`-Eigenschaft, die die folgenden Ei
 
 `Hub.Clients` enthält auch die folgenden Methoden:
 
-| Methode | Beschreibung |
+| -Methode | Beschreibung |
 | ------ | ----------- |
 | `AllExcept` | Ruft eine Methode auf allen verbundenen Clients mit Ausnahme der angegebenen Verbindungen auf. |
 | `Client` | Ruft eine Methode auf einem bestimmten verbundenen Client auf. |
@@ -173,6 +173,8 @@ Die SignalR Hubs-API stellt die `OnConnectedAsync` und `OnDisconnectedAsync` vir
 Überschreiben Sie die virtuelle `OnDisconnectedAsync`-Methode, um Aktionen auszuführen, wenn ein Client die Verbindung trennt. Wenn der Client die Verbindung absichtlich trennt (z. b. durch Aufrufen von `connection.stop()`), wird der `exception` Parameter `null`. Wenn der Client jedoch aufgrund eines Fehlers (z. b. eines Netzwerk Fehlers) getrennt wird, enthält der `exception` Parameter eine Ausnahme, die den Fehler beschreibt.
 
 [!code-csharp[Handle disconnection](hubs/sample/hubs/chathub.cs?name=OnDisconnectedAsync)]
+
+[!INCLUDE[](~/includes/connectionid-signalr.md)]
 
 ## <a name="handle-errors"></a>Behandeln von Fehlern
 
