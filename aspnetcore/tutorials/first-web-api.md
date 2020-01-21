@@ -108,7 +108,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
   
 * Wählen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren**für das **Zielframework** den Eintrag * *.NET Core 3.1* aus.
 
-* Geben Sie für **Projektname***TodoApi* ein, und wählen Sie dann **Erstellen** aus.
+* Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
   ![Dialogfeld „Konfiguration“](first-web-api-mac/_static/2.png)
 
@@ -551,7 +551,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
   
 * Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung **Zielframework** von * *.NET Core 2.2*.
 
-* Geben Sie für **Projektname***TodoApi* ein, und wählen Sie dann **Erstellen** aus.
+* Geben Sie für **Projektname** *TodoApi* ein, und wählen Sie dann **Erstellen** aus.
 
   ![Dialogfeld „Konfiguration“](first-web-api-mac/_static/2.png)
 
