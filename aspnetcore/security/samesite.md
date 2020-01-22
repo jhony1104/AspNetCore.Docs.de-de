@@ -1,5 +1,5 @@
 ---
-title: Arbeiten mit SameSite-Cookies in ASP.net Core
+title: Testen mit dem Microsoft Edge-Browser
 author: rick-anderson
 description: Erfahren Sie, wie Sie mit SameSite-Cookies in ASP.net Core
 ms.author: riande
@@ -133,7 +133,7 @@ Apps, die mit Remote Standorten interagieren, z. b. durch die Anmeldung von Drit
 * Testen Sie die Interaktion in mehreren Browsern.
 * Wenden Sie die in diesem Dokument erörterten [Erkennung und Entschärfung von cookiepolicy-Browsern](#sob) an.
 
-Testen Sie Web-Apps mithilfe einer Client Version, die das neue SameSite-Verhalten abonnieren kann. Chrome, Firefox und Chromium Edge verfügen über neue Feature-Flags, die für Tests verwendet werden können. Nachdem Ihre APP die SameSite-Patches angewendet hat, testen Sie Sie mit älteren Client Versionen, insbesondere Safari. Weitere Informationen finden Sie [unter unterstützen älterer Browser](#sob) in diesem Dokument.
+Testen Sie Web-Apps mithilfe einer Client Version, die das neue SameSite-Verhalten abonnieren kann. Chrome, Firefox und Microsoft Edge Chromium verfügen über neue Feature-Flags, die für Tests verwendet werden können. Nachdem Ihre APP die SameSite-Patches angewendet hat, testen Sie Sie mit älteren Client Versionen, insbesondere Safari. Weitere Informationen finden Sie [unter unterstützen älterer Browser](#sob) in diesem Dokument.
 
 ### <a name="test-with-chrome"></a>Testen mit Chrome
 
@@ -152,13 +152,13 @@ Safari 12 hat den vorherigen Entwurf streng implementiert und schlägt fehl, wen
 
 Die Firefox-Unterstützung für den neuen Standard kann auf Version 68 + getestet werden, indem Sie sich auf der Seite "`about:config`" mit dem Feature-Flag `network.cookie.sameSite.laxByDefault`anmelden. Es gab keine Berichte über Kompatibilitätsprobleme mit älteren Versionen von Firefox.
 
-### <a name="test-with-edge-browser"></a>Testen mit dem Edge-Browser
+### <a name="test-with-edge-browser"></a>Testen mit dem Microsoft Edge-Browser
 
-Edge unterstützt den alten SameSite-Standard. Edge Version 44 hat keine bekannten Kompatibilitätsprobleme mit dem neuen Standard.
+Microsoft Edge unterstützt den alten SameSite-Standard. Microsoft Edge Version 44 hat keine bekannten Kompatibilitätsprobleme mit dem neuen Standard.
 
-### <a name="test-with-edge-chromium"></a>Testen mit Edge (Chrom)
+### <a name="test-with-edge-chromium"></a>Testen mit Microsoft Edge (Chromium)
 
-Die SameSite-Flags werden auf der Seite "`edge://flags/#same-site-by-default-cookies`" festgelegt. Es wurden keine Kompatibilitätsprobleme mit Edge-Chrom erkannt.
+Die SameSite-Flags werden auf der Seite "`edge://flags/#same-site-by-default-cookies`" festgelegt. Es wurden keine Kompatibilitätsprobleme mit Microsoft Edge Chromium erkannt.
 
 ### <a name="test-with-electron"></a>Testen mit einem Elektron
 
