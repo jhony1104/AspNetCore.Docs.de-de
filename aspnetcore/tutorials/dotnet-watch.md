@@ -5,12 +5,12 @@ description: In diesem Tutorial wird erläutert, wie Sie das Dateiwatcher-Tool (
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: a2a0bcdace67052975630f99aab23bbb0fd99bff
-ms.sourcegitcommit: 383017d7060a6d58f6a79cf4d7335d5b4b6c5659
+ms.openlocfilehash: 053c98ba032c85b61776d5b5644c5575cd4f890c
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72816139"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828996"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
 
@@ -69,7 +69,7 @@ Das Dateiwatcher-Tool `dotnet watch` ist im Lieferumfang von .NET Core SDK-Versi
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Ausführen von .NET Core-CLI-Befehlen mit `dotnet watch`
 
-Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Beispiel:
+Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Zum Beispiel:
 
 | Befehl | Befehl mit watch |
 | ---- | ----- |
@@ -185,4 +185,4 @@ VSTest wird ausgeführt, wenn in einer beliebigen Datei in einem der Testprojekt
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` in GitHub
 
-`dotnet-watch` ist Teil des GitHub-[Aspnet/AspNetCore-Repository](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch).
+`dotnet-watch` ist Teil des GitHub-Repositorys [dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch).

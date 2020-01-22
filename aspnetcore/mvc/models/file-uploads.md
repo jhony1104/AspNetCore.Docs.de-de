@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/04/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 20e58660185a3055e06e92d9136e80e2394a470d
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: b5433576ff3e997e6d80201236be2d8463a52d07
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881070"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829230"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -83,7 +83,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Erstellen eines Blobs im Objektspeicher mithilfe von .NET](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -183,7 +183,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
 
   ```javascript
   <script>
@@ -448,7 +448,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Validierung von Inhalten
+### <a name="content-validation"></a>Inhaltsprüfung
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -456,7 +456,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -716,7 +716,7 @@ Der Standardgrenzwert für Anforderungen (`maxAllowedContentLength`) beträgt st
 
 Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Request Limits \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/) (Anforderungseinschränkungen).
 
-Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/aspnet/AspNetCore/issues/2711) (Es ist nicht möglich, Dateien mit einer Größe von mehr als 2 GB hochzuladen).
+Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711) (Upload von Dateien größer als 2 GB ist nicht möglich).
 
 ## <a name="troubleshoot"></a>Problembehandlung
 
@@ -812,7 +812,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Erstellen eines Blobs im Objektspeicher mithilfe von .NET](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -912,7 +912,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
 
   ```javascript
   <script>
@@ -1177,7 +1177,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Validierung von Inhalten
+### <a name="content-validation"></a>Inhaltsprüfung
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -1185,7 +1185,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1438,7 +1438,7 @@ Der Standardgrenzwert für Anforderungen (`maxAllowedContentLength`) beträgt st
 
 Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Request Limits \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/) (Anforderungseinschränkungen).
 
-Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/aspnet/AspNetCore/issues/2711) (Es ist nicht möglich, Dateien mit einer Größe von mehr als 2 GB hochzuladen).
+Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711) (Upload von Dateien größer als 2 GB ist nicht möglich).
 
 ## <a name="troubleshoot"></a>Problembehandlung
 
@@ -1473,5 +1473,5 @@ Bei den Beispielen in diesem Thema wird davon ausgegangen, dass <xref:System.IO.
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-* [Azure-Sicherheit: Sicherheitsrahmen: Eingabeüberprüfung | Risikominderung](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure-Sicherheit: Security Frame: Eingabeüberprüfung | Risikominderung](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Azure-Cloudentwurfsmuster: Muster „Valetschlüssel“](/azure/architecture/patterns/valet-key)

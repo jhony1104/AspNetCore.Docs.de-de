@@ -5,14 +5,14 @@ description: Lernen Sie aktive und inaktive IIS-Module für ASP.NET Core-Apps ke
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: eb6cedfc572b4ffea969b3583ea6ec44cae1f575
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: ca6cf349aa05db97e145f1cd0cae97a107761fd8
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970055"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951809"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS-Module mit ASP.NET Core
 
@@ -167,8 +167,7 @@ Das HTTP-Zwischenspeicherungsmodul (`HttpCacheModule`) implementiert den IIS-Aus
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:host-and-deploy/iis/index>
 * [Introduction to IIS Architectures: Modules in IIS (Einführung in IIS-Architekturen: Module in IIS)](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Übersicht über IIS-Module](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [Anpassen von IIS 7.0-Rollen und -Modulen](https://technet.microsoft.com/library/cc627313.aspx)
-* [IIS`<system.webServer>`](/iis/configuration/system.webServer/)
+* [IIS \<system.webServer>](/iis/configuration/system.webServer/)

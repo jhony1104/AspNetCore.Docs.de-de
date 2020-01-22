@@ -5,12 +5,12 @@ description: Freigeben von Controllern, Ansichten, Razor Pages und vielem mehr m
 ms.author: riande
 ms.date: 11/11/2019
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: a102511478c40ae64aada919fee7072c3027ddcd
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: a95c344410db0651b9f8f1c1eb7551029f084c25
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74958994"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829074"
 ---
 # <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Freigeben von Controllern, Ansichten, Razor Pages und vielem mehr mit Anwendungsparts
 
@@ -51,8 +51,8 @@ Der `ApplicationPartManager` enthält Parts für Folgendes:
 * Die Assembly der App und die abhängigen Assemblys.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
 * `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
-* `Microsoft.AspNetCore.Mvc.TagHelpers`.
-* `Microsoft.AspNetCore.Mvc.Razor`.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`
+* `Microsoft.AspNetCore.Mvc.Razor`
 
 <a name="fp"></a>
 
@@ -64,7 +64,7 @@ Anwendungsfeatureanbieter untersuchen Anwendungsparts und bieten Features für d
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/aspnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
 Featureanbieter erben von <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, wobei `T` der Typ des Features ist. Featureanbieter können für jeden der oben aufgeführten Featuretypen implementiert werden. Die Reihenfolge der Featureanbieter in `ApplicationPartManager.FeatureProviders` kann sich auf das Laufzeitverhalten auswirken. Später hinzugefügte Anbieter können auf Aktionen reagieren, die von früher hinzugefügten Anbietern ausgeführt wurden.
 
@@ -141,8 +141,8 @@ Der folgende Code verwendet <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>, um
 Der `ApplicationPartManager` enthält Parts für Folgendes:
 
 * Die Assembly der App und die abhängigen Assemblys.
-* `Microsoft.AspNetCore.Mvc.TagHelpers`.
-* `Microsoft.AspNetCore.Mvc.Razor`.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`
+* `Microsoft.AspNetCore.Mvc.Razor`
 
 ## <a name="application-feature-providers"></a>Anwendungsfeatureanbieter
 

@@ -5,16 +5,16 @@ description: Erstellen Sie Schritt für Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/13/2020
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 11ff540a70ebdb8baa0c7adb98cb1dfe27d91e50
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 8830dcf26b58b5f5fdd36b60298e7b365f99bdd9
+ms.sourcegitcommit: 925cdbd94613243f33bc7613a62ea34006219931
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944186"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75921292"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -73,19 +73,19 @@ Beziehen Sie eine Komponente mithilfe einer HTML-Syntax in eine andere Komponent
 
 Komponenten können auch Parameter aufweisen. Komponentenparameter werden mithilfe öffentlicher Eigenschaften für die Komponentenklasse mit dem `[Parameter]`-Attribut definiert. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
 
-1. Aktualisieren Sie den `@code`-C#-Code der Komponente:
+1. Ändern Sie den C#-Code `@code` der Komponente wie folgt:
 
    * Fügen Sie eine öffentliche `IncrementAmount`-Eigenschaft mit dem `[Parameter]`-Attribut hinzu.
-   * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
+   * Ändern Sie die `IncrementCount`-Methode, sodass die Eigenschaft `IncrementAmount` verwendet wird, um den Wert von `currentCount` zu erhöhen.
 
    *Pages/Counter.razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter.razor?highlight=13,17)]
 
-<!-- Add back when supported.
-   > [!NOTE]
-   > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
--->
+   <!-- Add back when supported.
+       > [!NOTE]
+       > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
+   -->
 
 1. Geben Sie unter Verwendung eines Attributs einen `IncrementAmount`-Parameter im `<Counter>`-Element der `Index`-Komponente an. Legen Sie den Wert fest, um den Zähler um zehn heraufzusetzen.
 

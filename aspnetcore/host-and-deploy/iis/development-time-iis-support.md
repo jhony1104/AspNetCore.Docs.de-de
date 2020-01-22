@@ -5,14 +5,14 @@ description: Informationen zur Unterstützung des Debuggens von ASP.NET Core-App
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/26/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 2d2c8d8e4b39d18a3a727e2a2bdef3be566897c1
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 704a8dae9da904e4bbdfae0754a6fcdabee6dc82
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034146"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952032"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>IIS-Support zum Zeitpunkt der Entwicklung in Visual Studio für ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Sourabh Shirhatti](https://twitter.com/sshirhatti) und [Luke Latham](https:
 
 In diesem Artikel wird die [Visual Studio](https://visualstudio.microsoft.com)-Unterstützung des Debuggens von ASP.NET Core-Apps beschrieben, die mit IIS unter Windows Server ausgeführt werden. Dieses Thema führt Sie durch die Aktivierung dieses Szenarios und Einrichtung eines Projekts.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [Visual Studio für Windows](https://visualstudio.microsoft.com/downloads/)
 * Workload **ASP.NET und Webentwicklung**
@@ -38,7 +38,7 @@ Für die IIS-Installation ist möglicherweise ein Neustart des Systems erforderl
 
 Für IIS muss eine Website mit Folgendem konfiguriert sein:
 
-* **Hostname** &ndash; In der Regel wird die **Standardwebsite** mit einem **Host** namens `localhost` verwendet. Allerdings funktioniert jede gültige IIS-Website mit einem eindeutigen Hostnamen.
+* **Hostname:** In der Regel wird die **Standardwebsite** mit einem **Host** namens `localhost` verwendet. Allerdings funktioniert jede gültige IIS-Website mit einem eindeutigen Hostnamen.
 * **Sitebindung**
   * Für Anwendungen, die HTTPS benötigen, erstellen Sie mithilfe eines Zertifikats eine Bindung an Port 443. In der Regel wird das **IIS Express-Entwicklungszertifikat** verwendet, doch es funktioniert auch jedes andere gültige Zertifikat.
   * Bei Apps, die HTTP verwenden, bestätigen Sie das Vorhandensein einer Bindung an Port 80, oder erstellen Sie für eine neue Website eine Bindung an Port 80.
@@ -80,7 +80,7 @@ So erstellen Sie ein neues Startprofil, um IIS-Unterstützung zur Entwicklungsze
    Geben Sie den Namen der App am Ende der URL an.
 
    `https://localhost/WebApplication1` (HTTPS) oder `http://localhost/WebApplication1` (HTTP) sind beispielsweise gültige Endpunkt-URLs.
-1. Klicken Sie im Abschnitt **Umgebungsvariablen** auf die Schaltfläche **Hinzufügen**. Geben Sie eine Umgebungsvariable mit dem **Namen** `ASPNETCORE_ENVIRONMENT` und dem **Wert** `Development` an.
+1. Klicken Sie im Abschnitt **Umgebungsvariablen** auf die Schaltfläche **Hinzufügen**. Geben Sie eine Umgebungsvariable mit dem **Namen**`ASPNETCORE_ENVIRONMENT` und dem **Wert**`Development` an.
 1. Legen Sie im Bereich **Webservereinstellungen** die **App-URL** auf den gleichen Wert fest, der für die Endpunkt-URL für **Browser starten** verwendet wird.
 1. Wählen Sie für die Einstellung **Hostingmodel** in Visual Studio 2019 oder höher **Standard**, um das vom Projekt verwendete Hostingmodell zu nutzen. Wenn das Projekt die `<AspNetCoreHostingModel>`-Eigenschaft in seiner Projektdatei festlegt, wird der Wert der Eigenschaft (`InProcess` oder `OutOfProcess`) verwendet. Wenn die Eigenschaft nicht vorhanden ist, wird das standardmäßige Hostingmodell der App (In-Process) verwendet. Wenn die App eine explizite Einstellung des Hostingmodells erfordert, die sich vom normalen Hostingmodell der App unterscheidet, legen Sie das **Hostingmodell** nach Bedarf entweder auf `In Process` oder `Out Of Process` fest.
 1. Speichern Sie den Profilnamen.
@@ -101,7 +101,7 @@ So erstellen Sie ein neues Startprofil, um IIS-Unterstützung zur Entwicklungsze
    Geben Sie den Namen der App am Ende der URL an.
 
    `https://localhost/WebApplication1` (HTTPS) oder `http://localhost/WebApplication1` (HTTP) sind beispielsweise gültige Endpunkt-URLs.
-1. Klicken Sie im Abschnitt **Umgebungsvariablen** auf die Schaltfläche **Hinzufügen**. Geben Sie eine Umgebungsvariable mit dem **Namen** `ASPNETCORE_ENVIRONMENT` und dem **Wert** `Development` an.
+1. Klicken Sie im Abschnitt **Umgebungsvariablen** auf die Schaltfläche **Hinzufügen**. Geben Sie eine Umgebungsvariable mit dem **Namen**`ASPNETCORE_ENVIRONMENT` und dem **Wert**`Development` an.
 1. Legen Sie im Bereich **Webservereinstellungen** die **App-URL** auf den gleichen Wert fest, der für die Endpunkt-URL für **Browser starten** verwendet wird.
 1. Wählen Sie für die Einstellung **Hostingmodel** in Visual Studio 2019 oder höher **Standard**, um das vom Projekt verwendete Hostingmodell zu nutzen. Wenn das Projekt die `<AspNetCoreHostingModel>`-Eigenschaft in seiner Projektdatei festlegt, wird der Wert der Eigenschaft (`InProcess` oder `OutOfProcess`) verwendet. Wenn die Eigenschaft nicht vorhanden ist, wird das standardmäßige Hostingmodell der App (Out-of-Process) verwendet. Wenn die App eine explizite Einstellung des Hostingmodells erfordert, die sich vom normalen Hostingmodell der App unterscheidet, legen Sie das **Hostingmodell** nach Bedarf entweder auf `In Process` oder `Out Of Process` fest.
 1. Speichern Sie den Profilnamen.
@@ -152,6 +152,4 @@ Bei Verwendung eines nicht vertrauenswürdigen Entwicklungszertifikats müssen S
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Erste Schritte mit IIS-Manager in IIS](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
-* <xref:host-and-deploy/iis/index>
-* <xref:host-and-deploy/aspnet-core-module>
 * <xref:security/enforcing-ssl>

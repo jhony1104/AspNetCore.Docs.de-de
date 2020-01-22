@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie das ASP.NET Core-Modul so konfigurieren, dass
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: c9bbd36b8a55b837f6d78abf99215c5496895a39
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 75f4a158253dd3276ed37011d9aa73d82cad5b79
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799412"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952019"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core-Modul
 
@@ -42,7 +42,7 @@ ASP.NET Core-Apps verwenden standardmäßig das In-Process-Hostingmodell.
 
 Die folgenden Merkmale treffen für In-Process-Hosting zu:
 
-* Der IIS-HTTP-Server (`IISHttpServer`) wird anstelle des [Kestrel](xref:fundamentals/servers/kestrel)-Servers verwendet. Für In-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings) <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> auf zu:
+* Der IIS-HTTP-Server (`IISHttpServer`) wird anstelle des [Kestrel](xref:fundamentals/servers/kestrel)-Servers verwendet. Für In-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings)<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> auf zu:
 
   * Registrieren des `IISHttpServer`.
   * Konfigurieren des Ports und des Basispfads, den der Server überwachen soll, wenn er hinter dem ASP.NET Core-Modul ausgeführt wird.
@@ -95,7 +95,7 @@ Beim Wert von `<AspNetCoreHostingModel>` wird die Groß-/Kleinschreibung nicht b
 
 Der [Kestrel](xref:fundamentals/servers/kestrel)-Server wird anstelle des IIS-HTTP-Servers (`IISHttpServer`) verwendet.
 
-Für Out-of-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings) <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> auf zu:
+Für Out-of-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings)<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> auf zu:
 
 * Konfigurieren des Ports und des Basispfads, den der Server überwachen soll, wenn er hinter dem ASP.NET Core-Modul ausgeführt wird.
 * Konfigurieren des Hosts zum Erfassen von Startfehlern.
@@ -173,7 +173,7 @@ Weitere Informationen zur Konfiguration von IIS untergeordneten Anwendungen find
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Attribute des aspNetCore-Elements
 
-| Attribut | BESCHREIBUNG | Standard |
+| Attribut | Beschreibung | Standard |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Optionales Zeichenfolgeattribut.</p><p>Argumente zur ausführbaren Datei, die in **processPath** angegeben wurde.</p> | |
 | `disableStartUpErrorPage` | <p>Optionales boolesches Attribut.</p><p>Wenn TRUE, wird die Seite **502.5: Prozessfehler** unterdrückt, und die in der Datei *web.config* konfigurierte Seite für den Statuscode 502 hat Vorrang.</p> | `false` |
@@ -458,7 +458,7 @@ Ist die `<AspNetCoreHostingModel>`-Eigenschaft nicht in der Datei vorhanden, ist
 
 Die folgenden Merkmale treffen für In-Process-Hosting zu:
 
-* Der IIS-HTTP-Server (`IISHttpServer`) wird anstelle des [Kestrel](xref:fundamentals/servers/kestrel)-Servers verwendet. Für In-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/web-host#set-up-a-host) <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> auf zu:
+* Der IIS-HTTP-Server (`IISHttpServer`) wird anstelle des [Kestrel](xref:fundamentals/servers/kestrel)-Servers verwendet. Für In-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/web-host#set-up-a-host)<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> auf zu:
 
   * Registrieren des `IISHttpServer`.
   * Konfigurieren des Ports und des Basispfads, den der Server überwachen soll, wenn er hinter dem ASP.NET Core-Modul ausgeführt wird.
@@ -510,7 +510,7 @@ Beim Wert wird die Groß-/Kleinschreibung nicht beachtet, sodass `inprocess` und
 
 Der [Kestrel](xref:fundamentals/servers/kestrel)-Server wird anstelle des IIS-HTTP-Servers (`IISHttpServer`) verwendet.
 
-Für Out-of-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/web-host#set-up-a-host) <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> auf zu:
+Für Out-of-Process ruft [CreateDefaultBuilder](xref:fundamentals/host/web-host#set-up-a-host)<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> auf zu:
 
 * Konfigurieren des Ports und des Basispfads, den der Server überwachen soll, wenn er hinter dem ASP.NET Core-Modul ausgeführt wird.
 * Konfigurieren des Hosts zum Erfassen von Startfehlern.
@@ -588,7 +588,7 @@ Weitere Informationen zur Konfiguration von IIS untergeordneten Anwendungen find
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Attribute des aspNetCore-Elements
 
-| Attribut | BESCHREIBUNG | Standard |
+| Attribut | Beschreibung | Standard |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Optionales Zeichenfolgeattribut.</p><p>Argumente zur ausführbaren Datei, die in **processPath** angegeben wurde.</p> | |
 | `disableStartUpErrorPage` | <p>Optionales boolesches Attribut.</p><p>Wenn TRUE, wird die Seite **502.5: Prozessfehler** unterdrückt, und die in der Datei *web.config* konfigurierte Seite für den Statuscode 502 hat Vorrang.</p> | `false` |
@@ -895,7 +895,7 @@ Weitere Informationen zur Konfiguration von IIS untergeordneten Anwendungen find
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Attribute des aspNetCore-Elements
 
-| Attribut | BESCHREIBUNG | Standard |
+| Attribut | Beschreibung | Standard |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Optionales Zeichenfolgeattribut.</p><p>Argumente zur ausführbaren Datei, die in **processPath** angegeben wurde.</p>| |
 | `disableStartUpErrorPage` | <p>Optionales boolesches Attribut.</p><p>Wenn TRUE, wird die Seite **502.5: Prozessfehler** unterdrückt, und die in der Datei *web.config* konfigurierte Seite für den Statuscode 502 hat Vorrang.</p> | `false` |
@@ -1046,5 +1046,6 @@ Den Speicherort dieser Dateien finden Sie, indem Sie *aspnetcore* in der Datei *
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:host-and-deploy/iis/index>
-* [GitHub-Repository für ASP.NET Core-Modul (Referenzquelle)](https://github.com/aspnet/AspNetCoreModule)
+* <xref:host-and-deploy/azure-apps/index>
+* [Quelle für die ASP.NET Core-Modulreferenz (Masterbranch)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2): Verwenden Sie die Dropdownliste **Branch**, um ein spezifisches Release auszuwählen (z. B. `release/3.1`).
 * <xref:host-and-deploy/iis/modules>

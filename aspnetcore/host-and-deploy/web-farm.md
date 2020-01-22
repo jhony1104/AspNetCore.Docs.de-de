@@ -5,14 +5,14 @@ description: Hier erfahren Sie, wie Sie mehrere Instanzen einer ASP.NET Core-App
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 16ec2162be8199857d0f2d0ff989ec4cdc6c3277
-ms.sourcegitcommit: 68d804d60e104c81fe77a87a9af70b5df2726f60
+ms.openlocfilehash: 5c13e9bc4c514f9b42871d55a430265c8ec2da23
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/08/2019
-ms.locfileid: "73830702"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951819"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Hosten von ASP.NET Core in einer Webfarm
 
@@ -20,10 +20,10 @@ Von [Luke Latham](https://github.com/guardrex) und [Chris Ross](https://github.c
 
 Eine *Webfarm* ist eine Gruppe von mindestens zwei Webservern (oder *Knoten*), die mehrere Instanzen einer App hostet. Wenn eine Webfarm Benutzeranforderungen empfängt, verteilt ein *Lastenausgleichsmodul* die Anforderungen auf die Knoten der Webfarm. Webfarmen verbessern:
 
-* **Zuverlässigkeit/Verfügbarkeit** &ndash; Wenn bei mindestens einem Knoten ein Fehler auftritt, kann das Lastenausgleichsmodul Anforderungen zur weiteren Verarbeitung an andere funktionierende Knoten weiterleiten.
-* **Kapazität/Leistung** &ndash; Mehrere Knoten können mehr Anforderungen verarbeiten als ein einzelner Server. Das Lastenausgleichsmodul verteilt den Workload, indem Anforderungen auf die Knoten verteilt werden.
-* **Skalierbarkeit** &ndash; Wenn mehr oder weniger Kapazität benötigt wird, kann die Anzahl der aktiven Knoten dem Workload entsprechend erhöht oder verringert werden. Webfarmtechnologien wie [Azure App Service](https://azure.microsoft.com/services/app-service/) können Knoten automatisch auf Systemadministratoranforderungen hin hinzufügen oder entfernen bzw. diese Vorgänge komplett ohne manuelles Eingreifen ausführen.
-* **Verwaltbarkeit** &ndash; Knoten einer Webfarm können auf einer Reihe von gemeinsamen Diensten basieren, wodurch die Systemverwaltung vereinfacht wird. Beispielsweise können die Knoten einer Webfarm auf einem einzigen Datenbankserver und einer gemeinsamen Netzwerkadresse für statische Ressourcen wie Images und herunterladbare Dateien basieren.
+* **Zuverlässigkeit/Verfügbarkeit:** Wenn bei mindestens einem Knoten ein Fehler auftritt, kann das Lastenausgleichsmodul Anforderungen zur weiteren Verarbeitung an andere funktionierende Knoten weiterleiten.
+* **Kapazität/Leistung:** Mehrere Knoten können mehr Anforderungen verarbeiten als ein einzelner Server. Das Lastenausgleichsmodul verteilt den Workload, indem Anforderungen auf die Knoten verteilt werden.
+* **Skalierbarkeit:** Wenn mehr oder weniger Kapazität benötigt wird, kann die Anzahl der aktiven Knoten entsprechend der Arbeitsauslastung erhöht oder verringert werden. Webfarmtechnologien wie [Azure App Service](https://azure.microsoft.com/services/app-service/) können Knoten automatisch auf Systemadministratoranforderungen hin hinzufügen oder entfernen bzw. diese Vorgänge komplett ohne manuelles Eingreifen ausführen.
+* **Verwaltbarkeit:** Knoten einer Webfarm können auf einer Reihe von gemeinsamen Diensten basieren, wodurch die Systemverwaltung vereinfacht wird. Beispielsweise können die Knoten einer Webfarm auf einem einzigen Datenbankserver und einer gemeinsamen Netzwerkadresse für statische Ressourcen wie Images und herunterladbare Dateien basieren.
 
 Dieses Thema beschreibt die Konfiguration und Abhängigkeiten für ASP.NET Core-Apps, die in einer Webfarm gehostet werden und auf freigegebenen Ressourcen basieren.
 
@@ -92,3 +92,4 @@ Wenn die Webfarm-Apps in der Lage sind, auf Anforderungen zu reagieren, erhalten
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * Die [benutzerdefinierte Skript Erweiterung für Windows](/azure/virtual-machines/extensions/custom-script-windows) lädt Skripts auf virtuellen Azure-Computern herunter und führt sie dort aus &ndash; dies ist für die Konfiguration und Softwareinstallation nach der Bereitstellung nützlich.
+* <xref:host-and-deploy/proxy-load-balancer>
