@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 4ade13c38880c9915ec590297f2a43548ca400a8
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1dee9a7e1cc381547e7ece71f302f407223dc838
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880827"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829113"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -73,9 +73,9 @@ Komponenten in Blazor werden üblicherweise mit der Razor-Syntax erstellt, einer
 
 Die gRPC-Funktionalität in ASP.NET Core 3.0 umfasst Folgendes:
 
-* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; ein ASP.NET Core-Framework zum Hosten von gRPC-Diensten. gRPC in ASP.NET Core lässt sich in ASP.NET Core-Standardfeatures wie Protokollierung, Abhängigkeitsinjektion (Dependency Injection, DI), Authentifizierung und Autorisierung integrieren.
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; ein gRPC-Client für .NET Core, der auf dem vertrauten `HttpClient` aufbaut.
-* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; gRPC-Clientintegration mit `HttpClientFactory`.
+* [Grpc.AspNetCore:](https://www.nuget.org/packages/Grpc.AspNetCore) Ein ASP.NET Core-Framework zum Hosten von gRPC-Diensten. gRPC in ASP.NET Core lässt sich in ASP.NET Core-Standardfeatures wie Protokollierung, Abhängigkeitsinjektion (Dependency Injection, DI), Authentifizierung und Autorisierung integrieren.
+* [Grpc.Net.Client:](https://www.nuget.org/packages/Grpc.Net.Client) Ein gRPC-Client für .NET Core, der auf dem vertrauten `HttpClient` aufbaut.
+* [Grpc.Net.ClientFactory:](https://www.nuget.org/packages/Grpc.Net.ClientFactory)&ndash; Eine gRPC-Clientintegration mit `HttpClientFactory`.
 
 Weitere Informationen finden Sie unter <xref:grpc/index>.
 
@@ -289,7 +289,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-JavaScript-Client-Apps verwenden das SignalR-`Subject` (oder ein [RxJS-Subject](https://rxjs.dev/api/index/class/Subject)) für das `stream`-Argument der oben genannten `UploadStream`-Hubmethode.
+JavaScript-Client-Apps verwenden SignalR `Subject` (oder [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) für das `stream`-Argument der oben genannten Hubmethode `UploadStream`.
 
 ```javascript
 let subject = new signalR.Subject();
@@ -319,8 +319,8 @@ Informationen zum Hinzufügen von Json.NET zu ASP.NET Core 3.0 finden Sie unter
 
 Die folgende Liste enthält neue Razor-Anweisungen:
 
-* [`@attribute`](xref:mvc/views/razor#attribute) &ndash; die `@attribute`-Anweisung wendet das angegebene Attribut auf die Klasse der generierten Seite oder Ansicht an. Beispielsweise `@attribute [Authorize]`.
-* [`@implements`](xref:mvc/views/razor#implements) &ndash; die `@implements`-Anweisung implementiert eine Schnittstelle für die generierte Klasse. Beispielsweise `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute): die Anweisung `@attribute` wendet das angegebene Attribut auf die Klasse der generierten Seite oder Ansicht an. Beispielsweise `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements): die Anweisung `@implements` implementiert eine Schnittstelle für die generierte Klasse. Beispielsweise `@implements IDisposable`.
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 unterstützt die Authentifizierung und Autorisierung für Web-APIs und SPAs.
 
@@ -536,7 +536,7 @@ Die wichtigsten Assemblys, die aus dem freigegebenen ASP.NET Core 3.0-Framework
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) (Json.NET). Informationen zum Hinzufügen von Json.NET zu ASP.NET Core 3.0 finden Sie unter [Hinzufügen von Newtonsoft.Json-basierter Unterstützung für das JSON-Format](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3.0 führt `System.Text.Json` zum Lesen und Schreiben von JSON ein. Weitere Informationen finden Sie im Abschnitt [Neue JSON-Serialisierung](#new-json-serialization) im vorliegenden Dokument.
 * [Entity Framework Core](/ef/core/)
 
-Eine vollständige Liste der Assemblys, die aus dem freigegebenen Framework entfernt wurden, finden Sie unter [Assemblies being removed from Microsoft.AspNetCore.App 3.0](https://github.com/aspnet/AspNetCore/issues/3755) (Assemblys, die aus Microsoft.AspNetCore.App 3.0 entfernt werden). Weitere Informationen zu den Beweggründen für diese Änderung finden Sie unter [Breaking changes to Microsoft.AspNetCore.App in 3.0](https://github.com/aspnet/Announcements/issues/325) (Breaking Changes an Microsoft.AspNetCore.App in Version 3.0) und [A first look at changes coming in ASP.NET Core 3.0](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/) (Ein erster Blick auf die Änderungen in ASP.NET Core 3.0).
+Eine vollständige Liste der Assemblys, die aus dem freigegebenen Framework entfernt wurden, finden Sie unter [Assemblies being removed from Microsoft.AspNetCore.App 3.0](https://github.com/dotnet/AspNetCore/issues/3755) (Assemblys, die aus Microsoft.AspNetCore.App 3.0 entfernt werden). Weitere Informationen zu den Beweggründen für diese Änderung finden Sie unter [Breaking changes to Microsoft.AspNetCore.App in 3.0](https://github.com/aspnet/Announcements/issues/325) (Breaking Changes an Microsoft.AspNetCore.App in Version 3.0) und [A first look at changes coming in ASP.NET Core 3.0](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/) (Ein erster Blick auf die Änderungen in ASP.NET Core 3.0).
 
 <!-- 
 ## Additional information
