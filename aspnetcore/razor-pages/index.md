@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: Erfahren Sie, wie Razor Pages in ASP.NET Core codierungsseitige Szenarios einfacher und produktiver gestalten als MVC.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 01/18/2020
 uid: razor-pages/index
-ms.openlocfilehash: fbe6e307ff5f7388e91cc2276f22ae1672507587
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 69c9f09aa0e3dbdbe78720c573b5e1fc63464571
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880898"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294654"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Einführung in Razor Pages in ASP.NET Core
 
@@ -25,7 +25,7 @@ Ein Tutorial, in dem der Model-View-Controller-Ansatz verwendet wird, finden Sie
 
 Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um ein Schritt-für-Schritt-Tutorial. Wenn es Ihnen Probleme bereitet, die Ausführungen in einigen Abschnitten nachzuvollziehen, lesen Sie [Erste Schritte mit Razor-Seiten in ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start). Eine Übersicht über ASP.NET Core finden Sie unter [Einführung in ASP.NET Core](xref:index).
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -128,7 +128,7 @@ Mit der Klasse `PageModel` kann die Logik einer Seite von deren Darstellung getr
 * Verwalten von Seitenabhängigkeiten mithilfe von [Dependency Injection](xref:fundamentals/dependency-injection)
 * [Komponententests](xref:test/razor-pages-tests)
 
-Die Seite hat eine `OnPostAsync`-*Handlermethode*, die auf `POST`-Anforderungen ausgeführt wird (wenn ein Benutzer das Formular sendet). Für alle HTTP-Verben können Handlermethoden hinzugefügt werden. Die am häufigsten verwendeten Handler sind:
+Die Seite verfügt über eine `OnPostAsync`-*Handlermethode*, die bei `POST`-Anforderungen ausgeführt wird (wenn ein Benutzer das Formular sendet). Für alle HTTP-Verben können Handlermethoden hinzugefügt werden. Die am häufigsten verwendeten Handler sind:
 
 * `OnGet`, um den für eine Seite erforderlichen Status zu initialisieren. Im vorangehenden Code wird die Razor-Seite *CreateModel.cshtml* durch die `OnGet`-Methode dargestellt.
 * `OnPost`, um Formularübermittlungen zu behandeln
@@ -198,7 +198,7 @@ Sehen Sie sich die Ansichtsdatei *Pages/Create.cshtml* an:
 * Im vorangehenden Code bindet das [Eingabetag-Hilfsprogramm](xref:mvc/views/working-with-forms#the-input-tag-helper) `<input asp-for="Customer.Name" />` das HTML-Element `<input>` an den Modellausdruck `Customer.Name`.
 * [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) stellt Taghilfsprogramme zur Verfügung.
 
-### <a name="the-home-page"></a>Auf der Startseite
+### <a name="the-home-page"></a>Die Homepage
 
 *Index.cshtml* ist die Homepage:
 
@@ -212,7 +212,7 @@ Die Datei *Index.cshtml* enthält das folgende Markup:
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-Das `<a /a>` [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) verwendet das `asp-route-{value}`-Attribut, um einen Link zur Seite „Edit“ (Bearbeiten) zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `https://localhost:5001/Edit/1`. [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien.
+Das [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `<a /a>` verwendet das `asp-route-{value}`-Attribut, um einen Link zur Bearbeitungsseite zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `https://localhost:5001/Edit/1`. [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien.
 
 Die Datei *Index.cshtml* enthält das Markup zum Erstellen der Schaltfläche „delete“ (Löschen) für jeden Kundenkontakt:
 
@@ -276,7 +276,7 @@ Für die folgende Ansichtsdatei *Create.cshtml* gilt Folgendes:
 Der vorangehende Code:
 
 * umfasst jQuery-Skripts einschließlich solcher zur Validierung.
-* verwendet die [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) `<div />` und `<span />` zur Aktivierung von Folgendem:
+* Verwendet die [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) `<div />` und `<span />`, um Folgendes zu ermöglichen:
 
   * clientseitiger Validierung.
   * Rendering von Validierungsfehlern.
@@ -432,13 +432,13 @@ Die App hat die folgende Datei/Ordner-Struktur:
     * *Edit.cshtml*
     * *Index.cshtml*
 
-Die Seiten *Pages/Customers/Create.cshtml* und *Pages/Customers/Edit.cshtml* führen bei Erfolg eine Umleitung zu *Pages/Customers/Index.cshtml* durch. Die Zeichenfolge `./Index` stellt einen relativen Seitennamen dar, der für den Zugriff auf die vorherige Seite verwendet wird. Sie wird für das Generieren von URIs für die Seite *Pages/Customers/Index.cshtml* verwendet. Beispiel:
+Die Seiten *Pages/Customers/Create.cshtml* und *Pages/Customers/Edit.cshtml* führen bei Erfolg eine Umleitung zu *Pages/Customers/Index.cshtml* durch. Die Zeichenfolge `./Index` stellt einen relativen Seitennamen dar, der für den Zugriff auf die vorherige Seite verwendet wird. Sie wird für das Generieren von URIs für die Seite *Pages/Customers/Index.cshtml* verwendet. Zum Beispiel:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Der absolute Seitenname `/Index` wird zum Generieren der URLs für die Seite *Pages/Index.cshtml* verwendet. Beispiel:
+Der absolute Seitenname `/Index` wird zum Generieren der URLs für die Seite *Pages/Index.cshtml* verwendet. Zum Beispiel:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -559,9 +559,7 @@ Verwenden Sie die `@page`-Anweisung für Folgendes:
 
 Es wird ein relativer Pfad zum Stamm unterstützt, der durch eine Tilde (`~`) festgelegt wird. `@page "~/Some/Other/Path"` entspricht beispielsweise `@page "/Some/Other/Path"`.
 
-Sie können die Abfragezeichenfolge `?handler=JoinList` in der URL in ein Routensegment (`/JoinList`) ändern, indem Sie die Routenvorlage `@page "{handler?}"` angeben.
-
-Wenn Sie nicht möchten, dass die Abfragezeichenfolge `?handler=JoinList` in der URL enthalten ist, können Sie die Route ändern, damit der Handlername im Pfadteil der URL eingefügt wird. Sie können die Route anpassen, indem Sie eine Routenvorlage in doppelten Anführungszeichen nach der `@page`-Anweisung hinzufügen.
+Wenn Sie nicht möchten, dass die Abfragezeichenfolge `?handler=JoinList` in der URL enthalten ist, ändern Sie die Route so, dass der Handlername im Pfadteil der URL eingefügt wird. Sie können die Route anpassen, indem Sie nach der `@page`-Anweisung eine Routenvorlage in doppelten Anführungszeichen hinzufügen.
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
@@ -618,7 +616,7 @@ Ein Tutorial, in dem der Model-View-Controller-Ansatz verwendet wird, finden Sie
 
 Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um ein Schritt-für-Schritt-Tutorial. Wenn es Ihnen Probleme bereitet, die Ausführungen in einigen Abschnitten nachzuvollziehen, lesen Sie [Erste Schritte mit Razor-Seiten in ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start). Eine Übersicht über ASP.NET Core finden Sie unter [Einführung in ASP.NET Core](xref:index).
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -721,7 +719,7 @@ Mit der Klasse `PageModel` kann die Logik einer Seite von deren Darstellung getr
 * Verwalten von Seitenabhängigkeiten mithilfe von [Dependency Injection](xref:fundamentals/dependency-injection)
 * [Komponententests](xref:test/razor-pages-tests) für Seiten
 
-Die Seite hat eine `OnPostAsync`-*Handlermethode*, die auf `POST`-Anforderungen ausgeführt wird (wenn ein Benutzer das Formular sendet). Sie können Handlermethoden für alle HTTP-Verben hinzufügen. Die am häufigsten verwendeten Handler sind:
+Die Seite verfügt über eine `OnPostAsync`-*Handlermethode*, die bei `POST`-Anforderungen ausgeführt wird (wenn ein Benutzer das Formular sendet). Sie können Handlermethoden für alle HTTP-Verben hinzufügen. Die am häufigsten verwendeten Handler sind:
 
 * `OnGet`, um den für eine Seite erforderlichen Status zu initialisieren. [OnGet](#OnGet)-Beispiel
 * `OnPost`, um Formularübermittlungen zu behandeln
@@ -768,7 +766,7 @@ Die Datei *Index.cshtml* enthält das folgende Markup, um einen Bearbeitungslink
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-Das `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) verwendet das `asp-route-{value}`-Attribut, um einen Link zur Seite „Edit“ (Bearbeiten) zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `https://localhost:5001/Edit/1`. [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien. Taghilfsprogramme werden durch `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` aktiviert.
+Das [Anchor-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` verwendet das `asp-route-{value}`-Attribut, um einen Link zur Bearbeitungsseite zu generieren. Der Link enthält die Routendaten mit der Kontakt-ID. Beispielsweise `https://localhost:5001/Edit/1`. [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien. Taghilfsprogramme werden durch `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` aktiviert.
 
 Die Datei *Pages/Edit.cshtml*:
 
@@ -948,7 +946,7 @@ Die App hat die folgende Datei/Ordner-Struktur:
     * *Edit.cshtml*
     * *Index.cshtml*
 
-Die Seiten *Pages/Customers/Create.cshtml* und *Pages/Customers/Edit.cshtml* leiten bei Erfolg an *Pages/Index.cshtml* weiter. Die Zeichenfolge `/Index` ist Teil des URI, der auf die vorhergehende Seite zugreifen soll. Die Zeichenfolge `/Index` kann für das Generieren von URIs für die Seite *Pages/Index.cshtml* verwendet werden. Beispiel:
+Die Seiten *Pages/Customers/Create.cshtml* und *Pages/Customers/Edit.cshtml* leiten bei Erfolg an *Pages/Index.cshtml* weiter. Die Zeichenfolge `/Index` ist Teil des URI, der auf die vorhergehende Seite zugreifen soll. Die Zeichenfolge `/Index` kann für das Generieren von URIs für die Seite *Pages/Index.cshtml* verwendet werden. Zum Beispiel:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -1066,9 +1064,7 @@ Verwenden Sie die `@page`-Anweisung für Folgendes:
 
 Es wird ein relativer Pfad zum Stamm unterstützt, der durch eine Tilde (`~`) festgelegt wird. `@page "~/Some/Other/Path"` entspricht beispielsweise `@page "/Some/Other/Path"`.
 
-Sie können die Abfragezeichenfolge `?handler=JoinList` in der URL in ein Routensegment (`/JoinList`) ändern, indem Sie die Routenvorlage `@page "{handler?}"` angeben.
-
-Wenn Sie nicht möchten, dass die Abfragezeichenfolge `?handler=JoinList` in der URL enthalten ist, können Sie die Route ändern, damit der Handlername im Pfadteil der URL eingefügt wird. Sie können die Route anpassen, indem Sie eine Routenvorlage in doppelten Anführungszeichen nach der `@page`-Anweisung hinzufügen.
+Wenn Sie nicht möchten, dass die Abfragezeichenfolge `?handler=JoinList` in der URL enthalten ist, ändern Sie die Route so, dass der Handlername im Pfadteil der URL eingefügt wird. Sie können die Route anpassen, indem Sie nach der `@page`-Anweisung eine Routenvorlage in doppelten Anführungszeichen hinzufügen.
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
