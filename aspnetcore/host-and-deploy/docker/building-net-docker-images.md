@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie veröffentlichte .NET Core-Docker-Images aus der Docker-Registrierung verwenden können. Übertragen Sie Images mithilfe von Pull, und erstellen Sie eigene Images.
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/18/2019
+ms.date: 01/15/2020
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 64503ed55438b24f2d3d87092107408ddcb515d7
-ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
+ms.openlocfilehash: 5bed5e9a4a6109a45badcef7c0d4e03eb2312bf0
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72165264"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146341"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Docker-Images für ASP.NET Core
 
@@ -40,7 +40,7 @@ Die Dockerfile-Beispieldatei verwendet das [Docker-Feature für mehrstufige Buil
 
    Das Beispiel verwendet dieses Image zum Ausführen der App. Das Image enthält die ASP.NET Core-Runtime und -Bibliotheken und wurde für das Ausführen von Apps in der Produktion optimiert. Das Image wurde im Hinblick auf Bereitstellungs- und App-Startgeschwindigkeit entwickelt und ist daher relativ klein, sodass die Netzwerkleistung von Docker-Registrierung zu Docker-Host optimiert ist. Nur die zum Ausführen einer App benötigten Binärdateien und Inhalte werden in den Container kopiert. Die Inhalte sind bereit zur Ausführung und ermöglichen in kürzester Zeit nach dem `Docker run` das Starten der App. Die dynamische Codekompilierung ist im Docker-Modell nicht erforderlich.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2.2 SDK](https://www.microsoft.com/net/core)
@@ -269,4 +269,4 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 Im Git-Repository, das die Beispiel-App enthält, finden Sie auch die Dokumentation. Eine Übersicht über die im Repository verfügbaren Ressourcen finden Sie in der [Infodatei](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md). Insbesondere erfahren Sie, wie Sie HTTPS implementieren:
 
 > [!div class="nextstepaction"]
-> [Entwickeln von ASP.NET Core-Anwendungen mit Docker über HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md)
+> [Entwickeln von ASP.NET Core-Anwendungen mit Docker über HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
