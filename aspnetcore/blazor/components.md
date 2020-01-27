@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: e73667925c04dd1b2360138343c4a2dcef0ee310
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 6643ccd0fdb62243427bb0972d8deb3f7b57079d
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160014"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726931"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -516,7 +516,7 @@ Im Allgemeinen kann eine Eigenschaft mithilfe `@bind-property:event` Attributs a
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-**Optionsfelder**
+**Options Felder**
 
 Informationen zum Binden an Options Felder in einem Formular finden Sie unter <xref:blazor/forms-validation#work-with-radio-buttons>.
 
@@ -578,7 +578,7 @@ Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 | Event            | Klasse                | DOM-Ereignisse und-Notizen |
 | ---------------- | -------------------- | -------------------- |
 | Zwischenablage        | `ClipboardEventArgs` | `oncut`ist `oncopy`ist `onpaste` |
-| Ziehen             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
+| Hinein             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
 | Fehler            | `ErrorEventArgs`     | `onerror` |
 | Event            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`ist `onbeforecopy`ist `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | Fokus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Beinhaltet keine Unterstützung für `relatedTarget`. |
@@ -603,7 +603,7 @@ Lambda-Ausdrücke können auch verwendet werden:
 Häufig ist es praktisch, zusätzliche Werte zu schließen, z. b. beim Durchlaufen eines Satzes von Elementen. Im folgenden Beispiel werden drei Schaltflächen erstellt, von denen jedes `UpdateHeading` aufgerufen wird, um ein Ereignis Argument (`MouseEventArgs`) und seine Schaltflächen Nummer (`buttonNumber`) zu übergeben, wenn es in der Benutzeroberfläche ausgewählt wird:
 
 ```razor
-<h2>@message</h2>
+<h2>@_message</h2>
 
 @for (var i = 1; i < 4; i++)
 {
@@ -616,11 +616,11 @@ Häufig ist es praktisch, zusätzliche Werte zu schließen, z. b. beim Durchlauf
 }
 
 @code {
-    private string message = "Select a button to learn its position.";
+    private string _message = "Select a button to learn its position.";
 
     private void UpdateHeading(MouseEventArgs e, int buttonNumber)
     {
-        message = $"You selected Button #{buttonNumber} at " +
+        _message = $"You selected Button #{buttonNumber} at " +
             $"mouse position: {e.ClientX} X {e.ClientY}.";
     }
 }
@@ -637,7 +637,7 @@ Der `ChildComponent` in der Beispiel-app (*Components/childcomponent. Razor*) ve
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-Der `ParentComponent` legt die `EventCallback<T>` des untergeordneten Elements auf seine `ShowMessage`-Methode fest.
+Der `ParentComponent` legt die `EventCallback<T>` (`OnClick`) des untergeordneten Elements auf die `ShowMessage` Methode fest.
 
 *Pages/para Component. Razor*:
 
@@ -652,36 +652,28 @@ Der `ParentComponent` legt die `EventCallback<T>` des untergeordneten Elements a
     by the parent component.
 </ChildComponent>
 
-<p><b>@messageText</b></p>
+<p><b>@_messageText</b></p>
 
 @code {
-    private string messageText;
+    private string _messageText;
 
     private void ShowMessage(MouseEventArgs e)
     {
-        messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
+        _messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
     }
 }
 ```
 
 Wenn die Schaltfläche im `ChildComponent`ausgewählt ist:
 
-* Die `ShowMessage`-Methode des `ParentComponent`wird aufgerufen. `messageText` wird aktualisiert und in der `ParentComponent`angezeigt.
+* Die `ShowMessage`-Methode des `ParentComponent`wird aufgerufen. `_messageText` wird aktualisiert und in der `ParentComponent`angezeigt.
 * In der-Methode des Rückrufs (`ShowMessage`) ist kein aufzurufende [statehasch-](xref:blazor/lifecycle#state-changes) Methode erforderlich. `StateHasChanged` wird automatisch aufgerufen, um die `ParentComponent`zu übertragen, ebenso wie untergeordnete Ereignisse die erneute Ausführung von Komponenten in Ereignis Handlern auslöst, die innerhalb des untergeordneten Elements ausgeführt werden.
 
 `EventCallback` und `EventCallback<T>` die asynchrone Delegaten zulassen. `EventCallback<T>` ist stark typisiert und erfordert einen bestimmten Argumenttyp. `EventCallback` ist schwach typisiert und ermöglicht einen beliebigen Argumenttyp.
 
 ```razor
-<p><b>@messageText</b></p>
-
-@{ var message = "Default Text"; }
-
 <ChildComponent 
-    OnClick="@(async () => { await Task.Yield(); messageText = "Blaze It!"; })" />
-
-@code {
-    private string messageText;
-}
+    OnClick="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
 ```
 
 Rufen Sie eine `EventCallback` oder `EventCallback<T>` mit `InvokeAsync` auf, und warten Sie auf die <xref:System.Threading.Tasks.Task>:
@@ -776,7 +768,7 @@ Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
-       type="@(showPassword ? "text" : "password")" 
+       type="@(_showPassword ? "text" : "password")" 
        value="@Password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
@@ -784,7 +776,7 @@ Password:
 </button>
 
 @code {
-    private bool showPassword;
+    private bool _showPassword;
 
     [Parameter]
     public string Password { get; set; }
@@ -801,7 +793,7 @@ Password:
 
     private void ToggleShowPassword()
     {
-        showPassword = !showPassword;
+        _showPassword = !_showPassword;
     }
 }
 ```
@@ -809,16 +801,16 @@ Password:
 Die `PasswordField` Komponente wird in einer anderen Komponente verwendet:
 
 ```razor
-<PasswordField @bind-Password="password" />
+<PasswordField @bind-Password="_password" />
 
 @code {
-    private string password;
+    private string _password;
 }
 ```
 
 Zum Ausführen von Überprüfungen oder Trap Fehlern für das Kennwort im vorherigen Beispiel:
 
-* Erstellen Sie ein Unterstützungs Feld für `Password` (`password` im folgenden Beispielcode).
+* Erstellen Sie ein Unterstützungs Feld für `Password` (`_password` im folgenden Beispielcode).
 * Führen Sie die Überprüfungen oder Trap Fehler im `Password` Setter aus.
 
 Im folgenden Beispiel wird dem Benutzer sofortiges Feedback bereitgestellt, wenn ein Leerzeichen im Wert des Kennworts verwendet wird:
@@ -828,36 +820,36 @@ Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
-       type="@(showPassword ? "text" : "password")" 
+       type="@(_showPassword ? "text" : "password")" 
        value="@Password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
 </button>
 
-<span class="text-danger">@validationMessage</span>
+<span class="text-danger">@_validationMessage</span>
 
 @code {
-    private bool showPassword;
-    private string password;
-    private string validationMessage;
+    private bool _showPassword;
+    private string _password;
+    private string _validationMessage;
 
     [Parameter]
     public string Password
     {
-        get { return password ?? string.Empty; }
+        get { return _password ?? string.Empty; }
         set
         {
-            if (password != value)
+            if (_password != value)
             {
                 if (value.Contains(' '))
                 {
-                    validationMessage = "Spaces not allowed!";
+                    _validationMessage = "Spaces not allowed!";
                 }
                 else
                 {
-                    password = value;
-                    validationMessage = string.Empty;
+                    _password = value;
+                    _validationMessage = string.Empty;
                 }
             }
         }
@@ -875,7 +867,7 @@ Password:
 
     private void ToggleShowPassword()
     {
-        showPassword = !showPassword;
+        _showPassword = !_showPassword;
     }
 }
 ```
@@ -888,22 +880,22 @@ Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu ve
 * Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
 
 ```razor
-<MyLoginDialog @ref="loginDialog" ... />
+<MyLoginDialog @ref="_loginDialog" ... />
 
 @code {
-    private MyLoginDialog loginDialog;
+    private MyLoginDialog _loginDialog;
 
     private void OnSomething()
     {
-        loginDialog.Show();
+        _loginDialog.Show();
     }
 }
 ```
 
-Wenn die Komponente gerendert wird, wird das `loginDialog` Feld mit der `MyLoginDialog` untergeordneten Komponenteninstanz aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
+Wenn die Komponente gerendert wird, wird das `_loginDialog` Feld mit der `MyLoginDialog` untergeordneten Komponenteninstanz aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
 
 > [!IMPORTANT]
-> Die `loginDialog` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](xref:blazor/lifecycle#after-component-render).
+> Die `_loginDialog` Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise mehr vorhanden. Um Komponenten Verweise zu bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, verwenden Sie die [onafterrenderasync-Methode oder die onafterrendering-Methode](xref:blazor/lifecycle#after-component-render).
 
 Beim Erfassen von Komponenten verweisen wird eine ähnliche Syntax zum [Erfassen von Element verweisen](xref:blazor/javascript-interop#capture-references-to-elements)verwendet, es handelt sich jedoch nicht um eine [JavaScript-Interop](xref:blazor/javascript-interop) -Funktion Komponenten Verweise werden nicht an JavaScript-Code übermittelt,&mdash;Sie nur in .NET-Code verwendet werden.
 
@@ -939,10 +931,10 @@ Verwendung des `NotifierService` zum Aktualisieren einer Komponente:
 @inject NotifierService Notifier
 @implements IDisposable
 
-<p>Last update: @lastNotification.key = @lastNotification.value</p>
+<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
 
 @code {
-    private (string key, int value) lastNotification;
+    private (string key, int value) _lastNotification;
 
     protected override void OnInitialized()
     {
@@ -953,7 +945,7 @@ Verwendung des `NotifierService` zum Aktualisieren einer Komponente:
     {
         await InvokeAsync(() =>
         {
-            lastNotification = (key, value);
+            _lastNotification = (key, value);
             StateHasChanged();
         });
     }
@@ -1101,16 +1093,16 @@ Das folgende Beispiel zeigt die Standard `Counter` Komponente mit einem `@code`-
 
 <h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current count: @_currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    int currentCount = 0;
+    private int _currentCount = 0;
 
     void IncrementCount()
     {
-        currentCount++;
+        _currentCount++;
     }
 }
 ```
@@ -1124,7 +1116,7 @@ Die `Counter` Komponente kann auch mit einer Code Behind-Datei mit einer partiel
 
 <h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current count: @_currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
@@ -1136,11 +1128,11 @@ namespace BlazorApp.Pages
 {
     public partial class Counter
     {
-        int currentCount = 0;
+        private int _currentCount = 0;
 
         void IncrementCount()
         {
-            currentCount++;
+            _currentCount++;
         }
     }
 }
@@ -1236,10 +1228,10 @@ Zeichen folgen werden normalerweise mithilfe von Dom-Textknoten gerendert, was b
 Im folgenden Beispiel wird gezeigt, wie der `MarkupString`-Typ verwendet wird, um der gerenderten Ausgabe einer Komponente einen Block von statischem HTML-Inhalt hinzuzufügen:
 
 ```html
-@((MarkupString)myMarkup)
+@((MarkupString)_myMarkup)
 
 @code {
-    private string myMarkup = 
+    private string _myMarkup = 
         "<p class='markup'>This is a <em>markup string</em>.</p>";
 }
 ```
@@ -1365,7 +1357,7 @@ Beispielsweise gibt die Beispiel-App Design Informationen (`ThemeInfo`) in einem
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="theme">
+            <CascadingValue Value="_theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -1375,7 +1367,7 @@ Beispielsweise gibt die Beispiel-App Design Informationen (`ThemeInfo`) in einem
 </div>
 
 @code {
-    private ThemeInfo theme = new ThemeInfo { ButtonClass = "btn-success" };
+    private ThemeInfo _theme = new ThemeInfo { ButtonClass = "btn-success" };
 }
 ```
 
@@ -1392,7 +1384,7 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme` Komponente den `
 
 <h1>Cascading Values & Parameters</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current count: @_currentCount</p>
 
 <p>
     <button class="btn" @onclick="IncrementCount">
@@ -1407,14 +1399,14 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme` Komponente den `
 </p>
 
 @code {
-    private int currentCount = 0;
+    private int _currentCount = 0;
 
     [CascadingParameter]
     protected ThemeInfo ThemeInfo { get; set; }
 
     private void IncrementCount()
     {
-        currentCount++;
+        _currentCount++;
     }
 }
 ```
@@ -1422,14 +1414,14 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme` Komponente den `
 Um mehrere Werte desselben Typs innerhalb derselben Unterstruktur zu kaskadieren, stellen Sie jeder `CascadingValue` Komponente und der entsprechenden `CascadingParameter`eine eindeutige `Name` Zeichenfolge bereit. Im folgenden Beispiel werden zwei `CascadingValue` Komponenten verschiedene Instanzen von `MyCascadingType` nach Namen kaskadieren:
 
 ```razor
-<CascadingValue Value=@ParentCascadeParameter1 Name="CascadeParam1">
+<CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
     <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
 
 @code {
-    private MyCascadingType ParentCascadeParameter1;
+    private MyCascadingType _parentCascadeParameter1;
 
     [Parameter]
     public MyCascadingType ParentCascadeParameter2 { get; set; }
@@ -1509,14 +1501,13 @@ Rendering-Fragmente können mithilfe der Razor-Vorlagen Syntax definiert werden.
 Im folgenden Beispiel wird veranschaulicht, wie Sie `RenderFragment`-und `RenderFragment<T>` Werte angeben und Vorlagen direkt in einer-Komponente darstellen. Rendering-Fragmente können auch als Argumente an vorlagenbasierte [Komponenten](#templated-components)übermittelt werden.
 
 ```razor
-@timeTemplate
+@_timeTemplate
 
-@petTemplate(new Pet { Name = "Rex" })
+@_petTemplate(new Pet { Name = "Rex" })
 
 @code {
-    private RenderFragment timeTemplate = @<p>The time is @DateTime.Now.</p>;
-    private RenderFragment<Pet> petTemplate = 
-        (pet) => @<p>Your pet's name is @pet.Name.</p>;
+    private RenderFragment _timeTemplate = @<p>The time is @DateTime.Now.</p>;
+    private RenderFragment<Pet> _petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
 
     private class Pet
     {
@@ -1530,7 +1521,7 @@ Gerenderte Ausgabe des vorangehenden Codes:
 ```html
 <p>The time is 10/04/2018 01:26:52.</p>
 
-<p>Your pet's name is Rex.</p>
+<p>Pet: Rex</p>
 ```
 
 ## <a name="manual-rendertreebuilder-logic"></a>Manuelle rendertreebuilder-Logik
@@ -1775,8 +1766,6 @@ Die folgende Komponente zeigt ein Beispiel dafür, wie die anfängliche Umleitun
 </select>
 
 @code {
-    private double textNumber;
-
     private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;

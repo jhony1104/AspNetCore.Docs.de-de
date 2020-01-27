@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 09400a076849bdec35beb284a488d01feb8a84c2
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 642881b5400a70a99f6e7e262d2a2f1038389ce7
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160001"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726847"
 ---
 # <a name="get-started-with-aspnet-core-opno-locblazor"></a>Erste Schritte mit ASP.NET Core Blazor
 
@@ -39,7 +39,7 @@ Beginnen Sie mit Blazor:
 
    # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-   1 \. Installieren Sie [Visual Studio 16,4 oder](https://visualstudio.microsoft.com/vs/preview/) höher mit der Arbeitsauslastung **ASP.net und Webentwicklung** .
+   1 \. Installieren Sie [Visual Studio 2019, Version 16,4 oder](https://visualstudio.microsoft.com/vs/preview/) höher, mit der Arbeitsauslastung **ASP.net und Webentwicklung** .
 
    2 \. Erstellen Sie ein neues Projekt.
 

@@ -5,14 +5,14 @@ description: Informationen zur Antwortkomprimierung und zum Verwenden von Antwor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/22/2020
 uid: performance/response-compression
-ms.openlocfilehash: 04b2ffd7047e8b127968adb5d40e0141365fb5fe
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: b8a84418a3258e9ac43b4eadd8564c0708590bce
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880909"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726963"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Antwort Komprimierung in ASP.net Core
 
@@ -139,7 +139,7 @@ public class Startup
 
 Anmerkungen:
 
-* `app.UseResponseCompression` muss vor `app.UseMvc`aufgerufen werden.
+* `app.UseResponseCompression` muss vor allen Middleware aufgerufen werden, die Antworten komprimiert. Weitere Informationen finden Sie unter <xref:fundamentals/middleware/index#middleware-order>.
 * Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", " [Firebug](https://getfirebug.com/)" oder [Postman](https://www.getpostman.com/) , um den `Accept-Encoding` Anforderungs Header festzulegen und die Antwortheader, die Größe und den Text zu überprüfen
 
 Senden Sie eine Anforderung an die Beispiel-App ohne den `Accept-Encoding`-Header, und beobachten Sie, dass die Antwort nicht komprimiert ist. Die Header "`Content-Encoding`" und "`Vary`" sind in der Antwort nicht vorhanden.
@@ -202,7 +202,7 @@ Der broesli-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierung
 
 Legen Sie die Komprimierungs Ebene mit <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>fest. Der brotli-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
 
-| Compression Level | Beschreibung |
+| Komprimierungs Ebene | Beschreibung |
 | ----------------- | ----------- |
 | [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
 | [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
@@ -265,7 +265,7 @@ Der GZip-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierungs A
 
 Legen Sie die Komprimierungs Ebene mit <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>fest. Der GZip-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
 
-| Compression Level | Beschreibung |
+| Komprimierungs Ebene | Beschreibung |
 | ----------------- | ----------- |
 | [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
 | [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |

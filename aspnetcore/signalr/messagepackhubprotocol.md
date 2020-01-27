@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: cd052a97db1e20d6c7aa00f47cf6a7d01a9bc305
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 1b01357233a9b95a5da052d92e30232c94e78a78
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963763"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727222"
 ---
 # <a name="use-messagepack-hub-protocol-in-opno-locsignalr-for-aspnet-core"></a>Verwenden Sie das messagepack-Hub-Protokoll in SignalR für ASP.net Core
 
@@ -173,7 +173,7 @@ Weitere Informationen zu dieser Einschränkung finden Sie unter GitHub [-Problem
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>Unterstützung von messagepack in der "Ahead-of-Time"-Kompilierungs Umgebung
 
-Die vom .NET-Client und-Server verwendete [messagepack-CSharp-](https://github.com/neuecc/MessagePack-CSharp) Bibliothek verwendet die Codegenerierung zum Optimieren der Serialisierung. Daher wird Sie standardmäßig nicht in Umgebungen unterstützt, in denen die "vorab"-Kompilierung (z. b. xamarin IOS oder Unity) verwendet wird. Es ist möglich, das messagepack in diesen Umgebungen zu verwenden, indem der Serialisierungsprogramme-/Deserialisierungscode "vorab erstellt" wird. Weitere Informationen finden Sie in [der Dokumentation zu messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp#pre-code-generationunityxamarin-supports). Nachdem Sie die serialisierungsinitialisierer vorab generiert haben, können Sie Sie mit dem an `AddMessagePackProtocol`über gebenden Konfigurations Delegaten registrieren:
+Die vom .NET-Client und-Server verwendete [messagepack-CSharp-](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8) Bibliothek verwendet die Codegenerierung zum Optimieren der Serialisierung. Daher wird Sie standardmäßig nicht in Umgebungen unterstützt, in denen die "vorab"-Kompilierung (z. b. xamarin IOS oder Unity) verwendet wird. Es ist möglich, das messagepack in diesen Umgebungen zu verwenden, indem der Serialisierungsprogramme-/Deserialisierungscode "vorab erstellt" wird. Weitere Informationen finden Sie in [der Dokumentation zu messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8#pre-code-generationunityxamarin-supports). Nachdem Sie die serialisierungsinitialisierer vorab generiert haben, können Sie Sie mit dem an `AddMessagePackProtocol`über gebenden Konfigurations Delegaten registrieren:
 
 ```csharp
 services.AddSignalR()

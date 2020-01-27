@@ -5,18 +5,18 @@ description: Erfahren Sie, wie Sie einen ASP.net Core verteilten Cache verwenden
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/27/2019
+ms.date: 01/22/2020
 uid: performance/caching/distributed
-ms.openlocfilehash: dbcdfcd07877fabfe6d18cd4d840b5597afa1afd
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 3e039a26505aed1bcc0299880039760fef19fd67
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081548"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727242"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Verteiltes Zwischenspeichern in ASP.net Core
 
-Von [Luke Latham](https://github.com/guardrex) und [Steve Smith](https://ardalis.com/)
+Von [Luke Latham](https://github.com/guardrex), [Muhsin Nasir](https://github.com/mohsinnasir)und [Steve Smith](https://ardalis.com/)
 
 Bei einem verteilten Cache handelt es sich um einen Cache, der von mehreren App-Servern gemeinsam verwendet wird, die in der Regel als externer Dienst für die App-Server verwaltet werden Ein verteilter Cache kann die Leistung und Skalierbarkeit einer ASP.net Core-App verbessern, insbesondere wenn die APP von einem Cloud-Dienst oder einer Serverfarm gehostet wird.
 
@@ -28,7 +28,7 @@ Wenn zwischengespeicherte Daten verteilt werden, sind die Daten wie folgt:
 * Überstehen Serverneustarts und App-bereit Stellungen.
 * Verwendet keinen lokalen Arbeitsspeicher.
 
-Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem Artikel wird beschrieben, wie Sie SQL Server und verteilte redis-Caches konfigurieren. Implementierungen von Drittanbietern sind ebenfalls verfügbar, wie z. b. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache auf GitHub](https://github.com/Alachisoft/NCache)). Unabhängig davon, welche Implementierung ausgewählt ist, interagiert die App mithilfe der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> -Schnittstelle mit dem Cache.
+Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem Artikel wird beschrieben, wie Sie SQL Server und verteilte redis-Caches konfigurieren. Implementierungen von Drittanbietern sind ebenfalls verfügbar, wie z. b. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache auf GitHub](https://github.com/Alachisoft/NCache)). Unabhängig davon, welche Implementierung ausgewählt ist, interagiert die APP mit dem Cache mithilfe der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -40,13 +40,17 @@ Um einen SQL Server verteilten Cache zu verwenden, fügen Sie dem Paket " [Micro
 
 Um einen verteilten redis-Cache zu verwenden, fügen Sie dem Paket [Microsoft. Extensions. Caching. stackexchangeredis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) einen Paket Verweis hinzu.
 
+Fügen Sie zum Verwenden von NCache-verteiltem Cache einen Paket Verweis zum [ncache. Microsoft. Extensions. Caching. opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) -Paket hinzu.
+
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.2"
 
 Wenn Sie einen SQL Server verteilten Cache verwenden möchten, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", oder fügen Sie dem Paket " [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) " einen Paket Verweis hinzu.
 
-Um einen verteilten redis-Cache zu verwenden, verweisen Sie auf das [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) , und fügen Sie dem Paket [Microsoft. Extensions. Caching. stackexchangeredis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) einen Paket Verweis hinzu. Das redis-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten. Daher müssen Sie das redis-Paket separat in der Projektdatei referenzieren.
+Um einen verteilten redis-Cache zu verwenden, verweisen Sie auf das [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) , und fügen Sie dem Paket [Microsoft. Extensions. Caching. stackexchangeredis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) einen Paket Verweis hinzu. Das redis-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten, daher müssen Sie das redis-Paket separat in der Projektdatei referenzieren.
+
+Um den verteilten NCache-Cache zu verwenden, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", und fügen Sie dem [ncache. Microsoft. Extensions. Caching. opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) -Paket einen Paket Verweis hinzu. Das NCache-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten, daher müssen Sie das NCache-Paket separat in der Projektdatei referenzieren.
 
 ::: moniker-end
 
@@ -54,37 +58,40 @@ Um einen verteilten redis-Cache zu verwenden, verweisen Sie auf das [Metapaket M
 
 Wenn Sie einen SQL Server verteilten Cache verwenden möchten, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", oder fügen Sie dem Paket " [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) " einen Paket Verweis hinzu.
 
-Um einen verteilten redis-Cache zu verwenden, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", und fügen Sie dem Paket " [Microsoft. Extensions. Caching. redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Redis) " einen Paket Verweis hinzu. Das redis-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten. Daher müssen Sie das redis-Paket separat in der Projektdatei referenzieren.
+Um einen verteilten redis-Cache zu verwenden, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", und fügen Sie dem Paket " [Microsoft. Extensions. Caching. redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Redis) " einen Paket Verweis hinzu. Das redis-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten, daher müssen Sie das redis-Paket separat in der Projektdatei referenzieren.
+
+Um den verteilten NCache-Cache zu verwenden, verweisen Sie auf das [Metapaket "Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) ", und fügen Sie dem [ncache. Microsoft. Extensions. Caching. opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) -Paket einen Paket Verweis hinzu. Das NCache-Paket ist nicht im `Microsoft.AspNetCore.App` Paket enthalten, daher müssen Sie das NCache-Paket separat in der Projektdatei referenzieren.
 
 ::: moniker-end
 
 ## <a name="idistributedcache-interface"></a>Idistributedcache-Schnittstelle
 
-Die <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> -Schnittstelle stellt die folgenden Methoden zum Bearbeiten von Elementen in der Implementierung verteilter Caches bereit:
+Die <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle stellt die folgenden Methoden zum Bearbeiten von Elementen in der Implementierung verteilter Caches bereit:
 
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get*>, <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync*> Akzeptiert einen Zeichen folgen Schlüssel und ruft ein zwischengespeichertes `byte[]` Element als ein-Array ab, &ndash; wenn es im Cache gefunden wird.
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>Fügt dem Cache ein Element ( `byte[]` als Array) mit einem Zeichen folgen Schlüssel hinzu. <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> &ndash;
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*><xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> AktualisierteinElementimCacheaufGrundlageseinesSchlüsselsundsetztdasgleitendeAblaufTimeout(&ndash; sofern vorhanden) zurück.
-* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove*><xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync*> EntfernteinCacheElementaufderGrundlagedes&ndash; zugehörigen Zeichen folgen Schlüssels.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get*>akzeptiert <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync*> &ndash; einen Zeichen folgen Schlüssel und ruft ein zwischengespeichertes Element als `byte[]` Array ab, wenn es im Cache gefunden wird.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set*>fügt <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync*> &ndash; dem Cache ein Element (als `byte[]` Array) mit einem Zeichen folgen Schlüssel hinzu.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh*>aktualisiert <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync*> &ndash; ein Element im Cache basierend auf dessen Schlüssel, wobei das gleitende Ablauf Timeout (sofern vorhanden) zurückgesetzt wird.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove*>, <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync*> &ndash; ein Cache Element auf der Grundlage des zugehörigen Zeichen folgen Schlüssels entfernt.
 
 ## <a name="establish-distributed-caching-services"></a>Einrichten verteilter Cache Dienste
 
-Registrieren Sie eine Implementierung <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> von `Startup.ConfigureServices`in. Die in diesem Thema beschriebenen Framework-Implementierungen umfassen Folgendes:
+Registrieren Sie eine Implementierung von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> in `Startup.ConfigureServices`. Die in diesem Thema beschriebenen Framework-Implementierungen umfassen Folgendes:
 
 * [Verteilter Speicher Cache](#distributed-memory-cache)
 * [Verteilter SQL Server Cache](#distributed-sql-server-cache)
 * [Verteilter redis-Cache](#distributed-redis-cache)
+* [Verteilter NCache-Cache](#distributed-ncache-cache)
 
 ### <a name="distributed-memory-cache"></a>Verteilter Speicher Cache
 
-Der verteilte Arbeitsspeicher Cache<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>() ist eine vom Framework bereitgestellte <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Implementierung von, die Elemente im Arbeitsspeicher speichert. Der verteilte Arbeitsspeicher Cache ist kein tatsächlicher verteilter Cache. Zwischengespeicherte Elemente werden von der app-Instanz auf dem Server gespeichert, auf dem die app ausgeführt wird.
+Der verteilte Arbeitsspeicher Cache (<xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddDistributedMemoryCache*>) ist eine vom Framework bereitgestellte Implementierung von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>, die Elemente im Arbeitsspeicher speichert. Der verteilte Arbeitsspeicher Cache ist kein tatsächlicher verteilter Cache. Zwischengespeicherte Elemente werden von der app-Instanz auf dem Server gespeichert, auf dem die app ausgeführt wird.
 
 Der verteilte Arbeitsspeicher Cache ist eine nützliche Implementierung:
 
 * In Entwicklungs-und Testszenarien.
 * Wenn ein einzelner Server in der Produktionsumgebung verwendet wird, ist der Arbeitsspeicher Verbrauch kein Problem. Durch das Implementieren des Cache für verteilte Arbeitsspeicher wird der zwischengespeicherte Datenspeicher Sie ermöglicht die Implementierung einer echten verteilten cachinglösung in Zukunft, wenn mehrere Knoten oder Fehlertoleranz erforderlich werden.
 
-Die Beispiel-App nutzt den verteilten Arbeitsspeicher Cache, wenn die app in der Entwicklungsumgebung in `Startup.ConfigureServices`ausgeführt wird:
+Die Beispiel-App nutzt den verteilten Arbeitsspeicher Cache, wenn die app in `Startup.ConfigureServices`in der Entwicklungsumgebung ausgeführt wird:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -100,9 +107,9 @@ Die Beispiel-App nutzt den verteilten Arbeitsspeicher Cache, wenn die app in der
 
 ### <a name="distributed-sql-server-cache"></a>Verteilter SQL Server Cache
 
-Die verteilte SQL Server Cache Implementierung (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) ermöglicht es dem verteilten Cache, eine SQL Server Datenbank als Sicherungs Speicher zu verwenden. Zum Erstellen einer SQL Server zwischengespeicherten Element Tabelle in einer SQL Server Instanz können Sie das `sql-cache` Tool verwenden. Das Tool erstellt eine Tabelle mit dem Namen und dem Schema, die Sie angeben.
+Die Implementierung des verteilten SQL Server Caches (<xref:Microsoft.Extensions.DependencyInjection.SqlServerCachingServicesExtensions.AddDistributedSqlServerCache*>) ermöglicht es dem verteilten Cache, eine SQL Server Datenbank als Sicherungs Speicher zu verwenden. Um eine SQL Server zwischengespeicherte Element Tabelle in einer SQL Server Instanz zu erstellen, können Sie das `sql-cache` Tool verwenden. Das Tool erstellt eine Tabelle mit dem Namen und dem Schema, die Sie angeben.
 
-Erstellen Sie eine Tabelle in SQL Server, indem `sql-cache create` Sie den Befehl ausführen. Geben Sie die SQL Server Instanz`Data Source`(), die`Initial Catalog`Datenbank (), das `dbo`Schema (z. b.) und den Tabellennamen `TestCache`(z. b.) an:
+Erstellen Sie eine Tabelle in SQL Server, indem Sie den `sql-cache create`-Befehl ausführen. Geben Sie die SQL Server Instanz (`Data Source`), die Datenbank (`Initial Catalog`), das Schema (z. b. `dbo`) und den Tabellennamen (z. b. `TestCache`) an:
 
 ```dotnetcli
 dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
@@ -119,9 +126,9 @@ Die vom `sql-cache` Tool erstellte Tabelle hat das folgende Schema:
 ![SQLServer-Cache Tabelle](distributed/_static/SqlServerCacheTable.png)
 
 > [!NOTE]
-> Eine APP sollte Cache Werte mithilfe einer Instanz von, <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache>nicht mithilfe von bearbeiten.
+> Eine APP sollte Cache Werte mit einer Instanz von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>und nicht mit einer <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache>bearbeiten.
 
-Die Beispiel-APP <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache> implementiert in einer nicht Entwicklungsumgebung in `Startup.ConfigureServices`:
+Die Beispiel-App implementiert <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache> in einer nicht Entwicklungsumgebung in `Startup.ConfigureServices`:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -136,7 +143,7 @@ Die Beispiel-APP <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache> im
 ::: moniker-end
 
 > [!NOTE]
-> A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (und <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> optional und) <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>werden in der Regel außerhalb der Quell Code Verwaltung gespeichert (z. b. durch den [Geheimnis-Manager](xref:security/app-secrets) oder durch appSettings *. JSON*/*appSettings. { Umgebung}. JSON* -Dateien). Die Verbindungs Zeichenfolge kann Anmelde Informationen enthalten, die aus den Quell Code Verwaltungssystemen ausgeschlossen werden sollen.
+> Eine <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (und optional, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> und <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) wird in der Regel außerhalb der Quell Code Verwaltung gespeichert (z. b. durch den [Geheimnis-Manager](xref:security/app-secrets) oder in *appSettings. JSON* gespeichert,/*appSettings. { Umgebung}. JSON* -Dateien). Die Verbindungs Zeichenfolge kann Anmelde Informationen enthalten, die aus den Quell Code Verwaltungssystemen ausgeschlossen werden sollen.
 
 ### <a name="distributed-redis-cache"></a>Verteilte redis Cache
 
@@ -144,7 +151,7 @@ Die Beispiel-APP <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCache> im
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> -Instanz (<xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*>) in einer nicht-Entwicklungsumgebung in: `Startup.ConfigureServices`
+Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> Instanz (<xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*>) in einer nicht Entwicklungsumgebung in `Startup.ConfigureServices`:
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
 
@@ -152,7 +159,7 @@ Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.E
 
 ::: moniker range="= aspnetcore-2.2"
 
-Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> -Instanz (<xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*>) in einer nicht-Entwicklungsumgebung in: `Startup.ConfigureServices`
+Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> Instanz (<xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*>) in einer nicht Entwicklungsumgebung in `Startup.ConfigureServices`:
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
 
@@ -160,7 +167,7 @@ Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.E
 
 ::: moniker range="< aspnetcore-2.2"
 
-Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.Redis.RedisCache> -Instanz (<xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*>):
+Eine App konfiguriert die Cache Implementierung mithilfe einer <xref:Microsoft.Extensions.Caching.Redis.RedisCache> Instanz (<xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*>):
 
 ```csharp
 services.AddDistributedRedisCache(options =>
@@ -174,16 +181,37 @@ services.AddDistributedRedisCache(options =>
 
 So installieren Sie redis auf dem lokalen Computer:
 
-* Installieren Sie das [Chocolatey redis-Paket](https://chocolatey.org/packages/redis-64/).
-* Führen `redis-server` Sie an einer Eingabeaufforderung aus.
+1. Installieren Sie das [Chocolatey redis-Paket](https://chocolatey.org/packages/redis-64/).
+1. Führen Sie `redis-server` über eine Eingabeaufforderung aus.
+
+### <a name="distributed-ncache-cache"></a>Verteilter NCache-Cache
+
+[NCache](https://github.com/Alachisoft/NCache) ist ein Open Source-verteilter, in-Memory-Cache, der System intern in .net und .net Core entwickelt wurde. NCache funktioniert sowohl lokal als auch als verteilter Cache Cluster für eine ASP.net Core-APP, die in Azure oder auf anderen Hostingplattformen ausgeführt wird.
+
+Informationen zum Installieren und Konfigurieren von NCache auf dem lokalen Computer finden Sie im Leitfaden zu den ersten Schritten mit [NCache für Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/).
+
+So konfigurieren Sie NCache:
+
+1. Installieren [Sie NCache Open Source nuget](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/).
+1. Konfigurieren Sie den Cache Cluster in " [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)".
+1. Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinzu:
+
+   ```csharp
+   services.AddNCacheDistributedCache(configuration =>    
+   {        
+       configuration.CacheName = "demoClusteredCache";
+       configuration.EnableLogs = true;
+       configuration.ExceptionsEnabled = true;
+   });
+   ```
 
 ## <a name="use-the-distributed-cache"></a>Verwenden des verteilten Caches
 
-Um die <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> -Schnittstelle zu verwenden, fordern <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Sie eine Instanz von von einem beliebigen Konstruktor in der APP an. Die-Instanz wird von der [Abhängigkeitsinjektion (di)](xref:fundamentals/dependency-injection)bereitgestellt.
+Um die <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle zu verwenden, fordern Sie eine Instanz von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> von einem beliebigen Konstruktor in der APP an. Die-Instanz wird von der [Abhängigkeitsinjektion (di)](xref:fundamentals/dependency-injection)bereitgestellt.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Wenn die Beispiel-App gestartet <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> wird, wird `Startup.Configure`in eingefügt. Die aktuelle Zeit wird mithilfe von <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> zwischengespeichert (Weitere Informationen finden [Sie unter generischer Host: Ihostapplicationlifetime](xref:fundamentals/host/generic-host#ihostapplicationlifetime)):
+Wenn die Beispiel-App gestartet wird, wird <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> in `Startup.Configure`eingefügt. Die aktuelle Zeit wird mithilfe von <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> zwischengespeichert (Weitere Informationen finden Sie unter [generischer Host: ihostapplicationlifetime](xref:fundamentals/host/generic-host#ihostapplicationlifetime)):
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
@@ -191,17 +219,17 @@ Wenn die Beispiel-App gestartet <xref:Microsoft.Extensions.Caching.Distributed.I
 
 ::: moniker range="< aspnetcore-3.0"
 
-Wenn die Beispiel-App gestartet <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> wird, wird `Startup.Configure`in eingefügt. Die aktuelle Zeit wird mithilfe von <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> zwischengespeichert (Weitere Informationen finden [Sie unter Webhost: Iapplicationlifetime-](xref:fundamentals/host/web-host#iapplicationlifetime-interface)Schnittstelle):
+Wenn die Beispiel-App gestartet wird, wird <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> in `Startup.Configure`eingefügt. Die aktuelle Zeit wird mithilfe von <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> zwischengespeichert (Weitere Informationen finden Sie unter [Webhost: iapplicationlifetime-Schnittstelle](xref:fundamentals/host/web-host#iapplicationlifetime-interface)):
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_Configure&highlight=10)]
 
 ::: moniker-end
 
-Die Beispiel-APP <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> wird in den `IndexModel` eingefügt, um von der Index Seite verwendet werden zu können.
+Die Beispiel-App Fügt <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> in die `IndexModel` ein, die von der Index Seite verwendet werden soll.
 
-Jedes Mal, wenn die Index Seite geladen wird, wird der Cache für die zwischengespeicherte `OnGetAsync`Zeit in geprüft. Wenn die zwischengespeicherte Zeit nicht abgelaufen ist, wird die Uhrzeit angezeigt. Wenn 20 Sekunden seit dem letzten Zugriff auf die zwischengespeicherte Zeit (beim letzten Laden dieser Seite) verstrichen sind, wird auf der Seite die *zwischengespeicherte Zeit abgelaufen*angezeigt.
+Jedes Mal, wenn die Index Seite geladen wird, wird der Cache für die zwischengespeicherte Zeit in `OnGetAsync`geprüft. Wenn die zwischengespeicherte Zeit nicht abgelaufen ist, wird die Uhrzeit angezeigt. Wenn 20 Sekunden seit dem letzten Zugriff auf die zwischengespeicherte Zeit (beim letzten Laden dieser Seite) verstrichen sind, wird auf der Seite die *zwischengespeicherte Zeit abgelaufen*angezeigt.
 
-Aktualisieren Sie die zwischengespeicherte Zeit sofort auf die aktuelle Zeit, indem Sie die Schaltfläche **zwischengespeicherte Zeit zurücksetzen** auswählen. Die Schaltfläche löst `OnPostResetCachedTime` die Handlermethode aus.
+Aktualisieren Sie die zwischengespeicherte Zeit sofort auf die aktuelle Zeit, indem Sie die Schaltfläche **zwischengespeicherte Zeit zurücksetzen** auswählen. Die Schaltfläche löst die `OnPostResetCachedTime` Handlermethode aus.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -218,15 +246,15 @@ Aktualisieren Sie die zwischengespeicherte Zeit sofort auf die aktuelle Zeit, in
 > [!NOTE]
 > Es ist nicht erforderlich, eine Singleton-oder Gültigkeitsdauer für <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Instanzen (zumindest für die integrierten Implementierungen) zu verwenden.
 >
-> Sie können auch immer dann <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> eine Instanz erstellen, wenn Sie eine Instanz benötigen, anstatt di zu verwenden, aber das Erstellen einer Instanz im Code kann dazu führen, dass Ihr Code schwieriger zu testen ist und gegen das [explizite Abhängigkeits Prinzip](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)verstößt.
+> Sie können auch immer dann eine <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Instanz erstellen, wenn Sie eine Instanz benötigen, anstatt di zu verwenden, aber das Erstellen einer Instanz im Code kann dazu führen, dass Ihr Code schwieriger zu testen ist und gegen das [explizite Abhängigkeits Prinzip](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)verstößt.
 
 ## <a name="recommendations"></a>Empfehlungen
 
-Beachten Sie Folgendes, wenn <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> Sie entscheiden, welche Implementierung von für Ihre APP am besten geeignet ist:
+Beachten Sie Folgendes, wenn Sie entscheiden, welche Implementierung von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> für Ihre APP am besten geeignet ist:
 
 * Vorhandene Infrastruktur
 * Leistungsanforderungen
-* Preis
+* Cost
 * Team Darstellung
 
 Zwischen Speicherungs Lösungen basieren in der Regel auf in-Memory-Speicher, um das schnelle Abrufen von zwischengespeicherten Daten zu ermöglichen, aber der Arbeitsspeicher ist eine begrenzte Ressource und ist aufwändig Speichert nur häufig verwendete Daten in einem Cache.
@@ -235,7 +263,7 @@ Im Allgemeinen bietet ein redis Cache einen höheren Durchsatz und eine niedrige
 
 Wenn SQL Server als Sicherungs Speicher für verteilte Caches verwendet wird, kann sich die Verwendung der gleichen Datenbank für den Cache und den normalen Datenspeicher und-Abruf der APP negativ auf die Leistung beider Anwendungen auswirken. Es wird empfohlen, für den Sicherungs Speicher im verteilten Cache eine dedizierte SQL Server Instanz zu verwenden.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Redis Cache in Azure](/azure/azure-cache-for-redis/)
 * [SQL-Datenbank in Azure](/azure/sql-database/)
