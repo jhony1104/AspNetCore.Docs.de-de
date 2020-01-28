@@ -1,37 +1,37 @@
 ---
-title: Azure Active Directory mit ASP.NET Core
+title: Microsoft Identity Platform und Azure Active Directory mit ASP.NET Core
 author: rick-anderson
-description: Erfahren Sie mehr zu Themen im Zusammenhang mit der Authentifizierung mit Azure Active Directory in ASP.NET Core.
+description: Entdecken Sie die Themen zur Authentifizierung mit Microsoft Identity Platform, Azure Active Directory für Web-Apps und APIs in ASP.NET Core.
 ms.author: riande
-ms.date: 01/14/2020
+ms.date: 01/21/2020
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-active-directory/index
-ms.openlocfilehash: a856643216d423c791d3df47bd2206f9121b543f
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 7829a062d4727238addca051d0599438c99e90dc
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75951919"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726755"
 ---
-# <a name="azure-active-directory-with-aspnet-core"></a><span data-ttu-id="405ec-103">Azure Active Directory mit ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="405ec-103">Azure Active Directory with ASP.NET Core</span></span>
+# <a name="azure-active-directory-with-aspnet-core"></a><span data-ttu-id="8e2c9-103">Azure Active Directory mit ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="8e2c9-103">Azure Active Directory with ASP.NET Core</span></span>
 
-## <a name="azure-ad-v1-samples"></a><span data-ttu-id="405ec-104">Azure AD V1-Beispiele</span><span class="sxs-lookup"><span data-stu-id="405ec-104">Azure AD V1 samples</span></span>
+<span data-ttu-id="8e2c9-104">In diesen Tutorials und Beispielen wird die Authentifizierung in ASP.NET Core mithilfe von Microsoft Identity Platform und Azure Active Directory veranschaulicht.</span><span class="sxs-lookup"><span data-stu-id="8e2c9-104">These tutorials and samples demonstrate authentication in ASP.NET Core using Microsoft identity platform and Azure Active Directory.</span></span> <span data-ttu-id="8e2c9-105">Weitere Tutorials und Beispiele zur Verwendung von ASP.NET Core mit Azure AD finden Sie unter [Microsoft Identity Platform](/azure/active-directory/develop/).</span><span class="sxs-lookup"><span data-stu-id="8e2c9-105">For additional tutorials and samples using ASP.NET Core with Azure AD, see [Microsoft identity platform](/azure/active-directory/develop/).</span></span>
 
-<span data-ttu-id="405ec-105">In den folgenden Beispielen wird gezeigt, wie Sie Azure AD V1 integrieren, sodass Benutzer sich mit einem Geschäfts-, Schul- oder Unikonto anmelden können:</span><span class="sxs-lookup"><span data-stu-id="405ec-105">The following samples show how to integrate Azure AD V1, enabling users to sign-in with a work and school account:</span></span>
-* <span data-ttu-id="405ec-106">[Integration von Azure AD in eine ASP.NET Core-Web-App](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/tree/master) (archiviert und nicht unterstützt)</span><span class="sxs-lookup"><span data-stu-id="405ec-106">[Integrating Azure AD Into an ASP.NET Core Web App](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/tree/master) (archived and unsupported)</span></span>
-* [<span data-ttu-id="405ec-107">Aufrufen einer ASP.NET Core-Web-API aus einer WPF-Anwendung mithilfe von Azure AD</span><span class="sxs-lookup"><span data-stu-id="405ec-107">Calling a ASP.NET Core Web API From a WPF Application Using Azure AD</span></span>](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore)
-* [<span data-ttu-id="405ec-108">Aufrufen einer Web-API in einer ASP.NET Core-Webanwendung mithilfe von Azure AD</span><span class="sxs-lookup"><span data-stu-id="405ec-108">Calling a Web API in an ASP.NET Core Web Application Using Azure AD</span></span>](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/)
+## <a name="application-scenarios"></a><span data-ttu-id="8e2c9-106">Anwendungsszenarios</span><span class="sxs-lookup"><span data-stu-id="8e2c9-106">Application Scenarios</span></span>
 
-## <a name="azure-ad-v2-samples"></a><span data-ttu-id="405ec-109">Azure AD V2-Beispiele</span><span class="sxs-lookup"><span data-stu-id="405ec-109">Azure AD V2 samples</span></span>
+* [<span data-ttu-id="8e2c9-107">Schnellstart: Hinzufügen von „Bei Microsoft anmelden“ zu einer ASP.NET Core-Web-App</span><span class="sxs-lookup"><span data-stu-id="8e2c9-107">Quickstart: Add sign-in with Microsoft to an ASP.NET Core web app</span></span>](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
+* [<span data-ttu-id="8e2c9-108">Web-App, die Benutzer anmeldet</span><span class="sxs-lookup"><span data-stu-id="8e2c9-108">Web app that signs in users</span></span>](/azure/active-directory/develop/scenario-web-app-sign-user-overview?tabs=aspnetcore)
+* [<span data-ttu-id="8e2c9-109">Web-App, die Web-APIs aufruft</span><span class="sxs-lookup"><span data-stu-id="8e2c9-109">Web app that calls web APIs</span></span>](/azure/active-directory/develop/scenario-web-app-call-api-overview)
+* [<span data-ttu-id="8e2c9-110">Geschützte Web-API</span><span class="sxs-lookup"><span data-stu-id="8e2c9-110">Protected web API</span></span>](/azure/active-directory/develop/scenario-protected-web-api-overview)
+* [<span data-ttu-id="8e2c9-111">Web-API, die Web-APIs aufruft</span><span class="sxs-lookup"><span data-stu-id="8e2c9-111">Web API that calls other web APIs</span></span>](/azure/active-directory/develop/scenario-web-api-call-api-overview)
+* [<span data-ttu-id="8e2c9-112">Cloudauthentifizierung mit Azure Active Directory B2C in ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="8e2c9-112">Web app that signs in users with Azure AD B2C</span></span>](xref:security/authentication/azure-ad-b2c)
 
-<span data-ttu-id="405ec-110">In den folgenden Beispielen erfahren Sie, wie Sie Azure AD V2 integrieren, sodass sich Benutzer mit Geschäfts-, Schul- oder Unikonto oder einem privaten Microsoft-Konto (früher Live-Konto) anmelden können:</span><span class="sxs-lookup"><span data-stu-id="405ec-110">The following samples show how to integrate Azure AD V2, enabling users to sign-in with a work and school account or a Microsoft personal account (formerly Live account):</span></span>
-* <span data-ttu-id="405ec-111">[Integrating Azure AD V2 into an ASP.NET Core 2.0 web app (Integration von Azure AD V2 in eine ASP.NET Core 2.0-Web-App)](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2):</span><span class="sxs-lookup"><span data-stu-id="405ec-111">[Integrating Azure AD V2 into an ASP.NET Core 2.0 web app](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2):</span></span> 
-  * <span data-ttu-id="405ec-112">Weitere Informationen erhalten Sie [in diesem Video](https://channel9.msdn.com/Events/Build/2018/THR5001).</span><span class="sxs-lookup"><span data-stu-id="405ec-112">See [this associated video](https://channel9.msdn.com/Events/Build/2018/THR5001)</span></span> 
+## <a name="samples"></a><span data-ttu-id="8e2c9-113">Proben</span><span class="sxs-lookup"><span data-stu-id="8e2c9-113">Samples</span></span>
 
-* <span data-ttu-id="405ec-113">[Calling a ASP.NET Core 2.0 Web API from a WPF application using Azure AD V2 (Aufrufen einer ASP.NET Core 2.0-Web-API über eine WPF-Anwendung mithilfe von Azure AD V2)](https://github.com/azure-samples/active-directory-dotnet-native-aspnetcore-v2):</span><span class="sxs-lookup"><span data-stu-id="405ec-113">[Calling a ASP.NET Core 2.0 Web API from a WPF application using Azure AD V2](https://github.com/azure-samples/active-directory-dotnet-native-aspnetcore-v2):</span></span> 
-  * <span data-ttu-id="405ec-114">Weitere Informationen erhalten Sie [in diesem Video](https://channel9.msdn.com/Events/Build/2018/THR5000).</span><span class="sxs-lookup"><span data-stu-id="405ec-114">See [this associated video](https://channel9.msdn.com/Events/Build/2018/THR5000)</span></span>
+* <span data-ttu-id="8e2c9-114">[Aktivieren Ihrer Web-Apps für die Anmeldung von Benutzern und das Aufrufen von APIs mithilfe von Microsoft Identity Platform (für Entwickler)](/samples/azure-samples/active-directory-aspnetcore-webapp-openidconnect-v2/enable-webapp-signin/):</span><span class="sxs-lookup"><span data-stu-id="8e2c9-114">[Enable your ASP.NET Core app to sign-in users and call web APIs using Azure AD V2](/samples/azure-samples/active-directory-aspnetcore-webapp-openidconnect-v2/enable-webapp-signin/):</span></span> 
+  * <span data-ttu-id="8e2c9-115">Weitere Informationen erhalten Sie [in diesem Video](https://channel9.msdn.com/Events/Build/2018/THR5001).</span><span class="sxs-lookup"><span data-stu-id="8e2c9-115">See [this associated video](https://channel9.msdn.com/Events/Build/2018/THR5001)</span></span>
 
-## <a name="azure-ad-b2c-sample"></a><span data-ttu-id="405ec-115">Azure AD B2C-Beispiel</span><span class="sxs-lookup"><span data-stu-id="405ec-115">Azure AD B2C sample</span></span>
+* <span data-ttu-id="8e2c9-116">[Aufrufen einer ASP.NET Core-Web-API über eine WPF-Anwendung mithilfe von Azure AD V2](/samples/azure-samples/active-directory-dotnet-native-aspnetcore-v2/calling-an-aspnet-core-web-api-from-a-wpf-application-using-azure-ad-v2/):</span><span class="sxs-lookup"><span data-stu-id="8e2c9-116">[Calling an ASP.NET Core 2.0 Web API from a WPF application using Azure AD V2](/samples/azure-samples/active-directory-dotnet-native-aspnetcore-v2/calling-an-aspnet-core-web-api-from-a-wpf-application-using-azure-ad-v2/):</span></span> 
+  * <span data-ttu-id="8e2c9-117">Weitere Informationen erhalten Sie [in diesem Video](https://channel9.msdn.com/Events/Build/2018/THR5000).</span><span class="sxs-lookup"><span data-stu-id="8e2c9-117">See [this associated video](https://channel9.msdn.com/Events/Build/2018/THR5000)</span></span>
 
-<span data-ttu-id="405ec-116">In diesem Beispiel wird gezeigt, wie Sie Azure AD B2C integrieren, sodass Benutzer sich über soziale Netzwerke anmelden können (z.B. Facebook, Google etc.).</span><span class="sxs-lookup"><span data-stu-id="405ec-116">This sample shows how to integrate Azure AD B2C, enabling users to sign-in with social identities (like Facebook, Google, ...)</span></span>
-* [<span data-ttu-id="405ec-117">Eine ASP.NET Core-Web-API in Azure AD B2C</span><span class="sxs-lookup"><span data-stu-id="405ec-117">An ASP.NET Core web API with Azure AD B2C</span></span>](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/)
+* [<span data-ttu-id="8e2c9-118">Eine ASP.NET Core-Web-API in Azure AD B2C</span><span class="sxs-lookup"><span data-stu-id="8e2c9-118">An ASP.NET Core web API with Azure AD B2C</span></span>](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/)
