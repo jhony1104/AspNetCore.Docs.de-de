@@ -5,14 +5,14 @@ description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/13/2020
+ms.date: 01/23/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 09ef06f179e34cd7f4f04ac30c3b5dd95d058244
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 141ae5cda7672159032013cbda1ef4bfa7c142dd
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75951873"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726980"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -923,7 +923,7 @@ Im Falle der Beispieldaten ist `sectionExists``false`, weil in den Konfiguration
 
 Die Konfiguration kann mit *Optionsmustern* an Klassen gebunden werden, die Gruppen von verwandten Einstellungen darstellen. Weitere Informationen finden Sie unter <xref:fundamentals/configuration/options>.
 
-Konfigurationswerte werden als Zeichenfolgen zurückgegeben, doch das Aufrufen von <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> ermöglicht die Erstellung von [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object)-Objekten.
+Konfigurationswerte werden als Zeichenfolgen zurückgegeben, doch das Aufrufen von <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> ermöglicht die Erstellung von [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object)-Objekten. Der Binder bindet Werte an alle öffentlichen Lese-/Schreibeigenschaften des angegebenen Typs. Felder werden **nicht** gebunden.
 
 Die Beispiel-App enthält ein `Starship`-Modell (*Models/Starship.cs*):
 
@@ -980,7 +980,7 @@ Die Beispiel-App ruft `GetSection` mit dem `starship`-Schlüssel auf. Die `stars
 
 ## <a name="bind-to-an-object-graph"></a>Binden an ein Objektdiagramm
 
-<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> kann ein ganzes POCO-Objektdiagramm binden.
+<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> kann ein ganzes POCO-Objektdiagramm binden. Wie beim Binden eines einfachen Objekts werden nur öffentliche Lese-/Schreibeigenschaften gebunden.
 
 Das Beispiel enthält ein `TvShow`-Modell, dessen Objektdiagramm die Klassen `Metadata` und `Actors` enthält (*Models/TvShow.cs*):
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieses Tutorial veranschaulicht, wie Sie eine ASP.NET Core-App mithilfe von OAuth 2.0 und externen Authentifizierungsanbietern entwickeln.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/21/2019
+ms.date: 01/23/2020
 uid: security/authentication/social/index
-ms.openlocfilehash: 06ce9c72f43955345efb61afed2538158810005f
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 7d0f6647a6f5a4d41067b13acd3d294144027bb7
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358068"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727333"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 
@@ -35,7 +35,7 @@ Beispiel dazu, wie Anmeldungen bei sozialen Medien für mehr Datenverkehr und ge
 * Erstellen Sie ein neues Projekt.
 * Wählen Sie **ASP.NET Core-Webanwendung** und **Weiter** aus.
 * Geben Sie einen **Projektnamen** ein, und bestätigen oder ändern Sie den **Speicherort**. Wählen Sie **Erstellen** aus.
-* Wählen Sie in der Dropdownliste **ASP.NET Core 3.0** und anschließend **Webanwendung** aus.
+* Wählen Sie die neueste Version von ASP.NET Core in der Dropdownliste (**ASP.NET Core {X.Y}** ) und dann **Webanwendung** aus.
 * Wählen Sie unter **Authentifizierung** die Option **Ändern** aus, und legen Sie die Authentifizierung auf **Einzelne Benutzerkonten** fest. Klicken Sie auf **OK**.
 * Wählen Sie im Fenster **Neue ASP.NET Core-Webanwendung erstellen** die Option **Erstellen** aus.
 
