@@ -5,17 +5,17 @@ description: Erfahren Sie, wie ASP.net Core Blazor, wie nicht behandelte Ausnahm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/22/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: fe4cc13b1efb8c70c9632f032626aa938fb65ea3
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 7b5602d5ae5e58d1678762fe1cd2adec1f31c969
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159949"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809002"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Behandeln von Fehlern in ASP.net Core Blazor-apps
 
@@ -112,7 +112,7 @@ Die vorangegangenen nicht behandelten Ausnahmen werden in den folgenden Abschnit
 Wenn Blazor eine Instanz einer-Komponente erstellt:
 
 * Der Konstruktor der Komponente wird aufgerufen.
-* Die Konstruktoren aller nicht-Singleton-di-Dienste, die über die [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) -Direktive oder das [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) -Attribut für den Konstruktor der Komponente bereitgestellt werden, werden aufgerufen. 
+* Die Konstruktoren aller nicht-Singleton-di-Dienste, die über die [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) -Direktive oder das [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) -Attribut für den Konstruktor der Komponente bereitgestellt werden, werden aufgerufen.
 
 Eine Verbindung kann nicht hergestellt werden, wenn ein ausgeführter Konstruktor oder ein Setter für eine `[Inject]` Eigenschaft eine nicht behandelte Ausnahme auslöst. Die Ausnahme ist schwerwiegend, da das Framework die Komponente nicht instanziieren kann. Wenn die Konstruktorlogik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
 
@@ -165,7 +165,7 @@ Wenn Benutzercode die Ausnahme nicht abfängt und behandelt, protokolliert das F
 
 ### <a name="component-disposal"></a>Komponenten Beseitigung
 
-Eine Komponente kann z. b. aus der Benutzeroberfläche entfernt werden, weil der Benutzer zu einer anderen Seite navigiert ist. Wenn eine Komponente, die <xref:System.IDisposable?displayProperty=fullName> implementiert, von der Benutzeroberfläche entfernt wird, ruft das Framework die <xref:System.IDisposable.Dispose*> Methode der Komponente auf. 
+Eine Komponente kann z. b. aus der Benutzeroberfläche entfernt werden, weil der Benutzer zu einer anderen Seite navigiert ist. Wenn eine Komponente, die <xref:System.IDisposable?displayProperty=fullName> implementiert, von der Benutzeroberfläche entfernt wird, ruft das Framework die <xref:System.IDisposable.Dispose*> Methode der Komponente auf.
 
 Wenn die `Dispose`-Methode der Komponente eine nicht behandelte Ausnahme auslöst, ist die Ausnahme für die Verbindung schwerwiegend. Wenn die Entsorgungs Logik Ausnahmen auslösen kann, sollte die APP die Ausnahmen mithilfe einer [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung abfangen.
 
@@ -192,16 +192,49 @@ Weitere Informationen finden Sie unter <xref:blazor/javascript-interop>.
 
 ### <a name="circuit-handlers"></a>Verbindungs Handler
 
-Blazor ermöglicht es Code, einen Verbindungs *Handler*zu definieren, der Benachrichtigungen empfängt, wenn sich der Status der Verbindung eines Benutzers ändert. Die folgenden Zustände werden verwendet:
+Blazor Server ermöglicht es Code, einen Verbindungs *Handler*zu definieren, der das Ausführen von Code für Änderungen am Zustand einer Benutzer Verbindung ermöglicht. Ein Verbindungs Handler wird implementiert, indem von `CircuitHandler` abgeleitet und die Klasse im Dienst Container der APP registriert wird. Im folgenden Beispiel für einen Verbindungs Handler werden geöffnete SignalR Verbindungen nachverfolgt:
 
-* `initialized`
-* `connected`
-* `disconnected`
-* `disposed`
+```csharp
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Server.Circuits;
 
-Benachrichtigungen werden durch Registrieren eines di-Dienstanbieter verwaltet, der von der `CircuitHandler` abstrakten Basisklasse erbt.
+public class TrackingCircuitHandler : CircuitHandler
+{
+    private HashSet<Circuit> _circuits = new HashSet<Circuit>();
 
-Wenn die Methoden eines benutzerdefinierten Verbindungs Handlers eine nicht behandelte Ausnahme auslösen, ist die Ausnahme für die Verbindung schwerwiegend. Um Ausnahmen im Code eines Handlers zu tolerieren oder Methoden aufzurufen, packen Sie den Code in einer oder mehreren [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung.
+    public override Task OnConnectionUpAsync(Circuit circuit, 
+        CancellationToken cancellationToken)
+    {
+        _circuits.Add(circuit);
+
+        return Task.CompletedTask;
+    }
+
+    public override Task OnConnectionDownAsync(Circuit circuit, 
+        CancellationToken cancellationToken)
+    {
+        _circuits.Remove(circuit);
+
+        return Task.CompletedTask;
+    }
+
+    public int ConnectedCircuits => _circuits.Count;
+}
+```
+
+Verbindungs Handler werden mithilfe von di registriert. Bereichs bezogene Instanzen werden pro Instanz einer Verbindung erstellt. Wenn Sie die `TrackingCircuitHandler` im vorherigen Beispiel verwenden, wird ein Singleton-Dienst erstellt, da der Status aller Verbindungen nachverfolgt werden muss:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddSingleton<CircuitHandler, TrackingCircuitHandler>();
+}
+```
+
+Wenn die Methoden eines benutzerdefinierten Verbindungs Handlers eine nicht behandelte Ausnahme auslösen, ist die Ausnahme für die Blazor Server Verbindung schwerwiegend. Um Ausnahmen im Code eines Handlers zu tolerieren oder Methoden aufzurufen, packen Sie den Code in einer oder mehreren [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung.
 
 ### <a name="circuit-disposal"></a>Freigabe Entfernung
 
@@ -224,7 +257,7 @@ Unter normalen Umständen ist es nicht sinnvoll, die Komponente zu erstellen und
 
 Um Fehler zu tolerieren, die möglicherweise während der vorab Generierung auftreten, muss die Fehler Behandlungs Logik in einer Komponente platziert werden, die Ausnahmen auslösen kann. Verwenden [Sie try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisungen mit Fehlerbehandlung und Protokollierung. Anstatt das `Component`-taghilfsprogramm in einer `try-catch`-Anweisung zu umwickeln, platzieren Sie die Fehler Behandlungs Logik in der vom `Component`-taghilfsprogramm gerenderten Komponente.
 
-## <a name="advanced-scenarios"></a>Erweiterte Szenarios
+## <a name="advanced-scenarios"></a>Erweiterte Szenarien
 
 ### <a name="recursive-rendering"></a>Rekursives Rendering
 
