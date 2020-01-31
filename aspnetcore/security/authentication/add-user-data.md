@@ -3,15 +3,15 @@ title: Hinzufügen, herunterladen und Löschen von Benutzerdaten auf Identität 
 author: rick-anderson
 description: Erfahren Sie, wie benutzerdefinierte Benutzerdaten Identität in einem ASP.NET Core-Projekt hinzugefügt. Löschen von Daten pro DSGVO.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 01/28/2020
 ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: f54df68834cd3e2493e558aaab9851f036f3f01b
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: e08c02e2e5d4a429aae10c59e7ae3ea48c975067
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880756"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885548"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Hinzufügen, herunterladen und Löschen von benutzerdefinierten Daten die Identität in einem ASP.NET Core-Projekt
 
@@ -26,7 +26,7 @@ Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anwe
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -46,7 +46,7 @@ Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anwe
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Code.
+* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Code.
 * Wählen Sie **ASP.net Core Webanwendung** > **OK** aus.
 * Wählen Sie in der Dropdown Liste **ASP.net Core 3,0** aus.
 * **Webanwendung** auswählen > **OK**
@@ -56,7 +56,7 @@ Die Project-Beispiels aus einer Razor Pages-Web-app erstellt wird, aber die Anwe
 
 ::: moniker range="< aspnetcore-3.0"
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Code.
+* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus. Nennen Sie das Projekt **"WebApp1"** Wenn Sie möchten einen übereinstimmenden Namespace die [Beispiel herunterladen](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Code.
 * Wählen Sie **ASP.net Core Webanwendung** > **OK** aus.
 * Wählen Sie in der Dropdown Liste **ASP.net Core 2,2** aus.
 * **Webanwendung** auswählen > **OK**
@@ -78,15 +78,15 @@ dotnet new webapp -o WebApp1
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Von **Projektmappen-Explorer**, mit der rechten Maustaste auf das Projekt > **hinzufügen** > **neues Gerüstelement**.
-* Im linken Bereich, der die **Gerüst hinzufügen** wählen Sie im Dialogfeld **Identität** > **hinzufügen**.
-* In der **ADD Identity** Dialog, der die folgenden Optionen:
+* Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identität** > **Hinzufügen**aus.
+* Im Dialogfeld **Identität hinzufügen** werden die folgenden Optionen angezeigt:
   * Wählen Sie die vorhandenen Layoutdatei *~/Pages/Shared/_Layout.cshtml*
   * Wählen Sie die folgenden Dateien überschreiben:
     * **Konto/registrieren**
     * **Konto / / Index verwalten**
   * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Datenkontextklasse**. Akzeptieren Sie den Typ (**WebApp1.Models.WebApp1Context** Wenn das Projekt den Namen **"WebApp1"** ).
   * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Benutzerklasse**. Akzeptieren Sie den Typ (**WebApp1User** Wenn das Projekt den Namen **"WebApp1"** ) > **hinzufügen**.
-* Wählen Sie **hinzufügen**.
+* Wählen Sie **Hinzufügen** aus.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 

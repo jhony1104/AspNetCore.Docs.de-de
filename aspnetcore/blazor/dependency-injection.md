@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 6930d721f04fd5f7cad2ba472724497a157fda0f
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
-ms.translationtype: MT
+ms.openlocfilehash: fa6762522c831c7fbe2742dbfe4e25a377988e1e
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159975"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76869563"
 ---
-# <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.net Core Blazor Abhängigkeitsinjektion
+# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.net Core blazor-Abhängigkeitsinjektion
 
 Von [Rainer stropek](https://www.timecockpit.com)
 
@@ -25,7 +25,7 @@ Von [Rainer stropek](https://www.timecockpit.com)
 
 Blazor unterstützt die [Abhängigkeitsinjektion (di)](xref:fundamentals/dependency-injection). Apps können integrierte Dienste verwenden, indem Sie Sie in Komponenten einfügen. Apps können auch benutzerdefinierte Dienste definieren und registrieren und in der gesamten App über di verfügbar machen.
 
-DI ist eine Technik für den Zugriff auf Dienste, die an einem zentralen Ort konfiguriert sind. Dies kann in Blazor-apps nützlich sein:
+DI ist eine Technik für den Zugriff auf Dienste, die an einem zentralen Ort konfiguriert sind. Dies kann bei blazor-Apps für folgende Aktionen nützlich sein:
 
 * Freigeben einer einzelnen Instanz einer Dienstklasse für viele Komponenten, die als *Singleton* -Dienst bezeichnet werden.
 * Entkoppeln von Komponenten aus konkreten Dienst Klassen mithilfe von Verweis Abstraktionen. Nehmen Sie beispielsweise eine Schnittstelle `IDataAccess` für den Zugriff auf Daten in der app. Die Schnittstelle wird von einer konkreten `DataAccess` Klasse implementiert und als Dienst im Dienst Container der APP registriert. Wenn eine Komponente di zum Empfangen einer `IDataAccess`-Implementierung verwendet, ist die Komponente nicht mit dem konkreten Typ gekoppelt. Die-Implementierung kann ausgetauscht werden, vielleicht für eine Pseudo Implementierung in Komponententests.
@@ -36,9 +36,9 @@ Standarddienste werden automatisch der Dienst Sammlung der app hinzugefügt.
 
 | Dienst | Lebensdauer | Beschreibung |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Singleton | Stellt Methoden zum Senden von HTTP-Anforderungen und empfangen von HTTP-Antworten aus einer Ressource bereit, die durch einen URI identifiziert wird<br><br>Die Instanz von `HttpClient` in einer Blazor Webassembly-App verwendet den Browser, um den HTTP-Datenverkehr im Hintergrund zu verarbeiten.<br><br>Blazor Server-Apps enthalten keine `HttpClient`, die standardmäßig als Dienst konfiguriert sind. Stellen Sie eine `HttpClient` für eine Blazor Server-App bereit.<br><br>Weitere Informationen finden Sie unter <xref:blazor/call-web-api>. |
-| `IJSRuntime` | Singleton (Blazor Webassembly)<br>Bereich (Blazor Server) | Stellt eine Instanz einer JavaScript-Laufzeit dar, in der JavaScript-Aufrufe gesendet werden. Weitere Informationen finden Sie unter <xref:blazor/javascript-interop>. |
-| `NavigationManager` | Singleton (Blazor Webassembly)<br>Bereich (Blazor Server) | Enthält Hilfsprogramme zum Arbeiten mit URIs und dem Navigations Zustand. Weitere Informationen finden Sie unter [URI-und Navigations Zustands Hilfen](xref:blazor/routing#uri-and-navigation-state-helpers). |
+| <xref:System.Net.Http.HttpClient> | Singleton | Stellt Methoden zum Senden von HTTP-Anforderungen und empfangen von HTTP-Antworten aus einer Ressource bereit, die durch einen URI identifiziert wird<br><br>Die Instanz von `HttpClient` in einer blazor Webassembly-App verwendet den Browser, um den HTTP-Datenverkehr im Hintergrund zu verarbeiten.<br><br>Blazor-Server-Apps enthalten keine `HttpClient`, die standardmäßig als Dienst konfiguriert sind. Stellen Sie eine `HttpClient` für eine blazor-Server-App bereit.<br><br>Weitere Informationen finden Sie unter <xref:blazor/call-web-api>. |
+| `IJSRuntime` | Singleton (blazor-Webassembly)<br>Bereich (blazor-Server) | Stellt eine Instanz einer JavaScript-Laufzeit dar, in der JavaScript-Aufrufe gesendet werden. Weitere Informationen finden Sie unter <xref:blazor/javascript-interop>. |
+| `NavigationManager` | Singleton (blazor-Webassembly)<br>Bereich (blazor-Server) | Enthält Hilfsprogramme zum Arbeiten mit URIs und dem Navigations Zustand. Weitere Informationen finden Sie unter [URI-und Navigations Zustands Hilfen](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
 Ein benutzerdefinierter Dienstanbieter stellt nicht automatisch die in der Tabelle aufgeführten Standarddienste bereit. Wenn Sie einen benutzerdefinierten Dienstanbieter verwenden und einen der Dienste benötigen, die in der Tabelle angezeigt werden, fügen Sie dem neuen Dienstanbieter die erforderlichen Dienste hinzu.
 
@@ -134,7 +134,7 @@ Voraussetzungen für die Konstruktorinjektion:
 
 In ASP.net Core-apps werden Bereichs bezogene Dienste in der Regel auf die aktuelle Anforderung festgelegt. Nachdem die Anforderung abgeschlossen ist, werden alle Bereichs bezogenen oder vorübergehenden Dienste vom System System entfernt. In Blazor Server-apps dauert der Anforderungs Bereich für die Dauer der Client Verbindung, was dazu führen kann, dass vorübergehende und Bereichs bezogene Dienste viel länger als erwartet Leben.
 
-Um Dienste auf die Lebensdauer einer Komponente zu beschränken, kann die `OwningComponentBase`-und `OwningComponentBase<TService>` Basisklassen verwenden. Diese Basisklassen machen eine `ScopedServices`-Eigenschaft des Typs `IServiceProvider` verfügbar, mit der Dienste aufgelöst werden, die auf die Lebensdauer der Komponente beschränkt sind. Verwenden Sie die `@inherits`-Direktive, um eine Komponente zu erstellen, die von einer Basisklasse in Razor erbt.
+Um Dienste auf die Lebensdauer einer Komponente zu beschränken, können Sie die `OwningComponentBase`-und `OwningComponentBase<TService>` Basisklassen verwenden. Diese Basisklassen machen eine `ScopedServices`-Eigenschaft des Typs `IServiceProvider` verfügbar, mit der Dienste aufgelöst werden, die auf die Lebensdauer der Komponente beschränkt sind. Verwenden Sie die `@inherits`-Direktive, um eine Komponente zu erstellen, die von einer Basisklasse in Razor erbt.
 
 ```razor
 @page "/users"

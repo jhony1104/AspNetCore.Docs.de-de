@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/11/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 34ec2b2eb511f33e1263cdad4a338183a3e4b83a
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 15899917826fb6559244998766d99d00f56e0521
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75356170"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294717"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -578,8 +578,9 @@ So führen Sie eine HTTP PUT-Anforderung aus:
         "data": "Strawberry"
       }
     ]
+    ```
 
-1. Run the `put` command on an endpoint that supports it:
+1. Führen Sie den Befehl `put` für einen Endpunkt aus, der ihn unterstützt:
 
     ```console
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json

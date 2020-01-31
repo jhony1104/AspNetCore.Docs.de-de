@@ -7,12 +7,12 @@ ms.date: 01/25/2020
 no-loc:
 - Blazor
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 49e21e1a432149409a01550452cedf4009dcfba7
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
-ms.translationtype: HT
+ms.openlocfilehash: 6a9d531efd2188aed525c949bb124914c31119db
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76830645"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76869765"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.net Core-Web-SDK
 
@@ -26,7 +26,7 @@ ms.locfileid: "76830645"
 Verwenden Sie das Web. SDK in einem Projekt:
 
   ```xml
-  <Project SDK="Microsoft.NET.Sdk.Web">
+  <Project Sdk="Microsoft.NET.Sdk.Web">
     <!-- omitted for brevity -->
   </Project>
   ```
@@ -37,7 +37,7 @@ Mit dem Web SDK aktivierte Funktionen:
 
   * Der [ASP.net Core freigegebenen Frameworks](xref:fundamentals/metapackage-app).
   * [Analyse](/visualstudio/extensibility/getting-started-with-roslyn-analyzers) Tools, die für die ASP.net Core-apps entwickelt wurden.
-* Das WebSDK aktiviert MSBuild-Ziele, die die Verwendung von Veröffentlichungs Profilen und die Veröffentlichung mit Webbereitstellung ermöglichen.
+* Das Web-SDK importiert MSBuild-Ziele, die die Verwendung von Veröffentlichungs Profilen und die Veröffentlichung mit Webbereitstellung ermöglichen.
 
 ### <a name="properties"></a>Eigenschaften
 

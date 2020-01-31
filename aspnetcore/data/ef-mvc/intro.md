@@ -7,22 +7,21 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a8909d391ae1a35e9c8155df767ab157701c8a51
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 04694f20c7142cc2917df25458e8e335ee933900
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259446"
+ms.lasthandoff: 01/18/2020
+ms.locfileid: "76268767"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
-::: moniker range=">= aspnetcore-3.0"
+Dieses Tutorial wurde **nicht** auf ASP.NET Core 3.0 aktualisiert. Die [Razor Pages-Version](xref:data/ef-rp/intro) wurde aktualisiert. Die meisten Codeänderungen für ASP.NET Core 3.0 und höher in diesem Tutorial:
 
-Dieses Tutorial wurde **nicht** auf ASP.NET Core 3.0 aktualisiert. Die [Razor Pages-Version](xref:data/ef-rp/intro) wurde aktualisiert. Informationen zum Zeitpunkt des Updates finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/13920).
+* befinden sich in den Dateien *Startup.cs* und *Program.cs*
+* finden Sie in der [Razor Pages-Version](xref:data/ef-rp/intro) 
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
+Informationen zum Zeitpunkt des Updates finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/13920).
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
@@ -43,7 +42,7 @@ In diesem Tutorial:
 > * Erstellen von einem Controller und Ansichten
 > * Zeigen Sie die Datenbank an
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) mit den folgenden Workloads:
@@ -387,4 +386,3 @@ Fahren Sie mit dem nächsten Tutorial fort, um zu erfahren, wie Sie grundlegende
 > [!div class="nextstepaction"]
 > [Implementieren von grundlegenden CRUD-Funktionen](crud.md)
 
-::: moniker-end

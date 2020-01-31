@@ -2,19 +2,20 @@
 title: Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 0fcefc3f1e51beb7cc29aef6dd4f4b8557e61965
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 8ed95cdb96804e08c3f1273bbea8f64a8e4f173c
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963634"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160248"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly
 
@@ -36,8 +37,8 @@ Die folgenden Bereitstellungsstrategien werden unterstützt:
 
 Routinganforderungen für Seitenkomponenten in einer Blazor WebAssembly-App sind nicht so unkompliziert wie Routinganforderungen in einer gehosteten Blazor Server-App. Gehen Sie von einer Blazor WebAssembly-App mit zwei Komponenten aus:
 
-* *Main.razor*: Wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`).
-* *About.razor*: `About`-Komponente.
+* *Main.razor:* wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`)
+* *About.razor:* `About`-Komponente.
 
 Wenn das Standarddokument der App über die Adressleiste des Browsers (z. B. `https://www.contoso.com/`) angefordert wird, geschieht Folgendes:
 

@@ -5,17 +5,17 @@ description: Erfahren Sie mehr über ASP.net Core Blazor App-Vorlagen und Blazor
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 2a95b986450471b474d93ead252255f2bd9d4918
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: acfa4b8a42cbd310c6fc6dc973573578e94ef999
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160118"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885509"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.net Core Blazor Vorlagen
 
@@ -36,16 +36,20 @@ Eine Schritt-für-Schritt-Anleitung zum Erstellen einer Blazor-App aus einer Vor
 
 Die folgenden Dateien und Ordner bilden eine Blazor-APP, die aus einer Blazor Vorlage generiert wird:
 
-* *Program.cs* &ndash; den Einstiegspunkt der APP, der den ASP.net Core [Host](xref:fundamentals/host/generic-host)einrichtet. Der Code in dieser Datei wird von allen ASP.net Core apps gemeinsam, die aus ASP.net Core Vorlagen generiert werden.
+* *Program.cs* &ndash; den Einstiegspunkt der APP, von dem das eingerichtet wird:
 
-* *Startup.cs* &ndash; die die Start Logik der app enthält. Die `Startup`-Klasse definiert zwei Methoden:
+  * ASP.net Core [Host](xref:fundamentals/host/generic-host) (Blazor Server)
+  * Webassembly-Host (Blazor Webassembly) &ndash; der Code in dieser Datei ist für apps eindeutig, die aus der Blazor Webassembly-Vorlage (`blazorwasm`) erstellt wurden.
+    * Die `App` Komponente, die die Stamm Komponente der APP ist, wird als `app` DOM-Element für die `Add`-Methode angegeben.
+    * Dienste können mit der `ConfigureServices`-Methode auf dem Host-Generator konfiguriert werden (z. b. `builder.Services.AddSingleton<IMyDependency, MyDependency>();`).
+    * Die Konfiguration kann über den Host-Generator (`builder.Configuration`) bereitgestellt werden.
+
+* *Startup.cs* (Blazor Server) &ndash; die die Start Logik der app enthält. Die `Startup`-Klasse definiert zwei Methoden:
 
   * mit `ConfigureServices` &ndash; werden die [Abhängigkeits Injektions Dienste (di)](xref:fundamentals/dependency-injection) der App konfiguriert. In Blazor Server-apps werden Dienste durch Aufrufen von <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*>hinzugefügt, und die `WeatherForecastService` wird zum Dienst Container hinzugefügt, der von der Beispiel `FetchData` Komponente verwendet wird.
   * `Configure` &ndash; konfiguriert die Pipeline für die Anforderungs Verarbeitung der APP:
-    * Blazor Webassembly &ndash; die `App` Komponente (angegeben als `app` DOM-Element der `AddComponent`-Methode) hinzufügt, die die Stamm Komponente der APP ist.
-    * Blazor Server
-      * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*> wird aufgerufen, um einen Endpunkt für die Echtzeitverbindung mit dem Browser einzurichten. Die Verbindung wird mit [SignalR](xref:signalr/introduction)erstellt. dabei handelt es sich um ein Framework zum Hinzufügen von Echt Zeit webollen zu apps.
-      * [Mapfallbacktopage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) wird aufgerufen, um die Stamm Seite der APP (*pages/_Host. cshtml*) einzurichten und die Navigation zu aktivieren.
+    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*> wird aufgerufen, um einen Endpunkt für die Echtzeitverbindung mit dem Browser einzurichten. Die Verbindung wird mit [SignalR](xref:signalr/introduction)erstellt. dabei handelt es sich um ein Framework zum Hinzufügen von Echt Zeit webollen zu apps.
+    * [Mapfallbacktopage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) wird aufgerufen, um die Stamm Seite der APP (*pages/_Host. cshtml*) einzurichten und die Navigation zu aktivieren.
 
 * *wwwroot/Index.html* (Blazor Webassembly) &ndash; die Stamm Seite der APP, die als HTML-Seite implementiert ist:
   * Wenn eine Seite der APP anfänglich angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.

@@ -6,12 +6,12 @@ description: Lernen Sie die Attribute für das ASP.NET Core-Link-Taghilfsprogram
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: e1e2e58b4ab9087e1f9de5b5c03b587feb88f1b9
-ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
+ms.openlocfilehash: d7514433bee8a138cd7d75bfd15c9798d4fd31a3
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71256483"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809106"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>Link-Taghilfsprogramm in ASP.NET Core
 
@@ -56,10 +56,6 @@ Der CSS-Eigenschaftsname, der für den Fallbacktest verwendet werden soll. Weite
 ### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
 
 Der CSS-Eigenschaftswert, der für den Fallbacktest verwendet werden soll. Weitere Informationen finden Sie unter <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>.
-
-### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
-
-Der CSS-Eigenschaftswert, der für den Fallbacktest verwendet werden soll. Weitere Informationen finden Sie unter <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
