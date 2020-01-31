@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Grundlagen zum Erstellen einer Web-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/22/2019
+ms.date: 01/27/2020
 uid: web-api/index
-ms.openlocfilehash: 5ef8b4d012f4ed90339ffea191612e4dc365d958
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 8609e2095c202643cdc905cc610298195b654215
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880529"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870016"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -78,13 +78,28 @@ Eine Liste mit den verfügbaren Attributen finden Sie im <xref:Microsoft.AspNetC
 
 Das [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)-Attribut kann auf eine Controllerklasse angewendet werden, um folgende API-spezifische Verhalten mit einigen vordefinierten Konfigurationen zu aktivieren:
 
+::: moniker range=">= aspnetcore-2.2"
+
 * [Anforderung für das Attributrouting](#attribute-routing-requirement)
 * [Automatische HTTP 400-Antworten](#automatic-http-400-responses)
 * [Rückschluss auf Bindungsquellparameter](#binding-source-parameter-inference)
 * [Ableiten der Multipart/form-data-Anforderung](#multipartform-data-request-inference)
 * [Problemdetails für Fehlerstatuscodes](#problem-details-for-error-status-codes)
 
+Das Feature *Problemdetails für Fehlerstatuscodes* erfordert mindestens die [Kompatibilitätsversion](xref:mvc/compatibility-version) 2.2. Die anderen Features erfordern mindestens Kompatibilitätsversion 2.1.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.1"
+
+* [Anforderung für das Attributrouting](#attribute-routing-requirement)
+* [Automatische HTTP 400-Antworten](#automatic-http-400-responses)
+* [Rückschluss auf Bindungsquellparameter](#binding-source-parameter-inference)
+* [Ableiten der Multipart/form-data-Anforderung](#multipartform-data-request-inference)
+
 Diese Features erfordern mindestens [Kompatibilitätsversion](xref:mvc/compatibility-version) 2.1.
+
+::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>Attribut für bestimmte Controller
 
@@ -141,7 +156,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Anforderung für das Attributrouting
 
-Durch das `[ApiController]`-Attribut wird das Attributrouting zu einer Anforderung. Beispiel:
+Durch das `[ApiController]`-Attribut wird das Attributrouting zu einer Anforderung. Zum Beispiel:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -354,7 +369,7 @@ Betrachten Sie den folgenden Code in einer Controlleraktion:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetails`-Text. Beispiel:
+Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetails`-Text. Zum Beispiel:
 
 ```json
 {
