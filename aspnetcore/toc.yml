@@ -230,8 +230,6 @@
           uid: razor-pages/filter
         - name: Routen- und App-Konventionen
           uid: razor-pages/razor-pages-conventions
-        - name: Razor SDK
-          uid: razor-pages/sdk
     - name: MVC
       items:
         - name: Übersicht
@@ -409,21 +407,25 @@
               href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
     - name: Erweitert
       items:
+        - name: Teile der Anwendung
+          uid: mvc/extensibility/app-parts
+        - name: Anwendungsmodell
+          uid: mvc/controllers/application-model
+        - name: Bereiche
+          uid: mvc/controllers/areas
+        - name: Filter
+          uid: mvc/controllers/filters
+        - name: Razor SDK
+          uid: razor-pages/sdk
         - name: Ansichtskomponenten
           uid: mvc/views/view-components
         - name: Ansichtskompilierung
           uid: mvc/views/view-compilation
-        - name: App-Modell
-          uid: mvc/controllers/application-model
-        - name: Filter
-          uid: mvc/controllers/filters
-        - name: Bereiche
-          uid: mvc/controllers/areas
         - name: Hochladen von Dateien
           uid: mvc/models/file-uploads
-        - name: App-Komponenten
-          uid: mvc/extensibility/app-parts
-        - name: aspnet-codegenerator
+        - name: Web-SDK
+          uid: razor-pages/web-sdk
+        - name: aspnet-codegenerator (Gerüstbau)
           uid: fundamentals/tools/dotnet-aspnet-codegenerator
 - name: Web-API-Apps
   items:
@@ -578,6 +580,8 @@
       uid: grpc/client
     - name: gRPC-Integration von ClientFactory
       uid: grpc/clientfactory
+    - name: Verwenden von gRPC in Browser-Apps
+      uid: grpc/browser
     - name: Konfiguration
       uid: grpc/configuration
     - name: Authentifizierung und Autorisierung
