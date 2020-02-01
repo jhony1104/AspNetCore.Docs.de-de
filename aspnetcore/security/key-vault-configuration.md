@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 37ba756cc4170c145d2ab1f9f0a465057cc826c1
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: cd31094884f53f34d55c0bceabae41ca2bacba4c
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358707"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928545"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -73,11 +73,11 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
 
 1. Öffnen Sie Azure Cloud Shell, indem Sie eine der folgenden Methoden in der [Azure-Portal](https://portal.azure.com/)verwenden:
 
-   * Klicken Sie in der rechten oberen Ecke eines Codeblocks auf **Ausprobieren**. Verwenden Sie die Such Zeichenfolge "Azure CLI" im Textfeld.
+   * Klicken Sie in der oberen rechten Ecke eines Code Blocks auf **ausprobieren** . Verwenden Sie die Such Zeichenfolge "Azure CLI" im Textfeld.
    * Öffnen Sie Cloud Shell in Ihrem Browser mit der Schaltfläche **Start Cloud Shell** .
-   * Wählen Sie im Azure-Portal rechts oben im Menü die Schaltfläche **Cloud Shell** aus.
+   * Wählen Sie im Menü in der oberen rechten Ecke des Azure-Portal die Schaltfläche **Cloud Shell** aus.
 
-   Weitere Informationen finden Sie unter [Azure-Befehlszeilenschnittstelle (CLI)](/cli/azure/) und [in der Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
+   Weitere Informationen finden Sie unter [Azure CLI](/cli/azure/) und [Übersicht über Azure Cloud Shell](/azure/cloud-shell/overview).
 
 1. Wenn Sie nicht bereits authentifiziert sind, melden Sie sich mit dem Befehl `az login` an.
 
@@ -106,7 +106,7 @@ Die Anweisungen im [Schnellstart: festlegen und Abrufen eines Geheimnisses aus A
 
 ## <a name="use-application-id-and-x509-certificate-for-non-azure-hosted-apps"></a>Verwenden Sie die Anwendungs-ID und das X. 509-Zertifikat für nicht in Azure gehostete Apps.
 
-Konfigurieren Sie Azure AD, Azure Key Vault und die APP für die Verwendung einer Azure Active Directory Anwendungs-ID und eines X. 509-Zertifikats, um sich bei einem Schlüssel Tresor zu authentifizieren, **Wenn die APP außerhalb von Azure gehostet wird**. Weitere Informationen finden Sie im Artikel [Informationen zu Schlüsseln, Geheimnissen und Zertifikaten](/azure/key-vault/about-keys-secrets-and-certificates).
+Konfigurieren Sie Azure AD, Azure Key Vault und die APP für die Verwendung einer Azure Active Directory Anwendungs-ID und eines X. 509-Zertifikats, um sich bei einem Schlüssel Tresor zu authentifizieren, **Wenn die APP außerhalb von Azure gehostet wird**. Weitere Informationen finden Sie unter Informationen [zu Schlüsseln, Geheimnissen und Zertifikaten](/azure/key-vault/about-keys-secrets-and-certificates).
 
 > [!NOTE]
 > Obwohl die Verwendung einer Anwendungs-ID und eines X. 509-Zertifikats für in Azure gehostete Apps unterstützt wird, empfiehlt es sich, beim Hosten einer APP in Azure [verwaltete Identitäten für Azure-Ressourcen zu](#use-managed-identities-for-azure-resources) verwenden. Für verwaltete Identitäten ist das Speichern eines Zertifikats in der APP oder in der Entwicklungsumgebung nicht erforderlich.
@@ -124,13 +124,13 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
 1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck in der *appSettings. JSON* -Datei der app.
 1. Navigieren Sie in der Azure-Portal zu **Schlüssel Tresoren** .
 1. Wählen Sie den Schlüssel Tresor aus, den Sie im Abschnitt " [Geheimnis Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) " erstellt haben.
-1. Klicken Sie auf **Zugriffsrichtlinien**.
+1. Wählen Sie **Zugriffsrichtlinien**aus.
 1. Wählen Sie **Zugriffs Richtlinie hinzufügen**aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
-1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **Auswählen** aus.
+1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **auswählen** aus.
 1. Klicken Sie auf **OK**.
 1. Klicken Sie auf **Speichern**.
-1. Stellen Sie die App bereit.
+1. Stellen Sie die APP bereit.
 
 Die `Certificate`-Beispiel-App Ruft die Konfigurationswerte aus `IConfigurationRoot` mit dem Namen des geheimen Schlüssels ab:
 
@@ -153,7 +153,7 @@ Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Micr
 
 ::: moniker-end
 
-Beispielwerte:
+Beispiel Werte:
 
 * Key Vault-Name: `contosovault`
 * Anwendungs-ID: `627e911e-43cc-61d4-992e-12db9c81b413`

@@ -1,27 +1,27 @@
 ---
-title: Verwenden Sie die Libman-Befehlszeilenschnittstelle (Command-Line Interface, CLI) mit ASP.net Core
+title: Verwenden der Libman-CLI mit ASP.net Core
 author: scottaddie
-description: Erfahren Sie, wie Sie die Libman-Befehlszeilenschnittstelle (Command-Line Interface, CLI) in einem ASP.net Core-Projekt verwenden.
+description: Erfahren Sie, wie Sie die Libman CLI in einem ASP.net Core-Projekt verwenden.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 8b2b1e45ab4685482554ac439b0276e0cf381609
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962799"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928363"
 ---
-# <a name="use-the-libman-command-line-interface-cli-with-aspnet-core"></a>Verwenden Sie die Libman-Befehlszeilenschnittstelle (Command-Line Interface, CLI) mit ASP.net Core
+# <a name="use-the-libman-cli-with-aspnet-core"></a>Verwenden der Libman-CLI mit ASP.net Core
 
 Von [Scott Addie](https://twitter.com/Scott_Addie)
 
 Die [Libman](xref:client-side/libman/index) CLI ist ein plattformübergreifendes Tool, das überall unterstützt wird, wo .net Core unterstützt wird.
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
@@ -43,7 +43,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 Im vorherigen Beispiel wird ein globales .net Core-Tool aus der *C:\Temp\Microsoft.Web.LibraryManager.CLI.1.0.94-g606058a278.nupkg* -Datei des lokalen Windows-Computers installiert.
 
-## <a name="usage"></a>Verwendung
+## <a name="usage"></a>Verwendungs-
 
 Nach der erfolgreichen Installation der CLI kann der folgende Befehl verwendet werden:
 
@@ -103,7 +103,7 @@ libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
 libman init [-h|--help]
 ```
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman init` sind die folgenden Optionen verfügbar:
 
@@ -163,7 +163,7 @@ libman install [-h|--help]
 
 Der Name der zu installierenden Bibliothek. Dieser Name kann die Notation der Versionsnummer (z. b. `@1.2.0`) enthalten.
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman install` sind die folgenden Optionen verfügbar:
 
@@ -276,7 +276,7 @@ libman restore [--verbosity]
 libman restore [-h|--help]
 ```
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman restore` sind die folgenden Optionen verfügbar:
 
@@ -301,7 +301,7 @@ libman clean [--verbosity]
 libman clean [-h|--help]
 ```
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman clean` sind die folgenden Optionen verfügbar:
 
@@ -342,7 +342,7 @@ libman uninstall [-h|--help]
 
 Der Name der Bibliothek, die deinstalliert werden soll. Dieser Name kann die Notation der Versionsnummer (z. b. `@1.2.0`) enthalten.
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman uninstall` sind die folgenden Optionen verfügbar:
 
@@ -394,7 +394,7 @@ libman update [-h|--help]
 
 Der Name der zu aktualisierenden Bibliothek.
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman update` sind die folgenden Optionen verfügbar:
 
@@ -448,7 +448,7 @@ Wird nur mit dem `clean`-Befehl verwendet. Gibt den zu bereinigen Anbieter Cache
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Options
 
 Für den Befehl `libman cache` sind die folgenden Optionen verfügbar:
 
@@ -578,7 +578,7 @@ Für den Befehl `libman cache` sind die folgenden Optionen verfügbar:
       (empty)
   ```
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Globales Tool installieren](/dotnet/core/tools/global-tools#install-a-global-tool)
 * <xref:client-side/libman/libman-vs>

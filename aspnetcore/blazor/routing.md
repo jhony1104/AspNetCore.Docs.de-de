@@ -10,28 +10,28 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/routing
-ms.openlocfilehash: 0cd15f25ff7975cae3f63a739212aa23062ece23
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 32459f9f42220b01ce04e6444a9bb4a9592ee2da
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160157"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928283"
 ---
-# <a name="aspnet-core-opno-locblazor-routing"></a>ASP.net Core Blazor Routing
+# <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Erfahren Sie, wie Sie Anforderungen weiterleiten und wie Sie die `NavLink` Komponente verwenden, um Navigations Verknüpfungen in Blazor-apps zu erstellen.
+Erfahren Sie, wie Sie Anforderungen weiterleiten und wie Sie die `NavLink` Komponente verwenden, um Navigations Verknüpfungen in blazor-apps zu erstellen.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.net Core Endpunkt-Routing Integration
 
-Blazor Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure`akzeptiert werden:
+Der blazor-Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure`akzeptiert werden:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page weiterzuleiten, die als Host für den serverseitigen Teil der Blazor Server-App fungiert. Gemäß der Konvention wird die *Hostseite* in der Regel *_Host. cshtml*benannt. Die in der Hostdatei angegebene Route wird als *Fall Back Route* bezeichnet, da Sie bei der Routen Übereinstimmung mit niedriger Priorität arbeitet. Die Fall Back Route wird berücksichtigt, wenn andere Routen nicht gleich sind. Dies ermöglicht der APP, andere Controller und Seiten zu verwenden, ohne die Blazor Server-APP zu beeinträchtigen.
+Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page weiterzuleiten, die als Host für den serverseitigen Teil der blazor-Server-App fungiert. Gemäß der Konvention wird die *Hostseite* in der Regel *_Host. cshtml*benannt. Die in der Hostdatei angegebene Route wird als *Fall Back Route* bezeichnet, da Sie bei der Routen Übereinstimmung mit niedriger Priorität arbeitet. Die Fall Back Route wird berücksichtigt, wenn andere Routen nicht gleich sind. Dies ermöglicht der APP, andere Controller und Seiten zu verwenden, ohne die blazor-Server-APP zu beeinträchtigen.
 
 ## <a name="route-templates"></a>Routen Vorlagen
 
@@ -48,14 +48,14 @@ Die `Router` Komponente ermöglicht das Routing an jede Komponente mit einer ang
 </Router>
 ```
 
-Wenn eine *Razor* -Datei mit einer `@page`-Direktive kompiliert wird, wird der generierten Klasse eine <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>, die die Routen Vorlage angibt, bereitgestellt.
+Wenn eine *Razor* -Datei mit einer `@page`-Direktive kompiliert wird, wird der generierten Klasse eine <xref:Microsoft.AspNetCore.Components.RouteAttribute>, die die Routen Vorlage angibt, bereitgestellt.
 
 Zur Laufzeit wird die `RouteView` Komponente:
 
 * Empfängt die `RouteData` zusammen mit den gewünschten Parametern vom `Router`.
 * Rendert die angegebene Komponente mit dem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
 
-Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. In den standardmäßigen Blazor Vorlagen wird die `MainLayout` Komponente angegeben. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
+Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. In den Standardvorlagen für blazor wird die `MainLayout` Komponente angegeben. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
 
 Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
@@ -67,7 +67,7 @@ Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folge
 ```
 
 > [!IMPORTANT]
-> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in Ihrer *wwwroot/Index.html* -Datei (Blazor Webassembly) oder in der Datei *pages/_Host. cshtml* (Blazor Server) mit dem App-Basispfad enthalten, der im `href`-Attribut (`<base href="/">`) angegeben ist. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
+> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in Ihrer *wwwroot/Index.html* -Datei (blazor Webassembly) oder *pages/_Host. cshtml-* Datei (blazor-Server) mit dem im `href`-Attribut (`<base href="/">`) angegebenen app-Basispfad enthalten. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Benutzerdefinierten Inhalt bereitstellen, wenn Inhalt nicht gefunden wird
 
@@ -153,7 +153,7 @@ Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügb
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing mit URLs, die Punkte enthalten
 
-In Blazor Server-Apps ist die Standardroute in *_Host. cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine Blazor-App gibt eine *404-nicht gefundene* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
+In blazor-Server-Apps ist die Standardroute in *_Host. cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine blazor-App gibt eine " *404-nicht gefunden"-* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
 
 ```cshtml
 @page "/{**path}"

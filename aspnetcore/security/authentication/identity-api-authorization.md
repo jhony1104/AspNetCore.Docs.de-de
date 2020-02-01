@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 31a5e47d772e7416646c4d83c3209d7d2b254199
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 623f739b17c0bed3ce929f562c9581ab26ecf5bc
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829165"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928560"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
 
@@ -42,7 +42,7 @@ Der vorherige Befehl erstellt eine ASP.net Core-App mit einem *ClientApp* -Verze
 
 In den folgenden Abschnitten werden Ergänzungen zum-Projekt beschrieben, wenn die Authentifizierungs Unterstützung enthalten ist:
 
-### <a name="startup-class"></a>Startklasse
+### <a name="startup-class"></a>Startup-Klasse
 
 Die `Startup`-Klasse verfügt über folgende Ergänzungen:
 
@@ -260,7 +260,7 @@ async populateWeatherData() {
 }
 ```
 
-## <a name="deploy-to-production"></a>Bereitstellen für die Produktion
+## <a name="deploy-to-production"></a>In Produktionsumgebungen bereitstellen
 
 Um die app in der Produktionsumgebung bereitzustellen, müssen die folgenden Ressourcen bereitgestellt werden:
 
@@ -285,9 +285,9 @@ In diesem Abschnitt wird beschrieben, wie Sie die app in Azure Websites mithilfe
 }
 ```
 
-* Die Name-Eigenschaft für das Zertifikat entspricht dem Distinguished Subject für das Zertifikat.
-* Der Speicherort stellt den Speicherort dar, von dem das Zertifikat geladen werden soll (`CurrentUser` oder `LocalMachine`).
 * Der Speicher Name steht für den Namen des Zertifikat Speicher, in dem das Zertifikat gespeichert ist. In diesem Fall verweist Sie auf den persönlichen Benutzerspeicher.
+* Der Speicherort stellt den Speicherort dar, von dem das Zertifikat geladen werden soll (`CurrentUser` oder `LocalMachine`).
+* Die Name-Eigenschaft für das Zertifikat entspricht dem Distinguished Subject für das Zertifikat.
 
 Stellen Sie die APP bereit, indem Sie die Schritte unter Bereitstellen [der app in Azure](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure) bereitstellen, um die erforderlichen Azure-Ressourcen zu erstellen und die app in der Produktionsumgebung bereitzustellen.
 
