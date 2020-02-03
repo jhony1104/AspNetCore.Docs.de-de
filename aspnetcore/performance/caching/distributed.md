@@ -32,7 +32,7 @@ Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem A
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -194,7 +194,7 @@ So konfigurieren Sie NCache:
 
 1. Installieren [Sie NCache Open Source nuget](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/).
 1. Konfigurieren Sie den Cache Cluster in " [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)".
-1. Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinzu:
+1. Fügen Sie `Startup.ConfigureServices` den folgenden Code zu folgenden Code hinzu:
 
    ```csharp
    services.AddNCacheDistributedCache(configuration =>    
@@ -254,7 +254,7 @@ Beachten Sie Folgendes, wenn Sie entscheiden, welche Implementierung von <xref:M
 
 * Vorhandene Infrastruktur
 * Leistungsanforderungen
-* Cost
+* Kosten
 * Team Darstellung
 
 Zwischen Speicherungs Lösungen basieren in der Regel auf in-Memory-Speicher, um das schnelle Abrufen von zwischengespeicherten Daten zu ermöglichen, aber der Arbeitsspeicher ist eine begrenzte Ressource und ist aufwändig Speichert nur häufig verwendete Daten in einem Cache.
@@ -263,7 +263,7 @@ Im Allgemeinen bietet ein redis Cache einen höheren Durchsatz und eine niedrige
 
 Wenn SQL Server als Sicherungs Speicher für verteilte Caches verwendet wird, kann sich die Verwendung der gleichen Datenbank für den Cache und den normalen Datenspeicher und-Abruf der APP negativ auf die Leistung beider Anwendungen auswirken. Es wird empfohlen, für den Sicherungs Speicher im verteilten Cache eine dedizierte SQL Server Instanz zu verwenden.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Redis Cache in Azure](/azure/azure-cache-for-redis/)
 * [SQL-Datenbank in Azure](/azure/sql-database/)

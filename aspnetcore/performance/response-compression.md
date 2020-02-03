@@ -44,7 +44,7 @@ Wenn ein Client komprimierte Inhalte verarbeiten kann, muss der Client den Serve
 
 ::: moniker range=">= aspnetcore-2.2"
 
-| `Accept-Encoding` Header Werte | Unterstützte Middleware | Beschreibung |
+| `Accept-Encoding` Header Werte | Unterstützte Middleware | BESCHREIBUNG |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Ja (Standard)        | [Brotli-komprimiertes Datenformat](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | Nein                   | [Komprimiertes Datenformat deflate](https://tools.ietf.org/html/rfc1951) |
@@ -58,7 +58,7 @@ Wenn ein Client komprimierte Inhalte verarbeiten kann, muss der Client den Serve
 
 ::: moniker range="< aspnetcore-2.2"
 
-| `Accept-Encoding` Header Werte | Unterstützte Middleware | Beschreibung |
+| `Accept-Encoding` Header Werte | Unterstützte Middleware | BESCHREIBUNG |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Nein                   | [Brotli-komprimiertes Datenformat](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | Nein                   | [Komprimiertes Datenformat deflate](https://tools.ietf.org/html/rfc1951) |
@@ -80,7 +80,7 @@ Komprimierungs Algorithmen unterliegen einem Kompromiss zwischen der Komprimieru
 
 Die Header, die beim anfordern, senden, Zwischenspeichern und empfangen von komprimiertem Inhalt beteiligt sind, werden in der folgenden Tabelle beschrieben.
 
-| Header             | Funktion |
+| Header             | Role |
 | ------------------ | ---- |
 | `Accept-Encoding`  | Wird vom Client an den Server gesendet, um die Inhalts Codierungs Schemas anzugeben, die für den Client zulässig sind. |
 | `Content-Encoding` | Wird vom Server an den Client gesendet, um die Codierung des Inhalts in der Nutzlast anzugeben. |
@@ -94,7 +94,7 @@ Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der 
 * Die Komprimierung von App-Antworten mithilfe von gzip und benutzerdefinierten Komprimierungs Anbietern.
 * Vorgehensweise beim Hinzufügen eines MIME-Typs zur Standardliste von MIME-Typen für die Komprimierung.
 
-## <a name="package"></a>Package
+## <a name="package"></a>Paket
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -108,7 +108,7 @@ Fügen Sie einen Verweis auf das [Metapaket Microsoft. aspnetcore. app](xref:fun
 
 ::: moniker-end
 
-## <a name="configuration"></a>-Konfiguration
+## <a name="configuration"></a>Konfiguration
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -137,7 +137,7 @@ public class Startup
 }
 ```
 
-Anmerkungen:
+Hinweise:
 
 * `app.UseResponseCompression` muss vor allen Middleware aufgerufen werden, die Antworten komprimiert. Weitere Informationen finden Sie unter <xref:fundamentals/middleware/index#middleware-order>.
 * Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", " [Firebug](https://getfirebug.com/)" oder [Postman](https://www.getpostman.com/) , um den `Accept-Encoding` Anforderungs Header festzulegen und die Antwortheader, die Größe und den Text zu überprüfen
@@ -202,11 +202,11 @@ Der broesli-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierung
 
 Legen Sie die Komprimierungs Ebene mit <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>fest. Der brotli-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
 
-| Komprimierungs Ebene | Beschreibung |
+| Compression Level | BESCHREIBUNG |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
-| [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
+| [CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
+| [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
+| [CompressionLevel. optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -265,11 +265,11 @@ Der GZip-Komprimierungs Anbieter muss hinzugefügt werden, wenn Komprimierungs A
 
 Legen Sie die Komprimierungs Ebene mit <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>fest. Der GZip-Komprimierungs Anbieter verwendet standardmäßig den schnellsten Komprimierungs Grad ([CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel)), der möglicherweise nicht die effizienteste Komprimierung erzeugt. Wenn die effizienteste Komprimierung erwünscht ist, konfigurieren Sie die Middleware für die optimale Komprimierung.
 
-| Komprimierungs Ebene | Beschreibung |
+| Compression Level | BESCHREIBUNG |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
-| [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
+| [CompressionLevel. schnellste](xref:System.IO.Compression.CompressionLevel) | Die Komprimierung sollte so schnell wie möglich durchgeführt werden, auch wenn die resultierende Ausgabe nicht optimal komprimiert ist. |
+| [CompressionLevel. NoCompression](xref:System.IO.Compression.CompressionLevel) | Es sollte keine Komprimierung durchgeführt werden. |
+| [CompressionLevel. optimal](xref:System.IO.Compression.CompressionLevel) | Antworten sollten optimal komprimiert werden, auch wenn die Komprimierung mehr Zeit in Anspruch nimmt. |
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -338,7 +338,7 @@ Ersetzen Sie MIME-Typen, oder fügen Sie Sie durch die Optionen für die Antwort
 
 ## <a name="compression-with-secure-protocol"></a>Komprimierung mit sicherem Protokoll
 
-Komprimierte Antworten über sichere Verbindungen können mit der Option `EnableForHttps` gesteuert werden, die standardmäßig deaktiviert ist. Die Verwendung der Komprimierung mit dynamisch generierten Seiten kann zu Sicherheitsproblemen führen, wie z. B. [CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit))- und [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit))-Angriffen.
+Komprimierte Antworten über sichere Verbindungen können mit der Option `EnableForHttps` gesteuert werden, die standardmäßig deaktiviert ist. [Die Verwendung](https://wikipedia.org/wiki/CRIME_(security_exploit)) der Komprimierung mit dynamisch generierten Seiten kann zu Sicherheitsproblemen führen, wie z. b. den Angriffen gegen Angriffe und [Verletzungen](https://wikipedia.org/wiki/BREACH_(security_exploit)) .
 
 ## <a name="adding-the-vary-header"></a>Hinzufügen des Vary-Headers
 
@@ -374,7 +374,7 @@ Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", "
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

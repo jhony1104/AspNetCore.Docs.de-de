@@ -466,7 +466,7 @@ Wenn die Antwort nicht den `Access-Control-Allow-Origin`-Header enthält, schlä
 
 <a name="test"></a>
 
-## <a name="test-cors"></a>Testen von cors
+## <a name="test-cors"></a>Testen von CORS
 
 So testen Sie cors:
 
@@ -506,7 +506,7 @@ Cors-aktivierte Endpunkte können mit einem Tool wie z. b. " [fddler](https://ww
 
 Beim Bereitstellen in IIS muss cors vor der Windows-Authentifizierung ausgeführt werden, wenn der Server nicht für den anonymen Zugriff konfiguriert ist. Zur Unterstützung dieses Szenarios muss das [IIS cors-Modul](https://www.iis.net/downloads/microsoft/iis-cors-module) für die APP installiert und konfiguriert werden.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Cross-Origin Resource Sharing (cors)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Einführung in das IIS cors-Modul](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

@@ -75,10 +75,10 @@ Es gibt drei allgemeine Speicherorte für die Beibehaltung des Zustands in einer
 
 ### <a name="server-side-in-a-database"></a>Server seitig in einer Datenbank
 
-Für permanente Daten Persistenz oder für Daten, die mehrere Benutzer oder Geräte umfassen müssen, ist eine unabhängige serverseitige Datenbank fast sicherlich die beste Wahl. Zu den Optionen gehören:
+Für permanente Daten Persistenz oder für Daten, die mehrere Benutzer oder Geräte umfassen müssen, ist eine unabhängige serverseitige Datenbank fast sicherlich die beste Wahl. Beispiele für Optionen:
 
 * Relationale SQL-Datenbank
-* Schlüssel-Wert-Speicher
+* Schlüssel-Wert-Speicherung
 * BLOB-Speicher
 * Tabellen Speicher
 
