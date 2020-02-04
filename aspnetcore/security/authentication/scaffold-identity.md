@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a0e9603cbca8c7f5771b0acf1a60839dffc89d4e
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: b3e077aeac11e62d9e992884100476f7be35b59a
+ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146484"
+ms.lasthandoff: 02/03/2020
+ms.locfileid: "76972044"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identität in ASP.net Core Projekten
 
@@ -30,7 +30,7 @@ Wir empfehlen die Verwendung eines Quell Code Verwaltungssystems, das Datei Unte
 
 Dienste sind erforderlich, wenn die [zweistufige Authentifizierung](xref:security/authentication/identity-enable-qrcodes), [Konto Bestätigung und Kenn Wort Wiederherstellung](xref:security/authentication/accconfirm)sowie andere Sicherheitsfeatures mit der Identität verwendet werden. Dienste oder Service-stubzeichen werden nicht generiert, wenn eine Gerüst Identität besteht Dienste zum Aktivieren dieser Features müssen manuell hinzugefügt werden. Weitere Informationen finden Sie unter Anfordern einer [e-Mail-Bestätigung](xref:security/authentication/accconfirm#require-email-confirmation)
 
-Dieses Dokument enthält eine ausführlichere Anleitung als die Datei " *gerüdodingreadme. txt* ", die generiert wird, wenn das Gerüst ausgeführt wird.
+Dieses Dokument enthält eine ausführlichere Anleitung als die Datei " *Gerüst* Datei", die generiert wird, wenn das Gerüst ausgeführt wird.
 
 ## <a name="scaffold-identity-into-an-empty-project"></a>Gerüst der Identität in ein leeres Projekt
 
@@ -83,7 +83,7 @@ Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfigurie
 
 <a name="useauthentication"></a>
 
-### <a name="enable-authentication"></a>Authentifizierung aktivieren
+### <a name="enable-authentication"></a>Aktivieren der Authentifizierung
 
 Aktualisieren Sie die `Startup`-Klasse mit Code, der dem folgenden ähnelt:
 
@@ -259,7 +259,7 @@ Ein ähnlicher Ansatz kann in Produktionsszenarien befolgt werden.
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>Veröffentlichen statischer identitätsassets verhindern
 
-Informationen zum Veröffentlichen statischer Identitäts Ressourcen im Webstamm finden Sie unter <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>.
+Weitere Informationen darüber, wie Sie verhindern, dass statische Identitätsobjekte veröffentlicht werden, finden Sie unter <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>.
 
 ## <a name="additional-resources"></a>Weitere Ressourcen
 
@@ -325,7 +325,7 @@ Die Identität wird in " *Areas/Identity/identityhostingstartup. cs*" konfigurie
 
 <a name="useauthentication"></a>
 
-### <a name="enable-authentication"></a>Authentifizierung aktivieren
+### <a name="enable-authentication"></a>Aktivieren der Authentifizierung
 
 Nennen Sie in der `Configure`-Methode der `Startup`-Klasse nach `UseStaticFiles`die [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) :
 
