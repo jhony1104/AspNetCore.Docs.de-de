@@ -4,14 +4,14 @@ author: pkellner
 description: Erfahren Sie, wie das Taghilfsprogramm für verteilten Cache verwendet wird.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2018
+ms.date: 01/24/2020
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: 4e4d383bac67c73bad8b0a31b9ceb9452251761b
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: e5100d7244600358186b653073990985f48434a7
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856198"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809054"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>Taghilfsprogramm für verteilten Cache in ASP.NET Core
 
@@ -60,7 +60,7 @@ Beispiel:
 
 ## <a name="distributed-cache-tag-helper-idistributedcache-implementations"></a>Implementierungen von IDistributedCache im Taghilfsprogramm für verteilten Cache
 
-In ASP.NET Core gibt es zwei Implementierungen von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>. Eine basiert auf SQL Server, die andere auf Redis. Ausführliche Informationen zu diesen Implementierungen finden Sie unter <xref:performance/caching/distributed>. Für beide Implementierungen wird eine Instanz von `IDistributedCache` in `Startup` festgelegt.
+In ASP.NET Core gibt es zwei Implementierungen von <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>. Eine basiert auf SQL Server, die andere auf Redis. Drittanbieterimplementierungen sind ebenfalls verfügbar, z. B. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html). Ausführliche Informationen zu diesen Implementierungen finden Sie unter <xref:performance/caching/distributed>. Für beide Implementierungen wird eine Instanz von `IDistributedCache` in `Startup` festgelegt.
 
 Es gibt keine Tagattribute, die einer bestimmten Implementierung von `IDistributedCache` explizit zugeordnet sind.
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 462f34664540b92ba6758224a722c7ca8f9c8de0
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 5e3ff65420b3c6769d52f8b96c216043cb1fdc1a
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829061"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727006"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -134,7 +134,7 @@ Die von <xref:Microsoft.AspNetCore.Routing.LinkGenerator> bereitgestellten Metho
   * [UseRouting](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*) fügt der Middlewarepipeline Routenzuordnung hinzu. Es muss vor jeder routingabhängigen Middleware wie Autorisierung, Endpunktausführung usw. stehen.
   * [UseEndpoints](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*) fügt der Middlewarepipeline Endpunktausführung hinzu. Es führt den Anforderungsdelegat aus, der die Antwort des Endpunkts bedient.
   In `UseEndpoints` können darüber hinaus Routenendpunkte konfiguriert werden, die von der App zugeordnet und ausgeführt werden können. Beispielsweise <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> und <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*>.
-* Apps verwenden die Hilfsmethoden von ASP.NET Core zum Konfigurieren ihrer Routen. ASP.NET Core-Frameworks bieten Hilfsmethoden wie <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> und `MapHub<THub>`. Außerdem gibt es Hilfsmethoden zum Konfigurieren Ihrer eigenen benutzerdefinierten Routenendpunkte: <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> und [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
+* Apps verwenden die Hilfsmethoden von ASP.NET Core zum Konfigurieren ihrer Routen. ASP.NET Core-Frameworks bieten Hilfsprogrammmethoden wie <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> und `MapHub<THub>`. Außerdem gibt es Hilfsmethoden zum Konfigurieren Ihrer eigenen benutzerdefinierten Routenendpunkte: <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> und [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
 * Endpunktrouting unterstützt darüber hinaus das Ändern von Endpunkten nach dem Starten einer Anwendung. Um dies in Ihrer App oder in ASP.NET Core-Framework zu unterstützen, muss eine benutzerdefinierte <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> erstellt und registriert werden. Dies ist eine erweiterte Funktion, die normalerweise nicht benötigt wird. Endpunkte werden normalerweise beim Start konfiguriert und bleiben für die Lebensdauer der App statisch. Das Laden einer Routenkonfiguration aus einer Datei oder Datenbank beim Start ist nicht dynamisch.
 
 Der folgende Code veranschaulicht ein einfaches Beispiel für Endpunktrouting:

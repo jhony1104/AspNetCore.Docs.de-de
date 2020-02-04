@@ -5,12 +5,12 @@ description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
 ms.author: riande
 ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: de75c3b0651c0cda6629af786d7db9dc83bc4fef
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: a25233968f115c6e3a214d97cf2ca5ab81df8d83
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72288821"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870427"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
@@ -61,9 +61,9 @@ Fügen Sie die Ansicht `Index` für `HelloWorldController` hinzu.
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Views/HelloWorld*, und klicken Sie dann **Hinzufügen > Neue Datei**.
 * Führen Sie im Dialogfeld **Neue Datei** folgende Aktionen aus:
 
-  * Wählen Sie im linken Bereich **Web** aus.
-  * Wählen Sie im mittleren Bereich **Leere HTML-Datei** aus.
-  * Geben Sie *Index.cshtml* in das Feld **Name** ein.
+  * Wählen Sie im linken Bereich die Option **ASP .NET Core** aus.
+  * Wählen Sie im Hauptbereich die Option **MVC-Ansichtsseite** aus.
+  * Geben Sie in das Feld **Name** die Zeichenfolge *Index* ein.
   * Wählen Sie **Neu** aus.
 
 ![Dialogfeld „Neues Element hinzufügen“](adding-view/_static/add_view_mac.png)
@@ -95,7 +95,7 @@ Im oben stehenden Markup wurden folgende Änderungen vorgenommen:
 * `MvcMovie` wurde dreimal in `Movie App` geändert.
 * Das Anchor-Element `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` wurde in `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>` geändert.
 
-Im obigen Markup wurden das `asp-area=""`-[AnchorTagHelper-Attribut](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) und der Attributwert weggelassen, weil in dieser App keine [Bereiche](xref:mvc/controllers/areas) verwendet werden.
+Im obigen Markup wurde das [Anchor-Tag-Hilfsprogramm-Attribut](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) von `asp-area=""` und der Attributwert ausgelassen, da für diese App keine [Bereiche](xref:mvc/controllers/areas) verwendet werden.
 
 **Hinweis:** Der `Movies`-Controller wurde nicht implementiert. An diesem Punkt ist der `Movie App`-Link nicht funktionsfähig.
 
@@ -250,7 +250,7 @@ Im folgenden Markup sind die Änderungen hervorgehoben dargestellt:
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
 
-Im obigen Markup wurde das `asp-area`-[Anchor-Taghilfsprogramm Attribut](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) weggelassen, weil in dieser App keine [Bereiche](xref:mvc/controllers/areas) verwendet werden.
+Im obigen Markup wurde das [Anchor-Tag-Hilfsprogramm-Attribut](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) von `asp-area` ausgelassen, da für diese App keine [Bereiche](xref:mvc/controllers/areas) verwendet werden.
 
 <!-- Routing has changed in 2.2, it's going to the last route.
 >[!WARNING]

@@ -3,14 +3,14 @@ title: Übersicht über ASP.NET Core MVC
 author: ardalis
 description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum Erstellen von Web-Apps und APIs mithilfe des Model-View-Controller-Entwurfsmusters
 ms.author: riande
-ms.date: 11/07/2019
+ms.date: 01/28/2020
 uid: mvc/overview
-ms.openlocfilehash: 4f4ea3da8563cabaaa6183c6835c2f1eb8c387b4
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: a147c2aa01f1440f8ac59f73eb7be734193f802a
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799493"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76869970"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -257,5 +257,6 @@ Weitere Informationen finden Sie unter <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; stark typisierte Bibliothek für Tests mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
+* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC:](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) stark typisierte Bibliothek für Komponententest mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
+* [Integrieren von Komponenten in Razor Pages und MVC-Apps](xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps)
 

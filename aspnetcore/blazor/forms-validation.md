@@ -17,11 +17,11 @@ ms.contentlocale: de-DE
 ms.lasthandoff: 01/24/2020
 ms.locfileid: "76726881"
 ---
-# <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.net Core Blazor Formularen und Validierung
+# <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.net Core [!OP.NO-LOC(Blazor)] Formularen und Validierung
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
-Formulare und Validierung werden in Blazor mithilfe von [Daten Anmerkungen](xref:mvc/models/validation)unterstützt.
+Formulare und Validierung werden in [!OP.NO-LOC(Blazor)] mithilfe von [Daten Anmerkungen](xref:mvc/models/validation)unterstützt.
 
 Der folgende `ExampleModel` Typ definiert die Validierungs Logik mithilfe von Daten Anmerkungen:
 
@@ -191,7 +191,7 @@ Im folgenden Formular werden Benutzereingaben mithilfe der im `Starship` Modell 
 
 Der `EditForm` erstellt eine `EditContext` als einen [kaskadierenden Wert](xref:blazor/components#cascading-values-and-parameters) , der Metadaten zum Bearbeitungsprozess nachverfolgt, einschließlich der geänderten Felder und der aktuellen Validierungs Meldungen. Der `EditForm` bietet auch praktische Ereignisse für gültige und ungültige übermitteln (`OnValidSubmit`, `OnInvalidSubmit`). Alternativ können Sie `OnSubmit` verwenden, um die Validierungs-und Prüf Feldwerte mit benutzerdefiniertem Validierungscode zu initiieren.
 
-Im folgenden Beispiel:
+Siehe folgendes Beispiel:
 
 * Die `HandleSubmit`-Methode wird ausgeführt, wenn die Schaltfläche **senden** ausgewählt ist.
 * Das Formular wird mit dem `EditContext`des Formulars überprüft.
@@ -258,7 +258,7 @@ Erstellen Sie eine-Komponente mit dem folgenden Markup, und verwenden Sie die-Ko
 
 ## <a name="work-with-radio-buttons"></a>Arbeiten mit Options Feldern
 
-Beim Arbeiten mit Options Feldern in einem Formular wird die Datenbindung anders behandelt als andere Elemente, da Options Felder als Gruppe ausgewertet werden. Der Wert jeder Options Schaltfläche ist korrigiert, aber der Wert der Optionsfeld Gruppe ist der Wert des ausgewählten Options Felds. Das folgende Beispiel zeigt Folgendes:
+Beim Arbeiten mit Options Feldern in einem Formular wird die Datenbindung anders behandelt als andere Elemente, da Options Felder als Gruppe ausgewertet werden. Der Wert jeder Options Schaltfläche ist korrigiert, aber der Wert der Optionsfeld Gruppe ist der Wert des ausgewählten Options Felds. Das folgende Beispiel veranschaulicht die Vorgehensweise:
 
 * Verarbeiten der Datenbindung für eine Optionsfeld Gruppe.
 * Unterstützen Sie die Validierung mithilfe einer benutzerdefinierten `InputRadio` Komponente.
@@ -398,11 +398,11 @@ private class MyCustomValidator : ValidationAttribute
 
 ### <a name="opno-locblazor-data-annotations-validation-package"></a>Validierungs Paket für Blazor Daten Anmerkungen
 
-[Microsoft. aspnetcore.Blazor. DataAnnotations. Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) ist ein Paket, das Validierungs Erfahrungs Lücken mithilfe der `DataAnnotationsValidator` Komponente füllt. Das Paket ist zurzeit *experimentell*.
+[Microsoft.aspnetcore.Blazor.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) ist ein Paket, das Validierungs Erfahrungs Lücken mithilfe der `DataAnnotationsValidator` Komponente füllt. Das Paket ist zurzeit *experimentell*.
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty]-Attribut
 
-Der <xref:System.ComponentModel.DataAnnotations.CompareAttribute> funktioniert nicht gut mit der `DataAnnotationsValidator` Komponente, da er das Validierungs Ergebnis nicht einem bestimmten Element zuordnet. Dies kann zu inkonsistentem Verhalten zwischen der Überprüfung auf Feldebene und dem Zeitpunkt der Überprüfung des gesamten Modells auf einem Submit [Microsoft. aspnetcore.Blazor. Mit dem experimentellen DataAnnotations. Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) -Paket wird ein zusätzliches Validierungs Attribut (`ComparePropertyAttribute`) eingeführt, das diese Einschränkungen behandelt. In einer Blazor-APP ist `[CompareProperty]` ein direkter Ersatz für das `[Compare]`-Attribut.
+Der <xref:System.ComponentModel.DataAnnotations.CompareAttribute> funktioniert nicht gut mit der `DataAnnotationsValidator` Komponente, da er das Validierungs Ergebnis nicht einem bestimmten Element zuordnet. Dies kann zu inkonsistentem Verhalten zwischen der Überprüfung auf Feldebene und dem Zeitpunkt der Überprüfung des gesamten Modells auf einem Submit [Microsoft.aspnetcore.Blazor.Mit dem experimentellen DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) -Paket wird ein zusätzliches Validierungs Attribut (`ComparePropertyAttribute`) eingeführt, das diese Einschränkungen behandelt. In einer Blazor-APP ist `[CompareProperty]` ein direkter Ersatz für das `[Compare]`-Attribut.
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>Untergeordnete Modelle, Sammlungs Typen und komplexe Typen
 

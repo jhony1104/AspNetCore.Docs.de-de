@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: e718592127115e46df3154364957943a457b0b1b
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: 880d1762ebbea641c0b9c5a9f8bbca0b68a463c5
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146328"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726667"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -144,6 +144,8 @@ server {
     }
 }
 ```
+
+Wenn es sich bei der App um eine Blazor-Server-App handelt, die auf SignalR-Websockets basiert, finden Sie unter <xref:host-and-deploy/blazor/server#linux-with-nginx> weitere Informationen, wie Sie den `Connection`-Header festlegen.
 
 Wenn keine Übereinstimmung mit `server_name` gefunden wird, verwendet Nginx den Standardserver. Wenn kein Server definiert ist, ist der erste Server in der Konfigurationsdatei der Standardserver. Als bewährte Methode gilt, einen bestimmten Standardserver hinzuzufügen, der den Statuscode 444 in Ihrer Konfigurationsdatei zurückgibt. Im Folgenden wird ein Beispiel für eine Standardserverkonfiguration aufgeführt:
 

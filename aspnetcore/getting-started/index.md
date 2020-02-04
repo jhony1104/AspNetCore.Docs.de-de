@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 uid: getting-started
-ms.openlocfilehash: c806bd1e79dea9119f1c9e99d0a2b9742a10987a
-ms.sourcegitcommit: ef1720cb733908f36a54825d84c3461c5280bdbe
+ms.openlocfilehash: 4f7e67e1e422afe3f7e2970e0c40380f065390ac
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2020
-ms.locfileid: "75737476"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928320"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
-Dieses Tutorial zeigt, wie die .NET Core-Befehlszeilenschnittstelle verwendet wird, um eine ASP.NET Core-Web-App zu erstellen und auszuführen.
+Dieses Tutorial zeigt, wie Sie die .NET Core-CLI verwenden, um eine ASP.NET Core-Web-App zu erstellen und auszuführen.
 
 Sie lernen, die folgende Aufgaben auszuführen:
 
@@ -70,7 +70,7 @@ dotnet dev-certs https --trust
 
 Über den vorherigen Befehl wird die folgende Meldung angezeigt:
 
-*Trusting the HTTPS development certificate was requested. Wenn das Zertifikat nicht bereits vertrauenswürdig ist, führen wir den folgenden Befehl aus:*  `'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`.
+*Trusting the HTTPS development certificate was requested. Wenn das Zertifikat nicht bereits vertrauenswürdig ist, führen wir den folgenden Befehl aus: * `'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`.
 
 Dieser Befehl fordert Sie möglicherweise zur Eingabe Ihres Kennworts auf, um das Zertifikat in der Keychain für das System zu installieren. Geben Sie Ihr Kennwort ein, wenn Sie die Vertrauenswürdigkeit des Entwicklungszertifikats bestätigen möchten.
 
