@@ -7,12 +7,12 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/angular
-ms.openlocfilehash: 62654ca040be99de8063a63c7e4ac09cbb8564eb
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 150b2176eac2e68c1ef9ec6deabb087836ff84ce
+ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080401"
+ms.lasthandoff: 02/04/2020
+ms.locfileid: "77004265"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
 
@@ -20,7 +20,7 @@ Die aktualisierte Angular-Projektvorlage stellt einen geeigneten Anfangspunkt f�
 
 Mit der Vorlage können Sie ein ASP.NET Core-Projekt, das als API-Back-End fungieren soll, sowie ein Angular-CLI-Projekt erstellen, das als Benutzerschnittstelle fungieren soll. Die Vorlage bietet den Vorteil, dass beide Projekte in einem App-Projekt gehostet werden können. Folglich kann das App-Projekt als eine einzelne Einheit erstellt und veröffentlicht werden.
 
-## <a name="create-a-new-app"></a>Erstellen einer neuen App
+## <a name="create-a-new-app"></a>Neue App erstellen
 
 Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlage für Angular-Projekte nicht installieren.
 
@@ -53,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 Navigieren Sie in einem Browser zu dieser URL.
 
-Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird angezeigt: *Ng Live Development Server lauscht auf "localhost&lt;: otherport&gt;", öffnet Ihren http://localhost:&lt Browser auf "&gt; otherport/* ". Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
+Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird protokolliert: *NG Live-Entwicklungsserver lauscht an localhost:&lt;otherport&gt;, öffnen Sie http://localhost:&lt;otherport&gt;/* in Ihrem Browser. Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
 
 ---
 
@@ -61,7 +61,7 @@ Mit der Projektvorlage werden eine ASP.NET Core-App und eine Angular-App erstell
 
 ## <a name="add-pages-images-styles-modules-etc"></a>Hinzufügen von Seiten, Images, Formatvorlagen, Modulen usw.
 
-Das Verzeichnis *ClientApp* enthält eine standardmäßige Angular-CLI-App. Weitere Informationen finden Sie in der offiziellen [Angular-Dokumentation](https://github.com/angular/angular-cli/wiki).
+Das Verzeichnis *ClientApp* enthält eine standardmäßige Angular-CLI-App. Weitere Informationen finden Sie in der offiziellen [Angular-Dokumentation](https://https://angular.io).
 
 Die Angular-App, die mit dieser Vorlage erstellt wurde, und die App, die von der Angular-CLI selbst (über `ng new`) erstellt wurde, unterscheiden sich geringfügig. Die Funktionen der App sind jedoch unverändert. Die mit der Vorlage erstellte App enthält ein auf [Bootstrap](https://getbootstrap.com/) basiertes Layout und ein Beispiel für grundlegendes Routing.
 
@@ -73,9 +73,9 @@ Wechseln Sie über eine Eingabeaufforderung zum Unterverzeichnis *ClientApp*:
 cd ClientApp
 ```
 
-Wenn das `ng`-Tool global installiert ist, können Sie seine Befehle ausführen. Sie können z.B. `ng lint`, `ng test` oder einen beliebigen anderen [Angular-CLI-Befehl](https://github.com/angular/angular-cli/wiki#additional-commands) ausführen. Allerdings muss `ng serve` nicht ausgeführt werden, da Ihre ASP.NET Core-App den serverseitigen und den clientseitigen Teil Ihrer App bedient. Intern verwendet sie `ng serve` bei der Entwicklung.
+Wenn das `ng`-Tool global installiert ist, können Sie seine Befehle ausführen. Sie können z.B. `ng lint`, `ng test` oder einen beliebigen anderen [Angular-CLI-Befehl](https://angular.io/cli) ausführen. Allerdings muss `ng serve` nicht ausgeführt werden, da Ihre ASP.NET Core-App den serverseitigen und den clientseitigen Teil Ihrer App bedient. Intern verwendet sie `ng serve` bei der Entwicklung.
 
-Wenn Sie das `ng`-Tool nicht installiert haben, führen Sie stattdessen `npm run ng` aus. Sie können beispielsweise `npm run ng lint` `npm run ng test` ausführen.
+Wenn Sie das `ng`-Tool nicht installiert haben, führen Sie stattdessen `npm run ng` aus. Sie können beispielsweise `npm run ng lint``npm run ng test` ausführen.
 
 ## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
@@ -148,6 +148,6 @@ Gleichzeitig hat die Aktivierung von SSR zahlreiche Nachteile. Sie erhöht die K
     }
     ```
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:security/authentication/identity/spa>
