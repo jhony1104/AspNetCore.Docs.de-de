@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über ASP.NET Core-Middleware und die Anforderung
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/19/2019
+ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 63566c1642e17ad333bb65b122330d11c4472aff
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 5c8e9e58ab222e482ef029f5099d0a8acd07d8a6
+ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75355005"
+ms.lasthandoff: 02/03/2020
+ms.locfileid: "76972025"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -226,6 +226,7 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Diagnose](xref:fundamentals/error-handling) | Mehrere separate Middlewares, die Entwicklern eine Ausnahmeseite, Ausnahmebehandlung, Statuscodeseiten und die Standardwebseite für neue Apps bereitstellen. | Vor Komponenten, die Fehler erzeugen. Terminal für Ausnahmen oder zum Bereitstellen der Standardwebseite für neue Apps. |
 | [Weitergeleitete Header](xref:host-and-deploy/proxy-load-balancer) | Leitet Proxyheader an die aktuelle Anforderung weiter. | Vor Komponenten, die die aktualisierten Felder nutzen. Beispiele: Schema, Host, Client-IP, Methode. |
 | [Integritätsprüfung](xref:host-and-deploy/health-checks) | Überprüft die Integrität der ASP.NET Core-App und ihrer Abhängigkeiten, z. B. Überprüfung der Datenbankverfügbarkeit. | Abschließend, wenn eine Anforderung mit einem Integritätsprüfungs-Endpunkt übereinstimmt. |
+| [Headerweitergabe](xref:fundamentals/http-requests#header-propagation-middleware) | Überträgt HTTP-Header aus der eingehenden Anforderung zu ausgehenden HTTP-Clientanforderungen |
 | [Außerkraftsetzung der HTTP-Methode](xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions) | Ermöglicht es eingehenden POST-Anforderungen, die Methode außer Kraft zu setzen. | Vor Komponenten, die die aktualisierte Methode nutzen. |
 | [HTTPS-Umleitung](xref:security/enforcing-ssl#require-https) | Leitet alle HTTP-Anforderungen an HTTPS um. | Vor Komponenten, die die URL nutzen. |
 | [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Middleware für erweiterte Sicherheit, die einen besonderen Antwortheader hinzufügt. | Bevor Antworten gesendet werden und nach Komponenten, die Anforderungen ändern. Beispiele: weitergeleitete Header, URL-Umschreibung. |
