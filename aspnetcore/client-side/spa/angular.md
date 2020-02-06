@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie sich mit der Projektvorlage für die Einzelse
 monikerRange: '>= aspnetcore-2.1'
 ms.author: stevesa
 ms.custom: mvc
-ms.date: 03/07/2019
+ms.date: 02/06/2020
 uid: spa/angular
-ms.openlocfilehash: 150b2176eac2e68c1ef9ec6deabb087836ff84ce
-ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
+ms.openlocfilehash: 11ad5d4c7cadcc582b3e288a331569f62f0b98ac
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/04/2020
-ms.locfileid: "77004265"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044859"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
 
@@ -20,7 +20,7 @@ Die aktualisierte Angular-Projektvorlage stellt einen geeigneten Anfangspunkt f�
 
 Mit der Vorlage können Sie ein ASP.NET Core-Projekt, das als API-Back-End fungieren soll, sowie ein Angular-CLI-Projekt erstellen, das als Benutzerschnittstelle fungieren soll. Die Vorlage bietet den Vorteil, dass beide Projekte in einem App-Projekt gehostet werden können. Folglich kann das App-Projekt als eine einzelne Einheit erstellt und veröffentlicht werden.
 
-## <a name="create-a-new-app"></a>Neue App erstellen
+## <a name="create-a-new-app"></a>Erstellen einer neuen App
 
 Wenn ASP.NET Core 2.1 auf Ihrem Computer installiert ist, müssen Sie die Vorlage für Angular-Projekte nicht installieren.
 
@@ -61,7 +61,7 @@ Mit der Projektvorlage werden eine ASP.NET Core-App und eine Angular-App erstell
 
 ## <a name="add-pages-images-styles-modules-etc"></a>Hinzufügen von Seiten, Images, Formatvorlagen, Modulen usw.
 
-Das Verzeichnis *ClientApp* enthält eine standardmäßige Angular-CLI-App. Weitere Informationen finden Sie in der offiziellen [Angular-Dokumentation](https://https://angular.io).
+Das Verzeichnis *ClientApp* enthält eine standardmäßige Angular-CLI-App. Weitere Informationen finden Sie in der offiziellen [Angular-Dokumentation](https://angular.io).
 
 Die Angular-App, die mit dieser Vorlage erstellt wurde, und die App, die von der Angular-CLI selbst (über `ng new`) erstellt wurde, unterscheiden sich geringfügig. Die Funktionen der App sind jedoch unverändert. Die mit der Vorlage erstellte App enthält ein auf [Bootstrap](https://getbootstrap.com/) basiertes Layout und ein Beispiel für grundlegendes Routing.
 
@@ -77,7 +77,7 @@ Wenn das `ng`-Tool global installiert ist, können Sie seine Befehle ausführen.
 
 Wenn Sie das `ng`-Tool nicht installiert haben, führen Sie stattdessen `npm run ng` aus. Sie können beispielsweise `npm run ng lint``npm run ng test` ausführen.
 
-## <a name="install-npm-packages"></a>NPM-Pakete installieren
+## <a name="install-npm-packages"></a>Installieren von npm-Paketen
 
 Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
 
@@ -98,7 +98,7 @@ Sie können [ASP.NET Core-Standardhosting- und -bereitstellungsmethoden](xref:ho
 
 Das Projekt ist so konfiguriert, dass die eigene Instanz des Angular-CLI-Servers im Hintergrund gestartet wird, wenn die ASP.NET Core-App im Entwicklungsmodus gestartet wird. Dies ist nützlich, da es bedeutet, dass Sie keinen separaten Server manuell ausführen müssen.
 
-Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der Angular-CLI-Server neu gestartet. Die Sicherung wird nach ca. 10 Sekunden gestartet. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der Angular-CLI-Server neu gestartet wurde, können Sie den Angular-CLI-Server unabhängig vom ASP.NET Core-Prozess extern ausführen. Gehen Sie hierzu wie folgt vor:
+Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der Angular-CLI-Server neu gestartet. Die Sicherung wird nach ca. 10 Sekunden gestartet. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der Angular-CLI-Server neu gestartet wurde, können Sie den Angular-CLI-Server unabhängig vom ASP.NET Core-Prozess extern ausführen. Gehen Sie folgendermaßen vor:
 
 1. Wechseln Sie in einer Eingabeaufforderung zu dem Unterverzeichnis *ClientApp*, und starten Sie den Angular-CLI-Entwicklungsserver:
 
@@ -110,7 +110,7 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
     > [!IMPORTANT]
     > Starten Sie den Angular-CLI-Entwicklungsserver mit `npm start` und nicht mit `ng serve`, damit die Konfiguration in *package.json* gewahrt wird. Um zusätzliche Parameter an den Angular-CLI-Server zu übergeben, fügen Sie diese der entsprechenden `scripts`-Zeile in der Datei *package.json* hinzu.
 
-2. Ändern Sie Ihre ASP.NET Core-App so, dass die externe Angular-CLI-Instanz verwendet wird, anstatt eine eigene Instanz zu starten. Ersetzen Sie den `spa.UseAngularCliServer`-Aufruf in Ihrer *Startklasse* durch Folgendes:
+2. Ändern Sie Ihre ASP.NET Core-App so, dass die externe Angular-CLI-Instanz verwendet wird, anstatt eine eigene Instanz zu starten. Ersetzen Sie den *-Aufruf in Ihrer* Startklasse`spa.UseAngularCliServer` durch Folgendes:
 
     ```csharp
     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
@@ -148,6 +148,6 @@ Gleichzeitig hat die Aktivierung von SSR zahlreiche Nachteile. Sie erhöht die K
     }
     ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/authentication/identity/spa>
