@@ -5,17 +5,17 @@ description: Verstehen Blazor Webassembly-und Blazor Server-Hostingmodellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 145f385fd6c5d04510a4ac15a41b879591ab5caa
-ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
+ms.openlocfilehash: 7b4d4aca0bc4650c31bc8e5c4a84ecbad6a49b09
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76885524"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034085"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.net Core blazor-Hostingmodelle
 
@@ -23,7 +23,7 @@ Von [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor ist ein Webframework, das für die Client seitige Ausführung im Browser auf einer [webassemblybasierten](https://webassembly.org/) .NET-Runtime (*blazor Webassembly*) oder Serverseite in ASP.net Core (*blazor-Server*) konzipiert ist. Unabhängig vom Hostingmodell sind die APP-und Komponentenmodelle *identisch*.
+Blazor ist ein Webframework, das für die Client seitige Ausführung im Browser auf einer [WebAssembly](https://webassembly.org/)webassemblybasierten .NET-Runtime (*blazor Webassembly*) oder Serverseite in ASP.net Core (*blazor-Server*) konzipiert ist. Unabhängig vom Hostingmodell sind die APP-und Komponentenmodelle *identisch*.
 
 Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebenen Hostingmodelle finden Sie unter <xref:blazor/get-started>.
 
@@ -35,7 +35,7 @@ Das Prinzipal-Hostingmodell für blazor führt die Client seitige Ausführung im
 
 Um eine blazor-App mithilfe des Client seitigen Hostingmodells zu erstellen, verwenden Sie die Vorlage " **blazor Webassembly-App** " ([dotnet New blazorwasm](/dotnet/core/tools/dotnet-new)).
 
-Nachdem Sie die APP-Vorlage für die **blazor-Webassembly** ausgewählt haben, können Sie die APP für die Verwendung eines ASP.net Core-Back-Ends konfigurieren, indem Sie das Kontrollkästchen **ASP.net Core gehostet** aktivieren ([dotnet New blazorwasm--Hosted](/dotnet/core/tools/dotnet-new)). Die ASP.net Core-App bedient die blazor-APP an Clients. Die blazor Webassembly-App kann über das Netzwerk mithilfe von Web-API-aufrufen oder [signalr](xref:signalr/introduction)mit dem Server interagieren.
+Nachdem Sie die APP-Vorlage für die **blazor-Webassembly** ausgewählt haben, können Sie die APP für die Verwendung eines ASP.net Core-Back-Ends konfigurieren, indem Sie das Kontrollkästchen **ASP.net Core gehostet** aktivieren ([dotnet New blazorwasm--Hosted](/dotnet/core/tools/dotnet-new)). Die ASP.net Core-App bedient die blazor-APP an Clients. Die blazor Webassembly-App kann über das Netzwerk mit dem Server mit Web-API-aufrufen oder [signalr](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) interagieren.
 
 Die Vorlagen enthalten das `blazor.webassembly.js` Skript, das Folgendes behandelt:
 
@@ -292,7 +292,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
 
    Wenn Sie einen benutzerdefinierten Ordner zum Speichern der APP-Komponenten verwenden, fügen Sie den Namespace, der den Ordner darstellt, der *views/_ViewImports. cshtml-* Datei hinzu. Weitere Informationen finden Sie unter <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>.
 
-### <a name="circuits"></a>Fen
+### <a name="circuits"></a>Leitungen
 
 Eine blazor-Server-APP wird zusätzlich zu [ASP.net Core signalr](xref:signalr/introduction)erstellt. Jeder Client kommuniziert *über eine oder*mehrere signalr-Verbindungen, die als Verbindung bezeichnet werden, mit dem Server. Eine Verbindung ist die Abstraktion von blazor über signalr-Verbindungen, die temporäre Netzwerkunterbrechungen tolerieren können. Wenn ein blazor-Client feststellt, dass die signalr-Verbindung getrennt ist, versucht er, eine Verbindung mit dem Server mithilfe einer neuen signalr-Verbindung herzustellen.
 
@@ -365,7 +365,7 @@ Blazor-Server-apps werden standardmäßig so eingerichtet, dass Sie die Benutzer
 * Wird in die Seite vorab übernommen.
 * Wird als statischer HTML-Code auf der Seite gerendert, oder wenn er die erforderlichen Informationen zum Bootstrapping einer blazor-APP vom Benutzer-Agent enthält.
 
-| `RenderMode`        | Beschreibung |
+| `RenderMode`        | BESCHREIBUNG |
 | ------------------- | ----------- |
 | `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine Blazor Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
 | `Server`            | Rendert einen Marker für eine Blazor Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
@@ -500,7 +500,8 @@ So konfigurieren Sie den SignalR-Client in der Datei *pages/_Host. cshtml* :
 </script>
 ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
+* <xref:tutorials/signalr-blazor-webassembly>
