@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: d7d4eece935bd83b69a6a5d81898012b99d73193
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 59883a8165040fa58edb2f6cf22d4d6b3abf6f3e
+ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828905"
+ms.lasthandoff: 02/07/2020
+ms.locfileid: "77074548"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -29,7 +29,7 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
@@ -45,14 +45,14 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 > [!WARNING]
 > ## <a name="api-projects"></a>API-Projekte
 >
-> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` leitet Browsers per HTTP-Statuscode von HTTP an HTTPS weiter. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
+> Verwenden Sie **nicht** "Requirements [httpsattribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) " für Web-APIs, die vertrauliche Informationen erhalten. `RequireHttpsAttribute` verwendet HTTP-Statuscodes, um Browser von http zu HTTPS umzuleiten. API-Clients verstehen diese Codes möglicherweise nicht, oder Sie führen keine Weiterleitung von HTTP an HTTPS durch. Dies kann dazu führen, dass solche Clients Daten unverschlüsselt mittels HTTP versenden. Web-APIs sollten daher entweder:
 >
 > * nicht auf HTTP lauschen oder
 > * die Verbindung mit dem Statuscode 400 („Ungültige Anforderung“) schließen und die Anforderung nicht verarbeiten.
 
 ::: moniker-end
 
-## <a name="require-https"></a>HTTPS erforderlich
+## <a name="require-https"></a>Erforderlichkeit von HTTPS
 
 Es wird empfohlen, dass die Web-Apps für die Produktion ASP.net Core:
 
@@ -150,7 +150,7 @@ Wenn Anforderungen in einer Reverseproxykonfiguration weitergeleitet werden, ver
 
 Wenn Sie Azure App Service bereitstellen, befolgen Sie die Anweisungen im [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
-### <a name="options"></a>Options
+### <a name="options"></a>Tastatur
 
 Der folgende markierte Code ruft [addhttpsredirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) auf, um Middleware-Optionen zu konfigurieren:
 
@@ -261,7 +261,7 @@ ASP.net Core 2,1 und höher implementiert hsts mit der `UseHsts`-Erweiterungsmet
 
 Legen Sie für Produktionsumgebungen, die HTTPS zum ersten Mal implementieren, die anfängliche [hstsoptions. MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) -Einstellung auf einen kleinen Wert fest, indem Sie eine der <xref:System.TimeSpan> Methoden verwenden. Legen Sie den Wert von Stunden auf nicht mehr als einen Tag fest, falls Sie die HTTPS-Infrastruktur auf http zurücksetzen müssen. Nachdem Sie sicher sind, dass die HTTPS-Konfiguration in der Lage ist, erhöhen Sie den Wert für hsts max-age. ein häufig verwendeter Wert ist ein Jahr.
 
-Der folgende Code
+Der folgende Code:
 
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -419,7 +419,7 @@ Informationen zur Behandlung von Zertifikat Problemen mit Visual Studio finden [
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express SSL-Zertifikat, das mit Visual Studio verwendet wird.
 
-Um Probleme mit dem IIS Express Zertifikat zu beheben, wählen Sie im Visual Studio-Installer **Reparieren** aus.
+Um Probleme mit dem IIS Express Zertifikat zu beheben, wählen Sie im Visual Studio-Installer **Reparieren** aus. Weitere Informationen finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/aspnetcore/issues/16892).
 
 ## <a name="additional-information"></a>Zusätzliche Informationen
 

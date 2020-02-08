@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 5c8e9e58ab222e482ef029f5099d0a8acd07d8a6
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: 47f465c00138acf434c6ec59f757e37361ad97db
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76972025"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034103"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -162,6 +162,13 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
+Bei Single-Page-Webanwendungen (Single-Page Application, SPA) ist die entsprechende SPA-Middleware <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*> in der Regel der letzte Teil der Middlewarepipeline. Die SPA-Middleware kommt zuletzt, damit:
+
+* Jede andere Middleware zuerst auf entsprechende Anforderungen reagieren können.
+* SPAs mit clientseitigem Routing für alle Routen ausgeführt werden können, die von der Server-App nicht erkannt werden.
+
+Weitere Informationen zu Single-Page-Anwendungen finden Sie in den Anleitungen zu den [React](xref:spa/react)- und [Angular](xref: client-side/spa/angular)-Projektvorlagen.
+
 ## <a name="branch-the-middleware-pipeline"></a>Branchen der Middlewarepipeline
 
 <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map*>-Erweiterungen werden als Konvention zum Branchen der Pipeline verwendet. `Map` brancht die Anforderungspipeline auf Grundlage von Übereinstimmungen des angegebenen Anforderungspfads. Wenn der Anforderungspfad mit dem angegebenen Pfad beginnt, wird der Branch ausgeführt.
@@ -236,7 +243,8 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Antwortkomprimierung](xref:performance/response-compression) | Bietet Unterstützung für das Komprimieren von Antworten. | Vor Komponenten, für die das Komprimieren erforderlich ist. |
 | [Lokalisierung von Anforderungen](xref:fundamentals/localization) | Bietet Unterstützung für die Lokalisierung. | Vor der Lokalisierung vertraulicher Komponenten. |
 | [Endpunktrouting](xref:fundamentals/routing) | Definiert Anforderungsrouten und schränkt diese ein. | Terminal für entsprechende Routen. |
-| [Sitzung](xref:fundamentals/app-state) | Bietet Unterstützung für das Verwalten von Benutzersitzungen. | Vor Komponenten, für die Sitzungen erforderlich sind. |
+| [SPA](xref:Microsoft.AspNetCore.Builder.SpaApplicationBuilderExtensions.UseSpa*) | Verarbeitet alle Anforderungen ab diesem Punkt in der Middlewarekette, indem die Standardseite für die Single-Page-Anwendung zurückgegeben wird. | Kommt spät in der Kette, sodass andere Middleware, z. B. die zum Bereitstellen von statischen Dateien oder MVC-Aktionen, Vorrang hat.|
+| [Sitzung](xref:fundamentals/app-state) | Bietet Unterstützung für das Verwalten von Benutzersitzungen. | Vor Komponenten, für die Sitzungen erforderlich sind. | 
 | [Statische Dateien](xref:fundamentals/static-files) | Bietet Unterstützung für das Verarbeiten statischer Dateien und das Durchsuchen des Verzeichnisses. | Abschließend, wenn eine Anforderung mit einer Datei übereinstimmt. |
 | [Umschreiben einer URL](xref:fundamentals/url-rewriting) | Bietet Unterstützung für das Umschreiben von URLs und das Umleiten von Anforderungen. | Vor Komponenten, die die URL nutzen. |
 | [WebSockets](xref:fundamentals/websockets) | Aktiviert das WebSockets-Protokoll. | Vor Komponenten, die WebSocket-Anforderungen annehmen müssen. |
