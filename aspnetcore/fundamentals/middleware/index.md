@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 47f465c00138acf434c6ec59f757e37361ad97db
-ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
+ms.openlocfilehash: 6698e269e0a6480cd5a03c59f9a19da31e23bf69
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2020
-ms.locfileid: "77034103"
+ms.lasthandoff: 02/08/2020
+ms.locfileid: "77089148"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -167,7 +167,7 @@ Bei Single-Page-Webanwendungen (Single-Page Application, SPA) ist die entspreche
 * Jede andere Middleware zuerst auf entsprechende Anforderungen reagieren können.
 * SPAs mit clientseitigem Routing für alle Routen ausgeführt werden können, die von der Server-App nicht erkannt werden.
 
-Weitere Informationen zu Single-Page-Anwendungen finden Sie in den Anleitungen zu den [React](xref:spa/react)- und [Angular](xref: client-side/spa/angular)-Projektvorlagen.
+Weitere Informationen zu Single-Page-Anwendungen finden Sie in den Anleitungen zu den [React](xref:spa/react)- und [Angular](xref:spa/angular)-Projektvorlagen.
 
 ## <a name="branch-the-middleware-pipeline"></a>Branchen der Middlewarepipeline
 
