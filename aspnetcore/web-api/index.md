@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Grundlagen zum Erstellen einer Web-API 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 01/27/2020
+ms.date: 02/02/2020
 uid: web-api/index
-ms.openlocfilehash: 8609e2095c202643cdc905cc610298195b654215
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: 420fe89fe969c6df5c949f643fe018fff2bc77a5
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870016"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77051458"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -397,6 +397,28 @@ Die automatische Erstellung einer `ProblemDetails`-Instanz ist deaktiviert, wenn
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=3,8)]
 
 ::: moniker-end
+
+## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Definieren unterstützter Anforderungsinhaltstypen mit dem [Consumes]-Attribut
+
+Standardmäßig unterstützt eine Aktion alle verfügbaren Anforderungsinhaltstypen. Wenn eine App beispielsweise zur Unterstützung von JSON- und XML-[Eingabeformatierern](xref:mvc/models/model-binding#input-formatters) konfiguriert ist, unterstützt eine Aktion mehrere Inhaltstypen, wie etwa `application/json` und `application/xml`.
+
+Das [[Consumes]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)-Attribut ermöglicht es einer Aktion, die unterstützten Anforderungsinhaltstypen einzuschränken. Wenden Sie das `[Consumes]`-Attribut auf eine Aktion oder einen Controller an, und geben Sie mindestens einen Inhaltstyp an:
+
+```csharp
+[HttpPost]
+[Consumes("application/xml")]
+public IActionResult CreateProduct(Product product)
+```
+
+Im obigen Code gibt die `CreateProduct`-Aktion den Inhaltstyp `application/xml` an. Anforderungen, die an diese Aktion weitergeleitet werden, müssen den `Content-Type`-Header `application/xml` angeben. Für Anforderungen, die den `Content-Type`-Header `application/xml` nicht angeben, wird die Antwort [415 – Nicht unterstützter Medientyp](https://developer.mozilla.org/docs/Web/HTTP/Status/415) zurückgegeben.
+
+Das `[Consumes]`-Attribut ermöglicht es einer Aktion auch, eine Typeinschränkung anzuwenden, um die Auswahl basierend auf dem Inhaltstyp einer eingehenden Anforderung zu beeinflussen. Betrachten Sie das folgende Beispiel:
+
+[!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
+
+Im obigen Code ist `ConsumesController` zur Verarbeitung von Anforderungen konfiguriert, die an die URL `https://localhost:5001/api/Consumes` gesendet werden. Beide Controlleraktionen – `PostJson` und `PostForm` – verarbeiten POST-Anforderungen mit derselben URL. Wenn das `[Consumes]`-Attribut keine Typeinschränkung anwendet, wird eine Ausnahme in Bezug auf eine mehrdeutige Übereinstimmung ausgelöst.
+
+Das `[Consumes]`-Attribut wird auf beide Aktionen angewendet. Die `PostJson`-Aktion verarbeitet Anforderungen, die mit dem `Content-Type`-Header `application/json` gesendet werden. Die `PostForm`-Aktion verarbeitet Anforderungen, die mit dem `Content-Type`-Header `application/x-www-form-urlencoded` gesendet werden. 
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
