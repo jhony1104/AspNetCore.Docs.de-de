@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: Erfahren Sie, wie Filter funktionieren und wie Sie sie in ASP.NET Core verwenden.
 ms.author: riande
 ms.custom: mvc
-ms.date: 1/1/2020
+ms.date: 02/04/2020
 uid: mvc/controllers/filters
-ms.openlocfilehash: 759c150e7f35f3f6a52947edc5ef41448dc227fe
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: c4bb9d5746e494106ead6ad5bbf972bbcc5a39f1
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828970"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034064"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -28,13 +28,16 @@ Integrierte Filter sind für folgende Aufgaben zuständig:
 
 Durch die Erstellung benutzerdefinierter Filter kann mit aktionsübergreifenden Problemen umgegangen werden. Zu solchen übergreifenden Problemen gehören beispielsweise Fehlerbehandlung, Caching, Konfiguration, Autorisierung und Protokollierung.  Mit Filtern lässt sich die Duplizierung von Code vermeiden. Sie können zum Beispiel die Fehlerbehandlung in einem Ausnahmefilter konsolidieren.
 
-Dieses Dokument gilt für Razor Pages, API-Controller und Controller mit Ansichten.
+Dieses Dokument gilt für Razor Pages, API-Controller und Controller mit Ansichten. Filter können nicht direkt mit [Razor-Komponenten](xref:blazor/components) verwendet werden. Ein Filter kann nur indirekt Einfluss auf eine Komponente haben, wenn Folgendes gilt:
+
+* Die Komponente ist in eine Seite oder Ansicht eingebettet.
+* Die Seite oder der Controller/die Ansicht verwendet den Filter.
 
 [Zeigen Sie ein Beispiel an, oder laden Sie es herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
 ## <a name="how-filters-work"></a>Die Funktionsweise von Filtern
 
-Filter werden in der *ASP.NET Core-Aktionsaufrufpipeline* ausgeführt, die manchmal auch als *Filterpipeline* bezeichnet wird.  Die Filterpipeline wird ausgeführt, nachdem ASP.NET Core die auszuführende Aktion ausgewählt hat.
+Filter werden in der *ASP.NET Core-Aktionsaufrufpipeline* ausgeführt, die manchmal auch als *Filterpipeline* bezeichnet wird. Die Filterpipeline wird ausgeführt, nachdem ASP.NET Core die auszuführende Aktion ausgewählt hat.
 
 ![Die Anforderung wird von weiterer Middleware, Routingmiddleware, Aktionsauswahl und der Aktionsaufrufpipeline verarbeitet. Die Verarbeitung von Anforderungen verläuft weiterhin durch Aktionsauswahl, Routingmiddleware und verschiedenen weiteren Middlewares, bevor eine Antwort an den Client gesendet wird.](filters/_static/filter-pipeline-1.png)
 
