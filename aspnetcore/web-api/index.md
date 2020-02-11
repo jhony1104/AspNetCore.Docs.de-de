@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
-ms.openlocfilehash: 420fe89fe969c6df5c949f643fe018fff2bc77a5
-ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
+ms.openlocfilehash: 3dca07db3d6be4ab219a2e05e3adcf1b24ee5c40
+ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77051458"
+ms.lasthandoff: 02/07/2020
+ms.locfileid: "77074509"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -397,6 +397,8 @@ Die automatische Erstellung einer `ProblemDetails`-Instanz ist deaktiviert, wenn
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=3,8)]
 
 ::: moniker-end
+
+<a name="consumes"></a>
 
 ## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Definieren unterstützter Anforderungsinhaltstypen mit dem [Consumes]-Attribut
 
