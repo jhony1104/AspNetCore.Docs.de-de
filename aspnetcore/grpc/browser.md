@@ -1,19 +1,19 @@
 ---
-title: GrpC in Browser-apps
+title: Verwenden von gRPC in Browser-Apps
 author: jamesnk
 description: Erfahren Sie, wie Sie GrpC-Dienste auf ASP.net Core konfigurieren können, um von Browser-Apps mithilfe von GrpC-Web aufgerufen zu werden.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 01/24/2020
+ms.date: 02/10/2020
 uid: grpc/browser
-ms.openlocfilehash: 6359c3b76b3cb1ba2b6d9f9a989f64cbf4c4379d
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
+ms.openlocfilehash: 333fc8c4277bbac47042d4904c276e963186914a
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76830633"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172275"
 ---
-# <a name="grpc-in-browser-apps"></a>GrpC in Browser-apps
+# <a name="use-grpc-in-browser-apps"></a>Verwenden von gRPC in Browser-Apps
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
@@ -38,7 +38,7 @@ So aktivieren Sie GrpC-Web mit einem ASP.net Core GrpC-Dienst:
 * Fügen Sie einen Verweis auf das Paket " [GrpC. aspnetcore. Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) " hinzu.
 * Konfigurieren Sie die APP für die Verwendung von GrpC-Web, indem Sie `AddGrpcWeb` und `UseGrpcWeb` zu *Startup.cs*hinzufügen:
 
-[!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=3,10,14)]
+[!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
 Der vorangehende Code:
 
@@ -47,7 +47,7 @@ Der vorangehende Code:
 
 Alternativ dazu können Sie alle Dienste so konfigurieren, dass GrpC-Web unterstützt wird, indem Sie `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` zu Configuration Services hinzufügen.
 
-[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=5,12,16)]
+[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
 
 Möglicherweise sind einige zusätzliche Konfigurationen erforderlich, um GrpC-Web über den Browser aufzurufen, z. b. das Konfigurieren von ASP.net Core zur Unterstützung von cors. Weitere Informationen finden Sie [unter Unterstützung von cors](xref:security/cors).
 
@@ -70,6 +70,7 @@ Der .net-GrpC-Client kann so konfiguriert werden, dass er GrpC-Web-Aufrufe aufru
 So verwenden Sie GrpC-Web:
 
 * Fügen Sie einen Verweis auf das [GrpC .net. Client. Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) -Paket hinzu.
+* Stellen Sie sicher, dass der Verweis auf das [GrpC .net. Client](https://www.nuget.org/packages/Grpc.Net.Client) -Paket 2.27.0 oder höher ist.
 * Konfigurieren Sie den Kanal für die Verwendung der `GrpcWebHandler`:
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
@@ -81,11 +82,16 @@ Der vorangehende Code:
 
 Die `GrpcWebHandler` verfügt bei der Erstellung über die folgenden Konfigurationsoptionen:
 
-* **Innerhandler**: die zugrunde liegende <xref:System.Net.Http.HttpMessageHandler>, die den HTTP-Befehl ausführt, z. b. `HttpClientHandler`.
-* **Mode**: `GrpcWebMode` Enum. `GrpcWebMode.GrpcWebText` konfiguriert Inhalte für die Base64-Codierung, die zur Unterstützung von serverstreamingaufrufen erforderlich ist.
-* **HttpVersion**: http-Protokoll `Version`. für "GrpC-Web" ist kein bestimmtes Protokoll erforderlich, und es wird kein bestimmtes Protokoll angegeben, wenn eine Anforderung nicht konfiguriert wird.
+* **Innerhandler**: die zugrunde liegende <xref:System.Net.Http.HttpMessageHandler>, die die GrpC-http-Anforderung ausführt, z. b. `HttpClientHandler`.
+* **Mode**: ein Enumerationstyp, der angibt, ob die GrpC-HTTP-Anforderungs Anforderung `Content-Type` `application/grpc-web` oder `application/grpc-web-text`ist.
+    * `GrpcWebMode.GrpcWeb` konfiguriert Inhalte so, dass Sie ohne Codierung gesendet werden. Standardwert.
+    * `GrpcWebMode.GrpcWebText` konfiguriert Inhalte so, dass Sie Base64-codiert sind. Erforderlich für serverstreamingaufrufe in Browsern.
+* **HttpVersion**: http-Protokoll `Version` das zum Festlegen von [httprequestmessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) für die zugrunde liegende GrpC-http-Anforderung verwendet wird. GrpC-Web erfordert keine bestimmte Version und überschreibt den Standardwert nur, wenn dies angegeben ist.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+> [!IMPORTANT]
+> Generierte GrpC-Clients verfügen über Synchronisierungs-und Async-Methoden zum Aufrufen unärer Methoden. `SayHello` ist beispielsweise Sync, und `SayHelloAsync` ist Async. Das Aufrufen einer Synchronisierungsmethode in einer blazor Webassembly-App führt dazu, dass die APP nicht mehr reagiert. Async-Methoden müssen stets in der blazor-Webassembly verwendet werden.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [GrpC für Webclients GitHub-Projekt](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

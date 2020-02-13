@@ -1,17 +1,17 @@
 ---
 title: Migrieren von ASP.NET zu ASP.NET Core 2.0
 author: isaac2004
-description: Erhalten Sie Anleitungen zum Migrieren vorhandener ASP.NET MVC- oder Web-API-Anwendungen in ASP.NET Core 2.0.
+description: Hier erhalten Sie Anleitungen zum Migrieren vorhandener ASP.NET MVC-oder Web-API-Anwendungen zu ASP.net Core 2,0.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
-ms.openlocfilehash: e9dffe8bce502e48a09af04ea0be9952a68aa46f
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 11bd3b948afaedc675ac4249099969382683f653
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815457"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172438"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>Migrieren von ASP.NET zu ASP.NET Core 2.0
 
@@ -19,11 +19,11 @@ Von [Isaac Levin](https://isaaclevin.com)
 
 Dieser Artikel dient als Leitfaden zum Migrieren von ASP.NET-Anwendungen zu ASP.NET Core 2.0.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
-Installieren Sie **eine** der folgenden Optionen aus [.NET Downloads: Windows](https://www.microsoft.com/net/download/windows):
+Installieren Sie **einen** der folgenden Schritte aus [.net-Downloads: Windows](https://www.microsoft.com/net/download/windows):
 
-* .NET Core SDK
+* .Net Core SDK
 * Visual Studio für Windows
   * Workload **ASP.NET und Webentwicklung**
   * Workload **Plattformübergreifende .NET Core-Entwicklung**
@@ -42,7 +42,7 @@ Wenn das Zielframework .NET Core ist, können Sie mit dem [Metapaket](xref:funda
 </ItemGroup>
 ```
 
-Wenn das Metapaket verwendet wird, werden mit der Anwendung keine Pakete bereitgestellt, auf die im Metapaket verwiesen wird. Die notwendigen Objekte sind im .NET Core-Laufzeitspeicher vorhanden und werden zur Verbesserung der Leistung vorkompiliert. Finden Sie unter <xref:fundamentals/metapackage> Weitere Details.
+Wenn das Metapaket verwendet wird, werden mit der Anwendung keine Pakete bereitgestellt, auf die im Metapaket verwiesen wird. Die notwendigen Objekte sind im .NET Core-Laufzeitspeicher vorhanden und werden zur Verbesserung der Leistung vorkompiliert. Weitere Informationen finden Sie unter <xref:fundamentals/metapackage>.
 
 ## <a name="project-structure-differences"></a>Unterschiede bei Projektstrukturen
 
@@ -76,13 +76,13 @@ In `Startup` muss die `Configure`-Methode enthalten sein. Fügen Sie in `Configu
 * Fehlerseiten
 * Statische Dateien
 * ASP.NET Core MVC
-* Identität
+* Identity
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
 Durch die Entkopplung von Host und Anwendung wird die Möglichkeit geschaffen, in der Zukunft eine Migration zu einer anderen Plattform vorzunehmen.
 
-Ausführliche Informationen zu ASP.NET Core-Start oder Middleware, finden Sie unter <xref:fundamentals/startup>.
+Einen ausführlicheren Verweis auf ASP.net Core Start und Middleware finden Sie unter <xref:fundamentals/startup>.
 
 ## <a name="storing-configurations"></a>Speichern von Konfigurationsdaten
 
@@ -108,20 +108,20 @@ Die Anwendung liest aus `Configuration`, um die Einstellungen abzurufen:
 
 Dieser Ansatz kann erweitert werden, um einen noch stabileren Prozess zu gewährleisten. Beispielsweise kann über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) ein Dienst mit diesen Werten geladen werden. Durch die Abhängigkeitsinjektion wird eine Reihe stark typisierter Konfigurationsobjekte zur Verfügung gestellt.
 
-````csharp
+```csharp
 // Assume AppConfiguration is a class representing a strongly-typed version of AppConfiguration section
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
-````
+```
 
-**Hinweis**: Ausführliche Informationen zur ASP.NET Core-Konfiguration, finden Sie unter <xref:fundamentals/configuration/index>.
+**Hinweis:** Einen ausführlicheren Verweis auf ASP.net Core Konfiguration finden Sie unter <xref:fundamentals/configuration/index>.
 
 ## <a name="native-dependency-injection"></a>Native Abhängigkeitsinjektion
 
-Ein wichtiges Ziel bei der Erstellung großer, skalierbarer Anwendungen besteht in der losen Kopplung von Komponenten und Diensten. [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) ist eine beliebte Methode hierfür, und es ist eine native Komponente von ASP.NET Core.
+Ein wichtiges Ziel bei der Erstellung großer, skalierbarer Anwendungen besteht in der losen Kopplung von Komponenten und Diensten. Die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) ist eine gängige Vorgehensweise, um dies zu erreichen, und es handelt sich um eine native Komponente von ASP.net Core.
 
-In ASP.NET-Anwendungen greifen Entwickler in einer Drittanbieter-Bibliothek zum Implementieren von Abhängigkeitsinjektion zurück. Eine solche Bibliothek ist [Unity](https://github.com/unitycontainer/unity), die von Microsoft Patterns & Practices bereitgestellt wird.
+In ASP.NET-Anwendungen greifen Entwickler auf eine Drittanbieter Bibliothek zurück, um eine Abhängigkeitsinjektion zu implementieren. Eine solche Bibliothek ist [Unity](https://github.com/unitycontainer/unity), die von Microsoft Patterns & Practices bereitgestellt wird.
 
-Ein Beispiel für das Einrichten der Abhängigkeitsinjektion mit Unity implementiert wird, `IDependencyResolver` , umschließt ein `UnityContainer`:
+Ein Beispiel für das Einrichten der Abhängigkeitsinjektion mit Unity ist die Implementierung von `IDependencyResolver`, die eine `UnityContainer`umschließt:
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -133,13 +133,13 @@ Fügen Sie bei Bedarf `IProductRepository` ein:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Da es sich bei Dependency Injection Teil von ASP.NET Core ist, können Sie Ihren Dienst im Hinzufügen der `Startup.ConfigureServices`:
+Da die Abhängigkeitsinjektion Teil ASP.net Core ist, können Sie Ihren Dienst in der `Startup.ConfigureServices`hinzufügen:
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Genau wie bei Unity kann auch hier das Repository an einer beliebigen Stelle eingefügt werden.
 
-Weitere Informationen zur Abhängigkeitsinjektion in ASP.NET Core finden Sie unter <xref:fundamentals/dependency-injection>.
+Weitere Informationen zur Abhängigkeitsinjektion in ASP.net Core finden Sie unter <xref:fundamentals/dependency-injection>.
 
 ## <a name="serving-static-files"></a>Bereitstellen statischer Dateien
 
@@ -151,11 +151,11 @@ In ASP.NET Core werden statische Dateien im Webstammverzeichnis ( *&lt;content r
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
-**Hinweis**: Wenn Sie Anwendungen für .NET Framework entwickeln, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.StaticFiles`.
+**Hinweis:** Wenn Sie Anwendungen für .NET Framework entwickeln, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.StaticFiles`.
 
-Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<imageFileName>` auf ein Bildobjekt im Ordner *wwwroot/images* zugreifen.
+Beispielsweise kann ein Browser an einem Speicherort wie *auf ein Bildobjekt im Ordner*wwwroot/images`http://<app>/images/<imageFileName>` zugreifen.
 
-**Hinweis**: Ausführliche Informationen zum Bereitstellen statischer Dateien in ASP.NET Core, finden Sie unter <xref:fundamentals/static-files>.
+**Hinweis:** Eine ausführlichere Referenz zum betreuen statischer Dateien in ASP.net Core finden Sie unter <xref:fundamentals/static-files>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

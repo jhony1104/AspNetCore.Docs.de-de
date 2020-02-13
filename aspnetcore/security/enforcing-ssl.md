@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 59883a8165040fa58edb2f6cf22d4d6b3abf6f3e
-ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
+ms.openlocfilehash: 9efd49bb246a10c4eb49fb1bb0374ae9442d55a1
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2020
-ms.locfileid: "77074548"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172625"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -52,7 +52,7 @@ Eine API kann nicht verhindern, dass ein Client bei der ersten Anforderung sensi
 
 ::: moniker-end
 
-## <a name="require-https"></a>Erforderlichkeit von HTTPS
+## <a name="require-https"></a>HTTPS erforderlich
 
 Es wird empfohlen, dass die Web-Apps für die Produktion ASP.net Core:
 
@@ -327,7 +327,7 @@ dotnet new webapp --no-https
 
 Die .net Core SDK enthält ein HTTPS-Entwicklungs Zertifikat. Das Zertifikat wird im Rahmen der erstmaligen Durchführung installiert. Beispielsweise erzeugt `dotnet --info` eine Ausgabe ähnlich der folgenden:
 
-```text
+```
 ASP.NET Core
 ------------
 Successfully installed the ASP.NET Core HTTPS Development Certificate.

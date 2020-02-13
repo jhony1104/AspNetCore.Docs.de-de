@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: 1a20b136203921e6a147058eb34da6dcbb7863e7
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: 8813244ea6d00b170d9f95d12743e9fee38bf810
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76971995"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172646"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Erstellen wiederverwendbarer Benutzeroberflächen mithilfe des Razor-Klassen Bibliotheks Projekts in ASP.net Core
 
@@ -30,7 +30,7 @@ Razor-Ansichten, Seiten, Controller, Seiten Modelle, [Razor-Komponenten](xref:bl
 * Wählen Sie in Visual Studio die Option **Neues Projekt erstellen**aus.
 * Wählen **Sie >** **Razor-Klassenbibliothek** aus.
 * Benennen Sie die Bibliothek (z. b. "razorclasslib"), > **Erstellen**. Stellen Sie sicher, dass der Bibliotheksname nicht auf `.Views` endet, um zu verhindern, dass es zu einem Dateinamenkonflikt mit der generierten Ansichtsbibliothek kommt.
-* Wählen Sie **Supportseiten und Sichten** aus, wenn Sie Ansichten unterstützen müssen. Standardmäßig werden nur Razor Pages unterstützt. Wählen Sie **Erstellen** aus.
+* Wählen Sie **Supportseiten und Sichten** aus, wenn Sie Ansichten unterstützen müssen. Standardmäßig werden nur Razor Pages unterstützt. Klicken Sie auf **Erstellen**.
 
 Die Vorlage der Razor-Klassenbibliothek (Razor Class Library, RCL) gilt standardmäßig für die Razor-Komponentenentwicklung. Die Option **Support Pages und Views** unterstützt Seiten und Ansichten.
 
@@ -50,7 +50,7 @@ Weitere Informationen finden Sie unter [dotnet new](/dotnet/core/tools/dotnet-ne
 
 Fügen Sie der RCL Razor-Dateien hinzu.
 
-ASP.NET Core-Vorlagen wird davon ausgegangen, der RCL Inhalt befindet sich in der *Bereiche* Ordner. Weitere Informationen finden Sie unter [RCL Pages Layout](#rcl-pages-layout) zum Erstellen einer RCL, die Inhalte in `~/Pages` und nicht in `~/Areas/Pages`verfügbar macht.
+Die ASP.net Core Vorlagen setzen voraus, dass sich der RCL-Inhalt im Ordner " *Bereiche* " befindet. Weitere Informationen finden Sie unter [RCL Pages Layout](#rcl-pages-layout) zum Erstellen einer RCL, die Inhalte in `~/Pages` und nicht in `~/Areas/Pages`verfügbar macht.
 
 ## <a name="reference-rcl-content"></a>Verweisen auf den RCL-Inhalt
 
@@ -69,12 +69,12 @@ Kopieren Sie die Teilansicht *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Mess
 
 ### <a name="rcl-pages-layout"></a>RCL Seitenlayout
 
-Auf Inhalt RCL, als wäre es Teil der Web-app-Verweis *Seiten* Ordner das RCL-Projekt erstellen, mit der folgenden Dateistruktur:
+Um auf RCL-Inhalte zu verweisen, als wären Sie Teil des Ordners " *pages* " der Web-App, erstellen Sie das RCL-Projekt mit der folgenden Dateistruktur:
 
-* *RazorUIClassLib/Seiten*
-* *RazorUIClassLib/Pages/Shared*
+* *Razoruiclasslib/Seiten*
+* *Razoruiclasslib/Pages/Shared*
 
-Nehmen wir an *RazorUIClassLib/Pages/Shared* enthält zwei partielle Dateien: *_Header.cshtml* und *_Footer.cshtml*. Die `<partial>` können Tags hinzugefügt werden *"_Layout.cshtml"* Datei:
+Angenommen, *razoruiclasslib/Pages/Shared* enthält zwei partielle Dateien: *_Header. cshtml* und *_Footer. cshtml*. Die `<partial>` Tags konnten *_Layout cshtml* -Datei hinzugefügt werden:
 
 ```cshtml
 <body>
@@ -176,7 +176,7 @@ Wenn die verarbeitende app ausgeführt wird:
 
 Wenn die RCL erstellt wurde, wird ein Manifest erstellt, in dem die statischen webasset-Speicherorte beschrieben werden. Die Verb raubende App liest das Manifest zur Laufzeit, um die Assets aus referenzierten Projekten und Paketen zu nutzen. Wenn einer RCL ein neues Asset hinzugefügt wird, muss die RCL neu erstellt werden, um das Manifest zu aktualisieren, bevor eine verarbeitende App auf das neue Medienobjekt zugreifen kann.
 
-### <a name="publish"></a>Veröffentlichungs
+### <a name="publish"></a>Veröffentlichen
 
 Wenn die App veröffentlicht wird, werden die begleitenden Objekte aus allen referenzierten Projekten und Paketen in den Ordner *wwwroot* der veröffentlichten app unter `_content/{LIBRARY NAME}/`kopiert.
 
@@ -193,7 +193,7 @@ Razor-Ansichten, Seiten, Controller, Seiten Modelle, [Razor-Komponenten](xref:bl
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
-* Wählen Sie **ASP.NET Core-Webanwendung** aus.
+* Klicken Sie auf **Neue ASP.NET Core-Webanwendung**.
 * Geben Sie der Bibliothek einen Namen (z.B. „RazorClassLib“), und klicken Sie anschließend auf **OK**. Stellen Sie sicher, dass der Bibliotheksname nicht auf `.Views` endet, um zu verhindern, dass es zu einem Dateinamenkonflikt mit der generierten Ansichtsbibliothek kommt.
 * Überprüfen Sie, ob **ASP.NET Core 2.1** oder höher ausgewählt ist.
 * Wählen Sie **Razor-Klassenbibliothek** > **OK**aus.
@@ -216,7 +216,7 @@ Weitere Informationen finden Sie unter [dotnet new](/dotnet/core/tools/dotnet-ne
 
 Fügen Sie der RCL Razor-Dateien hinzu.
 
-ASP.NET Core-Vorlagen wird davon ausgegangen, der RCL Inhalt befindet sich in der *Bereiche* Ordner. Weitere Informationen finden Sie unter [RCL Pages Layout](#rcl-pages-layout) zum Erstellen einer RCL, die Inhalte in `~/Pages` und nicht in `~/Areas/Pages`verfügbar macht.
+Die ASP.net Core Vorlagen setzen voraus, dass sich der RCL-Inhalt im Ordner " *Bereiche* " befindet. Weitere Informationen finden Sie unter [RCL Pages Layout](#rcl-pages-layout) zum Erstellen einer RCL, die Inhalte in `~/Pages` und nicht in `~/Areas/Pages`verfügbar macht.
 
 ## <a name="reference-rcl-content"></a>Verweisen auf den RCL-Inhalt
 
@@ -264,7 +264,7 @@ In diesem Abschnitt wird eine RCL erstellt. Dabei werden der RCL Razor-Dateien h
 Erstellen Sie das RCL-Projekt:
 
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
-* Wählen Sie **ASP.NET Core-Webanwendung** aus.
+* Klicken Sie auf **Neue ASP.NET Core-Webanwendung**.
 * Nennen Sie die APP **razoruiclasslib** > **OK**.
 * Überprüfen Sie, ob **ASP.NET Core 2.1** oder höher ausgewählt ist.
 * Wählen Sie **Razor-Klassenbibliothek** > **OK**aus.
@@ -284,9 +284,9 @@ Die obenstehenden Befehle haben folgende Konsequenzen:
 
 * Erstellt den `RazorUIClassLib` RCL.
 * Die Seite „Razor_Message“ wird erstellt und der RCL hinzugefügt. Durch den `-np`-Parameter wird die Seite ohne `PageModel` erstellt.
-* Erstellt eine [_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) Datei und fügt es der RCL hinzu.
+* Erstellt eine [_ViewStart. cshtml](xref:mvc/views/layout#running-code-before-each-view) -Datei und fügt Sie der RCL hinzu.
 
-Die *_ViewStart.cshtml* Datei ist erforderlich, um das Layout des Projekts mit Razor Pages verwenden (die im nächsten Abschnitt hinzugefügt wird).
+Die Datei *_ViewStart. cshtml* ist erforderlich, um das Layout des Razor Pages Projekts (das im nächsten Abschnitt hinzugefügt wird) zu verwenden.
 
 ---
 
@@ -306,7 +306,7 @@ Die *_ViewStart.cshtml* Datei ist erforderlich, um das Layout des Projekts mit R
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  Weitere Informationen zu *_ViewImports.cshtml*, finden Sie unter [freigegebenen Richtlinien importieren](xref:mvc/views/layout#importing-shared-directives)
+  Weitere Informationen zu *_ViewImports. cshtml*finden Sie unter [Importieren von freigegebenen Direktiven](xref:mvc/views/layout#importing-shared-directives) .
 
 * Erstellen Sie die Klassenbibliothek, um sicherzustellen, dass keine Compilerfehler vorliegen:
 
@@ -323,7 +323,7 @@ Die Buildausgabe enthält *RazorUIClassLib.dll* und *RazorUIClassLib.Views.dll*.
 Erstellen Sie die Web-App mit Razor-Seiten:
 
 * Klicken Sie in **Projektmappen-Explorer**mit der rechten Maustaste auf die Projekt Mappe, > >**Neues Projekt** **hinzuzufügen** .
-* Wählen Sie **ASP.NET Core-Webanwendung** aus.
+* Klicken Sie auf **Neue ASP.NET Core-Webanwendung**.
 * Legen Sie als Namen für die App **WebApp1** fest.
 * Überprüfen Sie, ob **ASP.NET Core 2.1** oder höher ausgewählt ist.
 * Wählen Sie **Webanwendung** > **OK**aus.
@@ -371,12 +371,12 @@ Kopieren Sie die Teilansicht *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Mess
 
 ### <a name="rcl-pages-layout"></a>RCL Seitenlayout
 
-Auf Inhalt RCL, als wäre es Teil der Web-app-Verweis *Seiten* Ordner das RCL-Projekt erstellen, mit der folgenden Dateistruktur:
+Um auf RCL-Inhalte zu verweisen, als wären Sie Teil des Ordners " *pages* " der Web-App, erstellen Sie das RCL-Projekt mit der folgenden Dateistruktur:
 
-* *RazorUIClassLib/Seiten*
-* *RazorUIClassLib/Pages/Shared*
+* *Razoruiclasslib/Seiten*
+* *Razoruiclasslib/Pages/Shared*
 
-Nehmen wir an *RazorUIClassLib/Pages/Shared* enthält zwei partielle Dateien: *_Header.cshtml* und *_Footer.cshtml*. Die `<partial>` können Tags hinzugefügt werden *"_Layout.cshtml"* Datei:
+Angenommen, *razoruiclasslib/Pages/Shared* enthält zwei partielle Dateien: *_Header. cshtml* und *_Footer. cshtml*. Die `<partial>` Tags konnten *_Layout cshtml* -Datei hinzugefügt werden:
 
 ```cshtml
 <body>
@@ -387,3 +387,7 @@ Nehmen wir an *RazorUIClassLib/Pages/Shared* enthält zwei partielle Dateien: *_
 ```
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* <xref:blazor/class-libraries>

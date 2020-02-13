@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 12/06/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 5d0695160d90d0c5d31b8e35bc6c4cc984829333
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 4710c033018710ce3620f8d7221ae2253b2c0b69
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944212"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172526"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>Externe Twitter-Anmelde Einrichtung mit ASP.net Core
 
@@ -24,9 +24,13 @@ Dieses Beispiel zeigt, wie Sie es Benutzern mithilfe eines auf der [vorherigen S
 
 * Fügen Sie dem Projekt das nuget-Paket [Microsoft. aspnetcore. Authentication. Twitter](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Twitter/3.0.0) hinzu.
 
-* Navigieren Sie zu [ https://apps.twitter.com/ ](https://apps.twitter.com/) und melden Sie sich. Wenn Sie noch nicht über ein Twitter-Konto verfügen, verwenden Sie den Link **[jetzt registrieren](https://twitter.com/signup)** , um einen zu erstellen.
+* Navigieren Sie zu [https://apps.twitter.com/](https://apps.twitter.com/) , und melden Sie sich an. Wenn Sie noch nicht über ein Twitter-Konto verfügen, verwenden Sie den Link **[jetzt registrieren](https://twitter.com/signup)** , um einen zu erstellen.
 
-* Klicken Sie auf **App erstellen**. Geben Sie den **APP-Namen**, die **Anwendungsbeschreibung** und den URI der öffentlichen **Website** an (Dies kann temporär sein, bis Sie den Domänen Namen registrieren):
+* Wählen Sie **Create an app** (App erstellen) aus. Geben Sie den **APP-Namen**, die **Anwendungsbeschreibung** und den URI der öffentlichen **Website** an (Dies kann temporär sein, bis Sie den Domänen Namen registrieren):
+
+* Aktivieren Sie das Kontrollkästchen neben **Anmelden mit Twitter aktivieren** .
+
+* Microsoft. aspnetcore. Identity erfordert, dass Benutzer standardmäßig über eine e-Mail-Adresse verfügen. Wechseln Sie zur Registerkarte **Berechtigungen** , klicken Sie auf die Schaltfläche **Bearbeiten** , und aktivieren Sie das Kontrollkästchen neben **e-Mail-Adresse anfordern von Benutzern**
 
 * Geben Sie Ihren Entwicklungs-URI ein, wobei `/signin-twitter` an das Feld **Rückruf-URLs** angehängt ist (z. b.: `https://webapp128.azurewebsites.net/signin-twitter`). Das Twitter-Authentifizierungsschema, das weiter unten in diesem Beispiel konfiguriert wird, verarbeitet automatisch Anforderungen auf `/signin-twitter` Route, um den OAuth-Fluss zu implementieren.
 
@@ -52,7 +56,7 @@ Diese Token finden Sie auf der Registerkarte **Schlüssel und Zugriffs Token** ,
 
 Fügen Sie den Twitter-Dienst in der `ConfigureServices`-Methode in der Datei *Startup.cs* hinzu:
 
-[!code-csharp[](~/security/authentication/social/social-code/3.x/StartupTwitter3x.cs?name=snippet&highlight=10-14)]
+[!code-csharp[](~/security/authentication/social/social-code/3.x/StartupTwitter3x.cs?name=snippet&highlight=10-15)]
 
 [!INCLUDE [default settings configuration](includes/default-settings.md)]
 
@@ -74,8 +78,8 @@ Sie sind jetzt mit Ihren Twitter-Anmelde Informationen angemeldet:
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
-* **ASP.NET Core 2.x nur:** Wenn Identität ist nicht konfiguriert, durch den Aufruf `services.AddIdentity` in `ConfigureServices`, Authentifizierungsversuch führt zu *ArgumentException: die Option 'SignInScheme' muss angegeben werden*. Die in diesem Beispiel verwendete Projektvorlage stellt sicher, dass dies abgeschlossen ist.
-* Wenn die Standortdatenbank nicht erstellt wurde, indem die ursprüngliche Migration anwenden, erhalten Sie *Fehler bei ein Datenbankvorgang beim Verarbeiten der Anforderung* Fehler. Tippen Sie auf **Migrationen anwenden** der Datenbank zu erstellen und aktualisieren, um den Fehler hinaus fortgesetzt.
+* **Nur ASP.net Core 2. x:** Wenn die Identität nicht durch Aufrufen von `services.AddIdentity` in `ConfigureServices`konfiguriert wird, führt der Versuch, die Authentifizierung zu authentifizieren, zu *argumumtexception: die Option "signinscheme" muss angegeben werden*. Die in diesem Beispiel verwendete Projektvorlage stellt sicher, dass dies abgeschlossen ist.
+* Wenn die Standortdatenbank nicht durch Anwenden der anfänglichen Migration erstellt wurde, wird *bei der Verarbeitung des Anforderungs Fehlers ein Daten Bank Vorgang* nicht ausgeführt. Tippen Sie auf **Migrations anwenden** , um die Datenbank zu erstellen und zu aktualisieren, um den Fehler zu überschreiten.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
