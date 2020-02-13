@@ -5,18 +5,20 @@ description: Erfahren Sie mehr über die Verzeichnisstruktur veröffentlichter A
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/28/2020
+ms.date: 02/07/2020
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: ba5cb96dfdcdca10034299e3bbe662ce056af791
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: c3c05e6bc461ea4a3bfefa2c7a49d524562f7e5b
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870265"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172256"
 ---
 # <a name="aspnet-core-directory-structure"></a>Verzeichnisstruktur für ASP.NET Core
 
 Von [Luke Latham](https://github.com/guardrex)
+
+::: moniker range=">= aspnetcore-3.0"
 
 Das Verzeichnis *publish* enthält die zur App gehörenden bereitstellbaren Ressourcen, die mit dem [dotnet publish](/dotnet/core/tools/dotnet-publish)-Befehl erstellt wurden. Das Verzeichnis enthält:
 
@@ -37,7 +39,35 @@ Das Verzeichnis *publish* stellt den *Pfad des Inhaltsstammverzeichnisses* (auch
 
 Das Verzeichnis *wwwroot* enthält, sofern vorhanden, nur statische Objekte.
 
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [dotnet publish](/dotnet/core/tools/dotnet-publish)
+* [.NET Core-Anwendungsbereitstellung](/dotnet/core/deploying/)
+* [Zielframeworks](/dotnet/standard/frameworks)
+* [.NET Core-RID-Katalog](/dotnet/core/rid-catalog)
+
+::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
+
+Das Verzeichnis *publish* enthält die zur App gehörenden bereitstellbaren Ressourcen, die mit dem [dotnet publish](/dotnet/core/tools/dotnet-publish)-Befehl erstellt wurden. Das Verzeichnis enthält:
+
+* Anwendungsdateien
+* Konfigurationsdateien
+* Statische Ressourcen
+* Pakete
+* Eine Runtime (nur [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd))
+
+| App-Typ | Verzeichnisstruktur |
+| -------- | ------------------- |
+| [Framework-abhängige ausführbare Dateien (FDEs)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Ansichten&dagger; (MVC-Apps, wenn Ansichten nicht vorkompiliert sind)</li><li>Seiten&dagger; (MVC- oder Razor Pages-Apps, wenn Seiten nicht vorkompiliert sind)</li><li>wwwroot&dagger;</li><li>*.DLL-Dateien</li><li>{ASSEMBLYNAME}.deps.json</li><li>{ASSEMBLYNAME}.dll</li><li>{ASSEMBLYNAME}{.ERWEITERUNG} *.exe* Erweiterung unter Windows, keine Erweiterung unter macOS oder Linux</li><li>{ASSEMBLYNAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLYNAME}.Views.pdb</li><li>{ASSEMBLYNAME}.runtimeconfig.json</li><li>web.config (IIS-Bereitstellungen)</li><li>createdump ([createdump-Hilfsprogramm von Linux](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>* .so (freigegebene Objektbibliothek für Linux)</li><li>*.a (macOS-Archiv)</li><li>* .dylib (dynamische macOS-Bibliothek)</li></ul></li></ul> |
+| [Eigenständige Bereitstellungen (Self-contained deployments, SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Ansichten&dagger; (MVC-Apps, wenn Ansichten nicht vorkompiliert sind)</li><li>Seiten&dagger; (MVC- oder Razor Pages-Apps, wenn Seiten nicht vorkompiliert sind)</li><li>wwwroot&dagger;</li><li>*.DLL-Dateien</li><li>{ASSEMBLYNAME}.deps.json</li><li>{ASSEMBLYNAME}.dll</li><li>{ASSEMBLYNAME}.exe</li><li>{ASSEMBLYNAME}.pdb</li><li>{ASSEMBLYNAME}.Views.dll</li><li>{ASSEMBLYNAME}.Views.pdb</li><li>{ASSEMBLYNAME}.runtimeconfig.json</li><li>web.config (IIS-Bereitstellungen)</li></ul></li></ul> |
+
+&dagger;Gibt ein Verzeichnis an
+
+Das Verzeichnis *publish* stellt den *Pfad des Inhaltsstammverzeichnisses* (auch als *Pfad der Anwendungsbasis* bekannt) der Bereitstellung dar. Unabhängig vom Namen des Verzeichnisses *publish* der auf dem Server bereitgestellten App dient der Speicherort des Verzeichnisses als physischer Pfad des Servers für die gehostete App.
+
+Das Verzeichnis *wwwroot* enthält, sofern vorhanden, nur statische Objekte.
 
 Das Erstellen eines *Logs*-Ordners ist für die [erweiterte Debugprotokollierung für das ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) nützlich. Ordner im Pfad, die für den `<handlerSetting>`-Wert bereitgestellt werden, werden nicht automatisch vom Modul erstellt und müssen zuvor in der Bereitstellung vorhanden sein, damit das Modul das Debugprotokoll schreiben kann.
 
@@ -62,11 +92,11 @@ Das Verzeichnis *Logs* (Protokolle) kann mit einem der folgenden beiden Ansätze
 
 Für das Bereitstellungsverzeichnis sind Lese-/Ausführungsberechtigungen erforderlich. Für das Verzeichnis *Logs* sind Lese-/Schreibberechtigungen erforderlich. Für weitere Verzeichnisse, in die Dateien geschrieben werden, sind Lese-/Schreibberechtigungen erforderlich.
 
-::: moniker-end
-
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [.NET Core-Anwendungsbereitstellung](/dotnet/core/deploying/)
 * [Zielframeworks](/dotnet/standard/frameworks)
 * [.NET Core-RID-Katalog](/dotnet/core/rid-catalog)
+
+::: moniker-end

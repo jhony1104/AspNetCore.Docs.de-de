@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 34157a63e43372876a02a858741dfd3a83a063b1
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: f283234ed8a32dc9b7904bc6fee1cc9c04741029
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75354809"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172601"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>Hinzufügen der Validierung zu einer Razor-Seite in ASP.NET Core
 
@@ -161,7 +161,7 @@ Durch die Anwendung von DataAnnotations auf die Klasse wird das Schema geändert
 
 Die `Movie`-Tabelle verfügt zurzeit über das folgende Schema:
 
-``` sql
+```sql
 CREATE TABLE [dbo].[Movie] (
     [ID]          INT             IDENTITY (1, 1) NOT NULL,
     [Title]       NVARCHAR (MAX)  NULL,
@@ -189,7 +189,7 @@ Update-Database
 
 Die aktualisierte `Movie`-Tabelle hat das folgende Schema:
 
-``` sql
+```sql
 CREATE TABLE [dbo].[Movie] (
     [ID]          INT             IDENTITY (1, 1) NOT NULL,
     [Title]       NVARCHAR (60)   NOT NULL,

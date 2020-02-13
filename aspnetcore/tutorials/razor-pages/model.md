@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilf
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 9d9266ae08c7abe747d4497bbcf52778cf2e370e
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
+ms.openlocfilehash: d2f9a64c77d76702004b94cdf36e558b33d7e19a
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/18/2020
-ms.locfileid: "76268756"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172578"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -211,7 +211,7 @@ Wählen Sie im Menü **Tools** **NuGet-Paket-Manager** > **Paket-Manager-Konsole
 
 Geben Sie in der PMC die folgenden Befehle ein:
 
-```PMC
+```powershell
 Add-Migration InitialCreate
 Update-Database
 ```
@@ -453,7 +453,7 @@ Wählen Sie im Menü **Tools** **NuGet-Paket-Manager** > **Paket-Manager-Konsole
 
 Geben Sie in der PMC die folgenden Befehle ein:
 
-```Powershell
+```powershell
 Add-Migration Initial
 Update-Database
 ```

@@ -5,18 +5,18 @@ description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasier
 ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/views/razor
-ms.openlocfilehash: baac0ac38a0781cb9c16689cf3e29526b602d8da
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 2d47fbc33328ab454616bcabab796df089686d79
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944251"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171859"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) und [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) (*.razor*) enthalten.
+Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) ( *.razor*) enthalten.
 
 ## <a name="rendering-html"></a>Rendern von HTML
 
@@ -128,7 +128,7 @@ Der Code rendert den folgenden HTML-Code:
 
 Der HTML-Code wird im Browser folgendermaßen angezeigt:
 
-```
+```html
 <span>Hello World</span>
 ```
 
@@ -483,11 +483,11 @@ Die `@functions`-Anweisung ermöglicht das Hinzufügen von C#-Membern (Feldern, 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Verwenden Sie in [Razor-Komponenten](xref:blazor/components) `@code` über `@functions`, um C#-Member hinzuzufügen.
+Verwenden Sie in [Razor-Komponenten](xref:blazor/components)`@code` über `@functions`, um C#-Member hinzuzufügen.
 
 ::: moniker-end
 
-Beispiel:
+Zum Beispiel:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -662,7 +662,7 @@ Die vorstehenden Beziehungen gelten für Importdateien, die mit MVC-Ansichten un
 
 Wenn mehrere Importdateien über eine `@namespace`-Anweisung verfügen, wird die Datei verwendet, die der Seite, der Ansicht oder der Komponente in der Verzeichnisstruktur am nächsten ist, um den Stammnamespace festzulegen.
 
-Wenn der Ordner *EvenMorePages* im Beispiel oben eine Importdatei mit `@namespace Another.Planet` enthält (oder die Datei *Pages/MorePages/EvenMorePages/Page.cshtml* `@namespace Another.Planet` enthält), finden Sie das Ergebnis in der folgenden Tabelle.
+Wenn der Ordner *EvenMorePages* im Beispiel oben eine Importdatei mit `@namespace Another.Planet` enthält (oder die Datei *Pages/MorePages/EvenMorePages/Page.cshtml*`@namespace Another.Planet` enthält), finden Sie das Ergebnis in der folgenden Tabelle.
 
 | Seite                                        | Namespace               |
 | ------------------------------------------- | ----------------------- |

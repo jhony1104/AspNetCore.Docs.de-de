@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/18/2018
 uid: fundamentals/owin
-ms.openlocfilehash: 7edb4db026f1b778d43ac72883690a0b2a18ee31
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 980b60512bdeadd2a58b87e633ebf1416f725851
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814898"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172092"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>Open Web Interface for .NET (OWIN) mit ASP.NET Core
 
@@ -79,11 +79,14 @@ Sie können andere Aktionen konfigurieren, die in der OWIN-Pipeline durchgeführ
 ```csharp
 app.UseOwin(pipeline =>
 {
-    pipeline(async (next) =>
+    pipeline(next =>
     {
-        // do something before
-        await OwinHello(new OwinEnvironment(HttpContext));
-        // do something after
+        return async environment =>
+        {
+            // Do something before.
+            await next(environment);
+            // Do something after.
+        };
     });
 });
 ```
@@ -234,7 +237,7 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="request-data-owin-v100"></a>Anforderungsdaten (OWIN v1.0.0)
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.RequestScheme | `String` |  |
 | owin.RequestMethod  | `String` | |    
@@ -247,13 +250,13 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="request-data-owin-v110"></a>Anforderungsdaten (OWIN v1.1.0)
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.RequestId | `String` | Optional |
 
 ### <a name="response-data-owin-v100"></a>Antwortdaten (OWIN v1.0.0)
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.ResponseStatusCode | `int` | Optional |
 | owin.ResponseReasonPhrase | `String` | Optional |
@@ -262,14 +265,14 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="other-data-owin-v100"></a>Andere Daten (OWIN v1.0.0)
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
 
 ### <a name="common-keys"></a>Gängige Schlüssel
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | ssl.ClientCertificate | `X509Certificate` |  |
 | ssl.LoadClientCertAsync  | `Func<Task>` | |    
@@ -282,13 +285,13 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="sendfiles-v030"></a>SendFiles v0.3.0
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | Pro Anforderung |
 
 ### <a name="opaque-v030"></a>Opaque v0.3.0
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
 | opaque.Upgrade | `OpaqueUpgrade` | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
@@ -297,7 +300,7 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="websocket-v030"></a>WebSocket v0.3.0
 
-| Key               | Wert (Typ) | BESCHREIBUNG |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
 | websocket.Accept | `WebSocketAccept` | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
