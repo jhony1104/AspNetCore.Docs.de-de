@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Metho
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/javascript-interop
-ms.openlocfilehash: 4edef123bc1fe41845b8060b9c3b8e77ffd2969d
-ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
+ms.openlocfilehash: c4f2444b60fc2d3a8af893df379cf62636a7bdd5
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76885471"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213362"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
@@ -241,11 +241,213 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 [!code-razor[](javascript-interop/samples_snapshot/component3.razor?highlight=17)]
 
+## <a name="reference-elements-across-components"></a>Komponenten übergreifende Verweis Elemente
+
+Ein `ElementReference` ist nur in der `OnAfterRender`-Methode einer Komponente, und ein Element Verweis ist ein `struct`), sodass ein Element Verweis nicht zwischen Komponenten übermittelt werden kann.
+
+Damit eine übergeordnete Komponente einen Element Verweis für andere Komponenten verfügbar macht, kann die übergeordnete Komponente folgende Aktionen ausführen:
+
+* Ermöglicht es untergeordneten Komponenten, Rückrufe zu registrieren.
+* Rufen Sie die registrierten Rückrufe während des `OnAfterRender` Ereignisses mit dem bestandenen Element Verweis auf. Indirekt ermöglicht dieser Ansatz, dass untergeordnete Komponenten mit dem Element Verweis des übergeordneten Elements interagieren.
+
+Im folgenden Blazor Webassembly-Beispiel wird der Ansatz veranschaulicht.
+
+Im `<head>` von *wwwroot/Index.html*:
+
+```html
+<style>
+    .red { color: red }
+</style>
+```
+
+Im `<body>` von *wwwroot/Index.html*:
+
+```html
+<script>
+    function setElementClass(element, className) {
+        /** @type {HTMLElement} **/
+        var myElement = element;
+        myElement.classList.add(className);
+    }
+</script>
+```
+
+*Pages/index. Razor* (übergeordnete Komponente):
+
+```razor
+@page "/"
+
+<h1 @ref="_title">Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Parent="this" Title="How is Blazor working for you?" />
+```
+
+*Pages/index. Razor. cs*:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample.Pages
+{
+    public partial class Index : 
+        ComponentBase, IObservable<ElementReference>, IDisposable
+    {
+        private bool _disposing;
+        private IList<IObserver<ElementReference>> _subscriptions = 
+            new List<IObserver<ElementReference>>();
+        private ElementReference _title;
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            foreach (var subscription in _subscriptions)
+            {
+                try
+                {
+                    subscription.OnNext(_title);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            _disposing = true;
+
+            foreach (var subscription in _subscriptions)
+            {
+                try
+                {
+                    subscription.OnCompleted();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            _subscriptions.Clear();
+        }
+
+        public IDisposable Subscribe(IObserver<ElementReference> observer)
+        {
+            if (_disposing)
+            {
+                throw new InvalidOperationException("Parent being disposed");
+            }
+
+            _subscriptions.Add(observer);
+
+            return new Subscription(observer, this);
+        }
+
+        private class Subscription : IDisposable
+        {
+            public Subscription(IObserver<ElementReference> observer, Index self)
+            {
+                Observer = observer;
+                Self = self;
+            }
+
+            public IObserver<ElementReference> Observer { get; }
+            public Index Self { get; }
+
+            public void Dispose()
+            {
+                Self._subscriptions.Remove(Observer);
+            }
+        }
+    }
+}
+```
+
+*Shared/surveyprompt. Razor* (untergeordnete Komponente):
+
+```razor
+@inject IJSRuntime JS
+
+<div class="alert alert-secondary mt-4" role="alert">
+    <span class="oi oi-pencil mr-2" aria-hidden="true"></span>
+    <strong>@Title</strong>
+
+    <span class="text-nowrap">
+        Please take our
+        <a target="_blank" class="font-weight-bold" 
+            href="https://go.microsoft.com/fwlink/?linkid=2109206">brief survey</a>
+    </span>
+    and tell us what you think.
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+}
+```
+
+*Shared/surveyprompt. Razor. cs*:
+
+```csharp
+using System;
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample.Shared
+{
+    public partial class SurveyPrompt : 
+        ComponentBase, IObserver<ElementReference>, IDisposable
+    {
+        private IDisposable _subscription = null;
+
+        [Parameter]
+        public IObservable<ElementReference> Parent { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+            }
+
+            _subscription = Parent.Subscribe(this);
+        }
+
+        public void OnCompleted()
+        {
+            _subscription = null;
+        }
+
+        public void OnError(Exception error)
+        {
+            _subscription = null;
+        }
+
+        public void OnNext(ElementReference value)
+        {
+            JS.InvokeAsync<object>(
+                "setElementClass", new object[] { value, "red" });
+        }
+
+        public void Dispose()
+        {
+            _subscription?.Dispose();
+        }
+    }
+}
+```
+
 ## <a name="invoke-net-methods-from-javascript-functions"></a>Aufrufen von .NET-Methoden aus JavaScript-Funktionen
 
 ### <a name="static-net-method-call"></a>Statischer .net-Methodenaufrufe
 
-Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung von Blazor Server-Szenarien bevorzugt. Um eine .NET-Methode aus JavaScript aufzurufen, muss die .NET-Methode öffentlich und statisch sein und über das `[JSInvokable]`-Attribut verfügen. Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute`-Konstruktor angeben. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
+Zum Aufrufen einer statischen .NET-Methode aus JavaScript verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die aufgerufen werden soll, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version ist für die Unterstützung von Blazor Server-Szenarien bevorzugt. Die .NET-Methode muss öffentlich und statisch sein und über das `[JSInvokable]`-Attribut verfügen. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
 
 Die Beispiel-app enthält C# eine-Methode, um ein Array von `int`s zurückzugeben. Das `JSInvokable`-Attribut wird auf die-Methode angewendet.
 
@@ -281,6 +483,30 @@ Array(4) [ 1, 2, 3, 4 ]
 ```
 
 Der vierte Arraywert wird per pushübertragung an das von `ReturnArrayAsync`zurückgegebene Array (`data.push(4);`) übermittelt.
+
+Standardmäßig ist der Methoden Bezeichner der Methodenname, aber Sie können einen anderen Bezeichner mit dem `JSInvokableAttribute`-Konstruktor angeben:
+
+```csharp
+@code {
+    [JSInvokable("DifferentMethodName")]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}
+```
+
+In der Client seitigen JavaScript-Datei:
+
+```javascript
+returnArrayAsyncJs: function () {
+  DotNet.invokeMethodAsync('BlazorSample', 'DifferentMethodName')
+    .then(data => {
+      data.push(4);
+      console.log(data);
+    });
+}
+```
 
 ### <a name="instance-method-call"></a>Instanzmethodenaufrufe
 
@@ -362,6 +588,284 @@ Das js-Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unz
 
 Weitere Informationen zur Ressourcenauslastung finden Sie unter <xref:security/blazor/server>.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Ausführen umfangreicher Datenübertragungen in Blazor Server-apps
+
+In einigen Szenarien müssen große Datenmengen zwischen JavaScript und Blazorübertragen werden. In der Regel erfolgen große Datenübertragungen in folgenden Zeit Mengen:
+
+* Browser Dateisystem-APIs werden zum Hochladen oder Herunterladen einer Datei verwendet.
+* Interop mit einer Drittanbieter Bibliothek ist erforderlich.
+
+In Blazor Server ist eine Einschränkung vorhanden, um zu verhindern, dass einzelne große Nachrichten übergeben werden, die zu Leistungsproblemen führen können.
+
+Beachten Sie die folgenden Anleitungen, wenn Sie Code entwickeln, mit dem Daten zwischen JavaScript und Blazorübertragen werden:
+
+* Segmentieren Sie die Daten in kleinere Teile, und senden Sie die Daten Segmente sequenziell, bis alle Daten vom Server empfangen werden.
+* Keine großen Objekte in JavaScript und C# Code zuordnen.
+* Blockieren Sie den Haupt-UI-Thread nicht für lange Zeiträume, wenn Sie Daten senden oder empfangen.
+* Freien Arbeitsspeicher freigeben, wenn der Prozess abgeschlossen oder abgebrochen wird.
+* Erzwingen Sie die folgenden zusätzlichen Anforderungen aus Sicherheitsgründen:
+  * Deklarieren Sie die maximale Datei-oder Datengröße, die übermittelt werden kann.
+  * Deklarieren Sie die minimale Uploadrate vom Client an den Server.
+* Nachdem die Daten vom Server empfangen wurden, können die Daten wie folgt lauten:
+  * Temporär in einem Arbeitsspeicher Puffer gespeichert, bis alle Segmente gesammelt wurden.
+  * Wird sofort genutzt. Beispielsweise können die Daten sofort in einer Datenbank gespeichert oder auf den Datenträger geschrieben werden, wenn die einzelnen Segmente empfangen werden.
+
+Die folgende dateiuploader-Klasse verarbeitet js-Interop mit dem-Client. Die Uploader-Klasse verwendet js-Interop für Folgendes:
+
+* Rufen Sie den Client ab, um ein Daten Segment zu senden.
+* Abbrechen der Transaktion, wenn ein Abruf Timeout auftritt.
+
+```csharp
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.JSInterop;
+
+public class FileUploader : IDisposable
+{
+    private readonly IJSRuntime _jsRuntime;
+    private readonly int _segmentSize = 6144;
+    private readonly int _maxBase64SegmentSize = 8192;
+    private readonly DotNetObjectReference<FileUploader> _thisReference;
+    private List<IMemoryOwner<byte>> _uploadedSegments = 
+        new List<IMemoryOwner<byte>>();
+
+    public FileUploader(IJSRuntime jsRuntime)
+    {
+        _jsRuntime = jsRuntime;
+    }
+
+    public async Task<Stream> ReceiveFile(string selector, int maxSize)
+    {
+        var fileSize = 
+            await _jsRuntime.InvokeAsync<int>("getFileSize", selector);
+
+        if (fileSize > maxSize)
+        {
+            return null;
+        }
+
+        var numberOfSegments = Math.Floor(fileSize / (double)_segmentSize) + 1;
+        var lastSegmentBytes = 0;
+        string base64EncodedSegment;
+
+        for (var i = 0; i < numberOfSegments; i++)
+        {
+            try
+            {
+                base64EncodedSegment = 
+                    await _jsRuntime.InvokeAsync<string>(
+                        "receiveSegment", i, selector);
+
+                if (base64EncodedSegment.Length < _maxBase64SegmentSize && 
+                    i < numberOfSegments - 1)
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+          var current = MemoryPool<byte>.Shared.Rent(_segmentSize);
+
+          if (!Convert.TryFromBase64String(base64EncodedSegment, 
+              current.Memory.Slice(0, _segmentSize).Span, out lastSegmentBytes))
+          {
+              return null;
+          }
+
+          _uploadedSegments.Add(current);
+        }
+
+        var segments = _uploadedSegments;
+        _uploadedSegments = null;
+
+        return new SegmentedStream(segments, _segmentSize, lastSegmentBytes);
+    }
+
+    public void Dispose()
+    {
+        if (_uploadedSegments != null)
+        {
+            foreach (var segment in _uploadedSegments)
+            {
+                segment.Dispose();
+            }
+        }
+    }
+}
+```
+
+Im vorherigen Beispiel:
+
+* Der `_maxBase64SegmentSize` ist auf `8192`festgelegt, der aus `_maxBase64SegmentSize = _segmentSize * 4 / 3`berechnet wird.
+* Low-Level-APIs für die Arbeitsspeicherverwaltung werden verwendet, um die Speichersegmente auf dem Server in `_uploadedSegments`zu speichern.
+* Eine `ReceiveFile`-Methode wird verwendet, um den Upload über js-Interop zu behandeln:
+  * Die Dateigröße wird in Bytes über js-Interop mit `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`festgelegt.
+  * Die Anzahl der zu empfangenden Segmente wird berechnet und in `numberOfSegments`gespeichert.
+  * Die Segmente werden in einer `for` Schleife durch JS-Interop mit `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`angefordert. Alle Segmente, aber die letzte müssen vor dem decodieren 8.192 Bytes betragen. Der Client ist gezwungen, die Daten auf effiziente Weise zu senden.
+  * Für jedes empfangene Segment werden Überprüfungen vor der Decodierung mit <xref:System.Convert.TryFromBase64String*>ausgeführt.
+  * Ein Datenstrom mit den Daten wird nach Abschluss des Uploads als neuer <xref:System.IO.Stream> (`SegmentedStream`) zurückgegeben.
+
+Die segmentierte Stream-Klasse macht die Liste der Segmente als schreibgeschützte, nicht suchbare <xref:System.IO.Stream>verfügbar:
+
+```csharp
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+
+public class SegmentedStream : Stream
+{
+    private readonly ReadOnlySequence<byte> _sequence;
+    private long _currentPosition = 0;
+
+    public SegmentedStream(IList<IMemoryOwner<byte>> segments, int segmentSize, 
+        int lastSegmentSize)
+    {
+        if (segments.Count == 1)
+        {
+            _sequence = new ReadOnlySequence<byte>(
+                segments[0].Memory.Slice(0, lastSegmentSize));
+            return;
+        }
+
+        var sequenceSegment = new BufferSegment<byte>(
+            segments[0].Memory.Slice(0, segmentSize));
+        var lastSegment = sequenceSegment;
+
+        for (int i = 1; i < segments.Count; i++)
+        {
+            var isLastSegment = i + 1 == segments.Count;
+            lastSegment = lastSegment.Append(segments[i].Memory.Slice(
+                0, isLastSegment ? lastSegmentSize : segmentSize));
+        }
+
+        _sequence = new ReadOnlySequence<byte>(
+            sequenceSegment, 0, lastSegment, lastSegmentSize);
+    }
+
+    public override long Position
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+
+    public override int Read(byte[] buffer, int offset, int count)
+    {
+        var bytesToWrite = (int)(_currentPosition + count < _sequence.Length ? 
+            count : _sequence.Length - _currentPosition);
+        var data = _sequence.Slice(_currentPosition, bytesToWrite);
+        data.CopyTo(buffer.AsSpan(offset, bytesToWrite));
+        _currentPosition += bytesToWrite;
+
+        return bytesToWrite;
+    }
+
+    private class BufferSegment<T> : ReadOnlySequenceSegment<T>
+    {
+        public BufferSegment(ReadOnlyMemory<T> memory)
+        {
+            Memory = memory;
+        }
+
+        public BufferSegment<T> Append(ReadOnlyMemory<T> memory)
+        {
+            var segment = new BufferSegment<T>(memory)
+            {
+                RunningIndex = RunningIndex + Memory.Length
+            };
+
+            Next = segment;
+
+            return segment;
+        }
+    }
+
+    public override bool CanRead => true;
+
+    public override bool CanSeek => false;
+
+    public override bool CanWrite => false;
+
+    public override long Length => throw new NotImplementedException();
+
+    public override void Flush() => throw new NotImplementedException();
+
+    public override long Seek(long offset, SeekOrigin origin) => 
+        throw new NotImplementedException();
+
+    public override void SetLength(long value) => 
+        throw new NotImplementedException();
+
+    public override void Write(byte[] buffer, int offset, int count) => 
+        throw new NotImplementedException();
+}
+```
+
+Der folgende Code implementiert JavaScript-Funktionen, um die Daten zu empfangen:
+
+```javascript
+function getFileSize(selector) {
+  const file = getFile(selector);
+  return file.size;
+}
+
+async function receiveSegment(segmentNumber, selector) {
+  const file = getFile(selector);
+  var segments = getFileSegments(file);
+  var index = segmentNumber * 6144;
+  return await getNextChunk(file, index);
+}
+
+function getFile(selector) {
+  const element = document.querySelector(selector);
+  if (!element) {
+    throw new Error('Invalid selector');
+  }
+  const files = element.files;
+  if (!files || files.length === 0) {
+    throw new Error(`Element ${elementId} doesn't contain any files.`);
+  }
+  const file = files[0];
+  return file;
+}
+
+function getFileSegments(file) {
+  const segments = Math.floor(size % 6144 === 0 ? size / 6144 : 1 + size / 6144);
+  return segments;
+}
+
+async function getNextChunk(file, index) {
+  const length = file.size - index <= 6144 ? file.size - index : 6144;
+  const chunk = file.slice(index, index + length);
+  index += length;
+  const base64Chunk = await this.base64EncodeAsync(chunk);
+  return { base64Chunk, index };
+}
+
+async function base64EncodeAsync(chunk) {
+  const reader = new FileReader();
+  const result = new Promise((resolve, reject) => {
+    reader.addEventListener('load',
+      () => {
+        const base64Chunk = reader.result;
+        const cleanChunk = 
+          base64Chunk.replace('data:application/octet-stream;base64,', '');
+        resolve(cleanChunk);
+      },
+      false);
+    reader.addEventListener('error', reject);
+  });
+  reader.readAsDataURL(chunk);
+  return result;
+}
+```
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Interopcomponent. Razor-Beispiel (dotnet/aspnetcore-GitHub-Repository, 3,1-releasebranch)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

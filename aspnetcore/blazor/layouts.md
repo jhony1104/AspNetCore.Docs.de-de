@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 51720af8fec5b4427fc66660eb8ac9c54ba2e99e
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 8e7294f6b66d34781473522a71f929ed5f9c33f2
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159858"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213375"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.net Core Blazor Layouts
 
@@ -66,9 +66,9 @@ Jeder Ordner einer APP kann optional eine Vorlagen Datei mit dem Namen *_Imports
 
 Die folgenden *_Imports. Razor* -Datei Importe:
 
-* `MyCoolLayout`.
+* [https://login.microsoftonline.com/consumers/](`MyCoolLayout`).
 * Alle Razor-Komponenten im selben Ordner und in allen Unterordnern.
-* Der `BlazorApp1.Data` -Namespace.
+* Der `BlazorApp1.Data`-Namespace.
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
@@ -94,8 +94,8 @@ Zum Schluss enthält `MasterLayout` in *Masterlayout. Razor* die Layoutelemente 
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Freigeben eines Razor Pages Layouts mit integrierten Komponenten
 
-Wenn Routing fähige Komponenten in eine Razor Pages-app integriert sind, kann das freigegebene Layout der APP mit den-Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps>.
+Wenn Routing fähige Komponenten in eine Razor Pages-app integriert sind, kann das freigegebene Layout der APP mit den-Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps>.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:mvc/views/layout>

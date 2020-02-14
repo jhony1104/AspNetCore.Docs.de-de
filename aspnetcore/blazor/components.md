@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, ei
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/24/2020
+ms.date: 02/04/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: d6ba60b20d21636c7f780a80d8fbdb152505a3a3
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: 0da0d83a4fde7b753a84bf05d3a9284776f2881f
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928262"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213349"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.net Core Razor-Komponenten
 
@@ -70,9 +70,9 @@ Um einen benutzerdefinierten Ordner zu verwenden, fügen Sie den Namespace des b
 
 Razor-Komponenten können in Razor Pages-und MVC-Apps integriert werden. Wenn die Seite oder Ansicht gerendert wird, können Komponenten gleichzeitig vorab vorgerendert werden.
 
-Wenn Sie eine Razor Pages-oder MVC-App zum Hosten von Razor-Komponenten vorbereiten möchten, befolgen Sie die Anweisungen im Abschnitt *integrieren von Razor-Komponenten in Razor Pages und MVC-apps* des <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps> Artikels.
+Wenn Sie eine Razor Pages-oder MVC-App zum Hosten von Razor-Komponenten vorbereiten möchten, befolgen Sie die Anweisungen im Abschnitt *integrieren von Razor-Komponenten in Razor Pages und MVC-apps* des <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps> Artikels.
 
-Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace, der den Ordner darstellt, entweder der Seite/Ansicht oder der Datei " *_ViewImports. cshtml* " hinzu. Im folgenden Beispiel:
+Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace, der den Ordner darstellt, entweder der Seite/Ansicht oder der Datei " *_ViewImports. cshtml* " hinzu. Siehe folgendes Beispiel:
 
 * Ändern Sie `MyAppNamespace` in den Namespace der app.
 * Wenn ein Ordner mit dem Namen *Components* nicht zum Speichern der Komponenten verwendet wird, ändern Sie `Components` in den Ordner, in dem sich die Komponenten befinden.
@@ -97,7 +97,7 @@ Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass
 * Wird in die Seite vorab übernommen.
 * Wird als statischer HTML-Code auf der Seite gerendert, oder wenn er die erforderlichen Informationen zum Bootstrapping einer blazor-APP vom Benutzer-Agent enthält.
 
-| `RenderMode`        | Beschreibung |
+| `RenderMode`        | BESCHREIBUNG |
 | ------------------- | ----------- |
 | `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine blazor-Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. |
 | `Server`            | Rendert einen Marker für eine blazor-Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer blazor-App verwendet. |
@@ -107,7 +107,10 @@ Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil n
 
 Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
 
-Weitere Informationen zum Rendern von Komponenten, zum Komponenten Status und zum `Component`-taghilfsprogramm finden Sie unter <xref:blazor/hosting-models>.
+Weitere Informationen zum Rendern von Komponenten, zum Komponenten Status und zum `Component`-taghilfsprogramm finden Sie in den folgenden Artikeln:
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
 
 ## <a name="tag-helpers-arent-used-in-components"></a>Taghilfsprogramme werden in Komponenten nicht verwendet.
 
@@ -149,7 +152,7 @@ Im folgenden Beispiel aus der Beispiel-App legt der `ParentComponent` den Wert d
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -180,7 +183,7 @@ Der `ParentComponent` in der Beispiel-App kann Inhalte zum Rendern des `ChildCom
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -351,11 +354,11 @@ im vorherigen Beispiel wird `@bind-value` gebunden:
 * Der angegebene Ausdruck (`CurrentValue`) zum `value` Attribut des Elements.
 * Ein Änderungs Ereignis Delegat für das Ereignis, das durch `@bind-value:event`angegeben wird.
 
-**Nicht zu erteilbare Werte**
+### <a name="unparsable-values"></a>Nicht zu erteilbare Werte
 
 Wenn ein Benutzer einen nicht zu erteilbaren Wert für ein Daten gebundene Element bereitstellt, wird der nicht teilbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungs Ereignis ausgelöst wird.
 
-Als Beispiel dient das folgende Szenario:
+Nehmen Sie das folgende Szenario als Beispiel:
 
 * Ein `<input>`-Element ist an einen `int` Typ mit einem Anfangswert von `123`gebunden:
 
@@ -379,7 +382,7 @@ Standardmäßig gilt die Bindung für das `onchange` Ereignis des Elements (`@bi
   * Ermöglicht es dem Benutzer, ungültige Eingaben bereitzustellen und Validierungs Fehler auf dem zugeordneten `EditContext`zu empfangen.
   * Zeigen Sie Validierungs Fehler in der Benutzeroberfläche an, ohne dass der Benutzer die Eingabe zusätzlicher Webform-Daten beeinträchtigt.
 
-**Globalisierung**
+### <a name="globalization"></a>Globalisierung
 
 `@bind` Werte für die Anzeige formatiert und mithilfe der Regeln der aktuellen Kultur analysiert werden.
 
@@ -406,7 +409,7 @@ Die folgenden Feldtypen weisen bestimmte Formatierungs Anforderungen auf und wer
 
 Informationen zum Festlegen der Kultur des Benutzers finden Sie im Abschnitt zur [Lokalisierung](#localization) .
 
-**Format Zeichenfolgen**
+### <a name="format-strings"></a>Format Zeichenfolgen
 
 Die Datenbindung funktioniert mit <xref:System.DateTime>-Format Zeichenfolgen [`@bind:format`](xref:mvc/views/razor#bind). Andere Format Ausdrücke, z. b. Währungs-oder Zahlenformate, sind zurzeit nicht verfügbar.
 
@@ -434,9 +437,9 @@ Es wird nicht empfohlen, ein Format für den `date` Feldtyp anzugeben, da blazor
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
 ```
 
-**Komponenten Parameter**
+### <a name="parent-to-child-binding-with-component-parameters"></a>Über-zu-untergeordnete Bindung mit Komponenten Parametern
 
-Die Bindung erkennt Komponenten Parameter, bei denen `@bind-{property}` einen Eigenschafts Wert auf Komponenten binden kann.
+Die Bindung erkennt Komponenten Parameter, bei denen `@bind-{property}` einen Eigenschafts Wert von einer übergeordneten Komponente an eine untergeordnete Komponente binden kann. Die Bindung von einem untergeordneten zu einem übergeordneten Element wird in der Bindung zwischen untergeordneten und über [geordneten Elementen mit verketteter](#child-to-parent-binding-with-chained-bind) Bindung behandelt.
 
 Die folgende untergeordnete Komponente (`ChildComponent`) verfügt über einen `Year` Component-Parameter und `YearChanged`-Rückruf:
 
@@ -456,7 +459,10 @@ Die folgende untergeordnete Komponente (`ChildComponent`) verfügt über einen `
 
 `EventCallback<T>` wird im Abschnitt [EventCallback](#eventcallback) erläutert.
 
-Die folgende übergeordnete Komponente verwendet `ChildComponent` und bindet den `ParentYear`-Parameter vom übergeordneten an den `Year`-Parameter in der untergeordneten Komponente:
+Die folgende übergeordnete Komponente verwendet:
+
+* `ChildComponent` und bindet den `ParentYear`-Parameter vom übergeordneten zum `Year`-Parameter in der untergeordneten Komponente.
+* Das `onclick`-Ereignis wird verwendet, um die `ChangeTheYear`-Methode zu initiieren. Weitere Informationen finden Sie im Abschnitt [Ereignis Behandlung](#event-handling) .
 
 ```razor
 @page "/ParentComponent"
@@ -520,11 +526,142 @@ Im Allgemeinen kann eine Eigenschaft mithilfe `@bind-property:event` Attributs a
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-**Options Felder**
+### <a name="child-to-parent-binding-with-chained-bind"></a>Bindung zwischen untergeordneten und übergeordneten Elementen mit verketteter Bindung
+
+Ein häufiges Szenario ist die Verkettung eines Daten gebundenen Parameters zu einem Page-Element in der Ausgabe der Komponente. Dieses Szenario wird als *verkettete Bindung* bezeichnet, da mehrere Bindungs Ebenen gleichzeitig auftreten.
+
+Eine verkettete Bindung kann nicht mit `@bind`-Syntax im-Element der Seite implementiert werden. Der Ereignishandler und der Wert müssen separat angegeben werden. Eine übergeordnete Komponente kann jedoch `@bind`-Syntax mit dem-Parameter der Komponente verwenden.
+
+Die folgende `PasswordField` Komponente (*PasswordField. Razor*):
+
+* Legt den Wert eines `<input>` Elements auf eine `Password` Eigenschaft fest.
+* Macht Änderungen der `Password`-Eigenschaft für eine übergeordnete Komponente mit einem [EventCallback](#eventcallback)verfügbar.
+* Verwendet das `onclick` Ereignis wird verwendet, um die `ToggleShowPassword`-Methode zu initiieren. Weitere Informationen finden Sie im Abschnitt [Ereignis Behandlung](#event-handling) .
+
+```razor
+<h1>Child Component</h2>
+
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(_showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+@code {
+    private bool _showPassword;
+
+    [Parameter]
+    public string Password { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        _showPassword = !_showPassword;
+    }
+}
+```
+
+Die `PasswordField` Komponente wird in einer anderen Komponente verwendet:
+
+```razor
+@page "/ParentComponent"
+
+<h1>Parent Component</h1>
+
+<PasswordField @bind-Password="_password" />
+
+@code {
+    private string _password;
+}
+```
+
+Zum Ausführen von Überprüfungen oder Trap Fehlern für das Kennwort im vorherigen Beispiel:
+
+* Erstellen Sie ein Unterstützungs Feld für `Password` (`_password` im folgenden Beispielcode).
+* Führen Sie die Überprüfungen oder Trap Fehler im `Password` Setter aus.
+
+Im folgenden Beispiel wird dem Benutzer sofortiges Feedback bereitgestellt, wenn ein Leerzeichen im Wert des Kennworts verwendet wird:
+
+```razor
+@page "/ParentComponent"
+
+<h1>Parent Component</h1>
+
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(_showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+<span class="text-danger">@_validationMessage</span>
+
+@code {
+    private bool _showPassword;
+    private string _password;
+    private string _validationMessage;
+
+    [Parameter]
+    public string Password
+    {
+        get { return _password ?? string.Empty; }
+        set
+        {
+            if (_password != value)
+            {
+                if (value.Contains(' '))
+                {
+                    _validationMessage = "Spaces not allowed!";
+                }
+                else
+                {
+                    _password = value;
+                    _validationMessage = string.Empty;
+                }
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        _showPassword = !_showPassword;
+    }
+}
+```
+
+### <a name="radio-buttons"></a>Optionsfelder
 
 Informationen zum Binden an Options Felder in einem Formular finden Sie unter <xref:blazor/forms-validation#work-with-radio-buttons>.
 
-## <a name="event-handling"></a>Ereignisbehandlung
+## <a name="event-handling"></a>Behandlung von Ereignissen
 
 Razor-Komponenten stellen Ereignis Behandlungs Funktionen bereit. Für ein HTML-Element Attribut mit dem Namen `on{EVENT}` (z. b. `onclick` und `onsubmit`) mit einem delegattypisierten Wert behandelt Razor-Komponenten den Wert des Attributs als Ereignishandler. Der Name des Attributs wird immer [`@on{EVENT}`](xref:mvc/views/razor#onevent)formatiert.
 
@@ -579,22 +716,25 @@ Für einige Ereignisse sind Ereignis Argument Typen zulässig. Wenn der Zugriff 
 
 Unterstützte `EventArgs` sind in der folgenden Tabelle aufgeführt.
 
-| Event            | Klasse                | DOM-Ereignisse und-Notizen |
+| Ereignis            | Klasse                | DOM-Ereignisse und-Notizen |
 | ---------------- | -------------------- | -------------------- |
-| Zwischenablage        | `ClipboardEventArgs` | `oncut`ist `oncopy`ist `onpaste` |
+| Zwischenablage        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
 | Hinein             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` und `DataTransferItem` die gezogenen Elementdaten speichern. |
 | Fehler            | `ErrorEventArgs`     | `onerror` |
-| Event            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`ist `onbeforecopy`ist `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
-| Fokus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Beinhaltet keine Unterstützung für `relatedTarget`. |
-| Input            | `ChangeEventArgs`    | `onchange`, `oninput` |
-| Tastatur         | `KeyboardEventArgs`  | `onkeydown`ist `onkeypress`ist `onkeyup` |
+| Ereignis            | `EventArgs`          | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input* (Eingabe)<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Focus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Beinhaltet keine Unterstützung für `relatedTarget`. |
+| Eingabe            | `ChangeEventArgs`    | `onchange`, `oninput` |
+| Tastatur         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
 | Maus            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
 | Mauszeiger    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
 | Mausrad      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| Fortschritt         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| Status         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | Toucheingabe            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` stellt einen einzelnen Kontaktpunkt auf einem Berührungs sensiblen Gerät dar. |
 
-Informationen zu den Eigenschaften und dem Ereignis Behandlungs Verhalten der Ereignisse in der vorangehenden Tabelle finden Sie unter [EventArgs classes in the Reference Source (dotnet/aspnetcore Release/3.1 Branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+Weitere Informationen finden Sie in den folgenden Ressourcen:
+
+* [EventArgs-Klassen in der ASP.net Core Verweis Quelle (dotnet/aspnetcore Release/3.1-Branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [MDN-Webdokumentation: globaleventhandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; enthält Informationen darüber, welche HTML-Elemente die einzelnen DOM-Ereignisse unterstützen.
 
 ### <a name="lambda-expressions"></a>Lambdaausdrücke
 
@@ -641,7 +781,7 @@ Der `ChildComponent` in der Beispiel-app (*Components/childcomponent. Razor*) ve
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-Der `ParentComponent` legt die `EventCallback<T>` (`OnClick`) des untergeordneten Elements auf die `ShowMessage` Methode fest.
+Der `ParentComponent` legt die `EventCallback<T>` (`OnClickCallback`) des untergeordneten Elements auf die `ShowMessage` Methode fest.
 
 *Pages/para Component. Razor*:
 
@@ -651,7 +791,7 @@ Der `ParentComponent` legt die `EventCallback<T>` (`OnClick`) des untergeordnete
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -677,7 +817,7 @@ Wenn die Schaltfläche im `ChildComponent`ausgewählt ist:
 
 ```razor
 <ChildComponent 
-    OnClick="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
+    OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
 ```
 
 Rufen Sie eine `EventCallback` oder `EventCallback<T>` mit `InvokeAsync` auf, und warten Sie auf die <xref:System.Threading.Tasks.Task>:
@@ -756,126 +896,6 @@ Im folgenden Beispiel wird durch Aktivieren des Kontrollkästchens verhindert, d
 }
 ```
 
-## <a name="chained-bind"></a>Verkettete Bindung
-
-Ein häufiges Szenario ist die Verkettung eines Daten gebundenen Parameters zu einem Page-Element in der Ausgabe der Komponente. Dieses Szenario wird als *verkettete Bindung* bezeichnet, da mehrere Bindungs Ebenen gleichzeitig auftreten.
-
-Eine verkettete Bindung kann nicht mit `@bind`-Syntax im-Element der Seite implementiert werden. Der Ereignishandler und der Wert müssen separat angegeben werden. Eine übergeordnete Komponente kann jedoch `@bind`-Syntax mit dem-Parameter der Komponente verwenden.
-
-Die folgende `PasswordField` Komponente (*PasswordField. Razor*):
-
-* Legt den Wert eines `<input>` Elements auf eine `Password` Eigenschaft fest.
-* Macht Änderungen der `Password`-Eigenschaft für eine übergeordnete Komponente mit einem [EventCallback](#eventcallback)verfügbar.
-
-```razor
-Password: 
-
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(_showPassword ? "text" : "password")" 
-       value="@Password" />
-
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
-
-@code {
-    private bool _showPassword;
-
-    [Parameter]
-    public string Password { get; set; }
-
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
-
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        Password = e.Value.ToString();
-
-        return PasswordChanged.InvokeAsync(Password);
-    }
-
-    private void ToggleShowPassword()
-    {
-        _showPassword = !_showPassword;
-    }
-}
-```
-
-Die `PasswordField` Komponente wird in einer anderen Komponente verwendet:
-
-```razor
-<PasswordField @bind-Password="_password" />
-
-@code {
-    private string _password;
-}
-```
-
-Zum Ausführen von Überprüfungen oder Trap Fehlern für das Kennwort im vorherigen Beispiel:
-
-* Erstellen Sie ein Unterstützungs Feld für `Password` (`_password` im folgenden Beispielcode).
-* Führen Sie die Überprüfungen oder Trap Fehler im `Password` Setter aus.
-
-Im folgenden Beispiel wird dem Benutzer sofortiges Feedback bereitgestellt, wenn ein Leerzeichen im Wert des Kennworts verwendet wird:
-
-```razor
-Password: 
-
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(_showPassword ? "text" : "password")" 
-       value="@Password" />
-
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
-
-<span class="text-danger">@_validationMessage</span>
-
-@code {
-    private bool _showPassword;
-    private string _password;
-    private string _validationMessage;
-
-    [Parameter]
-    public string Password
-    {
-        get { return _password ?? string.Empty; }
-        set
-        {
-            if (_password != value)
-            {
-                if (value.Contains(' '))
-                {
-                    _validationMessage = "Spaces not allowed!";
-                }
-                else
-                {
-                    _password = value;
-                    _validationMessage = string.Empty;
-                }
-            }
-        }
-    }
-
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
-
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        Password = e.Value.ToString();
-
-        return PasswordChanged.InvokeAsync(Password);
-    }
-
-    private void ToggleShowPassword()
-    {
-        _showPassword = !_showPassword;
-    }
-}
-```
-
 ## <a name="capture-references-to-components"></a>Verweise auf Komponenten erfassen
 
 Komponenten Verweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können, z. b. `Show` oder `Reset`. So erfassen Sie einen Komponenten Verweis:
@@ -928,7 +948,21 @@ public class NotifierService
 }
 ```
 
-Verwendung des `NotifierService` zum Aktualisieren einer Komponente:
+Registrieren Sie den `NotifierService` als singletion:
+
+* Registrieren Sie den Dienst in der blazor-Webassembly in `Program.Main`:
+
+  ```csharp
+  builder.Services.AddSingleton<NotifierService>();
+  ```
+
+* Registrieren Sie den Dienst auf dem blazor-Server in `Startup.ConfigureServices`:
+
+  ```csharp
+  services.AddSingleton<NotifierService>();
+  ```
+
+Verwenden Sie die `NotifierService`, um eine Komponente zu aktualisieren:
 
 ```razor
 @page "/"
@@ -967,7 +1001,7 @@ Im vorherigen Beispiel ruft `NotifierService` die `OnNotify` Methode der Kompone
 
 Beim Rendern einer Liste von Elementen oder Komponenten und der nachfolgend ändernden Elemente bzw. Komponenten muss der diffalling-Algorithmus von blazor entscheiden, welche der vorherigen Elemente oder Komponenten beibehalten werden können und wie Modell Objekte Ihnen zugeordnet werden sollen. Normalerweise erfolgt dieser Prozess automatisch und kann ignoriert werden, aber es gibt Fälle, in denen Sie den Prozess möglicherweise steuern möchten.
 
-Betrachten Sie das folgende Beispiel:
+Betrachten Sie das folgenden Beispiel:
 
 ```csharp
 @foreach (var person in People)
@@ -1654,16 +1688,16 @@ builder.AddContent(1, "Second");
 
 Wenn der Code zum ersten Mal ausgeführt wird, erhält der Generator Folgendes, wenn `someFlag` `true`ist:
 
-| Sequenz | Typ      | importieren   |
+| Sequenz | type      | Data   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | First (Erster)  |
+| 1        | Textknoten | Sekunde |
 
 Stellen Sie sich vor, dass `someFlag` `false`wird und das Markup wieder gerendert wird. Dieses Mal empfängt der Generator Folgendes:
 
-| Sequenz | Typ       | importieren   |
+| Sequenz | type       | Data   |
 | :------: | ---------- | :----: |
-| 1        | Textknoten  | Second |
+| 1        | Textknoten  | Sekunde |
 
 Wenn die Laufzeit einen diff ausführt, wird angezeigt, dass das Element bei Sequenz `0` entfernt wurde, sodass das folgende triviale *Bearbeitungs Skript*generiert wird:
 
@@ -1686,16 +1720,16 @@ builder.AddContent(seq++, "Second");
 
 Nun lautet die erste Ausgabe wie folgt:
 
-| Sequenz | Typ      | importieren   |
+| Sequenz | type      | Data   |
 | :------: | --------- | :----: |
-| 0        | Textknoten | Erster  |
-| 1        | Textknoten | Second |
+| 0        | Textknoten | First (Erster)  |
+| 1        | Textknoten | Sekunde |
 
 Dieses Ergebnis ist mit dem vorherigen Fall identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag` wird im zweiten Rendering `false`, und die Ausgabe lautet:
 
-| Sequenz | Typ      | importieren   |
+| Sequenz | type      | Data   |
 | :------: | --------- | ------ |
-| 0        | Textknoten | Second |
+| 0        | Textknoten | Sekunde |
 
 Dieses Mal sieht der Vergleichsalgorithmus, dass *zwei* Änderungen aufgetreten sind, und der Algorithmus generiert das folgende Bearbeitungs Skript:
 
@@ -1854,6 +1888,6 @@ Ebenso werden SVG-Images in den CSS-Regeln einer Stylesheet-Datei (*CSS*) unters
 
 Inline-SVG-Markup wird jedoch nicht in allen Szenarien unterstützt. Wenn Sie ein `<svg>`-Tag direkt in eine Komponenten Datei (*Razor*) platzieren, wird das grundlegende Image Rendering unterstützt, aber viele erweiterte Szenarien werden noch nicht unterstützt. Beispielsweise werden `<use>` Tags derzeit nicht beachtet, und `@bind` können nicht mit einigen SVG-Tags verwendet werden. Wir gehen davon aus, dass diese Einschränkungen in einer zukünftigen Version behandelt werden.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/blazor/server> &ndash; enthält Anleitungen zum Entwickeln von Blazor Server-apps, die sich mit der Ressourcenauslastung auseinandersetzen müssen.
