@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 61b50a63bd026f917035f64785d8d3b1956958a6
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1c7652c909432b25ae373873cd593afd879cfa00
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880963"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172561"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -41,7 +41,7 @@ Beispiel:
 
 Das zuvor erwähnte Taghilfsprogramm für Formulare generiert folgenden HTML-Code:
 
-```HTML
+```html
 <form method="post" action="/Demo/Register">
     <!-- Input and Submit elements -->
     <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>">
@@ -69,11 +69,11 @@ Viele der Ansichten im Ordner *Views/Account* (dieser wird generiert, wenn Sie e
 
 ## <a name="the-form-action-tag-helper"></a>Das Hilfsprogramm für Formularaktionen
 
-Das Hilfsprogramm für Formularaktionen generiert das `formaction`-Attribut auf dem generierten `<button ...>`- oder `<input type="image" ...>`-Tag. Das `formaction`-Attribut legt fest, wohin ein Formular seine Daten übermittelt. Es stellt eine Bindung mit den [\<Eingabe>](https://www.w3.org/wiki/HTML/Elements/input)-Elementen des Typs `image` und den [\<Schaltfläche>](https://www.w3.org/wiki/HTML/Elements/button)-Elementen her. Das Hilfsprogramm für Formularaktionen ermöglicht die Verwendung von mehreren [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)`asp-`-Attributen, die steuern, welcher `formaction`-Link für das entsprechende Element generiert wird.
+Das Hilfsprogramm für Formularaktionen generiert das `formaction`-Attribut auf dem generierten `<button ...>`- oder `<input type="image" ...>`-Tag. Das `formaction`-Attribut legt fest, wohin ein Formular seine Daten übermittelt. Es stellt eine Bindung mit den [\<Eingabe>](https://www.w3.org/wiki/HTML/Elements/input)-Elementen des Typs `image` und den [\<Schaltfläche>](https://www.w3.org/wiki/HTML/Elements/button)-Elementen her. Das Hilfsprogramm für Formularaktionen ermöglicht die Verwendung von mehreren [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-`-Attributen, die steuern, welcher `formaction`-Link für das entsprechende Element generiert wird.
 
 Folgende [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)-Attribute werden zum Steuern des Werts von `formaction` unterstützt:
 
-|Attribut|BESCHREIBUNG|
+|Attribut|Beschreibung|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|Der Name des Controllers.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|Der Name der Aktionsmethode.|
@@ -165,7 +165,7 @@ Das Taghilfsprogramm für die Eingabe bindet ein HTML-Element [\<input>](https:/
 
 Syntax:
 
-```HTML
+```cshtml
 <input asp-for="<Expression Name>">
 ```
 
@@ -183,7 +183,7 @@ Das Taghilfsprogramm für die Eingabe:
 
 * Stellt die starke Typisierung bereit Wenn der Name der Eigenschaft geändert wird und Sie das Taghilfsprogramm nicht aktualisieren, wird Ihnen eine Fehlermeldung ähnlich der Folgenden angezeigt:
 
-```HTML
+```
 An error occurred during the compilation of a resource required to process
 this request. Please review the following specific error details and modify
 your source code appropriately.
@@ -225,7 +225,7 @@ Beispiel:
 
 Der oben stehende Code generiert folgenden HTML-Code:
 
-```HTML
+```html
   <form method="post" action="/Demo/RegisterInput">
       Email:
       <input type="email" data-val="true"
@@ -251,7 +251,7 @@ Die Datenanmerkungen, die auf die `Email`- und `Password`-Eigenschaft angewendet
 
 `@Html.Editor()` und `@Html.EditorFor()` verwenden einen speziellen `ViewDataDictionary`-Eintrag namens `htmlAttributes`, wenn die Standardvorlagen ausgeführt werden. Dieses Verhalten kann optional mithilfe des `additionalViewData`-Parameters erweitert werden. Der Schlüssel „htmlAttributes“ berücksichtigt die Groß-/Kleinschreibung nicht. Der Schlüssel „htmlAttributes“ wird ähnlich wie das `htmlAttributes`-Objekt behandelt, das an Hilfsprogramme für die Eingabe wie `@Html.TextBox()` übergeben wird.
 
-```HTML
+```cshtml
 @Html.EditorFor(model => model.YourProperty, 
   new { htmlAttributes = new { @class="myCssClass", style="Width:100px" } })
 ```
@@ -260,16 +260,17 @@ Die Datenanmerkungen, die auf die `Email`- und `Password`-Eigenschaft angewendet
 
 Der `asp-for`-Attributwert stellt eine `ModelExpression`-Klasse sowie die rechte Seite eines Lambdaausdrucks dar. Somit wird `asp-for="Property1"` im generierten Code zu `m => m.Property1`. Dadurch benötigen Sie das Präfix `Model` nicht. Sie können das \@-Zeichen verwenden, um einen Inlineausdruck zu starten und diesen vor `m.` zu verschieben:
 
-```HTML
+```cshtml
 @{
-       var joe = "Joe";
-   }
-   <input asp-for="@joe">
+  var joe = "Joe";
+}
+
+<input asp-for="@joe">
 ```
 
 Folgendes wird generiert:
 
-```HTML
+```html
 <input type="text" id="joe" name="joe" value="Joe">
 ```
 
@@ -294,7 +295,7 @@ In der Ansicht wird eine Bindung an `Address.AddressLine1` erstellt:
 
 Folgender HTML-Code wird für `Address.AddressLine1` generiert:
 
-```HTML
+```html
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="">
 ```
 
@@ -308,10 +309,10 @@ Die Aktionsmethode:
 
 ```csharp
 public IActionResult Edit(int id, int colorIndex)
-   {
-       ViewData["Index"] = colorIndex;
-       return View(GetPerson(id));
-   }
+{
+    ViewData["Index"] = colorIndex;
+    return View(GetPerson(id));
+}
 ```
 
 Die folgende Razor-Syntax veranschaulicht den Zugriff auf ein bestimmtes `Color`-Element:
@@ -359,7 +360,7 @@ Beispiel:
 
 Folgender HTML-Code wird generiert:
 
-```HTML
+```html
 <form method="post" action="/Demo/RegisterTextArea">
   <textarea data-val="true"
    data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
@@ -395,7 +396,7 @@ Beispiel:
 
 Folgender HTML-Code wird für das `<label>`-Element generiert:
 
-```HTML
+```html
 <label for="Email">Email Address</label>
 ```
 
@@ -415,13 +416,13 @@ Es gibt zwei Taghilfsprogramme für die Validierung. `Validation Message Tag Hel
 
 `Validation Message Tag Helper` wird mit dem `asp-validation-for`-Attribut eines [span](https://developer.mozilla.org/docs/Web/HTML/Element/span)-HTML-Elements verwendet.
 
-```HTML
+```cshtml
 <span asp-validation-for="Email"></span>
 ```
 
 Das Taghilfsprogramm für Validierungsmeldungen generiert folgenden HTML-Code:
 
-```HTML
+```html
 <span class="field-validation-valid"
   data-valmsg-for="Email"
   data-valmsg-replace="true"></span>
@@ -434,7 +435,7 @@ Im Allgemeinen verwenden Sie `Validation Message Tag Helper` nach einem `Input`-
 
 Wenn ein serverseitiger Validierungsfehler auftritt (wenn Sie z.B. eine benutzerdefinierte serverseitige Validierung durchführen oder die clientseitige Validierung deaktiviert ist), legt MVC diese Fehlermeldung als Text des `<span>`-Elements fest.
 
-```HTML
+```html
 <span class="field-validation-error" data-valmsg-for="Email"
             data-valmsg-replace="true">
    The Email Address field is required.
@@ -465,7 +466,7 @@ Im folgenden Beispiel enthält das Datenmodell `DataAnnotation`-Attribute, wodur
 
 Der generierte HTML-Code (wenn das Modell gültig ist):
 
-```HTML
+```html
 <form action="/DemoReg/Register" method="post">
   <div class="validation-summary-valid" data-valmsg-summary="true">
   <ul><li style="display:none"></li></ul></div>
@@ -490,7 +491,7 @@ Der generierte HTML-Code (wenn das Modell gültig ist):
 
 * Verfügt über die alternativen HTML-Hilfsprogramme `Html.DropDownListFor` und `Html.ListBoxFor`
 
-Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Beispiel:
+Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Zum Beispiel:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -551,7 +552,7 @@ Sie können die Enumeratorliste mit dem `Display`-Attribut markieren, um eine um
 
 Folgender HTML-Code wird generiert:
 
-```HTML
+```html
   <form method="post" action="/Home/IndexEnum">
          <select data-val="true" data-val-required="The EnumCountry field is required."
                  id="EnumCountry" name="EnumCountry">
@@ -581,7 +582,7 @@ Die beiden Gruppen werden im Folgenden dargestellt:
 
 Der generierte HTML-Code:
 
-```HTML
+```html
  <form method="post" action="/Home/IndexGroup">
       <select id="Country" name="Country">
           <optgroup label="North America">
@@ -612,7 +613,7 @@ Mit folgender Ansicht
 
 wird der folgende HTML-Code generiert:
 
-```HTML
+```html
 <form method="post" action="/Home/IndexMultiSelect">
     <select id="CountryCodes"
     multiple="multiple"
@@ -648,7 +649,7 @@ Das richtige `<option>`-Element (enthält das `selected="selected"`-Attribut) wi
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=114-119)]
 
-```HTML
+```html
  <form method="post" action="/Home/IndexEmpty">
       <select id="Country" name="Country">
           <option value="">&lt;none&gt;</option>

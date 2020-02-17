@@ -297,18 +297,20 @@
           uid: blazor/components
         - name: Lebenszyklus
           uid: blazor/lifecycle
-        - name: Formulare und Überprüfung
-          uid: blazor/forms-validation
-        - name: Komponentenbibliotheken
-          uid: blazor/class-libraries
         - name: Layouts
           uid: blazor/layouts
+        - name: Formulare und Überprüfung
+          uid: blazor/forms-validation
         - name: Dependency Injection
           uid: blazor/dependency-injection
         - name: Routing
           uid: blazor/routing
         - name: JavaScript-Interoperabilität
           uid: blazor/javascript-interop
+        - name: Hostingmodellkonfiguration
+          uid: blazor/hosting-model-configuration
+        - name: Komponentenbibliotheken
+          uid: blazor/class-libraries
         - name: Sicherheit und Identität
           items:
             - name: Übersicht

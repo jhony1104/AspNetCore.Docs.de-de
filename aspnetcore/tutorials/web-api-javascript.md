@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/26/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 5a31aa2974eb41938db89f97c070c352a26290fd
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 2a19a7d16ca8b8f5d6ac8eb99ad919b89f1e368b
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681174"
+ms.lasthandoff: 02/10/2020
+ms.locfileid: "77114652"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript
 
@@ -27,7 +27,7 @@ Informationen zur Verwendung von ASP.NET Core 2.2 finden Sie im Artikel [Aufruf
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * Sie haben [Tutorial: Erstellen einer Web-API](xref:tutorials/first-web-api) abgeschlossen.
 * Sie sind mit CSS, HTML und JavaScript vertraut.
@@ -36,7 +36,7 @@ Informationen zur Verwendung von ASP.NET Core 2.2 finden Sie im Artikel [Aufruf
 
 In diesem Abschnitt fügen Sie eine HTML-Seite hinzu, die Formulare zum Erstellen und Verwalten von To-Do-Elementen enthält. An die Elemente auf der Seite sind Ereignishandler angefügt. Die Ereignishandler führen zu HTTP-Anforderungen an die Aktionsmethoden der Web-API. Die Funktion `fetch` der Fetch-API initiiert jede HTTP-Anforderung.
 
-Die Funktion `fetch` gibt ein `Promise`-Objekt zurück, das eine HTTP-Antwort in Form eines `Response`-Objekts enthält. Ein gängiges Muster besteht darin, den JSON-Antworttext durch Aufrufen der `json`-Funktion im `Response`-Objekt zu extrahieren. JavaScript aktualisiert die Seite mit den Details aus der Antwort der Web-API.
+Die Funktion `fetch` gibt ein [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)-Objekt zurück, das eine HTTP-Antwort in Form eines `Response`-Objekts enthält. Ein gängiges Muster besteht darin, den JSON-Antworttext durch Aufrufen der `json`-Funktion im `Response`-Objekt zu extrahieren. JavaScript aktualisiert die Seite mit den Details aus der Antwort der Web-API.
 
 Ein sehr einfacher `fetch`-Aufruf akzeptiert einen einzelnen Parameter, der die Route darstellt. Ein zweiter Parameter, der als `init`-Objekt bezeichnet wird, ist optional. `init` wird zum Konfigurieren der HTTP-Anforderung verwendet.
 

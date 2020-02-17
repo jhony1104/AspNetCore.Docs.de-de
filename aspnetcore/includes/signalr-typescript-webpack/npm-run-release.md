@@ -2,7 +2,7 @@
 npm run release
 ```
 
-Dieser Befehl hält die clientseitigen Objekte an, die bereitgestellt werden, wenn die App ausgeführt wird. Die Objekte werden im Ordner *wwwroot* gespeichert.
+Dieser Befehl generiert die clientseitigen Objekte an, die bereitgestellt werden, wenn die App ausgeführt wird. Die Objekte werden im Ordner *wwwroot* gespeichert.
 
 Webpack hat die folgenden Aufgaben durchgeführt:
 

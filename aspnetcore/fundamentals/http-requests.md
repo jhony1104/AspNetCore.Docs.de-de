@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über die Verwendung der IHttpClientFactory-Schni
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/16/2019
+ms.date: 02/09/2020
 uid: fundamentals/http-requests
-ms.openlocfilehash: 9b9da82191a587be0603ee114562e9a964f05250
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: 93b75525e8a3f10c4e0b655baaff83c0f6e8131b
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870397"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171808"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
 
@@ -109,7 +109,12 @@ Der folgende Code ruft <xref:Microsoft.Extensions.DependencyInjection.HttpClient
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet3)]
 
-Der typisierte Client wird mit DI als „vorübergehend“ registriert. Der typisierte Client kann direkt eingefügt und verwendet werden:
+Der typisierte Client wird mit DI als „vorübergehend“ registriert. Im vorherigen Code registriert `AddHttpClient` `GitHubService` als vorübergehenden Dienst. Diese Registrierung verwendet eine Factorymethode für folgende Aktionen:
+
+1. Erstellen Sie eine Instanz von `HttpClient`:
+1. Erstellen einer `GitHubService`-Instanz, wobei die Instanz von `HttpClient` an ihren Konstrukt übergeben wird
+
+Der typisierte Client kann direkt eingefügt und verwendet werden:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
@@ -364,7 +369,7 @@ Für die Headerweitergabe wird eine ASP.NET Core-Middleware verwendet, um HTTP-H
 
 * Der Client schließt die konfigurierten Header für ausgehende Anforderungen ein:
 
-  ```C#
+  ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
   var response = client.GetAsync(...);
   ```
@@ -991,7 +996,7 @@ Für die Headerweitergabe wird eine von der Community unterstützte Middleware v
 
 * Der Client schließt die konfigurierten Header für ausgehende Anforderungen ein:
 
-  ```C#
+  ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
   var response = client.GetAsync(...);
   ```

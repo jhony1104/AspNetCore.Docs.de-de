@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie eine Web-API aus einer Blazor-App mithilfe vo
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/22/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 66605f38a6fcaedebc92b0946dca1e5f28b593c6
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 345fb6962e3376c22551eb7914c70c89cb7100d5
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160066"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213274"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Ruft eine Web-API aus ASP.net Core Blazor
 
@@ -23,9 +23,9 @@ Von [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) -apps Web-APIs mithilfe eines vorkonfigurierten `HttpClient` Diensts aufruft. Verfassen von Anforderungen, die JavaScript-Abruf- [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) -Optionen enthalten können, unter Verwendung Blazor JSON-Hilfsprogramme oder mit <xref:System.Net.Http.HttpRequestMessage>.
+[Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) -apps Web-APIs mithilfe eines vorkonfigurierten `HttpClient` Diensts aufruft. Verfassen von Anforderungen, die JavaScript-Abruf- [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) -Optionen enthalten können, unter Verwendung Blazor JSON-Hilfsprogramme oder mit <xref:System.Net.Http.HttpRequestMessage>. Der `HttpClient` Dienst in Blazor Webassembly-apps konzentriert sich darauf, Anforderungen an den Ursprungsserver zurückzustellen. Die Anleitung in diesem Thema bezieht sich nur auf Blazor Webassembly-apps.
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) -apps Web-APIs mithilfe <xref:System.Net.Http.HttpClient> Instanzen, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory>erstellt werden. Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
+[Blazor Server](xref:blazor/hosting-models#blazor-server) -apps Web-APIs über <xref:System.Net.Http.HttpClient> Instanzen aufruft, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory>erstellt werden. Die Anleitungen in diesem Thema beziehen sich nicht auf Blazor Server-apps. Wenn Sie Blazor Server-apps entwickeln, befolgen Sie die Anweisungen in <xref:fundamentals/http-requests>.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([herunterladen](xref:index#how-to-download-a-sample)) &ndash; wählen Sie die APP *blazorwebassemblysample* aus.
 
@@ -36,7 +36,7 @@ Weitere Informationen finden Sie in der Beispiel-app " *blazorwebassemblysample*
 
 ## <a name="packages"></a>Pakete
 
-Verweisen Sie auf die *experimentelle* [Microsoft. aspnetcore.Blazor. HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) -nuget-Paket in der Projektdatei. `Microsoft.AspNetCore.Blazor.HttpClient` basiert auf `HttpClient` und [System. Text. JSON](https://www.nuget.org/packages/System.Text.Json/).
+Verweisen Sie auf die *experimentelle* [Microsoft.aspnetcore.Blazor.HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) -nuget-Paket in der Projektdatei. `Microsoft.AspNetCore.Blazor.HttpClient` basiert auf `HttpClient` und [System. Text. JSON](https://www.nuget.org/packages/System.Text.Json/).
 
 Verwenden Sie zum Verwenden einer stabilen API das [Microsoft. Aspnet. WebAPI. Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) -Paket, das " [newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/)/[JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)verwendet. Die Verwendung der stabilen API in `Microsoft.AspNet.WebApi.Client` bietet keine der in diesem Thema beschriebenen JSON-Hilfsprogramme, die für das experimentelle `Microsoft.AspNetCore.Blazor.HttpClient` Paket eindeutig sind.
 
@@ -223,7 +223,7 @@ app.UseCors(policy =>
 
 Weitere Informationen finden Sie unter <xref:security/cors> und der Komponente "http-Anforderungs Tester" der Beispiel-app (*Components/httprequesttester. Razor*).
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
