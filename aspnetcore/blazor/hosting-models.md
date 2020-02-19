@@ -5,17 +5,17 @@ description: Verstehen Blazor Webassembly-und Blazor Server-Hostingmodellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/31/2020
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 2314ba39e67fbf734807b96de6c54bc94283a67d
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
+ms.openlocfilehash: 54be0e032a60c69880f428e52f9d778032385dc5
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213313"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447047"
 ---
 # <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.net Core Blazor Hostingmodellen
 
@@ -121,7 +121,7 @@ Eine Blazor Server-App basiert auf [ASP.net Core SignalR](xref:signalr/introduct
 
 Jeder Browser Bildschirm (Browser Registerkarte oder IFRAME), der mit einer Blazor Server-App verbunden ist, verwendet eine SignalR Verbindung. Dies ist jedoch ein weiterer wichtiger Unterschied im Vergleich zu typischen, von Servern gerenderten apps. In einer Server gerenderten APP wird das Öffnen derselben app in mehreren Browser Bildschirmen in der Regel nicht zu zusätzlichen Ressourcenanforderungen auf dem Server übertragen. In einer Blazor Server-App erfordert jeder Browser Bildschirm eine separate Verbindung und separate Instanzen des Komponenten Zustands, die vom Server verwaltet werden.
 
-Blazor das Schließen einer Browser Registerkarte oder navigieren zu einer externen URL zu einer Ordnungs *gemäßen Beendigung.* Im Fall einer ordnungsgemäßen Beendigung werden die Verbindung und zugehörige Ressourcen sofort freigegeben. Ein Client kann möglicherweise auch nicht ordnungsgemäß getrennt werden, beispielsweise aufgrund einer Netzwerk Unterbrechung. Blazor Server speichert getrennte Verbindungen für ein konfigurierbares Intervall, damit der Client die Verbindung wiederherstellen kann. Weitere Informationen finden Sie unter [Wiederherstellen der Verbindung mit dem gleichen Server](xref:blazor/hosting-model-configuration#reconnection-to-the-same-server).
+Blazor das Schließen einer Browser Registerkarte oder navigieren zu einer externen URL zu einer Ordnungs *gemäßen Beendigung.* Im Fall einer ordnungsgemäßen Beendigung werden die Verbindung und zugehörige Ressourcen sofort freigegeben. Ein Client kann möglicherweise auch nicht ordnungsgemäß getrennt werden, beispielsweise aufgrund einer Netzwerk Unterbrechung. Blazor Server speichert getrennte Verbindungen für ein konfigurierbares Intervall, damit der Client die Verbindung wiederherstellen kann.
 
 ### <a name="ui-latency"></a>UI-Latenz
 

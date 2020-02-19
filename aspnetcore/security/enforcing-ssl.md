@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 9efd49bb246a10c4eb49fb1bb0374ae9442d55a1
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 43f3abfa4bc311ed246f6f2585d522661e492039
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172625"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447151"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -150,7 +150,7 @@ Wenn Anforderungen in einer Reverseproxykonfiguration weitergeleitet werden, ver
 
 Wenn Sie Azure App Service bereitstellen, befolgen Sie die Anweisungen im [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 Der folgende markierte Code ruft [addhttpsredirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) auf, um Middleware-Optionen zu konfigurieren:
 
@@ -259,7 +259,7 @@ ASP.net Core 2,1 und höher implementiert hsts mit der `UseHsts`-Erweiterungsmet
 
 `UseHsts` wird in der Entwicklung nicht empfohlen, da die hsts-Einstellungen durch Browser stark zwischen speicherbar sind. Standardmäßig schließt `UseHsts` die lokale Loopback Adresse aus.
 
-Legen Sie für Produktionsumgebungen, die HTTPS zum ersten Mal implementieren, die anfängliche [hstsoptions. MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) -Einstellung auf einen kleinen Wert fest, indem Sie eine der <xref:System.TimeSpan> Methoden verwenden. Legen Sie den Wert von Stunden auf nicht mehr als einen Tag fest, falls Sie die HTTPS-Infrastruktur auf http zurücksetzen müssen. Nachdem Sie sicher sind, dass die HTTPS-Konfiguration in der Lage ist, erhöhen Sie den Wert für hsts max-age. ein häufig verwendeter Wert ist ein Jahr.
+Legen Sie für Produktionsumgebungen, die HTTPS zum ersten Mal implementieren, die anfängliche [hstsoptions. MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) -Einstellung auf einen kleinen Wert fest, indem Sie eine der <xref:System.TimeSpan> Methoden verwenden. Legen Sie den Wert von Stunden auf nicht mehr als einen Tag fest, falls Sie die HTTPS-Infrastruktur auf http zurücksetzen müssen. Nachdem Sie sicher sind, dass die Konfiguration der HTTPS-Konfiguration von der HTTPS-Konfiguration überzeugt ist, erhöhen Sie den hsts-`max-age` ein häufig verwendeter Wert ist ein Jahr.
 
 Der folgende Code:
 
@@ -277,9 +277,9 @@ Der folgende Code:
 ::: moniker-end
 
 
-* Legt den vorab laden-Parameter des Strict-Transport-Security-Headers fest. Vorab laden ist nicht Teil der [RFC hsts-Spezifikation](https://tools.ietf.org/html/rfc6797), wird aber von Webbrowsern unterstützt, um hsts-Websites bei einer Neuinstallation vorab zu laden. Weitere Informationen finden Sie unter [https://hstspreload.org/](https://hstspreload.org/).
+* Legt den vorab laden-Parameter des `Strict-Transport-Security`-Headers fest. Vorab laden ist nicht Teil der [RFC hsts-Spezifikation](https://tools.ietf.org/html/rfc6797), wird aber von Webbrowsern unterstützt, um hsts-Websites bei einer Neuinstallation vorab zu laden. Weitere Informationen finden Sie unter [https://hstspreload.org/](https://hstspreload.org/).
 * Aktiviert [includesubdomain](https://tools.ietf.org/html/rfc6797#section-6.1.2), die die hsts-Richtlinie auf Host Unterdomänen anwendet.
-* Legt den max-age-Parameter des Strict-Transport-Security-Headers explizit auf 60 Tage fest. Wenn nicht festgelegt, wird standardmäßig 30 Tage verwendet. Weitere Informationen finden Sie in der [max-age-Direktive](https://tools.ietf.org/html/rfc6797#section-6.1.1) .
+* Legt den `max-age`-Parameter des `Strict-Transport-Security`-Headers explizit auf 60 Tage fest. Wenn nicht festgelegt, wird standardmäßig 30 Tage verwendet. Weitere Informationen finden Sie in der [max-age-Direktive](https://tools.ietf.org/html/rfc6797#section-6.1.1).
 * Fügt der Liste der auszuschließenden Hosts `example.com` hinzu.
 
 `UseHsts` schließt die folgenden Loopback Hosts aus:
@@ -294,7 +294,7 @@ In einigen Back-End-Dienst Szenarios, in denen die Verbindungssicherheit an der 
 
 So beenden Sie HTTPS/hsts:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Deaktivieren Sie das Kontrollkästchen **für HTTPS konfigurieren** .
 
@@ -311,7 +311,7 @@ Deaktivieren Sie das Kontrollkästchen **für HTTPS konfigurieren** .
 ::: moniker-end
 
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli) 
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli) 
 
 Verwenden Sie die `--no-https`-Option. Beispiel:
 
@@ -325,7 +325,7 @@ dotnet new webapp --no-https
 
 ## <a name="trust-the-aspnet-core-https-development-certificate-on-windows-and-macos"></a>Vertrauen des ASP.net Core HTTPS-Entwicklungs Zertifikats unter Windows und macOS
 
-Die .net Core SDK enthält ein HTTPS-Entwicklungs Zertifikat. Das Zertifikat wird im Rahmen der erstmaligen Durchführung installiert. Beispielsweise erzeugt `dotnet --info` eine Ausgabe ähnlich der folgenden:
+Die .net Core SDK enthält ein HTTPS-Entwicklungs Zertifikat. Das Zertifikat wird im Rahmen der erstmaligen Durchführung installiert. `dotnet --info` erzeugt z. b. eine Variation der folgenden Ausgabe:
 
 ```
 ASP.NET Core
@@ -404,7 +404,7 @@ Schließen Sie alle geöffneten Browser Instanzen. Öffnen Sie ein neues Browser
 * Öffnen Sie den Keychain-Zugriff.
 * Wählen Sie die System Schlüsselkette aus.
 * Überprüfen Sie, ob ein localhost-Zertifikat vorhanden ist.
-* Überprüfen Sie, ob es ein `+` Symbol auf dem Symbol enthält, um dessen vertrauenswürdig für alle Benutzer anzugeben.
+* Überprüfen Sie, ob es ein `+` Symbol auf dem Symbol enthält, um anzugeben, dass es für alle Benutzer vertrauenswürdig ist.
 * Entfernen Sie das Zertifikat aus der Keychain des Systems.
 * Führen Sie die folgenden Befehle aus:
 

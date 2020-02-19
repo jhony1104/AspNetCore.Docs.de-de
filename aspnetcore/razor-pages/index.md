@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: Erfahren Sie, wie Razor Pages in ASP.NET Core codierungsseitige Szenarios einfacher und produktiver gestalten als MVC.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
-ms.date: 01/28/2020
+ms.date: 02/12/2020
 uid: razor-pages/index
-ms.openlocfilehash: 402e11d653cf0e7433c63844cb7e2802abc61679
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 30e2cde03236bae4c3ca06a91c56586d8c9f2bff
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172610"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447450"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Einführung in Razor Pages in ASP.NET Core
 
@@ -27,15 +27,15 @@ Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -45,15 +45,15 @@ Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um
 
 ## <a name="create-a-razor-pages-project"></a>Erstellen eines Razor Pages-Projekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Ausführliche Informationen zum Erstellen eines Razor Pages-Projekts finden Sie unter [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start).
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Führen Sie `dotnet new webapp` über die Befehlszeile aus.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Führen Sie `dotnet new webapp` über die Befehlszeile aus.
 
@@ -603,7 +603,7 @@ Fügen Sie <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBu
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:test/razor-pages-tests>
 * <xref:mvc/views/partial>
-* [Integrieren von Komponenten in Razor Pages und MVC-Apps](xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps)
+* <xref:blazor/integrate-components>
 
 ::: moniker-end
 
@@ -619,15 +619,15 @@ Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
@@ -637,17 +637,17 @@ Dieses Dokument bietet eine Einführung in Razor Pages. Es handelt sich nicht um
 
 ## <a name="create-a-razor-pages-project"></a>Erstellen eines Razor Pages-Projekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Ausführliche Informationen zum Erstellen eines Razor Pages-Projekts finden Sie unter [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start).
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Führen Sie `dotnet new webapp` über die Befehlszeile aus.
 
 Öffnen Sie die generierte Datei *.csproj* aus Visual Studio für Mac.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Führen Sie `dotnet new webapp` über die Befehlszeile aus.
 

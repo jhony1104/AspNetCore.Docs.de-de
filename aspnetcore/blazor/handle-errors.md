@@ -5,17 +5,17 @@ description: Erfahren Sie, wie ASP.net Core Blazor, wie nicht behandelte Ausnahm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/22/2020
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: b987513e5410e95ab632b9935d858b648838d94f
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: 7191ae50d64ebd6a9b23b391116aedf3a6d01de2
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928272"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447021"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Behandeln von Fehlern in ASP.net Core Blazor-apps
 
@@ -180,7 +180,7 @@ Weitere Informationen zur Komponenten Beseitigung finden Sie unter <xref:blazor/
 Die folgenden Bedingungen gelten für die Fehlerbehandlung mit `InvokeAsync<T>`:
 
 * Wenn bei einem Rückruf von `InvokeAsync<T>` synchron ein Fehler auftritt, wird eine .NET-Ausnahme ausgelöst. Ein-`InvokeAsync<T>` kann beispielsweise fehlschlagen, da die bereitgestellten Argumente nicht serialisiert werden können. Der Entwickler Code muss die Ausnahme abfangen. Wenn der app-Code in einem Ereignishandler oder einer Komponenten Lebenszyklus-Methode keine Ausnahme behandelt, ist die resultierende Ausnahme eine Blazor Server Verbindung schwerwiegend.
-* Wenn ein-`InvokeAsync<T>` asynchron fehlschlägt, kann die .net-<xref:System.Threading.Tasks.Task> nicht ausgeführt werden. Ein-`InvokeAsync<T>` kann beispielsweise fehlschlagen, weil der JavaScript-seitige Code eine Ausnahme auslöst oder eine `Promise` zurückgibt, die als `rejected`abgeschlossen wurde. Der Entwickler Code muss die Ausnahme abfangen. Wenn Sie den [await](/dotnet/csharp/language-reference/keywords/await)-Operator verwenden, umschließen Sie den Methodenaufruf am besten in einer [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung mit der Fehlerbehandlung und der Protokollierung. Andernfalls führt der fehlgeschlagene Code zu einer nicht behandelten Ausnahme, die für eine Blazor Server Verbindung schwerwiegend ist.
+* Wenn ein-`InvokeAsync<T>` asynchron fehlschlägt, kann die .net-<xref:System.Threading.Tasks.Task> nicht ausgeführt werden. Ein-`InvokeAsync<T>` kann beispielsweise fehlschlagen, weil der JavaScript-seitige Code eine Ausnahme auslöst oder eine `Promise` zurückgibt, die als `rejected`abgeschlossen wurde. Der Entwickler Code muss die Ausnahme abfangen. Wenn Sie den [Erwartungs Operator verwenden](/dotnet/csharp/language-reference/keywords/await) , sollten Sie den Methoden aufrufin eine [try-catch-](/dotnet/csharp/language-reference/keywords/try-catch) Anweisung mit Fehlerbehandlung und Protokollierung umhüllen. Andernfalls führt der fehlgeschlagene Code zu einer nicht behandelten Ausnahme, die für eine Blazor Server Verbindung schwerwiegend ist.
 * Standardmäßig müssen Aufrufe von `InvokeAsync<T>` innerhalb eines bestimmten Zeitraums ausgeführt werden, oder für den Aufruf wird ein Timeout festgestellt. Der Standard Timeout Zeitraum beträgt eine Minute. Das Timeout schützt den Code vor einem Verlust in Netzwerk Konnektivität oder JavaScript-Code, der niemals eine Abschluss Nachricht zurücksendet. Wenn für den-Rückruf ein Timeout auftritt, tritt bei der resultierenden `Task` ein <xref:System.OperationCanceledException>auf. Trap und verarbeitet die Ausnahme mit der Protokollierung.
 
 Ebenso kann JavaScript-Code Aufrufe von .NET-Methoden initiieren, die durch das [`[JSInvokable]`](xref:blazor/javascript-interop#invoke-net-methods-from-javascript-functions) -Attribut angegeben werden. Wenn diese .NET-Methoden eine nicht behandelte Ausnahme auslösen:
@@ -285,7 +285,7 @@ Um unendliche Rekursions Muster zu vermeiden, stellen Sie sicher, dass der rekur
 
 ### <a name="custom-render-tree-logic"></a>Benutzerdefinierte renderstrukturlogik
 
-Die meisten Blazor Komponenten werden als *Razor* -Dateien implementiert und kompiliert, um Logik zu erzeugen, die auf einer `RenderTreeBuilder` zum Renderingausgabe funktioniert. Ein Entwickler kann `RenderTreeBuilder` Logik mithilfe von prozeduralem C# Code manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/components#manual-rendertreebuilder-logic>.
+Die meisten Blazor Komponenten werden als *Razor* -Dateien implementiert und kompiliert, um Logik zu erzeugen, die auf einer `RenderTreeBuilder` zum Renderingausgabe funktioniert. Ein Entwickler kann `RenderTreeBuilder` Logik mithilfe von prozeduralem C# Code manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
 > Die Verwendung der Logik des manuellen renderbaum-Generators wird als erweitertes und unsichere Szenario angesehen und wird für die allgemeine Komponentenentwicklung nicht empfohlen.

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
 uid: security/authentication/certauth
-ms.openlocfilehash: 9c175439c0313d62c75898f1af097774b06f353a
-ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
+ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75608144"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447281"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
@@ -218,9 +218,9 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> Endpunkte, die durch <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> Aufrufen von erstellt wurden, **bevor** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> aufgerufen werden, werden nicht auf die Standardwerte angewendet
+> Auf Endpunkte, die durch Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **vor** dem Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> erstellt werden, werden die Standardwerte nicht angewendet.
 
-### <a name="iis"></a>IIS
+### <a name="iis"></a>IIS-
 
 Führen Sie im IIS-Manager die folgenden Schritte aus:
 
@@ -236,19 +236,26 @@ Informationen zum Konfigurieren der Middleware für die Zertifikat Weiterleitung
 
 ### <a name="use-certificate-authentication-in-azure-web-apps"></a>Verwenden der Zertifikat Authentifizierung in Azure-Web-Apps
 
+Für Azure ist keine Weiterleitungs Konfiguration erforderlich. Dies ist bereits in der Middleware für die Zertifikat Weiterleitung eingerichtet.
+
+> [!NOTE]
+> Hierfür ist es erforderlich, dass die certificateforwardingmiddleware vorhanden ist.
+
+### <a name="use-certificate-authentication-in-custom-web-proxies"></a>Verwenden der Zertifikat Authentifizierung in benutzerdefinierten Webproxys
+
 Die `AddCertificateForwarding`-Methode wird verwendet, um Folgendes anzugeben:
 
 * Der Name des Client Headers.
 * Wie das Zertifikat geladen werden soll (mit der `HeaderConverter`-Eigenschaft).
 
-In Azure-Web-Apps wird das Zertifikat als benutzerdefinierter Anforderungs Header mit dem Namen "`X-ARR-ClientCert`" übermittelt. Konfigurieren Sie die Zertifikat Weiterleitung in `Startup.ConfigureServices`, um Sie zu verwenden:
+In benutzerdefinierten Webproxys wird das Zertifikat als benutzerdefinierter Anforderungs Header, z. b. `X-SSL-CERT`, übermittelt. Konfigurieren Sie die Zertifikat Weiterleitung in `Startup.ConfigureServices`, um Sie zu verwenden:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddCertificateForwarding(options =>
     {
-        options.CertificateHeader = "X-ARR-ClientCert";
+        options.CertificateHeader = "X-SSL-CERT";
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
@@ -326,46 +333,80 @@ namespace AspNetCoreCertificateAuthApi
 }
 ```
 
-#### <a name="implement-an-httpclient-using-a-certificate"></a>Implementieren eines httpclient mithilfe eines Zertifikats
+#### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>Implementieren eines httpclient mit einem Zertifikat und httpclienthandler
 
-Der Web-API-Client verwendet eine `HttpClient`, die mithilfe einer `IHttpClientFactory` Instanz erstellt wurde. Dies bietet keine Möglichkeit, einen Handler für die `HttpClient`zu definieren. verwenden Sie daher eine `HttpRequestMessage`, um das Zertifikat dem `X-ARR-ClientCert`-Anforderungs Header hinzuzufügen. Das Zertifikat wird mithilfe der `GetRawCertDataString`-Methode als Zeichenfolge hinzugefügt. 
+Der httpclienthandler kann direkt im Konstruktor der HttpClient-Klasse hinzugefügt werden. Beim Erstellen von Instanzen von HttpClient sollten Sie sorgfältig vorgehen. Der httpclient sendet dann das Zertifikat mit jeder Anforderung.
 
 ```csharp
-private async Task<JsonDocument> GetApiDataAsync()
+private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 {
-    try
+    var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+    var handler = new HttpClientHandler();
+    handler.ClientCertificates.Add(cert);
+    var client = new HttpClient(handler);
+     
+    var request = new HttpRequestMessage()
     {
-        // Do not hardcode passwords in production code
-        // Use thumbprint or key vault
-        var cert = new X509Certificate2(
-            Path.Combine(_environment.ContentRootPath, 
-                "sts_dev_cert.pfx"), "1234");
-        var client = _clientFactory.CreateClient();
-        var request = new HttpRequestMessage()
-        {
-            RequestUri = new Uri("https://localhost:44379/api/values"),
-            Method = HttpMethod.Get,
-        };
-
-        request.Headers.Add("X-ARR-ClientCert", cert.GetRawCertDataString());
-        var response = await client.SendAsync(request);
-
-        if (response.IsSuccessStatusCode)
-        {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var data = JsonDocument.Parse(responseContent);
-
-            return data;
-        }
-
-        throw new ApplicationException(
-            $"Status code: {response.StatusCode}, " +
-            $"Error: {response.ReasonPhrase}");
-    }
-    catch (Exception e)
+        RequestUri = new Uri("https://localhost:44379/api/values"),
+        Method = HttpMethod.Get,
+    };
+    var response = await client.SendAsync(request);
+    if (response.IsSuccessStatusCode)
     {
-        throw new ApplicationException($"Exception {e}");
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var data = JsonDocument.Parse(responseContent);
+        return data;
     }
+ 
+    throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
+}
+```
+
+#### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>Implementieren Sie einen httpclient mithilfe eines Zertifikats und eines Namens httpclient aus ihttpclientfactory. 
+
+Im folgenden Beispiel wird ein Client Zertifikat zu einem httpclienthandler hinzugefügt. dazu wird die ClientCertificate-Eigenschaft des-Handlers verwendet. Dieser Handler kann dann in einer benannten Instanz eines httpclient mithilfe der Methode "konfigurtadmaryhttpmessagehandler" verwendet werden. Dies ist das Setup in der Startup-Klasse in der-Methode von "Konfigurations Dienst".
+
+```csharp
+var clientCertificate = 
+    new X509Certificate2(
+      Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+ 
+var handler = new HttpClientHandler();
+handler.ClientCertificates.Add(clientCertificate);
+ 
+services.AddHttpClient("namedClient", c =>
+{
+}).ConfigurePrimaryHttpMessageHandler(() => handler);
+```
+
+Die ihttpclientfactory kann dann verwendet werden, um die benannte Instanz mit dem Handler und dem Zertifikat zu erhalten. Die Methode "Methode" mit dem Namen des Clients, der in der Startup-Klasse definiert ist, wird verwendet, um die Instanz zu erhalten. Die HTTP-Anforderung kann bei Bedarf mithilfe des Clients gesendet werden.
+
+```csharp
+private readonly IHttpClientFactory _clientFactory;
+ 
+public ApiService(IHttpClientFactory clientFactory)
+{
+    _clientFactory = clientFactory;
+}
+ 
+private async Task<JsonDocument> GetApiDataWithNamedClient()
+{
+    var client = _clientFactory.CreateClient("namedClient");
+ 
+    var request = new HttpRequestMessage()
+    {
+        RequestUri = new Uri("https://localhost:44379/api/values"),
+        Method = HttpMethod.Get,
+    };
+    var response = await client.SendAsync(request);
+    if (response.IsSuccessStatusCode)
+    {
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var data = JsonDocument.Parse(responseContent);
+        return data;
+    }
+ 
+    throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
 }
 ```
 

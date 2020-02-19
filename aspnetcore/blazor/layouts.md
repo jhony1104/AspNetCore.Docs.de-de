@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 8e7294f6b66d34781473522a71f929ed5f9c33f2
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
+ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213375"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447138"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.net Core Blazor Layouts
 
@@ -23,7 +23,7 @@ Von [Rainer stropek](https://www.timecockpit.com) und [Luke Latham](https://gith
 
 Einige APP-Elemente, z. b. Menüs, Copyright Meldungen und Firmenlogos, sind in der Regel Teil des gesamten Layouts der APP und werden von jeder Komponente in der APP verwendet. Das Kopieren des Codes dieser Elemente in alle Komponenten einer APP ist keine effiziente Vorgehensweise&mdash;jedes Mal, wenn eines der Elemente ein Update erfordert, muss jede Komponente aktualisiert werden. Eine solche Duplizierung ist schwierig zu verwalten und kann zu inkonsistenten Inhalten im Laufe der Zeit führen. *Layouts* lösen dieses Problem.
 
-Technisch gesehen ist ein Layout nur eine andere Komponente. Ein Layout ist in einer Razor-Vorlage oder im C# Code definiert und kann [Datenbindung](xref:blazor/components#data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection)und andere Komponenten Szenarios verwenden.
+Technisch gesehen ist ein Layout nur eine andere Komponente. Ein Layout ist in einer Razor-Vorlage oder im C# Code definiert und kann [Datenbindung](xref:blazor/data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection)und andere Komponenten Szenarios verwenden.
 
 Um eine *Komponente* in ein *Layout*umzuwandeln, ist die Komponente:
 
@@ -94,8 +94,8 @@ Zum Schluss enthält `MasterLayout` in *Masterlayout. Razor* die Layoutelemente 
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Freigeben eines Razor Pages Layouts mit integrierten Komponenten
 
-Wenn Routing fähige Komponenten in eine Razor Pages-app integriert sind, kann das freigegebene Layout der APP mit den-Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps>.
+Wenn Routing fähige Komponenten in eine Razor Pages-app integriert sind, kann das freigegebene Layout der APP mit den-Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/integrate-components>.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * <xref:mvc/views/layout>

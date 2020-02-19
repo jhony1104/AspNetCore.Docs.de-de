@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie JavaScript-Funktionen aus .net-und .NET-Metho
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/javascript-interop
-ms.openlocfilehash: c4f2444b60fc2d3a8af893df379cf62636a7bdd5
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
+ms.openlocfilehash: d681eea5a5e876912bd614fba8ea45a464844496
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213362"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447164"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>ASP.net Core Blazor JavaScript-Interop
 
@@ -74,7 +74,7 @@ Um die `IJSRuntime` Abstraktion zu verwenden, übernehmen Sie einen der folgende
 
   [!code-html[](javascript-interop/samples_snapshot/index-script-handleTickerChanged2.html)]
 
-* Verwenden Sie für die Generierung dynamischer Inhalte mit [buildrendertree](xref:blazor/components#manual-rendertreebuilder-logic)das `[Inject]`-Attribut:
+* Verwenden Sie für die Generierung dynamischer Inhalte mit [buildrendertree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic)das `[Inject]`-Attribut:
 
   ```razor
   [Inject]
@@ -512,7 +512,9 @@ returnArrayAsyncJs: function () {
 
 Sie können auch .net-Instanzmethoden von JavaScript aus abrufen. So rufen Sie eine .net-Instanzmethode aus JavaScript auf:
 
-* Übergeben Sie die .net-Instanz an JavaScript, indem Sie Sie in einer `DotNetObjectReference` Instanz Umpacken. Die .net-Instanz wird als Verweis an JavaScript übermittelt.
+* Übergeben Sie die .net-Instanz als Verweis an JavaScript:
+  * Erstellen Sie einen statischen Aufruf`DotNetObjectReference.Create`.
+  * Wrappen Sie die Instanz in einer `DotNetObjectReference` Instanz, und nennen Sie `Create` auf der `DotNetObjectReference` Instanz. Verwerfen von `DotNetObjectReference` Objekten (ein Beispiel wird später in diesem Abschnitt angezeigt).
 * Rufen Sie mithilfe der Funktionen `invokeMethod` oder `invokeMethodAsync` .net-Instanzmethoden für die-Instanz auf. Die .net-Instanz kann auch als Argument beim Aufrufen anderer .NET-Methoden aus JavaScript übermittelt werden.
 
 > [!NOTE]
@@ -556,6 +558,68 @@ Konsolenausgabe in den Webentwickler Tools des Browsers:
 
 ```console
 Hello, Blazor!
+```
+
+Löschen Sie das Objekt in der Klasse, die die `DotNetObjectReference` Instanz erstellt hat, um einen Speicherplatz zu vermeiden und Garbage Collection in einer Komponente zuzulassen, von der ein `DotNetObjectReference`erstellt wird:
+
+```csharp
+public class ExampleJsInterop : IDisposable
+{
+    private readonly IJSRuntime _jsRuntime;
+    private DotNetObjectReference<HelloHelper> _objRef;
+
+    public ExampleJsInterop(IJSRuntime jsRuntime)
+    {
+        _jsRuntime = jsRuntime;
+    }
+
+    public ValueTask<string> CallHelloHelperSayHello(string name)
+    {
+        _objRef = DotNetObjectReference.Create(new HelloHelper(name));
+
+        return _jsRuntime.InvokeAsync<string>(
+            "exampleJsFunctions.sayHello",
+            _objRef);
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+}
+```
+  
+Das vorangehende Muster, das in der `ExampleJsInterop`-Klasse dargestellt wird, kann auch in einer-Komponente implementiert werden:
+  
+```razor
+@page "/JSInteropComponent"
+@using BlazorSample.JsInteropClasses
+@implements IDisposable
+@inject IJSRuntime JSRuntime
+
+<h1>JavaScript Interop</h1>
+
+<button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
+    Trigger .NET instance method HelloHelper.SayHello
+</button>
+
+@code {
+    private DotNetObjectReference<HelloHelper> _objRef;
+
+    public async Task TriggerNetInstanceMethod()
+    {
+        _objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
+
+        await JSRuntime.InvokeAsync<string>(
+            "exampleJsFunctions.sayHello",
+            _objRef);
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+}
 ```
 
 ## <a name="share-interop-code-in-a-class-library"></a>Freigeben von Interop-Code in einer Klassenbibliothek
@@ -866,6 +930,6 @@ async function base64EncodeAsync(chunk) {
 }
 ```
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Interopcomponent. Razor-Beispiel (dotnet/aspnetcore-GitHub-Repository, 3,1-releasebranch)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
