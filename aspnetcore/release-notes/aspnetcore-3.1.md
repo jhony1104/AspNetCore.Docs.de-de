@@ -4,17 +4,17 @@ author: rick-anderson
 description: Informationen zu den neuen Features in ASP.NET Core 3.1.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 06c1d2596bff34bbfe3b55e782ea2d24321dd839
-ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
+ms.openlocfilehash: f375022ad3ebdea2990f626320ef295926f88c22
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75722751"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447437"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Neuerungen in ASP.NET Core 3.1
 
@@ -43,7 +43,7 @@ So können Sie eine `Counter`-Komponente beispielsweise mit einem Inkrement vora
     param-IncrementAmount="10" />
 ```
 
-Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Seiten und MVC-Apps](xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps).
+Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Seiten und MVC-Apps](xref:blazor/integrate-components).
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Unterstützung für freigegebene Warteschlangen in HTTP.sys
 
@@ -63,7 +63,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:preventDefault`, um die Standar
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-Weitere Informationen finden Sie unter [Verhindern von Standardaktionen](xref:blazor/components#prevent-default-actions).
+Weitere Informationen finden Sie unter [Verhindern von Standardaktionen](xref:blazor/event-handling#prevent-default-actions).
 
 ## <a name="stop-event-propagation-in-opno-locblazor-apps"></a>Beenden der Ereignisweitergabe in Blazor-Apps
 
@@ -83,7 +83,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:stopPropagation`, um die Ereign
 }
 ```
 
-Weitere Informationen finden Sie unter [Beenden der Ereignisweitergabe](xref:blazor/components#stop-event-propagation).
+Weitere Informationen finden Sie unter [Beenden der Ereignisweitergabe](xref:blazor/event-handling#stop-event-propagation).
 
 ## <a name="detailed-errors-during-opno-locblazor-app-development"></a>Ausführliche Fehler bei der Entwicklung von Blazor-Apps
 

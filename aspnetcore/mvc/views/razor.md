@@ -3,14 +3,14 @@ title: Razor-Syntaxreferenz für ASP.NET Core
 author: rick-anderson
 description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 02/12/2020
 uid: mvc/views/razor
-ms.openlocfilehash: 2d47fbc33328ab454616bcabab796df089686d79
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 0b1eed2816329d62fca4bdb5719825a4197af353
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171859"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447177"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -719,13 +719,13 @@ Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hin
 
 *Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
 
-Die Datenbindung in-Komponenten wird mit dem `@bind`-Attribut erreicht. Weitere Informationen finden Sie unter <xref:blazor/components#data-binding>.
+Die Datenbindung in-Komponenten wird mit dem `@bind`-Attribut erreicht. Weitere Informationen finden Sie unter <xref:blazor/data-binding>.
 
 ### <a name="onevent"></a>\@on{EVENT}
 
 *Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
 
-Razor stellt Ereignisbehandlungsfunktionen für Komponenten bereit. Weitere Informationen finden Sie unter <xref:blazor/components#event-handling>.
+Razor stellt Ereignisbehandlungsfunktionen für Komponenten bereit. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
 
 ::: moniker-end
 
@@ -763,7 +763,7 @@ Komponentenverweise (`@ref`) bieten eine Möglichkeit, auf eine Komponenteninsta
 
 *Dieses Szenario gilt nur für Razor-Komponenten (.razor).*
 
-Die `@typeparam`-Anweisung deklariert einen generischen Typparameter für die generierte Komponentenklasse. Weitere Informationen finden Sie unter <xref:blazor/components#generic-typed-components>.
+Die `@typeparam`-Anweisung deklariert einen generischen Typparameter für die generierte Komponentenklasse. Weitere Informationen finden Sie unter <xref:blazor/templated-components#generic-typed-components>.
 
 ::: moniker-end
 

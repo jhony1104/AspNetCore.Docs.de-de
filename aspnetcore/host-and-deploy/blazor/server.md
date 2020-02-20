@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie eine Blazor Server-App mit ASP.NET Core hoste
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/17/2020
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: e8b3a7faaf1dc88059a79abbc7e74657ebb2068c
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: a051d51e734fec4315da73d3c4df57706df7f363
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726727"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77465822"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Hosten und Bereitstellen von Blazor Server
 
@@ -59,7 +59,7 @@ Blazor funktioniert am besten, wenn WebSockets aufgrund geringerer Latenz und we
 
 Sie sollten [Azure SignalR Service](/azure/azure-signalr) für Blazor Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Außerdem tragen die globale Reichweite und die Hochleistungsrechenzentren von SignalR Service erheblich zur Verringerung der geografiebedingten Latenz bei. So konfigurieren Sie eine App (und stellen optional Azure SignalR Service bereit)
 
-1. Aktivieren Sie die Unterstützung von *persistenten Sitzungen* des Diensts, damit Clients [beim Vorabrendering an denselben Server umgeleitet werden](xref:blazor/hosting-models#reconnection-to-the-same-server). Legen Sie die `ServerStickyMode`-Option oder den Konfigurationswert auf `Required` fest. In der Regel erstellt eine App die Konfiguration mithilfe von **einem** der folgenden Ansätze:
+1. Aktivieren Sie die Unterstützung von *persistenten Sitzungen* des Diensts, damit Clients [beim Vorabrendering an denselben Server umgeleitet werden](xref:blazor/hosting-models#connection-to-the-server). Legen Sie die `ServerStickyMode`-Option oder den Konfigurationswert auf `Required` fest. In der Regel erstellt eine App die Konfiguration mithilfe von **einem** der folgenden Ansätze:
 
    * `Startup.ConfigureServices`:
   
