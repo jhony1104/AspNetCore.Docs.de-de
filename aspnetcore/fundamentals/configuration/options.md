@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie Optionsmuster verwenden, um Gruppen von zusam
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/07/2019
+ms.date: 02/12/2020
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 98fe30fbc424dd51ce8f8319b7ce959fd755c480
-ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
+ms.openlocfilehash: 1f3625380d816c7d4df5a7a24b0ac146500330de
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75722738"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447204"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
 
@@ -326,10 +326,10 @@ catch (OptionsValidationException e)
 
 Im vorherigen Beispiel wurde die benannte Optionsinstanz auf `optionalOptionsName` festgelegt. Die Standardoptionsinstanz ist `Options.DefaultName`.
 
-Überprüfungen werden ausgeführt, wenn die Optionsinstanz erstellt wird. Ihre Optionsinstanz besteht die Überprüfung beim ersten Zugriff garantiert.
+Überprüfungen werden ausgeführt, wenn die Optionsinstanz erstellt wird. Eine Optionsinstanz besteht die Überprüfung beim ersten Zugriff garantiert.
 
 > [!IMPORTANT]
-> Die Überprüfung von Optionen schützt nicht davor, dass Optionen nach der ersten Konfiguration und Überprüfung geändert werden.
+> Die Überprüfung von Optionen schützt nicht vor Änderungen an Optionen nach der Erstellung der Optionsinstanz. Beispielsweise werden `IOptionsSnapshot`-Optionen einmal pro Anforderung erstellt und überprüft, wenn zum ersten Mal auf die Optionen zugegriffen wird. Die `IOptionsSnapshot`-Optionen werden bei nachfolgenden Zugriffsversuchen *für dieselbe Anforderung* nicht erneut überprüft.
 
 Die `Validate`-Methode akzeptiert ein `Func<TOptions, bool>`-Element. Um die Überprüfung vollständig anzupassen, implementieren Sie `IValidateOptions<TOptions>`. Dies ermöglicht Folgendes:
 
@@ -750,10 +750,10 @@ catch (OptionsValidationException e)
 
 Im vorherigen Beispiel wurde die benannte Optionsinstanz auf `optionalOptionsName` festgelegt. Die Standardoptionsinstanz ist `Options.DefaultName`.
 
-Überprüfungen werden ausgeführt, wenn die Optionsinstanz erstellt wird. Ihre Optionsinstanz besteht die Überprüfung beim ersten Zugriff garantiert.
+Überprüfungen werden ausgeführt, wenn die Optionsinstanz erstellt wird. Eine Optionsinstanz besteht die Überprüfung beim ersten Zugriff garantiert.
 
 > [!IMPORTANT]
-> Die Überprüfung von Optionen schützt nicht davor, dass Optionen nach der ersten Konfiguration und Überprüfung geändert werden.
+> Die Überprüfung von Optionen schützt nicht vor Änderungen an Optionen nach der Erstellung der Optionsinstanz. Beispielsweise werden `IOptionsSnapshot`-Optionen einmal pro Anforderung erstellt und überprüft, wenn zum ersten Mal auf die Optionen zugegriffen wird. Die `IOptionsSnapshot`-Optionen werden bei nachfolgenden Zugriffsversuchen *für dieselbe Anforderung* nicht erneut überprüft.
 
 Die `Validate`-Methode akzeptiert ein `Func<TOptions, bool>`-Element. Um die Überprüfung vollständig anzupassen, implementieren Sie `IValidateOptions<TOptions>`. Dies ermöglicht Folgendes:
 

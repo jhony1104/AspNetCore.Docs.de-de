@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 01e507326ddd57057aa178ad3909fd4027a013fd
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 1a9d83be9180b1d32ab941932eb3cab8612dff01
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259376"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213401"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
 
@@ -19,19 +19,19 @@ Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitt
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dies ist das erste von vielen Tutorials, die zeigen, wie Entity Framework (EF) Core in einer [ASP.NET Core Razor Pages](xref:razor-pages/index)-App verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten.
+Dies ist das erste von vielen Tutorials, die zeigen, wie Entity Framework (EF) Core in einer [ASP.NET Core Razor Pages](xref:razor-pages/index)-App verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten. In diesem Tutorial wird der Code-First-Ansatz verwendet. Informationen zum Durcharbeiten dieses Tutorials mit dem Database-First-Ansatz finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/16897).
 
 [Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * Wenn Sie noch nicht mit Razor Pages vertraut sind, arbeiten Sie zuerst die Tutorialserie [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) durch, bevor Sie mit diesem Tutorial beginnen.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
 
@@ -61,7 +61,7 @@ Der Benutzeroberflächenstil dieser Website basiert auf den integrierten Projekt
 
 Folgen Sie dem Link am oberen Rand der Seite, um den Quellcode für das vollständige Projekt abzurufen. Der Ordner *cu30* enthält den Code für die ASP.NET Core 3.0-Version des Tutorials. Dateien, die den Status des Codes für die Tutorials 1 bis 7 widerspiegeln, finden Sie im Ordner *cu30snapshots*.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
@@ -75,7 +75,7 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
 * Führen Sie das Projekt aus, um das Seeding der Datenbank auszuführen.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
@@ -103,14 +103,14 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
 ## <a name="create-the-web-app-project"></a>Erstellen des Web-App-Projekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus.
+* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie **ASP.NET Core-Webanwendung** aus.
 * Geben Sie dem Projekt den Namen *ContosoUniversity*. Es ist wichtig, genau diesen Namen unter Beachtung von Groß-/Kleinschreibung zu verwenden, sodass die Namespaces beim Kopieren und Einfügen von Code übereinstimmen.
 * Wählen Sie in den Dropdownlisten **.NET Core** und **ASP.NET Core 3.0** und anschließend **Webanwendung** aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Navigieren Sie in einem Terminal zu dem Ordner, in dem der Projektordner erstellt werden soll.
 
@@ -206,11 +206,11 @@ In diesem Abschnitt verwenden Sie das ASP.Net Core-Gerüstbautool, um Folgendes 
 * Eine EF Core *context*-Klasse. „context“ ist die Hauptklasse, die die Entity Framework-Funktionen für ein angegebenes Datenmodell koordiniert. Diese Klasse wird von der `Microsoft.EntityFrameworkCore.DbContext`-Klasse abgeleitet.
 * Razor Pages, die Vorgänge zum Erstellen (Create), Lesen (Read), Aktualisieren (Update) und Löschen (Delete) (CRUD) für die `Student`-Entität verarbeiten.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Erstellen Sie einen Ordner *Students* im Ordner *Pages*.
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf den Ordner *Pages/Students*, und wählen Sie **Hinzufügen** > **Neues Gerüstelement** aus.
-* Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **HINZUFÜGEN** aus.
+* Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **Hinzufügen** aus.
 * Gehen Sie im Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen** folgendermaßen vor:
   * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
   * Wählen Sie in der Zeile **Datenkontextklasse** das **+** -Zeichen (Pluszeichen) aus.
@@ -224,7 +224,7 @@ Die folgenden Pakete werden automatisch installiert:
 * `Microsoft.Extensions.Logging.Debug`
 * `Microsoft.EntityFrameworkCore.Tools`
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Führen Sie die folgenden Befehle der .NET Core-CLI aus, um erforderliche NuGet-Pakete zu installieren:
 <!-- TO DO  After testing, Replace with
@@ -282,7 +282,7 @@ Der Gerüstbauprozess:
 
 ## <a name="database-connection-string"></a>Datenbankverbindungszeichenfolge
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Die Verbindungszeichenfolge gibt [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) an. 
 
@@ -290,7 +290,7 @@ Die Verbindungszeichenfolge gibt [SQL Server LocalDB](/sql/database-engine/confi
 
 LocalDB ist eine Basisversion der SQL Server Express-Datenbank-Engine, die zwar für die Anwendungsentwicklung, aber nicht für den Produktionseinsatz bestimmt ist. Standardmäßig erstellt LocalDB *MDF*-Dateien im Verzeichnis `C:/Users/<user>`.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Ändern Sie die Verbindungszeichenfolge, um auf eine SQLite-Datenbankdatei namens *CU.db* zu verweisen:
 
@@ -323,13 +323,13 @@ ASP.NET Core wird mit [Dependency Injection](xref:fundamentals/dependency-inject
 
 Das Gerüstbautool hat die context-Klasse automatisch beim Dependency Injection-Container registriert.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * In `ConfigureServices` wurden die hervorgehobenen Zeilen vom Gerüstbau hinzugefügt:
 
   [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Stellen Sie in `ConfigureServices` sicher, dass der durch den Gerüstbau hinzugefügte Code `UseSqlite` aufruft.
 
@@ -377,9 +377,9 @@ Erstellen Sie *Data/DbInitializer.cs* mit dem folgenden Code:
   ```csharp
   // context.Database.EnsureCreated();
   DbInitializer.Initialize(context);
-  ````
+  ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Beenden Sie die App, falls sie gerade ausgeführt wird, und führen Sie den folgenden Befehl in der **Paket-Manager-Konsole** (Package Manager Console, PMC) aus:
 
@@ -387,7 +387,7 @@ Beenden Sie die App, falls sie gerade ausgeführt wird, und führen Sie den folg
 Drop-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Beenden Sie die App, wenn Sie ausgeführt wird, und löschen Sie die Datei *CU.db*.
 
@@ -399,7 +399,7 @@ Drop-Database
 
 ## <a name="view-the-database"></a>Zeigen Sie die Datenbank an
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Öffnen Sie über das Menü **Ansicht** im Visual Studio **SQL Server-Objekt-Explorer** (SSOX).
 * Wählen Sie in SSOX **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}** aus. Der Datenbankname wird anhand des Kontextnamens, den Sie zuvor angegeben haben, plus Bindestrich und GUID generiert.
@@ -407,7 +407,7 @@ Drop-Database
 * Klicken Sie mit der rechten Maustaste auf die Tabelle **Student**, und klicken Sie auf **Daten anzeigen**, um die erstellten Spalten und die in die Tabelle eingefügten Zeilen aufzurufen.
 * Klicken Sie mit der rechten Maustaste auf die Tabelle **Student**, und klicken Sie auf **Code anzeigen**, um die Zuordnung des `Student`-Modells zum `Student`-Tabellenschema anzuzeigen.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Verwenden Sie das SQLite-Tool, um das Datenbankschema und die Daten anzuzeigen, mit denen das Seeding ausgeführt wurde. Die Datenbankdatei trägt den Namen *CU.db* und befindet sich im Projektordner.
 
@@ -460,13 +460,13 @@ Bei der Beispiel-App handelt es sich um eine Website für die fiktive Contoso Un
 
 [Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE [](~/includes/2.1-SDK.md)]
 
@@ -492,16 +492,16 @@ Der Benutzeroberflächenstil dieser Website ähnelt den durch die integrierten V
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Erstellen der Razor Pages-Web-App „ContosoUniversity“
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus.
+* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
 * Erstellen Sie eine neue ASP.NET Core-Webanwendung. Geben Sie dem Projekt den Namen **ContosoUniversity**. Es ist wichtig, dass Sie dem Projekt *ContosoUniversity* zu nennen, sodass die Namespaces übereinstimmen, wenn der Code kopiert und eingefügt wird.
 * Wählen Sie in der Dropdownliste **ASP.NET Core 2.1** und anschließend **Webanwendung** aus.
 
 Bilder zu den vorherigen Schritten finden Sie unter [Erstellen einer Razor-Web-App](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
 Führen Sie die App aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet new webapp -o ContosoUniversity
@@ -588,10 +588,10 @@ In diesem Abschnitt wird das Gerüst für das Studentenmodell erstellt. Mit dem 
 * Erstellen Sie das Projekt.
 * Erstellen Sie den Ordner *Pages/Students*.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf den Ordner *Pages/Students*, und wählen Sie **Hinzufügen** > **Neues Gerüstelement** aus.
-* Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **HINZUFÜGEN** aus.
+* Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **Hinzufügen** aus.
 
 Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen**:
 
@@ -604,7 +604,7 @@ Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) h
 
 Wenn Sie Probleme mit dem vorherigen Schritt haben, finden Sie weitere Informationen unter [Erstellen des Gerüsts für das Filmmodell](xref:tutorials/razor-pages/model#scaffold-the-movie-model).
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Führen Sie folgende Befehle aus, um das Gerüst für das Studentenmodell zu erstellen.
 
@@ -707,7 +707,7 @@ Die `EnsureCreated`-Methode erstellt automatisch die Datenbank für den Datenban
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Beenden Sie die App, falls sie gerade ausgeführt wird, und führen Sie den folgenden Befehl in der **Paket-Manager-Konsole** (Package Manager Console, PMC) aus:
 
@@ -715,7 +715,7 @@ Beenden Sie die App, falls sie gerade ausgeführt wird, und führen Sie den folg
 Drop-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Beenden Sie die App, wenn Sie ausgeführt wird, und löschen Sie die Datei *CU.db*.
 

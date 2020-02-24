@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 1244b2e23a842538ff2fca01a513317a690afe7c
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 411c0874d2b2c6ecadd1da9aff7a093f1e8e525a
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034030"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213427"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Datenmodell (5 von 8)
 
@@ -59,7 +59,7 @@ Bei `FullName` handelt es sich um eine berechnete Eigenschaft, die einen Wert zu
 
 Für die Anmeldedaten von Studenten zeigen alle Webseiten derzeit die Zeit und das Datum an, obwohl nur das Datum relevant ist. Indem Sie Attribute für die Datenanmerkung verwenden, können Sie eine Codeänderungen vornehmen, durch die das Anzeigeformat auf jeder Seite korrigiert wird, in der die Daten angezeigt werden. 
 
-Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Beispiel:
+Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Zum Beispiel:
 
 * Der Link `mailto:` wird automatisch für `DataType.EmailAddress` erstellt.
 * Die Datumsauswahl für `DataType.Date` wird in den meisten Browsern bereitgestellt.
@@ -99,7 +99,7 @@ Das `StringLength`-Attribut verhindert nicht, dass ein Benutzer einen Leerraum a
 [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Öffnen Sie im **SQL Server-Objekt-Explorer** (SSOX) den Tabellen-Designer „Student“, indem Sie auf die Tabelle **Student** doppelklicken.
 
@@ -107,7 +107,7 @@ Das `StringLength`-Attribut verhindert nicht, dass ein Benutzer einen Leerraum a
 
 In der vorangehenden Abbildung wird das Schema der `Student`-Tabelle dargestellt. Die Namensfelder weisen den Typ `nvarchar(MAX)` auf. Wenn eine Migration später in diesem Tutorial erstellt und angewendet wird, werden die Namensfelder `nvarchar(50)` als Ergebnis der Attribute für die Zeichenfolgenlänge.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Überprüfen Sie in Ihrem SQLite-Tool die Spaltendefinitionen für die `Student`-Tabelle. Die Namensfelder weisen den Typ `Text` auf. Beachten Sie, dass das Feld für den Vornamen den Namen `FirstMidName` trägt. Im nächsten Abschnitt ändern Sie den Namen dieser Spalte in `FirstName`.
 
@@ -157,7 +157,7 @@ Das `Display`-Attribut gibt an, dass die Beschriftung der Textfelder „First Na
 
 Führen Sie die Anwendung aus. Wechseln Sie zur Studentenseite. Es wird eine Ausnahme ausgelöst. Das `[Column]`-Attribut bewirkt, dass EF eine Spalte mit dem Namen `FirstName` erwartet, aber der Spaltenname in der Datenbank ist weiterhin `FirstMidName`.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Die Fehlermeldung lautet ungefähr wie im folgenden Beispiel:
 
@@ -187,7 +187,7 @@ SqlException: Invalid column name 'FirstName'.
 
   Bevor die Migration angewendet wurde, wiesen die Namensspalten den Typ [nvarchar(MAX)](/sql/t-sql/data-types/nchar-and-nvarchar-transact-sql) auf. Die Namensspalten weisen nun den Typ `nvarchar(50)` auf. Der Spaltenname wurde von `FirstMidName` in `FirstName` geändert.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Die Fehlermeldung lautet ungefähr wie im folgenden Beispiel:
 
@@ -301,7 +301,7 @@ Aktualisieren Sie *Models/Course.cs* mit folgendem Code:
 
 Die `Course`-Entität besitzt die Fremdschlüsseleigenschaft `DepartmentID`. `DepartmentID` zeigt auf die verknüpfte `Department`-Entität. Die `Course`-Entität besitzt eine `Department`-Navigationseigenschaft.
 
-Entity Framework Core erfordert keine Fremdschlüsseleigenschaft für ein Datenmodell, wenn das Modell über eine Navigationseigenschaft für eine verknüpfte Entität verfügt. Entity Framework Core erstellt an den erforderlichen Stellen automatisch Fremdschlüssel in der Datenbank. Entity Framework Core erstellt [Schatteneigenschaften](/ef/core/modeling/shadow-properties) für automatisch erstellte Fremdschlüssel. Durch explizites Einschließen des Fremdschlüssels in das Datenmodell können Updates jedoch einfacher und effizienter durchgeführt werden. Betrachten Sie beispielsweise ein Modell, bei dem die Fremdschlüsseleigenschaft `DepartmentID` *nicht* enthalten ist. Folgendes wird durchgeführt, wenn eine Course-Entität zum Bearbeiten abgerufen wird:
+Entity Framework Core erfordert keine Fremdschlüsseleigenschaft für ein Datenmodell, wenn das Modell über eine Navigationseigenschaft für eine verknüpfte Entität verfügt. Entity Framework Core erstellt an den erforderlichen Stellen automatisch Fremdschlüssel in der Datenbank. Entity Framework Core erstellt [Schatteneigenschaften](/ef/core/modeling/shadow-properties) für automatisch erstellte Fremdschlüssel. Durch explizites Einschließen des Fremdschlüssels in das Datenmodell können Updates jedoch einfacher und effizienter durchgeführt werden. Betrachten Sie beispielsweise ein Modell, bei dem die Fremdschlüsseleigenschaft `DepartmentID`*nicht* enthalten ist. Folgendes wird durchgeführt, wenn eine Course-Entität zum Bearbeiten abgerufen wird:
 
 * Die `Department`-Eigenschaft ist NULL, wenn diese nicht explizit geladen wird.
 * Die `Department`-Entität muss abgerufen werden, um die Course-Entität zu aktualisieren.
@@ -457,7 +457,7 @@ Die m:n-Beziehung zwischen „Instructor“ und „Courses“ erfordert eine Joi
 
 Es ist üblich, eine Joinentität `EntityName1EntityName2` zu benennen. Der Name der Jointabelle für „Instructor“ und „Courses“ würde mithilfe dieses Musters beispielsweise `CourseInstructor` lauten. Es wird jedoch empfohlen, einen Namen zu verwenden, der die Beziehung beschreibt.
 
-Datenmodelle fangen einfach an und werden dann größer. Jointabellen ohne Nutzlast (PJTs) entwickeln sich häufig so, dass sie eine Nutzlast beinhalten. Wenn Sie mit einem aussagekräftigen Entitätsnamen beginnen, muss dieser nicht geändert werden, wenn die Jointabelle sich verändert. Im Idealfall verfügt die Joinentität über einen eigenen, nachvollziehbaren Namen (der möglicherweise aus nur einem Wort besteht) in der Geschäftsdomäne. „Books“ und „Customers“ könnten beispielsweise über eine Joinentität namens „Ratings“ verknüpft werden. Bei der m:n-Beziehung zwischen „Instructor“ und „Course“ ist `CourseAssignment` `CourseInstructor` vorzuziehen.
+Datenmodelle fangen einfach an und werden dann größer. Jointabellen ohne Nutzlast (PJTs) entwickeln sich häufig so, dass sie eine Nutzlast beinhalten. Wenn Sie mit einem aussagekräftigen Entitätsnamen beginnen, muss dieser nicht geändert werden, wenn die Jointabelle sich verändert. Im Idealfall verfügt die Joinentität über einen eigenen, nachvollziehbaren Namen (der möglicherweise aus nur einem Wort besteht) in der Geschäftsdomäne. „Books“ und „Customers“ könnten beispielsweise über eine Joinentität namens „Ratings“ verknüpft werden. Bei der m:n-Beziehung zwischen „Instructor“ und „Course“ ist `CourseAssignment``CourseInstructor` vorzuziehen.
 
 ### <a name="composite-key"></a>Zusammengesetzte Schlüssel
 
@@ -536,7 +536,7 @@ Der vorangehende Code stellt Startwertdaten für die neuen Entitäten bereit. Du
 
 Erstellen Sie das Projekt.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Führen Sie in der PMC den folgenden Befehl aus.
 
@@ -561,7 +561,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 
 Im nächsten Abschnitt erfahren Sie, wie dieser Fehler zu behandeln ist.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Wenn Sie eine Migration hinzufügen und den `database update`-Befehl ausführen, wird der folgende Fehler generiert:
 
@@ -591,7 +591,7 @@ Beide Optionen funktionieren für SQL Server. Obwohl die apply-migration-Methode
 
 Löschen und aktualisieren Sie die Datenbank, um EF Core zum Erstellen einer neuen Datenbank zu zwingen:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Führen Sie folgenden Befehl in der **Paket-Manager-Konsole** aus:
 
@@ -606,7 +606,7 @@ Löschen und aktualisieren Sie die Datenbank, um EF Core zum Erstellen einer neu
   Update-Database
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie ein Befehlsfenster, und navigieren Sie zu dem Projektordner. Der Projektordner enthält die Datei *ContosoUniversity.csproj*.
 
@@ -627,7 +627,7 @@ Löschen und aktualisieren Sie die Datenbank, um EF Core zum Erstellen einer neu
 
 Führen Sie die App aus. Durch das Ausführen der App wird die `DbInitializer.Initialize`-Methode ausgeführt. Die `DbInitializer.Initialize`-Methode füllt die neue Datenbank mit Daten auf.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Öffnen Sie die Datenbank in SSOX:
 
@@ -643,7 +643,7 @@ Führen Sie die App aus. Durch das Ausführen der App wird die `DbInitializer.In
 
   ![CourseAssignment-Daten im SSOX](complex-data-model/_static/ssox-ci-data.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Verwenden Sie das SQLite-Tool, um die Datenbank zu untersuchen:
 
@@ -691,7 +691,7 @@ Die Vorgehensweise zum Behandeln der hier gezeigten Situation wurde für dieses 
 * Code oder Skripts einfügen, um `Department`-Zeilen und verknüpfte `Course`-Zeilen zu den neuen `Department`-Zeilen hinzuzufügen
 * Den Fachbereich „Temp“ nicht als Standardwert für `Course.DepartmentID` verwenden
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Führen Sie folgenden Befehl in der **Paket-Manager-Konsole** aus:
 
@@ -701,7 +701,7 @@ Die Vorgehensweise zum Behandeln der hier gezeigten Situation wurde für dieses 
 
 Da die `DbInitializer.Initialize`-Methode nur für die Verwendung mit einer leeren Datenbank konzipiert ist, löschen Sie mithilfe von SSOX alle Zeilen in den Tabellen „Student“ und „Course“. (Der kaskadierende Löschvorgang übernimmt die Tabelle „Enrollment“.)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Wenn Sie SQL Server LocalDB mit Visual Studio Code verwenden, führen Sie den folgenden Befehl aus:
 
@@ -749,7 +749,7 @@ Aktualisieren Sie *Models/Student.cs* mit folgendem hervorgehobenen Code:
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Beispiel:
+Das [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1)-Attribut gibt einen Datentyp an, der spezifischer als der datenbankinterne Typ ist. In diesem Fall sollte nur das Datum angezeigt werden, nicht das Datum und die Uhrzeit. Die [DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)-Enumeration stellt viele Datentypen bereit, wie z.B. „Date“, „Time“, „PhoneNumber“, „Currency“, „EmailAddress“. Das `DataType`-Attribut kann der App auch das Bereitstellen typspezifischer Features ermöglichen. Zum Beispiel:
 
 * Der Link `mailto:` wird automatisch für `DataType.EmailAddress` erstellt.
 * Die Datumsauswahl für `DataType.Date` wird in den meisten Browsern bereitgestellt.
@@ -821,7 +821,7 @@ Durch die zuvor vorgenommene Änderung wird `Student.FirstMidName` in der App de
 
 Durch das Hinzufügen des `Column`-Attributs wird das Modell geändert, das `SchoolContext` unterstützt. Das Modell, das `SchoolContext` unterstützt, stimmt nicht mehr mit der Datenbank überein. Wenn die App ausgeführt wird, bevor Migrationen angewendet werden, wird folgende Ausnahme generiert:
 
-```SQL
+```
 SqlException: Invalid column name 'FirstName'.
 ```
 
@@ -830,14 +830,14 @@ So aktualisieren Sie die Datenbank:
 * Erstellen Sie das Projekt.
 * Öffnen Sie ein Befehlsfenster im Projektordner. Geben Sie folgende Befehle ein, um eine neue Migration zu erstellen und die Datenbank zu aktualisieren:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-```PMC
+```powershell
 Add-Migration ColumnFirstName
 Update-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations add ColumnFirstName
@@ -998,7 +998,7 @@ Die `Course`-Entität besitzt die Fremdschlüsseleigenschaft `DepartmentID`. `De
 
 Entity Framework Core erfordert keine Fremdschlüsseleigenschaft für ein Datenmodell, wenn das Modell über eine Navigationseigenschaft für eine verknüpfte Entität verfügt.
 
-Entity Framework Core erstellt an den erforderlichen Stellen automatisch Fremdschlüssel in der Datenbank. Entity Framework Core erstellt [Schatteneigenschaften](/ef/core/modeling/shadow-properties) für automatisch erstellte Fremdschlüssel. Durch Fremdschlüssel im Datenmodell können Updates einfacher und effizienter durchgeführt werden. Betrachten Sie beispielsweise ein Modell, bei dem die Fremdschlüsseleigenschaft `DepartmentID` *nicht* enthalten ist. Folgendes wird durchgeführt, wenn eine Course-Entität zum Bearbeiten abgerufen wird:
+Entity Framework Core erstellt an den erforderlichen Stellen automatisch Fremdschlüssel in der Datenbank. Entity Framework Core erstellt [Schatteneigenschaften](/ef/core/modeling/shadow-properties) für automatisch erstellte Fremdschlüssel. Durch Fremdschlüssel im Datenmodell können Updates einfacher und effizienter durchgeführt werden. Betrachten Sie beispielsweise ein Modell, bei dem die Fremdschlüsseleigenschaft `DepartmentID`*nicht* enthalten ist. Folgendes wird durchgeführt, wenn eine Course-Entität zum Bearbeiten abgerufen wird:
 
 * Die `Department`-Entität ist NULL, wenn diese nicht explizit geladen wird.
 * Die `Department`-Entität muss abgerufen werden, um die Course-Entität zu aktualisieren.
@@ -1165,7 +1165,7 @@ Folgendes gilt für die m:n-Beziehung zwischen „Instructor“ und „Course“
 
 Es ist üblich, eine Joinentität `EntityName1EntityName2` zu benennen. Der Name der Jointabelle für „Instructor“ und „Course“ lautet mithilfe dieses Musters beispielsweise `CourseInstructor`. Es wird jedoch empfohlen, einen Namen zu verwenden, der die Beziehung beschreibt.
 
-Datenmodelle fangen einfach an und werden dann größer. Währenddessen erhalten Joins ohne Nutzlast häufig Nutzlasten. Wenn Sie mit einem aussagekräftigen Entitätsnamen beginnen, muss dieser nicht geändert werden, wenn die Jointabelle sich verändert. Im Idealfall verfügt die Joinentität über einen eigenen, nachvollziehbaren Namen (der möglicherweise aus nur einem Wort besteht) in der Geschäftsdomäne. „Books“ und „Customers“ könnten beispielsweise über eine Joinentität namens „Ratings“ verknüpft werden. Bei der m:n-Beziehung zwischen „Instructor“ und „Course“ ist `CourseAssignment` `CourseInstructor` vorzuziehen.
+Datenmodelle fangen einfach an und werden dann größer. Währenddessen erhalten Joins ohne Nutzlast häufig Nutzlasten. Wenn Sie mit einem aussagekräftigen Entitätsnamen beginnen, muss dieser nicht geändert werden, wenn die Jointabelle sich verändert. Im Idealfall verfügt die Joinentität über einen eigenen, nachvollziehbaren Namen (der möglicherweise aus nur einem Wort besteht) in der Geschäftsdomäne. „Books“ und „Customers“ könnten beispielsweise über eine Joinentität namens „Ratings“ verknüpft werden. Bei der m:n-Beziehung zwischen „Instructor“ und „Course“ ist `CourseAssignment``CourseInstructor` vorzuziehen.
 
 ### <a name="composite-key"></a>Zusammengesetzte Schlüssel
 
@@ -1244,13 +1244,13 @@ Der vorangehende Code stellt Startwertdaten für die neuen Entitäten bereit. Du
 
 Erstellen Sie das Projekt.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ComplexDataModel
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations add ComplexDataModel
@@ -1286,18 +1286,18 @@ Da Sie nun über eine Datenbank verfügen, müssen Sie überlegen, wie zukünfti
 
 Durch den Code in der aktualisierten `DbInitializer`-Klasse werden Startwertdaten für die neuen Entitäten hinzugefügt. Löschen und aktualisieren Sie die Datenbank, um EF Core zum Erstellen einer neuen Datenbank zu zwingen:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Führen Sie folgenden Befehl in der **Paket-Manager-Konsole** aus:
 
-```PMC
+```powershell
 Drop-Database
 Update-Database
 ```
 
 Führen Sie `Get-Help about_EntityFrameworkCore` über die Paket-Manager-Konsole aus, um Hilfeinformationen zu erhalten.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Öffnen Sie ein Befehlsfenster, und navigieren Sie zu dem Projektordner. Der Projektordner enthält die Datei *Startup.cs*.
 
@@ -1358,7 +1358,7 @@ Fügen Sie folgenden hervorgehobenen Code hinzu: Der neue Code folgt auf den Blo
 
 [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
-Durch die zuvor durchgeführten Änderungen sind die vorhandenen `Course`-Zeilen mit dem Fachbereich „Temp“ verknüpft, nachdem die Methode `ComplexDataModel` `Up` ausgeführt wurde.
+Aufgrund der zuvor durchgeführten Änderungen beziehen sich die vorhandenen `Course`-Zeilen auf den Fachbereich „Temp“, nachdem die Methode `ComplexDataModel` `Up` ausgeführt wurde.
 
 Ein Produktions-App würde:
 
