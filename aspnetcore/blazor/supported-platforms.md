@@ -17,7 +17,7 @@ ms.contentlocale: de-DE
 ms.lasthandoff: 01/17/2020
 ms.locfileid: "76160131"
 ---
-# <a name="aspnet-core-opno-locblazor-supported-platforms"></a>ASP.net Core Blazor unterstützten Plattformen
+# <a name="aspnet-core-opno-locblazor-supported-platforms"></a>ASP.net Core [!OP.NO-LOC(Blazor)] unterstützten Plattformen
 
 Von [Luke Latham](https://github.com/guardrex)
 
@@ -25,11 +25,11 @@ Von [Luke Latham](https://github.com/guardrex)
 
 ## <a name="browser-requirements"></a>Browseranforderungen
 
-### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+### <a name="opno-locblazor-webassembly"></a>[!OP.NO-LOC(Blazor)] WebAssembly
 
 | Browser                          | Version               |
 | -------------------------------- | :-------------------: |
-| Microsoft-Edge                   | Aktuell               |
+| Microsoft Edge                   | Aktuell               |
 | Mozilla Firefox                  | Aktuell               |
 | Google Chrome, einschließlich Android | Aktuell               |
 | Safari, einschließlich IOS            | Aktuell               |
@@ -37,11 +37,11 @@ Von [Luke Latham](https://github.com/guardrex)
 
 &dagger;Microsoft Internet Explorer unterstützt [Webassembly](https://webassembly.org)nicht.
 
-### <a name="opno-locblazor-server"></a>Blazor Server
+### <a name="opno-locblazor-server"></a>[!OP.NO-LOC(Blazor)] Server
 
 | Browser                          | Version    |
 | -------------------------------- | :--------: |
-| Microsoft-Edge                   | Aktuell    |
+| Microsoft Edge                   | Aktuell    |
 | Mozilla Firefox                  | Aktuell    |
 | Google Chrome, einschließlich Android | Aktuell    |
 | Safari, einschließlich IOS            | Aktuell    |

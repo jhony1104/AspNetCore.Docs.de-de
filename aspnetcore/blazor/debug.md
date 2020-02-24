@@ -17,13 +17,13 @@ ms.contentlocale: de-DE
 ms.lasthandoff: 01/17/2020
 ms.locfileid: "76159988"
 ---
-# <a name="debug-aspnet-core-opno-locblazor"></a>ASP.net Core Debuggen Blazor
+# <a name="debug-aspnet-core-opno-locblazor"></a>ASP.net Core Debuggen [!OP.NO-LOC(Blazor)]
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-*Frühe* Unterstützung für das Debuggen Blazor Webassembly mithilfe der Browser Entwicklertools in Chrom basierten Browsern (Chrome/Edge). Die Arbeit wird in folgenden Aufgaben ausgeführt:
+*Frühe* Unterstützung für das Debuggen [!OP.NO-LOC(Blazor)] Webassembly mithilfe der Browser Entwicklertools in Chrom basierten Browsern (Chrome/Microsoft Edge). Die Arbeit wird in folgenden Aufgaben ausgeführt:
 
 * Aktivieren Sie das Debuggen in Visual Studio vollständig.
 * Aktivieren Sie das Debugging in Visual Studio Code.
@@ -55,15 +55,15 @@ Das Debuggen erfordert einen der folgenden Browser:
 
 ## <a name="procedure"></a>-Prozedur
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 > [!WARNING]
 > Die Debugunterstützung in Visual Studio ist in einer frühen Phase der Entwicklung. **F5** -Debugging wird derzeit nicht unterstützt.
 
-1. Führen Sie eine Blazor Webassembly-app in `Debug` Konfiguration ohne Debuggen aus (**STRG**+**F5** anstelle von **F5**).
-1. Öffnen Sie die Debugeigenschaften der APP (Letzter Eintrag im Menü **Debuggen** ), und kopieren Sie die URL der HTTP- **App**. Navigieren Sie mit einem Chrom basierten Browser (Edge Beta oder Chrome) zur http-Adresse (nicht zur HTTPS-Adresse) der app.
+1. Führen Sie eine [!OP.NO-LOC(Blazor)] Webassembly-app in `Debug` Konfiguration ohne Debuggen aus (**STRG**+**F5** anstelle von **F5**).
+1. Öffnen Sie die Debugeigenschaften der APP (Letzter Eintrag im Menü **Debuggen** ), und kopieren Sie die URL der HTTP- **App**. Navigieren Sie mit einem Chrom basierten Browser (Microsoft Edge Beta oder Chrome) zur http-Adresse (nicht zur HTTPS-Adresse) der app.
 1. Platzieren Sie den Tastaturfokus in der APP im Browserfenster, nicht im Bereich Entwicklertools. Es ist am besten, den Entwicklertools-Panel für dieses Verfahren geschlossen zu halten. Nachdem das Debuggen gestartet wurde, können Sie den Bereich Entwicklertools erneut öffnen.
-1. Wählen Sie die folgende Blazorspezifische Tastenkombination aus:
+1. Wählen Sie die folgende [!OP.NO-LOC(Blazor)]spezifische Tastenkombination aus:
 
    * `Shift+Alt+D` unter Windows
    * `Shift+Cmd+D` unter macOS
@@ -76,18 +76,18 @@ Das Debuggen erfordert einen der folgenden Browser:
 
    2 \. Platzieren Sie den Tastaturfokus in der APP im Browserfenster.
 
-   3 \. Wählen Sie im neuen Browserfenster die Blazorspezifische Tastenkombination aus: `Shift+Alt+D` unter Windows oder `Shift+Cmd+D` unter macOS.
+   3 \. Wählen Sie im neuen Browserfenster die [!OP.NO-LOC(Blazor)]spezifische Tastenkombination aus: `Shift+Alt+D` unter Windows oder `Shift+Cmd+D` unter macOS.
 
    4 \. Die Registerkarte **devtools** wird im Browser geöffnet. **Wählen Sie die Registerkarte der APP im Browserfenster erneut aus.**
 
    Informationen zum Anfügen der APP an Visual Studio finden Sie [im Abschnitt Anfügen an den Prozess in Visual Studio](#attach-to-process-in-visual-studio) .
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-1. Führen Sie eine Blazor Webassembly-app in `Debug` Konfiguration aus, indem Sie die `--configuration Debug`-Option an den [dotnet Run](/dotnet/core/tools/dotnet-run) -Befehl übergeben: `dotnet run --configuration Debug`.
+1. Führen Sie eine [!OP.NO-LOC(Blazor)] Webassembly-app in `Debug` Konfiguration aus, indem Sie die `--configuration Debug`-Option an den [dotnet Run](/dotnet/core/tools/dotnet-run) -Befehl übergeben: `dotnet run --configuration Debug`.
 1. Navigieren Sie zu der APP unter der http-URL, die im Fenster der Shell angezeigt wird.
 1. Platzieren Sie den Tastaturfokus auf die APP, nicht auf den Bereich Entwicklertools. Es ist am besten, den Entwicklertools-Panel für dieses Verfahren geschlossen zu halten. Nachdem das Debuggen gestartet wurde, können Sie den Bereich Entwicklertools erneut öffnen.
-1. Wählen Sie die folgende Blazorspezifische Tastenkombination aus:
+1. Wählen Sie die folgende [!OP.NO-LOC(Blazor)]spezifische Tastenkombination aus:
 
    * `Shift+Alt+D` unter Windows
    * `Shift+Cmd+D` unter macOS
@@ -100,7 +100,7 @@ Das Debuggen erfordert einen der folgenden Browser:
 
    2 \. Platzieren Sie den Tastaturfokus in der APP im Browserfenster, nicht im Bereich Entwicklertools.
 
-   3 \. Wählen Sie im neuen Browserfenster die Blazorspezifische Tastenkombination aus: `Shift+Alt+D` unter Windows oder `Shift+Cmd+D` unter macOS.
+   3 \. Wählen Sie im neuen Browserfenster die [!OP.NO-LOC(Blazor)]spezifische Tastenkombination aus: `Shift+Alt+D` unter Windows oder `Shift+Cmd+D` unter macOS.
 
 ---
 
@@ -125,7 +125,7 @@ So fügen Sie den Prozess der laufenden app an Visual Studio an:
 1. Fügen Sie für das **Verbindungs Ziel**die http-Adresse (nicht die HTTPS-Adresse) der APP ein.
 1. Wählen Sie **Aktualisieren** aus, um die Einträge unter **Verfügbare Prozesse**zu aktualisieren.
 1. Wählen Sie den zu debuggenden Browser Prozess und dann **Anfügen**aus.
-1. Wählen Sie im Dialogfeld **Codetyp auswählen** den Codetyp für den jeweiligen Browser aus, an den Sie anhängen (Edge oder Chrome), und klicken Sie dann auf **OK**.
+1. Wählen Sie im Dialogfeld **Codetyp auswählen** den Codetyp für den jeweiligen Browser aus, an den Sie anhängen (Microsoft Edge oder Chrome), und klicken Sie dann auf **OK**.
 
 ## <a name="browser-source-maps"></a>Browser-Quell Zuordnungen
 

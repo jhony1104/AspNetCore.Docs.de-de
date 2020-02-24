@@ -16,11 +16,11 @@ ms.contentlocale: de-DE
 ms.lasthandoff: 01/16/2020
 ms.locfileid: "76146497"
 ---
-# <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core SignalR unterst체tzten Plattformen
+# <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core [!OP.NO-LOC(SignalR)] unterst체tzten Plattformen
 
 ## <a name="server-system-requirements"></a>Systemanforderungen an Server
 
-SignalR f체r ASP.net Core unterst체tzt jede Server Plattform, die ASP.net Core unterst체tzt.
+[!OP.NO-LOC(SignalR)] f체r ASP.net Core unterst체tzt jede Server Plattform, die ASP.net Core unterst체tzt.
 
 ## <a name="javascript-client"></a>JavaScript-Client
 
@@ -28,7 +28,7 @@ Der [JavaScript-Client](xref:signalr/javascript-client) wird auf nodejs 8 und h�
 
 | Browser                         | Version         |
 | ------------------------------- | --------------- |
-| Microsoft-Edge                  | Aktuelle&dagger; |
+| Microsoft Edge                  | Aktuelle&dagger; |
 | Mozilla Firefox                 | Aktuelle&dagger; |
 | Google Chrome; umfasst Android | Aktuelle&dagger; |
 | SK umfasst IOS            | Aktuelle&dagger; |
