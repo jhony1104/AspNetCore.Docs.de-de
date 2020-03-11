@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/02/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 2ed4af109b5ccd303a03a0d9167649dda7793126
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 6a0ef02db883db3bc91722786cd042ccec092735
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717021"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647575"
 ---
 # <a name="net-generic-host"></a>Generischer .NET-Host
 
@@ -209,7 +209,7 @@ Die Eigenschaft [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hos
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Produktion  
+**Standard**: Produktion  
 **Umgebungsvariable:** `<PREFIX_>ENVIRONMENT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseEnvironment` für `IHostBuilder` auf, um diesen Wert festzulegen:
@@ -259,7 +259,7 @@ Wenn diese `false` ist, führen Fehler beim Start zum Beenden des Hosts. Wenn di
 
 **Schlüssel:** captureStartupErrors  
 **Typ:** *Boolesch* (`true` or `1`)  
-**Standardwert**: Die Standardeinstellung ist gleich `false`, es sei denn, die App wird mit Kestrel hinter IIS ausgeführt, dann ist sie gleich `true`.  
+**Standard**: Die Standardeinstellung ist gleich `false`, es sei denn, die App wird mit Kestrel hinter IIS ausgeführt, dann ist sie gleich `true`.  
 **Umgebungsvariable:** `<PREFIX_>CAPTURESTARTUPERRORS`
 
 Verwenden Sie die Konfiguration, oder rufen Sie `CaptureStartupErrors` auf, um diesen Wert festzulegen:
@@ -289,7 +289,7 @@ Eine durch Semikolons getrennte Zeichenfolge der Hostingstartassemblys, die beim
 
 **Schlüssel:** hostingStartupAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Leere Zeichenfolge  
+**Standard**: Leere Zeichenfolge  
 **Umgebungsvariable:** `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
 Verwenden Sie die Konfiguration, oder rufen Sie `UseSetting` auf, um diesen Wert festzulegen:
@@ -304,7 +304,7 @@ Eine durch Semikolons getrennte Zeichenfolge der Hostingstartassemblys, die beim
 
 **Schlüssel**: hostingStartupExcludeAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Leere Zeichenfolge  
+**Standard**: Leere Zeichenfolge  
 **Umgebungsvariable:** `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 Verwenden Sie die Konfiguration, oder rufen Sie `UseSetting` auf, um diesen Wert festzulegen:
@@ -364,7 +364,7 @@ Die Assembly, die nach der `Startup`-Klasse suchen soll.
 
 **Schlüssel:** startupAssembly  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Die Assembly der App  
+**Standard**: Die Assembly der App  
 **Umgebungsvariable:** `<PREFIX_>STARTUPASSEMBLY`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseStartup` auf, um diesen Wert festzulegen. `UseStartup` kann einen Assemblynamen (`string`) oder einen Typ (`TStartup`) annehmen. Wenn mehrere `UseStartup`-Methoden aufgerufen werden, hat die letzte Vorrang.
@@ -400,7 +400,7 @@ Der relative Pfad für die statischen Objekte der App.
 
 **Schlüssel:** webroot  
 **Typ:** *Zeichenfolge*  
-**Standard**: Die Standardeinstellung ist `wwwroot`. Der Pfad zu *{Inhaltsstammverzeichnis}/wwwroot* muss vorhanden sein. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
+**Standard**: Der Standardwert ist `wwwroot`. Der Pfad zu *{Inhaltsstammverzeichnis}/wwwroot* muss vorhanden sein. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
 **Umgebungsvariable:** `<PREFIX_>WEBROOT`
 
 Verwenden Sie die Umgebungsvariable, oder rufen Sie `UseWebRoot` auf, um diesen Wert festzulegen:
@@ -494,7 +494,7 @@ Das Ziel des generischen Hosts besteht darin, die HTTP-Pipeline von der Webhost-
 
 Der generische Host ist neu in ASP.NET Core 2.1 und ist nicht für Webhostingszenarios geeignet. Verwenden Sie den [Webhost](xref:fundamentals/host/web-host) für Webhostingszenarios. Der generische Host wird den Webhost in einem zukünftigen Release ersetzen und als primäre Host-API in HTTP- und Nicht-HTTP-Szenarios fungieren.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Wenn Sie die Beispiel-App in [Visual Studio Code](https://code.visualstudio.com/) ausführen, verwenden Sie ein *externes oder integriertes Terminal*. Führen Sie das Beispiel nicht in `internalConsole` aus.
 
@@ -575,7 +575,7 @@ Diese Einstellung bestimmt, wo der Host mit der Suche nach Inhaltsdateien beginn
 
 **Schlüssel:** contentRoot  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
+**Standard**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
 **Festlegen mit:** `UseContentRoot`  
 **Umgebungsvariable:** `<PREFIX_>CONTENTROOT` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 
@@ -591,7 +591,7 @@ Legt die [Umgebung](xref:fundamentals/environments) der App fest.
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Produktion  
+**Standard**: Produktion  
 **Festlegen mit:** `UseEnvironment`  
 **Umgebungsvariable:** `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` ist [optional und benutzerdefiniert](#configurehostconfiguration))
 
@@ -670,7 +670,7 @@ Mithilfe von <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.Con
 
 Ein gehosteter Dienst ist eine Klasse mit Logik für Hintergrundaufgaben, die die Schnittstelle <xref:Microsoft.Extensions.Hosting.IHostedService> implementiert. Weitere Informationen finden Sie unter <xref:fundamentals/host/hosted-services>.
 
-Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) verwendet die Erweiterungsmethode `AddHostedService`, um einen Dienst für Lebensdauerereignisse (`LifetimeEventsHostedService`) und einen zeitgesteuerten Hintergrundtask (`TimedHostedService`) zur App hinzuzufügen:
+Die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) verwendet die Erweiterungsmethode `AddHostedService`, um einen Dienst für Lebensdauerereignisse (`LifetimeEventsHostedService`) und einen zeitgesteuerten Hintergrundtask (`TimedHostedService`) zur App hinzuzufügen:
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureServices)]
 
@@ -946,7 +946,7 @@ Weitere Informationen finden Sie unter <xref:fundamentals/environments>.
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopped*> | Der Host ein ordnungsgemäßes Herunterfahren abschließt. Alle Anforderungen sollten verarbeitet worden sein. Das Herunterfahren wird blockiert, bis das Ereignis abgeschlossen ist. |
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopping*> | Der Host ein ordnungsgemäßes Herunterfahren ausführt. Anforderungen möglicherweise noch verarbeitet werden. Das Herunterfahren wird blockiert, bis das Ereignis abgeschlossen ist. |
 
-Fügen Sie den <xref:Microsoft.Extensions.Hosting.IApplicationLifetime>-Dienst über einen Konstruktor in eine beliebige Klasse ein. Die [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) verwendet die Konstruktorinjektion für eine `LifetimeEventsHostedService`-Klasse (eine <xref:Microsoft.Extensions.Hosting.IHostedService>-Implementierung), um die Ereignisse zu registrieren.
+Fügen Sie den <xref:Microsoft.Extensions.Hosting.IApplicationLifetime>-Dienst über einen Konstruktor in eine beliebige Klasse ein. Die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) verwendet die Konstruktorinjektion für eine `LifetimeEventsHostedService`-Klasse (eine <xref:Microsoft.Extensions.Hosting.IHostedService>-Implementierung), um die Ereignisse zu registrieren.
 
 *LifetimeEventsHostedService.cs*:
 

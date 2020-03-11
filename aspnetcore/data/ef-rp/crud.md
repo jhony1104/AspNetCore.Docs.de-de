@@ -1,16 +1,16 @@
 ---
 title: 'Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)'
-author: tdykstra
+author: rick-anderson
 description: In diesem Tutorial wird veranschaulicht, wie mit EF Core Erstellungs-, Lese-, Aktualisierungs- und Löschvorgänge durchgeführt werden.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/crud
-ms.openlocfilehash: 57c4a1789d54c29a28ba7e67a1d15815415a461c
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583119"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650149"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)
 
@@ -116,7 +116,7 @@ Im folgenden Code wird das `StudentVM`-Ansichtsmodell für die Erstellung eines 
 
 Die Methode [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) legt die Werte dieses Objekts fest, indem sie Werte aus einem anderen [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues)-Objekt liest. `SetValues` verwendet die Übereinstimmung von Eigenschaftsnamen. Der Ansichtsmodelltyp muss nicht mit dem Modelltyp verknüpft sein. Er muss lediglich über übereinstimmende Eigenschaften verfügen.
 
-Für die Verwendung von `StudentVM` muss [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` anstelle von `Student` verwendet wird.
+Für die Verwendung von `StudentVM` muss [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` anstelle von `Student` verwendet wird.
 
 ## <a name="update-the-edit-page"></a>Aktualisieren der Seite „Bearbeiten“
 
@@ -322,7 +322,7 @@ Im folgenden Code wird das `StudentVM`-Ansichtsmodell für die Erstellung eines 
 
 Die Methode [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) legt die Werte dieses Objekts fest, indem sie Werte aus einem anderen [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues)-Objekt liest. `SetValues` verwendet die Übereinstimmung von Eigenschaftsnamen. Der Ansichtsmodelltyp muss nicht mit dem Modelltyp verknüpft sein. Er muss lediglich über übereinstimmende Eigenschaften verfügen.
 
-Für die Verwendung von `StudentVM` muss [CreateVM.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` statt `Student` verwendet wird.
+Für die Verwendung von `StudentVM` muss [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) aktualisiert werden, damit `StudentVM` statt `Student` verwendet wird.
 
 Auf Razor Pages stellt die abgeleitete `PageModel`-Klasse das Ansichtsmodell dar.
 

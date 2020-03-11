@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 227128607460f9b5821bd0697fde3f393cf6daa9
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259439"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646261"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Behandeln der Parallelität: ASP.NET MVC mit EF Core
 
@@ -37,7 +37,7 @@ In diesem Tutorial:
 > * Aktualisieren der Seite „Delete“ (Löschen)
 > * Aktualisieren der Ansichten „Details“ und „Erstellen“
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [Aktualisieren relevanter Daten](update-related-data.md)
 
@@ -146,7 +146,7 @@ Damit wird die Überschrift in „Abteilungen“ geändert, die Spalte „RowVer
 
 ## <a name="update-edit-methods"></a>Aktualisieren Sie „Bearbeiten“-Methoden
 
-Fügen Sie in den HttpGet-Methoden `Edit` und `Details` `AsNoTracking` hinzu. Fügen Sie in der HttpGet-Methode `Edit` für den Administrator Eager Loading hinzu.
+Fügen Sie in den HttpGet-Methoden `Edit` und `Details``AsNoTracking` hinzu. Fügen Sie in der HttpGet-Methode `Edit` für den Administrator Eager Loading hinzu.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EagerLoading)]
 
@@ -288,7 +288,7 @@ Ersetzen Sie den Code in der Datei *Views/Departments/Create.cshtml*, um der Dro
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

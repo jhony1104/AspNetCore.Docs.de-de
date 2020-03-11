@@ -5,12 +5,12 @@ description: In diesem Tutorial verwenden Sie zunächst das EF Core-Migrationsfe
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/migrations
-ms.openlocfilehash: f8e78cf7230528a4047eac1d52a12e2ed8392dec
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
+ms.openlocfilehash: 86fd83c898fce8e121e4d259aaca12c59591e606
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213442"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645553"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Migrationen (4 von 8)
 
@@ -160,7 +160,7 @@ Im nächsten Tutorial wird das Datenmodell erstellt, und es werden Entitätseige
 In diesem Tutorial wird das EF Core-Migrationsfeature zur Verwaltung von Datenmodelländerungen verwendet.
 
 Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
 
 Wenn eine neue App entwickelt wird, ändert sich das Datenmodell häufig. Nach jeder Modelländerung ist das Modell nicht mehr synchron mit der Datenbank. In diesem Tutorial wurde zunächst Entity Framework für die Erstellung der Datenbank konfiguriert, falls diese nicht vorhanden ist. Bei jeder Datenmodelländerung:
 
@@ -296,7 +296,7 @@ EF Core kann über die Tabelle `__MigrationsHistory` sehen, ob Migrationen ausge
 ## <a name="troubleshooting"></a>Problembehandlung
 
 Laden Sie die [fertige App](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations) herunter.
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations) herunter.
 
 Die App generiert folgende Ausnahme:
 

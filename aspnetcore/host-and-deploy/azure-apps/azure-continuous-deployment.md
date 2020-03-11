@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 12/06/2018
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
 ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890095"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648109"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Continuous Deployment in Azure mit Visual Studio und Git mit ASP.NET Core
 
@@ -26,7 +26,7 @@ Siehe auch [Erstellen einer ersten Pipeline mit Azure Pipelines](/azure/devops/p
 > [!NOTE]
 > Für dieses Tutorial ist ein Microsoft Azure-Konto erforderlich. Zum Abrufen eines Kontos können Sie die [Leistungen für MSDN-Abonnenten aktivieren](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) oder sich [für eine kostenlose Testversion registrieren](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 Dieses Tutorial setzt voraus, dass folgende Software installiert ist:
 
@@ -38,9 +38,9 @@ Dieses Tutorial setzt voraus, dass folgende Software installiert ist:
 
 1. Starten Sie Visual Studio.
 
-1. Wählen Sie im Menü **Datei** den Befehl **Neu** > **Projekt** aus.
+1. Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 
-1. Wählen Sie die Projektvorlage **ASP.NET Core-Webanwendung** aus. Sie wird unter **Installierte** > **Vorlagen** > **Visual C#** > **.NET Core** angezeigt. Benennen Sie das Projekt mit `SampleWebAppDemo`. Wählen Sie die Option **Neues Git-Repository erstellen** aus, und klicken Sie auf **OK**.
+1. Wählen Sie die Projektvorlage **ASP.NET Core-Webanwendung** aus. Sie wird unter **Installierte** > **Vorlagen** > **Visual C#**  >  **.NET Core** angezeigt. Benennen Sie das Projekt mit `SampleWebAppDemo`. Wählen Sie die Option **Neues Git-Repository erstellen** aus, und klicken Sie auf **OK**.
 
    ![Dialogfeld "Neues Projekt"](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -122,7 +122,7 @@ In diesem Abschnitt erstellen Sie ein lokales Git-Repository mit Visual Studio u
 * Führen Sie für die Projektänderungen einen Commit aus.
 * Übertragen Sie die Projektänderungen mithilfe von Push aus Ihrem lokalen Repository in das Remoterepository in Azure.
 
-1. Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Projektmappe „SampleWebAppDemo“**, und wählen Sie **Commit ausführen** aus. Der **Team Explorer** wird angezeigt.
+1. Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Projektmappe „SampleWebAppDemo“** , und wählen Sie **Commit ausführen** aus. Der **Team Explorer** wird angezeigt.
 
    ![Team Explorer-Registerkarte „Verbinden“](azure-continuous-deployment/_static/10-team-explorer.png)
 
@@ -209,7 +209,7 @@ Veröffentlichen Sie den lokalen Code erneut, nachdem Sie Änderungen daran vorg
 
 1. Speichern Sie die Änderungen in *Startup.cs*.
 
-1. Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Projektmappe „SampleWebAppDemo“**, und wählen Sie **Commit ausführen** aus. Der **Team Explorer** wird angezeigt.
+1. Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Projektmappe „SampleWebAppDemo“** , und wählen Sie **Commit ausführen** aus. Der **Team Explorer** wird angezeigt.
 
 1. Geben Sie eine Commit-Nachricht ein, wie z.B. `Update #2`.
 

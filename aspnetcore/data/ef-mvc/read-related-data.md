@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 1a16f905669d0192d713cbba9bfc6e3e75008b5d
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: a6e63723101ab09219db81ee9796c3938a612226
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259420"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646027"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lesen verwandter Daten: ASP.NET Core MVC mit EF Core
 
@@ -31,7 +31,7 @@ In diesem Tutorial:
 > * Erstellen Sie eine Seite „Instructors“
 > * Erfahren Sie mehr über das explizite Laden
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [Erstellen eines komplexen Datenmodells](complex-data-model.md)
 
@@ -47,7 +47,7 @@ Es gibt mehrere Möglichkeiten, mit denen Software für objektrelationales Mappi
 
   ![Beispiel für separate Abfragen](read-related-data/_static/separate-queries.png)
 
-* Explizites Laden. Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Sie schreiben Code, der die verwandten Daten abruft, wenn erforderlich. So wie im Fall von Eager Loading mit separaten Abfragen führt explizites Laden zu mehreren Abfragen, die an die Datenbank gesendet werden. Der Unterschied liegt darin, dass beim expliziten Laden der Code die zu ladenden Navigationseigenschaften angibt. In Entity Framework Core 1.1 können Sie die `Load`-Methode verwenden, um das explizite Laden auszuführen. Beispiel:
+* Explizites Laden. Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Sie schreiben Code, der die verwandten Daten abruft, wenn erforderlich. So wie im Fall von Eager Loading mit separaten Abfragen führt explizites Laden zu mehreren Abfragen, die an die Datenbank gesendet werden. Der Unterschied liegt darin, dass beim expliziten Laden der Code die zu ladenden Navigationseigenschaften angibt. In Entity Framework Core 1.1 können Sie die `Load`-Methode verwenden, um das explizite Laden auszuführen. Zum Beispiel:
 
   ![Beispiel für explizites Laden](read-related-data/_static/explicit-loading.png)
 
@@ -245,7 +245,7 @@ Führen Sie die Anwendung aus, navigieren Sie zur Dozentenindexseite, und Sie we
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

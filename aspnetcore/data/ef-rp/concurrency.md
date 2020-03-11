@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 944e746624bf5fe7c586a521059fa4eb34b0f1e7
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259383"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645877"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Parallelität (8 von 8)
 
@@ -98,7 +98,7 @@ modelBuilder.Entity<Department>()
   .IsRowVersion();
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Für eine SQL Server-Datenbank wird das `[Timestamp]`-Attribut für eine Entitätseigenschaft als Bytearray definiert:
 
@@ -123,7 +123,7 @@ Der folgende hervorgehobene Code stellt das T-SQL dar, das genau überprüft, ob
 
 [@@ROWCOUNT](/sql/t-sql/functions/rowcount-transact-sql) gibt die Anzahl der von der letzten Anweisung betroffenen Zeilen zurück. Wenn keine Zeilen aktualisiert werden, löst EF Core eine `DbUpdateConcurrencyException` aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Für eine SQLite-Datenbank wird das `[Timestamp]`-Attribut für eine Entitätseigenschaft als Bytearray definiert:
 
@@ -144,7 +144,7 @@ Das Hinzufügen der `RowVersion`-Eigenschaft ändert das Datenbankmodell, das ei
 
 Erstellen Sie das Projekt. 
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Führen Sie den folgenden Befehl in der PMC aus:
 
@@ -152,7 +152,7 @@ Erstellen Sie das Projekt.
   Add-Migration RowVersion
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Führen Sie die folgenden Befehle über ein Terminal aus:
 
@@ -169,7 +169,7 @@ Dieser Befehl:
 
   [!code-csharp[](intro/samples/cu30/Migrations/SchoolContextModelSnapshot.cs?name=snippet_Department&highlight=15-17)]
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Führen Sie den folgenden Befehl in der PMC aus:
 
@@ -177,7 +177,7 @@ Dieser Befehl:
   Update-Database
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie die Datei `Migrations/<timestamp>_RowVersion.cs`, und fügen Sie den hervorgehobenen Code hinzu:
 
@@ -200,7 +200,7 @@ Dieser Befehl:
 
 ## <a name="scaffold-department-pages"></a>Gerüstbau der Department-Seiten
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Befolgen Sie die Anweisungen unter [Gerüstbau der Student-Seiten](xref:data/ef-rp/intro#scaffold-student-pages) mit den folgenden Ausnahmen:
 
@@ -208,7 +208,7 @@ Dieser Befehl:
 * Verwenden Sie `Department` als Modellklasse.
   * Verwenden Sie die vorhandene Kontextklasse, anstatt eine neue Klasse zu erstellen.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Erstellen Sie einen Ordner *Pages/Departments*.
 
@@ -363,7 +363,7 @@ Löschen Sie den Testfachbereich aus der zweiten Registerkarte. Ein Parallelitä
 
 * [Concurrency Tokens in EF Core (Parallelitätstoken in EF Core)](/ef/core/modeling/concurrency)
 * [Handle concurrency in EF Core (Handhabung von Parallelität in EF Core)](/ef/core/saving/concurrency)
-* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
+* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
@@ -376,7 +376,7 @@ Dies ist das letzte Tutorial der Serie. Weitere Themen werden in der [MVC-Versio
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dieses Tutorial zeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren. Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter, oder zeigen Sie diese an. [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
+Dieses Tutorial zeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren. Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter, oder zeigen Sie diese an. [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
 ## <a name="concurrency-conflicts"></a>Nebenläufigkeitskonflikte
 
@@ -512,11 +512,11 @@ Die obenstehenden Befehle haben folgende Konsequenzen:
 
 ## <a name="scaffold-the-departments-model"></a>Erstellen des Gerüsts für das Abteilungsmodell
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Führen Sie die Schritte unter [Erstellen des Gerüsts für das Studentenmodell](xref:data/ef-rp/intro#scaffold-student-pages) aus, und verwenden Sie `Department` für die Modellklasse.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
  Führen Sie den folgenden Befehl aus:
 

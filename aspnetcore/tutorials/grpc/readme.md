@@ -9,11 +9,11 @@ products:
 - vs
 urlFragment: create-grpc-client
 ms.openlocfilehash: b9feb9eed62177358fffc0d7da582f625a431e32
-ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2019
-ms.locfileid: "73463045"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648157"
 ---
 # <a name="create-a-grpc-client-and-server-in-aspnet-core-30-using-visual-studio"></a>Erstellen eines gRPC-Clients und -Servers in ASP.NET Core 3.0 mit Visual Studio
 
@@ -29,7 +29,7 @@ In diesem Tutorial:
 
 ## <a name="create-a-grpc-service"></a>Erstellen eines gRPC-Diensts
 
-* Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**.
+* Wählen Sie in Visual Studio im Menü **Datei** die Option **Neu** > **Projekt** aus.
 * Wählen Sie im Dialogfeld **Neues Projekt** die Option **ASP.NET Core-Webanwendung** aus.
 * Klicken Sie auf **Weiter**.
 * Nennen Sie das Projekt **GrpcGreeter**. Es ist wichtig, den Namen *GrpcGreeter* zu verwenden, damit die Namespaces übereinstimmen, wenn Sie Code kopieren und einfügen.

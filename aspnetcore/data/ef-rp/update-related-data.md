@@ -1,16 +1,16 @@
 ---
 title: 'Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)'
-author: tdykstra
+author: rick-anderson
 description: Mithilfe dieses Tutorials aktualisieren verwandte Daten, indem Sie Felder mit Fremdschlüsseln sowie Navigationseigenschaften aktualisieren.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: bc237cf928d852b92c5c1984527129404f88018d
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583491"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645457"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)
 
@@ -48,6 +48,8 @@ Ein Kurs wird einem Fachbereich zugewiesen. Die Basisklasse für die Seite „Cr
 Aktualisieren Sie *Pages/Courses/Create.cshtml.cs* mit dem folgenden Code:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
+
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 Der vorangehende Code:
 
@@ -235,7 +237,7 @@ Führen Sie die App aus, und testen Sie die Seite „Delete“.
 
 ::: moniker range="< aspnetcore-3.0"
 
-In diesem Tutorial wird veranschaulicht, wie verwandte Daten aktualisiert werden. Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter, oder zeigen Sie diese an. [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
+In diesem Tutorial wird veranschaulicht, wie verwandte Daten aktualisiert werden. Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter, oder zeigen Sie diese an. [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
 In den folgenden Abbildungen werden einige der abgeschlossenen Seiten dargestellt.
 

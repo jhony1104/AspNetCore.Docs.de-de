@@ -1,22 +1,20 @@
 ---
 title: IIS-Module mit ASP.NET Core
-author: guardrex
+author: rick-anderson
 description: Lernen Sie aktive und inaktive IIS-Module für ASP.NET Core-Apps kennen, und erfahren Sie, wie Sie diese verwalten können.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: ca6cf349aa05db97e145f1cd0cae97a107761fd8
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 0f13ef3eb1da03960ef1fa54d33532b6ebbdc128
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75951809"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646645"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS-Module mit ASP.NET Core
-
-Von [Luke Latham](https://github.com/guardrex)
 
 Einige der nativen IIS-Module und sämtliche der IIS-verwalteten Module sind nicht in der Lage, Anforderungen für ASP.NET Core-Apps zu verarbeiten. In vielen Fällen bietet ASP.NET Core eine Alternative zu den Szenarien, die von nativen und verwalteten IIS-Modulen abgedeckt werden.
 

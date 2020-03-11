@@ -10,8 +10,8 @@ Artikel werden als Markdowndateien im Repository gespeichert. Einfache Änderung
 
 Sie benötigen Grundkenntnisse von [Git und GitHub.com](https://guides.github.com/activities/hello-world/).
 
-* Öffnen Sie ein [Thema](https://github.com/aspnet/Docs/issues/new), das beschreibt, was Sie tun, z.B. Ändern eines vorhandenen Artikels oder Erstellen eines neuen Artikels. Oftmals bitten wir für einen neuen Themenvorschlag um eine Beschreibung. Bevor Sie zu viel Zeit investieren, warten Sie auf die Genehmigung des Teams.
-* Forken Sie das Repository [aspnet/Docs](https://github.com/aspnet/Docs/), und erstellen Sie einen Branch für Ihre Änderungen.
+* Öffnen Sie ein [Thema](https://github.com/dotnet/AspNetCore.Docs/issues/new), das beschreibt, was Sie tun, z.B. Ändern eines vorhandenen Artikels oder Erstellen eines neuen Artikels. Oftmals bitten wir für einen neuen Themenvorschlag um eine Beschreibung. Bevor Sie zu viel Zeit investieren, warten Sie auf die Genehmigung des Teams.
+* Forken Sie das Repository [aspnet/Docs](https://github.com/dotnet/AspNetCore.Docs/), und erstellen Sie einen Branch für Ihre Änderungen.
 * Senden Sie einen PR mit Ihren Änderungen an den Master.
 * Wenn Ihrem PR die Bezeichnung „cla-required“ zugewiesen ist, [füllen Sie die Lizenzvereinbarung für Mitwirkende (Contribution License Agreement, CLA) aus](https://cla.dotnetfoundation.org/).
 * Treffen Sie entsprechende Maßnahmen bezüglich des PR-Feedbacks.
@@ -28,7 +28,7 @@ Artikel werden in [DocFx flavored Markdown](https://dotnet.github.io/docfx/spec/
 
 ## <a name="folder-structure-conventions"></a>Konventionen für Ordnerstrukturen
 
-Für jede Markdowndatei ist eventuell ein Ordner für Bilder und ein Ordner für Beispielcode vorhanden. Wenn sich der Artikel in der Datei [fundamentals/configuration/index.md](https://github.com/aspnet/Docs/blob/master/aspnetcore/fundamentals/configuration/index.md) befindet, befinden sich die Bilder unter [fundamentals/configuration/index/\_static](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static) und die Projektdateien für die Beispiel-App unter [ fundamentals/configuration/index/sample](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample). Ein Bild in der Datei *fundamentals/configuration/index.md* wird von der folgenden Markdowndatei gerendert:
+Für jede Markdowndatei ist eventuell ein Ordner für Bilder und ein Ordner für Beispielcode vorhanden. Wenn sich der Artikel in der Datei [fundamentals/configuration/index.md](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/fundamentals/configuration/index.md) befindet, befinden sich die Bilder unter [fundamentals/configuration/index/\_static](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static) und die Projektdateien für die Beispiel-App unter [ fundamentals/configuration/index/sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample). Ein Bild in der Datei *fundamentals/configuration/index.md* wird von der folgenden Markdowndatei gerendert:
 
 ```md
 ![description of image for alt attribute](configuration/index/_static/imagename.png)
@@ -157,4 +157,4 @@ Der [Microsoft-Styleguide für den Schreibstil](https://docs.microsoft.com/style
 
 ## <a name="redirects"></a>Umleitungen
 
-Wenn Sie einen Artikel löschen, ändern Sie den Dateinamen, oder in einen anderen Ordner verschieben, erstellen Sie eine Umleitung, damit Benutzer, die den Artikel als Lesezeichen gespeichert haben, nicht die Fehlermeldung *404 Nicht gefunden* erhalten. Fügen Sie Umleitungen zur [Masterumleitungsdatei](https://github.com/aspnet/Docs/blob/master/.openpublishing.redirection.json) hinzu.
+Wenn Sie einen Artikel löschen, ändern Sie den Dateinamen, oder in einen anderen Ordner verschieben, erstellen Sie eine Umleitung, damit Benutzer, die den Artikel als Lesezeichen gespeichert haben, nicht die Fehlermeldung *404 Nicht gefunden* erhalten. Fügen Sie Umleitungen zur [Masterumleitungsdatei](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json) hinzu.

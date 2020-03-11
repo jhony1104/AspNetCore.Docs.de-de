@@ -1,22 +1,20 @@
 ---
 title: Veröffentlichen einer ASP.NET Core-App in IIS
-author: guardrex
+author: rick-anderson
 description: Erfahren Sie, wie eine ASP.NET Core-App auf einem IIS-Server gehostet wird.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 820527cc15f883c906d2fdf1c073d443a5b3b40e
-ms.sourcegitcommit: d8b12cc1716ee329d7bd2300e201b61e15d506ac
+ms.openlocfilehash: f3860ba6ca7b99e63000ba0066749751f80cdc23
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/04/2019
-ms.locfileid: "71942886"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646621"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>Veröffentlichen einer ASP.NET Core-App in IIS
-
-Von [Luke Latham](https://github.com/guardrex)
 
 In diesem Tutorial wird gezeigt, wie eine ASP.NET Core-App auf einem IIS-Server gehostet wird.
 
@@ -27,7 +25,7 @@ Dieses Tutorial behandelt die folgenden Themen:
 > * Erstellen Sie einer IIS-Website in IIS-Manager.
 > * Bereitstellen einer ASP.NET Core-App.
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [.Net Core SDK](/dotnet/core/sdk) auf dem Entwicklungs Computer.
 * Windows Server, konfiguriert mit der Serverrolle **Webserver (IIS)** . Wenn Ihr Server nicht zum Hosten von Websites mit IIS konfiguriert ist, befolgen Sie die Anleitungen im Abschnitt *IIS-Konfiguration* des Artikels <xref:host-and-deploy/iis/index#iis-configuration>, und kehren Sie dann zu diesem Tutorial zurück.
@@ -72,7 +70,7 @@ Befolgen Sie das Tutorial <xref:getting-started> zum Erstellen einer Razor Pages
 * Die App wird in einem Ordner veröffentlicht.
 * Der Inhalt des Ordners wird in den Ordner der IIS-Website verschoben (der **physische Pfad** zur Website in IIS-Manager).
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf das Projekt, und wählen Sie **Veröffentlichen** aus.
 1. Wählen Sie im Dialogfeld **Veröffentlichungsziel auswählen** die Veröffentlichungsoptionen **Ordner** aus.
@@ -80,7 +78,7 @@ Befolgen Sie das Tutorial <xref:getting-started> zum Erstellen einer Razor Pages
    * Wenn Sie einen Ordner für die IIS-Website erstellt haben, der auf dem Entwicklungscomputer als Netzwerkfreigabe verfügbar ist, geben Sie den Pfad zur Freigabe an. Der aktuelle Benutzer muss über Schreibzugriff verfügen, um auf der Freigabe veröffentlichen zu können.
    * Wenn Sie nicht in der Lage sind, die Bereitstellung direkt im Ordner der IIS-Website auf dem IIS-Server auszuführen, veröffentlichen Sie in einem Ordner auf entfernbaren Medien, und verschieben Sie die veröffentlichte App physisch in den Ordner der IIS-Website auf dem Server. Dies ist der **physische Pfad** der Website in IIS Manager. Verschieben Sie den Inhalt des Ordners *bin/Release/{ZIELFRAMEWORK}/publish* in den Ordner der IIS-Website auf dem Server, der der **physische Pfad** der Website in IIS Manager ist.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 1. Veröffentlichen Sie die App mit der Konfiguration „Release“ mit dem Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) in einer Befehlsshell:
 
@@ -90,7 +88,7 @@ Befolgen Sie das Tutorial <xref:getting-started> zum Erstellen einer Razor Pages
 
 1. Verschieben Sie den Inhalt des Ordners *bin/Release/{ZIELFRAMEWORK}/publish* in den Ordner der IIS-Website auf dem Server, der der **physische Pfad** der Website in IIS Manager ist.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 1. Klicken Sie in der **Projektmappe** mit der rechten Maustaste auf das Projekt, und wählen Sie dann **Veröffentlichen** > **In Ordner veröffentlichen** aus.
 1. Legen Sie den Pfad unter **Pfad auswählen** fest.

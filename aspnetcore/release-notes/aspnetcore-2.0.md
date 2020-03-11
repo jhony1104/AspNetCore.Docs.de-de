@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 9d1e1b1154113b8825f4d0faf0f4552b8bd22287
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828424"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650857"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
 
@@ -48,7 +48,7 @@ Das `Microsoft.AspNetCore.All`-Metapaket ist ausschließlich auf .NET Core 2.0 a
 
 Standardmäßig wird in ASP.NET Core 2.0 eine `IConfiguration`-Instanz zum Dienstcontainer hinzugefügt. Die `IConfiguration`-Instanz im Dienstcontainer macht es Anwendungen leichter, Konfigurationswerte aus dem Container abzurufen.
 
-Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/3387).
+Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/3387).
 
 ## <a name="logging-update"></a>Aktualisierung der Protokollierung
 
@@ -62,7 +62,7 @@ Ein neues Authentifizierungsmodell erleichtert das Konfigurieren der Authentifiz
 
 Es sind neue Vorlagen für die Konfiguration der Authentifizierung für Web-Apps und Web-APIs mithilfe von [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/) verfügbar.
 
-Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/3054).
+Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
 ## <a name="identity-update"></a>Aktualisierung der Identität
 
@@ -114,7 +114,7 @@ Hostingumgebungen können nun während des Starts der Anwendung zusätzliche Pak
 
 In ASP.NET Core 2.0 wird diese Funktion verwendet, um automatisch die Application Insights-Diagnose beim Debuggen in Visual Studio oder (nach der Anmeldung) bei der Ausführung in Azure App Services zu aktivieren. Aus diesem Grund fügen die Projektvorlagen nicht mehr standardmäßig Application Insights-Pakete und Code hinzu.
 
-Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/3389).
+Weitere Informationen zum Status der geplanten Dokumentation finden Sie unter [GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/3389).
 
 ## <a name="automatic-use-of-anti-forgery-tokens"></a>Automatische Verwendung von Fälschungssicherheitstoken
 

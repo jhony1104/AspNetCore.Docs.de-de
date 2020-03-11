@@ -1,22 +1,20 @@
 ---
 title: Optionsmuster in ASP.NET Core
-author: guardrex
+author: rick-anderson
 description: Erfahren Sie, wie Sie Optionsmuster verwenden, um Gruppen von zusammengehörigen Einstellungen in ASP.NET Core-Anwendungen darzustellen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 1f3625380d816c7d4df5a7a24b0ac146500330de
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.openlocfilehash: 756d3d57122642ab10ab671c9accb75975c3799d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447204"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649987"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
-
-Von [Luke Latham](https://github.com/guardrex)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -27,7 +25,7 @@ Das Optionsmuster verwendet Klassen, um Gruppen von zusammengehörigen Einstellu
 
 Optionen bieten auch einen Mechanismus, um Konfigurationsdaten zu validieren. Weitere Informationen finden Sie im Abschnitt [Optionsvalidierung](#options-validation).
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="package"></a>Package
 
@@ -324,6 +322,8 @@ catch (OptionsValidationException e)
 }
 ```
 
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
+
 Im vorherigen Beispiel wurde die benannte Optionsinstanz auf `optionalOptionsName` festgelegt. Die Standardoptionsinstanz ist `Options.DefaultName`.
 
 Überprüfungen werden ausgeführt, wenn die Optionsinstanz erstellt wird. Eine Optionsinstanz besteht die Überprüfung beim ersten Zugriff garantiert.
@@ -451,7 +451,7 @@ Das Optionsmuster verwendet Klassen, um Gruppen von zusammengehörigen Einstellu
 
 Optionen bieten auch einen Mechanismus, um Konfigurationsdaten zu validieren. Weitere Informationen finden Sie im Abschnitt [Optionsvalidierung](#options-validation).
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -873,7 +873,7 @@ Das Optionsmuster verwendet Klassen, um Gruppen von zusammengehörigen Einstellu
 
 Optionen bieten auch einen Mechanismus, um Konfigurationsdaten zu validieren. Weitere Informationen finden Sie im Abschnitt [Optionsvalidierung](#options-validation).
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

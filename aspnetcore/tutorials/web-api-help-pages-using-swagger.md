@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 12/07/2019
 uid: tutorials/web-api-help-pages-using-swagger
 ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944082"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646855"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core-Web-API-Hilfeseiten mit Swagger/OpenAPI
 
@@ -108,7 +108,7 @@ Die [Swagger-Benutzeroberfläche](https://swagger.io/swagger-ui/) stellt eine we
 
 ![Swagger-Benutzeroberfläche](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Jede öffentliche Aktionsmethode in Ihren Controllern kann über die Benutzeroberfläche getestet werden. Klicken Sie auf einen Methodennamen, um den Abschnitt zu erweitern. Fügen Sie die erforderlichen Parameter hinzu, und klicken Sie auf **Probieren Sie es aus!**.
+Jede öffentliche Aktionsmethode in Ihren Controllern kann über die Benutzeroberfläche getestet werden. Klicken Sie auf einen Methodennamen, um den Abschnitt zu erweitern. Fügen Sie die erforderlichen Parameter hinzu, und klicken Sie auf **Probieren Sie es aus!** .
 
 ![Beispiel für einen Swagger-GET-Test](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
