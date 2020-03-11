@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 6698e269e0a6480cd5a03c59f9a19da31e23bf69
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: afa71b2c2b75be2c000fadd9545ac3fb4587825a
+ms.sourcegitcommit: 51c86c003ab5436598dbc42f26ea4a83a795fd6e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/08/2020
-ms.locfileid: "77089148"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "78964462"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -60,6 +60,7 @@ Wenn ein keine Anforderung an den nächsten Delegaten übergibt, wird dies als *
 <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run*>-Delegaten erhalten keinen `next`-Parameter. Der erste `Run`-Delegat beendet immer die Pipeline. `Run` ist eine Konvention. Einige Middlewarekomponenten machen möglicherweise `Run[Middleware]`-Methoden verfügbar, die am Ende einer Pipeline ausgeführt werden:
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=12-15)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 Im vorherigen Beispiel schreibt der `Run`-Delegat `"Hello from 2nd delegate."` zur Antwort und beendet dann die Pipeline. Wenn ein anderer `Use`- oder `Run`-Delegat nach dem `Run`-Delegaten hinzugefügt wird, wird dieser nicht aufgerufen.
 
@@ -214,9 +215,9 @@ In der folgenden Tabelle sind die Anforderungen und Antworten von `http://localh
 | localhost:1234                | Hello from non-Map delegate. |
 | localhost:1234/?branch=master | Branch used = master         |
 
-<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen*> brancht auch die Anforderungspipeline auf Grundlage des Ergebnisses des angegebenen Prädikats. Anders als bei `MapWhen` wird dieser Branch wieder mit der Hauptpipeline verbunden, wenn er kurzgeschlossen wird oder eine Terminalmiddleware enthält:
+<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen*> brancht auch die Anforderungspipeline auf Grundlage des Ergebnisses des angegebenen Prädikats. Anders als bei `MapWhen` wird dieser Branch wieder mit der Hauptpipeline verbunden, wenn er nicht kurzgeschlossen wird oder eine Terminalmiddleware enthält:
 
-[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=23-24)]
+[!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
 
 Im vorherigen Beispiel wird „Hello from main pipeline“ (Hallo aus der Hauptpipeline) für alle Anforderungen geschrieben. Wenn die Anforderung eine Abfragezeichenfolgevariable `branch` enthält, wird der Wert der Pipeline protokolliert, bevor eine neue Verbindung hergestellt wird.
 

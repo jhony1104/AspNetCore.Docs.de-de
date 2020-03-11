@@ -11,15 +11,15 @@
 
 * `--response`
 
-  Gibt eine Datei an, in die die gesamte HTTP-Antwort (inklusive Header und Text) geschrieben werden soll. Beispielsweise `--response "C:\response.txt"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
+  Gibt eine Datei an, in die die gesamte HTTP-Antwort (inklusive Header und Text) geschrieben werden soll. Beispiel: `--response "C:\response.txt"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
 
 * `--response:body`
 
-  Gibt eine Datei an, in die der HTTP-Antworttext geschrieben werden soll. Beispielsweise `--response:body "C:\response.json"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
+  Gibt eine Datei an, in die der HTTP-Antworttext geschrieben werden soll. Beispiel: `--response:body "C:\response.json"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
 
 * `--response:headers`
 
-  Gibt eine Datei an, in die die HTTP-Antwortheader geschrieben werden sollen. Beispielsweise `--response:headers "C:\response.txt"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
+  Gibt eine Datei an, in die die HTTP-Antwortheader geschrieben werden sollen. Beispiel: `--response:headers "C:\response.txt"`. Wenn die Datei nicht vorhanden ist, wird sie erstellt.
 
 * `-s|--streaming`
 

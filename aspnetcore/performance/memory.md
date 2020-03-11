@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: performance/memory
 ms.openlocfilehash: 0ae367e954e21e2f696a3b292fa64f1d2dba98ec
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829022"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654721"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Speicherverwaltung und Garbage Collection (GC) in ASP.net Core
 
 Von [Sébastien Ros](https://github.com/sebastienros) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Die Speicherverwaltung ist auch in verwalteten Frameworks wie .net Komplex. Das analysieren und verstehen von Speicherproblemen kann eine Herausforderung darstellen. Inhalt dieses Artikels
+Die Speicherverwaltung ist auch in verwalteten Frameworks wie .net Komplex. Das analysieren und verstehen von Speicherproblemen kann eine Herausforderung darstellen. Dieser Artikel:
 
 * Wurde von vielen *Speicherlecks* und *GC* -Fehlern motiviert. Die meisten dieser Probleme sind darauf zurückzuführen, dass Sie nicht verstehen, wie die Arbeitsspeicher Nutzung in .net Core funktioniert, oder nicht verstehen, wie Sie gemessen wird.
 * Veranschaulicht die problematische Speicher Verwendung und schlägt alternative Ansätze vor.
@@ -275,7 +275,7 @@ Die folgenden Links zeigen die ASP.net Core Methode zum Beibehalten von Objekten
 * [Responsecaching/Streams/streamutilities. cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [Responsecaching/memoryresponsecache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-Weitere Informationen finden Sie unter: .
+Weitere Informationen finden Sie unter
 
 * [Large Object Heap wurde aufgedeckt.](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Großer Objekt Heap](/dotnet/standard/garbage-collection/large-object-heap)
@@ -426,9 +426,9 @@ Das Anwenden derselben Last wie die nicht in einem Pool zusammengefasste Version
 
 Der Hauptunterschied besteht darin, dass Bytes zugeordnet werden, was zu einer wesentlich geringeren Auflistung der Generation 0 gehört.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Garbage Collection](/dotnet/standard/garbage-collection/)
+* [Automatische Speicherbereinigung](/dotnet/standard/garbage-collection/)
 * [Grundlegendes zu verschiedenen GC-Modi mit neben läufigkeits Schnellansicht](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)
 * [Large Object Heap wurde aufgedeckt.](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Großer Objekt Heap](/dotnet/standard/garbage-collection/large-object-heap)

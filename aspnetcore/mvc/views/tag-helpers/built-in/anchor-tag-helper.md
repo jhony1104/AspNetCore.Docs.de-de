@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 3ff8a52361b4911a5bb3163a8ea6ae90e504e4ef
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
-ms.translationtype: HT
+ms.openlocfilehash: 6bfbad39115c7823b5677d3c52ca64cfb0683037
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333938"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653779"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
@@ -21,7 +21,7 @@ Das [Anchor-Taghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTag
 
 Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpers/intro>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Der folgende *SpeakerController* wird in den Beispielen in diesem Dokument verwendet:
 
@@ -182,12 +182,12 @@ Betrachten Sie die folgende Verzeichnishierarchie:
 * **{Projektname}**
   * **wwwroot**
   * **Bereiche**
-    * **Sessions**
-      * **Pages**
+    * **Sitzungen**
+      * **Seiten**
         * *\_ViewStart.cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **Pages**
+  * **Seiten**
 
 Das Markup zum Verweisen auf den *Sessions*-Bereich der Razor-Seite *Index* lautet:
 
@@ -218,7 +218,7 @@ Betrachten Sie die folgende Verzeichnishierarchie:
       * **Controller**
         * *HomeController.cs*
       * **Ansichten**
-        * **Home**
+        * **Startseite**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
         * *\_ViewStart.cshtml*

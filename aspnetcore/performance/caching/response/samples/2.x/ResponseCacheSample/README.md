@@ -1,3 +1,3 @@
-# <a name="aspnet-core-response-cache-sample"></a>Beispiel: ASP.NET Core-Antwort-Cache
+# <a name="aspnet-core-response-cache-sample"></a>Beispiel für ASP.net Core-Antwort Cache
 
-Dieses Beispiel veranschaulicht die Verwendung des Zwischenspeicherns von Antworten in ASP.NET Core, begleitet [Zwischenspeichern von Antworten in ASP.NET Core](https://docs.microsoft.com/aspnet/core/performance/caching/response).
+Dieses Beispiel veranschaulicht die Verwendung des Antwort Caches in ASP.net Core, um das zwischen [Speichern von Antworten in ASP.net Core](https://docs.microsoft.com/aspnet/core/performance/caching/response)zu begleiten.

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: performance/caching/memory
-ms.openlocfilehash: 23acc17c861c203a87b1c113940e7bf42b51e810
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: e01e4a139893297a71aabb1af11b25cf0deb85a9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76972018"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653449"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Speicher interne Speicherung in ASP.net Core
 
@@ -19,7 +19,7 @@ ms.locfileid: "76972018"
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [John Luo](https://github.com/JunTaoLuo)und [Steve Smith](https://ardalis.com/)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/3.0sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/3.0sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="caching-basics"></a>Grundlagen zum Caching
 
@@ -37,7 +37,7 @@ Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnit
 
 * .NET Standard 2,0 oder höher.
 * Alle [.net-Implementierungen](/dotnet/standard/net-standard#net-implementation-support) , die auf .NET Standard 2,0 oder höher ausgerichtet sind. Beispielsweise ASP.net Core 2,0 oder höher.
-* .NET Framework 4,5 oder höher.
+* .NET Framework 4.5 oder höher.
 
 [Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/`IMemoryCache` (in diesem Artikel beschrieben) wird für `System.Runtime.Caching`/`MemoryCache` empfohlen, da Sie besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
 
@@ -180,7 +180,7 @@ Durch die Verwendung einer <xref:System.Threading.CancellationTokenSource> könn
 * Verwenden Sie <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks>, um die Rückrufe festzulegen, die ausgelöst werden, nachdem der Cache Eintrag aus dem Cache entfernt wurde.
 * Für die meisten apps ist `IMemoryCache` aktiviert. Wenn Sie z. b. `AddMvc`, `AddControllersWithViews`, `AddRazorPages`, `AddMvcCore().AddRazorViewEngine`und viele andere `Add{Service}` Methoden in `ConfigureServices`aufrufen, wird `IMemoryCache`aktiviert. Für apps, die keine der vorangehenden `Add{Service}` Methoden aufrufen, muss möglicherweise <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> in `ConfigureServices`aufgerufen werden.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>
@@ -196,7 +196,7 @@ Durch die Verwendung einer <xref:System.Threading.CancellationTokenSource> könn
 <!-- This is the 2.1 version -->
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [John Luo](https://github.com/JunTaoLuo)und [Steve Smith](https://ardalis.com/)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/memory/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="caching-basics"></a>Grundlagen zum Caching
 
@@ -214,7 +214,7 @@ Der in-Memory-Cache kann beliebige Objekte speichern. Die verteilte Cache Schnit
 
 * .NET Standard 2,0 oder höher.
 * Alle [.net-Implementierungen](/dotnet/standard/net-standard#net-implementation-support) , die auf .NET Standard 2,0 oder höher ausgerichtet sind. Beispielsweise ASP.net Core 2,0 oder höher.
-* .NET Framework 4,5 oder höher.
+* .NET Framework 4.5 oder höher.
 
 [Microsoft. Extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/)/`IMemoryCache` (in diesem Artikel beschrieben) wird für `System.Runtime.Caching`/`MemoryCache` empfohlen, da Sie besser in ASP.net Core integriert ist. Beispielsweise funktioniert `IMemoryCache` nativ mit ASP.net Core [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection).
 
@@ -347,7 +347,7 @@ Durch die Verwendung einer `CancellationTokenSource` können mehrere Cache Eintr
 
 * Verwenden Sie [postevictioncallbacks](/dotnet/api/microsoft.extensions.caching.memory.icacheentry.postevictioncallbacks#Microsoft_Extensions_Caching_Memory_ICacheEntry_PostEvictionCallbacks) , um die Rückrufe festzulegen, die ausgelöst werden, nachdem der Cache Eintrag aus dem Cache entfernt wurde.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>

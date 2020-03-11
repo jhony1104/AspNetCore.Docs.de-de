@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 02c95c19ebfb5ea6ad722f9d49f4cddc7471f8e1
-ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
+ms.openlocfilehash: 038799564078c4d3e8a7aa3a9841c6303edf9d12
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2020
-ms.locfileid: "77034080"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644263"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>Einführung in ASP.NET Core Blazor
 
@@ -136,11 +136,14 @@ Die Runtime handhabt das Senden von Benutzeroberflächenereignissen vom Browser 
 
 Die Verbindung, die von Blazor Server für die Kommunikation mit dem Browser verwendet wird, wird auch für die Verarbeitung von JavaScript-Interopaufrufen verwendet.
 
-![Blazor Server führt .NET-Code auf dem Server aus und interagiert über eine SignalR-Verbindung mit dem Dokumentobjektmodell.](index/_static/blazor-server.png)
+![Blazor Server führt .NET-Code auf dem Server aus und interagiert über eine SignalR-Verbindung](index/_static/blazor-server.png) mit dem Dokumentobjektmodell.
 
 ## <a name="javascript-interop"></a>JavaScript-Interoperabilität
 
-Für Apps, die JavaScript-Bibliotheken und Zugriff auf Browser-APIs von Drittanbietern benötigen, sind die Komponenten für die Interoperabilität mit JavaScript konzipiert. Komponenten können jede Bibliothek oder API verwenden, die auch von JavaScript verwendet werden kann. C#-Code kann JavaScript-Code abfragen, und umgekehrt. Weitere Informationen finden Sie unter <xref:blazor/javascript-interop>.
+Für Apps, die JavaScript-Bibliotheken und Zugriff auf Browser-APIs von Drittanbietern benötigen, sind die Komponenten für die Interoperabilität mit JavaScript konzipiert. Komponenten können jede Bibliothek oder API verwenden, die auch von JavaScript verwendet werden kann. C#-Code kann JavaScript-Code abfragen, und umgekehrt. Weitere Informationen finden Sie in den folgenden Artikeln:
+
+* <xref:blazor/call-javascript-from-dotnet>
+* <xref:blazor/call-dotnet-from-javascript>
 
 ## <a name="code-sharing-and-net-standard"></a>Codefreigabe und .NET Standard
 

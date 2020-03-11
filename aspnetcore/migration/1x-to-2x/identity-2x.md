@@ -5,12 +5,12 @@ description: In diesem Artikel werden die häufigsten Schritte zum Migrieren ASP
 ms.author: scaddie
 ms.date: 06/21/2019
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: f3817fa1808c331f7e167618e3bb00d68ad08571
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: af905f1127d504839f66d9e0e1ca1dfc27e32772
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75355180"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654943"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>Migrieren von Authentifizierung und Identität zu ASP.net Core 2,0
 
@@ -177,7 +177,7 @@ Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
     });
     ```
     
-### <a name="facebook-authentication"></a>Facebook-Authentifizierung
+### <a name="facebook-authentication"></a>Authentifizierung über Facebook
 
 Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
 - Ersetzen Sie den `UseFacebookAuthentication`-Methodenaufrufe in der `Configure`-Methode durch `UseAuthentication`:
@@ -197,7 +197,7 @@ Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
             });
     ```
 
-### <a name="google-authentication"></a>Google-Authentifizierung
+### <a name="google-authentication"></a>Authentifizierung über Google
 
 Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
 - Ersetzen Sie den `UseGoogleAuthentication`-Methodenaufrufe in der `Configure`-Methode durch `UseAuthentication`:
@@ -219,7 +219,7 @@ Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
 
 ### <a name="microsoft-account-authentication"></a>Authentifizierung über Microsoft-Konto
 
-Weitere Informationen zur Microsoft-Konto-Authentifizierung finden Sie in [diesem GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/14455).
+Weitere Informationen zur Microsoft-Konto-Authentifizierung finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/14455).
 
 Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
 - Ersetzen Sie den `UseMicrosoftAccountAuthentication`-Methodenaufrufe in der `Configure`-Methode durch `UseAuthentication`:
@@ -239,7 +239,7 @@ Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
             });
     ```
 
-### <a name="twitter-authentication"></a>Twitter-Authentifizierung
+### <a name="twitter-authentication"></a>Authentifizierung über Twitter
 
 Nehmen Sie die folgenden Änderungen in *Startup.cs*vor:
 - Ersetzen Sie den `UseTwitterAuthentication`-Methodenaufrufe in der `Configure`-Methode durch `UseAuthentication`:
@@ -448,6 +448,6 @@ In 2,0-Projekten ändert sich der Rückgabetyp in `IList<AuthenticationScheme>`.
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 Weitere Informationen finden Sie in der [Erörterung des Themas auth 2,0](https://github.com/aspnet/Security/issues/1338) auf GitHub.

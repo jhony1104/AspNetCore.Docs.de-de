@@ -10,31 +10,31 @@ no-loc:
 - SignalR
 uid: signalr/diagnostics
 ms.openlocfilehash: c5bd2ac27f8ca486b0d75aed8439747f72448625
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963848"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652411"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-opno-locsignalr"></a>Protokollierung und Diagnose in ASP.net Core SignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net Core signalr
 
 Von [Andrew Stanton-Nurse](https://twitter.com/anurse)
 
-Dieser Artikel bietet eine Anleitung zum Sammeln von Diagnoseinformationen aus Ihrer ASP.net Core SignalR-APP, um Probleme zu beheben.
+Dieser Artikel enthält Anleitungen zum Sammeln von Diagnoseinformationen aus Ihrer ASP.net Core signalr-APP, um Probleme zu beheben.
 
 ## <a name="server-side-logging"></a>Server seitige Protokollierung
 
 > [!WARNING]
 > Server seitige Protokolle können vertrauliche Informationen aus Ihrer APP enthalten. Veröffentlichen Sie **niemals** unformatierte Protokolle von Produktions-apps in öffentlichen Foren wie GitHub.
 
-Da SignalR Teil ASP.net Core ist, wird das ASP.net Core Protokollierungs System verwendet. In der Standardkonfiguration werden SignalR nur sehr wenig Informationen protokolliert, aber dies kann konfiguriert werden. Ausführliche Informationen zum Konfigurieren ASP.net Core Protokollierung finden Sie in der Dokumentation zur [ASP.net Core Protokollierung](xref:fundamentals/logging/index#configuration) .
+Da signalr Teil ASP.net Core ist, verwendet es das ASP.net Core Protokollierungs System. In der Standardkonfiguration protokolliert signalr nur wenige Informationen, aber dies kann konfiguriert werden. Ausführliche Informationen zum Konfigurieren ASP.net Core Protokollierung finden Sie in der Dokumentation zur [ASP.net Core Protokollierung](xref:fundamentals/logging/index#configuration) .
 
-SignalR verwendet zwei Kategorien von Kategorien:
+Signalr verwendet zwei Kategorien von Kategorien:
 
 * `Microsoft.AspNetCore.SignalR` &ndash; für Protokolle im Zusammenhang mit hubprotokollen, beim Aktivieren von Hubs, beim Aufrufen von Methoden und anderen hubbezogenen Aktivitäten.
-* `Microsoft.AspNetCore.Http.Connections` &ndash; für Protokolle im Zusammenhang mit Transporten, z. b. websockets, langen Abruf-und Server gesendeten Ereignissen und SignalR Infrastruktur auf niedriger Ebene.
+* `Microsoft.AspNetCore.Http.Connections` &ndash; für Protokolle, die sich auf Transporte beziehen, wie z. b. websockets, lange Abruf Ereignisse und Server gesendete Ereignisse und Low-Level signalr-Infrastruktur.
 
-Um ausführliche Protokolle von SignalRzu aktivieren, konfigurieren Sie beide vorangehenden Präfixe auf `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum `LogLevel` unter Abschnitt in `Logging`hinzufügen:
+Um detaillierte Protokolle von signalr zu aktivieren, konfigurieren Sie beide vorangehenden Präfixe auf der `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum unter Abschnitt `LogLevel` in `Logging`hinzufügen:
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -57,7 +57,7 @@ Wie Sie auf serverseitige Protokolle zugreifen, hängt von der Umgebung ab, in d
 
 ### <a name="as-a-console-app-outside-iis"></a>Als Konsolen-App außerhalb von IIS
 
-Wenn Sie in einer Konsolen-app ausgeführt werden, sollte die [Konsolen](xref:fundamentals/logging/index#console-provider) Protokollierung standardmäßig aktiviert werden. SignalR Protokolle werden in der-Konsole angezeigt.
+Wenn Sie in einer Konsolen-app ausgeführt werden, sollte die [Konsolen](xref:fundamentals/logging/index#console-provider) Protokollierung standardmäßig aktiviert werden. Signalr-Protokolle werden in der-Konsole angezeigt.
 
 ### <a name="within-iis-express-from-visual-studio"></a>In IIS Express aus Visual Studio
 
@@ -84,7 +84,7 @@ Um die Protokollierung vollständig zu deaktivieren, geben Sie `signalR.LogLevel
 
 In der folgenden Tabelle werden die für den JavaScript-Client verfügbaren Protokoll Ebenen angezeigt. Wenn Sie die Protokollebene auf einen dieser Werte festlegen, wird die Protokollierung auf dieser Ebene und allen darüber liegenden Ebenen in der Tabelle ermöglicht.
 
-| Ebene | Beschreibung |
+| Ebene | BESCHREIBUNG |
 | ----- | ----------- |
 | `None` | Es werden keine Nachrichten protokolliert. |
 | `Critical` | Meldungen, die auf einen Fehler in der gesamten App hindeuten. |
@@ -107,7 +107,7 @@ Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden m�
 
 Um Protokolle vom .NET-Client zu erhalten, können Sie die `ConfigureLogging`-Methode auf `HubConnectionBuilder`verwenden. Dies funktioniert auf die gleiche Weise wie die `ConfigureLogging`-Methode auf `WebHostBuilder` und `HostBuilder`. Sie können die gleichen Protokollierungs Anbieter konfigurieren, die Sie in ASP.net Core verwenden. Allerdings müssen Sie die nuget-Pakete für die einzelnen Protokollierungs Anbieter manuell installieren und aktivieren.
 
-### <a name="console-logging"></a>Konsolen Protokollierung
+### <a name="console-logging"></a>Konsolenprotokollierung
 
 Fügen Sie das Paket [Microsoft. Extensions. Logging. Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) hinzu, um die Konsolen Protokollierung zu aktivieren. Verwenden Sie dann die `AddConsole`-Methode zum Konfigurieren der Konsolen Protokollierung:
 
@@ -131,7 +131,7 @@ Wenn Sie sich an anderen Stellen in ihrer App anmelden, ist das Ändern der Stan
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
-## <a name="network-traces"></a>Netzwerk Ablauf Verfolgungen
+## <a name="network-traces"></a>Netzwerkablaufverfolgung
 
 > [!WARNING]
 > Eine Netzwerk Ablauf Verfolgung enthält den gesamten Inhalt jeder Nachricht, die von Ihrer APP gesendet wird. Veröffentlichen Sie **niemals** unformatierte Netzwerk Ablauf Verfolgungen aus Produktions-apps in öffentlichen Foren wie GitHub.

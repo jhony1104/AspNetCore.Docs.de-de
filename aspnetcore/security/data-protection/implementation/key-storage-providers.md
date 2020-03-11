@@ -5,12 +5,12 @@ description: Informationen Sie zu den softwareschlüsselspeicher-Anbieter in ASP
 ms.author: riande
 ms.date: 12/05/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 219ebc471de32d15e4a43c938eef156c52e5f11e
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172580"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653383"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Softwareschlüsselspeicher-Anbieter in ASP.NET Core
 
@@ -145,13 +145,15 @@ Um den EF Core-Anbieter zu konfigurieren, müssen Sie die [persistkeystodbcontex
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
+
 Der generische Parameter (`TContext`) muss von [dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) erben und [idataschutzkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)implementieren:
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
 Erstellen Sie die Tabelle `DataProtectionKeys`.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Führen Sie die folgenden Befehle im Fenster **Paket-Manager-Konsole** (PMC) aus:
 
@@ -160,7 +162,7 @@ Add-Migration AddDataProtectionKeys -Context MyKeysContext
 Update-Database -Context MyKeysContext
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 Führen Sie die folgenden Befehle in einer Befehlsshell aus:
 

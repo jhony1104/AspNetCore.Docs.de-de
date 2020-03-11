@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 508f91cdcd93c149602223250520eecb73625b24
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: 269be9ece674b39d03cb50720f4fb182c565a639
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880989"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651967"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>Hilfsprogramm für Teiltags in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Scott Addie](https://github.com/scottaddie)
 
 Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpers/intro>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="overview"></a>Übersicht
 
@@ -43,7 +43,7 @@ Das Modell *Product* wird in den Beispielen in diesem Dokument verwendet:
 
 Eine Auflistung der im Hilfsprogramm für Teiltags enthaltenen Attribute folgt.
 
-## <a name="name"></a>Name
+## <a name="name"></a>name
 
 Das `name`-Attribut ist erforderlich. Es gibt den Namen oder den Pfad der Teilansicht an, die gerendert werden soll. Wenn der Name einer Teilansicht bereitgestellt wird, wird der Prozess [Ansichtsermittlung](xref:mvc/views/overview#view-discovery) initiiert. Dieser Prozess wird umgangen, wenn ein expliziter Pfad bereitgestellt wird. Eine Übersicht über alle verfügbaren `name`-Werte finden Sie unter [Ermitteln von Teilansichten](xref:mvc/views/partial#partial-view-discovery).
 

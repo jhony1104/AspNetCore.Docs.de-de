@@ -9,25 +9,25 @@ no-loc:
 - SignalR
 uid: signalr/version-differences
 ms.openlocfilehash: cca9a0cb0c46fc25eb5d1f7127d31fd3ab92f0b4
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880365"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653533"
 ---
-# <a name="differences-between-aspnet-opno-locsignalr-and-aspnet-core-opno-locsignalr"></a>Unterschiede zwischen ASP.net-SignalR und ASP.net Core SignalR
+# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>Unterschiede zwischen ASP.net signalr und ASP.net Core signalr
 
-ASP.net Core SignalR ist für ASP.net-SignalRnicht mit Clients oder Servern kompatibel. In diesem Artikel werden die Features erläutert, die in ASP.net Core SignalRentfernt oder geändert wurden.
+ASP.net Core signalr ist nicht mit Clients oder Servern für ASP.net signalr kompatibel. In diesem Artikel werden die Features erläutert, die in ASP.net Core signalr entfernt oder geändert wurden.
 
-## <a name="how-to-identify-the-opno-locsignalr-version"></a>Identifizieren der SignalR Version
+## <a name="how-to-identify-the-signalr-version"></a>Identifizieren der signalr-Version
 
 ::: moniker range=">= aspnetcore-3.0"
 
-|                      | ASP.NET SignalR | ASP.net Core SignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
-| Server-nuget-Paket | [Microsoft. Aspnet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | Keine Im gemeinsamen [Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) -Framework enthalten. |
-| Client-nuget-Pakete | [Microsoft. Aspnet.SignalR. Ent](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. Aspnet.SignalR. JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. aspnetcore.SignalR. Ent](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
-| NPM-Paket für JavaScript-Client | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
+| Server-nuget-Paket | [Microsoft. Aspnet. signalr](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | Keine. Im gemeinsamen [Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app) -Framework enthalten. |
+| Client-nuget-Pakete | [Microsoft. Aspnet. signalr. Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. Aspnet. signalr. js](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. aspnetcore. signalr. Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
+| NPM-Paket für JavaScript-Client | [SignalR](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | Java-Client | [GitHub-Repository](https://github.com/SignalR/java-client) (veraltet)  | Maven-Paket [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | Server-App-Typ | ASP.net (System. Web) oder owin-Self-Host | ASP.NET Core |
 | Unterstützte Serverplattformen | .NET Framework 4,5 oder höher | .Net Core 3,0 oder höher |
@@ -36,11 +36,11 @@ ASP.net Core SignalR ist für ASP.net-SignalRnicht mit Clients oder Servern komp
 
 ::: moniker range="<= aspnetcore-2.2"
 
-|                      | ASP.NET SignalR | ASP.net Core SignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
 | Server-nuget-Paket | [Microsoft. Aspnet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [Microsoft. aspnetcore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[Microsoft. aspnetcore.SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
 | Client-nuget-Pakete | [Microsoft. Aspnet.SignalR. Ent](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. Aspnet.SignalR. JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. aspnetcore.SignalR. Ent](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
-| NPM-Paket für JavaScript-Client | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
+| NPM-Paket für JavaScript-Client | [SignalR](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
 | Java-Client | [GitHub-Repository](https://github.com/SignalR/java-client) (veraltet)  | Maven-Paket [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | Server-App-Typ | ASP.net (System. Web) oder owin-Self-Host | ASP.NET Core |
 | Unterstützte Serverplattformen | .NET Framework 4,5 oder höher | .NET Framework 4.6.1 oder höher<br>.Net Core 2,1 oder höher |
@@ -83,11 +83,11 @@ Vor ASP.net Core 3,0 unterstützt SignalR keine automatischen erneuten Verbindun
 
 ::: moniker-end
 
-### <a name="protocol-support"></a>Protokoll Unterstützung
+### <a name="protocol-support"></a>Protokollunterstützung
 
 ASP.net Core SignalR unterstützt JSON und ein neues binäres Protokoll, das auf [messagepack](xref:signalr/messagepackhubprotocol)basiert. Außerdem können benutzerdefinierte Protokolle erstellt werden.
 
-### <a name="transports"></a>Transportprotokolle
+### <a name="transports"></a>Transporte
 
 Der unveränderte Frame-Transport wird in ASP.net Core SignalRnicht unterstützt.
 
@@ -141,7 +141,7 @@ In ASP.net Core SignalRwurde das Verbindungs Modell vereinfacht. Verbindungen we
 
 ASP.net Core SignalR unterstützt jetzt das [Streaming von Daten](xref:signalr/streaming) vom Hub zum Client.
 
-### <a name="state"></a>Status
+### <a name="state"></a>State
 
 Die Möglichkeit, den beliebigen Zustand zwischen Clients und dem Hub (häufig als `HubState`bezeichnet) zu übergeben, wurde entfernt sowie Unterstützung für Fortschrittsmeldungen. Zurzeit gibt es keine Entsprechung von Hub-Proxys.
 

@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/03/2020
 uid: web-api/action-return-types
-ms.openlocfilehash: aeea005abfcfd45a6fc94dfddfd65e60ffb15df8
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
-ms.translationtype: HT
+ms.openlocfilehash: 17e290d3aba4f724fcbd1693af371017c4d3f03a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/08/2020
-ms.locfileid: "77089187"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651235"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
 
 Von [Scott Addie](https://github.com/scottaddie)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/action-return-types/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/action-return-types/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 In ASP.NET Core haben Sie die folgenden Optionen für Rückgabetypen für Web-API-Controlleraktionen:
 
@@ -148,7 +148,7 @@ Wenn das [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribut
 
 In ASP.NET Core 2.1 wurde der Rückgabetyp [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) für Web-API-Controlleraktionen eingeführt. Damit wird die Rückgabe eines von <xref:Microsoft.AspNetCore.Mvc.ActionResult> abgeleiteten Typs oder eines [spezifischen Typs](#specific-type) ermöglicht. `ActionResult<T>` besitzt gegenüber dem [IActionResult-Typ](#iactionresult-type) die folgenden Vorteile:
 
-* Die `Type`-Eigenschaft des [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)-Attributs kann ausgeschlossen werden. `[ProducesResponseType(200, Type = typeof(Product))]` wird beispielsweise zu `[ProducesResponseType(200)]` vereinfacht. Der erwartete Rückgabetyp der Aktion wird stattdessen von `T` in `ActionResult<T>` abgeleitet.
+* Die [-Eigenschaft des `[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)`Type`-Attributs kann ausgeschlossen werden. `[ProducesResponseType(200, Type = typeof(Product))]` wird beispielsweise zu `[ProducesResponseType(200)]` vereinfacht. Der erwartete Rückgabetyp der Aktion wird stattdessen von `T` in `ActionResult<T>` abgeleitet.
 * [Implizite Umwandlungsoperatoren](/dotnet/csharp/language-reference/keywords/implicit) unterstützen die Konvertierung von `T` und `ActionResult` in `ActionResult<T>`. `T` wird in <xref:Microsoft.AspNetCore.Mvc.ObjectResult> konvertiert, wodurch `return new ObjectResult(T);` zu `return T;` vereinfacht wird.
 
 C# unterstützt keine impliziten Umwandlungsoperatoren in Schnittstellen. Daher ist die Konvertierung der Schnittstelle in einen konkreten Typ erforderlich, um `ActionResult<T>` verwenden zu können. Die Verwendung von `IEnumerable` im folgenden Beispiel funktioniert also nicht:

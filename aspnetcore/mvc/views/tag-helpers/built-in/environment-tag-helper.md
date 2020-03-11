@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: e2e038fe69da696b67f7aef61795e23dc8512fdf
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
-ms.translationtype: HT
+ms.openlocfilehash: 308e7db47104ebd4d6bb8d08c64f14bbd118898b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856136"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653767"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>Umgebungstaghilfsprogramm in ASP.NET Core
 
-Von [Peter Kellner](https://peterkellner.net), [Hisham Bin Ateya](https://twitter.com/hishambinateya) und [Luke Latham](https://github.com/guardrex)
+Von [Peter Kellner](https://peterkellner.net) und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
 Basierend auf der aktuellen [Hostingumgebung](xref:fundamentals/environments) rendert das Environment-Taghilfsprogramm den von ihm eingeschlossenen Inhalt unter Vorbehalt. Das einzelne Attribut `names` des Environment-Taghilfsprogramm ist eine durch Trennzeichen getrennte Liste von Umgebungsnamen. Wenn die Namen der bereitgestellten Umgebung der aktuellen Umgebung entsprechen, wird der eingeschlossene Inhalt gerendert.
 
@@ -41,7 +41,7 @@ Im folgenden Beispiel wird ein Environment-Taghilfsprogramm verwendet: Der Inhal
 
 ## <a name="include-and-exclude-attributes"></a>Die Attribute „include“ und „exclude“
 
-Die Attribute `include` & `exclude` steuern das Rendern des eingeschlossenen Inhalts anhand der eingeschlossenen bzw. ausgeschlossenen Namen von Hostingumgebungen.
+`include` & `exclude` Attribute das Rendern des eingeschlossenen Inhalts basierend auf den eingeschlossenen oder ausgeschlossenen hostingumgebungsnamen.
 
 ### <a name="include"></a>include
 
@@ -53,7 +53,7 @@ Die `include`-Eigenschaft zeigt ein ähnliches Verhalten wie das Attribut `names
 </environment>
 ```
 
-### <a name="exclude"></a>exclude
+### <a name="exclude"></a>ausschließen
 
 Im Gegensatz zum Attribut `include` wird der Inhalt des `<environment>`-Tags gerendert, wenn die Hostingumgebung nicht einer Umgebung entspricht, die im Attributwert `exclude` aufgeführt wird.
 

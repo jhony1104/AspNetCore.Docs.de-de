@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 uid: mvc/views/partial
-ms.openlocfilehash: 50c4f41d5d3099184aa3992ed7e176b74c488d2a
-ms.sourcegitcommit: 805f625d16d74e77f02f5f37326e5aceafcb78e3
-ms.translationtype: HT
+ms.openlocfilehash: 04b6d6e620f34ac7154728b1b3048195e87c5860
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70985567"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653461"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Verwenden von Teilansichten in ASP.NET Core
 
-Von [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) und [Scott Sauber](https://twitter.com/scottsauber)
+Von [Steve Smith](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) und [Scott Sauber](https://twitter.com/scottsauber)
 
 Eine Teilansicht ist eine [Razor](xref:mvc/views/razor)-Markupdatei (*CSHTML-Datei*), die HTML-Ausgabe *innerhalb* der gerenderten Ausgabe einer anderen Markupdatei rendert.
 
@@ -25,7 +25,7 @@ Der Begriff *Teilansicht* wird verwendet, wenn entweder eine MVC-App entwickelt 
 
 ::: moniker-end
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-partial-views"></a>Wann werden Teilansichten verwendet?
 
@@ -74,7 +74,7 @@ Dateinamen von Teilansichten beginnen häufig mit einem Unterstrich (`_`). Diese
 
 ### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Verwenden einer Teilansicht in einem Razor Pages-PageModel
 
-In ASP.NET Core 2.0 oder 2.1 rendert die folgende Handlermethode die  *\_AuthorPartialRP.cshtml*-Teilansicht in der Antwort:
+In ASP.NET Core 2.0 oder 2.1 rendert die folgende Handlermethode die *\_AuthorPartialRP.cshtml*-Teilansicht in der Antwort:
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -266,7 +266,7 @@ Für die Ermittlung von Teilansichten gelten die folgenden Konventionen:
 * Teilansichten können *verkettet* sein: Eine Teilansicht kann eine andere Teilansicht aufrufen, wenn durch den Aufruf kein Zirkelbezug entsteht. Relative Pfade sind immer relativ zur aktuellen Datei, nicht zum Stamm- oder übergeordneten Verzeichnis der Datei.
 
 > [!NOTE]
-> Ein [Razor](xref:mvc/views/razor) `section`, der in einer Teilansicht definiert ist, ist für übergeordnete Markupdateien nicht sichtbar. Die `section`-Anweisung ist nur für die Teilansicht, in der sie definiert ist, sichtbar.
+> Ein [Razor](xref:mvc/views/razor) -`section`, das in einer Teilansicht definiert ist, ist für übergeordnete Markup Dateien nicht sichtbar. Die `section`-Anweisung ist nur für die Teilansicht, in der sie definiert ist, sichtbar.
 
 ## <a name="access-data-from-partial-views"></a>Zugriff auf Daten aus Teilansichten
 

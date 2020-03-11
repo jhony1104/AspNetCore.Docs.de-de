@@ -1,81 +1,81 @@
 ---
-title: ASP.NET Core-Datenschutz
+title: ASP.net Core Datenschutz
 author: rick-anderson
-description: Erfahren Sie mehr über das Konzept des Schutzes von Daten und den Entwurfsprinzipien von ASP.NET Core Datenschutz-APIs.
+description: Erfahren Sie mehr über das Konzept des Schutzes von Daten und die Entwurfs Prinzipien der ASP.net Core Datenschutz-APIs.
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/data-protection/introduction
 ms.openlocfilehash: 37f170a3e8a46ef2215b0999358d46dd402636df
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897987"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653839"
 ---
-# <a name="aspnet-core-data-protection"></a>ASP.NET Core-Datenschutz
+# <a name="aspnet-core-data-protection"></a>ASP.net Core Datenschutz
 
-Webanwendungen müssen häufig zum Speichern von vertraulichen Daten. Windows bietet DPAPI für desktop-Anwendungen, aber dies ist möglich, ungeeignet für Webanwendungen. ASP.NET Core-Stapel für den Schutz der Daten bieten eine einfache, benutzerfreundliche kryptographische API, die ein Entwickler zum Schutz von Daten, einschließlich der schlüsselverwaltung und-Rotation verwenden kann.
+Webanwendungen müssen häufig sicherheitsrelevante Daten speichern. Windows stellt DPAPI für Desktop Anwendungen bereit, ist aber für Webanwendungen ungeeignet. Der ASP.net Core Datenschutz Stapel bietet eine einfache, leicht zu verwendende kryptografieapi, mit der ein Entwickler Daten schützen kann, einschließlich Schlüsselverwaltung und Rotation.
 
-ASP.NET Core-Stapel für den Schutz der Daten als langfristige Ersatz für dienen soll die &lt;MachineKey&gt; Element in ASP.NET 1.x - 4.x. Es wurde speziell auf viele die Nachteile von den alten kryptografischen Stapel und gleichzeitig eine Out-of-the-Box-Lösung für die meisten Anwendungsfälle, die moderne Anwendungen wahrscheinlich konfrontiert werden.
+Der ASP.net Core Datenschutz Stapel dient als langfristige Ersetzung für das &lt;machineKey-&gt;-Element in ASP.NET 1. x-4. x. Es wurde so konzipiert, dass viele der Unzulänglichkeiten des alten kryptografiestapels behandelt werden, während gleichzeitig eine sofort Einsatz orientierte Lösung für die Mehrzahl der Anwendungsfälle bereitgestellt wird, auf denen moderne Anwendungen wahrscheinlich stoßen.
 
 ## <a name="problem-statement"></a>Problembeschreibung
 
-Die allgemeine Problem-Anweisung kann in einem einzigen Satz kurz angegeben werden: Muss ich vertrauenswürdigen Informationen für den späteren Abruf zu speichern, aber ich nicht den Dauerhaftigkeitsmechanismus vertrauen. Web ausgedrückt kann dies geschrieben werden, als "Ich Round-Trip vertrauenswürdigen Status über ein nicht vertrauenswürdiger Client muss."
+Die allgemeine Problem Erklärung kann in einem einzelnen Satz kurz gesagt werden: Ich muss vertrauenswürdige Informationen für den späteren Abruf beibehalten, aber ich vertraue dem Persistenzmechanismus nicht. In webbegriffen könnte dies wie folgt lauten: "Ich muss den vertrauenswürdigen Zustand über einen nicht vertrauenswürdigen Client Roundtrip".
 
-Das kanonische Beispiel hierfür ist ein Authentifizierungscookie oder bearertoken token. Der Server generiert eine "Ich bin Groot und Xyz berechtigt" token, und übergibt diesen an dem Client. Irgendwann wird der Client dieses Token an den Server angezeigt, aber der Server benötigt eine Art von Gewissheit, dass der Client das Token gefälschten noch nicht. Daher die erste Anforderung: Echtheitszertifikat (auch als) Integrität, vor unbefugtem Zugriff sichern).
+Das kanonische Beispiel hierfür ist ein Authentifizierungs Cookie oder bearertoken. Der Server generiert das Token "I am Groot und hat XYZ-Berechtigungen" und übergibt es an den Client. Zu einem späteren Zeitpunkt zeigt der Client das Token wieder dem Server an, der Server muss jedoch sicher sein, dass der Client das Token nicht gefälscht hat. Daher die erste Anforderung: Authentizität (auch bekannt als Integrität, Manipulationsschutz).
 
-Da der beibehaltene Zustand vom Server als vertrauenswürdig eingestuft wird, erwarten wir, dass es sich bei diesem Status Informationen enthalten kann, die spezifisch für die betriebsumgebung ist. Dies kann in Form von einen Dateipfad, eine Berechtigung, ein Handle oder andere indirekten Verweis oder einem anderen Ort von Server-spezifische Daten sein. Solche Informationen sollten in der Regel nicht zu einem nicht vertrauenswürdigen Client offengelegt werden. Daher die zweite Anforderung: Vertraulichkeit.
+Da der beibehaltene Zustand vom Server als vertrauenswürdig eingestuft wird, erwarten wir, dass dieser Zustand Informationen enthält, die spezifisch für die Betriebsumgebung sind. Dies kann ein Dateipfad, eine Berechtigung, ein Handle oder ein anderer indirekter Verweis oder ein anderer Teil der serverspezifischen Daten sein. Diese Informationen sollten in der Regel nicht einem nicht vertrauenswürdigen Client offengelegt werden. Daher ist dies die zweite Anforderung: Vertraulichkeit.
 
-Da moderne Anwendungen in Komponenten gegliedert sind, ist wie wir gesehen haben, dass die einzelne Komponenten dieses System unabhängig von anderen Komponenten im System nutzen möchten. Z. B. wenn eine Bearer-token-Komponente dieser Stapel verwendet wird, sollte es ohne Störungen durch eine Anti-CSRF-Methode ausgeführt werden, die auch denselben Stapel verwendet werden kann. Daher die letzte Voraussetzung: Isolation.
+Da moderne Anwendungen in Komponenten gegliedert werden, sehen wir, dass einzelne Komponenten dieses System ohne Rücksicht auf andere Komponenten des Systems nutzen möchten. Wenn beispielsweise eine bearertokenkomponente diesen Stapel verwendet, sollte Sie ohne Störungen von einem Anti-CSRF-Mechanismus betrieben werden, der möglicherweise auch denselben Stapel verwendet. Daher ist dies die letzte Anforderung: Isolation.
 
-Wir können weitere Einschränkungen bereitstellen, um die Anforderungen einzugrenzen. Es wird davon ausgegangen, dass alle Dienste innerhalb der Kryptografiesystem gleichermaßen vertrauenswürdig sind und die Daten müssen nicht generiert oder außerhalb der Dienste in unserem Einflussbereich direkt genutzt werden. Darüber hinaus benötigen wir, dass Vorgänge sind so schnell wie möglich, da jede Anforderung an den Webdienst der Kryptografiesystem einmal oder mehrmals durchlaufen kann. Dadurch symmetrische Kryptografie ideal für unser Szenario, und wir können asymmetrischen Kryptografie Rabatt, bis z. B. eine Zeit, die er benötigt wird.
+Wir können weitere Einschränkungen bereitstellen, um den Umfang unserer Anforderungen einzuschränken. Wir gehen davon aus, dass alle Dienste, die innerhalb des Kryptosystems ausgeführt werden, gleichermaßen vertrauenswürdig sind und dass die Daten nicht außerhalb der Dienste in unserer direkten Kontrolle generiert oder genutzt werden müssen. Außerdem ist es erforderlich, dass die Vorgänge so schnell wie möglich sind, da jede Anforderung an den Webdienst ein-oder mehrmals durch das Kryptosystem durchlaufen kann. Dadurch eignet sich die symmetrische Kryptografie ideal für unser Szenario, und wir können die asymmetrische Kryptografie bis zu einem solchen Zeitpunkt für die benötigte Zeit Rabatt.
 
-## <a name="design-philosophy"></a>Entwurfsphilosophie
+## <a name="design-philosophy"></a>Entwurfs Philosophie
 
-Da fingen wir durch Erkennen von Problemen mit dem vorhandenen Stapel. Sobald wir, die hatten, werden wir Umfrage unter Einhaltung von vorhandenen Lösungen und hat ergeben, dass keine vorhandene Lösung ganz die Funktionen verfügt, die wir gesucht. Wir konzipiert, klicken Sie dann eine Lösung basierend auf einige grundlegende Prinzipien.
+Wir haben damit begonnen, Probleme mit dem vorhandenen Stapel zu identifizieren. Nachdem wir dies hatten, haben wir die Landschaft vorhandener Lösungen befragt und davon abschlossen, dass keine vorhandene Lösung über die von uns gesuchten Funktionen verfügt. Anschließend haben wir eine Lösung auf Grundlage verschiedener Leitfäden entwickelt.
 
-* Das System sollte die Vereinfachung der Konfiguration bieten. Im Idealfall wird das System wäre ohne Konfigurationsaufwand, und Entwickler können sofort loslegen. In Situationen, in denen Entwickler so konfigurieren Sie einen bestimmten Aspekt (z. B. das Key-Repository müssen) sollte berücksichtigt werden, diese bestimmten Konfigurationen einfach darauf.
+* Das System sollte die Einfachheit der Konfiguration ermöglichen. Im Idealfall wäre das System eine Null-Konfiguration, und Entwickler könnten die Ausführung erreichen. In Situationen, in denen Entwickler einen bestimmten Aspekt konfigurieren müssen (z. b. das schlüsselrepository), sollte berücksichtigt werden, dass diese spezifischen Konfigurationen einfach sind.
 
-* Bieten Sie eine einfache Endverbraucher-API. Die APIs sollte für die ordnungsgemäße Verwendung einfach und schwierig, falsch zu verwenden.
+* Bietet eine einfache API für den Kunden Zugriff. Die APIs sollten auf einfache Weise ordnungsgemäß und schwer zu verwenden sein.
 
-* Entwickler sollten nicht schlüsselverwaltung Prinzipien lernen. Das System sollte Auswahl des Algorithmus und die Gültigkeitsdauer des Entwicklers im Auftrag verarbeiten können. Im Idealfall sollte der Entwickler nie Zugriff auf das unformatierte Schlüsselmaterial haben.
+* Entwickler sollten keine Schlüssel Verwaltungs Prinzipien erlernen. Das System sollte die Algorithmusauswahl und die Schlüssel Lebensdauer im Auftrag des Entwicklers verarbeiten. Im Idealfall sollte der Entwickler nie einmal auf das rohschlüssel Material zugreifen können.
 
-* Schlüssel sollten im Ruhezustand, wenn möglich geschützt werden. Das System sollte eine entsprechende Standardeinstellung Schutzmechanismus herausfinden und automatisch angewendet.
+* Schlüssel sollten nach Möglichkeit im Ruhezustand geschützt werden. Das System sollte einen geeigneten Standardschutz Mechanismus ermitteln und ihn automatisch anwenden.
 
-Mit diesen Prinzipien Beachten Sie, die wir entwickelt einer einfaches, [benutzerfreundliche](xref:security/data-protection/using-data-protection) der Stapel zum Schutz von Daten.
+Mit diesen Prinzipien haben wir einen einfachen, [leicht zu verwendenden](xref:security/data-protection/using-data-protection) Datenschutz Stapel entwickelt.
 
-Die ASP.NET Core die Datenschutz-APIs sind in erster Linie für unbestimmte Persistenz vertrauliche Nutzlasten nicht vorgesehen. Andere Technologien wie [Windows CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) und [Azure Rights Management](/rights-management/) eignen sich besser für das Szenario unbegrenzten Speicher, und dementsprechend sichere schlüsselverwaltung Funktionen haben. Allerdings nichts verbietet Entwickler mithilfe der ASP.NET Core die Datenschutz-APIs für den langfristigen Schutz von vertraulichen Daten.
+Die ASP.net Core-Datenschutz-APIs sind nicht in erster Linie für die unbegrenzte Persistenz von vertraulichen Nutzlasten vorgesehen. Andere Technologien wie [Windows CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) und [Azure Rights Management](/rights-management/) sind besser für das Szenario der unbegrenzten Speicherung geeignet und verfügen über die entsprechenden leistungsstarken Schlüssel Verwaltungsfunktionen. Dies bedeutet, dass ein Entwickler nicht daran hindert, die ASP.net Core Datenschutz-APIs für den langfristigen Schutz vertraulicher Daten zu verwenden.
 
 ## <a name="audience"></a>Zielgruppe
 
-Das System zum Schutz von Daten ist in fünf wichtigsten Pakete aufgeteilt. Verschiedene Aspekte dieser APIs Zielgruppen drei wichtigsten;
+Das Datenschutzsystem ist in fünf Haupt Pakete unterteilt. Verschiedene Aspekte dieser APIs sind drei Haupt Zielgruppen.
 
-1. Die [Übersicht über Consumer-APIs](xref:security/data-protection/consumer-apis/overview) Anwendungs- und Framework-Entwickler ausgerichtet.
+1. Die [Consumer-APIs (Übersicht](xref:security/data-protection/consumer-apis/overview) ) Ziel Anwendungs-und Frameworkentwickler.
 
-   "Ich möchte nicht erfahren Sie mehr über die Funktionsweise des Stapels oder darüber, wie es konfiguriert ist. Ich möchte einfach einigen Vorgängen so einfach wie möglich eine Weise mit hoher Wahrscheinlichkeit erfolgreich mithilfe der APIs ausführen."
+   "Ich möchte nicht erfahren, wie der Stapel funktioniert oder wie er konfiguriert ist. Ich möchte einen Vorgang so einfach wie möglich mit hoher Wahrscheinlichkeit für die erfolgreiche Verwendung der APIs ausführen. "
 
-2. Die [Konfigurations-APIs](xref:security/data-protection/configuration/overview) Anwendungsentwickler und Systemadministratoren als Ziel festlegen.
+2. Die [Konfigurations-APIs](xref:security/data-protection/configuration/overview) sind für Anwendungsentwickler und Systemadministratoren konzipiert.
 
-   "Ich möchte System zum Schutz von Daten zu informieren, dass meine Umgebung Nichtstandard-Pfade oder Einstellungen erfordert."
+   "Ich muss dem Datenschutzsystem mitteilen, dass meine Umgebung nicht standardmäßige Pfade oder Einstellungen erfordert."
 
-3. Die Erweiterbarkeit APIs Ziel Entwickler verantwortlich für die benutzerdefinierte Richtlinie implementieren. Verwendung dieser APIs würde auf seltenen Fällen beschränkt und aufgetreten ist, handelt es sich bei Sicherheit bewusst Entwickler.
+3. Die Erweiterbarkeits-APIs richten sich an Entwickler, die für die Implementierung benutzerdefinierter Richtlinien verantwortlich sind Die Verwendung dieser APIs ist auf seltene Situationen und erfahrene, sicherheitsbewusste Entwickler beschränkt.
 
-   "Ich möchte eine gesamte Komponente innerhalb des Systems zu ersetzen, da ich rundum einzigartigen verhaltensanforderungen verfügen. Ich bin bereit, um zu erfahren ungewöhnlicherweise verwendete Teile der API-Oberfläche, um ein Plug-in zu erstellen, die meine Anforderungen erfüllt."
+   "Ich muss eine gesamte Komponente im System ersetzen, da ich wirklich eindeutige Verhaltens Anforderungen habe. Ich bin bereit, nicht häufig verwendete Teile der API-Oberfläche zu erlernen, um ein Plug-in zu erstellen, das meine Anforderungen erfüllt. "
 
 ## <a name="package-layout"></a>Paketlayout
 
-Stapel für den Schutz von Daten besteht aus fünf Paketen.
+Der Stapel für den Datenschutz besteht aus fünf Paketen.
 
-* [Microsoft.AspNetCore.DataProtection.Abstractions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) enthält die <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> und <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> Schnittstellen zum Erstellen von Data Protection-Diensten. Es enthält auch nützliche Erweiterungsmethoden für die Arbeit mit diesen Typen (z. B. [IDataProtector.Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)). Wenn System zum Schutz von Daten ist an anderer Stelle instanziiert, und Sie die API verbrauchen-Verweis `Microsoft.AspNetCore.DataProtection.Abstractions`.
+* [Microsoft. aspnetcore. dataprotection. Abstractions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) enthält die <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> und <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> Schnittstellen zum Erstellen von Datenschutz Diensten. Außerdem sind nützliche Erweiterungs Methoden für die Arbeit mit diesen Typen (z. b. [idataprotector. Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)) enthalten. Wenn das Datenschutzsystem an einem anderen Speicherort instanziiert wird und Sie die API nutzen, verweisen Sie auf `Microsoft.AspNetCore.DataProtection.Abstractions`.
 
-* [Microsoft.AspNetCore.DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) enthält die Core-Implementierung des Data Protection Systems, einschließlich Core kryptografischen Vorgänge, schlüsselverwaltung, Konfiguration und Erweiterbarkeit. Instanziieren Sie das System zum Schutz von Daten (z. B. zum Hinzufügen einer <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) oder ändern, oder erweitern das Verhalten, verweisen Sie auf `Microsoft.AspNetCore.DataProtection`.
+* [Microsoft. aspnetcore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) enthält die grundlegende Implementierung des Datenschutzsystems, einschließlich der wichtigsten Kryptografievorgänge, Schlüsselverwaltung, Konfiguration und Erweiterbarkeit. Zum Instanziieren des Datenschutzsystems (z. b. zum Hinzufügen zu einem <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) oder zum Ändern oder Erweitern des Verhaltens `Microsoft.AspNetCore.DataProtection`verweisen.
 
-* [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält zusätzliche APIs die Entwicklern können hilfreich sein, aber nicht die im Core-Paket gehören. Dieses Paket enthält z. B. Factorymethoden zum Instanziieren Sie des Systems zum Schutz von Daten zum Speichern von Schlüssel an einem Speicherort im Dateisystem, ohne die Abhängigkeitsinjektion (finden Sie unter <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>). Es enthält auch Erweiterungsmethoden zum Beschränken der Lebensdauer von geschützten Payloads (finden Sie unter <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>).
+* [Microsoft. aspnetcore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält zusätzliche APIs, die Entwickler möglicherweise nützlich finden, aber nicht zum Kern Paket gehören. Dieses Paket enthält beispielsweise Factorymethoden zum Instanziieren des Datenschutzsystems zum Speichern von Schlüsseln an einem Speicherort im Dateisystem ohne Abhängigkeitsinjektion (Weitere Informationen finden Sie unter <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>). Sie enthält auch Erweiterungs Methoden zum Begrenzen der Lebensdauer geschützter Nutzlasten (siehe <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>).
 
-* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) installiert werden kann, in eine vorhandene ASP.NET 4.x-app zum Umleiten der `<machineKey>` Vorgänge für den neuen ASP.NET Core Data Protection-Stapel verwenden. Weitere Informationen finden Sie unter <xref:security/data-protection/compatibility/replacing-machinekey>.
+* [Microsoft. aspnetcore. dataprotection. systemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) kann in einer vorhandenen ASP.NET 4. x-APP installiert werden, um die `<machineKey>` Vorgänge so umzuleiten, dass der neue ASP.net Core Datenschutz Stapel verwendet wird. Weitere Informationen finden Sie unter <xref:security/data-protection/compatibility/replacing-machinekey>.
 
-* [Microsoft.AspNetCore.Cryptography.KeyDerivation](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) stellt eine Implementierung der Routine für PBKDF2 Kennworthashs und kann von Systemen, die Benutzerkennwörter sicher behandeln müssen verwendet werden. Weitere Informationen finden Sie unter <xref:security/data-protection/consumer-apis/password-hashing>.
+* [Microsoft. aspnetcore. Cryptography. keyderivations](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) stellt eine Implementierung der PBKDF2-Kenn Wort Hash Routine bereit und kann von Systemen verwendet werden, die Benutzer Kennwörter sicher behandeln müssen. Weitere Informationen finden Sie unter <xref:security/data-protection/consumer-apis/password-hashing>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

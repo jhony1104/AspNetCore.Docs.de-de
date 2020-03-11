@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/controllers/actions
 ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881107"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653347"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -55,11 +55,11 @@ Aktionen können ein beliebiges Element zurückgeben. Häufig geben Sie jedoch e
 
 Controller erben üblicherweise von [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller), auch wenn dies nicht erforderlich ist. Das Ableiten von `Controller` ermöglicht den Zugriff auf drei verschiedene Arten von Hilfsmethoden:
 
-#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. Methoden, die einen leeren Antworttext zur Folge haben
+#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. Methoden, die zu einem leeren Antworttext führen
 
 Es ist kein `Content-Type`-HTTP-Antwortheader beinhaltet, da der Antworttext keinen Inhalt aufweist, der beschrieben werden könnte.
 
-Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: Umleitung und HTTP-Statuscode.
+Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: Redirect (Umleiten) oder HTTP-Statuscode.
 
 * **HTTP-Statuscode**
 
@@ -71,11 +71,11 @@ Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: Umleitung und HTTP-Status
 
     Der Ergebnistyp „Redirect“ unterscheidet sich vom Typ „HTTP-Statuscode“ zunächst dahingehend, dass er über einen `Location`-HTTP-Antwortheader verfügt.
 
-#### <a name="2-methods-resulting-in-a-non-empty-response-body-with-a-predefined-content-type"></a>2. Methoden, die einen nicht leeren Antworttext mit einem vordefinierten Inhaltstyp zur Folge haben
+#### <a name="2-methods-resulting-in-a-non-empty-response-body-with-a-predefined-content-type"></a>2. Methoden, die zu einem nicht leeren Antworttext mit einem vordefinierten Inhaltstyp führen
 
 Die meisten Hilfsmethoden in dieser Kategorie beinhalten eine `ContentType`-Eigenschaft, mit der Sie den Antwortheader `Content-Type` festlegen können, um den Antworttext zu beschreiben.
 
-Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: [Ansicht](xref:mvc/views/overview) und [Formatierte Antwort](xref:web-api/advanced/formatting).
+Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: [View](xref:mvc/views/overview) (Ansicht) und [Formatted Response](xref:web-api/advanced/formatting) (Formatierte Antwort).
 
 * **Ansicht**
 
@@ -87,7 +87,7 @@ Es gibt zwei Ergebnistypen innerhalb dieser Kategorie: [Ansicht](xref:mvc/views/
     
     Weitere gängige Methoden dieses Typs sind `File` und `PhysicalFile`. `return PhysicalFile(customerFilePath, "text/xml");` gibt beispielsweise [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult) zurück.
 
-#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. Methoden, die einen nicht leeren Antworttext in einem mit dem Client ausgehandelten Inhaltsformat zur Folge haben
+#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. Methoden, die zu einem nicht leeren Antworttext in einem Inhaltstyp, der mit dem Client ausgehandelt wurde, formatieren
 
 Diese Kategorie wird auch als **Inhaltsaushandlung** bezeichnet. Die [Inhaltsaushandlung](xref:web-api/advanced/formatting#content-negotiation) wird dann angewendet, wenn eine Aktion einen [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult)-Typ oder ein anderes Objekt, das keine [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult)-Implementierung ist, zurückgibt. Eine Aktion, die eine Implementierung zurückgibt, die nicht `IActionResult` ist (z.B. `object`), gibt auch eine formatierte Antwort zurück.
 
@@ -100,7 +100,7 @@ Verschiedene Anwendungen haben häufig übereinstimmende Teile in Ihrem Workflow
 Die meisten Filterattribute, wie z.B. `[Authorize]`, können auf Ebene des Controllers oder der Aktion mit der gewünschten Detailgenauigkeit angewendet werden.
 
 Die Fehlerbehandlung und das Zwischenspeichern von Antworten sind häufig übergreifende Belange:
-* [Behandeln von Fehlern](xref:mvc/controllers/filters#exception-filters)
+* [Fehlerbehandlung](xref:mvc/controllers/filters#exception-filters)
 * [Zwischenspeichern von Antworten](xref:performance/caching/response)
 
 Viele übergreifende Belange können mit Filtern oder mit benutzerdefinierter [Middleware](xref:fundamentals/middleware/index) behandelt werden.

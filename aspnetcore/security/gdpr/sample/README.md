@@ -1,6 +1,6 @@
-# <a name="gdpr-sample"></a>DSGVO-Beispiel
+# <a name="gdpr-sample"></a>Dsgvo-Beispiel
 
-* In *"appSettings.JSON"* legen `CheckNotConsentNeeded` zu `false` Zustimmung; erforderlich ist. andernfalls auf "true", oder lassen Sie festgelegt. Testen der app mit `CheckNotConsentNeeded` festgelegt `false` und legen Sie auf `true`.
-* Erstellen Sie grundlegende und nicht unbedingt Cookies mit jeder Variante des `CheckConsentNeeded` und Zustimmung erteilt.
+* Legen Sie in *appSettings. JSON*`CheckNotConsentNeeded` auf `false` fest, um Zustimmung zu erfordern. andernfalls auf "true" oder "weglassen". Testen Sie die APP, wenn `CheckNotConsentNeeded` auf `false` festgelegt ist und auf `true`festgelegt ist.
+* Erstellen Sie wichtige und nicht erforderliche Cookies, wobei jede Variation von `CheckConsentNeeded` und Zustimmung erteilt wurde.
 * Registrieren Sie einen Benutzer.
 * Löschen Sie Cookies.

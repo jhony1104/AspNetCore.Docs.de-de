@@ -7,18 +7,18 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 12/10/2019
 uid: web-api/handle-errors
-ms.openlocfilehash: c2dbc47b4495b7187aefbc62eb6d2f0c9683c2da
-ms.sourcegitcommit: 29ace642ca0e1f0b48a18d66de266d8811df2b83
-ms.translationtype: HT
+ms.openlocfilehash: e445fb3d50973643c9cea60395d1ed02c2f5f675
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74987832"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652393"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Fehlerbehandlung in ASP.NET Core-Web-APIs
 
 Dieser Artikel beschreibt die Verarbeitung und Anpassung der Fehlerbehandlung bei ASP.NET Core-Web-APIs.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="developer-exception-page"></a>Seite mit Ausnahmen für Entwickler
 
@@ -121,7 +121,7 @@ Die HTML-formatierte Antwort wird beim Durchführen von Tests in Tools wie etwa 
 
 In nicht zur Entwicklung dienenden Umgebungen kann [Middleware zur Ausnahmebehandlung](xref:fundamentals/error-handling) verwendet werden, um eine Fehlernutzlast zu erzeugen:
 
-1. Rufen Sie <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> in `Startup.Configure` auf, um die Middleware zu verwenden:
+1. Rufen Sie `Startup.Configure` in <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> auf, um die Middleware zu verwenden:
 
     ::: moniker range=">= aspnetcore-3.0"
 

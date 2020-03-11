@@ -8,11 +8,11 @@ ms.date: 12/4/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
 ms.openlocfilehash: ddaae1a25a1dcf167ffae0f24b480e2cde6aca5b
-ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74825466"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652069"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Einrichtung externer Anmelde Informationen für Microsoft-Konto mit ASP.net Core
 
@@ -30,7 +30,7 @@ Wenn Sie keine Microsoft-Konto haben, wählen Sie **Erstellen**aus. Nachdem Sie 
 * Wählen Sie **Neue Registrierung** aus.
 * Geben Sie einen **Namen** ein.
 * Wählen Sie eine Option für **unterstützte Konto Typen**aus.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
-* Geben Sie unter **Umleitungs-URI**Ihre Entwicklungs-URL mit angefügtem `/signin-microsoft` ein. Beispielsweise `https://localhost:5001/signin-microsoft`. Das Microsoft-Authentifizierungsschema, das weiter unten in diesem Beispiel konfiguriert wird, verarbeitet automatisch Anforderungen auf `/signin-microsoft` Route, um den OAuth-Fluss zu implementieren.
+* Geben Sie unter **Umleitungs-URI**Ihre Entwicklungs-URL mit angefügtem `/signin-microsoft` ein. Beispiel: `https://localhost:5001/signin-microsoft`. Das Microsoft-Authentifizierungsschema, das weiter unten in diesem Beispiel konfiguriert wird, verarbeitet automatisch Anforderungen auf `/signin-microsoft` Route, um den OAuth-Fluss zu implementieren.
 * Wählen Sie **Registrieren** aus.
 
 ### <a name="create-client-secret"></a>Erstellen eines geheimen Clientschlüssels
@@ -87,7 +87,7 @@ Sie sind jetzt mit Ihren Microsoft-Anmelde Informationen angemeldet:
 
   Obwohl in der Fehlermeldung ein Problem mit der Microsoft-Authentifizierung angezeigt wird, ist die häufigste Ursache, dass ihr Anwendungs-URI mit keinem der für die **Webplattform** angegebenen **Umleitungs-URIs** übereinstimmt.
 * Wenn die Identität nicht durch Aufrufen von `services.AddIdentity` in `ConfigureServices`konfiguriert wird, führt der Versuch, die Authentifizierung zu authentifizieren, zu *argumumtexception: die Option "signinscheme" muss angegeben werden*. Die in diesem Beispiel verwendete Projektvorlage stellt sicher, dass dies abgeschlossen ist.
-* Wenn die Standortdatenbank nicht erstellt wurde, indem die ursprüngliche Migration anwenden, erhalten Sie *Fehler bei ein Datenbankvorgang beim Verarbeiten der Anforderung* Fehler. Tippen Sie auf **Migrationen anwenden** der Datenbank zu erstellen und aktualisieren, um den Fehler hinaus fortgesetzt.
+* Wenn die Standortdatenbank nicht durch Anwenden der anfänglichen Migration erstellt wurde, wird *bei der Verarbeitung des Anforderungs Fehlers ein Daten Bank Vorgang* nicht ausgeführt. Tippen Sie auf **Migrations anwenden** , um die Datenbank zu erstellen und zu aktualisieren, um den Fehler zu überschreiten.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

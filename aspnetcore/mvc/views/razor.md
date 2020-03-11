@@ -5,16 +5,16 @@ description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasier
 ms.author: riande
 ms.date: 02/12/2020
 uid: mvc/views/razor
-ms.openlocfilehash: 0b1eed2816329d62fca4bdb5719825a4197af353
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: HT
+ms.openlocfilehash: e9d2e42ba3c36bc1661739f3b105ec8efe03de48
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447177"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651727"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
-Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) und [Dan Vicarel](https://github.com/Rabadash8820)
+Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)und [Dan vicarel](https://github.com/Rabadash8820)
 
 Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) ( *.razor*) enthalten.
 
@@ -106,7 +106,7 @@ Explizite Ausdrücke können zum Verketten von Text mit einem Ergebnis des Ausdr
 
 Ohne den expliziten Ausdruck wird `<p>Age@joe.Age</p>` als E-Mail-Adresse behandelt und `<p>Age@joe.Age</p>` gerendert. `<p>Age33</p>` wird gerendert, wenn es als expliziter Ausdruck geschrieben wird.
 
-Explizite Ausdrücke können zum Rendern der Ausgabe von generischen Methoden in *.cshtml*-Dateien verwendet werden. Das folgende Markup zeigt, wie der weiter oben gezeigte Fehler behoben wird, der durch die Klammern einer generischen C#-Funktion verursacht wurde. Der Code wird als expliziter Ausdruck geschrieben:
+Explizite Ausdrücke können zum Rendern der Ausgabe von generischen Methoden in *.cshtml*-Dateien verwendet werden. Das folgende Markup zeigt, wie der weiter oben gezeigte Fehler behoben wird, der durch die Klammern von C#-Generika verursacht wurde. Der Code wird als expliziter Ausdruck geschrieben:
 
 ```cshtml
 <p>@(GenericMethod<int>())</p>
@@ -241,7 +241,7 @@ Verwenden Sie die `@:`-Syntax, um den Rest einer kompletten Zeile als HTML-Code 
 
 Ohne das `@:`-Symbol im Code wird ein Razor-Laufzeitfehler erzeugt.
 
-Zusätzliche `@`-Zeichen in einer Razor-Datei können zu Compilerfehlern bei späteren Anweisungen im Block führen. Diese Compilerfehler können dann schwer nachvollziehbar sein, da der tatsächliche vor dem gemeldeten Fehler auftritt. Dieser Fehler tritt häufig auf, wenn mehrere implizite/explizite Ausdrücke in einem einzigen Codeblock kombiniert werden.
+Zusätzliche `@`-Zeichen in einer Razor-Datei können zu Compilerfehlern bei späteren Anweisungen im Block führen. Diese Compilerfehler können dann schwer nachvollziehbar sein, da der tatsächliche Fehler vor dem gemeldeten Fehler auftritt. Dieser Fehler tritt häufig auf, wenn mehrere implizite/explizite Ausdrücke in einem einzigen Codeblock kombiniert werden.
 
 ## <a name="control-structures"></a>Steuerungsstrukturen
 
@@ -427,7 +427,7 @@ Wenn Sie wissen, wie von Razor Code für eine Ansicht generiert wird, erleichter
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
-Durch den Code wird eine Klasse ähnlich der folgenden generiert:
+Durch den Code wird eine Klasse ähnlich der folgenden Klasse generiert:
 
 ```csharp
 public class _Views_Something_cshtml : RazorPage<dynamic>
@@ -487,7 +487,7 @@ Verwenden Sie in [Razor-Komponenten](xref:blazor/components)`@code` über `@func
 
 ::: moniker-end
 
-Zum Beispiel:
+Beispiel:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -633,7 +633,7 @@ Razor macht eine `Model`-Eigenschaft für den Zugriff auf das an die Ansicht üb
 <div>The Login Email: @Model.Email</div>
 ```
 
-Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung legt das `T` in `RazorPage<T>` der generierten Klasse fest, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [Stark typisierte Modelle und das Schlüsselwort @model](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
+Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung gibt das `T` in `RazorPage<T>` der generierten Klasse an, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [Stark typisierte Modelle und das Schlüsselwort @model](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
 ### <a name="namespace"></a>\@namespace
 
@@ -695,7 +695,7 @@ Die `@section`-Anweisung wird in Verbindung mit [MVC- und Razor Pages-Layouts](x
 
 ### <a name="using"></a>\@using
 
-Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hinzu:
+Die `@using`-Anweisung fügt die `using`-C#-Anweisung der generierten Ansicht hinzu:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact9.cshtml)]
 
@@ -872,7 +872,7 @@ Gerenderte Ausgabe:
 
 Die folgenden drei Anweisungen gehören zu den [Taghilfsprogrammen](xref:mvc/views/tag-helpers/intro).
 
-| Anweisung | Funktion |
+| Direktive | Funktion |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | Macht Taghilfsprogramme für eine Ansicht verfügbar. |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Entfernt die zuvor aus einer Ansicht hinzugefügten Taghilfsprogramme. |
@@ -883,7 +883,7 @@ Die folgenden drei Anweisungen gehören zu den [Taghilfsprogrammen](xref:mvc/vie
 ### <a name="razor-keywords"></a>Razor-Schlüsselwörter
 
 * page (erfordert ASP.NET Core 2.1 oder höher)
-* namespace
+* Namespace
 * functions
 * inherits
 * model
@@ -901,13 +901,13 @@ Razor-Schlüsselwörter werden mit dem Escapezeichen `@(Razor Keyword)` versehen
 * foreach
 * if
 * else
-* lock
-* switch
-* try
-* catch
+* Sperre
+* Schalter
+* Versuch
+* erfassen
 * finally
-* using
-* while
+* Mithilfe von
+* während
 
 Razor-C#-Schlüsselwörter werden mit dem doppeltem Escapezeichen `@(@C# Razor Keyword)` versehen (z.B. `@(@case)`). Das erste `@` dient als Escapezeichen für den Razor-Parser. Das zweite `@` dient als Escapezeichen für den C#-Parser.
 

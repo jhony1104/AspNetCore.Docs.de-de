@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie die Konfiguration von einem ASP.NET-MVC-Proje
 ms.author: riande
 ms.date: 10/14/2016
 uid: migration/configuration
-ms.openlocfilehash: 455e66b94dd69ee6aab88768b64c525d56b8bbcf
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 2c50ea768a42aa38d14c55d8c403fea4176b3650
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73033906"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651883"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>Konfiguration zu ASP.net Core migrieren
 
@@ -18,9 +18,9 @@ Von [Steve Smith](https://ardalis.com/) und [Scott Addie](https://scottaddie.com
 
 Im vorherigen Artikel haben wir begonnen, [ein ASP.NET MVC-Projekt zu ASP.net Core MVC zu migrieren](xref:migration/mvc). In diesem Artikel wird die Konfiguration migriert.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="setup-configuration"></a>Setup Konfiguration
+## <a name="setup-configuration"></a>Einrichtungskonfiguration
 
 ASP.net Core verwendet nicht mehr die Dateien " *Global. asax* " und " *Web. config* ", die in früheren Versionen von ASP.NET verwendet wurden. In früheren Versionen von ASP.net wurde die Anwendungsstart Logik in einer `Application_StartUp`-Methode in " *Global. asax*" platziert. Später wurde in ASP.NET MVC eine *Startup.cs* -Datei in das Stammverzeichnis des Projekts eingefügt. und es wurde aufgerufen, als die Anwendung gestartet wurde. ASP.net Core hat diesen Ansatz vollständig übernommen, indem er die gesamte Start Logik in der *Startup.cs* -Datei platziert hat.
 

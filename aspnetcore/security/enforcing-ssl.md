@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 43f3abfa4bc311ed246f6f2585d522661e492039
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.openlocfilehash: 2a7b4152004cb65ee12487eb4793d42d0b7165d0
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447151"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653239"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Erzwingen von HTTPS in ASP.net Core
 
@@ -150,7 +150,7 @@ Wenn Anforderungen in einer Reverseproxykonfiguration weitergeleitet werden, ver
 
 Wenn Sie Azure App Service bereitstellen, befolgen Sie die Anweisungen im [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure-Web-Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
-### <a name="options"></a>Optionen
+### <a name="options"></a>Tastatur
 
 Der folgende markierte Code ruft [addhttpsredirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) auf, um Middleware-Optionen zu konfigurieren:
 
@@ -350,7 +350,7 @@ dotnet dev-certs https --help
 
 ## <a name="how-to-set-up-a-developer-certificate-for-docker"></a>Einrichten eines Entwickler Zertifikats für docker
 
-Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/6199).
+Weitere Informationen finden Sie im entsprechenden [GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/6199).
 
 <a name="wsl"></a>
 

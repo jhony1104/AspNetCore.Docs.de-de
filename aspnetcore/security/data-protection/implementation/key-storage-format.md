@@ -1,26 +1,26 @@
 ---
-title: Schlüsselspeicherformat in ASP.NET Core
+title: Schlüsselspeicher Format in ASP.net Core
 author: rick-anderson
-description: Erfahren Sie Details zur Implementierung des Schutzes von Daten ASP.NET Core Schlüsselspeicher Formats aus.
+description: Erfahren Sie mehr über die Implementierungsdetails des Speicher Formats für die ASP.net Core Datenschutz Schlüssel.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/key-storage-format
 ms.openlocfilehash: 81df124f3dd0cadf8fd895ab55f66eec6415705f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897477"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654997"
 ---
-# <a name="key-storage-format-in-aspnet-core"></a>Schlüsselspeicherformat in ASP.NET Core
+# <a name="key-storage-format-in-aspnet-core"></a>Schlüsselspeicher Format in ASP.net Core
 
 <a name="data-protection-implementation-key-storage-format"></a>
 
-Objekte werden im Ruhezustand in XML-Darstellung gespeichert. Das Standardverzeichnis für das Speichern von Schlüsseln ist % LOCALAPPDATA%\ASP.NET\DataProtection-Keys\.
+Objekte werden im Ruhezustand in der XML-Darstellung gespeichert. Das Standardverzeichnis für den Schlüsselspeicher ist%LocalAppData%\ASP.net\dataschutz-keys\.
 
-## <a name="the-key-element"></a>Die \<Key >-Element
+## <a name="the-key-element"></a>Das \<Key >-Element
 
-Schlüssel, die als Objekte der obersten Ebene im Key-Repository vorhanden sind. Gemäß der Konvention über Schlüssel verfügen, den Dateinamen **Schlüssel: {Guid} .xml**, wobei {Guid} die Id des Schlüssels ist. Jede dieser Dateien enthält einen einzelnen Schlüssel. Das Format der Datei lautet wie folgt aus.
+Schlüssel sind im schlüsselrepository als Objekte der obersten Ebene vorhanden. Gemäß den kontokonventionenschlüsseln haben Sie den Dateinamen **Key-{GUID}. XML**, wobei {GUID} die ID des Schlüssels ist. Jede dieser Dateien enthält einen einzelnen Schlüssel. Das Format der Datei lautet wie folgt.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -43,35 +43,35 @@ Schlüssel, die als Objekte der obersten Ebene im Key-Repository vorhanden sind.
 </key>
 ```
 
-Die \<Key >-Element enthält die folgenden Attribute und untergeordnete Elemente:
+Das \<Key >-Element enthält die folgenden Attribute und untergeordneten Elemente:
 
-* Die Schlüssel-ID. Dieser Wert wird als autorisierend behandelt. der Dateiname ist einfach eine Besonderheit für Menschen lesbar.
+* Die Schlüssel-ID. Dieser Wert wird als autorisierend behandelt. der Dateiname ist einfach ein nicseinwert für die Lesbarkeit von Menschen.
 
-* Die Version der \<Schlüssel > Element, das zurzeit auf 1 fest.
+* Die Version des \<Schlüssel > Elements, das derzeit bei 1 korrigiert ist.
 
-* Datumsangaben, des Schlüssels erstellen, Aktivierung und Ablauf.
+* Die Erstellungs-, Aktivierungs-und Ablaufdatums Angaben des Schlüssels.
 
-* Ein \<Deskriptor >-Element, das Objektberechtigungsinformationen für die authentifizierte Verschlüsselung-Implementierung, die innerhalb dieser Schlüssel enthält.
+* Ein \<Deskriptor >-Element, das Informationen zur Implementierung der authentifizierten Verschlüsselung enthält, die in diesem Schlüssel enthalten ist.
 
-Im obigen Beispiel der mit dem Schlüssel-Id ist {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, Erstellung und der am 19. März 2015, aktiviert und wird eine Lebensdauer von 90 Tagen. (Gelegentlich kann das Datum der Aktivierung etwas vor dem Erstellungsdatum wie in diesem Beispiel sein. Dies ist aufgrund einer übertreibenden wie die APIs arbeiten, und ist in der Praxis harmlos.)
+Im obigen Beispiel lautet die ID des Schlüssels {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, wurde am 19. März 2015 erstellt und aktiviert und verfügt über eine Gültigkeitsdauer von 90 Tagen. (Gelegentlich ist das Aktivierungsdatum möglicherweise etwas vor dem Erstellungsdatum, wie in diesem Beispiel. Der Grund hierfür ist die Funktionsweise der APIs und ist in der Praxis harmlos.)
 
-## <a name="the-descriptor-element"></a>Die \<Deskriptor >-Element
+## <a name="the-descriptor-element"></a>Das \<Deskriptor > Element
 
-Die äußere \<Deskriptor >-Element enthält ein Attribut-DeserializerType, wird die Assembly qualifizierten Namen eines Typs der IAuthenticatedEncryptorDescriptorDeserializer implementiert. Dieser Typ ist verantwortlich für das Lesen des inneren \<Deskriptor >-Element und für die Analyse der Informationen in.
+Das äußere \<Deskriptor >-Element enthält ein deserializertype-Attribut, bei dem es sich um den durch die Assembly qualifizierten Namen eines Typs handelt, der iauthenticatedencryptordescriptordeserializer implementiert. Dieser Typ ist für das Lesen des inneren \<Deskriptors >-Elements und für das Auswerten der in enthaltenen Informationen verantwortlich.
 
-Das besondere Format, der die \<Deskriptor >-Elements hängt von der authentifizierte Verschlüsselung Implementierung gekapselt durch den Schlüssel, und jeder Deserialisierer-Typ erwartet, dass ein geringfügig anderes Format für diese. Im Allgemeinen jedoch dieses Element enthält algorithmische Informationen (Namen, Typen, OIDs, oder ähnliches) und geheimem Schlüsselmaterial. Im obigen Beispiel gibt an, dass dieser Schlüssel dient als Wrapper für AES-256-CBC-Verschlüsselung und HMACSHA256-Überprüfung der Deskriptor.
+Das besondere Format des \<Deskriptors >-Elements hängt von der durch den Schlüssel gekapselten authentifizierten Verschlüsselungs Implementierung ab, und jeder deserialisierungstyp erwartet ein etwas anderes Format für dieses. Im Allgemeinen enthält dieses Element jedoch algorithmische Informationen (Namen, Typen, OIDs oder ähnliches) und Geheimnis Schlüsselmaterial. Im obigen Beispiel gibt der Deskriptor an, dass dieser Schlüssel die AES-256-CBC-Verschlüsselung + HMACSHA256-Überprüfung umschließt.
 
-## <a name="the-encryptedsecret-element"></a>Die \<EncryptedSecret >-Element
+## <a name="the-encryptedsecret-element"></a>Das \<"verschlüsseltedsecret"-> Element
 
-Ein **&lt;EncryptedSecret&gt;** Element enthält die verschlüsselte Form des Schlüsselmaterials geheimen darf vorhanden sein, wenn [die Verschlüsselung von Geheimnissen im Ruhezustand aktiviert](xref:security/data-protection/implementation/key-encryption-at-rest). Das Attribut `decryptorType` wird die Assembly qualifizierten Namen eines Typs, der implementiert [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Dieser Typ ist verantwortlich für das Lesen des inneren **&lt;EncryptedKey&gt;** Element- und entschlüsseln, um den ursprünglichen Klartext zu gewinnen.
+Ein **&lt;verschlüsseltedsecret-&gt;** Element, das die verschlüsselte Form des geheimen Schlüssel Materials enthält, kann vorhanden sein, wenn die [Verschlüsselung von geheimen Schlüsseln aktiviert ist](xref:security/data-protection/implementation/key-encryption-at-rest). Das Attribut `decryptorType` ist der durch die Assembly qualifizierte Name eines Typs, der [ixmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)implementiert. Dieser Typ ist für das Lesen der inneren **&lt;verschlüsseltedkey-&gt;** Elements und das Entschlüsseln der Methode zum Wiederherstellen des ursprünglichen Klartext verantwortlich.
 
-Wie bei `<descriptor>`, das besondere Format, der die `<encryptedSecret>` -Elements hängt von der im Ruhezustand Verschlüsselungsmechanismus verwendet. Im obigen Beispiel wird der Hauptschlüssel verschlüsselt mithilfe von Windows-DPAPI pro des Kommentars.
+Wie bei `<descriptor>`hängt das jeweilige Format des `<encryptedSecret>` Elements vom verwendeten ruhenden Verschlüsselungsmechanismus ab. Im obigen Beispiel wird der Hauptschlüssel mit Windows DPAPI gemäß dem Kommentar verschlüsselt.
 
-## <a name="the-revocation-element"></a>Die \<Sperrung >-Element
+## <a name="the-revocation-element"></a>Das \<-Sperr > Element
 
-Widerrufe sind als Objekte der obersten Ebene im Key-Repository vorhanden. Gemäß der Konvention Widerrufe Dateinamen haben **Zertifikatsperrlisten-{Zeitstempel} .xml** (für das Aufheben der alle Schlüssel vor einem bestimmten Datum) oder **Zertifikatsperrlisten-{Guid} .xml** (zum Aufheben von eines bestimmten Schlüssels). Jede Datei enthält eine einzelne \<Sperrung > Element.
+Widerrufen sind im schlüsselrepository als Objekte der obersten Ebene vorhanden. Gemäß der Konvention verfügen Widerrufungen über den Dateinamen " **Widerruf-{Timestamp}. XML** " (zum Aufheben aller Schlüssel vor einem bestimmten Datum) oder " **Widerruf-{GUID}. XML** " (für das Aufheben eines bestimmten Schlüssels). Jede Datei enthält ein einzelnes \<> Element.
 
-Widerrufe der einzelnen Schlüssel, den Inhalt der Datei werden wie folgt.
+Für das Aufheben der einzelnen Schlüssel wird der Inhalt der Datei wie unten beschrieben.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +82,7 @@ Widerrufe der einzelnen Schlüssel, den Inhalt der Datei werden wie folgt.
 </revocation>
 ```
 
-In diesem Fall wird nur auf der angegebene Schlüssel gesperrt. Wenn der Schlüssel-Id ist "*", jedoch wie in der folgenden Beispiel werden alle Schlüssel, dessen Datum der Erstellung vor dem angegebenen Sperrdatum wird, widerrufen.
+In diesem Fall wird nur der angegebene Schlüssel widerrufen. Wenn die Schlüssel-ID jedoch "*" lautet, wie im folgenden Beispiel, werden alle Schlüssel, deren Erstellungsdatum vor dem angegebenen Sperr Datum liegt, widerrufen.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -94,4 +94,4 @@ In diesem Fall wird nur auf der angegebene Schlüssel gesperrt. Wenn der Schlüs
 </revocation>
 ```
 
-Die \<Grund >-Element wird vom System nie gelesen. Es ist lediglich eine bequeme Möglichkeit, einen lesbaren Grund für die Sperrung zu speichern.
+Der \<Grund, warum > Element nie vom System gelesen wird. Es ist einfach ein guter Ort, um einen lesbaren Grund für den Widerruf zu speichern.

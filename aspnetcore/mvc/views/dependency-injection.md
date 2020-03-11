@@ -5,12 +5,12 @@ description: Erfahren Sie mehr über die Unterstützung von Dependency Injection
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 63feea5ddf286dd3e659f3a622cfb0f7451b9bba
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
-ms.translationtype: HT
+ms.openlocfilehash: 6241bb8e262f64e2e30721bc5fe6f8f1be84b60d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815337"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651475"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>Dependency Injection in Ansichten in ASP.NET Core
 
@@ -18,7 +18,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core unterstützt [Dependency Injection](xref:fundamentals/dependency-injection) in Ansichten. Dies kann besonders für ansichtsspezifische Dienste nützlich sein – z.B. für die Lokalisierung oder für Daten, die nur zum Auffüllen von Ansichtselementen erforderlich sind. Sie sollten versuchen, das Prinzip [Separation of Concerns](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) zwischen Controllern und Ansichten beizubehalten. Die meisten Daten, die in Ihren Ansichten angezeigt werden, sollten vom Controller übergeben worden sein.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="configuration-injection"></a>Konfigurationsinjektion
 
@@ -104,6 +104,6 @@ Die Standardfelder umfassen also `Html`, `Component` und `Url` sowie den `StatsS
 
 Wenn Sie vorhandene Dienste erweitern möchten, können Sie diese Technik verwenden und aus der vorhanden Implementierung erben bzw. diese mit Ihrer eigenen umschließen.
 
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
-* Blog von Simon Timms: [Getting Lookup Data Into Your View](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/) (Übertragen von Nachschlagedaten in Ihre Ansicht)
+* Blog von Simon Timms: [Getting Lookup Data Into Your View (Übertragen von Nachschlagedaten in Ihre Ansicht)](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)

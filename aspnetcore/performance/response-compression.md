@@ -1,28 +1,26 @@
 ---
 title: Antwort Komprimierung in ASP.net Core
-author: guardrex
+author: rick-anderson
 description: Informationen zur Antwortkomprimierung und zum Verwenden von Antworten komprimierender Middleware in ASP.NET Core-Apps.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: performance/response-compression
-ms.openlocfilehash: d37b05edd55ac0d3910855563b819114cf815b43
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: aae0b8d74fc424cc81c046e9042279856865bf6a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114808"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654343"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Antwort Komprimierung in ASP.net Core
-
-Von [Luke Latham](https://github.com/guardrex)
 
 ::: moniker range=">= aspnetcore-3.0"
 
 Die Netzwerkbandbreite ist eine begrenzte Ressource. Die Reduzierung der Antwort Größe erhöht in der Regel die Reaktionsfähigkeit einer APP, oft erheblich. Eine Möglichkeit, die Nutz Last Größen zu reduzieren, ist das Komprimieren der Antworten einer App.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Verwendung der Middleware für die Antwort Komprimierung
 
@@ -73,7 +71,7 @@ Die Header, die beim anfordern, senden, Zwischenspeichern und empfangen von komp
 | `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort sollte die `Content-Type`angeben. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort komprimiert werden soll. Die Middleware gibt eine Reihe von [Standard-MIME-Typen](#mime-types) an, die codiert werden können, aber Sie können MIME-Typen ersetzen oder hinzufügen. |
 | `Vary`             | Beim Senden durch den Server mit dem Wert `Accept-Encoding` an Clients und Proxys zeigt der `Vary`-Header dem Client oder dem Proxy an, dass er Antworten auf der Grundlage des Werts des `Accept-Encoding`-Headers der Anforderung Zwischenspeichern (variieren) soll. Das Ergebnis der Rückgabe von Inhalt mit dem `Vary: Accept-Encoding`-Header besteht darin, dass sowohl komprimierte als auch nicht komprimierte Antworten separat zwischengespeichert werden. |
 
-Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
+Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
 
 * Die Komprimierung von App-Antworten mithilfe von gzip und benutzerdefinierten Komprimierungs Anbietern.
 * Vorgehensweise beim Hinzufügen eines MIME-Typs zur Standardliste von MIME-Typen für die Komprimierung.
@@ -268,7 +266,7 @@ Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", "
 
 Die Netzwerkbandbreite ist eine begrenzte Ressource. Die Reduzierung der Antwort Größe erhöht in der Regel die Reaktionsfähigkeit einer APP, oft erheblich. Eine Möglichkeit, die Nutz Last Größen zu reduzieren, ist das Komprimieren der Antworten einer App.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Verwendung der Middleware für die Antwort Komprimierung
 
@@ -319,7 +317,7 @@ Die Header, die beim anfordern, senden, Zwischenspeichern und empfangen von komp
 | `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort sollte die `Content-Type`angeben. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort komprimiert werden soll. Die Middleware gibt eine Reihe von [Standard-MIME-Typen](#mime-types) an, die codiert werden können, aber Sie können MIME-Typen ersetzen oder hinzufügen. |
 | `Vary`             | Beim Senden durch den Server mit dem Wert `Accept-Encoding` an Clients und Proxys zeigt der `Vary`-Header dem Client oder dem Proxy an, dass er Antworten auf der Grundlage des Werts des `Accept-Encoding`-Headers der Anforderung Zwischenspeichern (variieren) soll. Das Ergebnis der Rückgabe von Inhalt mit dem `Vary: Accept-Encoding`-Header besteht darin, dass sowohl komprimierte als auch nicht komprimierte Antworten separat zwischengespeichert werden. |
 
-Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
+Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
 
 * Die Komprimierung von App-Antworten mithilfe von gzip und benutzerdefinierten Komprimierungs Anbietern.
 * Vorgehensweise beim Hinzufügen eines MIME-Typs zur Standardliste von MIME-Typen für die Komprimierung.
@@ -513,7 +511,7 @@ Verwenden Sie ein Tool wie z. b. " [fddler](https://www.telerik.com/fiddler)", "
 
 Die Netzwerkbandbreite ist eine begrenzte Ressource. Die Reduzierung der Antwort Größe erhöht in der Regel die Reaktionsfähigkeit einer APP, oft erheblich. Eine Möglichkeit, die Nutz Last Größen zu reduzieren, ist das Komprimieren der Antworten einer App.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Verwendung der Middleware für die Antwort Komprimierung
 
@@ -564,7 +562,7 @@ Die Header, die beim anfordern, senden, Zwischenspeichern und empfangen von komp
 | `Content-Type`     | Gibt den MIME-Typ des Inhalts an. Jede Antwort sollte die `Content-Type`angeben. Die Middleware überprüft diesen Wert, um zu bestimmen, ob die Antwort komprimiert werden soll. Die Middleware gibt eine Reihe von [Standard-MIME-Typen](#mime-types) an, die codiert werden können, aber Sie können MIME-Typen ersetzen oder hinzufügen. |
 | `Vary`             | Beim Senden durch den Server mit dem Wert `Accept-Encoding` an Clients und Proxys zeigt der `Vary`-Header dem Client oder dem Proxy an, dass er Antworten auf der Grundlage des Werts des `Accept-Encoding`-Headers der Anforderung Zwischenspeichern (variieren) soll. Das Ergebnis der Rückgabe von Inhalt mit dem `Vary: Accept-Encoding`-Header besteht darin, dass sowohl komprimierte als auch nicht komprimierte Antworten separat zwischengespeichert werden. |
 
-Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
+Erkunden Sie die Features der Middleware für die Antwort Komprimierung mit der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Das Beispiel veranschaulicht Folgendes:
 
 * Die Komprimierung von App-Antworten mithilfe von gzip und benutzerdefinierten Komprimierungs Anbietern.
 * Vorgehensweise beim Hinzufügen eines MIME-Typs zur Standardliste von MIME-Typen für die Komprimierung.

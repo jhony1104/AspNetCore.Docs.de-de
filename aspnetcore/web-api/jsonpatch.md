@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/01/2019
 uid: web-api/jsonpatch
-ms.openlocfilehash: e57556e4b3fba55c6c187092593ffab4e31ee2d9
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
-ms.translationtype: HT
+ms.openlocfilehash: cf1a00c1928652bf5210b2442087209e23b8868e
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76727036"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652951"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch in ASP.NET Core-Web-API
 
@@ -42,7 +42,7 @@ Support für JSON Patch kann mithilfe des `Microsoft.AspNetCore.Mvc.NewtonsoftJs
 
 ## <a name="jsonpatch-addnewtonsoftjson-and-systemtextjson"></a>JsonPatch, AddNewtonsoftJson und System.Text.Json
   
-`AddNewtonsoftJson` ersetzt die auf `System.Text.Json` basierten Eingabe- und Ausgabeformatierer, die für die Formatierung **aller** JSON-Inhalte verwendet werden. Aktualisieren Sie die Methode `Startup.ConfigureServices` des Projekts folgendermaßen, wenn Sie mithilfe von `Newtonsoft.Json` Support für `JsonPatch` hinzuzufügen möchten, während alle anderen Formatierer davon unbeeinflusst bleiben:
+`AddNewtonsoftJson` ersetzt die auf `System.Text.Json` basierten Eingabe- und Ausgabeformatierer, die für die Formatierung **aller** JSON-Inhalte verwendet werden. Aktualisieren Sie die Methode `JsonPatch` des Projekts folgendermaßen, wenn Sie mithilfe von `Newtonsoft.Json` Support für `Startup.ConfigureServices` hinzuzufügen möchten, während alle anderen Formatierer davon unbeeinflusst bleiben:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
@@ -102,15 +102,15 @@ Die Änderungen, die durch Anwenden eines JSON Patch-Dokuments auf eine Ressourc
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
-Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
+Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispiel: `"/address/zipCode"`.
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Zum `add` ans Ende eines Arrays verwenden Sie einen Bindestrich (-) anstelle einer Indexnummer: `/addresses/-`.
 
-### <a name="operations"></a>Vorgänge
+### <a name="operations"></a>Operationen (Operations)
 
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
-|Vorgang  | Hinweise |
+|Vorgang  | Notizen |
 |-----------|--------------------------------|
 | `add`     | Hinzufügen einer Eigenschaft oder eines Arrayelements. Für vorhandene Eigenschaft: set value.|
 | `remove`  | Entfernen einer Eigenschaft oder eines Arrayelements. |
@@ -131,7 +131,7 @@ Eine Aktionsmethode für JSON Patch in einem API-Controller:
 * Akzeptiert eine `JsonPatchDocument<T>`-Klasse, in der Regel mit `[FromBody]`.
 * Ruft `ApplyTo` für das Patch-Dokument auf, um die Änderungen anzuwenden.
 
-Im Folgenden ein Beispiel:
+Hier sehen Sie ein Beispiel:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -239,14 +239,14 @@ Das folgende Patch-Dokumentbeispiel hat keine Auswirkungen, wenn der Anfangswert
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Um das Beispiel zu testen, führen Sie die App aus, und senden Sie HTTP-Anforderungen mit den folgenden Einstellungen:
 
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP-Methode: `PATCH`
 * Header: `Content-Type: application/json-patch+json`
-* Hauptteil: Kopieren und Einfügen eines der JSON-Patch-Dokumentbeispiele aus dem *JSON*-Projektordner.
+* Text: Kopieren Sie eine der JSON-patchdokumentbeispiele, und fügen Sie Sie aus dem *JSON* -Projektordner ein.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
@@ -314,15 +314,15 @@ Die Änderungen, die durch Anwenden eines JSON Patch-Dokuments auf eine Ressourc
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
-Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
+Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispiel: `"/address/zipCode"`.
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Zum `add` ans Ende eines Arrays verwenden Sie einen Bindestrich (-) anstelle einer Indexnummer: `/addresses/-`.
 
-### <a name="operations"></a>Vorgänge
+### <a name="operations"></a>Operationen (Operations)
 
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
-|Vorgang  | Hinweise |
+|Vorgang  | Notizen |
 |-----------|--------------------------------|
 | `add`     | Hinzufügen einer Eigenschaft oder eines Arrayelements. Für vorhandene Eigenschaft: set value.|
 | `remove`  | Entfernen einer Eigenschaft oder eines Arrayelements. |
@@ -343,7 +343,7 @@ Eine Aktionsmethode für JSON Patch in einem API-Controller:
 * Akzeptiert eine `JsonPatchDocument<T>`-Klasse, in der Regel mit `[FromBody]`.
 * Ruft `ApplyTo` für das Patch-Dokument auf, um die Änderungen anzuwenden.
 
-Im Folgenden ein Beispiel:
+Hier sehen Sie ein Beispiel:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -451,14 +451,14 @@ Das folgende Patch-Dokumentbeispiel hat keine Auswirkungen, wenn der Anfangswert
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Um das Beispiel zu testen, führen Sie die App aus, und senden Sie HTTP-Anforderungen mit den folgenden Einstellungen:
 
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP-Methode: `PATCH`
 * Header: `Content-Type: application/json-patch+json`
-* Hauptteil: Kopieren und Einfügen eines der JSON-Patch-Dokumentbeispiele aus dem *JSON*-Projektordner.
+* Text: Kopieren Sie eine der JSON-patchdokumentbeispiele, und fügen Sie Sie aus dem *JSON* -Projektordner ein.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

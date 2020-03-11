@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 12/11/2019
 uid: security/authentication/individual
 ms.openlocfilehash: 7ef0d5eabded61d04fb9fe7be384a663ad7ea5f4
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828710"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651955"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artikel, die auf ASP.net Core Projekten basieren, die mit einzelnen Benutzerkonten erstellt wurden
 
@@ -61,7 +61,7 @@ Wenn die Windows-Authentifizierung ausgewählt ist, wird die APP für die Verwen
 
 In der folgenden Tabelle sind die für neue Web-Apps verfügbaren Authentifizierungs Optionen aufgeführt:
 
-| -Option | Authentifizierungstyp | Link für weitere Informationen |
+| Option | Authentifizierungstyp | Link für weitere Informationen |
  | ----------------- | ------------ | ---------- |
 | Keine            |  Keine Authentifizierung | | 
 | Einzelkonto      |  Individuelle Authentifizierung | <xref:security/authentication/identity>
@@ -74,7 +74,7 @@ In der folgenden Tabelle sind die für neue Web-Apps verfügbaren Authentifizier
 
 In der folgenden Tabelle sind die Authentifizierungs Optionen aufgeführt, die beim Erstellen einer neuen Web-App mit Visual Studio verfügbar sind:
 
-| -Option | Authentifizierungstyp | Link für weitere Informationen |
+| Option | Authentifizierungstyp | Link für weitere Informationen |
  | ----------------- | ------------ | ---------- |
 | Keine            |  Keine Authentifizierung | | 
 | Einzelne Benutzerkonten/Benutzerkonten in-APP speichern |  Individuelle Authentifizierung | <xref:security/authentication/identity> |
@@ -83,7 +83,7 @@ In der folgenden Tabelle sind die Authentifizierungs Optionen aufgeführt, die b
 | Geschäfts-, Schul-oder Uni-Cloud/Multiple org |  Organisations Authentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Windows-Authentifizierung | [Windows-Authentifizierung](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 In den folgenden Artikeln wird gezeigt, wie Sie den in ASP.net Core Vorlagen generierten Code verwenden, der einzelne Benutzerkonten verwendet:
 

@@ -2,7 +2,7 @@
 
 Führen Sie das Identitäts Gerüst aus:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie in **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, > fügen Sie > **Neues Gerüst Element** **hinzu** .
 * Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identität** > **Hinzufügen**aus.
@@ -12,14 +12,14 @@ Führen Sie das Identitäts Gerüst aus:
  Beispiel: `~/Pages/Shared/_Layout.cshtml` für Razor Pages `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
 * Um den vorhandenen Datenkontext zu verwenden, wählen Sie mindestens eine Datei aus, die Sie außer Kraft setzen möchten. Sie müssen mindestens eine Datei auswählen, um den Datenkontext hinzuzufügen.
   * Wählen Sie Ihre Datenkontext Klasse aus.
-  * Wählen Sie **Hinzufügen** aus.
+  * Wählen Sie **Hinzufügen**.
 * So erstellen Sie einen neuen Benutzer Kontext und erstellen möglicherweise eine benutzerdefinierte Benutzerklasse für die Identität:
-  * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Datenkontextklasse**.
-  * Wählen Sie **Hinzufügen** aus.
+  * Wählen Sie die Schaltfläche **+** aus, um eine neue **Datenkontext Klasse**zu erstellen.
+  * Wählen Sie **Hinzufügen**.
 
 Hinweis: Wenn Sie einen neuen Benutzer Kontext erstellen, müssen Sie keine Datei zum Überschreiben auswählen.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installieren Sie es jetzt:
 
@@ -68,7 +68,7 @@ Wenn Sie das Identitäts Gerüst ausführen, ohne das `--files`-Flag oder das `-
 
 Führen Sie das Identitäts Gerüst aus:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie in **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, > fügen Sie > **Neues Gerüst Element** **hinzu** .
 * Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identität** > **Hinzufügen**aus.
@@ -78,14 +78,14 @@ Führen Sie das Identitäts Gerüst aus:
  Beispiel: `~/Pages/Shared/_Layout.cshtml` für Razor Pages `~/Views/Shared/_Layout.cshtml` für MVC-Projekte
 * Um den vorhandenen Datenkontext zu verwenden, wählen Sie mindestens eine Datei aus, die Sie außer Kraft setzen möchten. Sie müssen mindestens eine Datei auswählen, um den Datenkontext hinzuzufügen.
   * Wählen Sie Ihre Datenkontext Klasse aus.
-  * Wählen Sie **Hinzufügen** aus.
+  * Wählen Sie **Hinzufügen**.
 * So erstellen Sie einen neuen Benutzer Kontext und erstellen möglicherweise eine benutzerdefinierte Benutzerklasse für die Identität:
-  * Wählen Sie die **+** Schaltfläche zum Erstellen eines neuen **Datenkontextklasse**.
-  * Wählen Sie **Hinzufügen** aus.
+  * Wählen Sie die Schaltfläche **+** aus, um eine neue **Datenkontext Klasse**zu erstellen.
+  * Wählen Sie **Hinzufügen**.
 
 Hinweis: Wenn Sie einen neuen Benutzer Kontext erstellen, müssen Sie keine Datei zum Überschreiben auswählen.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 Wenn Sie die ASP.NET Core-gerüstbauer noch nicht installiert haben, installieren Sie es jetzt:
 

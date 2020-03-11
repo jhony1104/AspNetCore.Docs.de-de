@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: ca5b0f8088773027f7403120247cbeca8900bcf5
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: d25c375f7e659168ab8cc9d8e11753cb7dfde831
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034348"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652051"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Client-IP-SafeList für ASP.net Core
 
 Von [Damien Bowder](https://twitter.com/damien_bod) und [Tom Dykstra](https://github.com/tdykstra)
  
-In diesem Artikel werden drei Möglichkeiten beschrieben, wie Sie eine IP-Safelist (auch als Whitelist bezeichnet) in einer ASP.net Core-App implementieren. Sie können Folgendes verwenden:
+In diesem Artikel werden drei Möglichkeiten beschrieben, wie Sie eine IP-Safelist (auch als Whitelist bezeichnet) in einer ASP.net Core-App implementieren. Verwenden Sie Folgendes:
 
 * Middleware zum Überprüfen der Remote-IP-Adresse für jede Anforderung.
 * Aktionsfilter zum Überprüfen der Remote-IP-Adresse von Anforderungen für bestimmte Controller oder Aktionsmethoden.
@@ -25,7 +25,7 @@ In diesem Artikel werden drei Möglichkeiten beschrieben, wie Sie eine IP-Safeli
 
 In jedem Fall wird eine Zeichenfolge mit genehmigten Client-IP-Adressen in einer APP-Einstellung gespeichert. Die Middleware oder der Filter analysiert die Zeichenfolge in eine Liste und überprüft, ob die Remote-IP-Adresse in der Liste enthalten ist. Wenn dies nicht der Wert ist, wird der Statuscode HTTP 403 verboten zurückgegeben.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples/2.x/ClientIpAspNetCore) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples/2.x/ClientIpAspNetCore) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="the-safelist"></a>Die SafeList
 
@@ -45,7 +45,7 @@ Die Middleware analysiert die Zeichenfolge in ein Array und sucht im Array nach 
 
 ## <a name="action-filter"></a>Aktionsfilter
 
-Wenn Sie eine SafeList nur für bestimmte Controller oder Aktionsmethoden verwenden möchten, verwenden Sie einen Aktionsfilter. Im Folgenden ein Beispiel: 
+Wenn Sie eine SafeList nur für bestimmte Controller oder Aktionsmethoden verwenden möchten, verwenden Sie einen Aktionsfilter. Hier sehen Sie ein Beispiel: 
 
 [!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckFilter.cs)]
 
@@ -61,7 +61,7 @@ In der Beispiel-APP wird der Filter auf die `Get`-Methode angewendet. Wenn Sie a
 
 ## <a name="razor-pages-filter"></a>Razor Pages Filter 
 
-Wenn Sie eine SafeList für eine Razor Pages-App verwenden möchten, verwenden Sie einen Razor Pages Filter. Im Folgenden ein Beispiel: 
+Wenn Sie eine SafeList für eine Razor Pages-App verwenden möchten, verwenden Sie einen Razor Pages Filter. Hier sehen Sie ein Beispiel: 
 
 [!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckPageFilter.cs)]
 

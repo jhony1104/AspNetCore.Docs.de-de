@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC-Controller Abhängigkeiten mit D
 ms.author: riande
 ms.date: 02/24/2019
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 6b08c321f4cae1f4efd8ea40300eaf4dfc2f63a1
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
-ms.translationtype: HT
+ms.openlocfilehash: 202b62d4b30c5c61c407abdc8509a2a75e181cb6
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890935"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652153"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Dependency Injection in Controller in ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Shadi Namrouti](https://github.com/shadinamrouti), [Rick Anderson](https://
 
 ASP.NET Core MVC-Controller fordern Abhängigkeiten explizit über Konstruktoren an. ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](xref:fundamentals/dependency-injection). DI erleichtert das Testen und die Wartung von Apps.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="constructor-injection"></a>Constructor Injection
 
@@ -52,7 +52,7 @@ Mit dem <xref:Microsoft.AspNetCore.Mvc.FromServicesAttribute> ist es möglich, e
 
 ## <a name="access-settings-from-a-controller"></a>Zugreifen auf Einstellungen von einem Controller
 
-Das Zugreifen auf App- oder Konfigurationseinstellungen von einem Controller aus ist ein häufiges Szenario. Das in <xref:fundamentals/configuration/options> beschriebene *Optionsmuster* ist der bevorzugte Ansatz, um Einstellungen zu verwalten. Fügen Sie generell <xref:Microsoft.Extensions.Configuration.IConfiguration> nicht direkt in einen Controller ein.
+Das Zugreifen auf App- oder Konfigurationseinstellungen von einem Controller aus ist ein häufiges Szenario. Das in *beschriebene*Optionsmuster<xref:fundamentals/configuration/options> ist der bevorzugte Ansatz, um Einstellungen zu verwalten. Fügen Sie generell <xref:Microsoft.Extensions.Configuration.IConfiguration> nicht direkt in einen Controller ein.
 
 Erstellen Sie eine Klasse, die die Optionen darstellt. Beispiel:
 

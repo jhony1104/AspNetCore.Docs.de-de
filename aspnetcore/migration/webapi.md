@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: migration/webapi
-ms.openlocfilehash: c68cf83f427f53b110075168c6d5e4d021808782
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 7f61b78c589fc9d01061b50554e5a639e372c3d8
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881149"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653005"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrieren von ASP.net-Web-API zu ASP.net Core
 
@@ -19,9 +19,9 @@ Von [Scott Adder](https://twitter.com/scott_addie) und [Steve Smith](https://ard
 
 Eine ASP.NET 4. x-Web-API ist ein HTTP-Dienst, der eine breite Palette von Clients, einschließlich Browser und mobiler Geräte, erreicht. ASP.net Core vereinheitlicht die MVC-und Web-API-APP-Modelle von ASP.NET 4. x in ein einfacheres Programmiermodell, das als ASP.net Core MVC bezeichnet wird. In diesem Artikel werden die erforderlichen Schritte zum Migrieren von der ASP.NET 4. x-Web-API zu ASP.net Core MVC erläutert.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Erforderliche Voraussetzungen
+## <a name="prerequisites"></a>Voraussetzungen
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -69,7 +69,7 @@ In ASP.net Core MVC ist das Attribut Routing standardmäßig enthalten, wenn <xr
 
 ## <a name="migrate-models-and-controllers"></a>Migrieren von Modellen und Controllern
 
-Kopieren Sie den Controller des *productapp* -Projekts und das verwendete Modell. Führen Sie folgende Schritte aus:
+Kopieren Sie den Controller des *productapp* -Projekts und das verwendete Modell. Folgen Sie diesen Schritten:
 
 1. Kopieren Sie " *Controllers/productioncontroller. cs* " aus dem ursprünglichen Projekt in das neue Projekt.
 1. Kopieren Sie den gesamten Ordner " *Models* " aus dem ursprünglichen Projekt in das neue Projekt.
@@ -83,7 +83,7 @@ Zu diesem Zeitpunkt führt das Entwickeln der APP zu einer Reihe von Kompilierun
 
 Beheben Sie die Fehler wie folgt:
 
-1. Änderung `ApiController` zu <xref:Microsoft.AspNetCore.Mvc.ControllerBase>. Fügen Sie `using Microsoft.AspNetCore.Mvc;` hinzu, um den `ControllerBase` Verweis aufzulösen.
+1. Ändern Sie `ApiController` in <xref:Microsoft.AspNetCore.Mvc.ControllerBase>. Fügen Sie `using Microsoft.AspNetCore.Mvc;` hinzu, um den `ControllerBase` Verweis aufzulösen.
 1. Löschen Sie `using System.Web.Http;`.
 1. Ändern Sie den Rückgabetyp der `GetProduct` Aktion von `IHttpActionResult` in `ActionResult<Product>`.
 
@@ -123,7 +123,7 @@ Nach den vorangehenden Änderungen und dem Entfernen nicht verwendeter `using`-A
 
 [!code-csharp[](webapi/sample/ProductsCore/Controllers/ProductsController.cs)]
 
-Führen Sie das migrierte Projekt aus, und navigieren Sie zu `/api/products`. Es wird eine vollständige Liste der drei Produkte angezeigt. Wechseln Sie zu `/api/products/1`. Das erste Produkt wird angezeigt.
+Führen Sie das migrierte Projekt aus, und navigieren Sie zu `/api/products`. Es wird eine vollständige Liste der drei Produkte angezeigt. Navigieren Sie zu `/api/products/1`. Das erste Produkt wird angezeigt.
 
 ## <a name="compatibility-shim"></a>Kompatibilitäts-Shim
 
@@ -156,7 +156,7 @@ So verwenden Sie den Kompatibilitäts-Shim:
 1. Registrieren Sie die Dienste des Kompatibilitäts-Shims mit dem di-Container der APP, indem Sie `services.AddMvc().AddWebApiConventions()` in `Startup.ConfigureServices`aufrufen.
 1. Definieren Sie Web-API-spezifische Routen mithilfe von `MapWebApiRoute` auf der `IRouteBuilder` im `IApplicationBuilder.UseMvc`-Befehl der app.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

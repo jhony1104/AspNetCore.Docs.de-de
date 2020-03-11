@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: 8df070b580b6125db6616b33a81f3ffebad69f3a
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 910fffbf360ed0f62f7fe20bc8bfdf5be8198876
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828918"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652315"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="view-components"></a>Ansichtskomponenten
 
@@ -155,7 +155,7 @@ In diesem Beispiel wird die Ansichtskomponente direkt von einem Controller aus a
 
 ## <a name="walkthrough-creating-a-simple-view-component"></a>Exemplarische Vorgehensweise: Erstellen einer einfachen Ansichtskomponente
 
-[Laden Sie den Startercode herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), und erstellen und testen Sie diesen. Dabei handelt es sich um ein einfaches Projekt mit einem `ToDo`-Controller, in dem eine Liste von *ToDo*-Elementen angezeigt wird.
+[Laden Sie den Startercode herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), und erstellen und testen Sie diesen. Dabei handelt es sich um ein einfaches Projekt mit einem `ToDo`-Controller, in dem eine Liste von *ToDo*-Elementen angezeigt wird.
 
 ![Liste mit ToDo-Elementen](view-components/_static/2dos.png)
 
@@ -202,7 +202,7 @@ Bemerkungen zum Code:
 
 Das Markup `@await Component.InvokeAsync` zeigt die Syntax für die aufrufenden Ansichtskomponenten an. Das erste Argument ist der Name der aufzurufenden Komponente. Darauffolgende Parameter werden an die Komponente übergeben. `InvokeAsync` kann eine arbiträre Anzahl von Argumenten annehmen.
 
-Testen der App In der folgenden Abbildung werden die ToDo-Liste und die Elemente mit Priorität angezeigt:
+Testen der App. In der folgenden Abbildung werden die ToDo-Liste und die Elemente mit Priorität angezeigt:
 
 ![ToDo-Liste und Prioritätselemente](view-components/_static/pi.png)
 
@@ -300,7 +300,7 @@ Die Ansichtskomponente wird in einer Razor-Datei (z.B. *Views/Home/Index.cshtml*
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [Taghilfsprogramm](xref:mvc/views/tag-helpers/intro)
 
-Rufen Sie `Component.InvokeAsync` auf, um das <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>-Verfahren zu verwenden:
+Rufen Sie <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> auf, um das `Component.InvokeAsync`-Verfahren zu verwenden:
 
 ::: moniker-end
 

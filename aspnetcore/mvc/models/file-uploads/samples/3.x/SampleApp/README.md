@@ -2,13 +2,13 @@
 
 Diese Beispiel-App veranschaulicht die im Thema [Hochladen von Dateien in ASP.NET Core](https://docs.microsoft.com/aspnet/core/mvc/models/file-uploads) beschriebenen Konzepte.
 
-## <a name="security-considerations"></a>Sicherheitsüberlegungen
+## <a name="security-considerations"></a>Sicherheitshinweise
 
 Gehen Sie mit Bedacht vor, wenn Sie Benutzern die Möglichkeit geben, Dateien auf einen Server hochzuladen. Angreifer können [Denial-of-Service](/windows-hardware/drivers/ifs/denial-of-service)-Angriffe ausführen, Viren oder Schadsoftware hochladen oder versuchen, Netzwerke und Server auf andere Weise zu kompromittieren.
 
 Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines erfolgreichen Angriffs zu verringern:
 
-* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien auf dem System hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Die Verwendung eines dedizierten Speicherorts erleichtert es, Sicherheitsmaßnahmen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort zum Hochladen Dateien.&dagger;
+* Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien auf dem System hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Die Verwendung eines dedizierten Speicherorts erleichtert es, Sicherheitsmaßnahmen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
 * Hochgeladene Dateien dürfen nie persistent in der Verzeichnisstruktur gespeichert werden, in der sich auch die App befindet.&dagger;
 * Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer eingegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger;
 * Lassen Sie nur einen festgelegten Satz genehmigter Dateierweiterungen zu.&dagger;
@@ -31,7 +31,7 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 > Wie Sie die Angriffsoberfläche beim Akzeptieren von Benutzerdateien reduzieren, erfahren Sie in den folgenden Artikeln:
 >
 > * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen erfolgen, wenn Dateien von Benutzern akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen gelten, wenn Dateien vom Benutzer akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 Weitere Informationen finden Sie unter [Hochladen von Dateien in ASP.NET Core](https://docs.microsoft.com/aspnet/core/mvc/models/file-uploads).
 

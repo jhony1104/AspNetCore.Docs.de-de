@@ -1,69 +1,69 @@
 ---
-title: Objekt-Wiederverwendung mit Objektpool in ASP.NET Core
+title: Wieder verwenden von Objekten mit Objectpool in ASP.net Core
 author: rick-anderson
-description: Tipps zum Verbessern der Leistung in ASP.NET Core-apps, die mit der Objektpool.
+description: Tipps zum Steigern der Leistung in ASP.net Core-apps mit Objectpool.
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 uid: performance/ObjectPool
 ms.openlocfilehash: 771f19e54a908b8b2cd85ff72f368f16e94a2310
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815523"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654379"
 ---
-# <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Objekt-Wiederverwendung mit Objektpool in ASP.NET Core
+# <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Wieder verwenden von Objekten mit Objectpool in ASP.net Core
 
-Durch [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak), und [Rick Anderson](https://twitter.com/RickAndMSFT)
+Von [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak)und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-<xref:Microsoft.Extensions.ObjectPool> ist Teil der ASP.NET Core-Infrastruktur, die unterstützt wird, halten eine Gruppe von Objekten im Arbeitsspeicher für die Wiederverwendung, anstatt können die Objekte in die Garbage erfasst.
+<xref:Microsoft.Extensions.ObjectPool> ist Teil der ASP.net Core Infrastruktur, die das Beibehalten einer Gruppe von Objekten im Arbeitsspeicher für die Wiederverwendung unterstützt, anstatt zuzulassen, dass die Objekte in die Garbage Collection aufgenommen werden.
 
-Möglicherweise möchten den-Objektpool verwenden, wenn die Objekte, die verwaltet werden:
+Möglicherweise möchten Sie den Objekt Pool verwenden, wenn die verwalteten Objekte wie folgt lauten:
 
-- Teuer zuordnen/initialisiert werden.
+- Das Zuordnen/initialisieren ist aufwendig.
 - Stellen Sie eine begrenzte Ressource dar.
-- Zuverlässig und häufig verwendet.
+- Wird vorhersag Bar und häufig verwendet.
 
-Das ASP.NET Core-Framework verwendet beispielsweise des Objektpools an einigen Stellen wiederverwenden <xref:System.Text.StringBuilder> Instanzen. `StringBuilder` Ordnet ein, und verwaltet seine eigenen Puffer zum Speichern von Zeichendaten enthalten sind. ASP.NET Core verwendet, regelmäßig `StringBuilder` zum Implementieren dieses features, und führt zu einer Leistungssteigerung wiederverwendet werden.
+Beispielsweise verwendet das ASP.net Core Framework den Objekt Pool an manchen Stellen, um <xref:System.Text.StringBuilder> Instanzen wiederzuverwenden. `StringBuilder` ordnet und verwaltet seine eigenen Puffer zum Speichern von Zeichendaten. ASP.net Core verwendet `StringBuilder` regelmäßig, um Features zu implementieren, und die erneute Verwendung bietet einen Leistungsvorteil.
 
-Objektpooling nicht immer die Leistung verbessert:
+Das Objekt Pooling verbessert nicht immer die Leistung:
 
-- Es sei denn, die Kosten der Initialisierung eines Objekts hoch ist, ist es in der Regel langsamer, um das Objekt aus dem Pool abzurufen.
-- Durch den Pool verwalteten Objekte nicht aufgehoben, bis der Pool aufgehoben ist.
+- Wenn die Initialisierungs Kosten eines Objekts nicht hoch sind, ist es normalerweise langsamer, das Objekt aus dem Pool zu erhalten.
+- Die Zuordnung von Objekten, die vom Pool verwaltet werden, wird erst aufgehoben, wenn die Zuordnung des Pools aufgehoben wird
 
-Verwenden Sie die Objektpooling nur nach dem Sammeln von Leistungsdaten mithilfe von realistischen Szenarien für Ihre app oder Bibliothek.
+Verwenden Sie das Objekt Pooling nur, nachdem Sie Leistungsdaten mithilfe realistischer Szenarien für Ihre APP oder Bibliothek gesammelt haben.
 
-**WARNUNG: Die `ObjectPool` implementiert keine `IDisposable`. Verwenden es mit Typen, die Freigabe benötigen empfohlen nicht.**
+**Warnung: der `ObjectPool` implementiert `IDisposable`nicht. Es wird nicht empfohlen, es mit Typen zu verwenden, die eine Entsorgung benötigen.**
 
-**HINWEIS: Der Objektpool keine Begrenzung der Anzahl der Objekte, die er zuordnet, es legt einen Grenzwert für die Anzahl der Objekte, die es beibehalten wird.**
+**Hinweis: die Anzahl der Objekte, die Sie zuordnen soll, wird von Objectpool nicht begrenzt, und die Anzahl der Objekte, die Sie beibehält, ist begrenzt.**
 
 ## <a name="concepts"></a>Konzepte
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> -die Pool-Abstraktion Basisobjekt. Zum Abrufen und Objekte zurückgegeben.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>: die grundlegende Objekt Pool Abstraktion. Wird verwendet, um-Objekte zu erhalten und zurückzugeben.
 
-<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> – Implementieren Sie diese Option, um anzupassen, wie ein Objekt erstellt wird und wie es *zurücksetzen* Wenn an den Pool zurückgegeben. Dies kann in einem Pool-Objekt übergeben werden, die Sie direkt zu erstellen... oder
+<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> implementieren, um anzupassen, wie ein Objekt erstellt wird und wie es *zurückgesetzt* wird, wenn es an den Pool zurückgegeben wird. Dies kann an einen Objekt Pool übermittelt werden, den Sie direkt erstellen... Noch
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> fungiert als Factory für die Erstellung von Objektpools.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> fungiert als Factory zum Erstellen von Objekt Pools.
 <!-- REview, there is no ObjectPoolProvider<T> -->
 
-Der Objektpool kann in einer app auf verschiedene Weise verwendet werden:
+Der Objectpool kann in einer APP auf verschiedene Weise verwendet werden:
 
-* Instanziieren einen Pool an.
-* Registrieren einen Pool in [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (DI) als eine Instanz.
-* Registrieren der `ObjectPoolProvider<>` in DI, und verwenden ihn als Factory.
+* Instanziieren eines Pools.
+* Registrieren eines Pools in [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (di) als-Instanz.
+* Registrieren der `ObjectPoolProvider<>` in di und Verwendung als Factory.
 
-## <a name="how-to-use-objectpool"></a>Gewusst wie: Verwenden der Objektpool
+## <a name="how-to-use-objectpool"></a>Verwenden von Objectpool
 
-Rufen Sie <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> um ein Objekt abzurufen und <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> das Objekt zurück.  Es ist nicht erforderlich, dass Sie jedes Objekt zurückgeben. Wenn Sie ein Objekt zurückgeben keine, werden Garbage Collection bereinigt.
+Ruft <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> auf, um ein-Objekt abzurufen und <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*>, um das Objekt zurückzugeben.  Es ist nicht erforderlich, jedes Objekt zurückzugeben. Wenn Sie kein Objekt zurückgeben, wird die Garbage Collection durchgeführt.
 
-## <a name="objectpool-sample"></a>Objektpool-Beispiel
+## <a name="objectpool-sample"></a>Objectpool-Beispiel
 
-Der folgende Code
+Der folgende Code:
 
-* Fügt `ObjectPoolProvider` auf die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (DI)-Container.
-* Hinzugefügt und konfiguriert `ObjectPool<StringBuilder>` zu DI-Container.
-* Fügt der `BirthdayMiddleware`.
+* Fügt `ObjectPoolProvider` dem Container für die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (di) hinzu.
+* Fügt `ObjectPool<StringBuilder>` dem di-Container hinzu und konfiguriert diese.
+* Fügt die `BirthdayMiddleware`hinzu.
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 

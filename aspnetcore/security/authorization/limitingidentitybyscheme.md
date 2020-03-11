@@ -6,16 +6,16 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 9c173a4589279b03bc12b4b7dea594fae88cf471
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: a3be2b8171c146beef7e62c8f7e55883ca5dc687
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928388"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652981"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren mit einem bestimmten Schema in ASP.net Core
 
-In einigen Szenarien, z. b. Single-Page-Anwendungen (Spas), ist es üblich, mehrere Authentifizierungsmethoden zu verwenden. Die APP kann z. b. die cookiebasierte Authentifizierung für die Anmeldung und die JWT-Träger Authentifizierung für JavaScript-Anforderungen verwenden. In einigen Fällen verfügt die APP möglicherweise über mehrere Instanzen eines Authentifizierungs Handlers. Beispielsweise zwei Cookie-Handler, bei denen eine eine grundlegende Identität enthält und eine erstellt wird, wenn eine mehrstufige Authentifizierung (Multi-Factor Authentication, MFA) ausgelöst wurde. MFA kann ausgelöst werden, da der Benutzer einen Vorgang angefordert hat, der zusätzliche Sicherheit erfordert. Weitere Informationen zum Erzwingen von MFA, wenn ein Benutzer eine Ressource anfordert, für die MFA erforderlich ist, finden Sie im Abschnitt "GitHub-Problem [Schutz" mit MFA](https://github.com/aspnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).
+In einigen Szenarien, z. b. Single-Page-Anwendungen (Spas), ist es üblich, mehrere Authentifizierungsmethoden zu verwenden. Die APP kann z. b. die cookiebasierte Authentifizierung für die Anmeldung und die JWT-Träger Authentifizierung für JavaScript-Anforderungen verwenden. In einigen Fällen verfügt die APP möglicherweise über mehrere Instanzen eines Authentifizierungs Handlers. Beispielsweise zwei Cookie-Handler, bei denen eine eine grundlegende Identität enthält und eine erstellt wird, wenn eine mehrstufige Authentifizierung (Multi-Factor Authentication, MFA) ausgelöst wurde. MFA kann ausgelöst werden, da der Benutzer einen Vorgang angefordert hat, der zusätzliche Sicherheit erfordert. Weitere Informationen zum Erzwingen von MFA, wenn ein Benutzer eine Ressource anfordert, für die MFA erforderlich ist, finden Sie im Abschnitt "GitHub-Problem [Schutz" mit MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).
 
 Ein Authentifizierungsschema wird benannt, wenn der Authentifizierungsdienst während der Authentifizierung konfiguriert wird. Beispiel:
 

@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
 ms.openlocfilehash: 623f739b17c0bed3ce929f562c9581ab26ecf5bc
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928560"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652699"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
 
@@ -42,7 +42,7 @@ Der vorherige Befehl erstellt eine ASP.net Core-App mit einem *ClientApp* -Verze
 
 In den folgenden Abschnitten werden Ergänzungen zum-Projekt beschrieben, wenn die Authentifizierungs Unterstützung enthalten ist:
 
-### <a name="startup-class"></a>Startup-Klasse
+### <a name="startup-class"></a>Startklasse
 
 Die `Startup`-Klasse verfügt über folgende Ergänzungen:
 
@@ -260,7 +260,7 @@ async populateWeatherData() {
 }
 ```
 
-## <a name="deploy-to-production"></a>In Produktionsumgebungen bereitstellen
+## <a name="deploy-to-production"></a>Bereitstellen für die Produktion
 
 Um die app in der Produktionsumgebung bereitzustellen, müssen die folgenden Ressourcen bereitgestellt werden:
 
@@ -369,7 +369,7 @@ AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
 });
 ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:spa/angular>
 * <xref:spa/react>

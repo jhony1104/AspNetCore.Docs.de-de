@@ -7,11 +7,11 @@ ms.author: bdorrans
 ms.date: 01/02/2020
 uid: security/authentication/certauth
 ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447281"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654169"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
@@ -220,7 +220,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 > [!NOTE]
 > Auf Endpunkte, die durch Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **vor** dem Aufrufen von <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> erstellt werden, werden die Standardwerte nicht angewendet.
 
-### <a name="iis"></a>IIS-
+### <a name="iis"></a>IIS
 
 Führen Sie im IIS-Manager die folgenden Schritte aus:
 

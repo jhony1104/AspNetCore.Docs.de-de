@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/07/2019
 uid: fundamentals/servers/index
 ms.openlocfilehash: d46793ef54c99fe609b5983c5a658fb7b20032fa
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289064"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644695"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Webserverimplementierungen in ASP.NET Core
 
@@ -40,7 +40,7 @@ Leitfäden zur Kestrel-Konfiguration und Informationen darüber, wann Kestrel in
 
 ::: moniker range=">= aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 ASP.NET Core wird mit folgendem Umfang ausgeliefert:
 
@@ -66,11 +66,11 @@ Weitere Informationen und Anleitungen zur Konfiguration finden Sie unter den fol
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/aspnet-core-module>
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core wird mit [Kestrel Server](xref:fundamentals/servers/kestrel) ausgeliefert, der der plattformübergreifende HTTP-Standardserver ist.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core wird mit [Kestrel Server](xref:fundamentals/servers/kestrel) ausgeliefert, der der plattformübergreifende HTTP-Standardserver ist.
 
@@ -80,7 +80,7 @@ ASP.NET Core wird mit [Kestrel Server](xref:fundamentals/servers/kestrel) ausgel
 
 ::: moniker range="< aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 ASP.NET Core wird mit folgendem Umfang ausgeliefert:
 
@@ -106,11 +106,11 @@ In den folgenden Artikeln finden Sie Konfigurationsrichtlinien für IIS und ein 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/aspnet-core-module>
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core wird mit [Kestrel Server](xref:fundamentals/servers/kestrel) ausgeliefert, der der plattformübergreifende HTTP-Standardserver ist.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core wird mit [Kestrel Server](xref:fundamentals/servers/kestrel) ausgeliefert, der der plattformübergreifende HTTP-Standardserver ist.
 
@@ -152,9 +152,9 @@ Wenn die integrierten Server nicht den Anforderungen der App entsprechen, kann e
 
 Der Server wird gestartet, wenn die integrierte Entwicklungsumgebung (IDE) oder der Editor die App startet:
 
-* [Visual Studio:](https://visualstudio.microsoft.com) Die Startprofile können verwendet werden, um die App und den Server mit [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) oder mit der Konsole zu starten.
-* [Visual Studio Code:](https://code.visualstudio.com/) Die App und der Server werden durch [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode) gestartet, das den CoreCLR-Debugger aktiviert.
-* [Visual Studio für Mac:](https://visualstudio.microsoft.com/vs/mac/) Die App und der Server werden durch den [Mono Soft-Mode Debugger](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/) gestartet.
+* [Visual Studio](https://visualstudio.microsoft.com): Startprofile können verwendet werden, um die App und den Server mit [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module) oder mit der Konsole zu starten.
+* [Visual Studio Code](https://code.visualstudio.com/): Die App und der Server werden durch [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode) gestartet, das den CoreCLR-Debugger aktiviert.
+* [Visual Studio für Mac](https://visualstudio.microsoft.com/vs/mac/): Die App und der Server werden durch den [Mono Soft-Mode Debugger](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/) gestartet.
 
 Wird die App über eine Eingabeaufforderung im Ordner des Projekts gestartet, startet [dotnet run](/dotnet/core/tools/dotnet-run) die App und den Server (nur Kestrel und HTTP.sys). Die Konfiguration wird durch die Option `-c|--configuration` angegeben, die entweder auf `Debug` (Standardwert) oder `Release` festgelegt ist.
 

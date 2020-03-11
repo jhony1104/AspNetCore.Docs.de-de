@@ -1,29 +1,29 @@
 ---
-title: Verschlüsselung ruhender Daten in ASP.NET Core
+title: Verschlüsselung ruhender Schlüssel in ASP.net Core
 author: rick-anderson
-description: Erfahren Sie Details zur Implementierung von ASP.NET Core-Datenschutz-Key-Verschlüsselung ruhender Daten.
+description: Erfahren Sie mehr über die Implementierungsdetails ASP.net Core Verschlüsselung von Datenschutz Schlüsseln ruhender Daten.
 ms.author: riande
 ms.date: 07/16/2018
 uid: security/data-protection/implementation/key-encryption-at-rest
 ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892307"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651631"
 ---
-# <a name="key-encryption-at-rest-in-aspnet-core"></a>Verschlüsselung ruhender Daten in ASP.NET Core
+# <a name="key-encryption-at-rest-in-aspnet-core"></a>Verschlüsselung ruhender Schlüssel in ASP.net Core
 
-System zum Schutz von Daten [Discovery-Mechanismus in der Standardeinstellung setzt](xref:security/data-protection/configuration/default-settings) um zu bestimmen, wie kryptografische Schlüssel im Ruhezustand verschlüsselt werden soll. Der Entwickler kann außer Kraft setzen der Discovery-Mechanismus und manuell angeben, wie die Schlüssel im Ruhezustand verschlüsselt werden soll.
+Das Datenschutzsystem [setzt standardmäßig einen Ermittlungs Mechanismus ein](xref:security/data-protection/configuration/default-settings) , um zu bestimmen, wie kryptografische Schlüssel im Ruhezustand verschlüsselt werden sollen. Der Entwickler kann den Ermittlungs Mechanismus überschreiben und manuell angeben, wie Schlüssel im Ruhezustand verschlüsselt werden sollen.
 
 > [!WARNING]
-> Wenn Sie einen expliziten angeben [Schlüssel persistenzspeicherort](xref:security/data-protection/implementation/key-storage-providers), System zum Schutz von Daten hebt die Registrierung der Standard-Schlüsselverschlüsselung auf Rest-Mechanismus. Daher werden die Schlüssel nicht mehr im Ruhezustand verschlüsselt. Es wird empfohlen, die Sie [Geben Sie einen Mechanismus für die explizite Schlüsselverschlüsselung](xref:security/data-protection/implementation/key-encryption-at-rest) für produktionsbereitstellungen. Die Verschlüsselung im Ruhezustand Methode-Optionen werden in diesem Thema beschrieben.
+> Wenn Sie einen expliziten [Speicherort für die Schlüssel Persistenz](xref:security/data-protection/implementation/key-storage-providers)angeben, hebt das Datenschutzsystem die Standardverschlüsselung im Ruhezustand auf. Folglich werden Schlüssel im Ruhezustand nicht mehr verschlüsselt. Es wird empfohlen, dass Sie [einen expliziten Schlüssel Verschlüsselungsmechanismus](xref:security/data-protection/implementation/key-encryption-at-rest) für Produktions Bereitstellungen angeben. Die Optionen für die Verschlüsselung ruhender Mechanismen werden in diesem Thema beschrieben.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-## <a name="azure-key-vault"></a>Azure Key Vault
+## <a name="azure-key-vault"></a>Azure-Schlüsseltresor
 
-Zum Speichern von Schlüsseln in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), konfigurieren Sie das System mit [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) in die `Startup` Klasse:
+Um Schlüssel in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)zu speichern, konfigurieren Sie das System mit " [protectkeyswithazurekeyvault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) " in der `Startup`-Klasse:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -34,15 +34,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Weitere Informationen finden Sie unter [Konfigurieren von ASP.NET Core-Datenschutz: ProtectKeysWithAzureKeyVault](xref:security/data-protection/configuration/overview#protectkeyswithazurekeyvault).
+Weitere Informationen finden Sie unter [Konfigurieren von ASP.net Core Datenschutz: protectkeyswithazurekeyvault](xref:security/data-protection/configuration/overview#protectkeyswithazurekeyvault).
 
 ::: moniker-end
 
 ## <a name="windows-dpapi"></a>Windows DPAPI
 
-**Gilt nur für Windows-Bereitstellungen.**
+**Gilt nur für Windows-bereit Stellungen.**
 
-Wenn Windows DPAPI verwendet wird, wird mit Schlüsselmaterial verschlüsselt [CryptProtectData](/windows/desktop/api/dpapi/nf-dpapi-cryptprotectdata) vor, die in den Speicher beibehalten wird. DPAPI ist einem entsprechenden Verschlüsselungsmechanismus für Daten, die niemals außerhalb des aktuellen Computers gelesen werden (allerdings es ist möglich, diese Schlüssel bis zum Active Directory sichern, finden Sie unter [DPAPI und servergespeicherte Profile](https://support.microsoft.com/kb/309408/#6)). Um DPAPI-Schlüssel im Ruhezustand-Verschlüsselung zu konfigurieren, rufen Sie eine der der [ProtectKeysWithDpapi](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpapi) Erweiterungsmethoden:
+Bei Verwendung von Windows DPAPI wird das Schlüsselmaterial mit " [CryptProtectData](/windows/desktop/api/dpapi/nf-dpapi-cryptprotectdata) " verschlüsselt, bevor es im Speicher gespeichert wird. DPAPI ist ein geeigneter Verschlüsselungsmechanismus für Daten, die nie außerhalb des aktuellen Computers gelesen werden (obwohl es möglich ist, diese Schlüssel bis Active Directory zu sichern. Weitere Informationen finden Sie unter [DPAPI und Roamingprofile](https://support.microsoft.com/kb/309408/#6)). Um die Verschlüsselung für den DPAPI-Schlüssel für die Verschlüsselung zu konfigurieren, wenden Sie eine der [protectkeyswithdpapi](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpapi) -Erweiterungs Methoden an:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -53,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wenn `ProtectKeysWithDpapi` mit ohne Parameter aufgerufen wird, nur das aktuelle Windows-Benutzerkonto den beibehaltenen Schlüsselbund entschlüsseln kann. Sie können optional angeben, dass jedes Benutzerkonto auf dem Computer (nicht nur das aktuelle Benutzerkonto) auf den Schlüsselbund zu entschlüsseln:
+Wenn `ProtectKeysWithDpapi` ohne Parameter aufgerufen wird, kann nur das aktuelle Windows-Benutzerkonto den persistenten Schlüsselring entschlüsseln. Optional können Sie angeben, dass jedes Benutzerkonto auf dem Computer (nicht nur das aktuelle Benutzerkonto) in der Lage sein soll, den Schlüsselring zu entschlüsseln:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -68,7 +68,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="x509-certificate"></a>X.509-Zertifikat
 
-Wenn die app über mehrere Computer verteilt ist, ist es möglicherweise sinnvoll, ein gemeinsam genutztes x. 509-Zertifikat auf dem Computer zu verteilen, und konfigurieren Sie die gehosteten apps zur Verwendung des Zertifikats für die Verschlüsselung von Schlüsseln im ruhenden Zustand:
+Wenn die APP auf mehrere Computer verteilt ist, ist es möglicherweise bequem, ein frei gegebenes X. 509-Zertifikat auf den Computern zu verteilen und die gehosteten apps so zu konfigurieren, dass das Zertifikat für die Verschlüsselung der Schlüssel im Ruhezustand verwendet wird:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -78,17 +78,17 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Aufgrund von Beschränkungen im .NET Framework werden nur Zertifikate mit privaten Schlüsseln CAPI unterstützt. Finden Sie unter den unten stehenden Inhalt mögliche problemumgehungen für diese Einschränkungen.
+Aufgrund .NET Framework Einschränkungen werden nur Zertifikate mit privaten CAPI-Schlüsseln unterstützt. In den folgenden Inhalten finden Sie mögliche Problem Umgehungen für diese Einschränkungen.
 
 ::: moniker-end
 
 ## <a name="windows-dpapi-ng"></a>Windows DPAPI-NG
 
-**Dieser Mechanismus ist nur für Windows 8/Windows Server 2012 oder höher verfügbar.**
+**Dieser Mechanismus ist nur unter Windows 8/Windows Server 2012 oder höher verfügbar.**
 
-Ab Windows 8 unterstützt Windows-Betriebssystem DPAPI-NG (auch als CNG DPAPI). Weitere Informationen finden Sie unter [zu CNG DPAPI](/windows/desktop/SecCNG/cng-dpapi).
+Ab Windows 8 unterstützt das Windows-Betriebssystem DPAPI-ng (auch CNG DPAPI genannt). Weitere Informationen finden Sie unter Informationen [zu CNG DPAPI](/windows/desktop/SecCNG/cng-dpapi).
 
-Der Prinzipal wird als eine Regel zum Schutz von Deskriptor codiert. Im folgenden Beispiel, das Aufrufe [ProtectKeysWithDpapiNG](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpaping)ausschließlich in die Domäne eingebundener Benutzer mit der angegebenen SID den Schlüsselbund entschlüsselt werden kann:
+Der Prinzipal wird als Schutz beschreibungsregel codiert. Im folgenden Beispiel, in dem [protectkeyswithdpaping](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpaping)aufgerufen wird, kann nur der in die Domäne eingebundenen Benutzer mit der angegebenen SID den Schlüsselbund entschlüsseln:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -100,7 +100,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Es gibt auch eine parameterlose Überladung von `ProtectKeysWithDpapiNG`. Diese Hilfsmethode verwenden, an die Regel "SID = {CURRENT_ACCOUNT_SID}", wobei *CURRENT_ACCOUNT_SID* ist die SID des die aktuelle Windows-Benutzerkonto:
+Es gibt auch eine parameterlose Überladung von `ProtectKeysWithDpapiNG`. Verwenden Sie diese Hilfsmethode, um die Regel "sid = {CURRENT_ACCOUNT_SID}" anzugeben, wobei *CURRENT_ACCOUNT_SID* die SID des aktuellen Windows-Benutzerkontos ist:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -111,11 +111,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-In diesem Szenario ist die Active Directory-Domänencontroller für die Verteilung von den DPAPI-NG-Vorgängen verwendeten Verschlüsselungsschlüssel verantwortlich. Der Zielbenutzer kann die verschlüsselte Nutzlast über eine beliebige Domäne eingebundenen Computer entschlüsselt werden, (vorausgesetzt, dass der Prozess unter ihrer Identität ausgeführt wird).
+In diesem Szenario ist der AD-Domänen Controller für die Verteilung der Verschlüsselungsschlüssel verantwortlich, die von den DPAPI-ng-Vorgängen verwendet werden. Der Ziel Benutzer kann die verschlüsselte Nutzlast von einem beliebigen in eine Domäne eingebundenen Computer entschlüsseln (vorausgesetzt, der Prozess wird unter seiner Identität ausgeführt).
 
-## <a name="certificate-based-encryption-with-windows-dpapi-ng"></a>Einem zertifikatbasierten Verschlüsselungsverfahren mit Windows DPAPI-NG
+## <a name="certificate-based-encryption-with-windows-dpapi-ng"></a>Zertifikat basierte Verschlüsselung mit Windows DPAPI-ng
 
-Wenn die app unter Windows 8.1 / Windows Server 2012 R2 ausgeführt wird, oder höher, Sie Windows DPAPI-NG verwenden können, um zertifikatbasierte Verschlüsselung auszuführen. Verwenden Sie die Regel sicherheitsbeschreibungs-Zeichenfolge "Zertifikat HashId:THUMBPRINT =", wobei *FINGERABDRUCK* ist der Hexadezimal-codierten SHA1-Fingerabdruck des Zertifikats:
+Wenn die APP unter Windows 8.1/Windows Server 2012 R2 oder höher ausgeführt wird, können Sie Windows DPAPI-ng verwenden, um eine Zertifikat basierte Verschlüsselung auszuführen. Verwenden Sie die Regel Deskriptorzeichenfolge "Certificate = Hashid: Fingerabdruck", wobei " *Fingerabdruck* " der hexadezimal codierte SHA1-Fingerabdruck des Zertifikats ist:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -126,8 +126,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Jede app, die auf dieses Repository verwiesen wird, muss unter Windows 8.1 / Windows Server 2012 R2 oder höher, auf die Schlüssel zu entschlüsseln ausgeführt werden.
+Jede APP, die auf dieses Repository verweist, muss auf Windows 8.1/Windows Server 2012 R2 oder höher ausgeführt werden, um die Schlüssel zu entschlüsseln.
 
-## <a name="custom-key-encryption"></a>Benutzerdefinierte Schlüsselverschlüsselung
+## <a name="custom-key-encryption"></a>Verschlüsselung von benutzerdefinierten Schlüsseln
 
-Wenn die integrierte Mechanismen nicht geeignet sind, kann der Entwickler einen eigenen Mechanismus für die Schlüsselverschlüsselung angeben, durch Bereitstellen eines benutzerdefinierten [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor).
+Wenn die in-Box-Mechanismen nicht geeignet sind, kann der Entwickler einen eigenen Schlüssel Verschlüsselungsmechanismus angeben, indem er einen benutzerdefinierten [ixmlencryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor)bereitstellt.

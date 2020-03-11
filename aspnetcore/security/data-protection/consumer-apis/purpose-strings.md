@@ -1,58 +1,58 @@
 ---
-title: Purpose-Zeichenfolgen in ASP.NET Core
+title: Zweck Zeichenfolgen in ASP.net Core
 author: rick-anderson
-description: Erfahren Sie, wie Purpose-Zeichenfolgen in ASP.NET Core Datenschutz-APIs verwendet werden.
+description: Erfahren Sie, wie Zweck Zeichenfolgen in den ASP.net Core Datenschutz-APIs verwendet werden.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/consumer-apis/purpose-strings
 ms.openlocfilehash: 4c85423f8de7e4b784ae1bb304a884541df251b6
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087530"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654001"
 ---
-# <a name="purpose-strings-in-aspnet-core"></a>Purpose-Zeichenfolgen in ASP.NET Core
+# <a name="purpose-strings-in-aspnet-core"></a>Zweck Zeichenfolgen in ASP.net Core
 
 <a name="data-protection-consumer-apis-purposes"></a>
 
-Komponenten, die nutzen `IDataProtectionProvider` muss einen eindeutigen bestehen *Zwecke* Parameter, um die `CreateProtector` Methode. Im Sinne *Parameter* ist dieses System zum Schutz von Daten, die Sicherheit Isolation zwischen kryptografischen Consumern, auch wenn die Stamm-kryptografischen Schlüssel identisch sind.
+Komponenten, die `IDataProtectionProvider` nutzen, müssen einen eindeutigen *Verwendungs* Parameter an die `CreateProtector`-Methode übergeben. Der *Parameter* "zwecks" ist der Sicherheit des Datenschutzsystems, da es die Isolation zwischen kryptografieconsumern ermöglicht, auch wenn die Stamm Kryptografieschlüssel identisch sind.
 
-Wenn ein Consumer einen Zweck angegeben ist, wird die Zweck-Zeichenfolge zusammen mit der Stamm-Kryptografieschlüssel verwendet, um kryptografische Unterschlüssel eindeutig, kann der Kunde abgeleitet werden. Dadurch wird den Consumer vor allen anderen kryptografischen Consumern in der Anwendung isoliert: keine andere Komponente der Nutzlasten lesen kann, und keine andere Komponente-Nutzlasten gelesen. Diese Isolierung wird auch nicht realisierbare ganze Kategorien der Angriff auf die Komponente gerendert.
+Wenn ein Consumer einen Zweck angibt, wird die Zweck Zeichenfolge zusammen mit den Stamm-Kryptografieschlüsseln verwendet, um kryptografische Unterschlüssel abzuleiten, die für diesen Consumer eindeutig sind. Dadurch wird der Consumer von allen anderen kryptografieverbrauchern in der Anwendung isoliert: keine andere Komponente kann seine Nutzlasten lesen, und er kann keine Nutzlasten anderer Komponenten lesen. Diese Isolation rendert außerdem alle möglichen Angriffs Kategorien für die Komponente.
 
-![Beispiel für ein allgemeines Diagramm](purpose-strings/_static/purposes.png)
+![Beispiel für Zweck Diagramm](purpose-strings/_static/purposes.png)
 
-In der Abbildung oben `IDataProtector` Instanzen A und B **kann nicht** gegenseitig-Nutzlasten für Lesen, nur ihre eigenen.
+In der obigen Abbildung können `IDataProtector` Instanzen A und B **nicht** die Nutzlasten anderer Benutzer, sondern nur Ihre eigenen Nutzlasten lesen.
 
-Die Zweck Zeichenfolge nicht geheim sein. Es sollte einfach insofern eindeutig sein, dass keine andere kaum Komponente immer die gleiche Zeichenfolge für den Zweck bereitstellen.
+Die Zweck Zeichenfolge muss nicht geheim sein. Es sollte einfach so eindeutig sein, dass keine andere gut verhaltene Komponente jemals die gleiche Zweck Zeichenfolge bereitstellen wird.
 
 >[!TIP]
-> Unter Verwendung des Namespace und Typ der Komponente, die die Datenschutz-APIs nutzen, ist eine gute Faustregel, wie in der Praxis, die diese Informationen nicht in Konflikt steht.
+> Die Verwendung des Namespace und Typnamens der Komponente, die die Datenschutz-APIs nutzt, ist eine gute Faustregel, da diese Informationen in der Praxis niemals in Konflikt stehen.
 >
->Eine Contoso autorisierten-Komponente, die für die minting Bearer-Tokens zuständig ist, kann Contoso.Security.BearerToken als dessen Zweck Zeichenfolge verwenden. Oder – noch besser – sie können Contoso.Security.BearerToken.v1 als dessen Zweck-Zeichenfolge. Ermöglicht das Anfügen der Versionsnummer einer zukünftigen Version Contoso.Security.BearerToken.v2 als ihren Zweck zu verwenden, und die verschiedenen Versionen wäre vollständig voneinander isoliert, so weit Nutzlasten wechseln.
+>Eine von Configuration Manager erstellte Komponente, die für das Minting von bearertoken zuständig ist, kann "" als Zweck Zeichenfolge "" "" als Zweck Zeichenfolge verwenden. Oder-noch besser: Es kann "" als Zweck Zeichenfolge "" verwendet werden. Das Anfügen der Versionsnummer ermöglicht einer zukünftigen Version die Verwendung von "fitoso. Security. bearertoken. v2" als Zweck, und die verschiedenen Versionen werden vollständig voneinander isoliert, soweit Nutzlasten erfolgen.
 
-Seit den Zwecke-Parameter, um `CreateProtector` ist ein Zeichenfolgenarray der oben genannten konnte haben stattdessen angegeben wurde als `[ "Contoso.Security.BearerToken", "v1" ]`. Dies ermöglicht das Erstellen einer Hierarchie von Zwecken und eröffnet die Möglichkeit der mehrinstanzenfähigkeit-Szenarien mit dem System zum Schutz von Daten.
+Da der Parameters "zwecks" `CreateProtector` ein Zeichen folgen Array ist, kann der obige Wert stattdessen als `[ "Contoso.Security.BearerToken", "v1" ]`angegeben werden. Dies ermöglicht das Einrichten einer Hierarchie von Zwecken und eröffnet die Möglichkeit von Szenarien mit mehreren Mandanten mit dem Datenschutzsystem.
 
 <a name="data-protection-contoso-purpose"></a>
 
 >[!WARNING]
-> Komponenten sollten nicht nicht vertrauenswürdiger Benutzereingaben als einzige Quelle der Eingabe für die Kette zu ausgewählt werden können.
+> Komponenten sollten nicht vertrauenswürdige Benutzereingaben nicht als alleinige Quelle für die Eingabe Quelle für die Zweck Kette zulassen.
 >
->Betrachten Sie beispielsweise eine Komponente Contoso.Messaging.SecureMessage, die für das Speichern von sicheren Nachrichten zuständig ist. Würde die sichere Messagingkomponente Aufrufen `CreateProtector([ username ])`, und klicken Sie dann ein böswilliger Benutzer ein Konto mit dem Benutzernamen "Contoso.Security.BearerToken" Fehler beim Abrufen der Komponente aufrufen, erstellen kann `CreateProtector([ "Contoso.Security.BearerToken" ])`, so unbeabsichtigt verursacht das secure messaging System Mint-Nutzlasten, die als Authentifizierungstoken wahrgenommen werden kann.
+>Stellen Sie sich z. b. eine Komponente "" "" ". Wenn die Secure Messaging-Komponente `CreateProtector([ username ])`aufruft, kann ein böswilliger Benutzer ein Konto mit dem Benutzernamen "" `CreateProtector([ "Contoso.Security.BearerToken" ])`, "", "" "" "", "" mit dem Benutzernamen "kontoso. Security. bearertoken".
 >
->Es wäre eine bessere Zwecke-Kette für die messaging-Komponente `CreateProtector([ "Contoso.Messaging.SecureMessage", "User: username" ])`, die richtigen Isolation bietet.
+>Eine bessere Verwendungs Kette für die Messaging Komponente wäre `CreateProtector([ "Contoso.Messaging.SecureMessage", "User: username" ])`, die eine ordnungsgemäße Isolation bereitstellt.
 
-Die Isolierung durch und das Verhalten der `IDataProtectionProvider`, `IDataProtector`, und Zwecke lauten wie folgt:
+Die von und Verhaltensweisen `IDataProtectionProvider`, `IDataProtector`und Zwecke bereitgestellte Isolation lauten wie folgt:
 
-* Für eine angegebenen `IDataProtectionProvider` -Objekt, das `CreateProtector` Methode erstellt ein `IDataProtector` Objekt eindeutig gebunden werden, sowohl die `IDataProtectionProvider` Objekt, das erstellt hat und der Zweck-Parameter, der an die Methode übergeben wurde.
+* Für ein bestimmtes `IDataProtectionProvider` Objekt erstellt die `CreateProtector`-Methode ein `IDataProtector` Objekt, das eindeutig an das `IDataProtectionProvider` Objekt gebunden ist, von dem es erstellt wurde, und den-Parameter, der an die-Methode übergeben wurde.
 
-* Der Zweck-Parameter darf nicht null sein. (Wenn Zwecke als Bytearray angegeben ist, bedeutet dies, dass das Array nicht der Länge Null sein darf und alle Elemente des Arrays müssen ungleich Null sein.) Ein leere Zeichenfolge Zweck ist technisch zulässig, wird jedoch abgeraten.
+* Der Zweck Parameter darf nicht NULL sein. (Wenn Zwecke als Array angegeben wird, bedeutet dies, dass das Array nicht die Länge 0 (null) aufweisen darf und dass alle Elemente des Arrays ungleich NULL sein müssen.) Ein leerer Zeichen folgen Zweck ist technisch zulässig, wird jedoch nicht empfohlen.
 
-* Argumente für zwei Zwecke sind gleichwertig, nur, wenn sie die gleichen Zeichenfolgen (einen ordinalen Vergleich mit) in der gleichen Reihenfolge enthalten. Ein Zweck-Argument ist das entsprechende begründungsarray von einem Element entspricht.
+* Zwei Zweck Argumente sind nur dann gleichwertig, wenn Sie dieselben Zeichen folgen (mit einem Ordinalvergleich) in derselben Reihenfolge enthalten. Ein Argument mit einem einzelnen Zweck entspricht dem entsprechenden Array von Einzelelement Zwecken.
 
-* Zwei `IDataProtector` Objekte sind äquivalent, wenn sie über entsprechende erstellt werden `IDataProtectionProvider` Objekte mit entsprechenden Zwecke-Parameter.
+* Zwei `IDataProtector` Objekte sind gleichwertig, wenn Sie aus äquivalenten `IDataProtectionProvider` Objekten mit entsprechenden Parametern erstellt werden.
 
-* Für einen bestimmten `IDataProtector` -Objekt, das einen Aufruf von `Unprotect(protectedData)` zurück, wird der ursprüngliche `unprotectedData` nur, wenn `protectedData := Protect(unprotectedData)` ein entsprechendes `IDataProtector` Objekt.
+* Für ein bestimmtes `IDataProtector` Objekt gibt ein Aufruf`Unprotect(protectedData)` den ursprünglichen `unprotectedData` zurück, wenn `protectedData := Protect(unprotectedData)` für ein entsprechendes `IDataProtector` Objekt ist.
 
 > [!NOTE]
-> Wir sind nicht den Fall in Betracht ziehen, in denen eine Komponente absichtlich eine Zeichenfolge Zweck wählt die einen Konflikt mit einer anderen Komponente bezeichnet wird. Eine solche Komponente wird im Wesentlichen böswillige berücksichtigt werden, und dieses System ist nicht vorgesehen, Sicherheitsgarantien bereitstellen, die bösartiger Code innerhalb des Arbeitsprozesses bereits ausgeführt wird.
+> Der Fall, in dem eine Komponente absichtlich eine Zweck Zeichenfolge auswählt, die bekanntermaßen mit einer anderen Komponente in Konflikt steht, wird nicht berücksichtigt. Eine solche Komponente würde im Grunde als schädlich angesehen werden, und dieses System ist nicht für die Bereitstellung von Sicherheitsgarantien gedacht, wenn bereits bösartiger Code innerhalb des Arbeitsprozesses ausgeführt wird.

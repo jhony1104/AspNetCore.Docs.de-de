@@ -10,11 +10,11 @@ no-loc:
 - SignalR
 uid: signalr/scale
 ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447333"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655159"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.net Core signalr-Hosting und-Skalierung
 
@@ -127,7 +127,7 @@ Weitere Informationen finden Sie unter [NGINX as a WebSocket Proxy (NGINX als We
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen finden Sie unter:
+Weitere Informationen finden Sie in den folgenden Ressourcen:
 
 * [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview)
 * [Einrichten einer redis-Rückwand](xref:signalr/redis-backplane)

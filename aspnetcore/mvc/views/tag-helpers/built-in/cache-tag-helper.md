@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 0273a9805dd5db5450f57dcf3fd4d952308df074
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
-ms.translationtype: HT
+ms.openlocfilehash: db9e1a968588410f11e5f137dfdd4542df505ebc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856214"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653305"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Cache-Taghilfsprogramm im ASP.NET Core MVC
 
-Von [Peter Kellner](https://peterkellner.net) und [Luke Latham](https://github.com/guardrex) 
+Von [Peter Kellner](https://peterkellner.net)
 
 Durch das Cache-Taghilfsprogramm kann die Leistung Ihrer ASP.NET Core-App verbessert werden, indem deren Inhalte im internen ASP.NET Core-Cacheanbieter zwischengespeichert werden.
 
@@ -35,9 +35,9 @@ Das folgende Razor-Markup speichert das aktuelle Datum zwischen:
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolesch         | `true`, `false` | `true`  |
+| Boolean         | `true`, `false` | `true`  |
 
-`enabled` legt fest, ob der Inhalt zwischengespeichert wird, der vom Cache-Taghilfsprogramm eingeschlossen wird. Die Standardeinstellung ist `true`. Wenn diese Option auf `false` festgelegt ist, wird die gerenderte Ausgabe **nicht** zwischengespeichert.
+`enabled` legt fest, ob der Inhalt zwischengespeichert wird, der vom Cache-Taghilfsprogramm eingeschlossen wird. Der Standardwert lautet `true`. Wenn diese Option auf `false` festgelegt ist, wird die gerenderte Ausgabe **nicht** zwischengespeichert.
 
 Beispiel:
 
@@ -101,7 +101,7 @@ Beispiel:
 
 | Attributtyp | Beispiele                                    |
 | -------------- | ------------------------------------------- |
-| Zeichenfolge         | `User-Agent`, `User-Agent,content-encoding` |
+| String         | `User-Agent`, `User-Agent,content-encoding` |
 
 `vary-by-header` akzeptiert eine durch Trennzeichen getrennte Liste von Headerwerten, die eine Cacheaktualisierung auslösen, wenn diese geändert werden.
 
@@ -117,7 +117,7 @@ Im folgenden Beispiel wird der Headerwert `User-Agent` überwacht. Außerdem wer
 
 | Attributtyp | Beispiele             |
 | -------------- | -------------------- |
-| Zeichenfolge         | `Make`, `Make,Model` |
+| String         | `Make`, `Make,Model` |
 
 `vary-by-query` akzeptiert eine durch Kommas getrennte Liste von <xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> in eine Abfragezeichenfolge (<xref:Microsoft.AspNetCore.Http.HttpRequest.Query*>), die eine Cacheaktualisierung auslösen, wenn der Wert eines aufgeführten Schlüssels geändert wird.
 
@@ -133,7 +133,7 @@ Im folgenden Beispiel werden die Werte von `Make` und `Model` überwacht. Außer
 
 | Attributtyp | Beispiele             |
 | -------------- | -------------------- |
-| Zeichenfolge         | `Make`, `Make,Model` |
+| String         | `Make`, `Make,Model` |
 
 `vary-by-route` akzeptiert eine durch Trennzeichen getrennte Liste mit Namen von Routenparametern, die eine Cacheaktualisierung auslösen, wenn der Routendatenparameter geändert wird.
 
@@ -159,7 +159,7 @@ routes.MapRoute(
 
 | Attributtyp | Beispiele                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
-| Zeichenfolge         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
+| String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
 `vary-by-cookie` akzeptiert eine durch Trennzeichen getrennte Liste mit Namen von Cookies, die eine Cacheaktualisierung auslösen, wenn der Cookiewert geändert wird.
 
@@ -175,7 +175,7 @@ Das folgende Beispiel überwacht das Cookie, das der ASP.NET Core-Identität zug
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolesch         | `true`, `false` | `true`  |
+| Boolean         | `true`, `false` | `true`  |
 
 `vary-by-user` gibt an, ob der Cache zurückgesetzt wird, wenn sich ein anderer Benutzer anmeldet, also der Kontextprinzipal geändert wird. Der aktuelle Benutzer wird auch als Anforderungskontextprinzipal bezeichnet und kann in einer Razor-Ansicht angezeigt werden, indem Sie auf `@User.Identity.Name` verweisen.
 
@@ -193,7 +193,7 @@ Wenn Sie dieses Attribut verwenden, werden die Inhalte im Cache über einen Anme
 
 | Attributtyp | Beispiel  |
 | -------------- | -------- |
-| Zeichenfolge         | `@Model` |
+| String         | `@Model` |
 
 Über `vary-by` können Sie festlegen, welche Daten zwischengespeichert werden sollen. Wenn das Objekt verändert wird, auf das der Zeichenfolgenwert des Attributs verweist, wird der Inhalt des Cache-Hilfsprogramms aktualisiert. Häufig wird eine Zeichenfolgenverkettung von Modellwerten diesem Attribut zugewiesen. Dies führt letztlich zu einem Szenario, bei dem der Cache ungültig wird, wenn ein Update an einem der verketteten Werte vorgenommen wird.
 

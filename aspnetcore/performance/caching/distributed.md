@@ -1,22 +1,22 @@
 ---
 title: Verteiltes Zwischenspeichern in ASP.net Core
-author: guardrex
+author: rick-anderson
 description: Erfahren Sie, wie Sie einen ASP.net Core verteilten Cache verwenden können, um die Leistung und Skalierbarkeit der APP zu verbessern, insbesondere in einer Cloud-oder Serverfarm Umgebung.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: performance/caching/distributed
-ms.openlocfilehash: d39ac6c7496de7cf9dc8d40718bbaf611e744c19
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: a4d2a59c8f81ad3e3f020e73a6657864885aa39a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114743"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651799"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Verteiltes Zwischenspeichern in ASP.net Core
 
-Von [Luke Latham](https://github.com/guardrex), [Muhsin Nasir](https://github.com/mohsinnasir)und [Steve Smith](https://ardalis.com/)
+Von " [nahusin Nasir](https://github.com/mohsinnasir) " und [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,7 +32,7 @@ Wenn zwischengespeicherte Daten verteilt werden, sind die Daten wie folgt:
 
 Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem Artikel wird beschrieben, wie Sie SQL Server und verteilte redis-Caches konfigurieren. Implementierungen von Drittanbietern sind ebenfalls verfügbar, wie z. b. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache auf GitHub](https://github.com/Alachisoft/NCache)). Unabhängig davon, welche Implementierung ausgewählt ist, interagiert die APP mit dem Cache mithilfe der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -202,7 +202,7 @@ Wenn zwischengespeicherte Daten verteilt werden, sind die Daten wie folgt:
 
 Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem Artikel wird beschrieben, wie Sie SQL Server und verteilte redis-Caches konfigurieren. Implementierungen von Drittanbietern sind ebenfalls verfügbar, wie z. b. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache auf GitHub](https://github.com/Alachisoft/NCache)). Unabhängig davon, welche Implementierung ausgewählt ist, interagiert die APP mit dem Cache mithilfe der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -372,7 +372,7 @@ Wenn zwischengespeicherte Daten verteilt werden, sind die Daten wie folgt:
 
 Die Konfiguration verteilter Caches ist Implementierungs spezifisch. In diesem Artikel wird beschrieben, wie Sie SQL Server und verteilte redis-Caches konfigurieren. Implementierungen von Drittanbietern sind ebenfalls verfügbar, wie z. b. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache auf GitHub](https://github.com/Alachisoft/NCache)). Unabhängig davon, welche Implementierung ausgewählt ist, interagiert die APP mit dem Cache mithilfe der <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache>-Schnittstelle.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -533,3 +533,4 @@ Wenn SQL Server als Sicherungs Speicher für verteilte Caches verwendet wird, ka
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
+ 
