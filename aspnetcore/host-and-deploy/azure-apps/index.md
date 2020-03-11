@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
 ms.openlocfilehash: ba9671f68a0faf99ff5232a6d5dd132d0a1d5ac5
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928428"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644611"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -251,9 +251,9 @@ Für eine 64-Bit-Bereitstellung:
 
 ### <a name="deploy-the-app-framework-dependent"></a>Frameworkabhängige Bereitstellung einer App
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Klicken Sie in der Visual Studio-Symbolleiste auf **Erstellen** > **{Anwendungsname} veröffentlichen**, oder klicken Sie mit der rechten Maustaste auf den **Projektmappen-Explorer**, und klicken Sie dann auf **Veröffentlichen**.
+1. Klicken Sie in der Visual Studio-Symbolleiste auf **Erstellen** >  **{Anwendungsname} veröffentlichen**, oder klicken Sie mit der rechten Maustaste auf den **Projektmappen-Explorer**, und klicken Sie dann auf **Veröffentlichen**.
 1. Vergewissern Sie sich im Dialogfeld **Veröffentlichungsziel auswählen**, dass **App Service** ausgewählt ist.
 1. Wählen Sie **Erweitert** aus. Das Dialogfeld **Veröffentlichen** wird geöffnet.
 1. Führen Sie im Dialogfeld **Veröffentlichen** folgende Schritte aus:
@@ -264,7 +264,7 @@ Für eine 64-Bit-Bereitstellung:
    * Klicken Sie auf **Speichern**.
 1. Sie können eine neue Website erstellen oder eine vorhandene aktualisieren, indem Sie die folgenden Anweisungen des Veröffentlichungs-Assistenten befolgen.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
 1. Geben Sie in der Projektdatei keine [RID (relativer Bezeichner)](/dotnet/core/rid-catalog) an.
 
@@ -282,9 +282,9 @@ Für eine 64-Bit-Bereitstellung:
 
 Nutzen Sie Visual Studio oder die .NET Core-CLI für eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) (Self-Contained Deployment, SCD).
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Klicken Sie in der Visual Studio-Symbolleiste auf **Erstellen** > **{Anwendungsname} veröffentlichen**, oder klicken Sie mit der rechten Maustaste auf den **Projektmappen-Explorer**, und klicken Sie dann auf **Veröffentlichen**.
+1. Klicken Sie in der Visual Studio-Symbolleiste auf **Erstellen** >  **{Anwendungsname} veröffentlichen**, oder klicken Sie mit der rechten Maustaste auf den **Projektmappen-Explorer**, und klicken Sie dann auf **Veröffentlichen**.
 1. Vergewissern Sie sich im Dialogfeld **Veröffentlichungsziel auswählen**, dass **App Service** ausgewählt ist.
 1. Wählen Sie **Erweitert** aus. Das Dialogfeld **Veröffentlichen** wird geöffnet.
 1. Führen Sie im Dialogfeld **Veröffentlichen** folgende Schritte aus:
@@ -295,7 +295,7 @@ Nutzen Sie Visual Studio oder die .NET Core-CLI für eine [eigenständige Bereit
    * Klicken Sie auf **Speichern**.
 1. Sie können eine neue Website erstellen oder eine vorhandene aktualisieren, indem Sie die folgenden Anweisungen des Veröffentlichungs-Assistenten befolgen.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
 1. Geben Sie in der Projektdatei eine oder mehrere [Runtimebezeichner (RIDs)](/dotnet/core/rid-catalog) an. Verwenden Sie die Singularform `<RuntimeIdentifier>` für eine einzelne RID oder die Pluralform `<RuntimeIdentifiers>`, um eine durch Semikolons getrennte Liste von RIDs bereitzustellen. Im folgenden Beispiel wird die RID `win-x86` angegeben:
 
@@ -318,7 +318,7 @@ Nutzen Sie Visual Studio oder die .NET Core-CLI für eine [eigenständige Bereit
 
 ## <a name="protocol-settings-https"></a>Protokolleinstellungen (HTTPS)
 
-Durch sichere Protokollbindungen können Sie ein Zertifikat festlegen, das verwendet werden soll, wenn über HTTPS auf Anforderungen geantwortet wird. Bindungen erfordern gültige private Zertifikate (*.pfx*), die für den angegebenen Hostnamen ausgestellt wurden. Weitere Informationen finden Sie unter [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure App Service](/azure/app-service/app-service-web-tutorial-custom-ssl).
+Durch sichere Protokollbindungen können Sie ein Zertifikat festlegen, das verwendet werden soll, wenn über HTTPS auf Anforderungen geantwortet wird. Bindungen erfordern gültige private Zertifikate ( *.pfx*), die für den angegebenen Hostnamen ausgestellt wurden. Weitere Informationen finden Sie unter [Tutorial: Binden eines vorhandenen benutzerdefinierten SSL-Zertifikats an Azure App Service](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
 ## <a name="transform-webconfig"></a>Transformieren von web.config
 

@@ -7,11 +7,11 @@ ms.date: 08/07/2018
 ms.custom: mvc, seodec18
 uid: azure/devops/index
 ms.openlocfilehash: f45bb2a5dd4b3d1a820085ede7ce3219045ed80b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64881955"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644245"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>DevOps mit ASP.NET Core und Azure
 
@@ -37,23 +37,23 @@ Er bezieht sich auf eine kontinuierliche End-to-End-Bereitstellungserfahrung fü
 
 ## <a name="whats-in-this-guide"></a>In diesem Handbuch
 
-### <a name="tools-and-downloadsxrefazuredevopstools-and-downloads"></a>[Tools und Downloads](xref:azure/devops/tools-and-downloads)
+### <a name="tools-and-downloads"></a>[Tools und Downloads](xref:azure/devops/tools-and-downloads)
 
 Erfahren Sie, wo die in diesem Leitfaden verwendeten Tools abgerufen werden können.
 
-### <a name="deploy-to-app-servicexrefazuredevopsdeploy-to-app-service"></a>[Bereitstellen in App Service](xref:azure/devops/deploy-to-app-service)
+### <a name="deploy-to-app-service"></a>[Bereitstellen in App Service](xref:azure/devops/deploy-to-app-service)
 
 Informationen zu den verschiedenen Methoden zum Bereitstellen einer ASP.NET Core-App zu Azure App Service.
 
-### <a name="continuous-integration-and-deploymentxrefazuredevopscicd"></a>[Continuous Integration und Continuous Deployment](xref:azure/devops/cicd)
+### <a name="continuous-integration-and-deployment"></a>[Continuous Integration und Continuous Deployment](xref:azure/devops/cicd)
 
 Stellen Sie eine End-to-End-Lösung für Continuous Integration und Continuous Deployment für Ihre ASP.NET Core-App mit GitHub, Azure DevOps Services und Azure bereit.
 
-### <a name="monitor-and-debugxrefazuredevopsmonitor"></a>[Überwachen und Debuggen](xref:azure/devops/monitor)
+### <a name="monitor-and-debug"></a>[Überwachen und Debuggen](xref:azure/devops/monitor)
 
 Verwenden Sie Azure-Tools zum Überwachen, Optimieren und für die Problembehandlung Ihrer Anwendung.
 
-### <a name="next-stepsxrefazuredevopsnext-steps"></a>[Nächste Schritte](xref:azure/devops/next-steps)
+### <a name="next-steps"></a>[Nächste Schritte](xref:azure/devops/next-steps)
 
 Andere Lernpfade für die ASP.NET Core-Entwickler, die sich mit Azure vertraut machen.
 

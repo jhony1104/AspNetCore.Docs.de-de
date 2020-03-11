@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: index
-ms.openlocfilehash: 3e41b329feb359c006258b8ed558496dfcbbf3b0
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: f6e4a624186ccf0d7f6475819df7da9ef99f9bcc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914221"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644371"
 ---
 # <a name="introduction-to-aspnet-core"></a>Einführung in ASP.NET Core
 
@@ -110,7 +110,7 @@ Eine Referenzanleitung für die Migration von ASP.NET-Apps zu ASP.NET Core finde
 
 Viele der Artikel und Tutorials enthalten Links zu Beispielcode.
 
-1. [Laden Sie die Zip-Datei des ASP.NET Repositorys herunter](https://codeload.github.com/aspnet/AspNetCore.Docs/zip/master).
+1. [Laden Sie die Zip-Datei des ASP.NET Repositorys herunter](https://codeload.github.com/dotnet/AspNetCore.Docs/zip/master).
 1. Entpacken Sie die Datei *Docs-master.zip*.
 1. Navigieren Sie mit der URL in der Beispielverknüpfung zum Beispielverzeichnis.
 
@@ -156,7 +156,7 @@ In der Markdowndatei wird auf den vorherigen C#-Codeausschnitt mit der folgenden
 
 Sie können die Anweisungen `#region` und `#endregion`, die den Code umschließen, ohne Weiteres ignorieren (oder entfernen). Ändern Sie jedoch den Code innerhalb dieser Anweisungen nicht, wenn Sie die im Artikel beschriebenen Beispielszenarios durchführen möchten. Wenn Sie andere Szenarios ausprobieren möchten, können Sie den Code anpassen.
 
-Weitere Informationen finden Sie unter [Contribute to the ASP.NET documentation: Code snippets (Mitwirken an der ASP.NET-Dokumentation: Codeausschnitte)](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
+Weitere Informationen finden Sie unter [Contribute to the ASP.NET documentation: Code snippets (Mitwirken an der ASP.NET-Dokumentation: Codeausschnitte)](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 
 ## <a name="next-steps"></a>Nächste Schritte
 

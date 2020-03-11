@@ -11,13 +11,13 @@ no-loc:
 - SignalR
 uid: host-and-deploy/blazor/index
 ms.openlocfilehash: 238e7fc8f8d64c7847dc8847fb66e22442a3c8e0
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160261"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644707"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
+# <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
 
@@ -27,13 +27,13 @@ Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.tim
 
 Apps werden für die Bereitstellung in Releasekonfigurationen veröffentlicht.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Wählen Sie **Build** > **Publish {APPLICATION}** auf der Navigationsleiste aus.
 1. Wählen Sie das *Veröffentlichungsziel* aus. Um lokal zu veröffentlichen, wählen Sie **Ordner** aus.
 1. Übernehmen Sie den Standardspeicherort im Feld **Ordner auswählen**, oder geben Sie einen anderen Speicherort an. Wählen Sie die Schaltfläche **Veröffentlichen** aus.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 Verwenden Sie den Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) aus, um die App mit einer Releasekonfiguration zu veröffentlichen:
 

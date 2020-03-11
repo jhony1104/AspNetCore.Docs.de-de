@@ -4,14 +4,14 @@ author: mjrousos
 description: Hier erfahren Sie mehr zur Authentifizierung in ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/04/2019
+ms.date: 03/03/2020
 uid: security/authentication/index
-ms.openlocfilehash: 40b2fb59b96486435a2ec0a7d69bee5ab4a814d2
-ms.sourcegitcommit: 76d7fff62014c3db02564191ab768acea00f1b26
+ms.openlocfilehash: 24113fd4f090cf76746a7b077212fdab012f82c1
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/05/2019
-ms.locfileid: "74852713"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644359"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Übersicht über die ASP.NET Core-Authentifizierung
 
@@ -78,16 +78,16 @@ In Abhängigkeit von der Konfiguration des Authentifizierungsschemas und vom Kon
   * Sie sind für den Zugriff nicht autorisiert (Unterbindung).
   * Sie sind nicht authentifiziert (Aufforderung).
 
-### <a name="authenticate"></a>Authentifizieren
+### <a name="authenticate"></a>Authenticate
 
-Die Authentifizierungsaktion eines Authentifizierungsschemas ist für das Erstellen der Identität des Benutzers basierend auf dem Anforderungskontext verantwortlich. Sie gibt ein <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>, das angibt, ob die Authentifizierung erfolgreich war, und in diesem Fall außerdem die Identität des Benutzers in einem Authentifizierungsticket zurück. Siehe `HttpContext.AuthenticateAsync`. Beispiele für die Authentifizierung:
+Die Authentifizierungsaktion eines Authentifizierungsschemas ist für das Erstellen der Identität des Benutzers basierend auf dem Anforderungskontext verantwortlich. Sie gibt ein <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>, das angibt, ob die Authentifizierung erfolgreich war, und in diesem Fall außerdem die Identität des Benutzers in einem Authentifizierungsticket zurück. Siehe <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Beispiele für die Authentifizierung:
 
 * Ein Cookieauthentifizierungsschema, bei dem die Identität des Benutzers aus Cookies erstellt wird.
 * Ein JWT-Bearer-Schema, das ein JWT-Bearertoken zum Erstellen der Identität des Benutzers deserialisiert und überprüft.
 
 ### <a name="challenge"></a>Herausforderung
 
-Eine Authentifizierungsaufforderung wird durch die Autorisierung aufgerufen, wenn ein nicht authentifizierter Benutzer einen Endpunkt anfordert, für den eine Authentifizierung erforderlich ist. Eine Authentifizierungsaufforderung wird z. B. ausgegeben, wenn ein anonymer Benutzer eine eingeschränkte Ressource anfordert oder auf einen Anmeldelink klickt. Die Autorisierung ruft eine Aufforderung mithilfe des/der angegebenen Authentifizierungsschema(s) oder, wenn keines angegeben ist, des Standardschemas auf. Siehe `HttpContext.ChallengeAsync`. Beispiele für Authentifizierungsaufforderungen:
+Eine Authentifizierungsaufforderung wird durch die Autorisierung aufgerufen, wenn ein nicht authentifizierter Benutzer einen Endpunkt anfordert, für den eine Authentifizierung erforderlich ist. Eine Authentifizierungsaufforderung wird z. B. ausgegeben, wenn ein anonymer Benutzer eine eingeschränkte Ressource anfordert oder auf einen Anmeldelink klickt. Die Autorisierung ruft eine Aufforderung mithilfe des/der angegebenen Authentifizierungsschema(s) oder, wenn keines angegeben ist, des Standardschemas auf. Siehe <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Beispiele für Authentifizierungsaufforderungen:
 
 * Ein Cookie-Authentifizierungsschema, das den Benutzer auf eine Anmeldeseite umleitet.
 * Ein JWT-Bearer-Schema, das ein 401-Ergebnis mit einem `www-authenticate: bearer`-Header zurückgibt.
@@ -96,7 +96,7 @@ Eine Aufforderungsaktion sollte dem Benutzer mitteilen können, welcher Authenti
 
 ### <a name="forbid"></a>Unterbindung
 
-Die Unterbindungsaktion eines Authentifizierungsschemas wird von der Autorisierung aufgerufen, wenn ein authentifizierter Benutzer versucht, auf eine Ressource zuzugreifen, für die er keine Berechtigung besitzt. Siehe `HttpContext.ForbidAsync`. Beispiele für Authentifizierungsunterbindungen:
+Die Unterbindungsaktion eines Authentifizierungsschemas wird von der Autorisierung aufgerufen, wenn ein authentifizierter Benutzer versucht, auf eine Ressource zuzugreifen, für die er keine Berechtigung besitzt. Siehe <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>. Beispiele für Authentifizierungsunterbindungen:
 * Ein Cookie-Authentifizierungsschema, das den Benutzer auf eine Seite umleitet, auf der steht, dass der Zugriff unzulässig war.
 * Ein JWT-Bearer-Schema, das ein 403-Ergebnis zurückgibt.
 * Ein benutzerdefiniertes Authentifizierungsschema, das den Benutzer auf eine Seite umleitet, auf der er den Zugriff auf die Ressource anfordern kann.

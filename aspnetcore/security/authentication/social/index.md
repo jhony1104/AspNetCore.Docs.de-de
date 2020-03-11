@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 uid: security/authentication/social/index
-ms.openlocfilehash: 7d0f6647a6f5a4d41067b13acd3d294144027bb7
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76727333"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644815"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 
@@ -30,7 +30,7 @@ Beispiel dazu, wie Anmeldungen bei sozialen Medien für mehr Datenverkehr und ge
 
 ## <a name="create-a-new-aspnet-core-project"></a>Erstellen eines neuen ASP.NET Core-Projekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Erstellen Sie ein neues Projekt.
 * Wählen Sie **ASP.NET Core-Webanwendung** und **Weiter** aus.
@@ -39,7 +39,7 @@ Beispiel dazu, wie Anmeldungen bei sozialen Medien für mehr Datenverkehr und ge
 * Wählen Sie unter **Authentifizierung** die Option **Ändern** aus, und legen Sie die Authentifizierung auf **Einzelne Benutzerkonten** fest. Klicken Sie auf **OK**.
 * Wählen Sie im Fenster **Neue ASP.NET Core-Webanwendung erstellen** die Option **Erstellen** aus.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Öffnen Sie das Terminal.  Für Visual Studio Code können Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) öffnen.
 
@@ -111,7 +111,7 @@ So erstellen Sie ein Kennwort und melden sich mithilfe Ihrer E-Mail-Adresse an, 
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Weitere Informationen zum Anpassen der Anmeldeschaltfläche finden Sie unter [diesem GitHub-Problem](https://github.com/aspnet/AspNetCore.Docs/issues/10563).
+* Weitere Informationen zum Anpassen der Anmeldeschaltfläche finden Sie unter [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/10563).
 * In diesem Artikel wurde die externe Authentifizierung behandelt. Ferner wurden die Voraussetzungen für das Hinzufügen externer Anmeldungen zu Ihrer ASP.NET Core-App erläutert.
 * Konsultieren Sie anbieterspezifische Seiten zum Konfigurieren von Anmeldungen für die von Ihrer App angeforderten Anbieter.
 * Möglicherweise möchten Sie zusätzliche Daten zum Benutzer und seinen Zugriffs- und Aktualisierungstoken persistent speichern. Weitere Informationen finden Sie unter <xref:security/authentication/social/additional-claims>.

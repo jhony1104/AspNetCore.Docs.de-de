@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 01/15/2020
 uid: fundamentals/index
 ms.openlocfilehash: 3fbfc7c4c0d5e568339bc00a7cbe84a3932acf1f
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146354"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644551"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -119,7 +119,7 @@ Eine ASP.NET Core-App verwendet eine HTTP-Serverimplementierung zum Lauschen auf
 
 ::: moniker range=">= aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 Die folgenden Serverimplementierungen werden von ASP.NET Core bereitgestellt:
 
@@ -127,11 +127,11 @@ Die folgenden Serverimplementierungen werden von ASP.NET Core bereitgestellt:
 * Der *IIS-HTTP-Server* ist ein Server für Windows, der IIS verwendet. Mit diesem Server werden die ASP.NET Core-App und IIS im gleichen Prozess ausgeführt.
 * *HTTP.sys* ist ein Server für Windows, der nicht mit IIS verwendet wird.
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
@@ -141,18 +141,18 @@ ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestr
 
 ::: moniker range="< aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 Die folgenden Serverimplementierungen werden von ASP.NET Core bereitgestellt:
 
 * *Kestrel* ist ein plattformübergreifender Webserver. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [IIS](https://www.iis.net/) ausgeführt. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist.
 * *HTTP.sys* ist ein Server für Windows, der nicht mit IIS verwendet wird.
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
