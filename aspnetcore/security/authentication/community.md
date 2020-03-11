@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/28/2019
 uid: security/authentication/community
 ms.openlocfilehash: 68c32515b7d789db86f60cd011632da5c1244c1f
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034254"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654175"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>Community OSS-Authentifizierungs Optionen für ASP.net Core
 
@@ -20,7 +20,7 @@ Diese Seite enthält von der Community bereitgestellte Open Source-Authentifizie
 
 Die nachstehende Liste ist alphabetisch sortiert.
 
-| -Name | Beschreibung |
+| Name | BESCHREIBUNG |
 | ---- | ----------- |
 | [ASPNET. Security. openidconnect. Server (ASOs)](https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Server) | Das Asos ist ein OpenID Connect-Server Framework auf niedriger Ebene für ASP.net Core und owin/Katana. |
 | [GLUU-Server](https://gluu.org/) | Unternehmen bereit, Open Source-Software für Identität, Zugriffs Verwaltung (IAM) und Single Sign-on (SSO). Weitere Informationen finden Sie in der [Produktdokumentation zu GLUU](https://gluu.org/docs/). |

@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 7825beba55cefb6236fd8d8e332d030a7e4fc6df
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 21dd8180fe168f81ed68b01f02b81a6264d6e5a6
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963890"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654973"
 ---
 # <a name="use-streaming-in-aspnet-core-opno-locsignalr"></a>Streaming in ASP.net Core verwenden SignalR
 
@@ -32,7 +32,7 @@ ASP.net Core SignalR unterstützt das Streamen von Rückgabe Werten von Server M
 
 ::: moniker-end
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="set-up-a-hub-for-streaming"></a>Einrichten eines Hubs für das Streaming
 
@@ -258,7 +258,7 @@ channel.Writer.Complete();
 
 JavaScript-Clients wenden Server-zu-Client-Streamingmethoden auf Hubs mit `connection.stream`an. Die `stream`-Methode akzeptiert zwei Argumente:
 
-* Der Name der Hub-Methode. Im folgenden Beispiel wird der Name der Hub-Methode `Counter`.
+* Der Name der hubmethode. Im folgenden Beispiel wird der Name der Hub-Methode `Counter`.
 * In der Hub-Methode definierte Argumente. Im folgenden Beispiel sind die Argumente eine Anzahl für die Anzahl der zu empfangenden Datenstrom Elemente und die Verzögerung zwischen streamingelementen.
 
 `connection.stream` gibt ein `IStreamResult`zurück, das eine `subscribe`-Methode enthält. Übergeben Sie eine `IStreamSubscriber` an `subscribe`, und legen Sie die `next`, `error`und `complete` Rückrufe so fest, dass Benachrichtigungen vom `stream` Aufruf empfangen werden.
@@ -298,7 +298,7 @@ Um den Stream zu beenden, wenden Sie `subject.complete()`an.
 Der SignalR Java-Client verwendet die `stream`-Methode, um Streamingmethoden aufzurufen. `stream` akzeptiert drei oder mehr Argumente:
 
 * Der erwartete Typ der streamelemente.
-* Der Name der Hub-Methode.
+* Der Name der hubmethode.
 * In der Hub-Methode definierte Argumente.
 
 ```java

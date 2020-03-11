@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um 
 ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/controllers/routing
-ms.openlocfilehash: 8cf7e74df292a614f287eff8561a22187f6558ce
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 1116cc699f749a137638b75095a7172ad0d4858a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/10/2020
-ms.locfileid: "75866058"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653671"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -44,7 +44,7 @@ public class ProductsController : Controller
 }
 ```
 
-In diesem Beispiel hat die Modellbindung den `id`-Parameter mit dem Wert `id = 5` beim Aufrufen dieser Aktion auf `5` festgelegt. Weitere Informationen finden Sie unter [Modellbindung](../models/model-binding.md).
+In diesem Beispiel hat die Modellbindung den `id = 5`-Parameter mit dem Wert `id` beim Aufrufen dieser Aktion auf `5` festgelegt. Weitere Informationen finden Sie unter [Modellbindung](../models/model-binding.md).
 
 Verwenden der `default`-Route:
 
@@ -165,7 +165,7 @@ Im Rahmen der Anforderungsverarbeitung überprüft MVC, ob mit den Routenwerten 
 
 ### <a name="disambiguating-actions"></a>Aktionen eindeutig zuordnen
 
-Wenn zwei Aktionen beim Routing übereinstimmen, muss MVC beide analysieren und die beste auswählen oder eine Ausnahme auslösen. Zum Beispiel:
+Wenn zwei Aktionen beim Routing übereinstimmen, muss MVC beide analysieren und die beste auswählen oder eine Ausnahme auslösen. Beispiel:
 
 ```csharp
 public class ProductsController : Controller
@@ -376,7 +376,7 @@ Attributrouten können mithilfe der `Order`-Eigenschaft aller vom Framework bere
 > [!TIP]
 > Vermeiden Sie eine Abhängigkeit von `Order`. Wenn der URL-Raum explizite Reihenfolgenwerte erfordert, um korrekt weiterzuleiten, ist es wahrscheinlich auch für Clients verwirrend. Beim Attributrouting wird im Allgemeinen mithilfe der URL-Zuordnung die richtige Route ausgewählt. Wenn die für die URL-Generierung verwendete Standardreihenfolge nicht funktioniert, ist es meist einfacher, Routennamen als Außerkraftsetzung zu verwenden, statt die `Order`-Eigenschaft anzuwenden.
 
-Razor Pages-Routing und MVC Controller-Routing verwenden eine gemeinsame Implementierung. Informationen zur Routenreihenfolge in den Razor Pages-Themen finden Sie unter [Razor Pages-Route und App-Konventionen: Routenreihenfolge](xref:razor-pages/razor-pages-conventions#route-order).
+Razor Pages-Routing und MVC Controller-Routing verwenden eine gemeinsame Implementierung. Informationen zur Routenreihenfolge in den Razor Pages-Themen finden Sie unter [Razor Pages-Route and App-Konventionen: Routenreihenfolge](xref:razor-pages/razor-pages-conventions#route-order).
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 
@@ -559,7 +559,7 @@ Aktionen werden entweder herkömmlich oder über Attribute zugeordnet, d.h., das
 
 ## <a name="complex-segments"></a>Komplexe Segmente
 
-Komplexe Segmente (z.B. `[Route("/dog{token}cat")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Eine entsprechende Beschreibung finden Sie im [Quellcode](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296). Weitere Informationen finden Sie in [diesem Thema](https://github.com/aspnet/AspNetCore.Docs/issues/8197).
+Komplexe Segmente (z.B. `[Route("/dog{token}cat")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Eine entsprechende Beschreibung finden Sie im [Quellcode](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296). Weitere Informationen finden Sie in [diesem Thema](https://github.com/dotnet/AspNetCore.Docs/issues/8197).
 
 <a name="routing-url-gen-ref-label"></a>
 

@@ -10,17 +10,17 @@ no-loc:
 - SignalR
 uid: signalr/supported-platforms
 ms.openlocfilehash: 054965921c87c1a9be27e5ddaa8a87b0fa1f4113
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146497"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655147"
 ---
-# <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>ASP.net Core [!OP.NO-LOC(SignalR)] unterstützten Plattformen
+# <a name="aspnet-core-signalr-supported-platforms"></a>ASP.net Core von signalr unterstützte Plattformen
 
 ## <a name="server-system-requirements"></a>Systemanforderungen an Server
 
-[!OP.NO-LOC(SignalR)] für ASP.net Core unterstützt jede Server Plattform, die ASP.net Core unterstützt.
+Signalr für ASP.net Core unterstützt jede Server Plattform, die von ASP.net Core unterstützt wird.
 
 ## <a name="javascript-client"></a>JavaScript-Client
 

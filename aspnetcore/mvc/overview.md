@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 02/12/2020
 uid: mvc/overview
 ms.openlocfilehash: 2911399f6ed4e14345171c908c4306b9c3e33805
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447411"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651667"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -41,7 +41,7 @@ Ansichten dienen der Darstellung von Inhalt über die Benutzeroberfläche. Dabei
 
 ### <a name="controller-responsibilities"></a>Aufgaben des Controllers
 
-Controller sind Komponenten, die Benutzerinteraktionen verarbeiten, mit dem Modell arbeiten und letztlich eine Ansicht auswählen, die gerendert werden soll. In einer MVC-Anwendung zeigt die Ansicht nur Informationen an. Benutzereingaben und -interaktionen werden vom Controller verarbeitet und beantwortet. Im MVC-Muster stellt der Controller den Einstiegspunkt dar. Er ist verantwortlich für die Auswahl des Modells, mit dem gearbeitet wird, sowie der Ansicht, die gerendert wird (daher kommt auch sein Name: Der Controller kontrolliert, wie die App auf eine bestimmte Anforderung reagiert).
+Controller sind Komponenten, die Benutzerinteraktionen verarbeiten, mit dem Modell arbeiten und letztlich eine Ansicht auswählen, die gerendert werden soll. In einer MVC-Anwendung zeigt die Ansicht nur Informationen an. Der Controller übernimmt das Behandeln und das Reagieren auf Benutzereingaben und Interaktion. Im MVC-Muster stellt der Controller den Einstiegspunkt dar. Er ist verantwortlich für die Auswahl des Modells, mit dem gearbeitet wird, sowie der Ansicht, die gerendert wird (daher kommt auch sein Name: Der Controller kontrolliert, wie die App auf eine bestimmte Anforderung reagiert).
 
 > [!NOTE]
 > Controller sollten nicht durch zu viele Aufgaben übermäßig kompliziert gemacht werden. Um zu verhindern, dass die Controllerlogik zu komplex wird, verlagern Sie die Geschäftslogik aus dem Controller in das Domänenmodell.
@@ -69,7 +69,7 @@ Zu ASP.NET Core MVC gehören folgende Elemente:
 * [Testfähigkeit](#testability)
 * [Razor-Ansichtsengine](#razor-view-engine)
 * [Stark typisierte Ansichten](#strongly-typed-views)
-* [Taghilfsprogramme](#tag-helpers)
+* [Tag Helpers (Taghilfsprogramme)](#tag-helpers)
 * [Ansichtskomponenten](#view-components)
 
 ### <a name="routing"></a>Routing
@@ -141,11 +141,11 @@ public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = 
 
 Das Framework verarbeitet Validierungsanforderungsdaten sowohl auf dem Client als auch auf dem Server. Für Modelltypen angegebene Validierungslogik wird den gerenderten Ansichten als unaufdringliche Anmerkungen hinzugefügt und im Browser mit [jQuery Validation](https://jqueryvalidation.org/) erzwungen.
 
-### <a name="dependency-injection"></a>Dependency Injection
+### <a name="dependency-injection"></a>Abhängigkeitsinjektion
 
 ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC können [Controller](controllers/dependency-injection.md) benötigte Dienste über ihre Konstruktoren anfordern. So wird das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgt.
 
-Mit der `@inject`-Anweisung kann Ihre App [Dependency Injection auch in Ansichtsdateien](views/dependency-injection.md) verwenden:
+Mit der [-Anweisung kann Ihre App ](views/dependency-injection.md)Dependency Injection auch in Ansichtsdateien`@inject` verwenden:
 
 ```cshtml
 @inject SomeService ServiceName
@@ -172,7 +172,7 @@ public class AccountController : Controller
 
 ### <a name="areas"></a>Bereiche
 
-[Bereiche](controllers/areas.md) sind eine Möglichkeit, eine große ASP.NET Core MVC-Web-App in kleinere funktionale Gruppierungen aufzuteilen. Ein Bereich ist eine MVC-Struktur innerhalb einer Anwendung. In einem MVC-Projekt sind logische Komponenten wie Modell, Controller und Ansicht in verschiedenen Ordnern gespeichert. MVC nutzt Namenskonventionen zum Erstellen einer Beziehung zwischen diesen Komponenten. Bei einer großen App kann es von Vorteil sein, die App in mehrere Bereiche mit hoher Funktionalität aufzuteilen. Dies gilt z.B. für eine E-Commerce-App mit mehreren Geschäftseinheiten, wie Auftragsabschluss, Abrechnung und Suche usw. Jede dieser Einheiten hat ihre eigenen logischen Komponentenansichten, Controller und Modelle.
+[Bereiche](controllers/areas.md) sind eine Möglichkeit, eine große ASP.NET Core MVC-Web-App in kleinere funktionale Gruppierungen aufzuteilen. Ein Bereich ist eine MVC-Struktur innerhalb einer Anwendung. In einem MVC-Projekt sind logische Komponenten wie Modell, Controller und Ansicht in verschiedenen Ordnern gespeichert. MVC nutzt Namenskonventionen zum Erstellen einer Beziehung zwischen diesen Komponenten. Bei einer großen App kann es von Vorteil sein, die App in mehrere Bereiche mit hoher Funktionalität aufzuteilen. Beispielsweise eine e-Commerce-App mit mehreren Geschäftseinheiten, z. b. Checkout, Abrechnung und Suche usw. Jede dieser Einheiten verfügt über eigene logische Komponenten Sichten, Controller und Modelle.
 
 ### <a name="web-apis"></a>Web-APIs
 
@@ -182,7 +182,7 @@ Das Framework beinhaltet Unterstützung für die Aushandlung von HTTP-Inhalt mit
 
 Außerdem können Sie mit der Linkgenerierung Unterstützung für Hypermedia aktivieren. Aktivieren Sie auf einfache Weise Unterstützung für die [Ressourcenfreigabe zwischen verschiedenen Ursprüngen (CORS)](https://www.w3.org/TR/cors/), damit Ihre Web-APIs für mehrere Webanwendungen freigegeben werden.
 
-### <a name="testability"></a>Testfähigkeit
+### <a name="testability"></a>Prüfbarkeit
 
 Durch die Verwendung von Schnittstellen und der Abhängigkeitsinjektion eignet sich das Framework besonders gut für Komponententests. Es enthält Features (wie etwa einen TestHost- und InMemory-Anbieter für Entity Framework), mit denen auch [Integrationstests](xref:test/integration-tests) schnell und einfach durchgeführt werden können. Weitere Informationen hierzu finden Sie unter [Testen der Controllerlogik](controllers/testing.md).
 

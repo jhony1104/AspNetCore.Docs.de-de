@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 10/05/2019
 uid: security/authorization/policies
 ms.openlocfilehash: eeb5ddd63ef8177325b35e5a666aa5e9ab047057
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828957"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652975"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinien basierte Autorisierung in ASP.net Core
 
@@ -123,7 +123,7 @@ Richtlinien werden auf Razor Pages mithilfe des `[Authorize]`-Attributs mit dem 
 
 Richtlinien können auch auf Razor Pages mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)angewendet werden.
 
-## <a name="requirements"></a>-Anforderungen
+## <a name="requirements"></a>Requirements (Anforderungen)
 
 Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;dem minimal Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 
@@ -340,7 +340,7 @@ Richtlinien werden auf Razor Pages mithilfe des `[Authorize]`-Attributs mit dem 
 
 Richtlinien können auch auf Razor Pages mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)angewendet werden.
 
-## <a name="requirements"></a>-Anforderungen
+## <a name="requirements"></a>Requirements (Anforderungen)
 
 Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;dem minimal Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 

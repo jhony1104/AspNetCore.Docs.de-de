@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: 59e90042ecbaf936602643bbdc3965e036426b26
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 7e8c85dcbc46daa68988374f499f19a9d2cead47
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963806"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654247"
 ---
 # <a name="manage-users-and-groups-in-opno-locsignalr"></a>Verwalten von Benutzern und Gruppen in SignalR
 
@@ -22,7 +22,7 @@ Von [Brennan](https://github.com/BrennanConroy) "a"
 
 SignalR ermöglicht das Senden von Nachrichten an alle Verbindungen, die einem bestimmten Benutzer zugeordnet sind, sowie an benannte Gruppen von Verbindungen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
 
 ## <a name="users-in-opno-locsignalr"></a>Benutzer in SignalR
 
@@ -48,7 +48,7 @@ Zum Schutz des Zugriffs auf Ressourcen bei der Verwendung von Gruppen verwenden 
 > [!NOTE]
 > Bei Gruppennamen wird die Groß-/Kleinschreibung beachtet.
 
-## <a name="related-resources"></a>Weitere Informationen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [Hubs](xref:signalr/hubs)

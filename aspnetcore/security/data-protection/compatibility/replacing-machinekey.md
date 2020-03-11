@@ -1,38 +1,38 @@
 ---
-title: Ersetzen Sie den ASP.NET MachineKey in ASP.NET Core
+title: Ersetzen Sie ASP.net machineKey in ASP.net Core
 author: rick-anderson
-description: Erfahren Sie, wie zum Ersetzen von MachineKey in ASP.NET für die Verwendung eines Systems, neue und sicherer Daten Schutz zu ermöglichen.
+description: Erfahren Sie, wie Sie machineKey in ASP.net ersetzen, um die Verwendung eines neuen und sichereren Datenschutzsystems zu ermöglichen.
 ms.author: riande
 ms.date: 04/06/2019
 uid: security/data-protection/compatibility/replacing-machinekey
 ms.openlocfilehash: 2317cb50cfe63226baf336ebfc5d681d1cebe5c6
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895337"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655081"
 ---
-# <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Ersetzen Sie den ASP.NET MachineKey in ASP.NET Core
+# <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Ersetzen Sie ASP.net machineKey in ASP.net Core
 
 <a name="compatibility-replacing-machinekey"></a>
 
-Die Implementierung der `<machineKey>` Element in ASP.NET [Standardversion](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Dadurch werden die meisten Aufrufe zum ASP.NET kryptografischen Routinen über einen Ersatz Data Protection-Mechanismus, einschließlich der neuen System zum Schutz von Daten weitergeleitet werden.
+Die Implementierung des `<machineKey>`-Elements in ASP.net [ist ersetzbar](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Dadurch können die meisten Aufrufe von ASP.net-kryptografieroutinen über einen Mechanismus zum Schutz von Daten, einschließlich des neuen Datenschutzsystems, weitergeleitet werden.
 
 ## <a name="package-installation"></a>Paketinstallation
 
 > [!NOTE]
-> Das neue System zum Schutz von Daten kann nur in eine vorhandene ASP.NET-Anwendung für .NET 4.5.1 oder höher ausgeführt werden. Installation wird fehlschlagen, wenn die Anwendung auf .NET 4.5 ausgerichtet ist oder zu verringern.
+> Das neue Datenschutzsystem kann nur in einer vorhandenen ASP.NET-Anwendung installiert werden, die auf .NET 4.5.1 oder höher ausgerichtet ist. Die Installation schlägt fehl, wenn die Anwendung .NET 4,5 oder niedriger als Zielversion verwendet.
 
-Um das neue System zum Schutz von Daten in ein vorhandenes ASP.NET-Projekt 4.5.1+ installieren zu können, müssen installieren Sie das Paket Microsoft.AspNetCore.DataProtection.SystemWeb. Dies wird instanziiert, die mithilfe von Data Protection System die [Standardkonfiguration](xref:security/data-protection/configuration/default-settings) Einstellungen.
+Installieren Sie das Paket Microsoft. aspnetcore. dataprotection. systemWeb, um das neue Datenschutzsystem in einem vorhandenen ASP.NET 4.5.1 +-Projekt zu installieren. Dadurch wird das Datenschutzsystem mithilfe der [Standard Konfigurations](xref:security/data-protection/configuration/default-settings) Einstellungen instanziiert.
 
-Wenn Sie das Paket installieren, fügt eine Zeile in *"Web.config"* , informiert, dass es für die Verwendung in ASP.NET [die meisten kryptografischen Vorgänge](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), einschließlich der Formularauthentifizierung, Ansichtszustand und Aufrufe an MachineKey.Protect. Die Zeile, die eingefügt wird, lautet wie folgt.
+Wenn Sie das Paket installieren, fügt es eine Zeile in die Datei " *Web. config* " ein, die ASP.net für [die meisten Kryptografievorgänge](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)verwendet, einschließlich der Formular Authentifizierung, des Ansichts Zustands und der Aufrufe von machineKey. Protect. Die eingefügte Zeile wird wie folgt gelesen.
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />
 ```
 
 >[!TIP]
-> Sie können feststellen, ob das neue System zum Schutz von Daten aktiv ist, durch Überprüfen der Felder wie `__VIEWSTATE`, die mit "CfDJ8" wie im folgenden Beispiel beginnen soll. "CfDJ8" ist die base64-Darstellung der Magic-Befehl "09 F0 C9 F0"-Header, der eine Nutzlast, die durch das System zum Schutz von Daten geschützt identifiziert.
+> Sie können erkennen, ob das neue Datenschutzsystem aktiv ist, indem Sie Felder wie `__VIEWSTATE`untersuchen, die mit "CfDJ8" beginnen sollen, wie im folgenden Beispiel gezeigt. "CfDJ8" ist die Base64-Darstellung des Magic "09 F0, F0"-Headers, der eine vom Datenschutzsystem geschützte Nutzlast identifiziert.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -40,9 +40,9 @@ Wenn Sie das Paket installieren, fügt eine Zeile in *"Web.config"* , informiert
 
 ## <a name="package-configuration"></a>Paketkonfiguration
 
-Das System zum Schutz von Daten wird mit einer NULL-Setup-Standardkonfiguration instanziiert. Aber da standardmäßig Schlüssel im lokalen Dateisystem beibehalten werden, funktioniert dies Anwendungen nicht für die in einer Farm bereitgestellt werden. Dieses Problem lösen, müssen Sie Configuration können bereitstellen werden, indem Sie einen Typ erstellen, die Unterklassen DataProtectionStartup und überschreibt die Methode "configureservices".
+Das Datenschutzsystem wird mit einer Standardkonfiguration für die Konfiguration von NULL instanziiert. Da jedoch standardmäßig Schlüssel im lokalen Dateisystem beibehalten werden, funktioniert dies nicht für Anwendungen, die in einer Farm bereitgestellt werden. Um dieses Problem zu beheben, können Sie die Konfiguration bereitstellen, indem Sie einen Typ erstellen, der die Unterklassen dataschutzstartup und die Konfiguration der konfigurierungsmethode überschreibt.
 
-Im folgenden finden Sie ein Beispiel für einen benutzerdefinierten Schutz beim Start Datentyp, der konfiguriert werden, sowohl, wo der Schlüssel gespeichert sind und wie sie im Ruhezustand verschlüsselt sind. Dabei wird auch die Isolation für Apps durch einen eigenen Anwendungsnamen bereitstellen.
+Im folgenden finden Sie ein Beispiel für einen benutzerdefinierten Starttyp für den Datenschutz, der sowohl die beibehaltenen Schlüssel als auch die Verschlüsselung im Ruhezustand konfiguriert hat. Außerdem wird die standardmäßige App-Isolations Richtlinie durch Bereitstellen eines eigenen Anwendungs Namens überschrieben.
 
 ```csharp
 using System;
@@ -67,9 +67,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Sie können auch `<machineKey applicationName="my-app" ... />` anstelle eines expliziten Aufrufs von SetApplicationName. Dies ist ein Benutzerfreundlicher Mechanismus vermieden, dass den Entwickler einen DataProtectionStartup abgeleiteten Typen zu erstellen, wenn wurde alles, was sie verwenden wollten, konfigurieren Sie den Namen der Anwendung festlegen.
+> Sie können auch `<machineKey applicationName="my-app" ... />` anstelle eines expliziten Aufrufens von "stapplicationname" verwenden. Dies ist eine praktische Methode, um zu verhindern, dass der Entwickler einen von dataschutzstartup abgeleiteten Typ erstellt, wenn der Anwendungsname von allen Elementen, die konfiguriert werden sollen, festgelegt wurde.
 
-Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zur Datei "Web.config", und suchen Sie nach der `<appSettings>` Element, das das Paket zu installieren, auf die Config-Datei hinzugefügt. Es sieht so aus wie das folgende Markup:
+Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu "Web. config", und suchen Sie nach dem `<appSettings>` Element, das von der Paketinstallation der Konfigurationsdatei hinzugefügt wurde. Es sieht wie das folgende Markup aus:
 
 ```xml
 <appSettings>
@@ -82,11 +82,11 @@ Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu
 </appSettings>
 ```
 
-Geben Sie den leeren Wert mit dem Namen mit assemblyqualifikation des DataProtectionStartup abgeleiteten Typs, die Sie gerade erstellt haben. Wenn der Name der Anwendung DataProtectionDemo ist, sieht dies wie die unten.
+Geben Sie den leeren Wert mit dem durch die Assembly qualifizierten Namen des von dataschutzstartup abgeleiteten Typs ein, den Sie soeben erstellt haben. Wenn der Name der Anwendung dataschutzdemo lautet, würde dies wie folgt aussehen.
 
 ```xml
 <add key="aspnet:dataProtectionStartupType"
      value="DataProtectionDemo.MyDataProtectionStartup, DataProtectionDemo" />
 ```
 
-Das System zum Schutz von Daten neu konfigurierten kann jetzt für die Verwendung in der Anwendung.
+Das neu konfigurierte Datenschutzsystem ist jetzt für die Verwendung in der Anwendung bereit.

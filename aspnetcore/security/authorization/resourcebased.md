@@ -6,29 +6,29 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 uid: security/authorization/resourcebased
-ms.openlocfilehash: acc931da1be0940fac72b0aabe07ab17ca7e63bd
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 2be611c754583d996db7107f341b1be03cef73cf
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73660005"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654061"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>Ressourcenbasierte Autorisierung in ASP.net Core
 
 Autorisierungs Strategie hängt von der Ressource ab, auf die zugegriffen wird. Stellen Sie sich ein Dokument mit der Eigenschaft Autor vor. Nur der Autor darf das Dokument aktualisieren. Folglich muss das Dokument aus dem Datenspeicher abgerufen werden, bevor die Autorisierungs Auswertung erfolgen kann.
 
-Die Attribut Auswertung erfolgt vor der Datenbindung und vor der Ausführung des Seiten Handlers oder der Aktion, die das Dokument lädt. Aus diesen Gründen genügt die deklarative Autorisierung mit einem `[Authorize]`-Attribut nicht. Stattdessen können Sie eine benutzerdefinierte Autorisierungs Methode &mdash;a Stil aufrufen, der als *imperative Autorisierung*bezeichnet wird.
+Die Attribut Auswertung erfolgt vor der Datenbindung und vor der Ausführung des Seiten Handlers oder der Aktion, die das Dokument lädt. Aus diesen Gründen genügt die deklarative Autorisierung mit einem `[Authorize]`-Attribut nicht. Stattdessen können Sie eine benutzerdefinierte Autorisierungs Methode&mdash;einen Stil aufrufen, der als *imperative Autorisierung*bezeichnet wird.
 
 ::: moniker range=">= aspnetcore-3.0"
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 ::: moniker-end
 
  ::: moniker range=">= aspnetcore-2.0 < aspnetcore-3.0"
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 ::: moniker-end
 
 [Erstellen einer ASP.net Core-App mit von der Autorisierung geschützten Benutzerdaten](xref:security/authorization/secure-data) enthält eine Beispiel-APP, die die ressourcenbasierte Autorisierung verwendet.
@@ -120,7 +120,7 @@ Registrieren Sie die Anforderung und den Handler in `Startup.ConfigureServices`:
 [!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Startup.cs?name=snippet_ConfigureServicesSample&highlight=3-7,9)]
 ::: moniker-end
 
-### <a name="operational-requirements"></a>Betriebliche Anforderungen
+### <a name="operational-requirements"></a>Betriebsanforderungen
 
 Wenn Sie Entscheidungen auf der Grundlage der Ergebnisse von CRUD-Vorgängen (erstellen, lesen, aktualisieren, löschen) treffen, verwenden Sie die Hilfsklasse [operationauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement) . Diese Klasse ermöglicht das Schreiben eines einzelnen Handlers anstelle einer einzelnen Klasse für jeden Vorgangstyp. Um es zu verwenden, geben Sie einige Vorgangs Namen an:
 

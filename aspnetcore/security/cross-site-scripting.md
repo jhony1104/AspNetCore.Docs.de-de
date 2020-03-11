@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/02/2018
 uid: security/cross-site-scripting
 ms.openlocfilehash: 1d6f605dc336d8768b8a47e4995f119d198a61af
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172633"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655075"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Verhindern von Cross-Site Scripting (XSS) in ASP.net Core
 

@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Back-End-Dienste mit ASP.NET Core MVC zur Unterst
 ms.author: riande
 ms.date: 12/05/2019
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 38ac69bfe9d99d6d61f96fde92d86fd752ebbb6b
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: dcd0a29af197ff0ca210c17bdff62b802219fb2d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881159"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653947"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>Erstellen von Back-End-Diensten für native mobile Apps mit ASP.NET Core
 
@@ -18,7 +18,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 Mobile Apps können mit Back-End-Diensten von ASP.NET Core kommunizieren. Anweisungen zum Herstellen einer Verbindung zwischen lokalen Webdienste von iOS-Simulatoren und Android-Emulatoren finden Sie unter [Herstellen von Verbindungen mit lokalen Webdiensten von iOS-Simulatoren und Android-Emulatoren](/xamarin/cross-platform/deploy-test/connect-to-local-web-services).
 
-[Anzeigen oder Herunterladen von Beispielcode für Back-End-Dienste](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mobile/native-mobile-backend/sample)
+[Anzeigen oder Herunterladen von Beispielcode für Back-End-Dienste](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mobile/native-mobile-backend/sample)
 
 ## <a name="the-sample-native-mobile-app"></a>Die native mobile Beispiel-App
 
@@ -136,7 +136,7 @@ Datensätze werden mithilfe von HTTP PUT-Anforderungen geändert. Abgesehen von 
 
 Diese Methode gibt bei erfolgreicher Ausführung die Antwort „`NoContent` (204)“ für die Konsistenz mit der bereits vorhandenen API zurück.
 
-### <a name="deleting-items"></a>Löschen von Elementen
+### <a name="deleting-items"></a>Löschen von Elementen | MSDN
 
 Datensätze werden gelöscht, indem DELETE-Anforderungen an den Dienst gestellt werden und die ID des zu löschenden Elements übergeben wird. Wie bei Updates erhalten Anforderungen bei nicht vorhandenen Elementen die Antwort `NotFound`. Bei erfolgreicher Ausführung einer Anforderung hingegen wird die Antwort „`NoContent` (204)“ angezeigt.
 

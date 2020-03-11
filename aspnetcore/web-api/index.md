@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
-ms.openlocfilehash: 3dca07db3d6be4ab219a2e05e3adcf1b24ee5c40
-ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
+ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2020
-ms.locfileid: "77074509"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644647"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
 
@@ -20,7 +20,7 @@ Von [Scott Addie](https://github.com/scottaddie) und [Tom Dykstra](https://githu
 
 ASP.NET Core unterstützt das Erstellen von RESTful-Diensten, die auch als Web-APIs bezeichnet werden, unter Verwendung von C#. Eine Web-API verwendet Controller, um Anforderungen zu verarbeiten. *Controller* in einer Web-API sind von `ControllerBase` abgeleitete Klassen. In diesem Artikel wird beschrieben, wie Sie Controller für die Verarbeitung von Web-API-Anforderungen verwenden.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="controllerbase-class"></a>ControllerBase-Klasse
 
@@ -226,7 +226,7 @@ Der `ValidationProblemDetails`-Typ:
 
 ### <a name="log-automatic-400-responses"></a>Protokollieren automatischer 400-Antworten
 
-Informationen finden Sie unter [How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157) (Protokollieren automatischer 400-Antworten auf Modellvalidierungsfehler, aspnet/AspNetCore.Docs #12157).
+Informationen finden Sie unter [How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157) (Protokollieren automatischer 400-Antworten auf Modellvalidierungsfehler, aspnet/AspNetCore.Docs #12157).
 
 ### <a name="disable-automatic-400-response"></a>Deaktivieren automatischer 400-Antwort
 
@@ -382,7 +382,7 @@ Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetai
 
 ### <a name="disable-problemdetails-response"></a>Deaktivieren der ProblemDetails-Antwort
 
-Die automatische Erstellung einer `ProblemDetails`-Instanz ist deaktiviert, wenn die <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A>-Eigenschaft auf `true` festgelegt ist. Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinzu:
+Die automatische Erstellung einer `ProblemDetails`-Antwort für Fehlerstatuscodes ist deaktiviert, wenn die <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A>-Eigenschaft auf `true` festgelegt ist. Fügen Sie den folgenden Code zu `Startup.ConfigureServices` hinzu:
 
 ::: moniker-end
 

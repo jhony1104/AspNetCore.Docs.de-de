@@ -7,30 +7,30 @@ ms.custom: mvc, seodec18
 ms.date: 10/30/2019
 uid: security/authentication/google-logins
 ms.openlocfilehash: 83f45143eca1be43410880bfd875a3fce1d2e9c9
-ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2019
-ms.locfileid: "73143454"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654919"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Google externe Anmeldung Setup in ASP.NET Core
 
 Von [Valeriy Novytskyy](https://github.com/01binary) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-This tutorial shows you how to enable users to sign in with their Google account using the ASP.NET Core 3.0 project created on the [previous page](xref:security/authentication/social/index).
+In diesem Tutorial wird gezeigt, wie Sie es Benutzern mithilfe des auf der [vorherigen Seite](xref:security/authentication/social/index)erstellten Projekts ASP.net Core 3,0 ermöglichen, sich mit Ihrem Google-Konto anzumelden.
 
-## <a name="create-a-google-api-console-project-and-client-id"></a>Create a Google API Console project and client ID
+## <a name="create-a-google-api-console-project-and-client-id"></a>Erstellen Sie ein Google API-Konsolen Projekt und eine Client-ID.
 
-* Install [Microsoft.AspNetCore.Authentication.Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google).
-* Navigate to [Integrating Google Sign-In into your web app](https://developers.google.com/identity/sign-in/web/devconsole-project) and select **CONFIGURE A PROJECT**.
-* In the **Configure your OAuth client** dialog, select **Web server**.
-* In the **Authorized redirect URIs** text entry box, set the redirect URI. Beispiel: `https://localhost:44312/signin-google`
-* Save the **Client ID** and **Client Secret**.
-* When deploying the site, register the new public url from the **Google Console**.
+* Installieren Sie [Microsoft. aspnetcore. Authentication. Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google).
+* Navigieren Sie zu [integrieren der Google-Anmeldung in Ihre Web-App](https://developers.google.com/identity/sign-in/web/devconsole-project) , und wählen Sie **Projekt konfigurieren**aus.
+* Wählen Sie im Dialogfeld **Konfigurieren des OAuth-Clients** den **Webserver**aus.
+* Legen Sie im Textfeld **autorisierte Umleitungs-URIs** den Umleitungs-URI fest. Zum Beispiel, `https://localhost:44312/signin-google`
+* Speichern Sie die **Client-ID** und den **geheimen Client**Schlüssel.
+* Wenn Sie den Standort bereitstellen, registrieren Sie die neue öffentliche URL in der **Google-Konsole**.
 
 ## <a name="store-google-clientid-and-clientsecret"></a>Store-Google-ClientID und ClientSecret
 
-Store sensitive settings such as the Google `Client ID` and `Client Secret` with the [Secret Manager](xref:security/app-secrets). For the purposes of this tutorial, name the tokens `Authentication:Google:ClientId` and `Authentication:Google:ClientSecret`:
+Speichern Sie sensible Einstellungen wie z. b. Google `Client ID` und `Client Secret` mit dem [Geheimnis-Manager](xref:security/app-secrets). Benennen Sie die Token für die Zwecke dieses Tutorials `Authentication:Google:ClientId` und `Authentication:Google:ClientSecret`:
 
 ```dotnetcli
 dotnet user-secrets set "Authentication:Google:ClientId" "<client id>"
@@ -39,37 +39,37 @@ dotnet user-secrets set "Authentication:Google:ClientSecret" "<client secret>"
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-You can manage your API credentials and usage in the [API Console](https://console.developers.google.com/apis/dashboard).
+Sie können Ihre API-Anmelde Informationen und die Verwendung in der [API-Konsole](https://console.developers.google.com/apis/dashboard)verwalten.
 
-## <a name="configure-google-authentication"></a>Configure Google authentication
+## <a name="configure-google-authentication"></a>Konfigurieren von Google-Authentifizierung
 
-Add the Google service to `Startup.ConfigureServices`:
+Fügen Sie den Google-Dienst zu `Startup.ConfigureServices`hinzu:
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupGoogle3x.cs?highlight=11-19)]
 
 [!INCLUDE [default settings configuration](includes/default-settings2-2.md)]
 
-## <a name="sign-in-with-google"></a>Mit Google anmelden
+## <a name="sign-in-with-google"></a>Anmelden mit Google
 
-* Run the app and click **Log in**. An option to sign in with Google appears.
-* Click the **Google** button, which redirects to Google for authentication.
-* After entering your Google credentials, you are redirected back to the web site.
+* Führen Sie die APP aus, und klicken Sie auf **Anmelden**. Eine Option zum Anmelden mit Google wird angezeigt.
+* Klicken Sie auf die **Google** -Schaltfläche, die zur Authentifizierung an Google umgeleitet wird.
+* Nachdem Sie Ihre Google-Anmelde Informationen eingegeben haben, werden Sie an die Website zurückgeleitet.
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-See the <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> API reference for more information on configuration options supported by Google authentication. Dies kann verwendet werden, um verschiedene Informationen über den Benutzer anzufordern.
+Weitere Informationen zu den von der Google-Authentifizierung unterstützten Konfigurationsoptionen finden Sie in der <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>-API-Referenz. Dies kann verwendet werden, um verschiedene Informationen über den Benutzer anzufordern.
 
-## <a name="change-the-default-callback-uri"></a>Change the default callback URI
+## <a name="change-the-default-callback-uri"></a>Ändern des Standard-Rückruf-URI
 
 Der URI-Segment `/signin-google` als den standardrückruf des Google-Authentifizierungsanbieter festgelegt ist. Sie können den standardrückruf-URI ändern, während der Konfiguration die Middleware für die Google-Authentifizierung über die geerbte [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) Eigenschaft der [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) Klasse.
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
-* If the sign-in doesn't work and you aren't getting any errors, switch to development mode to make the issue easier to debug.
-* If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate results in *ArgumentException: The 'SignInScheme' option must be provided*. Die Projektvorlage, die in diesem Tutorial verwendete wird sichergestellt, dass dies geschehen ist.
-* Wenn die Standortdatenbank nicht erstellt wurde, indem die ursprüngliche Migration anwenden, erhalten Sie *Fehler bei ein Datenbankvorgang beim Verarbeiten der Anforderung* Fehler. Select **Apply Migrations** to create the database, and refresh the page to continue past the error.
+* Wenn die Anmeldung nicht funktioniert und Sie keine Fehler erhalten, wechseln Sie in den Entwicklungsmodus, um das Problem zu vereinfachen.
+* Wenn die Identität nicht durch Aufrufen von `services.AddIdentity` in `ConfigureServices`konfiguriert ist, wird versucht, *die Ergebnisse in argumumtexception zu authentifizieren: die Option "signinscheme" muss angegeben werden*. Die Projektvorlage, die in diesem Tutorial verwendete wird sichergestellt, dass dies geschehen ist.
+* Wenn die Standortdatenbank nicht erstellt wurde, indem die ursprüngliche Migration anwenden, erhalten Sie *Fehler bei ein Datenbankvorgang beim Verarbeiten der Anforderung* Fehler. Wählen Sie **Migrationen anwenden** aus, um die Datenbank zu erstellen, und aktualisieren Sie die Seite, um den Fehler fortzusetzen.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

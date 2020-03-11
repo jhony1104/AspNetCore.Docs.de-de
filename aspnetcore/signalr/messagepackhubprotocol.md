@@ -10,11 +10,11 @@ no-loc:
 - SignalR
 uid: signalr/messagepackhubprotocol
 ms.openlocfilehash: 3c2a4285945d3fdc6bba195e3160da8b9dcbba44
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928174"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654565"
 ---
 # <a name="use-messagepack-hub-protocol-in-opno-locsignalr-for-aspnet-core"></a>Verwenden Sie das messagepack-Hub-Protokoll in SignalR für ASP.net Core
 
@@ -209,7 +209,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 Weitere Informationen zu dieser Einschränkung finden Sie unter GitHub [-Problem ASPNET/SignalR#2937](https://github.com/aspnet/SignalR/issues/2937).
 
-## <a name="related-resources"></a>Weitere Informationen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [.NET-Client](xref:signalr/dotnet-client)

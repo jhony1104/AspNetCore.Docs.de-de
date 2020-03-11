@@ -10,11 +10,11 @@ no-loc:
 - SignalR
 uid: signalr/introduction
 ms.openlocfilehash: 635431abf9263c2dff261aea47e6f8324061763f
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829282"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653365"
 ---
 # <a name="introduction-to-aspnet-core-opno-locsignalr"></a>Einführung in ASP.NET Core SignalR
 
@@ -58,7 +58,7 @@ Ein Hub ist eine Pipeline auf hoher Ebene, die es einem Client und einem Server 
 
 Hubs wenden Client seitigen Code an, indem Sie Nachrichten senden, die den Namen und die Parameter der Client seitigen Methode enthalten. Objekte, die als Methoden Parameter gesendet werden, werden mithilfe des konfigurierten Protokolls deserialisiert. Der Client versucht, den Namen einer Methode im Client seitigen Code zuzuordnen. Wenn der Client eine Entsprechung findet, ruft er die-Methode auf und übergibt die deserialisierten Parameterdaten an ihn.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Beginnen Sie mit SignalR für ASP.net Core](xref:tutorials/signalr)
 * [Unterstützte Plattformen](xref:signalr/supported-platforms)

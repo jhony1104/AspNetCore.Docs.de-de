@@ -1,22 +1,22 @@
 ---
 title: Azure Key Vault Konfigurations Anbieters in ASP.net Core
-author: guardrex
+author: rick-anderson
 description: Erfahren Sie, wie Sie mit dem Azure Key Vault-Konfigurations Anbieter eine App mithilfe von Name-Wert-Paaren konfigurieren, die zur Laufzeit geladen werden.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: security/key-vault-configuration
-ms.openlocfilehash: 7eb8cf5dcd6b9f112a2ef30e694b6223a7d1f2fe
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: d617627154e3125a6a59d082fd401fc69c25fcb3
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114873"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652177"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
-Von [Luke Latham](https://github.com/guardrex) und [Andrew Stanton-Nurse](https://github.com/anurse)
+Von [Andrew Stanton-Nurse](https://github.com/anurse)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -25,7 +25,7 @@ In diesem Dokument wird erläutert, wie Sie den [Microsoft Azure Key Vault](http
 * Steuern des Zugriffs auf vertrauliche Konfigurationsdaten.
 * Erfüllen der Anforderung für die Überprüfung der Hardware Sicherheitsmodule (HSM) von PPS 140-2 Level 2 bei der Speicherung von Konfigurationsdaten.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>Pakete
 
@@ -289,7 +289,7 @@ Wenn dieser Ansatz implementiert ist:
 
 Der Anbieter ist in der Lage, Konfigurationswerte in ein Array für die Bindung an ein poco-Array zu lesen.
 
-Beim Lesen aus einer Konfigurations Quelle, mit der Schlüssel Doppelpunkte (`:`Trennzeichen) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`... `:{n}:`). Weitere Informationen finden Sie unter [Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
+Beim Lesen aus einer Konfigurations Quelle, mit der Schlüssel Doppelpunkte (`:`Trennzeichen) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`, &hellip; `:{n}:`). Weitere Informationen finden Sie unter [Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
 
 Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden. Die in diesem Thema beschriebene Vorgehensweise verwendet doppelte Bindestriche (`--`) als Trennzeichen für hierarchische Werte (Abschnitte). Array Schlüssel werden in Azure Key Vault mit doppelten Bindestrichen und numerischen Schlüsselsegmenten (`--0--`, `--1--`, &hellip; `--{n}--`) gespeichert.
 
@@ -371,7 +371,7 @@ In diesem Dokument wird erläutert, wie Sie den [Microsoft Azure Key Vault](http
 * Steuern des Zugriffs auf vertrauliche Konfigurationsdaten.
 * Erfüllen der Anforderung für die Überprüfung der Hardware Sicherheitsmodule (HSM) von PPS 140-2 Level 2 bei der Speicherung von Konfigurationsdaten.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>Pakete
 
@@ -616,7 +616,7 @@ Wenn dieser Ansatz implementiert ist:
 
 Der Anbieter ist in der Lage, Konfigurationswerte in ein Array für die Bindung an ein poco-Array zu lesen.
 
-Beim Lesen aus einer Konfigurations Quelle, mit der Schlüssel Doppelpunkte (`:`Trennzeichen) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`... `:{n}:`). Weitere Informationen finden Sie unter [Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
+Beim Lesen aus einer Konfigurations Quelle, mit der Schlüssel Doppelpunkte (`:`Trennzeichen) enthalten können, wird ein numerisches Schlüssel Segment verwendet, um die Schlüssel zu unterscheiden, die ein Array bilden (`:0:`, `:1:`, &hellip; `:{n}:`). Weitere Informationen finden Sie unter [Konfiguration: Binden eines Arrays an eine Klasse](xref:fundamentals/configuration/index#bind-an-array-to-a-class).
 
 Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden. Die in diesem Thema beschriebene Vorgehensweise verwendet doppelte Bindestriche (`--`) als Trennzeichen für hierarchische Werte (Abschnitte). Array Schlüssel werden in Azure Key Vault mit doppelten Bindestrichen und numerischen Schlüsselsegmenten (`--0--`, `--1--`, &hellip; `--{n}--`) gespeichert.
 

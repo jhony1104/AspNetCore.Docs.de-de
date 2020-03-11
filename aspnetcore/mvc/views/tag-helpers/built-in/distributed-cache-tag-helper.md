@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/24/2020
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: e5100d7244600358186b653073990985f48434a7
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
-ms.translationtype: HT
+ms.openlocfilehash: f5957adf3cef8966812a1bf0cbc6b2627d19d026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76809054"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653791"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>Taghilfsprogramm für verteilten Cache in ASP.NET Core
 
-Von [Peter Kellner](https://peterkellner.net) und [Luke Latham](https://github.com/guardrex)
+Von [Peter Kellner](https://peterkellner.net)
 
 Durch das Taghilfsprogramm für verteilten Cache kann die Leistung Ihrer ASP.NET Core-App erheblich verbessert werden, indem deren Inhalte in einer verteilten Cachequelle zwischengespeichert werden.
 
@@ -42,11 +42,11 @@ Das Taghilfsprogramm für verteilten Cache verwendet die [Konstruktorinjektion](
 
 Das Taghilfsprogramm für verteilten Cache erbt von derselben Klasse wie das Cache-Taghilfsprogramm. Beschreibungen dieser Attribute finden Sie im [Cache-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper).
 
-### <a name="name"></a>Name
+### <a name="name"></a>name
 
 | Attributtyp | Beispiel                               |
 | -------------- | ------------------------------------- |
-| Zeichenfolge         | `my-distributed-cache-unique-key-101` |
+| String         | `my-distributed-cache-unique-key-101` |
 
 `name` ist erforderlich. Das `name`-Attribut wird als Schlüssel für die einzelnen gespeicherten Cacheinstanzen verwendet. Im Gegensatz zum Cache-Taghilfsprogramm, das jeder Instanz basierend auf dem Namen der Razor-Seite und dem Speicherort auf der Razor-Seite einen Cacheschlüssel zuweist, basieren die Schlüssel des Taghilfsprogramms für verteilten Cache nur auf dem Attribut `name`.
 

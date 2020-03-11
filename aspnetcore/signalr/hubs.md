@@ -9,32 +9,32 @@ ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: e5bc12c5ccafe2b5273d72e6bde0f631ca043428
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
+ms.openlocfilehash: 54ffd8614c1cec4cfeba0878e910ed25fc6ba7d2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/21/2020
-ms.locfileid: "76294628"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653377"
 ---
-# <a name="use-hubs-in-opno-locsignalr-for-aspnet-core"></a>Verwenden von Hubs in SignalR für ASP.net Core
+# <a name="use-hubs-in-signalr-for-aspnet-core"></a>Verwenden von Hubs in signalr für ASP.net Core
 
 Von [Rachel Appel](https://twitter.com/rachelappel) und [Kevin Griffin](https://twitter.com/1kevgriff)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-opno-locsignalr-hub"></a>Was ist ein SignalR Hub?
+## <a name="what-is-a-signalr-hub"></a>Was ist ein signalr-Hub?
 
-Mit der SignalR Hubs-API können Sie Methoden auf verbundenen Clients vom Server aus aufzurufen. Im Servercode definieren Sie Methoden, die vom Client aufgerufen werden. Im Client Code definieren Sie Methoden, die vom Server aufgerufen werden. SignalR kümmert sich um alles hinter den Kulissen, das die Kommunikation zwischen Client und Server und Server-zu-Client-Kommunikation ermöglicht.
+Die signalr Hubs-API ermöglicht es Ihnen, Methoden auf verbundenen Clients vom Server aus aufzurufen. Im Servercode definieren Sie Methoden, die vom Client aufgerufen werden. Im Client Code definieren Sie Methoden, die vom Server aufgerufen werden. Signalr kümmert sich um alles hinter den Kulissen, das eine Echtzeitkommunikation zwischen Client und Server und Server-zu-Client-Kommunikation ermöglicht.
 
-## <a name="configure-opno-locsignalr-hubs"></a>Konfigurieren von SignalR Hubs
+## <a name="configure-signalr-hubs"></a>Konfigurieren von signalr-Hubs
 
-Die SignalR Middleware erfordert einige Dienste, die durch Aufrufen von `services.AddSignalR`konfiguriert werden.
+Die signalr-Middleware erfordert einige Dienste, die durch Aufrufen von `services.AddSignalR`konfiguriert werden.
 
 [!code-csharp[Configure service](hubs/sample/startup.cs?range=38)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Wenn Sie einer ASP.net Core-App SignalR-Funktionalität hinzufügen, richten Sie die Routen ein SignalR, indem Sie `endpoint.MapHub` im `Startup.Configure` Rückruf der `app.UseEndpoints` Methode aufrufen.
+Beim Hinzufügen von signalr-Funktionen zu einer ASP.net Core-App richten Sie signalr-Routen ein, indem Sie `endpoint.MapHub` im `app.UseEndpoints` Rückruf der `Startup.Configure`-Methode aufrufen.
 
 ```csharp
 app.UseRouting();
@@ -48,7 +48,7 @@ app.UseEndpoints(endpoints =>
 
 ::: moniker range="<= aspnetcore-2.2"
 
-Wenn Sie einer ASP.net Core-App SignalR-Funktionalität hinzufügen, richten Sie SignalR Routen durch Aufrufen von `app.UseSignalR` in der `Startup.Configure`-Methode ein.
+Beim Hinzufügen von signalr-Funktionen zu einer ASP.net Core-App richten Sie signalr-Routen durch Aufrufen von `app.UseSignalR` in der `Startup.Configure`-Methode ein.
 
 [!code-csharp[Configure routes to hubs](hubs/sample/startup.cs?range=57-60)]
 
@@ -68,7 +68,7 @@ public class ChatHub : Hub
 }
 ```
 
-Sie können einen Rückgabetyp und Parameter, einschließlich komplexer Typen und Arrays, wie in jeder beliebigen C# Methode angeben. SignalR behandelt die Serialisierung und Deserialisierung komplexer Objekte und Arrays in ihren Parametern und Rückgabe Werten.
+Sie können einen Rückgabetyp und Parameter, einschließlich komplexer Typen und Arrays, wie in jeder beliebigen C# Methode angeben. Signalr verarbeitet die Serialisierung und Deserialisierung komplexer Objekte und Arrays in ihren Parametern und Rückgabe Werten.
 
 > [!NOTE]
 > Hubs sind flüchtig:
@@ -80,10 +80,10 @@ Sie können einen Rückgabetyp und Parameter, einschließlich komplexer Typen un
 
 Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eigenschaften, die Informationen über die Verbindung enthalten:
 
-| Die Eigenschaften- | Beschreibung |
+| Eigenschaft | BESCHREIBUNG |
 | ------ | ----------- |
-| `ConnectionId` | Ruft die eindeutige ID für die Verbindung ab, die von SignalRzugewiesen wird. Es gibt eine Verbindungs-ID für jede Verbindung.|
-| `UserIdentifier` | Ruft den [Benutzer Bezeichner](xref:signalr/groups)ab. Standardmäßig verwendet SignalR die `ClaimTypes.NameIdentifier` aus der `ClaimsPrincipal`, die der Verbindung zugeordnet ist, als Benutzer Bezeichner. |
+| `ConnectionId` | Ruft die eindeutige ID für die Verbindung ab, die von signalr zugewiesen wird. Es gibt eine Verbindungs-ID für jede Verbindung.|
+| `UserIdentifier` | Ruft den [Benutzer Bezeichner](xref:signalr/groups)ab. Standardmäßig verwendet signalr die `ClaimTypes.NameIdentifier` aus der `ClaimsPrincipal`, die der Verbindung zugeordnet ist, als Benutzer Bezeichner. |
 | `User` | Ruft den `ClaimsPrincipal` ab, der dem aktuellen Benutzer zugeordnet ist. |
 | `Items` | Ruft eine Schlüssel-/Wert-Auflistung ab, die verwendet werden kann, um Daten innerhalb des Gültigkeits Bereichs dieser Verbindung freizugeben. Die Daten können in dieser Sammlung gespeichert werden, und Sie werden für die Verbindung über verschiedene hubmethoden Aufrufe beibehalten. |
 | `Features` | Ruft die Auflistung der Funktionen ab, die für die Verbindung verfügbar sind. Diese Sammlung wird in den meisten Szenarien nicht benötigt, sodass Sie noch nicht ausführlich dokumentiert wird. |
@@ -91,7 +91,7 @@ Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eig
 
 `Hub.Context` enthält auch die folgenden Methoden:
 
-| -Methode | Beschreibung |
+| Methode | BESCHREIBUNG |
 | ------ | ----------- |
 | `GetHttpContext` | Gibt die `HttpContext` für die Verbindung zurück, oder `null`, wenn die Verbindung nicht mit einer HTTP-Anforderung verknüpft ist. Für http-Verbindungen können Sie diese Methode verwenden, um Informationen wie HTTP-Header und Abfrage Zeichenfolgen zu erhalten. |
 | `Abort` | Bricht die Verbindung ab. |
@@ -100,7 +100,7 @@ Die `Hub`-Klasse verfügt über eine `Context`-Eigenschaft mit den folgenden Eig
 
 Die `Hub`-Klasse verfügt über eine `Clients`-Eigenschaft, die die folgenden Eigenschaften für die Kommunikation zwischen Server und Client enthält:
 
-| Die Eigenschaften- | Beschreibung |
+| Eigenschaft | BESCHREIBUNG |
 | ------ | ----------- |
 | `All` | Ruft eine Methode auf allen verbundenen Clients auf. |
 | `Caller` | Ruft eine Methode auf dem Client auf, der die Hub-Methode aufgerufen hat. |
@@ -108,7 +108,7 @@ Die `Hub`-Klasse verfügt über eine `Clients`-Eigenschaft, die die folgenden Ei
 
 `Hub.Clients` enthält auch die folgenden Methoden:
 
-| -Methode | Beschreibung |
+| Methode | BESCHREIBUNG |
 | ------ | ----------- |
 | `AllExcept` | Ruft eine Methode auf allen verbundenen Clients mit Ausnahme der angegebenen Verbindungen auf. |
 | `Client` | Ruft eine Methode auf einem bestimmten verbundenen Client auf. |
@@ -176,7 +176,7 @@ Die SignalR Hubs-API stellt die `OnConnectedAsync` und `OnDisconnectedAsync` vir
 
 [!INCLUDE[](~/includes/connectionid-signalr.md)]
 
-## <a name="handle-errors"></a>Behandeln von Fehlern
+## <a name="handle-errors"></a>Fehlerbehandlung
 
 Ausnahmen, die in ihren hubmethoden ausgelöst werden, werden an den Client gesendet, der die Methode aufgerufen hat. Auf dem JavaScript-Client gibt die `invoke`-Methode eine [JavaScript-Zusage](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Using_promises)zurück. Wenn der Client einen Fehler mit einem Handler empfängt, der mithilfe von `catch`an die Zusage angefügt ist, wird er aufgerufen und als JavaScript-`Error` Objekt übermittelt.
 
@@ -197,7 +197,7 @@ Wenn Sie eine Ausnahme Bedingung haben, die Sie an den Client weiter *geben* mö
 > [!NOTE]
 > SignalR sendet nur die `Message`-Eigenschaft der Ausnahme an den Client. Die Stapel Überwachung und andere Eigenschaften der Ausnahme sind für den Client nicht verfügbar.
 
-## <a name="related-resources"></a>Weitere Informationen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Einführung in ASP.net Core SignalR](xref:signalr/introduction)
 * [JavaScript-Client](xref:signalr/javascript-client)

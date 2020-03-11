@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/05/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: cab383053751598b882f3716943d3d9392c56f4a
-ms.sourcegitcommit: 29ace642ca0e1f0b48a18d66de266d8811df2b83
-ms.translationtype: HT
+ms.openlocfilehash: 908016720ade67a02ebe30d1dcb7929ad7592270
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74987956"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653041"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -19,7 +19,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Steve Smith](https://a
 
 ASP.NET Core MVC unterstützt das Formatieren von Antwortdaten. Antwortdaten können mithilfe bestimmter Formate oder durch Übernahme des vom Client angeforderten Formats formatiert werden.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="format-specific-action-results"></a>Formatspezifische Aktionsergebnisse
 
@@ -31,14 +31,14 @@ Die integrierte Hilfsmethode <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> 
 
 Der Beispieldownload gibt die Liste der Autoren zurück. Bei Verwendung der F12-Entwicklertools im Browser oder von [Postman](https://www.getpostman.com/tools) mit dem obigen Code gilt Folgendes:
 
-* Der Antwortheader mit **content-type:** `application/json; charset=utf-8` wird angezeigt.
+* Der Antwortheader mit **Content-Type:** `application/json; charset=utf-8` wird angezeigt.
 * Die Anforderungsheader werden angezeigt. Beispiel: Der Header `Accept`. Der `Accept`-Header wird vom vorangehenden Code ignoriert.
 
 Wenn Sie Daten im Textformat zurückgeben möchten, verwenden Sie <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> und das <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content>-Hilfsprogramm:
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 
-Im obigen Code wird `text/plain` als `Content-Type` zurückgegeben. Das Zurückgeben einer Zeichenfolge liefert `text/plain` als `Content-Type`:
+Im obigen Code wird `Content-Type` als `text/plain` zurückgegeben. Das Zurückgeben einer Zeichenfolge liefert `Content-Type` als `text/plain`:
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_string)]
 
@@ -155,7 +155,7 @@ Vor ASP.NET Core 3.0 wurden standardmäßig die JSON-Formatierer verwendet, die
 
 Einige Features funktionieren mit `System.Text.Json`-basierten Formatierern möglicherweise nicht gut und erfordern einen Verweis auf die `Newtonsoft.Json`-basierten Formatierer. Verwenden Sie weiterhin `Newtonsoft.Json`-basierte Formatierer, wenn für die App Folgendes gilt:
 
-* Sie verwendet `Newtonsoft.Json`-Attribute. Beispielsweise `[JsonProperty]` oder `[JsonIgnore]`.
+* Sie verwendet `Newtonsoft.Json`-Attribute. Zum Beispiel: `[JsonProperty]` oder `[JsonIgnore]`.
 * Sie passt die Serialisierungseinstellungen an.
 * Sie nutzt Features, die von `Newtonsoft.Json` bereitgestellt werden.
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` konfiguriert. Vor ASP.NET Core 3.0 akzeptiert `JsonResult.SerializerSettings` eine Instanz von `JsonSerializerSettings`, die für `Newtonsoft.Json` spezifisch ist.
@@ -219,7 +219,7 @@ Weitere Informationen finden Sie unter [Filter](xref:mvc/controllers/filters).
 
 ### <a name="special-case-formatters"></a>Formatierer für besondere Fälle
 
-Einige besondere Fälle werden mithilfe von integrierten Formatierungsprogrammen implementiert. Standardmäßig werden `string`-Rückgabetypen als *text/plain* formatiert (bzw. als *text/html*, wenn sie über den `Accept`-Header angefordert werden). Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> gelöscht werden. Formatierer werden in der `ConfigureServices`-Methode entfernt. Aktionen mit einem Modellobjekt-Rückgabetyp geben `null` zurück, wenn der Rückgabewert `204 No Content` lautet. Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> gelöscht werden. Der folgende Code entfernt `StringOutputFormatter` und `HttpNoContentOutputFormatter`.
+Einige besondere Fälle werden mithilfe von integrierten Formatierungsprogrammen implementiert. Standardmäßig werden `string`-Rückgabetypen als *text/plain* formatiert (bzw. als *text/html*, wenn sie über den `Accept`-Header angefordert werden). Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> gelöscht werden. Formatierer werden in der `ConfigureServices`-Methode entfernt. Aktionen mit einem Modellobjekt-Rückgabetyp geben `204 No Content` zurück, wenn der Rückgabewert `null` lautet. Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> gelöscht werden. Der folgende Code entfernt `StringOutputFormatter` und `HttpNoContentOutputFormatter`.
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]

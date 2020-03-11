@@ -5,12 +5,12 @@ description: Freigeben von Controllern, Ansichten, Razor Pages und vielem mehr m
 ms.author: riande
 ms.date: 11/11/2019
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: a95c344410db0651b9f8f1c1eb7551029f084c25
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 0156c94bc6d0b83d0e14b8ef49468cfdf106d7e6
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829074"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654811"
 ---
 # <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Freigeben von Controllern, Ansichten, Razor Pages und vielem mehr mit Anwendungsparts
 
@@ -18,7 +18,7 @@ ms.locfileid: "75829074"
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsparts ermöglichen es ASP.NET Core, Controller, Ansichtskomponenten, Taghilfsprogramme, Razor Pages, Razor-Kompilierungsquellen und vieles mehr zu ermitteln. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
 
@@ -36,7 +36,7 @@ Der folgende Code bietet einen alternativen Ansatz, um den `ApplicationPartManag
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Die beiden oben gezeigten Codebeispiele laden den `SharedController` aus einer Assembly. Der `SharedController` befindet sich nicht im Projekt der App. Weitere Informationen finden Sie im Beispieldownload für eine [WebAppParts-Lösung](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts).
+Die beiden oben gezeigten Codebeispiele laden den `SharedController` aus einer Assembly. Der `SharedController` befindet sich nicht im Projekt der App. Weitere Informationen finden Sie im Beispieldownload für eine [WebAppParts-Lösung](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts).
 
 ### <a name="include-views"></a>Einschließen von Ansichten
 
@@ -51,8 +51,8 @@ Der `ApplicationPartManager` enthält Parts für Folgendes:
 * Die Assembly der App und die abhängigen Assemblys.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
 * `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
-* `Microsoft.AspNetCore.Mvc.TagHelpers`
-* `Microsoft.AspNetCore.Mvc.Razor`
+* [https://login.microsoftonline.com/consumers/](`Microsoft.AspNetCore.Mvc.TagHelpers`).
+* [https://login.microsoftonline.com/consumers/](`Microsoft.AspNetCore.Mvc.Razor`).
 
 <a name="fp"></a>
 
@@ -70,11 +70,11 @@ Featureanbieter erben von <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IAppli
 
 ### <a name="display-available-features"></a>Anzeigen verfügbarer Features
 
-Die für eine App verfügbaren Features können aufgelistet werden, indem durch [Abhängigkeitsinjektion](../../fundamentals/dependency-injection.md) ein `ApplicationPartManager` angefordert wird:
+Die für eine App verfügbaren Features können aufgelistet werden, indem durch `ApplicationPartManager`Abhängigkeitsinjektion[ ein ](../../fundamentals/dependency-injection.md) angefordert wird:
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
-Das [Downloadbeispiel](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2) verwendet den oben stehenden Code, um die App-Features anzuzeigen:
+Das [Downloadbeispiel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2) verwendet den oben stehenden Code, um die App-Features anzuzeigen:
 
 ```text
 Controllers:
@@ -108,7 +108,7 @@ Bei der Entwicklung mit Anwendungsparts sind HTTP-404-Fehler nicht ungewöhnlich
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsparts ermöglichen es ASP.NET Core, Controller, Ansichtskomponenten, Taghilfsprogramme, Razor Pages, Razor-Kompilierungsquellen und vieles mehr zu ermitteln. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
 
@@ -126,7 +126,7 @@ Der folgende Code bietet einen alternativen Ansatz, um den `ApplicationPartManag
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Die beiden oben gezeigten Codebeispiele laden den `SharedController` aus einer Assembly. Der `SharedController` befindet sich nicht im Projekt der Anwendung. Weitere Informationen finden Sie im Beispieldownload für eine [WebAppParts-Lösung](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts).
+Die beiden oben gezeigten Codebeispiele laden den `SharedController` aus einer Assembly. Der `SharedController` befindet sich nicht im Projekt der Anwendung. Weitere Informationen finden Sie im Beispieldownload für eine [WebAppParts-Lösung](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts).
 
 ### <a name="include-views"></a>Einschließen von Ansichten
 
@@ -141,26 +141,26 @@ Der folgende Code verwendet <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>, um
 Der `ApplicationPartManager` enthält Parts für Folgendes:
 
 * Die Assembly der App und die abhängigen Assemblys.
-* `Microsoft.AspNetCore.Mvc.TagHelpers`
-* `Microsoft.AspNetCore.Mvc.Razor`
+* [https://login.microsoftonline.com/consumers/](`Microsoft.AspNetCore.Mvc.TagHelpers`).
+* [https://login.microsoftonline.com/consumers/](`Microsoft.AspNetCore.Mvc.Razor`).
 
 ## <a name="application-feature-providers"></a>Anwendungsfeatureanbieter
 
 Anwendungsfeatureanbieter untersuchen Anwendungsparts und bieten Features für diese. Es gibt integrierte Featureanbieter für die folgenden ASP.NET Core-Features:
 
 * [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
-* [Taghilfsprogramme](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
+* [Tag Helpers (Taghilfsprogramme)](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [Ansichtskomponenten](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 
 Featureanbieter erben von <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, wobei `T` der Typ des Features ist. Featureanbieter können für jeden der oben aufgeführten Featuretypen implementiert werden. Die Reihenfolge der Featureanbieter in `ApplicationPartManager.FeatureProviders` kann sich auf das Laufzeitverhalten auswirken. Später hinzugefügte Anbieter können auf Aktionen reagieren, die von früher hinzugefügten Anbietern ausgeführt wurden.
 
 ### <a name="display-available-features"></a>Anzeigen verfügbarer Features
 
-Die für eine App verfügbaren Features können aufgelistet werden, indem durch [Abhängigkeitsinjektion](../../fundamentals/dependency-injection.md) ein `ApplicationPartManager` angefordert wird:
+Die für eine App verfügbaren Features können aufgelistet werden, indem durch `ApplicationPartManager`Abhängigkeitsinjektion[ ein ](../../fundamentals/dependency-injection.md) angefordert wird:
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
-Das [Downloadbeispiel](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2) verwendet den oben stehenden Code, um die App-Features anzuzeigen:
+Das [Downloadbeispiel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2) verwendet den oben stehenden Code, um die App-Features anzuzeigen:
 
 ```text
 Controllers:

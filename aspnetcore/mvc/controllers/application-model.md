@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/controllers/application-model
 ms.openlocfilehash: 4b6c978e5752eb320412a1c204df8e3d288fe4a1
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881094"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654553"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Arbeiten mit dem Anwendungsmodell in ASP.NET Core
 
@@ -143,7 +143,7 @@ Obwohl der Methodenname `SomeName` lautet, überschreibt das Attribut die MVC-Ko
 > [!NOTE]
 > Dieses Beispiel ist im Wesentlichen mit der Verwendung des integrierten Attributs [ActionName](/dotnet/api/microsoft.aspnetcore.mvc.actionnameattribute) identisch.
 
-### <a name="sample-custom-routing-convention"></a>Beispiel: benutzerdefinierte Routingkonvention
+### <a name="sample-custom-routing-convention"></a>Beispiel: Benutzerdefinierte Routingkonvention
 
 Sie können die Funktionsweise von Routing mithilfe einer `IApplicationModelConvention` anpassen. Die folgende Konvention bezieht beispielsweise Namespaces von Controllern in ihre Routen ein und ersetzt dabei in der Route `.` im Namespace durch `/`:
 
@@ -154,7 +154,7 @@ Die Konvention wird als Option unter „Start“ hinzugefügt.
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=6)]
 
 > [!TIP]
-> Sie können Konventionen zu Ihrer [Middleware](xref:fundamentals/middleware/index) hinzufügen, indem Sie über `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));` auf `MvcOptions` zugreifen.
+> Sie können Konventionen zu Ihrer [Middleware](xref:fundamentals/middleware/index) hinzufügen, indem Sie über `MvcOptions` auf `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));` zugreifen.
 
 Im nachfolgenden Beispiel wird diese Konvention auf Routen angewendet, die kein Attributrouting verwenden, bei dem der Name des Controllers „Namespace“ enthält. Der folgende Controller veranschaulicht diese Konvention:
 

@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/view-compilation
 ms.openlocfilehash: cd096bba5eb580c0a606699a2bf7c36442fb56f7
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76809067"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652495"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -57,7 +57,7 @@ Die Kompilierung zur Erstellung und Veröffentlichung von Razor-Dateien wird sta
 > [!IMPORTANT]
 > Das Vorkompilierungstool ist veraltet und wird in ASP.NET Core 3.0 entfernt. Wir empfehlen die Migration zu [Razor Sdk](xref:razor-pages/sdk).
 >
-> Das Razor SDK ist nur dann wirksam, wenn keine für die Vorkompilierung spezifischen Eigenschaften in der Projektdatei festgelegt sind. Durch Festlegen der Eigenschaft `MvcRazorCompileOnPublish` der *CSPROJ*-Datei auf `true` wird das Razor SDK beispielsweise deaktiviert.
+> Das Razor SDK ist nur dann wirksam, wenn keine für die Vorkompilierung spezifischen Eigenschaften in der Projektdatei festgelegt sind. Durch Festlegen der Eigenschaft *der*CSPROJ`MvcRazorCompileOnPublish`-Datei auf `true` wird das Razor SDK beispielsweise deaktiviert.
 
 ::: moniker-end
 
@@ -88,7 +88,7 @@ Legen Sie die Eigenschaft `MvcRazorCompileOnPublish` auf `true` fest und install
 
 ::: moniker range="<= aspnetcore-2.0"
 
-Bereiten Sie die App mit dem [Veröffentlichungsbefehl der .NET Core-CLI](/dotnet/core/tools/dotnet-publish) für eine [Framework-abhängige Bereitstellung](/dotnet/core/deploying/#framework-dependent-deployments-fdd) vor. Führen Sie z. B. den folgenden Befehl auf der Stammebene des Projekts aus:
+Bereiten Sie die App mit dem [Veröffentlichungsbefehl der .NET Core-CLI](/dotnet/core/deploying/#framework-dependent-deployments-fdd) für eine [Framework-abhängige Bereitstellung](/dotnet/core/tools/dotnet-publish) vor. Führen Sie z. B. den folgenden Befehl auf der Stammebene des Projekts aus:
 
 ```dotnetcli
 dotnet publish -c Release
@@ -127,7 +127,7 @@ So aktivieren Sie die Laufzeitkompilierung für alle Umgebungen und Konfiguratio
 
 1. das NuGet-Paket [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) installieren.
 
-1. Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von `AddRazorRuntimeCompilation` enthält. Zum Beispiel:
+1. Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von `AddRazorRuntimeCompilation` enthält. Beispiel:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)

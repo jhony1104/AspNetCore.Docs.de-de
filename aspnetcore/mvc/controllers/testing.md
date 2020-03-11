@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 uid: mvc/controllers/testing
-ms.openlocfilehash: 449d8791962e4233d599f364b2e8c922f0975d2f
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
-ms.translationtype: HT
+ms.openlocfilehash: 597f1472bb30ae3b34fa98659c8c8bb464223e84
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681096"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654475"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Komponententests für die Controllerlogik in ASP.NET Core
 
@@ -30,7 +30,7 @@ Wenn Sie benutzerdefinierte Filter und Routen schreiben, sollten Sie für diese 
 
 Um mehr über Komponententests für Controller zu erfahren, sehen Sie sich den folgenden Controller in der Beispiel-App an. 
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Der Homecontroller zeigt eine Liste von Brainstormingsitzungen an und ermöglicht das Erstellen neuer Brainstormingsitzungen mit einer POST-Anforderung:
 
@@ -57,8 +57,8 @@ Die `HTTP GET Index`-Methode verfügt weder über Schleifen noch über Verzweigu
 
 Die `HTTP POST Index`-Methodentests des Homecontrollers bestätigen dies:
 
-* Wenn [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) `false` ist, gibt die Aktionsmethode den Status *400 Bad Request* zurück (<xref:Microsoft.AspNetCore.Mvc.ViewResult> mit den entsprechenden Daten).
-* Wenn `ModelState.IsValid` `true` ist:
+* Wenn " [modelstate. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) " `false`ist, gibt die Aktionsmethode eine " *400 Bad Request* "-<xref:Microsoft.AspNetCore.Mvc.ViewResult> mit den entsprechenden Daten zurück.
+* Wenn `ModelState.IsValid``true` ist:
   * Die `Add`-Methode für das Repository wird aufgerufen.
   * Ein <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> wird mit den richtigen Argumenten zurückgegeben.
 
@@ -78,7 +78,7 @@ Simulierte Aufrufe, die nicht aufgerufen werden, werden normalerweise ignoriert.
 > [!NOTE]
 > Mit der in diesem Beispiel verwendeten Moq-Bibliothek können überprüfbare (oder „strikte“) Pseudoobjekte mit nicht überprüfbaren Pseudoobjekten (auch „nicht-strikte“ Pseudoobjekte oder „Stubs“ genannt) kombiniert werden. Weitere Informationen finden Sie unter [Customizing Mock behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (Anpassen des Verhaltens von Pseudoobjekten mit Moq).
 
-In der Beispiel-App werden Informationen zu einer bestimmten Brainstormingsitzung mit [SessionController](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) angezeigt. Der Controller enthält Logik, um ungültige `id` Werte zu behandeln (es gibt im folgenden Beispiel zwei `return`-Szenarien, die diese Fälle abdecken). Die endgültige `return`-Anweisung gibt ein neues `StormSessionViewModel`-Objekt an die Ansicht zurück (*Controllers/SessionController.cs*):
+In der Beispiel-App werden Informationen zu einer bestimmten Brainstormingsitzung mit [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) angezeigt. Der Controller enthält Logik, um ungültige `id` Werte zu behandeln (es gibt im folgenden Beispiel zwei `return`-Szenarien, die diese Fälle abdecken). Die endgültige `return`-Anweisung gibt ein neues `StormSessionViewModel`-Objekt an die Ansicht zurück (*Controllers/SessionController.cs*):
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -113,7 +113,7 @@ Die zweite `ForSession`-Test ermittelt, ob `ForSession` eine Liste der Sitzungsi
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-Um das Verhalten der `Create`-Methode zu testen, wenn der `ModelState` ungültig ist, fügt die Beispiel-App dem Controller einen Modellfehler als Teil des Tests hinzu. Versuchen Sie nicht, die Modellüberprüfung oder Modellbindung in Komponententests zu testen. Testen Sie einfach das Verhalten der Aktionsmethode, wenn Sie mit einem ungültigen `ModelState` konfrontiert wird:
+Um das Verhalten der `Create`-Methode zu testen, wenn der `ModelState` ungültig ist, fügt die Beispiel-App dem Controller einen Modellfehler als Teil des Tests hinzu. Versuchen Sie nicht, die Modellüberprüfung oder Modellbindung in Komponententests zu testen. Testen Sie einfach das Verhalten der Aktionsmethode, wenn Sie mit einem ungültigen &mdash; konfrontiert wird:
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
@@ -185,7 +185,7 @@ Für eine gültige Sitzungs-`id` bestätigt der letzte Test Folgendes:
 
 [Controller](xref:mvc/controllers/actions) spielen in jeder ASP.NET Core MVC-App eine zentrale Rolle. Daher sollten Sie sich auch darauf verlassen können, dass Controller in Ihrer App wie beabsichtigt funktionieren. Automatisierte Tests können Fehler erkennen, bevor die App in einer Produktionsumgebung bereitgestellt wird.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="unit-tests-of-controller-logic"></a>Komponententests der Controllerlogik
 
@@ -220,8 +220,8 @@ Die `HTTP GET Index`-Methode verfügt weder über Schleifen noch über Verzweigu
 
 Die `HTTP POST Index`-Methodentests des Homecontrollers bestätigen dies:
 
-* Wenn [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) `false` ist, gibt die Aktionsmethode den Status *400 Bad Request* zurück (<xref:Microsoft.AspNetCore.Mvc.ViewResult> mit den entsprechenden Daten).
-* Wenn `ModelState.IsValid` `true` ist:
+* Wenn " [modelstate. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) " `false`ist, gibt die Aktionsmethode eine " *400 Bad Request* "-<xref:Microsoft.AspNetCore.Mvc.ViewResult> mit den entsprechenden Daten zurück.
+* Wenn `ModelState.IsValid``true` ist:
   * Die `Add`-Methode für das Repository wird aufgerufen.
   * Ein <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> wird mit den richtigen Argumenten zurückgegeben.
 
@@ -241,7 +241,7 @@ Simulierte Aufrufe, die nicht aufgerufen werden, werden normalerweise ignoriert.
 > [!NOTE]
 > Mit der in diesem Beispiel verwendeten Moq-Bibliothek können überprüfbare (oder „strikte“) Pseudoobjekte mit nicht überprüfbaren Pseudoobjekten (auch „nicht-strikte“ Pseudoobjekte oder „Stubs“ genannt) kombiniert werden. Weitere Informationen finden Sie unter [Customizing Mock behavior with Moq](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior) (Anpassen des Verhaltens von Pseudoobjekten mit Moq).
 
-In der Beispiel-App werden Informationen zu einer bestimmten Brainstormingsitzung mit [SessionController](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) angezeigt. Der Controller enthält Logik, um ungültige `id` Werte zu behandeln (es gibt im folgenden Beispiel zwei `return`-Szenarien, die diese Fälle abdecken). Die endgültige `return`-Anweisung gibt ein neues `StormSessionViewModel`-Objekt an die Ansicht zurück (*Controllers/SessionController.cs*):
+In der Beispiel-App werden Informationen zu einer bestimmten Brainstormingsitzung mit [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) angezeigt. Der Controller enthält Logik, um ungültige `id` Werte zu behandeln (es gibt im folgenden Beispiel zwei `return`-Szenarien, die diese Fälle abdecken). Die endgültige `return`-Anweisung gibt ein neues `StormSessionViewModel`-Objekt an die Ansicht zurück (*Controllers/SessionController.cs*):
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -276,7 +276,7 @@ Die zweite `ForSession`-Test ermittelt, ob `ForSession` eine Liste der Sitzungsi
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-Um das Verhalten der `Create`-Methode zu testen, wenn der `ModelState` ungültig ist, fügt die Beispiel-App dem Controller einen Modellfehler als Teil des Tests hinzu. Versuchen Sie nicht, die Modellüberprüfung oder Modellbindung in Komponententests zu testen. Testen Sie einfach das Verhalten der Aktionsmethode, wenn Sie mit einem ungültigen `ModelState` konfrontiert wird:
+Um das Verhalten der `Create`-Methode zu testen, wenn der `ModelState` ungültig ist, fügt die Beispiel-App dem Controller einen Modellfehler als Teil des Tests hinzu. Versuchen Sie nicht, die Modellüberprüfung oder Modellbindung in Komponententests zu testen. Testen Sie einfach das Verhalten der Aktionsmethode, wenn Sie mit einem ungültigen &mdash; konfrontiert wird:
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
@@ -348,5 +348,5 @@ Für eine gültige Sitzungs-`id` bestätigt der letzte Test Folgendes:
 
 * <xref:test/integration-tests>
 * [Erstellen und Ausführen von Komponententests mit Visual Studio](/visualstudio/test/unit-test-your-code)
-* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; stark typisierte Bibliothek für Tests mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
+* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC:](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) stark typisierte Bibliothek für Komponententest mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
 

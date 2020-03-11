@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: e8b62d795f6444e6dd79e27ace687d5db4db86de
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: 43bd4eccfc06d27ade5de0e3387247a753609336
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880999"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653179"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>Erste Schritte mit Taghilfsprogrammen
 
@@ -45,11 +45,11 @@ Der Server verwendet das Taghilfsprogramm für E-Mails, um dieses Markup in Folg
 
 Dabei handelt es sich um ein Anchor-Tag, das daraus einen E-Mail-Link erstellt. Dieses Hilfsprogramm kann sich als nützlich erweisen, wenn Sie eine Blog-Engine schreiben und eine E-Mail an die Marketingabteilung, den Support oder andere Kontakte senden möchten, die alle derselben Domäne angehören.
 
-1. Fügen Sie dem Ordner *TagHelpers* die folgende `EmailTagHelper`-Klasse hinzu.
+1. Fügen Sie dem Ordner `EmailTagHelper`TagHelpers*die folgende*-Klasse hinzu.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * Taghilfsprogramme verwenden Namenskonventionen, die auf die Elemente des Stammklassennamens ausgerichtet sind. Das Element *TagHelper* ist in dem Klassennamen allerdings nicht enthalten. In diesem Beispiel lautet der Stammname von **EmailTagHelper** *email*, damit das `<email>`-Tag als Ziel verwendet wird. Diese Namenskonvention sollte für die meisten Taghilfsprogramme funktionieren. Nachfolgend finden Sie eine Erläuterung dazu, wie Sie diese außer Kraft setzen.
+   * Taghilfsprogramme verwenden Namenskonventionen, die auf die Elemente des Stammklassennamens ausgerichtet sind. Das Element *TagHelper* ist in dem Klassennamen allerdings nicht enthalten. In diesem Beispiel lautet der Stammname von **EmailTagHelper***email*, damit das `<email>`-Tag als Ziel verwendet wird. Diese Namenskonvention sollte für die meisten Taghilfsprogramme funktionieren. Nachfolgend finden Sie eine Erläuterung dazu, wie Sie diese außer Kraft setzen.
 
    * Die `EmailTagHelper`-Klasse wird von `TagHelper` abgeleitet. Über die `TagHelper`-Klasse werden Methoden und Eigenschaften für das Schreiben von Taghilfsprogrammen bereitgestellt.
 
@@ -65,11 +65,11 @@ Dabei handelt es sich um ein Anchor-Tag, das daraus einen E-Mail-Link erstellt. 
    public class Email : TagHelper
    ```
 
-1. Fügen Sie der *Views/_ViewImports.cshtml*-Datei die Anweisung `addTagHelper` hinzu, um die `EmailTagHelper`-Klasse für sämtliche Razor-Ansichten verfügbar zu machen:
+1. Fügen Sie der `EmailTagHelper`Views/_ViewImports.cshtml`addTagHelper`-Datei die Anweisung *hinzu, um die*-Klasse für sämtliche Razor-Ansichten verfügbar zu machen:
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie, dass in der zweiten Zeile die Taghilfsprogramme für ASP.NET Core MVC angegeben sind, die die Platzhaltersyntax verwendet (Informationen zu diesen Hilfsprogrammen finden Sie unter [Introduction to Tag Helpers (Einführung in Taghilfsprogramme))](intro.md). Die `@addTagHelper`-Anweisung stellt das Taghilfsprogramm für die Razor-Ansicht zur Verfügung. Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
+   Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie außerdem, dass die zweite Zeile die ASP.net Core MVC-taghilfsprogramme mithilfe der Platzhalter Syntax bringt (diese Hilfsprogramme werden unter [Einführung in taghilfsprogramme](intro.md)erläutert). Dabei handelt es sich um die `@addTagHelper`-Anweisung, die das taghilfsprogramm für die Razor-Ansicht verfügbar macht. Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
 
 ```csharp
 @using AuthoringTagHelpers
@@ -145,7 +145,7 @@ In diesem Abschnitt wird beschrieben, wie Sie ein asynchrones E-Mail-Hilfsprogra
 
 ### <a name="removeall-precontentsethtmlcontent-and-postcontentsethtmlcontent"></a>„RemoveAll“, „PreContent.SetHtmlContent“ und „PostContent.SetHtmlContent“
 
-1. Fügen Sie dem Ordner *TagHelpers* folgende `BoldTagHelper`-Klasse hinzu.
+1. Fügen Sie dem Ordner `BoldTagHelper`TagHelpers*die folgende*-Klasse hinzu.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/BoldTagHelper.cs)]
 
@@ -175,7 +175,7 @@ Wenn mehrere Attribute derselben Anweisung hinzugefügt werden, behandelt die Ru
 [HtmlTargetElement("bold", Attributes = "bold")]
    ```
 
-Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angezielten Elements zu ändern. Wenn Sie z.B. möchten, dass `BoldTagHelper` `<MyBold>`-Tags anzielt, müssen Sie die folgenden Attribute verwenden:
+Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angezielten Elements zu ändern. Wenn Sie z.B. möchten, dass `BoldTagHelper``<MyBold>`-Tags anzielt, müssen Sie die folgenden Attribute verwenden:
 
 ```csharp
 [HtmlTargetElement("MyBold")]
@@ -185,11 +185,11 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
 
 1. Fügen Sie einen *Models*-Ordner hinzu.
 
-1. Fügen Sie dem Ordner *Models* die folgende `WebsiteContext`-Klasse hinzu:
+1. Fügen Sie dem Ordner `WebsiteContext`Models*die folgende*-Klasse hinzu:
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Models/WebsiteContext.cs)]
 
-1. Fügen Sie dem Ordner *TagHelpers* folgende `WebsiteInformationTagHelper`-Klasse hinzu.
+1. Fügen Sie dem Ordner `WebsiteInformationTagHelper`TagHelpers*die folgende*-Klasse hinzu.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
@@ -237,7 +237,7 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
 
 Das Taghilfsprogramm für Bedingungen rendert Ausgaben, wenn ein TRUE-Wert zurückgegeben wird.
 
-1. Fügen Sie dem Ordner *TagHelpers* folgende `ConditionTagHelper`-Klasse hinzu.
+1. Fügen Sie dem Ordner `ConditionTagHelper`TagHelpers*die folgende*-Klasse hinzu.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/ConditionTagHelper.cs)]
 
@@ -264,7 +264,7 @@ In diesem Abschnitt wird erläutert, wie Sie zwei Taghilfsprogramme für automat
 
 Da dieses beiden Hilfsprogramme sehr ähnlich funktionieren und Sie sie möglicherweise in der Zukunft umgestalten möchten, werden diese in derselben Datei gespeichert.
 
-1. Fügen Sie dem Ordner *TagHelpers* folgende `AutoLinkerHttpTagHelper`-Klasse hinzu.
+1. Fügen Sie dem Ordner `AutoLinkerHttpTagHelper`TagHelpers*die folgende*-Klasse hinzu.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?range=7-19)]
 

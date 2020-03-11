@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/authorization/claims
 ms.openlocfilehash: e289851aafcbc7e3b3f60ab9fbe4b182a78bdf8a
-ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/30/2019
-ms.locfileid: "73143428"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652969"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Anspruchs basierte Autorisierung in ASP.net Core
 
@@ -63,9 +63,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-In this case the `EmployeeOnly` policy checks for the presence of an `EmployeeNumber` claim on the current identity.
+In diesem Fall prüft die `EmployeeOnly`-Richtlinie, ob ein `EmployeeNumber` Anspruch auf die aktuelle Identität vorhanden ist.
 
-You then apply the policy using the `Policy` property on the `AuthorizeAttribute` attribute to specify the policy name;
+Anschließend wenden Sie die Richtlinie mithilfe der `Policy`-Eigenschaft für das `AuthorizeAttribute`-Attribut an, um den Richtlinien Namen anzugeben.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -75,7 +75,7 @@ public IActionResult VacationBalance()
 }
 ```
 
-The `AuthorizeAttribute` attribute can be applied to an entire controller, in this instance only identities matching the policy will be allowed access to any Action on the controller.
+Das `AuthorizeAttribute`-Attribut kann auf einen gesamten Controller angewendet werden. in diesem Fall erhalten nur Identitäten, die mit der Richtlinie übereinstimmen, Zugriff auf jede Aktion auf dem Controller.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -87,7 +87,7 @@ public class VacationController : Controller
 }
 ```
 
-If you have a controller that's protected by the `AuthorizeAttribute` attribute, but want to allow anonymous access to particular actions you apply the `AllowAnonymousAttribute` attribute.
+Wenn Sie über einen Controller verfügen, der durch das `AuthorizeAttribute`-Attribut geschützt ist, aber den anonymen Zugriff auf bestimmte Aktionen erlauben soll, wenden Sie das `AllowAnonymousAttribute`-Attribut an.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -104,7 +104,7 @@ public class VacationController : Controller
 }
 ```
 
-Most claims come with a value. You can specify a list of allowed values when creating the policy. The following example would only succeed for employees whose employee number was 1, 2, 3, 4 or 5.
+Die meisten Ansprüche verfügen über einen Wert. Sie können eine Liste zulässiger Werte angeben, wenn Sie die Richtlinie erstellen. Das folgende Beispiel ist nur für Mitarbeiter erfolgreich, deren Mitarbeiternummer 1, 2, 3, 4 oder 5 war.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -140,13 +140,13 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 ::: moniker-end
-### <a name="add-a-generic-claim-check"></a>Add a generic claim check
+### <a name="add-a-generic-claim-check"></a>Generische Anspruchs Prüfung hinzufügen
 
-If the claim value isn't a single value or a transformation is required, use [RequireAssertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). For more information, see [Using a func to fulfill a policy](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy).
+Wenn der Anspruchs Wert kein einzelner Wert ist oder eine Transformation erforderlich ist, verwenden Sie [requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). Weitere Informationen finden Sie unter [Verwenden eines Func zum erfüllen einer Richtlinie](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy).
 
-## <a name="multiple-policy-evaluation"></a>Multiple Policy Evaluation
+## <a name="multiple-policy-evaluation"></a>Bewertung mehrerer Richtlinien
 
-If you apply multiple policies to a controller or action, then all policies must pass before access is granted. Beispiel:
+Wenn Sie mehrere Richtlinien auf einen Controller oder eine Aktion anwenden, müssen alle Richtlinien bestanden werden, bevor der Zugriff gewährt wird. Beispiel:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -163,6 +163,6 @@ public class SalaryController : Controller
 }
 ```
 
-In the above example any identity which fulfills the `EmployeeOnly` policy can access the `Payslip` action as that policy is enforced on the controller. However in order to call the `UpdateSalary` action the identity must fulfill *both* the `EmployeeOnly` policy and the `HumanResources` policy.
+Im obigen Beispiel kann jede Identität, die die `EmployeeOnly` Richtlinie erfüllt, auf die `Payslip` Aktion zugreifen, da diese Richtlinie auf dem Controller erzwungen wird. Um jedoch die `UpdateSalary` Aktion aufzurufen, muss die Identität *sowohl* die Richtlinie `EmployeeOnly` als auch die Richtlinie `HumanResources` erfüllen.
 
-If you want more complicated policies, such as taking a date of birth claim, calculating an age from it then checking the age is 21 or older then you need to write [custom policy handlers](xref:security/authorization/policies).
+Wenn Sie kompliziertere Richtlinien erstellen möchten, z. b. das Erstellen eines Geburts Geburts Anspruchs, das Berechnen eines Alters aus diesem und das überprüfen, ob das Alter 21 oder älter ist, müssen Sie [benutzerdefinierte Richtlinien Handler](xref:security/authorization/policies)schreiben.

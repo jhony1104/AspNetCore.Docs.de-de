@@ -7,11 +7,11 @@ ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
 ms.openlocfilehash: 15f94fd1c619e9f69c5783f664eafc9ca28f86f9
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239858"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652855"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Taghilfsprogramme in ASP.NET Core
 
@@ -27,7 +27,7 @@ Taghilfsprogramme ermöglichen serverseitigem Code das Mitwirken am Erstellen un
 
 **Eine umfassende IntelliSense-Umgebung zum Erstellen von HTML und Razor-Markup** Dies stellt einen starken Kontrast zu HTML-Hilfsprogrammen dar – dem vorherigen Ansatz zum Erstellen von Markup in Razor-Ansichten auf Serverseite. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert. Im Abschnitt [IntelliSense-Unterstützung für Taghilfsprogramme](#intellisense-support-for-tag-helpers) wird die IntelliSense-Umgebung beschrieben. Sogar Entwickler, die sich gut mit der Razor C#-Syntax auskennen, können mit Taghilfsprogrammen produktiver arbeiten als wenn sie C#-Razor-Markup schreiben würden.
 
-**Produktiveres Arbeiten und Erstellen von stabilerem, zuverlässigerem und verwaltbarem Code mithilfe von Informationen, die nur auf dem Server verfügbar sind** Beispielsweise galt in der Vergangenheit für das Aktualisieren von Bildern, dass auch der Name des Bildes geändert werden muss, wenn das Bild geändert wurde. Bilder sollten zur Verbesserung der Leistung immer zwischengespeichert werden, denn wenn Sie nicht den Namen des Bildes ändern, kann es sein, dass Clients veraltete Kopien erhalten. In der Vergangenheit musste der Name des Bildes immer geändert werden, wenn dieses bearbeitet wurde, und jeder Verweis auf das Bild in der Web-App musste aktualisiert werden. Dies ist nicht nur ein sehr aufwendiges Verfahren, sondern auch eins, bei dem Fehler entstehen können. Sie könnten z.B. einen Verweis übersehen oder aus Versehen die falsche Zeichenfolge eingeben. Der integrierte `ImageTagHelper` führt dieses Verfahren automatisch durch. Das `ImageTagHelper`-Taghilfsprogramm kann eine Versionsnummer an den Bildnamen anfügen. Das bedeutet, dass der Server bei jeder Änderung eine neue eindeutige Version für das Bild generiert. Clients erhalten dann immer das aktuelle Bild. Die Verwendung des `ImageTagHelper` ist grundsätzlich kostenlos, bietet mehr Stabilität, und Sie sparen Zeit.
+**Produktiveres Arbeiten und Erstellen von stabilerem, zuverlässigerem und verwaltbarem Code mithilfe von Informationen, die nur auf dem Server verfügbar sind** Beispielsweise galt in der Vergangenheit für das Aktualisieren von Bildern, dass auch der Name des Bildes geändert werden muss, wenn das Bild geändert wurde. Bilder sollten zur Verbesserung der Leistung immer zwischengespeichert werden, denn wenn Sie nicht den Namen des Bildes ändern, kann es sein, dass Clients veraltete Kopien erhalten. In der Vergangenheit musste der Name des Bildes immer geändert werden, wenn dieses bearbeitet wurde, und jeder Verweis auf das Bild in der Web-App musste aktualisiert werden. Dies ist nicht nur sehr arbeitsintensiv, sondern auch fehleranfällig (Sie könnten einen Verweis übersehen, versehentlich die falsche Zeichenfolge eingeben usw.) Das integrierte `ImageTagHelper` kann dies automatisch für Sie ausführen. Das `ImageTagHelper`-Taghilfsprogramm kann eine Versionsnummer an den Bildnamen anfügen. Das bedeutet, dass der Server bei jeder Änderung eine neue eindeutige Version für das Bild generiert. Clients erhalten dann immer das aktuelle Bild. Die Verwendung des `ImageTagHelper` ist grundsätzlich kostenlos, bietet mehr Stabilität, und Sie sparen Zeit.
 
 Die meisten integrierten Taghilfsprogramme sind für HTML-Standardelemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit. Das `<input>`-Element, das in vielen Ansichten im Ordner *Views/Accounts* (Ansichten/Konten) verwendet wird, enthält beispielsweise das `asp-for`-Attribut. Dieses Attribut extrahiert den Namen der angegebenen Modelleigenschaft, und fügt diesen in die gerenderte HTML-Seite ein. Gehen Sie von einer Razor-Ansicht mit folgendem Modell aus:
 
@@ -48,7 +48,7 @@ Das folgende Razor-Markup
 <label asp-for="Movie.Title"></label>
 ```
 
-wird der folgende HTML-Code generiert:
+generiert den folgenden HTML-Code:
 
 ```html
 <label for="Movie_Title">Title</label>
@@ -89,7 +89,7 @@ Wenn Sie einer Ansicht über einen vollqualifizierten Namen ein Taghilfsprogramm
 @addTagHelper AuthoringTagHelpers.TagHelpers.Email*, AuthoringTagHelpers
 ```
 
-Wie obenstehend bereits erwähnt, ist das Taghilfsprogramm für alle Ansichtsdateien im *Views*-Verzeichnis bzw. -Unterverzeichnis verfügbar, wenn Sie die `@addTagHelper`-Anweisung der Datei *Views/_ViewImports.cshtml* hinzufügen. Sie können die `@addTagHelper`-Anweisung in bestimmten Ansichtsdateien verwenden, wenn Sie festlegen möchten, dass das Taghilfsprogramm nur für diese Ansichten verfügbar ist.
+Wie obenstehend bereits erwähnt, ist das Taghilfsprogramm für alle Ansichtsdateien im `@addTagHelper`Views *-Verzeichnis bzw. -Unterverzeichnis verfügbar, wenn Sie die* -Anweisung der Datei *Views/_ViewImports.cshtml* hinzufügen. Sie können die `@addTagHelper`-Anweisung in bestimmten Ansichtsdateien verwenden, wenn Sie festlegen möchten, dass das Taghilfsprogramm nur für diese Ansichten verfügbar ist.
 
 <a name="remove-razor-directives-label"></a>
 
@@ -125,13 +125,13 @@ Mithilfe der `@tagHelperPrefix`-Anweisung können Sie ein Tagpräfix angeben, um
 
 Im nachfolgend Codebild ist das Präfix des Taghilfsprogramms auf `th:` festgelegt, sodass nur die Elemente, die das Präfix `th:` verwenden, Taghilfsprogramme unterstützen (Elemente, für die Taghilfsprogramme aktiviert sind, werden in einer anderen Schriftart dargestellt). Die Elemente `<label>` und `<input>` enthalten das Präfix des Taghilfsprogramms. Für sie sind Taghilfsprogramme aktiviert, für das Element `<span>` hingegen nicht.
 
-![Bild](intro/_static/thp.png)
+![image](intro/_static/thp.png)
 
 Für `@addTagHelper` gelten dieselben Hierarchieregeln wie für `@tagHelperPrefix`.
 
 ## <a name="self-closing-tag-helpers"></a>Taghilfsprogramme als selbstschließende Tags
 
-Viele Taghilfsprogramme können nicht als selbstschließende Tags verwendet werden. Einige Taghilfsprogramme sind als selbstschließende Tags konzipiert. Wenn Sie ein Taghilfsprogramm verwenden, das nicht als selbstschließendes Tag konzipiert ist, wird die gerenderte Ausgabe unterdrückt. Wenn Sie ein als selbstschließendes Tag konzipiertes Taghilfsprogramm verwenden, werden selbstschließende Tags in der gerenderten Ausgabe verwendet. Weitere Informationen finden Sie unter [Erstellen von Taghilfsprogrammen in ASP.NET Core](xref:mvc/views/tag-helpers/authoring) in [diesem Hinweis](xref:mvc/views/tag-helpers/authoring#self-closing).
+Viele Taghilfsprogramme können nicht als selbstschließende Tags verwendet werden. Einige Taghilfsprogramme sind als selbstschließende Tags konzipiert. Wenn Sie ein Taghilfsprogramm verwenden, das nicht als selbstschließendes Tag konzipiert ist, wird die gerenderte Ausgabe unterdrückt. Wenn Sie ein als selbstschließendes Tag konzipiertes Taghilfsprogramm verwenden, werden selbstschließende Tags in der gerenderten Ausgabe verwendet. Weitere Informationen finden Sie unter [Erstellen von Taghilfsprogrammen in ASP.NET Core](xref:mvc/views/tag-helpers/authoring#self-closing) in [diesem Hinweis](xref:mvc/views/tag-helpers/authoring).
 
 ## <a name="c-in-tag-helpers-attributedeclaration"></a>C# in Attributen/der Deklaration von Taghilfsprogrammen 
 
@@ -155,39 +155,39 @@ Wenn Sie eine neue ASP.NET Core-Web-App in Visual Studio erstellen, wird das NuG
 
 Sie sollten ein HTML-`<label>`-Element schreiben. Wenn Sie `<l` im Visual Studio-Editor eingeben, zeigt IntelliSense passende Elemente an:
 
-![Bild](intro/_static/label.png)
+![image](intro/_static/label.png)
 
 Sie erhalten nicht nur Hilfe für HTML, sondern es wird auch das Symbol „@" symbol with "“ mit <> darunter angezeigt.
 
-![Bild](intro/_static/tagSym.png)
+![image](intro/_static/tagSym.png)
 
 Erkennt das Element als für Taghilfsprogramme konzipiert an. Für reine HTML-Elemente wie `fieldset` wird das Symbol „<>“ angezeigt.
 
 Ein reines HTML-`<label>`-Tag zeigt das HTML-Tag (im Standardfarbdesign von Visual Studio) in braun, die Attribute in rot und die Attributwerte in blau an.
 
-![Bild](intro/_static/LableHtmlTag.png)
+![image](intro/_static/LableHtmlTag.png)
 
 Wenn Sie `<label` eingeben, listet IntelliSense die verfügbaren HTML/CSS-Attribute und die für Taghilfsprogramme konzipierten Attribute auf:
 
-![Bild](intro/_static/labelattr.png)
+![image](intro/_static/labelattr.png)
 
 Aufgrund der Anweisungsvervollständigung von IntelliSense können Sie die TAB-Taste drücken, um die Anweisung mit dem ausgewählten Wert zu vervollständigen:
 
-![Bild](intro/_static/stmtcomplete.png)
+![image](intro/_static/stmtcomplete.png)
 
 Wenn ein Taghilfsprogrammattribut eingegeben wird, ändern sich die Schriftarten des Tags und des Attributs. Wenn Sie das Standardfarbdesign von Visual Studio verwenden („Blau“ oder „Hell“), wird die Schrift in dunkellila angezeigt. Wenn Sie das Design „Dunkel“ verwenden, wird die Schrift in einem dunklen blaugrün angezeigt. Für die in diesem Artikel dargestellten Bilder wurde das Standarddesign verwendet.
 
-![Bild](intro/_static/labelaspfor2.png)
+![image](intro/_static/labelaspfor2.png)
 
 Sie können die Visual Studio-Verknüpfung *CompleteWord* verwenden ([standardmäßig](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio) STRG+LEERTASTE in doppelten Anführungszeichen (""), und jetzt befinden Sie sich genauso wie in einer C#-Klasse in C#). IntelliSense zeigt alle Methoden und Eigenschaften auf dem Seitenmodell an. Die Methoden und Eigenschaften sind verfügbar, weil der Eigenschaftentyp `ModelExpression` ist. Im nachfolgenden Beispiel wird die `Register`-Ansicht bearbeitet, damit das `RegisterViewModel` verfügbar ist.
 
-![Bild](intro/_static/intellemail.png)
+![image](intro/_static/intellemail.png)
 
 IntelliSense listet die Eigenschaften und Methoden auf, die für das Modell auf der Seite verfügbar sind. Mithilfe der umfassenden IntelliSense-Umgebung können Sie die CSS-Klasse auswählen:
 
-![Bild](intro/_static/iclass.png)
+![image](intro/_static/iclass.png)
 
-![Bild](intro/_static/intel3.png)
+![image](intro/_static/intel3.png)
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich
 
@@ -213,13 +213,13 @@ Wenn Sie das `LabelTagHelper`-Taghilfsprogramm verwenden, kann dasselbe Markup w
 
 Wenn Sie die Taghilfsprogrammversion verwenden und `<l` im Visual Studio-Editor eingeben, zeigt IntelliSense passende Elemente an:
 
-![Bild](intro/_static/label.png)
+![image](intro/_static/label.png)
 
 Mithilfe von IntelliSense können Sie die gesamte Zeile schreiben.
 
 Im folgenden Codeausschnitt wird der Formularteil der *Views/Account/Register.cshtml*-Razor-Ansicht angezeigt, der über die ASP.NET Core 4.5.x MVC-Vorlage generiert wird, die in Visual Studio enthalten ist.
 
-![Bild](intro/_static/regCS.png)
+![image](intro/_static/regCS.png)
 
 Der Visual Studio-Editor zeigt C#-Code vor grauem Hintergrund an. Z.B. wird das `AntiForgeryToken`-HTML-Hilfsprogramm
 
@@ -229,7 +229,7 @@ Der Visual Studio-Editor zeigt C#-Code vor grauem Hintergrund an. Z.B. wird das 
 
 vor grauem Hintergrund angezeigt. Ein Großteil des Markups in der Registeransicht ist in C# geschrieben. Zum Vergleich wird in der folgenden Abbildung der entsprechende Ansatz unter Verwendung von Taghilfsprogrammen dargestellt:
 
-![Bild](intro/_static/regTH.png)
+![image](intro/_static/regTH.png)
 
 Das Markup ist viel deutlicher und kann einfacher gelesen, bearbeitet und verwaltet werden als im Ansatz über das HTML-Hilfsprogramm. Der C#-Code ist auf die mindestens erforderlichen Informationen begrenzt, die der Server benötigt. Der Visual Studio-Editor zeigt Markup an, das von einem Taghilfsprogramm in einer anderen Schriftart angezeigt wird.
 
@@ -263,7 +263,7 @@ Mithilfe des Visual Studio-Editors können Sie das **gesamte** Markup im Taghilf
 
 Sie können die Schriftart und die Farben über **Extras** > **Optionen** > **Umgebung** > **Schriftarten und Farben** anpassen:
 
-![Bild](intro/_static/fontoptions2.png)
+![image](intro/_static/fontoptions2.png)
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 

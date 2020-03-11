@@ -1,18 +1,18 @@
 ---
-title: Kryptografieerweiterbarkeit in Core in ASP.NET Core
+title: Zentrale kryptografieerweiterbarkeit in ASP.net Core
 author: rick-anderson
-description: Informationen Sie zu IAuthenticatedEncryptor, IAuthenticatedEncryptorDescriptor, IAuthenticatedEncryptorDescriptorDeserializer und der obersten Ebene Factory.
+description: Erfahren Sie mehr über iauthenticatedencryptor, iauthenticatedencryptordescriptor, iauthenticatedencryptordescriptordeserializer und die Factory der obersten Ebene.
 ms.author: riande
 ms.date: 08/11/2017
 uid: security/data-protection/extensibility/core-crypto
 ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814703"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653545"
 ---
-# <a name="core-cryptography-extensibility-in-aspnet-core"></a>Kryptografieerweiterbarkeit in Core in ASP.NET Core
+# <a name="core-cryptography-extensibility-in-aspnet-core"></a>Zentrale kryptografieerweiterbarkeit in ASP.net Core
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
@@ -23,31 +23,31 @@ ms.locfileid: "67814703"
 
 ## <a name="iauthenticatedencryptor"></a>IAuthenticatedEncryptor
 
-Die **IAuthenticatedEncryptor** Schnittstelle ist der grundlegende Baustein des kryptografischen Subsystems. In der Regel eine IAuthenticatedEncryptor pro Schlüssel vorhanden ist, und die IAuthenticatedEncryptor Instanz dient als Wrapper für alle kryptografische Schlüsseldaten und algorithmische Informationen, die zum Ausführen kryptografischer Vorgänge erforderlich sind.
+Die **iauthenticatedencryptor** -Schnittstelle ist der Grundbaustein des kryptografischen Subsystems. Im Allgemeinen gibt es einen iauthenticatedencryptor pro Schlüssel, und die Instanz iauthenticatedencryptor umschließt sämtliche kryptografieschlüsselmaterialien und algorithmische Informationen, die für die Durchführung kryptografischer Vorgänge erforderlich sind.
 
-Wie der Name schon sagt, ist der Typ für die Bereitstellung des authentifizierten Ver- und Entschlüsselung Dienste verantwortlich. Er macht die folgenden zwei APIs verfügbar.
+Wie der Name bereits vermuten lässt, ist der Typ für die Bereitstellung von authentifizierten Verschlüsselungs-und Entschlüsselungs Diensten verantwortlich. Es werden die folgenden zwei APIs verfügbar gemacht.
 
 * `Decrypt(ArraySegment<byte> ciphertext, ArraySegment<byte> additionalAuthenticatedData) : byte[]`
 
 * `Encrypt(ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData) : byte[]`
 
-Die Encrypt-Methode gibt ein Blob, das dazu nur-Text und ein authentifizierungstag enthält. Das authentifizierungstag muss die zusätzlichen authentifizierten Daten (AAD) umfassen, obwohl die AAD selbst nicht aus der letzten Nutzlast wiederhergestellt werden muss. Die Decrypt-Methode überprüft das authentifizierungstag und die deciphered Nutzlast zurückgegeben. Alle Fehler auf (mit Ausnahme von "ArgumentNullException" und ähnlich) sollte auf CryptographicException antibiotischem sein.
+Die Methode "verschlüsseln" gibt ein BLOB zurück, das den verschlüsselten Klartext und ein authentifizierungstag enthält. Das authentifizierungstag muss die zusätzlichen authentifizierten Daten (AAD) umfassen, obwohl das Aad-Element von der endgültigen Nutzlast nicht wieder hergestellt werden muss. Die Entschlüsselungsmethode überprüft das authentifizierungstag und gibt die entschlüsselte Nutzlast zurück. Alle Fehler (außer ArgumentNullException und ähnlich) sollten zu CryptographicException homogenisiert werden.
 
 > [!NOTE]
-> Die IAuthenticatedEncryptor-Instanz selbst gar nicht wirklich das Schlüsselmaterial enthält. Die Implementierung könnte z. B. in ein HSM für alle Vorgänge delegieren.
+> Die iauthenticatedencryptor-Instanz selbst muss das Schlüsselmaterial nicht enthalten. Die-Implementierung könnte z. b. für alle Vorgänge einen Delegaten an ein HSM delegieren.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptorfactory"></a>
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor"></a>
 
-## <a name="how-to-create-an-iauthenticatedencryptor"></a>Vorgehensweise: Erstellen einer IAuthenticatedEncryptor
+## <a name="how-to-create-an-iauthenticatedencryptor"></a>Erstellen eines iauthenticatedencryptor
 
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-Die **IAuthenticatedEncryptorFactory** Schnittstelle darstellt, einen Typ, der weiß, wie Sie erstellen eine [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) Instanz. Die API lautet wie folgt aus:
+Die **iauthenticatedencryptorfactory** -Schnittstelle stellt einen Typ dar, der weiß, wie eine [iauthenticatedencryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) -Instanz erstellt wird. Die API ist wie folgt.
 
-* CreateEncryptorInstance ("iKey" Key): IAuthenticatedEncryptor
+* "Kreateverschlüsseltorinstance" (iKey-Schlüssel): "iauthenticatedencryptor"
 
-Für jede bestimmte Instanz "iKey" alle authentifizierten lehnen die CreateEncryptorInstance-Methode erstellt sollte als äquivalent betrachtet, wie in der unten stehende Codebeispiel.
+Für eine bestimmte iKey-Instanz sollten alle authentifizierten Verschlüsselungsmethoden, die von der-Methode von der-Methode erstellt wurden, als Äquivalent angesehen werden, wie im folgenden Codebeispiel gezeigt.
 
 ```csharp
 // we have an IAuthenticatedEncryptorFactory instance and an IKey instance
@@ -68,15 +68,15 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 // the 'roundTripped' and 'plaintext' buffers should be equivalent
 ```
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-Die **IAuthenticatedEncryptorDescriptor** Schnittstelle darstellt, einen Typ, der weiß, wie Sie erstellen eine [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) Instanz. Die API lautet wie folgt aus:
+Die **iauthenticatedencryptordescriptor** -Schnittstelle stellt einen Typ dar, der weiß, wie eine [iauthenticatedencryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) -Instanz erstellt wird. Die API ist wie folgt.
 
-* CreateEncryptorInstance() : IAuthenticatedEncryptor
+* "Kreateverschlüsseltorinstance ()": "iauthenticatedencryptor"
 
-* ExportToXml() : XmlSerializedDescriptorInfo
+* Exporttoxml (): xmlserializeddescriptorinfo
 
-Wie IAuthenticatedEncryptor wird angenommen, dass eine Instanz von IAuthenticatedEncryptorDescriptor um einen bestimmten Schlüssel zu umschließen. Dies bedeutet, dass für jede bestimmte Instanz IAuthenticatedEncryptorDescriptor alle authentifizierten lehnen die CreateEncryptorInstance-Methode erstellt wie im entsprechenden berücksichtigt werden sollte dem folgenden Codebeispiel.
+Wie bei iauthenticatedencryptor wird angenommen, dass eine Instanz von iauthenticatedencryptordescriptor einen bestimmten Schlüssel packt. Dies bedeutet, dass für jede beliebige iauthenticatedencryptordescriptor-Instanz alle authentifizierten Verschlüsselungsmethoden, die von der Methode "itateverschlüsseltorinstance" erstellt wurden, als Äquivalent angesehen werden, wie im folgenden Codebeispiel gezeigt.
 
 ```csharp
 // we have an IAuthenticatedEncryptorDescriptor instance
@@ -100,76 +100,76 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor"></a>
 
-## <a name="iauthenticatedencryptordescriptor-aspnet-core-2x-only"></a>IAuthenticatedEncryptorDescriptor ((ASP.NET Core 2.x nur)
+## <a name="iauthenticatedencryptordescriptor-aspnet-core-2x-only"></a>Iauthenticatedencryptordescriptor (nur ASP.net Core 2. x)
 
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-Die **IAuthenticatedEncryptorDescriptor** Schnittstelle darstellt, einen Typ, der weiß, wie Sie selbst nach XML exportieren. Die API lautet wie folgt aus:
+Die **iauthenticatedencryptordescriptor** -Schnittstelle stellt einen Typ dar, der weiß, wie er sich selbst in XML exportieren kann. Die API ist wie folgt.
 
-* ExportToXml() : XmlSerializedDescriptorInfo
+* Exporttoxml (): xmlserializeddescriptorinfo
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 ---
 
 ## <a name="xml-serialization"></a>XML-Serialisierung
 
-Der Hauptunterschied zwischen IAuthenticatedEncryptor und IAuthenticatedEncryptorDescriptor ist, dass der Deskriptor weiß, wie die Verschlüsselung zu erstellen, und klicken Sie mit gültigen Argumente bereitstellen. Erwägen Sie eine IAuthenticatedEncryptor SymmetricAlgorithm und KeyedHashAlgorithm, deren Implementierung abhängig. Die Verschlüsselungsmethode für die Aufgabe besteht darin, diese Typen nutzen, aber er weiß nicht unbedingt, in denen diese Typen stammen, damit sie wirklich keiner entsprechenden Beschreibung zum selbst neu zu erstellen schreiben kann, wenn die Anwendung neu gestartet wird. Der Deskriptor fungiert als eine höhere Sicherheitsstufe als Ergänzung. Da der Deskriptor weiß, wie die Verschlüsselung-Instanz zu erstellen (z. B. er weiß, wie die erforderlichen Algorithmen zu erstellen), können sie dieses Wissen im XML-Format serialisieren, damit die Verschlüsselung-Instanz wiederhergestellt werden kann, nachdem eine Anwendung zurückgesetzt.
+Der primäre Unterschied zwischen iauthenticatedencryptor und iauthenticatedencryptordescriptor besteht darin, dass der Deskriptor weiß, wie die Verschlüsselung erstellt und mit gültigen Argumenten bereitgestellt wird. Beachten Sie einen iauthenticatedencryptor, dessen Implementierung von SymmetricAlgorithm und KeyedHashAlgorithm abhängig ist. Der Verschlüsselungstyp ist für die Verwendung dieser Typen, aber es ist nicht unbedingt bekannt, woher diese Typen stammen. es ist daher nicht möglich, eine korrekte Beschreibung zu erstellen, wenn die Anwendung neu gestartet wird. Der Deskriptor fungiert oberhalb dieses als eine höhere Ebene. Da der Deskriptor weiß, wie die Verschlüsselungs Instanz erstellt wird (z. b. er weiß, wie die erforderlichen Algorithmen erstellt werden), kann er dieses Wissen in XML-Form serialisieren, sodass die Verschlüsselungs Instanz nach dem Zurücksetzen einer Anwendung neu erstellt werden kann.
 
 <a name="data-protection-extensibility-core-crypto-exporttoxml"></a>
 
-Der Deskriptor kann über die Routine ExportToXml serialisiert werden. Diese Routine gibt ein XmlSerializedDescriptorInfo enthält zwei Eigenschaften: die "XElement"-Darstellung des Deskriptors und den Typ steht für ein [IAuthenticatedEncryptorDescriptorDeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) kann verwendet, um diesen Deskriptor, erhält der entsprechende "XElement" erwecken.
+Der Deskriptor kann über seine exporttoxml-Routine serialisiert werden. Diese Routine gibt ein xmlserializeddescriptorinfo-Element zurück, das zwei Eigenschaften enthält: die XElement-Darstellung des Deskriptors und den Typ, der ein [iauthenticatedencryptordescriptordeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) -Element darstellt, das verwendet werden kann, um diesen Deskriptor mit dem entsprechenden XElement wiederzuverwenden.
 
-Der serialisierte Deskriptor enthalten möglicherweise vertrauliche Informationen wie z. B. kryptografische Schlüsseldaten. Das System zum Schutz von Daten verfügt über integrierte Unterstützung für das Verschlüsseln von Informationen, bevor es in den Speicher dauerhaft gespeichert wird. Um diesen Vorteil nutzen zu können, sollte der Deskriptor markieren Sie das Element enthält sensiblen Informationen mit dem Attribut namens "" RequiresEncryption"" (Xmlns "<http://schemas.asp.net/2015/03/dataProtection>"), Wert "true".
+Der serialisierte Deskriptor kann vertrauliche Informationen, wie z. b. kryptografieschlüsselmaterial, enthalten. Das Datenschutzsystem verfügt über eine integrierte Unterstützung für die Verschlüsselung von Informationen, bevor Sie im Speicher gespeichert werden. Um dies zu nutzen, sollte der Deskriptor das Element markieren, das vertrauliche Informationen mit dem Attributnamen "Requirements sencryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>"), Wert "true" enthält.
 
 >[!TIP]
-> Für das Festlegen dieses Attributs ist ein Hilfs-API verfügbar. Rufen Sie die Erweiterungsmethode XElement.MarkAsRequiresEncryption() im Namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel befindet.
+> Es gibt eine hilfsprogrammapi zum Festlegen dieses Attributs. Aufrufen der Erweiterungsmethode "XElement. markasrequirements sencryption ()", die sich im Namespace "Microsoft. aspnetcore. dataprotection. authenticatedencryption. configurationmodel" befindet.
 
-Es kann auch Fälle, in dem der serialisierte Deskriptor vertraulichen Informationen enthalten, nicht, vorhanden sein. Betrachten Sie erneut den Fall eines kryptografischen Schlüssels, der in einem HSM gespeichert. Der Deskriptor kann nicht beim selbst serialisieren, da das HSM für das Material in unverschlüsselter Form verfügbar machen wird nicht das Schlüsselmaterial geschrieben. Stattdessen kann der Deskriptor schreiben, die Schlüssel Wrapper-Version des Schlüssels (wenn das HSM Export auf diese Weise kann) oder den HSMs-Bezeichner für den Schlüssel.
+Es können auch Fälle geben, in denen der serialisierte Deskriptor keine vertraulichen Informationen enthält. Beachten Sie erneut den Fall eines Kryptografieschlüssels, der in einem HSM gespeichert ist. Der Deskriptor kann das Schlüsselmaterial bei der Serialisierung nicht schreiben, da das HSM das Material nicht in Klartext-Form verfügbar macht. Stattdessen schreibt der Deskriptor möglicherweise die Schlüssel umschließende Version des Schlüssels (wenn das HSM auf diese Weise exportiert werden kann) oder den eigenen eindeutigen Bezeichner des HSM für den Schlüssel.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer"></a>
 
 ## <a name="iauthenticatedencryptordescriptordeserializer"></a>IAuthenticatedEncryptorDescriptorDeserializer
 
-Die **IAuthenticatedEncryptorDescriptorDeserializer** Schnittstelle darstellt, einen Typ, der weiß, wie Sie eine Instanz eines "XElement" IAuthenticatedEncryptorDescriptor zu deserialisieren. Sie macht eine einzelne Methode verfügbar:
+Die **iauthenticatedencryptordescriptordeserializer** -Schnittstelle stellt einen Typ dar, der weiß, wie eine iauthenticatedencryptordescriptor-Instanz aus einem XElement-Element deserialisiert werden kann. Es macht eine einzelne Methode verfügbar:
 
-* ImportFromXml ("XElement"-Element): IAuthenticatedEncryptorDescriptor
+* Importfromxml (XElement-Element): iauthenticatedencryptordescriptor
 
-Die ImportFromXml-Methode akzeptiert die "XElement", die von zurückgegeben wurde [IAuthenticatedEncryptorDescriptor.ExportToXml](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-exporttoxml) und eine entsprechende von der ursprünglichen IAuthenticatedEncryptorDescriptor erstellt.
+Die importfromxml-Methode übernimmt das XElement, das von [iauthenticatedencryptordescriptor. exporttoxml](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-exporttoxml) zurückgegeben wurde, und erstellt eine Entsprechung des ursprünglichen iauthenticatedencryptordescriptor.
 
-Die IAuthenticatedEncryptorDescriptorDeserializer implementieren sollte eine der folgenden zwei öffentliche Konstruktoren aufweisen:
+Typen, die iauthenticatedencryptordescriptordeserializer implementieren, sollten einen der folgenden zwei öffentlichen Konstruktoren aufweisen:
 
 * .ctor(IServiceProvider)
 
 * .ctor()
 
 > [!NOTE]
-> Der an den Konstruktor übergebene IServiceProvider kann null sein.
+> Der an den Konstruktor übergeben "IServiceProvider" ist möglicherweise NULL.
 
 ## <a name="the-top-level-factory"></a>Die Factory der obersten Ebene
 
-# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-Die **AlgorithmConfiguration** Klasse stellt einen Typ, der weiß, wie Sie erstellen [IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) Instanzen. Er macht eine einzelne API verfügbar.
+Die **algorithmconfiguration** -Klasse stellt einen Typ dar, der weiß, wie [iauthenticatedencryptordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) -Instanzen erstellt werden. Es macht eine einzelne API verfügbar.
 
-* CreateNewDescriptor() : IAuthenticatedEncryptorDescriptor
+* "Kreatenewdescriptor ()": iauthenticatedencryptordescriptor
 
-Stellen Sie sich AlgorithmConfiguration als Factory der obersten Ebene. Die Konfiguration dient als Vorlage. Umschlossene algorithmische Informationen (z. B. diese Konfiguration erzeugt Deskriptoren mit einem Hauptschlüssel AES-128-GCM), aber es wurde noch nicht mit einem bestimmten Schlüssel verknüpft.
+Stellen Sie sich algorithmconfiguration als Factory der obersten Ebene vor. Die Konfiguration dient als Vorlage. Er umschließt algorithmische Informationen (z. b., diese Konfiguration erzeugt Deskriptoren mit einem AES-128-GCM-Hauptschlüssel), ist aber noch keinem bestimmten Schlüssel zugeordnet.
 
-Wenn CreateNewDescriptor aufgerufen wird, neues des Schlüsselmaterials ausschließlich für diesen Aufruf erstellt wird und eine neue IAuthenticatedEncryptorDescriptor erzeugt wird umschließt die diesem Schlüsselmaterial sowie die algorithmische Informationen erforderlich, um das Material zu verwenden. Das Schlüsselmaterial konnte in der Software erstellt (und im Arbeitsspeicher gespeichert werden), es erstellt und in einem HSM usw. gespeichert werden konnte. Der entscheidende Punkt ist, dass zwei Aufrufe CreateNewDescriptor nie entsprechende IAuthenticatedEncryptorDescriptor-Instanzen erstellen soll.
+Wenn "kreatenewdescriptor" aufgerufen wird, wird das neue Schlüsselmaterial ausschließlich für diesen Aufruf erstellt, und es wird ein neuer "iauthenticatedencryptordescriptor" erstellt, der dieses Schlüsselmaterial und die algorithmischen Informationen umschließt, die zur Nutzung des Materials erforderlich sind. Das Schlüsselmaterial kann in der Software erstellt werden (und im Arbeitsspeicher gespeichert), es kann erstellt und in einem HSM gespeichert werden usw. Der entscheidende Punkt ist, dass bei zwei Aufrufen von "" für "" "" "" "" "" "" "" "" "" "".
 
-Welche AlgorithmConfiguration dient als Einstiegspunkt für die schlüsselerstellung Routinen wie z. B. [automatische schlüsselrollover](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling). Um die Implementierung für alle zukünftigen Schlüssel zu ändern, legen Sie die AuthenticatedEncryptorConfiguration-Eigenschaft in KeyManagementOptions aus.
+Der algorithmconfiguration-Typ dient als Einstiegspunkt für Schlüssel Erstellungs Routinen wie [Automatisches Rollback von Schlüsseln](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling). Um die Implementierung für alle zukünftigen Schlüssel zu ändern, legen Sie die authenticatedencryptorconfiguration-Eigenschaft in keymanagementoptions fest.
 
-# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-Die **IAuthenticatedEncryptorConfiguration** Schnittstelle darstellt, einen Typ, der weiß, wie Sie erstellen [IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) Instanzen. Er macht eine einzelne API verfügbar.
+Die **iauthenticatedencryptorconfiguration** -Schnittstelle stellt einen Typ dar, der weiß, wie [iauthenticatedencryptordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) -Instanzen erstellt werden. Es macht eine einzelne API verfügbar.
 
-* CreateNewDescriptor() : IAuthenticatedEncryptorDescriptor
+* "Kreatenewdescriptor ()": iauthenticatedencryptordescriptor
 
-Stellen Sie sich IAuthenticatedEncryptorConfiguration als Factory der obersten Ebene. Die Konfiguration dient als Vorlage. Umschlossene algorithmische Informationen (z. B. diese Konfiguration erzeugt Deskriptoren mit einem Hauptschlüssel AES-128-GCM), aber es wurde noch nicht mit einem bestimmten Schlüssel verknüpft.
+Betrachten Sie iauthenticatedencryptor Configuration als Factory der obersten Ebene. Die Konfiguration dient als Vorlage. Er umschließt algorithmische Informationen (z. b., diese Konfiguration erzeugt Deskriptoren mit einem AES-128-GCM-Hauptschlüssel), ist aber noch keinem bestimmten Schlüssel zugeordnet.
 
-Wenn CreateNewDescriptor aufgerufen wird, neues des Schlüsselmaterials ausschließlich für diesen Aufruf erstellt wird und eine neue IAuthenticatedEncryptorDescriptor erzeugt wird umschließt die diesem Schlüsselmaterial sowie die algorithmische Informationen erforderlich, um das Material zu verwenden. Das Schlüsselmaterial konnte in der Software erstellt (und im Arbeitsspeicher gespeichert werden), es erstellt und in einem HSM usw. gespeichert werden konnte. Der entscheidende Punkt ist, dass zwei Aufrufe CreateNewDescriptor nie entsprechende IAuthenticatedEncryptorDescriptor-Instanzen erstellen soll.
+Wenn "kreatenewdescriptor" aufgerufen wird, wird das neue Schlüsselmaterial ausschließlich für diesen Aufruf erstellt, und es wird ein neuer "iauthenticatedencryptordescriptor" erstellt, der dieses Schlüsselmaterial und die algorithmischen Informationen umschließt, die zur Nutzung des Materials erforderlich sind. Das Schlüsselmaterial kann in der Software erstellt werden (und im Arbeitsspeicher gespeichert), es kann erstellt und in einem HSM gespeichert werden usw. Der entscheidende Punkt ist, dass bei zwei Aufrufen von "" für "" "" "" "" "" "" "" "" "" "".
 
-Welche IAuthenticatedEncryptorConfiguration dient als Einstiegspunkt für die schlüsselerstellung Routinen wie z. B. [automatische schlüsselrollover](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling). Um die Implementierung für alle zukünftigen Schlüssel zu ändern, registrieren Sie einen Singleton IAuthenticatedEncryptorConfiguration im Dienstcontainer.
+Der iauthenticatedencryptor Configuration-Typ dient als Einstiegspunkt für Schlüssel Erstellungs Routinen wie [Automatisches Rollback von Schlüsseln](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling). Um die Implementierung für alle zukünftigen Schlüssel zu ändern, registrieren Sie eine Singleton-iauthenticatedencryptorconfiguration im Dienst Container.
 
 ---

@@ -1,40 +1,40 @@
 ---
-title: Authentifizierte Verschlüsselungsdetails in ASP.NET Core
+title: Details zu authentifizierten Verschlüsselung in ASP.net Core
 author: rick-anderson
-description: Erfahren Sie Details zur Implementierung der Verschlüsselung von ASP.NET Core-Datenschutz authentifiziert.
+description: Erfahren Sie mehr über die Implementierungsdetails ASP.net Core authentifizierte Verschlüsselung für den Datenschutz.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/authenticated-encryption-details
 ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64896627"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655003"
 ---
-# <a name="authenticated-encryption-details-in-aspnet-core"></a>Authentifizierte Verschlüsselungsdetails in ASP.NET Core
+# <a name="authenticated-encryption-details-in-aspnet-core"></a>Details zu authentifizierten Verschlüsselung in ASP.net Core
 
 <a name="data-protection-implementation-authenticated-encryption-details"></a>
 
-Aufrufe von IDataProtector.Protect sind authentifizierte Verschlüsselung von Vorgängen. Die Protect-Methode bietet sowohl Vertraulichkeit und Authentizität, und es gebunden an die Kette von Zweck, die zum Ableiten von dieser bestimmten Instanz des IDataProtector ab dessen Stammverzeichnis IDataProtectionProvider verwendet wurde.
+Aufrufe von idataprotector. Protect sind authentifizierte Verschlüsselungs Vorgänge. Die Protect-Methode bietet sowohl Vertraulichkeit als auch Authentizität und ist an die Zweck Kette gebunden, die zum Ableiten dieser speziellen idataprotector-Instanz von Ihrem idataprotection Provider-Stamm verwendet wurde.
 
-IDataProtector.Protect nimmt einen Byte []-nur-Text-Parameter auf und erzeugt eine Byte [] geschützte Nutzlast, deren Format nachfolgend genauer beschrieben wird. (Es gibt auch eine Überladung der Erweiterung-Methode verwendet einen Zeichenfolgenparameter für nur-Text, und gibt Sie eine geschützte Zeichenfolge-Nutzlast zurück. Wenn diese API verwendet wird das geschützte nutzlastformat haben weiterhin die unterhalb der Struktur, aber sie werden [base64url-codierte](https://tools.ietf.org/html/rfc4648#section-5).)
+Idataprotector. Protect nimmt einen Byte []-Klartext-Parameter an und erzeugt eine durch Byte [] geschützte Nutzlast, deren Format unten beschrieben wird. (Es gibt auch eine Erweiterungs Methoden Überladung, die einen String-Klartext-Parameter annimmt und eine durch eine Zeichenfolge geschützte Nutzlast zurückgibt. Wenn diese API verwendet wird, verfügt das geschützte Nutz Last Format weiterhin über die folgende Struktur, aber es wird [base64url-codiert](https://tools.ietf.org/html/rfc4648#section-5).)
 
-## <a name="protected-payload-format"></a>Geschützte Nutzlast-format
+## <a name="protected-payload-format"></a>Geschütztes Nutz Last Format
 
-Die geschützte Nutzlast-Format besteht aus drei Hauptkomponenten:
+Das geschützte Nutz Last Format besteht aus drei Hauptkomponenten:
 
-* Ein 32-Bit-Header-Magic, der die Version des System zum Schutz von Daten angibt.
+* Ein 32-Bit-Magic-Header, der die Version des Datenschutzsystems identifiziert.
 
-* Eine 128-Bit-Schlüssel-Id, die den Schlüssel zum Schützen dieser bestimmten Nutzlast identifiziert.
+* Eine 128-Bit-Schlüssel-ID, die den Schlüssel identifiziert, mit dem diese bestimmte Nutzlast geschützt wird.
 
-* Der Rest der geschützte Nutzlast ist [speziell für die Verschlüsselung, die von diesem Schlüssel gekapselt](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation). Im folgenden Beispiel wird den Schlüssel darstellt, eine AES-256-CBC + HMACSHA256-Verschlüsselung, und die Nutzlast ist weiter wie folgt unterteilt:
-  * Ein 128-Bit-Schlüssel-Modifizierer.
-  * Eine 128-Bit-Initialisierungsvektor.
-  * 48 Bytes für den AES-256-CBC-Ausgabe.
-  * Ein Tag für den HMACSHA256-Authentifizierung.
+* Der Rest der geschützten Nutzlast ist [spezifisch für die Verschlüsselung, die von diesem Schlüssel gekapselt](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)wird. Im folgenden Beispiel stellt der Schlüssel eine AES-256-CBC + HMACSHA256-Verschlüsselung dar, und die Nutzlast wird wie folgt weiter unterteilt:
+  * Ein 128-Bit-schlüsselmodifizierer.
+  * Ein 128-Bit-Initialisierungs Vektor.
+  * 48 Bytes der AES-256-CBC-Ausgabe.
+  * Ein HMACSHA256-authentifizierungstag.
 
-Eine geschützte Beispielnutzlast wird im folgenden dargestellt.
+Eine Beispiel geschützte Nutzlast wird unten veranschaulicht.
 
 ```
 09 F0 C9 F0 80 9C 81 0C 19 66 19 40 95 36 53 F8
@@ -48,11 +48,11 @@ AA FF EE 57 57 2F 40 4C 3F 7F CC 9D CC D9 32 3E
 52 C9 74 A0
 ```
 
-Sind nicht mit dem nutzlastformat über die ersten 32 Bits oder 4 Bytes der Magic-Header, die die Version (09 F0 C9 F0) identifiziert
+Aus dem Nutz Last Format oberhalb der ersten 32 Bits, oder 4 Bytes sind der Magic-Header, der die Version identifiziert (09 F0-F0).
 
-Die nächsten 128 Bits oder 16 Bytes ist der Schlüsselbezeichner (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57)
+Die nächsten 128 Bits oder 16 Bytes sind der Schlüssel Bezeichner (80 9c 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57).
 
-Im weiteren Verlauf enthält die Nutzlast und bezieht sich auf das verwendete Format.
+Der Rest enthält die Nutzlast und ist spezifisch für das verwendete Format.
 
 > [!WARNING]
-> Alle Nutzlasten, die auf einen bestimmten Schlüssel geschützt werden mit den gleichen Header von 20-Byte (Magic-Wert, Schlüssel-Id) beginnen. Administratoren können diese Tatsache zu Diagnosezwecken verwenden, um zu ermitteln, wenn eine Nutzlast generiert wurde. Beispielsweise entspricht die Nutzlast, die oben aufgeführten Schlüssel {0c819c80-6619-4019-9536-53f8aaffee57}. Wenn Sie nach der Überprüfung der wichtigsten Repository feststellen, dass dieser bestimmte Schlüssel Aktivierungsdatum 2015-01-01 wurde und das Ablaufdatum 2015-03-01 wurde, und es sinnvoll ist, Sie davon ausgehen, dass die Nutzlast (sofern Sie nicht manipuliert) innerhalb dieses Fensters, bieten generiert wurde oder nehmen eine kleine Mogelfaktor auf beiden Seiten.
+> Alle Nutzlasten, die mit einem bestimmten Schlüssel geschützt werden, beginnen mit dem gleichen 20-Byte-Header (Magic Value, Key ID). Administratoren können diese Tatsache für Diagnosezwecke verwenden, um zu identifizieren, wann eine Nutzlast generiert wurde. Beispielsweise entspricht die obige Nutzlast dem Schlüssel {0c819c80-6619-4019-9536-53f8aaffee57}. Wenn Sie nach dem Überprüfen des schlüsselrepository feststellen, dass das Aktivierungsdatum dieses bestimmten Schlüssels 2015-01-01 war und das Ablaufdatum 2015-03-01 war, ist es sinnvoll anzunehmen, dass die Nutzlast (wenn nicht manipuliert) innerhalb dieses Fensters generiert wurde. der Mogel-Faktor auf jeder Seite.
