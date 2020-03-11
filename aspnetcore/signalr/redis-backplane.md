@@ -10,11 +10,11 @@ no-loc:
 - SignalR
 uid: signalr/redis-backplane
 ms.openlocfilehash: 0461fc6a212ba78111bc2054cca74951721c5820
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289036"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652663"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-opno-locsignalr-scale-out"></a>Einrichten einer redis-Rückwand für ASP.net Core SignalR horizontales hochskalieren
 
@@ -29,11 +29,11 @@ In diesem Artikel werden SignalRspezifischen Aspekte der Einrichtung eines [redi
   > [!IMPORTANT] 
   > Für den Einsatz in der Produktion wird eine redis-Rückwand nur dann empfohlen, wenn Sie im selben Rechenzentrum wie die SignalR-app ausgeführt wird. Andernfalls beeinträchtigt die Netzwerk Latenz die Leistung. Wenn Ihre SignalR-app in der Azure-Cloud ausgeführt wird, empfehlen wir den Azure-SignalR Dienst anstelle einer redis-Backplane. Sie können den Azure redis Cache-Dienst für Entwicklungs-und Testumgebungen verwenden.
 
-  Weitere Informationen finden Sie unter:
+  Weitere Informationen finden Sie in den folgenden Ressourcen:
 
   * <xref:signalr/scale>
   * [Redis-Dokumentation](https://redis.io/)
-  * [Dokumentation zu Azure redis Cache](https://docs.microsoft.com/azure/redis-cache/)
+  * [Dokumentation zu Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/)
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -226,9 +226,9 @@ services.AddSignalR()
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen finden Sie unter:
+Weitere Informationen finden Sie in den folgenden Ressourcen:
 
 * <xref:signalr/scale>
 * [Redis-Dokumentation](https://redis.io/documentation)
 * [Dokumentation zu stackexchange redis](https://stackexchange.github.io/StackExchange.Redis/)
-* [Dokumentation zu Azure redis Cache](https://docs.microsoft.com/azure/redis-cache/)
+* [Dokumentation zu Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/)

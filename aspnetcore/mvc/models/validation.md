@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: a39eeead10849d11349688c42fe814ede9e8a847
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.openlocfilehash: cf6b77de78f2c5dda48ffcd8ac1f9ed2f8d28bd7
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172493"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652513"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
 
@@ -21,7 +21,7 @@ Von [Kirk Larkin](https://github.com/serpent5)
 
 In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MVC- oder Razor Pages-App validiert werden.
 
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
 ## <a name="model-state"></a>Modellstatus
 
@@ -49,28 +49,28 @@ Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaft
 
 Im Folgenden sind einige der integrierten Validierungsattribute aufgeführt:
 
-* `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
-* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell miteinander übereinstimmen.
-* `[EmailAddress]`: Überprüft, ob die Eigenschaft über ein E-Mail-Format verfügt.
-* `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonnummernformat verfügt.
-* `[Range]`: Überprüft, ob der Eigenschaftenwert im vorgegebenen Bereich liegt.
-* `[RegularExpression]`: Überprüft, ob der Eigenschaftswert mit dem angegebenen regulären Ausdruck übereinstimmt.
-* `[Required]`: Überprüft, ob das Feld leer ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
-* `[StringLength]`: Überprüft, ob ein Zeichenfolgeneigenschaftswert kürzer ist als die angegebene Längenbeschränkung.
-* `[Url]`: Überprüft, ob die Eigenschaft über ein URL-Format verfügt.
-* `[Remote]`: Überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server abgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
+* `[CreditCard]`: überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
+* `[Compare]`: überprüft, ob zwei Eigenschaften in einem Modell stimmen.
+* `[EmailAddress]`: überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
+* `[Phone]`: überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
+* `[Range]`: überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
+* `[RegularExpression]`: überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
+* `[Required]`: überprüft, ob das Feld nicht NULL ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
+* `[StringLength]`: überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
+* `[Url]`: überprüft, ob die Eigenschaft ein URL-Format aufweist.
+* `[Remote]`: überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
 
 Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)-Namespace finden Sie eine vollständige Liste der Validierungsattribute.
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -265,7 +265,7 @@ Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn,
 
 ## <a name="unobtrusive-validation"></a>Unaufdringliche Validierung
 
-Informationen zur unaufdringlichen Validierung finden Sie in [diesem GitHub-Issue](https://github.com/aspnet/AspNetCore.Docs/issues/1111).
+Informationen zur unaufdringlichen Validierung finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/1111).
 
 ### <a name="add-validation-to-dynamic-forms"></a>Hinzufügen der Validierung zu dynamischen Formularen
 
@@ -389,7 +389,7 @@ Der vorherige Ansatz verhindert nicht die clientseite Validierung der ASP.NET Co
 
 In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MVC- oder Razor Pages-App validiert werden.
 
-[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
+[Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
 ## <a name="model-state"></a>Modellstatus
 
@@ -409,7 +409,7 @@ Die Validierung erfolgt automatisch, aber ggf. möchten Sie sie manuell wiederho
 
 ## <a name="validation-attributes"></a>Validierungsattribute
 
-Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaften angeben. Im folgenden Beispiel aus der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) sehen Sie eine Modellklasse, die mit Validierungsattributen versehen wurde. Das `[ClassicMovie]`-Attribut ist ein benutzerdefiniertes Validierungsattribut; die anderen sind integriert. Nicht gezeigt wird hier das Attribut `[ClassicMovie2]`, das eine Alternative darstellt, ein benutzerdefiniertes Attribut zu implementieren.
+Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaften angeben. Im folgenden Beispiel aus der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) sehen Sie eine Modellklasse, die mit Validierungsattributen versehen wurde. Das `[ClassicMovie]`-Attribut ist ein benutzerdefiniertes Validierungsattribut; die anderen sind integriert. Nicht gezeigt wird hier das Attribut `[ClassicMovie2]`, das eine Alternative darstellt, ein benutzerdefiniertes Attribut zu implementieren.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/Movie.cs?name=snippet_ModelClass)]
 
@@ -417,30 +417,30 @@ Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaft
 
 Zu den integrierten Validierungsattributen gehören:
 
-* `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
-* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell miteinander übereinstimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. [Gerüst für Identität](xref:security/authentication/scaffold-identity), um den Registrierungscode anzuzeigen.
-* `[EmailAddress]`: Überprüft, ob die Eigenschaft über ein E-Mail-Format verfügt.
-* `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonnummernformat verfügt.
-* `[Range]`: Überprüft, ob der Eigenschaftenwert im vorgegebenen Bereich liegt.
-* `[RegularExpression]`: Überprüft, ob der Eigenschaftswert mit dem angegebenen regulären Ausdruck übereinstimmt.
-* `[Required]`: Überprüft, ob das Feld leer ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
-* `[StringLength]`: Überprüft, ob ein Zeichenfolgeneigenschaftswert kürzer ist als die angegebene Längenbeschränkung.
-* `[Url]`: Überprüft, ob die Eigenschaft über ein URL-Format verfügt.
-* `[Remote]`: Überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server abgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
+* `[CreditCard]`: überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
+* `[Compare]`: überprüft, ob zwei Eigenschaften in einem Modell stimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. [Gerüst für Identität](xref:security/authentication/scaffold-identity), um den Registrierungscode anzuzeigen.
+* `[EmailAddress]`: überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
+* `[Phone]`: überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
+* `[Range]`: überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
+* `[RegularExpression]`: überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
+* `[Required]`: überprüft, ob das Feld nicht NULL ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
+* `[StringLength]`: überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
+* `[Url]`: überprüft, ob die Eigenschaft ein URL-Format aufweist.
+* `[Remote]`: überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
 
-Wenn das `[RegularExpression]`-Attribut mit der clientseitigen Validierung verwendet wird, wird der Regex in JavaScript auf dem Client ausgeführt. Dies bedeutet, dass ein mit [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) übereinstimmendes Verhalten verwendet wird. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/corefx/issues/42487).
+Wenn das `[RegularExpression]`-Attribut mit der clientseitigen Validierung verwendet wird, wird der Regex in JavaScript auf dem Client ausgeführt. Dies bedeutet, dass ein mit [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) übereinstimmendes Verhalten verwendet wird. Weitere Informationen finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/corefx/issues/42487).
 
 Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)-Namespace finden Sie eine vollständige Liste der Validierungsattribute.
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -496,7 +496,7 @@ So wird die Remotevalidierung implementiert:
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserEmailProperty)]
  
-   Das `[Remote]`-Attribut ist im `Microsoft.AspNetCore.Mvc`-Namespace enthalten. Wenn Sie nicht das Metapaket `Microsoft.AspNetCore.App` oder `Microsoft.AspNetCore.All` verwenden, installieren Sie das NuGet-Paket [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures).
+   Das `[Remote]`-Attribut ist im `Microsoft.AspNetCore.Mvc`-Namespace enthalten. Wenn Sie nicht das Metapaket [ oder ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) verwenden, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.App`Microsoft.AspNetCore.Mvc.ViewFeatures`Microsoft.AspNetCore.All`.
    
 ### <a name="additional-fields"></a>Zusätzliche Felder
 

@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: fb670902b0dafa7dce2b3372e550095387844936
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914240"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650773"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Hinzufügen eines Controllers zu einer ASP.NET Core MVC-App
 
@@ -32,7 +32,7 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 ## <a name="add-a-controller"></a>Hinzufügen eines Controllers
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Controller**.
   ![Kontextmenü](adding-controller/_static/add_controller.png)
@@ -43,13 +43,13 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 * Geben Sie im **Dialogfeld zum Hinzufügen eines leeren MVC-Controllers**  den Namen **HelloWorldController** ein, und wählen Sie **Hinzufügen** aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Wählen Sie das **EXPLORER**-Symbol aus, klicken Sie dann bei gedrückter STRG-TASTE bzw. mit der rechten Maustaste auf **Controller > Neue Datei**, und geben Sie der neuen Datei den Namen *HelloWorldController.cs*.
 
   ![Kontextmenü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Neue Datei**.
 ![Kontextmenü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
@@ -146,7 +146,7 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 ## <a name="add-a-controller"></a>Hinzufügen eines Controllers
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Controller**.
   ![Kontextmenü](adding-controller/_static/add_controller.png)
@@ -157,13 +157,13 @@ Wir behandeln diese Konzepte in dieser Tutorialreihe und zeigen Ihnen, wie Sie s
 
 * Geben Sie im **Dialogfeld zum Hinzufügen eines leeren MVC-Controllers**  den Namen **HelloWorldController** ein, und wählen Sie **Hinzufügen** aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Wählen Sie das **EXPLORER**-Symbol aus, klicken Sie dann bei gedrückter STRG-TASTE bzw. mit der rechten Maustaste auf **Controller > Neue Datei**, und geben Sie der neuen Datei den Namen *HelloWorldController.cs*.
 
   ![Kontextmenü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf **Controller > Hinzufügen > Neue Datei**.
 ![Kontextmenü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)

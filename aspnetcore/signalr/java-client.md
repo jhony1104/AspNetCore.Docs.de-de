@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: d7143b2c22ecdc4e68f484aa4c244e1c520beae0
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 6919eabf454f16887e012161a454a4848c45002b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963783"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652213"
 ---
 # <a name="aspnet-core-opno-locsignalr-java-client"></a>ASP.net Core SignalR Java-Clients
 
@@ -24,7 +24,7 @@ Der Java-Client ermöglicht das Herstellen einer Verbindung mit einem ASP.net Co
 
 Die Java-Beispiel Konsolen-APP, auf die in diesem Artikel verwiesen wird, verwendet den SignalR Java-Client
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="install-the-opno-locsignalr-java-client-package"></a>Installieren des SignalR Java-Client Pakets
 
@@ -40,13 +40,13 @@ Wenn Sie Maven verwenden, fügen Sie die folgenden Zeilen innerhalb des `<depend
 
 [!code-xml[pom.xml dependency element](java-client/sample/pom.xml?name=snippet_dependencyElement)]
 
-## <a name="connect-to-a-hub"></a>Herstellen einer Verbindung mit einem Hub
+## <a name="connect-to-a-hub"></a>Verbinden mit einem hub
 
 Zum Einrichten einer `HubConnection`sollte die `HubConnectionBuilder` verwendet werden. Die Hub-URL und die Protokollebene können während der Verbindungs Herstellung konfiguriert werden. Konfigurieren Sie alle erforderlichen Optionen, indem Sie eine der `HubConnectionBuilder` Methoden aufrufen, bevor Sie `build`. Starten Sie die Verbindung mit `start`.
 
 [!code-java[Build hub connection](java-client/sample/src/main/java/Chat.java?range=16-17)]
 
-## <a name="call-hub-methods-from-client"></a>Hub-Methoden vom Client abrufen
+## <a name="call-hub-methods-from-client"></a>Aufrufen von Hub-Methoden von client
 
 Ein Aufruf von `send` Ruft eine Hub-Methode auf. Übergeben Sie den Namen der Hub-Methode und alle in der Hub-Methode definierten Argumente an `send`.
 
@@ -55,7 +55,7 @@ Ein Aufruf von `send` Ruft eine Hub-Methode auf. Übergeben Sie den Namen der Hu
 > [!NOTE]
 > Wenn Sie Azure SignalR Service im *Server losen Modus*verwenden, können Sie keine hubmethoden von einem Client aus abrufen. Weitere Informationen finden Sie in der [Dokumentation zumSignalR-Dienst](/azure/azure-signalr/signalr-concept-serverless-development-config).
 
-## <a name="call-client-methods-from-hub"></a>Client Methoden aus Hub abrufen
+## <a name="call-client-methods-from-hub"></a>Rufen Sie Client-Methoden von Hub-Instanz
 
 Verwenden Sie `hubConnection.on`, um Methoden auf dem Client zu definieren, die der Hub abrufen kann. Definieren Sie die Methoden nach dem Aufbau, aber vor dem Starten der Verbindung.
 
@@ -117,7 +117,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Java-API-Referenz](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
+* [Java-API-Verweis](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>
 * <xref:signalr/javascript-client>
 * <xref:signalr/publish-to-azure-web-app>

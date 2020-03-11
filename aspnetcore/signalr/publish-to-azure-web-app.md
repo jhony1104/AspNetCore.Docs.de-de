@@ -10,20 +10,20 @@ no-loc:
 - SignalR
 uid: signalr/publish-to-azure-web-app
 ms.openlocfilehash: d03a007ca883b3d0391b848e3e92c90469ee640a
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963935"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652651"
 ---
-# <a name="publish-an-aspnet-core-opno-locsignalr-app-to-azure-app-service"></a>Veröffentlichen einer ASP.net Core SignalR-App auf Azure App Service
+# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Veröffentlichen einer ASP.net Core signalr-app in Azure App Service
 
 Von [Brady Gastern](https://twitter.com/bradygaster)
 
 [Azure App Service](/azure/app-service/app-service-web-overview) ist ein [Microsoft Cloud Computing](https://azure.microsoft.com/) Platform-Dienst zum Hosting von Web-Apps, einschließlich ASP.net Core.
 
 > [!NOTE]
-> Dieser Artikel bezieht sich auf das Veröffentlichen einer ASP.net Core SignalR-App aus Visual Studio. Weitere Informationen finden Sie unter [SignalR-Dienst für Azure](https://azure.microsoft.com/services/signalr-service).
+> Dieser Artikel bezieht sich auf das Veröffentlichen einer ASP.net Core signalr-App aus Visual Studio. Weitere Informationen finden Sie unter [signalr Service für Azure](https://azure.microsoft.com/services/signalr-service).
 
 ## <a name="publish-the-app"></a>Veröffentlichen der App
 
@@ -37,7 +37,7 @@ In diesem Artikel wird die Veröffentlichung mit den Tools in Visual Studio beha
 
    Geben Sie die in der folgenden Tabelle beschriebenen Informationen in das Dialogfeld **App Service erstellen** ein, und wählen Sie **Erstellen**aus.
 
-   | Element               | Beschreibung |
+   | Element               | BESCHREIBUNG |
    | ------------------ | ----------- |
    | **Name**           | Der eindeutige Name der app. |
    | **Abonnement**   | Azure-Abonnement, das von der APP verwendet wird. |
@@ -46,7 +46,7 @@ In diesem Artikel wird die Veröffentlichung mit den Tools in Visual Studio beha
 
 1. Wählen Sie in der Dropdown Liste **Abhängigkeiten** > **Hinzufügen** den **Azure-SignalR Dienst** aus:
 
-   ![Bereich "Abhängigkeiten" mit der Auswahl von Azure [! Schel. No-Loc (signalr)]-Dienst in der Dropdown Liste "hinzufügen"](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Bereich Abhängigkeiten, in dem die Auswahl von Azure SignalR-Dienst in der Dropdown Liste hinzufügen angezeigt wird](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. Wählen Sie im Dialogfeld **Azure SignalR-Dienst** die Option **neue Azure SignalR Dienst Instanz erstellen**aus.
 

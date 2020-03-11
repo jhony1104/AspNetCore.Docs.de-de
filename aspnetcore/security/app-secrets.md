@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: security/app-secrets
-ms.openlocfilehash: 9b36ae64fbe277cd81ed22ba7b21b0a035082dbd
-ms.sourcegitcommit: c815a9465e7b1bab44ce1643ec345b33e6cf1598
+ms.openlocfilehash: c3f165164f3c95e8c0aab773f3731429ae224bd9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75606791"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654691"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Sichere Speicherung von App-Geheimnissen in der Entwicklung in ASP.net Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Daniel Roth](https://github.com/danroth27)und [Scott Addie](https://github.com/scottaddie)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 Dieses Dokument erläutert Techniken zum Speichern und Abrufen von sensiblen Daten während der Entwicklung einer ASP.net Core-App auf einem Entwicklungs Computer. Speichern Sie niemals Kenn Wörter oder andere sensible Daten im Quellcode. Produktionsgeheimnisse sollten nicht für Entwicklungs-oder Testzwecke verwendet werden. Geheimnisse sollten nicht mit der APP bereitgestellt werden. Stattdessen sollten geheime Schlüssel in der Produktionsumgebung über eine kontrollierte Methode wie Umgebungsvariablen, Azure Key Vault usw. zur Verfügung gestellt werden. Sie können Azure-Test-und Produktionsgeheimnisse mit dem [Azure Key Vault Konfigurations Anbieters](xref:security/key-vault-configuration)speichern und schützen.
 
@@ -51,13 +51,13 @@ Das Secret Manager-Tool speichert vertrauliche Daten während der Entwicklung ei
 
 Das Secret Manager-Tool abstrahiert die Implementierungsdetails, z. b. wo und wie die Werte gespeichert werden. Sie können das Tool verwenden, ohne diese Implementierungsdetails kennen zu lernen. Die Werte werden in einer JSON-Konfigurationsdatei in einem vom System geschützten Benutzerprofil Ordner auf dem lokalen Computer gespeichert:
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 Dateisystempfad:
 
 `%APPDATA%\Microsoft\UserSecrets\<user_secrets_id>\secrets.json`
 
-# <a name="linux--macostablinuxmacos"></a>[Linux/macOS](#tab/linux+macos)
+# <a name="linux--macos"></a>[Linux/macOS](#tab/linux+macos)
 
 Dateisystempfad:
 
@@ -199,7 +199,7 @@ Die JSON-Struktur wird nach Änderungen über `dotnet user-secrets remove` oder 
 
 Ein Batch geheimer Schlüssel kann durch die Weiterleitung von JSON an den `set`-Befehl festgelegt werden. Im folgenden Beispiel wird der Inhalt der Datei " *Input. JSON* " an den `set`-Befehl weitergeleitet.
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
 
@@ -207,7 +207,7 @@ Ein Batch geheimer Schlüssel kann durch die Weiterleitung von JSON an den `set`
   type .\input.json | dotnet user-secrets set
   ```
 
-# <a name="linux--macostablinuxmacos"></a>[Linux/macOS](#tab/linux+macos)
+# <a name="linux--macos"></a>[Linux/macOS](#tab/linux+macos)
 
 Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
 
@@ -408,8 +408,8 @@ Beim Ausführen `dotnet user-secrets list` wird die folgende Meldung angezeigt:
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* Informationen zum Zugriff auf den geheimen Hauptschlüssel von IIS finden Sie in [diesem Thema](https://github.com/aspnet/AspNetCore.Docs/issues/16328) .
+* Informationen zum Zugriff auf den geheimen Hauptschlüssel von IIS finden Sie in [diesem Thema](https://github.com/dotnet/AspNetCore.Docs/issues/16328) .
 * <xref:fundamentals/configuration/index>
 * <xref:security/key-vault-configuration>

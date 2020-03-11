@@ -1,30 +1,30 @@
 ---
 title: Hochladen von Dateien in ASP.NET Core
-author: guardrex
+author: rick-anderson
 description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien in ASP.NET Core MVC
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/11/2020
+ms.date: 02/25/2020
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 56fd26c1864089558f5cd89f693dc86ea30c3331
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.openlocfilehash: fc71c39dd1aa70e6b092799fec00bd7bf66703e8
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172469"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654085"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
-Von [Luke Latham](https://github.com/guardrex), [Steve Smith](https://ardalis.com/) und [Rutger Storm](https://github.com/rutix)
+Von [Steve Smith](https://ardalis.com/) und [Rutger Storm](https://github.com/rutix)
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ASP.NET Core unterstützt das Hochladen einer oder mehrerer Dateien über die gepufferte Modellbindung für kleinere Dateien und ungepuffertes Streaming für größere Dateien.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Sicherheitsüberlegungen
+## <a name="security-considerations"></a>Sicherheitshinweise
 
 Gehen Sie mit Bedacht vor, wenn Sie Benutzern die Möglichkeit geben, Dateien auf einen Server hochzuladen. Angreifer versuchen möglicherweise Folgendes:
 
@@ -36,9 +36,9 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Codieren Sie den nicht vertrauenswürdigen Dateinamen mit HTML, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; HTML den nicht vertrauenswürdigen Dateinamen bei der Anzeige codieren. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
+* Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden.&dagger; Client seitige Überprüfungen sind einfach zu umgehen.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
@@ -49,14 +49,14 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 > Das Hochladen von schädlichem Code auf ein System ist häufig der erste Schritt, um Code mit der folgenden Absicht auszuführen:
 >
 > * Erlangen der vollständigen Kontrolle über ein System.
-> * Überlasten eines Systems mit dem Ziel eines Systemausfalls.
+> * Überlasten eines System mit dem Ziel eines Systemausfalls.
 > * Kompromittieren von Benutzer- oder Systemdaten
 > * Anwenden von Graffiti auf eine öffentliche Benutzeroberfläche.
 >
 > Wie Sie die Angriffsoberfläche beim Akzeptieren von Benutzerdateien reduzieren, erfahren Sie in den folgenden Artikeln:
 >
 > * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen erfolgen, wenn Dateien von Benutzern akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen gelten, wenn Dateien vom Benutzer akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 Weitere Informationen zur Implementierung von Sicherheitsmaßnahmen, einschließlich Beispiele aus der Beispielanwendung, finden Sie im Abschnitt [Validierung](#validation).
 
@@ -83,7 +83,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet).
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .net zum Erstellen eines BLOBs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet).
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -183,7 +183,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Beispiel:
 
   ```javascript
   <script>
@@ -214,7 +214,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 <a name="filename"></a>
 
 > [!WARNING]
-> Verwenden Sie die Eigenschaft `FileName` von <xref:Microsoft.AspNetCore.Http.IFormFile>, **ausschließlich** für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
+> Verwenden Sie die Eigenschaft **von**, `FileName`ausschließlich<xref:Microsoft.AspNetCore.Http.IFormFile> für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
 >
 > * den Pfad aus dem vom Benutzer angegebenen Dateinamen entfernen
 > * den mit HTML codierten Dateinamen, aus dem der Pfad entfernt wurde, für die Benutzeroberfläche oder Protokollierung speichern
@@ -226,10 +226,10 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Überlegungen zur Sicherheit](#security-considerations)
-> * [Validierung](#validation)
+> * [Sicherheitshinweise](#security-considerations)
+> * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
 
@@ -242,7 +242,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im Beispiel unten geschieht Folgendes:
+Im folgenden Beispiel:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -270,7 +270,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
     // Process uploaded files
     // Don't rely on or trust the FileName property without validation.
 
-    return Ok(new { count = files.Count, size, filePath });
+    return Ok(new { count = files.Count, size });
 }
 ```
 
@@ -294,7 +294,7 @@ foreach (var formFile in files)
 
 Der an <xref:System.IO.FileStream> übergebene Pfad *muss* den Dateinamen enthalten. Ist dies nicht der Fall, wird zur Laufzeit eine <xref:System.UnauthorizedAccessException> ausgelöst.
 
-Dateien, die über die <xref:Microsoft.AspNetCore.Http.IFormFile>-Technik hochgeladen werden, werden vor der Verarbeitung im Arbeitsspeicher oder auf einem Datenträger des Servers gepuffert. Innerhalb der Aktionsmethode können Sie über einen <xref:System.IO.Stream> auf die <xref:Microsoft.AspNetCore.Http.IFormFile>-Inhalte zugreifen. Zusätzlich zum lokalen Dateisystem können Dateien in einer Netzwerkfreigabe oder einem Dateispeicherdienst gespeichert werden, wie beispielsweise [Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
+Dateien, die über die <xref:Microsoft.AspNetCore.Http.IFormFile>-Technik hochgeladen werden, werden vor der Verarbeitung im Arbeitsspeicher oder auf einem Datenträger des Servers gepuffert. Innerhalb der Aktionsmethode können Sie über einen <xref:Microsoft.AspNetCore.Http.IFormFile> auf die <xref:System.IO.Stream>-Inhalte zugreifen. Zusätzlich zum lokalen Dateisystem können Dateien in einer Netzwerkfreigabe oder einem Dateispeicherdienst gespeichert werden, wie beispielsweise [Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
 
 Ein weiteres Beispiel, das mehrere hochzuladende Dateien in einer Schleife durchläuft und sichere Dateinamen verwendet, finden Sie in der Beispiel-App unter *Pages/BufferedMultipleFileUploadPhysical.cshtml.cs*.
 
@@ -397,10 +397,10 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Verlassen Sie sich nicht ohne Validierung auf die `FileName`-Eigenschaft <xref:Microsoft.AspNetCore.Http.IFormFile>, bzw. vertrauen Sie ihr nicht. Die `FileName`-Eigenschaft darf nur für Anzeigezwecke und erst nach der HTML-Codierung verwendet werden.
 >
-> Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Überlegungen zur Sicherheit](#security-considerations)
-> * [Validierung](#validation)
+> * [Sicherheitshinweise](#security-considerations)
+> * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
 
@@ -434,9 +434,9 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Validierung
+## <a name="validation"></a>Überprüfen
 
-Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
+Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei `ProcessFormFile`Utilities/FileHelpers.cs*in der*-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
 > [!WARNING]
 > Die in der Beispiel-App demonstrierten Validierungsverarbeitungsmethoden untersuchen nicht den Inhalt hochgeladener Dateien. In den meisten Produktionsszenarien wird eine API zum Scannen auf Viren/Schadsoftware auf die Datei angewendet, bevor die Datei Benutzern oder anderen Systemen zur Verfügung gestellt wird.
@@ -448,7 +448,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Inhaltsprüfung
+### <a name="content-validation"></a>Validierung von Inhalten
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -456,7 +456,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -559,7 +559,7 @@ if (formFile.Length > _fileSizeLimit)
 
 In Nicht-Razor-Formularen, die Daten per POST übermitteln oder `FormData` von JavaScript direkt verwenden, muss der im Formularelement oder `FormData` angegebene Name mit dem Namen des Parameters in der Aktion des Controllers übereinstimmen.
 
-Im folgenden Beispiel:
+Siehe folgendes Beispiel:
 
 * Wenn ein `<input>`-Element verwendet wird, wird das `name`-Attribut auf den Wert `battlePlans` festgelegt:
 
@@ -751,9 +751,9 @@ Bei den Beispielen in diesem Thema wird davon ausgegangen, dass <xref:System.IO.
 
 ASP.NET Core unterstützt das Hochladen einer oder mehrerer Dateien über die gepufferte Modellbindung für kleinere Dateien und ungepuffertes Streaming für größere Dateien.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Sicherheitsüberlegungen
+## <a name="security-considerations"></a>Sicherheitshinweise
 
 Gehen Sie mit Bedacht vor, wenn Sie Benutzern die Möglichkeit geben, Dateien auf einen Server hochzuladen. Angreifer versuchen möglicherweise Folgendes:
 
@@ -765,9 +765,9 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort für hochgeladene Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen vom Benutzer angegebenen Dateinamen oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; Codieren Sie den nicht vertrauenswürdigen Dateinamen mit HTML, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei.&dagger; HTML den nicht vertrauenswürdigen Dateinamen bei der Anzeige codieren. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server erfolgen.&dagger; Clientseitige Überprüfungen sind leicht zu umgehen.
+* Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden.&dagger; Client seitige Überprüfungen sind einfach zu umgehen.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
@@ -778,14 +778,14 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 > Das Hochladen von schädlichem Code auf ein System ist häufig der erste Schritt, um Code mit der folgenden Absicht auszuführen:
 >
 > * Erlangen der vollständigen Kontrolle über ein System.
-> * Überlasten eines Systems mit dem Ziel eines Systemausfalls.
+> * Überlasten eines System mit dem Ziel eines Systemausfalls.
 > * Kompromittieren von Benutzer- oder Systemdaten
 > * Anwenden von Graffiti auf eine öffentliche Benutzeroberfläche.
 >
 > Wie Sie die Angriffsoberfläche beim Akzeptieren von Benutzerdateien reduzieren, erfahren Sie in den folgenden Artikeln:
 >
 > * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen erfolgen, wenn Dateien von Benutzern akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure-Sicherheit: Sicherstellen, dass entsprechende Kontrollen gelten, wenn Dateien vom Benutzer akzeptiert werden](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 Weitere Informationen zur Implementierung von Sicherheitsmaßnahmen, einschließlich Beispiele aus der Beispielanwendung, finden Sie im Abschnitt [Validierung](#validation).
 
@@ -812,7 +812,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .net zum Erstellen eines BLOBs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -912,7 +912,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Beispiel:
 
   ```javascript
   <script>
@@ -943,7 +943,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 <a name="filename2"></a>
 
 > [!WARNING]
-> Verwenden Sie die Eigenschaft `FileName` von <xref:Microsoft.AspNetCore.Http.IFormFile>, **ausschließlich** für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
+> Verwenden Sie die Eigenschaft **von**, `FileName`ausschließlich<xref:Microsoft.AspNetCore.Http.IFormFile> für die Anzeige und Protokollierung. Codieren Sie den Dateinamen für die Anzeige und Protokollierung mit HTML. Ein Angreifer kann einen bösartigen Dateinamen bereitstellen, einschließlich vollständiger oder relativer Pfade. Anwendungen sollten folgende Aktionen ausführen:
 >
 > * den Pfad aus dem vom Benutzer angegebenen Dateinamen entfernen
 > * den mit HTML codierten Dateinamen, aus dem der Pfad entfernt wurde, für die Benutzeroberfläche oder Protokollierung speichern
@@ -955,10 +955,10 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Überlegungen zur Sicherheit](#security-considerations)
-> * [Validierung](#validation)
+> * [Sicherheitshinweise](#security-considerations)
+> * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
 
@@ -971,7 +971,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im Beispiel unten geschieht Folgendes:
+Im folgenden Beispiel:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -999,7 +999,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
     // Process uploaded files
     // Don't rely on or trust the FileName property without validation.
 
-    return Ok(new { count = files.Count, size, filePath });
+    return Ok(new { count = files.Count, size });
 }
 ```
 
@@ -1023,7 +1023,7 @@ foreach (var formFile in files)
 
 Der an <xref:System.IO.FileStream> übergebene Pfad *muss* den Dateinamen enthalten. Ist dies nicht der Fall, wird zur Laufzeit eine <xref:System.UnauthorizedAccessException> ausgelöst.
 
-Dateien, die über die <xref:Microsoft.AspNetCore.Http.IFormFile>-Technik hochgeladen werden, werden vor der Verarbeitung im Arbeitsspeicher oder auf einem Datenträger des Servers gepuffert. Innerhalb der Aktionsmethode können Sie über einen <xref:System.IO.Stream> auf die <xref:Microsoft.AspNetCore.Http.IFormFile>-Inhalte zugreifen. Zusätzlich zum lokalen Dateisystem können Dateien in einer Netzwerkfreigabe oder einem Dateispeicherdienst gespeichert werden, wie beispielsweise [Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
+Dateien, die über die <xref:Microsoft.AspNetCore.Http.IFormFile>-Technik hochgeladen werden, werden vor der Verarbeitung im Arbeitsspeicher oder auf einem Datenträger des Servers gepuffert. Innerhalb der Aktionsmethode können Sie über einen <xref:Microsoft.AspNetCore.Http.IFormFile> auf die <xref:System.IO.Stream>-Inhalte zugreifen. Zusätzlich zum lokalen Dateisystem können Dateien in einer Netzwerkfreigabe oder einem Dateispeicherdienst gespeichert werden, wie beispielsweise [Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
 
 Ein weiteres Beispiel, das mehrere hochzuladende Dateien in einer Schleife durchläuft und sichere Dateinamen verwendet, finden Sie in der Beispiel-App unter *Pages/BufferedMultipleFileUploadPhysical.cshtml.cs*.
 
@@ -1126,10 +1126,10 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Verlassen Sie sich nicht ohne Validierung auf die `FileName`-Eigenschaft <xref:Microsoft.AspNetCore.Http.IFormFile>, bzw. vertrauen Sie ihr nicht. Die `FileName`-Eigenschaft darf nur für Anzeigezwecke und erst nach der HTML-Codierung verwendet werden.
 >
-> Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Überlegungen zur Sicherheit](#security-considerations)
-> * [Validierung](#validation)
+> * [Sicherheitshinweise](#security-considerations)
+> * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
 
@@ -1163,9 +1163,9 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Validierung
+## <a name="validation"></a>Überprüfen
 
-Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
+Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei `ProcessFormFile`Utilities/FileHelpers.cs*in der*-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
 > [!WARNING]
 > Die in der Beispiel-App demonstrierten Validierungsverarbeitungsmethoden untersuchen nicht den Inhalt hochgeladener Dateien. In den meisten Produktionsszenarien wird eine API zum Scannen auf Viren/Schadsoftware auf die Datei angewendet, bevor die Datei Benutzern oder anderen Systemen zur Verfügung gestellt wird.
@@ -1177,7 +1177,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Inhaltsprüfung
+### <a name="content-validation"></a>Validierung von Inhalten
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -1185,7 +1185,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1288,7 +1288,7 @@ if (formFile.Length > _fileSizeLimit)
 
 In Nicht-Razor-Formularen, die Daten per POST übermitteln oder `FormData` von JavaScript direkt verwenden, muss der im Formularelement oder `FormData` angegebene Name mit dem Namen des Parameters in der Aktion des Controllers übereinstimmen.
 
-Im folgenden Beispiel:
+Siehe folgendes Beispiel:
 
 * Wenn ein `<input>`-Element verwendet wird, wird das `name`-Attribut auf den Wert `battlePlans` festgelegt:
 
@@ -1473,5 +1473,5 @@ Bei den Beispielen in diesem Thema wird davon ausgegangen, dass <xref:System.IO.
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-* [Azure-Sicherheit: Security Frame: Eingabeüberprüfung | Risikominderung](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure-Cloudentwurfsmuster: Muster „Valetschlüssel“](/azure/architecture/patterns/valet-key)
+* [Azure-Sicherheit: Sicherheitsrahmen: Eingabevalidierung | Entschärfungen](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure Cloud Design Patterns: Valet-Schlüssel Muster](/azure/architecture/patterns/valet-key)

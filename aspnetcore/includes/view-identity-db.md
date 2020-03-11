@@ -1,14 +1,14 @@
-### <a name="view-the-identity-database"></a>Abrufen der Identität-Datenbank
+### <a name="view-the-identity-database"></a>Anzeigen der Identitätsdatenbank
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-* Von der **Ansicht** , wählen Sie im Menü **Objekt-Explorer von SQL Server** (SSOX).
-* Navigieren Sie zu **(Localdb) MSSQLLocalDB (SQLServer-13)** . Mit der rechten Maustaste auf **Dbo. "Aspnetusers"**  > **zeigen Daten**:
+* Wählen Sie im Menü **Ansicht** die Option **SQL Server-Objekt-Explorer** (ssox) aus.
+* Navigieren Sie zu **(localdb) mssqllocaldb (SQL Server 13)** . Klicken Sie mit der rechten Maustaste auf **dbo. Aspnettusers** > **Anzeigen von Daten**:
 
-![Über das Kontextmenü für die Tabelle "aspnetusers" im Objekt-Explorer von SQL Server](~/security/authentication/accconfirm/_static/ssox.png)
+![Kontextmenü für die aspnettusers-Tabelle in SQL Server-Objekt-Explorer](~/security/authentication/accconfirm/_static/ssox.png)
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
-Es gibt viele Drittanbieter-Tools, die Sie herunterladen können, verwalten und Anzeigen von einer SQLite-Datenbank, z. B. [DB Browser for SQLite](https://sqlitebrowser.org/).
+Es gibt zahlreiche Drittanbieter Tools, die Sie zum Verwalten und Anzeigen einer SQLite-Datenbank herunterladen können, z. b. [DB-Browser für SQLite](https://sqlitebrowser.org/).
 
 ---

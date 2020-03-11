@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 01/31/2019
 uid: security/authentication/samples
 ms.openlocfilehash: 3d7e28f6e501bd8bd3908ca4b314a63cee52ebe3
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828671"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651655"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>Authentifizierungs Beispiele für ASP.net Core
 
@@ -28,9 +28,9 @@ Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die
 * [Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/PathSchemeSelection)
 * [Schränkt den Zugriff auf statische Dateien ein.](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/StaticFilesAuth)
 
-## <a name="run-the-samples"></a>Beispiele ausführen
+## <a name="run-the-samples"></a>Ausführen der Beispiele
 
-* Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore) aus. Beispiel: `Tag:v3.0.0`
+* Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus. Zum Beispiel, `Tag:v3.0.0`
 * Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.
 * Vergewissern Sie sich, dass Sie die [.net Core SDK](https://www.microsoft.com/net/download/all) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.
 * Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit `dotnet run`aus.
@@ -49,9 +49,9 @@ Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die
 * [Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/PathSchemeSelection)
 * [Schränkt den Zugriff auf statische Dateien ein.](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/StaticFilesAuth)
 
-## <a name="run-the-samples"></a>Beispiele ausführen
+## <a name="run-the-samples"></a>Ausführen der Beispiele
 
-* Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore) aus. Beispiel: `release/2.2`
+* Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus. Zum Beispiel, `release/2.2`
 * Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.
 * Vergewissern Sie sich, dass Sie die [.net Core SDK](https://www.microsoft.com/net/download/all) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.
 * Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit `dotnet run`aus.
