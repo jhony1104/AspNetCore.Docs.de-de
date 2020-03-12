@@ -5,14 +5,16 @@ description: Eine Erläuterung der Verwendung von Facebook, Google, Twitter usw.
 ms.author: riande
 ms.date: 12/10/2019
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 612964ec9ed4975cdc81780dda3bac6cce96037f
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: b30ce7055b35b721c7fb83b61a328200d6a136b1
+ms.sourcegitcommit: 3ca4a2235a8129def9e480d0a6ad54cc856920ec
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75359057"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "79025393"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>Verwenden der Authentifizierung für soziale Anmelde Anbieter ohne ASP.net Core Identität
+
+Von [Kirk Larkin](https://twitter.com/serpent5) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -22,12 +24,12 @@ In diesem Beispiel wird veranschaulicht, wie ein externer Authentifizierungs Anb
 
 In diesem Beispiel wird die [Google-Authentifizierung](xref:security/authentication/google-logins) zum Authentifizieren von Benutzern verwendet. Die Verwendung der Google-Authentifizierung verlagert viele der Komplexitäten bei der Verwaltung des Anmeldevorgangs an Google. Informationen zur Integration in einen anderen externen Authentifizierungs Anbieter finden Sie in den folgenden Themen:
 
-* [Facebook-Authentifizierung](xref:security/authentication/facebook-logins)
+* [Authentifizierung über Facebook](xref:security/authentication/facebook-logins)
 * [Microsoft-Authentifizierung](xref:security/authentication/microsoft-logins)
-* [Twitter-Authentifizierung](xref:security/authentication/twitter-logins)
+* [Authentifizierung über Twitter](xref:security/authentication/twitter-logins)
 * [Andere Anbieter](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>-Konfiguration
+## <a name="configuration"></a>Konfiguration
 
 Konfigurieren Sie in der `ConfigureServices`-Methode die Authentifizierungs Schemas der APP mit den Methoden <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>, <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>und <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*>:
 
@@ -63,7 +65,7 @@ Zum Abmelden des aktuellen Benutzers und zum Löschen des Cookies müssen Sie [s
 
 Beachten Sie, dass der `SignOutAsync`-Aufrufe kein Authentifizierungsschema angibt. Die `DefaultScheme` des `CookieAuthenticationDefaults.AuthenticationScheme` der APP wird als Fallback verwendet.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -77,12 +79,12 @@ In diesem Beispiel wird veranschaulicht, wie ein externer Authentifizierungs Anb
 
 In diesem Beispiel wird die [Google-Authentifizierung](xref:security/authentication/google-logins) zum Authentifizieren von Benutzern verwendet. Die Verwendung der Google-Authentifizierung verlagert viele der Komplexitäten bei der Verwaltung des Anmeldevorgangs an Google. Informationen zur Integration in einen anderen externen Authentifizierungs Anbieter finden Sie in den folgenden Themen:
 
-* [Facebook-Authentifizierung](xref:security/authentication/facebook-logins)
+* [Authentifizierung über Facebook](xref:security/authentication/facebook-logins)
 * [Microsoft-Authentifizierung](xref:security/authentication/microsoft-logins)
-* [Twitter-Authentifizierung](xref:security/authentication/twitter-logins)
+* [Authentifizierung über Twitter](xref:security/authentication/twitter-logins)
 * [Andere Anbieter](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>-Konfiguration
+## <a name="configuration"></a>Konfiguration
 
 Konfigurieren Sie in der `ConfigureServices`-Methode die Authentifizierungs Schemas der APP mit den Methoden `AddAuthentication`, `AddCookie`und `AddGoogle`:
 
@@ -118,7 +120,7 @@ Zum Abmelden des aktuellen Benutzers und zum Löschen des Cookies müssen Sie [s
 
 Beachten Sie, dass der `SignOutAsync`-Aufrufe kein Authentifizierungsschema angibt. Die `DefaultScheme` des `CookieAuthenticationDefaults.AuthenticationScheme` der APP wird als Fallback verwendet.
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
