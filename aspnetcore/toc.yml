@@ -315,8 +315,10 @@
           uid: blazor/dependency-injection
         - name: Routing
           uid: blazor/routing
-        - name: JavaScript-Interoperabilität
-          uid: blazor/javascript-interop
+        - name: Aufrufen von JavaScript über .NET
+          uid: blazor/call-javascript-from-dotnet
+        - name: Aufrufen von .NET über JavaScript
+          uid: blazor/call-dotnet-from-javascript
         - name: Hostingmodellkonfiguration
           uid: blazor/hosting-model-configuration
         - name: Komponentenbibliotheken
@@ -325,8 +327,30 @@
           items:
             - name: Übersicht
               uid: security/blazor/index
+            - name: Blazor WebAssembly
+              items:
+                - name: Übersicht
+                  uid: security/blazor/webassembly/index
+                - name: Eigenständig mit Authentifizierungsbibliothek
+                  uid: security/blazor/webassembly/standalone-with-authentication-library
+                - name: Eigenständig mit Microsoft-Konten
+                  uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+                - name: Eigenständig mit AAD
+                  uid: security/blazor/webassembly/standalone-with-azure-active-directory
+                - name: Eigenständig mit AAD B2C
+                  uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+                - name: Gehostet mit Identity Server
+                  uid: security/blazor/webassembly/hosted-with-identity-server
+                - name: Gehostet mit AAD
+                  uid: security/blazor/webassembly/hosted-with-azure-active-directory
+                - name: Gehostet mit AAD B2C
+                  uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: Zusätzliche Szenarien
+                  uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor Server
               uid: security/blazor/server
+            - name: Sicherheitsrichtlinie für den Inhalt
+              uid: security/blazor/content-security-policy
         - name: Zustandsverwaltung
           uid: blazor/state-management
         - name: Behandeln von Fehlern
@@ -335,6 +359,8 @@
           uid: blazor/debug
         - name: Aufrufen einer Web-API
           uid: blazor/call-web-api
+        - name: Progressive Webanwendungen
+          uid: blazor/progressive-web-app
         - name: Hosten und Bereitstellen
           items:
             - name: Übersicht
@@ -373,7 +399,7 @@
           uid: client-side/bundling-and-minification
         - name: Browserverknüpfung
           uid: client-side/using-browserlink
-    - name: Sitzungs- und Anwendungszustand
+    - name: Sitzungs- und Statusverwaltung
       uid: fundamentals/app-state
     - name: Layout
       uid: mvc/views/layout
@@ -1066,6 +1092,14 @@
       uid: security/cookie-sharing
     - name: SameSite-Cookies
       uid: security/samesite
+    - name: SameSite-Beispiele
+      items:
+        - name: Beispiel für SameSite-Cookie für Razor Pages 2.1
+          uid: security/samesite/rp21
+        - name: Beispiel für SameSite-Cookie für Razor Pages 3.1
+          uid: security/samesite/rp31
+        - name: Beispiel für SameSite-Cookie für MVC
+          uid: security/samesite/mvc21
     - name: Liste sicherer IP-Adressen
       uid: security/ip-safelist
     - name: 'Anwendungssicherheit: OWASP'
@@ -1074,8 +1108,30 @@
       items:
         - name: Übersicht
           uid: security/blazor/index
+        - name: Blazor WebAssembly
+          items:
+            - name: Übersicht
+              uid: security/blazor/webassembly/index
+            - name: Eigenständig mit Authentifizierungsbibliothek
+              uid: security/blazor/webassembly/standalone-with-authentication-library
+            - name: Eigenständig mit Microsoft-Konten
+              uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+            - name: Eigenständig mit AAD
+              uid: security/blazor/webassembly/standalone-with-azure-active-directory
+            - name: Eigenständig mit AAD B2C
+              uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+            - name: Gehostet mit Identity Server
+              uid: security/blazor/webassembly/hosted-with-identity-server
+            - name: Gehostet mit AAD
+              uid: security/blazor/webassembly/hosted-with-azure-active-directory
+            - name: Gehostet mit AAD B2C
+              uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: Zusätzliche Szenarien
+              uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor Server
           uid: security/blazor/server
+        - name: Sicherheitsrichtlinie für den Inhalt
+          uid: security/blazor/content-security-policy
 - name: Leistung
   items:
     - name: Übersicht
@@ -1203,4 +1259,4 @@
 - name: API-Verweis
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: Mitwirken
-  href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
+  href: 'https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'

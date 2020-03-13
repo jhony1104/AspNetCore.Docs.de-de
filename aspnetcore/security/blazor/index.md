@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: c07ffdbd5df58d6b3d19a5d75ce224d830101eac
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.openlocfilehash: ba00c0370094df4e0ae0479aeb23eceea6ef04f0
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447424"
+ms.lasthandoff: 03/11/2020
+ms.locfileid: "79083346"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
@@ -194,7 +194,7 @@ namespace BlazorSample.Services
 In einer Blazor-WebAssembly-App wird der `CustomAuthStateProvider`-Dienst in `Main` von *Program.cs* registriert:
 
 ```csharp
-using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorSample.Services;
@@ -513,6 +513,8 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
 In Blazor WebAssembly-Apps können Autorisierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
 **Führen Sie Autorisierungsprüfungen auf dem Server immer innerhalb aller API-Endpunkte durch, auf die Ihre clientseitige App zugreift.**
+
+Weitere Informationen finden Sie in den Artikeln unter <xref:security/blazor/webassembly/index>.
 
 ## <a name="troubleshoot-errors"></a>Fehlerbehandlung
 
