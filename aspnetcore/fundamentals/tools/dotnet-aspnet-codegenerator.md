@@ -7,11 +7,11 @@ ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081510"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649855"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -42,7 +42,7 @@ dotnet aspnet-codegenerator [arguments] [-p|--project] [-n|--nuget-package-dir] 
 dotnet aspnet-codegenerator [-h|--help]
 ```
 
-## <a name="description"></a>BESCHREIBUNG
+## <a name="description"></a>Beschreibung
 
 Der globale Befehl `dotnet aspnet-codegenerator` führt den ASP.NET Code-Codegenerator und die Gerüstbauengine aus.
 
@@ -68,7 +68,7 @@ Gibt das NuGet-Paketverzeichnis an.
 
 `-c|--configuration {Debug|Release}`
 
-Legt die Buildkonfiguration fest. Der Standardwert ist `Debug`sein.
+Legt die Buildkonfiguration fest. Der Standardwert ist `Debug`.
 
 `-tfm|--target-framework`
 
@@ -127,7 +127,7 @@ Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator` `controller`
 
 Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator controller`:
 
-| Option               | BESCHREIBUNG|
+| Option               | Beschreibung|
 | ----------------- | ------------ |
 | --controllerName oder -name | Der Name des Controllers. |
 | --useAsyncActions oder -async | Generiert asynchrone Controlleraktionen. |
@@ -176,7 +176,7 @@ Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator` `razorpage` 
 
 Die folgende Tabelle zeigt die Optionen für `aspnet-codegenerator razorpage`:
 
-| Option               | BESCHREIBUNG|
+| Option               | Beschreibung|
 | ----------------- | ------------ |
 |   --namespaceName oder -namespace | Der Name des Namespace, der für das generierte PageModel verwendet wird. |
 | --partialView oder -partial | Generiert eine Teilansicht. Die Layoutoptionen -l und -udl werden ignoriert, wenn diese Option angegeben wird. |

@@ -1,7 +1,7 @@
 ---
-title: Ruft eine Web-API aus ASP.net Core Blazor
+title: Aufrufen einer Web-API über ASP.NET Core Blazor
 author: guardrex
-description: Erfahren Sie, wie Sie eine Web-API aus einer Blazor-App mithilfe von JSON-Hilfsprogrammen aufzurufen, einschließlich der cors-Anforderungen (Cross-Origin Resource Sharing).
+description: Erfahren Sie, wie Sie mithilfe von JSON-Hilfsprogramme eine Web-API von einer Blazor-App aufrufen können, einschließlich der Erstellung von CORS-Anforderungen (Ressourcenfreigabe zwischen verschiedenen Ursprüngen).
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -10,56 +10,56 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 345fb6962e3376c22551eb7914c70c89cb7100d5
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
-ms.translationtype: MT
+ms.openlocfilehash: e6996f0e6731b05038d0a9329152b8afd5f6796d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213274"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647731"
 ---
-# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Ruft eine Web-API aus ASP.net Core Blazor
+# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Aufrufen einer Web-API über ASP.NET Core Blazor
 
-Von [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)und [Juan de la Cruz](https://github.com/juandelacruz23)
+Von [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) und [Juan De la Cruz](https://github.com/juandelacruz23)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) -apps Web-APIs mithilfe eines vorkonfigurierten `HttpClient` Diensts aufruft. Verfassen von Anforderungen, die JavaScript-Abruf- [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) -Optionen enthalten können, unter Verwendung Blazor JSON-Hilfsprogramme oder mit <xref:System.Net.Http.HttpRequestMessage>. Der `HttpClient` Dienst in Blazor Webassembly-apps konzentriert sich darauf, Anforderungen an den Ursprungsserver zurückzustellen. Die Anleitung in diesem Thema bezieht sich nur auf Blazor Webassembly-apps.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)-Apps rufen Web-APIs über einen vorkonfigurierten `HttpClient`-Dienst auf. Erstellen Sie Anforderungen, die JavaScript [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API)-Optionen enthalten können, mit BlazorJSON-Hilfsprogrammen oder mit <xref:System.Net.Http.HttpRequestMessage>. Der `HttpClient`-Dienst in Blazor WebAssembly-Apps konzentriert sich darauf, Anforderungen an den Ursprungsserver zurückzusenden. Die Anleitung in diesem Thema bezieht sich nur auf Blazor WebAssembly-Apps.
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) -apps Web-APIs über <xref:System.Net.Http.HttpClient> Instanzen aufruft, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory>erstellt werden. Die Anleitungen in diesem Thema beziehen sich nicht auf Blazor Server-apps. Wenn Sie Blazor Server-apps entwickeln, befolgen Sie die Anweisungen in <xref:fundamentals/http-requests>.
+[Blazor Server](xref:blazor/hosting-models#blazor-server)-Apps rufen Web-APIs über <xref:System.Net.Http.HttpClient>-Instanzen auf, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory> erstellt werden. Die Anleitung in diesem Thema bezieht sich nicht auf Blazor Server-Apps. Befolgen Sie bei der Entwicklung von Blazor Server-Apps die Anleitung in <xref:fundamentals/http-requests>.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([herunterladen](xref:index#how-to-download-a-sample)) &ndash; wählen Sie die APP *blazorwebassemblysample* aus.
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)) &ndash; Wählen Sie die *BlazorWebAssemblySample*-App aus.
 
-Weitere Informationen finden Sie in der Beispiel-app " *blazorwebassemblysample* " in den folgenden Komponenten:
+Weitere Informationen finden Sie in der *BlazorWebAssemblySample*-Beispiel-App:
 
-* Aufrufen der Web-API (*pages/callwebapi. Razor*)
-* HTTP-Anforderungs Tester (*Components/httprequesttester. Razor*)
+* Aufrufen der Web-API (*Pages/CallWebAPI.razor*)
+* HTTP-Anforderungstester (*Components/httprequesttester. Razor*)
 
 ## <a name="packages"></a>Pakete
 
-Verweisen Sie auf die *experimentelle* [Microsoft.aspnetcore.Blazor.HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) -nuget-Paket in der Projektdatei. `Microsoft.AspNetCore.Blazor.HttpClient` basiert auf `HttpClient` und [System. Text. JSON](https://www.nuget.org/packages/System.Text.Json/).
+Verweisen Sie auf das *experimentelle* [Microsoft.AspNetCore.Blazor.HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/)-NuGet-Paket in der Projektdatei. `Microsoft.AspNetCore.Blazor.HttpClient` basiert auf `HttpClient` und [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/).
 
-Verwenden Sie zum Verwenden einer stabilen API das [Microsoft. Aspnet. WebAPI. Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) -Paket, das " [newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/)/[JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)verwendet. Die Verwendung der stabilen API in `Microsoft.AspNet.WebApi.Client` bietet keine der in diesem Thema beschriebenen JSON-Hilfsprogramme, die für das experimentelle `Microsoft.AspNetCore.Blazor.HttpClient` Paket eindeutig sind.
+Zur Verwendung einer stabilen API verwenden Sie das Paket [Microsoft.AspNet.WebApi.Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/), das [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)/[Json.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm) verwendet. Die Verwendung der stabilen API in `Microsoft.AspNet.WebApi.Client` bietet nicht die in diesem Thema beschriebenen JSON-Hilfsprogramme, die nur für das experimentelle `Microsoft.AspNetCore.Blazor.HttpClient`-Paket zur Verfügung stehen.
 
-## <a name="httpclient-and-json-helpers"></a>HttpClient-und JSON-Hilfsprogramme
+## <a name="httpclient-and-json-helpers"></a>HttpClient- und JSON-Hilfsprogramme
 
-In einer Blazor Webassembly-App steht [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst zur Verfügung, um Anforderungen an den Ursprungsserver zurückzusenden.
+In einer Blazor WebAssembly-App ist [HttpClient](xref:fundamentals/http-requests) als vorkonfigurierter Dienst für die Rückübertragung von Anforderungen an den Ursprungsserver verfügbar.
 
-Eine Blazor Server-app enthält standardmäßig keinen `HttpClient` Dienst. Stellen Sie mithilfe der [HttpClient-Factory-Infrastruktur](xref:fundamentals/http-requests)eine `HttpClient` für die APP bereit.
+Eine Blazor Server-App enthält standardmäßig keinen `HttpClient`-Dienst. Stellen Sie der App über die [HttpClient-Factoryinfrastruktur](xref:fundamentals/http-requests) einen `HttpClient` zur Verfügung.
 
-`HttpClient`-und JSON-Hilfsprogramme werden auch verwendet, um Web-API-Endpunkte von Drittanbietern aufzurufen. `HttpClient` wird mithilfe der Browser- [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) implementiert und unterliegt seinen Beschränkungen, einschließlich der Erzwingung derselben Ursprungs Richtlinie.
+`HttpClient`- und JSON-Hilfsprogramme werden auch zum Aufrufen von Web-API-Endpunkten von Drittanbietern verwendet. `HttpClient` wird mithilfe der [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API) des Browsers implementiert und unterliegt dessen Beschränkungen, einschließlich der Durchsetzung derselben Ursprungsrichtlinie.
 
-Die Basisadresse des Clients wird auf die Adresse des Ursprungs Servers festgelegt. Fügen Sie mit der `@inject`-Direktive eine `HttpClient`-Instanz ein:
+Die Basisadresse des Clients wird auf die Adresse des Ursprungsservers festgelegt. Fügen Sie eine `HttpClient`-Instanz mit der `@inject`-Direktive ein:
 
 ```razor
 @using System.Net.Http
 @inject HttpClient Http
 ```
 
-In den folgenden Beispielen verarbeitet eine TODO-Web-API Vorgänge zum Erstellen, lesen, aktualisieren und löschen (CRUD). Die Beispiele basieren auf einer `TodoItem`-Klasse, die die speichert:
+In den folgenden Beispielen erstellt, liest, aktualisiert und löscht eine Todo-Web-API Vorgänge (CRUD). Die Beispiele basieren auf einer `TodoItem`-Klasse, die Folgendes speichert:
 
-* ID (`Id``long`) &ndash; eindeutige ID des Elements.
-* Name (`Name``string`) &ndash; Name des Elements.
-* Status (`IsComplete``bool`) &ndash; Angabe, ob das TODO-Element abgeschlossen ist.
+* ID (`Id`, `long`) &ndash; Eindeutige ID des Elements.
+* Name (`Name`, `string`) &ndash; Name des Elements.
+* Status (`IsComplete`, `bool`) &ndash; Angabe, ob das Todo-Element abgeschlossen ist.
 
 ```csharp
 private class TodoItem
@@ -72,9 +72,9 @@ private class TodoItem
 
 JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispielen eine Web-API) und verarbeiten die Antwort:
 
-* `GetJsonAsync` &ndash; sendet eine HTTP GET-Anforderung und analysiert den JSON-Antworttext, um ein Objekt zu erstellen.
+* `GetJsonAsync` &ndash; Sendet eine HTTP-GET-Anforderung und analysiert den JSON-Antworttext, um ein Objekt zu erstellen.
 
-  Im folgenden Code werden die `_todoItems` von der Komponente angezeigt. Die `GetTodoItems`-Methode wird ausgelöst, wenn das Rendering der Komponente abgeschlossen ist ([oninitializedasync](xref:blazor/lifecycle#component-initialization-methods)). Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+  Im folgenden Code werden die `_todoItems` von der Komponente angezeigt. Die `GetTodoItems`-Methode wird ausgelöst, wenn das Rendern der Komponente abgeschlossen ist ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Ein vollständiges Beispiel finden Sie in der Beispiel-App.
 
   ```razor
   @using System.Net.Http
@@ -88,9 +88,9 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
   }
   ```
 
-* `PostJsonAsync` &ndash; sendet eine HTTP POST-Anforderung, einschließlich JSON-codiertem Inhalt, und analysiert den JSON-Antworttext, um ein Objekt zu erstellen.
+* `PostJsonAsync` &ndash; Sendet eine HTTP-POST-Anforderung, einschließlich JSON-codierten Inhalten, und analysiert den JSON-Antworttext, um ein Objekt zu erstellen.
 
-  Im folgenden Code wird `_newItemName` von einem gebundenen Element der-Komponente bereitgestellt. Die `AddItem`-Methode wird durch Auswahl eines `<button>` Elements ausgelöst. Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+  Im folgenden Code wird `_newItemName` durch ein gebundenes Element der Komponente bereitgestellt. Die `AddItem`-Methode wird durch Auswählen eines `<button>`-Elements ausgelöst. Ein vollständiges Beispiel finden Sie in der Beispiel-App.
 
   ```razor
   @using System.Net.Http
@@ -110,9 +110,9 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
   }
   ```
 
-* `PutJsonAsync` &ndash; sendet eine HTTP PUT-Anforderung, einschließlich JSON-codiertem Inhalt.
+* `PutJsonAsync` &ndash; Sendet eine HTTP-PUT-Anforderung, einschließlich JSON-codierter Inhalte.
 
-  Im folgenden Code werden `_editItem` Werte für `Name` und `IsCompleted` von gebundenen Elementen der Komponente bereitgestellt. Die `Id` des Elements wird festgelegt, wenn das Element in einem anderen Teil der Benutzeroberfläche ausgewählt und `EditItem` aufgerufen wird. Die `SaveItem`-Methode wird ausgelöst, indem Sie das Save `<button>`-Element auswählen. Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+  Im folgenden Code werden `_editItem`-Werte für `Name` und `IsCompleted` durch gebundene Elemente der Komponente bereitgestellt. Die `Id` des Elements wird festgelegt, wenn das Element in einem anderen Teil der Benutzeroberfläche ausgewählt und `EditItem` aufgerufen wird. Die Methode `SaveItem` wird durch Auswahl des `<button>`-Elements „Speichern“ ausgelöst. Ein vollständiges Beispiel finden Sie in der Beispiel-App.
 
   ```razor
   @using System.Net.Http
@@ -137,9 +137,9 @@ JSON-Hilfsmethoden senden Anforderungen an einen URI (in den folgenden Beispiele
   }
   ```
 
-<xref:System.Net.Http> enthält zusätzliche Erweiterungs Methoden zum Senden von HTTP-Anforderungen und empfangen von HTTP-Antworten. " [HttpClient. deleteasync](xref:System.Net.Http.HttpClient.DeleteAsync*) " wird verwendet, um eine HTTP DELETE-Anforderung an eine Web-API zu senden.
+<xref:System.Net.Http> enthält zusätzliche Erweiterungsmethoden zum Senden von HTTP-Anforderungen und Empfangen von HTTP-Antworten. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) wird verwendet, um eine HTTP-DELETE-Anforderung an eine Web-API zu senden.
 
-Im folgenden Code Ruft das DELETE `<button>`-Element die `DeleteItem`-Methode auf. Das gebundene `<input>` Element stellt die `id` des zu löschenden Elements bereit. Ein umfassendes Beispiel finden Sie in der Beispiel-app.
+Im folgenden Code ruft das `<button>`-Element „Löschen“ die `DeleteItem`-Methode auf. Das gebundene `<input>`-Element stellt die `id` des zu löschenden Elements bereit. Ein vollständiges Beispiel finden Sie in der Beispiel-App.
 
 ```razor
 @using System.Net.Http
@@ -158,15 +158,15 @@ Im folgenden Code Ruft das DELETE `<button>`-Element die `DeleteItem`-Methode au
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Ressourcenfreigabe zwischen verschiedenen Ursprüngen (Cross-Origin Resource Sharing, CORS)
 
-Die Browser Sicherheit verhindert, dass eine Webseite Anforderungen an eine andere Domäne sendet, als die, die die Webseite bedient hat. Diese Einschränkung wird als *Richtlinie für denselben Ursprung*bezeichnet. Die Richtlinie für denselben Ursprung verhindert, dass ein böswilliger Standort vertrauliche Daten von einem anderen Standort liest. Um Anforderungen vom Browser an einen Endpunkt mit einem anderen Ursprung zu senden, muss der *Endpunkt* [Cross-Origin Resource Sharing (cors)](https://www.w3.org/TR/cors/)aktivieren.
+Die Browsersicherheit verhindert, dass eine Webseite Anforderungen an eine andere Domäne als diejenige stellt, die die Webseite versorgt hat. Diese Einschränkung wird als *Richtlinie des gleichen Ursprungs* bezeichnet. Die Richtlinie des gleichen Ursprungs verhindert, dass eine schädliche Website sensible Daten von einer anderen Website liest. Um Anforderungen vom Browser an einen Endpunkt mit einem anderen Ursprung zu stellen, muss der *Endpunkt* die [Ressourcenfreigabe zwischen verschiedenen Ursprüngen (CORS)](https://www.w3.org/TR/cors/) ermöglichen.
 
-Die [Blazor Webassembly-Beispiel-app (blazorwebassemblysample)](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) veranschaulicht die Verwendung von cors in der Web-API-Aufruf Komponente (*pages/callwebapi. Razor*).
+Die [Blazor WebAssembly-Beispiel-App (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) veranschaulicht die Verwendung von CORS in der Komponente „Web-API aufrufen“ (*Pages/CallWebAPI.razor*).
 
-Informationen dazu, wie Sie anderen Standorten cors-Anforderungen (Cross-Origin Resource Sharing) an Ihre APP senden können, finden Sie unter <xref:security/cors>.
+Informationen darüber, wie Sie anderen Websites ermöglichen, CORS-Anforderungen (Ressourcenfreigabe zwischen verschiedenen Ursprüngen) an Ihre App zu stellen, finden Sie unter <xref:security/cors>.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient und httprequestmessage mit Abruf-API-Anforderungs Optionen
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient und HttpRequestMessage mit Fetch-API-Anforderungsoptionen
 
-Verwenden Sie zum Anpassen von Anforderungen bei der Ausführung in Webassembly in einer Blazor Webassembly-APP [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage>. Sie können z. b. den Anforderungs-URI, die HTTP-Methode und alle gewünschten Anforderungs Header angeben.
+Wenn Sie WebAssembly in einer Blazor WebAssembly-App ausführen, verwenden Sie [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage> zum Anpassen von Anforderungen. Sie können z. B. den Anforderungs-URI, die HTTP-Methode und beliebige Anforderungsheader angeben.
 
 ```razor
 @using System.Net.Http
@@ -202,16 +202,16 @@ Verwenden Sie zum Anpassen von Anforderungen bei der Ausführung in Webassembly 
 }
 ```
 
-Weitere Informationen zu den Abruf-API-Optionen finden Sie unter [MDN-Webdokumentation: windoworworkerglobalscope. FETCH ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
+Weitere Informationen zu den Fetch-API-Optionen finden Sie in den [MDN-Webdokumentationen: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
 
-Beim Senden von Anmelde Informationen (Autorisierungs Cookies/-Header) für cors-Anforderungen muss der `Authorization`-Header von der cors-Richtlinie zugelassen werden.
+Beim Senden von Anmeldeinformationen (Autorisierungscookies/-header) bei CORS-Anforderungen muss der `Authorization`-Header von der CORS-Richtlinie zugelassen werden.
 
 Die folgende Richtlinie enthält die Konfiguration für:
 
-* Anforderungs Ursprünge (`http://localhost:5000``https://localhost:5001`).
-* Beliebige Methode (Verb).
-* `Content-Type` und `Authorization` Header. Um einen benutzerdefinierten Header (z. b. `x-custom-header`) zuzulassen, Listen Sie den-Header auf, wenn Sie <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>aufrufen.
-* Anmelde Informationen, die durch Client seitigen JavaScript-Code festgelegt wurden (`credentials`-Eigenschaft auf `include`festgelegt).
+* Anforderungsursprünge (`http://localhost:5000`, `https://localhost:5001`).
+* Any-Methode (Verb).
+* `Content-Type`- und `Authorization`-Header. Um einen benutzerdefinierten Header (z. B. `x-custom-header`) zuzulassen, listen Sie den Header beim Aufrufen von <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> auf.
+* Anmeldeinformationen werden durch clientseitigen JavaScript-Code festgelegt (`credentials`-Eigenschaft auf `include` festgelegt).
 
 ```csharp
 app.UseCors(policy => 
@@ -221,11 +221,11 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-Weitere Informationen finden Sie unter <xref:security/cors> und der Komponente "http-Anforderungs Tester" der Beispiel-app (*Components/httprequesttester. Razor*).
+Weitere Informationen finden Sie unter <xref:security/cors> und unter der HTTP-Anforderungstester-Komponente der Beispiel-App (*Components/HTTPRequestTester.razor*).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
-* [Konfiguration des Kestrel-HTTPS-Endpunkts](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [Cross-Origin Resource Sharing (cors) bei W3C](https://www.w3.org/TR/cors/)
+* [Kestrel HTTPS-Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration)
+* [Ressourcenfreigabe zwischen verschiedenen Ursprüngen (Cross-Origin Resource Sharing, CORS) beim W3C](https://www.w3.org/TR/cors/)

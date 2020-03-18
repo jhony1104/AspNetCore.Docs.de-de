@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie Blazor-Apps hosten und bereitstellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/11/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 238e7fc8f8d64c7847dc8847fb66e22442a3c8e0
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ddf70da29a82d462422c1bdf74ff45b92bb10b56
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644707"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434264"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
@@ -45,7 +45,12 @@ dotnet publish -c Release
 
 Das Veröffentlichen einer App löst eine [Wiederherstellung](/dotnet/core/tools/dotnet-restore) der Abhängigkeiten des Projekts aus und [erstellt](/dotnet/core/tools/dotnet-build) das Projekt, bevor die Objekte für die Bereitstellung erstellt werden. Im Rahmen des Buildprozesses werden nicht verwendete Methoden und Assemblys entfernt, um die Downloadgröße und Ladezeiten von Apps zu reduzieren.
 
-Eine Blazor WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/{ASSEMBLYNAME}/dist* veröffentlicht. Eine Blazor Server-App wird im Ordner */bin/Release/{TARGET FRAMEWORK}/publish* veröffentlicht.
+Veröffentlichungsspeicherorte:
+
+* Blazor WebAssembly
+  * Eigenständig &ndash; die App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* veröffentlicht. Zum Bereitstellen der App als statische Website kopieren Sie den Inhalt des Ordners *wwwroot* auf den Host der statischen Website.
+  * Gehostet &ndash; der Client Blazor der WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* der Server-App zusammen mit allen anderen statischen Webressourcen der Server-App veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
+* Blazor-Server &ndash; die App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish* veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
 
 Die Objekte im Ordner werden auf dem Webserver bereitgestellt. Die Bereitstellung kann je nach verwendetem Entwicklungstool manuell oder automatisch erfolgen.
 

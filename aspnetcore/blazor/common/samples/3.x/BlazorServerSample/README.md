@@ -1,3 +1,3 @@
-# <a name="blazor-server-sample-app"></a>Blazor Server-Beispiel-App
+# <a name="blazor-server-sample-app"></a>Beispiel-App für Blazor Server
 
-Dieses Beispiel veranschaulicht die Verwendung von blazor-Szenarios, die in der blazor-Dokumentation beschrieben werden.
+Dieses Beispiel veranschaulicht die Verwendung von Blazor-Szenarios, die in der Blazor-Dokumentation beschrieben werden.

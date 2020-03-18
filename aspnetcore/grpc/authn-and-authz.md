@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 4309a722859af23be78d5d74c01127a94cfec063
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c0312b186bbb35e3b802984484b7213016d8bf04
+ms.sourcegitcommit: 51c86c003ab5436598dbc42f26ea4a83a795fd6e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650821"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "78964440"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in gRPC für ASP.NET Core
 
@@ -35,7 +35,7 @@ public void Configure(IApplicationBuilder app)
 
     app.UseEndpoints(endpoints =>
     {
-        routes.MapGrpcService<GreeterService>();
+        endpoints.MapGrpcService<GreeterService>();
     });
 }
 ```

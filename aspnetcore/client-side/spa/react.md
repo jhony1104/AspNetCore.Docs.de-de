@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: bbe5328bfa5b4187989a00c3c94e98dabc5d032a
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
-ms.translationtype: MT
+ms.openlocfilehash: 9703a62eb7f779974382fe0fb01702d9fcd37d64
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190517"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649753"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Verwenden der React-Projektvorlage mit ASP.NET Core
 
@@ -20,7 +20,7 @@ Die aktualisierte React-Projektvorlage stellt einen geeigneten Anfangspunkt für
 
 Mit der Vorlage können ein ASP.NET Core-Projekt, das als API-Back-End fungieren soll, und ein CRA React-Projekt, das als Benutzeroberfläche fungieren soll, erstellt werden. Sie bietet jedoch den Komfort, dass beide Projekte in einem einzigen App-Projekt gehostet werden, das als eine Einheit erstellt und veröffentlicht werden kann.
 
-Die Projektvorlage "reagieren" ist nicht für serverseitiges Rendering (SSR) vorgesehen. Bei SSR mit "reagieren" und "Node. js" sollten Sie " [Next. js](https://github.com/zeit/next.js/) " oder " [razzle](https://github.com/jaredpalmer/razzle)"
+Die React-Projektvorlage ist nicht für serverseitiges Rendering (SSR) vorgesehen. Für SSR mit React und Node.js sollten Sie [Next.js](https://github.com/zeit/next.js/) oder [Razzle](https://github.com/jaredpalmer/razzle) in Erwägung ziehen.
 
 ## <a name="create-a-new-app"></a>Erstellen einer neuen App
 
@@ -35,13 +35,13 @@ cd my-new-app
 
 Führen Sie die App über Visual Studio oder die .NET Core CLI aus:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Öffnen Sie die generierte *CSPROJ*-Datei, und führen Sie die App von dort wie gewohnt aus.
 
 Während der Erstellung werden bei der ersten Ausführung npm-Abhängigkeiten wiederhergestellt. Dies kann einige Minuten dauern. Nachfolgende Builds sind wesentlich schneller.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
 Stellen Sie sicher, dass Sie über eine Umgebungsvariable mit dem Namen `ASPNETCORE_Environment` und dem Wert `Development` verfügen. Führen Sie unter Windows (bei Eingabeaufforderungen außerhalb von PowerShell) `SET ASPNETCORE_Environment=Development` aus. Führen Sie unter Linux oder macOS `export ASPNETCORE_Environment=Development` aus.
 
@@ -51,17 +51,17 @@ Führen Sie [dotnet run](/dotnet/core/tools/dotnet-run) aus, um die App zu start
 
 ---
 
-Mit der Projektvorlage werden eine ASP.NET Core-App und eine React-App erstellt. Die ASP.NET Core-App ist zur Verwendung für den Datenzugriff, die Autorisierung und weitere serverseitige Belange vorgesehen. Die React-App, die sich im Unterverzeichnis *ClientApp* befindet, ist für sämtliche Belange der Benutzeroberfläche vorgesehen.
+Mit der Projektvorlage werden eine ASP.NET Core-App und eine React-App erstellt. Die ASP.NET Core-App ist für die Verwendung für den Datenzugriff, die Autorisierung und weitere serverseitige Belange vorgesehen. Die React-App, die sich im Unterverzeichnis *ClientApp* befindet, ist für sämtliche Belange der Benutzeroberfläche vorgesehen.
 
 ## <a name="add-pages-images-styles-modules-etc"></a>Hinzufügen von Seiten, Images, Formatvorlagen, Modulen usw.
 
-Das Verzeichnis *ClientApp* ist eine CRA-React-Standard-App. Weitere Informationen finden Sie in der offiziellen [CRA-Dokumentation](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+Das Verzeichnis *ClientApp* ist eine CRA-React-Standard-App. Weitere Informationen finden Sie in der offiziellen [CRA-Dokumentation](https://create-react-app.dev/docs/getting-started/).
 
 Zwischen der React-App, die mit dieser Vorlage erstellt wurde, und der App, die von CRA selbst erstellt wurde, gibt es jedoch leichte Unterschiede; die Funktionen der App sind jedoch unverändert. Die mit der Vorlage erstellte App enthält ein auf [Bootstrap](https://getbootstrap.com/) basiertes Layout und ein Beispiel für grundlegendes Routing.
 
 ## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
-Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
+Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Zum Beispiel:
 
 ```console
 cd ClientApp
@@ -82,7 +82,7 @@ Das Projekt ist so konfiguriert, dass die eigene Instanz des CRA-Entwicklungsser
 
 Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der CRA-Server neu gestartet. Es dauert einige Sekunden, bis der Sicherungsvorgang gestartet wird. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der CRA-Server neu gestartet wurde, können Sie den CRA-Server extern ausführen, unabhängig vom ASP.NET Core-Prozess. Gehen Sie hierzu wie folgt vor:
 
-1. Fügen Sie dem *Client App* -Unterverzeichnis mit der folgenden Einstellung eine *. DV* -Datei hinzu:
+1. Fügen Sie dem Unterverzeichnis *ClientApp* eine *ENV*-Datei mit der folgenden Einstellung hinzu:
 
     ```
     BROWSER=none
@@ -106,7 +106,7 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
 Wenn Sie Ihre ASP.NET Core-App starten, wird kein CRA-Server gestartet. Stattdessen wird die Instanz verwendet, die Sie manuell gestartet haben. Dadurch kann sie schneller gestartet und neu gestartet werden. So müssen Sie nicht mehr jedes Mal warten, bis Ihre React-App neu erstellt wurde.
 
 > [!IMPORTANT]
-> "Server seitiges Rendering" ist kein unterstütztes Feature dieser Vorlage. Unser Ziel dieser Vorlage besteht darin, die Parität mit "Create-REAG-app" zu erfüllen. Daher werden Szenarios und Features, die nicht in einem Projekt vom Typ "Create-REAG-app" (z. b. SSR) enthalten sind, nicht unterstützt und bleiben für den Benutzer als Übung erhalten.
+> „Serverseitiges Rendering“ ist kein unterstütztes Feature dieser Vorlage. Unser Ziel hinsichtlich dieser Vorlage ist es, die Parität mit „create-react-app“ zu erfüllen. Daher werden Szenarios und Features, die nicht in einem „create-react-app“-Projekt (wie SSR) enthalten sind, nicht unterstützt und stehen als Übung für die Benutzer zur Verfügung.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

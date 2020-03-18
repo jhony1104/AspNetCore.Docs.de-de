@@ -11,19 +11,19 @@ no-loc:
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
 ms.openlocfilehash: 263b85a3213c1da233e4c96095faaf39d0a8e13f
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726776"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648607"
 ---
-# <a name="configure-the-linker-for-aspnet-core-opno-locblazor"></a>Konfigurieren des Linkers für ASP.NET Core [!OP.NO-LOC(Blazor)]
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[!OP.NO-LOC(Blazor)] führt bei einem Build eine [IL](/dotnet/standard/managed-code#intermediate-language--execution)-Verknüpfung durch, um nicht benötigte Zwischensprache aus den Ausgabeassemblys der App zu entfernen.
+Blazor führt bei einem Build eine [IL](/dotnet/standard/managed-code#intermediate-language--execution)-Verknüpfung durch, um nicht benötigte Zwischensprache aus den Ausgabeassemblys der App zu entfernen.
 
 Sie können die Assemblyverknüpfung mit einer der folgenden Methoden steuern:
 
@@ -55,7 +55,7 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  This file specifies which parts of the BCL or [!OP.NO-LOC(Blazor)] packages must not be
+  This file specifies which parts of the BCL or Blazor packages must not be
   stripped by the IL Linker even if they aren't referenced by user code.
 -->
 <linker>
@@ -86,7 +86,7 @@ Weitere Informationen finden Sie unter [IL Linker: Syntax of xml descriptor (IL-
 
 ### <a name="configure-the-linker-for-internationalization"></a>Konfigurieren des Linkers für die Internationalisierung
 
-Die [!OP.NO-LOC(Blazor)]-Linkerkonfiguration für [!OP.NO-LOC(Blazor)]-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Durch die Entfernung dieser Assemblys wird die Größe der App minimiert.
+Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Durch die Entfernung dieser Assemblys wird die Größe der App minimiert.
 
 Legen Sie die MSBuild-Eigenschaft `<MonoLinkerI18NAssemblies>` in der Projektdatei fest, um zu steuern, welche I18N-Assemblys beibehalten werden:
 

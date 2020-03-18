@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: 645f680436336acbe1d5c2854a242527c9b4b9cb
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717402"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648433"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -30,7 +30,7 @@ Die Lokalisierung von Apps umfasst die folgenden Aufgaben:
 
 3. Implementieren Sie eine Strategie zum Auswählen der Sprache bzw. Kultur für jede Anforderung.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Stellen Sie sicher, dass der Inhalt der App lokalisierbar ist.
 
@@ -144,7 +144,7 @@ Eine Ressourcendatei ist ein nützlicher Mechanismus für das Trennen von lokali
 
 ## <a name="resource-file-naming"></a>Benennung von Ressourcendateien
 
-Ressourcen werden nach dem vollständigen Typnamen ihrer Klasse, abzüglich des Assemblynamens, benannt. Eine französische Ressourcendatei, deren Hauptassembly für die Klasse `LocalizationWebsite.Web.Startup` `LocalizationWebsite.Web.dll` ist, würde zum Beispiel den Namen *Startup.fr.resx* erhalten. Eine Ressource für die Klasse `LocalizationWebsite.Web.Controllers.HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Wenn der Namespace Ihrer Zielklasse nicht dem Assemblynamen entspricht, benötigen Sie den vollständigen Typnamen. Eine Ressource für den Typ `ExtraNamespace.Tools` im Beispielprojekt würde z.B. den Namen *ExtraNamespace.Tools.fr.resx* erhalten.
+Ressourcen werden nach dem vollständigen Typnamen ihrer Klasse, abzüglich des Assemblynamens, benannt. Eine französische Ressourcendatei, deren Hauptassembly für die Klasse `LocalizationWebsite.Web.Startup``LocalizationWebsite.Web.dll` ist, würde zum Beispiel den Namen *Startup.fr.resx* erhalten. Eine Ressource für die Klasse `LocalizationWebsite.Web.Controllers.HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Wenn der Namespace Ihrer Zielklasse nicht dem Assemblynamen entspricht, benötigen Sie den vollständigen Typnamen. Eine Ressource für den Typ `ExtraNamespace.Tools` im Beispielprojekt würde z.B. den Namen *ExtraNamespace.Tools.fr.resx* erhalten.
 
 Im Beispielprojekt legt die Methode `ConfigureServices` die `ResourcesPath`-Eigenschaft auf „Resources“ fest. Der relative Projektpfad für den Controller „Home“ der französischen Ressourcendatei ist also *Resources/Controllers.HomeController.fr.resx*. Alternativ können Sie Ordner zum Organisieren von Ressourcendateien verwenden. Für den Controller „Home“ wäre der Pfad *Resources/Controllers/HomeController.fr.resx*. Wenn Sie die Option `ResourcesPath` nicht verwenden, würde sich die *RESX*-Datei im Basisprojektverzeichnis befinden. Die Ressourcendatei für `HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Ob Sie die Benennungskonventionen mit Punkten oder wie Pfade verwenden, hängt davon ab, wie Sie Ihre Ressourcendateien organisieren möchten.
 
@@ -225,6 +225,7 @@ Die Lokalisierung wird über die Methode `Startup.ConfigureServices` konfigurier
 Die aktuell angefragte Kultur wird in der [Middleware](xref:fundamentals/middleware/index) für die Lokalisierung festgelegt. Die Middleware für die Lokalisierung wird in der `Startup.Configure`-Methode aktiviert. Die Lokalisierungsmiddleware muss vor Middleware konfiguriert werden, die möglicherweise die Anforderungskultur prüft (z.B. `app.UseMvcWithDefaultRoute()`).
 
 [!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization` initialisiert ein `RequestLocalizationOptions`-Objekt. Bei jeder Anforderung wird die Liste von `RequestCultureProvider` in `RequestLocalizationOptions` aufgelistet und der erste Anbieter, der erfolgreich die Anforderungskultur bestimmen kann, wird verwendet. Die Standardanbieter stammen aus der Klasse `RequestLocalizationOptions`:
 
@@ -276,7 +277,7 @@ Der [Accept-Language-Header](https://www.w3.org/International/questions/qa-accep
 
 6. Klicken Sie auf die Sprache und dann auf **Nach oben**.
 
-::: moniker range=">= aspnetcore-3.1"
+::: moniker range="> aspnetcore-3.1"
 ### <a name="the-content-language-http-header"></a>Der Content-Language-HTTP-Header
 
 Der [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language)-Entitätsheader:

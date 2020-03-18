@@ -1,22 +1,22 @@
 ---
 title: Dateianbieter in ASP.NET Core
-author: guardrex
+author: rick-anderson
 description: Erfahren Sie, wie ASP.NET Core Dateisystemzugriff durch die Verwendung von Dateianbietern abstrahiert.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 uid: fundamentals/file-providers
-ms.openlocfilehash: a454ca394546184968222ca2ca44d7159b19a12a
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 34a48bbcf9ffb20bb61f89c80adedc1cc4783988
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944307"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647047"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dateianbieter in ASP.NET Core
 
-Von [Steve Smith](https://ardalis.com/) und [Luke Latham](https://github.com/guardrex)
+Von [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -27,7 +27,7 @@ ASP.NET Core abstrahiert Dateisystemzugriff durch die Verwendung von Dateianbiet
 * [Razor](xref:mvc/views/razor) verwendet Dateianbieter, um Seiten und Ansichten zu suchen.
 * .NET Core-Tools verwenden Dateianbieter und Globmuster, um anzugeben, welche Dateien veröffentlicht werden sollen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Dateianbieterschnittstellen
 
@@ -53,7 +53,7 @@ Die Beispiel-App demonstriert die Konfiguration eines Dateianbieters in `Startup
 
 Es sind drei Implementierungen von `IFileProvider` verfügbar.
 
-| Implementierung | BESCHREIBUNG |
+| Implementierung | Beschreibung |
 | -------------- | ----------- |
 | [PhysicalFileProvider](#physicalfileprovider) | Der physische Anbieter wird verwendet, um auf die physischen Systemdateien zuzugreifen. |
 | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | Der eingebettete Manifesanbieter wird verwendet, um auf Dateien zuzugreifen, die in Assemblys eingebettet sind. |
@@ -114,7 +114,7 @@ Mit zusätzlichen Überladungen können Sie:
 * Dateien einem zuletzt geänderten Datum zuordnen.
 * Die eingebettete Ressource benennen, die das eingebettete Dateimanifest enthält.
 
-| Überladung | BESCHREIBUNG |
+| Überladung | Beschreibung |
 | -------- | ----------- |
 | `ManifestEmbeddedFileProvider(Assembly, String)` | Akzeptiert einen optionalen relativen `root`-Pfadparameter. Geben Sie `root` an, um Aufrufe von <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> auf die Ressourcen im angegebenen Pfad zu begrenzen. |
 | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | Akzeptiert einen optionalen relativen `root`-Pfadparameter und einen Datumsparameter für `lastModified` (<xref:System.DateTimeOffset>). Das `lastModified`-Datum ordnet das letzte Änderungsdatum für die <xref:Microsoft.Extensions.FileProviders.IFileInfo>-Instanzen zu, die vom <xref:Microsoft.Extensions.FileProviders.IFileProvider> zurückgegeben wurden. |
@@ -132,8 +132,8 @@ In der Beispiel-App stellt ein `PhysicalFileProvider` und ein `ManifestEmbeddedF
 
 Die [IFileProvider.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)-Methode bietet ein Szenario, eine oder mehrere Dateien oder Verzeichnisse auf Änderungen zu überwachen. `Watch`akzeptiert eine Pfadzeichenfolge, die [Globmuster](#glob-patterns) verwenden kann, um mehrere Dateien anzugeben. <xref:Microsoft.Extensions.Primitives.IChangeToken> gibt `Watch` zurück. Das Änderungstoken macht folgendes verfügbar:
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> &ndash; eine Eigenschaft, die überprüft werden kann, um festzustellen, ob eine Änderung vorgenommen wurde.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> &ndash; wird aufgerufen, wenn Änderungen an der angegebenen Pfadzeichenfolge erkannt werden. Jedes Änderungstoken ruft nur seine zugeordneten Rückrufe als Antwort auf eine einzelne Änderung auf. Zur Aktivierung einer konstanten Überwachung verwenden Sie eine <xref:System.Threading.Tasks.TaskCompletionSource`1> (wie unten dargestellt), oder erstellen Sie `IChangeToken`-Instanzen nach Änderungen neu.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>: Eine Eigenschaft, die überprüft werden kann, um festzustellen, ob eine Änderung vorgenommen wurde.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> wird aufgerufen, wenn Änderungen an der angegebenen Pfadzeichenfolge erkannt werden. Jedes Änderungstoken ruft nur seine zugeordneten Rückrufe als Antwort auf eine einzelne Änderung auf. Zur Aktivierung einer konstanten Überwachung verwenden Sie eine <xref:System.Threading.Tasks.TaskCompletionSource`1> (wie unten dargestellt), oder erstellen Sie `IChangeToken`-Instanzen nach Änderungen neu.
 
 In der Beispiel-App wird die *WatchConsole*-Konsolen-App konfiguriert, damit sie bei einer Änderung einer Textdatei eine Meldung anzeigt:
 
@@ -176,7 +176,7 @@ ASP.NET Core abstrahiert Dateisystemzugriff durch die Verwendung von Dateianbiet
 * [Razor](xref:mvc/views/razor) verwendet Dateianbieter, um Seiten und Ansichten zu suchen.
 * .NET Core-Tools verwenden Dateianbieter und Globmuster, um anzugeben, welche Dateien veröffentlicht werden sollen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Dateianbieterschnittstellen
 
@@ -202,7 +202,7 @@ Die Beispiel-App demonstriert die Konfiguration eines Dateianbieters in `Startup
 
 Es sind drei Implementierungen von `IFileProvider` verfügbar.
 
-| Implementierung | BESCHREIBUNG |
+| Implementierung | Beschreibung |
 | -------------- | ----------- |
 | [PhysicalFileProvider](#physicalfileprovider) | Der physische Anbieter wird verwendet, um auf die physischen Systemdateien zuzugreifen. |
 | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | Der eingebettete Manifesanbieter wird verwendet, um auf Dateien zuzugreifen, die in Assemblys eingebettet sind. |
@@ -261,7 +261,7 @@ Mit zusätzlichen Überladungen können Sie:
 * Dateien einem zuletzt geänderten Datum zuordnen.
 * Die eingebettete Ressource benennen, die das eingebettete Dateimanifest enthält.
 
-| Überladung | BESCHREIBUNG |
+| Überladung | Beschreibung |
 | -------- | ----------- |
 | `ManifestEmbeddedFileProvider(Assembly, String)` | Akzeptiert einen optionalen relativen `root`-Pfadparameter. Geben Sie `root` an, um Aufrufe von <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> auf die Ressourcen im angegebenen Pfad zu begrenzen. |
 | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | Akzeptiert einen optionalen relativen `root`-Pfadparameter und einen Datumsparameter für `lastModified` (<xref:System.DateTimeOffset>). Das `lastModified`-Datum ordnet das letzte Änderungsdatum für die <xref:Microsoft.Extensions.FileProviders.IFileInfo>-Instanzen zu, die vom <xref:Microsoft.Extensions.FileProviders.IFileProvider> zurückgegeben wurden. |
@@ -279,8 +279,8 @@ In der Beispiel-App stellt ein `PhysicalFileProvider` und ein `ManifestEmbeddedF
 
 Die [IFileProvider.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)-Methode bietet ein Szenario, eine oder mehrere Dateien oder Verzeichnisse auf Änderungen zu überwachen. `Watch`akzeptiert eine Pfadzeichenfolge, die [Globmuster](#glob-patterns) verwenden kann, um mehrere Dateien anzugeben. <xref:Microsoft.Extensions.Primitives.IChangeToken> gibt `Watch` zurück. Das Änderungstoken macht folgendes verfügbar:
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> &ndash; eine Eigenschaft, die überprüft werden kann, um festzustellen, ob eine Änderung vorgenommen wurde.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> &ndash; wird aufgerufen, wenn Änderungen an der angegebenen Pfadzeichenfolge erkannt werden. Jedes Änderungstoken ruft nur seine zugeordneten Rückrufe als Antwort auf eine einzelne Änderung auf. Zur Aktivierung einer konstanten Überwachung verwenden Sie eine <xref:System.Threading.Tasks.TaskCompletionSource`1> (wie unten dargestellt), oder erstellen Sie `IChangeToken`-Instanzen nach Änderungen neu.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>: Eine Eigenschaft, die überprüft werden kann, um festzustellen, ob eine Änderung vorgenommen wurde.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> wird aufgerufen, wenn Änderungen an der angegebenen Pfadzeichenfolge erkannt werden. Jedes Änderungstoken ruft nur seine zugeordneten Rückrufe als Antwort auf eine einzelne Änderung auf. Zur Aktivierung einer konstanten Überwachung verwenden Sie eine <xref:System.Threading.Tasks.TaskCompletionSource`1> (wie unten dargestellt), oder erstellen Sie `IChangeToken`-Instanzen nach Änderungen neu.
 
 In der Beispiel-App wird die *WatchConsole*-Konsolen-App konfiguriert, damit sie bei einer Änderung einer Textdatei eine Meldung anzeigt:
 

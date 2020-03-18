@@ -1,7 +1,7 @@
 ---
-title: ASP.net Core Blazor Routing
+title: ASP.NET Core Blazor-Routing
 author: guardrex
-description: Erfahren Sie, wie Sie Anforderungen in apps und über die navlink-Komponente weiterleiten.
+description: Erfahren Sie, wie Sie Anforderungen in Apps und über die NavLink-Komponente weiterleiten.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,31 +11,31 @@ no-loc:
 - SignalR
 uid: blazor/routing
 ms.openlocfilehash: 32459f9f42220b01ce04e6444a9bb4a9592ee2da
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928283"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649237"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.net Core blazor-Routing
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor-Routing
 
 Von [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Erfahren Sie, wie Sie Anforderungen weiterleiten und wie Sie die `NavLink` Komponente verwenden, um Navigations Verknüpfungen in blazor-apps zu erstellen.
+Erfahren Sie, wie Sie Anforderungen weiterleiten und die `NavLink`-Komponente verwenden, um Navigationslinks in Blazor-Apps zu erstellen.
 
-## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.net Core Endpunkt-Routing Integration
+## <a name="aspnet-core-endpoint-routing-integration"></a>Integration von ASP.NET Core-Endpunktrouting
 
-Der blazor-Server ist in [ASP.net Core Endpunkt Routing](xref:fundamentals/routing)integriert. Eine ASP.net Core-APP ist so konfiguriert, dass eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure`akzeptiert werden:
+Blazor Server ist in das [ASP.NET Core-Endpunktrouting](xref:fundamentals/routing) integriert. Eine ASP.NET Core-App ist so konfiguriert, dass sie eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure` akzeptiert:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Die typische Konfiguration besteht darin, alle Anforderungen an eine Razor Page weiterzuleiten, die als Host für den serverseitigen Teil der blazor-Server-App fungiert. Gemäß der Konvention wird die *Hostseite* in der Regel *_Host. cshtml*benannt. Die in der Hostdatei angegebene Route wird als *Fall Back Route* bezeichnet, da Sie bei der Routen Übereinstimmung mit niedriger Priorität arbeitet. Die Fall Back Route wird berücksichtigt, wenn andere Routen nicht gleich sind. Dies ermöglicht der APP, andere Controller und Seiten zu verwenden, ohne die blazor-Server-APP zu beeinträchtigen.
+Die typischste Konfiguration ist die Weiterleitung aller Anforderungen an eine Razor-Seite, die als Host für den serverseitigen Teil der Blazor Server-App fungiert. Gemäß der Konvention wird die *Hostseite* normalerweise *_Host.cshtml* genannt. Die in der Hostdatei angegebene Route wird als *Fallbackroute* bezeichnet, da sie mit einer niedrigen Priorität bei der Routenanpassung arbeitet. Die Fallbackroute wird verwendet, wenn andere Routen nicht passen. Dadurch kann die App andere Controller und Seiten verwenden, ohne die Blazor Server-App zu beeinträchtigen.
 
-## <a name="route-templates"></a>Routen Vorlagen
+## <a name="route-templates"></a>Routenvorlagen
 
-Die `Router` Komponente ermöglicht das Routing an jede Komponente mit einer angegebenen Route. Die `Router` Komponente wird in der Datei " *app. Razor* " angezeigt:
+Die `Router`-Komponente ermöglicht das Routing zu jeder Komponente mit einer bestimmten Route. Die `Router`-Komponente wird in der Datei *App.razor* angezeigt:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -48,16 +48,16 @@ Die `Router` Komponente ermöglicht das Routing an jede Komponente mit einer ang
 </Router>
 ```
 
-Wenn eine *Razor* -Datei mit einer `@page`-Direktive kompiliert wird, wird der generierten Klasse eine <xref:Microsoft.AspNetCore.Components.RouteAttribute>, die die Routen Vorlage angibt, bereitgestellt.
+Wenn eine *.razor*-Datei mit einer `@page`-Anweisung kompiliert wird, erhält die generierte Klasse ein <xref:Microsoft.AspNetCore.Components.RouteAttribute>-Element, das die Routenvorlage angibt.
 
-Zur Laufzeit wird die `RouteView` Komponente:
+Zur Laufzeit führt die `RouteView`-Komponente Folgendes aus:
 
-* Empfängt die `RouteData` zusammen mit den gewünschten Parametern vom `Router`.
-* Rendert die angegebene Komponente mit dem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
+* Sie empfängt das `RouteData`-Element aus dem `Router`-Element zusammen mit den gewünschten Parametern.
+* Sie rendert die angegebene Komponente mit ihrem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
 
-Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout angeben. In den Standardvorlagen für blazor wird die `MainLayout` Komponente angegeben. *MainLayout. Razor* befindet sich im frei *gegebenen* Ordner des Vorlagen Projekts. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
+Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout festlegen. In den Blazor-Standardvorlagen wird die `MainLayout`-Komponente angegeben. *MainLayout.razor* befindet sich im *Freigabeordner* mit den Vorlagen für das Projekt. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
 
-Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
+Mehrere Routenvorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
 ```razor
 @page "/BlazorRoute"
@@ -67,13 +67,13 @@ Mehrere Routen Vorlagen können auf eine Komponente angewendet werden. Die folge
 ```
 
 > [!IMPORTANT]
-> Damit URLs ordnungsgemäß aufgelöst werden, muss die APP ein `<base>`-Tag in Ihrer *wwwroot/Index.html* -Datei (blazor Webassembly) oder *pages/_Host. cshtml-* Datei (blazor-Server) mit dem im `href`-Attribut (`<base href="/">`) angegebenen app-Basispfad enthalten. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
+> Damit URLs korrekt aufgelöst werden können, muss die Anwendung ein `<base>`-Tag in ihrer *wwwwroot/index.html*-Datei (Blazor WebAssembly) oder *Pages/_Host.cshtml*-Datei (Blazor Server) mit dem im `href`-Attribut (`<base href="/">`) angegebenen App-Basispfad enthalten. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#app-base-path>.
 
-## <a name="provide-custom-content-when-content-isnt-found"></a>Benutzerdefinierten Inhalt bereitstellen, wenn Inhalt nicht gefunden wird
+## <a name="provide-custom-content-when-content-isnt-found"></a>Bereitstellen von benutzerdefiniertem Inhalt, wenn kein Inhalt gefunden wurde
 
-Die `Router` Komponente ermöglicht der APP, benutzerdefinierten Inhalt anzugeben, wenn der Inhalt für die angeforderte Route nicht gefunden wurde.
+Die `Router`-Komponente ermöglicht es der App, benutzerdefinierte Inhalte anzugeben, wenn für die angeforderte Route keine Inhalte gefunden werden.
 
-Legen Sie in der Datei " *app. Razor* " benutzerdefinierten Inhalt im `NotFound` Template-Parameter der `Router` Komponente fest:
+Legen Sie in der Datei *App.razor* den benutzerdefinierten Inhalt im `NotFound`-Vorlagenparameter der `Router`-Komponente fest:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -87,11 +87,11 @@ Legen Sie in der Datei " *app. Razor* " benutzerdefinierten Inhalt im `NotFound`
 </Router>
 ```
 
-Der Inhalt `<NotFound>` Tags kann beliebige Elemente enthalten, wie z. b. andere interaktive Komponenten. Informationen zum Anwenden eines Standard Layouts auf `NotFound` Inhalt finden Sie unter <xref:blazor/layouts>.
+Der Inhalt von `<NotFound>`-Tags kann beliebige Elemente beinhalten, z. B. andere interaktive Komponenten. Informationen zum Anwenden eines Standardlayouts auf `NotFound`-Inhalte finden Sie unter <xref:blazor/layouts>.
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Weiterleiten an Komponenten aus mehreren Assemblys
 
-Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys anzugeben, die die `Router` Komponente bei der Suche nach Routing fähigen Komponenten beachten soll. Angegebene Assemblys werden zusätzlich zur `AppAssembly`angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine Routing fähige Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Im folgenden `AdditionalAssemblies` Beispiel wird die Routing Unterstützung für `Component1`:
+Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys anzugeben, die die `Router`-Komponente bei der Suche nach für das Routing geeigneten Komponenten beachten soll. Angegebene Assemblys werden zusätzlich zur mit `AppAssembly` angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine für das Routing geeignete Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Im folgenden Beispiel zu `AdditionalAssemblies` wird die Routingunterstützung für `Component1` ermöglicht:
 
 ```razor
 <Router
@@ -101,9 +101,9 @@ Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys an
 </Router>
 ```
 
-## <a name="route-parameters"></a>Routen Parameter
+## <a name="route-parameters"></a>Routenparameter
 
-Der Router verwendet Routen Parameter, um die entsprechenden Komponenten Parameter mit dem gleichen Namen (ohne Beachtung der Groß-/Kleinschreibung) aufzufüllen:
+Der Router verwendet Routenparameter, um die entsprechenden Komponentenparameter mit demselben Namen (mit Beachtung der Groß-/Kleinschreibung) aufzufüllen:
 
 ```razor
 @page "/RouteParameter"
@@ -122,20 +122,20 @@ Der Router verwendet Routen Parameter, um die entsprechenden Komponenten Paramet
 }
 ```
 
-Optionale Parameter werden nicht unterstützt. Im vorherigen Beispiel werden zwei `@page` Direktiven angewendet. Der erste ermöglicht die Navigation zur Komponente ohne einen-Parameter. Die zweite `@page`-Direktive übernimmt den `{text}` Route-Parameter und weist den Wert der `Text`-Eigenschaft zu.
+Optionale Parameter werden nicht unterstützt. Im vorherigen Beispiel werden zwei `@page`-Anweisungen angewendet. Die erste ermöglicht die Navigation zur Komponente ohne einen Parameter. Die zweite `@page`-Anweisung empfängt den `{text}`-Routenparameter und weist den Wert der `Text`-Eigenschaft zu.
 
-## <a name="route-constraints"></a>Routen Einschränkungen
+## <a name="route-constraints"></a>Routeneinschränkungen
 
-Eine Routen Einschränkung erzwingt die Typübereinstimmung in einem Routen Segment zu einer Komponente.
+Eine Routeneinschränkung erzwingt die Typübereinstimmung in einem Routensegment zu einer Komponente.
 
-Im folgenden Beispiel stimmt die Route zur `Users`-Komponente nur mit überein, wenn:
+Im folgenden Beispiel stimmt die Route zur `Users`-Komponente nur überein, wenn:
 
-* Ein `Id` Routen Segment ist in der Anforderungs-URL vorhanden.
-* Das `Id` Segment ist eine Ganzzahl (`int`).
+* Ein `Id`-Routensegment in der Anforderungs-URL vorhanden ist.
+* Das `Id`-Segment eine Ganzzahl (`int`) ist.
 
 [!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
 
-Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügbar. Informationen zu den Routen Einschränkungen, die mit der invarianten Kultur abgeglichen werden, finden Sie in der Warnung unterhalb der Tabelle.
+Die in der folgenden Tabelle aufgeführten Routeneinschränkungen sind verfügbar. Informationen zu den Routeneinschränkungen, die mit der invarianten Kultur abgeglichen werden, finden Sie in der Warnung unterhalb der Tabelle.
 
 | Constraint | Beispiel           | Beispiele für Übereinstimmungen                                                                  | Invariante<br>Kultur<br>Übereinstimmend |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
@@ -153,38 +153,38 @@ Die in der folgenden Tabelle aufgeführten Routen Einschränkungen sind verfügb
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing mit URLs, die Punkte enthalten
 
-In blazor-Server-Apps ist die Standardroute in *_Host. cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei erscheint. Eine blazor-App gibt eine " *404-nicht gefunden"-* Antwort für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host. cshtml* mit der folgenden Routen Vorlage:
+In Blazor Server-Apps ist die Standardroute in *_Host.cshtml* `/` (`@page "/"`). Eine Anforderungs-URL, die einen Punkt (`.`) enthält, wird nicht mit der Standardroute abgeglichen, da die URL zum Anfordern einer Datei angezeigt wird. Eine Blazor-App gibt eine Antwort *404 – Nicht gefunden* für eine statische Datei zurück, die nicht vorhanden ist. Um Routen zu verwenden, die einen Punkt enthalten, konfigurieren Sie *_Host.cshtml* mit der folgenden Routenvorlage:
 
 ```cshtml
 @page "/{**path}"
 ```
 
-Die `"/{**path}"` Vorlage umfasst Folgendes:
+Die `"/{**path}"`-Vorlage enthält Folgendes:
 
-* Doppelte Sternchen *-catch-all-* Syntax (`**`), um den Pfad über mehrere Ordner Grenzen ohne Codierungs Schrägstriche (`/`) zu erfassen.
-* `path` Routen Parameter Name.
+* *catch-all*-Syntax mit doppelten Sternchen (`**`) zur Erfassung des Pfades über mehrere Ordnergrenzen hinweg ohne Codierung von Schrägstrichen (`/`).
+* Name des `path`-Routenparameters.
 
 > [!NOTE]
-> Die *catch-all-* Parameter Syntax (`*`/`**`) wird in Razor-Komponenten *(Razor*-Komponenten) **nicht** unterstützt.
+> Die *catch-all*-Parametersyntax (`*`/`**`) wird **nicht** in Razor-Komponenten ( *.razor*) unterstützt.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/routing>.
 
-## <a name="navlink-component"></a>Navlink-Komponente
+## <a name="navlink-component"></a>NavLink-Komponente
 
-Verwenden Sie beim Erstellen von Navigationslinks eine `NavLink` Komponente anstelle von HTML-Hyperlink-Elementen (`<a>`). Eine `NavLink` Komponente verhält sich wie ein `<a>` Element, mit dem Unterschied, dass eine `active` CSS-Klasse auf der Grundlage der entsprechenden `href` mit der aktuellen URL umgeschaltet wird. Die `active`-Klasse hilft einem Benutzer zu verstehen, welche Seite die aktive Seite unter den angezeigten Navigationslinks ist.
+Verwenden Sie bei der Erstellung von Navigationslinks eine `NavLink`-Komponente anstelle von HTML-Hyperlinkelementen (`<a>`). Eine `NavLink`-Komponente verhält sich wie ein `<a>`-Element, abgesehen davon, dass sie eine `active`-CSS-Klasse umschaltet, je nachdem, ob das `href`-Element mit der aktuellen URL übereinstimmt. Die `active`-Klasse zeigt einem Benutzer auf, welche Seite unter den angezeigten Navigationslinks aktiv ist.
 
-Die folgende `NavMenu` Komponente erstellt eine [Bootstrap](https://getbootstrap.com/docs/) -Navigationsleiste, die die Verwendung `NavLink` Komponenten veranschaulicht:
+Die folgende `NavMenu`-Komponente erstellt eine [Bootstrap](https://getbootstrap.com/docs/)-Navigationsleiste, die zeigt, wie `NavLink`-Komponenten verwendet werden:
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-Es gibt zwei `NavLinkMatch` Optionen, die Sie dem `Match`-Attribut des `<NavLink>`-Elements zuweisen können:
+Es gibt zwei `NavLinkMatch`-Optionen, die Sie dem `Match`-Attribut des `<NavLink>`-Elements zuweisen können:
 
-* `NavLinkMatch.All` &ndash; die `NavLink` aktiv ist, wenn Sie mit der gesamten aktuellen URL übereinstimmt.
-* `NavLinkMatch.Prefix` (*Standard*) &ndash; das `NavLink` aktiv ist, wenn es mit einem beliebigen Präfix der aktuellen URL übereinstimmt.
+* `NavLinkMatch.All` &ndash; `NavLink` ist aktiv, wenn die gesamte aktuelle URL übereinstimmt.
+* `NavLinkMatch.Prefix` (*Standard*) &ndash; `NavLink` ist aktiv, wenn ein Präfix der aktuellen URL übereinstimmt.
 
-Im vorherigen Beispiel ist der Home `NavLink` `href=""` mit der Home-URL übereinstimmt und empfängt nur die `active` CSS-Klasse in der Standard-Basispfad-URL der APP (z. b. `https://localhost:5001/`). Die zweite `NavLink` empfängt die `active`-Klasse, wenn der Benutzer eine URL mit einem `MyComponent` Präfix (z. b. `https://localhost:5001/MyComponent` und `https://localhost:5001/MyComponent/AnotherSegment`) besucht.
+Im vorherigen Beispiel stimmt die Startseite `NavLink` `href=""` mit der Startseiten-URL überein und empfängt nur die CSS-Klasse `active` in der Standardbasispfad-URL der App (z. B. `https://localhost:5001/`). Die zweite `NavLink`-Komponente empfängt die `active`-Klasse, wenn der Benutzer eine beliebige URL mit einem `MyComponent`-Präfix aufruft (z. B. `https://localhost:5001/MyComponent` und `https://localhost:5001/MyComponent/AnotherSegment`).
 
-Zusätzliche `NavLink` Komponenten Attribute werden an das gerenderte Ankertag weitergegeben. Im folgenden Beispiel enthält die `NavLink` Komponente das `target`-Attribut:
+Zusätzliche `NavLink`-Komponentenattribute werden an das gerenderte Ankertag weitergegeben. Im folgenden Beispiel schließt die `NavLink`-Komponente das `target`-Attribut ein:
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -196,20 +196,20 @@ Das folgende HTML-Markup wird gerendert:
 <a href="my-page" target="_blank" rel="noopener noreferrer">My page</a>
 ```
 
-## <a name="uri-and-navigation-state-helpers"></a>URI-und Navigations Zustands Hilfen
+## <a name="uri-and-navigation-state-helpers"></a>Hilfsprogramme für URI und Navigationszustand
 
-Verwenden Sie `Microsoft.AspNetCore.Components.NavigationManager`, um mit URIs und der C# Navigation in Code zu arbeiten. `NavigationManager` stellt das Ereignis und die Methoden bereit, die in der folgenden Tabelle aufgeführt sind.
+Verwenden Sie `Microsoft.AspNetCore.Components.NavigationManager`, um mit URIs und Navigationselementen in C#-Code zu arbeiten. `NavigationManager` stellt das Ereignis und die Methoden bereit, die in der folgenden Tabelle aufgeführt sind.
 
 | Member | Beschreibung |
 | ------ | ----------- |
 | `Uri` | Ruft den aktuellen absoluten URI ab. |
-| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangesteht werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht `BaseUri` dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/Index.html* (Blazor Webassembly) oder *pages/_Host. cshtml* (Blazor Server). |
-| `NavigateTo` | Navigiert zum angegebenen URI. Wenn `forceLoad` `true`:<ul><li>Client seitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom Client seitigen Router verarbeitet wird.</li></ul> |
-| `LocationChanged` | Ein Ereignis, das ausgelöst wird, wenn sich die Navigations Position geändert hat. |
+| `BaseUri` | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangestellt werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht `BaseUri` dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server). |
+| `NavigateTo` | Navigiert zum angegebenen URI. Bei `forceLoad` lautet der Wert `true`:<ul><li>Clientseitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom clientseitigen Router verarbeitet wird oder nicht.</li></ul> |
+| `LocationChanged` | Ein Ereignis, das ausgelöst wird, wenn sich die Navigationsposition geändert hat. |
 | `ToAbsoluteUri` | Konvertiert einen relativen URI in einen absoluten URI. |
-| `ToBaseRelativePath` | Wenn ein Basis-URI (z. b. ein URI, der zuvor von `GetBaseUri`zurückgegeben wurde) angegeben wurde, konvertiert einen absoluten URI in einen URI relativ zum Basis-URI-Präfix. |
+| `ToBaseRelativePath` | Wenn ein Basis-URI (z. B. ein URI, der zuvor von `GetBaseUri` zurückgegeben wurde) vorhanden ist, wird ein absoluter URI in einen URI relativ zum Basis-URI-Präfix konvertiert. |
 
-Wenn die Schaltfläche ausgewählt wird, navigiert die folgende Komponente zur `Counter` Komponente der APP:
+Die folgende Komponente navigiert zu der `Counter`-Komponente der App, wenn die Schaltfläche ausgewählt wird:
 
 ```razor
 @page "/navigate"

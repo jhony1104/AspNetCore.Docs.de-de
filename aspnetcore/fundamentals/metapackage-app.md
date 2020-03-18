@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/24/2019
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 8435445890ce00f33ab9a8692f5442b1609192da
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 3ce74bc7329a88ffc6f77baf6b8a311c02951318
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71219110"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648955"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>Microsoft.AspNetCore.App für ASP.NET Core
 
@@ -43,7 +43,7 @@ Für das freigegebene ASP.NET Core-Framework gilt Folgendes:
 
 Für dieses Feature ist ASP.NET Core 2.x für .NET Core 2.x erforderlich.
 
-Das [Metapaket](/dotnet/core/packages#metapackages) [Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.App) für ASP.NET Core:
+Das [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Microsoft.AspNetCore.App)-[Metapaket](/dotnet/core/packages#metapackages) für ASP.NET Core:
 
 * Enthält keine Drittanbieterabhängigkeiten außer [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/), [Remotion.Linq](https://www.nuget.org/packages/Remotion.Linq/) und [IX-Async](https://www.nuget.org/packages/System.Interactive.Async/). Diese Drittanbieterabhängigkeiten sind erforderlich, damit die Features der wichtigsten Frameworks funktionieren.
 * Enthält alle unterstützten Pakete des ASP.NET Core-Teams außer denen, die Drittanbieterabhängigkeiten enthalten (von den bereits erwähnten abgesehen).
@@ -77,7 +77,7 @@ Die folgende Projektdatei verweist auf das Metapaket `Microsoft.AspNetCore.App` 
 </Project>
 ```
 
-Das hier angegebene Markup stellt eine typische ASP.NET Core 2.x-Vorlage dar. Es gibt keine Versionsnummer für den Paketverweis `Microsoft.AspNetCore.App` an. Wenn die Version nicht angegeben wird, wird vom SDK eine [implizite](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) Version angegeben (`Microsoft.NET.Sdk.Web`). Es wird empfohlen, die vom SDK angegebene implizite Version beizubehalten, statt die Versionsnummer im Paketverweis explizit festzulegen. Wenn Sie Fragen zu dieser Vorgehensweise haben, können Sie einen GitHub-Kommentar unter [Discussion for the Microsoft.AspNetCore.App implicit version (Diskussion zur impliziten Version für Microsoft.AspNetCore.App)](https://github.com/aspnet/AspNetCore.Docs/issues/6430) verfassen.
+Das hier angegebene Markup stellt eine typische ASP.NET Core 2.x-Vorlage dar. Es gibt keine Versionsnummer für den Paketverweis `Microsoft.AspNetCore.App` an. Wenn die Version nicht angegeben wird, wird vom SDK eine [implizite](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) Version angegeben (`Microsoft.NET.Sdk.Web`). Es wird empfohlen, die vom SDK angegebene implizite Version beizubehalten, statt die Versionsnummer im Paketverweis explizit festzulegen. Wenn Sie Fragen zu dieser Vorgehensweise haben, können Sie einen GitHub-Kommentar unter [Discussion for the Microsoft.AspNetCore.App implicit version (Diskussion zur impliziten Version für Microsoft.AspNetCore.App)](https://github.com/dotnet/AspNetCore.Docs/issues/6430) verfassen.
 
 Die implizite Version wird auf `major.minor.0` festgelegt, wenn es sich um Apps für Mobilgeräte handelt. Der Rollforwardmechanismus des freigegebenen Frameworks führt die App auf der neuesten kompatiblen Version der installierten freigegebenen Frameworks aus. Stellen Sie sicher, dass die gleiche Version des freigegebenen Frameworks in allen Umgebungen installiert ist, um zu gewährleisten, dass die gleiche Version bei der Entwicklung, beim Testen und in der Produktion verwendet wird. Bei unabhängigen Apps wird die implizite Versionsnummer auf die Versionsnummer `major.minor.patch` des freigegebenen Frameworks festgelegt, das im installierten SDK zusammengefasst ist.
 

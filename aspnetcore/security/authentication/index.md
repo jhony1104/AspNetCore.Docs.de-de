@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 uid: security/authentication/index
-ms.openlocfilehash: 24113fd4f090cf76746a7b077212fdab012f82c1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644359"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434329"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Übersicht über die ASP.NET Core-Authentifizierung
 
@@ -110,6 +110,18 @@ Unter den folgenden Links finden Sie Informationen zu den Unterschieden zwischen
 
 * [Aufforderung und Unterbindung mit einem funktionsfähigen Ressourcenhandler](xref:security/authorization/resourcebased#challenge-and-forbid-with-an-operational-resource-handler)
 * [Unterschiede zwischen Aufforderung und Unterbindung](xref:security/authorization/secure-data#challenge)
+
+## <a name="authentication-providers-per-tenant"></a>Authentifizierungsanbieter pro Mandant
+
+Das ASP.NET Core-Framework verfügt nicht über eine integrierte Lösung für eine mehrinstanzenfähige Authentifizierung.
+Obwohl es für Kunden sicherlich möglich ist, mithilfe der integrierten Features eine zu schreiben, empfehlen wir unseren Kunden, sich zu diesem Zweck [Orchard Core](https://www.orchardcore.net/) anzusehen.
+
+Orchard Core ist:
+
+* ein modulares und mehrinstanzenfähiges Open-Source-App-Framework, das mit ASP.NET Core erstellt wurde.
+* ein Content Management System (CMS), das auf Grundlage dieses App-Frameworks erstellt wurde.
+
+Im Quellcode von [Orchard Core](https://github.com/OrchardCMS/OrchardCore) finden Sie ein Beispiel für Authentifizierungsanbieter pro Mandant.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

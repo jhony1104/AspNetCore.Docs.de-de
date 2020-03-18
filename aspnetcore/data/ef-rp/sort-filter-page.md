@@ -1,17 +1,17 @@
 ---
 title: 'Razor-Seiten mit EF Core in ASP.NET Core: Sortieren, Filtern, Paging (3 von 8)'
-author: tdykstra
+author: rick-anderson
 description: In diesem Tutorial fügen Sie einer Razor-Seite mit ASP.NET Core und Entity Framework Core Funktionen zum Sortieren und Filtern sowie für Paging hinzu.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: b4cef98f3ad4973878c5fa65a47c0b86cdfc8686
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 9563f3ef52ce429eb0a58b468acb8e9cd7b276e2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583524"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645493"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Sortieren, Filtern, Paging (3 von 8)
 
@@ -49,7 +49,7 @@ Wenn die Indexseite über den Link **Studenten** angefordert wird, gibt es keine
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Der Code verwendet den bedingten C#-Operator [?:](/dotnet/csharp/language-reference/operators/conditional-operator). Der Operator `?:` ist ein ternärer Operator (er nimmt drei Operanden an). Die erste Zeile gibt an, dass wenn `sortOrder` NULL oder leer ist, `NameSort` auf „name_desc“ festgelegt wird. Wenn `sortOrder` **nicht** NULL oder leer ist, wird `NameSort` auf eine leere Zeichenfolge festgelegt.
+Der Code verwendet den bedingten C#-Operator [?:](/dotnet/csharp/language-reference/operators/conditional-operator). Der Operator `?:` ist ein ternärer Operator (er nimmt drei Operanden an). Die erste Zeile gibt an, dass wenn `sortOrder` NULL oder leer ist, `NameSort` auf „name_desc“ festgelegt wird. Wenn `sortOrder`**nicht** NULL oder leer ist, wird `NameSort` auf eine leere Zeichenfolge festgelegt.
 
 Durch diese beiden Anweisungen können auf der Seite die Hyperlinks in den Spaltenüberschriften wie folgt festgelegt werden:
 
@@ -140,7 +140,7 @@ Testen der App:
 
 * Klicken Sie auf **Suchen**.
 
-Beachten Sie, dass die URL die Suchzeichenfolge enthält. Beispiel:
+Beachten Sie, dass die URL die Suchzeichenfolge enthält. Zum Beispiel:
 
 ```
 https://localhost:<port>/Students?SearchString=an
@@ -275,7 +275,7 @@ Die folgende Abbildung zeigt eine fertige Seite. Die Spaltenüberschriften sind 
 
 ![Indexseite „Studenten“](sort-filter-page/_static/paging.png)
 
-Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
+Wenn nicht zu lösende Probleme auftreten, laden Sie die [fertige App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) herunter.
 
 ## <a name="add-sorting-to-the-index-page"></a>Hinzufügen einer Sortierung zur Indexseite
 
@@ -302,7 +302,7 @@ Der folgende Code enthält den bedingten [C#-Operator „?:“](/dotnet/csharp/l
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_Ternary)]
 
-Die erste Zeile gibt an, dass wenn `sortOrder` NULL oder leer ist, `NameSort` auf „name_desc“ festgelegt wird. Wenn `sortOrder` **nicht** NULL oder leer ist, wird `NameSort` auf eine leere Zeichenfolge festgelegt.
+Die erste Zeile gibt an, dass wenn `sortOrder` NULL oder leer ist, `NameSort` auf „name_desc“ festgelegt wird. Wenn `sortOrder`**nicht** NULL oder leer ist, wird `NameSort` auf eine leere Zeichenfolge festgelegt.
 
 `?: operator` ist auch als ternärer Operator bekannt.
 
@@ -521,13 +521,13 @@ Ersetzen Sie den Code in der Datei *Pages/About.cshtml* durch den folgenden Code
 
 Führen Sie die App aus, und navigieren Sie zur Seite „Info“. Die Anzahl der Studenten für die jeweiligen Anmeldedatumswerte wird in einer Tabelle angezeigt.
 
-Wenn nicht zu lösende Probleme auftreten, laden Sie die [abgeschlossene Anwendung für diese Phase](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting) herunter.
+Wenn nicht zu lösende Probleme auftreten, laden Sie die [abgeschlossene Anwendung für diese Phase](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting) herunter.
 
 ![Seite „Info“](sort-filter-page/_static/about.png)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
+* [Debuggen von ASP.NET Core 2.x-Quellcode](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Dieses Tutorial auf YouTube](https://www.youtube.com/watch?v=MDs7PFpoMqI)
 
 Im nächsten Tutorial verwendet die App Migrationen zum Aktualisieren des Datenmodells.

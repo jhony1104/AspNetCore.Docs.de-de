@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/07/2019
 uid: host-and-deploy/visual-studio-publish-profiles
 ms.openlocfilehash: 274dd2cd528d3766aa07f69aac3470a131c79ffe
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799352"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647347"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Visual Studio-Veröffentlichungsprofile (PUBXML) für die Bereitstellung von ASP.NET Core-Apps
 
@@ -70,7 +70,7 @@ Wenn ein ASP.NET Core-Projekt auf `Microsoft.NET.Sdk.Web` in der Projektdatei ve
 
 ## <a name="basic-command-line-publishing"></a>Grundlegendes zur Veröffentlichung über die Befehlszeile
 
-Die Veröffentlichung über die Befehlszeile funktioniert auf allen von .NET Core unterstützten Plattformen und setzt Visual Studio nicht voraus. In den folgenden Beispielen wird der Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) der .NET Core-CLI im Projektverzeichnis ausgeführt (das die Datei *CSPROJ* enthält). Wenn der Projektordner nicht das aktuelle Arbeitsverzeichnis ist, übergeben Sie den Projektdateipfad explizit. Beispiel:
+Die Veröffentlichung über die Befehlszeile funktioniert auf allen von .NET Core unterstützten Plattformen und setzt Visual Studio nicht voraus. In den folgenden Beispielen wird der Befehl [dotnet publish](/dotnet/core/tools/dotnet-publish) der .NET Core-CLI im Projektverzeichnis ausgeführt (das die Datei *CSPROJ* enthält). Wenn der Projektordner nicht das aktuelle Arbeitsverzeichnis ist, übergeben Sie den Projektdateipfad explizit. Zum Beispiel:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -452,7 +452,7 @@ Das Element `<ItemGroup>` im folgenden Beispiel veranschaulicht das Kopieren ein
 Das obenstehende Markup:
 
 * Kann der *CSPROJ*-Datei oder dem Veröffentlichungsprofil hinzugefügt werden. Wenn es der *CSPROJ*-Datei hinzugefügt wird, wird es in jedes Veröffentlichungsprofil im Projekt eingeschlossen.
-* Deklariert ein `_CustomFiles`-Element, um Dateien zu speichern, die mit dem Globmuster des `Include`-Attributs übereinstimmen. Der Ordner *images*, auf den im Muster verwiesen wird, befindet sich außerhalb des Projektverzeichnisses. Die [reservierte Eigenschaft](/visualstudio/msbuild/msbuild-reserved-and-well-known-properties) `$(MSBuildProjectDirectory)` löst den absoluten Pfad der Projektdatei auf.
+* Deklariert ein `_CustomFiles`-Element, um Dateien zu speichern, die mit dem Globmuster des `Include`-Attributs übereinstimmen. Der Ordner *images*, auf den im Muster verwiesen wird, befindet sich außerhalb des Projektverzeichnisses. Die [reservierte Eigenschaft](/visualstudio/msbuild/msbuild-reserved-and-well-known-properties)`$(MSBuildProjectDirectory)` löst den absoluten Pfad der Projektdatei auf.
 * Stellt eine Liste der zu verarbeitenden `DotNetPublishFiles`-Elemente bereit. Das `<DestinationRelativePath>`-Element des Elements ist standardmäßig leer. Der Standardwert wird im Markup überschrieben und verwendet [bekannte Elementmetadaten](/visualstudio/msbuild/msbuild-well-known-item-metadata) wie z. B. `%(RecursiveDir)`. Der innere Text stellt den Ordner *wwwroot/images* der veröffentlichten Website dar.
 
 ### <a name="selective-file-inclusion"></a>Selektives Einbeziehen von Dateien
@@ -465,7 +465,7 @@ Der markierte Markup-Code im folgenden Beispiel veranschaulicht Folgendes:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Im vorherigen Beispiel wird das Element `ResolvedFileToPublish` verwendet, dessen Standardverhalten darin besteht, die im `Include`-Attribut bereitgestellten Dateien in die veröffentlichte Website zu kopieren. Sie können das Standardverhalten überschreiben, indem Sie ein untergeordnetes `<CopyToPublishDirectory>`-Element mit dem inneren Text `Never` oder `PreserveNewest` einbeziehen. Beispiel:
+Im vorherigen Beispiel wird das Element `ResolvedFileToPublish` verwendet, dessen Standardverhalten darin besteht, die im `Include`-Attribut bereitgestellten Dateien in die veröffentlichte Website zu kopieren. Sie können das Standardverhalten überschreiben, indem Sie ein untergeordnetes `<CopyToPublishDirectory>`-Element mit dem inneren Text `Never` oder `PreserveNewest` einbeziehen. Zum Beispiel:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -501,7 +501,7 @@ Fügen Sie die Eigenschaft `<AllowUntrustedCertificate>` mit dem Wert `True` auf
 
 ## <a name="the-kudu-service"></a>Der Kudu-Dienst
 
-Verwenden Sie zum Anzeigen der Dateien in einer Web-App-Bereitstellung von Azure App Service den [Kudu-Dienst](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Fügen Sie das Token `scm` an den Namen Ihrer Web-App an. Beispiel:
+Verwenden Sie zum Anzeigen der Dateien in einer Web-App-Bereitstellung von Azure App Service den [Kudu-Dienst](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Fügen Sie das Token `scm` an den Namen Ihrer Web-App an. Zum Beispiel:
 
 | URL                                    | Ergebnis       |
 | -------------------------------------- | ------------ |

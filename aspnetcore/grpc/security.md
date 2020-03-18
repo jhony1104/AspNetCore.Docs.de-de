@@ -1,45 +1,45 @@
 ---
-title: Sicherheitsüberlegungen in GrpC für ASP.net Core
+title: Sicherheitsaspekte in gRPC für ASP.NET Core
 author: jamesnk
-description: Erfahren Sie mehr über die Sicherheitsüberlegungen für GrpC für ASP.net Core.
+description: Informationen zu Sicherheitsaspekten für gRPC für ASP.NET Core
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 07/07/2019
 uid: grpc/security
 ms.openlocfilehash: f84bec0ef485b701b2be36384a2e49b9b28e473d
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310381"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650887"
 ---
-# <a name="security-considerations-in-grpc-for-aspnet-core"></a>Sicherheitsüberlegungen in GrpC für ASP.net Core
+# <a name="security-considerations-in-grpc-for-aspnet-core"></a>Sicherheitsaspekte in gRPC für ASP.NET Core
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
-Dieser Artikel enthält Informationen zum Sichern von GrpC mit .net Core.
+Dieser Artikel enthält Informationen zum Sichern von gRPC mit .NET Core
 
-## <a name="transport-security"></a>Transport Sicherheit
+## <a name="transport-security"></a>Transportsicherheit
 
-GrpC-Nachrichten werden mithilfe von http/2 gesendet und empfangen. Wir empfehlen Folgendes:
+GRPC-Nachrichten werden über HTTP/2 gesendet und empfangen. Es wird Folgendes empfohlen:
 
-* [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246) zum Sichern von Nachrichten in Produktions-GrpC-Apps verwendet.
-* GrpC-Dienste sollten nur gesicherte Ports lauschen und darauf reagieren.
+* [Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246) wird verwendet, um Nachrichten in gRPC-Produktions-Apps zu sichern.
+* GRPC-Dienste dürfen nur über gesicherte Ports lauschen und reagieren.
 
-TLS ist in Kestrel konfiguriert. Weitere Informationen zum Konfigurieren von Kestrel-Endpunkten finden Sie unter [Kestrel-Endpunkt Konfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+TLS ist in Kestrel konfiguriert. Weitere Informationen zur Kestrel-Endpunktkonfiguration finden Sie unter [Kestrel-Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
 
 ## <a name="exceptions"></a>Ausnahmen
 
-Ausnahme Meldungen werden im Allgemeinen als sensible Daten betrachtet, die für einen Client nicht offengelegt werden sollen. Standardmäßig sendet GrpC nicht die Details einer Ausnahme, die von einem GrpC-Dienst ausgelöst wird, an den Client. Stattdessen empfängt der Client eine generische Meldung, die angibt, dass ein Fehler aufgetreten ist. Die Übermittlung von Ausnahme Meldungen an den Client kann überschrieben werden (z. b. in "Entwicklung" oder "Test") mit " [enabledetailederrors](xref:grpc/configuration#configure-services-options)". Ausnahme Meldungen sollten nicht in Produktions-Apps für den Client verfügbar gemacht werden.
+Ausnahmemeldungen werden generell als vertrauliche Daten angesehen, die nicht für einen Client offengelegt werden dürfen. Standardmäßig sendet gRPC keine Details einer von einem gRPC-Dienst ausgelösten Ausnahme an den Client. Stattdessen erhält der Client eine generische Nachricht, die angibt, dass ein Fehler aufgetreten ist. Ausnahmemeldungen, die an den Client übermittelt werden, können mithilfe von [EnableDetailedErrors](xref:grpc/configuration#configure-services-options) überschrieben werden (zum Beispiel während der Entwicklung oder eines Tests). Ausnahmemeldungen dürfen dem Client in Produktions-Apps nicht offengelegt werden.
 
-## <a name="message-size-limits"></a>Größen Limits für Nachrichten
+## <a name="message-size-limits"></a>Beschränkungen der Nachrichtengröße
 
-Eingehende Nachrichten an GrpC-Clients und-Dienste werden in den Arbeitsspeicher geladen. Die Größenbeschränkungen für Nachrichten sind ein Mechanismus, mit dem verhindert wird, dass GrpC übermäßig viele Ressourcen beansprucht.
+Eingehende Nachrichten an gRPC-Clients und -Dienste werden in den Speicher geladen. Die Größenbeschränkung für Nachrichten sind Mechanismen, um zu verhindern, dass gRPC übermäßig viele Ressourcen beansprucht.
 
-GrpC verwendet Größenbeschränkungen pro Nachricht, um eingehende und ausgehende Nachrichten zu verwalten. Standardmäßig schränkt der GrpC eingehende Nachrichten auf 4 MB ein. Es gibt keine Beschränkung für ausgehende Nachrichten.
+GRPC verwendet Größenbeschränkungen pro Nachricht, um eingehende und ausgehende Nachrichten zu verwalten. Standardmäßig beschränkt gRPC die eingehenden Nachrichten auf 4 MB. Für ausgehende Nachrichten gibt es keine Beschränkung.
 
-Auf dem-Server können die GrpC-Nachrichten Limits für alle Dienste in einer APP mit `AddGrpc`folgenden Aktionen konfiguriert werden:
+Auf dem Server können gRPC-Nachrichtengrenzwerte für alle Dienste in einer App mit `AddGrpc` konfiguriert werden:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,14 +52,14 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Grenzwerte können auch für einen einzelnen Dienst mithilfe `AddServiceOptions<TService>`von konfiguriert werden. Weitere Informationen zum Konfigurieren von Größen Limits für Nachrichten finden Sie unter [GrpC-Konfiguration](xref:grpc/configuration).
+Beschränkungen können auch für einen einzelnen Dienst mit `AddServiceOptions<TService>` konfiguriert werden. Weitere Informationen zur Konfiguration von Beschränkungen der Nachrichtengröße finden Sie unter [gRPC-Konfiguration](xref:grpc/configuration).
 
-## <a name="client-certificate-validation"></a>Überprüfung des Client Zertifikats
+## <a name="client-certificate-validation"></a>Clientzertifikatüberprüfung
 
-[Client Zertifikate](https://tools.ietf.org/html/rfc5246#section-7.4.4) werden anfänglich überprüft, wenn die Verbindung hergestellt wird. Standardmäßig führt Kestrel keine zusätzliche Überprüfung des Client Zertifikats einer Verbindung durch.
+[Clientzertifikate](https://tools.ietf.org/html/rfc5246#section-7.4.4) werden zunächst überprüft, wenn die Verbindung hergestellt wird. Standardmäßig führt Kestrel keine zusätzliche Überprüfung des Clientzertifikats einer Verbindung durch.
 
-Es wird empfohlen, dass die von Client Zertifikaten gesicherten GrpC-Dienste das [Microsoft. aspnetcore. Authentication. Certificate](xref:security/authentication/certauth) -Paket verwenden. ASP.net Core Zertifizierungs Authentifizierung führt eine zusätzliche Überprüfung für ein Client Zertifikat durch, einschließlich:
+Es wird empfohlen, dass gRPC-Dienste von Clientzertifikaten über das Paket [Microsoft.AspNetCore.Authentication.Certificate](xref:security/authentication/certauth) gesichert werden. Die Authentifizierung der ASP.NET Core-Zertifizierung führt zusätzliche Überprüfungen auf einem Clientzertifikat aus, einschließlich der folgenden:
 
-* Das Zertifikat hat eine gültige erweiterte Schlüssel Verwendung (EKU).
-* Liegt innerhalb seines Gültigkeits Zeitraums
-* Zertifikat Sperrung überprüfen
+* Zertifikat verfügt über gültige erweiterte Schlüsselverwendung (EKU)
+* Befindet sich innerhalb des Gültigkeitszeitraums
+* Zertifikatswiderruf wird überprüft

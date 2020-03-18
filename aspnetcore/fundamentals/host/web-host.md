@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 uid: fundamentals/host/web-host
-ms.openlocfilehash: bc18b5490d232758b796d33a62cd8d1a7dd7289f
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: e02d6efcb3aec1329469b8654e66ba845870421a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007109"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650581"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core-Webhost
 
@@ -171,7 +171,7 @@ Diese Einstellung steuert das Erfassen von Startfehlern.
 
 **Schlüssel:** captureStartupErrors  
 **Typ:** *Boolesch* (`true` or `1`)  
-**Standardwert**: Die Standardeinstellung ist gleich `false`, es sei denn, die App wird mit Kestrel hinter IIS ausgeführt, dann ist sie gleich `true`.  
+**Standard**: Die Standardeinstellung ist gleich `false`, es sei denn, die App wird mit Kestrel hinter IIS ausgeführt, dann ist sie gleich `true`.  
 **Festlegen mit:** `CaptureStartupErrors`  
 **Umgebungsvariable:** `ASPNETCORE_CAPTURESTARTUPERRORS`
 
@@ -188,7 +188,7 @@ Diese Einstellung bestimmt, wo ASP.NET mit der Suche nach Inhaltsdateien beginnt
 
 **Schlüssel:** contentRoot  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
+**Standard**: Entspricht standardmäßig dem Ordner, in dem die App-Assembly gespeichert ist.  
 **Festlegen mit:** `UseContentRoot`  
 **Umgebungsvariable:** `ASPNETCORE_CONTENTROOT`
 
@@ -227,7 +227,7 @@ Legt die Umgebung der App fest.
 
 **Schlüssel:** environment  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Produktion  
+**Standard**: Produktion  
 **Festlegen mit:** `UseEnvironment`  
 **Umgebungsvariable:** `ASPNETCORE_ENVIRONMENT`
 
@@ -244,7 +244,7 @@ Legt die Hostingstartassemblys der App fest.
 
 **Schlüssel:** hostingStartupAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Leere Zeichenfolge  
+**Standard**: Leere Zeichenfolge  
 **Festlegen mit:** `UseSetting`  
 **Umgebungsvariable:** `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
@@ -277,7 +277,7 @@ Eine durch Semikolons getrennte Zeichenfolge der Hostingstartassemblys, die beim
 
 **Schlüssel**: hostingStartupExcludeAssemblies  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Leere Zeichenfolge  
+**Standard**: Leere Zeichenfolge  
 **Festlegen mit:** `UseSetting`  
 **Umgebungsvariable:** `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
@@ -341,7 +341,7 @@ Gibt die Wartezeit an, bis der Webhost heruntergefahren wird.
 
 **Schlüssel:** shutdownTimeoutSeconds  
 **Typ:** *Ganze Zahl*  
-**Standardwert**: 5  
+**Standard**: 5  
 **Festlegen mit:** `UseShutdownTimeout`  
 **Umgebungsvariable:** `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
@@ -365,7 +365,7 @@ Bestimmt die Assembly, die nach der `Startup`-Klasse suchen soll.
 
 **Schlüssel:** startupAssembly  
 **Typ:** *Zeichenfolge*  
-**Standardwert**: Die Assembly der App  
+**Standard**: Die Assembly der App  
 **Festlegen mit:** `UseStartup`  
 **Umgebungsvariable:** `ASPNETCORE_STARTUPASSEMBLY`
 
@@ -387,7 +387,7 @@ Legt den relativen Pfad für die statischen Objekte der App fest.
 
 **Schlüssel:** webroot  
 **Typ:** *Zeichenfolge*  
-**Standard**: Die Standardeinstellung ist `wwwroot`. Der Pfad zu *{Inhaltsstammverzeichnis}/wwwroot* muss vorhanden sein. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
+**Standard**: Der Standardwert ist `wwwroot`. Der Pfad zu *{Inhaltsstammverzeichnis}/wwwroot* muss vorhanden sein. Wenn der Pfad nicht vorhanden ist, wird ein Dateianbieter ohne Funktion verwendet.  
 **Festlegen mit:** `UseWebRoot`  
 **Umgebungsvariable:** `ASPNETCORE_WEBROOT`
 
@@ -444,9 +444,7 @@ public class Program
 ```
 
 > [!NOTE]
-> Die [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration)-Erweiterungsmethode kann derzeit keine Konfigurationsabschnitte (z.B. `.UseConfiguration(Configuration.GetSection("section"))`) analysieren, die von `GetSection` zurückgegeben werden. Die `GetSection`-Methode filtert die Konfigurationsschlüssel des angeforderten Abschnitts, behält jedoch den Abschnittsnamen in den Schlüsseln bei (z.B. `section:urls`, `section:environment`). Die `UseConfiguration`-Methode erwartet, dass die Schlüssel den `WebHostBuilder`-Schlüsseln entsprechen (z.B. `urls`, `environment`). Das Vorhandensein des Abschnittsnamens in den Schlüsseln verhindert, dass die Werte des Abschnitts den Host konfigurieren. Dieses Problem wird in einer bevorstehenden Version behoben. Weitere Informationen und Problemumgehungen finden Sie unter [Passing configuration section into WebHostBuilder.UseConfiguration uses full keys (Beim Übergeben des Konfigurationsabschnitts an WebHostBuilder.UseConfiguration werden vollständige Schlüssel verwendet)](https://github.com/aspnet/Hosting/issues/839).
->
-> `UseConfiguration` kopiert nur Schlüssel aus der bereitgestellten `IConfiguration` in die Konfiguration des Host-Generators. Daher hat das Festlegen von `reloadOnChange: true` für JSON-, INI- und XML-Einstellungsdateien keine Auswirkung.
+> [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) kopiert nur Schlüssel aus der bereitgestellten `IConfiguration`-Schnittstelle in die Konfiguration des Host-Generators. Daher hat das Festlegen von `reloadOnChange: true` für JSON-, INI- und XML-Einstellungsdateien keine Auswirkung.
 
 Damit der Host auf einer bestimmten URL ausgeführt wird, kann der gewünschte Wert von der Befehlszeile aus übergeben werden, wenn [dotnet run](/dotnet/core/tools/dotnet-run) ausgeführt wird. Das Befehlszeilenargument überschreibt den `urls`-Wert der *hostsettings.json*-Datei, und der Server lauscht Port 8080:
 
@@ -524,7 +522,7 @@ using (var host = WebHost.Start("http://localhost:8080", app => app.Response.Wri
 }
 ```
 
-Erzeugt das gleiche Ergebnis wie **Start(RequestDelegate app)**, mit dem Unterschied, dass die App auf `http://localhost:8080` reagiert.
+Erzeugt das gleiche Ergebnis wie **Start(RequestDelegate app)** , mit dem Unterschied, dass die App auf `http://localhost:8080` reagiert.
 
 **Start(Action\<IRouteBuilder> routeBuilder)**
 

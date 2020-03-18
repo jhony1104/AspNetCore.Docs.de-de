@@ -4,18 +4,18 @@ author: rick-anderson
 description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 2/25/2020
 uid: tutorials/first-web-api
-ms.openlocfilehash: 73e547b014d78dcbcbf1c887ebec16e0743d10b9
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
+ms.openlocfilehash: 55dfc05b5c96f7fa060d537745bac969e92daa9b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/21/2020
-ms.locfileid: "76294750"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644965"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
-Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Mike Wasson](https://github.com/mikewasson)
+Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5) und [Mike Wasson](https://github.com/mikewasson)
 
 In diesem Tutorial lernen Sie die Grundlagen der Erstellung einer Web-API mit ASP.NET Core kennen.
 
@@ -50,15 +50,15 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
@@ -66,7 +66,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ## <a name="create-a-web-project"></a>Erstellen eines Webprojekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie die Vorlage **ASP.NET Core-Webanwendung** aus, und klicken Sie auf **Weiter**.
@@ -75,7 +75,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ![VS-Dialogfeld „Neues Projekt“](first-web-api/_static/vs3.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Wechseln Sie mit dem Befehl `cd`' zu dem Ordner, der den Projektordner enthalten soll.
@@ -96,7 +96,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
   * Ein neues Web-API-Projekt wird erstellt und in Visual Studio Code geöffnet.
   * Die NuGet-Pakete, die im nächsten Abschnitt erforderlich sind, werden hinzugefügt.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Klicken Sie auf **Datei** > **Neue Projektmappe**.
 
@@ -127,17 +127,17 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 Die Projektvorlage erstellt eine `WeatherForecast`-API. Rufen Sie in einem Browser die `Get`-Methode zum Testen der App auf.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Drücken Sie STRG+F5, um die App auszuführen. Visual Studio startet einen Browser und navigiert zu `https://localhost:<port>/WeatherForecast`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt.
 
 Wenn Sie in einem Dialogfeld angeben müssen, ob Sie dem IIS Express-Zertifikat vertrauen, wählen Sie **Ja** aus. Wählen Sie im folgenden Dialogfeld **Sicherheitswarnung** die Option **Ja** aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Drücken Sie STRG+F5, um die App auszuführen. Rufen Sie in einem Browser die folgende URL auf: [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast).
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Wählen Sie **Ausführen** > **Debugging starten** aus, um die App zu starten. Visual Studio für Mac startet einen Browser und navigiert zu `https://localhost:<port>`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt. Der Fehler „HTTP 404: Nicht gefunden“ wird zurückgegeben. Fügen Sie `/WeatherForecast` an die URL an, d. h., ändern Sie sie in `https://localhost:<port>/WeatherForecast`.
 
@@ -184,7 +184,7 @@ Der zurückgegebene JSON-Code sieht in etwa wie folgt aus:
 
 Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App verwaltet. Das Modell für diese App ist eine einzelne `TodoItem`-Klasse.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
 
@@ -192,13 +192,13 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
 * Ersetzen Sie den Vorlagencode durch den folgenden Code:
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Fügen Sie einen Ordner namens *Modelle* hinzu.
 
 * Fügen Sie dem Ordner *Modelle* mit dem folgenden Code eine `TodoItem`-Klasse hinzu:
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Klicken Sie mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
 
@@ -212,7 +212,7 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
 ---
 
-  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs)]
+  [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
 Die `Id`-Eigenschaft fungiert als eindeutiger Schlüssel in einer relationalen Datenbank.
 
@@ -222,7 +222,7 @@ Modellklassen können überall im Projekt platziert werden, doch gemäß der Kon
 
 Der *Datenbankkontext* ist die Hauptklasse, die die Entity Framework-Funktionen für ein Datenmodell koordiniert. Diese Klasse wird durch Ableiten von der `Microsoft.EntityFrameworkCore.DbContext`-Klasse erstellt.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-microsoftentityframeworkcoresqlserver"></a>Hinzufügen von Microsoft.EntityFrameworkCore.SqlServer
 
@@ -238,7 +238,7 @@ Der *Datenbankkontext* ist die Hauptklasse, die die Entity Framework-Funktionen 
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und wählen Sie **Hinzufügen** > **Klasse** aus. Nennen Sie die Klasse *TodoContext*, und klicken Sie auf **Hinzufügen**.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Fügen Sie eine `TodoContext`-Klasse zum Ordner *Modelle* hinzu.
 
@@ -264,7 +264,7 @@ Der vorangehende Code:
 
 ## <a name="scaffold-a-controller"></a>Erstellen eines Controllergerüsts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Controller*.
 * Wählen Sie **Hinzufügen** > **Neues Gerüstelement** aus.
@@ -275,7 +275,7 @@ Der vorangehende Code:
   * Wählen Sie in der **Datenkontextklasse** das Element **TodoContext (TodoApi.Models)** aus.
   * Wählen Sie **Hinzufügen** aus.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 Führen Sie die folgenden Befehle aus:
 
@@ -298,6 +298,13 @@ Der generierte Code hat folgende Auswirkungen:
 
 * Markiert die Klasse mit dem [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute)-Attribut. Dieses Attribut gibt an, dass der Controller auf Web-API-Anforderungen reagiert. Weitere Informationen zu bestimmten Verhaltensweisen, die das Attribut ermöglicht, finden Sie unter <xref:web-api/index>.
 * Verwendet die Abhängigkeitsinjektion, um den Datenbankkontext (`TodoContext`) dem Controller hinzuzufügen. Der Datenbankkontext wird in den einzelnen [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)-Methoden im Controller verwendet.
+
+Die ASP.NET Core-Vorlagen für:
+
+* Controller mit Ansichten enthalten `[action]` in der Routenvorlage.
+* API-Controller enthalten keine `[action]` in der Routenvorlage.
+
+Wenn sich das `[action]`-Token nicht in der Routenvorlage befindet, wird der [action](xref:mvc/controllers/routing#action)-Name von der Route ausgeschlossen. Dies bedeutet, dass der zugehörige Methodenname der Aktion nicht in der übereinstimmenden Route verwendet wird.
 
 ## <a name="examine-the-posttodoitem-create-method"></a>Überblick über die PostTodoItem-Erstellungsmethode
 
@@ -458,6 +465,37 @@ So löschen Sie mit Postman eine Aufgabe
 * Legen Sie den URI des zu löschenden Objekts fest, z. B. `https://localhost:5001/api/TodoItems/1`.
 * Wählen Sie **Send** (Senden) aus.
 
+<a name="over-post"></a>
+
+## <a name="prevent-over-posting"></a>Vermeiden von Overposting
+
+Derzeit macht die Beispiel-App das gesamte `TodoItem`-Objekt verfügbar. In den Produktions-Apps sind die Daten, die eingegeben und mithilfe einer Teilmenge des Modells zurückgegeben werden, in der Regel eingeschränkt. Hierfür gibt es mehrere Gründe, wobei die Sicherheit einer der Hauptgründe ist. Die Teilmenge eines Modells wird üblicherweise als Datenübertragungsobjekt (DTO, Data Transfer Object), Eingabemodell oder Anzeigemodell bezeichnet. In diesem Artikel wird das **DTO** verwendet.
+
+Ein DTO kann für Folgendes verwendet werden:
+
+* Vermeiden Sie Overposting.
+* Ausblenden von Eigenschaften, die Clients nicht anzeigen sollen
+* Auslassen einiger Eigenschaften, um die Nutzlast zu verringern
+* Vereinfachen von Objektgraphen, die geschachtelte Objekte enthalten Vereinfachte Objektgraphen können für Clients zweckmäßiger sein.
+
+Um den DTO-Ansatz zu veranschaulichen, aktualisieren Sie die `TodoItem`-Klasse, sodass sie ein geheimes Feld einschließt:
+
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
+
+Das geheime Feld muss in dieser App ausgeblendet werden, eine administrative App kann es jedoch verfügbar machen.
+
+Vergewissern Sie sich, dass Sie das geheime Feld veröffentlichen und abrufen können.
+
+Erstellen Sie ein DTO-Modell:
+
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
+
+Aktualisieren Sie `TodoItemsController`, sodass `TodoItemDTO` verwendet wird:
+
+[!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Controllers/TodoItemsController.cs?name=snippet)]
+
+Vergewissern Sie sich, dass Sie das geheime Feld weder veröffentlichen noch abrufen können.
+
 ## <a name="call-the-web-api-with-javascript"></a>Aufrufen der Web-API mit JavaScript
 
 Mehr dazu finden Sie im [-Tutorial: Aufrufen einer ASP.NET Core-Web-API mit JavaScript](xref:tutorials/web-api-javascript).
@@ -498,15 +536,15 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
@@ -514,7 +552,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ## <a name="create-a-web-project"></a>Erstellen eines Webprojekts
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 * Wählen Sie die Vorlage **ASP.NET Core-Webanwendung** aus, und klicken Sie auf **Weiter**.
@@ -523,7 +561,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 ![VS-Dialogfeld „Neues Projekt“](first-web-api/_static/vs.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Öffnen Sie das [integrierte Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Wechseln Sie mit dem Befehl `cd`' zu dem Ordner, der den Projektordner enthalten soll.
@@ -538,7 +576,7 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 * Wenn Sie in einem Dialogfeld angeben müssen, ob Sie dem Projekt die erforderlichen Elemente hinzufügen möchten, wählen Sie **Ja** aus.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Klicken Sie auf **Datei** > **Neue Projektmappe**.
 
@@ -560,17 +598,17 @@ Das folgende Diagramm zeigt den Entwurf der App.
 
 Die Projektvorlage erstellt eine `values`-API. Rufen Sie in einem Browser die `Get`-Methode zum Testen der App auf.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Drücken Sie STRG+F5, um die App auszuführen. Visual Studio startet einen Browser und navigiert zu `https://localhost:<port>/api/values`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt.
 
 Wenn Sie in einem Dialogfeld angeben müssen, ob Sie dem IIS Express-Zertifikat vertrauen, wählen Sie **Ja** aus. Wählen Sie im folgenden Dialogfeld **Sicherheitswarnung** die Option **Ja** aus.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Drücken Sie STRG+F5, um die App auszuführen. Rufen Sie in einem Browser die folgende URL auf: [https://localhost:5001/api/values](https://localhost:5001/api/values).
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Wählen Sie **Ausführen** > **Debugging starten** aus, um die App zu starten. Visual Studio für Mac startet einen Browser und navigiert zu `https://localhost:<port>`, wobei es sich bei `<port>` um eine zufällig ausgewählte Portnummer handelt. Der Fehler „HTTP 404: Nicht gefunden“ wird zurückgegeben. Fügen Sie der URL `/api/values` an, d.h. ändern Sie die URL in `https://localhost:<port>/api/values`.
 
@@ -586,7 +624,7 @@ Die folgende JSON-Datei wird zurückgegeben:
 
 Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App verwaltet. Das Modell für diese App ist eine einzelne `TodoItem`-Klasse.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
 
@@ -594,13 +632,13 @@ Ein *Modell* ist eine Gruppe von Klassen, die die Daten darstellen, die die App 
 
 * Ersetzen Sie den Vorlagencode durch den folgenden Code:
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Fügen Sie einen Ordner namens *Modelle* hinzu.
 
 * Fügen Sie dem Ordner *Modelle* mit dem folgenden Code eine `TodoItem`-Klasse hinzu:
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 * Klicken Sie mit der rechten Maustaste auf das Projekt. Klicken Sie auf **Hinzufügen** > **Neuer Ordner**. Geben Sie dem Ordner den Namen *Modelle*.
 
@@ -624,11 +662,11 @@ Modellklassen können überall im Projekt platziert werden, doch gemäß der Kon
 
 Der *Datenbankkontext* ist die Hauptklasse, die die Entity Framework-Funktionen für ein Datenmodell koordiniert. Diese Klasse wird durch Ableiten von der `Microsoft.EntityFrameworkCore.DbContext`-Klasse erstellt.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Modelle*, und wählen Sie **Hinzufügen** > **Klasse** aus. Nennen Sie die Klasse *TodoContext*, und klicken Sie auf **Hinzufügen**.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Fügen Sie eine `TodoContext`-Klasse zum Ordner *Modelle* hinzu.
 
@@ -654,7 +692,7 @@ Der vorangehende Code:
 
 ## <a name="add-a-controller"></a>Hinzufügen eines Controllers
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Klicken Sie mit der rechten Maustaste auf den Ordner *Controller*.
 * Wählen Sie **Hinzufügen** > **Neues Element** aus.
@@ -663,7 +701,7 @@ Der vorangehende Code:
 
   ![Dialogfeld „Neues Element hinzufügen“ mit Controller im Suchfeld und ausgewähltem Web-API-Controller](first-web-api/_static/new_controller.png)
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Erstellen Sie im Ordner *Controllers* eine Klasse namens `TodoController`.
 
@@ -743,11 +781,11 @@ Dieses Tutorial verwendet Postman zum Testen der Web-API.
 * Starten Sie Postman.
 * Deaktivieren Sie **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter File > Settings (**Datei** > **Einstellungen**) **SSL certificate verification** (Verifizierung des SSL-Zertifikats).
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio für Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * Deaktivieren Sie auf der Registerkarte **General** (Allgemein) unter **Postman** > **Preferences** (Postman > Einstellungen) **SSL certificate verification** (Verifizierung des SSL-Zertifikats). Wählen Sie alternativ den Schraubenschlüssel und **Settings** (Einstellungen) aus, und deaktivieren Sie dann die Überprüfung des SSL-Zertifikats.
 
@@ -918,7 +956,7 @@ Eine Aufgabe wird folgendermaßen gelöscht: im AJAX-Aufruf wird `type` auf `DEL
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-[Sie können den Beispielcode für dieses Tutorial anzeigen oder herunterladen.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [Informationen zum Herunterladen](xref:index#how-to-download-a-sample) finden Sie hier.
+[Sie können den Beispielcode für dieses Tutorial anzeigen oder herunterladen.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [Informationen zum Herunterladen](xref:index#how-to-download-a-sample) finden Sie hier.
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 

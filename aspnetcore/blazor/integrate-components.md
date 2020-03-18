@@ -1,7 +1,7 @@
 ---
-title: Integrieren von ASP.net Core Razor-Komponenten in Razor Pages und MVC-apps
+title: Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 author: guardrex
-description: Erfahren Sie mehr über Daten Bindungs Szenarien für Komponenten und DOM-Elemente in Blazor-apps.
+description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponenten und DOM-Elemente in Blazor-Apps kennen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,43 +11,43 @@ no-loc:
 - SignalR
 uid: blazor/integrate-components
 ms.openlocfilehash: de1a37ffd9456c956e3d84fcc69431ecb794513c
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77453211"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649081"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.net Core Razor-Komponenten in Razor Pages und MVC-apps
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
-Razor-Komponenten können in Razor Pages-und MVC-Apps integriert werden. Wenn die Seite oder Ansicht gerendert wird, können Komponenten gleichzeitig vorab vorgerendert werden.
+Razor-Komponenten können in Razor Pages- und MVC-Apps integriert werden. Wenn die Seite oder Ansicht gerendert wird, können Komponenten gleichzeitig vorab gerendert werden.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Vorbereiten der APP für die Verwendung von Komponenten in Seiten und Ansichten
+## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten
 
-Eine vorhandene Razor Pages-oder MVC-App kann Razor-Komponenten in Seiten und Ansichten integrieren:
+Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und Ansichten integrieren:
 
-1. In der Layoutdatei der APP ( *_Layout. cshtml*):
+1. In der Layoutdatei der App ( *_Layout.cshtml*):
 
-   * Fügen Sie dem `<head>`-Element das folgende `<base>`-Tag hinzu:
+   * Fügen Sie das folgende `<base>`-Tag zum `<head>`-Element hinzu:
 
      ```html
      <base href="~/" />
      ```
 
-     Beim `href` Wert (dem *App-Basispfad*) im vorhergehenden Beispiel wird davon ausgegangen, dass sich die APP im Stamm-URL-Pfad (`/`) befindet. Wenn es sich bei der App um eine untergeordnete Anwendung handelt, befolgen Sie die Anweisungen im Abschnitt *App-Basispfad* des <xref:host-and-deploy/blazor/index#app-base-path> Artikels.
+     Der `href`-Wert (der *App-Basispfad*) im obigen Beispiel setzt voraus, dass die App sich im URL-Stammpfad (`/`) befindet. Wenn es sich bei der App um eine untergeordnete Anwendung handelt, befolgen Sie die Anweisungen im Abschnitt *App-Basispfad* des <xref:host-and-deploy/blazor/index#app-base-path>-Artikels.
 
-     Die Datei " *_Layout. cshtml* " befindet sich im Ordner " *pages/Shared* " in einer Razor Pages-APP oder in *Sichten/freigegebenen* Ordnern in einer MVC-app.
+     Die Datei *_Layout.cshtml* befindet sich bei Razor Pages-Apps im Ordner *Pages/Shared* oder bei MVC-Apps im Ordner *Views/Shared*.
 
-   * Fügen Sie unmittelbar vor dem schließenden `</body>` Tag ein `<script>`-Tag für das Skript " *blazor. Server. js* " hinzu:
+   * Fügen Sie ein `<script>`-Tag für das Skript *blazor.server.js* direkt vor dem schließenden `</body>`-Tag ein:
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     Das-Framework fügt der APP das Skript " *blazor. Server. js* " hinzu. Es ist nicht erforderlich, das Skript manuell der APP hinzuzufügen.
+     Das Framework fügt das Skript *blazor.server.js* zur App hinzu. Das Skript muss nicht manuell zur App hinzugefügt werden.
 
-1. Fügen Sie dem Stamm Ordner des Projekts eine *_Imports. Razor* -Datei mit folgendem Inhalt hinzu (ändern Sie den letzten Namespace, `MyAppNamespace`, in den Namespace der APP):
+1. Fügen Sie eine *_Imports.razor*-Datei zum Stammordner des Projekts mit dem folgenden Inhalt ein (ändern Sie den letzten Namespace `MyAppNamespace` in den Namespace der App):
 
    ```razor
    @using System.Net.Http
@@ -60,29 +60,29 @@ Eine vorhandene Razor Pages-oder MVC-App kann Razor-Komponenten in Seiten und An
    @using MyAppNamespace
    ```
 
-1. Registrieren Sie in `Startup.ConfigureServices`den blazor-Server Dienst:
+1. Registrieren Sie den Blazor Server-Dienst in `Startup.ConfigureServices`:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. Fügen Sie in `Startup.Configure`den blazor-Hub-Endpunkt `app.UseEndpoints`hinzu:
+1. Fügen Sie den Blazor Hub-Endpunkt in `Startup.Configure` zu `app.UseEndpoints` hinzu:
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. Integrieren von Komponenten in beliebige Seiten oder Ansichten. Weitere Informationen finden Sie im Abschnitt [Rendering Components from a page or View](#render-components-from-a-page-or-view) .
+1. Integrieren Sie Komponenten in eine beliebige Seite oder Ansicht. Weitere Informationen finden Sie im Abschnitt [Rendern von Komponenten einer Seite oder Ansicht](#render-components-from-a-page-or-view).
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Verwenden von Routing fähigen Komponenten in einer Razor Pages-App
+## <a name="use-routable-components-in-a-razor-pages-app"></a>Verwenden routingfähiger Komponenten in einer Razor Pages-App
 
-*Dieser Abschnitt bezieht sich auf das Hinzufügen von Komponenten, die direkt von Benutzer Anforderungen aus Routing fähig sind.*
+*In diesem Abschnitt wird das Hinzufügen von Komponenten behandelt, die über Benutzeranforderungen direkt routingfähig sind.*
 
-So unterstützen Sie Routing fähige Razor-Komponenten in Razor Pages-apps:
+So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
 
-1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der APP für die Verwendung von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views) .
+1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views).
 
-1. Fügen Sie dem Projektstamm eine *app. Razor* -Datei mit folgendem Inhalt hinzu:
+1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -98,7 +98,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in Razor Pages-apps:
    </Router>
    ```
 
-1. Fügen Sie dem Ordner *pages* eine *_Host. cshtml* -Datei mit folgendem Inhalt hinzu:
+1. Fügen Sie eine *_Host.cshtml*-Datei mit dem folgenden Inhalt zum Ordner *Pages* hinzu:
 
    ```cshtml
    @page "/blazor"
@@ -111,9 +111,9 @@ So unterstützen Sie Routing fähige Razor-Komponenten in Razor Pages-apps:
    </app>
    ```
 
-   Komponenten verwenden die freigegebene *_Layout. cshtml* -Datei für das Layout.
+   Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
 
-1. Fügen Sie eine Route mit niedriger Priorität für die *_Host. cshtml* -Seite zur Endpunkt Konfiguration in `Startup.Configure`hinzu:
+1. Fügen Sie eine Route mit niedriger Priorität für die Seite *_Host.cshtml* zur Endpunktkonfiguration in `Startup.Configure` hinzu:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -124,7 +124,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in Razor Pages-apps:
    });
    ```
 
-1. Fügen Sie der APP Routing fähige Komponenten hinzu. Beispiel:
+1. Fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
 
    ```razor
    @page "/counter"
@@ -134,17 +134,17 @@ So unterstützen Sie Routing fähige Razor-Komponenten in Razor Pages-apps:
    ...
    ```
 
-   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces) .
+   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
 
-## <a name="use-routable-components-in-an-mvc-app"></a>Verwenden von Routing fähigen Komponenten in einer MVC-App
+## <a name="use-routable-components-in-an-mvc-app"></a>Verwenden routingfähiger Komponenten in einer MVC-App
 
-*Dieser Abschnitt bezieht sich auf das Hinzufügen von Komponenten, die direkt von Benutzer Anforderungen aus Routing fähig sind.*
+*In diesem Abschnitt wird das Hinzufügen von Komponenten behandelt, die über Benutzeranforderungen direkt routingfähig sind.*
 
-So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
+So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
 
-1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der APP für die Verwendung von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views) .
+1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views).
 
-1. Fügen Sie die Datei " *app. Razor* " dem Stamm des Projekts mit folgendem Inhalt hinzu:
+1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -160,7 +160,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
    </Router>
    ```
 
-1. Fügen Sie dem Ordner " *views/Home* " eine *_Host. cshtml* -Datei mit folgendem Inhalt hinzu:
+1. Fügen Sie eine *_Host.cshtml*-Datei mit dem folgenden Inhalt zum Ordner *Views/Home* hinzu:
 
    ```cshtml
    @{
@@ -172,9 +172,9 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
    </app>
    ```
 
-   Komponenten verwenden die freigegebene *_Layout. cshtml* -Datei für das Layout.
+   Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
 
-1. Fügen Sie dem Home-Controller eine Aktion hinzu:
+1. Fügen Sie eine Aktion zum Home-Controller hinzu:
 
    ```csharp
    public IActionResult Blazor()
@@ -183,7 +183,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
    }
    ```
 
-1. Fügen Sie eine Route mit niedriger Priorität für die Controller Aktion hinzu, die die Ansicht *_Host. cshtml* an die Endpunkt Konfiguration in `Startup.Configure`zurückgibt:
+1. Fügen Sie eine Route mit niedriger Priorität für die Controlleraktion hinzu, die die Ansicht *_Host.cshtml* an die Endpunktkonfiguration in `Startup.Configure` zurückgibt:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -194,7 +194,7 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
    });
    ```
 
-1. Erstellen Sie einen Ordner *pages* , und fügen Sie der APP Routing fähige Komponenten hinzu. Beispiel:
+1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
 
    ```razor
    @page "/counter"
@@ -204,52 +204,52 @@ So unterstützen Sie Routing fähige Razor-Komponenten in MVC-apps:
    ...
    ```
 
-   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces) .
+   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
 
 ## <a name="component-namespaces"></a>Komponentennamespaces
 
-Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace, der den Ordner darstellt, entweder der Seite/Ansicht oder der Datei " *_ViewImports. cshtml* " hinzu. Siehe folgendes Beispiel:
+Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace zur Seite/Ansicht oder zur Datei *_ViewImports.cshtml* hinzu. Im folgenden Beispiel:
 
-* Ändern Sie `MyAppNamespace` in den Namespace der app.
-* Wenn ein Ordner mit dem Namen *Components* nicht zum Speichern der Komponenten verwendet wird, ändern Sie `Components` in den Ordner, in dem sich die Komponenten befinden.
+* Ändern Sie `MyAppNamespace` in den Namespace der App.
+* Wenn die Komponenten nicht in einem Ordner namens *Components* enthalten sind, ändern Sie `Components` in den Namen des Ordners, in dem sich die Komponenten befinden.
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-Die Datei " *_ViewImports. cshtml* " befindet sich im Ordner " *pages* " einer Razor Pages-APP oder im Ordner " *views* " einer MVC-app.
+Die Datei *_ViewImports.cshtml* befindet sich bei Razor Pages-Apps im Ordner *Pages* oder bei MVC-Apps im Ordner *Views*.
 
 Weitere Informationen finden Sie unter <xref:blazor/components#import-components>.
 
-## <a name="render-components-from-a-page-or-view"></a>Rendering von Komponenten aus einer Seite oder Ansicht
+## <a name="render-components-from-a-page-or-view"></a>Rendern von Komponenten einer Seite oder Ansicht
 
-*Dieser Abschnitt bezieht sich auf das Hinzufügen von Komponenten zu Seiten oder Sichten, bei denen die Komponenten nicht direkt von Benutzer Anforderungen aus Routing fähig sind.*
+*In diesem Abschnitt wird das Hinzufügen von Komponenten zu Seiten oder Ansichten behandelt, wenn die Komponenten nicht direkt über Benutzeranforderungen routingfähig sind.*
 
-Verwenden Sie das `Component`-taghilfsprogramm, um eine Komponente aus einer Seite oder Sicht zu Rendering:
+Verwenden Sie das `Component`-Taghilfsprogramm zum Rendern einer Komponente einer Seite oder Ansicht:
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
 
-Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass der Typ einen Standardkonstruktor und festleg bare Eigenschaften aufweisen muss. Beispielsweise können Sie einen Wert für `IncrementAmount` angeben, da der Typ der `IncrementAmount` ein `int`ist, bei dem es sich um einen primitiven Typ handelt, der vom JSON-Serialisierungsprogramm unterstützt wird.
+Der Parametertyp muss mit JSON serialisierbar sein, in der Regel bedeutet das, dass der Typ über einen Standardkonstruktor und festlegbare Eigenschaften verfügen muss. Sie können beispielsweise einen Wert für `IncrementAmount` festlegen, weil `IncrementAmount` vom Typ `int` ist. Dabei handelt es sich um einen primitiven Typ, der vom JSON-Serialisierungsmodul unterstützt wird.
 
-`RenderMode` konfiguriert, ob die Komponente Folgendes hat:
+`RenderMode` konfiguriert folgende Einstellungen für die Komponente:
 
-* Wird in die Seite vorab übernommen.
-* Wird als statischer HTML-Code auf der Seite gerendert, oder wenn er die erforderlichen Informationen zum Bootstrapping einer blazor-APP vom Benutzer-Agent enthält.
+* Ob die Komponente zuvor für die Seite gerendert wird
+* Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
 
 | `RenderMode`        | Beschreibung |
 | ------------------- | ----------- |
-| `ServerPrerendered` | Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine Blazor Server-app. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
-| `Server`            | Rendert einen Marker für eine Blazor Server-app. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
-| `Static`            | Rendert die Komponente in statischem HTML-Format. |
+| `ServerPrerendered` | Rendert die Komponente in statische HTML und fügt einen Marker für eine Blazor Server-App hinzu. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
+| `Server`            | Rendert einen Marker für eine Blazor Server-App. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
+| `Static`            | Rendert die Komponente in statisches HTML-Format. |
 
-Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil nicht der Fall. Komponenten können keine Ansichts-und Seiten spezifischen Szenarien verwenden, wie z. b. partielle Sichten und Abschnitte. Um die Logik der Teilansicht in einer Komponente zu verwenden, müssen Sie die partielle Sicht Logik in eine Komponente einbeziehen.
+Seiten und Ansichten können zwar Komponenten verwenden, doch das Gegenteil ist nicht der Fall. Komponenten können ansichts- und seitenspezifische Szenarios nicht nutzen, z. B. Teilansichten und Abschnitte. Zum Verwenden der Logik einer Teilansicht in einer Komponente müssen Sie die Logik in die Komponente verlagern.
 
-Das Rendering von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
+Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.
 
-Weitere Informationen zum Rendern von Komponenten, zum Komponenten Status und zum `Component`-taghilfsprogramm finden Sie in den folgenden Artikeln:
+Weitere Informationen über das Rendern von Komponenten, den Komponentenzustand und das `Component`-Taghilfsprogramm finden Sie in den folgenden Artikeln:
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>

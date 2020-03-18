@@ -1,58 +1,58 @@
 ---
-title: Protokollierung und Diagnose in GrpC unter .net
+title: Protokollierung und Diagnosen in gRPC für .NET
 author: jamesnk
-description: Erfahren Sie, wie Sie die Diagnose von ihrer GrpC-app in .net sammeln.
+description: Hier erfahren Sie, wie Sie Diagnosen aus Ihrer gRPC-App für .NET erhalten.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
 ms.openlocfilehash: 17607b734e6d777de9516aa14e81c97f87b61023
-ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/07/2020
-ms.locfileid: "77074522"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650905"
 ---
-# <a name="logging-and-diagnostics-in-grpc-on-net"></a>Protokollierung und Diagnose in GrpC unter .net
+# <a name="logging-and-diagnostics-in-grpc-on-net"></a>Protokollierung und Diagnosen in gRPC für .NET
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
-Dieser Artikel enthält Anleitungen zum Sammeln von Diagnoseinformationen aus einer GrpC-APP, um Probleme bei der Problembehandlung zu beheben. Folgende Themen werden behandelt:
+In diesem Artikel erhalten Sie eine Anleitung, wie Sie Diagnosedaten aus einer gRPC-App erhalten, die Sie beim Troubleshooting von Problemen unterstützen. Folgende Themen werden behandelt:
 
-* **Protokollierung** : strukturierte Protokolle, die in [.net Core-Protokollierung](xref:fundamentals/logging/index)geschrieben werden <xref:Microsoft.Extensions.Logging.ILogger> wird von App-Frameworks verwendet, um Protokolle zu schreiben, und von Benutzern für die eigene Protokollierung in einer App.
-* Ablauf **Verfolgung** : Ereignisse im Zusammenhang mit einem Vorgang, der mit `DiaganosticSource` und `Activity`geschrieben wurde. Ablauf Verfolgungen aus der Diagnose Quelle werden häufig verwendet, um App-Telemetriedaten nach Bibliotheken wie [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) und [opentelemetry](https://github.com/open-telemetry/opentelemetry-dotnet)zu erfassen.
-* **Metriken** : Darstellung von Daten Messungen über Zeiträume, z. b. Anforderungen pro Sekunde. Metriken werden mithilfe von `EventCounter` ausgegeben und können mithilfe des Befehlszeilen Tools " [dotnet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) " oder mit [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)beobachtet werden.
+* **Protokollierung:** Strukturierte Protokolle, die in die [.NET Core-Protokollierung](xref:fundamentals/logging/index) geschrieben werden. <xref:Microsoft.Extensions.Logging.ILogger> wird von App-Frameworks verwendet, um Protokolle zu schreiben, sowie von Benutzern für die eigene Protokollierung in einer App.
+* **Ablaufverfolgung:** Ereignisse im Zusammenhang mit einem Vorgang werden mithilfe von `DiaganosticSource` und `Activity` geschrieben. Ablaufverfolgungen aus Diagnosequellen werden in der Regel dazu verwendet, um App-Telemetriedaten von Bibliotheken wie [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) und [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) zu sammeln.
+* **Metriken:** Hierbei handelt es sich um eine Darstellung von Datenmesswerten über bestimmte Zeiträume hinweg, beispielsweise für Anforderungen pro Sekunde. Metriken werden mithilfe von `EventCounter` ausgegeben und können mithilfe des [dotnet-counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters)-Befehlszeilentools oder mit [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters) überwacht werden.
 
 ## <a name="logging"></a>Protokollierung
 
-GrpC-Dienste und der GrpC-Client schreiben Protokolle mithilfe der [.net Core-Protokollierung](xref:fundamentals/logging/index). Protokolle sind ein guter Ausgangspunkt, wenn Sie unerwartetes Verhalten in ihren apps Debuggen müssen.
+gRPC-Dienste und der gRPC-Client schreiben Protokolle mithilfe der [.NET Core-Protokollierung](xref:fundamentals/logging/index). Protokolle sind gut als Ausgangspunkt geeignet, wenn Sie ein unerwartetes Verhalten Ihrer Apps debuggen müssen.
 
-### <a name="grpc-services-logging"></a>GrpC-Dienst Protokollierung
+### <a name="grpc-services-logging"></a>Protokollierung für gRPC-Dienste
 
 > [!WARNING]
-> Server seitige Protokolle können vertrauliche Informationen aus Ihrer APP enthalten. Veröffentlichen Sie **niemals** unformatierte Protokolle von Produktions-apps in öffentlichen Foren wie GitHub.
+> Serverseitige Protokolle enthalten möglicherweise vertrauliche Daten aus Ihrer App. Veröffentlichten Sie deshalb **niemals** Protokolle von Produktions-Apps auf öffentlichen Foren wie GitHub.
 
-Da GrpC-Dienste auf ASP.net Core gehostet werden, wird das ASP.net Core Protokollierungs System verwendet. In der Standardkonfiguration protokolliert GrpC nur wenige Informationen, aber dies kann konfiguriert werden. Ausführliche Informationen zum Konfigurieren ASP.net Core Protokollierung finden Sie in der Dokumentation zur [ASP.net Core Protokollierung](xref:fundamentals/logging/index#configuration) .
+Da gRPC-Dienste bei ASP.NET Core gehostet werden, wird das ASP.NET Core-Protokollierungssystem verwendet. In der Standardkonfiguration werden für gRPC nur wenige Informationen protokolliert, das kann jedoch konfiguriert werden. In der Dokumentation zur [ASP.NET Core-Protokollierung](xref:fundamentals/logging/index#configuration) finden Sie weitere Informationen zum Konfigurieren der ASP.NET Core-Protokollierung.
 
-GrpC fügt Protokolle unter der Kategorie `Grpc` hinzu. Um detaillierte Protokolle von GrpC zu aktivieren, konfigurieren Sie die `Grpc` Präfixe auf `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum `LogLevel` unter Abschnitt in `Logging`hinzufügen:
+gRPC fügt Protokolle unter der `Grpc`-Kategorie hinzu. Wenn Sie in gRPC detaillierte Protokolle aktivieren möchten, konfigurieren Sie die `Grpc`-Präfixe auf die `Debug`-Ebene in Ihrer *appsettings.json*-Datei, indem Sie die folgenden Elemente im `LogLevel`-Unterbereich in `Logging` hinzufügen:
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-Sie können dies auch in *Startup.cs* mit `ConfigureLogging`konfigurieren:
+Sie können das auch in der Datei *Startup.cs* mit `ConfigureLogging` konfigurieren:
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
-Wenn Sie keine JSON-basierte Konfiguration verwenden, legen Sie den folgenden Konfigurations Wert in Ihrem Konfigurationssystem fest:
+Wenn Sie keine JSON-basierte Konfiguration verwenden, legen Sie den folgenden Konfigurationswert in Ihrem Konfigurationssystem fest:
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-Überprüfen Sie die Dokumentation Ihres Konfigurations Systems, um zu bestimmen, wie Sie die Werte für die in der Struktur eingested Wenn z. b. Umgebungsvariablen verwendet werden, werden anstelle der `:` zwei `_` Zeichen verwendet (z. b. `Logging__LogLevel__Grpc`).
+Suchen Sie in der Dokumentation nach Informationen zu Ihrem Konfigurationssystem, um zu bestimmen, wie geschachtelte Konfigurationswerte angegeben werden. Bei der Verwendung von Umgebungsvariablen werden beispielsweise zwei `_`-Zeichen anstelle von `:` verwendet (z. B. `Logging__LogLevel__Grpc`).
 
-Es wird empfohlen, die `Debug` Ebene zu verwenden, wenn Sie eine detailliertere Diagnose für Ihre APP sammeln. Die `Trace` Ebene erzeugt eine sehr geringe Diagnose und wird nur selten zum Diagnostizieren von Problemen in Ihrer APP benötigt.
+Es empfiehlt sich, die `Debug`-Ebene zu verwenden, wenn detailliertere Diagnosedaten Ihrer App gesammelt werden sollen. Die `Trace`-Ebene bietet nur sehr wenige Diagnoseinformationen und wird nur selten verwendet, um App-Probleme zu identifizieren.
 
 #### <a name="sample-logging-output"></a>Beispiel einer Protokollierungsausgabe
 
-Im folgenden finden Sie ein Beispiel für die Konsolenausgabe auf `Debug` Ebene eines GrpC-Dienstanbieter:
+Hier finden Sie ein Beispiel einer Konsolenausgabe auf der `Debug`-Ebene eines gRPC-Diensts:
 
 ```console
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
@@ -73,41 +73,41 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 ### <a name="access-server-side-logs"></a>Zugreifen auf serverseitige Protokolle
 
-Wie Sie auf serverseitige Protokolle zugreifen, hängt von der Umgebung ab, in der Sie ausgeführt werden.
+Wie Sie auf serverseitige Protokolle zugreifen können, hängt von der Ausführungsumgebung ab.
 
-#### <a name="as-a-console-app"></a>Als Konsolen-App
+#### <a name="as-a-console-app"></a>Ausführung als Konsolen-App
 
-Wenn Sie in einer Konsolen-app ausgeführt werden, sollte die [Konsolen](xref:fundamentals/logging/index#console-provider) Protokollierung standardmäßig aktiviert werden. GrpC-Protokolle werden in der-Konsole angezeigt.
+Wenn die Ausführung in einer Konsolen-App stattfindet, sollte die [Konsolenprotokollierung](xref:fundamentals/logging/index#console-provider) standardmäßig aktiviert sein. gRPC-Protokolle werden in der Konsole angezeigt.
 
 #### <a name="other-environments"></a>Andere Umgebungen
 
-Wenn die app in einer anderen Umgebung (z. b. Docker, Kubernetes oder Windows-Dienst) bereitgestellt wird, finden Sie unter <xref:fundamentals/logging/index> Weitere Informationen zum Konfigurieren von Protokollierungs Anbietern, die für die Umgebung geeignet sind.
+Wenn die App in einer anderen Umgebung bereitgestellt wird (z. B. Docker, Kubernetes oder Windows-Dienst) finden Sie unter <xref:fundamentals/logging/index> weitere Informationen zum Konfigurieren von Protokollierungsanbietern, die für die Umgebung geeignet sind.
 
-### <a name="grpc-client-logging"></a>GrpC-Client Protokollierung
+### <a name="grpc-client-logging"></a>gRPC-Clientprotokollierung
 
 > [!WARNING]
-> Client seitige Protokolle können vertrauliche Informationen aus Ihrer APP enthalten. Veröffentlichen Sie **niemals** unformatierte Protokolle von Produktions-apps in öffentlichen Foren wie GitHub.
+> Clientseitige Protokolle enthalten möglicherweise vertrauliche Daten aus Ihrer App. Veröffentlichten Sie deshalb **niemals** Protokolle von Produktions-Apps auf öffentlichen Foren wie GitHub.
 
-Wenn Sie Protokolle vom .NET-Client erhalten möchten, können Sie die `GrpcChannelOptions.LoggerFactory`-Eigenschaft festlegen, wenn der Client Kanal erstellt wird. Wenn Sie einen GrpC-Dienst aus einer ASP.net Core-App aufrufen, kann die Protokollierungs Factory aus der Abhängigkeitsinjektion (di) aufgelöst werden:
+Wenn Sie Protokolle vom .NET-Client erhalten möchten, können Sie die `GrpcChannelOptions.LoggerFactory`-Eigenschaft festlegen, wenn der Kanal des Clients erstellt wird. Wenn Sie einen gRPC-Dienst in einer ASP.NET Core-App aufrufen, kann die Protokollierungsfactory aus einer Abhängigkeitsinjektion (Dependency Injection, DI) aufgelöst werden.
 
 [!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
-Eine alternative Möglichkeit zum Aktivieren der Client Protokollierung ist die Verwendung der [GrpC-clientfactory](xref:grpc/clientfactory) zum Erstellen des Clients. Ein GrpC-Client, der bei der clientfactory registriert und von di aufgelöst wird, verwendet automatisch die konfigurierte Protokollierung der app.
+Eine alternative Möglichkeit, die Clientprotokollierung zu aktivieren, ist die Verwendung der [gRPC-Clientfactory](xref:grpc/clientfactory), um den Client zu erstellen. Ein für die Clientfactory registrierter und aus der DI aufgelöster gRPC-Client verwendet automatisch die für die App konfigurierte Protokollierung.
 
-Wenn Ihre APP nicht di verwendet, können Sie mit [loggerfactory. Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)eine neue `ILoggerFactory`-Instanz erstellen. Um auf diese Methode zuzugreifen, fügen Sie der APP das Paket [Microsoft. Extensions. Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) hinzu.
+Wenn Ihre App die DI nicht verwendet, können Sie mit [LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*) eine neue `ILoggerFactory`-Instanz erstellen. Fügen Sie Ihrer App das Paket [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) hinzu, um auf diese Methode zuzugreifen.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
-#### <a name="grpc-client-log-scopes"></a>GrpC-Client Protokoll Bereiche
+#### <a name="grpc-client-log-scopes"></a>Protokollbereiche des gRPC-Clients
 
-Der GrpC-Client fügt Protokolle, die während eines GrpC-Aufrufes aufgerufen wurden, einen [Protokollierungs Bereich](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes) Der Bereich enthält Metadaten im Zusammenhang mit dem GrpC-Befehl:
+Der gRPC-Client fügt Protokollen, die während eines gRPC-Aufrufs erstellt werden, einen [Protokollierungsbereich](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes) hinzu. Der Bereich verfügt über mit dem gRPC-Aufruf verbundene Metadaten:
 
-* **Grpcmethodtype** : der Typ der GrpC-Methode. Mögliche Werte sind Namen aus `Grpc.Core.MethodType` Enumeration, z. b. unäres
-* **Grpcursor** : der relative URI der GrpC-Methode, z. b./Greet. Greeter/sayhellos
+* **GrpcMethodType:** Der gRPC-Methodentyp. Mögliche Werte sind Namen der `Grpc.Core.MethodType`-Enumeration, z. B. Unär.
+* **GrpcUri:** Der relative URI der gRPC-Methode, z. B. /greet.Greeter/SayHellos.
 
 #### <a name="sample-logging-output"></a>Beispiel einer Protokollierungsausgabe
 
-Im folgenden finden Sie ein Beispiel für die Konsolenausgabe auf der `Debug` Ebene eines GrpC-Clients:
+Hier finden Sie ein Beispiel einer Konsolenausgabe auf der `Debug`-Ebene eines gRPC-Clients:
 
 ```console
 dbug: Grpc.Net.Client.Internal.GrpcCall[1]
@@ -122,77 +122,77 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>Ablaufverfolgung
 
-GrpC-Dienste und der GrpC-Client stellen Informationen zu GrpC-aufrufen mithilfe von [diagnosticsource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) und [Aktivität](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)bereit.
+gRPC-Dienste und der gRPC-Client stellen Informationen zu gRPC-Aufrufen mithilfe von [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) und [Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity) zur Verfügung.
 
-* .Net-GrpC verwendet eine Aktivität zur Darstellung eines GrpC-Aufrufes.
-* Ablauf Verfolgungs Ereignisse werden am Anfang und am Ende der Aktivität "GrpC-Anrufe" in die Diagnose Quelle geschrieben.
-* Die Ablauf Verfolgung erfasst keine Informationen darüber, wann Nachrichten über die Lebensdauer von GrpC Streaming-aufrufen gesendet werden.
+* .NET gRPC verwendet eine Activity-Klasse, um einen gRPC-Aufruf darzustellen.
+* Ablaufverfolgungsereignisse werden bei Beginn und Ende der gRPC-Aufrufsaktivität in die Diagnosequelle geschrieben.
+* Bei der Ablaufverfolgung werden keine Informationen dazu gesammelt, wann Nachrichten während der Lebensdauer eines gRPC-Streamingaufrufs gesendet werden.
 
-### <a name="grpc-service-tracing"></a>GrpC-Dienst Ablauf Verfolgung
+### <a name="grpc-service-tracing"></a>gRPC-Dienstablaufsverfolgung
 
-GrpC-Dienste werden auf ASP.net Core gehostet, die Ereignisse über eingehende HTTP-Anforderungen meldet. GrpC-spezifische Metadaten werden der vorhandenen HTTP-Anforderungs Diagnose hinzugefügt, die ASP.net Core bereitstellt.
+gRPC-Dienste werden bei ASP.NET Core gehostet, wo Ereignisse zu eingehenden HTTP-Anforderungen gemeldet werden. Für gRPC spezifische Metadaten werden den bestehenden HTTP-Anforderungsdiagnosedaten hinzugefügt, die von ASP.NET Core bereitgestellt werden.
 
-* Der Name der Diagnose Quelle ist `Microsoft.AspNetCore`.
-* Der Aktivitäts Name ist `Microsoft.AspNetCore.Hosting.HttpRequestIn`.
-  * Der Name der vom GrpC-Aufruf aufgerufenen GrpC-Methode wird als Tag mit dem Namen `grpc.method`hinzugefügt.
-  * Der Status Code des GrpC-Aufrufens, wenn er fertig ist, wird als Tag mit dem Namen `grpc.status_code`hinzugefügt.
+* Der Name der Diagnosequelle ist `Microsoft.AspNetCore`.
+* Der Name der Aktivität ist `Microsoft.AspNetCore.Hosting.HttpRequestIn`.
+  * Der Name der gRPC-Methode, die vom gRPC-Aufruf aufgerufen wird, wird als Tag mit dem Namen `grpc.method` hinzugefügt.
+  * Der Statuscode des gRPC-Aufrufs wird bei Abschluss als Tag mit dem Namen `grpc.status_code` hinzugefügt.
 
-### <a name="grpc-client-tracing"></a>GrpC-Client Ablauf Verfolgung
+### <a name="grpc-client-tracing"></a>gPRC-Clientablaufverfolgung
 
-Der .net-GrpC-Client verwendet `HttpClient`, um GrpC-Aufrufe durchführen. Obwohl `HttpClient` Diagnose Ereignisse schreibt, stellt der .net-GrpC-Client eine benutzerdefinierte Diagnose Quelle, Aktivität und Ereignisse bereit, sodass umfassende Informationen zu einem GrpC-Rückruf gesammelt werden können.
+Der .NET-gRPC-Client verwendet `HttpClient`, um gRPC-Aufrufe durchzuführen. Obwohl `HttpClient` Diagnoseereignisse schreibt, stellt der .NET-gRPC-Client eine benutzerdefinierte Diagnosequelle, eine Aktivität und Ereignisse zur Verfügung, sodass alle erforderlichen Informationen zu einem gRPC-Aufruf gesammelt werden können.
 
-* Der Name der Diagnose Quelle ist `Grpc.Net.Client`.
-* Der Aktivitäts Name ist `Grpc.Net.Client.GrpcOut`.
-  * Der Name der vom GrpC-Aufruf aufgerufenen GrpC-Methode wird als Tag mit dem Namen `grpc.method`hinzugefügt.
-  * Der Status Code des GrpC-Aufrufens, wenn er fertig ist, wird als Tag mit dem Namen `grpc.status_code`hinzugefügt.
+* Der Name der Diagnosequelle ist `Grpc.Net.Client`.
+* Der Name der Aktivität ist `Grpc.Net.Client.GrpcOut`.
+  * Der Name der gRPC-Methode, die vom gRPC-Aufruf aufgerufen wird, wird als Tag mit dem Namen `grpc.method` hinzugefügt.
+  * Der Statuscode des gRPC-Aufrufs wird bei Abschluss als Tag mit dem Namen `grpc.status_code` hinzugefügt.
 
-### <a name="collecting-tracing"></a>Erfassen der Ablauf Verfolgung
+### <a name="collecting-tracing"></a>Sammeln von Ablaufverfolgungsdaten
 
-Die einfachste Möglichkeit, `DiagnosticSource` zu verwenden, besteht darin, eine telemetriebibliothek wie [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) oder [opentelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) in der APP zu konfigurieren. Die Bibliothek verarbeitet Informationen zu GrpC-aufrufen neben anderen APP-Telemetriedaten.
+Die einfachste Möglichkeit, `DiagnosticSource` zu verwenden, ist die Konfiguration einer Telemetriebibliothek wie [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) oder [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) in Ihrer App. Die Bibliothek verarbeitet Informationen zu gRPC-Aufrufen zusammen mit weiteren App-Telemetriedaten.
 
-Die Ablauf Verfolgung kann in einem verwalteten Dienst wie Application Insights angezeigt werden, oder Sie können ein eigenes verteiltes Ablauf Verfolgungssystem ausführen. Opentelemetry unterstützt das Exportieren von Ablauf Verfolgungs Daten in [Jaeger](https://www.jaegertracing.io/) und [Zipkin](https://zipkin.io/).
+Die Ablaufverfolgung kann in einem verwalteten Dienst wie Application Insights eingesehen werden, oder Sie entscheiden sich dazu, Ihr eigenes verteiltes Ablaufverfolgungssystem auszuführen. OpenTelemetry unterstützt das Exportieren von Ablaufverfolgungsdaten zu [Jaeger](https://www.jaegertracing.io/) und [Zipkin](https://zipkin.io/).
 
-`DiagnosticSource` können Ablauf Verfolgungs Ereignisse im Code mithilfe `DiagnosticListener`verarbeiten. Informationen zum lauschen auf eine Diagnose Quelle mit Code finden Sie im [Benutzerhandbuch für diagnosticsource](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
+`DiagnosticSource` kann Ablaufverfolgungsereignisse im Code mithilfe von `DiagnosticListener` verarbeiten. Weitere Informationen zum Lauschen auf einer Diagnosequelle mit Code finden Sie unter [Verarbeiten von Daten mithilfe von DiagnosticListener](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
 
 > [!NOTE]
-> Mit telemetriebibliotheken werden zurzeit keine GrpC-spezifischen `Grpc.Net.Client.GrpcOut` Telemetriedaten erfasst. Arbeiten, um telemetriebibliotheken zu verbessern, die diese Ablauf Verfolgung erfassen
+> Telemetriebibliotheken erfassen aktuell keine gRPC-spezifischen `Grpc.Net.Client.GrpcOut`-Telemetriedaten. Aktuell wird aber daran gearbeitet, die Telemetriebibliotheken zu optimieren, sodass diese Ablaufverfolgung erfasst wird.
 
-## <a name="metrics"></a>metrics
+## <a name="metrics"></a>Metriken
 
-Metriken sind eine Darstellung von Daten Messungen über Zeiträume, z. b. Anforderungen pro Sekunde. Metrikdaten ermöglichen die Überwachung des Zustands einer APP auf hoher Ebene. .Net-GrpC-Metriken werden mithilfe von `EventCounter`ausgegeben.
+Bei Metriken handelt es sich um eine Darstellung von Datenmesswerten über bestimmte Zeiträume hinweg, beispielsweise für Anforderungen pro Sekunde. Metrikdaten ermöglichen die Überwachung des Zustands einer App auf einer hohen Ebene. .NET-gRPC-Metriken werden mithilfe von `EventCounter` ausgegeben.
 
-### <a name="grpc-service-metrics"></a>GrpC-dienstmetriken
+### <a name="grpc-service-metrics"></a>gRPC-Dienstmetriken
 
-GrpC-servermetriken werden auf `Grpc.AspNetCore.Server` Ereignis Quelle gemeldet.
+gRPC-Servermetriken werden in der `Grpc.AspNetCore.Server`-Ereignisquelle gemeldet.
 
-| Name                      | BESCHREIBUNG                   |
+| name                      | Beschreibung                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Aufrufe gesamt                   |
 | `current-calls`           | Aktuelle Aufrufe                 |
-| `calls-failed`            | Fehlgeschlagene Aufrufe gesamt            |
-| `calls-deadline-exceeded` | Stichtag für Anrufe überschritten. |
-| `messages-sent`           | Gesamtzahl der gesendeten Nachrichten“           |
-| `messages-received`       | Empfangene Nachrichten insgesamt       |
-| `calls-unimplemented`     | Nicht implementierte Aufrufe gesamt     |
+| `calls-failed`            | Insgesamt fehlgeschlagene Aufrufe            |
+| `calls-deadline-exceeded` | Anzahl an Aufrufen, die eine Frist überschritten haben |
+| `messages-sent`           | Gesamtzahl der gesendeten Nachrichten           |
+| `messages-received`       | Insgesamt empfangene Nachrichten       |
+| `calls-unimplemented`     | Insgesamt nicht implementierte Aufrufe     |
 
-ASP.net Core bietet auch eine eigene Metrik für `Microsoft.AspNetCore.Hosting` Ereignis Quelle.
+In ASP.NET Core stehen auch eigene Metriken für die `Microsoft.AspNetCore.Hosting`-Ereignisquelle zur Verfügung.
 
-### <a name="grpc-client-metrics"></a>GrpC-Clientmetriken
+### <a name="grpc-client-metrics"></a>gRPC-Clientmetriken
 
-GrpC-Clientmetriken werden auf `Grpc.Net.Client` Ereignis Quelle gemeldet.
+gRPC-Clientmetriken werden in der `Grpc.Net.Client`-Ereignisquelle gemeldet.
 
-| Name                      | BESCHREIBUNG                   |
+| name                      | Beschreibung                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Aufrufe gesamt                   |
 | `current-calls`           | Aktuelle Aufrufe                 |
-| `calls-failed`            | Fehlgeschlagene Aufrufe gesamt            |
-| `calls-deadline-exceeded` | Stichtag für Anrufe überschritten. |
-| `messages-sent`           | Gesamtzahl der gesendeten Nachrichten“           |
-| `messages-received`       | Empfangene Nachrichten insgesamt       |
+| `calls-failed`            | Insgesamt fehlgeschlagene Aufrufe            |
+| `calls-deadline-exceeded` | Anzahl an Aufrufen, die eine Frist überschritten haben |
+| `messages-sent`           | Gesamtzahl der gesendeten Nachrichten           |
+| `messages-received`       | Insgesamt empfangene Nachrichten       |
 
-### <a name="observe-metrics"></a>Metriken beobachten
+### <a name="observe-metrics"></a>Überwachen von Metriken
 
-[dotnet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) ist ein Leistungs Überwachungs Tool für die Ad-hoc-Integritäts Überwachung und Leistungs Untersuchung auf erster Ebene. Überwachen Sie eine .net-App mit `Grpc.AspNetCore.Server` oder `Grpc.Net.Client` als Anbieter Namen.
+[dotnet-counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) ist ein Leistungsüberwachungstool zur Ad-hoc-Überwachung der Integrität und zur Leistungsuntersuchung auf erster Ebene. Sie können eine .NET-App entweder mit `Grpc.AspNetCore.Server` oder `Grpc.Net.Client` als Anbietername überwachen.
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -209,9 +209,9 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-Eine weitere Möglichkeit, um GrpC-Metriken zu beobachten, besteht darin, Indikator Daten mithilfe des [Microsoft. applicationinsights. eventcountercollector-Pakets](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)von Application Insights aufzuzeichnen. Nach der Einrichtung sammelt Application Insights allgemeine .NET-Leistungsindikatoren zur Laufzeit. die Leistungsindikatoren von GrpC werden standardmäßig nicht erfasst, App Insights kann jedoch so angepasst werden, dass [zusätzliche Indikatoren enthalten](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)sind.
+Eine andere Möglichkeit, gRPC-Metriken zu überwachen, ist es, Indikatoren mithilfe des [Microsoft.ApplicationInsights.EventCounterCollector-Pakets](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters) von Application Insights zu sammeln. Sobald Application Insights eingerichtet ist, werden allgemeine .NET-Indikatoren zur Laufzeit gesammelt. Indikatoren von gRPC werden nicht standardmäßig gesammelt, aber Application Insights kann so [angepasst werden, dass zusätzliche Indikatoren eingeschlossen](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected) werden.
 
-Geben Sie die zu sammelnden GrpC-Indikatoren für Application Insight in *Startup.cs*an:
+Geben Sie die gRPC-Indikatoren, die gesammelt werden sollen, für Application Insights in *Startup.cs*:
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

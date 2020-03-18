@@ -1,7 +1,7 @@
 ---
-title: ASP.net Core Blazor Globalisierung und Lokalisierung
+title: Globalisierung und Lokalisierung in ASP.NET Core Blazor
 author: guardrex
-description: Erfahren Sie, wie Sie Razor-Komponenten für Benutzer in mehreren Kulturen und Sprachen zugänglich machen.
+description: In diesem Artikel erfahren Sie, wie Sie Razor-Komponenten Benutzern mit verschiedenen Kulturen und Sprachen zur Verfügung stellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,77 +11,77 @@ no-loc:
 - SignalR
 uid: blazor/globalization-localization
 ms.openlocfilehash: aba62fa7b6285c8ba884652694f1ea3e3a66ed18
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77453187"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644893"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.net Core Blazor Globalisierung und Lokalisierung
+# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
-Razor-Komponenten können Benutzern in mehreren Kulturen und Sprachen zugänglich gemacht werden. Die folgenden Szenarien für die .NET-Globalisierung und-Lokalisierung sind verfügbar:
+Razor-Komponenten können Benutzern mit verschiedenen Kulturen und Sprachen zur Verfügung gestellt werden. Die folgenden Szenarios zur Globalisierung und Lokalisierung von .NET sind verfügbar:
 
-* . NET-Ressourcensystem
-* Kulturspezifische Zahlen-und Datums Formatierung
+* .NET-Ressourcensystem
+* Kulturspezifische Zahlen- und Datumsformatierung
 
-Zurzeit werden begrenzte Lokalisierungs Szenarien ASP.net Core unterstützt:
+Derzeit werden Lokalisierungsszenarios für ASP.NET Core eingeschränkt unterstützt:
 
-* `IStringLocalizer<>` wird in Blazor-apps *unterstützt* .
-* die Lokalisierung von `IHtmlLocalizer<>`, `IViewLocalizer<>`und Daten Anmerkungen ist ASP.net Core MVC-Szenarien und wird in Blazor-apps **nicht unterstützt** .
+* `IStringLocalizer<>` in Blazor-Apps *wird unterstützt*
+* `IHtmlLocalizer<>`, `IViewLocalizer<>` und die Lokalisierung von Datenanmerkungen sind ASP.NET Core MVC-Szenarios und **werden nicht in Blazor-Apps unterstützt**.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Globalisierung
 
-die `@bind` Funktionalität von Blazorführt Formate aus und analysiert Werte für die Anzeige basierend auf der aktuellen Kultur des Benutzers.
+Die `@bind`-Funktionalität von Blazor führt Formate durch und analysiert Werte zur Anzeige basierend auf der aktuellen Kultur des Benutzers.
 
-Der Zugriff auf die aktuelle Kultur ist über die <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName>-Eigenschaft möglich.
+Der Zugriff auf die aktuelle Kultur kann über die <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName>-Eigenschaft erfolgen.
 
-[CultureInfo. InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) wird für die folgenden Feldtypen (`<input type="{TYPE}" />`) verwendet:
+[CultureInfo.InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) wird für die folgenden Feldtypen (`<input type="{TYPE}" />`) verwendet:
 
 * `date`
 * `number`
 
-Die vorangehenden Feldtypen:
+Diese Feldtypen:
 
-* Werden mithilfe der entsprechenden browserbasierten Formatierungs Regeln angezeigt.
-* Darf keinen frei Form Text enthalten.
-* Stellen Sie die Eigenschaften der Benutzerinteraktion basierend auf der Implementierung des Browsers bereit.
+* werden basierend auf ihren entsprechenden browserbasierten Formatierungsregeln angezeigt.
+* können keinen Freiformtext enthalten.
+* bieten Benutzerinteraktionsmerkmale basierend auf der Implementierung des Browsers.
 
-Die folgenden Feldtypen weisen bestimmte Formatierungs Anforderungen auf und werden zurzeit nicht von Blazor unterstützt, da Sie nicht von allen wichtigen Browsern unterstützt werden:
+Die folgenden Feldtypen verfügen über spezifische Formatierungsanforderungen und werden derzeit nicht von Blazor unterstützt, weil sie von keinem der gängigen Browser unterstützt werden:
 
 * `datetime-local`
 * `month`
 * `week`
 
-`@bind` unterstützt den `@bind:culture`-Parameter, um eine <xref:System.Globalization.CultureInfo?displayProperty=fullName> zum Auswerten und Formatieren eines Werts bereitzustellen. Die Angabe einer Kultur ist nicht empfehlenswert, wenn die Feldtypen `date` und `number` verwendet werden. `date` und `number` verfügen über integrierte Blazor Unterstützung, die die erforderliche Kultur bereitstellt.
+`@bind` unterstützt den `@bind:culture`-Parameter, um eine <xref:System.Globalization.CultureInfo?displayProperty=fullName>-Klasse zum Analysieren und Formatieren eines Werts. Vom Festlegen einer Kultur wird abgeraten, wenn die Feldtypen `date` und `number` verwendet werden. `date` und `number` verfügen über integrierte Blazor-Unterstützung, die die erforderliche Kultur bereitstellt.
 
 ## <a name="localization"></a>Lokalisierung
 
-Blazor Server-apps werden mithilfe von [Lokalisierungs Middleware](xref:fundamentals/localization#localization-middleware)lokalisiert. Die Middleware wählt die entsprechende Kultur für Benutzer aus, die Ressourcen von der APP anfordern.
+Blazor Server-Apps werden mit [Lokalisierungsmiddleware](xref:fundamentals/localization#localization-middleware) lokalisiert. Die Middleware wählt die entsprechende Kultur für Benutzer aus, die Ressourcen von der App anfordern.
 
 Die Kultur kann mit einem der folgenden Ansätze festgelegt werden:
 
 * [Cookies](#cookies)
-* [Bereitstellen der Benutzeroberfläche zum Auswählen der Kultur](#provide-ui-to-choose-the-culture)
+* [Bereitstellen einer Benutzeroberfläche zum Auswählen der Kultur](#provide-ui-to-choose-the-culture)
 
 Weitere Informationen und Beispiele finden Sie unter <xref:fundamentals/localization>.
 
-### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>Konfigurieren des Linkers für die Internationalisierung (Blazor Webassembly)
+### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>Konfigurieren des Linkers für die Internationalisierung (Blazor WebAssembly)
 
-Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des linkerverhaltens finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
+Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des Verhaltens des Linkers finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
 
 ### <a name="cookies"></a>Cookies
 
-Ein Lokalisierungs Kultur Cookie kann die Kultur des Benutzers beibehalten. Das Cookie wird durch die `OnGet`-Methode der Hostseite der APP (*pages/Host. cshtml. cs*) erstellt. Die Lokalisierungs Middleware liest das Cookie bei nachfolgenden Anforderungen, um die Kultur des Benutzers festzulegen. 
+Ein Cookie für die Lokalisierungskultur kann die Kultur des Benutzers beibehalten. Das Cookie wird von der `OnGet`-Methode der Hostseite der App erstellt (*Pages/Host.cshtml.cs*). Die Lokalisierungsmiddleware liest das Cookie bei aufeinanderfolgenden Anforderungen, um die Kultur des Benutzers festzulegen. 
 
-Durch die Verwendung eines Cookies wird sichergestellt, dass die WebSocket-Verbindung die Kultur ordnungsgemäß weitergeben kann. Wenn Lokalisierungs Schemas auf dem URL-Pfad oder der Abfrage Zeichenfolge basieren, ist das Schema möglicherweise nicht in der Lage, mit websockets zu arbeiten. Daher kann die Kultur nicht persistent gespeichert werden. Daher ist die Verwendung eines Lokalisierungs Kultur Cookies die empfohlene Vorgehensweise.
+Durch Verwendung eines Cookies wird sichergestellt, wird sichergestellt, dass die WebSocket-Verbindung die Kultur ordnungsgemäß weitergeben kann. Wenn die Lokalisierungsschemas auf dem URL-Pfad oder der Abfragezeichenfolge basieren, kann das Schema möglicherweise nicht mit WebSockets funktionieren, wodurch das Beibehalten der Kultur fehlschlägt. Daher wird die Verwendung eines Cookies für die Lokalisierungskultur empfohlen.
 
-Jede Technik kann verwendet werden, um eine Kultur zuzuweisen, wenn die Kultur in einem Lokalisierungs Cookie beibehalten wird. Wenn die APP bereits über ein festgelegtes Lokalisierungs Schema für serverseitige ASP.net Core verfügt, verwenden Sie weiterhin die vorhandene Lokalisierungs Infrastruktur der APP, und legen Sie das Lokalisierungs Kultur Cookie innerhalb des App-Schemas fest.
+Alle Vorgehensweisen können zum Zuweisen einer Kultur verwendet werden, wenn die Kultur in einem Lokalisierungscookie beibehalten wird. Wenn die App bereits über ein Lokalisierungsschema für serverseitiges ASP.NET Core verfügt, können Sie die vorhandene Lokalisierungsinfrastruktur der App weiterhin verwenden und das Lokalisierungskulturcookie innerhalb des Schemas der App festlegen.
 
-Im folgenden Beispiel wird gezeigt, wie die aktuelle Kultur in einem Cookie festgelegt wird, das von der Lokalisierungs Middleware gelesen werden kann. Erstellen Sie eine Datei *pages/Host. cshtml. cs* mit folgendem Inhalt in der Blazor Server-App:
+Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie eine *Pages/Host.cshtml.cs*-Datei mit dem folgenden Inhalt in der Blazor Server-App:
 
 ```csharp
 public class HostModel : PageModel
@@ -98,22 +98,22 @@ public class HostModel : PageModel
 }
 ```
 
-Die Lokalisierung wird von der app in der folgenden Ereignis Sequenz behandelt:
+Die Lokalisierung wird mit der folgenden Ereignissequenz von der App verarbeitet:
 
-1. Der Browser sendet eine anfängliche http-Anforderung an die app.
-1. Die Kultur wird von der Lokalisierungs Middleware zugewiesen.
-1. Die `OnGet`-Methode in *_Host. cshtml. cs* speichert die Kultur in einem Cookie als Teil der Antwort.
-1. Der Browser öffnet eine WebSocket-Verbindung, um eine interaktive Blazor Server-Sitzung zu erstellen.
-1. Die Lokalisierungs Middleware liest das Cookie und weist die Kultur zu.
-1. Die Blazor Server-Sitzung beginnt mit der richtigen Kultur.
+1. Der Browser sendet zunächst eine HTTP-Anforderung an die App.
+1. Die Kultur wird von der Lokalisierungsmiddleware zugewiesen.
+1. Die `OnGet`-Methode in *_Host.cshtml.cs* speichert die Kultur im Rahmen der Reaktion in einem Cookie.
+1. Der Browser stellt eine WebSocket-Verbindung her, um einer interaktive Blazor-Serversitzung zu erstellen.
+1. Die Lokalisierungsmiddleware liest das Cookie und weist die Kultur zu.
+1. Die Blazor-Serversitzung beginnt mit der richtigen Kultur.
 
-### <a name="provide-ui-to-choose-the-culture"></a>Bereitstellen der Benutzeroberfläche zum Auswählen der Kultur
+### <a name="provide-ui-to-choose-the-culture"></a>Bereitstellen einer Benutzeroberfläche zum Auswählen der Kultur
 
-Zum Bereitstellen einer Benutzeroberfläche, mit der Benutzer eine Kultur auswählen können, wird ein *Umleitungs basierter Ansatz* empfohlen. Der Prozess ähnelt dem, was in einer Web-App geschieht, wenn ein Benutzer versucht, auf eine sichere Ressource zuzugreifen,&mdash;der Benutzer zu einer Anmeldeseite umgeleitet und dann zurück zur ursprünglichen Ressource umgeleitet wird. 
+Zum Bereitstellen einer Benutzeroberfläche, um Benutzern das Auswählen einer Kultur zu ermöglichen, wird ein *Ansatz auf Grundlage von Umleitungen* empfohlen. Der Prozess ist ähnelt dem Ablauf in einer Web-App, wenn ein Benutzer versucht auf eine sichere Ressource zuzugreifen: der Benutzer wird an eine Anmeldeseite umgeleitet und dann wieder zur ursprünglichen Ressource. 
 
-Die APP speichert die ausgewählte Kultur des Benutzers über eine Umleitung zu einem Controller. Der Controller legt die ausgewählte Kultur des Benutzers in einem Cookie fest und leitet den Benutzer zurück an den ursprünglichen URI.
+Die App behält die vom Benutzer ausgewählte Kultur mithilfe einer Umleitung an einen Controller bei. Der Controller legt die ausgewählte Kultur des Benutzers mit einem Cookie fest und leitet den Benutzer wieder an den ursprünglichen URI weiter.
 
-Richten Sie einen HTTP-Endpunkt auf dem Server ein, um die ausgewählte Kultur des Benutzers in einem Cookie festzulegen, und führen Sie die Umleitung zurück zum ursprünglichen URI aus:
+Erstellen Sie einen HTTP-Endpunkt auf dem Server zum Festlegen der ausgewählten Kultur eines Benutzers in einem Cookie, und leiten Sie ihn dann wieder an den ursprünglichen URI weiter:
 
 ```csharp
 [Route("[controller]/[action]")]
@@ -135,9 +135,9 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Verwenden Sie das Ergebnis der `LocalRedirect` Aktion, um Open Redirect-Angriffe zu verhindern. Weitere Informationen finden Sie unter <xref:security/preventing-open-redirects>.
+> Verwenden Sie das Ergebnis der `LocalRedirect`-Aktion, um Angriffe durch offene Umleitungen zu verhindern. Weitere Informationen finden Sie unter <xref:security/preventing-open-redirects>.
 
-Die folgende Komponente zeigt ein Beispiel dafür, wie die anfängliche Umleitung durchgeführt wird, wenn der Benutzer eine Kultur auswählt:
+Im folgenden Beispiel wird das Durchführen einer Umleitung veranschaulicht, wenn der Benutzer eine Kultur auswählt:
 
 ```razor
 @inject NavigationManager NavigationManager
@@ -164,6 +164,6 @@ Die folgende Komponente zeigt ein Beispiel dafür, wie die anfängliche Umleitun
 }
 ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/localization>

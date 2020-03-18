@@ -1,36 +1,36 @@
 ---
-title: Tools und Downloads - DevOps mit ASP.NET Core und Azure
+title: 'Tools und Downloads: DevOps mit ASP.NET Core und Azure'
 author: CamSoper
-description: Tools und Downloads, die für DevOps mit ASP.NET Core und Azure erforderlich sind.
+description: Für DevOps mit ASP.NET Core und Azure erforderliche Tools und Downloads.
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/tools-and-downloads
 ms.openlocfilehash: 25ce311373b0aaddfa3bc2728c39e503acbca69d
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080639"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647443"
 ---
-# <a name="tools-and-downloads"></a>Tools und downloads
+# <a name="tools-and-downloads"></a>Tools und Downloads
 
-Azure verfügt über mehrere Schnittstellen für die Bereitstellung und Verwaltung von Ressourcen, z. B. die [Azure-Portal](https://portal.azure.com), [Azure-Befehlszeilenschnittstelle](/cli/azure/), [Azure PowerShell](/powershell/azure/overview), [Azure-Cloud Shell](https://shell.azure.com/bash), und Visual Studio. Dieses Handbuch verwendet einen minimalistischen Ansatz und die Azure Cloud Shell nach Möglichkeit, um die erforderlichen Schritte zu reduzieren. Allerdings muss das Azure-Portal für einige Teile verwendet werden.
+Azure verfügt über mehrere Schnittstellen für die Bereitstellung und Verwaltung von Ressourcen wie das [Azure-Portal](https://portal.azure.com), die [Azure CLI](/cli/azure/), [Azure PowerShell](/powershell/azure/overview), [Azure Cloud Shell](https://shell.azure.com/bash) und Visual Studio. In diesem Leitfaden wird ein minimalistischer Ansatz verwendet, bei dem möglichst häufig Azure Cloud Shell zum Einsatz kommt, um die Anzahl der erforderlichen Schritte zu verringern. Für manche Schritte muss jedoch das Azure-Portal verwendet werden.
 
-## <a name="prerequisites"></a>Vorraussetzungen
+## <a name="prerequisites"></a>Voraussetzungen
 
-Die folgenden Abonnements sind erforderlich:
+Folgende Abonnements sind erforderlich:
 
-* Azure &mdash; , wenn Sie nicht über ein Konto verfügen [erhalten eine kostenlose Testversion](https://azure.microsoft.com/free/).
-* Azure DevOps-Dienste &mdash; wird Ihr Azure DevOps-Abonnement und Ihre Organisation erstellt, in Kapitel 4.
-* GitHub &mdash; , wenn Sie nicht über ein Konto verfügen [melden Sie sich jetzt](https://github.com/join).
+* Azure &mdash; Wenn Sie über kein Konto verfügen, [laden Sie eine kostenlose Testversion herunter](https://azure.microsoft.com/free/).
+* Azure DevOps Services &mdash; Ihr Azure DevOps-Abonnement und Ihre Organisation werden in Kapitel 4 erstellt.
+* GitHub &mdash; Falls Sie noch kein Konto besitzen, können Sie sich [kostenlos dafür registrieren](https://github.com/join).
 
-Die folgenden Tools sind erforderlich:
+Die folgenden Tools werden benötigt:
 
-* [Git](https://git-scm.com/downloads) &mdash; ein grundlegender Überblick über Git wird in diesem Handbuch empfohlen. Überprüfen Sie die [Git-Dokumentation](https://git-scm.com/doc), insbesondere [Git-Remoterepository](https://git-scm.com/docs/git-remote) und [Git-Push](https://git-scm.com/docs/git-push).
-* [.NET Core SDK](https://www.microsoft.com/net/download/) &mdash; 2.1.300-Version oder höher erstellen und Ausführen der Beispiel-app erforderlich ist. Wenn die Installation von Visual Studio mit der **plattformübergreifende Entwicklung mit .NET Core** Workload, die .NET Core SDK ist bereits installiert.
+* [Git](https://git-scm.com/downloads) &mdash; Grundlegende Kenntnisse von Git werden für diesen Leitfaden empfohlen. Lesen Sie die [Git-Dokumentation](https://git-scm.com/doc), insbesondere [git remote](https://git-scm.com/docs/git-remote) und [git push](https://git-scm.com/docs/git-push).
+* [.Net Core SDK](https://www.microsoft.com/net/download/) &mdash; Version 2.1.300 oder höher ist erforderlich, um die Beispiel-App zu erstellen und auszuführen. Wenn Visual Studio mit der **Plattformübergreifenden .NET Core-Entwicklung** installiert wird, ist das .NET Core SDK bereits installiert.
 
-    Überprüfen Sie die .NET Core SDK-Installation. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl:
+    Überprüfen Sie Ihre .NET Core SDK-Installation. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
 
     ```dotnetcli
     dotnet --version
@@ -38,9 +38,9 @@ Die folgenden Tools sind erforderlich:
 
 ## <a name="recommended-tools-windows-only"></a>Empfohlene Tools (nur Windows)
 
-* [Visual Studio](https://visualstudio.microsoft.com)des robuste Azure-Tools bieten einer grafische Benutzeroberfläche für den Großteil der Funktionalität, die in diesem Handbuch beschrieben. Eine beliebige Edition von Visual Studio funktionieren, einschließlich der kostenlosen Visual Studio Community Edition. In den Tutorials werden geschrieben, um Entwicklung und Bereitstellung von DevOps mit und ohne Visual Studio veranschaulichen.
+* Die stabilen Azure-Tools von [Visual Studio](https://visualstudio.microsoft.com) bieten eine GUI für die meisten der in diesem Handbuch beschriebenen Funktionen. Sie können jede beliebige Edition von Visual Studio verwenden, einschließlich der kostenlosen Visual Studio Community Edition. Die Tutorials dienen der Veranschaulichung von Entwicklung, Bereitstellung und DevOps sowohl mit als auch ohne Visual Studio.
 
-  Vergewissern Sie sich, dass Visual Studio die folgenden verfügt [Workloads](/visualstudio/install/modify-visual-studio) installiert:
+  Vergewissern Sie sich, dass für Visual Studio die folgenden [Workloads](/visualstudio/install/modify-visual-studio) installiert sind:
 
   * ASP.NET und Webentwicklung
   * Azure-Entwicklung

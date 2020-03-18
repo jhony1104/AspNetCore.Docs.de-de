@@ -1,48 +1,48 @@
 ---
-title: ASP.net Core laden/Belastungstest
+title: Auslastungs-/Belastungstests in ASP.NET Core
 author: Jeremy-Meng
-description: Erfahren Sie mehr über verschiedene wichtige Tools und Ansätze für Auslastungs Tests und Belastungstests ASP.net Core apps.
+description: Hier erhalten Sie weitere Informationen zu hilfreichen Tools und Ansätzen für Auslastungstests und Belastungstests für ASP.NET Core-Apps.
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 uid: test/loadtests
 ms.openlocfilehash: 1fd77a767fb53b9276081dd712e13108094a0382
-ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/04/2020
-ms.locfileid: "77004291"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649639"
 ---
-# <a name="aspnet-core-loadstress-testing"></a>ASP.net Core laden/Belastungstest
+# <a name="aspnet-core-loadstress-testing"></a>Auslastungs-/Belastungstests in ASP.NET Core
 
-Auslastungs Tests und Belastungstests sind wichtig, um sicherzustellen, dass eine Web-App Performance und skalierbar ist. Ihre Ziele sind unterschiedlich, obwohl Sie häufig ähnliche Tests gemeinsam nutzen.
+Auslastungstests und Belastungstests sind wichtig, um sicherzustellen, dass eine Web-App leistungsfähig bleibt und skalierbar ist. Ihre Ziele unterscheiden sich, obwohl oftmals ähnliche Tests verwendet werden.
 
-**Auslastungs Tests** &ndash; testen, ob die APP eine bestimmte Last von Benutzern für ein bestimmtes Szenario verarbeiten kann, während gleichzeitig das Antwort Ziel erfüllt ist. Die APP wird unter normalen Bedingungen ausgeführt.
+**Auslastungstests:** Hier wird getestet, ob die App eine bestimmte Benutzerauslastung für ein bestimmtes Szenario verarbeiten kann, und dabei weiterhin reaktionsfähig bleibt. Die App wird dabei unter normalen Umständen ausgeführt.
 
-**Belastungstests** &ndash; Test-App-Stabilität, wenn Sie unter Extrembedingungen ausgeführt wird, häufig für einen längeren Zeitraum. Die Tests platzieren hohe Benutzer Auslastung, entweder Spitzen oder allmählich höhere Auslastung, in der APP oder beschränken die computingressourcen der app.
+**Belastungstests:** Hier wird die Stabilität der App getestet, wenn sie unter extremen Bedingungen ausgeführt wird, oft auch für einen längeren Zeitraum. Beim Test wird die App einer hohen Benutzerauslastung ausgesetzt, entweder mit Spitzenwerten oder einer schrittweise ansteigenden Auslastung. Alternativ können die Computingressourcen der App eingeschränkt werden.
 
-Belastungstests bestimmen, ob eine zu Belastungs Ende App nach einem Fehler wieder hergestellt werden kann und ordnungsgemäß zum erwarteten Verhalten zurückkehren kann. Unter Belastung wird die APP nicht unter normalen Bedingungen ausgeführt.
+Bei Belastungstests wird untersucht, ob sich eine App unter Belastung nach einem Fehler erholen und ordnungsgemäß zum erwarteten Verhalten zurückkehren kann. Unter Belastung wird die App nicht unter normalen Bedingungen ausgeführt.
 
-Visual Studio 2019 ist die letzte Version von Visual Studio mit Auslastungs Test Features. Für Kunden, die zukünftig Auslastungs TestTools benötigen, empfehlen wir alternative Tools, wie z. b. Apache JMeter, Akamai cloudtest und blazemeter. Weitere Informationen finden Sie in den [Anmerkungen zu dieser Version von Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
+Visual Studio 2019 ist die letzte Version von Visual Studio, die Auslastungstestfeatures bietet. Kunden, die Auslastungstesttools benötigen, können zukünftig alternative Tools wie Apache JMeter, Akamai CloudTest oder BlazeMeter verwenden. Weitere Informationen finden Sie unter [Testtools in den Versionshinweisen zu Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
 
 ## <a name="visual-studio-tools"></a>Visual Studio Tools
 
-Visual Studio ermöglicht Benutzern das Erstellen, entwickeln und Debuggen von webleistungs-und Auslastungs Tests. Eine Option ist verfügbar, um Tests zu erstellen, indem Aktionen in einem Webbrowser aufgezeichnet werden.
+In Visual Studio können Benutzer Tests zur Webleistung und Auslastungstests erstellen, entwickeln und debuggen. Es steht eine Option zur Verfügung, Tests zu erstellen, indem Aktionen in einem Webbrowser aufgezeichnet werden.
 
-Informationen zum Erstellen, konfigurieren und Ausführen von Auslastungs Testprojekten mit Visual Studio 2017 finden Sie unter [Schnellstart: Erstellen eines Auslastungs Testprojekts](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
+Weitere Informationen zum Erstellen, Konfigurieren und Ausführen eines Auslastungstestprojekts mithilfe von Visual Studio 2017 finden Sie unter [Schnellstart: Erstellen eines Auslastungstestprojekts](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
 
-Auslastungs Tests können so konfiguriert werden, dass Sie lokal oder mithilfe von Azure devops in der Cloud ausgeführt werden.
+Auslastungstests können so konfiguriert werden, dass sie lokal oder in der Cloud mithilfe von Azure DevOps ausgeführt werden.
 
-## <a name="third-party-tools"></a>Drittanbieter Tools
+## <a name="third-party-tools"></a>Tools von Drittanbietern
 
-Die folgende Liste enthält webleistungs Tools von Drittanbietern mit verschiedenen Funktionsgruppen:
+In der folgenden Liste finden Sie Webleistungstools von Drittanbietern, die verschiedene Features bieten:
 
 * [Apache JMeter](https://jmeter.apache.org/)
-* [Apachebench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
-* [Gator](https://gatling.io/)
-* [K6](https://k6.io)
+* [ApacheBench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
+* [Gatling](https://gatling.io/)
+* [k6](https://k6.io)
 * [Locust](https://locust.io/)
-* [Webanstieg für Westwind](https://websurge.west-wind.com/)
-* [Wird netult](https://github.com/hallatore/Netling)
+* [West Wind WebSurge](https://websurge.west-wind.com/)
+* [Netling](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
 

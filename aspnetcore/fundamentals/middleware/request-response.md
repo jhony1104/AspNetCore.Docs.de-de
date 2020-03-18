@@ -7,12 +7,12 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: 5e531c0ce0ed48097054fd81ddc3655a66cc7c5f
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: b473fa02e1d23f02bc5d2e15fa54ab7b1dbbb17c
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081670"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650833"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>Anforderungs- und Antwortvorgänge in ASP.NET Core
 
@@ -22,7 +22,7 @@ In diesem Artikel wird erläutert, wie Sie den Anforderungstext lesen und den An
 
 Es stehen zwei Abstraktionen für die Anforderungs- und Antworttexte zur Verfügung: <xref:System.IO.Stream> und <xref:System.IO.Pipelines.Pipe>. [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body) ist ein <xref:System.IO.Stream> zum Lesen der Anforderung, und `HttpRequest.BodyReader` ist ein <xref:System.IO.Pipelines.PipeReader>. [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body) ist eine <xref:System.IO.Stream> zum Schreiben der Antwort, und `HttpResponse.BodyWriter` ist eine <xref:System.IO.Pipelines.PipeWriter>.
 
-Anstelle von Datenströmen werden Pipelines empfohlen. Datenströme können bei einigen einfachen Vorgängen einfacher zu verwenden sein, aber Pipelines haben einen Leistungsvorteil und sind in den meisten Szenarien einfacher zu verwenden. ASP.NET Core beginnt, intern Pipelines anstelle von Datenströmen zu verwenden. Beispiele:
+Anstelle von Datenströmen werden [Pipelines](/dotnet/standard/io/pipelines) empfohlen. Datenströme können bei einigen einfachen Vorgängen einfacher zu verwenden sein, aber Pipelines haben einen Leistungsvorteil und sind in den meisten Szenarien einfacher zu verwenden. ASP.NET Core beginnt, intern Pipelines anstelle von Datenströmen zu verwenden. Beispiele:
 
 * `FormReader`
 * `TextReader`
@@ -36,6 +36,7 @@ Datenströme werden jedoch nicht aus dem Framework entfernt. Datenströme werden
 Angenommen, Sie möchten eine Middleware erstellen, die den gesamten Anforderungstext als Liste von Zeichenfolgen liest, die in neue Zeilen umbrochen werden. Eine einfache Datenstromimplementierung könnte wie im folgenden Beispiel aussehen:
 
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringsFromStream)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 Dieser Code funktioniert, aber es gibt einige Probleme:
 
