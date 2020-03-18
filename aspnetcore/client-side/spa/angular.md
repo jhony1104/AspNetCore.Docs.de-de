@@ -7,12 +7,12 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 uid: spa/angular
-ms.openlocfilehash: 11ad5d4c7cadcc582b3e288a331569f62f0b98ac
-ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
-ms.translationtype: MT
+ms.openlocfilehash: fee872ff237e14cbe491efed9b320809df4c5654
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77044859"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646459"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Verwenden der Angular-Projektvorlage mit ASP.NET Core
 
@@ -33,13 +33,13 @@ cd my-new-app
 
 Führen Sie die App über Visual Studio oder die .NET Core CLI aus:
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 Öffnen Sie die generierte *CSPROJ*-Datei, und führen Sie die App von dort wie gewohnt aus.
 
 Während der Erstellung werden bei der ersten Ausführung npm-Abhängigkeiten wiederhergestellt. Dies kann einige Minuten dauern. Nachfolgende Builds sind wesentlich schneller.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
 Stellen Sie sicher, dass Sie über eine Umgebungsvariable mit dem Namen `ASPNETCORE_Environment` und dem Wert `Development` verfügen. Führen Sie unter Windows (bei Eingabeaufforderungen außerhalb von PowerShell) `SET ASPNETCORE_Environment=Development` aus. Führen Sie unter Linux oder macOS `export ASPNETCORE_Environment=Development` aus.
 
@@ -53,7 +53,8 @@ Now listening on: http://localhost:<port>
 
 Navigieren Sie in einem Browser zu dieser URL.
 
-Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird protokolliert: *NG Live-Entwicklungsserver lauscht an localhost:&lt;otherport&gt;, öffnen Sie http://localhost:&lt;otherport&gt;/* in Ihrem Browser. Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
+> [!WARNING]
+> Die App startet im Hintergrund eine Instanz des Angular-CLI-Servers. Eine der folgenden ähnelnde Meldung wird angezeigt: *NG Live Development Server lauscht an localhost:&lt;otherport&gt;, öffnen Sie einen Browser für http://localhost:&lt;otherport&gt;/* . Ignorieren Sie die Meldung&mdash;Es handelt sich **nicht** um die URL für die kombinierte ASP.NET Core und Angular-LI-App.
 
 ---
 
@@ -77,9 +78,9 @@ Wenn das `ng`-Tool global installiert ist, können Sie seine Befehle ausführen.
 
 Wenn Sie das `ng`-Tool nicht installiert haben, führen Sie stattdessen `npm run ng` aus. Sie können beispielsweise `npm run ng lint``npm run ng test` ausführen.
 
-## <a name="install-npm-packages"></a>Installieren von npm-Paketen
+## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
-Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
+Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Zum Beispiel:
 
 ```console
 cd ClientApp
@@ -90,7 +91,7 @@ npm install --save <package_name>
 
 Bei der Entwicklung wird die App in einem für Entwickler optimierten Modus ausgeführt. JavaScript-Pakete enthalten beispielsweise Quellzuordnungen (damit Sie beim Debuggen Ihren ursprünglichen TypeScript-Code anzeigen können). Die App überwacht TypeScript-, HTML- und CSS-Dateiänderungen auf dem Datenträger und führt bei Feststellung dieser Dateiänderungen automatisch eine Neukompilierung und ein erneutes Laden durch.
 
-Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zum entwicklungbuild ist es für den produktionsbuild nicht erforderlich, dass Node. js auf dem Server installiert wird (es sei denn, Sie haben serverseitiges Rendering (SSR) aktiviert).
+Stellen Sie bei der Produktion eine für Leistung optimierte Version Ihrer App bereit. Dies erfolgt gemäß der Konfiguration automatisch. Beim Veröffentlichen gibt die Buildkonfiguration einen verkleinerten, Ahead-of-Time-kompilierten Build (AOT-Build) Ihres clientseitigen Codes aus. Im Gegensatz zum Entwicklungsbuild muss Node.js beim Produktionsbuild nicht auf dem Server installiert sein (sofern Sie das serverseitige Rendern nicht aktiviert haben).
 
 Sie können [ASP.NET Core-Standardhosting- und -bereitstellungsmethoden](xref:host-and-deploy/index) verwenden.
 
@@ -98,7 +99,7 @@ Sie können [ASP.NET Core-Standardhosting- und -bereitstellungsmethoden](xref:ho
 
 Das Projekt ist so konfiguriert, dass die eigene Instanz des Angular-CLI-Servers im Hintergrund gestartet wird, wenn die ASP.NET Core-App im Entwicklungsmodus gestartet wird. Dies ist nützlich, da es bedeutet, dass Sie keinen separaten Server manuell ausführen müssen.
 
-Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der Angular-CLI-Server neu gestartet. Die Sicherung wird nach ca. 10 Sekunden gestartet. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der Angular-CLI-Server neu gestartet wurde, können Sie den Angular-CLI-Server unabhängig vom ASP.NET Core-Prozess extern ausführen. Gehen Sie folgendermaßen vor:
+Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Code ändern und Ihre ASP.NET Core-App neu gestartet werden muss, wird auch der Angular-CLI-Server neu gestartet. Die Sicherung wird nach ca. 10 Sekunden gestartet. Wenn Sie Ihren C#-Code häufig bearbeiten und nicht warten möchten, bis der Angular-CLI-Server neu gestartet wurde, können Sie den Angular-CLI-Server unabhängig vom ASP.NET Core-Prozess extern ausführen. Gehen Sie hierzu wie folgt vor:
 
 1. Wechseln Sie in einer Eingabeaufforderung zu dem Unterverzeichnis *ClientApp*, und starten Sie den Angular-CLI-Entwicklungsserver:
 
@@ -110,7 +111,7 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
     > [!IMPORTANT]
     > Starten Sie den Angular-CLI-Entwicklungsserver mit `npm start` und nicht mit `ng serve`, damit die Konfiguration in *package.json* gewahrt wird. Um zusätzliche Parameter an den Angular-CLI-Server zu übergeben, fügen Sie diese der entsprechenden `scripts`-Zeile in der Datei *package.json* hinzu.
 
-2. Ändern Sie Ihre ASP.NET Core-App so, dass die externe Angular-CLI-Instanz verwendet wird, anstatt eine eigene Instanz zu starten. Ersetzen Sie den *-Aufruf in Ihrer* Startklasse`spa.UseAngularCliServer` durch Folgendes:
+2. Ändern Sie Ihre ASP.NET Core-App so, dass die externe Angular-CLI-Instanz verwendet wird, anstatt eine eigene Instanz zu starten. Ersetzen Sie den `spa.UseAngularCliServer`-Aufruf in Ihrer *Startklasse* durch Folgendes:
 
     ```csharp
     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");

@@ -1,29 +1,29 @@
 ---
-title: Authentifizierung und Autorisierung in GrpC für ASP.net Core
+title: Authentifizierung und Autorisierung in gRPC für ASP.NET Core
 author: jamesnk
-description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in GrpC für ASP.net Core verwenden.
+description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in gRPC für ASP.NET Core durchführen.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 258b34113f3c3d9ef2031a43295ea5806b1e22ff
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: MT
+ms.openlocfilehash: 4309a722859af23be78d5d74c01127a94cfec063
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880689"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650821"
 ---
-# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in GrpC für ASP.net Core
+# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in gRPC für ASP.NET Core
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [(Vorgehensweise zum Herunterladen)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-calling-a-grpc-service"></a>Authentifizieren von Benutzern, die einen GrpC-Dienst aufrufen
+## <a name="authenticate-users-calling-a-grpc-service"></a>Authentifizieren von Benutzern, die einen gRPC-Dienst aufrufen
 
-GrpC kann mit ASP.net Core- [Authentifizierung](xref:security/authentication/identity) verwendet werden, um jedem-Befehl einen Benutzer zuzuordnen.
+gRPC kann mit der [ASP.NET Core-Authentifizierung](xref:security/authentication/identity) verwendet werden, um einen Benutzer mit jedem Aufruf zu verknüpfen.
 
-Im folgenden finden Sie ein Beispiel für `Startup.Configure`, die die GrpC-und ASP.net Core-Authentifizierung verwendet:
+Nachfolgend finden Sie ein Beispiel für `Startup.Configure`, das gRPC- und ASP.NET Core-Authentifizierung verwendet:
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -41,11 +41,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> Die Reihenfolge, in der Sie die ASP.net Core Authentifizierungs Middleware registrieren, ist wichtig. Nach `UseRouting` und vor `UseEndpoints`werden immer `UseAuthentication` und `UseAuthorization` aufgerufen.
+> Die Reihenfolge, in der Sie die ASP.NET Core-Middleware für die Authentifizierung registrieren, ist wichtig. Rufen Sie `UseAuthentication` und `UseAuthorization` immer nach `UseRouting` und vor `UseEndpoints` auf.
 
-Der Authentifizierungsmechanismus, den Ihre APP während eines Aufrufes verwendet, muss konfiguriert werden. Die Authentifizierungs Konfiguration wird in `Startup.ConfigureServices` hinzugefügt und unterscheidet sich je nach dem von Ihrer APP verwendeten Authentifizierungsmechanismus. Beispiele zum Sichern von ASP.net Core-apps finden Sie unter Beispiele für die [Authentifizierung](xref:security/authentication/samples).
+Der Authentifizierungsmechanismus, den Ihre App während eines Aufrufs verwendet, muss konfiguriert werden. Die Authentifizierungskonfiguration wird in `Startup.ConfigureServices` hinzugefügt und wird je nach dem von Ihrer App verwendeten Authentifizierungsmechanismus unterschiedlich sein. Beispiele für die Sicherung von ASP.NET Core-Apps finden Sie unter [Authentifizierungsbeispiele](xref:security/authentication/samples).
 
-Nachdem die Authentifizierung eingerichtet wurde, kann auf den Benutzer über die `ServerCallContext`über eine GrpC-Dienst Methode zugegriffen werden.
+Nachdem die Authentifizierung eingerichtet wurde, kann auf den Benutzer in einer Methode des gRPC-Diensts über `ServerCallContext` zugegriffen werden.
 
 ```csharp
 public override Task<BuyTicketsResponse> BuyTickets(
@@ -60,11 +60,11 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 ### <a name="bearer-token-authentication"></a>Bearertokenauthentifizierung
 
-Der Client kann ein Zugriffs Token für die Authentifizierung bereitstellen. Der Server überprüft das Token und verwendet es, um den Benutzer zu identifizieren.
+Der Client kann ein Zugriffstoken zur Authentifizierung bereitstellen. Der Server überprüft das Token und verwendet es zum Identifizieren des Benutzers.
 
-Auf dem Server wird die bearertokenauthentifizierung mithilfe der [JWT-bearermiddleware](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)konfiguriert.
+Auf dem Server wird die Bearertokenauthentifizierung unter Verwendung der [JWT Bearer-Middleware](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer) konfiguriert.
 
-Im .net-GrpC-Client kann das Token mit Aufrufen als Header gesendet werden:
+Im .NET gRPC-Client kann das Token mit Aufrufen als Header gesendet werden:
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -80,9 +80,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-Das Konfigurieren von `ChannelCredentials` auf einem Kanal ist eine alternative Möglichkeit, das Token mit GrpC-Aufrufen an den Dienst zu senden. Die Anmelde Informationen werden jedes Mal ausgeführt, wenn ein GrpC-Aufruf erfolgt. Dadurch entfällt die Notwendigkeit, Code an mehreren Stellen zu schreiben, um das Token selbst zu übergeben.
+Das Konfigurieren von `ChannelCredentials` für einen Kanal ist eine alternative Möglichkeit, das Token mit gRPC-Aufrufen an den Dienst zu senden. Die Anmeldeinformation wird bei jedem gRPC-Aufruf ausgeführt, wodurch vermieden wird, dass an mehreren Stellen Code geschrieben werden muss, um das Token selbst zu übergeben.
 
-Mit den Anmelde Informationen im folgenden Beispiel wird der Kanal so konfiguriert, dass das Token mit jedem GrpC-Befehl gesendet wird:
+Die Anmeldeinformationen im folgenden Beispiel konfigurieren den Kanal derart, dass das Token bei jedem gRPC-Aufruf gesendet wird:
 
 ```csharp
 private static GrpcChannel CreateAuthenticatedChannel(string address)
@@ -106,14 +106,14 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 }
 ```
 
-### <a name="client-certificate-authentication"></a>Authentifizierung von Clientzertifikaten
+### <a name="client-certificate-authentication"></a>Clientzertifikatsauthentifizierung
 
-Ein Client kann alternativ ein Client Zertifikat für die Authentifizierung bereitstellen. Die [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Wenn die Anforderung ASP.net Core eintritt, können Sie das Zertifikat mit dem Zertifikat für die [Client Zertifikat Authentifizierung](xref:security/authentication/certauth) in eine `ClaimsPrincipal`auflösen.
+Ein Client könnte alternativ ein Clientzertifikat zur Authentifizierung bereitstellen. Die [Zertifikatsauthentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) erfolgt auf der TLS-Ebene, lange bevor sie überhaupt zum ASP.NET Core gelangt. Wenn die Anforderung in ASP.NET Core eingeht, können Sie mit dem [Clientzertifikat-Authentifizierungspaket](xref:security/authentication/certauth) das Zertifikat in ein `ClaimsPrincipal` auflösen.
 
 > [!NOTE]
-> Der Host muss so konfiguriert werden, dass er Client Zertifikate akzeptiert. Weitere Informationen zum Akzeptieren von Client Zertifikaten in Kestrel, IIS und Azure finden [Sie unter Konfigurieren des Hosts für das](xref:security/authentication/certauth#configure-your-host-to-require-certificates) anfordern von Zertifikaten.
+> Der Host muss so konfiguriert werden, dass er Clientzertifikate akzeptiert. Informationen zum Akzeptieren von Clientzertifikaten in Kestrel, IIS und Azure finden Sie unter [Konfigurieren des Hosts für die Anforderung von Zertifikaten](xref:security/authentication/certauth#configure-your-host-to-require-certificates).
 
-Im .net-GrpC-Client wird das Client Zertifikat zu `HttpClientHandler` hinzugefügt, das dann zum Erstellen des GrpC-Clients verwendet wird:
+Im .NET gRPC-Client wird das Clientzertifikat zu `HttpClientHandler` hinzugefügt, das dann zur Erstellung des gRPC-Clients verwendet wird:
 
 ```csharp
 public Ticketer.TicketerClient CreateClientWithCert(
@@ -136,7 +136,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ### <a name="other-authentication-mechanisms"></a>Andere Authentifizierungsmechanismen
 
-Viele ASP.net Core unterstützten Authentifizierungsmechanismen funktionieren mit GrpC:
+Viele von ASP.NET Core unterstützte Authentifizierungsmechanismen arbeiten mit gRPC:
 
 * Azure Active Directory
 * Clientzertifikat
@@ -146,19 +146,19 @@ Viele ASP.net Core unterstützten Authentifizierungsmechanismen funktionieren mi
 * OpenID Connect
 * WS-Federation
 
-Weitere Informationen zum Konfigurieren der Authentifizierung auf dem Server finden Sie unter [ASP.net Core-Authentifizierung](xref:security/authentication/identity).
+Weitere Informationen zum Konfigurieren der Authentifizierung auf dem Server finden Sie unter [ASP.NET Core-Authentifizierung](xref:security/authentication/identity).
 
-Das Konfigurieren des GrpC-Clients für die Verwendung der Authentifizierung hängt von dem verwendeten Authentifizierungsmechanismus ab. Das vorherige bearertoken und Client Zertifikat Beispiele zeigen verschiedene Möglichkeiten, wie der GrpC-Client zum Senden von Authentifizierungs Metadaten mit GrpC-aufrufen konfiguriert werden kann:
+Die Konfiguration des gRPC-Clients für die Verwendung der Authentifizierung hängt von dem von Ihnen verwendeten Authentifizierungsmechanismus ab. Die vorherigen Beispiele für Bearertoken und Clientzertifikate zeigen eine Reihe von Möglichkeiten, wie der gRPC-Client so konfiguriert werden kann, dass er Authentifizierungsmetadaten mit gRPC-Aufrufen sendet:
 
-* Stark typisierte GrpC-Clients verwenden intern `HttpClient`. Die Authentifizierung kann für [httpclienthandler](/dotnet/api/system.net.http.httpclienthandler)oder durch Hinzufügen von benutzerdefinierten [httpmessagehandler](/dotnet/api/system.net.http.httpmessagehandler) -Instanzen zum `HttpClient`konfiguriert werden.
-* Jeder GrpC-Befehl verfügt über ein optionales `CallOptions` Argument. Benutzerdefinierte Header können mithilfe der Header Auflistung der Option gesendet werden.
+* Stark typisierte gRPC-Clients verwenden intern `HttpClient`. Die Authentifizierung kann für [HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler) oder durch Hinzufügen von benutzerdefinierten [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler)-Instanzen zu `HttpClient` konfiguriert werden.
+* Jeder gRPC-Aufruf hat ein optionales `CallOptions`-Argument. Benutzerdefinierte Header können über die Headersammlung der Option gesendet werden.
 
 > [!NOTE]
-> Die Windows-Authentifizierung (NTLM/Kerberos/Aushandlung) kann nicht mit GrpC verwendet werden. GrpC erfordert http/2, und http/2 unterstützt die Windows-Authentifizierung nicht.
+> Die Windows-Authentifizierung (NTLM/Kerberos/Negotiate) kann nicht mit gRPC verwendet werden. gRPC erfordert HTTP/2, und HTTP/2 unterstützt keine Windows-Authentifizierung.
 
-## <a name="authorize-users-to-access-services-and-service-methods"></a>Autorisieren von Benutzern für den Zugriff auf Dienste und Dienst Methoden
+## <a name="authorize-users-to-access-services-and-service-methods"></a>Autorisieren von Benutzern zum Zugriff auf Dienste und Dienstmethoden
 
-Standardmäßig können alle Methoden in einem Dienst von nicht authentifizierten Benutzern aufgerufen werden. Um eine Authentifizierung anzufordern, wenden Sie das [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) -Attribut auf den Dienst an:
+Standardmäßig können alle Methoden in einem Dienst von nicht authentifizierten Benutzern aufgerufen werden. Wenden Sie das Attribut [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) auf den Dienst an, um eine Authentifizierung zu erfordern:
 
 ```csharp
 [Authorize]
@@ -167,7 +167,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Sie können die Konstruktorargumente und-Eigenschaften des `[Authorize]`-Attributs verwenden, um den Zugriff auf Benutzer zu beschränken, die mit bestimmten [Autorisierungs Richtlinien](xref:security/authorization/policies)übereinstimmen. Wenn Sie z. b. eine benutzerdefinierte Autorisierungs Richtlinie namens `MyAuthorizationPolicy`haben, stellen Sie sicher, dass nur Benutzer, die dieser Richtlinie entsprechen, mithilfe des folgenden Codes auf den Dienst zugreifen können
+Sie können die Konstruktorargumente und -eigenschaften des `[Authorize]`-Attributs verwenden, um den Zugriff auf Benutzer zu beschränken, die bestimmten [Autorisierungsrichtlinien](xref:security/authorization/policies) entsprechen. Wenn Sie z. B. eine benutzerdefinierte Autorisierungsrichtlinie namens `MyAuthorizationPolicy` besitzen, stellen Sie sicher, dass nur Benutzer, die dieser Richtlinie entsprechen, mit dem folgenden Code auf den Dienst zugreifen können:
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -176,7 +176,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Für einzelne Dienst Methoden kann auch das `[Authorize]`-Attribut angewendet werden. Wenn der aktuelle Benutzer nicht **mit den Richtlinien für die** -Methode und die-Klasse identisch ist, wird ein Fehler an den Aufrufer zurückgegeben:
+Auf einzelne Dienstmethoden kann auch das Attribut `[Authorize]` angewendet werden. Wenn der aktuelle Benutzer nicht mit den Richtlinien übereinstimmt, die **sowohl** auf die Methode als auch auf die Klasse angewendet werden, wird ein Fehler an den Aufrufer zurückgegeben:
 
 ```csharp
 [Authorize]
@@ -197,7 +197,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Bearertokenauthentifizierung in ASP.net Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
-* [Konfigurieren der Client Zertifikat Authentifizierung in ASP.net Core](xref:security/authentication/certauth)
+* [Bearertokenauthentifizierung in ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
+* [Konfigurieren der Clientzertifikatsauthentifizierung in ASP.NET Core](xref:security/authentication/certauth)

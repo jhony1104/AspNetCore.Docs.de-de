@@ -9,11 +9,11 @@ no-loc:
 - Blazor
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 72096fc2f03033dfe8325b5129e074913a2fbd1f
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75463133"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646687"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Verwenden von ASP.NET Core-APIs in einer Klassenbibliothek
 
@@ -42,7 +42,7 @@ Um auf ASP.NET Core zu verweisen, fügen Sie Ihrer Projektdatei das folgende `<F
 
 Der Verweis auf ASP.NET Core in dieser Weise wird nur für Projekte mit der Zielplattform .NET Core 3.x unterstützt.
 
-## <a name="include-opno-locblazor-extensibility"></a>Einschließen von Blazor-Erweiterbarkeit
+## <a name="include-blazor-extensibility"></a>Einbeziehen der Blazor-Erweiterbarkeit
 
 Blazor unterstützt die [Hostingmodelle](xref:blazor/hosting-models) WebAssembly (WASM) und Server. Wenn es keinen bestimmten Grund gibt, der dagegen spricht, sollte eine [Razor-Komponenten](xref:blazor/components)-Bibliothek beide Hostingmodelle unterstützen. Eine Razor-Komponentenbibliothek muss das [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) verwenden.
 
@@ -50,11 +50,11 @@ Blazor unterstützt die [Hostingmodelle](xref:blazor/hosting-models) WebAssembly
 
 Verwenden Sie zur Nutzung von Razor-Komponenten sowohl aus [Blazor Server](xref:blazor/hosting-models#blazor-server)- als auch aus [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly)-Projekten die folgenden Anweisungen für Ihren Editor.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte deaktiviert sein.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Führen Sie im integrierten Terminal den folgenden Befehl aus:
 
@@ -62,7 +62,7 @@ Führen Sie im integrierten Terminal den folgenden Befehl aus:
 dotnet new razorclasslib
 ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage.
 
@@ -114,11 +114,11 @@ Wenn für das Projekt .NET Core 3.x als Ziel festgelegt ist, wird Folgendes ben�
 
 Die Projektvorlage **Razor-Klassenbibliothek** erfüllt die Voraussetzungen für Projekte mit dem Ziel .NET Core 3.x. Verwenden Sie die folgenden Anweisungen für Ihren Editor.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte aktiviert sein.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Führen Sie im integrierten Terminal den folgenden Befehl aus:
 
@@ -126,7 +126,7 @@ Führen Sie im integrierten Terminal den folgenden Befehl aus:
 dotnet new razorclasslib -s
 ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
 Zurzeit ist keine Unterstützung durch Projektvorlagen verfügbar.
 

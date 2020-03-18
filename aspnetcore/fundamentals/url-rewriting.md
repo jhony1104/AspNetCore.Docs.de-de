@@ -1,22 +1,22 @@
 ---
 title: URL-umschreibende Middleware in ASP.NET Core
-author: guardrex
+author: rick-anderson
 description: Informationen zum Umschreiben und Umleiten von URL mit URL-umschreibender Middleware in ASP.NET Core-Anwendungen
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: e284d2172af723bb80a7be9f6e6f1a87ebe5208e
-ms.sourcegitcommit: 41f2c1a6b316e6e368a4fd27a8b18d157cef91e1
+ms.openlocfilehash: 7d63cf381f1d8a19ed4fb789348e36f94304ad63
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/21/2019
-ms.locfileid: "69886509"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650473"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>URL-umschreibende Middleware in ASP.NET Core
 
-Von [Luke Latham](https://github.com/guardrex) und [Mikael Mengistu](https://github.com/mikaelm12)
+Von [Mikael Mengistu](https://github.com/mikaelm12)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -35,7 +35,7 @@ Bei der URL-Umschreibung werden die Anforderungs-URLs verändert, die auf mindes
 > [!NOTE]
 > Wenn Sie URLs umschreiben, kann das negative Auswirkungen auf die Leistung einer App haben. Wenn möglich, sollten Sie so wenig Regeln wie möglich erstellen und darauf achten, dass diese nicht zu kompliziert sind.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>Umleiten und Umschreiben von URLs
 
@@ -43,7 +43,7 @@ Der Unterschied zwischen dem *Umleiten* und *Neu schreiben* von URLs ist zwar ge
 
 Bei der *Umleitung von URLs* findet ein clientseitiger Vorgang statt, bei dem der Client angewiesen wird, auf eine Ressource unter einer anderen Adresse zuzugreifen, als die, die der Client ursprünglich angefordert hat. Dafür ist ein Roundtrip zum Server erforderlich. Die Umleitungs-URL, die an den Client zurückgegeben wird, wird in der Adressleiste des Browsers angezeigt, wenn der Client eine neue Anforderung an die Ressource sendet.
 
-Wenn `/resource` auf `/different-resource` *umgeleitet* wird, sendet der Server die Antwort, dass der Client die Ressource unter `/different-resource` abrufen soll. In der Antwort ist außerdem ein Statuscode enthalten, aus dem entnommen werden kann, ob die Umleitung temporär oder permanent ist.
+Wenn `/resource` auf `/different-resource`*umgeleitet* wird, sendet der Server die Antwort, dass der Client die Ressource unter `/different-resource` abrufen soll. In der Antwort ist außerdem ein Statuscode enthalten, aus dem entnommen werden kann, ob die Umleitung temporär oder permanent ist.
 
 ![Ein Web-API-Dienstendpunkt wurde auf dem Server kurzzeitig von Version 1 (v1) auf Version 2 (v2) geändert. Der Client sendet eine Anforderung an den Dienst unter dem Pfad für Version 1: „/v1/api“. Der Server sendet eine „302 – Gefunden“-Antwort mit dem neuen, temporären Pfad für Version 2: „/v2/api“. Der Client sendet eine zweite Anforderung an den Dienst unter der Umleitungs-URL. Der Server gibt den Statuscode „200 – OK“ zurück.](url-rewriting/_static/url_redirect.png)
 
@@ -57,7 +57,7 @@ Weitere Informationen zu Statuscodes finden Sie unter [RFC 2616: Status Code Def
 
 Bei der *Neuschreibung einer URL* handelt es sich um einen serverseitigen Vorgang, bei dem eine Ressource von einer anderen Ressourcenadresse, als der vom Client angeforderten, bereitgestellt wird. Wenn eine URL neu geschrieben wird, ist kein Roundtrip zum Server erforderlich. Die neu geschriebene URL wird nicht an den Server zurückgegeben und nicht in der Adressleiste des Browsers angezeigt.
 
-Wenn `/resource` in `/different-resource` *umgeschrieben* wird, ruft der Server die Ressource *intern* ab und gibt sie zurück an `/different-resource`.
+Wenn `/resource` in `/different-resource`*umgeschrieben* wird, ruft der Server die Ressource *intern* ab und gibt sie zurück an `/different-resource`.
 
 Auch wenn der Client die Ressource unter der neu geschriebene URL abrufen kann, erhält er nicht die Information, dass die Ressource unter der umgeschriebenen URL gespeichert ist, wenn er die Anforderung sendet und eine Antwort erhält.
 
@@ -65,7 +65,7 @@ Auch wenn der Client die Ressource unter der neu geschriebene URL abrufen kann, 
 
 ## <a name="url-rewriting-sample-app"></a>URL-umschreibende Beispiel-App
 
-Mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
+Mit der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>Empfohlene Verwendung der URL-umschreibenden Middleware
 
@@ -124,7 +124,7 @@ Ursprüngliche Anforderung: `/redirect-rule/1234/5678`
 
 ![Browserfenster mit Entwicklertools, die die Anforderungen und Antworten nachverfolgen](url-rewriting/_static/add_redirect.png)
 
-Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)*. Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
+Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)* . Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
 
 Erfassungsgruppen werden in der Ersetzungszeichenfolge mit dem Dollarzeichen (`$`) in die Zeichenfolge eingefügt. Danach folgt die Sequenznummer der Erfassung. Der erste Wert der Erfassungsgruppe wird mit `$1` abgerufen, der zweite mit `$2`. Dies wird in Sequenzen für die Erfassungsgruppen Ihres RegEx weitergeführt. Nur eine Erfassungsgruppe ist in der Beispiel-App im RegEx der Umleitungsregel enthalten. Das bedeutet, dass es in die Ersetzungszeichenfolge nur eine Gruppe eingefügt wird, nämlich `$1`. Wenn die Regel angewendet wird, ändert sich die URL in `/redirected/1234/5678`.
 
@@ -200,7 +200,7 @@ Die Umschreibungsregel (`^rewrite-rule/(\d+)/(\d+)`) stimmt nur mit Pfaden über
 | `/my-cool-rewrite-rule/1234/5678` | Nein    |
 | `/anotherrewrite-rule/1234/5678`  | Nein    |
 
-Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)*. Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
+Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)* . Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
 
 Es gibt keinen Roundtrip zum Server, um die Ressource abzurufen. Wenn es die Ressource gibt, wird sie abgerufen und dem Client mit dem Statuscode *200 – OK* zurückgegeben. Da der Client nicht umgeleitet wird, ändert sich die URL in der Adressleiste des Browsers nicht. Clients können nicht erkennen, dass ein Vorgang zum erneuten Schreiben einer URL auf dem Server stattgefunden hat.
 
@@ -319,7 +319,7 @@ Verwenden Sie <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>,
 
 | `RewriteContext.Result`              | Aktion                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (Standard) | Regeln weiter anwenden.                                         |
+| `RuleResult.ContinueRules` (Standardwert) | Regeln weiter anwenden.                                         |
 | `RuleResult.EndResponse`             | Regeln nicht mehr anwenden und Antwort senden.                       |
 | `RuleResult.SkipRemainingRules`      | Regeln nicht mehr anwenden, und den Kontext an die nächste Middleware senden. |
 
@@ -387,7 +387,7 @@ Bei der URL-Umschreibung werden die Anforderungs-URLs verändert, die auf mindes
 > [!NOTE]
 > Wenn Sie URLs umschreiben, kann das negative Auswirkungen auf die Leistung einer App haben. Wenn möglich, sollten Sie so wenig Regeln wie möglich erstellen und darauf achten, dass diese nicht zu kompliziert sind.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>Umleiten und Umschreiben von URLs
 
@@ -395,7 +395,7 @@ Der Unterschied zwischen dem *Umleiten* und *Neu schreiben* von URLs ist zwar ge
 
 Bei der *Umleitung von URLs* findet ein clientseitiger Vorgang statt, bei dem der Client angewiesen wird, auf eine Ressource unter einer anderen Adresse zuzugreifen, als die, die der Client ursprünglich angefordert hat. Dafür ist ein Roundtrip zum Server erforderlich. Die Umleitungs-URL, die an den Client zurückgegeben wird, wird in der Adressleiste des Browsers angezeigt, wenn der Client eine neue Anforderung an die Ressource sendet.
 
-Wenn `/resource` auf `/different-resource` *umgeleitet* wird, sendet der Server die Antwort, dass der Client die Ressource unter `/different-resource` abrufen soll. In der Antwort ist außerdem ein Statuscode enthalten, aus dem entnommen werden kann, ob die Umleitung temporär oder permanent ist.
+Wenn `/resource` auf `/different-resource`*umgeleitet* wird, sendet der Server die Antwort, dass der Client die Ressource unter `/different-resource` abrufen soll. In der Antwort ist außerdem ein Statuscode enthalten, aus dem entnommen werden kann, ob die Umleitung temporär oder permanent ist.
 
 ![Ein Web-API-Dienstendpunkt wurde auf dem Server kurzzeitig von Version 1 (v1) auf Version 2 (v2) geändert. Der Client sendet eine Anforderung an den Dienst unter dem Pfad für Version 1: „/v1/api“. Der Server sendet eine „302 – Gefunden“-Antwort mit dem neuen, temporären Pfad für Version 2: „/v2/api“. Der Client sendet eine zweite Anforderung an den Dienst unter der Umleitungs-URL. Der Server gibt den Statuscode „200 – OK“ zurück.](url-rewriting/_static/url_redirect.png)
 
@@ -409,7 +409,7 @@ Weitere Informationen zu Statuscodes finden Sie unter [RFC 2616: Status Code Def
 
 Bei der *Neuschreibung einer URL* handelt es sich um einen serverseitigen Vorgang, bei dem eine Ressource von einer anderen Ressourcenadresse, als der vom Client angeforderten, bereitgestellt wird. Wenn eine URL neu geschrieben wird, ist kein Roundtrip zum Server erforderlich. Die neu geschriebene URL wird nicht an den Server zurückgegeben und nicht in der Adressleiste des Browsers angezeigt.
 
-Wenn `/resource` in `/different-resource` *umgeschrieben* wird, ruft der Server die Ressource *intern* ab und gibt sie zurück an `/different-resource`.
+Wenn `/resource` in `/different-resource`*umgeschrieben* wird, ruft der Server die Ressource *intern* ab und gibt sie zurück an `/different-resource`.
 
 Auch wenn der Client die Ressource unter der neu geschriebene URL abrufen kann, erhält er nicht die Information, dass die Ressource unter der umgeschriebenen URL gespeichert ist, wenn er die Anforderung sendet und eine Antwort erhält.
 
@@ -417,7 +417,7 @@ Auch wenn der Client die Ressource unter der neu geschriebene URL abrufen kann, 
 
 ## <a name="url-rewriting-sample-app"></a>URL-umschreibende Beispiel-App
 
-Mit der [Beispiel-App](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
+Mit der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) können Sie die Features der Middleware zur URL-Neuschreibung testen. Die App wendet Umleitungs- und Neuschreibungsregeln an und zeigt die umgeleitete oder neu geschriebene URL für verschiedene Szenarios an.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>Empfohlene Verwendung der URL-umschreibenden Middleware
 
@@ -478,7 +478,7 @@ Ursprüngliche Anforderung: `/redirect-rule/1234/5678`
 
 ![Browserfenster mit Entwicklertools, die die Anforderungen und Antworten nachverfolgen](url-rewriting/_static/add_redirect.png)
 
-Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)*. Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
+Der Teil des Ausdruck in Klammern wird als *Erfassungsgruppe* bezeichnet. Der Punkt (`.`) im Ausdruck steht für *Übereinstimmung mit beliebigem Zeichen*. Das Sternchen (`*`) steht für *Übereinstimmung mit dem vorausgehenden Zeichen (keinmal oder mindestens einmal)* . Daher werden die letzten beiden Pfadsegmente der URL (`1234/5678`) von der Erfassungsgruppe erfasst `(.*)`. Alle Werte, die Sie in der Anforderungs-URL nach `redirect-rule/` angeben, werden von dieser Erfassungsgruppe erfasst.
 
 Erfassungsgruppen werden in der Ersetzungszeichenfolge mit dem Dollarzeichen (`$`) in die Zeichenfolge eingefügt. Danach folgt die Sequenznummer der Erfassung. Der erste Wert der Erfassungsgruppe wird mit `$1` abgerufen, der zweite mit `$2`. Dies wird in Sequenzen für die Erfassungsgruppen Ihres RegEx weitergeführt. Nur eine Erfassungsgruppe ist in der Beispiel-App im RegEx der Umleitungsregel enthalten. Das bedeutet, dass es in die Ersetzungszeichenfolge nur eine Gruppe eingefügt wird, nämlich `$1`. Wenn die Regel angewendet wird, ändert sich die URL in `/redirected/1234/5678`.
 
@@ -554,7 +554,7 @@ Die Umschreibungsregel (`^rewrite-rule/(\d+)/(\d+)`) stimmt nur mit Pfaden über
 | `/my-cool-rewrite-rule/1234/5678` | Nein    |
 | `/anotherrewrite-rule/1234/5678`  | Nein    |
 
-Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)*. Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
+Auf den `^rewrite-rule/`-Teil des Ausdruck folgen zwei Erfassungsgruppen: `(\d+)/(\d+)`. `\d` steht für *Übereinstimmung mit einer Ziffer (Zahl)* . Das Pluszeichen (`+`) steht für *match one or more of the preceding character* (Übereinstimmung mit mindestens einem vorausgehenden Zeichen). Aus diesem Grund muss die URL eine Zahl enthalten, auf die ein Schrägstrich und eine weitere Zahl folgt. Die Erfassungsgruppen werden in die umgeschriebene URL als `$1` und `$2` eingefügt. Über die Ersetzungszeichenfolge der Neuschreibungsregel werden die Erfassungsgruppen in die Abfragezeichenfolge eingefügt. Der angeforderte `/rewrite-rule/1234/5678`-Pfad wird umgeschrieben, um eine Ressource unter `/rewritten?var1=1234&var2=5678` abzurufen. Wenn es in der ursprünglichen Anforderung eine Abfragezeichenfolge gibt, bleibt diese erhalten, wenn die URL umgeschrieben wird.
 
 Es gibt keinen Roundtrip zum Server, um die Ressource abzurufen. Wenn es die Ressource gibt, wird sie abgerufen und dem Client mit dem Statuscode *200 – OK* zurückgegeben. Da der Client nicht umgeleitet wird, ändert sich die URL in der Adressleiste des Browsers nicht. Clients können nicht erkennen, dass ein Vorgang zum erneuten Schreiben einer URL auf dem Server stattgefunden hat.
 
@@ -673,7 +673,7 @@ Verwenden Sie <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>,
 
 | `RewriteContext.Result`              | Aktion                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (Standard) | Regeln weiter anwenden.                                         |
+| `RuleResult.ContinueRules` (Standardwert) | Regeln weiter anwenden.                                         |
 | `RuleResult.EndResponse`             | Regeln nicht mehr anwenden und Antwort senden.                       |
 | `RuleResult.SkipRemainingRules`      | Regeln nicht mehr anwenden, und den Kontext an die nächste Middleware senden. |
 
