@@ -1,27 +1,27 @@
 ---
-title: ASP.net Core Blazor Datenbindung
+title: ASP.NET Core Blazor-Datenbindung
 author: guardrex
-description: Erfahren Sie mehr über Daten Bindungs Szenarien für Komponenten und DOM-Elemente in Blazor-apps.
+description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponenten und DOM-Elemente in Blazor-Apps kennen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 02/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/data-binding
-ms.openlocfilehash: c38e6095d4e93d3eead10fa8bb0356b2113bb220
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: MT
+ms.openlocfilehash: 92377730b9d353a507ffd384710fb979affe7265
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77453157"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648223"
 ---
-# <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.net Core Blazor Datenbindung
+# <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET Core Blazor-Datenbindung
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
-Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [`@bind`](xref:mvc/views/razor#bind) -Attribut. Im folgenden Beispiel wird eine `CurrentValue`-Eigenschaft an den Wert des Textfelds gebunden:
+Die Datenbindung an Komponenten und DOM-Elemente wird mit dem Attribut [`@bind`](xref:mvc/views/razor#bind) erreicht. Das folgende Beispiel bindet eine `CurrentValue`-Eigenschaft an den Wert des Textfelds:
 
 ```razor
 <input @bind="CurrentValue" />
@@ -33,9 +33,9 @@ Die Datenbindung an beide Komponenten und DOM-Elemente erfolgt mit dem [`@bind`]
 
 Wenn das Textfeld den Fokus verliert, wird der Wert der Eigenschaft aktualisiert.
 
-Das Textfeld wird nur dann in der Benutzeroberfläche aktualisiert, wenn die Komponente gerendert wird, nicht als Reaktion auf das Ändern des Eigenschafts Werts. Da Komponenten nach der Ausführung des Ereignishandlercodes selbst gerenden werden, werden Eigenschafts Aktualisierungen in der Benutzeroberfläche *normalerweise* sofort nach dem Auslösen eines Ereignis Handlers
+Das Textfeld wird auf der Benutzeroberfläche nur dann aktualisiert, wenn die Komponente gerendert wird, nicht als Reaktion auf die Änderung des Werts der Eigenschaft. Da sich Komponenten nach der Ausführung von Ereignishandlercode selbst rendern, werden Eigenschaftsaktualisierungen *in der Regel* unmittelbar nach dem Auslösen eines Ereignishandlers auf der Benutzeroberfläche widergespiegelt.
 
-Die Verwendung von `@bind` mit der `CurrentValue`-Eigenschaft (`<input @bind="CurrentValue" />`) entspricht im wesentlichen folgendem:
+Die Verwendung von `@bind` mit der `CurrentValue`-Eigenschaft (`<input @bind="CurrentValue" />`) entspricht im Wesentlichen dem Folgenden:
 
 ```razor
 <input value="@CurrentValue"
@@ -47,32 +47,45 @@ Die Verwendung von `@bind` mit der `CurrentValue`-Eigenschaft (`<input @bind="Cu
 }
 ```
 
-Wenn die Komponente gerendert wird, stammt der `value` des Eingabe Elements aus der `CurrentValue`-Eigenschaft. Wenn der Benutzer das Textfeld eingibt und den Element Fokus ändert, wird das `onchange`-Ereignis ausgelöst, und die `CurrentValue`-Eigenschaft wird auf den geänderten Wert festgelegt. In der Realität ist die Codegenerierung komplexer, da `@bind` Fälle behandelt, in denen Typkonvertierungen durchgeführt werden. Im Prinzip ordnet `@bind` den aktuellen Wert eines Ausdrucks einem `value`-Attribut zu und behandelt Änderungen mithilfe des registrierten Handlers.
+Wenn die Komponente gerendert wird, stammt der `value` des Eingabeelements aus der `CurrentValue`-Eigenschaft. Wenn der Benutzer in das Textfeld eingibt und den Elementfokus ändert, wird das Ereignis `onchange` ausgelöst und die Eigenschaft `CurrentValue` auf den geänderten Wert festgelegt. In Wirklichkeit ist die Codegenerierung komplexer, weil `@bind` Fälle behandelt, in denen Typkonvertierungen durchgeführt werden. Im Prinzip assoziiert `@bind` den aktuellen Wert eines Ausdrucks mit einem `value`-Attribut und behandelt Änderungen mit dem registrierten Handler.
 
-Zusätzlich zur Behandlung von `onchange` Ereignissen mit `@bind` Syntax kann eine Eigenschaft oder ein Feld mit anderen Ereignissen gebunden werden, indem ein [`@bind-value`](xref:mvc/views/razor#bind) Attribut mit einem `event` Parameter ([`@bind-value:event`](xref:mvc/views/razor#bind)) angegeben wird. Im folgenden Beispiel wird die `CurrentValue`-Eigenschaft für das `oninput`-Ereignis gebunden:
+Binden Sie eine Eigenschaft oder ein Feld an andere Ereignisse, indem Sie auch ein `@bind:event`-Attribut mit einem `event`-Parameter einbeziehen. Das folgende Beispiel bindet die Eigenschaft `CurrentValue` an das Ereignis `oninput`:
 
 ```razor
-<input @bind-value="CurrentValue" @bind-value:event="oninput" />
+<input @bind="CurrentValue" @bind:event="oninput" />
 
 @code {
     private string CurrentValue { get; set; }
 }
 ```
 
-Im Gegensatz zu `onchange`, das ausgelöst wird, wenn das Element den Fokus verliert, `oninput` ausgelöst, wenn sich der Wert des Textfelds ändert.
+Im Gegensatz zu `onchange`, das ausgelöst wird, wenn das Element den Fokus verliert, wird `oninput` ausgelöst, wenn sich der Wert des Textfelds ändert.
 
-im vorherigen Beispiel wird `@bind-value` gebunden:
+Verwenden Sie `@bind-{ATTRIBUTE}` mit der `@bind-{ATTRIBUTE}:event`-Syntax, um andere Elementattribute als `value` zu binden. Im folgenden Beispiel wird der Stil des Absatzes aktualisiert, wenn sich der Wert `_paragraphStyle` ändert:
 
-* Der angegebene Ausdruck (`CurrentValue`) zum `value` Attribut des Elements.
-* Ein Änderungs Ereignis Delegat für das Ereignis, das durch `@bind-value:event`angegeben wird.
+```razor
+@page "/binding-example"
 
-### <a name="unparsable-values"></a>Nicht zu erteilbare Werte
+<p>
+    <input type="text" @bind="_paragraphStyle" />
+</p>
 
-Wenn ein Benutzer einen nicht zu erteilbaren Wert für ein Daten gebundene Element bereitstellt, wird der nicht teilbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungs Ereignis ausgelöst wird.
+<p @bind-style="_paragraphStyle" @bind-style:event="onchange">
+    Blazorify the app!
+</p>
 
-Als Beispiel dient das folgende Szenario:
+@code {
+    private string _paragraphStyle = "color:red";
+}
+```
 
-* Ein `<input>`-Element ist an einen `int` Typ mit einem Anfangswert von `123`gebunden:
+## <a name="unparsable-values"></a>Nicht analysierbare Werte
+
+Wenn ein Benutzer einem Element mit Datenbindung einen nicht analysierbaren Wert zur Verfügung stellt, wird der nicht analysierbare Wert automatisch auf seinen vorherigen Wert zurückgesetzt, wenn das Bindungsereignis ausgelöst wird.
+
+Betrachten Sie das folgende Szenario:
+
+* Ein `<input>`-Element ist an einen `int`-Typ mit einem Anfangswert von `123` gebunden:
 
   ```razor
   <input @bind="MyProperty" />
@@ -82,21 +95,21 @@ Als Beispiel dient das folgende Szenario:
       public int MyProperty { get; set; } = 123;
   }
   ```
-* Der Benutzer aktualisiert den Wert des-Elements auf `123.45` auf der Seite und ändert den Element Fokus.
+* Der Benutzer aktualisiert den Wert des Elements auf der Seite zu `123.45` und ändert den Elementfokus.
 
-Im vorangehenden Szenario wird der Wert des Elements auf `123`zurückgesetzt. Wenn der Wert `123.45` zugunsten des ursprünglichen Werts `123`abgelehnt wird, erkennt der Benutzer, dass sein Wert nicht akzeptiert wurde.
+Im vorangehenden Szenario wird der Wert des Elements auf `123` zurückgesetzt. Wenn der Wert `123.45` zugunsten des ursprünglichen Werts von `123` abgelehnt wird, versteht der Benutzer, dass sein Wert nicht akzeptiert wurde.
 
-Standardmäßig gilt die Bindung für das `onchange` Ereignis des Elements (`@bind="{PROPERTY OR FIELD}"`). Verwenden Sie `@bind-value="{PROPERTY OR FIELD}" @bind-value:event={EVENT}`, um ein anderes Ereignis festzulegen. Für das `oninput`-Ereignis (`@bind-value:event="oninput"`) tritt die Neuversion nach jedem Tastatur Strich auf, der einen nicht zu deerbaren Wert einführt. Wenn das `oninput` Ereignis mit einem `int`gebundenen Typ als Ziel verwendet wird, wird verhindert, dass ein Benutzer ein `.` Zeichen eingibt. Ein `.` Zeichen wird sofort entfernt, sodass der Benutzer sofort Feedback erhält, dass nur ganze Zahlen zulässig sind. Es gibt Szenarios, in denen das Wiederherstellen des Werts für das `oninput` Ereignis nicht ideal ist, z. b. wenn der Benutzer einen nicht zu testbaren `<input>` Wert löschen darf. Zu Alternativen gehören:
+Standardmäßig gilt die Bindung für das `onchange`-Ereignis des Elements (`@bind="{PROPERTY OR FIELD}"`). Verwenden Sie `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}`, um die Bindung bei einem anderen Ereignis auszulösen. Für das `oninput`-Ereignis (`@bind:event="oninput"`) erfolgt die Umkehrung nach jedem Tastendruck, der einen nicht analysierbaren Wert einführt. Wenn das `oninput`-Ereignis mit einem `int`-gebundenen Typ angestrebt wird, wird ein Benutzer daran gehindert, ein `.`-Zeichen einzugeben. Ein `.`-Zeichen wird sofort entfernt, sodass der Benutzer sofort die Rückmeldung erhält, dass nur ganze Zahlen zulässig sind. Es gibt Szenarien, in denen die Umkehrung des Werts auf das `oninput` Ereignis nicht ideal ist, z. B. wenn dem Benutzer erlaubt werden soll, einen nicht analysierbaren `<input>`-Wert zu löschen. Zu den Alternativen gehören:
 
-* Verwenden Sie das `oninput`-Ereignis nicht. Verwenden Sie das Standard `onchange` Ereignis (`@bind="{PROPERTY OR FIELD}"`), bei dem ein ungültiger Wert nicht wieder hergestellt wird, bis das Element den Fokus verliert.
-* Binden Sie an einen Typ, der NULL-Werte zulässt, wie z. b. `int?` oder `string`, und stellen Sie eine benutzerdefinierte Logik bereit,
-* Verwenden Sie eine [Formular Validierungs Komponente](xref:blazor/forms-validation), z. b. `InputNumber` oder `InputDate`. Komponenten Validierungs Komponenten verfügen über eine integrierte Unterstützung zum Verwalten Ungültiger Eingaben. Komponenten Validierungs Komponenten:
-  * Ermöglicht es dem Benutzer, ungültige Eingaben bereitzustellen und Validierungs Fehler auf dem zugeordneten `EditContext`zu empfangen.
-  * Zeigen Sie Validierungs Fehler in der Benutzeroberfläche an, ohne dass der Benutzer die Eingabe zusätzlicher Webform-Daten beeinträchtigt.
+* Verwenden Sie nicht das Ereignis `oninput`. Verwenden Sie das Standardereignis `onchange` (geben Sie nur `@bind="{PROPERTY OR FIELD}"` an), bei dem ein ungültiger Wert erst dann rückgängig gemacht wird, wenn das Element den Fokus verliert.
+* Binden Sie an einen Nullable-Typ, z. B. `int?` oder `string`, und stellen Sie eine benutzerdefinierte Logik zur Behandlung ungültiger Einträge bereit.
+* Verwenden Sie eine [Formularüberprüfungskomponente](xref:blazor/forms-validation) wie `InputNumber` oder `InputDate`. Formularüberprüfungskomponenten verfügen über die integrierte Unterstützung der Verwaltung ungültiger Eingaben. Formularüberprüfungskomponenten:
+  * Erlauben Sie dem Benutzer, ungültige Eingaben zu machen und Überprüfungsfehler für das zugehörige `EditContext` zu erhalten.
+  * Zeigen Sie Überprüfungsfehler auf der Benutzeroberfläche an, ohne den Benutzer bei der Eingabe zusätzlicher WebForm-Daten zu beeinträchtigen.
 
-### <a name="format-strings"></a>Format Zeichenfolgen
+## <a name="format-strings"></a>Formatzeichenfolgen
 
-Die Datenbindung funktioniert mit <xref:System.DateTime>-Format Zeichenfolgen [`@bind:format`](xref:mvc/views/razor#bind). Andere Format Ausdrücke, z. b. Währungs-oder Zahlenformate, sind zurzeit nicht verfügbar.
+Die Datenbindung funktioniert mit <xref:System.DateTime>-Formatzeichenfolgen unter Verwendung von [`@bind:format`](xref:mvc/views/razor#bind). Andere Formatausdrücke wie Währungs- oder Zahlenformate sind zu diesem Zeitpunkt nicht verfügbar.
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -107,26 +120,26 @@ Die Datenbindung funktioniert mit <xref:System.DateTime>-Format Zeichenfolgen [`
 }
 ```
 
-Im vorangehenden Code ist der Feldtyp (`type`) des `<input>` Elements standardmäßig `text`. `@bind:format` wird für die Bindung der folgenden .NET-Typen unterstützt:
+Im vorhergehenden Code ist der Feldtyp des `<input>`-Elements (`type`) standardmäßig auf `text` festgelegt. `@bind:format` wird für die Bindung der folgenden .NET-Typen unterstützt:
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-Das `@bind:format`-Attribut gibt das Datumsformat an, das auf die `value` des `<input>` Elements angewendet werden soll. Das-Format wird auch verwendet, um den Wert zu analysieren, wenn ein `onchange` Ereignis auftritt.
+Das `@bind:format`-Attribut gibt das Datumsformat an, das auf den `value` des `<input>`-Elements angewendet werden soll. Das Format wird auch verwendet, um den Wert beim Eintreten eines `onchange`-Ereignisses zu analysieren.
 
-Es wird nicht empfohlen, ein Format für den `date` Feldtyp anzugeben, da Blazor über eine integrierte Unterstützung zum Formatieren von Datumsangaben verfügt. Verwenden Sie trotz der Empfehlung nur das `yyyy-MM-dd` Datumsformat für die Bindung, um ordnungsgemäß zu funktionieren, wenn ein Format mit dem `date` Feldtyp bereitgestellt wird:
+Die Angabe eines Formats für den Feldtyp `date` wird nicht empfohlen, da Blazor eine integrierte Unterstützung für die Formatierung von Daten bietet. Verwenden Sie trotz der Empfehlung nur dann das Datumsformat `yyyy-MM-dd` für die Bindung, um ordnungsgemäß zu arbeiten, wenn ein Format mit dem Feldtyp `date` bereitgestellt wird:
 
 ```razor
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
 ```
 
-### <a name="parent-to-child-binding-with-component-parameters"></a>Über-zu-untergeordnete Bindung mit Komponenten Parametern
+## <a name="parent-to-child-binding-with-component-parameters"></a>Bindung zwischen übergeordnetem und untergeordnetem Element mit Komponentenparametern
 
-Die Bindung erkennt Komponenten Parameter, bei denen `@bind-{property}` einen Eigenschafts Wert von einer übergeordneten Komponente an eine untergeordnete Komponente binden kann. Die Bindung von einem untergeordneten zu einem übergeordneten Element wird in der Bindung zwischen untergeordneten und über [geordneten Elementen mit verketteter](#child-to-parent-binding-with-chained-bind) Bindung behandelt.
+Die Bindung erkennt Komponentenparameter, bei denen `@bind-{PROPERTY}` einen Eigenschaftswert von einer übergeordneten Komponente an eine untergeordnete Komponente binden kann. Die Bindung von einem untergeordneten Element an ein übergeordnetes Element wird im Abschnitt [Bindung zwischen untergeordnetem und übergeordnetem Element mit verketteter Bindung](#child-to-parent-binding-with-chained-bind) behandelt.
 
-Die folgende untergeordnete Komponente (`ChildComponent`) verfügt über einen `Year` Component-Parameter und `YearChanged`-Rückruf:
+Die folgende untergeordnete Komponente (`ChildComponent`) hat einen `Year`-Komponentenparameter und einen `YearChanged`-Rückruf:
 
 ```razor
 <h2>Child Component</h2>
@@ -142,12 +155,12 @@ Die folgende untergeordnete Komponente (`ChildComponent`) verfügt über einen `
 }
 ```
 
-`EventCallback<T>` wird in <xref:blazor/event-handling#eventcallback>erläutert.
+`EventCallback<T>` wird in <xref:blazor/event-handling#eventcallback> erläutert.
 
-Die folgende übergeordnete Komponente verwendet:
+Die folgende übergeordnete Komponente verwendet Folgendes:
 
-* `ChildComponent` und bindet den `ParentYear`-Parameter vom übergeordneten zum `Year`-Parameter in der untergeordneten Komponente.
-* Das `onclick`-Ereignis wird verwendet, um die `ChangeTheYear`-Methode zu initiieren. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
+* `ChildComponent` und bindet den `ParentYear`-Parameter der übergeordneten Komponente an den `Year`-Parameter in der untergeordneten Komponente.
+* Das Ereignis `onclick` wird zur Auslösung der `ChangeTheYear`-Methode verwendet. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
 
 ```razor
 @page "/ParentComponent"
@@ -173,7 +186,7 @@ Die folgende übergeordnete Komponente verwendet:
 }
 ```
 
-Beim Laden des `ParentComponent` wird das folgende Markup erzeugt:
+Das Laden von `ParentComponent` erzeugt das folgende Markup:
 
 ```html
 <h1>Parent Component</h1>
@@ -185,7 +198,7 @@ Beim Laden des `ParentComponent` wird das folgende Markup erzeugt:
 <p>Year: 1978</p>
 ```
 
-Wenn der Wert der `ParentYear`-Eigenschaft durch Auswählen der Schaltfläche im `ParentComponent`geändert wird, wird die Eigenschaft `Year` der `ChildComponent` aktualisiert. Der neue Wert `Year` wird in der Benutzeroberfläche gerendert, wenn die `ParentComponent` erneut ausgeführt wird:
+Wenn der Wert der Eigenschaft `ParentYear` durch Auswahl der Schaltfläche in der `ParentComponent` geändert wird, wird die Eigenschaft `Year` der `ChildComponent` aktualisiert. Der neue Wert von `Year` wird auf der Benutzeroberfläche gerendert, wenn die `ParentComponent` gerendert wird:
 
 ```html
 <h1>Parent Component</h1>
@@ -197,31 +210,31 @@ Wenn der Wert der `ParentYear`-Eigenschaft durch Auswählen der Schaltfläche im
 <p>Year: 1986</p>
 ```
 
-Der `Year`-Parameter ist bindbar, da er über ein Begleit `YearChanged` Ereignis verfügt, das mit dem Typ des `Year` Parameters übereinstimmt.
+Der Parameter `Year` ist bindbar, da er ein Begleitereignis `YearChanged` aufweist, das dem Typ des Parameters `Year` entspricht.
 
-Gemäß der Konvention ist `<ChildComponent @bind-Year="ParentYear" />` im wesentlichen Äquivalent zum Schreiben:
+Gemäß Konvention ist `<ChildComponent @bind-Year="ParentYear" />` im Wesentlichen gleichbedeutend mit dem Schreiben von:
 
 ```razor
 <ChildComponent @bind-Year="ParentYear" @bind-Year:event="YearChanged" />
 ```
 
-Im Allgemeinen kann eine Eigenschaft mithilfe `@bind-property:event` Attributs an einen entsprechenden Ereignishandler gebunden werden. Beispielsweise kann die-Eigenschaft `MyProp` an `MyEventHandler` mithilfe der folgenden beiden Attribute gebunden werden:
+Im Allgemeinen kann eine Eigenschaft an einen entsprechenden Ereignishandler gebunden werden, indem ein `@bind-{PROPRETY}:event`-Attribut einbezogen wird. Beispielsweise kann die Eigenschaft `MyProp` mit den folgenden beiden Attributen an `MyEventHandler` gebunden werden:
 
 ```razor
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-### <a name="child-to-parent-binding-with-chained-bind"></a>Bindung zwischen untergeordneten und übergeordneten Elementen mit verketteter Bindung
+## <a name="child-to-parent-binding-with-chained-bind"></a>Bindung zwischen untergeordnetem und übergeordnetem Element mit verketteter Bindung
 
-Ein häufiges Szenario ist die Verkettung eines Daten gebundenen Parameters zu einem Page-Element in der Ausgabe der Komponente. Dieses Szenario wird als *verkettete Bindung* bezeichnet, da mehrere Bindungs Ebenen gleichzeitig auftreten.
+Ein häufiges Szenario ist die Verkettung eines datengebundenen Parameters mit einem Seitenelement in der Ausgabe der Komponente. Dieses Szenario wird als *verkettete Bindung* bezeichnet, da mehrere Ebenen der Bindung gleichzeitig auftreten.
 
-Eine verkettete Bindung kann nicht mit `@bind`-Syntax im-Element der Seite implementiert werden. Der Ereignishandler und der Wert müssen separat angegeben werden. Eine übergeordnete Komponente kann jedoch `@bind`-Syntax mit dem-Parameter der Komponente verwenden.
+Eine verkettete Bindung kann nicht mit der `@bind`-Syntax im Element der Seite implementiert werden. Der Ereignishandler und der Wert müssen separat angegeben werden. Eine übergeordnete Komponente kann jedoch die `@bind`-Syntax mit dem Parameter der Komponente verwenden.
 
-Die folgende `PasswordField` Komponente (*PasswordField. Razor*):
+Die folgende `PasswordField`-Komponente (*Passwortfeld.razor*):
 
-* Legt den Wert eines `<input>` Elements auf eine `Password` Eigenschaft fest.
-* Macht Änderungen der `Password`-Eigenschaft für eine übergeordnete Komponente mit einem [EventCallback](xref:blazor/event-handling#eventcallback)verfügbar.
-* Verwendet das `onclick` Ereignis wird verwendet, um die `ToggleShowPassword`-Methode zu initiieren. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
+* Legt den Wert eines `<input>`-Elements auf eine `Password`-Eigenschaft fest.
+* Macht Änderungen der `Password`-Eigenschaft einer übergeordneten Komponente mit einem [EventCallback](xref:blazor/event-handling#eventcallback) verfügbar.
+* Verwendet das `onclick`-Ereignis zum Auslösen der `ToggleShowPassword`-Methode. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
 
 ```razor
 <h1>Child Component</h2>
@@ -260,7 +273,7 @@ Password:
 }
 ```
 
-Die `PasswordField` Komponente wird in einer anderen Komponente verwendet:
+Die `PasswordField`-Komponente wird in einer anderen Komponente verwendet:
 
 ```razor
 @page "/ParentComponent"
@@ -274,12 +287,12 @@ Die `PasswordField` Komponente wird in einer anderen Komponente verwendet:
 }
 ```
 
-Zum Ausführen von Überprüfungen oder Trap Fehlern für das Kennwort im vorherigen Beispiel:
+So führen Sie Prüfungen durch oder fangen Fehler beim Kennwort im vorhergehenden Beispiel ab
 
-* Erstellen Sie ein Unterstützungs Feld für `Password` (`_password` im folgenden Beispielcode).
-* Führen Sie die Überprüfungen oder Trap Fehler im `Password` Setter aus.
+* Erstellen Sie ein Unterstützungsfeld für `Password` (`_password` im folgenden Beispielcode).
+* Führen Sie die Prüfungen durch, oder fangen Sie Fehler im `Password`-Setter ab.
 
-Im folgenden Beispiel wird dem Benutzer sofortiges Feedback bereitgestellt, wenn ein Leerzeichen im Wert des Kennworts verwendet wird:
+Das folgende Beispiel gibt dem Benutzer ein sofortiges Feedback, wenn ein Leerzeichen im Wert des Kennworts verwendet wird:
 
 ```razor
 @page "/ParentComponent"
@@ -342,6 +355,6 @@ Password:
 }
 ```
 
-### <a name="radio-buttons"></a>Optionsfelder
+## <a name="radio-buttons"></a>Optionsfelder
 
-Informationen zum Binden an Options Felder in einem Formular finden Sie unter <xref:blazor/forms-validation#work-with-radio-buttons>.
+Informationen zur Bindung an Optionsfelder in einem Formular finden Sie unter <xref:blazor/forms-validation#work-with-radio-buttons>.
