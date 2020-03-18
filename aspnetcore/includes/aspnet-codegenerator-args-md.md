@@ -1,5 +1,5 @@
 <!-- Options common to Razor Pages and Controller -->
-| Option               | BESCHREIBUNG|
+| Option               | Beschreibung|
 | ----------------- | ------------ |
 | --model oder -m  | Die Modellklasse, die verwendet werden soll. |
 | --dataContext oder -dc  | Die `DbContext`-Klasse, die verwendet werden soll. |

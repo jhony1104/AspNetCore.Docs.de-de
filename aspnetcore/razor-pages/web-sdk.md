@@ -1,29 +1,29 @@
 ---
-title: ASP.net Core-Web-SDK
+title: ASP.NET Core-Web SDK
 author: Rick-Anderson
-description: Übersicht über Microsoft. net. SDK. Web.
+description: Übersicht über Microsoft.NET.Sdk.Web.
 ms.author: riande
 ms.date: 01/25/2020
 no-loc:
 - Blazor
 uid: razor-pages/web-sdk
 ms.openlocfilehash: 6a9d531efd2188aed525c949bb124914c31119db
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76869765"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648205"
 ---
-# <a name="aspnet-core-web-sdk"></a>ASP.net Core-Web-SDK
+# <a name="aspnet-core-web-sdk"></a>ASP.NET Core-Web SDK
 
-### <a name="overview"></a>Übersicht über
+### <a name="overview"></a>Übersicht
 
-`Microsoft.NET.Sdk.Web` ist ein [MSBuild-Projekt-SDK](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) zum Erstellen von ASP.net Core-apps. Es ist möglich, eine ASP.net Core-App ohne dieses SDK zu erstellen, aber das Web-SDK ist:
+`Microsoft.NET.Sdk.Web` ist ein [MSBuild-Projekt-SDK](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) zum Erstellen von ASP.NET Core-Apps. Es ist möglich, eine ASP.NET-Core-App ohne dieses SDK zu erstellen, für das Web SDK gilt jedoch Folgendes:
 
-* Sie sind auf die Bereitstellung eines erstklassigen Erlebnisses zugeschnitten.
-* Das empfohlene Ziel für die meisten Benutzer.
+* Es ist darauf ausgerichtet, ein erstklassiges Erlebnis zu bieten.
+* Es ist das empfohlene Ziel für die meisten Benutzer.
 
-Verwenden Sie das Web. SDK in einem Projekt:
+Verwenden Sie das Web.SDK in einem Projekt:
 
   ```xml
   <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -31,18 +31,18 @@ Verwenden Sie das Web. SDK in einem Projekt:
   </Project>
   ```
 
-Mit dem Web SDK aktivierte Funktionen:
+Features, die durch die Verwendung des Web SDK aktiviert werden:
 
-* Projekte, die auf .net Core 3,0 oder höher abzielen, verweisen implizit:
+* Projekte, die auf .NET Core 3.0 oder höher ausgerichtet sind, verweisen implizit auf:
 
-  * Der [ASP.net Core freigegebenen Frameworks](xref:fundamentals/metapackage-app).
-  * [Analyse](/visualstudio/extensibility/getting-started-with-roslyn-analyzers) Tools, die für die ASP.net Core-apps entwickelt wurden.
-* Das Web-SDK importiert MSBuild-Ziele, die die Verwendung von Veröffentlichungs Profilen und die Veröffentlichung mit Webbereitstellung ermöglichen.
+  * Das [freigegebene ASP.NET Core-Framework](xref:fundamentals/metapackage-app).
+  * [Analysetools](/visualstudio/extensibility/getting-started-with-roslyn-analyzers), die für die Erstellung von ASP.NET Core-Apps entwickelt wurden.
+* Das Web SDK importiert MSBuild-Ziele, die die Verwendung von Veröffentlichungsprofilen und die Veröffentlichung mit WebDeploy ermöglichen.
 
 ### <a name="properties"></a>Eigenschaften
 
-| Die Eigenschaften- | Beschreibung |
+| Eigenschaft | Beschreibung |
 | -------- | ----------- |
-| `DisableImplicitFrameworkReferences` | Deaktiviert den impliziten Verweis auf den `Microsoft.AspNetCore.App` freigegebenen Frameworks. |
-| `DisableImplicitAspNetCoreAnalyzers` | Deaktiviert den impliziten Verweis auf ASP.net Core-Analyzers. |
-| `DisableImplicitComponentsAnalyzers` | Deaktiviert den impliziten Verweis auf Razor-Komponenten Analysen beim Entwickeln von Blazor (Server)-Anwendungen. |
+| `DisableImplicitFrameworkReferences` | Deaktiviert den impliziten Verweis auf das freigegebene `Microsoft.AspNetCore.App`-Framework. |
+| `DisableImplicitAspNetCoreAnalyzers` | Deaktiviert den impliziten Verweis auf ASP.NET Core-Analysetools. |
+| `DisableImplicitComponentsAnalyzers` | Deaktiviert den impliziten Verweis auf Analysetools von Razor-Komponenten beim Erstellen von Blazor-Anwendungen (Server). |

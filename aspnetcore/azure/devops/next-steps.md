@@ -1,46 +1,46 @@
 ---
-title: 'Nächste Schritte: DevOps mit ASP.NET Core und Azure'
+title: Nächste Schritte – DevOps mit ASP.NET Core und Azure
 author: CamSoper
-description: Zusätzliche Lernpfade für DevOps mit ASP.NET Core und Azure.
+description: Weitere Lernpfade für DevOps mit ASP.NET Core und Azure.
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/next-steps
 ms.openlocfilehash: a775dc42551a43bcce72b5f9ca364ed00b1dc4e6
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892007"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647431"
 ---
 # <a name="next-steps"></a>Nächste Schritte
 
-In diesem Handbuch haben Sie eine DevOps-Pipeline für eine ASP.NET Core-Beispiel-app erstellt. Herzlichen Glückwunsch! Wir hoffen, Sie fanden lernen, wie Sie ASP.NET Core-Web-apps in Azure App Service veröffentlichen, und automatisieren die kontinuierliche Integration von Änderungen.
+In diesem Handbuch haben Sie eine DevOps-Pipeline für eine ASP.NET Core-Beispiel-App erstellt. Herzlichen Glückwunsch! Wir hoffen, Sie hatten Spaß zu Erfahren, wie ASP.NET Core-Web-Apps in Azure App Service veröffentlicht werden und wie die kontinuierliche Integration von Änderungen automatisiert werden kann.
 
-Nach der Bereitstellung auf einem Webserver, und klicken Sie mit der DevOps hat Azure eine Vielzahl von Platform-as-a-Service (PaaS)-Dienste, die für ASP.NET Core-Entwickler nützlich. Dieser Abschnitt enthält eine kurze Übersicht über einige der am häufigsten verwendeten Dienste.
+Über das Webhosting und DevOps hinaus bietet Azure eine breite Palette von PaaS-Diensten (Platform-as-a-Service), die für ASP.NET Core-Entwickler nützlich sind. Dieser Abschnitt enthält eine kurze Übersicht über einige der am häufigsten verwendeten Dienste.
 
 ## <a name="storage-and-databases"></a>Speicher und Datenbanken
 
-[Redis-Cache](/azure/redis-cache/) hohem Durchsatz und geringer Latenz datenzwischenspeicherung als Dienst verfügbar ist. Es kann für das Zwischenspeichern der Seitenausgabe datenbankanforderungen zu reduzieren und Bereitstellen von ASP.NET Core-Sitzungszustand über mehrere Instanzen einer App verwendet werden.
+[Redis Cache](/azure/redis-cache/) ist ein Zwischenspeicher für Daten mit hohem Durchsatz und niedriger Wartezeit, der als Dienst zur Verfügung steht. Er kann für die Zwischenspeicherung der Seitenausgabe, die Reduzierung von Datenbankanforderungen und die Bereitstellung des ASP.NET Core-Sitzungszustands über mehrere Instanzen einer App verwendet werden.
 
-[Azure-Speicher](/azure/storage/) massiv skalierbarer cloudspeicher von Azure ist. Entwickler können nutzen [Queue Storage](/azure/storage/queues/storage-queues-introduction) zuverlässiges Message Queuing, und [Table Storage](/azure/storage/tables/table-storage-overview) ist ein NoSQL-Schlüssel-Wert-Datenspeicher für die schnelle Entwicklung mithilfe von massive, teilweise strukturierten Datasets entwickelt.
+[Azure Storage](/azure/storage/) ist der extrem skalierbare Cloudspeicher von Azure. Entwickler können die Vorteile von [Warteschlangenspeicher](/azure/storage/queues/storage-queues-introduction) für zuverlässiges Message Queuing nutzen, und [Tabellenspeicher](/azure/storage/tables/table-storage-overview) ist ein NoSQL-Schlüsselwertspeicher, der für die schnelle Entwicklung mit extremen, teilweise strukturierten Datasets konzipiert ist.
 
-[Azure SQL-Datenbank](/azure/sql-database/) bietet relationale Datenbankfunktionalität als mit der Microsoft SQL Server-Engine-Dienst vertraut.
+[Azure SQL-Datenbank](/azure/sql-database/) bietet bekannte relationale Datenbankfunktionen als Dienst unter Verwendung der Microsoft SQL Server Engine.
 
-[COSMOS DB](/azure/cosmos-db/) Global verteilter NoSQL-Datenbankdienst. Mehrere APIs sind verfügbar, einschließlich SQL-API (früher als DocumentDB bezeichnet), Cassandra und MongoDB.
+[Cosmos DB](/azure/cosmos-db/) ist ein global verteilter NoSQL-Datenbankdienst mit mehreren Modellen. Es stehen mehrere APIs zur Verfügung, darunter SQL API (früher DocumentDB), Cassandra und MongoDB.
 
 ## <a name="identity"></a>Identität
 
-[Azure Active Directory](/azure/active-directory/) und [Azure Active Directory B2C](/azure/active-directory-b2c/) werden beide Identitätsdienste. Azure Active Directory ist für Enterprise-Szenarios konzipiert und ermöglicht der Azure AD B2B Zusammenarbeit (Business-to-Business), während Azure Active Directory B2C gewünschten Unternehmen-zu-Kunde-Szenarien, einschließlich der Anmeldung für soziale Netzwerke ist.
+[Azure Active Directory](/azure/active-directory/) und [Azure Active Directory B2C](/azure/active-directory-b2c/) sind beides Identitätsdienste. Azure Active Directory ist für Unternehmensszenarien konzipiert und ermöglicht die Zusammenarbeit mit Azure AD B2B (Business-to-Business), während Azure Active Directory B2C für Business-to-Customer-Szenarien vorgesehen ist, einschließlich der Anmeldung in sozialen Netzwerken.
 
 ## <a name="mobile"></a>Mobil
 
-[Notification Hubs](/azure/notification-hubs/) ist eine plattformübergreifende und skalierbare pushbenachrichtigungs-Engine, Millionen von Nachrichten schnell an apps auf verschiedenen Arten von Geräten zu senden.
+[Notification Hubs](/azure/notification-hubs/) ist eine skalierbare Multiplattform-Engine für Pushbenachrichtigungen, um schnell Millionen von Nachrichten an Apps auf verschiedenen Geräten zu senden.
 
 ## <a name="web-infrastructure"></a>Webinfrastruktur
 
-[Azure Container Service](/azure/aks/) verwaltet Ihre gehostete Kubernetes-Umgebung, sodass schnelle und einfache Bereitstellung und Verwaltung von containeranwendungen containerorchestrierung.
+[Azure Container Service](/azure/aks/) verwaltet Ihre gehostete Kubernetes-Umgebung und ermöglicht so die schnelle und einfache Bereitstellung und Verwaltung von Container-Apps – ganz ohne Kenntnisse in Sachen Containerorchestrierung.
 
-[Azure Search](/azure/search/) wird verwendet, um eine Lösung für Unternehmenssuche über private, heterogene Inhalte erstellen.
+[Azure Search](/azure/search/) wird verwendet, um eine Unternehmenslösung für die Suche über private, heterogene Inhalte zu erstellen.
 
-[Service Fabric](/azure/service-fabric/) ist eine Plattform für verteilte Systeme, die ganz einfach packen, bereitstellen und verwalten skalierbarer und zuverlässiger Microservices und Containern.
+[Service Fabric](/azure/service-fabric/) ist eine Plattform für verteilte Systeme, die das Packen, Bereitstellen und Verwalten skalierbarer und zuverlässiger Microservices und Container vereinfacht.

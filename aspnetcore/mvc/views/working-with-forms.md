@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 1c7652c909432b25ae373873cd593afd879cfa00
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.openlocfilehash: 5af532db35b858d157f61a6aca30f55d15e9ff1e
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172561"
+ms.lasthandoff: 03/16/2020
+ms.locfileid: "79416197"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Taghilfsprogramme in Formularen in ASP.NET Core
 
@@ -73,7 +73,7 @@ Das Hilfsprogramm für Formularaktionen generiert das `formaction`-Attribut auf 
 
 Folgende [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)-Attribute werden zum Steuern des Werts von `formaction` unterstützt:
 
-|Attribut|Beschreibung|
+|attribute|BESCHREIBUNG|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|Der Name des Controllers.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|Der Name der Aktionsmethode.|
@@ -81,7 +81,7 @@ Folgende [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-help
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Der Name der Razor Page.|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Der Name des Razor Page-Handlers.|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|Der Name der Route.|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|Ein einzelner URL-Routenwert. Beispielsweise `asp-route-id="1234"`.|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|Ein einzelner URL-Routenwert. Beispiel: `asp-route-id="1234"`.|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|Alle Routenwerte.|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|Das URL-Fragment.|
 
@@ -199,15 +199,15 @@ Das `Input`-Taghilfsprogramm legt das HTML-Attribut `type` basierend auf dem .NE
 |.NET-Typ|Eingabetyp|
 |---|---|
 |Bool|type="checkbox"|
-|Zeichenfolge|type="text"|
-|DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
+|String|type="text"|
+|Datetime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
 |Int|type="number"|
 |Single, Double|type="number"|
 
 In der folgenden Tabelle werden einige allgemeine Attribute für die [Datenanmerkung](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) aufgeführt, die das Taghilfsprogramm für die Eingabe bestimmten Eingabetypen zuordnet (nicht jedes Validierungsattribut wird aufgeführt):
 
-|Attribut|Eingabetyp|
+|attribute|Eingabetyp|
 |---|---|
 |[EmailAddress]|type="email"|
 |[Url]|type="url"|
@@ -241,7 +241,7 @@ Der oben stehende Code generiert folgenden HTML-Code:
    </form>
 ```
 
-Die Datenanmerkungen, die auf die `Email`- und `Password`-Eigenschaft angewendet werden, generieren Metadaten im Modell. Das Taghilfsprogramm für die Eingabe nutzt die Metadaten des Modells und erzeugt [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)-`data-val-*`-Attribute (siehe [Modellvalidierung](../models/validation.md)). Diese Attribute beschreiben das Validierungssteuerelement, das den Eingabefeldern angefügt werden soll. Dadurch wird die unaufdringliche Validierung für HTML5 und [jQuery](https://jquery.com/) bereitgestellt. Die unaufdringlichen Attribute verfügen über das Format `data-val-rule="Error Message"`, bei dem „rule“ dem Namen der Validierungsregel (z.B. `data-val-required`, `data-val-email`, `data-val-maxlength`) entspricht. Wenn eine Fehlermeldung im Attribut bereitgestellt wird, wird dieses als Wert für das `data-val-rule`-Attribut angezeigt. Es gibt ebenfalls Attribute im Format `data-val-ruleName-argumentName="argumentValue"`, die zusätzliche Details zur Regel bereitstellen, z.B. `data-val-maxlength-max="1024"`.
+Die Datenanmerkungen, die auf die `Email`- und `Password`-Eigenschaft angewendet werden, generieren Metadaten im Modell. Das Taghilfsprogramm für die Eingabe nutzt die Metadaten des Modells und erzeugt [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)-`data-val-*`-Attribute (siehe [Modellvalidierung](../models/validation.md)). Diese Attribute beschreiben das Validierungssteuerelement, das den Eingabefeldern angefügt werden soll. Dadurch wird die unaufdringliche Validierung für HTML5 und [jQuery](https://jquery.com/) bereitgestellt. Die unaufdringlichen Attribute haben das Format `data-val-rule="Error Message"`, wobei Rule der Name der Validierungs Regel ist (z. b. `data-val-required`, `data-val-email`, `data-val-maxlength`usw.). Wenn eine Fehlermeldung im-Attribut bereitgestellt wird, wird Sie als Wert für das `data-val-rule`-Attribut angezeigt. Es gibt ebenfalls Attribute im Format `data-val-ruleName-argumentName="argumentValue"`, die zusätzliche Details zur Regel bereitstellen, z.B. `data-val-maxlength-max="1024"`.
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>Alternative HTML-Hilfsprogramme zum Taghilfsprogramm für die Eingabe
 
@@ -335,7 +335,7 @@ Die Vorlage *Views/Shared/EditorTemplates/ToDoItem.cshtml*:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-Wenn der Wert in einem Kontext wie `asp-for` oder `Html.DisplayFor` ausgeführt wird, sollte nach Möglichkeit `foreach` verwendet werden. Allgemein ist `for` besser als `foreach` (sofern das Szenario dies zulässt), weil kein Enumerator zugewiesen werden muss. Die Auswertung eines Indexers in einem LINQ-Ausdruck kann jedoch teuer sein und sollte auf ein Mindestmaß reduziert werden.
+Wenn der Wert in einem Kontext wie `foreach` oder `asp-for` ausgeführt wird, sollte nach Möglichkeit `Html.DisplayFor` verwendet werden. Allgemein ist `for` besser als `foreach` (sofern das Szenario dies zulässt), weil kein Enumerator zugewiesen werden muss. Die Auswertung eines Indexers in einem LINQ-Ausdruck kann jedoch teuer sein und sollte auf ein Mindestmaß reduziert werden.
 
 &nbsp;
 
@@ -491,7 +491,7 @@ Der generierte HTML-Code (wenn das Modell gültig ist):
 
 * Verfügt über die alternativen HTML-Hilfsprogramme `Html.DropDownListFor` und `Html.ListBoxFor`
 
-Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Zum Beispiel:
+Das `Select Tag Helper` `asp-for` gibt den Namen der Modelleigenschaft für das [select](https://www.w3.org/wiki/HTML/Elements/select)-Element an, und `asp-items` legt die [option](https://www.w3.org/wiki/HTML/Elements/option)-Elemente fest.  Beispiel:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -611,7 +611,7 @@ Mit folgender Ansicht
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
-wird der folgende HTML-Code generiert:
+generiert den folgenden HTML-Code:
 
 ```html
 <form method="post" action="/Home/IndexMultiSelect">
@@ -670,4 +670,4 @@ Das richtige `<option>`-Element (enthält das `selected="selected"`-Attribut) wi
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
 * [IAttributeAdapter-Schnittstelle](/dotnet/api/Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter)
-* [Codeauschnitte für dieses Dokument](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)
+* [Codeauschnitte für dieses Dokument](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)

@@ -1,0 +1,1 @@
+Wenn Sie möchten, dass Codekommentare in anderen Sprachen als Englisch angezeigt werden, informieren Sie uns in [diesem GitHub-Issue](https://github.com/MicrosoftDocs/feedback/issues/2515).

@@ -1,88 +1,88 @@
 ---
-title: Versionierung von GrpC-Diensten
+title: Versionsverwaltung für gRPC-Dienste
 author: jamesnk
-description: Erfahren Sie, wie Sie GrpC-Dienste in Version
+description: Erfahren Sie, wie Sie die Versionsverwaltung für gRPC-Dienste durchführen können.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 01/09/2020
 uid: grpc/versioning
 ms.openlocfilehash: 9bd76009ba28a1abef25a98686afea6753d4a8f4
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828515"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649357"
 ---
-# <a name="versioning-grpc-services"></a>Versionierung von GrpC-Diensten
+# <a name="versioning-grpc-services"></a>Versionsverwaltung für gRPC-Dienste
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
-Neue Features, die einer app hinzugefügt werden, können für Clients bereitgestellte GrpC-Dienste erfordern, was manchmal auf unerwartete und unterbrechende Weise der Fall ist. Wenn sich die GrpC-Dienste ändern:
+Neue Features, die zu einer App hinzugefügt werden, können es erforderlich machen, dass sich die gRPC-Dienste, die den Kunden zur Verfügung gestellt werden, ändern, manchmal auf unerwartete und entscheidende Weise. Wenn sich die gRPC-Dienste ändern:
 
-* Beachten Sie, welche Auswirkungen Änderungen auf Clients haben.
-* Eine Versions Verwaltungs Strategie zur Unterstützung von Änderungen sollte implementiert werden.
+* Es sollten Überlegungen dahingehend angestellt werden, wie sich Veränderungen auf die Clients auswirken.
+* Es sollte eine Strategie der Versionsverwaltung zur Unterstützung von Änderungen implementiert werden.
 
 ## <a name="backwards-compatibility"></a>Abwärtskompatibilität
 
-Das GrpC-Protokoll dient zur Unterstützung von Diensten, die sich im Laufe der Zeit ändern. Im Allgemeinen sind Ergänzungen zu den GrpC-Diensten und-Methoden nicht unterbrechend. Durch nicht unterbrechende Änderungen können vorhandene Clients weiterhin ohne Änderungen arbeiten. Das ändern oder Löschen von GrpC-Diensten sind wichtige Änderungen. Wenn die GrpC-Dienste wichtige Änderungen aufweisen, müssen Clients, die diesen Dienst verwenden, aktualisiert und erneut bereitgestellt werden.
+Das gRPC-Protokoll wurde entwickelt, um Dienste zu unterstützen, die sich im Laufe der Zeit ändern. Im Allgemeinen sind die Ergänzungen zu den gRPC-Diensten und -Methoden keine Breaking Changes. Non-Breaking Changes ermöglichen es bestehenden Clients, die Arbeit ohne Änderungen fortzusetzen. Das Ändern oder Löschen von gRPC-Diensten sind Breaking Changes. Wenn gRPC-Dienste Breaking Changes aufweisen, müssen die Clients, die diesen Dienst in Anspruch nehmen, aktualisiert und erneut bereitgestellt werden.
 
-Das vornehmen von nicht wichtigen Änderungen an einem Dienst hat eine Reihe von Vorteilen:
+Die Durchführung von Non-Breaking Changes an einem Dienst hat eine Reihe von Vorteilen:
 
 * Vorhandene Clients werden weiterhin ausgeführt.
-* Vermeidet die Arbeit bei der Benachrichtigung von Clients über wichtige Änderungen und deren Aktualisierung.
-* Es muss nur eine Version des Dienstanbieter dokumentiert und gewartet werden.
+* Vermeidet die Arbeit, die damit verbunden ist, Clients über Breaking Changes zu benachrichtigen und diese zu aktualisieren.
+* Es muss nur eine Version des Diensts dokumentiert und verwaltet werden.
 
 ### <a name="non-breaking-changes"></a>Geringfügige Änderungen
 
-Diese Änderungen sind nicht unterbrechend auf der GrpC-Protokollebene und der .net-Binär Ebene.
+Diese Änderungen sind auf der gRPC-Protokollebene und der .NET-Binärebene keine Breaking Changes.
 
-* **Hinzufügen eines neuen Dienstanbieter**
+* **Hinzufügen eines neuen Diensts**
 * **Hinzufügen einer neuen Methode zu einem Dienst**
-* **Hinzufügen eines Felds zu einer Anforderungs Nachricht** : Felder, die einer Anforderungs Nachricht hinzugefügt werden, werden auf dem Server mit dem [Standardwert](https://developers.google.com/protocol-buffers/docs/proto3#default) deserialisiert, wenn Sie nicht festgelegt sind. Um nicht Breaking Change werden zu können, muss der Dienst erfolgreich sein, wenn das neue Feld nicht von älteren Clients festgelegt wird.
-* **Hinzufügen eines Felds zu einer Antwortnachricht** : Felder, die einer Antwortnachricht hinzugefügt werden, werden in die Auflistung [unbekannter Felder](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) der Nachricht auf dem Client deserialisiert.
-* Das **Hinzufügen eines Werts zu** enumerationsenumerationen wird als numerischer Wert serialisiert. Neue Enumerationswerte werden auf dem Client auf den-Enumerationswert ohne Enumerationsnamen deserialisiert. Ältere Clients müssen beim Empfang des neuen Enumerationswerts ordnungsgemäß ausgeführt werden, damit Sie nicht Breaking Change werden.
+* **Hinzufügen eines Felds zu einer Anforderungsnachricht**: Zu einer Anforderungsnachricht hinzugefügte Felder werden auf dem Server mit dem [Standardwert](https://developers.google.com/protocol-buffers/docs/proto3#default) deserialisiert, wenn sie nicht festgelegt sind. Damit es sich um Non-Breaking Changes handelt, muss der Dienst erfolgreich sein, wenn das neue Feld nicht von älteren Clients festgelegt wird.
+* **Hinzufügen eines Felds zu einer Antwortnachricht**: Zu einer Antwortnachricht hinzugefügte Felder werden in die Sammlung [Unbekannte Felder](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) der Nachricht auf dem Client deserialisiert.
+* **Hinzufügen eines Werts zu einer Enumeration**: Enumerationen werden als numerischer Wert serialisiert. Neue Enumerationswerte werden auf dem Client in den Enumerationswert ohne Enumerationsnamen deserialisiert. Damit es sich um Non-Breaking Changes handelt, müssen ältere Clients ordnungsgemäß ausgeführt werden, wenn sie den neuen Enumerationswert erhalten.
 
-### <a name="binary-breaking-changes"></a>Binäre wichtige Änderungen
+### <a name="binary-breaking-changes"></a>Binäre Breaking Changes
 
-Die folgenden Änderungen sind auf der GrpC-Protokollebene nicht unterbrechend, aber der Client muss aktualisiert werden, wenn er auf den neuesten *. proto* -Vertrag oder die Client .NET-Assembly aktualisiert wird. Die binäre Kompatibilität ist wichtig, wenn Sie beabsichtigen, eine GrpC-Bibliothek in nuget zu veröffentlichen.
+Die folgenden Änderungen stellen auf gRPC-Protokollebene Non-Breaking Changes dar, aber der Client muss aktualisiert werden, wenn er ein Upgrade auf den aktuellsten *.proto*-Vertrag oder die aktuellste .NET-Clientassembly durchführt. Binärkompatibilität ist wichtig, wenn Sie planen, eine gRPC-Bibliothek in NuGet zu veröffentlichen.
 
-* Das **Entfernen von Feldwerten** aus einem entfernten Feld wird in die [unbekannten Felder](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)der Nachricht deserialisiert. Dabei handelt es sich nicht um ein GrpC-Protokoll Breaking Change, aber der Client muss aktualisiert werden, wenn ein Upgrade auf den letzten Vertrag durchführt. Es ist wichtig, dass eine entfernte Feldnummer in Zukunft nicht versehentlich wieder verwendet wird. Um sicherzustellen, dass dies nicht der Fall ist, geben Sie mit dem [reservierten](https://developers.google.com/protocol-buffers/docs/proto3#reserved) Schlüsselwort von protobuf gelöschte Feldnummern und-Namen an.
-* Das **Umbenennen eines Nachrichten** Nachrichten namens wird in der Regel nicht im Netzwerk gesendet, sodass dies kein GrpC-Protokoll Breaking Change ist. Wenn ein Upgrade auf den letzten Vertrag durchführt, muss der Client aktualisiert werden. Eine Situation, in der Nachrichten Namen im Netzwerk gesendet **werden** , besteht aus [beliebigen](https://developers.google.com/protocol-buffers/docs/proto3#any) Feldern, wenn der Nachrichten Name verwendet wird, um den Nachrichtentyp zu identifizieren.
-* Wenn Sie **csharp_namespace** ändernde `csharp_namespace` ändern, ändert sich der Namespace generierter .NET-Typen. Dabei handelt es sich nicht um ein GrpC-Protokoll Breaking Change, aber der Client muss aktualisiert werden, wenn ein Upgrade auf den letzten Vertrag durchführt.
+* **Entfernen eines Felds**: Werte aus einem entfernten Feld werden in die [unbekannten Felder](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) einer Nachricht deserialisiert. Dies sind keine Breaking Changes des gRPC-Protokolls, aber der Client muss aktualisiert werden, wenn er ein Upgrade auf den aktuellsten Vertrag erhält. Es ist wichtig, dass eine entfernte Feldnummer in Zukunft nicht versehentlich wiederverwendet wird. Um sicherzustellen, dass dies nicht passiert, geben Sie gelöschte Feldnummern und Namen in der Nachricht mit dem [reservierten](https://developers.google.com/protocol-buffers/docs/proto3#reserved) Schlüsselwort von Protobuf an.
+* **Umbenennen einer Nachricht**: Nachrichtennamen werden normalerweise nicht über das Netzwerk gesendet, sodass es sich nicht um Breaking Changes des gRPC-Protokolls handelt. Der Client muss aktualisiert werden, wenn er ein Upgrade auf den aktuellsten Vertrag erhält. Eine Situation, in der Nachrichtennamen im Netzwerk **gesendet werden**, ist mit [Any](https://developers.google.com/protocol-buffers/docs/proto3#any)-Feldern, wenn der Nachrichtenname zur Identifizierung des Nachrichtentyps verwendet wird.
+* **Ändern von csharp_namespace**: Durch die Änderung von `csharp_namespace` wird der Namespace von generierten .NET-Typen geändert. Dies sind keine Breaking Changes des gRPC-Protokolls, aber der Client muss aktualisiert werden, wenn er ein Upgrade auf den aktuellsten Vertrag erhält.
 
-### <a name="protocol-breaking-changes"></a>Protokoll brechende Änderungen
+### <a name="protocol-breaking-changes"></a>Breaking Changes bei Protokollen
 
-Die folgenden Elemente sind Protokoll-und binäre wichtige Änderungen:
+Bei den folgenden Punkten handelt es sich um Breaking Changes von Protokollen und um binäre Breaking Changes:
 
-* **Umbenennen eines Felds** mit protobuf-Inhalt werden die Feldnamen nur im generierten Code verwendet. Die Feldzahl wird verwendet, um Felder im Netzwerk zu identifizieren. Das Umbenennen eines Felds ist kein Protokoll Breaking Change für protobuf. Wenn ein Server jedoch JSON-Inhalte verwendet, ist das Umbenennen eines Felds eine Breaking Change.
-* **Ändern eines Feld Datentyps** : das Ändern des Datentyps eines Felds in einen nicht [kompatiblen Typ](https://developers.google.com/protocol-buffers/docs/proto3#updating) führt beim Deserialisieren der Nachricht zu Fehlern. Auch wenn der neue Datentyp kompatibel ist, ist es wahrscheinlich, dass der Client aktualisiert werden muss, um den neuen Typ zu unterstützen, wenn er auf den letzten Vertrag aktualisiert wird.
-* **Ändern einer Feldzahl** : bei protobuf-Nutzlasten wird die Feldzahl verwendet, um Felder im Netzwerk zu identifizieren.
-* **Umbenennen eines Pakets, eines dienstangangs oder einer Methode** : GrpC verwendet den Paketnamen, den Dienstnamen und den Methodennamen, um die URL zu erstellen. Der Client erhält einen *nicht implementierten* Status vom Server.
-* **Entfernen eines Dienstes oder einer Methode** : der Client erhält einen *nicht implementierten* Status vom Server, wenn die entfernte Methode aufgerufen wird.
+* **Umbenennen eines Felds**: Bei Protobuf-Inhalten werden die Feldnamen nur im generierten Code verwendet. Die Feldnummer wird verwendet, um Felder im Netzwerk zu identifizieren. Die Umbenennung eines Felds ist für Protobuf keine Breaking Change für Protokolle. Wenn ein Server jedoch JSON-Inhalte verwendet, ist die Umbenennung eines Felds eine Breaking Change.
+* **Ändern eines Felddatentyps**: Das Ändern des Datentyps eines Felds in einen [inkompatiblen Typ](https://developers.google.com/protocol-buffers/docs/proto3#updating) führt zu Fehlern bei der Deserialisierung der Nachricht. Selbst wenn der neue Datentyp kompatibel ist, ist es wahrscheinlich, dass der Client aktualisiert werden muss, um den neuen Typ zu unterstützen, wenn er ein Upgrade auf den aktuellsten Vertrag erhält.
+* **Ändern einer Feldnummer**: Bei Protobuf-Nutzlasten wird die Feldnummer zur Identifizierung von Feldern im Netzwerk verwendet.
+* **Umbenennen eines Pakets, Diensts oder einer Methode**: gRPC verwendet den Paket-, Dienst- und Methodennamen zum Erstellen der URL. Der Client erhält vom Server den Status *NICHT IMPLEMENTIERT*.
+* **Entfernen eines Diensts oder einer Methode**: Der Client erhält beim Aufruf der entfernten Methode vom Server den Status *NICHT IMPLEMENTIERT*.
 
-### <a name="behavior-breaking-changes"></a>Wichtige Verhaltensänderungen
+### <a name="behavior-breaking-changes"></a>Breaking Changes für Verhalten
 
-Wenn Sie nicht unterbrechende Änderungen vornehmen, müssen Sie auch überprüfen, ob ältere Clients weiterhin mit dem neuen Dienst Verhalten arbeiten können. Beispiel: Hinzufügen eines neuen Felds zu einer Anforderungs Nachricht:
+Bei Non-Breaking Changes müssen Sie auch berücksichtigen, ob ältere Clients weiterhin mit dem neuen Dienstverhalten arbeiten können. Beispiel: Hinzufügen eines neuen Felds zu einer Anforderungsnachricht:
 
-* Ist kein Protokoll Breaking Change.
-* Wenn Sie einen Fehlerstatus auf dem Server zurückgeben, wenn das neue Feld nicht festgelegt ist, ist es ein Breaking Change für alte Clients.
+* Dies sind keine Breaking Changes für Protokolle.
+* Die Rückgabe eines Fehlerstatus auf dem Server, wenn das neue Feld nicht festgelegt ist, macht es für alte Clients zu einer Breaking Change.
 
-Die Verhaltens Kompatibilität wird durch Ihren app-spezifischen Code festgelegt.
+Die Verhaltenskompatibilität wird durch Ihren App-spezifischen Code bestimmt.
 
-## <a name="version-number-services"></a>Versionsnummern Dienste
+## <a name="version-number-services"></a>Versionsnummerndienste
 
-Dienste sollten eine Abwärtskompatibilität mit alten Clients anstreben. Letztendlich können Änderungen an Ihrer APP zu wichtigen Änderungen erforderlich sein. Das Unterbrechen von alten Clients und das Erzwingen der Aktualisierung zusammen mit Ihrem Dienst sind keine guten Benutzer Möglichkeiten. Eine Möglichkeit, die Abwärtskompatibilität zu gewährleisten, während wichtige Änderungen vorgenommen werden, besteht in der Veröffentlichung mehrerer Versionen eines Dienstanbieter.
+Die Dienste sollten anstreben, die Abwärtskompatibilität mit alten Clients zu erhalten. Möglicherweise erfordern Änderungen an Ihrer App entsprechende Breaking Changes. Alte Clients zu unterbrechen und zu zwingen, sie zusammen mit Ihrem Dienst zu aktualisieren, ist keine gute Benutzererfahrung. Eine Möglichkeit, die Abwärtskompatibilität aufrechtzuerhalten und gleichzeitig Breaking Changes vorzunehmen, besteht darin, mehrere Versionen eines Diensts zu veröffentlichen.
 
-GrpC unterstützt einen optionalen [paketspezifizierer](https://developers.google.com/protocol-buffers/docs/proto3#packages) , der ähnlich wie ein .NET-Namespace funktioniert. Tatsächlich wird der `package` als .NET-Namespace für generierte .NET-Typen verwendet, wenn `option csharp_namespace` nicht in der *. proto* -Datei festgelegt ist. Das Paket kann verwendet werden, um eine Versionsnummer für den Dienst und seine Nachrichten anzugeben:
+gRPC unterstützt einen optionalen [Paket](https://developers.google.com/protocol-buffers/docs/proto3#packages)-Spezifizierer, der ähnlich wie ein .NET-Namespace funktioniert. Tatsächlich wird der `package` als .NET-Namespace für generierte .NET-Typen verwendet, wenn `option csharp_namespace` in der *PROTO*-Datei nicht festgelegt ist. Das Paket kann verwendet werden, um eine Versionsnummer für Ihren Dienst und seine Nachrichten anzugeben:
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 
-Der Paketname wird mit dem Dienstnamen kombiniert, um eine Dienst Adresse zu identifizieren. Eine Dienst Adresse ermöglicht, dass mehrere Versionen eines Dienstanbieter nebeneinander gehostet werden:
+Der Paketname wird mit dem Dienstnamen kombiniert, um eine Dienstadresse zu identifizieren. Eine Dienstadresse ermöglicht es, mehrere Versionen eines Diensts nebeneinander zu hosten:
 
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-Implementierungen des versionierten Dienstanbieter werden in *Startup.cs*registriert:
+Implementierungen des Diensts mit Versionsangabe werden in *Startup.cs* registriert:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -95,14 +95,14 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Wenn Sie eine Versionsnummer in den Paketnamen einschließen, haben Sie die Möglichkeit, eine *v2* -Version Ihres Dienes mit wichtigen Änderungen zu veröffentlichen, während ältere Clients, die die *v1* -Version anrufen, weiterhin unterstützt werden. Nachdem die Clients die Verwendung des *v2* -Diensts aktualisiert haben, können Sie die alte Version entfernen. Beim Planen der Veröffentlichung mehrerer Versionen eines Dienstanbieter:
+Das Einbeziehen einer Versionsnummer in den Paketnamen gibt Ihnen die Möglichkeit, eine *v2*-Version Ihres Diensts mit Breaking Changes zu veröffentlichen, während ältere Clients, die die *v1*-Version aufrufen, weiterhin unterstützt werden. Nachdem die Clients aktualisiert wurden, um den *v2*-Dienst zu nutzen, können Sie die alte Version entfernen. Wenn Sie planen, mehrere Versionen eines Diensts zu veröffentlichen:
 
-* Vermeiden Sie bei angemessener Änderung wichtige Änderungen.
-* Aktualisieren Sie die Versionsnummer nicht, wenn Sie keine wichtigen Änderungen vornehmen.
-* Aktualisieren Sie die Versionsnummer, wenn Sie wichtige Änderungen vornehmen.
+* Vermeiden Sie Breaking Changes, wenn dies sinnvoll ist.
+* Aktualisieren Sie die Versionsnummer nur dann, wenn Sie Breaking Changes vornehmen.
+* Aktualisieren Sie die Versionsnummer, wenn Sie Breaking Changes vornehmen.
 
-Durch das Veröffentlichen mehrerer Versionen eines dienstanvers wird dieses dupliziert. Um die Duplizierung zu reduzieren, erwägen Sie, die Geschäftslogik von den Dienst Implementierungen an einen zentralisierten Speicherort zu verschieben, der von den alten und neuen Implementierungen verwendet werden kann:
+Durch die Veröffentlichung mehrerer Versionen eines Diensts wird dieser dupliziert. Um die Duplizierung zu verringern, sollten Sie in Erwägung ziehen, die Geschäftslogik von den Dienstimplementierungen an einen zentralen Ort zu verlagern, der von den alten und neuen Implementierungen wiederverwendet werden kann:
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-Dienste und Nachrichten, die mit verschiedenen Paketnamen generiert werden, sind **unterschiedliche .NET-Typen** Das Verschieben von Geschäftslogik an einen zentralisierten Speicherort erfordert die Zuordnung von Nachrichten zu allgemeinen Typen.
+Dienste und Nachrichten, die mit unterschiedlichen Paketnamen generiert werden, sind **verschiedene .NET-Typen**. Das Verschieben der Geschäftslogik an einen zentralen Ort erfordert die Zuordnung von Nachrichten zu allgemeinen Typen.

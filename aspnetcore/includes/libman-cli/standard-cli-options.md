@@ -1,10 +1,10 @@
 * `-h|--help`
 
-  Anzeigen von Hilfeinformationen.
+  Zeigt Hilfeinformationen an
 
 * `--verbosity <LEVEL>`
 
-  Legen Sie den Ausführlichkeitsgrad der Ausgabe. Ersetzen Sie dies `<LEVEL>` mit einem der folgenden Werte:
+  Legt den Ausführlichkeitsgrad der Ausgabe fest. Ersetzen Sie `<LEVEL>` durch einen der folgenden Werte:
   
   * `quiet`
   * `normal`

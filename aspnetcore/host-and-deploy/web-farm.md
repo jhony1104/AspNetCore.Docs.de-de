@@ -1,22 +1,22 @@
 ---
 title: Hosten von ASP.NET Core in einer Webfarm
-author: guardrex
+author: rick-anderson
 description: Hier erfahren Sie, wie Sie mehrere Instanzen einer ASP.NET Core-App mit gemeinsam genutzten Ressourcen in einer Webfarmumgebung hosten.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 5c13e9bc4c514f9b42871d55a430265c8ec2da23
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75951819"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647341"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Hosten von ASP.NET Core in einer Webfarm
 
-Von [Luke Latham](https://github.com/guardrex) und [Chris Ross](https://github.com/Tratcher)
+Von [Chris Ross](https://github.com/Tratcher)
 
 Eine *Webfarm* ist eine Gruppe von mindestens zwei Webservern (oder *Knoten*), die mehrere Instanzen einer App hostet. Wenn eine Webfarm Benutzeranforderungen empfängt, verteilt ein *Lastenausgleichsmodul* die Anforderungen auf die Knoten der Webfarm. Webfarmen verbessern:
 
@@ -62,8 +62,8 @@ Die folgenden Szenarien erfordern keine zusätzliche Konfiguration, hängen jedo
 | -------- | ------------------- |
 | Authentifizierung | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/cookie> und <xref:security/cookie-sharing>. |
 | Identität | Authentifizierung und Datenbankkonfiguration.<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/identity>. |
-| Sitzung | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) und Zwischenspeichern (siehe <xref:performance/caching/distributed>).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Zustand: Sitzungszustand](xref:fundamentals/app-state#session-state). |
-| TempData | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) oder Sitzung (siehe [Sitzungs- und App-Status: Sitzungszustand](xref:fundamentals/app-state#session-state)).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und App-Zustand: TempData](xref:fundamentals/app-state#tempdata). |
+| Sitzung | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) und Zwischenspeichern (siehe <xref:performance/caching/distributed>).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und Zustandsverwaltung: Sitzungszustand](xref:fundamentals/app-state#session-state). |
+| TempData | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) oder Sitzung (siehe [Sitzungs- und Zustandsverwaltung: Sitzungszustand](xref:fundamentals/app-state#session-state)).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und Zustandsverwaltung: TempData](xref:fundamentals/app-state#tempdata). |
 | Fälschungssicherheit | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Problembehandlung
@@ -93,3 +93,4 @@ Wenn die Webfarm-Apps in der Lage sind, auf Anforderungen zu reagieren, erhalten
 
 * Die [benutzerdefinierte Skript Erweiterung für Windows](/azure/virtual-machines/extensions/custom-script-windows) lädt Skripts auf virtuellen Azure-Computern herunter und führt sie dort aus &ndash; dies ist für die Konfiguration und Softwareinstallation nach der Bereitstellung nützlich.
 * <xref:host-and-deploy/proxy-load-balancer>
+ 
