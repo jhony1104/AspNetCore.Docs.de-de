@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie eine Blazor Server-App mit ASP.NET Core hoste
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/15/2020
+ms.date: 03/03/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 42321b8564524fec41104ccaf1ac47981d014c94
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 866bb348180c872d8ab20787283cfb7217183a8d
+ms.sourcegitcommit: 3ca4a2235a8129def9e480d0a6ad54cc856920ec
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647359"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "79025428"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Hosten und Bereitstellen von Blazor Server
 
@@ -110,14 +110,40 @@ metadata:
 
 #### <a name="linux-with-nginx"></a>Linux mit Nginx
 
-Damit SignalR-Websockets ordnungsgemäß funktionieren, legen Sie die Proxyheader `Upgrade` und `Connection` folgendermaßen fest:
+Damit SignalR WebSockets ordnungsgemäß funktioniert, sollten Sie sich vergewissern, dass die Header `Upgrade` und `Connection` des Proxys auf die folgenden Werte festgelegt sind und dass `$connection_upgrade` einem der folgenden Werte zugeordnet ist:
+
+* Der Standardwert für den Upgradeheader
+* `close`, wenn der Upgradeheader fehlt oder leer ist
 
 ```
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+    map $http_upgrade $connection_upgrade {
+        default Upgrade;
+        ''      close;
+    }
+
+    server {
+        listen      80;
+        server_name example.com *.example.com
+        location / {
+            proxy_pass         http://localhost:5000;
+            proxy_http_version 1.1;
+            proxy_set_header   Upgrade $http_upgrade;
+            proxy_set_header   Connection $connection_upgrade;
+            proxy_set_header   Host $host;
+            proxy_cache_bypass $http_upgrade;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+        }
+    }
+}
 ```
 
-Weitere Informationen finden Sie unter [NGINX as a WebSocket Proxy (NGINX als Websocket-Proxy)](https://www.nginx.com/blog/websocket-nginx/).
+Weitere Informationen finden Sie in den folgenden Artikeln:
+
+* [NGINX als WebSocket-Proxy](https://www.nginx.com/blog/websocket-nginx/)
+* [WebSocket-Proxyfunktion](http://nginx.org/docs/http/websocket.html)
+* <xref:host-and-deploy/linux-nginx>
 
 ### <a name="measure-network-latency"></a>Messen der Netzwerklatenz
 

@@ -5,17 +5,17 @@ description: Hier erfahren Sie, wie Sie Razor-Komponenten erstellen und verwende
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: e444ebfef5143a6c33ed2d122933903ad3a4f4a7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7afc9250cdfb4b791ef939ead0f41b503d83fad8
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648037"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511274"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -87,8 +87,6 @@ Weitere Informationen zum Festlegen des Basispfads einer App finden Sie unter <x
 ## <a name="use-components"></a>Verwenden von Komponenten
 
 Komponenten können andere Komponenten enthalten, sofern Sie sie mithilfe der HTML-Elementsyntax deklarieren. Das Markup für die Verwendung einer Komponente sieht wie ein HTML-Tag aus, wobei der Name des Tags der Typ der Komponente ist.
-
-Bei der Attributbindung wird die Groß- und Kleinschreibung berücksichtigt. Beispielsweise ist `@bind` zulässig, aber `@Bind` ist unzulässig.
 
 Das folgende Markup in *Index.razor* rendert eine `HeadingComponent`-Instanz:
 
@@ -389,7 +387,7 @@ Betrachten Sie das folgende Beispiel:
 ```csharp
 @foreach (var person in People)
 {
-    <DetailsEditor Details="person.Details" />
+    <DetailsEditor Details="@person.Details" />
 }
 
 @code {
@@ -405,7 +403,7 @@ Der Zuweisungsprozess kann mit dem `@key`-Anweisungsattribut gesteuert werden. `
 ```csharp
 @foreach (var person in People)
 {
-    <DetailsEditor @key="person" Details="person.Details" />
+    <DetailsEditor @key="person" Details="@person.Details" />
 }
 
 @code {

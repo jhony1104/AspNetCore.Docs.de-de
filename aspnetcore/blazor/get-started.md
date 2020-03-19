@@ -5,17 +5,17 @@ description: Erste Schritte mit Blazor durch Erstellen einer Blazor-App mit den 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/28/2019
+ms.date: 03/10/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: bd33d874b3d6122f2ab820e9b147b0e62ba03a58
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 89c7529d2b8ec97db731f7c7268e19937c398115
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648631"
+ms.lasthandoff: 03/11/2020
+ms.locfileid: "79083241"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Erste Schritte mit ASP.NET Core Blazor
 
@@ -28,12 +28,15 @@ Erste Schritte mit Blazor:
 1. Installieren Sie das [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1).
 
 1. Installieren Sie optional die Vorlage [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly):
-   * Installieren Sie das [SDK für .NET Core 3.1 oder höher (Vorschau)](https://dotnet.microsoft.com/download/dotnet-core/3.1).
-   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. Das Paket [Microsoft.AspNetCore.Blazor.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) enthält eine Vorschauversion, solange sich die Blazor WebAssembly in der Vorschauphase befindet.
+   * Installieren Sie das [.NET Core-SDK 3.1.102 oder höher (Vorschau)](https://dotnet.microsoft.com/download/dotnet-core/3.1).
+   * Führen Sie den folgenden Befehl in einer Befehlsshell aus. Das Paket [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) enthält eine Vorschauversion, solange sich die Blazor WebAssembly in der Vorschauphase befindet.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.2.0-preview1.20073.1
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview2.20160.5
    ```
+
+   > [!NOTE]
+   > Das .NET Core SDK 3.1.102 oder höher ist **erforderlich**, um die Blazor WebAssembly-Vorlage „3.2 Preview 2“ zu verwenden. Überprüfen Sie die installierte Version des .NET Core-SDK, indem Sie `dotnet --version` in einer Befehlsshell ausführen.
 
 1. Befolgen Sie die Anleitungen für die Auswahl der Tools:
 
@@ -47,7 +50,7 @@ Erste Schritte mit Blazor:
 
    4\. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Vergewissern Sie sich, dass der Eintrag für den **Speicherort** korrekt ist, oder geben Sie einen Speicherort für das Projekt an. Wählen Sie **Erstellen** aus.
 
-   5\. Für eine Blazor WebAssembly-Benutzeroberfläche wählen Sie die **Blazor WebAssembly App**-Vorlage aus. Für eine Blazor Server-Benutzeroberfläche wählen Sie die **Blazor Server App**-Vorlage aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden Blazor-Hostingmodellen, *Blazor Server* und *Blazor WebAssembly*, finden Sie unter <xref:blazor/hosting-models>.
+   5\. Für eine Blazor WebAssembly-Benutzeroberfläche wählen Sie die **Blazor WebAssembly App**-Vorlage aus. Für eine Blazor Server-Benutzeroberfläche wählen Sie die **Blazor Server App**-Vorlage aus. Wählen Sie **Erstellen** aus. Informationen zu den beiden Blazor-Hostingmodellen, *Blazor Server* und *Blazor WebAssembly*, finden Sie unter <xref:blazor/hosting-models>. Wenn die Blazor WebAssembly-Vorlage nicht vorhanden ist, kehren Sie zum vorherigen Schritt zurück, und installieren Sie die Vorlage erneut.
 
    6\. Drücken Sie **STRG**+**F5**, um die App auszuführen.
 
@@ -58,7 +61,7 @@ Erste Schritte mit Blazor:
 
    1\. Installieren Sie [Visual Studio Code](https://code.visualstudio.com/).
 
-   2\. Installieren Sie die aktuellste [C# für Visual Studio Code-Erweiterung](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
+   2\. Installieren Sie die aktuellste [C# für Visual Studio Code-Erweiterung](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
 
    3\. Für eine Blazor WebAssembly-Benutzeroberfläche führen Sie den folgenden Befehl in einer Befehlsshell aus:
 

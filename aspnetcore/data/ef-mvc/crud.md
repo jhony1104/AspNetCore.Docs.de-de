@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: f0c5bcff4c4b0808f9b4703e1429c3a6d1a7a2d7
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 2aa4ef48509b9a34f3b25eb657b1ecac51c1374b
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259722"
+ms.lasthandoff: 03/16/2020
+ms.locfileid: "79416161"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implementieren von CRUD-Funktionen – ASP.NET MVC mit EF Core
 
@@ -30,7 +30,7 @@ In diesem Tutorial:
 > * Aktualisieren der Seite „Delete“ (Löschen)
 > * Schließen von Datenbankverbindungen
 
-## <a name="prerequisites"></a>Erforderliche Komponenten
+## <a name="prerequisites"></a>Voraussetzungen
 
 * [Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App](intro.md)
 
@@ -199,15 +199,15 @@ Der Datenbankkontext verfolgt, ob die Entitäten im Arbeitsspeicher mit ihren en
 
 Eine Entität kann einen der folgenden Status aufweisen:
 
-* `Added`. Die Entität ist noch nicht in der Datenbank vorhanden. Die Methode `SaveChanges` gibt eine INSERT-Anweisung aus.
+* `Added` Die Entität ist noch nicht in der Datenbank vorhanden. Die Methode `SaveChanges` gibt eine INSERT-Anweisung aus.
 
-* `Unchanged`. Die Methode `SaveChanges` muss nichts mit dieser Entität tun. Wenn Sie eine Entität aus der Datenbank lesen, beginnt die Entität mit diesem Status.
+* `Unchanged` Die Methode `SaveChanges` muss nichts mit dieser Entität tun. Wenn Sie eine Entität aus der Datenbank lesen, beginnt die Entität mit diesem Status.
 
-* `Modified`. Einige oder alle Eigenschaftswerte der Entität wurden geändert. Die Methode `SaveChanges` gibt eine UPDATE-Anweisung aus.
+* `Modified` Einige oder alle Eigenschaftswerte der Entität wurden geändert. Die Methode `SaveChanges` gibt eine UPDATE-Anweisung aus.
 
-* `Deleted`. Die Entität wurde zum Löschen markiert. Die Methode `SaveChanges` gibt eine DELETE-Anweisung aus.
+* `Deleted` Die Entität wurde zum Löschen markiert. Die Methode `SaveChanges` gibt eine DELETE-Anweisung aus.
 
-* `Detached`. Die Entität wird nicht vom Datenbankkontext nachverfolgt.
+* `Detached` Die Entität wird nicht vom Datenbankkontext nachverfolgt.
 
 Statusänderungen werden in einer Desktop-App in der Regel automatisch festgelegt. Sie lesen eine Entität aus und nehmen Änderungen an ihren Eigenschaftswerten vor. Dadurch wird der Entitätsstatus automatisch auf `Modified` festgelegt. Wenn Sie dann `SaveChanges` aufrufen, generiert Entity Framework eine SQL UPDATE-Anweisung, die nur die aktuellen Eigenschaften aktualisiert, an denen Sie Änderungen vorgenommen haben.
 
@@ -293,7 +293,7 @@ Weitere Informationen finden Sie unter [Tracking vs. No-Tracking (Mit Nachverfol
 
 ## <a name="get-the-code"></a>Abrufen des Codes
 
-[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Nächste Schritte
 

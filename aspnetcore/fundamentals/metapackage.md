@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
-ms.openlocfilehash: e47f583d0fa75bdeb26b669303747a70619117c1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: cc00c075909da5c17a4aa2fd252c9e662e5a0fc9
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648961"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511066"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Das Metapaket „Microsoft.AspNetCore.All“ für ASP.NET Core 2.0
 
@@ -94,6 +94,6 @@ Alle Abhängigkeiten der vorangehenden Pakete, die keine Abhängigkeiten von `Mi
 
 Wir empfehlen die Migration zum Metapaket `Microsoft.AspNetCore.App` für 2.1 oder höher. Wenn Sie das `Microsoft.AspNetCore.All`-Metapaket weiterhin verwenden und sicherstellen möchten, dass die neueste Patchversion bereitgestellt wird, gehen Sie folgendermaßen vor:
 
-* Auf Entwicklungscomputern und Buildservern: Installieren Sie das neueste [.NET Core SDK](https://www.microsoft.com/net/download).
-* Auf Bereitstellungsservern: Installieren Sie die neueste [.NET Core Runtime](https://www.microsoft.com/net/download).
+* Auf Entwicklungscomputern und Buildservern: Installieren Sie das neueste [.NET Core SDK](https://dotnet.microsoft.com/download).
+* Auf Bereitstellungsservern: Installieren Sie die neueste [.NET Core Runtime](https://dotnet.microsoft.com/download).
  Für Ihre App wird bei einem Neustart der Anwendungen ein Rollforward auf die neueste installierte Version ausgeführt.
