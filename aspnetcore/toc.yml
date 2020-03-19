@@ -969,6 +969,8 @@
           uid: security/authentication/individual
         - name: Konfigurieren der Zertifikatauthentifizierung
           uid: security/authentication/certauth
+        - name: Multi-Factor Authentication
+          uid: security/authentication/mfa
     - name: Autorisierung
       items:
         - name: Übersicht
