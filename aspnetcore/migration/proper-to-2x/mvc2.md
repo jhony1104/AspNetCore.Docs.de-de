@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
-ms.openlocfilehash: 11bd3b948afaedc675ac4249099969382683f653
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5a2437f8dddee49d402bf7df67cb15aa895367b2
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653971"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511082"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>Migrieren von ASP.NET zu ASP.NET Core 2.0
 
@@ -19,9 +19,9 @@ Von [Isaac Levin](https://isaaclevin.com)
 
 Dieser Artikel dient als Leitfaden zum Migrieren von ASP.NET-Anwendungen zu ASP.NET Core 2.0.
 
-## <a name="prerequisites"></a>Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
-Installieren Sie **einen** der folgenden Schritte aus [.net-Downloads: Windows](https://www.microsoft.com/net/download/windows):
+Installieren Sie **einen** der folgenden Schritte aus [.net-Downloads: Windows](https://dotnet.microsoft.com/download):
 
 * .Net Core SDK
 * Visual Studio für Windows
@@ -76,7 +76,7 @@ In `Startup` muss die `Configure`-Methode enthalten sein. Fügen Sie in `Configu
 * Fehlerseiten
 * Statische Dateien
 * ASP.NET Core MVC
-* Identity
+* Identität
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
@@ -157,6 +157,6 @@ Beispielsweise kann ein Browser an einem Speicherort wie *auf ein Bildobjekt im 
 
 **Hinweis:** Eine ausführlichere Referenz zum betreuen statischer Dateien in ASP.net Core finden Sie unter <xref:fundamentals/static-files>.
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 * [Portieren auf .NET Core – Bibliotheken](/dotnet/core/porting/libraries)

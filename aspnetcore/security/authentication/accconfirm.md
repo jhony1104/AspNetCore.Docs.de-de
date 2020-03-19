@@ -5,12 +5,12 @@ description: Erfahren Sie, wie Sie eine ASP.net Core-App mit e-Mail-Bestätigung
 ms.author: riande
 ms.date: 03/11/2019
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 49d3d214fd64edc5b17df2df929ddc3c2af47ede
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3a6b0501d507929c9929207a7bb871b3b81b7cb8
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654223"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511625"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Konto Bestätigung und Kenn Wort Wiederherstellung in ASP.net Core
 
@@ -32,7 +32,7 @@ Informationen zum ASP.net Core 1,1-Version finden Sie in [dieser PDF-Datei](http
 
 ::: moniker range="> aspnetcore-2.2"
 
-## <a name="prerequisites"></a>Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
 [.NET Core 3.0 SDK oder höher](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -217,9 +217,9 @@ Das Aktivieren der Konto Bestätigung auf einem Standort mit Benutzern sperrt al
 
 ::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Voraussetzungen
+## <a name="prerequisites"></a>Erforderliche Komponenten
 
-[.Net Core 2,2 SDK oder höher](https://www.microsoft.com/net/download/all)
+[.Net Core 2,2 SDK oder höher](https://dotnet.microsoft.com/download/dotnet-core)
 
 ## <a name="create-a-web--app-and-scaffold-identity"></a>Erstellen einer Web-App und einer Gerüstbau-Identität
 
