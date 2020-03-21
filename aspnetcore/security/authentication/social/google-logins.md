@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dieses Tutorial veranschaulicht die Integration von Google-Konto der Benutzerauthentifizierung in eine vorhandene ASP.NET Core-app.
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 10/30/2019
+ms.date: 03/19/2020
 uid: security/authentication/google-logins
-ms.openlocfilehash: 83f45143eca1be43410880bfd875a3fce1d2e9c9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a114d23c25201c9fe31ad0397efaf99fe98a312a
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654919"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989772"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Google externe Anmeldung Setup in ASP.NET Core
 
@@ -24,18 +24,21 @@ In diesem Tutorial wird gezeigt, wie Sie es Benutzern mithilfe des auf der [vorh
 * Installieren Sie [Microsoft. aspnetcore. Authentication. Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google).
 * Navigieren Sie zu [integrieren der Google-Anmeldung in Ihre Web-App](https://developers.google.com/identity/sign-in/web/devconsole-project) , und wählen Sie **Projekt konfigurieren**aus.
 * Wählen Sie im Dialogfeld **Konfigurieren des OAuth-Clients** den **Webserver**aus.
-* Legen Sie im Textfeld **autorisierte Umleitungs-URIs** den Umleitungs-URI fest. Zum Beispiel, `https://localhost:44312/signin-google`
+* Legen Sie im Textfeld **autorisierte Umleitungs-URIs** den Umleitungs-URI fest. Beispiel: `https://localhost:44312/signin-google`
 * Speichern Sie die **Client-ID** und den **geheimen Client**Schlüssel.
 * Wenn Sie den Standort bereitstellen, registrieren Sie die neue öffentliche URL in der **Google-Konsole**.
 
-## <a name="store-google-clientid-and-clientsecret"></a>Store-Google-ClientID und ClientSecret
+## <a name="store-the-google-client-id-and-secret"></a>Speichern der Google-Client-ID und des geheimen Schlüssels
 
-Speichern Sie sensible Einstellungen wie z. b. Google `Client ID` und `Client Secret` mit dem [Geheimnis-Manager](xref:security/app-secrets). Benennen Sie die Token für die Zwecke dieses Tutorials `Authentication:Google:ClientId` und `Authentication:Google:ClientSecret`:
+Speichern Sie sensible Einstellungen wie die Google-Client-ID und die geheimen Werte mit [Secret Manager](xref:security/app-secrets). Führen Sie für dieses Beispiel die folgenden Schritte aus:
 
-```dotnetcli
-dotnet user-secrets set "Authentication:Google:ClientId" "<client id>"
-dotnet user-secrets set "Authentication:Google:ClientSecret" "<client secret>"
-```
+1. Initialisieren Sie das Projekt für die geheime Speicherung gemäß den Anweisungen unter [Aktivieren der geheimen Speicherung](xref:security/app-secrets#enable-secret-storage).
+1. Speichern Sie die sensiblen Einstellungen im lokalen Geheimnis Speicher mit den geheimen Schlüsseln `Authentication:Google:ClientId` und `Authentication:Google:ClientSecret`:
+
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
+    dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
+    ```
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -49,7 +52,7 @@ Fügen Sie den Google-Dienst zu `Startup.ConfigureServices`hinzu:
 
 [!INCLUDE [default settings configuration](includes/default-settings2-2.md)]
 
-## <a name="sign-in-with-google"></a>Anmelden mit Google
+## <a name="sign-in-with-google"></a>Mit Google anmelden
 
 * Führen Sie die APP aus, und klicken Sie auf **Anmelden**. Eine Option zum Anmelden mit Google wird angezeigt.
 * Klicken Sie auf die **Google** -Schaltfläche, die zur Authentifizierung an Google umgeleitet wird.

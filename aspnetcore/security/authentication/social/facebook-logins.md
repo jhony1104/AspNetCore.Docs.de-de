@@ -4,15 +4,15 @@ author: rick-anderson
 description: Tutorial mit Codebeispielen, die die Integration der Authentifizierung von Facebook-Konto Benutzern in eine vorhandene ASP.net Core-App veranschaulichen.
 ms.author: riande
 ms.custom: seoapril2019, mvc, seodec18
-ms.date: 12/02/2019
+ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 2e4cc04c6e7ff8e5f5701cc7f9ede73dbc1b4685
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: bb26a27f026e744c7d4925aa2281bf0625fff8a2
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654883"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989778"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>Facebook externe Anmeldung Setup in ASP.NET Core
 
@@ -51,7 +51,7 @@ In diesem Tutorial mit Codebeispielen wird veranschaulicht, wie Sie es Ihren Ben
 > [!NOTE]
 > Der URI */SignIn-Facebook* wird als Standard Rückruf des Facebook-Authentifizierungs Anbieters festgelegt. Sie können den Standard-Rückruf-URI beim Konfigurieren der Facebook-Authentifizierungs Middleware über die geerbte [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) -Eigenschaft der [facebookoptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) -Klasse ändern.
 
-* Klicken Sie auf **Änderungen speichern**.
+* Klicken Sie auf **Save Changes** (Änderungen speichern).
 
 * Klicken Sie im linken Navigationsbereich auf **Einstellungen** > **grundlegenden** Link.
 
@@ -59,18 +59,19 @@ In diesem Tutorial mit Codebeispielen wird veranschaulicht, wie Sie es Ihren Ben
 
 * Wenn Sie den Standort bereitstellen, müssen Sie die Seite für die **Facebook-Anmelde** Einrichtung erneut aufrufen und einen neuen öffentlichen URI registrieren.
 
-## <a name="store-facebook-app-id-and-app-secret"></a>Store-Facebook-App-ID und App-Geheimnis
+## <a name="store-the-facebook-app-id-and-secret"></a>Speichern der Facebook-APP-ID und des geheimen Schlüssels
 
-Verknüpfen Sie sensible Einstellungen wie Facebook `App ID` und `App Secret` mit ihrer Anwendungskonfiguration mithilfe des [geheimen Managers](xref:security/app-secrets). Benennen Sie die Token für die Zwecke dieses Tutorials `Authentication:Facebook:AppId` und `Authentication:Facebook:AppSecret`.
+Speichern Sie sensible Einstellungen wie die Facebook-APP-ID und die geheimen Werte mit dem [Geheimnis-Manager](xref:security/app-secrets). Führen Sie für dieses Beispiel die folgenden Schritte aus:
+
+1. Initialisieren Sie das Projekt für die geheime Speicherung gemäß den Anweisungen unter [Aktivieren der geheimen Speicherung](xref:security/app-secrets#enable-secret-storage).
+1. Speichern Sie die sensiblen Einstellungen im lokalen Geheimnis Speicher mit den geheimen Schlüsseln `Authentication:Facebook:AppId` und `Authentication:Facebook:AppSecret`:
+
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
+    dotnet user-secrets set "Authentication:Facebook:AppSecret" "<app-secret>"
+    ```
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
-
-Führen Sie die folgenden Befehle aus, um `App ID` und `App Secret` mithilfe von Secret Manager sicher zu speichern:
-
-```dotnetcli
-dotnet user-secrets set Authentication:Facebook:AppId <app-id>
-dotnet user-secrets set Authentication:Facebook:AppSecret <app-secret>
-```
 
 ## <a name="configure-facebook-authentication"></a>Konfigurieren der Facebook-Authentifizierung
 

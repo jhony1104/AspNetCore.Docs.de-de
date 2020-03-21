@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/09/2020
+ms.date: 03/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: fe87ce76d8e181de788188b021616f2a09833585
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: ccb512392341e3eea33f4ab45740b7900f7b63f9
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083692"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989469"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.net Core blazor Webassembly zusätzliche Sicherheitsszenarien
 
@@ -27,7 +27,7 @@ Von [Javier calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="handle-token-request-errors"></a>Behandeln von tokenanforderungs-Fehlern
 
-Wenn eine Single-Page-app (Single Page APP, Spa) einen Benutzer mithilfe von Open ID Connect (oidc) authentifiziert, wird der Authentifizierungs Status lokal innerhalb der Spa und im Identitäts Anbieter (IP) in Form eines Sitzungs Cookies verwaltet, das als Ergebnis des Benutzers festgelegt wird, der seine Anmelde Informationen bereitstellt.
+Wenn eine Single-Page-Anwendung (Single-Page Application, Spa) einen Benutzer mithilfe von Open ID Connect (oidc) authentifiziert, wird der Authentifizierungs Status lokal innerhalb der Spa und im Identitäts Anbieter (IP) in Form eines Sitzungs Cookies verwaltet, das als Ergebnis des Benutzers festgelegt wird, der die Daten.
 
 Die Token, die die IP-Adresse für den Benutzer ausgibt, sind in der Regel für kurze Zeiträume (etwa eine Stunde normal) gültig, sodass die Client-App regelmäßig neue Token abrufen muss. Andernfalls wird der Benutzer nach Ablauf der gewährten Token abgemeldet. In den meisten Fällen sind die oidc-Clients in der Lage, neue Token bereitzustellen, ohne dass sich der Benutzer aufgrund des Authentifizierungs Zustands oder der Sitzung innerhalb der IP-Adresse erneut authentifizieren muss.
 
@@ -260,14 +260,14 @@ Wenn Sie sich dafür entscheiden, können Sie die Benutzeroberfläche in verschi
 
 Der `RemoteAuthenticatorView` verfügt über ein Fragment, das in der folgenden Tabelle pro Authentifizierungs Route verwendet werden kann.
 
-| Route                            | Fragment             |
-| -------------------------------- | -------------------- |
-| `authentication/login`           | `<LoggingIn>`        |
-| `authentication/login-callback`  | `<CompletingLogIn>`  |
-| `authentication/login-failed`    | `<LogInFailed>`      |
-| `authentication/logout`          | `<LoggingOut>`       |
-| `authentication/logout-callback` | `<CompletingLogOut>` |
-| `authentication/logout-failed`   | `<LogOutFailed>`     |
-| `authentication/logged-out`      | `<LogOutSucceeded>`  |
-| `authentication/profile`         | `<UserProfile>`      |
-| `authentication/register`        | `<Registering>`      |
+| Route                            | Fragment                |
+| -------------------------------- | ----------------------- |
+| `authentication/login`           | `<LoggingIn>`           |
+| `authentication/login-callback`  | `<CompletingLoggingIn>` |
+| `authentication/login-failed`    | `<LogInFailed>`         |
+| `authentication/logout`          | `<LogOut>`              |
+| `authentication/logout-callback` | `<CompletingLogOut>`    |
+| `authentication/logout-failed`   | `<LogOutFailed>`        |
+| `authentication/logged-out`      | `<LogOutSucceeded>`     |
+| `authentication/profile`         | `<UserProfile>`         |
+| `authentication/register`        | `<Registering>`         |

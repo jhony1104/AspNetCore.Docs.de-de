@@ -4,15 +4,15 @@ author: rick-anderson
 description: In diesem Tutorial wird die Integration der Authentifizierung von Twitter-Konto Benutzern in eine vorhandene ASP.net Core-App veranschaulicht.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/06/2019
+ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 4710c033018710ce3620f8d7221ae2253b2c0b69
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b848486415fd72ce6180b4cf8fc1ba00410d694a
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654301"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989739"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>Externe Twitter-Anmelde Einrichtung mit ASP.net Core
 
@@ -39,16 +39,19 @@ Dieses Beispiel zeigt, wie Sie es Benutzern mithilfe eines auf der [vorherigen S
 
 * Füllen Sie das restliche Formular aus, und klicken Sie auf **Erstellen**. Es werden neue Anwendungsdetails angezeigt:
 
-## <a name="storing-twitter-consumer-api-key-and-secret"></a>Speichern von Twitter-Consumer-API-Schlüssel und-Geheimnis
+## <a name="store-the-twitter-consumer-api-key-and-secret"></a>Speichern Sie den Schlüssel und das Geheimnis der Twitter-consumerapi
 
-Führen Sie die folgenden Befehle aus, um `ClientId` und `ClientSecret` mithilfe von [Secret Manager](xref:security/app-secrets)sicher zu speichern:
+Speichern Sie sensible Einstellungen wie den Schlüssel der Twitter-Consumer-API und den geheimen Schlüssel mit [Secret Manager](xref:security/app-secrets). Führen Sie für dieses Beispiel die folgenden Schritte aus:
 
-```dotnetcli
-dotnet user-secrets set Authentication:Twitter:ConsumerAPIKey <Key>
-dotnet user-secrets set Authentication:Twitter:ConsumerSecret <Secret>
-```
+1. Initialisieren Sie das Projekt für die geheime Speicherung gemäß den Anweisungen unter [Aktivieren der geheimen Speicherung](xref:security/app-secrets#enable-secret-storage).
+1. Speichern Sie die sensiblen Einstellungen im lokalen Geheimnis Speicher mit den Schlüsseln `Authentication:Twitter:ConsumerKey` und `Authentication:Twitter:ConsumerSecret`:
 
-Verknüpfen Sie sensible Einstellungen wie Twitter `Consumer Key` und `Consumer Secret` mit ihrer Anwendungskonfiguration mithilfe des [geheimen Managers](xref:security/app-secrets). Benennen Sie die Token für die Zwecke dieses Beispiels `Authentication:Twitter:ConsumerKey` und `Authentication:Twitter:ConsumerSecret`.
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Twitter:ConsumerAPIKey" "<consumer-api-key>"
+    dotnet user-secrets set "Authentication:Twitter:ConsumerSecret" "<consumer-secret>"
+    ```
+
+[!INCLUDE[](~/includes/environmentVarableColon.md)]
 
 Diese Token finden Sie auf der Registerkarte **Schlüssel und Zugriffs Token** , nachdem Sie eine neue Twitter-Anwendung erstellt haben:
 
