@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: 48136d0717998df3311dd5177688e062d0009176
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: a65d47e55960d6e7bfeb672c0a1e6a7a305ad7ee
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083548"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989489"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>Sichern von Blazor-WebAssembly für ASP.NET Core
 
@@ -39,7 +39,7 @@ Eine weitere Option zum Authentifizieren von SPAs ist die Verwendung von SameSit
 * Serverendpunkte erfordern keinen Schutz gegenüber [websiteübergreifender Anforderungsfälschung (CSRF, Cross-Site Request Forgery)](xref:security/anti-request-forgery), da die Token explizit gesendet werden. Dadurch können Sie Blazor-WebAssembly-Apps zusammen mit MVC- oder Razor Pages-Apps hosten.
 * Token haben eingeschränktere Berechtigungen als Cookies. Beispielsweise können Token nicht zum Verwalten des Benutzerkontos oder zur Änderung eines Benutzerkennworts verwendet werden, es sei denn, diese Funktionalität wird explizit implementiert.
 * Token haben eine kürzere Lebensdauer, standardmäßig eine Stunde, wodurch sich das Angriffsfenster verkleinert. Token können auch zu jeder Zeit widerrufen werden.
-* Eigenständige JWTs bieten dem Client und dem Server Garantien zum Authentifizierungsprozess. Ein Client hat zum Beispiel die Möglichkeiten, zu erkennen und zu überprüfen, dass die von ihm empfangenen Token legitim sind und als Teil eines gegebenen Authentifizierungsprozesses ausgegeben wurden. Wenn Dritte versuchen, ein Token inmitten des Authentifizierungsprozesses zu tauschen, kann der Client das ausgetauschte Token erkennen und so die Nutzung vermeiden.
+* Eigenständige JWTs bieten dem Client und dem Server Garantien zum Authentifizierungsprozess. Ein Client verfügt zum Beispiel über die Mittel, um zu erkennen und zu überprüfen, dass die von ihm empfangenen Token legitim sind und im Rahmen eines bestimmten Authentifizierungsprozesses ausgegeben wurden. Wenn Dritte versuchen, ein Token inmitten des Authentifizierungsprozesses zu tauschen, kann der Client das ausgetauschte Token erkennen und so die Nutzung vermeiden.
 * Token mit OAuth und OIDC, die sich nicht auf den Benutzer-Agent verlassen, verhalten sich ordnungsgemäß, um zu gewährleisten, dass die App sicher ist.
 * Tokenbasierte Protokolle wie OAuth und OIDC lassen die Authentifizierung und Autorisierung gehosteter und eigenständiger Apps mit denselben Sicherheitsmerkmalen zu.
 

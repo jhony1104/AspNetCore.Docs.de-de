@@ -1,27 +1,29 @@
 ---
 title: ASP.NET Core Blazor-Datenbindung
 author: guardrex
-description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponenten und DOM-Elemente in Blazor-Apps kennen.
+description: In diesem Artikel lernen Sie Datenbindungsfeatures für Komponenten und DOM-Elemente in Blazor-Apps kennen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/24/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/data-binding
-ms.openlocfilehash: 92377730b9d353a507ffd384710fb979affe7265
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5b49d2598a451ee607e034913bd1aeaa03f941c6
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648223"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511196"
 ---
 # <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET Core Blazor-Datenbindung
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
-Die Datenbindung an Komponenten und DOM-Elemente wird mit dem Attribut [`@bind`](xref:mvc/views/razor#bind) erreicht. Das folgende Beispiel bindet eine `CurrentValue`-Eigenschaft an den Wert des Textfelds:
+Razor-Komponenten stellen Features zur Datenbindung über ein HTML-Elementattribut namens [`@bind`](xref:mvc/views/razor#bind) bereit, mit einem Feld, einer Eigenschaft oder einem Razor-Ausdruckswert.
+
+Das folgende Beispiel bindet die `CurrentValue`-Eigenschaft an den Wert des Textfelds:
 
 ```razor
 <input @bind="CurrentValue" />
@@ -78,6 +80,8 @@ Verwenden Sie `@bind-{ATTRIBUTE}` mit der `@bind-{ATTRIBUTE}:event`-Syntax, um a
     private string _paragraphStyle = "color:red";
 }
 ```
+
+Bei der Attributbindung wird die Groß- und Kleinschreibung berücksichtigt. Beispielsweise ist `@bind` zulässig, aber `@Bind` ist unzulässig.
 
 ## <a name="unparsable-values"></a>Nicht analysierbare Werte
 

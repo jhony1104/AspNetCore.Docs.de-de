@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 35accdd2f65ac5430525be88cc621094e37d3e40
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1a4efcd4e9e3296e9c208f1419bc86734951b0c1
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650851"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511521"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Neuerungen in ASP.NET Core 3.0
 
@@ -517,7 +517,7 @@ ASP.NET Core 3.0 enthält viele Verbesserungen, die die Arbeitsspeichernutzung 
 
 ## <a name="aspnet-core-30-only-runs-on-net-core-30"></a>ASP.NET Core 3.0 funktioniert nur in .NET Core 3.0
 
-Ab ASP.NET Core 3.0 ist .NET Framework kein unterstütztes Zielframework mehr. Projekte, die auf .NET Framework abzielen, können mit dem [.NET Core 2.1 LTS-Release](https://www.microsoft.com/net/download/dotnet-core/2.1) weiterhin mit vollständiger Unterstützung ausgeführt werden. Die meisten auf ASP.NET Core 2.1.x bezogenen Pakete werden unbegrenzt unterstützt, auch nach dem dreijährigen LTS-Zeitraum für .NET Core 2.1.
+Ab ASP.NET Core 3.0 ist .NET Framework kein unterstütztes Zielframework mehr. Projekte, die auf .NET Framework abzielen, können mit dem [.NET Core 2.1 LTS-Release](https://dotnet.microsoft.com/download/dotnet-core/2.1) weiterhin mit vollständiger Unterstützung ausgeführt werden. Die meisten auf ASP.NET Core 2.1.x bezogenen Pakete werden unbegrenzt unterstützt, auch nach dem dreijährigen LTS-Zeitraum für .NET Core 2.1.
 
 Informationen zur Migration finden Sie unter [Portieren Ihres Codes von .NET Framework auf .NET Core](/dotnet/core/porting/).
 
@@ -542,3 +542,4 @@ Eine vollständige Liste der Assemblys, die aus dem freigegebenen Framework entf
 ## Additional information
 For the complete list of changes, see the [ASP.NET Core 3.0 Release Notes](WHERE IS THIS????).
 -->
+ 

@@ -5,16 +5,16 @@ description: Erstellen Sie Schritt für Schritt eine Blazor-App.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/13/2020
+ms.date: 03/13/2020
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 8830dcf26b58b5f5fdd36b60298e7b365f99bdd9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 8b3802a6ffe3613e5d4ca65c57fafc3f404c8329
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644863"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434498"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
@@ -24,9 +24,9 @@ Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github
 
 In diesem Tutorial erfahren Sie, wie Sie eine Blazor-App erstellen und ändern.
 
-Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor-Projekt für dieses Tutorial zu erstellen. Name der *ToDoList* für das Projekt.
-
 ## <a name="build-components"></a>Erstellen von Komponenten
+
+1. Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um ein Blazor-Projekt für dieses Tutorial zu erstellen. Name der *ToDoList* für das Projekt.
 
 1. Navigieren Sie zu jeder der drei Seiten der App im Ordner *Pages*: „Home“, „Counter“ und „Fetch data“. Diese Seiten werden durch die Razor-Komponentendateien *Index.razor*, *Counter.razor* und *FetchData.razor* implementiert.
 
@@ -133,14 +133,14 @@ Eine [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleif
 
 Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste implementiert.
 
-1. Fügen Sie der App im Ordner *Pages* eine leere Datei mit dem Namen *Todo.razor* hinzu:
+1. Fügen Sie der App im Ordner *Seiten* eine neue `Todo`-Razor-Komponente hinzu. Klicken Sie in Visual Studio mit der rechten Maustaste auf den Ordner **Seiten**, und klicken Sie auf **Hinzufügen** > **Neues Element** > **Razor-Komponente**. Nennen Sie die Datei der Komponente *Todo.razor*. Fügen Sie dem Ordner **Seiten** in anderen Entwicklungsumgebungen eine leere Datei namens *Todo.razor* hinzu.
 
 1. Geben Sie das ursprüngliche Markup für die Komponente an:
 
    ```razor
    @page "/todo"
 
-   <h1>Todo</h1>
+   <h3>Todo</h3>
    ```
 
 1. Fügen Sie der Navigationsleiste die `Todo`-Komponente hinzu.
