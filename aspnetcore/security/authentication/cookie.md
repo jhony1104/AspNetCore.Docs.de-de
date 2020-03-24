@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 02/11/2020
 uid: security/authentication/cookie
-ms.openlocfilehash: 64f881441a7a7f9a5529cb6ee5ce81142ccd69e6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b7c8b2cccb27dd6818330b17439675e41bfef013
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653419"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219206"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>Verwenden der Cookie-Authentifizierung ohne ASP.net Core Identität
 
@@ -57,7 +57,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Cookie-Richtlinien Middleware
 
-[Cookingrichtlinienmiddleware](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) ermöglicht Cookingrichtlinienfunktionen. Das Hinzufügen der Middleware zur APP-Verarbeitungs Pipeline ist die Reihenfolge,&mdash;Sie nur auf Downstreamkomponenten wirkt, die in der Pipeline registriert sind.
+[Cookie Policy Middleware](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) Cookingrichtlinienmiddleware ermöglicht cookingrichtlinienfunktionen Das Hinzufügen der Middleware zur APP-Verarbeitungs Pipeline ist die Reihenfolge,&mdash;Sie nur auf Downstreamkomponenten wirkt, die in der Pipeline registriert sind.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
@@ -89,6 +89,8 @@ Erstellen Sie eine <xref:System.Security.Claims.ClaimsPrincipal>, um ein Cookie 
 Erstellen Sie eine <xref:System.Security.Claims.ClaimsIdentity> mit allen erforderlichen <xref:System.Security.Claims.Claim>s, und rufen Sie <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> auf, um den Benutzer anzumelden:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 `SignInAsync` erstellt ein verschlüsseltes Cookie und fügt es der aktuellen Antwort hinzu. Wenn `AuthenticationScheme` nicht angegeben ist, wird das Standardschema verwendet.
 
@@ -274,7 +276,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Cookie-Richtlinien Middleware
 
-[Cookingrichtlinienmiddleware](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) ermöglicht Cookingrichtlinienfunktionen. Das Hinzufügen der Middleware zur APP-Verarbeitungs Pipeline ist die Reihenfolge,&mdash;Sie nur auf Downstreamkomponenten wirkt, die in der Pipeline registriert sind.
+[Cookie Policy Middleware](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) Cookingrichtlinienmiddleware ermöglicht cookingrichtlinienfunktionen Das Hinzufügen der Middleware zur APP-Verarbeitungs Pipeline ist die Reihenfolge,&mdash;Sie nur auf Downstreamkomponenten wirkt, die in der Pipeline registriert sind.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
@@ -451,7 +453,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Weitere Ressourcen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authorization/claims>
