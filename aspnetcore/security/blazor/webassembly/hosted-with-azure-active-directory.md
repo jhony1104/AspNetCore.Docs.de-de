@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 2ddbc9791ec9b31d55c9c6017d9d6d5be5c8dec8
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.openlocfilehash: fc16a7212254e73efd4cea8155975f293e5d9ebb
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/17/2020
-ms.locfileid: "79434485"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219284"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sichern eines ASP.net Core Blazor gehosteten Webassembly-App mit Azure Active Directory
 
@@ -237,7 +237,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ### <a name="index-page"></a>Indexseite
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ### <a name="app-component"></a>App-Komponente
 

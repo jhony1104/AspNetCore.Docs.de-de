@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: b4d32e91b4013cbea37baecb972a535d2874d3d1
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.openlocfilehash: bb03ef1e6d216cfc06e2b91919c64f92f2ef634e
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/17/2020
-ms.locfileid: "79434459"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219271"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Sichern eines ASP.net Core Blazor eigenständigen Webassembly-App mit Azure Active Directory B2C
 
@@ -31,14 +31,14 @@ So erstellen Sie eine eigenständige Blazor Webassembly-APP, die [Azure Active D
 
    * [Erstellen Sie einen Aad B2C](/azure/active-directory-b2c/tutorial-create-tenant) Mandanten &ndash; notieren Sie die folgenden Informationen:
 
-     1 \. Aad B2C Instanz (z. b. `https://contoso.b2clogin.com/`, einschließlich des nachgestellten Schrägstrichs)<br>
-     2 \. Aad B2C Mandanten Domäne (z. b. `contoso.onmicrosoft.com`)
+     1\. Aad B2C Instanz (z. b. `https://contoso.b2clogin.com/`, einschließlich des nachgestellten Schrägstrichs)<br>
+     2\. Aad B2C Mandanten Domäne (z. b. `contoso.onmicrosoft.com`)
 
    * [Registrieren Sie eine Webanwendung](/azure/active-directory-b2c/tutorial-register-applications) &ndash; nehmen Sie bei der APP-Registrierung folgende Auswahl vor:
 
-     1 \. Legen Sie **Web-App/Web-API** auf **Ja**fest.<br>
-     2 \. Legen Sie **implizites Flow zulassen** auf **Ja**fest.<br>
-     3 \. Fügen Sie eine **Antwort-URL** `https://localhost:5001/authentication/login-callback`hinzu.
+     1\. Legen Sie **Web-App/Web-API** auf **Ja**fest.<br>
+     2\. Legen Sie **implizites Flow zulassen** auf **Ja**fest.<br>
+     3\. Fügen Sie eine **Antwort-URL** `https://localhost:5001/authentication/login-callback`hinzu.
 
      Notieren Sie die Anwendungs-ID (Client-ID) (z. b. `11111111-1111-1111-1111-111111111111`).
 
@@ -103,7 +103,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="index-page"></a>Indexseite
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ## <a name="app-component"></a>App-Komponente
 

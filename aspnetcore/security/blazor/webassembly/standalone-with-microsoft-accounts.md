@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 6883af3486256e7c6905626d8da09e8ae0c4a896
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: be73bec971f96bd64afc735a1ea750d47c7bc383
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083650"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219258"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern eines ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
 
@@ -31,18 +31,18 @@ So erstellen Sie eine eigenständige Blazor Webassembly-APP, die [Microsoft-Kont
 
    Registrieren Sie eine Aad-App im Bereich **Azure Active Directory** > **App-Registrierungen** des Azure-Portal:
 
-   1 \. Geben Sie einen **Namen** für die APP an (z. b. **Blazor Aad-Client**).<br>
-   2 \. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.<br>
-   3 \. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web**und einen Umleitungs-URI `https://localhost:5001/authentication/login-callback`.<br>
-   4 \. Deaktivieren Sie das Kontrollkästchen **Berechtigungen** > **erteilen Sie Administrator Berechtigungen für OpenID und offline_access Berechtigungen** .<br>
-   5 \. Wählen Sie **Registrieren**.
+   1\. Geben Sie einen **Namen** für die APP an (z. b. **Blazor Aad-Client**).<br>
+   2\. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.<br>
+   3\. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web**und einen Umleitungs-URI `https://localhost:5001/authentication/login-callback`.<br>
+   4\. Deaktivieren Sie das Kontrollkästchen **Berechtigungen** > **erteilen Sie Administrator Berechtigungen für OpenID und offline_access Berechtigungen** .<br>
+   5\. Wählen Sie **Registrieren**.
 
    In der **Authentifizierung** > **Platt Form Konfigurationen** > **Web**:
 
-   1 \. Vergewissern Sie sich, dass der **Umleitungs-URI** `https://localhost:5001/authentication/login-callback` vorhanden ist.<br>
-   2 \. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.<br>
-   3 \. Die verbleibenden Standardwerte für die APP sind für diese Art von akzeptabel.<br>
-   4 \. Wählen Sie die Schaltfläche **Speichern** aus.
+   1\. Vergewissern Sie sich, dass der **Umleitungs-URI** `https://localhost:5001/authentication/login-callback` vorhanden ist.<br>
+   2\. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.<br>
+   3\. Die verbleibenden Standardwerte für die APP sind für diese Art von akzeptabel.<br>
+   4\. Wählen Sie die Schaltfläche **Speichern** aus.
 
    Notieren Sie die Anwendungs-ID (Client-ID) (z. b. `11111111-1111-1111-1111-111111111111`).
 
@@ -93,7 +93,7 @@ Die `AddMsalAuthentication`-Methode akzeptiert einen Rückruf, um die Parameter 
 
 ## <a name="index-page"></a>Indexseite
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ## <a name="app-component"></a>App-Komponente
 
