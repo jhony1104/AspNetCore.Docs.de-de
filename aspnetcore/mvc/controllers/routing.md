@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um 
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: be7da9eeaf64c2f52c095b5179ccc22db43d57c3
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.openlocfilehash: c1c0d978714718af1de0f627e50a54f66ed391ed
+ms.sourcegitcommit: 4b166b49ec557a03f99f872dd069ca5e56faa524
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80242573"
+ms.lasthandoff: 03/27/2020
+ms.locfileid: "80362640"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -264,7 +264,7 @@ Beim Attributrouting werden Aktionen mithilfe von Attributen direkt Routenvorlag
 
 Im vorangehenden Code wird <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> in `UseEndpoints` aufgerufen, um Attribut Routing Controller zuzuordnen.
 
-Im folgenden Beispiel:
+Siehe folgendes Beispiel:
 
 * Die vorangehende `Configure` Methode wird verwendet.
 * `HomeController` entspricht einem Satz von URLs, die mit der herkömmlichen Standardroute `{controller=Home}/{action=Index}/{id?}` übereinstimmen.
@@ -420,7 +420,7 @@ In der folgenden Tabelle werden die `[Route]` Attribute im vorangehenden Code er
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | Ja | `"Home"` |
 | `[Route("Index")]` | Ja | `"Home/Index"` |
-| `[Route("/")]` | **No** | `""` |
+| `[Route("/")]` | **Nein** | `""` |
 | `[Route("About")]` | Ja | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
@@ -458,7 +458,7 @@ Durch das Hinzufügen von `Order` zu einem der Routen Attribute wird die Mehrdeu
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo3Controller.cs?name=snippet3& highlight=2)]
 
-Mit dem vorangehenden Code führt `/home` den `HomeController.Index` Endpunkt aus. Um zum `MyDemoController.MyIndex`zu gelangen, fordern Sie `/home/MyIndex`an. **Hinweis:**
+Mit dem vorangehenden Code führt `/home` den `HomeController.Index` Endpunkt aus. Um zum `MyDemoController.MyIndex`zu gelangen, fordern Sie `/home/MyIndex`an. **Hinweis**:
 
 * Der vorangehende Code ist ein Beispiel oder ein schlechtes Routing Design. Es wurde verwendet, um die `Order`-Eigenschaft zu veranschaulichen.
 * Die `Order`-Eigenschaft löst nur die Mehrdeutigkeit auf, diese Vorlage kann nicht abgeglichen werden. Es wäre besser, die `[Route("Home")]` Vorlage zu entfernen.
@@ -712,7 +712,7 @@ Wenn der Wert `{ d = Donovan }` hinzugefügt wird:
 
 Möglicherweise erwarten Sie dieses Problem mit der Standardroute `{controller}/{action}/{id?}`. Dieses Problem tritt in der Praxis selten auf, weil `Url.Action` immer explizit einen `controller` und `action` Wert angibt.
 
-Mehrere über Ladungen von [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) nehmen ein Routen Werte Objekt an, um Werte für andere Routen Parameter als `controller` und `action`bereitzustellen. Das Routen Werte Objekt wird häufig mit `id`verwendet. Beispielsweise `Url.Action("Buy", "Products", new { id = 17 })`. Das Routen Werte Objekt:
+Mehrere über Ladungen von [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) nehmen ein Routen Werte Objekt an, um Werte für andere Routen Parameter als `controller` und `action`bereitzustellen. Das Routen Werte Objekt wird häufig mit `id`verwendet. Beispiel: `Url.Action("Buy", "Products", new { id = 17 })`. Das Routen Werte Objekt:
 
 * Gemäß der Konvention ist in der Regel ein Objekt des anonymen Typs.
 * Kann eine `IDictionary<>` oder [poco](https://wikipedia.org/wiki/Plain_old_CLR_object)sein).
@@ -846,6 +846,8 @@ Der folgende Code generiert eine URL zum `/Zebra/Users/AddUser`:
 
  * Die [mydisplayrouteinfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) -Methode ist im [Beispiel Download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) enthalten und wird zum Anzeigen von Routing Informationen verwendet.
 * [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+
+[!INCLUDE[](~/includes/dbg-route.md)]
 
 ::: moniker-end
 
