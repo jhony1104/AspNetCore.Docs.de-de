@@ -5,17 +5,17 @@ description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponente
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: de1a37ffd9456c956e3d84fcc69431ecb794513c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649081"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218933"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
@@ -66,7 +66,7 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
    services.AddServerSideBlazor();
    ```
 
-1. Fügen Sie den Blazor Hub-Endpunkt in `Startup.Configure` zu `app.UseEndpoints` hinzu:
+1. Fügen Sie in `Startup.Configure` den Blazor Hub-Endpunkt zu `app.UseEndpoints` hinzu:
 
    ```csharp
    endpoints.MapBlazorHub();
@@ -225,31 +225,10 @@ Weitere Informationen finden Sie unter <xref:blazor/components#import-components
 
 *In diesem Abschnitt wird das Hinzufügen von Komponenten zu Seiten oder Ansichten behandelt, wenn die Komponenten nicht direkt über Benutzeranforderungen routingfähig sind.*
 
-Verwenden Sie das `Component`-Taghilfsprogramm zum Rendern einer Komponente einer Seite oder Ansicht:
-
-```cshtml
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-IncrementAmount="10" />
-```
-
-Der Parametertyp muss mit JSON serialisierbar sein, in der Regel bedeutet das, dass der Typ über einen Standardkonstruktor und festlegbare Eigenschaften verfügen muss. Sie können beispielsweise einen Wert für `IncrementAmount` festlegen, weil `IncrementAmount` vom Typ `int` ist. Dabei handelt es sich um einen primitiven Typ, der vom JSON-Serialisierungsmodul unterstützt wird.
-
-`RenderMode` konfiguriert folgende Einstellungen für die Komponente:
-
-* Ob die Komponente zuvor für die Seite gerendert wird
-* Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
-
-| `RenderMode`        | Beschreibung |
-| ------------------- | ----------- |
-| `ServerPrerendered` | Rendert die Komponente in statische HTML und fügt einen Marker für eine Blazor Server-App hinzu. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
-| `Server`            | Rendert einen Marker für eine Blazor Server-App. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
-| `Static`            | Rendert die Komponente in statisches HTML-Format. |
-
-Seiten und Ansichten können zwar Komponenten verwenden, doch das Gegenteil ist nicht der Fall. Komponenten können ansichts- und seitenspezifische Szenarios nicht nutzen, z. B. Teilansichten und Abschnitte. Zum Verwenden der Logik einer Teilansicht in einer Komponente müssen Sie die Logik in die Komponente verlagern.
-
-Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.
+Verwenden Sie das [Komponententaghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) zum Rendern einer Komponente einer Seite oder Ansicht.
 
 Weitere Informationen über das Rendern von Komponenten, den Komponentenzustand und das `Component`-Taghilfsprogramm finden Sie in den folgenden Artikeln:
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

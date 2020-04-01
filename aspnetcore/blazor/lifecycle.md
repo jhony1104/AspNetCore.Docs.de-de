@@ -5,17 +5,17 @@ description: Erfahren Sie, wie die Lebenszyklusmethoden von Razor-Komponenten in
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: ecacd0a9728cbefd716e9dc7cd8a8c62f3df6e0d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 831f575afa6ce11d06c016d43ecd1bb59d09eab6
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647581"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218907"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor-Lebenszyklus
 
@@ -56,6 +56,8 @@ Informationen zum Verhindern, dass Entwicklercode in `OnInitializedAsync` zweima
 
 Während für eine Blazor Server-App ein Prerendering durchgeführt wird, sind bestimmte Aktionen (z. B. Aufrufe in JavaScript) nicht möglich, da noch keine Verbindung mit dem Browser hergestellt wurde. Komponenten müssen wahrscheinlich unterschiedlich rendern, wenn dafür ein Prerendering durchgeführt wurde. Weitere Informationen finden Sie im Abschnitt [Ermitteln des Prerenderings einer App](#detect-when-the-app-is-prerendering).
 
+Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Beseitigung aufheben. Weitere Informationen finden Sie im Abschnitt [Beseitigung von Komponenten mit IDisposable](#component-disposal-with-idisposable).
+
 ### <a name="before-parameters-are-set"></a>Bevor die Parameter festgelegt werden
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*> legt Parameter fest, die vom übergeordneten Element der Komponente in der Renderstruktur bereitgestellt werden:
@@ -74,6 +76,8 @@ public override async Task SetParametersAsync(ParameterView parameters)
 Die Standardimplementierung von `SetParametersAsync` legt den Wert der einzelnen Eigenschaften mit dem Attribut `[Parameter]` oder `[CascadingParameter]` fest, die einen entsprechenden Wert in `ParameterView` aufweist. Parameter, die keinen entsprechenden Wert in `ParameterView` haben, bleiben unverändert.
 
 Wenn `base.SetParametersAync` nicht aufgerufen wird, kann der benutzerdefinierte Code den eingehenden Parameterwert in jeder gewünschten Weise interpretieren. Beispielsweise ist es nicht erforderlich, die eingehenden Parameter den Eigenschaften der Klasse zuzuordnen.
+
+Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Beseitigung aufheben. Weitere Informationen finden Sie im Abschnitt [Beseitigung von Komponenten mit IDisposable](#component-disposal-with-idisposable).
 
 ### <a name="after-parameters-are-set"></a>Nachdem die Parameter festgelegt wurden
 
@@ -100,6 +104,8 @@ protected override void OnParametersSet()
     ...
 }
 ```
+
+Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Beseitigung aufheben. Weitere Informationen finden Sie im Abschnitt [Beseitigung von Komponenten mit IDisposable](#component-disposal-with-idisposable).
 
 ### <a name="after-component-render"></a>Nach dem Rendern der Komponente
 
@@ -136,6 +142,8 @@ protected override void OnAfterRender(bool firstRender)
 ```
 
 `OnAfterRender` und `OnAfterRenderAsync` *werden beim Prerendering auf dem Server nicht aufgerufen.*
+
+Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Beseitigung aufheben. Weitere Informationen finden Sie im Abschnitt [Beseitigung von Komponenten mit IDisposable](#component-disposal-with-idisposable).
 
 ### <a name="suppress-ui-refreshing"></a>Unterdrücken der UI-Aktualisierung
 
@@ -188,6 +196,16 @@ Wenn eine Komponente <xref:System.IDisposable> implementiert, wird die [Dispose-
 
 > [!NOTE]
 > Der Aufruf von <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> in `Dispose` wird nicht unterstützt. `StateHasChanged` könnte im Rahmen des Beendens des Renderers aufgerufen werden, sodass die Anforderung von UI-Updates an diesem Punkt nicht unterstützt wird.
+
+Kündigen Sie die .NET-Ereignisabonnements der Ereignishandler. Die folgenden [Blazor-Formularbeispiele](xref:blazor/forms-validation) veranschaulichen das Aufheben der Einbindung eines Ereignishandlers in der `Dispose`-Methode:
+
+* Ansatz mit einem privatem Feld und Lambdaausdruck
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+
+* Ansatz mit einer privaten Methode
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="handle-errors"></a>Behandeln von Fehlern
 

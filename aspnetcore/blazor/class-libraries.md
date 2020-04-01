@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Komponenten aus einer externen Komponentenbibliot
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 03/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: 32088b43f91174596f6b9251d36782e806f966b9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: f2cc57638922bd1f6ab036adb2ed37209d14c5b0
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647989"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218765"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>Klassenbibliotheken für ASP.NET Core-Razor-Komponenten
 
@@ -114,6 +114,10 @@ Welcome to your new app.
 
 Fügen Sie die `@using MyComponentLib1`-Direktive in die *_Import.razor*-Datei der obersten Ebene ein, um die Komponenten der Bibliothek für ein ganzes Projekt zur Verfügung zu stellen. Fügen Sie die Direktive auf beliebiger Ebene zu einer *_Import.razor*-Datei hinzu, um den Namespace auf eine einzelne Seite oder eine Reihe von Seiten innerhalb eines Ordners anzuwenden.
 
+## <a name="create-a-razor-components-class-library-with-static-assets"></a>Erstellen einer Klassenbibliothek für Razor-Komponenten mit statischen Objekten
+
+Eine RCL kann statische Objekte enthalten. Die statischen Objekte sind für jede App verfügbar, die die Bibliothek nutzt. Weitere Informationen finden Sie unter <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.
+
 ## <a name="build-pack-and-ship-to-nuget"></a>Erstellen, Verpacken und Liefern an NuGet
 
 Da es sich bei Komponentenbibliotheken um standardmäßige .NET-Bibliotheken handelt, unterscheidet sich das Verpacken und Liefern an NuGet nicht vom Verpacken und Liefern einer beliebigen Bibliothek an NuGet. Das Verpacken wird mit dem Befehl [dotnet pack](/dotnet/core/tools/dotnet-pack) in einer Befehlsshell durchgeführt:
@@ -124,10 +128,7 @@ dotnet pack
 
 Laden Sie das Paket in NuGet mit dem Befehl [dotnet nuget push](/dotnet/core/tools/dotnet-nuget-push) in einer Befehlsshell hoch.
 
-## <a name="create-a-razor-components-class-library-with-static-assets"></a>Erstellen einer Klassenbibliothek für Razor-Komponenten mit statischen Objekten
-
-Eine RCL kann statische Objekte enthalten. Die statischen Objekte sind für jede App verfügbar, die die Bibliothek nutzt. Weitere Informationen finden Sie unter <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.
-
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:razor-pages/ui-class>
+* [Hinzufügen einer XML-Linkerkonfigurationsdatei zu einer Bibliothek](xref:host-and-deploy/blazor/configure-linker#add-an-xml-linker-configuration-file-to-a-library)

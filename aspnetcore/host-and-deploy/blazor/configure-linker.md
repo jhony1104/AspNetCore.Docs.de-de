@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie den IL-Linker (Intermediate Language, Zwische
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/10/2020
+ms.date: 03/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: b08ec26fb8d139223c57774600bc3cb19a56ac49
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083292"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218660"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
 
@@ -36,7 +36,7 @@ Das Verknüpfen von Blazor-Apps kann mithilfe der folgenden MSBuild-Funktionen k
 
 ## <a name="control-linking-with-an-msbuild-property"></a>Steuern der Verknüpfung mit einer MSBuild-Eigenschaft
 
-Verknüpfungen werden aktiviert, wenn eine App in der `Release`-Konfiguration erstellt wird. Sie können dieses Verhalten ändern, indem Sie die MSBuild-Eigenschaft `BlazorWebAssemblyEnableLinking` in der Projektdatei konfigurieren:
+Die Verknüpfung wird aktiviert, wenn eine App in der `Release`-Konfiguration erstellt wird. Sie können dieses Verhalten ändern, indem Sie die MSBuild-Eigenschaft `BlazorWebAssemblyEnableLinking` in der Projektdatei konfigurieren:
 
 ```xml
 <PropertyGroup>
@@ -50,11 +50,11 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 
 ```xml
 <ItemGroup>
-  <BlazorLinkerDescriptor Include="Linker.xml" />
+  <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
 </ItemGroup>
 ```
 
-*Linker.xml*:
+*LinkerConfig.xml:*
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -86,7 +86,21 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 </linker>
 ```
 
-Weitere Informationen finden Sie unter [IL Linker: Syntax of xml descriptor (IL-Linker: Syntax des XML-Deskriptors)](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor).
+Weitere Informationen finden Sie unter [Verknüpfen von XML-Beispieldateien (mono/linker-GitHub-Repository)](https://github.com/mono/linker#link-xml-file-examples).
+
+## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>Hinzufügen einer XML-Linkerkonfigurationsdatei zu einer Bibliothek
+
+Fügen Sie eine XML-Linkerkonfigurationsdatei als eingebettete Ressource zur Bibliothek hinzu, um den Linker für eine spezifische Bibliothek zu konfigurieren. Die eingebettete Ressource muss denselben Namen wie die Assembly aufweisen.
+
+Im folgenden Beispiel wird die Datei *LinkerConfig.xml* als eingebettete Ressource festgelegt, die denselben Namen wie die Assembly der Bibliothek aufweist:
+
+```xml
+<ItemGroup>
+  <EmbeddedResource Include="LinkerConfig.xml">
+    <LogicalName>$(MSBuildProjectName).xml</LogicalName>
+  </EmbeddedResource>
+</ItemGroup>
+```
 
 ### <a name="configure-the-linker-for-internationalization"></a>Konfigurieren des Linkers für die Internationalisierung
 

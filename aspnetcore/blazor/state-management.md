@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie den Zustand in Blazor-Server-Apps beibehalten
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 990d392b0e1658774256626eb277701e40287b79
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e8a1959a8fc05ea59362bb5824181a9d2e418811
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646525"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218868"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
 
@@ -242,7 +242,7 @@ Während des Prerenderings:
 
 Eine Möglichkeit, den Fehler zu beheben, besteht darin, das Prerendering zu deaktivieren. Dies ist normalerweise die beste Lösung, wenn die App den browserbasierten Speicher stark nutzt. Das Prerendering erhöht die Komplexität und bringt der App keinen Nutzen, da die App keinen nützlichen Inhalt vorab rendern kann, bevor nicht `localStorage` oder `sessionStorage` verfügbar sind.
 
-Öffnen Sie die Datei *Pages/_Host.cshtml*, und ändern Sie den `render-mode`-Aufruf des `Component`-Taghilfselements in `Server`, um das Prerendering zu deaktivieren.
+Öffnen Sie die Datei *Pages/_Host.cshtml*, und ändern Sie die `render-mode`-Eigenschaft des [Komponententaghilfsprogramms](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) in <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>, um das Prerendering zu deaktivieren.
 
 Das Prerendering ist möglicherweise nützlich für andere Seiten, die `localStorage` oder `sessionStorage` nicht verwenden. Damit das Prerendering aktiviert bleibt, verschieben Sie den Ladevorgang, bis der Browser mit der Verbindung verbunden ist. Im Folgenden finden Sie ein Beispiel für das Speichern eines Zählerwerts:
 
