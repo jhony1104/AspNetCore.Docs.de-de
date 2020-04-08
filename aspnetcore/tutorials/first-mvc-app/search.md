@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 89f1fa84783430f160ca0b840bf7ae9699520cb7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78648829"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Suche zu einer ASP.NET Core MVC-App
@@ -107,7 +107,7 @@ Das folgende Markup zeigt die Änderung am Tag `form`:
 
 ## <a name="add-search-by-genre"></a>Hinzufügen der Suche nach Genre
 
-Fügen Sie dem Ordner *Models* die folgende `MovieGenreViewModel`-Klasse hinzu:
+Fügen Sie dem Ordner `MovieGenreViewModel`Models*die folgende*-Klasse hinzu:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieGenreViewModel.cs)]
 
@@ -136,7 +136,7 @@ Aktualisieren Sie `Index.cshtml` in *Views/Movies/* folgendermaßen:
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 
-Überprüfen Sie den Lambdaausdruck, der im folgenden HTML-Hilfsprogramm verwendet wird:
+Überprüfen Sie den Lambdaausdruck, der in der folgenden HTML-Hilfsfunktion verwendet wird:
 
 `@Html.DisplayNameFor(model => model.Movies[0].Title)`
 

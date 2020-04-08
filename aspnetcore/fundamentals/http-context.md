@@ -8,15 +8,15 @@ ms.custom: mvc
 ms.date: 12/03/2019
 uid: fundamentals/httpcontext
 ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647011"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>Zugreifen auf HttpContext in ASP.NET Core
 
-ASP.NET Core-Apps greifen über die <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>-Schnittstelle und ihrer Standardimplementierung <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> auf `HttpContext` zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
+ASP.NET Core-Apps greifen über die `HttpContext`-Schnittstelle und ihrer Standardimplementierung <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> auf <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
 
 ## <a name="use-httpcontext-from-razor-pages"></a>Verwenden von HttpContext über Razor Pages
 

@@ -9,10 +9,10 @@ no-loc:
 - Blazor
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 72096fc2f03033dfe8325b5129e074913a2fbd1f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646687"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Verwenden von ASP.NET Core-APIs in einer Klassenbibliothek
@@ -76,7 +76,7 @@ Das aus der Vorlage generierte Projekt weist diese Eigenschaften auf:
   * [Microsoft.AspNetCore.Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft.AspNetCore.Components.Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
 
-Zum Beispiel:
+Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-components-library.csproj)]
 
@@ -87,7 +87,7 @@ Es ist weitaus weniger üblich, ein einzelnes Blazor-Hostingmodell zu unterstüt
 * Legen Sie .NET Core 3.x als Ziel fest.
 * Fügen Sie ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu.
 
-Zum Beispiel:
+Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
@@ -98,7 +98,7 @@ Weitere Informationen zu Bibliotheken, die Razor-Komponenten enthalten, finden S
 In diesem Abschnitt werden Empfehlungen für Bibliotheken erläutert, die Folgendes umfassen:
 
 * [Razor-Ansichten oder Razor Pages](#razor-views-or-razor-pages)
-* [Taghilfsprogramme](#tag-helpers)
+* [Tag Helpers (Taghilfsprogramme)](#tag-helpers)
 * [Ansichtskomponenten](#view-components)
 
 In diesem Abschnitt wird nicht die Unterstützung mehrerer Zielplattformen erörtert, um mehrere Versionen von MVC zu unterstützen. Anleitungen zum Unterstützen mehrerer ASP.NET Core-Versionen finden Sie unter [Unterstützung mehrerer ASP.NET Core-Versionen](#support-multiple-aspnet-core-versions).
@@ -132,31 +132,31 @@ Zurzeit ist keine Unterstützung durch Projektvorlagen verfügbar.
 
 ---
 
-Zum Beispiel:
+Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-Wenn das Projekt stattdessen .NET Standard als Ziel hat, ist ein Paketverweis auf [Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) erforderlich. Das `Microsoft.AspNetCore.Mvc`-Paket wurde in ASP.NET Core 3.0 in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Zum Beispiel:
+Wenn das Projekt stattdessen .NET Standard als Ziel hat, ist ein Paketverweis auf [Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) erforderlich. Das `Microsoft.AspNetCore.Mvc`-Paket wurde in ASP.NET Core 3.0 in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>Taghilfsprogramme
 
-Ein Projekt, das [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) umfasst, sollte das `Microsoft.NET.Sdk` SDK verwenden. Fügen Sie für .NET Core 3.x als Ziel ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu. Zum Beispiel:
+Ein Projekt, das [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) umfasst, sollte das `Microsoft.NET.Sdk` SDK verwenden. Fügen Sie für .NET Core 3.x als Ziel ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu. Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-Bei .NET Standard als Ziel (um Versionen vor ASP.NET Core 3.x zu unterstützen), fügen Sie einen Paketverweis auf [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) hinzu. Das `Microsoft.AspNetCore.Mvc.Razor`-Paket wurde in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Zum Beispiel:
+Bei .NET Standard als Ziel (um Versionen vor ASP.NET Core 3.x zu unterstützen), fügen Sie einen Paketverweis auf [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) hinzu. Das `Microsoft.AspNetCore.Mvc.Razor`-Paket wurde in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>Ansichtskomponenten
 
-Ein Projekt, das [Ansichtskomponenten](xref:mvc/views/view-components) umfasst, sollte das `Microsoft.NET.Sdk` SDK verwenden. Fügen Sie für .NET Core 3.x als Ziel ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu. Zum Beispiel:
+Ein Projekt, das [Ansichtskomponenten](xref:mvc/views/view-components) umfasst, sollte das `Microsoft.NET.Sdk` SDK verwenden. Fügen Sie für .NET Core 3.x als Ziel ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu. Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-Bei .NET Standard als Ziel (um Versionen vor ASP.NET Core 3.x zu unterstützen), fügen Sie einen Paketverweis auf [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) hinzu. Das `Microsoft.AspNetCore.Mvc.ViewFeatures`-Paket wurde in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Zum Beispiel:
+Bei .NET Standard als Ziel (um Versionen vor ASP.NET Core 3.x zu unterstützen), fügen Sie einen Paketverweis auf [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) hinzu. Das `Microsoft.AspNetCore.Mvc.ViewFeatures`-Paket wurde in das freigegebene Framework verschoben und wird daher nicht mehr veröffentlicht. Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -208,7 +208,7 @@ Wenn die Bibliothek nicht umgeschrieben werden kann, führen Sie die folgenden S
 * Fügen Sie ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu.
 * Verwenden Sie die [#if-Präprozessordirektive](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) mit dem entsprechenden Zielframeworksymbol, um Code bedingt zu kompilieren.
 
-Beispielsweise sind synchrone Lese- und Schreibvorgänge in HTTP-Anforderungs- und-Antwortdatenströmen standardmäßig ab ASP.NET Core 3.0 deaktiviert. ASP.NET Core 2.2 unterstützt das synchrone Verhalten standardmäßig. Stellen Sie sich eine Middleware-Bibliothek vor, in der synchrone Lese- und Schreibvorgänge aktiviert werden sollen, wenn E/A auftritt. Die Bibliothek sollte den Code einschließen, um in der entsprechenden Präprozessordirektive synchrone Funktionen zu aktivieren. Zum Beispiel:
+Beispielsweise sind synchrone Lese- und Schreibvorgänge in HTTP-Anforderungs- und-Antwortdatenströmen standardmäßig ab ASP.NET Core 3.0 deaktiviert. ASP.NET Core 2.2 unterstützt das synchrone Verhalten standardmäßig. Stellen Sie sich eine Middleware-Bibliothek vor, in der synchrone Lese- und Schreibvorgänge aktiviert werden sollen, wenn E/A auftritt. Die Bibliothek sollte den Code einschließen, um in der entsprechenden Präprozessordirektive synchrone Funktionen zu aktivieren. Beispiel:
 
 [!code-csharp[](target-aspnetcore/samples/middleware.cs?highlight=9-24)]
 

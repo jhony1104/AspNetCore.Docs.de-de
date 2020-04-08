@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 08/14/2019
 uid: test/razor-pages-tests
 ms.openlocfilehash: 0e217b6b7f15519a3da44f5d074cf80fa96a3b3a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649573"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>Komponententests für Razor Pages in ASP.NET Core

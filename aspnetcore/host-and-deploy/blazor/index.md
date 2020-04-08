@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/blazor/index
 ms.openlocfilehash: ddf70da29a82d462422c1bdf74ff45b92bb10b56
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/17/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79434264"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
@@ -67,7 +67,7 @@ Der *Basispfad einer App* beschreibt den URL-Stammpfad der App. Betrachten Sie d
 
 Wenn keine zusätzlichen Konfiguration für `CoolApp` festgelegt wird, weiß die untergeordnete App in diesem Szenario nicht, wo sie sich auf dem Server befindet. Beispielsweise kann die App keine richtigen relativen URLs zu ihren Ressourcen erstellen, ohne zu wissen, dass sie sich unter dem relativen URL-Pfad `/CoolApp/` befindet.
 
-Das `href`-Attribut des Tags `<base>` wird auf den relativen Stammpfad in der Datei *Pages/_Host.cshtml* (Blazor Server) oder *wwwroot/index.html* (Blazor WebAssembly) festgelegt, um die Konfiguration für den Basispfad `https://www.contoso.com/CoolApp/` der Blazor-App anzugeben:
+Das Blazor-Attribut des Tags `https://www.contoso.com/CoolApp/` wird auf den relativen Stammpfad in der Datei `<base>`Pages/_Host.cshtml`href` (*Server) oder*wwwroot/index.htmlBlazor (*WebAssembly) festgelegt, um die Konfiguration für den Basispfad* der Blazor-App anzugeben:
 
 ```html
 <base href="/CoolApp/">

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 12/15/2019
 uid: host-and-deploy/health-checks
 ms.openlocfilehash: 314e55c818cddf1dad2e3ec74d4d1e041ce7366f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649687"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Integritätsprüfungen in ASP.NET Core

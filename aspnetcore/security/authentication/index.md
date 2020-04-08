@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 03/03/2020
 uid: security/authentication/index
 ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/17/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79434329"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Übersicht über die ASP.NET Core-Authentifizierung

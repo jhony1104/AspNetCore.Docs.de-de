@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647413"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>Erweiterte ASP.NET Core Blazor-Szenarios
@@ -158,14 +158,14 @@ builder.AddContent(1, "Second");
 
 Wenn der Code zum ersten Mal ausgeführt wird, erhält der Generator Folgendes, wenn `someFlag` `true` ist:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | :----: |
 | 0        | Textknoten | First  |
 | 1        | Textknoten | Second |
 
 Stellen Sie sich vor, dass `someFlag` `false` wird und das Markup wieder gerendert wird. Dieses Mal empfängt der Generator Folgendes:
 
-| Sequenz | Typ       | Daten   |
+| Sequenz | Geben Sie Folgendes ein:       | Daten   |
 | :------: | ---------- | :----: |
 | 1        | Textknoten  | Second |
 
@@ -190,14 +190,14 @@ builder.AddContent(seq++, "Second");
 
 Die erste Ausgabe lautet nun wie folgt:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | :----: |
 | 0        | Textknoten | First  |
 | 1        | Textknoten | Second |
 
 Dieses Ergebnis ist mit dem des vorherigen Falls identisch, sodass keine negativen Probleme aufgetreten sind. `someFlag` ist beim zweiten Rendering `false`, und die Ausgabe lautet wie folgt:
 
-| Sequenz | Typ      | Daten   |
+| Sequenz | Geben Sie Folgendes ein:      | Daten   |
 | :------: | --------- | ------ |
 | 0        | Textknoten | Second |
 

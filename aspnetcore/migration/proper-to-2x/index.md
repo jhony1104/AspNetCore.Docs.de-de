@@ -1,15 +1,15 @@
 ---
-title: Migrieren von ASP.NET zu ASP.NET Core
+title: Migration von ASP.NET zu ASP.NET Core
 author: isaac2004
 description: Anweisungen zum Migrieren vorhandener ASP.NET MVC- oder Web-API-Apps zu ASP.NET Core Web.
 ms.author: scaddie
 ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
 ms.openlocfilehash: 68a45dc50e00bead564500a12509b62a4a193ec4
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511087"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migration von ASP.NET zu ASP.NET Core
@@ -128,7 +128,7 @@ Fügen Sie bei Bedarf `IProductRepository` ein:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Da die Abhängigkeitsinjektion eine Komponente von ASP.NET Core ist, können Sie Ihren Dienst in *Startup.cs* der Methode `ConfigureServices` hinzufügen:
+Da die Abhängigkeitsinjektion eine Komponente von ASP.NET Core ist, können Sie Ihren Dienst in `ConfigureServices`Startup.cs*der Methode* hinzufügen:
 
 [!code-csharp[](samples/configure-services.cs)]
 
@@ -150,7 +150,7 @@ In ASP.NET Core werden statische Dateien im Webstammverzeichnis ( *&lt;content r
 > [!NOTE]
 > Wenn Sie Anwendungen für .NET Framework entwickeln, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.StaticFiles`.
 
-Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<imageFileName>` auf ein Bildobjekt im Ordner *wwwroot/images* zugreifen.
+Beispielsweise kann ein Browser an einem Speicherort wie *auf ein Bildobjekt im Ordner*wwwroot/images`http://<app>/images/<imageFileName>` zugreifen.
 
 > [!NOTE]
 > Ausführliche Informationen zum Bereitstellen statischer Dateien in ASP.NET Core finden Sie im Artikel zu [statischen Dateien](xref:fundamentals/static-files).

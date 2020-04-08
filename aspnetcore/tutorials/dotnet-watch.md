@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: bedb3e6a65839db915ca7bc821a267a14d34bf30
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650959"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Entwickeln von ASP.NET Core-Apps mit einem Dateiwatcher
@@ -20,7 +20,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Victor Hurdugaci](http
 
 In diesem Tutorial wird eine vorhandene Web-API mit zwei Endpunkten verwendet: der eine gibt eine Summe zurück, der andere ein Produkt. Die Produktmethode enthält einen Fehler, der in diesem Tutorial behoben wird.
 
-Laden Sie die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie enthält zwei Projekte: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententest für die Web-API).
+Laden Sie die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample) herunter. Sie besteht aus zwei Projekten: *WebApp* (eine ASP.NET Core-Web-API) und *WebAppTests* (Komponententests für die Web-API).
 
 Navigieren Sie in einer Befehlsshell zum Ordner *WebApp*. Führen Sie den folgenden Befehl aus:
 
@@ -43,7 +43,7 @@ Application started. Press Ctrl+C to shut down.
 
 Navigieren Sie in einem Webbrowser zu `http://localhost:<port number>/api/math/sum?a=4&b=5`. Es sollten die Ergebnisse von `9` angezeigt werden.
 
-Navigieren Sie zur Produkt-API (`http://localhost:<port number>/api/math/product?a=4&b=5`). Es wird nicht wie erwartet `20` sondern `9` zurückgegeben. Dieses Problem wird später im Tutorial behoben.
+Navigieren Sie zur Produkt-API (`http://localhost:<port number>/api/math/product?a=4&b=5`). Es wird nicht wie erwartet `9` sondern `20` zurückgegeben. Dieses Problem wird später im Tutorial behoben.
 
 ::: moniker range="<= aspnetcore-2.0"
 
@@ -51,7 +51,7 @@ Navigieren Sie zur Produkt-API (`http://localhost:<port number>/api/math/product
 
 Das Dateiwatcher-Tool `dotnet watch` ist im Lieferumfang von .NET Core SDK-Version 2.1.300 enthalten. Wenn Sie eine frühere Version von .NET Core SDK verwenden, sind die folgenden Schritte erforderlich.
 
-1. Fügen Sie der *CSPROJ*-Datei einen `Microsoft.DotNet.Watcher.Tools`-Paketverweis hinzu:
+1. Fügen Sie der `Microsoft.DotNet.Watcher.Tools`CSPROJ *-Datei einen* -Paketverweis hinzu:
 
     ```xml
     <ItemGroup>
@@ -69,7 +69,7 @@ Das Dateiwatcher-Tool `dotnet watch` ist im Lieferumfang von .NET Core SDK-Versi
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Ausführen von .NET Core-CLI-Befehlen mit `dotnet watch`
 
-Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Zum Beispiel:
+Jeder [.NET Core-CLI-Befehl](/dotnet/core/tools#cli-commands) kann mit `dotnet watch` ausgeführt werden. Beispiel:
 
 | Befehl | Befehl mit watch |
 | ---- | ----- |
@@ -105,7 +105,7 @@ Vergewissern Sie sich, dass `http://localhost:<port number>/api/math/product?a=4
 1. Ändern Sie die `Product`-Methode von *MathController.cs* so, dass wieder die Summe zurückgegeben wird. Speichern Sie die Datei.
 1. Navigieren Sie in einer Befehlsshell zum Ordner *WebAppTests*.
 1. Führen Sie [dotnet restore](/dotnet/core/tools/dotnet-restore) aus.
-1. Führen Sie aus `dotnet watch test`. In der Ausgabe wird angezeigt, dass ein Test fehlgeschlagen ist und der Watcher auf Dateiänderungen wartet:
+1. Führen Sie `dotnet watch test` aus. In der Ausgabe wird angezeigt, dass ein Test fehlgeschlagen ist und der Watcher auf Dateiänderungen wartet:
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -135,7 +135,7 @@ Durch Bearbeiten der *CSPROJ*-Datei können der Watchlist weitere Elemente hinzu
 
 ## <a name="opt-out-of-files-to-be-watched"></a>Abwählen von zu überwachenden Dateien
 
-Sie können `dotnet-watch` so konfigurieren, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der *CSPROJ*-Datei das `Watch="false"`-Attribut hinzu:
+Sie können `dotnet-watch` so konfigurieren, dass die Standardeinstellungen ignoriert werden. Wenn Sie bestimmte Dateien ignorieren möchten, fügen Sie der Definition eines Elements in der `Watch="false"`CSPROJ *-Datei das* -Attribut hinzu:
 
 ```xml
 <ItemGroup>

@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/integrate-components
 ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218933"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
@@ -60,7 +60,7 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
    @using MyAppNamespace
    ```
 
-1. Registrieren Sie den Blazor Server-Dienst in `Startup.ConfigureServices`:
+1. Registrieren Sie den `Startup.ConfigureServices` Server-Dienst in Blazor:
 
    ```csharp
    services.AddServerSideBlazor();
@@ -124,7 +124,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
    });
    ```
 
-1. Fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
+1. Fügen Sie routingfähige Komponenten zur App hinzu. Beispiel:
 
    ```razor
    @page "/counter"
@@ -194,7 +194,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
    });
    ```
 
-1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
+1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Beispiel:
 
    ```razor
    @page "/counter"

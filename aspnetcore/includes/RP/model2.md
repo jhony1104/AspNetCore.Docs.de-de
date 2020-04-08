@@ -2,7 +2,7 @@
 
 ### <a name="add-a-database-context-class"></a>Hinzufügen einer Datenbankkontext-Klasse
 
-Erstellen Sie im RazorPagesMovie-Projekt einen neuen Ordner namens *Data*. Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
+Erstellen Sie im RazorPagesMovie-Projekt einen neuen Ordner namens *Data*. Fügen Sie dem Ordner `RazorPagesMovieContext`Data *(Daten) die folgende*-Klasse hinzu:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
@@ -26,7 +26,7 @@ Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code da
 
 ### <a name="register-the-database-context"></a>Registrieren des Datenbankkontexts
 
-Fügen Sie am Anfang der Datei *Startup.cs* die folgenden `using`-Anweisungen ein.
+Fügen Sie am Anfang der Datei `using`Startup.cs*die folgenden*-Anweisungen ein.
 
 ```csharp
 using RazorPagesMovie.Data;
@@ -59,7 +59,7 @@ Das `Microsoft.VisualStudio.Web.CodeGeneration.Design`-Paket wird für den Gerü
 
 ### <a name="register-the-database-context"></a>Registrieren des Datenbankkontexts
 
-Fügen Sie am Anfang der Datei *Startup.cs* die folgenden `using`-Anweisungen ein.
+Fügen Sie am Anfang der Datei `using`Startup.cs*die folgenden*-Anweisungen ein.
 
 ```csharp
 using RazorPagesMovie.Models;

@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645457"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)
@@ -130,7 +130,7 @@ Testen Sie die Seiten „Create“ (Erstellen), „Edit“ (Bearbeiten), „Deta
 
 Dozenten können eine beliebige Anzahl von Kursen unterrichten. In der folgenden Abbildung wird die Seite „Edit“ des Dozenten mit einem Reihe von Kurskontrollkästchen angezeigt.
 
-![Dozentenseite „Edit“ (Bearbeiten) mit Kursen](update-related-data/_static/instructor-edit-courses30.png)
+![Dozentenseite „Bearbeiten“ mit Kursen](update-related-data/_static/instructor-edit-courses30.png)
 
 Über die Kontrollkästchen können Änderungen an Kursen vorgenommen werden, denen ein Dozent zugewiesen ist. Für jeden Kurs in der Datenbank wird ein Kontrollkästchen angezeigt. Kurse, denen der Dozent zugewiesen ist, sind aktiviert. Der Benutzer kann Kontrollkästchen aktivieren oder deaktivieren, um Kurszuweisungen zu ändern. Wenn die Anzahl der Kurse viel größer ist, funktioniert eine andere Benutzeroberfläche möglicherweise besser. Die hier gezeigte Methode zum Verwalten einer m:n-Beziehung würde sich jedoch nicht ändern. Um Beziehungen zu erstellen oder zu löschen, bearbeiten Sie eine Joinentität.
 
@@ -199,7 +199,7 @@ Der vorangehende Code erstellt eine HTML-Tabelle mit drei Spalten. Jede Spalte v
 
 Wenn die Kontrollkästchen anfänglich gerendert werden, sind dem Dozenten zugewiesene Kurse ausgewählt.
 
-Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
+Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird für eine begrenzte Anzahl von Kursen empfohlen. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
 
 Führen Sie die App aus, und testen Sie die aktualisierte Seite „Edit“ des Dozenten. Ändern Sie einige Kurszuweisungen. Die Änderungen werden auf der Seite „Index“ widergespiegelt.
 
@@ -371,7 +371,7 @@ Stellen Sie sicher, dass Sie den Bürostandort eines Dozenten ändern können.
 
 Dozenten können eine beliebige Anzahl von Kursen unterrichten. In diesem Abschnitt fügen Sie die Möglichkeit zum Ändern von Kurszuweisungen hinzu. Die folgende Abbildung zeigt die aktualisierte Dozentenseite „Edit“ (Bearbeiten):
 
-![Dozentenseite „Edit“ (Bearbeiten) mit Kursen](update-related-data/_static/instructor-edit-courses.png)
+![Dozentenseite „Bearbeiten“ mit Kursen](update-related-data/_static/instructor-edit-courses.png)
 
 `Course` und `Instructor` weisen eine m:n-Beziehung auf. Wenn Sie Beziehungen hinzufügen und entfernen möchten, können Sie Entitäten aus der verknüpften `CourseAssignments`-Entitätenmenge hinzufügen und entfernen.
 
@@ -416,7 +416,7 @@ Wenn die Kontrollkästchen ursprünglich gerendert wurden, weisen dem Dozenten z
 
 Führen Sie die App aus, und testen Sie die aktualisierte Dozentenseite „Edit“ (Bearbeiten). Ändern Sie einige Kurszuweisungen. Die Änderungen werden auf der Seite „Index“ widergespiegelt.
 
-Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
+Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird für eine begrenzte Anzahl von Kursen empfohlen. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
 
 ### <a name="update-the-instructors-create-page"></a>Aktualisieren der Dozentenseite „Create“ (Erstellen)
 
@@ -434,7 +434,7 @@ Testen Sie die Dozentenseite „Create“ (Erstellen).
 
 ## <a name="update-the-delete-page"></a>Aktualisieren der Seite „Delete“ (Löschen)
 
-Aktualisieren Sie das Seitenmodell „Delete“ (Löschen) mit dem folgenden Code:
+Aktualisieren Sie das Seitenmodell „Löschen“ mit dem folgenden Code:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Delete.cshtml.cs?highlight=5,40-999)]
 

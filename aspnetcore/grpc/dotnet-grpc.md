@@ -7,10 +7,10 @@ ms.author: johluo
 ms.date: 10/17/2019
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: 994597c854a95bb33de1686ab025cb3744cf6845
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650899"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>Verwalten von Protobuf-Verweisen mit dotnet-grpc
@@ -97,7 +97,7 @@ dotnet-grpc add-url [options] <url>
 | -p | --project | Der Pfad zu der Projektdatei, mit der gearbeitet werden soll. Wenn keine Datei angegeben ist, sucht der Befehl im aktuellen Verzeichnis nach einer Projektdatei.
 | -S | --services | Der Typ der gRPC-Dienste, die generiert werden sollen. Wenn `Default` angegeben ist, wird `Both` für Webprojekte und `Client` für Nicht-Webprojekte verwendet. Zulässige Werte sind `Both`, `Client`, `Default`, `None`, `Server`.
 | -i | --additional-import-dirs | Zusätzliche Verzeichnisse, die bei der Auflösung von Importen für die Protobuf-Dateien verwendet werden. Dies ist eine durch Semikolons getrennte Liste von Pfaden.
-| | --access | Der Zugriffsmodifizierer, der für die generierten C#-Klassen verwendet werden soll. Der Standardwert ist `Public`sein. Zulässige Werte sind `Internal` und `Public`.
+| | --access | Der Zugriffsmodifizierer, der für die generierten C#-Klassen verwendet werden soll. Der Standardwert lautet `Public`. Zulässige Werte sind `Internal` und `Public`.
 
 ## <a name="remove"></a>Remove
 

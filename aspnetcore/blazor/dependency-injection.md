@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/dependency-injection
 ms.openlocfilehash: 4cdde9ee8c9fd9adf00894a067d32965b180e5ec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646693"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>Abhängigkeitsinjektion in ASP.NET Core Blazor
@@ -307,7 +307,7 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
          ServiceLifetime.Transient);
     ```  
 
-  * Der vorübergehende `DbContext` kann wie üblich (mit `@inject`) in Komponenten eingefügt werden, die nicht mehrere EF-Vorgänge parallel ausführen werden. Diejenigen, die mehrere EF-Vorgänge gleichzeitig durchführen können, können mit `IServiceProvider.GetRequiredService` separate `DbContext`-Objekte für jeden parallelen Vorgang anfordern.
+  * Der vorübergehende `DbContext` kann wie üblich (mit `@inject`) in Komponenten eingefügt werden, die nicht mehrere EF-Vorgänge parallel ausführen werden. Diejenigen, die mehrere EF-Vorgänge gleichzeitig durchführen können, können mit `DbContext` separate `IServiceProvider.GetRequiredService`-Objekte für jeden parallelen Vorgang anfordern.
 
     ```razor
     @page "/example"

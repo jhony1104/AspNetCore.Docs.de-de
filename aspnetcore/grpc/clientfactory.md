@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: grpc/clientfactory
 ms.openlocfilehash: 3042bb61367f8b9a9f3142217ad329270ab2cca5
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650797"
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>gRPC-Integration von Clientfactory in .NET Core

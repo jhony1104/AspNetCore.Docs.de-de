@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: ce5752743912a979a95fb5d504e4bcbb2b69ce1e
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511339"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>Verwenden von ASP.NET Core SignalR mit TypeScript und Webpack

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/index
 ms.openlocfilehash: 464d19bd63e1f0f06bd7d218e7644afde04a5672
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644149"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Hosten und Bereitstellen von ASP.NET Core
@@ -69,7 +69,7 @@ Anleitungen zum Veröffentlichen einer App in Azure mithilfe von Visual Studio f
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Veröffentlichen mit MSDeploy unter Windows
 
-Anleitungen zum Veröffentlichen einer App mit einem Visual Studio-Veröffentlichungsprofil z.B. von einer Windows-Eingabeaufforderung mit dem Befehl [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) finden Sie unter <xref:host-and-deploy/visual-studio-publish-profiles>.
+Anleitungen zum Veröffentlichen einer App mit einem Visual Studio-Veröffentlichungsprofil z.B. von einer Windows-Eingabeaufforderung mit dem Befehl <xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ finden Sie unter ](/dotnet/core/tools/dotnet-msbuild).
 
 ## <a name="internet-information-services-iis"></a>IIS (Internet Information Services)
 
@@ -147,7 +147,7 @@ Anleitungen zum Veröffentlichen einer App in Azure mithilfe von Visual Studio f
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Veröffentlichen mit MSDeploy unter Windows
 
-Anleitungen zum Veröffentlichen einer App mit einem Visual Studio-Veröffentlichungsprofil z.B. von einer Windows-Eingabeaufforderung mit dem Befehl [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) finden Sie unter <xref:host-and-deploy/visual-studio-publish-profiles>.
+Anleitungen zum Veröffentlichen einer App mit einem Visual Studio-Veröffentlichungsprofil z.B. von einer Windows-Eingabeaufforderung mit dem Befehl <xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ finden Sie unter ](/dotnet/core/tools/dotnet-msbuild).
 
 ## <a name="internet-information-services-iis"></a>IIS (Internet Information Services)
 

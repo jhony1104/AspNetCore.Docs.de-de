@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649603"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Verwenden der LibMan-CLI mit ASP.NET Core
@@ -169,7 +169,7 @@ Für den Befehl `libman install` sind die folgenden Optionen verfügbar:
 
 * `-d|--destination <PATH>`
 
-  Mit dieser Option wird der Installationsort für die Bibliothek festgelegt. Wenn kein Ort angegeben wird, wird der Standardspeicherort verwendet. Wenn in *libman.json* kein Wert für die Eigenschaft `defaultDestination` festgelegt ist, ist diese Option erforderlich.
+  Mit dieser Option wird der Installationsort für die Bibliothek festgelegt. Wenn kein Ort angegeben wird, wird der Standardspeicherort verwendet. Wenn in `defaultDestination`libman.json*kein Wert für die Eigenschaft* festgelegt ist, ist diese Option erforderlich.
 
 * `--files <FILE>`
 
@@ -181,7 +181,7 @@ Für den Befehl `libman install` sind die folgenden Optionen verfügbar:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Wenn kein Wert festgelegt wird, wird der Wert der Eigenschaft `defaultProvider` in *libman.json* verwendet. Wenn in *libman.json* kein Wert für die Eigenschaft `defaultProvider` festgelegt ist, ist diese Option erforderlich.
+  Wenn kein Wert festgelegt wird, wird der Wert der Eigenschaft `defaultProvider` in *libman.json* verwendet. Wenn in `defaultProvider`libman.json*kein Wert für die Eigenschaft* festgelegt ist, ist diese Option erforderlich.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -230,7 +230,7 @@ Installieren der Dateien *calendar.js* und *calendar.css* aus *C:\\temp\\contoso
 Es gibt zwei mögliche Gründe für die folgende Meldung:
 
 * Die Datei *libman.json* enthält keinen Wert für die Eigenschaft `defaultDestination`.
-* Die Option `-d|--destination` ist im Befehl `libman install` nicht enthalten.
+* Die Option `libman install` ist im Befehl `-d|--destination` nicht enthalten.
 
 ![Befehl „libman install“: Ziel](_static/libman-install-destination.png)
 

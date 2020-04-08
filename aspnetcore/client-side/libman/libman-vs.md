@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: e92e6bc28ec58b26785dd6c79e71512368202a26
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646795"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Verwenden von LibMan mit ASP.NET Core in Visual Studio
@@ -28,9 +28,9 @@ Visual Studio verfügt über die integrierte Unterstützung für [LibMan](xref:c
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) mit der Workload **ASP.NET- und Webentwicklung**
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) mit der Workload **ASP.NET und Webentwicklung**
 
-## <a name="add-library-files"></a>Hinzufügen von Bibliotheksdateien
+## <a name="add-library-files"></a>Bibliotheksdateien hinzufügen
 
 Bibliotheksdateien können einem ASP.NET Core-Projekt auf zwei verschiedene Arten hinzugefügt werden:
 
@@ -69,7 +69,7 @@ Befolgen Sie diese Schritte, um eine clientseitige Bibliothek zu installieren:
   |*Pages*-Ordner im Projekt                 |*Pages/jquery/*       |
 
 * Klicken Sie auf die Schaltfläche **Installieren**, um die Dateien gemäß der Konfiguration in *libman.json* herunterzuladen.
-* Überprüfen Sie den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** auf Installationsdetails. Zum Beispiel:
+* Überprüfen Sie den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** auf Installationsdetails. Beispiel:
 
   ```console
   Restore operation started...
@@ -88,7 +88,7 @@ Alle LibMan-Vorgänge in Visual Studio basieren auf dem Inhalt des LibMan-Manife
 
 Es gibt folgende Möglichkeiten, *libman.json* zur Bearbeitung zu öffnen:
 
-* Doppelklicken Sie im **Projektmappen-Explorer** auf die Datei *libman.json*.
+* Doppelklicken Sie im *Projektmappen-Explorer* auf die Datei **libman.json**.
 * Klicken Sie mit der rechten Maustaste auf das Projekt im **Projektmappen-Explorer**, und wählen Sie **Clientseitige Bibliotheken verwalten** aus. **&#8224;**
 * Wählen Sie **Clientseitige Bibliotheken verwalten** im Visual Studio-Menü **Projekt** aus. **&#8224;**
 
@@ -122,7 +122,7 @@ LibMan kann die definierten Bibliotheksdateien im Rahmen des Buildprozesses wied
 
 So aktivieren und testen Sie das Verhalten „Wiederherstellung während des Builds“
 
-* Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf *libman.json*, und wählen Sie im Kontextmenü **Wiederherstellung clientseitiger Bibliotheken bei Builderstellung aktivieren** aus.
+* Klicken Sie im *Projektmappen-Explorer* mit der rechten Maustaste auf **libman.json**, und wählen Sie im Kontextmenü **Wiederherstellung clientseitiger Bibliotheken bei Builderstellung aktivieren** aus.
 * Klicken Sie auf die Schaltfläche **Ja**, wenn Sie aufgefordert werden, ein NuGet-Paket zu installieren. Das NuGet-Paket [Microsoft.Web.LibraryManager.Build](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) wird dem Projekt hinzugefügt:
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
@@ -154,13 +154,13 @@ So stellen Sie Bibliotheksdateien manuell wieder her
   * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf den Namen der Projektmappe.
   * Wählen Sie die Option **Wiederherstellung clientseitiger Bibliotheken bei Builderstellung aktivieren** aus.
 * Gehen Sie für ein bestimmtes Projekt wie folgt vor:
-  * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf die Datei *libman.json*.
+  * Klicken Sie im *Projektmappen-Explorer* mit der rechten Maustaste auf die Datei **libman.json**.
   * Wählen Sie die Option **Wiederherstellung clientseitiger Bibliotheken bei Builderstellung aktivieren** aus.
 
 Gehen Sie wie folgt vor, während der Wiederherstellungsvorgang ausgeführt wird:
 
 * Das Symbol für das Aufgabenstatuscenter in der Statusleiste von Visual Studio wird animiert und zeigt *Wiederherstellungsvorgang gestartet* an. Wenn Sie auf das Symbol klicken, wird eine QuickInfo mit den bekannten Hintergrundaufgaben geöffnet.
-* Die Nachrichten werden an die Statusleiste und den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** gesendet. Zum Beispiel:
+* Die Nachrichten werden an die Statusleiste und den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** gesendet. Beispiel:
 
   ```console
   Restore operation started...
@@ -177,7 +177,7 @@ Gehen Sie wie folgt vor, während der Wiederherstellungsvorgang ausgeführt wird
 
 So führen Sie den *Bereinigungsvorgang* aus, der zuvor in Visual Studio wiederhergestellte Bibliotheksdateien löscht
 
-* Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf die Datei *libman.json*.
+* Klicken Sie im *Projektmappen-Explorer* mit der rechten Maustaste auf die Datei **libman.json**.
 * Wählen Sie die Option **Clientseitige Bibliotheken bereinigen** aus.
 
 Der Bereinigungsvorgang löscht keine vollständigen Verzeichnisse, um das unbeabsichtigte Entfernen von Nicht-Bibliotheksdateien zu verhindern. Es werden nur Dateien entfernt, die bei der vorherigen Wiederherstellung enthalten waren.
@@ -185,7 +185,7 @@ Der Bereinigungsvorgang löscht keine vollständigen Verzeichnisse, um das unbea
 Während der Bereinigungsvorgang ausgeführt wird:
 
 * Das Symbol für das Aufgabenstatuscenter in der Statusleiste von Visual Studio wird animiert und zeigt *Clientbibliotheksvorgang gestartet* an. Wenn Sie auf das Symbol klicken, wird eine QuickInfo mit den bekannten Hintergrundaufgaben geöffnet.
-* Die Nachrichten werden an die Statusleiste und den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** gesendet. Zum Beispiel:
+* Die Nachrichten werden an die Statusleiste und den **Bibliotheks-Manager**-Feed des Fensters **Ausgabe** gesendet. Beispiel:
 
 ```console
 Clean libraries operation started...

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: b55235ffc44f0bacf44bd1644e45210b37f19607
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 31161d6841986cb0bd8080468e5d523d59400490
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511326"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80405922"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Docker-Images für ASP.NET Core
 
@@ -178,7 +178,7 @@ Erstellen Sie eine neue Dockerfile-Datei, und verwenden Sie den `docker build .`
 
 ::: moniker range="< aspnetcore-3.0"
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./
@@ -214,7 +214,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./
@@ -248,7 +248,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ::: moniker-end
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./

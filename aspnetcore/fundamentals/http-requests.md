@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/09/2020
 uid: fundamentals/http-requests
 ms.openlocfilehash: 912be34ae0ee25837a94aab65443f15b17ab4556
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78648295"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Stellen von HTTP-Anforderungen mithilfe von IHttpClientFactory in ASP.NET Core
@@ -281,7 +281,7 @@ Weitere Informationen zu `IHttpClientFactory` und Polly-Integrationen finden Sie
 
 ## <a name="httpclient-and-lifetime-management"></a>HttpClient und die Verwaltung der Lebensdauer
 
-Bei jedem Aufruf von `CreateClient` in der `IHttpClientFactory` wird eine neue Instanz von `HttpClient` zurückgegeben. Pro benannter Client wird ein <xref:System.Net.Http.HttpMessageHandler> erstellt. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
+Bei jedem Aufruf von `HttpClient` in der `CreateClient` wird eine neue Instanz von `IHttpClientFactory` zurückgegeben. Pro benannter Client wird ein <xref:System.Net.Http.HttpMessageHandler> erstellt. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
 
 `IHttpClientFactory` legt die `HttpMessageHandler`-Instanzen zusammen, die von der Factory zum Reduzieren des Ressourcenverbrauchs erstellt wurden. Eine `HttpMessageHandler`-Instanz kann aus dem Pool wiederverwendet werden, wenn eine neue `HttpClient`-Instanz erstellt wird und deren Lebensdauer noch nicht abgelaufen ist.
 
@@ -364,7 +364,7 @@ Im folgenden Beispiel:
 Für die Headerweitergabe wird eine ASP.NET Core-Middleware verwendet, um HTTP-Header von eingehenden Anforderungen an ausgehende HTTP-Clientanforderungen weiterzugeben. So verwenden Sie die Headerweitergabe:
 
 * Erstellen Sie einen Verweis auf das [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)-Paket.
-* Konfigurieren Sie in `Startup` die Middleware und `HttpClient`:
+* Konfigurieren Sie in `HttpClient` die Middleware und `Startup`:
 
   [!code-csharp[](http-requests/samples/3.x/Startup.cs?highlight=5-9,21&name=snippet)]
 
@@ -599,7 +599,7 @@ Weitere Informationen zu `IHttpClientFactory` und Polly-Integrationen finden Sie
 
 ## <a name="httpclient-and-lifetime-management"></a>HttpClient und die Verwaltung der Lebensdauer
 
-Bei jedem Aufruf von `CreateClient` in der `IHttpClientFactory` wird eine neue Instanz von `HttpClient` zurückgegeben. Es gibt einen <xref:System.Net.Http.HttpMessageHandler> pro benanntem Client. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
+Bei jedem Aufruf von `HttpClient` in der `CreateClient` wird eine neue Instanz von `IHttpClientFactory` zurückgegeben. Es gibt einen <xref:System.Net.Http.HttpMessageHandler> pro benanntem Client. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
 
 `IHttpClientFactory` legt die `HttpMessageHandler`-Instanzen zusammen, die von der Factory zum Reduzieren des Ressourcenverbrauchs erstellt wurden. Eine `HttpMessageHandler`-Instanz kann aus dem Pool wiederverwendet werden, wenn eine neue `HttpClient`-Instanz erstellt wird und deren Lebensdauer noch nicht abgelaufen ist.
 
@@ -907,7 +907,7 @@ Weitere Informationen zu `IHttpClientFactory` und Polly-Integrationen finden Sie
 
 ## <a name="httpclient-and-lifetime-management"></a>HttpClient und die Verwaltung der Lebensdauer
 
-Bei jedem Aufruf von `CreateClient` in der `IHttpClientFactory` wird eine neue Instanz von `HttpClient` zurückgegeben. Es gibt einen <xref:System.Net.Http.HttpMessageHandler> pro benanntem Client. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
+Bei jedem Aufruf von `HttpClient` in der `CreateClient` wird eine neue Instanz von `IHttpClientFactory` zurückgegeben. Es gibt einen <xref:System.Net.Http.HttpMessageHandler> pro benanntem Client. Die Factory verwaltet die Lebensdauer der `HttpMessageHandler`-Instanzen.
 
 `IHttpClientFactory` legt die `HttpMessageHandler`-Instanzen zusammen, die von der Factory zum Reduzieren des Ressourcenverbrauchs erstellt wurden. Eine `HttpMessageHandler`-Instanz kann aus dem Pool wiederverwendet werden, wenn eine neue `HttpClient`-Instanz erstellt wird und deren Lebensdauer noch nicht abgelaufen ist.
 
@@ -991,7 +991,7 @@ Für die Headerweitergabe wird eine von der Community unterstützte Middleware v
 
 * Erstellen Sie einen Verweis auf das von der Community unterstützte [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation)-Paket. ASp.NET Core 3.1 und höher unterstützen [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation).
 
-* Konfigurieren Sie in `Startup` die Middleware und `HttpClient`:
+* Konfigurieren Sie in `HttpClient` die Middleware und `Startup`:
 
   [!code-csharp[](http-requests/samples/2.x/Startup21.cs?highlight=5-9,25&name=snippet)]
 

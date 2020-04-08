@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/call-dotnet-from-javascript
 ms.openlocfilehash: dbf44fe7923998c65119e42d97c304890fa95523
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218790"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>Aufrufen von .NET-Methoden von JavaScript-Funktionen in ASP.NET Core Blazor
@@ -66,7 +66,7 @@ Die Konsolenausgabe lautet:
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-Der vierte Arraywert wird in das von `ReturnArrayAsync` zurückgegebene Array (`data.push(4);`) gepusht.
+Der vierte Arraywert wird in das von `data.push(4);` zurückgegebene Array (`ReturnArrayAsync`) gepusht.
 
 Standardmäßig ist der Methodenbezeichner der Methodenname, aber Sie können mit dem Konstruktor `JSInvokableAttribute` einen anderen Bezeichner angeben:
 
@@ -274,7 +274,7 @@ Im folgenden Beispiel:
 
 * Die `JSInterop`-Komponente enthält mehrere `ListItem`-Komponenten.
 * Alle `ListItem`-Komponenten bestehen aus einer Nachricht und einer Schaltfläche.
-* Wenn auf die Schaltfläche einer `ListItem`-Komponente geklickt wird, ändert die `UpdateMessage`-Methode des `ListItem`-Elements den Text des Listenelements und blendet die Schaltfläche aus.
+* Wenn auf die Schaltfläche einer `ListItem`-Komponente geklickt wird, ändert die `ListItem`-Methode des `UpdateMessage`-Elements den Text des Listenelements und blendet die Schaltfläche aus.
 
 *MessageUpdateInvokeHelper.cs:*
 

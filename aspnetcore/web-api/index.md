@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
 ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644647"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Erstellen von Web-APIs mit ASP.NET Core
@@ -156,7 +156,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Anforderung für das Attributrouting
 
-Durch das `[ApiController]`-Attribut wird das Attributrouting zu einer Anforderung. Zum Beispiel:
+Durch das `[ApiController]`-Attribut wird das Attributrouting zu einer Anforderung. Beispiel:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -274,7 +274,7 @@ Im folgenden Beispiel gibt das `[FromQuery]`-Attribut an, dass der Parameterwert
 
 Das `[ApiController]`-Attribut wendet Rückschlussregeln auf die Standarddatenquellen von Aktionsparametern an. Da durch diese Regeln Attribute auf die Aktionsparameter angewendet werden, müssen Sie Bindungsquellen nicht manuell identifizieren. Die Rückschlussregeln für Bindungsquellen verhalten sich wie folgt:
 
-* `[FromBody]` wird für komplexe Typparameter abgeleitet. Jeder komplexe integrierte Typ mit spezieller Bedeutung, z. B. <xref:Microsoft.AspNetCore.Http.IFormCollection> und <xref:System.Threading.CancellationToken>, stellt eine Ausnahme von der `[FromBody]`-Rückschlussregel dar. Der Rückschlusscode der Bindungsquelle ignoriert diese Typen.
+* `[FromBody]` wird für komplexe Typparameter abgeleitet. Jeder komplexe integrierte Typ mit spezieller Bedeutung, z. B. `[FromBody]` und <xref:Microsoft.AspNetCore.Http.IFormCollection>, stellt eine Ausnahme von der <xref:System.Threading.CancellationToken>-Rückschlussregel dar. Der Rückschlusscode der Bindungsquelle ignoriert diese Typen.
 * `[FromForm]` wird für Aktionsparameter des Typs <xref:Microsoft.AspNetCore.Http.IFormFile> und <xref:Microsoft.AspNetCore.Http.IFormFileCollection> abgeleitet. Es wird für keine einfachen oder benutzerdefinierte Typen abgeleitet.
 * `[FromRoute]` wird für jeden Namen von Aktionsparametern abgeleitet, der mit einem Parameter in der Routenvorlage übereinstimmt. Wenn mehr als eine Route mit einem Aktionsparameter übereinstimmt, gilt jeder Routenwert als `[FromRoute]`.
 * `[FromQuery]` wird für alle anderen Aktionsparameter abgeleitet.
@@ -369,7 +369,7 @@ Betrachten Sie den folgenden Code in einer Controlleraktion:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetails`-Text. Zum Beispiel:
+Die `NotFound`-Methode erzeugt einen HTTP-404-Statuscode mit einem `ProblemDetails`-Text. Beispiel:
 
 ```json
 {

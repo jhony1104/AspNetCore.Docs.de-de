@@ -7,10 +7,10 @@ ms.author: riande
 ms.date: 10/07/2019
 uid: fundamentals/change-tokens
 ms.openlocfilehash: 70451e219f1295b854e2f84aac55f0cfd1786b19
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645397"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Erkennen von Änderungen mit Änderungstoken in ASP.NET Core
@@ -43,13 +43,13 @@ Die [ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extension
 
 Die [ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)-Überladung akzeptiert einen zusätzlichen `TState`-Parameter, der an den Tokenconsumer `Action` übergeben wird.
 
-<xref:System.IDisposable> gibt `OnChange` zurück. Der Aufruf von <xref:System.IDisposable.Dispose*> beendet den Überwachungsvorgang des Tokens auf weitere Änderungen und gibt die Tokenressourcen frei.
+`OnChange` gibt <xref:System.IDisposable> zurück. Der Aufruf von <xref:System.IDisposable.Dispose*> beendet den Überwachungsvorgang des Tokens auf weitere Änderungen und gibt die Tokenressourcen frei.
 
 ## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Beispielverwendungen von Änderungstoken in ASP.NET Core
 
 Änderungstoken werden in wichtigen Bereichen von ASP.NET Core verwendet, um auf Objektänderungen zu überwachen:
 
-* Für die Überwachung von Änderungen an Dateien erstellt die <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*>-Methode von <xref:Microsoft.Extensions.FileProviders.IFileProvider> ein `IChangeToken` für die angegebenen Dateien oder einen Ordner, der überwacht werden soll.
+* Für die Überwachung von Änderungen an Dateien erstellt die <xref:Microsoft.Extensions.FileProviders.IFileProvider>-Methode von <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> ein `IChangeToken` für die angegebenen Dateien oder einen Ordner, der überwacht werden soll.
 * `IChangeToken`-Token können zu Cacheeinträgen hinzugefügt werden, um bei Änderungen Cacheentfernungen auszulösen.
 * Für `TOptions`-Änderungen umfasst die <xref:Microsoft.Extensions.Options.OptionsMonitor`1>-Standardimplementierung von <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> eine Überladung, die eine oder mehrere <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1>-Instanzen akzeptiert. Jede Instanz gibt ein `IChangeToken` zurück, um den Rückruf einer Änderungsbenachrichtigung zur Nachverfolgung von Optionsänderungen zu registrieren.
 
@@ -241,13 +241,13 @@ Die [ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extension
 
 Die [ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*)-Überladung akzeptiert einen zusätzlichen `TState`-Parameter, der an den Tokenconsumer `Action` übergeben wird.
 
-<xref:System.IDisposable> gibt `OnChange` zurück. Der Aufruf von <xref:System.IDisposable.Dispose*> beendet den Überwachungsvorgang des Tokens auf weitere Änderungen und gibt die Tokenressourcen frei.
+`OnChange` gibt <xref:System.IDisposable> zurück. Der Aufruf von <xref:System.IDisposable.Dispose*> beendet den Überwachungsvorgang des Tokens auf weitere Änderungen und gibt die Tokenressourcen frei.
 
 ## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Beispielverwendungen von Änderungstoken in ASP.NET Core
 
 Änderungstoken werden in wichtigen Bereichen von ASP.NET Core verwendet, um auf Objektänderungen zu überwachen:
 
-* Für die Überwachung von Änderungen an Dateien erstellt die <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*>-Methode von <xref:Microsoft.Extensions.FileProviders.IFileProvider> ein `IChangeToken` für die angegebenen Dateien oder einen Ordner, der überwacht werden soll.
+* Für die Überwachung von Änderungen an Dateien erstellt die <xref:Microsoft.Extensions.FileProviders.IFileProvider>-Methode von <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> ein `IChangeToken` für die angegebenen Dateien oder einen Ordner, der überwacht werden soll.
 * `IChangeToken`-Token können zu Cacheeinträgen hinzugefügt werden, um bei Änderungen Cacheentfernungen auszulösen.
 * Für `TOptions`-Änderungen umfasst die <xref:Microsoft.Extensions.Options.OptionsMonitor`1>-Standardimplementierung von <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> eine Überladung, die eine oder mehrere <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1>-Instanzen akzeptiert. Jede Instanz gibt ein `IChangeToken` zurück, um den Rückruf einer Änderungsbenachrichtigung zur Nachverfolgung von Optionsänderungen zu registrieren.
 

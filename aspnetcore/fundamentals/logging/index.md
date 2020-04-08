@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/05/2020
 uid: fundamentals/logging/index
 ms.openlocfilehash: 58e236ad7f0863b87907d5585e1cb6bf61d46e99
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644449"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
@@ -70,7 +70,7 @@ Der vorstehende Code erfordert Verweise auf `Microsoft.Extensions.Logging` und `
 Die Standardprojektvorlage ruft die Methode <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> auf, die die folgenden Protokollierungsanbieter hinzufügt:
 
 * Konsole
-* Debug
+* Debuggen
 * EventSource (beginnend mit ASP.NET Core 2.2)
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_TemplateCode&highlight=7)]
@@ -513,7 +513,7 @@ ASP.NET Core definiert die folgenden Protokolliergrade. Die Reihenfolge reicht v
 
   Für Fehler, die sofortige Aufmerksamkeit erfordern. Beispiel: Szenarios mit Datenverlust, Speichermangel.
 
-Verwenden Sie den Protokolliergrad, um die Menge an Protokollausgabedaten zu steuern, die in ein bestimmtes Speichermedium geschrieben oder an ein Anzeigefenster ausgegeben werden. Zum Beispiel:
+Verwenden Sie den Protokolliergrad, um die Menge an Protokollausgabedaten zu steuern, die in ein bestimmtes Speichermedium geschrieben oder an ein Anzeigefenster ausgegeben werden. Beispiel:
 
 * In einer Produktionsumgebung
   * Das Protokollieren von `Trace` über die `Information`-Ebenen verursacht viele detaillierte Protokollmeldungen. Protokollieren Sie `Trace` über Nachrichten auf `Information`-Ebene in einem kostengünstigen Speicher mit hohem Volumen, um die Kosten zu überwachen und die Grenzwerte des Datenspeichers nicht zu überschreiten.
@@ -746,14 +746,14 @@ Die Konfigurationsdaten und der in den vorangegangenen Beispielen gezeigte `AddF
 
 | Anzahl | Anbieter      | Kategorien beginnend mit...          | Mindestprotokolliergrad |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | Debug         | Alle Kategorien                          | Information       |
+| 1      | Debuggen         | Alle Kategorien                          | Information       |
 | 2      | Konsole       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warnung           |
-| 3      | Konsole       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 3      | Konsole       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debuggen             |
 | 4      | Konsole       | Microsoft.AspNetCore.Mvc.Razor          | Fehler             |
 | 5      | Konsole       | Alle Kategorien                          | Information       |
-| 6      | Alle Anbieter | Alle Kategorien                          | Debug             |
-| 7      | Alle Anbieter | System                                  | Debug             |
-| 8      | Debug         | Microsoft                               | Ablaufverfolgung             |
+| 6      | Alle Anbieter | Alle Kategorien                          | Debuggen             |
+| 7      | Alle Anbieter | System                                  | Debuggen             |
+| 8      | Debuggen         | Microsoft                               | Ablaufverfolgung             |
 
 Wenn ein `ILogger`-Objekt erstellt wird, wählt das `ILoggerFactory`-Objekt eine einzige Regel pro Anbieter aus, die auf diese Protokollierung angewendet wird. Alle von einer `ILogger`-Instanz geschriebenen Meldungen werden auf Grundlage der ausgewählten Regeln gefiltert. Aus den verfügbaren Regeln wird die für jeden Anbieter und jedes Kategoriepaar spezifischste Regel ausgewählt.
 
@@ -776,7 +776,7 @@ Die sich ergebende `ILogger`-Instanz sendet Protokolle mit dem Protokolliergrad 
 Jeder Anbieter definiert einen *Alias*, der in der Konfiguration anstelle des vollqualifizierten Typnamens verwendet werden kann.  Verwenden Sie für die integrierten Anbieter die folgenden Aliase:
 
 * Konsole
-* Debug
+* Debuggen
 * EventSource
 * EventLog
 * TraceSource
@@ -804,7 +804,7 @@ Wenn Sie den Mindestprotokolliergrad nicht explizit festlegen, lautet der Standa
 
 ### <a name="filter-functions"></a>Filterfunktionen
 
-Eine Filterfunktion wird für alle Anbieter und Kategorien aufgerufen, denen keine Regeln durch Konfiguration oder Code zugewiesen sind. Code in der Funktion verfügt über Zugriff auf den Anbietertyp, die Kategorie und den Protokolliergrad. Zum Beispiel:
+Eine Filterfunktion wird für alle Anbieter und Kategorien aufgerufen, denen keine Regeln durch Konfiguration oder Code zugewiesen sind. Code in der Funktion verfügt über Zugriff auf den Anbietertyp, die Kategorie und den Protokolliergrad. Beispiel:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -989,7 +989,7 @@ Verwenden Sie das dotnet-trace-Tool, um die Ablaufverfolgung aus einer App zu er
 
    Auf Plattformen, die nicht unter Windows ausgeführt werden, fügen Sie die `-f speedscope`-Option hinzu, um das Format der Ablaufverfolgungsdatei der Ausgabe in `speedscope` zu ändern.
 
-   | Stichwort | Beschreibung |
+   | Schlüsselwort | Beschreibung |
    | :-----: | ----------- |
    | 1       | Protokolliert Metaereignisse über die `LoggingEventSource`. Es werden keine Ereignisse von `ILogger`) protokolliert. |
    | 2       | Aktiviert das `Message`-Ereignis, wenn `ILogger.Log()` aufgerufen wird. Die Informationen werden in einer programmgesteuerten (nicht formatierten) Weise ausgegeben. |

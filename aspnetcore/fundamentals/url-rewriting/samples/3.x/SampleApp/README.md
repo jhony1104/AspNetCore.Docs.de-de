@@ -7,25 +7,25 @@ Beim Ausführen des Beispiels wird die neu geschriebene oder umgeleitete URL von
 ## <a name="examples-in-this-sample"></a>Beispiele
 
 * `AddRedirect("redirect-rule/(.*)", "redirected/$1")`
-  - Statuscode für Erfolg: 302 Found (302 Gefunden)
+  - Statuscode für Erfolg: „302 – Gefunden“
   - Beispiel (Umleitung): **/redirect-rule/{capture_group}** zu **/redirected/{capture_group}**
 * `AddRewrite(@"^rewrite-rule/(\d+)/(\d+)", "rewritten?var1=$1&var2=$2", skipRemainingRules: true)`
-  - Statuscode für Erfolg: 200 (OK)
+  - Statuscode für Erfolg: „200 – OK“
   - Beispiel (Umschreibung): **/rewrite-rule/{capture_group_1}/{capture_group_2}** in **/rewritten?var1={capture_group_1}&var2={capture_group_2}**
 * `AddApacheModRewrite(env.ContentRootFileProvider, "ApacheModRewrite.txt")`
-  - Statuscode für Erfolg: 302 Found (302 Gefunden)
+  - Statuscode für Erfolg: „302 – Gefunden“
   - Beispiel (Umleitung): **/apache-mod-rules-redirect/{capture_group}** zu **/redirected?id={capture_group}**
 * `AddIISUrlRewrite(env.ContentRootFileProvider, "IISUrlRewrite.xml")`
-  - Statuscode für Erfolg: 200 (OK)
+  - Statuscode für Erfolg: „200 – OK“
   - Beispiel (Umschreibung): **/iis-rules-rewrite/{capture_group}** in **/rewritten?id={capture_group}**
 * `Add(RedirectXmlFileRequests)`
-  - Statuscode für Erfolg: 301 Moved permanently (301 Permanent verschoben)
+  - Statuscode für Erfolg: „301 – Permanent verschoben“
   - Beispiel (Umleitung): **/file.xml** zu **/xmlfiles/file.xml**
 * `Add(RewriteTextFileRequests)`
-  - Statuscode für Erfolg: 200 (OK)
+  - Statuscode für Erfolg: „200 – OK“
   - Beispiel (Neuschreibung): **/some_file.txt** zu **/file.txt**
 * `Add(new RedirectImageRequests(".png", "/png-images")))`<br>`Add(new RedirectImageRequests(".jpg", "/jpg-images")))`
-  - Statuscode für Erfolg: 301 Moved permanently (301 Permanent verschoben)
+  - Statuscode für Erfolg: „301 – Permanent verschoben“
   - Beispiel (Umleitung): **/image.png** zu **/png-images/image.png**
   - Beispiel (Umleitung): **/image.jpg** zu **/jpg-images/image.jpg**
 

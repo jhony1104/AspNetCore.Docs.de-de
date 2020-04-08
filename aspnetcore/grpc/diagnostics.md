@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: 17607b734e6d777de9516aa14e81c97f87b61023
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650905"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417519"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Protokollierung und Diagnosen in gRPC für .NET
 
@@ -94,13 +94,13 @@ Wenn Sie Protokolle vom .NET-Client erhalten möchten, können Sie die `GrpcChan
 
 Eine alternative Möglichkeit, die Clientprotokollierung zu aktivieren, ist die Verwendung der [gRPC-Clientfactory](xref:grpc/clientfactory), um den Client zu erstellen. Ein für die Clientfactory registrierter und aus der DI aufgelöster gRPC-Client verwendet automatisch die für die App konfigurierte Protokollierung.
 
-Wenn Ihre App die DI nicht verwendet, können Sie mit [LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*) eine neue `ILoggerFactory`-Instanz erstellen. Fügen Sie Ihrer App das Paket [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) hinzu, um auf diese Methode zuzugreifen.
+Wenn Ihre App die DI nicht verwendet, können Sie mit `ILoggerFactory`LoggerFactory.Create[ eine neue ](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)-Instanz erstellen. Fügen Sie Ihrer App das Paket [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) hinzu, um auf diese Methode zuzugreifen.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
 #### <a name="grpc-client-log-scopes"></a>Protokollbereiche des gRPC-Clients
 
-Der gRPC-Client fügt Protokollen, die während eines gRPC-Aufrufs erstellt werden, einen [Protokollierungsbereich](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes) hinzu. Der Bereich verfügt über mit dem gRPC-Aufruf verbundene Metadaten:
+Der gRPC-Client fügt Protokollen, die während eines gRPC-Aufrufs erstellt werden, einen [Protokollierungsbereich](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) hinzu. Der Bereich verfügt über mit dem gRPC-Aufruf verbundene Metadaten:
 
 * **GrpcMethodType:** Der gRPC-Methodentyp. Mögliche Werte sind Namen der `Grpc.Core.MethodType`-Enumeration, z. B. Unär.
 * **GrpcUri:** Der relative URI der gRPC-Methode, z. B. /greet.Greeter/SayHellos.
@@ -165,7 +165,7 @@ Bei Metriken handelt es sich um eine Darstellung von Datenmesswerten über besti
 
 gRPC-Servermetriken werden in der `Grpc.AspNetCore.Server`-Ereignisquelle gemeldet.
 
-| name                      | Beschreibung                   |
+| Name                      | Beschreibung                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Aufrufe gesamt                   |
 | `current-calls`           | Aktuelle Aufrufe                 |
@@ -181,7 +181,7 @@ In ASP.NET Core stehen auch eigene Metriken für die `Microsoft.AspNetCore.Hosti
 
 gRPC-Clientmetriken werden in der `Grpc.Net.Client`-Ereignisquelle gemeldet.
 
-| name                      | Beschreibung                   |
+| Name                      | Beschreibung                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Aufrufe gesamt                   |
 | `current-calls`           | Aktuelle Aufrufe                 |

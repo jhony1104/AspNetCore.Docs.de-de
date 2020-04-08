@@ -7,10 +7,10 @@ ms.author: johluo
 ms.date: 09/20/2019
 uid: grpc/index
 ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644719"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>Einführung in gRPC in .NET Core
@@ -54,7 +54,7 @@ message HelloReply {
 .NET-Typen für Dienste, Clients und Nachrichten werden automatisch generiert, indem *\*.proto*-Dateien in ein Projekt eingeschlossen werden:
 
 * Fügen Sie dem [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)-Paket einen Paketverweis hinzu.
-* Fügen Sie der `<Protobuf>`-Elementgruppe *\*.proto*-Dateien hinzu.
+* Fügen Sie der *-Elementgruppe \** .proto`<Protobuf>`-Dateien hinzu.
 
 ```xml
 <ItemGroup>

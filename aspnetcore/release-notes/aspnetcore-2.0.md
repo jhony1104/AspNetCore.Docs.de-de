@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
 ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650857"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Neuigkeiten in ASP.NET Core 2.0
@@ -80,7 +80,7 @@ Es sind Projektvorlagen der Einzelseitenanwendung (Single Page Application, SPA)
 
 ## <a name="kestrel-improvements"></a>Kestrel-Verbesserungen
 
-Der Kestrel-Webserver verfügt über neue Funktionen, die ihn geeigneter als mit dem Internet verbundenen Server machen. Zu der neuen Eigenschaft `Limits` der `KestrelServerOptions`-Klasse wurden eine Reihe von Optionen für die Servereinschränkungskonfiguration hinzugefügt. Fügen Sie Grenzwerte für Folgendes hinzu:
+Der Kestrel-Webserver verfügt über neue Funktionen, die ihn geeigneter als mit dem Internet verbundenen Server machen. Zu der neuen Eigenschaft `KestrelServerOptions` der `Limits`-Klasse wurden eine Reihe von Optionen für die Servereinschränkungskonfiguration hinzugefügt. Fügen Sie Grenzwerte für Folgendes hinzu:
 
 * Maximale Anzahl der Clientverbindungen
 * Maximale Größe des Anforderungstexts
@@ -143,7 +143,7 @@ Informationen zum Status der C# 7.1-Funktionen finden Sie im [Roslyn GitHub-Repo
 * [Visual Studio-Veröffentlichungsprofile für die Bereitstellung von ASP.NET Core-Apps](xref:host-and-deploy/visual-studio-publish-profiles)
 * [Schlüsselverwaltung](xref:security/data-protection/implementation/key-management)
 * [Configure Facebook authentication (Konfigurieren der Facebook-Authentifizierung)](xref:security/authentication/facebook-logins)
-* [Configure Twitter authentication (Konfigurieren der Twitter-Authentifizierung)](xref:security/authentication/twitter-logins)
+* [Konfigurieren der Twitter-Authentifizierung](xref:security/authentication/twitter-logins)
 * [Configure Google authentication (Konfigurieren der Google-Authentifizierung)](xref:security/authentication/google-logins)
 * [Configure Microsoft Account authentication (Konfigurieren der Microsoft-Kontoauthentifizierung)](xref:security/authentication/microsoft-logins)
 

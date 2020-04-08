@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/layouts
 ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647923"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>Blazor-Layouts in ASP.NET Core
@@ -42,7 +42,7 @@ Legen Sie das Standardlayout für die App in der `Router`-Komponente der Datei *
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-Geben Sie `LayoutView` für `NotFound`-Inhalt an, um ein Standardlayout für `NotFound`-Inhalt anzugeben:
+Geben Sie `NotFound` für `LayoutView`-Inhalt an, um ein Standardlayout für `NotFound`-Inhalt anzugeben:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
@@ -54,7 +54,7 @@ Das Festlegen des Layouts als Standardlayout im Router ist nützlich, da es pro 
 
 Verwenden Sie die Razor-Anweisung `@layout`, um ein Layout auf eine Komponente anzuwenden. Der Compiler konvertiert `@layout` in eine `LayoutAttribute`-Eigenschaft, die auf die Komponentenklasse angewendet wird.
 
-Der Inhalt der folgenden `MasterList`-Komponente wird bei der Position von `@Body` in `MasterLayout` eingefügt:
+Der Inhalt der folgenden `MasterList`-Komponente wird bei der Position von `MasterLayout` in `@Body` eingefügt:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
@@ -66,7 +66,7 @@ Alle Ordner einer App können optional eine Vorlagendatei namens *_Imports.razor
 
 Die folgende Datei *_Imports.razor* importiert Folgendes:
 
-* `MyCoolLayout`
+* `MyCoolLayout`.
 * Alle Razor-Komponenten im gleichen Ordner und in dessen Unterordnern
 * Der `BlazorApp1.Data` -Namespace.
  

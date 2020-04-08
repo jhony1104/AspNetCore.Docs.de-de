@@ -3,7 +3,7 @@
 1. Erstellen Sie ein neues Projekt.
 1. Wählen Sie **Workerdienst** aus. Klicken Sie auf **Weiter**.
 1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Wählen Sie **Erstellen** aus.
-1. Wählen Sie im Dialogfeld **Neuen Workerdienst erstellen****Erstellen** aus.
+1. Wählen Sie im Dialogfeld **Neuen Workerdienst erstellen** **Erstellen** aus.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 

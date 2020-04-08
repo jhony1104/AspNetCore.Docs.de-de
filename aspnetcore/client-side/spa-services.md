@@ -8,10 +8,10 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
 ms.openlocfilehash: c0c73882afd579510ad9cdf5b485c1d6fbeadd1c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649219"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Verwenden von JavaScript Services zum Erstellen von Single-Page-Anwendungen in ASP.NET Core
@@ -127,7 +127,7 @@ Um das vorherige Codebeispiel zu erweitern, können Daten vom Server an die Ansi
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,57-77,79-)]
 
-Das innerhalb des `globals`-Objekts definierte `postList`-Array wird an das globale `window`-Objekt des Browsers angefügt. Durch dieses Verschieben der Variablen in den globalen Bereich wird doppelter Arbeitsaufwand vermieden, insbesondere wenn dieselben Daten einmal auf den Server und ein zweites Mal auf den Client geladen werden.
+Das innerhalb des `postList`-Objekts definierte `globals`-Array wird an das globale `window`-Objekt des Browsers angefügt. Durch dieses Verschieben der Variablen in den globalen Bereich wird doppelter Arbeitsaufwand vermieden, insbesondere wenn dieselben Daten einmal auf den Server und ein zweites Mal auf den Client geladen werden.
 
 ![Globale postList-Variable, angefügt an window-Objekt](spa-services/_static/global_variable.png)
 
@@ -155,7 +155,7 @@ Webpack Dev Middleware wird in der HTTP-Anforderungspipeline über den folgenden
 
 Die `UseWebpackDevMiddleware`-Erweiterungsmethode muss aufgerufen werden, bevor das [Registrieren von statischem Dateihosting](xref:fundamentals/static-files) über die `UseStaticFiles`-Erweiterungsmethode erfolgt. Aus Sicherheitsgründen sollten Sie die Middleware nur registrieren, wenn die App im Entwicklungsmodus ausgeführt wird.
 
-Die Eigenschaft `output.publicPath` der Datei *webpack.config.js* weist die Middleware an, den Ordner `dist` auf Änderungen zu überwachen:
+Die Eigenschaft *der Datei*webpack.config.js`output.publicPath` weist die Middleware an, den Ordner `dist` auf Änderungen zu überwachen:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,13-16)]
 
@@ -213,7 +213,7 @@ Eine Erweiterungsmethode mit dem Namen `MapSpaFallbackRoute` wird in der `Config
 
 Routen werden in der Reihenfolge ausgewertet, in der sie konfiguriert sind. Folglich wird die `default`-Route im vorangehenden Codebeispiel zuerst für den Musterabgleich verwendet.
 
-## <a name="create-a-new-project"></a>Erstellen eines neuen Projekts
+## <a name="create-a-new-project"></a>Erstellt ein neues Projekt
 
 JavaScript Services stellt vorkonfigurierte Anwendungsvorlagen bereit. SpaServices wird in diesen Vorlagen zusammen mit verschiedenen Frameworks und Bibliotheken wie Angular, React und Redux verwendet.
 

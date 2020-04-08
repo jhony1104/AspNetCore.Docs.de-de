@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-2.1
 ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650971"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
@@ -72,7 +72,7 @@ Darüber hinaus kann die Verwendung von HTTPS mit dem [HTTP Strict Transport Sec
 
 In der Produktion muss HTTPS explizit konfiguriert sein. In Version 2.1 wurde ein Konfigurationsschema für die Konfiguration von HTTPS für Kestrel hinzugefügt. Apps können für folgende Verwendung konfiguriert werden:
 
-* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel web server implementation: Endpoint configuration (Kestrel: Endpunktkonfiguration)](xref:fundamentals/servers/kestrel#endpoint-configuration).
+* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
 * Das für HTTPS zu verwendende Zertifikat aus einer Datei auf dem Datenträger oder aus einem Zertifikatspeicher.
 
 ## <a name="gdpr"></a>DSGVO
@@ -133,7 +133,7 @@ Weitere Informationen finden Sie unter [Initiieren von HTTP-Anforderungen](xref:
 
 ## <a name="kestrel-transport-configuration"></a>Kestrel-Transportkonfiguration
 
-Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel web server implementation: Transport configuration (Kestrel: Transportkonfiguration)](xref:fundamentals/servers/kestrel#transport-configuration).
+Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Transportkonfiguration](xref:fundamentals/servers/kestrel#transport-configuration).
 
 ## <a name="generic-host-builder"></a>Generator für generische Hosts
 
