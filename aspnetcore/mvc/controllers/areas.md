@@ -3,14 +3,14 @@ title: Bereiche in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie mehr über Bereiche, ein Feature von ASP.NET MVC, das für die Organisation von verwandten Funktionalitäten in einer Gruppe als separater Namespace (für Routing) und Ordnerstruktur (für Ansichten) verwendet wird.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 03/21/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 41f7bdd6dbb3e33f843cb2a765dd30f98c81ce21
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 8859bc52416ff657036198c73f63b8b0a0201e11
+ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654235"
+ms.lasthandoff: 04/03/2020
+ms.locfileid: "80625934"
 ---
 # <a name="areas-in-aspnet-core"></a>Bereiche in ASP.NET Core
 
@@ -18,10 +18,10 @@ Von [Dhananjay Kumar](https://twitter.com/debug_mode) und [Rick Anderson](https:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bereiche sind eine ASP.net-Funktion, die verwendet wird, um verwandte Funktionen in einer Gruppe als separate zu organisieren:
+Bereiche sind ein ASP.NET-Feature, das verwendet wird, um verwandte Funktionen in einer Gruppe als separate zu organisieren:
 
-* Namespace für das Routing.
-* Ordnerstruktur für Sichten und Razor pages.
+* Namespace für Routing.
+* Ordnerstruktur für Ansichten und Razor-Seiten.
 
 Mithilfe von Bereichen wird außerdem eine Hierarchie erstellt, damit das Routing durch Hinzufügen eines anderen Routenparameters ausgeführt werden kann: `area` zu `controller` und `action` oder einer Razor Page `page`.
 
@@ -41,7 +41,7 @@ Wenn Sie Razor-Seiten verwenden, lesen Sie [Bereiche mit Razor-Seiten](#areas-wi
 Eine typische ASP.NET Core-Web-App, die Bereiche, Controller und Ansichten verwendet, beinhaltet Folgendes:
 
 * Eine [Bereichsordnerstruktur](#area-folder-structure).
-* Controller werden mit dem Attribut [`[Area]`](#attribute) versehen, um den Controller mit dem Bereich zu verknüpfen:
+* Controller mit [`[Area]`](#attribute) dem Attribut, um den Controller dem Bereich zuzuordnen:
 
   [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
@@ -85,22 +85,22 @@ Während das vorherige Layout typisch ist, wenn Bereiche verwendet werden, müss
 
 ### <a name="associate-the-controller-with-an-area"></a>Zuordnen eines Controllers zu einem Bereich
 
-Bereichscontroller werden mit dem Attribut [&lbrack;Bereich&rbrack;](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) versehen:
+Bereichssteuerungen werden mit dem [ &lbrack;&rbrack; Area-Attribut](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) gekennzeichnet:
 
 [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
 ### <a name="add-area-route"></a>Hinzufügen einer Bereichsroute
 
-Bereichs Routen verwenden normalerweise [herkömmliches Routing](xref:mvc/controllers/routing#cr) anstelle von [Attribut Routing](xref:mvc/controllers/routing#ar). Beim herkömmlichen Routing ist die Reihenfolge wichtig. Routen mit Bereichen werden im Allgemeinen früher in der Routentabelle aufgeführt als die spezifischeren Routen ohne Bereich.
+Flächenrouten verwenden in der Regel [konventionelles Routing](xref:mvc/controllers/routing#cr) anstelle von [Attributrouting](xref:mvc/controllers/routing#ar). Beim herkömmlichen Routing ist die Reihenfolge wichtig. Routen mit Bereichen werden im Allgemeinen früher in der Routentabelle aufgeführt als die spezifischeren Routen ohne Bereich.
 
 `{area:...}` kann als Token in Routenvorlagen verwendet werden, wenn der URL-Raum in allen Bereichen einheitlich ist:
 
 [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet&highlight=21-23)]
 
-Im vorherigen Code wendet `exists` eine Einschränkung an: Die Route muss mit einem Bereich übereinstimmen. Verwenden von `{area:...}` mit `MapControllerRoute`:
+Im vorherigen Code wendet `exists` eine Einschränkung an: Die Route muss mit einem Bereich übereinstimmen. Verwendung `{area:...}` `MapControllerRoute`mit:
 
 * Ist der am wenigsten komplizierte Mechanismus zum Hinzufügen von Routing zu Bereichen.
-* Entspricht allen Controllern mit dem `[Area("Area name")]`-Attribut.
+* Entspricht allen Controllern mit dem `[Area("Area name")]` Attribut.
 
 Im folgenden Code wird <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> verwendet, um zwei benannte Bereichsrouten zu erstellen:
 
@@ -114,35 +114,35 @@ Im folgenden Code aus dem [Beispieldownload](https://github.com/dotnet/AspNetCor
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-Der Beispiel Download umfasst eine [partielle Sicht](xref:mvc/views/partial) , die Folgendes enthält:
+Der Beispieldownload enthält eine [Teilansicht,](xref:mvc/views/partial) die Folgendes enthält:
 
-* Die vorangehenden Links.
-* Links, die mit Ausnahme von `area` vergleichbar sind, sind nicht angegeben.
+* Die vorhergehenden Links.
+* Links, die der `area` vorherigen Mitnummer ähneln, werden nicht angegeben.
 
 In der [Layoutdatei](xref:mvc/views/layout) wird auf die partielle Ansicht verwiesen. Jede Seite in der App stellt also die erstellen Links dar. Die Links, die ohne Angabe eines Bereichs erstellt werden, sind nur gültig, wenn auf sie von einer Seite im selben Bereich und Controller verwiesen wird.
 
-Wenn der Bereich oder der Kontroller nicht angegeben werden, hängt das Routing von den [Umgebungswerten](xref:mvc/controllers/routing#ambient) ab. Die aktuellen Routenwerte der aktuellen Anforderung werden bei der Linkgenerierung als Umgebungswerte behandelt. In vielen Fällen für die Beispiel-App generiert die Verwendung der Ambient-Werte falsche Verknüpfungen mit dem Markup, das nicht den Bereich angibt.
+Wenn der Bereich oder der Kontroller nicht angegeben werden, hängt das Routing von den [Umgebungswerten](xref:mvc/controllers/routing#ambient) ab. Die aktuellen Routenwerte der aktuellen Anforderung werden bei der Linkgenerierung als Umgebungswerte behandelt. In vielen Fällen für die Beispiel-App erzeugt die Verwendung der Umgebungswerte falsche Verknüpfungen mit dem Markup, das den Bereich nicht angibt.
 
 Weitere Informationen finden Sie unter [Routing zu Controlleraktionen in ASP.NET Core](xref:mvc/controllers/routing).
 
 ### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>Freigegebenes Layout für Bereiche unter Verwendung der _ViewStart.cshtml-Datei
 
-Wenn Sie ein gemeinsames Layout für die gesamte App freigeben möchten, behalten Sie die *_ViewStart. cshtml* im Stamm [Ordner der Anwendung](#arf)bei. Weitere Informationen finden Sie unter <xref:mvc/views/layout>.
+Um ein gemeinsames Layout für die gesamte App freizugeben, bewahren Sie die *_ViewStart.cshtml* im [Anwendungsstammordner](#arf)auf. Weitere Informationen finden Sie unter <xref:mvc/views/layout>.
 
 <a name="arf"></a>
 
-### <a name="application-root-folder"></a>Anwendungs Stamm Ordner
+### <a name="application-root-folder"></a>Anwendungsstammordner
 
-Der Stamm Ordner der Anwendung ist der Ordner, der *Startup.cs* in Web-App enthält, die mit den ASP.net Core Vorlagen erstellt wurde.
+Der Anwendungsstammordner ist der Ordner, *der Startup.cs* in der Web-App enthält, die mit den ASP.NET Core-Vorlagen erstellt wurde.
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
- */Views/_ViewImports. cshtml*, for MVC und */pages/_ViewImports. cshtml* für Razor Pages wird nicht in Ansichten in Bereichen importiert. Verwenden Sie einen der folgenden Ansätze, um Ansichts Importe für alle Sichten bereitzustellen:
+ */Views/_ViewImports.cshtml*, für MVC und */Pages/_ViewImports.cshtml* für Razor Pages, werden nicht in Ansichten in Bereichen importiert. Verwenden Sie einen der folgenden Ansätze, um Ansichtsimporte für alle Ansichten bereitzustellen:
 
-* Fügen Sie *_ViewImports. cshtml* dem [Anwendungs Stamm Ordner](#arf)hinzu. Eine *_ViewImports. cshtml* -Datei im Stamm Ordner der Anwendung gilt für alle Sichten in der app.
-* Kopieren Sie die Datei *_ViewImports. cshtml* in den entsprechenden Ansichts Ordner Unterbereiche.
+* Fügen Sie *_ViewImports.cshtml* zum [Anwendungsstammordner hinzu.](#arf) Ein *_ViewImports.cshtml* im Anwendungsstammordner gilt für alle Ansichten in der App.
+* Kopieren Sie die Datei *_ViewImports.cshtml* in den entsprechenden Ansichtsordner unter Bereiche.
 
-Die *_ViewImports. cshtml* -Datei enthält normalerweise [taghilfsprogramme](xref:mvc/views/tag-helpers/intro) Importe, `@using`und `@inject` Anweisungen. Weitere Informationen finden Sie unter [Importieren von freigegebenen Direktiven](xref:mvc/views/layout#importing-shared-directives).
+Die *Datei _ViewImports.cshtml* enthält in der `@inject` Regel Die Importe, `@using`und Anweisungen von Tag [Helpers.](xref:mvc/views/tag-helpers/intro) Weitere Informationen finden Sie unter [Importieren freigegebener Direktiven](xref:mvc/views/layout#importing-shared-directives).
 
 <a name="rename"></a>
 
@@ -156,7 +156,7 @@ Der folgende Code ändert den Standardbereichsordner von `"Areas"` in `"MyAreas"
 
 ## <a name="areas-with-razor-pages"></a>Bereiche mit Razor-Seiten
 
-Bereiche mit Razor Pages erfordern einen `Areas/<area name>/Pages` Ordner im Stamm der app. Die folgende Ordnerstruktur wird mit dem [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) verwendet.
+Bereiche mit Razor-Seiten erfordern einen `Areas/<area name>/Pages` Ordner im Stammverzeichnis der App. Die folgende Ordnerstruktur wird mit dem [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) verwendet.
 
 * Projektname
   * Bereiche
@@ -206,7 +206,7 @@ Im Beispieldownload enthält der Bereich „Products“ die folgende *_ViewImpor
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-Das folgende Markup zeigt die Razor-Seite */Products/About*:
+Das folgende Markup zeigt die Razor-Seite */Products/About*: 
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
@@ -243,7 +243,7 @@ Wenn Sie Razor-Seiten verwenden, lesen Sie [Bereiche mit Razor-Seiten](#areas-wi
 Eine typische ASP.NET Core-Web-App, die Bereiche, Controller und Ansichten verwendet, beinhaltet Folgendes:
 
 * Eine [Bereichsordnerstruktur](#area-folder-structure).
-* Controller werden mit dem Attribut [`[Area]`](#attribute) versehen, um den Controller mit dem Bereich zu verknüpfen:
+* Controller mit [`[Area]`](#attribute) dem Attribut, um den Controller dem Bereich zuzuordnen:
 
   [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
@@ -287,7 +287,7 @@ Während das vorherige Layout typisch ist, wenn Bereiche verwendet werden, müss
 
 ### <a name="associate-the-controller-with-an-area"></a>Zuordnen eines Controllers zu einem Bereich
 
-Bereichscontroller werden mit dem Attribut [&lbrack;Bereich&rbrack;](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) versehen:
+Bereichssteuerungen werden mit dem [ &lbrack;&rbrack; Area-Attribut](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) gekennzeichnet:
 
 [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
@@ -329,7 +329,7 @@ Um ein gemeinsames Layout für die gesamte App freizugeben, verschieben Sie *_Vi
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-An ihrem Standardspeicherort gilt die Datei */Views/_ViewImports.cshtml* nicht für Bereiche. Um allgemeine [Taghilfsprogramme](xref:mvc/views/tag-helpers/intro), `@using` oder `@inject` in Ihrem Bereich zu verwenden, stellen Sie sicher, dass eine ordnungsgemäße Datei *_ViewImports.cshtml*[für Ihre Bereichsansichten gilt](xref:mvc/views/layout#importing-shared-directives). Wenn Sie das gleiche Verhalten in allen Ansichten wünschen, verschieben Sie */Views/_ViewImports.cshtml* in den Anwendungsstamm.
+An ihrem Standardspeicherort gilt die Datei */Views/_ViewImports.cshtml* nicht für Bereiche. Um allgemeine [Tag-Hilfen](xref:mvc/views/tag-helpers/intro), `@using`oder `@inject` in Ihrer Umgebung zu verwenden, stellen Sie sicher, dass eine ordnungsgemäße *_ViewImports.cshtml-Datei* auf Ihre [Bereichsansichten angewendet wird.](xref:mvc/views/layout#importing-shared-directives) Wenn Sie das gleiche Verhalten in allen Ansichten wünschen, verschieben Sie */Views/_ViewImports.cshtml* in den Anwendungsstamm.
 
 <a name="rename"></a>
 
@@ -343,7 +343,7 @@ Der folgende Code ändert den Standardbereichsordner von `"Areas"` in `"MyAreas"
 
 ## <a name="areas-with-razor-pages"></a>Bereiche mit Razor-Seiten
 
-Bereiche mit Razor Pages erfordern einen `Areas/<area name>/Pages` Ordner im Stamm der app. Die folgende Ordnerstruktur wird mit dem [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) verwendet.
+Bereiche mit Razor-Seiten erfordern einen `Areas/<area name>/Pages` Ordner im Stammverzeichnis der App. Die folgende Ordnerstruktur wird mit dem [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) verwendet.
 
 * Projektname
   * Bereiche
@@ -395,7 +395,7 @@ Im Beispieldownload enthält der Bereich „Products“ die folgende *_ViewImpor
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-Das folgende Markup zeigt die Razor-Seite */Products/About*:
+Das folgende Markup zeigt die Razor-Seite */Products/About*: 
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 

@@ -5,14 +5,14 @@ description: Erfahren Sie mehr über ASP.NET Core-Middleware und die Anforderung
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 04/06/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 9dcd061d2807fb90884327916d0348af4593df9d
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.openlocfilehash: 6bf8ed823386ca4e1cf78982f7fba41fba429db8
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "79989720"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751085"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -67,6 +67,14 @@ Im vorherigen Beispiel schreibt der `Run`-Delegat `"Hello from 2nd delegate."` z
 <a name="order"></a>
 
 ## <a name="middleware-order"></a>Middlewarereihenfolge
+
+In der folgenden Abbildung wird die gesamte Anforderungsverarbeitungspipeline für MVC- und Razor Pages-Apps in ASP.NET Core dargestellt. Es ist zu sehen, wie vorhandene Middleware in einer typischen App sortiert ist und an welcher Stelle benutzerdefinierte Middleware hinzugefügt wird. Sie haben vollständige Kontrolle darüber, wie vorhandene Middleware neu angeordnet oder neue benutzerdefinierte Middleware nach Bedarf eingefügt wird.
+
+![ASP.NET Core-Middlewarepipeline](index/_static/middleware-pipeline.svg)
+
+Der **Endpunktmiddleware** in der vorangehenden Abbildung führt die Filterpipeline für den entsprechenden App-Typ aus (MVC oder Razor Pages).
+
+![ASP.NET Core-Filterpipeline](index/_static/mvc-endpoint.svg)
 
 Die Reihenfolge, in der Middlewarekomponenten in der `Startup.Configure`-Methode hinzugefügt werden, legt die Reihenfolge fest, in der die Middlewarekomponenten bei Anforderungen aufgerufen werden. Bei Antworten gilt die umgekehrte Reihenfolge. Die Reihenfolge ist in Bezug auf Sicherheit, Leistung und Funktionalität **entscheidend**.
 

@@ -5,14 +5,14 @@ description: Lernen Sie die grundlegenden Konzepte zum Erstellen von ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: 7533242140c31a937f32cc9082d760103347ce25
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219180"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417641"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -25,63 +25,68 @@ In diesem Artikel finden Sie eine Übersicht über die wichtigsten Themen zum En
 In der `Startup`-Klasse:
 
 * werden die von der App erforderlichen Dienste konfiguriert.
-* wird die Pipeline zur Anforderungsverarbeitung definiert.
-
-*Dienste* sind Komponenten, die von der App verwendet werden. Eine Protokollierungskomponente stellt beispielsweise einen Dienst dar. wird Code, der Dienste konfiguriert (oder *registriert*) der `Startup.ConfigureServices`-Methode hinzugefügt.
-
-Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren *Middlewarekomponenten*. Eine Middleware kann beispielsweise Anforderungen für statische Dateien verarbeiten oder HTTP-Anforderungen zu HTTPS umleiten. Jede Middleware führt asynchrone Operationen in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung. Code zum Konfigurieren der Pipeline zur Anforderungsverarbeitung wird der `Startup.Configure`-Methode hinzugefügt.
+* Die Anforderungsverarbeitungspipeline der App wird mit mehreren Middlewarekomponenten definiert.
 
 Beispiel für eine `Startup`-Klasse:
 
-[!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=3,12)]
+[!code-csharp[](index/samples_snapshot/3.x/Startup.cs?highlight=3,12)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
 
 ## <a name="dependency-injection-services"></a>Abhängigkeitsinjektion (Dienste)
 
-ASP.NET Core verfügt über ein integriertes DI-Framework (Dependency Injection), durch das konfigurierte Dienste für die Klassen einer App bereitgestellt werden. Eine Möglichkeit zum Abrufen einer Instanz eines Diensts in einer Klasse ist das Erstellen eines Konstruktors mit einem Parameter des erforderlichen Typs. Der Parameter kann der Diensttyp oder eine Schnittstelle sein. Das DI-System stellt den Dienst zur Laufzeit bereit.
+ASP.NET Core umfasst ein integriertes DI-Framework (Dependency Injection), durch das konfigurierte Dienste in einer App bereitgestellt werden. Eine Protokollierungskomponente stellt beispielsweise einen Dienst dar.
 
-Hier ist eine Klasse, in der Dependency Injection verwendet wird, um ein Entity Framework Core-Kontextobjekt abzurufen. Die hervorgehobene Zeile ist ein Beispiel für die Konstruktorinjektion:
+wird Code, der Dienste konfiguriert (oder *registriert*) der `Startup.ConfigureServices`-Methode hinzugefügt. Zum Beispiel:
 
-[!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
+[!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
-Obwohl die Dependency Injection integriert ist, können Sie hier, falls gewünscht, einen IoC-Container eines Drittanbieters einbinden.
+Dienste werden üblicherweise mit einer Constructor Injection aus der DI aufgelöst. Bei der Constructor Injection deklariert eine Klasse einen Konstruktorparameter des erforderlichen Typs oder einer Schnittstelle. Das DI-Framework stellt zur Laufzeit eine Instanz dieses Diensts bereit.
+
+Im folgenden Beispiel wird die Constructor Injection verwendet, um `RazorPagesMovieContext` aus der DI zu lösen:
+
+[!code-csharp[](index/samples_snapshot/3.x/Index.cshtml.cs?highlight=5)]
+
+Wenn der integrierte IoC-Container (Inversion of Control, Steuerungsumkehr) nicht alle Anforderungen einer App erfüllt, kann stattdessen ein IoC-Drittanbietercontainer verwendet werden.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/dependency-injection>.
 
 ## <a name="middleware"></a>Middleware
 
-Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren Middlewarekomponenten. Jede Komponente führt asynchrone Operationen in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung.
+Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren Middlewarekomponenten. Jede Komponente führt Vorgänge in einem `HttpContext` aus und ruft anschließend entweder die nächste Middleware in der Pipeline auf oder beendet die Anforderung.
 
-Gemäß Konvention wird eine Middlewarekomponente der Pipeline durch Aufrufen ihrer `Use...`-Erweiterungsmethode in der `Startup.Configure`-Methode hinzugefügt. Um beispielsweise das Rendering statischer Dateien zu aktivieren, rufen Sie `UseStaticFiles` auf.
+Gemäß Konvention wird eine Middlewarekomponente der Pipeline durch Aufrufen einer `Use...`-Erweiterungsmethode in der `Startup.Configure`-Methode hinzugefügt. Um beispielsweise das Rendering statischer Dateien zu aktivieren, rufen Sie `UseStaticFiles` auf.
 
-Der hervorgehobene Code in dem folgenden Beispiel konfiguriert die Pipeline zur Anforderungsverarbeitung:
+Im folgenden Beispiel wird einer Anforderungsverarbeitungspipeline konfiguriert:
 
-[!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=14-16)]
+[!code-csharp[](index/samples_snapshot/3.x/Configure.cs)]
 
-ASP.NET Core enthält eine Reihe umfangreicher integrierter Middleware. Außerdem können Sie benutzerdefinierte Middleware erstellen.
+ASP.NET Core enthält zahlreiche integrierte Middlewareanwendungen. Es können auch benutzerdefinierte Middlewarekomponenten geschrieben werden.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/middleware/index>.
 
 ## <a name="host"></a>Host
 
-Beim Starten erstellt eine ASP.NET Core-App einen *Host*. Der Host ist ein Objekt, das alle Ressourcen der App kapselt, z. B.:
+Beim Starten erstellt eine ASP.NET Core-App einen *Host*. Der Host kapselt alle Ressourcen der App, zum Beispiel:
 
 * eine HTTP-Serverimplementierung
 * Middlewarekomponenten
 * Protokollierung
-* DI
+* DI-Dienste
 * Konfiguration
 
-Der wichtigste Grund für das Einschließen aller unabhängigen Ressourcen der App in einem Objekt ist die Verwaltung der Lebensdauer: steuern von Start und ordnungsgemäßem Herunterfahren der App.
+Es gibt zwei verschiedene Hosts: 
 
-Es stehen zwei Hosts zur Verfügung: der generische Host und der Webhost. Der generische Host wird empfohlen. Der Webhost ist nur für die Abwärtskompatibilität verfügbar.
+* Generischer .NET-Host
+* ASP.NET Core-Webhost
 
-Der Code zum Erstellen eines Hosts befindet sich in `Program.Main`:
+Der generische .NET-Host wird empfohlen. Der ASP.NET Core-Webhost wird lediglich für die Abwärtskompatibilität zur Verfügung gestellt.
 
-[!code-csharp[](index/snapshots/3.x/Program1.cs)]
+Im folgenden Beispiel wird ein neuer generischer .NET-Host erstellt:
 
-Die Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults` konfigurieren einen Host mit häufig verwendeten Optionen wie den folgenden:
+[!code-csharp[](index/samples_snapshot/3.x/Program.cs)]
+
+Mit den Methoden `CreateDefaultBuilder` und `ConfigureWebHostDefaults` wird ein Host mit mehreren Standardoptionen konfiguriert, zum Beispiel:
 
 * Verwenden von [Kestrel](#servers) als Webserver, und aktivieren der Integration von Internetinformationsdiensten.
 * Laden der Konfiguration aus *appsettings.json*, *appsettings.[EnvironmentName].json*, Umgebungsvariablen, Befehlszeilenargumenten und anderen Konfigurationsquellen.
@@ -107,11 +112,11 @@ Die folgenden Serverimplementierungen werden von ASP.NET Core bereitgestellt:
 
 # <a name="macos"></a>[macOS](#tab/macos)
 
-ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
+ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edgeserver ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edge-Server ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
+ASP.NET Core bietet die plattformübergreifende Serverimplementierung von *Kestrel*. In ASP.NET Core 2.0 oder höher kann Kestrel als öffentlich zugänglicher Edgeserver ausgeführt werden, der direkt mit dem Internet verknüpft ist. Kestrel wird häufig in einer Reverseproxykonfiguration unter Verwendung von [Nginx](https://nginx.org) oder [Apache](https://httpd.apache.org/) ausgeführt.
 
 ---
 
@@ -119,44 +124,29 @@ Weitere Informationen finden Sie unter <xref:fundamentals/servers/index>.
 
 ## <a name="configuration"></a>Konfiguration
 
-ASP.NET Core bietet ein Konfigurationsframework, das Einstellungen als Name/Wert-Paare aus einer geordneten Menge von Konfigurationsanbietern abruft. Integrierte Konfigurationsanbieter gibt es für zahlreiche Quellen wie *.json*-Dateien, *.xml*-Dateien, Umgebungsvariablen und Befehlszeilenargumente. Sie können auch benutzerdefinierte Konfigurationsanbieter schreiben.
+ASP.NET Core bietet ein Konfigurationsframework, das Einstellungen als Name/Wert-Paare aus einer geordneten Menge von Konfigurationsanbietern abruft. Integrierte Konfigurationsanbieter stehen für eine Vielzahl von Quellen zur Verfügung, z. B. für *JSON*-Dateien, *XML*-Dateien, Umgebungsvariablen und Befehlszeilenargumente. Schreiben Sie benutzerdefinierte Konfigurationsanbieter, um andere Quellen zu unterstützen.
 
-Zum Beispiel könnten Sie angeben, dass die Konfiguration aus *appsettings.json* und Umgebungsvariablen stammt. Wenn dann der *ConnectionString*-Wert angefordert wird, sucht das Framework zuerst in der *appsettings.json*-Datei. Wenn der Wert sowohl dort als auch in einer Umgebungsvariablen gefunden wird, hat der Wert aus der Umgebungsvariablen Vorrang.
+ASP.NET Core-Apps werden [standardmäßig](xref:fundamentals/configuration/index#default) zum Lesen aus *appsettings.json*, Umgebungsvariablen, der Befehlszeile und mehr konfiguriert. Wenn die Konfiguration der App geladen wird, überschreiben Werte aus Umgebungsvariablen die Werte von *appsettings.json*.
 
-Zum Verwalten von vertraulichen Konfigurationsdaten wie Passwörtern bietet ASP.NET Core ein [Geheimnisverwaltungstool](xref:security/app-secrets). Für Produktionsgeheimnisse empfehlen wir [Azure Key Vault](xref:security/key-vault-configuration).
+Die bevorzugte Methode für das Lesen zugehöriger Konfigurationswerte ist die Verwendung des [Optionsmusters](xref:fundamentals/configuration/options). Weitere Informationen finden Sie unter [Binden hierarchischer Konfigurationsdaten mit dem Optionsmuster](xref:fundamentals/configuration/index#optpat).
+
+Zum Verwalten vertraulicher Konfigurationsdaten wie Kennwörter bietet ASP.NET Core den [Secret Manager](xref:security/app-secrets#secret-manager). Für Produktionsgeheimnisse empfehlen wir [Azure Key Vault](xref:security/key-vault-configuration).
 
 Weitere Informationen finden Sie unter <xref:fundamentals/configuration/index>.
 
-## <a name="options"></a>Optionen
-
-Wo möglich, folgt ASP.NET Core dem *Optionsmuster* zum Speichern und Abrufen von Konfigurationswerten. Das Optionsmuster verwendet Klassen, um Gruppen von zusammengehörigen Einstellungen darzustellen.
-
-Im folgenden Codebeispiel werden WebSockets-Optionen festgelegt:
-
-```csharp
-var options = new WebSocketOptions  
-{  
-   KeepAliveInterval = TimeSpan.FromSeconds(120),  
-   ReceiveBufferSize = 4096
-};  
-app.UseWebSockets(options);
-```
-
-Weitere Informationen finden Sie unter <xref:fundamentals/configuration/options>.
-
 ## <a name="environments"></a>Umgebungen
 
-Ausführungsumgebungen wie *Entwicklung*, *Staging* und *Produktion* sind in ASP.NET Core von besonderer Bedeutung. Um die Umgebung anzugeben, in der eine App ausgeführt wird, stellen Sie die `ASPNETCORE_ENVIRONMENT`-Umgebungsvariable ein. ASP.NET Core liest diese Umgebungsvariable beim Start der App und speichert den Wert in einer `IHostingEnvironment`-Implementierung. Das Umgebungsobjekt ist in der gesamten App mithilfe der Dependency Injection verfügbar.
+Ausführungsumgebungen wie `Development`, `Staging` und `Production` sind in ASP.NET Core von besonderer Bedeutung. Legen Sie die Umgebung fest, in der eine App ausgeführt wird, indem Sie die Umgebungsvariable `ASPNETCORE_ENVIRONMENT` festlegen. ASP.NET Core liest diese Umgebungsvariable beim Start der App und speichert den Wert in einer `IWebHostEnvironment`-Implementierung. Diese Implementierung ist per DI überall in einer App verfügbar.
 
-Im folgenden Codebeispiel aus der `Startup`-Klasse wird die App so konfiguriert, dass detaillierte Fehlerinformationen nur bereitgestellt werden, wenn die App in der Entwicklung ausgeführt wird:
+Im Folgenden Beispiel wird die App so konfiguriert, dass sie ausführliche Fehlerinformationen angibt, wenn sie in der `Development`-Umgebung ausgeführt wird:
 
-[!code-csharp[](index/snapshots/2.x/Startup2.cs?highlight=3-6)]
+[!code-csharp[](index/samples_snapshot/3.x/StartupConfigure.cs?highlight=3-6)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/environments>.
 
 ## <a name="logging"></a>Protokollierung
 
-ASP.NET Core unterstützt eine Protokollierungs-API, die mit einer Vielzahl von integrierten Protokollierungsanbietern und Drittanbieter-Protokollierungslösungen zusammenarbeitet. Zu den verfügbaren Anbietern gehören folgende:
+ASP.NET Core unterstützt eine Protokollierungs-API, die mit einer Vielzahl von integrierten Protokollierungsanbietern und Drittanbieter-Protokollierungslösungen zusammenarbeitet. Folgende Anbieter sind verfügbar:
 
 * Konsole
 * Debug
@@ -166,13 +156,11 @@ ASP.NET Core unterstützt eine Protokollierungs-API, die mit einer Vielzahl von 
 * Azure App Service
 * Azure Application Insights
 
-Schreiben Sie Protokolle aus jeder Stelle im Code einer App, indem Sie ein `ILogger`-Objekt aus Dependency Injection abrufen und Protokollmethoden aufrufen.
+Zum Erstellen von Protokollen lösen Sie einen <xref:Microsoft.Extensions.Logging.ILogger%601>-Dienst aus DI, und rufen Sie Protokollierungsmethoden wie <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> auf. Zum Beispiel:
 
-Hier ist ein Beispielcode, in dem ein `ILogger`-Objekt mit Konstruktorinjektion und den hervorgehobenen Aufrufen der Protokollierungsmethode verwendet wird.
+[!code-csharp[](index/samples_snapshot/3.x/TodoController.cs?highlight=5,13,19)]
 
-[!code-csharp[](index/snapshots/2.x/TodoController.cs?highlight=5,13,17)]
-
-Mithilfe der `ILogger`-Schnittstelle können Sie eine beliebige Anzahl von Feldern an den Protokollierungsanbieter übergeben. Die Felder werden häufig dazu verwendet, eine Meldungszeichenfolge zu erstellen, der Anbieter kann sie aber auch als einzelne Felder an einen Datenspeicher senden. Dieses Funktion ermöglicht Protokollierungsanbietern das Implementieren von [semantischer Protokollierung, auch bezeichnet als strukturierte Protokollierung](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
+Protokollierungsmethoden wie `LogInformation` unterstützen eine beliebige Anzahl von Feldern. Diese Felder werden häufig zum Erstellen einer `string`-Meldung verwendet, einige Protokollierungsanbieter senden sie jedoch als separate Felder an einen Datenspeicher. Dieses Funktion ermöglicht Protokollierungsanbietern das Implementieren von [semantischer Protokollierung, auch bezeichnet als strukturierte Protokollierung](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
 
 Weitere Informationen finden Sie unter <xref:fundamentals/logging/index>.
 
@@ -197,48 +185,39 @@ Weitere Informationen finden Sie unter <xref:fundamentals/error-handling>.
 
 Eine Implementierung von `IHttpClientFactory` ist verfügbar zum Erstellen von `HttpClient`-Instanzen. Die Factory:
 
-* Ein zentraler Ort für das Benennen und Konfigurieren logischer `HttpClient`-Instanzen wird damit geboten. Zum Beispiel kann ein *github*-Client für den Zugriff auf GitHub registriert und konfiguriert werden. Ein Standard-Client kann für andere Zwecke registriert werden.
-* Unterstützt die Registrierung und Verkettung von mehreren delegierenden Handlern, um eine Pipeline für die Middleware für ausgehende Anforderungen zu erstellen. Dieses Muster ähnelt der eingehenden Pipeline für Middleware in ASP.NET Core. Das Muster bietet einen Mechanismus zum Verwalten von übergreifenden Belangen bezüglich HTTP-Anforderungen, einschließlich der Zwischenspeicherung, Fehlerbehandlung, Serialisierung und Protokollierung.
+* Ein zentraler Ort für das Benennen und Konfigurieren logischer `HttpClient`-Instanzen wird damit geboten. Registrieren und konfigurieren Sie beispielsweise einen *GitHub*-Client für den Zugriff auf GitHub. Registrieren und konfigurieren Sie einen Standardclient für andere Zwecke.
+* Unterstützt die Registrierung und Verkettung von mehreren delegierenden Handlern, um eine Pipeline für die Middleware für ausgehende Anforderungen zu erstellen. Dieses Muster ähnelt der eingehenden Middlewarepipeline von ASP.NET Core. Das Muster bietet einen Mechanismus zum Verwalten von übergreifenden Belangen für HTTP-Anforderungen, einschließlich der Zwischenspeicherung, Fehlerbehandlung, Serialisierung und Protokollierung.
 * Integrierbar in *Polly*, eine beliebte Drittanbieter-Bibliothek zur Behandlung vorübergehender Fehler.
-* Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientMessageHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
-* Eine konfigurierbare Protokollierungsfunktion wird (über `ILogger`) für alle Anforderungen hinzugefügt, die über Clients gesendet werden, die von der Factory erstellt wurden.
+* Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
+* Eine konfigurierbare Protokollierungsfunktion wird über <xref:Microsoft.Extensions.Logging.ILogger> für alle Anforderungen hinzugefügt, die über Clients gesendet werden, die von der Factory erstellt wurden.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.
 
 ## <a name="content-root"></a>Inhaltsstammverzeichnis
 
-Der Inhaltsstamm ist der Basispfad zu Folgendem:
+Der Inhaltsstamm ist der Basispfad für:
 
-* Der ausführbaren Datei ( *.exe*), die die App hostet.
+* Die ausführbare Datei, die die App hostet ( *.exe*).
 * Kompilierten Assemblys, die die App bilden ( *.dll*).
-* Inhaltsdateien ohne Code, die von der App verwendet werden, wie z. B.:
+* Inhaltsdateien, die von der App verwendet werden, z. B.:
   * Razor-Dateien ( *.cshtml*, *.razor*)
   * Konfigurationsdateien ( *.json*, *.xml*)
   * Datendateien ( *.db*)
-* [Webstamm](#web-root), in der Regel der veröffentlichte Ordner *wwwroot*.
+* Der [Webstamm](#web-root), in der Regel der Ordner *wwwroot*
 
-Entwicklungsphase:
-
-* Der Inhaltsstamm ist standardmäßig auf das Stammverzeichnis des Projekts festgelegt.
-* Das Stammverzeichnis des Projekts dient zum Erstellen von Folgendem:
-  * Pfad zu den Inhaltsdateien ohne Code der App im Stammverzeichnis des Projekts.
-  * [Webstamm](#web-root), in der Regel der Ordner *wwwroot* im Stammverzeichnis des Projekts.
-
-Ein alternativer Inhaltsstammpfad kann beim [Erstellen des Hosts](#host) angegeben werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#contentrootpath>.
+Während der Entwicklung wird standardmäßig das Stammverzeichnis des Projekts als Inhaltsstamm verwendet. Dieses Verzeichnis ist auch der Basispfad für die Inhaltsdateien der App und den [Webstamm](#web-root). Sie können einen anderen Inhaltsstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/generic-host#contentrootpath-1).
 
 ## <a name="web-root"></a>Webstammverzeichnis
 
-Der Webstamm ist der Basispfad zu öffentlichen, statischen Ressourcendateien ohne Code, wie z. B.:
+Der Webstamm ist der Basispfad für öffentliche, statische Ressourcendateien, zum Beispiel:
 
 * Stylesheets ( *.css*)
 * JavaScript ( *.js*)
 * Bilder ( *.png*, *.jpg*)
 
-Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis (samt Unterverzeichnissen) bereitgestellt.
+Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis und dessen Unterverzeichnissen bereitgestellt. Standardmäßig lautet der Webstammpfad *{Inhaltsstamm}/wwwroot*. Sie können einen anderen Webstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/generic-host#webroot-1).
 
-Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, doch beim [Erstellen des Hosts](#host) kann ein anderer Webstamm angegeben werden. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host#webroot>.
-
-Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im *wwwroot/local*-Verzeichnis und in Unterverzeichnisse veröffentlicht werden:
+Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im Verzeichnis *wwwroot/local* und dessen Unterverzeichnissen veröffentlicht werden:
 
 ```xml
 <ItemGroup>
@@ -246,9 +225,7 @@ Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Pro
 </ItemGroup>
 ```
 
-Weitere Informationen darüber, wie Sie verhindern, dass statische Identitätsobjekte veröffentlicht werden, finden Sie unter <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>.
-
-In Razor-Dateien ( *.cshtml*) zeigen Tilde und Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
+In *CSHTML*-Dateien von Razor zeigen Tilden mit anschließendem Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.
 
@@ -271,7 +248,7 @@ Die Pipeline zur Anforderungsverarbeitung besteht aus mehreren *Middlewarekompon
 
 Beispiel für eine `Startup`-Klasse:
 
-[!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=3,12)]
+[!code-csharp[](index/samples_snapshot/2.x/Startup.cs?highlight=3,12)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/startup>.
 
@@ -281,7 +258,7 @@ ASP.NET Core verfügt über ein integriertes DI-Framework (Dependency Injection)
 
 Hier ist eine Klasse, in der Dependency Injection verwendet wird, um ein Entity Framework Core-Kontextobjekt abzurufen. Die hervorgehobene Zeile ist ein Beispiel für die Konstruktorinjektion:
 
-[!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
+[!code-csharp[](index/samples_snapshot/2.x/Index.cshtml.cs?highlight=5)]
 
 Obwohl die Dependency Injection integriert ist, können Sie hier, falls gewünscht, einen IoC-Container eines Drittanbieters einbinden.
 
@@ -295,7 +272,7 @@ Gemäß Konvention wird eine Middlewarekomponente der Pipeline durch Aufrufen ih
 
 Der hervorgehobene Code in dem folgenden Beispiel konfiguriert die Pipeline zur Anforderungsverarbeitung:
 
-[!code-csharp[](index/snapshots/2.x/Startup1.cs?highlight=14-16)]
+[!code-csharp[](index/samples_snapshot/2.x/Startup.cs?highlight=14-16)]
 
 ASP.NET Core enthält eine Reihe umfangreicher integrierter Middleware. Außerdem können Sie benutzerdefinierte Middleware erstellen.
 
@@ -317,7 +294,7 @@ Es stehen zwei Hosts zur Verfügung: der Webhost und der generische Host. In ASP
 
 Der Code zum Erstellen eines Hosts befindet sich in `Program.Main`:
 
-[!code-csharp[](index/snapshots/2.x/Program1.cs)]
+[!code-csharp[](index/samples_snapshot/2.x/Program.cs)]
 
 Die Methode `CreateDefaultBuilder` konfiguriert einen Host mit häufig verwendeten Optionen wie den folgenden:
 
@@ -400,14 +377,7 @@ Wo möglich, folgt ASP.NET Core dem *Optionsmuster* zum Speichern und Abrufen vo
 
 Im folgenden Codebeispiel werden WebSockets-Optionen festgelegt:
 
-```csharp
-var options = new WebSocketOptions  
-{  
-   KeepAliveInterval = TimeSpan.FromSeconds(120),  
-   ReceiveBufferSize = 4096
-};  
-app.UseWebSockets(options);
-```
+[!code-csharp[](index/samples_snapshot/2.x/UseWebSockets.cs)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/configuration/options>.
 
@@ -417,7 +387,7 @@ Ausführungsumgebungen wie *Entwicklung*, *Staging* und *Produktion* sind in ASP
 
 Im folgenden Codebeispiel aus der `Startup`-Klasse wird die App so konfiguriert, dass detaillierte Fehlerinformationen nur bereitgestellt werden, wenn die App in der Entwicklung ausgeführt wird:
 
-[!code-csharp[](index/snapshots/2.x/Startup2.cs?highlight=3-6)]
+[!code-csharp[](index/samples_snapshot/2.x/StartupConfigure.cs?highlight=3-6)]
 
 Weitere Informationen finden Sie unter <xref:fundamentals/environments>.
 
@@ -437,7 +407,7 @@ Schreiben Sie Protokolle aus jeder Stelle im Code einer App, indem Sie ein `ILog
 
 Hier ist ein Beispielcode, in dem ein `ILogger`-Objekt mit Konstruktorinjektion und den hervorgehobenen Aufrufen der Protokollierungsmethode verwendet wird.
 
-[!code-csharp[](index/snapshots/2.x/TodoController.cs?highlight=5,13,17)]
+[!code-csharp[](index/samples_snapshot/2.x/TodoController.cs?highlight=5,13,17)]
 
 Mithilfe der `ILogger`-Schnittstelle können Sie eine beliebige Anzahl von Feldern an den Protokollierungsanbieter übergeben. Die Felder werden häufig dazu verwendet, eine Meldungszeichenfolge zu erstellen, der Anbieter kann sie aber auch als einzelne Felder an einen Datenspeicher senden. Dieses Funktion ermöglicht Protokollierungsanbietern das Implementieren von [semantischer Protokollierung, auch bezeichnet als strukturierte Protokollierung](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
 
@@ -467,7 +437,7 @@ Eine Implementierung von `IHttpClientFactory` ist verfügbar zum Erstellen von `
 * Ein zentraler Ort für das Benennen und Konfigurieren logischer `HttpClient`-Instanzen wird damit geboten. Zum Beispiel kann ein *github*-Client für den Zugriff auf GitHub registriert und konfiguriert werden. Ein Standard-Client kann für andere Zwecke registriert werden.
 * Unterstützt die Registrierung und Verkettung von mehreren delegierenden Handlern, um eine Pipeline für die Middleware für ausgehende Anforderungen zu erstellen. Dieses Muster ähnelt der eingehenden Pipeline für Middleware in ASP.NET Core. Das Muster bietet einen Mechanismus zum Verwalten von übergreifenden Belangen bezüglich HTTP-Anforderungen, einschließlich der Zwischenspeicherung, Fehlerbehandlung, Serialisierung und Protokollierung.
 * Integrierbar in *Polly*, eine beliebte Drittanbieter-Bibliothek zur Behandlung vorübergehender Fehler.
-* Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientMessageHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
+* Das Pooling und die Lebensdauer von zugrunde liegenden `HttpClientHandler`-Instanzen werden verwaltet, um gängige DNS-Probleme zu vermeiden, die bei der manuellen Verwaltung der `HttpClient`-Lebensdauer auftreten.
 * Eine konfigurierbare Protokollierungsfunktion wird (über `ILogger`) für alle Anforderungen hinzugefügt, die über Clients gesendet werden, die von der Factory erstellt wurden.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/http-requests>.

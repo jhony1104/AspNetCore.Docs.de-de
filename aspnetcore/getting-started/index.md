@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 uid: getting-started
-ms.openlocfilehash: 047fd7a74d3d53f68a730d67b63c65fe6bda529f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 86a0c8d017138a949fddc0356f3de548d368a4c0
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644305"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417609"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutorial: Erste Schritte mit ASP.NET Core
 
@@ -91,7 +91,7 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-Nachdem die Befehlsshell angibt, dass die App gestartet wurde, wechseln Sie zu [https://localhost:5001](https://localhost:5001).
+Nachdem die Befehlsshell angibt, dass die App gestartet wurde, müssen Sie zu `https://localhost:5001` wechseln.
 
 ## <a name="edit-a-razor-page"></a>Bearbeiten einer Razor-Seite
 
@@ -99,7 +99,7 @@ Nachdem die Befehlsshell angibt, dass die App gestartet wurde, wechseln Sie zu [
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-Navigieren Sie zu [https://localhost:5001](https://localhost:5001), aktualisieren Sie die Seite, und überprüfen Sie, ob die Änderungen angezeigt werden.
+Navigieren Sie zu `https://localhost:5001`, aktualisieren Sie die Seite, und überprüfen Sie, ob die Änderungen angezeigt werden.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

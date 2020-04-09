@@ -5,17 +5,17 @@ description: Lernen Sie ASP.NET Core Blazor kennen, eine Möglichkeit, interakti
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 01/31/2020
+ms.date: 03/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 038799564078c4d3e8a7aa3a9841c6303edf9d12
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 6d2e95cd2ec92f97a97cb558fb39e4540450c766
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644263"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80405952"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>Einführung in ASP.NET Core Blazor
 
@@ -28,6 +28,7 @@ Blazor ist ein Framework zum Erstellen einer interaktiven clientseitigen Webbenu
 * Erstellen Sie umfassende interaktive Benutzeroberflächen mit C# anstatt mit JavaScript.
 * Gemeinsames Verwenden von server- und clientseitiger App-Logik, die in .NET geschrieben wurde.
 * Rendern der Benutzeroberfläche als HTML und CSS für umfassende Browserunterstützung (einschließlich mobiler Browser).
+* Integrieren mit modernen Hostingplattformen, z. B. [Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index)
 
 Die Verwendung von .NET im für die clientseitige Webentwicklung bietet die folgenden Vorteile:
 
