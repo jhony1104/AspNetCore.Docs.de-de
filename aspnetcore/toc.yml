@@ -1082,6 +1082,8 @@
       uid: security/enforcing-ssl
     - name: Hosten von Docker mit HTTPS
       uid: security/docker-https
+    - name: Docker Compose mit HTTPS
+      uid: security/docker-compose-https
     - name: Unterstützung für die Datenschutz-Grundverordnung (DSGVO)
       uid: security/gdpr
     - name: Anforderungsfälschungssicherheit
