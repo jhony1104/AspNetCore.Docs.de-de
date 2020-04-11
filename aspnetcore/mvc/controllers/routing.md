@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um 
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: c63313ec060c5be368fcbd20edf5f0d557046d2e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 74afd0a076ca8bd753000f547ef0a26308e8a884
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977215"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123491"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -93,10 +93,11 @@ Ersetzt:
 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-Routing wird mit <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> der <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> und Middleware konfiguriert. So verwenden Sie Controller:
-
-* Rufen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` Sie innerhalb, um [Attribut routende](#ar) Controller zuzuordnen.
-* Rufen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>Sie oder , um [konventionell geroutete](#cr) Controller zu kartieren.
+> [!IMPORTANT]
+> Routing wird mit <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> der <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> und Middleware konfiguriert. So verwenden Sie Controller:
+>
+> * Rufen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` Sie innerhalb, um [Attribut routende](#ar) Controller zuzuordnen.
+> * Rufen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>Sie oder , um [konventionell geroutete](#cr) Controller zu kartieren.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -415,7 +416,7 @@ Routenvorlagen, die auf eine Aktion angewendet werden, die mit einem `/` oder `~
 
 In der folgenden `[Route]` Tabelle werden die Attribute im vorherigen Code erläutert:
 
-| Attribut               | Kombiniert mit`[Route("Home")]` | Definiert die Routenvorlage |
+| attribute               | Kombiniert mit`[Route("Home")]` | Definiert die Routenvorlage |
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | Ja | `"Home"` |
 | `[Route("Index")]` | Ja | `"Home/Index"` |

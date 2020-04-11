@@ -1,34 +1,47 @@
 ---
-title: Komponententaghilfsprogramm in ASP.net Core
+title: Komponenten-Tag-Helfer in ASP.NET Core
 author: guardrex
 ms.author: riande
-description: Erfahren Sie, wie Sie das taghilfsprogramm ASP.net Core Component zum Darstellen von Razor-Komponenten in Seiten und Ansichten verwenden.
+description: Erfahren Sie, wie Sie den ASP.NET Core Component Tag Helper verwenden, um Razor-Komponenten in Seiten und Ansichten zu rendern.
 ms.custom: mvc
-ms.date: 03/18/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 801ceb73de5bb4ef7500624e1fbddbf96d1ab89c
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80226381"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123429"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a>Komponententaghilfsprogramm in ASP.net Core
+# <a name="component-tag-helper-in-aspnet-core"></a>Komponenten-Tag-Helfer in ASP.NET Core
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
-Verwenden Sie das [komponententaghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper), um eine Komponente aus einer Seite oder Sicht zu Rendering.
+Um eine Komponente von einer Seite oder Ansicht zu rendern, verwenden Sie den [Komponenten-Tag-Hilfsfeld .](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)
 
-Das folgende komponententaghilfsprogramm rendert die `Counter` Komponente in einer Seite oder Ansicht:
+## <a name="prerequisites"></a>Voraussetzungen
+
+Befolgen Sie die Anleitung im Abschnitt *Vorbereiten der App, um Komponenten in Seiten und Ansichten* des <xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> Artikels zu verwenden.
+
+## <a name="component-tag-helper"></a>Component Tag Helper
+
+Der folgende Komponenten-Tag-Hilfsfeld wird die `Counter` Komponente auf einer Seite oder Ansicht rendern:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Pages
+
+...
+
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten übergeben werden. Beachten Sie die folgende `ColorfulCheckbox` Komponente, mit der die Farbe und Größe der Kontrollkästchen Bezeichnung festgelegt wird:
+Im vorherigen Beispiel `Counter` wird davon ausgegangen, dass sich die Komponente im Ordner *Pages* der App befindet.
+
+Der Komponenten-Tag-Hilfssystem kann auch Parameter an Komponenten übergeben. Betrachten Sie `ColorfulCheckbox` die folgende Komponente, die die Farbe und Größe des Kontrollkästchens festlegt:
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -56,14 +69,21 @@ Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten überg
 }
 ```
 
-Die [Komponenten Parameter](xref:blazor/components#component-parameters) `Size` (`int`) und `Color` (`string`) können vom komponententaghilfsprogramm festgelegt werden:
+Die `Size` `int` [Komponentenparameter](xref:blazor/components#component-parameters) `string`( ) und `Color` ( ) können vom Component Tag Helper festgelegt werden:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Shared
+
+...
+
 <component type="typeof(ColorfulCheckbox)" render-mode="ServerPrerendered" 
     param-Size="14" param-Color="@("blue")" />
 ```
 
-Der folgende HTML-Code wird in der Seite oder Sicht gerendert:
+Im vorherigen Beispiel `ColorfulCheckbox` wird davon ausgegangen, dass sich die Komponente im *freigegebenen* Ordner der App befindet.
+
+Der folgende HTML-Code wird auf der Seite oder Ansicht gerendert:
 
 ```html
 <label style="font-size:24px;color:blue">
@@ -72,24 +92,78 @@ Der folgende HTML-Code wird in der Seite oder Sicht gerendert:
 </label>
 ```
 
-Das übergeben einer Zeichenfolge in Anführungszeichen erfordert einen [expliziten Razor-Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie für `param-Color` im vorherigen Beispiel gezeigt. Das Razor-erteilungsverhalten für einen `string` Type-Wert gilt nicht für ein `param-*` Attribut, da das Attribut ein `object` Typ ist.
+Das Übergeben einer zeichenfolgen Zeichenfolge erfordert `param-Color` einen [expliziten Razor-Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie im vorherigen Beispiel gezeigt. Das Razor-Analyseverhalten `string` für einen Typwert gilt `param-*` nicht für ein `object` Attribut, da es sich bei dem Attribut um einen Typ handelt.
 
-Der Parametertyp muss mit JSON serialisierbar sein, in der Regel bedeutet das, dass der Typ über einen Standardkonstruktor und festlegbare Eigenschaften verfügen muss. Beispielsweise können Sie im vorhergehenden Beispiel einen Wert für `Size` und `Color` angeben, da es sich bei den Typen von `Size` und `Color` um primitive Typen (`int` und `string`) handelt, die vom JSON-Serialisierungsprogramm unterstützt werden.
+Der Parametertyp muss JSON serialisierbar sein, was in der Regel bedeutet, dass der Typ über einen Standardkonstruktor und settable-Eigenschaften verfügen muss. Sie können z. B. `Size` `Color` einen Wert für und `Size` im `Color` vorherigen Beispiel`int` `string`angeben, da die Typen von und die primitivetypen ( und ) vom JSON-Serialisierungsmodul unterstützt werden.
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die Komponente:
+Im folgenden Beispiel wird ein Klassenobjekt an die Komponente übergeben:
 
-* Ob die Komponente zuvor für die Seite gerendert wird
-* Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
+*MyClass.cs*:
+
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+    }
+
+    public int MyInt { get; set; } = 999;
+    public string MyString { get; set; } = "Initial value";
+}
+```
+
+**Die Klasse muss über einen öffentlichen parameterlosen Konstruktor verfügen.**
+
+*Shared/MyComponent.razor*:
+
+```razor
+<h2>MyComponent</h2>
+
+<p>Int: @MyObject.MyInt</p>
+<p>String: @MyObject.MyString</p>
+
+@code
+{
+    [Parameter]
+    public MyClass MyObject { get; set; }
+}
+```
+
+*Seiten/MyPage.cshtml*:
+
+```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}
+@using {APP ASSEMBLY}.Shared
+
+...
+
+@{
+    var myObject = new MyClass();
+    myObject.MyInt = 7;
+    myObject.MyString = "Set by MyPage";
+}
+
+<component type="typeof(MyComponent)" render-mode="ServerPrerendered" 
+    param-MyObject="@myObject" />
+```
+
+Im vorherigen Beispiel `MyComponent` wird davon ausgegangen, dass sich die Komponente im *freigegebenen* Ordner der App befindet. `MyClass`sich im Namespace der`{APP ASSEMBLY}`App befindet ( ).
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>konfiguriert, ob die Komponente:
+
+* Wird in die Seite vorgerendert.
+* Wird als statischer HTML auf der Seite gerendert oder wenn es die erforderlichen Informationen enthält, um eine Blazor-App vom Benutzer-Agent zu booten.
 
 | Rendermodus | BESCHREIBUNG |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rendert die Komponente in statische HTML und fügt einen Marker für eine Blazor Server-App hinzu. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rendert einen Marker für eine Blazor Server-App. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rendert die Komponente in statischen HTML-Code. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rendert die Komponente in statischen HTML Blazor und enthält eine Markierung für eine Server-App. Wenn der Benutzer-Agent gestartet wird, wird Blazor diese Markierung verwendet, um eine App zu booten. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rendert eine Markierung Blazor für eine Server-App. Die Ausgabe der Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird Blazor diese Markierung verwendet, um eine App zu booten. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rendert die Komponente in statischen HTML. |
 
-Seiten und Ansichten können zwar Komponenten verwenden, doch das Gegenteil ist nicht der Fall. Komponenten können keine Ansichts-und Seiten spezifischen Funktionen verwenden, wie z. b. partielle Sichten und Abschnitte. Wenn Sie Logik aus einer partiellen Sicht in einer Komponente verwenden möchten, müssen Sie die partielle Sicht Logik in eine Komponente einbeziehen.
+Seiten und Ansichten können zwar Komponenten verwenden, aber das Gegenteil ist nicht wahr. Komponenten können keine ansichts- und seitenspezifischen Features wie Teilansichten und Abschnitte verwenden. Um Logik aus einer Teilansicht in einer Komponente zu verwenden, faktoridiere die partielle Ansichtslogik in eine Komponente.
 
-Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.
+Das Rendern von Serverkomponenten von einer statischen HTML-Seite wird nicht unterstützt.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
