@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/8/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 7f329ffb4c63e8699663f49720145984bb8802fd
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 0afd39fdb5a6f570e0e78ad54f6c436460bad3a6
+ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994605"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81223958"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -31,7 +31,7 @@ So aktivieren Sie die Laufzeitkompilierung für alle Umgebungen und Konfiguratio
 
 1. das NuGet-Paket [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) installieren.
 
-1. Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von `AddRazorRuntimeCompilation` enthält. Beispiel:
+1. Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> enthält. Beispiel:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -61,29 +61,15 @@ So aktivieren Sie die Laufzeitkompilierung basierend auf Umgebung und Konfigurat
 
 1. Aktualisieren Sie die `Startup.ConfigureServices`-Methode des Projekts so, dass diese einen Aufruf von `AddRazorRuntimeCompilation` enthält. Führen Sie `AddRazorRuntimeCompilation` bedingt so aus, dass die Ausführung nur dann im Debugmodus erfolgt, wenn die `ASPNETCORE_ENVIRONMENT`-Variable auf `Development` festgelegt ist:
 
-    ```csharp
-    public IWebHostEnvironment Env { get; set; }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        IMvcBuilder builder = services.AddRazorPages();
-
-    #if DEBUG
-        if (Env.IsDevelopment())
-        {
-            builder.AddRazorRuntimeCompilation();
-        }
-    #endif
-
-        // code omitted for brevity
-    }
-    ```
+  [!code-csharp[](~/mvc/views/view-compilation/sample/Startup.cs?name=snippet)]
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
+* [RazorCompileOnBuild- und RazorCompileOnPublish-Eigenschaften.](xref:razor-pages/sdk#properties)
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
+* Im Beispiel für die [Laufzeitkompilierung auf GitHub](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) finden Sie ein Beispiel, das zeigt, dass die Laufzeitkompilierung projektübergreifend funktioniert.
 
 ::: moniker-end
 
