@@ -5,17 +5,17 @@ description: Erstellen Sie eine Chat-App, die ASP.NET Core SignalR mit Blazor We
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/31/2020
+ms.date: 03/26/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 605cf8ebd3e85586f3e479c815f0b9902ce5a91a
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083382"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80306571"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Verwenden von ASP.NET Core SignalR mit Blazor WebAssembly
 
@@ -58,10 +58,10 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionierende Chat-App.
 
 ## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Erstellen eines gehosteten Blazor WebAssembly-App-Projekts
 
-Installieren Sie die Vorlage [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly). Das Paket [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) enthält eine Vorschauversion, solange sich die Blazor WebAssembly in der Vorschauphase befindet. Führen Sie in einer Befehlsshell den folgenden Befehle aus:
+Wenn Sie nicht Visual Studio Version 16.6 Vorschauversion 2 oder höher verwenden, installieren Sie die [Blazor-WebAssembly](xref:blazor/hosting-models#blazor-webassembly)-Vorlage. Das Paket [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) enthält eine Vorschauversion, solange sich die Blazor WebAssembly in der Vorschauphase befindet. Führen Sie in einer Befehlsshell den folgenden Befehle aus:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview2.20160.5
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
 ```
 
 Befolgen Sie die Anleitungen für die Auswahl der Tools:

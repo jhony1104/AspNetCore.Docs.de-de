@@ -5,17 +5,17 @@ description: Hier erfahren Sie mehr über ASP.NET Core-Vorlagen für Blazor-Apps
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/29/2020
+ms.date: 03/26/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: acfa4b8a42cbd310c6fc6dc973573578e94ef999
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649447"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80320984"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Core-Blazor-Vorlagen
 
@@ -58,18 +58,17 @@ Die folgenden Dateien und Ordner bilden eine Blazor-App, die aus einer Blazor-Vo
     * Diese lädt die .NET-Runtime, die App und der App-Abhängigkeiten herunter.
     * Sie initialisiert die Runtime, damit die App ausgeführt werden kann.
 
-* *Pages/_Host.cshtml* (Blazor Server): die Stammseite der App, die als Razor-Seite implementiert ist:
-  * Wenn eine Seite der App zum ersten Mal angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
-  * Die `_framework/blazor.server.js`-JavaScript-Datei wird geladen, die die SignalR-Echtzeitverbindung zwischen dem Browser und dem Server einrichtet.
-  * Auf der Hostseite wird angegeben, wo die `App`-Stammkomponente (*App.razor*) gerendert wird.
-
 * *App.razor*: Hierbei handelt es sich um die Stammkomponente der App, die das clientseitige Routing mithilfe der <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente einrichtet. Die `Router`-Komponente fängt die Browsernavigation ab und rendert die Seite, die der angeforderten Adresse entspricht.
 
-* *Pages*: Dieser Ordner enthält die routingfähigen Komponenten und Seiten ( *.razor*), aus denen die Blazor-App besteht. Die Route für jede Seite wird mithilfe der [`@page`](xref:mvc/views/razor#page)-Anweisung angegeben. Die Vorlage besteht aus den folgenden Komponenten:
-  * `Index` (*Index.razor*): implementiert die Startseite
+* *Pages*: Dieser Ordner enthält die routingfähigen Komponenten und Seiten ( *.razor*), aus denen die Blazor-App besteht, sowie die Razor-Stammseite einer Blazor-Server-App. Die Route für jede Seite wird mithilfe der [`@page`](xref:mvc/views/razor#page)-Anweisung angegeben. Die Vorlage besteht aus den folgenden Teilen:
+  * *_Host.cshtml* (Blazor-Server): die Stammseite der App, die als Razor-Seite implementiert ist:
+    * Wenn eine Seite der App zum ersten Mal angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
+    * Die `_framework/blazor.server.js`-JavaScript-Datei wird geladen, die die SignalR-Echtzeitverbindung zwischen dem Browser und dem Server einrichtet.
+    * Auf der Hostseite wird angegeben, wo die `App`-Stammkomponente (*App.razor*) gerendert wird.
   * `Counter` (*Counter.razor*) implementiert die Zählerseite
   * `Error` (*Error.razor*, nur Blazor Server-Apps): wird gerendert, wenn ein Ausnahmefehler in der App auftritt
   * `FetchData` (*FetchData.razor*): implementiert die Seite zum Abrufen von Daten
+  * `Index` (*Index.razor*): implementiert die Startseite
 
 * *Shared*: Dieser Ordner enthält weitere Benutzeroberflächenkomponenten ( *.razor*), die von der App verwendet werden:
   * `MainLayout` (*MainLayout.razor*): die Layoutkomponente der App

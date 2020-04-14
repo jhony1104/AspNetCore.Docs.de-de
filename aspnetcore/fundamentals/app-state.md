@@ -8,12 +8,12 @@ ms.date: 03/06/2020
 no-loc:
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 0cf75c14e09744907af926f0ec314801efeb3023
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 85d2a418c3aaae40bbcdc040095c2c98d4b7242c
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083266"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80640045"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Sitzungs- und Zustandsverwaltung in ASP.NET Core
 
@@ -164,7 +164,7 @@ Im folgenden Codebeispiel wird veranschaulicht, wie Sie eine ganze Zahl und eine
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-Alle Sitzungsdaten müssen serialisiert werden, um ein Szenario mit einem verteilten Cache zu ermöglichen, auch wenn Sie den speicherinternen Cache verwenden. Serialisierer von Zeichenfolgen und ganzen Zahlen werden durch die Erweiterungsmethoden von [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) bereitgestellt. Komplexe Typen müssen vom Benutzer mit einem anderen Verfahren wie etwa JSON serialisiert werden.
+Alle Sitzungsdaten müssen serialisiert werden, um ein Szenario mit einem verteilten Cache zu ermöglichen, auch wenn Sie den speicherinternen Cache verwenden. Serialisierer für Zeichenfolgen und ganze Zahlen werden durch die Erweiterungsmethoden von [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) bereitgestellt. Komplexe Typen müssen vom Benutzer mit einem anderen Verfahren wie etwa JSON serialisiert werden.
 
 Verwenden Sie den folgenden Beispielcode, um Objekte zu serialisieren:
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 uid: tutorials/first-web-api
-ms.openlocfilehash: 55dfc05b5c96f7fa060d537745bac969e92daa9b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644965"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417662"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -135,7 +135,7 @@ Wenn Sie in einem Dialogfeld angeben müssen, ob Sie dem IIS Express-Zertifikat 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Drücken Sie STRG+F5, um die App auszuführen. Rufen Sie in einem Browser die folgende URL auf: [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast).
+Drücken Sie STRG+F5, um die App auszuführen. Navigieren Sie in einem Browser zur folgenden URL: `https://localhost:5001/WeatherForecast`.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
@@ -374,8 +374,8 @@ Diese Methoden implementieren zwei GET-Endpunkte:
 
 Testen Sie die App, indem Sie die beiden Endpunkte in einem Browser oder über Postman aufrufen. Zum Beispiel:
 
-* [https://localhost:5001/api/TodoItems](https://localhost:5001/api/TodoItems)
-* [https://localhost:5001/api/TodoItems/1](https://localhost:5001/api/TodoItems/1)
+* `https://localhost:5001/api/TodoItems`
+* `https://localhost:5001/api/TodoItems/1`
 
 Durch einen Aufruf von `GetTodoItems` wird eine Antwort gesendet, die der folgenden ähnelt:
 
@@ -606,7 +606,7 @@ Wenn Sie in einem Dialogfeld angeben müssen, ob Sie dem IIS Express-Zertifikat 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Drücken Sie STRG+F5, um die App auszuführen. Rufen Sie in einem Browser die folgende URL auf: [https://localhost:5001/api/values](https://localhost:5001/api/values).
+Drücken Sie STRG+F5, um die App auszuführen. Navigieren Sie in einem Browser zur folgenden URL: `https://localhost:5001/api/values`.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 

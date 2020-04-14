@@ -5,17 +5,17 @@ description: Hier erfahren Sie, wie Sie Razor-Komponenten erstellen und verwende
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 03/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 7afc9250cdfb4b791ef939ead0f41b503d83fad8
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511274"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80306510"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -301,6 +301,8 @@ Wenn die Komponente gerendert wird, wird das `_loginDialog`-Feld mit der unterge
 
 > [!IMPORTANT]
 > Die `_loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise nötig. Sie können Komponentenverweise bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, indem Sie die Methode [OnAfterRenderAsync oder OnAfterRender](xref:blazor/lifecycle#after-component-render) verwenden.
+
+Informationen zum Verweisen auf Komponenten in einer Schleife finden Sie unter [Erfassen von Verweisen auf mehrere ähnliche untergeordnete Komponenten (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
 Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet, um [Elementverweise zu erfassen](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements), es handelt sich jedoch nicht um ein JavaScript-Interop-Feature. Komponentenverweise werden nicht an JavaScript-Code übermittelt, sondern werden nur in .NET-Code verwendet.
 

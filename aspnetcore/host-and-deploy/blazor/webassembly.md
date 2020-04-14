@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Co
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 04/06/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: ea2c625f424447209a362cdc58bdb18be061e47f
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511352"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751132"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly
 
@@ -93,6 +93,22 @@ Beim Veröffentlichen eines Blazor-Projekts wird eine Datei *web.config* mit der
 * URL-Rewrite-Modul-Regeln werden eingerichtet:
   * Stellen Sie das Unterverzeichnis bereit, in dem sich die statischen Objekte der App befinden (*wwwroot/{PATH REQUESTED}* ).
   * Richten Sie ein SPA-Fallbackrouting ein, sodass Anforderungen für nicht dateibasierte Objekte an das Standarddokument der App im entsprechenden Ordner für statische Objekte (*wwwroot/index.html*) umgeleitet werden.
+  
+#### <a name="use-a-custom-webconfig"></a>Verwenden einer benutzerdefinierten Datei web.config
+
+Gehen Sie wie folgt vor, um eine benutzerdefinierte Datei *web.config*  zu verwenden:
+
+1. Legen Sie die benutzerdefinierte Datei *web.config* im Stamm des Projektordners ab.
+1. Fügen Sie das folgende Ziel zur Projektdatei ( *.csproj*) hinzu:
+
+   ```xml
+   <Target Name="CopyWebConfigOnPublish" AfterTargets="Publish">
+     <Copy SourceFiles="web.config" DestinationFolder="$(PublishDir)" />
+   </Target>
+   ```
+   
+> [!NOTE]
+> Die Verwendung der MSBuild-Eigenschaft `<IsWebConfigTransformDisabled>` mit dem Wert `true` wird in Blazor-WebAssembly-Apps nicht unterstützt, [da diese für in den IIS bereitgestellte ASP.NET Core-Apps gedacht ist](xref:host-and-deploy/iis/index#webconfig-file). Weitere Informationen finden Sie unter [Kopieren von Ziel für Bereitstellung einer benutzerdefinierten Datei web.config für Blazor-WASM erforderlich (dotnet/aspnetcore #20569)](https://github.com/dotnet/aspnetcore/issues/20569).
 
 #### <a name="install-the-url-rewrite-module"></a>Installieren des URL-Rewrite-Moduls
 

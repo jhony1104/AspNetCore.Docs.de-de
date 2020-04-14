@@ -5,17 +5,17 @@ description: Erfahren Sie mehr über Hostingmodelle mit Blazor WebAssembly und B
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/18/2020
+ms.date: 03/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: e6ce2be53c35268854e0e8d408b649a8c6ef497e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646801"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80471830"
 ---
 # <a name="aspnet-core-opno-locblazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
@@ -58,6 +58,8 @@ Das Blazor WebAssembly-Hostingmodell besitzt folgende Nachteile:
 * Die Downloadmenge ist größer und die Ladezeit der Apps länger.
 * Die Unterstützung für die .NET-Runtime und -Tools ist weniger ausgereift. Bei der Unterstützung und dem Debuggen in [.NET Standard](/dotnet/standard/net-standard) existieren beispielsweise Einschränkungen.
 
+Das Blazor-Modell für gehostete Apps unterstützt [Docker-Container](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Klicken Sie mit der rechten Maustaste auf das Serverprojekt in Visual Studio, und klicken Sie dann auf **Hinzufügen** > **Docker-Unterstützung**.
+
 ## <a name="opno-locblazor-server"></a>Blazor Server
 
 Mit dem Blazor Server-Hostingmodell wird die App über eine ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
@@ -71,7 +73,7 @@ Die ASP.NET Core-App verweist auf die `Startup`-Klasse der App, um folgende Akti
 * Hinzufügen serverseitiger Dienste
 * Hinzufügen der App zur Pipeline für die Anforderungsverarbeitung
 
-Mit dem Skript&dagger; `blazor.server.js` wird die Verbindung zum Client hergestellt. Die App ist für das Beibehalten und Wiederherstellen des App-Zustands im Bedarfsfall (etwa bei einer Unterbrechung der Netzwerkverbindung) verantwortlich.
+Mit dem Skript `blazor.server.js` wird die Verbindung mit dem Client hergestellt. Die App ist für das Beibehalten und Wiederherstellen des App-Zustands im Bedarfsfall (etwa bei einer Unterbrechung der Netzwerkverbindung) verantwortlich. Das Skript `blazor.server.js` wird in einer eingebetteten Ressource im freigegebenen ASP.NET Core-Framework bereitgestellt.
 
 Das Blazor Server-Hostingmodell besitzt folgende Vorteile:
 
@@ -88,7 +90,7 @@ Das Blazor Server-Hostingmodell besitzt folgende Nachteile:
 * Die Skalierbarkeit ist bei Apps mit vielen Benutzern schwierig. Der Server muss eine Vielzahl von Clientverbindungen verwalten und Clientzustände verarbeiten.
 * Zum Bereitstellen der App ist ein ASP.NET Core-Server erforderlich. Serverlose Bereitstellungsszenarios sind nicht möglich (z. B. das Bereitstellen der App aus einem CDN).
 
-&dagger;Das Skript `blazor.server.js` wird aus einer eingebetteten Ressource im freigegebenen ASP.NET Core-Framework bereitgestellt.
+Das Blazor-Server-App-Modell unterstützt [Docker-Container](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Klicken Sie mit der rechten Maustaste auf das Projekt in Visual Studio, und klicken Sie dann auf **Hinzufügen** > **Docker-Unterstützung**.
 
 ### <a name="comparison-to-server-rendered-ui"></a>Vergleich mit einer auf dem Server gerenderten Benutzeroberfläche
 
