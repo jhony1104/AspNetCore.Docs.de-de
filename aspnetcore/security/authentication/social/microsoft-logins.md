@@ -7,18 +7,18 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 32315267e0672b0747917228f08591a15e4449f8
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 12c86456dad86731b86487a3a4dd725f36677002
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277248"
+ms.locfileid: "81384049"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Externe S-Anmeldung für Microsoft-Konten mit ASP.NET Core
 
 Von [Valeriy Novytskyy](https://github.com/01binary) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-In diesem Beispiel wird gezeigt, wie Benutzer sich mit ihrem Microsoft-Konto mit dem auf der [vorherigen Seite](xref:security/authentication/social/index)erstellten ASP.NET Core 3.0-Projekt anmelden können.
+In diesem Beispiel wird gezeigt, wie Benutzer sich mit ihrem Geschäfts-, Schul- oder persönlichen Microsoft-Konto mit dem auf der [vorherigen Seite](xref:security/authentication/social/index)erstellten ASP.NET Core 3.0-Projekt anmelden können.
 
 ## <a name="create-the-app-in-microsoft-developer-portal"></a>Erstellen der App im Microsoft Developer Portal
 
