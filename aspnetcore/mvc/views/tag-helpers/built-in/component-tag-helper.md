@@ -4,17 +4,17 @@ author: guardrex
 ms.author: riande
 description: Erfahren Sie, wie Sie den ASP.NET Core Component Tag Helper verwenden, um Razor-Komponenten in Seiten und Ansichten zu rendern.
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/15/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: aaa4b92a8912b4f52d861ed07432aa7cf3ca5240
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123429"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440960"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Komponenten-Tag-Helfer in ASP.NET Core
 
@@ -24,7 +24,7 @@ Um eine Komponente von einer Seite oder Ansicht zu rendern, verwenden Sie den [K
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-Befolgen Sie die Anleitung im Abschnitt *Vorbereiten der App, um Komponenten in Seiten und Ansichten* des <xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> Artikels zu verwenden.
+Befolgen Sie die Anleitung im Abschnitt *Vorbereiten der App, um Komponenten in Seiten und Ansichten* des <xref:blazor/integrate-components#prepare-the-app> Artikels zu verwenden.
 
 ## <a name="component-tag-helper"></a>Component Tag Helper
 

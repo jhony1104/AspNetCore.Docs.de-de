@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie die Kompilierung von Razor-Dateien in einer ASP.NET Core-App auftreten kann.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 04/14/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277267"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440934"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilieren einer Razor-Datei in ASP.NET Core
 
@@ -83,13 +83,23 @@ Im folgenden Beispiel ist die Laufzeitkompilierung in `IIS Express` `RazorPagesA
 
 In der `Startup` Projektklasse sind keine Codeänderungen erforderlich. Zur Laufzeit sucht ASP.NET Core nach einem [HostingStartup-Attribut](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) auf Assemblyebene in `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`. Das `HostingStartup` Attribut gibt den auszuführenden App-Startcode an. Dieser Startcode ermöglicht die Laufzeitkompilierung.
 
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Aktivieren der Laufzeitkompilierung für eine Razor-Klassenbibliothek
+
+Betrachten Sie ein Szenario, in dem ein Razor Pages-Projekt auf eine [Razor-Klassenbibliothek (RCL)](xref:razor-pages/ui-class) mit dem Namen *MyClassLib*verweist. Die RCL enthält eine *_Layout.cshtml-Datei,* die alle MVC- und Razor Pages-Projekte Ihres Teams verwenden. Sie möchten die Laufzeitkompilierung für die *Datei _Layout.cshtml* in dieser RCL aktivieren. Nehmen Sie die folgenden Änderungen im Razor Pages-Projekt vor:
+
+1. Aktivieren Sie die Laufzeitkompilierung mit den Anweisungen unter [Conditionally enable runtime compilation in einem vorhandenen Projekt](#conditionally-enable-runtime-compilation-in-an-existing-project).
+1. Konfigurieren Sie die Laufzeitkompilierungsoptionen in: `Startup.ConfigureServices`
+
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
+
+    Im vorherigen Code wird ein absoluter Pfad zur *MyClassLib-RCL* erstellt. Die [PhysicalFileProvider-API](xref:fundamentals/file-providers#physicalfileprovider) wird verwendet, um Verzeichnisse und Dateien in diesem absoluten Pfad zu suchen. Schließlich wird `PhysicalFileProvider` die Instanz einer Dateianbietersammlung hinzugefügt, die den Zugriff auf die *.cshtml-Dateien* der RCL ermöglicht.
+
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [RazorCompileOnBuild- und RazorCompileOnPublish-Eigenschaften.](xref:razor-pages/sdk#properties)
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* Im Beispiel für die [Laufzeitkompilierung auf GitHub](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) finden Sie ein Beispiel, das zeigt, dass die Laufzeitkompilierung projektübergreifend funktioniert.
 
 ::: moniker-end
 
