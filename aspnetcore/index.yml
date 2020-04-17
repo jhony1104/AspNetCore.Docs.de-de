@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 03/27/2020
-  ms.openlocfilehash: fb6d03616560649a336df8a624e7fb59006a7ea8
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/15/2020
+  ms.openlocfilehash: c0f987396a4bfcdbc8c189938125eb2a65dadc8a
+  ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
   ms.translationtype: HT
   ms.contentlocale: de-DE
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80366637"
+  ms.lasthandoff: 04/17/2020
+  ms.locfileid: "81542419"
 highlightedContent:
   items:
   - title: Erstellen einer ASP.NET Core-App auf einer beliebigen Plattform in nur 5 Minuten
@@ -41,7 +41,7 @@ highlightedContent:
     url: tutorials/signalr.md
   - title: Erstellen Ihrer ersten datengesteuerten MVC-Web-App
     itemType: get-started
-    url: tutorials/first-mvc-app/index.md
+    url: tutorials/first-mvc-app//start-mvc.md
 conceptualContent:
   title: Entwickeln von ASP.NET Core-Apps
   summary: Wählen Sie aus interaktiven Web-Apps, Web-APIs, Apps mit MVC-Muster, Echtzeit-Apps und mehr.
@@ -184,13 +184,13 @@ conceptualContent:
   - title: Datengesteuerte Web-Apps
     summary: Erstellen von datengesteuerten Web-Apps in ASP.NET Core
     links:
-    - url: tutorials/first-mvc-app/working-with-sql.md
+    - url: tutorials/first-mvc-app/start-mvc.md
       itemType: tutorial
       text: SQL mit ASP.NET Core
     - url: blazor/data-binding.md
       itemType: concept
       text: Datenbindung in ASP.NET Core Blazor
-    - url: tutorials/razor-pages/sql.md
+    - url: tutorials/razor-pages/razor-pages-start.md
       itemType: tutorial
       text: SQL Server Express und Razor Pages
     - url: data/ef-rp/intro.md

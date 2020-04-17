@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417641"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384060"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -205,7 +205,7 @@ Der Inhaltsstamm ist der Basispfad für:
   * Datendateien ( *.db*)
 * Der [Webstamm](#web-root), in der Regel der Ordner *wwwroot*
 
-Während der Entwicklung wird standardmäßig das Stammverzeichnis des Projekts als Inhaltsstamm verwendet. Dieses Verzeichnis ist auch der Basispfad für die Inhaltsdateien der App und den [Webstamm](#web-root). Sie können einen anderen Inhaltsstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/generic-host#contentrootpath-1).
+Während der Entwicklung wird standardmäßig das Stammverzeichnis des Projekts als Inhaltsstamm verwendet. Dieses Verzeichnis ist auch der Basispfad für die Inhaltsdateien der App und den [Webstamm](#web-root). Sie können einen anderen Inhaltsstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Inhaltsstamm](xref:fundamentals/host/generic-host#contentroot).
 
 ## <a name="web-root"></a>Webstammverzeichnis
 
@@ -215,7 +215,7 @@ Der Webstamm ist der Basispfad für öffentliche, statische Ressourcendateien, z
 * JavaScript ( *.js*)
 * Bilder ( *.png*, *.jpg*)
 
-Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis und dessen Unterverzeichnissen bereitgestellt. Standardmäßig lautet der Webstammpfad *{Inhaltsstamm}/wwwroot*. Sie können einen anderen Webstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/generic-host#webroot-1).
+Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis und dessen Unterverzeichnissen bereitgestellt. Standardmäßig lautet der Webstammpfad *{Inhaltsstamm}/wwwroot*. Sie können einen anderen Webstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/generic-host#webroot).
 
 Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im Verzeichnis *wwwroot/local* und dessen Unterverzeichnissen veröffentlicht werden:
 
