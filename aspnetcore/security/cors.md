@@ -4,14 +4,14 @@ author: rick-anderson
 description: Erfahren Sie, wie CORS als Standard ursprungsübergreifende Anforderungen in einer ASP.NET Core-App zugelassen oder abgelehnt werden kann.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 04/17/2020
 uid: security/cors
-ms.openlocfilehash: e7731fd967c206679ac93209fdb84f40367bea37
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 56a339d9018f619af38aecc6f4c2ff40c3c43d2f
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440908"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642700"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Aktivieren von Cross-Origin-Anforderungen (CROSS-Origin Requests, CORS) in ASP.NET Core
 
@@ -30,7 +30,7 @@ Die Browsersicherheit verhindert, dass eine Webseite Anforderungen an eine ander
 * Ermöglicht einem Server, einige ursprungsübergreifende Anforderungen explizit zuzulassen, während andere abgelehnt werden.
 * Ist sicherer und flexibler als frühere Techniken, wie z. B. [JSONP](/dotnet/framework/wcf/samples/jsonp).
 
-[Beispielcode anzeigen oder herunterladen](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ([downloaden](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="same-origin"></a>Gleicher Ursprung
 
@@ -71,7 +71,7 @@ CORS Middleware verarbeitet ursprungsübergreifende Anforderungen. Der folgende 
 Der vorangehende Code:
 
 * Legt den Richtliniennamen auf fest. `_myAllowSpecificOrigins` Der Richtlinienname ist willkürlich.
-* Ruft <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> die Erweiterungsmethode `_myAllowSpecificOrigins` auf und gibt die CORS-Richtlinie an. `UseCors`fügt die CORS-Middleware hinzu.
+* Ruft <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> die Erweiterungsmethode `_myAllowSpecificOrigins` auf und gibt die CORS-Richtlinie an. `UseCors`fügt die CORS-Middleware hinzu. Der Aufruf `UseCors` an muss `UseRouting`nach `UseAuthorization`platziert werden, aber vor . Weitere Informationen finden Sie unter [Middleware-Bestellung](xref:fundamentals/middleware/index#middleware-order).
 * Aufrufe <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> mit einem [Lambda-Ausdruck](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Der Lambda <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> nimmt ein Objekt. [Konfigurationsoptionen](#cors-policy-options), `WithOrigins`z. B. , werden weiter unten in diesem Artikel beschrieben.
 * Aktiviert `_myAllowSpecificOrigins` die CORS-Richtlinie für alle Controllerendpunkte. Siehe [Endpunktrouting,](#ecors) um eine CORS-Richtlinie auf bestimmte Endpunkte anzuwenden.
 
@@ -627,7 +627,7 @@ Die Browsersicherheit verhindert, dass eine Webseite Anforderungen an eine ander
 * Ermöglicht einem Server, einige ursprungsübergreifende Anforderungen explizit zuzulassen, während andere abgelehnt werden.
 * Ist sicherer und flexibler als frühere Techniken, wie z. B. [JSONP](/dotnet/framework/wcf/samples/jsonp).
 
-[Beispielcode anzeigen oder herunterladen](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([downloaden](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="same-origin"></a>Gleicher Ursprung
 

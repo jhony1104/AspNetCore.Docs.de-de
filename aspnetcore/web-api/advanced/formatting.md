@@ -4,14 +4,14 @@ author: ardalis
 description: Informationen zum Formatieren von Antwortdaten in Web-APIS in ASP.NET Core
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 12/05/2019
+ms.date: 04/17/2020
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 908016720ade67a02ebe30d1dcb7929ad7592270
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 392e4905126ffb6801cc55055f1d511f5fa99dd1
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653041"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642711"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -31,14 +31,14 @@ Die integrierte Hilfsmethode <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> 
 
 Der Beispieldownload gibt die Liste der Autoren zurück. Bei Verwendung der F12-Entwicklertools im Browser oder von [Postman](https://www.getpostman.com/tools) mit dem obigen Code gilt Folgendes:
 
-* Der Antwortheader mit **Content-Type:** `application/json; charset=utf-8` wird angezeigt.
+* Der Antwortheader mit **content-type:** `application/json; charset=utf-8` wird angezeigt.
 * Die Anforderungsheader werden angezeigt. Beispiel: Der Header `Accept`. Der `Accept`-Header wird vom vorangehenden Code ignoriert.
 
 Wenn Sie Daten im Textformat zurückgeben möchten, verwenden Sie <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> und das <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content>-Hilfsprogramm:
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 
-Im obigen Code wird `Content-Type` als `text/plain` zurückgegeben. Das Zurückgeben einer Zeichenfolge liefert `Content-Type` als `text/plain`:
+Im obigen Code wird `text/plain` als `Content-Type` zurückgegeben. Das Zurückgeben einer Zeichenfolge liefert `text/plain` als `Content-Type`:
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_string)]
 
@@ -128,10 +128,10 @@ Funktionen für die `System.Text.Json`-basierten Formatierer können mithilfe vo
 services.AddControllers().AddJsonOptions(options =>
 {
     // Use the default property (Pascal) casing.
-    options.SerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
 
     // Configure a custom converter.
-    options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
+    options.JsonSerializerOptions.Converters.Add(new MyCustomJsonConverter());
 });
 ```
 
@@ -170,7 +170,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
     // Configure a custom converter
-    options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
+    options.SerializerSettings.Converters.Add(new MyCustomJsonConverter());
 });
 ```
 
@@ -206,11 +206,11 @@ Bei Verwendung dieses Codes sollten Controllermethoden das geeignete Format basi
 
 ### <a name="specify-a-format"></a>Angeben eines Formats
 
-Um Verweisformate einzuschränken, wenden Sie den [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)-Filter an. Wie die meisten [Filter](xref:mvc/controllers/filters) kann `[Produces]` auf Aktions-, Controller- oder globaler Ebene angewendet werden:
+Um die Antwortformate [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) einzuschränken, wenden Sie den Filter an. Wie [Filters](xref:mvc/controllers/filters)die `[Produces]` meisten Filter kann auch der Aktionsbereich, der Controller oder der globale Bereich angewendet werden:
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-Mit dem oben stehenden [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)-Filter wird Folgendes ausgeführt:
+Der [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) vorangehende Filter:
 
 * Er erzwingt die Rückgabe von JSON-formatierten Antworten von allen Aktionen im Controller.
 * Wenn andere Formatierer konfiguriert sind und der Client ein anderes Format angibt, wird JSON zurückgegeben.
@@ -219,7 +219,7 @@ Weitere Informationen finden Sie unter [Filter](xref:mvc/controllers/filters).
 
 ### <a name="special-case-formatters"></a>Formatierer für besondere Fälle
 
-Einige besondere Fälle werden mithilfe von integrierten Formatierungsprogrammen implementiert. Standardmäßig werden `string`-Rückgabetypen als *text/plain* formatiert (bzw. als *text/html*, wenn sie über den `Accept`-Header angefordert werden). Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> gelöscht werden. Formatierer werden in der `ConfigureServices`-Methode entfernt. Aktionen mit einem Modellobjekt-Rückgabetyp geben `204 No Content` zurück, wenn der Rückgabewert `null` lautet. Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> gelöscht werden. Der folgende Code entfernt `StringOutputFormatter` und `HttpNoContentOutputFormatter`.
+Einige besondere Fälle werden mithilfe von integrierten Formatierungsprogrammen implementiert. Standardmäßig werden `string`-Rückgabetypen als *text/plain* formatiert (bzw. als *text/html*, wenn sie über den `Accept`-Header angefordert werden). Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> gelöscht werden. Formatierer werden in der `ConfigureServices`-Methode entfernt. Aktionen mit einem Modellobjekt-Rückgabetyp geben `null` zurück, wenn der Rückgabewert `204 No Content` lautet. Dieses Verhalten kann durch Entfernen von <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> gelöscht werden. Der folgende Code entfernt `StringOutputFormatter` und `HttpNoContentOutputFormatter`.
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]
@@ -246,7 +246,7 @@ Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die di
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das Attribut [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) überprüft, ob in den `RouteData` ein Formatwert vorhanden ist, und ordnet das Antwortformat beim Erstellen der Antwort dem entsprechenden Formatierer zu.
+Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) Attribut überprüft, ob der Formatwert im vorhanden ist, `RouteData` und ordnet das Antwortformat dem entsprechenden Formatformat zu, wenn die Antwort erstellt wird.
 
 |           Route        |             Formatierungsprogramm              |
 |------------------------|------------------------------------|
