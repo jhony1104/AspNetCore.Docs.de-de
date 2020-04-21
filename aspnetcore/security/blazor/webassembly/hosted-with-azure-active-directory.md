@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 8fec9f585f42469665cf29069674a199e1626629
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: a80be8d145b7c58be35e2c353a448db7e234e20b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977131"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661823"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sichern einer Blazor ASP.NET gehosteten Core WebAssembly-App mit Azure Active Directory
 
@@ -24,8 +24,6 @@ Von [Javier Calvarro Nelson](https://github.com/javiercn) und Luke [Latham](http
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-
 
 In diesem Artikel wird beschrieben, wie Sie eine [ Blazor gehostete WebAssembly-App](xref:blazor/hosting-models#blazor-webassembly) erstellen, die [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) für die Authentifizierung verwendet.
 

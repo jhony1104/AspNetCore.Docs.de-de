@@ -38,7 +38,7 @@ Wenn die Anforderung fehlgeschlagen ist, weil das Token ohne Benutzerinteraktion
         {
             httpClient.DefaultRequestHeaders.Add("Authorization", 
                 $"Bearer {token.Value}");
-            forecasts = await httpClient.GetJsonAsync<WeatherForecast[]>(
+            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
         }
         else
