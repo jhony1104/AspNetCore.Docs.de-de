@@ -5,16 +5,27 @@ description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Info
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: e4da57001ad369a8df87c7e0887772e3d75c032d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511222"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642750"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -124,7 +135,7 @@ services.Configure<IISServerOptions>(options =>
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Bei Festlegung auf `true` legt der Server den per [Windows-Authentifizierung](xref:security/authentication/windowsauth) authentifizierten `HttpContext.User` fest. Bei Festlegung auf `false` stellt der Server nur eine Identität für `HttpContext.User` bereit und antwortet auf explizite Anforderungen durch `AuthenticationScheme`. Die Windows-Authentifizierung muss in IIS aktiviert sein, damit `AutomaticAuthentication` funktioniert. Weitere Informationen finden Sie unter [Windows-Authentifizierung](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Legt den Anzeigename fest, der Benutzern auf Anmeldungsseiten angezeigt wird |
-| `AllowSynchronousIO`           | `false` | Steuert, ob eine synchrone Eingabe/Ausgabe für `HttpContext.Request` und `HttpContext.Response` zulässig ist. |
+| `AllowSynchronousIO`           | `false` | Steuert, ob synchrone E/A-Vorgänge für `HttpContext.Request` und `HttpContext.Response` zulässig sind. |
 | `MaxRequestBodySize`           | `30000000`  | Dient zum Abrufen oder Festlegen der maximalen Größe des Anforderungstexts für `HttpRequest`. Beachten Sie, dass IIS selbst das Limit `maxAllowedContentLength` aufweist, das vor der in den `IISServerOptions` festgelegten `MaxRequestBodySize` verarbeitet wird. Das Ändern von `MaxRequestBodySize` hat keine Auswirkungen auf `maxAllowedContentLength`. Zum Erhöhen von `maxAllowedContentLength` fügen Sie einen Eintrag in *web.config* hinzu, um `maxAllowedContentLength` auf einen höheren Wert festzulegen. Weitere Informationen hierzu finden Sie unter [Konfiguration](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration). |
 
 **Out-of-Process-Hostingmodell**
@@ -250,9 +261,9 @@ Laden Sie den Installer über folgenden Link herunter:
 So erhalten Sie eine frühere Version des Installers:
 
 1. Navigieren Sie zur [.NET Core-Downloadseite](https://dotnet.microsoft.com/download/dotnet-core).
-1. Klicken Sie auf die gewünschte .NET Core-Version.
+1. Wählen Sie die gewünschte .NET Core-Version aus.
 1. Suchen Sie in der Spalte **Run apps - Runtime** (Apps ausführen – Runtime) die Zeile mit der gewünschten .NET Core-RuntimeRuntime-Version.
-1. Laden Sie den Installer über den Link **Runtime & Hosting Bundle** (Runtime- und Hosting-Paket) herunter.
+1. Laden Sie den Installer über den Link das **Hosting Bundle** (Hosting-Paket) herunter.
 
 > [!WARNING]
 > Einige Installer enthalten Releaseversionen, die das Ende ihres Lebenszyklus erreicht haben und nicht mehr von Microsoft unterstützt werden. Weitere Informationen finden Sie in den [Unterstützungsrichtlinien](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -846,20 +857,12 @@ Installieren Sie das *Paket „.NET Core Hosting“* im Hostsystem. Das Paket in
 >
 > Wenn das Hosting-Paket nach der Installation der 64-Bit-Version (x64) von .NET Core installiert wird, kann es den Anschein haben, dass SDKs fehlen ([Es wurden keine .NET Core SDKs erkannt](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Informationen zum Beheben des Problems finden Sie unter <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="direct-download-current-version"></a>Direkter Download (aktuelle Version)
-
-Laden Sie den Installer über folgenden Link herunter:
-
-[Aktueller Installer für das .NET Core Hosting-Paket (direkter Download)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Frühere Versionen des Installers
-
-So erhalten Sie eine frühere Version des Installers:
+### <a name="download"></a>Herunterladen
 
 1. Navigieren Sie zur [.NET Core-Downloadseite](https://dotnet.microsoft.com/download/dotnet-core).
-1. Klicken Sie auf die gewünschte .NET Core-Version.
+1. Wählen Sie die gewünschte .NET Core-Version aus.
 1. Suchen Sie in der Spalte **Run apps - Runtime** (Apps ausführen – Runtime) die Zeile mit der gewünschten .NET Core-RuntimeRuntime-Version.
-1. Laden Sie den Installer über den Link **Runtime & Hosting Bundle** (Runtime- und Hosting-Paket) herunter.
+1. Laden Sie den Installer über den Link das **Hosting Bundle** (Hosting-Paket) herunter.
 
 > [!WARNING]
 > Einige Installer enthalten Releaseversionen, die das Ende ihres Lebenszyklus erreicht haben und nicht mehr von Microsoft unterstützt werden. Weitere Informationen finden Sie in den [Unterstützungsrichtlinien](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -1422,20 +1425,12 @@ Installieren Sie das *Paket „.NET Core Hosting“* im Hostsystem. Das Paket in
 >
 > Wenn das Hosting-Paket nach der Installation der 64-Bit-Version (x64) von .NET Core installiert wird, kann es den Anschein haben, dass SDKs fehlen ([Es wurden keine .NET Core SDKs erkannt](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Informationen zum Beheben des Problems finden Sie unter <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="direct-download-current-version"></a>Direkter Download (aktuelle Version)
-
-Laden Sie den Installer über folgenden Link herunter:
-
-[Aktueller Installer für das .NET Core Hosting-Paket (direkter Download)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Frühere Versionen des Installers
-
-So erhalten Sie eine frühere Version des Installers:
+### <a name="download"></a>Herunterladen
 
 1. Navigieren Sie zur [.NET Core-Downloadseite](https://dotnet.microsoft.com/download/dotnet-core).
-1. Klicken Sie auf die gewünschte .NET Core-Version.
+1. Wählen Sie die gewünschte .NET Core-Version aus.
 1. Suchen Sie in der Spalte **Run apps - Runtime** (Apps ausführen – Runtime) die Zeile mit der gewünschten .NET Core-RuntimeRuntime-Version.
-1. Laden Sie den Installer über den Link **Runtime & Hosting Bundle** (Runtime- und Hosting-Paket) herunter.
+1. Laden Sie den Installer über den Link das **Hosting Bundle** (Hosting-Paket) herunter.
 
 > [!WARNING]
 > Einige Installer enthalten Releaseversionen, die das Ende ihres Lebenszyklus erreicht haben und nicht mehr von Microsoft unterstützt werden. Weitere Informationen finden Sie in den [Unterstützungsrichtlinien](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
