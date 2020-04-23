@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646555"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228126"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Bereitstellen einer App für App Service
 
@@ -85,7 +85,7 @@ Zum Bereitstellen der App müssen Sie eine App Service-[Web-App](/azure/app-serv
 
     b. Erstellen Sie eine Ressourcengruppe. Ressourcengruppen bieten eine Möglichkeit, Azure-Ressourcen zu aggregieren und als Gruppe zu verwalten.
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ Zum Bereitstellen der App müssen Sie eine App Service-[Web-App](/azure/app-serv
 
     c. Erstellen Sie einen App Service-Plan im S1-Tarif. Ein App Service-Plan ist eine Gruppierung von Web-Apps, die denselben Tarif aufweisen. Der S1-Tarif ist nicht kostenlos, aber er ist für das Stagingslots-Feature erforderlich.
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. Erstellen Sie die Web-App-Ressource mit dem App Service-Plan in derselben Ressourcengruppe.
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. Legen Sie die Anmeldeinformationen für die Bereitstellung fest. Diese Anmeldeinformationen für die Bereitstellung gelten für alle Web-Apps in Ihrem Abonnement. Verwenden Sie keine Sonderzeichen im Benutzernamen.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. Konfigurieren Sie die Web-App so, dass sie Bereitstellungen vom lokalen Git akzeptiert und die *URL für die Git-Bereitstellung* anzeigt. **Notieren Sie diese URL zur späteren Bezugnahme**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Bereitstellungsslots unterstützen das Staging von Änderungen, ohne die in der 
 
     a. Erstellen Sie einen Bereitstellungsslot mit dem Namen *Staging*.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. Konfigurieren Sie den Stagingslot so, dass die Bereitstellung aus dem lokalen Git verwendet wird, und rufen Sie die Bereitstellungs-URL für das **Staging** ab. **Notieren Sie diese URL zur späteren Bezugnahme**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Bereitstellungsslots unterstützen das Staging von Änderungen, ohne die in der 
 
 7. Tauschen Sie in der Cloud Shell den überprüften/vorbereiteten Stagingslot mit der Produktionsumgebung.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 

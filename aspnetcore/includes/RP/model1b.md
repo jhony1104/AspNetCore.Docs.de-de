@@ -6,7 +6,7 @@ Fügen Sie der Klasse `Movie` die folgenden Eigenschaften hinzu:
 Die `Movie`-Klasse enthält:
 
 * Die Datenbank benötigt das Feld `ID` für den primären Schlüssel.
-* `[DataType(DataType.Date)]`:  Das [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter)-Attribut gibt den Typ der Daten (Date) an. Mit diesem Attribut:
+* `[DataType(DataType.Date)]`:  Das [DataType](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute)-Attribut gibt den Typ der Daten (Date) an. Mit diesem Attribut:
 
   * Es ist nicht erforderlich, dass der Benutzer Zeitinformationen in das Datumsfeld eingibt.
   * Nur das Datum wird angezeigt, keine Zeitinformationen.

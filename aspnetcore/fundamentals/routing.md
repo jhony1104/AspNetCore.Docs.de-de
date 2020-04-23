@@ -5,14 +5,14 @@ description: Erfahren Sie, wie das ASP.NET Core-Routing für das Abgleichen von 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 3/25/2020
+ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 2ebba716de90f142a66cf7619b5a4b0c77684bd4
-ms.sourcegitcommit: 0c62042d7d030ec5296c73bccd9f9b961d84496a
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80270445"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277222"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -136,7 +136,7 @@ Ein ASP.NET Core-Endpunkt ist:
 
 * Ausführbar: Verfügt über eine <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate>-Eigenschaft.
 * Erweiterbar: Verfügt über eine [Metadata](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*)-Sammlung.
-* Auswählbar: Verfügt optional über [Routinginformationen](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*).
+* Selectable (Auswählbar): Verfügt optional über [Routinginformationen](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*).
 * Aufzählbar: Die Sammlung von Endpunkten kann durch Abrufen der <xref:Microsoft.AspNetCore.Routing.EndpointDataSource>-Klasse aus [DI](xref:fundamentals/dependency-injection) aufgelistet werden.
 
 Der folgende Code zeigt, wie der Endpunkt, der mit der aktuellen Anforderung übereinstimmt, abgerufen und geprüft werden kann:
@@ -223,7 +223,7 @@ Beim in `Approach 1:` gezeigten Stil von Middleware handelt es sich um **Termina
 * Der Abgleich im vorangehenden Beispiel ist `Path == "/"` für die Middleware und `Path == "/Movie"` für das Routing.
 * Bei einem erfolgreichen Abgleich führt sie bestimmte Funktionen aus und kehrt zurück, anstatt die `next`-Middleware aufzurufen.
 
-Sie wird Terminalmiddleware genannt, da Sie die Suche beendet, einige Funktionen ausführt und dann zurückkehrt.
+Sie wird „Terminal Middleware“ genannt, da sie die Suche beendet, einige Funktionen ausführt und dann zurückkehrt.
 
 Vergleichen von Terminalmiddleware und Routing:
 * Beide Ansätze ermöglichen das Beenden der Verarbeitungspipeline:
@@ -455,6 +455,8 @@ Mit Vorlagen lässt sich Routing besonders leicht durchführen. Einschränkungen
 Komplexe Segmente werden von rechts nach links auf eine [nicht gierige](#greedy) Weise durch entsprechende Literaltrennzeichen verarbeitet. Beispielsweise ist `[Route("/a{b}c{d}")]` ein komplexes Segment.
 Komplexe Segmente funktionieren auf eine bestimmte Weise, die für eine erfolgreiche Verwendung verstanden werden muss. Das Beispiel in diesem Abschnitt zeigt, warum komplexe Segmente nur dann wirklich gut funktionieren, wenn der Trennzeichentext nicht innerhalb der Parameterwerte erscheint. Für komplexere Fälle ist die Verwendung eines [RegEx](/dotnet/standard/base-types/regular-expressions) und das anschließende manuelle Extrahieren der Werte erforderlich.
 
+[!INCLUDE[](~/includes/regex.md)]
+
 Dies ist eine Zusammenfassung der Schritte, die beim Routing mit der Vorlage `/a{b}c{d}` und dem URL-Pfad `/abcd` ausgeführt werden. `|` wird verwendet, um die Funktionsweise des Algorithmus besser zu veranschaulichen:
 
 * Das erste Literal von rechts nach links ist `c`. Daher wird `/abcd` von rechts durchsucht und `/ab|c|d` gefunden.
@@ -580,7 +582,7 @@ Die vorangehende Einschränkung wird im folgenden Code angewendet:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/TestController.cs?name=snippet&highlight=6,13)]
 
-Die [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x/RoutingSample/Extensions/ControllerContextExtensions.cs)-Methode ist im [Beispieldownload](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) enthalten und dient der Anzeige von Routinginformationen.
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 Die Implementierung von `MyCustomConstraint` verhindert die Anwendung von `0` auf einen Routenparameter:
 
@@ -984,6 +986,8 @@ Ein gutes Beispiel für diese Vorgabe ist die `UseAuthorization`-Middleware. Mit
 * Anforderungen, die nicht mit einem Endpunkt übereinstimmen.
 
 Dies macht die Autorisierungsmiddleware außerhalb des Routingkontexts sehr nützlich. Die Autorisierungsmiddleware kann für die traditionelle Middlewareprogrammierung verwendet werden.
+
+[!INCLUDE[](~/includes/dbg-route.md)]
 
 ::: moniker-end
 
@@ -1626,7 +1630,7 @@ Das Routingsystem weist die folgenden Eigenschaften auf:
 * Bei einer Antwort kann Routing verwendet werden, um URLs zu generieren (z.B. für Umleitungen oder Links), die auf Routeninformationen basieren. Dadurch wird die Erstellung von hartcodierten URLs verhindert, was wiederrum die Wartbarkeit verbessert.
 * Die URL-Generierung basiert auf Routen, die beliebige Erweiterbarkeit unterstützen. <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> bietet Methoden zum Erstellen von URLs.
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
-Die Routingfunktionalität wird über die <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>-Klasse mit der `[middleware](xref:fundamentals/middleware/index)`-Pipeline verbunden. [ASP.NET Core-MVC](xref:mvc/overview) fügt im Rahmen der Konfiguration die Routingfunktionalität der Middlewarepipeline hinzu und verarbeitet das Routing in MVC- und Razor Pages-Apps. Informationen darüber, wie Sie Routing als eigenständige Komponente verwenden, finden Sie im Abschnitt [Verwenden von Routingmiddleware](#use-routing-middleware).
+Die Routingfunktionalität wird über die Klasse <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> mit der [Middlewarepipeline](xref:fundamentals/middleware/index) verbunden. [ASP.NET Core-MVC](xref:mvc/overview) fügt im Rahmen der Konfiguration die Routingfunktionalität der Middlewarepipeline hinzu und verarbeitet das Routing in MVC- und Razor Pages-Apps. Informationen darüber, wie Sie Routing als eigenständige Komponente verwenden, finden Sie im Abschnitt [Verwenden von Routingmiddleware](#use-routing-middleware).
 
 ### <a name="url-matching"></a>URL-Zuordnung
 
@@ -1980,6 +1984,5 @@ Für diese Route wird nur dann ein Link generiert, wenn die übereinstimmenden W
 ## <a name="complex-segments"></a>Komplexe Segmente
 
 Komplexe Segmente (z.B. `[Route("/x{token}y")]`) werden von rechts nach links auf eine nicht gierige Weise durch entsprechende Literale verarbeitet. Unter [diesem Code](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) finden Sie eine ausführliche Erklärung für das Abgleichen komplexer Segmente. Das [Codebeispiel](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) wird von ASP.NET Core nicht verwendet, aber es bietet eine gute Erklärung komplexer Segmente.
-
 
 ::: moniker-end

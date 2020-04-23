@@ -5,17 +5,17 @@ description: In diesem Artikel erfahren Sie, wie Sie Razor-Komponenten Benutzern
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: aba62fa7b6285c8ba884652694f1ea3e3a66ed18
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
+ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644893"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81539660"
 ---
 # <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
 
@@ -60,6 +60,18 @@ Die folgenden Feldtypen verfügen über spezifische Formatierungsanforderungen u
 
 ## <a name="localization"></a>Lokalisierung
 
+### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+
+Blazor-WebAssembly-Apps legen die Kultur anhand der [Spracheinstellungen](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages) des Benutzers fest.
+
+Legen Sie in `Program.Main` `CultureInfo.DefaultThreadCurrentCulture` und `CultureInfo.DefaultThreadCurrentUICulture` fest, um die Kultur explizit zu konfigurieren.
+
+Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des Verhaltens des Linkers finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
+
+Auch wenn für die meisten Benutzer die standardmäßig von Blazor ausgewählte Kultur möglicherweise ausreichend ist, ziehen Sie in Betracht, Benutzern die Möglichkeit zu geben, ihr bevorzugtes Gebietsschema anzugeben. Eine Blazor-WebAssembly-Beispiel-App mit Kulturauswahl finden Sie in der [LocSample](https://github.com/pranavkm/LocSample)-Lokalisierungs-Beispiel-App.
+
+### <a name="opno-locblazor-server"></a>Blazor Server
+
 Blazor Server-Apps werden mit [Lokalisierungsmiddleware](xref:fundamentals/localization#localization-middleware) lokalisiert. Die Middleware wählt die entsprechende Kultur für Benutzer aus, die Ressourcen von der App anfordern.
 
 Die Kultur kann mit einem der folgenden Ansätze festgelegt werden:
@@ -69,11 +81,7 @@ Die Kultur kann mit einem der folgenden Ansätze festgelegt werden:
 
 Weitere Informationen und Beispiele finden Sie unter <xref:fundamentals/localization>.
 
-### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>Konfigurieren des Linkers für die Internationalisierung (Blazor WebAssembly)
-
-Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des Verhaltens des Linkers finden Sie unter <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
-
-### <a name="cookies"></a>Cookies
+#### <a name="cookies"></a>Cookies
 
 Ein Cookie für die Lokalisierungskultur kann die Kultur des Benutzers beibehalten. Das Cookie wird von der `OnGet`-Methode der Hostseite der App erstellt (*Pages/Host.cshtml.cs*). Die Lokalisierungsmiddleware liest das Cookie bei aufeinanderfolgenden Anforderungen, um die Kultur des Benutzers festzulegen. 
 
@@ -81,7 +89,7 @@ Durch Verwendung eines Cookies wird sichergestellt, wird sichergestellt, dass di
 
 Alle Vorgehensweisen können zum Zuweisen einer Kultur verwendet werden, wenn die Kultur in einem Lokalisierungscookie beibehalten wird. Wenn die App bereits über ein Lokalisierungsschema für serverseitiges ASP.NET Core verfügt, können Sie die vorhandene Lokalisierungsinfrastruktur der App weiterhin verwenden und das Lokalisierungskulturcookie innerhalb des Schemas der App festlegen.
 
-Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie eine *Pages/Host.cshtml.cs*-Datei mit dem folgenden Inhalt in der Blazor Server-App:
+Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie eine Datei *Pages/_Host.cshtml.cs* mit dem folgenden Inhalt in der Blazor-Server-App:
 
 ```csharp
 public class HostModel : PageModel
@@ -107,9 +115,9 @@ Die Lokalisierung wird mit der folgenden Ereignissequenz von der App verarbeitet
 1. Die Lokalisierungsmiddleware liest das Cookie und weist die Kultur zu.
 1. Die Blazor-Serversitzung beginnt mit der richtigen Kultur.
 
-### <a name="provide-ui-to-choose-the-culture"></a>Bereitstellen einer Benutzeroberfläche zum Auswählen der Kultur
+#### <a name="provide-ui-to-choose-the-culture"></a>Bereitstellen einer Benutzeroberfläche zum Auswählen der Kultur
 
-Zum Bereitstellen einer Benutzeroberfläche, um Benutzern das Auswählen einer Kultur zu ermöglichen, wird ein *Ansatz auf Grundlage von Umleitungen* empfohlen. Der Prozess ist ähnelt dem Ablauf in einer Web-App, wenn ein Benutzer versucht auf eine sichere Ressource zuzugreifen: der Benutzer wird an eine Anmeldeseite umgeleitet und dann wieder zur ursprünglichen Ressource. 
+Zum Bereitstellen einer Benutzeroberfläche, um Benutzern das Auswählen einer Kultur zu ermöglichen, wird ein *Ansatz auf Grundlage von Umleitungen* empfohlen. Dieses Verfahren ähnelt dem, was in einer Web-App passiert, wenn ein Benutzer versucht, auf eine sichere Ressource zuzugreifen. Der Benutzer wird auf eine Anmeldeseite umgeleitet und dann zurück zur ursprünglichen Ressource. 
 
 Die App behält die vom Benutzer ausgewählte Kultur mithilfe einer Umleitung an einen Controller bei. Der Controller legt die ausgewählte Kultur des Benutzers mit einem Cookie fest und leitet den Benutzer wieder an den ursprünglichen URI weiter.
 
@@ -154,7 +162,7 @@ Im folgenden Beispiel wird das Durchführen einer Umleitung veranschaulicht, wen
     private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;
-        var uri = new Uri(NavigationManager.Uri())
+        var uri = new Uri(NavigationManager.Uri)
             .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
         var query = $"?culture={Uri.EscapeDataString(culture)}&" +
             $"redirectUri={Uri.EscapeDataString(uri)}";

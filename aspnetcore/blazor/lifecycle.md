@@ -5,17 +5,17 @@ description: Erfahren Sie, wie die Lebenszyklusmethoden von Razor-Komponenten in
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 831f575afa6ce11d06c016d43ecd1bb59d09eab6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e7450ad57acc87500bb977aa8349c6ee009e3bf4
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218907"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791463"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor-Lebenszyklus
 
@@ -170,7 +170,7 @@ Selbst wenn `ShouldRender` außer Kraft gesetzt wird, wird die Komponente immer 
 
 Asynchrone Aktionen, die in Lebenszyklusereignissen ausgeführt werden, sind möglicherweise nicht abgeschlossen, bevor die Komponente gerendert wird. Objekte können während der Ausführung der Lebenszyklusmethode `null` oder unvollständig mit Daten gefüllt sein. Stellen Sie eine Renderinglogik bereit, um zu bestätigen, dass die Objekte initialisiert sind. Rendern Sie UI-Elemente für Platzhalter (z. B. eine Nachricht zum Ladevorgang), während Objekte `null` sind.
 
-In der `FetchData`-Komponente der Blazor-Vorlagen wird `OnInitializedAsync` außer Kraft gesetzt, um Vorhersagedaten asynchron zu erhalten (`forecasts`). Wenn `forecasts` gleich `null` ist, wird dem Benutzer eine Nachricht zum Ladevorgang angezeigt. Nachdem die von `Task` zurückgegebene `OnInitializedAsync` abgeschlossen ist, wird die Komponente mit dem aktualisierten Zustand neu gerendert.
+In der `FetchData`-Komponente der Blazor-Vorlagen wird `OnInitializedAsync` außer Kraft gesetzt, um Vorhersagedaten asynchron zu erhalten (`forecasts`). Wenn `forecasts` gleich `null` ist, wird dem Benutzer eine Nachricht zum Ladevorgang angezeigt. Nachdem die von `OnInitializedAsync` zurückgegebene `Task` abgeschlossen ist, wird die Komponente mit dem aktualisierten Zustand neu gerendert.
 
 *Pages/FetchData.razor* in der Blazor-Servervorlage:
 
@@ -213,7 +213,7 @@ Informationen zur Behandlung von Fehlern während der Ausführung von Lebenszykl
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Zustandsbehaftete erneute Verbindung nach dem Prerendering
 
-Wenn in einer Blazor-Server-App `RenderMode` gleich `ServerPrerendered` ist, wird die Komponente zunächst statisch als Teil der Seite gerendert. Sobald der Browser eine Verbindung mit dem Server herstellt, wird die Komponente *wieder* gerendert, und die Komponente ist nun interaktiv. Wenn die [OnInitialized{Async}](xref:blazor/lifecycle#component-initialization-methods)-Lebenszyklusmethode zur Initialisierung der Komponente vorhanden ist, wird die Methode *zweimal* ausgeführt:
+Wenn in einer Blazor-Server-App `RenderMode` gleich `ServerPrerendered` ist, wird die Komponente zunächst statisch als Teil der Seite gerendert. Sobald der Browser eine Verbindung mit dem Server herstellt, wird die Komponente *wieder* gerendert, und die Komponente ist nun interaktiv. Wenn die [OnInitialized{Async}](#component-initialization-methods)-Lebenszyklusmethode zur Initialisierung der Komponente vorhanden ist, wird die Methode *zweimal* ausgeführt:
 
 * Wenn die Komponente statisch vorab gerendert ist.
 * Nachdem die Serververbindung hergestellt wurde.
