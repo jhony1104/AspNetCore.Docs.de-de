@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644881"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661711"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Problembehandlung bei ASP.NET Core in Azure App Service und IIS
 
@@ -159,6 +159,15 @@ Reparieren Sie die Installation des [.NET Core-Hostingpakets](xref:host-and-depl
 ANCM konnte nicht innerhalb des angegebenen Zeitlimits für den Start gestartet werden. Das Standardzeitlimit beträgt 120 Sekunden.
 
 Dieser Fehler kann beim Starten einer großen Anzahl von Apps auf dem gleichen Computer auftreten. Überprüfen Sie, ob beim Starten CPU-/Speicherauslastungsspitzen auf dem Server vorhanden sind. In diesem Fall sollten Sie möglicherweise den Startvorgang einiger Apps staffeln.
+
+### <a name="50038-ancm-application-dll-not-found"></a>500.38 ANCM-Anwendungs-DLL nicht gefunden.
+
+Das ANCM konnte die Anwendungs-DLL nicht finden, die sich neben der ausführbaren Datei befinden sollte.
+
+Dieser Fehler tritt auf, wenn eine als [einzelne ausführbare Datei](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables) gepackte App mithilfe des In-Process-Hostingmodells gehostet wird. Das In-Process-Modell erfordert, dass das ANCM die .NET Core-App in den vorhandenen IIS-Prozess lädt. Dieses Szenario wird vom Einzeldatei-Bereitstellungsmodell nicht unterstützt. Verwenden Sie **einen** der folgenden Ansätze in der Projektdatei der App, um diesen Fehler zu korrigieren:
+
+1. Deaktivieren Sie die Einzeldateiveröffentlichung, indem Sie die MSBuild-Eigenschaft `PublishSingleFile` auf `false` festlegen.
+1. Wechseln Sie zum Out-of-Process-Hostingmodell, indem Sie die MSBuild-Eigenschaft `AspNetCoreHostingModel` auf `OutOfProcess` festlegen.
 
 ### <a name="5025-process-failure"></a>502.5: Prozessfehler
 

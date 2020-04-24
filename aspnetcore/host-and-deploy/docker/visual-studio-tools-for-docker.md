@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 0e6747a3de220b97cc7a84f9cd42b0da54b57ee9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649321"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440752"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Visual Studio-Containertools mit ASP.NET Core
 
@@ -26,7 +26,7 @@ Visual Studio 2017 und höhere Versionen unterstützen das Erstellen, Debuggen u
 
 ## <a name="installation-and-setup"></a>Installation und Einrichtung
 
-Lesen Sie vor der Installation von Docker zunächst [Docker for Windows: What to know before you install (Docker für Windows: Was vor der Installation zu beachten ist)](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install). Installieren Sie anschließend [Docker für Windows](https://docs.docker.com/docker-for-windows/install/).
+Lesen Sie vor der Installation von Docker zunächst [Docker for Windows: What to know before you install (Docker Desktop für Windows: Was vor der Installation zu beachten ist)](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install). Installieren Sie anschließend [Docker für Windows](https://docs.docker.com/docker-for-windows/install/).
 
 **[Freigegebene Laufwerke](https://docs.docker.com/docker-for-windows/#shared-drives)** in Docker für Windows müssen so konfiguriert sein, dass sie die Volumezuordnung und das Debuggen unterstützen. Klicken Sie mit der rechten Maustaste in der Taskleiste auf das Docker-Symbol, und rufen Sie anschließend **Einstellungen** > **Freigegebene Laufwerke** aus. Wählen Sie das Laufwerk aus, auf dem Docker Dateien speichert. Klicken Sie auf **Übernehmen**.
 
@@ -84,7 +84,7 @@ Die obige *Dockerfile*-Datei basiert auf dem [microsoft/aspnetcore](https://hub.
 
 In Version 15.7 oder in früheren Versionen von Visual Studio 2017 wird als Containerorchestrierungslösung ausschließlich [Docker Compose](https://docs.docker.com/compose/overview/) unterstützt. Die Docker Compose-Artefakte werden über **Hinzufügen** > **Docker-Unterstützung** hinzugefügt.
 
-Ab Version 15.8 von Visual Studio 2017 wird eine Orchestrierungslösung erst bei Aufforderung hinzugefügt. Klicken Sie mit der rechten Maustaste im **Projektmappen-Explorer** auf das Projekt, und rufen Sie **Hinzufügen** > **Container Orchestrator Support** (Unterstützung für Containerorchestrator) auf. Zur Auswahl stehen [Docker Compose](#docker-compose) und [Service Fabric](#service-fabric).
+Ab Version 15.8 von Visual Studio 2017 wird eine Orchestrierungslösung erst bei Aufforderung hinzugefügt. Klicken Sie mit der rechten Maustaste im **Projektmappen-Explorer** auf das Projekt, und rufen Sie **Hinzufügen** > **Container Orchestrator Support** (Unterstützung für Containerorchestrator) auf. Es werden zwei verschiedene Auswahlmöglichkeiten angeboten: [Docker Compose](#docker-compose) und [Service Fabric](#service-fabric).
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -120,7 +120,7 @@ Die Ausführung von Linux-Containern auf dem lokalen Entwicklungscluster unter W
 
 Die Containertools von Visual Studio führen die folgenden Aufgaben aus:
 
-* Ein *Service Fabric-Anwendungsprojekt&lt; mit dem Namen &gt;* Projektname**Application** wird der Projektmappe hinzugefügt.
+* Ein **Service Fabric-Anwendungsprojekt** mit dem Namen *&lt;Projektname&gt;Application* wird der Projektmappe hinzugefügt.
 * Eine *Dockerfile*-Datei und eine *DOCKERIGNORE*-Datei werden dem ASP.NET Core-Projekt hinzugefügt. Wenn im ASP.NET Core-Projekt bereits eine *Dockerfile*-Datei vorhanden ist, wird diese in *Dockerfile.original* umbenannt. Erstellt wird eine neue *Dockerfile*-Datei, die der folgenden ähnelt:
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
@@ -133,7 +133,7 @@ Die Containertools von Visual Studio führen die folgenden Aufgaben aus:
 
 Weitere Informationen finden Sie unter [Bereitstellen einer .NET-App in einem Windows-Container in Azure Service Fabric](/azure/service-fabric/service-fabric-host-app-in-a-container).
 
-## <a name="debug"></a>Debuggen
+## <a name="debug"></a>Debug
 
 Wählen Sie in der Symbolleiste im Dropdownmenü „Debuggen“ die Option **Docker** aus, und starten Sie das Debuggen der Anwendung. In der Ansicht **Docker** im Fenster **Ausgabe** werden die folgenden Aktionen angezeigt:
 
@@ -145,7 +145,7 @@ Wählen Sie in der Symbolleiste im Dropdownmenü „Debuggen“ die Option **Doc
 * Die App wird in den Container kopiert.
 * Der Standardbrowser wird mit dem dynamisch zugewiesenen Port gestartet, wobei der Debugger an den Container angehängt wird.
 
-Das resultierende Docker-Image der App wird mit dem Tag *dev* versehen. Das Image basiert auf dem Tag *2.1-aspnetcore-runtime* des Basisimages *microsoft/dotnet*. Führen Sie im Fenster `docker images`Paket-Manager-Konsole**den Befehl** aus. Die Images auf dem Computer werden angezeigt:
+Das resultierende Docker-Image der App wird mit dem Tag *dev* versehen. Das Image basiert auf dem Tag *2.1-aspnetcore-runtime* des Basisimages *microsoft/dotnet*. Führen Sie im Fenster **Paket-Manager-Konsole** den Befehl `docker images` aus. Die Images auf dem Computer werden angezeigt:
 
 ```console
 REPOSITORY        TAG                     IMAGE ID      CREATED         SIZE
@@ -163,7 +163,7 @@ microsoft/dotnet  2.1-aspnetcore-runtime  fcc3887985bb  6 days ago      255MB
 * Die App wird in den Container kopiert.
 * Der Standardbrowser wird mit dem dynamisch zugewiesenen Port gestartet, wobei der Debugger an den Container angehängt wird.
 
-Das resultierende Docker-Image der App wird mit dem Tag *dev* versehen. Das Image basiert auf dem Basisimage *microsoft/aspnetcore*. Führen Sie im Fenster `docker images`Paket-Manager-Konsole**den Befehl** aus. Die Images auf dem Computer werden angezeigt:
+Das resultierende Docker-Image der App wird mit dem Tag *dev* versehen. Das Image basiert auf dem Basisimage *microsoft/aspnetcore*. Führen Sie im Fenster **Paket-Manager-Konsole** den Befehl `docker images` aus. Die Images auf dem Computer werden angezeigt:
 
 ```console
 REPOSITORY            TAG  IMAGE ID      CREATED        SIZE
@@ -238,3 +238,4 @@ Möglicherweise wird angenommen, dass das Produktions- oder Releaseimage im Verg
 * [Bereitstellen einer .NET-App in einem Windows-Container in Azure Service Fabric](/azure/service-fabric/service-fabric-host-app-in-a-container)
 * [Problembehandlung bei der Visual Studio-Entwicklung mit Docker](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
 * [GitHub-Repository mit Visual Studio-Containertools](https://github.com/Microsoft/DockerTools)
+* [GC mittels Docker und kleiner Containers](xref:performance/memory#sc)

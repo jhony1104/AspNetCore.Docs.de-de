@@ -5,17 +5,17 @@ description: Erfahren Sie, wie Sie Blazor-Apps debuggen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7273ae3d240de0b59a58069fdcc1880247379751
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381871"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661605"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Debuggen der ASP.NET Core Blazor-Assembly
 
@@ -55,7 +55,7 @@ Zum Debuggen ist einer der folgenden Browser erforderlich:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Aktivieren des Debuggens für Visual Studio und Visual Studio Code
 
-Das Debuggen ist für neue Projekte automatisch aktiviert, die mit der Blazor WebAssembly-Projektvorlage von ASP.NET Core 3.2 Preview 3 erstellt werden.
+Das Debuggen ist für neue Projekte automatisch aktiviert, die mit der Blazor WebAssembly-Projektvorlage von ASP.NET Core 3.2 Preview 3 oder höher erstellt werden ([aktuelles Release ist 3.2 Preview 4](xref:blazor/get-started)).
 
 Zum Aktivieren des Debuggens für eine vorhandene Blazor WebAssembly-App müssen Sie die Datei *launchSettings.json* im Startprojekt aktualisieren, sodass sie die folgende `inspectUri`-Eigenschaft in allen Startprofilen enthält:
 
@@ -103,6 +103,8 @@ Während Sie Ihre Blazor WebAssembly-App debuggen, können Sie auch Ihren Server
    ![Debugserver](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
 1. Drücken Sie wieder <kbd>F5</kbd>, um die Ausführung fortzusetzen, damit die WeatherForecast-Tabelle gerendert wird.
+
+<a id="vscode"></a>
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 

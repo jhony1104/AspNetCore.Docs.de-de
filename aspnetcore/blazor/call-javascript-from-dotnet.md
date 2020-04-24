@@ -5,17 +5,17 @@ description: In diesem Artikel erfahren Sie, wie Sie JavaScript-Funktionen über
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/19/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 7a27b6f1be2ef296d5b2b2a4f566e0cdedbe6480
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0c6b6a0a8f88fa912523e7772fcd84ef4ce3b4ff
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647521"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977014"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>Aufrufen von JavaScript-Funktionen über .NET-Methoden in ASP.NET Core Blazor
 
@@ -461,6 +461,18 @@ JS Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unzuver
 Weitere Informationen zur Ressourcenauslastung finden Sie unter <xref:security/blazor/server>.
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>Vermeiden von Objektzirkelbezügen
+
+Objekte, die Zirkelbezüge enthalten, können auf dem Client für folgende Vorgänge nicht serialisiert werden:
+
+* .NET-Methodenaufrufe.
+* JavaScript-Methodenaufrufe von C#, wenn der Rückgabetyp Zirkelbezüge enthält.
+
+Weitere Informationen finden Sie unter den folgenden Problemen:
+
+* [Zirkelbezüge werden nicht unterstützt, die Zweite (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [Vorschlag: Hinzufügen eines Mechanismus zur Verarbeitung von Zirkelbezügen bei der Serialisierung (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

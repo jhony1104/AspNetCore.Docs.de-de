@@ -4,14 +4,14 @@ author: scottaddie
 description: Hier erfahren Sie, wie Sie statische Ressourcen in einer ASP.NET Core-Webanwendung mithilfe von Bündelungs- und Minimierungsverfahren optimieren.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 06/17/2019
+ms.date: 04/15/2020
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: a7a5c40d6c31c4416212c02c1b491dd794f2a1d3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 670ac6a96c3affd2b2ac699836f536aea7d85ff3
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646783"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488688"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung statischer Ressourcen in ASP.NET Core
 
@@ -63,7 +63,7 @@ Browser arbeiten in Bezug auf HTTP-Anforderungsheader ziemlich ausführlich. Die
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Auswählen einer Bündelungs- und Minimierungsstrategie
 
-Die MVC- und Razor Pages-Projektvorlagen enthalten eine einsatzbereite Bündelungs- und Minimierungslösung bestehend aus einer JSON-Konfigurationsdatei. Drittanbietertools, wie die [Grunt](xref:client-side/using-grunt)-Aufgabenausführung, führen dieselben Aufgaben auf etwas komplexere Weise aus. Ein Drittanbietertool eignet sich hervorragend in Fällen, in denen Ihr Entwicklungsworkflow Verarbeitungsschritte erfordert, die über die Bündelung und Minimierung hinausgehen, wie etwa Linting und Bildoptimierung. Bei der Bündelung und Minimierung zur Entwurfszeit werden die minimierten Dateien vor Bereitstellung der App erstellt. Werden die Bündelung und Minimierung vor der Bereitstellung durchgeführt, kann die Serverauslastung reduziert werden. Beachten Sie jedoch, dass eine Bündelung und Minimierung zur Entwurfszeit die Komplexität des Builds erhöht und auch nur mit statischen Dateien ausgeführt werden kann.
+Die MVC- und Razor Pages-Projektvorlagen enthalten eine Bündelungs- und Minimierungslösung, bestehend aus einer JSON-Konfigurationsdatei. Drittanbietertools, wie die [Grunt](xref:client-side/using-grunt)-Aufgabenausführung, führen dieselben Aufgaben auf etwas komplexere Weise aus. Ein Drittanbietertool eignet sich hervorragend in Fällen, in denen Ihr Entwicklungsworkflow Verarbeitungsschritte erfordert, die über die Bündelung und Minimierung hinausgehen, wie etwa Linting und Bildoptimierung. Bei der Bündelung und Minimierung zur Entwurfszeit werden die minimierten Dateien vor Bereitstellung der App erstellt. Werden die Bündelung und Minimierung vor der Bereitstellung durchgeführt, kann die Serverauslastung reduziert werden. Beachten Sie jedoch, dass eine Bündelung und Minimierung zur Entwurfszeit die Komplexität des Builds erhöht und auch nur mit statischen Dateien ausgeführt werden kann.
 
 ## <a name="configure-bundling-and-minification"></a>Konfigurieren der Bündelung und Minimierung
 
@@ -95,109 +95,6 @@ Zu den Konfigurationsoptionen gehören:
 * `includeInProject`: Flag, das angibt, ob der Projektdatei generierte Dateien hinzugefügt werden sollen. **Optional**, *Standardwert: FALSE*.
 * `sourceMap`: Flag, das angibt, ob für die Bündeldatei eine Quellzuordnungsdatei generiert werden soll. **Optional**, *Standardwert: FALSE*.
 * `sourceMapRootPath`: Stammpfad zum Speichern der generierten Quellzuordnungsdatei.
-
-## <a name="build-time-execution-of-bundling-and-minification"></a>Ausführen der Bündelung und Minimierung zur Buildzeit
-
-Mit dem NuGet-Paket [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier/) können Sie die Bündelung und Minimierung zur Buildzeit ausführen. Durch das Paket werden [MSBuild-Ziele](/visualstudio/msbuild/msbuild-targets) eingefügt, die zum Zeitpunkt des Builds und der Bereinigung ausgeführt werden. Die Datei *bundleconfig.json* wird im Buildprozess analysiert und die Ausgabedateien basierend auf der definierten Konfiguration erstellt.
-
-> [!NOTE]
-> Das Paket „BuildBundlerMinifier“ gehört zu einem von der Community gesteuerten Projekt auf GitHub, für das Microsoft keine Unterstützung bereitstellt. Hilfe bei Problemen finden Sie [hier](https://github.com/madskristensen/BundlerMinifier/issues).
-
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-Fügen Sie Ihrem Projekt das Paket *BuildBundlerMinifier* hinzu.
-
-Erstellen Sie das Projekt. Die folgende Ausgabe wird im Ausgabefenster angezeigt:
-
-```console
-1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Begin processing bundleconfig.json
-1>  Minified wwwroot/css/site.min.css
-1>  Minified wwwroot/js/site.min.js
-1>Bundler: Done processing bundleconfig.json
-1>BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-```
-
-Bereinigen Sie das Projekt. Die folgende Ausgabe wird im Ausgabefenster angezeigt:
-
-```console
-1>------ Clean started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Cleaning output from bundleconfig.json
-1>Bundler: Done cleaning output file from bundleconfig.json
-========== Clean: 1 succeeded, 0 failed, 0 skipped ==========
-```
-
-# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
-
-Fügen Sie Ihrem Projekt das Paket *BuildBundlerMinifier* hinzu:
-
-```dotnetcli
-dotnet add package BuildBundlerMinifier
-```
-
-Wenn Sie ASP.NET Core 1.x verwenden, stellen Sie das neu hinzugefügte Paket wieder her:
-
-```dotnetcli
-dotnet restore
-```
-
-Erstellen Sie das Projekt:
-
-```dotnetcli
-dotnet build
-```
-
-Die folgende Ausgabe wird angezeigt:
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-    Bundler: Begin processing bundleconfig.json
-    Bundler: Done processing bundleconfig.json
-    BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-```
-
-Bereinigen Sie das Projekt:
-
-```dotnetcli
-dotnet clean
-```
-
-Die folgende Ausgabe wird angezeigt:
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-  Bundler: Cleaning output from bundleconfig.json
-  Bundler: Done cleaning output file from bundleconfig.json
-```
-
----
-
-## <a name="ad-hoc-execution-of-bundling-and-minification"></a>Ausführen der Bündelung und Minimierung auf Ad-hoc-Basis
-
-Bündelungs- und Minimierungsaufgaben können auch ad hoc ausgeführt werden, ohne dass das Projekt erstellt werden muss. Fügen Sie Ihrem Projekt das NuGet-Paket [BundlerMinifier.Core](https://www.nuget.org/packages/BundlerMinifier.Core/) hinzu:
-
-[!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=10)]
-
-> [!NOTE]
-> Das Paket „BundlerMinifier.Core“ gehört zu einem von der Community gesteuerten Projekt auf GitHub, für das Microsoft keine Unterstützung bereitstellt. Hilfe bei Problemen finden Sie [hier](https://github.com/madskristensen/BundlerMinifier/issues).
-
-Mit diesem Paket wird die .NET Core-CLI erweitert, sodass sie anschließend das Tool *dotnet-bundle* enthält. Sie können den folgenden Befehl im Fenster der Paket-Manager-Konsole (PMC) oder in der Befehlsshell ausführen:
-
-```dotnetcli
-dotnet bundle
-```
-
-> [!IMPORTANT]
-> Mit dem NuGet-Paket-Manager werden der Datei „*.csproj“ Abhängigkeiten als `<PackageReference />`-Knoten hinzugefügt. Der Befehl `dotnet bundle` wird nur bei Verwendung eines `<DotNetCliToolReference />`-Knotens bei der .NET Core-CLI registriert. Ändern Sie die Datei „*.csproj“ entsprechend ab.
 
 ## <a name="add-files-to-workflow"></a>Hinzufügen von Dateien zum Workflow
 
@@ -258,32 +155,7 @@ Das folgende `environment`-Tag rendert die gebündelten und minimierten CSS-Date
 
 In einigen Fällen erfordert der Workflow für die Bündelung und Minimierung einer App zusätzliche Verarbeitungsschritte. Dazu gehören Bildoptimierung, Cache-Busting und die Verarbeitung von CDN-Ressourcen. Zur Durchführung dieser Aufgaben können Sie den Workflow für die Bündelung und Minimierung so konvertieren, dass Gulp verwendet wird.
 
-### <a name="use-the-bundler--minifier-extension"></a>Verwenden der Erweiterung „Bundler & Minifier“
-
-Die Konvertierung in Gulp wird durch die Visual Studio-Erweiterung [Bundler & Minifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) ausgeführt.
-
-> [!NOTE]
-> Die Erweiterung „Bundler & Minifier“ gehört zu einem von der Community gesteuerten Projekt auf GitHub, für das Microsoft keine Unterstützung bereitstellt. Hilfe bei Problemen finden Sie [hier](https://github.com/madskristensen/BundlerMinifier/issues).
-
-Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste auf die Datei *bundleconfig.json*, und klicken Sie anschließend auf **Bundler & Minifier** > **In Gulp konvertieren...** :
-
-![Kontextmenüelement „In Gulp konvertieren“](../client-side/bundling-and-minification/_static/convert-to-gulp.png)
-
-Die Dateien *gulpfile.js* und *package.json* werden dem Projekt hinzugefügt. Die im Bereich `devDependencies` der Datei *package.json* aufgelisteten unterstützenden [npm](https://www.npmjs.com/)-Pakete werden installiert.
-
-Führen Sie im PMC-Fenster folgenden Befehl aus, um die Gulp-CLI als globale Abhängigkeit zu installieren:
-
-```console
-npm i -g gulp-cli
-```
-
-Die Datei *gulpfile.js* liest die Datei *bundleconfig.json*, um die Eingaben, Ausgaben und Einstellungen zu ermitteln.
-
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-12&highlight=10)]
-
-### <a name="convert-manually"></a>Manuelles Konvertieren
-
-Sind Visual Studio und/oder die Erweiterung „Bundler & Minifier“ nicht verfügbar, können Sie die Konvertierung manuell durchführen.
+### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Manuelles Konvertieren des Workflows für die Bündelung und Minimierung, um Gulp zu verwenden
 
 Fügen Sie dem Projektstamm eine *package.json*-Datei mit den folgenden `devDependencies` hinzu:
 

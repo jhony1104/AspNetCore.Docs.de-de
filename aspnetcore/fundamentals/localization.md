@@ -5,12 +5,12 @@ description: Erfahren Sie, wie ASP.NET Core Dienste und Middleware für das Loka
 ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648433"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440817"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisierung und Lokalisierung in ASP.NET Core
 
@@ -44,7 +44,7 @@ Verwenden Sie die Implementierung von `IHtmlLocalizer<T>` für Ressourcen, die H
 
 [!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Hinweis:** Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
+**Hinweis**: Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
 
 Auf der untersten Ebene können Sie `IStringLocalizerFactory` aus [Dependency Injection](dependency-injection.md) abrufen:
 
@@ -74,13 +74,13 @@ Die Standardimplementierung von `IViewLocalizer` sucht die Ressourcendatei über
 
 Eine französische Ressourcendatei könnte Folgendes beinhalten:
 
-| Taste | Wert |
+| Key | Wert |
 | ----- | ------ |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 Die gerenderte Ansicht würde das HTML-Markup der Ressourcendatei enthalten.
 
-**Hinweis:** Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
+**Hinweis**: Normalerweise sollten Sie nur den Text lokalisieren, nicht den HTML-Code.
 
 Fügen Sie `IHtmlLocalizer<T>` ein, um eine freigegebene Ressourcendatei in einer Ansicht zu verwenden:
 
@@ -124,7 +124,7 @@ ASP.NET Core ermöglicht Ihnen, zwei Werte für die Kultur anzugeben: `Supported
 
 ## <a name="resource-files"></a>Ressourcendateien
 
-Eine Ressourcendatei ist ein nützlicher Mechanismus für das Trennen von lokalisierbaren Zeichenfolgen von Code. Bei übersetzten Zeichenfolgen für die Sprache, die nicht die Standardsprache darstellt, handelt es sich um isolierte *RESX*-Ressourcendateien. Möglicherweise möchten Sie z.B. eine spanische Ressourcendatei namens *Welcome.es.resx* erstellen, die übersetzte Zeichenfolgen enthält. „es“ ist der Sprachcode für Spanisch. Erstellen dieser Ressourcendatei in Visual Studio:
+Eine Ressourcendatei ist ein nützlicher Mechanismus für das Trennen von lokalisierbaren Zeichenfolgen von Code. Übersetzte Zeichenfolgen für die Sprache, die nicht die Standardsprache darstellt, werden in *RESX*-Ressourcendateien isoliert. Möglicherweise möchten Sie z.B. eine spanische Ressourcendatei namens *Welcome.es.resx* erstellen, die übersetzte Zeichenfolgen enthält. „es“ ist der Sprachcode für Spanisch. Erstellen dieser Ressourcendatei in Visual Studio:
 
 1. Führen Sie im **Projektmappen-Explorer** einen Rechtsklick auf den Ordner aus, der die Ressourcendatei enthalten soll, und klicken Sie dann auf **Hinzufügen** > **Neues Element**.
 
@@ -144,7 +144,7 @@ Eine Ressourcendatei ist ein nützlicher Mechanismus für das Trennen von lokali
 
 ## <a name="resource-file-naming"></a>Benennung von Ressourcendateien
 
-Ressourcen werden nach dem vollständigen Typnamen ihrer Klasse, abzüglich des Assemblynamens, benannt. Eine französische Ressourcendatei, deren Hauptassembly für die Klasse `LocalizationWebsite.Web.dll``LocalizationWebsite.Web.Startup` ist, würde zum Beispiel den Namen *Startup.fr.resx* erhalten. Eine Ressource für die Klasse `LocalizationWebsite.Web.Controllers.HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Wenn der Namespace Ihrer Zielklasse nicht dem Assemblynamen entspricht, benötigen Sie den vollständigen Typnamen. Eine Ressource für den Typ `ExtraNamespace.Tools` im Beispielprojekt würde z.B. den Namen *ExtraNamespace.Tools.fr.resx* erhalten.
+Ressourcen werden nach dem vollständigen Typnamen ihrer Klasse, abzüglich des Assemblynamens, benannt. Eine französische Ressourcendatei, deren Hauptassembly für die Klasse `LocalizationWebsite.Web.Startup``LocalizationWebsite.Web.dll` ist, würde zum Beispiel den Namen *Startup.fr.resx* erhalten. Eine Ressource für die Klasse `LocalizationWebsite.Web.Controllers.HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Wenn der Namespace Ihrer Zielklasse nicht dem Assemblynamen entspricht, benötigen Sie den vollständigen Typnamen. Eine Ressource für den Typ `ExtraNamespace.Tools` im Beispielprojekt würde z.B. den Namen *ExtraNamespace.Tools.fr.resx* erhalten.
 
 Im Beispielprojekt legt die Methode `ConfigureServices` die `ResourcesPath`-Eigenschaft auf „Resources“ fest. Der relative Projektpfad für den Controller „Home“ der französischen Ressourcendatei ist also *Resources/Controllers.HomeController.fr.resx*. Alternativ können Sie Ordner zum Organisieren von Ressourcendateien verwenden. Für den Controller „Home“ wäre der Pfad *Resources/Controllers/HomeController.fr.resx*. Wenn Sie die Option `ResourcesPath` nicht verwenden, würde sich die *RESX*-Datei im Basisprojektverzeichnis befinden. Die Ressourcendatei für `HomeController` würde den Namen *Controllers.HomeController.fr.resx* erhalten. Ob Sie die Benennungskonventionen mit Punkten oder wie Pfade verwenden, hängt davon ab, wie Sie Ihre Ressourcendateien organisieren möchten.
 
@@ -392,9 +392,9 @@ Begriffe:
 
 * Globalisierung (G11N): Der Prozess, durch den eine App mehrere Sprachen und Regionen unterstützen soll.
 * Lokalisierung (L10N): Der Prozess, durch den eine App auf eine Sprache und Region angepasst wird.
-* Internationalisierung (I18N): Beschreibt die Globalisierung und Lokalisierung.
+* Internationalisierung (I18N): Beschreibt sowohl Globalisierung als auch Lokalisierung.
 * Kultur: Beschreibt eine Sprache und optional auch eine Region.
-* Neutrale Kultur: Eine Kultur die eine bestimmte Sprache beschreibt, aber keine Region. (Zum Beispiel „en“, „es“)
+* Neutrale Kultur: Eine Kultur, die eine bestimmte Sprache beschreibt, aber keine Region. (Zum Beispiel „en“, „es“)
 * Spezifische Kultur: Eine Kultur, die eine bestimmte Sprache und Region beschreibt. (Zum Beispiel „en-US“, „en-GB“, „es-CL“)
 * Übergeordnete Kultur: Eine neutrale Kultur, die eine spezifische Kultur enthält. („en“ ist z.B. die übergeordnete Kultur von „en-US“ und „en-GB“)
 * Gebietsschema: Ein Gebietsschema ist identisch mit einer Kultur.

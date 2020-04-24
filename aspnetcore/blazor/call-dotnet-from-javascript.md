@@ -5,17 +5,17 @@ description: In diesem Artikel erfahren Sie, wie Sie .NET-Methoden von JavaScrip
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: dbf44fe7923998c65119e42d97c304890fa95523
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e2344dd15efd243a405373b6cf0362f28b48173a
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218790"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976949"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>Aufrufen von .NET-Methoden von JavaScript-Funktionen in ASP.NET Core Blazor
 
@@ -66,7 +66,7 @@ Die Konsolenausgabe lautet:
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-Der vierte Arraywert wird in das von `data.push(4);` zurückgegebene Array (`ReturnArrayAsync`) gepusht.
+Der vierte Arraywert wird in das von `ReturnArrayAsync` zurückgegebene Array (`data.push(4);`) gepusht.
 
 Standardmäßig ist der Methodenbezeichner der Methodenname, aber Sie können mit dem Konstruktor `JSInvokableAttribute` einen anderen Bezeichner angeben:
 
@@ -274,7 +274,7 @@ Im folgenden Beispiel:
 
 * Die `JSInterop`-Komponente enthält mehrere `ListItem`-Komponenten.
 * Alle `ListItem`-Komponenten bestehen aus einer Nachricht und einer Schaltfläche.
-* Wenn auf die Schaltfläche einer `ListItem`-Komponente geklickt wird, ändert die `ListItem`-Methode des `UpdateMessage`-Elements den Text des Listenelements und blendet die Schaltfläche aus.
+* Wenn auf die Schaltfläche einer `ListItem`-Komponente geklickt wird, ändert die `UpdateMessage`-Methode des `ListItem`-Elements den Text des Listenelements und blendet die Schaltfläche aus.
 
 *MessageUpdateInvokeHelper.cs:*
 
@@ -359,6 +359,18 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 ```
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>Vermeiden von Objektzirkelbezügen
+
+Objekte, die Zirkelbezüge enthalten, können auf dem Client für folgende Vorgänge nicht serialisiert werden:
+
+* .NET-Methodenaufrufe.
+* JavaScript-Methodenaufrufe von C#, wenn der Rückgabetyp Zirkelbezüge enthält.
+
+Weitere Informationen finden Sie unter den folgenden Problemen:
+
+* [Zirkelbezüge werden nicht unterstützt, die Zweite (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [Vorschlag: Hinzufügen eines Mechanismus zur Verarbeitung von Zirkelbezügen bei der Serialisierung (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
