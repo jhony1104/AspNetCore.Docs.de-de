@@ -1,47 +1,50 @@
 ---
-title: Sichern einer Blazor eigenständigen Core WebAssembly-App mit der Authentifizierungsbibliothek ASP.NET Core WebAssembly
+title: Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit der Authentifizierungs Bibliothek
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 893fff10df37e1c2be549604f4cb83cd20049108
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 043e4548ad6f40fdf1e6c27cd51946c7bf59a66e
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977040"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82110946"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Sichern einer Blazor eigenständigen Core WebAssembly-App mit der Authentifizierungsbibliothek ASP.NET Core WebAssembly
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit der Authentifizierungs Bibliothek
 
-Von [Javier Calvarro Nelson](https://github.com/javiercn) und Luke [Latham](https://github.com/guardrex)
+Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-*Befolgen Sie für Azure Active Directory (AAD) und Azure Active Directory B2C (AAD B2C) nicht die Anweisungen in diesem Thema. Siehe die Themen AAD und AAD B2C in diesem Inhaltsverzeichnisknoten.*
+> [!NOTE]
+> Die Anleitung in diesem Artikel gilt für ASP.net Core 3,2 Preview 4. Dieses Thema wird aktualisiert, um Preview 5 am Freitag, dem 24. April, zu behandeln.
 
-Um eine Blazor eigenständige WebAssembly-App `Microsoft.AspNetCore.Components.WebAssembly.Authentication` zu erstellen, die Bibliothek verwendet, führen Sie den folgenden Befehl in einer Befehlsshell aus:
+*Befolgen Sie die Anweisungen in diesem Thema für Azure Active Directory (AAD) und Azure Active Directory B2C (AAD B2C). Weitere Informationen finden Sie in den Themen zu Aad und Aad B2C in diesem Knoten Inhaltsverzeichnis.*
+
+Führen Sie den Blazor folgenden Befehl in einer Befehlsshell aus, um eine eigenständige Webassembly-APP zu erstellen, die die Bibliothek verwendet `Microsoft.AspNetCore.Components.WebAssembly.Authentication` :
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
 ```
 
-Um den Ausgabespeicherort anzugeben, der einen Projektordner erstellt, falls dieser nicht vorhanden ist, fügen `-o BlazorSample`Sie die Ausgabeoption in den Befehl mit einem Pfad ein (z. B. ). Der Ordnername wird auch Teil des Projektnamens.
+Um den Ausgabe Speicherort anzugeben, der einen Projektordner erstellt, wenn er nicht vorhanden ist, schließen Sie die Output-Option in den Befehl mit einem `-o BlazorSample`Pfad (z. b.) ein. Der Name des Ordners wird auch Teil des Projekt namens.
 
-Erstellen Sie in Visual Studio [eine Blazor WebAssembly-App](xref:blazor/get-started). Legen Sie **die Authentifizierung** auf **einzelne Benutzerkonten** mit der **Option Benutzerkonten speichern in der App** fest.
+Erstellen Sie in Visual Studio [eine Blazor Webassembly-App](xref:blazor/get-started). Legen Sie die **Authentifizierung** auf **einzelne Benutzerkonten** fest, indem Sie die Option **Benutzerkonten in-APP speichern** auswählen.
 
-## <a name="authentication-package"></a>Authentifizierungspaket
+## <a name="authentication-package"></a>Authentifizierungs Paket
 
-Wenn eine App für die Verwendung einzelner Benutzerkonten erstellt wird, erhält die App automatisch eine Paketreferenz für das `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Paket in der Projektdatei der App. Das Paket stellt eine Reihe von Primitiven bereit, die der App helfen, Benutzer zu authentifizieren und Token zum Aufrufen geschützter APIs zu erhalten.
+Wenn eine APP für die Verwendung einzelner Benutzerkonten erstellt wird, erhält die APP automatisch einen Paket Verweis für `Microsoft.AspNetCore.Components.WebAssembly.Authentication` das Paket in der Projektdatei der app. Das Paket enthält eine Reihe von primitiven, die der APP helfen, Benutzer zu authentifizieren und Token abzurufen, um geschützte APIs aufzurufen.
 
-Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manuell zur Projektdatei der App hinzu:
+Wenn Sie eine Authentifizierung zu einer APP hinzufügen, fügen Sie das Paket manuell zur Projektdatei der APP hinzu:
 
 ```xml
 <PackageReference 
@@ -49,11 +52,11 @@ Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manu
     Version="{VERSION}" />
 ```
 
-Ersetzen `{VERSION}` Sie im vorherigen Paketverweis `Microsoft.AspNetCore.Blazor.Templates` durch die <xref:blazor/get-started> im Artikel gezeigte Version des Pakets.
+Ersetzen `{VERSION}` Sie im vorherigen Paket Verweis durch die Version des `Microsoft.AspNetCore.Blazor.Templates` Pakets, das im <xref:blazor/get-started> Artikel angezeigt wird.
 
-## <a name="authentication-service-support"></a>Unterstützung des Authentifizierungsdienstes
+## <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
 
-Unterstützung für die Authentifizierung von Benutzern wird `AddOidcAuthentication` im Dienstcontainer `Microsoft.AspNetCore.Components.WebAssembly.Authentication` mit der vom Paket bereitgestellten Erweiterungsmethode registriert. Diese Methode richtet alle Dienste ein, die für die Interaktion der App mit dem Identitätsanbieter (IDENTITY Provider, IP) erforderlich sind.
+Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Container `AddOidcAuthentication` mit der vom `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Paket bereitgestellten Erweiterungsmethode registriert. Diese Methode richtet alle Dienste ein, die erforderlich sind, damit die APP mit dem Identitäts Anbieter (IP) interagieren muss.
 
 *Program.cs*:
 
@@ -65,11 +68,11 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-Die Authentifizierungsunterstützung für eigenständige Apps wird mit Open ID Connect (OIDC) angeboten. Die `AddOidcAuthentication` Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die erforderlich sind, um eine App mit OIDC zu authentifizieren. Die für die Konfiguration der App erforderlichen Werte können über die OIDC-kompatible IP abgerufen werden. Rufen Sie die Werte ab, wenn Sie die App registrieren, was in der Regel in ihrem Onlineportal auftritt.
+Die Authentifizierungs Unterstützung für eigenständige apps wird mithilfe von Open ID Connect (oidc) angeboten. Die `AddOidcAuthentication` -Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer App mithilfe von oidc erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können von der oidc-kompatiblen IP-Adresse abgerufen werden. Rufen Sie die Werte ab, wenn Sie die APP registrieren, die in der Regel in Ihrem Onlineportal erfolgt.
 
-## <a name="access-token-scopes"></a>Zugriffstokenbereiche
+## <a name="access-token-scopes"></a>Zugriffs Token-Bereiche
 
-Die Blazor WebAssembly-Vorlage konfiguriert die App nicht automatisch, um ein Zugriffstoken für eine sichere API anzufordern. Um ein Token als Teil des Anmeldeflusses zu bereitstellen, fügen Sie `OidcProviderOptions`den Bereich den Standardtokenbereichen der folgenden Werte hinzu:
+Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardtokenbereichen `OidcProviderOptions`von hinzu:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -80,12 +83,12 @@ builder.Services.AddOidcAuthentication(options =>
 ```
 
 > [!NOTE]
-> Wenn das Azure-Portal einen Bereichs-URI bereitstellt und **die App eine nicht behandelte Ausnahme auslöst,** wenn sie eine *401 nicht autorisierte* Antwort von der API empfängt, versuchen Sie, einen Bereichs-URI zu verwenden, der das Schema und den Host nicht enthält. Das Azure-Portal kann z. B. eines der folgenden Bereichs-URI-Formate bereitstellen:
+> Wenn die Azure-Portal einen Bereichs-URI bereitstellt und **die APP eine nicht behandelte Ausnahme** auslöst, wenn Sie eine 401-nicht *autorisierte* Antwort von der API empfängt, verwenden Sie einen Bereichs-URI, der das Schema und den Host nicht enthält. Der Azure-Portal kann z. b. eines der folgenden Bereich-URI-Formate bereitstellen:
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> Geben Sie den Bereichs-URI ohne Schema und Host:
+> Geben Sie den Bereichs-URI ohne das Schema und den Host an:
 >
 > ```csharp
 > options.ProviderOptions.DefaultScopes.Add(
@@ -94,7 +97,11 @@ builder.Services.AddOidcAuthentication(options =>
 
 Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
 
-## <a name="imports-file"></a>Imports-Datei
+<!--
+    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
+-->
+
+## <a name="imports-file"></a>Import Datei
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
@@ -106,15 +113,15 @@ Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additio
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-## <a name="redirecttologin-component"></a>RedirectToLogin-Komponente
+## <a name="redirecttologin-component"></a>Redirecttologin-Komponente
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-## <a name="logindisplay-component"></a>LoginDisplay-Komponente
+## <a name="logindisplay-component"></a>Logindisplay-Komponente
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
-## <a name="authentication-component"></a>Authentifizierungskomponente
+## <a name="authentication-component"></a>Authentifizierungs Komponente
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
@@ -122,4 +129,5 @@ Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additio
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Zusätzliche Zugriffstoken anfordern](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* <xref:security/blazor/webassembly/additional-scenarios>
+ 

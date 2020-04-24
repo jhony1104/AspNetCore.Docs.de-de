@@ -1,50 +1,53 @@
 ---
-title: Sichern einer Blazor eigenständigen Core WebAssembly-App mit ASP.NET Core WebAssembly mit Microsoft-Konten
+title: Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 8c409651b3338c2baeae497bef43b994823a20f9
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: a12cc8f94a97882e4a0ac3a6553628df4da2e82c
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977079"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111187"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern einer Blazor eigenständigen Core WebAssembly-App mit ASP.NET Core WebAssembly mit Microsoft-Konten
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
 
-Von [Javier Calvarro Nelson](https://github.com/javiercn) und Luke [Latham](https://github.com/guardrex)
+Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-So erstellen Blazor Sie eine eigenständige WebAssembly-App, die [Microsoft-Konten mit Azure Active Directory (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) für die Authentifizierung verwendet:
+> [!NOTE]
+> Die Anleitung in diesem Artikel gilt für ASP.net Core 3,2 Preview 4. Dieses Thema wird aktualisiert, um Preview 5 am Freitag, dem 24. April, zu behandeln.
 
-1. [Erstellen eines AAD-Mandanten und einer Webanwendung](/azure/active-directory/develop/v2-overview)
+So erstellen Sie Blazor eine eigenständige Webassembly-APP, die [Microsoft-Konten mit Azure Active Directory (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) für die Authentifizierung verwendet:
 
-   Registrieren einer AAD-App im Registrierungsbereich der Azure Active > **Directory-App** im Azure-Portal: **Azure Active Directory**
+1. [Erstellen eines Aad-Mandanten und einer Webanwendung](/azure/active-directory/develop/v2-overview)
 
-   1\. Geben Sie einen **Namen** für die App an (z. B. ** Blazor Client AAD**).<br>
-   2\. Wählen Sie unter **Unterstützte Kontotypen** **Konten in einem beliebigen Organisationsverzeichnis**aus.<br>
-   3\. Lassen Sie die Droptauchliste **"Umleitungs-URI"** auf **Web**festgelegt, und stellen Sie einen Umleitungs-URI von `https://localhost:5001/authentication/login-callback`bereit.<br>
-   4\. Deaktivieren Sie das Kontrollkästchen **Permissions** > **Grant admin concent zum öffnen und offline_access Berechtigungen.**<br>
-   5\. Wählen Sie **Registrieren**.
+   Registrieren Sie eine Aad-App im **Azure Active Directory** > **App-Registrierungen** Bereich der Azure-Portal:
 
-   In > **Authentifizierungsplattform-Konfigurationen** > **Web**: **Authentication**
+   1 \. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad**).<br>
+   2 \. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.<br>
+   3 \. Belassen Sie den **Umleitungs-URI** -Dropdown auf **Web**, und geben Sie `https://localhost:5001/authentication/login-callback`einen Umleitungs-URI von an.<br>
+   4 \. Deaktivieren Sie **das** > Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .<br>
+   5 \. Wählen Sie **Registrieren**.
 
-   1\. Bestätigen Sie, dass `https://localhost:5001/authentication/login-callback` der **Umleitungs-URI** von vorhanden ist.<br>
-   2\. Aktivieren Sie für **Implizite Erteilung**die Kontrollkästchen für **Access-Token** und **ID-Token**.<br>
-   3\. Die verbleibenden Standardeinstellungen für die App sind für diese Erfahrung akzeptabel.<br>
-   4\. Wählen Sie die Schaltfläche **Speichern** aus.
+   Im**Web**der **Authentifizierungs** > **Platt Form Konfigurationen** > :
 
-   Zeichnen Sie die Anwendungs-ID (Client-ID) auf (z. B. `11111111-1111-1111-1111-111111111111`).
+   1 \. Bestätigen Sie, dass der `https://localhost:5001/authentication/login-callback` **Umleitungs-URI** von vorhanden ist<br>
+   2 \. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.<br>
+   3 \. Die verbleibenden Standardwerte für die APP sind für diese Art von akzeptabel.<br>
+   4 \. Wählen Sie die Schaltfläche **Speichern** aus.
+
+   Notieren Sie sich `11111111-1111-1111-1111-111111111111`die Anwendungs-ID (Client-ID) (z. b.).
 
 1. Ersetzen Sie die Platzhalter im folgenden Befehl durch die zuvor aufgezeichneten Informationen, und führen Sie den Befehl in einer Befehlsshell aus:
 
@@ -52,31 +55,31 @@ So erstellen Blazor Sie eine eigenständige WebAssembly-App, die [Microsoft-Kont
    dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
    ```
 
-   Um den Ausgabespeicherort anzugeben, der einen Projektordner erstellt, falls dieser nicht vorhanden ist, fügen `-o BlazorSample`Sie die Ausgabeoption in den Befehl mit einem Pfad ein (z. B. ). Der Ordnername wird auch Teil des Projektnamens.
+   Um den Ausgabe Speicherort anzugeben, der einen Projektordner erstellt, wenn er nicht vorhanden ist, schließen Sie die Output-Option in den Befehl mit einem `-o BlazorSample`Pfad (z. b.) ein. Der Name des Ordners wird auch Teil des Projekt namens.
 
-Nach dem Erstellen der App sollten Sie in der Lage sein:
+Nachdem Sie die App erstellt haben, sollten Sie folgende Aktionen ausführen können:
 
-* Melden Sie sich mit einem Microsoft-Konto bei der App an.
-* Anfordern von Zugriffstoken für Microsoft-APIs mit Blazor dem gleichen Ansatz wie für eigenständige Apps, sofern Sie die App ordnungsgemäß konfiguriert haben. Weitere Informationen finden Sie unter [Schnellstart: Konfigurieren einer Anwendung zum Verfügbarmachen von Web-APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
+* Melden Sie sich mit einem Microsoft-Konto bei der APP an.
+* Anfordern von Zugriffs Token für Microsoft-APIs mit dem gleichen Ansatz wie Blazor für eigenständige apps, vorausgesetzt, dass Sie die APP ordnungsgemäß konfiguriert haben. Weitere Informationen finden Sie unter [Schnellstart: Konfigurieren einer Anwendung für die](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)Bereitstellung von Web-APIs.
 
-## <a name="authentication-package"></a>Authentifizierungspaket
+## <a name="authentication-package"></a>Authentifizierungs Paket
 
-Wenn eine App für die Verwendung`SingleOrg`von Arbeits- oder Schulkonten ( erstellt`Microsoft.Authentication.WebAssembly.Msal`wird, erhält die App automatisch eine Paketreferenz für die [Microsoft-Authentifizierungsbibliothek](/azure/active-directory/develop/msal-overview) ( ). Das Paket stellt eine Reihe von Primitiven bereit, die der App helfen, Benutzer zu authentifizieren und Token zum Aufrufen geschützter APIs zu erhalten.
+Wenn eine APP für die Verwendung von Geschäfts-, Schul-`SingleOrg`oder unikonten () erstellt wird, erhält die APP automatisch einen Paket Verweis`Microsoft.Authentication.WebAssembly.Msal`für die [Microsoft-Authentifizierungs Bibliothek](/azure/active-directory/develop/msal-overview) (). Das Paket enthält eine Reihe von primitiven, die der APP helfen, Benutzer zu authentifizieren und Token abzurufen, um geschützte APIs aufzurufen.
 
-Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manuell zur Projektdatei der App hinzu:
+Wenn Sie eine Authentifizierung zu einer APP hinzufügen, fügen Sie das Paket manuell zur Projektdatei der APP hinzu:
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-Ersetzen `{VERSION}` Sie im vorherigen Paketverweis `Microsoft.AspNetCore.Blazor.Templates` durch die <xref:blazor/get-started> im Artikel gezeigte Version des Pakets.
+Ersetzen `{VERSION}` Sie im vorherigen Paket Verweis durch die Version des `Microsoft.AspNetCore.Blazor.Templates` Pakets, das im <xref:blazor/get-started> Artikel angezeigt wird.
 
-Das `Microsoft.Authentication.WebAssembly.Msal` Paket fügt das `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Paket transitiv zur App hinzu.
+Das `Microsoft.Authentication.WebAssembly.Msal` Paket fügt das `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Paket transitiv der APP hinzu.
 
-## <a name="authentication-service-support"></a>Unterstützung des Authentifizierungsdienstes
+## <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
 
-Unterstützung für die Authentifizierung von Benutzern wird `AddMsalAuthentication` im Dienstcontainer `Microsoft.Authentication.WebAssembly.Msal` mit der vom Paket bereitgestellten Erweiterungsmethode registriert. Diese Methode richtet alle Dienste ein, die für die Interaktion der App mit dem Identitätsanbieter (IDENTITY Provider, IP) erforderlich sind.
+Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Container `AddMsalAuthentication` mit der vom `Microsoft.Authentication.WebAssembly.Msal` Paket bereitgestellten Erweiterungsmethode registriert. Diese Methode richtet alle Dienste ein, die erforderlich sind, damit die APP mit dem Identitäts Anbieter (IP) interagieren muss.
 
 *Program.cs*:
 
@@ -89,11 +92,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-Die `AddMsalAuthentication` Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer App erforderlich sind. Die zum Konfigurieren der App erforderlichen Werte können bei der Registrierung der App über die Microsoft-Kontenkonfiguration abgerufen werden.
+Die `AddMsalAuthentication` -Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer APP erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können bei der Registrierung der APP aus der Microsoft-Konto Konfiguration abgerufen werden.
 
-## <a name="access-token-scopes"></a>Zugriffstokenbereiche
+## <a name="access-token-scopes"></a>Zugriffs Token-Bereiche
 
-Die Blazor WebAssembly-Vorlage konfiguriert die App nicht automatisch, um ein Zugriffstoken für eine sichere API anzufordern. Um ein Token als Teil des Anmeldeflusses zu bereitstellen, fügen Sie den `MsalProviderOptions`Bereich den Standardzugriffstokenbereichen der folgenden Werte hinzu:
+Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardmäßigen zugriffstokenbereichen von hinzu `MsalProviderOptions`:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -104,12 +107,12 @@ builder.Services.AddMsalAuthentication(options =>
 ```
 
 > [!NOTE]
-> Wenn das Azure-Portal einen Bereichs-URI bereitstellt und **die App eine nicht behandelte Ausnahme auslöst,** wenn sie eine *401 nicht autorisierte* Antwort von der API empfängt, versuchen Sie, einen Bereichs-URI zu verwenden, der das Schema und den Host nicht enthält. Das Azure-Portal kann z. B. eines der folgenden Bereichs-URI-Formate bereitstellen:
+> Wenn die Azure-Portal einen Bereichs-URI bereitstellt und **die APP eine nicht behandelte Ausnahme** auslöst, wenn Sie eine 401-nicht *autorisierte* Antwort von der API empfängt, verwenden Sie einen Bereichs-URI, der das Schema und den Host nicht enthält. Der Azure-Portal kann z. b. eines der folgenden Bereich-URI-Formate bereitstellen:
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> Geben Sie den Bereichs-URI ohne Schema und Host:
+> Geben Sie den Bereichs-URI ohne das Schema und den Host an:
 >
 > ```csharp
 > options.ProviderOptions.DefaultAccessTokenScopes.Add(
@@ -118,7 +121,11 @@ builder.Services.AddMsalAuthentication(options =>
 
 Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
 
-## <a name="imports-file"></a>Imports-Datei
+<!--
+    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
+-->
+
+## <a name="imports-file"></a>Import Datei
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
@@ -130,15 +137,15 @@ Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additio
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-## <a name="redirecttologin-component"></a>RedirectToLogin-Komponente
+## <a name="redirecttologin-component"></a>Redirecttologin-Komponente
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-## <a name="logindisplay-component"></a>LoginDisplay-Komponente
+## <a name="logindisplay-component"></a>Logindisplay-Komponente
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
-## <a name="authentication-component"></a>Authentifizierungskomponente
+## <a name="authentication-component"></a>Authentifizierungs Komponente
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
@@ -146,6 +153,6 @@ Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additio
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Zusätzliche Zugriffstoken anfordern](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
-* [Schnellstart: Registrieren einer Anwendung mit der Microsoft-Identitätsplattform](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
-* [Schnellstart: Konfigurieren einer Anwendung zum Verfügbarmachen von Web-APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
+* <xref:security/blazor/webassembly/additional-scenarios>
+* [Schnellstart: Registrieren einer Anwendung bei Microsoft Identity Platform](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
+* [Schnellstart: Konfigurieren einer Anwendung für die Bereitstellung von Web-APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
