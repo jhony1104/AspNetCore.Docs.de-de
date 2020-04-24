@@ -5,17 +5,17 @@ description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponente
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218933"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81383972"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
@@ -23,7 +23,14 @@ Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.
 
 Razor-Komponenten können in Razor Pages- und MVC-Apps integriert werden. Wenn die Seite oder Ansicht gerendert wird, können Komponenten gleichzeitig vorab gerendert werden.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten
+Nachdem Sie [die App vorbereitet haben](#prepare-the-app), verwenden Sie die Anleitungen in den folgenden Abschnitten, abhängig von den Anforderungen der App:
+
+* Routingfähige Komponenten &ndash; Für Komponenten, die über Benutzeranforderungen direkt routingfähig sind. Befolgen Sie diese Anleitung, wenn Besucher in der Lage sein sollen, in ihrem Browser eine HTTP-Anforderung für eine Komponente mit einer [`@page`](xref:mvc/views/razor#page)-Direktive zu erstellen.
+  * [Verwenden routingfähiger Komponenten in einer Razor Pages-App](#use-routable-components-in-a-razor-pages-app)
+  * [Verwenden routingfähiger Komponenten in einer MVC-App](#use-routable-components-in-an-mvc-app)
+* [Rendern von Komponenten aus einer Seite oder Ansicht](#render-components-from-a-page-or-view) &ndash; Für Komponenten, die über Benutzeranforderungen nicht direkt routingfähig sind. Befolgen Sie diese Anleitung, wenn die App Komponenten mit dem [Taghilfsprogramm für Komponenten](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) in vorhandene Seiten und Ansichten einbettet.
+
+## <a name="prepare-the-app"></a>Vorbereiten der App
 
 Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und Ansichten integrieren:
 
@@ -60,13 +67,13 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
    @using MyAppNamespace
    ```
 
-1. Registrieren Sie den `Startup.ConfigureServices` Server-Dienst in Blazor:
+1. Registrieren Sie den Blazor Server-Dienst in `Startup.ConfigureServices`:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. Fügen Sie in `Startup.Configure` den Blazor Hub-Endpunkt zu `app.UseEndpoints` hinzu:
+1. Fügen Sie den Blazor Hub-Endpunkt in `Startup.Configure` zu `app.UseEndpoints` hinzu:
 
    ```csharp
    endpoints.MapBlazorHub();
@@ -80,7 +87,7 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
 
 So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
 
-1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views).
+1. Befolgen Sie die Anleitungen im Abschnitt [Vorbereiten der App](#prepare-the-app).
 
 1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
@@ -113,6 +120,19 @@ So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
 
    Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
 
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die `App`-Komponente:
+
+   * Ob die Komponente zuvor für die Seite gerendert wird
+   * Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
+
+   | Rendermodus | Beschreibung |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rendert die `App`-Komponente in statischem HTML und schließt einen Marker für eine Blazor Server-App ein. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rendert einen Marker für eine Blazor Server-App. Die Ausgabe der `App`-Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird dieser Marker zum Bootstrapping einer Blazor-App verwendet. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rendert die `App`-Komponente in statischem HTML. |
+
+   Weitere Informationen zum Taghilfsprogramm für Komponenten finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+
 1. Fügen Sie eine Route mit niedriger Priorität für die Seite *_Host.cshtml* zur Endpunktkonfiguration in `Startup.Configure` hinzu:
 
    ```csharp
@@ -124,7 +144,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
    });
    ```
 
-1. Fügen Sie routingfähige Komponenten zur App hinzu. Beispiel:
+1. Fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
 
    ```razor
    @page "/counter"
@@ -134,7 +154,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
    ...
    ```
 
-   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
+Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
 
 ## <a name="use-routable-components-in-an-mvc-app"></a>Verwenden routingfähiger Komponenten in einer MVC-App
 
@@ -142,7 +162,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in Razor Pages-Apps:
 
 So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
 
-1. Befolgen Sie die Anweisungen im Abschnitt [Vorbereiten der App zum Verwenden von Komponenten in Seiten und Ansichten](#prepare-the-app-to-use-components-in-pages-and-views).
+1. Befolgen Sie die Anleitungen im Abschnitt [Vorbereiten der App](#prepare-the-app).
 
 1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
@@ -173,6 +193,19 @@ So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
    ```
 
    Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
+   
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die `App`-Komponente:
+
+   * Ob die Komponente zuvor für die Seite gerendert wird
+   * Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
+
+   | Rendermodus | Beschreibung |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rendert die `App`-Komponente in statische HTML und fügt einen Marker für eine Blazor Server-App hinzu. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rendert einen Marker für eine Blazor Server-App. Die Ausgabe der `App`-Komponente ist nicht enthalten. Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rendert die `App`-Komponente in statischem HTML. |
+
+   Weitere Informationen zum Taghilfsprogramm für Komponenten finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 1. Fügen Sie eine Aktion zum Home-Controller hinzu:
 
@@ -194,7 +227,7 @@ So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
    });
    ```
 
-1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Beispiel:
+1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
 
    ```razor
    @page "/counter"
@@ -204,7 +237,19 @@ So unterstützen Sie routingfähige Razor-Komponenten in MVC-Apps:
    ...
    ```
 
-   Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
+Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespaces](#component-namespaces).
+
+## <a name="render-components-from-a-page-or-view"></a>Rendern von Komponenten einer Seite oder Ansicht
+
+*In diesem Abschnitt wird das Hinzufügen von Komponenten zu Seiten oder Ansichten behandelt, wenn die Komponenten nicht direkt über Benutzeranforderungen routingfähig sind.*
+
+Verwenden Sie das [Komponententaghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) zum Rendern einer Komponente einer Seite oder Ansicht.
+
+Weitere Informationen über das Rendern von Komponenten, den Komponentenzustand und das `Component`-Taghilfsprogramm finden Sie in den folgenden Artikeln:
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
 
 ## <a name="component-namespaces"></a>Komponentennamespaces
 
@@ -220,15 +265,3 @@ Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden
 Die Datei *_ViewImports.cshtml* befindet sich bei Razor Pages-Apps im Ordner *Pages* oder bei MVC-Apps im Ordner *Views*.
 
 Weitere Informationen finden Sie unter <xref:blazor/components#import-components>.
-
-## <a name="render-components-from-a-page-or-view"></a>Rendern von Komponenten einer Seite oder Ansicht
-
-*In diesem Abschnitt wird das Hinzufügen von Komponenten zu Seiten oder Ansichten behandelt, wenn die Komponenten nicht direkt über Benutzeranforderungen routingfähig sind.*
-
-Verwenden Sie das [Komponententaghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) zum Rendern einer Komponente einer Seite oder Ansicht.
-
-Weitere Informationen über das Rendern von Komponenten, den Komponentenzustand und das `Component`-Taghilfsprogramm finden Sie in den folgenden Artikeln:
-
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

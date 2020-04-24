@@ -4,14 +4,14 @@ author: jamesnk
 description: Erfahren Sie, wie Sie gRPC-Dienste für ASP.NET Core so konfigurieren, dass sie mit gRPC-Web von Browser-Apps aus aufgerufen werden können.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 02/16/2020
+ms.date: 04/15/2020
 uid: grpc/browser
-ms.openlocfilehash: 3beeffc26ffd3c2dc85bfc22a46d97d5fd78d3d0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a20e604488b1fb919f18932599ba690bfa308f0c
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649417"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440765"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Verwenden von gRPC in Browser-Apps
 
@@ -28,6 +28,15 @@ Von [James Newton-King](https://twitter.com/jamesnk)
 > Hinterlassen Sie Ihr Feedback unter [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet), um sicherzustellen, dass wir etwas entwickeln, das den Entwicklern gefällt und mit dem sie produktiv sind.
 
 Es ist nicht möglich, einen HTTP/2-gRPC-Dienst von einer browserbasierten App aus aufzurufen. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) ist ein Protokoll, das es JavaScript- und Blazor-Apps im Browser erlaubt, gRPC-Dienste aufzurufen. In diesem Artikel wird erläutert, wie gRPC-Web in .NET Core verwendet wird.
+
+## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web in ASP.NET Core im Vergleich zu Envoy
+
+Es gibt zwei Möglichkeiten zum Hinzufügen von gRPC-Web zu einer ASP.NET Core-App:
+
+* Unterstützung von gRPC-Web parallel zu gRPC HTTP/2 in ASP.NET Core. Diese Option verwendet die mit dem `Grpc.AspNetCore.Web`-Paket bereitgestellte Middleware.
+* Verwenden Sie die gRPC-Webunterstützung des [Envoy Proxys](https://www.envoyproxy.io/), um gRPC-Web in gRPC HTTP/2 zu übersetzen. Der übersetzte Aufruf wird dann an die ASP.NET Core-App weitergeleitet.
+
+Beide Ansätze haben Vor- und Nachteile. Wenn Sie Envoy bereits als Proxy in der Umgebung Ihrer App verwenden, kann es sinnvoll sein, ihn auch zur Bereitstellung von gRPC-Webunterstützung zu verwenden. Wenn Sie eine einfache Lösung für gRPC-Web wünschen, die nur ASP.NET Core erfordert, ist `Grpc.AspNetCore.Web` eine gute Wahl.
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>Konfigurieren von gRPC-Web in ASP.NET Core
 
@@ -48,6 +57,11 @@ Der vorangehende Code:
 Alternativ können Sie alle Dienste zur Unterstützung von gRPC-Web konfigurieren, indem Sie `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` zu ConfigureServices hinzufügen.
 
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
+
+> [!NOTE]
+> Es gibt ein bekanntes Problem, das dazu führen kann, dass gRPC-Web fehlschlägt, wenn es [von Htpp.sys](xref:fundamentals/servers/httpsys) in .NET Core 3.x gehostet wird.
+>
+> Eine Problemumgehung, um gRPC-Web auf Http.sys betreiben zu können, finden Sie [hier](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202).
 
 ### <a name="grpc-web-and-cors"></a>gRPC-Web und CORS
 
