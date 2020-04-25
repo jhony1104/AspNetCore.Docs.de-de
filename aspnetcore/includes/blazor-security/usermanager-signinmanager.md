@@ -1,18 +1,18 @@
-## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="75433-101">UserManager und SignInManager</span><span class="sxs-lookup"><span data-stu-id="75433-101">UserManager and SignInManager</span></span>
+## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="3bb0a-101">Usermanager und signinmanager</span><span class="sxs-lookup"><span data-stu-id="3bb0a-101">UserManager and SignInManager</span></span>
 
-<span data-ttu-id="75433-102">Legen Sie den Anspruchstyp der Benutzerkennung fest, wenn eine Server-App Folgendes erfordert:</span><span class="sxs-lookup"><span data-stu-id="75433-102">Set the user identifier claim type when a Server app requires:</span></span>
+<span data-ttu-id="3bb0a-102">Legen Sie den Anspruchstyp Benutzer-ID fest, wenn eine Server-App Folgendes erfordert:</span><span class="sxs-lookup"><span data-stu-id="3bb0a-102">Set the user identifier claim type when a Server app requires:</span></span>
 
-* <span data-ttu-id="75433-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>oder <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in einem API-Endpunkt.</span><span class="sxs-lookup"><span data-stu-id="75433-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
-* <span data-ttu-id="75433-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>Details, z. B. den Namen, die E-Mail-Adresse oder die Sperrendzeit des Benutzers.</span><span class="sxs-lookup"><span data-stu-id="75433-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
+* <span data-ttu-id="3bb0a-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>oder <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in einem API-Endpunkt.</span><span class="sxs-lookup"><span data-stu-id="3bb0a-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
+* <span data-ttu-id="3bb0a-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>Details, wie z. b. Benutzername, e-Mail-Adresse oder Sperr Ende.</span><span class="sxs-lookup"><span data-stu-id="3bb0a-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
 
-<span data-ttu-id="75433-105">In `Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="75433-105">In `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="3bb0a-105">In `Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="3bb0a-105">In `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-<span data-ttu-id="75433-106">Im `WeatherForecastController` Folgenden <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> wird `Get` protokolliert, wann die Methode aufgerufen wird:</span><span class="sxs-lookup"><span data-stu-id="75433-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
+<span data-ttu-id="3bb0a-106">Im folgenden `WeatherForecastController` wird protokolliert <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> , wenn `Get` die-Methode aufgerufen wird:</span><span class="sxs-lookup"><span data-stu-id="3bb0a-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]
