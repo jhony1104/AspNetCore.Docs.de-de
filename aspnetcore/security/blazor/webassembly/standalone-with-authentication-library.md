@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 043e4548ad6f40fdf1e6c27cd51946c7bf59a66e
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 25aa7761b9c1acc72081653422e80cb004500573
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110946"
+ms.locfileid: "82138520"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit der Authentifizierungs Bibliothek
 
@@ -24,9 +24,6 @@ Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](http
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Die Anleitung in diesem Artikel gilt für ASP.net Core 3,2 Preview 4. Dieses Thema wird aktualisiert, um Preview 5 am Freitag, dem 24. April, zu behandeln.
 
 *Befolgen Sie die Anweisungen in diesem Thema für Azure Active Directory (AAD) und Azure Active Directory B2C (AAD B2C). Weitere Informationen finden Sie in den Themen zu Aad und Aad B2C in diesem Knoten Inhaltsverzeichnis.*
 
@@ -63,16 +60,26 @@ Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Contai
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
 {
-    options.ProviderOptions.Authority = "{AUTHORITY}";
-    options.ProviderOptions.ClientId = "{CLIENT ID}";
+    builder.Configuration.Bind("Local", options.ProviderOptions);
 });
+```
+
+Die Konfiguration wird von der Datei " *wwwroot/appSettings. JSON* " bereitgestellt:
+
+```json
+{
+    "Local": {
+        "Authority": "{AUTHORITY}",
+        "ClientId": "{CLIENT ID}"
+    }
+}
 ```
 
 Die Authentifizierungs Unterstützung für eigenständige apps wird mithilfe von Open ID Connect (oidc) angeboten. Die `AddOidcAuthentication` -Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer App mithilfe von oidc erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können von der oidc-kompatiblen IP-Adresse abgerufen werden. Rufen Sie die Werte ab, wenn Sie die APP registrieren, die in der Regel in Ihrem Onlineportal erfolgt.
 
 ## <a name="access-token-scopes"></a>Zugriffs Token-Bereiche
 
-Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardtokenbereichen `OidcProviderOptions`von hinzu:
+Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Zugriffs Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardtokenbereichen `OidcProviderOptions`von hinzu:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -95,11 +102,10 @@ builder.Services.AddOidcAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+Weitere Informationen finden Sie in den folgenden Abschnitten des Artikels *weitere Szenarien* :
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [Anfordern zusätzlicher Zugriffs Token](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [Token an ausgehende Anforderungen anfügen](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>Import Datei
 
@@ -130,4 +136,3 @@ Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additio
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/blazor/webassembly/additional-scenarios>
- 

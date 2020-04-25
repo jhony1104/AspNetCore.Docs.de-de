@@ -2,7 +2,7 @@ Die von der `Authentication` Komponente (*pages/Authentication. Razor*) erstellt
 
 Die `RemoteAuthenticatorView` Komponente:
 
-* Wird vom `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Paket bereitgestellt.
+* Wird vom [Microsoft. aspnetcore. Components. Webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) -Paket bereitgestellt.
 * Verwaltet die entsprechenden Aktionen in jeder Phase der Authentifizierung.
 
 ```razor

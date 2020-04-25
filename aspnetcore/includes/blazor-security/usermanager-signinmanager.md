@@ -1,9 +1,9 @@
-## <a name="usermanager-and-signinmanager"></a>UserManager und SignInManager
+## <a name="usermanager-and-signinmanager"></a>Usermanager und signinmanager
 
-Legen Sie den Anspruchstyp der Benutzerkennung fest, wenn eine Server-App Folgendes erfordert:
+Legen Sie den Anspruchstyp Benutzer-ID fest, wenn eine Server-App Folgendes erfordert:
 
 * <xref:Microsoft.AspNetCore.Identity.UserManager%601>oder <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in einem API-Endpunkt.
-* <xref:Microsoft.AspNetCore.Identity.IdentityUser>Details, z. B. den Namen, die E-Mail-Adresse oder die Sperrendzeit des Benutzers.
+* <xref:Microsoft.AspNetCore.Identity.IdentityUser>Details, wie z. b. Benutzername, e-Mail-Adresse oder Sperr Ende.
 
 In `Startup.ConfigureServices`:
 
@@ -12,7 +12,7 @@ services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-Im `WeatherForecastController` Folgenden <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> wird `Get` protokolliert, wann die Methode aufgerufen wird:
+Im folgenden `WeatherForecastController` wird protokolliert <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> , wenn `Get` die-Methode aufgerufen wird:
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]

@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: a12cc8f94a97882e4a0ac3a6553628df4da2e82c
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 95c16bcd8da22792b27b3aaaf8632b2206372270
+ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111187"
+ms.locfileid: "82150058"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
 
@@ -25,27 +25,24 @@ Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](http
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-> [!NOTE]
-> Die Anleitung in diesem Artikel gilt für ASP.net Core 3,2 Preview 4. Dieses Thema wird aktualisiert, um Preview 5 am Freitag, dem 24. April, zu behandeln.
-
 So erstellen Sie Blazor eine eigenständige Webassembly-APP, die [Microsoft-Konten mit Azure Active Directory (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) für die Authentifizierung verwendet:
 
 1. [Erstellen eines Aad-Mandanten und einer Webanwendung](/azure/active-directory/develop/v2-overview)
 
    Registrieren Sie eine Aad-App im **Azure Active Directory** > **App-Registrierungen** Bereich der Azure-Portal:
 
-   1 \. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad**).<br>
-   2 \. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.<br>
+   1\. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad**).<br>
+   2\. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.<br>
    3 \. Belassen Sie den **Umleitungs-URI** -Dropdown auf **Web**, und geben Sie `https://localhost:5001/authentication/login-callback`einen Umleitungs-URI von an.<br>
    4 \. Deaktivieren Sie **das** > Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .<br>
    5 \. Wählen Sie **Registrieren**.
 
    Im**Web**der **Authentifizierungs** > **Platt Form Konfigurationen** > :
 
-   1 \. Bestätigen Sie, dass der `https://localhost:5001/authentication/login-callback` **Umleitungs-URI** von vorhanden ist<br>
-   2 \. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.<br>
+   1\. Bestätigen Sie, dass der `https://localhost:5001/authentication/login-callback` **Umleitungs-URI** von vorhanden ist<br>
+   2\. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.<br>
    3 \. Die verbleibenden Standardwerte für die APP sind für diese Art von akzeptabel.<br>
-   4 \. Wählen Sie die Schaltfläche **Speichern** aus.
+   4 \. Klicken Sie auf die Schaltfläche **Speichern**.
 
    Notieren Sie sich `11111111-1111-1111-1111-111111111111`die Anwendungs-ID (Client-ID) (z. b.).
 
@@ -86,17 +83,37 @@ Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Contai
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
 {
-    var authentication = options.ProviderOptions.Authentication;
-    authentication.Authority = "{AUTHORITY}";
-    authentication.ClientId = "{CLIENT ID}";
+    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
 });
 ```
 
 Die `AddMsalAuthentication` -Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer APP erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können bei der Registrierung der APP aus der Microsoft-Konto Konfiguration abgerufen werden.
 
+Die Konfiguration wird von der Datei " *wwwroot/appSettings. JSON* " bereitgestellt:
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common",
+    "ClientId": "{CLIENT ID}"
+  }
+}
+```
+
+Beispiel:
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common",
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+  }
+}
+```
+
 ## <a name="access-token-scopes"></a>Zugriffs Token-Bereiche
 
-Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardmäßigen zugriffstokenbereichen von hinzu `MsalProviderOptions`:
+Die Blazor webassemblyvorlage konfiguriert die APP nicht automatisch, um ein Zugriffs Token für eine sichere API anzufordern. Fügen Sie zum Bereitstellen eines Zugriffs Tokens als Teil des Anmelde Flusses den Gültigkeitsbereich zu den standardzugriffstokenbereichen von hinzu `MsalProviderOptions`:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -119,11 +136,10 @@ builder.Services.AddMsalAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+Weitere Informationen finden Sie in den folgenden Abschnitten des Artikels *weitere Szenarien* :
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [Anfordern zusätzlicher Zugriffs Token](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [Token an ausgehende Anforderungen anfügen](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>Import Datei
 

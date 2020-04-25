@@ -1,22 +1,34 @@
 ## <a name="troubleshoot"></a>Problembehandlung
 
-### <a name="cookies-and-site-data"></a>Cookies und Website-Daten
+### <a name="cookies-and-site-data"></a>Cookies und Standortdaten
 
-Cookies und Websitedaten können über App-Updates hinweg beibehalten werden und das Testen und Beheben von Problemen beeinträchtigen. Löschen Sie Folgendes, wenn Sie App-Codeänderungen, Benutzerkontenänderungen beim Anbieter oder Konfigurationsänderungen für Anbieter-Apps vornehmen:
+Cookies und Standortdaten können über APP-Updates hinweg beibehalten werden und das Testen und die Problembehandlung beeinträchtigen. Entfernen Sie Folgendes, wenn Sie Änderungen am APP-Code, Änderungen an den Benutzerkonten mit dem Anbieter oder Konfigurationsänderungen an den Anbieter-Apps vornehmen:
 
-* Benutzer-Anmelde-Cookies
+* Benutzer Anmelde Cookies
 * App-Cookies
-* Zwischengespeicherte und gespeicherte Websitedaten
+* Zwischengespeicherte und gespeicherte Standortdaten
 
-Ein Ansatz, um zu verhindern, dass veraltete Cookies und Websitedaten das Testen und Beheben von Problemen beeinträchtigen, ist:
+Ein Ansatz, um zu verhindern, dass veraltete Cookies und Standortdaten das Testen und die Problembehandlung beeinträchtigen, ist Folgendes:
 
-* Verwenden Sie einen Browser zum Testen, den Sie konfigurieren können, um alle Cookie- und Websitedaten jedes Mal zu löschen, wenn der Browser geschlossen wird.
-* Schließen Sie den Browser zwischen jeder Änderung an der App, dem Testbenutzer oder der Anbieterkonfiguration.
+* Browser konfigurieren
+  * Verwenden Sie einen Browser zum Testen, den Sie so konfigurieren können, dass alle Cookies und Standortdaten jedes Mal gelöscht werden, wenn der Browser geschlossen wird.
+  * Stellen Sie sicher, dass der Browser manuell oder durch die IDE zwischen allen Änderungen an der APP, dem Test Benutzer oder der Anbieter Konfiguration geschlossen wird.
+* Verwenden Sie einen benutzerdefinierten Befehl, um in Visual Studio einen Browser im Inkognito-Modus oder im privaten Modus zu öffnen:
+  * Öffnen Sie in der Visual Studio-Schaltfläche **Ausführen** das Dialogfeld **Durchsuchen** nach.
+  * Wählen Sie die Schaltfläche **Hinzufügen** aus.
+  * Geben Sie im Feld **Programm** den Pfad zu Ihrem Browser an.
+  * Geben Sie im Feld **Argumente** die Befehlszeilenoption an, die der Browser verwendet, um im Inkognito-oder privaten Modus und die URL der APP zu öffnen. Zum Beispiel:
+    * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
+  * Geben Sie im Feld Anzeige **Name** einen Namen ein. Beispielsweise `Firefox Auth Testing`.
+  * Klicken Sie auf die Schaltfläche **OK**.
+  * Um zu vermeiden, dass das Browserprofil für die einzelnen Iterationen von Tests mit einer APP ausgewählt werden muss, legen Sie das Profil mit der Schaltfläche **als Standard festlegen** als Standard fest.
+  * Stellen Sie sicher, dass der Browser von der IDE zwischen allen Änderungen an der APP, dem Test Benutzer oder der Anbieter Konfiguration geschlossen wird.
 
 ### <a name="run-the-server-app"></a>Ausführen der Server-App
 
-Stellen Sie beim Testen und Beheben einer gehosteten Blazor-App sicher, dass Sie die App über das **Server-Projekt** ausführen. Vergewissern Sie sich beispielsweise in Visual Studio, dass das Serverprojekt im **Projektmappen-Explorer** hervorgehoben ist, bevor Sie die App mit einem der folgenden Ansätze starten:
+Stellen Sie beim Testen und Beheben von Problemen bei einer gehosteten blazor-App sicher, dass Sie die APP aus dem **Server** Projekt ausführen. Vergewissern Sie sich z. b. in Visual Studio, dass das Server Projekt in **Projektmappen-Explorer** hervorgehoben wird, bevor Sie die APP mit einem der folgenden Ansätze starten:
 
 * Wählen Sie die Schaltfläche **Ausführen**.
-* Verwenden Sie **Debug** > **Start Debugging** aus dem Menü.
+*  > Verwenden **Sie**Debuggen**Debuggen starten** im Menü.
 * Drücken Sie <kbd>F5</kbd>.

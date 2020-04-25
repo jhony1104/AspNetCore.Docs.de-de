@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 45ef1e6599777a38da7db753a8868028f3134f4b
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 6f049906da4a1aa87f293f5ad1af19dad44f477a
+ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110979"
+ms.locfileid: "82150037"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory B2C
 
@@ -24,9 +24,6 @@ Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](http
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Die Anleitung in diesem Artikel gilt für ASP.net Core 3,2 Preview 4. Dieses Thema wird aktualisiert, um Preview 5 am Freitag, dem 24. April, zu behandeln.
 
 In diesem Artikel wird beschrieben, wie Blazor Sie eine eigenständige Webassembly-app erstellen, die [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) für die Authentifizierung verwendet.
 
@@ -84,7 +81,7 @@ Im**Web**der **Authentifizierungs** > **Platt Form Konfigurationen** > :
 1. Bestätigen Sie, dass der `https://localhost:5001/authentication/login-callback` **Umleitungs-URI** von vorhanden ist
 1. Aktivieren Sie für **implizite Gewährung**die Kontrollkästchen für **Zugriffs Token** und **ID-Token**.
 1. Die verbleibenden Standardwerte für die APP sind für diese Art von akzeptabel.
-1. Wählen Sie die Schaltfläche **Speichern** aus.
+1. Klicken Sie auf die Schaltfläche **Speichern**.
 
 In **API-Berechtigungen**:
 
@@ -130,7 +127,7 @@ Die Unterstützung für das Authentifizieren und autorialisieren von Aufrufen vo
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
-    Version="3.1.0" />
+    Version="{VERSION}" />
 ```
 
 ### <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
@@ -174,9 +171,22 @@ Die Datei *appSettings. JSON* enthält die Optionen zum Konfigurieren des JWT-be
 {
   "AzureAd": {
     "Instance": "https://{ORGANIZATION}.b2clogin.com/",
-    "ClientId": "{API CLIENT ID}",
+    "ClientId": "{SERVER API APP CLIENT ID}",
     "Domain": "{DOMAIN}",
     "SignUpSignInPolicyId": "{SIGN UP OR SIGN IN POLICY}"
+  }
+}
+```
+
+Beispiel:
+
+```json
+{
+  "AzureAd": {
+    "Instance": "https://contoso.b2clogin.com/",
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
+    "Domain": "contoso.onmicrosoft.com",
+    "SignUpSignInPolicyId": "B2C_1_signupsignin1",
   }
 }
 ```
@@ -223,6 +233,19 @@ Das `Microsoft.Authentication.WebAssembly.Msal` Paket fügt das `Microsoft.AspNe
 
 ### <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
 
+Es wird `HttpClient` Unterstützung für-Instanzen hinzugefügt, die Zugriffs Token enthalten, wenn Anforderungen an das Server Projekt gestellt werden.
+
+*Program.cs*:
+
+```csharp
+builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client => 
+        client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("{APP ASSEMBLY}.ServerAPI"));
+```
+
 Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Container `AddMsalAuthentication` mit der vom `Microsoft.Authentication.WebAssembly.Msal` Paket bereitgestellten Erweiterungsmethode registriert. Diese Methode richtet alle Dienste ein, die erforderlich sind, damit die APP mit dem Identitäts Anbieter (IP) interagieren muss.
 
 *Program.cs*:
@@ -230,16 +253,36 @@ Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Contai
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
 {
-    var authentication = options.ProviderOptions.Authentication;
-    authentication.Authority = 
-        "{AAD B2C INSTANCE}{DOMAIN}/{SIGN UP OR SIGN IN POLICY}";
-    authentication.ClientId = "{CLIENT ID}";
-    authentication.ValidateAuthority = false;
+    builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
 
 Die `AddMsalAuthentication` -Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer APP erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können aus der Aad-Konfiguration des Azure-Portals abgerufen werden, wenn Sie die APP registrieren.
+
+Die Konfiguration wird von der Datei " *wwwroot/appSettings. JSON* " bereitgestellt:
+
+```json
+{
+  "AzureAdB2C": {
+    "Authority": "{AAD B2C INSTANCE}{DOMAIN}/{SIGN UP OR SIGN IN POLICY}",
+    "ClientId": "{CLIENT APP CLIENT ID}",
+    "ValidateAuthority": false
+  }
+}
+```
+
+Beispiel:
+
+```json
+{
+  "AzureAdB2C": {
+    "Authority": "https://contoso.b2clogin.com/contoso.onmicrosoft.com/B2C_1_signupsignin1",
+    "ClientId": "4369008b-21fa-427c-abaa-9b53bf58e538",
+    "ValidateAuthority": false
+  }
+}
+```
 
 ### <a name="access-token-scopes"></a>Zugriffs Token-Bereiche
 
@@ -271,11 +314,11 @@ builder.Services.AddMsalAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-Weitere Informationen finden Sie unter <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+Weitere Informationen finden Sie in den folgenden Abschnitten des Artikels *weitere Szenarien* :
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [Anfordern zusätzlicher Zugriffs Token](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [Token an ausgehende Anforderungen anfügen](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+
 
 ### <a name="imports-file"></a>Import Datei
 
