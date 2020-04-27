@@ -299,14 +299,14 @@
           uid: blazor/data-binding
         - name: Ereignisbehandlung
           uid: blazor/event-handling
+        - name: Lebenszyklus
+          uid: blazor/lifecycle
         - name: Komponenten mit Vorlagen
           uid: blazor/templated-components
         - name: Integrieren von Komponenten
           uid: blazor/integrate-components
         - name: Globalisierung und Lokalisierung
           uid: blazor/globalization-localization
-        - name: Lebenszyklus
-          uid: blazor/lifecycle
         - name: Layouts
           uid: blazor/layouts
         - name: Formulare und Überprüfung
