@@ -5,14 +5,14 @@ description: In diesem Artikel wird das Verwenden des Protokollierungsframeworks
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 4/17/2020
+ms.date: 4/23/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: b897d0d775da62a11f01a64f39b47b6c5abebc8b
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: 7be8cef3377132ed43efde209db67401d7bdb6dc
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791562"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82110914"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Protokollieren in .NET Core und ASP.NET Core
 
@@ -165,7 +165,9 @@ Wenn Sie einen Dienst konfigurieren müssen, der von `ILogger<T>` abhängt, kön
 
 Der hervorgehobene Code oben ist eine `Func`, die ausgeführt wird, wenn der Abhängigkeitsinjektion-Container eine Instanz von `MyService` erstellen muss. Auf diese Weise können Sie auf alle registrierten Dienste zugreifen.
 
-### <a name="create-logs-in-blazor-webassembly"></a>Erstellen von Protokolle in Blazor WebAssembly
+### <a name="create-logs-in-blazor"></a>Erstellen von Protokollen in Blazor
+
+#### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Konfigurieren Sie Protokollierung in Blazor-WebAssembly-Apps mit der `WebAssemblyHostBuilder.Logging`-Eigenschaft in `Program.Main`:
 
@@ -181,6 +183,63 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 ```
 
 Die `Logging`-Eigenschaft ist vom Typ <xref:Microsoft.Extensions.Logging.ILoggingBuilder>, deshalb sind alle auf <xref:Microsoft.Extensions.Logging.ILoggingBuilder> verfügbaren Erweiterungsmethoden auch auf `Logging` verfügbar.
+
+#### <a name="log-in-razor-components"></a>Protokollieren in Razor-Komponenten
+
+Protokollierungen beachten die Startkonfiguration der App.
+
+Die `using`-Direktive für <xref:Microsoft.Extensions.Logging> ist erforderlich, um die IntelliSense-Vervollständigungen für APIs zu unterstützen, zum Beispiel <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> und <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>.
+
+Im folgenden Beispiel wird die Protokollierung mit einer <xref:Microsoft.Extensions.Logging.ILogger>-Schnittstelle in Razor-Komponenten veranschaulicht.
+
+```razor
+@page "/counter"
+@using Microsoft.Extensions.Logging;
+@inject ILogger<Counter> logger;
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        logger.LogWarning("Someone has clicked me!");
+
+        currentCount++;
+    }
+}
+```
+
+Im folgenden Beispiel wird die Protokollierung mit einer <xref:Microsoft.Extensions.Logging.ILoggerFactory>-Schnittstelle in Razor-Komponenten veranschaulicht.
+
+```razor
+@page "/counter"
+@using Microsoft.Extensions.Logging;
+@inject ILoggerFactory LoggerFactory
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        var logger = LoggerFactory.CreateLogger<Counter>();
+        logger.LogWarning("Someone has clicked me!");
+
+        currentCount++;
+    }
+}
+```
 
 ### <a name="no-asynchronous-logger-methods"></a>Keine asynchronen Protokollierungsmethoden
 
