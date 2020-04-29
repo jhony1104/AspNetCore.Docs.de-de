@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 04bbf20d1d848edfa98e719f316b790c812bfd95
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501316"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206098"
 ---
-# <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS) und [Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +44,7 @@ Blazor WebAssembly-Apps werden auf dem Client ausgeführt. Die Autorisierung wir
 
 Blazor verwendet die vorhandenen ASP.NET Core-Authentifizierungsmechanismen, um die Identität des Benutzers festzustellen. Der genaue Mechanismus hängt davon ab, wie die Blazor-App gehostet wird: über Blazor WebAssembly oder Blazor Server.
 
-### <a name="opno-locblazor-webassembly-authentication"></a>Blazor WebAssembly-Authentifizierung
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly-Authentifizierung
 
 In den Blazor WebAssembly-Apps können Authentifizierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
@@ -57,11 +57,11 @@ Für die Verarbeitung der Authentifizierung wird die Implementierung eines integ
 
 Weitere Informationen zur Erstellung von Apps und Konfigurationen finden Sie unter <xref:security/blazor/webassembly/index>.
 
-### <a name="opno-locblazor-server-authentication"></a>Blazor-Serverauthentifizierung
+### <a name="blazor-server-authentication"></a>Blazor-Serverauthentifizierung
 
 Blazor Server-Apps funktionieren über eine Echtzeitverbindung, die mit SignalR erstellt wurde. Die [Authentifizierung in SignalR-basierten Apps wird verarbeitet](xref:signalr/authn-and-authz), wenn die Verbindung hergestellt wird. Die Authentifizierung kann auf einem Cookie oder einem anderen Bearertoken basieren.
 
-Weitere Informationen zur Erstellung von Apps und Konfigurationen finden Sie unter <xref:security/blazor/server>.
+Weitere Informationen zur Erstellung von Apps und Konfigurationen finden Sie unter <xref:security/blazor/server/index>.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider-Dienst
 
@@ -468,7 +468,7 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
 >
 > Diese Namespaces können global bereitgestellt werden, indem Sie sie der Datei *_Imports.razor* der App hinzufügen.
 
-## <a name="authorization-in-opno-locblazor-webassembly-apps"></a>Autorisierung in Blazor WebAssembly-Apps
+## <a name="authorization-in-blazor-webassembly-apps"></a>Autorisierung in Blazor WebAssembly-Apps
 
 In Blazor WebAssembly-Apps können Autorisierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
@@ -499,6 +499,5 @@ Wahrscheinlich wurde das Projekt nicht mit einer Blazor Server-Vorlage mit aktiv
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/index>
-* <xref:security/blazor/server>
 * <xref:security/authentication/windowsauth>
 * [Nützliche Ressourcen für Blazor: Authentifizierung](https://github.com/AdrienTorris/awesome-blazor#authentication) – Beispiellinks für die Community

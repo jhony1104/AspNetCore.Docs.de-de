@@ -348,7 +348,13 @@
                 - name: Zusätzliche Szenarien
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor Server
-              uid: security/blazor/server
+              items:
+                - name: Übersicht
+                  uid: security/blazor/server/index
+                - name: Bedrohungsabwehr
+                  uid: security/blazor/server/threat-mitigation
+                - name: Zusätzliche Szenarien
+                  uid: security/blazor/server/additional-scenarios
             - name: Sicherheitsrichtlinie für den Inhalt
               uid: security/blazor/content-security-policy
         - name: Zustandsverwaltung
@@ -1135,7 +1141,13 @@
             - name: Zusätzliche Szenarien
               uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor Server
-          uid: security/blazor/server
+          items:
+            - name: Übersicht
+              uid: security/blazor/server/index
+            - name: Bedrohungsabwehr
+              uid: security/blazor/server/threat-mitigation
+            - name: Zusätzliche Szenarien
+              uid: security/blazor/server/additional-scenarios
         - name: Sicherheitsrichtlinie für den Inhalt
           uid: security/blazor/content-security-policy
 - name: Leistung

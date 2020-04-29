@@ -5,13 +5,13 @@ metadata:
   title: ASP.NET Core-Dokumentation – Neuerungen
   description: Dokumentation zu den neuen und aktualisierten Inhalten in ASP.NET Core.
   ms.topic: landing-page
-  ms.date: 04/01/2020
-  ms.openlocfilehash: 4d1e63bafe1a40110c0b514fcaf0f1eb2f180722
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/26/2020
+  ms.openlocfilehash: 1650541ec9a6c6160f65ce1a3e83caf4b5cd092e
+  ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
   ms.translationtype: HT
   ms.contentlocale: de-DE
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80538991"
+  ms.lasthandoff: 04/28/2020
+  ms.locfileid: "82206085"
 landingContent:
 - title: Neuerungen in ASP.NET Core
   linkLists:
@@ -45,6 +45,12 @@ landingContent:
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: Leitfaden für Mitwirkende an der ASP.NET Core-API-Referenz
       url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
+- title: Community
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Community
+      url: https://dotnet.microsoft.com/platform/community
 - title: Ähnliche Seiten zu Neuerungen
   linkLists:
   - linkListType: whats-new
