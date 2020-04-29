@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: cf6b77de78f2c5dda48ffcd8ac1f9ed2f8d28bd7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652513"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205890"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
 
@@ -49,28 +49,28 @@ Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaft
 
 Im Folgenden sind einige der integrierten Validierungsattribute aufgeführt:
 
-* `[CreditCard]`: überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
-* `[Compare]`: überprüft, ob zwei Eigenschaften in einem Modell stimmen.
-* `[EmailAddress]`: überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
-* `[Phone]`: überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
-* `[Range]`: überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
-* `[RegularExpression]`: überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
-* `[Required]`: überprüft, ob das Feld nicht NULL ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
-* `[StringLength]`: überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
-* `[Url]`: überprüft, ob die Eigenschaft ein URL-Format aufweist.
-* `[Remote]`: überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
+* `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
+* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell stimmen.
+* `[EmailAddress]`: Überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
+* `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
+* `[Range]`: Überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
+* `[RegularExpression]`: Überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
+* `[Required]`: Überprüft, ob das Feld nicht NULL ist. Weitere [ `[Required]` ](#required-attribute) Informationen zum Verhalten dieses Attributs finden Sie unter Attribut.
+* `[StringLength]`: Überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
+* `[Url]`: Überprüft, ob die Eigenschaft ein URL-Format aufweist.
+* `[Remote]`: Überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere [ `[Remote]` ](#remote-attribute) Informationen zum Verhalten dieses Attributs finden Sie unter Attribut.
 
 Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)-Namespace finden Sie eine vollständige Liste der Validierungsattribute.
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -78,7 +78,7 @@ Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter fü
 
 Bei Anwendung auf eine `Name`-Eigenschaft wäre die Fehlermeldung, die vom vorangehenden Code erstellt wurde, die Folgende: „Name length must be between 6 and 8“ (Die Länge des Namens muss zwischen 6 und 8 Zeichen betragen).
 
-Wenn Sie herausfinden möchten, welche Parameter an die Methode `String.Format` für die Fehlermeldung eines bestimmten Attributs übergeben werden, sehen Sie sich den [DataAnnotations-Quellcode](https://github.com/dotnet/corefx/tree/master/src/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations) an.
+Wenn Sie herausfinden möchten, welche Parameter an die Methode `String.Format` für die Fehlermeldung eines bestimmten Attributs übergeben werden, sehen Sie sich den [DataAnnotations-Quellcode](https://github.com/dotnet/runtime/tree/master/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations) an.
 
 ## <a name="required-attribute"></a>[Required]-Attribut
 
@@ -259,7 +259,7 @@ Die vorangegangenen Taghilfsprogramme rendern die folgende HTML:
 </div>
 ```
 
-Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `Movie.ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die jQuery Validate-Methode [required()](https://jqueryvalidation.org/required-method/), die diese Meldung dann im zugehörigen **\<span>** -Element anzeigt.
+Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `Movie.ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die jQuery Validate-Methode [required()](https://jqueryvalidation.org/required-method/), die diese Meldung dann im zugehörigen **\<span>**-Element anzeigt.
 
 Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. Mithilfe von `[DataType]`-Attributen und Subklassen wie `[EmailAddress]` können Sie die Fehlermeldung angeben.
 
@@ -381,7 +381,7 @@ Der vorherige Ansatz verhindert nicht die clientseite Validierung der ASP.NET Co
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [System.ComponentModel.DataAnnotations-Namespace](xref:System.ComponentModel.DataAnnotations)
-* [Modellbindung](model-binding.md)
+* [Modell Bindung](model-binding.md)
 
 ::: moniker-end
 
@@ -417,30 +417,30 @@ Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaft
 
 Zu den integrierten Validierungsattributen gehören:
 
-* `[CreditCard]`: überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
-* `[Compare]`: überprüft, ob zwei Eigenschaften in einem Modell stimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. [Gerüst für Identität](xref:security/authentication/scaffold-identity), um den Registrierungscode anzuzeigen.
-* `[EmailAddress]`: überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
-* `[Phone]`: überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
-* `[Range]`: überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
-* `[RegularExpression]`: überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
-* `[Required]`: überprüft, ob das Feld nicht NULL ist. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Required]`-Attribut](#required-attribute).
-* `[StringLength]`: überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
-* `[Url]`: überprüft, ob die Eigenschaft ein URL-Format aufweist.
-* `[Remote]`: überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere Informationen zum Verhalten dieses Attributs finden Sie unter [`[Remote]`-Attribut](#remote-attribute).
+* `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
+* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell stimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. [Gerüst für Identität](xref:security/authentication/scaffold-identity), um den Registrierungscode anzuzeigen.
+* `[EmailAddress]`: Überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
+* `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
+* `[Range]`: Überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
+* `[RegularExpression]`: Überprüft, ob der Eigenschafts Wert mit einem angegebenen regulären Ausdruck übereinstimmt.
+* `[Required]`: Überprüft, ob das Feld nicht NULL ist. Weitere [ `[Required]` ](#required-attribute) Informationen zum Verhalten dieses Attributs finden Sie unter Attribut.
+* `[StringLength]`: Überprüft, ob ein Zeichen folgen Eigenschafts Wert eine angegebene Längen Beschränkung nicht überschreitet.
+* `[Url]`: Überprüft, ob die Eigenschaft ein URL-Format aufweist.
+* `[Remote]`: Überprüft die Eingabe auf dem Client, indem eine Aktionsmethode auf dem Server aufgerufen wird. Weitere [ `[Remote]` ](#remote-attribute) Informationen zum Verhalten dieses Attributs finden Sie unter Attribut.
 
-Wenn das `[RegularExpression]`-Attribut mit der clientseitigen Validierung verwendet wird, wird der Regex in JavaScript auf dem Client ausgeführt. Dies bedeutet, dass ein mit [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) übereinstimmendes Verhalten verwendet wird. Weitere Informationen finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/corefx/issues/42487).
+Wenn das `[RegularExpression]`-Attribut mit der clientseitigen Validierung verwendet wird, wird der Regex in JavaScript auf dem Client ausgeführt. Dies bedeutet, dass ein mit [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) übereinstimmendes Verhalten verwendet wird. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/corefx/issues/42487).
 
 Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)-Namespace finden Sie eine vollständige Liste der Validierungsattribute.
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -496,7 +496,7 @@ So wird die Remotevalidierung implementiert:
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserEmailProperty)]
  
-   Das `[Remote]`-Attribut ist im `Microsoft.AspNetCore.Mvc`-Namespace enthalten. Wenn Sie nicht das Metapaket [ oder ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) verwenden, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.App`Microsoft.AspNetCore.Mvc.ViewFeatures`Microsoft.AspNetCore.All`.
+   Das `[Remote]`-Attribut ist im `Microsoft.AspNetCore.Mvc`-Namespace enthalten. Wenn Sie nicht das Metapaket `Microsoft.AspNetCore.App` oder `Microsoft.AspNetCore.All` verwenden, installieren Sie das NuGet-Paket [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures).
    
 ### <a name="additional-fields"></a>Zusätzliche Felder
 
@@ -634,7 +634,7 @@ Die vorangegangenen Taghilfsprogramme rendern die folgende HTML.
 </form>
 ```
 
-Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die jQuery Validate-Methode [required()](https://jqueryvalidation.org/required-method/), die diese Meldung dann im zugehörigen **\<span>** -Element anzeigt.
+Beachten Sie, dass die `data-`-Attribute in der HTML-Ausgabe mit den Validierungsattributen für die `ReleaseDate`-Eigenschaft übereinstimmen. Das `data-val-required`-Attribut enthält eine Fehlermeldung, die angezeigt wird, wenn der Benutzer das Datumsfeld für die Veröffentlichung nicht ausfüllt. „jQuery Unobtrusive Validation“ übergibt diesen Wert an die jQuery Validate-Methode [required()](https://jqueryvalidation.org/required-method/), die diese Meldung dann im zugehörigen **\<span>**-Element anzeigt.
 
 Die Datentypvalidierung basiert auf dem .NET-Typ einer Eigenschaft, es sei denn, dieser wird von einem `[DataType]`-Attribut überschrieben. Browser haben ihre eigenen Standardfehlermeldungen, aber das jQuery Validation Unobtrusive Validation-Paket kann diese Meldungen überschreiben. Mithilfe von `[DataType]`-Attributen und Subklassen wie `[EmailAddress]` können Sie die Fehlermeldung angeben.
 
@@ -751,6 +751,6 @@ Eine andere Möglichkeit, um die Clientvalidierung zu deaktivieren, ist es, den 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [System.ComponentModel.DataAnnotations-Namespace](xref:System.ComponentModel.DataAnnotations)
-* [Modellbindung](model-binding.md)
+* [Modell Bindung](model-binding.md)
 
 ::: moniker-end
