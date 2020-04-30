@@ -5,19 +5,19 @@ description: Erfahren Sie, wie ASP.NET Core Blazor wie Blazor Ausnahmefehler beh
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/29/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80382274"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111044"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Fehlerbehandlung in ASP.NET Core Blazor-Apps
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Fehlerbehandlung in ASP.NET Core Blazor-Apps
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -80,7 +80,7 @@ Das Element `blazor-error-ui` wird von den in den Blazor-Vorlagen enthaltenen Fo
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Reaktion eine Blazor Server-App auf Ausnahmefehler
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Reaktion eine Blazor Server-App auf Ausnahmefehler
 
 Blazor Server ist ein zustandsbehaftetes Framework. Während Benutzer mit einer App interagieren, besteht eine Verbindung mit dem Server, die als *Leitung* bezeichnet wird. Die Leitung enthält aktive Instanzen von Komponenten und weist zahlreiche andere Aspekte zum Zustand auf wie:
 
@@ -113,6 +113,8 @@ Im Fall eines Ausnahmefehlers wird die Ausnahme in den im Dienstcontainer konfig
 Während der Entwicklung sendet Blazor zur Unterstützung beim Debuggen in der Regel alle Ausnahmedetails an die Konsole des Browsers. In einer Produktionsumgebung sind ausführliche Fehler in der Konsole des Browsers standardmäßig deaktiviert. Das bedeutet, dass Fehler nicht an Clients gesendet werden. Es werden jedoch alle Details der Ausnahme serverseitig protokolliert. Weitere Informationen finden Sie unter <xref:fundamentals/error-handling>.
 
 Sie müssen entscheiden, welche Vorfälle protokolliert werden sollen. Zudem müssen Sie den Schweregrad für protokollierte Vorfälle festlegen. Feindliche Benutzer können Fehler möglicherweise absichtlich auslöst. Protokollieren Sie beispielsweise keinen Vorfall aus einem Fehler, bei dem eine unbekannte `ProductId` in der URL einer Komponente angegeben wurde, über die Produktdetails angezeigt werden. Nicht alle Fehler sollten als zu protokollierende Vorfälle mit hohem Schweregrad behandelt werden.
+
+Weitere Informationen finden Sie unter <xref:fundamentals/logging/index#create-logs-in-blazor>.
 
 ## <a name="places-where-errors-may-occur"></a>Stellen, an denen Fehler auftreten können
 
@@ -214,7 +216,7 @@ Weitere Informationen finden Sie in den folgenden Artikeln:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>Blazor Server-Prerendering
+### <a name="blazor-server-prerendering"></a>Blazor Server-Prerendering
 
 Blazor-Komponenten können mit dem [Komponententaghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) vorab gerendert werden, sodass das gerenderte HTML-Markup als Teil der ursprünglichen HTTP-Anforderung des Benutzers zurückgegeben wird. Dies funktioniert durch:
 

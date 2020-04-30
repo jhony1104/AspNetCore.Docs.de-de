@@ -5,17 +5,17 @@ description: Erstellen Sie eine Chat-App, die ASP.NET Core SignalR mit Blazor We
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 78c5fbb8b91b934bcb34525672e9e26b6a95290e
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306571"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111148"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Verwenden von ASP.NET Core SignalR mit Blazor WebAssembly
 
@@ -61,7 +61,7 @@ Am Ende dieses Tutorials verfügen Sie über eine funktionierende Chat-App.
 Wenn Sie nicht Visual Studio Version 16.6 Vorschauversion 2 oder höher verwenden, installieren Sie die [Blazor-WebAssembly](xref:blazor/hosting-models#blazor-webassembly)-Vorlage. Das Paket [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) enthält eine Vorschauversion, solange sich die Blazor WebAssembly in der Vorschauphase befindet. Führen Sie in einer Befehlsshell den folgenden Befehle aus:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
 ```
 
 Befolgen Sie die Anleitungen für die Auswahl der Tools:
@@ -168,7 +168,7 @@ Erstellen Sie im Projekt **BlazorSignalRApp.Server** den Ordner *Hubs* (Plural),
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>Hinzufügen von SignalR-Diensten und eines Endpunkts für den SignalR-Hub
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>Hinzufügen von Diensten und eines Endpunkts für den SignalR-Hub
 
 1. Öffnen Sie im Projekt **BlazorSignalRApp.Server** die Datei *Startup.cs*.
 
@@ -178,15 +178,13 @@ Erstellen Sie im Projekt **BlazorSignalRApp.Server** den Ordner *Hubs* (Plural),
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. Fügen Sie die SignalR-Dienste hinzu zu `Startup.ConfigureServices`:
+1. Hinzufügen von SignalR und Middlewarediensten für die Komprimierung von Antworten zu `Startup.ConfigureServices`:
 
-   ```csharp
-   services.AddSignalR();
-   ```
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. Fügen Sie in `Startup.Configure` zwischen den Endpunkten für die standardmäßige Controllerroute und dem clientseitigen Fallback einen Endpunkt für den Hub hinzu:
+1. Fügen Sie in `Startup.Configure` zwischen den Endpunkten für Controller und dem clientseitigen Fallback einen Endpunkt für den Hub hinzu:
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
 
 ## <a name="add-razor-component-code-for-chat"></a>Hinzufügen von Razor-Komponentencode für Chat
 
@@ -202,7 +200,7 @@ Erstellen Sie im Projekt **BlazorSignalRApp.Server** den Ordner *Hubs* (Plural),
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Wählen Sie im **Projektmappen-Explorer** das Projekt **BlazorSignalRApp.Server** aus. Drücken Sie **STRG+F5**, um die App ohne Debuggen zu starten.
+1. Wählen Sie im **Projektmappen-Explorer** das Projekt **BlazorSignalRApp.Server** aus. Drücken Sie <kbd>F5</kbd>, um die App mit Debuggen auszuführen, oder drücken Sie <kbd>STRG</kbd>+<kbd>F5</kbd>, um die App ohne Debuggen auszuführen.
 
 1. Kopieren Sie die URL aus der Adressleiste, öffnen Sie eine neue Browserinstanz oder Registerkarte, und fügen Sie die URL in die Adressleiste ein.
 
@@ -214,7 +212,13 @@ Erstellen Sie im Projekt **BlazorSignalRApp.Server** den Ordner *Hubs* (Plural),
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Wählen Sie aus der Symbolleiste **Debuggen** > **Ohne Debuggen ausführen** aus.
+1. Wenn VS Code anbietet, ein Startprofil für die Server-App zu erstellen ( *.vscode/launch.json*), scheint der `program`-Eintrag, ähnlich wie der folgende, auf die Assembly der App (`{APPLICATION NAME}.Server.dll`) zu zeigen:
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
+   ```
+
+1. Drücken Sie <kbd>F5</kbd>, um die App mit Debuggen auszuführen, oder drücken Sie <kbd>STRG</kbd>+<kbd>F5</kbd>, um die App ohne Debuggen auszuführen.
 
 1. Kopieren Sie die URL aus der Adressleiste, öffnen Sie eine neue Browserinstanz oder Registerkarte, und fügen Sie die URL in die Adressleiste ein.
 
@@ -226,7 +230,7 @@ Erstellen Sie im Projekt **BlazorSignalRApp.Server** den Ordner *Hubs* (Plural),
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-1. Wählen Sie in der Seitenleiste **Projektmappe** das Projekt **BlazorSignalRApp.Server** aus. Wählen Sie im Menü **Ausführen** > **Starten ohne Debuggen** aus.
+1. Wählen Sie in der Seitenleiste **Projektmappe** das Projekt **BlazorSignalRApp.Server** aus. Drücken Sie <kbd>⌘</kbd>+<kbd>↩</kbd>**, um die App mit Debuggen auszuführen, oder drücken Sie <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd>, um die App ohne Debuggen auszuführen.
 
 1. Kopieren Sie die URL aus der Adressleiste, öffnen Sie eine neue Browserinstanz oder Registerkarte, und fügen Sie die URL in die Adressleiste ein.
 

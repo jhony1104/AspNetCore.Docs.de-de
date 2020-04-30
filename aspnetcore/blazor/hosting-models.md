@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80471830"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205968"
 ---
-# <a name="aspnet-core-opno-locblazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
+# <a name="aspnet-core-blazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
 Von [Daniel Roth](https://github.com/danroth27)
 
@@ -29,7 +29,7 @@ Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebe
 
 Informationen zu erweiterten Konfigurationen finden Sie unter <xref:blazor/hosting-model-configuration>.
 
-## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Das wichtigste Hostingmodell für Blazor wird clientseitig im Browser in WebAssembly ausgeführt. Die Blazor-App, die jeweiligen Abhängigkeiten und die .NET-Runtime werden im Browser heruntergeladen. Die App wird direkt im UI-Thread des Browsers ausgeführt. Die Aktualisierung der Benutzeroberfläche und die Ereignisbehandlung erfolgen im selben Prozess. Die Ressourcen der App werden als statische Dateien auf einem Webserver oder für einen Dienst bereitgestellt, die geeignet sind, statische Inhalte für Clients bereitzustellen.
 
@@ -60,7 +60,7 @@ Das Blazor WebAssembly-Hostingmodell besitzt folgende Nachteile:
 
 Das Blazor-Modell für gehostete Apps unterstützt [Docker-Container](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Klicken Sie mit der rechten Maustaste auf das Serverprojekt in Visual Studio, und klicken Sie dann auf **Hinzufügen** > **Docker-Unterstützung**.
 
-## <a name="opno-locblazor-server"></a>Blazor Server
+## <a name="blazor-server"></a>Blazor Server
 
 Mit dem Blazor Server-Hostingmodell wird die App über eine ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
@@ -115,7 +115,7 @@ Eine Aktualisierung der Benutzeroberfläche wird in Blazor ausgelöst durch:
 
 Das Diagramm wird noch mal gerendert, und für die Benutzeroberfläche wird ein Unterschied *diff* berechnet. Dieser Unterschied stellt die kleinste Menge DOM-Änderungen dar, die zur Aktualisierung der Benutzeroberfläche auf dem Client erforderlich ist. Der Unterschied wird im Binärformat an den Client gesendet und vom Browser angewendet.
 
-Eine Komponente wird verworfen, sobald sie der Benutzer auf dem Client wieder verlässt. Während der Interaktion mit einem Benutzer muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da auf dem Server der Zustand vieler Komponenten möglicherweise gleichzeitig verwaltet werden muss, kann die Speicherausschöpfung zu einem Problem werden. Eine Anleitung zum Erstellen einer Blazor Server-App unter optimaler Verwendung des Arbeitsspeichers des Servers finden Sie unter <xref:security/blazor/server>.
+Eine Komponente wird verworfen, sobald sie der Benutzer auf dem Client wieder verlässt. Während der Interaktion mit einem Benutzer muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da auf dem Server der Zustand vieler Komponenten möglicherweise gleichzeitig verwaltet werden muss, kann die Speicherausschöpfung zu einem Problem werden. Eine Anleitung zum Erstellen einer Blazor Server-App unter optimaler Verwendung des Arbeitsspeichers des Servers finden Sie unter <xref:security/blazor/server/threat-mitigation>.
 
 ### <a name="circuits"></a>Leitungen
 
@@ -133,12 +133,12 @@ Benutzeroberflächenlatenz bezeichnet die Zeit vom Initiieren einer Aktion bis z
 
 Bei einer Branchen-App, die ausschließlich in einem privaten Unternehmensnetzwerk verwendet wird, ist der Anteil der Netzwerklatenz an der gesamten Latenzwahrnehmung durch den Benutzer in der Regel vernachlässigbar. Bei einer über das Internet bereitgestellten App kann die Latenz für Benutzer durchaus spürbar sein, insbesondere wenn diese geografisch weit verteilt sind.
 
-Auch die Speicherauslastung kann zur Latenzzeit einer App beitragen. Eine erhöhte Speicherauslastung führt zu einer häufigen Speicherbereinigung oder einer Auslagerung auf die Festplatte. Beide Maßnahmen reduzieren die Leistung einer App und erhöhen folglich deren Benutzeroberflächenlatenz. Weitere Informationen finden Sie unter <xref:security/blazor/server>.
+Auch die Speicherauslastung kann zur Latenzzeit einer App beitragen. Eine erhöhte Speicherauslastung führt zu einer häufigen Speicherbereinigung oder einer Auslagerung auf die Festplatte. Beide Maßnahmen reduzieren die Leistung einer App und erhöhen folglich deren Benutzeroberflächenlatenz.
 
 Sie sollten Blazor Server-Apps so optimieren, dass die Benutzeroberflächenlatenz durch Reduzieren der Netzwerklatenz und der Speicherauslastung minimiert wird. Informationen zum Messen der Netzwerklatenz finden Sie unter <xref:host-and-deploy/blazor/server#measure-network-latency>. Weitere Informationen zu SignalR und Blazor finden Sie unter:
 
 * <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server>
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Verbindung mit dem Server
 
