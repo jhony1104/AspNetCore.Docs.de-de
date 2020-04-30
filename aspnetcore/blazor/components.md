@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791492"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205955"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -966,4 +966,4 @@ SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:security/blazor/server> &ndash;: Anleitung zum Entwickeln von Blazor Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen
+* <xref:security/blazor/server/threat-mitigation> &ndash;: Anleitung zum Entwickeln von Blazor Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen

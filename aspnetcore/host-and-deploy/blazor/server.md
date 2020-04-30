@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 866bb348180c872d8ab20787283cfb7217183a8d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 380bbab8898b4fbeab4efa514b17b807accbb1ac
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79025428"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205864"
 ---
-# <a name="host-and-deploy-opno-locblazor-server"></a>Hosten und Bereitstellen von Blazor Server
+# <a name="host-and-deploy-blazor-server"></a>Hosten und Bereitstellen von Blazor Server
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
 
@@ -36,7 +36,7 @@ Hierfür wird ein Webserver benötigt, der eine ASP.NET Core-App hosten kann. Vi
 Planen Sie eine Bereitstellung, um die verfügbare Infrastruktur für eine Blazor Server-App optimal zu nutzen. Sehen Sie sich die folgenden Ressourcen an, um die Skalierbarkeit von Blazor Server-Apps zu behandeln:
 
 * [Grundlagen von Blazor Server-Apps](xref:blazor/hosting-models#blazor-server)
-* <xref:security/blazor/server>
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="deployment-server"></a>Bereitstellungsserver
 
@@ -45,17 +45,17 @@ Wenn Sie die Skalierbarkeit eines einzelnen Servers in Erwägung ziehen (zentral
 * Anzahl der aktiven Verbindungen, die ein Server unterstützen kann.
 * Benutzeroberflächenlatenz auf dem Client.
 
-Anleitungen zum Erstellen sicherer und skalierbarer Blazor Server-Apps finden Sie unter <xref:security/blazor/server>.
+Anleitungen zum Erstellen sicherer und skalierbarer Blazor Server-Apps finden Sie unter <xref:security/blazor/server/threat-mitigation>.
 
 Jede Verbindung verwendet ungefähr 250 KB Arbeitsspeicher für eine minimale App im *Hello World*-Stil. Die Größe einer Verbindung hängt vom App-Code und den Zustandsverwaltungsanforderungen der einzelnen Komponenten ab. Sie sollten die Ressourcenanforderungen während der Entwicklung für Ihre App und die Infrastruktur messen, aber die folgende Baseline kann ein Ausgangspunkt zur Planung des Bereitstellungsziels sein: Wenn Sie davon ausgehen, dass Ihre App 5.000 gleichzeitige Benutzer unterstützt, sollten Sie erwägen, mindestens 1,3 GB Serverarbeitsspeicher (oder ~273 KB pro Benutzer) für die App einzukalkulieren.
 
-### <a name="opno-locsignalr-configuration"></a>SignalR-Konfiguration
+### <a name="signalr-configuration"></a>SignalR-Konfiguration
 
 Blazor Server-Apps verwenden ASP.NET Core SignalR, um mit dem Browser zu kommunizieren. [Die Hosting- und Skalierungsbedingungen von SignalR](xref:signalr/publish-to-azure-web-app) gelten für Blazor Server-Apps.
 
 Blazor funktioniert am besten, wenn WebSockets aufgrund geringerer Latenz und wegen Zuverlässigkeit und [Sicherheit](xref:signalr/security) zum SignalR-Transport verwendet wird. SignalR verwendet Long Polling, wenn WebSockets nicht verfügbar oder die App explizit für die Verwendung von Long Polling konfiguriert ist. Konfigurieren Sie die App bei Bereitstellung für Azure App Service in den Einstellungen für den Dienst im Azure-Portal für die Verwendung von WebSockets. Weitere Informationen zum Konfigurieren der App für Azure App Service finden Sie in den [Richtlinien für die SignalR-Veröffentlichung](xref:signalr/publish-to-azure-web-app).
 
-#### <a name="azure-opno-locsignalr-service"></a>Azure SignalR Service
+#### <a name="azure-signalr-service"></a>Azure SignalR Service
 
 Sie sollten [Azure SignalR Service](/azure/azure-signalr) für Blazor Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Außerdem tragen die globale Reichweite und die Hochleistungsrechenzentren von SignalR Service erheblich zur Verringerung der geografiebedingten Latenz bei. So konfigurieren Sie eine App (und stellen optional Azure SignalR Service bereit)
 

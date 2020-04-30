@@ -8,12 +8,12 @@ ms.date: 03/06/2020
 no-loc:
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 85d2a418c3aaae40bbcdc040095c2c98d4b7242c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80640045"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558901"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Sitzungs- und Zustandsverwaltung in ASP.NET Core
 
@@ -96,7 +96,7 @@ Das [Microsoft.AspNetCore.Session](https://www.nuget.org/packages/Microsoft.AspN
 
 Der folgende Code zeigt, wie Sie den speicherinternen Sitzungsanbieter mit einer Standardimplementierung von `IDistributedCache` im Arbeitsspeicher einrichten:
 
-[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,39)]
+[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,45)]
 
 Der vorangegangene Code setzt ein kurzes Zeitlimit, um das Testen zu vereinfachen.
 
@@ -589,7 +589,7 @@ Verwenden Sie [Dependency Injection](xref:fundamentals/dependency-injection), um
 
   Es wird empfohlen, nach Fehlern zu suchen, indem Sie `await feature.Session.CommitAsync();` über App-Code aufrufen, wenn die App mit dem Schreiben in die Sitzung fertig ist. `CommitAsync` löst eine Ausnahme aus, wenn der Sicherungsspeicher nicht verfügbar ist. Wenn `CommitAsync` fehlschlägt, kann die App die Ausnahme verarbeiten. `LoadAsync` wird unter den gleichen Bedingungen ausgelöst, wenn der Sicherungsspeicher nicht verfügbar ist.
   
-## <a name="opno-locsignalr-and-session-state"></a>SignalR und Sitzungszustand
+## <a name="signalr-and-session-state"></a>SignalR und Sitzungszustand
 
 SignalR-Apps dürfen nicht den Sitzungszustand verwenden, um Informationen zu speichern. SignalR-Apps können Informationen je nach Verbindungszustand in `Context.Items` im Hub speichern. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
