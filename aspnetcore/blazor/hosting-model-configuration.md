@@ -5,31 +5,253 @@ description: Hier erhalten Sie Informationen zur Blazor-Hostingmodellkonfigurati
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: bd44643877e45c5b48b0972bcc2f637fbc5d98f2
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646789"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159618"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Hostingmodellkonfiguration für ASP.NET Core Blazor
 
-Von [Daniel Roth](https://github.com/danroth27)
+Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Dieser Artikel behandelt die Hostingmodellkonfiguration.
 
-<!-- For future use:
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-## Blazor WebAssembly
+### <a name="environment"></a>Umgebung
 
--->
+Wenn eine App lokal ausgeführt wird, wird Umgebung standardmäßig auf „Entwicklung“ festgelegt. Wenn die App veröffentlicht wird, wird standardmäßig die Produktionsumgebung verwendet.
+
+Eine gehostete Blazor WebAssembly-App übernimmt die Umgebung vom Server mittels einer Middleware, die die Umgebung dem Browser mitteilt, indem sie den `blazor-environment`-Header hinzufügt. Der Wert des Headers ist die Umgebung. Die gehostete Blazor-App und die Server-App verwenden gemeinsam dieselbe Umgebung. Weitere Informationen, einschließlich Informationen zum Konfigurieren der Umgebung, finden Sie unter <xref:fundamentals/environments>.
+
+Wenn eine eigenständige App lokal ausgeführt wird, fügt der Entwicklungsserver den `blazor-environment`-Header hinzu, um die Entwicklungsumgebung anzugeben. Um die Umgebung für andere Hostingumgebungen anzugeben, fügen Sie den `blazor-environment`-Header hinzu.
+
+Im folgenden Beispiel für IIS fügen Sie den benutzerdefinierten Header zu der veröffentlichten Datei *web.config* hinzu. Die Datei *web.config* befindet sich im Ordner */bin/Release/{ZIELFRAMEWORK}/publish*:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+
+    ...
+
+    <httpProtocol>
+      <customHeaders>
+        <add name="blazor-environment" value="Staging" />
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>
+```
+
+> [!NOTE]
+> Informationen zum Verwenden einer benutzerdefinierten Datei *web.config* für IIS, die nicht überschrieben wird, wenn die App im Ordner *publish* veröffentlicht wird, finden Sie unter <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>.
+
+Rufen Sie die Umgebung der App in einer Komponente ab, indem Sie `IWebAssemblyHostEnvironment` einfügen und die `Environment`-Eigenschaft lesen:
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
+
+<h1>Environment example</h1>
+
+<p>Environment: @HostEnvironment.Environment</p>
+```
+
+Während des Starts macht `WebAssemblyHostBuilder` die `IWebAssemblyHostEnvironment` über die `HostEnvironment`-Eigenschaft verfügbar, was es Entwicklern ermöglicht, umgebungsspezifische Logik in ihrem Code zu verwenden:
+
+```csharp
+if (builder.HostEnvironment.Environment == "Custom")
+{
+    ...
+};
+```
+
+Die folgenden bequemen Erweiterungsmethoden ermöglichen die Überprüfung der aktuellen Umgebung auf die Namen „Entwicklung“, „Produktion“, „Staging“ sowie benutzerdefinierte Umgebungsnamen:
+
+* `IsDevelopment()`
+* `IsProduction()`
+* `IsStaging()`
+* `IsEnvironment("{UMGEBUNGSNAME}")
+
+```csharp
+if (builder.HostEnvironment.IsStaging())
+{
+    ...
+};
+
+if (builder.HostEnvironment.IsEnvironment("Custom"))
+{
+    ...
+};
+```
+
+Die `IWebAssemblyHostEnvironment.BaseAddress`-Eigenschaft kann während des Starts verwendet werden, wenn der `NavigationManager`-Dienst nicht verfügbar ist.
+
+### <a name="configuration"></a>Konfiguration
+
+Blazor WebAssembly unterstützt die Konfiguration über:
+
+* Den [Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) für App-Einstellungsdateien standardmäßig aus:
+  * *wwwroot/appsettings.json*
+  * *wwwroot/appsettings.{UMGEBUNG}.json*
+* Andere [Konfigurationsanbieter](xref:fundamentals/configuration/index), die von der App registriert werden.
+
+> [!WARNING]
+> Die Konfiguration ist für Benutzer in einer Blazor WebAssembly-App sichtbar. **Speichern Sie keine App-Geheimnisse oder -Anmeldeinformationen in der Konfiguration.**
+
+Weitere Informationen zur Konfigurationsanbietern finden Sie unter <xref:fundamentals/configuration/index>.
+
+#### <a name="app-settings-configuration"></a>Konfiguration von App-Einstellungen
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "message": "Hello from config!"
+}
+```
+
+Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz in eine Komponente ein, um auf die Konfigurationsdaten zuzugreifen:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<p>Message: @Configuration["message"]</p>
+```
+
+#### <a name="provider-configuration"></a>Anbieterkonfiguration
+
+Im folgenden Beispiel werden ein <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource>-Element und der [Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) verwendet, um zusätzliche Konfiguration bereitzustellen:
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var vehicleData = new Dictionary<string, string>()
+{
+    { "color", "blue" },
+    { "type", "car" },
+    { "wheels:count", "3" },
+    { "wheels:brand", "Blazin" },
+    { "wheels:brand:type", "rally" },
+    { "wheels:year", "2008" },
+};
+
+var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
+
+...
+
+builder.Configuration
+    .Add(memoryConfig)
+    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+```
+
+Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz in eine Komponente ein, um auf die Konfigurationsdaten zuzugreifen:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</p>
+    <li>Brand: @Configuration["wheels:brand"]</p>
+    <li>Type: @Configuration["wheels:brand:type"]</p>
+    <li>Year: @Configuration["wheels:year"]</p>
+</ul>
+
+@code {
+    var wheelsSection = Configuration.GetSection("wheels");
+    
+    ...
+}
+```
+
+#### <a name="authentication-configuration"></a>Authentifizierungskonfiguration
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "AzureAD": {
+    "Authority": "https://login.microsoftonline.com/",
+    "ClientId": "aeaebf0f-d416-4d92-a08f-e1d5b51fc494"
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Services.AddOidcAuthentication(options =>
+    builder.Configuration.Bind("AzureAD", options);
+```
+
+#### <a name="logging-configuration"></a>Konfiguration der Protokollierung
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Logging.AddConfiguration(
+    builder.Configuration.GetSection("Logging"));
+```
+
+#### <a name="host-builder-configuration"></a>Konfiguration des Host-Generators
+
+`Program.Main`:
+
+```csharp
+var hostname = builder.Configuration["HostName"];
+```
+
+#### <a name="cached-configuration"></a>Zwischengespeicherte Konfiguration
+
+Konfigurationsdateien werden zur Offlineverwendung zwischengespeichert. Bei [progressiven Web-Apps (PWAs)](xref:blazor/progressive-web-app) können Sie Konfigurationsdateien nur beim Erstellen einer neuen Bereitstellung aktualisieren. Die Bearbeitung von Konfigurationsdateien zwischen Bereitstellungen hat aus folgenden Gründen keine Auswirkungen:
+
+* Benutzer verfügen über zwischengespeicherte Versionen der Dateien, die sie weiterhin verwenden können.
+* Die Dateien *service-worker.js* und *service-worker-assets.js* der PWA müssen bei der Kompilierung neu erstellt werden, wodurch der App beim nächsten Onlineaufruf des Benutzers signalisiert wird, dass die App neu bereitgestellt wurde.
+
+Weitere Informationen zur Verarbeitung von Updates im Hintergrund durch PWAs finden Sie unter <xref:blazor/progressive-web-app#background-updates>.
+
+### <a name="logging"></a>Protokollierung
+
+Informationen zur Unterstützung der Blazor WebAssembly-Protokollierung finden Sie unter <xref:fundamentals/logging/index#create-logs-in-blazor>.
 
 ## <a name="blazor-server"></a>Blazor Server
 
@@ -81,54 +303,7 @@ Blazor Server-Apps werden standardmäßig eingerichtet, um die Benutzeroberfläc
 
 Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.
 
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Rendern von zustandsbehafteten interaktiven Komponenten von Razor-Seiten und -Ansichten
-
-Zustandsbehaftete interaktive Komponenten können einer Razor-Seite oder -Ansicht hinzugefügt werden.
-
-Wenn die Seite oder Ansicht gerendert wird:
-
-* Die Komponente wird mit der Seite oder Ansicht vorab gerendert.
-* Der anfängliche Komponentenzustand, der zum Rendern vorab genutzt wurde, geht verloren.
-* Der neue Komponentenzustand wird erstellt, wenn die SignalR-Verbindung hergestellt wird.
-
-Die folgende Razor-Seite rendert eine `Counter`-Komponente:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Rendern von nicht interaktiven Komponenten von Razor-Seiten und Ansichten
-
-Auf der folgenden Razor-Seite wird die `Counter`-Komponente statisch mit einem Anfangswert gerendert, der mit einem Formular angegeben wird:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-<component type="typeof(Counter)" render-mode="Static" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-Da `MyComponent` statisch gerendert wird, darf die Komponente nicht interaktiv sein.
-
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Konfigurieren des SignalR-Clients für Blazor Server-Apps
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Konfigurieren des SignalR-Clients für Blazor Server-Apps
 
 In einigen Fällen müssen Sie den von den SignalR Server-Apps verwendeten Blazor-Client konfigurieren. Beispielsweise können Sie die Protokollierung auf dem SignalR-Client konfigurieren, um ein Verbindungsproblem zu diagnostizieren.
 
@@ -147,3 +322,7 @@ So konfigurieren Sie den SignalR-Client in der Datei *Pages/_Host.cshtml*:
   });
 </script>
 ```
+
+### <a name="logging"></a>Protokollierung
+
+Weitere Informationen zur Unterstützung von Blazor-Serverprotokollierung finden Sie unter <xref:fundamentals/logging/index#create-logs-in-blazor>.

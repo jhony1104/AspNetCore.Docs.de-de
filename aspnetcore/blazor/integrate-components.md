@@ -5,17 +5,17 @@ description: In diesem Artikel lernen Sie Datenbindungsszenarios für Komponente
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/14/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383972"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558916"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
@@ -245,11 +245,54 @@ Weitere Informationen zu Namespaces finden Sie im Abschnitt [Komponentennamespac
 
 Verwenden Sie das [Komponententaghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) zum Rendern einer Komponente einer Seite oder Ansicht.
 
-Weitere Informationen über das Rendern von Komponenten, den Komponentenzustand und das `Component`-Taghilfsprogramm finden Sie in den folgenden Artikeln:
+### <a name="render-stateful-interactive-components"></a>Rendern zustandsbehafteter interaktiver Komponenten
 
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
+Zustandsbehaftete interaktive Komponenten können einer Razor-Seite oder -Ansicht hinzugefügt werden.
+
+Wenn die Seite oder Ansicht gerendert wird:
+
+* Die Komponente wird mit der Seite oder Ansicht vorab gerendert.
+* Der anfängliche Komponentenzustand, der zum Rendern vorab genutzt wurde, geht verloren.
+* Der neue Komponentenzustand wird erstellt, wenn die SignalR-Verbindung hergestellt wird.
+
+Die folgende Razor-Seite rendert eine `Counter`-Komponente:
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<component type="typeof(Counter)" render-mode="ServerPrerendered" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+
+### <a name="render-noninteractive-components"></a>Rendern nicht interaktiver Komponenten
+
+Auf der folgenden Razor Page wird die `Counter`-Komponente statisch mit einem Anfangswert gerendert, der mit einem Formular angegeben wird. Da die Komponente statisch gerendert wird, ist die Komponente nicht interaktiv:
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<form>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
+</form>
+
+<component type="typeof(Counter)" render-mode="Static" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="component-namespaces"></a>Komponentennamespaces
 
