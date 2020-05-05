@@ -5,13 +5,19 @@ description: Lernen Sie die Attribute für das ASP.NET Core-Anchor-Taghilfsprogr
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 6bfbad39115c7823b5677d3c52ca64cfb0683037
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653779"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773964"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
@@ -41,7 +47,7 @@ Der generierte HTML-Code:
 <a href="/Speaker">All Speakers</a>
 ```
 
-Wenn das Attribut `asp-controller` angegeben wird und `asp-action` nicht, entspricht der `asp-action`-Standardwert der Controlleraktion, die der aktuell ausgeführten Ansicht zugeordnet ist. Wenn `asp-action` im obigen Markup ausgelassen wird und das Anchor-Taghilfsprogramm in der Ansicht *Index* von *HomeController* verwendet wird ( */Home*), wird folgender HTML-Code generiert:
+Wenn das Attribut `asp-controller` angegeben wird und `asp-action` nicht, entspricht der `asp-action`-Standardwert der Controlleraktion, die der aktuell ausgeführten Ansicht zugeordnet ist. Wenn `asp-action` im obigen Markup ausgelassen wird und das Anchor-Taghilfsprogramm in der Ansicht *Index* von *HomeController* verwendet wird (*/Home*), wird folgender HTML-Code generiert:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -139,7 +145,7 @@ Wenn `asp-controller` oder `asp-action` zusätzlich zu `asp-route` angegeben sin
 
 Das Attribut [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) unterstützt das Erstellen eines Wörterbuchs aus Schlüssel-Wert-Paaren. Der Schlüssel ist der Parametername, der Wert ist der Parameterwert.
 
-Im folgenden Beispiel wird ein Wörterbuch initialisiert und an eine Razor-Ansicht übergeben. Alternativ können die Daten auch mit Ihrem Modell übergeben werden.
+Im folgenden Beispiel wird ein Wörterbuch initialisiert und an eine Razor Ansicht übermittelt. Alternativ können die Daten auch mit Ihrem Modell übergeben werden.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -173,23 +179,23 @@ Hashtags sind beim Erstellen von clientseitigen Apps nützlich. Sie können beis
 
 Das Attribut [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) legt den Bereichsnamen zum Festlegen der geeigneten Route fest. Die folgenden Beispiele zeigen, wie das `asp-area`-Attribut eine Neuzuordnung von Routen verursacht.
 
-#### <a name="usage-in-razor-pages"></a>Verwendung in Razor Pages
+#### <a name="usage-in-razor-pages"></a>Verwendung in Razor Seiten
 
-Razor Pages-Bereiche werden in ASP.NET Core 2.1 oder höher unterstützt.
+RazorSeitenbereiche werden in ASP.net Core 2,1 oder höher unterstützt.
 
 Betrachten Sie die folgende Verzeichnishierarchie:
 
-* **{Projektname}**
+* **{Project Name}**
   * **wwwroot**
   * **Bereiche**
     * **Sitzungen**
       * **Seiten**
-        * *\_ViewStart.cshtml*
+        * *\_Viewstart. cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
   * **Seiten**
 
-Das Markup zum Verweisen auf den *Sessions*-Bereich der Razor-Seite *Index* lautet:
+Das Markup für den Verweis auf die *Sitzungs* Bereichs *Index* Razor -Seite lautet:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -200,7 +206,7 @@ Der generierte HTML-Code:
 ```
 
 > [!TIP]
-> Damit Bereiche in einer Razor Pages-App unterstützt werden, führen Sie einen der folgenden Schritte in `Startup.ConfigureServices` aus:
+> Führen Sie einen der folgenden Razor Schritte aus, um Bereiche in einer pages- `Startup.ConfigureServices`APP zu unterstützen:
 >
 > * Legen Sie die [Kompatibilitätsversion](xref:mvc/compatibility-version) auf 2.1 oder höher fest.
 > * Legen Sie die [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*)-Eigenschaft auf `true` fest:
@@ -211,18 +217,18 @@ Der generierte HTML-Code:
 
 Betrachten Sie die folgende Verzeichnishierarchie:
 
-* **{Projektname}**
+* **{Project Name}**
   * **wwwroot**
   * **Bereiche**
     * **Blogs**
-      * **Controller**
+      * **Controllers**
         * *HomeController.cs*
       * **Ansichten**
-        * **Startseite**
+        * **Start**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
-        * *\_ViewStart.cshtml*
-  * **Controller**
+        * *\_Viewstart. cshtml*
+  * **Controllers**
 
 Das Festlegen von `asp-area` auf „Blogs“ stellt das Verzeichnis *Areas/Blogs* den Routen der zugeordneten Controller und Ansichten für dieses Anchor-Tag voran. Das Markup zum Verweisen auf die *AboutBlog*-Ansicht lautet:
 
@@ -235,7 +241,7 @@ Der generierte HTML-Code:
 ```
 
 > [!TIP]
-> Die Routenvorlage muss einen Verweis auf den Bereich enthalten, damit Bereiche in einer MVC-App unterstützt werden. Diese Vorlage wird durch den zweiten Parameter des `routes.MapRoute`-Methodenaufrufs in *Startup.Configure* dargestellt:
+> Die Routenvorlage muss einen Verweis auf den Bereich enthalten, damit Bereiche in einer MVC-App unterstützt werden. Diese Vorlage wird durch den zweiten Parameter des `routes.MapRoute` Methoden Aufrufes in " *Startup. configure*" dargestellt:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
@@ -267,9 +273,9 @@ Der generierte HTML-Code:
 
 ### <a name="asp-page"></a>asp-page
 
-Das Attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) wird mit Razor Pages verwendet. Mit ihm wird der `href`-Attributwerts des Anchor-Tags auf eine bestimmte Seite festgelegt. Wenn Sie dem Seitennamen einen Schrägstrich „/“ voranstellen, wird die URL erstellt.
+Das [asp-page-](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) Attribut wird mit Razor Seiten verwendet. Mit ihm wird der `href`-Attributwerts des Anchor-Tags auf eine bestimmte Seite festgelegt. Wenn Sie dem Seitennamen einen Schrägstrich „/“ voranstellen, wird die URL erstellt.
 
-Das folgende Beispiel zeigt auf die Razor Page des Teilnehmers:
+Das folgende Beispiel zeigt auf die Razor Seite Teilnehmer:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -291,7 +297,7 @@ Der generierte HTML-Code:
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-Das Attribut [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) wird mit Razor Pages verwendet. Es dient zur Verknüpfung mit bestimmten Seitenhandlern.
+Das [asp-page-Handler-](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) Attribut wird mit Razor Seiten verwendet. Es dient zur Verknüpfung mit bestimmten Seitenhandlern.
 
 Betrachten Sie den folgenden Seitenhandler:
 

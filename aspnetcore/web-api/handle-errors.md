@@ -6,19 +6,25 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 12/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: e445fb3d50973643c9cea60395d1ed02c2f5f675
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7c641fb12e0d06ebd7bb3ce9f878f0469b4a3d8e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652393"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775062"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Fehlerbehandlung in ASP.NET Core-Web-APIs
 
 Dieser Artikel beschreibt die Verarbeitung und Anpassung der Fehlerbehandlung bei ASP.NET Core-Web-APIs.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples) (Vorgehens[Weise zum Herunterladen](xref:index#how-to-download-a-sample))
 
 ## <a name="developer-exception-page"></a>Seite mit Ausnahmen für Entwickler
 
@@ -121,7 +127,7 @@ Die HTML-formatierte Antwort wird beim Durchführen von Tests in Tools wie etwa 
 
 In nicht zur Entwicklung dienenden Umgebungen kann [Middleware zur Ausnahmebehandlung](xref:fundamentals/error-handling) verwendet werden, um eine Fehlernutzlast zu erzeugen:
 
-1. Rufen Sie `Startup.Configure` in <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> auf, um die Middleware zu verwenden:
+1. Rufen Sie <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> in `Startup.Configure` auf, um die Middleware zu verwenden:
 
     ::: moniker range=">= aspnetcore-3.0"
 

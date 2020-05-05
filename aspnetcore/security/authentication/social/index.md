@@ -5,13 +5,19 @@ description: Dieses Tutorial veranschaulicht, wie Sie eine ASP.NET Core-App mith
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644815"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777149"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentifizierung über Facebook, Google und externe Anbieter in ASP.NET Core
 

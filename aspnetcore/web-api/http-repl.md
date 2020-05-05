@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: d9beae68cc869b665ff5d2b6cf34f120406098dc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653029"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777097"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -28,13 +34,13 @@ Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Gu
 
 * [DELETE](#test-http-delete-requests)
 * [GET](#test-http-get-requests)
-* [HEAD](#test-http-head-requests)
-* [OPTIONS](#test-http-options-requests)
+* [Stadt](#test-http-head-requests)
+* [Optionen](#test-http-options-requests)
 * [PATCH](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
-[Sehen Sie sich die beispielhafte ASP.NET Core-Web-API an, oder laden Sie sie herunter (](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples)Downloadanleitung[)](xref:index#how-to-download-a-sample), um dem Artikel zu folgen.
+[Sehen Sie sich die beispielhafte ASP.NET Core-Web-API an, oder laden Sie sie herunter ([Downloadanleitung](xref:index#how-to-download-a-sample))](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples), um dem Artikel zu folgen.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -365,9 +371,9 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Standardmäßig weist die HTTP-REPL eine Reihe von relativen Pfaden auf, die zum Suchen des Swagger-Dokuments verwendet werden, wenn der `connect`-Befehl ohne die Option `--swagger` ausgeführt wird. Diese relativen Pfade werden mit den Stamm- und Basispfaden kombiniert, die im `connect`-Befehl angegeben werden. Die standardmäßigen relativen Pfade lauten wie folgt:
 
-- *swagger.json*
-- *swagger/v1/swagger.json*
-- */swagger.json*
+- *Swagger. JSON*
+- *Swagger/v1/Swagger. JSON*
+- */Swagger.JSON*
 - */swagger/v1/swagger.json*
 
 Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Beispiel:
@@ -378,7 +384,7 @@ pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 
 ## <a name="test-http-get-requests"></a>Testen von HTTP GET-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -462,7 +468,7 @@ So führen Sie eine HTTP GET-Anforderung aus:
 
 ## <a name="test-http-post-requests"></a>Testen von HTTP POST-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -532,7 +538,7 @@ So führen Sie eine HTTP POST-Anforderung aus:
 
 ## <a name="test-http-put-requests"></a>Testen von HTTP PUT-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -554,7 +560,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 So führen Sie eine HTTP PUT-Anforderung aus:
 
-1. *Optional*: führen Sie den `get` Befehl aus, um die Daten vor der Änderung anzuzeigen:
+1. *Optional*: führen Sie `get` den Befehl aus, um die Daten vor dem ändern anzuzeigen:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -616,7 +622,7 @@ So führen Sie eine HTTP PUT-Anforderung aus:
     Server: Kestrel
     ```
 
-1. *Optional*: Geben Sie einen `get` Befehl aus, um die Änderungen anzuzeigen. Wenn Sie beispielsweise „Cherry“ in den Text-Editor eingeben, gibt `get` Folgendes zurück:
+1. *Optional*: Geben Sie `get` einen Befehl aus, um die Änderungen anzuzeigen. Wenn Sie beispielsweise „Cherry“ in den Text-Editor eingeben, gibt `get` Folgendes zurück:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -647,7 +653,7 @@ So führen Sie eine HTTP PUT-Anforderung aus:
 
 ## <a name="test-http-delete-requests"></a>Testen von HTTP DELETE-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -667,7 +673,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 So führen Sie eine HTTP DELETE-Anforderung aus:
 
-1. *Optional*: führen Sie den `get` Befehl aus, um die Daten vor der Änderung anzuzeigen:
+1. *Optional*: führen Sie `get` den Befehl aus, um die Daten vor dem ändern anzuzeigen:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -707,7 +713,7 @@ So führen Sie eine HTTP DELETE-Anforderung aus:
     Server: Kestrel
     ```
 
-1. *Optional*: Geben Sie einen `get` Befehl aus, um die Änderungen anzuzeigen. In diesem Beispiel gibt `get` Folgendes zurück:
+1. *Optional*: Geben Sie `get` einen Befehl aus, um die Änderungen anzuzeigen. In diesem Beispiel gibt `get` Folgendes zurück:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -734,7 +740,7 @@ So führen Sie eine HTTP DELETE-Anforderung aus:
 
 ## <a name="test-http-patch-requests"></a>Testen von HTTP PATCH-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -754,7 +760,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 ## <a name="test-http-head-requests"></a>Testen von HTTP HEAD-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
@@ -772,7 +778,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 ## <a name="test-http-options-requests"></a>Testen von HTTP OPTIONS-Anforderungen
 
-### <a name="synopsis"></a>Zusammenfassung
+### <a name="synopsis"></a>Übersicht
 
 ```console
 options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]

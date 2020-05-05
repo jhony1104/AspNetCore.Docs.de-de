@@ -4,13 +4,19 @@ author: ardalis
 description: Erfahren Sie, wie Sie die Konfiguration von einem ASP.NET-MVC-Projekt zu einem ASP.net Core MVC-Projekt migrieren.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/configuration
-ms.openlocfilehash: 2c50ea768a42aa38d14c55d8c403fea4176b3650
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: f65db927d79224695861101aff00897315c6e0b2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651883"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777227"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>Konfiguration zu ASP.net Core migrieren
 
@@ -22,7 +28,7 @@ Im vorherigen Artikel haben wir begonnen, [ein ASP.NET MVC-Projekt zu ASP.net Co
 
 ## <a name="setup-configuration"></a>Einrichtungskonfiguration
 
-ASP.net Core verwendet nicht mehr die Dateien " *Global. asax* " und " *Web. config* ", die in früheren Versionen von ASP.NET verwendet wurden. In früheren Versionen von ASP.net wurde die Anwendungsstart Logik in einer `Application_StartUp`-Methode in " *Global. asax*" platziert. Später wurde in ASP.NET MVC eine *Startup.cs* -Datei in das Stammverzeichnis des Projekts eingefügt. und es wurde aufgerufen, als die Anwendung gestartet wurde. ASP.net Core hat diesen Ansatz vollständig übernommen, indem er die gesamte Start Logik in der *Startup.cs* -Datei platziert hat.
+ASP.net Core verwendet nicht mehr die Dateien " *Global. asax* " und " *Web. config* ", die in früheren Versionen von ASP.NET verwendet wurden. In früheren Versionen von ASP.net wurde die Anwendungsstart Logik in eine `Application_StartUp` -Methode in " *Global. asax*" eingefügt. Später wurde in ASP.NET MVC eine *Startup.cs* -Datei in das Stammverzeichnis des Projekts eingefügt. und es wurde aufgerufen, als die Anwendung gestartet wurde. ASP.net Core hat diesen Ansatz vollständig übernommen, indem er die gesamte Start Logik in der *Startup.cs* -Datei platziert hat.
 
 Die Datei " *Web. config* " wurde auch in ASP.net Core ersetzt. Die Konfiguration selbst kann nun im Rahmen des in *Startup.cs*beschriebenen Verfahrens zum Starten der Anwendung konfiguriert werden. Die Konfiguration kann weiterhin XML-Dateien verwenden, aber in der Regel ASP.net Core Projekte Konfigurationswerte in eine JSON-formatierte Datei (z. b. *appSettings. JSON*). ASP.net Core Konfigurationssystem kann auch problemlos auf Umgebungsvariablen zugreifen, die einen sichereren [und stabileren Speicherort](xref:security/app-secrets) für Umgebungs spezifische Werte bereitstellen können. Dies gilt insbesondere für Geheimnisse wie Verbindungs Zeichenfolgen und API-Schlüssel, die nicht in die Quell Code Verwaltung eingecheckt werden sollen. Weitere Informationen zur Konfiguration in ASP.net Core finden Sie unter [Konfiguration](xref:fundamentals/configuration/index) .
 
@@ -30,7 +36,7 @@ In diesem Artikel beginnen wir mit dem teilweise migrierten ASP.net Core Projekt
 
 [!code-csharp[](configuration/samples/WebApp1/src/WebApp1/Startup.cs?range=11-16)]
 
-Beachten Sie, dass die *Startup.cs* -Datei zu diesem Zeitpunkt nicht kompiliert werden kann, da wir weiterhin die folgende `using`-Anweisung hinzufügen müssen:
+Beachten Sie, dass die *Startup.cs* -Datei zu diesem Zeitpunkt nicht kompiliert werden kann, da wir weiterhin die `using` folgende Anweisung hinzufügen müssen:
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -42,7 +48,7 @@ Fügen Sie die Datei " *appSettings. JSON* " im Stammverzeichnis des Projekts mi
 
 ## <a name="migrate-configuration-settings-from-webconfig"></a>Konfigurationseinstellungen aus "Web. config" Migrieren
 
-Das ASP.NET-MVC-Projekt enthielt die erforderliche Daten bankverbindungs Zeichenfolge in *Web. config*im `<connectionStrings>`-Element. In unserem ASP.net Core Projekt werden diese Informationen in der Datei " *appSettings. JSON* " gespeichert. Öffnen Sie die *Datei "appSettings. JSON*", und beachten Sie, dass Sie bereits Folgendes umfasst:
+Das ASP.NET-MVC-Projekt enthielt die erforderliche Daten bankverbindungs Zeichenfolge in *Web. config*im- `<connectionStrings>` Element. In unserem ASP.net Core Projekt werden diese Informationen in der Datei " *appSettings. JSON* " gespeichert. Öffnen Sie die *Datei "appSettings. JSON*", und beachten Sie, dass Sie bereits Folgendes umfasst:
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 

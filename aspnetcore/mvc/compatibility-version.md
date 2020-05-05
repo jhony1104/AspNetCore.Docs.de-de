@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: b29e2ee49aaf0f557f1acd0cf03e9e82d5ea0105
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 45eca0bedc2e4e5c74936ae5d1bf525774467b2a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654805"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774209"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>Kompatibilitätsversion für ASP.NET Core MVC
 

@@ -1,18 +1,24 @@
 ---
-title: Verwaltung und Lebensdauer von Datenschutz Schlüsseln in ASP.net Core
+title: (Data Protection key management and lifetime in ASP.NET Core) Gültigkeitsdauer und Verwaltung von Schlüsseln für den Schutz von Daten in ASP.NET Core
 author: rick-anderson
 description: Erfahren Sie mehr über die Verwaltung von Daten und die Lebensdauer in ASP.net Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655069"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777448"
 ---
-# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Verwaltung und Lebensdauer von Datenschutz Schlüsseln in ASP.net Core
+# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>(Data Protection key management and lifetime in ASP.NET Core) Gültigkeitsdauer und Verwaltung von Schlüsseln für den Schutz von Daten in ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -27,18 +33,18 @@ Die APP versucht, ihre Betriebsumgebung zu erkennen und die Schlüssel Konfigura
 
 1. Wenn das Benutzerprofil verfügbar ist, werden Schlüssel im Ordner " *%LocalAppData%\ASP.net\dataschutz-Keys* " beibehalten. Wenn das Betriebssystem Windows ist, werden die Schlüssel im Ruhezustand mithilfe von DPAPI verschlüsselt.
 
-   Das [setProfileEnvironment-Attribut](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) des App-Pools muss ebenfalls aktiviert sein. Der Standardwert von `setProfileEnvironment` lautet `true`. In einigen Szenarien (z.B. Windows-Betriebssystem) ist `setProfileEnvironment` auf `false` festgelegt. Gehen Sie folgendermaßen vor, wenn Schlüssel nicht wie erwartet im Benutzerprofilverzeichnis gespeichert werden:
+   Das [setProfileEnvironment-Attribut](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) des App-Pools muss ebenfalls aktiviert sein. Der Standardwert von `setProfileEnvironment` ist `true`. In einigen Szenarien (z.B. Windows-Betriebssystem) ist `setProfileEnvironment` auf `false` festgelegt. Gehen Sie folgendermaßen vor, wenn Schlüssel nicht wie erwartet im Benutzerprofilverzeichnis gespeichert werden:
 
    1. Navigieren Sie zum Ordner *%windir%/system32/inetsrv/config*.
    1. Öffnen Sie die Datei *applicationHost.config*.
-   1. Suchen Sie das `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>`-Element.
+   1. Suchen Sie das Element `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` .
    1. Bestätigen Sie, dass das `setProfileEnvironment`-Attribut nicht vorhanden ist, das standardmäßig den Wert `true` aufweist, oder legen Sie den Wert des Attributs explizit auf `true` fest.
 
 1. Wenn die app in IIS gehostet wird, werden Schlüssel in der HKLM-Registrierung in einem speziellen Registrierungsschlüssel gespeichert, der nur für das Arbeitsprozess Konto übernommen wird. Schlüssel werden im Ruhezustand mit DPAPI verschlüsselt.
 
 1. Wenn keine dieser Bedingungen zutrifft, werden Schlüssel nicht außerhalb des aktuellen Prozesses beibehalten. Wenn der Prozess heruntergefahren wird, gehen alle generierten Schlüssel verloren.
 
-Der Entwickler hat stets die volle Kontrolle und kann überschreiben, wie und wo Schlüssel gespeichert werden. Die ersten drei oben aufgeführten Optionen sollten für die meisten apps gute Standardwerte bereitstellen, ähnlich wie die ASP.net- **\<machineKey >** in der Vergangenheit ausgearbeiteten Routinen zur automatischen Generierung. Die abschließende Option Fall Back ist das einzige Szenario, bei dem der Entwickler die [Konfiguration](xref:security/data-protection/configuration/overview) vorab angeben muss, wenn er eine Schlüssel Persistenz wünschen, aber dieser Fall Back tritt nur in seltenen Fällen auf.
+Der Entwickler hat stets die volle Kontrolle und kann überschreiben, wie und wo Schlüssel gespeichert werden. Die ersten drei oben aufgeführten Optionen sollten für die meisten apps gute Standardwerte bereitstellen, ähnlich wie die ASP.net ** \<machineKey->** die in der Vergangenheit ausgearbeiteten Routinen zur automatischen Generierung. Die abschließende Option Fall Back ist das einzige Szenario, bei dem der Entwickler die [Konfiguration](xref:security/data-protection/configuration/overview) vorab angeben muss, wenn er eine Schlüssel Persistenz wünschen, aber dieser Fall Back tritt nur in seltenen Fällen auf.
 
 Beim Hosten in einem docker-Container sollten Schlüssel in einem Ordner gespeichert werden, der ein docker-Volume ist (ein frei gegebenes Volume oder ein von einem Host bereitgestelltes Volume, das über die Lebensdauer des Containers hinaus bleibt) oder in einem externen Anbieter wie [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) oder [redis](https://redis.io/). Ein externer Anbieter ist auch bei Webfarm Szenarios nützlich, wenn apps nicht auf ein frei gegebenes Netzwerk Volume zugreifen können (Weitere Informationen finden Sie unter [persistkeystofile System](xref:security/data-protection/configuration/overview#persistkeystofilesystem) ).
 

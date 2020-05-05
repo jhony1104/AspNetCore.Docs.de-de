@@ -4,19 +4,25 @@ author: rick-anderson
 description: Informationen zum Erstellen und Verwenden von benutzerdefinierten Formatierern für Web-APIs in ASP.NET Core.
 ms.author: riande
 ms.date: 02/08/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: dd25cda460ba758cd07de094eaadd1f2d8c28657
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0836fc288a015adb9a6223c5a2b681b1b03bded4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654955"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777318"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>Benutzerdefinierte Formatierer in Web-APIs in ASP.NET Core
 
 Von [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core MVC unterstützt den Datenaustausch in Web-APIs mithilfe von Eingabe- und Ausgabeformatierern. Eingabeformatierer werden von der [Modellbindung](xref:mvc/models/model-binding) verwendet. Ausgabeformatierer werden zum [Formatieren von Antworten](xref:web-api/advanced/formatting) verwendet.
+ASP.NET Core MVC unterstützt den Datenaustausch in Web-APIs mithilfe von Eingabe- und Ausgabeformatierern. Eingabeformatierer werden von der [Modellbindung](xref:mvc/models/model-binding) verwendet. Ausgabe Formatierer werden verwendet, um [Antworten zu formatieren](xref:web-api/advanced/formatting).
 
 Das Framework stellt integrierte Eingabe- und Ausgabeformatierer für JSON und XML bereit. Es stellt einen integrierten Ausgabeformatierer für Nur-Text bereit, jedoch keinen Eingabeformatierer.
 
@@ -115,7 +121,8 @@ BEGIN:VCARD
 VERSION:2.1
 N:Davolio;Nancy
 FN:Nancy Davolio
-UID:20293482-9240-4d68-b475-325df4a83728
+no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR]
+uid:20293482-9240-4d68-b475-325df4a83728
 END:VCARD
 ```
 

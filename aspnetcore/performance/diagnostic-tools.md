@@ -5,13 +5,19 @@ description: Nützliche Tools zur Diagnose von Leistungsproblemen in ASP.net Cor
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/diagnostic-tools
-ms.openlocfilehash: d273897b9ad26d57eb94b196b58f14019a96d07d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 82c724ec647dfe5547db775ebaf8c2479bb258bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652471"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775855"
 ---
 # <a name="performance-diagnostic-tools"></a>Leistungs Diagnosetools
 
@@ -59,7 +65,7 @@ Weitere Informationen zu perfview und den ersten Schritten mit [perfview-Videotu
 
 [Windows Performance Toolkit](/windows-hardware/test/wpt/) (WPT) besteht aus zwei Komponenten: Windows Performance Recorder (WPR) und Windows Performance Analyzer (WPA). Die Tools erstellen detaillierte Leistungsprofile von Windows-Betriebssystemen und-apps. WPT bietet umfangreichere Möglichkeiten zur Visualisierung von Daten, aber die Datensammlung ist weniger leistungsfähig als perfview.
 
-## <a name="perfcollect"></a>PerfCollect
+## <a name="perfcollect"></a>Perfcollect
 
 Obwohl perfview ein nützliches Tool zur Leistungsanalyse für .net-Szenarien ist, wird es nur unter Windows ausgeführt, sodass Sie es nicht zum Erfassen von Ablauf Verfolgungen aus ASP.net Core Apps verwenden können, die in Linux-Umgebungen ausgeführt werden.
 

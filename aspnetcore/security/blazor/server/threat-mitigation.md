@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206341"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774183"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Leitfaden zur Bedrohungsminderung für ASP.net Core blazor-Server
 
@@ -144,11 +147,11 @@ Keine Vertrauenswürdigkeit von Aufrufen von JavaScript zu .NET-Methoden. Wenn e
   * Vermeiden Sie das Übergeben von benutzerdefinierten Daten in Parameter an JavaScript-Aufrufe. Wenn die Übergabe von Daten in Parametern wirklich erforderlich ist, müssen Sie sicherstellen, dass der JavaScript-Code die Übergabe der Daten ohne die Einführung von [XSS-Sicherheitsrisiken (Cross-Site Scripting](#cross-site-scripting-xss) Schreiben Sie z. b. keine vom Benutzer bereitgestellten Daten in die Dokumentobjektmodell (DOM) `innerHTML` , indem Sie die-Eigenschaft eines-Elements festlegen. Verwenden Sie die [Inhalts Sicherheitsrichtlinie (Content Security Policy, CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) , um und andere unsichere JavaScript-Primitive zu deaktivieren `eval` .
 * Vermeiden Sie die Implementierung der benutzerdefinierten Verteilung von .net-aufrufen zusätzlich zur Verteiler Implementierung des Frameworks. Das verfügbar machen von .NET-Methoden für den Browser ist ein erweitertes Szenario, Blazor das für die allgemeine Entwicklung nicht empfohlen wird.
 
-### <a name="events"></a>Events
+### <a name="events"></a>Ereignisse
 
 Ereignisse stellen einen Einstiegspunkt für eine Blazor Server-App bereit. Die gleichen Regeln für das Schützen von Endpunkten in Web-Apps gelten für Blazor die Ereignis Behandlung in Server-apps. Ein böswilliger Client kann alle Daten senden, die er als Nutzlast für ein Ereignis senden möchte.
 
-Zum Beispiel:
+Beispiel:
 
 * Ein Änderungs Ereignis für einen `<select>` kann einen Wert senden, der nicht innerhalb der Optionen liegt, die die APP dem Client vorgelegt hat.
 * Ein `<input>` kann beliebige Textdaten an den Server senden, wobei die Client seitige Validierung umgangen wird.
@@ -342,9 +345,9 @@ Zusätzlich zu den Sicherheitsvorkehrungen, die das Framework implementiert, mus
 
 Damit ein XSS-Sicherheitsrisiko vorhanden ist, muss die APP Benutzereingaben auf der gerenderten Seite einbinden. BlazorServer Komponenten führen einen Kompilierzeit Schritt aus, bei dem das Markup in einer *Razor* -Datei in prozedurale c#-Logik transformiert wird. Zur Laufzeit erstellt die c#-Logik eine *renderbaum* Struktur, die die Elemente, den Text und die untergeordneten Komponenten beschreibt. Dies wird über eine Sequenz von JavaScript-Anweisungen auf das DOM des Browsers angewendet (oder wird bei der vorab Generierung in HTML serialisiert):
 
-* Benutzereingaben, die über normale Razor-Syntax gerendert `@someStringValue`werden (z. b.), machen keine XSS-Sicherheits Anfälligkeit verfügbar, da die Razor-Syntax dem DOM über Befehle hinzugefügt wird, die nur Text schreiben können. Auch wenn der Wert HTML-Markup enthält, wird der Wert als statischer Text angezeigt. Bei der vorab Generierung ist die Ausgabe HTML-codiert, wodurch der Inhalt auch als statischer Text angezeigt wird.
+* Benutzereingaben, die über Razor die normale Syntax gerendert werden `@someStringValue`(z. b.), Razor machen keine XSS-Sicherheits Anfälligkeit verfügbar, da die Syntax dem DOM über Befehle hinzugefügt wird, die nur Text schreiben können Auch wenn der Wert HTML-Markup enthält, wird der Wert als statischer Text angezeigt. Bei der vorab Generierung ist die Ausgabe HTML-codiert, wodurch der Inhalt auch als statischer Text angezeigt wird.
 * Skript Tags sind nicht zulässig und sollten nicht in die Komponenten-Rendering-Struktur der APP eingeschlossen werden. Wenn ein Skripttag im Markup einer Komponente enthalten ist, wird ein Kompilierzeitfehler generiert.
-* Komponenten Autoren können Komponenten in c# erstellen, ohne Razor zu verwenden. Der Komponenten Autor ist für die Verwendung der richtigen APIs verantwortlich, wenn die Ausgabe ausgegeben wird. Verwenden `builder.AddContent(0, someUserSuppliedString)` Sie z. b. und *nicht* `builder.AddMarkupContent(0, someUserSuppliedString)`, da letztere ein XSS-Sicherheitsrisiko erzeugen könnte.
+* Komponenten Autoren können Komponenten in c# erstellen, ohne Razorzu verwenden. Der Komponenten Autor ist für die Verwendung der richtigen APIs verantwortlich, wenn die Ausgabe ausgegeben wird. Verwenden `builder.AddContent(0, someUserSuppliedString)` Sie z. b. und *nicht* `builder.AddMarkupContent(0, someUserSuppliedString)`, da letztere ein XSS-Sicherheitsrisiko erzeugen könnte.
 
 Im Rahmen des Schutzes vor XSS-Angriffen sollten Sie die Implementierung von XSS-entschärfungen in Erwägung gezogen werden, z. b. [Content Security Policy (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)
 

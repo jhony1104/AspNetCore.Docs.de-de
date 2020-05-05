@@ -5,13 +5,19 @@ description: Hier wird veranschaulicht, wie Sie das Tool „Microsoft.dotnet-ope
 ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 079e36511b63c186ffa7726bdb1e3c3bcbda9d34
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651247"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775712"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Entwickeln von ASP.NET Core-Apps mit OpenAPI-Tools
 
@@ -85,7 +91,7 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 |-------------|-------------|---------|
 | source-URL | Die Quelle, aus der ein Verweis erstellt werden soll. Es muss sich um eine URL handeln. |dotnet openapi add url `https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>Remove (Entfernen)
+## <a name="remove"></a>Entfernen
 
 Entfernt den OpenAPI-Verweis, der mit dem angegebenen Dateinamen übereinstimmt, aus der *CSPROJ*-Datei. Wenn der OpenAPI-Verweis entfernt wird, werden keine Clients generiert. Lokale *JSON*- und *YAML*-Dateien werden gelöscht.
 

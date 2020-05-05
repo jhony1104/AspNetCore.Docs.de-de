@@ -5,19 +5,25 @@ description: Definition des Umgebungstaghilfsprogramms für ASP.NET Core, einsch
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 308e7db47104ebd4d6bb8d08c64f14bbd118898b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 144cc8988ba5797265b38f0f7364f528e0dbb97e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653767"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777422"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>Umgebungstaghilfsprogramm in ASP.NET Core
 
 Von [Peter Kellner](https://peterkellner.net) und [Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
-Basierend auf der aktuellen [Hostingumgebung](xref:fundamentals/environments) rendert das Environment-Taghilfsprogramm den von ihm eingeschlossenen Inhalt unter Vorbehalt. Das einzelne Attribut `names` des Environment-Taghilfsprogramm ist eine durch Trennzeichen getrennte Liste von Umgebungsnamen. Wenn die Namen der bereitgestellten Umgebung der aktuellen Umgebung entsprechen, wird der eingeschlossene Inhalt gerendert.
+Das Umgebungs-taghilfsprogramm rendert den eingeschlossenen Inhalt bedingt basierend auf der aktuellen Host [Umgebung](xref:fundamentals/environments). Das einzelne Attribut `names` des Environment-Taghilfsprogramm ist eine durch Trennzeichen getrennte Liste von Umgebungsnamen. Wenn die Namen der bereitgestellten Umgebung der aktuellen Umgebung entsprechen, wird der eingeschlossene Inhalt gerendert.
 
 Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpers/intro>.
 
@@ -41,7 +47,7 @@ Im folgenden Beispiel wird ein Environment-Taghilfsprogramm verwendet: Der Inhal
 
 ## <a name="include-and-exclude-attributes"></a>Die Attribute „include“ und „exclude“
 
-`include` & `exclude` Attribute das Rendern des eingeschlossenen Inhalts basierend auf den eingeschlossenen oder ausgeschlossenen hostingumgebungsnamen.
+`include`& Attribute steuern das Rendern des eingeschlossenen Inhalts basierend auf den eingeschlossenen oder ausgeschlossenen Namen der Hostingumgebung `exclude` .
 
 ### <a name="include"></a>include
 
@@ -53,7 +59,7 @@ Die `include`-Eigenschaft zeigt ein ähnliches Verhalten wie das Attribut `names
 </environment>
 ```
 
-### <a name="exclude"></a>ausschließen
+### <a name="exclude"></a>exclude
 
 Im Gegensatz zum Attribut `include` wird der Inhalt des `<environment>`-Tags gerendert, wenn die Hostingumgebung nicht einer Umgebung entspricht, die im Attributwert `exclude` aufgeführt wird.
 

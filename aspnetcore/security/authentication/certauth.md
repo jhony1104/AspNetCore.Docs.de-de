@@ -5,17 +5,23 @@ description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net C
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654169"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776642"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
-`Microsoft.AspNetCore.Authentication.Certificate` enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine `ClaimsPrincipal`auflösen können. 
+`Microsoft.AspNetCore.Authentication.Certificate`enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine `ClaimsPrincipal`auflösen können. 
 
 [Konfigurieren Sie Ihren Host für die](#configure-your-host-to-require-certificates) Zertifikat Authentifizierung, also IIS, Kestrel, Azure-Web-Apps oder andere Benutzer, die Sie verwenden.
 
@@ -32,11 +38,11 @@ Eine Alternative zur Zertifikat Authentifizierung in Umgebungen, in denen Proxys
 
 Erwerben Sie ein HTTPS-Zertifikat, wenden Sie es an, und [Konfigurieren Sie den Host](#configure-your-host-to-require-certificates) , um Zertifikate anzufordern.
 
-Fügen Sie in Ihrer Web-App einen Verweis auf das `Microsoft.AspNetCore.Authentication.Certificate`-Paket hinzu. Nennen Sie dann in der `Startup.ConfigureServices`-Methode `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` mit den Optionen, und geben Sie einen Delegaten für `OnCertificateValidated` an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Wandeln Sie diese Informationen in eine `ClaimsPrincipal` um, und legen Sie Sie für die `context.Principal`-Eigenschaft fest.
+Fügen Sie in Ihrer Web-App einen Verweis auf `Microsoft.AspNetCore.Authentication.Certificate` das Paket hinzu. Verwenden Sie dann `Startup.ConfigureServices` in der- `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` Methode mit den Optionen, und geben Sie `OnCertificateValidated` einen Delegaten für an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Diese Informationen werden in ein `ClaimsPrincipal` -Objekt umgewandelt und für `context.Principal` die-Eigenschaft festgelegt.
 
-Wenn bei der Authentifizierung ein Fehler auftritt, gibt dieser Handler wie erwartet eine `403 (Forbidden)` Antwort zurück, die `401 (Unauthorized)`. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung stattfinden soll. Bis zum Zeitpunkt, an dem der Handler erreicht wird, ist es zu spät. Es gibt keine Möglichkeit, die Verbindung von einer anonymen Verbindung mit einem Zertifikat zu aktualisieren.
+Wenn die Authentifizierung fehlschlägt, gibt dieser `403 (Forbidden)` Handler wie erwartet `401 (Unauthorized)`eine Antwort zurück. Der Grund dafür ist, dass die Authentifizierung während der anfänglichen TLS-Verbindung stattfinden soll. Bis zum Zeitpunkt, an dem der Handler erreicht wird, ist es zu spät. Es gibt keine Möglichkeit, die Verbindung von einer anonymen Verbindung mit einem Zertifikat zu aktualisieren.
 
-Fügen Sie außerdem `app.UseAuthentication();` in der `Startup.Configure`-Methode hinzu. Andernfalls wird der `HttpContext.User` nicht auf `ClaimsPrincipal`, der aus dem Zertifikat erstellt wurde, festgelegt. Beispiel:
+Fügen Sie `app.UseAuthentication();` außerdem die `Startup.Configure` -Methode hinzu. Andernfalls `HttpContext.User` wird nicht auf `ClaimsPrincipal` aus dem Zertifikat erstellt festgelegt. Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -67,7 +73,7 @@ Standardwert: `CertificateTypes.Chained`
 
 Mit dieser Überprüfung wird überprüft, ob nur der geeignete Zertifikattyp zulässig ist. Wenn die APP selbst signierte Zertifikate verwendet, muss diese Option auf `CertificateTypes.All` oder `CertificateTypes.SelfSigned`festgelegt werden.
 
-### <a name="validatecertificateuse"></a>ValidateCertificateUse
+### <a name="validatecertificateuse"></a>Validatecertifi| euse
 
 Standardwert: `true`
 
@@ -105,8 +111,8 @@ Dies ist nicht möglich. Merken Sie sich, dass der Zertifikat Austausch durchgef
 
 Der Handler hat zwei Ereignisse:
 
-* `OnAuthenticationFailed` &ndash; aufgerufen, wenn eine Ausnahme während der Authentifizierung auftritt und es Ihnen ermöglicht, zu reagieren.
-* `OnCertificateValidated` &ndash; aufgerufen, nachdem das Zertifikat überprüft wurde, wird die Überprüfung bestanden, und ein Standard Prinzipal wurde erstellt. Dieses Ereignis ermöglicht es Ihnen, ihre eigene Validierung auszuführen und den Prinzipal zu erweitern oder zu ersetzen. Beispiele hierfür sind:
+* `OnAuthenticationFailed`&ndash; Wird aufgerufen, wenn während der Authentifizierung eine Ausnahme auftritt und Sie reagieren können.
+* `OnCertificateValidated`&ndash; Wird aufgerufen, nachdem das Zertifikat überprüft wurde, die Überprüfung bestanden und ein Standard Prinzipal erstellt wurde. Dieses Ereignis ermöglicht es Ihnen, ihre eigene Validierung auszuführen und den Prinzipal zu erweitern oder zu ersetzen. Beispiele hierfür sind:
   * Ermitteln, ob das Zertifikat den Diensten bekannt ist.
   * Erstellen eines eigenen Prinzipals. Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
@@ -142,7 +148,7 @@ services.AddAuthentication(
     });
 ```
 
-Wenn Sie feststellen, dass das eingehende Zertifikat die zusätzliche Überprüfung nicht erfüllt, wenden Sie `context.Fail("failure reason")` mit einem Fehler Grund an.
+Wenn Sie feststellen, dass das eingehende Zertifikat die zusätzliche über `context.Fail("failure reason")` Prüfung nicht erfüllt, können Sie mit einem Fehler Grund anrufen.
 
 Für echte Funktionen möchten Sie wahrscheinlich einen Dienst aufzurufen, der in der Abhängigkeitsinjektion registriert ist, der eine Verbindung mit einer Datenbank oder einem anderen Benutzerspeicher herstellt. Greifen Sie auf den Dienst zu, indem Sie den Kontext verwenden, der in ihren Delegaten Betrachten Sie das folgende Beispiel in `Startup.ConfigureServices`:
 
@@ -187,7 +193,7 @@ services.AddAuthentication(
     });
 ```
 
-Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb `OnCertificateValidated`ist durchaus akzeptabel.
+Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb `OnCertificateValidated`von ist durchaus akzeptabel.
 
 ## <a name="configure-your-host-to-require-certificates"></a>Konfigurieren des Hosts, damit Zertifikate erforderlich sind
 
@@ -243,12 +249,12 @@ Für Azure ist keine Weiterleitungs Konfiguration erforderlich. Dies ist bereits
 
 ### <a name="use-certificate-authentication-in-custom-web-proxies"></a>Verwenden der Zertifikat Authentifizierung in benutzerdefinierten Webproxys
 
-Die `AddCertificateForwarding`-Methode wird verwendet, um Folgendes anzugeben:
+Die `AddCertificateForwarding` -Methode wird verwendet, um Folgendes anzugeben:
 
 * Der Name des Client Headers.
-* Wie das Zertifikat geladen werden soll (mit der `HeaderConverter`-Eigenschaft).
+* Wie das Zertifikat geladen werden soll (mithilfe der `HeaderConverter` -Eigenschaft).
 
-In benutzerdefinierten Webproxys wird das Zertifikat als benutzerdefinierter Anforderungs Header, z. b. `X-SSL-CERT`, übermittelt. Konfigurieren Sie die Zertifikat Weiterleitung in `Startup.ConfigureServices`, um Sie zu verwenden:
+In benutzerdefinierten Webproxys wird das Zertifikat beispielsweise `X-SSL-CERT`als benutzerdefinierter Anforderungs Header übermittelt. Um es zu verwenden, konfigurieren Sie die `Startup.ConfigureServices`Zertifikat Weiterleitung in:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -285,7 +291,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-Die `Startup.Configure`-Methode fügt dann die Middleware hinzu. `UseCertificateForwarding` wird vor den Aufrufen von `UseAuthentication` und `UseAuthorization`aufgerufen:
+Die `Startup.Configure` -Methode fügt dann die Middleware hinzu. `UseCertificateForwarding`wird aufgerufen, bevor der Aufruf `UseAuthentication` von `UseAuthorization`und erfolgt:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -305,7 +311,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-Eine separate Klasse kann verwendet werden, um Validierungs Logik zu implementieren. Da in diesem Beispiel dasselbe selbst signierte Zertifikat verwendet wird, sollten Sie sicherstellen, dass nur Ihr Zertifikat verwendet werden kann. Überprüfen Sie, ob die Fingerabdrücke sowohl des Client Zertifikats als auch des Serverzertifikats Stimmen. andernfalls können alle Zertifikate verwendet werden, die für die Authentifizierung ausreichen. Dies wird in der `AddCertificate`-Methode verwendet. Sie können den Betreff oder den Aussteller hier auch überprüfen, wenn Sie zwischengeschaltete oder untergeordnete Zertifikate verwenden.
+Eine separate Klasse kann verwendet werden, um Validierungs Logik zu implementieren. Da in diesem Beispiel dasselbe selbst signierte Zertifikat verwendet wird, sollten Sie sicherstellen, dass nur Ihr Zertifikat verwendet werden kann. Überprüfen Sie, ob die Fingerabdrücke sowohl des Client Zertifikats als auch des Serverzertifikats Stimmen. andernfalls können alle Zertifikate verwendet werden, die für die Authentifizierung ausreichen. Dies wird in der `AddCertificate` -Methode verwendet. Sie können den Betreff oder den Aussteller hier auch überprüfen, wenn Sie zwischengeschaltete oder untergeordnete Zertifikate verwenden.
 
 ```csharp
 using System.IO;
@@ -414,7 +420,7 @@ Wenn das richtige Zertifikat an den Server gesendet wird, werden die Daten zurü
 
 ### <a name="create-certificates-in-powershell"></a>Erstellen von Zertifikaten in PowerShell
 
-Das Erstellen der Zertifikate ist der schwierigste Teil beim Einrichten dieses Flows. Ein Stamm Zertifikat kann mit dem `New-SelfSignedCertificate` PowerShell-Cmdlet erstellt werden. Verwenden Sie beim Erstellen des Zertifikats ein sicheres Kennwort. Es ist wichtig, den `KeyUsageProperty`-Parameter und den `KeyUsage`-Parameter wie gezeigt hinzuzufügen.
+Das Erstellen der Zertifikate ist der schwierigste Teil beim Einrichten dieses Flows. Ein Stamm Zertifikat kann mithilfe des `New-SelfSignedCertificate` PowerShell-Cmdlets erstellt werden. Verwenden Sie beim Erstellen des Zertifikats ein sicheres Kennwort. Es ist wichtig, den `KeyUsageProperty` -Parameter und den `KeyUsage` -Parameter wie gezeigt hinzuzufügen.
 
 #### <a name="create-root-ca"></a>Stamm Zertifizierungsstelle erstellen
 
@@ -429,7 +435,7 @@ Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath roo
 ```
 
 > [!NOTE]
-> Der Wert des `-DnsName`-Parameters muss mit dem Bereitstellungs Ziel der APP identisch sein. Beispiel: "localhost" für die Entwicklung.
+> Der `-DnsName` Parameterwert muss mit dem Bereitstellungs Ziel der APP identisch sein. Beispiel: "localhost" für die Entwicklung.
 
 #### <a name="install-in-the-trusted-root"></a>Installieren des vertrauenswürdigen Stamms
 
@@ -439,7 +445,7 @@ https://social.msdn.microsoft.com/Forums/SqlServer/5ed119ef-1704-4be4-8a4f-ef11d
 
 #### <a name="intermediate-certificate"></a>Zwischenzertifikat
 
-Ein zwischen Zertifikat kann nun aus dem Stamm Zertifikat erstellt werden. Dies ist für alle Anwendungsfälle nicht erforderlich, aber Sie müssen möglicherweise viele Zertifikate erstellen oder Gruppen von Zertifikaten aktivieren bzw. deaktivieren. Der `TextExtension`-Parameter ist erforderlich, um die Pfadlänge in den grundeinschränkungen des Zertifikats festzulegen.
+Ein zwischen Zertifikat kann nun aus dem Stamm Zertifikat erstellt werden. Dies ist für alle Anwendungsfälle nicht erforderlich, aber Sie müssen möglicherweise viele Zertifikate erstellen oder Gruppen von Zertifikaten aktivieren bzw. deaktivieren. Der `TextExtension` -Parameter ist erforderlich, um die Pfadlänge in den grundeinschränkungen des Zertifikats festzulegen.
 
 Das zwischen Zertifikat kann dann dem vertrauenswürdigen zwischen Zertifikat im Windows-Host System hinzugefügt werden.
 
