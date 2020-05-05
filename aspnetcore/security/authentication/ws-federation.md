@@ -5,13 +5,19 @@ description: In diesem Tutorial wird veranschaulicht, wie Sie WS-Federation in e
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: d82421a14ede6cb6b01ef59f233bb2eba6b56aec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ce0c484e84bc2ddb4a1d287246c63663f3875924
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651331"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768428"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Authentifizieren von Benutzern mit dem WS-Verbund in ASP.net Core
 
@@ -21,12 +27,12 @@ Bei ASP.net Core 2,0-apps wird die WS-Verbund Unterstützung von [Microsoft. asp
 
 Standardmäßig wird die neue Middleware:
 
-* Lässt keine nicht angeforderten Anmeldungen zu. Diese Funktion des WS-Verbund Protokolls ist anfällig für XSRF-Angriffe. Sie kann jedoch mit der Option `AllowUnsolicitedLogins` aktiviert werden.
-* Prüft nicht alle Formular Beiträge auf Anmelde Nachrichten. Nur Anforderungen an die `CallbackPath` werden auf Anmeldungen geprüft. `CallbackPath` ist standardmäßig `/signin-wsfed`, kann aber über die geerbte [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) -Eigenschaft der [wsfederationoptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) -Klasse geändert werden. Dieser Pfad kann für andere Authentifizierungs Anbieter freigegeben werden, indem die [skipunerkenzedrequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) -Option aktiviert wird.
+* Lässt keine nicht angeforderten Anmeldungen zu. Diese Funktion des WS-Verbund Protokolls ist anfällig für XSRF-Angriffe. Sie kann jedoch mit der `AllowUnsolicitedLogins` Option aktiviert werden.
+* Prüft nicht alle Formular Beiträge auf Anmelde Nachrichten. `CallbackPath` Nur Anforderungen an werden auf Anmeldungen geprüft. `CallbackPath` der Standardwert ist, `/signin-wsfed` aber kann über die geerbte [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) -Eigenschaft der [wsfederationoptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) -Klasse geändert werden. Dieser Pfad kann für andere Authentifizierungs Anbieter freigegeben werden, indem die [skipunerkenzedrequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) -Option aktiviert wird.
 
 ## <a name="register-the-app-with-active-directory"></a>Registrieren der App bei Active Directory
 
-### <a name="active-directory-federation-services"></a>Active Directory-Verbunddienste (AD FS)
+### <a name="active-directory-federation-services"></a>Active Directory-Verbunddienste
 
 * Öffnen **Sie den Assistenten zum Hinzufügen von Vertrauens Stellungen der vertrauenden Seite** in der AD FS-Verwaltungskonsole:
 
@@ -51,15 +57,15 @@ Standardmäßig wird die neue Middleware:
 
 * Klicken Sie im restlichen Assistenten auf **weiter** , und **Schließen** Sie am Ende.
 
-* Für ASP.net Core Identität ist ein **Name-ID** -Anspruch erforderlich. Fügen Sie eine aus dem Dialogfeld " **Anspruchs Regeln bearbeiten** " hinzu:
+* ASP.net Core Identity erfordert einen **namens-ID** -Anspruch. Fügen Sie eine aus dem Dialogfeld " **Anspruchs Regeln bearbeiten** " hinzu:
 
-![Bearbeiten von Anspruchsregeln](ws-federation/_static/EditClaimRules.png)
+![Anspruchsregeln bearbeiten](ws-federation/_static/EditClaimRules.png)
 
 * Belassen Sie im **Assistenten zum Hinzufügen von Transformations Anspruchs Regeln**die Vorlage Standardwert **für LDAP-Attribute als Ansprüche senden** , und klicken Sie auf **weiter**. Fügen Sie eine Regel hinzu, die das LDAP **-Attribut Sam-Account-Name** dem ausgehenden Anspruch der **namens-ID** zuordnet:
 
 ![Assistent zum Hinzufügen von Transformations Anspruchs Regeln: Konfigurieren von Anspruchs Regeln](ws-federation/_static/AddTransformClaimRule.png)
 
-* Klicken Sie im Fenster **Anspruchs Regeln bearbeiten** auf **Fertig** stellen > **OK** .
+* Klicken **Finish** > **Sie im Fenster** **Anspruchs Regeln bearbeiten** auf Fertigstellen.
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
@@ -72,17 +78,17 @@ Standardmäßig wird die neue Middleware:
 
 ![Azure Active Directory: App-Registrierung erstellen](ws-federation/_static/AadCreateAppRegistration.png)
 
-* Klicken Sie auf **Endpunkte** , und notieren Sie die Verbund **Metadaten-Dokument** -URL Dies sind die `MetadataAddress`der WS-Verbund Middleware:
+* Klicken Sie auf **Endpunkte** , und notieren Sie die Verbund **Metadaten-Dokument** -URL Dies sind die WS-Verbund-Middleware `MetadataAddress`:
 
 ![Azure Active Directory: Endpunkte](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* Navigieren Sie zur neuen App-Registrierung. Klicken Sie auf **Einstellungen** > **Eigenschaften** , und notieren Sie sich den **App-ID-URI**. Dies sind die `Wtrealm`der WS-Verbund Middleware:
+* Navigieren Sie zur neuen App-Registrierung. Klicken Sie auf **Einstellungs** > **Eigenschaften** , und notieren Sie sich den **App-ID-URI**. Dies sind die WS-Verbund-Middleware `Wtrealm`:
 
 ![Azure Active Directory: Eigenschaften der APP-Registrierung](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-identity"></a>Verwenden von WS-Federation ohne ASP.net Core Identität
+## <a name="use-ws-federation-without-aspnet-core-identity"></a>Verwenden von WS-Federation ohne ASP.net CoreIdentity
 
-Die WS-Verbund-Middleware kann ohne Identität verwendet werden. Beispiel:
+Die WS-Verbund-Middleware kann ohne Identityverwendet werden. Beispiel:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -91,10 +97,10 @@ Die WS-Verbund-Middleware kann ohne Identität verwendet werden. Beispiel:
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>WS-Verbund als externen Anmelde Anbieter für ASP.net Core Identität hinzufügen
+## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>Fügen Sie den WS-Verbund als externen Anmelde Anbieter für ASP.net CoreIdentity
 
 * Fügen Sie eine Abhängigkeit von [Microsoft. aspnetcore. Authentication. wsfederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) zum Projekt hinzu.
-* Fügen Sie `Startup.ConfigureServices`WS-Verbund hinzu:
+* WS-Verbund hinzufügen `Startup.ConfigureServices`zu:
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -108,10 +114,10 @@ Die WS-Verbund-Middleware kann ohne Identität verwendet werden. Beispiel:
 
 ### <a name="log-in-with-ws-federation"></a>Anmelden mit dem WS-Verbund
 
-Navigieren Sie zur APP, und klicken Sie auf den Link **Anmelden** im Navigations Header. Es gibt eine Option zum Anmelden mit wsfederation: ![Anmeldeseite](ws-federation/_static/WsFederationButton.png)
+Navigieren Sie zur APP, und klicken Sie auf den Link **Anmelden** im Navigations Header. Es gibt eine Option zum Anmelden mit wsfederation: ![Anmeldeseite.](ws-federation/_static/WsFederationButton.png)
 
 Bei ADFS als Anbieter wird die Schaltfläche zu einer AD FS-Anmeldeseite umgeleitet: ![ADFS-Anmeldeseite](ws-federation/_static/AdfsLoginPage.png)
 
 Wenn Azure Active Directory als Anbieter fungiert, wird die Schaltfläche an eine Aad-Anmeldeseite umgeleitet: ![Aad-Anmeldeseite](ws-federation/_static/AadSignIn.png)
 
-Eine erfolgreiche Anmeldung für einen neuen Benutzer leitet zur Benutzer Registrierungsseite der App um: ![Register Seite](ws-federation/_static/Register.png)
+Eine erfolgreiche Anmeldung für einen neuen Benutzer leitet zur Benutzer Registrierungsseite der App um: ![Seite registrieren.](ws-federation/_static/Register.png)

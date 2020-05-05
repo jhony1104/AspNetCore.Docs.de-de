@@ -4,13 +4,19 @@ author: ardalis
 description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum Erstellen von Web-Apps und APIs mithilfe des Model-View-Controller-Entwurfsmusters
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/overview
-ms.openlocfilehash: 2911399f6ed4e14345171c908c4306b9c3e33805
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651667"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775465"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -37,11 +43,11 @@ Das Modell stellt in einer MVC-Anwendung den Status der Anwendung und sämtliche
 
 ### <a name="view-responsibilities"></a>Aufgaben der Ansicht
 
-Ansichten dienen der Darstellung von Inhalt über die Benutzeroberfläche. Dabei verwenden sie die [Razor-Ansichtsengine](#razor-view-engine), um .NET-Code in HTML-Markup einzubetten. Ansichten sollten so wenig Logik wie möglich enthalten. Die enthaltene Logik sollte sich zudem auf die Darstellung von Inhalt beziehen. Sollten Sie dennoch viel Logik in Ansichtsdateien ausführen müssen, um Daten aus einem komplexen Modell anzuzeigen, ist es sinnvoll, eine [Ansichtskomponente](views/view-components.md), ViewModel oder eine Ansichtsvorlage zu verwenden, um die Ansicht zu vereinfachen.
+Ansichten dienen der Darstellung von Inhalt über die Benutzeroberfläche. Sie verwenden die [ Razor Ansichts-Engine](#razor-view-engine) zum Einbetten von .NET-Code in HTML-Markup. Ansichten sollten so wenig Logik wie möglich enthalten. Die enthaltene Logik sollte sich zudem auf die Darstellung von Inhalt beziehen. Sollten Sie dennoch viel Logik in Ansichtsdateien ausführen müssen, um Daten aus einem komplexen Modell anzuzeigen, ist es sinnvoll, eine [Ansichtskomponente](views/view-components.md), ViewModel oder eine Ansichtsvorlage zu verwenden, um die Ansicht zu vereinfachen.
 
 ### <a name="controller-responsibilities"></a>Aufgaben des Controllers
 
-Controller sind Komponenten, die Benutzerinteraktionen verarbeiten, mit dem Modell arbeiten und letztlich eine Ansicht auswählen, die gerendert werden soll. In einer MVC-Anwendung zeigt die Ansicht nur Informationen an. Der Controller übernimmt das Behandeln und das Reagieren auf Benutzereingaben und Interaktion. Im MVC-Muster stellt der Controller den Einstiegspunkt dar. Er ist verantwortlich für die Auswahl des Modells, mit dem gearbeitet wird, sowie der Ansicht, die gerendert wird (daher kommt auch sein Name: Der Controller kontrolliert, wie die App auf eine bestimmte Anforderung reagiert).
+Controller sind Komponenten, die Benutzerinteraktionen verarbeiten, mit dem Modell arbeiten und letztlich eine Ansicht auswählen, die gerendert werden soll. In einer MVC-Anwendung zeigt die Ansicht nur Informationen an. Benutzereingaben und -interaktionen werden vom Controller verarbeitet und beantwortet. Im MVC-Muster stellt der Controller den Einstiegspunkt dar. Er ist verantwortlich für die Auswahl des Modells, mit dem gearbeitet wird, sowie der Ansicht, die gerendert wird (daher kommt auch sein Name: Der Controller kontrolliert, wie die App auf eine bestimmte Anforderung reagiert).
 
 > [!NOTE]
 > Controller sollten nicht durch zu viele Aufgaben übermäßig kompliziert gemacht werden. Um zu verhindern, dass die Controllerlogik zu komplex wird, verlagern Sie die Geschäftslogik aus dem Controller in das Domänenmodell.
@@ -66,11 +72,11 @@ Zu ASP.NET Core MVC gehören folgende Elemente:
 * [Filter](#filters)
 * [Bereiche](#areas)
 * [Web-APIs](#web-apis)
-* [Testfähigkeit](#testability)
-* [Razor-Ansichtsengine](#razor-view-engine)
+* [Prüfbarkeit](#testability)
+* [RazorAnzeige-Engine](#razor-view-engine)
 * [Stark typisierte Ansichten](#strongly-typed-views)
-* [Tag Helpers (Taghilfsprogramme)](#tag-helpers)
-* [Ansichtskomponenten](#view-components)
+* [Taghilfsprogramme](#tag-helpers)
+* [Komponenten anzeigen](#view-components)
 
 ### <a name="routing"></a>Routing
 
@@ -141,11 +147,11 @@ public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = 
 
 Das Framework verarbeitet Validierungsanforderungsdaten sowohl auf dem Client als auch auf dem Server. Für Modelltypen angegebene Validierungslogik wird den gerenderten Ansichten als unaufdringliche Anmerkungen hinzugefügt und im Browser mit [jQuery Validation](https://jqueryvalidation.org/) erzwungen.
 
-### <a name="dependency-injection"></a>Abhängigkeitsinjektion
+### <a name="dependency-injection"></a>Dependency Injection
 
 ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC können [Controller](controllers/dependency-injection.md) benötigte Dienste über ihre Konstruktoren anfordern. So wird das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgt.
 
-Mit der [-Anweisung kann Ihre App ](views/dependency-injection.md)Dependency Injection auch in Ansichtsdateien`@inject` verwenden:
+Mit der `@inject`-Anweisung kann Ihre App [Dependency Injection auch in Ansichtsdateien](views/dependency-injection.md) verwenden:
 
 ```cshtml
 @inject SomeService ServiceName
@@ -172,7 +178,7 @@ public class AccountController : Controller
 
 ### <a name="areas"></a>Bereiche
 
-[Bereiche](controllers/areas.md) sind eine Möglichkeit, eine große ASP.NET Core MVC-Web-App in kleinere funktionale Gruppierungen aufzuteilen. Ein Bereich ist eine MVC-Struktur innerhalb einer Anwendung. In einem MVC-Projekt sind logische Komponenten wie Modell, Controller und Ansicht in verschiedenen Ordnern gespeichert. MVC nutzt Namenskonventionen zum Erstellen einer Beziehung zwischen diesen Komponenten. Bei einer großen App kann es von Vorteil sein, die App in mehrere Bereiche mit hoher Funktionalität aufzuteilen. Beispielsweise eine e-Commerce-App mit mehreren Geschäftseinheiten, z. b. Checkout, Abrechnung und Suche usw. Jede dieser Einheiten verfügt über eigene logische Komponenten Sichten, Controller und Modelle.
+[Bereiche](controllers/areas.md) bieten eine Möglichkeit, eine große ASP.net Core MVC-Web-App in kleinere funktionale Gruppierungen zu partitionieren. Ein Bereich ist eine MVC-Struktur innerhalb einer Anwendung. In einem MVC-Projekt sind logische Komponenten wie Modell, Controller und Ansicht in verschiedenen Ordnern gespeichert. MVC nutzt Namenskonventionen zum Erstellen einer Beziehung zwischen diesen Komponenten. Bei einer großen App kann es von Vorteil sein, die App in mehrere Bereiche mit hoher Funktionalität aufzuteilen. Beispielsweise eine e-Commerce-App mit mehreren Geschäftseinheiten, z. b. Checkout, Abrechnung und Suche usw. Jede dieser Einheiten verfügt über eigene logische Komponenten Sichten, Controller und Modelle.
 
 ### <a name="web-apis"></a>Web-APIs
 
@@ -186,9 +192,9 @@ Außerdem können Sie mit der Linkgenerierung Unterstützung für Hypermedia akt
 
 Durch die Verwendung von Schnittstellen und der Abhängigkeitsinjektion eignet sich das Framework besonders gut für Komponententests. Es enthält Features (wie etwa einen TestHost- und InMemory-Anbieter für Entity Framework), mit denen auch [Integrationstests](xref:test/integration-tests) schnell und einfach durchgeführt werden können. Weitere Informationen hierzu finden Sie unter [Testen der Controllerlogik](controllers/testing.md).
 
-### <a name="razor-view-engine"></a>Razor-Ansichtsengine
+### <a name="razor-view-engine"></a>RazorAnzeige-Engine
 
-[ASP.NET Core MVC-Ansichten](views/overview.md) verwenden zum Rendern von Ansichten die [Razor-Ansichtsengine](views/razor.md). Razor ist eine komprimierte, ausdrucksstarke und fließende Vorlagenmarkupsprache zum Definieren von Ansichten mithilfe von eingebettetem C#-Code. Razor wird verwendet, um Webinhalte auf dem Server dynamisch zu generieren. Sie können Servercode sauber mit Inhalt und Code der Clientseite kombinieren.
+[ASP.net Core MVC-Ansichten](views/overview.md) verwenden Sie die [ Razor Ansichts-Engine](views/razor.md) zum renderingansichten. Razorist eine kompakte, ausdrucksstarke und fließende Vorlagen Markup Sprache zum Definieren von Sichten mithilfe von eingebettetem c#-Code. Razorwird verwendet, um Webinhalte auf dem Server dynamisch zu generieren. Sie können Servercode sauber mit Inhalt und Code der Clientseite kombinieren.
 
 ```cshtml
 <ul>
@@ -198,11 +204,11 @@ Durch die Verwendung von Schnittstellen und der Abhängigkeitsinjektion eignet s
 </ul>
 ```
 
-Mit der Razor-Ansichtsengine können Sie [Layouts](views/layout.md), [Teilansichten](views/partial.md) sowie ersetzbare Bereiche definieren.
+Mithilfe der Razor Ansichts-Engine können Sie [Layouts](views/layout.md), [Teilansichten](views/partial.md) und austauschbare Abschnitte definieren.
 
 ### <a name="strongly-typed-views"></a>Stark typisierte Ansichten
 
-Je nach Modell können Razor-Ansichten in MVC stark typisiert sein. Controller können ein stark typisiertes Modell an die Ansichten übergeben, um Typüberprüfung und IntelliSense-Unterstützung für Ihre Ansichten zu aktivieren.
+RazorSichten in MVC können basierend auf dem Modell stark typisiert werden. Controller können ein stark typisiertes Modell an die Ansichten übergeben, um Typüberprüfung und IntelliSense-Unterstützung für Ihre Ansichten zu aktivieren.
 
 Die folgende Ansicht rendert beispielweise ein Modell vom Typ `IEnumerable<Product>`:
 
@@ -218,7 +224,7 @@ Die folgende Ansicht rendert beispielweise ein Modell vom Typ `IEnumerable<Produ
 
 ### <a name="tag-helpers"></a>Taghilfsprogramme
 
-[Taghilfsprogramme](views/tag-helpers/intro.md) ermöglichen serverseitigem Code, am Erstellen und Rendern von HTML-Elementen in Razor-Dateien mitzuwirken. Mit Taghilfsprogrammen können Sie benutzerdefinierte Tags anpassen (z.B. `<environment>`) oder das Verhalten von vorhandenen Tags ändern (z.B. `<label>`). Taghilfsprogramme sind an bestimmte Elemente basierend auf dem Elementnamen und dessen Attributen gebunden. Sie bieten gleichzeitig die Vorteile des serverseitigen Renderns sowie der HTML-Bearbeitungsmöglichkeiten.
+[Taghilfsprogramme](views/tag-helpers/intro.md) ermöglichen es dem serverseitigen Code, an der Erstellung und dem Rendern von HTML-Elementen in Razor Dateien teilzunehmen. Mit Taghilfsprogrammen können Sie benutzerdefinierte Tags anpassen (z.B. `<environment>`) oder das Verhalten von vorhandenen Tags ändern (z.B. `<label>`). Taghilfsprogramme sind an bestimmte Elemente basierend auf dem Elementnamen und dessen Attributen gebunden. Sie bieten gleichzeitig die Vorteile des serverseitigen Renderns sowie der HTML-Bearbeitungsmöglichkeiten.
 
 Für häufige Aufgaben wie das Erstellen von Formularen und Links sowie das Laden von Objekten gibt es zahlreiche integrierte Taghilfsprogramme. Weitere Taghilfsprogramme sind in öffentlichen GitHub-Repositorys und als NuGet-Pakete verfügbar. Taghilfsprogramme werden in C# erstellt und sind für HTML-Elemente basierend auf dem Elementnamen, dem Attributnamen oder dem übergeordneten Tag konzipiert. Der integrierte LinkTagHelper kann z.B. verwendet werden, um einen Link zur `Login`-Aktion des `AccountsController` zu erstellen:
 
@@ -243,7 +249,7 @@ Mit `EnvironmentTagHelper` können Sie Ihren Ansichten verschiedene Skripts hinz
 </environment>
 ```
 
-Taghilfsprogramme bieten HTML-freundliche Entwicklungsmöglichkeiten sowie eine umfangreiche IntelliSense-Umgebung zum Erstellen von HTML- und Razor-Markup. Die meisten integrierten Taghilfsprogramme sind für vorhandene HTML-Elemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit.
+Taghilfsprogramme bieten eine HTML-freundliche Entwicklungsumgebung und eine umfangreiche IntelliSense-Umgebung zum Erstellen Razor von HTML und Markup. Die meisten integrierten Taghilfsprogramme sind für vorhandene HTML-Elemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit.
 
 ### <a name="view-components"></a>Ansichtskomponenten
 
@@ -257,5 +263,5 @@ Weitere Informationen finden Sie unter <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC:](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) stark typisierte Bibliothek für Komponententest mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.* )
+* [](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC:&ndash; stark typisierte Bibliothek für Komponententest mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.*)
 * <xref:blazor/integrate-components>

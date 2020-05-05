@@ -5,13 +5,19 @@ description: In diesem Artikel wird erläutert, wie Sie die Identität auf ein b
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: a3be2b8171c146beef7e62c8f7e55883ca5dc687
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652981"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777513"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren mit einem bestimmten Schema in ASP.net Core
 
@@ -38,11 +44,11 @@ public void ConfigureServices(IServiceCollection services)
 Im vorangehenden Code wurden zwei Authentifizierungs Handler hinzugefügt: eine für Cookies und eine für Bearer.
 
 >[!NOTE]
->Wenn Sie das Standardschema angeben, wird die `HttpContext.User`-Eigenschaft auf diese Identität festgelegt. Wenn dieses Verhalten nicht erwünscht ist, deaktivieren Sie es, indem Sie die Parameter lose Form `AddAuthentication`aufrufen.
+>Wenn Sie das Standardschema angeben, `HttpContext.User` wird die-Eigenschaft auf diese Identität festgelegt. Wenn dieses Verhalten nicht erwünscht ist, deaktivieren Sie es durch Aufrufen der Parameter losen Form `AddAuthentication`von.
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Auswählen des Schemas mit dem Attribut "autorisieren"
 
-Zum Zeitpunkt der Autorisierung gibt die APP den zu verwendenden Handler an. Wählen Sie den Handler aus, mit dem die APP autorisiert werden soll, indem Sie eine durch Trennzeichen getrennte Liste von Authentifizierungs Schemas an `[Authorize]`übergeben. Das `[Authorize]`-Attribut gibt das Authentifizierungsschema bzw. die zu verwendenden Schemas an, unabhängig davon, ob ein Standard konfiguriert ist. Beispiel:
+Zum Zeitpunkt der Autorisierung gibt die APP den zu verwendenden Handler an. Wählen Sie den Handler aus, mit dem die APP autorisiert werden soll, indem Sie eine durch Trennzeichen getrennte `[Authorize]`Liste von Authentifizierungs Schemas an übergeben. Das `[Authorize]` -Attribut gibt das Authentifizierungsschema oder die zu verwendenden Schemas an, unabhängig davon, ob ein Standard konfiguriert ist. Beispiel:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -67,7 +73,7 @@ Im vorangehenden Code wird nur der Handler mit dem Schema "Träger" ausgeführt.
 
 ## <a name="selecting-the-scheme-with-policies"></a>Auswählen des Schemas mit Richtlinien
 
-Wenn Sie die gewünschten Schemas in der [Richtlinie](xref:security/authorization/policies)angeben möchten, können Sie beim Hinzufügen Ihrer Richtlinie die `AuthenticationSchemes` Sammlung festlegen:
+Wenn Sie die gewünschten Schemas in der [Richtlinie](xref:security/authorization/policies)angeben möchten, können Sie `AuthenticationSchemes` die Sammlung beim Hinzufügen Ihrer Richtlinie festlegen:
 
 ```csharp
 services.AddAuthorization(options =>
@@ -81,7 +87,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Im vorherigen Beispiel wird die Richtlinie "Over18" nur für die Identität ausgeführt, die vom Handler "Träger" erstellt wurde. Verwenden Sie die Richtlinie, indem Sie die `Policy`-Eigenschaft des `[Authorize]` Attributs festlegen:
+Im vorherigen Beispiel wird die Richtlinie "Over18" nur für die Identität ausgeführt, die vom Handler "Träger" erstellt wurde. Verwenden Sie die-Richtlinie `[Authorize]` durch Festlegen `Policy` der-Eigenschaft des Attributs:
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -94,7 +100,7 @@ public class RegistrationController : Controller
 
 Einige apps müssen möglicherweise mehrere Arten der Authentifizierung unterstützen. Beispielsweise kann Ihre App Benutzer von Azure Active Directory und einer Benutzerdatenbank authentifizieren. Ein weiteres Beispiel ist eine APP, die Benutzer sowohl aus Active Directory-Verbunddienste (AD FS) als auch aus Azure Active Directory B2C authentifiziert. In diesem Fall sollte die APP ein JWT-bearertoken von mehreren Ausstellern akzeptieren.
 
-Fügen Sie alle Authentifizierungs Schemas hinzu, die angenommen werden sollen. Beispielsweise werden mit dem folgenden Code in `Startup.ConfigureServices` zwei JWT-Träger Authentifizierungs Schemas für verschiedene Aussteller hinzugefügt:
+Fügen Sie alle Authentifizierungs Schemas hinzu, die angenommen werden sollen. Mit dem folgenden Code in `Startup.ConfigureServices` werden z. b. zwei JWT-Träger Authentifizierungs Schemas mit unterschiedlichen Ausstellern hinzugefügt:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -116,7 +122,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> Nur eine JWT-Träger Authentifizierung wird mit dem standardmäßigen Authentifizierungsschema `JwtBearerDefaults.AuthenticationScheme`registriert. Die zusätzliche Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
+> Nur eine JWT-Träger Authentifizierung wird mit dem Standard Authentifizierungsschema `JwtBearerDefaults.AuthenticationScheme`registriert. Die zusätzliche Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
 
 Der nächste Schritt besteht darin, die Standard Autorisierungs Richtlinie so zu aktualisieren, dass beide Authentifizierungs Schemas akzeptiert werden. Beispiel:
 
@@ -137,6 +143,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wenn die Standard Autorisierungs Richtlinie überschrieben wird, ist es möglich, das `[Authorize]`-Attribut in Controllern zu verwenden. Der Controller akzeptiert dann Anforderungen mit JWT, die vom ersten oder zweiten Aussteller ausgegeben wurden.
+Wenn die Standard Autorisierungs Richtlinie überschrieben wird, ist es möglich, das `[Authorize]` -Attribut in Controllern zu verwenden. Der Controller akzeptiert dann Anforderungen mit JWT, die vom ersten oder zweiten Aussteller ausgegeben wurden.
 
 ::: moniker-end

@@ -5,7 +5,7 @@ Die `FetchData` -Komponente zeigt Folgendes:
 
 Die `@attribute [Authorize]` -Direktive gibt dem blazor Webassembly-Autorisierungssystem an, dass der Benutzer autorisiert werden muss, um diese Komponente zu besuchen. Das vorhanden sein des-Attributs in der *Client* -App verhindert nicht, dass die API auf dem Server ohne die richtigen Anmelde Informationen aufgerufen wird. Die *Server* -app muss auch `[Authorize]` auf den geeigneten Endpunkten verwenden, um Sie ordnungsgemäß zu schützen.
 
-`AuthenticationService.RequestAccessToken();`übernimmt die Anforderung eines Zugriffs Tokens, das der Anforderung zum Aufrufen der API hinzugefügt werden kann. Wenn das Token zwischengespeichert wird oder der Dienst ein neues Zugriffs Token ohne Benutzerinteraktion bereitstellen kann, wird die Tokenanforderung erfolgreich ausgeführt. Andernfalls schlägt die Tokenanforderung fehl.
+`IAccessTokenProvider.RequestAccessToken();`übernimmt die Anforderung eines Zugriffs Tokens, das der Anforderung zum Aufrufen der API hinzugefügt werden kann. Wenn das Token zwischengespeichert wird oder der Dienst ein neues Zugriffs Token ohne Benutzerinteraktion bereitstellen kann, wird die Tokenanforderung erfolgreich ausgeführt. Andernfalls schlägt die Tokenanforderung mit einem `AccessTokenNotAvailableException` Fehler fehl, der in einer `try-catch` -Anweisung abgefangen wird.
 
 Um das tatsächliche Token abzurufen, das in die Anforderung aufgenommen werden soll, muss die APP überprüfen, ob die Anforderung `tokenResult.TryGetToken(out var token)`erfolgreich war, indem aufgerufen wird. 
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erlernen Sie die Grundlagen der Autorisierung und die Funktionsweise der Autorisierung in ASP.net Core apps.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: b5e60b3c256941fff5e54e1a02e077c34c535902
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652333"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777526"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>Einführung in die Autorisierung in ASP.net Core
 
@@ -20,7 +26,7 @@ Die Autorisierung bezieht sich auf den Prozess, mit dem bestimmt wird, was ein B
 
 Die Autorisierung ist orthogonal und unabhängig von der Authentifizierung. Die Autorisierung erfordert jedoch einen Authentifizierungsmechanismus. Die Authentifizierung ist der Prozess, bei dem ermittelt wird, wer ein Benutzer ist. Die Authentifizierung kann mindestens eine Identität für den aktuellen Benutzer erstellen.
 
-Weitere Informationen zur Authentifizierung in ASP.net Core finden Sie unter <xref:security/authentication/index>.
+Weitere Informationen zur Authentifizierung in ASP.net Core finden <xref:security/authentication/index>Sie unter.
 
 ## <a name="authorization-types"></a>Autorisierungs Typen
 
@@ -28,6 +34,6 @@ ASP.net Core Autorisierung bietet eine einfache, deklarative und umfassende [Ric
 
 ## <a name="namespaces"></a>Namespaces
 
-Autorisierungs Komponenten, einschließlich der `AuthorizeAttribute`-und `AllowAnonymousAttribute` Attribute, finden Sie im `Microsoft.AspNetCore.Authorization`-Namespace.
+Autorisierungs Komponenten, einschließlich `AuthorizeAttribute` des `AllowAnonymousAttribute` -Attributs und des- `Microsoft.AspNetCore.Authorization` Attributs, finden Sie im-Namespace.
 
 Informieren Sie sich in der Dokumentation über die [einfache Autorisierung](xref:security/authorization/simple).
