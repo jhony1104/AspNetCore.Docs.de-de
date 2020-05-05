@@ -5,13 +5,19 @@ description: Erfahren Sie, wie JSON Patch-Anforderungen in einer ASP.NET Core-We
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: be4115e870dac818aeb6b1e65ddfb21e89d9cf25
-ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
+ms.openlocfilehash: 3a78fa268cce8cff10fedf5814d61ce0e5faaf4b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80625879"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766666"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch in ASP.NET Core-Web-API
 
@@ -23,10 +29,10 @@ In diesem Artikel wird erläutert, wie JSON Patch-Anforderungen in einer ASP.NET
 
 ## <a name="package-installation"></a>Paketinstallation
 
-Führen Sie die folgenden Schritte aus, um die JSON Patch-Unterstützung in Ihrer App zu aktivieren:
+Führen Sie die folgenden Schritte aus, um die JSON-Patchunterstützung in der APP zu aktivieren:
 
 1. Installieren des NuGet-Pakets [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/).
-1. Aktualisieren Sie die `Startup.ConfigureServices` Methode <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>des Projekts zum Aufrufen von . Beispiel:
+1. Aktualisieren Sie die- `Startup.ConfigureServices` Methode des Projekts <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>, um aufzurufen. Beispiel:
 
     ```csharp
     services
@@ -40,13 +46,13 @@ Führen Sie die folgenden Schritte aus, um die JSON Patch-Unterstützung in Ihre
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, AddNewtonsoftJson und System.Text.Json
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, addnewtonweichjson und System. Text. JSON
 
-`AddNewtonsoftJson`ersetzt die `System.Text.Json`-basierten Eingabe- und Ausgabeformatters, die zum Formatieren **aller** JSON-Inhalte verwendet werden. Um die Unterstützung für `Newtonsoft.Json`JSON Patch mithilfe von hinzuzufügen, während die `Startup.ConfigureServices` anderen Formatters unverändert bleiben, aktualisieren Sie die Projektmethode wie folgt:
+`AddNewtonsoftJson`ersetzt die `System.Text.Json`-basierten Eingabe-und Ausgabe Formatierer, die zum Formatieren des **gesamten** JSON-Inhalts verwendet werden. Um Unterstützung für JSON-Patch `Newtonsoft.Json`mithilfe von hinzuzufügen und die anderen Formatierer unverändert zu lassen, `Startup.ConfigureServices` aktualisieren Sie die-Methode des Projekts wie folgt:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
-Der vorangehende `Microsoft.AspNetCore.Mvc.NewtonsoftJson` Code erfordert `using` das Paket und die folgenden Anweisungen:
+Der vorangehende Code erfordert `Microsoft.AspNetCore.Mvc.NewtonsoftJson` das-Paket und `using` die folgenden-Anweisungen:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet1)]
 
@@ -56,9 +62,9 @@ Die Methoden PUT und [PATCH](https://tools.ietf.org/html/rfc5789) werden verwend
 
 ## <a name="json-patch"></a>JSON Patch
 
-Mit dem [JSON Patch](https://tools.ietf.org/html/rfc6902)-Format geben Sie an, dass Updates auf eine Ressource angewendet werden sollen. Ein JSON Patch-Dokument verfügt über ein Array von *Vorgängen*. Jeder Vorgang identifiziert einen bestimmten Änderungstyp. Beispiele für solche Änderungen sind das Hinzufügen eines Arrayelements oder das Ersetzen eines Eigenschaftswerts.
+Mit dem [JSON Patch](https://tools.ietf.org/html/rfc6902)-Format geben Sie an, dass Updates auf eine Ressource angewendet werden sollen. Ein JSON Patch-Dokument verfügt über ein Array von *Vorgängen*. Jeder Vorgang identifiziert eine bestimmte Art von Änderung. Beispiele für solche Änderungen sind das Hinzufügen eines Array Elements oder das Ersetzen eines Eigenschafts Werts.
 
-Die folgenden JSON-Dokumente stellen beispielsweise eine Ressource, ein JSON-Patchdokument für die Ressource und das Ergebnis der Anwendung der Patch-Vorgänge dar.
+Die folgenden JSON-Dokumente stellen z. b. eine Ressource, ein JSON-Patch-Dokument für die Ressource und das Ergebnis der Anwendung der patchvorgänge dar.
 
 ### <a name="resource-example"></a>Ressourcenbeispiel
 
@@ -98,13 +104,13 @@ So sieht die Ressource nach der Anwendung des voranstehenden JSON Patch-Dokument
 }
 ```
 
-Die Änderungen, die durch Anwenden eines JSON-Patchdokuments auf eine Ressource vorgenommen werden, sind atomar. Wenn ein Vorgang in der Liste fehlschlägt, wird kein Vorgang in der Liste angewendet.
+Die Änderungen, die durch Anwenden eines JSON-Patch-Dokuments auf eine Ressource vorgenommen werden, sind atomarisch. Wenn ein Vorgang in der Liste fehlschlägt, wird kein Vorgang in der Liste angewendet.
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
 Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispiel: `"/address/zipCode"`.
 
-Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Verwenden `add` Sie bis zum Ende eines Arrays einen Bindestrich (`-`) anstelle einer Indexnummer: `/addresses/-`.
+Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Bis `add` zum Ende eines Arrays verwenden Sie einen Bindestrich (`-`) anstelle einer Indexnummer:. `/addresses/-`
 
 ### <a name="operations"></a>Operationen (Operations)
 
@@ -119,7 +125,7 @@ Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezif
 | `copy`    | Identisch mit `add` zum Ziel unter Verwendung des Werts aus der Quelle. |
 | `test`    | Gibt Statuscode für Erfolg zurück, wenn der Wert von `path` = bereitgestellter `value`.|
 
-## <a name="json-patch-in-aspnet-core"></a>JSON-Patch in ASP.NET Core
+## <a name="json-patch-in-aspnet-core"></a>JSON-Patch in ASP.net Core
 
 Die ASP.NET Core-Implementierung von JSON Patch wird im [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/)-NuGet-Paket bereitgestellt.
 
@@ -135,7 +141,7 @@ Hier sehen Sie ein Beispiel:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-Dieser Code aus der Beispiel-App funktioniert mit dem folgenden `Customer` Modell:
+Dieser Code aus der Beispiel-APP funktioniert mit dem `Customer` folgenden Modell:
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -163,7 +169,7 @@ Das voranstehende Aktionsmethodenbeispiel ruft eine Überladung von `ApplyTo` au
 
 ### <a name="dynamic-objects"></a>Dynamische Objekte
 
-Das folgende Beispiel für die Aktionsmethode zeigt, wie ein Patch auf ein dynamisches Objekt angewendet wird:
+Im folgenden Aktionsmethoden Beispiel wird gezeigt, wie ein Patch auf ein dynamisches Objekt angewendet wird:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_Dynamic)]
 
@@ -188,7 +194,7 @@ Das folgende Patch-Dokumentbeispiel legt den Wert von `CustomerName` fest und f�
     * Wenn die Eigenschaft NULL-Werte zulässt: auf Null festlegen.
     * Wenn die Eigenschaft keine NULL-Werte zulässt: auf `default<T>` festlegen.
 
-Das folgende Beispiel-Patchdokument wird auf null gesetzt `CustomerName` und `Orders[0]`löscht:
+Im folgenden Beispiel-Patch- `CustomerName` Dokument wird auf NULL `Orders[0]`festgelegt und löscht Folgendes:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
@@ -196,7 +202,7 @@ Das folgende Beispiel-Patchdokument wird auf null gesetzt `CustomerName` und `Or
 
 Dieser Vorgang ist funktionell identisch mit einem `remove`, gefolgt von einem `add`.
 
-Das folgende Beispielpatchdokument legt `CustomerName` den `Orders[0]`Wert von `Order` einem neuen Objekt fest und wird durch folgendes ersetzt:
+Im folgenden Beispiel-Patch-Dokument wird der `CustomerName` Wert von `Orders[0]`festgelegt und `Order` durch ein neues-Objekt ersetzt:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
@@ -246,7 +252,7 @@ Um das Beispiel zu testen, führen Sie die App aus, und senden Sie HTTP-Anforder
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP-Methode: `PATCH`
 * Header: `Content-Type: application/json-patch+json`
-* Text: Kopieren und fügen Sie eines der JSON-Patchdokumentbeispiele aus dem *JSON-Projektordner* ein.
+* Text: Kopieren Sie eine der JSON-patchdokumentbeispiele, und fügen Sie Sie aus dem *JSON* -Projektordner ein.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
@@ -458,7 +464,7 @@ Um das Beispiel zu testen, führen Sie die App aus, und senden Sie HTTP-Anforder
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP-Methode: `PATCH`
 * Header: `Content-Type: application/json-patch+json`
-* Text: Kopieren und fügen Sie eines der JSON-Patchdokumentbeispiele aus dem *JSON-Projektordner* ein.
+* Text: Kopieren Sie eine der JSON-patchdokumentbeispiele, und fügen Sie Sie aus dem *JSON* -Projektordner ein.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

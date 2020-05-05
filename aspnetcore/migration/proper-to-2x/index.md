@@ -1,16 +1,22 @@
 ---
-title: Migration von ASP.NET zu ASP.NET Core
+title: Migrieren von ASP.NET zu ASP.NET Core
 author: isaac2004
 description: Anweisungen zum Migrieren vorhandener ASP.NET MVC- oder Web-API-Apps zu ASP.NET Core Web.
 ms.author: scaddie
 ms.date: 10/18/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 68a45dc50e00bead564500a12509b62a4a193ec4
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 985c08e0994314cec8d52a6651681c93aca96514
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511087"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766510"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migration von ASP.NET zu ASP.NET Core
 
@@ -128,7 +134,7 @@ Fügen Sie bei Bedarf `IProductRepository` ein:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Da die Abhängigkeitsinjektion eine Komponente von ASP.NET Core ist, können Sie Ihren Dienst in `ConfigureServices`Startup.cs*der Methode* hinzufügen:
+Da die Abhängigkeitsinjektion eine Komponente von ASP.NET Core ist, können Sie Ihren Dienst in *Startup.cs* der Methode `ConfigureServices` hinzufügen:
 
 [!code-csharp[](samples/configure-services.cs)]
 
@@ -150,7 +156,7 @@ In ASP.NET Core werden statische Dateien im Webstammverzeichnis ( *&lt;content r
 > [!NOTE]
 > Wenn Sie Anwendungen für .NET Framework entwickeln, installieren Sie das NuGet-Paket `Microsoft.AspNetCore.StaticFiles`.
 
-Beispielsweise kann ein Browser an einem Speicherort wie *auf ein Bildobjekt im Ordner*wwwroot/images`http://<app>/images/<imageFileName>` zugreifen.
+Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<imageFileName>` auf ein Bildobjekt im Ordner *wwwroot/images* zugreifen.
 
 > [!NOTE]
 > Ausführliche Informationen zum Bereitstellen statischer Dateien in ASP.NET Core finden Sie im Artikel zu [statischen Dateien](xref:fundamentals/static-files).

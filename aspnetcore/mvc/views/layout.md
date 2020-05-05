@@ -4,27 +4,33 @@ author: ardalis
 description: Erfahren Sie, wie man gängige Layouts verwendet, Anweisungen von mehreren Ansichten gemeinsam nutzen lässt und Programmcode vor dem Rendern der Ansichten in einer ASP.NET Core-App ausführt.
 ms.author: riande
 ms.date: 07/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: db8c6c30397593c1a8375ebc800c1c0e34d241cb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655045"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766484"
 ---
 # <a name="layout-in-aspnet-core"></a>Layout in ASP.NET Core
 
 Von [Steve Smith](https://ardalis.com/) und [Dave Brock](https://twitter.com/daveabrock)
 
-Seiten und Ansichten beinhalten häufig sowohl visuelle als auch programmgesteuerte Elemente. Dieser Artikel zeigt exemplarische Vorgehensweisen für Folgendes:
+Seiten und Ansichten beinhalten häufig sowohl visuelle als auch programmgesteuerte Elemente. Dieser Artikel demonstriert Folgendes:
 
 * Verwendung von allgemeinen Layouts
 * Freigeben von Anweisungen
 * Führen Sie den allgemeinen Code aus, bevor Sie Seiten oder Ansichten rendern.
 
-In diesem Dokument werden Layouts für zwei verschiedene Ansätze zu ASP.NET Core MVC erläutert: Razor-Seiten und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
+In diesem Dokument werden die Layouts für die beiden unterschiedlichen Ansätze zum ASP.net Core Razor MVC erläutert: Seiten und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
 
-* Razor-Seiten befinden sich im Ordner *Pages*.
+* RazorSeiten befinden sich im Ordner *pages* .
 * Controller mit Ansichten verwenden einen Ordner namens *Views* für Ansichten.
 
 ## <a name="what-is-a-layout"></a>Was ist ein Layout?
@@ -37,7 +43,7 @@ Gängige HTML-Strukturen wie Skripts und Stylesheets werden häufig von vielen S
 
 Gemäß Konvention ist *_Layout.cshtml* das Standardlayout für eine ASP.NET Core-App. Für neue ASP.NET Core-Projekte, die mit den Vorlagen erstellt wurden, sind folgende Layoutdateien vorhanden:
 
-* Razor-Seiten: *Pages/Shared/_Layout.cshtml*
+* RazorSeiten: *pages/Shared/_Layout. cshtml*
 
   ![Ordner „Pages“ im Projektmappen-Explorer](layout/_static/rp-web-project-views.png)
 
@@ -53,11 +59,11 @@ Der folgende Code zeigt die Layoutdatei für eine Vorlage, die mit dem Projekt m
 
 ## <a name="specifying-a-layout"></a>Festlegen eines Layouts
 
-Razor-Ansichten verfügen über eine `Layout` -Eigenschaft. Durch Festlegen dieser Eigenschaft wird das Layout der jeweiligen Ansicht bestimmt:
+RazorSichten verfügen über `Layout` eine-Eigenschaft. Durch Festlegen dieser Eigenschaft wird das Layout der jeweiligen Ansicht bestimmt:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Das angegebene Layout kann einen vollständigen Pfad (z.B. */Pages/Shared/_Layout.cshtml* oder */Views/Shared/_Layout.cshtml*) oder einen Teil des Namens (Beispiel: `_Layout`) aufweisen. Wird ein Teil des Namens angegeben, dann sucht die Razor-Ansichts-Engine die Layoutdatei unter Verwendung des standardmäßigen Ermittlungsprozesses. Der Ordner, in dem sich die die Handlermethode (oder der Controller) befindet, wird zuerst durchsucht und danach der Ordner *Shared*. Dieser Ermittlungsprozess ist identisch mit dem Prozess zum Auffinden von [Teilansichten](xref:mvc/views/partial#partial-view-discovery).
+Das angegebene Layout kann einen vollständigen Pfad (z.B. */Pages/Shared/_Layout.cshtml* oder */Views/Shared/_Layout.cshtml*) oder einen Teil des Namens (Beispiel: `_Layout`) aufweisen. Wenn ein partieller Name angegeben wird, Razor sucht die Ansichts-Engine mithilfe Ihres Standard Ermittlungs Prozesses nach der Layoutdatei. Der Ordner, in dem sich die die Handlermethode (oder der Controller) befindet, wird zuerst durchsucht und danach der Ordner *Shared*. Dieser Ermittlungsprozess ist identisch mit dem Prozess zum Auffinden von [Teilansichten](xref:mvc/views/partial#partial-view-discovery).
 
 Standardmäßig muss jedes Layout `RenderBody` aufrufen. Wo immer der Aufruf von `RenderBody` platziert ist, wird der Inhalt der Ansicht gerendert.
 
@@ -73,9 +79,9 @@ Optional kann ein Layout auf mindestens einen *Abschnitt* verweisen, indem es `R
 @RenderSection("Scripts", required: false)
 ```
 
-Wenn ein erforderlicher Bereich nicht gefunden werden kann, wird eine Ausnahme ausgelöst. Einzelne Ansichten verwenden die Razor-Syntax `@section`, um den in einem Abschnitt zu rendernden Inhalt anzugeben. Wenn eine Seite oder eine Ansicht einen Abschnitt definiert, muss dieser auch gerendert werden. Andernfalls tritt ein Fehler auf.
+Wenn ein erforderlicher Bereich nicht gefunden werden kann, wird eine Ausnahme ausgelöst. Einzelne Ansichten geben den Inhalt an, der in einem Abschnitt mithilfe der `@section` Razor Syntax gerendert werden soll. Wenn eine Seite oder eine Ansicht einen Abschnitt definiert, muss dieser auch gerendert werden. Andernfalls tritt ein Fehler auf.
 
-Eine Beispieldefinition von `@section` in einer Razor Pages-Ansicht:
+Eine Beispiel `@section` Definition in Razor der Seitenansicht:
 
 ```html
 @section Scripts {
@@ -85,7 +91,7 @@ Eine Beispieldefinition von `@section` in einer Razor Pages-Ansicht:
 
 Im vorangehenden Code wird *scripts/main.js* zum Abschnitt `scripts` auf einer Seite oder in einer Ansicht hinzugefügt. Andere Seiten oder Ansichten in der gleichen App benötigen dieses Skript möglicherweise nicht und definieren einen Abschnitt zu Skripts.
 
-In der folgenden Markupdatei wird die Datei [_ValidationScriptsPartial.cshtml](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) mit dem *Partial-Taghilfsprogramm* gerendert:
+In der folgenden Markupdatei wird die Datei *_ValidationScriptsPartial.cshtml* mit dem [Partial-Taghilfsprogramm](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) gerendert:
 
 ```html
 @section Scripts {
@@ -93,23 +99,23 @@ In der folgenden Markupdatei wird die Datei [_ValidationScriptsPartial.cshtml](x
 }
 ```
 
-Die vorhergehende Markupdatei wurde durch [Gerüstidentitäten](xref:security/authentication/scaffold-identity) generiert.
+Das vorangehende Markup wurde durch [ IdentityGerüstbau ](xref:security/authentication/scaffold-identity)generiert.
 
 Die Abschnitte, die auf einer Seite oder in einer Ansicht definiert wurden, stehen nur auf deren Layoutseite zur Verfügung. Teilansichten, Ansichtskomponenten und andere Teile eines Ansichtssystems können nicht auf sie verweisen.
 
 ### <a name="ignoring-sections"></a>Ignorieren von Abschnitten
 
-Standardmäßig müssen der Text und die Abschnitte einer Inhaltsseite alle von der Layoutseite gerendert werden. Die Razor-Ansichtsengine erzwingt dies, indem sie erfasst, ob der Text und jeder Abschnitt gerendert wurde.
+Standardmäßig müssen der Text und die Abschnitte einer Inhaltsseite alle von der Layoutseite gerendert werden. Die Razor Ansichts-Engine erzwingt dies durch nachverfolgen, ob der Text und jeder Abschnitt gerendert wurden.
 
 Rufen Sie die Methoden `IgnoreBody` und `IgnoreSection` auf, um die Ansichtsengine anzuweisen, den Text oder die Abschnitte zu ignorieren.
 
-Der Text und jeder Abschnitt einer Razor Page müssen entweder gerendert oder ignoriert werden.
+Der Text und jeder Abschnitt einer Razor Seite müssen entweder gerendert oder ignoriert werden.
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>Importieren gemeinsam verwendeter Anweisungen
 
-Sichten und Seiten können Razor-Direktiven verwenden, um Namespaces zu importieren und [Abhängigkeitsinjektion](dependency-injection.md)zu verwenden. Anweisungen, die von mehreren Ansichten gemeinsam verwendet werden, können in einer gemeinsam verwendeten Datei namens *_ViewImports.cshtml* angegeben werden. Die `_ViewImports`-Datei unterstützt die folgenden Anweisungen:
+Sichten und Seiten können- Razor Direktiven verwenden, um Namespaces zu importieren und [Abhängigkeitsinjektion](dependency-injection.md)zu verwenden. Anweisungen, die von mehreren Ansichten gemeinsam verwendet werden, können in einer gemeinsam verwendeten Datei namens *_ViewImports.cshtml* angegeben werden. Die `_ViewImports`-Datei unterstützt die folgenden Anweisungen:
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -119,7 +125,7 @@ Sichten und Seiten können Razor-Direktiven verwenden, um Namespaces zu importie
 * `@inherits`
 * `@inject`
 
-Die Datei unterstützt keine anderen Razor-Features wie Funktionen und Abschnittdefinitionen.
+Die Datei unterstützt keine Razor anderen Features, wie z. b. Funktionen und Abschnitts Definitionen.
 
 Eine `_ViewImports.cshtml`-Beispieldatei:
 
@@ -147,7 +153,7 @@ Wenn sich mehrere Dateien namens *_ViewImports.cshtml* in der Hierarchie befinde
 
 ## <a name="running-code-before-each-view"></a>Ausführen von Code vor jeder Ansicht
 
-Code, der ausgeführt werden muss, bevor die einzelnen Ansichten oder Seiten in die Datei *_ViewStart.cshtml* platziert werden. Gemäß der Konvention befindet sich die Datei *_ViewStart.cshtml* im Ordner *Seiten* (oder *Ansichten*). Die in *_ViewStart.cshtml* aufgelisteten Anweisungen werden vor jeder vollständigen Ansicht (also keine Layouts und keine Teilansichten) ausgeführt. [_ViewStart.cshtml](xref:mvc/views/layout#viewimports) ist genauso wie *ViewImports.cshtml* hierarchisch. Wenn eine Datei namens *_ViewStart.cshtml* im Ordner „Ansichten“ oder „Seiten“, der mit einem Controller verknüpft ist, definiert wird, wird sie nach derjenigen ausgeführt, die im Stamm des Ordners *Seiten* (oder *Ansichten*) definiert wurde (falls vorhanden).
+Code, der ausgeführt werden muss, bevor die einzelnen Ansichten oder Seiten in die Datei *_ViewStart.cshtml* platziert werden. Gemäß der Konvention befindet sich die Datei *_ViewStart.cshtml* im Ordner *Seiten* (oder *Ansichten*). Die in *_ViewStart.cshtml* aufgelisteten Anweisungen werden vor jeder vollständigen Ansicht (also keine Layouts und keine Teilansichten) ausgeführt. *_ViewStart.cshtml* ist genauso wie [ViewImports.cshtml](xref:mvc/views/layout#viewimports) hierarchisch. Wenn eine Datei namens *_ViewStart.cshtml* im Ordner „Ansichten“ oder „Seiten“, der mit einem Controller verknüpft ist, definiert wird, wird sie nach derjenigen ausgeführt, die im Stamm des Ordners *Seiten* (oder *Ansichten*) definiert wurde (falls vorhanden).
 
 Ein Beispiel für die Datei *_ViewStart.cshtml*:
 
@@ -155,4 +161,4 @@ Ein Beispiel für die Datei *_ViewStart.cshtml*:
 
 Die oben stehende Datei gibt an, dass alle Ansichten das Layout *_Layout.cshtml* verwenden.
 
-*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder  */Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.
+*_ViewStart.cshtml* und *_ViewImports.cshtml* werden in der Regel **nicht** in den Ordner */Pages/Shared* (oder * /Views/Shared*) platziert. Die Versionen dieser Dateien auf Anwendungsebene sollten direkt in den Ordner */Pages* (oder */Views*) platziert werden.

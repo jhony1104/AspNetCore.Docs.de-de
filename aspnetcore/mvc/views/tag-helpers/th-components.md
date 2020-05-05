@@ -5,13 +5,19 @@ description: Informationen zu Taghilfsprogrammkomponenten und deren Verwendung i
 monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 5e2eb2d4322068c5864fbe49acaa6d0859bd319a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: df118cdc8346b99e4e5c60c9f0441c963543f4b4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652369"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767511"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Taghilfsprogrammkomponenten in ASP.NET Core
 
@@ -19,7 +25,7 @@ Von [Scott Addie](https://twitter.com/Scott_Addie) und [Fiyaz Bin Hasan](https:/
 
 Eine Taghilfsprogrammkomponente ist ein Taghilfsprogramm, mit dem Sie HTML-Elemente aus serverseitigem Code bedingt ändern oder hinzufügen können. Dieses Feature ist in ASP.NET Core 2.0 oder höher verfügbar.
 
-ASP.NET Core enthält zwei integrierte Taghilfsprogrammkomponenten: `head` und `body`. Sie befinden sich im Namespace <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> und können in MVC und Razor Pages verwendet werden. Taghilfsprogrammkomponenten benötigen keine Registrierung bei der App in *_ViewImports.cshtml*.
+ASP.NET Core enthält zwei integrierte Taghilfsprogrammkomponenten: `head` und `body`. Sie befinden sich im- <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> Namespace und können sowohl in MVC als auch Razor auf Seiten verwendet werden. Taghilfsprogrammkomponenten benötigen keine Registrierung bei der App in *_ViewImports.cshtml*.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -63,7 +69,7 @@ Der vorangehende Code bindet ein [Bootstrap-QuickInfo-Widget](https://getbootstr
 Eine Taghilfsprogrammkomponente muss der Sammlung „Taghilfsprogrammkomponenten“ der App hinzugefügt werden. Es gibt drei Möglichkeiten, der Sammlung Taghilfsprogrammkomponenten hinzuzufügen:
 
 * [Registrierung über Dienstcontainer](#registration-via-services-container)
-* [Registrierung über Razor-Datei](#registration-via-razor-file)
+* [Registrierung über Razor die Datei](#registration-via-razor-file)
 * [Registrierung über Seitenmodell oder Controller](#registration-via-page-model-or-controller)
 
 ### <a name="registration-via-services-container"></a>Registrierung über Dienstcontainer
@@ -72,9 +78,9 @@ Wenn die Klasse der Taghilfsprogrammkomponente nicht mit <xref:Microsoft.AspNetC
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Registrierung über Razor-Datei
+### <a name="registration-via-razor-file"></a>Registrierung über Razor die Datei
 
-Wenn die Taghilfsprogrammkomponente nicht mit Abhängigkeitsinjektion registriert wird, kann sie über eine Razor Pages-Seite oder eine MVC-Ansicht registriert werden. Diese Technik wird verwendet, um das injizierte Markup und die Reihenfolge der Komponentenausführung aus einer Razor-Datei zu steuern.
+Wenn die taghilfskomponente nicht bei di registriert ist, kann Sie auf einer Razor Seiten Seite oder in einer MVC-Ansicht registriert werden. Diese Technik wird zum Steuern des injizierten Markups und der Reihenfolge der Komponenten Razor Ausführung aus einer Datei verwendet.
 
 `ITagHelperComponentManager` dient zum Hinzufügen von Taghilfsprogrammkomponenten oder zum Entfernen aus der App. Im folgenden Code wird diese Technik mit `AddressTagHelperComponent` veranschaulicht:
 
@@ -82,7 +88,7 @@ Wenn die Taghilfsprogrammkomponente nicht mit Abhängigkeitsinjektion registrier
 
 Für den Code oben gilt:
 
-* Die `@inject`-Direktive stellt eine Instanz von `ITagHelperComponentManager` zur Verfügung. Die Instanz wird einer Variablen mit dem Namen `manager` für den Downstreamzugriff in der Razor-Datei zugewiesen.
+* Die `@inject`-Direktive stellt eine Instanz von `ITagHelperComponentManager` zur Verfügung. Die-Instanz wird einer Variablen mit dem `manager` Namen für Access Downstream in Razor der Datei zugewiesen.
 * Eine Instanz von `AddressTagHelperComponent` wird der Sammlung „Taghilfsprogrammkomponenten“ der App hinzugefügt.
 
 `AddressTagHelperComponent` wird geändert, um einen Konstruktor zu berücksichtigen, der die `markup`- und `order`-Parameter annimmt:
@@ -95,9 +101,9 @@ Der bereitgestellte `markup`-Parameter wird in `ProcessAsync` wie folgt verwende
 
 ### <a name="registration-via-page-model-or-controller"></a>Registrierung über Seitenmodell oder Controller
 
-Wenn die Taghilfsprogrammkomponente nicht mit Abhängigkeitsinjektion registriert wird, kann sie über ein Razor Pages-Seitenmodell oder einen MVC-Controller registriert werden. Diese Methode eignet sich zum Trennen von C#-Logik von Razor-Dateien.
+Wenn die taghilfskomponente nicht bei di registriert ist, kann Sie über ein Razor Seiten Modell oder einen MVC-Controller registriert werden. Dieses Verfahren ist nützlich, um c#-Logik Razor von Dateien zu trennen.
 
-Die Konstruktorinjektion wird verwendet, um auf eine Instanz von `ITagHelperComponentManager` zuzugreifen. Die Taghilfsprogrammkomponente wird der Sammlung „Taghilfsprogrammkomponenten“ der Instanz hinzugefügt. Das folgende Razor Pages-Seitenmodell veranschaulicht diese Technik mit `AddressTagHelperComponent`:
+Die Konstruktorinjektion wird verwendet, um auf eine Instanz von `ITagHelperComponentManager` zuzugreifen. Die Taghilfsprogrammkomponente wird der Sammlung „Taghilfsprogrammkomponenten“ der Instanz hinzugefügt. Das folgende Razor Seiten Modell veranschaulicht diese Vorgehensweise mit `AddressTagHelperComponent`:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
@@ -111,8 +117,8 @@ Für den Code oben gilt:
 So erstellen Sie eine benutzerdefinierte Taghilfsprogrammkomponente:
 
 * Erstellen Sie eine öffentliche Klasse, die von <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> ableitet ist.
-* Wenden Sie ein [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute)-Attribut auf die Klasse an. Geben Sie den Namen des HTML-Zielelements an.
-* *Optional*: wenden Sie ein [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) Attribut auf die Klasse an, um die Anzeige des Typs in IntelliSense zu unterdrücken.
+* Wenden Sie [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) ein Attribut auf die Klasse an. Geben Sie den Namen des HTML-Zielelements an.
+* *Optional*: wenden Sie [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) ein Attribut auf die Klasse an, um die Anzeige des Typs in IntelliSense zu unterdrücken.
 
 Der folgende Code erstellt eine benutzerdefinierte Taghilfsprogrammkomponente, das als Ziel das `<address>`-HTML-Element aufweist:
 
