@@ -4,19 +4,25 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie Anspruchs Überprüfungen zur Autorisierung in einer ASP.net Core-app hinzufügen.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: e289851aafcbc7e3b3f60ab9fbe4b182a78bdf8a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: de8ab915e6a8529c7401f89fad067ec33d5d0713
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652969"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774417"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Anspruchs basierte Autorisierung in ASP.net Core
 
 <a name="security-authorization-claims-based"></a>
 
-Wenn eine Identität erstellt wird, kann Ihr eine oder mehrere Ansprüche zugewiesen werden, die von einer vertrauenswürdigen Partei ausgegeben werden. Ein Anspruch ist ein Name-Wert-Paar, das den Betreff darstellt, nicht das, was der Betreff tun kann. Beispielsweise können Sie über die Lizenz eines Treibers verfügen, die von einer lokalen Führerschein Zertifizierungsstelle ausgestellt wurde. Die Lizenz Ihres Treibers hat das Geburtsdatum. In diesem Fall wäre der Anspruchs Name `DateOfBirth`. der Anspruchs Wert wäre z. b. das Geburtsdatum `8th June 1970`, und der Aussteller wäre die treibende Lizenz. Die Anspruchs basierte Autorisierung überprüft am einfachsten den Wert eines Anspruchs und ermöglicht den Zugriff auf eine Ressource basierend auf diesem Wert. Wenn Sie z. b. auf einen Nacht Club zugreifen möchten, könnte der Autorisierungs Prozess wie folgt lauten:
+Wenn eine Identität erstellt wird, kann Ihr eine oder mehrere Ansprüche zugewiesen werden, die von einer vertrauenswürdigen Partei ausgegeben werden. Ein Anspruch ist ein Name-Wert-Paar, das den Betreff darstellt, nicht das, was der Betreff tun kann. Beispielsweise können Sie über die Lizenz eines Treibers verfügen, die von einer lokalen Führerschein Zertifizierungsstelle ausgestellt wurde. Die Lizenz Ihres Treibers hat das Geburtsdatum. In diesem Fall würde der Anspruchs Name lauten `DateOfBirth`. der Anspruchs Wert wäre z `8th June 1970` . b. das Geburtsdatum, und der Aussteller wäre die treibende Lizenz. Die Anspruchs basierte Autorisierung überprüft am einfachsten den Wert eines Anspruchs und ermöglicht den Zugriff auf eine Ressource basierend auf diesem Wert. Wenn Sie z. b. auf einen Nacht Club zugreifen möchten, könnte der Autorisierungs Prozess wie folgt lauten:
 
 Der Door Security Officer wertet den Wert Ihres Geburts Geburts Anspruchs aus und gibt an, ob er dem Aussteller (der führerscheinbehörde) vertraut, bevor Sie Zugriff gewähren.
 
@@ -24,11 +30,11 @@ Eine Identität kann mehrere Ansprüche mit mehreren Werten enthalten und mehrer
 
 ## <a name="adding-claims-checks"></a>Hinzufügen von Anspruchs Prüfungen
 
-Anspruchs basierte Autorisierungs Überprüfungen sind deklarativ. der Entwickler bettet diese innerhalb Ihres Codes, für einen Controller oder eine Aktion innerhalb eines Controllers ein, gibt Ansprüche an, die der aktuelle Benutzer besitzen muss, und optional den Wert, den der Anspruch enthalten muss, um auf das angeforderte Ressource. Anspruchs Anforderungen sind Richtlinien basiert. der Entwickler muss eine Richtlinie erstellen und registrieren, die die Anspruchs Anforderungen ausdrückt.
+Anspruchs basierte Autorisierungs Überprüfungen sind deklarativ. der Entwickler bettet diese innerhalb Ihres Codes, für einen Controller oder eine Aktion innerhalb eines Controllers ein, gibt Ansprüche an, die der aktuelle Benutzer besitzen muss, und optional den Wert, den der Anspruch enthalten muss, um auf die angeforderte Ressource zuzugreifen. Anspruchs Anforderungen sind Richtlinien basiert. der Entwickler muss eine Richtlinie erstellen und registrieren, die die Anspruchs Anforderungen ausdrückt.
 
 Der einfachste Typ der Anspruchs Richtlinie sucht nach dem vorhanden sein eines Anspruchs und überprüft den Wert nicht.
 
-Zuerst müssen Sie die Richtlinie erstellen und registrieren. Dies erfolgt im Rahmen der Autorisierungs Dienst Konfiguration, die normalerweise an `ConfigureServices()` in Ihrer *Startup.cs* -Datei beteiligt ist.
+Zuerst müssen Sie die Richtlinie erstellen und registrieren. Dies erfolgt im Rahmen der Autorisierungs Dienst Konfiguration, die normalerweise in Ihrer `ConfigureServices()` *Startup.cs* -Datei teilnimmt.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -63,9 +69,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-In diesem Fall prüft die `EmployeeOnly`-Richtlinie, ob ein `EmployeeNumber` Anspruch auf die aktuelle Identität vorhanden ist.
+In diesem Fall prüft `EmployeeOnly` die Richtlinie, ob ein `EmployeeNumber` Anspruch auf die aktuelle Identität vorhanden ist.
 
-Anschließend wenden Sie die Richtlinie mithilfe der `Policy`-Eigenschaft für das `AuthorizeAttribute`-Attribut an, um den Richtlinien Namen anzugeben.
+Anschließend wenden Sie die Richtlinie mithilfe `Policy` der-Eigenschaft `AuthorizeAttribute` für das-Attribut an, um den Richtlinien Namen anzugeben.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -75,7 +81,7 @@ public IActionResult VacationBalance()
 }
 ```
 
-Das `AuthorizeAttribute`-Attribut kann auf einen gesamten Controller angewendet werden. in diesem Fall erhalten nur Identitäten, die mit der Richtlinie übereinstimmen, Zugriff auf jede Aktion auf dem Controller.
+Das `AuthorizeAttribute` -Attribut kann auf einen gesamten Controller angewendet werden. in diesem Fall erhalten nur Identitäten, die mit der Richtlinie übereinstimmen, Zugriff auf jede Aktion auf dem Controller.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -87,7 +93,7 @@ public class VacationController : Controller
 }
 ```
 
-Wenn Sie über einen Controller verfügen, der durch das `AuthorizeAttribute`-Attribut geschützt ist, aber den anonymen Zugriff auf bestimmte Aktionen erlauben soll, wenden Sie das `AllowAnonymousAttribute`-Attribut an.
+Wenn Sie über einen Controller verfügen, der durch das `AuthorizeAttribute` -Attribut geschützt ist, Sie jedoch den anonymen Zugriff auf bestimmte Aktionen zulassen `AllowAnonymousAttribute` möchten, wenden Sie das-Attribut an.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -163,6 +169,6 @@ public class SalaryController : Controller
 }
 ```
 
-Im obigen Beispiel kann jede Identität, die die `EmployeeOnly` Richtlinie erfüllt, auf die `Payslip` Aktion zugreifen, da diese Richtlinie auf dem Controller erzwungen wird. Um jedoch die `UpdateSalary` Aktion aufzurufen, muss die Identität *sowohl* die Richtlinie `EmployeeOnly` als auch die Richtlinie `HumanResources` erfüllen.
+Im obigen Beispiel kann jede Identität, die die `EmployeeOnly` Richtlinie erfüllt, `Payslip` auf die Aktion zugreifen, da diese Richtlinie auf dem Controller erzwungen wird. Um die `UpdateSalary` Aktion aufzurufen, muss die Identität jedoch *sowohl* die `EmployeeOnly` Richtlinie als auch `HumanResources` die Richtlinie erfüllen.
 
 Wenn Sie kompliziertere Richtlinien erstellen möchten, z. b. das Erstellen eines Geburts Geburts Anspruchs, das Berechnen eines Alters aus diesem und das überprüfen, ob das Alter 21 oder älter ist, müssen Sie [benutzerdefinierte Richtlinien Handler](xref:security/authorization/policies)schreiben.

@@ -4,19 +4,25 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie machineKey in ASP.net ersetzen, um die Verwendung eines neuen und sichereren Datenschutzsystems zu ermöglichen.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 2317cb50cfe63226baf336ebfc5d681d1cebe5c6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655081"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777461"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Ersetzen Sie ASP.net machineKey in ASP.net Core
 
 <a name="compatibility-replacing-machinekey"></a>
 
-Die Implementierung des `<machineKey>`-Elements in ASP.net [ist ersetzbar](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Dadurch können die meisten Aufrufe von ASP.net-kryptografieroutinen über einen Mechanismus zum Schutz von Daten, einschließlich des neuen Datenschutzsystems, weitergeleitet werden.
+Die Implementierung des- `<machineKey>` Elements in ASP.net kann [ersetzt werden](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Dadurch können die meisten Aufrufe von ASP.net-kryptografieroutinen über einen Mechanismus zum Schutz von Daten, einschließlich des neuen Datenschutzsystems, weitergeleitet werden.
 
 ## <a name="package-installation"></a>Paketinstallation
 
@@ -32,7 +38,7 @@ Wenn Sie das Paket installieren, fügt es eine Zeile in die Datei " *Web. config
 ```
 
 >[!TIP]
-> Sie können erkennen, ob das neue Datenschutzsystem aktiv ist, indem Sie Felder wie `__VIEWSTATE`untersuchen, die mit "CfDJ8" beginnen sollen, wie im folgenden Beispiel gezeigt. "CfDJ8" ist die Base64-Darstellung des Magic "09 F0, F0"-Headers, der eine vom Datenschutzsystem geschützte Nutzlast identifiziert.
+> Sie können erkennen, ob das neue Datenschutzsystem aktiv ist, indem Sie Felder `__VIEWSTATE`wie überprüfen, die mit "CfDJ8" beginnen sollen, wie im folgenden Beispiel gezeigt. "CfDJ8" ist die Base64-Darstellung des Magic "09 F0, F0"-Headers, der eine vom Datenschutzsystem geschützte Nutzlast identifiziert.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -67,9 +73,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Sie können auch `<machineKey applicationName="my-app" ... />` anstelle eines expliziten Aufrufens von "stapplicationname" verwenden. Dies ist eine praktische Methode, um zu verhindern, dass der Entwickler einen von dataschutzstartup abgeleiteten Typ erstellt, wenn der Anwendungsname von allen Elementen, die konfiguriert werden sollen, festgelegt wurde.
+> Sie können auch anstelle `<machineKey applicationName="my-app" ... />` eines expliziten Aufrufens von "stapplicationname" verwenden. Dies ist eine praktische Methode, um zu verhindern, dass der Entwickler einen von dataschutzstartup abgeleiteten Typ erstellt, wenn der Anwendungsname von allen Elementen, die konfiguriert werden sollen, festgelegt wurde.
 
-Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu "Web. config", und suchen Sie nach dem `<appSettings>` Element, das von der Paketinstallation der Konfigurationsdatei hinzugefügt wurde. Es sieht wie das folgende Markup aus:
+Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu Web. config, `<appSettings>` und suchen Sie nach dem Element, das von der Paketinstallation der Konfigurationsdatei hinzugefügt wurde. Es sieht wie das folgende Markup aus:
 
 ```xml
 <appSettings>

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie mehr über die Implementierungsdetails der APIs für die ASP.net Core Datenschutz-Schlüsselverwaltung.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: c571222d734fa69183563aefa5cc6ce5a10e7612
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653989"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776902"
 ---
 # <a name="key-management-in-aspnet-core"></a>Schlüsselverwaltung in ASP.net Core
 
@@ -59,7 +65,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-Ein Administrator kann auch die standardmäßige systemweite ändern, obwohl ein expliziter `SetDefaultKeyLifetime`-Aufrufvorgang jede systemweite Richtlinie außer Kraft setzt. Die Standard Gültigkeitsdauer des Schlüssels darf nicht kürzer als 7 Tage sein.
+Ein Administrator kann auch die standardmäßige systemweite ändern, obwohl ein expliziter `SetDefaultKeyLifetime` -Vorgang eine beliebige systemweite Richtlinie außer Kraft setzt. Die Standard Gültigkeitsdauer des Schlüssels darf nicht kürzer als 7 Tage sein.
 
 ## <a name="automatic-key-ring-refresh"></a>Automatische Aktualisierung des Schlüsselrings
 
@@ -68,11 +74,11 @@ Beim Initialisieren des Datenschutzsystems liest es den Schlüsselring aus dem z
 >[!WARNING]
 > Entwickler sollten die Schlüsselverwaltungs-APIs in sehr seltenen Fällen (Falls immer) direkt verwenden müssen. Das Datenschutzsystem führt die automatische Schlüsselverwaltung wie oben beschrieben aus.
 
-Das Datenschutzsystem macht eine Schnittstelle `IKeyManager` verfügbar, die verwendet werden kann, um den Schlüsselring zu überprüfen und zu ändern. Das di-System, das die Instanz von `IDataProtectionProvider` bereitgestellt hat, kann auch eine Instanz von `IKeyManager` für Ihren Verbrauch bereitstellen. Alternativ können Sie die `IKeyManager` direkt vom `IServiceProvider` abrufen, wie im folgenden Beispiel gezeigt.
+Das Datenschutzsystem macht eine Schnitt `IKeyManager` Stelle verfügbar, die verwendet werden kann, um den Schlüsselring zu überprüfen und zu ändern. Das di-System, das die Instanz `IDataProtectionProvider` von bereitstellt, kann auch `IKeyManager` eine Instanz von für den Verbrauch bereitstellen. Alternativ können Sie den `IKeyManager` direkt von der `IServiceProvider` abrufen, wie im folgenden Beispiel gezeigt.
 
-Jeder Vorgang, bei dem der Schlüsselbund geändert wird (durch explizites Erstellen eines neuen Schlüssels oder Durchführen einer Sperre) wird der in-Memory-Cache ungültig. Beim nächsten Aufrufen von `Protect` oder `Unprotect` wird der Schlüsselbund durch das Datenschutzsystem erneut registriert, und der Cache wird neu erstellt.
+Jeder Vorgang, bei dem der Schlüsselbund geändert wird (durch explizites Erstellen eines neuen Schlüssels oder Durchführen einer Sperre) wird der in-Memory-Cache ungültig. Beim nächsten Aufrufen von `Protect` oder `Unprotect` wird das Datenschutzsystem zum erneuten Einlesen des Schlüsselrings und zum erneuten Erstellen des Caches.
 
-Im folgenden Beispiel wird veranschaulicht, wie Sie die `IKeyManager`-Schnittstelle verwenden, um den Schlüsselring zu überprüfen und zu bearbeiten, einschließlich der Aufhebung vorhandener Schlüssel und der manuellen Erstellung eines neuen
+Das folgende Beispiel veranschaulicht die Verwendung `IKeyManager` der-Schnittstelle, um den Schlüsselring zu überprüfen und zu bearbeiten, einschließlich der Aufhebung vorhandener Schlüssel und der manuellen Erstellung eines neuen Schlüssels.
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Weitere Informationen zur Implementierung von ASP.net Core Datenschutz-Kontext Headern.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 381cc137d1de87e87f36c3b32a6a551a318ed3cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654577"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776954"
 ---
 # <a name="context-headers-in-aspnet-core"></a>Kontext Header in ASP.net Core
 
@@ -20,9 +26,9 @@ ms.locfileid: "78654577"
 
 Im Datenschutzsystem bedeutet ein "Schlüssel" ein Objekt, das authentifizierte Verschlüsselungsdienste bereitstellen kann. Jeder Schlüssel wird durch eine eindeutige ID (eine GUID) identifiziert, und er enthält algorithmische Informationen und Entropie Material. Es ist beabsichtigt, dass jeder Schlüssel eine eindeutige Entropie trägt, aber das System kann dies nicht erzwingen. Außerdem müssen Entwickler, die den Schlüsselbund manuell ändern können, die algorithmischen Informationen eines vorhandenen Schlüssels im Schlüsselbund ändern. Um unsere Sicherheitsanforderungen in diesen Fällen zu erfüllen, verfügt das Datenschutzsystem über ein Konzept der [kryptografischen Agilität](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/), das eine sichere Verwendung eines einzelnen Entropie Werts in mehreren Kryptografiealgorithmen ermöglicht.
 
-Bei den meisten Systemen, die kryptografische Agilität unterstützen, werden in der Nutzlast einige identifizierende Informationen über den Algorithmus eingeschlossen. Die OID des Algorithmus ist im Allgemeinen ein guter Kandidat dafür. Ein Problem ist jedoch, dass es mehrere Möglichkeiten gibt, denselben Algorithmus anzugeben: "AES" (CNG) und die verwalteten AES-, AesManaged-, AesCryptoServiceProvider-, aescng-und RijndaelManaged-Klassen (bestimmte Parameter) sind alle identisch. Das ist, und wir müssten eine Zuordnung all dieser Dateien zur richtigen OID erhalten. Wenn ein Entwickler einen benutzerdefinierten Algorithmus (oder sogar eine andere Implementierung von AES!) bereitstellen möchte, muss er uns seine OID mitteilen. Durch diesen zusätzlichen Registrierungs Schritt ist die Systemkonfiguration besonders mühsam.
+Bei den meisten Systemen, die kryptografische Agilität unterstützen, werden in der Nutzlast einige identifizierende Informationen über den Algorithmus eingeschlossen. Die OID des Algorithmus ist im Allgemeinen ein guter Kandidat dafür. Allerdings besteht ein Problem darin, dass es mehrere Möglichkeiten gibt, denselben Algorithmus anzugeben: "die Klassen AES (CNG) und Managed AES, AesManaged, AesCryptoServiceProvider, aescng und RijndaelManaged (mit bestimmten Parametern) sind tatsächlich identisch, und wir müssten eine Zuordnung all dieser Elemente zur richtigen OID beibehalten. Wenn ein Entwickler einen benutzerdefinierten Algorithmus (oder sogar eine andere Implementierung von AES!) bereitstellen möchte, muss er uns seine OID mitteilen. Durch diesen zusätzlichen Registrierungs Schritt ist die Systemkonfiguration besonders mühsam.
 
-Wir haben uns entschieden, das Problem aus der falschen Richtung zu beheben. Eine OID gibt Aufschluss darüber, was der Algorithmus ist, aber das ist nicht wirklich wichtig. Wenn wir einen einzelnen Entropie Wert sicher in zwei verschiedenen Algorithmen verwenden müssen, ist es nicht erforderlich, dass wir wissen, was die Algorithmen tatsächlich sind. Wir kümmern uns darum, wie Sie sich Verhalten. Ein beliebiger angemessener symmetrischer Blockchiffre Algorithmus ist auch eine starke Pseudo Zufalls-permutations (PRP): Korrigieren der Eingaben (Schlüssel, Verkettungs Modus, IV, Klartext), und die Chiffre Textausgabe wird mit überwältigender Wahrscheinlichkeit von allen anderen symmetrischen Blockchiffren abweichen. Algorithmus mit denselben Eingaben. Ebenso ist jede beliebige Schlüssel gebundene Hash Funktion auch eine starke Pseudo Zufallsfunktion (PRF), und bei einem festen Eingabe Satz unterscheidet sich Ihre Ausgabe überwiegend von jeder anderen Schlüssel gebundenen Hash Funktion.
+Wir haben uns entschieden, das Problem aus der falschen Richtung zu beheben. Eine OID gibt Aufschluss darüber, was der Algorithmus ist, aber das ist nicht wirklich wichtig. Wenn wir einen einzelnen Entropie Wert sicher in zwei verschiedenen Algorithmen verwenden müssen, ist es nicht erforderlich, dass wir wissen, was die Algorithmen tatsächlich sind. Wir kümmern uns darum, wie Sie sich Verhalten. Jeder angemessene symmetrische Blockchiffre Algorithmus ist auch eine starke Pseudo Zufalls-permutations (PRP): Korrigieren der Eingaben (Schlüssel, Verkettungs Modus, IV, Klartext), und die Chiffre Textausgabe wird mit überwältigender Wahrscheinlichkeit von allen anderen symmetrischen Blockverschlüsselungsalgorithmen unterschieden, wenn dieselben Eingaben verwendet werden. Ebenso ist jede beliebige Schlüssel gebundene Hash Funktion auch eine starke Pseudo Zufallsfunktion (PRF), und bei einem festen Eingabe Satz unterscheidet sich Ihre Ausgabe überwiegend von jeder anderen Schlüssel gebundenen Hash Funktion.
 
 Wir verwenden dieses Konzept mit starken prps und prfs, um einen Kontext Header zu erstellen. Diese Kontext Kopfzeile fungiert im Wesentlichen als stabiler Fingerabdruck für die Algorithmen, die für einen bestimmten Vorgang verwendet werden, und bietet die kryptografische Agilität, die vom Datenschutzsystem benötigt wird. Dieser Header ist reproduzierbar und wird später als Teil der [Unterschlüssel Ableitung](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)verwendet. Es gibt zwei verschiedene Möglichkeiten, den Kontext Header abhängig von den Betriebsmodi der zugrunde liegenden Algorithmen zu erstellen.
 
@@ -50,7 +56,7 @@ Im Idealfall könnten alle Vektoren für K_E und K_H übergeben werden. Wir möc
 
 Stattdessen verwenden wir die NIST SP800-108 KDF im Counter-Modus (siehe [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), sec. 5,1) mit einem Schlüssel, einer Bezeichnung und einem Kontext der Länge 0 (null) und HMACSHA512 als zugrunde liegende PRF. Wir leiten | K_E | + | K_H | Byte der Ausgabe, zerlegen Sie das Ergebnis in K_E, und K_H Sie sich selbst. Dies wird mathematisch wie folgt dargestellt.
 
-( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")
+(K_E | | K_H) = SP800_108_CTR (PRF = HMACSHA512, Key = "", Label = "", Context = "")
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>Beispiel: AES-192-CBC + HMACSHA256
 
@@ -67,11 +73,11 @@ B7 92 3D BF 59 90 00 A9
 
 Als Nächstes berechnen Sie Enc_CBC (K_E, IV, "") für "AES-192-CBC", wobei "IV = 0 *" angegeben ist, und K_E wie oben beschrieben.
 
-result := F474B1872B3B53E4721DE19C0841DB6F
+Ergebnis: = F474B1872B3B53E4721DE19C0841DB6F
 
 Als Nächstes berechnen Sie den Mac (K_H, "") für HMACSHA256, der K_H wie oben angegeben wurde.
 
-result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+Ergebnis: = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
 
 Dies erzeugt den vollständigen Kontext Header unten:
 
@@ -118,7 +124,7 @@ Ergebnis: = ABB100F81E53E10E
 
 Als Nächstes berechnen Sie den Mac (K_H, "") für HMACSHA1, der K_H wie oben angegeben wurde.
 
-result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+Ergebnis: = 76eb189b35cf03461ddf877cd9f4b1b4d63a7555
 
 Dies erzeugt den vollständigen Kontext Header, bei dem es sich um einen Fingerabdruck des authentifizierten Verschlüsselungsalgorithmus-Paars handelt (3DES-192-CBC-Verschlüsselung + HMACSHA1-Validierung), wie unten dargestellt:
 
@@ -168,11 +174,11 @@ K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", Label = "", Context = "")
 
 Lassen Sie zunächst K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", Label = "", Context = ""), wobei | K_E | = 256 Bits.
 
-K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+K_E: = 22bc6f1b171c08c4ae2f27444af8fc8b3087a90006caea91fdcfb47c1b8733b8
 
 Berechnen Sie als nächstes das authentifizierungstag Enc_GCM (K_E, Nonce, "") für "AES-256-GCM", wenn Sie "Nonce = 096" angegeben haben, und K_E wie oben beschrieben.
 
-result := E7DCCE66DF855A323A6BB7BD7A59BE45
+Ergebnis: = E7DCCE66DF855A323A6BB7BD7A59BE45
 
 Dies erzeugt den vollständigen Kontext Header unten:
 

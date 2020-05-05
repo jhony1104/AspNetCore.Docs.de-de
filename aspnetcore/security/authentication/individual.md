@@ -4,13 +4,19 @@ author: rick-anderson
 description: Entdecken Sie Artikel, die auf ASP.net Core Projekte basieren, die mit einzelnen Benutzerkonten erstellt wurden.
 ms.author: riande
 ms.date: 12/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 7ef0d5eabded61d04fb9fe7be384a663ad7ea5f4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 26f53b6452e307bbd0816c1a3604f38b04c6af15
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651955"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768649"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artikel, die auf ASP.net Core Projekten basieren, die mit einzelnen Benutzerkonten erstellt wurden
 
@@ -42,7 +48,7 @@ Sehen Sie sich [dieses GitHub-Problem](https://github.com/dotnet/AspNetCore/issu
 
 ## <a name="no-authentication"></a>Keine Authentifizierung
 
-Die Authentifizierung wird im .net Core-CLI mit der `-au`-Option angegeben. In Visual Studio ist das Dialogfeld **Authentifizierung ändern** für neue Webanwendungen verfügbar. Der Standardwert für neue Web-Apps in Visual Studio ist **keine Authentifizierung**.
+Die Authentifizierung wird im .net Core-CLI mit der `-au` Option angegeben. In Visual Studio ist das Dialogfeld **Authentifizierung ändern** für neue Webanwendungen verfügbar. Der Standardwert für neue Web-Apps in Visual Studio ist **keine Authentifizierung**.
 
 Ohne Authentifizierung erstellte Projekte:
 
@@ -53,7 +59,7 @@ Ohne Authentifizierung erstellte Projekte:
 
 ## <a name="windows-authentication"></a>Windows-Authentifizierung
 
-Die Windows-Authentifizierung wird für neue Web-Apps im .net Core-CLI mit der `-au Windows`-Option angegeben. Im Dialogfeld **Authentifizierung ändern** werden in Visual Studio die Optionen für die **Windows-Authentifizierung** angezeigt.
+Die Windows-Authentifizierung wird für neue Web-Apps im .net Core-CLI mit `-au Windows` der Option angegeben. Im Dialogfeld **Authentifizierung ändern** werden in Visual Studio die Optionen für die **Windows-Authentifizierung** angezeigt.
 
 Wenn die Windows-Authentifizierung ausgewählt ist, wird die APP für die Verwendung des [IIS-Moduls der Windows-Authentifizierung](xref:host-and-deploy/iis/modules)konfiguriert. Die Windows-Authentifizierung ist für Intranetwebsites vorgesehen.
 
@@ -66,8 +72,8 @@ In der folgenden Tabelle sind die für neue Web-Apps verfügbaren Authentifizier
 | Keine            |  Keine Authentifizierung | | 
 | Einzelkonto      |  Individuelle Authentifizierung | <xref:security/authentication/identity>
 | IndividualB2C   |  In der Cloud gehostete individuelle Authentifizierung mit Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
-| Singleorg       |  Organisations Authentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| Multiorg        |  Organisations Authentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Singleorg       |  Organisationsauthentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Multiorg        |  Organisationsauthentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Windows-Authentifizierung | [Windows-Authentifizierung](xref:security/authentication/windowsauth)
 
 ## <a name="visual-studio-new-webapp-authentication-options"></a>Visual Studio-Optionen für die neue webapp-Authentifizierung
@@ -79,8 +85,8 @@ In der folgenden Tabelle sind die Authentifizierungs Optionen aufgeführt, die b
 | Keine            |  Keine Authentifizierung | | 
 | Einzelne Benutzerkonten/Benutzerkonten in-APP speichern |  Individuelle Authentifizierung | <xref:security/authentication/identity> |
 | Einzelne Benutzerkonten/Verbindung mit einem vorhandenen Benutzerspeicher in der Cloud |  In der Cloud gehostete individuelle Authentifizierung mit Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
-| Geschäfts-, Schul-oder Uni-Cloud/Single org  |  Organisations Authentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| Geschäfts-, Schul-oder Uni-Cloud/Multiple org |  Organisations Authentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Geschäfts-, Schul-oder Uni-Cloud/Single org  |  Organisationsauthentifizierung für einen einzelnen Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Geschäfts-, Schul-oder Uni-Cloud/Multiple org |  Organisationsauthentifizierung für mehrere Mandanten | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Windows-Authentifizierung | [Windows-Authentifizierung](xref:security/authentication/windowsauth)
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen

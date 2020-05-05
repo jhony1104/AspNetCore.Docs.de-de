@@ -1,16 +1,22 @@
 ---
-title: Einführung in die Identität auf ASP.net Core
+title: Einführung in Identity ASP.net Core
 author: rick-anderson
-description: Verwenden Sie die Identität mit einer ASP.net Core-app. Erfahren Sie, wie Sie Kenn Wort Anforderungen ("Requirements Digit", "Requirements dlength", "Requirements duniquechars" usw.) festlegen.
+description: Verwenden Identity Sie dies mit einer ASP.net Core-app. Erfahren Sie, wie Sie Kenn Wort Anforderungen ("Requirements Digit", "Requirements dlength", "Requirements duniquechars" usw.) festlegen.
 ms.author: riande
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d596a8357c5c812b94950809eedf35718328747c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205942"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777006"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Einführung in die Identität auf ASP.net Core
 
@@ -67,7 +73,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Das generierte Projekt stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Die Razor-Klassenbibliothek für die Identität macht Endpunkte mit dem `Identity` Bereich verfügbar. Zum Beispiel:
+Das generierte Projekt stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Die Razor-Klassenbibliothek für die Identität macht Endpunkte mit dem `Identity` Bereich verfügbar. Beispiel:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -287,7 +293,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Das generierte Projekt stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Die Razor-Klassenbibliothek für die Identität macht Endpunkte mit dem `Identity` Bereich verfügbar. Zum Beispiel:
+Das generierte Projekt stellt [ASP.net Core Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class)bereit. Die Razor-Klassenbibliothek für die Identität macht Endpunkte mit dem `Identity` Bereich verfügbar. Beispiel:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -391,30 +397,30 @@ Post wird in der Datei *pages/Shared/_LoginPartial. cshtml*angegeben:
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-identity"></a>Test Identität
+## <a name="test-identity"></a>TestIdentity
 
-Die Standardweb Projektvorlagen ermöglichen den anonymen Zugriff auf die Startseiten. Fügen Sie zum Testen der [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) Identität der Seite Datenschutz hinzu.
+Die Standardweb Projektvorlagen ermöglichen den anonymen Zugriff auf die Startseiten. Fügen Sie Identityzum Testen [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) der Seite Datenschutz hinzu.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
 Wenn Sie angemeldet sind, melden Sie sich ab. Führen Sie die APP aus, und wählen Sie den **Datenschutz** Link. Sie werden zur Anmeldeseite umgeleitet.
 
-### <a name="explore-identity"></a>Identität erkunden
+### <a name="explore-identity"></a>EntdeckenIdentity
 
-So untersuchen Sie die Identität ausführlicher:
+Weitere Informationen Identity finden Sie unter:
 
 * [Benutzeroberflächen Quelle für vollständige Identität erstellen](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Überprüfen Sie die Quelle jeder Seite, und schrittweise durch den Debugger.
 
-## <a name="identity-components"></a>Identitäts Komponenten
+## <a name="identity-components"></a>IdentityKomponenten
 
-Alle Identitäts abhängigen nuget-Pakete sind im [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)enthalten.
+Alle Identity abhängigen nuget-Pakete sind im [Metapaket Microsoft. aspnetcore. app](xref:fundamentals/metapackage-app)enthalten.
 
-Das primäre Paket für Identity ist [Microsoft. aspnetcore. Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Dieses Paket enthält den Kernsatz von Schnittstellen für ASP.net Core Identität und ist in enthalten `Microsoft.AspNetCore.Identity.EntityFrameworkCore`.
+Das primäre Paket für Identity ist [Microsoft. aspnetcore.Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/) Dieses Paket enthält den Kernsatz von Schnittstellen für IdentityASP.net Core und ist in enthalten `Microsoft.AspNetCore.Identity.EntityFrameworkCore`.
 
-## <a name="migrating-to-aspnet-core-identity"></a>Migrieren zu ASP.net Core Identität
+## <a name="migrating-to-aspnet-core-identity"></a>Migrieren zu ASP.net CoreIdentity
 
-Weitere Informationen und Anleitungen zum Migrieren Ihres vorhandenen Identitäts Speicher finden Sie unter [Migrieren von Authentifizierung und Identität](xref:migration/identity).
+Weitere Informationen und Anleitungen zum Migrieren Ihres vorhandenen Identity Stores finden Sie unter [Migrieren Identityder Authentifizierung und ](xref:migration/identity).
 
 ## <a name="setting-password-strength"></a>Festlegen der Kenn Wort Stärke
 
@@ -422,8 +428,8 @@ Ein Beispiel zum Festlegen der Mindestanforderungen für das Kennwort finden Sie
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Weitere Informationen zum Konfigurieren der Identität mithilfe von SQLite finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/5131) .
-* [Konfigurieren von Identity](xref:security/authentication/identity-configuration)
+* Weitere Informationen zum Konfigurieren Identity von mithilfe von SQLite finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/5131) .
+* [KonfigurierenIdentity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

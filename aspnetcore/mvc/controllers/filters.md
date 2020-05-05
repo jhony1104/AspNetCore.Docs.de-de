@@ -5,13 +5,19 @@ description: Erfahren Sie, wie Filter funktionieren und wie Sie sie in ASP.NET C
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653341"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776785"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -47,13 +53,13 @@ Jeder Filtertyp wird in einer anderen Phase der Filterpipeline ausgeführt:
 
 * [Autorisierungsfilter](#authorization-filters) werden zuerst ausgeführt und dienen dazu, festzustellen, ob der Benutzer für die Anforderung berechtigt ist. Autorisierungsfilter schließen die Pipeline kurz, wenn die Anforderung nicht autorisiert ist.
 
-* [Ressourcenfilter](#resource-filters):
+* [Ressourcen Filter](#resource-filters):
 
   * Werden nach der Autorisierung ausgeführt.  
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> führt Code vor dem Rest der Filterpipeline aus. Beispielsweise führt `OnResourceExecuting` Code vor der Modellbindung aus.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> führt Code aus, nachdem der Rest der Pipeline abgeschlossen wurde.
 
-* [Für Aktionsfilter gilt Folgendes](#action-filters):
+* [Aktionsfilter](#action-filters):
 
   * Sie führen Code unmittelbar vor und nach dem Aufruf einer Aktionsmethode aus.
   * Sie können die an eine Aktion übergebenen Argumente ändern.
@@ -76,7 +82,7 @@ Synchrone Filter führen Code vor und nach der jeweiligen Pipelinephase aus. <xr
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-Asynchrone Filter definieren eine `On-Stage-ExecutionAsync`-Methode. Beispiel: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
+Asynchrone Filter definieren eine `On-Stage-ExecutionAsync`-Methode. Zum Beispiel <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
@@ -104,7 +110,7 @@ Wie im obigen Beispiel gezeigt, können Filter mithilfe von Attributen Argumente
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-Verwenden Sie ein Tool wie die [Browser-Entwicklertools](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools), um die Header zu untersuchen. Unter **Antwortheader** wird `author: Rick Anderson` angezeigt.
+Verwenden Sie ein Tool wie die [Browser-Entwicklertools](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools), um die Header zu untersuchen. Unter **Antwortheader** `author: Rick Anderson` wird angezeigt.
 
 Mit dem folgenden Code wird ein `ActionFilterAttribute`-Element implementiert, das diese Aktionen ausführt:
 
@@ -117,7 +123,7 @@ Die Konfigurationsoptionen werden vom [Konfigurationssystem](xref:fundamentals/c
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-Gehen Sie im `StartUp.ConfigureServices` folgendermaßen vor:
+In `StartUp.ConfigureServices`:
 
 * Die `PositionOptions`-Klasse wird dem Dienstcontainer mit dem Konfigurationsbereich `"Position"` hinzugefügt.
 * `MyActionFilterAttribute` wird dem Dienstcontainer hinzugefügt.
@@ -132,7 +138,7 @@ Der folgende Code wendet das `MyActionFilterAttribute` auf die Methode `Index2` 
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-Unter **Antwortheader** werden `author: Rick Anderson` und `Editor: Joe Smith` angezeigt, wenn der `Sample/Index2`-Endpunkt aufgerufen wird.
+Unter den **Antwort Headern** `author: Rick Anderson`wird `Editor: Joe Smith` und angezeigt, wenn `Sample/Index2` der Endpunkt aufgerufen wird.
 
 Der folgende Code wendet das `MyActionFilterAttribute` und das `AddHeaderAttribute` auf die Razor Page an:
 
@@ -197,7 +203,7 @@ Jeder Controller, der von der Basisklasse <xref:Microsoft.AspNetCore.Mvc.Control
 
 Im Downloadbeispiel wird `MySampleActionFilter` global beim Start angewendet.
 
-`TestController`:
+Die `TestController`:
 
 * Wendet das `SampleActionFilterAttribute` (`[SampleActionFilter]`) auf die Aktion `FilterTest2` an.
 * Überschreibt `OnActionExecuting` und `OnActionExecuted`:
@@ -267,7 +273,7 @@ Die Filterpipeline kann kurzgeschlossen werden, indem die Eigenschaft <xref:Micr
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Im folgenden Code verwenden sowohl der Filter `ShortCircuitingResourceFilter` und der Filter `AddHeader` die Aktionsmethode `SomeResource` als Ziel. `ShortCircuitingResourceFilter`:
+Im folgenden Code verwenden sowohl der Filter `ShortCircuitingResourceFilter` und der Filter `AddHeader` die Aktionsmethode `SomeResource` als Ziel. Die `ShortCircuitingResourceFilter`:
 
 * Der Filter wird zuerst ausgeführt, da es sich um einen Ressourcenfilter handelt und `AddHeader` ein Aktionsfilter ist.
 * Der Filter unterbricht alle verbleibenden Pipelineschritte.
@@ -276,7 +282,7 @@ Der `AddHeader`-Filter wird daher nie für die `SomeResource`-Aktion ausgeführt
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-## <a name="dependency-injection"></a>Abhängigkeitsinjektion
+## <a name="dependency-injection"></a>Dependency Injection
 
 Filter können nach Typ oder Instanz hinzugefügt werden. Wenn eine Instanz hinzugefügt wird, wird diese Instanz für jede Anforderung verwendet. Wenn ein Typ hinzugefügt wird, ist der Filter typaktiviert. Ein typaktivierter Filter bedeutet Folgendes:
 
@@ -394,7 +400,7 @@ Beispiele für Ressourcenfilter:
 
 ## <a name="action-filters"></a>Aktionsfilter
 
-Aktionsfilter gelten **nicht** für Razor Pages. Razor Pages unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>. Weitere Informationen finden Sie unter [Filtermethoden für Razor-Seiten](xref:razor-pages/filter).
+Aktionsfilter gelten **nicht** für Razor Pages. Razor Pages unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>. Weitere Informationen finden Sie unter [Filter methods for Razor Pages (Filtermethoden für Razor-Seiten)](xref:razor-pages/filter).
 
 Für Aktionsfilter gilt:
 
@@ -497,7 +503,7 @@ Der folgende Code zeigt einen Ergebnisfilter, der einen HTTP-Header hinzufügt:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, beinhaltet die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult>. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Erfahren Sie mehr zu [Aktionsergebnissen](xref:mvc/controllers/actions).
+Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, beinhaltet die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult>. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Erfahren Sie mehr über [Aktions Ergebnisse](xref:mvc/controllers/actions).
 
 Ergebnisfilter werden nur ausgeführt, wenn eine Aktion oder ein Aktionsfilter ein Aktionsergebnis liefert. Ergebnisfilter werden in folgenden Fällen nicht ausgeführt:
 
@@ -526,7 +532,7 @@ Das Framework stellt ein abstraktes `ResultFilterAttribute` bereit, das als Unte
 Die Schnittstellen <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> deklarieren eine <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>-Implementierung, die für alle Aktionsergebnisse ausgeführt wird. Dies schließt Aktionsergebnisse ein, die von folgenden Filtern generiert werden:
 
 * Autorisierungs- und Ressourcenfilter, die einen Kurzschluss bewirken
-* Ausnahmefilter.
+* Ausnahmefilter
 
 Beispielsweise wird der folgende Filter immer ausgeführt und legt ein Aktionsergebnis (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) mit dem Statuscode *422 – Einheit kann nicht bearbeitet werden* fest, wenn bei der Inhaltsaushandlung ein Fehler auftritt:
 
@@ -551,9 +557,9 @@ Testen Sie den vorangehenden Code durch Ausführen des [Downloadbeispiels](https
 
 Die F12-Entwicklungstools zeigen folgende Antwortheader an, die vom Beispielcode hinzugefügt wurden:
 
-* **author:** `Rick Anderson`
+* **Autor:**`Rick Anderson`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **intern:**`My header`
 
 Der oben stehende Code erstellt den Antwortheader „**internal:** `My header`“.
 
@@ -629,7 +635,7 @@ Jeder Filtertyp wird in einer anderen Phase der Filterpipeline ausgeführt:
 
 * [Autorisierungsfilter](#authorization-filters) werden zuerst ausgeführt und dienen dazu, festzustellen, ob der Benutzer für die Anforderung berechtigt ist. Autorisierungsfilter schließen die Pipeline kurz, wenn die Anforderung nicht autorisiert ist.
 
-* [Ressourcenfilter](#resource-filters):
+* [Ressourcen Filter](#resource-filters):
 
   * Werden nach der Autorisierung ausgeführt.  
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> kann Code vor dem Rest der Filterpipeline ausführen. Beispielsweise kann `OnResourceExecuting` Code vor der Modellbindung ausführen.
@@ -743,7 +749,7 @@ Jeder Controller, der von der Basisklasse <xref:Microsoft.AspNetCore.Mvc.Control
 
 Im Downloadbeispiel wird `MySampleActionFilter` global beim Start angewendet.
 
-`TestController`:
+Die `TestController`:
 
 * Wendet das `SampleActionFilterAttribute` (`[SampleActionFilter]`) auf die Aktion `FilterTest2` an.
 * Überschreibt `OnActionExecuting` und `OnActionExecuted`:
@@ -777,7 +783,7 @@ Die Eigenschaft `Order` kann mit einem Konstruktorparameter festgelegt werden:
 
 Sehen Sie sich die drei Aktionsfilter an, die im vorherigen Beispiel gezeigt werden. Wenn die `Order`-Eigenschaft des Controllers und der globalen Filter auf 1 bzw. 2 festgelegt ist, wird die Reihenfolge der Ausführung umgekehrt.
 
-| Sequenz | Filterbereich | `Order`-Eigenschaft | Filtermethode |
+| Sequenz | Filterbereich | `Order` -Eigenschaft | Filtermethode |
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Methode | 0 | `OnActionExecuting` |
 | 2 | Controller | 1  | `OnActionExecuting` |
@@ -796,7 +802,7 @@ Die Filterpipeline kann kurzgeschlossen werden, indem die Eigenschaft <xref:Micr
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Im folgenden Code verwenden sowohl der Filter `ShortCircuitingResourceFilter` und der Filter `AddHeader` die Aktionsmethode `SomeResource` als Ziel. `ShortCircuitingResourceFilter`:
+Im folgenden Code verwenden sowohl der Filter `ShortCircuitingResourceFilter` und der Filter `AddHeader` die Aktionsmethode `SomeResource` als Ziel. Die `ShortCircuitingResourceFilter`:
 
 * Der Filter wird zuerst ausgeführt, da es sich um einen Ressourcenfilter handelt und `AddHeader` ein Aktionsfilter ist.
 * Der Filter unterbricht alle verbleibenden Pipelineschritte.
@@ -805,7 +811,7 @@ Der `AddHeader`-Filter wird daher nie für die `SomeResource`-Aktion ausgeführt
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
-## <a name="dependency-injection"></a>Abhängigkeitsinjektion
+## <a name="dependency-injection"></a>Dependency Injection
 
 Filter können nach Typ oder Instanz hinzugefügt werden. Wenn eine Instanz hinzugefügt wird, wird diese Instanz für jede Anforderung verwendet. Wenn ein Typ hinzugefügt wird, ist der Filter typaktiviert. Ein typaktivierter Filter bedeutet Folgendes:
 
@@ -925,7 +931,7 @@ Beispiele für Ressourcenfilter:
 ## <a name="action-filters"></a>Aktionsfilter
 
 > [!IMPORTANT]
-> Aktionsfilter gelten **nicht** für Razor Pages. Razor Pages unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>. Weitere Informationen finden Sie unter [Filtermethoden für Razor-Seiten](xref:razor-pages/filter).
+> Aktionsfilter gelten **nicht** für Razor Seiten. Razor-Seiten <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> unter <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> stützen und. Weitere Informationen finden Sie unter [Filter Methoden für Razor Seiten](xref:razor-pages/filter).
 
 Für Aktionsfilter gilt:
 
@@ -997,7 +1003,7 @@ Für Ausnahmefilter gilt Folgendes:
 
 * Sie verfügen nicht über vorangehende oder darauffolgende Ereignisse.
 * Sie implementieren <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> oder <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.
-* Sie behandeln Ausnahmefehler, die bei der Erstellung von Razor Pages oder Controllern, bei der [Modellbindung](xref:mvc/models/model-binding), bei Aktionsfiltern oder bei Aktionsmethoden auftreten.
+* Behandeln von nicht behandelten Ausnahmen, die Razor bei der Erstellung von Seiten oder Controllern, [Modell Bindungen](xref:mvc/models/model-binding), Aktions filtern oder Aktionsmethoden auftreten.
 * Sie erfassen **keine** Ausnahmen, die in Ressourcenfiltern, Ergebnisfiltern oder bei der Ausführung von MVC-Ergebnissen auftreten.
 
 Um eine Ausnahme zu behandeln, muss die Eigenschaft <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> auf `true` festgelegt oder eine Antwort geschrieben werden. Dadurch wird die Weitergabe der Ausnahme beendet. Ein Ausnahmefilter kann eine Ausnahme nicht in ein „erfolgreiches Ergebnis“ umwandeln. Nur ein Aktionsfilter kann das.
@@ -1024,7 +1030,7 @@ Der folgende Code zeigt einen Ergebnisfilter, der einen HTTP-Header hinzufügt:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, würde die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult> beinhalten. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Erfahren Sie mehr zu [Aktionsergebnissen](xref:mvc/controllers/actions).
+Die Art des Ergebnisses, das ausgeführt wird, hängt von der jeweiligen Aktion ab. Eine Aktion, die eine Ansicht zurückgibt, würde die gesamte Razor-Verarbeitung als Teil der Ausführung von <xref:Microsoft.AspNetCore.Mvc.ViewResult> beinhalten. Eine API-Methode führt möglicherweise eine Art Serialisierung als Teil der Ausführung des Ergebnisses durch. Erfahren Sie mehr über [Aktions Ergebnisse](xref:mvc/controllers/actions).
 
 Ergebnisfilter werden nur ausgeführt, wenn eine Aktion oder ein Aktionsfilter ein Aktionsergebnis liefert. Ergebnisfilter werden in folgenden Fällen nicht ausgeführt:
 
@@ -1053,7 +1059,7 @@ Das Framework stellt ein abstraktes `ResultFilterAttribute` bereit, das als Unte
 Die Schnittstellen <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> deklarieren eine <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>-Implementierung, die für alle Aktionsergebnisse ausgeführt wird. Dies schließt Aktionsergebnisse ein, die von folgenden Filtern generiert werden:
 
 * Autorisierungs- und Ressourcenfilter, die einen Kurzschluss bewirken
-* Ausnahmefilter.
+* Ausnahmefilter
 
 Beispielsweise wird der folgende Filter immer ausgeführt und legt ein Aktionsergebnis (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) mit dem Statuscode *422 – Einheit kann nicht bearbeitet werden* fest, wenn bei der Inhaltsaushandlung ein Fehler auftritt:
 
@@ -1074,9 +1080,9 @@ Der oben stehende Code kann durch Ausführen des [Downloadbeispiels](https://git
 
 Die F12-Entwicklungstools zeigen folgende Antwortheader an, die vom Beispielcode hinzugefügt wurden:
 
-* **author:** `Joe Smith`
+* **Autor:**`Joe Smith`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **intern:**`My header`
 
 Der oben stehende Code erstellt den Antwortheader „**internal:** `My header`“.
 
@@ -1118,7 +1124,7 @@ Middlewarefilter werden zum selben Zeitpunkt in der Filterpipeline wie Ressource
 
 ## <a name="next-actions"></a>Nächste Schritte
 
-* Siehe [Filtermethoden für Razor Pages](xref:razor-pages/filter).
+* Weitere Informationen finden Sie unter [Filter Methoden für Razor Seiten](xref:razor-pages/filter).
 * Um Filter näher kennenzulernen, [laden Sie das GitHub-Beispiel herunter, und testen und bearbeiten Sie es](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).
 
 ::: moniker-end

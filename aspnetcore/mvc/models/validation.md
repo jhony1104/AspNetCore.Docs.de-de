@@ -1,25 +1,31 @@
 ---
 title: Modellvalidierung im ASP.NET Core MVC
 author: rick-anderson
-description: Informationen zur Modellvalidierung in ASP.NET Core MVC und Razor Pages
+description: Erfahren Sie mehr über die Modell Validierung in ASP.net Core Razor MVC und Seiten.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205890"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777175"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modellvalidierung in ASP.NET Core MVC und Razor Pages
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Modell Validierung in ASP.net Core MVC und Razor Seiten
 
 ::: moniker range=">= aspnetcore-3.0"
 
 Von [Kirk Larkin](https://github.com/serpent5)
 
-In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MVC- oder Razor Pages-App validiert werden.
+In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.net Core MVC Razor -oder Pages-APP überprüft werden.
 
 [Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
@@ -27,7 +33,7 @@ In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MV
 
 Der Modellstatus stellt Fehler dar, die aus zwei Subsystemen kommen: Modellbindung und Modellvalidierung. Fehler, die von der [Modellbindung](model-binding.md) herrühren, sind im allgemeinen Datenkonvertierungsfehler. Beispielsweise wird ein "x" in ein Integerfeld eingegeben. Die Modellvalidierung erfolgt nach der Modellbindung und meldet Fehler, bei denen die Daten nicht den Geschäftsregeln entsprechen. Beispielsweise wird eine 0 in einem Feld eingegeben, das eine Bewertung zwischen 1 und 5 erwartet.
 
-Sowohl Modellbindung als auch Modellvalidierung finden noch vor der Ausführung einer Controlleraktion oder einer Razor Pages-Handlermethode statt. Bei Web-Apps liegen die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
+Die Modell Bindung und die Modell Validierung treten vor der Ausführung einer Controller Aktion oder einer Razor Pages-Handlermethode auf. Bei Web-Apps liegen die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -64,13 +70,13 @@ Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnota
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -367,7 +373,7 @@ Diese Methode, bei der `data-`-Attribute in HTML gerendert werden, wird vom `Cla
 
 ## <a name="disable-client-side-validation"></a>Deaktivieren der clientseitigen Validierung
 
-Im folgenden Code wird die Clientvalidierung in Razor Pages deaktiviert:
+Der folgende Code deaktiviert die Client Validierung in Razor Seiten:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -376,7 +382,7 @@ Weitere Optionen zum Deaktivieren der clientseitigen Validierung:
 * Kommentieren Sie den Verweis auf `_ValidationScriptsPartial` in allen *CSHTML*-Dateien aus.
 * Entfernen Sie den Inhalt der *Pages\Shared\_ValidationScriptsPartial.cshtml*-Datei.
 
-Der vorherige Ansatz verhindert nicht die clientseite Validierung der ASP.NET Core-Identitäts-Razor-Klassenbibliothek. Weitere Informationen finden Sie unter <xref:security/authentication/scaffold-identity>.
+Der vorherige Ansatz verhindert die Client seitige Validierung ASP.net Core Identity Razor Klassenbibliothek nicht. Weitere Informationen finden Sie unter <xref:security/authentication/scaffold-identity>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
@@ -387,7 +393,7 @@ Der vorherige Ansatz verhindert nicht die clientseite Validierung der ASP.NET Co
 
 ::: moniker range="< aspnetcore-3.0"
 
-In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MVC- oder Razor Pages-App validiert werden.
+In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.net Core MVC Razor -oder Pages-APP überprüft werden.
 
 [Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
@@ -395,7 +401,7 @@ In diesem Artikel wird erläutert, wie Benutzereingaben in einer ASP.NET Core MV
 
 Der Modellstatus stellt Fehler dar, die aus zwei Subsystemen kommen: Modellbindung und Modellvalidierung. Fehler, die Ihren Ursprung bei der [Modellbindung](model-binding.md) haben, sind normalerweise Fehler bei der Datenkonvertierung, z. B. wenn in ein Feld ein „x“ eingegeben wird, das einen Integer erwartet. Die Modellvalidierung erfolgt nach der Modellbindung und meldet Fehler, wenn die Daten in Konflikt mit den Geschäftsregeln stehen, z. B. wenn in ein Feld eine 0 eingegeben wird, das eine Bewertung zwischen 1 und 5 erwartet.
 
-Sowohl Modellbindung als auch -validierung finden noch vor der Ausführung einer Controlleraktion oder einer Razor Pages-Handlermethode statt. Bei Web-Apps liegen die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
+Die Modell Bindung und-Validierung erfolgt vor der Ausführung einer Controller Aktion oder einer Razor Pages-Handlermethode. Bei Web-Apps liegen die Überprüfung von `ModelState.IsValid` und entsprechende Maßnahmen im Verantwortungsbereich der App. Web-Apps zeigen die Seite normalerweise mit einer Fehlermeldung erneut an:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -418,7 +424,7 @@ Mit Validierungsattributen können Sie Validierungsregeln für Modelleigenschaft
 Zu den integrierten Validierungsattributen gehören:
 
 * `[CreditCard]`: Überprüft, ob die Eigenschaft über ein Kreditkartenformat verfügt.
-* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell stimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. [Gerüst für Identität](xref:security/authentication/scaffold-identity), um den Registrierungscode anzuzeigen.
+* `[Compare]`: Überprüft, ob zwei Eigenschaften in einem Modell stimmen. Beispielsweise verwendet die *Register.cshtml.cs*-Datei `[Compare]`, um zu prüfen, ob die beiden eingegebenen Kennwörter übereinstimmen. Gerüstbau, um den Registrierungscode anzuzeigen. [ Identity ](xref:security/authentication/scaffold-identity)
 * `[EmailAddress]`: Überprüft, ob die Eigenschaft ein e-Mail-Format aufweist.
 * `[Phone]`: Überprüft, ob die Eigenschaft über ein Telefonnummern Format verfügt.
 * `[Range]`: Überprüft, ob der Eigenschafts Wert innerhalb eines angegebenen Bereichs liegt.
@@ -434,13 +440,13 @@ Im [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnota
 
 ### <a name="error-messages"></a>Fehlermeldungen
 
-Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Zum Beispiel:
+Mit Validierungsattributen können Sie die Fehlermeldung angeben, die im Fall einer ungültigen Eingabe angezeigt werden soll. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Zum Beispiel:
+Intern rufen die Attribute die Methode `String.Format` mit einem Platzhalter für den Feldnamen und manchmal zusätzliche Platzhalter auf. Beispiel:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -742,7 +748,7 @@ Im folgenden Code wird die Clientvalidierung in MVC-Ansichten deaktiviert:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-Und in Razor Pages:
+Und in Razor Seiten:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 

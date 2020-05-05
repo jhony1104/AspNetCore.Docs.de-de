@@ -5,14 +5,20 @@ description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/18/2020
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: e25da0b3867181a16a4636768f36c148a152dd23
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661736"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774131"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -36,9 +42,9 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort zum Hochladen Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; HTML kodiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige aufRazor der Benutzeroberfläche (Automatisches HTML-codieren der Ausgabe).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server durchgeführt werden. &dagger; Clientseitige Prüfungen sind leicht zu umgehen.
+* Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden. &dagger; Client seitige Überprüfungen können problemlos umgangen werden.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
@@ -83,7 +89,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet).
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .net zum Erstellen eines BLOBs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet).
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -113,7 +119,7 @@ Das Streamen großer Dateien wird im Abschnitt [Hochladen großer Dateien mit St
 
 Zum Hochladen kleiner Dateien können Sie ein mehrteiliges Formular verwenden oder über JavaScript eine POST-Anforderung erstellen.
 
-Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*Pages/BufferedSingleFileUploadPhysical.cshtml* in der Beispiel-App):
+Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -237,7 +243,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 * Eine der folgenden Sammlungen, die mehrere Dateien darstellen:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [Liste](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
@@ -340,7 +346,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> kann wie oben dargestellt direkt als Parameter einer Aktionsmethode oder als gebundene Modelleigenschaft verwendet werden. Im vorherigen Beispiel wird eine gebundene Modelleigenschaft verwendet.
 
-`FileUpload` wird im Razor Pages-Formular verwendet:
+Die `FileUpload` wird im Razor Seiten Format verwendet:
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -414,7 +420,7 @@ Das `DisableFormValueModelBindingAttribute` wird zum Deaktivieren der Modellbind
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-In der Beispiel-App werden `GenerateAntiforgeryTokenCookieAttribute` und `DisableFormValueModelBindingAttribute` als Filter auf die Seitenanwendungsmodelle von `/StreamedSingleFileUploadDb` und `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` unter Verwendung der [Razor Pages-Konventionen](xref:razor-pages/razor-pages-conventions) angewendet:
+`GenerateAntiforgeryTokenCookieAttribute` In der Beispiel-App werden `DisableFormValueModelBindingAttribute` und als Filter auf die Seiten Anwendungsmodelle von und `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` der Verwendung [ Razor von Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
@@ -502,7 +508,7 @@ Informationen zu zusätzlichen Dateisignaturen finden Sie in der [Datenbank „F
 
 Verwenden Sie niemals einen vom Kunden angegebenen Dateinamen zum Speichern einer Datei in physischem Speicher. Erstellen Sie mithilfe von [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) oder [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) einen sicheren Dateinamen für die Datei, um einen vollständigen Pfad (einschließlich des Dateinamens) für die temporäre Speicherung zu erstellen.
 
-Razor versieht anzuzeigende Eigenschaftswerte automatisch mit HTML-Codierung. Der folgende Code kann sicher verwendet werden:
+Razorautomatisch HTML-codiert Eigenschaftswerte für die Anzeige. Der folgende Code kann sicher verwendet werden:
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -514,7 +520,7 @@ Razor versieht anzuzeigende Eigenschaftswerte automatisch mit HTML-Codierung. De
 }
 ```
 
-Wenden Sie außerhalb von Razor stets <xref:System.Net.WebUtility.HtmlEncode*> auf Dateinameninhalte in der Anforderung eines Benutzers an.
+Außerhalb von Razorist immer <xref:System.Net.WebUtility.HtmlEncode*> der Name Inhalt aus der Anforderung eines Benutzers.
 
 Bei vielen Implementierungen muss geprüft werden, ob die Datei existiert. Andernfalls wird die Datei durch eine gleichnamige Datei überschrieben. Stellen Sie zusätzliche Logik bereit, um die Vorgaben Ihrer App zu erfüllen.
 
@@ -557,9 +563,9 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Vergleichen des Werts des Namensattributs mit dem Parameternamen der POST-Methode
 
-In Nicht-Razor-Formularen, die Daten per POST übermitteln oder `FormData` von JavaScript direkt verwenden, muss der im Formularelement oder `FormData` angegebene Name mit dem Namen des Parameters in der Aktion des Controllers übereinstimmen.
+In nicht-Razor Formularen, die Formulardaten veröffentlichen oder `FormData` direkt JavaScript verwenden, `FormData` muss der im-Element des Formulars angegebene Name dem Namen des Parameters in der Aktion des Controllers entsprechen.
 
-Siehe folgendes Beispiel:
+Im folgenden Beispiel:
 
 * Wenn ein `<input>`-Element verwendet wird, wird das `name`-Attribut auf den Wert `battlePlans` festgelegt:
 
@@ -579,7 +585,7 @@ Siehe folgendes Beispiel:
 
 Verwenden Sie einen übereinstimmenden Namen für den Parameter der C#-Methode (`battlePlans`):
 
-* Für eine Razor Pages-Seitenhandlermethode namens `Upload`:
+* Für eine Razor Seiten Handler-Methode mit `Upload`dem Namen:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -610,7 +616,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> dient zum Festlegen des <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> für eine einzelne Seite oder Aktion.
 
-Wenden Sie in einer Razor Pages-Anwendung den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices` an:
+Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
 
 ```csharp
 services.AddRazorPages()
@@ -627,7 +633,7 @@ services.AddRazorPages()
     });
 ```
 
-Wenden Sie in einer Razor Pages- oder MVC-App den Filter auf das Seitenmodell oder die Aktionsmethode an:
+Wenden Sie Razor in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
 
 ```csharp
 // Set the limit to 256 MB
@@ -658,7 +664,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> dient zum Festlegen von [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) für eine einzelne Seite oder Aktion.
 
-Wenden Sie in einer Razor Pages-Anwendung den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices` an:
+Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
 
 ```csharp
 services.AddRazorPages()
@@ -675,7 +681,7 @@ services.AddRazorPages()
     });
 ```
 
-Wenden Sie in einer Razor Pages- oder MVC-App den Filter auf die Seitenhandlerklasse oder Aktionsmethode an:
+Wenden Sie Razor den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
 
 ```csharp
 // Handle requests up to 50 MB
@@ -686,7 +692,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-Die `RequestSizeLimitAttribute` kann auch mit [`@attribute`](xref:mvc/views/razor#attribute) der Razor-Direktive angewendet werden:
+`RequestSizeLimitAttribute` Kann auch mit der [`@attribute`](xref:mvc/views/razor#attribute) Razor -Direktive angewendet werden:
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -696,7 +702,7 @@ Die `RequestSizeLimitAttribute` kann auch mit [`@attribute`](xref:mvc/views/razo
 
 Andere Kestrel-Grenzwerte können für von Kestrel gehostete Apps gelten:
 
-* [Maximale Anzahl von Clientverbindungen](xref:fundamentals/servers/kestrel#maximum-client-connections)
+* [Maximale Anzahl der Clientverbindungen](xref:fundamentals/servers/kestrel#maximum-client-connections)
 * [Datenraten für Anforderungen und Antworten](xref:fundamentals/servers/kestrel#minimum-request-body-data-rate)
 
 ### <a name="iis-content-length-limit"></a>Grenzwert der Länge von IIS-Inhalten
@@ -765,9 +771,9 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort zum Hochladen Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; HTML kodiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispiele dafür sind die Protokollierung des Dateinamens oder die Anzeige auf der Benutzeroberfläche (Razor codiert Ausgaben automatisch mit HTML).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige aufRazor der Benutzeroberfläche (Automatisches HTML-codieren der Ausgabe).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* Stellen Sie sicher, dass clientseitige Überprüfungen auf dem Server durchgeführt werden. &dagger; Clientseitige Prüfungen sind leicht zu umgehen.
+* Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden. &dagger; Client seitige Überprüfungen können problemlos umgangen werden.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
 * Wenn Dateien nicht durch eine hochgeladene Datei mit demselben Namen überschrieben werden sollen, vergleichen Sie den Dateinamen mit der Datenbank oder dem physischen Speicher, bevor Sie die Datei hochladen.
 * **Wenden Sie auf die hochgeladenen Inhalte einen Scanner auf Viren und Schadsoftware an, ehe die Datei gespeichert wird.**
@@ -812,7 +818,7 @@ Zu den allgemeinen Speicheroptionen für Dateien gehören u. a.:
   * Dienste bieten in der Regel eine bessere Skalierbarkeit und Resilienz gegenüber lokalen Lösungen, die in der Regel Single Points of Failure aufweisen.
   * Dienste sind bei Szenarien mit großen Speicherinfrastrukturen potenziell kostengünstiger.
 
-  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .NET zum Erstellen eines Blobs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
+  Weitere Informationen finden Sie unter [Schnellstart: Verwenden von .net zum Erstellen eines BLOBs im Objektspeicher](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Das Thema veranschaulicht <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, aber <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> kann verwendet werden, um einen <xref:System.IO.FileStream> in Blobspeicher zu speichern, wenn ein <xref:System.IO.Stream> verwendet wird.
 
 ## <a name="file-upload-scenarios"></a>Szenarien für das Hochladen von Dateien
 
@@ -842,7 +848,7 @@ Das Streamen großer Dateien wird im Abschnitt [Hochladen großer Dateien mit St
 
 Zum Hochladen kleiner Dateien können Sie ein mehrteiliges Formular verwenden oder über JavaScript eine POST-Anforderung erstellen.
 
-Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*Pages/BufferedSingleFileUploadPhysical.cshtml* in der Beispiel-App):
+Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -966,7 +972,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 * Eine der folgenden Sammlungen, die mehrere Dateien darstellen:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [Liste](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
@@ -1069,7 +1075,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> kann wie oben dargestellt direkt als Parameter einer Aktionsmethode oder als gebundene Modelleigenschaft verwendet werden. Im vorherigen Beispiel wird eine gebundene Modelleigenschaft verwendet.
 
-`FileUpload` wird im Razor Pages-Formular verwendet:
+Die `FileUpload` wird im Razor Seiten Format verwendet:
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1143,7 +1149,7 @@ Das `DisableFormValueModelBindingAttribute` wird zum Deaktivieren der Modellbind
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-In der Beispiel-App werden `GenerateAntiforgeryTokenCookieAttribute` und `DisableFormValueModelBindingAttribute` als Filter auf die Seitenanwendungsmodelle von `/StreamedSingleFileUploadDb` und `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` unter Verwendung der [Razor Pages-Konventionen](xref:razor-pages/razor-pages-conventions) angewendet:
+`GenerateAntiforgeryTokenCookieAttribute` In der Beispiel-App werden `DisableFormValueModelBindingAttribute` und als Filter auf die Seiten Anwendungsmodelle von und `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` der Verwendung [ Razor von Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1231,7 +1237,7 @@ Informationen zu zusätzlichen Dateisignaturen finden Sie in der [Datenbank „F
 
 Verwenden Sie niemals einen vom Kunden angegebenen Dateinamen zum Speichern einer Datei in physischem Speicher. Erstellen Sie mithilfe von [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) oder [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) einen sicheren Dateinamen für die Datei, um einen vollständigen Pfad (einschließlich des Dateinamens) für die temporäre Speicherung zu erstellen.
 
-Razor versieht anzuzeigende Eigenschaftswerte automatisch mit HTML-Codierung. Der folgende Code kann sicher verwendet werden:
+Razorautomatisch HTML-codiert Eigenschaftswerte für die Anzeige. Der folgende Code kann sicher verwendet werden:
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1243,7 +1249,7 @@ Razor versieht anzuzeigende Eigenschaftswerte automatisch mit HTML-Codierung. De
 }
 ```
 
-Wenden Sie außerhalb von Razor stets <xref:System.Net.WebUtility.HtmlEncode*> auf Dateinameninhalte in der Anforderung eines Benutzers an.
+Außerhalb von Razorist immer <xref:System.Net.WebUtility.HtmlEncode*> der Name Inhalt aus der Anforderung eines Benutzers.
 
 Bei vielen Implementierungen muss geprüft werden, ob die Datei existiert. Andernfalls wird die Datei durch eine gleichnamige Datei überschrieben. Stellen Sie zusätzliche Logik bereit, um die Vorgaben Ihrer App zu erfüllen.
 
@@ -1286,9 +1292,9 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Vergleichen des Werts des Namensattributs mit dem Parameternamen der POST-Methode
 
-In Nicht-Razor-Formularen, die Daten per POST übermitteln oder `FormData` von JavaScript direkt verwenden, muss der im Formularelement oder `FormData` angegebene Name mit dem Namen des Parameters in der Aktion des Controllers übereinstimmen.
+In nicht-Razor Formularen, die Formulardaten veröffentlichen oder `FormData` direkt JavaScript verwenden, `FormData` muss der im-Element des Formulars angegebene Name dem Namen des Parameters in der Aktion des Controllers entsprechen.
 
-Siehe folgendes Beispiel:
+Im folgenden Beispiel:
 
 * Wenn ein `<input>`-Element verwendet wird, wird das `name`-Attribut auf den Wert `battlePlans` festgelegt:
 
@@ -1308,7 +1314,7 @@ Siehe folgendes Beispiel:
 
 Verwenden Sie einen übereinstimmenden Namen für den Parameter der C#-Methode (`battlePlans`):
 
-* Für eine Razor Pages-Seitenhandlermethode namens `Upload`:
+* Für eine Razor Seiten Handler-Methode mit `Upload`dem Namen:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1339,7 +1345,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> dient zum Festlegen des <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> für eine einzelne Seite oder Aktion.
 
-Wenden Sie in einer Razor Pages-Anwendung den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices` an:
+Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
 
 ```csharp
 services.AddMvc()
@@ -1357,7 +1363,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Wenden Sie in einer Razor Pages- oder MVC-App den Filter auf das Seitenmodell oder die Aktionsmethode an:
+Wenden Sie Razor in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
 
 ```csharp
 // Set the limit to 256 MB
@@ -1385,7 +1391,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> dient zum Festlegen von [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) für eine einzelne Seite oder Aktion.
 
-Wenden Sie in einer Razor Pages-Anwendung den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in `Startup.ConfigureServices` an:
+Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
 
 ```csharp
 services.AddMvc()
@@ -1403,7 +1409,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Wenden Sie in einer Razor Pages- oder MVC-App den Filter auf die Seitenhandlerklasse oder Aktionsmethode an:
+Wenden Sie Razor den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
 
 ```csharp
 // Handle requests up to 50 MB
@@ -1418,7 +1424,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 Andere Kestrel-Grenzwerte können für von Kestrel gehostete Apps gelten:
 
-* [Maximale Anzahl von Clientverbindungen](xref:fundamentals/servers/kestrel#maximum-client-connections)
+* [Maximale Anzahl der Clientverbindungen](xref:fundamentals/servers/kestrel#maximum-client-connections)
 * [Datenraten für Anforderungen und Antworten](xref:fundamentals/servers/kestrel#minimum-request-body-data-rate)
 
 ### <a name="iis-content-length-limit"></a>Grenzwert der Länge von IIS-Inhalten
@@ -1472,6 +1478,7 @@ Bei den Beispielen in diesem Thema wird davon ausgegangen, dass <xref:System.IO.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
+* [HTTP-Verbindungs Anforderungs Ableitung](xref:fundamentals/servers/kestrel#http-connection-request-draining)
 * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
-* [Azure Security: Sicherheitsrahmen: Eingabeüberprüfung | Schutzmaßnahmen](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure Cloud-Entwurfsmuster: Valet-Schlüsselmuster](/azure/architecture/patterns/valet-key)
+* [Azure-Sicherheit: Sicherheitsrahmen: Eingabevalidierung | Entschärfungen](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure Cloud Design Patterns: Valet-Schlüssel Muster](/azure/architecture/patterns/valet-key)

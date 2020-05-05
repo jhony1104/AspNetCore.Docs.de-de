@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie mehr über die Unterstützung für das Festlegen einer standardmäßigen Computer weiten Richtlinie für alle apps, die ASP.net Core Datenschutz nutzen.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655063"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776837"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>Unterstützung der Computer weiten Datenschutzrichtlinie in ASP.net Core
 
@@ -31,39 +37,39 @@ Wenn Sie ein 64-Bit-Betriebssystem verwenden und das Verhalten von 32-Bit-apps b
 
 Die unterstützten Werte sind unten dargestellt.
 
-| value              | type   | BESCHREIBUNG |
+| Wert              | type   | BESCHREIBUNG |
 | ------------------ | :----: | ----------- |
 | EncryptionType     | string | Gibt an, welche Algorithmen für den Datenschutz verwendet werden sollen. Der Wert muss CNG-CBC, CNG-GCM oder Managed lauten und wird unten ausführlicher beschrieben. |
-| DefaultKeyLifetime | DWORD  | Gibt die Lebensdauer für neu generierte Schlüssel an. Der Wert wird in Tagen angegeben und muss > = 7 sein. |
-| KeyEscrowSinks     | string | Gibt die Typen an, die für die Schlüssel Hinterlegung verwendet werden. Der Wert ist eine durch Semikolons getrennte Liste von Schlüssel Hinterlegungs senken, wobei jedes Element in der Liste der durch die Assembly qualifizierte Name eines Typs ist, der [ikeyescrowsink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)implementiert. |
+| Defaultkeylifetime | DWORD  | Gibt die Lebensdauer für neu generierte Schlüssel an. Der Wert wird in Tagen angegeben und muss >= 7 sein. |
+| Keyescrowsinks     | string | Gibt die Typen an, die für die Schlüssel Hinterlegung verwendet werden. Der Wert ist eine durch Semikolons getrennte Liste von Schlüssel Hinterlegungs senken, wobei jedes Element in der Liste der durch die Assembly qualifizierte Name eines Typs ist, der [ikeyescrowsink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)implementiert. |
 
 ## <a name="encryption-types"></a>Verschlüsselungstypen
 
 Wenn Verschlüsselungstyp CNG-CBC ist, wird das System für die Verwendung eines symmetrischen Blockchiffre im CBC-Modus für Vertraulichkeit und HMAC für die Authentizität mit den von Windows CNG bereitgestellten Diensten konfiguriert (Weitere Informationen finden Sie unter [Angeben von benutzerdefinierten Windows CNG-Algorithmen](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) ). Die folgenden zusätzlichen Werte werden unterstützt, von denen jeder einer Eigenschaft im cngcbcauthenticatedencryptionsettings-Typ entspricht.
 
-| value                       | type   | BESCHREIBUNG |
+| Wert                       | type   | BESCHREIBUNG |
 | --------------------------- | :----: | ----------- |
 | EncryptionAlgorithm         | string | Der Name eines symmetrischen Blockchiffre Algorithmus, der von CNG interpretiert wird. Dieser Algorithmus wird im CBC-Modus geöffnet. |
-| EncryptionAlgorithmProvider | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus "Verschlüsselungalgorithmus" bilden kann. |
-| EncryptionAlgorithmKeySize  | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Blockchiffre Algorithmus abgeleitet werden soll. |
+| Verschlüsselungs algorithmuprovider | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus "Verschlüsselungalgorithmus" bilden kann. |
+| Verschlüsselungsalgorithmkeysize  | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Blockchiffre Algorithmus abgeleitet werden soll. |
 | HashAlgorithm               | string | Der Name eines Hash Algorithmus, der von CNG interpretiert wird. Dieser Algorithmus wird im HMAC-Modus geöffnet. |
-| HashAlgorithmProvider       | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus HashAlgorithm bilden kann. |
+| Hashalgorithmprovider       | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus HashAlgorithm bilden kann. |
 
 Wenn der Verschlüsselungstyp CNG-GCM ist, wird das System so konfiguriert, dass er eine Verschlüsselung mit dem symmetrischen Block "Galois/Counter Mode" für Vertraulichkeit und Authentizität mit Diensten von Windows CNG verwendet (Weitere Informationen finden Sie unter [Angeben von benutzerdefinierten Windows CNG-Algorithmen](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) ). Die folgenden zusätzlichen Werte werden unterstützt, von denen jeder einer Eigenschaft des cnggcmauthenticatedencryptionsettings-Typs entspricht.
 
-| value                       | type   | BESCHREIBUNG |
+| Wert                       | type   | BESCHREIBUNG |
 | --------------------------- | :----: | ----------- |
 | EncryptionAlgorithm         | string | Der Name eines symmetrischen Blockchiffre Algorithmus, der von CNG interpretiert wird. Dieser Algorithmus wird im Modus "Galois/Counter" geöffnet. |
-| EncryptionAlgorithmProvider | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus "Verschlüsselungalgorithmus" bilden kann. |
-| EncryptionAlgorithmKeySize  | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Blockchiffre Algorithmus abgeleitet werden soll. |
+| Verschlüsselungs algorithmuprovider | string | Der Name der CNG-Anbieter Implementierung, die den Algorithmus "Verschlüsselungalgorithmus" bilden kann. |
+| Verschlüsselungsalgorithmkeysize  | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Blockchiffre Algorithmus abgeleitet werden soll. |
 
 Wenn verschlüsselungstype verwaltet wird, ist das System so konfiguriert, dass ein verwaltetes SymmetricAlgorithm für Vertraulichkeit und KeyedHashAlgorithm für die Authentizität verwendet wird (Weitere Informationen finden Sie unter [Angeben von benutzerdefinierten verwalteten Algorithmen](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms) ). Die folgenden zusätzlichen Werte werden unterstützt, von denen jeder einer Eigenschaft im managedauthenticatedencryptionsettings-Typ entspricht.
 
-| value                      | type   | BESCHREIBUNG |
+| Wert                      | type   | BESCHREIBUNG |
 | -------------------------- | :----: | ----------- |
-| EncryptionAlgorithmType    | string | Der durch die Assembly qualifizierte Name eines Typs, der SymmetricAlgorithm implementiert. |
-| EncryptionAlgorithmKeySize | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Verschlüsselungsalgorithmus abgeleitet werden soll. |
-| ValidationAlgorithmType    | string | Der durch die Assembly qualifizierte Name eines Typs, der KeyedHashAlgorithm implementiert. |
+| Verschlüsselungsalgorithmtype    | string | Der durch die Assembly qualifizierte Name eines Typs, der SymmetricAlgorithm implementiert. |
+| Verschlüsselungsalgorithmkeysize | DWORD  | Die Länge des Schlüssels (in Bits), der für den symmetrischen Verschlüsselungsalgorithmus abgeleitet werden soll. |
+| Validationalgorithmtype    | string | Der durch die Assembly qualifizierte Name eines Typs, der KeyedHashAlgorithm implementiert. |
 
 Wenn der Verschlüsselungstyp einen anderen Wert als NULL oder leer hat, löst das Datenschutzsystem beim Start eine Ausnahme aus.
 

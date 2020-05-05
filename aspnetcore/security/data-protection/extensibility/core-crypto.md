@@ -4,24 +4,30 @@ author: rick-anderson
 description: Erfahren Sie mehr über iauthenticatedencryptor, iauthenticatedencryptordescriptor, iauthenticatedencryptordescriptordeserializer und die Factory der obersten Ebene.
 ms.author: riande
 ms.date: 08/11/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653545"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776421"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>Zentrale kryptografieerweiterbarkeit in ASP.net Core
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
 >[!WARNING]
-> Typen, die die folgenden Schnittstellen implementieren, sollten threadsicher werden für mehrere Aufrufer.
+> Typen, die eine der folgenden Schnittstellen implementieren, sollten für mehrere Aufrufer Thread sicher sein.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptor"></a>
 
-## <a name="iauthenticatedencryptor"></a>IAuthenticatedEncryptor
+## <a name="iauthenticatedencryptor"></a>Iauthenticatedencryptor
 
 Die **iauthenticatedencryptor** -Schnittstelle ist der Grundbaustein des kryptografischen Subsystems. Im Allgemeinen gibt es einen iauthenticatedencryptor pro Schlüssel, und die Instanz iauthenticatedencryptor umschließt sämtliche kryptografieschlüsselmaterialien und algorithmische Informationen, die für die Durchführung kryptografischer Vorgänge erforderlich sind.
 
@@ -41,7 +47,7 @@ Die Methode "verschlüsseln" gibt ein BLOB zurück, das den verschlüsselten Kla
 
 ## <a name="how-to-create-an-iauthenticatedencryptor"></a>Erstellen eines iauthenticatedencryptor
 
-# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 Die **iauthenticatedencryptorfactory** -Schnittstelle stellt einen Typ dar, der weiß, wie eine [iauthenticatedencryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) -Instanz erstellt wird. Die API ist wie folgt.
 
@@ -102,7 +108,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 ## <a name="iauthenticatedencryptordescriptor-aspnet-core-2x-only"></a>Iauthenticatedencryptordescriptor (nur ASP.net Core 2. x)
 
-# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 Die **iauthenticatedencryptordescriptor** -Schnittstelle stellt einen Typ dar, der weiß, wie er sich selbst in XML exportieren kann. Die API ist wie folgt.
 
@@ -120,7 +126,7 @@ Der primäre Unterschied zwischen iauthenticatedencryptor und iauthenticatedencr
 
 Der Deskriptor kann über seine exporttoxml-Routine serialisiert werden. Diese Routine gibt ein xmlserializeddescriptorinfo-Element zurück, das zwei Eigenschaften enthält: die XElement-Darstellung des Deskriptors und den Typ, der ein [iauthenticatedencryptordescriptordeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) -Element darstellt, das verwendet werden kann, um diesen Deskriptor mit dem entsprechenden XElement wiederzuverwenden.
 
-Der serialisierte Deskriptor kann vertrauliche Informationen, wie z. b. kryptografieschlüsselmaterial, enthalten. Das Datenschutzsystem verfügt über eine integrierte Unterstützung für die Verschlüsselung von Informationen, bevor Sie im Speicher gespeichert werden. Um dies zu nutzen, sollte der Deskriptor das Element markieren, das vertrauliche Informationen mit dem Attributnamen "Requirements sencryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>"), Wert "true" enthält.
+Der serialisierte Deskriptor kann vertrauliche Informationen, wie z. b. kryptografieschlüsselmaterial, enthalten. Das Datenschutzsystem verfügt über eine integrierte Unterstützung für die Verschlüsselung von Informationen, bevor Sie im Speicher gespeichert werden. Um dies zu nutzen, sollte der Deskriptor das Element markieren, das vertrauliche Informationen mit dem Attributnamen "Requirements sencryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>") und dem Wert "true" enthält.
 
 >[!TIP]
 > Es gibt eine hilfsprogrammapi zum Festlegen dieses Attributs. Aufrufen der Erweiterungsmethode "XElement. markasrequirements sencryption ()", die sich im Namespace "Microsoft. aspnetcore. dataprotection. authenticatedencryption. configurationmodel" befindet.
@@ -129,7 +135,7 @@ Es können auch Fälle geben, in denen der serialisierte Deskriptor keine vertra
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer"></a>
 
-## <a name="iauthenticatedencryptordescriptordeserializer"></a>IAuthenticatedEncryptorDescriptorDeserializer
+## <a name="iauthenticatedencryptordescriptordeserializer"></a>Iauthenticatedencryptordescriptordeserializer
 
 Die **iauthenticatedencryptordescriptordeserializer** -Schnittstelle stellt einen Typ dar, der weiß, wie eine iauthenticatedencryptordescriptor-Instanz aus einem XElement-Element deserialisiert werden kann. Es macht eine einzelne Methode verfügbar:
 
@@ -139,16 +145,16 @@ Die importfromxml-Methode übernimmt das XElement, das von [iauthenticatedencryp
 
 Typen, die iauthenticatedencryptordescriptordeserializer implementieren, sollten einen der folgenden zwei öffentlichen Konstruktoren aufweisen:
 
-* .ctor(IServiceProvider)
+* . ctor (IServiceProvider)
 
-* .ctor()
+* . ctor ()
 
 > [!NOTE]
 > Der an den Konstruktor übergeben "IServiceProvider" ist möglicherweise NULL.
 
 ## <a name="the-top-level-factory"></a>Die Factory der obersten Ebene
 
-# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+# <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 Die **algorithmconfiguration** -Klasse stellt einen Typ dar, der weiß, wie [iauthenticatedencryptordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) -Instanzen erstellt werden. Es macht eine einzelne API verfügbar.
 

@@ -5,17 +5,20 @@ description: Erfahren Sie, wie Sie Blazor Server-Apps als ASP.NET Core-Anwendung
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: 0021911b731e57bc6eabf857c27a13462e7400ae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: bbd8b6fcd357b8929bf097450854d98fbea2570e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206329"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772634"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Absichern von Blazor Server-Apps als ASP.NET Core-Anwendungen
 
@@ -101,3 +104,7 @@ Bei Verwenden der Option `-o|--output` nutzt der Befehl den für den Platzhalter
 Weitere Informationen finden Sie im Befehl [dotnet new](/dotnet/core/tools/dotnet-new) im Leitfaden für .NET Core.
 
 ---
+
+## <a name="secure-an-existing-app"></a>Schützen einer vorhandenen App
+
+Das Schützen von Blazor Server-Apps funktioniert genau wie bei ASP.NET Core-Apps. Weitere Informationen finden Sie in den Artikeln unter <xref:security/index>.

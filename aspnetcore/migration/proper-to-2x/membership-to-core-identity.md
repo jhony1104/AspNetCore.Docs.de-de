@@ -1,17 +1,23 @@
 ---
-title: Migrieren von der ASP.net-Mitgliedschafts Authentifizierung zu ASP.net Core 2,0-Identität
+title: Migrieren von der ASP.net-Mitgliedschafts Authentifizierung zu ASP.net Core 2,0Identity
 author: isaac2004
-description: Erfahren Sie, wie Sie vorhandene ASP.net-apps mithilfe der Mitgliedschafts Authentifizierung zum ASP.net Core 2,0-Identität migrieren.
+description: Erfahren Sie, wie Sie vorhandene ASP.net-apps mithilfe der Mitgliedschafts IdentityAuthentifizierung zu ASP.net Core 2,0 migrieren.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 3b708da13ff9f2887eee87ea17844312a4fe1b8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b5205ef69943f3744bba8381701008369dd0843c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651835"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774508"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>Migrieren von der ASP.net-Mitgliedschafts Authentifizierung zu ASP.net Core 2,0-Identität
 
@@ -40,8 +46,8 @@ Die schnellste Möglichkeit, das Schema für die ASP.net Core 2,0-Identität anz
 1. Erstellen Sie ein neues **ASP.net Core Webanwendungs** Projekt mit dem Namen *coreidentitysample*.
 1. Wählen Sie in der Dropdown Liste **ASP.net Core 2,0** aus, und wählen Sie dann **Webanwendung**. Diese Vorlage erzeugt eine [Razor Pages](xref:razor-pages/index) -app. Bevor Sie auf **OK**klicken, klicken Sie auf **Authentifizierung ändern**.
 1. Wählen Sie **einzelne Benutzerkonten** für die Identitäts Vorlagen aus. Klicken Sie abschließend auf **OK**und dann auf **OK**. Visual Studio erstellt ein Projekt mithilfe der ASP.net Core Identity-Vorlage.
-1. Wählen **Sie** Extras > **nuget-Paket-Manager** > Paket-Manager- **Konsole** , um das Fenster Paket- **Manager-Konsole** (PMC) zu öffnen.
-1. Navigieren Sie zum Projektstamm in der PMC, und führen Sie den Entity Framework Core-`Update-Database` Befehl [(EF)](/ef/core) aus.
+1.  > Klicken **Sie**auf Extras**nuget-Paket-Manager** > **Paket-Manager-Konsole** , um das Fenster der **Paket-Manager-Konsole** (PMC)
+1. Navigieren Sie in der PMC zum Stammverzeichnis des Projekts, und führen Sie den Befehl [Entity Framework (EF) Core](/ef/core) `Update-Database` aus.
 
     ASP.net Core 2,0-Identität verwendet EF Core, um mit der Datenbank zu interagieren, in der die Authentifizierungsdaten gespeichert werden. Damit die neu erstellte APP funktioniert, muss eine Datenbank vorhanden sein, um diese Daten zu speichern. Nach dem Erstellen einer neuen App besteht die schnellste Möglichkeit zum Überprüfen des Schemas in einer Datenbankumgebung darin, die Datenbank mithilfe [EF Core Migrationen](/ef/core/managing-schemas/migrations/)zu erstellen. Bei diesem Vorgang wird eine Datenbank erstellt, entweder lokal oder an anderer Stelle, die das Schema imitiert. Weitere Informationen finden Sie in der vorangehenden Dokumentation.
 
@@ -55,9 +61,9 @@ Die schnellste Möglichkeit, das Schema für die ASP.net Core 2,0-Identität anz
     }
     ```
 
-1. Wählen Sie > **SQL Server-Objekt-Explorer** **anzeigen** aus. Erweitern Sie den Knoten, der dem Datenbanknamen entspricht, der in der `ConnectionStrings:DefaultConnection`-Eigenschaft von *appSettings. JSON*angegeben ist.
+1. Wählen Sie**SQL Server-Objekt-Explorer** **anzeigen** > aus. Erweitern Sie den Knoten, der dem Datenbanknamen entspricht `ConnectionStrings:DefaultConnection` , der in der-Eigenschaft von *appSettings. JSON*angegeben ist.
 
-    Der `Update-Database`-Befehl hat die mit dem Schema angegebene Datenbank und alle Daten, die für die APP-Initialisierung erforderlich sind, erstellt. Die folgende Abbildung zeigt die Tabellenstruktur, die mit den vorherigen Schritten erstellt wurde.
+    Der `Update-Database` Befehl hat die mit dem Schema angegebene Datenbank und alle Daten, die für die APP-Initialisierung erforderlich sind, erstellt. Die folgende Abbildung zeigt die Tabellenstruktur, die mit den vorherigen Schritten erstellt wurde.
 
     ![Identitäts Tabellen](identity/_static/identity-tables.png)
 
@@ -67,36 +73,36 @@ Es gibt feine Unterschiede in den Tabellenstrukturen und-Feldern für Mitgliedsc
 
 ### <a name="users"></a>Benutzer
 
-|*Identity<br>(dbo). AspNetUsers*        ||*Mitgliedschafts<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
+|*Identität<br>(dbo). AspNetUsers*        ||*Mitgliedschaft<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
 |----------------------------------------|-----------------------------------------------------------|
 |**Feldname**                 |**Typ**|**Feldname**                                    |**Typ**|
-|`Id`                           |string  |`aspnet_Users.UserId`                             |string  |
-|`UserName`                     |string  |`aspnet_Users.UserName`                           |string  |
-|`Email`                        |string  |`aspnet_Membership.Email`                         |string  |
-|`NormalizedUserName`           |string  |`aspnet_Users.LoweredUserName`                    |string  |
-|`NormalizedEmail`              |string  |`aspnet_Membership.LoweredEmail`                  |string  |
-|`PhoneNumber`                  |string  |`aspnet_Users.MobileAlias`                        |string  |
+|`Id`                           |Zeichenfolge  |`aspnet_Users.UserId`                             |Zeichenfolge  |
+|`UserName`                     |Zeichenfolge  |`aspnet_Users.UserName`                           |Zeichenfolge  |
+|`Email`                        |Zeichenfolge  |`aspnet_Membership.Email`                         |Zeichenfolge  |
+|`NormalizedUserName`           |Zeichenfolge  |`aspnet_Users.LoweredUserName`                    |Zeichenfolge  |
+|`NormalizedEmail`              |Zeichenfolge  |`aspnet_Membership.LoweredEmail`                  |Zeichenfolge  |
+|`PhoneNumber`                  |Zeichenfolge  |`aspnet_Users.MobileAlias`                        |Zeichenfolge  |
 |`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
 
 > [!NOTE]
-> Nicht alle Feld Zuordnungen ähneln eins-zu-eins-Beziehungen von der Mitgliedschaft zur ASP.net Core Identität. In der vorangehenden Tabelle wird das Standardschema für Mitgliedschafts Benutzer und das Schema der ASP.net Core Identität zugeordnet. Alle anderen benutzerdefinierten Felder, die für die Mitgliedschaft verwendet wurden, müssen manuell zugeordnet werden. In dieser Zuordnung gibt es keine Zuordnung für Kenn Wörter, da sowohl Kenn Wort Kriterien als auch Kenn Wort Salze nicht zwischen den beiden migriert werden. **Es wird empfohlen, das Kennwort als Null zu belassen und Benutzer aufzufordern, ihre Kenn Wörter zurückzusetzen.** In ASP.net Core Identity sollten `LockoutEnd` in der Zukunft auf ein Datum festgelegt werden, wenn der Benutzer gesperrt ist. Dies wird im Migrations Skript gezeigt.
+> Nicht alle Feld Zuordnungen ähneln eins-zu-eins-Beziehungen von der Mitgliedschaft zur ASP.net Core Identität. In der vorangehenden Tabelle wird das Standardschema für Mitgliedschafts Benutzer und das Schema der ASP.net Core Identität zugeordnet. Alle anderen benutzerdefinierten Felder, die für die Mitgliedschaft verwendet wurden, müssen manuell zugeordnet werden. In dieser Zuordnung gibt es keine Zuordnung für Kenn Wörter, da sowohl Kenn Wort Kriterien als auch Kenn Wort Salze nicht zwischen den beiden migriert werden. **Es wird empfohlen, das Kennwort als Null zu belassen und Benutzer aufzufordern, ihre Kenn Wörter zurückzusetzen.** In ASP.net Core Identität sollte `LockoutEnd` in der Zukunft auf ein Datum festgelegt werden, wenn der Benutzer gesperrt ist. Dies wird im Migrations Skript gezeigt.
 
 ### <a name="roles"></a>Rollen
 
-|*Identity<br>(dbo). Aspnettroles)*        ||*Mitgliedschafts<br>(dbo. aspnet_Roles)*||
+|*Identität<br>(dbo). Aspnettroles)*        ||*Mitgliedschaft<br>(dbo. aspnet_Roles)*||
 |----------------------------------------|-----------------------------------|
 |**Feldname**                 |**Typ**|**Feldname**   |**Typ**         |
-|`Id`                           |string  |`RoleId`         | string          |
-|`Name`                         |string  |`RoleName`       | string          |
-|`NormalizedName`               |string  |`LoweredRoleName`| string          |
+|`Id`                           |Zeichenfolge  |`RoleId`         | Zeichenfolge          |
+|`Name`                         |Zeichenfolge  |`RoleName`       | Zeichenfolge          |
+|`NormalizedName`               |Zeichenfolge  |`LoweredRoleName`| Zeichenfolge          |
 
 ### <a name="user-roles"></a>Benutzerrollen
 
-|*Identity<br>(dbo). AspNetUserRoles*||*Mitgliedschafts<br>(dbo. aspnet_UsersInRoles)*||
+|*Identität<br>(dbo). AspNetUserRoles*||*Mitgliedschaft<br>(dbo. aspnet_UsersInRoles)*||
 |------------------------------------|------------------------------------------|
 |**Feldname**           |**Typ**  |**Feldname**|**Typ**                   |
-|`RoleId`                 |string    |`RoleId`      |string                     |
-|`UserId`                 |string    |`UserId`      |string                     |
+|`RoleId`                 |Zeichenfolge    |`RoleId`      |Zeichenfolge                     |
+|`UserId`                 |Zeichenfolge    |`UserId`      |Zeichenfolge                     |
 
 Verweisen Sie auf die vorangehenden Mapping-Tabellen, wenn Sie ein Migrations Skript für *Benutzer* und *Rollen*erstellen. Im folgenden Beispiel wird davon ausgegangen, dass Sie zwei Datenbanken auf einem Datenbankserver haben. Eine Datenbank enthält das vorhandene ASP.net-Mitgliedschafts Schema und die Daten. Die andere *coreidentitysample* -Datenbank wurde mithilfe der zuvor beschriebenen Schritte erstellt. Kommentare sind Inline enthalten, um weitere Informationen zu erhalten.
 
@@ -187,15 +193,15 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-Nachdem das vorherige Skript abgeschlossen wurde, wird die zuvor erstellte ASP.net Core Identitäts-App mit Mitgliedschafts Benutzern aufgefüllt. Benutzer müssen ihre Kenn Wörter ändern, bevor Sie sich anmelden.
+Nachdem das vorherige Skript abgeschlossen wurde, wird die Identity zuvor erstellte ASP.net Core-App mit Mitgliedschafts Benutzern aufgefüllt. Benutzer müssen ihre Kenn Wörter ändern, bevor Sie sich anmelden.
 
 > [!NOTE]
-> Wenn das Mitgliedschaftssystem Benutzer mit Benutzernamen enthielt, die nicht mit der e-Mail-Adresse übereinstimmen, sind Änderungen an der zuvor erstellten App erforderlich, um dies zu ermöglichen. Die Standardvorlage erwartet, dass `UserName` und `Email` identisch sind. In Situationen, in denen Sie sich unterscheiden, muss der Anmeldevorgang so geändert werden, dass anstelle von `Email``UserName` verwendet werden.
+> Wenn das Mitgliedschaftssystem Benutzer mit Benutzernamen enthielt, die nicht mit der e-Mail-Adresse übereinstimmen, sind Änderungen an der zuvor erstellten App erforderlich, um dies zu ermöglichen. Die Standardvorlage erwartet `UserName` , `Email` dass und identisch sind. In Situationen, in denen Sie sich unterscheiden, muss der Anmeldevorgang so geändert werden `UserName` , dass `Email`anstelle von verwendet wird.
 
-Entfernen Sie im `PageModel` der Anmeldeseite, die sich unter *Pages\Account\Login.cshtml.cs*befindet, das `[EmailAddress]`-Attribut aus der *Email-* Eigenschaft. Benennen Sie ihn in *username*um. Dies erfordert eine Änderung, wenn `EmailAddress` in der *Ansicht* und im Seiten *Modell*angegeben wird. Das Ergebnis sieht wie folgt aus:
+Entfernen Sie `PageModel` auf der Anmeldeseite, die sich unter *Pages\Account\Login.cshtml.cs*befindet, `[EmailAddress]` das-Attribut aus der *Email-* Eigenschaft. Benennen Sie ihn in *username*um. Dies erfordert eine Änderung, `EmailAddress` wo immer erwähnt wird, in der *Ansicht* und im Seiten *Modell*. Das Ergebnis sieht wie folgt aus:
 
  ![Anmeldung korrigiert](identity/_static/fixed-login.png)
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial haben Sie erfahren, wie Sie Benutzer aus der SQL-Mitgliedschaft in ASP.net Core 2,0-Identität portieren. Weitere Informationen zur ASP.net Core Identität finden Sie unter [Einführung in die Identität](xref:security/authentication/identity).
+In diesem Tutorial haben Sie erfahren, wie Sie Benutzer aus der SQL-Mitgliedschaft in IdentityASP.net Core 2,0 portieren. Weitere Informationen zu ASP.net Core Identityfinden Sie unter [Einführung in Identity ](xref:security/authentication/identity).

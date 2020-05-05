@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie, wie ASP.NET Core MVC Routingmiddleware verwendet, um die URLs der eingehenden Anforderungen abzugleichen und sie Aktionen zuzuordnen.
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206111"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775023"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing zu Controlleraktionen in ASP.NET Core
 
@@ -195,7 +201,9 @@ Das vorherige Beispiel:
 ### <a name="conventional-routing-order"></a>Konventionelle Routing Reihenfolge
 
 Herkömmliches Routing stimmt nur mit einer Kombination aus Aktion und Controller überein, die von der APP definiert werden. Dies dient zur Vereinfachung der Fälle, in denen herkömmliche Routen sich überlappen.
-Durch das hinzu <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>fügen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>von Routen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> mithilfe von, und wird ihren Endpunkten automatisch ein Bestellwert entsprechend der Reihenfolge zugewiesen, in der Sie aufgerufen werden. Übereinstimmungen aus einer zuvor angezeigten Route haben eine höhere Priorität. Beim herkömmlichen Routing ist die Reihenfolge wichtig. Im Allgemeinen sollten Routen mit Bereichen früher platziert werden, da Sie spezifischer als Routen ohne Bereich sind. [Dedizierte herkömmliche Routen](#dcr) mit catch all Route- `{*article}` Parameter wie können eine Route zu [gierig](xref:fundamentals/routing#greedy)machen, was bedeutet, dass Sie mit den URLs übereinstimmt, die Sie mit anderen Routen vergleichen wollten. Platzieren Sie die gierigen Routen später in der Routing Tabelle, um gierige Übereinstimmungen zu vermeiden.
+Durch das hinzu <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>fügen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>von Routen <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> mithilfe von, und wird ihren Endpunkten automatisch ein Bestellwert entsprechend der Reihenfolge zugewiesen, in der Sie aufgerufen werden. Übereinstimmungen aus einer zuvor angezeigten Route haben eine höhere Priorität. Beim herkömmlichen Routing ist die Reihenfolge wichtig. Im Allgemeinen sollten Routen mit Bereichen früher platziert werden, da Sie spezifischer als Routen ohne Bereich sind. [Dedizierte herkömmliche Routen](#dcr) mit "Catch-All" `{*article}` -Routen Parametern wie können eine Route zu [gierig](xref:fundamentals/routing#greedy)machen, was bedeutet, dass Sie mit den URLs übereinstimmt, die Sie mit anderen Routen vergleichen wollten. Platzieren Sie die gierigen Routen später in der Routing Tabelle, um gierige Übereinstimmungen zu vermeiden.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -206,7 +214,7 @@ Wenn zwei Endpunkte über das Routing abgleichen, muss das Routing einen der fol
 * Wählen Sie den besten Kandidaten aus.
 * Löst eine Ausnahme aus.
 
-Zum Beispiel:
+Beispiel:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -420,7 +428,7 @@ In der folgenden Tabelle werden `[Route]` die Attribute im vorangehenden Code er
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | Ja | `"Home"` |
 | `[Route("Index")]` | Ja | `"Home/Index"` |
-| `[Route("/")]` | **No** | `""` |
+| `[Route("/")]` | **Nein** | `""` |
 | `[Route("About")]` | Ja | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
@@ -463,7 +471,7 @@ Mit dem vorangehenden Code `/home` führt den `HomeController.Index` Endpunkt au
 * Der vorangehende Code ist ein Beispiel oder ein schlechtes Routing Design. Es wurde verwendet, um die `Order` -Eigenschaft zu veranschaulichen.
 * Die `Order` -Eigenschaft löst nur die Mehrdeutigkeit auf, diese Vorlage kann nicht abgeglichen werden. Es wäre besser, die `[Route("Home")]` Vorlage zu entfernen.
 
-Informationen zur Routen Reihenfolge mit Razor Pages finden Sie unter [Razor Pages Routen-und App-Konventionen: Routen Reihenfolge](xref:razor-pages/razor-pages-conventions#route-order) .
+Siehe [ Razor Seiten Routen und App-Konventionen: Routen Reihenfolge](xref:razor-pages/razor-pages-conventions#route-order) für Informationen zur Razor Routen Reihenfolge mit Seiten.
 
 In einigen Fällen wird ein HTTP 500-Fehler mit mehrdeutigen Routen zurückgegeben. Verwenden Sie die [Protokollierung](xref:fundamentals/logging/index) , um anzuzeigen, `AmbiguousMatchException`welche Endpunkte den verursacht haben
 
@@ -744,13 +752,13 @@ Der vorangehende Code hat das Erzeugen einer URL durch Übergeben des Controller
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-Die folgende Razor-Datei generiert einen HTML-Link `Destination_Route`zum:
+Die folgende Razor Datei generiert einen HTML-Link zum `Destination_Route`:
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>Generieren von URLs in HTML und Razor
+### <a name="generate-urls-in-html-and-razor"></a>Generieren von URLs in HTML undRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>stellt die <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> Methoden [HTML. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) und [HTML. Action Link](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) zum Generieren `<form>` von `<a>` -bzw.-Elementen bereit. Diese Methoden verwenden die [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) -Methode, um eine URL zu generieren, und Sie akzeptieren ähnliche Argumente. Die `Url.RouteUrl`-Begleiter für `HtmlHelper` sind `Html.BeginRouteForm` und `Html.RouteLink`, die ähnliche Funktionen aufweisen.
 
@@ -1001,7 +1009,7 @@ Im Rahmen der Anforderungsverarbeitung überprüft MVC, ob mit den Routenwerten 
 
 ### <a name="disambiguating-actions"></a>Aktionen eindeutig zuordnen
 
-Wenn zwei Aktionen beim Routing übereinstimmen, muss MVC beide analysieren und die beste auswählen oder eine Ausnahme auslösen. Zum Beispiel:
+Wenn zwei Aktionen beim Routing übereinstimmen, muss MVC beide analysieren und die beste auswählen oder eine Ausnahme auslösen. Beispiel:
 
 ```csharp
 public class ProductsController : Controller
@@ -1212,7 +1220,7 @@ Attributrouten können mithilfe der `Order`-Eigenschaft aller vom Framework bere
 > [!TIP]
 > Vermeiden Sie eine Abhängigkeit von `Order`. Wenn der URL-Raum explizite Reihenfolgenwerte erfordert, um korrekt weiterzuleiten, ist es wahrscheinlich auch für Clients verwirrend. Beim Attributrouting wird im Allgemeinen mithilfe der URL-Zuordnung die richtige Route ausgewählt. Wenn die für die URL-Generierung verwendete Standardreihenfolge nicht funktioniert, ist es meist einfacher, Routennamen als Außerkraftsetzung zu verwenden, statt die `Order`-Eigenschaft anzuwenden.
 
-Razor Pages-Routing und MVC Controller-Routing verwenden eine gemeinsame Implementierung. Informationen zur Routenreihenfolge in den Razor Pages-Themen finden Sie unter [Razor Pages-Route and App-Konventionen: Routenreihenfolge](xref:razor-pages/razor-pages-conventions#route-order).
+RazorSeiten Routing und MVC-Controller Routing haben eine Implementierung gemeinsam. Informationen zur Routen Reihenfolge Razor in den Seiten Themen finden Sie unter [ Razor Pages Route und App Conventions: Route Order](xref:razor-pages/razor-pages-conventions#route-order).
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

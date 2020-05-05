@@ -4,23 +4,29 @@ author: rick-anderson
 description: Erfahren Sie mehr über die Implementierungsdetails der ASP.net Core kurzlebigen Datenschutzanbieter.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-ephemeral
-ms.openlocfilehash: e4b0014ab3bdbf90b91383e8a33102f94faa8153
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 22a332230e15256dc33fd1d06f2da3ea8d34d3bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654013"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776889"
 ---
 # <a name="ephemeral-data-protection-providers-in-aspnet-core"></a>Kurzlebige Datenschutzanbieter in ASP.net Core
 
 <a name="data-protection-implementation-key-storage-ephemeral"></a>
 
-Es gibt Szenarien, in denen eine Anwendung eine drosswaway-`IDataProtectionProvider`benötigt. Der Entwickler kann z. b. einfach nur in einer Konsolenanwendung experimentieren, oder die Anwendung selbst ist flüchtig (es ist ein Skript oder ein Komponenten Testprojekt). Um diese Szenarien zu unterstützen, enthält das Paket [Microsoft. aspnetcore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) einen Typ `EphemeralDataProtectionProvider`. Dieser Typ stellt eine grundlegende Implementierung von `IDataProtectionProvider` bereit, deren schlüsselrepository ausschließlich im Arbeitsspeicher gespeichert ist und nicht in einen Sicherungs Speicher geschrieben wird.
+Es gibt Szenarien, in denen eine Anwendung eine drossöhe benötigt `IDataProtectionProvider`. Der Entwickler kann z. b. einfach nur in einer Konsolenanwendung experimentieren, oder die Anwendung selbst ist flüchtig (es ist ein Skript oder ein Komponenten Testprojekt). Um diese Szenarien zu unterstützen, enthält das Paket [Microsoft. aspnetcore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) einen-Typ `EphemeralDataProtectionProvider`. Dieser Typ stellt eine grundlegende Implementierung `IDataProtectionProvider` von bereit, deren schlüsselrepository ausschließlich im Arbeitsspeicher gespeichert ist und nicht in einen Sicherungs Speicher geschrieben wird.
 
-Jede Instanz von `EphemeralDataProtectionProvider` verwendet einen eigenen eindeutigen Hauptschlüssel. Wenn eine `IDataProtector`, die auf einem `EphemeralDataProtectionProvider` liegt, eine geschützte Nutzlast generiert, kann diese Nutzlast daher nur durch eine äquivalente `IDataProtector` (bei der gleichen [Zweck](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) Kette) geschützt sein, die auf derselben `EphemeralDataProtectionProvider` Instanz verankert ist.
+Jede Instanz von `EphemeralDataProtectionProvider` verwendet Ihren eigenen eindeutigen Hauptschlüssel. `IDataProtector` Wenn eine, die sich auf einem `EphemeralDataProtectionProvider` befindet, eine geschützte Nutzlast generiert, kann diese Nutzlast daher nur von einem `IDataProtector` Äquivalent (bei der gleichen [Zweck](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) Kette) geschützt werden, `EphemeralDataProtectionProvider` der sich auf derselben Instanz befindet.
 
-Im folgenden Beispiel wird veranschaulicht, wie ein `EphemeralDataProtectionProvider` instanziiert und verwendet wird, um Daten zu schützen und zu schützen.
+Das folgende Beispiel veranschaulicht das Instanziieren `EphemeralDataProtectionProvider` eines und dessen Verwendung zum schützen und Aufheben des Schutzes von Daten.
 
 ```csharp
 using System;

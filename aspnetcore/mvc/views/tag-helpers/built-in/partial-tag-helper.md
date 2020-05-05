@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 269be9ece674b39d03cb50720f4fb182c565a639
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: d3207969dfbeb9a81e0da88f38a38c6889bbfba9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651967"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775868"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>Hilfsprogramm für Teiltags in ASP.NET Core
 
@@ -24,7 +30,7 @@ Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpe
 
 ## <a name="overview"></a>Übersicht
 
-Das Hilfsprogramm für Teiltags wird für das Rendern einer [Teilansicht](xref:mvc/views/partial) auf Razor-Seiten und in MVC-Apps verwendet. Bedenken Sie dabei Folgendes:
+Das Hilfsprogramm für partielle Tags wird zum Rendern einer Razor [Teilansicht](xref:mvc/views/partial) in Seiten und MVC-Apps verwendet. Bedenken Sie dabei Folgendes:
 
 * Das Programm erfordert ASP.NET Core 2.1 oder höher.
 * Es stellt eine Alternative zur [Syntax des HTML-Hilfsprogramms](xref:mvc/views/partial#reference-a-partial-view) dar.
