@@ -5,13 +5,19 @@ description: Informationen zu gRPC-Diensten mit dem Kestrel-Server und dem ASP.N
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/index
-ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644719"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768847"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>Einführung in gRPC in .NET Core
 
@@ -54,7 +60,7 @@ message HelloReply {
 .NET-Typen für Dienste, Clients und Nachrichten werden automatisch generiert, indem *\*.proto*-Dateien in ein Projekt eingeschlossen werden:
 
 * Fügen Sie dem [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)-Paket einen Paketverweis hinzu.
-* Fügen Sie der *-Elementgruppe \** .proto`<Protobuf>`-Dateien hinzu.
+* Fügen Sie der `<Protobuf>`-Elementgruppe *\*.proto*-Dateien hinzu.
 
 ```xml
 <ItemGroup>

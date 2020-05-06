@@ -5,13 +5,19 @@ ms.author: riande
 description: Lernen Sie die Attribute für das ASP.NET Core-Link-Taghilfsprogramm kennen, und erfahren Sie, welche Rolle jedes Attribut bei der Erweiterung des Verhaltens des HTML-Linktags spielt.
 ms.custom: mvc
 ms.date: 09/24/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: d7514433bee8a138cd7d75bfd15c9798d4fd31a3
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1efd7c1a63baea4312a4a01cd9cd9c7582375d97
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653299"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777353"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>Link-Taghilfsprogramm in ASP.NET Core
 
@@ -23,7 +29,7 @@ Das [Link-Taghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelp
 
 Mit dem Link-Taghilfsprogramm können Sie ein CDN für die CSS-Datei und eine Fallbackquelle angeben, wenn das CDN nicht verfügbar ist. Das Link-Taghilfsprogramm bietet den Leistungsvorteil eines CDN kombiniert mit der Stabilität des lokalen Hostings.
 
-Das folgende Razor-Markup zeigt das `head`-Element einer Layoutdatei, die mit der Web-App-Vorlage von ASP.NET Core erstellt wurde:
+Das folgende Razor Markup zeigt das `head` -Element einer Layoutdatei, die mit der ASP.net Core Web-App-Vorlage erstellt wurde:
 
 [!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 

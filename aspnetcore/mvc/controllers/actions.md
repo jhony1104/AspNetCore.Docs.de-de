@@ -4,13 +4,19 @@ author: ardalis
 description: ''
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b7c4d61c4a71939e84bdea180a2f77b6438b15d5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653347"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774196"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -61,11 +67,11 @@ Es ist kein `Content-Type`-HTTP-Antwortheader beinhaltet, da der Antworttext kei
 
 Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: Redirect (Umleiten) oder HTTP-Statuscode.
 
-* **HTTP-Statuscode**
+* **HTTP-Status Code**
 
     Dieser Typ gibt einen HTTP-Statuscode zurück. Beispiele für Hilfsmethoden dieses Typs sind `BadRequest`, `NotFound` und `Ok`. `return BadRequest();` erzeugt beispielsweise bei der Ausführung den Statuscode 400. Wenn Methoden wie `BadRequest`, `NotFound` und `Ok` überladen werden, gelten sie nicht länger als HTTP-Statuscode-Antwortdienste, da eine Inhaltsaushandlung stattfindet.
 
-* **Redirect**
+* **Ausrichten**
 
     Dieser Typ gibt eine Umleitung an eine Aktion oder ein Ziel zurück (unter Verwendung von `Redirect`, `LocalRedirect`, `RedirectToAction` oder `RedirectToRoute`). `return RedirectToAction("Complete", new {id = 123});` leitet beispielsweise an `Complete` um und übergibt ein anonymes Objekt.
 

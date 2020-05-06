@@ -1,20 +1,24 @@
 ---
 title: ASP.net Core SignalR Produktions Hosting und-Skalierung
 author: bradygaster
-description: Erfahren Sie, wie Sie Leistungs-und Skalierungsprobleme in apps vermeiden, die ASP.net Core-SignalRverwenden.
+description: Erfahren Sie, wie Sie Leistungs-und Skalierungsprobleme in apps SignalRvermeiden, die ASP.net Core verwenden.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655159"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775075"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.net Core signalr-Hosting und-Skalierung
 
@@ -32,7 +36,7 @@ Signalr erfordert, dass alle HTTP-Anforderungen für eine bestimmte Verbindung v
 
 In allen anderen Fällen (einschließlich der Verwendung der redis-Rückwand) muss die Serverumgebung für persistente Sitzungen konfiguriert werden.
 
-Anleitungen zum Konfigurieren von Azure App Service für signalr finden Sie unter <xref:signalr/publish-to-azure-web-app>.
+Anleitungen zum Konfigurieren von Azure App Service für signalr finden <xref:signalr/publish-to-azure-web-app>Sie unter.
 
 ## <a name="tcp-connection-resources"></a>TCP-Verbindungs Ressourcen
 
@@ -52,7 +56,7 @@ Um die signalr-Ressourcenverwendung von Fehlern in anderen Web-Apps zu verhinder
 
 Um die signalr-Ressourcenverwendung von Fehlern in einer signalr-APP zu verhindern, Skalieren Sie horizontal hoch, um die Anzahl der Verbindungen zu begrenzen, die ein Server verarbeiten muss.
 
-## <a name="scale-out"></a>Horizontales Skalieren
+## <a name="scale-out"></a>Aufskalieren
 
 Eine APP, die signalr verwendet, muss alle Verbindungen nachverfolgen, die für eine Serverfarm Probleme verursachen. Fügen Sie einen Server hinzu, der neue Verbindungen erhält, die von den anderen Servern nicht bekannt sind. Beispielsweise sind in signalr auf jedem Server im folgenden Diagramm die Verbindungen auf den anderen Servern nicht bekannt. Wenn signalr auf einem der Server eine Nachricht an alle Clients senden möchte, wird die Nachricht nur an die Clients gesendet, die mit diesem Server verbunden sind.
 
@@ -94,8 +98,8 @@ Die zuvor notierten Vorteile des Azure signalr Service sind Nachteile der redis-
   * Alle Clients sind so konfiguriert, dass Sie **nur** websockets verwenden.
   * Die [Einstellung skipaushandlung](xref:signalr/configuration#configure-additional-options) ist in der Client Konfiguration aktiviert. 
    Nachdem eine Verbindung auf einem Server initiiert wurde, muss die Verbindung auf diesem Server bestehen.
-* Eine SignalR-app muss basierend auf der Anzahl von Clients horizontal hochskaliert werden, auch wenn nur wenige Nachrichten gesendet werden.
-* Eine SignalR-App verwendet erheblich mehr Verbindungs Ressourcen als eine Web-App ohne SignalR.
+* Eine SignalR app muss basierend auf der Anzahl von Clients horizontal hochskaliert werden, auch wenn nur wenige Nachrichten gesendet werden.
+* Eine SignalR -App verwendet erheblich mehr Verbindungs Ressourcen als eine Web- SignalRApp ohne.
 
 ## <a name="iis-limitations-on-windows-client-os"></a>IIS-Einschränkungen für Windows-Client Betriebssystem
 
@@ -111,7 +115,7 @@ Die vorangehenden Bedingungen machen es wahrscheinlich, dass die 10 Verbindungs 
 
 ## <a name="linux-with-nginx"></a>Linux mit Nginx
 
-Legen Sie die `Connection`-und `Upgrade` Header des Proxys für SignalR websockets auf Folgendes fest:
+Legen Sie die- `Connection` und `Upgrade` -Header des Proxys für SignalR websockets auf Folgendes fest:
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,7 +124,7 @@ proxy_set_header Connection $connection_upgrade;
 
 Weitere Informationen finden Sie unter [NGINX as a WebSocket Proxy (NGINX als Websocket-Proxy)](https://www.nginx.com/blog/websocket-nginx/).
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>Drittanbieter SignalR Rückwand-Anbieter
+## <a name="third-party-signalr-backplane-providers"></a>Drittanbieter- SignalR Rückwand-Anbieter
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Tro](https://github.com/OrleansContrib/SignalR.Orleans)
@@ -129,5 +133,5 @@ Weitere Informationen finden Sie unter [NGINX as a WebSocket Proxy (NGINX als We
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-* [Dokumentation zu Azure SignalR Service](/azure/azure-signalr/signalr-overview)
+* [Dokumentation SignalR zu Azure-Diensten](/azure/azure-signalr/signalr-overview)
 * [Einrichten einer redis-Rückwand](xref:signalr/redis-backplane)

@@ -5,17 +5,20 @@ description: Erfahren Sie, wie Sie Blazor-Apps hosten und bereitstellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/11/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: ddf70da29a82d462422c1bdf74ff45b92bb10b56
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79434264"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775166"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
@@ -32,6 +35,11 @@ Apps werden für die Bereitstellung in Releasekonfigurationen veröffentlicht.
 1. Wählen Sie **Build** > **Publish {APPLICATION}** auf der Navigationsleiste aus.
 1. Wählen Sie das *Veröffentlichungsziel* aus. Um lokal zu veröffentlichen, wählen Sie **Ordner** aus.
 1. Übernehmen Sie den Standardspeicherort im Feld **Ordner auswählen**, oder geben Sie einen anderen Speicherort an. Wählen Sie die Schaltfläche **Veröffentlichen** aus.
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
+
+1. Klicken Sie auf **Erstellen** > **In Ordner veröffentlichen**.
+1. Bestätigen Sie den Ordner, in dem die veröffentlichten Ressourcen gespeichert werden, und klicken Sie auf **Veröffentlichen**.
 
 # <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
@@ -67,7 +75,7 @@ Der *Basispfad einer App* beschreibt den URL-Stammpfad der App. Betrachten Sie d
 
 Wenn keine zusätzlichen Konfiguration für `CoolApp` festgelegt wird, weiß die untergeordnete App in diesem Szenario nicht, wo sie sich auf dem Server befindet. Beispielsweise kann die App keine richtigen relativen URLs zu ihren Ressourcen erstellen, ohne zu wissen, dass sie sich unter dem relativen URL-Pfad `/CoolApp/` befindet.
 
-Das Blazor-Attribut des Tags `https://www.contoso.com/CoolApp/` wird auf den relativen Stammpfad in der Datei `<base>`Pages/_Host.cshtml`href` (*Server) oder*wwwroot/index.htmlBlazor (*WebAssembly) festgelegt, um die Konfiguration für den Basispfad* der Blazor-App anzugeben:
+Das `href`-Attribut des Tags `<base>` wird auf den relativen Stammpfad in der Datei *Pages/_Host.cshtml* (Blazor Server) oder *wwwroot/index.html* (Blazor WebAssembly) festgelegt, um die Konfiguration für den Basispfad `https://www.contoso.com/CoolApp/` der Blazor-App anzugeben:
 
 ```html
 <base href="/CoolApp/">
