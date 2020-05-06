@@ -1,23 +1,29 @@
 ---
-title: Softwareschlüsselspeicher-Anbieter in ASP.NET Core
+title: Schlüsselspeicher Anbieter in ASP.net Core
 author: rick-anderson
-description: Informationen Sie zu den softwareschlüsselspeicher-Anbieter in ASP.NET Core und wichtige Speicherorte zu konfigurieren.
+description: Erfahren Sie mehr über die wichtigsten Speicher Anbieter in ASP.net Core und wie Sie Schlüsselspeicher Orte konfigurieren.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653383"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776876"
 ---
-# <a name="key-storage-providers-in-aspnet-core"></a>Softwareschlüsselspeicher-Anbieter in ASP.NET Core
+# <a name="key-storage-providers-in-aspnet-core"></a>Schlüsselspeicher Anbieter in ASP.net Core
 
-Das Datenschutzsystem [setzt standardmäßig einen Ermittlungs Mechanismus ein](xref:security/data-protection/configuration/default-settings) , um zu bestimmen, wo Kryptografieschlüssel persistent gespeichert werden sollen. Der Entwickler kann außer Kraft setzen als standardmäßiger Ermittlungsmechanismus verwendet und geben Sie den Speicherort manuell.
+Das Datenschutzsystem [setzt standardmäßig einen Ermittlungs Mechanismus ein](xref:security/data-protection/configuration/default-settings) , um zu bestimmen, wo Kryptografieschlüssel persistent gespeichert werden sollen. Der Entwickler kann den Standard Ermittlungs Mechanismus überschreiben und den Speicherort manuell angeben.
 
 > [!WARNING]
-> Wenn Sie einem Standort der explizite schlüsselpersistenz angeben, hebt die System zum Schutz von Daten, sodass Schlüssel nicht mehr im Ruhezustand verschlüsselt sind die wichtigsten standardverschlüsselung auf Rest-Mechanismus, Registrierung. Es wird empfohlen, zusätzlich [einen expliziten Schlüssel Verschlüsselungsmechanismus](xref:security/data-protection/implementation/key-encryption-at-rest) für Produktions Bereitstellungen anzugeben.
+> Wenn Sie einen expliziten Speicherort für die Schlüssel Persistenz angeben, hebt das Datenschutzsystem die Standardverschlüsselung im Ruhezustand auf, sodass Schlüssel im Ruhezustand nicht mehr verschlüsselt werden. Es wird empfohlen, zusätzlich [einen expliziten Schlüssel Verschlüsselungsmechanismus](xref:security/data-protection/implementation/key-encryption-at-rest) für Produktions Bereitstellungen anzugeben.
 
 ## <a name="file-system"></a>Dateisystem
 
@@ -31,11 +37,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Der `DirectoryInfo` kann auf ein Verzeichnis auf dem lokalen Computer verweisen oder auf einen Ordner auf einer Netzwerkfreigabe verweisen. Wenn Sie auf ein Verzeichnis auf dem lokalen Computer verweisen (und das Szenario darin besteht, dass nur apps auf dem lokalen Computer Zugriff benötigen, um dieses Repository zu verwenden), können Sie die Verwendung von [Windows DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (unter Windows) zum Verschlüsseln der Schlüssel im Ruhezustand in Erwägung gezogen. Andernfalls sollten Sie die Verwendung eines [X. 509-Zertifikats](xref:security/data-protection/implementation/key-encryption-at-rest) zum Verschlüsseln der Schlüssel im Ruhezustand in Erwägung gezogen.
+`DirectoryInfo` Kann auf ein Verzeichnis auf dem lokalen Computer zeigen, oder es kann auf einen Ordner auf einer Netzwerkfreigabe verweisen. Wenn Sie auf ein Verzeichnis auf dem lokalen Computer verweisen (und das Szenario darin besteht, dass nur apps auf dem lokalen Computer Zugriff benötigen, um dieses Repository zu verwenden), können Sie die Verwendung von [Windows DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (unter Windows) zum Verschlüsseln der Schlüssel im Ruhezustand in Erwägung gezogen. Andernfalls sollten Sie die Verwendung eines [X. 509-Zertifikats](xref:security/data-protection/implementation/key-encryption-at-rest) zum Verschlüsseln der Schlüssel im Ruhezustand in Erwägung gezogen.
 
 ## <a name="azure-storage"></a>Azure Storage
 
-Das Paket [Microsoft. aspnetcore. dataprotection. azurestorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) ermöglicht die Speicherung von Datenschutz Schlüsseln in Azure BLOB Storage. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das Paket [Microsoft. aspnetcore. dataprotection. azurestorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) ermöglicht die Speicherung von Datenschutz Schlüsseln in Azure BLOB Storage. Schlüssel können für mehrere Instanzen einer Web-App freigegeben werden. Apps können Authentifizierungs Cookies oder den CSRF-Schutz über mehrere Server hinweg freigeben.
 
 Zum Konfigurieren des Azure BLOB Storage Anbieters müssen Sie eine der [persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) -über Ladungen abrufen.
 
@@ -70,13 +76,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Das [Microsoft. aspnetcore. dataprotection. stackexchangeredis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das [Microsoft. aspnetcore. dataprotection. stackexchangeredis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können für mehrere Instanzen einer Web-App freigegeben werden. Apps können Authentifizierungs Cookies oder den CSRF-Schutz über mehrere Server hinweg freigeben.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Das [Microsoft. aspnetcore. dataprotection. redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können auf mehrere Instanzen einer Web-App gemeinsam genutzt werden. Apps können Authentifizierungscookies oder CSRF-Schutz über mehrere Server hinweg freigeben.
+Das [Microsoft. aspnetcore. dataprotection. redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) -Paket ermöglicht das Speichern von Datenschutz Schlüsseln in einem redis-Cache. Schlüssel können für mehrere Instanzen einer Web-App freigegeben werden. Apps können Authentifizierungs Cookies oder den CSRF-Schutz über mehrere Server hinweg freigeben.
 
 ::: moniker-end
 
@@ -110,7 +116,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-Weitere Informationen finden Sie in den folgenden Themen:
+Weitere Informationen finden Sie unter den folgenden Themen:
 
 * [Stackexchange. redis connectionmultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
 * [Azure Redis Cache](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
@@ -120,7 +126,7 @@ Weitere Informationen finden Sie in den folgenden Themen:
 
 **Gilt nur für Windows-bereit Stellungen.**
 
-Die app möglicherweise manchmal nicht über Schreibzugriff auf das Dateisystem. Stellen Sie sich ein Szenario vor, in dem eine App als virtuelles Dienst Konto (z. b. die APP-Pool Identität von *w3wp. exe*) ausgeführt wird. In diesen Fällen kann der Administrator einen Registrierungsschlüssel bereitstellen, der von der dienstkontoidentität zugänglich ist. Nennen Sie die [persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) -Erweiterungsmethode, wie unten gezeigt. Geben Sie einen [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) an, der auf den Speicherort verweist, an dem kryptografische Schlüssel gespeichert werden sollen:
+Manchmal verfügt die APP möglicherweise nicht über Schreibzugriff auf das Dateisystem. Stellen Sie sich ein Szenario vor, in dem eine App als virtuelles Dienst Konto (z. b. die APP-Pool Identität von *w3wp. exe*) ausgeführt wird. In diesen Fällen kann der Administrator einen Registrierungsschlüssel bereitstellen, der über die Dienst Konto Identität zugänglich ist. Nennen Sie die [persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) -Erweiterungsmethode, wie unten gezeigt. Geben Sie einen [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) an, der auf den Speicherort verweist, an dem kryptografische Schlüssel gespeichert werden sollen:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -139,15 +145,15 @@ public void ConfigureServices(IServiceCollection services)
 
 Das [Microsoft. aspnetcore. dataprotection. entityframeworkcore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) -Paket bietet einen Mechanismus zum Speichern von Datenschutz Schlüsseln in einer Datenbank mithilfe von Entity Framework Core. Das `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` nuget-Paket muss der Projektdatei hinzugefügt werden. es ist nicht Teil des [Microsoft. aspnetcore. app-Metapakets](xref:fundamentals/metapackage-app).
 
-Mit diesem Paket können Schlüssel über mehrere Instanzen einer Web-app hinweg freigegeben werden.
+Mit diesem Paket können Schlüssel für mehrere Instanzen einer Web-App freigegeben werden.
 
-Um den EF Core-Anbieter zu konfigurieren, müssen Sie die [persistkeystodbcontext\<tcontext >](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) -Methode abrufen:
+Um den EF Core-Anbieter zu konfigurieren, müssen Sie die " [\<persistkeystodbcontext tcontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) "->Methode abrufen:
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-Der generische Parameter (`TContext`) muss von [dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) erben und [idataschutzkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)implementieren:
+Der generische Parameter `TContext`muss von [dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) erben und [idataschutzkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)implementieren:
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
@@ -173,7 +179,7 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext` ist die im vorangehenden Codebeispiel definierte `DbContext`. Wenn Sie ein `DbContext` mit einem anderen Namen verwenden, ersetzen Sie den Namen Ihrer `DbContext` durch `MyKeysContext`.
+`MyKeysContext`ist der `DbContext` , der im vorangehenden Codebeispiel definiert wurde. Wenn Sie einen `DbContext` mit einem anderen Namen verwenden, ersetzen Sie den `DbContext` Namen durch `MyKeysContext`.
 
 Die `DataProtectionKeys` Klasse/Entität übernimmt die Struktur, die in der folgenden Tabelle gezeigt wird.
 
@@ -185,6 +191,6 @@ Die `DataProtectionKeys` Klasse/Entität übernimmt die Struktur, die in der fol
 
 ::: moniker-end
 
-## <a name="custom-key-repository"></a>Benutzerdefinierte Schlüssel-repository
+## <a name="custom-key-repository"></a>Repository für benutzerdefinierte Schlüssel
 
 Wenn die in-Box-Mechanismen nicht geeignet sind, kann der Entwickler einen eigenen Schlüssel Persistenzmechanismus angeben, indem er ein benutzerdefiniertes [ixmlrepository](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.ixmlrepository)bereitstellt.

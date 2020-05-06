@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie ASP.net Core Controller und den Aktions Zugriff einschränken, indem Sie Rollen an das Autorisierungs Attribut übergeben.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 28aa3df6aa661d0b762df78fe611cd827af43f75
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 01d4239377b128f711a110a821e1afea58ca14a7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651637"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776538"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>Rollenbasierte Autorisierung in ASP.net Core
 
@@ -20,9 +26,9 @@ Wenn eine Identität erstellt wird, kann Sie zu einer oder mehreren Rollen gehö
 
 ## <a name="adding-role-checks"></a>Rollen Prüfungen werden hinzugefügt
 
-Rollenbasierte Autorisierungs Überprüfungen sind deklarativ,&mdash;der Entwickler diese innerhalb des Codes einbettet, für einen Controller oder eine Aktion innerhalb eines Controllers, um Rollen anzugeben, in denen der aktuelle Benutzer Mitglied sein muss, um auf die angeforderte Ressource zuzugreifen.
+Rollenbasierte Autorisierungs Überprüfungen sind deklarativ&mdash;. der Entwickler bettet diese in Ihren Code ein, und zwar für einen Controller oder eine Aktion innerhalb eines Controllers, wobei Rollen angegeben werden, in denen der aktuelle Benutzer Mitglied sein muss, um auf die angeforderte Ressource zuzugreifen.
 
-Der folgende Code schränkt z. b. den Zugriff auf alle Aktionen auf dem `AdministrationController` für Benutzer ein, die Mitglied der `Administrator`-Rolle sind:
+Der folgende Code schränkt z. b. den Zugriff auf alle Aktionen `AdministrationController` für den Benutzer ein, die Mitglied der `Administrator` Rolle sind:
 
 ```csharp
 [Authorize(Roles = "Administrator")]
@@ -40,9 +46,9 @@ public class SalaryController : Controller
 }
 ```
 
-Auf diesen Controller kann nur von Benutzern zugegriffen werden, die Mitglieder der Rolle "`HRManager`" oder "`Finance`" sind.
+Auf diesen Controller kann nur von Benutzern zugegriffen werden, die Mitglieder der `HRManager` Rolle oder der `Finance` Rolle sind.
 
-Wenn Sie mehrere Attribute anwenden, muss ein Benutzer, der auf einen Benutzer zugreifen muss, ein Mitglied aller angegebenen Rollen sein. Das folgende Beispiel erfordert, dass ein Benutzer Mitglied der Rolle "`PowerUser`" und "`ControlPanelUser`" sein muss.
+Wenn Sie mehrere Attribute anwenden, muss ein Benutzer, der auf einen Benutzer zugreifen muss, ein Mitglied aller angegebenen Rollen sein. Das folgende Beispiel erfordert, dass ein Benutzer Mitglied der `PowerUser` -Rolle und der- `ControlPanelUser` Rolle sein muss.
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -69,7 +75,7 @@ public class ControlPanelController : Controller
 }
 ```
 
-In den vorherigen Code Ausschnitten können Mitglieder der Rolle "`Administrator`" oder "`PowerUser`" auf den Controller und die `SetTime` Aktion zugreifen, aber nur Mitglieder der `Administrator` Rolle können auf die `ShutDown` Aktion zugreifen.
+In den vorherigen Code Ausschnitten können Mitglieder der `Administrator` Rolle oder der `PowerUser` Rolle auf den Controller und die `SetTime` Aktion zugreifen, jedoch können nur Mitglieder der `Administrator` Rolle auf die `ShutDown` Aktion zugreifen.
 
 Sie können auch einen Controller sperren, aber anonymen, nicht authentifizierten Zugriff auf einzelne Aktionen zulassen.
 
@@ -90,10 +96,10 @@ public class ControlPanelController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Für Razor Pages können die `AuthorizeAttribute` wie folgt angewendet werden:
+Für Razor -Seiten `AuthorizeAttribute` kann auf Folgendes angewendet werden:
 
 * Verwenden einer [Konvention](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)oder
-* Anwenden der `AuthorizeAttribute` auf die `PageModel` Instanz:
+* Anwenden `AuthorizeAttribute` von auf die `PageModel` -Instanz:
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -106,14 +112,14 @@ public class UpdateModel : PageModel
 ```
 
 > [!IMPORTANT]
-> Filter Attribute, einschließlich `AuthorizeAttribute`, können nur auf ' pagemodel ' angewendet werden und können nicht auf bestimmte seitenhandlermethoden angewendet werden.
+> Filter Attribute, einschließlich `AuthorizeAttribute`, können nur auf pagemodel angewendet werden und können nicht auf bestimmte seitenhandlermethoden angewendet werden.
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
 
 ## <a name="policy-based-role-checks"></a>Richtlinien basierte Rollen Überprüfungen
 
-Rollenanforderungen können auch mit der neuen Richtlinien Syntax ausgedrückt werden, bei der ein Entwickler eine Richtlinie beim Start als Teil der Autorisierungs Dienst Konfiguration registriert. Dies tritt normalerweise in `ConfigureServices()` in Ihrer *Startup.cs* -Datei auf.
+Rollenanforderungen können auch mit der neuen Richtlinien Syntax ausgedrückt werden, bei der ein Entwickler eine Richtlinie beim Start als Teil der Autorisierungs Dienst Konfiguration registriert. Dies tritt normalerweise `ConfigureServices()` in Ihrer *Startup.cs* -Datei auf.
 
 ::: moniker range=">= aspnetcore-3.0"
 ```csharp
@@ -146,7 +152,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ::: moniker-end
 
-Richtlinien werden mithilfe der `Policy`-Eigenschaft des `AuthorizeAttribute` Attributs angewendet:
+Richtlinien werden mithilfe der `Policy` -Eigenschaft des `AuthorizeAttribute` -Attributs angewendet:
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -156,16 +162,16 @@ public IActionResult Shutdown()
 }
 ```
 
-Wenn Sie mehrere zulässige Rollen in einer Anforderung angeben möchten, können Sie Sie als Parameter für die `RequireRole`-Methode angeben:
+Wenn Sie mehrere zulässige Rollen in einer Anforderung angeben möchten, können Sie Sie als Parameter für die `RequireRole` -Methode angeben:
 
 ```csharp
 options.AddPolicy("ElevatedRights", policy =>
                   policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 ```
 
-In diesem Beispiel werden Benutzer autorisiert, die zu den Rollen `Administrator`, `PowerUser` oder `BackupAdministrator` gehören.
+In diesem Beispiel werden Benutzer autorisiert, die zu `Administrator`den `PowerUser` Rollen `BackupAdministrator` , oder gehören.
 
-### <a name="add-role-services-to-identity"></a>Fügen Sie Rollendienste hinzu, die Identität
+### <a name="add-role-services-to-identity"></a>Rollen Dienste hinzufügen zuIdentity
 
 Anfügen von [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) zum Hinzufügen von Rollen Diensten:
 

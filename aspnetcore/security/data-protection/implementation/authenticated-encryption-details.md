@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie mehr über die Implementierungsdetails ASP.net Core authentifizierte Verschlüsselung für den Datenschutz.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655003"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776967"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>Details zu authentifizierten Verschlüsselung in ASP.net Core
 
@@ -55,4 +61,4 @@ Die nächsten 128 Bits oder 16 Bytes sind der Schlüssel Bezeichner (80 9c 81 0C
 Der Rest enthält die Nutzlast und ist spezifisch für das verwendete Format.
 
 > [!WARNING]
-> Alle Nutzlasten, die mit einem bestimmten Schlüssel geschützt werden, beginnen mit dem gleichen 20-Byte-Header (Magic Value, Key ID). Administratoren können diese Tatsache für Diagnosezwecke verwenden, um zu identifizieren, wann eine Nutzlast generiert wurde. Beispielsweise entspricht die obige Nutzlast dem Schlüssel {0c819c80-6619-4019-9536-53f8aaffee57}. Wenn Sie nach dem Überprüfen des schlüsselrepository feststellen, dass das Aktivierungsdatum dieses bestimmten Schlüssels 2015-01-01 war und das Ablaufdatum 2015-03-01 war, ist es sinnvoll anzunehmen, dass die Nutzlast (wenn nicht manipuliert) innerhalb dieses Fensters generiert wurde. der Mogel-Faktor auf jeder Seite.
+> Alle Nutzlasten, die mit einem bestimmten Schlüssel geschützt werden, beginnen mit dem gleichen 20-Byte-Header (Magic Value, Key ID). Administratoren können diese Tatsache für Diagnosezwecke verwenden, um zu identifizieren, wann eine Nutzlast generiert wurde. Beispielsweise entspricht die obige Nutzlast dem Schlüssel {0c819c80-6619-4019-9536-53f8aaffee57}. Wenn Sie nach dem Überprüfen des schlüsselrepository feststellen, dass das Aktivierungsdatum dieses bestimmten Schlüssels 2015-01-01 und das Ablaufdatum 2015-03-01 war, sollten Sie davon ausgehen, dass die Nutzlast (wenn nicht manipuliert) innerhalb dieses Fensters generiert wurde.

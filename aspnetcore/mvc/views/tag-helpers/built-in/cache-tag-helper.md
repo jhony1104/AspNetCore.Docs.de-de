@@ -5,13 +5,19 @@ description: Erfahren Sie, wie das Cache-Taghilfsprogramm verwendet wird.
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: db9e1a968588410f11e5f137dfdd4542df505ebc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653305"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773941"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Cache-Taghilfsprogramm im ASP.NET Core MVC
 
@@ -35,9 +41,9 @@ Das folgende Razor-Markup speichert das aktuelle Datum zwischen:
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolean         | `true`, `false` | `true`  |
+| Boolesch         | `true`, `false` | `true`  |
 
-`enabled` legt fest, ob der Inhalt zwischengespeichert wird, der vom Cache-Taghilfsprogramm eingeschlossen wird. Der Standardwert lautet `true`. Wenn diese Option auf `false` festgelegt ist, wird die gerenderte Ausgabe **nicht** zwischengespeichert.
+`enabled` legt fest, ob der Inhalt zwischengespeichert wird, der vom Cache-Taghilfsprogramm eingeschlossen wird. Der Standardwert ist `true`. Wenn diese Option auf `false` festgelegt ist, wird die gerenderte Ausgabe **nicht** zwischengespeichert.
 
 Beispiel:
 
@@ -147,7 +153,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{Make?}/{Model?}");
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by-route="Make,Model">
@@ -175,7 +181,7 @@ Das folgende Beispiel überwacht das Cookie, das der ASP.NET Core-Identität zug
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolean         | `true`, `false` | `true`  |
+| Boolesch         | `true`, `false` | `true`  |
 
 `vary-by-user` gibt an, ob der Cache zurückgesetzt wird, wenn sich ein anderer Benutzer anmeldet, also der Kontextprinzipal geändert wird. Der aktuelle Benutzer wird auch als Anforderungskontextprinzipal bezeichnet und kann in einer Razor-Ansicht angezeigt werden, indem Sie auf `@User.Identity.Name` verweisen.
 
@@ -212,7 +218,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 }
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by="@Model">

@@ -5,13 +5,19 @@ description: Informationen zum Formatieren von Antwortdaten in Web-APIS in ASP.N
 ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 392e4905126ffb6801cc55055f1d511f5fa99dd1
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
+ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642711"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774235"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -206,11 +212,11 @@ Bei Verwendung dieses Codes sollten Controllermethoden das geeignete Format basi
 
 ### <a name="specify-a-format"></a>Angeben eines Formats
 
-Um die Antwortformate [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) einzuschränken, wenden Sie den Filter an. Wie [Filters](xref:mvc/controllers/filters)die `[Produces]` meisten Filter kann auch der Aktionsbereich, der Controller oder der globale Bereich angewendet werden:
+Um die Antwortformate einzuschränken, wenden Sie [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) den Filter an. Wie die [Filters](xref:mvc/controllers/filters)meisten Filter `[Produces]` können auch auf Aktion, Controller oder globaler Bereich angewendet werden:
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-Der [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) vorangehende Filter:
+Der vorangehende [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) Filter:
 
 * Er erzwingt die Rückgabe von JSON-formatierten Antworten von allen Aktionen im Controller.
 * Wenn andere Formatierer konfiguriert sind und der Client ein anderes Format angibt, wird JSON zurückgegeben.
@@ -246,7 +252,7 @@ Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die di
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) Attribut überprüft, ob der Formatwert im vorhanden ist, `RouteData` und ordnet das Antwortformat dem entsprechenden Formatformat zu, wenn die Antwort erstellt wird.
+Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) `RouteData` -Attribut überprüft das vorhanden sein des Format Werts im und ordnet das Antwortformat dem entsprechenden Formatierer zu, wenn die Antwort erstellt wird.
 
 |           Route        |             Formatierungsprogramm              |
 |------------------------|------------------------------------|
