@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 86808e6bdd3bb669a62ad9e333b11df4c09a9cd3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774638"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850434"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.net Core
 
@@ -40,7 +40,7 @@ In diesem Tutorial lernen Sie Folgendes:
 
 Für diese exemplarische Vorgehensweise sind die folgenden Schritte erforderlich:
 
-* [Microsoft Azure-Abonnement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+* [Microsoft Azure-Abonnement](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Erstellen des Azure Active Directory B2C Mandanten
@@ -94,7 +94,7 @@ In Visual Studio:
     | **Rückruf Pfad**             | *&lt;Standardwert verwenden&gt;*                       |
     | **Registrierungs-oder Anmelde Richtlinie** | `B2C_1_SiUpIn`                                        |
     | **Kenn Wort Richtlinie zurücksetzen**     | `B2C_1_SSPR`                                          |
-    | **Profil Richtlinie bearbeiten**       | *&lt;Lassen Sie dieses Feld leer.&gt;*                                 |
+    | **Profil Richtlinie bearbeiten**       | *&lt;leer lassen&gt;*                                 |
     
     Wählen Sie den Link **Kopieren** neben dem **Antwort-URI** aus, um den Antwort-URI in die Zwischenablage zu kopieren. Wählen Sie **OK** aus, um das Dialogfeld **Authentifizierung ändern** zu schließen. Wählen Sie **OK** , um die Web-App zu erstellen.
 
@@ -168,4 +168,4 @@ Nun, da die ASP.net Core-App für die Verwendung von Azure AD B2C für die Authe
 * Konfigurieren Sie zusätzliche Identitäts Anbieter wie [Microsoft](/azure/active-directory-b2c/active-directory-b2c-setup-msa-app), [Facebook](/azure/active-directory-b2c/active-directory-b2c-setup-fb-app), [Google](/azure/active-directory-b2c/active-directory-b2c-setup-goog-app), [Amazon](/azure/active-directory-b2c/active-directory-b2c-setup-amzn-app), [Twitter](/azure/active-directory-b2c/active-directory-b2c-setup-twitter-app)und andere.
 * [Verwenden Sie die Azure AD Graph-API](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) , um zusätzliche Benutzerinformationen, wie z. b. die Gruppenmitgliedschaft, aus dem Azure AD B2C-Mandanten abzurufen.
 * [Sichern einer ASP.net Core-Web-API mithilfe von Azure AD B2C](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/).
-* [Verwenden Sie Azure AD B2C eine .net-Web-API aus einer .net-Web-App](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-web-api-dotnet).
+* [Tutorial: Gewähren des Zugriffs auf eine ASP.net-Web-API mithilfe von Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-web-api-dotnet).

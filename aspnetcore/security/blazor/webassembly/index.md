@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: c096419f4866ea2f1db135594c4b88c89c7c90d1
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138416"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767999"
 ---
-# <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>Sichern von Blazor-WebAssembly für ASP.NET Core
+# <a name="secure-aspnet-core-blazor-webassembly"></a>Sichern von Blazor-WebAssembly für ASP.NET Core
 
 Von [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -29,7 +32,7 @@ Blazor-WebAssembly-Apps werden auf die gleiche Weise gesichert wie Single-Page-A
 
 ## <a name="authentication-library"></a>Authentifizierungsbibliothek
 
-Blazor-WebAssembly unterstützt die Authentifizierung und Autorisierung von Apps mit OIDC über die `Microsoft.AspNetCore.Components.WebAssembly.Authentication`-Bibliothek. Die Bibliothek stellt mehrere Primitive für die nahtlose Authentifizierung für ASP.NET Core-Back-Ends bereit. Die Bibliothek integriert die ASP.NET Core-Identität mit der API-Authentifizierungsunterstützung, die auf [Identity Server](https://identityserver.io/) basiert. Die Bibliothek kann bei einem Drittanbieter-Identitätsanbieter authentifiziert werden, der OIDC unterstützt (die OpenID-Anbieter).
+Blazor-WebAssembly unterstützt die Authentifizierung und Autorisierung von Apps mit OIDC über die `Microsoft.AspNetCore.Components.WebAssembly.Authentication`-Bibliothek. Die Bibliothek stellt mehrere Primitive für die nahtlose Authentifizierung für ASP.NET Core-Back-Ends bereit. Die Bibliothek integriert ASP.NET Core Identity mit der API-Authentifizierungsunterstützung, die auf [Identity Server](https://identityserver.io/) basiert. Die Bibliothek kann bei einem Drittanbieter-Identitätsanbieter authentifiziert werden, der OIDC unterstützt (die OpenID-Anbieter).
 
 Die Authentifizierungsunterstützung in Blazor-WebAssembly basiert auf der *oidc-client.js*-Bibliothek, die für die Verarbeitung der zugrunde liegenden Details des Authentifizierungsprotokolls verwendet wird.
 
@@ -49,7 +52,7 @@ Die `Microsoft.AspNetCore.Components.WebAssembly.Authentication`-Bibliothek biet
 
 * Wenn ein anonymer Benutzer auf die Anmeldeschaltfläche klickt oder eine Seite mit angewendetem [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)-Attribut anfordert, wird der Benutzer zur Anmeldeseite (`/authentication/login`) der App weitergeleitet.
 * Auf der Anmeldeseite bereitet die Authentifizierungsbibliothek eine Umleitung zum Autorisierungsendpunkt vor. Der Autorisierungsendpunkt befindet sich außerhalb der Blazor-WebAssembly-App und kann als separater Ursprung gehostet werden. Der Endpunkt ist dafür verantwortlich, zu bestimmen, ob der Benutzer authentifiziert ist, und dass ein oder mehrere Token als Antwort ausgegeben werden. Die Authentifizierungsbibliothek stellt einen Anmelderückruf zum Empfangen der Authentifizierungsantwort bereit.
-  * Wenn der Benutzer nicht authentifiziert ist, wird er an das zugrunde liegende Authentifizierungssystem umgeleitet (normalerweise die ASP.NET Core Identität).
+  * Wenn der Benutzer nicht authentifiziert ist, wird er an das zugrunde liegende Authentifizierungssystem umgeleitet (normalerweise ASP.NET Core Identity).
   * Wenn der Benutzer bereits authentifiziert wurde, generiert der Authentifizierungsendpunkt die entsprechenden Token und leitet den Browser zurück an den Anmelderückrufendpunkt (`/authentication/login-callback`).
 * Wenn die Blazor-WebAssembly-App den Anmelderückrufendpunkt (`/authentication/login-callback`) lädt, wird die Authentifizierungsantwort verarbeitet.
   * Sobald der Authentifizierungsprozess erfolgreich abgeschlossen wird, wird der Benutzer authentifiziert und optional an die ursprüngliche geschützte URL weitergeleitet, die vom Benutzer angefordert wurde.

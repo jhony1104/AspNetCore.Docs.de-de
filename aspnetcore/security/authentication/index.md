@@ -5,13 +5,19 @@ description: Hier erfahren Sie mehr zur Authentifizierung in ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/index
-ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 4e47bd91ce15836035d3e8f0a8ceed264f308b22
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79434329"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768636"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Übersicht über die ASP.NET Core-Authentifizierung
 
@@ -41,7 +47,7 @@ Der `AddAuthentication`-Parameter `JwtBearerDefaults.AuthenticationScheme` ist d
 
 Wenn mehrere Schemas verwendet werden, können Autorisierungsrichtlinien (oder Autorisierungsattribute) [das Authentifizierungsschema (oder die Authentifizierungsschemas) angeben](xref:security/authorization/limitingidentitybyscheme), von denen sie zur Authentifizierung des Benutzers abhängig sind. Im Beispiel oben kann das Cookie-Authentifizierungsschema verwendet werden, indem der Name angegeben wird (standardmäßig `CookieAuthenticationDefaults.AuthenticationScheme`, obwohl beim Aufruf von `AddCookie` ein anderer Name angegeben werden kann).
 
-In bestimmten Fällen erfolgt der Aufruf von `AddAuthentication` automatisch durch andere Erweiterungsmethoden. Wenn Sie z. B. [ASP.NET Core-Identität](xref:security/authentication/identity) verwenden, wird `AddAuthentication` intern aufgerufen.
+In bestimmten Fällen erfolgt der Aufruf von `AddAuthentication` automatisch durch andere Erweiterungsmethoden. Wenn Sie z. B. [ASP.NET Core Identity](xref:security/authentication/identity) verwenden, wird `AddAuthentication` intern aufgerufen.
 
 Die Authentifizierungsmiddleware wird in `Startup.Configure` durch Aufrufen der <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>-Erweiterungsmethode für den `IApplicationBuilder` der App hinzugefügt. Durch Aufrufen von `UseAuthentication` wird die Middleware registriert, die die zuvor registrierten Authentifizierungsschemas verwendet. Rufen Sie `UseAuthentication` vor jeder Middleware auf, die voraussetzt, dass Benutzer authentifiziert sind. Wenn Sie das Endpunktrouting verwenden, muss der Aufruf von `UseAuthentication`:
 

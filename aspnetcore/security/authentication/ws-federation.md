@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: ce0c484e84bc2ddb4a1d287246c63663f3875924
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: fede3887ad7dacd40cf3bb5d1b785392a9bc1480
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768428"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850460"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Authentifizieren von Benutzern mit dem WS-Verbund in ASP.net Core
 
-In diesem Tutorial wird veranschaulicht, wie Sie es Benutzern ermöglichen, sich mit einem WS-Verbund-Authentifizierungs Anbieter wie Active Directory-Verbunddienste (AD FS) (ADFS) oder [Azure Active Directory](/azure/active-directory/) (AAD) anzumelden. Dabei wird die in [Facebook, Google und der Authentifizierung externer Anbieter](xref:security/authentication/social/index)beschriebene ASP.net Core 2,0-Beispiel-App verwendet.
+In diesem Tutorial wird veranschaulicht, wie Sie es Benutzern ermöglichen, sich mit einem WS-Verbund-Authentifizierungs Anbieter wie Active Directory-Verbunddienste (AD FS) (ADFS) oder [Azure Active Directory](/azure/active-directory/) (AAD) anzumelden. Dabei wird die ASP.net Core-Beispiel-App verwendet, die in [Facebook, Google und der Authentifizierung externer Anbieter beschrieben wird](xref:security/authentication/social/index).
 
-Bei ASP.net Core 2,0-apps wird die WS-Verbund Unterstützung von [Microsoft. aspnetcore. Authentication. wsfederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)bereitgestellt. Diese Komponente wird von [Microsoft. owin. Security. wsfederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) portiert und nutzt viele der Mechanismen dieser Komponente. Allerdings unterscheiden sich die Komponenten auf einige wichtige Weise.
+Bei ASP.net Core-apps wird die WS-Verbund Unterstützung von [Microsoft. aspnetcore. Authentication. wsfederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)bereitgestellt. Diese Komponente wird von [Microsoft. owin. Security. wsfederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) portiert und nutzt viele der Mechanismen dieser Komponente. Allerdings unterscheiden sich die Komponenten auf einige wichtige Weise.
 
 Standardmäßig wird die neue Middleware:
 

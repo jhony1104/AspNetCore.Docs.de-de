@@ -8,16 +8,19 @@ ms.custom: mvc, seoapril2019
 ms.date: 03/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 6d2e95cd2ec92f97a97cb558fb39e4540450c766
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405952"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771949"
 ---
-# <a name="introduction-to-aspnet-core-opno-locblazor"></a>Einführung in ASP.NET Core Blazor
+# <a name="introduction-to-aspnet-core-blazor"></a>Einführung in ASP.NET Core Blazor
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
@@ -105,7 +108,7 @@ Wenn diese Komponente in der App verwendet wird, beschleunigt IntelliSense in [V
 
 Die Komponenten werden in einer In-Memory-Darstellung des Browser-DOM (Document Object Model) gerendert, die als *Renderbaum* bezeichnet und verwendet wird, um die Benutzeroberfläche auf flexible und effiziente Weise zu aktualisieren.
 
-## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -129,7 +132,7 @@ Die Größe der veröffentlichten App, ihre *Nutzlast*, ist ein wichtiger Leistu
 * HTTP-Antworten werden komprimiert.
 * Die .NET-Runtime und die Assemblys werden im Browser zwischengespeichert.
 
-## <a name="opno-locblazor-server"></a>Blazor Server
+## <a name="blazor-server"></a>Blazor Server
 
 Blazor entkoppelt die Komponentenrenderinglogik von Aktualisierungen der Benutzeroberfläche. Blazor Server bietet Unterstützung zum Hosten von Razor-Komponenten in einer ASP.NET Core-App auf dem Server. Aktualisierungen der Benutzeroberfläche werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 

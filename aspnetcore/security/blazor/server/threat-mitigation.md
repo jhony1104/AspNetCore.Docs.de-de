@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Sicherheitsbedrohungen Blazor für Server-app
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/05/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
+ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774183"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850499"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Leitfaden zur Bedrohungsminderung für ASP.net Core blazor-Server
 
@@ -97,7 +97,7 @@ Standardmäßig gibt es keine Beschränkung für die Anzahl der Verbindungen pro
 
 DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der Server eine oder mehrere seiner Ressourcen abwehrt, wodurch die APP nicht mehr verfügbar ist. Blazor-Server-Apps enthalten einige Standard Limits und basieren auf anderen ASP.net Core-und signalr-Limits zum Schutz vor DoS-Angriffen:
 
-| App-Limit für blazor-Server                            | BESCHREIBUNG | Standard |
+| App-Limit für blazor-Server                            | Beschreibung | Standard |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | Maximale Anzahl von Verbindungen, die von einem bestimmten Server gleichzeitig im Arbeitsspeicher enthalten sind. | 100 |
 | `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Maximale Zeitspanne, für die eine getrennte Verbindung im Arbeitsspeicher gehalten wird, bevor Sie abgebrochen wird. | 3 Minuten |
@@ -105,7 +105,7 @@ DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der 
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | Maximale Anzahl nicht bestätigter renderbatches, die der Server zu einem gegebenen Zeitpunkt pro Verbindung aufbewahrt, um eine robuste erneute Verbindung zu unterstützen. Nach Erreichen des Limits beendet der Server die Erstellung neuer Rendering-Batches, bis mindestens ein Stapel vom Client bestätigt wurde. | 10 |
 
 
-| Signalr-und ASP.net Core Limit             | BESCHREIBUNG | Standard |
+| Signalr-und ASP.net Core Limit             | Beschreibung | Standard |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | Nachrichtengröße für eine einzelne Nachricht. | 32 KB |
 
@@ -147,11 +147,11 @@ Keine Vertrauenswürdigkeit von Aufrufen von JavaScript zu .NET-Methoden. Wenn e
   * Vermeiden Sie das Übergeben von benutzerdefinierten Daten in Parameter an JavaScript-Aufrufe. Wenn die Übergabe von Daten in Parametern wirklich erforderlich ist, müssen Sie sicherstellen, dass der JavaScript-Code die Übergabe der Daten ohne die Einführung von [XSS-Sicherheitsrisiken (Cross-Site Scripting](#cross-site-scripting-xss) Schreiben Sie z. b. keine vom Benutzer bereitgestellten Daten in die Dokumentobjektmodell (DOM) `innerHTML` , indem Sie die-Eigenschaft eines-Elements festlegen. Verwenden Sie die [Inhalts Sicherheitsrichtlinie (Content Security Policy, CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) , um und andere unsichere JavaScript-Primitive zu deaktivieren `eval` .
 * Vermeiden Sie die Implementierung der benutzerdefinierten Verteilung von .net-aufrufen zusätzlich zur Verteiler Implementierung des Frameworks. Das verfügbar machen von .NET-Methoden für den Browser ist ein erweitertes Szenario, Blazor das für die allgemeine Entwicklung nicht empfohlen wird.
 
-### <a name="events"></a>Ereignisse
+### <a name="events"></a>Events
 
 Ereignisse stellen einen Einstiegspunkt für eine Blazor Server-App bereit. Die gleichen Regeln für das Schützen von Endpunkten in Web-Apps gelten für Blazor die Ereignis Behandlung in Server-apps. Ein böswilliger Client kann alle Daten senden, die er als Nutzlast für ein Ereignis senden möchte.
 
-Beispiel:
+Zum Beispiel:
 
 * Ein Änderungs Ereignis für einen `<select>` kann einen Wert senden, der nicht innerhalb der Optionen liegt, die die APP dem Client vorgelegt hat.
 * Ein `<input>` kann beliebige Textdaten an den Server senden, wobei die Client seitige Validierung umgangen wird.
@@ -281,7 +281,7 @@ Die Richtlinien zum Sichern von ASP.net Core- Blazor apps gelten für Server-app
 
 * [Protokollierung und sensible Daten](#logging-and-sensitive-data)
 * [Schützen von Informationen während der Übertragung mit HTTPS](#protect-information-in-transit-with-https)
-* [Cross-Site Scripting (XSS)](#cross-site-scripting-xss))
+* [Cross-Site Scripting (XSS)](#cross-site-scripting-xss)
 * [Cross-Origin-Schutz](#cross-origin-protection)
 * [Click-Jacking](#click-jacking)
 * [Offene Umleitungen](#open-redirects)
