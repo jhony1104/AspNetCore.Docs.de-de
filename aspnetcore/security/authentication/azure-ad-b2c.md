@@ -5,22 +5,28 @@ description: Erfahren Sie, wie Sie Azure Active Directory B2C Authentifizierung 
 ms.author: casoper
 ms.custom: mvc
 ms.date: 01/21/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 136fa47788456492a9a7fe6d9d9e5996c13e8c20
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 86808e6bdd3bb669a62ad9e333b11df4c09a9cd3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653617"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774638"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Cloudauthentifizierung mit Azure Active Directory B2C in ASP.net Core
 
 Von [Cam Soper](https://twitter.com/camsoper)
 
-[Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) ist eine Cloud-Identitäts Verwaltungs Lösung für Web-und Mobile Apps. Der Dienst ermöglicht die Authentifizierung für apps, die in der Cloud und lokal gehostet werden. Authentifizierungstypen sind einzelne Konten, Konten sozialer Netzwerke, und Verbundbenutzer Unternehmenskonten zu authentifizieren. Darüber hinaus können Azure AD B2C Multi-Factor Authentication mit minimaler Konfiguration bereitstellen.
+[Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C) ist eine Cloud-Identitäts Verwaltungs Lösung für Web-und Mobile Apps. Der Dienst bietet eine Authentifizierung für apps, die in der Cloud und lokal gehostet werden. Zu den Authentifizierungs Typen zählen einzelne Konten, soziale Netzwerk Konten und Verbund Unternehmenskonten. Darüber hinaus können Azure AD B2C Multi-Factor Authentication mit minimaler Konfiguration bereitstellen.
 
 > [!TIP]
-> Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Azure AD-Mandant repräsentiert eine Organisation, auf, während ein Azure AD B2C-Mandanten ist, eine Sammlung von Identitäten, die mit Anwendungen der vertrauenden Seite verwendet werden. Weitere Informationen finden Sie unter [Azure AD B2C: häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
+> Azure Active Directory (Azure AD) und Azure AD B2C sind separate Produktangebote. Ein Azure AD Mandant stellt eine Organisation dar, während ein Azure AD B2C Mandant eine Auflistung von Identitäten darstellt, die mit Anwendungen der vertrauenden Seite verwendet werden sollen. Weitere Informationen finden Sie unter [Azure AD B2C: häufig gestellte Fragen (FAQ)](/azure/active-directory-b2c/active-directory-b2c-faqs).
 
 In diesem Tutorial lernen Sie Folgendes:
 
@@ -32,28 +38,28 @@ In diesem Tutorial lernen Sie Folgendes:
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-Die folgenden Voraussetzungen gelten für diese exemplarische Vorgehensweise:
+Für diese exemplarische Vorgehensweise sind die folgenden Schritte erforderlich:
 
 * [Microsoft Azure-Abonnement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
-## <a name="create-the-azure-active-directory-b2c-tenant"></a>Erstellen der Azure Active Directory B2C-Mandanten
+## <a name="create-the-azure-active-directory-b2c-tenant"></a>Erstellen des Azure Active Directory B2C Mandanten
 
-Erstellen Sie einen Azure Active Directory B2C Mandanten, [wie in der Dokumentation beschrieben](/azure/active-directory-b2c/active-directory-b2c-get-started). Wenn Sie aufgefordert werden, ist ein Azure-Abonnement des Mandanten zuordnen optional für dieses Tutorial.
+Erstellen Sie einen Azure Active Directory B2C Mandanten, [wie in der Dokumentation beschrieben](/azure/active-directory-b2c/active-directory-b2c-get-started). Wenn Sie dazu aufgefordert werden, ist die Zuordnung des Mandanten zu einem Azure-Abonnement für dieses Tutorial optional.
 
 ## <a name="register-the-app-in-azure-ad-b2c"></a>Registrieren der app in Azure AD B2C
 
-Registrieren Sie Ihre APP im neu erstellten Azure AD B2C Mandanten mithilfe [der Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) im Abschnitt **Registrieren einer Web-App** . Legen Sie im Abschnitt **Erstellen eines geheimen Client Schlüssels für eine Web-App** an. Ein clientgeheimnis ist für dieses Tutorial nicht erforderlich. 
+Registrieren Sie Ihre APP im neu erstellten Azure AD B2C Mandanten mithilfe [der Schritte in der Dokumentation](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) im Abschnitt **Registrieren einer Web-App** . Legen Sie im Abschnitt **Erstellen eines geheimen Client Schlüssels für eine Web-App** an. Ein geheimer Client Schlüssel ist für dieses Tutorial nicht erforderlich. 
 
 Verwenden Sie die folgenden Werte:
 
-| Einstellung                       | value                     | Notizen                                                                                                                                                                                              |
+| Einstellung                       | Wert                     | Notizen                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**                      | *&lt;App-Name&gt;*        | Geben Sie einen **Namen** für die APP ein, mit dem Ihre APP für Consumer beschrieben wird.                                                                                                                                 |
 | **Web-App/Web-API einschließen** | Ja                       |                                                                                                                                                                                                    |
 | **Impliziten Fluss zulassen**       | Ja                       |                                                                                                                                                                                                    |
-| **Antwort-URL**                 | `https://localhost:44300/signin-oidc` | Antwort-URLs sind Endpunkte, an denen Azure AD B2C von Ihrer App angeforderte Token zurückgibt. Visual Studio stellt die zu verwendende Antwort-URL bereit. Geben Sie für den Moment `https://localhost:44300/signin-oidc` ein, um das Formular abzuschließen. |
-| **App-ID-URI**                | Nicht ausfüllen               | Für dieses Tutorial erforderlich nicht.                                                                                                                                                                    |
+| **Antwort-URL**                 | `https://localhost:44300/signin-oidc` | Antwort-URLs sind Endpunkte, an denen Azure AD B2C von Ihrer App angeforderte Token zurückgibt. Visual Studio stellt die zu verwendende Antwort-URL bereit. Geben Sie `https://localhost:44300/signin-oidc` vorerst ein, um das Formular abzuschließen. |
+| **APP-ID-URI**                | Nicht ausfüllen               | Für dieses Tutorial nicht erforderlich.                                                                                                                                                                    |
 | **Nativen Client einschließen**     | Nein                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
@@ -65,7 +71,7 @@ Im Azure AD B2C Mandanten kann zurzeit nichts mehr konfiguriert werden, aber las
 
 ## <a name="create-an-aspnet-core-app-in-visual-studio"></a>Erstellen einer ASP.net Core-app in Visual Studio
 
-Die Visual Studio Web Application-Vorlage kann für die verwenden Sie des Azure AD B2C-Mandantenverwaltungs für die Authentifizierung konfiguriert werden.
+Die Visual Studio-Webanwendungs Vorlage kann so konfiguriert werden, dass der Azure AD B2C Mandanten für die Authentifizierung verwendet wird.
 
 In Visual Studio:
 
@@ -73,22 +79,22 @@ In Visual Studio:
 2. Wählen Sie in der Liste der Vorlagen die Option **Webanwendung** aus.
 3. Wählen Sie die Schaltfläche **Authentifizierung ändern** aus.
     
-    ![Schaltfläche "Authentifizierung ändern"](./azure-ad-b2c/_static/changeauth.png)
+    ![Authentifizierungs Schaltfläche ändern](./azure-ad-b2c/_static/changeauth.png)
 
 4. Wählen Sie im Dialogfeld **Authentifizierung ändern** die Option **einzelne Benutzerkonten**aus, und wählen Sie dann in der Dropdown Liste die **Option mit einem vorhandenen Benutzerspeicher in der Cloud verbinden** aus. 
     
-    ![Authentifizierung-Dialogfeld "ändern"](./azure-ad-b2c/_static/changeauthdialog.png)
+    ![Dialog Feld zur Authentifizierung ändern](./azure-ad-b2c/_static/changeauthdialog.png)
 
-5. Füllen Sie das Formular mit den folgenden Werten:
+5. Füllen Sie das Formular mit den folgenden Werten aus:
     
-    | Einstellung                       | value                                                 |
+    | Einstellung                       | Wert                                                 |
     |-------------------------------|-------------------------------------------------------|
-    | **Domänenname**               | *&lt;den Domänen Namen Ihres B2C-Mandanten&gt;*          |
-    | **Anwendungs-ID**:            | *Fügen Sie &lt;die Anwendungs-ID aus der Zwischenablage ein&gt;* |
-    | **Rückruf Pfad**             | *&lt;den Standardwert verwenden&gt;*                       |
+    | **Domänen Name**               | *&lt;der Domänen Name Ihres B2C-Mandanten.&gt;*          |
+    | **Anwendungs-ID**            | *&lt;Fügen Sie die Anwendungs-ID aus der Zwischenablage ein.&gt;* |
+    | **Rückruf Pfad**             | *&lt;Standardwert verwenden&gt;*                       |
     | **Registrierungs-oder Anmelde Richtlinie** | `B2C_1_SiUpIn`                                        |
     | **Kenn Wort Richtlinie zurücksetzen**     | `B2C_1_SSPR`                                          |
-    | **Profil Richtlinie bearbeiten**       | *&lt;leer lassen&gt;*                                 |
+    | **Profil Richtlinie bearbeiten**       | *&lt;Lassen Sie dieses Feld leer.&gt;*                                 |
     
     Wählen Sie den Link **Kopieren** neben dem **Antwort-URI** aus, um den Antwort-URI in die Zwischenablage zu kopieren. Wählen Sie **OK** aus, um das Dialogfeld **Authentifizierung ändern** zu schließen. Wählen Sie **OK** , um die Web-App zu erstellen.
 
@@ -101,14 +107,14 @@ Kehren Sie zum Browserfenster zurück, in dem die B2C-App-Eigenschaften noch ge�
 
 ## <a name="configure-policies"></a>Konfigurieren von Richtlinien
 
-Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, um [eine Registrierungs-oder Anmelde Richtlinie zu erstellen](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), und [Erstellen Sie dann eine Richtlinie zum Zurücksetzen des Kennworts](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Verwenden Sie die Beispiel Werte, die in der Dokumentation für **Identitäts Anbieter**, Registrierungs **Attribute**und **Anwendungs Ansprüche**bereitgestellt werden. Die Verwendung der Schaltfläche **jetzt ausführen** zum Testen der Richtlinien, wie in der Dokumentation beschrieben, ist optional.
+Verwenden Sie die Schritte in der Azure AD B2C-Dokumentation, um [eine Registrierungs-oder Anmelde Richtlinie zu erstellen](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), und [Erstellen Sie dann eine Richtlinie zum Zurücksetzen des Kennworts](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Verwenden Sie die Beispiel Werte, die in der Dokumentation für ** Identity Anbieter**, Registrierungs **Attribute**und **Anwendungs Ansprüche**bereitgestellt werden. Die Verwendung der Schaltfläche **jetzt ausführen** zum Testen der Richtlinien, wie in der Dokumentation beschrieben, ist optional.
 
 > [!WARNING]
 > Stellen Sie sicher, dass die Richtlinien Namen genau wie in der Dokumentation beschrieben sind, da diese Richtlinien im Dialogfeld " **Authentifizierung ändern** " in Visual Studio verwendet wurden. Die Richtlinien Namen können in der *Datei "appSettings. JSON*" überprüft werden.
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Konfigurieren Sie die zugrunde liegenden openidconnectoptions/jwtbearertions/Cookie-Optionen.
 
-Um die zugrunde liegenden Optionen direkt zu konfigurieren, verwenden Sie die entsprechende Schema Konstante in `Startup.ConfigureServices`:
+Um die zugrunde liegenden Optionen direkt zu konfigurieren, verwenden Sie die entsprechende `Startup.ConfigureServices`Schema Konstante in:
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(
@@ -146,7 +152,7 @@ Nach erfolgreicher Anmeldung wird der Browser an die Web-App umgeleitet.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-In diesem Tutorial haben Sie Folgendes gelernt:
+In diesem Tutorial haben Sie gelernt, wie die folgenden Aufgaben ausgeführt werden:
 
 > [!div class="checklist"]
 > * Erstellen eines Azure Active Directory B2C-Mandanten

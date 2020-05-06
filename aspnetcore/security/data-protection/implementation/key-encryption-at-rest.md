@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie mehr über die Implementierungsdetails ASP.net Core Verschlüsselung von Datenschutz Schlüsseln ruhender Daten.
 ms.author: riande
 ms.date: 07/16/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651631"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776928"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>Verschlüsselung ruhender Schlüssel in ASP.net Core
 
@@ -23,7 +29,7 @@ Das Datenschutzsystem [setzt standardmäßig einen Ermittlungs Mechanismus ein](
 
 ## <a name="azure-key-vault"></a>Azure-Schlüsseltresor
 
-Um Schlüssel in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)zu speichern, konfigurieren Sie das System mit " [protectkeyswithazurekeyvault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) " in der `Startup`-Klasse:
+Um Schlüssel in [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)zu speichern, konfigurieren Sie das System mit [protectkeyswithazurekeyvault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) in der `Startup` -Klasse:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -38,7 +44,7 @@ Weitere Informationen finden Sie unter [Konfigurieren von ASP.net Core Datenschu
 
 ::: moniker-end
 
-## <a name="windows-dpapi"></a>Windows DPAPI
+## <a name="windows-dpapi"></a>Windows-DPAPI
 
 **Gilt nur für Windows-bereit Stellungen.**
 
@@ -82,7 +88,7 @@ Aufgrund .NET Framework Einschränkungen werden nur Zertifikate mit privaten CAP
 
 ::: moniker-end
 
-## <a name="windows-dpapi-ng"></a>Windows DPAPI-NG
+## <a name="windows-dpapi-ng"></a>Windows-DPAPI-ng
 
 **Dieser Mechanismus ist nur unter Windows 8/Windows Server 2012 oder höher verfügbar.**
 
@@ -100,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Es gibt auch eine parameterlose Überladung von `ProtectKeysWithDpapiNG`. Verwenden Sie diese Hilfsmethode, um die Regel "sid = {CURRENT_ACCOUNT_SID}" anzugeben, wobei *CURRENT_ACCOUNT_SID* die SID des aktuellen Windows-Benutzerkontos ist:
+Es gibt auch eine parameterlose Überladung `ProtectKeysWithDpapiNG`von. Verwenden Sie diese Hilfsmethode, um die Regel "sid = {CURRENT_ACCOUNT_SID}" anzugeben, wobei *CURRENT_ACCOUNT_SID* die SID des aktuellen Windows-Benutzerkontos ist:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

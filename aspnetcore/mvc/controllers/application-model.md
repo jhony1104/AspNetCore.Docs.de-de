@@ -4,13 +4,19 @@ author: ardalis
 description: Erfahren Sie, wie Sie das Anwendungsmodell lesen und bearbeiten, um das Verhalten von MVC-Elementen in ASP.NET Core zu ändern.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 4b6c978e5752eb320412a1c204df8e3d288fe4a1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654553"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768662"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Arbeiten mit dem Anwendungsmodell in ASP.NET Core
 
@@ -63,7 +69,7 @@ Das Konzept `DefaultApplicationModelProvider` etabliert viele der von ASP.NET Co
 * Hinzufügen von Aktionsmethodenparametern zum Kontext
 * Anwenden einer Route und anderer Attribute
 
-Einige integrierte Verhaltensweisen werden vom `DefaultApplicationModelProvider` implementiert. Dieser Anbieter ist verantwortlich für die Erstellung des [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel), das wiederum auf die Instanzen [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel), [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) und [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) verweist. Die `DefaultApplicationModelProvider`-Klasse stellt ein Detail zur Implementierung des internen Frameworks dar und wird sich in Zukunft ändern. 
+Einige integrierte Verhaltensweisen werden vom `DefaultApplicationModelProvider` implementiert. Dieser Anbieter ist für das Erstellen von [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)zuständig, das wiederum auf [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel)- [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel),- [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) und-Instanzen verweist. Die `DefaultApplicationModelProvider`-Klasse stellt ein Detail zur Implementierung des internen Frameworks dar und wird sich in Zukunft ändern. 
 
 `AuthorizationApplicationModelProvider` ist für die Anwendung des Verhaltens zuständig, das den Attributen `AuthorizeFilter` und `AllowAnonymousFilter` zugeordnet ist. [Weitere Informationen zu diesen Attributen](xref:security/authorization/simple).
 
@@ -80,7 +86,7 @@ Folgende Konventionen sind verfügbar:
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-Konventionen werden angewendet, indem sie zu MVC-Optionen hinzugefügt werden oder indem `Attribute` implementiert werden und diese auf Controller, Aktionen oder Aktionsparameter angewendet werden (vergleichbar mit [`Filters`](xref:mvc/controllers/filters)). Im Gegenteil zu Filtern werden Konventionen nur beim Starten der App ausgeführt, nicht im Rahmen einzelner Anforderungen.
+Konventionen werden angewendet, indem Sie den MVC-Optionen hinzugefügt `Attribute`werden, oder indem Sie s implementieren und auf Controller, Aktionen oder Aktionsparameter [`Filters`](xref:mvc/controllers/filters)anwenden (ähnlich wie). Im Gegenteil zu Filtern werden Konventionen nur beim Starten der App ausgeführt, nicht im Rahmen einzelner Anforderungen.
 
 ### <a name="sample-modifying-the-applicationmodel"></a>Beispiel: Ändern von ApplicationModel
 
@@ -154,7 +160,7 @@ Die Konvention wird als Option unter „Start“ hinzugefügt.
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=6)]
 
 > [!TIP]
-> Sie können Konventionen zu Ihrer [Middleware](xref:fundamentals/middleware/index) hinzufügen, indem Sie über `MvcOptions` auf `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));` zugreifen.
+> Sie können Konventionen zu Ihrer [Middleware](xref:fundamentals/middleware/index) hinzufügen, indem Sie über `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));` auf `MvcOptions` zugreifen.
 
 Im nachfolgenden Beispiel wird diese Konvention auf Routen angewendet, die kein Attributrouting verwenden, bei dem der Name des Controllers „Namespace“ enthält. Der folgende Controller veranschaulicht diese Konvention:
 
@@ -200,7 +206,7 @@ Neben einer Reihe von Konventionen enthält das Kompatibilitätspaket eine `Syst
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>Verwenden von ApiExplorer zum Dokumentieren Ihrer App
 
-Das Anwendungsmodell macht auf jeder Ebene, auf der die Struktur der App durchlaufen werden kann, eine Eigenschaft vom Typ [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) verfügbar. Diese kann zum [Generieren von Hilfeseiten für Ihre Web-APIs mithilfe von Tools wie Swagger](xref:tutorials/web-api-help-pages-using-swagger) verwendet werden. Die Eigenschaft `ApiExplorer` macht eine Eigenschaft vom Typ `IsVisible` verfügbar, die festgelegt werden kann, um anzugeben, welche Teile des Modells Ihrer App verfügbar gemacht werden sollten. Sie können diese Einstellung mithilfe einer Konvention konfigurieren:
+Das Anwendungsmodell macht eine [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) -Eigenschaft auf jeder Ebene verfügbar, die zum Durchlaufen der Struktur der APP verwendet werden kann. Diese kann zum [Generieren von Hilfeseiten für Ihre Web-APIs mithilfe von Tools wie Swagger](xref:tutorials/web-api-help-pages-using-swagger) verwendet werden. Die Eigenschaft `ApiExplorer` macht eine Eigenschaft vom Typ `IsVisible` verfügbar, die festgelegt werden kann, um anzugeben, welche Teile des Modells Ihrer App verfügbar gemacht werden sollten. Sie können diese Einstellung mithilfe einer Konvention konfigurieren:
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

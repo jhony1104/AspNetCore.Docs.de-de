@@ -1,20 +1,24 @@
 ---
-title: Veröffentlichen einer ASP.net Core SignalR-App auf Azure App Service
+title: Veröffentlichen einer ASP.net Core SignalR -app in Azure App Service
 author: bradygaster
-description: Erfahren Sie, wie Sie eine ASP.net Core SignalR-App zum Azure App Service veröffentlichen.
+description: Erfahren Sie, wie Sie eine SignalR ASP.net Core-app in Azure App Service veröffentlichen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d03a007ca883b3d0391b848e3e92c90469ee640a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a5d19c1519c69351605e8da1d8fa70bff784efd4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652651"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777188"
 ---
 # <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Veröffentlichen einer ASP.net Core signalr-app in Azure App Service
 
@@ -44,13 +48,13 @@ In diesem Artikel wird die Veröffentlichung mit den Tools in Visual Studio beha
    | **Ressourcengruppe** | Gruppe verwandter Ressourcen, zu denen die APP gehört. |
    | **Hostingplan**   | Der Tarif für die Web-App. |
 
-1. Wählen Sie in der Dropdown Liste **Abhängigkeiten** > **Hinzufügen** den **Azure-SignalR Dienst** aus:
+1. Wählen Sie in der Dropdown Liste **Abhängigkeiten** > **Hinzufügen** den ** SignalR Azure-Dienst** aus:
 
-   ![Bereich Abhängigkeiten, in dem die Auswahl von Azure SignalR-Dienst in der Dropdown Liste hinzufügen angezeigt wird](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Bereich "Abhängigkeiten" mit der Auswahl SignalR des Azure-Dienstanbieter in der Dropdown Liste "hinzufügen"](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. Wählen Sie im Dialogfeld **Azure SignalR-Dienst** die Option **neue Azure SignalR Dienst Instanz erstellen**aus.
+1. Wählen Sie im Dialogfeld **Azure SignalR -Dienst** die Option **neue SignalR Azure-Dienst Instanz erstellen**aus.
 
-1. Geben Sie einen **Namen**, eine **Ressourcengruppe**und einen **Speicherort**an. Wechseln Sie zurück zum Dialogfeld **Azure SignalR Service** , und wählen Sie **Hinzufügen**.
+1. Geben Sie einen **Namen**, eine **Ressourcengruppe**und einen **Speicherort**an. Wechseln Sie zum Dialogfeld **Azure SignalR -Dienst** , und wählen Sie **Hinzufügen**.
 
 Visual Studio führt die folgenden Aufgaben aus:
 
@@ -59,24 +63,24 @@ Visual Studio führt die folgenden Aufgaben aus:
 * Veröffentlicht die app.
 * Hiermit wird ein Browser gestartet, der die Web-App lädt.
 
-Das Format der App-URL ist `{APP SERVICE NAME}.azurewebsites.net`. Eine APP mit dem Namen `SignalRChatApp` hat z. b. eine URL `https://signalrchatapp.azurewebsites.net`.
+Das Format der App-URL lautet `{APP SERVICE NAME}.azurewebsites.net`. Eine APP mit dem Namen `SignalRChatApp` hat z. b. `https://signalrchatapp.azurewebsites.net`eine URL von.
 
 Wenn beim Bereitstellen einer APP, die auf eine Vorschauversion von .net Core ausgerichtet ist, ein Fehler vom Typ "http *502,2-* ungültiges Gateway" auftritt, finden Sie weitere Informationen unter Bereitstellen [ASP.net Core Vorschau Release Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service)
 
 ## <a name="configure-the-app-in-azure-app-service"></a>Konfigurieren der app in Azure App Service
 
 > [!NOTE]
-> *Dieser Abschnitt gilt nur für apps, die nicht den Azure SignalR-Dienst verwenden.*
+> *Dieser Abschnitt gilt nur für apps, die den Azure SignalR -Dienst nicht verwenden.*
 >
-> Wenn die APP den Azure SignalR-Dienst verwendet, ist für die APP Service keine Konfiguration der in diesem Abschnitt beschriebenen arr-Affinität (Application Request Routing) und der in diesem Abschnitt beschriebenen websockets erforderlich. Clients verbinden ihre websockets mit dem Azure SignalR-Dienst und nicht direkt mit der app.
+> Wenn die APP den Azure SignalR -Dienst verwendet, ist für den App Service nicht die Konfiguration der in diesem Abschnitt beschriebenen arr-Affinität (Application Request Routing) und der in diesem Abschnitt beschriebenen websockets erforderlich. Clients verbinden ihre websockets mit dem Azure SignalR -Dienst und nicht direkt mit der app.
 
-Aktivieren Sie für apps, die ohne den Azure SignalR Service gehostet werden, Folgendes:
+Aktivieren Sie für apps, die SignalR ohne Azure-Dienst gehostet werden, Folgendes:
 
 * [Arr-Affinität](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) zum Weiterleiten von Anforderungen von einem Benutzer an dieselbe App Service Instanz. Die Standardeinstellung ist **on**.
 * [Websockets](xref:fundamentals/websockets) , damit der websockets-Transport funktioniert. Die Standardeinstellung ist **Off**.
 
 1. Navigieren Sie in der Azure-Portal zu der Web-App in **App Services**.
-1. Öffnen Sie die **Konfigurations** > **allgemeinen Einstellungen**.
+1. Öffnen Sie die allgemeinen **Konfigurations** > **Einstellungen**.
 1. Legen Sie **websockets** **auf ein**fest.
 1. Vergewissern Sie sich, dass **arr-Affinität** **auf**ein festgelegt ist.
 
@@ -86,9 +90,9 @@ Websockets und andere Transporte sind auf Grundlage des ausgewählten App Servic
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Was ist Azure SignalR Service?](/azure/azure-signalr/signalr-overview)
+* [Was ist der SignalR Azure-Dienst?](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>
 * <xref:host-and-deploy/index>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>
-* [Veröffentlichen einer ASP.net Core-app in Azure mit Befehlszeilen Tools](/azure/app-service/app-service-web-get-started-dotnet)
+* [Veröffentlichen einer ASP.NET Core-App in Azure mithilfe von Befehlszeilentools](/azure/app-service/app-service-web-get-started-dotnet)
 * [Hosten und Bereitstellen ASP.net Core Vorschau-apps in Azure](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service)
