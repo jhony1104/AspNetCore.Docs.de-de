@@ -665,6 +665,8 @@
       uid: test/razor-pages-tests
     - name: Testen von Controllern
       uid: mvc/controllers/testing
+    - name: Testen von Middleware
+      uid: test/middleware
     - name: Remotedebuggen
       href: /visualstudio/debugger/remote-debugging-azure
     - name: Momentaufnahmendebugging
