@@ -5,14 +5,20 @@ description: Erfahren Sie, wie benutzerdefinierte ASP.NET Core-Middleware geschr
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/22/2019
+ms.date: 5/6/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: e74bba9e1bd826d4f493b0ee642a198f984daada
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6852c1831d1f71af7f4fad3288fd6f897dfaa65f
+ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649273"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82876191"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Schreiben von benutzerdefinierter ASP.NET Core-Middleware
 
@@ -85,6 +91,7 @@ Der folgende Code ruft die Methode von `Startup.Configure` auf:
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/middleware/index>
+* <xref:test/middleware>
 * <xref:migration/http-modules>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/request-features>

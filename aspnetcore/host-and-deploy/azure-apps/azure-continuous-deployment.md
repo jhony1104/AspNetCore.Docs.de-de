@@ -5,13 +5,19 @@ description: Erfahren Sie, wie Sie mit Visual Studio eine ASP.NET Core-Web-App e
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648109"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850564"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Continuous Deployment in Azure mit Visual Studio und Git mit ASP.NET Core
 
@@ -24,7 +30,7 @@ Dieses Tutorial zeigt, wie mit Visual Studio eine ASP.NET Core-Web-App erstellt 
 Siehe auch [Erstellen einer ersten Pipeline mit Azure Pipelines](/azure/devops/pipelines/get-started-yaml). Diese Anleitung zeigt, wie Sie einen CD-Workflow (Continuous Delivery) für [Azure App Service](/azure/app-service/app-service-web-overview) mit Azure DevOps Services konfigurieren. Azure Pipelines (ein Azure DevOps Services-Dienst) vereinfacht das Einrichten einer robusten Bereitstellungspipeline zur Veröffentlichung von Updates für Apps, die in Azure App Service gehostet werden. Die Pipeline kann im Azure-Portal für die folgenden Aufgaben konfiguriert werden: Erstellen von Builds, Ausführen von Tests, Bereitstellen in einem Stagingslot und anschließendes Bereitstellen in der Produktion.
 
 > [!NOTE]
-> Für dieses Tutorial ist ein Microsoft Azure-Konto erforderlich. Zum Abrufen eines Kontos können Sie die [Leistungen für MSDN-Abonnenten aktivieren](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) oder sich [für eine kostenlose Testversion registrieren](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+> Für dieses Tutorial ist ein Microsoft Azure-Konto erforderlich. Zum Abrufen eines Kontos können Sie die [Leistungen für MSDN-Abonnenten aktivieren](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) oder sich [für eine kostenlose Testversion registrieren](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

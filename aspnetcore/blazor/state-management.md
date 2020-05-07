@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: e8a1959a8fc05ea59362bb5824181a9d2e418811
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 75d9a66eb25201c2993b8f922754b8aa7ab84615
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218868"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771167"
 ---
-# <a name="aspnet-core-opno-locblazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
+# <a name="aspnet-core-blazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -34,7 +37,7 @@ Beispiele für den Zustand einer Benutzerverbindung sind:
 > [!NOTE]
 > In diesem Artikel wird die Zustandspersistenz in Blazor Server-Apps behandelt. Blazor-Webassemblyanwendungen können [clientseitige Zustandspersistenz im Browser nutzen](#client-side-in-the-browser), erfordern jedoch benutzerdefinierte Lösungen oder Drittanbieterpakete, die den Rahmen dieses Artikels sprengen würden.
 
-## <a name="opno-locblazor-circuits"></a>Blazor-Verbindungen
+## <a name="blazor-circuits"></a>Blazor-Verbindungen
 
 Wenn die Netzwerkverbindung vorübergehend getrennt wird, versucht Blazor, den Benutzer nochmals mit der ursprünglichen Verbindung zu verbinden, damit er die mit der Verwendung der App fortfahren kann. Es ist jedoch nicht immer möglich, einen Benutzer noch mal mit der ursprünglichen Verbindung im Arbeitsspeicher des Servers zu verbinden:
 

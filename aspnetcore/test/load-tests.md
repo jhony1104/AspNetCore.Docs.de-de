@@ -5,13 +5,19 @@ description: Hier erhalten Sie weitere Informationen zu hilfreichen Tools und An
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: test/loadtests
-ms.openlocfilehash: 1fd77a767fb53b9276081dd712e13108094a0382
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: cf99eaa71846ea705a312b0fb773605fc77b0d97
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649639"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775257"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>Auslastungs-/Belastungstests in ASP.NET Core
 

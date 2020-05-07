@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 05068853615a63611188175d95c27f1442973a86
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b451df023bdea3e76725d5d1301f3c3f44ea5d99
+ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768207"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82876204"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory B2C
 
@@ -94,7 +94,7 @@ In **API-Berechtigungen**:
 1. Öffnen Sie die **API** -Liste.
 1. Aktivieren Sie den Zugriff auf die API (z `API.Access`. b.).
 1. Wählen Sie **Berechtigungen hinzufügen** aus.
-1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie auf **Ja**, um zu bestätigen.
+1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie zum Bestätigen auf **Ja**.
 
 In der **Start** > **Azure AD B2C** > **benutzerflows**:
 
@@ -172,7 +172,7 @@ Die Datei *appSettings. JSON* enthält die Optionen zum Konfigurieren des JWT-be
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://{ORGANIZATION}.b2clogin.com/",
     "ClientId": "{SERVER API APP CLIENT ID}",
     "Domain": "{DOMAIN}",
@@ -185,7 +185,7 @@ Beispiel:
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://contoso.b2clogin.com/",
     "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
     "Domain": "contoso.onmicrosoft.com",
