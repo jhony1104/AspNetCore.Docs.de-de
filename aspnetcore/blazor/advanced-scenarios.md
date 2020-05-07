@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 9f1e5ea4d883a027f40ac0eccc7a9bba1435139d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647413"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767199"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>Erweiterte ASP.NET Core Blazor-Szenarios
 
@@ -218,7 +221,7 @@ Dies ist ein triviales Beispiel. In realistischeren Fällen mit komplexen und ti
 * Wenn Sequenznummern hartcodiert sind, erfordert der diff-Algorithmus nur, dass die Sequenznummern den Wert erhöhen. Die Anfangswerte und Lücken sind irrelevant. Eine legitime Option besteht darin, die Codezeilennummer als Sequenznummer zu verwenden oder von 0 (Null) aus zu starten und Werte in Einer- oder Hunderterschritten (oder einem beliebigen bevorzugten Intervall) zu erhöhen. 
 * Blazor verwendet Sequenznummern, während andere Benutzeroberflächenframeworks diese nicht für Verzeichnisvergleiche verwenden. Das Vergleichen ist weitaus schneller, wenn Sequenznummern verwendet werden. Außerdem hat Blazor den Vorteil eines Kompilierungsschritts, der Sequenznummern automatisch für Entwickler verarbeitet, die *.razor*-Dateien erstellen.
 
-## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Ausführen umfangreicher Datenübertragungen in Blazor Server-Apps
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Ausführen umfangreicher Datenübertragungen in Blazor Server-Apps
 
 In einigen Szenarios müssen große Datenmengen zwischen JavaScript und Blazorübertragen werden. In der Regel erfolgen große Datenübertragungen in den folgenden Fällen:
 

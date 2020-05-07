@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/routing
-ms.openlocfilehash: 87579c88a37e0258921e199db2b5d8c7627f5499
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 017fd4d3ab45b75355dabb400ff0e5cbf7009d82
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218894"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771206"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor-Routing
 
@@ -232,7 +235,7 @@ Die folgende Komponente navigiert zu der `Counter`-Komponente der App, wenn die 
 Die folgende Komponente verarbeitet ein Speicherortwechselereignis. Die Einbindung der `HandleLocationChanged`-Methode wird aufgehoben, wenn `Dispose` vom Framework aufgerufen wird. Durch das Aufheben der Einbindung der Methode wird die Garbage Collection für die Komponente ermöglicht.
 
 ```razor
-@implement IDisposable
+@implements IDisposable
 @inject NavigationManager NavigationManager
 
 ...

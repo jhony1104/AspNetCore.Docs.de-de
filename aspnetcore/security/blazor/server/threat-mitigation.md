@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
-ms.translationtype: HT
+ms.openlocfilehash: 7c71da690efc0a515b289fd575173f2d3093d1c1
+ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
+ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850499"
+ms.locfileid: "82852393"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Leitfaden zur Bedrohungsminderung für ASP.net Core blazor-Server
 
@@ -34,6 +34,10 @@ In eingeschränkten Umgebungen, wie z. b. innerhalb von Unternehmensnetzwerken o
 
 * Gilt nicht für die eingeschränkte Umgebung.
 * Die Implementierung der Kosten ist nicht sinnvoll, da das Sicherheitsrisiko in einer eingeschränkten Umgebung gering ist.
+
+## <a name="blazor-and-shared-state"></a>Blazor und Shared State
+
+[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>Ressourcenauslastung
 
@@ -151,7 +155,7 @@ Keine Vertrauenswürdigkeit von Aufrufen von JavaScript zu .NET-Methoden. Wenn e
 
 Ereignisse stellen einen Einstiegspunkt für eine Blazor Server-App bereit. Die gleichen Regeln für das Schützen von Endpunkten in Web-Apps gelten für Blazor die Ereignis Behandlung in Server-apps. Ein böswilliger Client kann alle Daten senden, die er als Nutzlast für ein Ereignis senden möchte.
 
-Zum Beispiel:
+Beispiel:
 
 * Ein Änderungs Ereignis für einen `<select>` kann einen Wert senden, der nicht innerhalb der Optionen liegt, die die APP dem Client vorgelegt hat.
 * Ein `<input>` kann beliebige Textdaten an den Server senden, wobei die Client seitige Validierung umgangen wird.

@@ -5,13 +5,19 @@ description: Hier erfahren Sie, wie Sie statische Ressourcen in einer ASP.NET Co
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 670ac6a96c3affd2b2ac699836f536aea7d85ff3
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 4523ba299d5c5e50a442f84acadf06bf57c69c5d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488688"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82770952"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Bündelung und Minimierung statischer Ressourcen in ASP.NET Core
 

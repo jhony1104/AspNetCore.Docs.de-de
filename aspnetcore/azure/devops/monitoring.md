@@ -5,13 +5,19 @@ description: Überwachen und Debuggen von Code als Teil einer DevOps-Lösung mit
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 1d8ed99f4387dbc99929164c558cc2ce14bd9ea0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3af36a37124968e13952e8bf5de1b643265a4a5b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647455"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766887"
 ---
 # <a name="monitor-and-debug"></a>Überwachen und Debuggen
 

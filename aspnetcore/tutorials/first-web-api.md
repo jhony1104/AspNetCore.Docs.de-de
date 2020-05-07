@@ -5,13 +5,19 @@ description: Informationen zum Erstellen einer Web-API mit ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417662"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767238"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Tutorial: Erstellen einer Web-API mit ASP.NET Core
 
@@ -38,11 +44,11 @@ In diesem Tutorial wird die folgende API erstellt:
 
 |API | Beschreibung | Anforderungstext | Antworttext |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
-|GET /api/TodoItems/{id} | Ein Element nach ID abrufen | Keine | To-do-Element|
-|POST /api/TodoItems | Neues Element hinzufügen | To-do-Element | To-do-Element |
-|PUT /api/TodoItems/{id} | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keine |
-|DELETE /api/TodoItems/{id} &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keine | Keine|
+|`GET /api/TodoItems` | Alle To-do-Elemente abrufen | Keine | Array von To-do-Elementen|
+|`GET /api/TodoItems/{id}` | Ein Element nach ID abrufen | Keine | To-do-Element|
+|`POST /api/TodoItems` | Neues Element hinzufügen | To-do-Element | To-do-Element |
+|`PUT /api/TodoItems/{id}` | Vorhandenes Element aktualisieren &nbsp; | To-do-Element | Keine |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Löschen eines Elements &nbsp; &nbsp; | Keine | Keine|
 
 Das folgende Diagramm zeigt den Entwurf der App.
 

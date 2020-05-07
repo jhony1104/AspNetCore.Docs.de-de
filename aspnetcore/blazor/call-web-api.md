@@ -5,17 +5,20 @@ description: Erfahren Sie, wie Sie mithilfe von JSON-Hilfsprogramme eine Web-API
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: abc546cc0079a01e3999b2c7c083235d3fff9b06
-ms.sourcegitcommit: e94ecfae6a3ef568fa197da791c8bc595917d17a
+ms.openlocfilehash: d823db3688e05f6befefacc9f390e0dcdbf329a7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82122218"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767147"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Aufrufen einer Web-API über ASP.NET Core Blazor
 
@@ -23,7 +26,7 @@ Von [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)-Apps rufen Web-APIs über einen vorkonfigurierten `HttpClient`-Dienst auf. Erstellen Sie Anforderungen, die JavaScript [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API)-Optionen enthalten können, mit Blazor JSON-Hilfsprogrammen oder mit <xref:System.Net.Http.HttpRequestMessage>. Der `HttpClient`-Dienst in Blazor WebAssembly-Apps konzentriert sich darauf, Anforderungen an den Ursprungsserver zurückzusenden. Die Anleitung in diesem Thema bezieht sich nur auf Blazor WebAssembly-Apps.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)-Apps rufen Web-APIs über einen vorkonfigurierten `HttpClient`-Dienst auf. Erstellen Sie Anforderungen, die JavaScript [Fetch-API](https://developer.mozilla.org/docs/Web/API/Fetch_API)-Optionen enthalten können, mit BlazorJSON-Hilfsprogrammen oder mit <xref:System.Net.Http.HttpRequestMessage>. Der `HttpClient`-Dienst in Blazor WebAssembly-Apps konzentriert sich darauf, Anforderungen an den Ursprungsserver zurückzusenden. Die Anleitung in diesem Thema bezieht sich nur auf Blazor WebAssembly-Apps.
 
 [Blazor Server](xref:blazor/hosting-models#blazor-server)-Apps rufen Web-APIs über <xref:System.Net.Http.HttpClient>-Instanzen auf, die in der Regel mit <xref:System.Net.Http.IHttpClientFactory> erstellt werden. Die Anleitung in diesem Thema bezieht sich nicht auf Blazor Server-Apps. Befolgen Sie bei der Entwicklung von Blazor Server-Apps die Anleitung in <xref:fundamentals/http-requests>.
 
@@ -43,7 +46,7 @@ Verweisen Sie in der Projektdatei auf das NuGet-Paket [System.Net.Http.Json](htt
 Fügen Sie in `Program.Main` einen `HttpClient`-Dienst hinzu, wenn dieser noch nicht vorhanden ist:
 
 ```csharp
-builder.Services.AddSingleton(
+builder.Services.AddTransient(sp => 
     new HttpClient
     {
         BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -186,90 +189,10 @@ Die [Blazor WebAssembly-Beispiel-App (BlazorWebAssemblySample)](https://github.c
 
 Informationen darüber, wie Sie anderen Websites ermöglichen, CORS-Anforderungen (Ressourcenfreigabe zwischen verschiedenen Ursprüngen) an Ihre App zu stellen, finden Sie unter <xref:security/cors>.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient und HttpRequestMessage mit Fetch-API-Anforderungsoptionen
-
-Wenn Sie WebAssembly in einer Blazor WebAssembly-App ausführen, verwenden Sie [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage> zum Anpassen von Anforderungen. Sie können z. B. den Anforderungs-URI, die HTTP-Methode und beliebige Anforderungsheader angeben.
-
-```razor
-@using System.Net.Http
-@using System.Net.Http.Headers
-@using System.Net.Http.Json
-@inject HttpClient Http
-
-@code {
-    private async Task PostRequest()
-    {
-        var requestMessage = new HttpRequestMessage()
-        {
-            Method = new HttpMethod("POST"),
-            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
-            Content = 
-                JsonContent.Create(new TodoItem
-                { 
-                    Name: "A New Todo Item",
-                    IsComplete: false
-                })
-        };
-        
-        requestMessage.Headers.Authorization = 
-           new AuthenticationHeaderValue("Bearer", "{OAUTH TOKEN}");
-
-        requestMessage.Content.Headers.TryAddWithoutValidation(
-            "x-custom-header", "value");
-
-        var response = await Http.SendAsync(requestMessage);
-        var responseStatusCode = response.StatusCode;
-        var responseBody = await response.Content.ReadAsStringAsync();
-    }
-}
-```
-
-Die .NET-WebAssembly-Implementierung von `HttpClient` verwendet [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch). FETCH ermöglicht die Konfiguration mehrerer [anforderungsspezifischer Optionen](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters). 
-
-HTTP FETCH-Anforderungsoptionen können mit `HttpRequestMessage`-Erweiterungsmethoden konfiguriert werden, die in der folgenden Tabelle aufgeführt sind.
-
-| `HttpRequestMessage`-Erweiterungsmethode | FETCH-Anforderungseigenschaft |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [integrity](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
-
-Sie können weitere Optionen mithilfe der allgemeineren `SetBrowserRequestOption`-Erweiterungsmethode festlegen.
- 
-Die HTTP-Antwort wird in der Regel in einer Blazor-WebAssembly-App gepuffert, um Unterstützung für Synchronisierungslesevorgänge im Antwortinhalt zu aktivieren. Um Unterstützung für Streaming von Antworten zu aktivieren, verwenden Sie die `SetBrowserResponseStreamingEnabled`-Erweiterungsmethode für die Anforderung.
-
-Wenn Sie Anmeldeinformationen in eine ursprungsübergreifende Anforderung einschließen möchten, verwenden Sie die `SetBrowserRequestCredentials`-Erweiterungsmethode:
-
-```csharp
-requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
-```
-
-Weitere Informationen zu den Fetch-API-Optionen finden Sie in den [MDN-Webdokumentationen: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
-
-Beim Senden von Anmeldeinformationen (Autorisierungscookies/-header) bei CORS-Anforderungen muss der `Authorization`-Header von der CORS-Richtlinie zugelassen werden.
-
-Die folgende Richtlinie enthält die Konfiguration für:
-
-* Anforderungsursprünge (`http://localhost:5000`, `https://localhost:5001`).
-* Any-Methode (Verb).
-* `Content-Type`- und `Authorization`-Header. Um einen benutzerdefinierten Header (z. B. `x-custom-header`) zuzulassen, listen Sie den Header beim Aufrufen von <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> auf.
-* Anmeldeinformationen werden durch clientseitigen JavaScript-Code festgelegt (`credentials`-Eigenschaft auf `include` festgelegt).
-
-```csharp
-app.UseCors(policy => 
-    policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
-    .AllowAnyMethod()
-    .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
-    .AllowCredentials());
-```
-
-Weitere Informationen finden Sie unter <xref:security/cors> und unter der HTTP-Anforderungstester-Komponente der Beispiel-App (*Components/HTTPRequestTester.razor*).
-
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Anfordern zusätzlicher Zugriffstoken](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
-* [Anfügen von Token an ausgehende Anforderungen](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+* <xref:security/blazor/webassembly/index>
+* <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS-Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration)

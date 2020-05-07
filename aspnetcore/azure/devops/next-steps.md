@@ -5,13 +5,19 @@ description: Weitere Lernpfade für DevOps mit ASP.NET Core und Azure.
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: a775dc42551a43bcce72b5f9ca364ed00b1dc4e6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 92401d45d36dd3b93d175e08a8fa8697217ca7c7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647431"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766523"
 ---
 # <a name="next-steps"></a>Nächste Schritte
 
@@ -29,11 +35,11 @@ In diesem Handbuch haben Sie eine DevOps-Pipeline für eine ASP.NET Core-Beispie
 
 [Cosmos DB](/azure/cosmos-db/) ist ein global verteilter NoSQL-Datenbankdienst mit mehreren Modellen. Es stehen mehrere APIs zur Verfügung, darunter SQL API (früher DocumentDB), Cassandra und MongoDB.
 
-## <a name="identity"></a>Identität
+## Identity
 
 [Azure Active Directory](/azure/active-directory/) und [Azure Active Directory B2C](/azure/active-directory-b2c/) sind beides Identitätsdienste. Azure Active Directory ist für Unternehmensszenarien konzipiert und ermöglicht die Zusammenarbeit mit Azure AD B2B (Business-to-Business), während Azure Active Directory B2C für Business-to-Customer-Szenarien vorgesehen ist, einschließlich der Anmeldung in sozialen Netzwerken.
 
-## <a name="mobile"></a>mobil
+## <a name="mobile"></a>Mobil
 
 [Notification Hubs](/azure/notification-hubs/) ist eine skalierbare Multiplattform-Engine für Pushbenachrichtigungen, um schnell Millionen von Nachrichten an Apps auf verschiedenen Geräten zu senden.
 

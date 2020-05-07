@@ -4,13 +4,19 @@ author: rick-anderson
 description: Informationen zum Hinzufügen der Validierung zu einer ASP.NET Core-App
 ms.author: riande
 ms.date: 04/13/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: ecf3d011b38347eb32020df00e44d93ca789443a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6e46a4ace7c99096f1a7d47946a21fd7a5c657e7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80242535"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776193"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Hinzufügen der Validierung zu einer ASP.NET Core MVC-App
 
@@ -122,7 +128,7 @@ Im nächsten Teil der Reihe überprüfen wir die App und nehmen einige Verbesser
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Arbeiten mit Formularen](xref:mvc/views/working-with-forms)
-* [Globalization and localization (Globalisierung und Lokalisierung)](xref:fundamentals/localization)
+* [Globalisierung und Lokalisierung](xref:fundamentals/localization)
 * [Einführung in Taghilfsprogramme](xref:mvc/views/tag-helpers/intro)
 * [Erstellen von Taghilfsprogrammen](xref:mvc/views/tag-helpers/authoring)
 
