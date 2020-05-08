@@ -330,7 +330,7 @@ ASP.net Core verfügt über die folgenden HTTP-Verb Vorlagen:
 
 <a name="rt"></a>
 
-### <a name="route-templates"></a>Routen Vorlagen
+### <a name="route-templates"></a>Routenvorlagen
 
 ASP.net Core verfügt über die folgenden Routen Vorlagen:
 
@@ -428,7 +428,7 @@ In der folgenden Tabelle werden `[Route]` die Attribute im vorangehenden Code er
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | Ja | `"Home"` |
 | `[Route("Index")]` | Ja | `"Home/Index"` |
-| `[Route("/")]` | **Nein** | `""` |
+| `[Route("/")]` | **No** | `""` |
 | `[Route("About")]` | Ja | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>

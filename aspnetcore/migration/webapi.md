@@ -75,7 +75,7 @@ In ASP.net Core MVC ist das Attribut Routing standardmäßig enthalten, <xref:Mi
 
 ## <a name="migrate-models-and-controllers"></a>Migrieren von Modellen und Controllern
 
-Kopieren Sie den Controller des *productapp* -Projekts und das verwendete Modell. Folgen Sie diesen Schritten:
+Kopieren Sie den Controller des *productapp* -Projekts und das verwendete Modell. Führen Sie folgende Schritte aus:
 
 1. Kopieren Sie " *Controllers/productioncontroller. cs* " aus dem ursprünglichen Projekt in das neue Projekt.
 1. Kopieren Sie den gesamten Ordner " *Models* " aus dem ursprünglichen Projekt in das neue Projekt.

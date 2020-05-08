@@ -314,7 +314,7 @@ Eine einfache Möglichkeit zum Testen der abgeschlossenen App besteht darin, dre
 * Manager können Kontaktdaten genehmigen/ablehnen. Die `Details` Ansicht zeigt die Schaltflächen **genehmigen** und **ablehnen** .
 * Administratoren können alle Daten genehmigen/ablehnen und bearbeiten bzw. löschen.
 
-| Benutzer                | Seeding von der APP | Tastatur                                  |
+| Benutzer                | Seeding von der APP | Optionen                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nein                | Bearbeiten/Löschen Sie die eigenen Daten.                |
 | manager@contoso.com | Ja               | Genehmigen/ablehnen und Bearbeiten/Löschen eigener Daten. |
@@ -641,7 +641,7 @@ Eine einfache Möglichkeit zum Testen der abgeschlossenen App besteht darin, dre
 * Manager können Kontaktdaten genehmigen/ablehnen. Die `Details` Ansicht zeigt die Schaltflächen **genehmigen** und **ablehnen** .
 * Administratoren können alle Daten genehmigen/ablehnen und bearbeiten bzw. löschen.
 
-| Benutzer                | Seeding von der APP | Tastatur                                  |
+| Benutzer                | Seeding von der APP | Optionen                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nein                | Bearbeiten/Löschen Sie die eigenen Daten.                |
 | manager@contoso.com | Ja               | Genehmigen/ablehnen und Bearbeiten/Löschen eigener Daten. |

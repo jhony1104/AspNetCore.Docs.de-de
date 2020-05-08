@@ -71,7 +71,7 @@ Die schnellste Möglichkeit, das Schema für die ASP.net Core 2,0-Identität anz
 
 Es gibt feine Unterschiede in den Tabellenstrukturen und-Feldern für Mitgliedschafts-und ASP.net Core Identität. Das Muster wurde für die Authentifizierung/Autorisierung mit ASP.net-und ASP.net Core-apps erheblich geändert. Die Schlüssel Objekte, die weiterhin mit der Identität verwendet werden, sind *Benutzer* und *Rollen*. Hier sind die Zuordnung von Tabellen für *Benutzer*, *Rollen*und *Benutzer Rollen*.
 
-### <a name="users"></a>Benutzer
+### <a name="users"></a>-Benutzer
 
 |*Identität<br>(dbo). AspNetUsers*        ||*Mitgliedschaft<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
 |----------------------------------------|-----------------------------------------------------------|

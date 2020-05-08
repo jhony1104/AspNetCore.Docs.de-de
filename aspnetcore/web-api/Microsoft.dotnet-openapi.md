@@ -60,9 +60,9 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 
 ### <a name="add-file"></a>Datei hinzufügen
 
-#### <a name="options"></a>Tastatur
+#### <a name="options"></a>Optionen
 
-| Kurze Option| Lange Option| BESCHREIBUNG | Beispiel |
+| Kurze Option| Lange Option| Beschreibung | Beispiel |
 |-------|------|-------|---------|
 | -p|--updateProject | Das Projekt, das bearbeitet werden soll. |dotnet openapi add file *--updateProject .\Ref.csproj* .\OpenAPI.json |
 | -c|--code-generator| Der Codegenerator, der auf den Verweis angewendet werden soll. Die Optionen sind `NSwagCSharp` und `NSwagTypeScript`. Wenn `--code-generator` nicht angegeben ist, werden standardmäßig `NSwagCSharp`-Tools verwendet.|dotnet openapi add file .\OpenApi.json --code-generator
@@ -70,15 +70,15 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 
 #### <a name="arguments"></a>Argumente
 
-|  Argument  | BESCHREIBUNG | Beispiel |
+|  Argument  | Beschreibung | Beispiel |
 |-------------|-------------|---------|
 | source-file | Die Quelle, aus der ein Verweis erstellt werden soll. Es muss sich um eine OpenAPI-Datei handeln. |dotnet openapi add file *.\OpenAPI.json* |
 
 ### <a name="add-url"></a>URL hinzufügen
 
-#### <a name="options"></a>Tastatur
+#### <a name="options"></a>Optionen
 
-| Kurze Option| Lange Option| BESCHREIBUNG | Beispiel |
+| Kurze Option| Lange Option| Beschreibung | Beispiel |
 |-------|------|-------------|---------|
 | -p|--updateProject | Das Projekt, das bearbeitet werden soll. |dotnet openapi add url *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
 | -o|--output-file | Speicherort für die lokale Kopie der OpenAPI-Datei. |dotnet openapi add url `https://contoso.com/openapi.json` *--output-file myclient.json* |
@@ -87,24 +87,24 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 
 #### <a name="arguments"></a>Argumente
 
-|  Argument  | BESCHREIBUNG | Beispiel |
+|  Argument  | Beschreibung | Beispiel |
 |-------------|-------------|---------|
 | source-URL | Die Quelle, aus der ein Verweis erstellt werden soll. Es muss sich um eine URL handeln. |dotnet openapi add url `https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>Entfernen
+## <a name="remove"></a>Remove (Entfernen)
 
 Entfernt den OpenAPI-Verweis, der mit dem angegebenen Dateinamen übereinstimmt, aus der *CSPROJ*-Datei. Wenn der OpenAPI-Verweis entfernt wird, werden keine Clients generiert. Lokale *JSON*- und *YAML*-Dateien werden gelöscht.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
-| Kurze Option| Lange Option| BESCHREIBUNG| Beispiel |
+| Kurze Option| Lange Option| Beschreibung| Beispiel |
 |-------|------|------------|---------|
 | -p|--updateProject | Das Projekt, das bearbeitet werden soll. |dotnet openapi remove *--updateProject .\Ref.csproj* .\OpenAPI.json |
 | -H|--help|Zeigt Hilfeinformationen an.|dotnet openapi remove --help|
 
 ### <a name="arguments"></a>Argumente
 
-|  Argument  | BESCHREIBUNG| Beispiel |
+|  Argument  | Beschreibung| Beispiel |
 | ------------|------------|---------|
 | source-file | Die Quelle, aus der der Verweis entfernt werden soll. |dotnet openapi remove *.\OpenAPI.json* |
 
@@ -112,15 +112,15 @@ Entfernt den OpenAPI-Verweis, der mit dem angegebenen Dateinamen übereinstimmt,
 
 Aktualisiert die lokale Version einer Datei, die unter Verwendung der neuesten Download-URL heruntergeladen wurde.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
-| Kurze Option| Lange Option| BESCHREIBUNG | Beispiel |
+| Kurze Option| Lange Option| Beschreibung | Beispiel |
 |-------|------|-------------|---------|
 | -p|--updateProject | Das Projekt, das bearbeitet werden soll. | dotnet openapi refresh *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
 | -H|--help|Zeigt Hilfeinformationen an.|dotnet openapi refresh --help|
 
 ### <a name="arguments"></a>Argumente
 
-|  Argument  | BESCHREIBUNG | Beispiel |
+|  Argument  | Beschreibung | Beispiel |
 | ------------|-------------|---------|
 | source-URL | Die URL, aus der der Verweis aktualisiert werden soll. | dotnet openapi refresh `https://contoso.com/openapi.json` |

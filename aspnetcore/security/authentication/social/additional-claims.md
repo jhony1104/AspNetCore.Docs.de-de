@@ -51,7 +51,7 @@ Die Beispiel-App konfiguriert den Google-Authentifizierungs Anbieter mit einer C
 
 Geben Sie die Liste der Berechtigungen an, die vom Anbieter abgerufen werden <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*>sollen, indem Sie angeben. Authentifizierungs Bereiche für allgemeine externe Anbieter werden in der folgenden Tabelle angezeigt.
 
-| Anbieter  | `Scope`                                                            |
+| Anbieter  | Bereich                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -191,7 +191,7 @@ Die Beispiel-App konfiguriert den Google-Authentifizierungs Anbieter mit einer C
 
 Geben Sie die Liste der Berechtigungen an, die vom Anbieter abgerufen werden <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*>sollen, indem Sie angeben. Authentifizierungs Bereiche für allgemeine externe Anbieter werden in der folgenden Tabelle angezeigt.
 
-| Anbieter  | `Scope`                                                            |
+| Anbieter  | Bereich                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |

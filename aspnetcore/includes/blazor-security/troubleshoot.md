@@ -17,10 +17,10 @@ Ein Ansatz, um zu verhindern, dass veraltete Cookies und Standortdaten das Teste
   * Öffnen Sie in der Visual Studio-Schaltfläche **Ausführen** das Dialogfeld **Durchsuchen** nach.
   * Wählen Sie die Schaltfläche **Hinzufügen** aus.
   * Geben Sie im Feld **Programm** den Pfad zu Ihrem Browser an.
-  * Geben Sie im Feld **Argumente** die Befehlszeilenoption an, die der Browser verwendet, um im Inkognito-oder privaten Modus und die URL der APP zu öffnen. Zum Beispiel:
+  * Geben Sie im Feld **Argumente** die Befehlszeilenoption an, die der Browser verwendet, um im Inkognito-oder privaten Modus und die URL der APP zu öffnen. Beispiel:
     * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
-  * Geben Sie im Feld Anzeige **Name** einen Namen ein. Beispielsweise `Firefox Auth Testing`.
+  * Geben Sie im Feld Anzeige **Name** einen Namen ein. Beispiel: `Firefox Auth Testing`.
   * Klicken Sie auf die Schaltfläche **OK**.
   * Um zu vermeiden, dass das Browserprofil für die einzelnen Iterationen von Tests mit einer APP ausgewählt werden muss, legen Sie das Profil mit der Schaltfläche **als Standard festlegen** als Standard fest.
   * Stellen Sie sicher, dass der Browser von der IDE zwischen allen Änderungen an der APP, dem Test Benutzer oder der Anbieter Konfiguration geschlossen wird.
