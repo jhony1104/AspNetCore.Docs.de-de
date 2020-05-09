@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/06/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3a2f3bdd194b9153c5d59af7adfad3a3c8c56b23
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: aaae2b755d6d6e74db0cb7676820d01964c2add4
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776037"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976804"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory
 
@@ -93,7 +93,7 @@ In **API-Berechtigungen**:
 1. Öffnen Sie die **API** -Liste.
 1. Aktivieren Sie den Zugriff auf die API (z `API.Access`. b.).
 1. Wählen Sie **Berechtigungen hinzufügen** aus.
-1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie auf **Ja**, um zu bestätigen.
+1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie zum Bestätigen auf **Ja**.
 
 Notieren Sie *Client app* sich `33333333-3333-3333-3333-333333333333`die Anwendungs-ID der Client-app (Client-ID) (z. b.).
 
@@ -354,5 +354,6 @@ Führen Sie die APP aus dem Server Projekt aus. Wenn Sie Visual Studio verwenden
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* <xref:security/blazor/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>
 * [Dokumentation zur Microsoft Identity Platform](/azure/active-directory/develop/)

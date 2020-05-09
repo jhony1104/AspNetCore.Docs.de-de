@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774131"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976752"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -189,7 +189,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
 
   ```javascript
   <script>
@@ -234,7 +234,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitshinweise](#security-considerations)
+> * [Sicherheitsüberlegungen](#security-considerations)
 > * [Validation](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
@@ -405,7 +405,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitshinweise](#security-considerations)
+> * [Sicherheitsüberlegungen](#security-considerations)
 > * [Validation](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
@@ -440,7 +440,7 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Überprüfen
+## <a name="validation"></a>Validierung
 
 Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
@@ -454,7 +454,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Validierung von Inhalten
+### <a name="content-validation"></a>Inhaltsprüfung
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -462,7 +462,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -918,7 +918,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
 
   ```javascript
   <script>
@@ -963,7 +963,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitshinweise](#security-considerations)
+> * [Sicherheitsüberlegungen](#security-considerations)
 > * [Validation](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
@@ -1134,7 +1134,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitshinweise](#security-considerations)
+> * [Sicherheitsüberlegungen](#security-considerations)
 > * [Validation](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
@@ -1169,7 +1169,7 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Überprüfen
+## <a name="validation"></a>Validierung
 
 Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
@@ -1183,7 +1183,7 @@ Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfun
 >
 > **Implementieren Sie niemals willkürlich Sicherheitscode in einer App, wenn Sie diese Anforderungen nicht erfüllen.**
 
-### <a name="content-validation"></a>Validierung von Inhalten
+### <a name="content-validation"></a>Inhaltsprüfung
 
 **Wenden Sie für hochgeladene Inhalte eine API zum Scannen auf Viren/Schadsoftware von Drittanbietern an.**
 
@@ -1191,7 +1191,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1478,7 +1478,7 @@ Bei den Beispielen in diesem Thema wird davon ausgegangen, dass <xref:System.IO.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [HTTP-Verbindungs Anforderungs Ableitung](xref:fundamentals/servers/kestrel#http-connection-request-draining)
+* [HTTP-Verbindungs Anforderungs Ableitung](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload (Uneingeschränkter Dateiupload)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Azure-Sicherheit: Sicherheitsrahmen: Eingabevalidierung | Entschärfungen](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Azure Cloud Design Patterns: Valet-Schlüssel Muster](/azure/architecture/patterns/valet-key)
