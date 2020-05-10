@@ -1,20 +1,26 @@
 ---
-title: Razor-Syntaxreferenz für ASP.NET Core
+title: Razor-Syntax Referenz für ASP.net Core
 author: rick-anderson
-description: Informationen zur Razor-Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten
+description: Erfahren Sie Razor mehr über Markup Syntax zum Einbetten von Server basiertem Code in Webseiten.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: dd5c73be56ed0dafb759df2f5ff2eac1a3b5b09e
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381764"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003189"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
-Von [Rick Anderson](https://twitter.com/RickAndMSFT), Taylor [Mullen](https://twitter.com/ntaylormullen)und [Dan Vicarel](https://github.com/Rabadash8820)
+Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)und [Dan vicarel](https://github.com/Rabadash8820)
 
 Razor stellt eine Markupsyntax zum Einbetten von serverbasiertem Code in Webseiten dar. Die Razor-Syntax besteht aus dem Razor-Markup, C# und HTML. Dateien, die Razor enthalten, besitzen in der Regel die Dateierweiterung *.cshtml*. Razor ist auch in [Razor-Komponentendateien](xref:blazor/components) (*.razor*) enthalten.
 
@@ -467,7 +473,7 @@ Der `@code`-Block ermöglicht einer [Razor-Komponente](xref:blazor/components) d
 }
 ```
 
-Für Razor-Komponenten `@code` ist [`@functions`](#functions) ein Alias `@functions`von und wird über empfohlen. Mehrere `@code`-Blöcke sind zulässig.
+Für Razor-Komponenten `@code` ist ein Alias von [`@functions`](#functions) und wird für `@functions`empfohlen. Mehrere `@code`-Blöcke sind zulässig.
 
 ::: moniker-end
 
@@ -487,7 +493,7 @@ Verwenden Sie in [Razor-Komponenten](xref:blazor/components)`@code` über `@func
 
 ::: moniker-end
 
-Beispiel:
+Zum Beispiel:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -633,7 +639,7 @@ Razor macht eine `Model`-Eigenschaft für den Zugriff auf das an die Ansicht üb
 <div>The Login Email: @Model.Email</div>
 ```
 
-Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung legt das `T` in `RazorPage<T>` der generierten Klasse fest, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [Stark @model typisierte Modelle und das Schlüsselwort](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
+Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung legt das `T` in `RazorPage<T>` der generierten Klasse fest, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [stark typisierte Modelle und @model das Schlüsselwort](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
 ### <a name="namespace"></a>\@namespace
 
@@ -654,7 +660,7 @@ Für das Razor Pages Beispiel in der folgenden Tabelle gilt:
 
 | Seite                                        | Namespace                             |
 | ------------------------------------------- | ------------------------------------- |
-| *Seiten/Index.cshtml*                        | `Hello.World`                         |
+| *Pages/index. cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
@@ -666,7 +672,7 @@ Wenn der Ordner *EvenMorePages* im Beispiel oben eine Importdatei mit `@namespac
 
 | Seite                                        | Namespace               |
 | ------------------------------------------- | ----------------------- |
-| *Seiten/Index.cshtml*                        | `Hello.World`           |
+| *Pages/index. cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
 
@@ -701,7 +707,7 @@ Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hin
 
 ::: moniker range=">= aspnetcore-3.0"
 
-In [Razor-Komponenten](xref:blazor/components)steuert `@using` auch, welche Komponenten im Gültigkeitsbereich sind.
+In [Razor](xref:blazor/components)-Komponenten `@using` steuert auch, welche Komponenten sich im Gültigkeitsbereich befinden.
 
 ::: moniker-end
 
@@ -878,21 +884,21 @@ Die folgenden drei Anweisungen gehören zu den [Taghilfsprogrammen](xref:mvc/vie
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Entfernt zuvor hinzugefügte Taghilfsprogramme aus einer Ansicht. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Gibt ein Tagpräfix an, um Unterstützung für Taghilfsprogramme zu aktivieren und ihre Verwendung explizit zu machen. |
 
-## <a name="razor-reserved-keywords"></a>Für Razor reservierte Schlüsselwörter
+## <a name="razor-reserved-keywords"></a>Razorreservierte Schlüsselwörter
 
-### <a name="razor-keywords"></a>Razor-Schlüsselwörter
+### <a name="razor-keywords"></a>RazorKeywords
 
 * page (erfordert ASP.NET Core 2.1 oder höher)
-* Namespace
+* namespace
 * functions
 * inherits
 * model
 * section
 * helper (wird derzeit nicht von ASP.NET Core unterstützt)
 
-Razor-Schlüsselwörter werden mit dem Escapezeichen `@(Razor Keyword)` versehen (z.B. `@(functions)`).
+RazorSchlüsselwörter werden mit `@(Razor Keyword)` Escapezeichen versehen `@(functions)`(z. b.).
 
-### <a name="c-razor-keywords"></a>Razor-C#-Schlüsselwörter
+### <a name="c-razor-keywords"></a>C# Razor -Schlüsselwörter
 
 * case
 * do
@@ -901,7 +907,7 @@ Razor-Schlüsselwörter werden mit dem Escapezeichen `@(Razor Keyword)` versehen
 * foreach
 * if
 * else
-* Sperre
+* lock
 * switch
 * Versuch
 * catch
@@ -909,28 +915,28 @@ Razor-Schlüsselwörter werden mit dem Escapezeichen `@(Razor Keyword)` versehen
 * using
 * while
 
-Razor-C#-Schlüsselwörter werden mit dem doppeltem Escapezeichen `@(@C# Razor Keyword)` versehen (z.B. `@(@case)`). Das erste `@` dient als Escapezeichen für den Razor-Parser. Das zweite `@` dient als Escapezeichen für den C#-Parser.
+C# Razor -Schlüsselwörter müssen mit `@(@C# Razor Keyword)` einem doppelten Escapezeichen versehen `@(@case)`werden (z. b.). Der erste `@` schützt den Razor Parser. Das zweite `@` dient als Escapezeichen für den C#-Parser.
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Reservierte Schlüsselwörter, die nicht von Razor verwendet werden
+### <a name="reserved-keywords-not-used-by-razor"></a>Reservierte Schlüsselwörter werden von nicht verwendetRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Überprüfen der Razor-C#-Klasse, die für eine Ansicht generiert wurde
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Überprüfen Razor der für eine Sicht generierten c#-Klasse
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Bei .NET Core SDK 2.1 oder höher führt das [Razor SDK](xref:razor-pages/sdk) die Kompilierung von Razor-Dateien durch. Beim Erstellen eines Projekts generiert das Razor SDK das Verzeichnis *obj/<build_konfiguration>/<ziel_framework_bezeichnung>/Razor* im Projektstamm. Die Verzeichnisstruktur im *Razor*-Verzeichnis spiegelt die Verzeichnisstruktur des Projekts.
+Bei .net Core SDK 2,1 oder höher übernimmt das [ Razor SDK](xref:razor-pages/sdk) die Kompilierung Razor von Dateien. Beim Entwickeln eines Projekts generiert das Razor SDK eine *obj/<build_configuration>/<target_framework_moniker>/Razor * Verzeichnis im Stammverzeichnis des Projekts. Die Verzeichnisstruktur im *Razor* Verzeichnis spiegelt die Verzeichnisstruktur des Projekts wider.
 
-Beachten Sie die folgende Verzeichnisstruktur in einem Razor Pages-Projekt in ASP.NET Core 2.1 für .NET Core 2.1:
+Sehen Sie sich die folgende Verzeichnisstruktur in einem Razor ASP.net Core 2,1 pages-Projekt an, das auf .net Core 2,1 abzielt:
 
-* **Bereiche/**
-  * **Admin/**
-    * **Seiten/**
+* **Felder**
+  * **Administrator**
+    * **Seiten**
       * *Index.cshtml*
       * *Index.cshtml.cs*
-* **Seiten/**
-  * **Gemeinsam/**
-    * *_Layout.cshtml*
+* **Seiten**
+  * **Genu**
+    * *_Layout. cshtml*
   * *_ViewImports.cshtml*
   * *_ViewStart.cshtml*
   * *Index.cshtml*
@@ -938,22 +944,22 @@ Beachten Sie die folgende Verzeichnisstruktur in einem Razor Pages-Projekt in AS
 
 Wenn Sie das Projekt mit der Konfiguration zum *Debuggen* erstellen, wird folgendes *obj*-Verzeichnis erstellt:
 
-* **obj/**
-  * **Debuggen/**
+* **obj**
+  * **Gen**
     * **netcoreapp2.1/**
-      * **Rasierer/**
-        * **Bereiche/**
-          * **Admin/**
-            * **Seiten/**
+      * **Razor/**
+        * **Felder**
+          * **Administrator**
+            * **Seiten**
               * *Index.g.cshtml.cs*
-        * **Seiten/**
-          * **Gemeinsam/**
+        * **Seiten**
+          * **Genu**
             * *_Layout.g.cshtml.cs*
           * *_ViewImports.g.cshtml.cs*
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-Öffnen Sie *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs*, um die für *Pages/Index.cshtml* generierte Klasse anzuzeigen.
+Öffnen Sie *obj/Debug/netcoreapp 2.1/Razor/pages/index.g.cshtml.cs*, um die generierte Klasse für *pages/index. cshtml*anzuzeigen.
 
 ::: moniker-end
 
@@ -975,7 +981,7 @@ Legen Sie auf der `return csharpDocument;`-Anweisung von `CustomTemplateEngine` 
 
 ## <a name="view-lookups-and-case-sensitivity"></a>Ansicht der Suchvorgänge und Groß-/Kleinschreibung
 
-Die Razor-Ansichtsengine führt für Ansichten Suchvorgänge aus, die die Groß-/Kleinschreibung berücksichtigen. Der tatsächliche Suchvorgang wird jedoch vom zugrunde liegenden Dateisystem bestimmt:
+Die Razor Ansichts-Engine führt Suchvorgänge bei der Suche nach Groß-und Kleinschreibung durch. Der tatsächliche Suchvorgang wird jedoch vom zugrunde liegenden Dateisystem bestimmt:
 
 * Dateibasierte Quelle:
   * Bei Betriebssystemen, die Dateisysteme ohne Berücksichtigung von Groß-/Kleinschreibung verwenden (z.B. Windows), wird bei Suchvorgängen nach physischen Dateianbietern die Groß- und Kleinschreibung nicht berücksichtigt. `return View("Test")` liefert beispielsweise Treffer für */Views/Home/Test.cshtml*, */Views/home/test.cshtml* sowie für jede andere Schreibweise.
@@ -985,10 +991,10 @@ Die Razor-Ansichtsengine führt für Ansichten Suchvorgänge aus, die die Groß-
 Entwicklern wird empfohlen, sich bei der Groß-/Kleinschreibung von Datei- und Verzeichnisnamen an der Schreibweise folgender Begriffe zu orientieren:
 
 * Bereichs-, Controller- und Aktionsnamen
-* Razor Pages
+* RazorSeiten.
 
 Durch Überprüfung der Groß-/Kleinschreibung wird sichergestellt, dass die entsprechenden Ansichten für die Bereitstellungen unabhängig von dem zugrunde liegenden Dateisystem gefunden werden.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-[Die Einführung in ASP.NET Webprogrammierung mit der Razor-Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) bietet viele Beispiele für die Programmierung mit Razor-Syntax.
+[Einführung in die ASP.net-Webprogrammierung Razor mit der-Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) bietet viele Beispiele Razor für die Programmierung mit Syntax.
