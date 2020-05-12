@@ -120,7 +120,7 @@ Wählen Sie den Benutzernamen aus, und wählen Sie dann **persönliche Daten**au
 
 ![Seite "persönliche Daten verwalten"](gdpr/_static/pd.png)
 
-Notizen:
+Anmerkungen:
 
 * Informationen zum Generieren `Account/Manage` des Codes finden Sie unter [Gerüst Identität](xref:security/authentication/scaffold-identity).
 * Die Links zum **Löschen** und **herunterladen** wirken sich nur auf die Standard Identitätsdaten aus. Apps, die benutzerdefinierte Benutzerdaten erstellen, müssen erweitert werden, um die benutzerdefinierten Benutzerdaten zu löschen/herunterzuladen. Weitere Informationen finden Sie unter [hinzufügen, herunterladen und Löschen von benutzerdefinierten Benutzerdaten in der Identität](xref:security/authentication/add-user-data).
@@ -138,13 +138,13 @@ Einige Datenbanken und Speicher Mechanismen ermöglichen die Verschlüsselung ru
 * Ist die einfachste und sicherste Option.
 * Ermöglicht der Datenbank die Verwaltung von Schlüsseln und Verschlüsselung.
 
-Zum Beispiel:
+Beispiel:
 
 * Microsoft SQL und Azure SQL bieten [transparent Data Encryption](/sql/relational-databases/security/encryption/transparent-data-encryption) (TDE).
 * [Die Datenbank wird von SQL Azure standardmäßig verschlüsselt.](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Azure-blobdateien,-Dateien,-Tabellen und-Queue Storage werden standardmäßig verschlüsselt](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-Bei Datenbanken, die keine integrierte Verschlüsselung im Ruhezustand bereitstellen, können Sie die Datenträger Verschlüsselung möglicherweise verwenden, um denselben Schutz zu gewährleisten. Zum Beispiel:
+Bei Datenbanken, die keine integrierte Verschlüsselung im Ruhezustand bereitstellen, können Sie die Datenträger Verschlüsselung möglicherweise verwenden, um denselben Schutz zu gewährleisten. Beispiel:
 
 * [BitLocker für Windows Server](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * Linux:
