@@ -5,7 +5,7 @@ description: Erfahren Sie, wie ASP.NET Core-Apps in Windows Server Internet Info
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/17/2020
+ms.date: 5/7/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c3841babe213a9a3f303b8f9b83a947fd33ad647
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775985"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003134"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Hosten von ASP.NET Core unter Windows mit IIS
 
@@ -60,6 +60,8 @@ Apps, die für Bereitstellungen für 32-Bit-Systeme (x86) oder 64-Bit-Systeme (x
 * Die App erfordert den größeren IIS-Stapel.
 * Die App weist native 64-Bit-Abhängigkeiten auf.
 
+Für Apps, die für 32 Bit (x86) veröffentlicht wurden, müssen 32 Bit für ihre IIS-Anwendungspools aktiviert sein. Weitere Informationen finden Sie im Abschnitt [Erstellen der IIS-Website](#create-the-iis-site).
+
 Verwenden Sie ein .NET Core SDK für 64-Bit (x64), um eine 64-Bit-App zu veröffentlichen. Auf dem Hostsystem muss eine 64-Bit-Runtime vorhanden sein.
 
 ## <a name="hosting-models"></a>Hostingmodelle
@@ -75,22 +77,26 @@ Das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module):
   * Ruft `Program.Main`.
 * Behandelt die Lebensdauer der nativen IIS-Anforderung.
 
-Das In-Process-Hostingmodell wird nicht für ASP.NET Core-Apps unterstützt, die auf .NET Framework abzielen.
-
 Das folgende Diagramm zeigt die Beziehung zwischen IIS, dem ASP.NET Core-Modul und einer In-Process gehosteten App:
 
 ![Das ASP.NET Core-Modul im In-Process-Hostingszenario](index/_static/ancm-inprocess.png)
 
-Eine Anforderung geht aus dem Web beim HTTP.sys-Treiber im Kernelmodus ein. Der Treiber leitet die native Anforderung an IIS auf dem konfigurierten Port der Webseite weiter, normalerweise 80 (HTTP) oder 443 (HTTPS). Das ASP.NET Core-Modul empfängt die native Anforderung und übergibt sie an den IIS-HTTP-Server (`IISHttpServer`). Der IIS-HTTP-Server ist eine prozessinterne Serverimplementierung für IIS, die die Anforderung vom nativen Modus in den verwalteten Modus konvertiert.
+1. Eine Anforderung geht aus dem Web beim HTTP.sys-Treiber im Kernelmodus ein.
+1. Der Treiber leitet die native Anforderung an IIS auf dem konfigurierten Port der Webseite weiter, normalerweise 80 (HTTP) oder 443 (HTTPS).
+1. Das ASP.NET Core-Modul empfängt die native Anforderung und übergibt sie an den IIS-HTTP-Server (`IISHttpServer`). Der IIS-HTTP-Server ist eine prozessinterne Serverimplementierung für IIS, die die Anforderung vom nativen Modus in den verwalteten Modus konvertiert.
 
-Nachdem der IIS-HTTP-Server die Anforderung verarbeitet hat, wird die Anforderung per Push an die Middlewarepipeline von ASP.NET Core übertragen. Die Middleware-Pipeline behandelt die Anforderung und gibt sie als `HttpContext`-Instanz an die App-Logik weiter. Die Antwort der App wird über den IIS-HTTP-Server zurück an IIS übergeben. IIS übermittelt die Antwort an den Client, der die Anforderung initiiert hat.
+Nach der Verarbeitung der Anforderung durch den IIS-HTTP-Server:
 
-In-Process-Hosting ist eine wählbare Option für vorhandene Apps. Die [dotnet new](/dotnet/core/tools/dotnet-new)-Vorlagen sehen das In-Process-Hostingmodell aber als Standard für alle IIS- und IIS Express-Szenarios vor.
+1. Die Anforderung wird an die ASP.NET Core-Middlewarepipeline gesendet.
+1. Die Middleware-Pipeline behandelt die Anforderung und gibt sie als `HttpContext`-Instanz an die App-Logik weiter.
+1. Die Antwort der App wird über den IIS-HTTP-Server zurück an IIS übergeben.
+1. IIS übermittelt die Antwort an den Client, der die Anforderung initiiert hat.
 
-`CreateDefaultBuilder` fügt eine <xref:Microsoft.AspNetCore.Hosting.Server.IServer>-Instanz hinzu, indem die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*>-Methode aufgerufen wird, um die [CoreCLR](/dotnet/standard/glossary#coreclr) zu starten und die App im IIS-Workerprozess zu hosten (*w3wp.exe* oder *iisexpress.exe*). Leistungstests weisen darauf hin, dass das In-Process-Hosting einer .NET Core-App einen weitaus höheren Anforderungsdurchsatz im Vergleich zum Out-of-Process-Hosting der App mit Weiterleitung der Anforderungen über einen Proxy an [Kestrel](xref:fundamentals/servers/kestrel) Server bietet.
+Das In-Process-Hosting ist eine wählbare Option für vorhandene Apps. Die ASP.NET Core-Webvorlagen verwenden das In-Process-Hostingmodell.
 
-> [!NOTE]
-> Apps, die als einzelne ausführbare Datei veröffentlicht wurden, können vom In-Prozess-Hostingmodell nicht geladen werden.
+`CreateDefaultBuilder` fügt eine <xref:Microsoft.AspNetCore.Hosting.Server.IServer>-Instanz hinzu, indem die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*>-Methode aufgerufen wird, um die [CoreCLR](/dotnet/standard/glossary#coreclr) zu starten und die App im IIS-Workerprozess zu hosten (*w3wp.exe* oder *iisexpress.exe*). Leistungstests weisen darauf hin, dass das In-Process-Hosting einer .NET Core-App einen weitaus höheren Anforderungsdurchsatz im Vergleich zum Out-of-Process-Hosting der App mit Weiterleitung der Anforderungen über einen Proxy an [Kestrel](xref:fundamentals/servers/kestrel) bietet.
+
+Apps, die als einzelne ausführbare Datei veröffentlicht wurden, können vom In-Prozess-Hostingmodell nicht geladen werden.
 
 ### <a name="out-of-process-hosting-model"></a>Out-of-Process-Hostingmodell
 
@@ -100,11 +106,14 @@ Das folgende Diagramm zeigt die Beziehung zwischen IIS, dem ASP.NET Core-Modul u
 
 ![Das ASP.NET Core-Modul im Out-of-Process-Hostingszenario](index/_static/ancm-outofprocess.png)
 
-Anforderungen gehen aus dem Internet an den Treiber „HTTP.sys“ ein, der im Kernelmodus betrieben wird. Der Treiber leitet die Anforderungen an IIS auf dem konfigurierten Port der Webseite weiter, normalerweise 80 (HTTP) oder 443 (HTTPS). Das Modul leitet die Anforderung an Kestrel auf einem zufälligen Port der App weiter, der nicht Port 80 oder 443 entspricht.
+1. Anforderungen gehen aus dem Internet an den Treiber „HTTP.sys“ ein, der im Kernelmodus betrieben wird.
+1. Der Treiber leitet die Anforderungen an IIS auf dem konfigurierten Port der Webseite weiter. Der konfigurierte Port ist normalerweise 80 (HTTP) oder 443 (HTTPS).
+1. Das Modul leitet die Anforderung an Kestrel auf einem zufälligen Port der App weiter. Der zufällige Port entspricht nicht Port 80 oder 443.
 
-Das Modul gibt den Port über die Umgebungsvariable beim Start an. Die <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Erweiterung konfiguriert den Server so, dass er auf `http://localhost:{PORT}` lauscht. Zusätzliche Überprüfungen werden durchgeführt. Anforderungen, die nicht vom Modul stammen, werden abgelehnt. Das Modul unterstützt die HTTPS-Weiterleitung nicht. Deshalb werden Anforderungen über HTTP weitergeleitet, selbst wenn sie von IIS über HTTPS empfangen wurden.
+<!-- make this a bullet list -->
+Das ASP.NET Core-Modul gibt den Port beim Start über eine Umgebungsvariable an. Mit der <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>-Erweiterung wird der Server so konfiguriert, dass er an `http://localhost:{PORT}` lauscht. Zusätzliche Überprüfungen werden durchgeführt. Anforderungen, die nicht vom Modul stammen, werden abgelehnt. Das Modul unterstützt die HTTPS-Weiterleitung nicht. Deshalb werden Anforderungen über HTTP weitergeleitet, selbst wenn sie von IIS über HTTPS empfangen wurden.
 
-Nachdem Kestrel die Anforderung vom Modul erhalten hat, wird die Anforderung in die Middleware-Pipeline von ASP.NET Core eingestellt. Die Middleware-Pipeline behandelt die Anforderung und gibt sie als `HttpContext`-Instanz an die App-Logik weiter. Die durch IIS-Integration hinzugefügte Middleware aktualisiert das Schema, die Remote-IP und die Pfadbasis, um der Weiterleitung der Anforderung an Kestrel Rechnung zu tragen. Die Antwort der App wird dann an IIS zurückgegeben, wo sie per Push an den HTTP-Client zurückgegeben wird, der die Anforderung initiiert hat.
+Nachdem Kestrel die Anforderung vom Modul erhalten hat, wird die Anforderung an die ASP.NET Core-Middlewarepipeline weitergeleitet. Die Middleware-Pipeline behandelt die Anforderung und gibt sie als `HttpContext`-Instanz an die App-Logik weiter. Die durch IIS-Integration hinzugefügte Middleware aktualisiert das Schema, die Remote-IP und die Pfadbasis, um der Weiterleitung der Anforderung an Kestrel Rechnung zu tragen. Die Antwort der App wird dann an IIS zurückgegeben und an den HTTP-Client weitergeleitet, der die Anforderung initiiert hat.
 
 Einen Konfigurationsleitfaden für das ASP.NET Core-Modul finden Sie unter <xref:host-and-deploy/aspnet-core-module>.
 
@@ -163,7 +172,14 @@ services.Configure<IISOptions>(options =>
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>Proxyserver und Lastenausgleichsszenarien
 
-Die [Middleware für die Integration von IIS](#enable-the-iisintegration-components), die die Middleware für weitergeleitete Header konfiguriert, und das ASP.NET Core-Modul sind so konfiguriert, dass sie das Schema (HTTP/HTTPS) und die Remote-IP-Adresse an die Stelle weiterleiten, von der die Anforderung stammte. Möglicherweise ist zusätzliche Konfiguration für Apps erforderlich, die hinter weiteren Proxyservern und Lastenausgleichsmodulen (Load Balancer) gehostet werden. Weitere Informationen hierzu feinden Sie unter [Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich](xref:host-and-deploy/proxy-load-balancer).
+Die [Middleware für die IIS-Integration](#enable-the-iisintegration-components) und das ASP.NET Core-Modul sind zur Weiterleitung des
+
+* Schemas (HTTP/HTTPS)
+* und der Remote-IP-Adresse konfiguriert, von der die Anforderung stammt.
+
+Die [Middleware für die IIS-Integration](#enable-the-iisintegration-components) konfiguriert die Middleware für weitergeleitete Header.
+
+Möglicherweise ist zusätzliche Konfiguration für Apps erforderlich, die hinter weiteren Proxyservern und Lastenausgleichsmodulen (Load Balancer) gehostet werden. Weitere Informationen hierzu feinden Sie unter [Konfigurieren von ASP.NET Core zur Verwendung mit Proxyservern und Lastenausgleich](xref:host-and-deploy/proxy-load-balancer).
 
 ### <a name="webconfig-file"></a>Datei „web.config“
 
@@ -199,7 +215,7 @@ Im physischen Pfad der App sind vertrauliche Dateien vorhanden, wie z.B. *\<asse
 
 ### <a name="transform-webconfig"></a>Transformieren von web.config
 
-Wenn Sie *web.config* beim Veröffentlichen transformieren müssen (z.B. Umgebungsvariablen basierend auf der Konfiguration, dem Profil oder der Umgebung festlegen müssen), finden Sie weitere Informationen unter <xref:host-and-deploy/iis/transform-webconfig>.
+Wenn Sie *web.config* beim Veröffentlichen transformieren müssen, finden Sie weitere Informationen unter <xref:host-and-deploy/iis/transform-webconfig>. Sie müssen möglicherweise *web.config* beim Veröffentlichen transformieren, um Umgebungsvariablen basierend auf der Konfiguration, dem Profil oder der Umgebung festzulegen.
 
 ## <a name="iis-configuration"></a>IIS-Konfiguration
 
@@ -326,11 +342,13 @@ Wenn Sie Apps auf Servern mit [Web Deploy](/iis/install/installing-publishing-te
 
    ![Legen Sie „Kein verwalteter Code“ für die .NET CLR-Version fest.](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core wird in einem separaten Prozess ausgeführt und verwaltet die Runtime. ASP.NET Core basiert nicht auf dem Laden des Desktop-CLR (.NET CLR). Die Core Common Language Runtime (CoreCLR) für .NET Core wird gestartet, um die App im Workerprozess zu hosten. Das Festlegen der **.NET CLR-Version** auf **Kein verwalteter Code** ist optional, wird aber empfohlen.
+    ASP.NET Core wird in einem separaten Prozess ausgeführt und verwaltet die Runtime. Für ASP.NET Core ist das Laden der Desktop-CLR (.NET CLR) nicht erforderlich. Die Core Common Language Runtime (CoreCLR) für .NET Core wird gestartet, um die App im Workerprozess zu hosten. Das Festlegen der **.NET CLR-Version** auf **Kein verwalteter Code** ist optional, wird aber empfohlen.
 
-1. *ASP.NET Core 2.2 oder höher*: Deaktivieren Sie für eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) für 64-Bit-Systeme (x64), die das [In-Process-Hostingmodell](#in-process-hosting-model) verwendet, den App-Pool für 32-Bit-Prozesse (x86).
+1. *ASP.NET Core 2.2 oder höher*:
 
-   Wählen Sie in der Seitenleiste **Aktionen** von „IIS-Manager > **Anwendungspools**“ die Option **Standardwerte für Anwendungspool festlegen** oder **Erweiterte Einstellungen** aus. Suchen Sie nach **32-Bit-Anwendungen aktivieren**, und legen Sie den Wert auf `False` fest. Diese Einstellung wirkt sich nicht auf Apps aus, die für [Out-of-Process-Hosting](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model) bereitgestellt wurden.
+   * Deaktivieren Sie für eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) für 32-Bit-Systeme (x86), die mit einem 32-Bit-SDK veröffentlicht wurde und die das [In-Process-Hostingmodell](#in-process-hosting-model) verwendet, den Anwendungspool für 32 Bit. Navigieren Sie im IIS-Manager zu **Anwendungspools** auf der Randleiste **Verbindungen**. Wählen Sie den Anwendungspool der App aus. Wählen Sie auf der Randleiste **Aktionen** die Option **Erweiterte Einstellungen** aus. Legen Sie **32-Bit-Anwendungen aktivieren** auf `True` fest. 
+
+   * Deaktivieren Sie für eine [eigenständige Bereitstellung](/dotnet/core/deploying/#self-contained-deployments-scd) für 64-Bit-Systeme (x64), die das [In-Process-Hostingmodell](#in-process-hosting-model) verwendet, den App-Pool für 32-Bit-Prozesse (x86). Navigieren Sie im IIS-Manager zu **Anwendungspools** auf der Randleiste **Verbindungen**. Wählen Sie den Anwendungspool der App aus. Wählen Sie auf der Randleiste **Aktionen** die Option **Erweiterte Einstellungen** aus. Legen Sie **32-Bit-Anwendungen aktivieren** auf `False` fest. 
 
 1. Vergewissern Sie sich, dass die Prozessmodellidentität über die richtigen Berechtigungen verfügt.
 
@@ -678,7 +696,11 @@ Verwenden Sie ein .NET Core SDK für 64-Bit (x64), um eine 64-Bit-App zu veröff
 
 ### <a name="in-process-hosting-model"></a>In-Process-Hostingmodell
 
-Beim Einsatz von In-Process-Hosting wird eine ASP.NET Core-App im gleichen Prozess wie ihr IIS-Arbeitsprozess ausgeführt. Durch das In-Process-Hosting wird die Leistung des Out-of-Process-Hosting verbessert, da Anforderungen nicht per Proxy über den Loopbackadapter weitergeleitet werden. Dabei handelt es sich um eine Netzwerkschnittstelle, die ausgehenden Netzwerkdatenverkehr zum selben Computer zurück leitet. IIS erledigt das Prozessmanagement mit dem [Windows-Prozessaktivierungsdienst (Process Activation Service, WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
+Beim Einsatz von In-Process-Hosting wird eine ASP.NET Core-App im gleichen Prozess wie ihr IIS-Arbeitsprozess ausgeführt. Das In-Process-Hosting bietet aus folgendem Grund eine bessere Leistung als das Out-of-Process-Hosting:
+
+* Anforderungen werden nicht über den Loopbackadapter weitergeleitet. Dabei handelt es sich um eine Netzwerkschnittstelle, die ausgehenden Netzwerkdatenverkehr zum selben Computer zurückleitet.
+
+IIS erledigt das Prozessmanagement mit dem [Windows-Prozessaktivierungsdienst (Process Activation Service, WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
 
 Das [ASP.NET Core-Modul](xref:host-and-deploy/aspnet-core-module):
 
