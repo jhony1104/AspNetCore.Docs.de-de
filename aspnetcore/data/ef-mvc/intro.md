@@ -6,20 +6,26 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511300"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773548"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Erste Schritte mit EF Core in einer ASP.NET Core MVC-Web-App
 
 Dieses Tutorial wurde **nicht** auf ASP.NET Core 3.0 aktualisiert. Die [Razor Pages-Version](xref:data/ef-rp/intro) wurde aktualisiert. Die meisten Codeänderungen für ASP.NET Core 3.0 und höher in diesem Tutorial:
 
 * befinden sich in den Dateien *Startup.cs* und *Program.cs*
-* finden Sie in der [Razor Pages-Version](xref:data/ef-rp/intro) 
+* In der [Razor Pages-Version](xref:data/ef-rp/intro) vorhanden. 
 
 Informationen zum Zeitpunkt des Updates finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/13920).
 

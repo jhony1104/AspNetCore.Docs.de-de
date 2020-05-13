@@ -6,20 +6,24 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 2dff64f1f2d67b8a1e676acf6cf131b684099750
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ab103adc20c5332f71d5f6e3348d0b14c69fce34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405869"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774703"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Vergleich von gRPC-Diensten mit HTTP-APIs
 
 Von [James Newton-King](https://twitter.com/jamesnk)
 
-In diesem Artikel wird der Vergleich von [gRPC-Diensten](https://grpc.io/docs/guides/) mit HTTP-APIs (einschließlich ASP.NET Core-[Web-APIs](xref:web-api/index)) erläutert. Die Technologie, mit der eine API für Ihre App bereitgestellt wird, ist eine wichtige Wahl, und gRPC bietet im Vergleich zu HTTP-APIs besondere Vorteile. In diesem Artikel werden die Stärken und Schwächen von gRPC erläutert und Szenarien empfohlen, in denen gRPC gegenüber anderen Technologien bevorzugt zu verwenden ist.
+In diesem Artikel wird der Vergleich von [gRPC-Diensten](https://grpc.io/docs/guides/) mit HTTP-APIs mit JSON (einschließlich ASP.NET Core-[Web-APIs](xref:web-api/index)) erläutert. Die Technologie, mit der eine API für Ihre App bereitgestellt wird, ist eine wichtige Wahl, und gRPC bietet im Vergleich zu HTTP-APIs besondere Vorteile. In diesem Artikel werden die Stärken und Schwächen von gRPC erläutert und Szenarien empfohlen, in denen gRPC gegenüber anderen Technologien bevorzugt zu verwenden ist.
 
 ## <a name="high-level-comparison"></a>Allgemeiner Vergleich
 
@@ -46,6 +50,8 @@ gRPC wurde für HTTP/2 konzipiert, eine umfassende Überarbeitung von HTTP, die 
 
 * Binäre Rahmen und Komprimierung. Das HTTP/2-Protokoll ist sowohl beim Senden als auch beim Empfangen kompakt und effizient.
 * Multiplexing mehrerer HTTP/2-Aufrufe über eine einzelne TCP-Verbindung. Durch Multiplexing werden [Head-of-Line-Blockierungen](https://en.wikipedia.org/wiki/Head-of-line_blocking) beseitigt.
+
+HTTP/2 ist nicht exklusiv für GrpC. Viele Anforderungstypen, einschließlich HTTP-APIs mit JSON, können HTTP/2 verwenden und von dessen Leistungsverbesserungen profitieren.
 
 ### <a name="code-generation"></a>Codeerzeugung
 

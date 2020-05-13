@@ -4,13 +4,19 @@ author: rick-anderson
 description: Dieser Artikel erläutert das Arbeiten mit einer Datenbank und ASP.NET Core.
 ms.author: riande
 ms.date: 7/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: b5acb573f8fa39e5300ecdb359113d8697d78934
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 159588ec750f0ede534522aa9397fc2aefb58cd6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649513"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775608"
 ---
 # <a name="work-with-a-database-and-aspnet-core"></a>Arbeiten mit einer Datenbank und ASP.NET Core
 
@@ -80,7 +86,7 @@ Beachten Sie das Schlüsselsymbol neben `ID`. EF erstellt standardmäßig eine E
 
 ## <a name="seed-the-database"></a>Ausführen eines Seedings für die Datenbank
 
-Erstellen Sie im Ordner `SeedData`Models*mit dem folgenden Code die neue Klasse*:
+Erstellen Sie im Ordner *Models* mit dem folgenden Code die neue Klasse `SeedData`:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -141,8 +147,8 @@ Im nächsten Tutorial wird die Präsentation der Daten verbessert.
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 > [!div class="step-by-step"]
-> [Zurück: Gerüstbau mit Razor-Seiten](xref:tutorials/razor-pages/page)
-> [Weiter: Aktualisieren der Seiten](xref:tutorials/razor-pages/da1)
+> [Zurück: Scaffolded Razor Pages (Gerüstbau mit Razor Pages)](xref:tutorials/razor-pages/page)
+> [Weiter: Updating the pages (Aktualisieren der Seiten)](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
 
@@ -224,7 +230,7 @@ Beachten Sie das Schlüsselsymbol neben `ID`. EF erstellt standardmäßig eine E
 
 ## <a name="seed-the-database"></a>Ausführen eines Seedings für die Datenbank
 
-Erstellen Sie im Ordner `SeedData`Models*mit dem folgenden Code die neue Klasse*:
+Erstellen Sie im Ordner *Models* mit dem folgenden Code die neue Klasse `SeedData`:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -297,7 +303,7 @@ Im nächsten Tutorial wird die Präsentation der Daten bereinigt.
 * [Dieses Tutorial auf YouTube](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> [Zurück: Gerüstbau mit Razor-Seiten](xref:tutorials/razor-pages/page)
-> [Weiter: Aktualisieren der Seiten](xref:tutorials/razor-pages/da1)
+> [Zurück: Gerüstbau mit Razor Pages](xref:tutorials/razor-pages/page)
+> [Weiter: Updating the pages (Aktualisieren der Seiten)](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

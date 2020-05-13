@@ -7,14 +7,17 @@ ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: f375022ad3ebdea2990f626320ef295926f88c22
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 67fc972676549a02265035c129c513f11d303d51
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648769"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774046"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Neuerungen in ASP.NET Core 3.1
 
@@ -24,7 +27,7 @@ In diesem Artikel werden die wichtigsten Änderungen in ASP.NET Core 3.1 aufgez
 
 Razor-Komponenten werden nun als partielle Klassen generiert. Der Code für eine Razor-Komponente kann nun mithilfe einer CodeBehind-Datei geschrieben werden, die als eine partielle Klasse definiert ist, anstatt den gesamten Code für die Komponente in einer einzelnen Datei zu definieren. Weitere Informationen finden Sie unter [Unterstützung von partiellen Klassen](xref:blazor/components#partial-class-support).
 
-## <a name="opno-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor-Komponententaghilfsprogramm und Übergeben von Parametern an Komponenten der obersten Ebene
+## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor-Komponententaghilfsprogramm und Übergeben von Parametern an Komponenten der obersten Ebene
 
 In Blazor mit ASP.NET Core 3.0 wurden Komponenten mithilfe eines HTML-Hilfsprogramms (`Html.RenderComponentAsync`) in Seiten und Ansichten gerendert. In ASP.NET Core 3.1 werden Komponenten mithilfe eines neuen Komponententaghilfsprogramms in Seiten oder Ansichten gerendert:
 
@@ -55,7 +58,7 @@ Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Sei
 
 Das Verhalten von SameSite-Cookies wurde gemäß bevorstehender Browseränderungen geändert. Dies kann sich auf Authentifizierungsszenarios wie Azure AD, OpenIdConnect oder WsFederation auswirken. Weitere Informationen finden Sie unter <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-opno-locblazor-apps"></a>Verhindern von Standardaktionen für Ereignisse in Blazor-Apps
+## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Verhindern von Standardaktionen für Ereignisse in Blazor-Apps
 
 Verwenden Sie das Direktivenattribut `@on{EVENT}:preventDefault`, um die Standardaktion für ein Ereignis zu verhindern. Im folgenden Beispiel wird die Standardaktion verhindert, welche das Zeichen eines Schlüssels im Textfeld anzeigt:
 
@@ -65,7 +68,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:preventDefault`, um die Standar
 
 Weitere Informationen finden Sie unter [Verhindern von Standardaktionen](xref:blazor/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-opno-locblazor-apps"></a>Beenden der Ereignisweitergabe in Blazor-Apps
+## <a name="stop-event-propagation-in-blazor-apps"></a>Beenden der Ereignisweitergabe in Blazor-Apps
 
 Verwenden Sie das Direktivenattribut `@on{EVENT}:stopPropagation`, um die Ereignisweitergabe zu beenden. Im folgenden Beispiel verhindert das Aktivieren des Kontrollkästchens die Weitergabe von Klickereignissen des untergeordneten `<div>`-Elements an das übergeordnete `<div>`-Element:
 
@@ -85,7 +88,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:stopPropagation`, um die Ereign
 
 Weitere Informationen finden Sie unter [Beenden der Ereignisweitergabe](xref:blazor/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-opno-locblazor-app-development"></a>Ausführliche Fehler bei der Entwicklung von Blazor-Apps
+## <a name="detailed-errors-during-blazor-app-development"></a>Ausführliche Fehler bei der Entwicklung von Blazor-Apps
 
 Wenn eine Blazor-App während der Entwicklung nicht ordnungsgemäß funktioniert, erhalten Sie nun ausführliche Fehlerinformationen von der App, die Sie beim Beheben des Problems unterstützen. Wenn ein Fehler auftritt, zeigen Blazor-Apps eine goldene Leiste am unteren Rand der Anzeige an:
 

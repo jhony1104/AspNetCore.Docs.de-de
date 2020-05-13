@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1f68bd5347ba1f67e56b7a2fe8914ffdaef8010c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650971"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774079"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Neuerungen in ASP.NET Core 2.1
 
@@ -41,13 +45,13 @@ ASP.NET Core 2.1 erleichtert die Erstellung und Einbeziehung einer Razor-basiert
 
 Weitere Informationen finden Sie unter [Erstellen einer wiederverwendbaren Benutzeroberfläche mithilfe des Razor-Klassenbibliotheksprojekts](xref:razor-pages/ui-class).
 
-## <a name="identity-ui-library--scaffolding"></a>Bibliothek „Identität“ der Benutzeroberfläche und Gerüst
+## <a name="identity-ui-library--scaffolding"></a>Bibliothek und Gerüst der Identity-Benutzeroberfläche
 
-ASP.NET Core 2.1 stellt [ASP.NET Core-Identität](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class) bereit. Apps, die über die Bibliothek „Identität“ verfügen, können das neue Gerüst „Identität“ anwenden, um die in der Razor-Klassenbibliothek „Identität“ enthaltenen Quellcode selektiv hinzuzufügen. Sie sollten Quellcode generieren, um den Code und das Verhalten ändern zu können. Sie können das Gerüst beispielsweise anweisen, den bei der Registrierung verwendeten Code zu generieren. Generierter Code hat Vorrang vor dem gleichen Code in der Razor-Klassenbibliothek „Identität“.
+ASP.NET Core 2.1 stellt [ASP.NET Core Identity](xref:security/authentication/identity) als [Razor-Klassenbibliothek](xref:razor-pages/ui-class) bereit. Apps, die über Identity verfügen, können das neue Gerüst Identity anwenden, um die in der Identity-Klassenbibliothek Razor enthaltenen Quellcode selektiv hinzuzufügen. Sie sollten Quellcode generieren, um den Code und das Verhalten ändern zu können. Sie können das Gerüst beispielsweise anweisen, den bei der Registrierung verwendeten Code zu generieren. Generierter Code hat Vorrang vor dem gleichen Code in der Razor-Klassenbibliothek Identity.
 
-Apps **ohne** Authentifizierung können das Gerüst „Identität“ anwenden, um das Paket der Razor-Klassenbibliothek „Identität“ hinzuzufügen. Sie können Code der Klassenbibliothek „Identität“ auswählen, der generiert werden soll.
+Apps **ohne** Authentifizierung können das Gerüst Identity anwenden, um das Paket der Razor-Klassenbibliothek Identity hinzuzufügen. Sie können Code der Klassenbibliothek Identity auswählen, der generiert werden soll.
 
-Weitere Informationen finden Sie unter [Gerüst „Identität“in ASP.NET Core Projekten](xref:security/authentication/scaffold-identity).
+Weitere Informationen finden Sie unter [Gerüst Identity in ASP.NET Core-Projekten](xref:security/authentication/scaffold-identity).
 
 ## <a name="https"></a>HTTPS
 
@@ -72,7 +76,7 @@ Darüber hinaus kann die Verwendung von HTTPS mit dem [HTTP Strict Transport Sec
 
 In der Produktion muss HTTPS explizit konfiguriert sein. In Version 2.1 wurde ein Konfigurationsschema für die Konfiguration von HTTPS für Kestrel hinzugefügt. Apps können für folgende Verwendung konfiguriert werden:
 
-* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Endpunktkonfiguration](xref:fundamentals/servers/kestrel#endpoint-configuration).
+* Mehrere Endpunkte einschließlich der URLs. Weitere Informationen finden Sie unter [Kestrel web server implementation: Endpoint configuration (Kestrel: Endpunktkonfiguration)](xref:fundamentals/servers/kestrel#endpoint-configuration).
 * Das für HTTPS zu verwendende Zertifikat aus einer Datei auf dem Datenträger oder aus einem Zertifikatspeicher.
 
 ## <a name="gdpr"></a>DSGVO
@@ -133,7 +137,7 @@ Weitere Informationen finden Sie unter [Initiieren von HTTP-Anforderungen](xref:
 
 ## <a name="kestrel-transport-configuration"></a>Kestrel-Transportkonfiguration
 
-Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel-Webserverimplementierung: Transportkonfiguration](xref:fundamentals/servers/kestrel#transport-configuration).
+Mit dem Release von ASP.NET Core 2.1 basiert der Standardtransport von Kestrel nicht mehr auf Libuv, sondern auf verwalteten Sockets. Weitere Informationen finden Sie unter [Kestrel web server implementation: Transport configuration (Kestrel: Transportkonfiguration)](xref:fundamentals/servers/kestrel#transport-configuration).
 
 ## <a name="generic-host-builder"></a>Generator für generische Hosts
 
@@ -155,7 +159,7 @@ Weitere Informationen finden Sie unter:
 
 ## <a name="razor-pages-search-for-razor-assets"></a>Razor Pages-Suche nach Razor-Objekten
 
-In Version 2.1 sucht Razor Pages in den folgenden Verzeichnissen in der aufgeführten Reihenfolge nach Razor-Objekten (z.B. Layouts und Teilausführungen):
+In Version 2.1 sucht Razor Pages in den folgenden Verzeichnissen in der aufgeführten Reihenfolge nach Razor-Objekten (z. B. Layouts und Teilausführungen):
 
 1. Im aktuellen Ordner „Pages“.
 1. */Pages/Shared/*
@@ -163,7 +167,7 @@ In Version 2.1 sucht Razor Pages in den folgenden Verzeichnissen in der aufgefü
 
 ## <a name="razor-pages-in-an-area"></a>Razor Pages in einem Bereich
 
-Razor Pages unterstützt jetzt [Bereiche](xref:mvc/controllers/areas). Erstellen Sie für die Anzeige eines Beispiels für Bereiche eine neue Razor Pages-Web-App mit individuellen Benutzerkonten. Eine Razor Pages-Web-App mit individuellen Benutzerkonten enthält */Areas/Identity/Pages*.
+Razor Pages unterstützen jetzt [Bereiche](xref:mvc/controllers/areas). Erstellen Sie für die Anzeige eines Beispiels für Bereiche eine neue Razor Pages-Web-App mit individuellen Benutzerkonten. Eine Razor Pages-Web-App mit individuellen Benutzerkonten enthält */Areas/Identity/Pages*.
 
 ## <a name="mvc-compatibility-version"></a>MVC-Kompatibilitätsversion
 

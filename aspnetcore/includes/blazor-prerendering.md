@@ -1,15 +1,6 @@
 ---
-no-loc:
-- Blazor
-- SignalR
-ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647527"
 ---
-Während für eine Blazor Server-App ein Prerendering durchgeführt wird, sind bestimmte Aktionen (z. B. Aufrufe in JavaScript) nicht möglich, da noch keine Verbindung mit dem Browser hergestellt wurde. Komponenten müssen wahrscheinlich unterschiedlich rendern, wenn dafür ein Prerendering durchgeführt wurde.
+Während für eine Blazor Server-App ein Prerendering erfolgt, sind bestimmte Aktionen (z. B. Aufrufe in JavaScript) nicht möglich, da noch keine Verbindung mit dem Browser hergestellt wurde. Komponenten müssen wahrscheinlich unterschiedlich rendern, wenn dafür ein Prerendering durchgeführt wurde.
 
 Wenn Sie JavaScript-Interop-Aufrufe bis nach Herstellung der Verbindung zum Browser verzögern möchten, können Sie das [Lebenszyklusereignis der OnAfterRenderAsync-Komponente](xref:blazor/lifecycle#after-component-render) verwenden. Dieses Ereignis wird nur aufgerufen, nachdem die App vollständig gerendert und die Clientverbindung hergestellt wurde.
 
@@ -33,7 +24,7 @@ Wenn Sie JavaScript-Interop-Aufrufe bis nach Herstellung der Verbindung zum Brow
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
+Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
 
 ```html
 <script>
@@ -81,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
+Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
 
 ```html
 <script>

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 756d3d57122642ab10ab671c9accb75975c3799d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: efce2caf37534823016c12b298afd277bab22030
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649987"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769935"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Optionsmuster in ASP.NET Core
 
@@ -166,7 +172,7 @@ Die Einfügung von Optionen ist als Beispiel 4 in der Beispiel-App dargestellt.
 
 Fügen Sie <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ein in:
 
-* Eine Razor-Seite oder MVC-Ansicht mithilfe der Razor-Anweisung [`@inject`](xref:mvc/views/razor#inject).
+* Eine Razor-Seite oder MVC-Ansicht mithilfe der [`@inject`](xref:mvc/views/razor#inject) Razor-Anweisung.
 * Ein Seiten- oder Ansichtsmodell.
 
 Im folgenden Beispiel aus der Beispiel-App wird <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in ein Seitenmodell eingefügt (*Pages/Index.cshtml.cs*):
@@ -592,7 +598,7 @@ Die Einfügung von Optionen ist als Beispiel 4 in der Beispiel-App dargestellt.
 
 Fügen Sie <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> ein in:
 
-* Eine Razor-Seite oder MVC-Ansicht mithilfe der Razor-Anweisung [`@inject`](xref:mvc/views/razor#inject).
+* Eine Razor-Seite oder MVC-Ansicht mithilfe der [`@inject`](xref:mvc/views/razor#inject) Razor-Anweisung.
 * Ein Seiten- oder Ansichtsmodell.
 
 Im folgenden Beispiel aus der Beispiel-App wird <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> in ein Seitenmodell eingefügt (*Pages/Index.cshtml.cs*):

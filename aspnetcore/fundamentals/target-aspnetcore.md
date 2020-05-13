@@ -7,13 +7,17 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 5374d7eec4334223a4bba7ee26cb6e2f208ed20b
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977196"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776486"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Verwenden von ASP.NET Core-APIs in einer Klassenbibliothek
 
@@ -175,7 +179,7 @@ Die folgende Projektdatei unterstützt diese Varianten über die `TargetFramewor
 Dies erfolgt mit der vorstehenden Projektdatei:
 
 * Das `Markdig`-Paket wird für alle Consumer hinzugefügt.
-* Ein Verweis auf [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) wird für Consumer mit dem Ziel .NET Framework 4.6.1 oder höher oder .NET Core 2.x hinzugefügt. Die Version 2.1.0 des Pakets funktioniert aufgrund der Abwärtskompatibilität mit ASP.NET Core 2.2.
+* Ein Verweis auf [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) wird für Consumer mit dem Ziel .NET Framework 4.6.1 oder höher oder .NET Core 2.x hinzugefügt. Die Version 2.1.0 des Pakets funktioniert aufgrund der Abwärtskompatibilität mit ASP.NET Core 2.2.
 * Auf das freigegebene Framework wird für Consumer mit dem Ziel .NET Core 3.x verwiesen. Das `Microsoft.AspNetCore.Mvc.Razor`-Paket ist im freigegebenen Framework enthalten.
 
 Alternativ könnte .NET Standard 2.0 als Ziel verwendet werden, statt sowohl .NET Core 2.1 als auch .NET Framework 4.6.1 als Ziel festzulegen:

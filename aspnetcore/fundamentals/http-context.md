@@ -5,22 +5,28 @@ description: Anleitung zum Zugreifen auf HttpContext in ASP.NET Core
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/03/2019
+ms.date: 5/5/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 716e74551b95455c99abbac58b712f013acfde56
+ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647011"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82852365"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>Zugreifen auf HttpContext in ASP.NET Core
 
-ASP.NET Core-Apps greifen über die `HttpContext`-Schnittstelle und ihrer Standardimplementierung <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> auf <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
+ASP.NET Core-Apps greifen über die <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>-Schnittstelle und ihrer Standardimplementierung <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> auf `HttpContext` zu. `IHttpContextAccessor` muss nur verwendet werden, wenn Sie auf `HttpContext` innerhalb eines Diensts zugreifen müssen.
 
 ## <a name="use-httpcontext-from-razor-pages"></a>Verwenden von HttpContext über Razor Pages
 
-Das Razor Pages-<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> stellt die <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext>-Eigenschaft zur Verfügung:
+Das <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> von Razor Pages stellt die <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext>-Eigenschaft zur Verfügung:
 
 ```csharp
 public class AboutModel : PageModel
@@ -34,7 +40,7 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>Verwenden von HttpContext in einer Razor-Ansicht
+## <a name="use-httpcontext-from-a-razor-view"></a>Verwenden von HttpContext über eine Razor-Ansicht
 
 Razor-Ansichten machen `HttpContext` direkt über die [RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context)-Eigenschaft in der Ansicht verfügbar. Im folgenden Beispiel wird der aktuelle Benutzername in einer Intranet-App abgerufen, die die Windows-Authentifizierung verwendet:
 
@@ -163,3 +169,8 @@ public class EmailController : Controller
         ...
     }
 }
+```
+
+## <a name="blazor-and-shared-state"></a>Blazor und freigegebener Zustand
+
+[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]

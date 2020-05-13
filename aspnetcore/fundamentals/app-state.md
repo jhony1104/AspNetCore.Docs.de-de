@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558901"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774807"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Sitzungs- und Zustandsverwaltung in ASP.NET Core
 
@@ -408,7 +412,7 @@ Die `ISession`-Implementierung bietet mehrere Erweiterungsmethoden zum Festlegen
 * [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
 * [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
 
-Mit dem folgenden Codebeispiel wird der Sitzungswert für den `IndexModel.SessionKeyName`-Schlüssel (`_Name` in der Beispiel-App) auf einer Razor Pages-Seite abgerufen:
+Mit dem folgenden Codebeispiel wird der Sitzungswert für den`IndexModel.SessionKeyName`-Schlüssel (`_Name` in der Beispiel-App) auf einer Razor Pages-Seite abgerufen:
 
 ```csharp
 @page
@@ -436,7 +440,7 @@ Im folgenden Beispiel wird dargestellt, wie Sie serialisierbare Objekte mit den 
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core macht die Razor Pages-[TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) oder Controller-<xref:Microsoft.AspNetCore.Mvc.Controller.TempData>verfügbar. Diese Eigenschaft speichert Daten, bis sie in einer anderen Anforderung gelesen werden. Mit den Methoden [Keep(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) und [Peek(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) können die Daten untersucht werden, ohne am Ende der Anforderung gelöscht zu werden. [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) markiert alle Elemente im Wörterbuch für die Aufbewahrung. `TempData` eignet sich besonders für die Weiterleitung, wenn Daten für mehr als eine Anforderung erforderlich sind. `TempData` wird von `TempData`-Anbietern durch Verwendung von Cookies oder des Sitzungszustands implementiert.
+ASP.NET Core macht die Razor Pages-[TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) oder Controller-<xref:Microsoft.AspNetCore.Mvc.Controller.TempData> verfügbar. Diese Eigenschaft speichert Daten, bis sie in einer anderen Anforderung gelesen werden. Mit den Methoden [Keep(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) und [Peek(String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) können die Daten untersucht werden, ohne am Ende der Anforderung gelöscht zu werden. [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) markiert alle Elemente im Wörterbuch für die Aufbewahrung. `TempData` eignet sich besonders für die Weiterleitung, wenn Daten für mehr als eine Anforderung erforderlich sind. `TempData` wird von `TempData`-Anbietern durch Verwendung von Cookies oder des Sitzungszustands implementiert.
 
 ## <a name="tempdata-samples"></a>TempData-Beispiele
 

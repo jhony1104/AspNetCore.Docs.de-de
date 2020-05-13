@@ -6,13 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: fc6f8d8c4ab09848cf316be2e522bf5ce3b9ac76
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 74153b9a185d382a3418dd9470ce6ca4c3c70041
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416179"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773613"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: Erfahren Sie mehr über erweiterte Szenarien: ASP.NET MVC mit EF Core
 
@@ -93,7 +99,7 @@ Wenn auf die Schaltfläche **Aktualisieren** geklickt wird, wird die HttpPost-Me
 
 Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf den Ordner *Ansichten/Kurse*, und klicken Sie anschließend auf **Hinzufügen > Neues Element**.
 
-Klicken Sie im Dialogfeld **Neues Element hinzufügen** unter **Installiert** im linken Bereich auf **ASP.NET Core**, klicken Sie auf **Razor-Ansicht**, und nennen Sie die neue Ansicht *UpdateCourseCredits.cshtml*.
+Klicken Sie im Dialogfeld **Neues Element hinzufügen** unter **Installiert** im linken Bereich auf **ASP.NET Core**, klicken Sie auf **RazorRazor-Ansicht**, und nennen Sie die neue Ansicht *UpdateCourseCredits.cshtml*.
 
 Ersetzen Sie in *Views/Courses/UpdateCourseCredits.cshtml* den Vorlagencode durch den folgenden Code:
 

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: e3249df4b7388beeff13fe4b4e0ff481c35725c5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 39fba5ccc99ec0ecf32df5681cfc025c52bc5469
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78651013"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776434"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Anwendungsstart in ASP.NET Core
 
@@ -33,7 +39,7 @@ ASP.NET Core-Apps verwenden eine `Startup`-Klasse, die standardmäßig `Startup`
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-Das Beispiel oben bezieht sich auf [Razor Pages](xref:razor-pages/index), die MVC-Version ist aber ähnlich.
+Das Beispiel oben bezieht sich auf [Razor Pages](xref:razor-pages/index). Die MVC-Version ist aber ähnlich.
 
 
 Die `Startup`-Klasse wird angegeben, wenn der [Host](xref:fundamentals/index#host) der App erstellt wird. Die `Startup`-Klasse wird in der Regel durch Aufruf der [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*)-Methode im Hostgenerator angegeben:
@@ -90,7 +96,7 @@ Die [ASP.NET Core-Vorlagen](/dotnet/core/tools/dotnet-new) konfigurieren die Pip
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-Das Beispiel oben bezieht sich auf [Razor Pages](xref:razor-pages/index), die MVC-Version ist aber ähnlich.
+Das Beispiel oben bezieht sich auf [Razor Pages](xref:razor-pages/index). Die MVC-Version ist aber ähnlich.
 
 Jede `Use`-Erweiterungsmethode fügt mindestens eine Middlewarekomponente zu der Anforderungspipeline hinzu. Beispielsweise konfiguriert <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>[Middleware](xref:fundamentals/middleware/index) für die Bereitstellung [statischer Dateien](xref:fundamentals/static-files).
 

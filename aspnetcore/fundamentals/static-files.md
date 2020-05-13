@@ -5,13 +5,19 @@ description: Hier erfahren Sie, wie statische Dateien bereitgestellt und gesiche
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 95a77defc7e98328e1f4e3615648b1d14485e51e
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f7697260e6ab29d0e9ba955dfdf0c8c81e4e1130
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647713"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775491"
 ---
 # <a name="static-files-in-aspnet-core"></a>Statische Dateien in ASP.NET Core
 
@@ -242,7 +248,7 @@ Mit dem vorangehenden Code wird eine Anforderung für eine Datei mit unbekanntem
 
 ## <a name="serve-files-from-multiple-locations"></a>Bereitstellen von Dateien aus mehreren Speicherorten
 
-Bei `UseStaticFiles` und `UseFileServer` zeigt der Dateianbieter standardmäßig auf *wwwroot*. Sie können weitere Instanzen von `UseStaticFiles` und `UseFileServer` mit anderen Dateianbietern bereitstellen, um Dateien von anderen Speicherorten bereitzustellen. Weitere Informationen finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
+Bei `UseStaticFiles` und `UseFileServer` zeigt der Dateianbieter standardmäßig auf *wwwroot*. Sie können weitere Instanzen von `UseStaticFiles` und `UseFileServer` mit anderen Dateianbietern bereitstellen, um Dateien von anderen Speicherorten bereitzustellen. Weitere Informationen finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
 
 ### <a name="considerations"></a>Weitere Überlegungen
 

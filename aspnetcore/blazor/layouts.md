@@ -8,22 +8,25 @@ ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5c6771dd7249bfb8280ba20e1ce75967f279971c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647923"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771584"
 ---
-# <a name="aspnet-core-opno-locblazor-layouts"></a>Blazor-Layouts in ASP.NET Core
+# <a name="aspnet-core-blazor-layouts"></a>Blazor-Layouts in ASP.NET Core
 
 Von [Rainer Stropek](https://www.timecockpit.com) und [Luke Latham](https://github.com/guardrex)
 
 Einige App-Elemente wie Menüs, Copyrightmeldungen und Firmenlogos sind in der Regel Teil des allgemeinen Layouts von Apps und werden von allen Komponenten der App verwendet. Es ist nicht sonderlich effizient, den Code dieser Elemente in alle anderen Komponenten einer App zu kopieren. Jedes Mal, wenn eines dieser Elemente aktualisiert werden muss, müssen alle Komponenten aktualisiert werden. Eine solche Duplizierung ist schwer zu verwalten und kann im Laufe der Zeit zu inkonsistenten Inhalten führen. Mit *Layouts* wird dieses Problem gelöst.
 
-Technisch gesehen ist ein Layout nur eine weitere Komponente. Layouts werden in Razor-Vorlagen oder in C#-Code definiert und können [Datenbindungen](xref:blazor/data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection) und andere Komponentenszenarios nutzen.
+Technisch gesehen ist ein Layout nur eine weitere Komponente. Layouts werden in Razor-Vorlagen oder in C#-Code definiert und können [Datenbindung](xref:blazor/data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection) und andere Komponentenszenarien nutzen.
 
 Zum Umwandeln einer *Komponente* in ein *Layout* muss die Komponente:
 
@@ -42,7 +45,7 @@ Legen Sie das Standardlayout für die App in der `Router`-Komponente der Datei *
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-Geben Sie `NotFound` für `LayoutView`-Inhalt an, um ein Standardlayout für `NotFound`-Inhalt anzugeben:
+Geben Sie `LayoutView` für `NotFound`-Inhalt an, um ein Standardlayout für `NotFound`-Inhalt anzugeben:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
@@ -54,7 +57,7 @@ Das Festlegen des Layouts als Standardlayout im Router ist nützlich, da es pro 
 
 Verwenden Sie die Razor-Anweisung `@layout`, um ein Layout auf eine Komponente anzuwenden. Der Compiler konvertiert `@layout` in eine `LayoutAttribute`-Eigenschaft, die auf die Komponentenklasse angewendet wird.
 
-Der Inhalt der folgenden `MasterList`-Komponente wird bei der Position von `MasterLayout` in `@Body` eingefügt:
+Der Inhalt der folgenden `MasterList`-Komponente wird bei der Position von `@Body` in `MasterLayout` eingefügt:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
@@ -66,9 +69,9 @@ Alle Ordner einer App können optional eine Vorlagendatei namens *_Imports.razor
 
 Die folgende Datei *_Imports.razor* importiert Folgendes:
 
-* `MyCoolLayout`.
+* `MyCoolLayout`
 * Alle Razor-Komponenten im gleichen Ordner und in dessen Unterordnern
-* Der `BlazorApp1.Data` -Namespace.
+* Den Namespace `BlazorApp1.Data`
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 

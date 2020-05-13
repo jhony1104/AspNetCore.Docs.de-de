@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: eb4378223c40594ac52f50b7b890785067515555
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558916"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771773"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
@@ -273,7 +276,7 @@ Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/co
 
 ### <a name="render-noninteractive-components"></a>Rendern nicht interaktiver Komponenten
 
-Auf der folgenden Razor Page wird die `Counter`-Komponente statisch mit einem Anfangswert gerendert, der mit einem Formular angegeben wird. Da die Komponente statisch gerendert wird, ist die Komponente nicht interaktiv:
+Auf der folgenden Razor-Seite wird die `Counter`-Komponente statisch mit einem Anfangswert gerendert, der mit einem Formular angegeben wird. Da die Komponente statisch gerendert wird, ist die Komponente nicht interaktiv:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -305,6 +308,6 @@ Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden
 @using MyAppNamespace.Components
 ```
 
-Die Datei *_ViewImports.cshtml* befindet sich bei Razor Pages-Apps im Ordner *Pages* oder bei MVC-Apps im Ordner *Views*.
+Die Datei *_ViewImports.cshtml* befindet sich bei *Pages-Apps im Ordner*PagesRazor oder bei MVC-Apps im Ordner *Views*.
 
 Weitere Informationen finden Sie unter <xref:blazor/components#import-components>.

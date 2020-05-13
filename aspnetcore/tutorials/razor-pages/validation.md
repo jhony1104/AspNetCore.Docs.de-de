@@ -1,17 +1,23 @@
 ---
-title: Hinzufügen der Validierung zu einer Razor-Seite in ASP.NET Core
+title: Hinzufügen der Validierung zu einer ASP.NET Core Razor-Seite
 author: rick-anderson
 description: Erfahren Sie, wie einer Razor-Seite in ASP.NET Core Validierung hinzugefügt wird.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f283234ed8a32dc9b7904bc6fee1cc9c04741029
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650341"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773774"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>Hinzufügen der Validierung zu einer Razor-Seite in ASP.NET Core
 

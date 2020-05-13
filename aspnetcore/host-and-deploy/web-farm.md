@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647341"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776356"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Hosten von ASP.NET Core in einer Webfarm
 
@@ -61,7 +67,7 @@ Die folgenden Szenarien erfordern keine zusätzliche Konfiguration, hängen jedo
 | Szenario | Abhängig von&hellip; |
 | -------- | ------------------- |
 | Authentifizierung | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/cookie> und <xref:security/cookie-sharing>. |
-| Identität | Authentifizierung und Datenbankkonfiguration.<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/identity>. |
+| Identity | Authentifizierung und Datenbankkonfiguration.<br><br>Weitere Informationen finden Sie unter <xref:security/authentication/identity>. |
 | Sitzung | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) und Zwischenspeichern (siehe <xref:performance/caching/distributed>).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und Zustandsverwaltung: Sitzungszustand](xref:fundamentals/app-state#session-state). |
 | TempData | Schutz von Daten (verschlüsselte Cookies) (siehe <xref:security/data-protection/configuration/overview>) oder Sitzung (siehe [Sitzungs- und Zustandsverwaltung: Sitzungszustand](xref:fundamentals/app-state#session-state)).<br><br>Weitere Informationen finden Sie unter [Sitzungs- und Zustandsverwaltung: TempData](xref:fundamentals/app-state#tempdata). |
 | Fälschungssicherheit | Schutz von Daten (siehe <xref:security/data-protection/configuration/overview>).<br><br>Weitere Informationen finden Sie unter <xref:security/anti-request-forgery>. |
@@ -77,7 +83,7 @@ Gehen Sie beispielsweise von einem Benutzer aus, der sich mithilfe der Cookieaut
 Wenn eines der folgenden Symptome **zeitweilig** auftritt, ist das Problem in der Regel auf eine falsche Konfiguration zum Schutz von Daten oder zum Zwischenspeichern für eine Webfarmumgebung zurückgeführt:
 
 * Authentifizierungsfehler &ndash; Das Authentifizierungscookie ist falsch konfiguriert oder kann nicht entschlüsselt werden. OAuth (Facebook, Microsoft und Twitter) oder OpenIdConnect-Anmeldungen schlagen mit der Fehlermeldung „Korrelationsfehler“ fehl.
-* Authentifizierungsfehler &ndash; Die Identität geht verloren.
+* Authentifizierungsfehler &ndash; Identity geht verloren.
 * Im Sitzungszustand gehen Daten verloren.
 * Zwischengespeicherte Elemente werden nicht angezeigt.
 * Fehler bei TempData.

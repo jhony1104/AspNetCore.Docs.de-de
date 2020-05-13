@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206124"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850512"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing in ASP.NET Core
 
@@ -348,7 +354,7 @@ Wie die Priorisierung im Einzelnen funktioniert, ist an die Definition der Route
 * Ein Segment mit Literaltext gilt als spezifischer als ein Parametersegment.
 * Ein Parametersegment mit einer Einschränkung gilt als spezifischer als ein Parametersegment ohne Einschränkung.
 * Ein komplexes Segment wird als genauso spezifisch betrachtet wie ein Parametersegment mit einer Einschränkung.
-* Erfassen Sie alle Parameter, die am wenigsten spezifisch sind.
+* Catch-All-Parameter, die am wenigsten spezifisch sind. Unter **Catch-All** in der [Referenz zu Routenvorlagen](#rtr) finden Sie wichtige Informationen zu Catch-All-Routen.
 
 Einen Verweis auf genaue Werte finden Sie im [Quellcode auf GitHub](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189).
 
@@ -415,6 +421,8 @@ Sternchen `*` oder Doppelsternchen `**`:
 * Werden **Catch-All**-Parameter genannt. Zum Beispiel `blog/{**slug}`:
   * Entspricht einem beliebigen URI, der mit `/blog` beginnt und einem beliebigen Wert folgt.
   * Der Wert nach `/blog` wird dem [Slug](https://developer.mozilla.org/docs/Glossary/Slug)-Routenwert zugewiesen.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 Durch Catch-All-Parameter können auch leere Zeichenfolgen gefunden werden.
 
@@ -573,6 +581,8 @@ Einen regulären Ausdruck können Sie verwenden, um einen Parameter auf zulässi
 Benutzerdefinierte Routeneinschränkungen können durch Implementierung der <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>-Schnittstelle erstellt werden. Die `IRouteConstraint`-Schnittstelle umfasst die <xref:System.Web.Routing.IRouteConstraint.Match*>-Methode, die `true` zurückgibt, wenn die Einschränkung erfüllt wird, und andernfalls `false`.
 
 Benutzerdefinierte Routeneinschränkungen werden nur selten benötigt. Bevor Sie eine benutzerdefinierte Routeneinschränkung implementieren, sollten Sie Alternativen in Betracht ziehen, wie z. B. Modellbindung.
+
+Der ASP.NET Core-Ordner [Constraints](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) bietet nützliche Beispiele für die Erstellung einer Einschränkung. Beispiel: [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
 Zum Verwenden eines benutzerdefinierten `IRouteConstraint`-Elements muss der Routeneinschränkungstyp bei der <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>-Eigenschaft der App im Dienstcontainer registriert werden. Eine `ConstraintMap` ist ein Wörterbuch, das Routeneinschränkungsschlüssel `IRouteConstraint`-Implementierungen zuordnet, die diese Einschränkungen überprüfen. Die `ConstraintMap` einer App kann in `Startup.ConfigureServices` entweder als Teil eines [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*)-Aufrufs oder durch direktes Konfigurieren von <xref:Microsoft.AspNetCore.Routing.RouteOptions> mit `services.Configure<RouteOptions>` aktualisiert werden. Zum Beispiel:
 

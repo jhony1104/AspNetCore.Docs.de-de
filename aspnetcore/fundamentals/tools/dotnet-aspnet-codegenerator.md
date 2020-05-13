@@ -5,13 +5,19 @@ description: Der Befehl „dotnet aspnet-codegenerator“ erstellt das Gerüst f
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649855"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766471"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -190,6 +196,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 Unter [Erstellen des Gerüsts für das Filmmodell](/aspnet/core/tutorials/razor-pages/model) finden Sie ein Beispiel für `dotnet aspnet-codegenerator razorpage`.
 
-### <a name="identity"></a>Identität
+### Identity
 
-Siehe [Gerüst für Identität](/aspnet/core/security/authentication/scaffold-identity)
+Siehe [Gerüst Identity](/aspnet/core/security/authentication/scaffold-identity)

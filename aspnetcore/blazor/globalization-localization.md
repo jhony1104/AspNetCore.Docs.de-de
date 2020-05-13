@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
-ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81539660"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772490"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
@@ -60,7 +63,7 @@ Die folgenden Feldtypen verfügen über spezifische Formatierungsanforderungen u
 
 ## <a name="localization"></a>Lokalisierung
 
-### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Blazor-WebAssembly-Apps legen die Kultur anhand der [Spracheinstellungen](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages) des Benutzers fest.
 
@@ -70,7 +73,7 @@ Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmä
 
 Auch wenn für die meisten Benutzer die standardmäßig von Blazor ausgewählte Kultur möglicherweise ausreichend ist, ziehen Sie in Betracht, Benutzern die Möglichkeit zu geben, ihr bevorzugtes Gebietsschema anzugeben. Eine Blazor-WebAssembly-Beispiel-App mit Kulturauswahl finden Sie in der [LocSample](https://github.com/pranavkm/LocSample)-Lokalisierungs-Beispiel-App.
 
-### <a name="opno-locblazor-server"></a>Blazor Server
+### <a name="blazor-server"></a>Blazor Server
 
 Blazor Server-Apps werden mit [Lokalisierungsmiddleware](xref:fundamentals/localization#localization-middleware) lokalisiert. Die Middleware wählt die entsprechende Kultur für Benutzer aus, die Ressourcen von der App anfordern.
 

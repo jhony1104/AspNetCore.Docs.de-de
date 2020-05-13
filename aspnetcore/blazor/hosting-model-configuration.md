@@ -5,17 +5,20 @@ description: Hier erhalten Sie Informationen zur Blazor-Hostingmodellkonfigurati
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159618"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772073"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Hostingmodellkonfiguration für ASP.NET Core Blazor
 
@@ -100,12 +103,12 @@ Die `IWebAssemblyHostEnvironment.BaseAddress`-Eigenschaft kann während des Star
 
 ### <a name="configuration"></a>Konfiguration
 
-Blazor WebAssembly unterstützt die Konfiguration über:
+Blazor WebAssembly lädt die Konfiguration:
 
-* Den [Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) für App-Einstellungsdateien standardmäßig aus:
+* Standardmäßig aus den App-Einstellungsdateien:
   * *wwwroot/appsettings.json*
   * *wwwroot/appsettings.{UMGEBUNG}.json*
-* Andere [Konfigurationsanbieter](xref:fundamentals/configuration/index), die von der App registriert werden.
+* Andere [Konfigurationsanbieter](xref:fundamentals/configuration/index), die von der App registriert werden. Nicht alle Anbieter sind für Blazor WebAssembly-Apps geeignet. Die Klärung der Frage, welche Anbieter Blazor WebAssembly unterstützt, wird unter [Clarify configuration providers for Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134) nachverfolgt.
 
 > [!WARNING]
 > Die Konfiguration ist für Benutzer in einer Blazor WebAssembly-App sichtbar. **Speichern Sie keine App-Geheimnisse oder -Anmeldeinformationen in der Konfiguration.**
@@ -136,12 +139,12 @@ Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz
 
 #### <a name="provider-configuration"></a>Anbieterkonfiguration
 
-Im folgenden Beispiel werden ein <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource>-Element und der [Dateikonfigurationsanbieter](xref:fundamentals/configuration/index#file-configuration-provider) verwendet, um zusätzliche Konfiguration bereitzustellen:
+Im folgenden Beispiel wird ein <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource>-Element verwendet, um zusätzliche Konfiguration bereitzustellen:
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz in eine Komponente ein, um auf die Konfigurationsdaten zuzugreifen:
@@ -176,10 +177,10 @@ Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz
     
     ...
 }
+```
+
+Um andere Konfigurationsdateien aus dem Ordner *wwwwroot* in die Konfiguration einzulesen, verwenden Sie einen `HttpClient`, um den Inhalt der Datei abzurufen. Bei diesem Ansatz kann die vorhandene `HttpClient`-Dienstregistrierung den zum Lesen der Datei erstellten lokalen Client verwenden, wie im folgenden Beispiel gezeigt:
+
+*wwwroot/cars.json*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>Authentifizierungskonfiguration

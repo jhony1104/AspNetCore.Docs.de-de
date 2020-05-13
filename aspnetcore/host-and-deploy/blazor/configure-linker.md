@@ -5,17 +5,20 @@ description: Erfahren Sie, wie Sie den IL-Linker (Intermediate Language, Zwische
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218660"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775179"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
 
@@ -86,7 +89,7 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 </linker>
 ```
 
-Weitere Informationen finden Sie unter [Verknüpfen von XML-Beispieldateien (mono/linker-GitHub-Repository)](https://github.com/mono/linker#link-xml-file-examples).
+Weitere Informationen finden Sie unter [Data Formats (GitHub-Repository zu mono/linker)](https://github.com/mono/linker/blob/master/docs/data-formats.md).
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>Hinzufügen einer XML-Linkerkonfigurationsdatei zu einer Bibliothek
 
@@ -106,11 +109,11 @@ Im folgenden Beispiel wird die Datei *LinkerConfig.xml* als eingebettete Ressour
 
 Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Durch die Entfernung dieser Assemblys wird die Größe der App minimiert.
 
-Legen Sie die MSBuild-Eigenschaft `<MonoLinkerI18NAssemblies>` in der Projektdatei fest, um zu steuern, welche I18N-Assemblys beibehalten werden:
+Legen Sie die MSBuild-Eigenschaft `<BlazorWebAssemblyI18NAssemblies>` in der Projektdatei fest, um zu steuern, welche I18N-Assemblys beibehalten werden:
 
 ```xml
 <PropertyGroup>
-  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 
