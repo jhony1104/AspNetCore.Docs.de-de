@@ -4,13 +4,19 @@ author: rick-anderson
 description: Erfahren Sie, wie Sie Klassen für das Verwalten von Filmen mithilfe von Entity Framework Core (EF Core) zu einer Datenbank hinzufügen.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: d093d7c4dc1b355c0042f300f70a830653b168c0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488870"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769831"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Hinzufügen eines Modells zu einer App mit Razor-Seiten in ASP.NET Core
 
@@ -534,6 +540,6 @@ Im nächsten Tutorial finden Sie Erläuterungen zu den Dateien, die durch den Ge
 
 > [!div class="step-by-step"]
 > [Zurück: Erste Schritte](xref:tutorials/razor-pages/razor-pages-start)
-> [Weiter: Scaffolded Razor Pages (Gerüstbau mit Razor Pages)](xref:tutorials/razor-pages/page)
+> [Weiter: Gerüstbau mit Razor Pages](xref:tutorials/razor-pages/page)
 
 ::: moniker-end

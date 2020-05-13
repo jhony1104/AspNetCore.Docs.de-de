@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: f2cc57638922bd1f6ab036adb2ed37209d14c5b0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 57f3494fd825b6549c40f56962da2c8076e8fd51
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218765"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767095"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>Klassenbibliotheken für ASP.NET Core-Razor-Komponenten
 
@@ -86,7 +89,7 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um Ihre Umgeb
 Um Komponenten, die in einer Bibliothek definiert sind, in einem anderen Projekt zu verwenden, verwenden Sie einen der folgenden Ansätze:
 
 * Verwenden Sie den vollständigen Typnamen mit dem Namespace.
-* Verwenden Sie die [\@using](xref:mvc/views/razor#using)-Direktive von Razor. Einzelne Komponenten können über den Namen hinzugefügt werden.
+* Verwenden Sie die [\@using](xref:mvc/views/razor#using)-Anweisung von Razor. Einzelne Komponenten können über den Namen hinzugefügt werden.
 
 In den folgenden Beispielen ist `MyComponentLib1` eine Komponentenbibliothek, die eine `SalesReport`-Komponente enthält.
 

@@ -8,15 +8,19 @@ ms.custom: mvc
 ms.date: 03/20/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989436"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776603"
 ---
-# <a name="build-your-first-opno-locblazor-app"></a>Erstellen Ihrer ersten Blazor-App
+# <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
@@ -101,7 +105,7 @@ Die `@page`-Anweisung im oberen Teil der *Counter.razor*-Datei gibt an, dass die
 
 ## <a name="dependency-injection"></a>Dependency Injection
 
-### <a name="opno-locblazor-server-experience"></a>Blazor Server-Benutzererfahrung
+### <a name="blazor-server-experience"></a>Blazor Server-Benutzererfahrung
 
 Wenn Sie mit einer Blazor Server-App arbeiten, wird der `WeatherForecastService`-Dienst in `Startup.ConfigureServices` als [Singleton](xref:fundamentals/dependency-injection#service-lifetimes) registriert. Eine Instanz des Diensts steht überall in der App mittels [Abhängigkeitsinjektion (Dependency Injection, DI)](xref:fundamentals/dependency-injection) zur Verfügung:
 
@@ -117,7 +121,7 @@ Die `FetchData`-Komponente verwendet den eingefügten Dienst wie `ForecastServic
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="opno-locblazor-webassembly-experience"></a>Blazor WebAssembly-Benutzererfahrung
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly-Benutzererfahrung
 
 Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um Wettervorhersagedaten aus der Datei *weather.json* im Ordner *wwwroot/sample-data* abzurufen.
 
@@ -133,7 +137,7 @@ Eine [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleif
 
 Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste implementiert.
 
-1. Fügen Sie der App im Ordner *Seiten* eine neue `Todo`-Razor-Komponente hinzu. Klicken Sie in Visual Studio mit der rechten Maustaste auf den Ordner **Seiten**, und klicken Sie auf **Hinzufügen** > **Neues Element** > **Razor-Komponente**. Nennen Sie die Datei der Komponente *Todo.razor*. Fügen Sie dem Ordner **Seiten** in anderen Entwicklungsumgebungen eine leere Datei namens *Todo.razor* hinzu.
+1. Fügen Sie der App im Ordner *Seiten* eine neue `Todo` Razor-Komponente hinzu. Klicken Sie in Visual Studio mit der rechten Maustaste auf den Ordner **Seiten**, und klicken Sie auf **Hinzufügen** > **Neues Element** >  **Razor-Komponente**. Nennen Sie die Datei der Komponente *Todo.razor*. Fügen Sie dem Ordner **Seiten** in anderen Entwicklungsumgebungen eine leere Datei namens *Todo.razor* hinzu.
 
 1. Geben Sie das ursprüngliche Markup für die Komponente an:
 

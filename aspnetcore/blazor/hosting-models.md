@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/31/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205968"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772086"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
@@ -94,9 +97,9 @@ Das Blazor-Server-App-Modell unterstützt [Docker-Container](/dotnet/standard/mi
 
 ### <a name="comparison-to-server-rendered-ui"></a>Vergleich mit einer auf dem Server gerenderten Benutzeroberfläche
 
-Das Wissen um die Unterschiede zu traditionellen Modellen zum Rendern von Benutzeroberflächen in ASP.NET Core-Apps mit Razor-Ansichten oder Razor Pages trägt zu einem besseren Verständnis von Blazor Server-Apps bei. Bei beiden Modellen wird zum Beschreiben von HTML-Inhalt die Razor-Syntax verwendet. Deutliche Unterschiede bestehen hingegen im Rendern von Markup.
+Das Wissen um die Unterschiede zu traditionellen Modellen zum Rendern von Benutzeroberflächen in ASP.NET Core-Apps mit Razor-Ansichten oder Razor Pages trägt zu einem besseren Verständnis von Blazor-Server-Apps bei. Bei beiden Modellen wird zum Beschreiben von HTML-Inhalt die Razor-Syntax verwendet. Deutliche Unterschiede bestehen hingegen im Rendern von Markup.
 
-Beim Rendern von Razor Pages oder einer Razor-Ansicht gibt jede Razor-Codezeile HTML in Textform aus. Nach dem Rendern verwirft der Server die Instanz der Seite oder Ansicht, einschließlich aller produzierten Zustände. Tritt eine weitere Anforderung für die Seite auf, wenn etwa bei der Serverüberprüfung ein Fehler auftritt und die Zusammenfassung der Überprüfung angezeigt wird, werden folgende Aktionen ausgeführt:
+Beim Rendern einer Razor-Seite oder -Ansicht gibt jede Razor-Codezeile HTML in Textform aus. Nach dem Rendern verwirft der Server die Instanz der Seite oder Ansicht, einschließlich aller produzierten Zustände. Tritt eine weitere Anforderung für die Seite auf, wenn etwa bei der Serverüberprüfung ein Fehler auftritt und die Zusammenfassung der Überprüfung angezeigt wird, werden folgende Aktionen ausgeführt:
 
 * Die gesamte Seite wird nochmals als HTML-Text gerendert.
 * Die Seite wird an den Client gesendet.
