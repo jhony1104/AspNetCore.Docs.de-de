@@ -5,17 +5,20 @@ description: Erfahren Sie, wie Blazor-Apps Dienste in Komponenten einfügen kön
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/20/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 4cdde9ee8c9fd9adf00894a067d32965b180e5ec
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646693"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967531"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>Abhängigkeitsinjektion in ASP.NET Core Blazor
 
@@ -36,7 +39,7 @@ Standarddienste werden automatisch zur Dienstsammlung der App hinzugefügt.
 
 | Dienst | Lebensdauer | Beschreibung |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Singleton | Stellt Methoden zum Senden von HTTP-Anforderungen und Empfangen von HTTP-Antworten aus einer Ressource bereit, die von einem URI identifiziert wird.<br><br>Die Instanz von `HttpClient` in einer Blazor WebAssembly-App verwendet den Browser für die Behandlung des HTTP-Datenverkehrs im Hintergrund.<br><br>Blazor Server-Apps enthalten standardmäßig kein `HttpClient`, das als Dienst konfiguriert ist. Stellen Sie ein `HttpClient` für eine Blazor Server-App bereit.<br><br>Weitere Informationen finden Sie unter <xref:blazor/call-web-api>. |
+| <xref:System.Net.Http.HttpClient> | Transient (vorübergehend) | Stellt Methoden zum Senden von HTTP-Anforderungen und Empfangen von HTTP-Antworten aus einer Ressource bereit, die von einem URI identifiziert wird.<br><br>Die Instanz von `HttpClient` in einer Blazor WebAssembly-App verwendet den Browser für die Behandlung des HTTP-Datenverkehrs im Hintergrund.<br><br>Blazor Server-Apps enthalten standardmäßig kein `HttpClient`, das als Dienst konfiguriert ist. Stellen Sie ein `HttpClient` für eine Blazor Server-App bereit.<br><br>Weitere Informationen finden Sie unter <xref:blazor/call-web-api>. |
 | `IJSRuntime` | Singleton (Blazor WebAssembly)<br>Bereichsbezogen (Blazor Server) | Stellt eine Instanz einer JavaScript-Laufzeit dar, in der JavaScript-Aufrufe verteilt werden. Weitere Informationen finden Sie unter <xref:blazor/call-javascript-from-dotnet>. |
 | `NavigationManager` | Singleton (Blazor WebAssembly)<br>Bereichsbezogen (Blazor Server) | Enthält Hilfsprogramme für die Arbeit mit URIs und dem Navigationszustand. Weitere Informationen finden Sie unter [Hilfsprogramme für URI und Navigationszustand](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
@@ -131,15 +134,15 @@ Die Dienste können mit den in der folgenden Tabelle angegebenen Lebensdauern ko
 
 | Lebensdauer | Beschreibung |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor WebAssembly-Apps verfügen derzeit nicht über ein Konzept für Bereiche von Abhängigkeitsinjektionen. `Scoped`-registrierte Dienste verhalten sich wie `Singleton`-Dienste. Das Blazor Server-Hostingmodell unterstützt jedoch die Lebensdauer `Scoped`. In Blazor Server-Apps wird die Registrierung eines bereichsbezogenen Diensts der *Verbindung* zugeordnet. Aus diesem Grund wird die Verwendung von bereichsbezogenen Diensten für Dienste bevorzugt, die dem aktuellen Benutzer zugeordnet werden sollen, auch wenn die aktuelle Absicht darin besteht, clientseitig im Browser ausgeführt zu werden. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | Die Abhängigkeitsinjektion erstellt eine *Einzelinstanz* des Diensts. Alle Komponenten, die einen `Singleton`-Dienst erfordern, erhalten eine Instanz desselben Diensts. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Immer wenn eine Komponente eine Instanz eines `Transient`-Diensts aus dem Dienstcontainer erhält, erhält sie eine *neue Instanz* des Diensts. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly-Apps verfügen derzeit nicht über ein Konzept für Bereiche von Abhängigkeitsinjektionen. `Scoped`-registrierte Dienste verhalten sich wie `Singleton`-Dienste. Das Blazor Server-Hostingmodell unterstützt jedoch die Lebensdauer `Scoped`. In Blazor Server-Apps wird die Registrierung eines bereichsbezogenen Diensts der *Verbindung* zugeordnet. Aus diesem Grund wird die Verwendung von bereichsbezogenen Diensten für Dienste bevorzugt, die dem aktuellen Benutzer zugeordnet werden sollen, auch wenn die aktuelle Absicht darin besteht, clientseitig im Browser ausgeführt zu werden. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Die Abhängigkeitsinjektion erstellt eine *Einzelinstanz* des Diensts. Alle Komponenten, die einen `Singleton`-Dienst erfordern, erhalten eine Instanz desselben Diensts. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Immer wenn eine Komponente eine Instanz eines `Transient`-Diensts aus dem Dienstcontainer erhält, erhält sie eine *neue Instanz* des Diensts. |
 
 Das Abhängigkeitsinjektionssystem basiert auf dem Abhängigkeitsinjektionssystem in ASP.NET Core. Weitere Informationen finden Sie unter <xref:fundamentals/dependency-injection>.
 
 ## <a name="request-a-service-in-a-component"></a>Anfordern eines Diensts in einer Komponente
 
-Nachdem die Dienste der Dienstsammlung hinzugefügt wurden, fügen Sie die Dienste mit der Razor-Direktive [\@inject](xref:mvc/views/razor#inject) in die Komponenten ein. `@inject` besitzt zwei Parameter:
+Nachdem die Dienste der Dienstsammlung hinzugefügt wurden, fügen Sie die Dienste mit der Razor-Anweisung [\@inject](xref:mvc/views/razor#inject) in die Komponenten ein. `@inject` besitzt zwei Parameter:
 
 * Typ &ndash;: Der Typ des einzufügenden Diensts.
 * Eigenschaft &ndash;: Der Name der Eigenschaft, die den eingefügten App-Dienst erhält. Die Eigenschaft erfordert keine manuelle Erstellung. Der Compiler erstellt die Eigenschaft.
@@ -271,7 +274,7 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
     @inject DbContextOptions<AppDbContext> DbContextOptions
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -280,11 +283,11 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 
@@ -307,7 +310,7 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
          ServiceLifetime.Transient);
     ```  
 
-  * Der vorübergehende `DbContext` kann wie üblich (mit `@inject`) in Komponenten eingefügt werden, die nicht mehrere EF-Vorgänge parallel ausführen werden. Diejenigen, die mehrere EF-Vorgänge gleichzeitig durchführen können, können mit `DbContext` separate `IServiceProvider.GetRequiredService`-Objekte für jeden parallelen Vorgang anfordern.
+  * Der vorübergehende `DbContext` kann wie üblich (mit `@inject`) in Komponenten eingefügt werden, die nicht mehrere EF-Vorgänge parallel ausführen werden. Diejenigen, die mehrere EF-Vorgänge gleichzeitig durchführen können, können mit `IServiceProvider.GetRequiredService` separate `DbContext`-Objekte für jeden parallelen Vorgang anfordern.
 
     ```razor
     @page "/example"
@@ -315,7 +318,7 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
     @inject IServiceProvider ServiceProvider
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -324,11 +327,11 @@ Wenn eine einzelne Komponente gleichzeitig einen `DbContext` verwenden könnte (
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 
