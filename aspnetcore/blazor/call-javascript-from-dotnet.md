@@ -8,109 +8,112 @@ ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 380a14177d4bb8fa3de63a3c1cd9a39aeab13db3
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 064f504e94cd65862370d4551c6cb44210a8238f
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205981"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967297"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a><span data-ttu-id="f4104-103">Aufrufen von JavaScript-Funktionen über .NET-Methoden in ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="f4104-103">Call JavaScript functions from .NET methods in ASP.NET Core Blazor</span></span>
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a><span data-ttu-id="aac43-103">Aufrufen von JavaScript-Funktionen über .NET-Methoden in ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="aac43-103">Call JavaScript functions from .NET methods in ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="f4104-104">Von [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="f4104-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="aac43-104">Von [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="aac43-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), and [Luke Latham](https://github.com/guardrex)</span></span>
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-<span data-ttu-id="f4104-105">Eine Blazor-App kann JavaScript-Funktionen über .NET-Methoden und .NET-Methoden über JavaScript-Funktionen aufrufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-105">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="f4104-106">Diese Szenarios werden als *JavaScript-Interoperabilität* (*JS Interop*) bezeichnet.</span><span class="sxs-lookup"><span data-stu-id="f4104-106">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
+<span data-ttu-id="aac43-105">Eine Blazor-App kann JavaScript-Funktionen über .NET-Methoden und .NET-Methoden über JavaScript-Funktionen aufrufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-105">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="aac43-106">Diese Szenarios werden als *JavaScript-Interoperabilität* (*JS Interop*) bezeichnet.</span><span class="sxs-lookup"><span data-stu-id="aac43-106">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
 
-<span data-ttu-id="f4104-107">In diesem Artikel wird das Aufrufen von JavaScript-Funktionen über .NET behandelt.</span><span class="sxs-lookup"><span data-stu-id="f4104-107">This article covers invoking JavaScript functions from .NET.</span></span> <span data-ttu-id="f4104-108">Weitere Informationen zum Aufrufen von .NET-Methoden über JavaScript finden Sie unter <xref:blazor/call-dotnet-from-javascript>.</span><span class="sxs-lookup"><span data-stu-id="f4104-108">For information on how to call .NET methods from JavaScript, see <xref:blazor/call-dotnet-from-javascript>.</span></span>
+<span data-ttu-id="aac43-107">In diesem Artikel wird das Aufrufen von JavaScript-Funktionen über .NET behandelt.</span><span class="sxs-lookup"><span data-stu-id="aac43-107">This article covers invoking JavaScript functions from .NET.</span></span> <span data-ttu-id="aac43-108">Weitere Informationen zum Aufrufen von .NET-Methoden über JavaScript finden Sie unter <xref:blazor/call-dotnet-from-javascript>.</span><span class="sxs-lookup"><span data-stu-id="aac43-108">For information on how to call .NET methods from JavaScript, see <xref:blazor/call-dotnet-from-javascript>.</span></span>
 
-<span data-ttu-id="f4104-109">[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="f4104-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="aac43-109">[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="aac43-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="f4104-110">Verwenden Sie die `IJSRuntime`-Abstraktion, um JavaScript über .NET aufzurufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-110">To call into JavaScript from .NET, use the `IJSRuntime` abstraction.</span></span> <span data-ttu-id="f4104-111">Fügen Sie die `IJSRuntime`-Abstraktion in Ihre Komponente ein, um JS Interop-Aufrufe auszugeben.</span><span class="sxs-lookup"><span data-stu-id="f4104-111">To issue JS interop calls, inject the `IJSRuntime` abstraction in your component.</span></span> <span data-ttu-id="f4104-112">Die `InvokeAsync<T>`-Methode akzeptiert einen Bezeichner für die JavaScript-Funktion, die Sie aufrufen möchten, sowie eine beliebige Anzahl JSON-serialisierbarer Argumente.</span><span class="sxs-lookup"><span data-stu-id="f4104-112">The `InvokeAsync<T>` method takes an identifier for the JavaScript function that you wish to invoke along with any number of JSON-serializable arguments.</span></span> <span data-ttu-id="f4104-113">Der Funktionsbezeichner ist relativ zum globalen Bereich (`window`).</span><span class="sxs-lookup"><span data-stu-id="f4104-113">The function identifier is relative to the global scope (`window`).</span></span> <span data-ttu-id="f4104-114">Wenn Sie `window.someScope.someFunction` aufrufen möchten, lautet der Bezeichner `someScope.someFunction`.</span><span class="sxs-lookup"><span data-stu-id="f4104-114">If you wish to call `window.someScope.someFunction`, the identifier is `someScope.someFunction`.</span></span> <span data-ttu-id="f4104-115">Die Funktion muss nicht registriert werden, bevor sie aufgerufen wird.</span><span class="sxs-lookup"><span data-stu-id="f4104-115">There's no need to register the function before it's called.</span></span> <span data-ttu-id="f4104-116">Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein.</span><span class="sxs-lookup"><span data-stu-id="f4104-116">The return type `T` must also be JSON serializable.</span></span> <span data-ttu-id="f4104-117">`T` sollte mit dem .NET-Typ übereinstimmen, der dem zurückgegebenen JSON-Typ am ehesten entspricht.</span><span class="sxs-lookup"><span data-stu-id="f4104-117">`T` should match the .NET type that best maps to the JSON type returned.</span></span>
+<span data-ttu-id="aac43-110">Verwenden Sie die `IJSRuntime`-Abstraktion, um JavaScript über .NET aufzurufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-110">To call into JavaScript from .NET, use the `IJSRuntime` abstraction.</span></span> <span data-ttu-id="aac43-111">Fügen Sie die `IJSRuntime`-Abstraktion in Ihre Komponente ein, um JS Interop-Aufrufe auszugeben.</span><span class="sxs-lookup"><span data-stu-id="aac43-111">To issue JS interop calls, inject the `IJSRuntime` abstraction in your component.</span></span> <span data-ttu-id="aac43-112">Die `InvokeAsync<T>`-Methode akzeptiert einen Bezeichner für die JavaScript-Funktion, die Sie aufrufen möchten, sowie eine beliebige Anzahl JSON-serialisierbarer Argumente.</span><span class="sxs-lookup"><span data-stu-id="aac43-112">The `InvokeAsync<T>` method takes an identifier for the JavaScript function that you wish to invoke along with any number of JSON-serializable arguments.</span></span> <span data-ttu-id="aac43-113">Der Funktionsbezeichner ist relativ zum globalen Bereich (`window`).</span><span class="sxs-lookup"><span data-stu-id="aac43-113">The function identifier is relative to the global scope (`window`).</span></span> <span data-ttu-id="aac43-114">Wenn Sie `window.someScope.someFunction` aufrufen möchten, lautet der Bezeichner `someScope.someFunction`.</span><span class="sxs-lookup"><span data-stu-id="aac43-114">If you wish to call `window.someScope.someFunction`, the identifier is `someScope.someFunction`.</span></span> <span data-ttu-id="aac43-115">Die Funktion muss nicht registriert werden, bevor sie aufgerufen wird.</span><span class="sxs-lookup"><span data-stu-id="aac43-115">There's no need to register the function before it's called.</span></span> <span data-ttu-id="aac43-116">Der Rückgabetyp `T` muss ebenfalls JSON-serialisierbar sein.</span><span class="sxs-lookup"><span data-stu-id="aac43-116">The return type `T` must also be JSON serializable.</span></span> <span data-ttu-id="aac43-117">`T` sollte mit dem .NET-Typ übereinstimmen, der dem zurückgegebenen JSON-Typ am ehesten entspricht.</span><span class="sxs-lookup"><span data-stu-id="aac43-117">`T` should match the .NET type that best maps to the JSON type returned.</span></span>
 
-<span data-ttu-id="f4104-118">Bei Blazor Server-Apps mit aktiviertem Prerendering ist das Aufrufen von JavaScript beim ersten Prerendering nicht möglich.</span><span class="sxs-lookup"><span data-stu-id="f4104-118">For Blazor Server apps with prerendering enabled, calling into JavaScript isn't possible during the initial prerendering.</span></span> <span data-ttu-id="f4104-119">JavaScript-Interoperabilitätsaufrufe müssen verzögert werden, bis die Verbindung mit dem Browser hergestellt ist.</span><span class="sxs-lookup"><span data-stu-id="f4104-119">JavaScript interop calls must be deferred until after the connection with the browser is established.</span></span> <span data-ttu-id="f4104-120">Weitere Informationen finden Sie im Abschnitt [Ermitteln des Prerenderings einer Blazor Server-App](#detect-when-a-blazor-server-app-is-prerendering).</span><span class="sxs-lookup"><span data-stu-id="f4104-120">For more information, see the [Detect when a Blazor Server app is prerendering](#detect-when-a-blazor-server-app-is-prerendering) section.</span></span>
+<span data-ttu-id="aac43-118">Bei Blazor Server-Apps mit aktiviertem Prerendering ist das Aufrufen von JavaScript beim ersten Prerendering nicht möglich.</span><span class="sxs-lookup"><span data-stu-id="aac43-118">For Blazor Server apps with prerendering enabled, calling into JavaScript isn't possible during the initial prerendering.</span></span> <span data-ttu-id="aac43-119">JavaScript-Interoperabilitätsaufrufe müssen verzögert werden, bis die Verbindung mit dem Browser hergestellt ist.</span><span class="sxs-lookup"><span data-stu-id="aac43-119">JavaScript interop calls must be deferred until after the connection with the browser is established.</span></span> <span data-ttu-id="aac43-120">Weitere Informationen finden Sie im Abschnitt [Ermitteln des Prerenderings einer Blazor Server-App](#detect-when-a-blazor-server-app-is-prerendering).</span><span class="sxs-lookup"><span data-stu-id="aac43-120">For more information, see the [Detect when a Blazor Server app is prerendering](#detect-when-a-blazor-server-app-is-prerendering) section.</span></span>
 
-<span data-ttu-id="f4104-121">Das folgende Beispiel basiert auf [TextDecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem auf JavaScript basierenden Decoder.</span><span class="sxs-lookup"><span data-stu-id="f4104-121">The following example is based on [TextDecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), a JavaScript-based decoder.</span></span> <span data-ttu-id="f4104-122">Im Beispiel wird das Aufrufen einer JavaScript-Funktion über eine C#-Methode veranschaulicht.</span><span class="sxs-lookup"><span data-stu-id="f4104-122">The example demonstrates how to invoke a JavaScript function from a C# method.</span></span> <span data-ttu-id="f4104-123">Die JavaScript-Funktion akzeptiert ein Bytearray von einer C#-Methode, decodiert das Array und gibt den Text zum Anzeigen an die Komponente zurück.</span><span class="sxs-lookup"><span data-stu-id="f4104-123">The JavaScript function accepts a byte array from a C# method, decodes the array, and returns the text to the component for display.</span></span>
+<span data-ttu-id="aac43-121">Das folgende Beispiel basiert auf [TextDecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), einem auf JavaScript basierenden Decoder.</span><span class="sxs-lookup"><span data-stu-id="aac43-121">The following example is based on [TextDecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder), a JavaScript-based decoder.</span></span> <span data-ttu-id="aac43-122">Im Beispiel wird das Aufrufen einer JavaScript-Funktion über eine C#-Methode veranschaulicht.</span><span class="sxs-lookup"><span data-stu-id="aac43-122">The example demonstrates how to invoke a JavaScript function from a C# method.</span></span> <span data-ttu-id="aac43-123">Die JavaScript-Funktion akzeptiert ein Bytearray von einer C#-Methode, decodiert das Array und gibt den Text zum Anzeigen an die Komponente zurück.</span><span class="sxs-lookup"><span data-stu-id="aac43-123">The JavaScript function accepts a byte array from a C# method, decodes the array, and returns the text to the component for display.</span></span>
 
-<span data-ttu-id="f4104-124">Geben Sie im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) eine JavaScript-Funktion an, die `TextDecoder` verwendet, um ein übermitteltes Array zu decodieren und den decodierten Wert zurückzugeben:</span><span class="sxs-lookup"><span data-stu-id="f4104-124">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a JavaScript function that uses `TextDecoder` to decode a passed array and return the decoded value:</span></span>
+<span data-ttu-id="aac43-124">Geben Sie im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) eine JavaScript-Funktion an, die `TextDecoder` verwendet, um ein übermitteltes Array zu decodieren und den decodierten Wert zurückzugeben:</span><span class="sxs-lookup"><span data-stu-id="aac43-124">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a JavaScript function that uses `TextDecoder` to decode a passed array and return the decoded value:</span></span>
 
 [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-convertarray.html)]
 
-<span data-ttu-id="f4104-125">JavaScript-Code, z. B. der Code im vorherigen Beispiel, kann auch über eine JavaScript-Datei ( *.js*) mit einem Verweis auf die Skriptdatei geladen werden:</span><span class="sxs-lookup"><span data-stu-id="f4104-125">JavaScript code, such as the code shown in the preceding example, can also be loaded from a JavaScript file (*.js*) with a reference to the script file:</span></span>
+<span data-ttu-id="aac43-125">JavaScript-Code, z. B. der Code im vorherigen Beispiel, kann auch über eine JavaScript-Datei ( *.js*) mit einem Verweis auf die Skriptdatei geladen werden:</span><span class="sxs-lookup"><span data-stu-id="aac43-125">JavaScript code, such as the code shown in the preceding example, can also be loaded from a JavaScript file (*.js*) with a reference to the script file:</span></span>
 
 ```html
 <script src="exampleJsInterop.js"></script>
 ```
 
-<span data-ttu-id="f4104-126">Die folgende Komponente führt folgende Aktionen aus:</span><span class="sxs-lookup"><span data-stu-id="f4104-126">The following component:</span></span>
+<span data-ttu-id="aac43-126">Die folgende Komponente führt folgende Aktionen aus:</span><span class="sxs-lookup"><span data-stu-id="aac43-126">The following component:</span></span>
 
-* <span data-ttu-id="f4104-127">Sie ruft die JavaScript-Funktion `convertArray` mit `JSRuntime` auf, wenn auf eine Komponentenschaltfläche (**Convert Array** (Array konvertieren)) geklickt wird.</span><span class="sxs-lookup"><span data-stu-id="f4104-127">Invokes the `convertArray` JavaScript function using `JSRuntime` when a component button (**Convert Array**) is selected.</span></span>
-* <span data-ttu-id="f4104-128">Nachdem die JavaScript-Funktion aufgerufen wurde, wird das übergebene Array in eine Zeichenfolge konvertiert.</span><span class="sxs-lookup"><span data-stu-id="f4104-128">After the JavaScript function is called, the passed array is converted into a string.</span></span> <span data-ttu-id="f4104-129">Die Zeichenfolge wird zur Anzeige an die Komponente zurückgegeben.</span><span class="sxs-lookup"><span data-stu-id="f4104-129">The string is returned to the component for display.</span></span>
+* <span data-ttu-id="aac43-127">Sie ruft die JavaScript-Funktion `convertArray` mit `JSRuntime` auf, wenn auf eine Komponentenschaltfläche (**Convert Array** (Array konvertieren)) geklickt wird.</span><span class="sxs-lookup"><span data-stu-id="aac43-127">Invokes the `convertArray` JavaScript function using `JSRuntime` when a component button (**Convert Array**) is selected.</span></span>
+* <span data-ttu-id="aac43-128">Nachdem die JavaScript-Funktion aufgerufen wurde, wird das übergebene Array in eine Zeichenfolge konvertiert.</span><span class="sxs-lookup"><span data-stu-id="aac43-128">After the JavaScript function is called, the passed array is converted into a string.</span></span> <span data-ttu-id="aac43-129">Die Zeichenfolge wird zur Anzeige an die Komponente zurückgegeben.</span><span class="sxs-lookup"><span data-stu-id="aac43-129">The string is returned to the component for display.</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
 
-## <a name="ijsruntime"></a><span data-ttu-id="f4104-130">IJSRuntime</span><span class="sxs-lookup"><span data-stu-id="f4104-130">IJSRuntime</span></span>
+## <a name="ijsruntime"></a><span data-ttu-id="aac43-130">IJSRuntime</span><span class="sxs-lookup"><span data-stu-id="aac43-130">IJSRuntime</span></span>
 
-<span data-ttu-id="f4104-131">Verwenden Sie einen der folgenden Ansätze, um die `IJSRuntime`-Abstraktion zu verwenden:</span><span class="sxs-lookup"><span data-stu-id="f4104-131">To use the `IJSRuntime` abstraction, adopt any of the following approaches:</span></span>
+<span data-ttu-id="aac43-131">Verwenden Sie einen der folgenden Ansätze, um die `IJSRuntime`-Abstraktion zu verwenden:</span><span class="sxs-lookup"><span data-stu-id="aac43-131">To use the `IJSRuntime` abstraction, adopt any of the following approaches:</span></span>
 
-* <span data-ttu-id="f4104-132">Fügen Sie die `IJSRuntime`-Abstraktion in die Razor-Komponente ( *.razor*) ein:</span><span class="sxs-lookup"><span data-stu-id="f4104-132">Inject the `IJSRuntime` abstraction into the Razor component (*.razor*):</span></span>
+* <span data-ttu-id="aac43-132">Fügen Sie die `IJSRuntime`-Abstraktion in die Razor-Komponente ( *.razor*) ein:</span><span class="sxs-lookup"><span data-stu-id="aac43-132">Inject the `IJSRuntime` abstraction into the Razor component (*.razor*):</span></span>
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  <span data-ttu-id="f4104-133">Geben Sie die JavaScript-Funktion `handleTickerChanged` im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) an.</span><span class="sxs-lookup"><span data-stu-id="f4104-133">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="f4104-134">Die Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:</span><span class="sxs-lookup"><span data-stu-id="f4104-134">The function is called with `IJSRuntime.InvokeVoidAsync` and doesn't return a value:</span></span>
+  <span data-ttu-id="aac43-133">Geben Sie die JavaScript-Funktion `handleTickerChanged` im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) an.</span><span class="sxs-lookup"><span data-stu-id="aac43-133">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="aac43-134">Die Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:</span><span class="sxs-lookup"><span data-stu-id="aac43-134">The function is called with `IJSRuntime.InvokeVoidAsync` and doesn't return a value:</span></span>
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged1.html)]
 
-* <span data-ttu-id="f4104-135">Fügen Sie die `IJSRuntime`-Abstraktion in eine Klasse ein ( *.cs*):</span><span class="sxs-lookup"><span data-stu-id="f4104-135">Inject the `IJSRuntime` abstraction into a class (*.cs*):</span></span>
+* <span data-ttu-id="aac43-135">Fügen Sie die `IJSRuntime`-Abstraktion in eine Klasse ein ( *.cs*):</span><span class="sxs-lookup"><span data-stu-id="aac43-135">Inject the `IJSRuntime` abstraction into a class (*.cs*):</span></span>
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  <span data-ttu-id="f4104-136">Geben Sie die JavaScript-Funktion `handleTickerChanged` im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) an.</span><span class="sxs-lookup"><span data-stu-id="f4104-136">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="f4104-137">Die Funktion wird mit `JSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:</span><span class="sxs-lookup"><span data-stu-id="f4104-137">The function is called with `JSRuntime.InvokeAsync` and returns a value:</span></span>
+  <span data-ttu-id="aac43-136">Geben Sie die JavaScript-Funktion `handleTickerChanged` im `<head>`-Element von *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) an.</span><span class="sxs-lookup"><span data-stu-id="aac43-136">Inside the `<head>` element of *wwwroot/index.html* (Blazor WebAssembly) or *Pages/_Host.cshtml* (Blazor Server), provide a `handleTickerChanged` JavaScript function.</span></span> <span data-ttu-id="aac43-137">Die Funktion wird mit `JSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:</span><span class="sxs-lookup"><span data-stu-id="aac43-137">The function is called with `JSRuntime.InvokeAsync` and returns a value:</span></span>
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
-* <span data-ttu-id="f4104-138">Verwenden Sie das `[Inject]`-Attribut für die dynamische Inhaltsgenerierung mit [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic):</span><span class="sxs-lookup"><span data-stu-id="f4104-138">For dynamic content generation with [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic), use the `[Inject]` attribute:</span></span>
+* <span data-ttu-id="aac43-138">Verwenden Sie das `[Inject]`-Attribut für die dynamische Inhaltsgenerierung mit [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic):</span><span class="sxs-lookup"><span data-stu-id="aac43-138">For dynamic content generation with [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic), use the `[Inject]` attribute:</span></span>
 
   ```razor
   [Inject]
   IJSRuntime JSRuntime { get; set; }
   ```
 
-<span data-ttu-id="f4104-139">In der clientseitigen Beispiel-App zu diesem Artikel stehen der App zwei JavaScript-Funktionen zur Verfügung, die mit dem DOM (Dokumentobjektmodell) interagieren, um Benutzereingaben zu empfangen und eine Begrüßungsnachricht anzuzeigen:</span><span class="sxs-lookup"><span data-stu-id="f4104-139">In the client-side sample app that accompanies this topic, two JavaScript functions are available to the app that interact with the DOM to receive user input and display a welcome message:</span></span>
+<span data-ttu-id="aac43-139">In der clientseitigen Beispiel-App zu diesem Artikel stehen der App zwei JavaScript-Funktionen zur Verfügung, die mit dem DOM (Dokumentobjektmodell) interagieren, um Benutzereingaben zu empfangen und eine Begrüßungsnachricht anzuzeigen:</span><span class="sxs-lookup"><span data-stu-id="aac43-139">In the client-side sample app that accompanies this topic, two JavaScript functions are available to the app that interact with the DOM to receive user input and display a welcome message:</span></span>
 
-* <span data-ttu-id="f4104-140">`showPrompt`: Erzeugt eine Eingabeaufforderung zum Akzeptieren der Benutzereingaben (der Name des Benutzers) und gibt den Namen an den Aufrufer zurück.</span><span class="sxs-lookup"><span data-stu-id="f4104-140">`showPrompt` &ndash; Produces a prompt to accept user input (the user's name) and returns the name to the caller.</span></span>
-* <span data-ttu-id="f4104-141">`displayWelcome`: Weist einem DOM-Objekt eine Begrüßungsnachricht vom Aufrufer mit dem `id`-Wert `welcome` zu.</span><span class="sxs-lookup"><span data-stu-id="f4104-141">`displayWelcome` &ndash; Assigns a welcome message from the caller to a DOM object with an `id` of `welcome`.</span></span>
+* <span data-ttu-id="aac43-140">`showPrompt`: Erzeugt eine Eingabeaufforderung zum Akzeptieren der Benutzereingaben (der Name des Benutzers) und gibt den Namen an den Aufrufer zurück.</span><span class="sxs-lookup"><span data-stu-id="aac43-140">`showPrompt` &ndash; Produces a prompt to accept user input (the user's name) and returns the name to the caller.</span></span>
+* <span data-ttu-id="aac43-141">`displayWelcome`: Weist einem DOM-Objekt eine Begrüßungsnachricht vom Aufrufer mit dem `id`-Wert `welcome` zu.</span><span class="sxs-lookup"><span data-stu-id="aac43-141">`displayWelcome` &ndash; Assigns a welcome message from the caller to a DOM object with an `id` of `welcome`.</span></span>
 
-<span data-ttu-id="f4104-142">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="f4104-142">*wwwroot/exampleJsInterop.js*:</span></span>
+<span data-ttu-id="aac43-142">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="aac43-142">*wwwroot/exampleJsInterop.js*:</span></span>
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-<span data-ttu-id="f4104-143">Platzieren Sie das Tag `<script>`, das auf die JavaScript-Datei in der Datei *wwwroot/index.html* (Blazor WebAssembly) oder in der Datei *Pages/_Host.cshtml* (Blazor Server) verweist.</span><span class="sxs-lookup"><span data-stu-id="f4104-143">Place the `<script>` tag that references the JavaScript file in the *wwwroot/index.html* file (Blazor WebAssembly) or *Pages/_Host.cshtml* file (Blazor Server).</span></span>
+<span data-ttu-id="aac43-143">Platzieren Sie das Tag `<script>`, das auf die JavaScript-Datei in der Datei *wwwroot/index.html* (Blazor WebAssembly) oder in der Datei *Pages/_Host.cshtml* (Blazor Server) verweist.</span><span class="sxs-lookup"><span data-stu-id="aac43-143">Place the `<script>` tag that references the JavaScript file in the *wwwroot/index.html* file (Blazor WebAssembly) or *Pages/_Host.cshtml* file (Blazor Server).</span></span>
 
-<span data-ttu-id="f4104-144">*wwwroot/index.html* (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="f4104-144">*wwwroot/index.html* (Blazor WebAssembly):</span></span>
+<span data-ttu-id="aac43-144">*wwwroot/index.html* (Blazor WebAssembly):</span><span class="sxs-lookup"><span data-stu-id="aac43-144">*wwwroot/index.html* (Blazor WebAssembly):</span></span>
 
 [!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
-<span data-ttu-id="f4104-145">*Pages/_Host.cshtml* (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="f4104-145">*Pages/_Host.cshtml* (Blazor Server):</span></span>
+<span data-ttu-id="aac43-145">*Pages/_Host.cshtml* (Blazor Server):</span><span class="sxs-lookup"><span data-stu-id="aac43-145">*Pages/_Host.cshtml* (Blazor Server):</span></span>
 
 [!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=35)]
 
-<span data-ttu-id="f4104-146">Platzieren Sie kein `<script>`-Tag in einer Komponentendatei, weil das `<script>`-Tag nicht dynamisch aktualisiert werden kann.</span><span class="sxs-lookup"><span data-stu-id="f4104-146">Don't place a `<script>` tag in a component file because the `<script>` tag can't be updated dynamically.</span></span>
+<span data-ttu-id="aac43-146">Platzieren Sie kein `<script>`-Tag in einer Komponentendatei, weil das `<script>`-Tag nicht dynamisch aktualisiert werden kann.</span><span class="sxs-lookup"><span data-stu-id="aac43-146">Don't place a `<script>` tag in a component file because the `<script>` tag can't be updated dynamically.</span></span>
 
-<span data-ttu-id="f4104-147">Die Interoperabilität von .NET-Methoden mit den JavaScript-Funktionen in der Datei *exampleJsInterop.js* erfolgt, indem `IJSRuntime.InvokeAsync<T>` aufgerufen wird.</span><span class="sxs-lookup"><span data-stu-id="f4104-147">.NET methods interop with the JavaScript functions in the *exampleJsInterop.js* file by calling `IJSRuntime.InvokeAsync<T>`.</span></span>
+<span data-ttu-id="aac43-147">Die Interoperabilität von .NET-Methoden mit den JavaScript-Funktionen in der Datei *exampleJsInterop.js* erfolgt, indem `IJSRuntime.InvokeAsync<T>` aufgerufen wird.</span><span class="sxs-lookup"><span data-stu-id="aac43-147">.NET methods interop with the JavaScript functions in the *exampleJsInterop.js* file by calling `IJSRuntime.InvokeAsync<T>`.</span></span>
 
-<span data-ttu-id="f4104-148">Die `IJSRuntime`-Abstraktion ist asynchron, um Blazor Server-Szenarios zu ermöglichen.</span><span class="sxs-lookup"><span data-stu-id="f4104-148">The `IJSRuntime` abstraction is asynchronous to allow for Blazor Server scenarios.</span></span> <span data-ttu-id="f4104-149">Wenn es sich bei der App um eine Blazor WebAssembly-App handelt, sollten Sie die JavaScript-Funktion synchron aufrufen, eine Typumwandlung nach unten in `IJSInProcessRuntime` durchführen und stattdessen `Invoke<T>` aufrufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-149">If the app is a Blazor WebAssembly app and you want to invoke a JavaScript function synchronously, downcast to `IJSInProcessRuntime` and call `Invoke<T>` instead.</span></span> <span data-ttu-id="f4104-150">Es wird empfohlen, für die meisten JS Interop-Bibliotheken asynchrone APIs zu verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarios verfügbar sind.</span><span class="sxs-lookup"><span data-stu-id="f4104-150">We recommend that most JS interop libraries use the async APIs to ensure that the libraries are available in all scenarios.</span></span>
+<span data-ttu-id="aac43-148">Die `IJSRuntime`-Abstraktion ist asynchron, um Blazor Server-Szenarios zu ermöglichen.</span><span class="sxs-lookup"><span data-stu-id="aac43-148">The `IJSRuntime` abstraction is asynchronous to allow for Blazor Server scenarios.</span></span> <span data-ttu-id="aac43-149">Wenn es sich bei der App um eine Blazor WebAssembly-App handelt, sollten Sie die JavaScript-Funktion synchron aufrufen, eine Typumwandlung nach unten in `IJSInProcessRuntime` durchführen und stattdessen `Invoke<T>` aufrufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-149">If the app is a Blazor WebAssembly app and you want to invoke a JavaScript function synchronously, downcast to `IJSInProcessRuntime` and call `Invoke<T>` instead.</span></span> <span data-ttu-id="aac43-150">Es wird empfohlen, für die meisten JS Interop-Bibliotheken asynchrone APIs zu verwenden, um sicherzustellen, dass die Bibliotheken in allen Szenarios verfügbar sind.</span><span class="sxs-lookup"><span data-stu-id="aac43-150">We recommend that most JS interop libraries use the async APIs to ensure that the libraries are available in all scenarios.</span></span>
 
-<span data-ttu-id="f4104-151">Die Beispiel-App enthält eine Komponente zur Veranschaulichung der JavaScript-Interoperabilität.</span><span class="sxs-lookup"><span data-stu-id="f4104-151">The sample app includes a component to demonstrate JS interop.</span></span> <span data-ttu-id="f4104-152">Die Komponente:</span><span class="sxs-lookup"><span data-stu-id="f4104-152">The component:</span></span>
+<span data-ttu-id="aac43-151">Die Beispiel-App enthält eine Komponente zur Veranschaulichung der JavaScript-Interoperabilität.</span><span class="sxs-lookup"><span data-stu-id="aac43-151">The sample app includes a component to demonstrate JS interop.</span></span> <span data-ttu-id="aac43-152">Die Komponente:</span><span class="sxs-lookup"><span data-stu-id="aac43-152">The component:</span></span>
 
-* <span data-ttu-id="f4104-153">empfängt Benutzereingaben über eine JavaScript-Eingabeaufforderung.</span><span class="sxs-lookup"><span data-stu-id="f4104-153">Receives user input via a JavaScript prompt.</span></span>
-* <span data-ttu-id="f4104-154">gibt den Text zur Verarbeitung an die Komponente zurück.</span><span class="sxs-lookup"><span data-stu-id="f4104-154">Returns the text to the component for processing.</span></span>
-* <span data-ttu-id="f4104-155">ruft eine zweite JavaScript-Funktion auf, die mit dem DOM interagiert, um eine Begrüßungsnachricht anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="f4104-155">Calls a second JavaScript function that interacts with the DOM to display a welcome message.</span></span>
+* <span data-ttu-id="aac43-153">empfängt Benutzereingaben über eine JavaScript-Eingabeaufforderung.</span><span class="sxs-lookup"><span data-stu-id="aac43-153">Receives user input via a JavaScript prompt.</span></span>
+* <span data-ttu-id="aac43-154">gibt den Text zur Verarbeitung an die Komponente zurück.</span><span class="sxs-lookup"><span data-stu-id="aac43-154">Returns the text to the component for processing.</span></span>
+* <span data-ttu-id="aac43-155">ruft eine zweite JavaScript-Funktion auf, die mit dem DOM interagiert, um eine Begrüßungsnachricht anzuzeigen.</span><span class="sxs-lookup"><span data-stu-id="aac43-155">Calls a second JavaScript function that interacts with the DOM to display a welcome message.</span></span>
 
-<span data-ttu-id="f4104-156">*Pages/JSInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="f4104-156">*Pages/JSInterop.razor*:</span></span>
+<span data-ttu-id="aac43-156">*Pages/JSInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="aac43-156">*Pages/JSInterop.razor*:</span></span>
 
 ```razor
 @page "/JSInterop"
@@ -141,28 +144,28 @@ ms.locfileid: "82205981"
 }
 ```
 
-1. <span data-ttu-id="f4104-157">Wenn `TriggerJsPrompt` ausgeführt wird, indem auf die Schaltfläche **Trigger JavaScript Prompt** (JavaScript-Eingabeaufforderung auslösen) der Komponente geklickt wird, wird die JavaScript-Funktion `showPrompt` aufgerufen, die in der Datei *wwwroot/exampleJsInterop.js* angegeben ist.</span><span class="sxs-lookup"><span data-stu-id="f4104-157">When `TriggerJsPrompt` is executed by selecting the component's **Trigger JavaScript Prompt** button, the JavaScript `showPrompt` function provided in the *wwwroot/exampleJsInterop.js* file is called.</span></span>
-1. <span data-ttu-id="f4104-158">Die `showPrompt`-Funktion akzeptiert Benutzereingaben (den Namen des Benutzers), die HTML-codiert und an die Komponente zurückgegeben werden.</span><span class="sxs-lookup"><span data-stu-id="f4104-158">The `showPrompt` function accepts user input (the user's name), which is HTML-encoded and returned to the component.</span></span> <span data-ttu-id="f4104-159">Die Komponente speichert den Namen des Benutzers in der lokalen Variable `name`.</span><span class="sxs-lookup"><span data-stu-id="f4104-159">The component stores the user's name in a local variable, `name`.</span></span>
-1. <span data-ttu-id="f4104-160">Die in `name` gespeicherte Zeichenfolge wird in eine Begrüßungsnachricht eingebunden, die an die JavaScript-Funktion `displayWelcome` übergeben wird, die die Begrüßungsnachricht in ein Überschriftentag rendert.</span><span class="sxs-lookup"><span data-stu-id="f4104-160">The string stored in `name` is incorporated into a welcome message, which is passed to a JavaScript function, `displayWelcome`, which renders the welcome message into a heading tag.</span></span>
+1. <span data-ttu-id="aac43-157">Wenn `TriggerJsPrompt` ausgeführt wird, indem auf die Schaltfläche **Trigger JavaScript Prompt** (JavaScript-Eingabeaufforderung auslösen) der Komponente geklickt wird, wird die JavaScript-Funktion `showPrompt` aufgerufen, die in der Datei *wwwroot/exampleJsInterop.js* angegeben ist.</span><span class="sxs-lookup"><span data-stu-id="aac43-157">When `TriggerJsPrompt` is executed by selecting the component's **Trigger JavaScript Prompt** button, the JavaScript `showPrompt` function provided in the *wwwroot/exampleJsInterop.js* file is called.</span></span>
+1. <span data-ttu-id="aac43-158">Die `showPrompt`-Funktion akzeptiert Benutzereingaben (den Namen des Benutzers), die HTML-codiert und an die Komponente zurückgegeben werden.</span><span class="sxs-lookup"><span data-stu-id="aac43-158">The `showPrompt` function accepts user input (the user's name), which is HTML-encoded and returned to the component.</span></span> <span data-ttu-id="aac43-159">Die Komponente speichert den Namen des Benutzers in der lokalen Variable `name`.</span><span class="sxs-lookup"><span data-stu-id="aac43-159">The component stores the user's name in a local variable, `name`.</span></span>
+1. <span data-ttu-id="aac43-160">Die in `name` gespeicherte Zeichenfolge wird in eine Begrüßungsnachricht eingebunden, die an die JavaScript-Funktion `displayWelcome` übergeben wird, die die Begrüßungsnachricht in ein Überschriftentag rendert.</span><span class="sxs-lookup"><span data-stu-id="aac43-160">The string stored in `name` is incorporated into a welcome message, which is passed to a JavaScript function, `displayWelcome`, which renders the welcome message into a heading tag.</span></span>
 
-## <a name="call-a-void-javascript-function"></a><span data-ttu-id="f4104-161">Aufrufen der JavaScript-Funktion „void“</span><span class="sxs-lookup"><span data-stu-id="f4104-161">Call a void JavaScript function</span></span>
+## <a name="call-a-void-javascript-function"></a><span data-ttu-id="aac43-161">Aufrufen der JavaScript-Funktion „void“</span><span class="sxs-lookup"><span data-stu-id="aac43-161">Call a void JavaScript function</span></span>
 
-<span data-ttu-id="f4104-162">JavaScript-Funktionen, die [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) oder [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) zurückgeben, werden mit `IJSRuntime.InvokeVoidAsync` aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-162">JavaScript functions that return [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) or [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) are called with `IJSRuntime.InvokeVoidAsync`.</span></span>
+<span data-ttu-id="aac43-162">JavaScript-Funktionen, die [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) oder [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) zurückgeben, werden mit `IJSRuntime.InvokeVoidAsync` aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-162">JavaScript functions that return [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) or [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) are called with `IJSRuntime.InvokeVoidAsync`.</span></span>
 
-## <a name="detect-when-a-blazor-server-app-is-prerendering"></a><span data-ttu-id="f4104-163">Ermitteln des Prerenderings einer Blazor Server-App</span><span class="sxs-lookup"><span data-stu-id="f4104-163">Detect when a Blazor Server app is prerendering</span></span>
+## <a name="detect-when-a-blazor-server-app-is-prerendering"></a><span data-ttu-id="aac43-163">Ermitteln des Prerenderings einer Blazor Server-App</span><span class="sxs-lookup"><span data-stu-id="aac43-163">Detect when a Blazor Server app is prerendering</span></span>
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
-## <a name="capture-references-to-elements"></a><span data-ttu-id="f4104-164">Erfassen von Verweisen auf Elemente</span><span class="sxs-lookup"><span data-stu-id="f4104-164">Capture references to elements</span></span>
+## <a name="capture-references-to-elements"></a><span data-ttu-id="aac43-164">Erfassen von Verweisen auf Elemente</span><span class="sxs-lookup"><span data-stu-id="aac43-164">Capture references to elements</span></span>
 
-<span data-ttu-id="f4104-165">Einige JS Interop-Szenarios erfordern Verweise auf HTML-Elemente.</span><span class="sxs-lookup"><span data-stu-id="f4104-165">Some JS interop scenarios require references to HTML elements.</span></span> <span data-ttu-id="f4104-166">Beispielsweise erfordert eine Benutzeroberflächenbibliothek möglicherweise einen Elementverweis für die Initialisierung, oder Sie müssen befehlsähnliche APIs für ein Element aufrufen, z. B. `focus` oder `play`.</span><span class="sxs-lookup"><span data-stu-id="f4104-166">For example, a UI library may require an element reference for initialization, or you might need to call command-like APIs on an element, such as `focus` or `play`.</span></span>
+<span data-ttu-id="aac43-165">Einige JS Interop-Szenarios erfordern Verweise auf HTML-Elemente.</span><span class="sxs-lookup"><span data-stu-id="aac43-165">Some JS interop scenarios require references to HTML elements.</span></span> <span data-ttu-id="aac43-166">Beispielsweise erfordert eine Benutzeroberflächenbibliothek möglicherweise einen Elementverweis für die Initialisierung, oder Sie müssen befehlsähnliche APIs für ein Element aufrufen, z. B. `focus` oder `play`.</span><span class="sxs-lookup"><span data-stu-id="aac43-166">For example, a UI library may require an element reference for initialization, or you might need to call command-like APIs on an element, such as `focus` or `play`.</span></span>
 
-<span data-ttu-id="f4104-167">Erfassen Sie mithilfe des folgenden Ansatzes Verweise auf HTML-Elemente in einer Komponente:</span><span class="sxs-lookup"><span data-stu-id="f4104-167">Capture references to HTML elements in a component using the following approach:</span></span>
+<span data-ttu-id="aac43-167">Erfassen Sie mithilfe des folgenden Ansatzes Verweise auf HTML-Elemente in einer Komponente:</span><span class="sxs-lookup"><span data-stu-id="aac43-167">Capture references to HTML elements in a component using the following approach:</span></span>
 
-* <span data-ttu-id="f4104-168">Fügen Sie ein `@ref`-Attribut zum HTML-Element hinzu.</span><span class="sxs-lookup"><span data-stu-id="f4104-168">Add an `@ref` attribute to the HTML element.</span></span>
-* <span data-ttu-id="f4104-169">Definieren Sie ein Feld vom Typ `ElementReference`, dessen Name mit dem Wert des `@ref`-Attributs übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="f4104-169">Define a field of type `ElementReference` whose name matches the value of the `@ref` attribute.</span></span>
+* <span data-ttu-id="aac43-168">Fügen Sie ein `@ref`-Attribut zum HTML-Element hinzu.</span><span class="sxs-lookup"><span data-stu-id="aac43-168">Add an `@ref` attribute to the HTML element.</span></span>
+* <span data-ttu-id="aac43-169">Definieren Sie ein Feld vom Typ `ElementReference`, dessen Name mit dem Wert des `@ref`-Attributs übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="aac43-169">Define a field of type `ElementReference` whose name matches the value of the `@ref` attribute.</span></span>
 
-<span data-ttu-id="f4104-170">Im folgenden Beispiel wird das Erfassen eines Verweises auf das `username` `<input>`-Element veranschaulicht:</span><span class="sxs-lookup"><span data-stu-id="f4104-170">The following example shows capturing a reference to the `username` `<input>` element:</span></span>
+<span data-ttu-id="aac43-170">Im folgenden Beispiel wird das Erfassen eines Verweises auf das `username` `<input>`-Element veranschaulicht:</span><span class="sxs-lookup"><span data-stu-id="aac43-170">The following example shows capturing a reference to the `username` `<input>` element:</span></span>
 
 ```razor
 <input @ref="username" ... />
@@ -173,9 +176,9 @@ ms.locfileid: "82205981"
 ```
 
 > [!WARNING]
-> <span data-ttu-id="f4104-171">Verwenden Sie Elementverweise nur, um die Inhalte eines leeren Elements zu ändern, das nicht mit Blazor interagiert.</span><span class="sxs-lookup"><span data-stu-id="f4104-171">Only use an element reference to mutate the contents of an empty element that doesn't interact with Blazor.</span></span> <span data-ttu-id="f4104-172">Dieses Szenario ist nützlich, wenn eine Drittanbieter-API Inhalt für das Element bereitstellt.</span><span class="sxs-lookup"><span data-stu-id="f4104-172">This scenario is useful when a 3rd party API supplies content to the element.</span></span> <span data-ttu-id="f4104-173">Da Blazor nicht mit dem Element interagiert, kann kein Konflikt zwischen der Darstellung von Blazor des Elements und dem DOM auftreten.</span><span class="sxs-lookup"><span data-stu-id="f4104-173">Because Blazor doesn't interact with the element, there's no possibility of a conflict between Blazor's representation of the element and the DOM.</span></span>
+> <span data-ttu-id="aac43-171">Verwenden Sie Elementverweise nur, um die Inhalte eines leeren Elements zu ändern, das nicht mit Blazor interagiert.</span><span class="sxs-lookup"><span data-stu-id="aac43-171">Only use an element reference to mutate the contents of an empty element that doesn't interact with Blazor.</span></span> <span data-ttu-id="aac43-172">Dieses Szenario ist nützlich, wenn eine Drittanbieter-API Inhalt für das Element bereitstellt.</span><span class="sxs-lookup"><span data-stu-id="aac43-172">This scenario is useful when a 3rd party API supplies content to the element.</span></span> <span data-ttu-id="aac43-173">Da Blazor nicht mit dem Element interagiert, kann kein Konflikt zwischen der Darstellung von Blazor des Elements und dem DOM auftreten.</span><span class="sxs-lookup"><span data-stu-id="aac43-173">Because Blazor doesn't interact with the element, there's no possibility of a conflict between Blazor's representation of the element and the DOM.</span></span>
 >
-> <span data-ttu-id="f4104-174">Im folgenden Beispiel ist es *gefährlich*, die Inhalte der unsortierten Liste (`ul`) zu ändern, weil Blazor mit dem DOM interagiert, um die Listenelemente (`<li>`) dieses Elements aufzufüllen:</span><span class="sxs-lookup"><span data-stu-id="f4104-174">In the following example, it's *dangerous* to mutate the contents of the unordered list (`ul`) because Blazor interacts with the DOM to populate this element's list items (`<li>`):</span></span>
+> <span data-ttu-id="aac43-174">Im folgenden Beispiel ist es *gefährlich*, die Inhalte der unsortierten Liste (`ul`) zu ändern, weil Blazor mit dem DOM interagiert, um die Listenelemente (`<li>`) dieses Elements aufzufüllen:</span><span class="sxs-lookup"><span data-stu-id="aac43-174">In the following example, it's *dangerous* to mutate the contents of the unordered list (`ul`) because Blazor interacts with the DOM to populate this element's list items (`<li>`):</span></span>
 >
 > ```razor
 > <ul ref="MyList">
@@ -186,13 +189,13 @@ ms.locfileid: "82205981"
 > </ul>
 > ```
 >
-> <span data-ttu-id="f4104-175">Wenn die Inhalte des Elements `MyList` durch JS Interop geändert werden und Blazor versucht, diffs-Algorithmen auf das Element anzuwenden, entsprechen diese nicht dem DOM.</span><span class="sxs-lookup"><span data-stu-id="f4104-175">If JS interop mutates the contents of element `MyList` and Blazor attempts to apply diffs to the element, the diffs won't match the DOM.</span></span>
+> <span data-ttu-id="aac43-175">Wenn die Inhalte des Elements `MyList` durch JS Interop geändert werden und Blazor versucht, diffs-Algorithmen auf das Element anzuwenden, entsprechen diese nicht dem DOM.</span><span class="sxs-lookup"><span data-stu-id="aac43-175">If JS interop mutates the contents of element `MyList` and Blazor attempts to apply diffs to the element, the diffs won't match the DOM.</span></span>
 
-<span data-ttu-id="f4104-176">Bei .NET-Code handelt es sich bei `ElementReference` um einen nicht transparenten Handle.</span><span class="sxs-lookup"><span data-stu-id="f4104-176">As far as .NET code is concerned, an `ElementReference` is an opaque handle.</span></span> <span data-ttu-id="f4104-177">Das *Einzige*, was Sie mit `ElementReference` tun können, ist, es per JS Interop an JavaScript-Code zu übergeben.</span><span class="sxs-lookup"><span data-stu-id="f4104-177">The *only* thing you can do with `ElementReference` is pass it through to JavaScript code via JS interop.</span></span> <span data-ttu-id="f4104-178">Dadurch empfängt der JavaScript-seitige Code eine `HTMLElement`-Instanz, die er mit normalen DOM-APIs verwenden kann.</span><span class="sxs-lookup"><span data-stu-id="f4104-178">When you do so, the JavaScript-side code receives an `HTMLElement` instance, which it can use with normal DOM APIs.</span></span>
+<span data-ttu-id="aac43-176">Bei .NET-Code handelt es sich bei `ElementReference` um einen nicht transparenten Handle.</span><span class="sxs-lookup"><span data-stu-id="aac43-176">As far as .NET code is concerned, an `ElementReference` is an opaque handle.</span></span> <span data-ttu-id="aac43-177">Das *Einzige*, was Sie mit `ElementReference` tun können, ist, es per JS Interop an JavaScript-Code zu übergeben.</span><span class="sxs-lookup"><span data-stu-id="aac43-177">The *only* thing you can do with `ElementReference` is pass it through to JavaScript code via JS interop.</span></span> <span data-ttu-id="aac43-178">Dadurch empfängt der JavaScript-seitige Code eine `HTMLElement`-Instanz, die er mit normalen DOM-APIs verwenden kann.</span><span class="sxs-lookup"><span data-stu-id="aac43-178">When you do so, the JavaScript-side code receives an `HTMLElement` instance, which it can use with normal DOM APIs.</span></span>
 
-<span data-ttu-id="f4104-179">Im folgenden Code wird beispielsweise eine .NET-Erweiterungsmethode definiert, die das Festlegen des Fokus auf ein Element ermöglicht:</span><span class="sxs-lookup"><span data-stu-id="f4104-179">For example, the following code defines a .NET extension method that enables setting the focus on an element:</span></span>
+<span data-ttu-id="aac43-179">Im folgenden Code wird beispielsweise eine .NET-Erweiterungsmethode definiert, die das Festlegen des Fokus auf ein Element ermöglicht:</span><span class="sxs-lookup"><span data-stu-id="aac43-179">For example, the following code defines a .NET extension method that enables setting the focus on an element:</span></span>
 
-<span data-ttu-id="f4104-180">*exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="f4104-180">*exampleJsInterop.js*:</span></span>
+<span data-ttu-id="aac43-180">*exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="aac43-180">*exampleJsInterop.js*:</span></span>
 
 ```javascript
 window.exampleJsFunctions = {
@@ -202,11 +205,11 @@ window.exampleJsFunctions = {
 }
 ```
 
-<span data-ttu-id="f4104-181">Verwenden Sie `IJSRuntime.InvokeVoidAsync`, um eine JavaScript-Funktion aufzurufen, die keinen Wert zurückgibt.</span><span class="sxs-lookup"><span data-stu-id="f4104-181">To call a JavaScript function that doesn't return a value, use `IJSRuntime.InvokeVoidAsync`.</span></span> <span data-ttu-id="f4104-182">Mit dem folgenden Code wird der Fokus auf die Eingabe des Benutzernamens festgelegt, indem die vorherige JavaScript-Funktion mit dem erfassten `ElementReference`-Wert aufgerufen wird:</span><span class="sxs-lookup"><span data-stu-id="f4104-182">The following code sets the focus on the username input by calling the preceding JavaScript function with the captured `ElementReference`:</span></span>
+<span data-ttu-id="aac43-181">Verwenden Sie `IJSRuntime.InvokeVoidAsync`, um eine JavaScript-Funktion aufzurufen, die keinen Wert zurückgibt.</span><span class="sxs-lookup"><span data-stu-id="aac43-181">To call a JavaScript function that doesn't return a value, use `IJSRuntime.InvokeVoidAsync`.</span></span> <span data-ttu-id="aac43-182">Mit dem folgenden Code wird der Fokus auf die Eingabe des Benutzernamens festgelegt, indem die vorherige JavaScript-Funktion mit dem erfassten `ElementReference`-Wert aufgerufen wird:</span><span class="sxs-lookup"><span data-stu-id="aac43-182">The following code sets the focus on the username input by calling the preceding JavaScript function with the captured `ElementReference`:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=1,3,11-12)]
 
-<span data-ttu-id="f4104-183">Erstellen Sie eine statische Erweiterungsmethode, die die `IJSRuntime`-Instanz empfängt, um eine Erweiterungsmethode zu verwenden:</span><span class="sxs-lookup"><span data-stu-id="f4104-183">To use an extension method, create a static extension method that receives the `IJSRuntime` instance:</span></span>
+<span data-ttu-id="aac43-183">Erstellen Sie eine statische Erweiterungsmethode, die die `IJSRuntime`-Instanz empfängt, um eine Erweiterungsmethode zu verwenden:</span><span class="sxs-lookup"><span data-stu-id="aac43-183">To use an extension method, create a static extension method that receives the `IJSRuntime` instance:</span></span>
 
 ```csharp
 public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
@@ -216,14 +219,14 @@ public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRu
 }
 ```
 
-<span data-ttu-id="f4104-184">Die `Focus`-Methode wird direkt für das Objekt aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-184">The `Focus` method is called directly on the object.</span></span> <span data-ttu-id="f4104-185">Im folgenden Beispiel wird davon ausgegangen, dass die `Focus`-Methode vom `JsInteropClasses`-Namespace verfügbar ist:</span><span class="sxs-lookup"><span data-stu-id="f4104-185">The following example assumes that the `Focus` method is available from the `JsInteropClasses` namespace:</span></span>
+<span data-ttu-id="aac43-184">Die `Focus`-Methode wird direkt für das Objekt aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-184">The `Focus` method is called directly on the object.</span></span> <span data-ttu-id="aac43-185">Im folgenden Beispiel wird davon ausgegangen, dass die `Focus`-Methode vom `JsInteropClasses`-Namespace verfügbar ist:</span><span class="sxs-lookup"><span data-stu-id="aac43-185">The following example assumes that the `Focus` method is available from the `JsInteropClasses` namespace:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> <span data-ttu-id="f4104-186">Die `username`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde.</span><span class="sxs-lookup"><span data-stu-id="f4104-186">The `username` variable is only populated after the component is rendered.</span></span> <span data-ttu-id="f4104-187">Wenn ein nicht aufgefüllter `ElementReference`-Wert an JavaScript-Code übergeben wird, empfängt der JavaScript-Code den Wert `null`.</span><span class="sxs-lookup"><span data-stu-id="f4104-187">If an unpopulated `ElementReference` is passed to JavaScript code, the JavaScript code receives a value of `null`.</span></span> <span data-ttu-id="f4104-188">Verwenden Sie die [Komponentenlebenszyklusmethoden OnAfterRenderAsync oder OnAfterRender](xref:blazor/lifecycle#after-component-render), um Elementverweise zu ändern, nachdem die Komponente gerendert wurde (um den anfänglichen Fokus für ein Element festzulegen).</span><span class="sxs-lookup"><span data-stu-id="f4104-188">To manipulate element references after the component has finished rendering (to set the initial focus on an element) use the [OnAfterRenderAsync or OnAfterRender component lifecycle methods](xref:blazor/lifecycle#after-component-render).</span></span>
+> <span data-ttu-id="aac43-186">Die `username`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde.</span><span class="sxs-lookup"><span data-stu-id="aac43-186">The `username` variable is only populated after the component is rendered.</span></span> <span data-ttu-id="aac43-187">Wenn ein nicht aufgefüllter `ElementReference`-Wert an JavaScript-Code übergeben wird, empfängt der JavaScript-Code den Wert `null`.</span><span class="sxs-lookup"><span data-stu-id="aac43-187">If an unpopulated `ElementReference` is passed to JavaScript code, the JavaScript code receives a value of `null`.</span></span> <span data-ttu-id="aac43-188">Verwenden Sie die [Komponentenlebenszyklusmethoden OnAfterRenderAsync oder OnAfterRender](xref:blazor/lifecycle#after-component-render), um Elementverweise zu ändern, nachdem die Komponente gerendert wurde (um den anfänglichen Fokus für ein Element festzulegen).</span><span class="sxs-lookup"><span data-stu-id="aac43-188">To manipulate element references after the component has finished rendering (to set the initial focus on an element) use the [OnAfterRenderAsync or OnAfterRender component lifecycle methods](xref:blazor/lifecycle#after-component-render).</span></span>
 
-<span data-ttu-id="f4104-189">Verwenden Sie [ValueTask\<T>](xref:System.Threading.Tasks.ValueTask`1), wenn Sie mit generischen Typen arbeiten und einen Wert zurückgeben:</span><span class="sxs-lookup"><span data-stu-id="f4104-189">When working with generic types and returning a value, use [ValueTask\<T>](xref:System.Threading.Tasks.ValueTask`1):</span></span>
+<span data-ttu-id="aac43-189">Verwenden Sie [ValueTask\<T>](xref:System.Threading.Tasks.ValueTask`1), wenn Sie mit generischen Typen arbeiten und einen Wert zurückgeben:</span><span class="sxs-lookup"><span data-stu-id="aac43-189">When working with generic types and returning a value, use [ValueTask\<T>](xref:System.Threading.Tasks.ValueTask`1):</span></span>
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
@@ -234,22 +237,22 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 }
 ```
 
-<span data-ttu-id="f4104-190">`GenericMethod` wird direkt für das Objekt mit einem Typ aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-190">`GenericMethod` is called directly on the object with a type.</span></span> <span data-ttu-id="f4104-191">Im folgenden Beispiel wird davon ausgegangen, dass die `GenericMethod`-Methode vom `JsInteropClasses`-Namespace verfügbar ist:</span><span class="sxs-lookup"><span data-stu-id="f4104-191">The following example assumes that the `GenericMethod` is available from the `JsInteropClasses` namespace:</span></span>
+<span data-ttu-id="aac43-190">`GenericMethod` wird direkt für das Objekt mit einem Typ aufgerufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-190">`GenericMethod` is called directly on the object with a type.</span></span> <span data-ttu-id="aac43-191">Im folgenden Beispiel wird davon ausgegangen, dass die `GenericMethod`-Methode vom `JsInteropClasses`-Namespace verfügbar ist:</span><span class="sxs-lookup"><span data-stu-id="aac43-191">The following example assumes that the `GenericMethod` is available from the `JsInteropClasses` namespace:</span></span>
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component3.razor?highlight=17)]
 
-## <a name="reference-elements-across-components"></a><span data-ttu-id="f4104-192">Komponentenübergreifende Verweiselemente</span><span class="sxs-lookup"><span data-stu-id="f4104-192">Reference elements across components</span></span>
+## <a name="reference-elements-across-components"></a><span data-ttu-id="aac43-192">Komponentenübergreifende Verweiselemente</span><span class="sxs-lookup"><span data-stu-id="aac43-192">Reference elements across components</span></span>
 
-<span data-ttu-id="f4104-193">`ElementReference` ist nur in der `OnAfterRender`-Methode einer Komponente garantiert gültig (und ein Elementverweis ist ein `struct`), daher kann ein Elementverweis nicht zwischen Komponenten übergeben werden.</span><span class="sxs-lookup"><span data-stu-id="f4104-193">An `ElementReference` is only guaranteed valid in a component's `OnAfterRender` method (and an element reference is a `struct`), so an element reference can't be passed between components.</span></span>
+<span data-ttu-id="aac43-193">`ElementReference` ist nur in der `OnAfterRender`-Methode einer Komponente garantiert gültig (und ein Elementverweis ist ein `struct`), daher kann ein Elementverweis nicht zwischen Komponenten übergeben werden.</span><span class="sxs-lookup"><span data-stu-id="aac43-193">An `ElementReference` is only guaranteed valid in a component's `OnAfterRender` method (and an element reference is a `struct`), so an element reference can't be passed between components.</span></span>
 
-<span data-ttu-id="f4104-194">Damit eine übergeordnete Komponente einen Elementverweis anderen Komponenten zur Verfügung stellen kann, kann die übergeordnete Komponente:</span><span class="sxs-lookup"><span data-stu-id="f4104-194">For a parent component to make an element reference available to other components, the parent component can:</span></span>
+<span data-ttu-id="aac43-194">Damit eine übergeordnete Komponente einen Elementverweis anderen Komponenten zur Verfügung stellen kann, kann die übergeordnete Komponente:</span><span class="sxs-lookup"><span data-stu-id="aac43-194">For a parent component to make an element reference available to other components, the parent component can:</span></span>
 
-* <span data-ttu-id="f4104-195">zulassen, dass untergeordnete Komponenten Rückrufe registrieren.</span><span class="sxs-lookup"><span data-stu-id="f4104-195">Allow child components to register callbacks.</span></span>
-* <span data-ttu-id="f4104-196">die registrierten Rückrufe während des `OnAfterRender`-Ereignisses mit dem übergebenen Elementverweis aufrufen.</span><span class="sxs-lookup"><span data-stu-id="f4104-196">Invoke the registered callbacks during the `OnAfterRender` event with the passed element reference.</span></span> <span data-ttu-id="f4104-197">Dieser Ansatz ermöglicht untergeordneten Komponenten indirekt die Interaktion mit dem Elementverweis des übergeordneten Elements.</span><span class="sxs-lookup"><span data-stu-id="f4104-197">Indirectly, this approach allows child components to interact with the parent's element reference.</span></span>
+* <span data-ttu-id="aac43-195">zulassen, dass untergeordnete Komponenten Rückrufe registrieren.</span><span class="sxs-lookup"><span data-stu-id="aac43-195">Allow child components to register callbacks.</span></span>
+* <span data-ttu-id="aac43-196">die registrierten Rückrufe während des `OnAfterRender`-Ereignisses mit dem übergebenen Elementverweis aufrufen.</span><span class="sxs-lookup"><span data-stu-id="aac43-196">Invoke the registered callbacks during the `OnAfterRender` event with the passed element reference.</span></span> <span data-ttu-id="aac43-197">Dieser Ansatz ermöglicht untergeordneten Komponenten indirekt die Interaktion mit dem Elementverweis des übergeordneten Elements.</span><span class="sxs-lookup"><span data-stu-id="aac43-197">Indirectly, this approach allows child components to interact with the parent's element reference.</span></span>
 
-<span data-ttu-id="f4104-198">Im folgenden Blazor WebAssembly-Beispiel wird der Ansatz veranschaulicht.</span><span class="sxs-lookup"><span data-stu-id="f4104-198">The following Blazor WebAssembly example illustrates the approach.</span></span>
+<span data-ttu-id="aac43-198">Im folgenden Blazor WebAssembly-Beispiel wird der Ansatz veranschaulicht.</span><span class="sxs-lookup"><span data-stu-id="aac43-198">The following Blazor WebAssembly example illustrates the approach.</span></span>
 
-<span data-ttu-id="f4104-199">In `<head>` der Datei *wwwroot/index.html*:</span><span class="sxs-lookup"><span data-stu-id="f4104-199">In the `<head>` of *wwwroot/index.html*:</span></span>
+<span data-ttu-id="aac43-199">In `<head>` der Datei *wwwroot/index.html*:</span><span class="sxs-lookup"><span data-stu-id="aac43-199">In the `<head>` of *wwwroot/index.html*:</span></span>
 
 ```html
 <style>
@@ -257,7 +260,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 </style>
 ```
 
-<span data-ttu-id="f4104-200">In `<body>` der Datei *wwwroot/index.html*:</span><span class="sxs-lookup"><span data-stu-id="f4104-200">In the `<body>` of *wwwroot/index.html*:</span></span>
+<span data-ttu-id="aac43-200">In `<body>` der Datei *wwwroot/index.html*:</span><span class="sxs-lookup"><span data-stu-id="aac43-200">In the `<body>` of *wwwroot/index.html*:</span></span>
 
 ```html
 <script>
@@ -269,19 +272,19 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 </script>
 ```
 
-<span data-ttu-id="f4104-201">*Pages/Index.razor* (übergeordnete Komponente):</span><span class="sxs-lookup"><span data-stu-id="f4104-201">*Pages/Index.razor* (parent component):</span></span>
+<span data-ttu-id="aac43-201">*Pages/Index.razor* (übergeordnete Komponente):</span><span class="sxs-lookup"><span data-stu-id="aac43-201">*Pages/Index.razor* (parent component):</span></span>
 
 ```razor
 @page "/"
 
-<h1 @ref="_title">Hello, world!</h1>
+<h1 @ref="title">Hello, world!</h1>
 
 Welcome to your new app.
 
 <SurveyPrompt Parent="this" Title="How is Blazor working for you?" />
 ```
 
-<span data-ttu-id="f4104-202">*Pages/Index.razor.cs*:</span><span class="sxs-lookup"><span data-stu-id="f4104-202">*Pages/Index.razor.cs*:</span></span>
+<span data-ttu-id="aac43-202">*Pages/Index.razor.cs*:</span><span class="sxs-lookup"><span data-stu-id="aac43-202">*Pages/Index.razor.cs*:</span></span>
 
 ```csharp
 using System;
@@ -293,20 +296,20 @@ namespace BlazorSample.Pages
     public partial class Index : 
         ComponentBase, IObservable<ElementReference>, IDisposable
     {
-        private bool _disposing;
-        private IList<IObserver<ElementReference>> _subscriptions = 
+        private bool disposing;
+        private IList<IObserver<ElementReference>> subscriptions = 
             new List<IObserver<ElementReference>>();
-        private ElementReference _title;
+        private ElementReference title;
 
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
-                    subscription.OnNext(_title);
+                    subscription.OnNext(title);
                 }
                 catch (Exception)
                 {
@@ -317,9 +320,9 @@ namespace BlazorSample.Pages
 
         public void Dispose()
         {
-            _disposing = true;
+            disposing = true;
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
@@ -330,17 +333,17 @@ namespace BlazorSample.Pages
                 }
             }
 
-            _subscriptions.Clear();
+            subscriptions.Clear();
         }
 
         public IDisposable Subscribe(IObserver<ElementReference> observer)
         {
-            if (_disposing)
+            if (disposing)
             {
                 throw new InvalidOperationException("Parent being disposed");
             }
 
-            _subscriptions.Add(observer);
+            subscriptions.Add(observer);
 
             return new Subscription(observer, this);
         }
@@ -358,14 +361,14 @@ namespace BlazorSample.Pages
 
             public void Dispose()
             {
-                Self._subscriptions.Remove(Observer);
+                Self.subscriptions.Remove(Observer);
             }
         }
     }
 }
 ```
 
-<span data-ttu-id="f4104-203">*Shared/SurveyPrompt.razor* (untergeordnete Komponente):</span><span class="sxs-lookup"><span data-stu-id="f4104-203">*Shared/SurveyPrompt.razor* (child component):</span></span>
+<span data-ttu-id="aac43-203">*Shared/SurveyPrompt.razor* (untergeordnete Komponente):</span><span class="sxs-lookup"><span data-stu-id="aac43-203">*Shared/SurveyPrompt.razor* (child component):</span></span>
 
 ```razor
 @inject IJSRuntime JS
@@ -388,7 +391,7 @@ namespace BlazorSample.Pages
 }
 ```
 
-<span data-ttu-id="f4104-204">*Shared/SurveyPrompt.razor.cs*:</span><span class="sxs-lookup"><span data-stu-id="f4104-204">*Shared/SurveyPrompt.razor.cs*:</span></span>
+<span data-ttu-id="aac43-204">*Shared/SurveyPrompt.razor.cs*:</span><span class="sxs-lookup"><span data-stu-id="aac43-204">*Shared/SurveyPrompt.razor.cs*:</span></span>
 
 ```csharp
 using System;
@@ -399,7 +402,7 @@ namespace BlazorSample.Shared
     public partial class SurveyPrompt : 
         ComponentBase, IObserver<ElementReference>, IDisposable
     {
-        private IDisposable _subscription = null;
+        private IDisposable subscription = null;
 
         [Parameter]
         public IObservable<ElementReference> Parent { get; set; }
@@ -408,22 +411,22 @@ namespace BlazorSample.Shared
         {
             base.OnParametersSet();
 
-            if (_subscription != null)
+            if (subscription != null)
             {
-                _subscription.Dispose();
+                subscription.Dispose();
             }
 
-            _subscription = Parent.Subscribe(this);
+            subscription = Parent.Subscribe(this);
         }
 
         public void OnCompleted()
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnError(Exception error)
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnNext(ElementReference value)
@@ -434,48 +437,48 @@ namespace BlazorSample.Shared
 
         public void Dispose()
         {
-            _subscription?.Dispose();
+            subscription?.Dispose();
         }
     }
 }
 ```
 
-## <a name="harden-js-interop-calls"></a><span data-ttu-id="f4104-205">Festschreiben von JS Interop-Aufrufen</span><span class="sxs-lookup"><span data-stu-id="f4104-205">Harden JS interop calls</span></span>
+## <a name="harden-js-interop-calls"></a><span data-ttu-id="aac43-205">Festschreiben von JS Interop-Aufrufen</span><span class="sxs-lookup"><span data-stu-id="aac43-205">Harden JS interop calls</span></span>
 
-<span data-ttu-id="f4104-206">JS Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unzuverlässig behandelt werden.</span><span class="sxs-lookup"><span data-stu-id="f4104-206">JS interop may fail due to networking errors and should be treated as unreliable.</span></span> <span data-ttu-id="f4104-207">Standardmäßig weisen Blazor Server-Apps einen Timeout für JS Interop-Aufrufe an den Server nach einer Minute auf.</span><span class="sxs-lookup"><span data-stu-id="f4104-207">By default, a Blazor Server app times out JS interop calls on the server after one minute.</span></span> <span data-ttu-id="f4104-208">Wenn eine App ein engeres Timeout tolerieren kann, z. B. 10 Sekunden, legen Sie das Timeout mit einem der folgenden Ansätze durch:</span><span class="sxs-lookup"><span data-stu-id="f4104-208">If an app can tolerate a more aggressive timeout, such as 10 seconds, set the timeout using one of the following approaches:</span></span>
+<span data-ttu-id="aac43-206">JS Interop kann aufgrund von Netzwerkfehlern fehlschlagen und sollte als unzuverlässig behandelt werden.</span><span class="sxs-lookup"><span data-stu-id="aac43-206">JS interop may fail due to networking errors and should be treated as unreliable.</span></span> <span data-ttu-id="aac43-207">Standardmäßig weisen Blazor Server-Apps einen Timeout für JS Interop-Aufrufe an den Server nach einer Minute auf.</span><span class="sxs-lookup"><span data-stu-id="aac43-207">By default, a Blazor Server app times out JS interop calls on the server after one minute.</span></span> <span data-ttu-id="aac43-208">Wenn eine App ein engeres Timeout tolerieren kann, z. B. 10 Sekunden, legen Sie das Timeout mit einem der folgenden Ansätze durch:</span><span class="sxs-lookup"><span data-stu-id="aac43-208">If an app can tolerate a more aggressive timeout, such as 10 seconds, set the timeout using one of the following approaches:</span></span>
 
-* <span data-ttu-id="f4104-209">Legen Sie das Timeout global in `Startup.ConfigureServices` fest:</span><span class="sxs-lookup"><span data-stu-id="f4104-209">Globally in `Startup.ConfigureServices`, specify the timeout:</span></span>
+* <span data-ttu-id="aac43-209">Legen Sie das Timeout global in `Startup.ConfigureServices` fest:</span><span class="sxs-lookup"><span data-stu-id="aac43-209">Globally in `Startup.ConfigureServices`, specify the timeout:</span></span>
 
   ```csharp
   services.AddServerSideBlazor(
       options => options.JSInteropDefaultCallTimeout = TimeSpan.FromSeconds({SECONDS}));
   ```
 
-* <span data-ttu-id="f4104-210">Pro Aufruf im Komponentencode kann ein einzelner Aufruf das Timeout festlegen:</span><span class="sxs-lookup"><span data-stu-id="f4104-210">Per-invocation in component code, a single call can specify the timeout:</span></span>
+* <span data-ttu-id="aac43-210">Pro Aufruf im Komponentencode kann ein einzelner Aufruf das Timeout festlegen:</span><span class="sxs-lookup"><span data-stu-id="aac43-210">Per-invocation in component code, a single call can specify the timeout:</span></span>
 
   ```csharp
   var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-<span data-ttu-id="f4104-211">Weitere Informationen zur Ressourcenauslastung finden Sie unter <xref:security/blazor/server/threat-mitigation>.</span><span class="sxs-lookup"><span data-stu-id="f4104-211">For more information on resource exhaustion, see <xref:security/blazor/server/threat-mitigation>.</span></span>
+<span data-ttu-id="aac43-211">Weitere Informationen zur Ressourcenauslastung finden Sie unter <xref:security/blazor/server/threat-mitigation>.</span><span class="sxs-lookup"><span data-stu-id="aac43-211">For more information on resource exhaustion, see <xref:security/blazor/server/threat-mitigation>.</span></span>
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a><span data-ttu-id="f4104-212">Vermeiden von Objektzirkelbezügen</span><span class="sxs-lookup"><span data-stu-id="f4104-212">Avoid circular object references</span></span>
+## <a name="avoid-circular-object-references"></a><span data-ttu-id="aac43-212">Vermeiden von Objektzirkelbezügen</span><span class="sxs-lookup"><span data-stu-id="aac43-212">Avoid circular object references</span></span>
 
-<span data-ttu-id="f4104-213">Objekte, die Zirkelbezüge enthalten, können auf dem Client für folgende Vorgänge nicht serialisiert werden:</span><span class="sxs-lookup"><span data-stu-id="f4104-213">Objects that contain circular references can't be serialized on the client for either:</span></span>
+<span data-ttu-id="aac43-213">Objekte, die Zirkelbezüge enthalten, können auf dem Client für folgende Vorgänge nicht serialisiert werden:</span><span class="sxs-lookup"><span data-stu-id="aac43-213">Objects that contain circular references can't be serialized on the client for either:</span></span>
 
-* <span data-ttu-id="f4104-214">.NET-Methodenaufrufe.</span><span class="sxs-lookup"><span data-stu-id="f4104-214">.NET method calls.</span></span>
-* <span data-ttu-id="f4104-215">JavaScript-Methodenaufrufe von C#, wenn der Rückgabetyp Zirkelbezüge enthält.</span><span class="sxs-lookup"><span data-stu-id="f4104-215">JavaScript method calls from C# when the return type has circular references.</span></span>
+* <span data-ttu-id="aac43-214">.NET-Methodenaufrufe.</span><span class="sxs-lookup"><span data-stu-id="aac43-214">.NET method calls.</span></span>
+* <span data-ttu-id="aac43-215">JavaScript-Methodenaufrufe von C#, wenn der Rückgabetyp Zirkelbezüge enthält.</span><span class="sxs-lookup"><span data-stu-id="aac43-215">JavaScript method calls from C# when the return type has circular references.</span></span>
 
-<span data-ttu-id="f4104-216">Weitere Informationen finden Sie unter den folgenden Problemen:</span><span class="sxs-lookup"><span data-stu-id="f4104-216">For more information, see the following issues:</span></span>
+<span data-ttu-id="aac43-216">Weitere Informationen finden Sie unter den folgenden Problemen:</span><span class="sxs-lookup"><span data-stu-id="aac43-216">For more information, see the following issues:</span></span>
 
-* [<span data-ttu-id="f4104-217">Zirkelbezüge werden nicht unterstützt, die Zweite (dotnet/aspnetcore #20525)</span><span class="sxs-lookup"><span data-stu-id="f4104-217">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
-* [<span data-ttu-id="f4104-218">Vorschlag: Hinzufügen eines Mechanismus zur Verarbeitung von Zirkelbezügen bei der Serialisierung (dotnet/runtime #30820)</span><span class="sxs-lookup"><span data-stu-id="f4104-218">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
+* [<span data-ttu-id="aac43-217">Zirkelbezüge werden nicht unterstützt, die Zweite (dotnet/aspnetcore #20525)</span><span class="sxs-lookup"><span data-stu-id="aac43-217">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
+* [<span data-ttu-id="aac43-218">Vorschlag: Hinzufügen eines Mechanismus zur Verarbeitung von Zirkelbezügen bei der Serialisierung (dotnet/runtime #30820)</span><span class="sxs-lookup"><span data-stu-id="aac43-218">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a><span data-ttu-id="f4104-219">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="f4104-219">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="aac43-219">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="aac43-219">Additional resources</span></span>
 
 * <xref:blazor/call-dotnet-from-javascript>
-* [<span data-ttu-id="f4104-220">InteropComponent.razor-Beispiel (dotnet/AspNetCore-GitHub-Repository, Releasebranch 3.1)</span><span class="sxs-lookup"><span data-stu-id="f4104-220">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* <span data-ttu-id="f4104-221">[Ausführen umfangreicher Datenübertragungen in Blazor Server-Apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span><span class="sxs-lookup"><span data-stu-id="f4104-221">[Perform large data transfers in Blazor Server apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span></span>
+* [<span data-ttu-id="aac43-220">InteropComponent.razor-Beispiel (dotnet/AspNetCore-GitHub-Repository, Releasebranch 3.1)</span><span class="sxs-lookup"><span data-stu-id="aac43-220">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* <span data-ttu-id="aac43-221">[Ausführen umfangreicher Datenübertragungen in Blazor Server-Apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span><span class="sxs-lookup"><span data-stu-id="aac43-221">[Perform large data transfers in Blazor Server apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span></span>
