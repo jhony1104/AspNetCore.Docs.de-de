@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Blazor-WebAssembly-Apps als Single-Page-Anwen
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 153e88bb5bd99803f0ac4a0c50213e22a3278cad
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767999"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424526"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Sichern von Blazor-WebAssembly für ASP.NET Core
 
@@ -57,8 +57,22 @@ Die `Microsoft.AspNetCore.Components.WebAssembly.Authentication`-Bibliothek biet
 * Wenn die Blazor-WebAssembly-App den Anmelderückrufendpunkt (`/authentication/login-callback`) lädt, wird die Authentifizierungsantwort verarbeitet.
   * Sobald der Authentifizierungsprozess erfolgreich abgeschlossen wird, wird der Benutzer authentifiziert und optional an die ursprüngliche geschützte URL weitergeleitet, die vom Benutzer angefordert wurde.
   * Sollte der Authentifizierungsprozess aus irgend einem Grund fehlschlagen, wird der Benutzer auf die Seite „Fehler bei der Anmeldung“ (`/authentication/login-failed`) weitergeleitet, und ein Fehler wird angezeigt.
+  
+## <a name="implementation-guidance"></a>Implementierungsleitfaden
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+Artikel unter dieser *Übersicht* bieten Informationen zum Authentifizieren von Benutzern in Blazor WebAssembly-Apps für bestimmte Anbieter.
 
-* Artikel unter dieser *Übersicht* bieten Informationen zum Authentifizieren von Benutzern in Blazor WebAssembly-Apps für bestimmte Anbieter.
-* <xref:security/blazor/webassembly/additional-scenarios>
+Eigenständige Blazor-WebAssembly-Apps
+
+* [Allgemeiner Leitfaden für OIDC-Anbieter und die WebAssembly-Authentifizierungsbibliothek](xref:security/blazor/webassembly/standalone-with-authentication-library)
+* [Microsoft-Konten](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/standalone-with-azure-active-directory-b2c)
+
+Gehostete Blazor-WebAssembly-Apps:
+
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/hosted-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/hosted-with-azure-active-directory-b2c)
+* [Identity Server](xref:security/blazor/webassembly/hosted-with-identity-server)
+
+Weitere Anleitungen zur Konfiguration finden Sie unter <xref:security/blazor/webassembly/additional-scenarios>.
