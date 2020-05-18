@@ -367,6 +367,8 @@
           uid: blazor/debug
         - name: Aufrufen einer Web-API über WebAssembly
           uid: blazor/call-web-api
+        - name: WebAssembly-Leistung
+          uid: performance/blazor/webassembly-best-practices
         - name: Progressive Webanwendungen
           uid: blazor/progressive-web-app
         - name: Hosten und Bereitstellen
@@ -557,7 +559,7 @@
     - name: Clients
       displayName: signalr
       items:
-        - name: SignalR-Clientfunktionen
+        - name: Übersicht
           uid: signalr/client-features
           displayName: signalr
         - name: .NET-Client
@@ -1180,6 +1182,8 @@
       uid: performance/diagnostic-tools
     - name: Auslastungs- und Belastungstests
       uid: test/loadtests
+    - name: Blazor WebAssembly
+      uid: performance/blazor/webassembly-best-practices
 - name: Globalisierung und Lokalisierung
   items:
     - name: Übersicht
