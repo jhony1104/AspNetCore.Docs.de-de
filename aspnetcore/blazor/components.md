@@ -1,21 +1,24 @@
 ---
 title: Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 author: guardrex
-description: Hier erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, Datenbindungen durchführen, Ereignisse behandeln und die Lebenszyklen von Komponenten verwalten.
+description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, Datenbindungen durchführen, Ereignisse behandeln und die Lebenszyklen von Komponenten verwalten.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/21/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205955"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153517"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -27,25 +30,25 @@ Blazor-Apps werden mithilfe von *Komponenten* erstellt. Eine Komponente ist ein 
 
 ## <a name="component-classes"></a>Komponentenklassen
 
-Komponenten werden mithilfe einer Kombination aus C# und HTML-Markup über [Razor](xref:mvc/views/razor)-Komponentendateien ( *.razor*) implementiert. Eine Komponente in Blazor wird formal als *Razor-Komponente* bezeichnet.
+Komponenten werden mithilfe einer Kombination aus C# und HTML-Markup in [Razor](xref:mvc/views/razor)-Komponentendateien ( *.razor*) implementiert. Eine Komponente in Blazor wird formal als *Razor-Komponente* bezeichnet.
 
 Der Name einer Komponente muss mit einem Großbuchstaben beginnen. Beispielsweise ist *MyCoolComponent.razor* zulässig, *mycoolcomponent.razor* aber nicht.
 
-Die Benutzeroberfläche einer Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z.B. Schleifen, Bedingungen, Ausdrücken) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Wenn eine App kompiliert wird, werden das HTML-Markup und die C#-Renderinglogik in eine Komponentenklasse konvertiert. Der Name der generierten Klasse entspricht dem Namen der Datei.
+Die Benutzeroberfläche einer Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z. B. Schleifen, Bedingungen, Ausdrücke) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Wenn eine App kompiliert wird, werden das HTML-Markup und die C#-Renderinglogik in eine Komponentenklasse konvertiert. Der Name der generierten Klasse entspricht dem Namen der Datei.
 
 Member der Komponentenklasse werden in einem `@code`-Block definiert. Im `@code`-Block wird der Komponentenstatus (Eigenschaften, Felder) mit Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Mehrere `@code`-Blöcke sind zulässig.
 
 Komponentenmember können als Teil der Renderinglogik der Komponente mithilfe von C#-Ausdrücken verwendet werden, die mit `@`beginnen. Beispielsweise wird ein C#-Feld gerendert, indem `@` dem Feldnamen vorangestellt wird. Das Beispiel wertet Folgendes aus und führt ein Rendering durch:
 
-* `_headingFontStyle` in den CSS-Eigenschaftswert für `font-style`
-* `_headingText` in den Inhalt des `<h1>`-Elements
+* `headingFontStyle` in den CSS-Eigenschaftswert für `font-style`
+* `headingText` in den Inhalt des `<h1>`-Elements
 
 ```razor
-<h1 style="font-style:@_headingFontStyle">@_headingText</h1>
+<h1 style="font-style:@headingFontStyle">@headingText</h1>
 
 @code {
-    private string _headingFontStyle = "italic";
-    private string _headingText = "Put on your new Blazor!";
+    private string headingFontStyle = "italic";
+    private string headingText = "Put on your new Blazor!";
 }
 ```
 
@@ -58,13 +61,19 @@ In der Regel wird der Namespace einer Komponente aus dem Stammnamespace der App 
 * der Namespace der `Counter`-Komponente `BlazorApp.Pages`, und
 * der vollqualifizierten Typname der Komponente ist `BlazorApp.Pages.Counter`.
 
-Weitere Informationen finden Sie im Abschnitt [Importieren von Komponenten](#import-components).
-
-Sie können einen benutzerdefinierten Ordner verwenden, indem Sie den Namespace des benutzerdefinierten Ordners entweder der übergeordneten Komponente oder der *_Imports.razor*-Datei der App hinzufügen. Der folgende Namespace stellt z. B. Komponenten im Ordner *Components* bereit, wenn der Stammnamespace der App `BlazorApp`ist:
+Fügen Sie für benutzerdefinierte Ordner, die Komponenten enthalten, eine `using`-Anweisung der übergeordneten Komponente oder der *_Imports.razor*-Datei der App hinzu. Im folgenden Beispiel werden Komponenten im Ordner *Components* (Komponenten) zur Verfügung gestellt:
 
 ```razor
 @using BlazorApp.Components
 ```
+
+Alternativ kann auf eine Komponente direkt verwiesen werden:
+
+```razor
+<BlazorApp.Components.MyCoolComponent />
+```
+
+Weitere Informationen finden Sie im Abschnitt [Importieren von Komponenten](#import-components).
 
 ## <a name="static-assets"></a>Statische Ressourcen
 
@@ -82,7 +91,7 @@ Weitere Informationen zum Festlegen des Basispfads einer App finden Sie unter <x
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>Keine Unterstützung von Taghilfsprogrammen in Komponenten
 
-[Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) werden in Razor-Komponenten (*RAZOR*-Dateien) nicht unterstützt. Sie können Taghilfsobjekte in Blazor bereitstellen, indem Sie eine Komponente mit der gleichen Funktionalität wie das Taghilfsprogramm erstellen und diese stattdessen verwenden.
+[Taghilfsprogramme](xref:mvc/views/tag-helpers/intro) werden in Razor-Komponenten ( *.razor*-Dateien) nicht unterstützt. Sie können Taghilfsobjekte in Blazor bereitstellen, indem Sie eine Komponente mit der gleichen Funktionalität wie das Taghilfsprogramm erstellen und diese stattdessen verwenden.
 
 ## <a name="use-components"></a>Verwenden von Komponenten
 
@@ -166,7 +175,7 @@ Die `ParentComponent`-Datei in der Beispiel-App kann Inhalte zum Rendern von `Ch
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Attributsplatting und arbiträre Parameter
 
-Komponenten können zusätzlich zu den deklarierten Parametern der Komponente weitere Attribute erfassen und rendern. Zusätzliche Attribute können in einem Wörterbuch erfasst und dann für ein Element *gesplattet* werden, wenn die Komponente mithilfe der Razor-Anweisung [`@attributes`](xref:mvc/views/razor#attributes) gerendert wird. Dieses Option ist nützlich, wenn Sie eine Komponente definieren, die ein Markupelement erzeugt, das viele verschiedene Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für ein `<input>`-Element separat zu definieren, das viele Parameter unterstützt.
+Komponenten können zusätzlich zu den deklarierten Parametern der Komponente weitere Attribute erfassen und rendern. Zusätzliche Attribute können in einem Wörterbuch erfasst und dann für ein Element *gesplattet* werden, wenn die Komponente mithilfe der [`@attributes`](xref:mvc/views/razor#attributes)-Anweisung Razor gerendert wird. Dieses Option ist nützlich, wenn Sie eine Komponente definieren, die ein Markupelement erzeugt, das viele verschiedene Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für ein `<input>`-Element separat zu definieren, das viele Parameter unterstützt.
 
 Im folgenden Beispiel verwendet das erste `<input>`-Element (`id="useIndividualParams"`) einzelne Komponentenparameter, während das zweite `<input>`-Element (`id="useAttributesDict"`) Attributsplatting verwendet:
 
@@ -288,22 +297,22 @@ Komponentenverweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu ver
 * Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
 
 ```razor
-<MyLoginDialog @ref="_loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog _loginDialog;
+    private MyLoginDialog loginDialog;
 
     private void OnSomething()
     {
-        _loginDialog.Show();
+        loginDialog.Show();
     }
 }
 ```
 
-Wenn die Komponente gerendert wird, wird das `_loginDialog`-Feld mit der untergeordneten `MyLoginDialog`-Komponenteninstanz aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
+Wenn die Komponente gerendert wird, wird das `loginDialog`-Feld mit der untergeordneten `MyLoginDialog`-Komponenteninstanz aufgefüllt. Anschließend können Sie .NET-Methoden für die Komponenteninstanz aufrufen.
 
 > [!IMPORTANT]
-> Die `_loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise nötig. Sie können Komponentenverweise bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, indem Sie die Methode [OnAfterRenderAsync oder OnAfterRender](xref:blazor/lifecycle#after-component-render) verwenden.
+> Die `loginDialog`-Variable wird erst aufgefüllt, nachdem die Komponente gerendert wurde und die Ausgabe das `MyLoginDialog`-Element enthält. Bis zu diesem Punkt sind keine Verweise nötig. Sie können Komponentenverweise bearbeiten, nachdem die Komponente das Rendering abgeschlossen hat, indem Sie die Methode [OnAfterRenderAsync oder OnAfterRender](xref:blazor/lifecycle#after-component-render) verwenden.
 
 Informationen zum Verweisen auf Komponenten in einer Schleife finden Sie unter [Erfassen von Verweisen auf mehrere ähnliche untergeordnete Komponenten (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
@@ -314,9 +323,11 @@ Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>Externes Aufrufen von Komponentenmethoden zur Aktualisierung des Status
 
-Blazor verwendet eine `SynchronizationContext`-Eigenschaft, um einen einzelnen logischen Ausführungsthread zu erzwingen. Die [Lebenszyklusmethoden](xref:blazor/lifecycle) einer Komponente und alle Ereignisrückrufe, die von Blazor ausgelöst werden, werden in dieser `SynchronizationContext`-Eigenschaft ausgeführt. Wenn eine Komponente aufgrund eines externen Ereignisses (z. B. eines Timers oder anderer Benachrichtigungen) aktualisiert werden muss, verwenden Sie die `InvokeAsync`-Methode, die an die `SynchronizationContext`-Eigenschaft von Blazor weitergeleitet wird.
+Blazor verwendet einen Synchronisierungskontext (`SynchronizationContext`), um einen einzelnen logischen Ausführungsthread zu erzwingen. Die [Lebenszyklusmethoden](xref:blazor/lifecycle) einer Komponente und alle Ereignisrückrufe, die von Blazor ausgelöst werden, werden in diesem Synchronisierungskontext ausgeführt.
 
-Nehmen Sie einen *Benachrichtigungsdienst* als Beispiel, der jede überwachende Komponente des aktualisierten Zustands benachrichtigen kann:
+Der Synchronisierungskontext des Blazor-Servers versucht, eine Singlethreadumgebung zu emulieren, sodass er genau mit dem WebAssembly-Modell im Browser übereinstimmt, das ein Singlethreadmodell ist. Zu jedem Zeitpunkt wird die Arbeit für genau einen Thread ausgeführt, woraus der Eindruck eines einzelnen logischen Threads entsteht. Zwei Vorgänge werden nicht gleichzeitig ausgeführt.
+
+Wenn eine Komponente aufgrund eines externen Ereignisses (z. B. eines Timers oder anderer Benachrichtigungen) aktualisiert werden muss, verwenden Sie die `InvokeAsync`-Methode, die an den Synchronisierungskontext von Blazor weitergeleitet wird. Nehmen Sie einen *Benachrichtigungsdienst* als Beispiel, der jede überwachende Komponente des aktualisierten Zustands benachrichtigen kann:
 
 ```csharp
 public class NotifierService
@@ -355,10 +366,10 @@ Verwenden Sie `NotifierService`, um eine Komponente zu aktualisieren:
 @inject NotifierService Notifier
 @implements IDisposable
 
-<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
 
 @code {
-    private (string key, int value) _lastNotification;
+    private (string key, int value) lastNotification;
 
     protected override void OnInitialized()
     {
@@ -369,7 +380,7 @@ Verwenden Sie `NotifierService`, um eine Komponente zu aktualisieren:
     {
         await InvokeAsync(() =>
         {
-            _lastNotification = (key, value);
+            lastNotification = (key, value);
             StateHasChanged();
         });
     }
@@ -381,7 +392,7 @@ Verwenden Sie `NotifierService`, um eine Komponente zu aktualisieren:
 }
 ```
 
-Im vorherigen Beispiel ruft `NotifierService` die `OnNotify`-Methode der Komponente außerhalb der `SynchronizationContext`-Eigenschaft von Blazor auf. `InvokeAsync` wird verwendet, um zum richtigen Kontext zu wechseln und ein Rendering in die Warteschlange zu stellen.
+Im vorherigen Beispiel ruft `NotifierService` die `OnNotify`-Methode der Komponente außerhalb des Synchronisierungskontexts von Blazor auf. `InvokeAsync` wird verwendet, um zum richtigen Kontext zu wechseln und ein Rendering in die Warteschlange zu stellen.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>Verwenden von \@key zur Steuerung der Beibehaltung von Elementen und Komponenten
 
@@ -516,14 +527,14 @@ Um den Zustand im vorangehenden Szenario beizubehalten, verwenden Sie ein *priva
 Die folgende `Expander`-Komponente:
 
 * akzeptiert den Wert des `Expanded`-Komponentenparameters aus der übergeordneten Komponente.
-* weist den Wert des Komponentenparameters einem *privaten Feld* (`_expanded`) im [OnInitialized-Ereignis](xref:blazor/lifecycle#component-initialization-methods) zu.
+* weist den Wert des Komponentenparameters einem *privaten Feld* (`expanded`) im [OnInitialized-Ereignis](xref:blazor/lifecycle#component-initialization-methods) zu.
 * verwendet das private Feld, um seinen internen Umschaltungszustand beizubehalten.
 
 ```razor
 <div @onclick="@Toggle">
-    Toggle (Expanded = @_expanded)
+    Toggle (Expanded = @expanded)
 
-    @if (_expanded)
+    @if (expanded)
     {
         @ChildContent
     }
@@ -536,16 +547,16 @@ Die folgende `Expander`-Komponente:
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private bool _expanded;
+    private bool expanded;
 
     protected override void OnInitialized()
     {
-        _expanded = Expanded;
+        expanded = Expanded;
     }
 
     private void Toggle()
     {
-        _expanded = !_expanded;
+        expanded = !expanded;
     }
 }
 ```
@@ -566,16 +577,16 @@ Das folgende Beispiel zeigt die `Counter`-Standardkomponente mit einem `@code`-B
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -589,7 +600,7 @@ Die `Counter`-Komponente kann auch mit einer CodeBehind-Datei mit einer partiell
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
@@ -601,11 +612,11 @@ namespace BlazorApp.Pages
 {
     public partial class Counter
     {
-        private int _currentCount = 0;
+        private int currentCount = 0;
 
         void IncrementCount()
         {
-            _currentCount++;
+            currentCount++;
         }
     }
 }
@@ -663,7 +674,7 @@ Attribute können in Razor-Komponenten mit der [`@attribute`](xref:mvc/views/raz
 
 Der Namespace einer mit Razor erstellten Komponente basiert auf Folgendem (nach Priorität):
 
-* [`@namespace`](xref:mvc/views/razor#namespace)-Bezeichnung im Markup (`@namespace BlazorSample.MyNamespace`) der Razor-Datei ( *.razor*)
+* [`@namespace`](xref:mvc/views/razor#namespace)-Bezeichnung im Markup (`@namespace BlazorSample.MyNamespace`) der Razor-Datei ( *.razor*).
 * Die `RootNamespace`-Eigenschaft des Projekts in der Projektdatei (`<RootNamespace>BlazorSample</RootNamespace>`)
 * Der Projektname, der aus dem Namen der Projektdatei ( *.csproj*) und dem Pfad vom Projektstamm zur Komponente resultiert. Das Framework löst z. B. *{Projektstamm}/Pages/Index.razor* (*BlazorSample.csproj*) in den Namespace `BlazorSample.Pages` auf. Komponenten folgen den Namensbindungsregeln für C#. Für die `Index`-Komponente in diesem Beispiel werden folgende Komponenten berücksichtigt:
   * Komponenten im selben Ordner (*Pages*)
@@ -738,10 +749,10 @@ Zeichenfolgen werden normalerweise mithilfe von DOM-Textknoten gerendert. Das be
 Im folgenden Beispiel wird veranschaulicht, wie der `MarkupString`-Typ verwendet wird, um der gerenderten Ausgabe einer Komponente einen Block mit statischem HTML-Inhalt hinzuzufügen:
 
 ```html
-@((MarkupString)_myMarkup)
+@((MarkupString)myMarkup)
 
 @code {
-    private string _myMarkup = 
+    private string myMarkup = 
         "<p class='markup'>This is a <em>markup string</em>.</p>";
 }
 ```
@@ -779,7 +790,7 @@ Beispielsweise gibt die Beispiel-App Designinformationen (`ThemeInfo`) in einem 
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="_theme">
+            <CascadingValue Value="theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -789,7 +800,7 @@ Beispielsweise gibt die Beispiel-App Designinformationen (`ThemeInfo`) in einem 
 </div>
 
 @code {
-    private ThemeInfo _theme = new ThemeInfo { ButtonClass = "btn-success" };
+    private ThemeInfo theme = new ThemeInfo { ButtonClass = "btn-success" };
 }
 ```
 
@@ -806,7 +817,7 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme`-Komponente den k
 
 <h1>Cascading Values & Parameters</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <p>
     <button class="btn" @onclick="IncrementCount">
@@ -821,14 +832,14 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme`-Komponente den k
 </p>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     [CascadingParameter]
     protected ThemeInfo ThemeInfo { get; set; }
 
     private void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -836,14 +847,14 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme`-Komponente den k
 Sie können mehrere Werte desselben Typs innerhalb derselben Unterstruktur kaskadieren, indem Sie jeder `CascadingValue`-Komponente und dem entsprechenden `CascadingParameter`-Attribut eine eindeutige `Name`-Zeichenfolge bereitstellen. Im folgenden Beispiel kaskadieren zwei `CascadingValue`-Komponenten verschiedene Instanzen von `MyCascadingType` nach Namen:
 
 ```razor
-<CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
+<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
     <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
 
 @code {
-    private MyCascadingType _parentCascadeParameter1;
+    private MyCascadingType parentCascadeParameter1;
 
     [Parameter]
     public MyCascadingType ParentCascadeParameter2 { get; set; }
@@ -923,13 +934,13 @@ Renderingfragmente können mithilfe der Razor-Vorlagensyntax definiert werden. M
 Im folgenden Beispiel wird veranschaulicht, wie Sie `RenderFragment`- und `RenderFragment<T>`-Werte angeben und Vorlagen direkt in einer-Komponente rendern können. Renderingfragmente können auch als Argumente an [Komponentenvorlagen](xref:blazor/templated-components) übergeben werden.
 
 ```razor
-@_timeTemplate
+@timeTemplate
 
-@_petTemplate(new Pet { Name = "Rex" })
+@petTemplate(new Pet { Name = "Rex" })
 
 @code {
-    private RenderFragment _timeTemplate = @<p>The time is @DateTime.Now.</p>;
-    private RenderFragment<Pet> _petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
+    private RenderFragment timeTemplate = @<p>The time is @DateTime.Now.</p>;
+    private RenderFragment<Pet> petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
 
     private class Pet
     {

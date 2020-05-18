@@ -5,19 +5,22 @@ description: Erfahren Sie, wie die Lebenszyklusmethoden von Razor-Komponenten in
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: e7450ad57acc87500bb977aa8349c6ee009e3bf4
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791463"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976700"
 ---
-# <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor-Lebenszyklus
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor-Lebenszyklus
 
 Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
 
@@ -27,7 +30,7 @@ Das Blazor-Framework umfasst synchrone und asynchrone Lebenszyklusmethoden. Setz
 
 ### <a name="component-initialization-methods"></a>Methoden zur Komponenteninitialisierung
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> werden aufgerufen, wenn die Komponente initialisiert wird, nachdem sie ihre anfänglichen Parameter von ihrer übergeordneten Komponente erhalten hat. Verwenden Sie `OnInitializedAsync`, wenn die Komponente einen asynchronen Vorgang ausführt und nach Abschluss des Vorgangs aktualisiert werden soll.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> werden aufgerufen, wenn die Komponente initialisiert wird, nachdem sie ihre anfänglichen Parameter von ihrer übergeordneten Komponente erhalten hat. Verwenden Sie `OnInitializedAsync`, wenn die Komponente einen asynchronen Vorgang ausführt und nach Abschluss des Vorgangs aktualisiert werden soll.
 
 Für einen synchronen Betrieb setzen Sie `OnInitialized` außer Kraft:
 
@@ -60,7 +63,7 @@ Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Be
 
 ### <a name="before-parameters-are-set"></a>Bevor die Parameter festgelegt werden
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*> legt Parameter fest, die vom übergeordneten Element der Komponente in der Renderstruktur bereitgestellt werden:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> legt Parameter fest, die vom übergeordneten Element der Komponente in der Renderstruktur bereitgestellt werden:
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -81,7 +84,7 @@ Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Be
 
 ### <a name="after-parameters-are-set"></a>Nachdem die Parameter festgelegt wurden
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> werden aufgerufen:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> werden aufgerufen:
 
 * Wenn die Komponente initialisiert ist und ihren ersten Parametersatz von ihrer übergeordneten Komponente erhalten hat.
 * Wenn die übergeordnete Komponente neu gerendert wird und Folgendes bereitstellt:
@@ -109,7 +112,7 @@ Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Be
 
 ### <a name="after-component-render"></a>Nach dem Rendern der Komponente
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*> werden aufgerufen, nachdem eine Komponente das Rendering beendet hat. Element- und Komponentenverweise werden an dieser Stelle aufgefüllt. In dieser Phase können Sie zusätzliche Initialisierungsschritte unter Verwendung des gerenderten Inhalts durchführen, z. B. die Aktivierung von JavaScript-Bibliotheken von Drittanbietern, die mit den gerenderten DOM-Elementen arbeiten.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> und <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> werden aufgerufen, nachdem eine Komponente das Rendering beendet hat. Element- und Komponentenverweise werden an dieser Stelle aufgefüllt. In dieser Phase können Sie zusätzliche Initialisierungsschritte unter Verwendung des gerenderten Inhalts durchführen, z. B. die Aktivierung von JavaScript-Bibliotheken von Drittanbietern, die mit den gerenderten DOM-Elementen arbeiten.
 
 Der Parameter `firstRender` für `OnAfterRenderAsync` und `OnAfterRender`:
 
@@ -147,7 +150,7 @@ Wenn Ereignishandler eingerichtet wurden, sollten Sie ihre Einbindung bei der Be
 
 ### <a name="suppress-ui-refreshing"></a>Unterdrücken der UI-Aktualisierung
 
-Setzen Sie <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*> außer Kraft, um die Aktualisierung der Benutzeroberfläche zu unterdrücken. Wenn die Implementierung `true` zurückgibt, wird die Benutzeroberfläche aktualisiert:
+Setzen Sie <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> außer Kraft, um die Aktualisierung der Benutzeroberfläche zu unterdrücken. Wenn die Implementierung `true` zurückgibt, wird die Benutzeroberfläche aktualisiert:
 
 ```csharp
 protected override bool ShouldRender()
@@ -164,7 +167,7 @@ Selbst wenn `ShouldRender` außer Kraft gesetzt wird, wird die Komponente immer 
 
 ## <a name="state-changes"></a>Statusänderungen
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> benachrichtigt die Komponente, dass sich ihr Zustand geändert hat. Gegebenenfalls bewirkt der Aufruf von `StateHasChanged` das erneute Rendern der Komponente.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> benachrichtigt die Komponente, dass sich ihr Zustand geändert hat. Gegebenenfalls bewirkt der Aufruf von `StateHasChanged` das erneute Rendern der Komponente.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>Behandeln unvollständiger asynchroner Aktionen beim Rendern
 
@@ -195,7 +198,7 @@ Wenn eine Komponente <xref:System.IDisposable> implementiert, wird die [Dispose-
 ```
 
 > [!NOTE]
-> Der Aufruf von <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> in `Dispose` wird nicht unterstützt. `StateHasChanged` könnte im Rahmen des Beendens des Renderers aufgerufen werden, sodass die Anforderung von UI-Updates an diesem Punkt nicht unterstützt wird.
+> Der Aufruf von <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> in `Dispose` wird nicht unterstützt. `StateHasChanged` könnte im Rahmen des Beendens des Renderers aufgerufen werden, sodass die Anforderung von UI-Updates an diesem Punkt nicht unterstützt wird.
 
 Kündigen Sie die .NET-Ereignisabonnements der Ereignishandler. Die folgenden [Blazor-Formularbeispiele](xref:blazor/forms-validation) veranschaulichen das Aufheben der Einbindung eines Ereignishandlers in der `Dispose`-Methode:
 
@@ -231,7 +234,7 @@ Der folgende Code veranschaulicht eine aktualisierte `WeatherForecastService` in
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -262,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }
@@ -274,3 +277,73 @@ Weitere Informationen zum `RenderMode` finden Sie unter <xref:blazor/hosting-mod
 ## <a name="detect-when-the-app-is-prerendering"></a>Erkennen, wenn für die App ein Prerendering durchgeführt wird
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>Abbrechbare Hintergrundarbeit
+
+Komponenten führen häufig Hintergrundaufgaben aus, die lange dauern, zum Beispiel die Durchführung von Netzwerkaufrufen (<xref:System.Net.Http.HttpClient>) und die Interaktion mit Datenbanken. Es ist wünschenswert, die Hintergrundarbeit zu unterbinden, um Systemressourcen in mehreren Situationen zu sparen. Beispielsweise werden asynchrone Hintergrundvorgänge nicht automatisch beendet, wenn ein Benutzer von einer Komponente wegnavigiert.
+
+Andere Gründe, warum Arbeitselemente, die im Hintergrund ausgeführt werden, unterbrochen werden müssen, sind die folgenden:
+
+* Eine ausgeführte Hintergrundaufgabe wurde mit fehlerhaften Eingabedaten oder Verarbeitungsparametern gestartet.
+* Die aktuellen Arbeitselemente, die im Hintergrund ausgeführt werden, müssen durch neue Arbeitselemente ersetzt werden.
+* Die Priorität der aktuell ausgeführten Aufgaben muss geändert werden.
+* Die App muss herunterfahren werden, um sie erneut auf dem Server bereitzustellen.
+* Serverressourcen werden eingeschränkt und erfordern die Neuplanung von Arbeitselementen, die im Hintergrund ausgeführt werden.
+
+So implementieren Sie ein abbrechbares Hintergrundarbeitsmuster in einer Komponente:
+
+* Verwenden Sie eine <xref:System.Threading.CancellationTokenSource>-Klasse und eine <xref:System.Threading.CancellationToken>-Struktur.
+* Es ist gewünscht, dass der Abbruch bei der [Löschung der Komponente](#component-disposal-with-idisposable) und zu jedem Zeitpunkt durch manuellen Abbruch des Tokens durchgeführt wird. Rufen Sie dazu [CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A) auf, um zu signalisieren, dass die Hintergrundarbeit abgebrochen werden soll.
+* Rufen Sie nach Rückgabe des asynchronen Aufrufs <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> für das Token auf.
+
+Im folgenden Beispiel:
+
+* `await Task.Delay(5000, cts.Token);` stellt asynchrone Hintergrundaufgaben mit langer Ausführungszeit dar.
+* `BackgroundResourceMethod` stellt eine Hintergrundmethode mit langer Ausführungszeit dar, die nicht gestartet werden sollte, wenn die `Resource` vor dem Aufruf der Methode verworfen wird.
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```
