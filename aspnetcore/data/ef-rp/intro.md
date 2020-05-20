@@ -1,18 +1,7 @@
 ---
-title: 'Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8'
-author: rick-anderson
-description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core
-ms.author: riande
-ms.custom: mvc, seodec18
-ms.date: 09/26/2019
-uid: data/ef-rp/intro
-ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661616"
+title: Razor Pages mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8 author: rick-anderson description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core ms.author: riande ms.custom: "mvc, seodec18" ms.date: 09/26/2019 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: data/ef-rp/intro
 ---
+
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
 
 Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
@@ -65,7 +54,6 @@ Folgen Sie dem Link am oberen Rand der Seite, um den Quellcode für das vollstä
 
 So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
-* Löschen Sie drei Dateien und einen Ordner, die *SQLite* im Namen tragen.
 * Erstellen Sie das Projekt.
 * Führen Sie folgenden Befehl in der Paket-Manager-Konsole aus:
 
@@ -83,6 +71,7 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 * Löschen Sie *Startup.cs*, und benennen Sie *StartupSQLite.cs* in *Startup.cs* um.
 * Löschen Sie *appSettings.json*, und benennen Sie *appSettingsSQLite.json* in *appSettings.json* um.
 * Löschen Sie den Ordner *Migrations*, und benennen Sie *MigrationsSQL* in *Migrations* um.
+* Führen Sie eine globale Suche nach `#if SQLiteVersion` aus, und entfernen Sie `#if SQLiteVersion` sowie die zugehörige `#endif`-Anweisung.
 * Erstellen Sie das Projekt.
 * Führen Sie an der Eingabeaufforderung im Projektordner die folgenden Befehle aus:
 
@@ -367,7 +356,7 @@ Später in der Tutorialserie löschen Sie die Datenbank, die von `EnsureCreated`
 Die `EnsureCreated`-Methode erstellt eine leere Datenbank. In diesem Abschnitt wird Code hinzugefügt, der die Datenbank mit Testdaten auffüllt.
 
 Erstellen Sie *Data/DbInitializer.cs* mit dem folgenden Code:
-
+<!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
   Der Code überprüft, ob Studenten in der Datenbank vorhanden sind. Wenn keine Studenten vorhanden sind, werden der Datenbank Testdaten hinzugefügt. Testdaten werden in Arrays anstelle von `List<T>`-Sammlungen erstellt, um die Leistung zu optimieren.
