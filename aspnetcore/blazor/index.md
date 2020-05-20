@@ -1,24 +1,12 @@
 ---
-title: Einführung in ASP.NET Core Blazor
-author: guardrex
-description: Lernen Sie ASP.NET Core Blazor kennen, eine Möglichkeit, interaktive clientseitige Webbenutzeroberflächen mit .NET in einer ASP.NET Core-App zu erstellen.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc, seoapril2019
-ms.date: 03/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/index
-ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771949"
+title: „Einführung in ASP.NET Core Blazor“ author: description: „Lernen Sie ASP.NET Core Blazor kennen, eine Möglichkeit, interaktive clientseitige Webbenutzeroberflächen mit .NET in einer ASP.NET Core-App zu erstellen.“
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Einführung in ASP.NET Core Blazor
 
@@ -109,8 +97,6 @@ Wenn diese Komponente in der App verwendet wird, beschleunigt IntelliSense in [V
 Die Komponenten werden in einer In-Memory-Darstellung des Browser-DOM (Document Object Model) gerendert, die als *Renderbaum* bezeichnet und verwendet wird, um die Benutzeroberfläche auf flexible und effiziente Weise zu aktualisieren.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor WebAssembly ist ein Single-Page-App-Framework zum Erstellen interaktiver clientseitiger Web-Apps mit .NET. Blazor WebAssembly verwendet offene Webstandards ohne Plug-Ins oder Codetranspilation und funktioniert in allen modernen Webbrowsern, einschließlich mobiler Browser.
 
