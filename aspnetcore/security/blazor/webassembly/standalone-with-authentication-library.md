@@ -1,32 +1,15 @@
 ---
-title: Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit der Authentifizierungs Bibliothek
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 219364ef2e699ff1029536effd106a80ec02825c
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153413"
+Title: "Sichern einer Blazor eigenständigen App mit ASP.net Core Webassembly mit der Authentifizierungs Bibliothek ' Author: Description: monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit der Authentifizierungs Bibliothek
 
 Von [Javier calvarro Nelson](https://github.com/javiercn) und [Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 *Befolgen Sie die Anweisungen in diesem Thema für Azure Active Directory (AAD) und Azure Active Directory B2C (AAD B2C). Weitere Informationen finden Sie in den Themen zu Aad und Aad B2C in diesem Knoten Inhaltsverzeichnis.*
 
@@ -48,15 +31,13 @@ Wenn Sie eine Authentifizierung zu einer APP hinzufügen, fügen Sie das Paket m
 
 ```xml
 <PackageReference 
-    Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-    Version="{VERSION}" />
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
 ```
-
-Ersetzen Sie `{VERSION}` im vorherigen Paket Verweis durch die Version des Pakets, das `Microsoft.AspNetCore.Blazor.Templates` im Artikel angezeigt wird <xref:blazor/get-started> .
 
 ## <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
 
-Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Container mit der `AddOidcAuthentication` vom Paket bereitgestellten Erweiterungsmethode registriert `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . Diese Methode richtet alle Dienste ein, die für die Interaktion der APP mit dem Identity Anbieter (IP) erforderlich sind.
+Die Unterstützung für das Authentifizieren von Benutzern wird im Dienst Container mit der `AddOidcAuthentication` vom Paket bereitgestellten Erweiterungsmethode registriert `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . Diese Methode richtet die Dienste ein, die für die Interaktion der APP mit dem Identity Anbieter (IP) erforderlich sind.
 
 *Program.cs*:
 
@@ -92,18 +73,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Wenn die Azure-Portal einen Bereichs-URI bereitstellt und **die APP eine nicht behandelte Ausnahme** auslöst, wenn Sie eine 401-nicht *autorisierte* Antwort von der API empfängt, verwenden Sie einen Bereichs-URI, der das Schema und den Host nicht enthält. Der Azure-Portal kann z. b. eines der folgenden Bereich-URI-Formate bereitstellen:
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> Geben Sie den Bereichs-URI ohne das Schema und den Host an:
->
-> ```csharp
-> options.ProviderOptions.DefaultScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 Weitere Informationen finden Sie in den folgenden Abschnitten des Artikels *weitere Szenarien* :
 
@@ -128,7 +98,39 @@ Weitere Informationen finden Sie in den folgenden Abschnitten des Artikels *weit
 
 ## <a name="logindisplay-component"></a>Logindisplay-Komponente
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLayout` Komponente (*Shared/MainLayout. Razor*) gerendert und verwaltet die folgenden Verhaltensweisen:
+
+* Für authentifizierte Benutzer:
+  * Zeigt den aktuellen Benutzernamen an.
+  * Bietet eine Schaltfläche, um sich von der APP abzumelden.
+* Für anonyme Benutzer bietet die Option zum Anmelden.
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
 
 ## <a name="authentication-component"></a>Authentifizierungs Komponente
 

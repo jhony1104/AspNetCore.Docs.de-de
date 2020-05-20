@@ -1,7 +1,7 @@
 ---
 title: Razor-Syntax Referenz für ASP.net Core
 author: rick-anderson
-description: Erfahren Sie Razor mehr über Markup Syntax zum Einbetten von Server basiertem Code in Webseiten.
+description: Erfahren Sie mehr über Razor Markup Syntax zum Einbetten von Server basiertem Code in Webseiten.
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003189"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424422"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razor-Syntaxreferenz für ASP.NET Core
 
@@ -473,7 +473,7 @@ Der `@code`-Block ermöglicht einer [Razor-Komponente](xref:blazor/components) d
 }
 ```
 
-Für Razor-Komponenten `@code` ist ein Alias von [`@functions`](#functions) und wird für `@functions`empfohlen. Mehrere `@code`-Blöcke sind zulässig.
+Für Razor-Komponenten `@code` ist ein Alias von [`@functions`](#functions) und wird für empfohlen `@functions` . Mehrere `@code`-Blöcke sind zulässig.
 
 ::: moniker-end
 
@@ -493,7 +493,7 @@ Verwenden Sie in [Razor-Komponenten](xref:blazor/components)`@code` über `@func
 
 ::: moniker-end
 
-Zum Beispiel:
+Beispiel:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -639,7 +639,7 @@ Razor macht eine `Model`-Eigenschaft für den Zugriff auf das an die Ansicht üb
 <div>The Login Email: @Model.Email</div>
 ```
 
-Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung legt das `T` in `RazorPage<T>` der generierten Klasse fest, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [stark typisierte Modelle und @model das Schlüsselwort](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
+Die `@model`-Anweisung gibt den Typ der `Model`-Eigenschaft an. Die Anweisung legt das `T` in `RazorPage<T>` der generierten Klasse fest, von der die Ansicht abgeleitet wird. Wird die `@model`-Anweisung nicht angegeben, hat die `Model`-Eigenschaft den Typ `dynamic`. Weitere Informationen finden Sie unter [stark typisierte Modelle und das @model Schlüsselwort](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
 ### <a name="namespace"></a>\@namespace
 
@@ -714,6 +714,8 @@ In [Razor](xref:blazor/components)-Komponenten `@using` steuert auch, welche Kom
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="directive-attributes"></a>Direktivenattribute
+
+Razor-Direktivenattribute werden durch implizite Ausdrücke mit reservierten Schlüsselwörtern nach dem- `@` Symbol dargestellt. Ein direktivenattribut ändert in der Regel die Art und Weise, in der ein Element analysiert wird, oder unterstützt
 
 ### <a name="attributes"></a>\@attributes
 
@@ -889,21 +891,21 @@ Die folgenden drei Anweisungen gehören zu den [Taghilfsprogrammen](xref:mvc/vie
 ### <a name="razor-keywords"></a>RazorKeywords
 
 * page (erfordert ASP.NET Core 2.1 oder höher)
-* namespace
+* Namespace
 * functions
 * inherits
 * model
 * section
 * helper (wird derzeit nicht von ASP.NET Core unterstützt)
 
-RazorSchlüsselwörter werden mit `@(Razor Keyword)` Escapezeichen versehen `@(functions)`(z. b.).
+RazorSchlüsselwörter werden mit Escapezeichen versehen `@(Razor Keyword)` (z `@(functions)` . b.).
 
-### <a name="c-razor-keywords"></a>C# Razor -Schlüsselwörter
+### <a name="c-razor-keywords"></a>C#- Razor Schlüsselwörter
 
 * case
 * do
 * default
-* for
+* für
 * foreach
 * if
 * else
@@ -915,19 +917,19 @@ RazorSchlüsselwörter werden mit `@(Razor Keyword)` Escapezeichen versehen `@(f
 * using
 * while
 
-C# Razor -Schlüsselwörter müssen mit `@(@C# Razor Keyword)` einem doppelten Escapezeichen versehen `@(@case)`werden (z. b.). Der erste `@` schützt den Razor Parser. Das zweite `@` dient als Escapezeichen für den C#-Parser.
+C# Razor -Schlüsselwörter müssen mit einem doppelten Escapezeichen versehen werden `@(@C# Razor Keyword)` (z `@(@case)` . b.). Der erste schützt `@` den Razor Parser. Das zweite `@` dient als Escapezeichen für den C#-Parser.
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>Reservierte Schlüsselwörter werden von nicht verwendetRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Überprüfen Razor der für eine Sicht generierten c#-Klasse
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Überprüfen der Razor für eine Sicht generierten c#-Klasse
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Bei .net Core SDK 2,1 oder höher übernimmt das [ Razor SDK](xref:razor-pages/sdk) die Kompilierung Razor von Dateien. Beim Entwickeln eines Projekts generiert das Razor SDK eine *obj/<build_configuration>/<target_framework_moniker>/Razor * Verzeichnis im Stammverzeichnis des Projekts. Die Verzeichnisstruktur im *Razor* Verzeichnis spiegelt die Verzeichnisstruktur des Projekts wider.
+Bei .net Core SDK 2,1 oder höher übernimmt das [ Razor SDK](xref:razor-pages/sdk) die Kompilierung von Razor Dateien. Beim Entwickeln eines Projekts generiert das Razor SDK eine *obj/<build_configuration>/<target_framework_moniker>/ Razor * Verzeichnis im Stammverzeichnis des Projekts. Die Verzeichnisstruktur im *Razor* Verzeichnis spiegelt die Verzeichnisstruktur des Projekts wider.
 
-Sehen Sie sich die folgende Verzeichnisstruktur in einem Razor ASP.net Core 2,1 pages-Projekt an, das auf .net Core 2,1 abzielt:
+Sehen Sie sich die folgende Verzeichnisstruktur in einem ASP.net Core 2,1 pages-Projekt an, das auf Razor .net Core 2,1 abzielt:
 
 * **Felder**
   * **Administrator**
@@ -959,7 +961,7 @@ Wenn Sie das Projekt mit der Konfiguration zum *Debuggen* erstellen, wird folgen
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-Öffnen Sie *obj/Debug/netcoreapp 2.1/Razor/pages/index.g.cshtml.cs*, um die generierte Klasse für *pages/index. cshtml*anzuzeigen.
+Öffnen Sie *obj/Debug/netcoreapp 2.1/ Razor /pages/index.g.cshtml.cs*, um die generierte Klasse für *pages/index. cshtml*anzuzeigen.
 
 ::: moniker-end
 
@@ -997,4 +999,4 @@ Durch Überprüfung der Groß-/Kleinschreibung wird sichergestellt, dass die ent
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-[Einführung in die ASP.net-Webprogrammierung Razor mit der-Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) bietet viele Beispiele Razor für die Programmierung mit Syntax.
+[Einführung in ASP.net-Webprogrammierung mithilfe Razor von Die Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) bietet viele Beispiele für die Programmierung mit Razor Syntax.

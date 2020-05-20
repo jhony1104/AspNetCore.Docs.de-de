@@ -1,32 +1,16 @@
 ---
-title: BlazorZusätzliche Sicherheitsszenarien für ASP.net Core Webassembly
-author: guardrex
-description: Erfahren Sie, wie Sie Blazor Webassembly für zusätzliche Sicherheitsszenarien konfigurieren.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: d460f65e996f1f77136a426b03d6eb548d9e309e
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153478"
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.net Core blazor Webassembly zusätzliche Sicherheitsszenarien
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>BlazorZusätzliche Sicherheitsszenarien für ASP.net Core Webassembly
 
 Von [Javier Calvarro Nelson](https://github.com/javiercn)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Anfügen von Token an ausgehende Anforderungen
 
@@ -52,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Zur einfacheren Verwendung `BaseAddressAuthorizationMessageHandler` ist ein enthalten, das mit der APP-Basisadresse als autorisierte URL vorkonfiguriert ist. Die Authentifizierungs fähigen blazor-webassemblyvorlagen verwenden nun <xref:System.Net.Http.IHttpClientFactory> im Server-API-Projekt, um eine <xref:System.Net.Http.HttpClient> mit dem einzurichten `BaseAddressAuthorizationMessageHandler` :
+Zur einfacheren Verwendung `BaseAddressAuthorizationMessageHandler` ist ein enthalten, das mit der APP-Basisadresse als autorisierte URL vorkonfiguriert ist. Die Authentifizierungs fähigen Blazor webassemblyvorlagen verwenden nun <xref:System.Net.Http.IHttpClientFactory> im Server-API-Projekt, um eine <xref:System.Net.Http.HttpClient> mit dem einzurichten `BaseAddressAuthorizationMessageHandler` :
 
 ```csharp
 using System.Net.Http;
@@ -72,7 +56,7 @@ Wenn der Client `CreateClient` im vorherigen Beispiel mit erstellt wird, werden 
 
 Der konfigurierte <xref:System.Net.Http.HttpClient> wird dann verwendet, um autorisierte Anforderungen mit einem einfachen Muster zu erstellen `try-catch` .
 
-`FetchData`Komponente (*pages/fetchdata. Razor*):
+`FetchData`-Komponente (*Pages/FetchData.razor*):
 
 ```csharp
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -94,7 +78,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="typed-httpclient"></a>Typisierter httpclient
+## <a name="typed-httpclient"></a>Typisierte HttpClient-Instanz
 
 Ein typisierter Client kann definiert werden, der alle Probleme mit der HTTP-und tokenübernahme innerhalb einer einzelnen Klasse behandelt.
 
@@ -135,7 +119,7 @@ public class WeatherForecastClient
 }
 ```
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 using System.Net.Http;
@@ -148,7 +132,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-`FetchData`Komponente (*pages/fetchdata. Razor*):
+`FetchData`-Komponente (*Pages/FetchData.razor*):
 
 ```razor
 @inject WeatherForecastClient Client
@@ -165,7 +149,7 @@ protected override async Task OnInitializedAsync()
 
 Der Handler kann für ausgehende HTTP-Anforderungen weiter konfiguriert werden <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> .
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -176,9 +160,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>Nicht authentifizierte oder nicht autorisierte Web-API-Anforderungen in einer APP mit einem sicheren Standard Client
 
-Wenn die blazor Webassembly-App normalerweise einen sicheren Standardwert verwendet <xref:System.Net.Http.HttpClient> , kann die APP auch nicht authentifizierte oder nicht autorisierte Web-API-Anforderungen erstellen, indem Sie einen mit dem Namen konfiguriert <xref:System.Net.Http.HttpClient> :
+Wenn die Blazor Webassembly-App normalerweise einen sicheren Standardwert verwendet <xref:System.Net.Http.HttpClient> , kann die APP auch nicht authentifizierte oder nicht autorisierte Web-API-Anforderungen erstellen, indem eine mit dem Namen konfiguriert wird <xref:System.Net.Http.HttpClient> :
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
@@ -216,7 +200,7 @@ Zugriffs Token können manuell abgerufen werden, indem aufgerufen wird `IAccessT
 
 Im folgenden Beispiel werden zusätzliche Azure Active Directory-Microsoft Graph-API-Bereiche (AAD) für eine APP benötigt, um Benutzerdaten zu lesen und e-Mails zu senden. Nachdem Sie die Berechtigungen für die Microsoft Graph-API im Azure Aad-Portal hinzugefügt haben, werden die zusätzlichen Bereiche in der Client-App konfiguriert.
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -232,7 +216,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 Die- `IAccessTokenProvider.RequestToken` Methode stellt eine Überladung bereit, die es einer App ermöglicht, ein Zugriffs Token mit einem bestimmten Satz von Bereichen bereitzustellen.
 
-In einer Razor-Komponente:
+In einer- Razor Komponente:
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -260,7 +244,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient und HttpRequestMessage mit Fetch-API-Anforderungsoptionen
 
-Beim Ausführen von webassemblys in einer blazor Webassembly-App können Sie [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage> zum Anpassen von Anforderungen verwenden. Beispielsweise können Sie die HTTP-Methode und die Anforderungs Header angeben. Die folgende Komponente sendet eine `POST` Anforderung an einen API-Endpunkt der Aufgabenliste auf dem Server und zeigt den Antworttext an:
+Beim Ausführen von Blazor webassemblys in einer webassemblyapp können Sie mithilfe von [HttpClient](xref:fundamentals/http-requests) und <xref:System.Net.Http.HttpRequestMessage> Anforderungen anpassen. Beispielsweise können Sie die HTTP-Methode und die Anforderungs Header angeben. Die folgende Komponente sendet eine `POST` Anforderung an einen API-Endpunkt der Aufgabenliste auf dem Server und zeigt den Antworttext an:
 
 ```razor
 @page "/todorequest"
@@ -327,15 +311,235 @@ Die .NET-WebAssembly-Implementierung von `HttpClient` verwendet [WindowOrWorkerG
 HTTP FETCH-Anforderungsoptionen können mit `HttpRequestMessage`-Erweiterungsmethoden konfiguriert werden, die in der folgenden Tabelle aufgeführt sind.
 
 | `HttpRequestMessage`-Erweiterungsmethode | FETCH-Anforderungseigenschaft |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [integrity](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| ---
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+------------------- | ---Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheitsszenarien konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+----------- | | `SetBrowserRequestCredentials`         |  [Anmelde](https://developer.mozilla.org/docs/Web/API/Request/credentials) Informationen | | `SetBrowserRequestCache`               |  [Cache](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`                |  [Modus](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           |  [Integrität](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
 Sie können weitere Optionen mithilfe der allgemeineren `SetBrowserRequestOption`-Erweiterungsmethode festlegen.
  
-Die HTTP-Antwort wird in der Regel in einer blazor Webassembly-App gepuffert, um die Unterstützung für Synchronisierungs Lesevorgänge im Antwort Inhalt zu aktivieren Um Unterstützung für Streaming von Antworten zu aktivieren, verwenden Sie die `SetBrowserResponseStreamingEnabled`-Erweiterungsmethode für die Anforderung.
+Die HTTP-Antwort wird in der Regel in einer Blazor-WebAssembly-App gepuffert, um Unterstützung für Synchronisierungslesevorgänge im Antwortinhalt zu aktivieren. Um Unterstützung für Streaming von Antworten zu aktivieren, verwenden Sie die `SetBrowserResponseStreamingEnabled`-Erweiterungsmethode für die Anforderung.
 
 Wenn Sie Anmeldeinformationen in eine ursprungsübergreifende Anforderung einschließen möchten, verwenden Sie die `SetBrowserRequestCredentials`-Erweiterungsmethode:
 
@@ -366,7 +570,7 @@ Weitere Informationen finden Sie unter <xref:security/cors> und unter der HTTP-A
 
 ## <a name="handle-token-request-errors"></a>Behandeln von tokenanforderungs-Fehlern
 
-Wenn eine Single-Page-Anwendung (Single-Page Application, Spa) einen Benutzer mithilfe von Open ID Connect (oidc) authentifiziert, wird der Authentifizierungs Status lokal innerhalb der Spa und im Identitäts Anbieter (IP) in Form eines Sitzungs Cookies verwaltet, das als Ergebnis des Benutzers festgelegt wird, der seine Anmelde Informationen bereitstellt.
+Wenn eine Single-Page-Anwendung (Single-Page Application, Spa) einen Benutzer mithilfe von Open ID Connect (oidc) authentifiziert, wird der Authentifizierungs Status lokal innerhalb der Spa und im Identity Anbieter (IP) in Form eines Sitzungs Cookies verwaltet, das als Ergebnis des Benutzers festgelegt wird, der seine Anmelde Informationen bereitstellt.
 
 Die Token, die die IP-Adresse für den Benutzer ausgibt, sind in der Regel für kurze Zeiträume (etwa eine Stunde normal) gültig, sodass die Client-App regelmäßig neue Token abrufen muss. Andernfalls wird der Benutzer nach Ablauf der gewährten Token abgemeldet. In den meisten Fällen sind die oidc-Clients in der Lage, neue Token bereitzustellen, ohne dass sich der Benutzer aufgrund des Authentifizierungs Zustands oder der Sitzung innerhalb der IP-Adresse erneut authentifizieren muss.
 
@@ -507,16 +711,141 @@ Während eines Authentifizierungs Vorgangs sollten Sie den App-Status speichern,
 Standardmäßig verwendet die `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Bibliothek die Routen, die in der folgenden Tabelle aufgeführt sind, zum Darstellen verschiedener Authentifizierungs Zustände.
 
 | Route                            | Zweck |
-| -------------------------------- | ------- |
-| `authentication/login`           | Löst einen Anmeldevorgang aus. |
-| `authentication/login-callback`  | Behandelt das Ergebnis eines beliebigen Anmeldevorgangs. |
-| `authentication/login-failed`    | Zeigt Fehlermeldungen an, wenn der Anmeldevorgang aus irgendeinem Grund fehlschlägt. |
-| `authentication/logout`          | Löst einen Abmeldevorgang aus. |
-| `authentication/logout-callback` | Behandelt das Ergebnis eines Abmelde Vorgangs. |
-| `authentication/logout-failed`   | Zeigt Fehlermeldungen an, wenn der Abmeldevorgang aus irgendeinem Grund fehlschlägt. |
-| `authentication/logged-out`      | Gibt an, dass der Benutzer sich erfolgreich abgemeldet hat. |
-| `authentication/profile`         | Löst einen Vorgang aus, um das Benutzerprofil zu bearbeiten. |
-| `authentication/register`        | Löst einen Vorgang aus, um einen neuen Benutzer zu registrieren. |
+| ---
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+---------------- | ---Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheitsszenarien konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+---- | | `authentication/login`           | Löst einen Anmeldevorgang aus. | | `authentication/login-callback`  | Behandelt das Ergebnis eines beliebigen Anmeldevorgangs. | | `authentication/login-failed`    | Zeigt Fehlermeldungen an, wenn der Anmeldevorgang aus irgendeinem Grund fehlschlägt. | | `authentication/logout`          | Löst einen Abmeldevorgang aus. | | `authentication/logout-callback` | Behandelt das Ergebnis eines Abmelde Vorgangs. | | `authentication/logout-failed`   | Zeigt Fehlermeldungen an, wenn der Abmeldevorgang aus irgendeinem Grund fehlschlägt. | | `authentication/logged-out`      | Gibt an, dass der Benutzer sich erfolgreich abgemeldet hat. | | `authentication/profile`         | Löst einen Vorgang aus, um das Benutzerprofil zu bearbeiten. | | `authentication/register`        | Löst einen Vorgang aus, um einen neuen Benutzer zu registrieren. |
 
 Die in der vorangehenden Tabelle gezeigten Routen können über konfiguriert werden `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` . Wenn Sie Optionen zum Bereitstellen benutzerdefinierter Routen festlegen, vergewissern Sie sich, dass die APP über eine Route verfügt, die die einzelnen Pfade verarbeitet
 
@@ -536,7 +865,7 @@ Im folgenden Beispiel wird allen Pfaden ein Präfix vorangestellt `/security` .
 }
 ```
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -587,16 +916,213 @@ Wenn Sie sich dafür entscheiden, können Sie die Benutzeroberfläche in verschi
 Der `RemoteAuthenticatorView` verfügt über ein Fragment, das in der folgenden Tabelle pro Authentifizierungs Route verwendet werden kann.
 
 | Route                            | Fragment                |
-| -------------------------------- | ----------------------- |
-| `authentication/login`           | `<LoggingIn>`           |
-| `authentication/login-callback`  | `<CompletingLoggingIn>` |
-| `authentication/login-failed`    | `<LogInFailed>`         |
-| `authentication/logout`          | `<LogOut>`              |
-| `authentication/logout-callback` | `<CompletingLogOut>`    |
-| `authentication/logout-failed`   | `<LogOutFailed>`        |
-| `authentication/logged-out`      | `<LogOutSucceeded>`     |
-| `authentication/profile`         | `<UserProfile>`         |
-| `authentication/register`        | `<Registering>`         |
+| ---
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+---------------- | ---Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheitsszenarien konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: "ASP.net Core Blazor Webassembly zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Blazor Webassembly für zusätzliche Sicherheits Szenarios konfiguriert wird."
+monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
 
 ## <a name="customize-the-user"></a>Benutzer anpassen
 
@@ -829,3 +1355,31 @@ Obwohl für diesen Ansatz ein zusätzlicher Netzwerkhop auf dem Server erforderl
 
 * Der Server kann Aktualisierungstokens speichern und dafür sorgen, dass die App nicht den Zugriff auf Drittanbieterressourcen verliert.
 * Die App kann Zugriffstokens auf dem Server nicht unberechtigterweise veröffentlichen, für den Berechtigungen mit noch höherer Vertraulichkeit erforderlich sind.
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Verwenden von Open ID Connect (oidc) v 2.0-Endpunkten
+
+In der Authentifizierungs Bibliothek und in den Vorlagen werden die Blazor Endpunkte von Open ID Connect (oidc) v 1.0 verwendet. Um einen v 2.0-Endpunkt zu verwenden, konfigurieren Sie die Option JWT-Träger <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> . Im folgenden Beispiel wird Aad für v 2.0 konfiguriert, indem ein `v2.0` Segment an die-Eigenschaft angehängt wird `Authority` :
+
+```csharp
+builder.Services.Configure<JwtBearerOptions>(
+    AzureADDefaults.JwtBearerAuthenticationScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    });
+```
+
+Alternativ kann die Einstellung in der APP-Einstellungsdatei (*appSettings. JSON*) vorgenommen werden:
+
+```json
+{
+  "Local": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+Wenn das über ein Segment an die Autorität nicht für den oidc-Anbieter der APP geeignet ist, z. b. bei nicht-Aad-Anbietern, legen Sie die- `Authority` Eigenschaft direkt fest. Legen Sie die-Eigenschaft entweder in `JwtBearerOptions` oder in der APP-Einstellungsdatei mit dem `Authority` Schlüssel fest.
+
+Die Liste der Ansprüche im ID-Token ändert sich für v 2.0-Endpunkte. Weitere Informationen finden Sie unter [Gründe für die Aktualisierung auf Microsoft Identity Platform (v 2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).

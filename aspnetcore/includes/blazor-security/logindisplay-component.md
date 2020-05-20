@@ -14,7 +14,7 @@ Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLa
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@ Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLa
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");

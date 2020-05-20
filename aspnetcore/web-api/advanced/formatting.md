@@ -1,23 +1,11 @@
 ---
-title: Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
-author: ardalis
-description: Informationen zum Formatieren von Antwortdaten in Web-APIS in ASP.NET Core
-ms.author: riande
-ms.custom: H1Hack27Feb2017
-ms.date: 04/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/advanced/formatting
-ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774235"
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -155,7 +143,7 @@ public IActionResult Get()
 
 ### <a name="add-newtonsoftjson-based-json-format-support"></a>Hinzufügen von Newtonsoft.Json-basierter Unterstützung für das JSON-Format
 
-Vor ASP.NET Core 3.0 wurden standardmäßig die JSON-Formatierer verwendet, die mithilfe des `Newtonsoft.Json`-Pakets implementiert wurden. In ASP.NET Core 3.0 oder höher basieren die Standardformatierer für JSON auf `System.Text.Json`. Sie erhalten Unterstützung für `Newtonsoft.Json`-basierte Formatierer und Features, indem Sie das NuGet-Paket [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) installieren und in `Startup.ConfigureServices` konfigurieren.
+Vor ASP.NET Core 3.0 wurden standardmäßig die JSON-Formatierer verwendet, die mithilfe des `Newtonsoft.Json`-Pakets implementiert wurden. In ASP.NET Core 3.0 oder höher basieren die Standardformatierer für JSON auf `System.Text.Json`. Unterstützung für `Newtonsoft.Json` basierte Formatierer und Features ist verfügbar, indem [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) Sie das nuget-Paket installieren und in konfigurieren `Startup.ConfigureServices` .
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
 
@@ -212,7 +200,7 @@ Bei Verwendung dieses Codes sollten Controllermethoden das geeignete Format basi
 
 ### <a name="specify-a-format"></a>Angeben eines Formats
 
-Um die Antwortformate einzuschränken, wenden Sie [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) den Filter an. Wie die [Filters](xref:mvc/controllers/filters)meisten Filter `[Produces]` können auch auf Aktion, Controller oder globaler Bereich angewendet werden:
+Um die Antwortformate einzuschränken, wenden Sie den [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) Filter an. Wie die [Filters](xref:mvc/controllers/filters)meisten Filter `[Produces]` können auch auf Aktion, Controller oder globaler Bereich angewendet werden:
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
@@ -252,10 +240,214 @@ Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die di
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) `RouteData` -Attribut überprüft das vorhanden sein des Format Werts im und ordnet das Antwortformat dem entsprechenden Formatierer zu, wenn die Antwort erstellt wird.
+Mit der oben genannten Route kann das angeforderte Format als optionale Dateierweiterung angegeben werden. Das [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) -Attribut überprüft das vorhanden sein des Format Werts im `RouteData` und ordnet das Antwortformat dem entsprechenden Formatierer zu, wenn die Antwort erstellt wird.
 
 |           Route        |             Formatierungsprogramm              |
-|------------------------|------------------------------------|
-|   `/api/products/5`    |    Standard-Ausgabeformatierungsprogramm    |
-| `/api/products/5.json` | JSON-Formatierungsprogramm (falls konfiguriert) |
-| `/api/products/5.xml`  | XML-Formatierungsprogramm (falls konfiguriert)  |
+|---
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+------------|---Titel: Author: Description: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+-
+Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' UID: 
+
+------------------| |   `/api/products/5`    |    Der standardausgabeformatierer | | `/api/products/5.json` | Der JSON-Formatierer (sofern konfiguriert) | | `/api/products/5.xml`  | Der XML-Formatierer (sofern konfiguriert) |
