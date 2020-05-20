@@ -4,7 +4,7 @@
 
 Erstellen Sie einen Ordner *Data*.
 
-Fügen Sie dem Ordner `MvcMovieContext`Data *(Daten) die folgende*-Klasse hinzu:  
+Fügen Sie dem Ordner *Data* (Daten) die folgende `MvcMovieContext`-Klasse hinzu:  
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
 
@@ -26,7 +26,7 @@ Fügen Sie der Datei *appsettings.json* eine Verbindungszeichenfolge hinzu:
 
 ### <a name="register-the-database-context"></a>Registrieren des Datenbankkontexts
 
-Fügen Sie am Anfang der Datei `using`Startup.cs*die folgenden*-Anweisungen ein.
+Fügen Sie am Anfang der Datei *Startup.cs* die folgenden `using`-Anweisungen ein.
 
 ```csharp
 using MvcMovie.Data;
@@ -43,7 +43,7 @@ Erstellen Sie das Projekt, um zu ermitteln, ob Compilerfehler vorliegen.
 
 ::: moniker range="< aspnetcore-3.0"
 
-Fügen Sie dem Ordner `MvcMovieContext`Models*die folgende*-Klasse hinzu:  
+Fügen Sie dem Ordner *Models* die folgende `MvcMovieContext`-Klasse hinzu:  
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Data/MvcMovieContext.cs)]
 
@@ -72,7 +72,7 @@ Das `Microsoft.VisualStudio.Web.CodeGeneration.Design`-Paket wird für den Gerü
 
 ### <a name="register-the-database-context"></a>Registrieren des Datenbankkontexts
 
-Fügen Sie am Anfang der Datei `using`Startup.cs*die folgenden*-Anweisungen ein.
+Fügen Sie am Anfang der Datei *Startup.cs* die folgenden `using`-Anweisungen ein.
 
 ```csharp
 using MvcMovie.Models;
