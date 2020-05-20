@@ -1,9 +1,9 @@
-<span data-ttu-id="7260f-101">Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLayout` Komponente (*Shared/MainLayout. Razor*) gerendert und verwaltet die folgenden Verhaltensweisen:</span><span class="sxs-lookup"><span data-stu-id="7260f-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
+<span data-ttu-id="3b209-101">Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLayout` Komponente (*Shared/MainLayout. Razor*) gerendert und verwaltet die folgenden Verhaltensweisen:</span><span class="sxs-lookup"><span data-stu-id="3b209-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
 
-* <span data-ttu-id="7260f-102">Für authentifizierte Benutzer:</span><span class="sxs-lookup"><span data-stu-id="7260f-102">For authenticated users:</span></span>
-  * <span data-ttu-id="7260f-103">Zeigt den aktuellen Benutzernamen an.</span><span class="sxs-lookup"><span data-stu-id="7260f-103">Displays the current username.</span></span>
-  * <span data-ttu-id="7260f-104">Bietet eine Schaltfläche, um sich von der APP abzumelden.</span><span class="sxs-lookup"><span data-stu-id="7260f-104">Offers a button to log out of the app.</span></span>
-* <span data-ttu-id="7260f-105">Für anonyme Benutzer bietet die Option zum Anmelden.</span><span class="sxs-lookup"><span data-stu-id="7260f-105">For anonymous users, offers the option to log in.</span></span>
+* <span data-ttu-id="3b209-102">Für authentifizierte Benutzer:</span><span class="sxs-lookup"><span data-stu-id="3b209-102">For authenticated users:</span></span>
+  * <span data-ttu-id="3b209-103">Zeigt den aktuellen Benutzernamen an.</span><span class="sxs-lookup"><span data-stu-id="3b209-103">Displays the current username.</span></span>
+  * <span data-ttu-id="3b209-104">Bietet eine Schaltfläche, um sich von der APP abzumelden.</span><span class="sxs-lookup"><span data-stu-id="3b209-104">Offers a button to log out of the app.</span></span>
+* <span data-ttu-id="3b209-105">Für anonyme Benutzer bietet die Option zum Anmelden.</span><span class="sxs-lookup"><span data-stu-id="3b209-105">For anonymous users, offers the option to log in.</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -14,7 +14,7 @@
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
