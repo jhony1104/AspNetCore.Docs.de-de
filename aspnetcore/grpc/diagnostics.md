@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 15f68ced99bdaea9ce53db801a4b2a3bfef2f8dd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 33b2ee29830cd3012ff791c949c3a7c23a2e98c7
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774677"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444346"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Protokollierung und Diagnosen in gRPC für .NET
 
@@ -83,7 +83,7 @@ Wie Sie auf serverseitige Protokolle zugreifen können, hängt von der Ausführu
 
 #### <a name="as-a-console-app"></a>Ausführung als Konsolen-App
 
-Wenn die Ausführung in einer Konsolen-App stattfindet, sollte die [Konsolenprotokollierung](xref:fundamentals/logging/index#console-provider) standardmäßig aktiviert sein. gRPC-Protokolle werden in der Konsole angezeigt.
+Wenn die Ausführung in einer Konsolen-App stattfindet, sollte die [Konsolenprotokollierung](xref:fundamentals/logging/index#console) standardmäßig aktiviert sein. gRPC-Protokolle werden in der Konsole angezeigt.
 
 #### <a name="other-environments"></a>Andere Umgebungen
 

@@ -4,7 +4,7 @@ Title: "Sichern einer Blazor eigenständigen App mit ASP.net Core Webassembly mi
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
@@ -19,7 +19,7 @@ Registrieren Sie eine Aad-App im **Azure Active Directory**  >  **App-Registrier
 
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor eigenständige Aad-Microsoft-Konten**).
 1. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.
-1. Belassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web**und geben Sie den folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` an: Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Bei IIS Express befindet sich der zufällig generierte Port in den Eigenschaften der APP im **Debug** -Panel.
+1. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web** fest, und geben Sie folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Wenn die APP auf einem anderen Kestrel-Port ausgeführt wird, verwenden Sie den Port der app. Für IIS Express befindet sich der zufällig generierte Port für die app in den Eigenschaften der APP im **Debug** -Panel. Da die APP zu diesem Zeitpunkt noch nicht vorhanden ist und der IIS Express Port nicht bekannt ist, kehren Sie zu diesem Schritt zurück, nachdem die App erstellt wurde, und aktualisieren Sie den Umleitungs-URI. Eine Anmerkung wird später in diesem Thema angezeigt, um IIS Express Benutzer daran zu erinnern, den Umleitungs-URI zu aktualisieren.
 1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .
 1. Wählen Sie **Registrieren** aus.
 
@@ -40,10 +40,17 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "commo
 
 Um den Ausgabe Speicherort anzugeben, der einen Projektordner erstellt, wenn er nicht vorhanden ist, schließen Sie die Output-Option in den Befehl mit einem Pfad (z `-o BlazorSample` . b.) ein. Der Name des Ordners wird auch Teil des Projekt namens.
 
+> [!NOTE]
+> Im Azure-Portal wird der **Authentication**  >  **Platform configurations**  >  **webumleitungs**-URI der Authentifizierungsplattform der APP  >  **Redirect URI** für apps, die auf dem Kestrel-Server mit Standardeinstellungen ausgeführt werden, für Port 5001 konfiguriert.
+>
+> Wenn die APP auf einem zufälligen IIS Express Port ausgeführt wird, finden Sie den Port für die app in den Eigenschaften der APP im **Debug** -Panel.
+>
+> Wenn der Port nicht zuvor mit dem bekannten Port der App konfiguriert wurde, kehren Sie zur Registrierung der APP im Azure-Portal zurück, und aktualisieren Sie den Umleitungs-URI mit dem richtigen Port.
+
 Nachdem Sie die App erstellt haben, sollten Sie folgende Aktionen ausführen können:
 
 * Melden Sie sich mit einem Microsoft-Konto bei der APP an.
-* Anfordern von Zugriffs Token für Microsoft-APIs. Weitere Informationen finden Sie unter
+* Anfordern von Zugriffs Token für Microsoft-APIs. Weitere Informationen finden Sie unter:
   * [Zugriffs Token-Bereiche](#access-token-scopes)
   * [Schnellstart: Konfigurieren einer Anwendung für die Bereitstellung von Web-APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 

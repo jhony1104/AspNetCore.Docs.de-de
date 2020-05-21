@@ -4,7 +4,7 @@ Title: "Secure an ASP.net Core Blazor Webassembly hosted App with Azure Active D
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory B2C
@@ -63,7 +63,7 @@ Befolgen Sie die Anweisungen im [Tutorial: Registrieren einer Anwendung in Azure
 1. Wählen Sie in **Azure Active Directory**  >  **App-Registrierungen**die Option **neue Registrierung**aus.
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad B2C**).
 1. Wählen Sie für **unterstützte Konto Typen**die Option für mehrere Mandanten aus: **Konten in einem beliebigen Organisations Verzeichnis oder einem beliebigen Identitäts Anbieter. Zum Authentifizieren von Benutzern mit Azure AD B2C.**
-1. Belassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web**und geben Sie den folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` an: Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Für IIS Express befindet sich der zufällig generierte Port in den Eigenschaften der Server-App im **Debug** -Panel.
+1. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web** fest, und geben Sie folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Wenn die APP auf einem anderen Kestrel-Port ausgeführt wird, verwenden Sie den Port der app. Für IIS Express befindet sich der zufällig generierte Port für die app in den Eigenschaften der Server-App im **Debug** -Panel. Da die APP zu diesem Zeitpunkt noch nicht vorhanden ist und der IIS Express Port nicht bekannt ist, kehren Sie zu diesem Schritt zurück, nachdem die App erstellt wurde, und aktualisieren Sie den Umleitungs-URI. Eine Anmerkung wird im Abschnitt [Erstellen der APP](#create-the-app) angezeigt, um IIS Express Benutzer daran zu erinnern, den Umleitungs-URI zu aktualisieren.
 1. Vergewissern Sie sich **, dass die Berechtigungen**  >  **admin keine Zustimmung für OpenID und offline_access Berechtigungen gewähren** aktiviert ist.
 1. Wählen Sie **Registrieren** aus.
 
@@ -108,6 +108,13 @@ Um den Ausgabe Speicherort anzugeben, der einen Projektordner erstellt, wenn er 
 >
 > Darüber hinaus wird für den von der gehosteten Blazor Vorlage eingerichteten Bereich möglicherweise der APP-ID-URI-Host wiederholt. Vergewissern Sie sich, dass der für die Sammlung konfigurierte Bereich `DefaultAccessTokenScopes` in `Program.Main` (*Program.cs*) der *Client-App*richtig ist.
 
+> [!NOTE]
+> Im Azure-Portal wird der **Authentication**webumleitungs-URI der Authentifizierung der *Client-App*  >  **Platform configurations**  >  **Web**  >  **Redirect URI** für apps, die auf dem Kestrel-Server mit Standardeinstellungen ausgeführt werden, für Port 5001 konfiguriert.
+>
+> Wenn die *Client-App* auf einem zufälligen IIS Express Port ausgeführt wird, finden Sie den Port für die app in den Eigenschaften der *Server-App* im **Debug** -Panel.
+>
+> Wenn der Port nicht zuvor mit dem bekannten Port der *Client-App* konfiguriert wurde, kehren Sie zur Registrierung der *Client-App* in der Azure-Portal zurück, und aktualisieren Sie den Umleitungs-URI mit dem richtigen Port.
+
 ## <a name="server-app-configuration"></a>Server-App-Konfiguration
 
 *Dieser Abschnitt bezieht sich auf die **Server** -App der Lösung.*
@@ -118,7 +125,7 @@ Die Unterstützung für das Authentifizieren und autorialisieren von Aufrufen vo
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
-  Version="3.2.0" />
+  Version="3.1.4" />
 ```
 
 ### <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienst
