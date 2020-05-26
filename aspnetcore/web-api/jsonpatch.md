@@ -4,7 +4,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ---
 
@@ -101,7 +101,7 @@ Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekt
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Bis `add` zum Ende eines Arrays verwenden Sie einen Bindestrich ( `-` ) anstelle einer Indexnummer: `/addresses/-` .
 
-### <a name="operations"></a>Operationen (Operations)
+### <a name="operations"></a>Operations
 
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
@@ -112,7 +112,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -120,7 +120,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -128,7 +128,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ------|---
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -136,7 +136,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -144,7 +144,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -152,7 +152,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -160,7 +160,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -168,7 +168,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -176,7 +176,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -184,7 +184,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -192,7 +192,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -200,7 +200,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -208,7 +208,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -216,7 +216,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -224,7 +224,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -232,7 +232,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -240,7 +240,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ----------------| | `add`     | Fügen Sie eine Eigenschaft oder ein Array Element hinzu. Für vorhandene Eigenschaft: Wert festlegen. | | `remove`  | Entfernen Sie eine Eigenschaft oder ein Array Element. | | `replace` | Identisch mit `remove` gefolgt von `add` am gleichen Speicherort. | | `move`    | Identisch `remove` mit der Quelle, gefolgt von `add` zum Ziel, wobei der Wert aus der Quelle verwendet wird. | | `copy`    | Identisch `add` mit dem Ziel mit dem Wert aus der Quelle. | | `test`    | Rückgabe des Erfolgsstatus Codes, wenn der Wert bei `path` = bereitgestellt wird `value` . |
 
@@ -443,7 +443,7 @@ Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekt
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Zum `add` ans Ende eines Arrays verwenden Sie einen Bindestrich (-) anstelle einer Indexnummer: `/addresses/-`.
 
-### <a name="operations"></a>Operationen (Operations)
+### <a name="operations"></a>Operations
 
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
@@ -454,7 +454,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -462,7 +462,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -470,7 +470,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ------|---
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -478,7 +478,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -486,7 +486,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -494,7 +494,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -502,7 +502,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -510,7 +510,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -518,7 +518,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -526,7 +526,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -534,7 +534,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -542,7 +542,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -550,7 +550,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -558,7 +558,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -566,7 +566,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -574,7 +574,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 -
 Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
@@ -582,7 +582,7 @@ Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ----------------| | `add`     | Fügen Sie eine Eigenschaft oder ein Array Element hinzu. Für vorhandene Eigenschaft: Wert festlegen. | | `remove`  | Entfernen Sie eine Eigenschaft oder ein Array Element. | | `replace` | Identisch mit `remove` gefolgt von `add` am gleichen Speicherort. | | `move`    | Identisch `remove` mit der Quelle, gefolgt von `add` zum Ziel, wobei der Wert aus der Quelle verwendet wird. | | `copy`    | Identisch `add` mit dem Ziel mit dem Wert aus der Quelle. | | `test`    | Rückgabe des Erfolgsstatus Codes, wenn der Wert bei `path` = bereitgestellt wird `value` . |
 
