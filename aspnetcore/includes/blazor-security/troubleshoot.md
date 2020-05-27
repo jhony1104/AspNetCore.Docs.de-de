@@ -30,5 +30,9 @@ Ein Ansatz, um zu verhindern, dass veraltete Cookies und Standortdaten das Teste
 Stellen Sie beim Testen und Beheben von Problemen bei einer gehosteten blazor-App sicher, dass Sie die APP aus dem **Server** Projekt ausführen. Vergewissern Sie sich z. b. in Visual Studio, dass das Server Projekt in **Projektmappen-Explorer** hervorgehoben wird, bevor Sie die APP mit einem der folgenden Ansätze starten:
 
 * Wählen Sie die Schaltfläche **Ausführen**.
-*  > Verwenden **Sie**Debuggen**Debuggen starten** im Menü.
+* Verwenden **Sie**  >  **Debuggen Debuggen starten** im Menü.
 * Drücken Sie <kbd>F5</kbd>.
+
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>Überprüfen des Inhalts eines JSON Web Token (JWT)
+
+Zum Decodieren eines JSON Web Token (JWT) verwenden Sie das [JWT.ms](https://jwt.ms/) -Tool von Microsoft. Werte in der Benutzeroberfläche verlassen ihren Browser nie.

@@ -1,24 +1,12 @@
 ---
-title: BlazorZusätzliche Sicherheitsszenarien für ASP.net Core Server
-author: guardrex
-description: Erfahren Sie, wie Sie Blazor Server für zusätzliche Sicherheitsszenarien konfigurieren.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444073"
+Title: "ASP.net Core Blazor Server zusätzliche Sicherheits Szenarios" Author: Description: "erfahren Sie, wie Sie Blazor Server für zusätzliche Sicherheitsszenarien konfigurieren."
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorZusätzliche Sicherheitsszenarien für ASP.net Core Server
 
@@ -171,7 +159,7 @@ Alternativ kann die Einstellung in der APP-Einstellungsdatei (*appSettings. JSON
 }
 ```
 
-Wenn das über ein Segment an die Autorität nicht für den oidc-Anbieter der APP geeignet ist, z. b. bei nicht-Aad-Anbietern, legen Sie die- `Authority` Eigenschaft direkt fest. Legen Sie die-Eigenschaft entweder in <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> oder in der APP-Einstellungsdatei mit dem `Authority` Schlüssel fest.
+Wenn das über ein Segment an die Autorität nicht für den oidc-Anbieter der APP geeignet ist, z. b. bei nicht-Aad-Anbietern, legen Sie die- <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> Eigenschaft direkt fest. Legen Sie die-Eigenschaft entweder in <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> oder in der APP-Einstellungsdatei mit dem <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> Schlüssel fest.
 
 ### <a name="code-changes"></a>Änderungen am Code
 

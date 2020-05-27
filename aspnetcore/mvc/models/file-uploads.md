@@ -1,24 +1,11 @@
 ---
-title: Hochladen von Dateien in ASP.NET Core
-author: rick-anderson
-description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien in ASP.NET Core MVC
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/03/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/models/file-uploads
-ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976752"
+Title: Autor: Beschreibung: monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -42,7 +29,7 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort zum Hochladen Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige aufRazor der Benutzeroberfläche (Automatisches HTML-codieren der Ausgabe).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige auf der Benutzeroberfläche ( Razor Automatisches HTML-codieren der Ausgabe).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden. &dagger; Client seitige Überprüfungen können problemlos umgangen werden.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
@@ -119,7 +106,7 @@ Das Streamen großer Dateien wird im Abschnitt [Hochladen großer Dateien mit St
 
 Zum Hochladen kleiner Dateien können Sie ein mehrteiliges Formular verwenden oder über JavaScript eine POST-Anforderung erstellen.
 
-Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
+Das folgende Beispiel veranschaulicht die Verwendung eines Razor pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -189,7 +176,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Beispiel:
 
   ```javascript
   <script>
@@ -235,7 +222,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Sicherheitsüberlegungen](#security-considerations)
-> * [Validation](#validation)
+> * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
 
@@ -248,7 +235,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im Beispiel unten geschieht Folgendes:
+Im folgenden Beispiel:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -346,7 +333,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> kann wie oben dargestellt direkt als Parameter einer Aktionsmethode oder als gebundene Modelleigenschaft verwendet werden. Im vorherigen Beispiel wird eine gebundene Modelleigenschaft verwendet.
 
-Die `FileUpload` wird im Razor Seiten Format verwendet:
+Die `FileUpload` wird im Seiten Format verwendet Razor :
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -406,7 +393,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Sicherheitsüberlegungen](#security-considerations)
-> * [Validation](#validation)
+> * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
 
@@ -420,7 +407,7 @@ Das `DisableFormValueModelBindingAttribute` wird zum Deaktivieren der Modellbind
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-`GenerateAntiforgeryTokenCookieAttribute` In der Beispiel-App werden `DisableFormValueModelBindingAttribute` und als Filter auf die Seiten Anwendungsmodelle von und `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` der Verwendung [ Razor von Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
+In der Beispiel-APP `GenerateAntiforgeryTokenCookieAttribute` `DisableFormValueModelBindingAttribute` werden und als Filter auf die Seiten Anwendungsmodelle von `/StreamedSingleFileUploadDb` und in der Verwendung von `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
@@ -462,7 +449,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -520,7 +507,7 @@ Razorautomatisch HTML-codiert Eigenschaftswerte für die Anzeige. Der folgende C
 }
 ```
 
-Außerhalb von Razorist immer <xref:System.Net.WebUtility.HtmlEncode*> der Name Inhalt aus der Anforderung eines Benutzers.
+Außerhalb von Razor ist immer der <xref:System.Net.WebUtility.HtmlEncode*> Name Inhalt aus der Anforderung eines Benutzers.
 
 Bei vielen Implementierungen muss geprüft werden, ob die Datei existiert. Andernfalls wird die Datei durch eine gleichnamige Datei überschrieben. Stellen Sie zusätzliche Logik bereit, um die Vorgaben Ihrer App zu erfüllen.
 
@@ -563,7 +550,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Vergleichen des Werts des Namensattributs mit dem Parameternamen der POST-Methode
 
-In nicht-Razor Formularen, die Formulardaten veröffentlichen oder `FormData` direkt JavaScript verwenden, `FormData` muss der im-Element des Formulars angegebene Name dem Namen des Parameters in der Aktion des Controllers entsprechen.
+In nicht- Razor Formularen, die Formulardaten veröffentlichen oder direkt JavaScript verwenden `FormData` , muss der im-Element des Formulars angegebene Name dem `FormData` Namen des Parameters in der Aktion des Controllers entsprechen.
 
 Im folgenden Beispiel:
 
@@ -585,7 +572,7 @@ Im folgenden Beispiel:
 
 Verwenden Sie einen übereinstimmenden Namen für den Parameter der C#-Methode (`battlePlans`):
 
-* Für eine Razor Seiten Handler-Methode mit `Upload`dem Namen:
+* Für eine Razor Seiten Handler-Methode mit dem Namen `Upload` :
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -616,7 +603,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> dient zum Festlegen des <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> für eine einzelne Seite oder Aktion.
 
-Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
+Wenden Sie in einer Razor pages-App den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in an `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -633,7 +620,7 @@ services.AddRazorPages()
     });
 ```
 
-Wenden Sie Razor in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
+RazorWenden Sie in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
 
 ```csharp
 // Set the limit to 256 MB
@@ -651,20 +638,20 @@ Die maximale Größe des Anforderungstexts beträgt für von Kestrel gehostete A
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-        .ConfigureKestrel((context, options) =>
-        {
-            // Handle requests up to 50 MB
-            options.Limits.MaxRequestBodySize = 52428800;
-        })
         .ConfigureWebHostDefaults(webBuilder =>
         {
-            webBuilder.UseStartup<Startup>();
+            webBuilder.ConfigureKestrel((context, options) =>
+            {
+                // Handle requests up to 50 MB
+                options.Limits.MaxRequestBodySize = 52428800;
+            })
+            .UseStartup<Startup>();
         });
 ```
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> dient zum Festlegen von [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) für eine einzelne Seite oder Aktion.
 
-Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
+Wenden Sie in einer Razor pages-App den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in an `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -681,7 +668,7 @@ services.AddRazorPages()
     });
 ```
 
-Wenden Sie Razor den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
+RazorWenden Sie den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
 
 ```csharp
 // Handle requests up to 50 MB
@@ -692,7 +679,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-`RequestSizeLimitAttribute` Kann auch mit der [`@attribute`](xref:mvc/views/razor#attribute) Razor -Direktive angewendet werden:
+`RequestSizeLimitAttribute`Kann auch mit der- [`@attribute`](xref:mvc/views/razor#attribute) Razor Direktive angewendet werden:
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -771,7 +758,7 @@ Folgende Schritte können Sie dabei unterstützen, die Wahrscheinlichkeit eines 
 
 * Laden Sie Dateien in einen dedizierten Bereich zum Hochladen von Dateien hoch, vorzugsweise auf ein Nicht-Systemlaufwerk. Ein dedizierter Speicherort erleichtert es, Sicherheitsbeschränkungen für hochgeladene Dateien zu erzwingen. Deaktivieren Sie Ausführungsberechtigungen für den Speicherort zum Hochladen Dateien.&dagger;
 * Speichern Sie hochgeladene Dateien **nicht** persistent in der Verzeichnisstruktur, in der sich auch die App befindet.&dagger;
-* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige aufRazor der Benutzeroberfläche (Automatisches HTML-codieren der Ausgabe).
+* Wählen Sie einen sicheren von der App festgelegten Dateinamen. Verwenden Sie keinen Dateinamen, der vom Benutzer bereitgestellt wird, oder den nicht vertrauenswürdigen Dateinamen der hochgeladenen Datei. &dagger; Der HTML-Code codiert den nicht vertrauenswürdigen Dateinamen, wenn er angezeigt wird. Beispielsweise die Protokollierung des Datei namens oder die Anzeige auf der Benutzeroberfläche ( Razor Automatisches HTML-codieren der Ausgabe).
 * Lassen Sie nur genehmigte Dateierweiterungen für die Entwurfsspezifikation der App zu.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Überprüfen Sie, ob Client seitige Überprüfungen auf dem Server ausgeführt werden. &dagger; Client seitige Überprüfungen können problemlos umgangen werden.
 * Überprüfen Sie die Größe einer hochgeladenen Datei. Legen Sie einen Grenzwert für die maximale Größe fest, um große Uploads zu verhindern.&dagger;
@@ -848,7 +835,7 @@ Das Streamen großer Dateien wird im Abschnitt [Hochladen großer Dateien mit St
 
 Zum Hochladen kleiner Dateien können Sie ein mehrteiliges Formular verwenden oder über JavaScript eine POST-Anforderung erstellen.
 
-Das folgende Beispiel veranschaulicht die Verwendung eines Razor Pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
+Das folgende Beispiel veranschaulicht die Verwendung eines Razor pages-Formulars zum Hochladen einer einzelnen Datei (*pages/bufferedsinglefileuploadphysical. cshtml* in der Beispiel-APP):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -918,7 +905,7 @@ Das folgende Beispiel ist analog zum vorherigen Beispiel, mit der Ausnahme, dass
 Um den POST-Befehl für das Formular in JavaScript für Clients auszuführen, die [die Fetch-API nicht unterstützen](https://caniuse.com/#feat=fetch), wählen Sie einen der folgenden Ansätze:
 
 * Verwenden Sie Fetch Polyfill (Beispiel: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch)).
-* Verwenden Sie `XMLHttpRequest`. Zum Beispiel:
+* Verwenden Sie `XMLHttpRequest`. Beispiel:
 
   ```javascript
   <script>
@@ -964,7 +951,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Sicherheitsüberlegungen](#security-considerations)
-> * [Validation](#validation)
+> * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
 
@@ -977,7 +964,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im Beispiel unten geschieht Folgendes:
+Im folgenden Beispiel:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -1075,7 +1062,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> kann wie oben dargestellt direkt als Parameter einer Aktionsmethode oder als gebundene Modelleigenschaft verwendet werden. Im vorherigen Beispiel wird eine gebundene Modelleigenschaft verwendet.
 
-Die `FileUpload` wird im Razor Seiten Format verwendet:
+Die `FileUpload` wird im Seiten Format verwendet Razor :
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1135,7 +1122,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Sicherheitsüberlegungen](#security-considerations)
-> * [Validation](#validation)
+> * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
 
@@ -1149,7 +1136,7 @@ Das `DisableFormValueModelBindingAttribute` wird zum Deaktivieren der Modellbind
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-`GenerateAntiforgeryTokenCookieAttribute` In der Beispiel-App werden `DisableFormValueModelBindingAttribute` und als Filter auf die Seiten Anwendungsmodelle von und `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` in `Startup.ConfigureServices` der Verwendung [ Razor von Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
+In der Beispiel-APP `GenerateAntiforgeryTokenCookieAttribute` `DisableFormValueModelBindingAttribute` werden und als Filter auf die Seiten Anwendungsmodelle von `/StreamedSingleFileUploadDb` und in der Verwendung von `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor Seiten Konventionen](xref:razor-pages/razor-pages-conventions)angewendet:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1191,7 +1178,7 @@ Das Scannen von Dateien stellt in Szenarien mit hohem Verarbeitungsvolumen hohe 
 
 ### <a name="file-extension-validation"></a>Validierung von Dateierweiterungen
 
-Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Zum Beispiel:
+Die Erweiterung der hochgeladenen Datei muss mit einer Liste zulässiger Erweiterungen abgeglichen werden. Beispiel:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1249,7 +1236,7 @@ Razorautomatisch HTML-codiert Eigenschaftswerte für die Anzeige. Der folgende C
 }
 ```
 
-Außerhalb von Razorist immer <xref:System.Net.WebUtility.HtmlEncode*> der Name Inhalt aus der Anforderung eines Benutzers.
+Außerhalb von Razor ist immer der <xref:System.Net.WebUtility.HtmlEncode*> Name Inhalt aus der Anforderung eines Benutzers.
 
 Bei vielen Implementierungen muss geprüft werden, ob die Datei existiert. Andernfalls wird die Datei durch eine gleichnamige Datei überschrieben. Stellen Sie zusätzliche Logik bereit, um die Vorgaben Ihrer App zu erfüllen.
 
@@ -1292,7 +1279,7 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Vergleichen des Werts des Namensattributs mit dem Parameternamen der POST-Methode
 
-In nicht-Razor Formularen, die Formulardaten veröffentlichen oder `FormData` direkt JavaScript verwenden, `FormData` muss der im-Element des Formulars angegebene Name dem Namen des Parameters in der Aktion des Controllers entsprechen.
+In nicht- Razor Formularen, die Formulardaten veröffentlichen oder direkt JavaScript verwenden `FormData` , muss der im-Element des Formulars angegebene Name dem `FormData` Namen des Parameters in der Aktion des Controllers entsprechen.
 
 Im folgenden Beispiel:
 
@@ -1314,7 +1301,7 @@ Im folgenden Beispiel:
 
 Verwenden Sie einen übereinstimmenden Namen für den Parameter der C#-Methode (`battlePlans`):
 
-* Für eine Razor Seiten Handler-Methode mit `Upload`dem Namen:
+* Für eine Razor Seiten Handler-Methode mit dem Namen `Upload` :
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1345,7 +1332,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> dient zum Festlegen des <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> für eine einzelne Seite oder Aktion.
 
-Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
+Wenden Sie in einer Razor pages-App den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in an `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1363,7 +1350,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Wenden Sie Razor in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
+RazorWenden Sie in einer Pages-APP oder einer MVC-App den Filter auf das Seiten Modell oder die Aktionsmethode an:
 
 ```csharp
 // Set the limit to 256 MB
@@ -1391,7 +1378,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> dient zum Festlegen von [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) für eine einzelne Seite oder Aktion.
 
-Wenden Sie Razor in einer Pages-App den Filter mit [convention](xref:razor-pages/razor-pages-conventions) einer Konvention `Startup.ConfigureServices`in an:
+Wenden Sie in einer Razor pages-App den Filter mit einer [Konvention](xref:razor-pages/razor-pages-conventions) in an `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1409,7 +1396,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Wenden Sie Razor den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
+RazorWenden Sie den Filter in einer Pages-APP oder einer MVC-App auf die Seitenhandlerklasse oder Aktionsmethode an:
 
 ```csharp
 // Handle requests up to 50 MB

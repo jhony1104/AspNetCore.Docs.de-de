@@ -1,24 +1,12 @@
 ---
-title: Bewährte Methoden für die ASP.net Core Blazor webassemblyleistung
-author: pranavkm
-description: Tipps zum Steigern der Leistung in ASP.net Core Blazor Webassembly-apps und vermeiden von häufigen Leistungsproblemen.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439422"
+Title: "ASP.net Core Blazor Webassembly Performance Best Practices ' Author: Description:" Tipps zum Steigern der Leistung in ASP.net Core Blazor Webassembly-apps und vermeiden von häufigen Leistungsproblemen. "
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Blazor webassemblyleistung
 
@@ -28,9 +16,9 @@ Dieser Artikel enthält Richtlinien für die Blazor bewährten Methoden der ASP.
 
 ## <a name="avoid-unnecessary-component-renders"></a>Unnötige Komponenten Rendering vermeiden
 
-Blazorder diffingalgorithmus vermeidet das erneute Ausführen einer Komponente, wenn der Algorithmus erkennt, dass sich die Komponente nicht geändert hat. Überschreiben Sie [componentbase. Leid drender](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A) , um das Komponenten Rendering präzise zu steuern.
+Blazorder diffingalgorithmus vermeidet das erneute Ausführen einer Komponente, wenn der Algorithmus erkennt, dass sich die Komponente nicht geändert hat. Überschreiben Sie, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType> um das Komponenten Rendering genauer zu steuern.
 
-Wenn Sie eine nur für die Benutzeroberfläche geschützte Komponente erstellen, die sich nach dem anfänglichen Rendering nie ändert, konfigurieren `ShouldRender` Sie für Folgendes `false` :
+Wenn Sie eine nur für die Benutzeroberfläche geschützte Komponente erstellen, die sich nach dem anfänglichen Rendering nie ändert, konfigurieren <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Sie für Folgendes `false` :
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ Die meisten apps benötigen keine differenzierte Kontrolle, können aber <xref:M
 
 Im folgenden Beispiel:
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>wird überschrieben und auf den Wert des Felds festgelegt `shouldRender` , das anfänglich ist, `false` Wenn die Komponente geladen wird.
-* Wenn die Schaltfläche ausgewählt wird, `shouldRender` wird auf festgelegt. Dadurch wird `true` die Komponente gezwungen, die Aktualisierung mit dem aktualisierten durchzusetzen `currentCount` .
-* Unmittelbar nach der erneuten Ausführung <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> legt den Wert von auf zurück, um die erneute Ausführung `shouldRender` bis zum `false` nächsten auswählen der Schaltfläche zu verhindern.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>wird überschrieben und auf den Wert des Felds festgelegt <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> , das anfänglich ist, `false` Wenn die Komponente geladen wird.
+* Wenn die Schaltfläche ausgewählt wird, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> wird auf festgelegt. Dadurch wird `true` die Komponente gezwungen, die Aktualisierung mit dem aktualisierten durchzusetzen `currentCount` .
+* Unmittelbar nach der erneuten Ausführung <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> legt den Wert von auf zurück, um die erneute Ausführung <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> bis zum `false` nächsten auswählen der Schaltfläche zu verhindern.
 
 ```razor
 <p>Current count: @currentCount</p>
