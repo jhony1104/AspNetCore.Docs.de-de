@@ -1,11 +1,11 @@
 ---
 Title: "ASP.net Core SignalR JavaScript-Client ' Author: Description:" Overview of ASP.net Core SignalR JavaScript Client. "
-monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.net Core SignalR JavaScript-Client
@@ -141,10 +141,10 @@ Verketten Sie eine `catch` Methode an das Ende der `start` Methode, um Client se
 
 Richten Sie die Client seitige Protokoll Ablauf Verfolgung ein, indem Sie eine Protokollierung und einen Ereignistyp an die Protokollierung übergeben, wenn die Verbindung hergestellt wird. Nachrichten werden mit der angegebenen Protokollebene und höher protokolliert. Folgende Protokoll Ebenen sind verfügbar:
 
-* `signalR.LogLevel.Error`&ndash;Fehlermeldungen. Protokolliert `Error` nur Meldungen.
-* `signalR.LogLevel.Warning`&ndash;Warnmeldungen zu möglichen Fehlern. Protokolle `Warning` und `Error` Nachrichten.
-* `signalR.LogLevel.Information`&ndash;Status Meldungen ohne Fehler. Protokolliert `Information` die `Warning` Meldungen, und `Error` .
-* `signalR.LogLevel.Trace`Ablauf &ndash; Verfolgungs Meldungen. Protokolliert alles, einschließlich Daten, die zwischen dem Hub und dem Client transportiert werden.
+* `signalR.LogLevel.Error`: Fehlermeldungen. Protokolliert `Error` nur Meldungen.
+* `signalR.LogLevel.Warning`: Warnmeldungen zu möglichen Fehlern. Protokolle `Warning` und `Error` Nachrichten.
+* `signalR.LogLevel.Information`: Status Meldungen ohne Fehler. Protokolliert `Information` die `Warning` Meldungen, und `Error` .
+* `signalR.LogLevel.Trace`: Ablauf Verfolgungs Meldungen. Protokolliert alles, einschließlich Daten, die zwischen dem Hub und dem Client transportiert werden.
 
 Verwenden Sie die Methode configure [relogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) für [hubconnectionbuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) , um die Protokollebene zu konfigurieren. Nachrichten werden in der Browser Konsole protokolliert.
 

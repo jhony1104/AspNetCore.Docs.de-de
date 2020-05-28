@@ -1,11 +1,11 @@
 ---
 Title: ' Erzwingen einer Inhalts Sicherheitsrichtlinie für ASP.net Core Blazor ' Author: Description: ' erfahren Sie, wie Sie eine Inhalts Sicherheitsrichtlinie (Content Security Policy, CSP) mit ASP.net Core- Blazor Apps verwenden, um Schutz vor Cross-Site Scripting (XSS)-Angriffen zu bieten.
-monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- 'SignalR' uid: 
 
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>Erzwingen einer Inhalts Sicherheitsrichtlinie für ASP.net CoreBlazor
@@ -28,14 +28,14 @@ CSP wird in den meisten modernen Desktop-und mobilen Browsern unterstützt, eins
 
 Legen Sie mindestens die folgenden Direktiven und Quellen für Blazor apps fest. Fügen Sie nach Bedarf weitere Direktiven und Quellen hinzu. Die folgenden Direktiven werden im Abschnitt [Anwenden der Richtlinie](#apply-the-policy) dieses Artikels verwendet, in dem Beispiel Sicherheitsrichtlinien für Blazor Webassembly und Blazor Server bereitgestellt werden:
 
-* [Basis-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; Schränkt die URLs für das Tag einer Seite ein `<base>` . Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
-* [Block-alle-gemischt-Inhalt](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; Verhindert das Laden gemischter http-und HTTPS-Inhalte.
-* [Standard-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; Gibt einen Fall Back für Quell Direktiven an, die nicht explizit durch die Richtlinie angegeben werden. Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; Gibt gültige Quellen für Images an.
+* [Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): schränkt die URLs für das Tag einer Seite ein `<base>` . Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
+* [Block-all-Mixed-Content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): verhindert das Laden von gemischtem http-und HTTPS-Inhalt.
+* [default-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): gibt ein Fall Back für Quell Direktiven an, die nicht explizit durch die Richtlinie angegeben werden. Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): gibt gültige Quellen für Images an.
   * Geben `data:` Sie an, um das Laden von Bildern aus `data:` URLs zuzulassen
   * Geben `https:` Sie an, um das Laden von Bildern von HTTPS-Endpunkten zuzulassen
-* [Objekt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; Gibt gültige Quellen für die `<object>` `<embed>` Tags, und an `<applet>` . Geben `none` Sie an, um alle URL-Quellen zu verhindern.
-* [Skript-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; Gibt gültige Quellen für Skripts an.
+* [Object-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): gibt gültige Quellen für die `<object>` `<embed>` Tags, und an `<applet>` . Geben `none` Sie an, um alle URL-Quellen zu verhindern.
+* [Script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): gibt gültige Quellen für Skripts an.
   * Geben Sie die `https://stackpath.bootstrapcdn.com/` Host Quelle für Bootstrap-Skripts an.
   * Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
   * In einer Blazor Webassembly-App:
@@ -45,11 +45,11 @@ Legen Sie mindestens die folgenden Direktiven und Quellen für Blazor apps fest.
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * Gibt `unsafe-eval` an, `eval()` dass die Methoden und zum Erstellen von Code aus Zeichen folgen verwenden.
   * Geben Sie in einer Blazor Server-App den `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` Hash für das Inline Skript an, das die Fall Back Erkennung für Stylesheets ausführt.
-* [Stil-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; Gibt gültige Quellen für Stylesheets an.
+* [Style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): gibt gültige Quellen für Stylesheets an.
   * Geben Sie die `https://stackpath.bootstrapcdn.com/` Host Quelle für Bootstrap-Stylesheets an.
   * Geben `self` Sie an, um anzugeben, dass der Ursprung der APP, einschließlich des Schemas und der Portnummer, eine gültige Quelle ist.
   * Geben `unsafe-inline` Sie an, um die Verwendung von Inline Stilen zuzulassen. Die Inline Deklaration ist erforderlich, damit die Benutzeroberfläche in Blazor Server-apps nach der anfänglichen Anforderung erneut eine Verbindung mit dem Client und dem Server herstellen kann. In einer zukünftigen Version kann die Inline Formatierung entfernt werden, sodass Sie `unsafe-inline` nicht mehr benötigt wird.
-* [Upgrade-unsichere Anforderungen](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; Gibt an, dass Inhalts-URLs aus unsicheren (http) Quellen sicher über HTTPS abgerufen werden sollen.
+* [Upgrade-unsicher-Requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): gibt an, dass Inhalts-URLs aus unsicheren (http) Quellen sicher über HTTPS abgerufen werden sollen.
 
 Die vorangehenden Anweisungen werden von allen Browsern mit Ausnahme von Microsoft Internet Explorer unterstützt.
 

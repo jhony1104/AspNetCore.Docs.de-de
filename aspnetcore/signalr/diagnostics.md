@@ -1,44 +1,32 @@
 ---
-title: Protokollierung und Diagnose in ASP.net CoreSignalR
-author: anurse
-description: Erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444216"
+Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net Core signalr
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net CoreSignalR
 
 Von [Andrew Stanton-Nurse](https://twitter.com/anurse)
 
-Dieser Artikel enthält Anleitungen zum Sammeln von Diagnoseinformationen aus Ihrer ASP.net Core signalr-APP, um Probleme zu beheben.
+Dieser Artikel enthält Anleitungen zum Sammeln von Diagnoseinformationen aus Ihrer ASP.net Core- SignalR app, um Probleme bei der Problembehandlung zu beheben.
 
 ## <a name="server-side-logging"></a>Server seitige Protokollierung
 
 > [!WARNING]
 > Serverseitige Protokolle enthalten möglicherweise vertrauliche Daten aus Ihrer App. Veröffentlichten Sie deshalb **niemals** Protokolle von Produktions-Apps auf öffentlichen Foren wie GitHub.
 
-Da signalr Teil ASP.net Core ist, verwendet es das ASP.net Core Protokollierungs System. In der Standardkonfiguration protokolliert signalr nur wenige Informationen, aber dies kann konfiguriert werden. In der Dokumentation zur [ASP.NET Core-Protokollierung](xref:fundamentals/logging/index#configuration) finden Sie weitere Informationen zum Konfigurieren der ASP.NET Core-Protokollierung.
+Da SignalR Teil ASP.net Core ist, wird das ASP.net Core Protokollierungs System verwendet. In der Standardkonfiguration protokolliert nur wenige SignalR Informationen, aber dies kann konfiguriert werden. In der Dokumentation zur [ASP.NET Core-Protokollierung](xref:fundamentals/logging/index#configuration) finden Sie weitere Informationen zum Konfigurieren der ASP.NET Core-Protokollierung.
 
-Signalr verwendet zwei Kategorien von Kategorien:
+SignalRverwendet zwei Kategorien von Kategorien:
 
-* `Microsoft.AspNetCore.SignalR`&ndash;Protokolle im Zusammenhang mit hubprotokollen, das Aktivieren von Hubs, das Aufrufen von Methoden und andere hubbezogene Aktivitäten.
-* `Microsoft.AspNetCore.Http.Connections`&ndash;Protokolle, die sich auf Transporte beziehen, wie z. b. websockets, lange Abruf Ereignisse und Server gesendete Ereignisse und eine signalr-Infrastruktur auf niedriger Ebene.
+* `Microsoft.AspNetCore.SignalR`: Bei Protokollen im Zusammenhang mit hubprotokollen, beim Aktivieren von Hubs, beim Aufrufen von Methoden und anderen hubbezogenen Aktivitäten.
+* `Microsoft.AspNetCore.Http.Connections`: Bei Protokollen, die sich auf Transporte beziehen, wie z. b. websockets, langes abrufen, vom Server gesendete Ereignisse und Low-Level- SignalR Infrastrukturen.
 
-Um ausführliche Protokolle von signalr zu aktivieren, konfigurieren Sie beide vorangehenden Präfixe auf der `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum `LogLevel` unter Abschnitt in hinzufügen `Logging` :
+Um ausführliche Protokolle von zu aktivieren SignalR , konfigurieren Sie beide vorangehenden Präfixe für die `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum `LogLevel` unter Abschnitt in hinzufügen `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ Wie Sie auf serverseitige Protokolle zugreifen können, hängt von der Ausführu
 
 ### <a name="as-a-console-app-outside-iis"></a>Als Konsolen-App außerhalb von IIS
 
-Wenn die Ausführung in einer Konsolen-App stattfindet, sollte die [Konsolenprotokollierung](xref:fundamentals/logging/index#console) standardmäßig aktiviert sein. Signalr-Protokolle werden in der-Konsole angezeigt.
+Wenn die Ausführung in einer Konsolen-App stattfindet, sollte die [Konsolenprotokollierung](xref:fundamentals/logging/index#console) standardmäßig aktiviert sein. SignalRdie Protokolle werden in der-Konsole angezeigt.
 
 ### <a name="within-iis-express-from-visual-studio"></a>In IIS Express aus Visual Studio
 
@@ -89,14 +77,34 @@ Um die Protokollierung vollständig zu deaktivieren, geben Sie `signalR.LogLevel
 In der folgenden Tabelle werden die für den JavaScript-Client verfügbaren Protokoll Ebenen angezeigt. Wenn Sie die Protokollebene auf einen dieser Werte festlegen, wird die Protokollierung auf dieser Ebene und allen darüber liegenden Ebenen in der Tabelle ermöglicht.
 
 | Ebene | BESCHREIBUNG |
-| ----- | ----------- |
-| `None` | Es werden keine Nachrichten protokolliert. |
-| `Critical` | Meldungen, die auf einen Fehler in der gesamten App hindeuten. |
-| `Error` | Meldungen, die auf einen Fehler im aktuellen Vorgang hindeuten. |
-| `Warning` | Meldungen, die auf ein nicht schwer wiedliches Problem hinweisen. |
-| `Information` | Informationsmeldungen. |
-| `Debug` | Diagnosemeldungen sind für das Debuggen nützlich. |
-| `Trace` | Sehr ausführliche Diagnosemeldungen, die für die Diagnose bestimmter Probleme entwickelt wurden. |
+| ----- | ---
+Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | `None` | Es werden keine Nachrichten protokolliert. | | `Critical` | Meldungen, die auf einen Fehler in der gesamten App hindeuten. | | `Error` | Meldungen, die auf einen Fehler im aktuellen Vorgang hindeuten. | | `Warning` | Meldungen, die auf ein nicht schwer wiedliches Problem hinweisen. | | `Information` | Informationsmeldungen. | | `Debug` | Diagnosemeldungen sind für das Debuggen nützlich. | | `Trace` | Sehr ausführliche Diagnosemeldungen, die für die Diagnose bestimmter Probleme entwickelt wurden. |
 
 Nachdem Sie die Ausführlichkeit konfiguriert haben, werden die Protokolle in die Browser Konsole (oder die Standard Ausgabe in einer nodejs-APP) geschrieben.
 

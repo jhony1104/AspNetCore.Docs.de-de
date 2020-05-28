@@ -1,22 +1,11 @@
 ---
-title: Übersicht über ASP.NET Core MVC
-author: ardalis
-description: Informationen zu ASP.NET Core MVC als umfangreiches Framework zum Erstellen von Web-Apps und APIs mithilfe des Model-View-Controller-Entwurfsmusters
-ms.author: riande
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/overview
-ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775465"
+Title: Autor: Beschreibung: ms. Author: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Übersicht über ASP.NET Core MVC
 
@@ -68,7 +57,7 @@ Zu ASP.NET Core MVC gehören folgende Elemente:
 * [Routing](#routing)
 * [Modellbindung](#model-binding)
 * [Modellvalidierung](#model-validation)
-* [Dependency Injection](../fundamentals/dependency-injection.md)
+* [Abhängigkeitsinjektion](../fundamentals/dependency-injection.md)
 * [Filter](#filters)
 * [Bereiche](#areas)
 * [Web-APIs](#web-apis)
@@ -147,7 +136,7 @@ public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = 
 
 Das Framework verarbeitet Validierungsanforderungsdaten sowohl auf dem Client als auch auf dem Server. Für Modelltypen angegebene Validierungslogik wird den gerenderten Ansichten als unaufdringliche Anmerkungen hinzugefügt und im Browser mit [jQuery Validation](https://jqueryvalidation.org/) erzwungen.
 
-### <a name="dependency-injection"></a>Dependency Injection
+### <a name="dependency-injection"></a>Abhängigkeitsinjektion
 
 ASP.NET Core verfügt über integrierte Unterstützung für [Dependency Injection ( DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC können [Controller](controllers/dependency-injection.md) benötigte Dienste über ihre Konstruktoren anfordern. So wird das [Prinzip der expliziten Abhängigkeiten](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) befolgt.
 
@@ -249,7 +238,7 @@ Mit `EnvironmentTagHelper` können Sie Ihren Ansichten verschiedene Skripts hinz
 </environment>
 ```
 
-Taghilfsprogramme bieten eine HTML-freundliche Entwicklungsumgebung und eine umfangreiche IntelliSense-Umgebung zum Erstellen Razor von HTML und Markup. Die meisten integrierten Taghilfsprogramme sind für vorhandene HTML-Elemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit.
+Taghilfsprogramme bieten eine HTML-freundliche Entwicklungsumgebung und eine umfangreiche IntelliSense-Umgebung zum Erstellen von HTML und Razor Markup. Die meisten integrierten Taghilfsprogramme sind für vorhandene HTML-Elemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit.
 
 ### <a name="view-components"></a>Ansichtskomponenten
 
@@ -263,5 +252,5 @@ Weitere Informationen finden Sie unter <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)MyTested.AspNetCore.Mvc: Fluent Testing-Bibliothek für ASP.NET Core MVC:&ndash; stark typisierte Bibliothek für Komponententest mit einer Fluent-Schnittstelle zum Testen von MVC- und Web-API-Apps. (*Wird von Microsoft nicht verwaltet oder unterstützt.*)
+* [Mytesting. aspnetcore. MVC-fließende Test Bibliothek für ASP.net Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): stark typisierte unittestbibliothek, die eine fließende Oberfläche zum Testen von MVC-und Web-API-apps bereitstellt. (*Wird von Microsoft nicht verwaltet oder unterstützt.*)
 * <xref:blazor/integrate-components>

@@ -1,23 +1,11 @@
 ---
-title: Zwischenspeichern von Antworten in ASP.net Core
-author: rick-anderson
-description: Erfahren Sie, wie Sie die Zwischenspeicherung von Antworten verwenden können, um die Bandbreitenanforderungen zu senken und die Leistung von ASP.NET Core-Apps zu steigern.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.date: 11/04/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/caching/response
-ms.openlocfilehash: 3e4bb9980c94f36319cf9b17e65a35ba0f77824e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776076"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.net Core
 
@@ -29,7 +17,7 @@ Beim Zwischenspeichern von Antworten wird die Anzahl von Anforderungen reduziert
 
 Das [responsecache-Attribut](#responsecache-attribute) nimmt an der Einstellung von Cache Headern für Antworten Teil. Clients und zwischen Proxys sollten die Header zum Zwischenspeichern von Antworten unter der [http 1,1-cachingspezifikation](https://tools.ietf.org/html/rfc7234)berücksichtigen.
 
-Verwenden Sie für die serverseitige Zwischenspeicherung, die der HTTP 1,1-Cache Spezifikation folgt, die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware). Die Middleware kann die Eigenschaften <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> verwenden, um das serverseitige zwischen Speicherungs Verhalten zu beeinflussen.
+Verwenden Sie für die serverseitige Zwischenspeicherung, die der HTTP 1,1-Cache Spezifikation folgt, die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware). Die Middleware kann die <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Eigenschaften verwenden, um das serverseitige zwischen Speicherungs Verhalten zu beeinflussen.
 
 ## <a name="http-based-response-caching"></a>HTTP-basiertes Zwischenspeichern von Antworten
 
@@ -38,29 +26,490 @@ In der [http 1,1-cachingspezifikation](https://tools.ietf.org/html/rfc7234) wird
 Allgemeine `Cache-Control` Anweisungen sind in der folgenden Tabelle aufgeführt.
 
 | Direktive                                                       | Aktion |
-| --------------------------------------------------------------- | ------ |
-| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Die Antwort kann in einem Cache gespeichert werden. |
-| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Die Antwort darf nicht von einem freigegebenen Cache gespeichert werden. In einem privaten Cache kann die Antwort gespeichert und wieder verwendet werden. |
-| [Max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Der Client akzeptiert keine Antwort, deren Alter größer ist als die angegebene Anzahl von Sekunden. Beispiele: `max-age=60` (60 Sekunden), `max-age=2592000` (1 Monat) |
-| [No-Cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Bei Anforderungen**: ein Cache darf keine gespeicherte Antwort verwenden, um die Anforderung zu erfüllen. Der Ursprungsserver generiert die Antwort für den Client erneut, und die Middleware aktualisiert die gespeicherte Antwort im Cache.<br><br>**Bei Antworten**: die Antwort darf nicht für eine nachfolgende Anforderung ohne Validierung auf dem Ursprungsserver verwendet werden. |
-| [No-Store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Bei Anforderungen**: die Anforderung darf nicht in einem Cache gespeichert werden.<br><br>**Bei Antworten**: ein Cache darf keinen Teil der Antwort speichern. |
+| ---
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------------------------- | ---Titel: Author: Description: monikerrange: ms. Author: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | | [öffentlich](https://tools.ietf.org/html/rfc7234#section-5.2.2.5) | Die Antwort kann in einem Cache gespeichert werden. | | [Privat](https://tools.ietf.org/html/rfc7234#section-5.2.2.6) | Die Antwort darf nicht von einem freigegebenen Cache gespeichert werden. In einem privaten Cache kann die Antwort gespeichert und wieder verwendet werden. | | [max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1) | Der Client akzeptiert keine Antwort, deren Alter größer ist als die angegebene Anzahl von Sekunden. Beispiele: `max-age=60` (60 Sekunden), `max-age=2592000` (1 Monat) | | [No-Cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4)  |  **Bei Anforderungen**: ein Cache darf keine gespeicherte Antwort verwenden, um die Anforderung zu erfüllen. Der Ursprungsserver generiert die Antwort für den Client erneut, und die Middleware aktualisiert die gespeicherte Antwort im Cache.<br><br>**Bei Antworten**: die Antwort darf nicht für eine nachfolgende Anforderung ohne Validierung auf dem Ursprungsserver verwendet werden. | | [No-Store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5)  |  **Bei Anforderungen**: die Anforderung darf nicht in einem Cache gespeichert werden.<br><br>**Bei Antworten**: ein Cache darf keinen Teil der Antwort speichern. |
 
 Andere Cache Header, die eine Rolle beim Caching spielen, sind in der folgenden Tabelle aufgeführt.
 
 | Header                                                     | Funktion |
-| ---------------------------------------------------------- | -------- |
-| [Eder](https://tools.ietf.org/html/rfc7234#section-5.1)     | Eine Schätzung der Zeitspanne (in Sekunden), seit die die Antwort auf dem Ursprungsserver generiert oder erfolgreich überprüft wurde. |
-| [Laufzeit](https://tools.ietf.org/html/rfc7234#section-5.3) | Die Zeit, nach der die Antwort als veraltet eingestuft wird. |
-| [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | Besteht aus Gründen der Abwärtskompatibilität mit HTTP/1.0- `no-cache` Caches zum Festlegen des Verhaltens. Wenn der `Cache-Control` Header vorhanden ist, wird `Pragma` der Header ignoriert. |
-| [Abweichen](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | Gibt an, dass eine zwischengespeicherte Antwort nicht gesendet werden darf, `Vary` es sei denn, alle Header Felder stimmen mit der ursprünglichen Anforderung der zwischengespeicherten Antwort und der neuen Anforderung gleich. |
+| ---
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----------------------------- | ---Titel: Author: Description: monikerrange: ms. Author: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | [Alter](https://tools.ietf.org/html/rfc7234#section-5.1) | Eine Schätzung der Zeitspanne (in Sekunden), seit die die Antwort auf dem Ursprungsserver generiert oder erfolgreich überprüft wurde. | | [Läuft](https://tools.ietf.org/html/rfc7234#section-5.3) ab | Die Zeit, nach der die Antwort als veraltet eingestuft wird. | | [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4) | Besteht aus Gründen der Abwärtskompatibilität mit HTTP/1.0-Caches zum Festlegen des `no-cache` Verhaltens. Wenn der `Cache-Control` Header vorhanden ist, `Pragma` wird der Header ignoriert. | | [Variieren](https://tools.ietf.org/html/rfc7231#section-7.1.4) | Gibt an, dass eine zwischengespeicherte Antwort nicht gesendet werden darf, es sei denn, alle `Vary` Header Felder stimmen mit der ursprünglichen Anforderung der zwischengespeicherten Antwort und der neuen Anforderung gleich. |
 
 ## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP-basiertes Zwischenspeichern, Anforderungs Cache-Steuerungs Direktiven
 
-Die [http 1,1-cachingspezifikation für den Cache-Control-Header](https://tools.ietf.org/html/rfc7234#section-5.2) erfordert einen Cache, `Cache-Control` um einen gültigen Header zu berücksichtigen, der vom Client gesendet wird. Ein Client kann Anforderungen mit einem `no-cache` Header Wert senden und erzwingen, dass der Server eine neue Antwort für jede Anforderung generiert.
+Die [http 1,1-cachingspezifikation für den Cache-Control-Header](https://tools.ietf.org/html/rfc7234#section-5.2) erfordert einen Cache, um einen gültigen Header zu berücksichtigen, der `Cache-Control` vom Client gesendet wird. Ein Client kann Anforderungen mit einem `no-cache` Header Wert senden und erzwingen, dass der Server eine neue Antwort für jede Anforderung generiert.
 
-Wenn Sie das Ziel `Cache-Control` der HTTP-Zwischenspeicherung in Erwägung gezogen haben, ist es sinnvoll, Client Anforderungs Header zu berücksichtigen. Unter der offiziellen Spezifikation soll das Caching die Latenz und den Netzwerk Aufwand bei der Erfüllung von Anforderungen in einem Netzwerk von Clients, Proxys und Servern reduzieren. Es ist nicht notwendigerweise eine Möglichkeit, die Last auf einem Ursprungsserver zu steuern.
+`Cache-Control`Wenn Sie das Ziel der HTTP-Zwischenspeicherung in Erwägung gezogen haben, ist es sinnvoll, Client Anforderungs Header zu berücksichtigen. Unter der offiziellen Spezifikation soll das Caching die Latenz und den Netzwerk Aufwand bei der Erfüllung von Anforderungen in einem Netzwerk von Clients, Proxys und Servern reduzieren. Es ist nicht notwendigerweise eine Möglichkeit, die Last auf einem Ursprungsserver zu steuern.
 
-Es gibt keine Entwickler Kontrolle über dieses zwischen Speicherungs Verhalten, wenn die [Middleware](xref:performance/caching/middleware) zum Zwischenspeichern von Antworten verwendet wird, da die Middleware die offizielle cachingspezifikation befolgt. [Geplante Erweiterungen der Middleware](https://github.com/dotnet/AspNetCore/issues/2612) sind die Möglichkeit, die Middleware so zu konfigurieren, dass der `Cache-Control` Header einer Anforderung ignoriert wird, wenn eine zwischengespeicherte Antwort verarbeitet wird. Geplante Erweiterungen bieten die Möglichkeit, die Serverlast besser zu steuern.
+Es gibt keine Entwickler Kontrolle über dieses zwischen Speicherungs Verhalten, wenn die [Middleware](xref:performance/caching/middleware) zum Zwischenspeichern von Antworten verwendet wird, da die Middleware die offizielle cachingspezifikation befolgt. [Geplante Erweiterungen der Middleware](https://github.com/dotnet/AspNetCore/issues/2612) sind die Möglichkeit, die Middleware so zu konfigurieren, dass der Header einer Anforderung ignoriert wird, `Cache-Control` Wenn eine zwischengespeicherte Antwort verarbeitet wird. Geplante Erweiterungen bieten die Möglichkeit, die Serverlast besser zu steuern.
 
 ## <a name="other-caching-technology-in-aspnet-core"></a>Andere cachingtechnologie in ASP.net Core
 
@@ -78,13 +527,13 @@ Weitere Informationen finden Sie unter <xref:performance/caching/distributed>.
 
 ### <a name="cache-tag-helper"></a>Cache-Taghilfsprogramm
 
-Zwischenspeichern des Inhalts aus einer MVC-Ansicht oder-Razor Page mit dem cachetaghilfsprogramm. Das Cache-taghilfsprogramm verwendet das Zwischenspeichern im Arbeitsspeicher zum Speichern von Daten.
+Zwischenspeichern des Inhalts aus einer MVC-Ansicht oder- Razor Seite mit dem cachetaghilfsprogramm. Das Cache-taghilfsprogramm verwendet das Zwischenspeichern im Arbeitsspeicher zum Speichern von Daten.
 
 Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>.
 
 ### <a name="distributed-cache-tag-helper"></a>Taghilfsprogramm für verteilten Cache
 
-Speichern Sie den Inhalt aus einer MVC-Ansicht oder einer Razor page in verteilten Cloud-oder Webfarm Szenarios mit dem taghilfsprogramm für verteilte Caches. Das taghilfsprogramm für verteilte Caches verwendet SQL Server, [redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)oder [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) zum Speichern von Daten.
+Zwischenspeichern des Inhalts aus einer MVC-Ansicht oder- Razor Seite in verteilten Cloud-oder Webfarm Szenarios mit dem taghilfsprogramm für verteilte Caches. Das taghilfsprogramm für verteilte Caches verwendet SQL Server, [redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)oder [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) zum Speichern von Daten.
 
 Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.
 
@@ -95,27 +544,215 @@ Der <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> gibt die Parameter an
 > [!WARNING]
 > Deaktivieren Sie das Zwischenspeichern für Inhalte, die Informationen für authentifizierte Clients enthalten. Das Zwischenspeichern sollte nur für Inhalt aktiviert werden, der sich nicht auf der Grundlage der Identität eines Benutzers ändert, oder ob ein Benutzer angemeldet ist.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>variiert die gespeicherte Antwort anhand der Werte der angegebenen Liste von Abfrage Schlüsseln. Wenn ein einzelner Wert bereit `*` gestellt wird, variiert die Middleware mit den Antworten aller Parameter der Anforderungs Abfrage Zeichenfolge.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>variiert die gespeicherte Antwort anhand der Werte der angegebenen Liste von Abfrage Schlüsseln. Wenn ein einzelner Wert `*` bereitgestellt wird, variiert die Middleware mit den Antworten aller Parameter der Anforderungs Abfrage Zeichenfolge.
 
-Die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware) muss aktiviert <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> sein, um die Eigenschaft festzulegen. Andernfalls wird eine Lauf Zeit Ausnahme ausgelöst. Es gibt keinen entsprechenden HTTP-Header für <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> die-Eigenschaft. Die-Eigenschaft ist eine HTTP-Funktion, die von der zwischenware zum Zwischenspeichern von Antworten Damit die Middleware eine zwischengespeicherte Antwort bereitstellt, müssen die Abfrage Zeichenfolge und der Abfrage Zeichenfolgen-Wert mit einer vorherigen Anforderung identisch sein. Stellen Sie sich z. b. die Abfolge der in der folgenden Tabelle gezeigten Anforderungen und Ergebnisse vor.
+Die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware) muss aktiviert sein, um die Eigenschaft festzulegen <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> . Andernfalls wird eine Lauf Zeit Ausnahme ausgelöst. Es gibt keinen entsprechenden HTTP-Header für die- <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> Eigenschaft. Die-Eigenschaft ist eine HTTP-Funktion, die von der zwischenware zum Zwischenspeichern von Antworten Damit die Middleware eine zwischengespeicherte Antwort bereitstellt, müssen die Abfrage Zeichenfolge und der Abfrage Zeichenfolgen-Wert mit einer vorherigen Anforderung identisch sein. Stellen Sie sich z. b. die Abfolge der in der folgenden Tabelle gezeigten Anforderungen und Ergebnisse vor.
 
 | Anforderung                          | Ergebnis                    |
-| -------------------------------- | ------------------------- |
-| `http://example.com?key1=value1` | Vom Server zurückgegeben. |
-| `http://example.com?key1=value1` | Von der Middleware zurückgegeben. |
-| `http://example.com?key1=value2` | Vom Server zurückgegeben. |
+| ---
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---------------- | ---Titel: Author: Description: monikerrange: ms. Author: ms. Date: NO-LOC:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------- | | `http://example.com?key1=value1` | Vom Server zurückgegeben. | | `http://example.com?key1=value1` | Von der Middleware zurückgegeben. | | `http://example.com?key1=value2` | Vom Server zurückgegeben. |
 
 Die erste Anforderung wird vom Server zurückgegeben und in der Middleware zwischengespeichert. Die zweite Anforderung wird von Middleware zurückgegeben, da die Abfrage Zeichenfolge mit der vorherigen Anforderung übereinstimmt. Die dritte Anforderung befindet sich nicht im middlewarecache, da der Wert der Abfrage Zeichenfolge mit einer vorherigen Anforderung nicht identisch ist.
 
-<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Wird verwendet, um (via <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>) zu konfigurieren und zu `Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter`erstellen. Der `ResponseCacheFilter` führt die Aktualisierung der entsprechenden HTTP-Header und Features der Antwort aus. Der Filter:
+<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Wird verwendet, um (via) zu konfigurieren und zu erstellen <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> `Microsoft.AspNetCore.Mvc.Internal.ResponseCacheFilter` . Der `ResponseCacheFilter` führt die Aktualisierung der entsprechenden HTTP-Header und Features der Antwort aus. Der Filter:
 
-* Entfernt alle vorhandenen Header für `Vary`, `Cache-Control`und `Pragma`.
-* Schreibt die entsprechenden Header auf der Grundlage der im festgelegten Eigenschaften <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>.
-* Aktualisiert das HTTP-Feature zum zwischen <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> Speichern von Antworten, wenn festgelegt ist
+* Entfernt alle vorhandenen Header für `Vary` , `Cache-Control` und `Pragma` .
+* Schreibt die entsprechenden Header auf der Grundlage der im festgelegten Eigenschaften <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> .
+* Aktualisiert das HTTP-Feature zum Zwischenspeichern von Antworten, wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> festgelegt ist
 
 ### <a name="vary"></a>Abweichen
 
-Dieser Header wird nur geschrieben, wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> die-Eigenschaft festgelegt wird. Die Eigenschaft, die auf `Vary` den Wert der Eigenschaft festgelegt ist. Im folgenden Beispiel wird die <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> -Eigenschaft verwendet:
+Dieser Header wird nur geschrieben, wenn die- <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> Eigenschaft festgelegt wird. Die Eigenschaft, die auf den Wert der Eigenschaft festgelegt `Vary` ist. Im folgenden Beispiel wird die- <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByHeader> Eigenschaft verwendet:
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache1.cshtml.cs?name=snippet)]
 
@@ -128,12 +765,12 @@ Vary: User-Agent
 
 ### <a name="nostore-and-locationnone"></a>NoStore und Location. None
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>überschreibt die meisten anderen Eigenschaften. Wenn diese Eigenschaft auf `true`festgelegt ist, `Cache-Control` wird der-Header `no-store`auf festgelegt. Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> auf `None`festgelegt ist:
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>überschreibt die meisten anderen Eigenschaften. Wenn diese Eigenschaft auf festgelegt ist `true` , `Cache-Control` wird der-Header auf festgelegt `no-store` . Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> auf festgelegt ist `None` :
 
 * `Cache-Control` ist auf `no-store,no-cache` festgelegt.
 * `Pragma` ist auf `no-cache` festgelegt.
 
-Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> den `false` Wert <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None`hat und `Cache-Control`den Wert `Pragma` , und auf `no-cache`festgelegt ist.
+Wenn <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> `false` den Wert <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> hat und den Wert `None` , `Cache-Control` und `Pragma` auf festgelegt ist `no-cache` .
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>wird in der Regel `true` für Fehlerseiten auf festgelegt. Die Cache2-Seite in der Beispiel-app erzeugt Antwortheader, die den Client anweisen, die Antwort nicht zu speichern.
 
@@ -148,13 +785,13 @@ Pragma: no-cache
 
 ### <a name="location-and-duration"></a>Speicherort und Dauer
 
-Um das Zwischenspeichern <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> zu aktivieren, muss auf einen positiven Wert <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> festgelegt werden `Any` und muss entweder (Standard `Client`) oder sein. Das Framework legt den `Cache-Control` -Header auf den Speicherort Wert fest `max-age` , gefolgt vom der Antwort.
+Um das Zwischenspeichern zu aktivieren, <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> muss auf einen positiven Wert festgelegt werden und <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> muss entweder `Any` (Standard) oder sein `Client` . Das Framework legt den- `Cache-Control` Header auf den Speicherort Wert fest, gefolgt vom `max-age` der Antwort.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>die Optionen von `Any` und `Client` `private`werden in `Cache-Control` Header Werte von `public` bzw. übersetzt. Wie im Abschnitt [NoStore und Location. None](#nostore-and-locationnone) vermerkt, legt das <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> festlegen `None` von auf `Cache-Control` sowohl `Pragma` -als `no-cache`auch-Header auf fest.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>die Optionen von `Any` und `Client` werden in `Cache-Control` Header Werte von `public` `private` bzw. übersetzt. Wie im Abschnitt [NoStore und Location. None](#nostore-and-locationnone) vermerkt, legt das Festlegen <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> von auf `None` sowohl `Cache-Control` -als auch- `Pragma` Header auf fest `no-cache` .
 
-`Location.Any`(`Cache-Control` festgelegt `public`auf) gibt an, dass der Wert des *Clients oder eines beliebigen zwischen Proxys zwischen* gespeichert werden kann, einschließlich der Zwischenspeicherung von zwischen [Speichern](xref:performance/caching/middleware)
+`Location.Any`( `Cache-Control` festgelegt auf `public` ) gibt an, dass der Wert des *Clients oder eines beliebigen zwischen Proxys zwischen* gespeichert werden kann, einschließlich der Zwischenspeicherung von zwischen [Speichern](xref:performance/caching/middleware)
 
-`Location.Client`(`Cache-Control` festgelegt `private`auf) gibt an, dass der Wert *nur vom Client* zwischengespeichert werden darf. Der Wert kann nicht zwischengespeichert werden, einschließlich der [Middleware](xref:performance/caching/middleware)zum Zwischenspeichern von Antworten.
+`Location.Client`( `Cache-Control` festgelegt auf `private` ) gibt an, dass der Wert *nur vom Client* zwischengespeichert werden darf. Der Wert kann nicht zwischengespeichert werden, einschließlich der [Middleware](xref:performance/caching/middleware)zum Zwischenspeichern von Antworten.
 
 Cache Steuerungs Header bieten lediglich Anleitungen für Clients und Vermittler Proxys, wann und wie Antworten zwischengespeichert werden. Es gibt keine Garantie dafür, dass Clients und Proxys die [http 1,1-cachingspezifikation](https://tools.ietf.org/html/rfc7234)berücksichtigen. Die [Middleware zum Zwischenspeichern von Antworten](xref:performance/caching/middleware) folgt immer den durch die Spezifikation vorgegebenen Cache Regeln.
 
@@ -170,23 +807,23 @@ Cache-Control: public,max-age=10
 
 ### <a name="cache-profiles"></a>Cache profile
 
-Anstatt die Einstellungen des Antwort Caches für viele Controller Aktions Attribute zu duplizieren, können Cache Profile beim Einrichten von MVC/Razor pages in `Startup.ConfigureServices`als Optionen konfiguriert werden. Werte, die in einem Cache Profil gefunden werden, auf das verwiesen wird <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> , werden als Standardwerte verwendet und von allen Eigenschaften überschrieben, die für das Attribut angegeben sind.
+Anstatt die Einstellungen des Antwort Caches für viele Controller Aktions Attribute zu duplizieren, können Cache Profile beim Einrichten von MVC/pages in als Optionen konfiguriert werden Razor `Startup.ConfigureServices` . Werte, die in einem Cache Profil gefunden werden, auf das verwiesen wird, werden als Standardwerte verwendet <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> und von allen Eigenschaften überschrieben, die für das Attribut angegeben sind.
 
-Einrichten eines Cache Profils. Das folgende Beispiel zeigt ein Cache Profil mit 30 Sekunden in der Beispiel- `Startup.ConfigureServices`App:
+Einrichten eines Cache Profils. Das folgende Beispiel zeigt ein Cache Profil mit 30 Sekunden in der Beispiel-APP `Startup.ConfigureServices` :
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
 
-Das Cache4-Seiten Modell der Beispiel-APP `Default30` verweist auf das Cache Profil:
+Das Cache4-Seiten Modell der Beispiel-App verweist auf das `Default30` Cache Profil:
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache4.cshtml.cs?name=snippet)]
 
-<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Kann angewendet werden auf:
+<xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Kann angewendet werden auf:
 
-* RazorAttribute von Seiten Handlern ( &ndash; Klassen) können nicht auf Handlermethoden angewendet werden.
+* RazorSeiten Handler (Klassen): Attribute können nicht auf Handlermethoden angewendet werden.
 * MVC-Controller (Klassen).
-* MVC-Aktionen (Methoden &ndash; ) Attribute auf Methoden Ebene überschreiben die in Attributen auf Klassenebene angegebenen Einstellungen.
+* MVC-Aktionen (Methoden): Attribute auf Methoden Ebene überschreiben die in Attributen auf Klassenebene angegebenen Einstellungen.
 
-Der resultierende Header, der für die Antwort auf die Cache4 `Default30` -Seite vom Cache Profil übernommen wird:
+Der resultierende Header, der für die Antwort auf die Cache4-Seite vom `Default30` Cache Profil übernommen wird:
 
 ```
 Cache-Control: public,max-age=30
