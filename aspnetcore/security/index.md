@@ -1,23 +1,11 @@
 ---
-title: Übersicht über die ASP.NET Core-Sicherheit
-author: rick-anderson
-description: Erfahren Sie mehr über die Grundlagen der Authentifizierung, Autorisierung und Sicherheit in ASP.NET Core.
-ms.author: riande
-ms.custom: mvc
-ms.date: 10/24/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/index
-ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776512"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="overview-of-aspnet-core-security"></a>Übersicht über die ASP.NET Core-Sicherheit
 
@@ -25,7 +13,7 @@ ASP.NET Core ermöglicht es Entwicklern, die Sicherheit ihrer Apps einfach zu ko
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core-Sicherheitsfeatures
 
-ASP.NET Core stellt zahlreiche Tools und Bibliotheken zur Verfügung, um Ihre Apps zu sichern (einschließlich integrierter Identitätsanbieter). Sie können jedoch auch Identitätsdienste von Drittanbietern wie Facebook, Twitter oder LinkedIn nutzen. Mit ASP.NET Core können Sie ganz einfach App-Geheimnisse verwalten, die eine Möglichkeit darstellen, vertrauliche Informationen zu speichern und zu verwenden, ohne sie im Code offenlegen zu müssen.
+ASP.NET Core stellt zahlreiche Tools und Bibliotheken zur Verfügung, um Ihre Apps zu sichern (einschließlich integrierter Identitätsanbieter). Sie können jedoch auch Identitätsdienste von Drittanbietern wie Facebook, Twitter und LinkedIn nutzen. Mit ASP.NET Core können Sie ganz einfach App-Geheimnisse verwalten, die eine Möglichkeit darstellen, vertrauliche Informationen zu speichern und zu verwenden, ohne sie im Code offenlegen zu müssen.
 
 ## <a name="authentication-vs-authorization"></a>Authentifizierung im Vergleich zu Autorisierung
 

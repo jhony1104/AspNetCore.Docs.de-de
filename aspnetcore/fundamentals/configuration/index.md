@@ -1,24 +1,11 @@
 ---
-title: Konfiguration in ASP.NET Core
-author: rick-anderson
-description: In diesem Artikel erfahren Sie, wie Sie mit der Konfigurations-API eine ASP.NET Core-App konfigurieren.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 3/29/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/configuration/index
-ms.openlocfilehash: c2a7ef9c1523bc179524f328905f3a4b1460a1a5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774495"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -86,41 +73,9 @@ Der Standard-<xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProv
 
 <a name="optpat"></a>
 
-#### <a name="bind-hierarchical-configuration-data-using-the-options-pattern"></a>Binden hierarchischer Konfigurationsdaten mit dem Optionsmuster
+### <a name="bind-hierarchical-configuration-data-using-the-options-pattern"></a>Binden hierarchischer Konfigurationsdaten mit dem Optionsmuster
 
-Die bevorzugte Methode für das Lesen zugehöriger Konfigurationswerte ist die Verwendung des [Optionsmusters](xref:fundamentals/configuration/options). Um z. B. die folgenden Konfigurationswerte zu lesen:
-
-```json
-  "Position": {
-    "Title": "Editor",
-    "Name": "Joe Smith"
-  }
-```
-
-Erstellen Sie die folgende neue `PositionOptions`-Klasse:
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Options/PositionOptions.cs?name=snippet)]
-
-Alle öffentlichen Lese-/Schreibeigenschaften des Typs sind gebunden. Felder werden ***nicht*** gebunden.
-
-Der folgende Code
-
-* Ruft [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) auf, um die `PositionOptions`-Klasse an den `Position`-Abschnitt zu binden.
-* Zeigt die `Position`-Konfigurationsdaten an.
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test22.cshtml.cs?name=snippet)]
-
-[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) bindet den angegebenen Typ und gibt ihn zurück. `ConfigurationBinder.Get<T>` ist möglicherweise praktischer als die Verwendung von `ConfigurationBinder.Bind`. Der folgende Code zeigt die Verwendung von `ConfigurationBinder.Get<T>` mit der `PositionOptions`-Klasse:
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test21.cshtml.cs?name=snippet)]
-
-Eine alternative Vorgehensweise bei der Verwendung des ***Optionsmusters*** besteht darin, den `Position`-Abschnitt zu binden und ihn zum [Dependency-Injection-Dienstcontainer](xref:fundamentals/dependency-injection) hinzuzufügen. Im folgenden Code wird `PositionOptions` mit <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> zum Dienstcontainer hinzugefügt und an die Konfiguration gebunden:
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Startup.cs?name=snippet)]
-
-Mithilfe des vorangehenden Codes liest der folgende Code die Positionsoptionen:
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test2.cshtml.cs?name=snippet)]
+[!INCLUDE[](~/includes/bind.md)]
 
 Wenn die [Standard](#default)-Konfiguration verwendet wird, werden die Dateien *appsettings.json* und *appsettings.* `Environment` *.json* mit [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75) aktiviert. Änderungen an den Dateien *appsettings.json* und *appsettings.* `Environment` *.json* ***nach*** dem Start der App werden vom [JSON-Konfigurationsanbieter](#jcp) gelesen.
 
@@ -185,7 +140,7 @@ Testen Sie wie folgt, ob die obigen Befehle *appsettings.json* und *appsettings.
 
 Rufen Sie <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> mit einer Zeichenfolge auf, um ein Präfix für Umgebungsvariablen anzugeben:
 
-[!code-csharp[](index/samples/3.x/ConfigSample/Program.cs?name=snippet4&highlight=12)]
+[!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Program.cs?name=snippet4&highlight=12)]
 
 Für den Code oben gilt:
 
@@ -332,16 +287,142 @@ Konfigurationswerte:
 Die folgende Tabelle zeigt die für ASP.NET Core-Apps verfügbaren Konfigurationsanbieter.
 
 | Anbieter | Bereitstellung der Konfiguration über |
-| -------- | ----------------------------------- |
-| [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) | Azure Key Vault |
-| [Azure-App-Konfigurationsanbieter](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure App Configuration |
-| [Befehlszeilen-Konfigurationsanbieter](#clcp) | Befehlszeilenparameter |
-| [Benutzerdefinierter Konfigurationsanbieter](#custom-configuration-provider) | Benutzerdefinierte Quelle |
-| [Umgebungsvariablen-Konfigurationsanbieter](#evcp) | Umgebungsvariablen |
-| [Dateikonfigurationsanbieter](#file-configuration-provider) | INI-, JSON- und XML-Dateien |
-| [Schlüssel-pro-Datei-Konfigurationsanbieter](#key-per-file-configuration-provider) | Verzeichnisdateien |
-| [Speicherkonfigurationsanbieter](#memory-configuration-provider) | In-Memory-Sammlungen |
-| [Secret Manager](xref:security/app-secrets)  | Datei im Benutzerprofilverzeichnis |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------------ | | [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) | Azure Key Vault | | [Azure-App-Konfigurationsanbieter](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure App Configuration | | [Befehlszeilen-Konfigurationsanbieter](#clcp) | Befehlszeilenparameter | | [Benutzerdefinierter Konfigurationsanbieter](#custom-configuration-provider) | Benutzerdefinierte Quelle | | [Umgebungsvariablen-Konfigurationsanbieter](#evcp) | Umgebungsvariablen | | [Dateikonfigurationsanbieter](#file-configuration-provider) | INI-, JSON- und XML-Dateien| | [Schlüssel-pro-Datei-Konfigurationsanbieter](#key-per-file-configuration-provider) | Verzeichnisdateien | | [Speicherkonfigurationsanbieter](#memory-configuration-provider) | In-Memory-Sammlungen | | [Geheimnis-Manager](xref:security/app-secrets)  | Datei im Benutzerprofilverzeichnis |
 
 Konfigurationsquellen werden in der Reihenfolge gelesen, in der ihre Konfigurationsanbieter angegeben sind. Ordnen Sie die Konfigurationsanbieter im Code so an, dass sie den Prioritäten für die zugrunde liegenden Konfigurationsquellen entsprechen, die für die App erforderlich sind.
 
@@ -364,9 +445,102 @@ Die obige Sequenz von Anbietern wird in der [Standardkonfiguration](#default) ve
 Die Konfigurations-API verfügt über spezielle Verarbeitungsregeln für vier Umgebungsvariablen für Verbindungszeichenfolgen. Diese Verbindungszeichenfolgen sind beim Konfigurieren von Azure-Verbindungszeichenfolgen für die App-Umgebung beteiligt. Umgebungsvariablen mit den in der Tabelle aufgeführten Präfixen werden mit der [Standardkonfiguration](#default) in die App geladen bzw. wenn kein Präfix für `AddEnvironmentVariables` bereitgestellt wird.
 
 | Präfix für Verbindungszeichenfolgen | Anbieter |
-| ------------------------ | -------- |
-| `CUSTOMCONNSTR_` | Benutzerdefinierter Anbieter |
-| `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | `CUSTOMCONNSTR_` | Benutzerdefinierter Anbieter | | `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
 | `SQLAZURECONNSTR_` | [Azure SQL-Datenbank](https://azure.microsoft.com/services/sql-database/) |
 | `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/) |
 
@@ -376,11 +550,469 @@ Wenn eine Umgebungsvariable entdeckt und mit einem der vier Präfixe aus der Tab
 * Ein neues Konfigurations-Schlüssel-Wert-Paar wird erstellt, das den Datenbankverbindungsanbieter repräsentiert (mit Ausnahme des Präfixes `CUSTOMCONNSTR_`, für das kein Anbieter angegeben ist).
 
 | Umgebungsvariablenschlüssel | Konvertierter Konfigurationsschlüssel | Anbieterkonfigurationseintrag                                                    |
-| ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
-| `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Konfigurationseintrag wurde nicht erstellt.                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `MySql.Data.MySqlClient` |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Konfigurationseintrag wurde nicht erstellt.                                                | | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  | | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
 
 <a name="jcp"></a>
 
@@ -719,11 +1351,35 @@ Der folgende Code zeigt Konfigurationsdaten auf einer Razor-Seite an:
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Pages/Test5.cshtml)]
 
+Im folgenden Code wird `MyOptions` mit <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> zum Dienstcontainer hinzugefügt und an die Konfiguration gebunden:
+
+[!code-csharp[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Startup3.cs?name=snippet_Example2)]
+
+Das folgende Markup verwendet die [`@inject`](xref:mvc/views/razor#inject) Razor Direktive, um die Optionswerte aufzulösen und anzuzeigen:
+
+[!code-cshtml[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Pages/Test3.cshtml)]
+
 ## <a name="access-configuration-in-a-mvc-view-file"></a>Zugriffskonfiguration in einer MVC-Ansichtsdatei
 
 Der folgende Code zeigt Konfigurationsdaten in einer MVC-Ansicht an:
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Views/Home2/Index.cshtml)]
+
+## <a name="configure-options-with-a-delegate"></a>Konfigurieren von Optionen mit einem Delegaten
+
+In einem Delegaten konfigurierte Optionen überschreiben die in den Konfigurationsanbietern festgelegten Werte.
+
+Das Konfigurieren von Optionen mit einem Delegaten wird als Beispiel 2 in der Beispiel-App veranschaulicht.
+
+Im folgenden Code wird ein dritter <xref:Microsoft.Extensions.Options.IConfigureOptions%601>-Dienst zum Dienstcontainer hinzugefügt. Er verwendet einen Delegaten, um Werte für `MyOptions` zu konfigurieren:
+
+[!code-csharp[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Startup2.cs?name=snippet_Example2)]
+
+Im folgenden Code werden die Optionswerte angezeigt:
+
+[!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
+
+Im vorherigen Beispiel wurden die Werte von `Option1` und `Option2` in *appsettings.json* angegeben und anschließend vom konfigurierten Delegaten überschrieben.
 
 <a name="hvac"></a>
 
@@ -879,7 +1535,7 @@ Beim Starten der Anwendung werden Konfigurationsquellen in der Reihenfolge geles
 
 Konfigurationsanbieter, die Änderungserkennung implementieren, können Konfigurationen erneut laden, wenn zugrunde liegende Einstellungen geändert werden. Der Dateikonfigurationsanbieter (weiter unten in diesem Thema beschrieben) und der [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) implementieren beispielsweise die Änderungserkennung.
 
-<xref:Microsoft.Extensions.Configuration.IConfiguration> steht im App-Container [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zur Verfügung. <xref:Microsoft.Extensions.Configuration.IConfiguration> kann in eine <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>-Klasse von Razor Pages oder <xref:Microsoft.AspNetCore.Mvc.Controller>-Klasse von MVC eingefügt werden, um die Konfiguration für die Klasse abzurufen.
+<xref:Microsoft.Extensions.Configuration.IConfiguration> steht im App-Container [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) zur Verfügung. <xref:Microsoft.Extensions.Configuration.IConfiguration> kann in <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> von Razor Pages oder <xref:Microsoft.AspNetCore.Mvc.Controller> von MVC eingefügt werden, um die Konfiguration für die Klasse abzurufen.
 
 In den folgenden Beispielen wird das Feld `_config` verwendet, um auf Konfigurationswerte zuzugreifen:
 
@@ -933,16 +1589,142 @@ Konfigurationswerte entsprechen den folgenden Konventionen:
 Die folgende Tabelle zeigt die für ASP.NET Core-Apps verfügbaren Konfigurationsanbieter.
 
 | Anbieter | Bereitstellung der Konfiguration über&hellip; |
-| -------- | ----------------------------------- |
-| [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) (Thema *Sicherheit*) | Azure Key Vault |
-| [Azure App Configuration-Anbieter](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure-Dokumentation) | Azure App Configuration |
-| [Befehlszeilen-Konfigurationsanbieter](#command-line-configuration-provider) | Befehlszeilenparameter |
-| [Benutzerdefinierter Konfigurationsanbieter](#custom-configuration-provider) | Benutzerdefinierte Quelle |
-| [Umgebungsvariablen-Konfigurationsanbieter](#environment-variables-configuration-provider) | Umgebungsvariablen |
-| [Dateikonfigurationsanbieter](#file-configuration-provider) | Dateien (INI, JSON, XML) |
-| [Schlüssel-pro-Datei-Konfigurationsanbieter](#key-per-file-configuration-provider) | Verzeichnisdateien |
-| [Speicherkonfigurationsanbieter](#memory-configuration-provider) | In-Memory-Sammlungen |
-| [Benutzergeheimnisse (Geheimnis-Manager)](xref:security/app-secrets) (Thema *Sicherheit*) | Datei im Benutzerprofilverzeichnis |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------------ | | [Azure Key Vault-Konfigurationsanbieter](xref:security/key-vault-configuration) (*Sicherheitsthemen*) | Azure Key Vault | | [Azure-App-Konfigurationsanbieter](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure-Dokumentation) | Azure App Configuration | | [Befehlszeilen-Konfigurationsanbieter](#command-line-configuration-provider) | Befehlszeilenparameter | | [Benutzerdefinierter Konfigurationsanbieter](#custom-configuration-provider) | Benutzerdefinierte Quelle | | [Umgebungsvariablen-Konfigurationsanbieter](#environment-variables-configuration-provider) | Umgebungsvariablen | | [Dateikonfigurationsanbieter](#file-configuration-provider) | Dateien (INI, JSON, XML) | | [Schlüssel-pro-Datei-Konfigurationsanbieter](#key-per-file-configuration-provider) | Verzeichnisdateien | | [Speicherkonfigurationsanbieter](#memory-configuration-provider) | In-Memory-Sammlungen | | [Benutzergeheimnisse (Geheimnis-Manager)](xref:security/app-secrets) (*Sicherheitsthemen*) | Datei im Benutzerprofilverzeichnis |
 
 Konfigurationsquellen werden beim Start in der Reihenfolge gelesen, in der ihre Konfigurationsanbieter angegeben sind. Die in diesem Thema beschriebenen Konfigurationsanbieter werden in alphabetischer Reihenfolge beschrieben, nicht in der Reihenfolge, in der der Code sie anordnet. Ordnen Sie die Konfigurationsanbieter im Code so an, dass sie den Prioritäten für die zugrunde liegenden Konfigurationsquellen entsprechen, die für die App erforderlich sind.
 
@@ -1057,10 +1839,288 @@ Die Beispiel-App nutzt zum Erstellen des Hosts die statische Hilfsmethode `Creat
 Der Wert muss einem Gleichheitszeichen (`=`) folgen, oder der Schlüssel muss ein Präfix (`--` oder `/`) haben, wenn der Wert einem Leerzeichen folgt. Der Wert ist nicht erforderlich, wenn ein Gleichheitszeichen verwendet wird (z. B. `CommandLineKey=`).
 
 | Schlüsselpräfix               | Beispiel                                                |
-| ------------------------ | ------------------------------------------------------ |
-| Ohne Präfix                | `CommandLineKey1=value1`                               |
-| Zwei Gedankenstriche (`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
-| Schrägstrich (`/`)      | `/CommandLineKey3=value3`, `/CommandLineKey3 value3`   |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------------------------- | | Kein Präfix                | `CommandLineKey1=value1`                               |
+| Zwei Bindestriche (`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
+|Schrägstrich (`/`)      | `/CommandLineKey3=value3`, `/CommandLineKey3 value3`   |
 
 Kombinieren Sie in einem Befehl nicht Schlüssel-Wert-Paare, die ein Gleichheitszeichen verwenden, mit Schlüssel-Wert-Paaren, die ein Leerzeichen verwenden.
 
@@ -1108,8 +2168,70 @@ Bei Apps, die Switchmappings verwenden, sollten im `CreateDefaultBuilder`-Aufruf
 Das erstellte Switchmappingwörterbuch enthält die in der folgenden Tabelle gezeigten Daten.
 
 | Key       | Wert             |
-| --------- | ----------------- |
-| `-CLKey1` | `CommandLineKey1` |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
 
 Wenn Switches zugeordnete Schlüssel beim Start der App verwendet werden, erhält die Konfiguration den Konfigurationswert auf dem vom Wörterbuch bereitgestellten Schlüssel:
@@ -1121,8 +2243,70 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 Nach dem Ausführen des obigen Befehls enthält die Konfiguration die in der folgenden Tabelle angegebenen Werte.
 
 | Key               | Wert    |
-| ----------------- | -------- |
-| `CommandLineKey1` | `value1` |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
 
 ## <a name="environment-variables-configuration-provider"></a>Umgebungsvariablen-Konfigurationsanbieter
@@ -1191,9 +2375,102 @@ Beim Erstellen des Host-Generators wird die Hostkonfiguration durch Umgebungsvar
 Die Konfigurations-API verfügt über spezielle Verarbeitungsregeln für vier Umgebungsvariablen für Verbindungszeichenfolgen, die beim Konfigurieren von Azure-Verbindungszeichenfolgen für die App-Umgebung verwendet werden. Umgebungsvariablen mit Präfixen, die in der Tabelle aufgeführt werden, werden in die App geladen, wenn für `AddEnvironmentVariables` kein Präfix angegeben wird.
 
 | Präfix für Verbindungszeichenfolgen | Anbieter |
-| ------------------------ | -------- |
-| `CUSTOMCONNSTR_` | Benutzerdefinierter Anbieter |
-| `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | `CUSTOMCONNSTR_` | Benutzerdefinierter Anbieter | | `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
 | `SQLAZURECONNSTR_` | [Azure SQL-Datenbank](https://azure.microsoft.com/services/sql-database/) |
 | `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/) |
 
@@ -1203,11 +2480,469 @@ Wenn eine Umgebungsvariable entdeckt und mit einem der vier Präfixe aus der Tab
 * Ein neues Konfigurations-Schlüssel-Wert-Paar wird erstellt, das den Datenbankverbindungsanbieter repräsentiert (mit Ausnahme des Präfixes `CUSTOMCONNSTR_`, für das kein Anbieter angegeben ist).
 
 | Umgebungsvariablenschlüssel | Konvertierter Konfigurationsschlüssel | Anbieterkonfigurationseintrag                                                    |
-| ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
-| `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Konfigurationseintrag wurde nicht erstellt.                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `MySql.Data.MySqlClient` |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Konfigurationseintrag wurde nicht erstellt.                                                | | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  | | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Schlüssel: `ConnectionStrings:{KEY}_ProviderName`:<br>Wert: `System.Data.SqlClient`  |
 
 **Beispiel**
 
@@ -1625,12 +3360,39 @@ TvShow = tvShow;
 Betrachten Sie die Konfigurationsschlüssel und -werte in der folgenden Tabelle.
 
 | Key             | Wert  |
-| :-------------: | :----: |
-| array:entries:0 | value0 |
-| array:entries:1 | value1 |
-| array:entries:2 | value2 |
-| array:entries:4 | value4 |
-| array:entries:5 | value5 |
+| :---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------: | :----: | | array:entries:0 | value0 | | array:entries:1 | value1 | | array:entries:2 | value2 | | array:entries:4 | value4 | | array:entries:5 | value5 |
 
 Diese Schlüssel und Werte werden mit dem Speicherkonfigurationsanbieter in die Beispiel-App geladen:
 
@@ -1656,12 +3418,182 @@ _config.GetSection("array").Bind(arrayExample);
 Das gebundene Objekt, eine Instanz von `ArrayExample`, empfängt die Arraydaten aus der Konfiguration.
 
 | `ArrayExample.Entries`-Index | `ArrayExample.Entries`-Wert |
-| :--------------------------: | :--------------------------: |
-| 0                            | value0                       |
-| 1                            | value1                       |
-| 2                            | value2                       |
-| 3                            | value4                       |
-| 4                            | value5                       |
+| :---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------: | | 0                            | value0                       | | 1                            | value1                       | | 2                            | value2                       | | 3                            | value4                       | | 4                            | value5                       |
 
 Index &num;3 im gebundenen Objekt enthält die Konfigurationsdaten für den `array:4`-Konfigurationsschlüssel und die Wert für `value4`. Beim Binden von Konfigurationsdaten, die ein Array enthalten, werden die Arrayindizes in den Konfigurationsschlüsseln lediglich zum Durchlaufen der Konfigurationsdaten beim Erstellen des Objekts verwendet. Ein NULL-Wert kann in den Konfigurationsdaten nicht beibehalten werden, und ein NULL-Eintrag wird nicht in einem gebundenen Objekt erstellt, wenn ein Array in Konfigurationsschlüsseln mindestens einen Index überspringt.
 
@@ -1685,19 +3617,219 @@ config.AddJsonFile(
 Das Schlüssel-Wert-Paar in der Tabelle wird in die Konfiguration geladen.
 
 | Key             | Wert  |
-| :-------------: | :----: |
-| array:entries:3 | value3 |
+| :---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------: | :----: | | array:entries:3 | value3 |
 
 Wenn die `ArrayExample`-Klasseninstanz gebunden wird, nachdem der JSON-Konfigurationsanbieter den Eintrag für Index &num;3 enthält, enthält das `ArrayExample.Entries`-Array den Wert.
 
 | `ArrayExample.Entries`-Index | `ArrayExample.Entries`-Wert |
-| :--------------------------: | :--------------------------: |
-| 0                            | value0                       |
-| 1                            | value1                       |
-| 2                            | value2                       |
-| 3                            | value3                       |
-| 4                            | value4                       |
-| 5                            | value5                       |
+| :---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------------: | | 0                            | value0                       | | 1                            | value1                       | | 2                            | value2                       | | 3                            | value3                       | | 4                            | value4                       | | 5                            | value5                       |
 
 **JSON-Arrayverarbeitung**
 
@@ -1708,11 +3840,79 @@ Wenn eine JSON-Datei ein Array enthält, werden Konfigurationsschlüssel für di
 Der JSON-Konfigurationsanbieter liest die Konfigurationsdaten in die folgenden Schlüssel-Wert-Paare:
 
 | Key                     | Wert  |
-| ----------------------- | :----: |
-| json_array:key          | valueA |
-| json_array:subsection:0 | valueB |
-| json_array:subsection:1 | valueC |
-| json_array:subsection:2 | valueD |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | :----: | | json_array:key          | valueA | | json_array:subsection:0 | valueB | | json_array:subsection:1 | valueC | | json_array:subsection:2 | valueD |
 
 In der Beispiel-App können die Konfigurations-Schlüssel-Wert-Paare mit dieser POCO-Klasse gebunden werden:
 
@@ -1721,10 +3921,230 @@ In der Beispiel-App können die Konfigurations-Schlüssel-Wert-Paare mit dieser 
 Nach dem Binden enthält `JsonArrayExample.Key` den Wert `valueA`. Die Unterabschnittwerte werden in der POCO-Arrayeigenschaft `Subsection` gespeichert.
 
 | `JsonArrayExample.Subsection`-Index | `JsonArrayExample.Subsection`-Wert |
-| :---------------------------------: | :---------------------------------: |
-| 0                                   | valueB                              |
-| 1                                   | valueC                              |
-| 2                                   | valueD                              |
+| :---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-----------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-----------------: | | 0                                   | valueB                              | | 1                                   | valueC                              | | 2                                   | valueD                              |
 
 ## <a name="custom-configuration-provider"></a>Benutzerdefinierter Konfigurationsanbieter
 
