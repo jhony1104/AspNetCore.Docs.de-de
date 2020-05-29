@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: ec2bc2867acdd1c9be42f77cb38be36abb8c8108
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: d7182594fbc22d056caff0864a053a0a92fa4e84
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967479"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438888"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>Core Blazor-Formulare und -Validierung in ASP.NET Core
 
@@ -65,7 +65,7 @@ Im vorherigen Beispiel:
 
 * Das Formular validiert Benutzereingaben im `name`-Feld mithilfe der im `ExampleModel`-Typ definierten Validierung. Das Modell wird im `@code`-Block der Komponente erstellt und in einem privaten Feld (`exampleModel`) gespeichert. Das Feld wird dem `Model`-Attribut des `<EditForm>`-Elements zugewiesen.
 * Der `@bind-Value` der `InputText`-Komponente bindet Folgendes:
-  * Die Modelleigenschaft (`exampleModel.Name`) an die `Value`-Eigenschaft der `InputText`-Komponente.
+  * Die Modelleigenschaft (`exampleModel.Name`) an die `Value`-Eigenschaft der `InputText`-Komponente. Weitere Informationen zur Eigenschaftenbindung finden Sie unter <xref:blazor/data-binding#parent-to-child-binding-with-component-parameters>.
   * Den Delegat eines Änderungsereignisses an die `ValueChanged`-Eigenschaft der `InputText`-Komponente.
 * Die `DataAnnotationsValidator`-Komponente fügt Validierungsunterstützung mithilfe von Datenanmerkungen hinzu.
 * Die `ValidationSummary`-Komponente fasst Validierungsnachrichten zusammen.
@@ -202,7 +202,7 @@ Im folgenden Beispiel:
 * Je nach Ergebnis der client- und serverseitigen Validierung, indem `isValid` überprüft wird, wird weiterer Code ausgeführt.
 
 ```razor
-<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+<EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
 
     ...
 

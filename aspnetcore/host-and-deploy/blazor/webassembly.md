@@ -1,50 +1,36 @@
 ---
-title: Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly
-author: guardrex
-description: Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: e136a401beffe9cc7e29906b3631ab3f068b30fd
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967596"
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
-# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Clientseitiges Hosten und Bereitstellen von ASP.NET WebAssembly
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams) und [Safia Abdalla](https://safia.rocks)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Mit dem [Blazor WebAssembly-Hostingmodell](xref:blazor/hosting-models#blazor-webassembly):
 
-* Die Blazor-App, ihre Abhängigkeiten und die .NET-Runtime werden parallel in den Browser heruntergeladen.
+* Die Blazor-App, ihre Abhängigkeiten und die .NET-Runtime werden parallel im Browser heruntergeladen.
 * Die App wird direkt im UI-Thread des Browsers ausgeführt.
 
 Die folgenden Bereitstellungsstrategien werden unterstützt:
 
 * Die Blazor-App wird von einer ASP.NET Core-App unterstützt. Diese Strategie wird im Abschnitt [Gehostete Bereitstellung mit ASP.NET Core](#hosted-deployment-with-aspnet-core) behandelt.
-* Die Blazor-App wird auf einem statischen Hosting-Webserver oder -Webservice abgelegt, auf dem .NET nicht zur Unterstützung der Blazor-App verwendet wird. Diese Strategie wird im Abschnitt [Eigenständige Bereitstellung](#standalone-deployment) behandelt, der Informationen zum Hosten einer Blazor WebAssembly-App als IIS-untergeordnete App enthält.
+* Die Blazor-App wird auf einem Webserver oder Webservice für statisches Hosting abgelegt, auf dem .NET nicht zur Unterstützung der Blazor-App verwendet wird. Diese Strategie wird im Abschnitt [Eigenständige Bereitstellung](#standalone-deployment) behandelt, der Informationen zum Hosten einer Blazor WebAssembly-App als untergeordnete IIS-App enthält.
 
 ## <a name="brotli-precompression"></a>Brotli-Vorkomprimierung
 
-Wenn eine Blazor WebAssembly-App veröffentlicht wird, wird die Ausgabe mithilfe des [Brotli-Komprimierungsalgorithmus](https://tools.ietf.org/html/rfc7932) auf höchster Stufe vorkomprimiert, um die App zu verkleinern und die Notwendigkeit einer Laufzeitkomprimierung zu beseitigen.
+Wenn eine Blazor WebAssembly-App veröffentlicht wird, wird die Ausgabe mithilfe des [Brotli-Komprimierungsalgorithmus](https://tools.ietf.org/html/rfc7932) auf höchster Stufe vorkomprimiert, um die App-Größe zu verringern und die Notwendigkeit für eine Laufzeitkomprimierung zu beseitigen.
 
 Informationen zur Komprimierungskonfiguration der Datei *web. config* von IIS finden Sie im Abschnitt [IIS: Brotli- und Gzip-Komprimierung](#brotli-and-gzip-compression).
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Erneutes Generieren von URLs für ein ordnungsgemäßes Routing
 
-Routinganforderungen für Seitenkomponenten in einer Blazor WebAssembly-App sind nicht so unkompliziert wie Routinganforderungen in einer gehosteten Blazor Server-App. Stellen Sie sich eine Blazor WebAssembly-App mit zwei Komponenten vor:
+Routinganforderungen für Seitenkomponenten in einer Blazor WebAssembly-App sind nicht so unkompliziert wie Routinganforderungen in einer gehosteten Blazor Server-App. Gehen Sie von einer Blazor WebAssembly-App mit zwei Komponenten aus:
 
 * *Main.razor:* wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`)
 * *About.razor:* `About`-Komponente.
@@ -54,9 +40,9 @@ Wenn das Standarddokument der App über die Adressleiste des Browsers (z. B. `h
 1. Der Browser sendet eine Anforderung.
 1. Die Standardseite wird zurückgegeben, in der Regel *index.html*.
 1. *index.html* startet die App.
-1. Der Blazor-Router lädt, und die Razor-Komponente `Main` wird gerendert.
+1. Der Blazor-Router wird geladen, und die Razor-Komponente `Main` wird gerendert.
 
-Auf der Seite „Main“ kann der Link zur `About`-Komponente auf dem Client ausgewählt werden, weil der Blazor-Router dafür sorgt, dass der Browser im Internet keine Anforderung für `About` an `www.contoso.com` sendet, und stattdessen die gerenderte `About`-Komponente selbst bereitstellt. Alle Anforderungen von internen Endpunkten *innerhalb der Blazor WebAssembly-App* funktionieren auf dieselbe Weise: Durch Anforderungen werden keine browserbasierten Anforderungen an serverseitig gehostete Ressourcen im Internet ausgelöst. Der Router verarbeitet Anforderungen intern.
+Auf der Seite „Main“ kann der Link zur `About`-Komponente auf dem Client ausgewählt werden, da der Blazor-Router dafür sorgt, dass der Browser im Internet keine Anforderung für `About` an `www.contoso.com` sendet, und stattdessen die gerenderte `About`-Komponente selbst bereitstellt. Alle Anforderungen von internen Endpunkten *innerhalb der Blazor WebAssembly-App* funktionieren auf dieselbe Weise: Durch Anforderungen werden keine browserbasierten Anforderungen an serverseitig gehostete Ressourcen im Internet ausgelöst. Der Router verarbeitet Anforderungen intern.
 
 Wenn eine Anforderung für `www.contoso.com/About` über die Adressleiste des Browsers gesendet wird, tritt bei der Anforderung ein Fehler auf. Diese Ressource ist im Internethost der App nicht vorhanden. Daher wird die Antwort *404 Nicht gefunden* zurückgegeben.
 
@@ -66,9 +52,9 @@ Wenn Sie die Bereitstellung auf einem IIS-Server durchführen, können Sie das U
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>Gehostete Bereitstellung mit ASP.NET Core
 
-Mit einer *gehosteten Bereitstellung* wird die Blazor WebAssembly-App über eine auf einem Webserver ausgeführte [ASP.NET Core-App](xref:index) für Browser bereitgestellt.
+Mit einer *gehosteten Bereitstellung* wird die Blazor WebAssembly-App über eine auf einem Webserver ausgeführte [ASP.NET Core-App für Browser](xref:index) bereitgestellt.
 
-Die Blazor WebAssembly-Client-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* der Server-App zusammen mit allen anderen statischen Webressourcen der Server-App veröffentlicht. Die beiden Apps werden zusammen bereitgestellt. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer gehosteten Bereitstellung enthält Visual Studio die Projektvorlage **Blazor WebAssembly-App** (`blazorwasm`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)) mit der ausgewählten Option **Hosted** (`-ho|--hosted`, wenn Sie den `dotnet new`-Befehl verwenden).
+Der Client Blazor der WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* der Server-App zusammen mit allen anderen statischen Webressourcen der Server-App veröffentlicht. Die beiden Apps werden zusammen bereitgestellt. Hierfür wird ein Webserver benötigt, auf dem eine ASP.NET Core-App gehostet werden kann. Bei einer gehosteten Bereitstellung enthält Visual Studio die **Blazor WebAssembly-App**-Projektvorlage (`blazorwasm`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)) mit der ausgewählten Option **Hosted** (`-ho|--hosted`, wenn Sie den `dotnet new`-Befehl verwenden).
 
 Weitere Informationen zum Hosten und Bereitstellen von ASP.NET Core-Apps finden Sie unter <xref:host-and-deploy/index>.
 
@@ -76,25 +62,25 @@ Informationen zum Bereitstellen für Azure App Service finden Sie unter <xref:tu
 
 ## <a name="standalone-deployment"></a>Eigenständige Bereitstellung
 
-Bei einer *eigenständigen Bereitstellung* wird die Blazor WebAssembly-App in Form von statischen Dateien bereitgestellt, die von Clients direkt angefordert werden. Jeder statische Dateiserver kann die Blazor-App bedienen.
+Bei einer *eigenständigen Bereitstellung* wird die Blazor WebAssembly-App in Form von statischen Dateien bereitgestellt, die von Clients direkt angefordert werden. Jeder Server für statische Dateien kann die Blazor-App bedienen.
 
 Eigenständige Bereitstellungsobjekte werden im Ordner */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* veröffentlicht.
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Blazor-WebAssembly-Apps können in Azure App Service unter Windows bereitgestellt werden. Dort wird die App auf [IIS](#iis) gehostet.
+Blazor WebAssembly-Apps können in Azure App Service unter Windows bereitgestellt werden. Dort wird die App auf [IIS](#iis) gehostet.
 
-Die Bereitstellung einer eigenständigen Blazor-WebAssembly-App in Azure App Service für Linux wird derzeit nicht unterstützt. Ein Linux-Serverimage zum Hosten der App ist derzeit nicht verfügbar. Wir arbeiten daran, sodass dieses Szenario bald unterstützt werden kann.
+Die Bereitstellung einer eigenständigen Blazor WebAssembly-App in Azure App Service für Linux wird derzeit nicht unterstützt. Ein Linux-Serverimage zum Hosten der App ist derzeit nicht verfügbar. Wir arbeiten daran, sodass dieses Szenario bald unterstützt werden kann.
 
 ### <a name="iis"></a>IIS
 
-IIS ist ein leistungsfähiger Server für statische Dateien für Blazor-Apps. Informationen zum Konfigurieren von IIS zum Hosten von Blazor finden Sie unter [Build a Static Website on IIS (Erstellen einer statischen Website unter IIS)](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).
+IIS ist ein leistungsfähiger Server für statische Dateien für Blazor-Apps. Informationen zum Konfigurieren von IIS zum Hosten von Blazor finden Sie unter [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis) (Erstellen einer statischen Website unter IIS).
 
 Veröffentlichte Objekte werden im Ordner */bin/Release/{Zielframework}/publish* erstellt. Die Inhalte des Ordners *publish* werden auf dem Webserver oder über den Hostingdienst gehostet.
 
 #### <a name="webconfig"></a>web.config
 
-Beim Veröffentlichen eines Blazor-Projekts wird eine *web.config*-Datei mit der folgenden IIS-Konfiguration erstellt:
+Beim Veröffentlichen eines Blazor-Projekts wird eine Datei *web.config* mit der folgenden IIS-Konfiguration erstellt:
 
 * Für die folgenden Dateierweiterungen werden MIME-Typen festgelegt:
   * *.dll* &ndash; `application/octet-stream`
@@ -133,7 +119,7 @@ Wenn eine eigenständige App als IIS-untergeordnete App gehostet wird, führen S
 
 * Deaktivieren Sie den vererbten ASP.NET Core Module-Handler.
 
-  Entfernen Sie den Handler in der veröffentlichen *web.config*-Datei der Blazor-App, indem Sie der Datei einen `<handlers>`-Abschnitt hinzufügen:
+  Entfernen Sie den Handler in der veröffentlichen Datei *web.config* der Blazor-App, indem Sie der Datei einen `<handlers>`-Abschnitt hinzufügen:
 
   ```xml
   <handlers>
@@ -161,11 +147,11 @@ Das Entfernen des Handlers bzw. das Deaktivieren der Vererbung wird zusätzlich 
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli- und Gzip-Komprimierung
 
-IIS kann über *web.config* so konfiguriert werden, dass mit Brotli oder Gzip komprimierte Blazor-Ressourcen bereitgestellt werden. Eine Beispielkonfiguration finden Sie unter [web.config](webassembly/_samples/web.config?raw=true).
+IIS kann über *web.config* so konfiguriert werden, dass Brotli- oder Gzip-komprimierte Blazor Ressourcen bereitgestellt werden. Eine Beispielkonfiguration finden Sie unter [web.config](webassembly/_samples/web.config?raw=true).
 
 #### <a name="troubleshooting"></a>Problembehandlung
 
-Wenn die Fehlermeldung *500: Interner Serverfehler* angezeigt wird und IIS-Manager beim Zugriff auf die Konfiguration der Website eine Fehlermeldung anzeigt, überprüfen Sie, ob das URL-Rewrite-Modul installiert ist. Wenn das Modul nicht installiert ist, kann die Datei *web.config* von IIS nicht analysiert werden. Dadurch wird verhindert, dass die Konfiguration der Website von IIS-Manager geladen wird, und dass die statischen Blazor-Dateien auf der Website bereitgestellt werden.
+Wenn die Fehlermeldung *500: Interner Serverfehler* angezeigt wird und IIS-Manager beim Zugriff auf die Konfiguration der Website eine Fehlermeldung anzeigt, überprüfen Sie, ob das URL-Rewrite-Modul installiert ist. Wenn das Modul nicht installiert ist, kann die Datei *web.config* von IIS nicht analysiert werden. Dadurch wird verhindert, dass die Konfiguration der Website vom IIS-Manager geladen wird, und dass die statischen Blazor-Dateien auf der Website bereitgestellt werden.
 
 Weitere Informationen zur Problembehandlung von Bereitstellungen für IIS finden Sie unter <xref:test/troubleshoot-azure-iis>.
 
@@ -176,7 +162,7 @@ Das Hosten statischer Dateien von [Azure Storage](/azure/storage/) ermöglicht d
 Wenn der Blobdienst für das Hosten von statischen Websites in einem Speicherkonto aktiviert ist, gehen Sie folgendermaßen vor:
 
 * Legen Sie den **Namen des Indexdokuments** auf `index.html` fest.
-* Legen Sie den **Pfad des Fehlerdokuments** auf `index.html` fest. Razor-Komponenten und andere Endpunkte, bei denen es sich nicht um Dateien handelt, befinden sich nicht in physischen Pfaden in dem statischen Inhalt, der vom Blobdienst gespeichert wird. Wenn eine Anforderung für eine dieser Ressourcen empfangen wird, die vom Blazor-Router verarbeitet werden soll, leitet der vom Blobdienst generierte Fehler *404 – Nicht gefunden* die Anforderung an den **Pfad des Fehlerdokuments** weiter. Das Blob *index.html* wird zurückgegeben, und der Blazor-Router lädt und verarbeitet den Pfad.
+* Legen Sie den **Pfad des Fehlerdokuments** auf `index.html` fest. Razor-Komponenten und andere Endpunkte, bei denen es sich nicht um Dateien handelt, befinden sich nicht in physischen Pfaden in dem statischen Inhalt, der vom Blobdienst gespeichert wird. Wenn eine Anforderung für eine dieser Ressourcen empfangen wird, die vom Blazor-Router verarbeitet werden soll, leitet der vom Blob-Dienst generierte *Fehler 404 – Nicht gefunden* die Anforderung an den **Pfad des Fehlerdokuments** weiter. Das Blob *index.html* wird zurückgegeben, und der Blazor-Router lädt und verarbeitet den Pfad.
 
 Weitere Informationen finden Sie unter [Hosten von statischen Websites in Azure Storage](/azure/storage/blobs/storage-blob-static-website).
 
@@ -202,7 +188,7 @@ Weitere Informationen zur Nginx-Webserverkonfiguration für die Produktion finde
 
 ### <a name="nginx-in-docker"></a>Nginx in Docker
 
-Richten Sie zum Hosten von Blazor in Docker mithilfe von Nginx die Dockerfile für die Verwendung des auf Alpine basierenden Nginx-Images ein. Aktualisieren Sie die Dockerfile zum Kopieren der Datei *nginx.config* in den Container.
+Richten Sie zum Hosten von Blazor in Docker mithilfe von NGINX das Dockerfile für die Verwendung des auf Alpine basierenden NGINX-Images ein. Aktualisieren Sie die Dockerfile zum Kopieren der Datei *nginx.config* in den Container.
 
 Fügen Sie der Dockerfile eine Zeile hinzu, wie im folgenden Beispiel dargestellt:
 
@@ -214,7 +200,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a>Apache
 
-So stellen Sie eine Blazor-WebAssembly-App für CentOS 7 oder später bereit:
+So stellen Sie eine Blazor WebAssembly-App für CentOS 7 oder höher bereit
 
 1. Erstellen Sie die Apache-Konfigurationsdatei. Im folgenden Beispiel wird eine vereinfachte Konfigurationsdatei veranschaulicht (*blazorapp.config*):
 
@@ -354,11 +340,69 @@ Eine Blazor WebAssembly-App kann mit der Funktion `loadBootResource` initialisie
 `loadBootResource`-Parameter sind in der folgenden Tabelle aufgeführt.
 
 | Parameter    | Beschreibung |
-| ------------ | ----------- |
-| `type`       | Der Typ der Ressource. Zulässige Typen: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`, `timezonedata` |
-| `name`       | Der Name der Ressource. |
-| `defaultUri` | Der relative oder absolute URI der Ressource. |
-| `integrity`  | Die Integritätszeichenfolge, die den erwarteten Inhalt in der Antwort darstellt. |
+| ---
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: 'Hosten und Bereitstellen von ASP.NET Core Blazor WebAssembly' author: description: 'Erfahren Sie, wie Sie eine Blazor-App mithilfe von ASP.NET Core, Content Delivery Network (CDN), Dateiservern und GitHub-Seiten hosten und bereitstellen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | `type`       | Der Typ der Ressource. Zulässige Typen: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`, `timezonedata` | | `name`       | Der Name der Ressource. | | `defaultUri` | Der relative oder absolute URI der Ressource. | | `integrity`  | Die Integritätszeichenfolge, die den erwarteten Inhalt in der Antwort darstellt. |
 
 `loadBootResource` gibt eines der folgenden Elemente zurück, um den Ladevorgang außer Kraft zu setzen:
 
@@ -427,11 +471,23 @@ dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" 
 ((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
 ```
 
+Wenn auch Service Worker-Assets verwendet werden, fügen Sie den folgenden Befehl hinzu:
+
+```powershell
+((Get-Content .\service-worker-assets.js -Raw) -replace '.dll"','.bin"') | Set-Content .\service-worker-assets.js
+```
+
 Unter Linux oder macOS:
 
 ```console
 for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
 sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
+```
+
+Wenn auch Service Worker-Assets verwendet werden, fügen Sie den folgenden Befehl hinzu:
+
+```console
+sed -i 's/\.dll"/.bin"/g' service-worker-assets.js
 ```
    
 Um eine andere Dateierweiterung als *.bin* zu verwenden, ersetzen Sie *.bin* in den vorherigen Befehlen.
@@ -440,6 +496,8 @@ Wählen Sie für die komprimierten Dateien *blazor.boot.json.gz* und *blazor.boo
 
 * Entfernen Sie die komprimierten Dateien *blazor.boot.json.gz* und *blazor.boot.json.br*. Bei diesem Ansatz ist die Komprimierung deaktiviert.
 * Komprimieren Sie die aktualisierte Datei *blazor.boot.json* erneut.
+
+Die vorherige Anleitung gilt auch, wenn Service Worker-Assets verwendet werden. Entfernen Sie *wwwroot/service-worker-assets.js.br* und *wwwroot/service-worker-assets.js.gz*, oder komprimieren Sie sie erneut. Andernfalls treten bei Dateiintegritätsprüfungen im Browser Fehler auf.
 
 Im folgenden Windows-Beispiel wird ein PowerShell-Skript verwendet, das sich im Stammverzeichnis des Projekts befindet.
 
@@ -452,6 +510,12 @@ dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { 
 Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 ```
 
+Wenn auch Service Worker-Assets verwendet werden, fügen Sie den folgenden Befehl hinzu:
+
+```powershell
+((Get-Content $filepath\bin\Release\$tfm\wwwroot\service-worker-assets.js -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\service-worker-assets.js
+```
+
 In der Projektdatei wird das Skript nach Veröffentlichung der App ausgeführt:
 
 ```xml
@@ -461,3 +525,4 @@ In der Projektdatei wird das Skript nach Veröffentlichung der App ausgeführt:
 ```
 
 Wenn Sie Feedback geben möchten, besuchen Sie [aspnetcore/issues #5477](https://github.com/dotnet/aspnetcore/issues/5477).
+ 

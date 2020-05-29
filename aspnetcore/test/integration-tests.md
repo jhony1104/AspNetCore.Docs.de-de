@@ -1,24 +1,11 @@
 ---
-title: Integrationstests in ASP.NET Core
-author: rick-anderson
-description: In diesem Artikel erfahren Sie, wie Integrationstests sicherstellen, dass die Komponenten einer App auf der Infrastrukturebene ordnungsgemäß funktionieren, einschließlich der Datenbank, dem Dateisystem und dem Netzwerk.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/06/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/integration-tests
-ms.openlocfilehash: a01d2881133f39c1a26e4724ae25336c54746bc5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766393"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Integrationstests in ASP.NET Core
 
@@ -34,7 +21,7 @@ In diesem Thema werden Grundkenntnisse über Komponententests vorausgesetzt. Wen
 
 Bei der Beispiel-App handelt es sich um eine Razor Pages-App, hierfür werden grundlegende Kenntnisse über Razor Pages vorausgesetzt. Wenn Sie nicht mit Razor Pages vertraut sind, lesen Sie die folgenden Themen:
 
-* [Introduction to Razor Pages (Einführung in Razor Pages)](xref:razor-pages/index)
+* [Einführung in Razor Pages](xref:razor-pages/index)
 * [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start)
 * [Komponententests für Razor-Seiten](xref:test/razor-pages-tests)
 
@@ -156,6 +143,8 @@ Die Webhostkonfiguration kann unabhängig von den Testklassen durch Erben von de
 
    Der Datenbankkontext des GS wird in dessen `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices`-Rückruf der Test-App wird ausgeführt, *nachdem* der `Startup.ConfigureServices`-Code der App ausgeführt wurde. Die Ausführungsreihenfolge ist im Release von ASP.NET Core 3.0 eine Breaking Change für den [generischen Host](xref:fundamentals/host/generic-host). Um für die Tests eine andere Datenbank als die Datenbank der App zu verwenden, muss der Datenbankkontext der App in `builder.ConfigureServices` ersetzt werden.
 
+   Für GS, die weiterhin den [Webhost}(xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
+
    Die Beispiel-App findet den Dienstdeskriptor für den Datenbankkontext und verwendet den Deskriptor, um die Dienstregistrierung zu entfernen. Als Nächstes fügt die Factory einen neuen `ApplicationDbContext` hinzu, der eine In-Memory-Datenbank für die Tests verwendet.
 
    Um eine Verbindung mit einer anderen Datenbank als der In-Memory-Datenbank herzustellen, ändern Sie den `UseInMemoryDatabase`-Aufruf, um den Kontext mit einer anderen Datenbank zu verbinden. So verwenden Sie eine SQL Server-Testdatenbank:
@@ -213,11 +202,45 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang durchführt, de
 In der folgenden Tabelle werden die Standard-[WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) gezeigt, die bei der Erstellung von `HttpClient`-Instanzen verfügbar sind.
 
 | Option | Beschreibung | Standard |
-| ------ | ----------- | ------- |
-| [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungsantworten befolgen sollen. | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt sie fest. | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen Cookies verarbeiten sollen. | `true` |
-| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Ruft die maximale Anzahl von Umleitungsantworten ab, die von `HttpClient`-Instanzen befolgt werden sollen, oder legt diese fest. | 7 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungsantworten befolgen sollen. | `true` | | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt sie fest. | `http://localhost` | | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen Cookies verarbeiten sollen. | `true` | | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Ruft die maximale Anzahl von Umleitungsantworten ab, die von `HttpClient`-Instanzen befolgt werden sollen, oder legt diese fest. | 7 |
 
 Erstellen Sie die `WebApplicationFactoryClientOptions`-Klasse, und übergeben Sie sie an die [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient)-Methode (Standardwerte werden im Codebeispiel gezeigt):
 
@@ -314,16 +337,23 @@ Weitere Informationen zu `WebApplicationFactoryClientOptions` finden Sie im Absc
 
 ## <a name="set-the-environment"></a>Festlegen der Umgebung
 
-Standardmäßig ist die Host- und App-Umgebung des GS für die Verwendung der Entwicklungsumgebung konfiguriert. So überschreiben Sie die Umgebung des GS:
+Standardmäßig ist die Host- und App-Umgebung des GS für die Verwendung der Entwicklungsumgebung konfiguriert. So überschreiben Sie die Umgebung des GS bei Verwendung von `IHostBuilder`:
 
 * Legen Sie die `ASPNETCORE_ENVIRONMENT`-Umgebungsvariable fest (z. B. `Staging`, `Production` oder ein anderer benutzerdefinierter Wert wie `Testing`).
 * Überschreiben Sie `CreateHostBuilder` in der Test-App, um Umgebungsvariablen mit dem Präfix `ASPNETCORE` zu lesen.
 
 ```csharp
-protected override IHostBuilder CreateHostBuilder() => 
+protected override IHostBuilder CreateHostBuilder() =>
     base.CreateHostBuilder()
         .ConfigureHostConfiguration(
             config => config.AddEnvironmentVariables("ASPNETCORE"));
+```
+
+Wenn das GS den Webhost (`IWebHostBuilder`) verwendet, überschreiben Sie `CreateWebHostBuilder`:
+
+```csharp
+protected override IWebHostBuilder CreateWebHostBuilder() =>
+    base.CreateWebHostBuilder().UseEnvironment("Testing");
 ```
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Ableitung des Inhaltsstammpfads der App durch die Testinfrastruktur
@@ -351,9 +381,78 @@ Nachdem die Tests der `IClassFixture`-Implementierung ausgeführt wurden, werden
 Die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei Apps:
 
 | App | Projektverzeichnis | Beschreibung |
-| --- | ----------------- | ----------- |
-| Nachrichten-App (das GS) | *src/RazorPagesProject* | Ermöglicht einem Benutzer, Nachrichten hinzuzufügen, eine oder alle Nachrichten zu löschen und Nachrichten zu analysieren. |
-| Testen der App | *tests/RazorPagesProject.Tests* | Wird für den Integrationstest des GS verwendet. |
+| --- | ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | Nachrichten-App (das GS) | *src/RazorPagesProject* | Ermöglicht einem Benutzer, Nachrichten hinzuzufügen, eine oder alle Nachrichten zu löschen und Nachrichten zu analysieren. | | Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das GS zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE, wie z. B. [Visual Studio](https://visualstudio.microsoft.com) ausgeführt werden. Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *tests/RazorPagesProject.Tests* aus:
 
@@ -381,11 +480,86 @@ Obwohl die App nicht das Repositorymuster verwendet und kein effektives Beispiel
 Bei der Test-App handelt es sich um eine Konsolen-App im Verzeichnis *tests/RazorPagesProject.Tests*.
 
 | Test-App-Verzeichnis | Beschreibung |
-| ------------------ | ----------- |
-| *AuthTests* | Enthält Testmethoden für Folgendes:<ul><li>Zugreifen auf eine sichere Seite durch einen nicht authentifizierten Benutzer.</li><li>Zugreifen auf eine sichere Seite durch einen authentifizierten Benutzer mit einem Pseudo-<xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>.</li><li>Abrufen eines GitHub-Benutzerprofils und Überprüfen der Benutzeranmeldung des Profils.</li></ul> |
-| *BasicTests* | Enthält eine Testmethode für Routing und Inhaltstyp. |
-| *IntegrationTests* | Enthält die Integrationstests für die Indexseite unter Verwendung der benutzerdefinierten `WebApplicationFactory`-Klasse. |
-| *Helpers/Utilities* | <ul><li>*Utilities.cs* enthält die `InitializeDbForTests`-Methode, mit der ein Seeding der Datenbank mit Testdaten durchgeführt wird.</li><li>*HtmlHelpers.cs* stellt eine Methode bereit, mit der ein AngleSharp-`IHtmlDocument` zur Verwendung durch die Testmethoden zurückgegeben wird.</li><li>*HttpClientExtensions.cs* stellt Überladungen für `SendAsync` bereit, um Anforderungen an das GS zu senden.</li></ul> |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | *AuthTests* | Enthält Testmethoden für:<ul><li>Zugreifen auf eine sichere Seite durch einen nicht authentifizierten Benutzer.</li><li>Zugreifen auf eine sichere Seite durch einen authentifizierten Benutzer mit einem Pseudo-<xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>.</li><li>Abrufen eines GitHub-Benutzerprofils und Überprüfen der Benutzeranmeldung des Profils.</li></ul> | | *BasicTests* | Enthält eine Testmethode für Routing und Inhaltstyp. | | *IntegrationTests* | Enthält die Integrationstests für die Indexseite unter Verwendung der benutzerdefinierten `WebApplicationFactory`-Klasse. | | *Helpers/Utilities* | <ul><li>*Utilities.cs* enthält die `InitializeDbForTests`-Methode, mit der ein Seeding der Datenbank mit Testdaten durchgeführt wird.</li><li>*HtmlHelpers.cs* stellt eine Methode bereit, mit der ein AngleSharp-`IHtmlDocument` zur Verwendung durch die Testmethoden zurückgegeben wird.</li><li>*HttpClientExtensions.cs* stellt Überladungen für `SendAsync` bereit, um Anforderungen an das GS zu senden.</li></ul> |
 
 Das Testframework ist [xUnit](https://xunit.github.io/). Integrationstests werden mit dem [Microsoft.AspNetCore.TestHost](/dotnet/api/microsoft.aspnetcore.testhost) durchgeführt, der den [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) umfasst. Da das [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing)-Paket zum Konfigurieren des Testhosts und des Testservers verwendet wird, benötigen die `TestHost`- und `TestServer`-Pakete keine direkten Paketverweise in der Projektdatei der Test-App bzw. keine Entwicklerkonfiguration in der Test-App.
 
@@ -399,6 +573,8 @@ Die Beispiel-App führt ein Seeding der Datenbank mit drei Nachrichten in *Utili
 
 Der Datenbankkontext des GS wird in dessen `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices`-Rückruf der Test-App wird ausgeführt, *nachdem* der `Startup.ConfigureServices`-Code der App ausgeführt wurde. Um eine andere Datenbank für die Tests zu verwenden, muss der Datenbankkontext der App in `builder.ConfigureServices` ersetzt werden. Weitere Informationen finden Sie im Abschnitt [Anpassen von WebApplicationFactory](#customize-webapplicationfactory).
 
+Für GS, die weiterhin den [Webhost}(xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
@@ -411,7 +587,7 @@ In diesem Thema werden Grundkenntnisse über Komponententests vorausgesetzt. Wen
 
 Bei der Beispiel-App handelt es sich um eine Razor Pages-App, hierfür werden grundlegende Kenntnisse über Razor Pages vorausgesetzt. Wenn Sie nicht mit Razor Pages vertraut sind, lesen Sie die folgenden Themen:
 
-* [Introduction to Razor Pages (Einführung in Razor Pages)](xref:razor-pages/index)
+* [Einführung in Razor Pages](xref:razor-pages/index)
 * [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start)
 * [Komponententests für Razor-Seiten](xref:test/razor-pages-tests)
 
@@ -519,7 +695,7 @@ Standardmäßig werden nicht erforderliche Cookies nicht über Anforderungen hin
 
 Die Webhostkonfiguration kann unabhängig von den Testklassen durch Erben von der `WebApplicationFactory` erstellt werden, um eine oder mehrere benutzerdefinierte Factorys zu erstellen:
 
-1. Erben Sie von `WebApplicationFactory`, und überschreiben Sie [ConfigureWebHost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost). Der [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) erlaubt die Konfiguration der Dienstsammlung mit [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices):
+1. Erben Sie von `WebApplicationFactory`, und überschreiben Sie [ConfigureWebHost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost). Der [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) erlaubt die Konfiguration der Dienstsammlung mit [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices), die vor den `Startup.ConfigureServices` der App ausgeführt werden. Der [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) ermöglicht das Überschreiben und Ändern registrierter Dienste in der Dienstsammlung mit [ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices):
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
@@ -567,11 +743,45 @@ Da ein anderer Test in der `IndexPageTests`-Klasse einen Vorgang durchführt, de
 In der folgenden Tabelle werden die Standard-[WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) gezeigt, die bei der Erstellung von `HttpClient`-Instanzen verfügbar sind.
 
 | Option | Beschreibung | Standard |
-| ------ | ----------- | ------- |
-| [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungsantworten befolgen sollen. | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt sie fest. | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen Cookies verarbeiten sollen. | `true` |
-| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Ruft die maximale Anzahl von Umleitungsantworten ab, die von `HttpClient`-Instanzen befolgt werden sollen, oder legt diese fest. | 7 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen automatisch Umleitungsantworten befolgen sollen. | `true` | | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Ruft die Basisadresse der `HttpClient`-Instanzen ab oder legt sie fest. | `http://localhost` | | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Ruft ab oder legt fest, ob `HttpClient`-Instanzen Cookies verarbeiten sollen. | `true` | | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Ruft die maximale Anzahl von Umleitungsantworten ab, die von `HttpClient`-Instanzen befolgt werden sollen, oder legt diese fest. | 7 |
 
 Erstellen Sie die `WebApplicationFactoryClientOptions`-Klasse, und übergeben Sie sie an die [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient)-Methode (Standardwerte werden im Codebeispiel gezeigt):
 
@@ -671,13 +881,38 @@ Weitere Informationen zu `WebApplicationFactoryClientOptions` finden Sie im Absc
 Standardmäßig ist die Host- und App-Umgebung des GS für die Verwendung der Entwicklungsumgebung konfiguriert. So überschreiben Sie die Umgebung des GS:
 
 * Legen Sie die `ASPNETCORE_ENVIRONMENT`-Umgebungsvariable fest (z. B. `Staging`, `Production` oder ein anderer benutzerdefinierter Wert wie `Testing`).
-* Überschreiben Sie `CreateHostBuilder` in der Test-App, um Umgebungsvariablen mit dem Präfix `ASPNETCORE` zu lesen.
+* Überschreiben Sie `CreateWebHostBuilder` in der Test-App, um die `ASPNETCORE_ENVIRONMENT`-Umgebungsvariable zu lesen.
 
 ```csharp
-protected override IHostBuilder CreateHostBuilder() => 
-    base.CreateHostBuilder()
-        .ConfigureHostConfiguration(
-            config => config.AddEnvironmentVariables("ASPNETCORE"));
+public class CustomWebApplicationFactory<TStartup> 
+    : WebApplicationFactory<TStartup> where TStartup: class
+{
+    protected override IWebHostBuilder CreateWebHostBuilder()
+    {
+        return base.CreateWebHostBuilder()
+            .UseEnvironment(
+                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+    }
+
+    ...
+}
+```
+
+Die Umgebung kann auch direkt auf dem Hostgenerator in einer benutzerdefinierten <xref:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory%601> festgelegt werden:
+
+```csharp
+public class CustomWebApplicationFactory<TStartup> 
+    : WebApplicationFactory<TStartup> where TStartup: class
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.UseEnvironment(
+            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+    
+        ...
+    }
+
+    ...
 ```
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Ableitung des Inhaltsstammpfads der App durch die Testinfrastruktur
@@ -715,9 +950,78 @@ Nachdem die Tests der `IClassFixture`-Implementierung ausgeführt wurden, werden
 Die [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) besteht aus zwei Apps:
 
 | App | Projektverzeichnis | Beschreibung |
-| --- | ----------------- | ----------- |
-| Nachrichten-App (das GS) | *src/RazorPagesProject* | Ermöglicht einem Benutzer, Nachrichten hinzuzufügen, eine oder alle Nachrichten zu löschen und Nachrichten zu analysieren. |
-| Testen der App | *tests/RazorPagesProject.Tests* | Wird für den Integrationstest des GS verwendet. |
+| --- | ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | Nachrichten-App (das GS) | *src/RazorPagesProject* | Ermöglicht einem Benutzer, Nachrichten hinzuzufügen, eine oder alle Nachrichten zu löschen und Nachrichten zu analysieren. | | Test-App | *tests/RazorPagesProject.Tests* | Wird verwendet, um das GS zu integrieren. |
 
 Die Tests können mit den integrierten Testfunktionen einer IDE, wie z. B. [Visual Studio](https://visualstudio.microsoft.com) ausgeführt werden. Wenn Sie [Visual Studio Code](https://code.visualstudio.com/) oder die Befehlszeile verwenden, führen Sie den folgenden Befehl an einer Eingabeaufforderung im Verzeichnis *tests/RazorPagesProject.Tests* aus:
 
@@ -745,11 +1049,86 @@ Obwohl die App nicht das Repositorymuster verwendet und kein effektives Beispiel
 Bei der Test-App handelt es sich um eine Konsolen-App im Verzeichnis *tests/RazorPagesProject.Tests*.
 
 | Test-App-Verzeichnis | Beschreibung |
-| ------------------ | ----------- |
-| *AuthTests* | Enthält Testmethoden für Folgendes:<ul><li>Zugreifen auf eine sichere Seite durch einen nicht authentifizierten Benutzer.</li><li>Zugreifen auf eine sichere Seite durch einen authentifizierten Benutzer mit einem Pseudo-<xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>.</li><li>Abrufen eines GitHub-Benutzerprofils und Überprüfen der Benutzeranmeldung des Profils.</li></ul> |
-| *BasicTests* | Enthält eine Testmethode für Routing und Inhaltstyp. |
-| *IntegrationTests* | Enthält die Integrationstests für die Indexseite unter Verwendung der benutzerdefinierten `WebApplicationFactory`-Klasse. |
-| *Helpers/Utilities* | <ul><li>*Utilities.cs* enthält die `InitializeDbForTests`-Methode, mit der ein Seeding der Datenbank mit Testdaten durchgeführt wird.</li><li>*HtmlHelpers.cs* stellt eine Methode bereit, mit der ein AngleSharp-`IHtmlDocument` zur Verwendung durch die Testmethoden zurückgegeben wird.</li><li>*HttpClientExtensions.cs* stellt Überladungen für `SendAsync` bereit, um Anforderungen an das GS zu senden.</li></ul> |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | *AuthTests* | Enthält Testmethoden für:<ul><li>Zugreifen auf eine sichere Seite durch einen nicht authentifizierten Benutzer.</li><li>Zugreifen auf eine sichere Seite durch einen authentifizierten Benutzer mit einem Pseudo-<xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>.</li><li>Abrufen eines GitHub-Benutzerprofils und Überprüfen der Benutzeranmeldung des Profils.</li></ul> | | *BasicTests* | Enthält eine Testmethode für Routing und Inhaltstyp. | | *IntegrationTests* | Enthält die Integrationstests für die Indexseite unter Verwendung der benutzerdefinierten `WebApplicationFactory`-Klasse. | | *Helpers/Utilities* | <ul><li>*Utilities.cs* enthält die `InitializeDbForTests`-Methode, mit der ein Seeding der Datenbank mit Testdaten durchgeführt wird.</li><li>*HtmlHelpers.cs* stellt eine Methode bereit, mit der ein AngleSharp-`IHtmlDocument` zur Verwendung durch die Testmethoden zurückgegeben wird.</li><li>*HttpClientExtensions.cs* stellt Überladungen für `SendAsync` bereit, um Anforderungen an das GS zu senden.</li></ul> |
 
 Das Testframework ist [xUnit](https://xunit.github.io/). Integrationstests werden mit dem [Microsoft.AspNetCore.TestHost](/dotnet/api/microsoft.aspnetcore.testhost) durchgeführt, der den [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) umfasst. Da das [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing)-Paket zum Konfigurieren des Testhosts und des Testservers verwendet wird, benötigen die `TestHost`- und `TestServer`-Pakete keine direkten Paketverweise in der Projektdatei der Test-App bzw. keine Entwicklerkonfiguration in der Test-App.
 

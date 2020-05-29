@@ -1,30 +1,16 @@
 ---
-title: Debuggen der ASP.NET Core Blazor-Assembly
-author: guardrex
-description: Erfahren Sie, wie Sie Blazor-Apps debuggen.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/16/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/debug
-ms.openlocfilehash: 9acbb8e7b122a8d527d16ce33af01c2e7e7608bf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767537"
+title: 'Debuggen der Blazor-WebAssembly' author: description: 'Erfahren Sie, wie Sie Blazor-Apps debuggen.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuggen der ASP.NET Core Blazor-Assembly
 
 [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Das Debuggen von Blazor WebAssembly-Apps kann mithilfe der Browserentwicklertools in Chromium-basierten Browsern (Edge/Chrome) durchgeführt werden.  Alternativ können Sie Ihre App mit Visual Studio oder Visual Studio Code debuggen.
 
@@ -58,8 +44,6 @@ Zum Debuggen ist einer der folgenden Browser erforderlich:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Aktivieren des Debuggens für Visual Studio und Visual Studio Code
 
-Das Debuggen ist für neue Projekte automatisch aktiviert, die mit der Blazor WebAssembly-Projektvorlage von ASP.NET Core 3.2 Preview 3 oder höher erstellt werden ([aktuelles Release ist 3.2 Preview 4](xref:blazor/get-started)).
-
 Zum Aktivieren des Debuggens für eine vorhandene Blazor WebAssembly-App müssen Sie die Datei *launchSettings.json* im Startprojekt aktualisieren, sodass sie die folgende `inspectUri`-Eigenschaft in allen Startprofilen enthält:
 
 ```json
@@ -79,7 +63,6 @@ Die `inspectUri`-Eigenschaft:
 
 So debuggen Sie eine Blazor WebAssembly-App in Visual Studio:
 
-1. Stellen Sie sicher, dass Sie [das neueste Preview-Release von Visual Studio 2019 16.6](https://visualstudio.com/preview) (Preview 2 oder höher) installiert haben.
 1. Erstellen Sie eine neue in ASP.NET Core gehostete Blazor WebAssembly-App.
 1. Drücken Sie <kbd>F5</kbd>, um die App im Debugger auszuführen.
 1. Legen Sie einen Breakpoint in der `IncrementCount`-Methode von *Counter.razor* fest.

@@ -1,23 +1,11 @@
 ---
-title: Verwenden von gRPC in Browser-Apps
-author: jamesnk
-description: Erfahren Sie, wie Sie gRPC-Dienste für ASP.NET Core so konfigurieren, dass sie mit gRPC-Web von Browser-Apps aus aufgerufen werden können.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 04/15/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/browser
-ms.openlocfilehash: a74f7acb54b4601a0c30ff1a39dc30231e2b5a78
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774742"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="use-grpc-in-browser-apps"></a>Verwenden von gRPC in Browser-Apps
 
@@ -51,7 +39,7 @@ gRPC-Dienste, die in ASP.NET Core gehostet werden, können so konfiguriert werde
 So aktivieren Sie gRPC-Web mit einem ASP.NET Core gRPC-Dienst
 
 * Fügen Sie einen Verweis auf das Paket [Grpc.AspNetCore.Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) hinzu.
-* Konfigurieren Sie die App zur Verwendung von gRPC-Web, indem Sie `AddGrpcWeb` und `UseGrpcWeb` zu *Startup.cs* hinzufügen:
+* Konfigurieren Sie die App zur Verwendung von gRPC-Web, indem Sie `UseGrpcWeb` und `EnableGrpcWeb` zu *Startup.cs* hinzufügen:
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
@@ -60,9 +48,9 @@ Der vorangehende Code:
 * Fügt die gRPC-Web-Middleware, `UseGrpcWeb`, nach dem Routing und vor den Endpunkten hinzu.
 * Gibt die Methode `endpoints.MapGrpcService<GreeterService>()` an, die gRPC-Web mit `EnableGrpcWeb` unterstützt. 
 
-Alternativ können Sie alle Dienste zur Unterstützung von gRPC-Web konfigurieren, indem Sie `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` zu ConfigureServices hinzufügen.
+Alternativ kann die gRPC-Web-Middleware so konfiguriert werden, dass alle Dienste standardmäßig gRPC-Web unterstützen und `EnableGrpcWeb` nicht erforderlich ist. Geben Sie `new GrpcWebOptions { DefaultEnabled = true }` an, wenn die Middleware hinzugefügt wird.
 
-[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
+[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
 > Es gibt ein bekanntes Problem, das dazu führen kann, dass gRPC-Web fehlschlägt, wenn es [von Htpp.sys](xref:fundamentals/servers/httpsys) in .NET Core 3.x gehostet wird.
@@ -102,7 +90,7 @@ Der .NET gRPC-Client kann für gRPC-Web-Aufrufe konfiguriert werden. Dies ist n�
 So verwenden Sie gRPC-Web
 
 * Fügen Sie einen Verweis auf das Paket [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) hinzu.
-* Stellen Sie sicher, dass der Verweis auf das Paket [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) 2.27.0 oder höher ist.
+* Stellen Sie sicher, dass der Verweis auf das Paket [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) 2.29.0 oder höher ist.
 * Konfigurieren Sie den Kanal für die Verwendung von `GrpcWebHandler`:
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
@@ -112,10 +100,10 @@ Der vorangehende Code:
 * Konfiguriert einen Kanal zur Verwendung von gRPC-Web.
 * Erstellt einen Client und tätigt einen Aufruf über den Kanal.
 
-Der `GrpcWebHandler` hat bei der Erstellung die folgenden Konfigurationsoptionen:
+`GrpcWebHandler` hat die folgenden Konfigurationsoptionen:
 
 * **InnerHandler**: Der zugrundeliegende <xref:System.Net.Http.HttpMessageHandler>, der die gRPC HTTP-Anforderung stellt, z. B. `HttpClientHandler`.
-* **Modus**: Ein Enumerationstyp, der angibt, ob die gRPC-HTTP-Anforderung `Content-Type` `application/grpc-web` oder `application/grpc-web-text` ist.
+* **GrpcWebMode**: Ein Enumerationstyp, der angibt, ob die gRPC-HTTP-Anforderung `Content-Type` `application/grpc-web` oder `application/grpc-web-text` ist.
     * `GrpcWebMode.GrpcWeb` konfiguriert Inhalte, die ohne Codierung gesendet werden. Standardwert.
     * `GrpcWebMode.GrpcWebText` konfiguriert den Inhalt so, dass er Base64-codiert ist. Erforderlich für Serverstreamingaufrufe in Browsern.
 * **HttpVersion**: Die `Version` des HTTP-Protokolls, die verwendet wird, um [HttpRequestMessage.Version](xref:System.Net.Http.HttpRequestMessage.Version) für die zugrunde liegende gRPC-HTTP-Anforderung festzulegen. gRPC-Web erfordert keine bestimmte Version und setzt die Standardeinstellung nicht außer Kraft, sofern nicht anders angegeben.

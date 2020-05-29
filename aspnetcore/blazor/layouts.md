@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 5c6771dd7249bfb8280ba20e1ce75967f279971c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771584"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424335"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Blazor-Layouts in ASP.NET Core
 
 Von [Rainer Stropek](https://www.timecockpit.com) und [Luke Latham](https://github.com/guardrex)
 
-Einige App-Elemente wie Menüs, Copyrightmeldungen und Firmenlogos sind in der Regel Teil des allgemeinen Layouts von Apps und werden von allen Komponenten der App verwendet. Es ist nicht sonderlich effizient, den Code dieser Elemente in alle anderen Komponenten einer App zu kopieren. Jedes Mal, wenn eines dieser Elemente aktualisiert werden muss, müssen alle Komponenten aktualisiert werden. Eine solche Duplizierung ist schwer zu verwalten und kann im Laufe der Zeit zu inkonsistenten Inhalten führen. Mit *Layouts* wird dieses Problem gelöst.
+Einige App-Elemente wie Menüs, Copyrightmeldungen und Firmenlogos sind in der Regel Teil des allgemeinen Layouts von Apps und werden von allen Komponenten der App verwendet. Das Kopieren des Codes dieser Elemente in alle Komponenten einer App ist kein effizientes Konzept. Jedes Mal, wenn eines der Elemente ein Update erfordert, muss jede Komponente aktualisiert werden. Eine solche Duplizierung ist schwer zu verwalten und kann im Laufe der Zeit zu inkonsistenten Inhalten führen. Mit *Layouts* wird dieses Problem gelöst.
 
 Technisch gesehen ist ein Layout nur eine weitere Komponente. Layouts werden in Razor-Vorlagen oder in C#-Code definiert und können [Datenbindung](xref:blazor/data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection) und andere Komponentenszenarien nutzen.
 
@@ -71,7 +71,7 @@ Die folgende Datei *_Imports.razor* importiert Folgendes:
 
 * `MyCoolLayout`
 * Alle Razor-Komponenten im gleichen Ordner und in dessen Unterordnern
-* Den Namespace `BlazorApp1.Data`
+* Der `BlazorApp1.Data` -Namespace.
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 

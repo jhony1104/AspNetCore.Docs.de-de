@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 7601e448a52be5e1064326929281e72ad28a0e65
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: cca4d8ce0c783f26f33cb7b2b1535a4bc53384d6
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967154"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424339"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Fehlerbehandlung in ASP.NET Core Blazor-Apps
 
@@ -92,7 +92,7 @@ Blazor Server ist ein zustandsbehaftetes Framework. Während Benutzer mit einer 
 
 Wenn ein Benutzer die App in mehreren Registerkarten eines Browsers öffnet, bestehen mehrere unabhängige Leitungen.
 
-Die meisten Ausnahmefehler werden von Blazor als für die Leitung schwerwiegende Fehler behandelt. Wenn eine Leitung aufgrund eines Ausnahmefehlers beendet wird, kann der Benutzer nur dann mit der App weiter interagieren, wenn die Seite nochmals geladen und so eine neue Leitung erstellt wird. Leitungen außerhalb der beendeten Leitung, bei denen es sich um Leitungen für andere Benutzer oder andere Browserregisterkarten handelt, sind davon nicht betroffen. Dieses Szenario ist mit einer abgestürzten Desktopanwendung vergleichbar: Die abgestürzte Anwendung muss neu gestartet werden, andere Anwendungen sind davon jedoch nicht betroffen.
+Die meisten Ausnahmefehler werden von Blazor als für die Leitung schwerwiegende Fehler behandelt. Wenn eine Leitung aufgrund eines Ausnahmefehlers beendet wird, kann der Benutzer nur dann mit der App weiter interagieren, wenn die Seite nochmals geladen und so eine neue Leitung erstellt wird. Leitungen außerhalb der beendeten Leitung, bei denen es sich um Leitungen für andere Benutzer oder andere Browserregisterkarten handelt, sind davon nicht betroffen. Dieses Szenario ähnelt einer Desktop-App, die abstürzt. Die abgestürzte App muss neu gestartet werden, aber andere Apps sind nicht betroffen.
 
 Eine Leitung wird beendet, wenn aus folgenden Gründen ein Ausnahmefehler auftritt:
 

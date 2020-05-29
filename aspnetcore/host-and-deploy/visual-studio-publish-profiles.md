@@ -5,7 +5,7 @@ description: Informationen zum Erstellen von Veröffentlichungsprofilen in Visua
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 0de20b93929162f79d4d15fc4731959e48bb3b6c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776369"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83439005"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Visual Studio-Veröffentlichungsprofile (PUBXML) für die Bereitstellung von ASP.NET Core-Apps
 
@@ -36,7 +36,7 @@ Der Befehl `dotnet new mvc` erzeugt eine Projektdatei, die das folgende [\<Proje
 
 Das `Sdk`-Attribut des vorhergehenden `<Project>`-Elements importiert die [Eigenschaften](/visualstudio/msbuild/msbuild-properties) und [Ziele](/visualstudio/msbuild/msbuild-targets) von MSBuild aus *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.reps* bzw. *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk*. Der Standardspeicherort für `$(MSBuildSDKsPath)` (mit Visual Studio 2019 Enterprise) ist der Ordner *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks*.
 
-`Microsoft.NET.Sdk.Web` (Web SDK) hängt von anderen SDKs ab, einschließlich `Microsoft.NET.Sdk` (.NET Core SDK) und `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)). Die MSBuild-Eigenschaften und -Ziele, die jedem abhängigen SDK zugeordnet sind, werden importiert. Veröffentlichungsziele importieren basierend auf der verwendeten Veröffentlichungsmethode die entsprechende Gruppe von Zielen.
+`Microsoft.NET.Sdk.Web` ([Web-SDK](xref:razor-pages/web-sdk)) hängt von anderen SDKs ab, einschließlich `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) und `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)). Die MSBuild-Eigenschaften und -Ziele, die jedem abhängigen SDK zugeordnet sind, werden importiert. Veröffentlichungsziele importieren basierend auf der verwendeten Veröffentlichungsmethode die entsprechende Gruppe von Zielen.
 
 Wenn in MSBuild oder Visual Studio ein Projekt geladen wird, werden die folgenden Aktionen auf hoher Ebene ausgeführt:
 
@@ -52,13 +52,13 @@ Die `Content`-Elementliste enthält Dateien, die zusätzlich zu den Buildausgabe
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Das Web SDK importiert das [Razor SDK](xref:razor-pages/sdk). Demzufolge sind Dateien, die mit den Mustern `**\*.cshtml` und `**\*.razor` übereinstimmen, in der Elementliste `Content` enthalten.
+Das [Web-SDK](xref:razor-pages/sdk) importiert das [Razor SDK](xref:razor-pages/web-sdk). Demzufolge sind Dateien, die mit den Mustern `**\*.cshtml` und `**\*.razor` übereinstimmen, in der Elementliste `Content` enthalten.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-Das Web SDK importiert das [Razor SDK](xref:razor-pages/sdk). Demzufolge sind Dateien, die mit dem Muster `**\*.cshtml` übereinstimmen, in der Elementliste `Content` enthalten.
+Das [Web-SDK](xref:razor-pages/sdk) importiert das [Razor SDK](xref:razor-pages/web-sdk). Demzufolge sind Dateien, die mit dem Muster `**\*.cshtml` übereinstimmen, in der Elementliste `Content` enthalten.
 
 ::: moniker-end
 
@@ -440,7 +440,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="include-files"></a>Includedateien
 
-Die folgenden Abschnitte beschreiben verschiedene Ansätze für das Einbeziehen von Dateien beim Veröffentlichen. Im Abschnitt [Allgemeines Einbeziehen von Dateien](#general-file-inclusion) wird das Element `DotNetPublishFiles` verwendet, das von einer Veröffentlichungszieledatei im Web-SDK bereitgestellt wird. Im Abschnitt [Selektives Einbeziehen von Dateien](#selective-file-inclusion) wird das Element `ResolvedFileToPublish` verwendet, das von einer Veröffentlichungszieledatei im .NET Core SDK bereitgestellt wird. Weil das Web-SDK vom .NET Core SDK abhängig ist, können beide Elemente in einem ASP.NET Core-Projekt verwendet werden.
+Die folgenden Abschnitte beschreiben verschiedene Ansätze für das Einbeziehen von Dateien beim Veröffentlichen. Im Abschnitt [Allgemeines Einbeziehen von Dateien](#general-file-inclusion) wird das Element `DotNetPublishFiles` verwendet, das von einer Veröffentlichungszieledatei im [Web-SDK](xref:razor-pages/web-sdk) bereitgestellt wird. Im Abschnitt [Selektives Einbeziehen von Dateien](#selective-file-inclusion) wird das Element `ResolvedFileToPublish` verwendet, das von einer Veröffentlichungszieledatei im [.NET Core SDK](/dotnet/core/project-sdk/msbuild-props) bereitgestellt wird. Weil das Web-SDK vom .NET Core SDK abhängig ist, können beide Elemente in einem ASP.NET Core-Projekt verwendet werden.
 
 ### <a name="general-file-inclusion"></a>Allgemeines Einbeziehen von Dateien
 

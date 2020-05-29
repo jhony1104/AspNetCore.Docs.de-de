@@ -4,7 +4,7 @@ author: tratcher
 description: Erfahren Sie, wie ASP.NET Core-Middleware mit TestServer testen.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/6/2019
+ms.date: 5/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 06ff7167e32fbd613c18709e31ecd078b3dfc926
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: ea7fc0e889ab32cbaf23257b3e866519af0727aa
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876422"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424538"
 ---
 # <a name="test-aspnet-core-middleware"></a>Testen von ASP.NET Core-Middleware
 
@@ -114,3 +114,20 @@ public async Task TestMiddleware_ExpectedResponse()
 <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> erlaubt die Direktkonfiguration eines <xref:Microsoft.AspNetCore.Http.HttpContext>-Objekts, anstatt die <xref:System.Net.Http.HttpClient>-Abstraktionen zu verwenden. Verwenden Sie <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A>, um Strukturen zu manipulieren, die nur auf dem Server verfügbar sind, wie z. B. [HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) oder [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).
 
 Wie im früheren Beispiel, das auf eine Antwort des Typs *404 – nicht gefunden* getestet wurde, überprüfen Sie das Gegenteil für jede `Assert`-Anweisung im vorhergehenden Test. Die Überprüfung bestätigt, dass der Test bei normalem Betrieb der Middleware ordnungsgemäß fehlschlägt. Nachdem Sie bestätigt haben, dass der falsch positive Test funktioniert, legen Sie die endgültigen `Assert`-Anweisungen für die erwarteten Bedingungen und Werte des Tests fest. Führen Sie ihn erneut aus, um zu bestätigen, dass er bestanden wird.
+
+## <a name="testserver-limitations"></a>TestServer-Einschränkungen
+
+TestServer:
+
+* Wurde erstellt, um Serververhalten zum Testen von Middleware zu replizieren.
+* Versucht ***nicht***, alle <xref:System.Net.Http.HttpClient>-Verhalten zu replizieren.
+* Es wird versucht, dem Client so viel Kontrolle über den Server wie möglich zu geben, mit weitestgehendem Einblick in die Vorgänge auf dem Server. Beispielsweise können Ausnahmen ausgelöst werden, die normalerweise nicht von `HttpClient` ausgelöst werden, um den Serverzustand direkt zu kommunizieren.
+* Standardmäßig werden einige transportspezifische Header nicht festgelegt, da diese in der Regel für Middleware nicht relevant sind. Weitere Informationen finden Sie im nächsten Abschnitt.
+
+### <a name="content-length-and-transfer-encoding-headers"></a>Content-Length- und Transfer-Encoding-Header
+
+TestServer legt ***keine*** transportbezogenen Anforderungs- oder Antwortheader wie [Content-Length](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) oder [Transfer-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding) fest. In Anwendungen sollten Abhängigkeiten von diesen Headern vermieden werden, weil ihre Verwendung je nach Client, Szenario und Protokoll variiert. Wenn `Content-Length` und `Transfer-Encoding` erforderlich sind, um ein bestimmtes Szenario zu testen, können sie im Test angegeben werden, wenn <xref:System.Net.Http.HttpRequestMessage> oder <xref:Microsoft.AspNetCore.Http.HttpContext> verfasst wird. Weitere Informationen finden Sie in den folgenden GitHub-Issues:
+
+* [dotnet/aspnetcore#21677](https://github.com/dotnet/aspnetcore/issues/21677)
+* [dotnet/aspnetcore#18463](https://github.com/dotnet/aspnetcore/issues/18463)
+* [dotnet/aspnetcore#13273](https://github.com/dotnet/aspnetcore/issues/13273)

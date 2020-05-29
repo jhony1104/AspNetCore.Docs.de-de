@@ -1,32 +1,26 @@
 ---
-title: Erstellen Ihrer ersten Blazor-App
-author: guardrex
-description: Erstellen Sie Schritt für Schritt eine Blazor-App.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/20/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: tutorials/first-blazor-app
-ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776603"
+title: 'Erstellen Ihrer ersten Blazor-App' author: description: 'Erstellen Sie Schritt für Schritt eine Blazor-App.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="build-your-first-blazor-app"></a>Erstellen Ihrer ersten Blazor-App
 
 Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+In diesem Tutorial erfahren Sie, wie Sie eine Blazor-App erstellen und ändern. Sie lernen Folgendes:
 
-In diesem Tutorial erfahren Sie, wie Sie eine Blazor-App erstellen und ändern.
+> [!div class="checklist"]
+> * Erstellen eines Aufgabenlisten-Blazor-App-Projekts
+> * Ändern von Razor-Komponenten
+> * Verwenden von Ereignisbehandlung und Datenbindung in Komponenten
+> * Verwenden von Abhängigkeitsinjektion (DI, Dependency Injection) und Routing in einer Blazor-App
+
+Am Ende dieses Tutorials verfügen Sie über eine funktionierende Chat-App.
 
 ## <a name="build-components"></a>Erstellen von Komponenten
 
@@ -127,7 +121,7 @@ Wenn Sie eine Blazor WebAssembly-App verwenden, wird `HttpClient` eingefügt, um
 
 *Pages/FetchData.razor*:
 
-[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
+[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-9)]
 
 Eine [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in)-Schleife rendert jede Vorhersageinstanz als eine Zeile in der Wetterdatentabelle:
 
@@ -213,6 +207,18 @@ Fügen Sie der App eine neue Komponente hinzu, die eine einfache Aufgabenliste i
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
 1. Erstellen Sie die App neu, und führen Sie sie aus. Fügen Sie Aufgabenelemente hinzu, um den neuen Code zu testen.
+
+## <a name="next-steps"></a>Nächste Schritte
+
+In diesem Tutorial haben Sie gelernt, wie die folgenden Aufgaben ausgeführt werden:
+
+> [!div class="checklist"]
+> * Erstellen eines Aufgabenlisten-Blazor-App-Projekts
+> * Ändern von Razor-Komponenten
+> * Verwenden von Ereignisbehandlung und Datenbindung in Komponenten
+> * Verwenden von Abhängigkeitsinjektion (DI, Dependency Injection) und Routing in einer Blazor-App
+
+Erfahren Sie, wie Sie Komponenten erstellen und verwenden:
 
 > [!div class="nextstepaction"]
 > <xref:blazor/components>

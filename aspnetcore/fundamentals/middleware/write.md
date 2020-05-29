@@ -1,30 +1,20 @@
 ---
-title: Schreiben von benutzerdefinierter ASP.NET Core-Middleware
-author: rick-anderson
-description: Erfahren Sie, wie benutzerdefinierte ASP.NET Core-Middleware geschrieben wird.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 5/6/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/middleware/write
-ms.openlocfilehash: 6852c1831d1f71af7f4fad3288fd6f897dfaa65f
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876191"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Schreiben von benutzerdefinierter ASP.NET Core-Middleware
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Steve Smith](https://ardalis.com/)
 
 Middleware ist Software, die zu einer Anwendungspipeline zusammengesetzt wird, um Anforderungen und Antworten zu verarbeiten. ASP.NET Core stellt in umfangreichem Maß integrierte Middlewarekomponenten zur Verfügung. In manchen Szenarios möchten Sie aber vielleicht selbst eine benutzerdefinierte Middleware schreiben.
+
+> [!NOTE]
+> In diesem Thema wird beschrieben, wie Sie *auf Konventionen basierende* Middleware schreiben. Informationen zu einem Ansatz, bei dem starke Typisierung und anforderungsbasierte Aktivierung verwendet werden, finden Sie unter <xref:fundamentals/middleware/extensibility>.
 
 ## <a name="middleware-class"></a>Middlewareklasse
 

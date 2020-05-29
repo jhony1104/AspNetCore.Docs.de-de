@@ -1,30 +1,16 @@
 ---
-title: Blazor-Hostingmodelle in ASP.NET Core
-author: guardrex
-description: Erfahren Sie mehr über Hostingmodelle mit Blazor WebAssembly und Blazor Server.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/31/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/hosting-models
-ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772086"
+title: 'Blazor-Hostingmodelle in ASP.NET Core' author: description: 'Erfahren Sie mehr über Hostingmodelle mit Blazor WebAssembly und Blazor Server.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
 Von [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Das Webframework Blazor kann auf Clientseite im Browser in einer auf [WebAssembly](https://webassembly.org/) basierenden .NET-Runtime ( *Blazor WebAssembly*) oder auf Serverseite in ASP.NET Core ( *Blazor Server*) ausgeführt werden. Die App und die Komponentenmodelle sind für alle Hostingmodelle *identisch*.
 

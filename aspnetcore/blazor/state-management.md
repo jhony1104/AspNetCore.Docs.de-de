@@ -1,36 +1,22 @@
 ---
-title: Blazor-Zustandsverwaltung in ASP.NET Core
-author: guardrex
-description: Erfahren Sie, wie Sie den Zustand in Blazor-Server-Apps beibehalten.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/state-management
-ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967414"
+title: 'Blazor-Zustandsverwaltung in ASP.NET Core' author: description: 'Erfahren Sie, wie Sie den Zustand in Blazor-Server-Apps beibehalten.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor Server ist ein zustandsbehaftetes App-Framework. In den meisten Fällen behält die App eine laufende Verbindung mit dem Server bei. Der Benutzerzustand wird in einer *Verbindung* im Speicher des Servers gespeichert. 
 
 Beispiele für den Zustand einer Benutzerverbindung sind:
 
-* Die gerenderte Benutzeroberfläche – die Hierarchie der Komponenteninstanzen und deren neueste Renderausgabe.
+* Die gerenderte Benutzeroberfläche: die Hierarchie der Komponenteninstanzen und deren neueste Renderausgabe.
 * Die Werte aller Felder und Eigenschaften in Komponenteninstanzen.
 * Daten, die in [-Abhängigkeitsinjektion (DI)](xref:fundamentals/dependency-injection)-Dienstinstanzen gespeichert sind, die auf die Verbindung beschränkt sind.
 
@@ -56,7 +42,7 @@ In einigen Szenarios ist die Beibehaltung des Zustands über mehrere Verbindunge
 
 Im Allgemeinen gilt: die Beibehaltung des Zustands über mehrere Verbindungen hinweg erfolgt in Szenarios, in denen Benutzer aktiv Daten erstellen und nicht nur Daten lesen, die bereits vorhanden sind.
 
-Um den Zustand über eine einzelne Verbindung hinaus beizubehalten, *speichern Sie die Daten nicht nur im Arbeitsspeicher des Servers*. Die App muss die Daten an einem anderen Speicherort speichern. Die Zustandspersistenz erfolgt nicht automatisch – Sie müssen bei der Entwicklung der App Schritte ausführen, um zustandsbehaftete Datenpersistenz zu implementieren.
+Um den Zustand über eine einzelne Verbindung hinaus beizubehalten, *speichern Sie die Daten nicht nur im Arbeitsspeicher des Servers*. Die App muss die Daten an einem anderen Speicherort speichern. Die Zustandspersistenz erfolgt nicht automatisch. Sie müssen bei der Entwicklung der App Schritte ausführen, um zustandsbehaftete Datenpersistenz zu implementieren.
 
 Die Datenpersistenz ist in der Regel nur für Zustände mit hohem Wert erforderlich, die von den Benutzern mit großem Aufwand erstellt wurden. In den folgenden Beispielen werden durch die Beibehaltung des Zustands Zeit- oder Hilfsmitteleinsparungen in kommerziellen Aktivitäten erzielt:
 
@@ -99,7 +85,7 @@ Modellieren Sie vorübergehende Daten, die den Navigationszustand darstellen, al
 Der Inhalt der Adressleiste des Browsers wird in folgenden Fällen beibehalten:
 
 * Der Benutzer lädt die Seite nochmals manuell.
-* Wenn der Webserver nicht mehr verfügbar ist, wird der Benutzer gezwungen, die Seite nochmals zu laden, damit eine Verbindung mit einem anderen Server hergestellt werden kann.
+* Wenn der Webserver nicht mehr verfügbar ist, ist der Benutzer gezwungen, die Seite nochmals zu laden, damit eine Verbindung mit einem anderen Server hergestellt werden kann.
 
 Weitere Informationen zum Definieren von URL-Mustern mit der `@page`-Direktive finden Sie unter <xref:blazor/routing>.
 

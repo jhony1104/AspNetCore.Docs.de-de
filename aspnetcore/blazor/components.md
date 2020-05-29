@@ -1,24 +1,12 @@
 ---
-title: Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
-author: guardrex
-description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, Datenbindungen durchführen, Ereignisse behandeln und die Lebenszyklen von Komponenten verwalten.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/components
-ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153517"
+title: 'Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten' author: description: 'Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, Datenbindungen durchführen, Ereignisse behandeln und die Lebenszyklen von Komponenten verwalten.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -34,9 +22,9 @@ Komponenten werden mithilfe einer Kombination aus C# und HTML-Markup in [Razor](
 
 Der Name einer Komponente muss mit einem Großbuchstaben beginnen. Beispielsweise ist *MyCoolComponent.razor* zulässig, *mycoolcomponent.razor* aber nicht.
 
-Die Benutzeroberfläche einer Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z. B. Schleifen, Bedingungen, Ausdrücke) wird über eine eingebettete C#-Syntax mit dem Namen [Razor](xref:mvc/views/razor) hinzugefügt. Wenn eine App kompiliert wird, werden das HTML-Markup und die C#-Renderinglogik in eine Komponentenklasse konvertiert. Der Name der generierten Klasse entspricht dem Namen der Datei.
+Die Benutzeroberfläche einer Komponente wird mithilfe von HTML definiert. Dynamische Renderinglogik (z. B. Schleifen, Bedingungen, Ausdrücke) wird über eine eingebettete C#-Syntax mit dem Namen *Razor* hinzugefügt. Wenn eine App kompiliert wird, werden das HTML-Markup und die C#-Renderinglogik in eine Komponentenklasse konvertiert. Der Name der generierten Klasse entspricht dem Namen der Datei.
 
-Member der Komponentenklasse werden in einem `@code`-Block definiert. Im `@code`-Block wird der Komponentenstatus (Eigenschaften, Felder) mit Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Mehrere `@code`-Blöcke sind zulässig.
+Member der Komponentenklasse werden in einem [`@code`][1]-Block definiert. Im [`@code`][1]-Block wird der Komponentenstatus (Eigenschaften, Felder) mit Methoden für die Behandlung von Ereignissen oder das Definieren anderer Komponentenlogik angegeben. Mehrere [`@code`][1]-Blöcke sind zulässig.
 
 Komponentenmember können als Teil der Renderinglogik der Komponente mithilfe von C#-Ausdrücken verwendet werden, die mit `@`beginnen. Beispielsweise wird ein C#-Feld gerendert, indem `@` dem Feldnamen vorangestellt wird. Das Beispiel wertet Folgendes aus und führt ein Rendering durch:
 
@@ -75,6 +63,15 @@ Alternativ kann auf eine Komponente direkt verwiesen werden:
 
 Weitere Informationen finden Sie im Abschnitt [Importieren von Komponenten](#import-components).
 
+## <a name="razor-syntax"></a>Razor-Syntax
+
+Razor-Komponenten in Blazor-Apps verwenden Razor-Syntax ausführlich. Wenn Sie mit der Razor-Markupsprache nicht vertraut sind, sollten Sie <xref:mvc/views/razor> lesen, bevor Sie fortfahren.
+
+Beachten Sie beim Zugriff auf den Inhalt der Razor-Syntax besonders die folgenden Abschnitte:
+
+* [Direktiven](xref:mvc/views/razor#directives) &ndash; reservierte Schlüsselwörter mit `@`-Präfix, die in der Regel die Art und Weise ändern, wie das Komponentenmarkup analysiert wird oder funktioniert.
+* [Direktivenattribute](xref:mvc/views/razor#directive-attributes) &ndash; reservierte Schlüsselwörter mit `@`-Präfixen, die in der Regel die Art und Weise ändern, wie Komponentenelemente analysiert werden oder funktionieren.
+
 ## <a name="static-assets"></a>Statische Ressourcen
 
 Blazor befolgt die Konvention für ASP.NET Core-Apps, statische Ressourcen unter dem Webstammordner ([wwwroot](xref:fundamentals/index#web-root)) des Projekts zu speichern.
@@ -107,13 +104,13 @@ Das folgende Markup in *Index.razor* rendert eine `HeadingComponent`-Instanz:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
-Wenn eine Komponente ein HTML-Element mit einem groß geschriebenen ersten Buchstaben enthält, der nicht mit einem Komponentennamen identisch ist, wird eine Warnung ausgegeben, dass das Element einen unerwarteten Namen aufweist. Durch das Hinzufügen einer `@using`-Anweisung für den Namespace der Komponente wird die Komponente zur Verfügung gestellt, wodurch die Warnung nicht mehr auftritt.
+Wenn eine Komponente ein HTML-Element mit einem groß geschriebenen ersten Buchstaben enthält, der nicht mit einem Komponentennamen identisch ist, wird eine Warnung ausgegeben, dass das Element einen unerwarteten Namen aufweist. Durch das Hinzufügen einer [`@using`][2]-Anweisung für den Namespace der Komponente wird die Komponente zur Verfügung gestellt, wodurch die Warnung nicht mehr auftritt.
 
 ## <a name="routing"></a>Routing
 
 Das Routing in Blazor erfolgt durch die Bereitstellung einer Routenvorlage für jede zugängliche Komponente in der App.
 
-Wenn eine Razor-Datei mit einer `@page`-Anweisung kompiliert wird, wird der generierten Klasse <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> hinzugefügt und so die Routenvorlage angegeben. Zur Laufzeit sucht der Router nach Komponentenklassen mit `RouteAttribute` und rendert die Komponente, deren Routenvorlage mit der angeforderten URL übereinstimmt.
+Wenn eine Razor-Datei mit einer [`@page`][9]-Anweisung kompiliert wird, wird der generierten Klasse ein <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> hinzugefügt und so die Routenvorlage angegeben. Zur Laufzeit sucht der Router nach Komponentenklassen mit `RouteAttribute` und rendert die Komponente, deren Routenvorlage mit der angeforderten URL übereinstimmt.
 
 ```razor
 @page "/ParentComponent"
@@ -127,13 +124,13 @@ Weitere Informationen finden Sie unter <xref:blazor/routing>.
 
 ### <a name="route-parameters"></a>Routenparameter
 
-Komponenten können Routenparameter von der Routenvorlage empfangen, die in der `@page`-Anweisung bereitgestellt wird. Der Router verwendet Routenparameter, um die entsprechenden Komponentenparameter aufzufüllen.
+Komponenten können Routenparameter von der Routenvorlage empfangen, die in der [`@page`][9]-Anweisung bereitgestellt wird. Der Router verwendet Routenparameter, um die entsprechenden Komponentenparameter aufzufüllen.
 
 *Pages/RouteParameter.razor*:
 
 [!code-razor[](components/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
-Optionale Parameter werden nicht unterstützt. Deshalb werden im vorherigen Beispiel zwei `@page`-Anweisungen angewendet. Die erste ermöglicht die Navigation zur Komponente ohne einen Parameter. Die zweite `@page`-Anweisung empfängt den `{text}`-Routenparameter und weist den Wert der `Text`-Eigenschaft zu.
+Optionale Parameter werden nicht unterstützt. Deshalb werden im vorherigen Beispiel zwei [`@page`][9]-Anweisungen angewendet. Die erste ermöglicht die Navigation zur Komponente ohne einen Parameter. Die zweite [`@page`][9]-Anweisung empfängt den `{text}`-Routenparameter und weist den Wert der `Text`-Eigenschaft zu.
 
 Die *Catch-all*-Parametersyntax (`*`/`**`), die den Pfad ordnerübergreifend erfasst, wird in Razor-Komponenten ( *.razor*) **nicht** unterstützt.
 
@@ -175,7 +172,7 @@ Die `ParentComponent`-Datei in der Beispiel-App kann Inhalte zum Rendern von `Ch
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Attributsplatting und arbiträre Parameter
 
-Komponenten können zusätzlich zu den deklarierten Parametern der Komponente weitere Attribute erfassen und rendern. Zusätzliche Attribute können in einem Wörterbuch erfasst und dann für ein Element *gesplattet* werden, wenn die Komponente mithilfe der [`@attributes`](xref:mvc/views/razor#attributes)-Anweisung Razor gerendert wird. Dieses Option ist nützlich, wenn Sie eine Komponente definieren, die ein Markupelement erzeugt, das viele verschiedene Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für ein `<input>`-Element separat zu definieren, das viele Parameter unterstützt.
+Komponenten können zusätzlich zu den deklarierten Parametern der Komponente weitere Attribute erfassen und rendern. Zusätzliche Attribute können in einem Wörterbuch erfasst und dann für ein Element *gesplattet* werden, wenn die Komponente mithilfe der [`@attributes`][3]-Anweisung Razor gerendert wird. Dieses Option ist nützlich, wenn Sie eine Komponente definieren, die ein Markupelement erzeugt, das viele verschiedene Anpassungen unterstützt. Beispielsweise kann es mühsam sein, Attribute für ein `<input>`-Element separat zu definieren, das viele Parameter unterstützt.
 
 Im folgenden Beispiel verwendet das erste `<input>`-Element (`id="useIndividualParams"`) einzelne Komponentenparameter, während das zweite `<input>`-Element (`id="useAttributesDict"`) Attributsplatting verwendet:
 
@@ -243,7 +240,7 @@ Definieren Sie einen Komponentenparameter mithilfe des `[Parameter]`-Attributs, 
 
 Wenn die `CaptureUnmatchedValues`-Eigenschaft auf `[Parameter]` festgelegt ist, kann der Parameter alle Attribute abgleichen, die keinem anderen Parameter entsprechen. Eine Komponente kann nur einen einzelnen Parameter mit `CaptureUnmatchedValues` definieren. Der mit `CaptureUnmatchedValues` verwendete Eigenschaftentyp muss von `Dictionary<string, object>` mit Zeichenfolgenschlüsseln zugewiesen werden können. `IEnumerable<KeyValuePair<string, object>>` oder `IReadOnlyDictionary<string, object>` sind in diesem Szenario ebenfalls mögliche Optionen.
 
-Die Position von `@attributes` relativ zur Position der Elementattribute ist wichtig. Wenn `@attributes`-Anweisungen für das Element gesplattet werden, werden die Attribute von rechts nach links (letztes bis erstes) verarbeitet. Sehen Sie sich das folgende Beispiel für eine Komponente an, die eine `Child`-Komponente verwendet:
+Die Position von [`@attributes`][3] relativ zur Position der Elementattribute ist wichtig. Wenn [`@attributes`][3]-Anweisungen für das Element gesplattet werden, werden die Attribute von rechts nach links (letztes bis erstes) verarbeitet. Sehen Sie sich das folgende Beispiel für eine Komponente an, die eine `Child`-Komponente verwendet:
 
 *ParentComponent.razor*:
 
@@ -260,13 +257,13 @@ Die Position von `@attributes` relativ zur Position der Elementattribute ist wic
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-Das `extra`-Attribut der `Child`-Komponente ist rechts von `@attributes` festgelegt. Das gerenderte `<div>`-Element der `Parent`-Komponente enthält `extra="5"`, wenn dieses über das zusätzliche Attribut weitergeleitet wird, da die Attribute von rechts nach links (letztes bis erstes) verarbeitet werden:
+Das `extra`-Attribut der `Child`-Komponente ist rechts von [`@attributes`][3] festgelegt. Das gerenderte `<div>`-Element der `Parent`-Komponente enthält `extra="5"`, wenn dieses über das zusätzliche Attribut weitergeleitet wird, da die Attribute von rechts nach links (letztes bis erstes) verarbeitet werden:
 
 ```html
 <div extra="5" />
 ```
 
-Im folgenden Beispiel wird die Reihenfolge von `extra` und `@attributes` im `<div>`-Element der `Child`-Komponente umgekehrt:
+Im folgenden Beispiel wird die Reihenfolge von `extra` und [`@attributes`][3] in `<div>` der `Child`-Komponente umgekehrt:
 
 *ParentComponent.razor*:
 
@@ -293,7 +290,7 @@ Das gerenderte `<div>`-Element in der `Parent`-Komponente enthält `extra="10"`,
 
 Komponentenverweise bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle wie `Show` oder `Reset` für diese Instanz ausgeben können. So erfassen Sie einen Komponentenverweis:
 
-* Fügen Sie der untergeordneten Komponente ein [`@ref`](xref:mvc/views/razor#ref)-Attribut hinzu.
+* Fügen Sie der untergeordneten Komponente ein [`@ref`][4]-Attribut hinzu.
 * Definieren Sie ein Feld mit demselben Typ wie die untergeordnete Komponente.
 
 ```razor
@@ -316,7 +313,7 @@ Wenn die Komponente gerendert wird, wird das `loginDialog`-Feld mit der untergeo
 
 Informationen zum Verweisen auf Komponenten in einer Schleife finden Sie unter [Erfassen von Verweisen auf mehrere ähnliche untergeordnete Komponenten (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
-Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet, um [Elementverweise zu erfassen](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements), es handelt sich jedoch nicht um ein JavaScript-Interop-Feature. Komponentenverweise werden nicht an JavaScript-Code übermittelt, sondern werden nur in .NET-Code verwendet.
+Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet, um [Elementverweise zu erfassen](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements), es handelt sich jedoch nicht um ein JavaScript-Interop-Feature. Komponentenverweise werden nicht an JavaScript-Code übermittelt. Komponentenverweise werden nur in .NET-Code verwendet.
 
 > [!NOTE]
 > Verwenden Sie **keine** Komponentenverweise verwenden, um den Zustand von untergeordneten Komponenten zu verändern. Verwenden Sie stattdessen normale deklarative Parameter, um Daten an untergeordnete Komponenten zu übergeben. Die Verwendung normaler deklarativer Parameter führt dazu, dass untergeordnete Komponenten automatisch zu den richtigen Zeitpunkten gerendert werden.
@@ -414,7 +411,7 @@ Betrachten Sie das folgende Beispiel:
 
 Der Inhalt der `People`-Sammlung kann sich durch eingefügte, gelöschte oder neu sortierte Einträgen ändern. Wenn die Komponente wiederholt gerendert wird, kann sich die `<DetailsEditor>`-Komponente ändern, damit sie andere `Details`-Parameterwerte empfangen kann. Dadurch kann es zu einem unerwartet komplexen erneuten Rendering kommen. In einigen Fällen kann das erneute Rendering zu erkennbaren Verhaltensabweichungen führen, z. B. zu einem verlorenen Elementfokus.
 
-Der Zuordnungsprozess kann mit dem [`@key`](xref:mvc/views/razor#key)-Anweisungsattribut gesteuert werden. `@key` bewirkt, dass der Vergleichsalgorithmus die Beibehaltung von Elementen oder Komponenten basierend auf dem Wert des Schlüssels garantiert.
+Der Zuordnungsprozess kann mit dem [`@key`][5]-Anweisungsattribut gesteuert werden. [`@key`][5] bewirkt, dass der Vergleichsalgorithmus die Beibehaltung von Elementen oder Komponenten basierend auf dem Wert des Schlüssels garantiert:
 
 ```csharp
 @foreach (var person in People)
@@ -434,16 +431,16 @@ Wenn sich die `People`-Sammlung ändert, behält der Vergleichsalgorithmus die Z
 * Wenn ein `Person` an einer bestimmten Position in der Liste eingefügt wird, wird eine neue `<DetailsEditor>`-Instanz an der entsprechenden Position eingefügt. Andere Instanzen bleiben unverändert.
 * Wenn `Person`-Einträge neu sortiert werden, werden die entsprechenden `<DetailsEditor>`-Instanzen beibehalten und auf der Benutzeroberfläche neu angeordnet.
 
-In einigen Szenarios minimiert die Verwendung von `@key` die Komplexität des erneuten Renderings und vermeidet potenzielle Probleme mit zustandsbehafteten Teilen der DOM-Änderung, z. B. der Fokusposition.
+In einigen Szenarios minimiert die Verwendung von [`@key`][5] die Komplexität des erneuten Renderings und vermeidet potenzielle Probleme mit zustandsbehafteten Teilen der DOM-Änderung, z. B. der Fokusposition.
 
 > [!IMPORTANT]
 > Schlüssel sind für jedes Containerelement oder jede Komponente lokal. Schlüssel werden nicht dokumentübergreifend global verglichen.
 
 ### <a name="when-to-use-key"></a>Anwendungsfälle für \@key
 
-In der Regel ist es sinnvoll, `@key` zu verwenden, wenn eine Liste gerendert wird (z. B. in einem `@foreach`-Block) und ein geeigneter Wert vorhanden ist, um `@key` zu definieren.
+In der Regel ist es sinnvoll, [`@key`][5] zu verwenden, wenn eine Liste gerendert wird (z. B. in einem `@foreach`-Block) und ein geeigneter Wert vorhanden ist, um den [`@key`][5] zu definieren.
 
-Sie können `@key` auch verwenden, um zu verhindern, dass Blazor eine Element- oder Komponententeilstruktur beibehält, wenn sich ein Objekt ändert:
+Sie können [`@key`][5] auch verwenden, um zu verhindern, dass Blazor eine Element- oder Komponententeilstruktur beibehält, wenn sich ein Objekt ändert:
 
 ```razor
 <div @key="currentPerson">
@@ -451,22 +448,22 @@ Sie können `@key` auch verwenden, um zu verhindern, dass Blazor eine Element- o
 </div>
 ```
 
-Wenn `@currentPerson` geändert wird, zwingt die `@key`-Attributanweisung Blazor, das gesamte `<div>`-Element und dessen Nachfolger zu verwerfen und die Teilstruktur auf der Benutzeroberfläche mit neuen Elementen und Komponenten noch mal zu erstellen. Das kann hilfreich sein, wenn Sie sicherstellen müssen, dass kein Benutzeroberflächenzustand beibehalten wird, wenn `@currentPerson` geändert wird.
+Wenn `@currentPerson` geändert wird, zwingt die [`@key`][5]-Attributanweisung Blazor, das gesamte `<div>`-Element und dessen Nachfolger zu verwerfen und die Teilstruktur auf der Benutzeroberfläche mit neuen Elementen und Komponenten noch mal zu erstellen. Das kann hilfreich sein, wenn Sie sicherstellen müssen, dass kein Benutzeroberflächenzustand beibehalten wird, wenn `@currentPerson` geändert wird.
 
 ### <a name="when-not-to-use-key"></a>Ungeeignete Anwendungsfälle für \@key
 
-Bei einem Vergleich mit `@key` wird die Leistung beeinträchtigt. Die Beeinträchtigung der Leistung ist nicht erheblich. Sie sollten `@key` jedoch nur angeben, wenn sich die Beibehaltungsregeln für das Element oder die Komponente positiv auf die App auswirken.
+Bei einem Vergleich mit [`@key`][5] wird die Leistung beeinträchtigt. Die Beeinträchtigung der Leistung ist nicht erheblich. Sie sollten [`@key`][5] jedoch nur angeben, wenn sich die Beibehaltungsregeln für das Element oder die Komponente positiv auf die App auswirken.
 
-Auch wenn `@key` nicht verwendet wird, behält Blazor die untergeordneten Element- und Komponenteninstanzen so weit wie möglich bei. Der einzige Vorteil bei der Verwendung von `@key` besteht in der Kontrolle darüber, *wie* Modellinstanzen den beibehaltenen Komponenteninstanzen zugeordnet wird, anstatt die Zuordnung durch den Vergleichsalgorithmus bestimmen zu lassen.
+Auch wenn [`@key`][5] nicht verwendet wird, behält Blazor die untergeordneten Element- und Komponenteninstanzen so weit wie möglich bei. Der einzige Vorteil bei der Verwendung von [`@key`][5] besteht in der Kontrolle darüber, *wie* Modellinstanzen den beibehaltenen Komponenteninstanzen zugeordnet werden, anstatt die Zuordnung durch den Vergleichsalgorithmus bestimmen zu lassen.
 
 ### <a name="what-values-to-use-for-key"></a>Zu verwendende Werte für \@key
 
-Im Allgemeinen ist es sinnvoll, Werte der folgenden Kategorien für `@key` bereitzustellen:
+Im Allgemeinen ist es sinnvoll, Werte der folgenden Kategorien für [`@key`][5] bereitzustellen:
 
 * Modellobjektinstanzen (z. B. eine `Person`-Instanz wie im vorherigen Beispiel): Dadurch wird die Beibehaltung basierend auf der Objektverweisgleichheit sichergestellt.
 * Eindeutige Bezeichner (z. B. Primärschlüsselwerte vom Typ `int`, `string`oder `Guid`):
 
-Stellen Sie sicher, dass die für `@key` verwendeten Werte nicht kollidieren. Wenn innerhalb desselben übergeordneten Elements kollidierende Werte erkannt werden, löst Blazor eine Ausnahme aus, da alte Elemente oder Komponenten nicht deterministisch neuen Elementen oder Komponenten zugeordnet werden können. Verwenden Sie nur eindeutige Werte wie Objektinstanzen oder Primärschlüsselwerte.
+Stellen Sie sicher, dass die für [`@key`][5] verwendeten Werte nicht kollidieren. Wenn innerhalb desselben übergeordneten Elements kollidierende Werte erkannt werden, löst Blazor eine Ausnahme aus, da alte Elemente oder Komponenten nicht deterministisch neuen Elementen oder Komponenten zugeordnet werden können. Verwenden Sie nur eindeutige Werte wie Objektinstanzen oder Primärschlüsselwerte.
 
 ## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Erstellen Sie keine Komponenten, die in ihre eigenen Parametereigenschaften schreiben
 
@@ -565,10 +562,10 @@ Die folgende `Expander`-Komponente:
 
 Razor-Komponenten werden als partielle Klassen generiert. Razor-Komponenten werden mithilfe eines der folgenden Ansätze erstellt:
 
-* C#-Code wird in einem [`@code`](xref:mvc/views/razor#code)-Block mit HTML-Markup und Razor-Code in einer einzelnen Datei definiert. Blazor-Vorlagen definieren Razor-Komponenten mithilfe dieses Ansatzes.
+* C#-Code wird in einem [`@code`][1]-Block mit HTML-Markup und Razor-Code in einer einzelnen Datei definiert. Blazor-Vorlagen definieren Razor-Komponenten mithilfe dieses Ansatzes.
 * C#-Code wird in einer CodeBehind-Datei gespeichert, die als partielle Klasse definiert ist.
 
-Das folgende Beispiel zeigt die `Counter`-Standardkomponente mit einem `@code`-Block in einer App, die aus einer Blazor-Vorlage generiert wurde. HTML-Markup, Razor-Code und C#-Code befinden sich in derselben Datei:
+Das folgende Beispiel zeigt die `Counter`-Standardkomponente mit einem [`@code`][1]-Block in einer App, die aus einer Blazor-Vorlage generiert wurde. HTML-Markup, Razor-Code und C#-Code befinden sich in derselben Datei:
 
 *Counter.razor*:
 
@@ -635,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Angeben einer Basisklasse
 
-Die [`@inherits`](xref:mvc/views/razor#inherits)-Anweisung kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben. Das folgende Beispiel zeigt, wie eine Komponente eine Basisklasse (`BlazorRocksBase`) erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen. Die Basisklasse sollte von `ComponentBase` abgeleitet werden.
+Die [`@inherits`][6]-Anweisung kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben. Das folgende Beispiel zeigt, wie eine Komponente eine Basisklasse (`BlazorRocksBase`) erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen. Die Basisklasse sollte von `ComponentBase` abgeleitet werden.
 
 *Pages/BlazorRocks.razor*:
 
@@ -663,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Angeben eines Attributs
 
-Attribute können in Razor-Komponenten mit der [`@attribute`](xref:mvc/views/razor#attribute)-Anweisung angegeben werden. Im folgenden Beispiel wird das `[Authorize]`-Attribut auf die Komponentenklasse angewendet:
+Attribute können in Razor-Komponenten mit der [`@attribute`][7]-Anweisung angegeben werden. Im folgenden Beispiel wird das `[Authorize]`-Attribut auf die Komponentenklasse angewendet:
 
 ```razor
 @page "/"
@@ -674,15 +671,15 @@ Attribute können in Razor-Komponenten mit der [`@attribute`](xref:mvc/views/raz
 
 Der Namespace einer mit Razor erstellten Komponente basiert auf Folgendem (nach Priorität):
 
-* [`@namespace`](xref:mvc/views/razor#namespace)-Bezeichnung im Markup (`@namespace BlazorSample.MyNamespace`) der Razor-Datei ( *.razor*).
+* [`@namespace`][8]-Bezeichnung im Markup (`@namespace BlazorSample.MyNamespace`) der Razor-Datei ( *.razor*).
 * Die `RootNamespace`-Eigenschaft des Projekts in der Projektdatei (`<RootNamespace>BlazorSample</RootNamespace>`)
 * Der Projektname, der aus dem Namen der Projektdatei ( *.csproj*) und dem Pfad vom Projektstamm zur Komponente resultiert. Das Framework löst z. B. *{Projektstamm}/Pages/Index.razor* (*BlazorSample.csproj*) in den Namespace `BlazorSample.Pages` auf. Komponenten folgen den Namensbindungsregeln für C#. Für die `Index`-Komponente in diesem Beispiel werden folgende Komponenten berücksichtigt:
   * Komponenten im selben Ordner (*Pages*)
   * Komponenten im Stammverzeichnis des Projekts, die nicht explizit einen anderen Namespace angeben
 
-Komponenten, die in einem anderen Namespace definiert sind, werden mithilfe der Razor-Anweisung [`@using`](xref:mvc/views/razor#using) in den Geltungsbereich einbezogen.
+Komponenten, die in einem anderen Namespace definiert sind, werden mithilfe der Razor-Anweisung [`@using`][2] in den Geltungsbereich einbezogen.
 
-Wenn eine andere Komponente (`NavMenu.razor`) im Ordner *BlazorSample/Shared/* vorhanden ist, kann die Komponente mithilfe der folgenden `@using`-Anweisung in `Index.razor` verwendet werden:
+Wenn eine andere Komponente (`NavMenu.razor`) im Ordner *BlazorSample/Shared/* vorhanden ist, kann die Komponente mithilfe der folgenden [`@using`][2]-Anweisung in `Index.razor` verwendet werden:
 
 ```razor
 @using BlazorSample.Shared
@@ -692,7 +689,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-Auf Komponenten kann auch mit ihrem vollqualifizierten Namen verwiesen werden. Hierfür ist die Anweisung [`@using`](xref:mvc/views/razor#using) nicht erforderlich:
+Auf Komponenten kann auch mit ihrem vollqualifizierten Namen verwiesen werden. Hierfür ist die Anweisung [`@using`][2] nicht erforderlich:
 
 ```razor
 This is the Index page.
@@ -973,8 +970,20 @@ Ebenso werden SVG-Bilder in den CSS-Regeln einer Stylesheetdatei ( *.css*) unter
 }
 ```
 
-SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein `<svg>`-Tag direkt in eine Komponentendatei ( *.razor*) einfügen, wird das grundlegende Bildrendering unterstützt, aber viele fortgeschrittene Szenarios noch nicht. Beispielsweise werden `<use>`-Tags derzeit nicht beachtet, und `@bind` kann nicht mit einigen SVG-Tags verwendet werden. Wir planen, diese Einschränkungen in einem zukünftigen Release zu beheben.
+SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein `<svg>`-Tag direkt in eine Komponentendatei ( *.razor*) einfügen, wird das grundlegende Bildrendering unterstützt, aber viele fortgeschrittene Szenarios noch nicht. Beispielsweise werden `<use>`-Tags derzeit nicht beachtet, und `@bind` kann nicht mit einigen SVG-Tags verwendet werden. Weitere Informationen finden Sie unter [Improve SVG support in Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271) (Verbessern der SVG-Unterstützung in Blazor).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:security/blazor/server/threat-mitigation> &ndash;: Anleitung zum Entwickeln von Blazor Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen
+
+<!--Reference links in article-->
+[1]: <xref:mvc/views/razor#code>
+[2]: <xref:mvc/views/razor#using>
+[3]: <xref:mvc/views/razor#attributes>
+[4]: <xref:mvc/views/razor#ref>
+[5]: <xref:mvc/views/razor#key>
+[6]: <xref:mvc/views/razor#inherits>
+[7]: <xref:mvc/views/razor#attribute>
+[8]: <xref:mvc/views/razor#namespace>
+[9]: <xref:mvc/views/razor#page>
+[10]: <xref:mvc/views/razor#bind>
