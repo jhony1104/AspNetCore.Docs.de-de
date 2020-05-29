@@ -25,13 +25,8 @@ Verfügbare Szenarien:
 
 Folgendes ist derzeit *nicht möglich*:
 
-* Untersuchen von Arrays
-* Zeigen auf Member zum Untersuchen
-* Schrittweises Debuggen in oder aus verwaltetem Code
-* Vollständige Unterstützung für die Untersuchung von Werttypen
 * Halt bei Ausnahmefehlern
 * Erreichen von Breakpoints beim App-Start
-* Debuggen einer App mit Service Worker
 
 Die Debuggingfunktionen werden in zukünftigen Releases weiter verbessert.
 
@@ -78,7 +73,7 @@ So debuggen Sie eine Blazor WebAssembly-App in Visual Studio:
 
 Während Sie Ihre Blazor WebAssembly-App debuggen, können Sie auch Ihren Servercode debuggen:
 
-1. Legen Sie einen Breakpoint auf der Seite *FetchData.razor* in `OnInitializedAsync` fest.
+1. Legen Sie einen Breakpoint auf der Seite *FetchData.razor* in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> fest.
 1. Legen Sie einen Breakpoint in der Aktionsmethode `Get` in `WeatherForecastController` fest.
 1. Rufen Sie die Registerkarte **FetchData** auf, um den ersten Breakpoint in der `FetchData`-Komponente zu erreichen, bevor sie eine HTTP-Anforderung an den Server übermittelt:
 
