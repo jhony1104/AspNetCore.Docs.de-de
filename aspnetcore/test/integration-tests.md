@@ -143,7 +143,7 @@ Die Webhostkonfiguration kann unabhängig von den Testklassen durch Erben von de
 
    Der Datenbankkontext des GS wird in dessen `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices`-Rückruf der Test-App wird ausgeführt, *nachdem* der `Startup.ConfigureServices`-Code der App ausgeführt wurde. Die Ausführungsreihenfolge ist im Release von ASP.NET Core 3.0 eine Breaking Change für den [generischen Host](xref:fundamentals/host/generic-host). Um für die Tests eine andere Datenbank als die Datenbank der App zu verwenden, muss der Datenbankkontext der App in `builder.ConfigureServices` ersetzt werden.
 
-   Für GS, die weiterhin den [Webhost}(xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
+   Für GS, die weiterhin den [Webhost](xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
 
    Die Beispiel-App findet den Dienstdeskriptor für den Datenbankkontext und verwendet den Deskriptor, um die Dienstregistrierung zu entfernen. Als Nächstes fügt die Factory einen neuen `ApplicationDbContext` hinzu, der eine In-Memory-Datenbank für die Tests verwendet.
 
@@ -178,7 +178,7 @@ Jede POST-Anforderung an das GS muss die Fälschungsschutzprüfung bestehen, die
 
 Die `SendAsync`-Hilfsprogrammerweiterungsmethoden (*Helpers/HttpClientExtensions.cs*) und die `GetDocumentAsync`-Hilfsprogrammmethode (*Helpers/HtmlHelpers.cs*) in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) verwenden den [AngleSharp](https://anglesharp.github.io/)-Parser, um die Fälschungsschutzprüfungen mit den folgenden Methoden durchzuführen:
 
-* `GetDocumentAsync` &ndash; Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt ein `IHtmlDocument` zurück. `GetDocumentAsync` verwendet eine Factory, die eine *virtuelle Antwort* basierend auf der ursprünglichen `HttpResponseMessage` vorbereitet. Weitere Informationen finden Sie in der [AngleSharp-Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt ein `IHtmlDocument` zurück. `GetDocumentAsync` verwendet eine Factory, die eine *virtuelle Antwort* basierend auf der ursprünglichen `HttpResponseMessage` vorbereitet. Weitere Informationen finden Sie in der [AngleSharp-Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync`-Erweiterungsmethoden für den `HttpClient` verfassen eine [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) und rufen [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) auf, um Anforderungen an das GS zu senden. Überladungen für `SendAsync` akzeptieren das HTML-Formular (`IHtmlFormElement`) und Folgendes:
   * Schaltfläche „Senden“ des Formulars (`IHtmlElement`)
   * Formularwerteauflistung (`IEnumerable<KeyValuePair<string, string>>`)
@@ -573,7 +573,7 @@ Die Beispiel-App führt ein Seeding der Datenbank mit drei Nachrichten in *Utili
 
 Der Datenbankkontext des GS wird in dessen `Startup.ConfigureServices`-Methode registriert. Der `builder.ConfigureServices`-Rückruf der Test-App wird ausgeführt, *nachdem* der `Startup.ConfigureServices`-Code der App ausgeführt wurde. Um eine andere Datenbank für die Tests zu verwenden, muss der Datenbankkontext der App in `builder.ConfigureServices` ersetzt werden. Weitere Informationen finden Sie im Abschnitt [Anpassen von WebApplicationFactory](#customize-webapplicationfactory).
 
-Für GS, die weiterhin den [Webhost}(xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
+Für GS, die weiterhin den [Webhost](xref:fundamentals/host/web-host) verwenden, wird der `builder.ConfigureServices`-Rückruf der Test-App ausgeführt, *bevor* der `Startup.ConfigureServices`-Code des GS ausgeführt wird. Der `builder.ConfigureTestServices`-Rückruf der Test-App wird *danach* ausgeführt.
 
 ::: moniker-end
 
@@ -719,7 +719,7 @@ Jede POST-Anforderung an das GS muss die Fälschungsschutzprüfung bestehen, die
 
 Die `SendAsync`-Hilfsprogrammerweiterungsmethoden (*Helpers/HttpClientExtensions.cs*) und die `GetDocumentAsync`-Hilfsprogrammmethode (*Helpers/HtmlHelpers.cs*) in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) verwenden den [AngleSharp](https://anglesharp.github.io/)-Parser, um die Fälschungsschutzprüfungen mit den folgenden Methoden durchzuführen:
 
-* `GetDocumentAsync` &ndash; Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt ein `IHtmlDocument` zurück. `GetDocumentAsync` verwendet eine Factory, die eine *virtuelle Antwort* basierend auf der ursprünglichen `HttpResponseMessage` vorbereitet. Weitere Informationen finden Sie in der [AngleSharp-Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: Empfängt die [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) und gibt ein `IHtmlDocument` zurück. `GetDocumentAsync` verwendet eine Factory, die eine *virtuelle Antwort* basierend auf der ursprünglichen `HttpResponseMessage` vorbereitet. Weitere Informationen finden Sie in der [AngleSharp-Dokumentation](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync`-Erweiterungsmethoden für den `HttpClient` verfassen eine [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) und rufen [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) auf, um Anforderungen an das GS zu senden. Überladungen für `SendAsync` akzeptieren das HTML-Formular (`IHtmlFormElement`) und Folgendes:
   * Schaltfläche „Senden“ des Formulars (`IHtmlElement`)
   * Formularwerteauflistung (`IEnumerable<KeyValuePair<string, string>>`)

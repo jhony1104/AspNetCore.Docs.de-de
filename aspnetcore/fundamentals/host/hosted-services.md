@@ -43,7 +43,7 @@ Für Web-Apps, die das `Microsoft.NET.Sdk.Web` SDK verwenden, wird auf das [Micr
 
 Die <xref:Microsoft.Extensions.Hosting.IHostedService>-Schnittstelle definiert zwei Methoden für Objekte, die vom Host verwaltet werden:
 
-* [StartAsync(CancellationToken):](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) `StartAsync` enthält die Logik zum Starten des Hintergrundtasks. `StartAsync` wird *vor* folgenden Vorgängen aufgerufen:
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` enthält die Logik zum Starten des Hintergrundtasks. `StartAsync` wird *vor* folgenden Vorgängen aufgerufen:
 
   * Die App-Pipeline für die Anforderungsverarbeitung wird konfiguriert (`Startup.Configure`).
   * Der Server wird gestartet, und [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) wird ausgelöst.
@@ -75,7 +75,7 @@ Die <xref:Microsoft.Extensions.Hosting.IHostedService>-Schnittstelle definiert z
   }
   ```
 
-* [StopAsync(CancellationToken):](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) wird ausgelöst, wenn der Host das Herunterfahren ordnungsgemäß ausführt. `StopAsync` enthält die Logik zum Beenden des Hintergrundtasks. Implementieren Sie <xref:System.IDisposable> und [Finalizer (Destruktoren)](/dotnet/csharp/programming-guide/classes-and-structs/destructors), um nicht verwaltete Ressourcen zu löschen.
+* [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*): Wird ausgelöst, wenn der Host ein ordnungsgemäßes Herunterfahren ausführt. `StopAsync` enthält die Logik zum Beenden des Hintergrundtasks. Implementieren Sie <xref:System.IDisposable> und [Finalizer (Destruktoren)](/dotnet/csharp/programming-guide/classes-and-structs/destructors), um nicht verwaltete Ressourcen zu löschen.
 
   Das Abbruchtoken hat standardmäßig ein Zeitlimit von fünf Sekunden, um zu melden, dass der Prozess des Herunterfahrens nicht mehr ordnungsgemäß ausgeführt wird. Gehen Sie wie folgt vor, wenn ein Abbruch für das Token angefordert wird:
 
@@ -184,9 +184,9 @@ Verweisen Sie auf das [Microsoft.AspNetCore.App-Metapaket](xref:fundamentals/met
 
 Gehostete Dienste implementieren die <xref:Microsoft.Extensions.Hosting.IHostedService>-Schnittstelle. Die Schnittstelle definiert zwei Methoden für Objekte, die vom Host verwaltet werden:
 
-* [StartAsync(CancellationToken):](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) `StartAsync` enthält die Logik zum Starten des Hintergrundtasks. Bei Verwendung des [Webhosts](xref:fundamentals/host/web-host) wird `StartAsync` aufgerufen, nachdem der Server gestartet und [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) ausgelöst wurde. Bei Verwendung des [generischen Hosts](xref:fundamentals/host/generic-host) wird `StartAsync` aufgerufen, bevor `ApplicationStarted` ausgelöst wird.
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` enthält die Logik zum Starten des Hintergrundtasks. Bei Verwendung des [Webhosts](xref:fundamentals/host/web-host) wird `StartAsync` aufgerufen, nachdem der Server gestartet und [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) ausgelöst wurde. Bei Verwendung des [generischen Hosts](xref:fundamentals/host/generic-host) wird `StartAsync` aufgerufen, bevor `ApplicationStarted` ausgelöst wird.
 
-* [StopAsync(CancellationToken):](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) wird ausgelöst, wenn der Host das Herunterfahren ordnungsgemäß ausführt. `StopAsync` enthält die Logik zum Beenden des Hintergrundtasks. Implementieren Sie <xref:System.IDisposable> und [Finalizer (Destruktoren)](/dotnet/csharp/programming-guide/classes-and-structs/destructors), um nicht verwaltete Ressourcen zu löschen.
+* [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*): Wird ausgelöst, wenn der Host ein ordnungsgemäßes Herunterfahren ausführt. `StopAsync` enthält die Logik zum Beenden des Hintergrundtasks. Implementieren Sie <xref:System.IDisposable> und [Finalizer (Destruktoren)](/dotnet/csharp/programming-guide/classes-and-structs/destructors), um nicht verwaltete Ressourcen zu löschen.
 
   Das Abbruchtoken hat standardmäßig ein Zeitlimit von fünf Sekunden, um zu melden, dass der Prozess des Herunterfahrens nicht mehr ordnungsgemäß ausgeführt wird. Gehen Sie wie folgt vor, wenn ein Abbruch für das Token angefordert wird:
 

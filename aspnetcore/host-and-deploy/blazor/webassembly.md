@@ -32,8 +32,8 @@ Informationen zur Komprimierungskonfiguration der Datei *web. config* von IIS fi
 
 Routinganforderungen für Seitenkomponenten in einer Blazor WebAssembly-App sind nicht so unkompliziert wie Routinganforderungen in einer gehosteten Blazor Server-App. Gehen Sie von einer Blazor WebAssembly-App mit zwei Komponenten aus:
 
-* *Main.razor:* wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`)
-* *About.razor:* `About`-Komponente.
+* *Main.razor*: Wird im Stammverzeichnis der App geladen und enthält einen Link zur `About`-Komponente (`href="About"`).
+* *About.razor*: `About`-Komponente.
 
 Wenn das Standarddokument der App über die Adressleiste des Browsers (z. B. `https://www.contoso.com/`) angefordert wird, geschieht Folgendes:
 
@@ -83,11 +83,11 @@ Veröffentlichte Objekte werden im Ordner */bin/Release/{Zielframework}/publish*
 Beim Veröffentlichen eines Blazor-Projekts wird eine Datei *web.config* mit der folgenden IIS-Konfiguration erstellt:
 
 * Für die folgenden Dateierweiterungen werden MIME-Typen festgelegt:
-  * *.dll* &ndash; `application/octet-stream`
-  * *.json* &ndash; `application/json`
-  * *.wasm* &ndash; `application/wasm`
-  * *.woff* &ndash; `application/font-woff`
-  * *.woff2* &ndash; `application/font-woff`
+  * *.dll*: `application/octet-stream`
+  * *.json*: `application/json`
+  * *.wasm*: `application/wasm`
+  * *.woff*: `application/font-woff`
+  * *.woff2*: `application/font-woff`
 * Für die folgenden MIME-Typen wird die HTTP-Komprimierung aktiviert:
   * `application/octet-stream`
   * `application/wasm`

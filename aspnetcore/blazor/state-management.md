@@ -46,8 +46,8 @@ Um den Zustand über eine einzelne Verbindung hinaus beizubehalten, *speichern S
 
 Die Datenpersistenz ist in der Regel nur für Zustände mit hohem Wert erforderlich, die von den Benutzern mit großem Aufwand erstellt wurden. In den folgenden Beispielen werden durch die Beibehaltung des Zustands Zeit- oder Hilfsmitteleinsparungen in kommerziellen Aktivitäten erzielt:
 
-* Aus mehreren Schritten bestehendes WebForm &ndash; es ist für den Benutzer zeitaufwändig, Daten für mehrere abgeschlossene Schritte eines mehrstufigen Prozesses wiederholt einzugeben, wenn der Zustand nicht mehr vorhanden ist. Der Benutzer verliert in diesem Szenario seinen Zustand, wenn er vom mehrstufigen Formular weg navigiert und später zum Formular zurückkehrt.
-* Warenkorb &ndash; kommerziell wichtige Komponenten einer App, die potenzielle Umsätze ermöglichen, können beibehalten werden. Ein Benutzer, der seinen Zustand verliert und dessen Warenkorb dadurch gelöscht wird, kann weniger Produkte oder Dienste kaufen, wenn er zu einem späteren Zeitpunkt zur Website zurückkehrt.
+* Mehrstufiges Webformular: Es ist für den Benutzer zeitaufwändig, Daten für mehrere abgeschlossene Schritte eines mehrstufigen Prozesses wiederholt einzugeben, wenn der Zustand nicht mehr vorhanden ist. Der Benutzer verliert in diesem Szenario seinen Zustand, wenn er vom mehrstufigen Formular weg navigiert und später zum Formular zurückkehrt.
+* Warenkorb: Kommerziell wichtige Komponenten einer App, die potenzielle Umsätze ermöglichen, können beibehalten werden. Ein Benutzer, der seinen Zustand verliert und dessen Warenkorb dadurch gelöscht wird, kann weniger Produkte oder Dienste kaufen, wenn er zu einem späteren Zeitpunkt zur Website zurückkehrt.
 
 Es ist in der Regel nicht notwendig, einen Zustand beizubehalten, der einfach erneut erstellt werden kann, z. B. den in ein Anmeldedialogfeld eingegebenen Benutzernamen, der nicht übermittelt wurde.
 
@@ -147,7 +147,7 @@ So installieren Sie das `Microsoft.AspNetCore.ProtectedBrowserStorage`-Paket
 
 ### <a name="save-and-load-data-within-a-component"></a>Speichern und Laden von Daten in einer Komponente
 
-Verwenden Sie für jede Komponente, die das Laden oder Speichern von Daten im Browserspeicher erfordert, [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component), um eine Instanz von einem der folgenden Komponenten einzufügen:
+Verwenden Sie für jede Komponente, die das Laden oder Speichern von Daten im Browserspeicher erfordert, [`@inject`](xref:mvc/views/razor#inject), um eine Instanz von einem der folgenden Komponenten einzufügen:
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -184,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Wenn die Parameter der Komponente den Navigationszustand enthalten, rufen Sie `ProtectedSessionStore.GetAsync` auf, und weisen Sie das Ergebnis in `OnParametersSetAsync` und nicht in `OnInitializedAsync` zu. `OnInitializedAsync` wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. `OnInitializedAsync` wird später nicht nochmals aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf der gleichen Seite bleibt. Weitere Informationen finden Sie unter <xref:blazor/lifecycle>.
+Wenn die Parameter der Komponente den Navigationszustand enthalten, rufen Sie `ProtectedSessionStore.GetAsync` auf, und weisen Sie das Ergebnis in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> und nicht in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> zu. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird später nicht nochmals aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf der gleichen Seite bleibt. Weitere Informationen finden Sie unter <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Die Beispiele in diesem Abschnitt funktionieren nur, wenn für den Server kein Prerendering aktiviert ist. Wenn Prerendering aktiviert ist, wird ein Fehler ähnlich dem folgenden generiert:
@@ -314,7 +314,7 @@ else
 
 Die `CounterStateProvider`-Komponente verarbeitet die Ladephase, indem der untergeordnete Inhalt erst nach Abschluss des Ladenvorgangs gerendert wird.
 
-Um die `CounterStateProvider`-Komponente zu verwenden, umschließen Sie eine Instanz der Komponente in einer beliebigen anderen Komponente, die Zugriff auf den Zählerzustand benötigt. Um den Zustand für alle Komponenten in einer App zugänglich zu machen, umschließen Sie die `CounterStateProvider`-Komponente um den `Router` in der `App`-Komponente (*App.razor*):
+Um die `CounterStateProvider`-Komponente zu verwenden, umschließen Sie eine Instanz der Komponente in einer beliebigen anderen Komponente, die Zugriff auf den Zählerzustand benötigt. Um den Zustand für alle Komponenten in einer App zugänglich zu machen, umschließen Sie die `CounterStateProvider`-Komponente um den <xref:Microsoft.AspNetCore.Components.Routing.Router> in der `App`-Komponente (*App.razor*):
 
 ```razor
 <CounterStateProvider>

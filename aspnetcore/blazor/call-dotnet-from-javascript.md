@@ -20,9 +20,9 @@ In diesem Artikel wird das Aufrufen von .NET-Methoden über JavaScript behandelt
 
 ## <a name="static-net-method-call"></a>Statischer .NET-Methodenaufruf
 
-Um eine statische .NET-Methode über JavaScript aufzurufen, verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die Sie aufrufen möchten, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version wird bevorzugt, um Blazor Server-Szenarien zu unterstützen. Die .NET-Methode muss öffentlich und statisch sein sowie das Attribut `[JSInvokable]` aufweisen. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
+Um eine statische .NET-Methode über JavaScript aufzurufen, verwenden Sie die Funktionen `DotNet.invokeMethod` oder `DotNet.invokeMethodAsync`. Übergeben Sie den Bezeichner der statischen Methode, die Sie aufrufen möchten, den Namen der Assembly, die die Funktion enthält, und alle Argumente. Die asynchrone Version wird bevorzugt, um Blazor Server-Szenarien zu unterstützen. Die .NET-Methode muss öffentlich und statisch sein sowie das Attribut [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) aufweisen. Das Aufrufen offener generischer Methoden wird derzeit nicht unterstützt.
 
-Die Beispiel-App enthält eine C#-Methode zur Rückgabe eines `int`-Arrays. Das `JSInvokable`-Attribut wird auf die Methode angewendet.
+Die Beispiel-App enthält eine C#-Methode zur Rückgabe eines `int`-Arrays. Das [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)-Attribut wird auf die Methode angewendet.
 
 *Pages/JsInterop.razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 Der vierte Arraywert wird in das von `ReturnArrayAsync` zurückgegebene Array (`data.push(4);`) gepusht.
 
-Standardmäßig ist der Methodenbezeichner der Methodenname, aber Sie können mit dem Konstruktor `JSInvokableAttribute` einen anderen Bezeichner angeben:
+Standardmäßig ist der Methodenbezeichner der Methodenname, aber Sie können mit dem Attributkonstruktor [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) einen anderen Bezeichner angeben:
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 Sie können auch .NET-Instanzmethoden von JavaScript aus aufrufen. So rufen Sie .NET-Instanzmethoden von JavaScript aus auf
 
 * Übergeben Sie die .NET-Instanz durch Verweis auf JavaScript:
-  * Führen Sie einen statischen Aufruf an `DotNetObjectReference.Create` durch.
-  * Umschließen Sie die Instanz mit einer `DotNetObjectReference`-Instanz, und rufen Sie `Create` für die `DotNetObjectReference`-Instanz auf. Entsorgen Sie `DotNetObjectReference`-Objekte (ein Beispiel folgt später in diesem Abschnitt).
+  * Führen Sie einen statischen Aufruf an <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> durch.
+  * Umschließen Sie die Instanz mit einer <xref:Microsoft.JSInterop.DotNetObjectReference>-Instanz, und rufen Sie <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> für die <xref:Microsoft.JSInterop.DotNetObjectReference>-Instanz auf. Entsorgen Sie <xref:Microsoft.JSInterop.DotNetObjectReference>-Objekte (ein Beispiel folgt später in diesem Abschnitt).
 * Rufen Sie .NET-Instanzmethoden für die Instanz mit den Funktionen `invokeMethod` oder `invokeMethodAsync` auf. Die .NET-Instanz kann auch als Argument übergeben werden, wenn andere .NET-Methoden von JavaScript aus aufgerufen werden.
 
 > [!NOTE]
@@ -133,9 +133,9 @@ Konsolenausgabe in den Webentwicklertools des Browsers:
 Hello, Blazor!
 ```
 
-Verwenden Sie einen der folgenden Ansätze, um einen Arbeitsspeicherverlust zu vermeiden und die Garbage Collection für eine Komponente zu ermöglichen, die ein `DotNetObjectReference` erstellt:
+Verwenden Sie einen der folgenden Ansätze, um einen Arbeitsspeicherverlust zu vermeiden und die Garbage Collection für eine Komponente zu ermöglichen, die ein <xref:Microsoft.JSInterop.DotNetObjectReference> erstellt:
 
-* Löschen Sie das Objekt in der Klasse, die die `DotNetObjectReference`-Instanz erstellt hat:
+* Löschen Sie das Objekt in der Klasse, die die <xref:Microsoft.JSInterop.DotNetObjectReference>-Instanz erstellt hat:
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Verwenden Sie einen der folgenden Ansätze, um einen Arbeitsspeicherverlust zu v
   }
   ```
 
-* Wenn die Komponente oder Klasse die `DotNetObjectReference`-Instanz nicht löscht, löschen Sie das Objekt im Client, indem Sie `.dispose()` aufrufen:
+* Wenn die Komponente oder Klasse die <xref:Microsoft.JSInterop.DotNetObjectReference>-Instanz nicht löscht, löschen Sie das Objekt im Client, indem Sie `.dispose()` aufrufen:
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Verwenden Sie einen der folgenden Ansätze, um einen Arbeitsspeicherverlust zu v
 So rufen Sie die .NET-Methoden einer Komponente auf:
 
 * Verwenden Sie die `invokeMethod`- oder `invokeMethodAsync`-Funktion, um einen statischen Methodenaufruf an die Komponente auszuführen.
-* Die statische Methode der Komponente umschließt den Aufruf der Instanzmethode als aufgerufene `Action`.
+* Die statische Methode der Komponente umschließt den Aufruf der Instanzmethode als aufgerufene <xref:System.Action>.
 
 In der clientseitigen JavaScript-Datei:
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-Wenn mehrere Komponenten mit eigenen aufzurufenden Instanzmethoden vorliegen, verwenden Sie eine Hilfsklasse, um die Instanzmethoden aller Komponenten (als `Action`) aufzurufen.
+Wenn mehrere Komponenten mit eigenen aufzurufenden Instanzmethoden vorliegen, verwenden Sie eine Hilfsklasse, um die Instanzmethoden aller Komponenten (als <xref:System.Action>) aufzurufen.
 
 Im folgenden Beispiel:
 
-* Die `JSInterop`-Komponente enthält mehrere `ListItem`-Komponenten.
+* Die `JSInteropExample`-Komponente enthält mehrere `ListItem`-Komponenten.
 * Alle `ListItem`-Komponenten bestehen aus einer Nachricht und einer Schaltfläche.
 * Wenn auf die Schaltfläche einer `ListItem`-Komponente geklickt wird, ändert die `UpdateMessage`-Methode des `ListItem`-Elements den Text des Listenelements und blendet die Schaltfläche aus.
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/JSInterop.razor*:
+*Pages/JSInteropExample.razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

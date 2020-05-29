@@ -1,24 +1,11 @@
 ---
-title: Visual Studio-Veröffentlichungsprofile (PUBXML) für die Bereitstellung von ASP.NET Core-Apps
-author: rick-anderson
-description: Informationen zum Erstellen von Veröffentlichungsprofilen in Visual Studio und zu deren Verwendung zum Verwalten von Bereitstellungen von ASP.NET Core-Apps an verschiedene Ziele.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439005"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Visual Studio-Veröffentlichungsprofile (PUBXML) für die Bereitstellung von ASP.NET Core-Apps
 
@@ -26,7 +13,7 @@ Von [Sayed Ibrahim Hashimi](https://github.com/sayedihashimi) und [Rick Anderson
 
 Dieser Artikel konzertiert sich auf die Verwendung von Visual Studio 2019 oder höher zum Erstellen und Verwenden von Veröffentlichungsprofilen. Die Veröffentlichungsprofile, die mit Visual Studio erstellt werden, können mit MSBuild und Visual Studio verwendet werden. Anweisungen zum Veröffentlichen in Azure finden Sie unter <xref:tutorials/publish-to-azure-webapp-using-vs>.
 
-Der Befehl `dotnet new mvc` erzeugt eine Projektdatei, die das folgende [\<Project>-Element](/visualstudio/msbuild/project-element-msbuild) auf der Stammebene enthält:
+Der Befehl `dotnet new mvc` generiert eine Projektdatei, die das folgende [\<Project>-Element](/visualstudio/msbuild/project-element-msbuild) auf Stammebene enthält:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -52,13 +39,13 @@ Die `Content`-Elementliste enthält Dateien, die zusätzlich zu den Buildausgabe
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Das [Web-SDK](xref:razor-pages/sdk) importiert das [Razor SDK](xref:razor-pages/web-sdk). Demzufolge sind Dateien, die mit den Mustern `**\*.cshtml` und `**\*.razor` übereinstimmen, in der Elementliste `Content` enthalten.
+Das [Web-SDK](xref:razor-pages/web-sdk) importiert das [Razor SDK](xref:razor-pages/sdk). Demzufolge sind Dateien, die mit den Mustern `**\*.cshtml` und `**\*.razor` übereinstimmen, in der Elementliste `Content` enthalten.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-Das [Web-SDK](xref:razor-pages/sdk) importiert das [Razor SDK](xref:razor-pages/web-sdk). Demzufolge sind Dateien, die mit dem Muster `**\*.cshtml` übereinstimmen, in der Elementliste `Content` enthalten.
+Das [Web-SDK](xref:razor-pages/web-sdk) importiert das [Razor SDK](xref:razor-pages/sdk). Demzufolge sind Dateien, die mit dem Muster `**\*.cshtml` übereinstimmen, in der Elementliste `Content` enthalten.
 
 ::: moniker-end
 
@@ -309,10 +296,10 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* {PATH}: der Pfad zur Projektdatei der App.
-* {PROFILE}: der Name des Veröffentlichungsprofils.
-* {USERNAME}: der MSDeploy-Benutzername. Die {USERNAME} ist im Veröffentlichungsprofil zu finden.
-* {PASSWORD}: das MSDeploy-Kennwort. Sie finden das {PASSWORD} in der Datei *{PROFILE}.PublishSettings*. Laden Sie die Datei *.PublishSettings* von einem der folgenden Speicherorte herunter:
+* {PATH}: Der Pfad zur Projektdatei der App.
+* {PROFILE}: Der Name des Veröffentlichungsprofils.
+* {USERNAME}: Der MSDeploy-Benutzername. Die {USERNAME} ist im Veröffentlichungsprofil zu finden.
+* {PASSWORD}: Das MSDeploy-Kennwort. Sie finden das {PASSWORD} in der Datei *{PROFILE}.PublishSettings*. Laden Sie die Datei *.PublishSettings* von einem der folgenden Speicherorte herunter:
   * **Projektmappen-Explorer:** Wählen Sie **Ansicht** > **Cloud-Explorer** aus. Stellen Sie eine Verbindung mit Ihrem Azure-Abonnement her. Öffnen Sie **App Services**. Klicken Sie mit der rechten Maustaste auf die App. Wählen Sie **Veröffentlichungsprofil herunterladen** aus.
   * Azure-Portal: Wählen Sie **Veröffentlichungsprofil abrufen** im Bereich **Übersicht** der Web-App aus.
 
@@ -510,9 +497,174 @@ Fügen Sie die Eigenschaft `<AllowUntrustedCertificate>` mit dem Wert `True` auf
 Verwenden Sie zum Anzeigen der Dateien in einer Web-App-Bereitstellung von Azure App Service den [Kudu-Dienst](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Fügen Sie das Token `scm` an den Namen Ihrer Web-App an. Zum Beispiel:
 
 | URL                                    | Ergebnis       |
-| -------------------------------------- | ------------ |
-| `http://mysite.azurewebsites.net/`     | Webanwendung      |
-| `http://mysite.scm.azurewebsites.net/` | Der Kudu-Dienst |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | `http://mysite.azurewebsites.net/` | Web-App | | `http://mysite.scm.azurewebsites.net/` | Kudu-Dienst |
 
 Wählen Sie das Menüelement [Debugging-Konsole](https://github.com/projectkudu/kudu/wiki/Kudu-console), aus, um Dateien anzuzeigen, zu bearbeiten, zu löschen oder hinzuzufügen.
 

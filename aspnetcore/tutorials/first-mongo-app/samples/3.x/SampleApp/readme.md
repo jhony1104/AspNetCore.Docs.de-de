@@ -8,12 +8,12 @@ products:
 - aspnet-core
 - vs
 urlFragment: aspnetcore-webapi-mongodb
-ms.openlocfilehash: 6f6022bee678af92066f45032b43b6b87e5f901e
-ms.sourcegitcommit: 7a42bc1e594de36c854fd4363c11821548a9efa7
+ms.openlocfilehash: 95a2a6fcda0a4f7148183981f7dbacd06388329d
+ms.sourcegitcommit: 58722eb309767e462bdbf3082bd38737a4ef168f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83608667"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84106519"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Erstellen einer Web-API mit ASP.NET Core und MongoDB
 
@@ -35,7 +35,7 @@ In diesem Tutorial lernen Sie, wie die folgenden Aufgaben ausgeführt werden:
 
 ## <a name="configure-mongodb"></a>Konfigurieren von MongoDB
 
-Wenn Sie Windows verwenden, wird MongoDB standardmäßig unter *C:\\Programme\\MongoDB* installiert. Fügen Sie der `Path`-Umgebungsvariablen *C:\\Programme\\MongoDB\\Server\\\<Versionsnummer>\\bin* hinzu. Durch diese Änderung können Sie von einer beliebigen Stelle auf Ihrem Entwicklungscomputer auf MongoDB zugreifen.
+Wenn Sie Windows verwenden, wird MongoDB standardmäßig unter *C:\\Programme\\MongoDB* installiert. Fügen Sie der `Path`-Umgebungsvariablen *C:\\Programme\\MongoDB\\Server\\\<version_number>\\bin* hinzu. Durch diese Änderung können Sie von einer beliebigen Stelle auf Ihrem Entwicklungscomputer auf MongoDB zugreifen.
 
 Verwenden Sie die Mongo-Shell in den folgenden Schritten, um eine Datenbank zu erstellen, Sammlungen durchzuführen und Dokumente zu speichern. Weitere Informationen zu Mongo-Shell-Befehlen finden Sie unter [Arbeiten mit der Mongo-Shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).
 
@@ -313,7 +313,7 @@ Die Datenbank ist bereit. Sie können beginnen, die ASP.NET Core-Web-API zu erst
 
 Die `BookService`-Klasse verwendet die folgenden `MongoDB.Driver`-Mitglieder, um CRUD-Vorgänge für die Datenbank ausführen:
 
-* [MongoClient:](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm) Liest die Serverinstanz zum Ausführen von Datenbankvorgängen. Der Konstruktor dieser Klasse wird in der MongoDB-Verbindungszeichenfolge bereitgestellt:
+* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): Liest die Serverinstanz für das Ausführen von Datenbankvorgängen. Der Konstruktor dieser Klasse wird in der MongoDB-Verbindungszeichenfolge bereitgestellt:
 
     ```csharp
     public BookService(IBookstoreDatabaseSettings settings)
@@ -325,16 +325,16 @@ Die `BookService`-Klasse verwendet die folgenden `MongoDB.Driver`-Mitglieder, um
     }
     ```
 
-* [IMongoDatabase:](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm) Stellt die Mongo-Datenbank zum Ausführen von Vorgängen dar. In diesem Tutorial wird die generische Methode [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) für die Schnittstelle verwendet, um Zugriff auf Daten in einer bestimmten Sammlung zu erhalten. Führen Sie CRUD-Vorgänge für die Sammlung aus, nachdem diese Methode aufgerufen wurde. Rufen Sie in der `GetCollection<TDocument>(collection)`-Methode folgendes auf:
+* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): Stellt die Mongo-Datenbank zum Ausführen von Vorgängen dar. In diesem Tutorial wird die generische Methode [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) für die Schnittstelle verwendet, um Zugriff auf Daten in einer bestimmten Sammlung zu erhalten. Führen Sie CRUD-Vorgänge für die Sammlung aus, nachdem diese Methode aufgerufen wurde. Rufen Sie in der `GetCollection<TDocument>(collection)`-Methode folgendes auf:
   * `collection` steht für den Sammlungsnamen.
   * `TDocument` steht für den in der Sammlung gespeicherten CLR-Objekttypen.
 
 `GetCollection<TDocument>(collection)` gibt ein [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm)-Objekt zurück, das die Sammlung darstellt. In diesem Tutorial werden die folgenden Methoden für der Sammlung aufgerufen:
 
-* [DeleteOne:](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm) Löscht ein einzelnes Dokument, das den angegebenen Suchkriterien entspricht
-* [Find\<TDocument>:](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm) Gibt alle Dokumente in der Sammlung zurück, die den angegebenen Suchkriterien entsprechen
-* [InsertOne:](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) Fügt das angegebene Objekt als neues Dokument in die Sammlung ein
-* [ReplaceOne:](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) Ersetzt das einzelne Dokument, das den angegebenen Suchkriterien entspricht, durch das angegebene Objekt
+* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Löscht das Einzeldokument, das den angegebenen Suchkriterien entspricht.
+* [Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): Gibt alle Dokumente in der Sammlung zurück, die den angegebenen Suchkriterien entsprechen.
+* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Fügt das angegebene Objekt als neues Dokument in die Sammlung ein.
+* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): Ersetzt das Einzeldokument, das den angegebenen Suchkriterien entspricht, durch das angegebene Objekt.
 
 ## <a name="add-a-controller"></a>Hinzufügen eines Controllers
 

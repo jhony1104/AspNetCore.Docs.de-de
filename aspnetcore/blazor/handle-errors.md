@@ -1,24 +1,12 @@
 ---
-title: Fehlerbehandlung in ASP.NET Core Blazor-Apps
-author: guardrex
-description: Erfahren Sie, wie ASP.NET Core Blazor wie Blazor Ausnahmefehler behandelt und wie Sie Apps entwickeln können, die Fehler erkennen und behandeln.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/23/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/handle-errors
-ms.openlocfilehash: cca4d8ce0c783f26f33cb7b2b1535a4bc53384d6
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
-ms.contentlocale: de-DE
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424339"
+title: „Behandeln von Fehlern in ASP.NET Core Blazor-Apps“ Autor: Beschreibung: ASP.NET Core Blazor: Wie Blazor Ausnahmefehler behandelt und wie Sie Apps entwickeln können, die Fehler erkennen und behandeln.
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Fehlerbehandlung in ASP.NET Core Blazor-Apps
 
@@ -138,7 +126,7 @@ Die genannten Ausnahmefehler werden in den folgenden Abschnitten dieses Artikels
 Wenn durch Blazor eine Instanz einer Komponente erstellt wird:
 
 * Wird der Konstruktor der Komponente aufgerufen.
-* Werden die Konstruktoren von Nicht-Singleton-DI-Diensten aufgerufen, die dem Konstruktor der Komponente mit der Anweisung [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) oder mit dem Attribut [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) bereitgestellt werden.
+* Werden die Konstruktoren von Nicht-Singleton-DI-Diensten aufgerufen, die dem Konstruktor der Komponente mit der Anweisung [`@inject`](xref:mvc/views/razor#inject) oder mit dem Attribut [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) bereitgestellt werden.
 
 Bei einer Blazor Server-Leitung tritt ein Fehler auf, wenn ein ausgeführter Konstruktor oder ein Setter für eine `[Inject]`-Eigenschaft einen Ausnahmefehler auslöst. Die Ausnahme ist schwerwiegend, weil die Komponente durch das Framework nicht instanziiert werden kann. Wenn eine Konstruktorlogik Ausnahmen auslösen kann, muss die App die Ausnahmen mit einer [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung mit Fehlerbehandlung und Fehlerprotokollierung abfangen.
 
@@ -146,16 +134,16 @@ Bei einer Blazor Server-Leitung tritt ein Fehler auf, wenn ein ausgeführter Kon
 
 Während der Lebensdauer einer Komponente ruft Blazor die folgenden [Lebenszyklusmethoden](xref:blazor/lifecycle) aufrufen:
 
-* `OnInitialized` / `OnInitializedAsync`
-* `OnParametersSet` / `OnParametersSetAsync`
-* `ShouldRender` / `ShouldRenderAsync`
-* `OnAfterRender` / `OnAfterRenderAsync`
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>
 
 Wenn eine Lebenszyklusmethode synchron oder asynchron eine Ausnahme auslöst, ist die Ausnahme für eine Blazor Server-Leitung schwerwiegend. Damit Komponenten Fehler in Lebenszyklusmethoden behandeln können, fügen Sie eine Fehlerbehandlungslogik hinzu.
 
-Im folgenden Beispiel, in dem `OnParametersSetAsync` eine Methode zum Aufrufen eines Produkts aufruft:
+Im folgenden Beispiel, in dem <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> eine Methode zum Aufrufen eines Produkts aufruft:
 
-* Wird eine Ausnahme, die in der `ProductRepository.GetProductByIdAsync`-Methode ausgelöst wird, durch eine `try-catch`-Anweisung behandelt.
+* Wird eine Ausnahme, die in der `ProductRepository.GetProductByIdAsync`-Methode ausgelöst wird, durch eine [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung behandelt.
 * Wenn der `catch`-Block ausgeführt wird:
   * wird `loadFailed` auf `true` festgelegt, sodass dem Benutzer eine Fehlermeldung angezeigt wird.
   * wird der Fehler protokolliert.
@@ -164,7 +152,7 @@ Im folgenden Beispiel, in dem `OnParametersSetAsync` eine Methode zum Aufrufen e
 
 ### <a name="rendering-logic"></a>Renderinglogik
 
-Das deklarative Markup in einer `.razor`-Komponentendatei wird in eine C#-Methode namens `BuildRenderTree` kompiliert. Beim Rendern einer Komponente wird von `BuildRenderTree` eine Datenstruktur ausgeführt und erstellt, die Elemente, Text und untergeordnete Komponenten der gerenderten Komponente beschreibt.
+Das deklarative Markup in einer `.razor`-Komponentendatei wird in eine C#-Methode namens <xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> kompiliert. Beim Rendern einer Komponente wird von <xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> eine Datenstruktur ausgeführt und erstellt, die Elemente, Text und untergeordnete Komponenten der gerenderten Komponente beschreibt.
 
 Die Renderinglogik kann eine Ausnahme auslösen. Ein Beispiel für dieses Szenario tritt auf, wenn `@someObject.PropertyName` ausgewertet wird, `@someObject` jedoch `null` ist. Ein von einer Renderinglogik ausgelöster Ausnahmefehler ist für eine Blazor Server-Leitung schwerwiegend.
 
@@ -199,15 +187,15 @@ Weitere Informationen zur Beseitigung von Komponenten finden Sie unter <xref:bla
 
 ### <a name="javascript-interop"></a>JavaScript-Interoperabilität
 
-Mit `IJSRuntime.InvokeAsync<T>` kann .NET-Code die JavaScript-Laufzeit im Browser des Benutzers asynchron aufrufen.
+Mit <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> kann .NET-Code die JavaScript-Laufzeit im Browser des Benutzers asynchron aufrufen.
 
-Die folgenden Bedingungen gelten für die Fehlerbehandlung mit `InvokeAsync<T>`:
+Die folgenden Bedingungen gelten für die Fehlerbehandlung mit <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>:
 
-* Wenn ein Aufruf von `InvokeAsync<T>` synchron fehlschlägt, tritt eine .NET-Ausnahme auf. Ein Aufruf von `InvokeAsync<T>` kann beispielsweise fehlschlagen, wenn die bereitgestellten Argumente nicht serialisiert werden können. Die Ausnahme muss vom Entwicklercode abgefangen werden. Wenn eine Ausnahme nicht von App-Code in einem Ereignishandler oder in der Lebenszyklusmethode einer Komponente behandelt wird, ist die resultierende Ausnahme für eine Blazor Server-Leitung schwerwiegend.
-* Wenn ein Aufruf von `InvokeAsync<T>` asynchron fehlschlägt, schlägt die .NET <xref:System.Threading.Tasks.Task> fehl. Ein Aufruf von `InvokeAsync<T>` kann beispielsweise fehlschlagen, wenn der JavaScript-Code eine Ausnahme auslöst oder eine `Promise` zurückgibt, die als `rejected` abgeschlossen wird. Die Ausnahme muss vom Entwicklercode abgefangen werden. Wenn Sie den [await](/dotnet/csharp/language-reference/keywords/await)-Operator verwenden, sollten Sie überlegen,ob Sie den Methodenaufruf mit einer [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung mit Fehlerbehandlung und Fehlerprotokollierung umschließen. Tun Sie dies nicht, führt der fehlgeschlagene Code zu einem Ausnahmefehler, der für eine Blazor Server-Leitung schwerwiegend ist.
-* Ein Aufruf von `InvokeAsync<T>` muss standardmäßig innerhalb eines bestimmten Zeitraums abgeschlossen werden, da ansonsten für den Aufruf ein Timeout auftritt. Die Standardwert für das Zeitlimit beträgt eine Minute. Mit dem Zeitlimit wird der Code vor dem Verlust der Netzwerkkonnektivität oder vor JavaScript-Code geschützt, der keine Abschlussmeldung sendet. Wenn beim Aufruf ein Timeout auftritt, schlägt die resultierende `Task` mit einer <xref:System.OperationCanceledException>fehl. Die Ausnahme wird abgefangen und mit Protokollierung verarbeitet.
+* Wenn ein Aufruf von <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> synchron fehlschlägt, tritt eine .NET-Ausnahme auf. Ein Aufruf von <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> kann beispielsweise fehlschlagen, wenn die bereitgestellten Argumente nicht serialisiert werden können. Die Ausnahme muss vom Entwicklercode abgefangen werden. Wenn eine Ausnahme nicht von App-Code in einem Ereignishandler oder in der Lebenszyklusmethode einer Komponente behandelt wird, ist die resultierende Ausnahme für eine Blazor Server-Leitung schwerwiegend.
+* Wenn ein Aufruf von <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> asynchron fehlschlägt, schlägt die .NET <xref:System.Threading.Tasks.Task> fehl. Ein Aufruf von <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> kann beispielsweise fehlschlagen, wenn der JavaScript-Code eine Ausnahme auslöst oder eine `Promise` zurückgibt, die als `rejected` abgeschlossen wird. Die Ausnahme muss vom Entwicklercode abgefangen werden. Wenn Sie den [await](/dotnet/csharp/language-reference/keywords/await)-Operator verwenden, sollten Sie überlegen,ob Sie den Methodenaufruf mit einer [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung mit Fehlerbehandlung und Fehlerprotokollierung umschließen. Tun Sie dies nicht, führt der fehlgeschlagene Code zu einem Ausnahmefehler, der für eine Blazor Server-Leitung schwerwiegend ist.
+* Ein Aufruf von <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> muss standardmäßig innerhalb eines bestimmten Zeitraums abgeschlossen werden, da ansonsten für den Aufruf ein Timeout auftritt. Die Standardwert für das Zeitlimit beträgt eine Minute. Mit dem Zeitlimit wird der Code vor dem Verlust der Netzwerkkonnektivität oder vor JavaScript-Code geschützt, der keine Abschlussmeldung sendet. Wenn beim Aufruf ein Timeout auftritt, schlägt die resultierende <xref:System.Threading.Tasks> mit einer <xref:System.OperationCanceledException>fehl. Die Ausnahme wird abgefangen und mit Protokollierung verarbeitet.
 
-Ähnlich kann JavaScript-Code Aufrufe von .NET-Methoden initiieren, die durch das [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript)-Attribut angegeben werden. Wenn diese .NET-Methoden einen Ausnahmefehler auslösen:
+Ähnlich kann JavaScript-Code Aufrufe von .NET-Methoden initiieren, die durch das [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)-Attribut (xref:blazor/call-dotnet-from-javascript) angegeben werden. Wenn diese .NET-Methoden einen Ausnahmefehler auslösen:
 
 * wird die Ausnahme nicht als schwerwiegend für eine Blazor Server-Leitung behandelt.
 * wird die JavaScript-seitige `Promise` abgelehnt.
@@ -230,11 +218,11 @@ Blazor-Komponenten können mit dem [Komponententaghilfsprogramm](xref:mvc/views/
 Wenn von einer Komponente während des Prerenderings ein Ausnahmefehler beispielswiese während einer Lebenszyklusmethode oder in der Renderinglogik ausgelöst wird, gilt Folgendes:
 
 * Die Ausnahme ist für die Leitung schwerwiegend.
-* Die Ausnahme wird vom `Component`-Taghilfsprogramm in der Aufrufliste weiter oben ausgelöst. Daher schlägt die gesamte HTTP-Anforderung fehl, es sei denn, die Ausnahme wird explizit vom Entwicklercode abgefangen.
+* Die Ausnahme wird vom <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>-Taghilfsprogramm in der Aufrufliste weiter oben ausgelöst. Daher schlägt die gesamte HTTP-Anforderung fehl, es sei denn, die Ausnahme wird explizit vom Entwicklercode abgefangen.
 
 Wenn das Prerendering unter normalen Umständen fehlschlägt, ist es nicht sinnvoll, mit dem Erstellen und Rendern der Komponente fortzufahren, da eine funktionierende Komponente nicht gerendert werden kann.
 
-Wenn während des Prerenderings auftretende Fehler toleriert werden sollen, muss sich die Fehlerbehandlungslogik in einer Komponente befinden, die möglicherweise Ausnahmen auslöst. Verwenden Sie [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisungen mit Fehlerbehandlung und Fehlerprotokollierung. Statt das `Component`-Taghilfsprogramm in einer `try-catch`-Anweisung zu umschließen, fügen Sie eine Fehlerbehandlungslogik in die vom `Component`-Taghilfsprogramm gerenderte Komponente ein.
+Wenn während des Prerenderings auftretende Fehler toleriert werden sollen, muss sich die Fehlerbehandlungslogik in einer Komponente befinden, die möglicherweise Ausnahmen auslöst. Verwenden Sie [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisungen mit Fehlerbehandlung und Fehlerprotokollierung. Statt das <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>-Taghilfsprogramm in einer [trycatch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisung zu umschließen, fügen Sie Fehlerbehandlungslogik in die vom <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>-Taghilfsprogramm gerenderte Komponente ein.
 
 ## <a name="advanced-scenarios"></a>Erweiterte Szenarien
 
@@ -262,14 +250,14 @@ Wenn Sie Muster mit Endlosrekursionen vermeiden möchten, müssen Sie sicherstel
 
 ### <a name="custom-render-tree-logic"></a>Benutzerdefinierte Renderstrukturlogik
 
-Die meisten Blazor-Komponenten werden als *.razor*-Dateien implementiert und kompiliert, um eine Logik zu erzeugen, die einen `RenderTreeBuilder` verwendet, um deren Ausgabe zu rendern. Ein Entwickler kann mit prozeduralem C#-Code eine `RenderTreeBuilder`-Logik manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
+Die meisten Blazor-Komponenten werden als *.razor*-Dateien implementiert und kompiliert, um eine Logik zu erzeugen, die einen <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> verwendet, um deren Ausgabe zu rendern. Ein Entwickler kann mit prozeduralem C#-Code eine <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>-Logik manuell implementieren. Weitere Informationen finden Sie unter <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
 > Die Verwendung einer manuellen Buildlogik für die Renderstruktur gilt als erweitertes und unsicheres Szenario, das für die allgemeine Komponentenentwicklung nicht empfohlen wird.
 
-Beim Schreiben von `RenderTreeBuilder`-Code muss der Entwickler die Richtigkeit des Codes garantieren. Der Entwickler muss beispielsweise Folgendes sicherstellen:
+Beim Schreiben von <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>-Code muss der Entwickler die Richtigkeit des Codes garantieren. Der Entwickler muss beispielsweise Folgendes sicherstellen:
 
-* Aufrufe von `OpenElement` und `CloseElement` sind ordnungsgemäß ausgeglichen.
+* Aufrufe von <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenElement%2A> und <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseElement%2A> sind ordnungsgemäß ausgeglichen.
 * Attribute werden nur an den richtigen Stellen hinzugefügt.
 
 Eine fehlerhafte Buildlogik für die Renderstruktur kann ein willkürliches undefiniertes Verhalten wie Abstürze, Serverabstürze und Sicherheitsrisiken verursachen.

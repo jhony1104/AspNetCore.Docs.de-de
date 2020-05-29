@@ -11,11 +11,11 @@ title: 'ASP.NET Core Blazor-Routing' author: description: monikerRange: ms.autho
 
 Von [Luke Latham](https://github.com/guardrex)
 
-Erfahren Sie, wie Sie Anforderungen weiterleiten und die `NavLink`-Komponente verwenden, um Navigationslinks in Blazor-Apps zu erstellen.
+Erfahren Sie, wie Sie Anforderungen weiterleiten und die <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente verwenden, um Navigationslinks in Blazor-Apps zu erstellen.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>Integration von ASP.NET Core-Endpunktrouting
 
-Blazor Server ist in das [ASP.NET Core-Endpunktrouting](xref:fundamentals/routing) integriert. Eine ASP.NET Core-App ist so konfiguriert, dass sie eingehende Verbindungen für interaktive Komponenten mit `MapBlazorHub` in `Startup.Configure` akzeptiert:
+Blazor Server ist in das [ASP.NET Core-Endpunktrouting](xref:fundamentals/routing) integriert. Eine ASP.NET Core-App ist so konfiguriert, dass sie eingehende Verbindungen für interaktive Komponenten mit <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> in `Startup.Configure` akzeptiert:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -23,7 +23,7 @@ Die typischste Konfiguration ist die Weiterleitung aller Anforderungen an eine R
 
 ## <a name="route-templates"></a>Routenvorlagen
 
-Die `Router`-Komponente ermöglicht das Routing zu jeder Komponente mit einer bestimmten Route. Die `Router`-Komponente wird in der Datei *App.razor* angezeigt:
+Die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente ermöglicht das Routing zu jeder Komponente mit einer bestimmten Route. Die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente wird in der Datei *App.razor* angezeigt:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -38,12 +38,12 @@ Die `Router`-Komponente ermöglicht das Routing zu jeder Komponente mit einer be
 
 Wenn eine *.razor*-Datei mit einer `@page`-Anweisung kompiliert wird, erhält die generierte Klasse ein <xref:Microsoft.AspNetCore.Components.RouteAttribute>-Element, das die Routenvorlage angibt.
 
-Zur Laufzeit führt die `RouteView`-Komponente Folgendes aus:
+Zur Laufzeit führt die <xref:Microsoft.AspNetCore.Components.RouteView>-Komponente Folgendes aus:
 
-* Sie empfängt das `RouteData`-Element aus dem `Router`-Element zusammen mit den gewünschten Parametern.
+* Sie empfängt das <xref:Microsoft.AspNetCore.Components.RouteData>-Element aus dem <xref:Microsoft.AspNetCore.Components.Routing.Router>-Element zusammen mit den gewünschten Parametern.
 * Sie rendert die angegebene Komponente mit ihrem Layout (oder einem optionalen Standardlayout) unter Verwendung der angegebenen Parameter.
 
-Optional können Sie einen `DefaultLayout`-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout festlegen. In den Blazor-Standardvorlagen wird die `MainLayout`-Komponente angegeben. *MainLayout.razor* befindet sich im *Freigabeordner* mit den Vorlagen für das Projekt. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
+Optional können Sie einen <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout>-Parameter mit einer Layoutklasse angeben, die für Komponenten verwendet werden soll, die kein Layout festlegen. In den Blazor-Standardvorlagen wird die `MainLayout`-Komponente angegeben. *MainLayout.razor* befindet sich im *Freigabeordner* mit den Vorlagen für das Projekt. Weitere Informationen zu Layouts finden Sie unter <xref:blazor/layouts>.
 
 Mehrere Routenvorlagen können auf eine Komponente angewendet werden. Die folgende Komponente antwortet auf Anforderungen für `/BlazorRoute` und `/DifferentBlazorRoute`:
 
@@ -59,9 +59,9 @@ Mehrere Routenvorlagen können auf eine Komponente angewendet werden. Die folgen
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Bereitstellen von benutzerdefiniertem Inhalt, wenn kein Inhalt gefunden wurde
 
-Die `Router`-Komponente ermöglicht es der App, benutzerdefinierte Inhalte anzugeben, wenn für die angeforderte Route keine Inhalte gefunden werden.
+Die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente ermöglicht es der App, benutzerdefinierte Inhalte anzugeben, wenn für die angeforderte Route keine Inhalte gefunden werden.
 
-Legen Sie in der Datei *App.razor* den benutzerdefinierten Inhalt im `NotFound`-Vorlagenparameter der `Router`-Komponente fest:
+Legen Sie in der Datei *App.razor* den benutzerdefinierten Inhalt im <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound>-Vorlagenparameter der <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente fest:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -75,11 +75,11 @@ Legen Sie in der Datei *App.razor* den benutzerdefinierten Inhalt im `NotFound`-
 </Router>
 ```
 
-Der Inhalt von `<NotFound>`-Tags kann beliebige Elemente beinhalten, z. B. andere interaktive Komponenten. Informationen zum Anwenden eines Standardlayouts auf `NotFound`-Inhalte finden Sie unter <xref:blazor/layouts>.
+Der Inhalt von `<NotFound>`-Tags kann beliebige Elemente beinhalten, z. B. andere interaktive Komponenten. Informationen zum Anwenden eines Standardlayouts auf <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound>-Inhalte finden Sie unter <xref:blazor/layouts>.
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Weiterleiten an Komponenten aus mehreren Assemblys
 
-Verwenden Sie den `AdditionalAssemblies`-Parameter, um zusätzliche Assemblys anzugeben, die die `Router`-Komponente bei der Suche nach für das Routing geeigneten Komponenten beachten soll. Angegebene Assemblys werden zusätzlich zur mit `AppAssembly` angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine für das Routing geeignete Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Im folgenden Beispiel zu `AdditionalAssemblies` wird die Routingunterstützung für `Component1` ermöglicht:
+Verwenden Sie den <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies>-Parameter, um zusätzliche Assemblys anzugeben, die die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente bei der Suche nach für das Routing geeigneten Komponenten beachten soll. Angegebene Assemblys werden zusätzlich zur mit `AppAssembly` angegebenen Assembly berücksichtigt. Im folgenden Beispiel ist `Component1` eine für das Routing geeignete Komponente, die in einer referenzierten Klassenbibliothek definiert ist. Im folgenden Beispiel zu <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> wird die Routingunterstützung für `Component1` ermöglicht:
 
 ```razor
 <Router
@@ -606,7 +606,7 @@ title: 'ASP.NET Core Blazor-Routing' author: description: monikerRange: ms.autho
 ---------------: | | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Nein                               | | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Ja                              | | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Ja                              | | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Ja                              | | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Ja                              | | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Nein                               | | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Ja                              | | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Ja                              |
 
 > [!WARNING]
-> Für Routeneinschränkungen, mit denen die URL überprüft wird und die in den CLR-Typ umgewandelt werden (beispielsweise `int` oder `DateTime`), wird immer die invariante Kultur verwendet. Diese Einschränkungen setzen voraus, dass die URL nicht lokalisierbar ist.
+> Für Routeneinschränkungen, mit denen die URL überprüft wird und die in den CLR-Typ umgewandelt werden (beispielsweise `int` oder <xref:System.DateTime>), wird immer die invariante Kultur verwendet. Diese Einschränkungen setzen voraus, dass die URL nicht lokalisierbar ist.
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing mit URLs, die Punkte enthalten
 
@@ -628,20 +628,20 @@ Weitere Informationen finden Sie unter <xref:fundamentals/routing>.
 
 ## <a name="navlink-component"></a>NavLink-Komponente
 
-Verwenden Sie bei der Erstellung von Navigationslinks eine `NavLink`-Komponente anstelle von HTML-Hyperlinkelementen (`<a>`). Eine `NavLink`-Komponente verhält sich wie ein `<a>`-Element, abgesehen davon, dass sie eine `active`-CSS-Klasse umschaltet, je nachdem, ob das `href`-Element mit der aktuellen URL übereinstimmt. Die `active`-Klasse zeigt einem Benutzer auf, welche Seite unter den angezeigten Navigationslinks aktiv ist.
+Verwenden Sie bei der Erstellung von Navigationslinks eine <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente anstelle von HTML-Hyperlinkelementen (`<a>`). Eine <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente verhält sich wie ein `<a>`-Element, abgesehen davon, dass sie eine `active`-CSS-Klasse umschaltet, je nachdem, ob das `href`-Element mit der aktuellen URL übereinstimmt. Die `active`-Klasse zeigt einem Benutzer auf, welche Seite unter den angezeigten Navigationslinks aktiv ist.
 
-Die folgende `NavMenu`-Komponente erstellt eine [Bootstrap](https://getbootstrap.com/docs/)-Navigationsleiste, die zeigt, wie `NavLink`-Komponenten verwendet werden:
+Die folgende `NavMenu`-Komponente erstellt eine [Bootstrap](https://getbootstrap.com/docs/)-Navigationsleiste, die zeigt, wie <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponenten verwendet werden:
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-Es gibt zwei `NavLinkMatch`-Optionen, die Sie dem `Match`-Attribut des `<NavLink>`-Elements zuweisen können:
+Es gibt zwei <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch>-Optionen, die Sie dem `Match`-Attribut des `<NavLink>`-Elements zuweisen können:
 
-* `NavLinkMatch.All` &ndash; `NavLink` ist aktiv, wenn die gesamte aktuelle URL übereinstimmt.
-* `NavLinkMatch.Prefix` (*Standard*) &ndash; `NavLink` ist aktiv, wenn ein Präfix der aktuellen URL übereinstimmt.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ist aktiv, wenn die gesamte aktuelle URL übereinstimmt.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*Standardwert*): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ist aktiv, wenn ein Präfix mit der aktuellen URL übereinstimmt.
 
-Im vorherigen Beispiel stimmt die Startseite `NavLink` `href=""` mit der Startseiten-URL überein und empfängt nur die CSS-Klasse `active` in der Standardbasispfad-URL der App (z. B. `https://localhost:5001/`). Die zweite `NavLink`-Komponente empfängt die `active`-Klasse, wenn der Benutzer eine beliebige URL mit einem `MyComponent`-Präfix aufruft (z. B. `https://localhost:5001/MyComponent` und `https://localhost:5001/MyComponent/AnotherSegment`).
+Im vorherigen Beispiel stimmt die Startseite <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` mit der Startseiten-URL überein und empfängt nur die CSS-Klasse `active` in der Standardbasispfad-URL der App (z. B. `https://localhost:5001/`). Die zweite <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente empfängt die `active`-Klasse, wenn der Benutzer eine beliebige URL mit einem `MyComponent`-Präfix aufruft (z. B. `https://localhost:5001/MyComponent` und `https://localhost:5001/MyComponent/AnotherSegment`).
 
-Zusätzliche `NavLink`-Komponentenattribute werden an das gerenderte Ankertag weitergegeben. Im folgenden Beispiel schließt die `NavLink`-Komponente das `target`-Attribut ein:
+Zusätzliche <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponentenattribute werden an das gerenderte Ankertag weitergegeben. Im folgenden Beispiel schließt die <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente das `target`-Attribut ein:
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -655,7 +655,7 @@ Das folgende HTML-Markup wird gerendert:
 
 ## <a name="uri-and-navigation-state-helpers"></a>Hilfsprogramme für URI und Navigationszustand
 
-Verwenden Sie <xref:Microsoft.AspNetCore.Components.NavigationManager>, um mit URIs und Navigationselementen in C#-Code zu arbeiten. `NavigationManager` stellt das Ereignis und die Methoden bereit, die in der folgenden Tabelle aufgeführt sind.
+Verwenden Sie <xref:Microsoft.AspNetCore.Components.NavigationManager>, um mit URIs und Navigationselementen in C#-Code zu arbeiten. <xref:Microsoft.AspNetCore.Components.NavigationManager> stellt das Ereignis und die Methoden bereit, die in der folgenden Tabelle aufgeführt sind.
 
 | Member | Beschreibung |
 | ---
@@ -689,7 +689,7 @@ title: 'ASP.NET Core Blazor-Routing' author: description: monikerRange: ms.autho
 - 'Razor'
 - 'SignalR' uid: 
 
------- | | Uri | Ruft den aktuellen absoluten URI ab. | | BaseUri | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangestellt werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht `BaseUri` dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server). | | NavigateTo | Navigiert zum angegebenen URI. Bei `forceLoad` lautet der Wert `true`:<ul><li>Clientseitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom clientseitigen Router verarbeitet wird oder nicht.</li></ul> | | LocationChanged | Ein Ereignis, das ausgelöst wird, wenn sich die Navigationsposition geändert hat. | | ToAbsoluteUri | Konvertiert einen relativen URI in einen absoluten URI. | | <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | Wenn ein Basis-URI (z. B. ein URI, der zuvor von `GetBaseUri` zurückgegeben wurde) vorhanden ist, wird ein absoluter URI in einen URI relativ zum Basis-URI-Präfix konvertiert. |
+------ | | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Ruft den aktuellen absoluten URI ab. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Ruft den Basis-URI (mit einem nachgestellten Schrägstrich) ab, der relativen URI-Pfaden vorangestellt werden kann, um einen absoluten URI zu erhalten. In der Regel entspricht <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> dem `href`-Attribut im `<base>`-Element des Dokuments in *wwwroot/index.html* (Blazor WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server). | | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | Navigiert zum angegebenen URI. Bei `forceLoad` lautet der Wert `true`:<ul><li>Clientseitiges Routing wird umgangen.</li><li>Der Browser ist gezwungen, die neue Seite vom Server zu laden, unabhängig davon, ob der URI normalerweise vom clientseitigen Router verarbeitet wird oder nicht.</li></ul> | | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | Ein Ereignis, das ausgelöst wird, wenn sich die Navigationsposition geändert hat. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | Konvertiert einen relativen URI in einen absoluten URI. | | <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | Wenn ein Basis-URI (z. B. ein URI, der zuvor von <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> zurückgegeben wurde) vorhanden ist, wird ein absoluter URI in einen URI relativ zum Basis-URI-Präfix konvertiert. |
 
 Die folgende Komponente navigiert zu der `Counter`-Komponente der App, wenn die Schaltfläche ausgewählt wird:
 
@@ -711,7 +711,7 @@ Die folgende Komponente navigiert zu der `Counter`-Komponente der App, wenn die 
 }
 ```
 
-Die folgende Komponente verarbeitet ein Speicherortwechselereignis. Die Einbindung der `HandleLocationChanged`-Methode wird aufgehoben, wenn `Dispose` vom Framework aufgerufen wird. Durch das Aufheben der Einbindung der Methode wird die Garbage Collection für die Komponente ermöglicht.
+Die folgende Komponente verarbeitet ein Speicherortwechselereignis, indem <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> festgelegt wird. Die Einbindung der `HandleLocationChanged`-Methode wird aufgehoben, wenn `Dispose` vom Framework aufgerufen wird. Durch das Aufheben der Einbindung der Methode wird die Garbage Collection für die Komponente ermöglicht.
 
 ```razor
 @implements IDisposable
@@ -737,7 +737,7 @@ public void Dispose()
 
 <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> stellt die folgenden Informationen zum Ereignis bereit:
 
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location> entspricht der URL des neuen Speicherorts.
-* Wenn <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted> den Wert `true` aufweist, wird die Navigation des Browsers von Blazor abgefangen. Wenn der Wert `false` vorliegt, wurde die Navigation von [NavigationManager.NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A) ausgelöst.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: Die URL des neuen Speicherorts.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: Wenn der Wert `true` ist, hat Blazor die Navigation vom Browser abgefangen. Wenn der Wert `false` ist, hat <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> bewirkt, dass die Navigation erfolgt ist.
 
 Weitere Informationen zur Beseitigung von Komponenten finden Sie unter <xref:blazor/lifecycle#component-disposal-with-idisposable>.

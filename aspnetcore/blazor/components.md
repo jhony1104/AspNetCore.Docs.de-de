@@ -69,8 +69,8 @@ Razor-Komponenten in Blazor-Apps verwenden Razor-Syntax ausführlich. Wenn Sie m
 
 Beachten Sie beim Zugriff auf den Inhalt der Razor-Syntax besonders die folgenden Abschnitte:
 
-* [Direktiven](xref:mvc/views/razor#directives) &ndash; reservierte Schlüsselwörter mit `@`-Präfix, die in der Regel die Art und Weise ändern, wie das Komponentenmarkup analysiert wird oder funktioniert.
-* [Direktivenattribute](xref:mvc/views/razor#directive-attributes) &ndash; reservierte Schlüsselwörter mit `@`-Präfixen, die in der Regel die Art und Weise ändern, wie Komponentenelemente analysiert werden oder funktionieren.
+* [Direktiven](xref:mvc/views/razor#directives): Reservierte Schlüsselwörter mit `@`-Präfix, die in der Regel die Art und Weise ändern, wie das Komponentenmarkup analysiert wird oder funktioniert.
+* [Direktivenattribute](xref:mvc/views/razor#directive-attributes): Reservierte Schlüsselwörter mit `@`-Präfix, die in der Regel die Art und Weise ändern, wie Komponentenelemente analysiert werden oder funktionieren.
 
 ## <a name="static-assets"></a>Statische Ressourcen
 
@@ -110,7 +110,7 @@ Wenn eine Komponente ein HTML-Element mit einem groß geschriebenen ersten Buchs
 
 Das Routing in Blazor erfolgt durch die Bereitstellung einer Routenvorlage für jede zugängliche Komponente in der App.
 
-Wenn eine Razor-Datei mit einer [`@page`][9]-Anweisung kompiliert wird, wird der generierten Klasse ein <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> hinzugefügt und so die Routenvorlage angegeben. Zur Laufzeit sucht der Router nach Komponentenklassen mit `RouteAttribute` und rendert die Komponente, deren Routenvorlage mit der angeforderten URL übereinstimmt.
+Wenn eine Razor-Datei mit einer [`@page`][9]-Anweisung kompiliert wird, wird der generierten Klasse ein <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> hinzugefügt und so die Routenvorlage angegeben. Zur Laufzeit sucht der Router nach Komponentenklassen mit <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> und rendert die Komponente, deren Routenvorlage mit der angeforderten URL übereinstimmt.
 
 ```razor
 @page "/ParentComponent"
@@ -136,7 +136,7 @@ Die *Catch-all*-Parametersyntax (`*`/`**`), die den Pfad ordnerübergreifend erf
 
 ### <a name="component-parameters"></a>Komponentenparameter
 
-Komponenten können *Komponentenparameter enthalten*, die mithilfe öffentlicher Eigenschaften für die Komponentenklasse mit dem `[Parameter]`-Attribut definiert werden. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
+Komponenten können *Komponentenparameter* enthalten, die mithilfe öffentlicher Eigenschaften für die Komponentenklasse mit dem [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute)-Attribut definiert werden. Verwenden Sie Attribute, um Argumente für eine Komponente im Markup anzugeben.
 
 *Components/ChildComponent.razor*:
 
@@ -155,14 +155,14 @@ Im folgenden Beispiel aus der Beispiel-App legt der `ParentComponent` den Wert d
 
 Komponenten können den Inhalt anderer Komponenten festlegen. Die zuweisende Komponente stellt den Inhalt zwischen den Tags bereit, mit denen die empfangende Komponente angegeben wird.
 
-Im folgenden Beispiel enthält `ChildComponent` eine `ChildContent`-Eigenschaft, die einen `RenderFragment`-Delegaten darstellt, der ein zu renderndes Segment der Benutzeroberfläche darstellt. Der Wert von `ChildContent` wird im Markup der Komponente positioniert, wo der Inhalt gerendert werden soll. Der Wert von `ChildContent` wird von der übergeordneten Komponente empfangen und innerhalb des `panel-body`-Elements des Bootstrappanels gerendert.
+Im folgenden Beispiel enthält `ChildComponent` eine `ChildContent`-Eigenschaft, die einen <xref:Microsoft.AspNetCore.Components.RenderFragment>-Delegaten darstellt, der ein zu renderndes Segment der Benutzeroberfläche darstellt. Der Wert von `ChildContent` wird im Markup der Komponente positioniert, wo der Inhalt gerendert werden soll. Der Wert von `ChildContent` wird von der übergeordneten Komponente empfangen und innerhalb des `panel-body`-Elements des Bootstrappanels gerendert.
 
 *Components/ChildComponent.razor*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> Die Eigenschaft, die den Inhalt von `RenderFragment` empfängt, muss gemäß der Konvention `ChildContent` benannt werden.
+> Die Eigenschaft, die den Inhalt von <xref:Microsoft.AspNetCore.Components.RenderFragment> empfängt, muss gemäß der Konvention `ChildContent` benannt werden.
 
 Die `ParentComponent`-Datei in der Beispiel-App kann Inhalte zum Rendern von `ChildComponent` bereitstellen, indem der Inhalt innerhalb der `<ChildComponent>`-Tags eingefügt wird.
 
@@ -229,7 +229,7 @@ Die gerenderten `<input>`-Elemente sind mit beiden Ansätzen identisch:
        size="50">
 ```
 
-Definieren Sie einen Komponentenparameter mithilfe des `[Parameter]`-Attributs, bei dem die `CaptureUnmatchedValues`-Eigenschaft auf `true` festgelegt ist, damit beliebige Attribute akzeptiert werden:
+Definieren Sie einen Komponentenparameter mithilfe des [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute)-Attributs, bei dem die <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>-Eigenschaft auf `true` festgelegt ist, damit beliebige Attribute akzeptiert werden:
 
 ```razor
 @code {
@@ -238,7 +238,7 @@ Definieren Sie einen Komponentenparameter mithilfe des `[Parameter]`-Attributs, 
 }
 ```
 
-Wenn die `CaptureUnmatchedValues`-Eigenschaft auf `[Parameter]` festgelegt ist, kann der Parameter alle Attribute abgleichen, die keinem anderen Parameter entsprechen. Eine Komponente kann nur einen einzelnen Parameter mit `CaptureUnmatchedValues` definieren. Der mit `CaptureUnmatchedValues` verwendete Eigenschaftentyp muss von `Dictionary<string, object>` mit Zeichenfolgenschlüsseln zugewiesen werden können. `IEnumerable<KeyValuePair<string, object>>` oder `IReadOnlyDictionary<string, object>` sind in diesem Szenario ebenfalls mögliche Optionen.
+Die <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>-Eigenschaft für [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) ermöglicht dem Parameter den Abgleich aller Attribute, die keinem anderen Parameter entsprechen. Eine Komponente kann nur einen einzelnen Parameter mit <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> definieren. Der mit <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> verwendete Eigenschaftentyp muss von `Dictionary<string, object>` mit Zeichenfolgenschlüsseln zugewiesen werden können. `IEnumerable<KeyValuePair<string, object>>` oder `IReadOnlyDictionary<string, object>` sind in diesem Szenario ebenfalls mögliche Optionen.
 
 Die Position von [`@attributes`][3] relativ zur Position der Elementattribute ist wichtig. Wenn [`@attributes`][3]-Anweisungen für das Element gesplattet werden, werden die Attribute von rechts nach links (letztes bis erstes) verarbeitet. Sehen Sie sich das folgende Beispiel für eine Komponente an, die eine `Child`-Komponente verwendet:
 
@@ -320,7 +320,7 @@ Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>Externes Aufrufen von Komponentenmethoden zur Aktualisierung des Status
 
-Blazor verwendet einen Synchronisierungskontext (`SynchronizationContext`), um einen einzelnen logischen Ausführungsthread zu erzwingen. Die [Lebenszyklusmethoden](xref:blazor/lifecycle) einer Komponente und alle Ereignisrückrufe, die von Blazor ausgelöst werden, werden in diesem Synchronisierungskontext ausgeführt.
+Blazor verwendet einen Synchronisierungskontext (<xref:System.Threading.SynchronizationContext>), um einen einzelnen logischen Ausführungsthread zu erzwingen. Die [Lebenszyklusmethoden](xref:blazor/lifecycle) einer Komponente und alle Ereignisrückrufe, die von Blazor ausgelöst werden, werden in diesem Synchronisierungskontext ausgeführt.
 
 Der Synchronisierungskontext des Blazor-Servers versucht, eine Singlethreadumgebung zu emulieren, sodass er genau mit dem WebAssembly-Modell im Browser übereinstimmt, das ein Singlethreadmodell ist. Zu jedem Zeitpunkt wird die Arbeit für genau einen Thread ausgeführt, woraus der Eindruck eines einzelnen logischen Threads entsteht. Zwei Vorgänge werden nicht gleichzeitig ausgeführt.
 
@@ -438,7 +438,7 @@ In einigen Szenarios minimiert die Verwendung von [`@key`][5] die Komplexität d
 
 ### <a name="when-to-use-key"></a>Anwendungsfälle für \@key
 
-In der Regel ist es sinnvoll, [`@key`][5] zu verwenden, wenn eine Liste gerendert wird (z. B. in einem `@foreach`-Block) und ein geeigneter Wert vorhanden ist, um den [`@key`][5] zu definieren.
+In der Regel ist es sinnvoll, [`@key`][5] zu verwenden, wenn eine Liste gerendert wird (z. B. in einem [foreach](/dotnet/csharp/language-reference/keywords/foreach-in)-Block) und ein geeigneter Wert vorhanden ist, um den [`@key`][5] zu definieren.
 
 Sie können [`@key`][5] auch verwenden, um zu verhindern, dass Blazor eine Element- oder Komponententeilstruktur beibehält, wenn sich ein Objekt ändert:
 
@@ -469,7 +469,7 @@ Stellen Sie sicher, dass die für [`@key`][5] verwendeten Werte nicht kollidiere
 
 Parameter werden unter den folgenden Bedingungen überschrieben:
 
-* Der Inhalt einer untergeordneten Komponente wird mit einem `RenderFragment` gerendert.
+* Der Inhalt einer untergeordneten Komponente wird mit einem <xref:Microsoft.AspNetCore.Components.RenderFragment> gerendert.
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wird in der übergeordneten Komponente aufgerufen.
 
 Parameter werden zurückgesetzt, weil die übergeordnete Komponente erneut gerendert wird, wenn <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> aufgerufen wird und der untergeordneten Komponente neue Parameterwerte bereitgestellt werden.
@@ -503,7 +503,7 @@ Angenommen, die folgende `Expander`-Komponente:
 }
 ```
 
-Die `Expander`-Komponente wird einer übergeordneten Komponente hinzugefügt, die `StateHasChanged` aufrufen kann:
+Die `Expander`-Komponente wird einer übergeordneten Komponente hinzugefügt, die <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> aufrufen kann:
 
 ```razor
 <Expander Expanded="true">
@@ -517,7 +517,7 @@ Die `Expander`-Komponente wird einer übergeordneten Komponente hinzugefügt, di
 </button>
 ```
 
-Anfänglich verhalten sich die `Expander`-Komponenten unabhängig, wenn ihre `Expanded`-Eigenschaften umgeschaltet werden. Die untergeordneten Komponenten behalten ihre Zustände erwartungsgemäß bei. Wenn `StateHasChanged` in der übergeordneten Komponente aufgerufen wird, wird der `Expanded`-Parameter der ersten untergeordneten Komponente wieder zurück auf seinen ursprünglichen Wert gesetzt (`true`). Der `Expanded`-Wert der zweiten `Expander`-Komponente wird nicht zurückgesetzt, weil in der zweiten Komponente kein untergeordneter Inhalt gerendert wird.
+Anfänglich verhalten sich die `Expander`-Komponenten unabhängig, wenn ihre `Expanded`-Eigenschaften umgeschaltet werden. Die untergeordneten Komponenten behalten ihre Zustände erwartungsgemäß bei. Wenn <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> in der übergeordneten Komponente aufgerufen wird, wird der `Expanded`-Parameter der ersten untergeordneten Komponente wieder zurück auf seinen ursprünglichen Wert gesetzt (`true`). Der `Expanded`-Wert der zweiten `Expander`-Komponente wird nicht zurückgesetzt, weil in der zweiten Komponente kein untergeordneter Inhalt gerendert wird.
 
 Um den Zustand im vorangehenden Szenario beizubehalten, verwenden Sie ein *privates Feld* in der `Expander`-Komponente, um dessen Umschaltungszustand beizubehalten.
 
@@ -632,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Angeben einer Basisklasse
 
-Die [`@inherits`][6]-Anweisung kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben. Das folgende Beispiel zeigt, wie eine Komponente eine Basisklasse (`BlazorRocksBase`) erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen. Die Basisklasse sollte von `ComponentBase` abgeleitet werden.
+Die [`@inherits`][6]-Anweisung kann verwendet werden, um eine Basisklasse für eine Komponente anzugeben. Das folgende Beispiel zeigt, wie eine Komponente eine Basisklasse (`BlazorRocksBase`) erben kann, um die Eigenschaften und Methoden der Komponente bereitzustellen. Die Basisklasse sollte von <xref:Microsoft.AspNetCore.Components.ComponentBase> abgeleitet werden.
 
 *Pages/BlazorRocks.razor*:
 
@@ -660,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Angeben eines Attributs
 
-Attribute können in Razor-Komponenten mit der [`@attribute`][7]-Anweisung angegeben werden. Im folgenden Beispiel wird das `[Authorize]`-Attribut auf die Komponentenklasse angewendet:
+Attribute können in Razor-Komponenten mit der [`@attribute`][7]-Anweisung angegeben werden. Im folgenden Beispiel wird das [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)-Attribut auf die Komponentenklasse angewendet:
 
 ```razor
 @page "/"
@@ -700,9 +700,9 @@ This is the Index page.
 > [!NOTE]
 > Die `global::`-Qualifizierung wird nicht unterstützt.
 >
-> Das Importieren von Komponenten mit `using`-Aliasanweisungen (z B. `@using Foo = Bar`) wird nicht unterstützt.
+> Das Importieren von Komponenten mit [using](/dotnet/csharp/language-reference/keywords/using-statement)-Aliasanweisungen (z B. `@using Foo = Bar`) wird nicht unterstützt.
 >
-> Teilweise qualifizierte Namen werden nicht unterstützt. Das Hinzufügen von `@using BlazorSample` und das Verweisen auf `NavMenu.razor` mit `<Shared.NavMenu></Shared.NavMenu>` werden beispielsweise nicht unterstützt.
+> Teilweise qualifizierte Namen werden nicht unterstützt. Das Hinzufügen von `@using BlazorSample` und das Verweisen auf die `NavMenu`-Komponente (`NavMenu.razor`) mit `<Shared.NavMenu></Shared.NavMenu>` werden beispielsweise nicht unterstützt.
 
 ## <a name="conditional-html-element-attributes"></a>Attribute für bedingte HTML-Elemente
 
@@ -771,7 +771,7 @@ public class ThemeInfo
 }
 ```
 
-Eine Vorgängerkomponente kann einen kaskadierenden Wert mithilfe der CascadingValue-Komponente bereitstellen. Die `CascadingValue`-Komponente umschließt eine Teilstruktur der Komponentenhierarchie und stellt einen einzelnen Wert für alle Komponenten in dieser Unterstruktur bereit.
+Eine Vorgängerkomponente kann einen kaskadierenden Wert mithilfe der CascadingValue-Komponente bereitstellen. Die <xref:Microsoft.AspNetCore.Components.CascadingValue%601>-Komponente umschließt eine Teilstruktur der Komponentenhierarchie und stellt einen einzelnen Wert für alle Komponenten in dieser Unterstruktur bereit.
 
 Beispielsweise gibt die Beispiel-App Designinformationen (`ThemeInfo`) in einem der Layouts der App als kaskadierenden Parameter für alle Komponenten an, die den Layouttext der `@Body`-Eigenschaft bilden. `ButtonClass` wird in der Layoutkomponente der Wert `btn-success` zugewiesen. Jede Nachfolgerkomponente kann diese Eigenschaft über das kaskadierende `ThemeInfo`-Objekt nutzen.
 
@@ -801,7 +801,7 @@ Beispielsweise gibt die Beispiel-App Designinformationen (`ThemeInfo`) in einem 
 }
 ```
 
-Komponenten deklarieren kaskadierende Parameter mithilfe des `[CascadingParameter]`-Attributs, um kaskadierende Werte zu verwenden. Kaskadierende Werte werden nach Typ an kaskadierende Parameter gebunden.
+Komponenten deklarieren kaskadierende Parameter mithilfe des [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute)-Attributs, um kaskadierende Werte zu verwenden. Kaskadierende Werte werden nach Typ an kaskadierende Parameter gebunden.
 
 In der Beispiel-App bindet die `CascadingValuesParametersTheme`-Komponente den kaskadierenden `ThemeInfo`-Wert an einen kaskadierenden Parameter. Der Parameter wird verwendet, um die CSS-Klasse für eine der Schaltflächen festzulegen, die von der Komponente angezeigt werden.
 
@@ -841,7 +841,7 @@ In der Beispiel-App bindet die `CascadingValuesParametersTheme`-Komponente den k
 }
 ```
 
-Sie können mehrere Werte desselben Typs innerhalb derselben Unterstruktur kaskadieren, indem Sie jeder `CascadingValue`-Komponente und dem entsprechenden `CascadingParameter`-Attribut eine eindeutige `Name`-Zeichenfolge bereitstellen. Im folgenden Beispiel kaskadieren zwei `CascadingValue`-Komponenten verschiedene Instanzen von `MyCascadingType` nach Namen:
+Sie können mehrere Werte desselben Typs innerhalb derselben Unterstruktur kaskadieren, indem Sie jeder <xref:Microsoft.AspNetCore.Components.CascadingValue%601>-Komponente und dem entsprechenden [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute)-Attribut eine eindeutige <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A>-Zeichenfolge bereitstellen. Im folgenden Beispiel kaskadieren zwei <xref:Microsoft.AspNetCore.Components.CascadingValue%601>-Komponenten verschiedene Instanzen von `MyCascadingType` nach Namen:
 
 ```razor
 <CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
@@ -928,7 +928,7 @@ Renderingfragmente können mithilfe der Razor-Vorlagensyntax definiert werden. M
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-Im folgenden Beispiel wird veranschaulicht, wie Sie `RenderFragment`- und `RenderFragment<T>`-Werte angeben und Vorlagen direkt in einer-Komponente rendern können. Renderingfragmente können auch als Argumente an [Komponentenvorlagen](xref:blazor/templated-components) übergeben werden.
+Im folgenden Beispiel wird veranschaulicht, wie Sie <xref:Microsoft.AspNetCore.Components.RenderFragment>- und <xref:Microsoft.AspNetCore.Components.RenderFragment%601>-Werte angeben und Vorlagen direkt in einer-Komponente rendern können. Renderingfragmente können auch als Argumente an [Komponentenvorlagen](xref:blazor/templated-components) übergeben werden.
 
 ```razor
 @timeTemplate
@@ -970,11 +970,11 @@ Ebenso werden SVG-Bilder in den CSS-Regeln einer Stylesheetdatei ( *.css*) unter
 }
 ```
 
-SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein `<svg>`-Tag direkt in eine Komponentendatei ( *.razor*) einfügen, wird das grundlegende Bildrendering unterstützt, aber viele fortgeschrittene Szenarios noch nicht. Beispielsweise werden `<use>`-Tags derzeit nicht beachtet, und `@bind` kann nicht mit einigen SVG-Tags verwendet werden. Weitere Informationen finden Sie unter [Improve SVG support in Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271) (Verbessern der SVG-Unterstützung in Blazor).
+SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein `<svg>`-Tag direkt in eine Komponentendatei ( *.razor*) einfügen, wird das grundlegende Bildrendering unterstützt, aber viele fortgeschrittene Szenarios noch nicht. Beispielsweise werden `<use>`-Tags derzeit nicht beachtet, und [`@bind`][10] kann nicht mit einigen SVG-Tags verwendet werden. Weitere Informationen finden Sie unter [Improve SVG support in Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271) (Verbessern der SVG-Unterstützung in Blazor).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:security/blazor/server/threat-mitigation> &ndash;: Anleitung zum Entwickeln von Blazor Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen
+* <xref:security/blazor/server/threat-mitigation>: Enthält Anleitung zum Entwickeln von Blazor-Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>
