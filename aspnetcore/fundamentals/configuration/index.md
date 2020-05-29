@@ -1495,7 +1495,7 @@ Wenden Sie die folgenden Verfahren an, um vertrauliche Konfigurationsdaten zu sc
 Weitere Informationen finden Sie unter den folgenden Themen:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets> &ndash; Enthält Hinweise zur Verwendung von Umgebungsvariablen zum Speichern sensibler Daten. Der Geheimnis-Manager verwendet den Dateikonfigurationsanbieter, um Benutzergeheimnisse in einer JSON-Datei im lokalen System zu speichern. Der Dateikonfigurationsanbieter wird später in diesem Thema beschrieben.
+* <xref:security/app-secrets>: Enthält Hinweise zur Verwendung von Umgebungsvariablen für das Speichern vertraulicher Daten. Der Geheimnis-Manager verwendet den Dateikonfigurationsanbieter, um Benutzergeheimnisse in einer JSON-Datei im lokalen System zu speichern. Der Dateikonfigurationsanbieter wird später in diesem Thema beschrieben.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) speichert App-Geheimnisse für ASP.NET Core-Apps auf sichere Weise. Weitere Informationen finden Sie unter <xref:security/key-vault-configuration>.
 
@@ -3028,8 +3028,8 @@ Um die JSON-Dateikonfiguration zu aktivieren, rufen Sie die <xref:Microsoft.Exte
 
 `AddJsonFile` wird automatisch zweimal aufgerufen, wenn Sie einen neuen Host-Generator mit `CreateDefaultBuilder` initialisieren. Die Methode wird aufgerufen, um die Konfiguration aus folgenden Dateien zu laden:
 
-* *appsettings.json* &ndash; Diese Datei wird zuerst gelesen. Die Umgebungsversion der Datei kann die Werte der Datei *appsettings.json* überschreiben.
-* *appsettings.{Environment}.json* &ndash; Die Umgebungsversion der Datei wird basierend auf [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*) geladen.
+* *appsettings.json*: Diese Datei wird zuerst gelesen. Die Umgebungsversion der Datei kann die Werte der Datei *appsettings.json* überschreiben.
+* *appsettings.{Environment}.json*: Die Umgebungsversion der Datei wird basierend auf [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*) geladen.
 
 Weitere Informationen finden Sie im Abschnitt [Standardkonfiguration](#default-configuration).
 
