@@ -1,10 +1,10 @@
 ---
-Title: "Secure an ASP.net Core Blazor Webassembly hosted App with Azure Active Directory" Author: Description: monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+Title: "Secure an ASP.net Core Blazor Webassembly hosted App with Azure Active Directory" Author: guardrex Description: monikerrange: ' >= aspnetcore-3,1 ' ms. Author: Riande ms. Custom: MVC ms. Date: 05/19/2020 NO-LOC:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- ' SignalR ' UID: Security/blazor/Webassembly/Hosted-with-Azure-Active-Directory
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory
@@ -21,7 +21,7 @@ Befolgen Sie die Anweisungen unter [Schnellstart: Einrichten eines](/azure/activ
 
 ### <a name="register-a-server-api-app"></a>Registrieren einer Server-API-APP
 
-Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung mit der Microsoft Identity Platform](/azure/active-directory/develop/quickstart-register-app) und nachfolgende Azure Aad-Themen zum Registrieren einer Aad-App für die *Server-API-APP*:
+Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung mit der Microsoft Identity Platform](/azure/active-directory/develop/quickstart-register-app) und nachfolgende Azure Aad-Themen zum Registrieren einer Aad-App für die *Server-API-APP* und führen Sie dann die folgenden Schritte aus:
 
 1. Wählen Sie in **Azure Active Directory**  >  **App-Registrierungen**die Option **neue Registrierung**aus.
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Server Aad**).
@@ -55,7 +55,7 @@ Notieren Sie sich die folgenden Informationen:
 
 ### <a name="register-a-client-app"></a>Registrieren einer Client-App
 
-Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung mit der Microsoft Identity Platform](/azure/active-directory/develop/quickstart-register-app) und nachfolgende Azure Aad-Themen zum Registrieren einer Aad-App für die *Client-App*:
+Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung mit der Microsoft Identity Platform](/azure/active-directory/develop/quickstart-register-app) und nachfolgende Azure Aad-Themen, um eine Aad-App für die *Client-App* zu registrieren und die folgenden Aktionen auszuführen:
 
 1. Wählen Sie in **Azure Active Directory**  >  **App-Registrierungen**die Option **neue Registrierung**aus.
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad**).
