@@ -103,7 +103,7 @@ dotnet-grpc add-url [options] <url>
 | -p | --project | Der Pfad zu der Projektdatei, mit der gearbeitet werden soll. Wenn keine Datei angegeben ist, sucht der Befehl im aktuellen Verzeichnis nach einer Projektdatei.
 | -S | --services | Der Typ der gRPC-Dienste, die generiert werden sollen. Wenn `Default` angegeben ist, wird `Both` für Webprojekte und `Client` für Nicht-Webprojekte verwendet. Zulässige Werte sind `Both`, `Client`, `Default`, `None`, `Server`.
 | -i | --additional-import-dirs | Zusätzliche Verzeichnisse, die bei der Auflösung von Importen für die Protobuf-Dateien verwendet werden. Dies ist eine durch Semikolons getrennte Liste von Pfaden.
-| | --access | Der Zugriffsmodifizierer, der für die generierten C#-Klassen verwendet werden soll. Der Standardwert lautet `Public`. Zulässige Werte sind `Internal` und `Public`.
+| | --access | Der Zugriffsmodifizierer, der für die generierten C#-Klassen verwendet werden soll. Der Standardwert ist `Public`sein. Zulässige Werte sind `Internal` und `Public`.
 
 ## <a name="remove"></a>Remove
 

@@ -125,7 +125,7 @@ Nutzen Sie die Azure App Service-Erweiterung für Visual Studio Code, und führe
 
 - Klicken Sie mit der rechten Maustaste auf den `publish`-Ordner, und wählen Sie `Deploy to Web App...` aus.
 - Wählen Sie das Abonnement aus, das Sie zum Erstellen der Web-App verwenden möchten.
-- Wählen Sie `Create New Web App` aus.
+- Klicken Sie auf `Create New Web App`.
 - Geben Sie einen Namen für die Web-App ein.
 
 Mit dieser Erweiterung wird die neue Web-App erstellt, und das Paket für die App wird automatisch bereitgestellt. Nachdem die Bereitstellung abgeschlossen ist, klicken Sie auf `Browse Website`, um die Bereitstellung zu überprüfen.

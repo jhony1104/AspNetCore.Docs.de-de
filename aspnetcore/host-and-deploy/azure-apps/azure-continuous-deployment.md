@@ -44,7 +44,7 @@ Dieses Tutorial setzt voraus, dass folgende Software installiert ist:
 
 1. Starten Sie Visual Studio.
 
-1. Wählen Sie im Menü **Datei** den Befehl **Neu** > **Projekt** aus.
+1. Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 
 1. Wählen Sie die Projektvorlage **ASP.NET Core-Webanwendung** aus. Sie wird unter **Installierte** > **Vorlagen** > **Visual C#**  >  **.NET Core** angezeigt. Benennen Sie das Projekt mit `SampleWebAppDemo`. Wählen Sie die Option **Neues Git-Repository erstellen** aus, und klicken Sie auf **OK**.
 
@@ -77,7 +77,7 @@ Mit den folgenden Schritten wird eine Web-App im Azure-Portal erstellt:
 
 1. Wählen Sie **Web + Mobil** > **Web-App** aus.
 
-   ![Microsoft Azure-Portal: Schaltfläche „Neu“: „Web + Mobil“ unter Marketplace: Schaltfläche „Web-App“ unter „Ausgewählte Apps“](azure-continuous-deployment/_static/05-azure-newwebapp.png)
+   ![Microsoft Azure-Portal: Schaltfläche „Neu“: „Web und mobil“ unter „Marketplace“: Schaltfläche „Web App“ unter „Ausgewählte Apps“](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
 1. Geben Sie auf dem Blatt **Web-App** für **App Service-Name** einen eindeutigen Wert ein.
 
@@ -90,7 +90,7 @@ Mit den folgenden Schritten wird eine Web-App im Azure-Portal erstellt:
 
 1. Wählen Sie **Erstellen** aus. Azure stellt die Web-App bereit und startet sie.
 
-   ![Azure-Portal: Beispiel-Web-App „Demo 01“, Blatt „Zusammenfassung“](azure-continuous-deployment/_static/07-azure-webappblade.png)
+   ![Azure-Portal: SampleWebAppDemo01, Blatt „Zusammenfassung“](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
 ## <a name="enable-git-publishing-for-the-new-web-app"></a>Aktivieren der Git-Veröffentlichung für die neue Web-App
 
@@ -104,7 +104,7 @@ Bei Git handelt es sich um ein verteiltes Versionskontrollsystem, mit dem Sie ei
 
 1. Klicken Sie auf dem Blatt **Bereitstellung** auf **Bereitstellungsoptionen** > **Quelle auswählen** > **Lokales Git-Repository**.
 
-   ![Blatt „Einstellungen“: Blatt „Bereitstellungsquelle“: Blatt „Quelle auswählen“](azure-continuous-deployment/_static/deployment-options.png)
+   ![Blatt "Einstellungen": Blatt „Bereitstellungsquelle“: Quellblatt auswählen](azure-continuous-deployment/_static/deployment-options.png)
 
 1. Klicken Sie auf **OK**.
 
@@ -190,7 +190,7 @@ In diesem Abschnitt erstellen Sie ein lokales Git-Repository mit Visual Studio u
 
 Wählen Sie die Web-App im [Azure-Portal](https://portal.azure.com) aus. Wählen Sie **Bereitstellung** > **Bereitstellungsoptionen** aus.
 
-![Azure-Portal: Blatt „Einstellungen“: Blatt „Bereitstellungen“ mit erfolgreicher Bereitstellung](azure-continuous-deployment/_static/13-verify-deployment.png)
+![Azure-Portal: Blatt "Einstellungen": Blatt „Bereitstellungen“ mit erfolgreicher Bereitstellung](azure-continuous-deployment/_static/13-verify-deployment.png)
 
 ## <a name="run-the-app-in-azure"></a>Ausführen der App in Azure
 

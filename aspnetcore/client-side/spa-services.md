@@ -133,7 +133,7 @@ Um das vorherige Codebeispiel zu erweitern, können Daten vom Server an die Ansi
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,57-77,79-)]
 
-Das innerhalb des `postList`-Objekts definierte `globals`-Array wird an das globale `window`-Objekt des Browsers angefügt. Durch dieses Verschieben der Variablen in den globalen Bereich wird doppelter Arbeitsaufwand vermieden, insbesondere wenn dieselben Daten einmal auf den Server und ein zweites Mal auf den Client geladen werden.
+Das innerhalb des `globals`-Objekts definierte `postList`-Array wird an das globale `window`-Objekt des Browsers angefügt. Durch dieses Verschieben der Variablen in den globalen Bereich wird doppelter Arbeitsaufwand vermieden, insbesondere wenn dieselben Daten einmal auf den Server und ein zweites Mal auf den Client geladen werden.
 
 ![Globale postList-Variable, angefügt an window-Objekt](spa-services/_static/global_variable.png)
 
@@ -161,7 +161,7 @@ Webpack Dev Middleware wird in der HTTP-Anforderungspipeline über den folgenden
 
 Die `UseWebpackDevMiddleware`-Erweiterungsmethode muss aufgerufen werden, bevor das [Registrieren von statischem Dateihosting](xref:fundamentals/static-files) über die `UseStaticFiles`-Erweiterungsmethode erfolgt. Aus Sicherheitsgründen sollten Sie die Middleware nur registrieren, wenn die App im Entwicklungsmodus ausgeführt wird.
 
-Die Eigenschaft *der Datei*webpack.config.js`output.publicPath` weist die Middleware an, den Ordner `dist` auf Änderungen zu überwachen:
+Die Eigenschaft `output.publicPath` der Datei *webpack.config.js* weist die Middleware an, den Ordner `dist` auf Änderungen zu überwachen:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,13-16)]
 

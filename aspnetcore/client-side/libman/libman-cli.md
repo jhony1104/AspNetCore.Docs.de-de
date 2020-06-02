@@ -173,7 +173,7 @@ Für den Befehl `libman install` sind die folgenden Optionen verfügbar:
 
 * `-d|--destination <PATH>`
 
-  Mit dieser Option wird der Installationsort für die Bibliothek festgelegt. Wenn kein Ort angegeben wird, wird der Standardspeicherort verwendet. Wenn in `defaultDestination`libman.json*kein Wert für die Eigenschaft* festgelegt ist, ist diese Option erforderlich.
+  Mit dieser Option wird der Installationsort für die Bibliothek festgelegt. Wenn kein Ort angegeben wird, wird der Standardspeicherort verwendet. Wenn in *libman.json* kein Wert für die Eigenschaft `defaultDestination` festgelegt ist, ist diese Option erforderlich.
 
 * `--files <FILE>`
 
@@ -185,7 +185,7 @@ Für den Befehl `libman install` sind die folgenden Optionen verfügbar:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Wenn kein Wert festgelegt wird, wird der Wert der Eigenschaft `defaultProvider` in *libman.json* verwendet. Wenn in `defaultProvider`libman.json*kein Wert für die Eigenschaft* festgelegt ist, ist diese Option erforderlich.
+  Wenn kein Wert festgelegt wird, wird der Wert der Eigenschaft `defaultProvider` in *libman.json* verwendet. Wenn in *libman.json* kein Wert für die Eigenschaft `defaultProvider` festgelegt ist, ist diese Option erforderlich.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -234,7 +234,7 @@ Installieren der Dateien *calendar.js* und *calendar.css* aus *C:\\temp\\contoso
 Es gibt zwei mögliche Gründe für die folgende Meldung:
 
 * Die Datei *libman.json* enthält keinen Wert für die Eigenschaft `defaultDestination`.
-* Die Option `libman install` ist im Befehl `-d|--destination` nicht enthalten.
+* Die Option `-d|--destination` ist im Befehl `libman install` nicht enthalten.
 
 ![Befehl „libman install“: Ziel](_static/libman-install-destination.png)
 

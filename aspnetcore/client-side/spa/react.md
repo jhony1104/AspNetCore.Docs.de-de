@@ -57,7 +57,7 @@ Führen Sie [dotnet run](/dotnet/core/tools/dotnet-run) aus, um die App zu start
 
 ---
 
-Mit der Projektvorlage werden eine ASP.NET Core-App und eine React-App erstellt. Die ASP.NET Core-App ist zur Verwendung für den Datenzugriff, die Autorisierung und weitere serverseitige Belange vorgesehen. Die React-App, die sich im Unterverzeichnis *ClientApp* befindet, ist für sämtliche Belange der Benutzeroberfläche vorgesehen.
+Mit der Projektvorlage werden eine ASP.NET Core-App und eine React-App erstellt. Die ASP.NET Core-App ist für die Verwendung für den Datenzugriff, die Autorisierung und weitere serverseitige Belange vorgesehen. Die React-App, die sich im Unterverzeichnis *ClientApp* befindet, ist für sämtliche Belange der Benutzeroberfläche vorgesehen.
 
 ## <a name="add-pages-images-styles-modules-etc"></a>Hinzufügen von Seiten, Images, Formatvorlagen, Modulen usw.
 
@@ -67,7 +67,7 @@ Zwischen der React-App, die mit dieser Vorlage erstellt wurde, und der App, die 
 
 ## <a name="install-npm-packages"></a>NPM-Pakete installieren
 
-Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Beispiel:
+Verwenden Sie für die Installation von npm-Paketen von Drittanbietern eine Eingabeaufforderung im Unterverzeichnis *ClientApp*. Zum Beispiel:
 
 ```console
 cd ClientApp
@@ -103,7 +103,7 @@ Bei diesem Standardsetup gibt es einen Nachteil. Jedes Mal, wenn Sie Ihren C#-Co
     npm start
     ```
 
-3. Ändern Sie Ihre ASP.NET Core-App so, dass die externe CRA-Serverinstanz verwendet wird, statt eine eigene Instanz zu starten. Ersetzen Sie den *-Aufruf in Ihrer* Startklasse`spa.UseReactDevelopmentServer` durch Folgendes:
+3. Ändern Sie Ihre ASP.NET Core-App so, dass die externe CRA-Serverinstanz verwendet wird, statt eine eigene Instanz zu starten. Ersetzen Sie den `spa.UseReactDevelopmentServer`-Aufruf in Ihrer *Startklasse* durch Folgendes:
 
     ```csharp
     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");

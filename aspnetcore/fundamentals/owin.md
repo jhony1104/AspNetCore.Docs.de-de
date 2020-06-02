@@ -243,7 +243,7 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="request-data-owin-v100"></a>Anforderungsdaten (OWIN v1.0.0)
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.RequestScheme | `String` |  |
 | owin.RequestMethod  | `String` | |    
@@ -256,13 +256,13 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="request-data-owin-v110"></a>Anforderungsdaten (OWIN v1.1.0)
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.RequestId | `String` | Optional |
 
 ### <a name="response-data-owin-v100"></a>Antwortdaten (OWIN v1.0.0)
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.ResponseStatusCode | `int` | Optional |
 | owin.ResponseReasonPhrase | `String` | Optional |
@@ -271,14 +271,14 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="other-data-owin-v100"></a>Andere Daten (OWIN v1.0.0)
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
 
 ### <a name="common-keys"></a>Gängige Schlüssel
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | ssl.ClientCertificate | `X509Certificate` |  |
 | ssl.LoadClientCertAsync  | `Func<Task>` | |    
@@ -291,13 +291,13 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="sendfiles-v030"></a>SendFiles v0.3.0
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | Pro Anforderung |
 
 ### <a name="opaque-v030"></a>Opaque v0.3.0
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
 | opaque.Upgrade | `OpaqueUpgrade` | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
@@ -306,7 +306,7 @@ OWIN ist von einem `IDictionary<string,object>`-Objekt abhängig, um Information
 
 ### <a name="websocket-v030"></a>WebSocket v0.3.0
 
-| Taste               | Wert (Typ) | Beschreibung |
+| Key               | Wert (Typ) | Beschreibung |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
 | websocket.Accept | `WebSocketAccept` | Siehe [Delegatsignatur](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
