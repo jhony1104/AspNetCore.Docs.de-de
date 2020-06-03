@@ -1,11 +1,11 @@
 ---
-title: „Authentifizierung und Autorisierung in ASP.NET Core Blazor“ author: description: „Lernen Sie die Szenarios für die Authentifizierung und Autorisierung in Blazor kennen.“
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title: „Authentifizierung und Autorisierung in ASP.NET Core Blazor“ author: guardrex description: „Lernen Sie die Szenarios für die Authentifizierung und Autorisierung in Blazor kennen.“
+monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date: 05/19/2020 no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- 'SignalR' uid: security/blazor/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
@@ -454,14 +454,6 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
 > ```
 >
 > Diese Namespaces können global bereitgestellt werden, indem Sie sie der Datei *_Imports.razor* der App hinzufügen.
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>Autorisierung in Blazor WebAssembly-Apps
-
-In Blazor WebAssembly-Apps können Autorisierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
-
-**Führen Sie Autorisierungsprüfungen auf dem Server immer innerhalb aller API-Endpunkte durch, auf die Ihre clientseitige App zugreift.**
-
-Weitere Informationen finden Sie in den Artikeln unter <xref:security/blazor/webassembly/index>.
 
 ## <a name="troubleshoot-errors"></a>Fehlerbehandlung
 
