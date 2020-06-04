@@ -1,11 +1,11 @@
 ---
-Title: "Verwalten von Benutzern und Gruppen in SignalR ' Autor: Beschreibung: ' Übersicht über ASP.net Core SignalR Benutzer-und Gruppenverwaltung."
-monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
+Title: "Verwalten von Benutzern und Gruppen in SignalR ' Author: bradygaester Description: ' Overview of ASP.net Core SignalR User and Group Management".
+monikerrange: ' >= aspnetcore-2,1 ' ms. Author: bradyg ms. Custom: MVC ms. Date: 05/17/2020 NO-LOC:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' UID: 
+- ' SignalR ' UID: signalr/Groups
 
 ---
 
@@ -15,7 +15,7 @@ Von [Brennan](https://github.com/BrennanConroy) "a"
 
 SignalRermöglicht das Senden von Nachrichten an alle Verbindungen, die einem bestimmten Benutzer zugeordnet sind, sowie an benannte Verbindungs Gruppen.
 
-[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(Vorgehensweise zum herunterladen)](xref:index#how-to-download-a-sample)
+[Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(Vorgehensweise zum Herunterladen)](xref:index#how-to-download-a-sample)
 
 ## <a name="users-in-signalr"></a>Benutzer inSignalR
 
