@@ -5,7 +5,7 @@ description: Hier erfahren Sie, wie Sie das globale .NET Core-Tool HTTP REPL ver
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/11/2019
+ms.date: 05/20/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777097"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452212"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -36,7 +36,7 @@ Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Gu
 * [GET](#test-http-get-requests)
 * [Stadt](#test-http-head-requests)
 * [Optionen](#test-http-options-requests)
-* [PATCH](#test-http-patch-requests)
+* [Patch](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
@@ -396,7 +396,7 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 Für den Befehl `get` sind die folgenden Optionen verfügbar:
 
@@ -480,7 +480,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -550,7 +550,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -560,7 +560,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 So führen Sie eine HTTP PUT-Anforderung aus:
 
-1. *Optional*: führen Sie `get` den Befehl aus, um die Daten vor dem ändern anzuzeigen:
+1. *Optional*: führen `get` Sie den Befehl aus, um die Daten vor dem ändern anzuzeigen:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -622,7 +622,7 @@ So führen Sie eine HTTP PUT-Anforderung aus:
     Server: Kestrel
     ```
 
-1. *Optional*: Geben Sie `get` einen Befehl aus, um die Änderungen anzuzeigen. Wenn Sie beispielsweise „Cherry“ in den Text-Editor eingeben, gibt `get` Folgendes zurück:
+1. *Optional*: geben `get` Sie einen Befehl aus, um die Änderungen anzuzeigen. Wenn Sie beispielsweise „Cherry“ in den Text-Editor eingeben, gibt `get` Folgendes zurück:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -665,7 +665,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -673,7 +673,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 So führen Sie eine HTTP DELETE-Anforderung aus:
 
-1. *Optional*: führen Sie `get` den Befehl aus, um die Daten vor dem ändern anzuzeigen:
+1. *Optional*: führen `get` Sie den Befehl aus, um die Daten vor dem ändern anzuzeigen:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -713,7 +713,7 @@ So führen Sie eine HTTP DELETE-Anforderung aus:
     Server: Kestrel
     ```
 
-1. *Optional*: Geben Sie `get` einen Befehl aus, um die Änderungen anzuzeigen. In diesem Beispiel gibt `get` Folgendes zurück:
+1. *Optional*: geben `get` Sie einen Befehl aus, um die Änderungen anzuzeigen. In diesem Beispiel gibt `get` Folgendes zurück:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -752,7 +752,7 @@ patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -772,7 +772,7 @@ head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:bod
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -790,7 +790,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode des Controllers erwartet wird.
 
-### <a name="options"></a>Tastatur
+### <a name="options"></a>Optionen
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -820,7 +820,23 @@ Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader fes
 
 ## <a name="test-secured-endpoints"></a>Testen gesicherter Endpunkte
 
-HTTP REPL unterstützt das Testen abgesicherter Endpunkte mithilfe von HTTP-Anforderungsheadern. Beispiele unterstützter Authentifizierungs- und Autorisierungsschemas sind Standardauthentifizierung, JWT-Bearertoken und Digestauthentifizierung. Beispielsweise können Sie mit dem folgenden Befehl ein Bearertoken an einen Endpunkt senden:
+Die http-repl unterstützt das Testen von gesicherten Endpunkten auf zwei Arten: über die Standard Anmelde Informationen des angemeldeten Benutzers oder durch Verwendung von HTTP-Anforderungs Headern. 
+
+### <a name="default-credentials"></a>Standard Anmelde Informationen
+
+Stellen Sie sich ein Szenario vor, in dem die zu testenden Web-API in IIS gehostet wird und mit der Windows-Authentifizierung geschützt ist. Sie möchten, dass die Anmelde Informationen des Benutzers, der das Tool ausführen soll, über die zu testenden HTTP-Endpunkte fließen. So übergeben Sie die Standard Anmelde Informationen des angemeldeten Benutzers:
+
+1. Legen Sie die Einstellung `httpClient.useDefaultCredentials` auf fest `true` :
+
+    ```console
+    pref set httpClient.useDefaultCredentials true
+    ```
+
+1. Beenden und starten Sie das Tool neu, bevor Sie eine weitere Anforderung an die Web-API senden.
+
+### <a name="http-request-headers"></a>HTTP-Anforderungsheader
+
+Beispiele unterstützter Authentifizierungs- und Autorisierungsschemas sind Standardauthentifizierung, JWT-Bearertoken und Digestauthentifizierung. Beispielsweise können Sie mit dem folgenden Befehl ein Bearertoken an einen Endpunkt senden:
 
 ```console
 set header Authorization "bearer <TOKEN VALUE>"
@@ -830,25 +846,25 @@ Um auf einen in Azure gehosteten Endpunkt zuzugreifen oder die [Azure-REST-API](
 
 1. Anmelden bei Azure:
 
-    ```azcli
+    ```azurecli
     az login
     ```
 
 1. Rufen Sie Ihre Abonnement-ID mit dem folgenden Befehl ab:
 
-    ```azcli
+    ```azurecli
     az account show --query id
     ```
 
 1. Kopieren Sie Ihre Abonnement-ID, und führen Sie den folgenden Befehl aus:
 
-    ```azcli
+    ```azurecli
     az account set --subscription "<SUBSCRIPTION ID>"
     ```
 
 1. Rufen Sie Ihr Bearertoken mit dem folgenden Befehl ab:
 
-    ```azcli
+    ```azurecli
     az account get-access-token --query accessToken
     ```
 

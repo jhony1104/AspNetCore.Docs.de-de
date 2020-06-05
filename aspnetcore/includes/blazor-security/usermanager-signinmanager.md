@@ -8,11 +8,15 @@ Legen Sie den Anspruchstyp Benutzer-ID fest, wenn eine Server-App Folgendes erfo
 In `Startup.ConfigureServices`:
 
 ```csharp
+using System.Security.Claims;
+
+...
+
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-Im folgenden `WeatherForecastController` wird protokolliert <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> , wenn `Get` die-Methode aufgerufen wird:
+Im folgenden `WeatherForecastController` wird protokolliert, <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> Wenn die- `Get` Methode aufgerufen wird:
 
 ```csharp
 using System;
@@ -33,7 +37,7 @@ namespace {APP NAMESPACE}.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         private static readonly string[] Summaries = new[]
         {
@@ -47,7 +51,7 @@ namespace {APP NAMESPACE}.Server.Controllers
             UserManager<ApplicationUser> userManager)
         {
             this.logger = logger;
-            _userManager = userManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -55,7 +59,7 @@ namespace {APP NAMESPACE}.Server.Controllers
         {
             var rng = new Random();
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
 
             if (user != null)
             {

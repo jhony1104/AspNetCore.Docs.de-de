@@ -1,12 +1,23 @@
 ---
-Title: Formatieren von Antwortdaten in ASP.net Core Web-API-Autor: ardalis Description: Informationen zum Formatieren von Antwortdaten in ASP.net Core Web-API.
-ms. Author: Riande ms. Custom: H1Hack27Feb2017 ms. Date: 04/17/2020 NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' UID: Web-API/Advanced/Formatierung
-
+title: Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
+author: ardalis
+description: Informationen zum Formatieren von Antwortdaten in Web-APIS in ASP.NET Core
+ms.author: riande
+ms.custom: H1Hack27Feb2017
+ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/advanced/formatting
+ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355369"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 

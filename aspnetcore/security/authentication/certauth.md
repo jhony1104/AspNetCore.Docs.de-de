@@ -1,17 +1,29 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
+author: blowdart
+description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net Core für IIS und http. sys konfigurieren.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: bdorrans
+ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/certauth
+ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454609"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
-`Microsoft.AspNetCore.Authentication.Certificate`enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikat Authentifizierung erfolgt auf TLS-Ebene, lange vor der ASP.net Core. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine auflösen können `ClaimsPrincipal` . 
+`Microsoft.AspNetCore.Authentication.Certificate`enthält eine-Implementierung, die der [Zertifikat Authentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) für ASP.net Core ähnelt. Die Zertifikatsauthentifizierung erfolgt auf der TLS-Ebene, lange bevor sie überhaupt zum ASP.NET Core gelangt. Genauer ist dies ein Authentifizierungs Handler, der das Zertifikat überprüft und dann ein Ereignis liefert, bei dem Sie dieses Zertifikat in eine auflösen können `ClaimsPrincipal` . 
 
-[Konfigurieren Sie Ihren Host für die](#configure-your-host-to-require-certificates) Zertifikat Authentifizierung, also IIS, Kestrel, Azure-Web-Apps oder andere Benutzer, die Sie verwenden.
+[Konfigurieren Sie den Server für die](#configure-your-server-to-require-certificates) Zertifikat Authentifizierung, also IIS, Kestrel, Azure-Web-Apps oder andere von Ihnen verwendete.
 
 ## <a name="proxy-and-load-balancer-scenarios"></a>Proxy-und Load Balancer-Szenarios
 
@@ -24,7 +36,7 @@ Eine Alternative zur Zertifikat Authentifizierung in Umgebungen, in denen Proxys
 
 ## <a name="get-started"></a>Erste Schritte
 
-Erwerben Sie ein HTTPS-Zertifikat, wenden Sie es an, und [Konfigurieren Sie den Host](#configure-your-host-to-require-certificates) , um Zertifikate anzufordern.
+Erwerben Sie ein HTTPS-Zertifikat, wenden Sie es an, und [Konfigurieren Sie den Server](#configure-your-server-to-require-certificates) für die Verwendung von Zertifikaten.
 
 Fügen Sie in Ihrer Web-App einen Verweis auf das `Microsoft.AspNetCore.Authentication.Certificate` Paket hinzu. Verwenden Sie dann in der- `Startup.ConfigureServices` Methode `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` mit den Optionen, und geben Sie einen Delegaten für `OnCertificateValidated` an, um eine ergänzende Validierung für das mit Anforderungen gesendete Client Zertifikat durchzuführen. Diese Informationen werden in ein `ClaimsPrincipal` -Objekt umgewandelt und für die-Eigenschaft festgelegt `context.Principal` .
 
@@ -183,7 +195,7 @@ services.AddAuthentication(
 
 Konzeptionell ist die Validierung des Zertifikats ein Autorisierungs Problem. Das Hinzufügen einer Überprüfung (z. b. eines Ausstellers oder Fingerabdrucks in einer Autorisierungs Richtlinie) und nicht innerhalb von `OnCertificateValidated` ist durchaus akzeptabel.
 
-## <a name="configure-your-host-to-require-certificates"></a>Konfigurieren des Hosts, damit Zertifikate erforderlich sind
+## <a name="configure-your-server-to-require-certificates"></a>Konfigurieren des Servers für die Anforderung von Zertifikaten
 
 ### <a name="kestrel"></a>Kestrel
 

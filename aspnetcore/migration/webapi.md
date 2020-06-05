@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Migrieren von ASP.net-Web-API zu ASP.net Core
+author: ardalis
+description: Erfahren Sie, wie Sie eine Web-API-Implementierung von der ASP.NET 4. x-Web-API zu ASP.net Core MVC migrieren.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/webapi
+ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145550"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrieren von ASP.net-Web-API zu ASP.net Core
 
@@ -47,7 +59,7 @@ Erstellen Sie eine neue leere Projekt Mappe in Visual Studio, und fügen Sie der
 
 1. Klicken Sie im Menü **Datei** auf **Neu** > **Projekt**.
 1. Wählen Sie die Vorlage **leere** Vorlage aus, und klicken Sie auf **weiter**.
-1. Nennen Sie die Projekt Mappe *webapimigration*. Wählen Sie **Erstellen** aus.
+1. Nennen Sie die Projekt Mappe *webapimigration*. Klicken Sie auf **Erstellen**.
 1. Fügen Sie der Projekt Mappe das vorhandene *producungapp* -Projekt hinzu.
 
 Fügen Sie ein neues API-Projekt für die Migration hinzu:

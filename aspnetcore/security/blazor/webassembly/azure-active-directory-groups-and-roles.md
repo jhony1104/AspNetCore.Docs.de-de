@@ -1,11 +1,11 @@
 ---
 title: ASP.net Core Blazor Webassembly mit Azure Active Directory Gruppen und Rollen
 author: guardrex
-description: Erfahren Sie, wie Blazor Sie Webassembly für die Verwendung von Azure Active Directory Gruppen und Rollen konfigurieren.
+description: Erfahren Sie, wie Sie Blazor Webassembly für die Verwendung von Azure Active Directory Gruppen und Rollen konfigurieren.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976882"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451874"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure Ad Gruppen, administrative Rollen und benutzerdefinierte Rollen
 
 Von [Luke Latham](https://github.com/guardrex) und [Javier calvarro Nelson](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Azure Active Directory (AAD) bietet mehrere Autorisierungs Ansätze, die mit ASP.net Core Identität kombiniert werden können:
+Azure Active Directory (AAD) bietet mehrere Autorisierungs Ansätze, die mit ASP.net Core kombiniert werden können Identity :
 
 * Benutzerdefinierte Gruppen
   * Sicherheit
@@ -38,7 +34,7 @@ Azure Active Directory (AAD) bietet mehrere Autorisierungs Ansätze, die mit ASP
   * Integrierte Verwaltungs Rollen
   * Benutzerdefinierte Rollen
 
-Die Anleitung in diesem Artikel gilt für die Aad-Bereitstellungs Szenarien der blazor-Webassembly, die in den folgenden Themen beschrieben werden:
+Die Anleitung in diesem Artikel gilt für die Blazor Aad-Bereitstellungs Szenarios der Webassembly, die in den folgenden Themen beschrieben werden:
 
 * [Eigenständig mit Microsoft-Konten](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [Eigenständig mit AAD](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -46,16 +42,16 @@ Die Anleitung in diesem Artikel gilt für die Aad-Bereitstellungs Szenarien der 
 
 ### <a name="user-defined-groups-and-built-in-administrative-roles"></a>Benutzerdefinierte Gruppen und integrierte Verwaltungs Rollen
 
-Informationen zum Konfigurieren der APP im Azure-Portal für die bereit `groups` Stellung eines Mitgliedschafts Anspruchs finden Sie in den folgenden Azure-Artikeln. Zuweisen von Benutzern zu benutzerdefinierten Aad-Gruppen und integrierten Administrator Rollen
+Informationen zum Konfigurieren der APP im Azure-Portal für die Bereitstellung eines `groups` Mitgliedschafts Anspruchs finden Sie in den folgenden Azure-Artikeln. Zuweisen von Benutzern zu benutzerdefinierten Aad-Gruppen und integrierten Administrator Rollen
 
 * [Rollen auf Grundlage von Azure AD-Sicherheitsgruppen](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [groupMembershipClaims-Attribut](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 In den folgenden Beispielen wird davon ausgegangen, dass ein Benutzer der integrierten Aad- *Abrechnungs Administrator* Rolle zugewiesen ist.
 
-Der von `groups` Aad gesendete einzelne Anspruch zeigt die Gruppen und Rollen des Benutzers als Objekt-IDs (GUIDs) in einem JSON-Array an. Die APP muss das JSON-Array von Gruppen und Rollen in einzelne `group` Ansprüche konvertieren, für die die APP [Richtlinien](xref:security/authorization/policies) erstellen kann.
+Der `groups` von Aad gesendete einzelne Anspruch zeigt die Gruppen und Rollen des Benutzers als Objekt-IDs (GUIDs) in einem JSON-Array an. Die APP muss das JSON-Array von Gruppen und Rollen in einzelne `group` Ansprüche konvertieren, für die die APP [Richtlinien](xref:security/authorization/policies) erstellen kann.
 
-Erweitern `RemoteUserAccount` Sie diese Eigenschaft, um Array Eigenschaften für Gruppen und Rollen einzubeziehen.
+Erweitern <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> Sie diese Eigenschaft, um Array Eigenschaften für Gruppen und Rollen einzubeziehen.
 
 *CustomUserAccount.cs*:
 
@@ -73,7 +69,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-Erstellen Sie eine benutzerdefinierte benutzerfactory in der eigenständigen APP oder Client-App einer gehosteten Lösung. Die folgende Factory ist auch für die Behandlung `roles` von Anspruchs Arrays konfiguriert, die im Abschnitt " [benutzerdefinierte Rollen](#user-defined-roles) " behandelt werden:
+Erstellen Sie eine benutzerdefinierte benutzerfactory in der eigenständigen APP oder Client-App einer gehosteten Lösung. Die folgende Factory ist auch für die Behandlung von `roles` Anspruchs Arrays konfiguriert, die im Abschnitt " [benutzerdefinierte Rollen](#user-defined-roles) " behandelt werden:
 
 ```csharp
 using System.Security.Claims;
@@ -117,9 +113,9 @@ public class CustomUserFactory
 }
 ```
 
-Es muss kein Code bereitgestellt werden, um den ursprünglichen `groups` Anspruch zu entfernen, da er automatisch vom Framework entfernt wird.
+Es muss kein Code bereitgestellt werden, um den ursprünglichen Anspruch zu entfernen, `groups` da er automatisch vom Framework entfernt wird.
 
-Registrieren Sie die Factory `Program.Main` in (*Program.cs*) der eigenständigen APP-oder Client-App einer gehosteten Lösung:
+Registrieren Sie die Factory in `Program.Main` (*Program.cs*) der eigenständigen APP-oder Client-App einer gehosteten Lösung:
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-Erstellen Sie eine [Richtlinie](xref:security/authorization/policies) für jede Gruppe oder `Program.Main`Rolle in. Im folgenden Beispiel wird eine Richtlinie für die integrierte Aad- *Abrechnungs Administrator* Rolle erstellt:
+Erstellen Sie eine [Richtlinie](xref:security/authorization/policies) für jede Gruppe oder Rolle in `Program.Main` . Im folgenden Beispiel wird eine Richtlinie für die integrierte Aad- *Abrechnungs Administrator* Rolle erstellt:
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ Die [Autorität für die autorizeview](xref:security/blazor/index#authorizeview-
 </AuthorizeView>
 ```
 
-Der Zugriff auf eine gesamte Komponente kann auf der Richtlinie mithilfe der [ `[Authorize]` attributdirektivendirektive](xref:security/blazor/index#authorize-attribute) basieren:
+Der Zugriff auf eine gesamte Komponente kann auf der Richtlinie mithilfe der [ `[Authorize]` ]-Attribut Direktive] (Xref: Security/blazor/Index # Autorisierungs Attribut) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) basieren:
 
 ```razor
 @page "/"
@@ -220,7 +216,7 @@ Eine Richtlinien Überprüfung kann auch [in Code mit prozeduraler Logik ausgef�
 
 Eine Aad-registrierte App kann auch so konfiguriert werden, dass benutzerdefinierte Rollen verwendet werden.
 
-Informationen zum Konfigurieren der APP im Azure-Portal für die bereit `roles` Stellung eines Mitgliedschafts Anspruchs finden Sie unter Gewusst [wie: Hinzufügen von App-Rollen in Ihrer Anwendung und empfangen der APP im Token](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) in der Azure-Dokumentation.
+Informationen zum Konfigurieren der APP im Azure-Portal für die Bereitstellung eines `roles` Mitgliedschafts Anspruchs finden Sie unter Gewusst [wie: Hinzufügen von App-Rollen in Ihrer Anwendung und empfangen der APP im Token](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) in der Azure-Dokumentation.
 
 Im folgenden Beispiel wird davon ausgegangen, dass eine APP mit zwei Rollen konfiguriert ist:
 
@@ -232,11 +228,11 @@ Im folgenden Beispiel wird davon ausgegangen, dass eine APP mit zwei Rollen konf
 >
 > Mehrere Rollen werden in der Azure-Portal zugewiesen, indem ein Benutzer für jede weitere Rollenzuweisung **_neu hinzugefügt_** wird.
 
-Der von `roles` Aad gesendete einzelne Anspruch zeigt die benutzerdefinierten Rollen als s `appRoles`in `value`einem JSON-Array an. Die APP muss das JSON-Array von Rollen in einzelne `role` Ansprüche konvertieren.
+Der `roles` von Aad gesendete einzelne Anspruch zeigt die benutzerdefinierten Rollen als `appRoles` `value` s in einem JSON-Array an. Die APP muss das JSON-Array von Rollen in einzelne `role` Ansprüche konvertieren.
 
-Der `CustomUserFactory` im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Administrator Rollen](#user-defined-groups-and-built-in-administrative-roles) angezeigte Vorgang ist so eingerichtet, dass er für einen `roles` Anspruch mit einem JSON-Array Wert ausgeführt wird. Fügen Sie die `CustomUserFactory` in der eigenständigen APP oder Client-App einer gehosteten Lösung hinzu, und registrieren Sie Sie, wie im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Verwaltungs Rollen](#user-defined-groups-and-built-in-administrative-roles) beschrieben. Es muss kein Code bereitgestellt werden, um den ursprünglichen `roles` Anspruch zu entfernen, da er automatisch vom Framework entfernt wird.
+Der `CustomUserFactory` im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Administrator Rollen](#user-defined-groups-and-built-in-administrative-roles) angezeigte Vorgang ist so eingerichtet, dass er für einen `roles` Anspruch mit einem JSON-Array Wert ausgeführt wird. Fügen Sie die `CustomUserFactory` in der eigenständigen APP oder Client-App einer gehosteten Lösung hinzu, und registrieren Sie Sie, wie im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Verwaltungs Rollen](#user-defined-groups-and-built-in-administrative-roles) beschrieben. Es muss kein Code bereitgestellt werden, um den ursprünglichen Anspruch zu entfernen, `roles` da er automatisch vom Framework entfernt wird.
 
-Geben `Program.Main` Sie in der eigenständigen APP oder Client-App einer gehosteten Lösung den Anspruch mit`role`dem Namen "" als Rollen Anspruch an:
+Geben Sie in der `Program.Main` eigenständigen APP oder Client-App einer gehosteten Lösung den Anspruch mit dem Namen " `role` " als Rollen Anspruch an:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -247,11 +243,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-An dieser Stelle sind die Komponenten Autorisierungs Ansätze funktionsfähig. Alle Autorisierungs Mechanismen in-Komponenten können die `admin` -Rolle verwenden, um den Benutzer zu autorisieren:
+An dieser Stelle sind die Komponenten Autorisierungs Ansätze funktionsfähig. Alle Autorisierungs Mechanismen in-Komponenten können die- `admin` Rolle verwenden, um den Benutzer zu autorisieren:
 
-* [Autorität View-Komponente](xref:security/blazor/index#authorizeview-component) (Beispiel: `<AuthorizeView Roles="admin">`)
-* Attribute-Direktive ( `@attribute [Authorize(Roles = "admin")]`Beispiel:) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [Prozedurale Logik](xref:security/blazor/index#procedural-logic) ( `if (user.IsInRole("admin")) { ... }`Beispiel:)
+* [Autorität View-Komponente](xref:security/blazor/index#authorizeview-component) (Beispiel: `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ]-Attribut Direktive] (Xref: Security/blazor/Index # autorisieren-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Beispiel: `@attribute [Authorize(Roles = "admin")]` )
+* [Prozedurale Logik](xref:security/blazor/index#procedural-logic) (Beispiel: `if (user.IsInRole("admin")) { ... }` )
 
   Mehrere Rollen Tests werden unterstützt:
 
@@ -264,7 +260,7 @@ An dieser Stelle sind die Komponenten Autorisierungs Ansätze funktionsfähig. A
 
 ## <a name="aad-adminstrative-role-group-ids"></a>Rollen Gruppen-IDs für Aad-Administratoren
 
-Die Objekt-IDs, die in der folgenden Tabelle dargestellt werden, dienen `group` zum Erstellen von [Richtlinien](xref:security/authorization/policies) für Ansprüche. Mit Richtlinien ist es einer APP gestattet, Benutzer für verschiedene Aktivitäten in einer APP zu autorisieren. Weitere Informationen finden Sie im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Administrator Rollen](#user-defined-groups-and-built-in-administrative-roles) .
+Die Objekt-IDs, die in der folgenden Tabelle dargestellt werden, dienen zum Erstellen von [Richtlinien](xref:security/authorization/policies) für `group` Ansprüche. Mit Richtlinien ist es einer APP gestattet, Benutzer für verschiedene Aktivitäten in einer APP zu autorisieren. Weitere Informationen finden Sie im Abschnitt [benutzerdefinierte Gruppen und integrierte Aad-Administrator Rollen](#user-defined-groups-and-built-in-administrative-roles) .
 
 Aad-Administrator Rolle | ObjectID
 --- | ---

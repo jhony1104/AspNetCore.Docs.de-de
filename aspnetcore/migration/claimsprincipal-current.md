@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Migrieren von "ClaimsPrincipal. Current"
+author: mjrousos
+description: Erfahren Sie, wie Sie von ClaimsPrincipal. Current migrieren, um die Identität und Ansprüche des aktuellen authentifizierten Benutzers in ASP.net Core abzurufen.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 03/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/claimsprincipal-current
+ms.openlocfilehash: 4bcbaa1854016d7393d019a9c275bc8221974d7a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145615"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>Migrieren von "ClaimsPrincipal. Current"
 

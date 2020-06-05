@@ -1,12 +1,23 @@
 ---
-Title: Rückgabe Typen von Controller Aktionen in ASP.net Core Web-API-Autor: scottadder Description: erfahren Sie mehr über die Verwendung der verschiedenen Controller Aktionsmethoden-Rückgabe Typen in einer ASP.net Core Web-API.
-ms. Author: scaddas ms. Custom: MVC ms. Date: 02/03/2020 NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' UID: Web-API/Action-Return-Types
-
+title: Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
+author: scottaddie
+description: In diesem Artikel erfahren Sie, wie die verschiedenen Rückgabetypen für Controlleraktionsmethoden in einer ASP.NET Core-Web-API verwendet werden.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 02/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/action-return-types
+ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253785"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Rückgabetypen für Controlleraktionen in der ASP.NET Core-Web-API
 

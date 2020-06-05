@@ -1,12 +1,23 @@
 ---
-Title: Zwischenspeichern von Antworten in ASP.net Core Author: Rick-Anderson Description: erfahren Sie, wie Sie das Zwischenspeichern von Antworten verwenden, um die Bandbreitenanforderungen zu verringern und die Leistung von ASP.net Core apps
-monikerrange: ' >= aspnetcore-2,1 ' ms. Author: Riande ms. Date: 11/04/2019 NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' UID: Performance/Caching/Response
-
+title: Zwischenspeichern von Antworten in ASP.net Core
+author: rick-anderson
+description: Erfahren Sie, wie Sie die Zwischenspeicherung von Antworten verwenden können, um die Bandbreitenanforderungen zu senken und die Leistung von ASP.NET Core-Apps zu steigern.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.date: 11/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/caching/response
+ms.openlocfilehash: 87ff2633ded612eba2c996583b4a6cf997fe8e18
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84105765"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.net Core
 

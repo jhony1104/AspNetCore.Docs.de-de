@@ -1,12 +1,22 @@
 ---
-Title: einfache Autorisierung in ASP.net Core Author: Rick-Anderson Description: erfahren Sie, wie Sie das Attribut "autorisieren" verwenden, um den Zugriff auf ASP.net Core Controller und Aktionen einzuschränken.
-ms. Author: Riande ms. Date: 10/14/2016 NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' UID: Security/Authorization/Simple
-
+title: Einfache Autorisierung in ASP.net Core
+author: rick-anderson
+description: Erfahren Sie, wie Sie das Attribut "autorisieren" verwenden, um den Zugriff auf ASP.net Core Controller und Aktionen einzuschränken.
+ms.author: riande
+ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authorization/simple
+ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272124"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Einfache Autorisierung in ASP.net Core
 
@@ -48,7 +58,7 @@ public class AccountController : Controller
 
 Jetzt können nur authentifizierte Benutzer auf die `Logout` Funktion zugreifen.
 
-Sie können auch das- `AllowAnonymous` Attribut verwenden, um den Zugriff durch nicht authentifizierte Benutzer auf einzelne Aktionen zuzulassen. Zum Beispiel:
+Sie können auch das- `AllowAnonymous` Attribut verwenden, um den Zugriff durch nicht authentifizierte Benutzer auf einzelne Aktionen zuzulassen. Beispiel:
 
 ```csharp
 [Authorize]
