@@ -16,8 +16,12 @@ Ein Ansatz, um zu verhindern, dass veraltete Cookies und Standortdaten das Teste
 * Verwenden Sie einen benutzerdefinierten Befehl, um in Visual Studio einen Browser im Inkognito-Modus oder im privaten Modus zu öffnen:
   * Öffnen Sie in der Visual Studio-Schaltfläche **Ausführen** das Dialogfeld **Durchsuchen** nach.
   * Wählen Sie die Schaltfläche **Hinzufügen** aus.
-  * Geben Sie im Feld **Programm** den Pfad zu Ihrem Browser an.
-  * Geben Sie im Feld **Argumente** die Befehlszeilenoption an, die der Browser verwendet, um im Inkognito-oder privaten Modus und die URL der APP zu öffnen. Beispiel:
+  * Geben Sie im Feld **Programm** den Pfad zu Ihrem Browser an. Die folgenden ausführbaren Pfade sind typische Installations Orte für Windows 10. Wenn Ihr Browser an einem anderen Speicherort installiert ist oder Sie nicht Windows 10 verwenden, geben Sie den Pfad zur ausführbaren Datei des Browsers an.
+    * Microsoft Edge:`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome:`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox:`C:\Program Files\Mozilla Firefox\firefox.exe`
+  * Geben Sie im Feld **Argumente** die Befehlszeilenoption an, die der Browser verwendet, um im Inkognito-oder private-Modus zu öffnen. Für einige Browser ist die URL der APP erforderlich.
+    * Microsoft Edge:`-inprivate`
     * Google Chrome:`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox:`-private -url https://localhost:5001`
   * Geben Sie im Feld Anzeige **Name** einen Namen ein. Beispiel: `Firefox Auth Testing`.
