@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Blazor-Apps hosten und bereitstellen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,18 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 482b066d347c2c572b0ffb78ccab1ac391195823
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775166"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452238"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hosten und Bereitstellen von ASP.NET Core Blazor
 
 Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) und [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ## <a name="publish-the-app"></a>Veröffentlichen der App
 
@@ -56,9 +54,9 @@ Das Veröffentlichen einer App löst eine [Wiederherstellung](/dotnet/core/tools
 Veröffentlichungsspeicherorte:
 
 * Blazor WebAssembly
-  * Eigenständig &ndash; die App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* veröffentlicht. Zum Bereitstellen der App als statische Website kopieren Sie den Inhalt des Ordners *wwwroot* auf den Host der statischen Website.
-  * Gehostet &ndash; der Client Blazor der WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* der Server-App zusammen mit allen anderen statischen Webressourcen der Server-App veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
-* Blazor-Server &ndash; die App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish* veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
+  * Eigenständig: Die App wird im Ordner */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* veröffentlicht. Zum Bereitstellen der App als statische Website kopieren Sie den Inhalt des Ordners *wwwroot* auf den Host der statischen Website.
+  * Gehostet: Der Client Blazor der WebAssembly-App wird im Ordner */bin/Release/{ZIELFRAMEWORK}/publish/wwwroot* der Server-App zusammen mit allen anderen statischen Webressourcen der Server-App veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
+* Blazor Server: Die App wird im Ordner */bin/Release/{TARGET FRAMEWORK}/publish* veröffentlicht. Stellen Sie die Inhalte des Ordners *publish* auf dem Host bereit.
 
 Die Objekte im Ordner werden auf dem Webserver bereitgestellt. Die Bereitstellung kann je nach verwendetem Entwicklungstool manuell oder automatisch erfolgen.
 

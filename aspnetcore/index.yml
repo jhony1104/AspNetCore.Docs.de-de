@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: ASP.NET Core-Dokumentation
+title: ASP.NET-Dokumentation
 summary: Erfahren Sie, wie Sie ASP.NET Core verwenden, um Web-Apps und Dienste zu erstellen, die schnell, sicher, plattformübergreifend und cloudbasiert sind. Durchsuchen Sie Tutorials, Codebeispiele, Grundlagen, API-Referenz und mehr.
 brand: aspnet
 metadata:
-  title: ASP.NET Core-Dokumentation
+  title: ASP.NET-Dokumentation
   description: Erfahren Sie, wie Sie ASP.NET Core verwenden, um Web-Apps und Dienste zu erstellen, die schnell, sicher, plattformübergreifend und cloudbasiert sind. Durchsuchen Sie Tutorials, Codebeispiele, Grundlagen, API-Referenz und mehr.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 06/03/2020
-  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
-  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+  ms.date: 06/05/2020
+  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
+  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
   ms.translationtype: HT
   ms.contentlocale: de-DE
-  ms.lasthandoff: 06/04/2020
-  ms.locfileid: "84355424"
+  ms.lasthandoff: 06/08/2020
+  ms.locfileid: "84507324"
 highlightedContent:
   items:
   - title: Erstellen einer ASP.NET Core-App auf einer beliebigen Plattform in nur 5 Minuten
@@ -44,7 +44,7 @@ highlightedContent:
     url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: Entwickeln von ASP.NET Core-Apps
-  summary: Wählen Sie aus interaktiven Web-Apps, Web-APIs, Apps mit MVC-Muster, Echtzeit-Apps und mehr. Die ASP.NET 4.x-Dokumentation finden Sie unter [ASP.NET](https://docs.microsoft.com/aspnet/overview).
+  summary: Wählen Sie aus interaktiven Web-Apps, Web-APIs, Apps mit MVC-Muster, Echtzeit-Apps und mehr.
   items:
   - title: Interaktive clientseitige Blazor-Apps
     summary: Entwickeln mit wiederverwendbaren Benutzeroberflächenkomponenten, die von WebAssembly für nahezu native Leistung profitieren können
