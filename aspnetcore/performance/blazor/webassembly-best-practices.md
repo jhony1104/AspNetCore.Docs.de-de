@@ -1,12 +1,24 @@
 ---
-Title: "ASP.net Core Blazor Webassembly Performance Best Practices ' Author: Description:" Tipps zum Steigern der Leistung in ASP.net Core Blazor Webassembly-apps und vermeiden von häufigen Leistungsproblemen. "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Bewährte Methoden für die ASP.net Core Blazor webassemblyleistung
+author: pranavkm
+description: Tipps zum Steigern der Leistung in ASP.net Core Blazor Webassembly-apps und vermeiden von häufigen Leistungsproblemen.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/blazor/webassembly-best-practices
+ms.openlocfilehash: 950d87a6f09e998e47e96c93c5d68bb3f19ddafb
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529631"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Bewährte Methoden für die ASP.net Core Blazor webassemblyleistung
 
@@ -131,6 +143,12 @@ BlazorWebassembly bietet zwei weitere Versionen von <xref:Microsoft.JSInterop.IJ
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="compression"></a>Komprimierung
+
+Wenn eine Blazor Webassembly-App veröffentlicht wird, wird die Ausgabe statisch während der Veröffentlichung komprimiert, um die Größe der APP zu reduzieren und den mehr Aufwand für die Lauf Zeit Komprimierung zu entfernen. Blazorbasiert auf dem-Server, um die Inhalts Erfüllung auszuführen und statisch komprimierte Dateien zu verarbeiten.
+
+Nachdem eine APP bereitgestellt wurde, überprüfen Sie, ob die APP komprimierte Dateien bereitstellt. Überprüfen Sie die Registerkarte Netzwerk im Entwicklertools eines Browsers, und überprüfen Sie, ob die Dateien mit oder bedient werden `Content-Encoding: br` `Content-Encoding: gz` . Wenn der Host keine komprimierten Dateien bedient, befolgen Sie die Anweisungen unter <xref:host-and-deploy/blazor/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>Nicht verwendete Funktionen deaktivieren
 

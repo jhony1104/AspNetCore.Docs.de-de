@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: bbd8b6fcd357b8929bf097450854d98fbea2570e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5ba7bbde49bfc232795d375a1ec644825a0dee1e
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772634"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454635"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Absichern von Blazor Server-Apps als ASP.NET Core-Anwendungen
 
 Von [Luke Latham](https://github.com/guardrex)
 
-## <a name="blazor-server-project-template"></a>Projektvorlage „Blazor Server“
+## <a name="blazor-server-project-template"></a>Blazor Server-Projektvorlage
 
 Die Projektvorlage „Blazor Server“ kann beim Erstellen des Projekts für die Authentifizierung konfiguriert werden.
 
@@ -32,13 +32,13 @@ Die Projektvorlage „Blazor Server“ kann beim Erstellen des Projekts für die
 
 Befolgen Sie die Visual Studio-Anweisungen im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen.
 
-Nachdem Sie im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Vorlage **Blazor-Server-App** ausgewählt haben, wählen Sie im Dialogfeld **Authentifizierung** die Option **Ändern**.
+Nachdem Sie im Dialogfeld **Neue ASP.NET Core-Webanwendung erstellen** die Vorlage **Blazor Server-App** ausgewählt haben, wählen Sie im Dialogfeld **Authentifizierung** die Option **Ändern** aus.
 
 Ein Dialogfeld wird geöffnet, in dem dieselben Authentifizierungsmechanismen angeboten werden, die auch für andere ASP.NET-Core-Projekte verfügbar sind:
 
 * **Keine Authentifizierung**
-* **Einzelne Benutzerkonten** &ndash; Benutzerkonten können gespeichert werden:
-  * Innerhalb der App anhand des Systems [Identität](xref:security/authentication/identity) von ASP.NET Core.
+* **Einzelne Benutzerkonten**: Benutzerkonten können wie folgt gespeichert werden:
+  * Innerhalb der App anhand des Systems [Identity](xref:security/authentication/identity) von ASP.NET Core.
   * Mit [Azure AD B2C](xref:security/authentication/azure-ad-b2c).
 * **Geschäfts-, Schul- oder Unikonten**
 * **Windows-Authentifizierung**
@@ -79,7 +79,7 @@ Weitere Informationen finden Sie im Befehl [dotnet new](/dotnet/core/tools/dotne
 
 # <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-Befolgen Sie die Anleitungen für die .NET Core-CLI im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
+Befolgen Sie die Anleitungen für die .NET Core-CLI im Artikel <xref:blazor/get-started>, um ein neues Blazor Blazor-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -108,3 +108,10 @@ Weitere Informationen finden Sie im Befehl [dotnet new](/dotnet/core/tools/dotne
 ## <a name="secure-an-existing-app"></a>Schützen einer vorhandenen App
 
 Das Schützen von Blazor Server-Apps funktioniert genau wie bei ASP.NET Core-Apps. Weitere Informationen finden Sie in den Artikeln unter <xref:security/index>.
+
+## <a name="scaffold-identity"></a>Gerüst Identity
+
+Gerüst Identity in einem Blazor Server-Projekt:
+
+* [Ohne vorhandene Autorisierung](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization)
+* [Mit Autorisierung](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization)

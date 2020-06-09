@@ -1,12 +1,24 @@
 ---
-Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Protokollierung und Diagnose in ASP.net CoreSignalR
+author: anurse
+description: Erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: anurse
+ms.custom: signalr
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/diagnostics
+ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507315"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net CoreSignalR
 
@@ -77,34 +89,14 @@ Um die Protokollierung vollständig zu deaktivieren, geben Sie `signalR.LogLevel
 In der folgenden Tabelle werden die für den JavaScript-Client verfügbaren Protokoll Ebenen angezeigt. Wenn Sie die Protokollebene auf einen dieser Werte festlegen, wird die Protokollierung auf dieser Ebene und allen darüber liegenden Ebenen in der Tabelle ermöglicht.
 
 | Ebene | BESCHREIBUNG |
-| ----- | ---
-Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: "Protokollierung und Diagnose in ASP.net Core SignalR " Author: Description: "erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core- SignalR App erfassen."
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | `None` | Es werden keine Nachrichten protokolliert. | | `Critical` | Meldungen, die auf einen Fehler in der gesamten App hindeuten. | | `Error` | Meldungen, die auf einen Fehler im aktuellen Vorgang hindeuten. | | `Warning` | Meldungen, die auf ein nicht schwer wiedliches Problem hinweisen. | | `Information` | Informationsmeldungen. | | `Debug` | Diagnosemeldungen sind für das Debuggen nützlich. | | `Trace` | Sehr ausführliche Diagnosemeldungen, die für die Diagnose bestimmter Probleme entwickelt wurden. |
+| ----- | ----------- |
+| `None` | Es werden keine Nachrichten protokolliert. |
+| `Critical` | Meldungen, die auf einen Fehler in der gesamten App hindeuten. |
+| `Error` | Meldungen, die auf einen Fehler im aktuellen Vorgang hindeuten. |
+| `Warning` | Meldungen, die auf ein nicht schwer wiedliches Problem hinweisen. |
+| `Information` | Informationsmeldungen. |
+| `Debug` | Diagnosemeldungen sind für das Debuggen nützlich. |
+| `Trace` | Sehr ausführliche Diagnosemeldungen, die für die Diagnose bestimmter Probleme entwickelt wurden. |
 
 Nachdem Sie die Ausführlichkeit konfiguriert haben, werden die Protokolle in die Browser Konsole (oder die Standard Ausgabe in einer nodejs-APP) geschrieben.
 
@@ -217,6 +209,39 @@ Sie können Diagnose Dateien an GitHub-Probleme anfügen, indem Sie Sie so umben
 > Fügen Sie den Inhalt von Protokolldateien oder Netzwerk Ablauf Verfolgungen nicht in ein GitHub-Problem ein. Diese Protokolle und Ablauf Verfolgungen können sehr umfangreich sein, und GitHub verkürzt Sie in der Regel.
 
 ![Ziehen von Protokolldateien auf ein GitHub-Problem](diagnostics/attaching-diagnostics-files.png)
+
+## <a name="metrics"></a>Metriken
+
+Metriken sind eine Darstellung von Daten Messungen in Zeitintervallen. Beispielsweise Anforderungen pro Sekunde. Metrikdaten ermöglichen eine Überwachung des Zustands einer APP auf hoher Ebene. .NET-gRPC-Metriken werden mithilfe von <xref:System.Diagnostics.Tracing.EventCounter> ausgegeben.
+
+### <a name="signalr-server-metrics"></a>SignalRservermetriken
+
+SignalRservermetriken werden auf der <xref:Microsoft.AspNetCore.Http.Connections> Ereignis Quelle gemeldet.
+
+| Name                    | BESCHREIBUNG                 |
+|-------------------------|-----------------------------|
+| `connections-started`   | Gestartete Verbindungen gesamt   |
+| `connections-stopped`   | Beendete Verbindungen insgesamt   |
+| `connections-timed-out` | Timeout bei Verbindungen gesamt |
+| `current-connections`   | Aktuelle Verbindungen         |
+| `connections-duration`  | Durchschnittliche Verbindungs Dauer |
+
+### <a name="observe-metrics"></a>Überwachen von Metriken
+
+[dotnet-counters](/dotnet/core/diagnostics/dotnet-counters) ist ein Leistungsüberwachungstool zur Ad-hoc-Überwachung der Integrität und zur Leistungsuntersuchung auf erster Ebene. Überwachen Sie eine .net-App mit `Microsoft.AspNetCore.Http.Connections` als Anbieter Namen. Beispiel:
+
+```console
+> dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
+
+Press p to pause, r to resume, q to quit.
+    Status: Running
+[Microsoft.AspNetCore.Http.Connections]
+    Average Connection Duration (ms)       16,040.56
+    Current Connections                         1
+    Total Connections Started                   8
+    Total Connections Stopped                   7
+    Total Connections Timed Out                 0
+```
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
