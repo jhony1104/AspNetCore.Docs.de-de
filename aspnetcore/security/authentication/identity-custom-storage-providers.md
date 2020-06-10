@@ -1,12 +1,23 @@
 ---
-Title: "benutzerdefinierte Speicher Anbieter für ASP.net Core Identity " Author: Description: "erfahren Sie, wie Sie benutzerdefinierte Speicher Anbieter für ASP.net Core konfigurieren Identity ."
-ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Benutzerdefinierte Speicher Anbieter für ASP.net CoreIdentity
+author: ardalis
+description: Erfahren Sie, wie Sie benutzerdefinierte Speicher Anbieter für ASP.net Core konfigurieren Identity .
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106584"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Benutzerdefinierte Speicher Anbieter für ASP.net CoreIdentity
 
@@ -230,7 +241,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>References
+## <a name="references"></a>Referenzen
 
 * [Benutzerdefinierte Speicher Anbieter für ASP.NET 4. xIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
 * [ASP.net Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): dieses Repository enthält Links zu von der Community verwalteten Speicheranbietern.

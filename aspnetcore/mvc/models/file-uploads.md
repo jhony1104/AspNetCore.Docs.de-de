@@ -1,11 +1,24 @@
 ---
-Title: Autor: Beschreibung: monikerrange: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Hochladen von Dateien in ASP.NET Core
+author: rick-anderson
+description: Verwenden von Modellbindung und Streaming zum Hochladen von Dateien in ASP.NET Core MVC
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/models/file-uploads
+ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83838317"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Hochladen von Dateien in ASP.NET Core
 
@@ -221,7 +234,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitsüberlegungen](#security-considerations)
+> * [Sicherheitshinweise](#security-considerations)
 > * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
@@ -235,7 +248,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im folgenden Beispiel:
+Im Beispiel unten geschieht Folgendes:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -392,7 +405,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitsüberlegungen](#security-considerations)
+> * [Sicherheitshinweise](#security-considerations)
 > * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
@@ -427,7 +440,7 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Validierung
+## <a name="validation"></a>Überprüfen
 
 Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
@@ -707,7 +720,7 @@ Der Standardgrenzwert für Anforderungen (`maxAllowedContentLength`) beträgt st
 </system.webServer>
 ```
 
-Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Request Limits \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/) (Anforderungseinschränkungen).
+Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Anforderungs Limits \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711) (Upload von Dateien größer als 2 GB ist nicht möglich).
 
@@ -950,7 +963,7 @@ Auf die einzelnen Dateien, die auf den Server geladen werden, kann über eine [M
 >
 > Bei den bisher vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitsüberlegungen](#security-considerations)
+> * [Sicherheitshinweise](#security-considerations)
 > * [Überprüfung](#validation)
 
 Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http.IFormFile> kann die Aktionsmethode Folgendes akzeptieren:
@@ -964,7 +977,7 @@ Beim Hochladen von Dateien mit Modellbindung und <xref:Microsoft.AspNetCore.Http
 > [!NOTE]
 > Zur Bindung werden Formulardateien anhand des Namens abgeglichen. So muss beispielsweise der HTML-Wert `name` in `<input type="file" name="formFile">` mit der C#-Parameter-/Eigenschaftsbindung übereinstimmen (`FormFile`). Weitere Informationen finden Sie im Abschnitt [Abgleichen des Werts des Namensattributs mit dem Parameternamen in der POST-Methode](#match-name-attribute-value-to-parameter-name-of-post-method).
 
-Im folgenden Beispiel:
+Im Beispiel unten geschieht Folgendes:
 
 * Durchläuft mindestens eine hochgeladene Datei.
 * Verwendet [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*), um einen vollständigen Pfad für eine Datei samt Dateinamen zurückzugeben. 
@@ -1121,7 +1134,7 @@ Das vorherige Beispiel ähnelt einem Szenario, das in der Beispiel-App veranscha
 >
 > Bei den vorgestellten Beispielen werden keine Sicherheitsaspekte berücksichtigt. Weitere Informationen finden Sie in den folgenden Abschnitten und in der [Beispiel-App](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Sicherheitsüberlegungen](#security-considerations)
+> * [Sicherheitshinweise](#security-considerations)
 > * [Überprüfung](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Hochladen von großen Dateien mittels Streaming
@@ -1156,7 +1169,7 @@ Die vollständige `StreamingController.UploadPhysical`-Methode für das Streamin
 
 In der Beispiel-App werden Validierungsprüfungen von `FileHelpers.ProcessStreamedFile` übernommen.
 
-## <a name="validation"></a>Validierung
+## <a name="validation"></a>Überprüfen
 
 Die `FileHelpers`-Klasse der Beispiel-App veranschaulicht eine Reihe von Prüfungen für gepufferte <xref:Microsoft.AspNetCore.Http.IFormFile>- und gestreamte Dateiuploads. Informationen zum Verarbeiten mit <xref:Microsoft.AspNetCore.Http.IFormFile> gepufferter Dateiuploads in der Beispiel-App finden Sie in der Datei *Utilities/FileHelpers.cs* in der `ProcessFormFile`-Methode. Informationen zum Verarbeiten gestreamter Dateien finden Sie in der `ProcessStreamedFile`-Methode in der gleichen Datei.
 
@@ -1429,7 +1442,7 @@ Der Standardgrenzwert für Anforderungen (`maxAllowedContentLength`) beträgt st
 </system.webServer>
 ```
 
-Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Request Limits \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/) (Anforderungseinschränkungen).
+Diese Einstellung gilt nur für IIS. Beim Hosting unter Kestrel gehört dieses Verhalten nicht zum Standard. Weitere Informationen finden Sie unter [Anforderungs Limits \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Einschränkungen im ASP.NET Core-Modul oder das Vorhandensein des IIS-Anforderungsfiltermoduls können Uploads auf entweder 2 oder 4 GB beschränken. Weitere Informationen finden Sie unter [Unable to upload file greater than 2GB in size (aspnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711) (Upload von Dateien größer als 2 GB ist nicht möglich).
 

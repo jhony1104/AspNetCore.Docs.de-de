@@ -1,12 +1,24 @@
 ---
-Title: "Leitfaden zur Bedrohungsminderung für ASP.net Core Blazor Server" Author: Description: "erfahren Sie, wie Sicherheitsbedrohungen für Server-apps minimiert werden Blazor ."
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Leitfaden zur Bedrohungsminderung für ASP.net Core Blazor Server
+author: guardrex
+description: Erfahren Sie, wie Sie Sicherheitsbedrohungen für Blazor Server-apps mindern.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864630"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Leitfaden zur Bedrohungsminderung für ASP.net Core Blazor Server
 
@@ -89,7 +101,7 @@ Standardmäßig gibt es keine Beschränkung für die Anzahl der Verbindungen pro
 
 DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der Server eine oder mehrere seiner Ressourcen abwehrt, wodurch die APP nicht mehr verfügbar ist. BlazorServer-Apps enthalten einige Standard Limits und basieren auf anderen ASP.net Core und SignalR Beschränkungen zum Schutz vor DoS-Angriffen, die für festgelegt sind <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| BlazorLimit für Server-apps | BESCHREIBUNG | Standard |
+| BlazorLimit für Server-apps | Beschreibung | Standard |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Maximale Anzahl von Verbindungen, die von einem bestimmten Server gleichzeitig im Arbeitsspeicher enthalten sind. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Maximale Zeitspanne, für die eine getrennte Verbindung im Arbeitsspeicher gehalten wird, bevor Sie abgebrochen wird. | 3 Minuten |
@@ -98,7 +110,7 @@ DOS-Angriffe (Denial of Service) beinhalten einen Client, der bewirkt, dass der 
 
 Legen Sie die maximale Nachrichtengröße einer einzelnen eingehenden Hub-Nachricht mit fest <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalRund ASP.net Core Limit | BESCHREIBUNG | Standard |
+| SignalRund ASP.net Core Limit | Beschreibung | Standard |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Nachrichtengröße für eine einzelne Nachricht. | 32 KB |
 

@@ -1,12 +1,24 @@
 ---
-Title: "ASP.net Core SignalR JavaScript-Client ' Author: Description:" Overview of ASP.net Core SignalR JavaScript Client. "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.net Core SignalR JavaScript-Client
+author: bradygaster
+description: Übersicht über ASP.net Core SignalR JavaScript-Client.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/javascript-client
+ms.openlocfilehash: 4b3a4b2323b7f221d9cd1aab1c56d1d9828eb916
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106454"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.net Core SignalR JavaScript-Client
 
@@ -300,7 +312,7 @@ Eine reale Implementierung würde einen exponentiellen Backoff verwenden oder ei
 * [JavaScript-API-Referenz](/javascript/api/?view=signalr-js-latest)
 * [JavaScript-Tutorial](xref:tutorials/signalr)
 * [WebPack und typescript-Tutorial](xref:tutorials/signalr-typescript-webpack)
-* [Hubs](xref:signalr/hubs)
+* [Hub](xref:signalr/hubs)
 * [.NET-Client](xref:signalr/dotnet-client)
 * [Veröffentlichen in Azure](xref:signalr/publish-to-azure-web-app)
 * [Cross-Origin-Anforderungen (cors)](xref:security/cors)
