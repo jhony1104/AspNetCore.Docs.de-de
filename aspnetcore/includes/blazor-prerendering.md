@@ -24,7 +24,7 @@ Wenn Sie JavaScript-Interop-Aufrufe bis nach Herstellung der Verbindung zum Brow
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeVoidAsync` aufgerufen und gibt keinen Wert zurück:
+Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> aufgerufen und gibt keinen Wert zurück:
 
 ```html
 <script>
@@ -35,9 +35,9 @@ Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript
 > [!WARNING]
 > Im vorangehenden Beispiel wird das Dokumentobjektmodell (DOM) direkt zu Demonstrationszwecken geändert. Das direkte Ändern des DOM mit JavaScript wird in den meisten Szenarios nicht empfohlen, da JavaScript die Änderungsnachverfolgung von Blazor beeinträchtigen kann.
 
-Die folgende Komponente veranschaulicht, wie JavaScript-Interop als Teil der Initialisierungslogik einer Komponente auf eine Weise verwendet werden kann, die mit dem Prerendering kompatibel ist. Die Komponente zeigt, dass es möglich ist, in `OnAfterRenderAsync` ein Renderingupdate zu initiieren. Der Entwickler muss in diesem Szenario vermeiden, eine Endlosschleife zu erstellen.
+Die folgende Komponente veranschaulicht, wie JavaScript-Interop als Teil der Initialisierungslogik einer Komponente auf eine Weise verwendet werden kann, die mit dem Prerendering kompatibel ist. Die Komponente zeigt, dass es möglich ist, in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> ein Renderingupdate zu initiieren. Der Entwickler muss in diesem Szenario vermeiden, eine Endlosschleife zu erstellen.
 
-Wenn `JSRuntime.InvokeAsync` aufgerufen wird, wird `ElementRef` nur in `OnAfterRenderAsync` und nicht in einer früheren Lebenszyklusmethode verwendet, da es kein JavaScript-Element gibt, bis die Komponente gerendert wird.
+Wenn <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> aufgerufen wird, wird `ElementRef` nur in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> und nicht in einer früheren Lebenszyklusmethode verwendet, da es kein JavaScript-Element gibt, bis die Komponente gerendert wird.
 
 [StateHasChanged](xref:blazor/lifecycle#state-changes) wird aufgerufen, um die Komponente mit dem neuen Zustand, der vom JavaScript-Interop-Aufruf abgerufen wurde, erneut zu überarbeiten. Der Code erstellt keine Endlosschleife, da `StateHasChanged` nur aufgerufen wird, wenn `infoFromJs` `null` ist.
 
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit `IJSRuntime.InvokeAsync` aufgerufen und gibt einen Wert zurück:
+Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> aufgerufen und gibt einen Wert zurück:
 
 ```html
 <script>

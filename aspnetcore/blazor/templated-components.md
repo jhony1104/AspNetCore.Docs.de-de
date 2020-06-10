@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core-Komponentenvorlagen in Blazor
+title: "title: 'ASP.NET Core-Komponentenvorlagen in Blazor' author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:"
 author: guardrex
-description: Hier erfahren Sie, wie Komponentenvorlagen eine oder mehrere Benutzeroberflächenvorlagen als Parameter akzeptieren können, die dann wiederum als Teil der Renderlogik der Komponente verwendet werden können.
+description: "'Blazor'"
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,31 +13,31 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templated-components
-ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8c970387fa79b02127c8a2375195373148749679
+ms.sourcegitcommit: 04eeffe9f2f07aaa9e04720adb2e37245f5ce17d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771066"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83851888"
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core-Komponentenvorlagen in Blazor
+# <a name="aspnet-core-blazor-templated-components"></a>'Identity'
 
-Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
+'Let's Encrypt'
 
-Bei Komponentenvorlagen geht es um Komponenten, die eine oder mehrere Benutzeroberflächenvorlagen als Parameter akzeptieren, die dann wiederum als Teil der Renderlogik der Komponente verwendet werden können. Mit Komponentenvorlagen können Sie Komponenten höherer Ebenen erstellen, die einfacher wiederverwendet werden können als reguläre Komponenten. Nachstehend sind einige Beispiele angegeben:
+'Razor' 'SignalR' uid: ASP.NET Core-Komponentenvorlagen in Blazor
 
-* Eine Tabellenkomponente, mit der ein Benutzer Vorlagen für die Überschrift, die Zeilen und die Fußzeile einer Tabelle angeben kann
-* Eine Listenkomponente, mit der ein Benutzer eine Vorlage für Renderelemente in einer Liste angeben kann
+* Von [Luke Latham](https://github.com/guardrex) und [Daniel Roth](https://github.com/danroth27)
+* Bei Komponentenvorlagen geht es um Komponenten, die eine oder mehrere Benutzeroberflächenvorlagen als Parameter akzeptieren, die dann wiederum als Teil der Renderlogik der Komponente verwendet werden können.
 
-## <a name="template-parameters"></a>Vorlagenparameter
+## <a name="template-parameters"></a>Mit Komponentenvorlagen können Sie Komponenten höherer Ebenen erstellen, die einfacher wiederverwendet werden können als reguläre Komponenten.
 
-Eine Komponentenvorlage wird definiert, indem mindestens ein Komponentenparameter des Typs `RenderFragment` oder `RenderFragment<T>` angegeben wird. Ein Renderfragment stellt dabei ein Segment der Benutzeroberfläche dar, das gerendert werden soll. `RenderFragment<T>` akzeptiert einen Typparameter, der angegeben werden kann, wenn das Renderfragment aufgerufen wird.
+Nachstehend sind einige Beispiele angegeben: Eine Tabellenkomponente, mit der ein Benutzer Vorlagen für die Überschrift, die Zeilen und die Fußzeile einer Tabelle angeben kann Eine Listenkomponente, mit der ein Benutzer eine Vorlage für Renderelemente in einer Liste angeben kann
 
-`TableTemplate`-Komponente:
+Vorlagenparameter
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
-Bei der Verwendung einer Komponentenvorlage werden die Vorlagenparameter mithilfe eines untergeordneten Elements angegeben, das mit den Namen der Parameter übereinstimmt (`TableHeader` und `RowTemplate` im folgenden Beispiel):
+Eine Komponentenvorlage wird definiert, indem mindestens ein Komponentenparameter des Typs <xref:Microsoft.AspNetCore.Components.RenderFragment> oder <xref:Microsoft.AspNetCore.Components.RenderFragment%601> angegeben wird.
 
 ```razor
 <TableTemplate Items="pets">
@@ -53,11 +53,11 @@ Bei der Verwendung einer Komponentenvorlage werden die Vorlagenparameter mithilf
 ```
 
 > [!NOTE]
-> Generische Typeinschränkungen werden in einem zukünftigen Release unterstützt. Weitere Informationen finden Sie unter [Zulassen generischer Typeinschränkungen (dotnet/aspnetcore #8433)](https://github.com/dotnet/aspnetcore/issues/8433).
+> Ein Renderfragment stellt dabei ein Segment der Benutzeroberfläche dar, das gerendert werden soll. <xref:Microsoft.AspNetCore.Components.RenderFragment%601> akzeptiert einen Typparameter, der angegeben werden kann, wenn das Renderfragment aufgerufen wird.
 
-## <a name="template-context-parameters"></a>Vorlagenkontextparameter
+## <a name="template-context-parameters"></a>`TableTemplate`-Komponente:
 
-Komponentenargument des Typs `RenderFragment<T>`, die als Elemente übergeben werden, verfügen über einen impliziten Parameter namens `context` (beispielsweise `@context.PetId` im vorherigen Codebeispiel). Sie können den Parameternamen jedoch mithilfe des `Context`-Attributs für das untergeordnete Element ändern. Im folgenden Beispiel gibt das `RowTemplate`-Attribut des `Context`-Elements den `pet`-Parameter an:
+Bei der Verwendung einer Komponentenvorlage werden die Vorlagenparameter mithilfe eines untergeordneten Elements angegeben, das mit den Namen der Parameter übereinstimmt (`TableHeader` und `RowTemplate` im folgenden Beispiel): Generische Typeinschränkungen werden in einem zukünftigen Release unterstützt.
 
 ```razor
 <TableTemplate Items="pets">
@@ -72,7 +72,7 @@ Komponentenargument des Typs `RenderFragment<T>`, die als Elemente übergeben we
 </TableTemplate>
 ```
 
-Alternativ können Sie das `Context`-Attribut im Komponentenelement angeben. Das angegebene `Context`-Attribut gilt für alle angegebenen Vorlagenparameter. Dies ist hilfreich, wenn Sie den Inhaltsparametername für einen impliziten untergeordneten Inhalt angeben möchten, ohne das untergeordnete Elemente umschließen zu müssen. Im folgenden Beispiel wird das `Context`-Attribut auf dem `TableTemplate`-Element angezeigt und gilt für alle Vorlagenparameter:
+Weitere Informationen finden Sie unter [Zulassen generischer Typeinschränkungen (dotnet/aspnetcore #8433)](https://github.com/dotnet/aspnetcore/issues/8433). Vorlagenkontextparameter Komponentenargument des Typs <xref:Microsoft.AspNetCore.Components.RenderFragment%601>, die als Elemente übergeben werden, verfügen über einen impliziten Parameter namens `context` (beispielsweise `@context.PetId` im vorherigen Codebeispiel). Sie können den Parameternamen jedoch mithilfe des `Context`-Attributs für das untergeordnete Element ändern. Im folgenden Beispiel gibt das `Context`-Attribut des `RowTemplate`-Elements den `pet`-Parameter an:
 
 ```razor
 <TableTemplate Items="pets" Context="pet">
@@ -87,13 +87,13 @@ Alternativ können Sie das `Context`-Attribut im Komponentenelement angeben. Das
 </TableTemplate>
 ```
 
-## <a name="generic-typed-components"></a>Komponenten mit generischem Typ
+## <a name="generic-typed-components"></a>Alternativ können Sie das `Context`-Attribut im Komponentenelement angeben.
 
-Komponentenvorlagen haben oft einen generischen Typ. Eine generische `ListViewTemplate`-Komponenten kann beispielsweise verwendet werden, um `IEnumerable<T>`-Werte zu rendern. Verwenden Sie die [`@typeparam`](xref:mvc/views/razor#typeparam)-Direktive, um Typenparameter anzugeben, um eine generische Komponente zu definieren:
+Das angegebene `Context`-Attribut gilt für alle angegebenen Vorlagenparameter. Dies ist hilfreich, wenn Sie den Inhaltsparametername für einen impliziten untergeordneten Inhalt angeben möchten, ohne das untergeordnete Elemente umschließen zu müssen. Im folgenden Beispiel wird das `Context`-Attribut auf dem `TableTemplate`-Element angezeigt und gilt für alle Vorlagenparameter:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
-Bei der Verwendung einer Komponente mit generischem Typ, wird der Typparameter wenn möglich abgeleitet:
+Komponenten mit generischem Typ
 
 ```razor
 <ListViewTemplate Items="pets">
@@ -103,7 +103,7 @@ Bei der Verwendung einer Komponente mit generischem Typ, wird der Typparameter w
 </ListViewTemplate>
 ```
 
-Andernfalls muss der Typparameter explizit mithilfe eines Attributs angegeben werden, der mit dem Namen des Typparameters übereinstimmt. Im folgenden Beispiel wird der Typ von `TItem="Pet"` angegeben:
+Komponentenvorlagen haben oft einen generischen Typ. Eine generische `ListViewTemplate`-Komponenten kann beispielsweise verwendet werden, um `IEnumerable<T>`-Werte zu rendern.
 
 ```razor
 <ListViewTemplate Items="pets" TItem="Pet">
