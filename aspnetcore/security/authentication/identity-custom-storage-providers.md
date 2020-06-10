@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106584"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652990"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Benutzerdefinierte Speicher Anbieter für ASP.net CoreIdentity
 
@@ -25,7 +25,7 @@ Von [Steve Smith](https://ardalis.com/)
 
 ASP.net Core Identity ist ein erweiterbares System, mit dem Sie einen benutzerdefinierten Speicher Anbieter erstellen und mit Ihrer APP verbinden können. In diesem Thema wird beschrieben, wie ein angepasster Speicher Anbieter für ASP.net Core erstellt wird Identity . Es behandelt die wichtigsten Konzepte zum Erstellen eines eigenen Speicher Anbieters, aber keine schrittweise exemplarische Vorgehensweise.
 
-[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample).
+[Beispiel anzeigen oder von GitHub herunterladen](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
 
 ## <a name="introduction"></a>Einführung
 

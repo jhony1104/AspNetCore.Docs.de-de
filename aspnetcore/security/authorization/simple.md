@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84272124"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652948"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Einfache Autorisierung in ASP.net Core
 
@@ -79,3 +79,24 @@ Dies erlaubt nur authentifizierte Benutzer, `AccountController` außer bei der `
 
 > [!WARNING]
 > `[AllowAnonymous]`umgeht alle Autorisierungs Anweisungen. Wenn Sie `[AllowAnonymous]` und ein beliebiges Attribut kombinieren `[Authorize]` , `[Authorize]` werden die Attribute ignoriert. Wenn Sie z. b `[AllowAnonymous]` . auf Controller Ebene anwenden, werden alle `[Authorize]` Attribute auf dem gleichen Controller (oder in einer beliebigen Aktion) ignoriert.
+
+<a name="aarp"></a>
+
+## <a name="authorize-attribute-and-razor-pages"></a>Autorisieren von Attributen und Razor Seiten
+
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Kann ***nicht*** auf Razor Seiten Handler angewendet werden. `[Authorize]`Kann z. b. nicht auf `OnGet` , `OnPost` oder einen anderen Seiten Handler angewendet werden.
+
+Die folgenden zwei Ansätze können verwendet werden, um die Autorisierung auf Razor seitenhandlermethoden anzuwenden:
+
+* Verwenden Sie separate Seiten für Seiten Handler, die eine unterschiedliche Autorisierung erfordern. Freigegebenen Inhalt in eine oder mehrere [Teilansichten](xref:mvc/views/partial)verschoben. Wenn möglich, ist dies die empfohlene Vorgehensweise.
+* Für Inhalte, die eine gemeinsame Seite freigeben müssen, schreiben Sie einen Filter, der eine Autorisierung als Teil von [iasyncpagefilter. onpagehandlerselectionasync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)ausführt. Das [pagehandlerauth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) -GitHub-Projekt veranschaulicht diesen Ansatz:
+  * Der Autorisierungs Filter wird von " [autorisierungshandlerfilter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizePageHandlerFilter.cs) " implementiert:[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]
+
+  * Das Attribut [[Autorität Page Handler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16) wird auf den `OnGet` Seiten Handler angewendet:[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]
+
+> [!WARNING]
+> Der [pagehandlerauth](https://github.com/pranavkm/PageHandlerAuth) -Beispiel Ansatz ist ***nicht***:
+> * Verfassen Sie mit Autorisierungs Attributen, die auf die Seite, das Seiten Modell oder Global angewendet werden. Das Verfassen von Autorisierungs Attributen führt dazu, dass die Authentifizierung und Autorisierung mehrmals durchgeführt `AuthorizeAttribute` wird, wenn eine oder mehrere `AuthorizeFilter` Instanzen auch auf die Seite angewendet werden.
+> * Arbeiten Sie in Verbindung mit dem Rest ASP.net Core Authentifizierungs-und Autorisierungssystem. Sie müssen überprüfen, ob dieser Ansatz für Ihre Anwendung ordnungsgemäß funktioniert.
+
+Es ist nicht geplant, den `AuthorizeAttribute` auf Razor Seiten Handlern zu unterstützen. 
