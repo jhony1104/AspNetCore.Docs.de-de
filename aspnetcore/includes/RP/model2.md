@@ -1,5 +1,9 @@
 <a name="dc"></a>
 
+### <a name="add-nuget-packages-and-ef-tools"></a>Hinzufügen von NuGet-Paketen und EF-Tools
+
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
 ### <a name="add-a-database-context-class"></a>Hinzufügen einer Datenbankkontext-Klasse
 
 Erstellen Sie im RazorPagesMovie-Projekt einen neuen Ordner namens *Data*. Fügen Sie dem Ordner *Data* (Daten) die folgende `RazorPagesMovieContext`-Klasse hinzu:
@@ -17,10 +21,6 @@ Fügen Sie zur Datei *appsettings.json* wie im folgenden hervorgehobenen Code da
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
-
-### <a name="add-nuget-packages-and-ef-tools"></a>Hinzufügen von NuGet-Paketen und EF-Tools
-
-[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 <a name="reg"></a>
 

@@ -1,12 +1,24 @@
 ---
-title: 'ASP.NET Core-Blazor-Vorlagen' author: description: 'Hier erfahren Sie mehr über ASP.NET Core-Blazor-Apps-Vorlagen und Blazor-Projektstruktur.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core-Blazor-Vorlagen
+author: guardrex
+description: Hier erfahren Sie mehr über ASP.NET Core-Vorlagen für Blazor-Apps und die Blazor-Projektstruktur.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/templates
+ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105531"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core-Blazor-Vorlagen
 

@@ -1,12 +1,24 @@
 ---
-title: „Blazor-Layouts in ASP.NET Core“ Autor: Beschreibung: Erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für Blazor-Apps erstellen.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Blazor-Layouts in ASP.NET Core
+author: guardrex
+description: In diesem Artikel erfahren Sie, wie Sie wiederverwendbare Layoutkomponenten für Blazor-Apps erstellen.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/layouts
+ms.openlocfilehash: ba172282d0cd6371ebc94b4fda1c13aee14d6fbd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851991"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Blazor-Layouts in ASP.NET Core
 
