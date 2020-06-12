@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Blazor Server für zusätzliche Sicherheitssz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/04/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: f172df7f2333fd79ba175ec8a3a6925ec07f1113
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 159d418a78caa3954294ad0a1067654d895147f7
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851524"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679669"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorZusätzliche Sicherheitsszenarien für ASP.net Core Server
 
@@ -28,7 +28,7 @@ Von [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Token, die außerhalb der Razor Komponenten in einer Blazor Server-app verfügbar sind, können mit dem in diesem Abschnitt beschriebenen Ansatz an Komponenten weitergegeben werden. Beispielcode, einschließlich eines umfassenden `Startup.ConfigureServices` Beispiels, finden Sie unter [übergeben von Token an eine serverseitige Blazor Anwendung](https://github.com/javiercn/blazor-server-aad-sample).
 
-Authentifizieren Blazor Sie die Server-APP wie bei einer regulären Razor Seite oder MVC-app. Stellen Sie die Token für das Authentifizierungs Cookie bereit, und speichern Sie Sie. Beispiel:
+Authentifizieren Blazor Sie die Server-APP wie bei einer regulären Razor Seite oder MVC-app. Stellen Sie die Token für das Authentifizierungs Cookie bereit, und speichern Sie Sie. Zum Beispiel:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -148,6 +148,18 @@ public class WeatherForecastService
 }
 ```
 
+## <a name="set-the-authentication-scheme"></a>Festlegen des Authentifizierungs Schemas
+
+Für eine APP, die mehr als eine Authentifizierungs Middleware verwendet und daher mehr als ein Authentifizierungsschema aufweist, kann das Schema, das Blazor verwendet, explizit in der Endpunkt Konfiguration von festgelegt werden `Startup.Configure` . Im folgenden Beispiel wird das Azure Active Directory Schema festgelegt:
+
+```csharp
+endpoints.MapBlazorHub().RequireAuthorization(
+    new AuthorizeAttribute 
+    {
+        AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
+    });
+```
+
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Verwenden von Open ID Connect (oidc) v 2.0-Endpunkten
 
 In der Authentifizierungs Bibliothek und in den Vorlagen werden die Blazor Endpunkte von Open ID Connect (oidc) v 1.0 verwendet. Um einen v 2.0-Endpunkt zu verwenden, konfigurieren Sie die- <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> Option in der <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
@@ -160,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-Alternativ kann die Einstellung in der APP-Einstellungsdatei (*appSettings. JSON*) vorgenommen werden:
+Alternativ kann die Einstellung in der APP-Einstellungsdatei (*appsettings.json*) vorgenommen werden:
 
 ```json
 {
