@@ -1,7 +1,7 @@
 ---
 title: Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 author: blowdart
-description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net Core für IIS und http. sys konfigurieren.
+description: Erfahren Sie, wie Sie die Zertifikat Authentifizierung in ASP.net Core für IIS und HTTP.sys konfigurieren.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454609"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724249"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurieren der Zertifikat Authentifizierung in ASP.net Core
 
@@ -557,3 +557,36 @@ namespace AspNetCoreCertificateAuthApi
     }
 }
 ```
+
+<a name="occ"></a>
+
+## <a name="optional-client-certificates"></a>Optionale Client Zertifikate
+
+Dieser Abschnitt enthält Informationen für apps, die eine Teilmenge der APP mit einem Zertifikat schützen müssen. Beispielsweise sind für eine Razor Seite oder einen Controller in der APP möglicherweise Client Zertifikate erforderlich. Dies stellt Herausforderungen als Client Zertifikate dar:
+  
+* Ist eine TLS-Funktion und keine HTTP-Funktion.
+* Werden pro Verbindung ausgehandelt und müssen zu Beginn der Verbindung ausgehandelt werden, bevor HTTP-Daten verfügbar sind. Zu Beginn der Verbindung ist nur die Servernamensanzeige (SNI) &dagger; bekannt. Die Client-und Server Zertifikate werden vor der ersten Anforderung einer Verbindung ausgehandelt, und Anforderungen können in der Regel nicht erneut verhandelt werden. Die erneute Aushandlung ist in http/2 unzulässig.
+
+ASP.net Core 5 Preview 4 und höher bietet eine bequeme Unterstützung für optionale Client Zertifikate. Weitere Informationen finden Sie im [Beispiel optionale Zertifikate](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+
+Der folgende Ansatz unterstützt optionale Client Zertifikate:
+
+* Richten Sie eine Bindung für die Domäne und die Unterdomäne ein:
+  * Richten Sie z. b. Bindungen für `contoso.com` und ein `myClient.contoso.com` . Für den `contoso.com` Host ist kein Client Zertifikat erforderlich `myClient.contoso.com` .
+  * Weitere Informationen finden Sie in folgenden Quellen:
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * Hinweis Kestrel unterstützt derzeit nicht mehrere TLS-Konfigurationen für eine Bindung. Sie benötigen zwei Bindungen mit eindeutigen IPS oder Ports. Siehe https://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [Hosting von IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [Konfigurieren der Sicherheit für IIS](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Konfigurieren von Windows Server](xref:fundamentals/servers/httpsys#configure-windows-server)
+* Für Anforderungen an die Web-App, für die ein Client Zertifikat erforderlich ist und keines vorhanden ist:
+  * Leiten Sie mithilfe der geschützten Unterdomäne des Client Zertifikats eine Umleitung zur gleichen Seite ein.
+  * Beispielsweise können Sie zu umleiten `myClient.contoso.com/requestedPage` . Da es sich bei der Anforderung an um `myClient.contoso.com/requestedPage` einen anderen Hostnamen als handelt `contoso.com/requestedPage` , stellt der Client eine andere Verbindung her, und das Client Zertifikat wird bereitgestellt.
+  * Weitere Informationen finden Sie unter <xref:security/authorization/introduction>.
+
+In [diesem GitHub-Diskussions](https://github.com/dotnet/AspNetCore.Docs/issues/18720) Problem können Sie Fragen, Kommentare und anderes Feedback zu optionalen Client Zertifikaten hinterlassen.
+
+&dagger;Servernamensanzeige (SNI) ist eine TLS-Erweiterung zum Einbeziehen einer virtuellen Domäne als Teil der SSL-Aushandlung. Dies bedeutet, dass der virtuelle Domänen Name oder ein Hostname zur Identifizierung des Netzwerk Endpunkts verwendet werden kann.

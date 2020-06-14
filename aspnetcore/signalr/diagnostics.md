@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Diagnoseinformationen aus Ihrer ASP.net Core-
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
-ms.date: 06/08/2020
+ms.date: 06/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507315"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755962"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net CoreSignalR
 
@@ -38,7 +38,7 @@ SignalRverwendet zwei Kategorien von Kategorien:
 * `Microsoft.AspNetCore.SignalR`: Bei Protokollen im Zusammenhang mit hubprotokollen, beim Aktivieren von Hubs, beim Aufrufen von Methoden und anderen hubbezogenen Aktivitäten.
 * `Microsoft.AspNetCore.Http.Connections`: Bei Protokollen, die sich auf Transporte beziehen, wie z. b. websockets, langes abrufen, vom Server gesendete Ereignisse und Low-Level- SignalR Infrastrukturen.
 
-Um ausführliche Protokolle von zu aktivieren SignalR , konfigurieren Sie beide vorangehenden Präfixe für die `Debug` Ebene in der Datei *appSettings. JSON* , indem Sie die folgenden Elemente zum `LogLevel` unter Abschnitt in hinzufügen `Logging` :
+Wenn Sie ausführliche Protokolle von aktivieren möchten SignalR , konfigurieren Sie beide vorangehenden Präfixe für die `Debug` Ebene in Ihrer *appsettings.js* Datei, indem Sie dem `LogLevel` unter Abschnitt in die folgenden Elemente hinzufügen `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -110,6 +110,8 @@ Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden m�
 > Clientseitige Protokolle enthalten möglicherweise vertrauliche Daten aus Ihrer App. Veröffentlichten Sie deshalb **niemals** Protokolle von Produktions-Apps auf öffentlichen Foren wie GitHub.
 
 Um Protokolle vom .NET-Client zu erhalten, können Sie die- `ConfigureLogging` Methode für verwenden `HubConnectionBuilder` . Dies funktioniert genauso wie die `ConfigureLogging` -Methode in `WebHostBuilder` und `HostBuilder` . Sie können die gleichen Protokollierungs Anbieter konfigurieren, die Sie in ASP.net Core verwenden. Allerdings müssen Sie die nuget-Pakete für die einzelnen Protokollierungs Anbieter manuell installieren und aktivieren.
+
+Informationen zum Hinzufügen der .NET-Client Protokollierung zu einer Blazor Webassembly-App finden Sie unter <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging>
 
 ### <a name="console-logging"></a>Konsolenprotokollierung
 

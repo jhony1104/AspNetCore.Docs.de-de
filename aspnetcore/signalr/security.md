@@ -1,7 +1,7 @@
 ---
 title: Sicherheitsüberlegungen in ASP.net CoreSignalR
 author: bradygaster
-description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in ASP.net Core SignalRverwenden.
+description: Erfahren Sie, wie Sie die Authentifizierung und Autorisierung in ASP.net Core verwenden SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
@@ -13,32 +13,32 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 2b049d9d8131c6c95b2f768620c984d0f67f92cc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b80ece8c74c0f1d4d8518f0da16a91db9687336c
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775322"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755886"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>Sicherheitsüberlegungen in ASP.net CoreSignalR
 
 Von [Andrew Stanton-Nurse](https://twitter.com/anurse)
 
-Dieser Artikel enthält Informationen zum Sichern SignalRvon.
+Dieser Artikel enthält Informationen zum Sichern von SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Cross-Origin Resource Sharing
 
-[Cross-Origin Resource Sharing (cors)](https://www.w3.org/TR/cors/) kann verwendet werden, um Ursprungs SignalR übergreifende Verbindungen im Browser zuzulassen. Wenn JavaScript-Code in einer anderen Domäne als der SignalR App gehostet wird, muss [cors-Middleware](xref:security/cors) aktiviert werden, damit JavaScript eine Verbindung mit SignalR der App herstellen kann. Lassen Sie Ursprungs übergreifende Anforderungen nur von vertrauenswürdigen Domänen zu. Beispiel:
+[Cross-Origin Resource Sharing (cors)](https://www.w3.org/TR/cors/) kann verwendet werden, um Ursprungs übergreifende SignalR Verbindungen im Browser zuzulassen. Wenn JavaScript-Code in einer anderen Domäne als der APP gehostet wird SignalR , muss [cors-Middleware](xref:security/cors) aktiviert werden, damit JavaScript eine Verbindung mit der App herstellen kann SignalR . Lassen Sie Ursprungs übergreifende Anforderungen nur von vertrauenswürdigen Domänen zu. Beispiel:
 
 * Ihre Website wird gehostet auf`http://www.example.com`
-* Ihre SignalR APP wird gehostet auf`http://signalr.example.com`
+* Ihre SignalR App wird gehostet auf`http://signalr.example.com`
 
-Cors sollte in der SignalR APP so konfiguriert werden, dass Sie nur `www.example.com`den Ursprung zulässt.
+Cors sollte in der APP so konfiguriert werden SignalR , dass Sie nur den Ursprung zulässt `www.example.com` .
 
 Weitere Informationen zum Konfigurieren von cors finden Sie unter [Aktivieren von Cross-Origin-Anforderungen (cors)](xref:security/cors). SignalR**erfordert** die folgenden cors-Richtlinien:
 
 * Hiermit werden bestimmte erwartete Ursprünge zugelassen. Es ist möglich, einen beliebigen Ursprung zuzulassen, aber er ist **nicht** sicher oder wird empfohlen.
-* HTTP- `GET` Methoden `POST` und müssen zulässig sein.
+* HTTP `GET` -Methoden und `POST` müssen zulässig sein.
 * Anmelde Informationen müssen zulässig sein, damit cookiebasierte persistente Sitzungen ordnungsgemäß funktionieren. Sie müssen auch dann aktiviert werden, wenn die Authentifizierung nicht verwendet wird.
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -48,7 +48,7 @@ Die Option, Anmelde Informationen nicht zu verwenden, sollte nur verwendet werde
 
 ::: moniker-end
 
-Mit der folgenden cors-Richtlinie kann Beispiels SignalR Weise ein auf gehosteter `https://example.com` Browser Client SignalR auf die auf `https://signalr.example.com`gehostete App zugreifen:
+Mit der folgenden cors-Richtlinie kann beispielsweise ein auf SignalR gehosteter Browser Client auf `https://example.com` die SignalR auf gehostete App zugreifen `https://signalr.example.com` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -71,7 +71,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     app.UseEndpoints(endpoints =>
     {
-        endpoints.MapHub<ChatHub>("/chatHub");
+        endpoints.MapHub<ChatHub>("/chathub");
     });
 
     // ... other middleware ...
@@ -103,7 +103,7 @@ Der von CORS erzeugte Schutz gilt nicht für WebSockets. Für Browser gilt Folge
 
 Allerdings senden Browser den `Origin`-Header, wenn die WebSocket-Anforderungen ausgegeben werden. Anwendungen sollten zur Überprüfung dieser Header konfiguriert werden, um sicherzustellen, dass nur WebSockets von den erwarteten Ursprüngen zulässig sind.
 
-In ASP.net Core 2,1 und höher kann die Header Validierung mithilfe einer benutzerdefinierten Middleware **vor `UseSignalR`und der Authentifizierungs Middleware** in `Configure`erreicht werden:
+In ASP.net Core 2,1 und höher kann die Header Validierung mithilfe einer benutzerdefinierten Middleware **vor und der `UseSignalR` Authentifizierungs Middleware** in erreicht werden `Configure` :
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
@@ -114,22 +114,22 @@ In ASP.net Core 2,1 und höher kann die Header Validierung mithilfe einer benutz
 
 ## <a name="connectionid"></a>ConnectionId
 
-Das `ConnectionId` verfügbar machen von kann zu böswilligem Identitäts SignalR Wechsel führen, wenn die Server-oder Client Version ASP.net Core 2,2 oder früher ist. Wenn die SignalR Server-und die Client Version ASP.net Core 3,0 oder höher sind `ConnectionToken` , muss anstelle `ConnectionId` des geheim gehalten werden. Der `ConnectionToken` wird absichtlich nicht in einer API verfügbar gemacht.  Es kann schwierig sein, sicherzustellen, SignalR dass ältere Clients keine Verbindung mit dem Server herstellen. selbst SignalR Wenn Ihre Server Version ASP.net Core 3,0 oder höher ist `ConnectionId` , sollte der nicht verfügbar gemacht werden.
+Das verfügbar machen `ConnectionId` von kann zu böswilligem Identitätswechsel führen, wenn die SignalR Server-oder Client Version ASP.net Core 2,2 oder früher ist. Wenn die SignalR Server-und die Client Version ASP.net Core 3,0 oder höher sind, `ConnectionToken` muss anstelle des `ConnectionId` geheim gehalten werden. Der `ConnectionToken` wird absichtlich nicht in einer API verfügbar gemacht.  Es kann schwierig sein, sicherzustellen, dass ältere SignalR Clients keine Verbindung mit dem Server herstellen. selbst wenn Ihre SignalR Server Version ASP.net Core 3,0 oder höher ist, sollte der nicht verfügbar gemacht `ConnectionId` werden.
 
 ## <a name="access-token-logging"></a>Protokollierung von Zugriffs Token
 
-Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im allgemeinen `Authorization` sicher, wenn der Standard Header verwendet wird. Verwenden Sie immer HTTPS, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Beispiel:
+Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im Allgemeinen sicher, wenn der Standard Header verwendet wird `Authorization` . Verwenden Sie immer HTTPS, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Beispiel:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
-      Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
+      Request starting HTTP/1.1 GET http://localhost:5000/chathub?access_token=1234
 ```
 
-Wenn Sie Bedenken haben, dass Sie diese Daten mit ihren Serverprotokollen protokollieren möchten, können Sie diese Protokollierung `Microsoft.AspNetCore.Hosting` vollständig deaktivieren `Warning` , indem Sie die Protokollierung auf die Ebene `Info` oder höher konfigurieren (diese Nachrichten werden auf der Ebene geschrieben). Weitere Informationen finden Sie unter [Protokollfilterung](xref:fundamentals/logging/index#log-filtering) . Wenn Sie trotzdem bestimmte Anforderungs Informationen protokollieren möchten, können Sie [eine Middleware schreiben](xref:fundamentals/middleware/write) , um die benötigten Daten zu protokollieren und den `access_token` Wert der Abfrage Zeichenfolge (sofern vorhanden) herauszufiltern.
+Wenn Sie Bedenken haben, dass Sie diese Daten mit ihren Serverprotokollen protokollieren möchten, können Sie diese Protokollierung vollständig deaktivieren, indem Sie die Protokollierung `Microsoft.AspNetCore.Hosting` auf die `Warning` Ebene oder höher konfigurieren (diese Nachrichten werden auf der `Info` Ebene geschrieben). Weitere Informationen finden Sie unter [Protokollfilterung](xref:fundamentals/logging/index#log-filtering) . Wenn Sie trotzdem bestimmte Anforderungs Informationen protokollieren möchten, können Sie [eine Middleware schreiben](xref:fundamentals/middleware/write) , um die benötigten Daten zu protokollieren und den `access_token` Wert der Abfrage Zeichenfolge (sofern vorhanden) herauszufiltern.
 
 ## <a name="exceptions"></a>Ausnahmen
 
-Ausnahme Meldungen werden im Allgemeinen als sensible Daten betrachtet, die für einen Client nicht offengelegt werden sollen. Standardmäßig sendet SignalR nicht die Details einer Ausnahme, die von einer Hub-Methode ausgelöst wird, an den Client. Stattdessen empfängt der Client eine generische Meldung, die angibt, dass ein Fehler aufgetreten ist. Die Übermittlung von Ausnahme Meldungen an den Client kann überschrieben werden (z. b. in "Entwicklung" oder "Test") mit [enabledetailederrors](xref:signalr/configuration#configure-server-options). Ausnahme Meldungen sollten in Produktions-apps nicht für den Client verfügbar gemacht werden.
+Ausnahmemeldungen werden generell als vertrauliche Daten angesehen, die nicht für einen Client offengelegt werden dürfen. Standardmäßig SignalR sendet nicht die Details einer Ausnahme, die von einer Hub-Methode ausgelöst wird, an den Client. Stattdessen erhält der Client eine generische Nachricht, die angibt, dass ein Fehler aufgetreten ist. Die Übermittlung von Ausnahme Meldungen an den Client kann überschrieben werden (z. b. in "Entwicklung" oder "Test") mit [enabledetailederrors](xref:signalr/configuration#configure-server-options). Ausnahme Meldungen sollten in Produktions-apps nicht für den Client verfügbar gemacht werden.
 
 ## <a name="buffer-management"></a>Pufferverwaltung
 
@@ -143,9 +143,9 @@ Wenn die Nachrichten größer als 32 KB sind, können Sie den Grenzwert erhöhen
 * Der-Client kann bewirken, dass der Server große Speicherpuffer zuweist.
 * Die Server Zuordnung großer Puffer verringert möglicherweise die Anzahl der gleichzeitigen Verbindungen.
 
-Es gibt Grenzwerte für eingehende und ausgehende Nachrichten. beide können für das [httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) - `MapHub`Objekt konfiguriert werden, das in konfiguriert ist:
+Es gibt Grenzwerte für eingehende und ausgehende Nachrichten. beide können für das [httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) -Objekt konfiguriert werden, das in konfiguriert ist `MapHub` :
 
 * `ApplicationMaxBufferSize`stellt die maximale Anzahl von Bytes vom Client dar, die der Server puffert. Wenn der Client versucht, eine Nachricht zu senden, die über diesen Grenzwert hinausgeht, wird die Verbindung möglicherweise geschlossen.
 * `TransportMaxBufferSize`stellt die maximale Anzahl von Bytes dar, die vom Server gesendet werden können. Wenn der Server versucht, eine Nachricht (einschließlich Rückgabewerte von hubmethoden) zu senden, die größer als dieser Grenzwert ist, wird eine Ausnahme ausgelöst.
 
-Durch Festlegen des Limits `0` auf wird der Grenzwert deaktiviert. Durch das Entfernen des Limits kann ein Client eine beliebige Größe einer Nachricht senden. Böswillige Clients, die große Nachrichten senden, können dazu führen, dass mehr Speicherplatz zugewiesen Durch eine übermäßige Speicherauslastung kann die Anzahl gleichzeitiger Verbindungen erheblich reduziert werden.
+Durch Festlegen des Limits auf wird `0` der Grenzwert deaktiviert. Durch das Entfernen des Limits kann ein Client eine beliebige Größe einer Nachricht senden. Böswillige Clients, die große Nachrichten senden, können dazu führen, dass mehr Speicherplatz zugewiesen Durch eine übermäßige Speicherauslastung kann die Anzahl gleichzeitiger Verbindungen erheblich reduziert werden.

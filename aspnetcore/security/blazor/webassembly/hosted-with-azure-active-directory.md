@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 9e76b300c159a2a1432aa4b1c6e47b3d91084a85
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 5c73b5e5416956e2f6996e5692100e8c02a25cbf
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84215102"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724327"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sichern einer ASP.net Core Blazor Webassembly-gehosteten App mit Azure Active Directory
 
@@ -40,7 +40,7 @@ Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung m
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Server Aad**).
 1. Wählen Sie einen **unterstützten Kontotyp**aus. Für diese Vorgehens Art können Sie **nur Konten in diesem Organisations Verzeichnis** auswählen (einzelner Mandant).
 1. Für die *Server-API-APP* ist in diesem Szenario kein **Umleitungs-URI** erforderlich. lassen Sie die Dropdown-Datei also auf **Web** festgelegt und geben Sie keinen Umleitungs-URI
-1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .
+1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Zustimmung für OpenID und offline_access Berechtigungen gewähren** .
 1. Wählen Sie **Registrieren**.
 
 Notieren Sie sich die folgenden Informationen:
@@ -74,7 +74,7 @@ Befolgen Sie die Anleitungen unter [Schnellstart: Registrieren einer Anwendung m
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor Client Aad**).
 1. Wählen Sie einen **unterstützten Kontotyp**aus. Für diese Vorgehens Art können Sie **nur Konten in diesem Organisations Verzeichnis** auswählen (einzelner Mandant).
 1. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web** fest, und geben Sie folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Wenn die APP auf einem anderen Kestrel-Port ausgeführt wird, verwenden Sie den Port der app. Für IIS Express befindet sich der zufällig generierte Port für die app in den Eigenschaften der Server-App im **Debug** -Panel. Da die APP zu diesem Zeitpunkt noch nicht vorhanden ist und der IIS Express Port nicht bekannt ist, kehren Sie zu diesem Schritt zurück, nachdem die App erstellt wurde, und aktualisieren Sie den Umleitungs-URI. Eine Anmerkung wird im Abschnitt [Erstellen der APP](#create-the-app) angezeigt, um IIS Express Benutzer daran zu erinnern, den Umleitungs-URI zu aktualisieren.
-1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .
+1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Zustimmung für OpenID und offline_access Berechtigungen gewähren** .
 1. Wählen Sie **Registrieren**.
 
 Notieren Sie sich die Anwendungs-ID der *Client-App* (Client-ID) (z `33333333-3333-3333-3333-333333333333` . b.).
@@ -94,7 +94,7 @@ In **API-Berechtigungen**:
 1. Öffnen Sie die **API** -Liste.
 1. Aktivieren Sie den Zugriff auf die API (z `API.Access` . b.).
 1. Wählen Sie **Berechtigungen hinzufügen** aus.
-1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie zum Bestätigen auf **Ja**.
+1. Wählen Sie die Schaltfläche **Administrator Inhalt für {TENANT Name} erteilen aus** . Klicken Sie auf **Ja**, um zu bestätigen.
 
 ### <a name="create-the-app"></a>Erstellen der App
 
@@ -168,7 +168,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="app-settings"></a>App-Einstellungen
 
-Die Datei *appSettings. JSON* enthält die Optionen zum Konfigurieren des JWT-bearerhandlers, der zum Überprüfen von Zugriffs Token verwendet wird:
+Die *appsettings.json* -Datei enthält die Optionen zum Konfigurieren des JWT-bearerhandlers zum Überprüfen von Zugriffs Token:
 
 ```json
 {
@@ -261,7 +261,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 Die- <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer APP erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können aus der Aad-Konfiguration des Azure-Portals abgerufen werden, wenn Sie die APP registrieren.
 
-Die Konfiguration wird von der Datei " *wwwroot/appSettings. JSON* " bereitgestellt:
+Die Konfiguration wird durch die Datei *wwwroot/appsettings.jsin* der Datei bereitgestellt:
 
 ```json
 {

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 116e5d27e7585e9168db433480c3a5e9d08379f3
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454666"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724288"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identity in ASP.net Core Projekten
 
@@ -195,7 +195,7 @@ Token können an-Komponenten übermittelt werden:
 * Wenn Authentifizierungs Token bereitgestellt und im Authentifizierungs Cookie gespeichert werden, können Sie an-Komponenten übermittelt werden.
 * RazorKomponenten können nicht `HttpContext` direkt verwenden. Daher gibt es keine Möglichkeit, ein [Anti-Request-fälschungstoken (XSRF)](xref:security/anti-request-forgery) zu erhalten, um an Identity den Abmelde Endpunkt in bereitzustellen `/Identity/Account/Logout` . Ein XSRF-Token kann an-Komponenten übermittelt werden.
 
-Weitere Informationen finden Sie unter <xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app>.
+Weitere Informationen finden Sie unter <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 Stellen Sie in der Datei *pages/_Host. cshtml* das Token her, nachdem Sie es der `InitialApplicationState` -Klasse und der-Klasse hinzugefügt haben `TokenProvider` :
 
@@ -229,7 +229,7 @@ Der `TokenProvider` im Thema gezeigte Dienst wird in der `LoginDisplay` Komponen
 In der- `Startup` Klasse:
 
 * Vergewissern Sie sich, dass Razor Seiten Dienste in hinzugefügt wurden `Startup.ConfigureServices` .
-* Wenn Sie den-Registrierungs [Anbieter](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app)verwenden, registrieren Sie den Dienst.
+* Wenn Sie den-Registrierungs [Anbieter](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)verwenden, registrieren Sie den Dienst.
 * Ruft `UseDatabaseErrorPage` für den Anwendungs-Generator in `Startup.Configure` für die Entwicklungsumgebung auf.
 * `UseAuthentication`Und `UseAuthorization` nach `UseRouting` .
 * Fügen Sie einen Endpunkt für Razor Seiten hinzu.
@@ -253,7 +253,7 @@ Fügen Sie `RedirectToLogin` dem frei *gegebenen* Ordner der APP im Projektstamm
 }
 ```
 
-Fügen Sie `LoginDisplay` dem frei *gegebenen* Ordner der App eine Komponente (*logindisplay. Razor*) hinzu. Der [TokenProvider-Dienst](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app) stellt das XSRF-Token für das HTML-Formular bereit, das in den Identity Abmelde-Endpunkt von Beiträgen sendet:
+Fügen Sie `LoginDisplay` dem frei *gegebenen* Ordner der App eine Komponente (*logindisplay. Razor*) hinzu. Der [TokenProvider-Dienst](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) stellt das XSRF-Token für das HTML-Formular bereit, das in den Identity Abmelde-Endpunkt von Beiträgen sendet:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -398,7 +398,9 @@ cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
 -->
-## <a name="disable-register-page"></a>Registerseite deaktivieren
+## <a name="disable-a-page"></a>Seite deaktivieren
+
+In diesem Abschnitt wird gezeigt, wie Sie die Registerseite deaktivieren, aber der Ansatz kann verwendet werden, um eine beliebige Seite zu deaktivieren.
 
 So deaktivieren Sie die Benutzerregistrierung:
 
@@ -418,13 +420,13 @@ So deaktivieren Sie die Benutzerregistrierung:
 
 * Kommentieren Sie den Registrierungs Link aus *Bereichen/ Identity /pages/Account/Login.cshtml* aus, oder entfernen Sie ihn.
 
-```cshtml
-@*
-<p>
-    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-</p>
-*@
-```
+  ```cshtml
+  @*
+  <p>
+      <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+  </p>
+  *@
+  ```
 
 * Aktualisieren Sie die Seite " *Bereiche/ Identity /pages/Account/RegisterConfirmation* ".
 
@@ -482,7 +484,7 @@ Anwendungen, die **keine** -Authentifizierung einschließen, können das Gerüst
 
 Obwohl das Gerüst den größten Teil des notwendigen Codes generiert, müssen Sie das Projekt aktualisieren, um den Vorgang abzuschließen. In diesem Dokument werden die erforderlichen Schritte zum Durchführen eines Identity Gerüstbau Updates erläutert.
 
-Wenn das Identity Gerüst ausgeführt wird, wird im Projektverzeichnis eine Datei mit *gerüdodingreadme. txt* erstellt. Die Datei " *gerüstoldingreadme. txt* " enthält allgemeine Anweisungen dazu, was zum Abschluss des Identity Gerüstbau Updates erforderlich ist. Dieses Dokument enthält ausführlichere Anweisungen als die Datei " *Gerüst-dingreadme. txt* ".
+Wenn das Identity Gerüst ausgeführt wird, wird eine *ScaffoldingReadme.txt* -Datei im Projektverzeichnis erstellt. Die *ScaffoldingReadme.txt* -Datei enthält allgemeine Anweisungen dazu, was erforderlich ist, um das Identity Gerüstbau Update abzuschließen. Dieses Dokument enthält ausführlichere Anweisungen als die *ScaffoldingReadme.txt* Datei.
 
 Wir empfehlen die Verwendung eines Quell Code Verwaltungssystems, das Datei Unterschiede anzeigt und es Ihnen ermöglicht, Änderungen zurückzusetzen. Überprüfen Sie die Änderungen, nachdem Sie das Gerüst ausgeführt haben Identity .
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: e4c49f899d5988dc42b16c16eb5114613c7204ba
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 113a0aaba89b90922a9ccd58da13aabeecec0081
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83852337"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724314"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sichern einer ASP.net Core Blazor eigenständigen Webassembly-App mit Microsoft-Konten
 
@@ -33,7 +33,7 @@ Registrieren Sie eine Aad-App im **Azure Active Directory**  >  **App-Registrier
 1. Geben Sie einen **Namen** für die APP an (z. b. ** Blazor eigenständige Aad-Microsoft-Konten**).
 1. Wählen Sie **unter Unterstützte Konto Typen**die Option **Konten in einem beliebigen Organisations Verzeichnis**aus.
 1. Lassen Sie die Dropdown-Einstellung für **Umleitungs-URI** auf **Web** fest, und geben Sie folgenden Umleitungs-URI `https://localhost:{PORT}/authentication/login-callback` Der Standardport für eine APP, die auf Kestrel ausgeführt wird, ist 5001. Wenn die APP auf einem anderen Kestrel-Port ausgeführt wird, verwenden Sie den Port der app. Für IIS Express befindet sich der zufällig generierte Port für die app in den Eigenschaften der APP im **Debug** -Panel. Da die APP zu diesem Zeitpunkt noch nicht vorhanden ist und der IIS Express Port nicht bekannt ist, kehren Sie zu diesem Schritt zurück, nachdem die App erstellt wurde, und aktualisieren Sie den Umleitungs-URI. Eine Anmerkung wird später in diesem Thema angezeigt, um IIS Express Benutzer daran zu erinnern, den Umleitungs-URI zu aktualisieren.
-1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Berechtigungen für OpenID und offline_access Berechtigungen gewähren** .
+1. Deaktivieren Sie **das**  >  Kontrollkästchen**Administrator Zustimmung für OpenID und offline_access Berechtigungen gewähren** .
 1. Wählen Sie **Registrieren**.
 
 Notieren Sie sich die Anwendungs-ID (Client-ID) (z `11111111-1111-1111-1111-111111111111` . b.).
@@ -63,7 +63,7 @@ Um den Ausgabe Speicherort anzugeben, der einen Projektordner erstellt, wenn er 
 Nachdem Sie die App erstellt haben, sollten Sie folgende Aktionen ausführen können:
 
 * Melden Sie sich mit einem Microsoft-Konto bei der APP an.
-* Anfordern von Zugriffs Token für Microsoft-APIs. Weitere Informationen finden Sie unter
+* Anfordern von Zugriffs Token für Microsoft-APIs. Weitere Informationen finden Sie in folgenden Quellen:
   * [Zugriffs Token-Bereiche](#access-token-scopes)
   * [Schnellstart: Konfigurieren einer Anwendung für die Bereitstellung von Web-APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
@@ -95,7 +95,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 Die- <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> Methode akzeptiert einen Rückruf, um die Parameter zu konfigurieren, die zum Authentifizieren einer APP erforderlich sind. Die für die Konfiguration der APP erforderlichen Werte können aus der Aad-Konfiguration abgerufen werden, wenn Sie die APP registrieren.
 
-Die Konfiguration wird von der Datei " *wwwroot/appSettings. JSON* " bereitgestellt:
+Die Konfiguration wird durch die Datei *wwwroot/appsettings.jsin* der Datei bereitgestellt:
 
 ```json
 {

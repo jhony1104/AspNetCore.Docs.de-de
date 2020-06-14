@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 87cdf02a6f6babc869d90658e6a7cd54db73bb68
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451874"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756027"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure Ad Gruppen, administrative Rollen und benutzerdefinierte Rollen
 
@@ -29,7 +29,7 @@ Azure Active Directory (AAD) bietet mehrere Autorisierungs Ansätze, die mit ASP
 * Benutzerdefinierte Gruppen
   * Sicherheit
   * O365
-  * Distribution
+  * Verteilung
 * Rollen
   * Integrierte Verwaltungs Rollen
   * Benutzerdefinierte Rollen
@@ -164,7 +164,7 @@ Die [Autorität für die autorizeview](xref:security/blazor/index#authorizeview-
 </AuthorizeView>
 ```
 
-Der Zugriff auf eine gesamte Komponente kann auf der Richtlinie mithilfe der [ `[Authorize]` ]-Attribut Direktive] (Xref: Security/blazor/Index # Autorisierungs Attribut) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) basieren:
+Der Zugriff auf eine gesamte Komponente kann basierend auf der [ `[Authorize]` Richtlinie mithilfe der Attribut Direktive](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) erfolgen:
 
 ```razor
 @page "/"
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 An dieser Stelle sind die Komponenten Autorisierungs Ansätze funktionsfähig. Alle Autorisierungs Mechanismen in-Komponenten können die- `admin` Rolle verwenden, um den Benutzer zu autorisieren:
 
 * [Autorität View-Komponente](xref:security/blazor/index#authorizeview-component) (Beispiel: `<AuthorizeView Roles="admin">` )
-* [ `[Authorize]` ]-Attribut Direktive] (Xref: Security/blazor/Index # autorisieren-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Beispiel: `@attribute [Authorize(Roles = "admin")]` )
+* [ `[Authorize]` Attribute-Direktive](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Beispiel: `@attribute [Authorize(Roles = "admin")]` )
 * [Prozedurale Logik](xref:security/blazor/index#procedural-logic) (Beispiel: `if (user.IsInRole("admin")) { ... }` )
 
   Mehrere Rollen Tests werden unterstützt:
