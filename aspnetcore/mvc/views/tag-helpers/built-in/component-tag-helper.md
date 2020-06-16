@@ -2,7 +2,7 @@
 title: Komponententaghilfsprogramm in ASP.net Core
 author: guardrex
 ms.author: riande
-description: Erfahren Sie, wie Sie das taghilfsprogramm ASP.net Core Component Razor zum Rendering von Komponenten in Seiten und Ansichten verwenden.
+description: Erfahren Sie, wie Sie das taghilfsprogramm ASP.net Core Component zum Rendering von Razor Komponenten in Seiten und Ansichten verwenden.
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4e003e5ed5e7863d8a218c0f02bb37e214e31910
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b6e3890e13ef5ad20098d3907b6895046087aeca
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773928"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776500"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Komponententaghilfsprogramm in ASP.net Core
 
@@ -31,7 +31,7 @@ Befolgen Sie die Anweisungen im Abschnitt *Vorbereiten der APP für die Verwendu
 
 ## <a name="component-tag-helper"></a>Komponententaghilfsprogramm
 
-Das folgende komponententaghilfsprogramm `Counter` rendert die Komponente in einer Seite oder Ansicht:
+Das folgende komponententaghilfsprogramm rendert die `Counter` Komponente in einer Seite oder Ansicht:
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -42,9 +42,9 @@ Das folgende komponententaghilfsprogramm `Counter` rendert die Komponente in ein
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-Im vorangehenden Beispiel wird davon `Counter` ausgegangen, dass sich die Komponente im *Seiten* Ordner der APP befindet.
+Im vorangehenden Beispiel wird davon ausgegangen, dass `Counter` sich die Komponente im *Seiten* Ordner der APP befindet. Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample.Pages` . b.).
 
-Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten übergeben werden. Sehen Sie sich `ColorfulCheckbox` die folgende Komponente an, mit der die Farbe und Größe der Kontrollkästchen Bezeichnung festgelegt wird:
+Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten übergeben werden. Sehen `ColorfulCheckbox` Sie sich die folgende Komponente an, mit der die Farbe und Größe der Kontrollkästchen Bezeichnung festgelegt wird:
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -72,7 +72,7 @@ Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten überg
 }
 ```
 
-Die `Size` `int` [Komponenten Parameter](xref:blazor/components#component-parameters) ( `Color` )`string`und () können vom komponententaghilfsprogramm festgelegt werden:
+Die `Size` `int` Komponenten Parameter () und `Color` ( `string` ) können vom komponententaghilfsprogramm festgelegt werden: [component parameters](xref:blazor/components#component-parameters)
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -84,7 +84,7 @@ Die `Size` `int` [Komponenten Parameter](xref:blazor/components#component-parame
     param-Size="14" param-Color="@("blue")" />
 ```
 
-Im vorangehenden Beispiel wird davon `ColorfulCheckbox` ausgegangen, dass sich die Komponente im frei *gegebenen* Ordner der APP befindet.
+Im vorangehenden Beispiel wird davon ausgegangen, dass `ColorfulCheckbox` sich die Komponente im frei *gegebenen* Ordner der APP befindet. Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample.Shared` . b.).
 
 Der folgende HTML-Code wird in der Seite oder Sicht gerendert:
 
@@ -95,9 +95,9 @@ Der folgende HTML-Code wird in der Seite oder Sicht gerendert:
 </label>
 ```
 
-Das übergeben einer Zeichenfolge in Anführungszeichen erfordert einen [expliziten Razor-Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie `param-Color` im vorherigen Beispiel gezeigt. Das Razor-Verarbeitungs Verhalten für einen `string` Typwert gilt nicht für ein `param-*` -Attribut, da das- `object` Attribut ein-Typ ist.
+Das übergeben einer Zeichenfolge in Anführungszeichen erfordert einen [expliziten Razor Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie `param-Color` im vorherigen Beispiel gezeigt. Das Verarbeitungs Razor Verhalten für einen `string` Typwert gilt nicht für ein- `param-*` Attribut, da es sich bei dem Attribut um einen- `object` Typ handelt.
 
-Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass der Typ einen Standardkonstruktor und festleg bare Eigenschaften aufweisen muss. Beispielsweise können Sie einen `Size` Wert für und `Color` im vorangehenden Beispiel angeben, da die Typen von `Size` und `Color` primitive Typen (`int` und `string`) sind, die vom JSON-Serialisierungsprogramm unterstützt werden.
+Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass der Typ einen Standardkonstruktor und festleg bare Eigenschaften aufweisen muss. Beispielsweise können Sie einen Wert für `Size` und `Color` im vorangehenden Beispiel angeben, da die Typen von `Size` und `Color` primitive Typen ( `int` und `string` ) sind, die vom JSON-Serialisierungsprogramm unterstützt werden.
 
 Im folgenden Beispiel wird ein-Klassenobjekt an die-Komponente übermittelt:
 
@@ -151,12 +151,12 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-Im vorangehenden Beispiel wird davon `MyComponent` ausgegangen, dass sich die Komponente im frei *gegebenen* Ordner der APP befindet. `MyClass`befindet sich im-Namespace der APP`{APP ASSEMBLY}`().
+Im vorangehenden Beispiel wird davon ausgegangen, dass `MyComponent` sich die Komponente im frei *gegebenen* Ordner der APP befindet. Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample` `@using BlazorSample.Shared` . b. und). `MyClass`befindet sich im-Namespace der app.
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die Komponente:
 
 * Ob die Komponente zuvor für die Seite gerendert wird
-* Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält
+* Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält.
 
 | Rendermodus | Beschreibung |
 | ----------- | ----------- |
