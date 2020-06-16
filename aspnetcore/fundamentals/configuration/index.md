@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ead9cb8c852ac768c8fe1f9066eb73ac1203c4ce
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454700"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776539"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguration in ASP.NET Core
 
@@ -56,7 +56,7 @@ ASP.NET Core-Web-Apps, die mit [dotnet new](/dotnet/core/tools/dotnet-new) oder 
 1. Umgebungsvariablen, die den [Umgebungsvariablen-Konfigurationsanbieter](#evcp) verwenden
 1. Befehlszeilenargumente, die den [Befehlszeilen-Konfigurationsanbieter](#command-line) verwenden
 
-Später hinzugefügte Konfigurationsanbieter überschreiben vorherige Schlüsseleinstellungen. Wenn beispielsweise `MyKey` sowohl unter *appsettings.json* als auch unter Umgebung festgelegt wird, wird der Umgebungswert verwendet. Bei Verwendung der Standardkonfigurationsanbieter überschreibt der [Befehlszeilen-Konfigurationsanbieter](#command-line-configuration-provider) alle anderen Anbieter.
+Später hinzugefügte Konfigurationsanbieter überschreiben vorherige Schlüsseleinstellungen. Wenn beispielsweise `MyKey` sowohl unter *appsettings.json* als auch unter Umgebung festgelegt wird, wird der Umgebungswert verwendet. Bei Verwendung der Standardkonfigurationsanbieter überschreibt der [Befehlszeilen-Konfigurationsanbieter](#clcp) alle anderen Anbieter.
 
 Weitere Informationen zu `CreateDefaultBuilder` finden Sie unter [Standardeinstellungen für den Generator](xref:fundamentals/host/generic-host#default-builder-settings).
 
