@@ -1,7 +1,7 @@
 ---
-title: Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
+title: 'Teil 3: Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App'
 author: rick-anderson
-description: Hinzufügen einer Ansicht zu einer einfachen ASP.NET Core MVC-App
+description: Dies ist Teil 3 der Tutorialreihe zu ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774599"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652827"
 ---
-# <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Teil 3: Hinzufügen einer Ansicht zu einer ASP.NET Core MVC-App
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -26,7 +26,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 In diesem Abschnitt ändern Sie die `HelloWorldController`-Klasse so, dass [Razor](xref:mvc/views/razor)-Ansichtsdateien verwendet werden, um den Prozess des Generierens von HTML-Antworten für einen Client sauber zu kapseln.
 
-Sie erstellen eine Ansichtsvorlagendatei mithilfe von Razor. Razor-basierte Ansichtsvorlagen haben die Dateinamenerweiterung *.cshtml*. Sie bieten eine elegante Möglichkeit zum Erstellen einer HTML-Ausgabe mit C#.
+Sie erstellen mithilfe von Razor eine Ansichtsvorlagendatei. Razor-basierte Ansichtsvorlagen haben die Dateinamenerweiterung *.cshtml*. Sie bieten eine elegante Möglichkeit zum Erstellen einer HTML-Ausgabe mit C#.
 
 Derzeit gibt die `Index`-Methode eine Zeichenfolge mit der Meldung zurück, die in der Controllerklasse hartcodiert ist. Ersetzen Sie in der `HelloWorldController`-Klasse die `Index`-Methode durch den folgenden Code:
 
@@ -46,7 +46,7 @@ Der vorangehende Code ruft die Methode<xref:Microsoft.AspNetCore.Mvc.Controller.
 
   * Geben Sie in das Suchfeld rechts oben *Ansicht* ein.
 
-  * Wählen Sie **Razor-Ansicht** aus.
+  * Klicken Sie auf **Razor-Ansicht**.
 
   * Übernehmen Sie den im Feld **Name** stehenden Wert *Index.cshtml*.
 
@@ -80,7 +80,7 @@ Ersetzen Sie den Inhalt der Razor-Ansichtsdatei *Views/HelloWorld/Index.cshtml* 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass er in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
+Navigieren Sie zu `https://localhost:{PORT}/HelloWorld`. Die `Index`-Methode im `HelloWorldController` hatte nicht viel zu tun. Sie diente zum Ausführen der Anweisung `return View();`, die angab, dass die Methode eine Ansichtsvorlagendatei zum Rendern einer Antwort im Browser verwenden sollte. Da kein Name für eine Ansichtsvorlagendatei angegeben wurde, verwendet MVC standardmäßig die Standardansichtsdatei. Die Standardansichtsdatei hat den gleichen Namen wie die Methode (`Index`), sodass die Ansichtsvorlage in */Views/HelloWorld/Index.cshtml* verwendet wird. Die folgende Abbildung zeigt die Zeichenfolge "Hello from our View Template!“, die in der Ansicht hartcodiert ist.
 
 ![Browserfenster](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -183,7 +183,7 @@ Im nächsten Tutorial wird eine Filmdatenbank erstellt.
 
 In diesem Abschnitt ändern Sie die `HelloWorldController`-Klasse so, dass [Razor](xref:mvc/views/razor)-Ansichtsdateien verwendet werden, um den Prozess des Generierens von HTML-Antworten für einen Client sauber zu kapseln.
 
-Sie erstellen eine Ansichtsvorlagendatei mithilfe von Razor. Razor-basierte Ansichtsvorlagen haben die Dateinamenerweiterung *.cshtml*. Sie bieten eine elegante Möglichkeit zum Erstellen einer HTML-Ausgabe mit C#.
+Sie erstellen mithilfe von Razor eine Ansichtsvorlagendatei. Razor-basierte Ansichtsvorlagen haben die Dateinamenerweiterung *.cshtml*. Sie bieten eine elegante Möglichkeit zum Erstellen einer HTML-Ausgabe mit C#.
 
 Derzeit gibt die `Index`-Methode eine Zeichenfolge mit der Meldung zurück, die in der Controllerklasse hartcodiert ist. Ersetzen Sie in der `HelloWorldController`-Klasse die `Index`-Methode durch den folgenden Code:
 
@@ -203,7 +203,7 @@ Der vorangehende Code ruft die Methode<xref:Microsoft.AspNetCore.Mvc.Controller.
 
   * Geben Sie in das Suchfeld rechts oben *Ansicht* ein.
 
-  * Wählen Sie **Razor-Ansicht** aus.
+  * Klicken Sie auf **Razor-Ansicht**.
 
   * Übernehmen Sie den im Feld **Name** stehenden Wert *Index.cshtml*.
 

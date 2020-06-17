@@ -1,7 +1,7 @@
 ---
-title: Arbeiten mit einer Datenbank und ASP.NET Core
+title: 'Teil 4: Arbeiten mit einer Datenbank und ASP.NET Core'
 author: rick-anderson
-description: Dieser Artikel erläutert das Arbeiten mit einer Datenbank und ASP.NET Core.
+description: Dies ist Teil 4 der Tutorialreihe zu Razor Pages.
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 159588ec750f0ede534522aa9397fc2aefb58cd6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 21ae2ed4e91a0b3e52b1cdad1f4f4686c50614ba
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775608"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652983"
 ---
-# <a name="work-with-a-database-and-aspnet-core"></a>Arbeiten mit einer Datenbank und ASP.NET Core
+# <a name="part-4-with-a-database-and-aspnet-core"></a>Teil 4: Arbeiten mit einer Datenbank und ASP.NET Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT) und [Joe Audette](https://twitter.com/joeaudette)
 
@@ -147,7 +147,7 @@ Im nächsten Tutorial wird die Präsentation der Daten verbessert.
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 > [!div class="step-by-step"]
-> [Zurück: Scaffolded Razor Pages (Gerüstbau mit Razor Pages)](xref:tutorials/razor-pages/page)
+> [Zurück: Gerüstbau mit Razor Pages](xref:tutorials/razor-pages/page)
 > [Weiter: Updating the pages (Aktualisieren der Seiten)](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

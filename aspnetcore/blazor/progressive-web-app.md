@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie eine Blazor-basierte progressive Web-App (PWA
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: cf31c91ddc073498d882b111b597c546e788cc98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771558"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679611"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Erstellen progressiver Webanwendungen mit Blazor WebAssembly für ASP.NET Core
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Erstellen progressiver Webanwendungen mit der Blazor WebAssembly für ASP.NET Core
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Eine progressive Web-App(PWA) ist eine Single-Page-Webanwendung (SPA), die mithilfe moderner Browser-APIs und -Funktionen das gleiche Verhalten wie eine Desktop-App aufweist. Blazor WebAssembly ist eine auf Standards basierende clientseitige Web-App-Plattform, die beliebige Browser-APIs verwenden kann, einschließlich der PWA-APIs, die für die folgenden Funktionen erforderlich sind:
+Eine progressive Web-App(PWA) ist eine Single-Page-Webanwendung (SPA), die mithilfe moderner Browser-APIs und -Funktionen das gleiche Verhalten wie eine Desktop-App aufweist. Blazor WebAssembly ist eine auf Standards basierende clientseitige Web-App-Plattform, die beliebige Browser-APIs einschließlich der PWA-APIs verwenden kann, die für die folgenden Funktionen erforderlich sind:
 
 * Die Fähigkeit, unabhängig von der Netzwerkgeschwindigkeit, mit sofortigem Laden offline zu arbeiten
 * Ausführung in einem eigenen App-Fenster, nicht nur in einem Browserfenster
@@ -128,14 +124,14 @@ Der integrierte Service Worker *service-worker.published.js* löst Anforderungen
 
 Die Cache-First-Strategie hat folgende Vorteile:
 
-* **Die Zuverlässigkeit wird sichergestellt.** &ndash; Der Netzwerkzugriff ist kein boolescher Zustand. Ein Benutzer ist nicht einfach online oder offline:
+* **Die Zuverlässigkeit wird sichergestellt.** Der Netzwerkzugriff ist kein boolescher Zustand. Ein Benutzer ist nicht einfach online oder offline:
 
   * Das Gerät des Benutzers geht möglicherweise davon aus, dass es online ist, jedoch kann das Netzwerk so langsam sein, dass es unpraktisch ist, auf es zu warten.
   * Das Netzwerk könnte ungültige Ergebnisse für bestimmte URLs zurückgeben, z. B. wenn ein Captive-WLAN-Portal vorliegt, das bestimmte Anforderungen derzeit blockiert oder umleitet.
   
   Aus diesem Grund ist die `navigator.onLine`-API des Browsers nicht zuverlässig, und Sie sollten nicht auf sie vertrauen.
 
-* **Die Richtigkeit wird sichergestellt.** &ndash; Beim Erstellen eines Caches für Offlineressourcen stellt der Service Worker mithilfe von Inhaltshashs sicher, dass er zu einem bestimmten Zeitpunkt eine vollständige und in sich konsistente Momentaufnahme der Ressourcen abgerufen hat. Dieser Cache wird dann als atomische Einheit verwendet. Es macht keinen Sinn, neue Ressourcen vom Netzwerk anzufordern, da nur die bereits zwischengespeicherten Versionen erforderlich sind. Alle anderen Strategien sind mit dem Risiko von Inkonsistenz und Inkompatibilität behaftet (wenn z. B. versucht wird, Versionen von .NET-Assemblys zu verwenden, die nicht gemeinsam kompiliert wurden).
+* **Die Richtigkeit wird sichergestellt.** Beim Erstellen eines Caches für Offlineressourcen stellt der Service Worker mithilfe von Inhaltshashs sicher, dass er zu einem bestimmten Zeitpunkt eine vollständige und in sich konsistente Momentaufnahme der Ressourcen abgerufen hat. Dieser Cache wird dann als atomische Einheit verwendet. Es macht keinen Sinn, neue Ressourcen vom Netzwerk anzufordern, da nur die bereits zwischengespeicherten Versionen erforderlich sind. Alle anderen Strategien sind mit dem Risiko von Inkonsistenz und Inkompatibilität behaftet (wenn z. B. versucht wird, Versionen von .NET-Assemblys zu verwenden, die nicht gemeinsam kompiliert wurden).
 
 ### <a name="background-updates"></a>Hintergrundupdates
 
@@ -155,7 +151,7 @@ Sie können diesen Prozess anpassen, indem Sie die Service Worker-Logik bearbeit
 
 Wie im Abschnitt [Cache-First-Abrufstrategie](#cache-first-fetch-strategy) beschrieben verwendet der Standard-Service Worker eine *Cache-First-Strategie*, d. h., er versucht zwischengespeicherte Inhalte bereitzustellen, wenn diese verfügbar sind. Wenn für eine bestimmte URL kein Inhalt zwischengespeichert ist, z. B., wenn Daten von einer Back-End-API angefordert werden, greif der Service Worker auf eine herkömmliche Netzwerkanforderung zurück. Die Netzwerkanforderung wird erfolgreich durchgeführt, wenn der Server erreichbar ist. Diese Logik ist in der `onFetch`-Funktion in der Datei *service-worker.published.js* implementiert.
 
-Wenn die Razor-Komponenten der App Daten von Back-End-APIs anfordern müssen und Sie ein benutzerfreundliches Verfahren für fehlgeschlagene Anforderungen bei nicht verfügbarer Netzwerkverbindung anbieten möchten, können Sie die Logik innerhalb der App-Komponenten implementieren. Schließen Sie z. B. `HttpClient`-Anforderungen in `try/catch` ein.
+Wenn die Razor-Komponenten der App Daten von Back-End-APIs anfordern müssen und Sie ein benutzerfreundliches Verfahren für fehlgeschlagene Anforderungen bei nicht verfügbarer Netzwerkverbindung anbieten möchten, können Sie die Logik innerhalb der App-Komponenten implementieren. Schließen Sie z. B. <xref:System.Net.Http.HttpClient>-Anforderungen in `try/catch` ein.
 
 ### <a name="support-server-rendered-pages"></a>Unterstützung von auf dem Server gerenderten Seiten
 
@@ -276,8 +272,27 @@ Sie können beliebige Logik implementieren, um zu steuern, welche Teilmenge der 
 
 ### <a name="interaction-with-authentication"></a>Interaktion mit Authentifizierung
 
-Sie können die PWA-Vorlagenoption zusammen mit den Authentifizierungsoptionen verwenden. Eine offlinefähige PWA kann auch die Authentifizierung unterstützen, wenn der Benutzer über Netzwerkkonnektivität verfügt.
+Die PWA-Vorlage kann in Verbindung mit der Authentifizierung verwendet werden. Eine offlinefähige PWA kann auch die Authentifizierung unterstützen, wenn der Benutzer über eine anfängliche Netzwerkkonnektivität verfügt.
 
-Wenn ein Benutzer über keine Netzwerkkonnektivität verfügt, kann er sich nicht authentifizieren und keine Zugriffstoken abrufen. Versuche, die Anmeldeseite ohne Netzwerkzugriff zu besuchen, führen standardmäßig zu Netzwerkfehlermeldungen.
+Wenn ein Benutzer über keine Netzwerkkonnektivität verfügt, kann er sich nicht authentifizieren und keine Zugriffstoken abrufen. Versuche, die Anmeldeseite ohne Netzwerkzugriff zu besuchen, führen standardmäßig zu Netzwerkfehlermeldungen. Sie müssen einen Benutzeroberflächenflow entwerfen, den Benutzer für nützliche Aktionen offline ausführen können, ohne dass sie versuchen müssen, sich zu authentifizieren oder Zugriffstoken abzurufen. Alternativ können Sie die App so entwerfen, dass sie ordnungsgemäß fehlschlägt, wenn das Netzwerk nicht verfügbar ist. Wenn die App nicht für die Verarbeitung dieser Szenarios entwickelt werden kann, sollten Sie die Offlineunterstützung nicht aktivieren.
 
-Sie müssen einen Benutzeroberflächenflow entwerfen, den Benutzer für nützliche Aktionen offline ausführen können, ohne dass sie versuchen müssen, sich zu authentifizieren oder Zugriffstoken abzurufen. Alternativ können Sie die App so entwerfen, dass sie ordnungsgemäß fehlschlägt, wenn das Netzwerk nicht verfügbar ist. Wenn dies bei Ihrer App nicht möglich ist, sollten Sie die Offlineunterstützung womöglich nicht aktivieren.
+Folgendes trifft zu, wenn eine App, die für die Online- und Offlinenutzung vorgesehen ist, wieder online geschaltet wird:
+
+* Die App muss möglicherweise ein neues Zugriffstoken bereitstellen.
+* Die App muss erkennen, ob ein anderer Benutzer beim Dienst angemeldet ist, sodass sie Vorgänge auf das Konto eines Benutzers anwenden kann, die vorgenommen wurden, als die App offline war.
+
+So erstellen Sie eine PWA-Offline-App, die mit der Authentifizierung interagiert:
+
+* Ersetzen Sie die <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>-Klasse durch eine Zuordnungsinstanz, die den zuletzt angemeldeten Benutzer speichert und diesen gespeicherten Benutzer verwendet, wenn die App offline ist.
+* Reihen Sie Vorgänge in die Warteschlange ein, während die App offline ist, und wenden Sie diese an, wenn die App wieder online ist.
+* Löschen Sie bei der Abmeldung den gespeicherten Benutzer.
+
+Die Beispiel-App [CarChecker](https://github.com/SteveSandersonMS/CarChecker) veranschaulicht die obigen Ansätze. Sehen Sie sich die folgenden Teile der App an:
+
+* `OfflineAccountClaimsPrincipalFactory` (*Client/Data/OfflineAccountClaimsPrincipalFactory.cs*)
+* `LocalVehiclesStore` (*Client/Data/LocalVehiclesStore.cs*)
+* `LoginStatus`-Komponente (*Client/Shared/LoginStatus.razor*)
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Ursprungsübergreifende SignalR-Aushandlung für die Authentifizierung](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

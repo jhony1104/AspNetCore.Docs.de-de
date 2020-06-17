@@ -1,12 +1,24 @@
 ---
-title: 'Globalisierung und Lokalisierung mit Blazor in ASP.NET Core' author: description: 'In diesem Artikel erfahren Sie, wie Sie Razor-Komponenten Benutzern verschiedener Kulturen in verschiedenen Sprachen zur Verfügung stellen.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Globalisierung und Lokalisierung in ASP.NET Core Blazor
+author: guardrex
+description: In diesem Artikel erfahren Sie, wie Sie Razor-Komponenten Benutzern mit verschiedenen Kulturen und Sprachen zur Verfügung stellen.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419735"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
 
@@ -74,34 +86,39 @@ Weitere Informationen und Beispiele finden Sie unter <xref:fundamentals/localiza
 
 #### <a name="cookies"></a>Cookies
 
-Ein Cookie für die Lokalisierungskultur kann die Kultur des Benutzers beibehalten. Das Cookie wird von der `OnGet`-Methode der Hostseite der App erstellt (*Pages/Host.cshtml.cs*). Die Lokalisierungsmiddleware liest das Cookie bei aufeinanderfolgenden Anforderungen, um die Kultur des Benutzers festzulegen. 
+Ein Cookie für die Lokalisierungskultur kann die Kultur des Benutzers beibehalten. Die Lokalisierungsmiddleware liest das Cookie bei aufeinanderfolgenden Anforderungen, um die Kultur des Benutzers festzulegen. 
 
 Durch Verwendung eines Cookies wird sichergestellt, wird sichergestellt, dass die WebSocket-Verbindung die Kultur ordnungsgemäß weitergeben kann. Wenn die Lokalisierungsschemas auf dem URL-Pfad oder der Abfragezeichenfolge basieren, kann das Schema möglicherweise nicht mit WebSockets funktionieren, wodurch das Beibehalten der Kultur fehlschlägt. Daher wird die Verwendung eines Cookies für die Lokalisierungskultur empfohlen.
 
 Alle Vorgehensweisen können zum Zuweisen einer Kultur verwendet werden, wenn die Kultur in einem Lokalisierungscookie beibehalten wird. Wenn die App bereits über ein Lokalisierungsschema für serverseitiges ASP.NET Core verfügt, können Sie die vorhandene Lokalisierungsinfrastruktur der App weiterhin verwenden und das Lokalisierungskulturcookie innerhalb des Schemas der App festlegen.
 
-Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie eine Datei *Pages/_Host.cshtml.cs* mit dem folgenden Inhalt in der Blazor-Server-App:
+Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie in der *Pages/_Host.cshtml*-Datei direkt innerhalb des öffnenden Tags Razor einen `<body>`-Ausdruck:
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 Die Lokalisierung wird mit der folgenden Ereignissequenz von der App verarbeitet:
 
 1. Der Browser sendet zunächst eine HTTP-Anforderung an die App.
 1. Die Kultur wird von der Lokalisierungsmiddleware zugewiesen.
-1. Die `OnGet`-Methode in *_Host.cshtml.cs* speichert die Kultur im Rahmen der Reaktion in einem Cookie.
+1. Der Razor-Ausdruck auf der `_Host`-Seite ( *_Host.cshtml*) speichert die Kultur im Rahmen der Reaktion in einem Cookie.
 1. Der Browser stellt eine WebSocket-Verbindung her, um einer interaktive Blazor-Serversitzung zu erstellen.
 1. Die Lokalisierungsmiddleware liest das Cookie und weist die Kultur zu.
 1. Die Blazor-Serversitzung beginnt mit der richtigen Kultur.
@@ -135,6 +152,25 @@ public class CultureController : Controller
 
 > [!WARNING]
 > Verwenden Sie das Ergebnis der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A>-Aktion, um Angriffe durch offene Umleitungen zu verhindern. Weitere Informationen finden Sie unter <xref:security/preventing-open-redirects>.
+
+Befolgen Sie die folgenden Schritte, wenn die App nicht für die Verarbeitung von Controlleraktionen konfiguriert ist:
+
+* Fügen Sie MVC-Dienste zur Dienstsammlung in `Startup.ConfigureServices` hinzu:
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* Fügen Sie das Controllerendpunktrouting in `Startup.Configure` hinzu:
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 Im folgenden Beispiel wird das Durchführen einer Umleitung veranschaulicht, wenn der Benutzer eine Kultur auswählt:
 

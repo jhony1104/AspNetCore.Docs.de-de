@@ -1,7 +1,7 @@
 ---
-title: Untersuchen der Methoden „Details“ und „Delete“ einer ASP.NET Core-App
+title: 'Teil 10: Untersuchen der Methoden „Details“ und „Delete“ einer ASP.NET Core-App'
 author: rick-anderson
-description: Erfahren Sie mehr über die Controllermethode und Ansicht „Details“ in einer einfachen ASP.NET Core MVC-App.
+description: Dies ist Teil 10 der Tutorialreihe zu ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: cff8bc0d3506210879974f711a4e665c8549051d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 722112b6fba611e980931ffd3bc4ddf43bc08468
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777553"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653002"
 ---
-# <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>Untersuchen der Methoden „Details“ und „Delete“ einer ASP.NET Core-App
+# <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>Teil 10: Untersuchen der Methoden „Details“ und „Delete“ einer ASP.NET Core-App
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 50096ae6a77d5f8b07e6be795d9401fcbfd421e3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cd4cc6778de7d2156243dc91fba64b2bdb79cf08
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776707"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452121"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Erste Schritte mit NSwag und ASP.NET Core
 
@@ -111,7 +111,7 @@ Durch die Auswahl einer der folgenden Optionen können Sie die Funktion zur Code
 * Die NuGet-Pakete [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) oder [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/), um Code innerhalb des Projekts zu generieren.
 * NSwag über die [Befehlszeile](https://github.com/RicoSuter/NSwag/wiki/CommandLine).
 * Das NuGet-Paket [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild).
-* [Unchase OpenAPI (Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice): Ein mit Visual Studio verbundener Dienst zum Generieren von API-Clientcode in C# oder TypeScript. Es werden auch C#-Controller für OpenAPI-Dienste mit NSwag generiert.
+* [Unchase OpenAPI (Swagger) Connected Service:](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) Dies ist ein mit Visual Studio verbundener Dienst zum Generieren von API-Clientcode in C# oder TypeScript. Es werden auch C#-Controller für OpenAPI-Dienste mit NSwag generiert.
 
 ### <a name="generate-code-with-nswagstudio"></a>Generieren von Code mit NSwagStudio
 
@@ -271,7 +271,7 @@ Die vorherige Aktion gibt `IActionResult` zurück. Innerhalb der Aktion gibt sie
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Da NSwag [Reflection](/dotnet/csharp/programming-guide/concepts/reflection) verwendet, und der empfohlene Rückgabetyp für Web-API-Aktionen [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601) ist, kann nur der von `T` definierte Rückgabetyp abgeleitet werden. Sie können nicht automatisch andere mögliche Rückgabetypen ableiten.
+Da NSwag [Reflection](/dotnet/csharp/programming-guide/concepts/reflection) verwendet und der empfohlene Rückgabetyp für Web-API-Aktionen [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601) ist, kann nur der von `T` definierte Rückgabetyp abgeleitet werden. Sie können nicht automatisch andere mögliche Rückgabetypen ableiten.
 
 Betrachten Sie das folgende Beispiel:
 

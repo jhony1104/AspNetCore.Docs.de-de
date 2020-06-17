@@ -1,7 +1,7 @@
 ---
-title: Aktualisieren der generierten Seiten in einer ASP.NET Core-App
+title: 'Teil 5: Aktualisieren der generierten Seiten in einer ASP.NET Core-App'
 author: rick-anderson
-description: Erfahren Sie mehr über das Aktualisieren der generierten Seiten in einer ASP.NET Core-App.
+description: Dies ist Teil 5 der Tutorialreihe zu Razor Pages.
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d9ab20b7ed4b394c154141efe3a94481efaf063c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 144c4e7f07986c0a10089d74991fe3b44c013894
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774547"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652861"
 ---
-# <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Aktualisieren der generierten Seiten in einer ASP.NET Core-App
+# <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Teil 5: Aktualisieren der generierten Seiten in einer ASP.NET Core-App
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 5e617a201cbd133e695bdadc08dc6c797f97b6be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 10d6f0bd6f6b95efbe868e4bc21513460e1f0b67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773626"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652479"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Tutorial: Erstellen eines komplexen Datenmodells: ASP.NET MVC mit EF Core
 
@@ -95,7 +95,7 @@ Angenommen, Sie möchten sicherstellen, dass Benutzer nicht mehr als 50 Zeichen 
 Das `StringLength`-Attribut verhindert nicht, dass ein Benutzer einen Leerraum als Namen eingibt. Sie können das `RegularExpression`-Attribut verwenden, um Beschränkungen auf die Eingabe anzuwenden. Folgender Code erfordert beispielsweise, dass das erste Zeichen ein Großbuchstabe sein muss und die restlichen Zeichen alphabetisch sein müssen:
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 Das `MaxLength`-Attribut stellt ähnliche Funktionalitäten wie das `StringLength`-Attribut bereit, ermöglicht jedoch keine clientseitige Validierung.
@@ -112,7 +112,7 @@ dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
 ```
 
-Der `migrations add`-Befehl gibt eine Warnung aus, dass es zu Datenverlust kommen kann, da die maximale Länge durch die Änderung um zwei Spalten verkürzt wurde.  Durch Migrationen wird eine Datei namens *\<Zeitstempel>_MaxLengthOnNames.cs* erstellt. Diese Datei enthält Code in der `Up`-Methode, durch den die Datenbank dem aktuellen Datenmodell entsprechend aktualisiert wird. Der Code wurde durch den `database update`-Befehl ausgeführt.
+Der `migrations add`-Befehl gibt eine Warnung aus, dass es zu Datenverlust kommen kann, da die maximale Länge durch die Änderung um zwei Spalten verkürzt wurde.  Durch Migrationen wird eine Datei namens *\<timeStamp>_MaxLengthOnNames.cs* erstellt. Diese Datei enthält Code in der `Up`-Methode, durch den die Datenbank dem aktuellen Datenmodell entsprechend aktualisiert wird. Der Code wurde durch den `database update`-Befehl ausgeführt.
 
 Der Zeitstempel, der dem Namen der Migrationsdatei vorangestellt ist, wird von Entity Framework verwendet, um die Migrationen zu sortieren. Sie können mehrere Migrationen erstellen, bevor Sie den Befehl „update-database“ ausführen. Anschließend werden alle Migrationen in der Reihenfolge angewendet, in der Sie erstellt wurden.
 

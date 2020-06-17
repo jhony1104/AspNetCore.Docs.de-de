@@ -1,18 +1,24 @@
 ---
-title: 'Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)'
+title: 'Teil 7: Razor Pages mit EF Core in ASP.NET Core – Aktualisieren relevanter Daten'
 author: rick-anderson
-description: Mithilfe dieses Tutorials aktualisieren verwandte Daten, indem Sie Felder mit Fremdschlüsseln sowie Navigationseigenschaften aktualisieren.
+description: Dies ist Teil 7 der Tutorialreihe zu Razor Pages und dem Entity Framework.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d86e57d50c414e4baabd00ca9675aa66266342ca
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645457"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652603"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Aktualisieren verwandter Daten (7 von 8)
+# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Teil 7: Razor Pages mit EF Core in ASP.NET Core – Aktualisieren relevanter Daten
 
 Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -57,7 +63,7 @@ Der vorangehende Code:
 * Verwendet `TryUpdateModelAsync`, um ein [Overposting](xref:data/ef-rp/crud#overposting) zu verhindern.
 * Entfernt `ViewData["DepartmentID"]` `DepartmentNameSL` aus der Basisklasse ist ein stark typisiertes Modell, das von der Razor-Seite verwendet wird. Stark typisierte Modelle werden gegenüber schwach typisierten Modellen bevorzugt. Weitere Informationen hierzu finden Sie unter [Weakly typed data (ViewData and ViewBag) (Schwach typisierte Daten (ViewData und ViewBag))](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-course-create-razor-page"></a>Aktualisieren der Razor-Seite „Course Create“
+### <a name="update-the-course-create-razor-page"></a>Aktualisieren der Razor-Seite zum Erstellen von Kursen
 
 Aktualisieren Sie *Pages/Courses/Create.cshtml* mit dem folgenden Code:
 
@@ -84,7 +90,7 @@ Aktualisieren Sie *Pages/Courses/Edit.cshtml.cs* mit dem folgenden Code:
 
 Die Änderungen ähneln den im Seitenmodell „Create“ (Erstellen) vorgenommenen Änderungen. Im vorangehenden Code wird `PopulateDepartmentsDropDownList` an die Fachbereichs-ID übergeben, wodurch der in der Dropdownliste angegebene Fachbereich ausgewählt wird.
 
-### <a name="update-the-course-edit-razor-page"></a>Aktualisieren der Razor-Seite „Course Edit“
+### <a name="update-the-course-edit-razor-page"></a>Aktualisieren der Razor-Seite zum Bearbeiten von Kursen
 
 Aktualisieren Sie *Pages/Courses/Edit.cshtml* mit dem folgenden Code:
 
@@ -112,7 +118,7 @@ Nehmen Sie dieselbe Änderung in der Datei *Pages/Courses/Details.cshtml.cs* vor
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>Aktualisieren der Razor-Seiten „Course“
+### <a name="update-the-course-razor-pages"></a>Aktualisieren der Razor-Seiten für Kurse
 
 Aktualisieren Sie *Pages/Courses/Delete.cshtml* mit dem folgenden Code:
 
@@ -130,7 +136,7 @@ Testen Sie die Seiten „Create“ (Erstellen), „Edit“ (Bearbeiten), „Deta
 
 Dozenten können eine beliebige Anzahl von Kursen unterrichten. In der folgenden Abbildung wird die Seite „Edit“ des Dozenten mit einem Reihe von Kurskontrollkästchen angezeigt.
 
-![Dozentenseite „Bearbeiten“ mit Kursen](update-related-data/_static/instructor-edit-courses30.png)
+![Dozentenseite „Edit“ (Bearbeiten) mit Kursen](update-related-data/_static/instructor-edit-courses30.png)
 
 Über die Kontrollkästchen können Änderungen an Kursen vorgenommen werden, denen ein Dozent zugewiesen ist. Für jeden Kurs in der Datenbank wird ein Kontrollkästchen angezeigt. Kurse, denen der Dozent zugewiesen ist, sind aktiviert. Der Benutzer kann Kontrollkästchen aktivieren oder deaktivieren, um Kurszuweisungen zu ändern. Wenn die Anzahl der Kurse viel größer ist, funktioniert eine andere Benutzeroberfläche möglicherweise besser. Die hier gezeigte Methode zum Verwalten einer m:n-Beziehung würde sich jedoch nicht ändern. Um Beziehungen zu erstellen oder zu löschen, bearbeiten Sie eine Joinentität.
 
@@ -150,7 +156,7 @@ Erstellen Sie die Basisklasse *Pages/Instructors/InstructorCoursesPageModel.cs*:
 
 Bei `InstructorCoursesPageModel` handelt es sich um die Basisklasse, die Sie für die Seitenmodelle „Edit“ (Bearbeiten) und „Create“ (Erstellen) verwenden. `PopulateAssignedCourseData` liest alle `Course`-Entitäten, mit denen `AssignedCourseDataList` aufgefüllt werden soll. Für jeden Kurs legt der Code die `CourseID` und den Titel fest. Zudem legt er fest, ob der Dozent einem Kurs zugewiesen ist. Ein [HashSet](/dotnet/api/system.collections.generic.hashset-1) wird für effiziente Suchvorgänge verwendet.
 
-Da es auf der Razor-Seite keine Sammlung der Course-Entitäten gibt, kann durch die Modellbindung keine automatische Aktualisierung der `CourseAssignments`-Navigationseigenschaft erfolgen. Verwenden Sie dafür die neue `CourseAssignments`-Methode anstatt die Modellbindung zu verwenden, um ein Update für die `UpdateInstructorCourses`-Navigationseigenschaft auszuführen. Aus diesem Grund müssen Sie die `CourseAssignments`-Eigenschaft von der Modellbindung ausschließen. Dafür muss der Code, der `TryUpdateModel` aufruft, nicht verändert werden, da Sie die Whitelist-Überladung verwenden und `CourseAssignments` nicht in der Liste enthalten ist.
+Da es auf der Razor-Seite keine Sammlung der Course-Entitäten gibt, kann durch die Modellbindung kein automatisches Update für die `CourseAssignments`-Navigationseigenschaft ausgeführt werden. Verwenden Sie dafür die neue `CourseAssignments`-Methode anstatt die Modellbindung zu verwenden, um ein Update für die `UpdateInstructorCourses`-Navigationseigenschaft auszuführen. Aus diesem Grund müssen Sie die `CourseAssignments`-Eigenschaft von der Modellbindung ausschließen. Dafür muss der Code, der `TryUpdateModel` aufruft, nicht verändert werden, da Sie die Whitelist-Überladung verwenden und `CourseAssignments` nicht in der Liste enthalten ist.
 
 Wenn keins der Kontrollkästchen aktiviert ist, initialisiert der Code in `UpdateInstructorCourses` die `CourseAssignments`-Navigationseigenschaft mit einer leeren Auflistung und gibt Folgendes zurück:
 
@@ -189,7 +195,7 @@ Der vorangehende Code:
 * Ruft `UpdateInstructorCourses` in `OnPostAsync` auf,um Informationen aus den Kontrollkästchen für die zu bearbeitende Instructor-Entität anzuwenden.
 * Ruft `PopulateAssignedCourseData` und `UpdateInstructorCourses` in `OnPostAsync` auf, wenn `TryUpdateModel` fehlschlägt. Diese Methodenaufrufe stellen die zugewiesenen Kursdaten wieder her, die auf der Seite eingegeben werden, wenn sie mit einer Fehlermeldung erneut angezeigt wird.
 
-### <a name="update-the-instructor-edit-razor-page"></a>Aktualisieren der Razor-Seite „Edit“ des Dozenten
+### <a name="update-the-instructor-edit-razor-page"></a>Aktualisieren der Razor-Seite zum Bearbeiten von Dozenten
 
 Aktualisieren Sie die Datei *Pages\Instructors\Edit.cshtml* mit dem folgenden Code:
 
@@ -199,13 +205,13 @@ Der vorangehende Code erstellt eine HTML-Tabelle mit drei Spalten. Jede Spalte v
 
 Wenn die Kontrollkästchen anfänglich gerendert werden, sind dem Dozenten zugewiesene Kurse ausgewählt.
 
-Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird für eine begrenzte Anzahl von Kursen empfohlen. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
+Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
 
 Führen Sie die App aus, und testen Sie die aktualisierte Seite „Edit“ des Dozenten. Ändern Sie einige Kurszuweisungen. Die Änderungen werden auf der Seite „Index“ widergespiegelt.
 
 ### <a name="update-the-instructor-create-page"></a>Aktualisieren der Dozentenseite „Create“
 
-Aktualisieren Sie das Seitenmodell „Instructor Create“ und die Razor-Seite mit Code, der der Seite „Edit“ ähnelt:
+Aktualisieren Sie das Modell der Dozentenseite „Create“ und die Razor-Seite mit Code, der der Seite „Edit“ ähnelt:
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
@@ -327,7 +333,7 @@ Aktualisieren Sie die Methode `OnGetAsync` in der Datei *Pages/Courses/Details.c
 
 ### <a name="modify-the-delete-and-details-pages"></a>Ändern der Seiten „Delete“ (Löschen) und „Details“
 
-Aktualisieren Sie die Razor Page „Delete“ (Löschen) mit folgendem Markup:
+Aktualisieren Sie die Razor-Seite „Delete“ (Löschen) mit folgendem Markup:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
@@ -371,7 +377,7 @@ Stellen Sie sicher, dass Sie den Bürostandort eines Dozenten ändern können.
 
 Dozenten können eine beliebige Anzahl von Kursen unterrichten. In diesem Abschnitt fügen Sie die Möglichkeit zum Ändern von Kurszuweisungen hinzu. Die folgende Abbildung zeigt die aktualisierte Dozentenseite „Edit“ (Bearbeiten):
 
-![Dozentenseite „Bearbeiten“ mit Kursen](update-related-data/_static/instructor-edit-courses.png)
+![Dozentenseite „Edit“ (Bearbeiten) mit Kursen](update-related-data/_static/instructor-edit-courses.png)
 
 `Course` und `Instructor` weisen eine m:n-Beziehung auf. Wenn Sie Beziehungen hinzufügen und entfernen möchten, können Sie Entitäten aus der verknüpften `CourseAssignments`-Entitätenmenge hinzufügen und entfernen.
 
@@ -402,7 +408,7 @@ Aktualisieren Sie das Seitenmodell „Edit“ (Bearbeiten) für Dozenten mit dem
 
 Der vorangehende Code behandelt an Bürozuweisungen vorgenommene Änderungen.
 
-Aktualisieren Sie die Razor-Ansicht des Dozenten:
+Aktualisieren der Razor-Ansicht „Dozent“
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
@@ -416,7 +422,7 @@ Wenn die Kontrollkästchen ursprünglich gerendert wurden, weisen dem Dozenten z
 
 Führen Sie die App aus, und testen Sie die aktualisierte Dozentenseite „Edit“ (Bearbeiten). Ändern Sie einige Kurszuweisungen. Die Änderungen werden auf der Seite „Index“ widergespiegelt.
 
-Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird für eine begrenzte Anzahl von Kursen empfohlen. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
+Hinweis: Der hier gewählte Ansatz für die Bearbeitung der Kursdaten von Dozenten wird empfohlen, wenn eine begrenzte Anzahl von Kursen verwendet wird. Bei umfangreicheren Sammlungen wären eine andere Benutzeroberfläche und eine andere Aktualisierungsmethode nützlicher und effizienter.
 
 ### <a name="update-the-instructors-create-page"></a>Aktualisieren der Dozentenseite „Create“ (Erstellen)
 
@@ -426,7 +432,7 @@ Aktualisieren Sie das Seitenmodell „Create“ (Erstellen) für Dozenten mit de
 
 Der vorangehende Code ähnelt dem Code *Pages/Instructors/Edit.cshtml.cs*.
 
-Aktualisieren Sie die Razor Page „Create“ (Erstellen) für Dozenten mit folgendem Markup:
+Aktualisieren Sie die Razor-Seite „Create“ (Erstellen) für Dozenten mit folgendem Markup:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 
@@ -434,7 +440,7 @@ Testen Sie die Dozentenseite „Create“ (Erstellen).
 
 ## <a name="update-the-delete-page"></a>Aktualisieren der Seite „Delete“ (Löschen)
 
-Aktualisieren Sie das Seitenmodell „Löschen“ mit dem folgenden Code:
+Aktualisieren Sie das Seitenmodell „Delete“ (Löschen) mit dem folgenden Code:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Delete.cshtml.cs?highlight=5,40-999)]
 

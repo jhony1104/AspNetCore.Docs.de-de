@@ -1,19 +1,25 @@
 ---
-title: 'Razor-Seiten mit EF Core in ASP.NET Core: Sortieren, Filtern, Paging (3 von 8)'
+title: 'Teil 3: Razor Pages mit EF Core in ASP.NET Core – Sortieren, Filtern und Paging'
 author: rick-anderson
-description: In diesem Tutorial fügen Sie einer Razor-Seite mit ASP.NET Core und Entity Framework Core Funktionen zum Sortieren und Filtern sowie für Paging hinzu.
+description: Dies ist Teil 3 der Tutorialreihe zu Razor Pages und dem Entity Framework.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 9563f3ef52ce429eb0a58b468acb8e9cd7b276e2
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645493"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652593"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Sortieren, Filtern, Paging (3 von 8)
+# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Teil 3: Razor Pages mit EF Core in ASP.NET Core – Sortieren, Filtern und Paging
 
 Von [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT) und [Jon P. Smith](https://twitter.com/thereformedprog)
 
@@ -45,7 +51,7 @@ Der Parameter `sortOrder` ist entweder „Name“ oder „Datum“. Dem Paramete
 
 Wenn die Indexseite über den Link **Studenten** angefordert wird, gibt es keine Abfragezeichenfolge. Die Studenten werden in aufsteigender Reihenfolge nach Nachnamen angezeigt. Die aufsteigende Reihenfolge nach Nachnamen (FallThrough-Fall) ist in der `switch`-Anweisung die Standardeinstellung. Wenn der Benutzer auf einen Link in einer Spaltenüberschrift klickt, wird der entsprechende `sortOrder`-Wert im Abfragezeichenfolgenwert bereitgestellt.
 
-`NameSort` und `DateSort` werden auf der Razor Page verwendet, um die Hyperlinks in den Spaltenüberschriften mit den entsprechenden Abfragezeichenfolgenwerten zu konfigurieren:
+`NameSort` und `DateSort` werden auf der Razor-Seite verwendet, um die Hyperlinks in den Spaltenüberschriften mit den entsprechenden Abfragezeichenfolgenwerten zu konfigurieren:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -187,9 +193,9 @@ Alle Parameter, die `OnGetAsync` empfängt, sind NULL, wenn:
 
 Wenn auf einen Paging-Link geklickt wird, enthält die Seitenindexvariable die anzuzeigende Seitenzahl.
 
-Die `CurrentSort`-Eigenschaft stellt die Razor Page mit der aktuellen Sortierreihenfolge bereit. Die aktuelle Sortierreihenfolge muss in den Paging-Links enthalten sein, damit die Sortierreihenfolge während des Pagings beibehalten wird.
+Die `CurrentSort`-Eigenschaft stellt die Razor-Seite mit der aktuellen Sortierreihenfolge bereit. Die aktuelle Sortierreihenfolge muss in den Paging-Links enthalten sein, damit die Sortierreihenfolge während des Pagings beibehalten wird.
 
-Die `CurrentFilter`-Eigenschaft stellt die Razor Page mit der aktuellen Filterzeichenfolge bereit. Der `CurrentFilter`-Wert:
+Die `CurrentFilter`-Eigenschaft stellt die Razor-Seite mit der aktuellen Filterzeichenfolge bereit. Der `CurrentFilter`-Wert:
 
 * Muss in den Paging-Links enthalten sein, damit die Filtereinstellungen während des Pagings beibehalten werden.
 * Muss im Textfeld wiederhergestellt werden, wenn die Seite erneut angezeigt wird.
@@ -199,11 +205,11 @@ Wenn die Suchzeichenfolge während des Pagings geändert wird, wird die Seite au
   * Die Suchzeichenfolge wird geändert.
   * Der Parameter `searchString` ist nicht NULL.
 
-  Die Methode `PaginatedList.CreateAsync` konvertiert die Studentenabfrage in eine einzelne Studentenseite in einem Sammlungstyp, der das Paging unterstützt. Diese einzelne Studentenseite wird an die Eaglemoss Razor Page übergeben.
+  Die Methode `PaginatedList.CreateAsync` konvertiert die Studentenabfrage in eine einzelne Studentenseite in einem Sammlungstyp, der das Paging unterstützt. Diese einzelne Studentenseite wird an die Razor Page übergeben.
 
   Die zwei Fragezeichen nach `pageIndex` im `PaginatedList.CreateAsync`-Aufruf stellen den [NULL-Sammeloperator](/dotnet/csharp/language-reference/operators/null-conditional-operator) dar. Der NULL-Sammeloperator definiert einen Standardwert für einen auf NULL festlegbaren Typ. Der Ausdruck `(pageIndex ?? 1)` bedeutet, dass der Wert von `pageIndex` zurückgegeben wird, wenn dieser einen Wert aufweist. Wenn der `pageIndex` keinen Wert aufweist, wird 1 zurückgegeben.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Hinzufügen von Paging-Links zur Razor Page
+### <a name="add-paging-links-to-the-razor-page"></a>Hinzufügen von Paging-Links zur Razor-Seite
 
 Ersetzen Sie den Code in *Students/Index.cshtml* durch den folgenden Code. Die Änderungen werden hervorgehoben:
 
@@ -239,7 +245,7 @@ Erstellen Sie *SchoolViewModels/EnrollmentDateGroup.cs* mit dem folgenden Code:
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Aktualisieren der Razor Page
+### <a name="create-the-razor-page"></a>Erstellen der Razor-Seite
 
 Fügen Sie eine Datei *Pages/About.cshtml* mit dem folgenden Code hinzu:
 
@@ -294,7 +300,7 @@ Der Parameter `sortOrder` ist entweder „Name“ oder „Datum“. Dem Paramete
 
 Wenn die Indexseite über den Link **Studenten** angefordert wird, gibt es keine Abfragezeichenfolge. Die Studenten werden in aufsteigender Reihenfolge nach Nachnamen angezeigt. Die aufsteigende Reihenfolge nach Nachnamen (FallThrough-Fall) ist in der `switch`-Anweisung die Standardeinstellung. Wenn der Benutzer auf einen Link in einer Spaltenüberschrift klickt, wird der entsprechende `sortOrder`-Wert im Abfragezeichenfolgenwert bereitgestellt.
 
-`NameSort` und `DateSort` werden auf der Razor Page verwendet, um die Hyperlinks in den Spaltenüberschriften mit den entsprechenden Abfragezeichenfolgenwerten zu konfigurieren:
+`NameSort` und `DateSort` werden auf der Razor-Seite verwendet, um die Hyperlinks in den Spaltenüberschriften mit den entsprechenden Abfragezeichenfolgenwerten zu konfigurieren:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -453,7 +459,7 @@ Wenn die Suchzeichenfolge während des Pagings geändert wird, wird die Seite au
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage3)]
 
-Die Methode `PaginatedList.CreateAsync` konvertiert die Studentenabfrage in eine einzelne Studentenseite in einem Sammlungstyp, der das Paging unterstützt. Diese einzelne Studentenseite wird an die Eaglemoss Razor Page übergeben.
+Die Methode `PaginatedList.CreateAsync` konvertiert die Studentenabfrage in eine einzelne Studentenseite in einem Sammlungstyp, der das Paging unterstützt. Diese einzelne Studentenseite wird an die Razor Page übergeben.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage4)]
 
@@ -505,7 +511,7 @@ Fügen Sie im Ordner *SchoolViewModels* die Datei *EnrollmentDateGroup.cs* mit f
 
 ### <a name="update-the-about-page-model"></a>Aktualisieren des Info-Seitenmodells
 
-Die Webvorlagen in ASP.NET Core 2.2 enthalten nicht die Seite „Info“. Erstellen Sie bei Verwendung von ASP.NET Core 2.2 die „Informationen zu Razor“-Seite.
+Die Webvorlagen in ASP.NET Core 2.2 enthalten nicht die Seite „Info“. Erstellen Sie bei Verwenden von ASP.NET Core 2.2 die „Informationen zu Razor Page“.
 
 Aktualisieren Sie die Datei *Pages/About.cshtml.cs* mit folgendem Code:
 
@@ -513,7 +519,7 @@ Aktualisieren Sie die Datei *Pages/About.cshtml.cs* mit folgendem Code:
 
 Die LINQ-Anweisung gruppiert die Studentenentitäten nach Anmeldedatum, berechnet die Anzahl der Entitäten in jeder Gruppe und speichert die Ergebnisse in einer Sammlung von `EnrollmentDateGroup`-Ansichtsmodellobjekten.
 
-### <a name="modify-the-about-razor-page"></a>Ändern der Razor Page „Info“
+### <a name="modify-the-about-razor-page"></a>Ändern der Seite „Informationen zu Razor Page“
 
 Ersetzen Sie den Code in der Datei *Pages/About.cshtml* durch den folgenden Code:
 

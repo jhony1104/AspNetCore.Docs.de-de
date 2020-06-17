@@ -1,19 +1,25 @@
 ---
-title: 'Razor-Seiten mit EF Core in ASP.NET Core: Parallelität (8 von 8)'
+title: 'Teil 8: Razor Pages mit EF Core in ASP.NET Core – Parallelität'
 author: rick-anderson
-description: In diesem Tutorial wird gezeigt, wie Sie Konflikte behandeln, wenn mehrere Benutzer gleichzeitig dieselbe Entität aktualisieren.
+description: Dies ist Teil 8 der Tutorialreihe zu Razor Pages und dem Entity Framework.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fb6a59a11cf31dff4866d5f5294cd9f15b173add
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645877"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652431"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: Parallelität (8 von 8)
+# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Teil 8: Razor Pages mit EF Core in ASP.NET Core – Parallelität
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra) und [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -272,7 +278,7 @@ Der folgende hervorgehobene Code legt den `RowVersion`-Wert auf den neuen Wert f
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-Die Anweisung `ModelState.Remove` ist erforderlich, da `ModelState` über den alten `RowVersion`-Wert verfügt. Auf der Razor Page hat der `ModelState`-Wert eines Felds Vorrang gegenüber den Modelleigenschaftswerten, wenn beide vorhanden sind.
+Die Anweisung `ModelState.Remove` ist erforderlich, da `ModelState` über den alten `RowVersion`-Wert verfügt. In der Razor-Seite hat der Wert `ModelState` Vorrang vor den Modelleigenschaftswerten, wenn beide vorhanden sind.
 
 ### <a name="update-the-razor-page"></a>Aktualisieren der Razor-Seite
 
@@ -327,7 +333,7 @@ Die Seite „Löschen“ erkennt Nebenläufigkeitskonflikte, wenn die Entität g
 * Wird eine DbUpdateConcurrencyException-Ausnahme ausgelöst.
 * Wird `OnGetAsync` mit `concurrencyError` aufgerufen.
 
-### <a name="update-the-delete-razor-page"></a>Aktualisieren der Razor Page „Löschen“
+### <a name="update-the-delete-razor-page"></a>Aktualisieren der Razor-Seite „Delete“ (Löschen)
 
 Aktualisieren Sie die *Pages\Departments\Delete.cshtml*-Datei mithilfe des folgenden Codes:
 
@@ -568,7 +574,7 @@ Der folgende hervorgehobene Code legt den `RowVersion`-Wert auf den neuen Wert f
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-Die Anweisung `ModelState.Remove` ist erforderlich, da `ModelState` über den alten `RowVersion`-Wert verfügt. Auf der Razor Page hat der `ModelState`-Wert eines Felds Vorrang gegenüber den Modelleigenschaftswerten, wenn beide vorhanden sind.
+Die Anweisung `ModelState.Remove` ist erforderlich, da `ModelState` über den alten `RowVersion`-Wert verfügt. In der Razor-Seite hat der Wert `ModelState` Vorrang vor den Modelleigenschaftswerten, wenn beide vorhanden sind.
 
 ## <a name="update-the-edit-page"></a>Aktualisieren der Seite „Bearbeiten“
 

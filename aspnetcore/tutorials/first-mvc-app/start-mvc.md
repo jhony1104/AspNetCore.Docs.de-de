@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0b28e99d9c56d92e157e9010880e58ec5165196a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c2b76b59ae775b9268fa77019bf8420e5e4108b6
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774984"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452282"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Erste Schritte mit ASP.NET Core MVC
 
@@ -98,17 +98,24 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
 * Klicken Sie auf **Datei** > **Neue Projektmappe**.
 
-  ![Neue Projektmappe in macOS](./start-mvc/_static/new_project_vsmac.png)
+  ![Neue Projektmappe in macOS](start-mvc/_static/new_project_vsmac.png)
 
-* Wählen Sie **.NET Core** > **App** > **Webanwendung (Model-View-Controller)** > **Weiter** aus.
+* Navigieren Sie in Visual Studio für Mac-Versionen vor Version 8.6 zu **.NET Core** > **App** > **Webanwendung (Model-View-Controller)**  > **Weiter**. Bei Version 8.6 oder höher klicken Sie auf **Web and Console** > **App** > **Webanwendung (Model-View-Controller)**  > **Weiter** (Web und Konsole).
 
-  ![Dialogfeld „Neue Projektmappe“ in macOS](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![Auswählen der macOS-Web-App-Vorlage](start-mvc/_static/web_app_template_vsmac.png)
 
-* Wählen Sie im Dialogfeld **Configure your new ASP.NET Core Web API** (Neue ASP.NET Core-Web-API konfigurieren) für das **Zielframework** den Eintrag **.NET Core 3.1** aus.
+* Bestätigen Sie die folgenden Konfigurationen:
 
-  ![Auswahl für .NET Core 3.1 in macOS](./start-mvc/_static/new_project_31_vsmac.png)
+  * **Zielframework** auf **.NET Core 3.1** festgelegt
+  * **Authentifizierung** auf **Keine Authentifizierung** festgelegt
+   
+  Klicken Sie auf **Weiter**.
+
+  ![Auswahl für .NET Core 3.1 in macOS](start-mvc/_static/new_project_31_vsmac.png)
 
 * Nennen Sie das Projekt **MvcMovie**, und wählen Sie dann **Erstellen** aus.
+
+  ![Benennen des macOS-Projekts](start-mvc/_static/MvcMovie.png)
 
 ---
 
@@ -248,9 +255,7 @@ Das Tutorial setzt voraus, dass Sie mit VS Code vertraut sind. Weitere Informati
 
   ![Neue Projektmappe in macOS](./start-mvc/_static/new_project_vsmac.png)
 
-* Wählen Sie **.NET Core** > **App** > **Webanwendung (Model-View-Controller)** > **Weiter** aus.
-
-  ![Dialogfeld „Neue Projektmappe“ in macOS](./start-mvc/_static/new_project_mvc_vsmac.png)
+* Navigieren Sie in Visual Studio für Mac-Versionen vor Version 8.6 zu **.NET Core** > **App** > **Webanwendung (Model-View-Controller)**  > **Weiter**. Bei Version 8.6 oder höher klicken Sie auf **Web and Console** > **App** > **Webanwendung (Model-View-Controller)**  > **Weiter** (Web und Konsole).
 
 * Übernehmen Sie im Dialogfeld **Neue ASP.NET Core-Web-API konfigurieren** die Standardeinstellung für **Zielframework** von **.NET Core 2.2**.
 

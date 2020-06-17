@@ -1,12 +1,24 @@
 ---
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Blazor-Formulare und -Validierung in ASP.NET Core
+author: guardrex
+description: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarios in Blazor verwendet werden.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/forms-validation
+ms.openlocfilehash: 707686cdc4ceb6605d6214eeeee0f6dd2e121c90
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679526"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>Blazor-Formulare und -Validierung in ASP.NET Core
 
@@ -62,114 +74,13 @@ Im vorherigen Beispiel:
 Einige integrierte Eingabekomponenten sind verfügbar, um Benutzereingaben zu empfangen und zu validieren. Eingaben werden validiert, wenn sie geändert werden und wenn ein Formular gesendet wird. In der folgenden Tabelle finden Sie verfügbare Eingabekomponenten.
 
 | Eingabekomponenten | Wird gerendert als&hellip; |
-| ---
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--------- | --- title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: „Blazor-Formulare und -Validierung in ASP.NET Core“ Autor: Beschreibung: Hier erfahren Sie, wie Formular- und Feldvalidierungsszenarien in Blazor verwendet werden.
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------- | | <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
 
 Alle Eingabekomponenten einschließlich <xref:Microsoft.AspNetCore.Components.Forms.EditForm> unterstützen arbiträre Attribute. Attribute, die nicht mit einem Komponentenparameter übereinstimmen, werden dem gerenderten HTML-Element hinzugefügt.
 
@@ -335,7 +246,9 @@ Im folgenden Beispiel:
 
 Verwenden Sie die <xref:Microsoft.AspNetCore.Components.Forms.InputText>-Komponente, um eine benutzerdefinierte Komponente zu erstellen, die das `input`-Ereignis anstelle des `change`-Ereignisses verwendet.
 
-Erstellen Sie eine Komponente mit dem folgenden Markup, und verwenden Sie die Komponente genauso, wie <xref:Microsoft.AspNetCore.Components.Forms.InputText> verwendet wird.
+Im folgenden Beispiel erbt die `CustomInputText`-Komponente die `InputText`-Komponente des Frameworks und legt die Ereignisbindung (<xref:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder%2A>) auf das `oninput`-Ereignis fest.
+
+*Shared/CustomInputText.razor:*
 
 ```razor
 @inherits InputText
@@ -343,9 +256,48 @@ Erstellen Sie eine Komponente mit dem folgenden Markup, und verwenden Sie die Ko
 <input 
     @attributes="AdditionalAttributes" 
     class="@CssClass" 
-    value="@CurrentValue" 
+    value="@CurrentValue"
     @oninput="EventCallback.Factory.CreateBinder<string>(
-        this, __value => CurrentValueAsString = __value, CurrentValueAsString)" />
+         this, __value => CurrentValueAsString = __value, 
+         CurrentValueAsString)" />
+```
+
+Die `CustomInputText`-Komponente kann überall dort verwendet werden, wo <xref:Microsoft.AspNetCore.Components.Forms.InputText> verwendet wird:
+
+*Pages/TestForm.razor*:
+
+```razor
+@page  "/testform"
+@using System.ComponentModel.DataAnnotations;
+
+<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <CustomInputText @bind-Value="exampleModel.Name" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<p>
+    CurrentValue: @exampleModel.Name
+</p>
+
+@code {
+    private ExampleModel exampleModel = new ExampleModel();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+
+    public class ExampleModel
+    {
+        [Required]
+        [StringLength(10, ErrorMessage = "Name is too long.")]
+        public string Name { get; set; }
+    }
+}
 ```
 
 ## <a name="work-with-radio-buttons"></a>Verwenden von Optionsfeldern

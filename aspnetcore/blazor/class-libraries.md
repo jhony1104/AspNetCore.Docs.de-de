@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: 57f3494fd825b6549c40f56962da2c8076e8fd51
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b7819404066267003a340629979f2339c66724b0
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767095"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452017"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>Klassenbibliotheken für ASP.NET Core-Razor-Komponenten
 
@@ -39,8 +39,8 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um Ihre Umgeb
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Erstellen Sie ein neues Projekt.
-1. Wählen Sie **Razor-Klassenbibliothek** aus. Klicken Sie auf **Weiter**.
-1. Wählen Sie im Dialogfeld **Neue Razor-Klassenbibliothek erstellen** die Option **Erstellen** aus.
+1. Klicken Sie auf **Razor-Klassenbibliothek**. Klicken Sie auf **Weiter**.
+1. Klicken Sie im Dialogfeld **Neue Razor-Klassenbibliothek erstellen** auf **Erstellen**.
 1. Geben Sie im Feld **Projektname** einen Projektnamen ein, oder übernehmen Sie den Standardnamen. Die Beispiele in diesem Thema verwenden den Projektnamen `MyComponentLib1`. Wählen Sie **Erstellen** aus.
 1. Fügen Sie die RCL zu einer Projektmappe hinzu:
    1. Klicken Sie mit der rechten Maustaste auf die Projektmappe. Wählen Sie **Hinzufügen** > **Vorhandenes Projekt** aus.
@@ -89,7 +89,7 @@ Befolgen Sie die Anweisungen im Artikel <xref:blazor/get-started>, um Ihre Umgeb
 Um Komponenten, die in einer Bibliothek definiert sind, in einem anderen Projekt zu verwenden, verwenden Sie einen der folgenden Ansätze:
 
 * Verwenden Sie den vollständigen Typnamen mit dem Namespace.
-* Verwenden Sie die [\@using](xref:mvc/views/razor#using)-Anweisung von Razor. Einzelne Komponenten können über den Namen hinzugefügt werden.
+* Verwenden Sie die Razor-Anweisung [`@using`](xref:mvc/views/razor#using). Einzelne Komponenten können über den Namen hinzugefügt werden.
 
 In den folgenden Beispielen ist `MyComponentLib1` eine Komponentenbibliothek, die eine `SalesReport`-Komponente enthält.
 

@@ -1,18 +1,24 @@
 ---
-title: 'Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)'
+title: 'Teil 2: Razor Pages mit EF Core in ASP.NET Core – CRUD'
 author: rick-anderson
-description: In diesem Tutorial wird veranschaulicht, wie mit EF Core Erstellungs-, Lese-, Aktualisierungs- und Löschvorgänge durchgeführt werden.
+description: Dies ist Teil 2 der Tutorialreihe zu Razor Pages und dem Entity Framework.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 62e35639d5e3d43bd20c9f92b75fa101d7914f82
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650149"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652353"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Razor-Seiten mit EF Core in ASP.NET Core: CRUD (2 von 8)
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>Teil 2: Razor Pages mit EF Core in ASP.NET Core – CRUD
 
 Von [Tom Dykstra](https://github.com/tdykstra), [Jon P. Smith](https://twitter.com/thereformedprog) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -90,7 +96,7 @@ Die Verwendung von `TryUpdateModel` zur Aktualisierung von Feldern mit bereitges
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Selbst wenn die App auf der Razor Page „Create“ oder „Update“ (Erstellen oder Aktualisieren) nicht über ein Feld `Secret` verfügt, könnte ein Hacker den `Secret`-Wert durch Overposting festlegen. Ein Hacker könnte ein Tool wie Fiddler verwenden oder JavaScript-Code schreiben, um einen `Secret`-Formularwert bereitzustellen. Die Felder, die von der Modellbindung bei der Erstellung einer Student-Instanz verwendet werden, werden nicht durch den ursprünglichen Code begrenzt.
+Selbst wenn die App auf der Razor Page „Create“ oder „Update“ (Erstellen oder Aktualisieren) nicht über das Feld `Secret` verfügt, könnte ein Hacker den `Secret`-Wert durch Overposting festlegen. Ein Hacker könnte ein Tool wie Fiddler verwenden oder JavaScript-Code schreiben, um einen `Secret`-Formularwert bereitzustellen. Die Felder, die von der Modellbindung bei der Erstellung einer Student-Instanz verwendet werden, werden nicht durch den ursprünglichen Code begrenzt.
 
 Jeder beliebige Wert, der vom Hacker im `Secret`-Formularfeld angegeben wird, wird in der Datenbank aktualisiert. Die folgende Abbildung zeigt das Fiddler-Tool beim Hinzufügen des Felds `Secret` (mit dem Wert „OverPost“) zu den bereitgestellten Formularwerten.
 
@@ -185,7 +191,7 @@ Führen Sie die App aus, und löschen Sie einen Studenten, um die Seite „Delet
 
 In diesem Tutorial wird der erstellte CRUD-Code (CRUD = Create, Read, Update, Delete; Erstellen, Lesen, Aktualisieren, Löschen) überprüft und angepasst.
 
-Zur Minimierung der Komplexität und damit EF Core im Fokus dieser Tutorials bleibt, wird in den Seitenmodellen EF Core-Code verwendet. Einige Entwickler verwenden eine Dienstschicht oder ein Repositorymuster für die Erstellung einer Abstraktionsschicht zwischen der Benutzeroberfläche (Razor Pages) und der Datenzugriffsschicht.
+Zur Minimierung der Komplexität und damit EF Core im Fokus dieser Tutorials bleibt, wird in den Seitenmodellen EF Core-Code verwendet. Einige Entwickler verwenden eine Dienstschicht oder ein Repositorymuster, um eine Abstraktionsschicht zwischen der Benutzeroberfläche (Razor Pages) und der Datenzugriffsschicht zu erstellen.
 
 In diesem Tutorial werden die Razor Pages „Create“ (Erstellen), „Edit“ (Bearbeiten), „Delete“ (Löschen) und „Details“ im Ordner *Students* erläutert.
 
@@ -298,7 +304,7 @@ Die Verwendung von `TryUpdateModel` zur Aktualisierung von Feldern mit bereitges
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Selbst wenn die App auf der Razor Page „Create/Update“ (Erstellen/Aktualisieren) nicht über ein Feld vom Typ `Secret` verfügt, könnte ein Hacker den `Secret`-Wert durch Overposting festlegen. Ein Hacker könnte ein Tool wie Fiddler verwenden oder JavaScript-Code schreiben, um einen `Secret`-Formularwert bereitzustellen. Die Felder, die von der Modellbindung bei der Erstellung einer Student-Instanz verwendet werden, werden nicht durch den ursprünglichen Code begrenzt.
+Selbst wenn die App auf der Razor Page „Create“ oder „Update“ (Erstellen oder Aktualisieren) nicht über das Feld `Secret` verfügt, könnte ein Hacker den `Secret`-Wert durch Overposting festlegen. Ein Hacker könnte ein Tool wie Fiddler verwenden oder JavaScript-Code schreiben, um einen `Secret`-Formularwert bereitzustellen. Die Felder, die von der Modellbindung bei der Erstellung einer Student-Instanz verwendet werden, werden nicht durch den ursprünglichen Code begrenzt.
 
 Jeder beliebige, vom Hacker in den `Secret`-Formularfeldern angegebene Wert wird in der Datenbank aktualisiert. Die folgende Abbildung zeigt das Fiddler-Tool beim Hinzufügen des Felds `Secret` (mit dem Wert „OverPost“) zu den bereitgestellten Formularwerten.
 
@@ -385,7 +391,7 @@ Der vorangehende Code ruft die ausgewählte Entität ab und anschließend die Me
 * Wird die Datenbankausnahme abgefangen.
 * Wird die Methode `OnGetAsync` auf der Seite „Löschen“ mit `saveChangesError=true` aufgerufen.
 
-### <a name="update-the-delete-razor-page"></a>Aktualisieren der Razor Page „Löschen“
+### <a name="update-the-delete-razor-page"></a>Aktualisieren der Razor Page „Delete“ (Löschen)
 
 Fügen Sie folgende hervorgehobene Fehlermeldung zur Razor Page „Löschen“ hinzu.
 <!--
@@ -399,7 +405,7 @@ Testen Sie die Seite „Löschen“.
 
 „Students/Index“ oder andere Links funktionieren nicht:
 
-Überprüfen Sie, ob die Razor Page die richtige `@page`-Anweisung enthält. Die Razor-Seite „Students/Index“ sollte beispielsweise **keine** Routenvorlage enthalten:
+Überprüfen Sie, ob die Razor Page die richtige `@page`-Anweisung enthält. Die Razor Page „Students/Index“ sollte beispielsweise **keine** Routenvorlage enthalten:
 
 ```cshtml
 @page "{id:int}"
