@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: 2d806413eb66d4c1301df4a0db950e8b919c09a4
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 66430fe45d74fadf46dff3798215ae3ac6e10a40
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84419748"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776396"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor-Ereignisbehandlung
 
@@ -184,7 +184,7 @@ Wenn die Schaltfläche in der `ChildComponent` ausgewählt ist:
 Rufen Sie ein <xref:Microsoft.AspNetCore.Components.EventCallback> oder <xref:Microsoft.AspNetCore.Components.EventCallback%601> mit <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A> auf, und warten Sie auf das <xref:System.Threading.Tasks.Task>:
 
 ```csharp
-await callback.InvokeAsync(arg);
+await OnClickCallback.InvokeAsync(arg);
 ```
 
 Verwenden Sie <xref:Microsoft.AspNetCore.Components.EventCallback> und <xref:Microsoft.AspNetCore.Components.EventCallback%601> für die Ereignisbehandlung und die Bindung von Komponentenparametern.
