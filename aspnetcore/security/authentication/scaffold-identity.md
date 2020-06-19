@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724288"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103031"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identity in ASP.net Core Projekten
 
@@ -195,7 +195,7 @@ Token können an-Komponenten übermittelt werden:
 * Wenn Authentifizierungs Token bereitgestellt und im Authentifizierungs Cookie gespeichert werden, können Sie an-Komponenten übermittelt werden.
 * RazorKomponenten können nicht `HttpContext` direkt verwenden. Daher gibt es keine Möglichkeit, ein [Anti-Request-fälschungstoken (XSRF)](xref:security/anti-request-forgery) zu erhalten, um an Identity den Abmelde Endpunkt in bereitzustellen `/Identity/Account/Logout` . Ein XSRF-Token kann an-Komponenten übermittelt werden.
 
-Weitere Informationen finden Sie unter <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Weitere Informationen finden Sie unter <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 Stellen Sie in der Datei *pages/_Host. cshtml* das Token her, nachdem Sie es der `InitialApplicationState` -Klasse und der-Klasse hinzugefügt haben `TokenProvider` :
 
@@ -229,7 +229,7 @@ Der `TokenProvider` im Thema gezeigte Dienst wird in der `LoginDisplay` Komponen
 In der- `Startup` Klasse:
 
 * Vergewissern Sie sich, dass Razor Seiten Dienste in hinzugefügt wurden `Startup.ConfigureServices` .
-* Wenn Sie den-Registrierungs [Anbieter](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)verwenden, registrieren Sie den Dienst.
+* Wenn Sie den-Registrierungs [Anbieter](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)verwenden, registrieren Sie den Dienst.
 * Ruft `UseDatabaseErrorPage` für den Anwendungs-Generator in `Startup.Configure` für die Entwicklungsumgebung auf.
 * `UseAuthentication`Und `UseAuthorization` nach `UseRouting` .
 * Fügen Sie einen Endpunkt für Razor Seiten hinzu.
@@ -253,7 +253,7 @@ Fügen Sie `RedirectToLogin` dem frei *gegebenen* Ordner der APP im Projektstamm
 }
 ```
 
-Fügen Sie `LoginDisplay` dem frei *gegebenen* Ordner der App eine Komponente (*logindisplay. Razor*) hinzu. Der [TokenProvider-Dienst](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) stellt das XSRF-Token für das HTML-Formular bereit, das in den Identity Abmelde-Endpunkt von Beiträgen sendet:
+Fügen Sie `LoginDisplay` dem frei *gegebenen* Ordner der App eine Komponente (*logindisplay. Razor*) hinzu. Der [TokenProvider-Dienst](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) stellt das XSRF-Token für das HTML-Formular bereit, das in den Identity Abmelde-Endpunkt von Beiträgen sendet:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: de8ab915e6a8529c7401f89fad067ec33d5d0713
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774417"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074477"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Anspruchs basierte Autorisierung in ASP.net Core
 
 <a name="security-authorization-claims-based"></a>
 
-Wenn eine Identität erstellt wird, kann Ihr eine oder mehrere Ansprüche zugewiesen werden, die von einer vertrauenswürdigen Partei ausgegeben werden. Ein Anspruch ist ein Name-Wert-Paar, das den Betreff darstellt, nicht das, was der Betreff tun kann. Beispielsweise können Sie über die Lizenz eines Treibers verfügen, die von einer lokalen Führerschein Zertifizierungsstelle ausgestellt wurde. Die Lizenz Ihres Treibers hat das Geburtsdatum. In diesem Fall würde der Anspruchs Name lauten `DateOfBirth`. der Anspruchs Wert wäre z `8th June 1970` . b. das Geburtsdatum, und der Aussteller wäre die treibende Lizenz. Die Anspruchs basierte Autorisierung überprüft am einfachsten den Wert eines Anspruchs und ermöglicht den Zugriff auf eine Ressource basierend auf diesem Wert. Wenn Sie z. b. auf einen Nacht Club zugreifen möchten, könnte der Autorisierungs Prozess wie folgt lauten:
+Wenn eine Identität erstellt wird, kann Ihr eine oder mehrere Ansprüche zugewiesen werden, die von einer vertrauenswürdigen Partei ausgegeben werden. Ein Anspruch ist ein Name-Wert-Paar, das den Betreff darstellt, nicht das, was der Betreff tun kann. Beispielsweise können Sie über die Lizenz eines Treibers verfügen, die von einer lokalen Führerschein Zertifizierungsstelle ausgestellt wurde. Die Lizenz Ihres Treibers hat das Geburtsdatum. In diesem Fall würde der Anspruchs Name lauten `DateOfBirth` . der Anspruchs Wert wäre z. b. das Geburtsdatum, `8th June 1970` und der Aussteller wäre die treibende Lizenz. Die Anspruchs basierte Autorisierung überprüft am einfachsten den Wert eines Anspruchs und ermöglicht den Zugriff auf eine Ressource basierend auf diesem Wert. Wenn Sie z. b. auf einen Nacht Club zugreifen möchten, könnte der Autorisierungs Prozess wie folgt lauten:
 
 Der Door Security Officer wertet den Wert Ihres Geburts Geburts Anspruchs aus und gibt an, ob er dem Aussteller (der führerscheinbehörde) vertraut, bevor Sie Zugriff gewähren.
 
@@ -34,7 +34,7 @@ Anspruchs basierte Autorisierungs Überprüfungen sind deklarativ. der Entwickle
 
 Der einfachste Typ der Anspruchs Richtlinie sucht nach dem vorhanden sein eines Anspruchs und überprüft den Wert nicht.
 
-Zuerst müssen Sie die Richtlinie erstellen und registrieren. Dies erfolgt im Rahmen der Autorisierungs Dienst Konfiguration, die normalerweise in Ihrer `ConfigureServices()` *Startup.cs* -Datei teilnimmt.
+Zuerst müssen Sie die Richtlinie erstellen und registrieren. Dies erfolgt im Rahmen der Autorisierungs Dienst Konfiguration, die normalerweise in `ConfigureServices()` Ihrer *Startup.cs* -Datei teilnimmt.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -69,9 +69,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-In diesem Fall prüft `EmployeeOnly` die Richtlinie, ob ein `EmployeeNumber` Anspruch auf die aktuelle Identität vorhanden ist.
+In diesem Fall `EmployeeOnly` prüft die Richtlinie, ob ein `EmployeeNumber` Anspruch auf die aktuelle Identität vorhanden ist.
 
-Anschließend wenden Sie die Richtlinie mithilfe `Policy` der-Eigenschaft `AuthorizeAttribute` für das-Attribut an, um den Richtlinien Namen anzugeben.
+Anschließend wenden Sie die Richtlinie mithilfe der- `Policy` Eigenschaft für das- `AuthorizeAttribute` Attribut an, um den Richtlinien Namen anzugeben.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -81,7 +81,7 @@ public IActionResult VacationBalance()
 }
 ```
 
-Das `AuthorizeAttribute` -Attribut kann auf einen gesamten Controller angewendet werden. in diesem Fall erhalten nur Identitäten, die mit der Richtlinie übereinstimmen, Zugriff auf jede Aktion auf dem Controller.
+Das- `AuthorizeAttribute` Attribut kann auf einen gesamten Controller angewendet werden. in diesem Fall erhalten nur Identitäten, die mit der Richtlinie übereinstimmen, Zugriff auf jede Aktion auf dem Controller.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -93,7 +93,7 @@ public class VacationController : Controller
 }
 ```
 
-Wenn Sie über einen Controller verfügen, der durch das `AuthorizeAttribute` -Attribut geschützt ist, Sie jedoch den anonymen Zugriff auf bestimmte Aktionen zulassen `AllowAnonymousAttribute` möchten, wenden Sie das-Attribut an.
+Wenn Sie über einen Controller verfügen, der durch das-Attribut geschützt ist `AuthorizeAttribute` , Sie jedoch den anonymen Zugriff auf bestimmte Aktionen zulassen möchten, wenden Sie das- `AllowAnonymousAttribute` Attribut an.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -148,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 ::: moniker-end
 ### <a name="add-a-generic-claim-check"></a>Generische Anspruchs Prüfung hinzufügen
 
-Wenn der Anspruchs Wert kein einzelner Wert ist oder eine Transformation erforderlich ist, verwenden Sie [requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). Weitere Informationen finden Sie unter [Verwenden eines Func zum erfüllen einer Richtlinie](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy).
+Wenn der Anspruchs Wert kein einzelner Wert ist oder eine Transformation erforderlich ist, verwenden Sie [requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). Weitere Informationen finden Sie unter [Verwenden eines Func zum erfüllen einer Richtlinie](xref:security/authorization/policies#use-a-func-to-fulfill-a-policy).
 
 ## <a name="multiple-policy-evaluation"></a>Bewertung mehrerer Richtlinien
 
@@ -169,6 +169,6 @@ public class SalaryController : Controller
 }
 ```
 
-Im obigen Beispiel kann jede Identität, die die `EmployeeOnly` Richtlinie erfüllt, `Payslip` auf die Aktion zugreifen, da diese Richtlinie auf dem Controller erzwungen wird. Um die `UpdateSalary` Aktion aufzurufen, muss die Identität jedoch *sowohl* die `EmployeeOnly` Richtlinie als auch `HumanResources` die Richtlinie erfüllen.
+Im obigen Beispiel kann jede Identität, die die `EmployeeOnly` Richtlinie erfüllt, `Payslip` auf die Aktion zugreifen, da diese Richtlinie auf dem Controller erzwungen wird. Um die Aktion aufzurufen, `UpdateSalary` muss die Identität jedoch *sowohl* die `EmployeeOnly` Richtlinie als auch die `HumanResources` Richtlinie erfüllen.
 
 Wenn Sie kompliziertere Richtlinien erstellen möchten, z. b. das Erstellen eines Geburts Geburts Anspruchs, das Berechnen eines Alters aus diesem und das überprüfen, ob das Alter 21 oder älter ist, müssen Sie [benutzerdefinierte Richtlinien Handler](xref:security/authorization/policies)schreiben.

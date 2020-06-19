@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 3b6fcef91355bf22e5aa185652d9489a44998db0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777500"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074152"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Richtlinien basierte Autorisierung in ASP.net Core
 
@@ -25,15 +25,15 @@ ms.locfileid: "82777500"
 
 Im Hintergrund werden bei der [rollenbasierten Autorisierung](xref:security/authorization/roles) und der [Anspruchs basierten Autorisierung](xref:security/authorization/claims) eine Anforderung, ein Anforderungs Handler und eine vorkonfigurierte Richtlinie verwendet. Diese Bausteine unterstützen den Ausdruck der Autorisierungs Auswertungen im Code. Das Ergebnis ist eine umfangreichere, wiederverwendbare, testbare Autorisierungs Struktur.
 
-Eine Autorisierungs Richtlinie besteht aus einer oder mehreren Anforderungen. Sie wird als Teil der Autorisierungs Dienst Konfiguration in der `Startup.ConfigureServices` -Methode registriert:
+Eine Autorisierungs Richtlinie besteht aus einer oder mehreren Anforderungen. Sie wird als Teil der Autorisierungs Dienst Konfiguration in der- `Startup.ConfigureServices` Methode registriert:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53, 58)]
 
-Im vorherigen Beispiel wird eine Richtlinie "AtLeast21" erstellt. Sie verfügt über eine einzige&mdash;Anforderung, die ein minimal Alter ist, das als Parameter für die Anforderung angegeben wird.
+Im vorherigen Beispiel wird eine Richtlinie "AtLeast21" erstellt. Sie verfügt über eine einzige Anforderung, die ein &mdash; minimal Alter ist, das als Parameter für die Anforderung angegeben wird.
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich war, ist <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>:
+Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich war, ist <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> :
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
@@ -60,7 +60,7 @@ public interface IAuthorizationHandler
 }
 ```
 
-Mit <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> der-Klasse wird der Handler verwendet, um zu kennzeichnen, ob Anforderungen erfüllt sind:
+Mit der- <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> Klasse wird der Handler verwendet, um zu kennzeichnen, ob Anforderungen erfüllt sind:
 
 ```csharp
  context.Succeed(requirement)
@@ -89,7 +89,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-Der folgende Code zeigt ein typisches `ConfigureServices`:
+Der folgende Code zeigt ein typisches `ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -111,27 +111,27 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Verwenden <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> Sie `[Authorize(Policy = "Something")]` oder für die Autorisierung.
+Verwenden Sie <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> oder `[Authorize(Policy = "Something")]` für die Autorisierung.
 
-## <a name="applying-policies-to-mvc-controllers"></a>Anwenden von Richtlinien auf MVC-Controller
+## <a name="apply-policies-to-mvc-controllers"></a>Anwenden von Richtlinien auf MVC-Controller
 
-Wenn Sie Seiten verwenden Razor , finden Sie weitere Informationen unter [Anwenden von Richtlinien Razor auf Seiten](#applying-policies-to-razor-pages) in diesem Dokument.
+Wenn Sie Seiten verwenden Razor , finden Sie weitere Informationen unter [Anwenden von Richtlinien auf Razor Seiten](#apply-policies-to-razor-pages) in diesem Dokument.
 
-Richtlinien werden mithilfe des `[Authorize]` -Attributs mit dem Richtlinien Namen auf Controller angewendet. Beispiel:
+Richtlinien werden mithilfe des- `[Authorize]` Attributs mit dem Richtlinien Namen auf Controller angewendet. Beispiel:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>Anwenden von Richt Razor Linien auf Seiten
+## <a name="apply-policies-to-razor-pages"></a>Anwenden von Richtlinien auf Razor Seiten
 
-Richtlinien werden mithilfe Razor des `[Authorize]` -Attributs mit dem Richtlinien Namen auf Seiten angewendet. Beispiel:
+Richtlinien werden Razor mithilfe des- `[Authorize]` Attributs mit dem Richtlinien Namen auf Seiten angewendet. Beispiel:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Richtlinien können auch mithilfe einer Razor [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)auf Seiten angewendet werden.
+Richtlinien können auch Razor mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)auf Seiten angewendet werden.
 
-## <a name="requirements"></a>Anforderungen
+## <a name="requirements"></a>Requirements (Anforderungen)
 
-Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;das minimale Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
+Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter &mdash; das minimale Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -146,7 +146,7 @@ Wenn eine Autorisierungs Richtlinie mehrere Autorisierungs Anforderungen enthäl
 
 Ein Autorisierungs Handler ist dafür verantwortlich, die Eigenschaften einer Anforderung zu evaluieren. Der Autorisierungs Handler wertet die Anforderungen anhand eines angegebenen [authorizationhandlercontext](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext) aus, um zu bestimmen, ob der Zugriff zulässig ist.
 
-Eine Anforderung kann [mehrere Handler](#security-authorization-policies-based-multiple-handlers)aufweisen. Ein Handler kann die [authorizationhandler\<-trequirement ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)->`TRequirement` erben, wobei die zu behandelnde Anforderung ist. Alternativ kann ein Handler [iauthorizationhandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) implementieren, um mehr als eine Art von Anforderung zu verarbeiten.
+Eine Anforderung kann [mehrere Handler](#security-authorization-policies-based-multiple-handlers)aufweisen. Ein Handler kann den [authorizationhandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)erben, wobei `TRequirement` die zu behandelnde Anforderung ist. Alternativ kann ein Handler [iauthorizationhandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) implementieren, um mehr als eine Art von Anforderung zu verarbeiten.
 
 ### <a name="use-a-handler-for-one-requirement"></a>Verwenden eines Handlers für eine Anforderung
 
@@ -156,7 +156,7 @@ Im folgenden finden Sie ein Beispiel für eine 1:1-Beziehung, bei der ein minima
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-Der vorangehende Code bestimmt, ob der aktuelle Benutzer Prinzipal über ein Geburtsdatum des Geburts Anspruchs verfügt, das von einem bekannten und vertrauenswürdigen Aussteller ausgestellt wurde. Die Autorisierung kann nicht ausgeführt werden, wenn der Anspruch fehlt. in diesem Fall wird eine abgeschlossene Aufgabe zurückgegeben. Wenn ein Anspruch vorhanden ist, wird das Alter des Benutzers berechnet. Wenn der Benutzer das durch die Anforderung definierte mindestage erfüllt, wird die Autorisierung als erfolgreich eingestuft. Wenn die Autorisierung erfolgreich `context.Succeed` ist, wird mit der Erfüllung der Anforderungen als einziger Parameter aufgerufen.
+Der vorangehende Code bestimmt, ob der aktuelle Benutzer Prinzipal über ein Geburtsdatum des Geburts Anspruchs verfügt, das von einem bekannten und vertrauenswürdigen Aussteller ausgestellt wurde. Die Autorisierung kann nicht ausgeführt werden, wenn der Anspruch fehlt. in diesem Fall wird eine abgeschlossene Aufgabe zurückgegeben. Wenn ein Anspruch vorhanden ist, wird das Alter des Benutzers berechnet. Wenn der Benutzer das durch die Anforderung definierte mindestage erfüllt, wird die Autorisierung als erfolgreich eingestuft. Wenn die Autorisierung erfolgreich ist, `context.Succeed` wird mit der Erfüllung der Anforderungen als einziger Parameter aufgerufen.
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>Verwenden eines Handlers für mehrere Anforderungen
 
@@ -164,7 +164,7 @@ Im folgenden finden Sie ein Beispiel für eine 1: n-Beziehung, in der ein Berech
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-Der vorangehende Code durchsucht die " [pdingrequirequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;"-Eigenschaft mit den Anforderungen, die nicht als erfolgreich gekennzeichnet sind. Für eine `ReadPermission` Anforderung muss der Benutzer entweder ein Besitzer oder ein Sponsor sein, um auf die angeforderte Ressource zuzugreifen. Bei einer `EditPermission` -oder `DeletePermission` -Anforderung muss er ein Besitzer sein, um auf die angeforderte Ressource zugreifen zu können.
+Der vorangehende Code durchsucht die " [pdingrequirequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)"- &mdash; Eigenschaft mit den Anforderungen, die nicht als erfolgreich gekennzeichnet sind. Für eine `ReadPermission` Anforderung muss der Benutzer entweder ein Besitzer oder ein Sponsor sein, um auf die angeforderte Ressource zuzugreifen. Bei einer-oder- `EditPermission` `DeletePermission` Anforderung muss er ein Besitzer sein, um auf die angeforderte Ressource zugreifen zu können.
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -174,19 +174,19 @@ Handler werden während der Konfiguration in der Dienste-Sammlung registriert. B
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
-Der vorangehende Code `MinimumAgeHandler` wird als Singleton registriert, `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`indem aufgerufen wird. Handler können mithilfe einer beliebigen integrierten [Dienst Lebensdauer](xref:fundamentals/dependency-injection#service-lifetimes)registriert werden.
+Der vorangehende Code `MinimumAgeHandler` wird als Singleton registriert, indem aufgerufen wird `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` . Handler können mithilfe einer beliebigen integrierten [Dienst Lebensdauer](xref:fundamentals/dependency-injection#service-lifetimes)registriert werden.
 
 ## <a name="what-should-a-handler-return"></a>Was sollte ein Handler zurückgeben?
 
-Beachten Sie, `Handle` dass die-Methode im [handlerbeispiel](#security-authorization-handler-example) keinen Wert zurückgibt. Wie wird der Status "erfolgreich" oder "Fehler" angegeben?
+Beachten Sie, dass die- `Handle` Methode im [handlerbeispiel](#security-authorization-handler-example) keinen Wert zurückgibt. Wie wird der Status "erfolgreich" oder "Fehler" angegeben?
 
-* Ein Handler gibt den Erfolg durch `context.Succeed(IAuthorizationRequirement requirement)`Aufrufen von an und übergibt die Anforderung, die erfolgreich überprüft wurde.
+* Ein Handler gibt den Erfolg durch Aufrufen von an `context.Succeed(IAuthorizationRequirement requirement)` und übergibt die Anforderung, die erfolgreich überprüft wurde.
 
 * Ein Handler muss im Allgemeinen keine Fehler behandeln, da andere Handler für dieselbe Anforderung erfolgreich ausgeführt werden können.
 
-* Um einen Fehler zu gewährleisten, müssen Sie, auch wenn andere `context.Fail`Anforderungs Handler erfolgreich sind, den Befehl
+* Um einen Fehler zu gewährleisten, müssen Sie, auch wenn andere Anforderungs Handler erfolgreich sind, den Befehl `context.Fail`
 
-Wenn ein Handler oder `context.Succeed` `context.Fail`aufruft, werden alle anderen Handler immer noch aufgerufen. Dies ermöglicht die Generierung von Nebeneffekten, wie z. b. die Protokollierung, die auch dann stattfindet, wenn ein anderer Handler eine Anforderung erfolgreich überprüft oder nicht erfüllt hat. Wenn diese Eigenschaft `false`auf festgelegt ist, wird die Ausführung von Handlern durch die [invokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) -Eigenschaft (verfügbar in ASP.net Core 1,1 `context.Fail` und höher) kurz beendet, wenn aufgerufen wird. `InvokeHandlersAfterFailure`der Standard `true`Wert ist. in diesem Fall werden alle Handler aufgerufen.
+Wenn ein Handler `context.Succeed` oder aufruft `context.Fail` , werden alle anderen Handler immer noch aufgerufen. Dies ermöglicht die Generierung von Nebeneffekten, wie z. b. die Protokollierung, die auch dann stattfindet, wenn ein anderer Handler eine Anforderung erfolgreich überprüft oder nicht erfüllt hat. Wenn diese Eigenschaft auf festgelegt ist `false` , wird die Ausführung von Handlern durch die [invokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) -Eigenschaft (verfügbar in ASP.net Core 1,1 und höher) kurz beendet, wenn `context.Fail` aufgerufen wird. `InvokeHandlersAfterFailure`der Standardwert `true` ist. in diesem Fall werden alle Handler aufgerufen.
 
 > [!NOTE]
 > Autorisierungs Handler werden auch dann aufgerufen, wenn die Authentifizierung fehlschlägt.
@@ -209,23 +209,35 @@ Wenn Sie evaluieren möchten, können Sie mehrere Handler **für eine einzelne**
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-Stellen Sie sicher, dass beide Handler [registriert](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)sind. Wenn einer der beiden Handler erfolgreich ist, wenn `BuildingEntryRequirement`eine Richtlinie den auswertet, ist die Richtlinien Auswertung erfolgreich.
+Stellen Sie sicher, dass beide Handler [registriert](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)sind. Wenn einer der beiden Handler erfolgreich ist, wenn eine Richtlinie den `BuildingEntryRequirement` auswertet, ist die Richtlinien Auswertung erfolgreich.
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Verwenden eines Func zum erfüllen einer Richtlinie
+## <a name="use-a-func-to-fulfill-a-policy"></a>Verwenden eines Func zum erfüllen einer Richtlinie
 
-Es kann Situationen geben, in denen das erfüllen einer Richtlinie einfach im Code ausgedrückt werden kann. Beim Konfigurieren Ihrer Richtlinie mit `Func<AuthorizationHandlerContext, bool>` dem `RequireAssertion` Richtlinien Generator ist es möglich, eine bereitzustellen.
+Es kann Situationen geben, in denen das erfüllen einer Richtlinie einfach im Code ausgedrückt werden kann. `Func<AuthorizationHandlerContext, bool>`Beim Konfigurieren Ihrer Richtlinie mit dem Richtlinien Generator ist es möglich, eine bereitzustellen `RequireAssertion` .
 
-Die vorherige `BadgeEntryHandler` könnte z. b. wie folgt umgeschrieben werden:
+Die vorherige könnte z. b. `BadgeEntryHandler` wie folgt umgeschrieben werden:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=42-43,47-53)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>Zugreifen auf den MVC-Anforderungs Kontext in Handlern
+## <a name="access-mvc-request-context-in-handlers"></a>Zugreifen auf den MVC-Anforderungs Kontext in Handlern
 
-Die `HandleRequirementAsync` Methode, die Sie in einem Autorisierungs Handler implementieren, verfügt `AuthorizationHandlerContext` über zwei `TRequirement` Parameter: einen und den, den Sie behandeln. Frameworks wie z. b. MVC oder jabbr können ein beliebiges `Resource` Objekt zur- `AuthorizationHandlerContext` Eigenschaft hinzufügen, um zusätzliche Informationen zu übergeben.
+Die `HandleRequirementAsync` Methode, die Sie in einem Autorisierungs Handler implementieren, verfügt über zwei Parameter: einen `AuthorizationHandlerContext` und den, den `TRequirement` Sie behandeln. Frameworks wie MVC oder SignalR können jedes beliebige Objekt der- `Resource` Eigenschaft im hinzufügen `AuthorizationHandlerContext` , um zusätzliche Informationen zu übergeben.
 
-MVC übergibt z. b. eine Instanz von [authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) in `Resource` der-Eigenschaft. Diese Eigenschaft ermöglicht den Zugriff `HttpContext`auf `RouteData`, und alles andere, was von MVC Razor und Seiten bereitgestellt wird.
+Wenn Sie das Endpunkt Routing verwenden, wird die Autorisierung in der Regel von der Autorisierungs Middleware verarbeitet. In diesem Fall ist die `Resource` Eigenschaft eine Instanz von <xref:Microsoft.AspNetCore.Http.Endpoint> . Der Endpunkt kann verwendet werden, um die zugrunde liegende Ressource zu überprüfen, an die Sie weiterleiten. Beispiel:
 
-Die Verwendung der- `Resource` Eigenschaft ist Framework-spezifisch. Die Verwendung von Informationen `Resource` in der-Eigenschaft schränkt Ihre Autorisierungs Richtlinien auf bestimmte Frameworks ein. Sie sollten die `Resource` -Eigenschaft mit dem `is` -Schlüsselwort umwandeln und dann bestätigen, dass die Umwandlung erfolgreich war, um sicherzustellen `InvalidCastException` , dass der Code nicht mit einem stürzt
+```csharp
+if (context.Resource is Endpoint endpoint)
+{
+   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
+   ...
+}
+```
+
+Der-Endpunkt bietet keinen Zugriff auf die aktuelle `HttpContext` . Wenn Sie das Endpunkt Routing verwenden, verwenden `IHttpContextAcessor` Sie für den Zugriff `HttpContext` innerhalb eines Autorisierungs Handlers. Weitere Informationen finden Sie unter [Verwenden von HttpContext aus benutzerdefinierten Komponenten](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components).
+
+Mit herkömmlichem Routing oder wenn die Autorisierung im Rahmen des Autorisierungs Filters von MVC erfolgt, ist der Wert von `Resource` eine <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> Instanz von. Diese Eigenschaft ermöglicht den Zugriff auf `HttpContext` , `RouteData` und alles andere, was von MVC und Seiten bereitgestellt wird Razor .
+
+Die Verwendung der- `Resource` Eigenschaft ist Framework-spezifisch. Die Verwendung von Informationen in der- `Resource` Eigenschaft schränkt Ihre Autorisierungs Richtlinien auf bestimmte Frameworks ein. Sie sollten die `Resource` -Eigenschaft mit dem `is` -Schlüsselwort umwandeln und dann bestätigen, dass die Umwandlung erfolgreich war, um sicherzustellen, dass der Code nicht mit einem stürzt `InvalidCastException`
 
 ```csharp
 // Requires the following import:
@@ -243,17 +255,19 @@ if (context.Resource is AuthorizationFilterContext mvcContext)
 
 Im Hintergrund werden bei der [rollenbasierten Autorisierung](xref:security/authorization/roles) und der [Anspruchs basierten Autorisierung](xref:security/authorization/claims) eine Anforderung, ein Anforderungs Handler und eine vorkonfigurierte Richtlinie verwendet. Diese Bausteine unterstützen den Ausdruck der Autorisierungs Auswertungen im Code. Das Ergebnis ist eine umfangreichere, wiederverwendbare, testbare Autorisierungs Struktur.
 
-Eine Autorisierungs Richtlinie besteht aus einer oder mehreren Anforderungen. Sie wird als Teil der Autorisierungs Dienst Konfiguration in der `Startup.ConfigureServices` -Methode registriert:
+Eine Autorisierungs Richtlinie besteht aus einer oder mehreren Anforderungen. Sie wird als Teil der Autorisierungs Dienst Konfiguration in der- `Startup.ConfigureServices` Methode registriert:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,66)]
 
-Im vorherigen Beispiel wird eine Richtlinie "AtLeast21" erstellt. Sie verfügt über eine einzige&mdash;Anforderung, die ein minimal Alter ist, das als Parameter für die Anforderung angegeben wird.
+Im vorherigen Beispiel wird eine Richtlinie "AtLeast21" erstellt. Sie verfügt über eine einzige Anforderung, die ein &mdash; minimal Alter ist, das als Parameter für die Anforderung angegeben wird.
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich war, ist <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>:
+Der primäre Dienst, der bestimmt, ob die Autorisierung erfolgreich war, ist <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> :
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 Im vorangehenden Code werden die beiden Methoden des [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)hervorgehoben.
 
@@ -278,7 +292,7 @@ public interface IAuthorizationHandler
 }
 ```
 
-Mit <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> der-Klasse wird der Handler verwendet, um zu kennzeichnen, ob Anforderungen erfüllt sind:
+Mit der- <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> Klasse wird der Handler verwendet, um zu kennzeichnen, ob Anforderungen erfüllt sind:
 
 ```csharp
  context.Succeed(requirement)
@@ -307,7 +321,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-Der folgende Code zeigt ein typisches `ConfigureServices`:
+Der folgende Code zeigt ein typisches `ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -328,27 +342,27 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Verwenden <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> Sie `[Authorize(Policy = "Something")]` oder für die Autorisierung.
+Verwenden Sie <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> oder `[Authorize(Policy = "Something")]` für die Autorisierung.
 
-## <a name="applying-policies-to-mvc-controllers"></a>Anwenden von Richtlinien auf MVC-Controller
+## <a name="apply-policies-to-mvc-controllers"></a>Anwenden von Richtlinien auf MVC-Controller
 
-Wenn Sie Seiten verwenden Razor , finden Sie weitere Informationen unter [Anwenden von Richtlinien Razor auf Seiten](#applying-policies-to-razor-pages) in diesem Dokument.
+Wenn Sie Seiten verwenden Razor , finden Sie weitere Informationen unter [Anwenden von Richtlinien auf Razor Seiten](#apply-policies-to-razor-pages) in diesem Dokument.
 
-Richtlinien werden mithilfe des `[Authorize]` -Attributs mit dem Richtlinien Namen auf Controller angewendet. Beispiel:
+Richtlinien werden mithilfe des- `[Authorize]` Attributs mit dem Richtlinien Namen auf Controller angewendet. Beispiel:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>Anwenden von Richt Razor Linien auf Seiten
+## <a name="apply-policies-to-razor-pages"></a>Anwenden von Richtlinien auf Razor Seiten
 
-Richtlinien werden mithilfe Razor des `[Authorize]` -Attributs mit dem Richtlinien Namen auf Seiten angewendet. Beispiel:
+Richtlinien werden Razor mithilfe des- `[Authorize]` Attributs mit dem Richtlinien Namen auf Seiten angewendet. Beispiel:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Richtlinien können auch mithilfe einer Razor [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)auf Seiten angewendet werden.
+Richtlinien können auch Razor mithilfe einer [Autorisierungs Konvention](xref:security/authorization/razor-pages-authorization)auf Seiten angewendet werden.
 
-## <a name="requirements"></a>Anforderungen
+## <a name="requirements"></a>Requirements (Anforderungen)
 
-Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter&mdash;das minimale Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
+Eine Autorisierungs Anforderung ist eine Auflistung von Daten Parametern, die eine Richtlinie verwenden kann, um den aktuellen Benutzer Prinzipal auszuwerten. In unserer Richtlinie "AtLeast21" ist die Anforderung ein einzelner Parameter &mdash; das minimale Alter. Eine Anforderung implementiert [iauthorizationrequirements](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), bei dem es sich um eine leere markerschnittstelle handelt. Eine parametrisierte minimale Alters Anforderung kann wie folgt implementiert werden:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -363,7 +377,7 @@ Wenn eine Autorisierungs Richtlinie mehrere Autorisierungs Anforderungen enthäl
 
 Ein Autorisierungs Handler ist dafür verantwortlich, die Eigenschaften einer Anforderung zu evaluieren. Der Autorisierungs Handler wertet die Anforderungen anhand eines angegebenen [authorizationhandlercontext](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext) aus, um zu bestimmen, ob der Zugriff zulässig ist.
 
-Eine Anforderung kann [mehrere Handler](#security-authorization-policies-based-multiple-handlers)aufweisen. Ein Handler kann die [authorizationhandler\<-trequirement ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)->`TRequirement` erben, wobei die zu behandelnde Anforderung ist. Alternativ kann ein Handler [iauthorizationhandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) implementieren, um mehr als eine Art von Anforderung zu verarbeiten.
+Eine Anforderung kann [mehrere Handler](#security-authorization-policies-based-multiple-handlers)aufweisen. Ein Handler kann den [authorizationhandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)erben, wobei `TRequirement` die zu behandelnde Anforderung ist. Alternativ kann ein Handler [iauthorizationhandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) implementieren, um mehr als eine Art von Anforderung zu verarbeiten.
 
 ### <a name="use-a-handler-for-one-requirement"></a>Verwenden eines Handlers für eine Anforderung
 
@@ -373,7 +387,7 @@ Im folgenden finden Sie ein Beispiel für eine 1:1-Beziehung, bei der ein minima
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-Der vorangehende Code bestimmt, ob der aktuelle Benutzer Prinzipal über ein Geburtsdatum des Geburts Anspruchs verfügt, das von einem bekannten und vertrauenswürdigen Aussteller ausgestellt wurde. Die Autorisierung kann nicht ausgeführt werden, wenn der Anspruch fehlt. in diesem Fall wird eine abgeschlossene Aufgabe zurückgegeben. Wenn ein Anspruch vorhanden ist, wird das Alter des Benutzers berechnet. Wenn der Benutzer das durch die Anforderung definierte mindestage erfüllt, wird die Autorisierung als erfolgreich eingestuft. Wenn die Autorisierung erfolgreich `context.Succeed` ist, wird mit der Erfüllung der Anforderungen als einziger Parameter aufgerufen.
+Der vorangehende Code bestimmt, ob der aktuelle Benutzer Prinzipal über ein Geburtsdatum des Geburts Anspruchs verfügt, das von einem bekannten und vertrauenswürdigen Aussteller ausgestellt wurde. Die Autorisierung kann nicht ausgeführt werden, wenn der Anspruch fehlt. in diesem Fall wird eine abgeschlossene Aufgabe zurückgegeben. Wenn ein Anspruch vorhanden ist, wird das Alter des Benutzers berechnet. Wenn der Benutzer das durch die Anforderung definierte mindestage erfüllt, wird die Autorisierung als erfolgreich eingestuft. Wenn die Autorisierung erfolgreich ist, `context.Succeed` wird mit der Erfüllung der Anforderungen als einziger Parameter aufgerufen.
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>Verwenden eines Handlers für mehrere Anforderungen
 
@@ -381,7 +395,7 @@ Im folgenden finden Sie ein Beispiel für eine 1: n-Beziehung, in der ein Berech
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-Der vorangehende Code durchsucht die " [pdingrequirequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;"-Eigenschaft mit den Anforderungen, die nicht als erfolgreich gekennzeichnet sind. Für eine `ReadPermission` Anforderung muss der Benutzer entweder ein Besitzer oder ein Sponsor sein, um auf die angeforderte Ressource zuzugreifen. Bei einer `EditPermission` -oder `DeletePermission` -Anforderung muss er ein Besitzer sein, um auf die angeforderte Ressource zugreifen zu können.
+Der vorangehende Code durchsucht die " [pdingrequirequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)"- &mdash; Eigenschaft mit den Anforderungen, die nicht als erfolgreich gekennzeichnet sind. Für eine `ReadPermission` Anforderung muss der Benutzer entweder ein Besitzer oder ein Sponsor sein, um auf die angeforderte Ressource zuzugreifen. Bei einer-oder- `EditPermission` `DeletePermission` Anforderung muss er ein Besitzer sein, um auf die angeforderte Ressource zugreifen zu können.
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -391,19 +405,19 @@ Handler werden während der Konfiguration in der Dienste-Sammlung registriert. B
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
-Der vorangehende Code `MinimumAgeHandler` wird als Singleton registriert, `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`indem aufgerufen wird. Handler können mithilfe einer beliebigen integrierten [Dienst Lebensdauer](xref:fundamentals/dependency-injection#service-lifetimes)registriert werden.
+Der vorangehende Code `MinimumAgeHandler` wird als Singleton registriert, indem aufgerufen wird `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` . Handler können mithilfe einer beliebigen integrierten [Dienst Lebensdauer](xref:fundamentals/dependency-injection#service-lifetimes)registriert werden.
 
 ## <a name="what-should-a-handler-return"></a>Was sollte ein Handler zurückgeben?
 
-Beachten Sie, `Handle` dass die-Methode im [handlerbeispiel](#security-authorization-handler-example) keinen Wert zurückgibt. Wie wird der Status "erfolgreich" oder "Fehler" angegeben?
+Beachten Sie, dass die- `Handle` Methode im [handlerbeispiel](#security-authorization-handler-example) keinen Wert zurückgibt. Wie wird der Status "erfolgreich" oder "Fehler" angegeben?
 
-* Ein Handler gibt den Erfolg durch `context.Succeed(IAuthorizationRequirement requirement)`Aufrufen von an und übergibt die Anforderung, die erfolgreich überprüft wurde.
+* Ein Handler gibt den Erfolg durch Aufrufen von an `context.Succeed(IAuthorizationRequirement requirement)` und übergibt die Anforderung, die erfolgreich überprüft wurde.
 
 * Ein Handler muss im Allgemeinen keine Fehler behandeln, da andere Handler für dieselbe Anforderung erfolgreich ausgeführt werden können.
 
-* Um einen Fehler zu gewährleisten, müssen Sie, auch wenn andere `context.Fail`Anforderungs Handler erfolgreich sind, den Befehl
+* Um einen Fehler zu gewährleisten, müssen Sie, auch wenn andere Anforderungs Handler erfolgreich sind, den Befehl `context.Fail`
 
-Wenn ein Handler oder `context.Succeed` `context.Fail`aufruft, werden alle anderen Handler immer noch aufgerufen. Dies ermöglicht die Generierung von Nebeneffekten, wie z. b. die Protokollierung, die auch dann stattfindet, wenn ein anderer Handler eine Anforderung erfolgreich überprüft oder nicht erfüllt hat. Wenn diese Eigenschaft `false`auf festgelegt ist, wird die Ausführung von Handlern durch die [invokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) -Eigenschaft (verfügbar in ASP.net Core 1,1 `context.Fail` und höher) kurz beendet, wenn aufgerufen wird. `InvokeHandlersAfterFailure`der Standard `true`Wert ist. in diesem Fall werden alle Handler aufgerufen.
+Wenn ein Handler `context.Succeed` oder aufruft `context.Fail` , werden alle anderen Handler immer noch aufgerufen. Dies ermöglicht die Generierung von Nebeneffekten, wie z. b. die Protokollierung, die auch dann stattfindet, wenn ein anderer Handler eine Anforderung erfolgreich überprüft oder nicht erfüllt hat. Wenn diese Eigenschaft auf festgelegt ist `false` , wird die Ausführung von Handlern durch die [invokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) -Eigenschaft (verfügbar in ASP.net Core 1,1 und höher) kurz beendet, wenn `context.Fail` aufgerufen wird. `InvokeHandlersAfterFailure`der Standardwert `true` ist. in diesem Fall werden alle Handler aufgerufen.
 
 > [!NOTE]
 > Autorisierungs Handler werden auch dann aufgerufen, wenn die Authentifizierung fehlschlägt.
@@ -426,33 +440,23 @@ Wenn Sie evaluieren möchten, können Sie mehrere Handler **für eine einzelne**
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-Stellen Sie sicher, dass beide Handler [registriert](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)sind. Wenn einer der beiden Handler erfolgreich ist, wenn `BuildingEntryRequirement`eine Richtlinie den auswertet, ist die Richtlinien Auswertung erfolgreich.
+Stellen Sie sicher, dass beide Handler [registriert](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)sind. Wenn einer der beiden Handler erfolgreich ist, wenn eine Richtlinie den `BuildingEntryRequirement` auswertet, ist die Richtlinien Auswertung erfolgreich.
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Verwenden eines Func zum erfüllen einer Richtlinie
+## <a name="use-a-func-to-fulfill-a-policy"></a>Verwenden eines Func zum erfüllen einer Richtlinie
 
-Es kann Situationen geben, in denen das erfüllen einer Richtlinie einfach im Code ausgedrückt werden kann. Beim Konfigurieren Ihrer Richtlinie mit `Func<AuthorizationHandlerContext, bool>` dem `RequireAssertion` Richtlinien Generator ist es möglich, eine bereitzustellen.
+Es kann Situationen geben, in denen das erfüllen einer Richtlinie einfach im Code ausgedrückt werden kann. `Func<AuthorizationHandlerContext, bool>`Beim Konfigurieren Ihrer Richtlinie mit dem Richtlinien Generator ist es möglich, eine bereitzustellen `RequireAssertion` .
 
-Die vorherige `BadgeEntryHandler` könnte z. b. wie folgt umgeschrieben werden:
+Die vorherige könnte z. b. `BadgeEntryHandler` wie folgt umgeschrieben werden:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=50-51,55-61)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>Zugreifen auf den MVC-Anforderungs Kontext in Handlern
+## <a name="access-mvc-request-context-in-handlers"></a>Zugreifen auf den MVC-Anforderungs Kontext in Handlern
 
-Die `HandleRequirementAsync` Methode, die Sie in einem Autorisierungs Handler implementieren, verfügt `AuthorizationHandlerContext` über zwei `TRequirement` Parameter: einen und den, den Sie behandeln. Frameworks wie MVC oder SignalR können jedes beliebige Objekt der `Resource` -Eigenschaft im hinzufügen `AuthorizationHandlerContext` , um zusätzliche Informationen zu übergeben.
+Die `HandleRequirementAsync` Methode, die Sie in einem Autorisierungs Handler implementieren, verfügt über zwei Parameter: einen `AuthorizationHandlerContext` und den, den `TRequirement` Sie behandeln. Frameworks wie MVC oder SignalR können jedes beliebige Objekt der- `Resource` Eigenschaft im hinzufügen `AuthorizationHandlerContext` , um zusätzliche Informationen zu übergeben.
 
-Wenn Sie das Endpunkt Routing verwenden, wird die Autorisierung in der Regel von der Autorisierungs Middleware verarbeitet. In diesem Fall ist die `Resource` Eigenschaft eine Instanz von <xref:Microsoft.AspNetCore.Http.Endpoint>. Der Endpunkt kann verwendet werden, um die zugrunde liegende Ressource, an die Sie weiterleiten, zu überprüfen. Beispiel:
+MVC übergibt z. b. eine Instanz von [authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) in der- `Resource` Eigenschaft. Diese Eigenschaft ermöglicht den Zugriff auf `HttpContext` , `RouteData` und alles andere, was von MVC und Seiten bereitgestellt wird Razor .
 
-```csharp
-if (context.Resource is Endpoint endpoint)
-{
-   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
-   ...
-}
-```
-
-Mit herkömmlichem Routing oder wenn die Autorisierung im Rahmen des Autorisierungs Filters von MVC erfolgt, `Resource` ist der <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> Wert von eine Instanz von. Diese Eigenschaft ermöglicht den Zugriff `HttpContext`auf `RouteData`, und alles andere, was von MVC Razor und Seiten bereitgestellt wird.
-
-Die Verwendung der- `Resource` Eigenschaft ist Framework-spezifisch. Die Verwendung von Informationen `Resource` in der-Eigenschaft schränkt Ihre Autorisierungs Richtlinien auf bestimmte Frameworks ein. Sie sollten die `Resource` -Eigenschaft mit dem `is` -Schlüsselwort umwandeln und dann bestätigen, dass die Umwandlung erfolgreich war, um sicherzustellen `InvalidCastException` , dass der Code nicht mit einem stürzt
+Die Verwendung der- `Resource` Eigenschaft ist Framework-spezifisch. Die Verwendung von Informationen in der- `Resource` Eigenschaft schränkt Ihre Autorisierungs Richtlinien auf bestimmte Frameworks ein. Sie sollten die `Resource` -Eigenschaft mit dem `is` -Schlüsselwort umwandeln und dann bestätigen, dass die Umwandlung erfolgreich war, um sicherzustellen, dass der Code nicht mit einem stürzt `InvalidCastException`
 
 ```csharp
 // Requires the following import:

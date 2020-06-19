@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: e85c9d384361f9169035e6a3ab8770e1a96b8650
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756131"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102731"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>RazorSyntax Verweis für ASP.net Core
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)und [Dan vicarel](https://github.com/Rabadash8820)
 
-Razorist eine Markup Syntax zum Einbetten von Server basiertem Code in Webseiten. Die Razor Syntax besteht aus Razor Markup, c# und HTML. Dateien mit Razor der Dateierweiterung " *. cshtml* ". Razorwird auch in [ Razor Komponenten](xref:blazor/components) Dateien (*Razor*-Dateien) gefunden.
+Razorist eine Markup Syntax zum Einbetten von Server basiertem Code in Webseiten. Die Razor Syntax besteht aus Razor Markup, c# und HTML. Dateien mit Razor der Dateierweiterung " *. cshtml* ". Razorwird auch in [ Razor Komponenten](xref:blazor/components/index) Dateien (*Razor*-Dateien) gefunden.
 
 ## <a name="rendering-html"></a>Rendern von HTML
 
@@ -465,7 +465,7 @@ Die `@attribute`-Anweisung fügt das angegebene Attribut zu der Klasse der gener
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Der- `@code` Block ermöglicht einer [ Razor Komponente](xref:blazor/components) das Hinzufügen von c#-Membern (Feldern, Eigenschaften und Methoden) zu einer Komponente:
+Der- `@code` Block ermöglicht einer [ Razor Komponente](xref:blazor/components/index) das Hinzufügen von c#-Membern (Feldern, Eigenschaften und Methoden) zu einer Komponente:
 
 ```razor
 @code {
@@ -489,7 +489,7 @@ Die `@functions`-Anweisung ermöglicht das Hinzufügen von C#-Membern (Feldern, 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Verwenden Sie in- [ Razor Komponenten](xref:blazor/components), `@code` `@functions` um c#-Member hinzuzufügen.
+Verwenden Sie in- [ Razor Komponenten](xref:blazor/components/index), `@code` `@functions` um c#-Member hinzuzufügen.
 
 ::: moniker-end
 
@@ -683,7 +683,7 @@ Wenn der Ordner *EvenMorePages* im Beispiel oben eine Importdatei mit `@namespac
 Die `@page`-Anweisung hat abhängig vom Typ der Datei, in der Sie verwendet wird, unterschiedliche Auswirkungen. Für die Anweisung gilt:
 
 * In einer *cshtml* -Datei gibt an, dass die Datei eine Razor Seite ist. Weitere Informationen finden Sie unter [Benutzerdefinierte Routen](xref:razor-pages/index#custom-routes) und <xref:razor-pages/index>.
-* Gibt an, dass eine Razor Komponente Anforderungen direkt verarbeiten soll. Weitere Informationen finden Sie unter <xref:blazor/routing>.
+* Gibt an, dass eine Razor Komponente Anforderungen direkt verarbeiten soll. Weitere Informationen finden Sie unter <xref:blazor/fundamentals/routing>.
 
 ::: moniker-end
 
@@ -707,7 +707,7 @@ Die `@using`-Anweisung fügt die C#-Anweisung `using`der generierten Ansicht hin
 
 ::: moniker range=">= aspnetcore-3.0"
 
-In- [ Razor Komponenten](xref:blazor/components) `@using` steuert auch, welche Komponenten sich im Gültigkeitsbereich befinden.
+In- [ Razor Komponenten](xref:blazor/components/index) `@using` steuert auch, welche Komponenten sich im Gültigkeitsbereich befinden.
 
 ::: moniker-end
 
@@ -721,19 +721,19 @@ RazorDirektivenattribute werden durch implizite Ausdrücke mit reservierten Schl
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-`@attributes` ermöglicht es einer Komponente, nicht deklarierte Attribute zu rendern. Weitere Informationen finden Sie unter <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes` ermöglicht es einer Komponente, nicht deklarierte Attribute zu rendern. Weitere Informationen finden Sie unter <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.
 
 ### `@bind`
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Die Datenbindung in-Komponenten wird mit dem `@bind`-Attribut erreicht. Weitere Informationen finden Sie unter <xref:blazor/data-binding>.
+Die Datenbindung in-Komponenten wird mit dem `@bind`-Attribut erreicht. Weitere Informationen finden Sie unter <xref:blazor/components/data-binding>.
 
 ### `@on{EVENT}`
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Razorstellt Funktionen für die Ereignis Behandlung für-Komponenten bereit. Weitere Informationen finden Sie unter <xref:blazor/event-handling>.
+Razorstellt Funktionen für die Ereignis Behandlung für-Komponenten bereit. Weitere Informationen finden Sie unter <xref:blazor/components/event-handling>.
 
 ::: moniker-end
 
@@ -759,19 +759,19 @@ Beendet die Ereignisweitergabe für das Ereignis.
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Das Direktivenattribut `@key` bewirkt, dass der Komponentenvergleichsalgorithmus die Erhaltung von Elementen oder Komponenten basierend auf dem Wert des Schlüssels garantiert. Weitere Informationen finden Sie unter <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+Das Direktivenattribut `@key` bewirkt, dass der Komponentenvergleichsalgorithmus die Erhaltung von Elementen oder Komponenten basierend auf dem Wert des Schlüssels garantiert. Weitere Informationen finden Sie unter <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### `@ref`
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Komponentenverweise (`@ref`) bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können. Weitere Informationen finden Sie unter <xref:blazor/components#capture-references-to-components>.
+Komponentenverweise (`@ref`) bieten eine Möglichkeit, auf eine Komponenteninstanz zu verweisen, damit Sie Befehle für diese Instanz ausgeben können. Weitere Informationen finden Sie unter <xref:blazor/components/index#capture-references-to-components>.
 
 ### `@typeparam`
 
 *Dieses Szenario gilt nur für Razor Komponenten (Razor).*
 
-Die `@typeparam`-Anweisung deklariert einen generischen Typparameter für die generierte Komponentenklasse. Weitere Informationen finden Sie unter <xref:blazor/templated-components#generic-typed-components>.
+Die `@typeparam`-Anweisung deklariert einen generischen Typparameter für die generierte Komponentenklasse. Weitere Informationen finden Sie unter <xref:blazor/components/templated-components#generic-typed-components>.
 
 ::: moniker-end
 

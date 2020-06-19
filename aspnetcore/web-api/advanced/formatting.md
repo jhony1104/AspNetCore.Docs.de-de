@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355369"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074225"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -40,7 +40,7 @@ Der Beispieldownload gibt die Liste der Autoren zurück. Bei Verwendung der F12-
 * Der Antwortheader mit **content-type:** `application/json; charset=utf-8` wird angezeigt.
 * Die Anforderungsheader werden angezeigt. Beispiel: Der Header `Accept`. Der `Accept`-Header wird vom vorangehenden Code ignoriert.
 
-Wenn Sie Daten im Textformat zurückgeben möchten, verwenden Sie <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> und das <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content>-Hilfsprogramm:
+Wenn Sie Daten im Textformat zurückgeben möchten, verwenden Sie <xref:Microsoft.AspNetCore.Mvc.ContentResult> und das <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Content%2A>-Hilfsprogramm:
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: cfc2867baa03cbc0bedc9ad4a90244ec007094d6
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105661"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102506"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
 
@@ -99,7 +99,7 @@ Der Inhalt der Adressleiste des Browsers wird in folgenden Fällen beibehalten:
 * Der Benutzer lädt die Seite nochmals manuell.
 * Wenn der Webserver nicht mehr verfügbar ist, ist der Benutzer gezwungen, die Seite nochmals zu laden, damit eine Verbindung mit einem anderen Server hergestellt werden kann.
 
-Weitere Informationen zum Definieren von URL-Mustern mit der `@page`-Direktive finden Sie unter <xref:blazor/routing>.
+Weitere Informationen zum Definieren von URL-Mustern mit der `@page`-Direktive finden Sie unter <xref:blazor/fundamentals/routing>.
 
 ### <a name="client-side-in-the-browser"></a>Clientseitig im Browser
 
@@ -196,7 +196,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Wenn die Parameter der Komponente den Navigationszustand enthalten, rufen Sie `ProtectedSessionStore.GetAsync` auf, und weisen Sie das Ergebnis in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> und nicht in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> zu. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird später nicht nochmals aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf der gleichen Seite bleibt. Weitere Informationen finden Sie unter <xref:blazor/lifecycle>.
+Wenn die Parameter der Komponente den Navigationszustand enthalten, rufen Sie `ProtectedSessionStore.GetAsync` auf, und weisen Sie das Ergebnis in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> und nicht in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> zu. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird nur einmal aufgerufen, wenn die Komponente zum ersten Mal instanziiert wird. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> wird später nicht nochmals aufgerufen, wenn der Benutzer zu einer anderen URL navigiert, während er auf der gleichen Seite bleibt. Weitere Informationen finden Sie unter <xref:blazor/components/lifecycle>.
 
 > [!WARNING]
 > Die Beispiele in diesem Abschnitt funktionieren nur, wenn für den Server kein Prerendering aktiviert ist. Wenn Prerendering aktiviert ist, wird ein Fehler ähnlich dem folgenden generiert:

@@ -15,4 +15,4 @@ Der empfohlene Weg der Übergabe des Anforderungszustands an die Blazor-Anwendun
 * Definieren Sie einen Parameter in der Stammkomponente, der die an die Anwendung zu übergebenden Daten enthält.
 * Verwenden Sie die benutzerspezifischen Daten innerhalb der App. Alternativ dazu können Sie diese Daten in einen bereichsbezogenen Dienst innerhalb von <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> kopieren, damit sie in der gesamten App verwendet werden können.
 
-Weitere Informationen und Beispielcode finden Sie unter <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Weitere Informationen und Beispielcode finden Sie unter <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.

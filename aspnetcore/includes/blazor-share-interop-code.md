@@ -6,4 +6,4 @@ Die Klassenbibliothek behandelt das Einbetten von JavaScript-Ressourcen in der e
 
 In der Projektdatei der App wird so auf das NuGet-Paket verwiesen, wie auf jedes andere NuGet-Paket verwiesen wird. Nachdem das Paket wiederhergestellt wurde, kann App-Code einen Aufruf in JavaScript wie auch unter C# durchführen.
 
-Weitere Informationen finden Sie unter <xref:blazor/class-libraries>.
+Weitere Informationen finden Sie unter <xref:blazor/components/class-libraries>.

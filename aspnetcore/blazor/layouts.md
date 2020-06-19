@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: ba172282d0cd6371ebc94b4fda1c13aee14d6fbd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851991"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102252"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Blazor-Layouts in ASP.NET Core
 
@@ -26,7 +26,7 @@ Von [Rainer Stropek](https://www.timecockpit.com) und [Luke Latham](https://gith
 
 Einige App-Elemente wie Menüs, Copyrightmeldungen und Firmenlogos sind in der Regel Teil des allgemeinen Layouts von Apps und werden von allen Komponenten der App verwendet. Das Kopieren des Codes dieser Elemente in alle Komponenten einer App ist kein effizientes Konzept. Jedes Mal, wenn eines der Elemente ein Update erfordert, muss jede Komponente aktualisiert werden. Eine solche Duplizierung ist schwer zu verwalten und kann im Laufe der Zeit zu inkonsistenten Inhalten führen. Mit *Layouts* wird dieses Problem gelöst.
 
-Technisch gesehen ist ein Layout nur eine weitere Komponente. Layouts werden in Razor-Vorlagen oder in C#-Code definiert und können [Datenbindung](xref:blazor/data-binding), [Abhängigkeitsinjektion](xref:blazor/dependency-injection) und andere Komponentenszenarien nutzen.
+Technisch gesehen ist ein Layout nur eine weitere Komponente. Layouts werden in Razor-Vorlagen oder in C#-Code definiert und können [Datenbindung](xref:blazor/components/data-binding), [Abhängigkeitsinjektion](xref:blazor/fundamentals/dependency-injection) und andere Komponentenszenarien nutzen.
 
 Zum Umwandeln einer *Komponente* in ein *Layout* muss die Komponente:
 
@@ -49,7 +49,7 @@ Geben Sie <xref:Microsoft.AspNetCore.Components.LayoutView> für <xref:Microsoft
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Weitere Informationen zur <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente finden Sie unter <xref:blazor/routing>.
+Weitere Informationen zur <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente finden Sie unter <xref:blazor/fundamentals/routing>.
 
 Das Festlegen des Layouts als Standardlayout im Router ist nützlich, da es pro Komponente oder pro Ordner überschrieben werden kann. Das Verwenden des Routers zum Festlegen des Standardlayouts der App wird bevorzugt, da es sich dabei um die allgemeinste Methode handelt.
 
@@ -97,7 +97,7 @@ Schließlich enthält `MasterLayout` in der Datei *MasterLayout.razor* die allge
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Freigeben eines Razor Pages-Layouts mit integrierten Komponenten
 
-Wenn routingfähige Komponenten in eine Razor Pages-App integriert werden, kann das freigegebene Layout der App mit den Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/integrate-components>.
+Wenn routingfähige Komponenten in eine Razor Pages-App integriert werden, kann das freigegebene Layout der App mit den Komponenten verwendet werden. Weitere Informationen finden Sie unter <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

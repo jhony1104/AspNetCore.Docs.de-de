@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 407583533939ec1077af8e1a1511ed187ef9de69
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776785"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103014"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -34,7 +34,7 @@ Integrierte Filter sind für folgende Aufgaben zuständig:
 
 Durch die Erstellung benutzerdefinierter Filter kann mit aktionsübergreifenden Problemen umgegangen werden. Zu solchen übergreifenden Problemen gehören beispielsweise Fehlerbehandlung, Caching, Konfiguration, Autorisierung und Protokollierung.  Mit Filtern lässt sich die Duplizierung von Code vermeiden. Sie können zum Beispiel die Fehlerbehandlung in einem Ausnahmefilter konsolidieren.
 
-Dieses Dokument gilt für Razor Pages, API-Controller und Controller mit Ansichten. Filter können nicht direkt mit [Razor-Komponenten](xref:blazor/components) verwendet werden. Ein Filter kann nur indirekt Einfluss auf eine Komponente haben, wenn Folgendes gilt:
+Dieses Dokument gilt für Razor Seiten, API-Controller und Controller mit Ansichten. Filter funktionieren nicht direkt mit- [ Razor Komponenten](xref:blazor/components/index). Ein Filter kann nur indirekt Einfluss auf eine Komponente haben, wenn Folgendes gilt:
 
 * Die Komponente ist in eine Seite oder Ansicht eingebettet.
 * Die Seite oder der Controller/die Ansicht verwendet den Filter.
@@ -64,7 +64,7 @@ Jeder Filtertyp wird in einer anderen Phase der Filterpipeline ausgeführt:
   * Sie führen Code unmittelbar vor und nach dem Aufruf einer Aktionsmethode aus.
   * Sie können die an eine Aktion übergebenen Argumente ändern.
   * Sie können das von der Aktion zurückgegebene Ergebnis ändern.
-  * Sie werden in Razor Pages **nicht** unterstützt.
+  * Werden in Seiten **nicht** unterstützt Razor .
 
 * [Ausnahmefilter](#exception-filters) wenden globale Richtlinien auf unbehandelte Ausnahmen an, die auftreten, bevor etwas in den Antworttext geschrieben wurde.
 
@@ -110,7 +110,7 @@ Wie im obigen Beispiel gezeigt, können Filter mithilfe von Attributen Argumente
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-Verwenden Sie ein Tool wie die [Browser-Entwicklertools](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools), um die Header zu untersuchen. Unter **Antwortheader** `author: Rick Anderson` wird angezeigt.
+Verwenden Sie ein Tool wie die [Browser Entwicklertools](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) , um die Header zu untersuchen. Unter **Antwortheader** wird `author: Rick Anderson` angezeigt.
 
 Mit dem folgenden Code wird ein `ActionFilterAttribute`-Element implementiert, das diese Aktionen ausführt:
 
@@ -138,13 +138,13 @@ Der folgende Code wendet das `MyActionFilterAttribute` auf die Methode `Index2` 
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-Unter den **Antwort Headern** `author: Rick Anderson`wird `Editor: Joe Smith` und angezeigt, wenn `Sample/Index2` der Endpunkt aufgerufen wird.
+Unter den **Antwort Headern** `author: Rick Anderson` `Editor: Joe Smith` wird und angezeigt, wenn der `Sample/Index2` Endpunkt aufgerufen wird.
 
-Der folgende Code wendet das `MyActionFilterAttribute` und das `AddHeaderAttribute` auf die Razor Page an:
+Der folgende Code wendet `MyActionFilterAttribute` und `AddHeaderAttribute` auf die Seite an Razor :
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Pages/Movies/Index.cshtml.cs?name=snippet)]
 
-Es können keine Filter auf Handlermethoden von Razor Pages angewendet werden. Sie können entweder auf das Razor Page-Modell oder global angewendet werden.
+Filter können nicht auf Razor seitenhandlermethoden angewendet werden. Sie können entweder auf das Razor Seiten Modell oder Global angewendet werden.
 
 Einige der Filterschnittstellen besitzen entsprechende Attribute, die als Basisklassen für benutzerdefinierte Implementierungen verwendet werden können.
 
@@ -161,9 +161,9 @@ Filterattribute:
 
 Der Pipeline kann in einem von drei *Bereichen* ein Filter hinzugefügt werden:
 
-* Verwenden eines Attributs für eine Controller-Aktion. Es können keine Filterattribute auf Handlermethoden von Razor Pages angewendet werden.
-* Verwenden eines Attributs für einen Controller oder eine Razor Page.
-* Global für alle Controller und Aktionen, Razor Pages wie im folgenden Code gezeigt:
+* Verwenden eines Attributs für eine Controller-Aktion. Filter Attribute können nicht auf Razor Seiten Handlermethoden angewendet werden.
+* Verwenden eines Attributs auf einem Controller oder einer Razor Seite.
+* Global für alle Controller, Aktionen und Razor Seiten, wie im folgenden Code gezeigt:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder.cs?name=snippet)]
 
@@ -174,10 +174,10 @@ Wenn es mehrere Filter für eine bestimmte Stufe der Pipeline gibt, bestimmt der
 Als Ergebnis der Filterschachtelung wird der *nach* einer Pipelinephase auszuführende Code in umgekehrter Reihenfolge zum Code *vor* einer Pipelinephase ausgeführt. Filterreihenfolge:
 
 * Der Code von globalen Filtern, der *vor* einer Pipelinephase ausgeführt werden soll
-  * Der Code von Controllerfiltern und Razor Page-Filtern, der *vor* einer Pipelinephase ausgeführt werden soll
+  * Der *vor* -Code von Controller-und Razor Seiten filtern.
     * Der Code von Aktionsmethodenfiltern, der *vor* einer Pipelinephase ausgeführt werden soll
     * Der Code von Aktionsmethodenfiltern, der *nach* einer Pipelinephase ausgeführt werden soll
-  * Der Code von Controllerfiltern und Razor Page-Filtern, der *nach* einer Pipelinephase ausgeführt werden soll
+  * Der *after* -Code von Controller-und Razor Seiten filtern.
 * Der Code von globalen Filtern, der *nach* einer Pipelinephase ausgeführt werden soll
   
 Das folgende Beispiel veranschaulicht die Reihenfolge, in der Filtermethoden für synchrone Aktionsfilter aufgerufen werden.
@@ -185,10 +185,10 @@ Das folgende Beispiel veranschaulicht die Reihenfolge, in der Filtermethoden fü
 | Sequenz | Filterbereich | Filtermethode |
 |:--------:|:------------:|:-------------:|
 | 1 | Global | `OnActionExecuting` |
-| 2 | Controller oder Razor Page| `OnActionExecuting` |
+| 2 | Controller oder Razor Seite| `OnActionExecuting` |
 | 3 | Methode | `OnActionExecuting` |
 | 4 | Methode | `OnActionExecuted` |
-| 5 | Controller oder Razor Page | `OnActionExecuted` |
+| 5 | Controller oder Razor Seite | `OnActionExecuted` |
 | 6 | Global | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filter auf Controllerebene
@@ -224,7 +224,7 @@ Durch Navigieren zu `https://localhost:5001/Test2/FilterTest2` wird der folgende
 
 Filter auf Controllerebene legen die Eigenschaft [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) auf `int.MinValue` fest. Für Filter auf Controllerebene kann die Ausführung nach Filtern, die auf Methoden angewendet werden **nicht** festgelegt werden. Die Reihenfolge wird im nächsten Abschnitt erläutert.
 
-Informationen zu Razor Pages finden Sie unter [Implementieren von Filtern für Razor-Seiten durch Überschreiben von Filtermethoden](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
+Informationen zu Razor Seiten finden Sie unter [Implementieren von Seiten Razor Filtern durch Überschreiben von Filter Methoden](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
 
 ### <a name="overriding-the-default-order"></a>Überschreiben der Standardreihenfolge
 
@@ -400,7 +400,7 @@ Beispiele für Ressourcenfilter:
 
 ## <a name="action-filters"></a>Aktionsfilter
 
-Aktionsfilter gelten **nicht** für Razor Pages. Razor Pages unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>. Weitere Informationen finden Sie unter [Filter methods for Razor Pages (Filtermethoden für Razor-Seiten)](xref:razor-pages/filter).
+Aktionsfilter gelten **nicht** für Razor Seiten. Razor-Seiten unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Weitere Informationen finden Sie unter [Filtermethoden für Razor Pages](xref:razor-pages/filter).
 
 Für Aktionsfilter gilt:
 
@@ -476,7 +476,7 @@ Für Ausnahmefilter gilt Folgendes:
 
 * Sie verfügen nicht über vorangehende oder darauffolgende Ereignisse.
 * Sie implementieren <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> oder <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.
-* Sie behandeln Ausnahmefehler, die bei der Erstellung von Razor Pages oder Controllern, bei der [Modellbindung](xref:mvc/models/model-binding), bei Aktionsfiltern oder bei Aktionsmethoden auftreten.
+* Behandeln von nicht behandelten Ausnahmen, die bei der Razor Erstellung von Seiten oder Controllern, [Modell Bindungen](xref:mvc/models/model-binding), Aktions filtern oder Aktionsmethoden auftreten.
 * Sie erfassen **keine** Ausnahmen, die in Ressourcenfiltern, Ergebnisfiltern oder bei der Ausführung von MVC-Ergebnissen auftreten.
 
 Um eine Ausnahme zu behandeln, muss die Eigenschaft <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> auf `true` festgelegt oder eine Antwort geschrieben werden. Dadurch wird die Weitergabe der Ausnahme beendet. Ein Ausnahmefilter kann eine Ausnahme nicht in ein „erfolgreiches Ergebnis“ umwandeln. Nur ein Aktionsfilter kann das.
@@ -601,7 +601,7 @@ Middlewarefilter werden zum selben Zeitpunkt in der Filterpipeline wie Ressource
 
 ## <a name="next-actions"></a>Nächste Schritte
 
-* Siehe [Filtermethoden für Razor Pages](xref:razor-pages/filter).
+* Weitere Informationen finden Sie unter [Filter Methoden für Razor Seiten](xref:razor-pages/filter).
 * Um Filter näher kennenzulernen, [laden Sie das GitHub-Beispiel herunter, und testen und bearbeiten Sie es](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample).
 
 ::: moniker-end
@@ -619,7 +619,7 @@ Integrierte Filter sind für folgende Aufgaben zuständig:
 
 Durch die Erstellung benutzerdefinierter Filter kann mit aktionsübergreifenden Problemen umgegangen werden. Zu solchen übergreifenden Problemen gehören beispielsweise Fehlerbehandlung, Caching, Konfiguration, Autorisierung und Protokollierung.  Mit Filtern lässt sich die Duplizierung von Code vermeiden. Sie können zum Beispiel die Fehlerbehandlung in einem Ausnahmefilter konsolidieren.
 
-Dieses Dokument gilt für Razor Pages, API-Controller und Controller mit Ansichten.
+Dieses Dokument gilt für Razor Seiten, API-Controller und Controller mit Ansichten.
 
 [Zeigen Sie ein Beispiel an, oder laden Sie es herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
 
@@ -641,7 +641,7 @@ Jeder Filtertyp wird in einer anderen Phase der Filterpipeline ausgeführt:
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> kann Code vor dem Rest der Filterpipeline ausführen. Beispielsweise kann `OnResourceExecuting` Code vor der Modellbindung ausführen.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> kann Code nach Abschluss der restlichen Pipeline ausführen.
 
-* [Aktionsfilter](#action-filters) können, vor und nach dem Aufruf einer individuelle Aktionsmethode, Code ausführen. Sie können zur Bearbeitung der Argumente, die an eine Aktion übermittelt werden, und des Ergebnisses, das von der Aktion zurückgegeben wird, verwendet werden. Aktionsfilter werden in Razor Pages **nicht** unterstützt.
+* [Aktionsfilter](#action-filters) können, vor und nach dem Aufruf einer individuelle Aktionsmethode, Code ausführen. Sie können zur Bearbeitung der Argumente, die an eine Aktion übermittelt werden, und des Ergebnisses, das von der Aktion zurückgegeben wird, verwendet werden. Aktionsfilter werden in Seiten **nicht** unterstützt Razor .
 
 * [Ausnahmefilter](#exception-filters) werden dazu verwendet, globale Richtlinien auf unbehandelte Ausnahmen anzuwenden, die auftreten, bevor etwas in den Antworttext geschrieben wurde.
 
@@ -737,7 +737,7 @@ Diese Sequenz veranschaulicht Folgendes:
 * Der Methodenfilter ist innerhalb des Controllerfilters geschachtelt.
 * Der Controllerfilter ist innerhalb des globalen Filters geschachtelt.
 
-### <a name="controller-and-razor-page-level-filters"></a>Filter auf Controller- und Razor Page-Ebene
+### <a name="controller-and-razor-page-level-filters"></a>Filter auf Controller-und Razor Seitenebene
 
 Jeder Controller, der von der Basisklasse <xref:Microsoft.AspNetCore.Mvc.Controller> erbt, enthält die Methoden [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) und [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted`. Diese Methoden führen Folgendes aus:
@@ -766,7 +766,7 @@ Durch Navigieren zu `https://localhost:5001/Test/FilterTest2` wird der folgende 
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-Informationen zu Razor Pages finden Sie unter [Implementieren von Filtern für Razor-Seiten durch Überschreiben von Filtermethoden](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
+Informationen zu Razor Seiten finden Sie unter [Implementieren von Seiten Razor Filtern durch Überschreiben von Filter Methoden](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
 
 ### <a name="overriding-the-default-order"></a>Überschreiben der Standardreihenfolge
 
@@ -783,7 +783,7 @@ Die Eigenschaft `Order` kann mit einem Konstruktorparameter festgelegt werden:
 
 Sehen Sie sich die drei Aktionsfilter an, die im vorherigen Beispiel gezeigt werden. Wenn die `Order`-Eigenschaft des Controllers und der globalen Filter auf 1 bzw. 2 festgelegt ist, wird die Reihenfolge der Ausführung umgekehrt.
 
-| Sequenz | Filterbereich | `Order` -Eigenschaft | Filtermethode |
+| Sequenz | Filterbereich | `Order`-Eigenschaft | Filtermethode |
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Methode | 0 | `OnActionExecuting` |
 | 2 | Controller | 1  | `OnActionExecuting` |
@@ -931,7 +931,7 @@ Beispiele für Ressourcenfilter:
 ## <a name="action-filters"></a>Aktionsfilter
 
 > [!IMPORTANT]
-> Aktionsfilter gelten **nicht** für Razor Seiten. Razor-Seiten <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> unter <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> stützen und. Weitere Informationen finden Sie unter [Filter Methoden für Razor Seiten](xref:razor-pages/filter).
+> Aktionsfilter gelten **nicht** für Razor Seiten. Razor-Seiten unterstützen <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> und <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Weitere Informationen finden Sie unter [Filtermethoden für Razor Pages](xref:razor-pages/filter).
 
 Für Aktionsfilter gilt:
 
@@ -1003,7 +1003,7 @@ Für Ausnahmefilter gilt Folgendes:
 
 * Sie verfügen nicht über vorangehende oder darauffolgende Ereignisse.
 * Sie implementieren <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> oder <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.
-* Behandeln von nicht behandelten Ausnahmen, die Razor bei der Erstellung von Seiten oder Controllern, [Modell Bindungen](xref:mvc/models/model-binding), Aktions filtern oder Aktionsmethoden auftreten.
+* Behandeln von nicht behandelten Ausnahmen, die bei der Razor Erstellung von Seiten oder Controllern, [Modell Bindungen](xref:mvc/models/model-binding), Aktions filtern oder Aktionsmethoden auftreten.
 * Sie erfassen **keine** Ausnahmen, die in Ressourcenfiltern, Ergebnisfiltern oder bei der Ausführung von MVC-Ergebnissen auftreten.
 
 Um eine Ausnahme zu behandeln, muss die Eigenschaft <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> auf `true` festgelegt oder eine Antwort geschrieben werden. Dadurch wird die Weitergabe der Ausnahme beendet. Ein Ausnahmefilter kann eine Ausnahme nicht in ein „erfolgreiches Ergebnis“ umwandeln. Nur ein Aktionsfilter kann das.

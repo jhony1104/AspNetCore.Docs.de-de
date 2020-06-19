@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755962"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102948"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net CoreSignalR
 
@@ -111,7 +111,7 @@ Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden m�
 
 Um Protokolle vom .NET-Client zu erhalten, können Sie die- `ConfigureLogging` Methode für verwenden `HubConnectionBuilder` . Dies funktioniert genauso wie die `ConfigureLogging` -Methode in `WebHostBuilder` und `HostBuilder` . Sie können die gleichen Protokollierungs Anbieter konfigurieren, die Sie in ASP.net Core verwenden. Allerdings müssen Sie die nuget-Pakete für die einzelnen Protokollierungs Anbieter manuell installieren und aktivieren.
 
-Informationen zum Hinzufügen der .NET-Client Protokollierung zu einer Blazor Webassembly-App finden Sie unter <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging>
+Informationen zum Hinzufügen der .NET-Client Protokollierung zu einer Blazor Webassembly-App finden Sie unter <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>
 
 ### <a name="console-logging"></a>Konsolenprotokollierung
 

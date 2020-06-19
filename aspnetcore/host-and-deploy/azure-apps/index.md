@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 8195702a3de93bafc76dff61939dfc70d4e896b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775244"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074242"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Bereitstellen von ASP.NET Core-Apps in Azure App Service
 
@@ -87,17 +87,20 @@ Die Metapakete [Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) sin
 
 ## <a name="override-app-configuration-using-the-azure-portal"></a>Überschreiben der App-Konfiguration im Azure-Portal
 
-Über die App-Einstellungen im Azure-Portal können Sie Umgebungsvariablen für die App festlegen. Umgebungsvariablen können von [Umgebungsvariablen-Konfigurationsanbietern](xref:fundamentals/configuration/index#environment-variables-configuration-provider) verarbeitet werden.
+::: moniker range=">= aspnetcore-3.0"
+
+Über die App-Einstellungen im Azure-Portal können Sie Umgebungsvariablen für die App festlegen. Umgebungsvariablen können von [Umgebungsvariablen-Konfigurationsanbietern](xref:fundamentals/configuration/index#environment-variables) verarbeitet werden.
 
 Wenn eine App-Einstellung im Azure-Portal erstellt oder geändert und die Schaltfläche **Speichern** ausgewählt wird, wird die Azure-App neu gestartet. Die Umgebungsvariable steht der App nach dem Neustart des Diensts zur Verfügung.
 
-::: moniker range=">= aspnetcore-3.0"
-
-Wenn eine App einen [generischen Host](xref:fundamentals/host/generic-host) verwendet, werden beim Abruf von <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> zum Erstellen des Hosts Umgebungsvariablen in die Konfiguration der App geladen. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Wenn eine App einen [generischen Host](xref:fundamentals/host/generic-host) verwendet, werden beim Abruf von <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> zum Erstellen des Hosts Umgebungsvariablen in die Konfiguration der App geladen. Weitere Informationen finden Sie unter <xref:fundamentals/host/generic-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables).
 
 ::: moniker-end
-
 ::: moniker range="< aspnetcore-3.0"
+
+Über die App-Einstellungen im Azure-Portal können Sie Umgebungsvariablen für die App festlegen. Umgebungsvariablen können von [Umgebungsvariablen-Konfigurationsanbietern](xref:fundamentals/configuration/index#environment-variables-configuration-provider) verarbeitet werden.
+
+Wenn eine App-Einstellung im Azure-Portal erstellt oder geändert und die Schaltfläche **Speichern** ausgewählt wird, wird die Azure-App neu gestartet. Die Umgebungsvariable steht der App nach dem Neustart des Diensts zur Verfügung.
 
 Wenn eine App einen [Webhost](xref:fundamentals/host/web-host) verwendet, werden beim Abruf von <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> zum Erstellen des Hosts Umgebungsvariablen in die Konfiguration der App geladen. Weitere Informationen finden Sie unter <xref:fundamentals/host/web-host> und unter [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 

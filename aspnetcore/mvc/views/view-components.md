@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 28696d246c5e1e6874e0d9058813750ed1955003
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8e97dc69ef167b5c08522c91691e0aded9f56908
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774651"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102931"
 ---
 # <a name="view-components-in-aspnet-core"></a>Ansichtskomponenten in ASP.NET Core
 
@@ -27,7 +27,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="view-components"></a>Ansichtskomponenten
 
-Ansichtskomponenten ähneln zwar den Teilansichten, sind aber wesentlich leistungsstärker. Ansichtskomponenten verwenden keine Modellbindungen und sind nur von den Daten abhängig, die bei ihrem Aufruf bereitgestellt werden. Dieser Artikel wurde mit Controllern und Ansichten geschrieben, aber Ansichts Komponenten funktionieren Razor auch mit Seiten.
+Ansichtskomponenten ähneln zwar den Teilansichten, sind aber wesentlich leistungsstärker. Ansichtskomponenten verwenden keine Modellbindungen und sind nur von den Daten abhängig, die bei ihrem Aufruf bereitgestellt werden. Dieser Artikel wurde mit Controllern und Ansichten geschrieben, aber Ansichts Komponenten funktionieren auch mit Razor Seiten.
 
 Eine Ansichtskomponente:
 
@@ -48,7 +48,7 @@ Ansichtskomponenten wurden für wiederverwendbare Renderinglogik entwickelt, die
 
 Eine Ansichtskomponenten besteht aus zwei Teilen: der Klasse (normalerweise von [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent) abgeleitet) und dem von dieser Klasse zurückgegebenen Ergebnis (normalerweise eine Ansicht). Eine Ansichtskomponente kann, ähnlich wie Controller, ein POCO sein. Die meisten Entwickler sollten jedoch von den Methoden und Eigenschaften, die von `ViewComponent` abgeleitet werden, Gebrauch machen.
 
-Wenn Sie überlegen, ob Ansichts Komponenten die Spezifikationen einer APP erfüllen Razor , erwägen Sie stattdessen die Verwendung von-Komponenten. RazorKomponenten kombinieren auch Markup mit c#-Code, um wiederverwendbare UI-Einheiten zu schaffen RazorKomponenten sind für Entwickler Produktivität konzipiert, wenn Sie Client seitige Benutzeroberflächen Logik und Komposition bereitstellen. Weitere Informationen finden Sie unter <xref:blazor/components>.
+Wenn Sie überlegen, ob Ansichts Komponenten die Spezifikationen einer APP erfüllen, erwägen Sie stattdessen die Verwendung von- Razor Komponenten. RazorKomponenten kombinieren auch Markup mit c#-Code, um wiederverwendbare UI-Einheiten zu schaffen RazorKomponenten sind für Entwickler Produktivität konzipiert, wenn Sie Client seitige Benutzeroberflächen Logik und Komposition bereitstellen. Weitere Informationen finden Sie unter <xref:blazor/components/index>.
 
 ## <a name="creating-a-view-component"></a>Erstellen einer Ansichtskomponente
 
@@ -75,7 +75,7 @@ Eine Ansichtskomponentenklasse:
 Eine Ansichtskomponente definiert ihre Logik in einer `InvokeAsync`-Methode, die ein `Task<IViewComponentResult>` zurückgibt, oder in einer synchronen `Invoke`-Methode, die ein `IViewComponentResult` zurückgibt. Parameter stammen direkt vom Aufruf der Ansichtskomponente und nicht von der Modellbindung. Eine Ansichtskomponente behandelt nie direkt eine Anfrage. Normalerweise initialisiert eine Ansichtskomponente ein Modell und übergibt dieses an eine Ansicht, indem sie die `View`-Methode aufruft. Zusammengefasst bedeutet dies für Komponentenmethoden Folgendes:
 
 * Es wird eine `InvokeAsync`-Methode definiert, die ein `Task<IViewComponentResult>` zurückgibt, oder eine synchrone `Invoke`-Methode, die ein `IViewComponentResult` zurückgibt.
-* Initialisiert in der Regel ein Modell und übergibt es an eine Ansicht, `ViewComponent` `View` indem die-Methode aufgerufen wird.
+* Initialisiert in der Regel ein Modell und übergibt es an eine Ansicht, indem die-Methode aufgerufen wird `ViewComponent` `View` .
 * Parameter stammen aus der aufrufenden Methode, nicht aus HTTP. Es gibt keine Modellbindung.
 * Die Methoden sind nicht direkt als HTTP-Endpunkt erreichbar. Sie werden von Ihrem Code aufgerufen (üblicherweise in einer Ansicht). Eine Ansichtskomponente verarbeitet nie eine Anforderung.
 * Methoden werden in der Signatur überladen, nicht in Details der aktuellen HTTP-Anforderung.
@@ -88,7 +88,7 @@ Die Runtime sucht in den folgenden Pfaden nach der Ansicht:
 * /Views/Shared/Components/{Ansichtskomponentenname}/{Ansichtsname}
 * /Pages/Shared/Components/{Ansichtskomponentenname}/{Ansichtsname}
 
-Der Suchpfad gilt für Projekte mit Controllern und Ansichten Razor und Seiten.
+Der Suchpfad gilt für Projekte mit Controllern und Ansichten und Razor Seiten.
 
 Der Standardansichtsname für die Ansichtskomponente ist *Default*. Dies bedeutet, dass Ihre Ansichtsdatei normalerweise *Default.cshtml* heißt. Sie können einen anderen Ansichtsnamen angeben, wenn Sie die Ansichtskomponentenergebnisse erstellen oder die `View`-Methode aufrufen.
 
@@ -96,7 +96,7 @@ Es wird empfohlen, dass Sie die Ansichtsdatei *Default.cshtml* nennen und den Pf
 
 ### <a name="customize-the-view-search-path"></a>Anpassen des Ansichtssuchpfads
 
-Um den Suchpfad für die Ansicht anzupassen Razor, <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> ändern Sie die Sammlung. Um z. B. nach Ansichten im Pfad „/Components/{Name der Ansichtskomponente}/{Name der Ansicht}“ zu suchen, fügen Sie der Auflistung ein neues Element hinzu:
+Um den Suchpfad für die Ansicht anzupassen, ändern Sie Razor die <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> Sammlung. Um z. B. nach Ansichten im Pfad „/Components/{Name der Ansichtskomponente}/{Name der Ansicht}“ zu suchen, fügen Sie der Auflistung ein neues Element hinzu:
 
 [!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
@@ -187,18 +187,18 @@ Bemerkungen zum Code:
 * `InvokeAsync` macht eine Methode verfügbar, die von einer Ansicht aus aufgerufen werden kann, und akzeptiert eine arbiträre Anzahl von Argumenten.
 * Die `InvokeAsync`-Methode gibt mehrere `ToDo`-Elemente zurück, die die Bedingungen der Parameter `isDone` und `maxPriority` erfüllen.
 
-### <a name="create-the-view-component-razor-view"></a>Erstellen der Ansichts Razor Komponenten Ansicht
+### <a name="create-the-view-component-razor-view"></a>Erstellen der Ansichts Komponenten Razor Ansicht
 
 * Erstellen Sie den Ordner *Views/Shared/Components*. Diese Ordner **muss** den Namen *Components* besitzen.
 
 * Erstellen Sie den Ordner *Views/Shared/Components/PriorityList*. Der Ordnername muss mit dem Namen der Ansichtskomponentenklasse oder mit dem Namen der Klasse ohne Suffix (wenn wir uns an die Konvention gehalten und *ViewComponent* als Suffix im Klassennamen verwendet haben) übereinstimmen. Wenn Sie das Attribut `ViewComponent` verwenden, muss der Klassenname mit der Attributbezeichnung übereinstimmen.
 
-* Erstellen Sie eine *Sichten/Shared/Components/prioritylist/default. cshtml* Razor -Ansicht:
+* Erstellen Sie eine *Sichten/Shared/Components/prioritylist/default. cshtml* - Razor Ansicht:
 
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   In Razor der Ansicht wird eine Liste `TodoItem` von angezeigt und angezeigt. Wenn die `InvokeAsync`-Methode der Ansichtskomponente nicht den Namen der Ansicht übergibt (wie in unserem Beispiel), wird *Default* per Konvention für den Ansichtsnamen verwendet. Später in diesem Tutorial erfahren Sie, wie Sie den Namen der Ansicht übergeben. Fügen Sie eine Ansicht einem controllerspezifischen Ansichtsordner hinzu, um das Standardformat für einen spezifischen Controller zu überschreiben (z.B. *Views/ToDo/Components/PriorityList/Default.cshtml*).
+   RazorIn der Ansicht wird eine Liste `TodoItem` von angezeigt und angezeigt. Wenn die `InvokeAsync`-Methode der Ansichtskomponente nicht den Namen der Ansicht übergibt (wie in unserem Beispiel), wird *Default* per Konvention für den Ansichtsnamen verwendet. Später in diesem Tutorial erfahren Sie, wie Sie den Namen der Ansicht übergeben. Fügen Sie eine Ansicht einem controllerspezifischen Ansichtsordner hinzu, um das Standardformat für einen spezifischen Controller zu überschreiben (z.B. *Views/ToDo/Components/PriorityList/Default.cshtml*).
 
     Wenn die Ansichtskomponente controllerspezifisch ist, können Sie sie dem controllerspezifischen Ordner hinzufügen (*Views/ToDo/Components/PriorityList/Default.cshtml*).
 
@@ -266,7 +266,7 @@ Wenn Sie Sicherheit zu Kompilierzeit haben möchten, können Sie den hart codier
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityList.cs?highlight=10&range=5-35)]
 
-Fügen Sie `using` der Razor Ansichts Datei eine-Anweisung hinzu, `nameof` und verwenden Sie den-Operator:
+Fügen Sie `using` Razor der Ansichts Datei eine-Anweisung hinzu, und verwenden Sie den- `nameof` Operator:
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexNameof.cshtml?range=1-6,35-)]
 
@@ -285,7 +285,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-Die Datei der Ansichts Razor Komponente listet die an die `Invoke` Methode übergebenen Zeichen folgen auf (*views/Home/Components/prioritylist/default. cshtml*):
+Die Datei der Ansichts Komponente Razor Listet die an die Methode übergebenen Zeichen folgen auf `Invoke` (*views/Home/Components/prioritylist/default. cshtml*):
 
 ```cshtml
 @model List<string>
@@ -312,7 +312,7 @@ Rufen Sie `Component.InvokeAsync` auf, um das <xref:Microsoft.AspNetCore.Mvc.IVi
 
 ::: moniker range="< aspnetcore-1.1"
 
-Die Ansichts Komponente wird in einer Razor Datei (z. b. *views/Home/Index. cshtml*) <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>mit aufgerufen.
+Die Ansichts Komponente wird in einer Razor Datei (z. b. *views/Home/Index. cshtml*) mit aufgerufen <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
 
 Rufen Sie `Component.InvokeAsync` auf:
 
@@ -330,7 +330,7 @@ Um das Taghilfsprogramm zu verwenden, registrieren Sie die Assembly, die die Ans
 @addTagHelper *, MyWebApp
 ```
 
-Verwenden Sie das taghilfsprogramm für die Razor Ansichts Komponente in der Markup Datei:
+Verwenden Sie das taghilfsprogramm für die Ansichts Komponente in der Razor Markup Datei:
 
 ```cshtml
 <vc:priority-list max-priority="999" is-done="false">

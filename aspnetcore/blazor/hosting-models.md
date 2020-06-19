@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105492"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102275"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
@@ -28,7 +28,7 @@ Das Webframework Blazor kann auf Clientseite im Browser in einer auf [WebAssembl
 
 Informationen zum Erstellen eines Projekts für die in diesem Artikel beschriebenen Hostingmodelle finden Sie unter <xref:blazor/get-started>.
 
-Informationen zu erweiterten Konfigurationen finden Sie unter <xref:blazor/hosting-model-configuration>.
+Informationen zu erweiterten Konfigurationen finden Sie unter <xref:blazor/fundamentals/configuration>.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
@@ -116,7 +116,7 @@ Eine Aktualisierung der Benutzeroberfläche wird in Blazor ausgelöst durch:
 
 Das Diagramm wird noch mal gerendert, und für die Benutzeroberfläche wird ein Unterschied *diff* berechnet. Dieser Unterschied stellt die kleinste Menge DOM-Änderungen dar, die zur Aktualisierung der Benutzeroberfläche auf dem Client erforderlich ist. Der Unterschied wird im Binärformat an den Client gesendet und vom Browser angewendet.
 
-Eine Komponente wird verworfen, sobald sie der Benutzer auf dem Client wieder verlässt. Während der Interaktion mit einem Benutzer muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da auf dem Server der Zustand vieler Komponenten möglicherweise gleichzeitig verwaltet werden muss, kann die Speicherausschöpfung zu einem Problem werden. Eine Anleitung zum Erstellen einer Blazor Server-App unter optimaler Verwendung des Arbeitsspeichers des Servers finden Sie unter <xref:security/blazor/server/threat-mitigation>.
+Eine Komponente wird verworfen, sobald sie der Benutzer auf dem Client wieder verlässt. Während der Interaktion mit einem Benutzer muss der Zustand der Komponente (Dienste, Ressourcen) im Arbeitsspeicher des Servers gespeichert werden. Da auf dem Server der Zustand vieler Komponenten möglicherweise gleichzeitig verwaltet werden muss, kann die Speicherausschöpfung zu einem Problem werden. Eine Anleitung zum Erstellen einer Blazor Server-App unter optimaler Verwendung des Arbeitsspeichers des Servers finden Sie unter <xref:blazor/security/server/threat-mitigation>.
 
 ### <a name="circuits"></a>Leitungen
 
@@ -136,10 +136,10 @@ Bei einer Branchen-App, die ausschließlich in einem privaten Unternehmensnetzwe
 
 Auch die Speicherauslastung kann zur Latenzzeit einer App beitragen. Eine erhöhte Speicherauslastung führt zu einer häufigen Speicherbereinigung oder einer Auslagerung auf die Festplatte. Beide Maßnahmen reduzieren die Leistung einer App und erhöhen folglich deren Benutzeroberflächenlatenz.
 
-Sie sollten Blazor Server-Apps so optimieren, dass die Benutzeroberflächenlatenz durch Reduzieren der Netzwerklatenz und der Speicherauslastung minimiert wird. Informationen zum Messen der Netzwerklatenz finden Sie unter <xref:host-and-deploy/blazor/server#measure-network-latency>. Weitere Informationen zu SignalR und Blazor finden Sie unter:
+Sie sollten Blazor Server-Apps so optimieren, dass die Benutzeroberflächenlatenz durch Reduzieren der Netzwerklatenz und der Speicherauslastung minimiert wird. Informationen zum Messen der Netzwerklatenz finden Sie unter <xref:blazor/host-and-deploy/server#measure-network-latency>. Weitere Informationen zu SignalR und Blazor finden Sie unter:
 
-* <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server/threat-mitigation>
+* <xref:blazor/host-and-deploy/server>
+* <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Verbindung mit dem Server
 
@@ -147,7 +147,7 @@ Blazor Server-Apps erfordern eine aktive SignalR-Verbindung mit dem Server. Wird
 
 Als Reaktion auf die erste Clientanforderung führt die Blazor Server-App ein Prerendering aus, das den Zustand der Benutzeroberfläche auf dem Server festlegt. Versucht der Client, eine SignalR-Verbindung zu erstellen, muss er noch mal mit demselben Server eine Verbindung herstellen. Blazor Server-Apps mit mehr als einem Back-End-Server sollten für SignalR-Verbindungen *persistente Sitzungen* implementieren.
 
-Sie sollten [Azure SignalR Service](/azure/azure-signalr) für Blazor Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Bei Azure SignalR Service werden persistente Sitzungen aktiviert, indem die Option `ServerStickyMode` des Diensts oder dessen Konfigurationswert auf `Required` festgelegt wird. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/server#signalr-configuration>.
+Sie sollten [Azure SignalR Service](/azure/azure-signalr) für Blazor Server-Apps verwenden. Der Dienst ermöglicht das zentrale Hochskalieren einer Blazor Server-App auf eine große Anzahl gleichzeitiger SignalR-Verbindungen. Bei Azure SignalR Service werden persistente Sitzungen aktiviert, indem die Option `ServerStickyMode` des Diensts oder dessen Konfigurationswert auf `Required` festgelegt wird. Weitere Informationen finden Sie unter <xref:blazor/host-and-deploy/server#signalr-configuration>.
 
 Bei der Verwendung von IIS sind persistente Sitzungen mit Routing von Anwendungsanforderungen aktiviert. Weitere Informationen finden Sie unter [HTTP-Lastenausgleiche mithilfe von Routing von Anwendungsanforderungen](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
@@ -155,5 +155,5 @@ Bei der Verwendung von IIS sind persistente Sitzungen mit Routing von Anwendungs
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
-* <xref:blazor/hosting-model-configuration>
+* <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

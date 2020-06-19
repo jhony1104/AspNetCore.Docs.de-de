@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507243"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102576"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Neuerungen in ASP.NET Core 3.1
 
@@ -25,7 +25,7 @@ In diesem Artikel werden die wichtigsten Änderungen in ASP.NET Core 3.1 aufgez
 
 ## <a name="partial-class-support-for-razor-components"></a>Unterstützung von partiellen Klassen für Razor-Komponenten
 
-Razor-Komponenten werden nun als partielle Klassen generiert. Der Code für eine Razor-Komponente kann nun mithilfe einer CodeBehind-Datei geschrieben werden, die als eine partielle Klasse definiert ist, anstatt den gesamten Code für die Komponente in einer einzelnen Datei zu definieren. Weitere Informationen finden Sie unter [Unterstützung von partiellen Klassen](xref:blazor/components#partial-class-support).
+Razor-Komponenten werden nun als partielle Klassen generiert. Der Code für eine Razor-Komponente kann nun mithilfe einer CodeBehind-Datei geschrieben werden, die als eine partielle Klasse definiert ist, anstatt den gesamten Code für die Komponente in einer einzelnen Datei zu definieren. Weitere Informationen finden Sie unter [Unterstützung von partiellen Klassen](xref:blazor/components/index#partial-class-support).
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor-Komponententaghilfsprogramm und Übergeben von Parametern an Komponenten der obersten Ebene
 
@@ -46,7 +46,7 @@ So können Sie eine `Counter`-Komponente beispielsweise mit einem Inkrement vora
     param-IncrementAmount="10" />
 ```
 
-Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Seiten und MVC-Apps](xref:blazor/integrate-components).
+Weitere Informationen finden Sie unter [Integrieren von Komponenten in Razor-Seiten und MVC-Apps](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps).
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Unterstützung für freigegebene Warteschlangen in HTTP.sys
 
@@ -66,7 +66,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:preventDefault`, um die Standar
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-Weitere Informationen finden Sie unter [Verhindern von Standardaktionen](xref:blazor/event-handling#prevent-default-actions).
+Weitere Informationen finden Sie unter [Verhindern von Standardaktionen](xref:blazor/components/event-handling#prevent-default-actions).
 
 ## <a name="stop-event-propagation-in-blazor-apps"></a>Beenden der Ereignisweitergabe in Blazor-Apps
 
@@ -86,7 +86,7 @@ Verwenden Sie das Direktivenattribut `@on{EVENT}:stopPropagation`, um die Ereign
 }
 ```
 
-Weitere Informationen finden Sie unter [Beenden der Ereignisweitergabe](xref:blazor/event-handling#stop-event-propagation).
+Weitere Informationen finden Sie unter [Beenden der Ereignisweitergabe](xref:blazor/components/event-handling#stop-event-propagation).
 
 ## <a name="detailed-errors-during-blazor-app-development"></a>Ausführliche Fehler bei der Entwicklung von Blazor-Apps
 
@@ -95,4 +95,4 @@ Wenn eine Blazor-App während der Entwicklung nicht ordnungsgemäß funktioniert
 * Während der Entwicklung leitet die goldene Leiste Sie an die Browserkonsole weiter, in der die Ausnahme angezeigt wird.
 * In der Produktion benachrichtigt die goldene Leiste den Benutzer darüber, dass ein Fehler aufgetreten ist, und empfiehlt eine Aktualisierung des Browsers.
 
-Weitere Informationen finden Sie unter [Ausführliche Fehler während der Entwicklung](xref:blazor/handle-errors#detailed-errors-during-development).
+Weitere Informationen finden Sie unter [Ausführliche Fehler während der Entwicklung](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development).
