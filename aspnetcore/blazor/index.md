@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "83608186"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102289"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Einführung in ASP.NET Core Blazor
 
@@ -126,7 +126,7 @@ Folgendes geschieht, wenn eine Blazor WebAssembly-App in einem Browser erstellt 
 
 Die Größe der veröffentlichten App, ihre *Nutzlast*, ist ein wichtiger Leistungsfaktor für die Nutzbarkeit einer App. Das Herunterladen einer großen App in einen Browser dauert relativ lange, was die Benutzerfreundlichkeit beeinträchtigt. Blazor WebAssembly optimiert die Nutzlastgröße, um die Downloadzeiten zu verkürzen:
 
-* Nicht verwendeter Code wird aus der App entfernt, wenn sie vom [IL-Linker (Intermediate Language)](xref:host-and-deploy/blazor/configure-linker) veröffentlicht wird.
+* Nicht verwendeter Code wird aus der App entfernt, wenn sie vom [IL-Linker (Intermediate Language)](xref:blazor/host-and-deploy/configure-linker) veröffentlicht wird.
 * HTTP-Antworten werden komprimiert.
 * Die .NET-Runtime und die Assemblys werden im Browser zwischengespeichert.
 
