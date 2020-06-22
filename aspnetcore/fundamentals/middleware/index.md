@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 745eca9788d95c9a123e51a737b34dccdc65d8d4
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: b2468220d0c059a94a085357f2be7bbb3b89adc4
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876230"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074209"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -183,6 +183,10 @@ Bei Single-Page-Webanwendungen (Single-Page Applications, SPAs) ist die entsprec
 * SPAs mit clientseitigem Routing für alle Routen ausgeführt werden können, die von der Server-App nicht erkannt werden.
 
 Weitere Informationen zu SPAs finden Sie in den Anleitungen zu den [React](xref:spa/react)- und [Angular](xref:spa/angular)-Projektvorlagen.
+
+### <a name="forwarded-headers-middleware-order"></a>Middleware für weitergeleitete Header: Auftrag
+
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
 ## <a name="branch-the-middleware-pipeline"></a>Branchen der Middlewarepipeline
 
