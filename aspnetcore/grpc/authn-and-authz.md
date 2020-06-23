@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 61ddcdc75a627fe777fab88b41bdbc4c7f9be9f3
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105791"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84723989"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentifizierung und Autorisierung in gRPC für ASP.NET Core
 
@@ -117,7 +117,7 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 Ein Client könnte alternativ ein Clientzertifikat zur Authentifizierung bereitstellen. Die [Zertifikatsauthentifizierung](https://tools.ietf.org/html/rfc5246#section-7.4.4) erfolgt auf der TLS-Ebene, lange bevor sie überhaupt zum ASP.NET Core gelangt. Wenn die Anforderung in ASP.NET Core eingeht, können Sie mit dem [Clientzertifikat-Authentifizierungspaket](xref:security/authentication/certauth) das Zertifikat in ein `ClaimsPrincipal` auflösen.
 
 > [!NOTE]
-> Der Host muss so konfiguriert werden, dass er Clientzertifikate akzeptiert. Informationen zum Akzeptieren von Clientzertifikaten in Kestrel, IIS und Azure finden Sie unter [Konfigurieren des Hosts für die Anforderung von Zertifikaten](xref:security/authentication/certauth#configure-your-host-to-require-certificates).
+> Der Server muss so konfiguriert werden, dass er Clientzertifikate akzeptiert. Informationen zum Akzeptieren von Clientzertifikaten in Kestrel, IIS und Azure finden Sie unter <xref:security/authentication/certauth#configure-your-server-to-require-certificates>.
 
 Im .NET gRPC-Client wird das Clientzertifikat zu `HttpClientHandler` hinzugefügt, das dann zur Erstellung des gRPC-Clients verwendet wird:
 
