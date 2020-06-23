@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: f29d15fc1e2d2ad84526598be14638110f08614e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774781"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241010"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Wieder verwenden von Objekten mit Objectpool in ASP.net Core
 
@@ -31,7 +31,7 @@ Möglicherweise möchten Sie den Objekt Pool verwenden, wenn die verwalteten Obj
 - Stellen Sie eine begrenzte Ressource dar.
 - Wird vorhersag Bar und häufig verwendet.
 
-Beispielsweise verwendet das ASP.net Core Framework den Objekt Pool an manchen Stellen, um Instanzen <xref:System.Text.StringBuilder> wiederzuverwenden. `StringBuilder`ordnet und verwaltet eigene Puffer zum Speichern von Zeichendaten. ASP.net Core werden Regel `StringBuilder` mäßig verwendet, um Funktionen zu implementieren, und die Wiederverwendung bietet einen Leistungsvorteil.
+Beispielsweise verwendet das ASP.net Core Framework den Objekt Pool an manchen Stellen, um Instanzen wiederzuverwenden <xref:System.Text.StringBuilder> . `StringBuilder`ordnet und verwaltet eigene Puffer zum Speichern von Zeichendaten. ASP.net Core werden regelmäßig verwendet `StringBuilder` , um Funktionen zu implementieren, und die Wiederverwendung bietet einen Leistungsvorteil.
 
 Das Objekt Pooling verbessert nicht immer die Leistung:
 
@@ -40,7 +40,7 @@ Das Objekt Pooling verbessert nicht immer die Leistung:
 
 Verwenden Sie das Objekt Pooling nur, nachdem Sie Leistungsdaten mithilfe realistischer Szenarien für Ihre APP oder Bibliothek gesammelt haben.
 
-**Warnung: der `ObjectPool` implementiert `IDisposable`nicht. Es wird nicht empfohlen, es mit Typen zu verwenden, die eine Entsorgung benötigen.**
+**Warnung: der `ObjectPool` implementiert nicht `IDisposable` . Es wird nicht empfohlen, es mit Typen zu verwenden, die eine Entsorgung benötigen.**
 
 **Hinweis: die Anzahl der Objekte, die Sie zuordnen soll, wird von Objectpool nicht begrenzt, und die Anzahl der Objekte, die Sie beibehält, ist begrenzt.**
 
@@ -61,18 +61,20 @@ Der Objectpool kann in einer APP auf verschiedene Weise verwendet werden:
 
 ## <a name="how-to-use-objectpool"></a>Verwenden von Objectpool
 
-Ruft <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> auf, um ein- <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> Objekt abzurufen und das-Objekt zurückzugeben.  Es ist nicht erforderlich, jedes Objekt zurückzugeben. Wenn Sie kein Objekt zurückgeben, wird die Garbage Collection durchgeführt.
+Ruft <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> auf, um ein-Objekt abzurufen und <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> das-Objekt zurückzugeben.  Es ist nicht erforderlich, jedes Objekt zurückzugeben. Wenn Sie kein Objekt zurückgeben, wird die Garbage Collection durchgeführt.
 
 ## <a name="objectpool-sample"></a>Objectpool-Beispiel
 
 Der folgende Code
 
 * Fügt `ObjectPoolProvider` dem Container für die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) (di) hinzu.
-* Hiermit wird der di `ObjectPool<StringBuilder>` -Container hinzugefügt und konfiguriert.
-* Fügt hinzu `BirthdayMiddleware`.
+* Hiermit wird der di-Container hinzugefügt und konfiguriert `ObjectPool<StringBuilder>` .
+* Fügt hinzu `BirthdayMiddleware` .
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
 Der folgende Code implementiert`BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
