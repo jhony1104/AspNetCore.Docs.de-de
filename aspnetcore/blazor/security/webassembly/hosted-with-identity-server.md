@@ -1,0 +1,435 @@
+---
+title: Sichern einer gehosteten Blazor WebAssembly-App in ASP.NET Core mit IdentityServer
+author: guardrex
+description: In diesem Artikel erfahren Sie, wie Sie eine neue von Blazor gehostete App mit Authentifizierung in Visual Studio erstellen, die ein [IdentityServer](https://identityserver.io/)-Backend verwendet.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/security/webassembly/hosted-with-identity-server
+ms.openlocfilehash: 0fdc88e8e50856fcc4da0beb74f03925ae24401e
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103284"
+---
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sichern einer gehosteten Blazor WebAssembly-App in ASP.NET Core mit IdentityServer
+
+Von [Javier Calvarro Nelson](https://github.com/javiercn) und [Luke Latham](https://github.com/guardrex)
+
+In diesem Artikel wird erläutert, wie eine neue von Blazor gehostete App erstellt wird, für die [IdentityServer](https://identityserver.io/) verwendet wird, um Benutzer und API-Aufrufe zu authentifizieren.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+In Visual Studio:
+
+1. Erstellen Sie eine neue **Blazor WebAssembly**-App. Weitere Informationen finden Sie unter <xref:blazor/get-started>.
+1. Klicken Sie im Dialogfeld **Neue Blazor-App erstellen** im Bereich **Authentifizierung** auf **Ändern**.
+1. Klicken Sie zuerst auf **Einzelne Benutzerkonten** und dann auf **OK**.
+1. Aktivieren Sie im Bereich **Erweitert** das Kontrollkästchen **ASP.NET Core hosted** (In ASP.NET Core gehostet).
+1. Wählen Sie die Schaltfläche **Erstellen**.
+
+# <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
+
+Führen Sie zum Erstellen der App in einer Befehlsshell den folgenden Befehle aus:
+
+```dotnetcli
+dotnet new blazorwasm -au Individual -ho
+```
+
+Zum Angeben eines Ausgabespeicherorts (wodurch ein Projektordner erstellt wird, falls noch nicht vorhanden) schließen Sie die Ausgabeoption mit einem Pfad (z. B. `-o BlazorSample`) in den Befehl ein. Der Name des Ordners wird auch Teil des Projektnamens.
+
+---
+
+## <a name="server-app-configuration"></a>Server-App-Konfiguration
+
+In den folgenden Abschnitten werden Ergänzungen zum Projekt erläutert, wenn die Authentifizierungsunterstützung eingeschlossen wird.
+
+### <a name="startup-class"></a>Startklasse
+
+Die `Startup`-Klasse verfügt über die folgenden Ergänzungen.
+
+* In `Startup.ConfigureServices`:
+
+  * ASP.NET Core Identity:
+
+    ```csharp
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite(
+            Configuration.GetConnectionString("DefaultConnection")));
+
+    services.AddDefaultIdentity<ApplicationUser>(options => 
+            options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+    ```
+
+  * IdentityServer mit einer zusätzlichen <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>-Hilfsprogrammmethode, die ASP.NET Core-Standardkonventionen zusätzlich zu IdentityServer einrichtet:
+
+    ```csharp
+    services.AddIdentityServer()
+        .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+    ```
+
+  * Authentifizierung mit einer zusätzlichen <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>-Hilfsprogrammmethode, die die App so konfiguriert, dass sie von IdentityServer generierte JWT-Token überprüft:
+
+    ```csharp
+    services.AddAuthentication()
+        .AddIdentityServerJwt();
+    ```
+
+* In `Startup.Configure`:
+
+  * Die IdentityServer-Middleware macht die Open ID Connect-Endpunkte (OIDC) verfügbar:
+
+    ```csharp
+    app.UseIdentityServer();
+    ```
+
+  * Die Authentifizierungsmiddleware ist für die Überprüfung der Anforderungsanmeldeinformationen und für das Festlegen des Benutzers auf den Anforderungskontext verantwortlich:
+
+    ```csharp
+    app.UseAuthentication();
+    ```
+
+  * Die Autorisierungsmiddleware aktiviert Autorisierungsfunktionen:
+
+    ```csharp
+    app.UseAuthentication();
+    app.UseAuthorization();
+    ```
+
+### <a name="addapiauthorization"></a>AddApiAuthorization
+
+Die <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>-Hilfsprogrammmethode konfiguriert [IdentityServer](https://identityserver.io/) für ASP.NET Core-Szenarios. IdentityServer ist ein leistungsfähiges und erweiterbares Framework für Überlegungen zum Thema „App-Sicherheit“. IdentityServer ist für die meisten gängigen Szenarios unnötig komplex. Als Folge werden mehrere Konventionen und Konfigurationsoptionen bereitgestellt, die sich gut als Startpunkt eignen. Sobald Ihre Authentifizierung geändert werden muss, stehen alle Funktionen von IdentityServer zur Verfügung, um die Authentifizierung so anzupassen, dass sie den Anforderungen der App entspricht.
+
+### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
+
+Die <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>-Hilfsprogrammmethode konfiguriert ein Richtlinienschema für die App als Standardauthentifizierungshandler. Die Richtlinie ist so konfiguriert, dass Identity alle an beliebige Unterpfade im Identity-URL-Raum `/Identity` weitergeleiteten Anforderungen verarbeiten kann. <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> verarbeitet alle anderen Anforderungen. Außerdem übernimmt diese Methode die folgenden Aufgaben:
+
+* Registrieren einer `{APPLICATION NAME}API`-API-Ressource mit IdentityServer mit einem Standardbereich für `{APPLICATION NAME}API`
+* Konfigurieren der JWT-Bearertoken-Middleware zum Überprüfen der von IdentityServer für die App ausgegeben Token
+
+### <a name="weatherforecastcontroller"></a>WeatherForecastController
+
+In `WeatherForecastController` (*Controllers/WeatherForecastController.cs*), wird das [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)-Attribut auf die Klasse angewendet. Das Attribut gibt an, dass der Benutzer basierend auf der Standardrichtlinie autorisiert werden muss, um auf die Ressource zuzugreifen. Die Standardautorisierungsrichtlinie ist so konfiguriert, dass das Standardauthentifizierungsschema verwendet wird, das von <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> eingerichtet wird. Die Hilfsprogrammmethode konfiguriert <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> als Standardhandler für Anforderungen an die App.
+
+### <a name="applicationdbcontext"></a>ApplicationDbContext
+
+In `ApplicationDbContext` (*Data/ApplicationDbContext.cs*) wird <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> durch <xref:Microsoft.EntityFrameworkCore.DbContext> erweitert, damit das Schema für IdentityServer eingeschlossen wird. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> wird von <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> abgeleitet.
+
+Für eine vollständige Kontrolle des Datenbankschemas wird von einer der verfügbaren Identity-<xref:Microsoft.EntityFrameworkCore.DbContext>-Klassen geerbt, und der Kontext wird so konfiguriert, dass er das Identity-Schema einschließt, indem `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` in der <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A>-Methode aufgerufen wird.
+
+### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
+
+In `OidcConfigurationController` (*Controllers/OidcConfigurationController.cs*) wird der Clientendpunkt bereitgestellt, um OIDC-Parameter bereitzustellen.
+
+### <a name="app-settings-files"></a>App-Einstellungsdateien
+
+In der App-Einstellungsdatei (*appsettings.json*) beschreibt der Bereich `IdentityServer` auf Projektstammebene die Liste der konfigurierten Clients. Im folgenden Beispiel gibt es einen einzelnen Client. Der Clientname entspricht dem App-Namen, und er wird durch Konventionen dem OAuth-`ClientId`-Parameter zugeordnet. Das Profil gibt den App-Typ an, der konfiguriert wird. Das Profil wird intern verwendet, um Konventionen zu etablieren, die den Konfigurationsprozess für den Server vereinfachen. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+
+```json
+"IdentityServer": {
+  "Clients": {
+    "{APP ASSEMBLY}.Client": {
+      "Profile": "IdentityServerSPA"
+    }
+  }
+}
+```
+
+Der Platzhalter `{APP ASSEMBLY}` ist der Assemblyname der App (z. B. `BlazorSample.Client`).
+
+## <a name="client-app-configuration"></a>Client-App-Konfiguration
+
+### <a name="authentication-package"></a>Authentifizierungspaket
+
+Wenn eine App erstellt wird, die einzelne Benutzerkonten (`Individual`) verwendet, erhält die App automatisch einen Paketverweis für das [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)-Paket in der Projektdatei der App. Das Paket stellt einige Primitive bereit, die der App beim Authentifizieren von Benutzern und beim Abrufen von Token zum Aufrufen geschützter APIs helfen.
+
+Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manuell der Projektdatei der App hinzu:
+
+```xml
+<PackageReference 
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
+```
+
+### <a name="api-authorization-support"></a>API-Autorisierungsunterstützung
+
+Die Unterstützung für das Authentifizieren von Benutzern wird im Dienstcontainer durch die Erweiterungsmethode integriert, die im Paket [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) bereitgestellt wird. Diese Methode richtet die Dienste ein, die erforderlich sind, damit die App mit dem vorhandenen Autorisierungssystem interagiert.
+
+```csharp
+builder.Services.AddApiAuthorization();
+```
+
+Standardmäßig wird die Konfiguration für die App durch die Konvention von `_configuration/{client-id}` geladen. Per Konvention wird die Client-ID auf den Assemblynamen der App festgelegt. Diese URL kann so geändert werden, dass sie auf einen eigenen Endpunkt verweist, indem das Überladen mit Optionen aufgerufen wird.
+
+### <a name="imports-file"></a>Imports-Datei
+
+[!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
+
+### <a name="index-page"></a>Indexseite
+
+[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
+
+### <a name="app-component"></a>App-Komponente
+
+[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+
+### <a name="redirecttologin-component"></a>RedirectToLogin-Komponente
+
+[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+
+### <a name="logindisplay-component"></a>LoginDisplay-Komponente
+
+Die `LoginDisplay`-Komponente (*Shared/LoginDisplay.razor*) wird in der `MainLayout`-Komponente (*Shared/MainLayout.razor*) gerendert, und sie verwaltet die folgenden Verhaltensweisen:
+
+* Für authentifizierte Benutzer:
+  * Zeigt den aktuellen Benutzernamen an
+  * Stellt einen Link zur Benutzerprofilseite in ASP.NET Core-Identity bereit
+  * Bietet eine Schaltfläche zum Abmelden von der App
+* Für anonyme Benutzer:
+  * Bietet die Option zum Registrieren
+  * Bietet die Option zur Anmeldung
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/register">Register</a>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
+
+### <a name="authentication-component"></a>Authentication-Komponente
+
+[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+
+### <a name="fetchdata-component"></a>FetchData-Komponente
+
+[!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
+
+## <a name="run-the-app"></a>Ausführen der App
+
+Führen Sie die App aus dem Serverprojekt aus. Wenn Sie Visual Studio verwenden, haben Sie folgende beiden Möglichkeiten:
+
+* Wählen Sie in der Dropdownliste **Startprojekte** in der Symbolleiste die *Server-API-App* aus, und klicken Sie auf **Ausführen**.
+* Wählen Sie das Serverprojekt im **Projektmappen-Explorer** aus, und klicken Sie in der Symbolleiste auf **Ausführen**, oder starten Sie die App über das Menü **Debuggen**.
+
+## <a name="name-and-role-claim-with-api-authorization"></a>Namens- und Rollenanspruch mit API-Autorisierung
+
+### <a name="custom-user-factory"></a>Benutzerdefinierte Benutzerfactory
+
+Erstellen Sie in der Client-App eine benutzerdefinierte Benutzerfactory. IdentityServer sendet mehrere Rollen als JSON-Array in einem einzelnen `role`-Anspruch. Eine einzelne Rolle wird im Anspruch als Zeichenfolgenwert gesendet. Die Factory erstellt einen einzelnen `role`-Anspruch für die einzelnen Rollen des Benutzers.
+
+*CustomUserFactory.cs:*
+
+```csharp
+using System.Linq;
+using System.Security.Claims;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+
+public class CustomUserFactory
+    : AccountClaimsPrincipalFactory<RemoteUserAccount>
+{
+    public CustomUserFactory(IAccessTokenProviderAccessor accessor)
+        : base(accessor)
+    {
+    }
+
+    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
+        RemoteUserAccount account,
+        RemoteAuthenticationUserOptions options)
+    {
+        var user = await base.CreateUserAsync(account, options);
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var identity = (ClaimsIdentity)user.Identity;
+            var roleClaims = identity.FindAll(identity.RoleClaimType);
+
+            if (roleClaims != null && roleClaims.Any())
+            {
+                foreach (var existingClaim in roleClaims)
+                {
+                    identity.RemoveClaim(existingClaim);
+                }
+
+                var rolesElem = account.AdditionalProperties[identity.RoleClaimType];
+
+                if (rolesElem is JsonElement roles)
+                {
+                    if (roles.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var role in roles.EnumerateArray())
+                        {
+                            identity.AddClaim(new Claim(options.RoleClaim, role.GetString()));
+                        }
+                    }
+                    else
+                    {
+                        identity.AddClaim(new Claim(options.RoleClaim, roles.GetString()));
+                    }
+                }
+            }
+        }
+
+        return user;
+    }
+}
+```
+
+Registrieren Sie in der Client-App die Factory in `Program.Main` (*Program.cs*):
+
+```csharp
+builder.Services.AddApiAuthorization()
+    .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
+```
+
+Rufen Sie in der Server-App <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> für den Identity-Generator auf, der rollenbezogene Dienste hinzufügt:
+
+```csharp
+using Microsoft.AspNetCore.Identity;
+
+...
+
+services.AddDefaultIdentity<ApplicationUser>(options => 
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+```
+
+### <a name="configure-identity-server"></a>Konfigurieren von IdentityServer
+
+Verwenden Sie **einen** der folgenden Ansätze:
+
+* [API-Autorisierungsoptionen](#api-authorization-options)
+* [Profildienst](#profile-service)
+
+#### <a name="api-authorization-options"></a>API-Autorisierungsoptionen
+
+Führen Sie in der Server-App die folgenden Aktionen aus:
+
+* Konfigurieren Sie IdentityServer so, dass der `name`- und der `role`-Anspruch in das ID-Token und das Zugriffstoken platziert werden.
+* Verhindern Sie die Standardzuordnung für Rollen im JWT-Tokenhandler.
+
+```csharp
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+
+...
+
+services.AddIdentityServer()
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
+        options.IdentityResources["openid"].UserClaims.Add("name");
+        options.ApiResources.Single().UserClaims.Add("name");
+        options.IdentityResources["openid"].UserClaims.Add("role");
+        options.ApiResources.Single().UserClaims.Add("role");
+    });
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
+```
+
+#### <a name="profile-service"></a>Profildienst
+
+Erstellen Sie in der Server-App eine `ProfileService`-Implementierung.
+
+*ProfileService.cs:*
+
+```csharp
+using IdentityModel;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using System.Threading.Tasks;
+
+public class ProfileService : IProfileService
+{
+    public ProfileService()
+    {
+    }
+
+    public Task GetProfileDataAsync(ProfileDataRequestContext context)
+    {
+        var nameClaim = context.Subject.FindAll(JwtClaimTypes.Name);
+        context.IssuedClaims.AddRange(nameClaim);
+
+        var roleClaims = context.Subject.FindAll(JwtClaimTypes.Role);
+        context.IssuedClaims.AddRange(roleClaims);
+
+        return Task.CompletedTask;
+    }
+
+    public Task IsActiveAsync(IsActiveContext context)
+    {
+        return Task.CompletedTask;
+    }
+}
+```
+
+Registrieren Sie in der Server-App den Profildienst in `Startup.ConfigureServices`:
+
+```csharp
+using IdentityServer4.Services;
+
+...
+
+services.AddTransient<IProfileService, ProfileService>();
+```
+
+### <a name="use-authorization-mechanisms"></a>Verwenden der Autorisierungsmechanismen
+
+Die Komponentenautorisierungsansätze in der Client-App sind Stand jetzt funktional. Jeder der Autorisierungsmechanismen bei den Komponenten kann eine Rolle verwenden, um den Benutzer zu autorisieren:
+
+* [AuthorizeView-Komponente](xref:blazor/security/index#authorizeview-component) (Beispiel: `<AuthorizeView Roles="admin">`)
+* [`[Authorize]`-Attributanweisung](xref:blazor/security/index#authorize-attribute) (<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>) (Beispiel: `@attribute [Authorize(Roles = "admin")]`)
+* [Prozedurale Logik](xref:blazor/security/index#procedural-logic) (Beispiel: `if (user.IsInRole("admin")) { ... }`)
+
+  Mehrere Rollentests werden unterstützt:
+
+  ```csharp
+  if (user.IsInRole("admin") && user.IsInRole("developer"))
+  {
+      ...
+  }
+  ```
+
+`User.Identity.Name` wird in der Client-App mit dem Benutzernamen des Benutzers aufgefüllt. In der Regel handelt es sich dabei um die E-Mail-Adresse für die Anmeldung.
+
+[!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+
+[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Bereitstellen für die Produktion](xref:security/authentication/identity/spa#deploy-to-production)
+* [Importieren eines Zertifikats aus Key Vault](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)
+* <xref:blazor/security/webassembly/additional-scenarios>
+* [Nicht authentifizierte oder nicht autorisierte Web-API-Anforderungen in einer App mit einem sicheren Standardclient](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

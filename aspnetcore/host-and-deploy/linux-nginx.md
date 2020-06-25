@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: af2bea1b3a149ef8d80970031e939dc083d94a03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e1367fe284c4d51a341da01c6415284f6f3e7a9c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775894"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102898"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hosten von ASP.NET Core unter Linux mit Nginx
 
@@ -89,7 +89,8 @@ Für diesen Leitfaden wird eine einzelne Instanz von Nginx verwendet. Diese wird
 
 Da Anforderungen vom Reverseproxy weitergeleitet werden, sollten Sie die [Middleware für weitergeleitete Header](xref:host-and-deploy/proxy-load-balancer) aus dem Paket [Microsoft.AspNetCore.HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) verwenden. Diese Middleware aktualisiert `Request.Scheme` mithilfe des `X-Forwarded-Proto`-Headers, sodass Umleitungs-URIs und andere Sicherheitsrichtlinien ordnungsgemäß funktionieren.
 
-Jede vom Schema abhängige Komponente, wie etwa Authentifizierung, Linkgenerierung, Umleitungen und Geolocation, muss nach dem Aufrufen der Middleware für weitergeleitete Header eingefügt werden. Allgemein gilt, dass Middleware für weitergeleitete Header vor jeder anderen Middleware ausgeführt werden sollte, mit Ausnahme von Middleware für die Diagnose und Fehlerbehandlung. Mit dieser Reihenfolge wird sichergestellt, dass die auf Informationen von weitergeleiteten Headern basierende Middleware die zu verarbeitenden Headerwerte nutzen kann.
+
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
 Rufen Sie die Methode <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> am Anfang von `Startup.Configure` auf, bevor Sie andere Middleware aufrufen. Konfigurieren Sie die Middleware so, dass die Header `X-Forwarded-For` und `X-Forwarded-Proto` weitergeleitet werden:
 
@@ -155,7 +156,7 @@ server {
 }
 ```
 
-Wenn es sich bei der App um eine Blazor-Server-App handelt, die auf SignalR-Websockets basiert, finden Sie unter <xref:host-and-deploy/blazor/server#linux-with-nginx> weitere Informationen, wie Sie den `Connection`-Header festlegen.
+Wenn es sich bei der App um eine Blazor-Server-App handelt, die auf SignalR-Websockets basiert, finden Sie unter <xref:blazor/host-and-deploy/server#linux-with-nginx> weitere Informationen, wie Sie den `Connection`-Header festlegen.
 
 Wenn keine Übereinstimmung mit `server_name` gefunden wird, verwendet Nginx den Standardserver. Wenn kein Server definiert ist, ist der erste Server in der Konfigurationsdatei der Standardserver. Als bewährte Methode gilt, einen bestimmten Standardserver hinzuzufügen, der den Statuscode 444 in Ihrer Konfigurationsdatei zurückgibt. Im Folgenden wird ein Beispiel für eine Standardserverkonfiguration aufgeführt:
 
@@ -234,7 +235,16 @@ Einige Werte (z.B. SQL-Verbindungszeichenfolgen) müssen mit Escapezeichen verse
 systemd-escape "<value-to-escape>"
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+Doppelpunkte (`:`) als Trennzeichen werden in Umgebungsvariablennamen nicht unterstützt. Verwenden Sie statt eines Doppelpunkts zwei Unterstriche (`__`). Der [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables) konvertiert jeweils die zwei Unterstriche in einen Doppelpunkt, wenn die Umgebungsvariablen in die Konfiguration gelesen werden. Im folgenden Beispiel wird der Verbindungszeichenfolgeschlüssel `ConnectionStrings:DefaultConnection` als `ConnectionStrings__DefaultConnection` in die Dienstdefinitionsdatei platziert:
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
+
 Doppelpunkte (`:`) als Trennzeichen werden in Umgebungsvariablennamen nicht unterstützt. Verwenden Sie statt eines Doppelpunkts zwei Unterstriche (`__`). Der [Umgebungsvariablen-Konfigurationsanbieter](xref:fundamentals/configuration/index#environment-variables-configuration-provider) konvertiert jeweils die zwei Unterstriche in einen Doppelpunkt, wenn die Umgebungsvariablen in die Konfiguration gelesen werden. Im folgenden Beispiel wird der Verbindungszeichenfolgeschlüssel `ConnectionStrings:DefaultConnection` als `ConnectionStrings__DefaultConnection` in die Dienstdefinitionsdatei platziert:
+
+::: moniker-end
 
 ```
 Environment=ConnectionStrings__DefaultConnection={Connection String}
@@ -371,7 +381,10 @@ Konfigurieren Sie mithilfe eines der folgenden Ansätze die App so, dass sie bei
 
 * Durch das Hinzufügen eines `HTTP Strict-Transport-Security`-Headers (HSTS) wird sichergestellt, dass alle nachfolgenden Anforderungen vom Client über HTTPS erfolgen.
 
-* Fügen Sie den HSTS-Header nicht hinzu, oder wählen Sie ein entsprechendes `max-age` aus, wenn Sie HTTPS in Zukunft deaktivieren möchten.
+* Wenn HTTPS in Zukunft deaktiviert wird, halten Sie sich an einen der folgenden Ansätze:
+
+  * Fügen Sie den HSTS-Header nicht hinzu.
+  * Wählen Sie einen kurzen `max-age`-Wert aus.
 
 Fügen Sie die Konfigurationsdatei */etc/nginx/proxy.conf* hinzu:
 

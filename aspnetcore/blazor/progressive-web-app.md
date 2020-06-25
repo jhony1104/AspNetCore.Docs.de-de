@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679611"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102304"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Erstellen progressiver Webanwendungen mit der Blazor WebAssembly für ASP.NET Core
 
 Von [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Eine progressive Web-App(PWA) ist eine Single-Page-Webanwendung (SPA), die mithilfe moderner Browser-APIs und -Funktionen das gleiche Verhalten wie eine Desktop-App aufweist. Blazor WebAssembly ist eine auf Standards basierende clientseitige Web-App-Plattform, die beliebige Browser-APIs einschließlich der PWA-APIs verwenden kann, die für die folgenden Funktionen erforderlich sind:
+Eine progressive Webanwendung (PWA) ist in der Regel eine Single-Page-Webanwendung (SPA), die mithilfe moderner Browser-APIs und -Funktionen das gleiche Verhalten wie eine Desktop-App aufweist. Blazor WebAssembly ist eine auf Standards basierende clientseitige Web-App-Plattform, die beliebige Browser-APIs einschließlich der PWA-APIs verwenden kann, die für die folgenden Funktionen erforderlich sind:
 
 * Die Fähigkeit, unabhängig von der Netzwerkgeschwindigkeit, mit sofortigem Laden offline zu arbeiten
 * Ausführung in einem eigenen App-Fenster, nicht nur in einem Browserfenster
@@ -89,7 +89,7 @@ Die Offlineausführung von Apps, die mit der PWA-Vorlagenoption erstellt wurden,
 
 So erfahren Sie, wie die Offlineunterstützung funktioniert:
 
-1. Veröffentlichen Sie die App. Weitere Informationen finden Sie unter <xref:host-and-deploy/blazor/index#publish-the-app>.
+1. Veröffentlichen Sie die App. Weitere Informationen finden Sie unter <xref:blazor/host-and-deploy/index#publish-the-app>.
 1. Stellen Sie die App auf einem Server bereit, der HTTPS unterstützt, und greifen Sie auf die App über ihre sichere HTTPS-Adresse in einem Browser zu.
 1. Öffnen Sie die Entwicklertools des Browsers, und überprüfen Sie, ob ein *Service Worker* für den Host auf der Registerkarte **Anwendung** registriert ist:
 
@@ -295,4 +295,4 @@ Die Beispiel-App [CarChecker](https://github.com/SteveSandersonMS/CarChecker) ve
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Ursprungsübergreifende SignalR-Aushandlung für die Authentifizierung](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [Ursprungsübergreifende SignalR-Aushandlung für die Authentifizierung](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

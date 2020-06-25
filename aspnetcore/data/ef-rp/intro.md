@@ -1,20 +1,37 @@
 ---
-title: Razor Pages mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8 author: rick-anderson description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core ms.author: riande ms.custom: "mvc, seodec18" ms.date: 09/26/2019 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: data/ef-rp/intro
+title: Razor Pages mit Entity Framework Core in ASP.NET Core – Tutorial 1 bis 8
+author: rick-anderson
+description: Informationen zum Erstellen einer Razor Pages-App mit Entity Framework Core
+ms.author: riande
+ms.custom: mvc, seodec18
+ms.date: 09/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: data/ef-rp/intro
+ms.openlocfilehash: a6915da23124b7ed4bfaa982692635f9fc75f96a
+ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "82967511"
 ---
-
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor-Seiten mit Entity Framework Core in ASP.NET Core: Tutorial 1 von 8
+# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Pages mit Entity Framework Core in ASP.NET Core – Tutorial 1 bis 8
 
 Von [Tom Dykstra](https://github.com/tdykstra) und [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dies ist das erste von vielen Tutorials, die zeigen, wie Entity Framework (EF) Core in einer [ASP.NET Core Razor Pages](xref:razor-pages/index)-App verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten. In diesem Tutorial wird der Code-First-Ansatz verwendet. Informationen zum Durcharbeiten dieses Tutorials mit dem Database-First-Ansatz finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).
+Dies ist das erste einer Reihe von Tutorials, die zeigen, wie Entity Framework (EF) Core für eine [Razor Pages-App mit ASP.NET Core](xref:razor-pages/index) verwendet wird. In den Tutorials wird eine Website für eine fiktive Contoso University erstellt. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten. In diesem Tutorial wird der Code-First-Ansatz verwendet. Informationen zum Durcharbeiten dieses Tutorials mit dem Database-First-Ansatz finden Sie in [diesem GitHub-Issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).
 
 [Download or view the completed app (Herunterladen oder anzeigen der vollständigen App).](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Anweisungen zum Download.](xref:index#how-to-download-a-sample)
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* Wenn Sie noch nicht mit Razor Pages vertraut sind, arbeiten Sie zuerst die Tutorialserie [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) durch, bevor Sie mit diesem Tutorial beginnen.
+* Wenn Sie noch nicht mit Razor Pages vertraut sind, arbeiten Sie zuerst die Tutorialreihe [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) durch, bevor Sie mit diesem Tutorial beginnen.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -103,7 +120,7 @@ So führen Sie die APP nach dem Herunterladen des vollständigen Projekts aus:
 
 * Navigieren Sie in einem Terminal zu dem Ordner, in dem der Projektordner erstellt werden soll.
 
-* Führen Sie die folgenden Befehle aus, um ein Razor Pages `cd`-Projekt und den neuen Projektordner zu erstellen:
+* Führen Sie die folgenden Befehle aus, um ein Razor Pages-Projekt zu erstellen und per `cd` in den neuen Projektordner zu wechseln:
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -193,7 +210,7 @@ Erstellen Sie das Projekt, um sich zu vergewissern, dass keine Compilerfehler vo
 In diesem Abschnitt verwenden Sie das ASP.Net Core-Gerüstbautool, um Folgendes zu generieren:
 
 * Eine EF Core *context*-Klasse. „context“ ist die Hauptklasse, die die Entity Framework-Funktionen für ein angegebenes Datenmodell koordiniert. Diese Klasse wird von der `Microsoft.EntityFrameworkCore.DbContext`-Klasse abgeleitet.
-* Razor Pages, die Vorgänge zum Erstellen (Create), Lesen (Read), Aktualisieren (Update) und Löschen (Delete) (CRUD) für die `Student`-Entität verarbeiten.
+* Razor Pages-Instanzen, die CRUD-Vorgänge (Create, Read, Update, Delete) für die `Student`-Entität verarbeiten.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -302,13 +319,13 @@ Der hervorgehobene Code erstellt eine [DbSet\<TEntity>](/dotnet/api/microsoft.en
 
 Da eine Entitätenmenge mehrere Entitäten enthält, sollten die DBSet-Eigenschaften Namen im Plural tragen. Da das Gerüstbautool ein `Student`-DBSet erstellt hat, ändert dieser Schritt den Namen in den Plural `Students`. 
 
-Nehmen Sie eine globale Änderung im gesamten Projekt aus `_context.Student` in `_context.Students`vor, damit der Razor Pages-Code mit dem neuen DBSet-Namen übereinstimmt.  Es gibt 8 Vorkommen.
+Damit der Razor Pages-Code mit dem neuen DBSet-Namen übereinstimmt, ändern Sie `_context.Student` im gesamten Projekt global in `_context.Students`.  Es gibt 8 Vorkommen.
 
 Erstellen Sie das Projekt, um sich zu vergewissern, dass keine Compilerfehler vorhanden sind.
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core wird mit [Dependency Injection](xref:fundamentals/dependency-injection) erstellt. Dienste wie der EF Core-Datenbankkontext werden über Abhängigkeitsinjektion (Dependency Injection) beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z.B. Razor Pages), werden von diesen Diensten über Konstruktorparameter bereitgestellt. Der Konstruktorcode, der eine Datenbankkontextinstanz abruft, wird später in diesem Tutorial erläutert.
+ASP.NET Core wird mit [Dependency Injection](xref:fundamentals/dependency-injection) erstellt. Dienste wie der EF Core-Datenbankkontext werden über Abhängigkeitsinjektion (Dependency Injection) beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z. B. Razor Pages), werden von diesen Diensten über Konstruktorparameter bereitgestellt. Der Konstruktorcode, der eine Datenbankkontextinstanz abruft, wird später in diesem Tutorial erläutert.
 
 Das Gerüstbautool hat die context-Klasse automatisch beim Dependency Injection-Container registriert.
 
@@ -443,7 +460,7 @@ Weitere Informationen zur asynchronen Programmierung in .NET finden Sie unter [A
 
 ::: moniker range="< aspnetcore-3.0"
 
-Die Beispiel-Web-App der Contoso University veranschaulicht, wie mit Entity Framework Core (EF Core) eine ASP.NET Core-App mit Razor Pages erstellt werden kann.
+Die Beispiel-Web-App der Contoso University veranschaulicht, wie Sie mit Entity Framework Core (EF Core) und ASP.NET Core eine Razor Pages-App erstellen können.
 
 Bei der Beispiel-App handelt es sich um eine Website für die fiktive Contoso University. Sie enthält Funktionen wie die Zulassung von Studenten, die Erstellung von Kursen und Aufgaben von Dozenten. Dies ist die erste Seite eines mehrseitigen Tutorials, in dem die Erstellung der Beispiel-App der Contoso University erläutert wird.
 
@@ -461,7 +478,7 @@ Bei der Beispiel-App handelt es sich um eine Website für die fiktive Contoso Un
 
 ---
 
-Kenntnisse über [Razor Pages](xref:razor-pages/index). Anfänger sollten den Artikel [Erste Schritte mit Razor Pages in ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start) lesen, bevor sie mit diesem Tutorial beginnen.
+Kenntnisse zu [Razor Pages](xref:razor-pages/index). Einsteiger sollten den Artikel [Erste Schritte mit Razor Pages](xref:tutorials/razor-pages/razor-pages-start) lesen, bevor sie mit dieser Tutorialreihe beginnen.
 
 ## <a name="troubleshooting"></a>Problembehandlung
 
@@ -477,7 +494,7 @@ Benutzer können Informationen zu den Studenten, Kursen und Dozenten abrufen. Im
 
 ![Bearbeitungsseite für Studenten](intro/_static/student-edit.png)
 
-Der Benutzeroberflächenstil dieser Website ähnelt den durch die integrierten Vorlagen generierten Seiten. In diesem Tutorial wird Entity Framework Core mit Razor Pages thematisiert. Die Benutzeroberfläche wird nicht erläutert.
+Der Benutzeroberflächenstil dieser Website ähnelt den durch die integrierten Vorlagen generierten Seiten. In diesem Tutorial geht es um EF Core mit Razor Pages, nicht um die Benutzeroberfläche.
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Erstellen der Razor Pages-Web-App „ContosoUniversity“
 
@@ -487,7 +504,7 @@ Der Benutzeroberflächenstil dieser Website ähnelt den durch die integrierten V
 * Erstellen Sie eine neue ASP.NET Core-Webanwendung. Geben Sie dem Projekt den Namen **ContosoUniversity**. Es ist wichtig, dass Sie dem Projekt *ContosoUniversity* zu nennen, sodass die Namespaces übereinstimmen, wenn der Code kopiert und eingefügt wird.
 * Wählen Sie in der Dropdownliste **ASP.NET Core 2.1** und anschließend **Webanwendung** aus.
 
-Bilder zu den vorherigen Schritten finden Sie unter [Erstellen einer Razor-Web-App](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
+Bilder zu den vorherigen Schritten finden Sie unter [Erstellen einer Razor Pages-Web-App](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
 Führen Sie die App aus.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -582,7 +599,7 @@ In diesem Abschnitt wird das Gerüst für das Studentenmodell erstellt. Mit dem 
 * Klicken Sie im **Projektmappen-Explorer** mit der rechten Maustaste auf den Ordner *Pages/Students*, und wählen Sie **Hinzufügen** > **Neues Gerüstelement** aus.
 * Wählen Sie im Dialogfeld **Gerüst hinzufügen** den Eintrag **Razor Pages mit Entity Framework (CRUD)** > **Hinzufügen** aus.
 
-Vervollständigen Sie das Dialogfeld **Razor Pages mit Entity Framework (CRUD) hinzufügen**:
+Vervollständigen Sie das Dialogfeld **Add Razor Pages using Entity Framework (CRUD)** (Razor-Seiten mithilfe des Entity Frameworks (CRUD) hinzufügen):
 
 * Wählen Sie im Dropdownmenü **Modellklasse** **Student (ContosoUniversity.Models)** aus.
 * Wählen Sie in der Zeile **Datenkontextklasse** das Pluszeichen ( **+** ) aus, und ändern Sie den generierten Namen in **ContosoUniversity.Models.SchoolContext**.
@@ -619,7 +636,7 @@ Der Gerüstprozess hat folgende Dateien erstellt und geändert:
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>Überprüfen des mit Dependency Injection registrierten Kontexts
 
-ASP.NET Core wird mit [Dependency Injection](xref:fundamentals/dependency-injection) erstellt. Dienste (z.B. der Datenbankkontext Entity Framework Core) werden über Dependency Injection beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z.B. Razor Pages), werden von diesen Diensten über Konstruktorparameter bereitgestellt. Der Konstruktorcode, der eine Datenbankkontextinstanz abruft, wird später in diesem Tutorial erläutert.
+ASP.NET Core wird mit [Dependency Injection](xref:fundamentals/dependency-injection) erstellt. Dienste (z.B. der Datenbankkontext Entity Framework Core) werden über Dependency Injection beim Anwendungsstart registriert. Komponenten, die diese Dienste erfordern (z. B. Razor Pages), werden von diesen Diensten über Konstruktorparameter bereitgestellt. Der Konstruktorcode, der eine Datenbankkontextinstanz abruft, wird später in diesem Tutorial erläutert.
 
 Das Gerüstbautool hat automatisch einen Datenbankkontext erstellt und diesen mit dem Dependency Injection-Container registriert.
 

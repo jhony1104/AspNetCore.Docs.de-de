@@ -13,16 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: a8604ca6ea60386bb3c54c950205ee695d37c689
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103116"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292684"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Absichern von Blazor Server-Apps als ASP.NET Core-Anwendungen
 
 Von [Luke Latham](https://github.com/guardrex)
+
+Das Schützen von Blazor Server-Apps funktioniert genau wie bei ASP.NET Core-Apps. Weitere Informationen finden Sie in den Artikeln unter <xref:security/index>. Die Themen in dieser Übersicht gelten speziell für Blazor Server. 
 
 ## <a name="blazor-server-project-template"></a>Blazor Server-Projektvorlage
 
@@ -67,7 +69,7 @@ Bei Verwenden der Option `-o|--output` nutzt der Befehl den für den Platzhalter
 * Erstellen Sie einen Ordner für das Projekt.
 * Benennen Sie das Projekt.
 
-Weitere Informationen finden Sie im Befehl [dotnet new](/dotnet/core/tools/dotnet-new) im Leitfaden für .NET Core.
+Weitere Informationen finden Sie im Befehl [`dotnet new`](/dotnet/core/tools/dotnet-new) im Leitfaden für .NET Core.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
@@ -101,13 +103,9 @@ Bei Verwenden der Option `-o|--output` nutzt der Befehl den für den Platzhalter
 * Erstellen Sie einen Ordner für das Projekt.
 * Benennen Sie das Projekt.
 
-Weitere Informationen finden Sie im Befehl [dotnet new](/dotnet/core/tools/dotnet-new) im Leitfaden für .NET Core.
+Weitere Informationen finden Sie im Befehl [`dotnet new`](/dotnet/core/tools/dotnet-new) im Leitfaden für .NET Core.
 
 ---
-
-## <a name="secure-an-existing-app"></a>Schützen einer vorhandenen App
-
-Das Schützen von Blazor Server-Apps funktioniert genau wie bei ASP.NET Core-Apps. Weitere Informationen finden Sie in den Artikeln unter <xref:security/index>.
 
 ## <a name="scaffold-identity"></a>Gerüst Identity
 

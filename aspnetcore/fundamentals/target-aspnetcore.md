@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776486"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103023"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Verwenden von ASP.NET Core-APIs in einer Klassenbibliothek
 
@@ -46,17 +46,17 @@ Um auf ASP.NET Core zu verweisen, fügen Sie Ihrer Projektdatei das folgende `<F
 
 Der Verweis auf ASP.NET Core in dieser Weise wird nur für Projekte mit der Zielplattform .NET Core 3.x unterstützt.
 
-## <a name="include-blazor-extensibility"></a>Einbeziehen der Blazor-Erweiterbarkeit
+## <a name="include-blazor-extensibility"></a>Einschließen von Blazor-Erweiterbarkeit
 
-Blazor unterstützt die [Hostingmodelle](xref:blazor/hosting-models) WebAssembly (WASM) und Server. Wenn es keinen bestimmten Grund gibt, der dagegen spricht, sollte eine [Razor-Komponenten](xref:blazor/components)-Bibliothek beide Hostingmodelle unterstützen. Eine Razor-Komponentenbibliothek muss das [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) verwenden.
+Blazor unterstützt die [Hostingmodelle](xref:blazor/hosting-models) WebAssembly (WASM) und Server. Wenn es keinen bestimmten Grund gibt, der dagegen spricht, sollte eine [Razor-Komponenten](xref:blazor/components/index)-Bibliothek beide Hostingmodelle unterstützen. Eine Razor-Komponentenbibliothek muss das [Microsoft.NET.Sdk.Razor-SDK ](xref:razor-pages/sdk) verwenden.
 
 ### <a name="support-both-hosting-models"></a>Unterstützen beider Hostingmodelle
 
-Verwenden Sie zur Nutzung von Razor-Komponenten sowohl aus [Blazor Server](xref:blazor/hosting-models#blazor-server)- als auch aus [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly)-Projekten die folgenden Anweisungen für Ihren Editor.
+Verwenden Sie zur Unterstützung der Nutzung von Razor-Komponenten sowohl in [Blazor Server-](xref:blazor/hosting-models#blazor-server) als auch in [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly)-Projekten die folgenden Anweisungen für Ihren Editor.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte deaktiviert sein.
+Verwenden Sie die Projektvorlage **Razor-Klassenbibliothek**. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte deaktiviert sein.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -68,7 +68,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio für Mac](#tab/visual-studio-mac)
 
-Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage.
+Verwenden Sie die Projektvorlage **Razor-Klassenbibliothek**.
 
 ---
 
@@ -86,7 +86,7 @@ Zum Beispiel:
 
 ### <a name="support-a-specific-hosting-model"></a>Unterstützen eines bestimmten Hostingmodells
 
-Es ist weitaus weniger üblich, ein einzelnes Blazor-Hostingmodell zu unterstützen. Um beispielsweise die Razor-Komponentennutzung nur aus [Blazor Server](xref:blazor/hosting-models#blazor-server)-Projekten zu unterstützen:
+Es ist weitaus weniger üblich, ein einzelnes Blazor-Hostingmodell zu unterstützen. So wird beispielsweise die Nutzung von Razor-Komponenten nur in [Blazor Server](xref:blazor/hosting-models#blazor-server)-Projekten unterstützt:
 
 * Legen Sie .NET Core 3.x als Ziel fest.
 * Fügen Sie ein `<FrameworkReference>`-Element für das freigegebene Framework hinzu.
@@ -95,32 +95,32 @@ Zum Beispiel:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Weitere Informationen zu Bibliotheken, die Razor-Komponenten enthalten, finden Sie unter [Klassenbibliotheken für ASP.NET Core Razor-Komponenten](xref:blazor/class-libraries).
+Weitere Informationen zu Bibliotheken, die Razor-Komponenten enthalten, finden Sie unter [Klassenbibliotheken für ASP.NET Core-Razor-Komponenten](xref:blazor/components/class-libraries).
 
 ## <a name="include-mvc-extensibility"></a>Einschließen von MVC-Erweiterbarkeit
 
 In diesem Abschnitt werden Empfehlungen für Bibliotheken erläutert, die Folgendes umfassen:
 
-* [Razor-Ansichten oder Razor Pages](#razor-views-or-razor-pages)
+* [Razor-Ansichten oder Razor-Seiten](#razor-views-or-razor-pages)
 * [Taghilfsprogramme](#tag-helpers)
 * [Ansichtskomponenten](#view-components)
 
 In diesem Abschnitt wird nicht die Unterstützung mehrerer Zielplattformen erörtert, um mehrere Versionen von MVC zu unterstützen. Anleitungen zum Unterstützen mehrerer ASP.NET Core-Versionen finden Sie unter [Unterstützung mehrerer ASP.NET Core-Versionen](#support-multiple-aspnet-core-versions).
 
-### <a name="razor-views-or-razor-pages"></a>Razor-Ansichten oder Razor Pages
+### <a name="razor-views-or-razor-pages"></a>Razor-Ansichten oder Razor-Seiten
 
-Ein Projekt, das [Razor-Ansichten](xref:mvc/views/overview) oder [Razor Pages enthält](xref:razor-pages/index) muss das [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) verwenden.
+Ein Projekt, das [Razor-Ansichten](xref:mvc/views/overview) oder [Razor-Seiten](xref:razor-pages/index) enthält, muss das [Microsoft.NET.Sdk.Razor-SDK ](xref:razor-pages/sdk) verwenden.
 
 Wenn für das Projekt .NET Core 3.x als Ziel festgelegt ist, wird Folgendes benötigt:
 
 * Eine `AddRazorSupportForMvc`-MSBuild-Eigenschaft, die auf `true` festgelegt ist.
 * Ein `<FrameworkReference>`-Element für das freigegebene Framework.
 
-Die Projektvorlage **Razor-Klassenbibliothek** erfüllt die Voraussetzungen für Projekte mit dem Ziel .NET Core 3.x. Verwenden Sie die folgenden Anweisungen für Ihren Editor.
+Die Projektvorlage **Razor-Klassenbibliothek** erfüllt die obigen Voraussetzungen für Projekte für .NET Core 3.x. Verwenden Sie die folgenden Anweisungen für Ihren Editor.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Verwenden Sie die **Razor-Klassenbibliothek**-Projektvorlage. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte aktiviert sein.
+Verwenden Sie die Projektvorlage **Razor-Klassenbibliothek**. Das Kontrollkästchen **Seiten und Ansichten unterstützen** sollte aktiviert sein.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -286,6 +286,6 @@ So fügen Sie z. B. den Web-API-Client hinzu:
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:razor-pages/ui-class>
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>
 * [Unterstützung der .NET-Implementierung](/dotnet/standard/net-standard#net-implementation-support)
 * [.NET-Unterstützungsrichtlinien](https://dotnet.microsoft.com/platform/support/policy)

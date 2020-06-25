@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: b2468220d0c059a94a085357f2be7bbb3b89adc4
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 81a0da65215bc41f6dfad0de28a95bdc455bd8fb
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074209"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292788"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core-Middleware
 
@@ -91,7 +91,9 @@ Die folgende `Startup.Configure`-Methode fügt sicherheitsbezogene Middlewarekom
 Für den Code oben gilt:
 
 * Middleware, die beim Erstellen einer neuen Web-App mit [einzelnen Benutzerkonten](xref:security/authentication/identity) nicht hinzugefügt wird, wird auskommentiert.
-* Nicht jede Middleware muss in genau dieser Reihenfolge vorliegen, aber für viele Middlewarekomponenten ist dies erforderlich. Beispielsweise müssen `UseCors`, `UseAuthentication` und `UseAuthorization` in der gezeigten Reihenfolge vorliegen.
+* Nicht jede Middleware muss in genau dieser Reihenfolge vorliegen, aber für viele Middlewarekomponenten ist dies erforderlich. Zum Beispiel:
+  * `UseCors`, `UseAuthentication` und `UseAuthorization` müssen in der gezeigten Reihenfolge vorliegen.
+  * `UseCors` muss sich derzeit aufgrund [dieses Fehlers](https://github.com/dotnet/aspnetcore/issues/23218) vor `UseResponseCaching` befinden.
 
 Die folgenden `Startup.Configure`-Methode fügt Middlewarekomponenten für allgemeine App-Szenarien hinzu:
 
@@ -248,7 +250,7 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [Authentifizierung](xref:security/authentication/identity) | Bietet Unterstützung für Authentifizierungen. | Bevor `HttpContext.User` erforderlich ist. Terminal für OAuth-Rückrufe. |
 | [Autorisierung](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*) | Bietet Unterstützung für Authentifizierungen | Direkt nach der Authentifizierungsmiddleware |
 | [Cookierichtlinie](xref:security/gdpr) | Verfolgt die Zustimmung von Benutzern zum Speichern persönlicher Informationen nach und erzwingt die Mindeststandards für Cookiefelder, z.B. `secure` und `SameSite`. | Befindet sich vor der Middleware, die Cookies ausstellt. Beispiele: Authentifizierung, Sitzung, MVC (TempData). |
-| [CORS](xref:security/cors) | Konfiguriert die Ressourcenfreigabe zwischen verschiedenen Ursprüngen (Cross-Origin Resource Sharing, CORS). | Vor Komponenten, die CORS verwenden. |
+| [CORS](xref:security/cors) | Konfiguriert die Ressourcenfreigabe zwischen verschiedenen Ursprüngen (Cross-Origin Resource Sharing, CORS). | Vor Komponenten, die CORS verwenden. `UseCors` muss sich derzeit aufgrund [dieses Fehlers](https://github.com/dotnet/aspnetcore/issues/23218) vor `UseResponseCaching` befinden.|
 | [Diagnose](xref:fundamentals/error-handling) | Mehrere separate Middlewares, die Entwicklern eine Ausnahmeseite, Ausnahmebehandlung, Statuscodeseiten und die Standardwebseite für neue Apps bereitstellen. | Vor Komponenten, die Fehler erzeugen. Terminal für Ausnahmen oder zum Bereitstellen der Standardwebseite für neue Apps. |
 | [Weitergeleitete Header](xref:host-and-deploy/proxy-load-balancer) | Leitet Proxyheader an die aktuelle Anforderung weiter. | Vor Komponenten, die die aktualisierten Felder nutzen. Beispiele: Schema, Host, Client-IP, Methode. |
 | [Integritätsprüfung](xref:host-and-deploy/health-checks) | Überprüft die Integrität der ASP.NET Core-App und ihrer Abhängigkeiten, z. B. Überprüfung der Datenbankverfügbarkeit. | Abschließend, wenn eine Anforderung mit einem Integritätsprüfungs-Endpunkt übereinstimmt. |
@@ -258,7 +260,7 @@ Die folgenden Middlewarekomponenten sind im Lieferumfang von ASP.NET Core enthal
 | [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Middleware für erweiterte Sicherheit, die einen besonderen Antwortheader hinzufügt. | Bevor Antworten gesendet werden und nach Komponenten, die Anforderungen ändern. Beispiele: weitergeleitete Header, URL-Umschreibung. |
 | [MVC](xref:mvc/overview) | Verarbeitet Anforderungen mit MVC/Razor Pages. | Abschließend, wenn eine Anforderung mit einer Route übereinstimmt. |
 | [OWIN](xref:fundamentals/owin) | Interoperabilität mit auf OWIN basierten Apps, Servern und Middleware. | Abschließend, wenn die OWIN-Middleware die Anforderung vollständig verarbeitet. |
-| [Zwischenspeichern von Antworten](xref:performance/caching/middleware) | Bietet Unterstützung für das Zwischenspeichern von Antworten. | Vor Komponenten, für die das Zwischenspeichern erforderlich ist. |
+| [Zwischenspeichern von Antworten](xref:performance/caching/middleware) | Bietet Unterstützung für das Zwischenspeichern von Antworten. | Vor Komponenten, für die das Zwischenspeichern erforderlich ist. `UseCORS` muss sich vor `UseResponseCaching` befinden.|
 | [Antwortkomprimierung](xref:performance/response-compression) | Bietet Unterstützung für das Komprimieren von Antworten. | Vor Komponenten, für die das Komprimieren erforderlich ist. |
 | [Lokalisierung von Anforderungen](xref:fundamentals/localization) | Bietet Unterstützung für die Lokalisierung. | Vor der Lokalisierung vertraulicher Komponenten. |
 | [Endpunktrouting](xref:fundamentals/routing) | Definiert Anforderungsrouten und schränkt diese ein. | Terminal für entsprechende Routen. |
