@@ -1,5 +1,5 @@
 ---
-title: Hinzufügen, herunterladen und Löschen von Identity Benutzerdaten in einem ASP.net Core Projekt
+title: Hinzufügen, herunterladen und Löschen von Benutzerdaten Identity in einem ASP.net Core Projekt
 author: rick-anderson
 description: Erfahren Sie, wie Sie Identity in einem ASP.net Core Projekt benutzerdefinierte Benutzerdaten hinzufügen. Löschen von Daten pro dsgvo.
 ms.author: riande
@@ -12,23 +12,23 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 29c23e10d11eb1042b64fc071c221a9ead857fcc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6b4de0a47cd7882852512040a08832942f20aa4c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777331"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347111"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Hinzufügen, herunterladen und Löschen von benutzerdefinierten Benutzerdaten in einem ASP.net Core Projekt
+# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Hinzufügen, herunterladen und Löschen von benutzerdefinierten Benutzerdaten Identity in einem ASP.net Core Projekt
 
 Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 In diesem Artikel werden die folgenden Aufgaben erläutert:
 
 * Fügen Sie benutzerdefinierte Benutzerdaten zu einer ASP.net Core-Web-App hinzu.
-* Markieren Sie das benutzerdefinierte Benutzerdaten Modell <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> mit dem-Attribut, damit es automatisch heruntergeladen und gelöscht werden kann. Das herunterladen und Löschen der Daten hilft bei [der Einhaltung der](xref:security/gdpr) dsgvo-Anforderungen.
+* Markieren Sie das benutzerdefinierte Benutzerdaten Modell mit dem <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> -Attribut, damit es automatisch heruntergeladen und gelöscht werden kann. Das herunterladen und Löschen der Daten hilft bei [der Einhaltung der](xref:security/gdpr) dsgvo-Anforderungen.
 
-Das Projektbeispiel wird aus einer Razor Pages-Web-App erstellt, die Anweisungen ähneln jedoch einer ASP.net Core MVC-Web-App.
+Das Projektbeispiel wird aus einer Razor pages-Web-App erstellt, die Anweisungen ähneln jedoch einer ASP.net Core MVC-Web-App.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -46,7 +46,7 @@ Das Projektbeispiel wird aus einer Razor Pages-Web-App erstellt, die Anweisungen
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>Erstellen einer Razor-Web-App
+## <a name="create-a-razor-web-app"></a>Erstellen einer Razor Web-App
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -55,7 +55,7 @@ Das Projektbeispiel wird aus einer Razor Pages-Web-App erstellt, die Anweisungen
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Benennen Sie das Projekt **"WebApp1"** Wenn Sie den Namespace des [Download Beispiel](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Codes anpassen möchten.
 * **ASP.net Core Webanwendung** > **OK** auswählen
 * Wählen Sie in der Dropdown Liste **ASP.net Core 3,0** aus.
-* **Webanwendung** > auswählen **OK**
+* **Webanwendung** auswählen > **OK**
 * Erstellen Sie das Projekt, und führen Sie es aus.
 
 ::: moniker-end
@@ -65,7 +65,7 @@ Das Projektbeispiel wird aus einer Razor Pages-Web-App erstellt, die Anweisungen
 * Klicken Sie in Visual Studio im Menü **Datei** auf **Neu** > **Projekt**. Benennen Sie das Projekt **"WebApp1"** Wenn Sie den Namespace des [Download Beispiel](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) Codes anpassen möchten.
 * **ASP.net Core Webanwendung** > **OK** auswählen
 * Wählen Sie in der Dropdown Liste **ASP.net Core 2,2** aus.
-* **Webanwendung** > auswählen **OK**
+* **Webanwendung** auswählen > **OK**
 * Erstellen Sie das Projekt, und führen Sie es aus.
 
 ::: moniker-end
@@ -79,19 +79,19 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>Ausführen des Identitäts gerüstems
+## <a name="run-the-identity-scaffolder"></a>Das Identity Gerüst ausführen
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Klicken Sie in **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, >**Neues Gerüst Element** **Hinzufügen** > .
-* Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identität** > **Hinzufügen**aus.
-* Im Dialogfeld **Identität hinzufügen** werden die folgenden Optionen angezeigt:
+* Klicken Sie in **Projektmappen-Explorer**mit der rechten Maustaste auf das Projekt, > **Add**  >  **Neues Gerüst Element**hinzufügen.
+* Wählen Sie im linken Bereich des Dialog Felds **Gerüst hinzufügen** die Option **Identity**  >  **Hinzufügen**aus.
+* Im Dialog **Feld Identity Hinzufügen** werden die folgenden Optionen angezeigt:
   * Wählen Sie die vorhandene Layoutdatei aus *~/pages/Shared/_Layout. cshtml*
   * Wählen Sie die folgenden zu über schreibenden Dateien aus:
     * **Konto/Registrierung**
     * **Konto/Verwaltung/Index**
-  * Wählen Sie **+** die Schaltfläche aus, um eine neue **Datenkontext Klasse**zu erstellen. Akzeptieren Sie den Typ (**"WebApp1". Models. WebApp1Context** , wenn das Projekt den Namen **"WebApp1"** hat).
-  * Wählen Sie **+** die Schaltfläche aus, um eine neue **Benutzerklasse**zu erstellen. Akzeptieren Sie den Typ (**WebApp1User** , wenn das Projekt den Namen **"WebApp1"** hat), > **Hinzufügen**.
+  * Wählen Sie die **+** Schaltfläche aus, um eine neue **Datenkontext Klasse**zu erstellen. Akzeptieren Sie den Typ (**"WebApp1". Models. WebApp1Context** , wenn das Projekt den Namen **"WebApp1"** hat).
+  * Wählen Sie die **+** Schaltfläche aus, um eine neue **Benutzerklasse**zu erstellen. Akzeptieren Sie den Typ (**WebApp1User** , wenn das Projekt den Namen **"WebApp1"** hat), > **Hinzufügen**.
 * Wählen Sie **Hinzufügen**.
 
 # <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
@@ -109,13 +109,13 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-Führen Sie den folgenden Befehl aus, um die Einstellungen für das Identitäts Gerüst aufzulisten:
+Führen Sie den folgenden Befehl aus, um die Identity Gerüst Optionen aufzulisten:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-Führen Sie im Projektordner das Identitäts Gerüst aus:
+Führen Sie im Projektordner das Identity Gerüst aus:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
@@ -127,17 +127,17 @@ Befolgen Sie die Anweisungen in [Migrationen, UseAuthentication und Layout](xref
 
 * Erstellen Sie eine Migration, und aktualisieren Sie die Datenbank.
 * Fügen Sie `UseAuthentication` zu `Startup.Configure` hinzu.
-* Fügen `<partial name="_LoginPartial" />` Sie der Layoutdatei hinzu.
+* Fügen Sie `<partial name="_LoginPartial" />` der Layoutdatei hinzu.
 * Testen der App:
   * Registrieren eines Benutzers
   * Wählen Sie den neuen Benutzernamen (neben dem Link **Logout) aus** . Möglicherweise müssen Sie das Fenster erweitern oder das Navigationsleisten Symbol auswählen, um den Benutzernamen und andere Links anzuzeigen.
   * Wählen Sie die Registerkarte **persönliche Daten** aus.
-  * Wählen Sie die Schaltfläche **herunterladen** aus, und untersuchen Sie die Datei " *Personal*
+  * Wählen Sie die Schaltfläche **herunterladen** aus, und untersuchen Sie die Datei *PersonalData.js*
   * Testen Sie die Schaltfläche **Löschen** , mit der der angemeldete Benutzer gelöscht wird.
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>Hinzufügen von benutzerdefinierten Benutzerdaten zur Identity DB
+## <a name="add-custom-user-data-to-the-identity-db"></a>Hinzufügen von benutzerdefinierten Benutzer Identity Daten zur Datenbank
 
-Aktualisieren Sie `IdentityUser` die abgeleitete Klasse mit benutzerdefinierten Eigenschaften. Wenn Sie das Projekt "WebApp1" benannt haben, heißt die Datei " *Areas/Identity/Data/WebApp1User. cs*". Aktualisieren Sie die Datei mit dem folgenden Code:
+Aktualisieren Sie die `IdentityUser` abgeleitete Klasse mit benutzerdefinierten Eigenschaften. Wenn Sie das Projekt "WebApp1" benannt haben, heißt die Datei " *Areas/ Identity /Data/WebApp1User.cs*". Aktualisieren Sie die Datei mit dem folgenden Code:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -153,18 +153,18 @@ Aktualisieren Sie `IdentityUser` die abgeleitete Klasse mit benutzerdefinierten 
 
 Eigenschaften mit dem Attribut " [Personal Data](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) ":
 
-* Wird gelöscht, wenn die Razor page " *Areas/Identity/Pages/Account/Manage/deletepersonal Data. cshtml* " aufruft `UserManager.Delete`.
-* In den heruntergeladenen Daten nach der Razor page " *Bereiche/Identität/Seiten/Konto/verwalten/downloadpersonal Data. cshtml* " enthalten.
+* Wird gelöscht, wenn die Seite " *Bereiche/ Identity /pages/Account/Manage/DeletePersonalData.cshtml* " Razor aufruft `UserManager.Delete` .
+* In den heruntergeladenen Daten von der Seite " *Bereiche/ Identity /pages/Account/Manage/DownloadPersonalData.cshtml* " enthalten Razor .
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a>Aktualisieren Sie die Seite "Account/Manage/Index. cshtml".
 
-Aktualisieren Sie `InputModel` das in *Areas/Identity/Pages/Account/Manage/Index. cshtml. cs* mit dem folgenden hervorgehobenen Code:
+Aktualisieren Sie die `InputModel` in *Areas/ Identity /pages/Account/Manage/Index.cshtml.cs* mit dem folgenden markierten Code:
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Manage/Index. cshtml* " mit dem folgenden markierten Markup:
+Aktualisieren Sie die *Bereiche/ Identity /pages/Account/Manage/Index.cshtml* mit dem folgenden markierten Markup:
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -174,7 +174,7 @@ Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Manage/Index. csht
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Manage/Index. cshtml* " mit dem folgenden markierten Markup:
+Aktualisieren Sie die *Bereiche/ Identity /pages/Account/Manage/Index.cshtml* mit dem folgenden markierten Markup:
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
@@ -182,13 +182,13 @@ Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Manage/Index. csht
 
 ### <a name="update-the-accountregistercshtml-page"></a>Aktualisieren Sie die Seite "Account/Register. cshtml".
 
-Aktualisieren Sie `InputModel` das in *Areas/Identity/Pages/Account/Register. cshtml. cs* mit dem folgenden hervorgehobenen Code:
+Aktualisieren Sie die `InputModel` in *Areas/ Identity /pages/Account/Register.cshtml.cs* mit dem folgenden markierten Code:
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Register. cshtml* " mit dem folgenden markierten Markup:
+Aktualisieren Sie die *Bereiche/ Identity /pages/Account/Register.cshtml* mit dem folgenden markierten Markup:
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -198,7 +198,7 @@ Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Register. cshtml* 
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-Aktualisieren Sie die *Bereiche "Areas/Identity/Pages/Account/Register. cshtml* " mit dem folgenden markierten Markup:
+Aktualisieren Sie die *Bereiche/ Identity /pages/Account/Register.cshtml* mit dem folgenden markierten Markup:
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -232,12 +232,15 @@ dotnet ef database update
 Testen der App:
 
 * Registrieren Sie einen neuen Benutzer.
-* Zeigen Sie die benutzerdefinierten Benutzerdaten `/Identity/Account/Manage` auf der Seite an.
-* Herunterladen und Anzeigen der persönlichen Daten der Benutzer `/Identity/Account/Manage/PersonalData` auf der Seite.
+* Zeigen Sie die benutzerdefinierten Benutzerdaten auf der `/Identity/Account/Manage` Seite an.
+* Herunterladen und Anzeigen der persönlichen Daten der Benutzer auf der `/Identity/Account/Manage/PersonalData` Seite.
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Hinzufügen von Identity Ansprüchen zu mithilfe von iuserclaimsprincipalfactory<ApplicationUser>
+## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Hinzufügen von Ansprüchen zu Identity mithilfe von iuserclaimsprincipalfactory<ApplicationUser>
 
-Zusätzliche Ansprüche können ASP.net Core Identity mithilfe der `IUserClaimsPrincipalFactory<T>` -Schnittstelle hinzugefügt werden. Diese Klasse kann der app in der `Startup.ConfigureServices` -Methode hinzugefügt werden. Fügen Sie die benutzerdefinierte Implementierung der-Klasse wie folgt hinzu:
+> [!NOTE]
+> Dieser Abschnitt ist keine Erweiterung des vorherigen Tutorials. Informationen zum Anwenden der folgenden Schritte auf die APP, die mit dem Tutorial erstellt wurde, finden Sie in [diesem GitHub-Problem](https://github.com/dotnet/AspNetCore.Docs/issues/18797).
+
+Zusätzliche Ansprüche können ASP.net Core Identity mithilfe der-Schnittstelle hinzugefügt werden `IUserClaimsPrincipalFactory<T>` . Diese Klasse kann der app in der-Methode hinzugefügt werden `Startup.ConfigureServices` . Fügen Sie die benutzerdefinierte Implementierung der-Klasse wie folgt hinzu:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -250,7 +253,7 @@ public void ConfigureServices(IServiceCollection services)
         AdditionalUserClaimsPrincipalFactory>();
 ```
 
-Der Democode verwendet die `ApplicationUser` -Klasse. Diese Klasse fügt eine `IsAdmin` Eigenschaft hinzu, die zum Hinzufügen des zusätzlichen Anspruchs verwendet wird.
+Der Democode verwendet die- `ApplicationUser` Klasse. Diese Klasse fügt eine `IsAdmin` Eigenschaft hinzu, die zum Hinzufügen des zusätzlichen Anspruchs verwendet wird.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -259,7 +262,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-Die `AdditionalUserClaimsPrincipalFactory` implementiert die `UserClaimsPrincipalFactory`-Schnittstelle. Dem `ClaimsPrincipal`wird ein neuer Rollen Anspruch hinzugefügt.
+Die `AdditionalUserClaimsPrincipalFactory` implementiert die `UserClaimsPrincipalFactory`-Schnittstelle. Dem wird ein neuer Rollen Anspruch hinzugefügt `ClaimsPrincipal` .
 
 ```csharp
 public class AdditionalUserClaimsPrincipalFactory 
