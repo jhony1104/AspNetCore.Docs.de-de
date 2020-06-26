@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/02/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 5a14042db6250d5f7a47acaf4083b44272c606ab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a94fe1612c023468238f09a91ddb0346b65d52ba
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777487"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408018"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Verhindern von Cross-Site Scripting (XSS) in ASP.net Core
 
@@ -26,23 +28,23 @@ Cross-Site Scripting (XSS) ist ein Sicherheitsrisiko, das es Angreifern ermögli
 
 ## <a name="protecting-your-application-against-xss"></a>Schutz Ihrer Anwendung vor XSS
 
-XSS funktioniert auf der Basisebene, indem Sie die Anwendung in das Einfügen `<script>` eines Tags in die gerenderte Seite einfügen oder `On*` ein Ereignis in ein Element einfügen. Entwickler sollten die folgenden Präventionsmaßnahmen ergreifen, um die Einführung von XSS in Ihre Anwendung zu vermeiden.
+XSS funktioniert auf der Basisebene, indem Sie die Anwendung in das Einfügen eines `<script>` Tags in die gerenderte Seite einfügen oder ein `On*` Ereignis in ein Element einfügen. Entwickler sollten die folgenden Präventionsmaßnahmen ergreifen, um die Einführung von XSS in Ihre Anwendung zu vermeiden.
 
 1. Fügen Sie niemals nicht vertrauenswürdige Daten in Ihre HTML-Eingabe ein, es sei denn, Sie führen die restlichen Schritte aus. Bei nicht vertrauenswürdigen Daten handelt es sich um Daten, die von einem Angreifer gesteuert werden können, HTML-Formular Eingaben, Abfrage Zeichenfolgen, HTTP-Header, und auch Daten, die aus einer Datenbank als Angreifer stammen, können möglicherweise die Datenbank verletzen, auch wenn Sie Ihre Anwendung nicht verletzen können.
 
-2. Vor dem Einfügen nicht vertrauenswürdiger Daten in ein HTML-Element stellen Sie sicher, dass die HTML-Codierung vorliegt Bei der HTML &lt; -Codierung werden Zeichen wie z. b. und in &amp;eine sichere Form wie lt geändert.
+2. Vor dem Einfügen nicht vertrauenswürdiger Daten in ein HTML-Element stellen Sie sicher, dass die HTML-Codierung vorliegt Bei der HTML-Codierung werden Zeichen wie z &lt; . b. und in eine sichere Form wie &amp; lt geändert.
 
 3. Bevor nicht vertrauenswürdige Daten in ein HTML-Attribut gesetzt werden, stellen Sie sicher, dass die HTML-Codierung Die HTML-Attribut Codierung ist eine supermenge der HTML-Codierung und codiert zusätzliche Zeichen wie z. b. "and".
 
-4. Vor dem Einfügen nicht vertrauenswürdiger Daten in JavaScript platzieren Sie die Daten in einem HTML-Element, dessen Inhalt Sie zur Laufzeit abrufen. Wenn dies nicht möglich ist, stellen Sie sicher, dass die Daten JavaScript-codiert sind. Die JavaScript-Codierung erfordert gefährliche Zeichen für JavaScript und ersetzt Sie durch ihre hexadezimal Zeichen, die beispielsweise &lt; als `\u003C`codiert werden.
+4. Vor dem Einfügen nicht vertrauenswürdiger Daten in JavaScript platzieren Sie die Daten in einem HTML-Element, dessen Inhalt Sie zur Laufzeit abrufen. Wenn dies nicht möglich ist, stellen Sie sicher, dass die Daten JavaScript-codiert sind. Die JavaScript-Codierung erfordert gefährliche Zeichen für JavaScript und ersetzt Sie durch ihre hexadezimal Zeichen, die beispielsweise &lt; als codiert werden `\u003C` .
 
 5. Vor dem Einfügen von nicht vertrauenswürdigen Daten in eine URL-Abfrage Zeichenfolge stellen Sie sicher, dass die URL
 
 ## <a name="html-encoding-using-razor"></a>HTML-Codierung mithilfe vonRazor
 
-Die Razor Engine, die in MVC verwendet wird, codiert automatisch alle Ausgaben aus Variablen, es sei denn, Sie arbeiten wirklich hart, um dies zu verhindern. Dabei werden bei der Verwendung der *@* -Direktive HTML-Attribut Codierungsregeln verwendet. Da die HTML-Attribut Codierung eine supermenge der HTML-Codierung ist, bedeutet dies, dass Sie sich nicht darum kümmern müssen, ob Sie HTML-Codierung oder HTML-Attribut Codierung verwenden sollten. Sie müssen sicherstellen, dass Sie @ nur in einem HTML-Kontext verwenden, nicht, wenn Sie versuchen, nicht vertrauenswürdige Eingaben direkt in JavaScript einzufügen. Taghilfsprogramme codieren auch Eingaben, die Sie in tagparametern verwenden.
+Die Razor Engine, die in MVC verwendet wird, codiert automatisch alle Ausgaben aus Variablen, es sei denn, Sie arbeiten wirklich hart, um dies zu verhindern. Dabei werden bei der Verwendung der-Direktive HTML-Attribut Codierungsregeln verwendet *@* . Da die HTML-Attribut Codierung eine supermenge der HTML-Codierung ist, bedeutet dies, dass Sie sich nicht darum kümmern müssen, ob Sie HTML-Codierung oder HTML-Attribut Codierung verwenden sollten. Sie müssen sicherstellen, dass Sie @ nur in einem HTML-Kontext verwenden, nicht, wenn Sie versuchen, nicht vertrauenswürdige Eingaben direkt in JavaScript einzufügen. Taghilfsprogramme codieren auch Eingaben, die Sie in tagparametern verwenden.
 
-Sehen Sie sich Razor die folgende Ansicht an:
+Sehen Sie sich die folgende Razor Ansicht an:
 
 ```cshtml
 @{
@@ -52,18 +54,18 @@ Sehen Sie sich Razor die folgende Ansicht an:
    @untrustedInput
    ```
 
-In dieser Ansicht wird der Inhalt der Variablen *untreudinput ausgegeben* . Diese Variable enthält einige Zeichen, die in XSS-Angriffen verwendet werden &lt;, nämlich " &gt;und. Beim Untersuchen der Quelle wird die gerenderte Ausgabe angezeigt, die als
+In dieser Ansicht wird der Inhalt der Variablen *untreudinput ausgegeben* . Diese Variable enthält einige Zeichen, die in XSS-Angriffen verwendet werden, nämlich &lt; "und &gt; . Beim Untersuchen der Quelle wird die gerenderte Ausgabe angezeigt, die als
 
 ```html
 &lt;&quot;123&quot;&gt;
    ```
 
 >[!WARNING]
-> ASP.net Core MVC stellt eine `HtmlString` -Klasse bereit, die bei der Ausgabe nicht automatisch codiert wird. Dies sollte nie in Kombination mit nicht vertrauenswürdigen Eingaben verwendet werden, da dadurch ein XSS-Sicherheitsrisiko verfügbar gemacht wird.
+> ASP.net Core MVC stellt eine- `HtmlString` Klasse bereit, die bei der Ausgabe nicht automatisch codiert wird. Dies sollte nie in Kombination mit nicht vertrauenswürdigen Eingaben verwendet werden, da dadurch ein XSS-Sicherheitsrisiko verfügbar gemacht wird.
 
 ## <a name="javascript-encoding-using-razor"></a>JavaScript-Codierung mithilfe vonRazor
 
-Es kann vorkommen, dass Sie einen Wert in JavaScript einfügen möchten, um Ihre Ansicht zu verarbeiten. Es gibt hierbei zwei Möglichkeiten. Die sicherste Möglichkeit zum Einfügen von Werten besteht darin, den Wert in einem Daten Attribut eines Tags zu platzieren und ihn in JavaScript abzurufen. Beispiel:
+Es kann vorkommen, dass Sie einen Wert in JavaScript einfügen möchten, um Ihre Ansicht zu verarbeiten. Es gibt hierbei zwei Möglichkeiten. Die sicherste Möglichkeit zum Einfügen von Werten besteht darin, den Wert in einem Daten Attribut eines Tags zu platzieren und ihn in JavaScript abzurufen. Zum Beispiel:
 
 ```cshtml
 @{
@@ -144,11 +146,11 @@ Dies wird im Browser wie folgt dargestellt:
 ```
 
 >[!WARNING]
-> Verketten Sie nicht vertrauenswürdige Eingaben in JavaScript, um DOM-Elemente zu erstellen. Verwenden `createElement()` Sie `node.TextContent=`, und weisen Sie Eigenschaftswerte entsprechend zu, z `element.SetAttribute()` / `element[attribute]=` . b., oder verwenden Sie andernfalls den DOM-basierten XSS.
+> Verketten Sie nicht vertrauenswürdige Eingaben in JavaScript, um DOM-Elemente zu erstellen. Verwenden Sie `createElement()` , und weisen Sie Eigenschaftswerte entsprechend `node.TextContent=` zu, z. b., oder verwenden `element.SetAttribute()` / `element[attribute]=` Sie andernfalls den DOM-basierten XSS.
 
 ## <a name="accessing-encoders-in-code"></a>Aufrufen von Encodern im Code
 
-Die HTML-, JavaScript-und URL-Encoder sind für den Code auf zwei Arten verfügbar. Sie können Sie über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) einfügen, oder Sie können die im- `System.Text.Encodings.Web` Namespace enthaltenen Standard Encoder verwenden. Wenn Sie die Standard Encoder verwenden, werden alle, die Sie auf Zeichen Bereiche angewendet haben, als sicher behandelt werden, nicht wirksam. die Standard Codierungen verwenden die sichersten Codierungsregeln.
+Die HTML-, JavaScript-und URL-Encoder sind für den Code auf zwei Arten verfügbar. Sie können Sie über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) einfügen, oder Sie können die im-Namespace enthaltenen Standard Encoder verwenden `System.Text.Encodings.Web` . Wenn Sie die Standard Encoder verwenden, werden alle, die Sie auf Zeichen Bereiche angewendet haben, als sicher behandelt werden, nicht wirksam. die Standard Codierungen verwenden die sichersten Codierungsregeln.
 
 Um die konfigurierbaren Encoder über di verwenden zu können, sollten die Konstruktoren nach Bedarf einen *htmlencoder*-, *javascriptencoder* -und *urlencoder* -Parameter verwenden. Beispiel:
 
@@ -179,7 +181,7 @@ var example = "\"Quoted Value with spaces and &\"";
    var encodedValue = _urlEncoder.Encode(example);
    ```
 
-Nach der Codierung enthält `%22Quoted%20Value%20with%20spaces%20and%20%26%22`die encodvalue-Variable. Leerzeichen, Anführungszeichen, Interpunktions Zeichen und andere unsichere Zeichen werden in den hexadezimalen Wert Prozent codiert, z. b. wird ein Leerzeichen zu %20.
+Nach der Codierung enthält die encodvalue-Variable `%22Quoted%20Value%20with%20spaces%20and%20%26%22` . Leerzeichen, Anführungszeichen, Interpunktions Zeichen und andere unsichere Zeichen werden in den hexadezimalen Wert Prozent codiert, z. b. wird ein Leerzeichen zu %20.
 
 >[!WARNING]
 > Verwenden Sie nicht vertrauenswürdige Eingaben nicht als Teil eines URL-Pfads. Übergeben Sie immer nicht vertrauenswürdige Eingaben als Abfrage Zeichenfolgen-Wert.
@@ -192,9 +194,9 @@ Standardmäßig verwenden Encoder eine sichere Liste, die auf den grundlegenden 
 
 Die dahinter liegende Argumentation besteht darin, vor unbekannten oder zukünftigen Browserfehlern zu schützen (vorherige Browser Fehler haben die Analysierung basierend auf der Verarbeitung von nicht englischen Zeichen abgeglichen). Wenn Ihre Website nicht lateinische Zeichen wie Chinesisch, Kyrillisch oder andere verwendet, ist dies wahrscheinlich nicht das gewünschte Verhalten.
 
-Sie können die Liste der Encoder-sichere Listen so anpassen, dass Sie für Ihre Anwendung geeignete Unicode `ConfigureServices()`-Bereiche in enthalten.
+Sie können die Liste der Encoder-sichere Listen so anpassen, dass Sie für Ihre Anwendung geeignete Unicode-Bereiche in enthalten `ConfigureServices()` .
 
-Wenn Sie beispielsweise die Standardkonfiguration verwenden, können Sie Razor eine htmlhelper-Methode wie folgt verwenden.
+Wenn Sie beispielsweise die Standardkonfiguration verwenden, können Sie eine Razor htmlhelper-Methode wie folgt verwenden.
 
 ```html
 <p>This link text is in Chinese: @Html.ActionLink("汉语/漢語", "Index")</p>
@@ -206,7 +208,7 @@ Wenn Sie die Quelle der Webseite anzeigen, sehen Sie, dass Sie wie folgt gerende
 <p>This link text is in Chinese: <a href="/">&#x6C49;&#x8BED;/&#x6F22;&#x8A9E;</a></p>
    ```
 
-Um die vom Encoder als sicher behandelten Zeichen zu erweitern, fügen Sie die folgende Zeile in `ConfigureServices()` `startup.cs`die-Methode ein.
+Um die vom Encoder als sicher behandelten Zeichen zu erweitern, fügen Sie die folgende Zeile in die- `ConfigureServices()` Methode ein `startup.cs` .
 
 ```csharp
 services.AddSingleton<HtmlEncoder>(
@@ -223,7 +225,7 @@ In diesem Beispiel wird die sichere Liste so erweitert, dass Sie den Unicode-Ber
 Sichere Listen Bereiche werden als Unicode-Code Diagramme, nicht als Sprachen angegeben. Der [Unicode-Standard](https://unicode.org/) enthält eine Liste von [Code Diagrammen](https://www.unicode.org/charts/index.html) , die Sie verwenden können, um das Diagramm mit ihren Zeichen zu suchen. Jeder Encoder, HTML, JavaScript und jede URL muss separat konfiguriert werden.
 
 > [!NOTE]
-> Die Anpassung der sicheren Liste wirkt sich nur auf Encoder aus, die über di übertragen werden. Wenn Sie über `System.Text.Encodings.Web.*Encoder.Default` einen direkten Zugriff auf einen Encoder verfügen, wird die standardmäßige lateinische Standard SafeList verwendet.
+> Die Anpassung der sicheren Liste wirkt sich nur auf Encoder aus, die über di übertragen werden. Wenn Sie über einen direkten Zugriff auf einen Encoder verfügen `System.Text.Encodings.Web.*Encoder.Default` , wird die standardmäßige lateinische Standard SafeList verwendet.
 
 ## <a name="where-should-encoding-take-place"></a>Wo sollte die Codierung erfolgen?
 

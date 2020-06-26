@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 67861b2cdb946f7cd630770507181ee853b7fbfd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775699"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408421"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Dependency Injection in Controller in ASP.NET Core
 
@@ -60,7 +62,7 @@ Mit dem <xref:Microsoft.AspNetCore.Mvc.FromServicesAttribute> ist es möglich, e
 
 Das Zugreifen auf App- oder Konfigurationseinstellungen von einem Controller aus ist ein häufiges Szenario. Das in <xref:fundamentals/configuration/options> beschriebene *Optionsmuster* ist der bevorzugte Ansatz, um Einstellungen zu verwalten. Fügen Sie generell <xref:Microsoft.Extensions.Configuration.IConfiguration> nicht direkt in einen Controller ein.
 
-Erstellen Sie eine Klasse, die die Optionen darstellt. Beispiel:
+Erstellen Sie eine Klasse, die die Optionen darstellt. Zum Beispiel:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

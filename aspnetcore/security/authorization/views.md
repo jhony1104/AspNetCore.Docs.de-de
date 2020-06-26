@@ -1,36 +1,38 @@
 ---
 title: Ansichts basierte Autorisierung in ASP.net Core MVC
 author: rick-anderson
-description: In diesem Dokument wird veranschaulicht, wie der Autorisierungs Dienst in einer ASP.net Core Razor Ansicht eingefügt und verwendet wird.
+description: In diesem Dokument wird veranschaulicht, wie der Autorisierungs Dienst in einer ASP.net Core Ansicht eingefügt und verwendet wird Razor .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: 1a3b4a92d270844fa99fc9fb0283226e94edb22d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ce2365dbdcffc8c44d0d9d7cc6c9d29d0fe1895c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775621"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408928"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>Ansichts basierte Autorisierung in ASP.net Core MVC
 
-Ein Entwickler möchte eine Benutzeroberfläche häufig auf der Grundlage der aktuellen Benutzeridentität anzeigen, ausblenden oder anderweitig ändern. Sie können über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)in MVC-Ansichten auf den Autorisierungs Dienst zugreifen. Um den Autorisierungs Dienst in eine Razor Ansicht einzufügen, verwenden `@inject` Sie die-Direktive:
+Ein Entwickler möchte eine Benutzeroberfläche häufig auf der Grundlage der aktuellen Benutzeridentität anzeigen, ausblenden oder anderweitig ändern. Sie können über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection)in MVC-Ansichten auf den Autorisierungs Dienst zugreifen. Um den Autorisierungs Dienst in eine Razor Ansicht einzufügen, verwenden Sie die- `@inject` Direktive:
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 ```
 
-Wenn Sie den Autorisierungs Dienst in jeder Ansicht verwenden möchten, `@inject` platzieren Sie die Direktive in der Datei " *_ViewImports. cshtml* " des Verzeichnisses " *views* ". Weitere Informationen finden Sie unter [Dependency Injection in Ansichten](xref:mvc/views/dependency-injection).
+Wenn Sie den Autorisierungs Dienst in jeder Ansicht verwenden möchten, platzieren Sie die `@inject` Direktive in der Datei " *_ViewImports. cshtml* " des Verzeichnisses " *views* ". Weitere Informationen finden Sie unter [Dependency Injection in Ansichten](xref:mvc/views/dependency-injection).
 
-Verwenden Sie den injizierten Autorisierungs `AuthorizeAsync` Dienst, um genau die gleiche Weise aufzurufen, die Sie bei der [ressourcenbasierten Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)überprüfen würden:
+Verwenden Sie den injizierten Autorisierungs Dienst, um `AuthorizeAsync` genau die gleiche Weise aufzurufen, die Sie bei der [ressourcenbasierten Autorisierung](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)überprüfen würden:
 
 ```cshtml
 @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773964"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408252"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Anchor-Tag-Hilfsprogramm in ASP.NET Core
 
@@ -145,7 +147,7 @@ Wenn `asp-controller` oder `asp-action` zusätzlich zu `asp-route` angegeben sin
 
 Das Attribut [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) unterstützt das Erstellen eines Wörterbuchs aus Schlüssel-Wert-Paaren. Der Schlüssel ist der Parametername, der Wert ist der Parameterwert.
 
-Im folgenden Beispiel wird ein Wörterbuch initialisiert und an eine Razor Ansicht übermittelt. Alternativ können die Daten auch mit Ihrem Modell übergeben werden.
+Im folgenden Beispiel wird ein Wörterbuch initialisiert und an eine Ansicht übermittelt Razor . Alternativ können die Daten auch mit Ihrem Modell übergeben werden.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -195,7 +197,7 @@ Betrachten Sie die folgende Verzeichnishierarchie:
         * *Index.cshtml.cs*
   * **Seiten**
 
-Das Markup für den Verweis auf die *Sitzungs* Bereichs *Index* Razor -Seite lautet:
+Das Markup für den Verweis auf die *Sitzungs* Bereichs *Index* - Razor Seite lautet:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -206,7 +208,7 @@ Der generierte HTML-Code:
 ```
 
 > [!TIP]
-> Führen Sie einen der folgenden Razor Schritte aus, um Bereiche in einer pages- `Startup.ConfigureServices`APP zu unterstützen:
+> RazorFühren Sie einen der folgenden Schritte aus, um Bereiche in einer Pages-APP zu unterstützen `Startup.ConfigureServices` :
 >
 > * Legen Sie die [Kompatibilitätsversion](xref:mvc/compatibility-version) auf 2.1 oder höher fest.
 > * Legen Sie die [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*)-Eigenschaft auf `true` fest:
@@ -221,14 +223,14 @@ Betrachten Sie die folgende Verzeichnishierarchie:
   * **wwwroot**
   * **Bereiche**
     * **Blogs**
-      * **Controllers**
+      * **Controller**
         * *HomeController.cs*
       * **Ansichten**
         * **Start**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
         * *\_Viewstart. cshtml*
-  * **Controllers**
+  * **Controller**
 
 Das Festlegen von `asp-area` auf „Blogs“ stellt das Verzeichnis *Areas/Blogs* den Routen der zugeordneten Controller und Ansichten für dieses Anchor-Tag voran. Das Markup zum Verweisen auf die *AboutBlog*-Ansicht lautet:
 
@@ -241,13 +243,13 @@ Der generierte HTML-Code:
 ```
 
 > [!TIP]
-> Die Routenvorlage muss einen Verweis auf den Bereich enthalten, damit Bereiche in einer MVC-App unterstützt werden. Diese Vorlage wird durch den zweiten Parameter des `routes.MapRoute` Methoden Aufrufes in " *Startup. configure*" dargestellt:
+> Die Routenvorlage muss einen Verweis auf den Bereich enthalten, damit Bereiche in einer MVC-App unterstützt werden. Diese Vorlage wird durch den zweiten Parameter des `routes.MapRoute` Methoden Aufrufes in *Startup.Configure*dargestellt:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>asp-protocol
 
-Das Attribut [asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) gibt ein Protokoll in Ihrer URL an (z.B. `https`). Beispiel:
+Das Attribut [asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) gibt ein Protokoll in Ihrer URL an (z.B. `https`). Zum Beispiel:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -261,7 +263,7 @@ Der Hostname im Beispiel ist „localhost“. Das Anchor-Taghilfsprogramm verwen
 
 ### <a name="asp-host"></a>asp-host
 
-Mit dem Attribut [asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) wird ein Hostname in Ihrer URL angegeben. Beispiel:
+Mit dem Attribut [asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) wird ein Hostname in Ihrer URL angegeben. Zum Beispiel:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
@@ -275,7 +277,7 @@ Der generierte HTML-Code:
 
 Das [asp-page-](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) Attribut wird mit Razor Seiten verwendet. Mit ihm wird der `href`-Attributwerts des Anchor-Tags auf eine bestimmte Seite festgelegt. Wenn Sie dem Seitennamen einen Schrägstrich „/“ voranstellen, wird die URL erstellt.
 
-Das folgende Beispiel zeigt auf die Razor Seite Teilnehmer:
+Das folgende Beispiel zeigt auf die Seite Teilnehmer Razor :
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 

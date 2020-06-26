@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 533d86fb17e3c89fdca59685b090645a11ba5473
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b282af3b9c657bda4432f0d60f100f65fa7cbae9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775140"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408616"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>Hosting ASP.net Core Images mit docker Compose über HTTPS
 
@@ -39,14 +41,14 @@ Für einige der Anweisungen in diesem Dokument ist das [.net Core 2,2 SDK](https
 
 Ein Zertifikat von einer [Zertifizierungs](https://wikipedia.org/wiki/Certificate_authority) Stelle ist für das [Produktions Hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) für eine Domäne erforderlich. [Let's Encrypt](https://letsencrypt.org/)ist eine Zertifizierungsstelle, die kostenlose Zertifikate anbietet.
 
-In `localhost`diesem Dokument werden [selbst signierte Entwicklungs Zertifikate](https://wikipedia.org/wiki/Self-signed_certificate) für das Hosting von vordefinierten Images verwendet. Die Anweisungen ähneln der Verwendung von Produktions Zertifikaten.
+In diesem Dokument werden [selbst signierte Entwicklungs Zertifikate](https://wikipedia.org/wiki/Self-signed_certificate) für das Hosting von vordefinierten Images verwendet `localhost` . Die Anweisungen ähneln der Verwendung von Produktions Zertifikaten.
 
 Für Produktions Zertifikate:
 
 * Das `dotnet dev-certs` Tool ist nicht erforderlich.
 * Zertifikate müssen nicht an dem Speicherort gespeichert werden, der in den Anweisungen verwendet wird. Speichern Sie die Zertifikate an einem beliebigen Speicherort außerhalb des Website Verzeichnisses.
 
-Die Anweisungen im folgenden Abschnitt enthalten ein Volume zum Einbinden von Zertifikaten in Containern `volumes` mithilfe der-Eigenschaft in *docker-Compose. yml.* Sie können Zertifikate in Container Images mit einem `COPY` Befehl in einer *dockerfile-Datei*hinzufügen, dies wird jedoch nicht empfohlen. Das Kopieren von Zertifikaten in ein Abbild wird aus den folgenden Gründen nicht empfohlen:
+Die Anweisungen im folgenden Abschnitt enthalten ein Volume zum Einbinden von Zertifikaten in Containern mithilfe der- `volumes` Eigenschaft in *docker-Compose. yml.* Sie können Zertifikate in Container Images mit einem `COPY` Befehl in einer *dockerfile-Datei*hinzufügen, dies wird jedoch nicht empfohlen. Das Kopieren von Zertifikaten in ein Abbild wird aus den folgenden Gründen nicht empfohlen:
 
 * Es ist schwierig, dasselbe Image für Tests mit Entwickler Zertifikaten zu verwenden.
 * Es ist schwierig, das gleiche Image für das Hosting mit Produktions Zertifikaten zu verwenden.
@@ -65,7 +67,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie in den vorangehenden Befehlen `{ password here }` durch ein Kennwort.
 
 Erstellen Sie eine _docker-Compose. Debug. yml_ -Datei mit folgendem Inhalt:
 
@@ -105,7 +107,7 @@ dotnet dev-certs https --trust
 
 `dotnet dev-certs https --trust`wird nur unter macOS und Windows unterstützt. Sie müssen Zertifikate unter Linux in der von Ihrer Distribution unterstützten Weise als vertrauenswürdig einstufen. Es ist wahrscheinlich, dass Sie das Zertifikat in Ihrem Browser als vertrauenswürdig einstufen müssen.
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie in den vorangehenden Befehlen `{ password here }` durch ein Kennwort.
 
 Erstellen Sie eine _docker-Compose. Debug. yml_ -Datei mit folgendem Inhalt:
 
@@ -143,7 +145,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Ersetzen `{ password here }` Sie in den vorangehenden Befehlen durch ein Kennwort.
+Ersetzen Sie in den vorangehenden Befehlen `{ password here }` durch ein Kennwort.
 
 Erstellen Sie eine _docker-Compose. Debug. yml_ -Datei mit folgendem Inhalt:
 

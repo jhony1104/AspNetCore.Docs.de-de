@@ -8,17 +8,19 @@ ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102948"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409097"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Protokollierung und Diagnose in ASP.net CoreSignalR
 
@@ -100,7 +102,7 @@ In der folgenden Tabelle werden die für den JavaScript-Client verfügbaren Prot
 
 Nachdem Sie die Ausführlichkeit konfiguriert haben, werden die Protokolle in die Browser Konsole (oder die Standard Ausgabe in einer nodejs-APP) geschrieben.
 
-Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden möchten, können Sie ein JavaScript-Objekt bereitstellen, das die- `ILogger` Schnittstelle implementiert. Die einzige Methode, die implementiert werden muss `log` , ist, die die Ebene des Ereignisses und die dem Ereignis zugeordnete Meldung annimmt. Beispiel:
+Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden möchten, können Sie ein JavaScript-Objekt bereitstellen, das die- `ILogger` Schnittstelle implementiert. Die einzige Methode, die implementiert werden muss `log` , ist, die die Ebene des Ereignisses und die dem Ereignis zugeordnete Meldung annimmt. Zum Beispiel:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -111,7 +113,7 @@ Wenn Sie Protokolle an ein benutzerdefiniertes Protokollierungs System senden m�
 
 Um Protokolle vom .NET-Client zu erhalten, können Sie die- `ConfigureLogging` Methode für verwenden `HubConnectionBuilder` . Dies funktioniert genauso wie die `ConfigureLogging` -Methode in `WebHostBuilder` und `HostBuilder` . Sie können die gleichen Protokollierungs Anbieter konfigurieren, die Sie in ASP.net Core verwenden. Allerdings müssen Sie die nuget-Pakete für die einzelnen Protokollierungs Anbieter manuell installieren und aktivieren.
 
-Informationen zum Hinzufügen der .NET-Client Protokollierung zu einer Blazor Webassembly-App finden Sie unter <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>
+Weitere Informationen zum Hinzufügen der .NET-Client Protokollierung zu einer- Blazor WebAssembly App <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>
 
 ### <a name="console-logging"></a>Konsolenprotokollierung
 
@@ -220,7 +222,7 @@ Metriken sind eine Darstellung von Daten Messungen in Zeitintervallen. Beispiels
 
 SignalRservermetriken werden auf der <xref:Microsoft.AspNetCore.Http.Connections> Ereignis Quelle gemeldet.
 
-| Name                    | BESCHREIBUNG                 |
+| Name                    | Beschreibung                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | Gestartete Verbindungen gesamt   |
 | `connections-stopped`   | Beendete Verbindungen insgesamt   |

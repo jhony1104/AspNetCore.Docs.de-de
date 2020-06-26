@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: afdb52039c0eff53a421038518c687c78e1d509b
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: c7ba0fff8bca53e2d6d12add693ee391ffa789ca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756066"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408564"
 ---
 # <a name="use-hub-filters-in-aspnet-core-signalr"></a>Verwenden von Hub-Filtern in ASP.net CoreSignalR
 
@@ -191,7 +193,7 @@ Nehmen Sie für dieses Beispiel an, dass eine `LanguageFilterAttribute` Klasse d
 
 `HubInvocationContext`Enthält Informationen für den aktuellen hubmethoden Aufruf.
 
-| Eigenschaft | BESCHREIBUNG | type |
+| Eigenschaft | Beschreibung | Typ |
 | ------ | ------ | ----------- |
 | `Context ` | `HubCallerContext`Enthält Informationen über die Verbindung. | `HubCallerContext` |
 | `Hub` | Die Instanz des Hubs, der für diesen hubmethoden Aufruf verwendet wird. | `Hub` |
@@ -204,7 +206,7 @@ Nehmen Sie für dieses Beispiel an, dass eine `LanguageFilterAttribute` Klasse d
 
 Der `HubLifetimeContext` enthält Informationen für die `OnConnectedAsync` `OnDisconnectedAsync` hubmethoden und.
 
-| Eigenschaft | BESCHREIBUNG | type |
+| Eigenschaft | Beschreibung | Typ |
 | ------ | ------ | ----------- |
 | `Context ` | `HubCallerContext`Enthält Informationen über die Verbindung. | `HubCallerContext` |
 | `Hub` | Die Instanz des Hubs, der für diesen hubmethoden Aufruf verwendet wird. | `Hub` |

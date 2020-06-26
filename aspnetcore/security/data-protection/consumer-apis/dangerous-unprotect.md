@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/dangerous-unprotect
-ms.openlocfilehash: 062703fc72ab4e515a99558b3316070ce1f83f79
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a0b5bb29c509e8cc999b998776da3ab4ec27ec29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776798"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408395"
 ---
 # <a name="unprotect-payloads-whose-keys-have-been-revoked-in-aspnet-core"></a>Aufheben des Schutzes von Nutzlasten, deren Schlüssel in ASP.net Core widerrufen wurden
 
@@ -25,14 +27,14 @@ ms.locfileid: "82776798"
 
 Die ASP.net Core-Datenschutz-APIs sind nicht in erster Linie für die unbegrenzte Persistenz von vertraulichen Nutzlasten vorgesehen. Andere Technologien wie [Windows CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) und [Azure Rights Management](/rights-management/) sind besser für das Szenario der unbegrenzten Speicherung geeignet und verfügen über die entsprechenden leistungsstarken Schlüssel Verwaltungsfunktionen. Dies bedeutet, dass ein Entwickler nicht daran hindert, die ASP.net Core Datenschutz-APIs für den langfristigen Schutz vertraulicher Daten zu verwenden. Schlüssel werden nie aus dem Schlüsselbund entfernt. so `IDataProtector.Unprotect` können vorhandene Nutzlasten immer wieder hergestellt werden, solange die Schlüssel verfügbar und gültig sind.
 
-Es tritt jedoch ein Problem auf, wenn der Entwickler versucht, den Schutz von Daten aufzuheben, die mit einem gesperrten Schlüssel `IDataProtector.Unprotect` geschützt wurden, da in diesem Fall eine Ausnahme auslöst. Dies kann bei kurzlebigen oder vorübergehenden Nutzlasten (wie z. b. Authentifizierungs Token) in Ordnung sein, da diese Arten von Nutzlasten problemlos vom System neu erstellt werden können und sich der Standort Besucher im schlimmsten Fall erneut anmelden muss. Für persistente Nutzlasten könnte das `Unprotect` Auslösen von "throw" zu nicht akzeptablen Datenverlusten führen.
+Es tritt jedoch ein Problem auf, wenn der Entwickler versucht, den Schutz von Daten aufzuheben, die mit einem gesperrten Schlüssel geschützt wurden, da `IDataProtector.Unprotect` in diesem Fall eine Ausnahme auslöst. Dies kann bei kurzlebigen oder vorübergehenden Nutzlasten (wie z. b. Authentifizierungs Token) in Ordnung sein, da diese Arten von Nutzlasten problemlos vom System neu erstellt werden können und sich der Standort Besucher im schlimmsten Fall erneut anmelden muss. Für persistente Nutzlasten könnte das Auslösen von " `Unprotect` throw" zu nicht akzeptablen Datenverlusten führen.
 
 ## <a name="ipersisteddataprotector"></a>Ipersisteddataprotector
 
-Um das Szenario zu unterstützen, in dem Nutzlasten auch bei widerrufenen Schlüsseln nicht geschützt werden können, enthält das Daten `IPersistedDataProtector` Schutzsystem einen-Typ. Um `IPersistedDataProtector`eine Instanz von zu erhalten, können Sie einfach eine `IDataProtector` Instanz von in der normalen Weise erhalten und `IDataProtector` versuchen `IPersistedDataProtector`, die in umzuwandeln.
+Um das Szenario zu unterstützen, in dem Nutzlasten auch bei widerrufenen Schlüsseln nicht geschützt werden können, enthält das Datenschutzsystem einen- `IPersistedDataProtector` Typ. Um eine Instanz von zu erhalten `IPersistedDataProtector` , können Sie einfach eine Instanz von `IDataProtector` in der normalen Weise erhalten und versuchen, die in umzuwandeln `IDataProtector` `IPersistedDataProtector` .
 
 > [!NOTE]
-> Nicht alle `IDataProtector` Instanzen können in `IPersistedDataProtector`umgewandelt werden. Entwickler sollten den c#-Operator oder ähnlich verwenden, um Lauf Zeit Ausnahmen zu vermeiden, die durch ungültige Umwandlungen verursacht werden, und Sie sollten darauf vorbereitet sein, den Fehlerfall entsprechend zu behandeln.
+> Nicht alle `IDataProtector` Instanzen können in umgewandelt werden `IPersistedDataProtector` . Entwickler sollten den c#-Operator oder ähnlich verwenden, um Lauf Zeit Ausnahmen zu vermeiden, die durch ungültige Umwandlungen verursacht werden, und Sie sollten darauf vorbereitet sein, den Fehlerfall entsprechend zu behandeln.
 
 `IPersistedDataProtector`macht die folgende API-Oberfläche verfügbar:
 
@@ -48,6 +50,6 @@ Diese API übernimmt die geschützte Nutzlast (als Bytearray) und gibt die unges
 * `wasRevoked`: wird auf true festgelegt, wenn der Schlüssel, der zum Schützen dieser Nutzlast verwendet wurde, widerrufen wurde.
 
 >[!WARNING]
-> Gehen Sie beim übergeben `ignoreRevocationErrors: true` an die `DangerousUnprotect` -Methode mit äußerster Vorsicht vor. Wenn nach dem Aufrufen dieser Methode `wasRevoked` der Wert true ist, wurde der zum Schutz dieser Nutzlast verwendete Schlüssel widerrufen, und die Authentizität der Nutzlast sollte als Fehler verdächtig behandelt werden. In diesem Fall wird nur der Betrieb der nicht geschützten Nutzlast fortgesetzt, wenn Sie eine separate Gewissheit haben, dass Sie authentisch ist, z. b., dass Sie von einer sicheren Datenbank stammt, anstatt von einem nicht vertrauenswürdigen WebClient gesendet zu werden.
+> Gehen Sie beim übergeben `ignoreRevocationErrors: true` an die-Methode mit äußerster Vorsicht vor `DangerousUnprotect` . Wenn nach dem Aufrufen dieser Methode der `wasRevoked` Wert true ist, wurde der zum Schutz dieser Nutzlast verwendete Schlüssel widerrufen, und die Authentizität der Nutzlast sollte als Fehler verdächtig behandelt werden. In diesem Fall wird nur der Betrieb der nicht geschützten Nutzlast fortgesetzt, wenn Sie eine separate Gewissheit haben, dass Sie authentisch ist, z. b., dass Sie von einer sicheren Datenbank stammt, anstatt von einem nicht vertrauenswürdigen WebClient gesendet zu werden.
 
 [!code-csharp[](dangerous-unprotect/samples/dangerous-unprotect.cs)]

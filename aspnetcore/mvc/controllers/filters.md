@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 068b471c1f5fa5f0ca87dd7b028badf70f8c1b67
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122164"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408291"
 ---
 # <a name="filters-in-aspnet-core"></a>Filter in ASP.NET Core
 
@@ -282,7 +284,7 @@ Der `AddHeader`-Filter wird daher nie für die `SomeResource`-Aktion ausgeführt
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-## <a name="dependency-injection"></a>Dependency Injection
+## <a name="dependency-injection"></a>Abhängigkeitsinjektion
 
 Filter können nach Typ oder Instanz hinzugefügt werden. Wenn eine Instanz hinzugefügt wird, wird diese Instanz für jede Anforderung verwendet. Wenn ein Typ hinzugefügt wird, ist der Filter typaktiviert. Ein typaktivierter Filter bedeutet Folgendes:
 
@@ -814,7 +816,7 @@ Der `AddHeader`-Filter wird daher nie für die `SomeResource`-Aktion ausgeführt
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
-## <a name="dependency-injection"></a>Dependency Injection
+## <a name="dependency-injection"></a>Abhängigkeitsinjektion
 
 Filter können nach Typ oder Instanz hinzugefügt werden. Wenn eine Instanz hinzugefügt wird, wird diese Instanz für jede Anforderung verwendet. Wenn ein Typ hinzugefügt wird, ist der Filter typaktiviert. Ein typaktivierter Filter bedeutet Folgendes:
 

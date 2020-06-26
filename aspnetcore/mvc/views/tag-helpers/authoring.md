@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 0b60468b96ded559d180e7b3bf5f799ce2f4d7e3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5e250debb5c4c2ef00b844557d31ed8281d2ff2f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775088"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407589"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Erstellen von Taghilfsprogrammen in ASP.NET Core
 
@@ -37,7 +39,7 @@ Bei einem Taghilfsprogramm handelt es sich um eine Klasse, die die `ITagHelper`-
 
 ## <a name="a-minimal-tag-helper"></a>Ein Taghilfsprogramm mit den mindestens erforderlichen Elementen
 
-In diesem Beispiel wird erläutert, wie Sie ein Taghilfsprogramm schreiben, das ein Update für ein E-Mail-Tag ausführt. Beispiel:
+In diesem Beispiel wird erläutert, wie Sie ein Taghilfsprogramm schreiben, das ein Update für ein E-Mail-Tag ausführt. Zum Beispiel:
 
 ```html
 <email>Support</email>
@@ -71,11 +73,11 @@ Dabei handelt es sich um ein Anchor-Tag, das daraus einen E-Mail-Link erstellt. 
    public class Email : TagHelper
    ```
 
-1. Fügen Sie der `EmailTagHelper` Razor *views/_ViewImports. cshtml-* Datei die `addTagHelper` -Direktive hinzu, um die Klasse für alle Sichten verfügbar zu machen:
+1. `EmailTagHelper` Razor Fügen Sie der `addTagHelper` *views/_ViewImports. cshtml-* Datei die-Direktive hinzu, um die Klasse für alle Sichten verfügbar zu machen:
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie außerdem, dass die zweite Zeile die ASP.net Core MVC-taghilfsprogramme mithilfe der Platzhalter Syntax bringt (diese Hilfsprogramme werden unter [Einführung in taghilfsprogramme](intro.md)erläutert). Dies ist die `@addTagHelper` -Direktive, die das taghilfsprogramm Razor für die Ansicht verfügbar macht. Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
+   Im obenstehenden Code wird die Platzhaltersyntax verwendet, um alle Taghilfsprogramme anzugeben, die in der Assembly verfügbar sein sollen. In der ersten Zeichenfolge nach `@addTagHelper` wird angegeben, welches Taghilfsprogramm geladen werden soll (Verwenden Sie für alle Taghilfsprogramme „*“), und die zweite Zeichenfolge „AuthoringTagHelpers“ gibt die Assembly an, in der sich das Taghilfsprogramm befindet. Beachten Sie außerdem, dass die zweite Zeile die ASP.net Core MVC-taghilfsprogramme mithilfe der Platzhalter Syntax bringt (diese Hilfsprogramme werden unter [Einführung in taghilfsprogramme](intro.md)erläutert). Dies ist die- `@addTagHelper` Direktive, die das taghilfsprogramm für die Ansicht verfügbar macht Razor . Stattdessen können Sie auch wie folgt den vollqualifizierten Namen eines Taghilfsprogramms eingeben:
 
 ```csharp
 @using AuthoringTagHelpers
@@ -199,7 +201,7 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * Wie obenstehend erwähnt, übersetzen Taghilfsprogramme C#-Klassennamen und -Eigenschaften in der Pascal-Schreibweise für Taghilfsprogramme in [Kebab-Schreibweise](https://wiki.c2.com/?KebabCase). Um `WebsiteInformationTagHelper` in Razorzu verwenden, schreiben `<website-information />`Sie daher.
+   * Wie obenstehend erwähnt, übersetzen Taghilfsprogramme C#-Klassennamen und -Eigenschaften in der Pascal-Schreibweise für Taghilfsprogramme in [Kebab-Schreibweise](https://wiki.c2.com/?KebabCase). Um in zu verwenden `WebsiteInformationTagHelper` Razor , schreiben Sie daher `<website-information />` .
 
    * Das Zielelement wird mit dem `[HtmlTargetElement]`-Attribut nicht explizit identifiziert, sodass standardmäßig `website-information` angezielt wird. Wenn Sie das folgende Attribut angewendet haben (beachten Sie, dass es sich hierbei nicht um Kebab Case handelt, sondern das Attribut dem Klassennamen zugeordnet wird):
 
@@ -226,7 +228,7 @@ Außerdem können Sie `[HtmlTargetElement]` verwenden, um den Namen des angeziel
    [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
-   > Im unten Razor gezeigten Markup:
+   > Im Razor unten gezeigten Markup:
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >

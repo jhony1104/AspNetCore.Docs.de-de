@@ -1,36 +1,38 @@
 ---
 title: Konfigurieren von ASP.net CoreIdentity
 author: AdrienTorris
-description: Verstehen Sie Identity ASP.net Core Standardwerte, und erfahren Sie Identity , wie Sie Eigenschaften für die Verwendung von benutzerdefinierten Werten konfigurieren.
+description: Verstehen Identity Sie ASP.net Core Standardwerte, und erfahren Sie, wie Sie Identity Eigenschaften für die Verwendung von benutzerdefinierten Werten konfigurieren.
 ms.author: riande
 ms.date: 02/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b88f2627eabc536f2d3b8e677020a67bfd1a40ba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775647"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408967"
 ---
-# <a name="configure-aspnet-core-identity"></a>Konfigurieren ASP.net Core Identität
+# <a name="configure-aspnet-core-identity"></a>Konfigurieren von ASP.net CoreIdentity
 
-ASP.net Core Identität verwendet Standardwerte für Einstellungen wie Kenn Wort Richtlinie, Sperrung und Konfiguration von Cookies. Diese Einstellungen können in der `Startup` -Klasse überschrieben werden.
+In ASP.net Core werden Identity Standardwerte für Einstellungen verwendet, z. b. Kenn Wort Richtlinie, Sperrung und Konfiguration von Cookies. Diese Einstellungen können in der-Klasse überschrieben werden `Startup` .
 
-## <a name="identity-options"></a>Identitäts Optionen
+## <a name="identity-options"></a>IdentityOptionen
 
-Die [identityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) -Klasse stellt die Optionen dar, die zum Konfigurieren des Identitäts Systems verwendet werden können. `IdentityOptions`muss **nach** dem Aufrufen `AddIdentity` von oder `AddDefaultIdentity`festgelegt werden.
+Die [identityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) -Klasse stellt die Optionen dar, die verwendet werden können, um das System zu konfigurieren Identity . `IdentityOptions`muss **nach** dem Aufrufen von oder festgelegt werden `AddIdentity` `AddDefaultIdentity` .
 
-### <a name="claims-identity"></a>Anspruchs Identität
+### <a name="claims-identity"></a>ClaimsIdentity
 
 " [Identityoptions. ClaimsIdentity](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) " gibt die " [claimsidentityoptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) " mit den Eigenschaften an, die in der folgenden Tabelle aufgeführt sind.
 
-| Eigenschaft | BESCHREIBUNG | Standard |
+| Eigenschaft | Beschreibung | Standard |
 | -------- | ----------- | :-----: |
 | [Roleclaimtype](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.roleclaimtype) | Ruft den für einen Rollen Anspruch verwendeten Anspruchstyp ab oder legt ihn fest. | [ClaimTypes. Role](/dotnet/api/system.security.claims.claimtypes.role) |
 | [Securitystampclaimtype](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.securitystampclaimtype) | Ruft den für den sicherheitstokenanspruch verwendeten Anspruchstyp ab oder legt ihn fest. | `AspNet.Identity.SecurityStamp` |
@@ -43,9 +45,9 @@ Die Sperre wird in der [passwordsigninasync](/dotnet/api/microsoft.aspnetcore.id
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-Der vorangehende Code basiert auf der `Login` Identitäts Vorlage. 
+Der vorangehende Code basiert auf der `Login` Identity Vorlage. 
 
-Sperrungs Optionen werden in `StartUp.ConfigureServices`festgelegt:
+Sperrungs Optionen werden in festgelegt `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
@@ -55,7 +57,7 @@ Bei erfolgreicher Authentifizierung wird die Anzahl fehlerhafter Zugriffsversuch
 
 [Identityoptions. Lockout](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) gibt die [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) mit den in der Tabelle angezeigten Eigenschaften an.
 
-| Eigenschaft | BESCHREIBUNG | Standard |
+| Eigenschaft | Beschreibung | Standard |
 | -------- | ----------- | :-----: |
 | ["Zuweisen"](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.allowedfornewusers) | Bestimmt, ob ein neuer Benutzer gesperrt werden kann. | `true` |
 | [Defaultlockouttimespan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | Die Zeitspanne, für die ein Benutzer gesperrt wird, wenn eine Sperre auftritt. | 5 Minuten |
@@ -63,7 +65,7 @@ Bei erfolgreicher Authentifizierung wird die Anzahl fehlerhafter Zugriffsversuch
 
 ### <a name="password"></a>Kennwort
 
-Standardmäßig erfordert Identity, dass Kenn Wörter einen Großbuchstaben, einen Kleinbuchstaben, eine Ziffer und ein nicht alphanumerisches Zeichen enthalten. Kenn Wörter müssen mindestens sechs Zeichen lang sein. [Passwordoptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) kann in `Startup.ConfigureServices`festgelegt werden.
+Standardmäßig Identity erfordert, dass Kenn Wörter einen Großbuchstaben, einen Kleinbuchstaben, eine Ziffer und ein nicht alphanumerisches Zeichen enthalten. Kenn Wörter müssen mindestens sechs Zeichen lang sein. [Passwordoptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) kann in festgelegt werden `Startup.ConfigureServices` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -87,7 +89,7 @@ Standardmäßig erfordert Identity, dass Kenn Wörter einen Großbuchstaben, ein
 
 ::: moniker range=">= aspnetcore-2.0"
 
-| Eigenschaft | BESCHREIBUNG | Standard |
+| Eigenschaft | Beschreibung | Standard |
 | -------- | ----------- | :-----: |
 | [Requirements-Ziffer](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | Erfordert eine Zahl zwischen 0-9 und dem Kennwort. | `true` |
 | [Requirements dlength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | Die Mindestlänge des Kennworts. | 6 |
@@ -100,7 +102,7 @@ Standardmäßig erfordert Identity, dass Kenn Wörter einen Großbuchstaben, ein
 
 ::: moniker range="< aspnetcore-2.0"
 
-| Eigenschaft | BESCHREIBUNG | Standard |
+| Eigenschaft | Beschreibung | Standard |
 | -------- | ----------- | :-----: |
 | [Requirements-Ziffer](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | Erfordert eine Zahl zwischen 0-9 und dem Kennwort. | `true` |
 | [Requirements dlength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | Die Mindestlänge des Kennworts. | 6 |
@@ -112,7 +114,7 @@ Standardmäßig erfordert Identity, dass Kenn Wörter einen Großbuchstaben, ein
 
 ### <a name="sign-in"></a>Anmeldung
 
-Mit dem folgenden Code `SignIn` werden Einstellungen festgelegt (auf Standardwerte):
+Mit dem folgenden Code werden Einstellungen festgelegt `SignIn` (auf Standardwerte):
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -128,7 +130,7 @@ Mit dem folgenden Code `SignIn` werden Einstellungen festgelegt (auf Standardwer
 
 [Identityoptions. SignIn](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) gibt die [signinoptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) -Eigenschaft mit den in der Tabelle angezeigten Eigenschaften an.
 
-| Eigenschaft | BESCHREIBUNG | Standard |
+| Eigenschaft | Beschreibung | Standard |
 | -------- | ----------- | :-----: |
 | ["Requirements confirmede Mail"](/dotnet/api/microsoft.aspnetcore.identity.signinoptions.requireconfirmedemail) | Erfordert eine bestätigte e-Mail-Adresse für die Anmeldung. | `false` |
 | [Requirements confirmedphonenumber](/dotnet/api/microsoft.aspnetcore.identity.signinoptions.requireconfirmedphonenumber) | Erfordert eine bestätigte Telefonnummer, um sich anzumelden. | `false` |
@@ -137,13 +139,13 @@ Mit dem folgenden Code `SignIn` werden Einstellungen festgelegt (auf Standardwer
 
 [Identityoptions. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) gibt die [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) mit den Eigenschaften an, die in der Tabelle angezeigt werden.
 
-|                                                        Eigenschaft                                                         |                                                                                      BESCHREIBUNG                                                                                      |
+|                                                        Eigenschaft                                                         |                                                                                      Beschreibung                                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [Authenticenortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       Ruft den ab, `AuthenticatorTokenProvider` der zum Überprüfen von zweistufigen Anmeldungen mit einem Authentifikator verwendet wird, oder legt diesen fest.                                       |
-|       [Changeemailstokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Ruft den zum Generieren `ChangeEmailTokenProvider` von Token ab, die in e-Mail-Bestätigungs-e-Mails verwendet werden.                                     |
-| [Changephonenumberumkenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Ruft den ab, `ChangePhoneNumberTokenProvider` der zum Generieren von Token verwendet wird, die beim Ändern von Telefonnummern verwendet werden                                      |
+|     [Authenticenortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       Ruft den ab `AuthenticatorTokenProvider` , der zum Überprüfen von zweistufigen Anmeldungen mit einem Authentifikator verwendet wird, oder legt diesen fest.                                       |
+|       [Changeemailstokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Ruft den `ChangeEmailTokenProvider` zum Generieren von Token ab, die in e-Mail-Bestätigungs-e-Mails verwendet werden.                                     |
+| [Changephonenumberumkenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Ruft den ab `ChangePhoneNumberTokenProvider` , der zum Generieren von Token verwendet wird, die beim Ändern von Telefonnummern verwendet werden                                      |
 | [Emailconfirmationstokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Ruft den Tokenanbieter ab, der zum Generieren von Token verwendet wird, die in e-Mail-Konto Bestätigungs                                              |
-|     [Passwordresetstokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Ruft den [iusertwofaktortokenprovider\<-tuser>](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) ab oder legt ihn fest, der verwendet wird, um Token zu generieren, die in e-Mail |
+|     [Passwordresetstokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Ruft den [iusertwofaktortokenprovider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) ab, der zum Generieren von Token verwendet wird, die in e-Mails zur Kenn Wort Zurücksetzung verwendet werden |
 |                    [Providermap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Wird verwendet, um einen [benutzertokenanbieter](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) mit dem Schlüssel zu erstellen, der als Name des Anbieters verwendet wird.                 |
 
 ### <a name="user"></a>Benutzer
@@ -159,7 +161,7 @@ Mit dem folgenden Code `SignIn` werden Einstellungen festgelegt (auf Standardwer
 
 ### <a name="cookie-settings"></a>Cookie-Einstellungen
 
-Konfigurieren Sie das Cookie der APP `Startup.ConfigureServices`in. " [Applireapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) " muss **nach** dem `AddIdentity` aufrufen `AddDefaultIdentity`von oder aufgerufen werden.
+Konfigurieren Sie das Cookie der app in `Startup.ConfigureServices` . " [Applireapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) " muss **nach** dem Aufrufen von oder aufgerufen werden `AddIdentity` `AddDefaultIdentity` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -187,10 +189,10 @@ Weitere Informationen finden Sie unter [cookieauthenticationoptions](/dotnet/api
 
 | Option | BESCHREIBUNG |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Der beim hashup neuer Kenn Wörter verwendete Kompatibilitätsmodus. Der Standardwert lautet <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. Das erste Byte eines Hash Kennworts, das als *Format Marker*bezeichnet wird, gibt die Version des Hash Algorithmus an, mit dem das Kennwort als Hash verwendet wird. Wenn ein Kennwort mit einem Hash überprüft wird <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> , wählt die Methode den richtigen Algorithmus basierend auf dem ersten Byte aus. Ein Client kann authentifiziert werden, unabhängig davon, welche Version des Algorithmus zum Hashen des Kennworts verwendet wurde. Das Festlegen des Kompatibilitätsmodus wirkt sich auf das hashup *neuer Kenn Wörter*aus. |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Die Anzahl der Iterationen, die beim Hashwert von Kenn Wörtern mithilfe von PBKDF2 verwendet werden. Dieser Wert wird nur verwendet, wenn <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> auf <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>festgelegt ist. Der Wert muss eine positive ganze Zahl sein, `10000`und der Standardwert ist. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Der beim hashup neuer Kenn Wörter verwendete Kompatibilitätsmodus. Wird standardmäßig auf <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> festgelegt. Das erste Byte eines Hash Kennworts, das als *Format Marker*bezeichnet wird, gibt die Version des Hash Algorithmus an, mit dem das Kennwort als Hash verwendet wird. Wenn ein Kennwort mit einem Hash überprüft wird, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> wählt die Methode den richtigen Algorithmus basierend auf dem ersten Byte aus. Ein Client kann authentifiziert werden, unabhängig davon, welche Version des Algorithmus zum Hashen des Kennworts verwendet wurde. Das Festlegen des Kompatibilitätsmodus wirkt sich auf das hashup *neuer Kenn Wörter*aus. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Die Anzahl der Iterationen, die beim Hashwert von Kenn Wörtern mithilfe von PBKDF2 verwendet werden. Dieser Wert wird nur verwendet, wenn <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> auf festgelegt ist <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Der Wert muss eine positive ganze Zahl sein, und der Standardwert ist `10000` . |
 
-Im folgenden Beispiel <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> wird auf `12000` in `Startup.ConfigureServices`festgelegt:
+Im folgenden Beispiel <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> wird auf in festgelegt `12000` `Startup.ConfigureServices` :
 
 ```csharp
 // using Microsoft.AspNetCore.Identity;

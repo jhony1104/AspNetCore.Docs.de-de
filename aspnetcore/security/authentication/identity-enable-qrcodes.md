@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/14/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 42ddddeaa329ac5ff5b2b40cbf9ebffa68f6d4cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4ed5a550b5d3ca00179ae0492bf61e7fe91e324c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774430"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408772"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>Aktivieren der QR-Code Generierung für TOTP Authenticator-apps in ASP.net Core
 
@@ -36,22 +38,22 @@ Die zweistufige Authentifizierung erfolgt nicht mithilfe eines externen Authenti
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>Hinzufügen von QR-Codes zur Seite "2FA-Konfiguration"
 
-In diesen Anweisungen wird *QRCode. js* aus https://davidshimjs.github.io/qrcodejs/ dem Repository verwendet.
+In diesen Anweisungen wird *qrcode.js* aus dem Repository verwendet https://davidshimjs.github.io/qrcodejs/ .
 
-* Laden Sie die [JavaScript-Bibliothek QRCode. js](https://davidshimjs.github.io/qrcodejs/) in den `wwwroot\lib` Ordner in Ihrem Projekt herunter.
+* Laden Sie die [JavaScript-Bibliothekqrcode.js](https://davidshimjs.github.io/qrcodejs/) in den `wwwroot\lib` Ordner in Ihrem Projekt herunter.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* Befolgen Sie die Anweisungen in [ Identity Gerüstbau](xref:security/authentication/scaffold-identity) , um */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*zu generieren.
-* Suchen Sie in */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*den `Scripts` Abschnitt am Ende der Datei:
+* Befolgen Sie die Anweisungen in [ Identity Gerüstbau](xref:security/authentication/scaffold-identity) , um */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*zu generieren.
+* Suchen Sie in */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*den `Scripts` Abschnitt am Ende der Datei:
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-* Suchen Sie in *pages/Account/Manage/enableauthenticator. cshtml* (Razor Pages) oder *views/Manage/enableauthenticator. cshtml* (MVC) den `Scripts` Abschnitt am Ende der Datei:
+* Suchen Sie in *pages/Account/Manage/enableauthenticator. cshtml* ( Razor Pages) oder *views/Manage/enableauthenticator. cshtml* (MVC) den `Scripts` Abschnitt am Ende der Datei:
 
 ::: moniker-end
 
@@ -63,7 +65,7 @@ In diesen Anweisungen wird *QRCode. js* aus https://davidshimjs.github.io/qrcode
 }
 ```
 
-* Aktualisieren Sie `Scripts` den Abschnitt, um einen Verweis auf `qrcodejs` die hinzugefügte Bibliothek hinzuzufügen, und einen-Befehl zum Generieren des QR-Codes. Dies sollte folgendermaßen aussehen:
+* Aktualisieren Sie den `Scripts` Abschnitt, um einen Verweis auf die `qrcodejs` hinzugefügte Bibliothek hinzuzufügen, und einen-Befehl zum Generieren des QR-Codes. Dies sollte folgendermaßen aussehen:
 
 ```cshtml
 @section Scripts {
@@ -91,13 +93,13 @@ Führen Sie Ihre APP aus, und stellen Sie sicher, dass Sie den QR-Code Scannen u
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Der Name der Website im QR-Code stammt aus dem Projektnamen, den Sie beim ersten Erstellen des Projekts auswählen. Sie können es ändern, indem Sie die `GenerateQrCodeUri(string email, string unformattedKey)` -Methode in *derIdentity/Areas/-/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*suchen.
+Der Name der Website im QR-Code stammt aus dem Projektnamen, den Sie beim ersten Erstellen des Projekts auswählen. Sie können es ändern, indem Sie die- `GenerateQrCodeUri(string email, string unformattedKey)` Methode in der */Areas/- Identity /pages/Account/Manage/EnableAuthenticator.cshtml.cs*suchen.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-Der Name der Website im QR-Code stammt aus dem Projektnamen, den Sie beim ersten Erstellen des Projekts auswählen. Sie können dies ändern, indem Sie die `GenerateQrCodeUri(string email, string unformattedKey)` -Methode in der Datei *pages/Account/Manage/enableauthenticator. cshtml. cs* (Razor Pages) oder der Datei *Controllers/managecontroller. cs* (MVC) suchen.
+Der Name der Website im QR-Code stammt aus dem Projektnamen, den Sie beim ersten Erstellen des Projekts auswählen. Sie können dies ändern, indem Sie die `GenerateQrCodeUri(string email, string unformattedKey)` -Methode in der Datei *pages/Account/Manage/enableauthenticator. cshtml. cs* ( Razor Pages) oder der Datei *Controllers/managecontroller. cs* (MVC) suchen.
 
 ::: moniker-end
 
@@ -116,16 +118,16 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 }
 ```
 
-Der zweite Parameter im-Aufrufen von `string.Format` ist Ihr Site Name, der aus dem Projektmappennamen entnommen wurde. Sie kann in einen beliebigen Wert geändert werden, muss jedoch immer URL-codiert sein.
+Der zweite Parameter im-aufrufen `string.Format` von ist Ihr Site Name, der aus dem Projektmappennamen entnommen wurde. Sie kann in einen beliebigen Wert geändert werden, muss jedoch immer URL-codiert sein.
 
 ## <a name="using-a-different-qr-code-library"></a>Verwenden einer anderen QR-Code Bibliothek
 
-Sie können die QR-Code Bibliothek durch Ihre bevorzugte Bibliothek ersetzen. Der HTML-Code `qrCode` enthält ein-Element, in das Sie einen QR-Code mit jedem Mechanismus platzieren können, den Ihre Bibliothek bereitstellt.
+Sie können die QR-Code Bibliothek durch Ihre bevorzugte Bibliothek ersetzen. Der HTML-Code enthält ein- `qrCode` Element, in das Sie einen QR-Code mit jedem Mechanismus platzieren können, den Ihre Bibliothek bereitstellt.
 
 Die korrekt formatierte URL für den QR-Code ist in verfügbar:
 
 * `AuthenticatorUri`-Eigenschaft des Modells.
-* `data-url`-Eigenschaft im `qrCodeData` -Element.
+* `data-url`-Eigenschaft im- `qrCodeData` Element.
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP-Client-und Serverzeit Abweichung
 

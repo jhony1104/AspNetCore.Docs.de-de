@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/08/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032b3f9ccea2ae361a8f2fd12538ffb901310247
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776863"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408902"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>Schlüsselspeicher Format in ASP.net Core
 
@@ -27,7 +29,7 @@ Objekte werden im Ruhezustand in der XML-Darstellung gespeichert. Das Standardve
 * Windows: *%localappdata%\ASP.net\dataschutz-Keys\*
 * macOS/Linux: *$Home/.Aspnet/DataProtection-Keys*
 
-## <a name="the-key-element"></a>Das \<Schlüssel> Element
+## <a name="the-key-element"></a>Das \<key>-Element
 
 Schlüssel sind im schlüsselrepository als Objekte der obersten Ebene vorhanden. Gemäß den kontokonventionenschlüsseln haben Sie den Dateinamen **Key-{GUID}. XML**, wobei {GUID} die ID des Schlüssels ist. Jede dieser Dateien enthält einen einzelnen Schlüssel. Das Format der Datei lautet wie folgt.
 
@@ -52,33 +54,33 @@ Schlüssel sind im schlüsselrepository als Objekte der obersten Ebene vorhanden
 </key>
 ```
 
-Das \<Schlüssel>-Element enthält die folgenden Attribute und untergeordneten Elemente:
+Das \<key> -Element enthält die folgenden Attribute und untergeordneten Elemente:
 
 * Die Schlüssel-ID. Dieser Wert wird als autorisierend behandelt. der Dateiname ist einfach ein nicseinwert für die Lesbarkeit von Menschen.
 
-* Die Version des \<Schlüssel> Elements, das derzeit bei 1 korrigiert ist.
+* Die Version des \<key> Elements, die derzeit bei 1 korrigiert ist.
 
 * Die Erstellungs-, Aktivierungs-und Ablaufdatums Angaben des Schlüssels.
 
-* Ein \<Deskriptor>-Element, das Informationen zur Implementierung der authentifizierten Verschlüsselung enthält, die in diesem Schlüssel enthalten ist.
+* Ein- \<descriptor> Element, das Informationen zur Implementierung der authentifizierten Verschlüsselung enthält, die in diesem Schlüssel enthalten ist.
 
 Im obigen Beispiel lautet die ID des Schlüssels {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, wurde am 19. März 2015 erstellt und aktiviert und verfügt über eine Gültigkeitsdauer von 90 Tagen. (Gelegentlich ist das Aktivierungsdatum möglicherweise etwas vor dem Erstellungsdatum, wie in diesem Beispiel. Der Grund hierfür ist die Funktionsweise der APIs und ist in der Praxis harmlos.)
 
-## <a name="the-descriptor-element"></a>Der \<Deskriptor> Element
+## <a name="the-descriptor-element"></a>Das \<descriptor>-Element
 
-Der äußere \<Deskriptor>-Element enthält ein deserializertype-Attribut, bei dem es sich um den durch die Assembly qualifizierten Namen eines Typs handelt, der iauthenticatedencryptordescriptordeserializer implementiert. Dieser Typ ist für das Lesen des inneren \<Deskriptors>-Elements und für das Auswerten der in enthaltenen Informationen verantwortlich.
+Das äußere \<descriptor> Element enthält ein deserializertype-Attribut, bei dem es sich um den durch die Assembly qualifizierten Namen eines Typs handelt, der iauthenticatedencryptordescriptordeserializer implementiert. Dieser Typ ist für das Lesen des inneren \<descriptor> Elements und für das Auswerten der in enthaltenen Informationen verantwortlich.
 
-Das besondere Format des \<Deskriptors>-Elements hängt von der durch den Schlüssel gekapselten authentifizierten Verschlüsselungs Implementierung ab, und jeder deserialisierungstyp erwartet ein etwas anderes Format für dieses. Im Allgemeinen enthält dieses Element jedoch algorithmische Informationen (Namen, Typen, OIDs oder ähnliches) und Geheimnis Schlüsselmaterial. Im obigen Beispiel gibt der Deskriptor an, dass dieser Schlüssel die AES-256-CBC-Verschlüsselung + HMACSHA256-Überprüfung umschließt.
+Das jeweilige Format des- \<descriptor> Elements hängt von der durch den Schlüssel gekapselten authentifizierten Verschlüsselungs Implementierung ab, und jeder deserialisierungstyp erwartet ein etwas anderes Format für dieses. Im Allgemeinen enthält dieses Element jedoch algorithmische Informationen (Namen, Typen, OIDs oder ähnliches) und Geheimnis Schlüsselmaterial. Im obigen Beispiel gibt der Deskriptor an, dass dieser Schlüssel die AES-256-CBC-Verschlüsselung + HMACSHA256-Überprüfung umschließt.
 
-## <a name="the-encryptedsecret-element"></a>Das \<> Element "verschlüsseltedsecret"
+## <a name="the-encryptedsecret-element"></a>Das \<encryptedSecret>-Element
 
-Wenn die [Verschlüsselung von geheimen Schlüsseln aktiviert ist](xref:security/data-protection/implementation/key-encryption-at-rest), kann ein ** &lt;verschlüsseltedsecret&gt; ** -Element vorhanden sein, das die verschlüsselte Form des geheimen Schlüssel Materials enthält. Das- `decryptorType` Attribut ist der durch die Assembly qualifizierte Name eines Typs, der [ixmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)implementiert. Dieser Typ ist verantwortlich für das Lesen des inneren ** &lt;verschlüsseltedkey&gt; ** -Elements und das entschlüsseln, um den ursprünglichen Klartext wiederherzustellen.
+Wenn die [Verschlüsselung von geheimen Schlüsseln aktiviert ist](xref:security/data-protection/implementation/key-encryption-at-rest), kann ein ** &lt; verschlüsseltedsecret &gt; ** -Element vorhanden sein, das die verschlüsselte Form des geheimen Schlüssel Materials enthält. Das-Attribut `decryptorType` ist der durch die Assembly qualifizierte Name eines Typs, der [ixmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)implementiert. Dieser Typ ist verantwortlich für das Lesen des inneren ** &lt; verschlüsseltedkey &gt; ** -Elements und das entschlüsseln, um den ursprünglichen Klartext wiederherzustellen.
 
-Wie bei `<descriptor>`ist das jeweilige Format des- `<encryptedSecret>` Elements abhängig von dem verwendeten ruhenden Verschlüsselungsmechanismus. Im obigen Beispiel wird der Hauptschlüssel mit Windows DPAPI gemäß dem Kommentar verschlüsselt.
+Wie bei `<descriptor>` ist das jeweilige Format des `<encryptedSecret>` -Elements abhängig von dem verwendeten ruhenden Verschlüsselungsmechanismus. Im obigen Beispiel wird der Hauptschlüssel mit Windows DPAPI gemäß dem Kommentar verschlüsselt.
 
-## <a name="the-revocation-element"></a>Das \<Sperr> Element.
+## <a name="the-revocation-element"></a>Das \<revocation>-Element
 
-Widerrufen sind im schlüsselrepository als Objekte der obersten Ebene vorhanden. Gemäß der Konvention verfügen Widerrufungen über den Dateinamen " **Widerruf-{Timestamp}. XML** " (zum Aufheben aller Schlüssel vor einem bestimmten Datum) oder " **Widerruf-{GUID}. XML** " (für das Aufheben eines bestimmten Schlüssels). Jede Datei enthält ein einzelnes \<Sperr> Element.
+Widerrufen sind im schlüsselrepository als Objekte der obersten Ebene vorhanden. Gemäß der Konvention verfügen Widerrufungen über den Dateinamen " **Widerruf-{Timestamp}. XML** " (zum Aufheben aller Schlüssel vor einem bestimmten Datum) oder " **Widerruf-{GUID}. XML** " (für das Aufheben eines bestimmten Schlüssels). Jede Datei enthält ein einzelnes \<revocation> Element.
 
 Für das Aufheben der einzelnen Schlüssel wird der Inhalt der Datei wie unten beschrieben.
 
@@ -103,4 +105,4 @@ In diesem Fall wird nur der angegebene Schlüssel widerrufen. Wenn die Schlüsse
 </revocation>
 ```
 
-Der \<Grund, warum> Element nie vom System gelesen wird. Es ist einfach ein guter Ort, um einen lesbaren Grund für den Widerruf zu speichern.
+Das- \<reason> Element wird nie vom System gelesen. Es ist einfach ein guter Ort, um einen lesbaren Grund für den Widerruf zu speichern.

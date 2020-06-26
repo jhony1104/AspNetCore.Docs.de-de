@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775829"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408577"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Zweistufige Authentifizierung mit SMS in ASP.net Core
 
@@ -33,7 +35,7 @@ In diesem Tutorial wird gezeigt, wie Sie die zweistufige Authentifizierung (2FA)
 
 ## <a name="create-a-new-aspnet-core-project"></a>Erstellen eines neuen ASP.NET Core-Projekts
 
-Erstellen Sie eine neue ASP.net Core Web- `Web2FA` App mit dem Namen mit einzelnen Benutzerkonten. Befolgen Sie die Anweisungen <xref:security/enforcing-ssl> unter, um HTTPS einzurichten und anzufordern.
+Erstellen Sie eine neue ASP.net Core Web-App mit dem Namen `Web2FA` mit einzelnen Benutzerkonten. Befolgen Sie die Anweisungen unter <xref:security/enforcing-ssl> , um HTTPS einzurichten und anzufordern.
 
 ### <a name="create-an-sms-account"></a>Erstellen eines SMS-Kontos
 
@@ -49,7 +51,7 @@ Kopieren Sie die **Konto-SID** und das Authentifizierungs **Token**auf der Regis
 
 Navigieren Sie in Ihren Kontoeinstellungen zu **UserKey** , und kopieren Sie es mit Ihrem **Kennwort**.
 
-Diese Werte werden später in mit dem Secret-Manager-Tool in den Schlüsseln `SMSAccountIdentification` und `SMSAccountPassword`gespeichert.
+Diese Werte werden später in mit dem Secret-Manager-Tool in den Schlüsseln `SMSAccountIdentification` und gespeichert `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>Angeben von SenderID/Absender
 
@@ -57,7 +59,7 @@ Diese Werte werden später in mit dem Secret-Manager-Tool in den Schlüsseln `SM
 
 **Aspsms:** Entsperren Sie einen oder mehrere Originatoren im Menü Unlock-Absender, oder wählen Sie einen alphanumerischen Absender aus (wird nicht von allen Netzwerken unterstützt).
 
-Dieser Wert wird später mit dem Secret-Manager-Tool im Schlüssel `SMSAccountFrom`gespeichert.
+Dieser Wert wird später mit dem Secret-Manager-Tool im Schlüssel gespeichert `SMSAccountFrom` .
 
 ### <a name="provide-credentials-for-the-sms-service"></a>Angeben von Anmelde Informationen für den SMS-Dienst
 
@@ -67,7 +69,7 @@ Wir verwenden das [options Muster](xref:fundamentals/configuration/options) für
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`Legen Sie `SMSAccountPassword` und `SMSAccountFrom` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Beispiel:
+Legen Sie `SMSAccountIdentification` `SMSAccountPassword` und `SMSAccountFrom` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Zum Beispiel:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -94,7 +96,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>Zu verwendenden Start konfigurieren`SMSoptions`
 
-Fügen `SMSoptions` Sie dem Dienst Container in der `ConfigureServices` -Methode in der *Startup.cs*hinzu:
+Fügen Sie dem `SMSoptions` Dienst Container in der- `ConfigureServices` Methode in der *Startup.cs*hinzu:
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
@@ -152,7 +154,7 @@ Die Kontosperrung wird mit 2FA empfohlen. Sobald sich ein Benutzer über ein lok
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-Vergewissern Sie sich, dass [passwordsigninasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) auf `lockoutOnFailure` `true`festgelegt ist:
+Vergewissern Sie sich, dass [passwordsigninasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) auf festgelegt ist `lockoutOnFailure` `true` :
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(

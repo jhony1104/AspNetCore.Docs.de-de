@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 79a8c98d276738f687ef484795818897f18ceded
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: ff78321cba11b1c91a12b5c777c505b4c9b85309
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755806"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408317"
 ---
 # <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>Verwenden des messagepack-Hub-Protokolls in SignalR für ASP.net Core
 
@@ -127,7 +129,7 @@ public class ChatMessage
 }
 ```
 
-Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Beispiel:
+Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Zum Beispiel:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -179,7 +181,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 Weitere Informationen zu dieser Einschränkung finden Sie unter GitHub [-Problem ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
-## <a name="related-resources"></a>Verwandte Ressourcen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [.NET-Client](xref:signalr/dotnet-client)
@@ -302,7 +304,7 @@ public class ChatMessage
 }
 ```
 
-Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Beispiel:
+Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Zum Beispiel:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -354,7 +356,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 Weitere Informationen zu dieser Einschränkung finden Sie unter GitHub [-Problem ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
-## <a name="related-resources"></a>Verwandte Ressourcen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [.NET-Client](xref:signalr/dotnet-client)
@@ -477,7 +479,7 @@ public class ChatMessage
 }
 ```
 
-Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Beispiel:
+Beim Senden vom JavaScript-Client müssen Sie `PascalCased` Eigenschaftsnamen verwenden, da die Groß-/Kleinschreibung genau mit der c#-Klasse übereinstimmen muss. Zum Beispiel:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -529,7 +531,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 Weitere Informationen zu dieser Einschränkung finden Sie unter GitHub [-Problem ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
-## <a name="related-resources"></a>Verwandte Ressourcen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [.NET-Client](xref:signalr/dotnet-client)

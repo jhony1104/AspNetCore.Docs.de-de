@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: c4b4076d532e33b48b3438f842507a8cda2d71b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776850"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408031"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Unterschlüssel Ableitung und authentifizierte Verschlüsselung in ASP.net Core
 
@@ -25,21 +27,21 @@ ms.locfileid: "82776850"
 Die meisten Schlüssel im Schlüsselbund enthalten eine Form der Entropie und enthalten algorithmische Informationen, die "CBC-modusverschlüsselung + HMAC-Validierung" oder "GCM-Verschlüsselung + Validierung" angeben. In diesen Fällen verweisen wir auf die eingebettete Entropie als Hauptschlüssel Material (oder km) für diesen Schlüssel und führen eine Schlüssel Ableitungen Funktion aus, um die Schlüssel abzuleiten, die für die eigentlichen Kryptografievorgänge verwendet werden.
 
 > [!NOTE]
-> Schlüssel sind abstrakt, und eine benutzerdefinierte Implementierung verhält sich möglicherweise nicht wie unten beschrieben. Wenn der Schlüssel seine eigene Implementierung von `IAuthenticatedEncryptor` bereitstellt, anstatt eine unserer integrierten Factorys zu verwenden, gilt der in diesem Abschnitt beschriebene Mechanismus nicht mehr.
+> Schlüssel sind abstrakt, und eine benutzerdefinierte Implementierung verhält sich möglicherweise nicht wie unten beschrieben. Wenn der Schlüssel seine eigene Implementierung von bereitstellt `IAuthenticatedEncryptor` , anstatt eine unserer integrierten Factorys zu verwenden, gilt der in diesem Abschnitt beschriebene Mechanismus nicht mehr.
 
 <a name="data-protection-implementation-subkey-derivation-aad"></a>
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>Zusätzliche authentifizierte Daten und Unterschlüssel Ableitung
 
-Die `IAuthenticatedEncryptor` -Schnittstelle fungiert als Kernschnittstelle für alle authentifizierten Verschlüsselungs Vorgänge. Die `Encrypt` zugehörige-Methode nimmt zwei Puffer an: Klartext und additionalauthentiereddata (AAD). Der nur-Text-Inhalt fließt unverändert zum Aufrufen `IDataProtector.Protect`von, aber das Aad wird vom System generiert und besteht aus drei Komponenten:
+Die- `IAuthenticatedEncryptor` Schnittstelle fungiert als Kernschnittstelle für alle authentifizierten Verschlüsselungs Vorgänge. Die zugehörige- `Encrypt` Methode nimmt zwei Puffer an: Klartext und additionalauthentiereddata (AAD). Der nur-Text-Inhalt fließt unverändert zum Aufrufen `IDataProtector.Protect` von, aber das Aad wird vom System generiert und besteht aus drei Komponenten:
 
 1. Der 32-Bit Magic Header 09 F0 C9 F0, der diese Version des Datenschutzsystems identifiziert.
 
 2. Die 128-Bit-Schlüssel-ID.
 
-3. Eine Zeichenfolge variabler Länge, die aus der Zweck Kette gebildet wird `IDataProtector` , die den erstellt hat, der diesen Vorgang ausführt.
+3. Eine Zeichenfolge variabler Länge, die aus der Zweck Kette gebildet wird, die den erstellt hat `IDataProtector` , der diesen Vorgang ausführt.
 
-Da Aad für das Tupel aller drei Komponenten eindeutig ist, kann es verwendet werden, um neue Schlüssel von km zu ableiten, anstatt km selbst in allen kryptografischen Vorgängen zu verwenden. Für jeden-Aufrufe `IAuthenticatedEncryptor.Encrypt`findet der folgende Schlüssel abderivationsprozess statt:
+Da Aad für das Tupel aller drei Komponenten eindeutig ist, kann es verwendet werden, um neue Schlüssel von km zu ableiten, anstatt km selbst in allen kryptografischen Vorgängen zu verwenden. Für jeden-Aufrufe `IAuthenticatedEncryptor.Encrypt` findet der folgende Schlüssel abderivationsprozess statt:
 
 (K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contexderader | | keymodifier)
 
@@ -53,7 +55,7 @@ Hier rufen wir die NIST SP800-108 KDF im Counter-Modus (siehe [NIST SP800-108](h
 
 * Context = contexteader | | keymodifier
 
-Der Kontext Header weist eine Variable Länge auf und fungiert im Wesentlichen als Fingerabdruck der Algorithmen, für die K_E und K_H abgeleitet werden. Der schlüsselmodifizierer ist eine 128-Bit-Zeichenfolge, die `Encrypt` nach dem Zufallsprinzip für jeden-Befehl generiert wird, und stellt sicher, dass KE und KH für diesen spezifischen Authentifizierungs Verschlüsselungs Vorgang eindeutig sind, auch wenn alle anderen Eingaben für die KDF konstant sind.
+Der Kontext Header weist eine Variable Länge auf und fungiert im Wesentlichen als Fingerabdruck der Algorithmen, für die K_E und K_H abgeleitet werden. Der schlüsselmodifizierer ist eine 128-Bit-Zeichenfolge, die nach dem Zufallsprinzip für jeden-Befehl generiert wird, `Encrypt` und stellt sicher, dass KE und KH für diesen spezifischen Authentifizierungs Verschlüsselungs Vorgang eindeutig sind, auch wenn alle anderen Eingaben für die KDF konstant sind.
 
 Für CBC-modusverschlüsselung + HMAC-Validierungs Vorgänge | K_E | die Länge des symmetrischen Blockchiffre Schlüssels und | K_H | Die Hashgröße der HMAC-Routine. Für GCM-Verschlüsselung und Validierungs Vorgänge | K_H | = 0.
 

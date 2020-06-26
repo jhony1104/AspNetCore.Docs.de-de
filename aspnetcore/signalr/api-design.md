@@ -1,83 +1,91 @@
 ---
-title: Überlegungen zum Entwurf der SignalR-API
+title: SignalRAPI-Entwurfs Überlegungen
 author: anurse
-description: Erfahren Sie, wie SignalR-APIs für die Kompatibilität zwischen Versionen Ihrer App zu entwerfen.
+description: Erfahren Sie, wie Sie SignalR APIs für die Kompatibilität zwischen verschiedenen Versionen Ihrer APP entwerfen.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 3f17bf055b793e8fc91fbcc15f668928ca261f77
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897807"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407797"
 ---
-# <a name="signalr-api-design-considerations"></a>Überlegungen zum Entwurf der SignalR-API
+# <a name="signalr-api-design-considerations"></a>SignalRAPI-Entwurfs Überlegungen
 
-Durch [Andrew Stanton-Nurse](https://twitter.com/anurse)
+Von [Andrew Stanton-Nurse](https://twitter.com/anurse)
 
-Dieser Artikel enthält Anleitungen zum Erstellen von SignalR-basierten APIs.
+Dieser Artikel enthält Anleitungen zum Entwickeln von SignalR -basierten APIs.
 
-## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Verwenden Sie benutzerdefiniertes Objekt-Parameter, um Abwärtskompatibilität zu gewährleisten.
+## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Verwenden von benutzerdefinierten Objekt Parametern, um Abwärtskompatibilität zu gewährleisten
 
-Hinzufügen von Parametern an eine SignalR-Hub-Methode (auf dem Client oder Server) ist eine *bedeutende Änderung*. Dies bedeutet, dass ältere Clients oder Server Fehler erhalten, wenn sie versuchen, die ohne die entsprechende Anzahl von Parametern für Methodenaufrufe. Allerdings ist das Hinzufügen von Eigenschaften für einen Parameter des benutzerdefinierten Objekts **nicht** eine unterbrechende Änderung. Dies kann verwendet werden, zum Entwerfen von kompatiblen APIs, die auf Änderungen auf dem Client oder Server stabil sind.
+Das Hinzufügen von Parametern zu einer SignalR Hub-Methode (auf dem Client oder auf dem Server) ist eine *Breaking Change*. Dies bedeutet, dass ältere Clients/Server Fehler erhalten, wenn Sie versuchen, die Methode ohne die erforderliche Anzahl von Parametern aufzurufen. Das Hinzufügen von Eigenschaften zu einem benutzerdefinierten Objekt Parameter ist jedoch **keine** Breaking Change. Dies kann zum Entwerfen kompatibler APIs verwendet werden, die für Änderungen auf dem Client oder dem Server stabil sind.
 
-Betrachten Sie beispielsweise eine serverseitige API wie folgt aus:
+Stellen Sie sich beispielsweise eine serverseitige API wie die folgende vor:
 
 [!code-csharp[ParameterBasedOldVersion](api-design/sample/Samples.cs?name=ParameterBasedOldVersion)]
 
-Der JavaScript-Client ruft diese Methode mit `invoke` wie folgt:
+Der JavaScript-Client ruft diese Methode mit `invoke` wie folgt auf:
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-Wenn Sie später einen zweiten Parameter an die Servermethode hinzufügen, wird nicht ältere Clients diesen Parameterwert angeben. Zum Beispiel:
+Wenn Sie später der Server Methode einen zweiten Parameter hinzufügen, wird dieser Parameterwert von älteren Clients nicht bereitgestellt. Zum Beispiel:
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
-Wenn der alte Client versucht, diese Methode aufzurufen, erhalten sie eine Fehlermeldung wie folgt:
+Wenn der alte Client versucht, diese Methode aufzurufen, wird eine Fehlermeldung wie die folgende angezeigt:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
-Auf dem Server sehen Sie eine protokollmeldung wie folgt:
+Auf dem Server wird eine Protokollmeldung wie die folgende angezeigt:
 
 ```
 System.IO.InvalidDataException: Invocation provides 1 argument(s) but target expects 2.
 ```
 
-Die alten Clients nur einen Parameter gesendet, aber der neuere API-Server erforderlich, zwei Parameter. Verwenden von benutzerdefinierten Objekten als Parameter können Sie flexibler. Wir ändern die original-API, um ein benutzerdefiniertes Objekt zu verwenden:
+Der alte Client hat nur einen Parameter gesendet, aber die neuere Server-API erforderte zwei Parameter. Die Verwendung von benutzerdefinierten Objekten als Parameter bietet Ihnen mehr Flexibilität. Wir wollen die ursprüngliche API so umgestalten, dass Sie ein benutzerdefiniertes Objekt verwendet:
 
 [!code-csharp[ObjectBasedOldVersion](api-design/sample/Samples.cs?name=ObjectBasedOldVersion)]
 
-Nun verwendet der Client ein Objekt zum Aufrufen der Methode:
+Nun verwendet der Client ein-Objekt, um die-Methode aufzurufen:
 
 [!code-typescript[CallWithObject](api-design/sample/Samples.ts?name=CallWithObject)]
 
-Anstatt einen Parameter hinzufügen, fügen Sie eine Eigenschaft, um die `TotalLengthRequest` Objekt:
+Fügen Sie dem-Objekt eine Eigenschaft hinzu, anstatt einen Parameter hinzuzufügen `TotalLengthRequest` :
 
 [!code-csharp[ObjectBasedNewVersion](api-design/sample/Samples.cs?name=ObjectBasedNewVersion&highlight=4,9-13)]
 
-Wenn die alten Clients sendet einen einzelnen Parameter, die zusätzlichen `Param2` Eigenschaft wechselt `null`. Sie können erkennen, dass eine Nachricht von einem älteren Client gesendet werden, indem Sie überprüfen die `Param2` für `null` und Standardwert anwenden. Ein neuer Client kann beide Parameter senden.
+Wenn der alte Client einen einzelnen Parameter sendet, bleibt die zusätzliche `Param2` Eigenschaft erhalten `null` . Sie können eine Nachricht erkennen, die von einem älteren Client gesendet wurde, indem Sie den `Param2` für prüfen `null` und einen Standardwert anwenden. Ein neuer Client kann beide Parameter senden.
 
 [!code-typescript[CallWithObjectNew](api-design/sample/Samples.ts?name=CallWithObjectNew)]
 
-Dieselbe Vorgehensweise funktioniert für Methoden, die auf dem Client definiert. Sie können ein benutzerdefiniertes Objekt von der Serverseite senden:
+Dieselbe Technik funktioniert auch für Methoden, die auf dem Client definiert sind. Sie können ein benutzerdefiniertes Objekt von der Serverseite senden:
 
 [!code-csharp[ClientSideObjectBasedOld](api-design/sample/Samples.cs?name=ClientSideObjectBasedOld)]
 
-Klicken Sie auf der Clientseite, in dem Sie Zugriff auf die `Message` -Eigenschaft, anstatt einen Parameter:
+Auf der Clientseite greifen Sie auf die-Eigenschaft zu, `Message` anstatt einen Parameter zu verwenden:
 
 [!code-typescript[OnWithObjectOld](api-design/sample/Samples.ts?name=OnWithObjectOld)]
 
-Wenn Sie später die Nutzlast der Absender der Nachricht hinzu, fügen Sie auf das Objekt eine Eigenschaft hinzu:
+Wenn Sie sich später entscheiden, den Absender der Nachricht der Nutzlast hinzuzufügen, fügen Sie dem-Objekt eine Eigenschaft hinzu:
 
 [!code-csharp[ClientSideObjectBasedNew](api-design/sample/Samples.cs?name=ClientSideObjectBasedNew&highlight=5)]
 
-Die älteren Clients wird nicht erwartet werden die `Sender` Wert, sodass sie es ignoriert werden. Ein neuer Client können sie übernehmen, indem Sie aktualisiert, um die neue Eigenschaft zu lesen:
+Die älteren Clients erwarten den Wert nicht `Sender` , sodass Sie ihn ignorieren. Ein neuer Client kann ihn akzeptieren, indem er aktualisiert, um die neue Eigenschaft zu lesen:
 
 [!code-typescript[OnWithObjectNew](api-design/sample/Samples.ts?name=OnWithObjectNew&highlight=2-5)]
 
-Der neue Client ist in diesem Fall auch von einer alten Server, die nicht zur Verfügung stellt, fehlertolerante der `Sender` Wert. Da es sich bei der alte Server sind die `Sender` Wert, der Client überprüft, um festzustellen, ob es vorhanden ist, bevor Sie darauf zugreifen.
+In diesem Fall ist der neue Client auch für einen alten Server tolerant, der den Wert nicht bereitstellt `Sender` . Da der alte Server den Wert nicht bereitstellt `Sender` , überprüft der Client, ob er vorhanden ist, bevor er darauf zugreifen kann.

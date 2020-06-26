@@ -6,27 +6,29 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: bc1597f75d8c5f786d46e59ac027d01ffca077c0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d8c83ca46b1993af1f5e7985571ff012d90b1e01
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768610"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408369"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>Beschränken der Lebensdauer geschützter Nutzlasten in ASP.net Core
 
 Es gibt Szenarien, in denen der Anwendungsentwickler eine geschützte Nutzlast erstellen möchte, die nach einer festgelegten Zeitspanne abläuft. Beispielsweise kann die geschützte Nutzlast ein Token zum Zurücksetzen von Kenn Wörtern darstellen, das nur eine Stunde gültig sein sollte. Es ist für den Entwickler sicherlich möglich, ein eigenes Nutz Last Format zu erstellen, das ein eingebettetes Ablaufdatum enthält, und fortgeschrittene Entwickler möchten dies möglicherweise trotzdem tun, aber für die Mehrzahl der Entwickler, die diese Abläufe verwalten, kann es mühsam sein.
 
-Das Paket [Microsoft. aspnetcore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält hilfsprogrammapis zum Erstellen von Nutzlasten, die nach einem festgelegten Zeitraum automatisch ablaufen, um dies für unsere Entwickler Zielgruppe zu vereinfachen. Diese APIs hängen vom `ITimeLimitedDataProtector` Typ ab.
+Das Paket [Microsoft. aspnetcore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält hilfsprogrammapis zum Erstellen von Nutzlasten, die nach einem festgelegten Zeitraum automatisch ablaufen, um dies für unsere Entwickler Zielgruppe zu vereinfachen. Diese APIs hängen vom Typ ab `ITimeLimitedDataProtector` .
 
 ## <a name="api-usage"></a>API-Verwendung
 
-Die `ITimeLimitedDataProtector` -Schnittstelle ist die Kernschnittstelle zum Schutz und zum Schutz von zeitlich begrenzten und selbst abgelaufenen Nutzlasten. Zum Erstellen einer Instanz von benötigen `ITimeLimitedDataProtector`Sie zunächst eine Instanz einer regulären [idataprotector](xref:security/data-protection/consumer-apis/overview) , die mit einem bestimmten Zweck erstellt wurde. Sobald die `IDataProtector` Instanz verfügbar ist, können Sie `IDataProtector.ToTimeLimitedDataProtector` die Erweiterungsmethode abrufen, um eine Schutzvorrichtung mit den integrierten Ablauf Funktionen zu erhalten.
+Die `ITimeLimitedDataProtector` -Schnittstelle ist die Kernschnittstelle zum Schutz und zum Schutz von zeitlich begrenzten und selbst abgelaufenen Nutzlasten. Zum Erstellen einer Instanz von `ITimeLimitedDataProtector` benötigen Sie zunächst eine Instanz einer regulären [idataprotector](xref:security/data-protection/consumer-apis/overview) , die mit einem bestimmten Zweck erstellt wurde. Sobald die `IDataProtector` Instanz verfügbar ist, können `IDataProtector.ToTimeLimitedDataProtector` Sie die Erweiterungsmethode abrufen, um eine Schutzvorrichtung mit den integrierten Ablauf Funktionen zu erhalten.
 
 `ITimeLimitedDataProtector`macht die folgenden API-Oberflächen-und Erweiterungs Methoden verfügbar:
 
@@ -44,7 +46,7 @@ Die `ITimeLimitedDataProtector` -Schnittstelle ist die Kernschnittstelle zum Sch
 
 * Protect (Zeichenfolge Klartext): Zeichenfolge
 
-Zusätzlich zu den Kern `Protect` Methoden, die nur den nur-Text verwenden, gibt es neue über Ladungen, die das Angeben des Ablaufdatums der Nutzlast ermöglichen. Das Ablaufdatum kann als absolutes Datum (über einen `DateTimeOffset`) oder als relative Zeit (von der aktuellen Systemzeit über einen `TimeSpan`) angegeben werden. Wenn eine Überladung, die keine Ablaufzeit annimmt, aufgerufen wird, wird davon ausgegangen, dass die Nutzlast nie abläuft.
+Zusätzlich zu den Kern `Protect` Methoden, die nur den nur-Text verwenden, gibt es neue über Ladungen, die das Angeben des Ablaufdatums der Nutzlast ermöglichen. Das Ablaufdatum kann als absolutes Datum (über einen `DateTimeOffset` ) oder als relative Zeit (von der aktuellen Systemzeit über einen) angegeben werden `TimeSpan` . Wenn eine Überladung, die keine Ablaufzeit annimmt, aufgerufen wird, wird davon ausgegangen, dass die Nutzlast nie abläuft.
 
 * Schutz aufheben (Byte [] ProtectedData, Ausgabe DateTimeOffset): Byte []
 
@@ -54,7 +56,7 @@ Zusätzlich zu den Kern `Protect` Methoden, die nur den nur-Text verwenden, gibt
 
 * Schutz aufheben (Zeichenfolge ProtectedData): Zeichenfolge
 
-Die `Unprotect` -Methoden geben die ursprünglichen ungeschützten Daten zurück. Wenn die Nutzlast noch nicht abgelaufen ist, wird der absolute Ablauf zusammen mit den ursprünglichen ungeschützten Daten als optionaler out-Parameter zurückgegeben. Wenn die Nutzlast abgelaufen ist, lösen alle über Ladungen der Methode zum Aufheben des Schutzes CryptographicException aus.
+Die- `Unprotect` Methoden geben die ursprünglichen ungeschützten Daten zurück. Wenn die Nutzlast noch nicht abgelaufen ist, wird der absolute Ablauf zusammen mit den ursprünglichen ungeschützten Daten als optionaler out-Parameter zurückgegeben. Wenn die Nutzlast abgelaufen ist, lösen alle über Ladungen der Methode zum Aufheben des Schutzes CryptographicException aus.
 
 >[!WARNING]
 > Es wird nicht empfohlen, diese APIs zu verwenden, um Nutzlasten zu schützen, für die eine langfristige oder unbegrenzte Persistenz erforderlich ist. "Kann ich mir leisten, dass die geschützten Nutzlasten nach einem Monat dauerhaft nicht wieder hergestellt werden können?" kann als gute Faustregel dienen. Wenn die Antwort nein lautet, sollten Entwickler alternative APIs in Erwägung gezogen.
