@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103235"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242965"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Leitfaden zur Bedrohungsabwehr für Blazor Server in ASP.NET Core
 
@@ -134,7 +134,7 @@ Für .NET-Methoden, die JavaScript aufrufen:
 
 Treffen Sie die folgenden Vorkehrungen, um sich gegen die zuvor genannten Szenarios zu schützen:
 
-* Umschließen Sie Aufrufe von JS-Interop in [try-catch](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisungen, um während der Aufrufe gegebenenfalls Fehler abzufangen. Weitere Informationen finden Sie unter <xref:blazor/fundamentals/handle-errors#javascript-interop>.
+* Umschließen Sie Aufrufe von JS-Interop in [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch)-Anweisungen, um während der Aufrufe gegebenenfalls Fehler abzufangen. Weitere Informationen finden Sie unter <xref:blazor/fundamentals/handle-errors#javascript-interop>.
 * Überprüfen Sie die Daten, die bei JS-Interop-Aufrufen zurückgegeben werden, einschließlich der Fehlermeldungen, bevor Sie etwas unternehmen.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Über den Browser aufgerufene .NET-Methoden
@@ -302,7 +302,7 @@ Die clientseitige Fehlermeldung enthält weder den Aufrufstapel noch Details zur
 In JavaScript werden detaillierte Fehlermeldungen wie folgt aktiviert:
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>
-* Der Konfigurationsschlüssel `DetailedErrors` muss auf `true` festgelegt werden. Diese Einstellung können Sie in der Einstellungsdatei der App (*appsettings.json*) vornehmen. Der Schlüssel lässt sich darüber hinaus mithilfe der Umgebungsvariablen `ASPNETCORE_DETAILEDERRORS` auf den Wert `true` festlegen.
+* Der Konfigurationsschlüssel `DetailedErrors` muss auf `true` festgelegt werden. Diese Einstellung können Sie in der Einstellungsdatei der App (`appsettings.json`) vornehmen. Der Schlüssel lässt sich darüber hinaus mithilfe der Umgebungsvariablen `ASPNETCORE_DETAILEDERRORS` auf den Wert `true` festlegen.
 
 > [!WARNING]
 > Das Verfügbarmachen von Fehlerinformationen für internetseitige Clients ist ein Sicherheitsrisiko, dass immer vermieden werden sollte.
@@ -348,7 +348,7 @@ Zusätzlich zu den vom Framework implementierten Schutzmaßnahmen muss die App v
 * Vertrauen Sie nicht der Eingabe für JS-Interop-Aufrufe zwischen JavaScript und .NET-Methoden (beide Richtungen).
 * Die App ist dafür zuständig, dass die Gültigkeit der Argumente und Ergebnisse überprüft wird, selbst wenn die Argumente oder Ergebnisse korrekt deserialisiert wurden.
 
-Das Risiko von XSS besteht nur, wenn die App Benutzereingaben in die gerenderte Seite einbindet. Blazor Server-Komponenten führen einen Schritt zur Kompilierzeit aus, bei dem Markup in einer *.razor*-Datei in eine prozedurale C#-Logik transformiert wird. Zur Laufzeit erstellt die C#-Logik eine *Renderingstruktur*, die die Elemente, den Text und die untergeordneten Komponenten beschreibt. Diese wird mithilfe mehrerer JavaScript-Anweisungen auf das DOM des Browsers angewendet (oder im Falle von Prerendering in HTML serialisiert):
+Das Risiko von XSS besteht nur, wenn die App Benutzereingaben in die gerenderte Seite einbindet. Blazor Server-Komponenten führen einen Schritt zur Kompilierzeit aus, bei dem Markup in einer `.razor`-Datei in eine prozedurale C#-Logik transformiert wird. Zur Laufzeit erstellt die C#-Logik eine *Renderingstruktur*, die die Elemente, den Text und die untergeordneten Komponenten beschreibt. Diese wird mithilfe mehrerer JavaScript-Anweisungen auf das DOM des Browsers angewendet (oder im Falle von Prerendering in HTML serialisiert):
 
 * Benutzereingaben, die über eine normale Razor-Syntax gerendert werden (z. B. `@someStringValue`) stellen kein XSS-Risiko dar, weil die Razor-Syntax mithilfe von Befehlen, die nur Text schreiben können, dem DOM hinzugefügt wird. Selbst wenn der Wert HTML-Markup enthält, wird er als statischer Text angezeigt. Während des Prerenderings wird die Ausgabe HTML-codiert, wodurch der Inhalt ebenfalls als statischer Text angezeigt wird.
 * Skripttags sind nicht zulässig und sollten in der Komponentenrenderingstruktur der App nicht verwendet werden. Wenn Sie ein Skripttag das Markup einer Komponente aufnehmen, wird ein Kompilierzeitfehler zurückgegeben.

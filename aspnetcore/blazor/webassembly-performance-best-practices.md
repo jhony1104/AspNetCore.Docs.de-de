@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: c5169231eec67a43830f761bff7585deff774613
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103276"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243030"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Best Practices zur Blazor WebAssembly-Leistung in ASP.NET Core
 
@@ -76,10 +76,10 @@ Weitere Informationen finden Sie unter <xref:blazor/components/lifecycle#after-c
 
 Komponenten stellen einen bequemen Ansatz dar, um wiederverwendbare Code- und Markupfragmente zu generieren. Allgemein wird empfohlen, einzelne Komponenten zu erstellen, die am besten die Anforderungen der App erfüllen können. Eine Einschränkung besteht darin, dass die einzelnen zusätzlichen untergeordneten Komponenten zur Gesamtzeit beitragen, die benötigt wird, eine übergeordnete Komponente zu rendern. Bei den meisten Apps kann dieser zusätzliche Aufwand vernachlässigt werden. Für Apps, die eine große Anzahl Komponenten erzeugen, sollte die Verwendung von Strategien in Betracht gezogen werden, die den Verarbeitungsaufwand reduzieren, z. B. indem die Anzahl gerenderter Komponenten begrenzt wird.
 
-Bei einem Raster oder einer Liste, die Hunderte Datensätze rendert, die Komponenten enthalten, ist die Auslastung des Prozessors für das Rendern beispielsweise höher. Ziehen Sie es in Betracht, ein Raster oder ein Listenlayout zu virtualisieren, sodass nur eine Teilmenge der Komponenten jeweils gleichzeitig gerendert wird. Ein Beispiel für das Rendern einer Teilmenge von Komponenten finden Sie mit den folgenden Komponenten unter [Virtualisierungsbeispiel-App (aspnet/samples, GitHub-Repository)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization):
+Bei einem Raster oder einer Liste, die Hunderte Datensätze rendert, die Komponenten enthalten, ist die Auslastung des Prozessors für das Rendern beispielsweise höher. Ziehen Sie es in Betracht, ein Raster oder ein Listenlayout zu virtualisieren, sodass nur eine Teilmenge der Komponenten jeweils gleichzeitig gerendert wird. Ein Beispiel für das Rendern einer Teilmenge von Komponenten finden Sie bei den folgenden Komponenten unter [`Virtualization`-Beispiel-App (aspnet/samples, GitHub-Repository)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization):
 
-* `Virtualize`-Komponente ([Shared/Virtualize.razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): Eine in C# geschriebene Komponente, die <xref:Microsoft.AspNetCore.Components.ComponentBase> implementiert, um mehrere Wetterdatensätze basierend auf dem Scrollen des Benutzers zu rendern
-* `FetchData`-Komponente ([Pages/FetchData.razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): Verwendet die `Virtualize`-Komponente, um 25 Wetterdatensätze gleichzeitig anzuzeigen
+* `Virtualize`-Komponente ([`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): Eine in C# geschriebene Komponente, die <xref:Microsoft.AspNetCore.Components.ComponentBase> implementiert, um mehrere Wetterdatensätze basierend auf dem Scrollen des Benutzers zu rendern
+* `FetchData`-Komponente ([`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): Verwendet die `Virtualize`-Komponente, um 25 Wetterdatensätze gleichzeitig anzuzeigen
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>Vermeiden von JavaScript-Interoperabilität zum Marshallen von Daten
 
@@ -89,7 +89,7 @@ In Blazor WebAssembly muss ein JavaScript-Interop-Aufruf (JS) die WebAssembly-JS
 
 Die JS-Interop-Implementierung von Blazor basiert auf <xref:System.Text.Json>. Dabei handelt es sich um eine JSON-Hochleistungsserialisierungsbibliothek mit niedriger Arbeitsspeicherzuteilung. Das Verwenden von <xref:System.Text.Json> führt nicht zu einer zusätzlichen Nutzlastgröße für die App, wenn eine oder mehrere alternative JSON-Bibliotheken hinzufügt werden.
 
-Eine Anleitung zur Migration finden Sie unter [Migration von Newtonsoft.Json zu System.Text.Json](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to).
+Eine Anleitung zur Migration finden Sie unter [Migration von `Newtonsoft.Json` zu `System.Text.Json`](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to).
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>Verwenden von synchronen und nicht gemarshallten JS-Interop-APIs (wenn möglich)
 
@@ -138,7 +138,7 @@ Blazor WebAssembly bietet zwei zusätzliche Versionen von <xref:Microsoft.JSInte
 
 ### <a name="intermediate-language-il-linking"></a>Intermediate Language-Verknüpfung (IL)
 
-[Das Konfigurieren eines Linkers für eine Blazor WebAssembly-App](xref:blazor/host-and-deploy/configure-linker) reduziert die Größe der App, indem nicht genutzter Code in den Binärdateien der App gekürzt wird. Standardmäßig ist der Linker nur aktiviert, wenn der Erstellvorgang in der `Release`-Konfiguration ausgeführt wird. Veröffentlichen Sie die App für die Bereitstellung mithilfe des Befehls [dotnet publish](/dotnet/core/tools/dotnet-publish) mit auf `Release` festgelegter Option [-c|--configuration](/dotnet/core/tools/dotnet-publish#options), um diesen Vorteil zu nutzen.
+[Das Konfigurieren eines Linkers für eine Blazor WebAssembly-App](xref:blazor/host-and-deploy/configure-linker) reduziert die Größe der App, indem nicht genutzter Code in den Binärdateien der App gekürzt wird. Standardmäßig ist der Linker nur aktiviert, wenn der Erstellvorgang in der `Release`-Konfiguration ausgeführt wird. Veröffentlichen Sie die App für die Bereitstellung mithilfe des Befehls [`dotnet publish`](/dotnet/core/tools/dotnet-publish) mit auf `Release` festgelegter Option [-c|--configuration](/dotnet/core/tools/dotnet-publish#options), um diesen Vorteil zu nutzen:
 
 ```dotnetcli
 dotnet publish -c Release

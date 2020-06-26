@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 203f29ce606a313463e416b068177ce02acd6231
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a527e04cf97dd2d2b88dcc6e866475835498545d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103249"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243615"
 ---
 # <a name="aspnet-core-blazor-environments"></a>ASP.NET Core Blazor-Umgebungen
 
@@ -31,7 +31,7 @@ Eine gehostete Blazor WebAssembly-App übernimmt die Umgebung vom Server mittels
 
 Wenn eine eigenständige App lokal ausgeführt wird, fügt der Entwicklungsserver den `blazor-environment`-Header hinzu, um die Entwicklungsumgebung anzugeben. Um die Umgebung für andere Hostingumgebungen anzugeben, fügen Sie den `blazor-environment`-Header hinzu.
 
-Im folgenden Beispiel für IIS fügen Sie den benutzerdefinierten Header zu der veröffentlichten Datei *web.config* hinzu. Die Datei *web.config* befindet sich im Ordner */bin/Release/{ZIELFRAMEWORK}/publish*:
+Im folgenden Beispiel für IIS fügen Sie den benutzerdefinierten Header zu der veröffentlichten Datei `web.config` hinzu. Die `web.config`-Datei befindet sich im Ordner `bin/Release/{TARGET FRAMEWORK}/publish`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ Im folgenden Beispiel für IIS fügen Sie den benutzerdefinierten Header zu der 
 ```
 
 > [!NOTE]
-> Informationen zum Verwenden einer benutzerdefinierten Datei *web.config* für IIS, die nicht überschrieben wird, wenn die App im Ordner *publish* veröffentlicht wird, finden Sie unter <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>.
+> Informationen zum Verwenden einer benutzerdefinierten Datei `web.config` für IIS, die nicht überschrieben wird, wenn die App im Ordner `publish` veröffentlicht wird, finden Sie unter <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>.
 
 Rufen Sie die Umgebung der App in einer Komponente ab, indem Sie <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> einfügen und die <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment>-Eigenschaft lesen:
 

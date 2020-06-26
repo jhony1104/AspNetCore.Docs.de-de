@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 22e9af6ed0a6215e881ed733aa0ba3ad8c6cc78e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 3dfaa043fd2e6bc092c2db828563aeaedaa9d272
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103287"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243537"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sichern einer gehosteten ASP.NET Core Blazor WebAssembly-App mit Azure Active Directory B2C
 
@@ -102,7 +102,7 @@ Gehen Sie unter **Startseite** > **Azure AD B2C** > **Benutzerflows** wie folgt 
 
 [Erstellen Sie einen Benutzerflow für die Registrierung und Anmeldung](/azure/active-directory-b2c/tutorial-create-user-flows)
 
-Wählen Sie mindestens das Benutzerattribut **Anwendungsansprüche** > **Anzeigename** aus, um `context.User.Identity.Name` in der `LoginDisplay`-Komponente (*Shared/LoginDisplay.razor*) auszufüllen.
+Wählen Sie mindestens das Benutzerattribut **Anwendungsansprüche** > **Anzeigename** aus, um `context.User.Identity.Name` in der `LoginDisplay`-Komponente (`Shared/LoginDisplay.razor`) auszufüllen.
 
 Notieren Sie sich den Namen des für die App erstellten Benutzerflows für die Registrierung und Anmeldung (z. B. `B2C_1_signupsignin`).
 
@@ -119,10 +119,10 @@ Zum Angeben eines Ausgabespeicherorts (wodurch ein Projektordner erstellt wird, 
 > [!NOTE]
 > Übergeben Sie den App-ID-URI an die Option `app-id-uri`. Beachten Sie jedoch, dass eine Änderung der Konfiguration in der Client-App erforderlich sein könnte, die im Abschnitt [Zugriffstokenbereiche](#access-token-scopes) beschrieben ist.
 >
-> Außerdem könnte der von der gehosteten Blazor-Vorlage festgelegte Bereich den Host des App-ID-URI wiederholt haben. Vergewissern Sie sich, dass der für die `DefaultAccessTokenScopes`-Sammlung konfigurierte Bereich in `Program.Main` (*Program.cs*) der *Client-App* korrekt ist.
+> Außerdem könnte der von der gehosteten Blazor-Vorlage festgelegte Bereich den Host des App-ID-URI wiederholt haben. Vergewissern Sie sich, dass der für die `DefaultAccessTokenScopes`-Sammlung konfigurierte Bereich in `Program.Main` (`Program.cs`) der *Client-App* korrekt ist.
 
 > [!NOTE]
-> Im Azure-Portal ist der **Authentifizierung** > **Plattformkonfigurationen** > **Web** > **Umleitungs-URI** der *Client-App* für Apps für Port 5001 konfiguriert, die auf dem Kestrel-Server mit Standardeinstellungen ausgeführt werden.
+> Im Azure-Portal ist der **Authentifizierung** > **Plattformkonfigurationen** > **Web** > **Umleitungs-URI** der *Client-App* für Apps für Port 5001 konfiguriert, die auf dem Kestrel-Server mit Standardeinstellungen ausgeführt werden.
 >
 > Wenn die *Client-App* auf einem zufälligen IIS Express-Port ausgeführt wird, finden Sie den Port der App in den Eigenschaften der *Server-App* im Panel **Debuggen**.
 >
@@ -130,11 +130,11 @@ Zum Angeben eines Ausgabespeicherorts (wodurch ein Projektordner erstellt wird, 
 
 ## <a name="server-app-configuration"></a>Server-App-Konfiguration
 
-*Dieser Abschnitt bezieht sich auf die **Server**-App der Lösung.*
+*Dieser Abschnitt bezieht sich auf die **`Server`** -App der Lösung.*
 
 ### <a name="authentication-package"></a>Authentifizierungspaket
 
-Die Unterstützung für die Authentifizierung und Autorisierung von Aufrufen von ASP.NET Core-Web-APIs wird vom Paket [Microsoft.AspNetCore.Authentication.AzureADB2C.UI](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.AzureADB2C.UI/) bereitgestellt:
+Die Unterstützung für die Authentifizierung und Autorisierung von Aufrufen von ASP.NET Core-Web-APIs wird vom Paket [`Microsoft.AspNetCore.Authentication.AzureADB2C.UI`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.AzureADB2C.UI/) bereitgestellt:
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
@@ -164,7 +164,7 @@ app.UseAuthorization();
 
 `User.Identity.Name` wird standardmäßig nicht ausgefüllt.
 
-Konfigurieren Sie [TokenValidationParameters.NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) von <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`, um die App so zu konfigurieren, dass sie den Wert aus dem `name`-Anspruchstyp empfängt:
+Konfigurieren Sie <xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType?displayProperty=nameWithType> von <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`, um die App so zu konfigurieren, dass sie den Wert aus dem `name`-Anspruchstyp empfängt:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -180,7 +180,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="app-settings"></a>App-Einstellungen
 
-Die Datei *appsettings.json* enthält die Optionen zum Konfigurieren des JWT-Bearerhandlers, der zum Überprüfen von Zugriffstoken verwendet wird.
+Die Datei `appsettings.json` enthält die Optionen zum Konfigurieren des JWT-Bearerhandlers, der zum Überprüfen von Zugriffstoken verwendet wird.
 
 ```json
 {
@@ -229,11 +229,11 @@ public class WeatherForecastController : ControllerBase
 
 ## <a name="client-app-configuration"></a>Client-App-Konfiguration
 
-*Dieser Abschnitt bezieht sich auf die **Client**-App der Lösung.*
+*Dieser Abschnitt bezieht sich auf die **`Client`** -App der Lösung.*
 
 ### <a name="authentication-package"></a>Authentifizierungspaket
 
-Wenn eine App zum Verwenden eines B2C-Einzelkontos (`IndividualB2C`) erstellt wird, erhält die App automatisch einen Paketverweis für die [Authentifizierungsbibliothek von Microsoft](/azure/active-directory/develop/msal-overview) ([Microsoft.Authentication.WebAssembly.Msal](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)). Das Paket stellt einige Primitive bereit, die der App beim Authentifizieren von Benutzern und beim Abrufen von Token zum Aufrufen geschützter APIs helfen.
+Wenn eine App zum Verwenden eines B2C-Einzelkontos (`IndividualB2C`) erstellt wird, erhält die App automatisch einen Paketverweis für die [Authentifizierungsbibliothek von Microsoft](/azure/active-directory/develop/msal-overview) ([`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)). Das Paket stellt einige Primitive bereit, die der App beim Authentifizieren von Benutzern und beim Abrufen von Token zum Aufrufen geschützter APIs helfen.
 
 Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manuell der Projektdatei der App hinzu:
 
@@ -242,13 +242,13 @@ Wenn Sie einer App eine Authentifizierung hinzufügen, fügen Sie das Paket manu
   Version="3.2.0" />
 ```
 
-Das [Microsoft.Authentication.WebAssembly.Msal](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)-Paket fügt der App das Paket [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) transitiv hinzu.
+Das [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)-Paket fügt der App das [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)-Paket transitiv hinzu.
 
 ### <a name="authentication-service-support"></a>Unterstützung für Authentifizierungsdienste
 
 Es wird Unterstützung für <xref:System.Net.Http.HttpClient>-Instanzen hinzugefügt, die bei Anforderungen an das Serverprojekt Zugriffstoken einschließen.
 
-*Program.cs*:
+`Program.cs`:
 
 ```csharp
 builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client => 
@@ -261,9 +261,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 Der Platzhalter `{APP ASSEMBLY}` ist der Assemblyname der App (z. B. `BlazorSample.ServerAPI`).
 
-Die Unterstützung für die Authentifizierung von Benutzern wird im Dienstcontainer mit der vom Paket [Microsoft.Authentication.WebAssembly.Msal](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) bereitgestellten <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>-Erweiterungsmethode registriert. Diese Methode richtet die Dienste ein, die erforderlich sind, damit die App mit dem Identitätsanbieter interagiert.
+Die Unterstützung für die Authentifizierung von Benutzern wird im Dienstcontainer mit der vom Paket [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) bereitgestellten <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>-Erweiterungsmethode registriert. Diese Methode richtet die Dienste ein, die erforderlich sind, damit die App mit dem Identitätsanbieter interagiert.
 
-*Program.cs*:
+`Program.cs`:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -275,7 +275,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 Die <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>-Methode akzeptiert einen Rückruf zum Konfigurieren der für die Authentifizierung der App erforderlichen Parameter. Die zum Konfigurieren der App erforderlichen Werte können von der AAD-Konfiguration im Azure-Portal beim Registrieren der App abgerufen werden.
 
-Die Konfiguration wird durch die Datei *wwwroot/appsettings.json* bereitgestellt.
+Die Konfiguration wird durch die Datei `wwwroot/appsettings.json` bereitgestellt:
 
 ```json
 {

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: b4ac0dbc6dabdeff4689544f2e11278b8302c553
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103253"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242796"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>Abhängigkeitsinjektion in ASP.NET Core Blazor
 
@@ -47,7 +47,7 @@ Ein benutzerdefinierter Dienstanbieter stellt nicht automatisch die in der Tabel
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Konfigurieren Sie Dienste für die Dienstsammlung der App in der `Main`-Methode von *Program.cs*. Im folgenden Beispiel ist die `MyDependency`-Implementierung für `IMyDependency` registriert:
+Konfigurieren Sie Dienste für die Dienstsammlung der App in der `Main`-Methode von `Program.cs`. Im folgenden Beispiel ist die `MyDependency`-Implementierung für `IMyDependency` registriert:
 
 ```csharp
 public class Program
@@ -84,7 +84,7 @@ public class Program
 }
 ```
 
-Der Host stellt auch eine zentrale Konfigurationsinstanz für die App zur Verfügung. Ausgehend vom vorhergehenden Beispiel wird die URL des Wetterdiensts von einer Standardkonfigurationsquelle (z. B. *appsettings.json*) an `InitializeWeatherAsync` übergeben:
+Der Host stellt auch eine zentrale Konfigurationsinstanz für die App zur Verfügung. Ausgehend vom vorhergehenden Beispiel wird die URL des Wetterdiensts von einer Standardkonfigurationsquelle (z. B. `appsettings.json`) an `InitializeWeatherAsync` übergeben:
 
 ```csharp
 public class Program
@@ -193,7 +193,7 @@ public class DataAccess : IDataAccess
 Voraussetzungen für die Constructor Injection:
 
 * Es muss einen Konstruktor geben, dessen Argumente alle von der Abhängigkeitsinjektion erfüllt werden können. Zusätzliche, nicht durch die Abhängigkeitsinjektion abgedeckte Parameter sind zulässig, wenn sie Standardwerte angeben.
-* Der anwendbare Konstruktor muss *öffentlich* sein.
+* Der anwendbare Konstruktor muss `public` sein.
 * Es muss ein anwendbarer Konstruktor vorhanden sein. Im Falle einer Mehrdeutigkeit löst die Abhängigkeitsinjektion eine Ausnahme aus.
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Hilfsprogramm-Basiskomponentenklassen zur Verwaltung eines Bereichs für die Abhängigkeitsinjektion
@@ -346,5 +346,5 @@ Wenn eine einzelne Komponente gleichzeitig einen <xref:Microsoft.EntityFramework
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * <xref:fundamentals/dependency-injection>
-* [IDisposable-Anleitung für vorübergehende and freigegebene Instanzen](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
+* [`IDisposable`-Anleitung für vorübergehende and freigegebene Instanzen](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

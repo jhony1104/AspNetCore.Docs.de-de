@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103269"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242380"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>Kaskadierende Werte und Parameter in ASP.NET Core Blazor
 
@@ -30,7 +30,7 @@ In einigen Szenarios ist es unpraktisch, Daten mithilfe von [Komponentenparamete
 
 Im folgenden Beispiel aus der Beispiel-App gibt die `ThemeInfo`-Klasse die Designinformationen an, die in der Komponentenhierarchie nach unten weitergegeben werden, sodass alle Schaltflächen innerhalb eines bestimmten Teils der App denselben Stil aufweisen.
 
-*UIThemeClasses/ThemeInfo.cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ In einer Nachfolgerkomponente erhalten die kaskadierenden Parameter ihre Werte n
 
 ### <a name="tabset-example"></a>TabSet-Beispiel
 
-Kaskadierende Parameter ermöglichen auch die Zusammenarbeit von Komponenten in der Komponentenhierarchie. Sehen Sie sich z. B. das folgende *TabSet*-Beispiel in der Beispiel-App an.
+Kaskadierende Parameter ermöglichen auch die Zusammenarbeit von Komponenten in der Komponentenhierarchie. Sehen Sie sich z. B. das folgende `TabSet`-Beispiel in der Beispiel-App an.
 
 Die Beispiel-App enthält eine `ITab`-Schnittstelle, die Registerkarten implementieren:
 

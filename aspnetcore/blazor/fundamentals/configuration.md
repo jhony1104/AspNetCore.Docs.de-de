@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: b43eae03c71cabbaafa2bc0d704765e89f743279
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0e36b81d771b07e85158724c02210ee50a3ab118
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103252"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242679"
 ---
 # <a name="aspnet-core-blazor-configuration"></a>Blazor-Konfiguration in ASP.NET Core
 
@@ -28,8 +28,8 @@ ms.locfileid: "85103252"
 Blazor WebAssembly lädt die Konfiguration von:
 
 * Standardmäßig aus den App-Einstellungsdateien:
-  * *wwwroot/appsettings.json*
-  * *wwwroot/appsettings.{UMGEBUNG}.json*
+  * `wwwroot/appsettings.json`
+  * `wwwroot/appsettings.{ENVIRONMENT}.json`
 * Andere [Konfigurationsanbieter](xref:fundamentals/configuration/index), die von der App registriert werden. Nicht alle Anbieter sind für Blazor WebAssembly-Apps geeignet. Welche Anbieter für Blazor WebAssembly geeignet sind, erfahren Sie unter [Clarify configuration providers for Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134) (Konfigurationsanbieter für Blazor WebAssembly).
 
 > [!WARNING]
@@ -39,7 +39,7 @@ Weitere Informationen zur Konfigurationsanbietern finden Sie unter <xref:fundame
 
 ## <a name="app-settings-configuration"></a>Konfiguration von App-Einstellungen
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -112,9 +112,9 @@ Fügen Sie eine <xref:Microsoft.Extensions.Configuration.IConfiguration>-Instanz
 }
 ```
 
-Um andere Konfigurationsdateien aus dem Ordner *wwwwroot* in die Konfiguration einzulesen, verwenden Sie einen <xref:System.Net.Http.HttpClient>, um den Inhalt der Datei abzurufen. Bei diesem Ansatz kann die vorhandene <xref:System.Net.Http.HttpClient>-Dienstregistrierung den zum Lesen der Datei erstellten lokalen Client verwenden, wie im folgenden Beispiel gezeigt:
+Um andere Konfigurationsdateien aus dem Ordner `wwwroot` in die Konfiguration einzulesen, verwenden Sie einen <xref:System.Net.Http.HttpClient>, um den Inhalt der Datei abzurufen. Bei diesem Ansatz kann die vorhandene <xref:System.Net.Http.HttpClient>-Dienstregistrierung den zum Lesen der Datei erstellten lokalen Client verwenden, wie im folgenden Beispiel gezeigt:
 
-*wwwroot/cars.json*:
+`wwwroot/cars.json`:
 
 ```json
 {
@@ -144,7 +144,7 @@ builder.Configuration.AddJsonStream(stream);
 
 ## <a name="authentication-configuration"></a>Authentifizierungskonfiguration
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -164,13 +164,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logging-configuration"></a>Konfiguration der Protokollierung
 
-Fügen Sie einen Paketverweis für [Microsoft.Extensions.Logging.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) hinzu:
+Fügen Sie einen Paketverweis für [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) hinzu:
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -208,6 +208,6 @@ var hostname = builder.Configuration["HostName"];
 Konfigurationsdateien werden zur Offlineverwendung zwischengespeichert. Bei [progressiven Web-Apps (PWAs)](xref:blazor/progressive-web-app) können Sie Konfigurationsdateien nur beim Erstellen einer neuen Bereitstellung aktualisieren. Die Bearbeitung von Konfigurationsdateien zwischen Bereitstellungen hat aus folgenden Gründen keine Auswirkungen:
 
 * Benutzer verfügen über zwischengespeicherte Versionen der Dateien, die sie weiterhin verwenden können.
-* Die Dateien *service-worker.js* und *service-worker-assets.js* der PWA müssen bei der Kompilierung neu erstellt werden, wodurch der App beim nächsten Onlineaufruf des Benutzers signalisiert wird, dass die App neu bereitgestellt wurde.
+* Die Dateien `service-worker.js` und `service-worker-assets.js` der PWA müssen bei der Kompilierung neu erstellt werden, wodurch der App beim nächsten Onlineaufruf des Benutzers signalisiert wird, dass die App neu bereitgestellt wurde.
 
 Weitere Informationen zur Verarbeitung von Updates im Hintergrund durch PWAs finden Sie unter <xref:blazor/progressive-web-app#background-updates>.
