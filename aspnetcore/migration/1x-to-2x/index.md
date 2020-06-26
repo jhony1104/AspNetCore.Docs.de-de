@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1b7b89b130f66c851bf01d0eb6d643e4b3676a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774222"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408694"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrieren von ASP.NET Core 1.x zu 2.0
 
@@ -124,7 +126,7 @@ In 1.x-Projekten konnten Sie Konfigurationsanbieter einer App mit dem `Startup`-
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-Im vorherigen Beispiel wurde der `Configuration`-Member mit Konfigurationseinstellen aus *appsettings.json* geladen sowie aus jeder anderen *appsettings.\<Umgebungsname\>.json*-Datei, die mit der `IHostingEnvironment.EnvironmentName`-Eigenschaft übereinstimmt. Diese Dateien befinden sich am gleichen Speicherort wie *startup.cs*.
+Im vorherigen Beispiel wurde der `Configuration`-Member mit Konfigurationseinstellen aus *appsettings.json* geladen sowie aus jeder anderen *appsettings.\<EnvironmentName\>.json*-Datei, die mit der Eigenschaft `IHostingEnvironment.EnvironmentName` übereinstimmt. Diese Dateien befinden sich am gleichen Speicherort wie *startup.cs*.
 
 In 2.0-Projekten wird der Bausteinkonfigurationsknoten, der 1.x-Projekten eigen ist, im Hintergrund ausgeführt. Umgebungsvariablen und App-Einstellungen werden beispielsweise beim Start geladen. Der entsprechende Code *startup.cs* wird zur `IConfiguration`-Initialisierung mit der eingefügten Instanz reduziert:
 

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: 0f0e97246b6e1381b85866bd831ee9b4b150650d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774326"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403299"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core – Grundlagen
 
@@ -223,7 +225,7 @@ Der Webstamm ist der Basispfad für öffentliche, statische Ressourcendateien, z
 
 Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis und dessen Unterverzeichnissen bereitgestellt. Standardmäßig lautet der Webstammpfad *{Inhaltsstamm}/wwwroot*. Sie können einen anderen Webstamm festlegen, indem Sie den entsprechenden Pfad beim [Erstellen des Hosts](#host) festlegen. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/generic-host#webroot).
 
-Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im Verzeichnis *wwwroot/local* und dessen Unterverzeichnissen veröffentlicht werden:
+Verhindern Sie das Veröffentlichen von Dateien in *wwwroot* mit dem [\<Content>-Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im Verzeichnis *wwwroot/local* und dessen Unterverzeichnissen veröffentlicht werden:
 
 ```xml
 <ItemGroup>
@@ -231,7 +233,7 @@ Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Pro
 </ItemGroup>
 ```
 
-In *CSHTML*-Dateien von Razor zeigen Tilden mit anschließendem Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
+In Razor-Dateien ( *.cshtml*) verweisen Tilde und Schrägstrich (`~/`) auf den Webstamm. Ein mit `~/` beginnender Pfad wird als *virtueller Pfad* bezeichnet.
 
 Weitere Informationen finden Sie unter <xref:fundamentals/static-files>.
 
@@ -481,7 +483,7 @@ Statische Dateien werden standardmäßig nur aus dem Webstammverzeichnis (samt U
 
 Der Webstammpfad ist standardmäßig auf *{Inhaltsstamm}/wwwroot* festgelegt, doch beim [Erstellen des Hosts](#host) kann ein anderer Webstamm angegeben werden. Weitere Informationen finden Sie unter [Webstamm](xref:fundamentals/host/web-host#web-root).
 
-Verhindern Sie das Veröffentlichen von Datei in *wwwroot* über [\<Inhalt > Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im *wwwroot/local*-Verzeichnis und in Unterverzeichnisse veröffentlicht werden:
+Verhindern Sie das Veröffentlichen von Dateien in *wwwroot* mit dem [\<Content>-Projektelement](/visualstudio/msbuild/common-msbuild-project-items#content) in der Projektdatei. Im folgenden Beispiel wird verhindert, dass Inhalte im *wwwroot/local*-Verzeichnis und in Unterverzeichnisse veröffentlicht werden:
 
 ```xml
 <ItemGroup>

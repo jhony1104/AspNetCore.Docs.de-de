@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 14cf614bf5d4f2ad6a34c49cb08277a2deae8d00
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: e905f08f867b73fc37d5fed7138256ac89811312
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242949"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402402"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentifizierung und Autorisierung in ASP.NET Core Blazor
 
@@ -40,9 +42,9 @@ Blazor WebAssembly-Apps werden auf dem Client ausgeführt. Die Autorisierung wir
 
 ## <a name="authentication"></a>Authentifizierung
 
-Blazor verwendet die vorhandenen ASP.NET Core-Authentifizierungsmechanismen, um die Identität des Benutzers festzustellen. Der genaue Mechanismus hängt davon ab, wie die Blazor-App gehostet wird: über Blazor WebAssembly oder Blazor Server.
+Blazor verwendet die vorhandenen ASP.NET Core-Authentifizierungsmechanismen, um die Identität des Benutzers festzustellen. Der genaue Mechanismus hängt davon ab, wie die Blazor-App gehostet wird – über Blazor WebAssembly oder Blazor Server.
 
-### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly-Authentifizierung
+### <a name="blazor-webassembly-authentication"></a>Authentifizierung per Blazor WebAssembly
 
 In den Blazor WebAssembly-Apps können Authentifizierungsprüfungen umgangen werden, da der gesamte clientseitige Code von Benutzern geändert werden kann. Dasselbe gilt für alle clientseitigen App-Technologien, einschließlich JavaScript SPA-Frameworks oder native Apps für jedes Betriebssystem.
 
@@ -55,7 +57,7 @@ Für die Verarbeitung der Authentifizierung wird die Implementierung eines integ
 
 Weitere Informationen zur Erstellung von Apps und Konfigurationen finden Sie unter <xref:blazor/security/webassembly/index>.
 
-### <a name="blazor-server-authentication"></a>Blazor-Serverauthentifizierung
+### <a name="blazor-server-authentication"></a>Authentifizierung per Blazor Server
 
 Blazor Server-Apps funktionieren über eine Echtzeitverbindung, die mit SignalR erstellt wurde. Die [Authentifizierung in SignalR-basierten Apps wird verarbeitet](xref:signalr/authn-and-authz), wenn die Verbindung hergestellt wird. Die Authentifizierung kann auf einem Cookie oder einem anderen Bearertoken basieren.
 
@@ -149,7 +151,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 }
 ```
 
-In einer Blazor WebAssembly-App wird der `CustomAuthStateProvider`-Dienst in `Main` von `Program.cs` registriert:
+In einer Blazor WebAssembly-App ist der Dienst `CustomAuthStateProvider` in `Main` von `Program.cs` registriert:
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -159,7 +161,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 ```
 
-In einer Blazor Server-App ist der Dienst `CustomAuthStateProvider` in `Startup.ConfigureServices` registriert:
+In einer Blazor Server-App ist der `CustomAuthStateProvider`-Dienst in `Startup.ConfigureServices` registriert:
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -225,7 +227,7 @@ Richten Sie den kaskadierenden Parameter `Task<`<xref:Microsoft.AspNetCore.Compo
 </CascadingAuthenticationState>
 ```
 
-Fügen Sie `Program.Main` in einer Blazor WebAssembly-App Dienste für Optionen und die Autorisierung hinzu:
+Fügen Sie in einer Blazor WebAssembly-App Dienste für Optionen und für die Autorisierung in `Program.Main` hinzu:
 
 ```csharp
 builder.Services.AddOptions();
@@ -460,7 +462,7 @@ Wenn die App zur Überprüfung von Autorisierungsregeln im Rahmen der prozedural
 ```
 
 > [!NOTE]
-> Fügen Sie in einer Komponente einer <xref:Microsoft.AspNetCore.Components.Authorization> WebAssembly-App die Namespaces Blazor und <xref:Microsoft.AspNetCore.Authorization> hinzu:
+> Fügen Sie in einer Komponente einer <xref:Microsoft.AspNetCore.Components.Authorization>-App die Namespaces Blazor WebAssembly und <xref:Microsoft.AspNetCore.Authorization> hinzu:
 >
 > ```razor
 > @using Microsoft.AspNetCore.Authorization

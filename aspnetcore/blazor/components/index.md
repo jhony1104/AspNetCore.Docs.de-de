@@ -5,20 +5,22 @@ description: Erfahren Sie, wie Sie Razor-Komponenten erstellen und verwenden, Da
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/11/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 02e3f7f5442a5abde0b13b7bba14d9d0f29c1de7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242433"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399087"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Erstellen und Verwenden von ASP.NET Core-Razor-Komponenten
 
@@ -83,8 +85,8 @@ Komponenten sind normale C#-Klassen und können an beliebiger Stelle innerhalb e
 
 In der Regel wird der Namespace einer Komponente aus dem Stammnamespace der App und dem Speicherort (Ordner) der Komponente in der App abgeleitet. Wenn der Stammnamespace der App `BlazorApp` lautet und sich die `Counter` Komponente im Ordner `Pages` befindet, gilt Folgendes:
 
-* Der Namespace der `Counter`-Komponente lautet `BlazorApp.Pages`.
-* Der vollqualifizierte Typname der Komponente lautet `BlazorApp.Pages.Counter`.
+* der Namespace der `Counter`-Komponente `BlazorApp.Pages`, und
+* der vollqualifizierten Typname der Komponente ist `BlazorApp.Pages.Counter`.
 
 Fügen Sie für benutzerdefinierte Ordner, die Komponenten enthalten, eine [`@using`][2]-Anweisung zur übergeordneten Komponente oder zur `_Imports.razor`-Datei der App hinzu. Das folgende Beispiel stellt Komponenten im Ordner `Components` zur Verfügung:
 
@@ -427,11 +429,24 @@ Beim Erfassen von Komponentenverweisen wird zwar eine ähnliche Syntax verwendet
 > [!NOTE]
 > Verwenden Sie **keine** Komponentenverweise verwenden, um den Zustand von untergeordneten Komponenten zu verändern. Verwenden Sie stattdessen normale deklarative Parameter, um Daten an untergeordnete Komponenten zu übergeben. Die Verwendung normaler deklarativer Parameter führt dazu, dass untergeordnete Komponenten automatisch zu den richtigen Zeitpunkten gerendert werden.
 
-## <a name="invoke-component-methods-externally-to-update-state"></a>Externes Aufrufen von Komponentenmethoden zur Aktualisierung des Status
+## <a name="synchronization-context"></a>Synchronisierungskontext
 
 Blazor verwendet einen Synchronisierungskontext (<xref:System.Threading.SynchronizationContext>), um einen einzelnen logischen Ausführungsthread zu erzwingen. Die [Lebenszyklusmethoden](xref:blazor/components/lifecycle) einer Komponente und alle Ereignisrückrufe, die von Blazor ausgelöst werden, werden in diesem Synchronisierungskontext ausgeführt.
 
-Der Synchronisierungskontext des Blazor-Servers versucht, eine Singlethreadumgebung zu emulieren, sodass er genau mit dem WebAssembly-Modell im Browser übereinstimmt, das ein Singlethreadmodell ist. Zu jedem Zeitpunkt wird die Arbeit für genau einen Thread ausgeführt, woraus der Eindruck eines einzelnen logischen Threads entsteht. Zwei Vorgänge werden nicht gleichzeitig ausgeführt.
+Der Synchronisierungskontext des Blazor Server versucht, eine Singlethreadumgebung zu emulieren, sodass er genau mit dem WebAssembly-Modell im Browser übereinstimmt, das ein Singlethreadmodell ist. Zu jedem Zeitpunkt wird die Arbeit für genau einen Thread ausgeführt, woraus der Eindruck eines einzelnen logischen Threads entsteht. Zwei Vorgänge werden nicht gleichzeitig ausgeführt.
+
+### <a name="avoid-thread-blocking-calls"></a>Vermeiden Sie eine Threadblockierung von Aufrufen.
+
+Rufen Sie generell folgende Methoden nicht auf. Die folgenden Methoden blockieren den Thread und hindern somit die App an der Wiederaufnahme der Arbeit, bis der zugrunde liegende <xref:System.Threading.Tasks.Task> beendet ist:
+
+* <xref:System.Threading.Tasks.Task%601.Result%2A>
+* <xref:System.Threading.Tasks.Task.Wait%2A>
+* <xref:System.Threading.Tasks.Task.WaitAny%2A>
+* <xref:System.Threading.Tasks.Task.WaitAll%2A>
+* <xref:System.Threading.Thread.Sleep%2A>
+* <xref:System.Runtime.CompilerServices.TaskAwaiter.GetResult%2A>
+
+### <a name="invoke-component-methods-externally-to-update-state"></a>Externes Aufrufen von Komponentenmethoden zur Aktualisierung des Status
 
 Wenn eine Komponente aufgrund eines externen Ereignisses (z. B. eines Timers oder anderer Benachrichtigungen) aktualisiert werden muss, verwenden Sie die `InvokeAsync`-Methode, die an den Synchronisierungskontext von Blazor weitergeleitet wird. Nehmen Sie einen *Benachrichtigungsdienst* als Beispiel, der jede überwachende Komponente des aktualisierten Zustands benachrichtigen kann:
 
@@ -453,13 +468,13 @@ public class NotifierService
 
 Registrieren Sie `NotifierService` als Singleton:
 
-* Registrieren Sie den Dienst in Blazor WebAssembly in `Program.Main`:
+* Registrieren Sie in Blazor WebAssembly den Dienst in `Program.Main`:
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* Registrieren Sie den Dienst in Blazor Server in `Startup.ConfigureServices`:
+* Registrieren Sie in Blazor Server den Dienst in `Startup.ConfigureServices`:
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -798,7 +813,7 @@ SVG-Inlinemarkup wird jedoch nicht in allen Szenarios unterstützt. Wenn Sie ein
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* <xref:blazor/security/server/threat-mitigation>: Enthält Anleitung zum Entwickeln von Blazor-Server-Apps, die sich mit Ressourcenauslastung auseinandersetzen müssen.
+* <xref:blazor/security/server/threat-mitigation>: Enthält Anleitungen zum Erstellen von Blazor Server-Apps, die Ressourcenauslastung handhaben müssen.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

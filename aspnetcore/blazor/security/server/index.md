@@ -1,26 +1,28 @@
 ---
-title: Absichern von Blazor Server-Apps als ASP.NET Core-Anwendungen
+title: Schützen von Blazor Server-Apps von ASP.NET Core
 author: guardrex
-description: Erfahren Sie, wie Sie Blazor Server-Apps als ASP.NET Core-Anwendungen absichern.
+description: Erfahren Sie, wie Sie Blazor Server-Apps als ASP.NET Core-Anwendungen schützen.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292684"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402311"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>Absichern von Blazor Server-Apps als ASP.NET Core-Anwendungen
+# <a name="secure-aspnet-core-blazor-server-apps"></a>Schützen von Blazor Server-Apps von ASP.NET Core
 
 Von [Luke Latham](https://github.com/guardrex)
 
@@ -28,7 +30,7 @@ Das Schützen von Blazor Server-Apps funktioniert genau wie bei ASP.NET Core-App
 
 ## <a name="blazor-server-project-template"></a>Blazor Server-Projektvorlage
 
-Die Projektvorlage „Blazor Server“ kann beim Erstellen des Projekts für die Authentifizierung konfiguriert werden.
+Die Projektvorlage Blazor Server kann beim Erstellen des Projekts für die Authentifizierung konfiguriert werden.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -75,13 +77,13 @@ Weitere Informationen finden Sie im Befehl [`dotnet new`](/dotnet/core/tools/dot
 
 1. Befolgen Sie die Anleitungen für Visual Studio für Mac im Artikel <xref:blazor/get-started>.
 
-1. Wählen Sie im Schritt **Configure your new Blazor Server App** (Ihre neue Blazor Server-App konfigurieren) in der Dropdownliste **Authentifizierung** die Option **Individual Authentication (in-app)** (Individuelle Authentifizierung [in der App]) aus.
+1. Wählen Sie im Schritt **Konfigurieren Ihrer neuen Blazor Server-App** in der Dropdownliste **Authentifizierung** die Option **Individual Authentication (in-app)** (Individuelle Authentifizierung [in der App]) aus.
 
 1. Die Anwendung wird für einzelne Benutzer erstellt, die in der App mit ASP.NET Core-Identität gespeichert sind.
 
 # <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli/)
 
-Befolgen Sie die Anleitungen für die .NET Core-CLI im Artikel <xref:blazor/get-started>, um ein neues Blazor Blazor-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
+Befolgen Sie die Anleitungen für die .NET Core-CLI im Artikel <xref:blazor/get-started>, um ein neues Blazor Server-Projekt mit einem Authentifizierungsmechanismus zu erstellen:
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
