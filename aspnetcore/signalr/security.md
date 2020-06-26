@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: b80ece8c74c0f1d4d8518f0da16a91db9687336c
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755886"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400413"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>Sicherheitsüberlegungen in ASP.net CoreSignalR
 
@@ -28,7 +30,7 @@ Dieser Artikel enthält Informationen zum Sichern von SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Cross-Origin Resource Sharing
 
-[Cross-Origin Resource Sharing (cors)](https://www.w3.org/TR/cors/) kann verwendet werden, um Ursprungs übergreifende SignalR Verbindungen im Browser zuzulassen. Wenn JavaScript-Code in einer anderen Domäne als der APP gehostet wird SignalR , muss [cors-Middleware](xref:security/cors) aktiviert werden, damit JavaScript eine Verbindung mit der App herstellen kann SignalR . Lassen Sie Ursprungs übergreifende Anforderungen nur von vertrauenswürdigen Domänen zu. Beispiel:
+[Cross-Origin Resource Sharing (cors)](https://www.w3.org/TR/cors/) kann verwendet werden, um Ursprungs übergreifende SignalR Verbindungen im Browser zuzulassen. Wenn JavaScript-Code in einer anderen Domäne als der APP gehostet wird SignalR , muss [cors-Middleware](xref:security/cors) aktiviert werden, damit JavaScript eine Verbindung mit der App herstellen kann SignalR . Lassen Sie Ursprungs übergreifende Anforderungen nur von vertrauenswürdigen Domänen zu. Zum Beispiel:
 
 * Ihre Website wird gehostet auf`http://www.example.com`
 * Ihre SignalR App wird gehostet auf`http://signalr.example.com`
@@ -118,7 +120,7 @@ Das verfügbar machen `ConnectionId` von kann zu böswilligem Identitätswechsel
 
 ## <a name="access-token-logging"></a>Protokollierung von Zugriffs Token
 
-Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im Allgemeinen sicher, wenn der Standard Header verwendet wird `Authorization` . Verwenden Sie immer HTTPS, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Beispiel:
+Wenn websockets oder vom Server gesendete Ereignisse verwendet werden, sendet der Browser Client das Zugriffs Token in der Abfrage Zeichenfolge. Der Empfang des Zugriffs Tokens über eine Abfrage Zeichenfolge ist im Allgemeinen sicher, wenn der Standard Header verwendet wird `Authorization` . Verwenden Sie immer HTTPS, um eine sichere End-to-End-Verbindung zwischen dem Client und dem Server sicherzustellen. Viele Webserver protokollieren die URL für jede Anforderung, einschließlich der Abfrage Zeichenfolge. Durch das Protokollieren der URLs kann das Zugriffs Token protokolliert werden. ASP.net Core protokolliert standardmäßig die URL für jede Anforderung, die die Abfrage Zeichenfolge enthält. Zum Beispiel:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

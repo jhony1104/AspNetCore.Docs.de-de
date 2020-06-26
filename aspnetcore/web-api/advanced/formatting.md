@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074225"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400361"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatieren von Antwortdaten in Web-APIs in ASP.NET Core
 
@@ -141,7 +143,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-Optionen zur Ausgabeserialisierung können aktionsweise mithilfe von `JsonResult` konfiguriert werden. Beispiel:
+Optionen zur Ausgabeserialisierung können aktionsweise mithilfe von `JsonResult` konfiguriert werden. Zum Beispiel:
 
 ```csharp
 public IActionResult Get()
@@ -161,7 +163,7 @@ Vor ASP.NET Core 3.0 wurden standardmäßig die JSON-Formatierer verwendet, die
 
 Einige Features funktionieren mit `System.Text.Json`-basierten Formatierern möglicherweise nicht gut und erfordern einen Verweis auf die `Newtonsoft.Json`-basierten Formatierer. Verwenden Sie weiterhin `Newtonsoft.Json`-basierte Formatierer, wenn für die App Folgendes gilt:
 
-* Sie verwendet `Newtonsoft.Json`-Attribute. Zum Beispiel: `[JsonProperty]` oder `[JsonIgnore]`.
+* Sie verwendet `Newtonsoft.Json`-Attribute. Beispielsweise `[JsonProperty]` oder `[JsonIgnore]`.
 * Sie passt die Serialisierungseinstellungen an.
 * Sie nutzt Features, die von `Newtonsoft.Json` bereitgestellt werden.
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` konfiguriert. Vor ASP.NET Core 3.0 akzeptiert `JsonResult.SerializerSettings` eine Instanz von `JsonSerializerSettings`, die für `Newtonsoft.Json` spezifisch ist.
@@ -180,7 +182,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-Optionen zur Ausgabeserialisierung können aktionsweise mithilfe von `JsonResult` konfiguriert werden. Beispiel:
+Optionen zur Ausgabeserialisierung können aktionsweise mithilfe von `JsonResult` konfiguriert werden. Zum Beispiel:
 
 ```csharp
 public IActionResult Get()
@@ -236,7 +238,7 @@ Einige besondere Fälle werden mithilfe von integrierten Formatierungsprogrammen
 
 Ohne den `StringOutputFormatter` formatiert der integrierte JSON-Formatierer `string`-Rückgabetypen. Wenn der integrierte JSON-Formatierer entfernt wird und ein XML-Formatierer verfügbar ist, formatiert der XML-Formatierer `string`-Rückgabetypen. Andernfalls geben `string`-Rückgabetypen `406 Not Acceptable` zurück.
 
-Ohne `HttpNoContentOutputFormatter` werden NULL-Objekte mithilfe des konfigurierten Formatierungsprogramms formatiert. Beispiel:
+Ohne `HttpNoContentOutputFormatter` werden NULL-Objekte mithilfe des konfigurierten Formatierungsprogramms formatiert. Zum Beispiel:
 
 * Der JSON-Formatierer gibt eine Antwort mit dem Text `null` zurück.
 * Der XML-Formatierer gibt ein leeres XML-Element mit festgelegtem Attribut `xsi:nil="true"` zurück.
@@ -248,7 +250,7 @@ Clients können in der URL ein bestimmtes Format anfordern, beispielsweise folge
 * In der Abfragezeichenfolge oder als Teil des Pfads.
 * Durch Verwendung einer formatspezifischen Dateierweiterung wie „.xml“ oder „.json“.
 
-Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die die API verwendet. Beispiel:
+Die Zuordnung des Anforderungspfads sollte in der Route angegeben werden, die die API verwendet. Zum Beispiel:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

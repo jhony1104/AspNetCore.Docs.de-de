@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 7298e514938e8285a1e42afad0f2f71375e2781d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 36d8c3dd42ac9d0acdb93bba4bc39ab18ad5c52f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776473"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400894"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Taghilfsprogramme in ASP.NET Core
 
@@ -25,17 +27,17 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="what-are-tag-helpers"></a>Informationen zu Taghilfsprogrammen
 
-Taghilfsprogramme ermöglichen Server seitigem Code, an der Erstellung und dem Rendern von HTML Razor -Elementen in Dateien beteiligt zu sein. Beispielsweise kann der integrierte `ImageTagHelper` eine Versionsnummer an den Bildnamen anfügen. Bei jeder Änderung des Bilds generiert der Server eine neue eindeutige Version des Bilds, sodass Clients immer das aktuelle Bild (anstelle eines veralteten zwischengespeicherten Bilds) erhalten. Für häufige Aufgaben wie das Erstellen von Formularen und Links sowie das Laden von Objekten gibt es zahlreiche integrierte Taghilfsprogramme. Weitere Taghilfsprogramme sind in öffentlichen GitHub-Repositorys und als NuGet-Pakete verfügbar. Taghilfsprogramme werden in C# erstellt und sind für HTML-Elemente basierend auf dem Elementnamen, dem Attributnamen oder dem übergeordneten Tag konzipiert. Beispielsweise kann der integrierte `LabelTagHelper` für das HTML-`<label>`-Element verwendet werden, wenn die `LabelTagHelper`-Attribute angewendet werden. Wenn Sie mit [HTML](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)-Hilfsprogrammen vertraut sind, verringern taghilfsprogramme die expliziten Übergänge zwischen HTML und Razor c# in Sichten. Häufig stellen HTML-Hilfsprogramme eine Alternative zu einem bestimmten Taghilfsprogramm dar. Allerdings ersetzen Taghilfsprogramme HTML-Hilfsprogramme nicht, und es gibt nicht für jedes HTML-Hilfsprogramm ein Taghilfsprogramm. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert.
+Taghilfsprogramme ermöglichen serverseitigem Code das Mitwirken am Erstellen und Rendern von HTML-Elementen in Razor-Dateien. Beispielsweise kann der integrierte `ImageTagHelper` eine Versionsnummer an den Bildnamen anfügen. Bei jeder Änderung des Bilds generiert der Server eine neue eindeutige Version des Bilds, sodass Clients immer das aktuelle Bild (anstelle eines veralteten zwischengespeicherten Bilds) erhalten. Für häufige Aufgaben wie das Erstellen von Formularen und Links sowie das Laden von Objekten gibt es zahlreiche integrierte Taghilfsprogramme. Weitere Taghilfsprogramme sind in öffentlichen GitHub-Repositorys und als NuGet-Pakete verfügbar. Taghilfsprogramme werden in C# erstellt und sind für HTML-Elemente basierend auf dem Elementnamen, dem Attributnamen oder dem übergeordneten Tag konzipiert. Beispielsweise kann der integrierte `LabelTagHelper` für das HTML-`<label>`-Element verwendet werden, wenn die `LabelTagHelper`-Attribute angewendet werden. Wenn Sie mit [HTML](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)-Hilfsprogrammen vertraut sind, verringern taghilfsprogramme die expliziten Übergänge zwischen HTML und c# in Razor Sichten. Häufig stellen HTML-Hilfsprogramme eine Alternative zu einem bestimmten Taghilfsprogramm dar. Allerdings ersetzen Taghilfsprogramme HTML-Hilfsprogramme nicht, und es gibt nicht für jedes HTML-Hilfsprogramm ein Taghilfsprogramm. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert.
 
 ## <a name="what-tag-helpers-provide"></a>Vorteile eines Taghilfsprogramms
 
-**HTML-freundliche Entwicklungs Benutzerfreundlichkeit** Zum größten Teil sieht Razor Markup mit taghilfsprogrammen wie Standard-HTML aus. Front-End-Designer, die mit HTML/CSS/JavaScript vertraut Razor sind, können ohne Razor Erlernen der c#-Syntax bearbeiten.
+**HTML-freundliche Entwicklungs Benutzerfreundlichkeit** Zum größten Teil Razor sieht Markup mit taghilfsprogrammen wie Standard-HTML aus. Front-End-Designer, die mit HTML/CSS/JavaScript vertraut sind, können Razor ohne Erlernen der c#- Razor Syntax bearbeiten.
 
-**Eine umfangreiche IntelliSense-Umgebung zum Erstellen Razor von HTML-und Markup-** Funktionen ist ein starker Kontrast zu HTML-Hilfsprogrammen, der vorherige Ansatz für Razor die serverseitige Erstellung von Markup in Ansichten. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert. Im Abschnitt [IntelliSense-Unterstützung für Taghilfsprogramme](#intellisense-support-for-tag-helpers) wird die IntelliSense-Umgebung beschrieben. Sogar Entwickler, die Razor die c#-Syntax kennen, sind mit taghilfsprogrammen produktiver Razor als das Schreiben von c#-Markup.
+**Eine umfangreiche IntelliSense-Umgebung zum Erstellen von HTML-und Razor Markup-** Funktionen ist ein starker Kontrast zu HTML-Hilfsprogrammen, der vorherige Ansatz für die serverseitige Erstellung von Markup in Razor Ansichten. Im Abschnitt [Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich](#tag-helpers-compared-to-html-helpers) werden die Unterschiede detaillierter erläutert. Im Abschnitt [IntelliSense-Unterstützung für Taghilfsprogramme](#intellisense-support-for-tag-helpers) wird die IntelliSense-Umgebung beschrieben. Sogar Entwickler, Razor die die c#-Syntax kennen, sind mit taghilfsprogrammen produktiver als das Schreiben von c#- Razor Markup.
 
 **Produktiveres Arbeiten und Erstellen von stabilerem, zuverlässigerem und verwaltbarem Code mithilfe von Informationen, die nur auf dem Server verfügbar sind** Beispielsweise galt in der Vergangenheit für das Aktualisieren von Bildern, dass auch der Name des Bildes geändert werden muss, wenn das Bild geändert wurde. Bilder sollten zur Verbesserung der Leistung immer zwischengespeichert werden, denn wenn Sie nicht den Namen des Bildes ändern, kann es sein, dass Clients veraltete Kopien erhalten. In der Vergangenheit musste der Name des Bildes immer geändert werden, wenn dieses bearbeitet wurde, und jeder Verweis auf das Bild in der Web-App musste aktualisiert werden. Dies ist nicht nur sehr arbeitsintensiv, sondern auch fehleranfällig (Sie könnten einen Verweis übersehen, versehentlich die falsche Zeichenfolge eingeben usw.) Das integrierte `ImageTagHelper` kann dies automatisch für Sie ausführen. Das `ImageTagHelper`-Taghilfsprogramm kann eine Versionsnummer an den Bildnamen anfügen. Das bedeutet, dass der Server bei jeder Änderung eine neue eindeutige Version für das Bild generiert. Clients erhalten dann immer das aktuelle Bild. Die Verwendung des `ImageTagHelper` ist grundsätzlich kostenlos, bietet mehr Stabilität, und Sie sparen Zeit.
 
-Die meisten integrierten Taghilfsprogramme sind für HTML-Standardelemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit. Das `<input>`-Element, das in vielen Ansichten im Ordner *Views/Accounts* (Ansichten/Konten) verwendet wird, enthält beispielsweise das `asp-for`-Attribut. Dieses Attribut extrahiert den Namen der angegebenen Modelleigenschaft, und fügt diesen in die gerenderte HTML-Seite ein. Betrachten Sie Razor eine Ansicht mit dem folgenden Modell:
+Die meisten integrierten Taghilfsprogramme sind für HTML-Standardelemente konzipiert und stellen serverseitige Attribute für die jeweiligen Elemente bereit. Das `<input>`-Element, das in vielen Ansichten im Ordner *Views/Accounts* (Ansichten/Konten) verwendet wird, enthält beispielsweise das `asp-for`-Attribut. Dieses Attribut extrahiert den Namen der angegebenen Modelleigenschaft, und fügt diesen in die gerenderte HTML-Seite ein. Betrachten Sie eine Razor Ansicht mit dem folgenden Modell:
 
 ```csharp
 public class Movie
@@ -74,7 +76,7 @@ Wenn Sie eine neue ASP.NET Core-Web-App mit dem Namen *AuthoringTagHelpers* erst
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-Über die `@addTagHelper`-Anweisung werden Taghilfsprogramme in der Ansicht zur Verfügung gestellt. In diesem Fall ist die Ansichts Datei *pages/_ViewImports. cshtml*, die standardmäßig von allen Dateien im Ordner " *pages* " und den Unterordnern geerbt wird. Bereitstellen von taghilfsprogrammen Im obigen Code wird die Platzhalter Syntax (\*"") verwendet, um anzugeben, dass alle taghilfsprogramme in der angegebenen Assembly (*Microsoft. aspnetcore. MVC. taghilfsprogramme*) für jede Ansichts Datei im Verzeichnis " *views* " oder Unterverzeichnis verfügbar sind. Über den ersten Parameter nach `@addTagHelper` wird das Taghilfsprogramm geladen („\*“ wird für alle Taghilfsprogramme verwendet), und über den zweiten Parameter „Microsoft.AspNetCore.Mvc.TagHelpers“ wird die Assembly angegeben, die die Taghilfsprogramme enthält. Bei *Microsoft.AspNetCore.Mvc.TagHelpers* handelt es sich um die Assembly für die integrierten ASP.NET Core-Taghilfsprogramme.
+Über die `@addTagHelper`-Anweisung werden Taghilfsprogramme in der Ansicht zur Verfügung gestellt. In diesem Fall ist die Ansichts Datei *pages/_ViewImports. cshtml*, die standardmäßig von allen Dateien im Ordner " *pages* " und den Unterordnern geerbt wird. Bereitstellen von taghilfsprogrammen Im obigen Code wird die Platzhalter Syntax (" \* ") verwendet, um anzugeben, dass alle taghilfsprogramme in der angegebenen Assembly (*Microsoft. aspnetcore. MVC. taghilfsprogramme*) für jede Ansichts Datei im Verzeichnis " *views* " oder Unterverzeichnis verfügbar sind. Über den ersten Parameter nach `@addTagHelper` wird das Taghilfsprogramm geladen („\*“ wird für alle Taghilfsprogramme verwendet), und über den zweiten Parameter „Microsoft.AspNetCore.Mvc.TagHelpers“ wird die Assembly angegeben, die die Taghilfsprogramme enthält. Bei *Microsoft.AspNetCore.Mvc.TagHelpers* handelt es sich um die Assembly für die integrierten ASP.NET Core-Taghilfsprogramme.
 
 Verwenden Sie folgenden Code, wenn Sie alle Taghilfsprogramme in diesem Projekt zur Verfügung stellen wollen. Dadurch wird eine Assembly mit dem Namen *AuthoringTagHelpers* erstellt:
 
@@ -157,7 +159,7 @@ Der vorangehende Code kann wie folgt geschrieben werden:
 
 ## <a name="intellisense-support-for-tag-helpers"></a>IntelliSense-Unterstützung für Taghilfsprogramme
 
-Wenn Sie eine neue ASP.net Core Web-App in Visual Studio erstellen, wird das nuget-Paket "Microsoft. aspnetcore" hinzugefügt. Razor. Tools ". Dabei handelt es sich um das Paket, das Taghilfsprogramme hinzufügt.
+Wenn Sie eine neue ASP.net Core-Web-App in Visual Studio erstellen, wird das nuget-Paket "Microsoft. aspnetcore. Razor .. Tools ". Dabei handelt es sich um das Paket, das Taghilfsprogramme hinzufügt.
 
 Sie sollten ein HTML-`<label>`-Element schreiben. Wenn Sie `<l` im Visual Studio-Editor eingeben, zeigt IntelliSense passende Elemente an:
 
@@ -197,19 +199,19 @@ IntelliSense listet die Eigenschaften und Methoden auf, die für das Modell auf 
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>Taghilfsprogramme und HTML-Hilfsprogramme im Vergleich
 
-Taghilfsprogramme werden an HTML-Elemente Razor in Sichten angehängt, während [HTML](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) -Hilfsprogramme als Methoden aufgerufen werden, die mit Razor HTML in Sichten kombinierten sind. Beachten Sie das Razor folgende Markup, das eine HTML-Bezeichnung mit der CSS-Klasse "Caption" erstellt:
+Taghilfsprogramme werden an HTML-Elemente in Razor Sichten angehängt, während [HTML](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) -Hilfsprogramme als Methoden aufgerufen werden, die mit HTML in Sichten kombinierten sind Razor . Beachten Sie das folgende Razor Markup, das eine HTML-Bezeichnung mit der CSS-Klasse "Caption" erstellt:
 
 ```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
 ```
 
-Das at (`@`)-Symbol Razor weist darauf hin, dass es sich um den Anfang des Codes handelt Bei den nächsten beiden Parametern („FirstName“ und „First Name:“) handelt es sich um Zeichenfolgen. Daher kann [IntelliSense](/visualstudio/ide/using-intellisense) nicht helfen. Das letzte Argument:
+Das at ( `@` )-Symbol weist darauf hin, dass Razor es sich um den Anfang des Codes handelt Bei den nächsten beiden Parametern („FirstName“ und „First Name:“) handelt es sich um Zeichenfolgen. Daher kann [IntelliSense](/visualstudio/ide/using-intellisense) nicht helfen. Das letzte Argument:
 
 ```cshtml
 new {@class="caption"}
 ```
 
-Dabei handelt es sich um ein anonymes Objekt, das verwendet wird, um Attribute darzustellen. Da es sich bei `class` um ein reserviertes Schlüsselwort in C# handelt, sollten Sie das `@`-Symbol verwenden, um C# zu zwingen, `@class=` als Symbol (Eigenschaftenname) zu interpretieren. An einen Front-End-Designer (jemand, der mit HTML/CSS/JavaScript und anderen Client Technologien vertraut ist, aber nicht Razormit c# und vertraut ist), ist der größte Teil der Zeile fremd. Die gesamte Zeile muss ohne Hilfe von IntelliSense erstellt werden.
+Dabei handelt es sich um ein anonymes Objekt, das verwendet wird, um Attribute darzustellen. Da es sich bei `class` um ein reserviertes Schlüsselwort in C# handelt, sollten Sie das `@`-Symbol verwenden, um C# zu zwingen, `@class=` als Symbol (Eigenschaftenname) zu interpretieren. An einen Front-End-Designer (jemand, der mit HTML/CSS/JavaScript und anderen Client Technologien vertraut ist, aber nicht mit c# und vertraut Razor ist), ist der größte Teil der Zeile fremd. Die gesamte Zeile muss ohne Hilfe von IntelliSense erstellt werden.
 
 Wenn Sie das `LabelTagHelper`-Taghilfsprogramm verwenden, kann dasselbe Markup wie folgt geschrieben sein:
 
@@ -223,7 +225,7 @@ Wenn Sie die Taghilfsprogrammversion verwenden und `<l` im Visual Studio-Editor 
 
 Mithilfe von IntelliSense können Sie die gesamte Zeile schreiben.
 
-Die folgende Codeabbildung zeigt den Formular Teil der Ansicht *views/Account/Register. cshtml* Razor , der aus der in Visual Studio enthaltenen ASP.NET 4.5. x-MVC-Vorlage generiert wurde.
+Die folgende Codeabbildung zeigt den Formular Teil der Ansicht *views/Account/Register. cshtml* , der Razor aus der in Visual Studio enthaltenen ASP.NET 4.5. x-MVC-Vorlage generiert wurde.
 
 ![image](intro/_static/regCS.png)
 
@@ -267,7 +269,7 @@ Mithilfe des Visual Studio-Editors können Sie das **gesamte** Markup im Taghilf
 
 ## <a name="customizing-the-tag-helper-element-font"></a>Anpassen der Elementschriftart des Taghilfsprogramms
 
-Sie können die Schriftart und die **Farbgebung unter** > **Extras Optionen** > **Umgebung** > **Schriftarten und Farben**anpassen:
+Sie können die Schriftart und die **Farbgebung unter Extras**  >  **Optionen**  >  **Umgebung**  >  **Schriftarten und Farben**anpassen:
 
 ![image](intro/_static/fontoptions2.png)
 

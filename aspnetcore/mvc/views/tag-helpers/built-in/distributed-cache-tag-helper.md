@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/24/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: df1daa68a3e18f7aad4507ce9526d76ff6a2114d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4b8e393542c56502a825000773bbf714d91e4128
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773915"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399230"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>Taghilfsprogramm für verteilten Cache in ASP.NET Core
 
@@ -52,9 +54,9 @@ Das Taghilfsprogramm für verteilten Cache erbt von derselben Klasse wie das Cac
 
 | Attributtyp | Beispiel                               |
 | -------------- | ------------------------------------- |
-| String         | `my-distributed-cache-unique-key-101` |
+| Zeichenfolge         | `my-distributed-cache-unique-key-101` |
 
-`name` ist erforderlich. Das `name`-Attribut wird als Schlüssel für die einzelnen gespeicherten Cacheinstanzen verwendet. Im Gegensatz zum Cache-taghilfsprogramm, das jeder Instanz basierend auf dem Razor Seitennamen und dem Speicherort auf Razor der Seite einen Cache Schlüssel zuweist, basiert das taghilfsprogramm für `name`verteilte Caches nur seinen Schlüssel auf dem Attribut.
+`name` ist erforderlich. Das `name`-Attribut wird als Schlüssel für die einzelnen gespeicherten Cacheinstanzen verwendet. Im Gegensatz zum Cache-taghilfsprogramm, das jeder Instanz basierend auf dem Razor Seitennamen und dem Speicherort auf der Seite einen Cache Schlüssel zuweist Razor , basiert das taghilfsprogramm für verteilte Caches nur seinen Schlüssel auf dem Attribut `name` .
 
 Beispiel:
 

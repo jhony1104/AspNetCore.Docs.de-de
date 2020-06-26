@@ -7,18 +7,20 @@ ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 43d5a3dbc5e202688e006355e0b105a86d721460
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 68766591ec86e12e5602d741de74e20aec67cf49
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775101"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399503"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>Arbeiten mit SameSite-Cookies in ASP.net Core
 
@@ -26,11 +28,11 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 SameSite ist ein [IETF](https://ietf.org/about/) -Entwurfs Standard, der Schutz vor Cross-Site Request fälschungstoken (CSRF) bietet. Ursprünglich in [2016](https://tools.ietf.org/html/draft-west-first-party-cookies-07)entworfen wurde, wurde der Entwurfs Standard in [2019](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00)aktualisiert. Der aktualisierte Standard ist nicht abwärts kompatibel mit dem vorherigen Standard, und es gibt folgende Unterschiede:
 
-* Cookies ohne SameSite-Header werden Standard `SameSite=Lax` mäßig als behandelt.
+* Cookies ohne SameSite-Header werden `SameSite=Lax` standardmäßig als behandelt.
 * `SameSite=None`muss verwendet werden, um eine standortübergreifende Cookie-Verwendung zuzulassen.
-* Cookies, die `SameSite=None` bestätigen, müssen auch als `Secure`markiert werden.
-* Bei Anwendungen, [`<iframe>`](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) die verwenden, treten `sameSite=Lax` möglich `sameSite=Strict` erweise Probleme `<iframe>` mit-oder-Cookies auf, da als standortübergreifende Szenarien behandelt wird.
-* Der Wert `SameSite=None` ist vom [2016-Standard](https://tools.ietf.org/html/draft-west-first-party-cookies-07) nicht zulässig und bewirkt, dass einige Implementierungen solche Cookies als `SameSite=Strict`behandeln. Siehe [Unterstützung älterer Browser](#sob) in diesem Dokument.
+* Cookies, die bestätigen, `SameSite=None` müssen auch als markiert werden `Secure` .
+* Bei Anwendungen, die verwenden, treten [`<iframe>`](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) möglicherweise Probleme mit- `sameSite=Lax` oder `sameSite=Strict` -Cookies auf, da `<iframe>` als standortübergreifende Szenarien behandelt wird.
+* Der Wert `SameSite=None` ist vom [2016-Standard](https://tools.ietf.org/html/draft-west-first-party-cookies-07) nicht zulässig und bewirkt, dass einige Implementierungen solche Cookies als behandeln `SameSite=Strict` . Siehe [Unterstützung älterer Browser](#sob) in diesem Dokument.
 
 Die `SameSite=Lax` Einstellung funktioniert für die meisten Anwendungs Cookies. Für einige Formen der Authentifizierung wie [OpenID Connect](https://openid.net/connect/) (oidc) und [WS-](https://auth0.com/docs/protocols/ws-fed) Verbund werden standardmäßig Post basierte Umleitungen bereitgestellt. Die Post basierten Umleitungen veranlassen den SameSite-Browserschutz, sodass SameSite für diese Komponenten deaktiviert ist. Die meisten [OAuth](https://oauth.net/) -Anmeldungen sind aufgrund von Unterschieden in der Art der Anforderungs Abläufe nicht betroffen.
 
@@ -45,7 +47,7 @@ Die folgenden Beispiele können heruntergeladen und getestet werden:
 | Beispiel               | Dokument |
 | ----------------- | ------------ |
 | [.Net Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
-| [.Net Core-Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
+| [.Net Core- Razor Seiten](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
 
 ::: moniker-end
 
@@ -56,7 +58,7 @@ Das folgende Beispiel kann heruntergeladen und getestet werden:
 
 | Beispiel               | Dokument |
 | ----------------- | ------------ |
-| [.Net Core-Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
+| [.Net Core- Razor Seiten](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
 
 ::: moniker-end
 
@@ -64,11 +66,11 @@ Das folgende Beispiel kann heruntergeladen und getestet werden:
 
 ## <a name="net-core-support-for-the-samesite-attribute"></a>.Net Core-Unterstützung für das SameSite-Attribut
 
-.Net Core 2,2 unterstützt seit der Veröffentlichung von Updates im Dezember 2019 den 2019-Entwurfs Standard für SameSite. Entwickler können den Wert des SameSite-Attributs Programm gesteuert mithilfe der `HttpCookie.SameSite` -Eigenschaft steuern. Wenn die `SameSite` Eigenschaft auf Strict, Lax oder None festgelegt wird, werden diese Werte mit dem Cookie im Netzwerk geschrieben. Wenn Sie es auf (samesitemode) (-1) festlegen, wird angegeben, dass kein SameSite-Attribut im Netzwerk mit dem Cookie enthalten sein soll.
+.Net Core 2,2 unterstützt seit der Veröffentlichung von Updates im Dezember 2019 den 2019-Entwurfs Standard für SameSite. Entwickler können den Wert des SameSite-Attributs Programm gesteuert mithilfe der- `HttpCookie.SameSite` Eigenschaft steuern. Wenn die `SameSite` Eigenschaft auf Strict, Lax oder None festgelegt wird, werden diese Werte mit dem Cookie im Netzwerk geschrieben. Wenn Sie es auf (samesitemode) (-1) festlegen, wird angegeben, dass kein SameSite-Attribut im Netzwerk mit dem Cookie enthalten sein soll.
 
 [!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
 
-.Net Core 3,0 unterstützt die aktualisierten SameSite-Werte und fügt der `SameSiteMode.Unspecified` `SameSiteMode` Enumeration einen zusätzlichen Enumerationswert hinzu.
+.Net Core 3,0 unterstützt die aktualisierten SameSite-Werte und fügt der Enumeration einen zusätzlichen Enumerationswert hinzu `SameSiteMode.Unspecified` `SameSiteMode` .
 Dieser neue Wert gibt an, dass keine SameSite mit dem Cookie gesendet werden soll.
 
 ::: moniker-end
@@ -77,15 +79,15 @@ Dieser neue Wert gibt an, dass keine SameSite mit dem Cookie gesendet werden sol
 
 ## <a name="december-patch-behavior-changes"></a>Änderungen im Dezember-patchverhalten
 
-Die spezifische Behavior Change für .NET Framework und .net Core 2,1 gibt an, `SameSite` wie die- `None` Eigenschaft den Wert interpretiert. Vor dem Patch `None` bedeutete der Wert "geben Sie das Attribut überhaupt nicht aus". nach dem Patch bedeutet dies, dass das Attribut mit dem Wert `None`"" ausgegeben wird. Nach dem Patch `(SameSiteMode)(-1)` bewirkt `SameSite` der Wert, dass das Attribut nicht ausgegeben wird.
+Die spezifische Behavior Change für .NET Framework und .net Core 2,1 gibt an, wie die- `SameSite` Eigenschaft den `None` Wert interpretiert. Vor dem Patch bedeutete der Wert " `None` Geben Sie das Attribut überhaupt nicht aus". nach dem Patch bedeutet dies, dass das Attribut mit dem Wert "" ausgegeben wird `None` . Nach dem Patch `SameSite` bewirkt der Wert `(SameSiteMode)(-1)` , dass das Attribut nicht ausgegeben wird.
 
-Der Standardwert von SameSite für die Formular Authentifizierung und Sitzungs Zustands Cookies wurde `None` von `Lax`in geändert.
+Der Standardwert von SameSite für die Formular Authentifizierung und Sitzungs Zustands Cookies wurde von `None` in geändert `Lax` .
 
 ::: moniker-end
 
 ## <a name="api-usage-with-samesite"></a>API-Nutzung mit SameSite
 
-[HttpContext. Response. Cookies. Append](xref:Microsoft.AspNetCore.Http.IResponseCookies.Append*) ist Standard `Unspecified`mäßig auf festgelegt. Dies bedeutet, dass kein SameSite-Attribut, das dem Cookie hinzugefügt wurde, und der Client sein Standardverhalten verwendet (LAX für neue Browser, keine für die alten). Der folgende Code zeigt, wie der Wert des Cookie-SameSite `SameSiteMode.Lax`-Werts in geändert wird:
+[HttpContext. Response. Cookies. Append](xref:Microsoft.AspNetCore.Http.IResponseCookies.Append*) ist standardmäßig auf festgelegt. `Unspecified` Dies bedeutet, dass kein SameSite-Attribut, das dem Cookie hinzugefügt wurde, und der Client sein Standardverhalten verwendet (LAX für neue Browser, keine für die alten). Der folgende Code zeigt, wie der Wert des Cookie-SameSite-Werts in geändert wird `SameSiteMode.Lax` :
 
 [!code-csharp[](samesite/sample/Pages/Index.cshtml.cs?name=snippet)]
 
@@ -109,13 +111,13 @@ ASP.net Core 3,1 und höher bietet die folgende SameSite-Unterstützung:
 
 * Definiert das auszugebende Verhalten `SameSiteMode.None` von neu.`SameSite=None`
 * Fügt einen neuen Wert `SameSiteMode.Unspecified` zum Weglassen des SameSite-Attributs hinzu.
-* Alle Cookies-APIs werden `Unspecified`standardmäßig auf eingestellt. Einige Komponenten, die Cookies verwenden, legen die Werte spezifischer für Ihre Szenarios fest. Beispiele finden Sie in der obigen Tabelle.
+* Alle Cookies-APIs werden standardmäßig auf eingestellt `Unspecified` . Einige Komponenten, die Cookies verwenden, legen die Werte spezifischer für Ihre Szenarios fest. Beispiele finden Sie in der obigen Tabelle.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-In ASP.net Core 3,0 und höher wurden die SameSite-Standardwerte geändert, um Konflikte mit inkonsistenten Client Standardwerten zu vermeiden. Die folgenden APIs haben den Standardwert von `SameSiteMode.Lax ` in `-1` geändert, um zu vermeiden, dass ein SameSite-Attribut für diese Cookies ausgegeben wird:
+In ASP.net Core 3,0 und höher wurden die SameSite-Standardwerte geändert, um Konflikte mit inkonsistenten Client Standardwerten zu vermeiden. Die folgenden APIs haben den Standardwert von `SameSiteMode.Lax ` in geändert `-1` , um zu vermeiden, dass ein SameSite-Attribut für diese Cookies ausgegeben wird:
 
 * <xref:Microsoft.AspNetCore.Http.CookieOptions>wird mit " [HttpContext. Response. Cookies. Append](xref:Microsoft.AspNetCore.Http.IResponseCookies.Append*) " verwendet.
 * <xref:Microsoft.AspNetCore.Http.CookieBuilder>wird als Factory für`CookieOptions`
@@ -131,7 +133,7 @@ Im November 2019 wurden [Patches](https://devblogs.microsoft.com/dotnet/net-core
 
 * Ist **nicht** abwärts kompatibel mit dem 2016-Entwurf. Weitere Informationen finden Sie [unter unterstützen älterer Browser](#sob) in diesem Dokument.
 * Gibt an, dass Cookies `SameSite=Lax` standardmäßig als behandelt werden.
-* Gibt Cookies an, die `SameSite=None` explizit bestätigt werden, um die standortübergreifende Übermittlung zu aktivieren, `Secure`sollte als gekennzeichnet werden. `None`ist ein neuer Eintrag zum ablehnen.
+* Gibt Cookies an, die explizit bestätigt werden, um `SameSite=None` die standortübergreifende Übermittlung zu aktivieren, sollte als gekennzeichnet werden `Secure` . `None`ist ein neuer Eintrag zum ablehnen.
 * Wird von Patches unterstützt, die für ASP.net Core 2,1, 2,2 und 3,0 ausgegeben werden. ASP.net Core 3,1 bietet zusätzliche Unterstützung für SameSite.
 * Ist für die standardmäßige Aktivierung durch [Chrome](https://chromestatus.com/feature/5088147346030592) in [Feb 2020](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)vorgesehen. Die Umstellung auf diesen Standard in 2019 wurde gestartet.
 
@@ -148,13 +150,13 @@ Im November 2019 wurden [Patches](https://devblogs.microsoft.com/dotnet/net-core
 
 ## <a name="supporting-older-browsers"></a>Unterstützung älterer Browser
 
-Der 2016 SameSite-Standard hat festgestellt, dass unbekannte Werte `SameSite=Strict` als Werte behandelt werden müssen. Apps, auf die von älteren Browsern zugegriffen wird, die den 2016 SameSite-Standard unterstützen, können unterbrechen, wenn Sie `None`eine SameSite-Eigenschaft mit dem Wert erhalten. Web-Apps müssen die Browser Erkennung implementieren, wenn Sie ältere Browser unterstützen möchten. ASP.net Core implementiert die Browser Erkennung nicht, da die Werte von Benutzer-Agents stark flüchtig sind und häufig geändert werden. Ein Erweiterungs Punkt in <xref:Microsoft.AspNetCore.CookiePolicy> ermöglicht das Plug in der Benutzer-Agent-spezifischen Logik.
+Der 2016 SameSite-Standard hat festgestellt, dass unbekannte Werte als Werte behandelt werden müssen `SameSite=Strict` . Apps, auf die von älteren Browsern zugegriffen wird, die den 2016 SameSite-Standard unterstützen, können unterbrechen, wenn Sie eine SameSite-Eigenschaft mit dem Wert erhalten `None` . Web-Apps müssen die Browser Erkennung implementieren, wenn Sie ältere Browser unterstützen möchten. ASP.net Core implementiert die Browser Erkennung nicht, da die Werte von Benutzer-Agents stark flüchtig sind und häufig geändert werden. Ein Erweiterungs Punkt in <xref:Microsoft.AspNetCore.CookiePolicy> ermöglicht das Plug in der Benutzer-Agent-spezifischen Logik.
 
-Fügen `Startup.Configure`Sie in Code hinzu, <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> der aufruft <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> , bevor aufgerufen wird, oder *eine* Methode, die Cookies schreibt:
+`Startup.Configure`Fügen Sie in Code hinzu, der aufruft, <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> bevor aufgerufen wird, <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> oder *eine* Methode, die Cookies schreibt:
 
 [!code-csharp[](samesite/sample/Startup.cs?name=snippet5&highlight=18-19)]
 
-Fügen `Startup.ConfigureServices`Sie in Code ähnlich dem folgenden hinzu:
+`Startup.ConfigureServices`Fügen Sie in Code ähnlich dem folgenden hinzu:
 
 ::: moniker range="= aspnetcore-3.1"
 
@@ -168,7 +170,7 @@ Fügen `Startup.ConfigureServices`Sie in Code ähnlich dem folgenden hinzu:
 
 ::: moniker-end
 
-Im vorherigen Beispiel `MyUserAgentDetectionLib.DisallowsSameSiteNone` ist eine vom Benutzer bereitgestellte Bibliothek, die erkennt, ob der Benutzer-Agent SameSite `None`nicht unterstützt:
+Im vorherigen Beispiel `MyUserAgentDetectionLib.DisallowsSameSiteNone` ist eine vom Benutzer bereitgestellte Bibliothek, die erkennt, ob der Benutzer-Agent SameSite nicht unterstützt `None` :
 
 [!code-csharp[](samesite/sample/Startup31.cs?name=snippet2)]
 
@@ -199,15 +201,15 @@ Google stellt keine älteren Chrome-Versionen zur Verfügung. Befolgen Sie die A
 * [Chromium 76 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/664998/)
 * [Chromium 74 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/638880/)
 
-Beginnend mit der Canary `80.0.3975.0`-Version kann die vorübergehende Entschärfung von Lax und Post zu Testzwecken deaktiviert werden. `--enable-features=SameSiteDefaultChecksMethodRigorously` dazu wird das neue Flag verwendet, um das Testen von Websites und Diensten im Endzustand des Features zuzulassen, bei dem die Entschärfung entfernt wurde. Weitere Informationen finden Sie in den Informationen zu den [Software Update](https://www.chromium.org/updates/same-site) -Projekten in der Projektwebsite.
+Beginnend mit der Canary-Version `80.0.3975.0` kann die vorübergehende Entschärfung von Lax und Post zu Testzwecken deaktiviert werden. dazu wird das neue Flag verwendet `--enable-features=SameSiteDefaultChecksMethodRigorously` , um das Testen von Websites und Diensten im Endzustand des Features zuzulassen, bei dem die Entschärfung entfernt wurde. Weitere Informationen finden Sie in den Informationen zu den [Software Update](https://www.chromium.org/updates/same-site) -Projekten in der Projektwebsite.
 
 ### <a name="test-with-safari"></a>Testen mit Safari
 
-Safari 12 hat den vorherigen Entwurf streng implementiert und schlägt fehl, `None` wenn der neue Wert in einem Cookie liegt. `None`wird über den Browser Erkennungs Code, der ältere Browser in diesem Dokument [unterstützt](#sob) , vermieden. Testen Sie Safari 12-, Safari 13-und WebKit-basierte Anmeldungen im Betriebssystem Format unter Verwendung von msal, Adal oder einer beliebigen Bibliothek, die Sie verwenden. Das Problem hängt von der zugrunde liegenden Betriebssystemversion ab. OSX-mujave (10,14) und IOS 12 haben bekanntermaßen Kompatibilitätsprobleme mit dem neuen SameSite-Verhalten. Durch ein Upgrade des Betriebssystems auf OSX Catalina (10,15) oder IOS 13 wird das Problem behoben. Safari verfügt derzeit nicht über ein Opt-in-Flag zum Testen des neuen Spezifikations Verhaltens.
+Safari 12 hat den vorherigen Entwurf streng implementiert und schlägt fehl, wenn der neue `None` Wert in einem Cookie liegt. `None`wird über den Browser Erkennungs Code, der ältere Browser in diesem Dokument [unterstützt](#sob) , vermieden. Testen Sie Safari 12-, Safari 13-und WebKit-basierte Anmeldungen im Betriebssystem Format unter Verwendung von msal, Adal oder einer beliebigen Bibliothek, die Sie verwenden. Das Problem hängt von der zugrunde liegenden Betriebssystemversion ab. OSX-mujave (10,14) und IOS 12 haben bekanntermaßen Kompatibilitätsprobleme mit dem neuen SameSite-Verhalten. Durch ein Upgrade des Betriebssystems auf OSX Catalina (10,15) oder IOS 13 wird das Problem behoben. Safari verfügt derzeit nicht über ein Opt-in-Flag zum Testen des neuen Spezifikations Verhaltens.
 
 ### <a name="test-with-firefox"></a>Testen mit Firefox
 
-Die Firefox-Unterstützung für den neuen Standard kann auf Version 68 + getestet werden, indem `about:config` Sie sich auf der Seite `network.cookie.sameSite.laxByDefault`mit dem Feature-Flag anmelden. Es gab keine Berichte über Kompatibilitätsprobleme mit älteren Versionen von Firefox.
+Die Firefox-Unterstützung für den neuen Standard kann auf Version 68 + getestet werden, indem Sie sich auf der `about:config` Seite mit dem Feature-Flag anmelden `network.cookie.sameSite.laxByDefault` . Es gab keine Berichte über Kompatibilitätsprobleme mit älteren Versionen von Firefox.
 
 ### <a name="test-with-edge-browser"></a>Testen mit dem Edge-Browser
 
@@ -217,9 +219,9 @@ Edge unterstützt den alten SameSite-Standard. Edge Version 44 hat keine bekannt
 
 SameSite-Flags werden auf der `edge://flags/#same-site-by-default-cookies` Seite festgelegt. Es wurden keine Kompatibilitätsprobleme mit Edge-Chrom erkannt.
 
-### <a name="test-with-electron"></a>Testen mit einem Elektron
+### <a name="test-with-electron"></a>Testen mitElectron
 
-Zu den Electron-Versionen zählen ältere Versionen von Chromium. Beispielsweise ist die Version des von Teams verwendeten Elektrons Chrom 66, das das ältere Verhalten zeigt. Sie müssen ihre eigenen Kompatibilitätstests mit der Version des von Ihrem Produkt verwendeten-Elektronen durchführen. Weitere Informationen finden Sie [unter Unterstützung älterer Browser](#sob) im folgenden Abschnitt.
+Zu den Versionen von Electron zählen ältere Versionen von Chrom. Beispielsweise Electron ist die von Teams verwendete-Version Chrom 66, das das ältere Verhalten zeigt. Sie müssen ihre eigenen Kompatibilitätstests mit der Produktversion durchführen Electron . Weitere Informationen finden Sie [unter Unterstützung älterer Browser](#sob) im folgenden Abschnitt.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
@@ -232,7 +234,7 @@ Zu den Electron-Versionen zählen ältere Versionen von Chromium. Beispielsweise
 | Beispiel               | Dokument |
 | ----------------- | ------------ |
 | [.Net Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
-| [.Net Core-Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
+| [.Net Core- Razor Seiten](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
 
 ::: moniker-end
 
@@ -240,6 +242,6 @@ Zu den Electron-Versionen zählen ältere Versionen von Chromium. Beispielsweise
 
 | Beispiel               | Dokument |
 | ----------------- | ------------ |
-| [.Net Core Razor -Seiten](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
+| [.Net Core- Razor Seiten](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
 
 ::: moniker-end

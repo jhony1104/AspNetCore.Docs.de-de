@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 1bce6b9cdc876062b050eae6eb3c4acf0127ce92
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777123"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399711"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Verwenden von Teilansichten in ASP.NET Core
 
@@ -27,7 +29,7 @@ Eine Teilansicht ist eine [Razor](xref:mvc/views/razor) Markup Datei (*. cshtml*
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Der Begriff " *Teilansicht* " wird verwendet, wenn eine MVC-app entwickelt wird, in der Markup Dateien als Razor *Sichten*bezeichnet werden, oder eine Pages-APP, bei der Markup Dateien als *Seiten*bezeichnet werden. Dieses Thema verweist generisch auf MVC-Ansichten Razor und Seiten Seiten als *Markup Dateien*.
+Der Begriff " *Teilansicht* " wird verwendet, wenn eine MVC-app entwickelt wird, in der Markup Dateien als *Sichten*bezeichnet werden, oder eine Razor pages-APP, bei der Markup Dateien als *Seiten*bezeichnet werden. Dieses Thema verweist generisch auf MVC-Ansichten und Razor Seiten Seiten als *Markup Dateien*.
 
 ::: moniker-end
 
@@ -52,9 +54,9 @@ Verwenden Sie keine Teilansicht, wenn für das Rendern des Markups eine komplexe
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Eine Teilansicht ist eine *cshtml* -Markup Datei, die im Ordner *views* (MVC) oder im Ordner *pages* (Razor Seiten) verwaltet wird.
+Eine Teilansicht ist eine *cshtml* -Markup Datei, die im Ordner *views* (MVC) oder im Ordner *pages* ( Razor Seiten) verwaltet wird.
 
-In ASP.NET Core MVC kann <xref:Microsoft.AspNetCore.Mvc.ViewResult> eines Controllers eine Ansicht oder eine Teilansicht zurückgeben. In Razor Seiten kann eine <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> eine partielle Ansicht zurückgeben, die <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> als-Objekt dargestellt wird. Das Verweisen auf und Rendern von Teilansichten wird im Abschnitt [Verweisen auf eine Teilansicht](#reference-a-partial-view) beschrieben.
+In ASP.NET Core MVC kann <xref:Microsoft.AspNetCore.Mvc.ViewResult> eines Controllers eine Ansicht oder eine Teilansicht zurückgeben. In Razor Seiten kann eine <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> eine partielle Ansicht zurückgeben, die als-Objekt dargestellt wird <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> . Das Verweisen auf und Rendern von Teilansichten wird im Abschnitt [Verweisen auf eine Teilansicht](#reference-a-partial-view) beschrieben.
 
 Im Gegensatz zu MVC-Ansichten oder Seitenrendering führt eine Teilansicht *_ViewStart.cshtml* nicht aus. Weitere Informationen zu *_ViewStart.cshtml* finden Sie unter <xref:mvc/views/layout>.
 
@@ -80,7 +82,7 @@ Dateinamen von Teilansichten beginnen häufig mit einem Unterstrich (`_`). Diese
 
 ### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Verwenden einer Teilansicht in Razor Seiten Modellen für Seiten
 
-In ASP.net Core 2,0 oder 2,1 rendert die folgende Handlermethode die * \_Teilansicht authorpartialrp. cshtml* für die Antwort:
+In ASP.net Core 2,0 oder 2,1 rendert die folgende Handlermethode die Teilansicht * \_ authorpartialrp. cshtml* für die Antwort:
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -269,7 +271,7 @@ Für die Ermittlung von Teilansichten gelten die folgenden Konventionen:
 
 * Unterschiedliche Teilansichten mit dem gleichen Dateinamen sind zulässig, wenn sich die Teilansichten in verschiedenen Ordnern befinden.
 * Wenn auf eine Teilansicht über den Namen ohne Dateierweiterung verwiesen wird und die Teilansicht sowohl im Ordner des Aufrufers als auch im Ordner *Shared* vorhanden ist, stellt die Teilansicht im Ordner des Aufrufers die Teilansicht bereit. Wenn die Teilansicht nicht im Ordner des Aufrufers vorhanden ist, wird die Teilansicht aus dem Ordner *Shared* bereitgestellt. Teilansichten im Ordner *Shared* werden als *Freigegebene Teilansichten* oder *Standardteilansichten* bezeichnet.
-* Teilansichten können *verkettet*&mdash;werden. eine partielle Ansicht kann eine andere partielle Sicht aufrufen, wenn ein Zirkel Verweis nicht durch die Aufrufe gebildet wird. Relative Pfade sind immer relativ zur aktuellen Datei, nicht zum Stamm- oder übergeordneten Verzeichnis der Datei.
+* Teilansichten können *verkettet*werden &mdash; . eine partielle Ansicht kann eine andere partielle Sicht aufrufen, wenn ein Zirkel Verweis nicht durch die Aufrufe gebildet wird. Relative Pfade sind immer relativ zur aktuellen Datei, nicht zum Stamm- oder übergeordneten Verzeichnis der Datei.
 
 > [!NOTE]
 > Ein [Razor](xref:mvc/views/razor) `section` , der in einer Teilansicht definiert ist, ist für übergeordnete Markup Dateien nicht sichtbar. Die `section`-Anweisung ist nur für die Teilansicht, in der sie definiert ist, sichtbar.

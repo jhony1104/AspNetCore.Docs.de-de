@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: db041ab4939fc7c39ac01cc02e350aca2fbee93e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777461"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400543"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Ersetzen Sie ASP.net machineKey in ASP.net Core
 
@@ -29,16 +31,16 @@ Die Implementierung des- `<machineKey>` Elements in ASP.net kann [ersetzt werden
 > [!NOTE]
 > Das neue Datenschutzsystem kann nur in einer vorhandenen ASP.NET-Anwendung installiert werden, die auf .NET 4.5.1 oder höher ausgerichtet ist. Die Installation schlägt fehl, wenn die Anwendung .NET 4,5 oder niedriger als Zielversion verwendet.
 
-Installieren Sie das Paket Microsoft. aspnetcore. dataprotection. systemWeb, um das neue Datenschutzsystem in einem vorhandenen ASP.NET 4.5.1 +-Projekt zu installieren. Dadurch wird das Datenschutzsystem mithilfe der [Standard Konfigurations](xref:security/data-protection/configuration/default-settings) Einstellungen instanziiert.
+Um das neue Datenschutzsystem in einem vorhandenen ASP.NET 4.5.1 +-Projekt zu installieren, installieren Sie das Paket Microsoft.AspNetCore.DataProtection.Systemweb. Dadurch wird das Datenschutzsystem mithilfe der [Standard Konfigurations](xref:security/data-protection/configuration/default-settings) Einstellungen instanziiert.
 
-Wenn Sie das Paket installieren, fügt es eine Zeile in die Datei " *Web. config* " ein, die ASP.net für [die meisten Kryptografievorgänge](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)verwendet, einschließlich der Formular Authentifizierung, des Ansichts Zustands und der Aufrufe von machineKey. Protect. Die eingefügte Zeile wird wie folgt gelesen.
+Wenn Sie das Paket installieren, fügt es eine Zeile in *Web.config* ein, die ASP.net anweist, es für [die meisten Kryptografievorgänge](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)zu verwenden, einschließlich der Formular Authentifizierung, des Ansichts Zustands und der Aufrufe von machineKey. Protect. Die eingefügte Zeile wird wie folgt gelesen.
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />
 ```
 
 >[!TIP]
-> Sie können erkennen, ob das neue Datenschutzsystem aktiv ist, indem Sie Felder `__VIEWSTATE`wie überprüfen, die mit "CfDJ8" beginnen sollen, wie im folgenden Beispiel gezeigt. "CfDJ8" ist die Base64-Darstellung des Magic "09 F0, F0"-Headers, der eine vom Datenschutzsystem geschützte Nutzlast identifiziert.
+> Sie können erkennen, ob das neue Datenschutzsystem aktiv ist, indem Sie Felder wie überprüfen `__VIEWSTATE` , die mit "CfDJ8" beginnen sollen, wie im folgenden Beispiel gezeigt. "CfDJ8" ist die Base64-Darstellung des Magic "09 F0, F0"-Headers, der eine vom Datenschutzsystem geschützte Nutzlast identifiziert.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -73,9 +75,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Sie können auch anstelle `<machineKey applicationName="my-app" ... />` eines expliziten Aufrufens von "stapplicationname" verwenden. Dies ist eine praktische Methode, um zu verhindern, dass der Entwickler einen von dataschutzstartup abgeleiteten Typ erstellt, wenn der Anwendungsname von allen Elementen, die konfiguriert werden sollen, festgelegt wurde.
+> Sie können auch `<machineKey applicationName="my-app" ... />` anstelle eines expliziten Aufrufens von "stapplicationname" verwenden. Dies ist eine praktische Methode, um zu verhindern, dass der Entwickler einen von dataschutzstartup abgeleiteten Typ erstellt, wenn der Anwendungsname von allen Elementen, die konfiguriert werden sollen, festgelegt wurde.
 
-Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu Web. config, `<appSettings>` und suchen Sie nach dem Element, das von der Paketinstallation der Konfigurationsdatei hinzugefügt wurde. Es sieht wie das folgende Markup aus:
+Um diese benutzerdefinierte Konfiguration zu aktivieren, wechseln Sie zurück zu Web.config, und suchen Sie nach dem Element, das von `<appSettings>` der Paketinstallation zur Konfigurationsdatei hinzugefügt wurde. Es sieht wie das folgende Markup aus:
 
 ```xml
 <appSettings>

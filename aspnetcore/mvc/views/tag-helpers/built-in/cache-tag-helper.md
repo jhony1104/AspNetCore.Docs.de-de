@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773941"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399282"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Cache-Taghilfsprogramm im ASP.NET Core MVC
 
@@ -27,7 +29,7 @@ Durch das Cache-Taghilfsprogramm kann die Leistung Ihrer ASP.NET Core-App verbes
 
 Eine Übersicht der Taghilfsprogramme finden Sie unter <xref:mvc/views/tag-helpers/intro>.
 
-Das folgende Razor-Markup speichert das aktuelle Datum zwischen:
+Im folgenden Razor Markup wird das aktuelle Datum zwischengespeichert:
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -41,7 +43,7 @@ Das folgende Razor-Markup speichert das aktuelle Datum zwischen:
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolesch         | `true`, `false` | `true`  |
+| Boolean         | `true`, `false` | `true`  |
 
 `enabled` legt fest, ob der Inhalt zwischengespeichert wird, der vom Cache-Taghilfsprogramm eingeschlossen wird. Der Standardwert ist `true`. Wenn diese Option auf `false` festgelegt ist, wird die gerenderte Ausgabe **nicht** zwischengespeichert.
 
@@ -85,7 +87,7 @@ Beispiel:
 </cache>
 ```
 
-Die Razor-Ansichts-Engine legt für `expires-after` einen Standardwert von 20 Minuten fest.
+Der Razor Standardwert wird von der Ansichts-Engine `expires-after` auf 20 Minuten festgelegt.
 
 ### <a name="expires-sliding"></a>expires-sliding
 
@@ -107,7 +109,7 @@ Beispiel:
 
 | Attributtyp | Beispiele                                    |
 | -------------- | ------------------------------------------- |
-| String         | `User-Agent`, `User-Agent,content-encoding` |
+| Zeichenfolge         | `User-Agent`, `User-Agent,content-encoding` |
 
 `vary-by-header` akzeptiert eine durch Trennzeichen getrennte Liste von Headerwerten, die eine Cacheaktualisierung auslösen, wenn diese geändert werden.
 
@@ -123,7 +125,7 @@ Im folgenden Beispiel wird der Headerwert `User-Agent` überwacht. Außerdem wer
 
 | Attributtyp | Beispiele             |
 | -------------- | -------------------- |
-| String         | `Make`, `Make,Model` |
+| Zeichenfolge         | `Make`, `Make,Model` |
 
 `vary-by-query` akzeptiert eine durch Kommas getrennte Liste von <xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> in eine Abfragezeichenfolge (<xref:Microsoft.AspNetCore.Http.HttpRequest.Query*>), die eine Cacheaktualisierung auslösen, wenn der Wert eines aufgeführten Schlüssels geändert wird.
 
@@ -139,7 +141,7 @@ Im folgenden Beispiel werden die Werte von `Make` und `Model` überwacht. Außer
 
 | Attributtyp | Beispiele             |
 | -------------- | -------------------- |
-| String         | `Make`, `Make,Model` |
+| Zeichenfolge         | `Make`, `Make,Model` |
 
 `vary-by-route` akzeptiert eine durch Trennzeichen getrennte Liste mit Namen von Routenparametern, die eine Cacheaktualisierung auslösen, wenn der Routendatenparameter geändert wird.
 
@@ -165,11 +167,11 @@ routes.MapRoute(
 
 | Attributtyp | Beispiele                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
-| String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
+| Zeichenfolge         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
 `vary-by-cookie` akzeptiert eine durch Trennzeichen getrennte Liste mit Namen von Cookies, die eine Cacheaktualisierung auslösen, wenn der Cookiewert geändert wird.
 
-Das folgende Beispiel überwacht das Cookie, das der ASP.NET Core-Identität zugeordnet ist. Wenn ein Benutzer authentifiziert ist, löst eine Änderung im Identitätscookie eine Cacheaktualisierung aus:
+Im folgenden Beispiel wird das Cookie überwacht, das ASP.net Core zugeordnet ist Identity . Wenn ein Benutzer authentifiziert wird, löst eine Änderung im Identity Cookie eine Cache Aktualisierung aus:
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -181,9 +183,9 @@ Das folgende Beispiel überwacht das Cookie, das der ASP.NET Core-Identität zug
 
 | Attributtyp  | Beispiele        | Standard |
 | --------------- | --------------- | ------- |
-| Boolesch         | `true`, `false` | `true`  |
+| Boolean         | `true`, `false` | `true`  |
 
-`vary-by-user` gibt an, ob der Cache zurückgesetzt wird, wenn sich ein anderer Benutzer anmeldet, also der Kontextprinzipal geändert wird. Der aktuelle Benutzer wird auch als Anforderungskontextprinzipal bezeichnet und kann in einer Razor-Ansicht angezeigt werden, indem Sie auf `@User.Identity.Name` verweisen.
+`vary-by-user` gibt an, ob der Cache zurückgesetzt wird, wenn sich ein anderer Benutzer anmeldet, also der Kontextprinzipal geändert wird. Der aktuelle Benutzer wird auch als Anforderungs Kontext Prinzipal bezeichnet und kann in einer Ansicht angezeigt werden, Razor indem auf verwiesen wird `@User.Identity.Name` .
 
 Das folgende Beispiel überwacht den derzeit angemeldeten Benutzer, um eine Cacheaktualisierung auszulösen:
 
@@ -199,7 +201,7 @@ Wenn Sie dieses Attribut verwenden, werden die Inhalte im Cache über einen Anme
 
 | Attributtyp | Beispiel  |
 | -------------- | -------- |
-| String         | `@Model` |
+| Zeichenfolge         | `@Model` |
 
 Über `vary-by` können Sie festlegen, welche Daten zwischengespeichert werden sollen. Wenn das Objekt verändert wird, auf das der Zeichenfolgenwert des Attributs verweist, wird der Inhalt des Cache-Hilfsprogramms aktualisiert. Häufig wird eine Zeichenfolgenverkettung von Modellwerten diesem Attribut zugewiesen. Dies führt letztlich zu einem Szenario, bei dem der Cache ungültig wird, wenn ein Update an einem der verketteten Werte vorgenommen wird.
 

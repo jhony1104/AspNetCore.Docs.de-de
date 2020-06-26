@@ -1,24 +1,26 @@
 ---
-title: Freigeben von Controllern, Razor Ansichten, Seiten und mehr mit Anwendungs Teilen in ASP.net Core
+title: Freigeben von Controllern, Ansichten, Razor Seiten und mehr mit Anwendungs Teilen in ASP.net Core
 author: rick-anderson
-description: Freigeben von Controllern, Razor anzeigen, Seiten und mehr mit Anwendungs Teilen in ASP.net Core
+description: Freigeben von Controllern, anzeigen, Razor Seiten und mehr mit Anwendungs Teilen in ASP.net Core
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774404"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399750"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Freigeben von Controllern, Razor Ansichten, Seiten und mehr mit Anwendungs teilen
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Freigeben von Controllern, Ansichten, Razor Seiten und mehr mit Anwendungs teilen
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -26,7 +28,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsteile ermöglichen ASP.net Core das Ermitteln von Controllern, Ansichts Komponenten, Razor taghilfsprogramme, Seiten, Razor-Kompilierungs Quellen und vieles mehr. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
+Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsteile ermöglichen ASP.net Core das Ermitteln von Controllern, Ansichts Komponenten, taghilfsprogramme, Razor Seiten, Razor-Kompilierungs Quellen und vieles mehr. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
 
 [Featureanbieter](#fp) arbeiten mit Anwendungsparts, um die Features einer ASP.NET Core-Anwendung aufzufüllen. Anwendungsparts werden hauptsächlich dafür eingesetzt, eine App so zu konfigurieren, dass sie die ASP.NET Core-Features in einer Assembly ermittelt (oder das Laden solcher Features vermeidet). Ein Beispiel: Sie möchten einige gängige Funktionen in mehreren Apps gemeinsam nutzen. Mithilfe von Anwendungs teilen können Sie eine Assembly (dll) mit Controllern, Ansichten, Razor Seiten, Razor-Kompilierungs Quellen, taghilfsprogrammen und mehr für mehrere apps freigeben. Die Freigabe einer Assembly ist dem Duplizieren von Code in mehreren Projekten vorzuziehen.
 
@@ -116,7 +118,7 @@ Von [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 
-Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsteile ermöglichen ASP.net Core das Ermitteln von Controllern, Ansichts Komponenten, Razor taghilfsprogramme, Seiten, Razor-Kompilierungs Quellen und vieles mehr. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
+Ein *Anwendungspart* ist eine Abstraktion der Ressourcen einer App. Anwendungsteile ermöglichen ASP.net Core das Ermitteln von Controllern, Ansichts Komponenten, taghilfsprogramme, Razor Seiten, Razor-Kompilierungs Quellen und vieles mehr. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) ist ein Anwendungspart. `AssemblyPart` kapselt einen Assemblyverweis und macht Typen und Kompilierungsverweise verfügbar.
 
 *Featureanbieter* arbeiten mit Anwendungsparts, um die Features einer ASP.NET Core-Anwendung aufzufüllen. Anwendungsparts werden hauptsächlich dafür eingesetzt, eine App so zu konfigurieren, dass sie die ASP.NET Core-Features in einer Assembly ermittelt (oder das Laden solcher Features vermeidet). Ein Beispiel: Sie möchten einige gängige Funktionen in mehreren Apps gemeinsam nutzen. Mithilfe von Anwendungs teilen können Sie eine Assembly (dll) mit Controllern, Ansichten, Razor Seiten, Razor-Kompilierungs Quellen, taghilfsprogrammen und mehr für mehrere apps freigeben. Die Freigabe einer Assembly ist dem Duplizieren von Code in mehreren Projekten vorzuziehen.
 
@@ -154,7 +156,7 @@ Der `ApplicationPartManager` enthält Parts für Folgendes:
 
 Anwendungsfeatureanbieter untersuchen Anwendungsparts und bieten Features für diese. Es gibt integrierte Featureanbieter für die folgenden ASP.NET Core-Features:
 
-* [Controllers](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
+* [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
 * [Taghilfsprogramme](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [Komponenten anzeigen](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 

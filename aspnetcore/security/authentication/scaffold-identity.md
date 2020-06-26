@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103031"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400816"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Gerüst Identity in ASP.net Core Projekten
 
@@ -289,11 +291,11 @@ Fügen Sie `LoginDisplay` dem frei *gegebenen* Ordner der App eine Komponente (*
 
 ### <a name="style-authentication-endpoints"></a>Endpunkte für die Stil Authentifizierung
 
-Da Blazor der Server Razor Seiten Seiten verwendet Identity , ändert sich das Formatieren der Benutzeroberfläche, wenn ein Besucher zwischen den Identity Seiten und den Komponenten navigiert. Sie haben zwei Möglichkeiten, die nicht passenden Stile zu berücksichtigen:
+Da Blazor Server Razor Seiten Identity Seiten verwendet, ändert sich das Formatieren der Benutzeroberfläche, wenn ein Besucher zwischen Identity Seiten und Komponenten navigiert. Sie haben zwei Möglichkeiten, die nicht passenden Stile zu berücksichtigen:
 
 #### <a name="build-identity-components"></a>IdentityBuildkomponenten
 
-Ein Ansatz zur Verwendung von Komponenten für Identity anstelle von Seiten besteht darin, Komponenten zu erstellen Identity . Da `SignInManager` und `UserManager` in-Komponenten nicht unterstützt Razor werden, verwenden Sie API-Endpunkte in der Blazor Server-APP, um Benutzerkonto Aktionen zu verarbeiten.
+Ein Ansatz zur Verwendung von Komponenten für Identity anstelle von Seiten besteht darin, Komponenten zu erstellen Identity . Da `SignInManager` und `UserManager` in-Komponenten nicht unterstützt Razor werden, verwenden Sie API-Endpunkte in der Blazor Server app, um Benutzerkonto Aktionen zu verarbeiten.
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Verwenden eines benutzerdefinierten Layouts mit Blazor App-Stilen
 
@@ -404,7 +406,7 @@ In diesem Abschnitt wird gezeigt, wie Sie die Registerseite deaktivieren, aber d
 
 So deaktivieren Sie die Benutzerregistrierung:
 
-* Gerüstbau Identity . Schließen Sie Account. Register, Account. Login und Account. registerconfirmation ein. Beispiel:
+* Gerüstbau Identity . Schließen Sie Account. Register, Account. Login und Account. registerconfirmation ein. Zum Beispiel:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -649,7 +651,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 So deaktivieren Sie die Benutzerregistrierung:
 
-* Gerüstbau Identity . Schließen Sie Account. Register, Account. Login und Account. registerconfirmation ein. Beispiel:
+* Gerüstbau Identity . Schließen Sie Account. Register, Account. Login und Account. registerconfirmation ein. Zum Beispiel:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"

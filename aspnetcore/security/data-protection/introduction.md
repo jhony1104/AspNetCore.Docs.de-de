@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: db2c22454fc6c7e663ca603e9d70b6c12ce31af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775803"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399529"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.net Core Datenschutz
 
 Webanwendungen müssen häufig sicherheitsrelevante Daten speichern. Windows stellt DPAPI für Desktop Anwendungen bereit, ist aber für Webanwendungen ungeeignet. Der ASP.net Core Datenschutz Stapel bietet eine einfache, leicht zu verwendende kryptografieapi, mit der ein Entwickler Daten schützen kann, einschließlich Schlüsselverwaltung und Rotation.
 
-Der ASP.net Core Datenschutz Stapel ist so konzipiert, dass er als langfristiger Ersatz für das &lt;machineKey&gt; -Element in ASP.NET 1. x-4. x fungiert. Es wurde so konzipiert, dass viele der Unzulänglichkeiten des alten kryptografiestapels behandelt werden, während gleichzeitig eine sofort Einsatz orientierte Lösung für die Mehrzahl der Anwendungsfälle bereitgestellt wird, auf denen moderne Anwendungen wahrscheinlich stoßen.
+Der ASP.net Core Datenschutz Stapel ist so konzipiert, dass er als langfristiger Ersatz für das &lt; machineKey- &gt; Element in ASP.NET 1. x-4. x fungiert. Es wurde so konzipiert, dass viele der Unzulänglichkeiten des alten kryptografiestapels behandelt werden, während gleichzeitig eine sofort Einsatz orientierte Lösung für die Mehrzahl der Anwendungsfälle bereitgestellt wird, auf denen moderne Anwendungen wahrscheinlich stoßen.
 
 ## <a name="problem-statement"></a>Problembeschreibung
 
@@ -73,13 +75,13 @@ Das Datenschutzsystem ist in fünf Haupt Pakete unterteilt. Verschiedene Aspekte
 
 Der Stapel für den Datenschutz besteht aus fünf Paketen.
 
-* [Microsoft. aspnetcore. dataprotection. Abstractions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) enthält die <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> Schnitt <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> stellen und, um Datenschutzdienste zu erstellen. Außerdem sind nützliche Erweiterungs Methoden für die Arbeit mit diesen Typen (z. b. [idataprotector. Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)) enthalten. Wenn das Datenschutzsystem an einem anderen Speicherort instanziiert wird und Sie die API `Microsoft.AspNetCore.DataProtection.Abstractions`verwenden, verweisen Sie auf.
+* [Microsoft. aspnetcore. dataprotection. Abstractions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) enthält die <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> Schnittstellen und, um Datenschutzdienste zu erstellen. Außerdem sind nützliche Erweiterungs Methoden für die Arbeit mit diesen Typen (z. b. [idataprotector. Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)) enthalten. Wenn das Datenschutzsystem an einem anderen Speicherort instanziiert wird und Sie die API verwenden, verweisen Sie auf `Microsoft.AspNetCore.DataProtection.Abstractions` .
 
-* [Microsoft. aspnetcore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) enthält die grundlegende Implementierung des Datenschutzsystems, einschließlich der wichtigsten Kryptografievorgänge, Schlüsselverwaltung, Konfiguration und Erweiterbarkeit. Um das Datenschutzsystem zu instanziieren (z. b. hinzufügen <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>zu einem) oder um das Verhalten zu ändern `Microsoft.AspNetCore.DataProtection`oder zu erweitern, verweisen Sie auf.
+* [Microsoft. aspnetcore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) enthält die grundlegende Implementierung des Datenschutzsystems, einschließlich der wichtigsten Kryptografievorgänge, Schlüsselverwaltung, Konfiguration und Erweiterbarkeit. Um das Datenschutzsystem zu instanziieren (z. b. hinzufügen zu einem <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> ) oder um das Verhalten zu ändern oder zu erweitern, verweisen Sie auf `Microsoft.AspNetCore.DataProtection` .
 
-* [Microsoft. aspnetcore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält zusätzliche APIs, die Entwickler möglicherweise nützlich finden, aber nicht zum Kern Paket gehören. Dieses Paket enthält beispielsweise Factorymethoden zum Instanziieren des Datenschutzsystems zum Speichern von Schlüsseln an einem Speicherort im Dateisystem ohne Abhängigkeits <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>Injektion (Weitere Informationen finden Sie unter). Sie enthält auch Erweiterungs Methoden zum Begrenzen der Lebensdauer geschützter Nutzlasten (siehe <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>).
+* [Microsoft. aspnetcore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) enthält zusätzliche APIs, die Entwickler möglicherweise nützlich finden, aber nicht zum Kern Paket gehören. Dieses Paket enthält beispielsweise Factorymethoden zum Instanziieren des Datenschutzsystems zum Speichern von Schlüsseln an einem Speicherort im Dateisystem ohne Abhängigkeitsinjektion (Weitere Informationen finden Sie unter <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> ). Sie enthält auch Erweiterungs Methoden zum Begrenzen der Lebensdauer geschützter Nutzlasten (siehe <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector> ).
 
-* [Microsoft. aspnetcore. dataprotection. systemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) kann in einer vorhandenen ASP.NET 4. x-APP installiert werden, um `<machineKey>` die Vorgänge so umzuleiten, dass der neue Stapel für die ASP.net Core Datenschutz verwendet wird. Weitere Informationen finden Sie unter <xref:security/data-protection/compatibility/replacing-machinekey>.
+* [Microsoft.AspNetCore.DataProtection.Systemweb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) kann in einer vorhandenen ASP.NET 4. x-APP installiert werden, um `<machineKey>` die Vorgänge so umzuleiten, dass der neue ASP.net Core Datenschutz Stapel verwendet wird. Weitere Informationen finden Sie unter <xref:security/data-protection/compatibility/replacing-machinekey>.
 
 * [Microsoft. aspnetcore. Cryptography. keyderivations](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) stellt eine Implementierung der PBKDF2-Kenn Wort Hash Routine bereit und kann von Systemen verwendet werden, die Benutzer Kennwörter sicher behandeln müssen. Weitere Informationen finden Sie unter <xref:security/data-protection/consumer-apis/password-hashing>.
 

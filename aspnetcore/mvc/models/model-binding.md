@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 12/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 2e604cd1869ea077fc0465df91ec083b9db83763
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768969"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400153"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Modellbindung in ASP.NET Core
 
@@ -66,7 +68,7 @@ Im vorherigen Beispiel sind die Ziele der Modellbindung Methodenparameter, die e
 Die Modellbindung versucht, Werte für die folgenden Arten von Zielen zu finden:
 
 * Parameter der Controlleraktionsmethode, zu der eine Anforderung weitergeleitet wird.
-* Parameter der Razor Pages-Handlermethode, an die eine Anforderung weitergeleitet wird. 
+* Parameter der Razor pages-Handlermethode, an die eine Anforderung weitergeleitet wird. 
 * Öffentliche Eigenschaften eines Controllers oder einer `PageModel`-Klasse, falls durch Attribute angegeben.
 
 ### <a name="bindproperty-attribute"></a>[BindProperty]-Attribut
@@ -93,7 +95,7 @@ Standardmäßig ruft die Modellbindung Daten in Form von Schlüssel-Wert-Paaren 
 
 1. Formularfelder
 1. Der Anforderungstext (für [Controller mit dem [ApiController]-Attribut](xref:web-api/index#binding-source-parameter-inference))
-1. Weiterleiten von Daten
+1. Routendaten
 1. Abfragezeichenfolge-Parameter
 1. Hochgeladene Dateien
 
@@ -174,7 +176,7 @@ Standardmäßig wird kein Modellzustandsfehler erstellt, wenn kein Wert für ein
 * Für komplexe Typen erstellt die Modellbindung eine Instanz, indem der Standardkonstruktor verwendet wird, ohne Eigenschaften festzulegen.
 * Arrays werden auf `Array.Empty<T>()` festgelegt, mit der Ausnahme, dass `byte[]`-Arrays auf `null` festgelegt werden.
 
-Wenn der Modell Zustand für eine Modell Eigenschaft ungültig gemacht werden soll, wenn nichts gefunden wird, verwenden Sie das [`[BindRequired]`](#bindrequired-attribute) -Attribut.
+Wenn der Modell Zustand für eine Modell Eigenschaft ungültig gemacht werden soll, wenn nichts gefunden wird, verwenden Sie das- [`[BindRequired]`](#bindrequired-attribute) Attribut.
 
 Beachten Sie, dass dieses `[BindRequired]`-Verhalten für die Modellbindung von Daten aus bereitgestellten Formulardaten gilt, nicht für JSON- oder XML-Daten in einem Anforderungstext. Anforderungstextdaten werden von [Eingabeformatierern](#input-formatters) verarbeitet.
 
@@ -184,11 +186,11 @@ Wenn eine Quelle gefunden wird, aber nicht in den Zieltyp konvertiert werden kan
 
 In einem API-Controller, der über das `[ApiController]`-Attribut verfügt, führt ein ungültiger Modellzustand zu einer automatischen „HTTP 400“-Antwort.
 
-Zeigen Sie Razor auf einer Seite die Seite erneut mit einer Fehlermeldung an:
+Zeigen Sie auf einer Razor Seite die Seite erneut mit einer Fehlermeldung an:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-Bei der Client seitigen Validierung werden die meisten ungültigen Daten abgefangen, die andernfalls Razor an ein Seiten Formular übermittelt werden. Diese Validierung erschwert es, den voranstehenden, hervorgehobenen Code auszulösen. Die Beispiel-App umfasst eine Schaltfläche **Submit with Invalid Date** (Mit ungültigem Datum absenden), die ungültige Daten in das Feld **Hire Date** (Einstellungsdatum) einfügt und das Formular absendet. Diese Schaltfläche zeigt, wie der Code zum erneuten Anzeigen der Seite funktioniert, wenn Datenkonvertierungsfehler auftreten.
+Bei der Client seitigen Validierung werden die meisten ungültigen Daten abgefangen, die andernfalls an ein Seiten Formular übermittelt werden Razor . Diese Validierung erschwert es, den voranstehenden, hervorgehobenen Code auszulösen. Die Beispiel-App umfasst eine Schaltfläche **Submit with Invalid Date** (Mit ungültigem Datum absenden), die ungültige Daten in das Feld **Hire Date** (Einstellungsdatum) einfügt und das Formular absendet. Diese Schaltfläche zeigt, wie der Code zum erneuten Anzeigen der Seite funktioniert, wenn Datenkonvertierungsfehler auftreten.
 
 Wenn die Seite von dem vorangehenden Code erneut angezeigt wird, wird die ungültige Eingabe nicht im Formularfeld angezeigt. Dies liegt daran, dass die Modelleigenschaft auf „null“ oder einen Standardwert festgelegt wurde. Die ungültige Eingabe wird jedoch in einer Fehlermeldung angezeigt. Wenn Sie aber die ungültigen Daten im Formularfeld erneut anzeigen möchten, sollten Sie aus der Modelleigenschaft eine Zeichenfolge machen und die Datenkonvertierung manuell ausführen.
 
@@ -198,14 +200,14 @@ Dieselbe Strategie empfiehlt sich, wenn Sie nicht möchten, dass Typkonvertierun
 
 Die einfachen Typen, in die die Modellbindung Quellzeichenfolgen konvertieren kann, sind unter anderem:
 
-* [Boolescher Wert](xref:System.ComponentModel.BooleanConverter)
+* [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Dezimal](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Enumeration](xref:System.ComponentModel.EnumConverter)
 * [GUID](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -280,13 +282,13 @@ Mehrere integrierte Attribute stehen für die Kontrolle der Modellbindung komple
 
 ### <a name="bindrequired-attribute"></a>[BindRequired]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -312,7 +314,7 @@ Das `[Bind]`-Attribut kann zum Schutz vor Overposting in *Erstellungs*szenarien 
 
 ## <a name="collections"></a>Sammlungen
 
-Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Zum Beispiel:
 
 * Angenommen, der zu bindende Parameter ist ein Array namens `selectedCourses`:
 
@@ -357,7 +359,7 @@ Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Ü
 
 ## <a name="dictionaries"></a>Wörterbücher
 
-Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Zum Beispiel:
 
 * Angenommen, der Zielparameter ist eine `Dictionary<int, string>` mit dem Namen `selectedCourses`:
 
@@ -486,7 +488,7 @@ Sie können die Modellbindung erweitern, indem Sie eine benutzerdefinierte Model
 
 ## <a name="manual-model-binding"></a>Manuelle Modellbindung 
 
-Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Hier sehen Sie ein Beispiel:
+Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -552,7 +554,7 @@ Im vorherigen Beispiel sind die Ziele der Modellbindung Methodenparameter, die e
 Die Modellbindung versucht, Werte für die folgenden Arten von Zielen zu finden:
 
 * Parameter der Controlleraktionsmethode, zu der eine Anforderung weitergeleitet wird.
-* Parameter der Razor Pages-Handlermethode, an die eine Anforderung weitergeleitet wird. 
+* Parameter der Razor pages-Handlermethode, an die eine Anforderung weitergeleitet wird. 
 * Öffentliche Eigenschaften eines Controllers oder einer `PageModel`-Klasse, falls durch Attribute angegeben.
 
 ### <a name="bindproperty-attribute"></a>[BindProperty]-Attribut
@@ -579,7 +581,7 @@ Standardmäßig ruft die Modellbindung Daten in Form von Schlüssel-Wert-Paaren 
 
 1. Formularfelder
 1. Der Anforderungstext (für [Controller mit dem [ApiController]-Attribut](xref:web-api/index#binding-source-parameter-inference))
-1. Weiterleiten von Daten
+1. Routendaten
 1. Abfragezeichenfolge-Parameter
 1. Hochgeladene Dateien
 
@@ -660,7 +662,7 @@ Standardmäßig wird kein Modellzustandsfehler erstellt, wenn kein Wert für ein
 * Für komplexe Typen erstellt die Modellbindung eine Instanz, indem der Standardkonstruktor verwendet wird, ohne Eigenschaften festzulegen.
 * Arrays werden auf `Array.Empty<T>()` festgelegt, mit der Ausnahme, dass `byte[]`-Arrays auf `null` festgelegt werden.
 
-Wenn der Modell Zustand für eine Modell Eigenschaft ungültig gemacht werden soll, wenn nichts gefunden wird, verwenden Sie das [`[BindRequired]`](#bindrequired-attribute) -Attribut.
+Wenn der Modell Zustand für eine Modell Eigenschaft ungültig gemacht werden soll, wenn nichts gefunden wird, verwenden Sie das- [`[BindRequired]`](#bindrequired-attribute) Attribut.
 
 Beachten Sie, dass dieses `[BindRequired]`-Verhalten für die Modellbindung von Daten aus bereitgestellten Formulardaten gilt, nicht für JSON- oder XML-Daten in einem Anforderungstext. Anforderungstextdaten werden von [Eingabeformatierern](#input-formatters) verarbeitet.
 
@@ -670,11 +672,11 @@ Wenn eine Quelle gefunden wird, aber nicht in den Zieltyp konvertiert werden kan
 
 In einem API-Controller, der über das `[ApiController]`-Attribut verfügt, führt ein ungültiger Modellzustand zu einer automatischen „HTTP 400“-Antwort.
 
-Zeigen Sie Razor auf einer Seite die Seite erneut mit einer Fehlermeldung an:
+Zeigen Sie auf einer Razor Seite die Seite erneut mit einer Fehlermeldung an:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-Bei der Client seitigen Validierung werden die meisten ungültigen Daten abgefangen, die andernfalls Razor an ein Seiten Formular übermittelt werden. Diese Validierung erschwert es, den voranstehenden, hervorgehobenen Code auszulösen. Die Beispiel-App umfasst eine Schaltfläche **Submit with Invalid Date** (Mit ungültigem Datum absenden), die ungültige Daten in das Feld **Hire Date** (Einstellungsdatum) einfügt und das Formular absendet. Diese Schaltfläche zeigt, wie der Code zum erneuten Anzeigen der Seite funktioniert, wenn Datenkonvertierungsfehler auftreten.
+Bei der Client seitigen Validierung werden die meisten ungültigen Daten abgefangen, die andernfalls an ein Seiten Formular übermittelt werden Razor . Diese Validierung erschwert es, den voranstehenden, hervorgehobenen Code auszulösen. Die Beispiel-App umfasst eine Schaltfläche **Submit with Invalid Date** (Mit ungültigem Datum absenden), die ungültige Daten in das Feld **Hire Date** (Einstellungsdatum) einfügt und das Formular absendet. Diese Schaltfläche zeigt, wie der Code zum erneuten Anzeigen der Seite funktioniert, wenn Datenkonvertierungsfehler auftreten.
 
 Wenn die Seite von dem vorangehenden Code erneut angezeigt wird, wird die ungültige Eingabe nicht im Formularfeld angezeigt. Dies liegt daran, dass die Modelleigenschaft auf „null“ oder einen Standardwert festgelegt wurde. Die ungültige Eingabe wird jedoch in einer Fehlermeldung angezeigt. Wenn Sie aber die ungültigen Daten im Formularfeld erneut anzeigen möchten, sollten Sie aus der Modelleigenschaft eine Zeichenfolge machen und die Datenkonvertierung manuell ausführen.
 
@@ -684,14 +686,14 @@ Dieselbe Strategie empfiehlt sich, wenn Sie nicht möchten, dass Typkonvertierun
 
 Die einfachen Typen, in die die Modellbindung Quellzeichenfolgen konvertieren kann, sind unter anderem:
 
-* [Boolescher Wert](xref:System.ComponentModel.BooleanConverter)
+* [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Dezimal](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Enumeration](xref:System.ComponentModel.EnumConverter)
 * [GUID](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
@@ -766,13 +768,13 @@ Mehrere integrierte Attribute stehen für die Kontrolle der Modellbindung komple
 
 ### <a name="bindrequired-attribute"></a>[BindRequired]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Bewirkt, dass die Modellbindung einen Modellzustandsfehler hinzufügt, wenn die Bindung für die Eigenschaft eines Modells nicht erfolgen kann. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[BindNever]-Attribut
 
-Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Hier sehen Sie ein Beispiel:
+Kann nur auf Modelleigenschaften angewendet werden, nicht auf Methodenparameter. Verhindert, dass die Modellbindung die Eigenschaft eines Modells festlegt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -798,7 +800,7 @@ Das `[Bind]`-Attribut kann zum Schutz vor Overposting in *Erstellungs*szenarien 
 
 ## <a name="collections"></a>Sammlungen
 
-Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Zum Beispiel:
 
 * Angenommen, der zu bindende Parameter ist ein Array namens `selectedCourses`:
 
@@ -843,7 +845,7 @@ Bei Zielen, die Sammlungen einfacher Typen sind, sucht die Modellbindung nach Ü
 
 ## <a name="dictionaries"></a>Wörterbücher
 
-Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Beispiel:
+Bei `Dictionary`-Zielen sucht die Modellbindung nach Übereinstimmungen mit *parameter_name* oder *property_name*. Wird keine Übereinstimmung gefunden, sucht sie nach einem der unterstützten Formate ohne Präfix. Zum Beispiel:
 
 * Angenommen, der Zielparameter ist eine `Dictionary<int, string>` mit dem Namen `selectedCourses`:
 
@@ -954,7 +956,7 @@ Sie können die Modellbindung erweitern, indem Sie eine benutzerdefinierte Model
 
 ## <a name="manual-model-binding"></a>Manuelle Modellbindung
 
-Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Hier sehen Sie ein Beispiel:
+Die Modellbindung kann mithilfe der <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>-Methode manuell aufgerufen werden. Die Methode ist für die beiden Klassen `ControllerBase` und `PageModel` definiert. Mithilfe von Methodenüberladungen können Sie das Präfix und den Wertanbieter festlegen, die verwendet werden sollen. Die Methode gibt `false` zurück, wenn die Modellbindung fehlschlägt. Im Folgenden ein Beispiel:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
