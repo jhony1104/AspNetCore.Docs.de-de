@@ -7,31 +7,33 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: df978d49201ba1010ddf13b1b9a63ae27116616e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: c088cb7dd4f446b6a42c63357ccf2a080d852382
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103084"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399243"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a><span data-ttu-id="9975b-103">Komponententaghilfsprogramm in ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="9975b-103">Component Tag Helper in ASP.NET Core</span></span>
+# <a name="component-tag-helper-in-aspnet-core"></a><span data-ttu-id="7d5a3-103">Komponententaghilfsprogramm in ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="7d5a3-103">Component Tag Helper in ASP.NET Core</span></span>
 
-<span data-ttu-id="9975b-104">Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="9975b-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="7d5a3-104">Von [Daniel Roth](https://github.com/danroth27) und [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="7d5a3-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="9975b-105">Verwenden Sie das [Komponententaghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper) zum Rendern einer Komponente einer Seite oder Ansicht.</span><span class="sxs-lookup"><span data-stu-id="9975b-105">To render a component from a page or view, use the [Component Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper).</span></span>
+<span data-ttu-id="7d5a3-105">Verwenden Sie das [Komponententaghilfsprogramm](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper) zum Rendern einer Komponente einer Seite oder Ansicht.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-105">To render a component from a page or view, use the [Component Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="9975b-106">Voraussetzungen</span><span class="sxs-lookup"><span data-stu-id="9975b-106">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="7d5a3-106">Voraussetzungen</span><span class="sxs-lookup"><span data-stu-id="7d5a3-106">Prerequisites</span></span>
 
-<span data-ttu-id="9975b-107">Befolgen Sie die Anweisungen im Abschnitt *Vorbereiten der APP für die Verwendung von Komponenten im Bereich "Seiten und Ansichten* " des <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> Artikels.</span><span class="sxs-lookup"><span data-stu-id="9975b-107">Follow the guidance in the *Prepare the app to use components in pages and views* section of the <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> article.</span></span>
+<span data-ttu-id="7d5a3-107">Befolgen Sie die Anweisungen im Abschnitt *Vorbereiten der APP für die Verwendung von Komponenten im Bereich "Seiten und Ansichten* " des <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> Artikels.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-107">Follow the guidance in the *Prepare the app to use components in pages and views* section of the <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> article.</span></span>
 
-## <a name="component-tag-helper"></a><span data-ttu-id="9975b-108">Komponententaghilfsprogramm</span><span class="sxs-lookup"><span data-stu-id="9975b-108">Component Tag Helper</span></span>
+## <a name="component-tag-helper"></a><span data-ttu-id="7d5a3-108">Komponententaghilfsprogramm</span><span class="sxs-lookup"><span data-stu-id="7d5a3-108">Component Tag Helper</span></span>
 
-<span data-ttu-id="9975b-109">Das folgende komponententaghilfsprogramm rendert die `Counter` Komponente in einer Seite oder Ansicht:</span><span class="sxs-lookup"><span data-stu-id="9975b-109">The following Component Tag Helper renders the `Counter` component in a page or view:</span></span>
+<span data-ttu-id="7d5a3-109">Das folgende komponententaghilfsprogramm rendert die `Counter` Komponente in einer Seite oder Ansicht:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-109">The following Component Tag Helper renders the `Counter` component in a page or view:</span></span>
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -42,9 +44,9 @@ ms.locfileid: "85103084"
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-<span data-ttu-id="9975b-110">Im vorangehenden Beispiel wird davon ausgegangen, dass `Counter` sich die Komponente im *Seiten* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="9975b-110">The preceding example assumes that the `Counter` component is in the app's *Pages* folder.</span></span> <span data-ttu-id="9975b-111">Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample.Pages` . b.).</span><span class="sxs-lookup"><span data-stu-id="9975b-111">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample.Pages`).</span></span>
+<span data-ttu-id="7d5a3-110">Im vorangehenden Beispiel wird davon ausgegangen, dass `Counter` sich die Komponente im *Seiten* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-110">The preceding example assumes that the `Counter` component is in the app's *Pages* folder.</span></span> <span data-ttu-id="7d5a3-111">Der Platzhalter `{APP ASSEMBLY}` ist der Assemblyname der App (z. B. `@using BlazorSample.Pages`).</span><span class="sxs-lookup"><span data-stu-id="7d5a3-111">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample.Pages`).</span></span>
 
-<span data-ttu-id="9975b-112">Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten übergeben werden.</span><span class="sxs-lookup"><span data-stu-id="9975b-112">The Component Tag Helper can also pass parameters to components.</span></span> <span data-ttu-id="9975b-113">Sehen `ColorfulCheckbox` Sie sich die folgende Komponente an, mit der die Farbe und Größe der Kontrollkästchen Bezeichnung festgelegt wird:</span><span class="sxs-lookup"><span data-stu-id="9975b-113">Consider the following `ColorfulCheckbox` component that sets the check box label's color and size:</span></span>
+<span data-ttu-id="7d5a3-112">Mit dem komponententaghilfsprogramm können auch Parameter an Komponenten übergeben werden.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-112">The Component Tag Helper can also pass parameters to components.</span></span> <span data-ttu-id="7d5a3-113">Sehen `ColorfulCheckbox` Sie sich die folgende Komponente an, mit der die Farbe und Größe der Kontrollkästchen Bezeichnung festgelegt wird:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-113">Consider the following `ColorfulCheckbox` component that sets the check box label's color and size:</span></span>
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -72,7 +74,7 @@ ms.locfileid: "85103084"
 }
 ```
 
-<span data-ttu-id="9975b-114">Die `Size` `int` Komponenten Parameter () und `Color` ( `string` ) können vom komponententaghilfsprogramm festgelegt werden: [component parameters](xref:blazor/components/index#component-parameters)</span><span class="sxs-lookup"><span data-stu-id="9975b-114">The `Size` (`int`) and `Color` (`string`) [component parameters](xref:blazor/components/index#component-parameters) can be set by the Component Tag Helper:</span></span>
+<span data-ttu-id="7d5a3-114">Die `Size` `int` Komponenten Parameter () und `Color` ( `string` ) können vom komponententaghilfsprogramm festgelegt werden: [component parameters](xref:blazor/components/index#component-parameters)</span><span class="sxs-lookup"><span data-stu-id="7d5a3-114">The `Size` (`int`) and `Color` (`string`) [component parameters](xref:blazor/components/index#component-parameters) can be set by the Component Tag Helper:</span></span>
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -84,9 +86,9 @@ ms.locfileid: "85103084"
     param-Size="14" param-Color="@("blue")" />
 ```
 
-<span data-ttu-id="9975b-115">Im vorangehenden Beispiel wird davon ausgegangen, dass `ColorfulCheckbox` sich die Komponente im frei *gegebenen* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="9975b-115">The preceding example assumes that the `ColorfulCheckbox` component is in the app's *Shared* folder.</span></span> <span data-ttu-id="9975b-116">Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample.Shared` . b.).</span><span class="sxs-lookup"><span data-stu-id="9975b-116">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample.Shared`).</span></span>
+<span data-ttu-id="7d5a3-115">Im vorangehenden Beispiel wird davon ausgegangen, dass `ColorfulCheckbox` sich die Komponente im frei *gegebenen* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-115">The preceding example assumes that the `ColorfulCheckbox` component is in the app's *Shared* folder.</span></span> <span data-ttu-id="7d5a3-116">Der Platzhalter `{APP ASSEMBLY}` ist der Assemblyname der App (z. B. `@using BlazorSample.Shared`).</span><span class="sxs-lookup"><span data-stu-id="7d5a3-116">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample.Shared`).</span></span>
 
-<span data-ttu-id="9975b-117">Der folgende HTML-Code wird in der Seite oder Sicht gerendert:</span><span class="sxs-lookup"><span data-stu-id="9975b-117">The following HTML is rendered in the page or view:</span></span>
+<span data-ttu-id="7d5a3-117">Der folgende HTML-Code wird in der Seite oder Sicht gerendert:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-117">The following HTML is rendered in the page or view:</span></span>
 
 ```html
 <label style="font-size:24px;color:blue">
@@ -95,13 +97,13 @@ ms.locfileid: "85103084"
 </label>
 ```
 
-<span data-ttu-id="9975b-118">Das übergeben einer Zeichenfolge in Anführungszeichen erfordert einen [expliziten Razor Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie `param-Color` im vorherigen Beispiel gezeigt.</span><span class="sxs-lookup"><span data-stu-id="9975b-118">Passing a quoted string requires an [explicit Razor expression](xref:mvc/views/razor#explicit-razor-expressions), as shown for `param-Color` in the preceding example.</span></span> <span data-ttu-id="9975b-119">Das Verarbeitungs Razor Verhalten für einen `string` Typwert gilt nicht für ein- `param-*` Attribut, da es sich bei dem Attribut um einen- `object` Typ handelt.</span><span class="sxs-lookup"><span data-stu-id="9975b-119">The Razor parsing behavior for a `string` type value doesn't apply to a `param-*` attribute because the attribute is an `object` type.</span></span>
+<span data-ttu-id="7d5a3-118">Das übergeben einer Zeichenfolge in Anführungszeichen erfordert einen [expliziten Razor Ausdruck](xref:mvc/views/razor#explicit-razor-expressions), wie `param-Color` im vorherigen Beispiel gezeigt.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-118">Passing a quoted string requires an [explicit Razor expression](xref:mvc/views/razor#explicit-razor-expressions), as shown for `param-Color` in the preceding example.</span></span> <span data-ttu-id="7d5a3-119">Das Verarbeitungs Razor Verhalten für einen `string` Typwert gilt nicht für ein- `param-*` Attribut, da es sich bei dem Attribut um einen- `object` Typ handelt.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-119">The Razor parsing behavior for a `string` type value doesn't apply to a `param-*` attribute because the attribute is an `object` type.</span></span>
 
-<span data-ttu-id="9975b-120">Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass der Typ einen Standardkonstruktor und festleg bare Eigenschaften aufweisen muss.</span><span class="sxs-lookup"><span data-stu-id="9975b-120">The parameter type must be JSON serializable, which typically means that the type must have a default constructor and settable properties.</span></span> <span data-ttu-id="9975b-121">Beispielsweise können Sie einen Wert für `Size` und `Color` im vorangehenden Beispiel angeben, da die Typen von `Size` und `Color` primitive Typen ( `int` und `string` ) sind, die vom JSON-Serialisierungsprogramm unterstützt werden.</span><span class="sxs-lookup"><span data-stu-id="9975b-121">For example, you can specify a value for `Size` and `Color` in the preceding example because the types of `Size` and `Color` are primitive types (`int` and `string`), which are supported by the JSON serializer.</span></span>
+<span data-ttu-id="7d5a3-120">Der Parametertyp muss JSON-serialisierbar sein. Dies bedeutet in der Regel, dass der Typ einen Standardkonstruktor und festleg bare Eigenschaften aufweisen muss.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-120">The parameter type must be JSON serializable, which typically means that the type must have a default constructor and settable properties.</span></span> <span data-ttu-id="7d5a3-121">Beispielsweise können Sie einen Wert für `Size` und `Color` im vorangehenden Beispiel angeben, da die Typen von `Size` und `Color` primitive Typen ( `int` und `string` ) sind, die vom JSON-Serialisierungsprogramm unterstützt werden.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-121">For example, you can specify a value for `Size` and `Color` in the preceding example because the types of `Size` and `Color` are primitive types (`int` and `string`), which are supported by the JSON serializer.</span></span>
 
-<span data-ttu-id="9975b-122">Im folgenden Beispiel wird ein-Klassenobjekt an die-Komponente übermittelt:</span><span class="sxs-lookup"><span data-stu-id="9975b-122">In the following example, a class object is passed to the component:</span></span>
+<span data-ttu-id="7d5a3-122">Im folgenden Beispiel wird ein-Klassenobjekt an die-Komponente übermittelt:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-122">In the following example, a class object is passed to the component:</span></span>
 
-<span data-ttu-id="9975b-123">*MyClass.cs*:</span><span class="sxs-lookup"><span data-stu-id="9975b-123">*MyClass.cs*:</span></span>
+<span data-ttu-id="7d5a3-123">*MyClass.cs*:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-123">*MyClass.cs*:</span></span>
 
 ```csharp
 public class MyClass
@@ -115,9 +117,9 @@ public class MyClass
 }
 ```
 
-<span data-ttu-id="9975b-124">**Die Klasse muss über einen öffentlichen Parameter losen Konstruktor verfügen.**</span><span class="sxs-lookup"><span data-stu-id="9975b-124">**The class must have a public parameterless constructor.**</span></span>
+<span data-ttu-id="7d5a3-124">**Die Klasse muss über einen öffentlichen Parameter losen Konstruktor verfügen.**</span><span class="sxs-lookup"><span data-stu-id="7d5a3-124">**The class must have a public parameterless constructor.**</span></span>
 
-<span data-ttu-id="9975b-125">*Shared/MyComponent. Razor*:</span><span class="sxs-lookup"><span data-stu-id="9975b-125">*Shared/MyComponent.razor*:</span></span>
+<span data-ttu-id="7d5a3-125">*Shared/MyComponent. Razor*:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-125">*Shared/MyComponent.razor*:</span></span>
 
 ```razor
 <h2>MyComponent</h2>
@@ -132,7 +134,7 @@ public class MyClass
 }
 ```
 
-<span data-ttu-id="9975b-126">*Pages/mypage. cshtml*:</span><span class="sxs-lookup"><span data-stu-id="9975b-126">*Pages/MyPage.cshtml*:</span></span>
+<span data-ttu-id="7d5a3-126">*Pages/mypage. cshtml*:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-126">*Pages/MyPage.cshtml*:</span></span>
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -151,24 +153,24 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-<span data-ttu-id="9975b-127">Im vorangehenden Beispiel wird davon ausgegangen, dass `MyComponent` sich die Komponente im frei *gegebenen* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="9975b-127">The preceding example assumes that the `MyComponent` component is in the app's *Shared* folder.</span></span> <span data-ttu-id="9975b-128">Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample` `@using BlazorSample.Shared` . b. und).</span><span class="sxs-lookup"><span data-stu-id="9975b-128">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample` and `@using BlazorSample.Shared`).</span></span> <span data-ttu-id="9975b-129">`MyClass`befindet sich im-Namespace der app.</span><span class="sxs-lookup"><span data-stu-id="9975b-129">`MyClass` is in the app's namespace.</span></span>
+<span data-ttu-id="7d5a3-127">Im vorangehenden Beispiel wird davon ausgegangen, dass `MyComponent` sich die Komponente im frei *gegebenen* Ordner der APP befindet.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-127">The preceding example assumes that the `MyComponent` component is in the app's *Shared* folder.</span></span> <span data-ttu-id="7d5a3-128">Der Platzhalter `{APP ASSEMBLY}` ist der AssemblyName der APP (z `@using BlazorSample` `@using BlazorSample.Shared` . b. und).</span><span class="sxs-lookup"><span data-stu-id="7d5a3-128">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `@using BlazorSample` and `@using BlazorSample.Shared`).</span></span> <span data-ttu-id="7d5a3-129">`MyClass`befindet sich im-Namespace der app.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-129">`MyClass` is in the app's namespace.</span></span>
 
-<span data-ttu-id="9975b-130"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die Komponente:</span><span class="sxs-lookup"><span data-stu-id="9975b-130"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the component:</span></span>
+<span data-ttu-id="7d5a3-130"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die Komponente:</span><span class="sxs-lookup"><span data-stu-id="7d5a3-130"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the component:</span></span>
 
-* <span data-ttu-id="9975b-131">Ob die Komponente zuvor für die Seite gerendert wird</span><span class="sxs-lookup"><span data-stu-id="9975b-131">Is prerendered into the page.</span></span>
-* <span data-ttu-id="9975b-132">Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält.</span><span class="sxs-lookup"><span data-stu-id="9975b-132">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
+* <span data-ttu-id="7d5a3-131">Ob die Komponente zuvor für die Seite gerendert wird</span><span class="sxs-lookup"><span data-stu-id="7d5a3-131">Is prerendered into the page.</span></span>
+* <span data-ttu-id="7d5a3-132">Ob die Komponente als statische HTML auf der Seite gerendert wird oder ob sie die nötigen Informationen für das Bootstrapping einer Blazor-App über den Benutzer-Agent enthält.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-132">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
 
-| <span data-ttu-id="9975b-133">Rendermodus</span><span class="sxs-lookup"><span data-stu-id="9975b-133">Render Mode</span></span> | <span data-ttu-id="9975b-134">Beschreibung</span><span class="sxs-lookup"><span data-stu-id="9975b-134">Description</span></span> |
+| <span data-ttu-id="7d5a3-133">Rendermodus</span><span class="sxs-lookup"><span data-stu-id="7d5a3-133">Render Mode</span></span> | <span data-ttu-id="7d5a3-134">Beschreibung</span><span class="sxs-lookup"><span data-stu-id="7d5a3-134">Description</span></span> |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="9975b-135">Rendert die Komponente in statische HTML und fügt einen Marker für eine Blazor Server-App hinzu.</span><span class="sxs-lookup"><span data-stu-id="9975b-135">Renders the component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="9975b-136">Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet.</span><span class="sxs-lookup"><span data-stu-id="9975b-136">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="9975b-137">Rendert einen Marker für eine Blazor Server-App.</span><span class="sxs-lookup"><span data-stu-id="9975b-137">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="9975b-138">Die Ausgabe der Komponente ist nicht enthalten.</span><span class="sxs-lookup"><span data-stu-id="9975b-138">Output from the component isn't included.</span></span> <span data-ttu-id="9975b-139">Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet.</span><span class="sxs-lookup"><span data-stu-id="9975b-139">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="9975b-140">Rendert die Komponente in statischen HTML-Code.</span><span class="sxs-lookup"><span data-stu-id="9975b-140">Renders the component into static HTML.</span></span> |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="7d5a3-135">Rendert die Komponente in statischem HTML-Format und enthält einen Marker für eine- Blazor Server app.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-135">Renders the component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="7d5a3-136">Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-136">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="7d5a3-137">Rendert einen Marker für eine- Blazor Server app.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-137">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="7d5a3-138">Die Ausgabe der Komponente ist nicht enthalten.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-138">Output from the component isn't included.</span></span> <span data-ttu-id="7d5a3-139">Wenn der Benutzer-Agent gestartet wird, wird der Marker zum Bootstrapping einer Blazor-App verwendet.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-139">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="7d5a3-140">Rendert die Komponente in statischen HTML-Code.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-140">Renders the component into static HTML.</span></span> |
 
-<span data-ttu-id="9975b-141">Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil nicht der Fall.</span><span class="sxs-lookup"><span data-stu-id="9975b-141">While pages and views can use components, the converse isn't true.</span></span> <span data-ttu-id="9975b-142">Komponenten können keine Ansichts-und Seiten spezifischen Funktionen verwenden, wie z. b. partielle Sichten und Abschnitte.</span><span class="sxs-lookup"><span data-stu-id="9975b-142">Components can't use view- and page-specific features, such as partial views and sections.</span></span> <span data-ttu-id="9975b-143">Wenn Sie Logik aus einer partiellen Sicht in einer Komponente verwenden möchten, müssen Sie die partielle Sicht Logik in eine Komponente einbeziehen.</span><span class="sxs-lookup"><span data-stu-id="9975b-143">To use logic from a partial view in a component, factor out the partial view logic into a component.</span></span>
+<span data-ttu-id="7d5a3-141">Während Seiten und Ansichten Komponenten verwenden können, ist das Gegenteil nicht der Fall.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-141">While pages and views can use components, the converse isn't true.</span></span> <span data-ttu-id="7d5a3-142">Komponenten können keine Ansichts-und Seiten spezifischen Funktionen verwenden, wie z. b. partielle Sichten und Abschnitte.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-142">Components can't use view- and page-specific features, such as partial views and sections.</span></span> <span data-ttu-id="7d5a3-143">Wenn Sie Logik aus einer partiellen Sicht in einer Komponente verwenden möchten, müssen Sie die partielle Sicht Logik in eine Komponente einbeziehen.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-143">To use logic from a partial view in a component, factor out the partial view logic into a component.</span></span>
 
-<span data-ttu-id="9975b-144">Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.</span><span class="sxs-lookup"><span data-stu-id="9975b-144">Rendering server components from a static HTML page isn't supported.</span></span>
+<span data-ttu-id="7d5a3-144">Das Rendern von Serverkomponenten über eine statische HTML-Seite wird nicht unterstützt.</span><span class="sxs-lookup"><span data-stu-id="7d5a3-144">Rendering server components from a static HTML page isn't supported.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="9975b-145">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="9975b-145">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="7d5a3-145">Zusätzliche Ressourcen</span><span class="sxs-lookup"><span data-stu-id="7d5a3-145">Additional resources</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>
