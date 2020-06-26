@@ -6,60 +6,62 @@ ms.author: riande
 ms.date: 01/31/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 7cd0fe60d7917abda7d8ac0e071deca13a4136ce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95915c28b132a1a48fb772b2663794754006627f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776551"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405353"
 ---
-# <a name="authentication-samples-for-aspnet-core"></a><span data-ttu-id="c759d-103">Authentifizierungs Beispiele für ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="c759d-103">Authentication samples for ASP.NET Core</span></span>
+# <a name="authentication-samples-for-aspnet-core"></a><span data-ttu-id="5aa69-103">Authentifizierungs Beispiele für ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="5aa69-103">Authentication samples for ASP.NET Core</span></span>
 
-<span data-ttu-id="c759d-104">Von [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c759d-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="5aa69-104">Von [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="5aa69-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="c759d-105">Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die folgenden Authentifizierungs Beispiele im Ordner " *aspnetcore/src/Security/Samples* ":</span><span class="sxs-lookup"><span data-stu-id="c759d-105">The [ASP.NET Core repository](https://github.com/dotnet/AspNetCore) contains the following authentication samples in the *AspNetCore/src/Security/samples* folder:</span></span>
+<span data-ttu-id="5aa69-105">Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die folgenden Authentifizierungs Beispiele im Ordner " *aspnetcore/src/Security/Samples* ":</span><span class="sxs-lookup"><span data-stu-id="5aa69-105">The [ASP.NET Core repository](https://github.com/dotnet/AspNetCore) contains the following authentication samples in the *AspNetCore/src/Security/samples* folder:</span></span>
 
-* [<span data-ttu-id="c759d-106">Transformation von Ansprüchen</span><span class="sxs-lookup"><span data-stu-id="c759d-106">Claims transformation</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/ClaimsTransformation)
-* [<span data-ttu-id="c759d-107">Cookie-Authentifizierung</span><span class="sxs-lookup"><span data-stu-id="c759d-107">Cookie authentication</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Cookies)
-* [<span data-ttu-id="c759d-108">Benutzerdefinierter Richtlinien Anbieter-iauthorizationpolicyprovider</span><span class="sxs-lookup"><span data-stu-id="c759d-108">Custom policy provider - IAuthorizationPolicyProvider</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider)
-* [<span data-ttu-id="c759d-109">Dynamische Authentifizierungs Schemas und-Optionen</span><span class="sxs-lookup"><span data-stu-id="c759d-109">Dynamic authentication schemes and options</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/DynamicSchemes)
-* <span data-ttu-id="c759d-110">[Externe Ansprüche](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Identity.ExternalClaims)</span><span class="sxs-lookup"><span data-stu-id="c759d-110">[External claims](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Identity.ExternalClaims)</span></span>
-* [<span data-ttu-id="c759d-111">Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung</span><span class="sxs-lookup"><span data-stu-id="c759d-111">Selecting between cookie and another authentication scheme based on the request</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/PathSchemeSelection)
-* [<span data-ttu-id="c759d-112">Schränkt den Zugriff auf statische Dateien ein.</span><span class="sxs-lookup"><span data-stu-id="c759d-112">Restricts access to static files</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/StaticFilesAuth)
+* [<span data-ttu-id="5aa69-106">Transformation von Ansprüchen</span><span class="sxs-lookup"><span data-stu-id="5aa69-106">Claims transformation</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/ClaimsTransformation)
+* [<span data-ttu-id="5aa69-107">Cookie-Authentifizierung</span><span class="sxs-lookup"><span data-stu-id="5aa69-107">Cookie authentication</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Cookies)
+* [<span data-ttu-id="5aa69-108">Benutzerdefinierter Richtlinien Anbieter-iauthorizationpolicyprovider</span><span class="sxs-lookup"><span data-stu-id="5aa69-108">Custom policy provider - IAuthorizationPolicyProvider</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider)
+* [<span data-ttu-id="5aa69-109">Dynamische Authentifizierungs Schemas und-Optionen</span><span class="sxs-lookup"><span data-stu-id="5aa69-109">Dynamic authentication schemes and options</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/DynamicSchemes)
+* <span data-ttu-id="5aa69-110">[Externe Ansprüche](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Identity.ExternalClaims)</span><span class="sxs-lookup"><span data-stu-id="5aa69-110">[External claims](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Identity.ExternalClaims)</span></span>
+* [<span data-ttu-id="5aa69-111">Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung</span><span class="sxs-lookup"><span data-stu-id="5aa69-111">Selecting between cookie and another authentication scheme based on the request</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/PathSchemeSelection)
+* [<span data-ttu-id="5aa69-112">Schränkt den Zugriff auf statische Dateien ein.</span><span class="sxs-lookup"><span data-stu-id="5aa69-112">Restricts access to static files</span></span>](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/StaticFilesAuth)
 
-## <a name="run-the-samples"></a><span data-ttu-id="c759d-113">Ausführen der Beispiele</span><span class="sxs-lookup"><span data-stu-id="c759d-113">Run the samples</span></span>
+## <a name="run-the-samples"></a><span data-ttu-id="5aa69-113">Ausführen der Beispiele</span><span class="sxs-lookup"><span data-stu-id="5aa69-113">Run the samples</span></span>
 
-* <span data-ttu-id="c759d-114">Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus.</span><span class="sxs-lookup"><span data-stu-id="c759d-114">Select a [branch](https://github.com/dotnet/AspNetCore).</span></span> <span data-ttu-id="c759d-115">Zum Beispiel, `release/3.1`</span><span class="sxs-lookup"><span data-stu-id="c759d-115">For example, `release/3.1`</span></span>
-* <span data-ttu-id="c759d-116">Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.</span><span class="sxs-lookup"><span data-stu-id="c759d-116">Clone or download the [ASP.NET Core repository](https://github.com/dotnet/AspNetCore).</span></span>
-* <span data-ttu-id="c759d-117">Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="c759d-117">Verify you have installed the [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) version matching the clone of the ASP.NET Core repository.</span></span>
-* <span data-ttu-id="c759d-118">Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie `dotnet run`das Beispiel mit aus.</span><span class="sxs-lookup"><span data-stu-id="c759d-118">Navigate to a sample in *AspNetCore/src/Security/samples* and run the sample with `dotnet run`.</span></span>
+* <span data-ttu-id="5aa69-114">Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus.</span><span class="sxs-lookup"><span data-stu-id="5aa69-114">Select a [branch](https://github.com/dotnet/AspNetCore).</span></span> <span data-ttu-id="5aa69-115">Zum Beispiel, `release/3.1`</span><span class="sxs-lookup"><span data-stu-id="5aa69-115">For example, `release/3.1`</span></span>
+* <span data-ttu-id="5aa69-116">Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.</span><span class="sxs-lookup"><span data-stu-id="5aa69-116">Clone or download the [ASP.NET Core repository](https://github.com/dotnet/AspNetCore).</span></span>
+* <span data-ttu-id="5aa69-117">Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="5aa69-117">Verify you have installed the [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) version matching the clone of the ASP.NET Core repository.</span></span>
+* <span data-ttu-id="5aa69-118">Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit aus `dotnet run` .</span><span class="sxs-lookup"><span data-stu-id="5aa69-118">Navigate to a sample in *AspNetCore/src/Security/samples* and run the sample with `dotnet run`.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="c759d-119">Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die folgenden Authentifizierungs Beispiele im Ordner " *aspnetcore/src/Security/Samples* ":</span><span class="sxs-lookup"><span data-stu-id="c759d-119">The [ASP.NET Core repository](https://github.com/dotnet/AspNetCore) contains the following authentication samples in the *AspNetCore/src/Security/samples* folder:</span></span>
+<span data-ttu-id="5aa69-119">Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die folgenden Authentifizierungs Beispiele im Ordner " *aspnetcore/src/Security/Samples* ":</span><span class="sxs-lookup"><span data-stu-id="5aa69-119">The [ASP.NET Core repository](https://github.com/dotnet/AspNetCore) contains the following authentication samples in the *AspNetCore/src/Security/samples* folder:</span></span>
 
-* [<span data-ttu-id="c759d-120">Transformation von Ansprüchen</span><span class="sxs-lookup"><span data-stu-id="c759d-120">Claims transformation</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/ClaimsTransformation)
-* [<span data-ttu-id="c759d-121">Cookie-Authentifizierung</span><span class="sxs-lookup"><span data-stu-id="c759d-121">Cookie authentication</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Cookies)
-* [<span data-ttu-id="c759d-122">Benutzerdefinierter Richtlinien Anbieter-iauthorizationpolicyprovider</span><span class="sxs-lookup"><span data-stu-id="c759d-122">Custom policy provider - IAuthorizationPolicyProvider</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider)
-* [<span data-ttu-id="c759d-123">Dynamische Authentifizierungs Schemas und-Optionen</span><span class="sxs-lookup"><span data-stu-id="c759d-123">Dynamic authentication schemes and options</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/DynamicSchemes)
-* <span data-ttu-id="c759d-124">[Externe Ansprüche](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Identity.ExternalClaims)</span><span class="sxs-lookup"><span data-stu-id="c759d-124">[External claims](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Identity.ExternalClaims)</span></span>
-* [<span data-ttu-id="c759d-125">Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung</span><span class="sxs-lookup"><span data-stu-id="c759d-125">Selecting between cookie and another authentication scheme based on the request</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/PathSchemeSelection)
-* [<span data-ttu-id="c759d-126">Schränkt den Zugriff auf statische Dateien ein.</span><span class="sxs-lookup"><span data-stu-id="c759d-126">Restricts access to static files</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/StaticFilesAuth)
+* [<span data-ttu-id="5aa69-120">Transformation von Ansprüchen</span><span class="sxs-lookup"><span data-stu-id="5aa69-120">Claims transformation</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/ClaimsTransformation)
+* [<span data-ttu-id="5aa69-121">Cookie-Authentifizierung</span><span class="sxs-lookup"><span data-stu-id="5aa69-121">Cookie authentication</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Cookies)
+* [<span data-ttu-id="5aa69-122">Benutzerdefinierter Richtlinien Anbieter-iauthorizationpolicyprovider</span><span class="sxs-lookup"><span data-stu-id="5aa69-122">Custom policy provider - IAuthorizationPolicyProvider</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider)
+* [<span data-ttu-id="5aa69-123">Dynamische Authentifizierungs Schemas und-Optionen</span><span class="sxs-lookup"><span data-stu-id="5aa69-123">Dynamic authentication schemes and options</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/DynamicSchemes)
+* <span data-ttu-id="5aa69-124">[Externe Ansprüche](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Identity.ExternalClaims)</span><span class="sxs-lookup"><span data-stu-id="5aa69-124">[External claims](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/Identity.ExternalClaims)</span></span>
+* [<span data-ttu-id="5aa69-125">Auswählen zwischen Cookie und einem anderen Authentifizierungsschema basierend auf der Anforderung</span><span class="sxs-lookup"><span data-stu-id="5aa69-125">Selecting between cookie and another authentication scheme based on the request</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/PathSchemeSelection)
+* [<span data-ttu-id="5aa69-126">Schränkt den Zugriff auf statische Dateien ein.</span><span class="sxs-lookup"><span data-stu-id="5aa69-126">Restricts access to static files</span></span>](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/StaticFilesAuth)
 
-## <a name="run-the-samples"></a><span data-ttu-id="c759d-127">Ausführen der Beispiele</span><span class="sxs-lookup"><span data-stu-id="c759d-127">Run the samples</span></span>
+## <a name="run-the-samples"></a><span data-ttu-id="5aa69-127">Ausführen der Beispiele</span><span class="sxs-lookup"><span data-stu-id="5aa69-127">Run the samples</span></span>
 
-* <span data-ttu-id="c759d-128">Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus.</span><span class="sxs-lookup"><span data-stu-id="c759d-128">Select a [branch](https://github.com/dotnet/AspNetCore).</span></span> <span data-ttu-id="c759d-129">Zum Beispiel, `release/2.2`</span><span class="sxs-lookup"><span data-stu-id="c759d-129">For example, `release/2.2`</span></span>
-* <span data-ttu-id="c759d-130">Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.</span><span class="sxs-lookup"><span data-stu-id="c759d-130">Clone or download the [ASP.NET Core repository](https://github.com/dotnet/AspNetCore).</span></span>
-* <span data-ttu-id="c759d-131">Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="c759d-131">Verify you have installed the [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) version matching the clone of the ASP.NET Core repository.</span></span>
-* <span data-ttu-id="c759d-132">Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie `dotnet run`das Beispiel mit aus.</span><span class="sxs-lookup"><span data-stu-id="c759d-132">Navigate to a sample in *AspNetCore/src/Security/samples* and run the sample with `dotnet run`.</span></span>
+* <span data-ttu-id="5aa69-128">Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus.</span><span class="sxs-lookup"><span data-stu-id="5aa69-128">Select a [branch](https://github.com/dotnet/AspNetCore).</span></span> <span data-ttu-id="5aa69-129">Zum Beispiel, `release/2.2`</span><span class="sxs-lookup"><span data-stu-id="5aa69-129">For example, `release/2.2`</span></span>
+* <span data-ttu-id="5aa69-130">Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.</span><span class="sxs-lookup"><span data-stu-id="5aa69-130">Clone or download the [ASP.NET Core repository](https://github.com/dotnet/AspNetCore).</span></span>
+* <span data-ttu-id="5aa69-131">Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.</span><span class="sxs-lookup"><span data-stu-id="5aa69-131">Verify you have installed the [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) version matching the clone of the ASP.NET Core repository.</span></span>
+* <span data-ttu-id="5aa69-132">Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit aus `dotnet run` .</span><span class="sxs-lookup"><span data-stu-id="5aa69-132">Navigate to a sample in *AspNetCore/src/Security/samples* and run the sample with `dotnet run`.</span></span>
 
 ::: moniker-end
