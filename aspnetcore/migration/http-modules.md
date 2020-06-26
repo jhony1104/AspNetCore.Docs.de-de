@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/07/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 214e3fa86a1418f04a5e292cdc1b4baac8c75643
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074187"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403650"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrieren von HTTP-Handlern und Modulen zu ASP.net Core Middleware
 
@@ -391,6 +393,6 @@ Die `SetCookies` Rückruf Methode würde wie folgt aussehen:
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 * [Übersicht über HTTP-Handler und HTTP-Module](/iis/configuration/system.webserver/)
-* [Konfiguration](xref:fundamentals/configuration/index)
+* [Configuration](xref:fundamentals/configuration/index)
 * [Anwendungsstart](xref:fundamentals/startup)
 * [Middleware](xref:fundamentals/middleware/index)

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452212"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403377"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testen von Web-APIs mit HTTP REPL
 
@@ -36,7 +38,7 @@ Folgende [HTTP-Verben](https://github.com/microsoft/api-guidelines/blob/vNext/Gu
 * [GET](#test-http-get-requests)
 * [Stadt](#test-http-head-requests)
 * [Optionen](#test-http-options-requests)
-* [Patch](#test-http-patch-requests)
+* [PATCH](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
@@ -140,7 +142,7 @@ Stellen Sie mithilfe des folgenden Befehls eine Verbindung mit einer Web-API her
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` ist der Basis-URI für die Web-API. Beispiel:
+`<ROOT URI>` ist der Basis-URI für die Web-API. Zum Beispiel:
 
 ```console
 httprepl https://localhost:5001
@@ -152,7 +154,7 @@ Alternativ können Sie den folgenden Befehl jederzeit ausführen, während HTTP 
 connect <ROOT URI>
 ```
 
-Beispiel:
+Zum Beispiel:
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -166,7 +168,7 @@ Der oben genannte connect-Befehl versucht, das Swagger-Dokument automatisch zu f
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-Beispiel:
+Zum Beispiel:
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -205,7 +207,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-Führen Sie alternativ den Befehl `ui` aus, um die Swagger-Benutzeroberflächenseite der Web-API in einem Browser zu öffnen. Beispiel:
+Führen Sie alternativ den Befehl `ui` aus, um die Swagger-Benutzeroberflächenseite der Web-API in einem Browser zu öffnen. Zum Beispiel:
 
 ```console
 https://localhost:5001/~ ui
@@ -249,7 +251,7 @@ Die *HTTPREPLPREFS-Datei* wird beim Start geladen und bei der Laufzeit nicht auf
 
 ### <a name="view-the-settings"></a>Anzeigen der Einstellungen
 
-Führen Sie den Befehl `pref get` aus, um die verfügbaren Einstellungen anzuzeigen. Beispiel:
+Führen Sie den Befehl `pref get` aus, um die verfügbaren Einstellungen anzuzeigen. Zum Beispiel:
 
 ```console
 https://localhost:5001/~ pref get
@@ -287,7 +289,7 @@ Wenn bestimmte Farbtasten nicht festgelegt sind, werden mehr generische Schlüss
 
 ### <a name="set-indentation-size"></a>Festlegen der Einzugsgröße
 
-Die Anpassung der Einzugsgröße für Antworten wird derzeit nur für JSON unterstützt. Der Standardgröße beträgt zwei Leerzeichen. Beispiel:
+Die Anpassung der Einzugsgröße für Antworten wird derzeit nur für JSON unterstützt. Der Standardgröße beträgt zwei Leerzeichen. Zum Beispiel:
 
 ```json
 [
@@ -371,12 +373,12 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Standardmäßig weist die HTTP-REPL eine Reihe von relativen Pfaden auf, die zum Suchen des Swagger-Dokuments verwendet werden, wenn der `connect`-Befehl ohne die Option `--swagger` ausgeführt wird. Diese relativen Pfade werden mit den Stamm- und Basispfaden kombiniert, die im `connect`-Befehl angegeben werden. Die standardmäßigen relativen Pfade lauten wie folgt:
 
-- *Swagger. JSON*
-- *Swagger/v1/Swagger. JSON*
-- */Swagger.JSON*
+- *swagger.js*
+- *Swagger/v1/swagger.json*
+- */swagger.js*
 - */swagger/v1/swagger.json*
 
-Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Beispiel:
+Um andere Suchpfade in Ihrer Umgebung zu verwenden, legen Sie die Einstellung `swagger.searchPaths` fest. Bei dem Wert muss es sich um eine durch Pipezeichen getrennte Liste relativer Pfade handeln. Zum Beispiel:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -496,7 +498,7 @@ So führen Sie eine HTTP POST-Anforderung aus:
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Beispiel:
+    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Zum Beispiel:
 
     ```json
     {
@@ -592,7 +594,7 @@ So führen Sie eine HTTP PUT-Anforderung aus:
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Beispiel:
+    Im vorherigen Befehl wird der HTTP-Anforderungsheader `Content-Type` so festgelegt, dass er den Medientyp des Anforderungstexts (JSON) angibt. Der Standard-Text-Editor öffnet eine *TMP-Datei* mit einer JSON-Vorlage, die den HTTP-Anforderungstext darstellt. Zum Beispiel:
 
     ```json
     {
@@ -798,7 +800,7 @@ Der Routenparameter (sofern vorhanden), der von der zugeordneten Aktionsmethode 
 
 Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader festzulegen:
 
-* Legen Sie den Header inline mit der HTTP-Anforderung fest. Beispiel:
+* Legen Sie den Header inline mit der HTTP-Anforderung fest. Zum Beispiel:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -806,13 +808,13 @@ Verwenden Sie einen der folgenden Ansätze, um einen HTTP-Anforderungsheader fes
     
     Beim vorherigen Ansatz benötigt jeder eindeutige HTTP-Anforderungsheader eine eigene `-h`-Option.
 
-* Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Beispiel:
+* Legen Sie den Header fest, bevor Sie die HTTP-Anforderung senden. Zum Beispiel:
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Beispiel:
+    Wenn Sie den Header vor dem Senden einer Anforderung festlegen, bleibt er für die Dauer der Befehlsshellsitzung festgelegt. Geben Sie einen leeren Wert an, um den Header zu löschen. Zum Beispiel:
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -922,14 +924,14 @@ Standardmäßig wird die Anzeige der gesendeten HTTP-Anforderung unterdrückt. S
 
 ### <a name="enable-request-display"></a>Aktivieren der Anzeige von Anforderungen
 
-Zeigen Sie die gesendete HTTP-Anforderung an, indem Sie den Befehl `echo on` ausführen. Beispiel:
+Zeigen Sie die gesendete HTTP-Anforderung an, indem Sie den Befehl `echo on` ausführen. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-Nachfolgende HTTP-Anforderungen in der aktuellen Sitzung zeigen die Anforderungsheader an. Beispiel:
+Nachfolgende HTTP-Anforderungen in der aktuellen Sitzung zeigen die Anforderungsheader an. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ post
@@ -967,7 +969,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>Deaktivieren der Anzeige von Anforderungen
 
-Unterdrücken Sie die Anzeige der gesendeten HTTP-Anforderung, indem Sie den Befehl `echo off` ausführen. Beispiel:
+Unterdrücken Sie die Anzeige der gesendeten HTTP-Anforderung, indem Sie den Befehl `echo off` ausführen. Zum Beispiel:
 
 ```console
 https://localhost:5001/people~ echo off
@@ -976,7 +978,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Ausführen eines Skripts
 
-Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in einer Textdatei speichern. Die Befehle in der Datei haben das gleiche Format wie die manuell in der Befehlszeile ausgeführten Befehle. Die Befehle können mithilfe des Befehls `run` auf einmal ausgeführt werden. Beispiel:
+Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in einer Textdatei speichern. Die Befehle in der Datei haben das gleiche Format wie die manuell in der Befehlszeile ausgeführten Befehle. Die Befehle können mithilfe des Befehls `run` auf einmal ausgeführt werden. Zum Beispiel:
 
 1. Erstellen Sie eine Textdatei, die einige Befehle enthält, die jeweils in einer neuen Zeile stehen. Sie können die Datei *people-script.txt*, die folgende Befehle enthält, als Beispiel verwenden:
 
@@ -988,7 +990,7 @@ Wenn Sie häufig die gleichen HTTP REPL-Befehle ausführen, können Sie diese in
     get 1
     ```
 
-1. Führen Sie den Befehl `run` aus, und übergeben Sie den Pfad der Textdatei. Beispiel:
+1. Führen Sie den Befehl `run` aus, und übergeben Sie den Pfad der Textdatei. Zum Beispiel:
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt

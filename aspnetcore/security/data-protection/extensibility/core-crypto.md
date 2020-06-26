@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776421"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404274"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>Zentrale kryptografieerweiterbarkeit in ASP.net Core
 
@@ -126,10 +128,10 @@ Der primäre Unterschied zwischen iauthenticatedencryptor und iauthenticatedencr
 
 Der Deskriptor kann über seine exporttoxml-Routine serialisiert werden. Diese Routine gibt ein xmlserializeddescriptorinfo-Element zurück, das zwei Eigenschaften enthält: die XElement-Darstellung des Deskriptors und den Typ, der ein [iauthenticatedencryptordescriptordeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) -Element darstellt, das verwendet werden kann, um diesen Deskriptor mit dem entsprechenden XElement wiederzuverwenden.
 
-Der serialisierte Deskriptor kann vertrauliche Informationen, wie z. b. kryptografieschlüsselmaterial, enthalten. Das Datenschutzsystem verfügt über eine integrierte Unterstützung für die Verschlüsselung von Informationen, bevor Sie im Speicher gespeichert werden. Um dies zu nutzen, sollte der Deskriptor das Element markieren, das vertrauliche Informationen mit dem Attributnamen "Requirements sencryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>") und dem Wert "true" enthält.
+Der serialisierte Deskriptor kann vertrauliche Informationen, wie z. b. kryptografieschlüsselmaterial, enthalten. Das Datenschutzsystem verfügt über eine integrierte Unterstützung für die Verschlüsselung von Informationen, bevor Sie im Speicher gespeichert werden. Um dies zu nutzen, sollte der Deskriptor das Element markieren, das vertrauliche Informationen mit dem Attributnamen "Requirements sencryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> ") und dem Wert "true" enthält.
 
 >[!TIP]
-> Es gibt eine hilfsprogrammapi zum Festlegen dieses Attributs. Aufrufen der Erweiterungsmethode "XElement. markasrequirements sencryption ()", die sich im Namespace "Microsoft. aspnetcore. dataprotection. authenticatedencryption. configurationmodel" befindet.
+> Es gibt eine hilfsprogrammapi zum Festlegen dieses Attributs. Nennen Sie die Erweiterungsmethode "XElement. markasrequirements sencryption ()", die sich im Namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Config"urationmodel" befindet.
 
 Es können auch Fälle geben, in denen der serialisierte Deskriptor keine vertraulichen Informationen enthält. Beachten Sie erneut den Fall eines Kryptografieschlüssels, der in einem HSM gespeichert ist. Der Deskriptor kann das Schlüsselmaterial bei der Serialisierung nicht schreiben, da das HSM das Material nicht in Klartext-Form verfügbar macht. Stattdessen schreibt der Deskriptor möglicherweise die Schlüssel umschließende Version des Schlüssels (wenn das HSM auf diese Weise exportiert werden kann) oder den eigenen eindeutigen Bezeichner des HSM für den Schlüssel.
 

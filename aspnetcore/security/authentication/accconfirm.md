@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 03/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724366"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404651"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Account confirmation and password recovery in ASP.NET Core (Kontobestätigung und Kennwortwiederherstellung in ASP.NET Core)
 
@@ -71,7 +73,7 @@ Erstellen Sie eine Klasse zum Abrufen des Schlüssels für sichere e-Mails. Erst
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurieren von sendgrid-Benutzer Geheimnissen
 
-Legen Sie `SendGridUser` und `SendGridKey` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Beispiel:
+Legen Sie `SendGridUser` und `SendGridKey` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Zum Beispiel:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -279,7 +281,7 @@ Erstellen Sie eine Klasse zum Abrufen des Schlüssels für sichere e-Mails. Erst
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurieren von sendgrid-Benutzer Geheimnissen
 
-Legen Sie `SendGridUser` und `SendGridKey` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Beispiel:
+Legen Sie `SendGridUser` und `SendGridKey` mit dem [Secret-Manager-Tool](xref:security/app-secrets)fest. Zum Beispiel:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT

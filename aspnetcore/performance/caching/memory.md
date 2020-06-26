@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 1967fb1942b4003d498800f6cf4c9dd280aca24e
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
+ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393853"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404612"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Speicher interne Speicherung in ASP.net Core
 
@@ -116,7 +118,7 @@ Im folgenden Beispiel:
 
 Eine `MemoryCache` -Instanz kann optional eine Größenbeschränkung angeben und erzwingen. Das Cache Größenlimit weist keine definierte Maßeinheit auf, da der Cache keinen Mechanismus zum Messen der Größe der Einträge aufweist. Wenn die Cache Größenbeschränkung festgelegt ist, müssen alle Einträge die Größe angeben. Die ASP.net Core Laufzeit schränkt die Cache Größe nicht auf Grundlage des Arbeitsspeichers ein. Der Entwickler muss die Cache Größe einschränken. Die angegebene Größe befindet sich in Einheiten, die vom Entwickler ausgewählt werden.
 
-Beispiel:
+Zum Beispiel:
 
 * Wenn die Web-App primär Zeichen folgen zwischenspeichert, könnte jede Cache Eintrags Größe die Zeichen folgen Länge aufweisen.
 * Die APP kann die Größe aller Einträge als 1 angeben, und die Größenbeschränkung ist die Anzahl der Einträge.
@@ -292,7 +294,7 @@ Im folgenden Beispiel:
 
 Eine `MemoryCache` -Instanz kann optional eine Größenbeschränkung angeben und erzwingen. Das Cache Größenlimit weist keine definierte Maßeinheit auf, da der Cache keinen Mechanismus zum Messen der Größe der Einträge aufweist. Wenn die Cache Größenbeschränkung festgelegt ist, müssen alle Einträge die Größe angeben. Die ASP.net Core Laufzeit schränkt die Cache Größe nicht auf Grundlage des Arbeitsspeichers ein. Der Entwickler muss die Cache Größe einschränken. Die angegebene Größe befindet sich in Einheiten, die vom Entwickler ausgewählt werden.
 
-Beispiel:
+Zum Beispiel:
 
 * Wenn die Web-App primär Zeichen folgen zwischenspeichert, könnte jede Cache Eintrags Größe die Zeichen folgen Länge aufweisen.
 * Die APP kann die Größe aller Einträge als 1 angeben, und die Größenbeschränkung ist die Anzahl der Einträge.
