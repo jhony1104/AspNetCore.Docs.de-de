@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106675"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406874"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault Konfigurations Anbieters in ASP.net Core
 
@@ -35,7 +37,7 @@ In diesem Dokument wird erläutert, wie Sie den [Microsoft Azure Key Vault](http
 
 ## <a name="packages"></a>Pakete
 
-Fügen Sie dem Paket " [Microsoft. Extensions. Configuration. azurekeyvault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) " einen Paket Verweis hinzu.
+Fügen Sie einen Paket Verweis auf die [Microsoft.Extensions.Config-urung hinzu. Azurekeyvault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) -Paket.
 
 ## <a name="sample-app"></a>Beispiel-App
 
@@ -129,11 +131,11 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
    1. Wählen Sie die app in Azure AD aus.
    1. Navigieren Sie zu **Zertifikate & Geheimnissen**.
    1. Wählen Sie **Zertifikat hochladen** aus, um das Zertifikat hochzuladen, das den öffentlichen Schlüssel enthält. Ein *CER*-, *PEM*-oder *CRT* -Zertifikat ist akzeptabel.
-1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck in der *appSettings. JSON* -Datei der app.
+1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck im *appsettings.js* der app in der Datei.
 1. Navigieren Sie in der Azure-Portal zu **Schlüssel Tresoren** .
 1. Wählen Sie den Schlüssel Tresor aus, den Sie im Abschnitt " [Geheimnis Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) " erstellt haben.
 1. Klicken Sie auf **Zugriffsrichtlinien**.
-1. Wählen Sie **Zugriffs Richtlinie hinzufügen**aus.
+1. Wählen Sie **Zugriffsrichtlinie hinzufügen** aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
 1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **Auswählen** aus.
 1. Klicken Sie auf **OK**.
@@ -147,7 +149,7 @@ Die `Certificate` Beispiel-APP erhält Ihre Konfigurationswerte aus `IConfigurat
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> mit Werten auf, die von der *appSettings. JSON* -Datei bereitgestellt werden:
+Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> mit Werten auf, die vom *appsettings.jsfür* die Datei bereitgestellt werden:
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -169,7 +171,7 @@ Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen We
 
 In der Beispiel-App werden verwaltete Identitäten für Azure-Ressourcen verwendet, wenn die- `#define` Anweisung am Anfang der *Program.cs* -Datei auf festgelegt ist `Managed` .
 
-Geben Sie den Tresor Namen in die Datei " *appSettings. JSON* " der APP ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel), wenn Sie auf die-Version festgelegt `Managed` ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der Datei " *appSettings. JSON* " gespeichert ist.
+Geben Sie den Tresor Namen in das *appsettings.js* der app in der Datei ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel), wenn Sie auf die-Version festgelegt `Managed` ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der *appsettings.js* Datei gespeichert ist.
 
 Stellen Sie die Beispiel-App für Azure App Service bereit.
 
@@ -324,7 +326,7 @@ Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden
 
 Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key Vault mithilfe von Double Dash ( `--` )-Notation und numerischen Segmenten gespeichert:
 
-| Schlüssel | Wert |
+| Key | Wert |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -381,7 +383,7 @@ In diesem Dokument wird erläutert, wie Sie den [Microsoft Azure Key Vault](http
 
 ## <a name="packages"></a>Pakete
 
-Fügen Sie dem Paket " [Microsoft. Extensions. Configuration. azurekeyvault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) " einen Paket Verweis hinzu.
+Fügen Sie einen Paket Verweis auf die [Microsoft.Extensions.Config-urung hinzu. Azurekeyvault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) -Paket.
 
 ## <a name="sample-app"></a>Beispiel-App
 
@@ -475,11 +477,11 @@ Die Beispiel-App verwendet eine Anwendungs-ID und ein X. 509-Zertifikat, wenn di
    1. Wählen Sie die app in Azure AD aus.
    1. Navigieren Sie zu **Zertifikate & Geheimnissen**.
    1. Wählen Sie **Zertifikat hochladen** aus, um das Zertifikat hochzuladen, das den öffentlichen Schlüssel enthält. Ein *CER*-, *PEM*-oder *CRT* -Zertifikat ist akzeptabel.
-1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck in der *appSettings. JSON* -Datei der app.
+1. Speichern Sie den Key Vault-Namen, die Anwendungs-ID und den Zertifikat Fingerabdruck im *appsettings.js* der app in der Datei.
 1. Navigieren Sie in der Azure-Portal zu **Schlüssel Tresoren** .
 1. Wählen Sie den Schlüssel Tresor aus, den Sie im Abschnitt " [Geheimnis Speicher in der Produktionsumgebung mit Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) " erstellt haben.
 1. Klicken Sie auf **Zugriffsrichtlinien**.
-1. Wählen Sie **Zugriffs Richtlinie hinzufügen**aus.
+1. Wählen Sie **Zugriffsrichtlinie hinzufügen** aus.
 1. Öffnen Sie **geheime Berechtigungen** , und stellen Sie der APP die Berechtigungen **Get** und **List** bereit.
 1. Wählen Sie **Prinzipal auswählen** , und wählen Sie die registrierte App nach Name aus. Wählen Sie die Schaltfläche **Auswählen** aus.
 1. Klicken Sie auf **OK**.
@@ -493,7 +495,7 @@ Die `Certificate` Beispiel-APP erhält Ihre Konfigurationswerte aus `IConfigurat
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> mit Werten auf, die von der *appSettings. JSON* -Datei bereitgestellt werden:
+Das X. 509-Zertifikat wird vom Betriebssystem verwaltet. Die App Ruft <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> mit Werten auf, die vom *appsettings.jsfür* die Datei bereitgestellt werden:
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -515,7 +517,7 @@ Wenn Sie die app ausführen, werden auf einer Webseite die geladenen geheimen We
 
 In der Beispiel-App werden verwaltete Identitäten für Azure-Ressourcen verwendet, wenn die- `#define` Anweisung am Anfang der *Program.cs* -Datei auf festgelegt ist `Managed` .
 
-Geben Sie den Tresor Namen in die Datei " *appSettings. JSON* " der APP ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel), wenn Sie auf die-Version festgelegt `Managed` ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der Datei " *appSettings. JSON* " gespeichert ist.
+Geben Sie den Tresor Namen in das *appsettings.js* der app in der Datei ein. Die Beispiel-App erfordert keine Anwendungs-ID und kein Kennwort (geheimer Client Schlüssel), wenn Sie auf die-Version festgelegt `Managed` ist, sodass Sie diese Konfigurationseinträge ignorieren können. Die APP wird in Azure bereitgestellt, und Azure authentifiziert die APP für den Zugriff auf Azure Key Vault nur mithilfe des Tresor namens, der in der *appsettings.js* Datei gespeichert ist.
 
 Stellen Sie die Beispiel-App für Azure App Service bereit.
 
@@ -651,7 +653,7 @@ Azure Key Vault Schlüssel können keinen Doppelpunkt als Trennzeichen verwenden
 
 Die in der vorangehenden JSON-Datei angezeigte Konfiguration wird in Azure Key Vault mithilfe von Double Dash ( `--` )-Notation und numerischen Segmenten gespeichert:
 
-| Schlüssel | Wert |
+| Key | Wert |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |

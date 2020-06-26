@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 62b8e33d8b7eb17a65a7a54df2a9aa298acdfe36
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: 91dab7764e6915ccacacf73f74861faaee532777
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292811"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406224"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Authentifizieren von Benutzern mit dem WS-Verbund in ASP.net Core
 
@@ -88,7 +90,7 @@ Standardmäßig wird die neue Middleware:
 
 ## <a name="use-ws-federation-without-aspnet-core-identity"></a>Verwenden von WS-Federation ohne ASP.net CoreIdentity
 
-Die WS-Verbund-Middleware kann ohne verwendet werden Identity . Beispiel:
+Die WS-Verbund-Middleware kann ohne verwendet werden Identity . Zum Beispiel:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end

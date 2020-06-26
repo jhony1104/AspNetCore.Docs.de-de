@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b0d6c91adfb5dc273aeb662cb2c249626ef1d3c6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777526"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405431"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>Einführung in die Autorisierung in ASP.net Core
 
@@ -26,7 +28,7 @@ Die Autorisierung bezieht sich auf den Prozess, mit dem bestimmt wird, was ein B
 
 Die Autorisierung ist orthogonal und unabhängig von der Authentifizierung. Die Autorisierung erfordert jedoch einen Authentifizierungsmechanismus. Die Authentifizierung ist der Prozess, bei dem ermittelt wird, wer ein Benutzer ist. Die Authentifizierung kann mindestens eine Identität für den aktuellen Benutzer erstellen.
 
-Weitere Informationen zur Authentifizierung in ASP.net Core finden <xref:security/authentication/index>Sie unter.
+Weitere Informationen zur Authentifizierung in ASP.net Core finden Sie unter <xref:security/authentication/index> .
 
 ## <a name="authorization-types"></a>Autorisierungs Typen
 
@@ -34,6 +36,6 @@ ASP.net Core Autorisierung bietet eine einfache, deklarative und umfassende [Ric
 
 ## <a name="namespaces"></a>Namespaces
 
-Autorisierungs Komponenten, einschließlich `AuthorizeAttribute` des `AllowAnonymousAttribute` -Attributs und des- `Microsoft.AspNetCore.Authorization` Attributs, finden Sie im-Namespace.
+Autorisierungs Komponenten, einschließlich des `AuthorizeAttribute` -Attributs und des- `AllowAnonymousAttribute` Attributs, finden Sie im- `Microsoft.AspNetCore.Authorization` Namespace.
 
 Informieren Sie sich in der Dokumentation über die [einfache Autorisierung](xref:security/authorization/simple).

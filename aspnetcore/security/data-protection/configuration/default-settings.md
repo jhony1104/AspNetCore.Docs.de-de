@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777448"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407095"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>(Data Protection key management and lifetime in ASP.NET Core) Gültigkeitsdauer und Verwaltung von Schlüsseln für den Schutz von Daten in ASP.NET Core
 
@@ -44,7 +46,7 @@ Die APP versucht, ihre Betriebsumgebung zu erkennen und die Schlüssel Konfigura
 
 1. Wenn keine dieser Bedingungen zutrifft, werden Schlüssel nicht außerhalb des aktuellen Prozesses beibehalten. Wenn der Prozess heruntergefahren wird, gehen alle generierten Schlüssel verloren.
 
-Der Entwickler hat stets die volle Kontrolle und kann überschreiben, wie und wo Schlüssel gespeichert werden. Die ersten drei oben aufgeführten Optionen sollten für die meisten apps gute Standardwerte bereitstellen, ähnlich wie die ASP.net ** \<machineKey->** die in der Vergangenheit ausgearbeiteten Routinen zur automatischen Generierung. Die abschließende Option Fall Back ist das einzige Szenario, bei dem der Entwickler die [Konfiguration](xref:security/data-protection/configuration/overview) vorab angeben muss, wenn er eine Schlüssel Persistenz wünschen, aber dieser Fall Back tritt nur in seltenen Fällen auf.
+Der Entwickler hat stets die volle Kontrolle und kann überschreiben, wie und wo Schlüssel gespeichert werden. Die ersten drei oben aufgeführten Optionen sollten für die meisten apps gute Standardwerte bereitstellen, ähnlich wie die ASP.net **\<machineKey>** -automatischen Generierungs Routinen in der Vergangenheit. Die abschließende Option Fall Back ist das einzige Szenario, bei dem der Entwickler die [Konfiguration](xref:security/data-protection/configuration/overview) vorab angeben muss, wenn er eine Schlüssel Persistenz wünschen, aber dieser Fall Back tritt nur in seltenen Fällen auf.
 
 Beim Hosten in einem docker-Container sollten Schlüssel in einem Ordner gespeichert werden, der ein docker-Volume ist (ein frei gegebenes Volume oder ein von einem Host bereitgestelltes Volume, das über die Lebensdauer des Containers hinaus bleibt) oder in einem externen Anbieter wie [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) oder [redis](https://redis.io/). Ein externer Anbieter ist auch bei Webfarm Szenarios nützlich, wenn apps nicht auf ein frei gegebenes Netzwerk Volume zugreifen können (Weitere Informationen finden Sie unter [persistkeystofile System](xref:security/data-protection/configuration/overview#persistkeystofilesystem) ).
 

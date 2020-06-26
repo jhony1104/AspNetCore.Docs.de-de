@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 5af4dd6a33e43191dbb5e7a8431fd8468a5fa11b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 35d8521227d82bb066cfbf2badf4a1e1f30bfd8e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774313"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405626"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>Ressourcenbasierte Autorisierung in ASP.net Core
 
 Autorisierungs Strategie hängt von der Ressource ab, auf die zugegriffen wird. Stellen Sie sich ein Dokument mit der Eigenschaft Autor vor. Nur der Autor darf das Dokument aktualisieren. Folglich muss das Dokument aus dem Datenspeicher abgerufen werden, bevor die Autorisierungs Auswertung erfolgen kann.
 
-Die Attribut Auswertung erfolgt vor der Datenbindung und vor der Ausführung des Seiten Handlers oder der Aktion, die das Dokument lädt. Aus diesen Gründen genügt die deklarative Autorisierung `[Authorize]` mit einem-Attribut nicht. Sie können stattdessen eine benutzerdefinierte Autorisierungs Methode&mdash;aufrufen, die als *imperative Autorisierung*bezeichnet wird.
+Die Attribut Auswertung erfolgt vor der Datenbindung und vor der Ausführung des Seiten Handlers oder der Aktion, die das Dokument lädt. Aus diesen Gründen genügt die deklarative Autorisierung mit einem- `[Authorize]` Attribut nicht. Sie können stattdessen eine benutzerdefinierte Autorisierungs Methode aufrufen, die &mdash; als *imperative Autorisierung*bezeichnet wird.
 
 ::: moniker range=">= aspnetcore-3.0"
 [Zeigen Sie Beispielcode an, oder laden Sie diesen herunter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample)).
@@ -41,11 +43,11 @@ Die Attribut Auswertung erfolgt vor der Datenbindung und vor der Ausführung des
 
 ## <a name="use-imperative-authorization"></a>Imperative Autorisierung verwenden
 
-Die Autorisierung wird als [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) -Dienst implementiert und in der-Dienst Auflistung innerhalb `Startup` der-Klasse registriert. Der Dienst wird über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) in Seiten Handler oder Aktionen bereitgestellt.
+Die Autorisierung wird als [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) -Dienst implementiert und in der-Dienst Auflistung innerhalb der- `Startup` Klasse registriert. Der Dienst wird über die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) in Seiten Handler oder Aktionen bereitgestellt.
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
-`IAuthorizationService`verfügt über `AuthorizeAsync` zwei Methoden Überladungen: einen, der die Ressource annimmt, und den Richtlinien Namen und den anderen, der die Ressource annimmt, und eine Liste der auszuwertenden Anforderungen.
+`IAuthorizationService`verfügt über zwei `AuthorizeAsync` Methoden Überladungen: einen, der die Ressource annimmt, und den Richtlinien Namen und den anderen, der die Ressource annimmt, und eine Liste der auszuwertenden Anforderungen.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -75,10 +77,10 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 <a name="security-authorization-resource-based-imperative"></a>
 
-Im folgenden Beispiel wird die zu sichernden Ressource in ein benutzerdefiniertes `Document` -Objekt geladen. Eine `AuthorizeAsync` Überladung wird aufgerufen, um zu bestimmen, ob der aktuelle Benutzer das angegebene Dokument bearbeiten darf. Eine benutzerdefinierte editpolicy-Autorisierungs Richtlinie wird in die Entscheidung einbezogen. Weitere Informationen zum Erstellen von Autorisierungs Richtlinien finden Sie unter [benutzerdefinierte Richtlinien basierte Autorisierung](xref:security/authorization/policies) .
+Im folgenden Beispiel wird die zu sichernden Ressource in ein benutzerdefiniertes- `Document` Objekt geladen. Eine `AuthorizeAsync` Überladung wird aufgerufen, um zu bestimmen, ob der aktuelle Benutzer das angegebene Dokument bearbeiten darf. Eine benutzerdefinierte editpolicy-Autorisierungs Richtlinie wird in die Entscheidung einbezogen. Weitere Informationen zum Erstellen von Autorisierungs Richtlinien finden Sie unter [benutzerdefinierte Richtlinien basierte Autorisierung](xref:security/authorization/policies) .
 
 > [!NOTE]
-> In den folgenden Codebeispielen wird vorausgesetzt, dass die `User` -Authentifizierung ausgeführt wurde und die-Eigenschaft
+> In den folgenden Codebeispielen wird vorausgesetzt, dass die-Authentifizierung ausgeführt wurde und die- `User` Eigenschaft
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -96,7 +98,7 @@ Im folgenden Beispiel wird die zu sichernden Ressource in ein benutzerdefinierte
 
 Das Schreiben eines Handlers für die ressourcenbasierte Autorisierung unterscheidet sich nicht wesentlich vom [Schreiben eines einfachen Anforderungs Handlers](xref:security/authorization/policies#security-authorization-policies-based-authorization-handler). Erstellen Sie eine benutzerdefinierte Anforderungs Klasse, und implementieren Sie eine Anforderungs Handler-Klasse. Weitere Informationen zum Erstellen einer Anforderungs Klasse finden Sie unter [Anforderungen](xref:security/authorization/policies#requirements).
 
-Die Handlerklasse gibt sowohl die Anforderung als auch den Ressourcentyp an. Ein Handler, der eine `SameAuthorRequirement` -und eine `Document` -Ressource nutzt, folgt z. b.:
+Die Handlerklasse gibt sowohl die Anforderung als auch den Ressourcentyp an. Ein Handler, der eine `SameAuthorRequirement` -und eine-Ressource nutzt, folgt z. b. `Document` :
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -110,9 +112,9 @@ Die Handlerklasse gibt sowohl die Anforderung als auch den Ressourcentyp an. Ein
 
 ::: moniker-end
 
-Stellen Sie sich vor, dass `SameAuthorRequirement` im vorherigen Beispiel ein Sonderfall einer generischen `SpecificAuthorRequirement` -Klasse ist. Die `SpecificAuthorRequirement` -Klasse (nicht angezeigt) enthält `Name` eine Eigenschaft, die den Namen des Autors darstellt. Die `Name` -Eigenschaft kann auf den aktuellen Benutzer festgelegt werden.
+Stellen Sie sich vor, dass im vorherigen Beispiel `SameAuthorRequirement` ein Sonderfall einer generischen- `SpecificAuthorRequirement` Klasse ist. Die- `SpecificAuthorRequirement` Klasse (nicht angezeigt) enthält eine `Name` Eigenschaft, die den Namen des Autors darstellt. Die- `Name` Eigenschaft kann auf den aktuellen Benutzer festgelegt werden.
 
-Registrieren Sie die Anforderung und den `Startup.ConfigureServices`Handler in:
+Registrieren Sie die Anforderung und den Handler in `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=4-8,10)]
@@ -145,22 +147,22 @@ Der Handler wird wie folgt implementiert, wobei eine `OperationAuthorizationRequ
 
 ::: moniker-end
 
-Der vorherige Handler überprüft den Vorgang mit der Ressource, der Identität des Benutzers und der- `Name` Eigenschaft der Anforderung.
+Der vorherige Handler überprüft den Vorgang mit der Ressource, der Identität des Benutzers und der-Eigenschaft der Anforderung `Name` .
 
 ## <a name="challenge-and-forbid-with-an-operational-resource-handler"></a>Herausforderungen und verbieten mit einem funktionstüchtigen Ressourcen Handler
 
 In diesem Abschnitt wird gezeigt, wie die Ergebnisse "Challenge" und "verboten" verarbeitet werden und wie sich die Herausforderung und die unter
 
-Um einen Ressourcen Handler für operative Ressourcen aufzurufen, geben Sie `AuthorizeAsync` den Vorgang an, wenn Sie in Ihrem Seiten Handler oder einer Aktion aufrufen. Im folgenden Beispiel wird ermittelt, ob der authentifizierte Benutzer das angegebene Dokument anzeigen darf.
+Um einen Ressourcen Handler für operative Ressourcen aufzurufen, geben Sie den Vorgang an, wenn `AuthorizeAsync` Sie in Ihrem Seiten Handler oder einer Aktion aufrufen. Im folgenden Beispiel wird ermittelt, ob der authentifizierte Benutzer das angegebene Dokument anzeigen darf.
 
 > [!NOTE]
-> In den folgenden Codebeispielen wird vorausgesetzt, dass die `User` -Authentifizierung ausgeführt wurde und die-Eigenschaft
+> In den folgenden Codebeispielen wird vorausgesetzt, dass die-Authentifizierung ausgeführt wurde und die- `User` Eigenschaft
 
 ::: moniker range=">= aspnetcore-2.0"
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
 
-Wenn die Autorisierung erfolgreich ist, wird die Seite zum Anzeigen des Dokuments zurückgegeben. Wenn die Autorisierung fehlschlägt, der Benutzer aber authentifiziert ist, wird bei der Rückgabe `ForbidResult` der Authentifizierungs Middleware, bei der die Autorisierung Wenn `ChallengeResult` eine Authentifizierung durchgeführt werden muss, wird eine zurückgegeben. Bei interaktiven Browser Clients kann es sinnvoll sein, den Benutzer an eine Anmeldeseite umzuleiten.
+Wenn die Autorisierung erfolgreich ist, wird die Seite zum Anzeigen des Dokuments zurückgegeben. Wenn die Autorisierung fehlschlägt, der Benutzer aber authentifiziert ist, wird bei der Rückgabe der `ForbidResult` Authentifizierungs Middleware, bei der die Autorisierung `ChallengeResult`Wenn eine Authentifizierung durchgeführt werden muss, wird eine zurückgegeben. Bei interaktiven Browser Clients kann es sinnvoll sein, den Benutzer an eine Anmeldeseite umzuleiten.
 
 ::: moniker-end
 
@@ -168,6 +170,6 @@ Wenn die Autorisierung erfolgreich ist, wird die Seite zum Anzeigen des Dokument
 
 [!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentViewAction&highlight=11-12)]
 
-Wenn die Autorisierung erfolgreich ist, wird die Sicht für das Dokument zurückgegeben. Wenn die Autorisierung fehl `ChallengeResult` schlägt, wird bei der Rückgabe von alle Authentifizierungs Middleware benachrichtigt, dass die Autorisierung fehlgeschlagen ist, und die Middleware kann die entsprechende Eine entsprechende Antwort könnte einen 401-oder 403-Statuscode zurückgeben. Bei interaktiven Browser Clients könnte dies bedeuten, dass der Benutzer an eine Anmeldeseite umgeleitet wird.
+Wenn die Autorisierung erfolgreich ist, wird die Sicht für das Dokument zurückgegeben. Wenn die Autorisierung fehlschlägt, wird bei der Rückgabe `ChallengeResult` von alle Authentifizierungs Middleware benachrichtigt, dass die Autorisierung fehlgeschlagen ist, und die Middleware kann die entsprechende Eine entsprechende Antwort könnte einen 401-oder 403-Statuscode zurückgeben. Bei interaktiven Browser Clients könnte dies bedeuten, dass der Benutzer an eine Anmeldeseite umgeleitet wird.
 
 ::: moniker-end

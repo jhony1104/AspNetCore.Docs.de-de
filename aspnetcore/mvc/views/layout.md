@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766484"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406653"
 ---
 # <a name="layout-in-aspnet-core"></a>Layout in ASP.NET Core
 
@@ -28,7 +30,7 @@ Seiten und Ansichten beinhalten häufig sowohl visuelle als auch programmgesteue
 * Freigeben von Anweisungen
 * Führen Sie den allgemeinen Code aus, bevor Sie Seiten oder Ansichten rendern.
 
-In diesem Dokument werden die Layouts für die beiden unterschiedlichen Ansätze zum ASP.net Core Razor MVC erläutert: Seiten und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
+In diesem Dokument werden die Layouts für die beiden unterschiedlichen Ansätze zum ASP.net Core MVC erläutert: Razor Seiten und Controller mit Ansichten. In diesem Thema sind die Unterschiede minimal:
 
 * RazorSeiten befinden sich im Ordner *pages* .
 * Controller mit Ansichten verwenden einen Ordner namens *Views* für Ansichten.
@@ -59,7 +61,7 @@ Der folgende Code zeigt die Layoutdatei für eine Vorlage, die mit dem Projekt m
 
 ## <a name="specifying-a-layout"></a>Festlegen eines Layouts
 
-RazorSichten verfügen über `Layout` eine-Eigenschaft. Durch Festlegen dieser Eigenschaft wird das Layout der jeweiligen Ansicht bestimmt:
+RazorSichten verfügen über eine- `Layout` Eigenschaft. Durch Festlegen dieser Eigenschaft wird das Layout der jeweiligen Ansicht bestimmt:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
@@ -79,9 +81,9 @@ Optional kann ein Layout auf mindestens einen *Abschnitt* verweisen, indem es `R
 @RenderSection("Scripts", required: false)
 ```
 
-Wenn ein erforderlicher Bereich nicht gefunden werden kann, wird eine Ausnahme ausgelöst. Einzelne Ansichten geben den Inhalt an, der in einem Abschnitt mithilfe der `@section` Razor Syntax gerendert werden soll. Wenn eine Seite oder eine Ansicht einen Abschnitt definiert, muss dieser auch gerendert werden. Andernfalls tritt ein Fehler auf.
+Wenn ein erforderlicher Bereich nicht gefunden werden kann, wird eine Ausnahme ausgelöst. Einzelne Ansichten geben den Inhalt an, der in einem Abschnitt mithilfe der Syntax gerendert werden soll `@section` Razor . Wenn eine Seite oder eine Ansicht einen Abschnitt definiert, muss dieser auch gerendert werden. Andernfalls tritt ein Fehler auf.
 
-Eine Beispiel `@section` Definition in Razor der Seitenansicht:
+Eine Beispiel `@section` Definition in der Razor Seitenansicht:
 
 ```html
 @section Scripts {
@@ -99,7 +101,7 @@ In der folgenden Markupdatei wird die Datei *_ValidationScriptsPartial.cshtml* m
 }
 ```
 
-Das vorangehende Markup wurde durch [ IdentityGerüstbau ](xref:security/authentication/scaffold-identity)generiert.
+Das vorangehende Markup wurde durch [ Identity Gerüstbau ](xref:security/authentication/scaffold-identity)generiert.
 
 Die Abschnitte, die auf einer Seite oder in einer Ansicht definiert wurden, stehen nur auf deren Layoutseite zur Verfügung. Teilansichten, Ansichtskomponenten und andere Teile eines Ansichtssystems können nicht auf sie verweisen.
 
@@ -115,7 +117,7 @@ Der Text und jeder Abschnitt einer Razor Seite müssen entweder gerendert oder i
 
 ## <a name="importing-shared-directives"></a>Importieren gemeinsam verwendeter Anweisungen
 
-Sichten und Seiten können- Razor Direktiven verwenden, um Namespaces zu importieren und [Abhängigkeitsinjektion](dependency-injection.md)zu verwenden. Anweisungen, die von mehreren Ansichten gemeinsam verwendet werden, können in einer gemeinsam verwendeten Datei namens *_ViewImports.cshtml* angegeben werden. Die `_ViewImports`-Datei unterstützt die folgenden Anweisungen:
+Sichten und Seiten können Razor -Direktiven verwenden, um Namespaces zu importieren und [Abhängigkeitsinjektion](dependency-injection.md)zu verwenden. Anweisungen, die von mehreren Ansichten gemeinsam verwendet werden, können in einer gemeinsam verwendeten Datei namens *_ViewImports.cshtml* angegeben werden. Die `_ViewImports`-Datei unterstützt die folgenden Anweisungen:
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -125,7 +127,7 @@ Sichten und Seiten können- Razor Direktiven verwenden, um Namespaces zu importi
 * `@inherits`
 * `@inject`
 
-Die Datei unterstützt keine Razor anderen Features, wie z. b. Funktionen und Abschnitts Definitionen.
+Die Datei unterstützt keine anderen Razor Features, wie z. b. Funktionen und Abschnitts Definitionen.
 
 Eine `_ViewImports.cshtml`-Beispieldatei:
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 98b93731d40b47be8d7d5050afc7c74d25a7e1dc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c51098ec02e5a337fd6607e970d3bf78ffcd568a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776271"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405522"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>Migrieren von ASP.NET zu ASP.NET Core 2.0
 
@@ -48,7 +50,7 @@ Wenn das Zielframework .NET Core ist, können Sie mit dem [Metapaket](xref:funda
 </ItemGroup>
 ```
 
-Wenn das Metapaket verwendet wird, werden mit der Anwendung keine Pakete bereitgestellt, auf die im Metapaket verwiesen wird. Die notwendigen Objekte sind im .NET Core-Laufzeitspeicher vorhanden und werden zur Verbesserung der Leistung vorkompiliert. Weitere <xref:fundamentals/metapackage> Informationen finden Sie unter.
+Wenn das Metapaket verwendet wird, werden mit der Anwendung keine Pakete bereitgestellt, auf die im Metapaket verwiesen wird. Die notwendigen Objekte sind im .NET Core-Laufzeitspeicher vorhanden und werden zur Verbesserung der Leistung vorkompiliert. Weitere Informationen finden Sie unter <xref:fundamentals/metapackage> .
 
 ## <a name="project-structure-differences"></a>Unterschiede bei Projektstrukturen
 
@@ -72,7 +74,7 @@ Bei diesem Ansatz werden die Anwendung und der Server, auf dem die Anwendung ber
 
 Hierdurch werden Ihre Standardrouten konfiguriert. Außerdem wird standardmäßig XmlSerialization anstelle von JSON verwendet. Bei Bedarf können Sie weitere Middleware (z.B. zum Laden von Diensten, für Konfigurationseinstellungen, für statische Dateien usw.) zur Pipeline hinzufügen.
 
-ASP.NET Core verwendet einen ähnlichen Ansatz, ist jedoch hinsichtlich des Einstiegspunkts nicht auf OWIN angewiesen. Stattdessen kommt – ähnlich wie bei Konsolenanwendungen – in *Program.cs die * `Main`-Methode zum Einsatz, in der `Startup` geladen wird.
+ASP.NET Core verwendet einen ähnlichen Ansatz, ist jedoch hinsichtlich des Einstiegspunkts nicht auf OWIN angewiesen. Stattdessen kommt – ähnlich wie bei Konsolenanwendungen – in *Program.cs* die `Main`-Methode zum Einsatz, in der `Startup` geladen wird.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -88,7 +90,7 @@ In `Startup` muss die `Configure`-Methode enthalten sein. Fügen Sie in `Configu
 
 Durch die Entkopplung von Host und Anwendung wird die Möglichkeit geschaffen, in der Zukunft eine Migration zu einer anderen Plattform vorzunehmen.
 
-Einen ausführlicheren Verweis auf ASP.net Core Start und Middleware finden <xref:fundamentals/startup>Sie unter.
+Einen ausführlicheren Verweis auf ASP.net Core Start und Middleware finden Sie unter <xref:fundamentals/startup> .
 
 ## <a name="storing-configurations"></a>Speichern von Konfigurationsdaten
 
@@ -119,7 +121,7 @@ Dieser Ansatz kann erweitert werden, um einen noch stabileren Prozess zu gewähr
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
 ```
 
-**Hinweis:** Einen ausführlicheren Verweis auf ASP.net Core Konfiguration finden <xref:fundamentals/configuration/index>Sie unter.
+**Hinweis:** Einen ausführlicheren Verweis auf ASP.net Core Konfiguration finden Sie unter <xref:fundamentals/configuration/index> .
 
 ## <a name="native-dependency-injection"></a>Native Abhängigkeitsinjektion
 
@@ -127,7 +129,7 @@ Ein wichtiges Ziel bei der Erstellung großer, skalierbarer Anwendungen besteht 
 
 In ASP.NET-Anwendungen greifen Entwickler auf eine Drittanbieter Bibliothek zurück, um eine Abhängigkeitsinjektion zu implementieren. Eine solche Bibliothek ist [Unity](https://github.com/unitycontainer/unity), die von Microsoft Patterns & Practices bereitgestellt wird.
 
-Ein Beispiel für das Einrichten der Abhängigkeitsinjektion mit Unity `IDependencyResolver` ist die Implementierung `UnityContainer`von, die einen umschließt:
+Ein Beispiel für das Einrichten der Abhängigkeitsinjektion mit Unity ist die Implementierung von `IDependencyResolver` , die einen umschließt `UnityContainer` :
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -139,13 +141,13 @@ Fügen Sie bei Bedarf `IProductRepository` ein:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Da die `Startup.ConfigureServices`Abhängigkeitsinjektion Teil ASP.net Core ist, können Sie Ihren Dienst in hinzufügen:
+Da die Abhängigkeitsinjektion Teil ASP.net Core ist, können Sie Ihren Dienst in hinzufügen `Startup.ConfigureServices` :
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Genau wie bei Unity kann auch hier das Repository an einer beliebigen Stelle eingefügt werden.
 
-Weitere Informationen zur Abhängigkeitsinjektion in ASP.net Core finden <xref:fundamentals/dependency-injection>Sie unter.
+Weitere Informationen zur Abhängigkeitsinjektion in ASP.net Core finden Sie unter <xref:fundamentals/dependency-injection> .
 
 ## <a name="serving-static-files"></a>Bereitstellen statischer Dateien
 
@@ -153,7 +155,7 @@ Ein wichtiger Teil der Webentwicklung ist die Möglichkeit, statische, clientsei
 
 Statische Dateien werden in ASP.NET in verschiedenen Verzeichnissen gespeichert. Der Verweis auf die Dateien erfolgt in den Ansichten.
 
-In ASP.net Core werden statische Dateien im "Web Root" (*&lt;Content root&gt;/wwwroot*) gespeichert, sofern nicht anders konfiguriert. Die Dateien werden über den Aufruf der Erweiterungsmethode `UseStaticFiles` aus `Startup.Configure` in die Anforderungspipeline geladen:
+In ASP.NET Core werden statische Dateien im Webstammverzeichnis ( *&lt;content root&gt;/wwwroot*) gespeichert, falls keine anderen Einstellungen vorgenommen wurden. Die Dateien werden über den Aufruf der Erweiterungsmethode `UseStaticFiles` aus `Startup.Configure` in die Anforderungspipeline geladen:
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -161,7 +163,7 @@ In ASP.net Core werden statische Dateien im "Web Root" (*&lt;Content root&gt;/ww
 
 Beispielsweise kann ein Browser an einem Speicherort wie `http://<app>/images/<imageFileName>` auf ein Bildobjekt im Ordner *wwwroot/images* zugreifen.
 
-**Hinweis:** Eine ausführlichere Referenz zum betreuen statischer Dateien in ASP.net Core finden <xref:fundamentals/static-files>Sie unter.
+**Hinweis:** Eine ausführlichere Referenz zum betreuen statischer Dateien in ASP.net Core finden Sie unter <xref:fundamentals/static-files> .
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

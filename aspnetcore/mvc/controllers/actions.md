@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: b7c4d61c4a71939e84bdea180a2f77b6438b15d5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0c91edc947b1a17f2dd36b281afe348aa8611bd7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774196"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406913"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Verarbeiten von Anforderungen mit Controllern in ASP.NET Core MVC
 
@@ -71,7 +73,7 @@ Innerhalb dieser Kategorie gibt es wiederum zwei Ergebnistypen: Redirect (Umleit
 
     Dieser Typ gibt einen HTTP-Statuscode zurück. Beispiele für Hilfsmethoden dieses Typs sind `BadRequest`, `NotFound` und `Ok`. `return BadRequest();` erzeugt beispielsweise bei der Ausführung den Statuscode 400. Wenn Methoden wie `BadRequest`, `NotFound` und `Ok` überladen werden, gelten sie nicht länger als HTTP-Statuscode-Antwortdienste, da eine Inhaltsaushandlung stattfindet.
 
-* **Ausrichten**
+* **Umleiten**
 
     Dieser Typ gibt eine Umleitung an eine Aktion oder ein Ziel zurück (unter Verwendung von `Redirect`, `LocalRedirect`, `RedirectToAction` oder `RedirectToRoute`). `return RedirectToAction("Complete", new {id = 123});` leitet beispielsweise an `Complete` um und übergibt ein anonymes Objekt.
 

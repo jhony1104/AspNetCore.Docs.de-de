@@ -1,24 +1,26 @@
 ---
 title: Einführung in ASP.NET Core SignalR
 author: bradygaster
-description: Erfahren Sie, wie SignalR die ASP.net Core Bibliothek das Hinzufügen von Echtzeitfunktionen zu apps vereinfacht.
+description: Erfahren Sie, wie die ASP.net Core SignalR Bibliothek das Hinzufügen von Echtzeitfunktionen zu apps vereinfacht.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 4e968659d23330c4b1403ab998dda9c9e6ebe080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775777"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404950"
 ---
 # <a name="introduction-to-aspnet-core-signalr"></a>Einführung in ASP.NET Core SignalR
 
@@ -26,7 +28,7 @@ ms.locfileid: "82775777"
 
 ASP.net Core SignalR ist eine Open-Source-Bibliothek, die das Hinzufügen von Echt Zeit Webfunktionen zu apps vereinfacht. Die Echt Zeit webolle ermöglicht es dem serverseitigen Code, Inhalte sofort per Push an Clients zu übersetzen.
 
-Gute Kandidaten für SignalR:
+Gute Kandidaten für SignalR :
 
 * Apps, für die eine hohe Frequenz von Updates vom Server benötigt wird. Beispiele hierfür sind Apps aus den Bereichen Gaming, soziale Netzwerke, Voting, Auktionen, Karten und GPS.
 * Dashboards und Überwachungs-Apps. Beispiele hierfür sind Unternehmensdashboards, Sofortupdates von Verkaufszahlen oder Reisehinweise.
@@ -35,7 +37,7 @@ Gute Kandidaten für SignalR:
 
 SignalRstellt eine API zum Erstellen von [Remote Prozedur aufrufen (RPC)](https://wikipedia.org/wiki/Remote_procedure_call)für Server-zu-Client bereit. Die RPCs wenden JavaScript-Funktionen auf Clients aus dem serverseitigen .net Core-Code an.
 
-Im folgenden sind einige Features SignalR von für ASP.net Core aufgeführt:
+Im folgenden sind einige Features von SignalR für ASP.net Core aufgeführt:
 
 * Behandelt die Verbindungs Verwaltung automatisch.
 * Sendet Nachrichten gleichzeitig an alle verbundenen Clients. Beispielsweise ein Chatraum.
@@ -64,7 +66,7 @@ Hubs wenden Client seitigen Code an, indem Sie Nachrichten senden, die den Namen
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-* [Beginnen Sie mit SignalR der ASP.net Core](xref:tutorials/signalr)
+* [Beginnen Sie mit der SignalR ASP.net Core](xref:tutorials/signalr)
 * [Unterstützte Plattformen](xref:signalr/supported-platforms)
 * [Hubs](xref:signalr/hubs)
 * [JavaScript-Client](xref:signalr/javascript-client)

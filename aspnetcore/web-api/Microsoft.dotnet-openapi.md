@@ -7,17 +7,19 @@ ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb8d6a1dc70b2aabf495bdb359e243c91e94289f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775712"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404794"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Entwickeln von ASP.NET Core-Apps mit OpenAPI-Tools
 
@@ -33,7 +35,7 @@ Führen Sie den folgenden Befehl aus, um `Microsoft.dotnet-openapi` zu installie
 dotnet tool install -g Microsoft.dotnet-openapi
 ```
 
-## <a name="add"></a>Hinzufügen
+## <a name="add"></a>Add
 
 Wenn Sie mit einem der Befehle auf dieser Seite einen OpenAPI-Verweis hinzufügen, wird ein `<OpenApiReference />`-Element ähnlich dem folgenden zur *CSPROJ*-Datei hinzugefügt:
 
@@ -70,7 +72,7 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 
 #### <a name="arguments"></a>Argumente
 
-|  Argument  | Beschreibung | Beispiel |
+|  Argument  | BESCHREIBUNG | Beispiel |
 |-------------|-------------|---------|
 | source-file | Die Quelle, aus der ein Verweis erstellt werden soll. Es muss sich um eine OpenAPI-Datei handeln. |dotnet openapi add file *.\OpenAPI.json* |
 
@@ -87,11 +89,11 @@ Der oben genannte Verweis ist erforderlich, damit die App den generierten Client
 
 #### <a name="arguments"></a>Argumente
 
-|  Argument  | Beschreibung | Beispiel |
+|  Argument  | BESCHREIBUNG | Beispiel |
 |-------------|-------------|---------|
 | source-URL | Die Quelle, aus der ein Verweis erstellt werden soll. Es muss sich um eine URL handeln. |dotnet openapi add url `https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>Remove (Entfernen)
+## <a name="remove"></a>Entfernen
 
 Entfernt den OpenAPI-Verweis, der mit dem angegebenen Dateinamen übereinstimmt, aus der *CSPROJ*-Datei. Wenn der OpenAPI-Verweis entfernt wird, werden keine Clients generiert. Lokale *JSON*- und *YAML*-Dateien werden gelöscht.
 
@@ -104,7 +106,7 @@ Entfernt den OpenAPI-Verweis, der mit dem angegebenen Dateinamen übereinstimmt,
 
 ### <a name="arguments"></a>Argumente
 
-|  Argument  | Beschreibung| Beispiel |
+|  Argument  | BESCHREIBUNG| Beispiel |
 | ------------|------------|---------|
 | source-file | Die Quelle, aus der der Verweis entfernt werden soll. |dotnet openapi remove *.\OpenAPI.json* |
 

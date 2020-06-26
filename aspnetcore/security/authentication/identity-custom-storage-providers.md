@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652990"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404742"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Benutzerdefinierte Speicher Anbieter für ASP.net CoreIdentity
 
@@ -29,7 +31,7 @@ ASP.net Core Identity ist ein erweiterbares System, mit dem Sie einen benutzerde
 
 ## <a name="introduction"></a>Einführung
 
-Standardmäßig speichert das ASP.net Core Identity Systembenutzer Informationen in einer SQL Server Datenbank mithilfe Entity Framework Core. Bei vielen apps funktioniert dieser Ansatz gut. Es empfiehlt sich jedoch, einen anderen Persistenzmechanismus oder ein anderes Datenschema zu verwenden. Beispiel:
+Standardmäßig speichert das ASP.net Core Identity Systembenutzer Informationen in einer SQL Server Datenbank mithilfe Entity Framework Core. Bei vielen apps funktioniert dieser Ansatz gut. Es empfiehlt sich jedoch, einen anderen Persistenzmechanismus oder ein anderes Datenschema zu verwenden. Zum Beispiel:
 
 * Sie verwenden [Azure Table Storage](/azure/storage/) oder einen anderen Datenspeicher.
 * Die Datenbanktabellen haben eine andere Struktur. 
@@ -175,7 +177,7 @@ In der- `UserStore` Klasse verwenden Sie die Datenzugriffsklassen, die Sie erste
 * **Iqueryableuserstore ist**  
  Die [ &lt; tuser &gt; -Schnittstelle iqueryableuserstore](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiert die Elemente, die Sie implementieren, um einen abfragbaren Benutzerspeicher bereitzustellen.
 
-Sie implementieren nur die Schnittstellen, die in Ihrer APP benötigt werden. Beispiel:
+Sie implementieren nur die Schnittstellen, die in Ihrer APP benötigt werden. Zum Beispiel:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

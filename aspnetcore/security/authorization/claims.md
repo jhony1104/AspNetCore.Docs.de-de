@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 404e26f0fb5e71dbc22b1c08a2f8caf8461ad7e1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074477"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406380"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Anspruchs basierte Autorisierung in ASP.net Core
 
@@ -152,7 +154,7 @@ Wenn der Anspruchs Wert kein einzelner Wert ist oder eine Transformation erforde
 
 ## <a name="multiple-policy-evaluation"></a>Bewertung mehrerer Richtlinien
 
-Wenn Sie mehrere Richtlinien auf einen Controller oder eine Aktion anwenden, müssen alle Richtlinien bestanden werden, bevor der Zugriff gewährt wird. Beispiel:
+Wenn Sie mehrere Richtlinien auf einen Controller oder eine Aktion anwenden, müssen alle Richtlinien bestanden werden, bevor der Zugriff gewährt wird. Zum Beispiel:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]

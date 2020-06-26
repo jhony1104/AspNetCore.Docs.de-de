@@ -1,13 +1,26 @@
 ---
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: JsonPatch in ASP.NET Core-Web-API
+author: rick-anderson
+description: Erfahren Sie, wie JSON Patch-Anforderungen in einer ASP.NET Core-Web-API behandelt werden.
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/02/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/jsonpatch
+ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: de-DE
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405028"
 ---
-
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch in ASP.NET Core-Web-API
 
 Von [Tom Dykstra](https://github.com/tdykstra) und [Kirk Larkin](https://github.com/serpent5)
@@ -21,7 +34,7 @@ In diesem Artikel wird erläutert, wie JSON Patch-Anforderungen in einer ASP.NET
 Führen Sie die folgenden Schritte aus, um die JSON-Patchunterstützung in der APP zu aktivieren:
 
 1. Installieren Sie das [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) nuget-Paket.
-1. Aktualisieren Sie die- `Startup.ConfigureServices` Methode des Projekts, um aufzurufen <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Beispiel:
+1. Aktualisieren Sie die- `Startup.ConfigureServices` Methode des Projekts, um aufzurufen <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Zum Beispiel:
 
     ```csharp
     services
@@ -35,7 +48,7 @@ Führen Sie die folgenden Schritte aus, um die JSON-Patchunterstützung in der A
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, addnewtonweichjson und System. Text. JSON
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, addnewtonweichjson und System.Text.Js
 
 `AddNewtonsoftJson`ersetzt die `System.Text.Json` -basierten Eingabe-und Ausgabe Formatierer, die zum Formatieren des **gesamten** JSON-Inhalts verwendet werden. Um Unterstützung für JSON-Patch mithilfe von hinzuzufügen und `Newtonsoft.Json` die anderen Formatierer unverändert zu lassen, aktualisieren Sie die-Methode des Projekts `Startup.ConfigureServices` wie folgt:
 
@@ -97,7 +110,7 @@ Die Änderungen, die durch Anwenden eines JSON-Patch-Dokuments auf eine Ressourc
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
-Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispiel: `"/address/zipCode"`.
+Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Bis `add` zum Ende eines Arrays verwenden Sie einen Bindestrich ( `-` ) anstelle einer Indexnummer: `/addresses/-` .
 
@@ -106,143 +119,13 @@ Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Ele
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
 |Vorgang  | Hinweise |
-|---
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-------|---
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----------------| | `add`     | Fügen Sie eine Eigenschaft oder ein Array Element hinzu. Für vorhandene Eigenschaft: Wert festlegen. | | `remove`  | Entfernen Sie eine Eigenschaft oder ein Array Element. | | `replace` | Identisch mit `remove` gefolgt von `add` am gleichen Speicherort. | | `move`    | Identisch `remove` mit der Quelle, gefolgt von `add` zum Ziel, wobei der Wert aus der Quelle verwendet wird. | | `copy`    | Identisch `add` mit dem Ziel mit dem Wert aus der Quelle. | | `test`    | Rückgabe des Erfolgsstatus Codes, wenn der Wert bei `path` = bereitgestellt wird `value` . |
+|-----------|--------------------------------|
+| `add`     | Hinzufügen einer Eigenschaft oder eines Arrayelements. Für vorhandene Eigenschaft: set value.|
+| `remove`  | Entfernen einer Eigenschaft oder eines Arrayelements. |
+| `replace` | Identisch mit `remove`, gefolgt von `add` an gleicher Stelle. |
+| `move`    | Identisch mit `remove` aus der Quelle, gefolgt von `add` zum Ziel unter Verwendung des Werts aus der Quelle. |
+| `copy`    | Identisch mit `add` zum Ziel unter Verwendung des Werts aus der Quelle. |
+| `test`    | Gibt Statuscode für Erfolg zurück, wenn der Wert von `path` = bereitgestellter `value`.|
 
 ## <a name="json-patch-in-aspnet-core"></a>JSON-Patch in ASP.net Core
 
@@ -256,7 +139,7 @@ Eine Aktionsmethode für JSON Patch in einem API-Controller:
 * Akzeptiert eine `JsonPatchDocument<T>`-Klasse, in der Regel mit `[FromBody]`.
 * Ruft `ApplyTo` für das Patch-Dokument auf, um die Änderungen anzuwenden.
 
-Beispiel:
+Im Folgenden ein Beispiel:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -362,7 +245,7 @@ Das folgende Patch-Dokumentbeispiel hat keine Auswirkungen, wenn der Anfangswert
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>Beziehen des Codes
+## <a name="get-the-code"></a>Abrufen des Codes
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 
@@ -439,7 +322,7 @@ Die Änderungen, die durch Anwenden eines JSON Patch-Dokuments auf eine Ressourc
 
 ## <a name="path-syntax"></a>Pfadsyntax
 
-Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispiel: `"/address/zipCode"`.
+Die [path](https://tools.ietf.org/html/rfc6901)-Eigenschaft eines Vorgangsobjekts weist Schrägstriche zwischen Ebenen auf. Beispielsweise `"/address/zipCode"`.
 
 Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Element des `addresses`-Arrays wäre bei `/addresses/0`. Zum `add` ans Ende eines Arrays verwenden Sie einen Bindestrich (-) anstelle einer Indexnummer: `/addresses/-`.
 
@@ -448,143 +331,13 @@ Nullbasierte Indizes werden verwendet, um Arrayelemente anzugeben. Das erste Ele
 Die folgende Tabelle zeigt unterstützt Vorgänge gemäß der [JSON Patch-Spezifikation](https://tools.ietf.org/html/rfc6902):
 
 |Vorgang  | Hinweise |
-|---
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-------|---
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-Title: Autor: Beschreibung: ms. Author: ms. Custom: ms. Date: NO-LOC:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----------------| | `add`     | Fügen Sie eine Eigenschaft oder ein Array Element hinzu. Für vorhandene Eigenschaft: Wert festlegen. | | `remove`  | Entfernen Sie eine Eigenschaft oder ein Array Element. | | `replace` | Identisch mit `remove` gefolgt von `add` am gleichen Speicherort. | | `move`    | Identisch `remove` mit der Quelle, gefolgt von `add` zum Ziel, wobei der Wert aus der Quelle verwendet wird. | | `copy`    | Identisch `add` mit dem Ziel mit dem Wert aus der Quelle. | | `test`    | Rückgabe des Erfolgsstatus Codes, wenn der Wert bei `path` = bereitgestellt wird `value` . |
+|-----------|--------------------------------|
+| `add`     | Hinzufügen einer Eigenschaft oder eines Arrayelements. Für vorhandene Eigenschaft: set value.|
+| `remove`  | Entfernen einer Eigenschaft oder eines Arrayelements. |
+| `replace` | Identisch mit `remove`, gefolgt von `add` an gleicher Stelle. |
+| `move`    | Identisch mit `remove` aus der Quelle, gefolgt von `add` zum Ziel unter Verwendung des Werts aus der Quelle. |
+| `copy`    | Identisch mit `add` zum Ziel unter Verwendung des Werts aus der Quelle. |
+| `test`    | Gibt Statuscode für Erfolg zurück, wenn der Wert von `path` = bereitgestellter `value`.|
 
 ## <a name="jsonpatch-in-aspnet-core"></a>JsonPatch in ASP.NET Core
 
@@ -598,7 +351,7 @@ Eine Aktionsmethode für JSON Patch in einem API-Controller:
 * Akzeptiert eine `JsonPatchDocument<T>`-Klasse, in der Regel mit `[FromBody]`.
 * Ruft `ApplyTo` für das Patch-Dokument auf, um die Änderungen anzuwenden.
 
-Beispiel:
+Im Folgenden ein Beispiel:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -704,7 +457,7 @@ Das folgende Patch-Dokumentbeispiel hat keine Auswirkungen, wenn der Anfangswert
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>Beziehen des Codes
+## <a name="get-the-code"></a>Abrufen des Codes
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([Informationen zum Herunterladen](xref:index#how-to-download-a-sample))
 

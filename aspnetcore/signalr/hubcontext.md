@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 336173866e9346d836bb31955644d07403fc238d
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756053"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405808"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>Senden von Nachrichten von außerhalb eines Hubs
 
@@ -109,7 +111,7 @@ public class ChatController : Controller
 }
 ```
 
-## <a name="related-resources"></a>Verwandte Ressourcen
+## <a name="related-resources"></a>Zugehörige Ressourcen
 
 * [Erste Schritte](xref:tutorials/signalr)
 * [Hubs](xref:signalr/hubs)

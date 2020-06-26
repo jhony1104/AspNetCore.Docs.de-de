@@ -7,23 +7,25 @@ ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777513"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406016"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisieren mit einem bestimmten Schema in ASP.net Core
 
 In einigen Szenarien, z. b. Single-Page-Anwendungen (Spas), ist es üblich, mehrere Authentifizierungsmethoden zu verwenden. Die APP kann z. b. die cookiebasierte Authentifizierung für die Anmeldung und die JWT-Träger Authentifizierung für JavaScript-Anforderungen verwenden. In einigen Fällen verfügt die APP möglicherweise über mehrere Instanzen eines Authentifizierungs Handlers. Beispielsweise zwei Cookie-Handler, bei denen eine eine grundlegende Identität enthält und eine erstellt wird, wenn eine mehrstufige Authentifizierung (Multi-Factor Authentication, MFA) ausgelöst wurde. MFA kann ausgelöst werden, da der Benutzer einen Vorgang angefordert hat, der zusätzliche Sicherheit erfordert. Weitere Informationen zum Erzwingen von MFA, wenn ein Benutzer eine Ressource anfordert, für die MFA erforderlich ist, finden Sie im Abschnitt "GitHub-Problem [Schutz" mit MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).
 
-Ein Authentifizierungsschema wird benannt, wenn der Authentifizierungsdienst während der Authentifizierung konfiguriert wird. Beispiel:
+Ein Authentifizierungsschema wird benannt, wenn der Authentifizierungsdienst während der Authentifizierung konfiguriert wird. Zum Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -44,11 +46,11 @@ public void ConfigureServices(IServiceCollection services)
 Im vorangehenden Code wurden zwei Authentifizierungs Handler hinzugefügt: eine für Cookies und eine für Bearer.
 
 >[!NOTE]
->Wenn Sie das Standardschema angeben, `HttpContext.User` wird die-Eigenschaft auf diese Identität festgelegt. Wenn dieses Verhalten nicht erwünscht ist, deaktivieren Sie es durch Aufrufen der Parameter losen Form `AddAuthentication`von.
+>Wenn Sie das Standardschema angeben, `HttpContext.User` wird die-Eigenschaft auf diese Identität festgelegt. Wenn dieses Verhalten nicht erwünscht ist, deaktivieren Sie es durch Aufrufen der Parameter losen Form von `AddAuthentication` .
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Auswählen des Schemas mit dem Attribut "autorisieren"
 
-Zum Zeitpunkt der Autorisierung gibt die APP den zu verwendenden Handler an. Wählen Sie den Handler aus, mit dem die APP autorisiert werden soll, indem Sie eine durch Trennzeichen getrennte `[Authorize]`Liste von Authentifizierungs Schemas an übergeben. Das `[Authorize]` -Attribut gibt das Authentifizierungsschema oder die zu verwendenden Schemas an, unabhängig davon, ob ein Standard konfiguriert ist. Beispiel:
+Zum Zeitpunkt der Autorisierung gibt die APP den zu verwendenden Handler an. Wählen Sie den Handler aus, mit dem die APP autorisiert werden soll, indem Sie eine durch Trennzeichen getrennte Liste von Authentifizierungs Schemas an übergeben `[Authorize]` . Das- `[Authorize]` Attribut gibt das Authentifizierungsschema oder die zu verwendenden Schemas an, unabhängig davon, ob ein Standard konfiguriert ist. Zum Beispiel:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -73,7 +75,7 @@ Im vorangehenden Code wird nur der Handler mit dem Schema "Träger" ausgeführt.
 
 ## <a name="selecting-the-scheme-with-policies"></a>Auswählen des Schemas mit Richtlinien
 
-Wenn Sie die gewünschten Schemas in der [Richtlinie](xref:security/authorization/policies)angeben möchten, können Sie `AuthenticationSchemes` die Sammlung beim Hinzufügen Ihrer Richtlinie festlegen:
+Wenn Sie die gewünschten Schemas in der [Richtlinie](xref:security/authorization/policies)angeben möchten, können Sie die `AuthenticationSchemes` Sammlung beim Hinzufügen Ihrer Richtlinie festlegen:
 
 ```csharp
 services.AddAuthorization(options =>
@@ -87,7 +89,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Im vorherigen Beispiel wird die Richtlinie "Over18" nur für die Identität ausgeführt, die vom Handler "Träger" erstellt wurde. Verwenden Sie die-Richtlinie `[Authorize]` durch Festlegen `Policy` der-Eigenschaft des Attributs:
+Im vorherigen Beispiel wird die Richtlinie "Over18" nur für die Identität ausgeführt, die vom Handler "Träger" erstellt wurde. Verwenden Sie die-Richtlinie durch Festlegen der `[Authorize]` -Eigenschaft des Attributs `Policy` :
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -100,7 +102,7 @@ public class RegistrationController : Controller
 
 Einige apps müssen möglicherweise mehrere Arten der Authentifizierung unterstützen. Beispielsweise kann Ihre App Benutzer von Azure Active Directory und einer Benutzerdatenbank authentifizieren. Ein weiteres Beispiel ist eine APP, die Benutzer sowohl aus Active Directory-Verbunddienste (AD FS) als auch aus Azure Active Directory B2C authentifiziert. In diesem Fall sollte die APP ein JWT-bearertoken von mehreren Ausstellern akzeptieren.
 
-Fügen Sie alle Authentifizierungs Schemas hinzu, die angenommen werden sollen. Mit dem folgenden Code in `Startup.ConfigureServices` werden z. b. zwei JWT-Träger Authentifizierungs Schemas mit unterschiedlichen Ausstellern hinzugefügt:
+Fügen Sie alle Authentifizierungs Schemas hinzu, die angenommen werden sollen. Mit dem folgenden Code in werden z. b. `Startup.ConfigureServices` zwei JWT-Träger Authentifizierungs Schemas mit unterschiedlichen Ausstellern hinzugefügt:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -122,9 +124,9 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> Nur eine JWT-Träger Authentifizierung wird mit dem Standard Authentifizierungsschema `JwtBearerDefaults.AuthenticationScheme`registriert. Die zusätzliche Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
+> Nur eine JWT-Träger Authentifizierung wird mit dem Standard Authentifizierungsschema registriert `JwtBearerDefaults.AuthenticationScheme` . Die zusätzliche Authentifizierung muss mit einem eindeutigen Authentifizierungsschema registriert werden.
 
-Der nächste Schritt besteht darin, die Standard Autorisierungs Richtlinie so zu aktualisieren, dass beide Authentifizierungs Schemas akzeptiert werden. Beispiel:
+Der nächste Schritt besteht darin, die Standard Autorisierungs Richtlinie so zu aktualisieren, dass beide Authentifizierungs Schemas akzeptiert werden. Zum Beispiel:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -143,6 +145,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Wenn die Standard Autorisierungs Richtlinie überschrieben wird, ist es möglich, das `[Authorize]` -Attribut in Controllern zu verwenden. Der Controller akzeptiert dann Anforderungen mit JWT, die vom ersten oder zweiten Aussteller ausgegeben wurden.
+Wenn die Standard Autorisierungs Richtlinie überschrieben wird, ist es möglich, das- `[Authorize]` Attribut in Controllern zu verwenden. Der Controller akzeptiert dann Anforderungen mit JWT, die vom ersten oder zweiten Aussteller ausgegeben wurden.
 
 ::: moniker-end

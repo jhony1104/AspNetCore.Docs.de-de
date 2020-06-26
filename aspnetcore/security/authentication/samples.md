@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/31/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 7cd0fe60d7917abda7d8ac0e071deca13a4136ce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95915c28b132a1a48fb772b2663794754006627f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776551"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405353"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>Authentifizierungs Beispiele für ASP.net Core
 
@@ -39,7 +41,7 @@ Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die
 * Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus. Zum Beispiel, `release/3.1`
 * Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.
 * Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.
-* Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie `dotnet run`das Beispiel mit aus.
+* Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit aus `dotnet run` .
 
 ::: moniker-end
 
@@ -60,6 +62,6 @@ Das [ASP.net Core-Repository](https://github.com/dotnet/AspNetCore) enthält die
 * Wählen Sie eine [Verzweigung](https://github.com/dotnet/AspNetCore)aus. Zum Beispiel, `release/2.2`
 * Klonen Sie das [ASP.net Core Repository](https://github.com/dotnet/AspNetCore), oder laden Sie es herunter.
 * Vergewissern Sie sich, dass Sie die [.net Core SDK](https://dotnet.microsoft.com/download/dotnet-core) Version installiert haben, die mit dem Klon des ASP.net Core Repository übereinstimmt.
-* Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie `dotnet run`das Beispiel mit aus.
+* Navigieren Sie in *aspnetcore/src/Security/Samples* zu einem Beispiel, und führen Sie das Beispiel mit aus `dotnet run` .
 
 ::: moniker-end

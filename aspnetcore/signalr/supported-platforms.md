@@ -1,30 +1,32 @@
 ---
-title: Unter SignalR stützte Plattformen ASP.net Core
+title: Unterstützte Plattformen für ASP.NET Core SignalR
 author: bradygaster
-description: Erfahren Sie mehr über die unterstützten SignalRPlattformen für ASP.net Core.
+description: Erfahren Sie mehr über die unterstützten Plattformen für ASP.NET Core SignalR.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 70a05dabb95aaf561aa78d5c8b24b430c51bd973
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d7dd946ae5cf83b76a83ba1faeed0bb3fc31cef
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772604"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405821"
 ---
-# <a name="aspnet-core-signalr-supported-platforms"></a>ASP.net Core von signalr unterstützte Plattformen
+# <a name="aspnet-core-signalr-supported-platforms"></a>Unterstützte Plattformen für ASP.NET Core SignalR
 
 ## <a name="server-system-requirements"></a>Systemanforderungen an Server
 
-Signalr für ASP.net Core unterstützt jede Server Plattform, die von ASP.net Core unterstützt wird.
+SignalRfür ASP.net Core unterstützt jede Server Plattform, die von ASP.net Core unterstützt wird.
 
 ## <a name="javascript-client"></a>JavaScript-Client
 
@@ -32,10 +34,10 @@ Der [JavaScript-Client](xref:signalr/javascript-client) wird auf nodejs 8 und h�
 
 | Browser                         | Version         |
 | ------------------------------- | --------------- |
-| Microsoft Edge                  | Strömung&dagger; |
-| Mozilla Firefox                 | Strömung&dagger; |
-| Google Chrome; umfasst Android | Strömung&dagger; |
-| SK umfasst IOS            | Strömung&dagger; |
+| Microsoft Edge                  | Aktuell&dagger; |
+| Mozilla Firefox                 | Aktuell&dagger; |
+| Google Chrome; umfasst Android | Aktuell&dagger; |
+| SK umfasst IOS            | Aktuell&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
 &dagger;*Current* bezieht sich auf die neueste Version des Browsers.
