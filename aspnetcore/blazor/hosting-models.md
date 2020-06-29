@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a54f92d1c951792e599992b82e6b6d5c85549292
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102275"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243498"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Blazor-Hostingmodelle in ASP.NET Core
 
@@ -36,9 +36,9 @@ Das wichtigste Hostingmodell für Blazor wird clientseitig im Browser in WebAsse
 
 ![Blazor WebAssembly: Die Blazor-App wird in einem Benutzeroberflächenthread im Browser ausgeführt.](hosting-models/_static/blazor-webassembly.png)
 
-Verwenden Sie zum Erstellen einer Blazor-App mithilfe des clientseitigen Hostingmodells die Vorlage **Blazor WebAssembly-App** ([dotnet new blazorwasm](/dotnet/core/tools/dotnet-new)).
+Verwenden Sie zum Erstellen einer Blazor-App mithilfe des clientseitigen Hostingmodells die Vorlage **Blazor WebAssembly-App** ([`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new)).
 
-Nachdem Sie die Vorlage **Blazor WebAssembly-App** ausgewählt haben, können Sie die App so konfigurieren, dass sie ein ASP.NET Core-Back-End verwendet. Aktivieren Sie hierzu das Kontrollkästchen **In ASP.NET Core gehostet** ([dotnet new blazorwasm --hosted](/dotnet/core/tools/dotnet-new)). Die ASP.NET Core-App stellt Clients die Blazor-App bereit. Die Blazor WebAssembly-App kann mit dem Server über das Netzwerk mithilfe von API-Aufrufen oder [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) interagieren.
+Nachdem Sie die Vorlage **Blazor WebAssembly-App** ausgewählt haben, können Sie die App so konfigurieren, dass sie ein ASP.NET Core-Back-End verwendet. Aktivieren Sie hierzu das Kontrollkästchen **In ASP.NET Core gehostet** ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)). Die ASP.NET Core-App stellt Clients die Blazor-App bereit. Die Blazor WebAssembly-App kann mit dem Server über das Netzwerk mithilfe von API-Aufrufen oder [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) interagieren.
 
 Die Vorlagen umfassen das Skript `blazor.webassembly.js`, mit dem folgende Aktionen ausgeführt werden können:
 
@@ -67,7 +67,7 @@ Mit dem Blazor Server-Hostingmodell wird die App über eine ASP.NET Core-App auf
 
 ![Der Browser interagiert mit der (in einer ASP.NET Core-App gehosteten) App über eine SignalR-Verbindung auf dem Server.](hosting-models/_static/blazor-server.png)
 
-Verwenden Sie zum Erstellen einer Blazor-App mithilfe des Blazor Server-Hostingmodells die ASP.NET Core-Vorlage **Blazor Server-App** ([dotnet new blazorserver](/dotnet/core/tools/dotnet-new)). Die ASP.NET Core-App hostet die Blazor Server-App und erstellt den SignalR-Endpunkt für Clientverbindungen.
+Verwenden Sie zum Erstellen einer Blazor-App mithilfe des Blazor Server-Hostingmodells die ASP.NET Core-Vorlage **Blazor Server-App** ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)). Die ASP.NET Core-App hostet die Blazor Server-App und erstellt den SignalR-Endpunkt für Clientverbindungen.
 
 Die ASP.NET Core-App verweist auf die `Startup`-Klasse der App, um folgende Aktionen durchzuführen:
 

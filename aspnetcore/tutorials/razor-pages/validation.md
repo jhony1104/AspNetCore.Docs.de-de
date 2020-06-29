@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652834"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122112"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>Teil 8: Hinzufügen der Validierung zu einer ASP.NET Core-Razor-Seite
 
@@ -140,7 +140,7 @@ Das `DisplayFormat`-Attribut kann eigenständig verwendet werden, doch meist emp
 * Standardmäßig rendert der Browser Daten mit dem ordnungsgemäßen auf Ihrem Gebietsschema basierenden Format.
 * Das `DataType`-Attribut kann dem ASP.NET Core-Framework ermöglichen, die richtige Feldvorlage zum Rendern der Daten auszuwählen. `DisplayFormat`, falls eigenständig genutzt, verwendet die Zeichenfolgenvorlage.
 
-Hinweis: Die jQuery-Validierung funktioniert nicht mit den Attributen `Range` und `DateTime`. Bei folgendem Code wird z.B. stets ein clientseitiger Validierungsfehler angezeigt, auch wenn sich das Datum im angegebenen Bereich befindet:
+**Hinweis:** Die jQuery-Validierung funktioniert nicht mit den Attributen `Range` und `DateTime`. Bei folgendem Code wird z.B. stets ein clientseitiger Validierungsfehler angezeigt, auch wenn sich das Datum im angegebenen Bereich befindet:
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

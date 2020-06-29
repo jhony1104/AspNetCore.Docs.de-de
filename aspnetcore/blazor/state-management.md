@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 59adcce972b503a6aa6e596bc9bff63225961f84
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102506"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243199"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>Blazor-Zustandsverwaltung in ASP.NET Core
 
@@ -135,7 +135,7 @@ Erwägen Sie die Auswahl eines Pakets, das die [Datenschutzlösung](xref:securit
 
 ## <a name="protected-browser-storage-experimental-package"></a>Experimentelles Paket für geschützten Browserspeicher
 
-Ein Beispiel für ein NuGet-Paket, das [Datenschutz](xref:security/data-protection/introduction) für `localStorage` und `sessionStorage` bereitstellt, ist [Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).
+Ein Beispiel für ein NuGet-Paket, das [Datenschutz](xref:security/data-protection/introduction) für `localStorage` und `sessionStorage` bietet, ist [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage` ist ein nicht unterstütztes experimentelles Paket, das derzeit nicht für den Einsatz in der Produktion geeignet ist.
@@ -144,8 +144,8 @@ Ein Beispiel für ein NuGet-Paket, das [Datenschutz](xref:security/data-protecti
 
 So installieren Sie das `Microsoft.AspNetCore.ProtectedBrowserStorage`-Paket
 
-1. Fügen Sie im Blazor Server-App-Projekt einen Paketverweis für [Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) hinzu.
-1. Fügen Sie im HTML-Code der obersten Ebene (z. B. in der Datei *Pages/_Host.cshtml* in der Standardprojektvorlage) den folgenden `<script>`-Tag hinzu:
+1. Fügen Sie im Blazor Server-App-Projekt einen Paketverweis zu [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) hinzu.
+1. Fügen Sie im HTML-Code der obersten Ebene (z. B. in der Datei `Pages/_Host.cshtml` in der Standardprojektvorlage) das folgende `<script>`-Tag hinzu:
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
@@ -171,7 +171,7 @@ Die Auswahl hängt von dem Sicherungsspeicher ab, den Sie verwenden möchten. Im
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-Die `@using`-Anweisung kann in einer *_Imports.razor*-Datei statt in der Komponente abgelegt werden. Bei Verwendung der *_Imports.razor*-Datei wird der Namespace für größere Segmente der App oder die gesamte App zur Verfügung gestellt.
+Die `@using`-Anweisung kann in einer `_Imports.razor`-Datei statt in der Komponente abgelegt werden. Bei Verwendung der `_Imports.razor`-Datei wird der Namespace für größere Segmente der App oder die gesamte App zur Verfügung gestellt.
 
 Um den `currentCount`-Wert in der `Counter`-Komponente der Projektvorlage beizubehalten, ändern Sie die `IncrementCount`-Methode so, dass `ProtectedSessionStore.SetAsync` verwendet wird:
 
@@ -215,7 +215,7 @@ Ein Ansatz besteht darin, zu beobachten, ob die Daten den Zustand `null` aufweis
 private int? currentCount;
 ```
 
-Anstatt bedingungslos die Anzahl und die Schaltfläche **Inkrement** anzuzeigen, legen Sie fest, dass diese Elemente nur dann angezeigt werden, wenn die Daten geladen sind:
+Anstatt bedingungslos die Anzahl und die Schaltfläche **`Increment`** anzuzeigen, legen Sie fest, dass diese Elemente nur dann angezeigt werden, wenn die Daten geladen sind:
 
 ```razor
 @if (currentCount.HasValue)
@@ -243,7 +243,7 @@ Während des Prerenderings:
 
 Eine Möglichkeit, den Fehler zu beheben, besteht darin, das Prerendering zu deaktivieren. Dies ist normalerweise die beste Lösung, wenn die App den browserbasierten Speicher stark nutzt. Das Prerendering erhöht die Komplexität und bringt der App keinen Nutzen, da die App keinen nützlichen Inhalt vorab rendern kann, bevor nicht `localStorage` oder `sessionStorage` verfügbar sind.
 
-Öffnen Sie die Datei *Pages/_Host.cshtml*, und ändern Sie die `render-mode`-Eigenschaft des [Komponententaghilfsprogramms](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) in <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>, um das Prerendering zu deaktivieren.
+Öffnen Sie die Datei `Pages/_Host.cshtml`, und ändern Sie die `render-mode`-Eigenschaft des [Komponententag-Hilfsprogramms](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) in <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>, um das Prerendering zu deaktivieren.
 
 Das Prerendering ist möglicherweise nützlich für andere Seiten, die `localStorage` oder `sessionStorage` nicht verwenden. Damit das Prerendering aktiviert bleibt, verschieben Sie den Ladevorgang, bis der Browser mit der Verbindung verbunden ist. Im Folgenden finden Sie ein Beispiel für das Speichern eines Zählerwerts:
 
@@ -326,7 +326,7 @@ else
 
 Die `CounterStateProvider`-Komponente verarbeitet die Ladephase, indem der untergeordnete Inhalt erst nach Abschluss des Ladenvorgangs gerendert wird.
 
-Um die `CounterStateProvider`-Komponente zu verwenden, umschließen Sie eine Instanz der Komponente in einer beliebigen anderen Komponente, die Zugriff auf den Zählerzustand benötigt. Um den Zustand für alle Komponenten in einer App zugänglich zu machen, umschließen Sie die `CounterStateProvider`-Komponente um den <xref:Microsoft.AspNetCore.Components.Routing.Router> in der `App`-Komponente (*App.razor*):
+Um die `CounterStateProvider`-Komponente zu verwenden, umschließen Sie eine Instanz der Komponente in einer beliebigen anderen Komponente, die Zugriff auf den Zählerzustand benötigt. Um den Zustand für alle Komponenten in einer App zugänglich zu machen, umschließen Sie die `CounterStateProvider`-Komponente um den <xref:Microsoft.AspNetCore.Components.Routing.Router> in der `App`-Komponente (`App.razor`):
 
 ```razor
 <CounterStateProvider>

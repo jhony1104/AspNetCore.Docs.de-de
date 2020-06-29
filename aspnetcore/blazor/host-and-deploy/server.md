@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 891714250bc4e8b0b241e589efb268b8f8e9f0d5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: c02d005aa5e37bc359e1c104a19c387f1c16fa34
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103242"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243550"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Hosten und Bereitstellen von Blazor Server
 
@@ -32,7 +32,7 @@ Von [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.tim
 
 Mit dem [Blazor Server-Hostingmodell](xref:blazor/hosting-models#blazor-server) wird Blazor in einer ASP.NET Core-App auf dem Server ausgeführt. Benutzeroberflächenupdates, Ereignisbehandlung und JavaScript-Aufrufe werden über eine [SignalR](xref:signalr/introduction)-Verbindung verarbeitet.
 
-Hierfür wird ein Webserver benötigt, der eine ASP.NET Core-App hosten kann. Visual Studio enthält die **Blazor Server-App**-Projektvorlage (oder die `blazorserverside`-Vorlage bei Verwendung des Befehls [dotnet new](/dotnet/core/tools/dotnet-new)).
+Hierfür wird ein Webserver benötigt, der eine ASP.NET Core-App hosten kann. Visual Studio enthält die Projektvorlage der **Blazor-Server-App** (oder die `blazorserverside`-Vorlage bei Verwendung des Befehls [`dotnet new`](/dotnet/core/tools/dotnet-new)).
 
 ## <a name="scalability"></a>Skalierbarkeit
 
@@ -76,7 +76,7 @@ Sie sollten [Azure SignalR Service](/azure/azure-signalr) für Blazor Server-App
 
    * Konfiguration (verwenden Sie **einen** der folgenden Ansätze):
   
-     * *appsettings.json*:
+     * `appsettings.json`:
 
        ```json
        "Azure:SignalR:ServerStickyMode": "Required"

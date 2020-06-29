@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102317"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243589"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>Globalisierung und Lokalisierung in ASP.NET Core Blazor
 
@@ -71,7 +71,7 @@ Legen Sie in `Program.Main` <xref:System.Globalization.CultureInfo.DefaultThread
 
 Die Blazor-Linkerkonfiguration für Blazor-WebAssembly-Apps entfernt standardmäßig Internationalisierungsinformationen, mit Ausnahme von explizit angeforderten Gebietsschemas. Weitere Informationen und Anleitungen zum Steuern des Verhaltens des Linkers finden Sie unter <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>.
 
-Auch wenn für die meisten Benutzer die standardmäßig von Blazor ausgewählte Kultur möglicherweise ausreichend ist, ziehen Sie in Betracht, Benutzern die Möglichkeit zu geben, ihr bevorzugtes Gebietsschema anzugeben. Eine Blazor-WebAssembly-Beispiel-App mit Kulturauswahl finden Sie in der [LocSample](https://github.com/pranavkm/LocSample)-Lokalisierungs-Beispiel-App.
+Auch wenn für die meisten Benutzer die standardmäßig von Blazor ausgewählte Kultur möglicherweise ausreichend ist, ziehen Sie in Betracht, Benutzern die Möglichkeit zu geben, ihr bevorzugtes Gebietsschema anzugeben. Eine Blazor WebAssembly-Beispiel-App mit Kulturauswahl finden Sie in [`LocSample`](https://github.com/pranavkm/LocSample), der Beispiel-App für die Lokalisierung.
 
 ### <a name="blazor-server"></a>Blazor Server
 
@@ -92,7 +92,7 @@ Durch Verwendung eines Cookies wird sichergestellt, wird sichergestellt, dass di
 
 Alle Vorgehensweisen können zum Zuweisen einer Kultur verwendet werden, wenn die Kultur in einem Lokalisierungscookie beibehalten wird. Wenn die App bereits über ein Lokalisierungsschema für serverseitiges ASP.NET Core verfügt, können Sie die vorhandene Lokalisierungsinfrastruktur der App weiterhin verwenden und das Lokalisierungskulturcookie innerhalb des Schemas der App festlegen.
 
-Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie in der *Pages/_Host.cshtml*-Datei direkt innerhalb des öffnenden Tags Razor einen `<body>`-Ausdruck:
+Im folgenden Beispiel wird veranschaulicht, wie die aktuelle Kultur in einem Cookie festgelegt werden kann, das von der Lokalisierungsmiddleware gelesen werden kann. Erstellen Sie in der `Pages/_Host.cshtml`-Datei direkt innerhalb des öffnenden `<body>`-Tags einen Razor-Ausdruck:
 
 ```cshtml
 @using System.Globalization
@@ -118,7 +118,7 @@ Die Lokalisierung wird mit der folgenden Ereignissequenz von der App verarbeitet
 
 1. Der Browser sendet zunächst eine HTTP-Anforderung an die App.
 1. Die Kultur wird von der Lokalisierungsmiddleware zugewiesen.
-1. Der Razor-Ausdruck auf der `_Host`-Seite ( *_Host.cshtml*) speichert die Kultur im Rahmen der Reaktion in einem Cookie.
+1. Der Razor-Ausdruck auf der `_Host`-Seite (`_Host.cshtml`) speichert die Kultur im Rahmen der Reaktion in einem Cookie.
 1. Der Browser stellt eine WebSocket-Verbindung her, um einer interaktive Blazor-Serversitzung zu erstellen.
 1. Die Lokalisierungsmiddleware liest das Cookie und weist die Kultur zu.
 1. Die Blazor-Serversitzung beginnt mit der richtigen Kultur.

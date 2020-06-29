@@ -1,7 +1,7 @@
-Die `RedirectToLogin` Komponente (*Shared/redirecttologin. Razor*):
+Die `RedirectToLogin`-Komponente (`Shared/RedirectToLogin.razor`):
 
 * Verwaltet die Umleitung nicht autorisierter Benutzer auf die Anmeldeseite.
-* Behält die aktuelle URL bei, auf die der Benutzer zugreifen möchte, damit Sie an diese Seite zurückgegeben werden können, wenn die Authentifizierung erfolgreich ist.
+* Behält die aktuelle URL bei, auf die der Benutzer zuzugreifen versucht, sodass er bei erfolgreicher Authentifizierung zu dieser Seite zurückkehren kann.
 
 ```razor
 @inject NavigationManager Navigation

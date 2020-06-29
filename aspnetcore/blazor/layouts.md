@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 6103a2e8173ccbb78372e01bd799d1bb47da4fa2
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102252"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243056"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Blazor-Layouts in ASP.NET Core
 
@@ -33,15 +33,15 @@ Zum Umwandeln einer *Komponente* in ein *Layout* muss die Komponente:
 * von <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> erben, was eine <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body>-Eigenschaft für die gerenderten Inhalte im Layout definiert.
 * die Razor-Syntax `@Body` verwenden, um den Standort im Layoutmarkup anzugeben, ab den der Inhalt gerendert wird.
 
-Im folgenden Codebeispiel wird eine Razor-Vorlage einer Layoutkomponente (*MainLayout.razor*) veranschaulicht. Das Layout erbt <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> und legt `@Body` zwischen der Navigationsleiste und der Fußzeile fest:
+Das folgende Codebeispiel zeigt die Razor-Vorlage einer Layoutkomponente (`MainLayout.razor`). Das Layout erbt <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> und legt `@Body` zwischen der Navigationsleiste und der Fußzeile fest:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Bei Apps, die auf Blazor-App-Vorlagen basieren, befindet sich die `MainLayout`-Komponente (*MainLayout.razor*) im Ordner *Shared* der App.
+In einer App, die auf einer der Blazor-App-Vorlagen basiert, befindet sich die Komponente `MainLayout` (`MainLayout.razor`) im Ordner `Shared` der App.
 
 ## <a name="default-layout"></a>Standardlayout
 
-Legen Sie das Standardlayout für die App in der <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente der Datei *App.razor* der App fest. Mit der folgenden <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente, die von den Blazor-Standardvorlagen bereitgestellt wird, wird das Standardlayout auf die `MainLayout`-Komponente festgelegt:
+Legen Sie das Standardlayout für die App in der Komponente <xref:Microsoft.AspNetCore.Components.Routing.Router> der Datei `App.razor` der App fest. Mit der folgenden <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente, die von den Blazor-Standardvorlagen bereitgestellt wird, wird das Standardlayout auf die `MainLayout`-Komponente festgelegt:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
@@ -61,13 +61,13 @@ Der Inhalt der folgenden `MasterList`-Komponente wird bei der Position von `@Bod
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-Durch das direkte Festlegen eines Layouts in einer Komponente wird das im Router oder mit einer aus *_Imports.razor* importierten `@layout`-Anweisung festgelegte *Standardlayout* überschrieben.
+Durch das direkte Festlegen eines Layouts in einer Komponente wird das im Router oder mit einer aus `_Imports.razor` importierten `@layout`-Anweisung festgelegte *Standardlayout* überschrieben.
 
 ## <a name="centralized-layout-selection"></a>Zentrale Layoutauswahl
 
-Alle Ordner einer App können optional eine Vorlagendatei namens *_Imports.razor* enthalten. Der Compiler enthält die in der Importdatei angegebenen Anweisungen in allen Razor-Vorlagen im gleichen Ordner und rekursiv in allen Unterordnern. Daher wird mit einer *_Imports.razor*-Datei, die `@layout MyCoolLayout` enthält, sichergestellt, dass alle Komponenten in einem Ordner `MyCoolLayout` verwenden. `@layout MyCoolLayout` muss nicht wiederholt zu allen *RAZOR*-Dateien im Ordner und in den Unterordnern hinzugefügt werden. `@using`-Anweisungen werden auf die gleiche Weise auf Komponenten angewendet.
+Alle Ordner einer App können optional eine Vorlagendatei namens `_Imports.razor` enthalten. Der Compiler enthält die in der Importdatei angegebenen Anweisungen in allen Razor-Vorlagen im gleichen Ordner und rekursiv in allen Unterordnern. Daher wird mit einer `_Imports.razor`-Datei, die `@layout MyCoolLayout` enthält, sichergestellt, dass alle Komponenten in einem Ordner `MyCoolLayout` verwenden. `@layout MyCoolLayout` muss nicht wiederholt zu allen `.razor`-Dateien im Ordner und in den Unterordnern hinzugefügt werden. `@using`-Anweisungen werden auf die gleiche Weise auf Komponenten angewendet.
 
-Die folgende Datei *_Imports.razor* importiert Folgendes:
+Die folgende `_Imports.razor`-Datei importiert:
 
 * `MyCoolLayout`
 * Alle Razor-Komponenten im gleichen Ordner und in dessen Unterordnern
@@ -75,23 +75,23 @@ Die folgende Datei *_Imports.razor* importiert Folgendes:
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
-Die Datei *_Imports.razor* ähnelt der Datei [_ViewImports.cshtml für Razor-Ansichten und -Seiten](xref:mvc/views/layout#importing-shared-directives), gilt aber spezifisch für Razor-Komponentendateien.
+Die Datei `_Imports.razor` ähnelt der Datei [_ViewImports.cshtml für Razor-Ansichten und -Seiten](xref:mvc/views/layout#importing-shared-directives), gilt aber spezifisch für Razor-Komponentendateien.
 
-Durch das Festlegen eines Layouts in *_Imports.razor* wird ein Layout überschrieben, das als *Standardlayout* des Routers festgelegt wird.
+Durch das Festlegen eines Layouts in `_Imports.razor` wird ein Layout überschrieben, das als *Standardlayout* des Routers festgelegt wird.
 
 ## <a name="nested-layouts"></a>Geschachtelte Layouts
 
 Apps können aus geschachtelten Layouts bestehen. Eine Komponente kann auf ein Layout verweisen, das wiederum auf ein anderes Layout verweist. Geschachtelte Layouts werden beispielsweise dazu verwendet, eine Menüstruktur mit mehreren Ebenen zu erstellen.
 
-Im folgenden Beispiel wird die Verwendung von geschachtelten Layouts veranschaulicht. Die Datei *EpisodesComponent.razor* ist die Komponente, die angezeigt werden soll. Die Komponente verweist auf `MasterListLayout`:
+Im folgenden Beispiel wird die Verwendung von geschachtelten Layouts veranschaulicht. Die Datei `EpisodesComponent.razor` ist die Komponente, die angezeigt werden soll. Die Komponente verweist auf `MasterListLayout`:
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-Die Datei *MasterListLayout.razor* stellt `MasterListLayout` bereit. Das Layout verweist auf ein anderes Layout (`MasterLayout`), in dem es gerendert wird. `EpisodesComponent` wird dort gerendert, wo `@Body` vorkommt:
+Die Datei `MasterListLayout.razor` stellt das `MasterListLayout` bereit. Das Layout verweist auf ein anderes Layout (`MasterLayout`), in dem es gerendert wird. `EpisodesComponent` wird dort gerendert, wo `@Body` vorkommt:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Schließlich enthält `MasterLayout` in der Datei *MasterLayout.razor* die allgemeinen Layoutelemente, z. B. die Kopfzeile, das Hauptmenü und die Fußzeile. Das Layout `MasterListLayout` mit der Komponente `EpisodesComponent` wird dort gerendert, wo `@Body` vorkommt:
+Schließlich enthält das `MasterLayout` in der Datei `MasterLayout.razor` die allgemeinen Layoutelemente, z. B. die Kopfzeile, das Hauptmenü und die Fußzeile. Das Layout `MasterListLayout` mit der Komponente `EpisodesComponent` wird dort gerendert, wo `@Body` vorkommt:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

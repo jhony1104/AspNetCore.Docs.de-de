@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: efac62c325b03b5ee19cae58abb5227f3d300b69
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 76af450df70fe666ea1b951cb4b41696057c5e67
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103243"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243576"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurieren des Linkers für ASP.NET Core Blazor
 
@@ -55,7 +55,7 @@ Sie können die Verknüpfung für unterschiedliche Assemblys steuern, indem Sie 
 </ItemGroup>
 ```
 
-*LinkerConfig.xml:*
+`LinkerConfig.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -93,7 +93,7 @@ Weitere Informationen finden Sie unter [Data Formats (GitHub-Repository zu mono/
 
 Fügen Sie eine XML-Linkerkonfigurationsdatei als eingebettete Ressource zur Bibliothek hinzu, um den Linker für eine spezifische Bibliothek zu konfigurieren. Die eingebettete Ressource muss denselben Namen wie die Assembly aufweisen.
 
-Im folgenden Beispiel wird die Datei *LinkerConfig.xml* als eingebettete Ressource festgelegt, die denselben Namen wie die Assembly der Bibliothek aufweist:
+Im folgenden Beispiel wird die Datei `LinkerConfig.xml` als eingebettete Ressource festgelegt, die denselben Namen wie die Assembly der Bibliothek aufweist:
 
 ```xml
 <ItemGroup>
@@ -118,12 +118,12 @@ Legen Sie die MSBuild-Eigenschaft `<BlazorWebAssemblyI18NAssemblies>` in der Pro
 | Regionswert     | Mono-Regionsassembly    |
 | ---------------- | ----------------------- |
 | `all`            | Alle Assemblys sind enthalten |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
+| `cjk`            | `I18N.CJK.dll`          |
+| `mideast`        | `I18N.MidEast.dll`      |
 | `none` (Standardwert) | Keine                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| `other`          | `I18N.Other.dll`        |
+| `rare`           | `I18N.Rare.dll`         |
+| `west`           | `I18N.West.dll`         |
 
 Verwenden Sie ein Komma, um mehrere Werte voneinander zu trennen (z. B. `mideast,west`).
 

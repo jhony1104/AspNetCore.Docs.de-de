@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 78d524bc0271fd2640302bb0de78571ab688bef5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103270"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242458"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrieren von ASP.NET Core Razor-Komponenten in Razor Pages- und MVC-Apps
 
@@ -37,7 +37,7 @@ Nachdem Sie [die App vorbereitet haben](#prepare-the-app), verwenden Sie die Anl
 
 Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und Ansichten integrieren:
 
-1. In der Layoutdatei der App ( *_Layout.cshtml*):
+1. In der Layoutdatei der App (`_Layout.cshtml`):
 
    * Fügen Sie das folgende `<base>`-Tag zum `<head>`-Element hinzu:
 
@@ -47,7 +47,7 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
 
      Der `href`-Wert (der *App-Basispfad*) im obigen Beispiel setzt voraus, dass die App sich im URL-Stammpfad (`/`) befindet. Wenn es sich bei der App um eine untergeordnete Anwendung handelt, befolgen Sie die Anweisungen im Abschnitt *App-Basispfad* des <xref:blazor/host-and-deploy/index#app-base-path>-Artikels.
 
-     Die Datei *_Layout.cshtml* befindet sich bei Razor Pages-Apps im Ordner *Pages/Shared* und bei MVC-Apps im Ordner *Views/Shared*.
+     Die Datei `_Layout.cshtml` befindet sich bei Razor-Pages-Apps im Ordner *Pages/Shared* und bei MVC-Apps im Ordner *Views/Shared*.
 
    * Fügen Sie ein `<script>`-Tag für das Skript *blazor.server.js* direkt vor dem schließenden `</body>`-Tag ein:
 
@@ -57,7 +57,7 @@ Eine vorhandene Razor Pages- oder MVC-App kann Razor-Komponenten in Seiten und A
 
      Das Framework fügt das Skript *blazor.server.js* zur App hinzu. Das Skript muss nicht manuell zur App hinzugefügt werden.
 
-1. Fügen Sie eine *_Imports.razor*-Datei zum Stammordner des Projekts mit dem folgenden Inhalt ein (ändern Sie den letzten Namespace `MyAppNamespace` in den Namespace der App):
+1. Fügen Sie im Stammordner des Projekts eine `_Imports.razor`-Datei mit dem folgenden Inhalt ein (ändern Sie den letzten Namespace `MyAppNamespace` in den Namespace der App):
 
    ```razor
    @using System.Net.Http
@@ -92,7 +92,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in Razor
 
 1. Befolgen Sie die Anleitungen im Abschnitt [Vorbereiten der App](#prepare-the-app).
 
-1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
+1. Fügen Sie eine `App.razor`-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +108,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in Razor
    </Router>
    ```
 
-1. Fügen Sie eine *_Host.cshtml*-Datei mit dem folgenden Inhalt zum Ordner *Pages* hinzu:
+1. Fügen Sie dem Ordner `Pages` eine `_Host.cshtml`-Datei mit dem folgenden Inhalt hinzu:
 
    ```cshtml
    @page "/blazor"
@@ -121,7 +121,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in Razor
    </app>
    ```
 
-   Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
+   Komponenten verwenden die gemeinsam verwendete Datei `_Layout.cshtml` für ihr Layout.
 
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die `App`-Komponente:
 
@@ -136,7 +136,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in Razor
 
    Weitere Informationen zum Taghilfsprogramm für Komponenten finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
-1. Fügen Sie eine Route mit niedriger Priorität für die Seite *_Host.cshtml* zur Endpunktkonfiguration in `Startup.Configure` hinzu:
+1. Fügen Sie eine Route mit niedriger Priorität für die Seite `_Host.cshtml` zur Endpunktkonfiguration in `Startup.Configure` hinzu:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -167,7 +167,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in MVC-A
 
 1. Befolgen Sie die Anleitungen im Abschnitt [Vorbereiten der App](#prepare-the-app).
 
-1. Fügen Sie eine *App.razor*-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
+1. Fügen Sie eine `App.razor`-Datei mit dem folgenden Inhalt zum Projektstamm hinzu:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +183,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in MVC-A
    </Router>
    ```
 
-1. Fügen Sie eine *_Host.cshtml*-Datei mit dem folgenden Inhalt zum Ordner *Views/Home* hinzu:
+1. Fügen Sie dem Ordner `Views/Home` eine `_Host.cshtml`-Datei mit dem folgenden Inhalt hinzu:
 
    ```cshtml
    @{
@@ -195,7 +195,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in MVC-A
    </app>
    ```
 
-   Komponenten verwenden die gemeinsam verwendete Datei *_Layout.cshtml* für ihr Layout.
+   Komponenten verwenden die gemeinsam verwendete Datei `_Layout.cshtml` für ihr Layout.
    
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> konfiguriert folgende Einstellungen für die `App`-Komponente:
 
@@ -219,7 +219,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in MVC-A
    }
    ```
 
-1. Fügen Sie eine Route mit niedriger Priorität für die Controlleraktion hinzu, die die Ansicht *_Host.cshtml* an die Endpunktkonfiguration in `Startup.Configure` zurückgibt:
+1. Fügen Sie eine Route mit niedriger Priorität für die Controlleraktion hinzu, die die Ansicht `_Host.cshtml` an die Endpunktkonfiguration in `Startup.Configure` zurückgibt:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +230,7 @@ So richten Sie die Unterstützung von routingfähigen Razor-Komponenten in MVC-A
    });
    ```
 
-1. Erstellen Sie einen *Pages*-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
+1. Erstellen Sie einen `Pages`-Ordner, und fügen Sie routingfähige Komponenten zur App hinzu. Zum Beispiel:
 
    ```razor
    @page "/counter"
@@ -299,7 +299,7 @@ Weitere Informationen finden Sie unter <xref:mvc/views/tag-helpers/builtin-th/co
 
 ## <a name="component-namespaces"></a>Komponentennamespaces
 
-Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace zur Seite/Ansicht oder zur Datei *_ViewImports.cshtml* hinzu. Im folgenden Beispiel:
+Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden, fügen Sie den Namespace des Ordners zur Seite/Ansicht oder zur Datei `_ViewImports.cshtml` hinzu. Im folgenden Beispiel:
 
 * Ändern Sie `MyAppNamespace` in den Namespace der App.
 * Wenn die Komponenten nicht in einem Ordner namens *Components* enthalten sind, ändern Sie `Components` in den Namen des Ordners, in dem sich die Komponenten befinden.
@@ -308,6 +308,6 @@ Wenn Sie einen benutzerdefinierten Ordner für die Komponenten der App verwenden
 @using MyAppNamespace.Components
 ```
 
-Die Datei *_ViewImports.cshtml* befindet sich bei *Pages-Apps im Ordner*PagesRazor oder bei MVC-Apps im Ordner *Views*.
+Die Datei `_ViewImports.cshtml` befindet sich im Ordner `Pages` einer Razor-Pages-App oder im Ordner `Views` einer MVC-App.
 
 Weitere Informationen finden Sie unter <xref:blazor/components/index#namespaces>.

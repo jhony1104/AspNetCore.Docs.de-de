@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102337"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243602"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Erste Schritte mit ASP.NET Core Blazor
 
@@ -70,7 +70,7 @@ Befolgen Sie für Ihre ersten Schritte mit Blazor die Anweisungen für Ihre bevo
 
    Informationen zu den zwei Blazor-Hostingmodellen ( *Blazor-WebAssembly* und *Blazor-Server*) finden Sie unter <xref:blazor/hosting-models>.
 
-1. Öffnen Sie in Visual Studio Code den Ordner *WebApplication1*.
+1. Öffnen Sie in Visual Studio Code den Ordner `WebApplication1`.
 
 1. Die IDE fordert an, dass Sie Ressourcen zum Erstellen und Debuggen des Projekts hinzufügen. Wählen Sie **Ja**.
 
@@ -137,15 +137,15 @@ Mehrere Seiten sind über Registerkarten in der Randleiste verfügbar:
 * Zähler
 * Abrufen von Daten
 
-Wählen Sie auf der Seite „Counter“ die Schaltfläche **Hier klicken** aus, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Für das Heraufsetzen eines Zählers auf einer Webseite müssen Sie JavaScript-Code schreiben, aber mit Blazor können Sie C# verwenden.
+Klicken Sie auf der Seite der Zähler auf die Schaltfläche, um den Zähler ohne Seitenaktualisierung heraufzusetzen. Für das Heraufsetzen eines Zählers auf einer Webseite müssen Sie JavaScript-Code schreiben, aber mit Blazor können Sie C# verwenden.
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 Eine Anforderung für `/counter` im Browser, wie durch die `@page`-Direktive oben angegeben, veranlasst die `Counter`-Komponente, ihren Inhalt zu rendern. Die Komponenten werden in einer In-Memory-Darstellung der Renderstruktur gerendert, die anschließend verwendet werden kann, um die Benutzeroberfläche auf flexible und effiziente Weise zu aktualisieren.
 
-Jedes Mal, wenn die **Hier klicken**-Schaltfläche ausgewählt wird:
+Jedes Mal, wenn die Schaltfläche ausgewählt wird:
 
 * Das `onclick`-Ereignis wird ausgelöst.
 * Die `IncrementCount` -Methode wird aufgerufen.
@@ -156,7 +156,7 @@ Die Laufzeit vergleicht den neuen Inhalt mit dem bisherigen Inhalt und wendet nu
 
 Fügen Sie eine Komponente mithilfe der HTML-Syntax zu einer anderen Komponente hinzu. Fügen Sie z. B. die `Counter`-Komponente zur Startseite der App hinzu, indem Sie der `Index`-Komponente ein `<Counter />`-Element hinzufügen.
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ Komponentenparameter werden mithilfe von Attributen oder [untergeordneten Inhalt
 * Fügen Sie eine öffentliche Eigenschaft für `IncrementAmount` mit einem [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute)-Attribut hinzu.
 * Ändern Sie die `IncrementCount`-Methode, um `IncrementAmount` beim Heraufsetzen des Werts von `currentCount` zu verwenden.
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 Geben Sie `IncrementAmount` im `<Counter>`-Element der `Index`-Komponente mit einem Attribut an.
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Führen Sie die App aus. Die Komponente `Index` verfügt über einen eigenen Zähler, der bei jeder Auswahl der Schaltfläche **Hier klicken** um zehn erhöht wird. Die `Counter`-Komponente (*Counter.razor*) bei `/counter` wird weiterhin um eins erhöht.
+Führen Sie die App aus. Die Komponente `Index` verfügt über einen eigenen Zähler, der bei jeder Auswahl der Schaltfläche um zehn erhöht wird. Die Komponente `Counter` (`Pages/Counter.razor`) bei `/counter` wird weiterhin um eins erhöht.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

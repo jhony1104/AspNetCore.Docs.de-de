@@ -24,7 +24,7 @@ Wenn Sie JavaScript-Interop-Aufrufe bis nach Herstellung der Verbindung zum Brow
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> aufgerufen und gibt keinen Wert zurück:
+Stellen Sie für den obigen Beispielcode eine `setElementText`-JavaScript-Funktion im `<head>`-Element von `wwwroot/index.html` (Blazor WebAssembly) oder `Pages/_Host.cshtml` (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> aufgerufen und gibt keinen Wert zurück:
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Stellen Sie für den vorangehenden Beispielcode eine `setElementText`-JavaScript-Funktion im`<head>` -Element von *wwwroot/index.html* ( WebAssembly) oder *Pages/_Host.cshtml* (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> aufgerufen und gibt einen Wert zurück:
+Stellen Sie für den obigen Beispielcode eine `setElementText`-JavaScript-Funktion im `<head>`-Element von `wwwroot/index.html` (Blazor WebAssembly) oder `Pages/_Host.cshtml` (Blazor Server) bereit. Die Funktion wird mit <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> aufgerufen und gibt einen Wert zurück:
 
 ```html
 <script>

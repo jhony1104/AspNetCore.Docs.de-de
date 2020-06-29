@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103265"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242497"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor-Datenbindung
 
@@ -240,10 +240,10 @@ Ein häufiges Szenario ist die Verkettung eines datengebundenen Parameters mit e
 
 Eine verkettete Bindung kann nicht mit der [`@bind`](xref:mvc/views/razor#bind)-Syntax im Element der Seite implementiert werden. Der Ereignishandler und der Wert müssen separat angegeben werden. Eine übergeordnete Komponente kann jedoch die [`@bind`](xref:mvc/views/razor#bind)-Syntax mit dem Parameter der Komponente verwenden.
 
-Die folgende `PasswordField`-Komponente (*Passwortfeld.razor*):
+Die folgende `PasswordField`-Komponente (`PasswordField.razor`):
 
 * Legt den Wert eines `<input>`-Elements auf eine `Password`-Eigenschaft fest.
-* Macht Änderungen der `Password`-Eigenschaft einer übergeordneten Komponente mit einem [EventCallback](xref:blazor/components/event-handling#eventcallback) verfügbar.
+* Macht Änderungen der `Password`-Eigenschaft einer übergeordneten Komponente mit einem [`EventCallback`](xref:blazor/components/event-handling#eventcallback) verfügbar.
 * Verwendet das `onclick`-Ereignis zum Auslösen der `ToggleShowPassword`-Methode. Weitere Informationen finden Sie unter <xref:blazor/components/event-handling>.
 
 ```razor

@@ -1,9 +1,9 @@
-Die `LoginDisplay` Komponente (*Shared/logindisplay. Razor*) wird in der `MainLayout` Komponente (*Shared/MainLayout. Razor*) gerendert und verwaltet die folgenden Verhaltensweisen:
+Die `LoginDisplay`-Komponente (`Shared/LoginDisplay.razor`) wird in der `MainLayout`-Komponente (`Shared/MainLayout.razor`) gerendert und verwaltet die folgenden Verhaltensweisen:
 
 * Für authentifizierte Benutzer:
-  * Zeigt den aktuellen Benutzernamen an.
-  * Bietet eine Schaltfläche, um sich von der APP abzumelden.
-* Für anonyme Benutzer bietet die Option zum Anmelden.
+  * Zeigt den aktuellen Benutzernamen an
+  * Bietet eine Schaltfläche zum Abmelden von der App
+* Bietet die Option zur Anmeldung für anonyme Benutzer
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84239205"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242770"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuggen der ASP.NET Core Blazor-Assembly
 
@@ -51,13 +51,13 @@ Zum Debuggen ist einer der folgenden Browser erforderlich:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Aktivieren des Debuggens für Visual Studio und Visual Studio Code
 
-Zum Aktivieren des Debuggens für eine vorhandene Blazor WebAssembly-App müssen Sie die Datei *launchSettings.json* im Startprojekt aktualisieren, sodass sie die folgende `inspectUri`-Eigenschaft in allen Startprofilen enthält:
+Zum Aktivieren des Debuggens für eine vorhandene Blazor WebAssembly-App müssen Sie die Datei `launchSettings.json` im Startprojekt aktualisieren, sodass sie die folgende `inspectUri`-Eigenschaft in allen Startprofilen enthält:
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Anschließend sollte die Datei *launchSettings.json* dem folgenden Beispiel ähneln:
+Nach dem Aktualisieren sollte die Datei `launchSettings.json` dem folgenden Beispiel ähneln:
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -74,8 +74,8 @@ So debuggen Sie eine Blazor WebAssembly-App in Visual Studio:
 
 1. Erstellen Sie eine neue in ASP.NET Core gehostete Blazor WebAssembly-App.
 1. Drücken Sie <kbd>F5</kbd>, um die App im Debugger auszuführen.
-1. Legen Sie einen Breakpoint in der `IncrementCount`-Methode von *Counter.razor* fest.
-1. Rufen Sie die Registerkarte **Counter** auf, und klicken Sie auf die Schaltfläche zum Erreichen des Breakpoints:
+1. Legen Sie in `Pages/Counter.razor` einen Breakpoint in der `IncrementCount`-Methode fest.
+1. Rufen Sie die Registerkarte **`Counter`** auf, und klicken Sie auf die Schaltfläche zum Erreichen des Breakpoints:
 
    ![„Counter.razor“ debuggen](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
@@ -87,9 +87,9 @@ So debuggen Sie eine Blazor WebAssembly-App in Visual Studio:
 
 Während Sie Ihre Blazor WebAssembly-App debuggen, können Sie auch Ihren Servercode debuggen:
 
-1. Legen Sie einen Breakpoint auf der Seite *FetchData.razor* in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> fest.
+1. Legen Sie einen Breakpoint auf der Seite `Pages/FetchData.razor` in<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> fest.
 1. Legen Sie einen Breakpoint in der Aktionsmethode `Get` in `WeatherForecastController` fest.
-1. Rufen Sie die Registerkarte **FetchData** auf, um den ersten Breakpoint in der `FetchData`-Komponente zu erreichen, bevor sie eine HTTP-Anforderung an den Server übermittelt:
+1. Rufen Sie die Registerkarte **`Fetch Data`** auf, um den ersten Breakpoint in der Komponente `FetchData` zu erreichen, bevor sie eine HTTP-Anforderung an den Server übermittelt:
 
    ![„FetchData.razor“ debuggen](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
@@ -145,11 +145,11 @@ Installieren Sie die [C#-Erweiterung](https://marketplace.visualstudio.com/items
 
 1. Wählen Sie im Auswahlfenster das Projekt *Server* in der gehosteten Lösung.
 
-Zum Starten des Debuggers wird eine *launch.json*-Datei mit der Startkonfiguration generiert.
+Zum Starten des Debuggers wird eine `launch.json`-Datei mit der Startkonfiguration generiert.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Anfügen an eine vorhandene Debugsitzung
 
-Um an eine laufende Blazor-App anzufügen, erstellen Sie eine *launch.json*-Datei mit der folgenden Konfiguration:
+Um an eine laufende Blazor-App anzufügen, erstellen Sie eine `launch.json`-Datei mit der folgenden Konfiguration:
 
 ```json
 {
@@ -222,7 +222,7 @@ Für den Debugtyp `blazorwasm` werden die folgenden Optionen für die Startkonfi
 
 1. Der Browser muss mit aktiviertem Remotedebuggen ausgeführt werden. Wenn das Remotedebuggen deaktiviert ist, wird die Fehlerseite mit der Aussage generiert, dass **keine debugfähige Browserregisterkarte gefunden werden konnte**. Die Fehlerseite enthält Anweisungen zum Ausführen des Browsers bei geöffnetem Debugport, sodass der Blazor-Debugproxy eine Verbindung mit der App herstellen kann. *Schließen Sie alle Browserinstanzen*, und starten Sie den Browser gemäß den Anweisungen neu.
 
-Sobald der Browser mit aktiviertem Remotedebuggen ausgeführt wird, öffnen die Tastenkombination zum Debuggen eine neue Debuggerregisterkarte. Nach einem Moment zeigt die Registerkarte **Quellen** eine Liste der .NET-Assemblys in der App an. Erweitern Sie jede Assembly, und suchen Sie die *CS*/*RAZOR*-Quelldateien, die zum Debuggen zur Verfügung stehen. Legen Sie Breakpoints fest, wechseln Sie zurück zur Registerkarte der App, und die Breakpoints werden beim Ausführen des Codes getroffen. Nachdem ein Breakpoint erreicht wurde, durchlaufen Sie den Code per Einzelschritt (<kbd>F10</kbd>), oder setzen Sie die Codeausführung normal fort (<kbd>F8</kbd>).
+Sobald der Browser mit aktiviertem Remotedebuggen ausgeführt wird, öffnen die Tastenkombination zum Debuggen eine neue Debuggerregisterkarte. Nach einem Moment zeigt die Registerkarte **Quellen** eine Liste der .NET-Assemblys in der App an. Erweitern Sie jede Assembly, und suchen Sie die `.cs`/`.razor`-Quelldateien, die zum Debuggen zur Verfügung stehen. Legen Sie Breakpoints fest, wechseln Sie zurück zur Registerkarte der App, und die Breakpoints werden beim Ausführen des Codes getroffen. Nachdem ein Breakpoint erreicht wurde, durchlaufen Sie den Code per Einzelschritt (<kbd>F10</kbd>), oder setzen Sie die Codeausführung normal fort (<kbd>F8</kbd>).
 
 Blazor bietet einen Debugproxy, der das [Chrome DevTools-Protokoll](https://chromedevtools.github.io/devtools-protocol/) implementiert und das Protokoll um .NET-spezifische Informationen erweitert. Wenn die Tastenkombination zum Debuggen gedrückt wird, verweist Blazor die Chrome DevTools auf den Proxy. Der Proxy stellt eine Verbindung mit dem Browserfenster her, das Sie debuggen möchten (daher die Notwendigkeit, das Remotedebuggen zu aktivieren).
 

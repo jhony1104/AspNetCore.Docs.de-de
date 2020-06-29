@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 68962d5a3a49e52510d72899e7dead2c1983d8b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ea6b897a008d1be1953928e5d90555d9a9a408ec
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775517"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347137"
 ---
 # <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Filtermethoden für Razor-Seiten in ASP-NET Core
 
@@ -36,7 +36,7 @@ Filter für Razor Pages:
 * Können nicht auf seitenspezifische Handlermethoden angewendet werden
 * Alle Konstruktorabhängigkeiten werden durch die [Abhängigkeitsinjektion](xref:fundamentals/dependency-injection) aufgefüllt. Weitere Informationen finden Sie unter [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) und [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
 
-Während Seitenkonstruktoren und Middleware die Ausführung von benutzerdefiniertem Code vor der Ausführung einer Handlermethode ermöglichen, gestatten nur Razor Page-Filter den Zugriff auf <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> und die Seite. Middleware hat Zugriff auf den `HttpContext`, aber nicht auf den „Seitenkontext“. Filter verfügen über einen Parameter, der von <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> abgeleitet ist, um Zugriff auf `HttpContext` zu ermöglichen. Das Beispiel [Implementieren eines Filterattributs](#ifa) fügt der Antwort z.B. einen Header hinzu. Dies kann nicht über Konstruktoren oder Middleware erfolgen.
+Während Seitenkonstruktoren und Middleware die Ausführung von benutzerdefiniertem Code vor der Ausführung einer Handlermethode ermöglichen, gestatten nur Razor Page-Filter den Zugriff auf <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> und die Seite. Middleware hat Zugriff auf den `HttpContext`, aber nicht auf den „Seitenkontext“. Filter verfügen über einen Parameter, der von <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> abgeleitet ist, um Zugriff auf `HttpContext` zu ermöglichen. Im Folgenden finden Sie ein Beispiel für einen Seitenfilter: [Implementieren eines Filterattributs](#ifa) fügt der Antwort einen Header hinzu. Dies kann nicht über Konstruktoren oder Middleware erfolgen. Der Zugriff auf den Seitenkontext, der den Zugriff auf die Instanzen der Seite und ihr Modell enthält, ist nur verfügbar, wenn Filter, Handler oder der Text einer Razor-Seite ausgeführt werden.
 
 [Anzeigen oder Herunterladen von Beispielcode](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([Vorgehensweise zum Herunterladen](xref:index#how-to-download-a-sample))
 

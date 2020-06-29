@@ -5,7 +5,7 @@ description: Erfahren Sie, wie Sie Integritätsprüfungen für ASP.NET Core-Infr
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/15/2019
+ms.date: 06/22/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: ca5540b4920bc92e968dcbc22a9407453041b01c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074431"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292697"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Integritätsprüfungen in ASP.NET Core
 
@@ -442,10 +442,10 @@ Unhealthy
 
 In einigen Hostingszenarien wird ein Integritätsprüfungspaar verwendet, bei dem zwischen zwei App-Status unterschieden wird:
 
-* Die App funktioniert, ist aber noch nicht für den Empfang von Anforderungen bereit. Dieser Status gibt die *Bereitschaft* der App wieder.
-* Die App funktioniert und antwortet auf Anforderungen. Dieser Status gibt die *Lebendigkeit* der App wieder.
+* *Bereitschaft* gibt an, ob die App ordnungsgemäß ausgeführt wird, aber nicht für den Empfang von Anforderungen bereit ist.
+* *Livetest* gibt an, ob eine App abgestürzt ist und neu gestartet werden muss.
 
-Die Bereitschaftsprüfung führt in der Regel eine Reihe umfassenderer und zeitaufwendigerer Überprüfungen durch, um zu ermitteln, ob alle Subsysteme und Ressourcen der App verfügbar sind. Eine Lebendigkeitsprüfung führt nur eine schnelle Überprüfung aus, um zu ermitteln, ob die App für die Verarbeitung von Anforderungen verfügbar ist. Nachdem die App die Bereitschaftsprüfung einmal bestanden hat, muss die App nicht weiter mit diesen Prüfungen belastet werden – weitere Prüfungen müssen dann nur noch für die Lebendigkeit erfolgen.
+Betrachten Sie das folgende Beispiel: Eine App muss eine große Konfigurationsdatei herunterladen, bevor sie für die Verarbeitung von Anforderungen bereit ist. Wir möchten nicht, dass die App neu gestartet wird, wenn der erste Download fehlschlägt, da die App mehrmals versuchen kann, die Datei herunterzuladen. Wir verwenden einen *Livetest*, um den Livezustand des Prozesses zu beschreiben. Weitere Überprüfungen werden nicht durchgeführt. Außerdem soll verhindert werden, dass Anforderungen an die App gesendet werden, bevor die Konfigurationsdatei erfolgreich heruntergeladen wurde. Wir verwenden einen *Bereitschaftstest*, um den Status "nicht bereit" anzugeben, bis der Download erfolgreich durchgeführt wurde und die App für den Empfang von Anforderungen bereit ist.
 
 Die Beispiel-App enthält eine Integritätsprüfung, um den Abschluss eines Starttasks mit langer Ausführungsdauer in einem [gehosteten Dienst](xref:fundamentals/host/hosted-services) zu melden. `StartupHostedServiceHealthCheck` macht die Eigenschaft `StartupTaskCompleted` verfügbar, die der gehostete Dienst auf `true` festlegen kann, wenn der Task mit langer Ausführungsdauer abgeschlossen ist (*StartupHostedServiceHealthCheck.cs*):
 
@@ -1155,10 +1155,10 @@ Unhealthy
 
 In einigen Hostingszenarien wird ein Integritätsprüfungspaar verwendet, bei dem zwischen zwei App-Status unterschieden wird:
 
-* Die App funktioniert, ist aber noch nicht für den Empfang von Anforderungen bereit. Dieser Status gibt die *Bereitschaft* der App wieder.
-* Die App funktioniert und antwortet auf Anforderungen. Dieser Status gibt die *Lebendigkeit* der App wieder.
+* *Bereitschaft* gibt an, ob die App ordnungsgemäß ausgeführt wird, aber nicht für den Empfang von Anforderungen bereit ist.
+* *Livetest* gibt an, ob eine App abgestürzt ist und neu gestartet werden muss.
 
-Die Bereitschaftsprüfung führt in der Regel eine Reihe umfassenderer und zeitaufwendigerer Überprüfungen durch, um zu ermitteln, ob alle Subsysteme und Ressourcen der App verfügbar sind. Eine Lebendigkeitsprüfung führt nur eine schnelle Überprüfung aus, um zu ermitteln, ob die App für die Verarbeitung von Anforderungen verfügbar ist. Nachdem die App die Bereitschaftsprüfung einmal bestanden hat, muss die App nicht weiter mit diesen Prüfungen belastet werden – weitere Prüfungen müssen dann nur noch für die Lebendigkeit erfolgen.
+Betrachten Sie das folgende Beispiel: Eine App muss eine große Konfigurationsdatei herunterladen, bevor sie für die Verarbeitung von Anforderungen bereit ist. Wir möchten nicht, dass die App neu gestartet wird, wenn der erste Download fehlschlägt, da die App mehrmals versuchen kann, die Datei herunterzuladen. Wir verwenden einen *Livetest*, um den Livezustand des Prozesses zu beschreiben. Weitere Überprüfungen werden nicht durchgeführt. Außerdem soll verhindert werden, dass Anforderungen an die App gesendet werden, bevor die Konfigurationsdatei erfolgreich heruntergeladen wurde. Wir verwenden einen *Bereitschaftstest*, um den Status "nicht bereit" anzugeben, bis der Download erfolgreich durchgeführt wurde und die App für den Empfang von Anforderungen bereit ist.
 
 Die Beispiel-App enthält eine Integritätsprüfung, um den Abschluss eines Starttasks mit langer Ausführungsdauer in einem [gehosteten Dienst](xref:fundamentals/host/hosted-services) zu melden. `StartupHostedServiceHealthCheck` macht die Eigenschaft `StartupTaskCompleted` verfügbar, die der gehostete Dienst auf `true` festlegen kann, wenn der Task mit langer Ausführungsdauer abgeschlossen ist (*StartupHostedServiceHealthCheck.cs*):
 

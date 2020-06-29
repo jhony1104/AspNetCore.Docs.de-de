@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 32f7595cffc2c31116c8d876c9f9526b84c52f14
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103264"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242418"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor-Ereignisbehandlung
 
@@ -73,7 +73,14 @@ Im folgenden Beispiel wird `UpdateHeading` asynchron aufgerufen, wenn die Schalt
 
 ## <a name="event-argument-types"></a>Ereignisargumenttypen
 
-Für einige Ereignisse sind Ereignisargumenttypen zulässig. Die Angabe eines Ereignistyps im Methodenaufruf ist nur dann erforderlich, wenn der Ereignistyp in der Methode verwendet wird.
+Für einige Ereignisse sind Ereignisargumenttypen zulässig. Die Angabe eines Ereignisparameters in einer Ereignismethodendefinition ist optional und nur erforderlich, wenn der Ereignistyp in der Methode verwendet wird. Im folgenden Beispiel wird das Ereignisargument `MouseEventArgs` in der Methode `ShowMessage` verwendet, um den Nachrichtentext festzulegen:
+
+```csharp
+private void ShowMessage(MouseEventArgs e)
+{
+    messageText = $"The mouse is at coordinates: {e.ScreenX}:{e.ScreenY}";
+}
+```
 
 Die unterstützten <xref:System.EventArgs> sind in der folgenden Tabelle aufgeführt.
 
@@ -82,7 +89,7 @@ Die unterstützten <xref:System.EventArgs> sind in der folgenden Tabelle aufgef�
 | Zwischenablage        | <xref:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> | `oncut`, `oncopy`, `onpaste` |
 | Ziehen             | <xref:Microsoft.AspNetCore.Components.Web.DragEventArgs> | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br><xref:Microsoft.AspNetCore.Components.Web.DataTransfer> und <xref:Microsoft.AspNetCore.Components.Web.DataTransferItem> speichern gezogene Elementdaten. |
 | Fehler            | <xref:Microsoft.AspNetCore.Components.Web.ErrorEventArgs> | `onerror` |
-| event            | <xref:System.EventArgs> | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit><br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers> enthält Attribute zum Konfigurieren der Zuordnungen zwischen Ereignisnamen und Ereignisargumenttypen. |
+| event            | <xref:System.EventArgs> | *Allgemein*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Zwischenablage*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Eingabe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit><br><br>*Medien*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onended`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers> enthält Attribute zum Konfigurieren der Zuordnungen zwischen Ereignisnamen und Ereignisargumenttypen. |
 | Fokus            | <xref:Microsoft.AspNetCore.Components.Web.FocusEventArgs> | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Umfasst nicht die Unterstützung für `relatedTarget`. |
 | Eingabe            | <xref:Microsoft.AspNetCore.Components.ChangeEventArgs> | `onchange`, `oninput` |
 | Tastatur         | <xref:Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> | `onkeydown`, `onkeypress`, `onkeyup` |
@@ -94,7 +101,7 @@ Die unterstützten <xref:System.EventArgs> sind in der folgenden Tabelle aufgef�
 
 Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-* [EventArgs-Klassen in der ASP.NET Core-Referenzquelle (dotnet/aspnetcore release/3.1 branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [`EventArgs`-Klassen in der ASP.NET Core-Referenzquelle (dotnet/aspnetcore release/3.1 branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
 * [MDN-Webdokumentationen: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers): Enthält Informationen dazu, welche HTML-Elemente die einzelnen DOM-Ereignisse unterstützen.
 
 ## <a name="lambda-expressions"></a>Lambdaausdrücke
@@ -138,13 +145,13 @@ Es ist häufig praktisch, über zusätzliche Werte zusammenzuschlagen, z. B. be
 
 Ein häufiges Szenario mit geschachtelten Komponenten ist der Wunsch, die Methode einer übergeordneten Komponente auszuführen, wenn ein Ereignis einer untergeordneten Komponente eintritt. Das ein `onclick`-Ereignis in der untergeordneten Komponente auftritt, ist ein gängiger Anwendungsfall. Um Ereignisse komponentenübergreifend darzustellen, verwenden Sie ein <xref:Microsoft.AspNetCore.Components.EventCallback>. Eine übergeordnete Komponente kann dem <xref:Microsoft.AspNetCore.Components.EventCallback> einer untergeordneten Komponente eine Rückrufmethode zuweisen.
 
-Der `ChildComponent` in der Beispiel-App (*Components/ChildComponent.razor*) zeigt, wie der `onclick`-Handler einer Schaltfläche so eingerichtet ist, dass er einen <xref:Microsoft.AspNetCore.Components.EventCallback>-Delegaten von der `ParentComponent` des Beispiels empfängt. Der <xref:Microsoft.AspNetCore.Components.EventCallback> wird mit `MouseEventArgs` typisiert, was für ein `onclick`-Ereignis von einem Peripheriegerät geeignet ist:
+Der `ChildComponent` in der Beispiel-App (`Components/ChildComponent.razor`) zeigt, wie der `onclick`-Handler einer Schaltfläche so eingerichtet ist, dass er einen <xref:Microsoft.AspNetCore.Components.EventCallback>-Delegaten von der `ParentComponent` des Beispiels empfängt. Der <xref:Microsoft.AspNetCore.Components.EventCallback> wird mit `MouseEventArgs` typisiert, was für ein `onclick`-Ereignis von einem Peripheriegerät geeignet ist:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 Die `ParentComponent` legt die <xref:Microsoft.AspNetCore.Components.EventCallback%601> (`OnClickCallback`) des untergeordneten Elements auf seine `ShowMessage`-Methode fest.
 
-*Pages/ParentComponent.razor*:
+`Pages/ParentComponent.razor`:
 
 ```razor
 @page "/ParentComponent"
@@ -172,7 +179,7 @@ Die `ParentComponent` legt die <xref:Microsoft.AspNetCore.Components.EventCallba
 Wenn die Schaltfläche in der `ChildComponent` ausgewählt ist:
 
 * Die `ShowMessage`-Methode von `ParentComponent` wird aufgerufen. `messageText` wird aktualisiert und in der `ParentComponent` angezeigt.
-* Ein Aufruf von [StateHasChanged](xref:blazor/components/lifecycle#state-changes) ist in der Methode des Rückrufs (`ShowMessage`) nicht erforderlich. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wird automatisch aufgerufen, um die `ParentComponent` zu rendern, so wie Ereignisse untergeordneter Elemente das Rendern von Komponenten in Ereignishandlern auslösen, die innerhalb des untergeordneten Elements ausgeführt werden.
+* Ein Aufruf von [`StateHasChanged`](xref:blazor/components/lifecycle#state-changes) ist in der Methode des Rückrufs (`ShowMessage`) nicht erforderlich. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wird automatisch aufgerufen, um die `ParentComponent` zu rendern, so wie Ereignisse untergeordneter Elemente das Rendern von Komponenten in Ereignishandlern auslösen, die innerhalb des untergeordneten Elements ausgeführt werden.
 
 <xref:Microsoft.AspNetCore.Components.EventCallback> und <xref:Microsoft.AspNetCore.Components.EventCallback%601> gestatten asynchrone Delegate. <xref:Microsoft.AspNetCore.Components.EventCallback%601> ist stark typisiert und erfordert einen bestimmten Argumenttyp. <xref:Microsoft.AspNetCore.Components.EventCallback> ist schwach typisiert und gestattet jeden Argumenttyp.
 

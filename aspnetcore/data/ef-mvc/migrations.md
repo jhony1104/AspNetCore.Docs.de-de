@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: b8701687d97f5fe940e2f39fca9c3f98052660be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 20a6cbbdd1f10c06f454f230363951059bdd3a7b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773522"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240925"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Tutorial: Verwenden des Migrationsfeatures: ASP.NET MVC mit EF Core
 
@@ -78,19 +78,19 @@ Speichern Sie Ihre Änderungen, und erstellen Sie das Projekt. Öffnen Sie ansch
 Geben Sie im Befehlsfenster folgenden Befehl ein:
 
 ```dotnetcli
+dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 ```
 
-Im Befehlsfenster wird Ihnen eine Ausgabe wie die folgende angezeigt:
+`dotnet tool install --global dotnet-ef` installiert `dotnet ef` als [globales Tool](/ef/core/miscellaneous/cli/dotnet).
+
+Mit den obigen Befehlen wird eine ähnliche Ausgabe wie die folgende angezeigt:
 
 ```console
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
       Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 Done. To undo this action, use 'ef migrations remove'
 ```
-
-> [!NOTE]
-> Wenn Ihnen die Fehlermeldung *Es wurde keine ausführbare Datei gefunden, die dem Befehl „dotnet-ef“ entspricht.* angezeigt wird, finden Sie unter [diesem Blogbeitrag](https://thedatafarm.com/data-access/no-executable-found-matching-command-dotnet-ef/) Hilfe zur Problembehandlung.
 
 Wenn Ihnen die Fehlermeldung *Auf die Datei „ContosoUniversity.dll“ kann nicht zugegriffen werden, da sie von einem anderen Prozess verwendet wird.* angezeigt wird, suchen Sie in der Windows-Taskleiste nach dem Symbol „IIS Express“, klicken Sie mit der rechten Maustaste darauf, und klicken Sie anschließend auf **ContosoUniversity > Website beenden**.
 

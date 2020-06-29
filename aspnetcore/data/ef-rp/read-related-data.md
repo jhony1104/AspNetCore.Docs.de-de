@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652612"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240937"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Teil 6: Razor Pages mit EF Core in ASP.NET Core – Lesen relevanter Daten
 
@@ -52,7 +52,7 @@ Es gibt mehrere Möglichkeiten, mit denen EF Core verwandte Daten in die Navigat
 
   ![Beispiel für separate Abfragen](read-related-data/_static/separate-queries.png)
 
-  Hinweis: EF Core korrigiert automatisch Navigationseigenschaften für alle anderen Entitäten, die zuvor in die Kontextinstanz geladen wurden. Auch wenn die Daten für eine Navigationseigenschaft *nicht* explizit eingeschlossen sind, kann die Eigenschaft immer noch aufgefüllt werden, wenn einige oder alle verwandten Entitäten zuvor geladen wurden.
+  **Hinweis**: EF Core korrigiert automatisch Navigationseigenschaften für alle anderen Entitäten, die zuvor in die Kontextinstanz geladen wurden. Auch wenn die Daten für eine Navigationseigenschaft *nicht* explizit eingeschlossen sind, kann die Eigenschaft immer noch aufgefüllt werden, wenn einige oder alle verwandten Entitäten zuvor geladen wurden.
 
 * [Explizites Laden](/ef/core/querying/related-data#explicit-loading). Wenn die Entität zuerst gelesen wird, werden verwandte Daten nicht abgerufen. Es muss Code geschrieben werden, um die verwandten Daten bei Bedarf abzurufen. Explizites Laden mit separaten Abfragen führt zu mehreren Abfragen, die an die Datenbank gesendet werden. Mit explizitem Laden gibt der Code die zu ladenden Navigationseigenschaften an. Verwenden Sie für explizites Laden die `Load`-Methode. Zum Beispiel:
 
@@ -231,7 +231,7 @@ Der folgende Code wird ausgeführt, wenn ein Dozent ausgewählt wird (`id != nul
 
 Der ausgewählte Dozent wird aus der Liste der Dozenten im Ansichtsmodell abgerufen. Die `Courses`-Eigenschaft des Ansichtsmodells wird mit den `Course`-Entitäten aus der `CourseAssignments`-Navigationseigenschaft dieses Dozenten geladen.
 
-Die `Where`-Methode gibt eine Sammlung zurück. In diesem Fall wählt der Filter jedoch eine einzelne Entität aus. Daher wird die `Single`-Methode aufgerufen, um die Sammlung in eine einzelne `Instructor`-Entität zu konvertieren. Die `Instructor`-Entität ermöglicht Zugriff auf die `CourseAssignments`-Eigenschaft. `CourseAssignments` ermöglicht Zugriff auf die verwandten `Course`-Entitäten.
+Die `Where`-Methode gibt eine Sammlung zurück. In diesem Fall wählt der Filter jedoch eine einzelne Entität aus, sodass die `Single`-Methode aufgerufen wird, um die Sammlung in eine einzelne `Instructor`-Entität zu konvertieren. Die `Instructor`-Entität ermöglicht Zugriff auf die `CourseAssignments`-Eigenschaft. `CourseAssignments` ermöglicht Zugriff auf die verwandten `Course`-Entitäten.
 
 ![Dozent:Kurse m:N](complex-data-model/_static/courseassignment.png)
 
