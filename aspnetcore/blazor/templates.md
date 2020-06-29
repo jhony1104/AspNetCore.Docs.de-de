@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: ce46d562285b95ff656ed43b3a63ca5e7315f4c8
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102486"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243212"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core-Blazor-Vorlagen
 
@@ -33,7 +33,7 @@ Weitere Informationen zur Blazor-Hostingmodellen finden Sie unter <xref:blazor/h
 
 Eine ausführliche Anleitung zum Erstellen einer Blazor-App aus einer Vorlage finden Sie unter <xref:blazor/get-started>.
 
-Vorlagenoptionen sind verfügbar, indem Sie die `--help`-Option an den CLI-Befehl [dotnet new](/dotnet/core/tools/dotnet-new) übergeben:
+Vorlagenoptionen sind verfügbar, indem Sie die `--help`-Option an den CLI-Befehl [`dotnet new`](/dotnet/core/tools/dotnet-new) übergeben:
 
 ```dotnetcli
 dotnet new blazorwasm --help
@@ -44,7 +44,7 @@ dotnet new blazorserver --help
 
 Die folgenden Dateien und Ordner bilden eine Blazor-App, die aus einer Blazor-Vorlage generiert wird:
 
-* *Program.cs*: Der Einstiegspunkt der App, von dem aus Folgendes eingerichtet wird:
+* `Program.cs`: Der Einstiegspunkt der App, von dem aus Folgendes eingerichtet wird:
 
   * der ASP.NET Core-[Host](xref:fundamentals/host/generic-host) (Blazor Server)
   * WebAssembly-Host (Blazor-WebAssembly): Der Code in dieser Datei ist für Apps eindeutig, die aus der Blazor-WebAssembly-Vorlage (`blazorwasm`) erstellt wurden.
@@ -52,40 +52,40 @@ Die folgenden Dateien und Ordner bilden eine Blazor-App, die aus einer Blazor-Vo
     * Dienste können mit der `ConfigureServices`-Methode auf dem Host-Generator konfiguriert werden (z. B. `builder.Services.AddSingleton<IMyDependency, MyDependency>();`).
     * Die Konfiguration kann über den Host-Generator (`builder.Configuration`) bereitgestellt werden.
 
-* *Startup.cs* (Blazor-Server): Diese Datei enthält die Startlogik der App. Die `Startup`-Klasse definiert zwei Methoden:
+* `Startup.cs` (Blazor Server): Diese Datei enthält die Startlogik der App. Die `Startup`-Klasse definiert zwei Methoden:
 
   * `ConfigureServices`: Diese Methode konfiguriert die [DI-Dienste (Dependency Injection)](xref:fundamentals/dependency-injection) der App. In Blazor Server-Apps werden Dienste durch Aufrufe von <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> hinzugefügt, und `WeatherForecastService` wird zum Dienstcontainer hinzugefügt, damit die `FetchData`-Beispielkomponente darauf zugreifen kann.
   * `Configure`: Konfiguriert die Pipeline für die Anforderungsverarbeitung der App:
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> wird aufgerufen, um einen Endpunkt für die Echtzeitverbindung mit dem Browser einzurichten. Die Verbindung wird mit [SignalR](xref:signalr/introduction) hergestellt. Dabei handelt es sich um ein Framework zum Hinzufügen von Echtzeitwebfunktionen zu Apps.
-    * [MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) wird aufgerufen, um die Stammseite der App (*Pages/_Host.cshtml*) einzurichten und die Navigation zu ermöglichen.
+    * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) wird aufgerufen, um die Stammseite der App (`Pages/_Host.cshtml`) einzurichten und die Navigation zu aktivieren.
 
-* *wwwroot/index.html* (Blazor WebAssembly): Die Stammseite der App, die als HTML-Seite implementiert ist:
+* `wwwroot/index.html` (Blazor WebAssembly): Die Stammseite der App, die als HTML-Seite implementiert ist:
   * Wenn eine Seite der App zum ersten Mal angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
-  * Die Seite gibt an, wo die `App`-Stammkomponente gerendert wird. Die `App`-Komponente (*App.razor*) wird in der `AddComponent`-Methode in `Startup.Configure` als `app`-DOM-Element angegeben.
+  * Die Seite gibt an, wo die `App`-Stammkomponente gerendert wird. Die `App`-Komponente (`App.razor`) wird in der `AddComponent` -Methode in `Startup.Configure` als `app`-DOM-Element angegeben.
   * Die `_framework/blazor.webassembly.js`-JavaScript-Datei wird geladen:
     * Diese lädt die .NET-Runtime, die App und der App-Abhängigkeiten herunter.
     * Sie initialisiert die Runtime, damit die App ausgeführt werden kann.
 
-* *App.razor*: Hierbei handelt es sich um die Stammkomponente der App, die das clientseitige Routing mithilfe der <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente einrichtet. Die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente fängt die Browsernavigation ab und rendert die Seite, die der angeforderten Adresse entspricht.
+* `App.razor`: Hierbei handelt es sich um die Stammkomponente der App, die das clientseitige Routing mithilfe der <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente einrichtet. Die <xref:Microsoft.AspNetCore.Components.Routing.Router>-Komponente fängt die Browsernavigation ab und rendert die Seite, die der angeforderten Adresse entspricht.
 
-* Ordner *Pages*: Dieser Ordner enthält die routingfähigen Komponenten und Seiten (*RAZOR-Dateien*), aus denen die Blazor-App besteht, sowie die Razor-Stammseite einer Blazor-Server-App. Die Route für jede Seite wird mithilfe der [`@page`](xref:mvc/views/razor#page)-Anweisung angegeben. Die Vorlage besteht aus den folgenden Teilen:
-  * *_Host.cshtml* (Blazor-Server): Die Stammseite der App, die als Razor-Seite implementiert ist:
+* `Pages`-Ordner: Dieser Ordner enthält die routingfähigen Komponenten und Seiten (`.razor`), aus denen die Blazor-App besteht, sowie die Razor-Stammseite einer Blazor-Server-App. Die Route für jede Seite wird mithilfe der [`@page`](xref:mvc/views/razor#page)-Anweisung angegeben. Die Vorlage besteht aus den folgenden Teilen:
+  * `_Host.cshtml` (Blazor Server): Die Stammseite der App, die als Razor-Seite implementiert ist:
     * Wenn eine Seite der App zum ersten Mal angefordert wird, wird diese Seite gerendert und in der Antwort zurückgegeben.
     * Die `_framework/blazor.server.js`-JavaScript-Datei wird geladen, die die SignalR-Echtzeitverbindung zwischen dem Browser und dem Server einrichtet.
-    * Auf der Hostseite wird angegeben, wo die `App`-Stammkomponente (*App.razor*) gerendert wird.
-  * `Counter` (*Counter.razor*): Implementiert die Zählerseite.
-  * `Error` (*Error.razor*, nur Blazor-Server-App): Wird gerendert, wenn in der App eine nicht behandelte Ausnahme auftritt.
-  * `FetchData` (*FetchData.razor*): Implementiert die Seite zum Abrufen von Daten.
-  * `Index` (*Index.razor*): Implementiert die Homepage.
+    * Die Hostseite gibt an, wo die `App`-Stammkomponente (`App.razor`) gerendert wird.
+  * `Counter` (`Pages/Counter.razor`): Implementiert die Zählerseite.
+  * `Error` (`Error.razor`, nur Blazor-Server-App): Wird gerendert, wenn in der App eine nicht behandelte Ausnahme auftritt.
+  * `FetchData` (`Pages/FetchData.razor`): Implementiert die Seite zum Abrufen von Daten.
+  * `Index` (`Pages/Index.razor`): Implementiert die Homepage.
 
-* Ordner *Shared*: Dieser Ordner enthält weitere Benutzeroberflächenkomponenten (*RAZOR-Dateien*), die von der App verwendet werden:
-  * `MainLayout` (*MainLayout.razor*): Die Layoutkomponente der App.
-  * `NavMenu` (*NavMenu.razor*): Diese Komponente implementiert die Navigation in der Seitenleiste. Sie schließt die [NavLink-Komponente](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) ein, die Navigationslinks zu anderen Razor-Komponenten rendert. Die <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente gibt automatisch einen ausgewählten Zustand an, wenn die Komponente geladen wird, sodass der Benutzer nachvollziehen kann, welche Komponente derzeit angezeigt wird.
+* `Shared`-Ordner: Dieser Ordner enthält weitere Benutzeroberflächenkomponenten (`.razor`), die von der App verwendet werden:
+  * `MainLayout` (`MainLayout.razor`): Die Layoutkomponente der App.
+  * `NavMenu` (`NavMenu.razor`): Diese Komponente implementiert die Navigation in der Seitenleiste. Sie schließt die [`NavLink`-Komponente](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) ein, die Navigationslinks zu anderen Razor-Komponenten rendert. Die <xref:Microsoft.AspNetCore.Components.Routing.NavLink>-Komponente gibt automatisch einen ausgewählten Zustand an, wenn die Komponente geladen wird, sodass der Benutzer nachvollziehen kann, welche Komponente derzeit angezeigt wird.
 
-* *_Imports.razor*: Enthält gängige Razor-Anweisungen, die in die Komponenten der App (*RAZOR-Dateien*) eingefügt werden sollen, z. B. [`@using`](xref:mvc/views/razor#using)-Anweisungen für Namespaces.
+* `_Imports.razor`: Enthält gängige Razor-Anweisungen, die in die Komponenten der App (`.razor`) eingefügt werden sollen, z. B. [`@using`](xref:mvc/views/razor#using)-Anweisungen für Namespaces.
 
-* Ordner *Data* (Blazor-Server): Dieser Ordner enthält die `WeatherForecast`-Klasse und Implementierung von `WeatherForecastService`, die Beispielwetterdaten für die `FetchData`-Komponente der App bereitstellen.
+* `Data`-Ordner (Blazor Server): Dieser Ordner enthält die `WeatherForecast`-Klasse und Implementierung von `WeatherForecastService`, die Beispielwetterdaten für die `FetchData`-Komponente der App bereitstellen.
 
-* *wwwroot*: Der Ordner [Web Root](xref:fundamentals/index#web-root) für die App, der die öffentlichen statischen Ressourcen der App enthält.
+* `wwwroot`: Der Ordner [Web Root](xref:fundamentals/index#web-root) für die App, der die öffentlichen statischen Ressourcen der App enthält.
 
-* *appsettings.json* (Blazor-Server): Konfigurationseinstellungen für die App.
+* `appsettings.json` (Blazor Server): Konfigurationseinstellungen für die App.
