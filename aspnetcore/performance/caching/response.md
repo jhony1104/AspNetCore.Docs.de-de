@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408187"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459765"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Zwischenspeichern von Antworten in ASP.net Core
 
@@ -176,7 +176,17 @@ Anstatt die Einstellungen des Antwort Caches für viele Controller Aktions Attri
 
 Einrichten eines Cache Profils. Das folgende Beispiel zeigt ein Cache Profil mit 30 Sekunden in der Beispiel-APP `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 Das Cache4-Seiten Modell der Beispiel-App verweist auf das `Default30` Cache Profil:
 
@@ -184,9 +194,9 @@ Das Cache4-Seiten Modell der Beispiel-App verweist auf das `Default30` Cache Pro
 
 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Kann angewendet werden auf:
 
-* RazorSeiten Handler (Klassen): Attribute können nicht auf Handlermethoden angewendet werden.
-* MVC-Controller (Klassen).
-* MVC-Aktionen (Methoden): Attribute auf Methoden Ebene überschreiben die in Attributen auf Klassenebene angegebenen Einstellungen.
+* RazorPages: Attribute können nicht auf Handlermethoden angewendet werden.
+* MVC-Controller.
+* MVC-Aktionsmethoden: Attribute auf Methoden Ebene überschreiben die in Attributen auf Klassenebene angegebenen Einstellungen.
 
 Der resultierende Header, der für die Antwort auf die Cache4-Seite vom `Default30` Cache Profil übernommen wird:
 
