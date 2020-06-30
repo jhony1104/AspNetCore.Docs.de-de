@@ -22,15 +22,15 @@ ms.contentlocale: de-DE
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402987"
 ---
-# <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für Spas
+# <a name="authentication-and-authorization-for-spas"></a>Authentifizierung und Autorisierung für SPAs
 
-ASP.net Core 3,0 oder höher bietet die Authentifizierung in Single-Page-Apps (Spas) mithilfe der Unterstützung für die API-Autorisierung. ASP.net Core Identity zum Authentifizieren und Speichern von Benutzern wird mit [identityserver](https://identityserver.io/) für die Implementierung von Open ID Connect kombiniert.
+ASP.net Core 3,0 oder höher bietet die Authentifizierung in Single-Page-Apps (SPAs) mithilfe der Unterstützung für die API-Autorisierung. ASP.net Core Identity zum Authentifizieren und Speichern von Benutzern wird mit [identityserver](https://identityserver.io/) für die Implementierung von Open ID Connect kombiniert.
 
 Der **Angular** -und **der-Projekt** Vorlagen, die dem-Authentifizierungs Parameter in den Projektvorlagen für **Webanwendungen (Model-View-Controller)** (MVC) und **Webanwendungen** (Seiten) ähneln, wurde ein Authentifizierungs Parameter hinzugefügt Razor . Die zulässigen Parameterwerte sind **None** und **Individual**. Die Projektvorlage " **React.js und Redux** " unterstützt derzeit den Authentifizierungs Parameter nicht.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Erstellen einer APP mit Unterstützung für die API-Autorisierung
 
-Benutzerauthentifizierung und-Autorisierung können mit Angular-und reagingspas verwendet werden. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
+Benutzerauthentifizierung und-Autorisierung können mit Angular- und React-SPAs verwendet werden. Öffnen Sie eine Befehlsshell, und führen Sie den folgenden Befehl aus:
 
 **Angular**:
 
@@ -38,13 +38,13 @@ Benutzerauthentifizierung und-Autorisierung können mit Angular-und reagingspas 
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
-**Reagieren**:
+**React**:
 
 ```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
 ```
 
-Der vorherige Befehl erstellt eine ASP.net Core-App mit einem *ClientApp* -Verzeichnis, das die Spa enthält.
+Der vorherige Befehl erstellt eine ASP.net Core-App mit einem *ClientApp* -Verzeichnis, das die SPA enthält.
 
 ## <a name="general-description-of-the-aspnet-core-components-of-the-app"></a>Allgemeine Beschreibung der ASP.net Core Komponenten der APP
 
@@ -52,7 +52,7 @@ In den folgenden Abschnitten werden Ergänzungen zum-Projekt beschrieben, wenn d
 
 ### <a name="startup-class"></a>Startklasse
 
-Die folgenden Codebeispiele basieren auf dem nuget-Paket [Microsoft. aspnetcore. apiauthorization. identityserver](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) . In den Beispielen werden die API-Authentifizierung und-Autorisierung mithilfe der <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> Erweiterungs Methoden und konfiguriert. Projekte, die die Projektvorlagen "Projekt" oder "Angular Spa" mit Authentifizierung verwenden, enthalten einen Verweis auf dieses Paket.
+Die folgenden Codebeispiele basieren auf dem nuget-Paket [Microsoft.AspNetCore.ApiAuthorization.IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) . In den Beispielen werden die API-Authentifizierung und-Autorisierung mithilfe der <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> Erweiterungs Methoden und konfiguriert. Projekte, die die Projektvorlagen "Projekt" oder "Angular SPA" mit Authentifizierung verwenden, enthalten einen Verweis auf dieses Paket.
 
 Die- `Startup` Klasse verfügt über die folgenden Ergänzungen:
 
@@ -158,9 +158,9 @@ Die Unterstützung von Authentifizierung und API-Autorisierung in der Angular-Vo
 * Ein Dienst `AuthorizeService` , der die Details des Authentifizierungsprozesses auf niedrigerer Ebene behandelt und Informationen über den authentifizierten Benutzer für den Rest der App zur Nutzung verfügbar macht.
 * Ein Angular-Modul, das Routen definiert, die den Authentifizierungs Teilen der APP zugeordnet sind. Er macht die Anmelde Menü Komponente, den Interceptor, den Wächter und den Dienst für die Nutzung durch den Rest der app verfügbar.
 
-## <a name="general-description-of-the-react-app"></a>Allgemeine Beschreibung der App "reagieren"
+## <a name="general-description-of-the-react-app"></a>Allgemeine Beschreibung der React-App
 
-Die Unterstützung für die Authentifizierung und API-Autorisierung in der "reagieren"-Vorlage befindet sich im Verzeichnis " *clientapp\src\components\api-Authorization* ". Sie besteht aus den folgenden Elementen:
+Die Unterstützung für die Authentifizierung und API-Autorisierung in der React-Vorlage befindet sich im Verzeichnis " *clientapp\src\components\api-Authorization* ". Sie besteht aus den folgenden Elementen:
 
 * 4 Komponenten:
   * *Login.js*: übernimmt den Anmelde Fluss der app.
@@ -234,7 +234,7 @@ Beachten Sie, dass der Schutz einer Route nicht den eigentlichen Endpunkt schüt
 
 Die Authentifizierung von Anforderungen an APIs, die zusammen mit der APP gehostet werden, erfolgt automatisch durch die Verwendung des von der APP definierten http-Client-Interceptors.
 
-## <a name="protect-a-client-side-route-react"></a>Schützen einer Client seitigen Route (reagieren)
+## <a name="protect-a-client-side-route-react"></a>Schützen einer Client seitigen Route (React)
 
 Schützen Sie eine Client seitige Route mithilfe der `AuthorizeRoute` Komponente anstelle der einfachen `Route` Komponente. Beachten Sie z. b., wie die `fetch-data` Route innerhalb der-Komponente konfiguriert ist `App` :
 
@@ -247,9 +247,9 @@ Schützen einer Route:
 * Schützt nicht den eigentlichen Endpunkt (für den immer noch ein `[Authorize]` angewendetes Attribut erforderlich ist).
 * Verhindert, dass der Benutzer zur angegebenen Client seitigen Route navigiert, wenn er nicht authentifiziert ist.
 
-## <a name="authenticate-api-requests-react"></a>Authentifizieren von API-Anforderungen (reagieren)
+## <a name="authenticate-api-requests-react"></a>Authentifizieren von API-Anforderungen (React)
 
-Das Authentifizieren von Anforderungen mit reagieren erfolgt durch das erste Importieren der- `authService` Instanz aus `AuthorizeService` . Das Zugriffs Token wird aus dem abgerufen `authService` und wie unten dargestellt an die Anforderung angefügt. In reagiere Komponenten wird diese Aufgabe in der Regel in der `componentDidMount` Lebenszyklus Methode oder als Ergebnis einer Benutzerinteraktion ausgeführt.
+Das Authentifizieren von Anforderungen mit React erfolgt durch das erste Importieren der `authService` Instanz aus `AuthorizeService`. Das Zugriffs Token wird aus dem abgerufen `authService` und wie unten dargestellt an die Anforderung angefügt. In React-Komponenten wird diese Aufgabe in der Regel in der `componentDidMount` Lebenszyklus Methode oder als Ergebnis einer Benutzerinteraktion ausgeführt.
 
 ### <a name="import-the-authservice-into-your-component"></a>Importieren Sie den authService in Ihre Komponente.
 
@@ -311,19 +311,19 @@ Nachdem Sie die APP und die App-Einstellungen im Azure-Portal konfiguriert haben
 
 ## <a name="other-configuration-options"></a>Andere Konfigurationsoptionen
 
-Die Unterstützung für die API-Autorisierung basiert auf identityserver mit einem Satz von Konventionen, Standardwerten und Verbesserungen, um die Bedienung für Spas zu vereinfachen. Natürlich ist die volle Leistungsfähigkeit von identityserver im Hintergrund verfügbar, wenn die ASP.net Core Integrationen Ihr Szenario nicht abdecken. Die ASP.net Core-Unterstützung konzentriert sich auf "erst Anbieter-Apps", bei denen alle apps von unserer Organisation erstellt und bereitgestellt werden. Daher wird die Unterstützung für Dinge wie die Zustimmung oder den Verbund nicht angeboten. Verwenden Sie für diese Szenarios identityserver, und befolgen Sie die zugehörigen Dokumentationen.
+Die Unterstützung für die API-Autorisierung basiert auf identityserver mit einem Satz von Konventionen, Standardwerten und Verbesserungen, um die Bedienung für SPAs zu vereinfachen. Natürlich ist die volle Leistungsfähigkeit von identityserver im Hintergrund verfügbar, wenn die ASP.net Core Integrationen Ihr Szenario nicht abdecken. Die ASP.net Core-Unterstützung konzentriert sich auf "erst Anbieter-Apps", bei denen alle apps von unserer Organisation erstellt und bereitgestellt werden. Daher wird die Unterstützung für Dinge wie die Zustimmung oder den Verbund nicht angeboten. Verwenden Sie für diese Szenarios identityserver, und befolgen Sie die zugehörigen Dokumentationen.
 
 ### <a name="application-profiles"></a>Anwendungsprofile
 
 Anwendungsprofile sind vordefinierte Konfigurationen für apps, die ihre Parameter weiter definieren. Zu diesem Zeitpunkt werden die folgenden Profile unterstützt:
 
-* `IdentityServerSPA`: Stellt eine von identityserver gehostete Spa als einzelne Einheit dar.
+* `IdentityServerSPA`: Stellt eine von identityserver gehostete SPA als einzelne Einheit dar.
   * Der `redirect_uri` Standardwert ist `/authentication/login-callback` .
   * Der `post_logout_redirect_uri` Standardwert ist `/authentication/logout-callback` .
   * Der Satz von Bereichen umfasst `openid` , und alle Bereiche, die `profile` für die APIs in der APP definiert sind.
   * Der Satz zulässiger oidc-Antworttypen ist `id_token token` oder jeweils einzeln ( `id_token` , `token` ).
   * Der zulässige Antwortmodus ist `fragment` .
-* `SPA`: Stellt eine Spa dar, die nicht mit identityserver gehostet wird.
+* `SPA`: Stellt eine SPA dar, die nicht mit identityserver gehostet wird.
   * Der Satz von Bereichen umfasst `openid` , und alle Bereiche, die `profile` für die APIs in der APP definiert sind.
   * Der Satz zulässiger oidc-Antworttypen ist `id_token token` oder jeweils einzeln ( `id_token` , `token` ).
   * Der zulässige Antwortmodus ist `fragment` .
